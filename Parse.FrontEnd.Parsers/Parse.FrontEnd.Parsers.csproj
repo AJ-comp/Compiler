@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{EAF7D943-D2F9-4BB0-929F-04DB7B59D9D5}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Parse.FrontEnd.Parsers</RootNamespace>
+    <AssemblyName>Parse.FrontEnd.Parsers</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AmbiguityDeleter.cs" />
+    <Compile Include="Analyzer.cs" />
+    <Compile Include="Collections\Canonical.cs" />
+    <Compile Include="Collections\CanonicalTable.cs" />
+    <Compile Include="Collections\ParsingDic.cs" />
+    <Compile Include="Collections\ParsingHistory.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Collections\ParsingRule.cs" />
+    <Compile Include="Datas\CanonicalItem.cs" />
+    <Compile Include="Datas\LRParsingData.cs" />
+    <Compile Include="EventArgs\LRParsingEventArgs.cs" />
+    <Compile Include="LR\LALRParser.cs" />
+    <Compile Include="Lexer.cs" />
+    <Compile Include="LLParser.cs" />
+    <Compile Include="LR\LRParser.cs" />
+    <Compile Include="Parser.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resource.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resource.resx</DependentUpon>
+    </Compile>
+    <Compile Include="RelationAnalyzers\FollowAnalyzer.cs" />
+    <Compile Include="RelationAnalyzers\RelationAnalyzer.cs" />
+    <Compile Include="LR\SLRParser.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Parse.FrontEnd.Grammars\Parse.FrontEnd.Grammars.csproj">
+      <Project>{a0661596-8c09-42a8-b412-8702108fd935}</Project>
+      <Name>Parse.FrontEnd.Grammars</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Parse.Resources\Parse.Resources.csproj">
+      <Project>{6354957e-57d2-4d42-9c42-e2b13a04460f}</Project>
+      <Name>Parse.Resources</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Parse\Parse.csproj">
+      <Project>{54ec5cea-8d91-4165-9ebb-6a0693a96c4f}</Project>
+      <Name>Parse</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resource.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resource.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
