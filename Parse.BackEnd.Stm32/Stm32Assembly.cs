@@ -5,6 +5,7 @@ namespace Parse.BackEnd.Stm32
 {
     public class Stm32Assembly : TargetAssembly
     {
+        /*
         Logic logic = new Logic();
 
         public Stm32Assembly()
@@ -27,6 +28,7 @@ namespace Parse.BackEnd.Stm32
                     string.Format("sub r0, r0, r1");
                 });
         }
+        */
 
         public override void GenerateCode(AstNonTerminal asTree)
         {

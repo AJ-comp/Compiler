@@ -30,7 +30,7 @@ namespace Parse.RegularGrammar
             this.AddRange(target);
         }
 
-        public NonTerminalSingle(NonTerminal target, int index, uint priority, Logic.MeaningUnit meaningUnit = Logic.MeaningUnit.Empty) : base(priority, meaningUnit)
+        public NonTerminalSingle(NonTerminal target, int index, uint priority, MeaningUnit meaningUnit = null) : base(priority, meaningUnit)
         {
             this.UniqueKey = target.uniqueKey;
             this.IsStartSymbol = target.IsStartSymbol;

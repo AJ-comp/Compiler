@@ -123,7 +123,7 @@ namespace Parse.RegularGrammar
         /// </summary>
         /// <param name="treeBlockRoot"></param>
         /// <remarks>https://www.lucidchart.com/documents/edit/332a9afe-d053-4c13-ab2a-7110f25bff73/0</remarks>
-        public void SetItem(NonTerminal treeBlockRoot, Logic.MeaningUnit meaningUnit = Logic.MeaningUnit.Empty)
+        public void SetItem(NonTerminal treeBlockRoot, MeaningUnit meaningUnit = null)
         {
             this.Children.Clear();
 
@@ -134,7 +134,7 @@ namespace Parse.RegularGrammar
             Optimizer.OptAltNode(this);
         }
 
-        public void AddItem(NonTerminal treeBlockRoot, Logic.MeaningUnit meaningUnit = Logic.MeaningUnit.Empty)
+        public void AddItem(NonTerminal treeBlockRoot, MeaningUnit meaningUnit = null)
         {
             this.AddItem(treeBlockRoot, 0, meaningUnit);
         }
@@ -145,7 +145,7 @@ namespace Parse.RegularGrammar
         /// <param name="treeBlockRoot"></param>
         /// <param name="priority">A low value means higher priority</param>
         /// <param name="meaningUnit"></param>
-        public void AddItem(NonTerminal treeBlockRoot, uint priority, Logic.MeaningUnit meaningUnit = Logic.MeaningUnit.Empty)
+        public void AddItem(NonTerminal treeBlockRoot, uint priority, MeaningUnit meaningUnit = null)
         {
             int prevCnt = this.Count;
             this.Children.Add(new NonTerminalConcat(treeBlockRoot));
@@ -162,7 +162,7 @@ namespace Parse.RegularGrammar
             }
         }
 
-        public void AddItem(Terminal item, Logic.MeaningUnit meaningUnit = Logic.MeaningUnit.Empty)
+        public void AddItem(Terminal item, MeaningUnit meaningUnit = null)
         {
             int prevCnt = this.Count;
             this.Children.Add(new NonTerminalConcat(item));

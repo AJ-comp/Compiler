@@ -1,11 +1,9 @@
 ﻿using Parse.Ast;
 using Parse.Extensions;
-using Parse.FrontEnd.Grammars.PracticeGrammars;
-using Parse.FrontEnd.Parsers;
+using Parse.FrontEnd.Grammars.MiniC;
 using Parse.FrontEnd.Parsers.Collections;
 using Parse.FrontEnd.Parsers.LR;
 using System;
-using System.Drawing;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
@@ -14,7 +12,7 @@ namespace WindowsFormsApp
     public partial class MainForm : Form
     {
         private ToolTip toolTip1 = new ToolTip();
-        private LRParser parser = new SLRParser(new Mini_C());
+        private LRParser parser = new SLRParser(new MiniCGrammar());
         private int recentRowIdx = -1;
         private int recentColIdx = -1;
 

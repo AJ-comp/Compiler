@@ -1,7 +1,9 @@
 ﻿using Parse.Ast;
 using Parse.FrontEnd.Grammars;
+using Parse.FrontEnd.Parsers.Collections;
 using Parse.RegularGrammar;
 using System;
+using System.Collections.Generic;
 using System.Data;
 
 namespace Parse.FrontEnd.Parsers
@@ -10,6 +12,7 @@ namespace Parse.FrontEnd.Parsers
     {
         protected Lexer Lexer { get; } = null;
         protected Grammar Grammar { get; } = null;
+        protected SymbolTableStack SymbolTableStack { get; } = new SymbolTableStack();
 
         /// <summary> this event handler called when the input terminal does not exists in the expected terminal set. </summary>
         public Action<Terminal, TokenData> MatchFailed { get; set; } = null;

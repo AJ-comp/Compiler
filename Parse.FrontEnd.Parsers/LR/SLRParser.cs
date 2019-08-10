@@ -71,13 +71,15 @@ namespace Parse.FrontEnd.Parsers.LR
             else if(args.ActionDir == ActionInfo.reduce)
             {
                 var item = args.ActionDest as NonTerminalSingle;
-                if (item.MeaningUnit == Logic.MeaningUnit.Empty) return;
+                if (item.MeaningUnit == null) return;
 
                 AstNonTerminal nonTerminal = new AstNonTerminal(item.MeaningUnit);
                 if (this.AstRoot != null) nonTerminal.Add(this.AstRoot);
                 while (this.meaningTerminals.Count > 0)  nonTerminal.Add(new AstTerminal(this.meaningTerminals.Dequeue()));
 
                 this.AstRoot = nonTerminal;
+
+                item.MeaningUnit.ActionLogic(this.AstRoot);
             }
         }
 

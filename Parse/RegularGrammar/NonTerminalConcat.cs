@@ -35,7 +35,7 @@ namespace Parse.RegularGrammar
             }
         }
         public uint Priority { get; internal set; } = 0;
-        public Logic.MeaningUnit MeaningUnit { get; internal set; } = Logic.MeaningUnit.Empty;
+        public MeaningUnit MeaningUnit { get; internal set; } = null;
 
         public int Count => ((IList<Symbol>)symbols).Count;
         public bool IsReadOnly => ((IList<Symbol>)symbols).IsReadOnly;
@@ -52,7 +52,7 @@ namespace Parse.RegularGrammar
             this.Priority = priority;
         }
 
-        public NonTerminalConcat(uint priority, Logic.MeaningUnit meaningUnit)
+        public NonTerminalConcat(uint priority, MeaningUnit meaningUnit)
         {
             this.Priority = priority;
             this.MeaningUnit = meaningUnit;

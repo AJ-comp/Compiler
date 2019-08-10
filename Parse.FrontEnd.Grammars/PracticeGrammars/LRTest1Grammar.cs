@@ -1,4 +1,5 @@
-﻿using Parse.RegularGrammar;
+﻿using Parse.Ast;
+using Parse.RegularGrammar;
 
 namespace Parse.FrontEnd.Grammars.PracticeGrammars
 {
@@ -13,12 +14,33 @@ namespace Parse.FrontEnd.Grammars.PracticeGrammars
 
         public LRTest1Grammar()
         {
-            E.AddItem((E + plus + T), Logic.MeaningUnit.Add);
-            E.AddItem((E + mul + T), Logic.MeaningUnit.Mul);
+            Sdts sdts = new Sdts(this.keyManager);
+
+            E.AddItem((E + plus + T), sdts.Add);
+            E.AddItem((E + mul + T), sdts.Mul);
             E.AddItem(T);
             T.SetChildren(a);
 
             this.Optimization();
+        }
+    }
+
+    public class LRTest1Sdts : Sdts
+    {
+        private void ActionAdd(AstNonTerminal node)
+        {
+
+        }
+
+        private void ActionMul(AstNonTerminal node)
+        {
+
+        }
+
+        public LRTest1Sdts(KeyManager keyManager) : base(keyManager)
+        {
+            this.Add.ActionLogic = this.ActionAdd;
+            this.Mul.ActionLogic = this.ActionMul;
         }
     }
 }

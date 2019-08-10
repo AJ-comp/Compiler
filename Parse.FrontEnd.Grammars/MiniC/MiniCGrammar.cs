@@ -3,11 +3,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
-namespace Parse.FrontEnd.Grammars.PracticeGrammars
+namespace Parse.FrontEnd.Grammars.MiniC
 {
-    public class Mini_C : Grammar
+    public class MiniCGrammar : Grammar
     {
         private Terminal @if = new Terminal(TokenType.Keyword, "if");
         private Terminal @else = new Terminal(TokenType.Keyword, "else");
@@ -99,95 +100,99 @@ namespace Parse.FrontEnd.Grammars.PracticeGrammars
         private NonTerminal actualParamList = new NonTerminal("actual_param_list");
         private NonTerminal primaryExp = new NonTerminal("primary_exp");
 
-        public Mini_C()
+        public MiniCGrammar()
         {
-            this.miniC.AddItem(this.translationUnit);
+            MiniCSdts sdts = new MiniCSdts(this.keyManager);
+
+            this.miniC.AddItem(this.translationUnit, sdts.Program);
             this.translationUnit.AddItem(this.externalDcl | this.translationUnit + this.externalDcl);
             this.externalDcl.AddItem(this.functionDef | this.declaration);
-            this.functionDef.AddItem(this.functionHeader + this.compoundSt);
-            this.functionHeader.AddItem(this.dclSpec + this.functionName + this.formalParam);
-            this.dclSpec.AddItem(this.dclSpecifiers);
+            this.functionDef.AddItem(this.functionHeader + this.compoundSt, sdts.FuncDef);
+            this.functionHeader.AddItem(this.dclSpec + this.functionName + this.formalParam, sdts.FuncHead);
+            this.dclSpec.AddItem(this.dclSpecifiers,sdts.DclSpec);
             this.dclSpecifiers.AddItem(this.dclSpecifier | this.dclSpecifiers + this.dclSpecifier);
             this.dclSpecifier.AddItem(this.typeQualifier | this.typeSpecifier);
-            this.typeQualifier.AddItem(this.@const);
-            this.typeSpecifier.AddItem(this.@int | this.@void);
+            this.typeQualifier.AddItem(this.@const, sdts.ConstNode);
+            this.typeSpecifier.AddItem(this.@int, sdts.IntNode);
+            this.typeSpecifier.AddItem(this.@void, sdts.VoidNode);
             this.functionName.AddItem(this.ident);
-            this.formalParam.AddItem(this.openParenthesis + this.optFormalParam + this.closeParenthesis);
+            this.formalParam.AddItem(this.openParenthesis + this.optFormalParam + this.closeParenthesis, sdts.FormalPara);
             this.optFormalParam.AddItem(this.formalParamList | new Epsilon());
             this.formalParamList.AddItem(this.paramDcl | this.formalParamList + this.comma + this.paramDcl);
-            this.paramDcl.AddItem(this.dclSpec + this.declarator);
-            this.compoundSt.AddItem(this.openCurlyBrace + this.optDclList + this.optStatList + this.closeCurlyBrace);
-            this.optDclList.AddItem(this.declarationList | new Epsilon());
+            this.paramDcl.AddItem(this.dclSpec + this.declarator, sdts.ParamDcl);
+            this.compoundSt.AddItem(this.openCurlyBrace + this.optDclList + this.optStatList + this.closeCurlyBrace, sdts.CompoundSt);
+            this.optDclList.AddItem(this.declarationList | new Epsilon(), sdts.DclList);
             this.declarationList.AddItem(this.declaration | this.declarationList + this.declaration);
-            this.declaration.AddItem(this.dclSpec + this.initDclList + this.semiColon);
+            this.declaration.AddItem(this.dclSpec + this.initDclList + this.semiColon, sdts.Dcl);
             this.initDclList.AddItem(this.initDeclarator | this.initDclList + this.comma + this.initDeclarator);
 
-            this.initDeclarator.AddItem(this.declarator);
-            this.initDeclarator.AddItem(this.declarator + this.assign + this.number);
+            this.initDeclarator.AddItem(this.declarator, sdts.DclItem);
+            this.initDeclarator.AddItem(this.declarator + this.assign + this.number, sdts.DclItem);
 
-            this.declarator.AddItem(this.ident);
-            this.declarator.AddItem(this.ident + this.openSquareBrace + this.optNumber + this.closeSquareBrace);
+            this.declarator.AddItem(this.ident, sdts.SimpleVar);
+            this.declarator.AddItem(this.ident + this.openSquareBrace + this.optNumber + this.closeSquareBrace, sdts.ArrayVar);
 
             this.optNumber.AddItem(this.number | new Epsilon());
-            this.optStatList.AddItem(this.statementList | new Epsilon());
+            this.optStatList.AddItem(this.statementList, sdts.StatList);
+            this.optStatList.AddItem(new Epsilon());
 
             this.statementList.AddItem(this.statement | this.statementList + this.statement);
             this.statement.AddItem(this.compoundSt | this.expressionSt | this.ifSt | this.whileSt | this.returnSt);
-            this.expressionSt.AddItem(this.optExpression + this.semiColon);
+            this.expressionSt.AddItem(this.optExpression + this.semiColon, sdts.ExpSt);
             this.optExpression.AddItem(this.expression | new Epsilon());
 
-            this.ifSt.AddItem(this.@if + this.openParenthesis + this.expression + this.closeParenthesis + this.statement, 1);
-            this.ifSt.AddItem(this.@if + this.openParenthesis + this.expression + this.closeParenthesis + this.statement + this.@else + this.statement, 0);
+            this.ifSt.AddItem(this.@if + this.openParenthesis + this.expression + this.closeParenthesis + this.statement, 1, sdts.IfSt);
+            this.ifSt.AddItem(this.@if + this.openParenthesis + this.expression + this.closeParenthesis + this.statement + this.@else + this.statement, 0, sdts.IfElseSt);
 
-            this.whileSt.AddItem(this.@while + this.openParenthesis + this.expression + this.closeParenthesis + this.statement);
-            this.returnSt.AddItem(this.@return + this.optExpression + this.semiColon);
+            this.whileSt.AddItem(this.@while + this.openParenthesis + this.expression + this.closeParenthesis + this.statement, sdts.WhileSt);
+            this.returnSt.AddItem(this.@return + this.optExpression + this.semiColon, sdts.ReturnSt);
             this.expression.AddItem(this.assignmentExp);
 
             this.assignmentExp.AddItem(this.logicalOrExp);
-            this.assignmentExp.AddItem(this.unaryExp + this.assign + this.assignmentExp);
-            this.assignmentExp.AddItem(this.unaryExp + this.addAssign + this.assignmentExp);
-            this.assignmentExp.AddItem(this.unaryExp + this.subAssign + this.assignmentExp);
-            this.assignmentExp.AddItem(this.unaryExp + this.mulAssign + this.assignmentExp);
-            this.assignmentExp.AddItem(this.unaryExp + this.divAssign + this.assignmentExp);
-            this.assignmentExp.AddItem(this.unaryExp + this.modAssign + this.assignmentExp);
+            this.assignmentExp.AddItem(this.unaryExp + this.assign + this.assignmentExp, sdts.Assign);
+            this.assignmentExp.AddItem(this.unaryExp + this.addAssign + this.assignmentExp, sdts.AddAssign);
+            this.assignmentExp.AddItem(this.unaryExp + this.subAssign + this.assignmentExp, sdts.SubAssign);
+            this.assignmentExp.AddItem(this.unaryExp + this.mulAssign + this.assignmentExp, sdts.MulAssign);
+            this.assignmentExp.AddItem(this.unaryExp + this.divAssign + this.assignmentExp, sdts.DivAssign);
+            this.assignmentExp.AddItem(this.unaryExp + this.modAssign + this.assignmentExp, sdts.ModAssign);
 
             this.logicalOrExp.AddItem(this.logicalAndExp);
-            this.logicalOrExp.AddItem(this.logicalOrExp + this.logicalOr + this.logicalAndExp);
+            this.logicalOrExp.AddItem(this.logicalOrExp + this.logicalOr + this.logicalAndExp, sdts.LogicalOr);
 
             this.logicalAndExp.AddItem(this.equalityExp);
-            this.logicalAndExp.AddItem(this.logicalAndExp + this.logicalAnd + this.equalityExp);
+            this.logicalAndExp.AddItem(this.logicalAndExp + this.logicalAnd + this.equalityExp, sdts.LogicalAnd);
 
             this.equalityExp.AddItem(this.relationalExp);
-            this.equalityExp.AddItem(this.equalityExp + this.equal + this.relationalExp);
-            this.equalityExp.AddItem(this.equalityExp + this.notEqual + this.relationalExp);
+            this.equalityExp.AddItem(this.equalityExp + this.equal + this.relationalExp, sdts.Equal);
+            this.equalityExp.AddItem(this.equalityExp + this.notEqual + this.relationalExp, sdts.NotEqual);
 
             this.relationalExp.AddItem(this.additiveExp);
-            this.relationalExp.AddItem(this.relationalExp + this.greaterThan + this.additiveExp);
-            this.relationalExp.AddItem(this.relationalExp + this.lessThan + this.additiveExp);
-            this.relationalExp.AddItem(this.relationalExp + this.greaterEqual + this.additiveExp);
+            this.relationalExp.AddItem(this.relationalExp + this.greaterThan + this.additiveExp, sdts.GreaterThan);
+            this.relationalExp.AddItem(this.relationalExp + this.lessThan + this.additiveExp, sdts.LessThan);
+            this.relationalExp.AddItem(this.relationalExp + this.greaterEqual + this.additiveExp, sdts.GreatherEqual);
 
             this.additiveExp.AddItem(this.multiplicativeExp);
-            this.additiveExp.AddItem(this.additiveExp + this.add + this.multiplicativeExp);
-            this.additiveExp.AddItem(this.additiveExp + this.sub + this.multiplicativeExp);
+            this.additiveExp.AddItem(this.additiveExp + this.add + this.multiplicativeExp, sdts.Add);
+            this.additiveExp.AddItem(this.additiveExp + this.sub + this.multiplicativeExp, sdts.Sub);
 
             this.multiplicativeExp.AddItem(this.unaryExp);
-            this.multiplicativeExp.AddItem(this.multiplicativeExp + this.mul + this.unaryExp);
-            this.multiplicativeExp.AddItem(this.multiplicativeExp + this.div + this.unaryExp);
-            this.multiplicativeExp.AddItem(this.multiplicativeExp + this.mod + this.unaryExp);
+            this.multiplicativeExp.AddItem(this.multiplicativeExp + this.mul + this.unaryExp, sdts.Mul);
+            this.multiplicativeExp.AddItem(this.multiplicativeExp + this.div + this.unaryExp, sdts.Div);
+            this.multiplicativeExp.AddItem(this.multiplicativeExp + this.mod + this.unaryExp, sdts.Mod);
 
             this.unaryExp.AddItem(this.postfixExp);
-            this.unaryExp.AddItem(this.sub + this.unaryExp);
-            this.unaryExp.AddItem(this.logicalNot + this.unaryExp);
-            this.unaryExp.AddItem(this.inc + this.unaryExp);
-            this.unaryExp.AddItem(this.dec + this.unaryExp);
+            this.unaryExp.AddItem(this.sub + this.unaryExp, sdts.UnaryMinus);
+            this.unaryExp.AddItem(this.logicalNot + this.unaryExp, sdts.LogicalNot);
+            this.unaryExp.AddItem(this.inc + this.unaryExp, sdts.PreInc);
+            this.unaryExp.AddItem(this.dec + this.unaryExp, sdts.PreDec);
 
             this.postfixExp.AddItem(this.primaryExp);
-            this.postfixExp.AddItem(this.postfixExp + this.openSquareBrace + this.expression + this.closeSquareBrace);
-            this.postfixExp.AddItem(this.postfixExp + this.openParenthesis + this.optActualParam + this.closeParenthesis);
-            this.postfixExp.AddItem(this.postfixExp + this.inc);
-            this.postfixExp.AddItem(this.postfixExp + this.dec);
+            this.postfixExp.AddItem(this.postfixExp + this.openSquareBrace + this.expression + this.closeSquareBrace, sdts.Index);
+            this.postfixExp.AddItem(this.postfixExp + this.openParenthesis + this.optActualParam + this.closeParenthesis, sdts.Cell);
+            this.postfixExp.AddItem(this.postfixExp + this.inc, sdts.PostInc);
+            this.postfixExp.AddItem(this.postfixExp + this.dec, sdts.PostDec);
 
-            this.optActualParam.AddItem(this.actualParam);
+            this.optActualParam.AddItem(this.actualParam, sdts.ActualParam);
             this.optActualParam.AddItem(new Epsilon());
 
             this.actualParam.AddItem(this.actualParamList);

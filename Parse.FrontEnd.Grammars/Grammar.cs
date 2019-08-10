@@ -8,7 +8,7 @@ namespace Parse.FrontEnd.Grammars
 {
     public abstract class Grammar
     {
-        private KeyManager keyManager = new KeyManager();
+        protected KeyManager keyManager = new KeyManager();
 
         /// <summary> first is character, second means whether ignore. true is ignoring. </summary>
         public Dictionary<string, bool> DelimiterDic { get; } = new Dictionary<string, bool>();

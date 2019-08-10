@@ -49,8 +49,11 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Collections\ParsingRule.cs" />
+    <Compile Include="Collections\SymbolTable.cs" />
+    <Compile Include="Collections\SymbolTableStack.cs" />
     <Compile Include="Datas\CanonicalItem.cs" />
     <Compile Include="Datas\LRParsingData.cs" />
+    <Compile Include="Datas\SymbolRowData.cs" />
     <Compile Include="EventArgs\LRParsingEventArgs.cs" />
     <Compile Include="LR\LALRParser.cs" />
     <Compile Include="Lexer.cs" />

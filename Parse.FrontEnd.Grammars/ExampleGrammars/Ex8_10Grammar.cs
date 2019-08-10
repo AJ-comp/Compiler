@@ -1,4 +1,5 @@
-﻿using Parse.RegularGrammar;
+﻿using Parse.Ast;
+using Parse.RegularGrammar;
 
 namespace Parse.FrontEnd.Grammars.ExampleGrammars
 {
@@ -17,13 +18,34 @@ namespace Parse.FrontEnd.Grammars.ExampleGrammars
 
         public Ex8_10Grammar()
         {
-            this.E.AddItem((E + plus + T), Logic.MeaningUnit.Add);
+            Ex8_10Sdts sdts = new Ex8_10Sdts(this.keyManager);
+
+            this.E.AddItem((E + plus + T), sdts.Add);
             this.E.AddItem(T);
-            this.T.AddItem((T + mul + F), Logic.MeaningUnit.Mul);
+            this.T.AddItem((T + mul + F), sdts.Mul);
             this.T.AddItem(F);
             this.F.SetItem((open + E + close)|ident);
 
             this.Optimization();
+        }
+    }
+
+    public class Ex8_10Sdts : Sdts
+    {
+        private void ActionAdd(AstNonTerminal node)
+        {
+
+        }
+
+        private void ActionMul(AstNonTerminal node)
+        {
+
+        }
+
+        public Ex8_10Sdts(KeyManager keyManager) : base(keyManager)
+        {
+            this.Add.ActionLogic = this.ActionAdd;
+            this.Mul.ActionLogic = this.ActionMul;
         }
     }
 }

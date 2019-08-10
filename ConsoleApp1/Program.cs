@@ -1,5 +1,5 @@
 ﻿using Parse.Extensions;
-using Parse.FrontEnd.Grammars.PracticeGrammars;
+using Parse.FrontEnd.Grammars.MiniC;
 using Parse.FrontEnd.Parsers;
 using Parse.FrontEnd.Parsers.LR;
 using System;
@@ -11,7 +11,7 @@ namespace ConsoleApp1
         static void Main(string[] args)
         {
 //            Parser parser = new LLParser(new Ex8_10Grammar());
-            Parser parser = new SLRParser(new Mini_C());
+            Parser parser = new SLRParser(new MiniCGrammar());
 
             Console.WriteLine(parser.RegularGrammar);
             Console.WriteLine(parser.AnalysisResult);

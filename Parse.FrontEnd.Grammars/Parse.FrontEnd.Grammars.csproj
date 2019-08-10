@@ -49,8 +49,10 @@
     <Compile Include="ExampleGrammars\Ex8_8Grammar.cs" />
     <Compile Include="ExampleGrammars\Ex8_9Grammar.cs" />
     <Compile Include="Grammar.cs" />
+    <Compile Include="MiniC\MiniCSdts.cs" />
+    <Compile Include="Sdts.cs" />
     <Compile Include="PracticeGrammars\LRTest1Grammar.cs" />
-    <Compile Include="PracticeGrammars\Mini_C.cs" />
+    <Compile Include="MiniC\MiniCGrammar.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

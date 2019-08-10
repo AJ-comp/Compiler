@@ -53,12 +53,12 @@
     <Compile Include="ISemantic.cs" />
     <Compile Include="ITemplateCreatable.cs" />
     <Compile Include="KeyManager.cs" />
+    <Compile Include="MeaningUnit.cs" />
     <Compile Include="Optimizer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RegularGrammar\IBridgeable.cs" />
     <Compile Include="RegularGrammar\IQuantifiable.cs" />
     <Compile Include="RegularGrammar\IShowable.cs" />
-    <Compile Include="RegularGrammar\Logic.cs" />
     <Compile Include="RegularGrammar\NonTerminal.cs" />
     <Compile Include="RegularGrammar\NonTerminalSingle.cs" />
     <Compile Include="RegularGrammar\Symbol.cs" />
