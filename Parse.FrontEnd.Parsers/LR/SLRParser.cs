@@ -19,9 +19,10 @@ namespace Parse.FrontEnd.Parsers.LR
         private ParsingRule parsingRule = new ParsingRule();
         private ParsingHistory parsingHistory = new ParsingHistory();
         private FollowAnalyzer followAnalyzer = new FollowAnalyzer();
-        private Queue<TokenData> meaningTerminals = new Queue<TokenData>();
+        private Stack<AstSymbol> meaningStack = new Stack<AstSymbol>();
+        private TerminalSet recentPossibleSet = new TerminalSet();
 
-        public override TerminalSet PossibleTerminalSet => new TerminalSet();
+        public override TerminalSet PossibleTerminalSet => this.recentPossibleSet;
         public override DataTable ParsingTable => this.parsingRule.ToDataTable();
         public override DataTable ParsingHistory
         {
@@ -29,13 +30,13 @@ namespace Parse.FrontEnd.Parsers.LR
             {
                 this.parsingRule.ActionCompleted = this.AddParsingHistory;
                 this.Parse(this.recentCode);
-                this.parsingRule.ActionCompleted = this.BuildAST;
+                this.parsingRule.ActionCompleted = this.BuildParseTree;
 
                 return this.parsingHistory;
             }
         }
         public override string AnalysisResult => this.C0.ToString();
-        public override AstNonTerminal AstRoot { get; protected set; } = null;
+        public override List<AstSymbol> ParseTree => this.meaningStack.Reverse().ToList();
         public override CanonicalTable C0 { get; } = new CanonicalTable();
 
         public SLRParser(Grammar grammar) : base(grammar)
@@ -48,7 +49,7 @@ namespace Parse.FrontEnd.Parsers.LR
             this.followAnalyzer.CalculateAllFollow(this.Grammar.NonTerminalMultiples);
             this.parsingRule.Calculate(this.C0, this.followAnalyzer.Datas);
 
-            this.parsingRule.ActionCompleted = this.BuildAST;
+            this.parsingRule.ActionCompleted = this.BuildParseTree;
             this.parsingRule.ActionFailed = this.AddFailedInfoToParsingHistory;
         }
 
@@ -60,26 +61,32 @@ namespace Parse.FrontEnd.Parsers.LR
             this.parsingHistory.AddColumn("current stack");
         }
 
-        private void BuildAST(LRParsingEventArgs args)
+        private void BuildParseTree(LRParsingEventArgs args)
         {
-            if(args.ActionDir == ActionInfo.shift)
+            if(args.ActionData.ActionDirection == ActionDir.shift)
             {
-                if (!args.InputValue.Kind.Meaning) return;
+//                if (!args.InputValue.Kind.Meaning) return;
 
-                this.meaningTerminals.Enqueue(args.InputValue);
+                this.meaningStack.Push(new AstTerminal(args.InputValue));
             }
-            else if(args.ActionDir == ActionInfo.reduce)
+            else if(args.ActionData.ActionDirection == ActionDir.reduce)
             {
-                var item = args.ActionDest as NonTerminalSingle;
-                if (item.MeaningUnit == null) return;
+                var item = args.ActionData.ActionDest as NonTerminalSingle;
 
-                AstNonTerminal nonTerminal = new AstNonTerminal(item.MeaningUnit);
-                if (this.AstRoot != null) nonTerminal.Add(this.AstRoot);
-                while (this.meaningTerminals.Count > 0)  nonTerminal.Add(new AstTerminal(this.meaningTerminals.Dequeue()));
+                AstNonTerminal nonTerminal = new AstNonTerminal(item);
+                for(int i=0; i<item.Count; i++) nonTerminal.Insert(0, this.meaningStack.Pop());
+                this.meaningStack.Push(nonTerminal);
 
-                this.AstRoot = nonTerminal;
+                item.MeaningUnit?.ActionLogic(nonTerminal);
+            }
+            else if(args.ActionData.ActionDirection == ActionDir.epsilon_reduce)
+            {
+                var item = args.ActionData.ActionDest as NonTerminalSingle;
+                AstNonTerminal nonTerminal = new AstNonTerminal(item);
 
-                item.MeaningUnit.ActionLogic(this.AstRoot);
+                this.meaningStack.Push(nonTerminal);
+
+                item.MeaningUnit?.ActionLogic(nonTerminal);
             }
         }
 
@@ -89,18 +96,18 @@ namespace Parse.FrontEnd.Parsers.LR
         /// <param name="args">parsing process information</param>
         private void AddParsingHistory(LRParsingEventArgs args)
         {
-            this.BuildAST(args);
+            this.BuildParseTree(args);
 
             var param1 = Convert.ToString(args.PrevStack.Reverse(), " ");
             var param2 = args.InputValue.ToString();
-            var param3 = args.ActionDir.ToString() + " ";
+            var param3 = args.ActionData.ActionDirection.ToString() + " ";
             var param4 = Convert.ToString(args.CurrentStack.Reverse(), " ");
 
-            if (args.ActionDir != ActionInfo.accept)
-                param3 += (args.ActionDest is NonTerminalSingle) ? (args.ActionDest as NonTerminalSingle).ToGrammarString() : args.ActionDest.ToString();
+            if (args.ActionData.ActionDirection != ActionDir.accept)
+                param3 += (args.ActionData.ActionDest is NonTerminalSingle) ? (args.ActionData.ActionDest as NonTerminalSingle).ToGrammarString() : args.ActionData.ActionDest.ToString();
 
-            if (args.ActionDir == ActionInfo.reduce)
-                this.parsingHistory.AddTreeInfo(args.ActionDest as NonTerminalSingle);
+            if (args.ActionData.ActionDirection == ActionDir.reduce)
+                this.parsingHistory.AddTreeInfo(args.ActionData.ActionDest as NonTerminalSingle);
 
             this.parsingHistory.AddRow(param1, param2, param3, param4);
         }
@@ -112,9 +119,11 @@ namespace Parse.FrontEnd.Parsers.LR
         /// <param name="possibleSet">incorrect terminal set</param>
         private void AddFailedInfoToParsingHistory(LRParsingEventArgs args, TerminalSet possibleSet)
         {
+            this.recentPossibleSet = possibleSet;
+
             var param1 = Convert.ToString(args.PrevStack.Reverse(), " ");
             var param2 = args.InputValue.ToString();
-            var param3 = args.ActionDir.ToString() + " ";
+            var param3 = args.ActionData.ActionDirection.ToString() + " ";
 
             string message = Resource.CantShift + " " + possibleSet + " " + Resource.MustCome;
             this.parsingHistory.AddRow(param1, param2, message, string.Empty);
@@ -124,8 +133,7 @@ namespace Parse.FrontEnd.Parsers.LR
         {
             this.parsingRule.ParsingInit();
             this.parsingHistory.Clear();
-            this.AstRoot = null;
-            this.meaningTerminals.Clear();
+            this.meaningStack.Clear();
         }
 
         public override bool Parse(string data)
@@ -141,18 +149,18 @@ namespace Parse.FrontEnd.Parsers.LR
                 if (token.Kind == new NotDefined())
                 {
                 }
-                ActionInfo parsingResult = this.parsingRule.Parsing(token);
-                if(parsingResult == ActionInfo.failed)
+                ActionDir parsingResult = this.parsingRule.Parsing(token);
+                if(parsingResult == ActionDir.failed)
                 {
                     result = false;
                     break;
                 }
-                else if(parsingResult == ActionInfo.accept)
+                else if(parsingResult == ActionDir.accept)
                 {
                     result = true;
                     break;
                 }
-                else if(parsingResult == ActionInfo.reduce || parsingResult == ActionInfo.moveto)
+                else if(parsingResult == ActionDir.reduce || parsingResult == ActionDir.epsilon_reduce || parsingResult == ActionDir.moveto)
                 {
                     this.Lexer.RollBackTokenReadIndex();
                 }

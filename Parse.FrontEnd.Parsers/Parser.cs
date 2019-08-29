@@ -11,7 +11,6 @@ namespace Parse.FrontEnd.Parsers
     public abstract class Parser
     {
         protected Lexer Lexer { get; } = null;
-        protected Grammar Grammar { get; } = null;
         protected SymbolTableStack SymbolTableStack { get; } = new SymbolTableStack();
 
         /// <summary> this event handler called when the input terminal does not exists in the expected terminal set. </summary>
@@ -19,7 +18,20 @@ namespace Parse.FrontEnd.Parsers
         /// <summary> this event handler called when can not expand from the current status when the input terminal enter. </summary>
         public Action<NonTerminal, TokenData> ExpandFailed { get; set; } = null;
 
+        public Grammar Grammar { get; } = null;
         public string OptimizeList => Optimizer.ChangeableNodeData(this.Grammar.NonTerminalMultiples).ToString();
+
+        public List<String> DelimiterList
+        {
+            get
+            {
+                List<String> result = new List<string>();
+
+                foreach(var item in this.Grammar.DelimiterDic)  result.Add(item.Key);
+
+                return result;
+            }
+        }
 
         public string RegularGrammar
         {
@@ -41,7 +53,7 @@ namespace Parse.FrontEnd.Parsers
         public abstract DataTable ParsingTable { get; }
         /// <summary> Get the parsing history with data table format.</summary>
         public abstract DataTable ParsingHistory { get; }
-        public abstract AstNonTerminal AstRoot { get; protected set; }
+        public abstract List<AstSymbol> ParseTree { get; }
 
 
         public Parser(Grammar grammar)

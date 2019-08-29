@@ -1,9 +1,11 @@
-﻿using Parse.Ast;
+﻿using ActiproSoftware.SyntaxEditor;
+using Parse.Ast;
 using Parse.Extensions;
 using Parse.FrontEnd.Grammars.MiniC;
 using Parse.FrontEnd.Parsers.Collections;
 using Parse.FrontEnd.Parsers.LR;
 using System;
+using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
@@ -27,14 +29,30 @@ namespace WindowsFormsApp
             else if (astSymbol is AstNonTerminal)
             {
                 AstNonTerminal astNT = (astSymbol as AstNonTerminal);
-                nodes.Add(astNT.Name.ToString());
+                int index = nodes.Count;
+                nodes.Add(astNT.SignPost.Name);
 
-                for(int i=0; i<astNT.Count; i++)
+                for (int i = 0; i < astNT.Count; i++)
                 {
                     var child = astNT[i];
-                    this.ConnectAstToTreeView(child, nodes[0].Nodes);
+                    this.ConnectAstToTreeView(child, nodes[index].Nodes);
                 }
             }
+        }
+
+        private void ConnectAstToTreeView(IList<AstSymbol> astSymbols, TreeNodeCollection nodes)
+        {
+            foreach (var symbol in astSymbols) this.ConnectAstToTreeView(symbol, nodes);
+        }
+
+        private void CreateMemberList(IntelliPromptMemberList memberList)
+        {
+            if (memberList.Count != 0) return;
+
+            foreach (var terminal in this.parser.PossibleTerminalSet)
+                memberList.Add(new ActiproSoftware.SyntaxEditor.IntelliPromptMemberListItem(terminal.Value, 0));
+
+            if (memberList.Count > 0) memberList.Show();
         }
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -60,29 +78,30 @@ namespace WindowsFormsApp
             //            this.tableGridView.DataSource = parser.ParsingTable;
             //            this.historyGridView.DataSource = parser.ParsingHistory;
             //            this.ConnectAstToTreeView(parser.AstRoot, this.astView.Nodes);
+
+            this.parser.Parse(this.syntaxEditor.Text);
         }
 
         private void editor_TextChanged(object sender, EventArgs e)
         {
             this.astView.Nodes.Clear();
             this.parser.Parse(this.editor.Text);
-
-            this.ConnectAstToTreeView(parser.AstRoot, this.astView.Nodes);
         }
 
         private void parsingTab_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if(this.parsingTab.SelectedTab.Name == "parsingHistoryTab")
+            if (this.parsingTab.SelectedTab.Name == "parsingHistoryTab")
             {
                 this.historyGridView.DataSource = parser.ParsingHistory;
                 parser.ParsingHistory.Print();
                 this.historyGridView.Update();
                 this.historyGridView.Refresh();
             }
-        }
-
-        private void editor_KeyDown(object sender, KeyEventArgs e)
-        {
+            else if (this.parsingTab.SelectedTab.Name == "parseTreeTab")
+            {
+                this.astView.Nodes.Clear();
+                this.ConnectAstToTreeView(parser.ParseTree, this.astView.Nodes);
+            }
         }
 
         private void tableGridView_CellMouseEnter(object sender, DataGridViewCellEventArgs e)
@@ -106,6 +125,31 @@ namespace WindowsFormsApp
             var popDelay = 3000 * lineCount;
             if (popDelay > 30000) popDelay = 30000;
             toolTip1.Show(canonical.ToLineString(), this.tableGridView, popDelay);
+        }
+
+        private void syntaxEditor_IntelliPromptMemberListClosed(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            this.syntaxEditor.IntelliPrompt.MemberList.Clear();
+        }
+
+        private void syntaxEditor_DocumentPreTextChanging(object sender, ActiproSoftware.SyntaxEditor.DocumentModificationEventArgs e)
+        {
+            if (e.Modification.InsertedText == "\n") return;
+            if (e.Modification.InsertedText == string.Empty) return;
+
+            if (e.DirtyTextRange.StartOffset == 0) this.CreateMemberList(this.syntaxEditor.IntelliPrompt.MemberList);
+            else
+            {
+                char data = e.Document.Text[e.DirtyTextRange.StartOffset - 1];
+                if (this.parser.DelimiterList.Contains(data.ToString()) == false) return;
+
+                this.CreateMemberList(this.syntaxEditor.IntelliPrompt.MemberList);
+            }
+        }
+
+        private void syntaxEditor_DocumentTextChanged(object sender, DocumentModificationEventArgs e)
+        {
+//            this.parser.Parse()
         }
     }
 }

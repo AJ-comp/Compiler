@@ -28,7 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.astTab = new System.Windows.Forms.TabPage();
+            ActiproSoftware.SyntaxEditor.Document document1 = new ActiproSoftware.SyntaxEditor.Document();
+            ActiproSoftware.SyntaxEditor.VisualStudio2005SyntaxEditorRenderer visualStudio2005SyntaxEditorRenderer1 = new ActiproSoftware.SyntaxEditor.VisualStudio2005SyntaxEditorRenderer();
+            this.parseTreeTab = new System.Windows.Forms.TabPage();
             this.astView = new System.Windows.Forms.TreeView();
             this.parsingHistoryTab = new System.Windows.Forms.TabPage();
             this.historyGridView = new System.Windows.Forms.DataGridView();
@@ -36,12 +38,13 @@
             this.tableGridView = new System.Windows.Forms.DataGridView();
             this.parsingTab = new System.Windows.Forms.TabControl();
             this.editorTab = new System.Windows.Forms.TabPage();
+            this.syntaxEditor = new ActiproSoftware.SyntaxEditor.SyntaxEditor();
             this.editor = new System.Windows.Forms.RichTextBox();
             this.grammarTab = new System.Windows.Forms.TabPage();
             this.grammar = new System.Windows.Forms.Label();
             this.canonicalTableTab = new System.Windows.Forms.TabPage();
             this.canonicalCollection = new System.Windows.Forms.RichTextBox();
-            this.astTab.SuspendLayout();
+            this.parseTreeTab.SuspendLayout();
             this.parsingHistoryTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.historyGridView)).BeginInit();
             this.parsingTableTab.SuspendLayout();
@@ -52,16 +55,16 @@
             this.canonicalTableTab.SuspendLayout();
             this.SuspendLayout();
             // 
-            // astTab
+            // parseTreeTab
             // 
-            this.astTab.Controls.Add(this.astView);
-            this.astTab.Location = new System.Drawing.Point(4, 22);
-            this.astTab.Name = "astTab";
-            this.astTab.Padding = new System.Windows.Forms.Padding(3);
-            this.astTab.Size = new System.Drawing.Size(792, 424);
-            this.astTab.TabIndex = 4;
-            this.astTab.Text = "AST";
-            this.astTab.UseVisualStyleBackColor = true;
+            this.parseTreeTab.Controls.Add(this.astView);
+            this.parseTreeTab.Location = new System.Drawing.Point(4, 22);
+            this.parseTreeTab.Name = "parseTreeTab";
+            this.parseTreeTab.Padding = new System.Windows.Forms.Padding(3);
+            this.parseTreeTab.Size = new System.Drawing.Size(792, 424);
+            this.parseTreeTab.TabIndex = 4;
+            this.parseTreeTab.Text = "ParseTree";
+            this.parseTreeTab.UseVisualStyleBackColor = true;
             // 
             // astView
             // 
@@ -121,7 +124,7 @@
             this.parsingTab.Controls.Add(this.canonicalTableTab);
             this.parsingTab.Controls.Add(this.parsingTableTab);
             this.parsingTab.Controls.Add(this.parsingHistoryTab);
-            this.parsingTab.Controls.Add(this.astTab);
+            this.parsingTab.Controls.Add(this.parseTreeTab);
             this.parsingTab.Dock = System.Windows.Forms.DockStyle.Fill;
             this.parsingTab.Location = new System.Drawing.Point(0, 0);
             this.parsingTab.Name = "parsingTab";
@@ -132,6 +135,7 @@
             // 
             // editorTab
             // 
+            this.editorTab.Controls.Add(this.syntaxEditor);
             this.editorTab.Controls.Add(this.editor);
             this.editorTab.Location = new System.Drawing.Point(4, 22);
             this.editorTab.Name = "editorTab";
@@ -141,16 +145,30 @@
             this.editorTab.Text = "Editor";
             this.editorTab.UseVisualStyleBackColor = true;
             // 
+            // syntaxEditor
+            // 
+            this.syntaxEditor.CurrentLineHighlightingVisible = true;
+            this.syntaxEditor.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.syntaxEditor.Document = document1;
+            this.syntaxEditor.LineNumberMarginVisible = true;
+            this.syntaxEditor.LineNumberMarginWidth = 30;
+            this.syntaxEditor.Location = new System.Drawing.Point(3, 3);
+            this.syntaxEditor.Name = "syntaxEditor";
+            visualStudio2005SyntaxEditorRenderer1.ResetAllPropertiesOnSystemColorChange = false;
+            this.syntaxEditor.Renderer = visualStudio2005SyntaxEditorRenderer1;
+            this.syntaxEditor.Size = new System.Drawing.Size(786, 418);
+            this.syntaxEditor.TabIndex = 2;
+            this.syntaxEditor.DocumentPreTextChanging += new ActiproSoftware.SyntaxEditor.DocumentModificationEventHandler(this.syntaxEditor_DocumentPreTextChanging);
+            this.syntaxEditor.DocumentTextChanged += new ActiproSoftware.SyntaxEditor.DocumentModificationEventHandler(this.syntaxEditor_DocumentTextChanged);
+            this.syntaxEditor.IntelliPromptMemberListClosed += new System.ComponentModel.CancelEventHandler(this.syntaxEditor_IntelliPromptMemberListClosed);
+            // 
             // editor
             // 
-            this.editor.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.editor.Location = new System.Drawing.Point(3, 3);
+            this.editor.Location = new System.Drawing.Point(0, 0);
             this.editor.Name = "editor";
-            this.editor.Size = new System.Drawing.Size(786, 418);
-            this.editor.TabIndex = 1;
+            this.editor.Size = new System.Drawing.Size(100, 96);
+            this.editor.TabIndex = 3;
             this.editor.Text = "";
-            this.editor.TextChanged += new System.EventHandler(this.editor_TextChanged);
-            this.editor.KeyDown += new System.Windows.Forms.KeyEventHandler(this.editor_KeyDown);
             // 
             // grammarTab
             // 
@@ -160,7 +178,7 @@
             this.grammarTab.Padding = new System.Windows.Forms.Padding(3);
             this.grammarTab.Size = new System.Drawing.Size(792, 424);
             this.grammarTab.TabIndex = 5;
-            this.grammarTab.Text = "Grammar";
+            this.grammarTab.Text = "grammar";
             this.grammarTab.UseVisualStyleBackColor = true;
             // 
             // grammar
@@ -169,8 +187,9 @@
             this.grammar.Dock = System.Windows.Forms.DockStyle.Fill;
             this.grammar.Location = new System.Drawing.Point(3, 3);
             this.grammar.Name = "grammar";
-            this.grammar.Size = new System.Drawing.Size(0, 12);
+            this.grammar.Size = new System.Drawing.Size(56, 12);
             this.grammar.TabIndex = 0;
+            this.grammar.Text = "grammar";
             // 
             // canonicalTableTab
             // 
@@ -204,7 +223,7 @@
             this.Name = "MainForm";
             this.Text = "MainForm";
             this.Load += new System.EventHandler(this.MainForm_Load);
-            this.astTab.ResumeLayout(false);
+            this.parseTreeTab.ResumeLayout(false);
             this.parsingHistoryTab.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.historyGridView)).EndInit();
             this.parsingTableTab.ResumeLayout(false);
@@ -220,7 +239,7 @@
 
         #endregion
 
-        private System.Windows.Forms.TabPage astTab;
+        private System.Windows.Forms.TabPage parseTreeTab;
         private System.Windows.Forms.TabPage parsingHistoryTab;
         private System.Windows.Forms.TabPage parsingTableTab;
         private System.Windows.Forms.DataGridView tableGridView;
@@ -229,10 +248,11 @@
         private System.Windows.Forms.TabPage editorTab;
         private System.Windows.Forms.RichTextBox editor;
         private System.Windows.Forms.TabPage canonicalTableTab;
-        private System.Windows.Forms.TabPage grammarTab;
-        private System.Windows.Forms.Label grammar;
         private System.Windows.Forms.TreeView astView;
         private System.Windows.Forms.RichTextBox canonicalCollection;
+        private ActiproSoftware.SyntaxEditor.SyntaxEditor syntaxEditor;
+        private System.Windows.Forms.TabPage grammarTab;
+        private System.Windows.Forms.Label grammar;
     }
 }
 

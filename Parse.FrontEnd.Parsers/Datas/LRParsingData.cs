@@ -7,10 +7,10 @@ namespace Parse.FrontEnd.Parsers.Datas
 {
     public class LRParsingData
     {
-        public enum ActionInfo { shift, reduce, epsilon_reduce, moveto, accept, failed }
+        public enum ActionDir { shift, reduce, epsilon_reduce, moveto, accept, failed }
 
         public Canonical Ix { get; }
-        public Dictionary<Symbol, Tuple<ActionInfo, object>> MatchedValueSet { get; }
+        public Dictionary<Symbol, Tuple<ActionDir, object>> MatchedValueSet { get; }
         public TerminalSet PossibleTerminalSet
         {
             get
@@ -40,7 +40,7 @@ namespace Parse.FrontEnd.Parsers.Datas
             }
         }
 
-        public LRParsingData(Canonical ix, Dictionary<Symbol, Tuple<ActionInfo, object>> matchedValueSet)
+        public LRParsingData(Canonical ix, Dictionary<Symbol, Tuple<ActionDir, object>> matchedValueSet)
         {
             this.Ix = ix;
             this.MatchedValueSet = matchedValueSet;

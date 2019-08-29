@@ -9,6 +9,7 @@ namespace Parse.FrontEnd.Parsers
         private string source = string.Empty;
         private int codePieceIndex = 0;
         private Grammar grammar = null;
+        private int strStartIndex = 0;
         private List<string> codePieces { get; } = new List<string>();
 
         /// <summary>
@@ -18,15 +19,61 @@ namespace Parse.FrontEnd.Parsers
         {
             get
             {
-                string value = (this.codePieceIndex >= this.codePieces.Count) ? string.Empty : this.codePieces[this.codePieceIndex++];
+                string value = string.Empty;
+
+                while(true)
+                {
+                    value = this.GetNextString();
+                    if (this.IsIgnoreString(value) == false) break;
+                }
 
                 return new TokenData(value, (value == string.Empty) ? new Epsilon() : this.grammar.GetTerminal(value));
+
+                /*
+                get
+                {
+                    string value = (this.codePieceIndex >= this.codePieces.Count) ? string.Empty : this.codePieces[this.codePieceIndex++];
+
+                    return new TokenData(value, (value == string.Empty) ? new Epsilon() : this.grammar.GetTerminal(value));
+                }
+                */
             }
         }
 
         public Lexer(Grammar grammar)
         {
             this.grammar = grammar;
+        }
+
+        private string GetNextString()
+        {
+            string result = string.Empty;
+            bool bExistDelimitString = false;
+
+            foreach (char input in this.source.Substring(this.strStartIndex))
+            {
+                string inputString = input.ToString();
+
+                if (this.grammar.DelimiterDic.ContainsKey(inputString) == false)
+                {
+                    if (bExistDelimitString) break;
+
+                    result += inputString;
+                }
+                else
+                {
+                    if (this.grammar.DelimiterDic.ContainsKey(result + inputString))
+                    {
+                        bExistDelimitString = true;
+                        result += inputString;
+                    }
+                    else break;
+                }
+            }
+
+            this.strStartIndex += result.Length;
+
+            return result;
         }
 
         public void RollBackTokenReadIndex()
@@ -46,6 +93,44 @@ namespace Parse.FrontEnd.Parsers
             if (this.grammar.DelimiterDic.ContainsKey(target))  result = this.grammar.DelimiterDic[target];
 
             return result;
+        }
+
+        public void AddCode(string code)
+        {
+            if (this.source.Length > 0) this.source = this.source.Substring(0, this.source.Length - 1);
+
+            this.source += code + new EndMarker().Value;
+        }
+
+        public void AddCode(int startIndex, string code)
+        {
+            if (startIndex >= this.source.Length) { this.AddCode(code); return; }
+
+            this.source.Insert(startIndex, code);
+
+            if (this.strStartIndex <= startIndex)
+            {
+                this.strStartIndex = startIndex;
+
+                while (this.strStartIndex > 0)
+                {
+                    if (this.grammar.DelimiterDic.ContainsKey(this.source[--this.strStartIndex].ToString())) break;
+                }
+            }
+        }
+        public void DelCode(int startIndex, string code)
+        {
+            this.source.Remove(startIndex, code.Length);
+
+            if (this.strStartIndex > startIndex)
+            {
+                this.strStartIndex = startIndex;
+
+                while (this.strStartIndex > 0)
+                {
+                    if (this.grammar.DelimiterDic.ContainsKey(this.source[--this.strStartIndex].ToString())) break;
+                }
+            }
         }
 
         /// <summary>

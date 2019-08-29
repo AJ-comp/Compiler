@@ -24,7 +24,6 @@ namespace ConsoleApp1
             //            parser.Parse("a,a");
             parser.Parse("a*a+a");
             parser.ParsingHistory.Print();
-            Console.WriteLine(parser.AstRoot.ToTreeString());
             Console.WriteLine(parser.ToParsingTreeString());
         }
     }

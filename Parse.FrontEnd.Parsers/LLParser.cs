@@ -19,7 +19,7 @@ namespace Parse.FrontEnd.Parsers
         public string ShowStack => string.Join("", this.stack);
         public override DataTable ParsingHistory => this.parsingHistory;
         public override DataTable ParsingTable => this.relationAnalyzer.ParsingDic.ToDataTable(this.Grammar.NonTerminalMultiples);
-        public override AstNonTerminal AstRoot { get; protected set; } = null;
+        public override List<AstSymbol> ParseTree { get; }
 
         public override TerminalSet PossibleTerminalSet
         {

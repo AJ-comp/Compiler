@@ -120,35 +120,33 @@ namespace Parse.FrontEnd.Parsers.Collections
             }
         }
 
-        private ActionInfo Process(Tuple<ActionInfo,object>matchedValue, TokenData inputValue, Stack<object> prevStack)
+        private ActionData Process(Tuple<ActionDir,object>matchedValue, TokenData inputValue, Stack<object> prevStack)
         {
-            ActionInfo result = ActionInfo.failed;
+            ActionData result = new ActionData();
+            result.ActionDest = matchedValue.Item2;
 
-            if (matchedValue.Item1 == ActionInfo.shift)
+            if (matchedValue.Item1 == ActionDir.shift)
             {
                 this.stack.Push(inputValue);
                 this.stack.Push(matchedValue.Item2);
 
-                result = ActionInfo.shift;
+                result.ActionDirection = ActionDir.shift;
             }
-            else if (matchedValue.Item1 == ActionInfo.reduce)
+            else if (matchedValue.Item1 == ActionDir.reduce)
             {
                 var reduceDest = matchedValue.Item2 as NonTerminalSingle;
-                //                if(reduceDest.IsEpsilon
 
                 for (int i = 0; i < reduceDest.Count * 2; i++) this.stack.Pop();
                 this.stack.Push(reduceDest);
-
-                result = ActionInfo.reduce;
+                result.ActionDirection = ActionDir.reduce;
             }
-            else if (matchedValue.Item1 == ActionInfo.epsilon_reduce)
+            else if (matchedValue.Item1 == ActionDir.epsilon_reduce)
             {
                 this.stack.Push(matchedValue.Item2 as NonTerminalSingle);
 
-
-                result = ActionInfo.reduce;
+                result.ActionDirection = ActionDir.epsilon_reduce;
             }
-            else if (matchedValue.Item1 == ActionInfo.accept) result = ActionInfo.accept;
+            else if (matchedValue.Item1 == ActionDir.accept) result.ActionDirection = ActionDir.accept;
 
             return result;
         }
@@ -159,28 +157,28 @@ namespace Parse.FrontEnd.Parsers.Collections
         /// <param name="inputValue"></param>
         /// <param name="prevStack"></param>
         /// <returns></returns>
-        private ActionInfo ShiftAndReduce(TokenData inputValue, Stack<object> prevStack)
+        private ActionDir ShiftAndReduce(TokenData inputValue, Stack<object> prevStack)
         {
             var topData = this.stack.Peek();
 
-            if (topData is NonTerminalSingle) return ActionInfo.failed;
+            if (topData is NonTerminalSingle) return ActionDir.failed;
 
             var IxMetrix = this[(int)topData];
 
             // invalid input symbol, can't shift
             if (!IxMetrix.MatchedValueSet.ContainsKey(inputValue.Kind))
             {
-                var data = new LRParsingEventArgs(prevStack, this.stack, inputValue, ActionInfo.failed, null);
-                this.ActionFailed?.Invoke(new LRParsingEventArgs(prevStack, this.stack, inputValue, ActionInfo.failed, null), IxMetrix.PossibleTerminalSet);
-                return ActionInfo.failed;
+                var data = new LRParsingEventArgs(prevStack, this.stack, inputValue, new ActionData(ActionDir.failed, null));
+                this.ActionFailed?.Invoke(new LRParsingEventArgs(prevStack, this.stack, inputValue, new ActionData(ActionDir.failed, null)), IxMetrix.PossibleTerminalSet);
+                return ActionDir.failed;
             }
 
             var matchedValue = IxMetrix.MatchedValueSet[inputValue.Kind];
             var result = this.Process(matchedValue, inputValue, prevStack);
 
-            this.ActionCompleted?.Invoke(new LRParsingEventArgs(prevStack, this.stack, inputValue, matchedValue.Item1, matchedValue.Item2));
+            this.ActionCompleted?.Invoke(new LRParsingEventArgs(prevStack, this.stack, inputValue, result));
 
-            return result;
+            return result.ActionDirection;
         }
 
         /// <summary>
@@ -211,7 +209,7 @@ namespace Parse.FrontEnd.Parsers.Collections
                 var matchedValue = IxMetrix.MatchedValueSet[seenSingleNT.ToNonTerminal()];
 
                 this.stack.Push((int)matchedValue.Item2);
-                this.ActionCompleted?.Invoke(new LRParsingEventArgs(prevStack, this.stack, inputValue, matchedValue.Item1, matchedValue.Item2));
+                this.ActionCompleted?.Invoke(new LRParsingEventArgs(prevStack, this.stack, inputValue, new ActionData(matchedValue.Item1, matchedValue.Item2)));
             }
 
             return result;
@@ -245,14 +243,14 @@ namespace Parse.FrontEnd.Parsers.Collections
         /// <param name="stack">current stack</param>
         /// <param name="inputValue">input terminal</param>
         /// <returns></returns>
-        public ActionInfo Parsing(TokenData inputValue)
+        public ActionDir Parsing(TokenData inputValue)
         {
-            ActionInfo result = ActionInfo.failed;
+            ActionDir result = ActionDir.failed;
             Stack<object> prevStack = this.stack.Clone();
 
             if (this.GoTo(inputValue, prevStack))
             {
-                result = ActionInfo.moveto;
+                result = ActionDir.moveto;
             }
             else
             {
@@ -267,6 +265,17 @@ namespace Parse.FrontEnd.Parsers.Collections
         {
             DataTable result = new DataTable();
             result.Columns.Add(this.introduce, typeof(string));
+
+            /*
+            DataColumn column = new DataColumn();
+
+            column.DataType = typeof(string);
+            column.ColumnName = "(";
+            column.Caption = "(";
+            column.ReadOnly = true;
+            column.DefaultValue = "";
+            result.Columns.Add(column);
+            */
 
             this.CreateColumns(result);
             this.CreateRows(result);

@@ -9,6 +9,8 @@ namespace Parse.Ast
 {
     public abstract class AstSymbol : IShowable
     {
+        public NonTerminalSingle SignPost = null;
+
         public abstract string ToGrammarString();
         public abstract string ToTreeString(ushort depth = 1);
     }

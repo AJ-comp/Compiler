@@ -10,18 +10,17 @@ namespace Parse.Ast
 {
     public class AstNonTerminal : AstSymbol, IList<AstSymbol>
     {
-        private MeaningUnit meaningUnit = null;
         private List<AstSymbol> symbols = new List<AstSymbol>();
 
-        public string Name => meaningUnit?.Name;
+        public string Name => this.SignPost.MeaningUnit?.Name;
 
         public AstSymbol this[int index] { get => ((IList<AstSymbol>)symbols)[index]; set => ((IList<AstSymbol>)symbols)[index] = value; }
         public int Count => ((IList<AstSymbol>)symbols).Count;
         public bool IsReadOnly => ((IList<AstSymbol>)symbols).IsReadOnly;
 
-        public AstNonTerminal(MeaningUnit meaningUnit)
+        public AstNonTerminal(NonTerminalSingle singleNT)
         {
-            this.meaningUnit = meaningUnit;
+            this.SignPost = singleNT;
         }
 
         public void Add(AstSymbol item)

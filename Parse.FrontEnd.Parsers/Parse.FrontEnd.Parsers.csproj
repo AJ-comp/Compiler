@@ -51,6 +51,7 @@
     <Compile Include="Collections\ParsingRule.cs" />
     <Compile Include="Collections\SymbolTable.cs" />
     <Compile Include="Collections\SymbolTableStack.cs" />
+    <Compile Include="Datas\ActionData.cs" />
     <Compile Include="Datas\CanonicalItem.cs" />
     <Compile Include="Datas\LRParsingData.cs" />
     <Compile Include="Datas\SymbolRowData.cs" />

@@ -136,9 +136,9 @@ namespace Parse.FrontEnd.Parsers.Collections
         /// <param name="IxIndex"></param>
         /// <param name="relationData">follow information</param>
         /// <returns></returns>
-        public Dictionary<Symbol, Tuple<ActionInfo, object>> GetCanSeeMatchValue(int IxIndex, RelationData relationData)
+        public Dictionary<Symbol, Tuple<ActionDir, object>> GetCanSeeMatchValue(int IxIndex, RelationData relationData)
         {
-            var result = new Dictionary<Symbol, Tuple<ActionInfo, object>>();
+            var result = new Dictionary<Symbol, Tuple<ActionDir, object>>();
             var tempStorage = new Dictionary<Symbol, uint>();
             Canonical curStatus = this.GetStatusFromIxIndex(IxIndex);
 
@@ -153,10 +153,10 @@ namespace Parse.FrontEnd.Parsers.Collections
                         if (singleNT.Priority < highestPriority) highestPriority = singleNT.Priority;
                     }
 
-                    ActionInfo actionInfo = (item.Key.Item2 is Terminal) ? ActionInfo.shift : ActionInfo.moveto;
+                    ActionDir actionInfo = (item.Key.Item2 is Terminal) ? ActionDir.shift : ActionDir.moveto;
 
                     tempStorage.Add(item.Key.Item2, highestPriority);
-                    result.Add(item.Key.Item2, new Tuple<ActionInfo, object>(actionInfo, item.Value.Item1));
+                    result.Add(item.Key.Item2, new Tuple<ActionDir, object>(actionInfo, item.Value.Item1));
                 }
             }
 
@@ -165,9 +165,9 @@ namespace Parse.FrontEnd.Parsers.Collections
             {
                 foreach (var followItem in relationData[singleNT.ToNonTerminal()])
                 {
-                    ActionInfo actionInfo = ActionInfo.reduce;
-                    if (this.virtualStartSymbol.IsSubSet(singleNT)) actionInfo = ActionInfo.accept;
-                    else if (singleNT.IsEpsilon) actionInfo = ActionInfo.epsilon_reduce;
+                    ActionDir actionInfo = ActionDir.reduce;
+                    if (this.virtualStartSymbol.IsSubSet(singleNT)) actionInfo = ActionDir.accept;
+                    else if (singleNT.IsEpsilon) actionInfo = ActionDir.epsilon_reduce;
 //                    ActionInfo actionInfo = (this.virtualStartSymbol.IsSubSet(singleNT)) ? ActionInfo.accept : ActionInfo.reduce;
 
 
@@ -180,13 +180,13 @@ namespace Parse.FrontEnd.Parsers.Collections
                             tempStorage.Add(followItem, singleNT.Priority);
 
                             result.Remove(followItem);
-                            result.Add(followItem, new Tuple<ActionInfo, object>(actionInfo, singleNT));
+                            result.Add(followItem, new Tuple<ActionDir, object>(actionInfo, singleNT));
                         }
                     }
                     else
                     {
                         tempStorage.Add(followItem, singleNT.Priority);
-                        result.Add(followItem, new Tuple<ActionInfo, object>(actionInfo, singleNT));
+                        result.Add(followItem, new Tuple<ActionDir, object>(actionInfo, singleNT));
                     }
                 }
             }
