@@ -1,4 +1,5 @@
 ﻿using Parse.WpfControls.SyntaxEditorComponents;
+using Parse.WpfControls.SyntaxEditorComponents.EventArgs;
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
@@ -41,376 +42,142 @@ namespace Parse.WpfControls
     ///     <MyNamespace:Editor/>
     ///
     /// </summary>
-    public class Editor : TextBox
+    public class Editor : Control
     {
-        private DrawingControl renderCanvas;
-        private DrawingControl lineNumbersCanvas;
-        private ScrollViewer scrollViewer;
-        private HashSet<SelectionInfo> selectionBlocks = new HashSet<SelectionInfo>();
-        private Dictionary<string, TextStyle> textStyleDic = new Dictionary<string, TextStyle>();
-        private Dictionary<string, TextStyle> patternStyleDic = new Dictionary<string, TextStyle>();
-        private int prevLineIndex = 0;
-        private int prevStartCaretIndexByLine = 0;
-        private double lineHeight;
-        private int maxLineCountInBlock;
-        private HashSet<string> DelimiterSet = new HashSet<string>();
+        private double recentVerticalOffset = 0;
+        private double recentHorizontalOffset = 0;
 
-        /// <summary>
-        /// This member is used to improve speed when collecting line string.
-        /// </summary>
-        private List<int> cacheLineFeedIndex = new List<int>();
+        private TextViewer lineNumbersCanvas;
+        public TextArea TextArea { get; private set; }
 
-        /// <summary>
-        /// This member means maximum showable line count at one go.
-        /// </summary>
-        private int maxViewLineOnce = 100;
 
-        public List<LineTextInfo> LineInfos { get; internal set; } = new List<LineTextInfo>();
+        #region Dependency Properties
+        public Brush LineNumberBackColor
+        {
+            get { return (Brush)GetValue(LineNumberBackColorProperty); }
+            set { SetValue(LineNumberBackColorProperty, value); }
+        }
 
-        public uint TabSize { get; set; } = 4;
+        // Using a DependencyProperty as the backing store for LineNumberBackColor.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty LineNumberBackColorProperty =
+            DependencyProperty.Register("LineNumberBackColor", typeof(Brush), typeof(Editor), new PropertyMetadata(Brushes.Transparent));
+
+
+        public Brush LineNumberForeColor
+        {
+            get { return (Brush)GetValue(LineNumberForeColorProperty); }
+            set { SetValue(LineNumberForeColorProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for LineNumberForeColor.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty LineNumberForeColorProperty =
+            DependencyProperty.Register("LineNumberForeColor", typeof(Brush), typeof(Editor), new PropertyMetadata(Brushes.Black));
+
+
+        public bool IsLineNumberingVisible
+        {
+            get { return (bool)GetValue(IsLineNumberingVisibleProperty); }
+            set { SetValue(IsLineNumberingVisibleProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for IsLineNumberingVisible.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty IsLineNumberingVisibleProperty =
+            DependencyProperty.Register("IsLineNumberingVisible", typeof(bool), typeof(Editor), new PropertyMetadata(false));
+
 
         public double LineHeight
         {
-            get { return lineHeight; }
-            set
-            {
-                if (value != lineHeight)
-                {
-                    lineHeight = value;
-                    TextBlock.SetLineStackingStrategy(this, LineStackingStrategy.BlockLineHeight);
-                    TextBlock.SetLineHeight(this, lineHeight);
-                }
-            }
+            get { return (double)GetValue(LineHeightProperty); }
+            set { SetValue(LineHeightProperty, value); }
         }
 
-        public int MaxLineCountInBlock
+        // Using a DependencyProperty as the backing store for LineHeight.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty LineHeightProperty =
+            DependencyProperty.Register("LineHeight", typeof(double), typeof(Editor), new PropertyMetadata(null));
+
+
+        public Brush SelectedLineBrush
         {
-            get { return maxLineCountInBlock; }
-            set
-            {
-                maxLineCountInBlock = value > 0 ? value : 0;
-            }
+            get { return (Brush)GetValue(SelectedLineBrushProperty); }
+            set { SetValue(SelectedLineBrushProperty, value); }
         }
 
+        // Using a DependencyProperty as the backing store for SelectedLineBrush.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty SelectedLineBrushProperty =
+            DependencyProperty.Register("SelectedLineBrush", typeof(Brush), typeof(Editor), new PropertyMetadata(Brushes.Transparent));
 
 
-
-        public char BeforeCharFromCursor
+        public Brush SelectedLineBorderBrush
         {
-            get { return (char)GetValue(BeforeCharFromCursorProperty); }
-            set { SetValue(BeforeCharFromCursorProperty, value); }
+            get { return (Brush)GetValue(SelectedLineBorderBrushProperty); }
+            set { SetValue(SelectedLineBorderBrushProperty, value); }
         }
 
-        // Using a DependencyProperty as the backing store for BeforeCharFromCursor.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty BeforeCharFromCursorProperty =
-            DependencyProperty.Register("BeforeCharFromCursor", typeof(char), typeof(Editor), new PropertyMetadata(' '));
+        // Using a DependencyProperty as the backing store for SelectedLineBorderBrush.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty SelectedLineBorderBrushProperty =
+            DependencyProperty.Register("SelectedLineBorderBrush", typeof(Brush), typeof(Editor), new PropertyMetadata(Brushes.Transparent));
 
 
-
-
-        public StringCollection LineString
+        public int SelectedLineBorder
         {
-            get { return (StringCollection)GetValue(LineStringProperty); }
-            set { SetValue(LineStringProperty, value); }
+            get { return (int)GetValue(SelectedLineBorderProperty); }
+            set { SetValue(SelectedLineBorderProperty, value); }
         }
 
-        // Using a DependencyProperty as the backing store for LineString.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty LineStringProperty =
-            DependencyProperty.Register("LineString", typeof(StringCollection), typeof(Editor), new PropertyMetadata(new StringCollection()));
+        // Using a DependencyProperty as the backing store for SelectedLineBorder.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty SelectedLineBorderProperty =
+            DependencyProperty.Register("SelectedLineBorder", typeof(int), typeof(Editor), new PropertyMetadata(1));
+
+        #endregion
 
 
-        public StringCollection ViewLineString
-        {
-            get { return (StringCollection)GetValue(ViewLineStringProperty); }
-            set { SetValue(ViewLineStringProperty, value); }
-        }
-
-        // Using a DependencyProperty as the backing store for LineString.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty ViewLineStringProperty =
-            DependencyProperty.Register("ViewLineString", typeof(StringCollection), typeof(Editor), new PropertyMetadata(new StringCollection()));
+        #region Routed Events
 
 
-        public int LineIndex
-        {
-            get { return (int)GetValue(LineIndexProperty); }
-            set { SetValue(LineIndexProperty, value); }
-        }
-
-        // Using a DependencyProperty as the backing store for LineIndex.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty LineIndexProperty =
-            DependencyProperty.Register("LineIndex", typeof(int), typeof(Editor), new PropertyMetadata(0));
-
-
-        public int StartCaretIndexByLine
-        {
-            get { return (int)GetValue(StartCaretIndexByLineProperty); }
-            set { SetValue(StartCaretIndexByLineProperty, value); }
-        }
-
-        // Using a DependencyProperty as the backing store for CaretIndexBD.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty StartCaretIndexByLineProperty =
-            DependencyProperty.Register("StartCaretIndexByLine", typeof(int), typeof(Editor), new PropertyMetadata(0));
-
-
+        #endregion
 
         static Editor()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(Editor), new FrameworkPropertyMetadata(typeof(Editor)));
-            
-//            TextProperty.OverrideMetadata(typeof(Editor), new FrameworkPropertyMetadata(new PropertyChangedCallback(TextPropertyChanged)));
+
+            //            TextProperty.OverrideMetadata(typeof(Editor), new FrameworkPropertyMetadata(new PropertyChangedCallback(TextPropertyChanged)));
+        }
+
+        public override void OnApplyTemplate()
+        {
+            base.OnApplyTemplate();
+
+            this.lineNumbersCanvas = (TextViewer)Template.FindName("PART_LineNumbersCanvas", this);
+            this.TextArea = (TextArea)Template.FindName("PART_TextArea", this);
         }
 
         public Editor()
         {
-            this.DelimiterSet.Add(" ");
-            this.DelimiterSet.Add("\r\n");
-
-            this.LineString.Add(string.Empty);
-
-            LineHeight = FontSize * 1.3;
-
             Loaded += (s, e) =>
             {
-                renderCanvas = (DrawingControl)Template.FindName("PART_RenderCanvas", this);
-                lineNumbersCanvas = (DrawingControl)Template.FindName("PART_LineNumbersCanvas", this);
-                scrollViewer = (ScrollViewer)Template.FindName("PART_ContentHost", this);
-
                 //                lineNumbersCanvas.Width = GetFormattedTextWidth(string.Format("{0:0000}", totalLineCount)) + 5;
-                scrollViewer.ScrollChanged += OnScrollChanged;
-                this.SelectionChanged += Editor_SelectionChanged;
+                //                scrollViewer.ScrollChanged += OnScrollChanged;
+                this.TextArea.Rendered += TextArea_Rendered;
 
-                //                InvalidateBlocks(0);
-                InvalidateVisual();
-            };
-
-            SizeChanged += (s, e) =>
-            {
-                if (e.HeightChanged == false)
-                    return;
-//                UpdateBlocks();
-                InvalidateVisual();
-            };
-
-            TextChanged += (s, e) =>
-            {
-                this.UpdateLineString(e.Changes.First());
                 InvalidateVisual();
             };
         }
 
-        private int GetLineIndexFromCaretIndex(int caretIndex)
+        private void ShowPrompt(TextChange changeInfo)
         {
-            int result = 0;
-            int totalLength = 0;
-            for(int i=0; i<this.LineString.Count; i++)
-            {
-                totalLength += this.LineString[i].Length + Environment.NewLine.Length;
-                if (totalLength > caretIndex) { result = i; break; }
-            }
+            if (changeInfo.AddedLength != 1) return;
 
-            return result;
+            IntelliPrompt prompt = new IntelliPrompt();
         }
 
-        private int GetStartIndexFromLineIndex(int lineIndex, int caretIndex)
+        private void TextArea_Rendered(object sender, RoutedEventArgs e)
         {
-            int totalLength = 0;
-            for (int i = 0; i < lineIndex; i++) totalLength += this.LineString[i].Length + Environment.NewLine.Length;
+            EditorRenderedEventArgs arg = e as EditorRenderedEventArgs;
 
-            return caretIndex - totalLength;
-        }
+            this.recentHorizontalOffset = arg.HorizontalOffset;
+            this.recentVerticalOffset = arg.VerticalOffset;
 
-        private int GetStartLineOnViewPos(double topViewPos) => (int)(topViewPos / this.lineHeight);
-
-        /// <summary>
-        /// This function adds line-string an added string.
-        /// </summary>
-        /// <see cref=""/>
-        /// <param name="offset">Start position of addString</param>
-        /// <param name="addString">added string</param>
-        private void AddCharToLineString(int offset, string addString)
-        {
-            if (addString.Length == 0) return;
-
-            int lineIndex = this.GetLineIndexFromCaretIndex(offset);
-            int startCaretByLine = this.GetStartIndexFromLineIndex(lineIndex, offset);
-            this.LineString[lineIndex] = this.LineString[lineIndex].Insert(startCaretByLine, addString);
-
-            if (addString.Contains(Environment.NewLine) == false) return;
-
-            string[] lines = this.LineString[lineIndex].Split(new string[] { Environment.NewLine }, StringSplitOptions.None);
-
-            this.LineString[lineIndex] = lines.First();
-
-            for(int i=1; i<lines.Length; i++)
-                this.LineString.Insert(lineIndex + i, lines[i]);
-        }
-
-        /// <summary>
-        /// This function removes from the line-string a string.
-        /// </summary>
-        /// <param name="changeInfo"></param>
-        private void DelCharFromLineString(TextChange changeInfo)
-        {
-            if (changeInfo.RemovedLength == 0) return;
-
-            int sLineIndex = this.GetLineIndexFromCaretIndex(changeInfo.Offset);
-            int startCaretByLine = this.GetStartIndexFromLineIndex(sLineIndex, changeInfo.Offset);
-
-            int endIndex = changeInfo.Offset + changeInfo.RemovedLength;
-            int eLineIndex = this.GetLineIndexFromCaretIndex(endIndex);
-            int endCaretByLine = this.GetStartIndexFromLineIndex(eLineIndex, endIndex);
-
-            string sLineString = this.LineString[sLineIndex];
-            string eLineString = this.LineString[eLineIndex];
-
-            if (sLineIndex == eLineIndex)
-                this.LineString[sLineIndex] = sLineString.Remove(startCaretByLine, endCaretByLine - startCaretByLine);
-            else
-            {
-                if (startCaretByLine < sLineString.Length) this.LineString[sLineIndex] = sLineString.Remove(startCaretByLine);
-                this.LineString[sLineIndex] += eLineString.Substring(endCaretByLine);
-
-                for (int i = sLineIndex + 1; i <= eLineIndex; i++) this.LineString.RemoveAt(sLineIndex + 1);
-            }
-
-            /*
-            // single character deletion process
-            if (this.SelectionBlocks.Count == 0)
-            {
-                if (this.StartCaretIndexByLine == 0)
-                {
-                    this.LineString[this.LineIndex - 1] += this.LineString[this.LineIndex];
-                    this.LineString.RemoveAt(this.LineIndex);
-                }
-                else this.LineString[this.LineIndex] = this.LineString[this.LineIndex].Remove(this.StartCaretIndexByLine-1, 1);
-            }
-            // block deletion process
-            else
-            {
-                foreach(var block in this.SelectionBlocks)
-                {
-                    string sLineString = this.LineString[block.StartLine];
-                    string eLineString = this.LineString[block.EndLine];
-
-                    if (block.StartLine == block.EndLine)
-                        this.LineString[block.StartLine] = sLineString.Remove(block.StartCaretFromLine, block.EndCaretFromLine - block.StartCaretFromLine);
-                    else
-                    {
-                        if (block.StartCaretFromLine < sLineString.Length)  this.LineString[block.StartLine] = sLineString.Remove(block.StartCaretFromLine);
-                        this.LineString[block.StartLine] += eLineString.Substring(block.EndCaretFromLine);
-
-                        for (int i = block.StartLine + 1; i <= block.EndLine; i++)  this.LineString.RemoveAt(block.StartLine + 1);
-                    }
-                }
-            }
-            */
-        }
-
-        /// <summary>
-        /// This function updates a line-string when is changed string of editor.
-        /// </summary>
-        /// <param name="changeInfo">update information</param>
-        private void UpdateLineString(TextChange changeInfo)
-        {
-            string addString = this.Text.Substring(changeInfo.Offset, changeInfo.AddedLength);
-
-            this.DelCharFromLineString(changeInfo);
-            this.AddCharToLineString(changeInfo.Offset, addString);
-        }
-
-        /// <summary>
-        /// This function gets the line-string-collection
-        /// </summary>
-        /// <param name="startLine">The start line that gets line-string-collection</param>
-        /// <param name="cnt">Line count</param>
-        /// <returns></returns>
-        private StringCollection GetLineStringCollection(int startLine, int cnt)
-        {
-            StringCollection result = new StringCollection();
-
-            if (startLine >= this.LineString.Count) return result;
-
-            int maxCnt = (startLine + cnt < this.LineString.Count) ? startLine + cnt : this.LineString.Count;
-            for (int i = startLine; i < maxCnt; i++) result.Add(this.LineString[i]);
-
-            return result;
-        }
-
-        /// <summary>
-        /// This function returns a string that is applied a style.
-        /// </summary>
-        /// <param name="text"></param>
-        /// <returns></returns>
-        private FormattedText GetFormattedText(string text)
-        {
-            Brush foreBrush = Brushes.Black;
-            if (this.textStyleDic.ContainsKey(text)) foreBrush = this.textStyleDic[text].ForeGround;
-            else
-            {
-                foreach(var item in this.patternStyleDic)
-                {
-                    // all match
-                    if (Regex.Match(text, item.Key).Length == text.Length)
-                    {
-                        foreBrush = item.Value.ForeGround;
-                        break;
-                    }
-                }
-            }
-
-            FormattedText ft = new FormattedText(text, CultureInfo.InvariantCulture, FlowDirection.LeftToRight,
-                new Typeface(FontFamily, FontStyle, FontWeight, FontStretch),
-                FontSize,
-                foreBrush);
-
-            ft.Trimming = TextTrimming.None;
-            ft.LineHeight = lineHeight;
-
-            return ft;
-        }
-
-        private void UpdateCaretInfo()
-        {
-            this.prevLineIndex = this.LineIndex;
-            this.LineIndex = this.GetLineIndexFromCaretIndex(this.CaretIndex);
-
-            this.prevStartCaretIndexByLine = this.StartCaretIndexByLine;
-            this.StartCaretIndexByLine = GetStartIndexFromLineIndex(this.LineIndex, this.CaretIndex);
-        }
-
-        private void Editor_SelectionChanged(object sender, RoutedEventArgs e)
-        {
-            this.UpdateCaretInfo();
-            this.selectionBlocks.Clear();
-
-            this.BeforeCharFromCursor = (this.CaretIndex == 0) ? ' ' : this.Text[this.CaretIndex - 1];
-
-            if (this.SelectionLength == 0)  return;
-
-
-            SelectionInfo selectionInfo = new SelectionInfo();
-
-            var selectionEndIndex = this.SelectionStart + this.SelectionLength;
-            selectionInfo.StartLine = this.GetLineIndexFromCaretIndex(this.SelectionStart);
-            selectionInfo.StartCaretFromLine = this.GetStartIndexFromLineIndex(selectionInfo.StartLine, this.SelectionStart);
-
-            selectionInfo.EndLine = this.GetLineIndexFromCaretIndex(selectionEndIndex);
-            selectionInfo.EndCaretFromLine = this.GetStartIndexFromLineIndex(selectionInfo.EndLine, selectionEndIndex);
-
-            this.selectionBlocks.Add(selectionInfo);
-        }
-
-        protected override void OnPreviewKeyDown(KeyEventArgs e)
-        {
-            if (e.Key == Key.Tab)
-            {
-                string tab = new string(' ', (int)TabSize);
-                int caretPosition = base.CaretIndex;
-                base.Text = base.Text.Insert(caretPosition, tab);
-                base.CaretIndex = caretPosition + (int)TabSize;
-
-                e.Handled = true;
-            }
+            this.InvalidateVisual();
         }
 
         /// <summary>
@@ -420,37 +187,43 @@ namespace Parse.WpfControls
         /// <param name="drawingContext"></param>
         protected override void OnRender(DrawingContext drawingContext)
         {
-//            if (!IsLoaded || renderCanvas == null || lineNumbersCanvas == null) return;
-            if (!IsLoaded || renderCanvas == null) return;
+            if (this.IsLoaded == false || this.lineNumbersCanvas == null || this.TextArea == null) return;
+            if (this.TextArea.ViewLineString.Count == 0) return;
 
-            var dc = renderCanvas.GetContext();
+            this.lineNumbersCanvas.SetDrawStartingPos(0, this.recentVerticalOffset, this.LineHeight);
 
-            this.ViewLineString = this.GetLineStringCollection(this.GetStartLineOnViewPos(this.VerticalOffset), this.maxViewLineOnce);
+            List<FormattedText> lines = new List<FormattedText>();
 
-            double yPos = this.lineHeight * (int)(this.VerticalOffset / this.lineHeight);
-            foreach(var line in this.ViewLineString)
+            int maxNumberOfDigit = this.TextArea.ViewLineString[this.TextArea.ViewLineString.Count - 1].AbsoluteLineIndex.ToString().Length;
+            this.lineNumbersCanvas.Width = maxNumberOfDigit * this.FontSize;
+            for (int i=0; i<this.TextArea.ViewLineString.Count; i++)
             {
-                List<string> tokenList = SplitAndKeep(line, this.DelimiterSet.ToArray()).ToList();
+                FormattedText lineNumberingText = new FormattedText((this.TextArea.ViewLineString[i].AbsoluteLineIndex + 1).ToString(), 
+                    CultureInfo.InvariantCulture, FlowDirection.LeftToRight,
+                    new Typeface(FontFamily, FontStyle, FontWeight, FontStretch),
+                    this.FontSize, this.LineNumberForeColor);
 
-                double itemDrawStartY = yPos;
-                double itemDrawEndY = yPos + this.lineHeight;
-                yPos = itemDrawEndY;
-                double top = 0 - this.VerticalOffset;
-
-                double itemDrawStartX = 2 - this.HorizontalOffset;
-
-                foreach (var token in tokenList)
-                {
-                    FormattedText item = this.GetFormattedText(token);
-
-                    if (top < ActualHeight)
-                        dc.DrawText(item, new Point(itemDrawStartX, itemDrawStartY - this.VerticalOffset));
-
-                    itemDrawStartX += item.WidthIncludingTrailingWhitespace;
-                }
+                lines.Add(lineNumberingText);
             }
 
-            dc.Close();
+            this.lineNumbersCanvas.DrawLines(lines);
+
+            /*
+            double yPos = this.drawingPosY;
+            for (int i=this.TextArea.LineIndex; i<100; i++)
+            {
+                double itemDrawStartX = 2;
+                double itemDrawStartY = this.drawingPosY;
+                yPos += lineHeight;
+                double top = 0 - this.VerticalOffset;
+
+                FormattedText lineNumberingText = new FormattedText(i+1.ToString(), CultureInfo.InvariantCulture, FlowDirection.LeftToRight,
+                                new Typeface(FontFamily, FontStyle, FontWeight, FontStretch),
+                                FontSize, Brushes.Aquamarine);
+
+                dc.DrawText(lineNumberingText, )
+            }
+            */
 
             base.OnRender(drawingContext);
         }
@@ -460,68 +233,8 @@ namespace Parse.WpfControls
             if (e.VerticalChange != 0 || e.HorizontalChange != 0) InvalidateVisual();
         }
 
-        /// <summary>
-        /// This function adds to the editor a delimiter that is used to separate.
-        /// </summary>
-        /// <param name="delimiter"></param>
-        public void AddDelimiterList(string delimiter)
-        {
-            this.DelimiterSet.Add(delimiter);
-        }
-
-        /// <summary>
-        /// This function adds information which to syntax-highlight to the editor.
-        /// </summary>
-        /// <param name="text"></param>
-        /// <param name="foreBrush"></param>
-        /// <param name="bPattern"></param>
-        public void AddSyntaxHighLightInfo(string text, Brush foreBrush, bool bPattern = false)
-        {
-            if (bPattern)
-                this.patternStyleDic.Add(text, new TextStyle(foreBrush, Brushes.Transparent));
-            else
-                this.textStyleDic.Add(text, new TextStyle(foreBrush, Brushes.Transparent));
-        }
-
         static void TextPropertyChanged(DependencyObject sender, DependencyPropertyChangedEventArgs args)
         {
-        }
-
-
-        /// <summary>
-        /// This function split a string on the basis of delimiters.
-        /// </summary>
-        /// <see cref="https://www.lucidchart.com/documents/edit/41d20574-d843-41ce-ae44-2d3e29fbc716/0_0?beaconFlowId=E9C38964142A86C1"/>
-        /// <param name="s"></param>
-        /// <param name="delimiters"></param>
-        /// <returns></returns>
-        public static IEnumerable<string> SplitAndKeep(string s, params string[] delimiters)
-        {
-            List<string> result = new List<string>();
-
-            string data = string.Empty;
-            string delimiteStr = string.Empty;
-
-            foreach(var ch in s)
-            {
-                if (delimiters.Contains(ch + delimiteStr))
-                {
-                    if(data.Length > 0) result.Add(data);
-                    data = string.Empty;
-                    delimiteStr += ch;
-                }
-                else
-                {
-                    if(delimiteStr.Length > 0) result.Add(delimiteStr);
-                    delimiteStr = string.Empty;
-                    data += ch;
-                }
-            }
-
-            if (delimiteStr.Length > 0) result.Add(delimiteStr);
-            if (data.Length > 0) result.Add(data);
-
-            return result;
         }
     }
 
@@ -534,11 +247,5 @@ namespace Parse.WpfControls
 
         public int EndLine { get; internal set; }
         public int EndCaretFromLine { get; internal set; }
-    }
-
-    public class LineTextInfo
-    {
-        public List<TextInfo> TokenInfos { get; internal set; }
-
     }
 }

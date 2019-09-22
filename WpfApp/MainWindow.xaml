@@ -30,15 +30,18 @@
                         <RowDefinition Height="auto"/>
                     </Grid.RowDefinitions>
 
-                    <wpfcontrols:Editor Name="syntaxEditor" Grid.Row="0"/>
+                    <wpfcontrols:Editor Name="syntaxEditor"  Grid.Row="0"
+                                        FontSize="15" 
+                                        FontFamily="Arial"
+                                        IsLineNumberingVisible="True"  LineNumberForeColor="DarkGreen"/>
                     <StatusBar Grid.Row="1">
                         <StatusBarItem>
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock Text="Line="/>
-                                <TextBlock Text="{Binding ElementName=syntaxEditor, Path=LineIndex}"/>
+                                <TextBlock Text="{Binding ElementName=syntaxEditor.TextArea, Path=LineIndex}"/>
                                 <Border BorderThickness="5" BorderBrush="Transparent"/>
                                 <TextBlock Text="CaretPosition="/>
-                                <TextBlock Text="{Binding ElementName=syntaxEditor, Path=StartCaretIndexByLine}"/>
+                                <TextBlock Text="{Binding ElementName=syntaxEditor.TextArea, Path=StartCaretIndexByLine}"/>
                             </StackPanel>
                         </StatusBarItem>
                     </StatusBar>

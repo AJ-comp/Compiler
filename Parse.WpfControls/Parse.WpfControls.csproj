@@ -32,11 +32,29 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="ActiproSoftware.Text.Wpf, Version=18.1.673.0, Culture=neutral, PublicKeyToken=36ff2196ab5654b9, processorArchitecture=MSIL" />
+    <Reference Include="CommonServiceLocator, Version=2.0.2.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\CommonServiceLocator.2.0.2\lib\net47\CommonServiceLocator.dll</HintPath>
+    </Reference>
+    <Reference Include="GalaSoft.MvvmLight, Version=5.4.1.0, Culture=neutral, PublicKeyToken=e7570ab207bcb616, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvvmLightLibs.5.4.1.1\lib\net45\GalaSoft.MvvmLight.dll</HintPath>
+    </Reference>
+    <Reference Include="GalaSoft.MvvmLight.Extras, Version=5.4.1.0, Culture=neutral, PublicKeyToken=669f0b5e8f868abf, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvvmLightLibs.5.4.1.1\lib\net45\GalaSoft.MvvmLight.Extras.dll</HintPath>
+    </Reference>
+    <Reference Include="GalaSoft.MvvmLight.Platform, Version=5.4.1.0, Culture=neutral, PublicKeyToken=5f873c45e98af8a1, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvvmLightLibs.5.4.1.1\lib\net45\GalaSoft.MvvmLight.Platform.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Expression.Interactions, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Windows.Interactivity.WPF.2.0.20525\lib\net40\Microsoft.Expression.Interactions.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Printing" />
     <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvvmLightLibs.5.4.1.1\lib\net45\System.Windows.Interactivity.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -46,15 +64,45 @@
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
+    <Reference Include="Windows.Foundation.UniversalApiContract">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Windows Kits\10\References\10.0.16299.0\Windows.Foundation.UniversalApiContract\5.0.0.0\Windows.Foundation.UniversalApiContract.winmd</HintPath>
+    </Reference>
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Abstracts\ViewModelBase.cs" />
+    <Compile Include="Converters\EventArgConverterExtension.cs" />
+    <Compile Include="Converters\FontReleateConverter.cs" />
+    <Compile Include="Converters\LineHeightBasedFontSizeConverter.cs" />
+    <Compile Include="Converters\MouseDoubleClickEventArgConverter.cs" />
+    <Compile Include="Converters\SingleSelectionChangedEventArgsConverter.cs" />
+    <Compile Include="SyntaxEditorComponents\Behaviors\CompletionListBehavior.cs" />
+    <Compile Include="SyntaxEditorComponents\Behaviors\ZoomScrollBehavior.cs" />
+    <Compile Include="SyntaxEditorComponents\CompletionList.xaml.cs">
+      <DependentUpon>CompletionList.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SyntaxEditorComponents\CompletionWindow.cs" />
+    <Compile Include="SyntaxEditorComponents\DrawingAlgorithm.cs" />
+    <Compile Include="SyntaxEditorComponents\EventArgs\EditorScrollChangedEventArgs.cs" />
+    <Compile Include="SyntaxEditorComponents\EventArgs\EditorRenderedEventArgs.cs" />
     <Compile Include="SyntaxEditorComponents\IntelliPrompt.cs" />
+    <Compile Include="SyntaxEditorComponents\Models\CompletionItem.cs" />
+    <Compile Include="SyntaxEditorComponents\TextArea.cs" />
+    <Compile Include="SyntaxEditorComponents\TextViewer.cs" />
     <Compile Include="SyntaxEditorComponents\TextStyle.cs" />
     <Compile Include="Editor.cs" />
     <Compile Include="SyntaxEditorComponents\DrawingControl.cs" />
+    <Compile Include="SyntaxEditorComponents\ViewModels\CompletionListViewModel.cs" />
+    <Compile Include="Utilities\StringUtility.cs" />
+    <Compile Include="Utilities\TextBoxUtility.cs" />
+    <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="ViewModel\ViewModelLocator.cs" />
+    <Page Include="SyntaxEditorComponents\CompletionList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Themes\Editor.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -81,7 +129,10 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
+    <None Include="app.config" />
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -100,6 +151,12 @@
       <Project>{54EC5CEA-8D91-4165-9EBB-6A0693A96C4F}</Project>
       <Name>Parse</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Common\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\monkey_spanner.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -66,12 +66,13 @@ namespace WpfApp
             dataGridView.DataSource = parser.ParsingTable;
             dataGridView.CellMouseEnter += new DataGridViewCellEventHandler(this.tableGridView_CellMouseEnter);
 
-            this.syntaxEditor.AddSyntaxHighLightInfo("const", Brushes.Lime);
-            this.syntaxEditor.AddSyntaxHighLightInfo("int", Brushes.Lime);
-            this.syntaxEditor.AddSyntaxHighLightInfo("void", Brushes.Lime);
-            this.syntaxEditor.AddSyntaxHighLightInfo("private", Brushes.Lime);
-            this.syntaxEditor.AddSyntaxHighLightInfo("[0-9]*", Brushes.LightSteelBlue, true);
-
+            this.syntaxEditor.TextArea.AddSyntaxHighLightInfo("const", Brushes.Lime);
+            this.syntaxEditor.TextArea.AddSyntaxHighLightInfo("int", Brushes.Lime);
+            this.syntaxEditor.TextArea.AddSyntaxHighLightInfo("void", Brushes.Lime);
+            this.syntaxEditor.TextArea.AddSyntaxHighLightInfo("private", Brushes.Lime);
+            this.syntaxEditor.TextArea.AddSyntaxHighLightInfo("public", Brushes.DeepPink);
+            this.syntaxEditor.TextArea.AddSyntaxHighLightInfo("static", Brushes.DeepSkyBlue);
+            this.syntaxEditor.TextArea.AddSyntaxHighLightInfo("[0-9]*", Brushes.LightSteelBlue, true);
 
             //            this.editor.SetComponents(this.parser);
 
