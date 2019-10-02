@@ -3,6 +3,7 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:host="clr-namespace:Parse.WpfControls"
                     xmlns:syntaxcomponent="clr-namespace:Parse.WpfControls.SyntaxEditorComponents"
+                    xmlns:views="clr-namespace:Parse.WpfControls.SyntaxEditorComponents.Views"
                     xmlns:behaviors="clr-namespace:Parse.WpfControls.SyntaxEditorComponents.Behaviors">
 
     <Style TargetType="{x:Type syntaxcomponent:TextArea}">
@@ -15,7 +16,7 @@
 
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="{x:Type syntaxcomponent:TextArea}">
+                <ControlTemplate x:Name="textArea" TargetType="{x:Type syntaxcomponent:TextArea}">
                     <Border BorderThickness="{Binding BorderTickness}"
                                 BorderBrush="{Binding BorderBrush}"
                                 Background="{Binding BackGround}">
@@ -25,7 +26,7 @@
                                                             TextOptions.TextRenderingMode="ClearType" TextOptions.TextFormattingMode="Display"/>
 
                             <ScrollViewer x:Name="PART_ContentHost" Background="#00FFFFFF"/>
-                            <syntaxcomponent:CompletionList x:Name="PART_CompletionList"/>
+                            <views:CompletionList x:Name="PART_CompletionList"/>
 
                         </Grid>
                     </Border>

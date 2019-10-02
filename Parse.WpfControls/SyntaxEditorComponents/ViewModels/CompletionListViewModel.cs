@@ -1,15 +1,24 @@
 ﻿using GalaSoft.MvvmLight.Command;
 using Parse.WpfControls.Abstracts;
+using Parse.WpfControls.Algorithms;
 using Parse.WpfControls.SyntaxEditorComponents.Models;
+using Parse.WpfControls.Utilities;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Windows.Input;
+using System.Text.RegularExpressions;
+using System.Windows;
 
 namespace Parse.WpfControls.SyntaxEditorComponents.ViewModels
 {
     public class CompletionListViewModel : ViewModelBase
     {
-        public ObservableCollection<CompletionItem> TotalCollection { get; } = new ObservableCollection<CompletionItem>();
-        public ObservableCollection<CompletionItem> AvailableCollection { get; } = new ObservableCollection<CompletionItem>();
+        private ISimilarityComparison similarity = new VSLikeSimilarityComparison();
+
+        public SortedSet<CompletionItem> TotalCollection { get; } = new SortedSet<CompletionItem>(new CompletionItemComparer());
+        public HashSet<CompletionItem> AvailableCollection { get; private set; } = new HashSet<CompletionItem>();
+        public ObservableCollection<CompletionItem> CandidateCollection { get; private set; } = new ObservableCollection<CompletionItem>();
+
+//        RoutedEvent SelectedItem
 
         private RelayCommand<bool> doubleClickCmd;
         public RelayCommand<bool> DoubleClickCmd
@@ -45,6 +54,27 @@ namespace Parse.WpfControls.SyntaxEditorComponents.ViewModels
 
         }
 
+        private void SelectTopCandidate()
+        {
+            double topPriority = -1;
+            this.SelectedIndex = -1;
+
+            for(int i=0; i<this.CandidateCollection.Count; i++)
+            {
+                
+                var item = this.CandidateCollection[i];
+                double priority = this.similarity.SimilarityValue(item.ItemName, this.inputString);
+                if (priority > 0)
+                {
+                    if (priority > topPriority)
+                    {
+                        topPriority = priority;
+                        this.SelectedIndex = i;
+                    }
+                }
+            }
+        }
+
         public void Up()
         {
             if (this.selectedIndex <= 0) return;
@@ -60,39 +90,45 @@ namespace Parse.WpfControls.SyntaxEditorComponents.ViewModels
             this.SelectedIndex++;
         }
 
+        public void LoadAvailableCollection()
+        {
+            this.AvailableCollection.Clear();
+            foreach (var item in this.TotalCollection) this.AvailableCollection.Add(item);
+        }
+
         public void OnInputStringChanged()
         {
-            // Show the all available completion item when the length of the input string is 1.
-            if(this.InputString.Length == 1)
+            if(this.inputString.Length == 1)
             {
-                foreach (var item in this.TotalCollection) this.AvailableCollection.Add(item);
-
-                int minFindIndex = 0xff;
-                for (int i = 0; i < this.AvailableCollection.Count; i++)
-                {
-                    var item = this.AvailableCollection[i];
-                    int findIndex = item.ItemName.IndexOf(this.InputString);
-                    if (findIndex >= 0 && findIndex < minFindIndex)
-                    {
-                        minFindIndex = findIndex;
-                        this.SelectedIndex = i;
-                    }
-                }
+                this.CandidateCollection.Clear();
+                foreach (var item in this.AvailableCollection) this.CandidateCollection.Add(item);
             }
             else if(this.inputString.Length > 1)
             {
-                foreach (var item in this.TotalCollection) this.AvailableCollection.Add(item);
-            }
-            else
-            {
-                this.AvailableCollection.Clear();
-            }
-        }
+                this.CandidateCollection.Clear();
 
-        public void Clear()
+                foreach(var item in this.AvailableCollection)
+                {
+                    if (this.similarity.SimilarityValue(item.ItemName, this.inputString) > 0) this.CandidateCollection.Add(item);
+                }
+
+                if(this.CandidateCollection.Count == 0)
+                {
+                    foreach (var item in this.AvailableCollection) this.CandidateCollection.Add(item);
+                }
+            }
+
+            this.SelectTopCandidate();
+        }
+    }
+
+
+    public class CompletionItemComparer : IComparer<CompletionItem>
+    {
+        public int Compare(CompletionItem x, CompletionItem y)
         {
-            this.TotalCollection.Clear();
-            this.AvailableCollection.Clear();
+            // TODO: Handle x or y being null, or them not having names
+            return x.ItemName.CompareTo(y.ItemName);
         }
     }
 }

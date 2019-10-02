@@ -1,6 +1,7 @@
 ﻿using Parse.WpfControls.SyntaxEditorComponents.EventArgs;
 using Parse.WpfControls.SyntaxEditorComponents.Models;
 using Parse.WpfControls.SyntaxEditorComponents.ViewModels;
+using Parse.WpfControls.SyntaxEditorComponents.Views;
 using Parse.WpfControls.Utilities;
 using System;
 using System.Collections.Generic;
@@ -17,6 +18,8 @@ using System.Windows.Media.Imaging;
 
 namespace Parse.WpfControls.SyntaxEditorComponents
 {
+    public enum CompletionItemType { Keyword, Property, Function, Event };
+
     public class TextArea : TextBox
     {
         private TextViewer renderCanvas;
@@ -186,6 +189,8 @@ namespace Parse.WpfControls.SyntaxEditorComponents
             this.DelimiterSet.Add("}");
 
             this.LineString.Add(string.Empty);
+            // Regist function that for rollback a focus to this control when left click in the popup control.
+            this.AddHandler(ListBox.MouseLeftButtonDownEvent, new RoutedEventHandler(this.OnMouseLeftClick), true);
 
             Loaded += (s, e) =>
             {
@@ -212,6 +217,11 @@ namespace Parse.WpfControls.SyntaxEditorComponents
             };
         }
 
+        private void OnMouseLeftClick(object sender, RoutedEventArgs e)
+        {
+            this.Focus();
+        }
+
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
@@ -221,6 +231,8 @@ namespace Parse.WpfControls.SyntaxEditorComponents
             this.completionList = (CompletionList)Template.FindName("PART_CompletionList", this);
         }
 
+        private bool IsBackSpace(TextChange changeInfo) => (changeInfo.RemovedLength >= 1 && changeInfo.AddedLength == 0);
+
         /// <summary>
         /// This function generates completion list.
         /// </summary>
@@ -228,20 +240,22 @@ namespace Parse.WpfControls.SyntaxEditorComponents
         private void GenerateCompletionList(TextChange changeInfo)
         {
             var addString = this.Text.Substring(changeInfo.Offset, changeInfo.AddedLength);
-
-            if (addString.Length != 1) { this.completionList.IsOpen = false; return; }
+            if (addString.Length > 1) { this.completionList.IsOpen = false; return; }
             if (this.DelimiterSet.Contains(addString)) { this.completionList.IsOpen = false; return; }
-            if (this.completionList.IsOpen == false)
+
+            var context = this.completionList.DataContext as CompletionListViewModel;
+            if(this.IsBackSpace(changeInfo))
             {
-                var context = this.completionList.DataContext as CompletionListViewModel;
-                context.Clear();
-                Image image = new Image();
-                image.Source = new BitmapImage(new Uri("../Resources/monkey_spanner.png", UriKind.RelativeOrAbsolute));
-                context.TotalCollection.Add(new CompletionItem() { Image = image, ItemName = "test1" });
-                context.TotalCollection.Add(new CompletionItem() { Image = image, ItemName = "test2" });
-                context.TotalCollection.Add(new CompletionItem() { Image = image, ItemName = "test3" });
-                context.InputString = addString;
-                this.CaretIndexWhenCLOccur = this.CaretIndex - 1;
+                if (this.completionList.IsOpen == false) return;
+                if (this.CaretIndex <= this.CaretIndexWhenCLOccur) { this.completionList.IsOpen = false; return; }
+            }
+            else if(this.completionList.IsOpen == false)
+            {
+                if(addString.Length == 1)
+                {
+                    context.LoadAvailableCollection();
+                    this.CaretIndexWhenCLOccur = this.CaretIndex - 1;
+                }
             }
 
             var rect = this.GetRectFromCharacterIndex(this.CaretIndex);
@@ -253,7 +267,7 @@ namespace Parse.WpfControls.SyntaxEditorComponents
             this.completionList.HorizontalOffset = rect.X;
 
             this.completionList.IsOpen = true;
-
+            context.InputString = this.Text.Substring(this.CaretIndexWhenCLOccur, this.CaretIndex - this.CaretIndexWhenCLOccur);
         }
 
         private int GetLineIndexFromCaretIndex(int caretIndex)
@@ -468,45 +482,52 @@ namespace Parse.WpfControls.SyntaxEditorComponents
 
             if (context.SelectedIndex >= 0)
             {
-                var addString = context.AvailableCollection[context.SelectedIndex].ItemName + other;
+                var addString = context.CandidateCollection[context.SelectedIndex].ItemName + other;
 
-                this.Select(startIndex, endIndex);
+                this.Select(startIndex, endIndex - startIndex);
                 TextCompositionManager.StartComposition(new TextComposition(InputManager.Current, this, addString));
             }
             else if(other.Length > 0)
                 TextCompositionManager.StartComposition(new TextComposition(InputManager.Current, this, other));
         }
 
-        private void InputProcessOnCompletionList(KeyEventArgs e)
+        private bool InputProcessOnCompletionList(Key keyType)
         {
-            if (e.Key == Key.Up)
+            bool result = false;
+
+            if (keyType == Key.Up)
             {
                 var context = this.completionList.DataContext as CompletionListViewModel;
                 context.Up();
-
-                e.Handled = true;
+                result = true;
             }
-            else if(e.Key == Key.Down)
+            else if(keyType == Key.Down)
             {
                 var context = this.completionList.DataContext as CompletionListViewModel;
                 context.Down();
-
-                e.Handled = true;
+                result = true;
             }
-            else if (e.Key == Key.Enter || e.Key == Key.Tab)
+            else if (keyType == Key.Enter || keyType == Key.Tab)
             {
                 this.completionList.IsOpen = false;
                 this.BringStringFromCompletionList();
-
-                e.Handled = true;
+                result = true;
             }
-            else if(e.Key == Key.Space)
+            else if(keyType == Key.Space || keyType == Key.OemPeriod)
             {
                 this.completionList.IsOpen = false;
-                this.BringStringFromCompletionList(" ");
+                if(keyType == Key.Space)  this.BringStringFromCompletionList(" ");
+                else if(keyType == Key.OemPeriod) this.BringStringFromCompletionList(".");
 
-                e.Handled = true;
+                result = true;
             }
+            else if(keyType == Key.Escape)
+            {
+                this.completionList.IsOpen = false;
+                result = true;
+            }
+
+            return result;
         }
 
 
@@ -539,7 +560,7 @@ namespace Parse.WpfControls.SyntaxEditorComponents
                 InvalidateVisual();
 
                 e.RoutedEvent = TextArea.ScrollChangedEvent;
-                RaiseEvent(e);
+                this.RaiseEvent(e);
             }
         }
 
@@ -580,15 +601,15 @@ namespace Parse.WpfControls.SyntaxEditorComponents
                                                                                 this.HorizontalOffset, this.VerticalOffset, this.LineHeight));
         }
 
-        protected override void OnPreviewTextInput(TextCompositionEventArgs e)
-        {
-        }
-
         protected override void OnPreviewKeyDown(KeyEventArgs e)
         {
             if (this.completionList.IsOpen)
             {
-                this.InputProcessOnCompletionList(e);
+                if (this.InputProcessOnCompletionList(e.Key))
+                {
+                    e.Handled = true;
+                    this.completionList.listBox.ScrollIntoView(this.completionList.listBox.SelectedItem);
+                }
                 return;
             }
 
@@ -601,6 +622,21 @@ namespace Parse.WpfControls.SyntaxEditorComponents
             }
         }
 
+        protected override void OnMouseDoubleClick(MouseButtonEventArgs e)
+        {
+            if(this.completionList.listBox.IsMouseOver)
+            {
+                var src = VisualTreeHelper.GetParent(e.OriginalSource as DependencyObject);
+                if(src is VirtualizingStackPanel)
+                {
+                    this.InputProcessOnCompletionList(Key.Enter);
+                }
+                return;
+            }
+
+            base.OnMouseDoubleClick(e);
+        }
+
         /// <summary>
         /// This function adds to the editor a delimiter that is used to separate.
         /// </summary>
@@ -608,6 +644,31 @@ namespace Parse.WpfControls.SyntaxEditorComponents
         public void AddDelimiterList(string delimiter)
         {
             this.DelimiterSet.Add(delimiter);
+        }
+
+        public void AddCompletionList(string item)
+        {
+            var context = this.completionList.DataContext as CompletionListViewModel;
+
+            Image image = new Image();
+            image.Source = new BitmapImage(new Uri("../Resources/monkey_spanner.png", UriKind.RelativeOrAbsolute));
+            context.TotalCollection.Add(new CompletionItem() { Image = image, ItemName = item });
+        }
+
+        public void AddCompletionList(CompletionItemType type, string item)
+        {
+            Image image = new Image();
+            if (type == CompletionItemType.Keyword)
+                image.Source = new BitmapImage(new Uri("../Resources/monkey_spanner.png", UriKind.RelativeOrAbsolute));
+            else if(type == CompletionItemType.Property)
+                image.Source = new BitmapImage(new Uri("../Resources/monkey_spanner.png", UriKind.RelativeOrAbsolute));
+            else if(type == CompletionItemType.Function)
+                image.Source = new BitmapImage(new Uri("../Resources/monkey_spanner.png", UriKind.RelativeOrAbsolute));
+            else if(type == CompletionItemType.Event)
+                image.Source = new BitmapImage(new Uri("../Resources/monkey_spanner.png", UriKind.RelativeOrAbsolute));
+
+            var context = this.completionList.DataContext as CompletionListViewModel;
+            context.TotalCollection.Add(new CompletionItem() { Image = image, ItemName = item });
         }
 
         /// <summary>

@@ -73,14 +73,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Abstracts\ViewModelBase.cs" />
+    <Compile Include="Algorithms\ISimilarityComparison.cs" />
+    <Compile Include="Algorithms\NaiveSimilarityComparison.cs" />
+    <Compile Include="Algorithms\VSLikeSimilarityComparison.cs" />
     <Compile Include="Converters\EventArgConverterExtension.cs" />
     <Compile Include="Converters\FontReleateConverter.cs" />
     <Compile Include="Converters\LineHeightBasedFontSizeConverter.cs" />
     <Compile Include="Converters\MouseDoubleClickEventArgConverter.cs" />
     <Compile Include="Converters\SingleSelectionChangedEventArgsConverter.cs" />
-    <Compile Include="SyntaxEditorComponents\Behaviors\CompletionListBehavior.cs" />
+    <Compile Include="SyntaxEditorComponents\Behaviors\RedirectRoutedEventBehavior.cs" />
     <Compile Include="SyntaxEditorComponents\Behaviors\ZoomScrollBehavior.cs" />
-    <Compile Include="SyntaxEditorComponents\CompletionList.xaml.cs">
+    <Compile Include="SyntaxEditorComponents\Views\CompletionList.xaml.cs">
       <DependentUpon>CompletionList.xaml</DependentUpon>
     </Compile>
     <Compile Include="SyntaxEditorComponents\CompletionWindow.cs" />
@@ -99,7 +102,7 @@
     <Compile Include="Utilities\TextBoxUtility.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
-    <Page Include="SyntaxEditorComponents\CompletionList.xaml">
+    <Page Include="SyntaxEditorComponents\Views\CompletionList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

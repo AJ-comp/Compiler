@@ -1,6 +1,7 @@
 ﻿using Parse.FrontEnd.Grammars.MiniC;
 using Parse.FrontEnd.Parsers.Collections;
 using Parse.FrontEnd.Parsers.LR;
+using Parse.WpfControls.SyntaxEditorComponents;
 using System;
 using System.Data;
 using System.Text.RegularExpressions;
@@ -73,6 +74,13 @@ namespace WpfApp
             this.syntaxEditor.TextArea.AddSyntaxHighLightInfo("public", Brushes.DeepPink);
             this.syntaxEditor.TextArea.AddSyntaxHighLightInfo("static", Brushes.DeepSkyBlue);
             this.syntaxEditor.TextArea.AddSyntaxHighLightInfo("[0-9]*", Brushes.LightSteelBlue, true);
+
+            this.syntaxEditor.TextArea.AddCompletionList(CompletionItemType.Keyword, "const");
+            this.syntaxEditor.TextArea.AddCompletionList(CompletionItemType.Keyword, "int");
+            this.syntaxEditor.TextArea.AddCompletionList(CompletionItemType.Keyword, "void");
+            this.syntaxEditor.TextArea.AddCompletionList(CompletionItemType.Keyword, "private");
+            this.syntaxEditor.TextArea.AddCompletionList(CompletionItemType.Keyword, "public");
+            this.syntaxEditor.TextArea.AddCompletionList(CompletionItemType.Keyword, "static");
 
             //            this.editor.SetComponents(this.parser);
 

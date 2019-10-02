@@ -21,14 +21,17 @@ namespace Parse.WpfControls.SyntaxEditorComponents.Behaviors
             this.AssociatedObject.PreviewKeyDown += AssociatedObject_PreviewKeyDown;
             this.AssociatedObject.PreviewKeyUp += AssociatedObject_PreviewKeyUp;
             this.AssociatedObject.PreviewMouseWheel += AssociatedObject_PreviewMouseWheel;
+
+            this.AssociatedObject.KeyDown += AssociatedObject_KeyDown;
+            this.AssociatedObject.KeyUp += AssociatedObject_KeyUp;
         }
 
-        protected override void OnDetaching()
+        private void AssociatedObject_KeyUp(object sender, KeyEventArgs e)
         {
-            this.AssociatedObject.PreviewKeyDown -= AssociatedObject_PreviewKeyDown;
-            this.AssociatedObject.PreviewKeyUp -= AssociatedObject_PreviewKeyUp;
-            this.AssociatedObject.PreviewMouseWheel -= AssociatedObject_PreviewMouseWheel;
-            base.OnDetaching();
+        }
+
+        private void AssociatedObject_KeyDown(object sender, KeyEventArgs e)
+        {
         }
 
         private void AssociatedObject_PreviewKeyDown(object sender, KeyEventArgs e)
@@ -49,10 +52,9 @@ namespace Parse.WpfControls.SyntaxEditorComponents.Behaviors
 
         private void AssociatedObject_PreviewMouseWheel(object sender, MouseWheelEventArgs e)
         {
-            e.Handled = true;
-
             if (this.zoomingReady)
             {
+                e.Handled = true;
                 Control control = sender as Control;
 
                 if(e.Delta > 0)
@@ -66,10 +68,23 @@ namespace Parse.WpfControls.SyntaxEditorComponents.Behaviors
             }
             else
             {
+                /*
                 var e2 = new MouseWheelEventArgs(e.MouseDevice, e.Timestamp, e.Delta);
                 e2.RoutedEvent = UIElement.MouseWheelEvent;
                 AssociatedObject.RaiseEvent(e2);
+                */
             }
+        }
+
+        protected override void OnDetaching()
+        {
+            this.AssociatedObject.PreviewKeyDown -= AssociatedObject_PreviewKeyDown;
+            this.AssociatedObject.PreviewKeyUp -= AssociatedObject_PreviewKeyUp;
+            this.AssociatedObject.PreviewMouseWheel -= AssociatedObject_PreviewMouseWheel;
+
+            this.AssociatedObject.KeyDown -= AssociatedObject_KeyDown;
+            this.AssociatedObject.KeyUp -= AssociatedObject_KeyUp;
+            base.OnDetaching();
         }
     }
 }
