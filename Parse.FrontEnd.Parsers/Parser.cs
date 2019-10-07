@@ -13,9 +13,17 @@ namespace Parse.FrontEnd.Parsers
         protected Lexer Lexer { get; } = null;
         protected SymbolTableStack SymbolTableStack { get; } = new SymbolTableStack();
 
-        /// <summary> this event handler called when the input terminal does not exists in the expected terminal set. </summary>
+        /// <summary>
+        /// This event handler is called when the input token does not exists in the expected terminal set.
+        /// Terminal : Terminal that expected.
+        /// TokenData : Input token
+        /// </summary>
         public Action<Terminal, TokenData> MatchFailed { get; set; } = null;
-        /// <summary> this event handler called when can not expand from the current status when the input terminal enter. </summary>
+        /// <summary> 
+        /// This event handler is called when can not expand from the current state when the input token enter. 
+        /// NonTerminal : Current state
+        /// TokenData : Input token
+        /// </summary>
         public Action<NonTerminal, TokenData> ExpandFailed { get; set; } = null;
 
         public Grammar Grammar { get; } = null;

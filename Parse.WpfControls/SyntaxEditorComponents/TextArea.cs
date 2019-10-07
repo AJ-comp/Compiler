@@ -189,8 +189,8 @@ namespace Parse.WpfControls.SyntaxEditorComponents
             this.DelimiterSet.Add("}");
 
             this.LineString.Add(string.Empty);
-            // Regist function that for rollback a focus to this control when left click in the popup control.
-            this.AddHandler(ListBox.MouseLeftButtonDownEvent, new RoutedEventHandler(this.OnMouseLeftClick), true);
+
+//            this.AddHandler(ListBox.MouseLeftButtonDownEvent, new RoutedEventHandler(this.OnMouseLeftClick), true);
 
             Loaded += (s, e) =>
             {
@@ -217,11 +217,6 @@ namespace Parse.WpfControls.SyntaxEditorComponents
             };
         }
 
-        private void OnMouseLeftClick(object sender, RoutedEventArgs e)
-        {
-            this.Focus();
-        }
-
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
@@ -229,6 +224,10 @@ namespace Parse.WpfControls.SyntaxEditorComponents
             this.renderCanvas = (TextViewer)Template.FindName("PART_RenderCanvas", this);
             this.scrollViewer = (ScrollViewer)Template.FindName("PART_ContentHost", this);
             this.completionList = (CompletionList)Template.FindName("PART_CompletionList", this);
+
+            var completionListContext = this.completionList.DataContext as CompletionListViewModel;
+            this.completionList.listBox.SelectionChanged += ((s, e) => this.Focus());
+            completionListContext.RequestFilterButtonClick += ((s, e) => this.Focus());
         }
 
         private bool IsBackSpace(TextChange changeInfo) => (changeInfo.RemovedLength >= 1 && changeInfo.AddedLength == 0);
@@ -260,14 +259,14 @@ namespace Parse.WpfControls.SyntaxEditorComponents
 
             var rect = this.GetRectFromCharacterIndex(this.CaretIndex);
 
-            this.completionList.StaysOpen = true;
+            this.completionList.StaysOpen = false;
             this.completionList.Placement = PlacementMode.Relative;
             this.completionList.PlacementTarget = this;
             this.completionList.VerticalOffset = rect.Y + this.LineHeight;
             this.completionList.HorizontalOffset = rect.X;
 
-            this.completionList.IsOpen = true;
             context.InputString = this.Text.Substring(this.CaretIndexWhenCLOccur, this.CaretIndex - this.CaretIndexWhenCLOccur);
+            this.completionList.IsOpen = true;
         }
 
         private int GetLineIndexFromCaretIndex(int caretIndex)
@@ -627,7 +626,7 @@ namespace Parse.WpfControls.SyntaxEditorComponents
             if(this.completionList.listBox.IsMouseOver)
             {
                 var src = VisualTreeHelper.GetParent(e.OriginalSource as DependencyObject);
-                if(src is VirtualizingStackPanel)
+                if(src is VirtualizingStackPanel || src is ContentPresenter)
                 {
                     this.InputProcessOnCompletionList(Key.Enter);
                 }
@@ -646,29 +645,11 @@ namespace Parse.WpfControls.SyntaxEditorComponents
             this.DelimiterSet.Add(delimiter);
         }
 
-        public void AddCompletionList(string item)
-        {
-            var context = this.completionList.DataContext as CompletionListViewModel;
-
-            Image image = new Image();
-            image.Source = new BitmapImage(new Uri("../Resources/monkey_spanner.png", UriKind.RelativeOrAbsolute));
-            context.TotalCollection.Add(new CompletionItem() { Image = image, ItemName = item });
-        }
-
         public void AddCompletionList(CompletionItemType type, string item)
         {
-            Image image = new Image();
-            if (type == CompletionItemType.Keyword)
-                image.Source = new BitmapImage(new Uri("../Resources/monkey_spanner.png", UriKind.RelativeOrAbsolute));
-            else if(type == CompletionItemType.Property)
-                image.Source = new BitmapImage(new Uri("../Resources/monkey_spanner.png", UriKind.RelativeOrAbsolute));
-            else if(type == CompletionItemType.Function)
-                image.Source = new BitmapImage(new Uri("../Resources/monkey_spanner.png", UriKind.RelativeOrAbsolute));
-            else if(type == CompletionItemType.Event)
-                image.Source = new BitmapImage(new Uri("../Resources/monkey_spanner.png", UriKind.RelativeOrAbsolute));
-
             var context = this.completionList.DataContext as CompletionListViewModel;
-            context.TotalCollection.Add(new CompletionItem() { Image = image, ItemName = item });
+
+            context.TotalCollection.Add(new CompletionItem() { ImageSource = context.PropertyImgSrc, ItemName = item, ItemType = type });
         }
 
         /// <summary>

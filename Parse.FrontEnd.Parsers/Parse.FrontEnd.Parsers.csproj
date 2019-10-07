@@ -56,6 +56,7 @@
     <Compile Include="Datas\LRParsingData.cs" />
     <Compile Include="Datas\SymbolRowData.cs" />
     <Compile Include="EventArgs\LRParsingEventArgs.cs" />
+    <Compile Include="EventArgs\ParsingFailedEventArgs.cs" />
     <Compile Include="LR\LALRParser.cs" />
     <Compile Include="Lexer.cs" />
     <Compile Include="LLParser.cs" />
@@ -91,5 +92,6 @@
       <LastGenOutput>Resource.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

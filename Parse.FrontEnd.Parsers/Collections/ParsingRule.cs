@@ -16,10 +16,10 @@ namespace Parse.FrontEnd.Parsers.Collections
 
         /// <summary>
         /// The Error Handler that if the action failed.
-        /// TokenData : status when error generated
-        /// TerminalSet : correct input set
+        /// LRParsingEventArgs : The state information when error generated
+        /// TerminalSet : The possible input terminal set
         /// </summary>
-        public Action<LRParsingEventArgs, TerminalSet> ActionFailed { get; set; } = null;
+        public event EventHandler<ParsingFailedEventArgs> ActionFailed;
         /// <summary>
         /// The Error Handler that if the goto failed.
         /// TokenData : input data
@@ -29,7 +29,7 @@ namespace Parse.FrontEnd.Parsers.Collections
         /// <summary>
         /// The Error Handler that if the action completed.
         /// </summary>
-        public Action<LRParsingEventArgs> ActionCompleted { get; set; } = null;
+        public event EventHandler<LRParsingEventArgs> ActionCompleted;
 
         private TerminalSet RefTerminalSet
         {
@@ -169,14 +169,14 @@ namespace Parse.FrontEnd.Parsers.Collections
             if (!IxMetrix.MatchedValueSet.ContainsKey(inputValue.Kind))
             {
                 var data = new LRParsingEventArgs(prevStack, this.stack, inputValue, new ActionData(ActionDir.failed, null));
-                this.ActionFailed?.Invoke(new LRParsingEventArgs(prevStack, this.stack, inputValue, new ActionData(ActionDir.failed, null)), IxMetrix.PossibleTerminalSet);
+                this.ActionFailed?.Invoke(this, new ParsingFailedEventArgs(prevStack, this.stack, inputValue, new ActionData(ActionDir.failed, null), IxMetrix.PossibleTerminalSet));
                 return ActionDir.failed;
             }
 
             var matchedValue = IxMetrix.MatchedValueSet[inputValue.Kind];
             var result = this.Process(matchedValue, inputValue, prevStack);
 
-            this.ActionCompleted?.Invoke(new LRParsingEventArgs(prevStack, this.stack, inputValue, result));
+            this.ActionCompleted?.Invoke(this, new LRParsingEventArgs(prevStack, this.stack, inputValue, result));
 
             return result.ActionDirection;
         }
@@ -209,7 +209,8 @@ namespace Parse.FrontEnd.Parsers.Collections
                 var matchedValue = IxMetrix.MatchedValueSet[seenSingleNT.ToNonTerminal()];
 
                 this.stack.Push((int)matchedValue.Item2);
-                this.ActionCompleted?.Invoke(new LRParsingEventArgs(prevStack, this.stack, inputValue, new ActionData(matchedValue.Item1, matchedValue.Item2)));
+                var actionData = new ActionData(matchedValue.Item1, matchedValue.Item2);
+                this.ActionCompleted?.Invoke(this, new LRParsingEventArgs(prevStack, this.stack, inputValue, actionData));
             }
 
             return result;

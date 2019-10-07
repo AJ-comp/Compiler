@@ -42,16 +42,25 @@ namespace Parse.WpfControls
     ///     <MyNamespace:Editor/>
     ///
     /// </summary>
+    [TemplatePart(Name = "TextArea", Type = typeof(TextArea))]
     public class Editor : Control
     {
         private double recentVerticalOffset = 0;
         private double recentHorizontalOffset = 0;
 
         private TextViewer lineNumbersCanvas;
-        public TextArea TextArea { get; private set; }
-
 
         #region Dependency Properties
+        public TextArea TextArea
+        {
+            get { return (TextArea)GetValue(TextAreaProperty); }
+            private set { SetValue(TextAreaProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for TextArea.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty TextAreaProperty =
+            DependencyProperty.Register("TextArea", typeof(TextArea), typeof(Editor), new PropertyMetadata(null));
+
         public Brush LineNumberBackColor
         {
             get { return (Brush)GetValue(LineNumberBackColorProperty); }
@@ -130,9 +139,16 @@ namespace Parse.WpfControls
 
         #endregion
 
-
         #region Routed Events
+        public static readonly RoutedEvent TextChangedEvent = EventManager.RegisterRoutedEvent("TextChanged", RoutingStrategy.Bubble,
+                typeof(RoutedEventHandler), typeof(Editor));
 
+        // .NET wrapper
+        public event RoutedEventHandler TextChanged
+        {
+            add { AddHandler(TextChangedEvent, value); }
+            remove { RemoveHandler(TextChangedEvent, value); }
+        }
 
         #endregion
 
@@ -158,9 +174,14 @@ namespace Parse.WpfControls
                 //                lineNumbersCanvas.Width = GetFormattedTextWidth(string.Format("{0:0000}", totalLineCount)) + 5;
                 //                scrollViewer.ScrollChanged += OnScrollChanged;
                 this.TextArea.Rendered += TextArea_Rendered;
+                this.TextArea.TextChanged += TextArea_TextChanged;
 
                 InvalidateVisual();
             };
+        }
+
+        private void TextArea_TextChanged(object sender, TextChangedEventArgs e)
+        {
         }
 
         private void ShowPrompt(TextChange changeInfo)
@@ -207,23 +228,6 @@ namespace Parse.WpfControls
             }
 
             this.lineNumbersCanvas.DrawLines(lines);
-
-            /*
-            double yPos = this.drawingPosY;
-            for (int i=this.TextArea.LineIndex; i<100; i++)
-            {
-                double itemDrawStartX = 2;
-                double itemDrawStartY = this.drawingPosY;
-                yPos += lineHeight;
-                double top = 0 - this.VerticalOffset;
-
-                FormattedText lineNumberingText = new FormattedText(i+1.ToString(), CultureInfo.InvariantCulture, FlowDirection.LeftToRight,
-                                new Typeface(FontFamily, FontStyle, FontWeight, FontStretch),
-                                FontSize, Brushes.Aquamarine);
-
-                dc.DrawText(lineNumberingText, )
-            }
-            */
 
             base.OnRender(drawingContext);
         }

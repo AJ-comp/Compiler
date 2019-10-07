@@ -7,6 +7,12 @@
                     xmlns:behaviors="clr-namespace:Parse.WpfControls.SyntaxEditorComponents.Behaviors">
 
     <Style TargetType="{x:Type syntaxcomponent:TextArea}">
+        <Style.Triggers>
+            <!--<DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=
+                        {x:Type views:CompletionList}}, Path=IsFilteringKeyword}" Value="True">
+                </DataTrigger>-->
+        </Style.Triggers>
+
         <Setter Property="AcceptsReturn" Value="True" />
         <Setter Property="AcceptsTab" Value="True" />
         <Setter Property="HorizontalScrollBarVisibility" Value="Auto" />

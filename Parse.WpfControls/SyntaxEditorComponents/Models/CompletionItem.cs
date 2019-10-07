@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Controls;
-
-namespace Parse.WpfControls.SyntaxEditorComponents.Models
+﻿namespace Parse.WpfControls.SyntaxEditorComponents.Models
 {
     public class CompletionItem
     {
-        public Image Image { get; set; }
+        public string ImageSource { get; set; }
         public string ItemName { get; set; }
+
+        public CompletionItemType ItemType { get; set; }
     }
 }

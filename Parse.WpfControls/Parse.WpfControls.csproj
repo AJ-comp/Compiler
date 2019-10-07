@@ -72,7 +72,6 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Abstracts\ViewModelBase.cs" />
     <Compile Include="Algorithms\ISimilarityComparison.cs" />
     <Compile Include="Algorithms\NaiveSimilarityComparison.cs" />
     <Compile Include="Algorithms\VSLikeSimilarityComparison.cs" />
@@ -81,12 +80,13 @@
     <Compile Include="Converters\LineHeightBasedFontSizeConverter.cs" />
     <Compile Include="Converters\MouseDoubleClickEventArgConverter.cs" />
     <Compile Include="Converters\SingleSelectionChangedEventArgsConverter.cs" />
+    <Compile Include="SyntaxEditorComponents\Behaviors\DynamicToggleButtonCreateBehavior.cs" />
     <Compile Include="SyntaxEditorComponents\Behaviors\RedirectRoutedEventBehavior.cs" />
+    <Compile Include="SyntaxEditorComponents\Behaviors\ToggleButtonBehavior.cs" />
     <Compile Include="SyntaxEditorComponents\Behaviors\ZoomScrollBehavior.cs" />
     <Compile Include="SyntaxEditorComponents\Views\CompletionList.xaml.cs">
       <DependentUpon>CompletionList.xaml</DependentUpon>
     </Compile>
-    <Compile Include="SyntaxEditorComponents\CompletionWindow.cs" />
     <Compile Include="SyntaxEditorComponents\DrawingAlgorithm.cs" />
     <Compile Include="SyntaxEditorComponents\EventArgs\EditorScrollChangedEventArgs.cs" />
     <Compile Include="SyntaxEditorComponents\EventArgs\EditorRenderedEventArgs.cs" />
@@ -156,10 +156,11 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Abstracts\" />
     <Folder Include="Common\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\monkey_spanner.png" />
+    <Resource Include="Resources\monkey_spanner.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

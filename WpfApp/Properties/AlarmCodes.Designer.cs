@@ -22,14 +22,14 @@ namespace WpfApp.Properties {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Resources {
+    internal class AlarmCodes {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Resources() {
+        internal AlarmCodes() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace WpfApp.Properties {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("WpfApp.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("WpfApp.Properties.AlarmCodes", typeof(AlarmCodes).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,47 +61,11 @@ namespace WpfApp.Properties {
         }
         
         /// <summary>
-        ///   Code과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   {0} expected과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
-        internal static string ErrorCode {
+        internal static string CE0000 {
             get {
-                return ResourceManager.GetString("ErrorCode", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Explanation과(와) 유사한 지역화된 문자열을 찾습니다.
-        /// </summary>
-        internal static string ErrorExplanation {
-            get {
-                return ResourceManager.GetString("ErrorExplanation", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   File과(와) 유사한 지역화된 문자열을 찾습니다.
-        /// </summary>
-        internal static string ErrorFile {
-            get {
-                return ResourceManager.GetString("ErrorFile", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Line과(와) 유사한 지역화된 문자열을 찾습니다.
-        /// </summary>
-        internal static string ErrorLine {
-            get {
-                return ResourceManager.GetString("ErrorLine", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Project과(와) 유사한 지역화된 문자열을 찾습니다.
-        /// </summary>
-        internal static string ErrorProject {
-            get {
-                return ResourceManager.GetString("ErrorProject", resourceCulture);
+                return ResourceManager.GetString("CE0000", resourceCulture);
             }
         }
     }

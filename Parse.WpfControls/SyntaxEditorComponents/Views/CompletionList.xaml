@@ -20,12 +20,29 @@
     <Popup.Resources>
         <Style TargetType="Popup">
             <Style.Triggers>
+                <!--<DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=
+                        {x:Type ToggleButton}},Path=IsChecked}" Value="True">
+                </DataTrigger>-->
+            </Style.Triggers>
+        </Style>
+
+        <Style TargetType="ToggleButton" x:Key="filterBtnStyle">
+            <Setter Property="Width" Value="30"/>
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Command" Value="{Binding FilterButtonClickCmd}"/>
+            <!--<Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
                     <Setter Property="FocusManager.FocusedElement" Value="{Binding RelativeSource={RelativeSource Self}}"/>
                 </Trigger>
-            </Style.Triggers>
+            </Style.Triggers>-->
         </Style>
+        
     </Popup.Resources>
+
+    <i:Interaction.Behaviors>
+        <behavior:DynamicToggleButtonCreateBehavior/>
+    </i:Interaction.Behaviors>
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -39,12 +56,13 @@
         <ListBox x:Name="listBox" Grid.Row="0" ItemsSource="{Binding CandidateCollection}" 
                  MaxHeight="100" 
                  SelectedIndex="{Binding SelectedIndex, Mode=TwoWay}"
-                 HorizontalContentAlignment="Stretch">
+                 HorizontalContentAlignment="Stretch"
+                 >
 
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <VirtualizingStackPanel Name="vStack" Orientation="Horizontal">
-                        <Image Source="{Binding Image}" Width="16" Height="16" Margin="0,0,2,0"/>
+                        <Image Source="{Binding ImageSource}"  Width="16" Height="16" Margin="0,0,2,0"/>
                         <TextBlock Text="{Binding ItemName}"/>
                     </VirtualizingStackPanel>
                     <DataTemplate.Triggers>
@@ -77,11 +95,30 @@
         </ListBox>
 
         <StackPanel Grid.Row="1" Orientation="Horizontal">
-            <ToggleButton x:Name="propertyBtn">
-                <Image Source="{Binding PropertyImg}" Width="16" Height="16"/>
+            <ToggleButton x:Name="propertyBtn" Visibility="Collapsed" 
+                          IsChecked="{Binding IsFilteringProperty}"
+                          Style="{StaticResource filterBtnStyle}">
+                <Image Source="{Binding PropertyImgSrc}"  Width="16" Height="16"/>
+            </ToggleButton>
+            <ToggleButton x:Name="keywordBtn" Visibility="Collapsed" 
+                          IsChecked="{Binding IsFilteringKeyword, Mode=TwoWay}"
+                          Style="{StaticResource filterBtnStyle}">
+                <Image Source="{Binding KeywordImgSrc}"  Width="16" Height="16"/>
+                <!--<i:Interaction.Behaviors>
+                    <behavior:ToggleButtonBehavior/>
+                </i:Interaction.Behaviors>-->
+            </ToggleButton>
+            <ToggleButton x:Name="enumBtn" Visibility="Collapsed" 
+                          IsChecked="{Binding IsFilteringEnum}"
+                          Style="{StaticResource filterBtnStyle}">
+                <Image Source="{Binding EnumImgSrc}"  Width="16" Height="16"/>
+            </ToggleButton>
+            <ToggleButton x:Name="functionBtn" Visibility="Collapsed" 
+                          IsChecked="{Binding IsFilteringFunction}"
+                          Style="{StaticResource filterBtnStyle}">
+                <Image Source="{Binding FunctionImgSrc}"  Width="16" Height="16"/>
             </ToggleButton>
         </StackPanel>
-        
 
     </Grid>
 </Popup>

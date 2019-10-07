@@ -14,3 +14,4 @@ namespace Parse.WpfControls.SyntaxEditorComponents
         }
     }
 }
+

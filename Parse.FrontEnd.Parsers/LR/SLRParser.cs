@@ -28,9 +28,11 @@ namespace Parse.FrontEnd.Parsers.LR
         {
             get
             {
-                this.parsingRule.ActionCompleted = this.AddParsingHistory;
+                /*
+                this.parsingRule.ActionCompleted -= this.AddParsingHistory;
                 this.Parse(this.recentCode);
-                this.parsingRule.ActionCompleted = this.BuildParseTree;
+                this.parsingRule.ActionCompleted += this.BuildParseTree;
+                */
 
                 return this.parsingHistory;
             }
@@ -49,8 +51,8 @@ namespace Parse.FrontEnd.Parsers.LR
             this.followAnalyzer.CalculateAllFollow(this.Grammar.NonTerminalMultiples);
             this.parsingRule.Calculate(this.C0, this.followAnalyzer.Datas);
 
-            this.parsingRule.ActionCompleted = this.BuildParseTree;
-            this.parsingRule.ActionFailed = this.AddFailedInfoToParsingHistory;
+            this.parsingRule.ActionCompleted += this.BuildParseTree;
+            this.parsingRule.ActionFailed += this.AddFailedInfoToParsingHistory;
         }
 
         private void CreateParsingHistoryTemplate()
@@ -61,7 +63,7 @@ namespace Parse.FrontEnd.Parsers.LR
             this.parsingHistory.AddColumn("current stack");
         }
 
-        private void BuildParseTree(LRParsingEventArgs args)
+        private void BuildParseTree(object sender, LRParsingEventArgs args)
         {
             if(args.ActionData.ActionDirection == ActionDir.shift)
             {
@@ -94,9 +96,9 @@ namespace Parse.FrontEnd.Parsers.LR
         /// This function writes parsing process information to the parsingHistory.
         /// </summary>
         /// <param name="args">parsing process information</param>
-        private void AddParsingHistory(LRParsingEventArgs args)
+        private void AddParsingHistory(object sender, LRParsingEventArgs args)
         {
-            this.BuildParseTree(args);
+            this.BuildParseTree(sender, args);
 
             var param1 = Convert.ToString(args.PrevStack.Reverse(), " ");
             var param2 = args.InputValue.ToString();
@@ -115,18 +117,20 @@ namespace Parse.FrontEnd.Parsers.LR
         /// <summary>
         /// This function writes parsing error information to the parsingHistory.
         /// </summary>
+        /// <param name="sender"></param>
         /// <param name="args">parsing process information when error generated</param>
-        /// <param name="possibleSet">incorrect terminal set</param>
-        private void AddFailedInfoToParsingHistory(LRParsingEventArgs args, TerminalSet possibleSet)
+        private void AddFailedInfoToParsingHistory(object sender, ParsingFailedEventArgs args)
         {
-            this.recentPossibleSet = possibleSet;
+            this.recentPossibleSet = args.PossibleSet;
 
             var param1 = Convert.ToString(args.PrevStack.Reverse(), " ");
             var param2 = args.InputValue.ToString();
             var param3 = args.ActionData.ActionDirection.ToString() + " ";
 
-            string message = Resource.CantShift + " " + possibleSet + " " + Resource.MustCome;
+            string message = Resource.CantShift + " " + args.PossibleSet + " " + Resource.MustCome;
             this.parsingHistory.AddRow(param1, param2, message, string.Empty);
+
+            this.OnParsingFailed(args);
         }
 
         private void ParsingInit()
