@@ -77,6 +77,13 @@ namespace Parse.FrontEnd.Parsers
         /// <returns> Return true if succeed. </returns>
         public abstract bool Parse(string data);
 
+        /// <summary>
+        /// Start parsing about parameter.
+        /// </summary>
+        /// <param name="tokens"></param>
+        /// <returns></returns>
+        public abstract bool Parse(string[] tokens);
+
         /// <summary> Get the parsing tree with string format. </summary>
         /// <returns>tree string</returns>
         public abstract string ToParsingTreeString();

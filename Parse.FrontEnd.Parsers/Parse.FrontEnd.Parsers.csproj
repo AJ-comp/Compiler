@@ -77,10 +77,6 @@
       <Project>{a0661596-8c09-42a8-b412-8702108fd935}</Project>
       <Name>Parse.FrontEnd.Grammars</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Parse.Resources\Parse.Resources.csproj">
-      <Project>{6354957e-57d2-4d42-9c42-e2b13a04460f}</Project>
-      <Name>Parse.Resources</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Parse\Parse.csproj">
       <Project>{54ec5cea-8d91-4165-9ebb-6a0693a96c4f}</Project>
       <Name>Parse</Name>

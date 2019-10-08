@@ -63,10 +63,209 @@ namespace Parse.WpfControls.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
-        internal static System.Drawing.Bitmap monkey_spanner {
+        internal static System.Drawing.Bitmap _class {
             get {
-                object obj = ResourceManager.GetObject("monkey_spanner", resourceCulture);
+                object obj = ResourceManager.GetObject("_class", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap _delegate {
+            get {
+                object obj = ResourceManager.GetObject("_delegate", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap _enum {
+            get {
+                object obj = ResourceManager.GetObject("_enum", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap _event {
+            get {
+                object obj = ResourceManager.GetObject("_event", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap _interface {
+            get {
+                object obj = ResourceManager.GetObject("_interface", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap _namespace {
+            get {
+                object obj = ResourceManager.GetObject("_namespace", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap _struct {
+            get {
+                object obj = ResourceManager.GetObject("_struct", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Class과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        internal static string Class_ {
+            get {
+                return ResourceManager.GetString("Class_", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   CodeSnipp과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        internal static string CodeSnipp {
+            get {
+                return ResourceManager.GetString("CodeSnipp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap codesnipp1 {
+            get {
+                object obj = ResourceManager.GetObject("codesnipp1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Delegate과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        internal static string Delegate {
+            get {
+                return ResourceManager.GetString("Delegate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Enum과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        internal static string Enumerate {
+            get {
+                return ResourceManager.GetString("Enumerate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Event과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        internal static string Event {
+            get {
+                return ResourceManager.GetString("Event", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap function {
+            get {
+                object obj = ResourceManager.GetObject("function", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Function과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        internal static string Function_ {
+            get {
+                return ResourceManager.GetString("Function_", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Interface과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        internal static string Interface_ {
+            get {
+                return ResourceManager.GetString("Interface_", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap keyword {
+            get {
+                object obj = ResourceManager.GetObject("keyword", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Keyword과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        internal static string Keyword_ {
+            get {
+                return ResourceManager.GetString("Keyword_", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Namespace과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        internal static string Namespace {
+            get {
+                return ResourceManager.GetString("Namespace", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap property {
+            get {
+                object obj = ResourceManager.GetObject("property", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Property과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        internal static string Property_ {
+            get {
+                return ResourceManager.GetString("Property_", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Structure과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        internal static string Structure {
+            get {
+                return ResourceManager.GetString("Structure", resourceCulture);
             }
         }
     }

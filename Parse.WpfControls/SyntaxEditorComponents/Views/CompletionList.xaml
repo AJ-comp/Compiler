@@ -7,6 +7,7 @@
        xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
        xmlns:viewmodel="clr-namespace:Parse.WpfControls.SyntaxEditorComponents.ViewModels"
       xmlns:behavior="clr-namespace:Parse.WpfControls.SyntaxEditorComponents.Behaviors"
+       xmlns:lex="http://wpflocalizeextension.codeplex.com" 
        xmlns:mvvm="http://www.galasoft.ch/mvvmlight"
        xmlns:eventArgConverters="clr-namespace:Parse.WpfControls.Converters"
        xmlns:resources="clr-namespace:Parse.WpfControls.SyntaxEditorComponents.Views"
@@ -94,29 +95,30 @@
             </ListBox.Resources>-->
         </ListBox>
 
-        <StackPanel Grid.Row="1" Orientation="Horizontal">
+        <StackPanel Grid.Row="1" Orientation="Horizontal" Background="{Binding ElementName=listBox, Path=Background}">
             <ToggleButton x:Name="propertyBtn" Visibility="Collapsed" 
-                          IsChecked="{Binding IsFilteringProperty}"
+                          IsChecked="{Binding PropertyInfo.IsFiltering}"
+                          ToolTip="{Binding PropertyInfo.Explain}"
                           Style="{StaticResource filterBtnStyle}">
-                <Image Source="{Binding PropertyImgSrc}"  Width="16" Height="16"/>
+                <Image Source="{Binding PropertyInfo.ImgSrc}"  Width="16" Height="16"/>
             </ToggleButton>
             <ToggleButton x:Name="keywordBtn" Visibility="Collapsed" 
-                          IsChecked="{Binding IsFilteringKeyword, Mode=TwoWay}"
+                          IsChecked="{Binding KeywordInfo.IsFiltering, Mode=TwoWay}"
+                          ToolTip="{Binding KeywordInfo.Explain}"
                           Style="{StaticResource filterBtnStyle}">
-                <Image Source="{Binding KeywordImgSrc}"  Width="16" Height="16"/>
-                <!--<i:Interaction.Behaviors>
-                    <behavior:ToggleButtonBehavior/>
-                </i:Interaction.Behaviors>-->
+                <Image Source="{Binding KeywordInfo.ImgSrc}"  Width="16" Height="16"/>
             </ToggleButton>
             <ToggleButton x:Name="enumBtn" Visibility="Collapsed" 
                           IsChecked="{Binding IsFilteringEnum}"
+                          ToolTip="{Binding EnumInfo.Explain}"
                           Style="{StaticResource filterBtnStyle}">
-                <Image Source="{Binding EnumImgSrc}"  Width="16" Height="16"/>
+                <Image Source="{Binding EnumInfo.ImgSrc}"  Width="16" Height="16"/>
             </ToggleButton>
             <ToggleButton x:Name="functionBtn" Visibility="Collapsed" 
                           IsChecked="{Binding IsFilteringFunction}"
+                          ToolTip="{Binding FunctionInfo.Explain}"
                           Style="{StaticResource filterBtnStyle}">
-                <Image Source="{Binding FunctionImgSrc}"  Width="16" Height="16"/>
+                <Image Source="{Binding FunctionInfo.ImgSrc}"  Width="16" Height="16"/>
             </ToggleButton>
         </StackPanel>
 

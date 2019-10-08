@@ -189,5 +189,10 @@ namespace Parse.FrontEnd.Parsers
 
             return result;
         }
+
+        public override bool Parse(string[] tokens)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

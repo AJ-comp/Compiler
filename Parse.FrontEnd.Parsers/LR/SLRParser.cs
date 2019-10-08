@@ -173,6 +173,36 @@ namespace Parse.FrontEnd.Parsers.LR
             return result;
         }
 
+        public override bool Parse(string[] tokens)
+        {
+            bool result = false;
+
+            foreach(var t in tokens)
+            {
+                var token = this.Lexer.GetTokenInfo(t);
+                if (token.Kind == new NotDefined())
+                {
+                }
+                ActionDir parsingResult = this.parsingRule.Parsing(token);
+                if (parsingResult == ActionDir.failed)
+                {
+                    result = false;
+                    break;
+                }
+                else if (parsingResult == ActionDir.accept)
+                {
+                    result = true;
+                    break;
+                }
+                else if (parsingResult == ActionDir.reduce || parsingResult == ActionDir.epsilon_reduce || parsingResult == ActionDir.moveto)
+                {
+                    this.Lexer.RollBackTokenReadIndex();
+                }
+            }
+
+            return result;
+        }
+
         public override string ToParsingTreeString()
         {
             string result = string.Empty;

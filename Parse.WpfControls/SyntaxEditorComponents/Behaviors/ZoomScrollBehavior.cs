@@ -15,9 +15,22 @@ namespace Parse.WpfControls.SyntaxEditorComponents.Behaviors
         /// <summary>This member switch to 'true' value while the user pressed Ctrl key.</summary>
         private bool zoomingReady = false;
 
+        protected override void OnDetaching()
+        {
+            this.AssociatedObject.PreviewKeyDown -= AssociatedObject_PreviewKeyDown;
+            this.AssociatedObject.PreviewKeyUp -= AssociatedObject_PreviewKeyUp;
+            this.AssociatedObject.PreviewMouseWheel -= AssociatedObject_PreviewMouseWheel;
+
+            this.AssociatedObject.KeyDown -= AssociatedObject_KeyDown;
+            this.AssociatedObject.KeyUp -= AssociatedObject_KeyUp;
+
+            base.OnDetaching();
+        }
+
         protected override void OnAttached()
         {
             base.OnAttached();
+
             this.AssociatedObject.PreviewKeyDown += AssociatedObject_PreviewKeyDown;
             this.AssociatedObject.PreviewKeyUp += AssociatedObject_PreviewKeyUp;
             this.AssociatedObject.PreviewMouseWheel += AssociatedObject_PreviewMouseWheel;
@@ -74,17 +87,6 @@ namespace Parse.WpfControls.SyntaxEditorComponents.Behaviors
                 AssociatedObject.RaiseEvent(e2);
                 */
             }
-        }
-
-        protected override void OnDetaching()
-        {
-            this.AssociatedObject.PreviewKeyDown -= AssociatedObject_PreviewKeyDown;
-            this.AssociatedObject.PreviewKeyUp -= AssociatedObject_PreviewKeyUp;
-            this.AssociatedObject.PreviewMouseWheel -= AssociatedObject_PreviewMouseWheel;
-
-            this.AssociatedObject.KeyDown -= AssociatedObject_KeyDown;
-            this.AssociatedObject.KeyUp -= AssociatedObject_KeyUp;
-            base.OnDetaching();
         }
     }
 }

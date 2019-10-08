@@ -27,7 +27,7 @@ namespace Parse.FrontEnd.Parsers
                     if (this.IsIgnoreString(value) == false) break;
                 }
 
-                return new TokenData(value, (value == string.Empty) ? new Epsilon() : this.grammar.GetTerminal(value));
+                return this.GetTokenInfo(value);
 
                 /*
                 get
@@ -79,6 +79,11 @@ namespace Parse.FrontEnd.Parsers
         public void RollBackTokenReadIndex()
         {
             if(this.codePieceIndex > 0) this.codePieceIndex--;
+        }
+
+        public TokenData GetTokenInfo(string data)
+        {
+            return new TokenData(data, (data == string.Empty) ? new Epsilon() : this.grammar.GetTerminal(data));
         }
 
         /// <summary>

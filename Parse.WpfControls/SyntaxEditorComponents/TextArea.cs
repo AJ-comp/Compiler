@@ -18,7 +18,7 @@ using System.Windows.Media.Imaging;
 
 namespace Parse.WpfControls.SyntaxEditorComponents
 {
-    public enum CompletionItemType { Keyword, Property, Function, Event };
+    public enum CompletionItemType { Keyword, Property, Enum, Namespace, CodeSnipp, Function, Event, Delegate, Class, Struct, Interface };
 
     public class TextArea : TextBox
     {
@@ -649,7 +649,7 @@ namespace Parse.WpfControls.SyntaxEditorComponents
         {
             var context = this.completionList.DataContext as CompletionListViewModel;
 
-            context.TotalCollection.Add(new CompletionItem() { ImageSource = context.PropertyImgSrc, ItemName = item, ItemType = type });
+            context.AddCollection(type, item);
         }
 
         /// <summary>

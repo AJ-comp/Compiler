@@ -25,7 +25,7 @@ namespace WpfApp
         {
             var context = this.DataContext as MainWindowViewModel;
 
-
+//            context.Parser.Parse()
         }
     }
 }

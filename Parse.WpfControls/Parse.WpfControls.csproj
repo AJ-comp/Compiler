@@ -50,6 +50,7 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Management" />
     <Reference Include="System.Printing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -70,6 +71,12 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="WPFLocalizeExtension, Version=3.3.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\WPFLocalizeExtension.3.3.1\lib\net452\WPFLocalizeExtension.dll</HintPath>
+    </Reference>
+    <Reference Include="XAMLMarkupExtensions, Version=1.5.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\XAMLMarkupExtensions.1.5.1\lib\net452\XAMLMarkupExtensions.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Algorithms\ISimilarityComparison.cs" />
@@ -80,10 +87,15 @@
     <Compile Include="Converters\LineHeightBasedFontSizeConverter.cs" />
     <Compile Include="Converters\MouseDoubleClickEventArgConverter.cs" />
     <Compile Include="Converters\SingleSelectionChangedEventArgsConverter.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="SyntaxEditorComponents\Behaviors\DynamicToggleButtonCreateBehavior.cs" />
     <Compile Include="SyntaxEditorComponents\Behaviors\RedirectRoutedEventBehavior.cs" />
-    <Compile Include="SyntaxEditorComponents\Behaviors\ToggleButtonBehavior.cs" />
     <Compile Include="SyntaxEditorComponents\Behaviors\ZoomScrollBehavior.cs" />
+    <Compile Include="SyntaxEditorComponents\Models\CodeContentInfo.cs" />
     <Compile Include="SyntaxEditorComponents\Views\CompletionList.xaml.cs">
       <DependentUpon>CompletionList.xaml</DependentUpon>
     </Compile>
@@ -119,11 +131,6 @@
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
@@ -131,8 +138,8 @@
     </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="app.config" />
     <None Include="packages.config" />
@@ -160,7 +167,37 @@
     <Folder Include="Common\" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\monkey_spanner.png" />
+    <Resource Include="Resources\property.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\keyword.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\function.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\codesnipp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\enum.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\namespace.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\event.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\class.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\delegate.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\interface.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\struct.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

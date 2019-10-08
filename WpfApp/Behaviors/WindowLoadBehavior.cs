@@ -57,8 +57,8 @@ namespace WpfApp.Behaviors
             mainWindow.syntaxEditor.TextArea.AddCompletionList(CompletionItemType.Keyword, "public");
             mainWindow.syntaxEditor.TextArea.AddCompletionList(CompletionItemType.Keyword, "static");
 
-            mainWindow.syntaxEditor.TextArea.AddCompletionList(CompletionItemType.Function, "ppp");
-            mainWindow.syntaxEditor.TextArea.AddCompletionList(CompletionItemType.Function, "ccc");
+            mainWindow.syntaxEditor.TextArea.AddCompletionList(CompletionItemType.Property, "ppp");
+            mainWindow.syntaxEditor.TextArea.AddCompletionList(CompletionItemType.Property, "ccc");
 
             //            this.editor.SetComponents(this.parser);
 
