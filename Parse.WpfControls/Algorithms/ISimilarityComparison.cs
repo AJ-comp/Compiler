@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace Parse.WpfControls.Algorithms
 {
     public interface ISimilarityComparison
     {
-        double SimilarityValue(string target, string source);
+        double SimilarityValue(string target, string source, out List<uint> matchedIndexes);
     }
 }

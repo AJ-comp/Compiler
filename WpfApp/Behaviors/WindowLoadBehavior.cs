@@ -57,8 +57,15 @@ namespace WpfApp.Behaviors
             mainWindow.syntaxEditor.TextArea.AddCompletionList(CompletionItemType.Keyword, "public");
             mainWindow.syntaxEditor.TextArea.AddCompletionList(CompletionItemType.Keyword, "static");
 
-            mainWindow.syntaxEditor.TextArea.AddCompletionList(CompletionItemType.Property, "ppp");
-            mainWindow.syntaxEditor.TextArea.AddCompletionList(CompletionItemType.Property, "ccc");
+            mainWindow.syntaxEditor.TextArea.AddCompletionList(CompletionItemType.Property, "HighLight");
+            mainWindow.syntaxEditor.TextArea.AddCompletionList(CompletionItemType.Property, "HightIlHe");
+
+            mainWindow.syntaxEditor.TextArea.AddDelimiter(" ");
+            mainWindow.syntaxEditor.TextArea.AddDelimiter(Environment.NewLine);
+            mainWindow.syntaxEditor.TextArea.AddDelimiter("(");
+            mainWindow.syntaxEditor.TextArea.AddDelimiter(")");
+            mainWindow.syntaxEditor.TextArea.AddDelimiter("{");
+            mainWindow.syntaxEditor.TextArea.AddDelimiter("}");
 
             //            this.editor.SetComponents(this.parser);
 

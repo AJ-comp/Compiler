@@ -82,11 +82,13 @@
     <Compile Include="Algorithms\ISimilarityComparison.cs" />
     <Compile Include="Algorithms\NaiveSimilarityComparison.cs" />
     <Compile Include="Algorithms\VSLikeSimilarityComparison.cs" />
+    <Compile Include="AttachedProperties\TextBlockProperties.cs" />
     <Compile Include="Converters\EventArgConverterExtension.cs" />
     <Compile Include="Converters\FontReleateConverter.cs" />
     <Compile Include="Converters\LineHeightBasedFontSizeConverter.cs" />
     <Compile Include="Converters\MouseDoubleClickEventArgConverter.cs" />
     <Compile Include="Converters\SingleSelectionChangedEventArgsConverter.cs" />
+    <Compile Include="Converters\UIntListToStringConverter.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -111,7 +113,6 @@
     <Compile Include="SyntaxEditorComponents\DrawingControl.cs" />
     <Compile Include="SyntaxEditorComponents\ViewModels\CompletionListViewModel.cs" />
     <Compile Include="Utilities\StringUtility.cs" />
-    <Compile Include="Utilities\TextBoxUtility.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Page Include="SyntaxEditorComponents\Views\CompletionList.xaml">
@@ -163,7 +164,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Abstracts\" />
     <Folder Include="Common\" />
   </ItemGroup>
   <ItemGroup>
@@ -198,6 +198,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\struct.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\field.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

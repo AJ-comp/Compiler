@@ -18,7 +18,7 @@ using System.Windows.Media.Imaging;
 
 namespace Parse.WpfControls.SyntaxEditorComponents
 {
-    public enum CompletionItemType { Keyword, Property, Enum, Namespace, CodeSnipp, Function, Event, Delegate, Class, Struct, Interface };
+    public enum CompletionItemType { Field, Keyword, Property, Enum, Namespace, CodeSnipp, Function, Event, Delegate, Class, Struct, Interface };
 
     public class TextArea : TextBox
     {
@@ -181,13 +181,6 @@ namespace Parse.WpfControls.SyntaxEditorComponents
 
         public TextArea()
         {
-            this.DelimiterSet.Add(" ");
-            this.DelimiterSet.Add(Environment.NewLine);
-            this.DelimiterSet.Add("(");
-            this.DelimiterSet.Add(")");
-            this.DelimiterSet.Add("{");
-            this.DelimiterSet.Add("}");
-
             this.LineString.Add(string.Empty);
 
 //            this.AddHandler(ListBox.MouseLeftButtonDownEvent, new RoutedEventHandler(this.OnMouseLeftClick), true);
@@ -196,6 +189,7 @@ namespace Parse.WpfControls.SyntaxEditorComponents
             {
                 this.scrollViewer.ScrollChanged += OnScrollChanged;
                 this.SelectionChanged += TextArea_SelectionChanged;
+                this.completionList.listBox.SelectionChanged += ((ls, le) => this.completionList.listBox.ScrollIntoView(this.completionList.listBox.SelectedItem));
 
                 InvalidateVisual();
             };
@@ -472,6 +466,10 @@ namespace Parse.WpfControls.SyntaxEditorComponents
             */
         }
 
+        /// <summary>
+        /// This function brings to TextArea a selected text in the completion list.
+        /// </summary>
+        /// <param name="other"></param>
         private void BringStringFromCompletionList(string other = "")
         {
             var context = this.completionList.DataContext as CompletionListViewModel;
@@ -604,11 +602,7 @@ namespace Parse.WpfControls.SyntaxEditorComponents
         {
             if (this.completionList.IsOpen)
             {
-                if (this.InputProcessOnCompletionList(e.Key))
-                {
-                    e.Handled = true;
-                    this.completionList.listBox.ScrollIntoView(this.completionList.listBox.SelectedItem);
-                }
+                if (this.InputProcessOnCompletionList(e.Key)) e.Handled = true;
                 return;
             }
 
@@ -640,7 +634,7 @@ namespace Parse.WpfControls.SyntaxEditorComponents
         /// This function adds to the editor a delimiter that is used to separate.
         /// </summary>
         /// <param name="delimiter"></param>
-        public void AddDelimiterList(string delimiter)
+        public void AddDelimiter(string delimiter)
         {
             this.DelimiterSet.Add(delimiter);
         }

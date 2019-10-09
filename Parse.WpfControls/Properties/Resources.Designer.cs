@@ -188,6 +188,25 @@ namespace Parse.WpfControls.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
+        internal static System.Drawing.Bitmap field {
+            get {
+                object obj = ResourceManager.GetObject("field", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Field과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        internal static string Field_ {
+            get {
+                return ResourceManager.GetString("Field_", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
         internal static System.Drawing.Bitmap function {
             get {
                 object obj = ResourceManager.GetObject("function", resourceCulture);

@@ -7,9 +7,10 @@
        xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
        xmlns:viewmodel="clr-namespace:Parse.WpfControls.SyntaxEditorComponents.ViewModels"
       xmlns:behavior="clr-namespace:Parse.WpfControls.SyntaxEditorComponents.Behaviors"
+       xmlns:attached="clr-namespace:Parse.WpfControls.AttachedProperties"
        xmlns:lex="http://wpflocalizeextension.codeplex.com" 
        xmlns:mvvm="http://www.galasoft.ch/mvvmlight"
-       xmlns:eventArgConverters="clr-namespace:Parse.WpfControls.Converters"
+       xmlns:converter="clr-namespace:Parse.WpfControls.Converters"
        xmlns:resources="clr-namespace:Parse.WpfControls.SyntaxEditorComponents.Views"
        mc:Ignorable="d" 
        x:Name="owner"
@@ -64,11 +65,13 @@
                 <DataTemplate>
                     <VirtualizingStackPanel Name="vStack" Orientation="Horizontal">
                         <Image Source="{Binding ImageSource}"  Width="16" Height="16" Margin="0,0,2,0"/>
-                        <TextBlock Text="{Binding ItemName}"/>
+                        <TextBlock Text="{Binding ItemName}" attached:TextBlockProperties.BoldIndexes="{Binding MatchedIndexes, Converter={converter:UIntListToStringConverter}}">
+                        </TextBlock>
                     </VirtualizingStackPanel>
                     <DataTemplate.Triggers>
                         <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ListBoxItem}},Path=IsSelected}" Value="True">
-                            <Setter TargetName="vStack" Property="Background" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                            <!--<Setter TargetName="vStack" Property="Background" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>-->
+                            <Setter TargetName="vStack" Property="Background" Value="Yellow"/>
                         </DataTrigger>
                     </DataTemplate.Triggers>
                 </DataTemplate>
@@ -96,6 +99,12 @@
         </ListBox>
 
         <StackPanel Grid.Row="1" Orientation="Horizontal" Background="{Binding ElementName=listBox, Path=Background}">
+            <ToggleButton x:Name="fieldBtn" Visibility="Collapsed" 
+                          IsChecked="{Binding FieldInfo.IsFiltering}"
+                          ToolTip="{Binding FieldInfo.Explain}"
+                          Style="{StaticResource filterBtnStyle}">
+                <Image Source="{Binding FieldInfo.ImgSrc}"  Width="16" Height="16"/>
+            </ToggleButton>
             <ToggleButton x:Name="propertyBtn" Visibility="Collapsed" 
                           IsChecked="{Binding PropertyInfo.IsFiltering}"
                           ToolTip="{Binding PropertyInfo.Explain}"
@@ -114,11 +123,53 @@
                           Style="{StaticResource filterBtnStyle}">
                 <Image Source="{Binding EnumInfo.ImgSrc}"  Width="16" Height="16"/>
             </ToggleButton>
+            <ToggleButton x:Name="codeSnippBtn" Visibility="Collapsed" 
+                          IsChecked="{Binding CodeSnippInfo.IsFiltering}"
+                          ToolTip="{Binding CodeSnippInfo.Explain}"
+                          Style="{StaticResource filterBtnStyle}">
+                <Image Source="{Binding CodeSnippInfo.ImgSrc}"  Width="16" Height="16"/>
+            </ToggleButton>
             <ToggleButton x:Name="functionBtn" Visibility="Collapsed" 
                           IsChecked="{Binding IsFilteringFunction}"
                           ToolTip="{Binding FunctionInfo.Explain}"
                           Style="{StaticResource filterBtnStyle}">
                 <Image Source="{Binding FunctionInfo.ImgSrc}"  Width="16" Height="16"/>
+            </ToggleButton>
+            <ToggleButton x:Name="namespaceBtn" Visibility="Collapsed" 
+                          IsChecked="{Binding NamespaceInfo.IsFiltering}"
+                          ToolTip="{Binding NamespaceInfo.Explain}"
+                          Style="{StaticResource filterBtnStyle}">
+                <Image Source="{Binding NamespaceInfo.ImgSrc}"  Width="16" Height="16"/>
+            </ToggleButton>
+            <ToggleButton x:Name="eventBtn" Visibility="Collapsed" 
+                          IsChecked="{Binding EventInfo.IsFiltering}"
+                          ToolTip="{Binding EventInfo.Explain}"
+                          Style="{StaticResource filterBtnStyle}">
+                <Image Source="{Binding EventInfo.ImgSrc}"  Width="16" Height="16"/>
+            </ToggleButton>
+            <ToggleButton x:Name="delegateBtn" Visibility="Collapsed" 
+                          IsChecked="{Binding DelegateInfo.IsFiltering}"
+                          ToolTip="{Binding DelegateInfo.Explain}"
+                          Style="{StaticResource filterBtnStyle}">
+                <Image Source="{Binding DelegateInfo.ImgSrc}"  Width="16" Height="16"/>
+            </ToggleButton>
+            <ToggleButton x:Name="classBtn" Visibility="Collapsed" 
+                          IsChecked="{Binding ClassInfo.IsFiltering}"
+                          ToolTip="{Binding ClassInfo.Explain}"
+                          Style="{StaticResource filterBtnStyle}">
+                <Image Source="{Binding ClassInfo.ImgSrc}"  Width="16" Height="16"/>
+            </ToggleButton>
+            <ToggleButton x:Name="structBtn" Visibility="Collapsed" 
+                          IsChecked="{Binding StructInfo.IsFiltering}"
+                          ToolTip="{Binding StructInfo.Explain}"
+                          Style="{StaticResource filterBtnStyle}">
+                <Image Source="{Binding StructInfo.ImgSrc}"  Width="16" Height="16"/>
+            </ToggleButton>
+            <ToggleButton x:Name="interfaceBtn" Visibility="Collapsed" 
+                          IsChecked="{Binding InterfaceInfo.IsFiltering}"
+                          ToolTip="{Binding InterfaceInfo.Explain}"
+                          Style="{StaticResource filterBtnStyle}">
+                <Image Source="{Binding InterfaceInfo.ImgSrc}"  Width="16" Height="16"/>
             </ToggleButton>
         </StackPanel>
 

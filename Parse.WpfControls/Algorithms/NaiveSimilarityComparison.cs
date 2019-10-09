@@ -36,8 +36,9 @@ namespace Parse.WpfControls.Algorithms
             return result;
         }
 
-        public double SimilarityValue(string target, string source)
+        public double SimilarityValue(string target, string source, out List<uint> matchedIndexes)
         {
+            matchedIndexes = new List<uint>();
             double result = 0;
 
             foreach (var s in source)

@@ -38,12 +38,18 @@ namespace Parse.WpfControls.SyntaxEditorComponents.Behaviors
 
             foreach (CompletionItem item in completionList.listBox.Items)
             {
-                if (item.ItemType == CompletionItemType.Property)
-                    completionList.propertyBtn.Visibility = Visibility.Visible;
-                else if (item.ItemType == CompletionItemType.Function)
-                    completionList.functionBtn.Visibility = Visibility.Visible;
-                else if(item.ItemType == CompletionItemType.Keyword)
-                    completionList.keywordBtn.Visibility = Visibility.Visible;
+                if (item.ItemType == CompletionItemType.Field) completionList.fieldBtn.Visibility = Visibility.Visible;
+                else if (item.ItemType == CompletionItemType.Property) completionList.propertyBtn.Visibility = Visibility.Visible;
+                else if (item.ItemType == CompletionItemType.Keyword) completionList.keywordBtn.Visibility = Visibility.Visible;
+                else if (item.ItemType == CompletionItemType.Enum) completionList.enumBtn.Visibility = Visibility.Visible;
+                else if (item.ItemType == CompletionItemType.CodeSnipp) completionList.codeSnippBtn.Visibility = Visibility.Visible;
+                else if (item.ItemType == CompletionItemType.Function) completionList.functionBtn.Visibility = Visibility.Visible;
+                else if (item.ItemType == CompletionItemType.Namespace) completionList.namespaceBtn.Visibility = Visibility.Visible;
+                else if (item.ItemType == CompletionItemType.Event) completionList.eventBtn.Visibility = Visibility.Visible;
+                else if (item.ItemType == CompletionItemType.Delegate) completionList.delegateBtn.Visibility = Visibility.Visible;
+                else if (item.ItemType == CompletionItemType.Class) completionList.classBtn.Visibility = Visibility.Visible;
+                else if (item.ItemType == CompletionItemType.Struct) completionList.structBtn.Visibility = Visibility.Visible;
+                else if (item.ItemType == CompletionItemType.Interface) completionList.interfaceBtn.Visibility = Visibility.Visible;
             }
 
             

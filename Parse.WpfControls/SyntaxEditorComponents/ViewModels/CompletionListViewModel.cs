@@ -6,6 +6,7 @@ using Parse.WpfControls.SyntaxEditorComponents.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace Parse.WpfControls.SyntaxEditorComponents.ViewModels
 {
@@ -18,10 +19,12 @@ namespace Parse.WpfControls.SyntaxEditorComponents.ViewModels
         private ISimilarityComparison similarity = new VSLikeSimilarityComparison();
         private SortedSet<CompletionItem> totalCollection = new SortedSet<CompletionItem>(new CompletionItemComparer());
         private HashSet<CompletionItem> availableCollection = new HashSet<CompletionItem>();
+        private HashSet<CompletionItem> filteredAvailableCollection = new HashSet<CompletionItem>();
         private ObservableCollection<CodeContentInfo> codeContents = new ObservableCollection<CodeContentInfo>();
 
         public ObservableCollection<CompletionItem> CandidateCollection { get; private set; } = new ObservableCollection<CompletionItem>();
 
+        public CodeContentInfo FieldInfo { get; } = new CodeContentInfo("field.png", Resources.Field_, CompletionItemType.Field);
         public CodeContentInfo PropertyInfo { get; } = new CodeContentInfo("property.png", Resources.Property_, CompletionItemType.Property);
         public CodeContentInfo KeywordInfo { get; } = new CodeContentInfo("keyword.png", Resources.Keyword_, CompletionItemType.Keyword);
         public CodeContentInfo EnumInfo { get; } = new CodeContentInfo("enum.png", Resources.Enumerate, CompletionItemType.Enum);
@@ -66,6 +69,7 @@ namespace Parse.WpfControls.SyntaxEditorComponents.ViewModels
         {
             this.FilterButtonClickCmd = new RelayCommand(() => this.RequestFilterButtonClick?.Invoke(this, null));
 
+            this.codeContents.Add(this.FieldInfo);
             this.codeContents.Add(this.PropertyInfo);
             this.codeContents.Add(this.KeywordInfo);
             this.codeContents.Add(this.EnumInfo);
@@ -79,7 +83,7 @@ namespace Parse.WpfControls.SyntaxEditorComponents.ViewModels
             this.codeContents.Add(this.InterfaceInfo);
 
             foreach (var item in this.codeContents)
-                item.PropertyChanged += ((s, e) => this.OnFilteringChanged());
+                item.PropertyChanged += ((s, e) => this.OnInputStringChanged());
         }
 
         private bool IsFilteringAllDisable()
@@ -108,24 +112,53 @@ namespace Parse.WpfControls.SyntaxEditorComponents.ViewModels
             return result;
         }
 
-        private void SelectTopCandidate()
+        /// <summary>
+        /// This function allocate a values to CandidateCollection by reference the availableCollection.
+        /// </summary>
+        /// <param name="IsIncludeZeroSimilarity">Whether include if the similarity value is zero </param>
+        /// <param name="bFilteringState">Whether filtering state</param>
+        /// <returns></returns>
+        private List<double> CreateCandidateCollection(bool IsIncludeZeroSimilarity, bool bFilteringState)
         {
-            double topPriority = -1;
-            this.SelectedIndex = -1;
+            List<double> similarityValues = new List<double>();
 
-            for(int i=0; i<this.CandidateCollection.Count; i++)
+            var repeatCollection = (bFilteringState) ? this.filteredAvailableCollection : this.availableCollection;
+            foreach (var item in repeatCollection)
             {
-                
-                var item = this.CandidateCollection[i];
-                double priority = this.similarity.SimilarityValue(item.ItemName, this.inputString);
-                if (priority > 0)
+                List<uint> matchedIndex;
+                double value = this.similarity.SimilarityValue(item.ItemName, this.inputString, out matchedIndex);
+                if (value == 0)
                 {
-                    if (priority > topPriority)
-                    {
-                        topPriority = priority;
-                        this.SelectedIndex = i;
-                    }
+                    if (IsIncludeZeroSimilarity == false) continue;
                 }
+
+                item.MatchedIndexes = matchedIndex;
+                this.CandidateCollection.Add(item);
+                similarityValues.Add(value);
+            }
+
+            return similarityValues;
+        }
+
+        private void SelectTopCandidate(List<double> similarityValues)
+        {
+            if (similarityValues.Count == 0) return;
+            this.SelectedIndex = similarityValues.IndexOf(similarityValues.Max());
+        }
+
+        private void CreateCandidateByFiltering()
+        {
+            if (this.CandidateCollection.Count <= 0) return;
+
+            this.filteredCandidate = new CompletionItem[this.CandidateCollection.Count];
+            this.CandidateCollection.CopyTo(this.filteredCandidate, 0);
+
+            this.CandidateCollection.Clear();
+            foreach (var item in this.filteredCandidate)
+            {
+                if (this.IsFilteringState(item.ItemType) == false) continue;
+
+                this.CandidateCollection.Add(item);
             }
         }
 
@@ -155,62 +188,47 @@ namespace Parse.WpfControls.SyntaxEditorComponents.ViewModels
             foreach (var item in this.totalCollection) this.availableCollection.Add(item);
         }
 
+        /// <summary>
+        /// This function is called when the input string is changed.
+        /// </summary>
         public void OnInputStringChanged()
         {
-            if(this.inputString.Length == 1)
+            // if filtering state
+            bool bFilteringState = !this.IsFilteringAllDisable();
+            if (bFilteringState)
+            {
+                this.filteredAvailableCollection.Clear();
+                foreach (var item in this.availableCollection)
+                {
+                    if (this.IsFilteringState(item.ItemType) == false) continue;
+                    this.filteredAvailableCollection.Add(item);
+                }
+            }
+
+            if (this.inputString.Length == 1)
             {
                 this.CandidateCollection.Clear();
-                foreach (var item in this.availableCollection) this.CandidateCollection.Add(item);
+                this.SelectTopCandidate(this.CreateCandidateCollection(true, bFilteringState));
             }
             else if(this.inputString.Length > 1)
             {
                 this.CandidateCollection.Clear();
+                this.SelectTopCandidate(this.CreateCandidateCollection(false, bFilteringState));
 
-                foreach(var item in this.availableCollection)
+                if (this.CandidateCollection.Count == 0)
                 {
-                    if (this.similarity.SimilarityValue(item.ItemName, this.inputString) > 0) this.CandidateCollection.Add(item);
-                }
-
-                if(this.CandidateCollection.Count == 0)
-                {
-                    foreach (var item in this.availableCollection) this.CandidateCollection.Add(item);
+                    var repeatCollection = (bFilteringState) ? this.filteredAvailableCollection : this.availableCollection;
+                    foreach (var item in repeatCollection) this.CandidateCollection.Add(item);
                 }
             }
-
-            if (this.CandidateCollection.Count <= 0) return;
-
-            this.filteredCandidate = new CompletionItem[this.CandidateCollection.Count];
-            this.CandidateCollection.CopyTo(this.filteredCandidate, 0);
-
-            // if filtering state
-            if (this.IsFilteringAllDisable() == false) this.OnFilteringChanged();
-            else this.SelectTopCandidate();
-        }
-
-        public void OnFilteringChanged()
-        {
-            if (this.IsFilteringAllDisable())
-            {
-                this.OnInputStringChanged();
-                return;
-            }
-
-            this.CandidateCollection.Clear();
-            foreach(var item in this.filteredCandidate)
-            {
-                if (this.IsFilteringState(item.ItemType) == false) continue;
-
-                this.CandidateCollection.Add(item);
-            }
-
-            this.SelectTopCandidate();
         }
 
         public void AddCollection(CompletionItemType type, string name)
         {
             string imgSrc = string.Empty;
 
-            if (type == CompletionItemType.Property) imgSrc = PropertyInfo.ImgSrc;
+            if (type == CompletionItemType.Field) imgSrc = FieldInfo.ImgSrc;
+            else if (type == CompletionItemType.Property) imgSrc = PropertyInfo.ImgSrc;
             else if (type == CompletionItemType.Keyword) imgSrc = KeywordInfo.ImgSrc;
             else if (type == CompletionItemType.Enum) imgSrc = EnumInfo.ImgSrc;
             else if (type == CompletionItemType.CodeSnipp) imgSrc = CodeSnippInfo.ImgSrc;
