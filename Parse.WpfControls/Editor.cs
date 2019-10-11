@@ -105,38 +105,6 @@ namespace Parse.WpfControls
             DependencyProperty.Register("LineHeight", typeof(double), typeof(Editor), new PropertyMetadata(null));
 
 
-        public Brush SelectedLineBrush
-        {
-            get { return (Brush)GetValue(SelectedLineBrushProperty); }
-            set { SetValue(SelectedLineBrushProperty, value); }
-        }
-
-        // Using a DependencyProperty as the backing store for SelectedLineBrush.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty SelectedLineBrushProperty =
-            DependencyProperty.Register("SelectedLineBrush", typeof(Brush), typeof(Editor), new PropertyMetadata(Brushes.Transparent));
-
-
-        public Brush SelectedLineBorderBrush
-        {
-            get { return (Brush)GetValue(SelectedLineBorderBrushProperty); }
-            set { SetValue(SelectedLineBorderBrushProperty, value); }
-        }
-
-        // Using a DependencyProperty as the backing store for SelectedLineBorderBrush.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty SelectedLineBorderBrushProperty =
-            DependencyProperty.Register("SelectedLineBorderBrush", typeof(Brush), typeof(Editor), new PropertyMetadata(Brushes.Transparent));
-
-
-        public int SelectedLineBorder
-        {
-            get { return (int)GetValue(SelectedLineBorderProperty); }
-            set { SetValue(SelectedLineBorderProperty, value); }
-        }
-
-        // Using a DependencyProperty as the backing store for SelectedLineBorder.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty SelectedLineBorderProperty =
-            DependencyProperty.Register("SelectedLineBorder", typeof(int), typeof(Editor), new PropertyMetadata(1));
-
         #endregion
 
         #region Routed Events

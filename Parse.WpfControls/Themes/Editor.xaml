@@ -4,7 +4,8 @@
                     xmlns:host="clr-namespace:Parse.WpfControls"
                     xmlns:syntaxcomponent="clr-namespace:Parse.WpfControls.SyntaxEditorComponents"
                     xmlns:views="clr-namespace:Parse.WpfControls.SyntaxEditorComponents.Views"
-                    xmlns:behaviors="clr-namespace:Parse.WpfControls.SyntaxEditorComponents.Behaviors">
+                    xmlns:behaviors="clr-namespace:Parse.WpfControls.SyntaxEditorComponents.Behaviors"
+                    xmlns:attached="clr-namespace:Parse.WpfControls.AttachedProperties">
 
     <Style TargetType="{x:Type syntaxcomponent:TextArea}">
         <Style.Triggers>
@@ -19,6 +20,11 @@
         <Setter Property="VerticalScrollBarVisibility" Value="Auto" />
         <Setter Property="TextWrapping" Value="NoWrap"/>
         <Setter Property="Foreground" Value="#00000000"/>
+        <Setter Property="SelectionLineBorderBrush" Value="DarkGray"/>
+        <Setter Property="FontSize" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=FontSize, Mode=TwoWay}"/>
+        <Setter Property="LineHeight" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=LineHeight}"/>
+        <Setter Property="attached:TextBoxExtension.TabSizeEnable" Value="True"/>
+        <Setter Property="attached:TextBoxExtension.TabSize" Value="{Binding RelativeSource={RelativeSource Mode=Self}, Path=TabSize}"/>
 
         <Setter Property="Template">
             <Setter.Value>
@@ -45,7 +51,6 @@
         <Setter Property="FontSize" Value="9"/>
         <Setter Property="LineNumberForeColor" Value="Aquamarine"/>
         <Setter Property="LineHeight" Value="{Binding RelativeSource={RelativeSource Self}, Mode=OneWay, Path=FontSize}"/>
-        <Setter Property="SelectedLineBorderBrush" Value="DarkGray"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type host:Editor}">
@@ -66,16 +71,10 @@
 
                             <Grid Grid.Column="2">
                                 <Grid Margin="{TemplateBinding Padding}">
-                                    <syntaxcomponent:TextArea x:Name="PART_TextArea" 
-                                                              FontSize="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=FontSize, Mode=TwoWay}"
-                                                              LineHeight="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=LineHeight}"
-                                                              SelectionLineBrush="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=SelectedLineBrush, Mode=TwoWay}"
-                                                              SelectionLineBorderBrush="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=SelectedLineBorderBrush, Mode=TwoWay}"
-                                                              SelectionLineBorderThickness="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=SelectedLineBorder, Mode=TwoWay}"
-                                                              >
-
+                                    <syntaxcomponent:TextArea x:Name="PART_TextArea">
                                         <i:Interaction.Behaviors>
                                             <behaviors:ZoomScrollBehavior/>
+                                            <behaviors:CompletionListBehavior/>
                                         </i:Interaction.Behaviors>
                                     </syntaxcomponent:TextArea>
 

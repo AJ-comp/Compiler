@@ -8,24 +8,9 @@ using System.Windows.Documents;
 
 namespace Parse.WpfControls.AttachedProperties
 {
-    static class TextBlockProperties
+    static class TextBlockExtension
     {
-        public static bool GetIsBold(DependencyObject item)
-        {
-            return (bool)item.GetValue(IsBoldProperty);
-        }
-
-        public static void SetIsBold(DependencyObject obj, bool value)
-        {
-            obj.SetValue(IsBoldProperty, value);
-        }
-
-        // Using a DependencyProperty as the backing store for CanFocusOnLoad.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty IsBoldProperty =
-            DependencyProperty.RegisterAttached("IsBold", typeof(bool), typeof(TextBlockProperties), new PropertyMetadata(BoldIndexesChanged));
-
-
-
+        #region BoldIndexes
         public static string GetBoldIndexes(DependencyObject item)
         {
             return (string)item.GetValue(BoldIndexesProperty);
@@ -48,9 +33,10 @@ namespace Parse.WpfControls.AttachedProperties
 
         // Using a DependencyProperty as the backing store for CanFocusOnLoad.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty BoldIndexesProperty =
-            DependencyProperty.RegisterAttached("BoldIndexes", typeof(string), typeof(TextBlockProperties), new PropertyMetadata(BoldIndexesChanged));
+            DependencyProperty.RegisterAttached("BoldIndexes", typeof(string), typeof(TextBlockExtension), new PropertyMetadata(BoldIndexesChanged));
+        #endregion
 
-
+        #region BoldIndexes Handler
         private static void BoldIndexesChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var element = d as TextBlock;
@@ -70,5 +56,8 @@ namespace Parse.WpfControls.AttachedProperties
                     element.Inlines.Add(text[i].ToString());
             }
         }
+        #endregion
+
+
     }
 }

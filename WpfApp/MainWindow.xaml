@@ -45,7 +45,8 @@
                                         FontSize="15" 
                                         FontFamily="Arial"
                                         IsLineNumberingVisible="True"  LineNumberForeColor="DarkGreen"
-                                        TextBoxBase.TextChanged="syntaxEditor_TextChanged" >
+                                        TextBoxBase.TextChanged="syntaxEditor_TextChanged"
+                                        >
 
                         <!--<i:Interaction.Triggers>
                             <i:EventTrigger EventName="TextBoxBase.TextChanged">

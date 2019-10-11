@@ -21,9 +21,6 @@ namespace Parse.WpfControls.SyntaxEditorComponents.Behaviors
             this.AssociatedObject.PreviewKeyUp -= AssociatedObject_PreviewKeyUp;
             this.AssociatedObject.PreviewMouseWheel -= AssociatedObject_PreviewMouseWheel;
 
-            this.AssociatedObject.KeyDown -= AssociatedObject_KeyDown;
-            this.AssociatedObject.KeyUp -= AssociatedObject_KeyUp;
-
             base.OnDetaching();
         }
 
@@ -34,17 +31,6 @@ namespace Parse.WpfControls.SyntaxEditorComponents.Behaviors
             this.AssociatedObject.PreviewKeyDown += AssociatedObject_PreviewKeyDown;
             this.AssociatedObject.PreviewKeyUp += AssociatedObject_PreviewKeyUp;
             this.AssociatedObject.PreviewMouseWheel += AssociatedObject_PreviewMouseWheel;
-
-            this.AssociatedObject.KeyDown += AssociatedObject_KeyDown;
-            this.AssociatedObject.KeyUp += AssociatedObject_KeyUp;
-        }
-
-        private void AssociatedObject_KeyUp(object sender, KeyEventArgs e)
-        {
-        }
-
-        private void AssociatedObject_KeyDown(object sender, KeyEventArgs e)
-        {
         }
 
         private void AssociatedObject_PreviewKeyDown(object sender, KeyEventArgs e)

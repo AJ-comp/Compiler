@@ -24,7 +24,7 @@ namespace Parse.WpfControls.SyntaxEditorComponents
     {
         private TextViewer renderCanvas;
         private ScrollViewer scrollViewer;
-        private CompletionList completionList;
+        internal CompletionList completionList;
 
         private HashSet<SelectionInfo> selectionBlocks = new HashSet<SelectionInfo>();
         private Dictionary<string, TextStyle> textStyleDic = new Dictionary<string, TextStyle>();
@@ -32,17 +32,24 @@ namespace Parse.WpfControls.SyntaxEditorComponents
 
         private int prevLineIndex = 0;
         private int prevStartCaretIndexByLine = 0;
-        private HashSet<string> DelimiterSet = new HashSet<string>();
         /// <summary>This member means maximum showable line count at one go.</summary>
         private int maxViewLineOnce = 100;
 
-        /// <summary> This property gets or sets the tab size. </summary>
-        public uint TabSize { get; set; } = 4;
-        /// <summary> This property gets the caret index when completion list occur. </summary>
-        public int CaretIndexWhenCLOccur { get; private set; }
+        public HashSet<string> DelimiterSet { get; } = new HashSet<string>();
 
 
         #region Dependency Properties
+        public int TabSize
+        {
+            get { return (int)GetValue(TabSizeProperty); }
+            set { SetValue(TabSizeProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for TabSize.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty TabSizeProperty =
+            DependencyProperty.Register("TabSize", typeof(int), typeof(TextArea), new PropertyMetadata(4));
+
+
         public double LineHeight
         {
             get { return (double)GetValue(LineHeightProperty); }
@@ -189,7 +196,6 @@ namespace Parse.WpfControls.SyntaxEditorComponents
             {
                 this.scrollViewer.ScrollChanged += OnScrollChanged;
                 this.SelectionChanged += TextArea_SelectionChanged;
-                this.completionList.listBox.SelectionChanged += ((ls, le) => this.completionList.listBox.ScrollIntoView(this.completionList.listBox.SelectedItem));
 
                 InvalidateVisual();
             };
@@ -205,7 +211,6 @@ namespace Parse.WpfControls.SyntaxEditorComponents
             {
                 TextChange changeInfo = e.Changes.First();
                 this.UpdateLineString(changeInfo);
-                this.GenerateCompletionList(changeInfo);
 
                 InvalidateVisual();
             };
@@ -218,49 +223,6 @@ namespace Parse.WpfControls.SyntaxEditorComponents
             this.renderCanvas = (TextViewer)Template.FindName("PART_RenderCanvas", this);
             this.scrollViewer = (ScrollViewer)Template.FindName("PART_ContentHost", this);
             this.completionList = (CompletionList)Template.FindName("PART_CompletionList", this);
-
-            var completionListContext = this.completionList.DataContext as CompletionListViewModel;
-            this.completionList.listBox.SelectionChanged += ((s, e) => this.Focus());
-            completionListContext.RequestFilterButtonClick += ((s, e) => this.Focus());
-        }
-
-        private bool IsBackSpace(TextChange changeInfo) => (changeInfo.RemovedLength >= 1 && changeInfo.AddedLength == 0);
-
-        /// <summary>
-        /// This function generates completion list.
-        /// </summary>
-        /// <param name="changeInfo"></param>
-        private void GenerateCompletionList(TextChange changeInfo)
-        {
-            var addString = this.Text.Substring(changeInfo.Offset, changeInfo.AddedLength);
-            if (addString.Length > 1) { this.completionList.IsOpen = false; return; }
-            if (this.DelimiterSet.Contains(addString)) { this.completionList.IsOpen = false; return; }
-
-            var context = this.completionList.DataContext as CompletionListViewModel;
-            if(this.IsBackSpace(changeInfo))
-            {
-                if (this.completionList.IsOpen == false) return;
-                if (this.CaretIndex <= this.CaretIndexWhenCLOccur) { this.completionList.IsOpen = false; return; }
-            }
-            else if(this.completionList.IsOpen == false)
-            {
-                if(addString.Length == 1)
-                {
-                    context.LoadAvailableCollection();
-                    this.CaretIndexWhenCLOccur = this.CaretIndex - 1;
-                }
-            }
-
-            var rect = this.GetRectFromCharacterIndex(this.CaretIndex);
-
-            this.completionList.StaysOpen = false;
-            this.completionList.Placement = PlacementMode.Relative;
-            this.completionList.PlacementTarget = this;
-            this.completionList.VerticalOffset = rect.Y + this.LineHeight;
-            this.completionList.HorizontalOffset = rect.X;
-
-            context.InputString = this.Text.Substring(this.CaretIndexWhenCLOccur, this.CaretIndex - this.CaretIndexWhenCLOccur);
-            this.completionList.IsOpen = true;
         }
 
         private int GetLineIndexFromCaretIndex(int caretIndex)
@@ -454,80 +416,6 @@ namespace Parse.WpfControls.SyntaxEditorComponents
             return result;
         }
 
-        private void DrawCore(double itemDrawStartX, double itemDrawStartY, ViewStringInfo viewLineData, DrawingContext dc)
-        {
-            /*
-            // Draw current line rectangle.
-            if (viewLineData.AbsoluteLineIndex == this.LineIndex)
-            {
-                var currentLineRect = new Rect(itemDrawStartX, itemDrawStartY, this.RenderSize.Width, this.lineHeight);
-                dc.DrawRectangle(this.CurrentLineBrush, null, currentLineRect);
-            }
-            */
-        }
-
-        /// <summary>
-        /// This function brings to TextArea a selected text in the completion list.
-        /// </summary>
-        /// <param name="other"></param>
-        private void BringStringFromCompletionList(string other = "")
-        {
-            var context = this.completionList.DataContext as CompletionListViewModel;
-
-            int startIndex = this.CaretIndexWhenCLOccur;
-            int endIndex = this.CaretIndex;
-
-            if (context.SelectedIndex >= 0)
-            {
-                var addString = context.CandidateCollection[context.SelectedIndex].ItemName + other;
-
-                this.Select(startIndex, endIndex - startIndex);
-                TextCompositionManager.StartComposition(new TextComposition(InputManager.Current, this, addString));
-            }
-            else if(other.Length > 0)
-                TextCompositionManager.StartComposition(new TextComposition(InputManager.Current, this, other));
-        }
-
-        private bool InputProcessOnCompletionList(Key keyType)
-        {
-            bool result = false;
-
-            if (keyType == Key.Up)
-            {
-                var context = this.completionList.DataContext as CompletionListViewModel;
-                context.Up();
-                result = true;
-            }
-            else if(keyType == Key.Down)
-            {
-                var context = this.completionList.DataContext as CompletionListViewModel;
-                context.Down();
-                result = true;
-            }
-            else if (keyType == Key.Enter || keyType == Key.Tab)
-            {
-                this.completionList.IsOpen = false;
-                this.BringStringFromCompletionList();
-                result = true;
-            }
-            else if(keyType == Key.Space || keyType == Key.OemPeriod)
-            {
-                this.completionList.IsOpen = false;
-                if(keyType == Key.Space)  this.BringStringFromCompletionList(" ");
-                else if(keyType == Key.OemPeriod) this.BringStringFromCompletionList(".");
-
-                result = true;
-            }
-            else if(keyType == Key.Escape)
-            {
-                this.completionList.IsOpen = false;
-                result = true;
-            }
-
-            return result;
-        }
-
-
         private void TextArea_SelectionChanged(object sender, RoutedEventArgs e)
         {
             this.UpdateCaretInfo();
@@ -596,38 +484,6 @@ namespace Parse.WpfControls.SyntaxEditorComponents
             int endNumber = startLine + 1 + this.ViewLineString.Count;
             this.RaiseEvent(new EditorRenderedEventArgs(TextArea.RenderedEvent, startLine+1, startNumber + endNumber, 
                                                                                 this.HorizontalOffset, this.VerticalOffset, this.LineHeight));
-        }
-
-        protected override void OnPreviewKeyDown(KeyEventArgs e)
-        {
-            if (this.completionList.IsOpen)
-            {
-                if (this.InputProcessOnCompletionList(e.Key)) e.Handled = true;
-                return;
-            }
-
-            if (e.Key == Key.Tab)
-            {
-                string tab = new string(' ', (int)TabSize);
-                TextCompositionManager.StartComposition(new TextComposition(InputManager.Current, this, tab));
-
-                e.Handled = true;
-            }
-        }
-
-        protected override void OnMouseDoubleClick(MouseButtonEventArgs e)
-        {
-            if(this.completionList.listBox.IsMouseOver)
-            {
-                var src = VisualTreeHelper.GetParent(e.OriginalSource as DependencyObject);
-                if(src is VirtualizingStackPanel || src is ContentPresenter)
-                {
-                    this.InputProcessOnCompletionList(Key.Enter);
-                }
-                return;
-            }
-
-            base.OnMouseDoubleClick(e);
         }
 
         /// <summary>
