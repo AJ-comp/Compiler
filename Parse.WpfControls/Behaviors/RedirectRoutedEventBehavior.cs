@@ -2,7 +2,7 @@
 using System.Windows;
 using System.Windows.Interactivity;
 
-namespace Parse.WpfControls.SyntaxEditorComponents.Behaviors
+namespace Parse.WpfControls.Behaviors
 {
     public class RedirectRoutedEventBehavior : Behavior<UIElement>
     {

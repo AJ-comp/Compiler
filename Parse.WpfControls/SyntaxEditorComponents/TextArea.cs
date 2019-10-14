@@ -1,30 +1,25 @@
-﻿using Parse.WpfControls.SyntaxEditorComponents.EventArgs;
+﻿using Parse.WpfControls.AttachedProperties;
+using Parse.WpfControls.Behaviors;
+using Parse.WpfControls.SyntaxEditorComponents.EventArgs;
 using Parse.WpfControls.SyntaxEditorComponents.Models;
-using Parse.WpfControls.SyntaxEditorComponents.ViewModels;
-using Parse.WpfControls.SyntaxEditorComponents.Views;
 using Parse.WpfControls.Utilities;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Globalization;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
 
 namespace Parse.WpfControls.SyntaxEditorComponents
 {
-    public enum CompletionItemType { Field, Keyword, Property, Enum, Namespace, CodeSnipp, Function, Event, Delegate, Class, Struct, Interface };
-
     public class TextArea : TextBox
     {
         private TextViewer renderCanvas;
         private ScrollViewer scrollViewer;
-        internal CompletionList completionList;
 
         private HashSet<SelectionInfo> selectionBlocks = new HashSet<SelectionInfo>();
         private Dictionary<string, TextStyle> textStyleDic = new Dictionary<string, TextStyle>();
@@ -35,10 +30,8 @@ namespace Parse.WpfControls.SyntaxEditorComponents
         /// <summary>This member means maximum showable line count at one go.</summary>
         private int maxViewLineOnce = 100;
 
-        public HashSet<string> DelimiterSet { get; } = new HashSet<string>();
 
-
-        #region Dependency Properties
+        #region Dependency Property releated with TabSize Property
         public int TabSize
         {
             get { return (int)GetValue(TabSizeProperty); }
@@ -48,8 +41,32 @@ namespace Parse.WpfControls.SyntaxEditorComponents
         // Using a DependencyProperty as the backing store for TabSize.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty TabSizeProperty =
             DependencyProperty.Register("TabSize", typeof(int), typeof(TextArea), new PropertyMetadata(4));
+        #endregion
+
+        #region Dependency Properties related with CompletionListBehavior
+        public ObservableCollection<CompletionItem> CompletionItems
+        {
+            get { return (ObservableCollection<CompletionItem>)GetValue(CompletionItemsProperty); }
+            set { SetValue(CompletionItemsProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for CompletionItems.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty CompletionItemsProperty =
+            DependencyProperty.Register("CompletionItems", typeof(ObservableCollection<CompletionItem>), typeof(TextArea), new PropertyMetadata(null));
 
 
+        public StringCollection DelimiterSet
+        {
+            get { return (StringCollection)GetValue(DelimiterSetProperty); }
+            set { SetValue(DelimiterSetProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for DelimiterSet.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty DelimiterSetProperty =
+            DependencyProperty.Register("DelimiterSet", typeof(StringCollection), typeof(TextArea), new PropertyMetadata(null));
+        #endregion
+
+        #region Dependency Properties releated with HighlightingBehavior
         public double LineHeight
         {
             get { return (double)GetValue(LineHeightProperty); }
@@ -68,6 +85,7 @@ namespace Parse.WpfControls.SyntaxEditorComponents
             TextBlock.SetLineStackingStrategy(area, LineStackingStrategy.BlockLineHeight);
             TextBlock.SetLineHeight(area, (double)args.NewValue);
         }
+
 
         public char BeforeCharFromCursor
         {
@@ -188,6 +206,9 @@ namespace Parse.WpfControls.SyntaxEditorComponents
 
         public TextArea()
         {
+            SetValue(CompletionItemsProperty, new ObservableCollection<CompletionItem>());
+            SetValue(DelimiterSetProperty, new StringCollection());
+
             this.LineString.Add(string.Empty);
 
 //            this.AddHandler(ListBox.MouseLeftButtonDownEvent, new RoutedEventHandler(this.OnMouseLeftClick), true);
@@ -216,13 +237,16 @@ namespace Parse.WpfControls.SyntaxEditorComponents
             };
         }
 
+        private void CompletionItems2_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+        }
+
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
 
             this.renderCanvas = (TextViewer)Template.FindName("PART_RenderCanvas", this);
             this.scrollViewer = (ScrollViewer)Template.FindName("PART_ContentHost", this);
-            this.completionList = (CompletionList)Template.FindName("PART_CompletionList", this);
         }
 
         private int GetLineIndexFromCaretIndex(int caretIndex)
@@ -410,7 +434,7 @@ namespace Parse.WpfControls.SyntaxEditorComponents
         {
             LineFormattedText result = new LineFormattedText();
 
-            foreach (var token in StringUtility.SplitAndKeep(line, this.DelimiterSet.ToArray()).ToList())
+            foreach (var token in StringUtility.SplitAndKeep(line, this.DelimiterSet.Cast<string>().ToArray()).ToList())
                 result.Add(this.GetFormattedText(token));
 
             return result;
@@ -486,20 +510,9 @@ namespace Parse.WpfControls.SyntaxEditorComponents
                                                                                 this.HorizontalOffset, this.VerticalOffset, this.LineHeight));
         }
 
-        /// <summary>
-        /// This function adds to the editor a delimiter that is used to separate.
-        /// </summary>
-        /// <param name="delimiter"></param>
-        public void AddDelimiter(string delimiter)
-        {
-            this.DelimiterSet.Add(delimiter);
-        }
-
         public void AddCompletionList(CompletionItemType type, string item)
         {
-            var context = this.completionList.DataContext as CompletionListViewModel;
-
-            context.AddCollection(type, item);
+            this.CompletionItems.Add(new CompletionItem() { ItemType = type, ItemName = item });
         }
 
         /// <summary>

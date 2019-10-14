@@ -6,7 +6,7 @@ namespace Parse.WpfControls.Algorithms
     /// <summary>
     /// 
     /// </summary>
-    public class VSLikeSimilarityComparison : ISimilarityComparison
+    public class LikeVSSimilarityComparison : ISimilarityComparison
     {
         private uint GetPremium(List<uint> matchedIndexes)
         {

@@ -16,7 +16,7 @@ namespace Parse.WpfControls.SyntaxEditorComponents.ViewModels
         /// This member means filtered candidate by the input string.
         /// </summary>
         private CompletionItem[] filteredCandidate;
-        private ISimilarityComparison similarity = new VSLikeSimilarityComparison();
+        private ISimilarityComparison similarity = new LikeVSSimilarityComparison();
         private SortedSet<CompletionItem> totalCollection = new SortedSet<CompletionItem>(new CompletionItemComparer());
         private HashSet<CompletionItem> availableCollection = new HashSet<CompletionItem>();
         private HashSet<CompletionItem> filteredAvailableCollection = new HashSet<CompletionItem>();
@@ -162,7 +162,7 @@ namespace Parse.WpfControls.SyntaxEditorComponents.ViewModels
             }
         }
 
-        public void Clear()
+        public void Init()
         {
             foreach (var item in this.codeContents) item.IsFiltering = false;
         }
@@ -242,6 +242,10 @@ namespace Parse.WpfControls.SyntaxEditorComponents.ViewModels
 
             this.totalCollection.Add(new CompletionItem() { ImageSource = imgSrc, ItemName = name, ItemType = type });
         }
+
+        public void ClearCollection() => this.totalCollection.Clear();
+        public bool IsExistCollection() => this.availableCollection.Count() > 0;
+        public void SetSimilarityComparison(ISimilarityComparison similarity) => this.similarity = similarity;
     }
 
 

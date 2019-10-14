@@ -1,5 +1,6 @@
 ﻿using Parse.FrontEnd.Parsers.Collections;
 using Parse.WpfControls.SyntaxEditorComponents;
+using Parse.WpfControls.SyntaxEditorComponents.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -60,12 +61,12 @@ namespace WpfApp.Behaviors
             mainWindow.syntaxEditor.TextArea.AddCompletionList(CompletionItemType.Property, "HighLight");
             mainWindow.syntaxEditor.TextArea.AddCompletionList(CompletionItemType.Property, "HightIlHe");
 
-            mainWindow.syntaxEditor.TextArea.AddDelimiter(" ");
-            mainWindow.syntaxEditor.TextArea.AddDelimiter(Environment.NewLine);
-            mainWindow.syntaxEditor.TextArea.AddDelimiter("(");
-            mainWindow.syntaxEditor.TextArea.AddDelimiter(")");
-            mainWindow.syntaxEditor.TextArea.AddDelimiter("{");
-            mainWindow.syntaxEditor.TextArea.AddDelimiter("}");
+            mainWindow.syntaxEditor.TextArea.DelimiterSet.Add(" ");
+            mainWindow.syntaxEditor.TextArea.DelimiterSet.Add(Environment.NewLine);
+            mainWindow.syntaxEditor.TextArea.DelimiterSet.Add("(");
+            mainWindow.syntaxEditor.TextArea.DelimiterSet.Add(")");
+            mainWindow.syntaxEditor.TextArea.DelimiterSet.Add("{");
+            mainWindow.syntaxEditor.TextArea.DelimiterSet.Add("}");
 
             //            this.editor.SetComponents(this.parser);
 

@@ -1,8 +1,9 @@
-﻿using System;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 
 namespace Parse.WpfControls.SyntaxEditorComponents.Models
 {
+    public enum CompletionItemType { Field, Keyword, Property, Enum, Namespace, CodeSnipp, Function, Event, Delegate, Class, Struct, Interface };
+
     public class CodeContentInfo : INotifyPropertyChanged
     {
         public string ImgSrc { get; }
@@ -31,11 +32,7 @@ namespace Parse.WpfControls.SyntaxEditorComponents.Models
 
         protected void OnPropertyChanged(string name)
         {
-            PropertyChangedEventHandler handler = PropertyChanged;
-            if (handler != null)
-            {
-                handler(this, new PropertyChangedEventArgs(name));
-            }
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
     }
 }

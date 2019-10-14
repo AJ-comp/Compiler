@@ -81,9 +81,10 @@
   <ItemGroup>
     <Compile Include="Algorithms\ISimilarityComparison.cs" />
     <Compile Include="Algorithms\NaiveSimilarityComparison.cs" />
-    <Compile Include="Algorithms\VSLikeSimilarityComparison.cs" />
+    <Compile Include="Algorithms\LikeVSSimilarityComparison.cs" />
     <Compile Include="AttachedProperties\TextBlockExtension.cs" />
     <Compile Include="AttachedProperties\TextBoxExtension.cs" />
+    <Compile Include="Behaviors\CompletionListBehavior.cs" />
     <Compile Include="Converters\EventArgConverterExtension.cs" />
     <Compile Include="Converters\FontReleateConverter.cs" />
     <Compile Include="Converters\LineHeightBasedFontSizeConverter.cs" />
@@ -96,9 +97,8 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="SyntaxEditorComponents\Behaviors\DynamicToggleButtonCreateBehavior.cs" />
-    <Compile Include="SyntaxEditorComponents\Behaviors\RedirectRoutedEventBehavior.cs" />
-    <Compile Include="SyntaxEditorComponents\Behaviors\CompletionListBehavior.cs" />
-    <Compile Include="SyntaxEditorComponents\Behaviors\ZoomScrollBehavior.cs" />
+    <Compile Include="Behaviors\RedirectRoutedEventBehavior.cs" />
+    <Compile Include="Behaviors\ZoomScrollBehavior.cs" />
     <Compile Include="SyntaxEditorComponents\Models\CodeContentInfo.cs" />
     <Compile Include="SyntaxEditorComponents\Views\CompletionList.xaml.cs">
       <DependentUpon>CompletionList.xaml</DependentUpon>
@@ -167,6 +167,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Common\" />
+    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\property.png" />

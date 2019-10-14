@@ -3,7 +3,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Interactivity;
 
-namespace Parse.WpfControls.SyntaxEditorComponents.Behaviors
+namespace Parse.WpfControls.Behaviors
 {
     /// <summary>
     /// This class defines behavior pattern related to scrolling including zoom feature.
@@ -14,6 +14,18 @@ namespace Parse.WpfControls.SyntaxEditorComponents.Behaviors
         private double MaxFontSize { get; set; } = 50;
         /// <summary>This member switch to 'true' value while the user pressed Ctrl key.</summary>
         private bool zoomingReady = false;
+
+        public Key ZoomingStateEntryKey
+        {
+            get { return (Key)GetValue(ZoomingStateEntryKeyProperty); }
+            set { SetValue(ZoomingStateEntryKeyProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for ZoomingStateEntryKey.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty ZoomingStateEntryKeyProperty =
+            DependencyProperty.Register("ZoomingStateEntryKey", typeof(Key), typeof(ZoomScrollBehavior), new PropertyMetadata(Key.LeftCtrl));
+
+
 
         protected override void OnDetaching()
         {
@@ -35,18 +47,12 @@ namespace Parse.WpfControls.SyntaxEditorComponents.Behaviors
 
         private void AssociatedObject_PreviewKeyDown(object sender, KeyEventArgs e)
         {
-            if (e.Key == Key.LeftCtrl)
-            {
-                this.zoomingReady = true;
-            }
+            if (e.Key == this.ZoomingStateEntryKey) this.zoomingReady = true;
         }
 
         private void AssociatedObject_PreviewKeyUp(object sender, KeyEventArgs e)
         {
-            if (e.Key == Key.LeftCtrl)
-            {
-                this.zoomingReady = false;
-            }
+            if (e.Key == this.ZoomingStateEntryKey) this.zoomingReady = false;
         }
 
         private void AssociatedObject_PreviewMouseWheel(object sender, MouseWheelEventArgs e)

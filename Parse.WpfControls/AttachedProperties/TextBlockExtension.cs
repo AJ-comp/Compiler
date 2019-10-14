@@ -8,7 +8,7 @@ using System.Windows.Documents;
 
 namespace Parse.WpfControls.AttachedProperties
 {
-    static class TextBlockExtension
+    class TextBlockExtension : DependencyObject
     {
         #region BoldIndexes
         public static string GetBoldIndexes(DependencyObject item)

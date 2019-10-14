@@ -29,7 +29,7 @@ namespace Parse.WpfControls.SyntaxEditorComponents.Behaviors
             CompletionList completionList = sender as CompletionList;
             var context = completionList.DataContext as CompletionListViewModel;
 
-            context.Clear();
+            context.Init();
         }
 
         private void AssociatedObject_Opened(object sender, System.EventArgs e)
@@ -51,7 +51,6 @@ namespace Parse.WpfControls.SyntaxEditorComponents.Behaviors
                 else if (item.ItemType == CompletionItemType.Struct) completionList.structBtn.Visibility = Visibility.Visible;
                 else if (item.ItemType == CompletionItemType.Interface) completionList.interfaceBtn.Visibility = Visibility.Visible;
             }
-
             
         }
     }

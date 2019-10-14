@@ -4,7 +4,7 @@ using System.Windows.Input;
 
 namespace Parse.WpfControls.AttachedProperties
 {
-    static class TextBoxExtension
+    class TextBoxExtension : DependencyObject
     {
         #region TabSizeEnable
         public static bool GetTabSizeEnable(DependencyObject item)
@@ -68,7 +68,5 @@ namespace Parse.WpfControls.AttachedProperties
             }
         }
         #endregion
-
-
     }
 }

@@ -4,7 +4,8 @@
                     xmlns:host="clr-namespace:Parse.WpfControls"
                     xmlns:syntaxcomponent="clr-namespace:Parse.WpfControls.SyntaxEditorComponents"
                     xmlns:views="clr-namespace:Parse.WpfControls.SyntaxEditorComponents.Views"
-                    xmlns:behaviors="clr-namespace:Parse.WpfControls.SyntaxEditorComponents.Behaviors"
+                    xmlns:System="clr-namespace:System;assembly=mscorlib"
+                    xmlns:behaviors="clr-namespace:Parse.WpfControls.Behaviors"
                     xmlns:attached="clr-namespace:Parse.WpfControls.AttachedProperties">
 
     <Style TargetType="{x:Type syntaxcomponent:TextArea}">
@@ -38,7 +39,6 @@
                                                             TextOptions.TextRenderingMode="ClearType" TextOptions.TextFormattingMode="Display"/>
 
                             <ScrollViewer x:Name="PART_ContentHost" Background="#00FFFFFF"/>
-                            <views:CompletionList x:Name="PART_CompletionList"/>
 
                         </Grid>
                     </Border>
@@ -73,11 +73,12 @@
                                 <Grid Margin="{TemplateBinding Padding}">
                                     <syntaxcomponent:TextArea x:Name="PART_TextArea">
                                         <i:Interaction.Behaviors>
-                                            <behaviors:ZoomScrollBehavior/>
-                                            <behaviors:CompletionListBehavior/>
+                                            <behaviors:CompletionListBehavior CloseCharacters="{Binding ElementName=PART_TextArea, Path=DelimiterSet}"
+                                                                              Items="{Binding ElementName=PART_TextArea, Path=CompletionItems}"/>
+                                            <behaviors:ZoomScrollBehavior />
                                         </i:Interaction.Behaviors>
                                     </syntaxcomponent:TextArea>
-
+                                    
                                 </Grid>
 
                             </Grid>
