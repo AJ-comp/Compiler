@@ -85,7 +85,6 @@
     <Compile Include="AttachedProperties\TextBlockExtension.cs" />
     <Compile Include="AttachedProperties\TextBoxBehavior.cs" />
     <Compile Include="Behaviors\CompletionListBehavior.cs" />
-    <Compile Include="Behaviors\HighlightBehavior.cs" />
     <Compile Include="Common\ExtensionTextBox.cs" />
     <Compile Include="Converters\EventArgConverterExtension.cs" />
     <Compile Include="Converters\FontReleateConverter.cs" />
@@ -98,32 +97,30 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="SyntaxEditorComponents\Behaviors\DynamicToggleButtonCreateBehavior.cs" />
+    <Compile Include="Behaviors\DynamicToggleButtonCreateBehavior.cs" />
     <Compile Include="Behaviors\RedirectRoutedEventBehavior.cs" />
     <Compile Include="Behaviors\ZoomScrollBehavior.cs" />
-    <Compile Include="SyntaxEditorComponents\Models\CodeContentInfo.cs" />
-    <Compile Include="SyntaxEditorComponents\Views\CompletionList.xaml.cs">
+    <Compile Include="Models\CodeContentInfo.cs" />
+    <Compile Include="Views\CompletionList.xaml.cs">
       <DependentUpon>CompletionList.xaml</DependentUpon>
     </Compile>
-    <Compile Include="SyntaxEditorComponents\DrawingAlgorithm.cs" />
-    <Compile Include="SyntaxEditorComponents\EventArgs\EditorScrollChangedEventArgs.cs" />
-    <Compile Include="SyntaxEditorComponents\EventArgs\EditorRenderedEventArgs.cs" />
-    <Compile Include="SyntaxEditorComponents\IntelliPrompt.cs" />
-    <Compile Include="SyntaxEditorComponents\Models\CompletionItem.cs" />
-    <Compile Include="SyntaxEditorComponents\TextArea.cs" />
-    <Compile Include="SyntaxEditorComponents\TextViewer.cs" />
-    <Compile Include="SyntaxEditorComponents\TextStyle.cs" />
-    <Compile Include="Editor.cs" />
-    <Compile Include="SyntaxEditorComponents\DrawingControl.cs" />
-    <Compile Include="SyntaxEditorComponents\ViewModels\CompletionListViewModel.cs" />
+    <Compile Include="Common\DrawingAlgorithm.cs" />
+    <Compile Include="EventArgs\EditorScrollChangedEventArgs.cs" />
+    <Compile Include="EventArgs\EditorRenderedEventArgs.cs" />
+    <Compile Include="Models\CompletionItem.cs" />
+    <Compile Include="HighlightTextBox.cs" />
+    <Compile Include="TextViewer.cs" />
+    <Compile Include="TextStyle.cs" />
+    <Compile Include="Common\DrawingControl.cs" />
+    <Compile Include="ViewModels\CompletionListViewModel.cs" />
     <Compile Include="Utilities\StringUtility.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
-    <Page Include="SyntaxEditorComponents\Views\CompletionList.xaml">
+    <Page Include="Views\CompletionList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Themes\Editor.xaml">
+    <Page Include="Themes\HighlightTextBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -167,9 +164,7 @@
       <Name>Parse</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Models\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Resource Include="Resources\property.png" />
   </ItemGroup>

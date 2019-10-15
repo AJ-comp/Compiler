@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace Parse.WpfControls.SyntaxEditorComponents.EventArgs
+namespace Parse.WpfControls.EventArgs
 {
     class EditorScrollChangedEventArgs : RoutedEventArgs
     {

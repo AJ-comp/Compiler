@@ -158,6 +158,10 @@
       <Project>{EAF7D943-D2F9-4BB0-929F-04DB7B59D9D5}</Project>
       <Name>Parse.FrontEnd.Parsers</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Parse.WpfControls.SyntaxEditor\Parse.WpfControls.SyntaxEditor.csproj">
+      <Project>{dccedeb5-9ca4-41fe-ab6b-50e4bcc64ee6}</Project>
+      <Name>Parse.WpfControls.SyntaxEditor</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Parse.WpfControls\Parse.WpfControls.csproj">
       <Project>{1d389520-0862-434b-82f9-ad0c41c2db5f}</Project>
       <Name>Parse.WpfControls</Name>

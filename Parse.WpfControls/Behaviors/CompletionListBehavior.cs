@@ -1,6 +1,6 @@
-﻿using Parse.WpfControls.SyntaxEditorComponents.Models;
-using Parse.WpfControls.SyntaxEditorComponents.ViewModels;
-using Parse.WpfControls.SyntaxEditorComponents.Views;
+﻿using Parse.WpfControls.Models;
+using Parse.WpfControls.ViewModels;
+using Parse.WpfControls.Views;
 using System;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
@@ -17,7 +17,7 @@ namespace Parse.WpfControls.Behaviors
     /// <summary>
     /// This behavior class gives to TextBox an ability that can interaction CompletionList Module.
     /// </summary>
-    class CompletionListBehavior : Behavior<TextBoxBase>
+    public class CompletionListBehavior : Behavior<TextBoxBase>
     {
         private int caretIndexWhenCLOccur;
         private static CompletionList completionList = new CompletionList();

@@ -8,6 +8,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
     xmlns:wpfcontrols="clr-namespace:Parse.WpfControls;assembly=Parse.WpfControls"
+    xmlns:syntaxeditor="clr-namespace:Parse.WpfControls.SyntaxEditor;assembly=Parse.WpfControls.SyntaxEditor"
     xmlns:behaviors="clr-namespace:WpfApp.Behaviors"
     xmlns:viewModels="clr-namespace:WpfApp.ViewModels"
     xmlns:lex="http://wpflocalizeextension.codeplex.com" 
@@ -41,7 +42,7 @@
                         <RowDefinition Height="auto"/>
                     </Grid.RowDefinitions>
 
-                    <wpfcontrols:Editor Name="syntaxEditor"  Grid.Row="0"
+                    <syntaxeditor:SyntaxEditor Name="syntaxEditor"  Grid.Row="0"
                                         FontSize="15" 
                                         FontFamily="Arial"
                                         IsLineNumberingVisible="True"  LineNumberForeColor="DarkGreen"
@@ -54,7 +55,7 @@
                             </i:EventTrigger>
                         </i:Interaction.Triggers>-->
 
-                    </wpfcontrols:Editor>
+                    </syntaxeditor:SyntaxEditor>
 
                     <ListView Name="errorList" Grid.Row="1" ItemsSource="{Binding AlarmLists}">
                         <ListView.Resources>

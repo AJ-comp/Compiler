@@ -226,4 +226,16 @@ namespace Parse.WpfControls.Common
             */
         }
     }
+
+
+    public class SelectionInfo
+    {
+        public int Length { get; internal set; }
+
+        public int StartLine { get; internal set; }
+        public int StartCaretFromLine { get; internal set; }
+
+        public int EndLine { get; internal set; }
+        public int EndCaretFromLine { get; internal set; }
+    }
 }

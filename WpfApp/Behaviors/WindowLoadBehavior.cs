@@ -1,12 +1,7 @@
 ﻿using Parse.FrontEnd.Parsers.Collections;
-using Parse.WpfControls.SyntaxEditorComponents;
-using Parse.WpfControls.SyntaxEditorComponents.Models;
+using Parse.WpfControls.Models;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Forms;
 using System.Windows.Interactivity;

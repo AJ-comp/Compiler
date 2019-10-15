@@ -1,6 +1,6 @@
 ﻿using Parse.WpfControls.Common;
-using Parse.WpfControls.SyntaxEditorComponents.EventArgs;
-using Parse.WpfControls.SyntaxEditorComponents.Models;
+using Parse.WpfControls.EventArgs;
+using Parse.WpfControls.Models;
 using Parse.WpfControls.Utilities;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -12,9 +12,9 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 
-namespace Parse.WpfControls.SyntaxEditorComponents
+namespace Parse.WpfControls
 {
-    public class TextArea : ExtensionTextBox
+    public class HighlightTextBox : ExtensionTextBox
     {
         private TextViewer renderCanvas;
         private ScrollViewer scrollViewer;
@@ -34,7 +34,7 @@ namespace Parse.WpfControls.SyntaxEditorComponents
 
         // Using a DependencyProperty as the backing store for TabSize.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty TabSizeProperty =
-            DependencyProperty.Register("TabSize", typeof(int), typeof(TextArea), new PropertyMetadata(4));
+            DependencyProperty.Register("TabSize", typeof(int), typeof(HighlightTextBox), new PropertyMetadata(4));
         #endregion
 
         #region Dependency Properties related with CompletionListBehavior
@@ -46,7 +46,7 @@ namespace Parse.WpfControls.SyntaxEditorComponents
 
         // Using a DependencyProperty as the backing store for CompletionItems.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty CompletionItemsProperty =
-            DependencyProperty.Register("CompletionItems", typeof(ObservableCollection<CompletionItem>), typeof(TextArea), new PropertyMetadata(null));
+            DependencyProperty.Register("CompletionItems", typeof(ObservableCollection<CompletionItem>), typeof(HighlightTextBox), new PropertyMetadata(null));
 
 
         public StringCollection DelimiterSet
@@ -57,7 +57,7 @@ namespace Parse.WpfControls.SyntaxEditorComponents
 
         // Using a DependencyProperty as the backing store for DelimiterSet.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty DelimiterSetProperty =
-            DependencyProperty.Register("DelimiterSet", typeof(StringCollection), typeof(TextArea), new PropertyMetadata(null));
+            DependencyProperty.Register("DelimiterSet", typeof(StringCollection), typeof(HighlightTextBox), new PropertyMetadata(null));
         #endregion
 
         #region Dependency Properties releated with Visual (Render)
@@ -69,12 +69,12 @@ namespace Parse.WpfControls.SyntaxEditorComponents
 
         // Using a DependencyProperty as the backing store for LineHeight.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty LineHeightProperty =
-            DependencyProperty.Register("LineHeight", typeof(double), typeof(TextArea), new PropertyMetadata(new PropertyChangedCallback(LineHeightChanged)));
+            DependencyProperty.Register("LineHeight", typeof(double), typeof(HighlightTextBox), new PropertyMetadata(new PropertyChangedCallback(LineHeightChanged)));
 
 
         public static void LineHeightChanged(DependencyObject dp, DependencyPropertyChangedEventArgs args)
         {
-            TextArea area = dp as TextArea;
+            HighlightTextBox area = dp as HighlightTextBox;
 
             TextBlock.SetLineStackingStrategy(area, LineStackingStrategy.BlockLineHeight);
             TextBlock.SetLineHeight(area, (double)args.NewValue);
@@ -88,7 +88,7 @@ namespace Parse.WpfControls.SyntaxEditorComponents
 
         // Using a DependencyProperty as the backing store for SelectionLineBrush.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty SelectionLineBrushProperty =
-            DependencyProperty.Register("SelectionLineBrush", typeof(Brush), typeof(TextArea), new PropertyMetadata(Brushes.Transparent));
+            DependencyProperty.Register("SelectionLineBrush", typeof(Brush), typeof(HighlightTextBox), new PropertyMetadata(Brushes.Transparent));
 
 
         public Brush SelectionLineBorderBrush
@@ -99,7 +99,7 @@ namespace Parse.WpfControls.SyntaxEditorComponents
 
         // Using a DependencyProperty as the backing store for SelectionBorderBrush.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty SelectionLineBorderBrushProperty =
-            DependencyProperty.Register("SelectionLineBorderBrush", typeof(Brush), typeof(TextArea), new PropertyMetadata(Brushes.Transparent));
+            DependencyProperty.Register("SelectionLineBorderBrush", typeof(Brush), typeof(HighlightTextBox), new PropertyMetadata(Brushes.Transparent));
 
 
         public int SelectionLineBorderThickness
@@ -110,12 +110,12 @@ namespace Parse.WpfControls.SyntaxEditorComponents
 
         // Using a DependencyProperty as the backing store for SelectionBorderThickness.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty SelectionLineBorderThicknessProperty =
-            DependencyProperty.Register("SelectionLineBorderThickness", typeof(int), typeof(TextArea), new PropertyMetadata(1));
+            DependencyProperty.Register("SelectionLineBorderThickness", typeof(int), typeof(HighlightTextBox), new PropertyMetadata(1));
         #endregion
 
         #region Routed Events
         public static readonly RoutedEvent ScrollChangedEvent = EventManager.RegisterRoutedEvent("ScrollChanged", RoutingStrategy.Bubble,
-            typeof(RoutedEventHandler), typeof(TextArea));
+            typeof(RoutedEventHandler), typeof(HighlightTextBox));
 
         // .NET wrapper
         public event RoutedEventHandler ScrollChanged
@@ -125,7 +125,7 @@ namespace Parse.WpfControls.SyntaxEditorComponents
         }
 
         public static readonly RoutedEvent RenderedEvent = EventManager.RegisterRoutedEvent("Rendered", RoutingStrategy.Bubble,
-            typeof(RoutedEventHandler), typeof(TextArea));
+            typeof(RoutedEventHandler), typeof(HighlightTextBox));
 
         // .NET wrapper
         public event RoutedEventHandler Rendered
@@ -136,12 +136,12 @@ namespace Parse.WpfControls.SyntaxEditorComponents
         #endregion
 
 
-        static TextArea()
+        static HighlightTextBox()
         {
-            DefaultStyleKeyProperty.OverrideMetadata(typeof(TextArea), new FrameworkPropertyMetadata(typeof(TextArea)));
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(HighlightTextBox), new FrameworkPropertyMetadata(typeof(HighlightTextBox)));
         }
 
-        public TextArea()
+        public HighlightTextBox()
         {
             SetValue(CompletionItemsProperty, new ObservableCollection<CompletionItem>());
             SetValue(DelimiterSetProperty, new StringCollection());
@@ -248,7 +248,7 @@ namespace Parse.WpfControls.SyntaxEditorComponents
             {
                 InvalidateVisual();
 
-                e.RoutedEvent = TextArea.ScrollChangedEvent;
+                e.RoutedEvent = HighlightTextBox.ScrollChangedEvent;
                 this.RaiseEvent(e);
             }
         }
@@ -286,7 +286,7 @@ namespace Parse.WpfControls.SyntaxEditorComponents
 
             int startNumber = ViewLineString.First().AbsoluteLineIndex + 1;
             int endNumber = ViewLineString.Last().AbsoluteLineIndex + 1;
-            this.RaiseEvent(new EditorRenderedEventArgs(TextArea.RenderedEvent, startLine, endNumber, 
+            this.RaiseEvent(new EditorRenderedEventArgs(HighlightTextBox.RenderedEvent, startLine, endNumber, 
                                                                                 this.HorizontalOffset, this.VerticalOffset, this.LineHeight));
         }
 

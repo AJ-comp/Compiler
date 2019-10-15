@@ -1,10 +1,10 @@
-﻿using Parse.WpfControls.SyntaxEditorComponents.Models;
-using Parse.WpfControls.SyntaxEditorComponents.ViewModels;
-using Parse.WpfControls.SyntaxEditorComponents.Views;
+﻿using Parse.WpfControls.Models;
+using Parse.WpfControls.ViewModels;
+using Parse.WpfControls.Views;
 using System.Windows;
 using System.Windows.Interactivity;
 
-namespace Parse.WpfControls.SyntaxEditorComponents.Behaviors
+namespace Parse.WpfControls.Behaviors
 {
     class DynamicToggleButtonCreateBehavior : Behavior<CompletionList>
     {

@@ -1,13 +1,4 @@
-﻿using Parse.FrontEnd.Grammars.MiniC;
-using Parse.FrontEnd.Parsers.Collections;
-using Parse.FrontEnd.Parsers.LR;
-using Parse.WpfControls.SyntaxEditorComponents;
-using System;
-using System.Text.RegularExpressions;
-using System.Windows;
-using System.Windows.Forms;
-using System.Windows.Media;
-using WpfApp.ViewModels;
+﻿using WpfApp.ViewModels;
 
 namespace WpfApp
 {

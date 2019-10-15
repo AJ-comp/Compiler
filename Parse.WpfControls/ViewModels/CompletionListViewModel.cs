@@ -2,13 +2,13 @@
 using GalaSoft.MvvmLight.Command;
 using Parse.WpfControls.Algorithms;
 using Parse.WpfControls.Properties;
-using Parse.WpfControls.SyntaxEditorComponents.Models;
+using Parse.WpfControls.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 
-namespace Parse.WpfControls.SyntaxEditorComponents.ViewModels
+namespace Parse.WpfControls.ViewModels
 {
     public class CompletionListViewModel : ViewModelBase
     {

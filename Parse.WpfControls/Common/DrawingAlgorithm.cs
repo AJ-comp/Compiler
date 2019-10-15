@@ -1,4 +1,4 @@
-﻿namespace Parse.WpfControls.SyntaxEditorComponents
+﻿namespace Parse.WpfControls
 {
     public class DrawingAlgorithm
     {

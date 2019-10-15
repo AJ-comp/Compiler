@@ -2,7 +2,7 @@
 using System.Windows;
 using System.Windows.Media;
 
-namespace Parse.WpfControls.SyntaxEditorComponents
+namespace Parse.WpfControls
 {
     public class DrawingControl : FrameworkElement
     {

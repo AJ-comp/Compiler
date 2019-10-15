@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Parse.WpfControls.SyntaxEditorComponents.Models
+namespace Parse.WpfControls.Models
 {
     public class CompletionItem
     {

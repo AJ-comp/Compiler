@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace Parse.WpfControls.SyntaxEditorComponents.Models
+namespace Parse.WpfControls.Models
 {
     public enum CompletionItemType { Field, Keyword, Property, Enum, Namespace, CodeSnipp, Function, Event, Delegate, Class, Struct, Interface };
 

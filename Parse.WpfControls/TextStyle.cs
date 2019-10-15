@@ -1,6 +1,6 @@
 ﻿using System.Windows.Media;
 
-namespace Parse.WpfControls.SyntaxEditorComponents
+namespace Parse.WpfControls
 {
     public class TextStyle
     {
