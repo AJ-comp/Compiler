@@ -53,12 +53,12 @@
                                 <mvvm:EventToCommand Command="{Binding TextChangedCommand}" PassEventArgsToCommand="True"/>
                             </i:EventTrigger>
                         </i:Interaction.Triggers>-->
-                        
+
                     </wpfcontrols:Editor>
 
                     <ListView Name="errorList" Grid.Row="1" ItemsSource="{Binding AlarmLists}">
                         <ListView.Resources>
-                            
+
                         </ListView.Resources>
                         <ListView.View>
                             <GridView>

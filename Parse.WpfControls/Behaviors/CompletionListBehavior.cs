@@ -2,7 +2,6 @@
 using Parse.WpfControls.SyntaxEditorComponents.ViewModels;
 using Parse.WpfControls.SyntaxEditorComponents.Views;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Linq;
@@ -18,7 +17,7 @@ namespace Parse.WpfControls.Behaviors
     /// <summary>
     /// This behavior class gives to TextBox an ability that can interaction CompletionList Module.
     /// </summary>
-    class CompletionListBehavior : Behavior<TextBox>
+    class CompletionListBehavior : Behavior<TextBoxBase>
     {
         private int caretIndexWhenCLOccur;
         private static CompletionList completionList = new CompletionList();
@@ -40,7 +39,6 @@ namespace Parse.WpfControls.Behaviors
         #endregion
 
         #region Items DP
-
         public ObservableCollection<CompletionItem> Items
         {
             get { return (ObservableCollection<CompletionItem>)GetValue(ItemsProperty); }
@@ -77,6 +75,19 @@ namespace Parse.WpfControls.Behaviors
             }
         }
         #endregion
+
+        #region LineHeight DP
+        public double LineHeight
+        {
+            get { return (double)GetValue(LineHeightProperty); }
+            set { SetValue(LineHeightProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for LineHeight.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty LineHeightProperty =
+            DependencyProperty.Register("LineHeight", typeof(double), typeof(CompletionListBehavior), new PropertyMetadata((double)0));
+        #endregion
+
 
         public CompletionListBehavior()
         {
@@ -179,7 +190,7 @@ namespace Parse.WpfControls.Behaviors
             completionList.StaysOpen = false;
             completionList.Placement = PlacementMode.Relative;
             completionList.PlacementTarget = textbox;
-            completionList.VerticalOffset = rect.Y + textbox.FontSize;
+            completionList.VerticalOffset = (this.LineHeight > 0) ? rect.Y + this.LineHeight : rect.Y + textbox.FontSize;
             completionList.HorizontalOffset = rect.X;
 
             context.InputString = textbox.Text.Substring(caretIndexWhenCLOccur, textbox.CaretIndex - caretIndexWhenCLOccur);

@@ -4,8 +4,10 @@ using System.Windows.Input;
 
 namespace Parse.WpfControls.AttachedProperties
 {
-    class TextBoxExtension : DependencyObject
+    class TextBoxBehavior : DependencyObject
     {
+        private static bool backupAcceptTab = false;
+
         #region TabSizeEnable
         public static bool GetTabSizeEnable(DependencyObject item)
         {
@@ -19,16 +21,23 @@ namespace Parse.WpfControls.AttachedProperties
 
         // Using a DependencyProperty as the backing store for CanFocusOnLoad.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty TabSizeEnableProperty =
-            DependencyProperty.RegisterAttached("TabSizeEnable", typeof(bool), typeof(TextBoxExtension), new PropertyMetadata(TabSizeEnableChanged));
+            DependencyProperty.RegisterAttached("TabSizeEnable", typeof(bool), typeof(TextBoxBehavior), new PropertyMetadata(TabSizeEnableChanged));
 
         private static void TabSizeEnableChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var textBox = d as TextBox;
 
             if ((bool)e.NewValue == true)
+            {
+                backupAcceptTab = textBox.AcceptsTab;
+                textBox.AcceptsTab = true;
                 textBox.PreviewKeyDown += TextBox_TabSizeHandler;
+            }
             else
+            {
+                textBox.AcceptsTab = backupAcceptTab;
                 textBox.PreviewKeyDown -= TextBox_TabSizeHandler;
+            }
         }
         #endregion
 
@@ -46,7 +55,7 @@ namespace Parse.WpfControls.AttachedProperties
 
         // Using a DependencyProperty as the backing store for CanFocusOnLoad.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty TabSizeProperty =
-            DependencyProperty.RegisterAttached("TabSize", typeof(int), typeof(TextBoxExtension), new PropertyMetadata(TabSizeChanged));
+            DependencyProperty.RegisterAttached("TabSize", typeof(int), typeof(TextBoxBehavior), new PropertyMetadata(TabSizeChanged));
 
         private static void TabSizeChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {

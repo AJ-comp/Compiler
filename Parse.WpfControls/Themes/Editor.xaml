@@ -5,6 +5,7 @@
                     xmlns:syntaxcomponent="clr-namespace:Parse.WpfControls.SyntaxEditorComponents"
                     xmlns:views="clr-namespace:Parse.WpfControls.SyntaxEditorComponents.Views"
                     xmlns:System="clr-namespace:System;assembly=mscorlib"
+                    xmlns:converter="clr-namespace:Parse.WpfControls.Converters"
                     xmlns:behaviors="clr-namespace:Parse.WpfControls.Behaviors"
                     xmlns:attached="clr-namespace:Parse.WpfControls.AttachedProperties">
 
@@ -16,7 +17,6 @@
         </Style.Triggers>
 
         <Setter Property="AcceptsReturn" Value="True" />
-        <Setter Property="AcceptsTab" Value="True" />
         <Setter Property="HorizontalScrollBarVisibility" Value="Auto" />
         <Setter Property="VerticalScrollBarVisibility" Value="Auto" />
         <Setter Property="TextWrapping" Value="NoWrap"/>
@@ -24,8 +24,8 @@
         <Setter Property="SelectionLineBorderBrush" Value="DarkGray"/>
         <Setter Property="FontSize" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=FontSize, Mode=TwoWay}"/>
         <Setter Property="LineHeight" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=LineHeight}"/>
-        <Setter Property="attached:TextBoxExtension.TabSizeEnable" Value="True"/>
-        <Setter Property="attached:TextBoxExtension.TabSize" Value="{Binding RelativeSource={RelativeSource Mode=Self}, Path=TabSize}"/>
+        <Setter Property="attached:TextBoxBehavior.TabSizeEnable" Value="True"/>
+        <Setter Property="attached:TextBoxBehavior.TabSize" Value="{Binding RelativeSource={RelativeSource Mode=Self}, Path=TabSize}"/>
 
         <Setter Property="Template">
             <Setter.Value>
@@ -50,7 +50,7 @@
     <Style TargetType="{x:Type host:Editor}">
         <Setter Property="FontSize" Value="9"/>
         <Setter Property="LineNumberForeColor" Value="Aquamarine"/>
-        <Setter Property="LineHeight" Value="{Binding RelativeSource={RelativeSource Self}, Mode=OneWay, Path=FontSize}"/>
+        <Setter Property="LineHeight" Value="{Binding RelativeSource={RelativeSource Self}, Mode=OneWay, Path=FontSize, Converter={converter:LineHeightBasedFontSizeConverter}}"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type host:Editor}">
@@ -73,7 +73,8 @@
                                 <Grid Margin="{TemplateBinding Padding}">
                                     <syntaxcomponent:TextArea x:Name="PART_TextArea">
                                         <i:Interaction.Behaviors>
-                                            <behaviors:CompletionListBehavior CloseCharacters="{Binding ElementName=PART_TextArea, Path=DelimiterSet}"
+                                            <behaviors:CompletionListBehavior LineHeight="{Binding ElementName=PART_TextArea, Path=LineHeight}"
+                                                                            CloseCharacters="{Binding ElementName=PART_TextArea, Path=DelimiterSet}"
                                                                               Items="{Binding ElementName=PART_TextArea, Path=CompletionItems}"/>
                                             <behaviors:ZoomScrollBehavior />
                                         </i:Interaction.Behaviors>

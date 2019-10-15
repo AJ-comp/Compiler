@@ -1,14 +1,9 @@
 ﻿using Parse.WpfControls.SyntaxEditorComponents;
 using Parse.WpfControls.SyntaxEditorComponents.EventArgs;
-using System;
 using System.Collections.Generic;
-using System.Collections.Specialized;
 using System.Globalization;
-using System.Linq;
-using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Input;
 using System.Windows.Media;
 
 namespace Parse.WpfControls
@@ -47,6 +42,8 @@ namespace Parse.WpfControls
     {
         private double recentVerticalOffset = 0;
         private double recentHorizontalOffset = 0;
+        private int startLine = 0;
+        private int endLine = 1;
 
         private TextViewer lineNumbersCanvas;
 
@@ -102,9 +99,7 @@ namespace Parse.WpfControls
 
         // Using a DependencyProperty as the backing store for LineHeight.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty LineHeightProperty =
-            DependencyProperty.Register("LineHeight", typeof(double), typeof(Editor), new PropertyMetadata(null));
-
-
+            DependencyProperty.Register("LineHeight", typeof(double), typeof(Editor), new PropertyMetadata((double)0));
         #endregion
 
         #region Routed Events
@@ -165,6 +160,8 @@ namespace Parse.WpfControls
 
             this.recentHorizontalOffset = arg.HorizontalOffset;
             this.recentVerticalOffset = arg.VerticalOffset;
+            this.startLine = arg.ViewStartLineIndex;
+            this.endLine = arg.ViewEndLineIndex;
 
             this.InvalidateVisual();
         }
@@ -177,20 +174,18 @@ namespace Parse.WpfControls
         protected override void OnRender(DrawingContext drawingContext)
         {
             if (this.IsLoaded == false || this.lineNumbersCanvas == null || this.TextArea == null) return;
-            if (this.TextArea.ViewLineString.Count == 0) return;
+            if (this.endLine-this.startLine <= 0) return;
 
             this.lineNumbersCanvas.SetDrawStartingPos(0, this.recentVerticalOffset, this.LineHeight);
 
             List<FormattedText> lines = new List<FormattedText>();
 
-            int maxNumberOfDigit = this.TextArea.ViewLineString[this.TextArea.ViewLineString.Count - 1].AbsoluteLineIndex.ToString().Length;
+            int maxNumberOfDigit = endLine.ToString().Length;
             this.lineNumbersCanvas.Width = maxNumberOfDigit * this.FontSize;
-            for (int i=0; i<this.TextArea.ViewLineString.Count; i++)
+            for (int i=startLine; i<endLine; i++)
             {
-                FormattedText lineNumberingText = new FormattedText((this.TextArea.ViewLineString[i].AbsoluteLineIndex + 1).ToString(), 
-                    CultureInfo.InvariantCulture, FlowDirection.LeftToRight,
-                    new Typeface(FontFamily, FontStyle, FontWeight, FontStretch),
-                    this.FontSize, this.LineNumberForeColor);
+                FormattedText lineNumberingText = new FormattedText((i + 1).ToString(), CultureInfo.InvariantCulture, FlowDirection.LeftToRight,
+                    new Typeface(FontFamily, FontStyle, FontWeight, FontStretch), this.FontSize, this.LineNumberForeColor);
 
                 lines.Add(lineNumberingText);
             }

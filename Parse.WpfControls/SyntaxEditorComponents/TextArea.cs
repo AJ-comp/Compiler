@@ -1,9 +1,7 @@
-﻿using Parse.WpfControls.AttachedProperties;
-using Parse.WpfControls.Behaviors;
+﻿using Parse.WpfControls.Common;
 using Parse.WpfControls.SyntaxEditorComponents.EventArgs;
 using Parse.WpfControls.SyntaxEditorComponents.Models;
 using Parse.WpfControls.Utilities;
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
@@ -16,20 +14,16 @@ using System.Windows.Media;
 
 namespace Parse.WpfControls.SyntaxEditorComponents
 {
-    public class TextArea : TextBox
+    public class TextArea : ExtensionTextBox
     {
         private TextViewer renderCanvas;
         private ScrollViewer scrollViewer;
 
-        private HashSet<SelectionInfo> selectionBlocks = new HashSet<SelectionInfo>();
         private Dictionary<string, TextStyle> textStyleDic = new Dictionary<string, TextStyle>();
         private Dictionary<string, TextStyle> patternStyleDic = new Dictionary<string, TextStyle>();
 
-        private int prevLineIndex = 0;
-        private int prevStartCaretIndexByLine = 0;
         /// <summary>This member means maximum showable line count at one go.</summary>
         private int maxViewLineOnce = 100;
-
 
         #region Dependency Property releated with TabSize Property
         public int TabSize
@@ -66,7 +60,7 @@ namespace Parse.WpfControls.SyntaxEditorComponents
             DependencyProperty.Register("DelimiterSet", typeof(StringCollection), typeof(TextArea), new PropertyMetadata(null));
         #endregion
 
-        #region Dependency Properties releated with HighlightingBehavior
+        #region Dependency Properties releated with Visual (Render)
         public double LineHeight
         {
             get { return (double)GetValue(LineHeightProperty); }
@@ -85,18 +79,6 @@ namespace Parse.WpfControls.SyntaxEditorComponents
             TextBlock.SetLineStackingStrategy(area, LineStackingStrategy.BlockLineHeight);
             TextBlock.SetLineHeight(area, (double)args.NewValue);
         }
-
-
-        public char BeforeCharFromCursor
-        {
-            get { return (char)GetValue(BeforeCharFromCursorProperty); }
-            set { SetValue(BeforeCharFromCursorProperty, value); }
-        }
-
-        // Using a DependencyProperty as the backing store for BeforeCharFromCursor.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty BeforeCharFromCursorProperty =
-            DependencyProperty.Register("BeforeCharFromCursor", typeof(char), typeof(TextArea), new PropertyMetadata(' '));
-
 
         public Brush SelectionLineBrush
         {
@@ -129,51 +111,6 @@ namespace Parse.WpfControls.SyntaxEditorComponents
         // Using a DependencyProperty as the backing store for SelectionBorderThickness.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty SelectionLineBorderThicknessProperty =
             DependencyProperty.Register("SelectionLineBorderThickness", typeof(int), typeof(TextArea), new PropertyMetadata(1));
-
-
-        public StringCollection LineString
-        {
-            get { return (StringCollection)GetValue(LineStringProperty); }
-            set { SetValue(LineStringProperty, value); }
-        }
-
-        // Using a DependencyProperty as the backing store for LineString.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty LineStringProperty =
-            DependencyProperty.Register("LineString", typeof(StringCollection), typeof(TextArea), new PropertyMetadata(new StringCollection()));
-
-
-        public List<ViewStringInfo> ViewLineString
-        {
-            get { return (List<ViewStringInfo>)GetValue(ViewLineStringProperty); }
-            set { SetValue(ViewLineStringProperty, value); }
-        }
-
-        // Using a DependencyProperty as the backing store for LineString.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty ViewLineStringProperty =
-            DependencyProperty.Register("ViewLineString", typeof(List<ViewStringInfo>), typeof(TextArea), new PropertyMetadata(new List<ViewStringInfo>()));
-
-
-        public int LineIndex
-        {
-            get { return (int)GetValue(LineIndexProperty); }
-            set { SetValue(LineIndexProperty, value); }
-        }
-
-        // Using a DependencyProperty as the backing store for LineIndex.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty LineIndexProperty =
-            DependencyProperty.Register("LineIndex", typeof(int), typeof(TextArea), new PropertyMetadata(0));
-
-
-        public int StartCaretIndexByLine
-        {
-            get { return (int)GetValue(StartCaretIndexByLineProperty); }
-            set { SetValue(StartCaretIndexByLineProperty, value); }
-        }
-
-        // Using a DependencyProperty as the backing store for CaretIndexBD.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty StartCaretIndexByLineProperty =
-            DependencyProperty.Register("StartCaretIndexByLine", typeof(int), typeof(TextArea), new PropertyMetadata(0));
-
         #endregion
 
         #region Routed Events
@@ -216,7 +153,6 @@ namespace Parse.WpfControls.SyntaxEditorComponents
             Loaded += (s, e) =>
             {
                 this.scrollViewer.ScrollChanged += OnScrollChanged;
-                this.SelectionChanged += TextArea_SelectionChanged;
 
                 InvalidateVisual();
             };
@@ -230,15 +166,8 @@ namespace Parse.WpfControls.SyntaxEditorComponents
 
             TextChanged += (s, e) =>
             {
-                TextChange changeInfo = e.Changes.First();
-                this.UpdateLineString(changeInfo);
-
                 InvalidateVisual();
             };
-        }
-
-        private void CompletionItems2_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
-        {
         }
 
         public override void OnApplyTemplate()
@@ -249,114 +178,8 @@ namespace Parse.WpfControls.SyntaxEditorComponents
             this.scrollViewer = (ScrollViewer)Template.FindName("PART_ContentHost", this);
         }
 
-        private int GetLineIndexFromCaretIndex(int caretIndex)
-        {
-            int result = 0;
-            int totalLength = 0;
-            for (int i = 0; i < this.LineString.Count; i++)
-            {
-                totalLength += this.LineString[i].Length + Environment.NewLine.Length;
-                if (totalLength > caretIndex) { result = i; break; }
-            }
-
-            return result;
-        }
-
-        private int GetStartIndexFromLineIndex(int lineIndex, int caretIndex)
-        {
-            int totalLength = 0;
-            for (int i = 0; i < lineIndex; i++) totalLength += this.LineString[i].Length + Environment.NewLine.Length;
-
-            return caretIndex - totalLength;
-        }
-
         private int GetStartLineOnViewPos(double topViewPos) => (int)(topViewPos / this.LineHeight);
 
-
-        /// <summary>
-        /// This function adds line-string an added string.
-        /// </summary>
-        /// <see cref=""/>
-        /// <param name="offset">Start position of addString</param>
-        /// <param name="addString">added string</param>
-        private void AddCharToLineString(int offset, string addString)
-        {
-            if (addString.Length == 0) return;
-
-            int lineIndex = this.GetLineIndexFromCaretIndex(offset);
-            int startCaretByLine = this.GetStartIndexFromLineIndex(lineIndex, offset);
-            this.LineString[lineIndex] = this.LineString[lineIndex].Insert(startCaretByLine, addString);
-
-            if (addString.Contains(Environment.NewLine) == false) return;
-
-            string[] lines = this.LineString[lineIndex].Split(new string[] { Environment.NewLine }, StringSplitOptions.None);
-
-            this.LineString[lineIndex] = lines.First();
-
-            for (int i = 1; i < lines.Length; i++)
-                this.LineString.Insert(lineIndex + i, lines[i]);
-        }
-
-        /// <summary>
-        /// This function removes from the line-string a string.
-        /// </summary>
-        /// <param name="changeInfo"></param>
-        private void DelCharFromLineString(TextChange changeInfo)
-        {
-            if (changeInfo.RemovedLength == 0) return;
-
-            int sLineIndex = this.GetLineIndexFromCaretIndex(changeInfo.Offset);
-            int startCaretByLine = this.GetStartIndexFromLineIndex(sLineIndex, changeInfo.Offset);
-
-            int endIndex = changeInfo.Offset + changeInfo.RemovedLength;
-            int eLineIndex = this.GetLineIndexFromCaretIndex(endIndex);
-            int endCaretByLine = this.GetStartIndexFromLineIndex(eLineIndex, endIndex);
-
-            string sLineString = this.LineString[sLineIndex];
-            string eLineString = this.LineString[eLineIndex];
-
-            if (sLineIndex == eLineIndex)
-                this.LineString[sLineIndex] = sLineString.Remove(startCaretByLine, endCaretByLine - startCaretByLine);
-            else
-            {
-                if (startCaretByLine < sLineString.Length) this.LineString[sLineIndex] = sLineString.Remove(startCaretByLine);
-                this.LineString[sLineIndex] += eLineString.Substring(endCaretByLine);
-
-                for (int i = sLineIndex + 1; i <= eLineIndex; i++) this.LineString.RemoveAt(sLineIndex + 1);
-            }
-
-            /*
-            // single character deletion process
-            if (this.SelectionBlocks.Count == 0)
-            {
-                if (this.StartCaretIndexByLine == 0)
-                {
-                    this.LineString[this.LineIndex - 1] += this.LineString[this.LineIndex];
-                    this.LineString.RemoveAt(this.LineIndex);
-                }
-                else this.LineString[this.LineIndex] = this.LineString[this.LineIndex].Remove(this.StartCaretIndexByLine-1, 1);
-            }
-            // block deletion process
-            else
-            {
-                foreach(var block in this.SelectionBlocks)
-                {
-                    string sLineString = this.LineString[block.StartLine];
-                    string eLineString = this.LineString[block.EndLine];
-
-                    if (block.StartLine == block.EndLine)
-                        this.LineString[block.StartLine] = sLineString.Remove(block.StartCaretFromLine, block.EndCaretFromLine - block.StartCaretFromLine);
-                    else
-                    {
-                        if (block.StartCaretFromLine < sLineString.Length)  this.LineString[block.StartLine] = sLineString.Remove(block.StartCaretFromLine);
-                        this.LineString[block.StartLine] += eLineString.Substring(block.EndCaretFromLine);
-
-                        for (int i = block.StartLine + 1; i <= block.EndLine; i++)  this.LineString.RemoveAt(block.StartLine + 1);
-                    }
-                }
-            }
-            */
-        }
 
         /// <summary>
         /// This function gets the line-string-collection
@@ -409,27 +232,6 @@ namespace Parse.WpfControls.SyntaxEditorComponents
             return ft;
         }
 
-        /// <summary>
-        /// This function updates a line-string when is changed string of editor.
-        /// </summary>
-        /// <param name="changeInfo">update information</param>
-        private void UpdateLineString(TextChange changeInfo)
-        {
-            string addString = this.Text.Substring(changeInfo.Offset, changeInfo.AddedLength);
-
-            this.DelCharFromLineString(changeInfo);
-            this.AddCharToLineString(changeInfo.Offset, addString);
-        }
-
-        private void UpdateCaretInfo()
-        {
-            this.prevLineIndex = this.LineIndex;
-            this.LineIndex = this.GetLineIndexFromCaretIndex(this.CaretIndex);
-
-            this.prevStartCaretIndexByLine = this.StartCaretIndexByLine;
-            this.StartCaretIndexByLine = GetStartIndexFromLineIndex(this.LineIndex, this.CaretIndex);
-        }
-
         private LineFormattedText GetLineFormattedText(string line)
         {
             LineFormattedText result = new LineFormattedText();
@@ -438,28 +240,6 @@ namespace Parse.WpfControls.SyntaxEditorComponents
                 result.Add(this.GetFormattedText(token));
 
             return result;
-        }
-
-        private void TextArea_SelectionChanged(object sender, RoutedEventArgs e)
-        {
-            this.UpdateCaretInfo();
-            this.selectionBlocks.Clear();
-
-            this.BeforeCharFromCursor = (this.CaretIndex == 0) ? ' ' : this.Text[this.CaretIndex - 1];
-            // For current line hightlight effect
-//            if (this.prevLineIndex != this.LineIndex) this.InvalidateVisual();
-            if (this.SelectionLength == 0)  return;
-
-            SelectionInfo selectionInfo = new SelectionInfo();
-
-            var selectionEndIndex = this.SelectionStart + this.SelectionLength;
-            selectionInfo.StartLine = this.GetLineIndexFromCaretIndex(this.SelectionStart);
-            selectionInfo.StartCaretFromLine = this.GetStartIndexFromLineIndex(selectionInfo.StartLine, this.SelectionStart);
-
-            selectionInfo.EndLine = this.GetLineIndexFromCaretIndex(selectionEndIndex);
-            selectionInfo.EndCaretFromLine = this.GetStartIndexFromLineIndex(selectionInfo.EndLine, selectionEndIndex);
-
-            this.selectionBlocks.Add(selectionInfo);
         }
 
         private void OnScrollChanged(object sender, ScrollChangedEventArgs e)
@@ -483,10 +263,10 @@ namespace Parse.WpfControls.SyntaxEditorComponents
             if (!IsLoaded || renderCanvas == null) return;
 
             int startLine = this.GetStartLineOnViewPos(this.VerticalOffset);
-            this.ViewLineString = this.GetLineStringCollection(startLine, this.maxViewLineOnce);
+            var ViewLineString = this.GetLineStringCollection(startLine, this.maxViewLineOnce);
 
             List<LineFormattedText> drawnItems = new List<LineFormattedText>();
-            foreach (var viewLineData in this.ViewLineString)
+            foreach (var viewLineData in ViewLineString)
             {
                 var item = this.GetLineFormattedText(viewLineData.Data);
 
@@ -504,9 +284,9 @@ namespace Parse.WpfControls.SyntaxEditorComponents
 
             base.OnRender(drawingContext);
 
-            int startNumber = startLine + 1;
-            int endNumber = startLine + 1 + this.ViewLineString.Count;
-            this.RaiseEvent(new EditorRenderedEventArgs(TextArea.RenderedEvent, startLine+1, startNumber + endNumber, 
+            int startNumber = ViewLineString.First().AbsoluteLineIndex + 1;
+            int endNumber = ViewLineString.Last().AbsoluteLineIndex + 1;
+            this.RaiseEvent(new EditorRenderedEventArgs(TextArea.RenderedEvent, startLine, endNumber, 
                                                                                 this.HorizontalOffset, this.VerticalOffset, this.LineHeight));
         }
 

@@ -83,8 +83,10 @@
     <Compile Include="Algorithms\NaiveSimilarityComparison.cs" />
     <Compile Include="Algorithms\LikeVSSimilarityComparison.cs" />
     <Compile Include="AttachedProperties\TextBlockExtension.cs" />
-    <Compile Include="AttachedProperties\TextBoxExtension.cs" />
+    <Compile Include="AttachedProperties\TextBoxBehavior.cs" />
     <Compile Include="Behaviors\CompletionListBehavior.cs" />
+    <Compile Include="Behaviors\HighlightBehavior.cs" />
+    <Compile Include="Common\ExtensionTextBox.cs" />
     <Compile Include="Converters\EventArgConverterExtension.cs" />
     <Compile Include="Converters\FontReleateConverter.cs" />
     <Compile Include="Converters\LineHeightBasedFontSizeConverter.cs" />
@@ -166,7 +168,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Common\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
