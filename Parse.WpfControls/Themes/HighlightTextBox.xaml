@@ -1,9 +1,9 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:wpfcontrols="clr-namespace:Parse.WpfControls"
+                    xmlns:host="clr-namespace:Parse.WpfControls"
                     xmlns:attached="clr-namespace:Parse.WpfControls.AttachedProperties">
 
-    <Style TargetType="{x:Type wpfcontrols:HighlightTextBox}">
+    <Style TargetType="{x:Type host:HighlightTextBox}">
         <Style.Triggers>
             <!--<DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=
                         {x:Type views:CompletionList}}, Path=IsFilteringKeyword}" Value="True">
@@ -23,13 +23,13 @@
 
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate x:Name="textArea" TargetType="{x:Type wpfcontrols:HighlightTextBox}">
+                <ControlTemplate x:Name="textArea" TargetType="{x:Type host:HighlightTextBox}">
                     <Border BorderThickness="{Binding BorderTickness}"
                                 BorderBrush="{Binding BorderBrush}"
                                 Background="{Binding BackGround}">
 
                         <Grid Margin="{TemplateBinding Padding}" x:Name="PART_Grid">
-                            <wpfcontrols:TextViewer x:Name="PART_RenderCanvas" ClipToBounds="True"
+                            <host:TextViewer x:Name="PART_RenderCanvas" ClipToBounds="True"
                                                             TextOptions.TextRenderingMode="ClearType" TextOptions.TextFormattingMode="Display"/>
 
                             <ScrollViewer x:Name="PART_ContentHost" Background="#00FFFFFF"/>

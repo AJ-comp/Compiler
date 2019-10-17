@@ -1,199 +1,166 @@
-﻿using Parse.WpfControls.EventArgs;
-using System.Collections.Generic;
-using System.Globalization;
+﻿using Parse.FrontEnd.Grammars;
+using Parse.FrontEnd.Grammars.MiniC;
+using Parse.FrontEnd.Parsers.EventArgs;
+using Parse.FrontEnd.Parsers.LR;
+using Parse.WpfControls.Models;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 
 namespace Parse.WpfControls.SyntaxEditor
 {
-    /// <summary>
-    /// XAML 파일에서 이 사용자 지정 컨트롤을 사용하려면 1a 또는 1b단계를 수행한 다음 2단계를 수행하십시오.
-    ///
-    /// 1a단계) 현재 프로젝트에 있는 XAML 파일에서 이 사용자 지정 컨트롤 사용.
-    /// 이 XmlNamespace 특성을 사용할 마크업 파일의 루트 요소에 이 특성을 
-    /// 추가합니다.
-    ///
-    ///     xmlns:MyNamespace="clr-namespace:Parse.WpfControls.SyntaxEditor"
-    ///
-    ///
-    /// 1b단계) 다른 프로젝트에 있는 XAML 파일에서 이 사용자 지정 컨트롤 사용.
-    /// 이 XmlNamespace 특성을 사용할 마크업 파일의 루트 요소에 이 특성을 
-    /// 추가합니다.
-    ///
-    ///     xmlns:MyNamespace="clr-namespace:Parse.WpfControls.SyntaxEditor;assembly=Parse.WpfControls.SyntaxEditor"
-    ///
-    /// 또한 XAML 파일이 있는 프로젝트의 프로젝트 참조를 이 프로젝트에 추가하고
-    /// 다시 빌드하여 컴파일 오류를 방지해야 합니다.
-    ///
-    ///     솔루션 탐색기에서 대상 프로젝트를 마우스 오른쪽 단추로 클릭하고
-    ///     [참조 추가]->[프로젝트]를 차례로 클릭한 다음 이 프로젝트를 선택합니다.
-    ///
-    ///
-    /// 2단계)
-    /// 계속 진행하여 XAML 파일에서 컨트롤을 사용합니다.
-    ///
-    ///     <MyNamespace:CustomControl1/>
-    ///
-    /// </summary>
     [TemplatePart(Name = "TextArea", Type = typeof(HighlightTextBox))]
-    public class SyntaxEditor : Control
+    public class SyntaxEditor : Editor
     {
-        private double recentVerticalOffset = 0;
-        private double recentHorizontalOffset = 0;
-        private int startLine = 0;
-        private int endLine = 1;
+        public delegate void OnParserChangedEventHandler(object sender);
+        public event OnParserChangedEventHandler OnParserChanged;
 
-        private TextViewer lineNumbersCanvas;
-
-        #region Dependency Properties
-        public HighlightTextBox TextArea
+        private LRParser parser;
+        public LRParser Parser
         {
-            get { return (HighlightTextBox)GetValue(TextAreaProperty); }
-            private set { SetValue(TextAreaProperty, value); }
+            get => this.parser;
+            private set
+            {
+                this.parser = value;
+                this.OnParserChanged?.Invoke(this);
+            }
         }
 
-        // Using a DependencyProperty as the backing store for TextArea.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty TextAreaProperty =
-            DependencyProperty.Register("TextArea", typeof(HighlightTextBox), typeof(SyntaxEditor), new PropertyMetadata(null));
 
-        public Brush LineNumberBackColor
+        public Brush KeywordForeground
         {
-            get { return (Brush)GetValue(LineNumberBackColorProperty); }
-            set { SetValue(LineNumberBackColorProperty, value); }
+            get { return (Brush)GetValue(KeywordForegroundProperty); }
+            set { SetValue(KeywordForegroundProperty, value); }
         }
 
-        // Using a DependencyProperty as the backing store for LineNumberBackColor.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty LineNumberBackColorProperty =
-            DependencyProperty.Register("LineNumberBackColor", typeof(Brush), typeof(SyntaxEditor), new PropertyMetadata(Brushes.Transparent));
+        // Using a DependencyProperty as the backing store for KeywordForeground.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty KeywordForegroundProperty =
+            DependencyProperty.Register("KeywordForeground", typeof(Brush), typeof(SyntaxEditor), new PropertyMetadata(Brushes.Black));
 
 
-        public Brush LineNumberForeColor
+        #region Dependency Properties related to numeral foreground color
+        public Brush DigitForeground
         {
-            get { return (Brush)GetValue(LineNumberForeColorProperty); }
-            set { SetValue(LineNumberForeColorProperty, value); }
+            get { return (Brush)GetValue(DigitForegroundProperty); }
+            set { SetValue(DigitForegroundProperty, value); }
         }
 
-        // Using a DependencyProperty as the backing store for LineNumberForeColor.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty LineNumberForeColorProperty =
-            DependencyProperty.Register("LineNumberForeColor", typeof(Brush), typeof(SyntaxEditor), new PropertyMetadata(Brushes.Black));
+        // Using a DependencyProperty as the backing store for DigitForeground.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty DigitForegroundProperty =
+            DependencyProperty.Register("DigitForeground", typeof(Brush), typeof(SyntaxEditor), new PropertyMetadata(Brushes.LightSteelBlue));
 
 
-        public bool IsLineNumberingVisible
+        public Brush BinaryForeground
         {
-            get { return (bool)GetValue(IsLineNumberingVisibleProperty); }
-            set { SetValue(IsLineNumberingVisibleProperty, value); }
+            get { return (Brush)GetValue(BinaryForegroundProperty); }
+            set { SetValue(BinaryForegroundProperty, value); }
         }
 
-        // Using a DependencyProperty as the backing store for IsLineNumberingVisible.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty IsLineNumberingVisibleProperty =
-            DependencyProperty.Register("IsLineNumberingVisible", typeof(bool), typeof(SyntaxEditor), new PropertyMetadata(false));
+        // Using a DependencyProperty as the backing store for BinaryForeground.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty BinaryForegroundProperty =
+            DependencyProperty.Register("BinaryForeground", typeof(Brush), typeof(SyntaxEditor), new PropertyMetadata(Brushes.LightSteelBlue));
 
 
-        public double LineHeight
+        public Brush OctalForeground
         {
-            get { return (double)GetValue(LineHeightProperty); }
-            set { SetValue(LineHeightProperty, value); }
+            get { return (Brush)GetValue(OctalForegroundProperty); }
+            set { SetValue(OctalForegroundProperty, value); }
         }
 
-        // Using a DependencyProperty as the backing store for LineHeight.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty LineHeightProperty =
-            DependencyProperty.Register("LineHeight", typeof(double), typeof(SyntaxEditor), new PropertyMetadata((double)0));
+        // Using a DependencyProperty as the backing store for OctalForeground.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty OctalForegroundProperty =
+            DependencyProperty.Register("OctalForeground", typeof(Brush), typeof(SyntaxEditor), new PropertyMetadata(Brushes.LightSteelBlue));
+
+
+        public Brush HexForeground
+        {
+            get { return (Brush)GetValue(HexForegroundProperty); }
+            set { SetValue(HexForegroundProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for HexForeground.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty HexForegroundProperty =
+            DependencyProperty.Register("HexForeground", typeof(Brush), typeof(SyntaxEditor), new PropertyMetadata(Brushes.LightSteelBlue));
         #endregion
 
-        #region Routed Events
-        public static readonly RoutedEvent TextChangedEvent = EventManager.RegisterRoutedEvent("TextChanged", RoutingStrategy.Bubble,
-                typeof(RoutedEventHandler), typeof(SyntaxEditor));
-
-        // .NET wrapper
-        public event RoutedEventHandler TextChanged
+        #region Dependency Properties related to comment foreground color
+        public Brush LineCommentForeground
         {
-            add { AddHandler(TextChangedEvent, value); }
-            remove { RemoveHandler(TextChangedEvent, value); }
+            get { return (Brush)GetValue(LineCommentForegroundProperty); }
+            set { SetValue(LineCommentForegroundProperty, value); }
         }
 
+        // Using a DependencyProperty as the backing store for LineCommentForeground.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty LineCommentForegroundProperty =
+            DependencyProperty.Register("LineCommentForeground", typeof(Brush), typeof(SyntaxEditor), new PropertyMetadata(Brushes.Green));
+
+
+        public Brush ScopeCommentForeground
+        {
+            get { return (Brush)GetValue(ScopeCommentForegroundProperty); }
+            set { SetValue(ScopeCommentForegroundProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for ScopeCommentForeground.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty ScopeCommentForegroundProperty =
+            DependencyProperty.Register("ScopeCommentForeground", typeof(Brush), typeof(SyntaxEditor), new PropertyMetadata(Brushes.Green));
         #endregion
 
-        static SyntaxEditor()
-        {
-            DefaultStyleKeyProperty.OverrideMetadata(typeof(SyntaxEditor), new FrameworkPropertyMetadata(typeof(SyntaxEditor)));
 
-            //            TextProperty.OverrideMetadata(typeof(Editor), new FrameworkPropertyMetadata(new PropertyChangedCallback(TextPropertyChanged)));
+        public SyntaxEditor()
+        {
         }
 
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
 
-            this.lineNumbersCanvas = (TextViewer)Template.FindName("PART_LineNumbersCanvas", this);
-            this.TextArea = (HighlightTextBox)Template.FindName("PART_TextArea", this);
+            this.SetGrammar(new MiniCGrammar());
+            this.TextArea.TextChanged += TextArea_TextChanged;
         }
 
-        public SyntaxEditor()
+        private void RegisterKeywords(Grammar grammar)
         {
-            Loaded += (s, e) =>
+            foreach (var terminal in grammar.TerminalSet)
             {
-                //                lineNumbersCanvas.Width = GetFormattedTextWidth(string.Format("{0:0000}", totalLineCount)) + 5;
-                //                scrollViewer.ScrollChanged += OnScrollChanged;
-                this.TextArea.Rendered += TextArea_Rendered;
-                this.TextArea.TextChanged += TextArea_TextChanged;
+                if (terminal.TokenType == RegularGrammar.TokenType.Keyword)
+                {
+                    this.TextArea.AddCompletionList(CompletionItemType.Keyword, terminal.Value);
+                    this.TextArea.AddSyntaxHighLightInfo(terminal.Value, KeywordForeground, terminal.Pattern);
+                }
+                else if(terminal.TokenType == RegularGrammar.TokenType.LineComment)
+                    this.TextArea.AddSyntaxHighLightInfo(terminal.Value, this.LineCommentForeground, terminal.Pattern);
+                else if (terminal.TokenType == RegularGrammar.TokenType.ScopeComment)
+                    this.TextArea.AddSyntaxHighLightInfo(terminal.Value, this.ScopeCommentForeground, terminal.Pattern);
+                else if (terminal.TokenType == RegularGrammar.TokenType.Digit10)
+                    this.TextArea.AddSyntaxHighLightInfo(terminal.Value, this.DigitForeground, terminal.Pattern);
+                else if (terminal.TokenType == RegularGrammar.TokenType.Digit2)
+                    this.TextArea.AddSyntaxHighLightInfo(terminal.Value, this.BinaryForeground, terminal.Pattern);
+                else if (terminal.TokenType == RegularGrammar.TokenType.Digit8)
+                    this.TextArea.AddSyntaxHighLightInfo(terminal.Value, this.OctalForeground, terminal.Pattern);
+                else if (terminal.TokenType == RegularGrammar.TokenType.Digit16)
+                    this.TextArea.AddSyntaxHighLightInfo(terminal.Value, this.HexForeground, terminal.Pattern);
+            }
 
-                InvalidateVisual();
-            };
+            foreach (var delimiter in grammar.DelimiterDic)
+                this.TextArea.DelimiterSet.Add(delimiter.Key);
+
+
+            // filtering test code
+            this.TextArea.AddCompletionList(CompletionItemType.Property, "HighLight");
+            this.TextArea.AddCompletionList(CompletionItemType.Property, "HightIlHe");
+        }
+
+        public void SetGrammar(Grammar grammar)
+        {
+            this.Parser = new SLRParser(grammar);
+
+            this.RegisterKeywords(grammar);
         }
 
         private void TextArea_TextChanged(object sender, TextChangedEventArgs e)
         {
-        }
-
-        private void TextArea_Rendered(object sender, RoutedEventArgs e)
-        {
-            EditorRenderedEventArgs arg = e as EditorRenderedEventArgs;
-
-            this.recentHorizontalOffset = arg.HorizontalOffset;
-            this.recentVerticalOffset = arg.VerticalOffset;
-            this.startLine = arg.ViewStartLineIndex;
-            this.endLine = arg.ViewEndLineIndex;
-
-            this.InvalidateVisual();
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <see cref="https://www.lucidchart.com/documents/edit/cdd4b7ff-4807-4df0-8360-bc75d3f9dd2b/0_0"/>
-        /// <param name="drawingContext"></param>
-        protected override void OnRender(DrawingContext drawingContext)
-        {
-            if (this.IsLoaded == false || this.lineNumbersCanvas == null || this.TextArea == null) return;
-            if (this.endLine - this.startLine <= 0) return;
-
-            this.lineNumbersCanvas.SetDrawStartingPos(0, this.recentVerticalOffset, this.LineHeight);
-
-            List<FormattedText> lines = new List<FormattedText>();
-
-            int maxNumberOfDigit = endLine.ToString().Length;
-            this.lineNumbersCanvas.Width = maxNumberOfDigit * this.FontSize;
-            for (int i = startLine; i < endLine; i++)
-            {
-                FormattedText lineNumberingText = new FormattedText((i + 1).ToString(), CultureInfo.InvariantCulture, FlowDirection.LeftToRight,
-                    new Typeface(FontFamily, FontStyle, FontWeight, FontStretch), this.FontSize, this.LineNumberForeColor);
-
-                lines.Add(lineNumberingText);
-            }
-
-            this.lineNumbersCanvas.DrawLines(lines);
-
-            base.OnRender(drawingContext);
-        }
-
-        private void OnScrollChanged(object sender, ScrollChangedEventArgs e)
-        {
-            if (e.VerticalChange != 0 || e.HorizontalChange != 0) InvalidateVisual();
-        }
-
-        static void TextPropertyChanged(DependencyObject sender, DependencyPropertyChangedEventArgs args)
-        {
+            this.Parser.Parse(this.TextArea.Text);
         }
     }
 }

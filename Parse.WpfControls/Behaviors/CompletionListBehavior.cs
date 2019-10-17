@@ -56,8 +56,6 @@ namespace Parse.WpfControls.Behaviors
 
             col = (ObservableCollection<CompletionItem>)e.OldValue;
             if (col != null) { col.CollectionChanged -= OnCollectionChanged; }
-
-
         }
 
         private static void OnCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)

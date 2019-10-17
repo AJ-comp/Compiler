@@ -172,6 +172,7 @@ namespace Parse.WpfControls
 
         public override void OnApplyTemplate()
         {
+
             base.OnApplyTemplate();
 
             this.renderCanvas = (TextViewer)Template.FindName("PART_RenderCanvas", this);

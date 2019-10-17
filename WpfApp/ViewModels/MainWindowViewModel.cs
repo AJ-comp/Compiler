@@ -12,13 +12,9 @@ namespace WpfApp.ViewModels
 {
     class MainWindowViewModel : ViewModelBase
     {
-        public LRParser Parser { get; } = new SLRParser(new MiniCGrammar());
         public ObservableCollection<ParsingAlarmList> AlarmLists { get; } = new ObservableCollection<ParsingAlarmList>();
 
         private RelayCommand<TextChangedEventArgs> _cmdMouseDown;
-
-
-
         public RelayCommand<TextChangedEventArgs> CmdMouseDown
         {
             get
@@ -32,10 +28,6 @@ namespace WpfApp.ViewModels
 
         public MainWindowViewModel()
         {
-            this.Parser.ParsingFailed += Parser_ParsingFailed;
-//            this.Parser.MatchFailed
-
-            
         }
 
         private void ExecuteTextChanged(TextChangedEventArgs e)

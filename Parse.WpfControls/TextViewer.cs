@@ -19,6 +19,11 @@ namespace Parse.WpfControls
         {
         }
 
+        public override void OnApplyTemplate()
+        {
+
+        }
+
         public void SetDrawStartingPos(double horizontalOffset, double verticalOffset, double lineHeight)
         {
             this.currentHorizontalOffset = horizontalOffset;

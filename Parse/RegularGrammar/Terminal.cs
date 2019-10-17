@@ -2,7 +2,7 @@
 
 namespace Parse.RegularGrammar
 {
-    public enum TokenType { Keyword, Operator, Identifier, NotDefined, Epsilon, Digit2, Digit10, Digit8, Digit16, Marker };
+    public enum TokenType { Keyword, Operator, Identifier, LineComment, ScopeComment, NotDefined, Epsilon, Digit2, Digit10, Digit8, Digit16, Marker };
 
     public class Terminal : Symbol
     {

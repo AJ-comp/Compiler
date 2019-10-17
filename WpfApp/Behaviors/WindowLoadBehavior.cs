@@ -1,21 +1,26 @@
 ﻿using Parse.FrontEnd.Parsers.Collections;
-using Parse.WpfControls.Models;
+using Parse.FrontEnd.Parsers.EventArgs;
 using System;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Forms;
 using System.Windows.Interactivity;
-using System.Windows.Media;
-using WpfApp.ViewModels;
 
 namespace WpfApp.Behaviors
 {
     class WindowLoadBehavior : Behavior<Window>
     {
-        private MainWindowViewModel context;
+        private MainWindow mainWindow;
         private ToolTip toolTip = new ToolTip();
         private int recentRowIdx = -1;
         private int recentColIdx = -1;
+
+        protected override void OnDetaching()
+        {
+            this.AssociatedObject.Loaded -= AssociatedObject_Loaded;
+
+            base.OnDetaching();
+        }
 
         protected override void OnAttached()
         {
@@ -26,8 +31,7 @@ namespace WpfApp.Behaviors
 
         private void AssociatedObject_Loaded(object sender, RoutedEventArgs e)
         {
-            MainWindow mainWindow = sender as MainWindow;
-            this.context = mainWindow.DataContext as MainWindowViewModel;
+            this.mainWindow = sender as MainWindow;
 
             mainWindow.winformControl.Child = new DataGridView();
 
@@ -35,33 +39,10 @@ namespace WpfApp.Behaviors
 
             dataGridView.EditMode = DataGridViewEditMode.EditProgrammatically;
             dataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
-            dataGridView.DataSource = context.Parser.ParsingTable;
+            dataGridView.DataSource = mainWindow.syntaxEditor.Parser.ParsingTable;
             dataGridView.CellMouseEnter += new DataGridViewCellEventHandler(this.tableGridView_CellMouseEnter);
 
-            mainWindow.syntaxEditor.TextArea.AddSyntaxHighLightInfo("const", Brushes.Lime);
-            mainWindow.syntaxEditor.TextArea.AddSyntaxHighLightInfo("int", Brushes.Lime);
-            mainWindow.syntaxEditor.TextArea.AddSyntaxHighLightInfo("void", Brushes.Lime);
-            mainWindow.syntaxEditor.TextArea.AddSyntaxHighLightInfo("private", Brushes.Lime);
-            mainWindow.syntaxEditor.TextArea.AddSyntaxHighLightInfo("public", Brushes.DeepPink);
-            mainWindow.syntaxEditor.TextArea.AddSyntaxHighLightInfo("static", Brushes.DeepSkyBlue);
-            mainWindow.syntaxEditor.TextArea.AddSyntaxHighLightInfo("[0-9]*", Brushes.LightSteelBlue, true);
-
-            mainWindow.syntaxEditor.TextArea.AddCompletionList(CompletionItemType.Keyword, "const");
-            mainWindow.syntaxEditor.TextArea.AddCompletionList(CompletionItemType.Keyword, "int");
-            mainWindow.syntaxEditor.TextArea.AddCompletionList(CompletionItemType.Keyword, "void");
-            mainWindow.syntaxEditor.TextArea.AddCompletionList(CompletionItemType.Keyword, "private");
-            mainWindow.syntaxEditor.TextArea.AddCompletionList(CompletionItemType.Keyword, "public");
-            mainWindow.syntaxEditor.TextArea.AddCompletionList(CompletionItemType.Keyword, "static");
-
-            mainWindow.syntaxEditor.TextArea.AddCompletionList(CompletionItemType.Property, "HighLight");
-            mainWindow.syntaxEditor.TextArea.AddCompletionList(CompletionItemType.Property, "HightIlHe");
-
-            mainWindow.syntaxEditor.TextArea.DelimiterSet.Add(" ");
-            mainWindow.syntaxEditor.TextArea.DelimiterSet.Add(Environment.NewLine);
-            mainWindow.syntaxEditor.TextArea.DelimiterSet.Add("(");
-            mainWindow.syntaxEditor.TextArea.DelimiterSet.Add(")");
-            mainWindow.syntaxEditor.TextArea.DelimiterSet.Add("{");
-            mainWindow.syntaxEditor.TextArea.DelimiterSet.Add("}");
+            this.mainWindow.syntaxEditor.Parser.ParsingFailed += Parser_ParsingFailed;
 
             //            this.editor.SetComponents(this.parser);
 
@@ -83,6 +64,10 @@ namespace WpfApp.Behaviors
             */
         }
 
+        private void Parser_ParsingFailed(object sender, ParsingFailedEventArgs e)
+        {
+        }
+
         private void tableGridView_CellMouseEnter(object sender, DataGridViewCellEventArgs e)
         {
             if (this.recentColIdx == e.ColumnIndex && this.recentRowIdx == e.RowIndex) return;
@@ -97,7 +82,7 @@ namespace WpfApp.Behaviors
             tableGridView.ShowCellToolTips = false;
 
             var cell = tableGridView[e.ColumnIndex, e.RowIndex];
-            Canonical canonical = context.Parser.C0.GetStatusFromIxIndex(Convert.ToInt32(cell.Value.ToString().Substring(1)));
+            Canonical canonical = mainWindow.syntaxEditor.Parser.C0.GetStatusFromIxIndex(Convert.ToInt32(cell.Value.ToString().Substring(1)));
 
             var data = canonical.ToLineString();
             var lineCount = Regex.Matches(data, Environment.NewLine).Count;
@@ -112,13 +97,6 @@ namespace WpfApp.Behaviors
         {
             //            this.parsingHistory.ItemsSource = parser.ParsingHistory.DefaultView;
             //            this.parsingHistory.Items.Refresh();
-        }
-
-        protected override void OnDetaching()
-        {
-            this.AssociatedObject.Loaded -= AssociatedObject_Loaded;
-
-            base.OnDetaching();
         }
     }
 }

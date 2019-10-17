@@ -28,10 +28,6 @@
         <viewModels:MainWindowViewModel/>
     </Window.DataContext>
 
-    <i:Interaction.Behaviors>
-        <behaviors:WindowLoadBehavior/>
-    </i:Interaction.Behaviors>
-
     <Grid>
         <TabControl x:Name="tablControl">
             <TabItem Header="Editor">
@@ -110,5 +106,10 @@
         </TabControl>
 
     </Grid>
+
+
+    <i:Interaction.Behaviors>
+        <behaviors:WindowLoadBehavior/>
+    </i:Interaction.Behaviors>
 
 </Controls:MetroWindow>
