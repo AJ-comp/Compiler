@@ -86,6 +86,7 @@
     <Compile Include="AttachedProperties\TextBoxBehavior.cs" />
     <Compile Include="Behaviors\CompletionListBehavior.cs" />
     <Compile Include="Common\ExtensionTextBox.cs" />
+    <Compile Include="Common\TokenizeTextBox.cs" />
     <Compile Include="Converters\EventArgConverterExtension.cs" />
     <Compile Include="Converters\FontReleateConverter.cs" />
     <Compile Include="Converters\LineHeightBasedFontSizeConverter.cs" />
@@ -93,6 +94,9 @@
     <Compile Include="Converters\SingleSelectionChangedEventArgsConverter.cs" />
     <Compile Include="Converters\UIntListToStringConverter.cs" />
     <Compile Include="Editor.cs" />
+    <Compile Include="EventArgs\LineChangedEventArgs.cs" />
+    <Compile Include="Models\BlockManager.cs" />
+    <Compile Include="Models\TokenManager.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -102,6 +106,7 @@
     <Compile Include="Behaviors\RedirectRoutedEventBehavior.cs" />
     <Compile Include="Behaviors\ZoomScrollBehavior.cs" />
     <Compile Include="Models\CodeContentInfo.cs" />
+    <Compile Include="Utilities\RegexUtility.cs" />
     <Compile Include="Views\CompletionList.xaml.cs">
       <DependentUpon>CompletionList.xaml</DependentUpon>
     </Compile>

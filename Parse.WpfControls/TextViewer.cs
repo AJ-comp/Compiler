@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
 using System.Windows;
 using System.Windows.Media;
 
@@ -13,7 +15,7 @@ namespace Parse.WpfControls
 
         private DrawingAlgorithm algorithm = new DrawingAlgorithm();
 
-//        public InlineCollection Inlines { get; }
+        //        public InlineCollection Inlines { get; }
 
         public TextViewer()
         {
@@ -52,29 +54,35 @@ namespace Parse.WpfControls
 
         public void DrawLines(List<FormattedText> lines)
         {
-            var dc = this.GetContext();
+            this.Clear();
 
-            foreach(var line in lines)
+            foreach (var line in lines)
             {
+                this.AddLine();
+                var dc = this.GetLastLine().RenderOpen();
+
                 this.algorithm.CalculateNextLine();
 
                 double top = 0 - this.currentVerticalOffset;
                 if (top >= ActualHeight) return;
 
                 dc.DrawText(line, new Point(this.algorithm.DrawingPointX, this.algorithm.DrawingPointY));
-            }
 
-            dc.Close();
+                dc.Close();
+            }
         }
 
         public void DrawAll(List<LineFormattedText> contents, double horizontalOffset, double verticalOffset, double lineHeight)
         {
             this.algorithm.Initial(lineHeight, horizontalOffset, verticalOffset);
 
-            var dc = this.GetContext();
+            this.Clear();
 
-            foreach(var line in contents)
+            foreach (var line in contents)
             {
+                this.AddLine();
+                var dc = this.GetLastLine().RenderOpen();
+
                 this.algorithm.CalculateNextLine();
 
                 double top = 0 - verticalOffset;
@@ -88,10 +96,50 @@ namespace Parse.WpfControls
 
                     this.algorithm.CalculateNextXPoint(token.WidthIncludingTrailingWhitespace);
                 }
+
+                dc.Close();
+            }
+        }
+
+        public void DrawLine(int index, LineFormattedText line)
+        {
+            for (int i = this.VisualChildrenCount - 1; i < index; i++)
+            {
+                this.AddLine();
+                var dc = this.GetLastLine().RenderOpen();
+
+                double x = this.algorithm.DrawingStartingPoint.X;
+                double y = this.algorithm.GetDrawingYPosition(i);
+                dc.DrawRectangle(Brushes.Transparent, null, new Rect(x, y, 10, this.currentLineHeight));
+
+                dc.Close();
             }
 
-            dc.Close();
+            if (this.VisualChildrenCount <= index) this.AddLine();
+
+            var visual = this.GetVisualChild(index) as DrawingVisual;
+            var dc2 = visual.RenderOpen();
+            var yPos = this.algorithm.GetDrawingYPosition(index);
+            this.algorithm.HorizontalPosInitial();
+            foreach (var token in line)
+            {
+                dc2.DrawText(token, new Point(this.algorithm.DrawingPointX, yPos));
+
+                this.algorithm.CalculateNextXPoint(token.WidthIncludingTrailingWhitespace);
+            }
+
+
+            dc2.Close();
         }
+
+        public void AddLine()
+        {
+            DrawingVisual visual = new DrawingVisual();
+            var dc = visual.RenderOpen();
+            this.Add(visual);
+        }
+
+        public DrawingVisual GetLastLine() => this.GetVisualChild(this.VisualChildrenCount - 1) as DrawingVisual;
     }
 
     public class LineFormattedText : List<FormattedText>

@@ -1,6 +1,7 @@
-﻿using System;
+﻿using Parse.WpfControls.EventArgs;
+using System;
 using System.Collections.Generic;
-using System.Collections.Specialized;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -16,6 +17,13 @@ namespace Parse.WpfControls.Common
         private int prevStartCaretIndexByLine = 0;
         private HashSet<SelectionInfo> selectionBlocks = new HashSet<SelectionInfo>();
 
+        public delegate void LineChangedEventHandler(object sender, LineChangedEventArgs e);
+        //        public new LineChangedEventHandler TextChanged;
+
+        public List<int> LineIndexes { get; } = new List<int>();
+//        public Dictionary<int, TokenDataList> TokenDataByLine { get; } = new Dictionary<int, TokenDataList>();
+//        public BlockManager BlockManager { get; } = new BlockManager();
+
         #region Dependency Properties releated with TextLogic
         public char BeforeCharFromCursor
         {
@@ -28,15 +36,30 @@ namespace Parse.WpfControls.Common
             DependencyProperty.Register("BeforeCharFromCursor", typeof(char), typeof(ExtensionTextBox), new PropertyMetadata(' '));
 
 
-        public StringCollection LineString
+        public ObservableCollection<string> TokenPatternList
         {
-            get { return (StringCollection)GetValue(LineStringProperty); }
-            set { SetValue(LineStringProperty, value); }
+            get { return (ObservableCollection<string>)GetValue(TokenPatternListProperty); }
+            set { SetValue(TokenPatternListProperty, value); }
         }
 
-        // Using a DependencyProperty as the backing store for LineString.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty LineStringProperty =
-            DependencyProperty.Register("LineString", typeof(StringCollection), typeof(ExtensionTextBox), new PropertyMetadata(new StringCollection()));
+        // Using a DependencyProperty as the backing store for TokenPatternList.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty TokenPatternListProperty =
+            DependencyProperty.Register("TokenPatternList", typeof(ObservableCollection<string>), typeof(ExtensionTextBox), new PropertyMetadata(new ObservableCollection<string>()));
+
+
+
+
+        public ObservableCollection<PatternInfo> TokenPattern
+        {
+            get { return (ObservableCollection<PatternInfo>)GetValue(TokenPatternProperty); }
+            set { SetValue(TokenPatternProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for TokenPattern.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty TokenPatternProperty =
+            DependencyProperty.Register("TokenPattern", typeof(ObservableCollection<PatternInfo>), typeof(ExtensionTextBox), new PropertyMetadata(new ObservableCollection<PatternInfo>()));
+
+
 
 
         public int LineIndex
@@ -64,12 +87,14 @@ namespace Parse.WpfControls.Common
 
         public ExtensionTextBox()
         {
-            Loaded += (s, e) =>
+            this.LineIndexes.Add(0);
+
+            this.Loaded += (s, e) =>
             {
                 this.SelectionChanged += TextArea_SelectionChanged;
             };
 
-            TextChanged += (s, e) =>
+            this.TextChanged += (s, e) =>
             {
                 TextChange changeInfo = e.Changes.First();
                 this.UpdateLineString(changeInfo);
@@ -77,34 +102,38 @@ namespace Parse.WpfControls.Common
         }
 
 
-        protected int GetLineIndexFromCaretIndex(int caretIndex)
+        /// <summary>
+        /// This function returns a line index and a caret index of a line from the current caret index.
+        /// </summary>
+        /// <param name="caretIndex">current caret index.</param>
+        /// <returns>X : caret index of a line, Y : a line index.</returns>
+        public Point GetIndexInfoFromCaretIndex(int caretIndex)
         {
-            int result = 0;
-            int totalLength = 0;
-            for (int i = 0; i < this.LineString.Count; i++)
+            Point result = new Point();
+
+            for (int i = 0; i < this.LineIndexes.Count; i++)
             {
-                totalLength += this.LineString[i].Length + Environment.NewLine.Length;
-                if (totalLength > caretIndex) { result = i; break; }
+                if (this.LineIndexes[i] > caretIndex)
+                {
+                    result.Y = i - 1;
+                    result.X = caretIndex - this.LineIndexes[i - 1];
+                    break;
+                }
+                else result = new Point(0, i);
             }
 
             return result;
         }
 
-        protected int GetStartIndexFromLineIndex(int lineIndex, int caretIndex)
-        {
-            int totalLength = 0;
-            for (int i = 0; i < lineIndex; i++) totalLength += this.LineString[i].Length + Environment.NewLine.Length;
-
-            return caretIndex - totalLength;
-        }
 
         protected void UpdateCaretInfo()
         {
             this.prevLineIndex = this.LineIndex;
-            this.LineIndex = this.GetLineIndexFromCaretIndex(this.CaretIndex);
-
             this.prevStartCaretIndexByLine = this.StartCaretIndexByLine;
-            this.StartCaretIndexByLine = GetStartIndexFromLineIndex(this.LineIndex, this.CaretIndex);
+
+            var point = this.GetIndexInfoFromCaretIndex(this.CaretIndex);
+            this.LineIndex = (int)point.Y;
+            this.StartCaretIndexByLine = (int)point.X;
         }
 
         private void TextArea_SelectionChanged(object sender, RoutedEventArgs e)
@@ -120,11 +149,13 @@ namespace Parse.WpfControls.Common
             SelectionInfo selectionInfo = new SelectionInfo();
 
             var selectionEndIndex = this.SelectionStart + this.SelectionLength;
-            selectionInfo.StartLine = this.GetLineIndexFromCaretIndex(this.SelectionStart);
-            selectionInfo.StartCaretFromLine = this.GetStartIndexFromLineIndex(selectionInfo.StartLine, this.SelectionStart);
+            Point point = this.GetIndexInfoFromCaretIndex(this.SelectionStart);
+            selectionInfo.StartLine = (int)point.Y;
+            selectionInfo.StartCaretFromLine = (int)point.X;
 
-            selectionInfo.EndLine = this.GetLineIndexFromCaretIndex(selectionEndIndex);
-            selectionInfo.EndCaretFromLine = this.GetStartIndexFromLineIndex(selectionInfo.EndLine, selectionEndIndex);
+            point = this.GetIndexInfoFromCaretIndex(selectionEndIndex);
+            selectionInfo.EndLine = (int)point.Y;
+            selectionInfo.EndCaretFromLine = (int)point.X;
 
             this.selectionBlocks.Add(selectionInfo);
         }
@@ -141,6 +172,79 @@ namespace Parse.WpfControls.Common
             this.AddCharToLineString(changeInfo.Offset, addString);
         }
 
+        /*
+        private void EditTokenFromChar(int lineIndex, int startCaretByLine, string addString)
+        {
+
+            else
+            {
+                
+
+                int minIndex = 0xff;
+                PatternInfo selectedPattern = null;
+                foreach (var pattern in this.TokenPattern)
+                {
+                    Match matchInfo = Regex.Match(token, pattern.StartPattern);
+                    if (matchInfo.Success == false) continue;
+
+                    int curIndex = matchInfo.Index;
+                    if (minIndex > curIndex)
+                    {
+                        minIndex = curIndex;
+                        selectedPattern = pattern;
+                    }
+                }
+
+                if (selectedPattern != null)
+                {
+                    selectedPattern.EndPattern
+                }
+            }
+        }
+
+        /// <summary>
+        /// This function merge addString with existing token and returns merged token.
+        /// </summary>
+        /// <param name="lineIndex"></param>
+        /// <param name="startCaretByLine"></param>
+        /// <param name="addString">a string that tries to merge.</param>
+        /// <returns>first : token index, second : TokenData</returns>
+        private Tuple<int, TokenData> TokenMerge(int lineIndex, int startCaretByLine, string addString)
+        {
+            if (this.TokenDataByLine.ContainsKey(lineIndex) == false)
+            {
+                var tokenList = new TokenDataList();
+                var tokenData = new TokenData() { Token = addString, StartIndex = startCaretByLine, bEnd = false };
+                tokenList.Add(tokenData);
+
+                this.TokenDataByLine.Add(lineIndex, tokenList);
+                return new Tuple<int, TokenData>(0, tokenData);
+            }
+            else
+            {
+                var tokenDataList = this.TokenDataByLine[lineIndex].GetCandidateTokens(startCaretByLine);
+                if(tokenDataList != null)
+                {
+
+                    tokenData.Item2.Token.Insert(startCaretByLine, addString);
+                    return new Tuple<int, TokenData>(tokenData.Item1, tokenData.Item2);
+                }
+
+                tokenData = 
+                {
+
+                }
+            }
+        }
+
+        private void EditToken(int lineIndex, int startCaretByLine, string addString)
+        {
+            if (addString.Length == 1) this.EditTokenFromChar(lineIndex, startCaretByLine, addString);
+
+
+        }
+        */
+
         /// <summary>
         /// This function adds line-string an added string.
         /// </summary>
@@ -151,18 +255,27 @@ namespace Parse.WpfControls.Common
         {
             if (addString.Length == 0) return;
 
-            int lineIndex = this.GetLineIndexFromCaretIndex(offset);
-            int startCaretByLine = this.GetStartIndexFromLineIndex(lineIndex, offset);
-            this.LineString[lineIndex] = this.LineString[lineIndex].Insert(startCaretByLine, addString);
+            int index = this.LineIndexes.FindIndex(p => p > offset);
+            if (index >= 0)
+            {
+                for (int i = index; i < this.LineIndexes.Count; i++)
+                    this.LineIndexes[i] += addString.Length;
+            }
 
-            if (addString.Contains(Environment.NewLine) == false) return;
+            int startIndex = 0;
+            while(true)
+            {
+                var newLineIndex = addString.IndexOf(Environment.NewLine, startIndex);
+                if (newLineIndex < 0) break;
 
-            string[] lines = this.LineString[lineIndex].Split(new string[] { Environment.NewLine }, StringSplitOptions.None);
+                startIndex = newLineIndex + Environment.NewLine.Length;
 
-            this.LineString[lineIndex] = lines.First();
+                this.LineIndexes.Add(offset + startIndex);
+            }
 
-            for (int i = 1; i < lines.Length; i++)
-                this.LineString.Insert(lineIndex + i, lines[i]);
+            this.LineIndexes.Sort();
+
+//            this.EditToken(lineIndex, startCaretByLine, addString);
         }
 
         /// <summary>
@@ -173,57 +286,33 @@ namespace Parse.WpfControls.Common
         {
             if (changeInfo.RemovedLength == 0) return;
 
-            int sLineIndex = this.GetLineIndexFromCaretIndex(changeInfo.Offset);
-            int startCaretByLine = this.GetStartIndexFromLineIndex(sLineIndex, changeInfo.Offset);
-
-            int endIndex = changeInfo.Offset + changeInfo.RemovedLength;
-            int eLineIndex = this.GetLineIndexFromCaretIndex(endIndex);
-            int endCaretByLine = this.GetStartIndexFromLineIndex(eLineIndex, endIndex);
-
-            string sLineString = this.LineString[sLineIndex];
-            string eLineString = this.LineString[eLineIndex];
-
-            if (sLineIndex == eLineIndex)
-                this.LineString[sLineIndex] = sLineString.Remove(startCaretByLine, endCaretByLine - startCaretByLine);
-            else
+            int findIndex = 0;
+            List<int> removeIndexes = new List<int>();
+            for (int i = changeInfo.Offset+1; i <= changeInfo.Offset + changeInfo.RemovedLength; i++)
             {
-                if (startCaretByLine < sLineString.Length) this.LineString[sLineIndex] = sLineString.Remove(startCaretByLine);
-                this.LineString[sLineIndex] += eLineString.Substring(endCaretByLine);
-
-                for (int i = sLineIndex + 1; i <= eLineIndex; i++) this.LineString.RemoveAt(sLineIndex + 1);
-            }
-
-            /*
-            // single character deletion process
-            if (this.SelectionBlocks.Count == 0)
-            {
-                if (this.StartCaretIndexByLine == 0)
+                for(int j=findIndex; j<this.LineIndexes.Count; j++)
                 {
-                    this.LineString[this.LineIndex - 1] += this.LineString[this.LineIndex];
-                    this.LineString.RemoveAt(this.LineIndex);
-                }
-                else this.LineString[this.LineIndex] = this.LineString[this.LineIndex].Remove(this.StartCaretIndexByLine-1, 1);
-            }
-            // block deletion process
-            else
-            {
-                foreach(var block in this.SelectionBlocks)
-                {
-                    string sLineString = this.LineString[block.StartLine];
-                    string eLineString = this.LineString[block.EndLine];
+                    if (this.LineIndexes[j] <= i) findIndex = j;
+                    else break;
 
-                    if (block.StartLine == block.EndLine)
-                        this.LineString[block.StartLine] = sLineString.Remove(block.StartCaretFromLine, block.EndCaretFromLine - block.StartCaretFromLine);
-                    else
+                    if (this.LineIndexes[j] == i)
                     {
-                        if (block.StartCaretFromLine < sLineString.Length)  this.LineString[block.StartLine] = sLineString.Remove(block.StartCaretFromLine);
-                        this.LineString[block.StartLine] += eLineString.Substring(block.EndCaretFromLine);
-
-                        for (int i = block.StartLine + 1; i <= block.EndLine; i++)  this.LineString.RemoveAt(block.StartLine + 1);
+                        removeIndexes.Add(j);
+                        break;
                     }
                 }
             }
-            */
+            
+            if(removeIndexes.Count > 0)
+                this.LineIndexes.RemoveRange(removeIndexes.First(), removeIndexes.Count);
+
+            int index = this.LineIndexes.FindIndex(p => p > changeInfo.Offset + changeInfo.RemovedLength);
+            if (index >= 0)
+            {
+                for (int i = index; i < this.LineIndexes.Count; i++)
+                    this.LineIndexes[i] -= changeInfo.RemovedLength;
+            }
+
         }
     }
 
@@ -237,5 +326,11 @@ namespace Parse.WpfControls.Common
 
         public int EndLine { get; internal set; }
         public int EndCaretFromLine { get; internal set; }
+    }
+
+    public class PatternInfo
+    {
+        public string StartPattern { get; set; }
+        public string EndPattern { get; set; }
     }
 }

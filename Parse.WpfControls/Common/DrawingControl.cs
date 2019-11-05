@@ -7,18 +7,10 @@ namespace Parse.WpfControls
     public class DrawingControl : FrameworkElement
     {
         private VisualCollection visuals;
-        private DrawingVisual visual;
 
         public DrawingControl()
         {
-            visual = new DrawingVisual();
             visuals = new VisualCollection(this);
-            visuals.Add(visual);
-        }
-
-        public DrawingContext GetContext()
-        {
-            return visual.RenderOpen();
         }
 
         protected override int VisualChildrenCount
@@ -32,5 +24,9 @@ namespace Parse.WpfControls
                 throw new ArgumentOutOfRangeException();
             return visuals[index];
         }
+
+        public void Add(DrawingVisual visual) => this.visuals.Add(visual);
+
+        public void Clear() => this.visuals.Clear();
     }
 }

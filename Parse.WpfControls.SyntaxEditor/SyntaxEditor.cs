@@ -160,7 +160,7 @@ namespace Parse.WpfControls.SyntaxEditor
 
         private void TextArea_TextChanged(object sender, TextChangedEventArgs e)
         {
-            this.Parser.Parse(this.TextArea.Text);
+//            this.Parser.Parse(this.TextArea.Text);
         }
     }
 }

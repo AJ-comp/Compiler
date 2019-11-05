@@ -43,7 +43,6 @@ namespace WpfApp.Behaviors
             dataGridView.CellMouseEnter += new DataGridViewCellEventHandler(this.tableGridView_CellMouseEnter);
 
             this.mainWindow.syntaxEditor.Parser.ParsingFailed += Parser_ParsingFailed;
-
             //            this.editor.SetComponents(this.parser);
 
             /*

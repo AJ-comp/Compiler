@@ -136,14 +136,9 @@ namespace Parse.WpfControls
                 //                lineNumbersCanvas.Width = GetFormattedTextWidth(string.Format("{0:0000}", totalLineCount)) + 5;
                 //                scrollViewer.ScrollChanged += OnScrollChanged;
                 this.TextArea.Rendered += TextArea_Rendered;
-                this.TextArea.TextChanged += TextArea_TextChanged;
 
                 InvalidateVisual();
             };
-        }
-
-        private void TextArea_TextChanged(object sender, TextChangedEventArgs e)
-        {
         }
 
         private void TextArea_Rendered(object sender, RoutedEventArgs e)

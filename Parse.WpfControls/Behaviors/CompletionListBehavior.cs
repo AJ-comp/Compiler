@@ -20,6 +20,7 @@ namespace Parse.WpfControls.Behaviors
     public class CompletionListBehavior : Behavior<TextBoxBase>
     {
         private int caretIndexWhenCLOccur;
+        private TextBox parent;
         private static CompletionList completionList = new CompletionList();
 
         #region CloseCharacters DP
@@ -96,9 +97,9 @@ namespace Parse.WpfControls.Behaviors
         protected override void OnDetaching()
         {
             this.AssociatedObject.Loaded -= AssociatedObject_Loaded;
+            this.AssociatedObject.Unloaded -= AssociatedObject_Unloaded;
             this.AssociatedObject.TextChanged -= AssociatedObject_TextChanged;
             this.AssociatedObject.PreviewKeyDown -= AssociatedObject_PreviewKeyDown;
-            this.AssociatedObject.MouseDoubleClick -= AssociatedObject_MouseDoubleClick;
 
             base.OnDetaching();
         }
@@ -108,20 +109,40 @@ namespace Parse.WpfControls.Behaviors
             base.OnAttached();
 
             this.AssociatedObject.Loaded += AssociatedObject_Loaded;
+            this.AssociatedObject.Unloaded += AssociatedObject_Unloaded;
             this.AssociatedObject.TextChanged += AssociatedObject_TextChanged;
             this.AssociatedObject.PreviewKeyDown += AssociatedObject_PreviewKeyDown;
-            this.AssociatedObject.MouseDoubleClick += AssociatedObject_MouseDoubleClick;
+        }
+
+        private void AssociatedObject_Unloaded(object sender, RoutedEventArgs e)
+        {
+            completionList.listBox.MouseDoubleClick -= ListBox_MouseDoubleClick;
         }
 
         private void AssociatedObject_Loaded(object sender, RoutedEventArgs e)
         {
-            TextBox textbox = sender as TextBox;
+            this.parent = sender as TextBox;
 
             var completionListContext = completionList.DataContext as CompletionListViewModel;
 
             completionList.listBox.SelectionChanged += ((s, le) => completionList.listBox.ScrollIntoView(completionList.listBox.SelectedItem));
-            completionList.listBox.SelectionChanged += ((s, le) => textbox.Focus());
-            completionListContext.RequestFilterButtonClick += ((s, le) => textbox.Focus());
+            completionList.listBox.SelectionChanged += ((s, le) => this.parent.Focus());
+            completionListContext.RequestFilterButtonClick += ((s, le) => this.parent.Focus());
+
+            completionList.listBox.MouseDoubleClick += ListBox_MouseDoubleClick;
+        }
+
+        private void ListBox_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            var listbox = sender as ListBox;
+
+            this.InputProcessOnCompletionList(this.parent, Key.Enter);
+
+            //var src = VisualTreeHelper.GetParent(e.OriginalSource as DependencyObject);
+            //if (src is VirtualizingStackPanel || src is ContentPresenter)
+            //{
+            //    this.InputProcessOnCompletionList(this.parent, Key.Enter);
+            //}
         }
 
         private void AssociatedObject_TextChanged(object sender, TextChangedEventArgs e)
@@ -136,21 +157,6 @@ namespace Parse.WpfControls.Behaviors
             if (completionList.IsOpen)
             {
                 if (this.InputProcessOnCompletionList(textbox, e.Key)) e.Handled = true;
-                return;
-            }
-        }
-
-        private void AssociatedObject_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-            var textbox = sender as TextBox;
-
-            if (completionList.listBox.IsMouseOver)
-            {
-                var src = VisualTreeHelper.GetParent(e.OriginalSource as DependencyObject);
-                if (src is VirtualizingStackPanel || src is ContentPresenter)
-                {
-                    this.InputProcessOnCompletionList(textbox, Key.Enter);
-                }
                 return;
             }
         }

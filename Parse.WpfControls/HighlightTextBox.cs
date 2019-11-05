@@ -2,6 +2,7 @@
 using Parse.WpfControls.EventArgs;
 using Parse.WpfControls.Models;
 using Parse.WpfControls.Utilities;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
@@ -14,13 +15,16 @@ using System.Windows.Media;
 
 namespace Parse.WpfControls
 {
-    public class HighlightTextBox : ExtensionTextBox
+    public class HighlightTextBox : TokenizeTextBox
     {
         private TextViewer renderCanvas;
         private ScrollViewer scrollViewer;
 
         private Dictionary<string, TextStyle> textStyleDic = new Dictionary<string, TextStyle>();
         private Dictionary<string, TextStyle> patternStyleDic = new Dictionary<string, TextStyle>();
+
+        /// <summary>For cache</summary>
+        private bool bSingleCharacterAdded = false;
 
         /// <summary>This member means maximum showable line count at one go.</summary>
         private int maxViewLineOnce = 100;
@@ -146,8 +150,6 @@ namespace Parse.WpfControls
             SetValue(CompletionItemsProperty, new ObservableCollection<CompletionItem>());
             SetValue(DelimiterSetProperty, new StringCollection());
 
-            this.LineString.Add(string.Empty);
-
 //            this.AddHandler(ListBox.MouseLeftButtonDownEvent, new RoutedEventHandler(this.OnMouseLeftClick), true);
 
             Loaded += (s, e) =>
@@ -166,13 +168,16 @@ namespace Parse.WpfControls
 
             TextChanged += (s, e) =>
             {
+                TextChange changeInfo = e.Changes.First();
+                string addString = this.Text.Substring(changeInfo.Offset, changeInfo.AddedLength);
+                if (changeInfo.RemovedLength == 0 && addString.Length == 1) this.bSingleCharacterAdded = true;
+
                 InvalidateVisual();
             };
         }
 
         public override void OnApplyTemplate()
         {
-
             base.OnApplyTemplate();
 
             this.renderCanvas = (TextViewer)Template.FindName("PART_RenderCanvas", this);
@@ -192,10 +197,19 @@ namespace Parse.WpfControls
         {
             List<ViewStringInfo> result = new List<ViewStringInfo>();
 
-            if (startLine >= this.LineString.Count) return result;
+            if (startLine >= this.LineIndexes.Count) return result;
 
-            int maxCnt = (startLine + cnt < this.LineString.Count) ? startLine + cnt : this.LineString.Count;
-            for (int i = startLine; i < maxCnt; i++) result.Add(new ViewStringInfo(this.LineString[i], i));
+            int maxCnt = (startLine + cnt < this.LineIndexes.Count) ? startLine + cnt : this.LineIndexes.Count;
+
+            for (int i = startLine; i < maxCnt; i++)
+            {
+                if (i == this.LineIndexes.Count - 1)
+                    result.Add(new ViewStringInfo(this.Text.Substring(this.LineIndexes[i], this.Text.Length - this.LineIndexes[i]), i));
+                else
+                    result.Add(new ViewStringInfo(this.Text.Substring(this.LineIndexes[i], this.LineIndexes[i+1] - this.LineIndexes[i] - Environment.NewLine.Length), i));
+
+                
+            }
 
             return result;
         }
@@ -254,6 +268,55 @@ namespace Parse.WpfControls
             }
         }
 
+        private void SingleLineRender(DrawingContext drawingContext)
+        {
+            this.bSingleCharacterAdded = false;
+            var startLineIndex = this.GetStartLineOnViewPos(this.VerticalOffset);
+            if (this.LineIndex >= startLineIndex && this.LineIndex <= startLineIndex + this.maxViewLineOnce)
+            {
+                var ViewLineString = this.GetLineStringCollection(this.LineIndex, 1);
+                if (ViewLineString.Count == 0) return;
+
+                var item = this.GetLineFormattedText(ViewLineString[0].Data);
+
+                int addIndex = this.LineIndex - startLineIndex;
+                this.renderCanvas.DrawLine(addIndex, item);
+            }
+        }
+
+        private void AllRender(DrawingContext drawingContext)
+        {
+            int startLine = this.GetStartLineOnViewPos(this.VerticalOffset);
+            var ViewLineString = this.GetLineStringCollection(startLine, this.maxViewLineOnce);
+            if (ViewLineString.Count == 0) return;
+
+            List<LineFormattedText> drawnItems = new List<LineFormattedText>();
+            foreach (var viewLineData in ViewLineString)
+            {
+                var item = this.GetLineFormattedText(viewLineData.Data);
+
+                drawnItems.Add(item);
+            }
+
+            /*
+            if (ViewLineString.First().AbsoluteLineIndex <= this.LineIndex && ViewLineString.Last().AbsoluteLineIndex >= this.LineIndex)
+            {
+                drawnItems[this.LineIndex].BackGroundBrush = this.SelectionLineBrush;
+                drawnItems[this.LineIndex].BorderBrush = this.SelectionLineBorderBrush;
+                drawnItems[this.LineIndex].BorderThickness = this.SelectionLineBorderThickness;
+            }
+            */
+
+            this.renderCanvas.DrawAll(drawnItems, this.HorizontalOffset, this.VerticalOffset, this.LineHeight);
+
+            base.OnRender(drawingContext);
+
+            int startNumber = ViewLineString.First().AbsoluteLineIndex + 1;
+            int endNumber = ViewLineString.Last().AbsoluteLineIndex + 1;
+            this.RaiseEvent(new EditorRenderedEventArgs(HighlightTextBox.RenderedEvent, startLine, endNumber,
+                                                                                this.HorizontalOffset, this.VerticalOffset, this.LineHeight));
+        }
+
         /// <summary>
         /// 
         /// </summary>
@@ -263,32 +326,14 @@ namespace Parse.WpfControls
             //            if (!IsLoaded || renderCanvas == null || lineNumbersCanvas == null) return;
             if (!IsLoaded || renderCanvas == null) return;
 
-            int startLine = this.GetStartLineOnViewPos(this.VerticalOffset);
-            var ViewLineString = this.GetLineStringCollection(startLine, this.maxViewLineOnce);
-
-            List<LineFormattedText> drawnItems = new List<LineFormattedText>();
-            foreach (var viewLineData in ViewLineString)
+            if (this.bSingleCharacterAdded)
             {
-                var item = this.GetLineFormattedText(viewLineData.Data);
-
-                if (viewLineData.AbsoluteLineIndex == this.LineIndex)
-                {
-                    item.BackGroundBrush = this.SelectionLineBrush;
-                    item.BorderBrush = this.SelectionLineBorderBrush;
-                    item.BorderThickness = this.SelectionLineBorderThickness;
-                }
-
-                drawnItems.Add(item);
+                this.SingleLineRender(drawingContext);
+                this.bSingleCharacterAdded = false;
+                return;
             }
-
-            this.renderCanvas.DrawAll(drawnItems, this.HorizontalOffset, this.VerticalOffset, this.LineHeight);
-
-            base.OnRender(drawingContext);
-
-            int startNumber = ViewLineString.First().AbsoluteLineIndex + 1;
-            int endNumber = ViewLineString.Last().AbsoluteLineIndex + 1;
-            this.RaiseEvent(new EditorRenderedEventArgs(HighlightTextBox.RenderedEvent, startLine, endNumber, 
-                                                                                this.HorizontalOffset, this.VerticalOffset, this.LineHeight));
+            else
+                this.AllRender(drawingContext);
         }
 
         public void AddCompletionList(CompletionItemType type, string item)
@@ -322,5 +367,7 @@ namespace Parse.WpfControls
             this.Data = data;
             this.AbsoluteLineIndex = absoluteLineIndex;
         }
+
+        public override string ToString() => string.Format("{0}, {1}", this.AbsoluteLineIndex, this.Data);
     }
 }

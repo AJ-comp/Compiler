@@ -1,4 +1,7 @@
-﻿namespace Parse.WpfControls
+﻿
+using System.Windows;
+
+namespace Parse.WpfControls
 {
     public class DrawingAlgorithm
     {
@@ -7,6 +10,7 @@
         private double lineHeight = 0;
         private double yPos = 0;
 
+        public Point DrawingStartingPoint { get; private set; } = new Point();
         public double DrawingPointX { get; private set; } = 0;
         public double DrawingPointY { get; private set; } = 0;
 
@@ -18,6 +22,8 @@
 
             this.VerticalPosInitial();
             this.HorizontalPosInitial();
+
+            this.DrawingStartingPoint = new Point(2 - this.horizontalOffset, yPos - this.verticalOffset);
         }
 
         public void VerticalPosInitial()
@@ -27,7 +33,7 @@
 
         public void HorizontalPosInitial()
         {
-            this.DrawingPointX = 2 - this.horizontalOffset;
+            this.DrawingPointX = this.DrawingStartingPoint.X;
         }
 
         /// <summary>
@@ -40,6 +46,15 @@
 
             this.DrawingPointY = this.yPos - this.verticalOffset;
             this.yPos += this.lineHeight;
+        }
+
+        public double GetDrawingYPosition(int index) => this.DrawingStartingPoint.Y + (this.lineHeight * index);
+
+        public Point GetDrawingPoint(int index)
+        {
+            Point result = this.DrawingStartingPoint;
+            result.Y += (this.lineHeight * index);
+            return result;
         }
 
         /// <summary>
