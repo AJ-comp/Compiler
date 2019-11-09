@@ -5,6 +5,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace Parse.WpfControls.Common
 {
@@ -92,6 +93,11 @@ namespace Parse.WpfControls.Common
             this.Loaded += (s, e) =>
             {
                 this.SelectionChanged += TextArea_SelectionChanged;
+            };
+
+            this.SelectionChanged += (s, e) =>
+            {
+                this.UpdateCaretInfo();
             };
 
             this.TextChanged += (s, e) =>

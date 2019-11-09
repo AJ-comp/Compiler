@@ -16,6 +16,7 @@
         <Setter Property="TextWrapping" Value="NoWrap"/>
         <Setter Property="Foreground" Value="#00000000"/>
         <Setter Property="SelectionLineBorderBrush" Value="DarkGray"/>
+        <Setter Property="SelectionLineBorderBrush" Value="DarkGray"/>
         <Setter Property="FontSize" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=FontSize, Mode=TwoWay}"/>
         <Setter Property="LineHeight" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=LineHeight}"/>
         <Setter Property="attached:TextBoxBehavior.TabSizeEnable" Value="True"/>
@@ -30,7 +31,8 @@
 
                         <Grid Margin="{TemplateBinding Padding}" x:Name="PART_Grid">
                             <host:TextViewer x:Name="PART_RenderCanvas" ClipToBounds="True"
-                                                            TextOptions.TextRenderingMode="ClearType" TextOptions.TextFormattingMode="Display"/>
+                                                            TextOptions.TextRenderingMode="ClearType" TextOptions.TextFormattingMode="Display"
+                                             LineHeight="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=LineHeight}"/>
 
                             <ScrollViewer x:Name="PART_ContentHost" Background="#00FFFFFF"/>
 

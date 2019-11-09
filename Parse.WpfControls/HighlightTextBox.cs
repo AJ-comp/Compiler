@@ -166,6 +166,11 @@ namespace Parse.WpfControls
                 InvalidateVisual();
             };
 
+            SelectionChanged += (s, e) =>
+            {
+                this.DrawSelectionLineAppearance();
+            };
+
             TextChanged += (s, e) =>
             {
                 TextChange changeInfo = e.Changes.First();
@@ -185,6 +190,18 @@ namespace Parse.WpfControls
         }
 
         private int GetStartLineOnViewPos(double topViewPos) => (int)(topViewPos / this.LineHeight);
+
+        private void DrawSelectionLineAppearance()
+        {
+            var appearance = new AppearanceInfo()
+            {
+                BorderBrush = this.SelectionLineBorderBrush,
+                BorderThickness = this.SelectionLineBorderThickness,
+                BackGroundBrush = Brushes.Transparent
+            };
+            int addedLineIndex = this.LineIndex - this.GetStartLineOnViewPos(this.VerticalOffset);
+            this.renderCanvas.DrawSelectedLineAppearance(addedLineIndex, appearance);
+        }
 
 
         /// <summary>
@@ -271,17 +288,14 @@ namespace Parse.WpfControls
         private void SingleLineRender(DrawingContext drawingContext)
         {
             this.bSingleCharacterAdded = false;
-            var startLineIndex = this.GetStartLineOnViewPos(this.VerticalOffset);
-            if (this.LineIndex >= startLineIndex && this.LineIndex <= startLineIndex + this.maxViewLineOnce)
-            {
-                var ViewLineString = this.GetLineStringCollection(this.LineIndex, 1);
-                if (ViewLineString.Count == 0) return;
+            int addedLineIndex = this.LineIndex - this.GetStartLineOnViewPos(this.VerticalOffset);
+            if (addedLineIndex < 0) return;
 
-                var item = this.GetLineFormattedText(ViewLineString[0].Data);
+            var ViewLineString = this.GetLineStringCollection(this.LineIndex, 1);
+            if (ViewLineString.Count == 0) return;
 
-                int addIndex = this.LineIndex - startLineIndex;
-                this.renderCanvas.DrawLine(addIndex, item);
-            }
+            var item = this.GetLineFormattedText(ViewLineString[0].Data);
+            this.renderCanvas.DrawLine(addedLineIndex, item);
         }
 
         private void AllRender(DrawingContext drawingContext)
@@ -298,16 +312,7 @@ namespace Parse.WpfControls
                 drawnItems.Add(item);
             }
 
-            /*
-            if (ViewLineString.First().AbsoluteLineIndex <= this.LineIndex && ViewLineString.Last().AbsoluteLineIndex >= this.LineIndex)
-            {
-                drawnItems[this.LineIndex].BackGroundBrush = this.SelectionLineBrush;
-                drawnItems[this.LineIndex].BorderBrush = this.SelectionLineBorderBrush;
-                drawnItems[this.LineIndex].BorderThickness = this.SelectionLineBorderThickness;
-            }
-            */
-
-            this.renderCanvas.DrawAll(drawnItems, this.HorizontalOffset, this.VerticalOffset, this.LineHeight);
+            this.renderCanvas.DrawAll(drawnItems, this.HorizontalOffset, this.VerticalOffset);
 
             base.OnRender(drawingContext);
 
@@ -334,6 +339,8 @@ namespace Parse.WpfControls
             }
             else
                 this.AllRender(drawingContext);
+
+            this.DrawSelectionLineAppearance();
         }
 
         public void AddCompletionList(CompletionItemType type, string item)

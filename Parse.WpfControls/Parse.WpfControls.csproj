@@ -117,7 +117,6 @@
     <Compile Include="HighlightTextBox.cs" />
     <Compile Include="TextViewer.cs" />
     <Compile Include="TextStyle.cs" />
-    <Compile Include="Common\DrawingControl.cs" />
     <Compile Include="ViewModels\CompletionListViewModel.cs" />
     <Compile Include="Utilities\StringUtility.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />

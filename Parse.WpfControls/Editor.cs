@@ -163,7 +163,7 @@ namespace Parse.WpfControls
             if (this.IsLoaded == false || this.lineNumbersCanvas == null || this.TextArea == null) return;
             if (this.endLine - this.startLine <= 0) return;
 
-            this.lineNumbersCanvas.SetDrawStartingPos(0, this.recentVerticalOffset, this.LineHeight);
+            this.lineNumbersCanvas.SetDrawStartingPos(0, this.recentVerticalOffset);
 
             List<FormattedText> lines = new List<FormattedText>();
 
