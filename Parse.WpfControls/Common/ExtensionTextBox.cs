@@ -2,10 +2,10 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Input;
 
 namespace Parse.WpfControls.Common
 {
@@ -22,6 +22,7 @@ namespace Parse.WpfControls.Common
         //        public new LineChangedEventHandler TextChanged;
 
         public List<int> LineIndexes { get; } = new List<int>();
+
 //        public Dictionary<int, TokenDataList> TokenDataByLine { get; } = new Dictionary<int, TokenDataList>();
 //        public BlockManager BlockManager { get; } = new BlockManager();
 
@@ -35,18 +36,6 @@ namespace Parse.WpfControls.Common
         // Using a DependencyProperty as the backing store for BeforeCharFromCursor.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty BeforeCharFromCursorProperty =
             DependencyProperty.Register("BeforeCharFromCursor", typeof(char), typeof(ExtensionTextBox), new PropertyMetadata(' '));
-
-
-        public ObservableCollection<string> TokenPatternList
-        {
-            get { return (ObservableCollection<string>)GetValue(TokenPatternListProperty); }
-            set { SetValue(TokenPatternListProperty, value); }
-        }
-
-        // Using a DependencyProperty as the backing store for TokenPatternList.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty TokenPatternListProperty =
-            DependencyProperty.Register("TokenPatternList", typeof(ObservableCollection<string>), typeof(ExtensionTextBox), new PropertyMetadata(new ObservableCollection<string>()));
-
 
 
 
@@ -131,6 +120,7 @@ namespace Parse.WpfControls.Common
             return result;
         }
 
+        public int GetStartingCaretIndexOfLineIndex(int lineIndex) => (lineIndex >= this.LineIndexes.Count) ? -1 : this.LineIndexes[lineIndex];
 
         protected void UpdateCaretInfo()
         {
@@ -177,79 +167,6 @@ namespace Parse.WpfControls.Common
             this.DelCharFromLineString(changeInfo);
             this.AddCharToLineString(changeInfo.Offset, addString);
         }
-
-        /*
-        private void EditTokenFromChar(int lineIndex, int startCaretByLine, string addString)
-        {
-
-            else
-            {
-                
-
-                int minIndex = 0xff;
-                PatternInfo selectedPattern = null;
-                foreach (var pattern in this.TokenPattern)
-                {
-                    Match matchInfo = Regex.Match(token, pattern.StartPattern);
-                    if (matchInfo.Success == false) continue;
-
-                    int curIndex = matchInfo.Index;
-                    if (minIndex > curIndex)
-                    {
-                        minIndex = curIndex;
-                        selectedPattern = pattern;
-                    }
-                }
-
-                if (selectedPattern != null)
-                {
-                    selectedPattern.EndPattern
-                }
-            }
-        }
-
-        /// <summary>
-        /// This function merge addString with existing token and returns merged token.
-        /// </summary>
-        /// <param name="lineIndex"></param>
-        /// <param name="startCaretByLine"></param>
-        /// <param name="addString">a string that tries to merge.</param>
-        /// <returns>first : token index, second : TokenData</returns>
-        private Tuple<int, TokenData> TokenMerge(int lineIndex, int startCaretByLine, string addString)
-        {
-            if (this.TokenDataByLine.ContainsKey(lineIndex) == false)
-            {
-                var tokenList = new TokenDataList();
-                var tokenData = new TokenData() { Token = addString, StartIndex = startCaretByLine, bEnd = false };
-                tokenList.Add(tokenData);
-
-                this.TokenDataByLine.Add(lineIndex, tokenList);
-                return new Tuple<int, TokenData>(0, tokenData);
-            }
-            else
-            {
-                var tokenDataList = this.TokenDataByLine[lineIndex].GetCandidateTokens(startCaretByLine);
-                if(tokenDataList != null)
-                {
-
-                    tokenData.Item2.Token.Insert(startCaretByLine, addString);
-                    return new Tuple<int, TokenData>(tokenData.Item1, tokenData.Item2);
-                }
-
-                tokenData = 
-                {
-
-                }
-            }
-        }
-
-        private void EditToken(int lineIndex, int startCaretByLine, string addString)
-        {
-            if (addString.Length == 1) this.EditTokenFromChar(lineIndex, startCaretByLine, addString);
-
-
-        }
-        */
 
         /// <summary>
         /// This function adds line-string an added string.

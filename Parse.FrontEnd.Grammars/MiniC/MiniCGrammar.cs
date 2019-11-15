@@ -12,7 +12,7 @@ namespace Parse.FrontEnd.Grammars.MiniC
         private Terminal @int = new Terminal(TokenType.Keyword, "int");
         private Terminal @void = new Terminal(TokenType.Keyword, "void");
         private Terminal ident = new Terminal(TokenType.Identifier, "[_a-zA-Z][_a-zA-Z0-9]*", "ident", true, true);
-        private Terminal number = new Terminal(TokenType.Digit10, "[0-9]*", "number", true, true);
+        private Terminal number = new Terminal(TokenType.Digit10, "[0-9]+", "number", true, true);
         private Terminal lineComment = new Terminal(TokenType.LineComment, "//.*$", false, true);
 
         private Terminal openParenthesis = new Terminal(TokenType.Operator, "(");

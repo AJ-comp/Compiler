@@ -96,7 +96,7 @@
     <Compile Include="Editor.cs" />
     <Compile Include="EventArgs\LineChangedEventArgs.cs" />
     <Compile Include="Models\BlockManager.cs" />
-    <Compile Include="Models\TokenManager.cs" />
+    <Compile Include="Models\HighlightText.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -115,7 +115,7 @@
     <Compile Include="EventArgs\EditorRenderedEventArgs.cs" />
     <Compile Include="Models\CompletionItem.cs" />
     <Compile Include="HighlightTextBox.cs" />
-    <Compile Include="TextViewer.cs" />
+    <Compile Include="TextCanvas.cs" />
     <Compile Include="TextStyle.cs" />
     <Compile Include="ViewModels\CompletionListViewModel.cs" />
     <Compile Include="Utilities\StringUtility.cs" />

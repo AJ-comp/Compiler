@@ -20,8 +20,10 @@ namespace Parse.FrontEnd.Grammars
         public TerminalSet TerminalSet { get; } = new TerminalSet();
         public NonTerminal StartSymbol { get; private set; } = null;
 
-        private string letter = "[a-zA-Z]";
-        private string varLetter = "[_a-zA-Z]";
+        public string IdentPattern { get; } = "[_a-zA-Z][_a-zA-Z0-9]*";
+        public string LetterPattern { get; } = "[a-zA-Z]";
+        public string VarLetterPattern { get; } = "[_a-zA-Z]";
+        public string DigitPattern { get; } = "[0-9]+";
 
         public Grammar()
         {

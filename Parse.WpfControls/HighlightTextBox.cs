@@ -1,7 +1,6 @@
 ﻿using Parse.WpfControls.Common;
 using Parse.WpfControls.EventArgs;
 using Parse.WpfControls.Models;
-using Parse.WpfControls.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -17,7 +16,7 @@ namespace Parse.WpfControls
 {
     public class HighlightTextBox : TokenizeTextBox
     {
-        private TextViewer renderCanvas;
+        private TextCanvas renderCanvas;
         private ScrollViewer scrollViewer;
 
         private Dictionary<string, TextStyle> textStyleDic = new Dictionary<string, TextStyle>();
@@ -185,7 +184,7 @@ namespace Parse.WpfControls
         {
             base.OnApplyTemplate();
 
-            this.renderCanvas = (TextViewer)Template.FindName("PART_RenderCanvas", this);
+            this.renderCanvas = (TextCanvas)Template.FindName("PART_RenderCanvas", this);
             this.scrollViewer = (ScrollViewer)Template.FindName("PART_ContentHost", this);
         }
 
@@ -205,73 +204,85 @@ namespace Parse.WpfControls
 
 
         /// <summary>
-        /// This function gets the line-string-collection
+        /// This function gets the line-string-collection.
         /// </summary>
         /// <param name="startLine">The start line that gets line-string-collection</param>
         /// <param name="cnt">Line count</param>
         /// <returns></returns>
-        private List<ViewStringInfo> GetLineStringCollection(int startLine, int cnt)
+        private List<LineHighlightText> GetLineStringCollection(int startLine, int cnt)
         {
-            List<ViewStringInfo> result = new List<ViewStringInfo>();
+            List<LineHighlightText> result = new List<LineHighlightText>();
+            var tokenStartIndex = this.GetTokenIndexFromCaretIndex(this.GetStartingCaretIndexOfLineIndex(startLine));
 
+            if (tokenStartIndex < 0) return result;
             if (startLine >= this.LineIndexes.Count) return result;
 
             int maxCnt = (startLine + cnt < this.LineIndexes.Count) ? startLine + cnt : this.LineIndexes.Count;
 
-            for (int i = startLine; i < maxCnt; i++)
+            int lineIndex = startLine + 1;
+            LineHighlightText lineString = new LineHighlightText();
+            for (int i = tokenStartIndex; i < this.Tokens.Count; i++)
             {
-                if (i == this.LineIndexes.Count - 1)
-                    result.Add(new ViewStringInfo(this.Text.Substring(this.LineIndexes[i], this.Text.Length - this.LineIndexes[i]), i));
-                else
-                    result.Add(new ViewStringInfo(this.Text.Substring(this.LineIndexes[i], this.LineIndexes[i+1] - this.LineIndexes[i] - Environment.NewLine.Length), i));
+                int lbPos = (lineIndex == this.LineIndexes.Count) ? -1 : this.LineIndexes[lineIndex] - 1;
 
-                
+                // Not found the line break syntax.
+                if (this.Tokens[i].StartIndex > lbPos || lbPos > this.Tokens[i].EndIndex)
+                {
+                    lineString.Add(this.GetHighlightToken(this.Tokens[i]));
+                    continue;
+                }
+
+                // Found the line break syntax.
+                string[] lineStrings = this.Tokens[i].Data.Split(new string[] { "\n" }, StringSplitOptions.RemoveEmptyEntries);
+                for (int j = 0; j < lineStrings.Length - 1; j++)
+                {
+                    lineString.Add(this.GetHighlightToken(lineStrings[j], this.Tokens[i].PatternInfo.OriginalPattern));
+                    lineString.AbsoluteLineIndex = lineIndex - 1;
+                    result.Add(lineString);
+                    lineString = new LineHighlightText();
+
+                    if (lineIndex++ > maxCnt) break;
+                }
+
+                lineString.Add(this.GetHighlightToken(lineStrings.Last(), this.Tokens[i].PatternInfo.OriginalPattern));
+                // If the count of the elements of the lineStrings is one then the above loop statement is not executed so execute the following logic instead of.
+                if (lineStrings.Length == 1)
+                {
+                    lineString.AbsoluteLineIndex = lineIndex - 1;
+                    result.Add(lineString);
+                    lineIndex++;
+                }
+                if (lineIndex > maxCnt) break;
             }
+
+            if (lineString.Count > 0) result.Add(lineString);
 
             return result;
         }
 
         /// <summary>
-        /// This function returns a string that is applied a style.
+        /// This function returns a HighlightToken from the TokenInfo.
         /// </summary>
-        /// <param name="text"></param>
+        /// <param name="tokenInfo"></param>
         /// <returns></returns>
-        private FormattedText GetFormattedText(string text)
+        private HighlightToken GetHighlightToken(TokenInfo tokenInfo)
+        {
+            return this.GetHighlightToken(tokenInfo.Data, tokenInfo.PatternInfo.OriginalPattern);
+        }
+
+        private HighlightToken GetHighlightToken(string text, string pattern)
         {
             Brush foreBrush = Brushes.Black;
-            if (this.textStyleDic.ContainsKey(text)) foreBrush = this.textStyleDic[text].ForeGround;
-            else
-            {
-                foreach (var item in this.patternStyleDic)
-                {
-                    // all match
-                    if (Regex.Match(text, item.Key).Length == text.Length)
-                    {
-                        foreBrush = item.Value.ForeGround;
-                        break;
-                    }
-                }
-            }
+            if (this.textStyleDic.ContainsKey(pattern))
+                foreBrush = this.textStyleDic[pattern].ForeGround;
 
-            FormattedText ft = new FormattedText(text, CultureInfo.InvariantCulture, FlowDirection.LeftToRight,
-                new Typeface(FontFamily, FontStyle, FontWeight, FontStretch),
-                FontSize,
-                foreBrush);
+            HighlightToken ft = new HighlightToken(text, CultureInfo.InvariantCulture, FlowDirection.LeftToRight,
+                new Typeface(FontFamily, FontStyle, FontWeight, FontStretch), this.FontSize, foreBrush, VisualTreeHelper.GetDpi(this).PixelsPerDip);
 
             ft.Trimming = TextTrimming.None;
             ft.LineHeight = this.LineHeight;
 
             return ft;
-        }
-
-        private LineFormattedText GetLineFormattedText(string line)
-        {
-            LineFormattedText result = new LineFormattedText();
-
-            foreach (var token in StringUtility.SplitAndKeep(line, this.DelimiterSet.Cast<string>().ToArray()).ToList())
-                result.Add(this.GetFormattedText(token));
-
-            return result;
         }
 
         private void OnScrollChanged(object sender, ScrollChangedEventArgs e)
@@ -294,8 +305,7 @@ namespace Parse.WpfControls
             var ViewLineString = this.GetLineStringCollection(this.LineIndex, 1);
             if (ViewLineString.Count == 0) return;
 
-            var item = this.GetLineFormattedText(ViewLineString[0].Data);
-            this.renderCanvas.DrawLine(addedLineIndex, item);
+            this.renderCanvas.DrawLine(addedLineIndex, ViewLineString.First());
         }
 
         private void AllRender(DrawingContext drawingContext)
@@ -304,20 +314,13 @@ namespace Parse.WpfControls
             var ViewLineString = this.GetLineStringCollection(startLine, this.maxViewLineOnce);
             if (ViewLineString.Count == 0) return;
 
-            List<LineFormattedText> drawnItems = new List<LineFormattedText>();
-            foreach (var viewLineData in ViewLineString)
-            {
-                var item = this.GetLineFormattedText(viewLineData.Data);
-
-                drawnItems.Add(item);
-            }
-
-            this.renderCanvas.DrawAll(drawnItems, this.HorizontalOffset, this.VerticalOffset);
+            this.renderCanvas.DrawAll(ViewLineString, this.HorizontalOffset, this.VerticalOffset);
 
             base.OnRender(drawingContext);
 
             int startNumber = ViewLineString.First().AbsoluteLineIndex + 1;
             int endNumber = ViewLineString.Last().AbsoluteLineIndex + 1;
+
             this.RaiseEvent(new EditorRenderedEventArgs(HighlightTextBox.RenderedEvent, startLine, endNumber,
                                                                                 this.HorizontalOffset, this.VerticalOffset, this.LineHeight));
         }
@@ -351,15 +354,14 @@ namespace Parse.WpfControls
         /// <summary>
         /// This function adds information which to syntax-highlight to the editor.
         /// </summary>
-        /// <param name="text"></param>
-        /// <param name="foreBrush"></param>
-        /// <param name="bPattern"></param>
-        public void AddSyntaxHighLightInfo(string text, Brush foreBrush, bool bPattern = false)
+        /// <param name="text">This argument means text to highlight. This argument can be a pattern.</param>
+        /// <param name="foreBrush">This argument means the foreground color of the text.</param>
+        /// <param name="bCanDerived">This argument means whether a text argument can create a derived text.</param>
+        /// <param name="bOperator">This argument means whether text is operator.</param>
+        public void AddSyntaxHighLightInfo(string text, object type, Brush foreBrush, bool bCanDerived, bool bOperator = false)
         {
-            if (bPattern)
-                this.patternStyleDic.Add(text, new TextStyle(foreBrush, Brushes.Transparent));
-            else
-                this.textStyleDic.Add(text, new TextStyle(foreBrush, Brushes.Transparent));
+            this.textStyleDic.Add(text, new TextStyle(foreBrush, Brushes.Transparent));
+            this.TokenPatternList.Add(new TokenPatternInfo(type, text, bCanDerived, bOperator));
         }
     }
 

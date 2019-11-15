@@ -78,6 +78,9 @@
                                 <Border BorderThickness="5" BorderBrush="Transparent"/>
                                 <TextBlock Text="CaretPosition="/>
                                 <TextBlock Text="{Binding ElementName=syntaxEditor, Path=TextArea.StartCaretIndexByLine}"/>
+                                <Border BorderThickness="5" BorderBrush="Transparent"/>
+                                <TextBlock Text="TokenIndex="/>
+                                <TextBlock Text="{Binding ElementName=syntaxEditor, Path=TextArea.TokenIndex}"/>
                             </StackPanel>
                         </StatusBarItem>
                     </StatusBar>

@@ -121,25 +121,33 @@ namespace Parse.WpfControls.SyntaxEditor
 
         private void RegisterKeywords(Grammar grammar)
         {
+            // The keyword type doesn't have delimitable ability.
+            // The terminal that has the derive ability also doesn't have delimitable ability.
+            // Only operator type has delimitable ability.
+
             foreach (var terminal in grammar.TerminalSet)
             {
                 if (terminal.TokenType == RegularGrammar.TokenType.Keyword)
                 {
                     this.TextArea.AddCompletionList(CompletionItemType.Keyword, terminal.Value);
-                    this.TextArea.AddSyntaxHighLightInfo(terminal.Value, KeywordForeground, terminal.Pattern);
+                    this.TextArea.AddSyntaxHighLightInfo(terminal.Value, terminal.TokenType, KeywordForeground, terminal.CanDerived);
                 }
                 else if(terminal.TokenType == RegularGrammar.TokenType.LineComment)
-                    this.TextArea.AddSyntaxHighLightInfo(terminal.Value, this.LineCommentForeground, terminal.Pattern);
+                    this.TextArea.AddSyntaxHighLightInfo(terminal.Value, terminal.TokenType, this.LineCommentForeground, terminal.CanDerived);
                 else if (terminal.TokenType == RegularGrammar.TokenType.ScopeComment)
-                    this.TextArea.AddSyntaxHighLightInfo(terminal.Value, this.ScopeCommentForeground, terminal.Pattern);
+                    this.TextArea.AddSyntaxHighLightInfo(terminal.Value, terminal.TokenType, this.ScopeCommentForeground, terminal.CanDerived);
                 else if (terminal.TokenType == RegularGrammar.TokenType.Digit10)
-                    this.TextArea.AddSyntaxHighLightInfo(terminal.Value, this.DigitForeground, terminal.Pattern);
+                    this.TextArea.AddSyntaxHighLightInfo(terminal.Value, terminal.TokenType, this.DigitForeground, terminal.CanDerived);
                 else if (terminal.TokenType == RegularGrammar.TokenType.Digit2)
-                    this.TextArea.AddSyntaxHighLightInfo(terminal.Value, this.BinaryForeground, terminal.Pattern);
+                    this.TextArea.AddSyntaxHighLightInfo(terminal.Value, terminal.TokenType, this.BinaryForeground, terminal.CanDerived);
                 else if (terminal.TokenType == RegularGrammar.TokenType.Digit8)
-                    this.TextArea.AddSyntaxHighLightInfo(terminal.Value, this.OctalForeground, terminal.Pattern);
+                    this.TextArea.AddSyntaxHighLightInfo(terminal.Value, terminal.TokenType, this.OctalForeground, terminal.CanDerived);
                 else if (terminal.TokenType == RegularGrammar.TokenType.Digit16)
-                    this.TextArea.AddSyntaxHighLightInfo(terminal.Value, this.HexForeground, terminal.Pattern);
+                    this.TextArea.AddSyntaxHighLightInfo(terminal.Value, terminal.TokenType, this.HexForeground, terminal.CanDerived);
+                else if (terminal.TokenType == RegularGrammar.TokenType.Operator)
+                    this.TextArea.AddSyntaxHighLightInfo(terminal.Value, terminal.TokenType, Brushes.Black, terminal.CanDerived, true);
+                else if(terminal.TokenType == RegularGrammar.TokenType.Identifier)
+                    this.TextArea.AddSyntaxHighLightInfo(terminal.Value, terminal.TokenType, Brushes.Black, terminal.CanDerived);
             }
 
             foreach (var delimiter in grammar.DelimiterDic)

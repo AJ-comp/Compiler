@@ -30,7 +30,7 @@
                                 Background="{Binding BackGround}">
 
                         <Grid Margin="{TemplateBinding Padding}" x:Name="PART_Grid">
-                            <host:TextViewer x:Name="PART_RenderCanvas" ClipToBounds="True"
+                            <host:TextCanvas x:Name="PART_RenderCanvas" ClipToBounds="True"
                                                             TextOptions.TextRenderingMode="ClearType" TextOptions.TextFormattingMode="Display"
                                              LineHeight="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=LineHeight}"/>
 

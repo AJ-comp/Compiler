@@ -1,4 +1,4 @@
-﻿using Parse.WpfControls.Common;
+﻿using Parse.WpfControls.Models;
 using System;
 using System.Collections.Generic;
 using System.Windows;
@@ -7,7 +7,7 @@ using System.Windows.Media;
 namespace Parse.WpfControls
 {
     //    [System.Windows.Markup.ContentProperty("Inlines")]
-    public class TextViewer : FrameworkElement
+    public class TextCanvas : FrameworkElement
     {
         private double currentVerticalOffset = 0;
         private double currentHorizontalOffset = 0;
@@ -27,10 +27,10 @@ namespace Parse.WpfControls
 
         // Using a DependencyProperty as the backing store for LineHeight.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty LineHeightProperty =
-            DependencyProperty.Register("LineHeight", typeof(double), typeof(TextViewer), new PropertyMetadata(null));
+            DependencyProperty.Register("LineHeight", typeof(double), typeof(TextCanvas), new PropertyMetadata(null));
 
 
-        public TextViewer()
+        public TextCanvas()
         {
             this.lines = new VisualCollection(this);
             this.AddVisualChild(this.selectionLineAppearance);
@@ -84,7 +84,7 @@ namespace Parse.WpfControls
             }
         }
 
-        public void DrawAll(List<LineFormattedText> contents, double horizontalOffset, double verticalOffset)
+        public void DrawAll(List<LineHighlightText> contents, double horizontalOffset, double verticalOffset)
         {
             this.algorithm.Initial(this.LineHeight, horizontalOffset, verticalOffset);
 
@@ -111,7 +111,7 @@ namespace Parse.WpfControls
             }
         }
 
-        public void DrawLine(int index, LineFormattedText line)
+        public void DrawLine(int index, LineHighlightText line)
         {
             for (int i = this.lines.Count - 1; i < index; i++)
             {
@@ -163,17 +163,5 @@ namespace Parse.WpfControls
 
         public void AddLine() => this.lines.Add(new DrawingVisual());
         public DrawingVisual GetLastLine() => this.lines[this.lines.Count - 1] as DrawingVisual;
-    }
-
-    public class LineFormattedText : List<FormattedText>
-    {
-    }
-
-    public class AppearanceInfo
-    {
-        public Brush BorderBrush { get; set; } = Brushes.Transparent;
-        public Brush BackGroundBrush { get; set; } = Brushes.Transparent;
-
-        public int BorderThickness { get; set; } = 1;
     }
 }

@@ -44,7 +44,7 @@ namespace Parse.WpfControls
         private int startLine = 0;
         private int endLine = 1;
 
-        private TextViewer lineNumbersCanvas;
+        private TextCanvas lineNumbersCanvas;
 
         #region Dependency Properties
         public HighlightTextBox TextArea
@@ -125,7 +125,7 @@ namespace Parse.WpfControls
         {
             base.OnApplyTemplate();
 
-            this.lineNumbersCanvas = (TextViewer)Template.FindName("PART_LineNumbersCanvas", this);
+            this.lineNumbersCanvas = (TextCanvas)Template.FindName("PART_LineNumbersCanvas", this);
             this.TextArea = (HighlightTextBox)Template.FindName("PART_TextArea", this);
         }
 
@@ -172,7 +172,7 @@ namespace Parse.WpfControls
             for (int i = startLine; i < endLine; i++)
             {
                 FormattedText lineNumberingText = new FormattedText((i + 1).ToString(), CultureInfo.InvariantCulture, FlowDirection.LeftToRight,
-                    new Typeface(FontFamily, FontStyle, FontWeight, FontStretch), this.FontSize, this.LineNumberForeColor);
+                    new Typeface(FontFamily, FontStyle, FontWeight, FontStretch), this.FontSize, this.LineNumberForeColor, VisualTreeHelper.GetDpi(this).PixelsPerDip);
 
                 lines.Add(lineNumberingText);
             }

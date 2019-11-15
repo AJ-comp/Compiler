@@ -11,24 +11,24 @@ namespace Parse.RegularGrammar
         public TokenType TokenType { get; }
         public string Value { get; } = string.Empty;
         public bool Meaning { get; } = true;
-        public bool Pattern { get; } = false;
+        public bool CanDerived { get; } = false;
 
-        public Terminal(TokenType type, string value, bool meaning = true, bool pattern = false)
+        public Terminal(TokenType type, string value, bool meaning = true, bool CanDerived = false)
         {
             this.TokenType = type;
             this.Value = value;
             this.caption = value;
             this.Meaning = meaning;
-            this.Pattern = pattern;
+            this.CanDerived = CanDerived;
         }
 
-        public Terminal(TokenType type, string value, string caption, bool meaning = true, bool pattern = false)
+        public Terminal(TokenType type, string value, string caption, bool meaning = true, bool CanDerived = false)
         {
             this.TokenType = type;
             this.Value = value;
             this.caption = caption;
             this.Meaning = meaning;
-            this.Pattern = pattern;
+            this.CanDerived = CanDerived;
         }
 
         public override string ToString()
