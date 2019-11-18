@@ -1,4 +1,4 @@
-﻿using Parse.RegularGrammar;
+﻿using Parse.FrontEnd.RegularGrammar;
 
 namespace Parse.FrontEnd.Grammars.MiniC
 {
@@ -13,7 +13,9 @@ namespace Parse.FrontEnd.Grammars.MiniC
         private Terminal @void = new Terminal(TokenType.Keyword, "void");
         private Terminal ident = new Terminal(TokenType.Identifier, "[_a-zA-Z][_a-zA-Z0-9]*", "ident", true, true);
         private Terminal number = new Terminal(TokenType.Digit10, "[0-9]+", "number", true, true);
-        private Terminal lineComment = new Terminal(TokenType.LineComment, "//.*$", false, true);
+        private Terminal lineComment = new Terminal(TokenType.Comment, "//.*$", false, true);
+
+        //        private Terminal scopeComment = new Terminal(TokenType.Comment, new ScopeSyntax("/*", "*/"), string.Empty, false);
 
         private Terminal openParenthesis = new Terminal(TokenType.Operator, "(");
         private Terminal closeParenthesis = new Terminal(TokenType.Operator, ")");
@@ -22,6 +24,8 @@ namespace Parse.FrontEnd.Grammars.MiniC
         private Terminal openSquareBrace = new Terminal(TokenType.Operator, "[");
         private Terminal closeSquareBrace = new Terminal(TokenType.Operator, "]");
 
+        private Terminal scopeCommentStart = new Terminal(TokenType.Operator, "/*");
+        private Terminal scopeCommentEnd = new Terminal(TokenType.Operator, "*/");
         private Terminal inc = new Terminal(TokenType.Operator, "++");
         private Terminal dec = new Terminal(TokenType.Operator, "--");
         private Terminal add = new Terminal(TokenType.Operator, "+");
@@ -97,6 +101,8 @@ namespace Parse.FrontEnd.Grammars.MiniC
 
         public MiniCGrammar()
         {
+            this.ScopeInfos.Add(new ScopeInfo(this.scopeCommentStart, this.scopeCommentEnd));
+
             MiniCSdts sdts = new MiniCSdts(this.keyManager);
 
             this.miniC.AddItem(this.translationUnit, sdts.Program);

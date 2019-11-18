@@ -1,4 +1,4 @@
-﻿namespace Parse.RegularGrammar
+﻿namespace Parse.FrontEnd.RegularGrammar
 {
     public enum BridgeType { Concatenation, Alternation };
 

@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-namespace Parse.RegularGrammar
+namespace Parse.FrontEnd.RegularGrammar
 {
     public class NonTerminalConcat : IList<Symbol>, ICloneable, ITemplateCreatable
     {

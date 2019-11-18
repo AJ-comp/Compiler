@@ -77,9 +77,9 @@
       <Project>{a0661596-8c09-42a8-b412-8702108fd935}</Project>
       <Name>Parse.FrontEnd.Grammars</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Parse\Parse.csproj">
+    <ProjectReference Include="..\Parse\Parse.FrontEnd.csproj">
       <Project>{54ec5cea-8d91-4165-9ebb-6a0693a96c4f}</Project>
-      <Name>Parse</Name>
+      <Name>Parse.FrontEnd</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

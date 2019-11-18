@@ -1,9 +1,8 @@
-﻿using System;
+﻿using Parse;
+using System;
 
-namespace Parse.RegularGrammar
+namespace Parse.FrontEnd.RegularGrammar
 {
-    public enum TokenType { Keyword, Operator, Identifier, LineComment, ScopeComment, NotDefined, Epsilon, Digit2, Digit10, Digit8, Digit16, Marker };
-
     public class Terminal : Symbol
     {
         private string caption = string.Empty;
@@ -13,15 +12,9 @@ namespace Parse.RegularGrammar
         public bool Meaning { get; } = true;
         public bool CanDerived { get; } = false;
 
-        public Terminal(TokenType type, string value, bool meaning = true, bool CanDerived = false)
+        public Terminal(TokenType type, string value, bool meaning = true, bool CanDerived = false) : this(type, value, value, meaning, CanDerived)
         {
-            this.TokenType = type;
-            this.Value = value;
-            this.caption = value;
-            this.Meaning = meaning;
-            this.CanDerived = CanDerived;
         }
-
         public Terminal(TokenType type, string value, string caption, bool meaning = true, bool CanDerived = false)
         {
             this.TokenType = type;

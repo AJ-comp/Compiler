@@ -96,13 +96,17 @@
       <Project>{eaf7d943-d2f9-4bb0-929f-04db7b59d9d5}</Project>
       <Name>Parse.FrontEnd.Parsers</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Parse.FrontEnd\Parse.csproj">
+      <Project>{46590802-ce40-49c9-86e1-cd6f3487ff5b}</Project>
+      <Name>Parse</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Parse.WpfControls\Parse.WpfControls.csproj">
       <Project>{1d389520-0862-434b-82f9-ad0c41c2db5f}</Project>
       <Name>Parse.WpfControls</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Parse\Parse.csproj">
-      <Project>{54EC5CEA-8D91-4165-9EBB-6A0693A96C4F}</Project>
-      <Name>Parse</Name>
+    <ProjectReference Include="..\Parse\Parse.FrontEnd.csproj">
+      <Project>{54ec5cea-8d91-4165-9ebb-6a0693a96c4f}</Project>
+      <Name>Parse.FrontEnd</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

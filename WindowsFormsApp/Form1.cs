@@ -1,6 +1,6 @@
 ﻿using ActiproSoftware.SyntaxEditor;
-using Parse.Ast;
-using Parse.Extensions;
+using Parse.FrontEnd.Ast;
+using Parse.FrontEnd.Extensions;
 using Parse.FrontEnd.Grammars.MiniC;
 using Parse.FrontEnd.Parsers.Collections;
 using Parse.FrontEnd.Parsers.LR;

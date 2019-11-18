@@ -1,6 +1,6 @@
 ﻿using Parse.FrontEnd.Parsers.Collections;
 using Parse.FrontEnd.Parsers.Datas;
-using Parse.RegularGrammar;
+using Parse.FrontEnd.RegularGrammar;
 using System.Collections.Generic;
 
 namespace Parse.FrontEnd.Parsers

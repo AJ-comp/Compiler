@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 
-namespace Parse.Extensions
+namespace Parse.FrontEnd.Extensions
 {
     public static class EtcExtensionMethods
     {

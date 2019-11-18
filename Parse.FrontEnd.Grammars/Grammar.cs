@@ -1,4 +1,5 @@
-﻿using Parse.RegularGrammar;
+﻿using Parse;
+using Parse.FrontEnd.RegularGrammar;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +17,7 @@ namespace Parse.FrontEnd.Grammars
         public HashSet<NonTerminal> NonTerminalMultiples { get; } = new HashSet<NonTerminal>();
         public HashSet<NonTerminal> AutoGenerateNTSet { get; } = new HashSet<NonTerminal>();
         public HashSet<NonTerminalSingle> NonTerminalSingles { get; } = new HashSet<NonTerminalSingle>();
+        public HashSet<ScopeInfo> ScopeInfos { get; } = new HashSet<ScopeInfo>();
 
         public TerminalSet TerminalSet { get; } = new TerminalSet();
         public NonTerminal StartSymbol { get; private set; } = null;
@@ -207,5 +209,20 @@ namespace Parse.FrontEnd.Grammars
 
             return result;
         }
+    }
+
+
+    public class ScopeInfo
+    {
+        public Terminal StartTerminal { get; }
+        public Terminal EndTerminal { get; }
+
+        public ScopeInfo(Terminal startTerminal, Terminal endTerminal)
+        {
+            this.StartTerminal = startTerminal;
+            this.EndTerminal = endTerminal;
+        }
+
+        public override string ToString() => string.Format("{0},{1}", this.StartTerminal, this.EndTerminal);
     }
 }

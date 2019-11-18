@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Parse.Extensions
+namespace Parse.FrontEnd.Extensions
 {
     public static class ListExtensionMethods
     {

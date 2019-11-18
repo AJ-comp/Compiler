@@ -1,7 +1,7 @@
-﻿using Parse.RegularGrammar;
+﻿using Parse.FrontEnd.RegularGrammar;
 using System.Collections.Generic;
 
-namespace Parse
+namespace Parse.FrontEnd
 {
     public static class Convert
     {

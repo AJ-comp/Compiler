@@ -1,8 +1,8 @@
-﻿using Parse.Ast;
-using Parse.Extensions;
+﻿using Parse.FrontEnd.Ast;
+using Parse.FrontEnd.Extensions;
 using Parse.FrontEnd.Grammars;
 using Parse.FrontEnd.Parsers.Collections;
-using Parse.RegularGrammar;
+using Parse.FrontEnd.RegularGrammar;
 using ParsingLibrary.Parsers.RelationAnalyzers;
 using System;
 using System.Collections.Generic;

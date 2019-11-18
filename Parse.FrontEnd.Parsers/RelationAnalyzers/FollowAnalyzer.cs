@@ -1,4 +1,4 @@
-﻿using Parse.RegularGrammar;
+﻿using Parse.FrontEnd.RegularGrammar;
 using System.Collections.Generic;
 
 namespace Parse.FrontEnd.Parsers.RelationAnalyzers

@@ -97,6 +97,7 @@
     <Compile Include="EventArgs\LineChangedEventArgs.cs" />
     <Compile Include="Models\BlockManager.cs" />
     <Compile Include="Models\HighlightText.cs" />
+    <Compile Include="Models\SyntaxPair.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -160,16 +161,8 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Parse.FrontEnd.Grammars\Parse.FrontEnd.Grammars.csproj">
-      <Project>{A0661596-8C09-42A8-B412-8702108FD935}</Project>
-      <Name>Parse.FrontEnd.Grammars</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Parse.FrontEnd.Parsers\Parse.FrontEnd.Parsers.csproj">
-      <Project>{EAF7D943-D2F9-4BB0-929F-04DB7B59D9D5}</Project>
-      <Name>Parse.FrontEnd.Parsers</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Parse\Parse.csproj">
-      <Project>{54EC5CEA-8D91-4165-9EBB-6A0693A96C4F}</Project>
+    <ProjectReference Include="..\Parse.FrontEnd\Parse.csproj">
+      <Project>{46590802-ce40-49c9-86e1-cd6f3487ff5b}</Project>
       <Name>Parse</Name>
     </ProjectReference>
   </ItemGroup>

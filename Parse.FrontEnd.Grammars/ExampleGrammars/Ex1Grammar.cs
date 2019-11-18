@@ -1,4 +1,4 @@
-﻿using Parse.RegularGrammar;
+﻿using Parse.FrontEnd.RegularGrammar;
 
 namespace Parse.FrontEnd.Grammars.ExampleGrammars
 {

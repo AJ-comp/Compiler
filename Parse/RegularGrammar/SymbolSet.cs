@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Parse.RegularGrammar
+namespace Parse.FrontEnd.RegularGrammar
 {
     public class SymbolSet : HashSet<Symbol>
     {

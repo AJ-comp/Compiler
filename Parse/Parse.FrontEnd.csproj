@@ -7,8 +7,8 @@
     <ProjectGuid>{54EC5CEA-8D91-4165-9EBB-6A0693A96C4F}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Parse</RootNamespace>
-    <AssemblyName>Parse</AssemblyName>
+    <RootNamespace>Parse.FrontEnd</RootNamespace>
+    <AssemblyName>Parse.FrontEnd</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -70,6 +70,11 @@
     <Compile Include="RelationData.cs" />
     <Compile Include="TokenData.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\Parse.FrontEnd\Parse.csproj">
+      <Project>{46590802-ce40-49c9-86e1-cd6f3487ff5b}</Project>
+      <Name>Parse</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

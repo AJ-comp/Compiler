@@ -1,6 +1,6 @@
-﻿using Parse.RegularGrammar;
+﻿using Parse.FrontEnd.RegularGrammar;
 
-namespace Parse
+namespace Parse.FrontEnd
 {
     public class TokenData
     {

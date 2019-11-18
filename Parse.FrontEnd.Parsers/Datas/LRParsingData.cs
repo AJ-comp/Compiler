@@ -1,5 +1,5 @@
 ﻿using Parse.FrontEnd.Parsers.Collections;
-using Parse.RegularGrammar;
+using Parse.FrontEnd.RegularGrammar;
 using System;
 using System.Collections.Generic;
 

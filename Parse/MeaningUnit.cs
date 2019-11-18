@@ -1,7 +1,7 @@
-﻿using Parse.Ast;
+﻿using Parse.FrontEnd.Ast;
 using System;
 
-namespace Parse
+namespace Parse.FrontEnd
 {
     public class MeaningUnit
     {

@@ -1,7 +1,7 @@
-﻿using Parse.RegularGrammar;
+﻿using Parse.FrontEnd.RegularGrammar;
 using System;
 
-namespace Parse
+namespace Parse.FrontEnd
 {
     public class AutoGenerator
     {

@@ -15,6 +15,18 @@ namespace Parse.WpfControls.SyntaxEditor
         public delegate void OnParserChangedEventHandler(object sender);
         public event OnParserChangedEventHandler OnParserChanged;
 
+        public int MyProperty
+        {
+            get { return (int)GetValue(MyPropertyProperty); }
+            set { SetValue(MyPropertyProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for MyProperty.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty MyPropertyProperty =
+            DependencyProperty.Register("MyProperty", typeof(int), typeof(SyntaxEditor), new PropertyMetadata(0));
+
+
+
         private LRParser parser;
         public LRParser Parser
         {
@@ -127,27 +139,25 @@ namespace Parse.WpfControls.SyntaxEditor
 
             foreach (var terminal in grammar.TerminalSet)
             {
-                if (terminal.TokenType == RegularGrammar.TokenType.Keyword)
+                if (terminal.TokenType == TokenType.Keyword)
                 {
                     this.TextArea.AddCompletionList(CompletionItemType.Keyword, terminal.Value);
-                    this.TextArea.AddSyntaxHighLightInfo(terminal.Value, terminal.TokenType, KeywordForeground, terminal.CanDerived);
+                    this.TextArea.AddSyntaxHighLightInfo(terminal.Value, terminal, this.KeywordForeground, terminal.CanDerived);
                 }
-                else if(terminal.TokenType == RegularGrammar.TokenType.LineComment)
-                    this.TextArea.AddSyntaxHighLightInfo(terminal.Value, terminal.TokenType, this.LineCommentForeground, terminal.CanDerived);
-                else if (terminal.TokenType == RegularGrammar.TokenType.ScopeComment)
-                    this.TextArea.AddSyntaxHighLightInfo(terminal.Value, terminal.TokenType, this.ScopeCommentForeground, terminal.CanDerived);
-                else if (terminal.TokenType == RegularGrammar.TokenType.Digit10)
-                    this.TextArea.AddSyntaxHighLightInfo(terminal.Value, terminal.TokenType, this.DigitForeground, terminal.CanDerived);
-                else if (terminal.TokenType == RegularGrammar.TokenType.Digit2)
-                    this.TextArea.AddSyntaxHighLightInfo(terminal.Value, terminal.TokenType, this.BinaryForeground, terminal.CanDerived);
-                else if (terminal.TokenType == RegularGrammar.TokenType.Digit8)
-                    this.TextArea.AddSyntaxHighLightInfo(terminal.Value, terminal.TokenType, this.OctalForeground, terminal.CanDerived);
-                else if (terminal.TokenType == RegularGrammar.TokenType.Digit16)
-                    this.TextArea.AddSyntaxHighLightInfo(terminal.Value, terminal.TokenType, this.HexForeground, terminal.CanDerived);
-                else if (terminal.TokenType == RegularGrammar.TokenType.Operator)
-                    this.TextArea.AddSyntaxHighLightInfo(terminal.Value, terminal.TokenType, Brushes.Black, terminal.CanDerived, true);
-                else if(terminal.TokenType == RegularGrammar.TokenType.Identifier)
-                    this.TextArea.AddSyntaxHighLightInfo(terminal.Value, terminal.TokenType, Brushes.Black, terminal.CanDerived);
+                else if(terminal.TokenType == TokenType.Comment)
+                    this.TextArea.AddSyntaxHighLightInfo(terminal.Value, terminal, this.LineCommentForeground, terminal.CanDerived);
+                else if (terminal.TokenType == TokenType.Digit10)
+                    this.TextArea.AddSyntaxHighLightInfo(terminal.Value, terminal, this.DigitForeground, terminal.CanDerived);
+                else if (terminal.TokenType == TokenType.Digit2)
+                    this.TextArea.AddSyntaxHighLightInfo(terminal.Value, terminal, this.BinaryForeground, terminal.CanDerived);
+                else if (terminal.TokenType == TokenType.Digit8)
+                    this.TextArea.AddSyntaxHighLightInfo(terminal.Value, terminal, this.OctalForeground, terminal.CanDerived);
+                else if (terminal.TokenType == TokenType.Digit16)
+                    this.TextArea.AddSyntaxHighLightInfo(terminal.Value, terminal, this.HexForeground, terminal.CanDerived);
+                else if (terminal.TokenType == TokenType.Operator)
+                    this.TextArea.AddSyntaxHighLightInfo(terminal.Value, terminal, Brushes.Black, terminal.CanDerived, true);
+                else if(terminal.TokenType == TokenType.Identifier)
+                    this.TextArea.AddSyntaxHighLightInfo(terminal.Value, terminal, Brushes.Black, terminal.CanDerived);
             }
 
             foreach (var delimiter in grammar.DelimiterDic)
@@ -165,6 +175,12 @@ namespace Parse.WpfControls.SyntaxEditor
 
             this.RegisterKeywords(grammar);
         }
+
+        // 전처리기 등록자 (ex : #define, #undef ) 등록 함수 만들기 
+        // (파라메터 : 1.등록자 syntax, 2. 등록자의 행동 (ex : 전처리기 시스템에 등록, 등록해제) 3.에디터내의 등록자의 허용 위치, 4.등록자의 Highlight Color)
+
+        // 전처리기 액션자 (ex : #if ~ #elsif ~ #else ~ #endif) 등록 함수 만들기
+        // (파라메터 : 1.액션자 syntax, 액션자 범주에서 행동 요소), 3.액션자의 Highlight Color)
 
         private void TextArea_TextChanged(object sender, TextChangedEventArgs e)
         {

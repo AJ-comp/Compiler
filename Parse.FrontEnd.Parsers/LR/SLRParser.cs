@@ -1,11 +1,11 @@
-﻿using Parse.Ast;
-using Parse.Extensions;
+﻿using Parse.FrontEnd.Ast;
+using Parse.FrontEnd.Extensions;
 using Parse.FrontEnd.Grammars;
 using Parse.FrontEnd.Parsers.Collections;
 using Parse.FrontEnd.Parsers.EventArgs;
 using Parse.FrontEnd.Parsers.Properties;
 using Parse.FrontEnd.Parsers.RelationAnalyzers;
-using Parse.RegularGrammar;
+using Parse.FrontEnd.RegularGrammar;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;

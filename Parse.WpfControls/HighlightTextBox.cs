@@ -358,10 +358,10 @@ namespace Parse.WpfControls
         /// <param name="foreBrush">This argument means the foreground color of the text.</param>
         /// <param name="bCanDerived">This argument means whether a text argument can create a derived text.</param>
         /// <param name="bOperator">This argument means whether text is operator.</param>
-        public void AddSyntaxHighLightInfo(string text, object type, Brush foreBrush, bool bCanDerived, bool bOperator = false)
+        public void AddSyntaxHighLightInfo(string text, object optionData, Brush foreBrush, bool bCanDerived, bool bOperator = false)
         {
             this.textStyleDic.Add(text, new TextStyle(foreBrush, Brushes.Transparent));
-            this.TokenPatternList.Add(new TokenPatternInfo(type, text, bCanDerived, bOperator));
+            this.AddTokenPattern(text, optionData, bCanDerived, bOperator);
         }
     }
 

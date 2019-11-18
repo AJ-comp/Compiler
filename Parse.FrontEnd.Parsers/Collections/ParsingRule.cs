@@ -1,7 +1,7 @@
-﻿using Parse.Extensions;
+﻿using Parse.FrontEnd.Extensions;
 using Parse.FrontEnd.Parsers.Datas;
 using Parse.FrontEnd.Parsers.EventArgs;
-using Parse.RegularGrammar;
+using Parse.FrontEnd.RegularGrammar;
 using System;
 using System.Collections.Generic;
 using System.Data;

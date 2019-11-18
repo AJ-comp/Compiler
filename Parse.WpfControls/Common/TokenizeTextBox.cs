@@ -1,6 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using Parse.WpfControls.Models;
+using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -8,10 +11,15 @@ namespace Parse.WpfControls.Common
 {
     public class TokenizeTextBox : ExtensionTextBox
     {
-        public TokenData TokenData { get; }
-        public List<int> TokenIndexes { get; } = new List<int>();
+        private int nextKey = 1;
+        private string patternSum = string.Empty;
+        private TokenPatternInfo notDefinedToken = new TokenPatternInfo(0, string.Empty);
+        private List<Tuple<int, int>> scopeSyntaxes = new List<Tuple<int, int>>();
+        private List<TokenPatternInfo> tokenPatternList = new List<TokenPatternInfo>();
+        private Dictionary<int, List<int>> tokenIndexesTable = new Dictionary<int, List<int>>();
+
         public List<TokenInfo> Tokens { get; } = new List<TokenInfo>();
-        public List<TokenPatternInfo> TokenPatternList = new List<TokenPatternInfo>();
+        public SyntaxPairCollection syntaxPairs = new SyntaxPairCollection();
 
 
         public int TokenIndex
@@ -42,30 +50,17 @@ namespace Parse.WpfControls.Common
             };
         }
 
-        private TokenInfo GetTokenInfo(int offset)
+        private int GetTokenKey(string pattern)
         {
-            int prevMaxIndex = 0;
-            TokenInfo result = null;
+            int result = -1;
 
-            foreach (var maxIndex in this.TokenIndexes)
+            foreach (var item in this.tokenPatternList)
             {
-                if (offset <= maxIndex)
+                if (item.OriginalPattern == pattern)
                 {
-                    int accum = 0;
-
-                    foreach (var item in this.Tokens)
-                    {
-                        int startIndex = (prevMaxIndex == 0) ? 0 + accum : (maxIndex - prevMaxIndex) + accum;
-                        if (startIndex < offset && maxIndex >= offset)
-                        {
-                            result = new TokenInfo(startIndex, item.Data, null);
-                            break;
-                        }
-                        accum += item.Data.Length;
-                    }
+                    result = item.Key;
+                    break;
                 }
-
-                prevMaxIndex = maxIndex;
             }
 
             return result;
@@ -79,21 +74,15 @@ namespace Parse.WpfControls.Common
         /// </summary>
         private void SortTokenPatternList()
         {
-            this.TokenPatternList.Sort(delegate (TokenPatternInfo t, TokenPatternInfo td)
+            this.tokenPatternList.Sort(delegate (TokenPatternInfo t, TokenPatternInfo td)
             {
-                if (t.CanDerived || td.CanDerived)
+                if(t.Operator != td.Operator)
                 {
-                    if (t.CanDerived == false && td.CanDerived)
-                    {
-                        // CanDerived > Delimitable
-                        return (t.Operator) ? 1 : -1;
-                    }
-                    else if (t.CanDerived && td.CanDerived == false)
-                    {
-                        // CanDerived > Delimitable
-                        return (td.Operator) ? -1 : 1;
-                    }
-                    return 0;
+                    return (t.Operator) ? 1 : -1;
+                }
+                else if(t.CanDerived != td.CanDerived)
+                {
+                    return (t.CanDerived) ? 1 : -1;
                 }
 
                 if (t.OriginalPattern.Length > td.OriginalPattern.Length) return -1;
@@ -111,48 +100,33 @@ namespace Parse.WpfControls.Common
         {
             string addString = this.Text.Substring(changeInfo.Offset, changeInfo.AddedLength);
 
-            TokenInfo tokenInfo = this.GetTokenInfo(changeInfo.Offset);
-            if (tokenInfo == null)
+            int tokenIndex = this.GetTokenIndexFromCaretIndex(changeInfo.Offset);
+            if (tokenIndex == -1)
             {
                 List<TokenInfo> tokens = new List<TokenInfo>();
-                this.TokenIndexes.Add(addString.Length);
 
-                this.SortTokenPatternList();
-
-                string patternSum = string.Empty;
-                string generateString = string.Empty;
-                foreach (var pattern in this.TokenPatternList)
-                {
-                    generateString += "a";
-                    patternSum += string.Format("(?<{1}>{0})|", pattern.Pattern, generateString);
-//                    patternSum += string.Format("({0})|", pattern.Pattern);
-                }
-
-
-                patternSum = patternSum.Substring(0, patternSum.Length - 1);
                 int prevEI = 0;
                 foreach(var data in Regex.Matches(addString, patternSum, RegexOptions.Multiline | RegexOptions.ExplicitCapture))
                 {
                     var matchData = data as Match;
 
-                    TokenPatternInfo patternInfo = new TokenPatternInfo(string.Empty, string.Empty);
+                    // Not defined pattern
+                    TokenPatternInfo patternInfo = this.notDefinedToken;
                     if (prevEI < matchData.Index)
                         tokens.Add(new TokenInfo(prevEI, addString.Substring(prevEI, matchData.Index - prevEI), patternInfo));
 
                     // The number of elements in the group is 1 more than the number of elements in the TokenPatternList.
-                    for (int i=0; i<this.TokenPatternList.Count+1; i++)
+                    for (int i=0; i<this.tokenPatternList.Count+1; i++)
                     {
-                        var dd = matchData.Groups[8];
                         // The 0 index of the groups is always matched so it doesn't need to check.
                         if (matchData.Groups[i+1].Length > 0)
                         {
-                            patternInfo = this.TokenPatternList[i];
+                            patternInfo = this.tokenPatternList[i];
                             break;
                         }
                     }
 
                     tokens.Add(new TokenInfo(matchData.Index, matchData.Value, patternInfo));
-
                     prevEI = matchData.Index + matchData.Length;
                 }
 
@@ -220,8 +194,9 @@ namespace Parse.WpfControls.Common
             }
             else
             {
-                int insertPos = changeInfo.Offset - tokenInfo.StartIndex;
-                addString = tokenInfo.Data.Insert(insertPos, addString);
+                TokenInfo token = this.Tokens[tokenIndex];
+                int insertPos = changeInfo.Offset - token.StartIndex;
+                addString = token.Data.Insert(insertPos, addString);
 
             }
 
@@ -236,41 +211,66 @@ namespace Parse.WpfControls.Common
         {
             int index = -1;
 
-            for(int i=0; i<this.Tokens.Count; i++)
+            Parallel.For(0, this.Tokens.Count, (i, loopState) =>
             {
                 TokenInfo tokenInfo = this.Tokens[i];
 
                 if (tokenInfo.StartIndex <= caretIndex && caretIndex <= tokenInfo.EndIndex)
                 {
                     index = i;
-                    break;
+                    loopState.Stop();
                 }
-            }
+            });
 
             return index;
         }
-    }
 
-    public class TokenWithCaretInfo
-    {
-        public enum PositionFromCaret { Included, FrontOfCaret, BackOfCaret }
-
-        public int TokenIndex { get; }
-        public TokenData TokenData { get; }
-
-        public PositionFromCaret Type { get; }
-
-        public TokenWithCaretInfo(int tokenIndex, TokenData tokenData, PositionFromCaret type)
+        /// <summary>
+        /// This function regist a pattern for tokenizing.
+        /// </summary>
+        /// <param name="text"></param>
+        /// <param name="optionData"></param>
+        /// <param name="bCanDerived"></param>
+        /// <param name="bOperator"></param>
+        public void AddTokenPattern(string text, object optionData = null, bool bCanDerived = false, bool bOperator = false)
         {
-            this.TokenIndex = tokenIndex;
-            this.TokenData = TokenData;
-            this.Type = type;
+            foreach(var item in this.tokenPatternList)
+            {
+                if (item.OriginalPattern == text) return;
+            }
+
+            this.tokenPatternList.Add(new TokenPatternInfo(this.nextKey++, text, optionData, bCanDerived, bOperator));
+
+            this.SortTokenPatternList();
+
+            this.patternSum = string.Empty;
+            string generateString = string.Empty;
+            foreach (var pattern in this.tokenPatternList)
+            {
+                if (pattern.OriginalPattern == string.Empty) continue;
+
+                generateString += "a";
+                this.patternSum += string.Format("(?<{1}>{0})|", pattern.Pattern, generateString);
+                //                    patternSum += string.Format("({0})|", pattern.Pattern);
+            }
+
+            this.patternSum = this.patternSum.Substring(0, patternSum.Length - 1);
+        }
+
+        public void AddScopeGroup(string startScopeSymbol, string endScopeSymbol)
+        {
+            int startScopeKey = this.GetTokenKey(startScopeSymbol);
+            int endScopeKey = this.GetTokenKey(endScopeSymbol);
+
+            if (startScopeKey > 0 || endScopeKey > 0) return;
+            this.scopeSyntaxes.Add(new Tuple<int, int>(startScopeKey, endScopeKey));
         }
     }
 
     public class TokenPatternInfo
     {
-        public object Type { get; }
+        public int Key { get; }
+        public object OptionData { get; }
         public string Pattern
         {
             get
@@ -293,16 +293,18 @@ namespace Parse.WpfControls.Common
         public bool CanDerived { get; }
         public bool Operator { get; }
 
-        public TokenPatternInfo(object type, string pattern, bool bCanDerived = false, bool bOperator = false)
+        public TokenPatternInfo(int key, string pattern, object optionData = null, bool bCanDerived = false, bool bOperator = false)
         {
-            this.Type = type;
+            this.Key = key;
+            this.OptionData = optionData;
             this.OriginalPattern = pattern;
             this.CanDerived = bCanDerived;
             this.Operator = bOperator;
         }
 
-        public override string ToString() => string.Format("{0}, {1}, {2}, {3}", this.Type, this.Pattern, this.CanDerived.ToString().ToLower(), this.Operator.ToString().ToLower());
+        public override string ToString() => string.Format("{0}, {1}, {2}, {3}", this.Key, this.Pattern, this.CanDerived.ToString().ToLower(), this.Operator.ToString().ToLower());
     }
+
 
     public class TokenInfo
     {
@@ -325,7 +327,7 @@ namespace Parse.WpfControls.Common
             convertedString = convertedString.Replace("\n", "\\n");
             convertedString = convertedString.Replace("\t", "\\t");
 
-            return string.Format("{0}, \"{1}\", {2}", this.StartIndex, convertedString, PatternInfo.Type);
+            return string.Format("{0}, \"{1}\", {2}", this.StartIndex, convertedString, PatternInfo.OptionData);
         }
     }
 

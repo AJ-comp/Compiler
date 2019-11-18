@@ -1,7 +1,7 @@
 ﻿using Parse.FrontEnd.Parsers;
 using Parse.FrontEnd.Parsers.Collections;
 using Parse.FrontEnd.Parsers.RelationAnalyzers;
-using Parse.RegularGrammar;
+using Parse.FrontEnd.RegularGrammar;
 using System;
 using System.Collections.Generic;
 

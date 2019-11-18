@@ -115,9 +115,9 @@
       <Project>{eaf7d943-d2f9-4bb0-929f-04db7b59d9d5}</Project>
       <Name>Parse.FrontEnd.Parsers</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Parse\Parse.csproj">
+    <ProjectReference Include="..\Parse\Parse.FrontEnd.csproj">
       <Project>{54EC5CEA-8D91-4165-9EBB-6A0693A96C4F}</Project>
-      <Name>Parse</Name>
+      <Name>Parse.FrontEnd</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

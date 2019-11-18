@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Parse.FrontEnd.Grammars", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Parse.MiddleEnd.Utilities", "Parse.MiddleEnd.Utilities\Parse.MiddleEnd.Utilities.csproj", "{1CB34127-F46B-49F3-A7C8-3304A2DBADEB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Parse", "Parse\Parse.csproj", "{54EC5CEA-8D91-4165-9EBB-6A0693A96C4F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Parse.FrontEnd", "Parse\Parse.FrontEnd.csproj", "{54EC5CEA-8D91-4165-9EBB-6A0693A96C4F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Parse.BackEnd.Stm32", "Parse.BackEnd.Stm32\Parse.BackEnd.Stm32.csproj", "{B1443F20-B7D2-4884-AD74-3394FE811AF2}"
 EndProject
@@ -24,6 +24,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UWPApp", "UWPApp\UWPApp.csproj", "{97F57363-4CC9-40C5-9DA3-E0105D20DB02}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Parse.WpfControls.SyntaxEditor", "Parse.WpfControls.SyntaxEditor\Parse.WpfControls.SyntaxEditor.csproj", "{DCCEDEB5-9CA4-41FE-AB6B-50E4BCC64EE6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Parse", "Parse.FrontEnd\Parse.csproj", "{46590802-CE40-49C9-86E1-CD6F3487FF5B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -217,6 +219,22 @@ Global
 		{DCCEDEB5-9CA4-41FE-AB6B-50E4BCC64EE6}.Release|x64.Build.0 = Release|Any CPU
 		{DCCEDEB5-9CA4-41FE-AB6B-50E4BCC64EE6}.Release|x86.ActiveCfg = Release|Any CPU
 		{DCCEDEB5-9CA4-41FE-AB6B-50E4BCC64EE6}.Release|x86.Build.0 = Release|Any CPU
+		{46590802-CE40-49C9-86E1-CD6F3487FF5B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{46590802-CE40-49C9-86E1-CD6F3487FF5B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{46590802-CE40-49C9-86E1-CD6F3487FF5B}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{46590802-CE40-49C9-86E1-CD6F3487FF5B}.Debug|ARM.Build.0 = Debug|Any CPU
+		{46590802-CE40-49C9-86E1-CD6F3487FF5B}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{46590802-CE40-49C9-86E1-CD6F3487FF5B}.Debug|x64.Build.0 = Debug|Any CPU
+		{46590802-CE40-49C9-86E1-CD6F3487FF5B}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{46590802-CE40-49C9-86E1-CD6F3487FF5B}.Debug|x86.Build.0 = Debug|Any CPU
+		{46590802-CE40-49C9-86E1-CD6F3487FF5B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{46590802-CE40-49C9-86E1-CD6F3487FF5B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{46590802-CE40-49C9-86E1-CD6F3487FF5B}.Release|ARM.ActiveCfg = Release|Any CPU
+		{46590802-CE40-49C9-86E1-CD6F3487FF5B}.Release|ARM.Build.0 = Release|Any CPU
+		{46590802-CE40-49C9-86E1-CD6F3487FF5B}.Release|x64.ActiveCfg = Release|Any CPU
+		{46590802-CE40-49C9-86E1-CD6F3487FF5B}.Release|x64.Build.0 = Release|Any CPU
+		{46590802-CE40-49C9-86E1-CD6F3487FF5B}.Release|x86.ActiveCfg = Release|Any CPU
+		{46590802-CE40-49C9-86E1-CD6F3487FF5B}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

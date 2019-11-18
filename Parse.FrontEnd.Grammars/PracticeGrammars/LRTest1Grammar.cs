@@ -1,5 +1,5 @@
-﻿using Parse.Ast;
-using Parse.RegularGrammar;
+﻿using Parse.FrontEnd.Ast;
+using Parse.FrontEnd.RegularGrammar;
 
 namespace Parse.FrontEnd.Grammars.PracticeGrammars
 {

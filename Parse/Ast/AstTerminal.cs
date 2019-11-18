@@ -1,11 +1,11 @@
-﻿using Parse.RegularGrammar;
+﻿using Parse.FrontEnd.RegularGrammar;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Parse.Ast
+namespace Parse.FrontEnd.Ast
 {
     public class AstTerminal : AstSymbol
     {

@@ -1,4 +1,4 @@
-﻿namespace Parse
+﻿namespace Parse.FrontEnd
 {
     public class ISemantic
     {

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
-namespace Parse.RegularGrammar
+namespace Parse.FrontEnd.RegularGrammar
 {
     public class TerminalSet : HashSet<Terminal>
     {

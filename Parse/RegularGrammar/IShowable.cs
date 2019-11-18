@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Parse.RegularGrammar
+namespace Parse.FrontEnd.RegularGrammar
 {
     public interface IShowable
     {

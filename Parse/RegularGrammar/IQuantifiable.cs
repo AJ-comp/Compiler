@@ -1,4 +1,4 @@
-﻿namespace Parse.RegularGrammar
+﻿namespace Parse.FrontEnd.RegularGrammar
 {
     public interface IQuantifiable
     {

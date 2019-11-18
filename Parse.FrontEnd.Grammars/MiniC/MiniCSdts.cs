@@ -1,4 +1,4 @@
-﻿using Parse.Ast;
+﻿using Parse.FrontEnd.Ast;
 
 namespace Parse.FrontEnd.Grammars.MiniC
 {

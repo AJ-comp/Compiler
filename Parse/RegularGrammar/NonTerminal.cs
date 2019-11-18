@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Parse.RegularGrammar
+namespace Parse.FrontEnd.RegularGrammar
 {
     public class NonTerminal : Symbol, IEnumerable<NonTerminalSingle>, ICloneable
     {
