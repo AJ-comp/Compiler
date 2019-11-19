@@ -11,7 +11,7 @@ namespace Parse.WpfControls.Common
 {
     public class TokenizeTextBox : ExtensionTextBox
     {
-        private int nextKey = 1;
+        private int key = 1;
         private string patternSum = string.Empty;
         private TokenPatternInfo notDefinedToken = new TokenPatternInfo(0, string.Empty);
         private List<Tuple<int, int>> scopeSyntaxes = new List<Tuple<int, int>>();
@@ -106,7 +106,8 @@ namespace Parse.WpfControls.Common
                 List<TokenInfo> tokens = new List<TokenInfo>();
 
                 int prevEI = 0;
-                foreach(var data in Regex.Matches(addString, patternSum, RegexOptions.Multiline | RegexOptions.ExplicitCapture))
+                var count = Regex.Matches(addString, patternSum, RegexOptions.Multiline | RegexOptions.ExplicitCapture);
+                foreach (var data in Regex.Matches(addString, patternSum, RegexOptions.Multiline | RegexOptions.ExplicitCapture))
                 {
                     var matchData = data as Match;
 
@@ -128,6 +129,12 @@ namespace Parse.WpfControls.Common
 
                     tokens.Add(new TokenInfo(matchData.Index, matchData.Value, patternInfo));
                     prevEI = matchData.Index + matchData.Length;
+                }
+
+                if(prevEI < addString.Length)
+                {
+                    TokenPatternInfo patternInfo = this.notDefinedToken;
+                    tokens.Add(new TokenInfo(prevEI, addString.Substring(prevEI, addString.Length - prevEI), patternInfo));
                 }
 
                 tokens.ForEach(i => this.Tokens.Add(i));
@@ -203,11 +210,12 @@ namespace Parse.WpfControls.Common
         }
 
         /// <summary>
-        /// This function returns a token index from the caretIndex
+        /// This function returns a token index from the caretIndex.
         /// </summary>
         /// <param name="caretIndex">The index of the caret</param>
+        /// <param name="bBackWay">The standard index for recognition a token</param>
         /// <returns>a token index</returns>
-        public int GetTokenIndexFromCaretIndex(int caretIndex)
+        public int GetTokenIndexFromCaretIndex(int caretIndex, bool bBackWay = true)
         {
             int index = -1;
 
@@ -215,10 +223,21 @@ namespace Parse.WpfControls.Common
             {
                 TokenInfo tokenInfo = this.Tokens[i];
 
-                if (tokenInfo.StartIndex <= caretIndex && caretIndex <= tokenInfo.EndIndex)
+                if(bBackWay)
                 {
-                    index = i;
-                    loopState.Stop();
+                    if (tokenInfo.StartIndex < caretIndex && caretIndex <= tokenInfo.EndIndex + 1)
+                    {
+                        index = i;
+                        loopState.Stop();
+                    }
+                }
+                else
+                {
+                    if (tokenInfo.StartIndex <= caretIndex && caretIndex <= tokenInfo.EndIndex)
+                    {
+                        index = i;
+                        loopState.Stop();
+                    }
                 }
             });
 
@@ -239,7 +258,8 @@ namespace Parse.WpfControls.Common
                 if (item.OriginalPattern == text) return;
             }
 
-            this.tokenPatternList.Add(new TokenPatternInfo(this.nextKey++, text, optionData, bCanDerived, bOperator));
+            this.tokenIndexesTable.Add(this.key, new List<int>());
+            this.tokenPatternList.Add(new TokenPatternInfo(this.key++, text, optionData, bCanDerived, bOperator));
 
             this.SortTokenPatternList();
 

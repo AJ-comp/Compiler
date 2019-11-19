@@ -7,7 +7,6 @@ using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Globalization;
 using System.Linq;
-using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -202,6 +201,51 @@ namespace Parse.WpfControls
             this.renderCanvas.DrawSelectedLineAppearance(addedLineIndex, appearance);
         }
 
+        private void AddLineString(ref LineHighlightText from, List<LineHighlightText> to, int lineIndex)
+        {
+            from.AbsoluteLineIndex = lineIndex - 1;
+            to.Add(from);
+            from = new LineHighlightText();
+        }
+
+
+        /// <summary>
+        /// This function stores to List after split line by line.
+        /// </summary>
+        /// <param name="lineString">string list in the line</param>
+        /// <param name="result">line list</param>
+        /// <param name="lineIndex">line index</param>
+        /// <param name="tokenIndex">The index of the token that has "\n" string</param>
+        private void SplitMultipleLineFromToken(ref LineHighlightText lineString, List<LineHighlightText> result, ref int lineIndex, int tokenIndex)
+        {
+            // Found the line break syntax.
+            int startPos = 0;
+            string searchString = this.Tokens[tokenIndex].Data;
+            while (true)
+            {
+                if (searchString.Length == 0)
+                {
+                    // If searchString is empty then the last string is "n" so must add one line.
+                    lineString.Add(this.GetHighlightToken("", this.Tokens[tokenIndex].PatternInfo.OriginalPattern));
+                    break;
+                }
+
+                int endPos = searchString.IndexOf("\n");
+
+                // The "\n" was not in the searchString.
+                if (endPos < startPos)
+                {
+                    lineString.Add(this.GetHighlightToken(searchString, this.Tokens[tokenIndex].PatternInfo.OriginalPattern));
+                    break;
+                }
+
+                // Found the "\n"
+                lineString.Add(this.GetHighlightToken(searchString.Substring(0, endPos + 1), this.Tokens[tokenIndex].PatternInfo.OriginalPattern));
+                this.AddLineString(ref lineString, result, lineIndex);
+                lineIndex++;
+                searchString = searchString.Substring(endPos + 1);
+            }
+        }
 
         /// <summary>
         /// This function gets the line-string-collection.
@@ -212,7 +256,7 @@ namespace Parse.WpfControls
         private List<LineHighlightText> GetLineStringCollection(int startLine, int cnt)
         {
             List<LineHighlightText> result = new List<LineHighlightText>();
-            var tokenStartIndex = this.GetTokenIndexFromCaretIndex(this.GetStartingCaretIndexOfLineIndex(startLine));
+            var tokenStartIndex = this.GetTokenIndexFromCaretIndex(this.GetStartingCaretIndexOfLineIndex(startLine), false);
 
             if (tokenStartIndex < 0) return result;
             if (startLine >= this.LineIndexes.Count) return result;
@@ -232,30 +276,12 @@ namespace Parse.WpfControls
                     continue;
                 }
 
-                // Found the line break syntax.
-                string[] lineStrings = this.Tokens[i].Data.Split(new string[] { "\n" }, StringSplitOptions.RemoveEmptyEntries);
-                for (int j = 0; j < lineStrings.Length - 1; j++)
-                {
-                    lineString.Add(this.GetHighlightToken(lineStrings[j], this.Tokens[i].PatternInfo.OriginalPattern));
-                    lineString.AbsoluteLineIndex = lineIndex - 1;
-                    result.Add(lineString);
-                    lineString = new LineHighlightText();
+                this.SplitMultipleLineFromToken(ref lineString, result, ref lineIndex, i);
 
-                    if (lineIndex++ > maxCnt) break;
-                }
-
-                lineString.Add(this.GetHighlightToken(lineStrings.Last(), this.Tokens[i].PatternInfo.OriginalPattern));
-                // If the count of the elements of the lineStrings is one then the above loop statement is not executed so execute the following logic instead of.
-                if (lineStrings.Length == 1)
-                {
-                    lineString.AbsoluteLineIndex = lineIndex - 1;
-                    result.Add(lineString);
-                    lineIndex++;
-                }
                 if (lineIndex > maxCnt) break;
             }
 
-            if (lineString.Count > 0) result.Add(lineString);
+            if (lineString.Count > 0) this.AddLineString(ref lineString, result, lineIndex);
 
             return result;
         }

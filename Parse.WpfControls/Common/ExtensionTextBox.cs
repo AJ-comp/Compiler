@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Collections.Specialized;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -164,8 +163,8 @@ namespace Parse.WpfControls.Common
         {
             string addString = this.Text.Substring(changeInfo.Offset, changeInfo.AddedLength);
 
-            this.DelCharFromLineString(changeInfo);
-            this.AddCharToLineString(changeInfo.Offset, addString);
+            this.DelTextProcess(changeInfo);
+            this.AddTextProcess(changeInfo.Offset, addString);
         }
 
         /// <summary>
@@ -174,7 +173,7 @@ namespace Parse.WpfControls.Common
         /// <see cref=""/>
         /// <param name="offset">Start position of addString</param>
         /// <param name="addString">added string</param>
-        private void AddCharToLineString(int offset, string addString)
+        private void AddTextProcess(int offset, string addString)
         {
             if (addString.Length == 0) return;
 
@@ -205,7 +204,7 @@ namespace Parse.WpfControls.Common
         /// This function removes from the line-string a string.
         /// </summary>
         /// <param name="changeInfo"></param>
-        private void DelCharFromLineString(TextChange changeInfo)
+        private void DelTextProcess(TextChange changeInfo)
         {
             if (changeInfo.RemovedLength == 0) return;
 

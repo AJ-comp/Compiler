@@ -43,6 +43,7 @@
                                         FontFamily="Arial"
                                         IsLineNumberingVisible="True"  LineNumberForeColor="DarkGreen"
                                         KeywordForeground="Blue"
+                                        LineCommentForeground="ForestGreen"
                                         TextBoxBase.TextChanged="syntaxEditor_TextChanged"
                                         >
 
