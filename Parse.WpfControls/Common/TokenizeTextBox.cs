@@ -96,49 +96,68 @@ namespace Parse.WpfControls.Common
             this.TokenIndex = this.GetTokenIndexFromCaretIndex(this.CaretIndex);
         }
 
+        /// <summary>
+        /// This function register after tokenizing string into the multiple tokens.
+        /// </summary>
+        /// <param name="addString">The string for tokenizing.</param>
+        /// <param name="basisIndex">The basis index that uses to set up a starting index of a token.</param>
+        private List<TokenInfo> Tokenize(string addString, int basisIndex)
+        {
+            List<TokenInfo> result = new List<TokenInfo>();
+
+            int prevEI = 0;
+            foreach (var data in Regex.Matches(addString, patternSum, RegexOptions.Multiline | RegexOptions.ExplicitCapture))
+            {
+                var matchData = data as Match;
+
+                // Not defined pattern
+                TokenPatternInfo patternInfo = this.notDefinedToken;
+                if (prevEI < matchData.Index)
+                    result.Add(new TokenInfo(basisIndex + prevEI, addString.Substring(prevEI, matchData.Index - prevEI), patternInfo));
+
+                // The number of elements in the group is 1 more than the number of elements in the TokenPatternList.
+                for (int i = 0; i < this.tokenPatternList.Count + 1; i++)
+                {
+                    // The 0 index of the groups is always matched so it doesn't need to check.
+                    if (matchData.Groups[i + 1].Length > 0)
+                    {
+                        patternInfo = this.tokenPatternList[i];
+                        break;
+                    }
+                }
+
+                result.Add(new TokenInfo(basisIndex + matchData.Index, matchData.Value, patternInfo));
+                prevEI = matchData.Index + matchData.Length;
+            }
+
+            // if a string is remained then add to the token.
+            if (prevEI < addString.Length)
+                result.Add(new TokenInfo(basisIndex + prevEI, addString.Substring(prevEI, addString.Length - prevEI), this.notDefinedToken));
+
+            return result;
+        }
+
+        private void DelTokens(TextChange changeInfo)
+        {
+            if (changeInfo.RemovedLength == 0) return;
+
+
+        }
+
+        private void AddTokens(TextChange changeInfo)
+        {
+
+        }
+
         private void UpdateTokenInfos(TextChange changeInfo)
         {
+            RecognitionWay recognitionWay = RecognitionWay.Back;
             string addString = this.Text.Substring(changeInfo.Offset, changeInfo.AddedLength);
 
-            int tokenIndex = this.GetTokenIndexFromCaretIndex(changeInfo.Offset);
+            int tokenIndex = this.GetTokenIndexFromCaretIndex(changeInfo.Offset, recognitionWay);
             if (tokenIndex == -1)
             {
-                List<TokenInfo> tokens = new List<TokenInfo>();
-
-                int prevEI = 0;
-                var count = Regex.Matches(addString, patternSum, RegexOptions.Multiline | RegexOptions.ExplicitCapture);
-                foreach (var data in Regex.Matches(addString, patternSum, RegexOptions.Multiline | RegexOptions.ExplicitCapture))
-                {
-                    var matchData = data as Match;
-
-                    // Not defined pattern
-                    TokenPatternInfo patternInfo = this.notDefinedToken;
-                    if (prevEI < matchData.Index)
-                        tokens.Add(new TokenInfo(prevEI, addString.Substring(prevEI, matchData.Index - prevEI), patternInfo));
-
-                    // The number of elements in the group is 1 more than the number of elements in the TokenPatternList.
-                    for (int i=0; i<this.tokenPatternList.Count+1; i++)
-                    {
-                        // The 0 index of the groups is always matched so it doesn't need to check.
-                        if (matchData.Groups[i+1].Length > 0)
-                        {
-                            patternInfo = this.tokenPatternList[i];
-                            break;
-                        }
-                    }
-
-                    tokens.Add(new TokenInfo(matchData.Index, matchData.Value, patternInfo));
-                    prevEI = matchData.Index + matchData.Length;
-                }
-
-                if(prevEI < addString.Length)
-                {
-                    TokenPatternInfo patternInfo = this.notDefinedToken;
-                    tokens.Add(new TokenInfo(prevEI, addString.Substring(prevEI, addString.Length - prevEI), patternInfo));
-                }
-
-                tokens.ForEach(i => this.Tokens.Add(i));
-
+                this.Tokenize(addString, 0).ForEach(i => this.Tokens.Add(i));
 
                 #region The method of the second tokenize. (delete duplicate element after all match)
                 /*
@@ -202,9 +221,36 @@ namespace Parse.WpfControls.Common
             else
             {
                 TokenInfo token = this.Tokens[tokenIndex];
-                int insertPos = changeInfo.Offset - token.StartIndex;
-                addString = token.Data.Insert(insertPos, addString);
+                string mergeString = token.MergeString(changeInfo.Offset, addString, recognitionWay);
 
+                int addLength = mergeString.Length - token.Data.Length;
+
+                Parallel.For(tokenIndex + 1, this.Tokens.Count, i =>
+                {
+                    this.Tokens[i].StartIndex += addLength;
+                });
+
+                int prevTokenCnt = this.Tokens.Count;
+                int basisIndex = (tokenIndex == 0) ? 0 : this.Tokens[tokenIndex - 1].EndIndex + 1;
+
+                this.Tokens.RemoveAt(tokenIndex);
+                this.Tokenize(mergeString, basisIndex).ForEach(i => this.Tokens.Insert(tokenIndex++, i));
+
+                while(tokenIndex < this.Tokens.Count)
+                {
+                    // Check next token
+                    var nextToken = this.Tokens[tokenIndex];
+                    mergeString = nextToken.MergeStringToFront(this.Tokens[tokenIndex-1].Data);
+
+                    basisIndex = (tokenIndex == 0) ? 0 : this.Tokens[tokenIndex - 1].StartIndex;
+                    List<TokenInfo> result = this.Tokenize(mergeString, basisIndex);
+                    if (result[0].Data == this.Tokens[tokenIndex - 1].Data) break;
+
+                    this.Tokens.RemoveAt(tokenIndex);
+                    this.Tokens.RemoveAt(tokenIndex--);
+
+                    result.ForEach(i => this.Tokens.Insert(tokenIndex++, i));
+                }
             }
 
         }
@@ -213,9 +259,9 @@ namespace Parse.WpfControls.Common
         /// This function returns a token index from the caretIndex.
         /// </summary>
         /// <param name="caretIndex">The index of the caret</param>
-        /// <param name="bBackWay">The standard index for recognition a token</param>
+        /// <param name="recognWay">The standard index for recognition a token</param>
         /// <returns>a token index</returns>
-        public int GetTokenIndexFromCaretIndex(int caretIndex, bool bBackWay = true)
+        public int GetTokenIndexFromCaretIndex(int caretIndex, RecognitionWay recognWay = RecognitionWay.Back)
         {
             int index = -1;
 
@@ -223,21 +269,10 @@ namespace Parse.WpfControls.Common
             {
                 TokenInfo tokenInfo = this.Tokens[i];
 
-                if(bBackWay)
+                if (tokenInfo.Contains(caretIndex, recognWay))
                 {
-                    if (tokenInfo.StartIndex < caretIndex && caretIndex <= tokenInfo.EndIndex + 1)
-                    {
-                        index = i;
-                        loopState.Stop();
-                    }
-                }
-                else
-                {
-                    if (tokenInfo.StartIndex <= caretIndex && caretIndex <= tokenInfo.EndIndex)
-                    {
-                        index = i;
-                        loopState.Stop();
-                    }
+                    index = i;
+                    loopState.Stop();
                 }
             });
 
@@ -286,69 +321,4 @@ namespace Parse.WpfControls.Common
             this.scopeSyntaxes.Add(new Tuple<int, int>(startScopeKey, endScopeKey));
         }
     }
-
-    public class TokenPatternInfo
-    {
-        public int Key { get; }
-        public object OptionData { get; }
-        public string Pattern
-        {
-            get
-            {
-                if (this.Operator)
-                {
-                    string convertString = string.Empty;
-                    foreach (var c in this.OriginalPattern)
-                        convertString += "\\" + c;
-
-                    return convertString;
-                }
-                else
-                {
-                    return (this.CanDerived) ? this.OriginalPattern : "\\b" + this.OriginalPattern + "\\b";
-                }
-            }
-        }
-        public string OriginalPattern { get; }
-        public bool CanDerived { get; }
-        public bool Operator { get; }
-
-        public TokenPatternInfo(int key, string pattern, object optionData = null, bool bCanDerived = false, bool bOperator = false)
-        {
-            this.Key = key;
-            this.OptionData = optionData;
-            this.OriginalPattern = pattern;
-            this.CanDerived = bCanDerived;
-            this.Operator = bOperator;
-        }
-
-        public override string ToString() => string.Format("{0}, {1}, {2}, {3}", this.Key, this.Pattern, this.CanDerived.ToString().ToLower(), this.Operator.ToString().ToLower());
-    }
-
-
-    public class TokenInfo
-    {
-        public int StartIndex { get; }
-        public int EndIndex { get => this.StartIndex + this.Data.Length - 1; }
-        public string Data { get; } = string.Empty;
-        public TokenPatternInfo PatternInfo { get; }
-
-        public TokenInfo(int startIndex, string data, TokenPatternInfo patternInfo)
-        {
-            this.StartIndex = startIndex;
-            this.Data = data;
-
-            this.PatternInfo = patternInfo;
-        }
-
-        public override string ToString()
-        {
-            string convertedString = this.Data.Replace("\r", "\\r");
-            convertedString = convertedString.Replace("\n", "\\n");
-            convertedString = convertedString.Replace("\t", "\\t");
-
-            return string.Format("{0}, \"{1}\", {2}", this.StartIndex, convertedString, PatternInfo.OptionData);
-        }
-    }
-
 }

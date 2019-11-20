@@ -17,6 +17,7 @@ namespace Parse.FrontEnd.Parsers
         /// </summary>
         public TokenData NextToken
         {
+            /*
             get
             {
                 string value = string.Empty;
@@ -28,15 +29,14 @@ namespace Parse.FrontEnd.Parsers
                 }
 
                 return this.GetTokenInfo(value);
+            }
+            */
 
-                /*
-                get
-                {
-                    string value = (this.codePieceIndex >= this.codePieces.Count) ? string.Empty : this.codePieces[this.codePieceIndex++];
+            get
+            {
+                string value = (this.codePieceIndex >= this.codePieces.Count) ? string.Empty : this.codePieces[this.codePieceIndex++];
 
-                    return new TokenData(value, (value == string.Empty) ? new Epsilon() : this.grammar.GetTerminal(value));
-                }
-                */
+                return new TokenData(value, (value == string.Empty) ? new Epsilon() : this.grammar.GetTerminal(value));
             }
         }
 
@@ -183,7 +183,9 @@ namespace Parse.FrontEnd.Parsers
             }
 
             if (delimiteStr.Length > 0) this.codePieces.Add(delimiteStr);
-//            if (data.Length > 0) this.codePieces.Add(data);
+            //            if (data.Length > 0) this.codePieces.Add(data);
+
+            this.strStartIndex = 0;
         }
     }
 }

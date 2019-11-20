@@ -51,7 +51,8 @@ namespace Parse.FrontEnd.Parsers.LR
             this.followAnalyzer.CalculateAllFollow(this.Grammar.NonTerminalMultiples);
             this.parsingRule.Calculate(this.C0, this.followAnalyzer.Datas);
 
-            this.parsingRule.ActionCompleted += this.BuildParseTree;
+            //            this.parsingRule.ActionCompleted += this.BuildParseTree;
+            this.parsingRule.ActionCompleted += AddParsingHistory;
             this.parsingRule.ActionFailed += this.AddFailedInfoToParsingHistory;
         }
 

@@ -15,8 +15,6 @@ namespace Parse.FrontEnd.Grammars.MiniC
         private Terminal number = new Terminal(TokenType.Digit10, "[0-9]+", "number", true, true);
         private Terminal lineComment = new Terminal(TokenType.Comment, "//.*$", false, true);
 
-        //        private Terminal scopeComment = new Terminal(TokenType.Comment, new ScopeSyntax("/*", "*/"), string.Empty, false);
-
         private Terminal openParenthesis = new Terminal(TokenType.Operator, "(");
         private Terminal closeParenthesis = new Terminal(TokenType.Operator, ")");
         private Terminal openCurlyBrace = new Terminal(TokenType.Operator, "{");

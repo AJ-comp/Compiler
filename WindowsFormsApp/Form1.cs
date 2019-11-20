@@ -70,13 +70,11 @@ namespace WindowsFormsApp
             this.tableGridView.DataSource = parser.ParsingTable;
             this.tableGridView.Refresh();
             this.tableGridView.Update();
+            this.historyGridView.DataSource = parser.ParsingHistory;
             //            Console.WriteLine(parser.OptimizeList);
             //            Console.WriteLine(parser.PossibleTerminalSet.ToString());
 
             //            parser.Parse("a*b+ad");
-
-            //            this.tableGridView.DataSource = parser.ParsingTable;
-            //            this.historyGridView.DataSource = parser.ParsingHistory;
             //            this.ConnectAstToTreeView(parser.AstRoot, this.astView.Nodes);
 
             this.parser.Parse(this.syntaxEditor.Text);
@@ -149,7 +147,7 @@ namespace WindowsFormsApp
 
         private void syntaxEditor_DocumentTextChanged(object sender, DocumentModificationEventArgs e)
         {
-//            this.parser.Parse()
+            this.parser.Parse(this.syntaxEditor.Text);
         }
     }
 }

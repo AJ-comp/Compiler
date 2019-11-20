@@ -1,7 +1,6 @@
 ﻿using Parse.WpfControls.Common;
 using Parse.WpfControls.EventArgs;
 using Parse.WpfControls.Models;
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
@@ -256,7 +255,7 @@ namespace Parse.WpfControls
         private List<LineHighlightText> GetLineStringCollection(int startLine, int cnt)
         {
             List<LineHighlightText> result = new List<LineHighlightText>();
-            var tokenStartIndex = this.GetTokenIndexFromCaretIndex(this.GetStartingCaretIndexOfLineIndex(startLine), false);
+            var tokenStartIndex = this.GetTokenIndexFromCaretIndex(this.GetStartingCaretIndexOfLineIndex(startLine), RecognitionWay.Front);
 
             if (tokenStartIndex < 0) return result;
             if (startLine >= this.LineIndexes.Count) return result;

@@ -98,6 +98,7 @@
     <Compile Include="Models\BlockManager.cs" />
     <Compile Include="Models\HighlightText.cs" />
     <Compile Include="Models\SyntaxPair.cs" />
+    <Compile Include="Models\TokenInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
