@@ -17,6 +17,7 @@ namespace Parse.WpfControls.Common
         private List<Tuple<int, int>> scopeSyntaxes = new List<Tuple<int, int>>();
         private List<TokenPatternInfo> tokenPatternList = new List<TokenPatternInfo>();
         private Dictionary<int, List<int>> tokenIndexesTable = new Dictionary<int, List<int>>();
+        private SelectionTokensContainer selectionBlocks = new SelectionTokensContainer();
 
         public List<TokenInfo> Tokens { get; } = new List<TokenInfo>();
         public SyntaxPairCollection syntaxPairs = new SyntaxPairCollection();
@@ -94,6 +95,8 @@ namespace Parse.WpfControls.Common
         private void UpdateTokenIndex()
         {
             this.TokenIndex = this.GetTokenIndexFromCaretIndex(this.CaretIndex);
+
+            this.selectionBlocks = this.GetSelectionTokenInfos();
         }
 
         /// <summary>
@@ -137,27 +140,76 @@ namespace Parse.WpfControls.Common
             return result;
         }
 
+        /// <summary>
+        /// This function returns an information that selected.
+        /// </summary>
+        /// <returns></returns>
+        private SelectionTokensContainer GetSelectionTokenInfos()
+        {
+            SelectionTokensContainer result = new SelectionTokensContainer();
+            int prevOffset = this.SelectionStart + this.SelectionLength;
+            RecognitionWay recognitionWay = RecognitionWay.Front;
+
+            Parallel.For(0, this.Tokens.Count, (i, loopOption) =>
+            {
+                var token = this.Tokens[i];
+                // If whole of the token is contained -> reserve delete
+                if (token.MoreRange(this.SelectionStart, prevOffset))
+                {
+                    lock(result.WholeSelectionBag) result.WholeSelectionBag.Add(i);
+                }
+                // If overlap in part of the first token
+                else if (token.Contains(this.SelectionStart, recognitionWay))
+                {
+                    int cIndex = this.SelectionStart - token.StartIndex;
+                    int length = token.Data.Length - cIndex;
+                    length = (this.SelectionLength > length) ? length : this.SelectionLength;
+
+                    lock(result.PartSelectionBag) result.PartSelectionBag.Add(new Tuple<int, int, int>(i, cIndex, length));
+                }
+                // If overlap in part of the last token
+                else if (token.Contains(prevOffset, recognitionWay))
+                {
+                    int cIndex = prevOffset - token.StartIndex;
+
+                    lock(result.PartSelectionBag) result.PartSelectionBag.Add(new Tuple<int, int, int>(i, 0, cIndex));
+                }
+            });
+
+            result.WholeSelectionBag.Sort();
+
+            return result;
+        }
+
         private void DelTokens(TextChange changeInfo)
         {
             if (changeInfo.RemovedLength == 0) return;
 
+            if(this.selectionBlocks.WholeSelectionBag.Count != 0)
+            {
+                int delIndex = this.selectionBlocks.WholeSelectionBag.First();
 
+                // The calculation that influences the length of the array never use a parallel calculation without synchronization. (ex : insert, delete)
+                Parallel.For(0, this.selectionBlocks.WholeSelectionBag.Count, i =>
+                {
+                    // for synchronization
+                    lock (this.Tokens) this.Tokens.RemoveAt(delIndex);
+                });
+            }
         }
 
         private void AddTokens(TextChange changeInfo)
         {
+            if (changeInfo.AddedLength == 0) return;
 
-        }
-
-        private void UpdateTokenInfos(TextChange changeInfo)
-        {
             RecognitionWay recognitionWay = RecognitionWay.Back;
             string addString = this.Text.Substring(changeInfo.Offset, changeInfo.AddedLength);
 
-            int tokenIndex = this.GetTokenIndexFromCaretIndex(changeInfo.Offset, recognitionWay);
-            if (tokenIndex == -1)
+            int curTokenIndex = this.GetTokenIndexFromCaretIndex(changeInfo.Offset, recognitionWay);
+            int nextTokenIndex = curTokenIndex + 1;
+            if (this.Tokens.Count == 0)
             {
-                this.Tokenize(addString, 0).ForEach(i => this.Tokens.Add(i));
+                this.Tokenize(addString, nextTokenIndex).ForEach(i => this.Tokens.Add(i));
 
                 #region The method of the second tokenize. (delete duplicate element after all match)
                 /*
@@ -220,39 +272,79 @@ namespace Parse.WpfControls.Common
             }
             else
             {
-                TokenInfo token = this.Tokens[tokenIndex];
-                string mergeString = token.MergeString(changeInfo.Offset, addString, recognitionWay);
-
-                int addLength = mergeString.Length - token.Data.Length;
-
-                Parallel.For(tokenIndex + 1, this.Tokens.Count, i =>
+                if (curTokenIndex == -1)
                 {
-                    this.Tokens[i].StartIndex += addLength;
-                });
+                    TokenInfo nextToken = this.Tokens[nextTokenIndex];
 
-                int prevTokenCnt = this.Tokens.Count;
-                int basisIndex = (tokenIndex == 0) ? 0 : this.Tokens[tokenIndex - 1].EndIndex + 1;
-
-                this.Tokens.RemoveAt(tokenIndex);
-                this.Tokenize(mergeString, basisIndex).ForEach(i => this.Tokens.Insert(tokenIndex++, i));
-
-                while(tokenIndex < this.Tokens.Count)
+                    int lastTokenIndex = this.ReplaceToken(nextTokenIndex, nextToken.MergeStringToFront(addString));
+                    this.ContinousTokenize(lastTokenIndex);
+                }
+                else
                 {
-                    // Check next token
-                    var nextToken = this.Tokens[tokenIndex];
-                    mergeString = nextToken.MergeStringToFront(this.Tokens[tokenIndex-1].Data);
+                    TokenInfo token = this.Tokens[curTokenIndex];
+                    string mergeString = token.MergeString(changeInfo.Offset, addString, recognitionWay);
 
-                    basisIndex = (tokenIndex == 0) ? 0 : this.Tokens[tokenIndex - 1].StartIndex;
-                    List<TokenInfo> result = this.Tokenize(mergeString, basisIndex);
-                    if (result[0].Data == this.Tokens[tokenIndex - 1].Data) break;
-
-                    this.Tokens.RemoveAt(tokenIndex);
-                    this.Tokens.RemoveAt(tokenIndex--);
-
-                    result.ForEach(i => this.Tokens.Insert(tokenIndex++, i));
+                    this.ContinousTokenize(this.ReplaceToken(curTokenIndex, mergeString));
                 }
             }
+        }
 
+        /// <summary>
+        /// This function replaces exist token to new tokens that are generated after tokenize the replaceString.
+        /// </summary>
+        /// <param name="tokenIndex">The index of the exist token</param>
+        /// <param name="replaceString"> </param>
+        /// <returns>The last index of the replaced token.</returns>
+        private int ReplaceToken(int tokenIndex, string replaceString)
+        {
+            TokenInfo token = this.Tokens[tokenIndex];
+            int addLength = replaceString.Length - token.Data.Length;
+
+            Parallel.For(tokenIndex + 1, this.Tokens.Count, i =>
+            {
+                this.Tokens[i].StartIndex += addLength;
+            });
+
+            int prevTokenCnt = this.Tokens.Count;
+            int basisIndex = (tokenIndex == 0) ? 0 : this.Tokens[tokenIndex - 1].EndIndex + 1;
+
+            this.Tokens.RemoveAt(tokenIndex);
+            this.Tokenize(replaceString, basisIndex).ForEach(i => this.Tokens.Insert(tokenIndex++, i));
+
+            return tokenIndex - 1;
+        }
+
+        /// <summary>
+        /// This function tokenize after merges the token of the token index-1 with the token of the token index until there's no change.
+        /// </summary>
+        /// <param name="tokenIndex"></param>
+        private void ContinousTokenize(int tokenIndex)
+        {
+            while (true)
+            {
+                // If tokenIndex is the last of the token then break.
+                if (tokenIndex == this.Tokens.Count - 1) break;
+
+                // Check next token
+                var nextToken = this.Tokens[tokenIndex];
+                string mergeString = nextToken.MergeStringToEnd(this.Tokens[tokenIndex + 1].Data);
+
+                int basisIndex = (tokenIndex == 0) ? 0 : this.Tokens[tokenIndex].StartIndex;
+                List<TokenInfo> result = this.Tokenize(mergeString, basisIndex);
+                if (result[0].Data == this.Tokens[tokenIndex].Data) break;
+
+                this.Tokens.RemoveAt(tokenIndex);
+                this.Tokens.RemoveAt(tokenIndex);
+
+                result.ForEach(i => this.Tokens.Insert(tokenIndex++, i));
+                tokenIndex--;
+            }
+        }
+
+        private void UpdateTokenInfos(TextChange changeInfo)
+        {
+            this.DelTokens(changeInfo);
+            this.AddTokens(changeInfo);
         }
 
         /// <summary>

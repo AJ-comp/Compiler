@@ -161,6 +161,11 @@ namespace Parse.WpfControls
             dc.Close();
         }
 
+        public void Clear()
+        {
+            this.lines.Clear();
+        }
+
         public void AddLine() => this.lines.Add(new DrawingVisual());
         public DrawingVisual GetLastLine() => this.lines[this.lines.Count - 1] as DrawingVisual;
     }

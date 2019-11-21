@@ -23,6 +23,9 @@
                 (this.StartIndex < caretIndex && caretIndex <= this.EndIndex + 1) : (this.StartIndex <= caretIndex && caretIndex <= this.EndIndex);
         }
 
+        public bool MoreRange(int startingPos, int endingPos) => (startingPos <= this.StartIndex && this.EndIndex < endingPos);
+        public bool SubRange(int startingPos, int endingPos) => (startingPos < this.StartIndex && this.EndIndex >= endingPos);
+
         /// <summary>
         /// This function returns a merged string if the caret index passed through the condition.
         /// </summary>

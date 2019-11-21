@@ -337,14 +337,19 @@ namespace Parse.WpfControls
         {
             int startLine = this.GetStartLineOnViewPos(this.VerticalOffset);
             var ViewLineString = this.GetLineStringCollection(startLine, this.maxViewLineOnce);
-            if (ViewLineString.Count == 0) return;
+            int startNumber = 1;
+            int endNumber = 1;
 
-            this.renderCanvas.DrawAll(ViewLineString, this.HorizontalOffset, this.VerticalOffset);
+            if (ViewLineString.Count == 0) this.renderCanvas.Clear();
+            else
+            {
+                startNumber += ViewLineString.First().AbsoluteLineIndex;
+                endNumber += ViewLineString.Last().AbsoluteLineIndex;
+
+                this.renderCanvas.DrawAll(ViewLineString, this.HorizontalOffset, this.VerticalOffset);
+            }
 
             base.OnRender(drawingContext);
-
-            int startNumber = ViewLineString.First().AbsoluteLineIndex + 1;
-            int endNumber = ViewLineString.Last().AbsoluteLineIndex + 1;
 
             this.RaiseEvent(new EditorRenderedEventArgs(HighlightTextBox.RenderedEvent, startLine, endNumber,
                                                                                 this.HorizontalOffset, this.VerticalOffset, this.LineHeight));
