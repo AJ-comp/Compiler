@@ -2,14 +2,14 @@
 {
     public enum RecognitionWay { Front, Back };
 
-    public class TokenInfo
+    public class TokenCell
     {
         public int StartIndex { get; internal set; }
         public int EndIndex { get => this.StartIndex + this.Data.Length - 1; }
         public string Data { get; } = string.Empty;
         public TokenPatternInfo PatternInfo { get; }
 
-        public TokenInfo(int startIndex, string data, TokenPatternInfo patternInfo)
+        public TokenCell(int startIndex, string data, TokenPatternInfo patternInfo)
         {
             this.StartIndex = startIndex;
             this.Data = data;
@@ -35,6 +35,7 @@
         /// <returns>The merged string.</returns>
         public string MergeString(int caretIndex, string addString, RecognitionWay recognitionWay)
         {
+            if (addString.Length == 0) return string.Empty;
             if (!this.Contains(caretIndex, recognitionWay)) return string.Empty;
 
             return this.Data.Insert(caretIndex - this.StartIndex, addString);
@@ -42,6 +43,15 @@
 
         public string MergeStringToFront(string addString) => this.Data.Insert(0, addString);
         public string MergeStringToEnd(string addString) => this.Data.Insert(this.Data.Length, addString);
+
+
+        public TokenCell GetTokenInfoAfterMergeString(int caretIndex, string addString, RecognitionWay recognitionWay)
+        {
+            string mergeString = this.MergeString(caretIndex, addString, recognitionWay);
+            if (mergeString.Length == 0) return null;
+
+            return new TokenCell(this.StartIndex, mergeString, TokenPatternInfo.NotDefinedToken);
+        }
 
         public override string ToString()
         {
@@ -76,6 +86,9 @@
                 }
             }
         }
+
+        public static TokenPatternInfo NotDefinedToken { get => new TokenPatternInfo(0, string.Empty); }
+
         public string OriginalPattern { get; }
         public bool CanDerived { get; }
         public bool Operator { get; }
@@ -88,6 +101,7 @@
             this.CanDerived = bCanDerived;
             this.Operator = bOperator;
         }
+
 
         public override string ToString() => string.Format("{0}, {1}, {2}, {3}", this.Key, this.Pattern, this.CanDerived.ToString().ToLower(), this.Operator.ToString().ToLower());
     }

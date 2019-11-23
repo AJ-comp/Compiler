@@ -17,6 +17,10 @@ namespace Parse.WpfControls.Models
         public List<Tuple<int, int, int>> PartSelectionBag { get; } = new List<Tuple<int, int, int>>();
 
 
-//        public void Sort() => this.WholeSelectionBag.OrderByDescending(c => c);
+        public void SortAll()
+        {
+            this.WholeSelectionBag.Sort();
+            this.PartSelectionBag.Sort();
+        }
     }
 }

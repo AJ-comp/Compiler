@@ -290,7 +290,7 @@ namespace Parse.WpfControls
         /// </summary>
         /// <param name="tokenInfo"></param>
         /// <returns></returns>
-        private HighlightToken GetHighlightToken(TokenInfo tokenInfo)
+        private HighlightToken GetHighlightToken(TokenCell tokenInfo)
         {
             return this.GetHighlightToken(tokenInfo.Data, tokenInfo.PatternInfo.OriginalPattern);
         }

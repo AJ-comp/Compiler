@@ -13,13 +13,13 @@ namespace Parse.WpfControls.Common
     {
         private int key = 1;
         private string patternSum = string.Empty;
-        private TokenPatternInfo notDefinedToken = new TokenPatternInfo(0, string.Empty);
         private List<Tuple<int, int>> scopeSyntaxes = new List<Tuple<int, int>>();
         private List<TokenPatternInfo> tokenPatternList = new List<TokenPatternInfo>();
         private Dictionary<int, List<int>> tokenIndexesTable = new Dictionary<int, List<int>>();
         private SelectionTokensContainer selectionBlocks = new SelectionTokensContainer();
+        private Tokenizer tokenizer = new Tokenizer();
 
-        public List<TokenInfo> Tokens { get; } = new List<TokenInfo>();
+        public List<TokenCell> Tokens { get; } = new List<TokenCell>();
         public SyntaxPairCollection syntaxPairs = new SyntaxPairCollection();
 
 
@@ -96,74 +96,33 @@ namespace Parse.WpfControls.Common
         {
             this.TokenIndex = this.GetTokenIndexFromCaretIndex(this.CaretIndex);
 
-            this.selectionBlocks = this.GetSelectionTokenInfos();
-        }
-
-        /// <summary>
-        /// This function register after tokenizing string into the multiple tokens.
-        /// </summary>
-        /// <param name="addString">The string for tokenizing.</param>
-        /// <param name="basisIndex">The basis index that uses to set up a starting index of a token.</param>
-        private List<TokenInfo> Tokenize(string addString, int basisIndex)
-        {
-            List<TokenInfo> result = new List<TokenInfo>();
-
-            int prevEI = 0;
-            foreach (var data in Regex.Matches(addString, patternSum, RegexOptions.Multiline | RegexOptions.ExplicitCapture))
-            {
-                var matchData = data as Match;
-
-                // Not defined pattern
-                TokenPatternInfo patternInfo = this.notDefinedToken;
-                if (prevEI < matchData.Index)
-                    result.Add(new TokenInfo(basisIndex + prevEI, addString.Substring(prevEI, matchData.Index - prevEI), patternInfo));
-
-                // The number of elements in the group is 1 more than the number of elements in the TokenPatternList.
-                for (int i = 0; i < this.tokenPatternList.Count + 1; i++)
-                {
-                    // The 0 index of the groups is always matched so it doesn't need to check.
-                    if (matchData.Groups[i + 1].Length > 0)
-                    {
-                        patternInfo = this.tokenPatternList[i];
-                        break;
-                    }
-                }
-
-                result.Add(new TokenInfo(basisIndex + matchData.Index, matchData.Value, patternInfo));
-                prevEI = matchData.Index + matchData.Length;
-            }
-
-            // if a string is remained then add to the token.
-            if (prevEI < addString.Length)
-                result.Add(new TokenInfo(basisIndex + prevEI, addString.Substring(prevEI, addString.Length - prevEI), this.notDefinedToken));
-
-            return result;
+            this.selectionBlocks = this.GetSelectionTokenInfos(this.SelectionStart, this.SelectionLength);
         }
 
         /// <summary>
         /// This function returns an information that selected.
         /// </summary>
         /// <returns></returns>
-        private SelectionTokensContainer GetSelectionTokenInfos()
+        private SelectionTokensContainer GetSelectionTokenInfos(int offset, int len)
         {
             SelectionTokensContainer result = new SelectionTokensContainer();
-            int prevOffset = this.SelectionStart + this.SelectionLength;
+            int prevOffset = offset + len;
             RecognitionWay recognitionWay = RecognitionWay.Front;
 
             Parallel.For(0, this.Tokens.Count, (i, loopOption) =>
             {
                 var token = this.Tokens[i];
                 // If whole of the token is contained -> reserve delete
-                if (token.MoreRange(this.SelectionStart, prevOffset))
+                if (token.MoreRange(offset, prevOffset))
                 {
                     lock(result.WholeSelectionBag) result.WholeSelectionBag.Add(i);
                 }
                 // If overlap in part of the first token
-                else if (token.Contains(this.SelectionStart, recognitionWay))
+                else if (token.Contains(offset, recognitionWay))
                 {
-                    int cIndex = this.SelectionStart - token.StartIndex;
+                    int cIndex = offset - token.StartIndex;
                     int length = token.Data.Length - cIndex;
-                    length = (this.SelectionLength > length) ? length : this.SelectionLength;
+                    length = (len > length) ? length : len;
 
                     lock(result.PartSelectionBag) result.PartSelectionBag.Add(new Tuple<int, int, int>(i, cIndex, length));
                 }
@@ -176,7 +135,7 @@ namespace Parse.WpfControls.Common
                 }
             });
 
-            result.WholeSelectionBag.Sort();
+            result.SortAll();
 
             return result;
         }
@@ -185,16 +144,23 @@ namespace Parse.WpfControls.Common
         {
             if (changeInfo.RemovedLength == 0) return;
 
-            if(this.selectionBlocks.WholeSelectionBag.Count != 0)
+            var delInfos = (changeInfo.RemovedLength == 1) ? this.GetSelectionTokenInfos(changeInfo.Offset, 1) : this.selectionBlocks;
+
+            if(delInfos.WholeSelectionBag.Count != 0)
             {
-                int delIndex = this.selectionBlocks.WholeSelectionBag.First();
+                int delIndex = delInfos.WholeSelectionBag.First();
 
                 // The calculation that influences the length of the array never use a parallel calculation without synchronization. (ex : insert, delete)
-                Parallel.For(0, this.selectionBlocks.WholeSelectionBag.Count, i =>
+                Parallel.For(0, delInfos.WholeSelectionBag.Count, i =>
                 {
                     // for synchronization
                     lock (this.Tokens) this.Tokens.RemoveAt(delIndex);
                 });
+
+
+
+                // The Rectangle Deletion operation need to write other algorithm also the algorithm will very complicate so I don't write it yet.
+                // (Can use the above data struct on the Rectangle Deletion operation.)
             }
         }
 
@@ -209,7 +175,7 @@ namespace Parse.WpfControls.Common
             int nextTokenIndex = curTokenIndex + 1;
             if (this.Tokens.Count == 0)
             {
-                this.Tokenize(addString, nextTokenIndex).ForEach(i => this.Tokens.Add(i));
+                this.tokenizer.Tokenize(addString, nextTokenIndex).ForEach(i => this.Tokens.Add(i));
 
                 #region The method of the second tokenize. (delete duplicate element after all match)
                 /*
@@ -274,14 +240,14 @@ namespace Parse.WpfControls.Common
             {
                 if (curTokenIndex == -1)
                 {
-                    TokenInfo nextToken = this.Tokens[nextTokenIndex];
+                    TokenCell nextToken = this.Tokens[nextTokenIndex];
 
                     int lastTokenIndex = this.ReplaceToken(nextTokenIndex, nextToken.MergeStringToFront(addString));
                     this.ContinousTokenize(lastTokenIndex);
                 }
                 else
                 {
-                    TokenInfo token = this.Tokens[curTokenIndex];
+                    TokenCell token = this.Tokens[curTokenIndex];
                     string mergeString = token.MergeString(changeInfo.Offset, addString, recognitionWay);
 
                     this.ContinousTokenize(this.ReplaceToken(curTokenIndex, mergeString));
@@ -297,7 +263,7 @@ namespace Parse.WpfControls.Common
         /// <returns>The last index of the replaced token.</returns>
         private int ReplaceToken(int tokenIndex, string replaceString)
         {
-            TokenInfo token = this.Tokens[tokenIndex];
+            TokenCell token = this.Tokens[tokenIndex];
             int addLength = replaceString.Length - token.Data.Length;
 
             Parallel.For(tokenIndex + 1, this.Tokens.Count, i =>
@@ -309,7 +275,7 @@ namespace Parse.WpfControls.Common
             int basisIndex = (tokenIndex == 0) ? 0 : this.Tokens[tokenIndex - 1].EndIndex + 1;
 
             this.Tokens.RemoveAt(tokenIndex);
-            this.Tokenize(replaceString, basisIndex).ForEach(i => this.Tokens.Insert(tokenIndex++, i));
+            this.tokenizer.Tokenize(replaceString, basisIndex).ForEach(i => this.Tokens.Insert(tokenIndex++, i));
 
             return tokenIndex - 1;
         }
@@ -330,7 +296,7 @@ namespace Parse.WpfControls.Common
                 string mergeString = nextToken.MergeStringToEnd(this.Tokens[tokenIndex + 1].Data);
 
                 int basisIndex = (tokenIndex == 0) ? 0 : this.Tokens[tokenIndex].StartIndex;
-                List<TokenInfo> result = this.Tokenize(mergeString, basisIndex);
+                List<TokenCell> result = this.tokenizer.Tokenize(mergeString, basisIndex);
                 if (result[0].Data == this.Tokens[tokenIndex].Data) break;
 
                 this.Tokens.RemoveAt(tokenIndex);
@@ -359,7 +325,7 @@ namespace Parse.WpfControls.Common
 
             Parallel.For(0, this.Tokens.Count, (i, loopState) =>
             {
-                TokenInfo tokenInfo = this.Tokens[i];
+                TokenCell tokenInfo = this.Tokens[i];
 
                 if (tokenInfo.Contains(caretIndex, recognWay))
                 {
@@ -389,19 +355,7 @@ namespace Parse.WpfControls.Common
             this.tokenPatternList.Add(new TokenPatternInfo(this.key++, text, optionData, bCanDerived, bOperator));
 
             this.SortTokenPatternList();
-
-            this.patternSum = string.Empty;
-            string generateString = string.Empty;
-            foreach (var pattern in this.tokenPatternList)
-            {
-                if (pattern.OriginalPattern == string.Empty) continue;
-
-                generateString += "a";
-                this.patternSum += string.Format("(?<{1}>{0})|", pattern.Pattern, generateString);
-                //                    patternSum += string.Format("({0})|", pattern.Pattern);
-            }
-
-            this.patternSum = this.patternSum.Substring(0, patternSum.Length - 1);
+            this.tokenizer.RegistTokenizeRule(this.tokenPatternList);
         }
 
         public void AddScopeGroup(string startScopeSymbol, string endScopeSymbol)
