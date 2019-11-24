@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-namespace Parse.WpfControls.Models
+namespace Parse.Tokenize
 {
     public class Tokenizer
     {
-        List<TokenPatternInfo> tokenPatternList = new List<TokenPatternInfo>();
-        string rule = string.Empty;
+        private List<TokenPatternInfo> tokenPatternList = new List<TokenPatternInfo>();
+        private string rule = string.Empty;
 
 
         private List<Tuple<int, string, Match>> TokenizeCore(string addString, int basisIndex)
@@ -103,6 +103,62 @@ namespace Parse.WpfControls.Models
             });
 
             return result;
+        }
+
+        /// <summary>
+        /// This function replaces an exist token to new tokens that are generated after tokenize the replaceString.
+        /// </summary>
+        /// <param name="tokens"> token list. </param>
+        /// <param name="fromIndex"> The index of the token to replace. </param>
+        /// <param name="replaceString"> The target for tokenizing. </param>
+        /// <returns>The last index of the replaced token.</returns>
+        public int ReplaceToken(List<TokenCell> tokens, int fromIndex, string replaceString)
+        {
+            if (fromIndex >= tokens.Count) return -1;
+
+            TokenCell token = tokens[fromIndex];
+            int addLength = replaceString.Length - token.Data.Length;
+
+            Parallel.For(fromIndex + 1, tokens.Count, i =>
+            {
+                tokens[i].StartIndex += addLength;
+            });
+
+            int prevTokenCnt = tokens.Count;
+            int basisIndex = (fromIndex == 0) ? 0 : tokens[fromIndex - 1].EndIndex + 1;
+
+            tokens.RemoveAt(fromIndex);
+            this.Tokenize(replaceString, basisIndex).ForEach(i => tokens.Insert(fromIndex++, i));
+
+            return fromIndex - 1;
+        }
+
+        /// <summary>
+        /// This function tokenize after merges the token of the token index-1 with the token of the token index until there's no change.
+        /// </summary>
+        /// <param name="tokens"> token list. </param>
+        /// <param name="tokenIndex"></param>
+        public void ContinousTokenize(List<TokenCell> tokens, int tokenIndex)
+        {
+            while (true)
+            {
+                // If tokenIndex is the last of the token then break.
+                if (tokenIndex == tokens.Count - 1) break;
+
+                // Check next token
+                var nextToken = tokens[tokenIndex];
+                string mergeString = nextToken.MergeStringToEnd(tokens[tokenIndex + 1].Data);
+
+                int basisIndex = (tokenIndex == 0) ? 0 : tokens[tokenIndex].StartIndex;
+                List<TokenCell> result = this.Tokenize(mergeString, basisIndex);
+                if (result[0].Data == tokens[tokenIndex].Data) break;
+
+                tokens.RemoveAt(tokenIndex);
+                tokens.RemoveAt(tokenIndex);
+
+                result.ForEach(i => tokens.Insert(tokenIndex++, i));
+                tokenIndex--;
+            }
         }
     }
 }

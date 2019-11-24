@@ -96,12 +96,9 @@
     <Compile Include="Editor.cs" />
     <Compile Include="EventArgs\LineChangedEventArgs.cs" />
     <Compile Include="Models\BlockManager.cs" />
-    <Compile Include="Models\Collections\TokenCellList.cs" />
     <Compile Include="Models\SelectionTokensContainer.cs" />
     <Compile Include="Models\HighlightText.cs" />
     <Compile Include="Models\SyntaxPair.cs" />
-    <Compile Include="Models\TokenCell.cs" />
-    <Compile Include="Models\Tokenizer.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -170,7 +167,9 @@
       <Name>Parse</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Models\Collections\" />
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\property.png" />
   </ItemGroup>
