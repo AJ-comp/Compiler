@@ -1,4 +1,4 @@
-﻿using Parse.FrontEnd.Extensions;
+﻿using Parse.Extensions;
 using Parse.FrontEnd.Parsers.Datas;
 using Parse.FrontEnd.Parsers.EventArgs;
 using Parse.FrontEnd.RegularGrammar;

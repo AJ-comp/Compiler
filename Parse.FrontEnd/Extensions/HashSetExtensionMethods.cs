@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace Parse.FrontEnd.Extensions
+namespace Parse.Extensions
 {
     public static class HashSetExtensionMethods
     {

@@ -46,10 +46,6 @@
     <Compile Include="AutoGenerator.cs" />
     <Compile Include="ChangeableDataSet.cs" />
     <Compile Include="Convert.cs" />
-    <Compile Include="Extensions\DataTableExtensionMethods.cs" />
-    <Compile Include="Extensions\EtcExtensionMethods.cs" />
-    <Compile Include="Extensions\HashSetExtensionMethods.cs" />
-    <Compile Include="Extensions\ListExtensionMethods.cs" />
     <Compile Include="ISemantic.cs" />
     <Compile Include="ITemplateCreatable.cs" />
     <Compile Include="KeyManager.cs" />

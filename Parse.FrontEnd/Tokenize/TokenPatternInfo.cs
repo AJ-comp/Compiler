@@ -39,6 +39,29 @@
         }
 
 
+        public bool Equals(TokenPatternInfo other)
+        {
+            if (object.ReferenceEquals(other, null)) return false;
+
+            return (this.GetHashCode() == other.GetHashCode());
+        }
+
+        public override int GetHashCode() => (int)this.Key;
+
+        public override bool Equals(object obj)
+        {
+            bool result = false;
+
+            if (obj is TokenPatternInfo)
+            {
+                TokenPatternInfo right = obj as TokenPatternInfo;
+
+                result = (this.GetHashCode() == right.GetHashCode());
+            }
+
+            return result;
+        }
+
         public override string ToString() => string.Format("{0}, {1}, {2}, {3}", this.Key, this.Pattern, this.CanDerived.ToString().ToLower(), this.Operator.ToString().ToLower());
     }
 }

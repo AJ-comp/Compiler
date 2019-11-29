@@ -1,10 +1,14 @@
-﻿using System;
+﻿using Parse.Extensions;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace Parse.Tokenize
 {
+    public enum MergeDirection { Front, End };
+
     public class Tokenizer
     {
         private List<TokenPatternInfo> tokenPatternList = new List<TokenPatternInfo>();
@@ -64,7 +68,7 @@ namespace Parse.Tokenize
         /// </summary>
         /// <param name="addString">The string for tokenizing.</param>
         /// <param name="basisIndex">The basis index that uses to set up a starting index of a token.</param>
-        public List<TokenCell> Tokenize(string addString, int basisIndex)
+        public List<TokenCell> Tokenize(string addString, int basisIndex = 0)
         {
             List<TokenCell> result = new List<TokenCell>();
             var coreResult = this.TokenizeCore(addString, basisIndex);
@@ -75,7 +79,7 @@ namespace Parse.Tokenize
                 var item = coreResult[index];
                 TokenPatternInfo patternInfo = TokenPatternInfo.NotDefinedToken;
 
-                if(item.Item3 == null)
+                if (item.Item3 == null)
                 {
                     lock (result) result.Add(new TokenCell(item.Item1, item.Item2, patternInfo));
                     return;
@@ -105,32 +109,64 @@ namespace Parse.Tokenize
             return result;
         }
 
-        /// <summary>
-        /// This function replaces an exist token to new tokens that are generated after tokenize the replaceString.
-        /// </summary>
-        /// <param name="tokens"> token list. </param>
-        /// <param name="fromIndex"> The index of the token to replace. </param>
-        /// <param name="replaceString"> The target for tokenizing. </param>
-        /// <returns>The last index of the replaced token.</returns>
-        public int ReplaceToken(List<TokenCell> tokens, int fromIndex, string replaceString)
+
+
+        /*
+        private List<int> MergeCore(List<TokenCell> tokens, int tokenIndex, int len)
         {
-            if (fromIndex >= tokens.Count) return -1;
+            List<int> result = new List<int>();
 
-            TokenCell token = tokens[fromIndex];
-            int addLength = replaceString.Length - token.Data.Length;
+            if (tokenIndex + len >= tokens.Count - 1) return result;
 
-            Parallel.For(fromIndex + 1, tokens.Count, i =>
+            int endIndex = tokenIndex + len;
+            string mergeString = string.Empty;
+            for (int i = tokenIndex; i <= endIndex; i++)
             {
-                tokens[i].StartIndex += addLength;
+                var targetToken = tokens[i];
+                mergeString += targetToken.Data;
+            }
+
+            int basisIndex = tokens[tokenIndex].StartIndex;
+            List<TokenCell> temp = this.Tokenize(mergeString, basisIndex);
+
+            if (temp.IsEqual(tokens.Skip(tokenIndex).Take(len).ToList())) return result;
+
+            for (int i = 0; i <= len; i++) tokens.RemoveAt(tokenIndex);
+
+            temp.ForEach(i => 
+            {
+                result.Add(tokenIndex);
+                tokens.Insert(tokenIndex++, i);
             });
 
-            int prevTokenCnt = tokens.Count;
-            int basisIndex = (fromIndex == 0) ? 0 : tokens[fromIndex - 1].EndIndex + 1;
+            return result;
+        }
 
-            tokens.RemoveAt(fromIndex);
-            this.Tokenize(replaceString, basisIndex).ForEach(i => tokens.Insert(fromIndex++, i));
+        /// <summary>
+        /// This function merges token into direction MergeDirection and returns a number that is inserted a merged token.
+        /// </summary>
+        /// <param name="tokens">The target list</param>
+        /// <param name="tokenIndex">The starting index to merge</param>
+        /// <param name="len">The length to merge</param>
+        /// <param name="mergeDirection">Direction to merge</param>
+        /// <returns>The inserted indexes after merge</returns>
+        public List<int> Merge(List<TokenCell> tokens, int tokenIndex, int len, MergeDirection mergeDirection)
+        {
+            List<int> result = new List<int>();
+            if (tokenIndex >= tokens.Count) return result;
 
-            return fromIndex - 1;
+            if (mergeDirection == MergeDirection.Front)
+            {
+                if (tokenIndex == 0) return result;
+                if (tokenIndex - len < 0) return result;
+
+                int startIndex = tokenIndex - len;
+
+                result = this.MergeCore(tokens, startIndex, len);
+            }
+            else result = this.MergeCore(tokens, tokenIndex, len);
+
+            return result;
         }
 
         /// <summary>
@@ -138,27 +174,65 @@ namespace Parse.Tokenize
         /// </summary>
         /// <param name="tokens"> token list. </param>
         /// <param name="tokenIndex"></param>
-        public void ContinousTokenize(List<TokenCell> tokens, int tokenIndex)
+        public void ContinousMergeAndTokenize(List<TokenCell> tokens, int tokenIndex, MergeDirection mergeDirection)
         {
-            while (true)
+            if(mergeDirection == MergeDirection.Front)
             {
-                // If tokenIndex is the last of the token then break.
-                if (tokenIndex == tokens.Count - 1) break;
+                while (true)
+                {
+                    // If tokenIndex is the last of the token then break.
+                    if (tokenIndex == tokens.Count - 1) break;
 
-                // Check next token
-                var nextToken = tokens[tokenIndex];
-                string mergeString = nextToken.MergeStringToEnd(tokens[tokenIndex + 1].Data);
+                    // Check next token
+                    var nextToken = tokens[tokenIndex];
+                    string mergeString = nextToken.MergeStringToEnd(tokens[tokenIndex + 1].Data);
 
-                int basisIndex = (tokenIndex == 0) ? 0 : tokens[tokenIndex].StartIndex;
-                List<TokenCell> result = this.Tokenize(mergeString, basisIndex);
-                if (result[0].Data == tokens[tokenIndex].Data) break;
+                    int basisIndex = (tokenIndex == 0) ? 0 : tokens[tokenIndex].StartIndex;
+                    List<TokenCell> result = this.Tokenize(mergeString, basisIndex);
+                    if (result[0].Data == tokens[tokenIndex].Data) break;
 
-                tokens.RemoveAt(tokenIndex);
-                tokens.RemoveAt(tokenIndex);
+                    tokens.RemoveAt(tokenIndex);
+                    tokens.RemoveAt(tokenIndex);
 
-                result.ForEach(i => tokens.Insert(tokenIndex++, i));
-                tokenIndex--;
+                    result.ForEach(i => tokens.Insert(tokenIndex++, i));
+                    tokenIndex--;
+                }
+            }
+
+            if(mergeDirection == MergeDirection.End)
+            {
+                while (true)
+                {
+                    // If tokenIndex is the last of the token then break.
+                    if (tokenIndex == tokens.Count - 1) break;
+
+                    // Check next token
+                    var nextToken = tokens[tokenIndex];
+                    string mergeString = nextToken.MergeStringToEnd(tokens[tokenIndex + 1].Data);
+
+                    int basisIndex = (tokenIndex == 0) ? 0 : tokens[tokenIndex].StartIndex;
+                    List<TokenCell> result = this.Tokenize(mergeString, basisIndex);
+                    if (result[0].Data == tokens[tokenIndex].Data) break;
+
+                    tokens.RemoveAt(tokenIndex);
+                    tokens.RemoveAt(tokenIndex);
+
+                    result.ForEach(i => tokens.Insert(tokenIndex++, i));
+                    tokenIndex--;
+                }
             }
         }
+
+        public List<int> MergeAndTokenize(List<TokenCell> tokens, int fromIndex, int len)
+        {
+            List<int> result = new List<int>();
+
+            if (len == 0) return result;
+            if (fromIndex< 0) return result;
+            if (fromIndex + len >= tokens.Count) return result;
+
+            return this.MergeCore(tokens, fromIndex, len);
+        }
+        */
     }
 }

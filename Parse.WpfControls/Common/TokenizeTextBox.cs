@@ -56,7 +56,7 @@ namespace Parse.WpfControls.Common
         }
 
         /// <summary>
-        /// This function returns an information that selected.
+        /// This function returns a selected information.
         /// </summary>
         /// <returns></returns>
         private SelectionTokensContainer GetSelectionTokenInfos(int offset, int len)
@@ -102,22 +102,7 @@ namespace Parse.WpfControls.Common
 
             var delInfos = (changeInfo.RemovedLength == 1) ? this.GetSelectionTokenInfos(changeInfo.Offset, 1) : this.selectionBlocks;
 
-            if(delInfos.WholeSelectionBag.Count != 0)
-            {
-                int delIndex = delInfos.WholeSelectionBag.First();
-
-                // The calculation that influences the length of the array never use a parallel calculation without synchronization. (ex : insert, delete)
-                Parallel.For(0, delInfos.WholeSelectionBag.Count, i =>
-                {
-                    // for synchronization
-                    lock (this.Tokens) this.Tokens.RemoveAt(delIndex);
-                });
-
-
-
-                // The Rectangle Deletion operation need to write other algorithm also the algorithm will very complicate so I don't write it yet.
-                // (Can use the above data struct on the Rectangle Deletion operation.)
-            }
+            this.tokenizeFactory.ReceiveOrder(delInfos);
         }
 
         private void UpdateTokenInfos(TextChange changeInfo)
@@ -146,11 +131,13 @@ namespace Parse.WpfControls.Common
 
         public void AddScopeGroup(string startScopeSymbol, string endScopeSymbol)
         {
-            int startScopeKey = this.tokenizeFactory.GetPatternKey(startScopeSymbol);
-            int endScopeKey = this.tokenizeFactory.GetPatternKey(endScopeSymbol);
+            /*
+            int startScopeKey = this.tokenizeFactory.GetPatternInfo(startScopeSymbol);
+            int endScopeKey = this.tokenizeFactory.GetPatternInfo(endScopeSymbol);
 
             if (startScopeKey > 0 || endScopeKey > 0) return;
             this.scopeSyntaxes.Add(new Tuple<int, int>(startScopeKey, endScopeKey));
+            */
         }
     }
 }

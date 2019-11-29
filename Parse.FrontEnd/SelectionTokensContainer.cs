@@ -3,7 +3,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Parse.WpfControls.Models
+namespace Parse
 {
     public class SelectionTokensContainer
     {

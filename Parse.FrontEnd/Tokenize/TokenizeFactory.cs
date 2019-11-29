@@ -1,11 +1,14 @@
-﻿using System.Collections.Generic;
+﻿using Parse.Extensions;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Parse.Tokenize
 {
     public class TokenizeFactory
     {
-        int key = 1;
-        List<TokenPatternInfo> tokenPatternList = new List<TokenPatternInfo>();
+        private int key = 1;
+        private List<TokenPatternInfo> tokenPatternList = new List<TokenPatternInfo>();
 
         private Tokenizer tokenizeTeam = new Tokenizer();
         public TokenStorage StorageTeam { get; } = new TokenStorage();
@@ -36,18 +39,20 @@ namespace Parse.Tokenize
             });
         }
 
-        public int GetPatternKey(string pattern)
+        public TokenPatternInfo GetPatternInfo(string pattern)
         {
-            int result = -1;
+            TokenPatternInfo result = null;
 
-            foreach (var item in this.tokenPatternList)
+            Parallel.For(0, this.tokenPatternList.Count, (i, loopOption) =>
             {
-                if (item.OriginalPattern == pattern)
+                var patternInfo = this.tokenPatternList[i];
+
+                if (patternInfo.OriginalPattern == pattern)
                 {
-                    result = item.Key;
-                    break;
+                    result = patternInfo;
+                    loopOption.Stop();
                 }
-            }
+            });
 
             return result;
         }
@@ -63,6 +68,45 @@ namespace Parse.Tokenize
             this.SortTokenPatternList();
 
             this.tokenizeTeam.RegistTokenizeRule(this.tokenPatternList);
+            this.StorageTeam.InitTokenTable(this.tokenPatternList);
+        }
+
+        /// <summary>
+        /// This function works the merge and the tokenize. (from fromIndex to the toIndex[fromIndex + count - 1])
+        /// </summary>
+        /// <param name="fromIndex"></param>
+        /// <param name="count"></param>
+        private void RangeMergeAndTokenizeProcess(int fromIndex, int count)
+        {
+            if (fromIndex + count > this.StorageTeam.AllTokens.Count) return;
+
+            string mergeString = string.Empty;
+            foreach(var item in this.StorageTeam.AllTokens.Skip(fromIndex).Take(count))
+                mergeString += item.Data;
+
+            var tokenList = this.tokenizeTeam.Tokenize(mergeString);
+            this.StorageTeam.ReplaceToken(fromIndex, count, tokenList);
+        }
+
+        /// <summary>
+        /// This function process the following algorithm.
+        /// 1. Generate tokens by tokenizing the mergeString argument.
+        /// 2. Replace token of the replaceIndex argument to the generated tokens.
+        /// 3. Work the RangeMergeAndTokenizeProcess.
+        /// </summary>
+        /// <param name="replaceIndex"></param>
+        /// <param name="mergeString"></param>
+        private void TokenizeAfterReplace(int replaceIndex, string mergeString)
+        {
+            TokenCell token = this.StorageTeam.AllTokens[replaceIndex];
+            // If to use the basisIndex then it can increase the performance of the ReplaceToken function because of need not arrange.
+            // But the logic is not written yet.
+            var tokenList = this.tokenizeTeam.Tokenize(mergeString);
+            this.StorageTeam.ReplaceToken(replaceIndex, 1, tokenList);
+
+            var indexInfo = this.StorageTeam.FindImpactRange(replaceIndex + tokenList.Count - 1);
+
+            this.RangeMergeAndTokenizeProcess(indexInfo.Item1, indexInfo.Item2);
         }
 
         /// <summary>
@@ -73,6 +117,7 @@ namespace Parse.Tokenize
         public void ReceiveOrder(int offset, string rawString)
         {
             RecognitionWay recognitionWay = RecognitionWay.Back;
+            this.StorageTeam.UpdateTableForAllPatterns();
 
             int curTokenIndex = this.StorageTeam.TokenIndexForOffset(offset, recognitionWay);
             int nextTokenIndex = curTokenIndex + 1;
@@ -144,24 +189,44 @@ namespace Parse.Tokenize
                 if (curTokenIndex == -1)
                 {
                     TokenCell nextToken = this.StorageTeam.AllTokens[nextTokenIndex];
-
-                    int lastTokenIndex = this.tokenizeTeam.ReplaceToken(this.StorageTeam.AllTokens, nextTokenIndex, nextToken.MergeStringToFront(rawString));
-                    this.tokenizeTeam.ContinousTokenize(this.StorageTeam.AllTokens, lastTokenIndex);
+                    this.TokenizeAfterReplace(nextTokenIndex, nextToken.MergeStringToFront(rawString));
                 }
                 else
                 {
                     TokenCell token = this.StorageTeam.AllTokens[curTokenIndex];
-                    string mergeString = token.MergeString(offset, rawString, recognitionWay);
-
-                    var lastTokenIndex = this.tokenizeTeam.ReplaceToken(this.StorageTeam.AllTokens, curTokenIndex, mergeString);
-                    this.tokenizeTeam.ContinousTokenize(this.StorageTeam.AllTokens, lastTokenIndex);
+                    this.TokenizeAfterReplace(curTokenIndex, token.MergeString(offset, rawString, recognitionWay));
                 }
             }
         }
 
-        public void ReceiveOrder(int offset, int delLen)
+        public void ReceiveOrder(SelectionTokensContainer delInfos)
         {
+            if (delInfos.WholeSelectionBag.Count != 0)
+            {
+                this.StorageTeam.UpdateTableForAllPatterns();
 
+                int delIndex = delInfos.WholeSelectionBag.First();
+
+                // The calculation that influences the length of the array never use a parallel calculation without synchronization. (ex : insert, delete)
+                Parallel.For(0, delInfos.WholeSelectionBag.Count, i =>
+                {
+                    // for synchronization
+                    lock (this.StorageTeam.AllTokens) this.StorageTeam.AllTokens.RemoveAt(delIndex);
+                });
+
+                Parallel.For(0, delInfos.PartSelectionBag.Count, i =>
+                {
+                    var delInfo = delInfos.PartSelectionBag[i];
+
+//                    this.StorageTeam.AllTokens[i]. this.StorageTeam.AllTokens[i].Data.Remove(delInfo.Item2, delInfo.Item3);
+                });
+
+
+
+
+                // The Rectangle Deletion operation need to write other algorithm also the algorithm will very complicate so I don't write it yet.
+                // (Can use the above data struct on the Rectangle Deletion operation.)
+            }
         }
 
     }

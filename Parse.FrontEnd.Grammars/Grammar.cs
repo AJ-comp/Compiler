@@ -11,6 +11,11 @@ namespace Parse.FrontEnd.Grammars
     {
         protected KeyManager keyManager = new KeyManager();
 
+        protected Terminal space = new Terminal(TokenType.Delimiter, " ");
+        protected Terminal tab = new Terminal(TokenType.Delimiter, "\t");
+        protected Terminal lineFeed = new Terminal(TokenType.Delimiter, "\r");
+        protected Terminal lineBreak = new Terminal(TokenType.Delimiter, "\n");
+
         /// <summary> first is character, second means whether ignore. true is ignoring. </summary>
         public Dictionary<string, bool> DelimiterDic { get; } = new Dictionary<string, bool>();
 

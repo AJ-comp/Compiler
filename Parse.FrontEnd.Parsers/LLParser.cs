@@ -1,5 +1,5 @@
 ﻿using Parse.FrontEnd.Ast;
-using Parse.FrontEnd.Extensions;
+using Parse.Extensions;
 using Parse.FrontEnd.Grammars;
 using Parse.FrontEnd.Parsers.Collections;
 using Parse.FrontEnd.RegularGrammar;

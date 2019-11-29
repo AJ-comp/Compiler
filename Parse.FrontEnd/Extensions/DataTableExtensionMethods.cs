@@ -5,7 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 
-namespace Parse.FrontEnd.Extensions
+namespace Parse.Extensions
 {
     public static class DataTableExtensionMethods
     {
