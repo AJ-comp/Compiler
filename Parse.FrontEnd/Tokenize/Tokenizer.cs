@@ -66,12 +66,12 @@ namespace Parse.Tokenize
         /// <summary>
         /// This function register after tokenizing string into the multiple tokens.
         /// </summary>
-        /// <param name="addString">The string for tokenizing.</param>
+        /// <param name="toTokenizeString">The string to tokenize.</param>
         /// <param name="basisIndex">The basis index that uses to set up a starting index of a token.</param>
-        public List<TokenCell> Tokenize(string addString, int basisIndex = 0)
+        public List<TokenCell> Tokenize(string toTokenizeString, int basisIndex = 0)
         {
             List<TokenCell> result = new List<TokenCell>();
-            var coreResult = this.TokenizeCore(addString, basisIndex);
+            var coreResult = this.TokenizeCore(toTokenizeString, basisIndex);
 
             // It would attach the label (TokenPatternInfo).
             Parallel.For(0, coreResult.Count, index =>

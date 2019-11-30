@@ -62,19 +62,20 @@ namespace Parse.WpfControls.Common
         private SelectionTokensContainer GetSelectionTokenInfos(int offset, int len)
         {
             SelectionTokensContainer result = new SelectionTokensContainer();
-            int prevOffset = offset + len;
-            RecognitionWay recognitionWay = RecognitionWay.Front;
+            if (len <= 0) return result;
+
+            int endOffset = offset + len;
 
             Parallel.For(0, this.Tokens.Count, (i, loopOption) =>
             {
                 var token = this.Tokens[i];
                 // If whole of the token is contained -> reserve delete
-                if (token.MoreRange(offset, prevOffset))
+                if (token.MoreRange(offset, endOffset))
                 {
                     lock(result.WholeSelectionBag) result.WholeSelectionBag.Add(i);
                 }
                 // If overlap in part of the first token
-                else if (token.Contains(offset, recognitionWay))
+                else if (token.Contains(offset, RecognitionWay.Front))
                 {
                     int cIndex = offset - token.StartIndex;
                     int length = token.Data.Length - cIndex;
@@ -83,9 +84,9 @@ namespace Parse.WpfControls.Common
                     lock(result.PartSelectionBag) result.PartSelectionBag.Add(new Tuple<int, int, int>(i, cIndex, length));
                 }
                 // If overlap in part of the last token
-                else if (token.Contains(prevOffset, recognitionWay))
+                else if (token.Contains(endOffset, RecognitionWay.Back))
                 {
-                    int cIndex = prevOffset - token.StartIndex;
+                    int cIndex = endOffset - token.StartIndex;
 
                     lock(result.PartSelectionBag) result.PartSelectionBag.Add(new Tuple<int, int, int>(i, 0, cIndex));
                 }
@@ -100,7 +101,8 @@ namespace Parse.WpfControls.Common
         {
             if (changeInfo.RemovedLength == 0) return;
 
-            var delInfos = (changeInfo.RemovedLength == 1) ? this.GetSelectionTokenInfos(changeInfo.Offset, 1) : this.selectionBlocks;
+            var delInfos = (this.selectionBlocks.IsEmpty()) ? 
+                this.GetSelectionTokenInfos(changeInfo.Offset, changeInfo.RemovedLength) : this.selectionBlocks;
 
             this.tokenizeFactory.ReceiveOrder(delInfos);
         }

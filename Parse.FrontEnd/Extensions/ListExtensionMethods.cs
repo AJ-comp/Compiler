@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Parse.Extensions
 {
@@ -29,23 +30,24 @@ namespace Parse.Extensions
         /// </summary>
         /// <param name="obj"></param>
         /// <param name="value"></param>
+        /// <param name="bZeroDiffInclude"></param>
         /// <returns></returns>
-        public static int GetIndexNearestLessThanValue(this List<int>obj, int value)
+        public static int GetIndexNearestLessThanValue(this List<int>obj, int value, bool bZeroDiffInclude=false)
         {
             int result = -1;
             if (obj.Count == 0) return result;
 
-            int minDiff = 0xff;
+            int minDiff = int.MaxValue;
             obj.ForEach(i =>
             {
                 if (i <= value)
                 {
                     int diff = value - i;
-                    if (diff < minDiff)
+                    if (diff == 0)
                     {
-                        result = i;
-                        minDiff = diff;
+                        if (bZeroDiffInclude) { result = i; minDiff = diff; }
                     }
+                    else if (diff < minDiff) { result = i; minDiff = diff; }
                 }
             });
 
@@ -57,23 +59,24 @@ namespace Parse.Extensions
         /// </summary>
         /// <param name="obj"></param>
         /// <param name="value"></param>
+        /// <param name="bZeroDiffInclude"></param>
         /// <returns></returns>
-        public static int GetIndexNearestMoreThanValue(this List<int>obj, int value)
+        public static int GetIndexNearestMoreThanValue(this List<int>obj, int value, bool bZeroDiffInclude=false)
         {
             int result = -1;
             if (obj.Count == 0) return result;
 
-            int minDiff = 0xff;
+            int minDiff = int.MaxValue;
             obj.ForEach(i =>
             {
                 if (i >= value)
                 {
                     int diff = i - value;
-                    if (diff < minDiff)
+                    if (diff == 0)
                     {
-                        result = i;
-                        minDiff = diff;
+                        if (bZeroDiffInclude) { result = i; minDiff = diff; }
                     }
+                    else if (diff < minDiff) { result = i; minDiff = diff; }
                 }
             });
 

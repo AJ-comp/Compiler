@@ -147,7 +147,7 @@ namespace Parse.FrontEnd.Parsers.Collections
             {
                 if (item.Key.Item1 == IxIndex)
                 {
-                    uint highestPriority = 0xff;
+                    uint highestPriority = int.MaxValue;
                     foreach(var singleNT in curStatus.GetNTSingleMatchedMarkSymbol(item.Key.Item2))
                     {
                         if (singleNT.Priority < highestPriority) highestPriority = singleNT.Priority;

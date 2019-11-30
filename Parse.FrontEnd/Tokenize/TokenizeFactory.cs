@@ -39,6 +39,29 @@ namespace Parse.Tokenize
             });
         }
 
+        /// <summary>
+        /// This function returns a part string that applied the PartSelectionBag in the SelectionTokensContainer.
+        /// </summary>
+        /// <param name="tokenIndex"></param>
+        /// <param name="rangeInfo"></param>
+        /// <returns>The merged string.</returns>
+        private string GetPartString(int tokenIndex, SelectionTokensContainer rangeInfo)
+        {
+            string result = string.Empty;
+
+            int index = rangeInfo.GetIndexInPartSelectionBag(tokenIndex);
+            if (index >= 0)
+            {
+                var startIndexToRemove = rangeInfo.PartSelectionBag[index].Item2;
+                var removeLength = rangeInfo.PartSelectionBag[index].Item3;
+
+                result = this.StorageTeam.AllTokens[tokenIndex].Data.Remove(startIndexToRemove, removeLength);
+            }
+
+            return result;
+        }
+
+
         public TokenPatternInfo GetPatternInfo(string pattern)
         {
             TokenPatternInfo result = null;
@@ -57,6 +80,13 @@ namespace Parse.Tokenize
             return result;
         }
 
+        /// <summary>
+        /// This function adds a tokenize rule to the sub-modules of the TokenizeFactory.
+        /// </summary>
+        /// <param name="text">The pattern to tokenize.</param>
+        /// <param name="optionData">If exist additional data then would add to this.</param>
+        /// <param name="bCanDerived">This argument means the first argument is the derived pattern or is a fixed pattern.</param>
+        /// <param name="bOperator">true = delimiter, false = not delimiter.</param>
         public void AddTokenRule(string text, object optionData = null, bool bCanDerived = false, bool bOperator = false)
         {
             foreach (var item in this.tokenPatternList)
@@ -85,7 +115,7 @@ namespace Parse.Tokenize
                 mergeString += item.Data;
 
             var tokenList = this.tokenizeTeam.Tokenize(mergeString);
-            this.StorageTeam.ReplaceToken(fromIndex, count, tokenList);
+            this.StorageTeam.ReplaceToken(new Range(fromIndex, count), tokenList);
         }
 
         /// <summary>
@@ -99,14 +129,19 @@ namespace Parse.Tokenize
         private void TokenizeAfterReplace(int replaceIndex, string mergeString)
         {
             TokenCell token = this.StorageTeam.AllTokens[replaceIndex];
+
+            var impactRange = this.StorageTeam.FindImpactRange(replaceIndex);
+
+            var firstString = this.StorageTeam.GetMergeStringOfRange(new Range(impactRange.StartIndex, replaceIndex - impactRange.StartIndex));
+            var lastString = this.StorageTeam.GetMergeStringOfRange(new Range(replaceIndex + 1, impactRange.EndIndex - replaceIndex));
+            mergeString = firstString + mergeString + lastString;
+
             // If to use the basisIndex then it can increase the performance of the ReplaceToken function because of need not arrange.
             // But the logic is not written yet.
             var tokenList = this.tokenizeTeam.Tokenize(mergeString);
-            this.StorageTeam.ReplaceToken(replaceIndex, 1, tokenList);
+            this.StorageTeam.ReplaceToken(impactRange, tokenList);
 
-            var indexInfo = this.StorageTeam.FindImpactRange(replaceIndex + tokenList.Count - 1);
-
-            this.RangeMergeAndTokenizeProcess(indexInfo.Item1, indexInfo.Item2);
+            this.RangeMergeAndTokenizeProcess(impactRange.StartIndex, impactRange.Count);
         }
 
         /// <summary>
@@ -199,34 +234,31 @@ namespace Parse.Tokenize
             }
         }
 
+        /// <summary>
+        /// This function processes the deletion order.
+        /// </summary>
+        /// <param name="delInfos"></param>
         public void ReceiveOrder(SelectionTokensContainer delInfos)
         {
-            if (delInfos.WholeSelectionBag.Count != 0)
-            {
-                this.StorageTeam.UpdateTableForAllPatterns();
+            if (delInfos.IsEmpty()) return;
 
-                int delIndex = delInfos.WholeSelectionBag.First();
+            var indexInfo = delInfos.Range;
+            var impactRange = this.StorageTeam.FindImpactRange(indexInfo.StartIndex, indexInfo.EndIndex);
 
-                // The calculation that influences the length of the array never use a parallel calculation without synchronization. (ex : insert, delete)
-                Parallel.For(0, delInfos.WholeSelectionBag.Count, i =>
-                {
-                    // for synchronization
-                    lock (this.StorageTeam.AllTokens) this.StorageTeam.AllTokens.RemoveAt(delIndex);
-                });
+            string mergeString = this.StorageTeam.GetMergeStringOfRange(new Range(impactRange.StartIndex, indexInfo.StartIndex - impactRange.StartIndex));
+            mergeString += this.GetPartString(indexInfo.StartIndex, delInfos);
 
-                Parallel.For(0, delInfos.PartSelectionBag.Count, i =>
-                {
-                    var delInfo = delInfos.PartSelectionBag[i];
+            if (indexInfo.StartIndex != indexInfo.EndIndex) mergeString += this.GetPartString(indexInfo.EndIndex, delInfos);
+            int endIndex = indexInfo.EndIndex + 1;
+            mergeString += this.StorageTeam.GetMergeStringOfRange(new Range(endIndex, impactRange.EndIndex - indexInfo.EndIndex));
 
-//                    this.StorageTeam.AllTokens[i]. this.StorageTeam.AllTokens[i].Data.Remove(delInfo.Item2, delInfo.Item3);
-                });
+            var toInsertTokens = this.tokenizeTeam.Tokenize(mergeString);
+            this.StorageTeam.ReplaceToken(impactRange, toInsertTokens);
 
+            this.StorageTeam.UpdateTableForAllPatterns();
 
-
-
-                // The Rectangle Deletion operation need to write other algorithm also the algorithm will very complicate so I don't write it yet.
-                // (Can use the above data struct on the Rectangle Deletion operation.)
-            }
+            // The Rectangle Deletion operation need to write other algorithm also the algorithm will very complicate so I don't write it yet.
+            // (Can use the above data struct on the Rectangle Deletion operation.)
         }
 
     }

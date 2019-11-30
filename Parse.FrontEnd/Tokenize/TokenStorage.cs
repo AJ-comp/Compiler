@@ -1,5 +1,5 @@
 ﻿using Parse.Extensions;
-using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -28,6 +28,10 @@ namespace Parse.Tokenize
             });
         }
 
+        /// <summary>
+        /// This function initializes the token table into the argument value.
+        /// </summary>
+        /// <param name="tokenPatternList">The value of the token pattern list to initialize.</param>
         internal void InitTokenTable(List<TokenPatternInfo> tokenPatternList)
         {
             this.tableForAllPatterns.Clear();
@@ -107,7 +111,7 @@ namespace Parse.Tokenize
             var indexes = this.GetIndexesForSpecialPattern(pattern);
 
             int result = -1;
-            int minDiffer = 0xff;
+            int minDiffer = int.MaxValue;
             indexes.ForEach(i =>
             {
                 int differ = tokenIndex - i;
@@ -128,7 +132,7 @@ namespace Parse.Tokenize
             var indexes = this.GetIndexesForSpecialPattern(findPattern);
 
             int result = -1;
-            int minDiffer = 0xff;
+            int minDiffer = int.MaxValue;
             indexes.ForEach(i => 
             {
                 int differ = tokenIndex - i;
@@ -150,7 +154,7 @@ namespace Parse.Tokenize
             var indexes = this.GetIndexesForSpecialPattern(findPattern);
 
             int result = -1;
-            int minDiffer = 0xff;
+            int minDiffer = int.MaxValue;
             indexes.ForEach(i =>
             {
                 if (i > tokenIndex)
@@ -198,57 +202,68 @@ namespace Parse.Tokenize
         /// </summary>
         /// <param name="tokenIndex"></param>
         /// <returns>The first value : index, The second value : count </returns>
-        public Tuple<int, int> FindImpactRange(int tokenIndex)
-        {
-            var indexes = this.GetIndexesForSpecialPattern(" ", "\n");
-            var fromIndex = indexes.GetIndexNearestLessThanValue(tokenIndex);
-            var toIndex = indexes.GetIndexNearestMoreThanValue(tokenIndex);
-
-            fromIndex = (fromIndex == -1) ? 0 : fromIndex;
-            toIndex = (toIndex == -1) ? this.AllTokens.Count : toIndex;
-
-            return new Tuple<int, int>(fromIndex, toIndex - fromIndex + 1);
-        }
+        public Range FindImpactRange(int tokenIndex) => this.FindImpactRange(tokenIndex, tokenIndex);
 
         /// <summary>
         /// This function returns the impact range on the basis of the arguments.
         /// </summary>
-        /// <param name="tokenIndex"></param>
+        /// <param name="startTokenIndex"></param>
+        /// <param name="endTokenIndex"></param>
         /// <returns>The first value : index, The second value : count </returns>
-        public Tuple<int, int> FindImpactRange(int startTokenIndex, int endTokenIndex)
+        public Range FindImpactRange(int startTokenIndex, int endTokenIndex)
         {
             var indexes = this.GetIndexesForSpecialPattern(" ", "\n");
-            var fromIndex = indexes.GetIndexNearestLessThanValue(startTokenIndex);
-            var toIndex = indexes.GetIndexNearestMoreThanValue(endTokenIndex);
+            var fromIndex = -1;
+            var toIndex = -1;
+
+            Parallel.Invoke(
+                () =>
+                {
+                    fromIndex = indexes.GetIndexNearestLessThanValue(startTokenIndex);
+                }, 
+                () => 
+                {
+                    toIndex = indexes.GetIndexNearestMoreThanValue(endTokenIndex);
+                });
 
             fromIndex = (fromIndex == -1) ? 0 : fromIndex;
-            toIndex = (toIndex == -1) ? this.AllTokens.Count : toIndex;
+            toIndex = (toIndex == -1) ? this.AllTokens.Count - 1 : toIndex;
 
-            return new Tuple<int, int>(fromIndex, toIndex - fromIndex + 1);
+            return new Range(fromIndex, toIndex - fromIndex + 1);
+        }
+
+        public string GetMergeStringOfRange(Range range)
+        {
+            string result = string.Empty;
+
+            for (int i = range.StartIndex; i <= range.EndIndex; i++)
+                result += this.AllTokens[i].Data;
+
+            return result;
         }
 
         /// <summary>
         /// This function replaces an exist token to new tokens (replaceTokenList)
         /// </summary>
-        /// <param name="startIndex">The start index of token for replacing.</param>
-        /// <param name="count">The token number for replacing.</param>
+        /// <param name="range">The range of token for replacing.</param>
         /// <param name="replaceTokenList">The new tokens to replace.</param>
-        public void ReplaceToken(int startIndex, int count, List<TokenCell> replaceTokenList)
+        public void ReplaceToken(Range range, List<TokenCell> replaceTokenList)
         {
             int addLength = 0;
             foreach (var item in replaceTokenList) addLength += item.Data.Length;
 
-            for (int i = startIndex; i < startIndex + count; i++)
+            for (int i = range.StartIndex; i <= range.EndIndex; i++)
                 addLength = addLength - this.AllTokens[i].Data.Length;
 
-            Parallel.For(startIndex + count, this.AllTokens.Count, i =>
+            Parallel.For(range.EndIndex + 1, this.AllTokens.Count, i =>
             {
                 this.AllTokens[i].StartIndex += addLength;
             });
 
-            int contentIndex = (startIndex == 0) ? 0 : this.AllTokens[startIndex].StartIndex;
-            for (int i = startIndex; i < startIndex + count; i++) this.AllTokens.RemoveAt(startIndex);
+            int contentIndex = (range.StartIndex == 0) ? 0 : this.AllTokens[range.StartIndex].StartIndex;
+            this.AllTokens.RemoveRange(range.StartIndex, range.Count);
 
+            int startIndex = range.StartIndex;
             replaceTokenList.ForEach(i =>
             {
                 i.StartIndex = contentIndex;
