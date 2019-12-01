@@ -1,4 +1,6 @@
-﻿namespace Parse.Tokenize
+﻿using System.Text.RegularExpressions;
+
+namespace Parse.Tokenize
 {
     public enum RecognitionWay { Front, Back };
 
@@ -7,14 +9,25 @@
         public int StartIndex { get; internal set; }
         public int EndIndex { get => this.StartIndex + this.Data.Length - 1; }
         public string Data { get; } = string.Empty;
-        public TokenPatternInfo PatternInfo { get; }
+        public Match matchData { get; }
+        public TokenPatternInfo PatternInfo { get; internal set; }
 
+        /*
         public TokenCell(int startIndex, string data, TokenPatternInfo patternInfo)
         {
             this.StartIndex = startIndex;
             this.Data = data;
 
             this.PatternInfo = patternInfo;
+        }
+        */
+
+        public TokenCell(int startIndex, string data, Match matchData)
+        {
+            this.StartIndex = startIndex;
+            this.Data = data;
+
+            this.matchData = matchData;
         }
 
         public bool Contains(int caretIndex, RecognitionWay recognitionWay)
@@ -44,7 +57,7 @@
         public string MergeStringToFront(string addString) => this.Data.Insert(0, addString);
         public string MergeStringToEnd(string addString) => this.Data.Insert(this.Data.Length, addString);
 
-
+        /*
         public TokenCell GetTokenInfoAfterMergeString(int caretIndex, string addString, RecognitionWay recognitionWay)
         {
             string mergeString = this.MergeString(caretIndex, addString, recognitionWay);
@@ -52,6 +65,7 @@
 
             return new TokenCell(this.StartIndex, mergeString, TokenPatternInfo.NotDefinedToken);
         }
+        */
 
         public override string ToString()
         {

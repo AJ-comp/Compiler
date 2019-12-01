@@ -1,6 +1,6 @@
-﻿using Parse.Extensions;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace Parse.Tokenize
@@ -9,10 +9,73 @@ namespace Parse.Tokenize
     {
         private int key = 1;
         private List<TokenPatternInfo> tokenPatternList = new List<TokenPatternInfo>();
+        private string tokenizeRule = string.Empty;
 
         private Tokenizer tokenizeTeam = new Tokenizer();
         public TokenStorage StorageTeam { get; } = new TokenStorage();
 
+        public TokenizeFactory()
+        {
+            this.tokenizeTeam.TokenizeCompleted = TokenizeCompletedWork;
+        }
+
+        private void TokenizeCompletedWork(List<TokenCell> tokenCells)
+        {
+            // It would attach the label (TokenPatternInfo).
+            Parallel.For(0, tokenCells.Count, index =>
+            {
+                var patternInfo = this.GetMatchedPattern(tokenCells[index].matchData);
+
+                tokenCells[index].PatternInfo = patternInfo;
+            });
+        }
+
+        /// <summary>
+        /// This function returns the tokenize rule.
+        /// </summary>
+        /// <param name="tokenPatternList"></param>
+        public string GetTokenizeRule(List<TokenPatternInfo> tokenPatternList)
+        {
+            this.tokenPatternList = tokenPatternList;
+
+            string result = string.Empty;
+            string generateString = string.Empty;
+            foreach (var pattern in tokenPatternList)
+            {
+                if (pattern.OriginalPattern == string.Empty) continue;
+
+                generateString += "a";
+                result += string.Format("(?<{1}>{0})|", pattern.Pattern, generateString);
+                //                    patternSum += string.Format("({0})|", pattern.Pattern);
+            }
+
+            return result.Substring(0, result.Length - 1);
+        }
+
+        /// <summary>
+        /// This function returns the TokenPatternInfo for Match argument.
+        /// </summary>
+        /// <param name="matchInfo"></param>
+        /// <returns></returns>
+        private TokenPatternInfo GetMatchedPattern(Match matchInfo)
+        {
+            TokenPatternInfo result = TokenPatternInfo.NotDefinedToken;
+
+            if (matchInfo == null) return result;
+
+            // The number of elements in the group is 1 more than the number of elements in the TokenPatternList.
+            for (int i = 0; i < this.tokenPatternList.Count + 1; i++)
+            {
+                // The 0 index of the groups is always matched so it doesn't need to check.
+                if (matchInfo.Groups[i + 1].Length > 0)
+                {
+                    result = this.tokenPatternList[i];
+                    break;
+                }
+            }
+
+            return result;
+        }
 
         /// <summary>
         /// This function sorts the TokenPatterList accoding to the following principle.
@@ -97,7 +160,7 @@ namespace Parse.Tokenize
             this.tokenPatternList.Add(new TokenPatternInfo(this.key++, text, optionData, bCanDerived, bOperator));
             this.SortTokenPatternList();
 
-            this.tokenizeTeam.RegistTokenizeRule(this.tokenPatternList);
+            this.tokenizeRule = this.GetTokenizeRule(this.tokenPatternList);
             this.StorageTeam.InitTokenTable(this.tokenPatternList);
         }
 
@@ -114,7 +177,7 @@ namespace Parse.Tokenize
             foreach(var item in this.StorageTeam.AllTokens.Skip(fromIndex).Take(count))
                 mergeString += item.Data;
 
-            var tokenList = this.tokenizeTeam.Tokenize(mergeString);
+            var tokenList = this.tokenizeTeam.Tokenize(this.tokenizeRule, mergeString);
             this.StorageTeam.ReplaceToken(new Range(fromIndex, count), tokenList);
         }
 
@@ -138,7 +201,7 @@ namespace Parse.Tokenize
 
             // If to use the basisIndex then it can increase the performance of the ReplaceToken function because of need not arrange.
             // But the logic is not written yet.
-            var tokenList = this.tokenizeTeam.Tokenize(mergeString);
+            var tokenList = this.tokenizeTeam.Tokenize(this.tokenizeRule, mergeString);
             this.StorageTeam.ReplaceToken(impactRange, tokenList);
 
             this.RangeMergeAndTokenizeProcess(impactRange.StartIndex, impactRange.Count);
@@ -158,7 +221,7 @@ namespace Parse.Tokenize
             int nextTokenIndex = curTokenIndex + 1;
             if (this.StorageTeam.AllTokens.Count == 0)
             {
-                this.tokenizeTeam.Tokenize(rawString, nextTokenIndex).ForEach(i => this.StorageTeam.AllTokens.Add(i));
+                this.tokenizeTeam.Tokenize(this.tokenizeRule, rawString, nextTokenIndex).ForEach(i => this.StorageTeam.AllTokens.Add(i));
 
                 #region The method of the second tokenize. (delete duplicate element after all match)
                 /*
@@ -252,7 +315,7 @@ namespace Parse.Tokenize
             int endIndex = indexInfo.EndIndex + 1;
             mergeString += this.StorageTeam.GetMergeStringOfRange(new Range(endIndex, impactRange.EndIndex - indexInfo.EndIndex));
 
-            var toInsertTokens = this.tokenizeTeam.Tokenize(mergeString);
+            var toInsertTokens = this.tokenizeTeam.Tokenize(this.tokenizeRule, mergeString);
             this.StorageTeam.ReplaceToken(impactRange, toInsertTokens);
 
             this.StorageTeam.UpdateTableForAllPatterns();
