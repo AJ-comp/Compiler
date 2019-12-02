@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using static Parse.FrontEnd.Parsers.Datas.LRParsingData;
+using Parse.Tokenize;
 
 namespace Parse.FrontEnd.Parsers.LR
 {
@@ -210,6 +211,53 @@ namespace Parse.FrontEnd.Parsers.LR
 
             foreach(var item in this.parsingHistory.TreeInfo.ToReverseList())
                 result += item.ToTreeString();
+
+            return result;
+        }
+
+        public override bool Parse(TokenCell[] tokenCells)
+        {
+            bool result = false;
+            this.ParsingInit();
+
+            var tokens = tokenCells.ToList();
+            tokens.Add(new TokenCell(-1, new EndMarker().Value, null));
+
+            for (int i = 0; i < tokens.Count; i++)
+            {
+                var item = tokens[i];
+
+                Terminal type = new Epsilon();
+                if (item.Data == new EndMarker().Value && i == tokens.Count - 1) type = new EndMarker();
+                else
+                {
+                    var typeData = item.PatternInfo.OptionData as Terminal;
+                    if (typeData == null) type = new NotDefined();
+                    else if (typeData?.TokenType == TokenType.Delimiter) continue;
+                    else type = typeData;
+                }
+
+                var token = new TokenData(item.Data, type);
+
+                if (token.Kind == new NotDefined())
+                {
+                }
+                ActionDir parsingResult = this.parsingRule.Parsing(token);
+                if (parsingResult == ActionDir.failed)
+                {
+                    result = false;
+                    break;
+                }
+                else if (parsingResult == ActionDir.accept)
+                {
+                    result = true;
+                    break;
+                }
+                else if (parsingResult == ActionDir.reduce || parsingResult == ActionDir.epsilon_reduce || parsingResult == ActionDir.moveto)
+                {
+                    i--;
+                }
+            }
 
             return result;
         }

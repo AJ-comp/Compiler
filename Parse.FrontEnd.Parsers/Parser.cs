@@ -2,6 +2,7 @@
 using Parse.FrontEnd.Grammars;
 using Parse.FrontEnd.Parsers.Collections;
 using Parse.FrontEnd.RegularGrammar;
+using Parse.Tokenize;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -41,18 +42,6 @@ namespace Parse.FrontEnd.Parsers
             }
         }
 
-        public string RegularGrammar
-        {
-            get
-            {
-                string result = string.Empty;
-
-                foreach (var symbol in this.Grammar.NonTerminalMultiples) result += symbol.ToGrammarString() + Environment.NewLine;
-
-                return result;
-            }
-        }
-
         /// <summary> Get the permissible terminal set from current status </summary>
         public abstract TerminalSet PossibleTerminalSet { get; }
         /// <summary> Get the analysis result with string format. </summary>
@@ -71,18 +60,25 @@ namespace Parse.FrontEnd.Parsers
         }
 
         /// <summary>
-        /// Start parsing about parameter.
+        /// Start parsing for parameter.
         /// </summary>
         /// <param name="data"></param>
         /// <returns> Return true if succeed. </returns>
         public abstract bool Parse(string data);
 
         /// <summary>
-        /// Start parsing about parameter.
+        /// Start parsing for parameter.
         /// </summary>
         /// <param name="tokens"></param>
         /// <returns></returns>
         public abstract bool Parse(string[] tokens);
+
+        /// <summary>
+        /// Start parsing for parameter.
+        /// </summary>
+        /// <param name="tokens"></param>
+        /// <returns></returns>
+        public abstract bool Parse(TokenCell[] tokens);
 
         /// <summary> Get the parsing tree with string format. </summary>
         /// <returns>tree string</returns>

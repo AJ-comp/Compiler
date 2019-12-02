@@ -7,6 +7,7 @@ using ParsingLibrary.Parsers.RelationAnalyzers;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using Parse.Tokenize;
 
 namespace Parse.FrontEnd.Parsers
 {
@@ -191,6 +192,11 @@ namespace Parse.FrontEnd.Parsers
         }
 
         public override bool Parse(string[] tokens)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override bool Parse(TokenCell[] tokens)
         {
             throw new NotImplementedException();
         }

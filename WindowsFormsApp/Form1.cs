@@ -65,7 +65,7 @@ namespace WindowsFormsApp
             this.tableGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
             this.historyGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
 
-            this.grammar.Text = parser.RegularGrammar;
+            this.grammar.Text = parser.Grammar.ToString();
             this.canonicalCollection.Text = parser.AnalysisResult;
             this.tableGridView.DataSource = parser.ParsingTable;
             this.tableGridView.Refresh();

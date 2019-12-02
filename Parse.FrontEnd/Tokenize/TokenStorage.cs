@@ -1,5 +1,4 @@
 ﻿using Parse.Extensions;
-using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -232,6 +231,11 @@ namespace Parse.Tokenize
             return new Range(fromIndex, toIndex - fromIndex + 1);
         }
 
+        /// <summary>
+        /// This function returns the merged string of all tokens in the range.
+        /// </summary>
+        /// <param name="range">The range to get the merged string.</param>
+        /// <returns>The merged string.</returns>
         public string GetMergeStringOfRange(Range range)
         {
             string result = string.Empty;
@@ -255,11 +259,6 @@ namespace Parse.Tokenize
             for (int i = range.StartIndex; i <= range.EndIndex; i++)
                 addLength = addLength - this.AllTokens[i].Data.Length;
 
-            Parallel.For(range.EndIndex + 1, this.AllTokens.Count, i =>
-            {
-                this.AllTokens[i].StartIndex += addLength;
-            });
-
             int contentIndex = (range.StartIndex == 0) ? 0 : this.AllTokens[range.StartIndex].StartIndex;
             this.AllTokens.RemoveRange(range.StartIndex, range.Count);
 
@@ -271,6 +270,19 @@ namespace Parse.Tokenize
 
                 this.AllTokens.Insert(startIndex++, i);
             });
+
+            Parallel.Invoke(
+                () =>
+                {
+                    this.UpdateTableForAllPatterns();
+                },
+                () =>
+                {
+                    Parallel.For(startIndex, this.AllTokens.Count, i =>
+                    {
+                        this.AllTokens[i].StartIndex += addLength;
+                    });
+                });
         }
     }
 }

@@ -1,8 +1,8 @@
 ﻿using Parse.FrontEnd.Grammars;
 using Parse.FrontEnd.Grammars.MiniC;
-using Parse.FrontEnd.Parsers.EventArgs;
 using Parse.FrontEnd.Parsers.LR;
 using Parse.WpfControls.Models;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -184,9 +184,10 @@ namespace Parse.WpfControls.SyntaxEditor
         // 전처리기 액션자 (ex : #if ~ #elsif ~ #else ~ #endif) 등록 함수 만들기
         // (파라메터 : 1.액션자 syntax, 액션자 범주에서 행동 요소), 3.액션자의 Highlight Color)
 
-        private void TextArea_TextChanged(object sender, TextChangedEventArgs e)
+        private async void TextArea_TextChanged(object sender, TextChangedEventArgs e)
         {
-//            this.Parser.Parse(this.TextArea.Text);
+            this.Parser.Parse(this.TextArea.Tokens.ToArray());
+//            this.parser.Parse("const int main(){}");
         }
     }
 }

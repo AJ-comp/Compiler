@@ -33,16 +33,28 @@ namespace WpfApp.Behaviors
         {
             this.mainWindow = sender as MainWindow;
 
+            #region Initialize parsing table view
             mainWindow.winformControl.Child = new DataGridView();
-
-            DataGridView dataGridView = mainWindow.winformControl.Child as DataGridView;
-
-            dataGridView.EditMode = DataGridViewEditMode.EditProgrammatically;
-            dataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
-            dataGridView.DataSource = mainWindow.syntaxEditor.Parser.ParsingTable;
-            dataGridView.CellMouseEnter += new DataGridViewCellEventHandler(this.tableGridView_CellMouseEnter);
+            DataGridView parsingTableView = mainWindow.winformControl.Child as DataGridView;
+            parsingTableView.EditMode = DataGridViewEditMode.EditProgrammatically;
+            parsingTableView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            parsingTableView.DataSource = mainWindow.syntaxEditor.Parser.ParsingTable;
+            parsingTableView.CellMouseEnter += new DataGridViewCellEventHandler(this.tableGridView_CellMouseEnter);
+            #endregion
 
             this.mainWindow.syntaxEditor.Parser.ParsingFailed += Parser_ParsingFailed;
+            this.mainWindow.grammarLabel.Content = this.mainWindow.syntaxEditor.Parser.Grammar.ToString();
+            this.mainWindow.canonicalRTB.Text = this.mainWindow.syntaxEditor.Parser.C0.ToString();
+
+            #region Initialize parsing history view
+            mainWindow.parsingHistory.Child = new DataGridView();
+            DataGridView parsingHistoryView = mainWindow.parsingHistory.Child as DataGridView;
+            parsingHistoryView.EditMode = DataGridViewEditMode.EditProgrammatically;
+            parsingHistoryView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            parsingHistoryView.DataSource = mainWindow.syntaxEditor.Parser.ParsingHistory;
+            #endregion
+
+
             //            this.editor.SetComponents(this.parser);
 
             /*
@@ -61,6 +73,16 @@ namespace WpfApp.Behaviors
 
             this.editor.IntelliPrompt.Sessions.Add(session);    // <-- error [NullReferenceException]
             */
+        }
+
+        private DataGridView DataGridWinformInit(Control winformControl)
+        {
+            winformControl = new DataGridView();
+            DataGridView result = winformControl as DataGridView;
+            result.EditMode = DataGridViewEditMode.EditProgrammatically;
+            result.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+
+            return result;
         }
 
         private void Parser_ParsingFailed(object sender, ParsingFailedEventArgs e)

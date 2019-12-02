@@ -44,7 +44,6 @@
                                         IsLineNumberingVisible="True"  LineNumberForeColor="DarkGreen"
                                         KeywordForeground="Blue"
                                         LineCommentForeground="ForestGreen"
-                                        TextBoxBase.TextChanged="syntaxEditor_TextChanged"
                                         >
 
                         <!--<i:Interaction.Triggers>
@@ -99,13 +98,13 @@
             </TabItem>
             <TabItem Header="Parsing Table">
                 <DockPanel>
-                    <WindowsFormsHost x:Name="winformControl" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
-                    </WindowsFormsHost>
+                    <WindowsFormsHost x:Name="winformControl" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
                 </DockPanel>
             </TabItem>
             <TabItem Header="Parsing History">
-                <DataGrid x:Name="parsingHistory" AutoGenerateColumns="True" IsReadOnly="True" 
-                          ItemsSource="{Binding Parser.ParsingHistory.DefaultView}" />
+                <DockPanel>
+                    <WindowsFormsHost x:Name="parsingHistory" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                </DockPanel>
             </TabItem>
             <TabItem Header="Parse Tree" />
         </TabControl>

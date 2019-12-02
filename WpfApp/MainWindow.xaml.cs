@@ -11,12 +11,5 @@ namespace WpfApp
         {
             InitializeComponent();
         }
-
-        private void syntaxEditor_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
-        {
-            var context = this.DataContext as MainWindowViewModel;
-
-//            context.Parser.Parse()
-        }
     }
 }

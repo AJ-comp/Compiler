@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Parse.Extensions;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -169,9 +170,10 @@ namespace Parse.Tokenize
         /// </summary>
         /// <param name="fromIndex"></param>
         /// <param name="count"></param>
-        private void RangeMergeAndTokenizeProcess(int fromIndex, int count)
+        /// <returns>The tokens after processed in range.</returns>
+        private List<TokenCell> RangeMergeAndTokenizeProcess(int fromIndex, int count)
         {
-            if (fromIndex + count > this.StorageTeam.AllTokens.Count) return;
+            if (fromIndex + count > this.StorageTeam.AllTokens.Count) return new List<TokenCell>();
 
             string mergeString = string.Empty;
             foreach(var item in this.StorageTeam.AllTokens.Skip(fromIndex).Take(count))
@@ -179,6 +181,8 @@ namespace Parse.Tokenize
 
             var tokenList = this.tokenizeTeam.Tokenize(this.tokenizeRule, mergeString);
             this.StorageTeam.ReplaceToken(new Range(fromIndex, count), tokenList);
+
+            return tokenList;
         }
 
         /// <summary>
@@ -204,7 +208,14 @@ namespace Parse.Tokenize
             var tokenList = this.tokenizeTeam.Tokenize(this.tokenizeRule, mergeString);
             this.StorageTeam.ReplaceToken(impactRange, tokenList);
 
-            this.RangeMergeAndTokenizeProcess(impactRange.StartIndex, impactRange.Count);
+            while(true)
+            {
+                impactRange = this.StorageTeam.FindImpactRange(impactRange.StartIndex, impactRange.EndIndex);
+                var beforeTokens = this.StorageTeam.AllTokens.Skip(impactRange.StartIndex).Take(impactRange.Count).ToList();
+                var processedTokens = this.RangeMergeAndTokenizeProcess(impactRange.StartIndex, impactRange.Count);
+
+                if (beforeTokens.IsEqual(processedTokens)) break;
+            }
         }
 
         /// <summary>
@@ -215,13 +226,13 @@ namespace Parse.Tokenize
         public void ReceiveOrder(int offset, string rawString)
         {
             RecognitionWay recognitionWay = RecognitionWay.Back;
-            this.StorageTeam.UpdateTableForAllPatterns();
 
             int curTokenIndex = this.StorageTeam.TokenIndexForOffset(offset, recognitionWay);
             int nextTokenIndex = curTokenIndex + 1;
             if (this.StorageTeam.AllTokens.Count == 0)
             {
                 this.tokenizeTeam.Tokenize(this.tokenizeRule, rawString, nextTokenIndex).ForEach(i => this.StorageTeam.AllTokens.Add(i));
+                this.StorageTeam.UpdateTableForAllPatterns();
 
                 #region The method of the second tokenize. (delete duplicate element after all match)
                 /*
@@ -317,8 +328,6 @@ namespace Parse.Tokenize
 
             var toInsertTokens = this.tokenizeTeam.Tokenize(this.tokenizeRule, mergeString);
             this.StorageTeam.ReplaceToken(impactRange, toInsertTokens);
-
-            this.StorageTeam.UpdateTableForAllPatterns();
 
             // The Rectangle Deletion operation need to write other algorithm also the algorithm will very complicate so I don't write it yet.
             // (Can use the above data struct on the Rectangle Deletion operation.)

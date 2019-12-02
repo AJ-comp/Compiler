@@ -214,6 +214,16 @@ namespace Parse.FrontEnd.Grammars
 
             return result;
         }
+
+
+        public override string ToString()
+        {
+            string result = string.Empty;
+
+            foreach (var symbol in this.NonTerminalMultiples) result += symbol.ToGrammarString() + Environment.NewLine;
+
+            return result;
+        }
     }
 
 

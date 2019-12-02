@@ -1,4 +1,5 @@
-﻿using System.Text.RegularExpressions;
+﻿using System.Collections.Generic;
+using System.Text.RegularExpressions;
 
 namespace Parse.Tokenize
 {
@@ -57,15 +58,27 @@ namespace Parse.Tokenize
         public string MergeStringToFront(string addString) => this.Data.Insert(0, addString);
         public string MergeStringToEnd(string addString) => this.Data.Insert(this.Data.Length, addString);
 
-        /*
-        public TokenCell GetTokenInfoAfterMergeString(int caretIndex, string addString, RecognitionWay recognitionWay)
-        {
-            string mergeString = this.MergeString(caretIndex, addString, recognitionWay);
-            if (mergeString.Length == 0) return null;
 
-            return new TokenCell(this.StartIndex, mergeString, TokenPatternInfo.NotDefinedToken);
+        public bool Equals(TokenCell other)
+        {
+            if (object.ReferenceEquals(other, null)) return false;
+
+            return (this.GetHashCode() == other.GetHashCode());
         }
-        */
+
+        public override bool Equals(object obj)
+        {
+            bool result = false;
+
+            if (obj is TokenCell)
+            {
+                TokenCell right = obj as TokenCell;
+
+                result = (this.StartIndex == right.StartIndex && this.Data == right.Data);
+            }
+
+            return result;
+        }
 
         public override string ToString()
         {
@@ -74,6 +87,25 @@ namespace Parse.Tokenize
             convertedString = convertedString.Replace("\t", "\\t");
 
             return string.Format("{0}, \"{1}\", {2}", this.StartIndex, convertedString, PatternInfo.OptionData);
+        }
+
+        public override int GetHashCode()
+        {
+            var hashCode = -2097962145;
+            hashCode = hashCode * -1521134295 + StartIndex.GetHashCode();
+            hashCode = hashCode * -1521134295 + EndIndex.GetHashCode();
+            hashCode = hashCode * -1521134295 + PatternInfo.GetHashCode();
+            return hashCode;
+        }
+
+        public static bool operator ==(TokenCell cell1, TokenCell cell2)
+        {
+            return EqualityComparer<TokenCell>.Default.Equals(cell1, cell2);
+        }
+
+        public static bool operator !=(TokenCell cell1, TokenCell cell2)
+        {
+            return !(cell1 == cell2);
         }
     }
 }
