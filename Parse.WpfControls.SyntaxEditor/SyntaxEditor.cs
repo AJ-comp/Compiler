@@ -1,7 +1,10 @@
 ﻿using Parse.FrontEnd.Grammars;
 using Parse.FrontEnd.Grammars.MiniC;
 using Parse.FrontEnd.Parsers.LR;
+using Parse.Tokenize;
+using Parse.WpfControls.Common;
 using Parse.WpfControls.Models;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -12,6 +15,9 @@ namespace Parse.WpfControls.SyntaxEditor
     [TemplatePart(Name = "TextArea", Type = typeof(HighlightTextBox))]
     public class SyntaxEditor : Editor
     {
+        private bool bParsing = false;
+        private List<TokenCell> reserveTokenCells = new List<TokenCell>();
+
         public delegate void OnParserChangedEventHandler(object sender);
         public event OnParserChangedEventHandler OnParserChanged;
 
@@ -129,6 +135,17 @@ namespace Parse.WpfControls.SyntaxEditor
 
             this.SetGrammar(new MiniCGrammar());
             this.TextArea.TextChanged += TextArea_TextChanged;
+            this.parser.ParsingFailed += Parser_ParsingFailed;
+        }
+
+        private void Parser_ParsingFailed(object sender, FrontEnd.Parsers.EventArgs.ParsingFailedEventArgs e)
+        {
+            TokenStatus status = TokenStatus.None;
+            if (e.InputValue.TokenCell.ValueOptionData != null)
+                status = (TokenStatus)e.InputValue.TokenCell.ValueOptionData;
+
+            status |= TokenStatus.Problem;
+            e.InputValue.TokenCell.ValueOptionData = status;
         }
 
         private void RegisterKeywords(Grammar grammar)
@@ -187,7 +204,7 @@ namespace Parse.WpfControls.SyntaxEditor
         private async void TextArea_TextChanged(object sender, TextChangedEventArgs e)
         {
             this.Parser.Parse(this.TextArea.Tokens.ToArray());
-//            this.parser.Parse("const int main(){}");
+            //            this.parser.Parse("const int main(){}");
         }
     }
 }

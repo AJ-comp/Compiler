@@ -9,12 +9,15 @@ using System.Windows.Controls;
 
 namespace Parse.WpfControls.Common
 {
+    public enum TokenStatus { None=0, Problem=1, Selected=2 }
+
     public class TokenizeTextBox : ExtensionTextBox
     {
         private List<Tuple<int, int>> scopeSyntaxes = new List<Tuple<int, int>>();
         private Dictionary<int, List<int>> tokenIndexesTable = new Dictionary<int, List<int>>();
         private SelectionTokensContainer selectionBlocks = new SelectionTokensContainer();
         private TokenizeFactory tokenizeFactory = new TokenizeFactory();
+        private Dictionary<int, TokenStatus> additionalInfo = new Dictionary<int, TokenStatus>();
 
         public List<TokenCell> Tokens { get => this.tokenizeFactory.StorageTeam.AllTokens; }
         public SyntaxPairCollection syntaxPairs = new SyntaxPairCollection();
@@ -129,6 +132,25 @@ namespace Parse.WpfControls.Common
         public void AddTokenPattern(string text, object optionData = null, bool bCanDerived = false, bool bOperator = false)
         {
             this.tokenizeFactory.AddTokenRule(text, optionData, bCanDerived, bOperator);
+        }
+
+        /// <summary>
+        /// This function sets the status of the xth token.
+        /// </summary>
+        /// <param name="index"></param>
+        /// <param name="status"></param>
+        public void SetTokenStatus(int index, TokenStatus status)
+        {
+            if (index >= this.Tokens.Count) return;
+
+            if (status == TokenStatus.None)
+            {
+                this.additionalInfo.Remove(index);
+                return;
+            }
+
+            if (this.additionalInfo.ContainsKey(index)) this.additionalInfo[index] = status;
+            else this.additionalInfo.Add(index, status);
         }
 
         public void AddScopeGroup(string startScopeSymbol, string endScopeSymbol)

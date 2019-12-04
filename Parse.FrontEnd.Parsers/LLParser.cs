@@ -125,8 +125,6 @@ namespace Parse.FrontEnd.Parsers
                 if (symbol != new Epsilon()) this.stack.Push(symbol);
             }
 
-            this.Lexer.RollBackTokenReadIndex();
-
             return true;
         }
 
@@ -144,6 +142,7 @@ namespace Parse.FrontEnd.Parsers
         /// </summary>
         /// <param name="data"></param>
         /// <returns></returns>
+/*
         public override bool Parse(string data)
         {
             bool result = false;
@@ -166,7 +165,8 @@ namespace Parse.FrontEnd.Parsers
                     break;
                 }
 
-                if (!this.Expand(topSymbol, token))
+                if (this.Expand(topSymbol, token)) this.Lexer.RollBackTokenReadIndex();
+                else
                 {
                     this.parsingHistory.AddRow(this.stack.ToElementString(), token.ToString(), "error");
                     break;
@@ -175,6 +175,7 @@ namespace Parse.FrontEnd.Parsers
 
             return result;
         }
+        */
 
         public override string ToParsingTreeString()
         {
@@ -189,11 +190,6 @@ namespace Parse.FrontEnd.Parsers
             }
 
             return result;
-        }
-
-        public override bool Parse(string[] tokens)
-        {
-            throw new NotImplementedException();
         }
 
         public override bool Parse(TokenCell[] tokens)

@@ -58,7 +58,6 @@
     <Compile Include="EventArgs\LRParsingEventArgs.cs" />
     <Compile Include="EventArgs\ParsingFailedEventArgs.cs" />
     <Compile Include="LR\LALRParser.cs" />
-    <Compile Include="Lexer.cs" />
     <Compile Include="LLParser.cs" />
     <Compile Include="LR\LRParser.cs" />
     <Compile Include="Parser.cs" />

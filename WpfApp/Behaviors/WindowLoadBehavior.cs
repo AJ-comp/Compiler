@@ -43,7 +43,7 @@ namespace WpfApp.Behaviors
             #endregion
 
             this.mainWindow.syntaxEditor.Parser.ParsingFailed += Parser_ParsingFailed;
-            this.mainWindow.grammarLabel.Content = this.mainWindow.syntaxEditor.Parser.Grammar.ToString();
+            this.mainWindow.grammarText.Text = this.mainWindow.syntaxEditor.Parser.Grammar.ToString();
             this.mainWindow.canonicalRTB.Text = this.mainWindow.syntaxEditor.Parser.C0.ToString();
 
             #region Initialize parsing history view

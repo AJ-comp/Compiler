@@ -76,7 +76,9 @@ namespace Parse.FrontEnd.RegularGrammar
 
     public class EndMarker : Terminal
     {
-        public EndMarker() : base(TokenType.Marker, "$")
+        static string EndMarkerChar = "щ";
+
+        public EndMarker() : base(TokenType.Marker, EndMarkerChar)
         {
             this.uniqueKey = KeyManager.EndMarkerKey;
         }

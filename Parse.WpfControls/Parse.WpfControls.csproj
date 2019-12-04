@@ -91,6 +91,7 @@
     <Compile Include="Converters\FontReleateConverter.cs" />
     <Compile Include="Converters\LineHeightBasedFontSizeConverter.cs" />
     <Compile Include="Converters\MouseDoubleClickEventArgConverter.cs" />
+    <Compile Include="Converters\PropertyValueToStringConverter.cs" />
     <Compile Include="Converters\SingleSelectionChangedEventArgsConverter.cs" />
     <Compile Include="Converters\UIntListToStringConverter.cs" />
     <Compile Include="Editor.cs" />

@@ -1,6 +1,5 @@
 ﻿using Parse.FrontEnd.Parsers.Datas;
 using System.Collections.Generic;
-using static Parse.FrontEnd.Parsers.Datas.LRParsingData;
 
 namespace Parse.FrontEnd.Parsers.EventArgs
 {

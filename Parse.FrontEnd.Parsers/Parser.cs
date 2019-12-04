@@ -11,11 +11,10 @@ namespace Parse.FrontEnd.Parsers
 {
     public abstract class Parser
     {
-        protected Lexer Lexer { get; } = null;
         protected SymbolTableStack SymbolTableStack { get; } = new SymbolTableStack();
 
         /// <summary>
-        /// This event handler is called when the input token does not exists in the expected terminal set.
+        /// This event handler is called when the input token is not in the expected terminal set.
         /// Terminal : Terminal that expected.
         /// TokenData : Input token
         /// </summary>
@@ -56,28 +55,13 @@ namespace Parse.FrontEnd.Parsers
         public Parser(Grammar grammar)
         {
             this.Grammar = grammar;
-            this.Lexer = new Lexer(this.Grammar);
         }
 
         /// <summary>
         /// Start parsing for parameter.
         /// </summary>
-        /// <param name="data"></param>
+        /// <param name="tokens"></param>
         /// <returns> Return true if succeed. </returns>
-        public abstract bool Parse(string data);
-
-        /// <summary>
-        /// Start parsing for parameter.
-        /// </summary>
-        /// <param name="tokens"></param>
-        /// <returns></returns>
-        public abstract bool Parse(string[] tokens);
-
-        /// <summary>
-        /// Start parsing for parameter.
-        /// </summary>
-        /// <param name="tokens"></param>
-        /// <returns></returns>
         public abstract bool Parse(TokenCell[] tokens);
 
         /// <summary> Get the parsing tree with string format. </summary>

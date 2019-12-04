@@ -8,6 +8,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
     xmlns:wpfcontrols="clr-namespace:Parse.WpfControls;assembly=Parse.WpfControls"
+    xmlns:converter="clr-namespace:Parse.WpfControls.Converters;assembly=Parse.WpfControls"
     xmlns:syntaxeditor="clr-namespace:Parse.WpfControls.SyntaxEditor;assembly=Parse.WpfControls.SyntaxEditor"
     xmlns:behaviors="clr-namespace:WpfApp.Behaviors"
     xmlns:viewModels="clr-namespace:WpfApp.ViewModels"
@@ -38,7 +39,7 @@
                         <RowDefinition Height="auto"/>
                     </Grid.RowDefinitions>
 
-                    <syntaxeditor:SyntaxEditor Name="syntaxEditor"  Grid.Row="0"
+                    <syntaxeditor:SyntaxEditor x:Name="syntaxEditor"  Grid.Row="0"
                                         FontSize="15" 
                                         FontFamily="Arial"
                                         IsLineNumberingVisible="True"  LineNumberForeColor="DarkGreen"
@@ -90,11 +91,18 @@
                                            DocumentTextChanged="editor_DocumentTextChanged"/>-->
             </TabItem>
             <TabItem Header="Grammar">
-                <Label x:Name="grammarLabel" Content="{Binding Parser.RegularGrammar}"/>
+                <TextBox x:Name="grammarText" FontSize="18"
+                         HorizontalScrollBarVisibility="Auto"
+                         VerticalScrollBarVisibility="Auto"
+                         Text="{Binding ElementName=syntaxEditor, Path=Parser.Grammar, Mode=OneWay, 
+                            Converter={converter:PropertyValueToStringConverter} }"/>
             </TabItem>
             <TabItem Header="Canonical Table">
-                <TextBox x:Name="canonicalRTB" IsReadOnly="True"
-                         Text="{Binding Parser.AnalysisResult, Mode=OneWay}"/>
+                <TextBox x:Name="canonicalRTB" IsReadOnly="True" FontSize="18" 
+                         HorizontalScrollBarVisibility="Auto"
+                         VerticalScrollBarVisibility="Auto"
+                         Text="{Binding ElementName=syntaxEditor, Path=Parser.C0, Mode=OneWay, 
+                            Converter={converter:PropertyValueToStringConverter}}"/>
             </TabItem>
             <TabItem Header="Parsing Table">
                 <DockPanel>

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
 namespace Parse.Tokenize
@@ -12,6 +13,9 @@ namespace Parse.Tokenize
         public string Data { get; } = string.Empty;
         public Match matchData { get; }
         public TokenPatternInfo PatternInfo { get; internal set; }
+
+        public ValueType ValueOptionData { get; set; }
+        public object RefOptionalData { get; set; }
 
         /*
         public TokenCell(int startIndex, string data, TokenPatternInfo patternInfo)

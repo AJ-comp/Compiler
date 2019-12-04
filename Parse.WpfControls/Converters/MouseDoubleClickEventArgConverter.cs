@@ -1,6 +1,4 @@
 ﻿using GalaSoft.MvvmLight.Command;
-using System;
-using System.Windows.Forms;
 using System.Windows.Input;
 
 namespace Parse.WpfControls.Converters

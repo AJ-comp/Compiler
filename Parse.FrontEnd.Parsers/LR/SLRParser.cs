@@ -16,6 +16,7 @@ namespace Parse.FrontEnd.Parsers.LR
 {
     public class SLRParser : LRParser
     {
+        private int curTokenIndex = 0;
         private string recentCode = string.Empty;
         private ParsingRule parsingRule = new ParsingRule();
         private ParsingHistory parsingHistory = new ParsingHistory();
@@ -142,69 +143,6 @@ namespace Parse.FrontEnd.Parsers.LR
             this.meaningStack.Clear();
         }
 
-        public override bool Parse(string data)
-        {
-            bool result = false;
-            this.recentCode = data;
-            this.Lexer.SetCode(data);
-            this.ParsingInit();
-
-            while (true)
-            {
-                var token = this.Lexer.NextToken;
-                if (token.Kind == new NotDefined())
-                {
-                }
-                ActionDir parsingResult = this.parsingRule.Parsing(token);
-                if(parsingResult == ActionDir.failed)
-                {
-                    result = false;
-                    break;
-                }
-                else if(parsingResult == ActionDir.accept)
-                {
-                    result = true;
-                    break;
-                }
-                else if(parsingResult == ActionDir.reduce || parsingResult == ActionDir.epsilon_reduce || parsingResult == ActionDir.moveto)
-                {
-                    this.Lexer.RollBackTokenReadIndex();
-                }
-            }
-
-            return result;
-        }
-
-        public override bool Parse(string[] tokens)
-        {
-            bool result = false;
-
-            foreach(var t in tokens)
-            {
-                var token = this.Lexer.GetTokenInfo(t);
-                if (token.Kind == new NotDefined())
-                {
-                }
-                ActionDir parsingResult = this.parsingRule.Parsing(token);
-                if (parsingResult == ActionDir.failed)
-                {
-                    result = false;
-                    break;
-                }
-                else if (parsingResult == ActionDir.accept)
-                {
-                    result = true;
-                    break;
-                }
-                else if (parsingResult == ActionDir.reduce || parsingResult == ActionDir.epsilon_reduce || parsingResult == ActionDir.moveto)
-                {
-                    this.Lexer.RollBackTokenReadIndex();
-                }
-            }
-
-            return result;
-        }
-
         public override string ToParsingTreeString()
         {
             string result = string.Empty;
@@ -218,6 +156,7 @@ namespace Parse.FrontEnd.Parsers.LR
         public override bool Parse(TokenCell[] tokenCells)
         {
             bool result = false;
+            this.curTokenIndex = 0;
             this.ParsingInit();
 
             var tokens = tokenCells.ToList();
@@ -225,6 +164,7 @@ namespace Parse.FrontEnd.Parsers.LR
 
             for (int i = 0; i < tokens.Count; i++)
             {
+                curTokenIndex = i;
                 var item = tokens[i];
 
                 Terminal type = new Epsilon();
@@ -233,11 +173,12 @@ namespace Parse.FrontEnd.Parsers.LR
                 {
                     var typeData = item.PatternInfo.OptionData as Terminal;
                     if (typeData == null) type = new NotDefined();
-                    else if (typeData?.TokenType == TokenType.Delimiter) continue;
+                    else if (typeData.TokenType == TokenType.Delimiter) continue;
+                    else if (typeData.TokenType == TokenType.Comment) continue;
                     else type = typeData;
                 }
 
-                var token = new TokenData(item.Data, type);
+                var token = new TokenData(item.Data, type, item);
 
                 if (token.Kind == new NotDefined())
                 {
