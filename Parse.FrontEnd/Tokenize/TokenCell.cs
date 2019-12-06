@@ -14,7 +14,7 @@ namespace Parse.Tokenize
         public Match matchData { get; }
         public TokenPatternInfo PatternInfo { get; internal set; }
 
-        public ValueType ValueOptionData { get; set; }
+        public ValueType ValueOptionData { get; set; } = 0;
         public object RefOptionalData { get; set; }
 
         /*

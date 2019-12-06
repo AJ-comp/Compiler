@@ -226,7 +226,7 @@ namespace Parse.WpfControls
                 if (searchString.Length == 0)
                 {
                     // If searchString is empty then the last string is "n" so must add one line.
-                    lineString.Add(this.GetHighlightToken("", this.Tokens[tokenIndex].PatternInfo.OriginalPattern));
+                    lineString.Add(this.GetHighlightToken(this.Tokens[tokenIndex]));
                     break;
                 }
 
@@ -235,12 +235,12 @@ namespace Parse.WpfControls
                 // The "\n" was not in the searchString.
                 if (endPos < startPos)
                 {
-                    lineString.Add(this.GetHighlightToken(searchString, this.Tokens[tokenIndex].PatternInfo.OriginalPattern));
+                    lineString.Add(this.GetHighlightToken(this.Tokens[tokenIndex]));
                     break;
                 }
 
                 // Found the "\n"
-                lineString.Add(this.GetHighlightToken(searchString.Substring(0, endPos + 1), this.Tokens[tokenIndex].PatternInfo.OriginalPattern));
+                lineString.Add(this.GetHighlightToken(searchString.Substring(0, endPos + 1), this.Tokens[tokenIndex].PatternInfo.OriginalPattern, TokenStatus.None));
                 this.AddLineString(ref lineString, result, lineIndex);
                 lineIndex++;
                 searchString = searchString.Substring(endPos + 1);
@@ -293,10 +293,10 @@ namespace Parse.WpfControls
         /// <returns></returns>
         private HighlightToken GetHighlightToken(TokenCell tokenInfo)
         {
-            return this.GetHighlightToken(tokenInfo.Data, tokenInfo.PatternInfo.OriginalPattern);
+            return this.GetHighlightToken(tokenInfo.Data, tokenInfo.PatternInfo.OriginalPattern, (TokenStatus)tokenInfo.ValueOptionData);
         }
 
-        private HighlightToken GetHighlightToken(string text, string pattern)
+        private HighlightToken GetHighlightToken(string text, string pattern, TokenStatus status)
         {
             Brush foreBrush = Brushes.Black;
             if (this.textStyleDic.ContainsKey(pattern))
@@ -307,6 +307,14 @@ namespace Parse.WpfControls
 
             ft.Trimming = TextTrimming.None;
             ft.LineHeight = this.LineHeight;
+
+            if ((status & TokenStatus.Selected) == TokenStatus.Selected)
+                ft.AppearanceInfo.Selected = true;
+            else ft.AppearanceInfo.Selected = false;
+
+            if ((status & TokenStatus.Problem) == TokenStatus.Problem)
+                ft.AppearanceInfo.UnderLine = true;
+            else ft.AppearanceInfo.UnderLine = false;
 
             return ft;
         }

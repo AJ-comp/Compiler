@@ -11,16 +11,12 @@ namespace Parse.WpfControls.Models
     {
         public AppearanceInfo AppearanceInfo { get; } = new AppearanceInfo();
 
-
         public HighlightToken(string textToFormat, CultureInfo culture, FlowDirection flowDirection, Typeface typeface, double emSize, Brush foreground, double pixelsPerDip)
             : base(textToFormat, culture, flowDirection, typeface, emSize, foreground, pixelsPerDip)
         {
         }
 
-        public override string ToString()
-        {
-            return this.Text;
-        }
+        public override string ToString() => this.Text;
     }
 
 
@@ -46,7 +42,9 @@ namespace Parse.WpfControls.Models
     {
         public Brush BorderBrush { get; set; } = Brushes.Transparent;
         public Brush BackGroundBrush { get; set; } = Brushes.Transparent;
-
         public int BorderThickness { get; set; } = 1;
+
+        public bool Selected { get; set; }
+        public bool UnderLine { get; set; }
     }
 }

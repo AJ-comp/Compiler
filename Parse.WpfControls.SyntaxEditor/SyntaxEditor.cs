@@ -4,8 +4,9 @@ using Parse.FrontEnd.Parsers.LR;
 using Parse.Tokenize;
 using Parse.WpfControls.Common;
 using Parse.WpfControls.Models;
+using Parse.WpfControls.SyntaxEditor.EventArgs;
+using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -20,6 +21,8 @@ namespace Parse.WpfControls.SyntaxEditor
 
         public delegate void OnParserChangedEventHandler(object sender);
         public event OnParserChangedEventHandler OnParserChanged;
+
+        public event EventHandler<AlarmEventArgs> AlarmFired;
 
         public int MyProperty
         {
@@ -146,6 +149,9 @@ namespace Parse.WpfControls.SyntaxEditor
 
             status |= TokenStatus.Problem;
             e.InputValue.TokenCell.ValueOptionData = status;
+
+            var eventArgs = new AlarmEventArgs(string.Empty, this.FileName, e);
+            this.AlarmFired?.Invoke(this, eventArgs);
         }
 
         private void RegisterKeywords(Grammar grammar)
@@ -203,8 +209,10 @@ namespace Parse.WpfControls.SyntaxEditor
 
         private async void TextArea_TextChanged(object sender, TextChangedEventArgs e)
         {
-            this.Parser.Parse(this.TextArea.Tokens.ToArray());
+            if (this.Parser.Parse(this.TextArea.Tokens.ToArray()))
+                this.AlarmFired?.Invoke(this, new AlarmEventArgs(string.Empty, this.FileName));
             //            this.parser.Parse("const int main(){}");
+            this.TextArea.InvalidateVisual();
         }
     }
 }

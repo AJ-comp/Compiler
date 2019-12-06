@@ -1,10 +1,13 @@
 ﻿using Parse.FrontEnd.Parsers.Collections;
 using Parse.FrontEnd.Parsers.EventArgs;
+using Parse.WpfControls.SyntaxEditor;
 using System;
+using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Forms;
 using System.Windows.Interactivity;
+using WpfApp.ViewModels;
 
 namespace WpfApp.Behaviors
 {
@@ -42,7 +45,10 @@ namespace WpfApp.Behaviors
             parsingTableView.CellMouseEnter += new DataGridViewCellEventHandler(this.tableGridView_CellMouseEnter);
             #endregion
 
-            this.mainWindow.syntaxEditor.Parser.ParsingFailed += Parser_ParsingFailed;
+            MainWindowViewModel mainVm = this.mainWindow.DataContext as MainWindowViewModel;
+
+            if(mainVm != null)
+                this.mainWindow.syntaxEditor.AlarmFired += mainVm.ParsingFailedEventHandler;
             this.mainWindow.grammarText.Text = this.mainWindow.syntaxEditor.Parser.Grammar.ToString();
             this.mainWindow.canonicalRTB.Text = this.mainWindow.syntaxEditor.Parser.C0.ToString();
 
@@ -83,10 +89,6 @@ namespace WpfApp.Behaviors
             result.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
 
             return result;
-        }
-
-        private void Parser_ParsingFailed(object sender, ParsingFailedEventArgs e)
-        {
         }
 
         private void tableGridView_CellMouseEnter(object sender, DataGridViewCellEventArgs e)

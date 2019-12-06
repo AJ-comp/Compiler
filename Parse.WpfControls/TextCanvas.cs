@@ -56,6 +56,29 @@ namespace Parse.WpfControls
             return lines[index-1];
         }
 
+        private void SetDecoration(HighlightToken token)
+        {
+            if(token.AppearanceInfo.UnderLine == true)
+            {
+                TextDecorationCollection textDecorations = new TextDecorationCollection();
+
+                TextDecoration underline = new TextDecoration();
+                underline.Location = TextDecorationLocation.Underline;
+                underline.Pen = new Pen(Brushes.Red, 1);
+                underline.PenThicknessUnit = TextDecorationUnit.FontRecommended;
+
+                textDecorations.Add(underline);
+
+                token.SetTextDecorations(textDecorations);
+            }
+
+            if(token.AppearanceInfo.Selected == true)
+            {
+
+            }
+        }
+
+
         public void SetDrawStartingPos(double horizontalOffset, double verticalOffset)
         {
             this.currentHorizontalOffset = horizontalOffset;
@@ -102,6 +125,7 @@ namespace Parse.WpfControls
 
                 foreach (var token in line)
                 {
+                    this.SetDecoration(token);
                     dc.DrawText(token, new Point(this.algorithm.DrawingPointX, this.algorithm.DrawingPointY));
 
                     this.algorithm.CalculateNextXPoint(token.WidthIncludingTrailingWhitespace);
@@ -134,6 +158,7 @@ namespace Parse.WpfControls
             this.algorithm.HorizontalPosInitial();
             foreach (var token in line)
             {
+                this.SetDecoration(token);
                 dc2.DrawText(token, new Point(this.algorithm.DrawingPointX, yPos));
 
                 this.algorithm.CalculateNextXPoint(token.WidthIncludingTrailingWhitespace);

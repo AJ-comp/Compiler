@@ -1,8 +1,6 @@
 ﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
-using Parse.FrontEnd.Grammars.MiniC;
-using Parse.FrontEnd.Parsers.EventArgs;
-using Parse.FrontEnd.Parsers.LR;
+using Parse.WpfControls.SyntaxEditor.EventArgs;
 using System.Collections.ObjectModel;
 using System.Windows.Controls;
 using WpfApp.Models;
@@ -12,7 +10,8 @@ namespace WpfApp.ViewModels
 {
     class MainWindowViewModel : ViewModelBase
     {
-        public ObservableCollection<ParsingAlarmList> AlarmLists { get; } = new ObservableCollection<ParsingAlarmList>();
+        //        public AlarmListViewModel AlarmListVM { get; } = new AlarmListViewModel();
+        public ObservableCollection<ParsingAlarmData> AlarmLists { get; } = new ObservableCollection<ParsingAlarmData>();
 
         private RelayCommand<TextChangedEventArgs> _cmdMouseDown;
         public RelayCommand<TextChangedEventArgs> CmdMouseDown
@@ -35,12 +34,18 @@ namespace WpfApp.ViewModels
 
         }
 
-        private void Parser_ParsingFailed(object sender, ParsingFailedEventArgs e)
-        {
-            var message = string.Format(AlarmCodes.CE0000, e.PossibleSet.ToString());
 
-            ParsingAlarmList alarmList = new ParsingAlarmList(AlarmCodes.CE0000, message, "", "", "1");
-            this.AlarmLists.Add(alarmList);
+        public void ParsingFailedEventHandler(object sender, AlarmEventArgs e)
+        {
+            this.AlarmLists.Clear();
+
+            if (e.Status == AlarmStatus.None) return;
+
+            var message = string.Format(AlarmCodes.CE0000, e.ParsingFailedArgs.PossibleSet.ToString());
+
+            ParsingAlarmData item = new ParsingAlarmData(AlarmCodes.CE0000, message, "", "", "1");
+            this.AlarmLists.Add(item);
+            //            this.AlarmListVM.AddAlarmList
         }
     }
 }

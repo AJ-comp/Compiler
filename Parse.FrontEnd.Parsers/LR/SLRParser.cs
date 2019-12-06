@@ -16,7 +16,7 @@ namespace Parse.FrontEnd.Parsers.LR
 {
     public class SLRParser : LRParser
     {
-        private int curTokenIndex = 0;
+        private TokenData prevToken = null;
         private string recentCode = string.Empty;
         private ParsingRule parsingRule = new ParsingRule();
         private ParsingHistory parsingHistory = new ParsingHistory();
@@ -131,7 +131,11 @@ namespace Parse.FrontEnd.Parsers.LR
             var param3 = args.ActionData.ActionDirection.ToString() + " ";
 
             string message = Resource.CantShift + " " + args.PossibleSet + " " + Resource.MustCome;
+            args.ErrorMessage = message;
             this.parsingHistory.AddRow(param1, param2, message, string.Empty);
+
+            if (args.InputValue.Kind == new EndMarker())
+                args = new ParsingFailedEventArgs(args.PrevStack, args.CurrentStack, this.prevToken, args.ActionData, args.PossibleSet);
 
             this.OnParsingFailed(args);
         }
@@ -155,8 +159,9 @@ namespace Parse.FrontEnd.Parsers.LR
 
         public override bool Parse(TokenCell[] tokenCells)
         {
+            if (tokenCells.Length <= 0) return true;
+
             bool result = false;
-            this.curTokenIndex = 0;
             this.ParsingInit();
 
             var tokens = tokenCells.ToList();
@@ -164,7 +169,6 @@ namespace Parse.FrontEnd.Parsers.LR
 
             for (int i = 0; i < tokens.Count; i++)
             {
-                curTokenIndex = i;
                 var item = tokens[i];
 
                 Terminal type = new Epsilon();
@@ -173,8 +177,8 @@ namespace Parse.FrontEnd.Parsers.LR
                 {
                     var typeData = item.PatternInfo.OptionData as Terminal;
                     if (typeData == null) type = new NotDefined();
-                    else if (typeData.TokenType == TokenType.Delimiter) continue;
-                    else if (typeData.TokenType == TokenType.Comment) continue;
+                    else if (typeData.TokenType == TokenType.Delimiter) { prevToken = new TokenData(item.Data, typeData, item); continue; }
+                    else if (typeData.TokenType == TokenType.Comment) { prevToken = new TokenData(item.Data, typeData, item); continue; }
                     else type = typeData;
                 }
 
@@ -198,6 +202,8 @@ namespace Parse.FrontEnd.Parsers.LR
                 {
                     i--;
                 }
+
+                prevToken = token;
             }
 
             return result;

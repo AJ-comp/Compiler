@@ -43,6 +43,7 @@ namespace Parse.WpfControls
         private double recentHorizontalOffset = 0;
         private int startLine = 0;
         private int endLine = 1;
+        public string FileName { get; } = "test.txt";
 
         private TextCanvas lineNumbersCanvas;
 

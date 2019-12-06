@@ -10,7 +10,6 @@ using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using System.Windows.Interactivity;
-using System.Windows.Media;
 
 namespace Parse.WpfControls.Behaviors
 {
