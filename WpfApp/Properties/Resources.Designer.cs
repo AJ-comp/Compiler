@@ -61,6 +61,16 @@ namespace WpfApp.Properties {
         }
         
         /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap error {
+            get {
+                object obj = ResourceManager.GetObject("error", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Code과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         internal static string ErrorCode {
@@ -102,6 +112,16 @@ namespace WpfApp.Properties {
         internal static string ErrorProject {
             get {
                 return ResourceManager.GetString("ErrorProject", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap warning {
+            get {
+                object obj = ResourceManager.GetObject("warning", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
     }

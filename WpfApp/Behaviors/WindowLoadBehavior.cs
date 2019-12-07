@@ -48,7 +48,7 @@ namespace WpfApp.Behaviors
             MainWindowViewModel mainVm = this.mainWindow.DataContext as MainWindowViewModel;
 
             if(mainVm != null)
-                this.mainWindow.syntaxEditor.AlarmFired += mainVm.ParsingFailedEventHandler;
+                this.mainWindow.syntaxEditor.AlarmFired += mainVm.SyntaxEditorAlarmEventHandler;
             this.mainWindow.grammarText.Text = this.mainWindow.syntaxEditor.Parser.Grammar.ToString();
             this.mainWindow.canonicalRTB.Text = this.mainWindow.syntaxEditor.Parser.C0.ToString();
 

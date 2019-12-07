@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Drawing;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -101,9 +102,9 @@ namespace Parse.WpfControls.Common
         /// </summary>
         /// <param name="caretIndex">current caret index.</param>
         /// <returns>X : caret index of a line, Y : a line index.</returns>
-        public Point GetIndexInfoFromCaretIndex(int caretIndex)
+        public System.Drawing.Point GetIndexInfoFromCaretIndex(int caretIndex)
         {
-            Point result = new Point();
+            System.Drawing.Point result = new System.Drawing.Point();
 
             for (int i = 0; i < this.LineIndexes.Count; i++)
             {
@@ -113,7 +114,7 @@ namespace Parse.WpfControls.Common
                     result.X = caretIndex - this.LineIndexes[i - 1];
                     break;
                 }
-                else result = new Point(0, i);
+                else result = new System.Drawing.Point(0, i);
             }
 
             return result;
@@ -127,8 +128,8 @@ namespace Parse.WpfControls.Common
             this.prevStartCaretIndexByLine = this.StartCaretIndexByLine;
 
             var point = this.GetIndexInfoFromCaretIndex(this.CaretIndex);
-            this.LineIndex = (int)point.Y;
-            this.StartCaretIndexByLine = (int)point.X;
+            this.LineIndex = point.Y;
+            this.StartCaretIndexByLine = point.X;
         }
 
         private void TextArea_SelectionChanged(object sender, RoutedEventArgs e)
@@ -144,13 +145,13 @@ namespace Parse.WpfControls.Common
             SelectionInfo selectionInfo = new SelectionInfo();
 
             var selectionEndIndex = this.SelectionStart + this.SelectionLength;
-            Point point = this.GetIndexInfoFromCaretIndex(this.SelectionStart);
-            selectionInfo.StartLine = (int)point.Y;
-            selectionInfo.StartCaretFromLine = (int)point.X;
+            var point = this.GetIndexInfoFromCaretIndex(this.SelectionStart);
+            selectionInfo.StartLine = point.Y;
+            selectionInfo.StartCaretFromLine = point.X;
 
             point = this.GetIndexInfoFromCaretIndex(selectionEndIndex);
-            selectionInfo.EndLine = (int)point.Y;
-            selectionInfo.EndCaretFromLine = (int)point.X;
+            selectionInfo.EndLine = point.Y;
+            selectionInfo.EndCaretFromLine = point.X;
 
             this.selectionBlocks.Add(selectionInfo);
         }

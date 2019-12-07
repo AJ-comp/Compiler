@@ -3,24 +3,35 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:viewmodel="clr-namespace:WpfApp.ViewModels"
              xmlns:local="clr-namespace:WpfApp.Views"
+             xmlns:localViewmodel="clr-namespace:WpfApp.ViewModels"
+             xmlns:localConverters="clr-namespace:WpfApp.Converters"
              xmlns:lex="http://wpflocalizeextension.codeplex.com" 
              mc:Ignorable="d" 
              d:DesignHeight="200" d:DesignWidth="600">
+    <UserControl.DataContext>
+        <localViewmodel:AlarmListViewModel/>
+    </UserControl.DataContext>
+    
     <Grid>
-        <ListView>
+        <ListView ItemsSource="{Binding AlarmLists}">
             <ListView.Resources>
 
             </ListView.Resources>
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header=" "/>
-                    <GridViewColumn Header="{lex:Loc Key=ErrorCode}"/>
-                    <GridViewColumn Header="{lex:Loc Key=ErrorExplanation}"/>
-                    <GridViewColumn Header="{lex:Loc Key=ErrorProject}"/>
-                    <GridViewColumn Header="{lex:Loc Key=ErrorFile}"/>
-                    <GridViewColumn Header="{lex:Loc Key=ErrorLine}"/>
+                    <GridViewColumn Header=" ">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Image Source="{Binding Status, Converter={localConverters:EnumToImageConverter}}" Width="16" Height="16" Margin="0,0,2,0"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="{lex:Loc Key=ErrorCode}" DisplayMemberBinding="{Binding Code}" />
+                    <GridViewColumn Header="{lex:Loc Key=ErrorExplanation}" DisplayMemberBinding="{Binding Message}"/>
+                    <GridViewColumn Header="{lex:Loc Key=ErrorProject}" DisplayMemberBinding="{Binding ProjectName}"/>
+                    <GridViewColumn Header="{lex:Loc Key=ErrorFile}" DisplayMemberBinding="{Binding FileName}"/>
+                    <GridViewColumn Header="{lex:Loc Key=ErrorLine}" DisplayMemberBinding="{Binding Line}"/>
                 </GridView>
             </ListView.View>
         </ListView>

@@ -96,6 +96,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Behaviors\WindowLoadBehavior.cs" />
+    <Compile Include="Converters\EnumToImageConverter.cs" />
     <Compile Include="Models\ParsingAlarmList.cs" />
     <Compile Include="Properties\AlarmCodes.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -178,6 +179,13 @@
       <Project>{54EC5CEA-8D91-4165-9EBB-6A0693A96C4F}</Project>
       <Name>Parse.FrontEnd</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Resources\error.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\warning.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

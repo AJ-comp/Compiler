@@ -8,7 +8,6 @@ namespace Parse.FrontEnd.Parsers.EventArgs
     {
         public TerminalSet PossibleSet { get; } = new TerminalSet();
         public int ErrorIndex { get; internal set; }
-        public string ErrorCode { get; internal set; }
         public string ErrorMessage { get; internal set; }
 
 

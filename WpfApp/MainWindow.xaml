@@ -8,10 +8,11 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
     xmlns:wpfcontrols="clr-namespace:Parse.WpfControls;assembly=Parse.WpfControls"
+    xmlns:localConverters="clr-namespace:WpfApp.Converters"
     xmlns:converter="clr-namespace:Parse.WpfControls.Converters;assembly=Parse.WpfControls"
     xmlns:syntaxeditor="clr-namespace:Parse.WpfControls.SyntaxEditor;assembly=Parse.WpfControls.SyntaxEditor"
     xmlns:behaviors="clr-namespace:WpfApp.Behaviors"
-    xmlns:viewModels="clr-namespace:WpfApp.ViewModels"
+    xmlns:localViewModels="clr-namespace:WpfApp.ViewModels"
     xmlns:view="clr-namespace:WpfApp.Views"
     xmlns:lex="http://wpflocalizeextension.codeplex.com" 
         lex:LocalizeDictionary.DesignCulture="en"
@@ -27,7 +28,7 @@
         ResizeMode="CanResizeWithGrip"
         WindowTransitionsEnabled="False">
     <Window.DataContext>
-        <viewModels:MainWindowViewModel/>
+        <localViewModels:MainWindowViewModel/>
     </Window.DataContext>
 
     <Grid>
@@ -57,21 +58,7 @@
                     </syntaxeditor:SyntaxEditor>
 
                     <Grid Grid.Row="1">
-                        <ListView ItemsSource="{Binding AlarmLists}">
-                            <ListView.Resources>
-
-                            </ListView.Resources>
-                            <ListView.View>
-                                <GridView>
-                                    <GridViewColumn Header=" "/>
-                                    <GridViewColumn Header="{lex:Loc Key=ErrorCode}" DisplayMemberBinding="{Binding Code}"/>
-                                    <GridViewColumn Header="{lex:Loc Key=ErrorExplanation}" DisplayMemberBinding="{Binding Message}"/>
-                                    <GridViewColumn Header="{lex:Loc Key=ErrorProject}" DisplayMemberBinding="{Binding ProjectName}"/>
-                                    <GridViewColumn Header="{lex:Loc Key=ErrorFile}" DisplayMemberBinding="{Binding FileName}"/>
-                                    <GridViewColumn Header="{lex:Loc Key=ErrorLine}" DisplayMemberBinding="{Binding Line}"/>
-                                </GridView>
-                            </ListView.View>
-                        </ListView>
+                        <view:ErrorList DataContext="{Binding AlarmListVM}"/>
                     </Grid>
 
                     <StatusBar Grid.Row="2">

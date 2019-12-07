@@ -13,6 +13,8 @@ using System.Windows.Media;
 
 namespace Parse.WpfControls
 {
+    public enum DrawOption { None = 0, Underline = 1, Selected = 2 }
+
     public class HighlightTextBox : TokenizeTextBox
     {
         private TextCanvas renderCanvas;
@@ -240,7 +242,7 @@ namespace Parse.WpfControls
                 }
 
                 // Found the "\n"
-                lineString.Add(this.GetHighlightToken(searchString.Substring(0, endPos + 1), this.Tokens[tokenIndex].PatternInfo.OriginalPattern, TokenStatus.None));
+                lineString.Add(this.GetHighlightToken(searchString.Substring(0, endPos + 1), this.Tokens[tokenIndex].PatternInfo.OriginalPattern, DrawOption.None));
                 this.AddLineString(ref lineString, result, lineIndex);
                 lineIndex++;
                 searchString = searchString.Substring(endPos + 1);
@@ -293,10 +295,10 @@ namespace Parse.WpfControls
         /// <returns></returns>
         private HighlightToken GetHighlightToken(TokenCell tokenInfo)
         {
-            return this.GetHighlightToken(tokenInfo.Data, tokenInfo.PatternInfo.OriginalPattern, (TokenStatus)tokenInfo.ValueOptionData);
+            return this.GetHighlightToken(tokenInfo.Data, tokenInfo.PatternInfo.OriginalPattern, (DrawOption)tokenInfo.ValueOptionData);
         }
 
-        private HighlightToken GetHighlightToken(string text, string pattern, TokenStatus status)
+        private HighlightToken GetHighlightToken(string text, string pattern, DrawOption status)
         {
             Brush foreBrush = Brushes.Black;
             if (this.textStyleDic.ContainsKey(pattern))
@@ -308,11 +310,11 @@ namespace Parse.WpfControls
             ft.Trimming = TextTrimming.None;
             ft.LineHeight = this.LineHeight;
 
-            if ((status & TokenStatus.Selected) == TokenStatus.Selected)
+            if ((status & DrawOption.Selected) == DrawOption.Selected)
                 ft.AppearanceInfo.Selected = true;
             else ft.AppearanceInfo.Selected = false;
 
-            if ((status & TokenStatus.Problem) == TokenStatus.Problem)
+            if ((status & DrawOption.Underline) == DrawOption.Underline)
                 ft.AppearanceInfo.UnderLine = true;
             else ft.AppearanceInfo.UnderLine = false;
 

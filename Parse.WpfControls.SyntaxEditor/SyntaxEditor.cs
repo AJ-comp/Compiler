@@ -1,5 +1,6 @@
 ﻿using Parse.FrontEnd.Grammars;
 using Parse.FrontEnd.Grammars.MiniC;
+using Parse.FrontEnd.Parsers.EventArgs;
 using Parse.FrontEnd.Parsers.LR;
 using Parse.Tokenize;
 using Parse.WpfControls.Common;
@@ -141,17 +142,24 @@ namespace Parse.WpfControls.SyntaxEditor
             this.parser.ParsingFailed += Parser_ParsingFailed;
         }
 
-        private void Parser_ParsingFailed(object sender, FrontEnd.Parsers.EventArgs.ParsingFailedEventArgs e)
+        private void Parser_ParsingFailed(object sender, ParsingFailedEventArgs e)
         {
-            TokenStatus status = TokenStatus.None;
-            if (e.InputValue.TokenCell.ValueOptionData != null)
-                status = (TokenStatus)e.InputValue.TokenCell.ValueOptionData;
+            // if Endmarker
+            if (e.InputValue == null)
+                ;
+            else
+            {
+                DrawOption status = DrawOption.None;
+                if (e.InputValue.TokenCell.ValueOptionData != null)
+                    status = (DrawOption)e.InputValue.TokenCell.ValueOptionData;
 
-            status |= TokenStatus.Problem;
-            e.InputValue.TokenCell.ValueOptionData = status;
+                status |= DrawOption.Underline;
+                e.InputValue.TokenCell.ValueOptionData = status;
 
-            var eventArgs = new AlarmEventArgs(string.Empty, this.FileName, e);
-            this.AlarmFired?.Invoke(this, eventArgs);
+                var point = this.TextArea.GetIndexInfoFromCaretIndex(e.InputValue.TokenCell.StartIndex);
+                var eventArgs = new AlarmEventArgs(string.Empty, this.FileName, point.Y + 1, e);
+                this.AlarmFired?.Invoke(this, eventArgs);
+            }
         }
 
         private void RegisterKeywords(Grammar grammar)
