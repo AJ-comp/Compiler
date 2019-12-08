@@ -1,10 +1,6 @@
 ﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
-using Parse.WpfControls.SyntaxEditor.EventArgs;
-using System.Collections.ObjectModel;
 using System.Windows.Controls;
-using WpfApp.Models;
-using WpfApp.Properties;
 
 namespace WpfApp.ViewModels
 {
@@ -32,8 +28,5 @@ namespace WpfApp.ViewModels
         {
 
         }
-
-
-        public void SyntaxEditorAlarmEventHandler(object sender, AlarmEventArgs e) => this.AlarmListVM.AddAlarmList(e);
     }
 }

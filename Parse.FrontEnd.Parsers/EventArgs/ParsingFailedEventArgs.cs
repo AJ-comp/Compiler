@@ -4,9 +4,12 @@ using System.Collections.Generic;
 
 namespace Parse.FrontEnd.Parsers.EventArgs
 {
+    public enum ErrorPosition { OnNormalToken, OnEndMarker }
+
     public class ParsingFailedEventArgs : LRParsingEventArgs
     {
         public TerminalSet PossibleSet { get; } = new TerminalSet();
+        public ErrorPosition ErrorPosition { get; internal set; } = ErrorPosition.OnNormalToken;
         public int ErrorIndex { get; internal set; }
         public string ErrorMessage { get; internal set; }
 

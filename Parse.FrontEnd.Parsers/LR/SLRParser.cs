@@ -17,6 +17,7 @@ namespace Parse.FrontEnd.Parsers.LR
     public class SLRParser : LRParser
     {
         private int curTokenIndex = 0;
+        private TokenData prevToken = null;
         private ParsingRule parsingRule = new ParsingRule();
         private ParsingHistory parsingHistory = new ParsingHistory();
         private FollowAnalyzer followAnalyzer = new FollowAnalyzer();
@@ -134,9 +135,16 @@ namespace Parse.FrontEnd.Parsers.LR
             this.parsingHistory.AddRow(param1, param2, message, string.Empty);
 
             if (args.InputValue.Kind == new EndMarker())
-                 args = new ParsingFailedEventArgs(args.PrevStack, args.CurrentStack, null, args.ActionData, args.PossibleSet);
+            {
+                args.ErrorPosition = ErrorPosition.OnEndMarker;
+                args = new ParsingFailedEventArgs(args.PrevStack, args.CurrentStack, this.prevToken, args.ActionData, args.PossibleSet);
+                args.ErrorIndex = this.curTokenIndex - 1;   // because prev token index
+            }
             else
+            {
+                args.ErrorPosition = ErrorPosition.OnNormalToken;
                 args.ErrorIndex = this.curTokenIndex;
+            }
 
             this.OnParsingFailed(args);
         }
@@ -179,8 +187,8 @@ namespace Parse.FrontEnd.Parsers.LR
                 {
                     var typeData = item.PatternInfo.OptionData as Terminal;
                     if (typeData == null) type = new NotDefined();
-                    else if (typeData.TokenType == TokenType.Delimiter) continue;
-                    else if (typeData.TokenType == TokenType.Comment) continue;
+                    else if (typeData.TokenType == TokenType.Delimiter) { this.prevToken = new TokenData(item.Data, type, item); continue; }
+                    else if (typeData.TokenType == TokenType.Comment) { this.prevToken = new TokenData(item.Data, type, item); continue; }
                     else type = typeData;
                 }
 
@@ -204,6 +212,8 @@ namespace Parse.FrontEnd.Parsers.LR
                 {
                     i--;
                 }
+
+                this.prevToken = token;
             }
 
             return result;

@@ -13,7 +13,7 @@ using System.Windows.Media;
 
 namespace Parse.WpfControls
 {
-    public enum DrawOption { None = 0, Underline = 1, Selected = 2 }
+    public enum DrawOption { None = 0, Underline = 1, EndPointUnderline=2, Selected = 4 }
 
     public class HighlightTextBox : TokenizeTextBox
     {

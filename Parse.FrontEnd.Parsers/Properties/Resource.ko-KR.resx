@@ -117,38 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Code" xml:space="preserve">
-    <value>Code</value>
+  <data name="MustCome" xml:space="preserve">
+    <value>와야 합니다</value>
   </data>
-  <data name="Explanation" xml:space="preserve">
-    <value>Explanation</value>
-  </data>
-  <data name="Project" xml:space="preserve">
-    <value>Project</value>
-  </data>
-  <data name="File" xml:space="preserve">
-    <value>File</value>
-  </data>
-  <data name="Line" xml:space="preserve">
-    <value>Line</value>
-  </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="error" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\error.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="warning" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\warning.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="WholeSolution" xml:space="preserve">
-    <value>Whole Solution</value>
-  </data>
-  <data name="CurrentProject" xml:space="preserve">
-    <value>Current Project</value>
-  </data>
-  <data name="Documentation" xml:space="preserve">
-    <value>Documentation</value>
-  </data>
-  <data name="CurrentDocumentation" xml:space="preserve">
-    <value>Current Documentation</value>
+  <data name="CantShift" xml:space="preserve">
+    <value>shift 할 수 없습니다</value>
   </data>
 </root>

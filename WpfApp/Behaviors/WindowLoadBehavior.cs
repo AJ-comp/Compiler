@@ -1,12 +1,13 @@
 ﻿using Parse.FrontEnd.Parsers.Collections;
-using Parse.FrontEnd.Parsers.EventArgs;
-using Parse.WpfControls.SyntaxEditor;
+using Parse.WpfControls.SyntaxEditor.EventArgs;
 using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Forms;
 using System.Windows.Interactivity;
+using WpfApp.Models;
+using WpfApp.Properties;
 using WpfApp.ViewModels;
 
 namespace WpfApp.Behaviors
@@ -48,7 +49,7 @@ namespace WpfApp.Behaviors
             MainWindowViewModel mainVm = this.mainWindow.DataContext as MainWindowViewModel;
 
             if(mainVm != null)
-                this.mainWindow.syntaxEditor.AlarmFired += mainVm.SyntaxEditorAlarmEventHandler;
+                this.mainWindow.syntaxEditor.AlarmFired += SyntaxEditor_AlarmFired;
             this.mainWindow.grammarText.Text = this.mainWindow.syntaxEditor.Parser.Grammar.ToString();
             this.mainWindow.canonicalRTB.Text = this.mainWindow.syntaxEditor.Parser.C0.ToString();
 
@@ -79,6 +80,22 @@ namespace WpfApp.Behaviors
 
             this.editor.IntelliPrompt.Sessions.Add(session);    // <-- error [NullReferenceException]
             */
+        }
+
+        private void SyntaxEditor_AlarmFired(object sender, AlarmCollection e)
+        {
+            MainWindowViewModel mainVM = this.mainWindow.DataContext as MainWindowViewModel;
+
+            List<AlarmData> alarmList = new List<AlarmData>();
+            foreach (var item in e)
+            {
+                if (item.Status == AlarmStatus.None) continue;
+
+                var message = string.Format(AlarmCodes.CE0000, item.ParsingFailedArgs.PossibleSet.ToString());
+                alarmList.Add(new AlarmData(sender, item.Status, AlarmCodes.CE0000, message, item.ProjectName, item.FileName, item.Line));
+            }
+
+            mainVM.AlarmListVM.AddAlarmList(sender, alarmList);
         }
 
         private DataGridView DataGridWinformInit(Control winformControl)

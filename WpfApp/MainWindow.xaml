@@ -58,7 +58,7 @@
                     </syntaxeditor:SyntaxEditor>
 
                     <Grid Grid.Row="1">
-                        <view:ErrorList DataContext="{Binding AlarmListVM}"/>
+                        <view:AlarmList DataContext="{Binding AlarmListVM}"/>
                     </Grid>
 
                     <StatusBar Grid.Row="2">

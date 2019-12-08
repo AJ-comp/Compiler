@@ -48,7 +48,7 @@ namespace Parse.FrontEnd.Parsers.Collections
 
                 foreach(var data in this)
                 {
-                    if (data.IsEnd) result.Add(data.singleNT);
+                    if (data.IsEnd) result.Add(data.SingleNT);
                 }
 
                 return result;
@@ -66,7 +66,7 @@ namespace Parse.FrontEnd.Parsers.Collections
 
             foreach (var data in this)
             {
-                if (data.MarkSymbol == markSymbol) result.Add(data.singleNT);
+                if (data.MarkSymbol == markSymbol) result.Add(data.SingleNT);
             }
 
             return result;

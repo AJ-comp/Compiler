@@ -131,6 +131,18 @@ namespace Parse.WpfControls.Common
             this.tokenizeFactory.AddTokenRule(text, optionData, bCanDerived, bOperator);
         }
 
+        /// <summary>
+        /// This function moves the caret to the token of index.
+        /// </summary>
+        /// <param name="tokenIndex"></param>
+        public void MoveCaretToToken(int tokenIndex)
+        {
+            if (tokenIndex < 0) return;
+            if (tokenIndex >= this.Tokens.Count) return;
+
+            this.CaretIndex = this.Tokens[tokenIndex].EndIndex;
+        }
+
         public void AddScopeGroup(string startScopeSymbol, string endScopeSymbol)
         {
             /*

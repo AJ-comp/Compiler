@@ -1,27 +1,46 @@
 ﻿using GalaSoft.MvvmLight;
-using Parse.WpfControls.SyntaxEditor.EventArgs;
+using GalaSoft.MvvmLight.Command;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using WpfApp.Models;
-using WpfApp.Properties;
 
 namespace WpfApp.ViewModels
 {
     class AlarmListViewModel : ViewModelBase
     {
-        public ObservableCollection<ParsingAlarmData> AlarmLists { get; } = new ObservableCollection<ParsingAlarmData>();
+        public ObservableCollection<AlarmData> AlarmLists { get; } = new ObservableCollection<AlarmData>();
 
-
-        public void AddAlarmList(AlarmEventArgs e)
+        private RelayCommand<int> _cmdMouseDoubleClick;
+        public RelayCommand<int> CmdMouseDoubleClick
         {
+            get
+            {
+                if (_cmdMouseDoubleClick == null)
+                    _cmdMouseDoubleClick = new RelayCommand<int>(this.ExecuteMouseDoubleClick);
+
+                return _cmdMouseDoubleClick;
+            }
+        }
+
+        private void ExecuteMouseDoubleClick(int index)
+        {
+
+        }
+
+        private void RemoveAllMatched(object fromControl)
+        {
+            var list = this.AlarmLists.Except(this.AlarmLists.Where(x => x.FromControl == fromControl));
+
             this.AlarmLists.Clear();
+            foreach (var item in list) this.AlarmLists.Add(item);
+        }
 
-            if (e.Status == AlarmStatus.None) return;
+        public void AddAlarmList(object fromControl, List<AlarmData> e)
+        {
+            this.RemoveAllMatched(fromControl);
 
-            var message = string.Format(AlarmCodes.CE0000, e.ParsingFailedArgs.PossibleSet.ToString());
-
-            ParsingAlarmData item = new ParsingAlarmData(e.Status, AlarmCodes.CE0000, message, e.ProjectName, e.FileName, e.Line);
-            this.AlarmLists.Add(item);
-            //            this.AlarmListVM.AddAlarmList
+            foreach (var item in e) this.AlarmLists.Add(item);
         }
     }
 }

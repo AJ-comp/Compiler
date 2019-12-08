@@ -7,7 +7,7 @@ namespace Parse.FrontEnd.Parsers.Datas
     {
         private sbyte markIndex = 0;
 
-        public NonTerminalSingle singleNT { get; }
+        public NonTerminalSingle SingleNT { get; }
         public Symbol MarkSymbol
         {
             get
@@ -26,20 +26,20 @@ namespace Parse.FrontEnd.Parsers.Datas
         {
             get
             {
-                if (this.singleNT.IsEpsilon) return true;
+                if (this.SingleNT.IsEpsilon) return true;
 
-                return (this.markIndex >= this.singleNT.Count);
+                return (this.markIndex >= this.SingleNT.Count);
             }
         }
 
         public CanonicalItem(NonTerminalSingle singleNT)
         {
-            this.singleNT = singleNT;
+            this.SingleNT = singleNT;
         }
 
         public CanonicalItem(NonTerminalSingle singleNT, sbyte markIdx)
         {
-            this.singleNT = singleNT;
+            this.SingleNT = singleNT;
             this.markIndex = markIdx;
         }
 
@@ -58,9 +58,9 @@ namespace Parse.FrontEnd.Parsers.Datas
             Symbol result = null;
             if (this.markIndex-index < 0) return result;
 
-            if (this.markIndex-index < this.singleNT.Count)
+            if (this.markIndex-index < this.SingleNT.Count)
             {
-                result = this.singleNT[this.markIndex-index];
+                result = this.SingleNT[this.markIndex-index];
             }
 
             return result;
@@ -68,17 +68,17 @@ namespace Parse.FrontEnd.Parsers.Datas
 
         public override string ToString()
         {
-            string result = this.singleNT.Name + " ->";
+            string result = this.SingleNT.Name + " ->";
 
-            for (int i = 0; i < this.singleNT.Count; i++)
+            for (int i = 0; i < this.SingleNT.Count; i++)
             {
                 result += (i == this.markIndex) ? "." : " ";
 
-                if(this.singleNT[i] != new Epsilon())
-                    result += this.singleNT[i].ToString();
+                if(this.SingleNT[i] != new Epsilon())
+                    result += this.SingleNT[i].ToString();
             }
 
-            if (this.markIndex >= this.singleNT.Count) result += ".";
+            if (this.markIndex >= this.SingleNT.Count) result += ".";
 
             return result;
         }
@@ -90,7 +90,7 @@ namespace Parse.FrontEnd.Parsers.Datas
             return (this.GetHashCode() == other.GetHashCode());
         }
 
-        public override int GetHashCode() => System.Convert.ToInt32(this.singleNT.GetHashCode().ToString() + this.markIndex.ToString());
+        public override int GetHashCode() => System.Convert.ToInt32(this.SingleNT.GetHashCode().ToString() + this.markIndex.ToString());
 
         public override bool Equals(object obj)
         {
@@ -126,6 +126,6 @@ namespace Parse.FrontEnd.Parsers.Datas
             return !left.Equals(right);
         }
 
-        public object Clone() => new CanonicalItem(this.singleNT.Clone() as NonTerminalSingle, this.markIndex);
+        public object Clone() => new CanonicalItem(this.SingleNT.Clone() as NonTerminalSingle, this.markIndex);
     }
 }

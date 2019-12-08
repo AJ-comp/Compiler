@@ -59,6 +59,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Compile Include="EventArgs\AlarmCollection.cs" />
     <Compile Include="EventArgs\AlarmEventArgs.cs" />
     <Compile Include="SyntaxEditor.cs">
       <SubType>Code</SubType>

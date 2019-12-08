@@ -1,11 +1,13 @@
 ﻿using Parse.WpfControls.SyntaxEditor.EventArgs;
+using System;
 
 namespace WpfApp.Models
 {
-    class ParsingAlarmData
+    class AlarmData
     {
         public AlarmStatus Status { get; }
 
+        public object FromControl { get; }
         public string Code { get; }
         public string Message { get; }
         public string ProjectName { get; }
@@ -13,10 +15,11 @@ namespace WpfApp.Models
         public int TokenIndex { get; }
         public int Line { get; }
 
-        public ParsingAlarmData(AlarmStatus status, string code, string message, string projectName, string fileName, int line)
+        public AlarmData(object fromControl, AlarmStatus status, string code, string message, string projectName, string fileName, int line)
         {
             this.Status = status;
 
+            this.FromControl = fromControl;
             this.Code = code;
             this.Message = message;
             this.ProjectName = projectName;

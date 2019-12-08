@@ -3,11 +3,11 @@ using Parse.FrontEnd.Grammars.MiniC;
 using Parse.FrontEnd.Parsers.EventArgs;
 using Parse.FrontEnd.Parsers.LR;
 using Parse.Tokenize;
-using Parse.WpfControls.Common;
 using Parse.WpfControls.Models;
 using Parse.WpfControls.SyntaxEditor.EventArgs;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -18,12 +18,13 @@ namespace Parse.WpfControls.SyntaxEditor
     public class SyntaxEditor : Editor
     {
         private bool bParsing = false;
+        private AlarmCollection alarmList = new AlarmCollection();
         private List<TokenCell> reserveTokenCells = new List<TokenCell>();
 
         public delegate void OnParserChangedEventHandler(object sender);
         public event OnParserChangedEventHandler OnParserChanged;
 
-        public event EventHandler<AlarmEventArgs> AlarmFired;
+        public event EventHandler<AlarmCollection> AlarmFired;
 
         public int MyProperty
         {
@@ -144,22 +145,20 @@ namespace Parse.WpfControls.SyntaxEditor
 
         private void Parser_ParsingFailed(object sender, ParsingFailedEventArgs e)
         {
-            // if Endmarker
-            if (e.InputValue == null)
-                ;
+            // If fired the error on Endmarker.
+            DrawOption status = DrawOption.None;
+            if (e.InputValue.TokenCell.ValueOptionData != null)
+                status = (DrawOption)e.InputValue.TokenCell.ValueOptionData;
+
+            if (e.ErrorPosition == ErrorPosition.OnEndMarker)
+                status |= DrawOption.EndPointUnderline;
             else
-            {
-                DrawOption status = DrawOption.None;
-                if (e.InputValue.TokenCell.ValueOptionData != null)
-                    status = (DrawOption)e.InputValue.TokenCell.ValueOptionData;
-
                 status |= DrawOption.Underline;
-                e.InputValue.TokenCell.ValueOptionData = status;
 
-                var point = this.TextArea.GetIndexInfoFromCaretIndex(e.InputValue.TokenCell.StartIndex);
-                var eventArgs = new AlarmEventArgs(string.Empty, this.FileName, point.Y + 1, e);
-                this.AlarmFired?.Invoke(this, eventArgs);
-            }
+            e.InputValue.TokenCell.ValueOptionData = status;
+
+            var point = this.TextArea.GetIndexInfoFromCaretIndex(e.InputValue.TokenCell.StartIndex);
+            this.alarmList.Add(new AlarmEventArgs(string.Empty, this.FileName, e.ErrorIndex, point.Y + 1, e));
         }
 
         private void RegisterKeywords(Grammar grammar)
@@ -215,11 +214,40 @@ namespace Parse.WpfControls.SyntaxEditor
         // 전처리기 액션자 (ex : #if ~ #elsif ~ #else ~ #endif) 등록 함수 만들기
         // (파라메터 : 1.액션자 syntax, 액션자 범주에서 행동 요소), 3.액션자의 Highlight Color)
 
+        /// <summary>
+        /// This function deletes useless alarm from the AlarmList.
+        /// </summary>
+        private void AdjustToValidAlarmList()
+        {
+            AlarmCollection correctList = new AlarmCollection();
+
+            foreach(var item in this.alarmList)
+            {
+                int tokenIndex = item.ParsingFailedArgs.ErrorIndex;
+                if (this.TextArea.Tokens[tokenIndex] == item.ParsingFailedArgs.InputValue.TokenCell) correctList.Add(item);
+            }
+
+            /*
+            var correctList = this.alarmList.Where(x =>
+            {
+                int tokenIndex = x.ParsingFailedArgs.ErrorIndex;
+                return (this.TextArea.Tokens[tokenIndex] == x.ParsingFailedArgs.InputValue.TokenCell);
+            });
+            */
+
+            this.alarmList.Clear();
+            foreach(var item in correctList) this.alarmList.Add(item);
+        }
+
         private async void TextArea_TextChanged(object sender, TextChangedEventArgs e)
         {
+            this.alarmList.Clear();
+
             if (this.Parser.Parse(this.TextArea.Tokens.ToArray()))
-                this.AlarmFired?.Invoke(this, new AlarmEventArgs(string.Empty, this.FileName));
-            //            this.parser.Parse("const int main(){}");
+                this.alarmList.Add(new AlarmEventArgs(string.Empty, this.FileName));
+            else this.AdjustToValidAlarmList();
+
+            this.AlarmFired?.Invoke(this, this.alarmList);
             this.TextArea.InvalidateVisual();
         }
     }

@@ -1,12 +1,14 @@
-﻿<UserControl x:Class="WpfApp.Views.ErrorList"
+﻿<UserControl x:Class="WpfApp.Views.AlarmList"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:WpfApp.Views"
+             xmlns:mvvm="http://www.galasoft.ch/mvvmlight"
              xmlns:localViewmodel="clr-namespace:WpfApp.ViewModels"
              xmlns:localConverters="clr-namespace:WpfApp.Converters"
              xmlns:lex="http://wpflocalizeextension.codeplex.com" 
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              mc:Ignorable="d" 
              d:DesignHeight="200" d:DesignWidth="600">
     <UserControl.DataContext>
@@ -14,7 +16,34 @@
     </UserControl.DataContext>
     
     <Grid>
-        <ListView ItemsSource="{Binding AlarmLists}">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
+        <StackPanel Grid.Row="0" Orientation="Horizontal">
+            <ComboBox Width="150" Margin="0 0 10 0" SelectedIndex="0" Background="Transparent">
+                <ComboBoxItem Content="{lex:Loc Key=WholeSolution}"/>
+                <ComboBoxItem Content="{lex:Loc Key=CurrentProject}"/>
+                <ComboBoxItem Content="{lex:Loc Key=CurrentDocumentation}"/>
+            </ComboBox>
+            <ToggleButton Background="Transparent" Margin=" 0 0 5 0">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="pack://application:,,,/WpfApp;component/Resources/error.png"
+                           Width="16" Height="16" Margin="0,0,2,0"/>
+                </StackPanel>
+            </ToggleButton>
+            <ToggleButton Background="Transparent" Margin="0 0 5 0">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="pack://application:,,,/WpfApp;component/Resources/warning.png"
+                           Width="16" Height="16" Margin="0,0,2,0"/>
+                </StackPanel>
+            </ToggleButton>
+        </StackPanel>
+        
+        
+        <ListView Name="alarmList" Grid.Row="1" ItemsSource="{Binding AlarmLists}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
             <ListView.Resources>
 
             </ListView.Resources>
@@ -23,17 +52,28 @@
                     <GridViewColumn Header=" ">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <Image Source="{Binding Status, Converter={localConverters:EnumToImageConverter}}" Width="16" Height="16" Margin="0,0,2,0"/>
+                                <Image Source="{Binding Status, Converter={localConverters:EnumToImageConverter}}" 
+                                       Width="16" Height="16" Margin="0,0,2,0"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn Header="{lex:Loc Key=ErrorCode}" DisplayMemberBinding="{Binding Code}" />
-                    <GridViewColumn Header="{lex:Loc Key=ErrorExplanation}" DisplayMemberBinding="{Binding Message}"/>
-                    <GridViewColumn Header="{lex:Loc Key=ErrorProject}" DisplayMemberBinding="{Binding ProjectName}"/>
-                    <GridViewColumn Header="{lex:Loc Key=ErrorFile}" DisplayMemberBinding="{Binding FileName}"/>
-                    <GridViewColumn Header="{lex:Loc Key=ErrorLine}" DisplayMemberBinding="{Binding Line}"/>
+                    <GridViewColumn Header="{lex:Loc Key=Code}" DisplayMemberBinding="{Binding Code}" />
+                    <GridViewColumn Header="{lex:Loc Key=Explanation}" DisplayMemberBinding="{Binding Message}"/>
+                    <GridViewColumn Header="{lex:Loc Key=Project}" DisplayMemberBinding="{Binding ProjectName}"/>
+                    <GridViewColumn Header="{lex:Loc Key=File}" DisplayMemberBinding="{Binding FileName}"/>
+                    <GridViewColumn Header="{lex:Loc Key=Line}" DisplayMemberBinding="{Binding Line}"/>
                 </GridView>
             </ListView.View>
+
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="MouseDoubleClick">
+                    <mvvm:EventToCommand Command="{Binding CmdMouseDoubleClick}" 
+                                         PassEventArgsToCommand="True"
+                                         EventArgsConverter="{localConverters:MouseDoubleClickIndexConverter}"
+                                         EventArgsConverterParameter="{Binding ElementName=alarmList, Path=SelectedIndex}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
         </ListView>
+
     </Grid>
 </UserControl>

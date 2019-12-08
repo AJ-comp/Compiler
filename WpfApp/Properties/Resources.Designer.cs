@@ -61,6 +61,42 @@ namespace WpfApp.Properties {
         }
         
         /// <summary>
+        ///   Code과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        internal static string Code {
+            get {
+                return ResourceManager.GetString("Code", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Current Documentation과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        internal static string CurrentDocumentation {
+            get {
+                return ResourceManager.GetString("CurrentDocumentation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Current Project과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        internal static string CurrentProject {
+            get {
+                return ResourceManager.GetString("CurrentProject", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Documentation과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        internal static string Documentation {
+            get {
+                return ResourceManager.GetString("Documentation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
         internal static System.Drawing.Bitmap error {
@@ -71,47 +107,38 @@ namespace WpfApp.Properties {
         }
         
         /// <summary>
-        ///   Code과(와) 유사한 지역화된 문자열을 찾습니다.
-        /// </summary>
-        internal static string ErrorCode {
-            get {
-                return ResourceManager.GetString("ErrorCode", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Explanation과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
-        internal static string ErrorExplanation {
+        internal static string Explanation {
             get {
-                return ResourceManager.GetString("ErrorExplanation", resourceCulture);
+                return ResourceManager.GetString("Explanation", resourceCulture);
             }
         }
         
         /// <summary>
         ///   File과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
-        internal static string ErrorFile {
+        internal static string File {
             get {
-                return ResourceManager.GetString("ErrorFile", resourceCulture);
+                return ResourceManager.GetString("File", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Line과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
-        internal static string ErrorLine {
+        internal static string Line {
             get {
-                return ResourceManager.GetString("ErrorLine", resourceCulture);
+                return ResourceManager.GetString("Line", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Project과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
-        internal static string ErrorProject {
+        internal static string Project {
             get {
-                return ResourceManager.GetString("ErrorProject", resourceCulture);
+                return ResourceManager.GetString("Project", resourceCulture);
             }
         }
         
@@ -122,6 +149,15 @@ namespace WpfApp.Properties {
             get {
                 object obj = ResourceManager.GetObject("warning", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Whole Solution과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        internal static string WholeSolution {
+            get {
+                return ResourceManager.GetString("WholeSolution", resourceCulture);
             }
         }
     }
