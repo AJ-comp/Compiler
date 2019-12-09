@@ -6,15 +6,18 @@
              xmlns:local="clr-namespace:WpfApp.Views"
              xmlns:mvvm="http://www.galasoft.ch/mvvmlight"
              xmlns:localViewmodel="clr-namespace:WpfApp.ViewModels"
+             xmlns:localBehaviors="clr-namespace:WpfApp.Behaviors"
              xmlns:localConverters="clr-namespace:WpfApp.Converters"
              xmlns:lex="http://wpflocalizeextension.codeplex.com" 
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             lex:LocalizeDictionary.DesignCulture="en"
              mc:Ignorable="d" 
              d:DesignHeight="200" d:DesignWidth="600">
     <UserControl.DataContext>
         <localViewmodel:AlarmListViewModel/>
     </UserControl.DataContext>
-    
+
     <Grid>
 
         <Grid.RowDefinitions>
@@ -41,8 +44,8 @@
                 </StackPanel>
             </ToggleButton>
         </StackPanel>
-        
-        
+
+
         <ListView Name="alarmList" Grid.Row="1" ItemsSource="{Binding AlarmLists}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
             <ListView.Resources>
 
@@ -58,7 +61,7 @@
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
                     <GridViewColumn Header="{lex:Loc Key=Code}" DisplayMemberBinding="{Binding Code}" />
-                    <GridViewColumn Header="{lex:Loc Key=Explanation}" DisplayMemberBinding="{Binding Message}"/>
+                    <GridViewColumn Header="{lex:Loc Key=Explanation}" Width="200" DisplayMemberBinding="{Binding Message}"/>
                     <GridViewColumn Header="{lex:Loc Key=Project}" DisplayMemberBinding="{Binding ProjectName}"/>
                     <GridViewColumn Header="{lex:Loc Key=File}" DisplayMemberBinding="{Binding FileName}"/>
                     <GridViewColumn Header="{lex:Loc Key=Line}" DisplayMemberBinding="{Binding Line}"/>

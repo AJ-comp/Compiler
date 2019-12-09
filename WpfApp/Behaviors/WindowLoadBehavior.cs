@@ -92,7 +92,9 @@ namespace WpfApp.Behaviors
                 if (item.Status == AlarmStatus.None) continue;
 
                 var message = string.Format(AlarmCodes.CE0000, item.ParsingFailedArgs.PossibleSet.ToString());
-                alarmList.Add(new AlarmData(sender, item.Status, AlarmCodes.CE0000, message, item.ProjectName, item.FileName, item.Line));
+                var alarmData = new AlarmData(sender, item.Status, AlarmCodes.CE0000, message, item.ProjectName, item.FileName, item.TokenIndex, item.Line);
+                alarmData.IndicateLogic = this.mainWindow.syntaxEditor.TextArea.MoveCaretToToken;
+                alarmList.Add(alarmData);
             }
 
             mainVM.AlarmListVM.AddAlarmList(sender, alarmList);

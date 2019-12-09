@@ -151,4 +151,16 @@
   <data name="CurrentDocumentation" xml:space="preserve">
     <value>Current Documentation</value>
   </data>
+  <data name="_File" xml:space="preserve">
+    <value>File</value>
+  </data>
+  <data name="_Edit" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="View" xml:space="preserve">
+    <value>View</value>
+  </data>
+  <data name="New" xml:space="preserve">
+    <value>New Create</value>
+  </data>
 </root>

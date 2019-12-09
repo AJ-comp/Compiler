@@ -140,7 +140,8 @@ namespace Parse.WpfControls.Common
             if (tokenIndex < 0) return;
             if (tokenIndex >= this.Tokens.Count) return;
 
-            this.CaretIndex = this.Tokens[tokenIndex].EndIndex;
+            this.CaretIndex = this.Tokens[tokenIndex].EndIndex + 1;
+            this.Focus();
         }
 
         public void AddScopeGroup(string startScopeSymbol, string endScopeSymbol)

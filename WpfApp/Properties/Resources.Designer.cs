@@ -61,6 +61,24 @@ namespace WpfApp.Properties {
         }
         
         /// <summary>
+        ///   Edit과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        internal static string _Edit {
+            get {
+                return ResourceManager.GetString("_Edit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   File과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        internal static string _File {
+            get {
+                return ResourceManager.GetString("_File", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Code과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         internal static string Code {
@@ -134,11 +152,29 @@ namespace WpfApp.Properties {
         }
         
         /// <summary>
+        ///   New Create과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        internal static string New {
+            get {
+                return ResourceManager.GetString("New", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Project과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         internal static string Project {
             get {
                 return ResourceManager.GetString("Project", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   View과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        internal static string View {
+            get {
+                return ResourceManager.GetString("View", resourceCulture);
             }
         }
         

@@ -1,4 +1,4 @@
-﻿<Controls:MetroWindow 
+﻿<Window
         x:Class="WpfApp.MainWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
@@ -6,7 +6,6 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
     xmlns:wpfcontrols="clr-namespace:Parse.WpfControls;assembly=Parse.WpfControls"
     xmlns:localConverters="clr-namespace:WpfApp.Converters"
     xmlns:converter="clr-namespace:Parse.WpfControls.Converters;assembly=Parse.WpfControls"
@@ -15,24 +14,50 @@
     xmlns:localViewModels="clr-namespace:WpfApp.ViewModels"
     xmlns:view="clr-namespace:WpfApp.Views"
     xmlns:lex="http://wpflocalizeextension.codeplex.com" 
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         lex:LocalizeDictionary.DesignCulture="en"
       lex:ResxLocalizationProvider.DefaultAssembly="WpfApp"
       lex:ResxLocalizationProvider.DefaultDictionary="Resources"
     mc:Ignorable="d"
         Title="MainWindow" Height="600" Width="800"
         WindowStartupLocation="CenterScreen"
-        ShowTitleBar="True" ShowIconOnTitleBar="True"
-        BorderBrush="{DynamicResource AccentColorBrush}"
         BorderThickness="1"
-        GlowBrush="Black"
         ResizeMode="CanResizeWithGrip"
-        WindowTransitionsEnabled="False">
+        WindowState="Maximized">
     <Window.DataContext>
         <localViewModels:MainWindowViewModel/>
     </Window.DataContext>
 
-    <Grid>
-        <TabControl x:Name="tablControl">
+    <DockPanel>
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="{lex:Loc Key=_File}" InputGestureText="Alt+F">
+                <MenuItem Header="{lex:Loc Key=New}" InputGestureText="Alt+N">
+                    <MenuItem Header="{lex:Loc Key=Project}" InputGestureText="Ctrl+Shift+N"/>
+                    <MenuItem Header="{lex:Loc Key=_File}" InputGestureText="Ctrl+N"/>
+                </MenuItem>
+            </MenuItem>
+            <MenuItem Header="{lex:Loc Key=_Edit}" InputGestureText="Alt+E"/>
+            <MenuItem Header="{lex:Loc Key=View}" InputGestureText="Alt+V"/>
+        </Menu>
+
+        <StatusBar DockPanel.Dock="Bottom">
+            <StatusBarItem>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Line="/>
+                    <TextBlock Text="{Binding ElementName=syntaxEditor, Path=TextArea.LineIndex}"/>
+                    <Border BorderThickness="5" BorderBrush="Transparent"/>
+                    <TextBlock Text="CaretPosition="/>
+                    <TextBlock Text="{Binding ElementName=syntaxEditor, Path=TextArea.StartCaretIndexByLine}"/>
+                    <Border BorderThickness="5" BorderBrush="Transparent"/>
+                    <TextBlock Text="TokenIndex="/>
+                    <TextBlock Text="{Binding ElementName=syntaxEditor, Path=TextArea.TokenIndex}"/>
+                </StackPanel>
+            </StatusBarItem>
+        </StatusBar>
+
+        <TabControl Grid.Row="1" x:Name="tablControl"
+                    Background="Transparent"
+                    Foreground="WhiteSmoke">
             <TabItem Header="Editor">
                 <Grid>
                     <Grid.RowDefinitions>
@@ -60,21 +85,6 @@
                     <Grid Grid.Row="1">
                         <view:AlarmList DataContext="{Binding AlarmListVM}"/>
                     </Grid>
-
-                    <StatusBar Grid.Row="2">
-                        <StatusBarItem>
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="Line="/>
-                                <TextBlock Text="{Binding ElementName=syntaxEditor, Path=TextArea.LineIndex}"/>
-                                <Border BorderThickness="5" BorderBrush="Transparent"/>
-                                <TextBlock Text="CaretPosition="/>
-                                <TextBlock Text="{Binding ElementName=syntaxEditor, Path=TextArea.StartCaretIndexByLine}"/>
-                                <Border BorderThickness="5" BorderBrush="Transparent"/>
-                                <TextBlock Text="TokenIndex="/>
-                                <TextBlock Text="{Binding ElementName=syntaxEditor, Path=TextArea.TokenIndex}"/>
-                            </StackPanel>
-                        </StatusBarItem>
-                    </StatusBar>
                 </Grid>
                 <!--                <syntaxeditor:SyntaxEditor Name="editor" IsLineNumberMarginVisible="True" 
                                            IsOutliningMarginVisible="True"
@@ -107,11 +117,11 @@
             <TabItem Header="Parse Tree" />
         </TabControl>
 
-    </Grid>
+    </DockPanel>
 
 
     <i:Interaction.Behaviors>
         <behaviors:WindowLoadBehavior/>
     </i:Interaction.Behaviors>
 
-</Controls:MetroWindow>
+</Window>

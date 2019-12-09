@@ -15,7 +15,9 @@ namespace WpfApp.Models
         public int TokenIndex { get; }
         public int Line { get; }
 
-        public AlarmData(object fromControl, AlarmStatus status, string code, string message, string projectName, string fileName, int line)
+        public Action<int> IndicateLogic { get; set; } = null;
+
+        public AlarmData(object fromControl, AlarmStatus status, string code, string message, string projectName, string fileName, int tokenIndex, int line)
         {
             this.Status = status;
 
@@ -24,6 +26,7 @@ namespace WpfApp.Models
             this.Message = message;
             this.ProjectName = projectName;
             this.FileName = fileName;
+            this.TokenIndex = tokenIndex;
             this.Line = line;
         }
     }

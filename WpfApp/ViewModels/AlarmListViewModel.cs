@@ -25,7 +25,8 @@ namespace WpfApp.ViewModels
 
         private void ExecuteMouseDoubleClick(int index)
         {
-
+            int tokenIndex = this.AlarmLists[index].TokenIndex;
+            this.AlarmLists[index].IndicateLogic(tokenIndex);
         }
 
         private void RemoveAllMatched(object fromControl)

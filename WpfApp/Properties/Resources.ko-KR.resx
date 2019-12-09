@@ -144,4 +144,16 @@
   <data name="CurrentDocumentation" xml:space="preserve">
     <value>현재 문서</value>
   </data>
+  <data name="_File" xml:space="preserve">
+    <value>파일</value>
+  </data>
+  <data name="_Edit" xml:space="preserve">
+    <value>편집</value>
+  </data>
+  <data name="View" xml:space="preserve">
+    <value>보기</value>
+  </data>
+  <data name="New" xml:space="preserve">
+    <value>새로 만들기</value>
+  </data>
 </root>
