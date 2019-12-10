@@ -1,0 +1,33 @@
+﻿<Window x:Class="WpfApp.Views.NewFileWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp.Views"
+        xmlns:localViewmodels="clr-namespace:WpfApp.ViewModels"
+        mc:Ignorable="d"
+        Title="NewFileWindow" Height="450" Width="600">
+    <Window.DataContext>
+        <localViewmodels:NewFileWindowViewModel/>
+    </Window.DataContext>
+
+    <Grid>
+        <ListBox ItemsSource="{Binding NewFileDataCollection}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <VirtualizingStackPanel Name="vStack" Orientation="Horizontal">
+                        <Image Source="{Binding ImageSource}"  Width="48" Height="48" Margin="0,0,2,0"/>
+                        <TextBlock Text="{Binding ItemName}" Width="100"/>
+                        <TextBlock Text="{Binding Explain}" FontSize="8"/>
+                    </VirtualizingStackPanel>
+                    <DataTemplate.Triggers>
+                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ListBoxItem}},Path=IsSelected}" Value="True">
+                            <!--<Setter TargetName="vStack" Property="Background" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>-->
+                            <Setter TargetName="vStack" Property="Background" Value="Yellow"/>
+                        </DataTrigger>
+                    </DataTemplate.Triggers>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+    </Grid>
+</Window>

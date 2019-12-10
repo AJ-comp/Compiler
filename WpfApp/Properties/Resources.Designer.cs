@@ -79,6 +79,15 @@ namespace WpfApp.Properties {
         }
         
         /// <summary>
+        ///   Canonical Table과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        internal static string CanonicalTable {
+            get {
+                return ResourceManager.GetString("CanonicalTable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Code과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         internal static string Code {
@@ -143,11 +152,38 @@ namespace WpfApp.Properties {
         }
         
         /// <summary>
+        ///   Grammar과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        internal static string Grammar {
+            get {
+                return ResourceManager.GetString("Grammar", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Line과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         internal static string Line {
             get {
                 return ResourceManager.GetString("Line", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Mini C File과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        internal static string MiniCFile {
+            get {
+                return ResourceManager.GetString("MiniCFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   It generates the Mini C file과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        internal static string MiniCFileExplain {
+            get {
+                return ResourceManager.GetString("MiniCFileExplain", resourceCulture);
             }
         }
         
@@ -161,11 +197,58 @@ namespace WpfApp.Properties {
         }
         
         /// <summary>
+        ///   Parse Tree과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        internal static string ParseTree {
+            get {
+                return ResourceManager.GetString("ParseTree", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Parsing History과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        internal static string ParsingHistory {
+            get {
+                return ResourceManager.GetString("ParsingHistory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Parsing Table과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        internal static string ParsingTable {
+            get {
+                return ResourceManager.GetString("ParsingTable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Project과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         internal static string Project {
             get {
                 return ResourceManager.GetString("Project", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap typec16 {
+            get {
+                object obj = ResourceManager.GetObject("typec16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap typec24 {
+            get {
+                object obj = ResourceManager.GetObject("typec24", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         

@@ -87,6 +87,7 @@
     <Compile Include="AttachedProperties\TextBlockExtension.cs" />
     <Compile Include="AttachedProperties\TextBoxBehavior.cs" />
     <Compile Include="Behaviors\CompletionListBehavior.cs" />
+    <Compile Include="ClosableTab.cs" />
     <Compile Include="Common\ExtensionTextBox.cs" />
     <Compile Include="Common\TokenizeTextBox.cs" />
     <Compile Include="Converters\EventArgConverterExtension.cs" />
@@ -110,7 +111,11 @@
     <Compile Include="Behaviors\RedirectRoutedEventBehavior.cs" />
     <Compile Include="Behaviors\ZoomScrollBehavior.cs" />
     <Compile Include="Models\CodeContentInfo.cs" />
+    <Compile Include="TextViewWindow.cs" />
     <Compile Include="Utilities\RegexUtility.cs" />
+    <Compile Include="Views\ClosableHeader.xaml.cs">
+      <DependentUpon>ClosableHeader.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\CompletionList.xaml.cs">
       <DependentUpon>CompletionList.xaml</DependentUpon>
     </Compile>
@@ -128,6 +133,14 @@
     <Page Include="Themes\Editor.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\TextViewWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ClosableHeader.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\CompletionList.xaml">
       <SubType>Designer</SubType>

@@ -2,8 +2,8 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:Parse.WpfControls.Themes">
     <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/Parse.WpfControls;component/Themes/TextViewWindow.xaml"/>
         <ResourceDictionary Source="/Parse.WpfControls;component/Themes/HighlightTextBox.xaml"/>
         <ResourceDictionary Source="/Parse.WpfControls;component/Themes/Editor.xaml"/>
     </ResourceDictionary.MergedDictionaries>
-
 </ResourceDictionary>

@@ -156,4 +156,25 @@
   <data name="New" xml:space="preserve">
     <value>새로 만들기</value>
   </data>
+  <data name="Grammar" xml:space="preserve">
+    <value>문법</value>
+  </data>
+  <data name="CanonicalTable" xml:space="preserve">
+    <value>Canonical 테이블</value>
+  </data>
+  <data name="ParsingTable" xml:space="preserve">
+    <value>파싱 테이블</value>
+  </data>
+  <data name="ParsingHistory" xml:space="preserve">
+    <value>파싱 히스토리</value>
+  </data>
+  <data name="ParseTree" xml:space="preserve">
+    <value>파스 트리</value>
+  </data>
+  <data name="MiniCFile" xml:space="preserve">
+    <value>Mini C 파일</value>
+  </data>
+  <data name="MiniCFileExplain" xml:space="preserve">
+    <value>Mini C 파일을 생성합니다</value>
+  </data>
 </root>

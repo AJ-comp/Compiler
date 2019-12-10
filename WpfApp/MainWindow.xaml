@@ -14,7 +14,6 @@
     xmlns:localViewModels="clr-namespace:WpfApp.ViewModels"
     xmlns:view="clr-namespace:WpfApp.Views"
     xmlns:lex="http://wpflocalizeextension.codeplex.com" 
-    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         lex:LocalizeDictionary.DesignCulture="en"
       lex:ResxLocalizationProvider.DefaultAssembly="WpfApp"
       lex:ResxLocalizationProvider.DefaultDictionary="Resources"
@@ -28,37 +27,28 @@
         <localViewModels:MainWindowViewModel/>
     </Window.DataContext>
 
-    <DockPanel>
-        <Menu DockPanel.Dock="Top">
-            <MenuItem Header="{lex:Loc Key=_File}" InputGestureText="Alt+F">
-                <MenuItem Header="{lex:Loc Key=New}" InputGestureText="Alt+N">
-                    <MenuItem Header="{lex:Loc Key=Project}" InputGestureText="Ctrl+Shift+N"/>
-                    <MenuItem Header="{lex:Loc Key=_File}" InputGestureText="Ctrl+N"/>
-                </MenuItem>
-            </MenuItem>
-            <MenuItem Header="{lex:Loc Key=_Edit}" InputGestureText="Alt+E"/>
-            <MenuItem Header="{lex:Loc Key=View}" InputGestureText="Alt+V"/>
-        </Menu>
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Resources/MainWindowMenus.xaml"/>
+                <ResourceDictionary Source="Resources/MainWindowStatusBar.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
 
-        <StatusBar DockPanel.Dock="Bottom">
-            <StatusBarItem>
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="Line="/>
-                    <TextBlock Text="{Binding ElementName=syntaxEditor, Path=TextArea.LineIndex}"/>
-                    <Border BorderThickness="5" BorderBrush="Transparent"/>
-                    <TextBlock Text="CaretPosition="/>
-                    <TextBlock Text="{Binding ElementName=syntaxEditor, Path=TextArea.StartCaretIndexByLine}"/>
-                    <Border BorderThickness="5" BorderBrush="Transparent"/>
-                    <TextBlock Text="TokenIndex="/>
-                    <TextBlock Text="{Binding ElementName=syntaxEditor, Path=TextArea.TokenIndex}"/>
-                </StackPanel>
-            </StatusBarItem>
-        </StatusBar>
+    <DockPanel>
+        <DockPanel DockPanel.Dock="Top">
+            <ContentControl Content="{StaticResource MainWindowMenus}"/>
+        </DockPanel>
+
+        <DockPanel DockPanel.Dock="Bottom">
+            <ContentControl Content="{StaticResource MainWindowStatusBar}"/>
+        </DockPanel>
 
         <TabControl Grid.Row="1" x:Name="tablControl"
                     Background="Transparent"
                     Foreground="WhiteSmoke">
-            <TabItem Header="Editor">
+            <wpfcontrols:ClosableTab Title="Editor">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="4*"/>
@@ -89,32 +79,7 @@
                 <!--                <syntaxeditor:SyntaxEditor Name="editor" IsLineNumberMarginVisible="True" 
                                            IsOutliningMarginVisible="True"
                                            DocumentTextChanged="editor_DocumentTextChanged"/>-->
-            </TabItem>
-            <TabItem Header="Grammar">
-                <TextBox x:Name="grammarText" FontSize="18"
-                         HorizontalScrollBarVisibility="Auto"
-                         VerticalScrollBarVisibility="Auto"
-                         Text="{Binding ElementName=syntaxEditor, Path=Parser.Grammar, Mode=OneWay, 
-                            Converter={converter:PropertyValueToStringConverter} }"/>
-            </TabItem>
-            <TabItem Header="Canonical Table">
-                <TextBox x:Name="canonicalRTB" IsReadOnly="True" FontSize="18" 
-                         HorizontalScrollBarVisibility="Auto"
-                         VerticalScrollBarVisibility="Auto"
-                         Text="{Binding ElementName=syntaxEditor, Path=Parser.C0, Mode=OneWay, 
-                            Converter={converter:PropertyValueToStringConverter}}"/>
-            </TabItem>
-            <TabItem Header="Parsing Table">
-                <DockPanel>
-                    <WindowsFormsHost x:Name="winformControl" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
-                </DockPanel>
-            </TabItem>
-            <TabItem Header="Parsing History">
-                <DockPanel>
-                    <WindowsFormsHost x:Name="parsingHistory" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
-                </DockPanel>
-            </TabItem>
-            <TabItem Header="Parse Tree" />
+            </wpfcontrols:ClosableTab>
         </TabControl>
 
     </DockPanel>
