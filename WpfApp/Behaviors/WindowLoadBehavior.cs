@@ -41,7 +41,7 @@ namespace WpfApp.Behaviors
         {
             this.mainWindow = sender as MainWindow;
 
-            MainWindowViewModel mainVm = this.mainWindow.DataContext as MainWindowViewModel;
+            MainViewModel mainVm = this.mainWindow.DataContext as MainViewModel;
 
             if(mainVm != null)
                 this.mainWindow.syntaxEditor.AlarmFired += SyntaxEditor_AlarmFired;
@@ -69,12 +69,14 @@ namespace WpfApp.Behaviors
             */
         }
 
-        private void ExecuteMenuCommand(MainWindowViewModel mainVm)
+        private void ExecuteMenuCommand(MainViewModel mainVm)
         {
             mainVm.NewFileAction = (() =>
             {
-                NewFileWindow window = new NewFileWindow();
-                window.ShowDialog();
+                //                NewFileWindow window = new NewFileWindow();
+                //                window.ShowDialog();
+
+                new NewFileWindowViewModel();
             });
 
             mainVm.GrammarAction = (() =>
@@ -161,7 +163,7 @@ namespace WpfApp.Behaviors
 
         private void SyntaxEditor_AlarmFired(object sender, AlarmCollection e)
         {
-            MainWindowViewModel mainVM = this.mainWindow.DataContext as MainWindowViewModel;
+            MainViewModel mainVM = this.mainWindow.DataContext as MainViewModel;
 
             List<AlarmData> alarmList = new List<AlarmData>();
             foreach (var item in e)

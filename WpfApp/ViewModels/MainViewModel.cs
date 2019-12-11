@@ -1,11 +1,52 @@
-﻿using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using System;
+using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 
 namespace WpfApp.ViewModels
 {
-    class MainWindowViewModel : ViewModelBase
+    /// <summary>
+    /// This class contains properties that the main View can data bind to.
+    /// <para>
+    /// Use the <strong>mvvminpc</strong> snippet to add bindable properties to this ViewModel.
+    /// </para>
+    /// <para>
+    /// You can also use Blend to data bind with the tool's support.
+    /// </para>
+    /// <para>
+    /// See http://www.galasoft.ch/mvvm
+    /// </para>
+    /// </summary>
+    public class MainViewModel : ViewModelBase
     {
+        private ObservableCollection<DocumentViewModel> _documents;
+        public ObservableCollection<DocumentViewModel> Documents
+        {
+            get
+            {
+                if (this._documents == null)
+                {
+                    this._documents = new ObservableCollection<DocumentViewModel>();
+                    this._documents.CollectionChanged += _documents_CollectionChanged;
+                }
+
+                return this._documents;
+            }
+        }
+
+        private void _documents_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            if (e.NewItems != null && e.NewItems.Count != 0)
+                foreach (DocumentViewModel document in e.NewItems)
+                    document.RequestClose += Document_RequestClose;
+            if (e.OldItems != null && e.OldItems.Count != 0)
+                foreach (DocumentViewModel document in e.NewItems)
+                    document.RequestClose -= Document_RequestClose;
+        }
+
+        private void Document_RequestClose(object sender, EventArgs e) => this._documents.Remove(sender as DocumentViewModel);
+
         public AlarmListViewModel AlarmListVM { get; } = new AlarmListViewModel();
 
         public Action NewFileAction = null;
@@ -88,15 +129,26 @@ namespace WpfApp.ViewModels
             }
         }
 
-        public MainWindowViewModel()
-        {
-        }
-
         private void OnNewFile() => this.NewFileAction?.Invoke();
         private void OnGrammar() => this.GrammarAction?.Invoke();
         private void OnCanonicalTable() => this.CanonicalTableAction?.Invoke();
         private void OnParsingTable() => this.ParsingTableAction?.Invoke();
         private void OnParsingHistory() => this.ParsingHistoryAction?.Invoke();
         private void OnParseTree() => this.ParseTreeAction?.Invoke();
+
+        /// <summary>
+        /// Initializes a new instance of the MainViewModel class.
+        /// </summary>
+        public MainViewModel()
+        {
+            if (IsInDesignMode)
+            {
+                // Code runs in Blend --> create design time data.
+            }
+            else
+            {
+                // Code runs "for real"
+            }
+        }
     }
 }

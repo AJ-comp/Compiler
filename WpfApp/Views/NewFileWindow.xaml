@@ -7,6 +7,7 @@
         xmlns:localViewmodels="clr-namespace:WpfApp.ViewModels"
         mc:Ignorable="d"
         Title="NewFileWindow" Height="450" Width="600">
+
     <Window.DataContext>
         <localViewmodels:NewFileWindowViewModel/>
     </Window.DataContext>

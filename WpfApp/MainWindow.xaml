@@ -22,10 +22,8 @@
         WindowStartupLocation="CenterScreen"
         BorderThickness="1"
         ResizeMode="CanResizeWithGrip"
-        WindowState="Maximized">
-    <Window.DataContext>
-        <localViewModels:MainWindowViewModel/>
-    </Window.DataContext>
+        WindowState="Maximized"
+    DataContext="{Binding Main, Source={StaticResource Locator}}">
 
     <Window.Resources>
         <ResourceDictionary>

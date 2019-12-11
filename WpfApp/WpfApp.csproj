@@ -107,10 +107,10 @@
       <DependentUpon>AlarmCodes.resx</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\AlarmListViewModel.cs" />
-    <Compile Include="ViewModels\MainWindowViewModel.cs" />
+    <Compile Include="ViewModels\DocumentViewModel.cs" />
     <Compile Include="ViewModels\NewFileWindowViewModel.cs" />
-    <Compile Include="ViewModel\MainViewModel.cs" />
-    <Compile Include="ViewModel\ViewModelLocator.cs" />
+    <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="ViewModels\ViewModelLocator.cs" />
     <Compile Include="Views\AlarmList.xaml.cs">
       <DependentUpon>AlarmList.xaml</DependentUpon>
     </Compile>
@@ -212,6 +212,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\typec24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="ViewModel\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

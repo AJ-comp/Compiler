@@ -3,7 +3,7 @@ using System;
 
 namespace WpfApp.Models
 {
-    class AlarmData
+    public class AlarmData
     {
         public AlarmStatus Status { get; }
 

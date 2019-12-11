@@ -7,7 +7,7 @@ using WpfApp.Models;
 
 namespace WpfApp.ViewModels
 {
-    class AlarmListViewModel : ViewModelBase
+    public class AlarmListViewModel : ViewModelBase
     {
         public ObservableCollection<AlarmData> AlarmLists { get; } = new ObservableCollection<AlarmData>();
 
