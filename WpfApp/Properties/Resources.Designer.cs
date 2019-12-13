@@ -79,6 +79,15 @@ namespace WpfApp.Properties {
         }
         
         /// <summary>
+        ///   Cancel과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        internal static string Cancel {
+            get {
+                return ResourceManager.GetString("Cancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Canonical Table과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         internal static string CanonicalTable {
@@ -193,6 +202,15 @@ namespace WpfApp.Properties {
         internal static string New {
             get {
                 return ResourceManager.GetString("New", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Open과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        internal static string Open {
+            get {
+                return ResourceManager.GetString("Open", resourceCulture);
             }
         }
         

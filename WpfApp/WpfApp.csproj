@@ -96,11 +96,12 @@
     </ApplicationDefinition>
     <Compile Include="Behaviors\AlarmListViewModelBehavior.cs" />
     <Compile Include="Behaviors\WindowLoadBehavior.cs" />
+    <Compile Include="Converters\WindowCloseLogicConverter.cs" />
     <Compile Include="Converters\EnumToImageConverter.cs" />
     <Compile Include="Converters\EventArgsConverterExtension.cs" />
     <Compile Include="Converters\MouseDoubleClickIndexConverter.cs" />
     <Compile Include="Models\AlarmData.cs" />
-    <Compile Include="Models\NewFileData.cs" />
+    <Compile Include="Models\Document.cs" />
     <Compile Include="Properties\AlarmCodes.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -214,7 +215,7 @@
     <Resource Include="Resources\typec24.png" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="ViewModel\" />
+    <Folder Include="Resources\DataTemplates\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

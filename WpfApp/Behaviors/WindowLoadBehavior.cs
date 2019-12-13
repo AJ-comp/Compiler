@@ -1,4 +1,5 @@
-﻿using Parse.FrontEnd.Parsers.Collections;
+﻿using CommonServiceLocator;
+using Parse.FrontEnd.Parsers.Collections;
 using Parse.WpfControls;
 using Parse.WpfControls.SyntaxEditor.EventArgs;
 using System;
@@ -73,15 +74,19 @@ namespace WpfApp.Behaviors
         {
             mainVm.NewFileAction = (() =>
             {
-                //                NewFileWindow window = new NewFileWindow();
-                //                window.ShowDialog();
+                NewFileWindow window = new NewFileWindow();
+                var vm = window.DataContext as NewFileWindowViewModel;
 
-                new NewFileWindowViewModel();
+                vm.CreateRequest -= OnDocumentCreate;
+                vm.CreateRequest += OnDocumentCreate;
+
+                window.ShowDialog();
             });
 
             mainVm.GrammarAction = (() =>
             {
                 Window window = new Window();
+                window.WindowStartupLocation = WindowStartupLocation.CenterScreen;
 
                 Grid grid = new Grid();
                 System.Windows.Controls.TextBox textBox = new System.Windows.Controls.TextBox();
@@ -98,6 +103,7 @@ namespace WpfApp.Behaviors
             mainVm.CanonicalTableAction = (() =>
             {
                 Window window = new Window();
+                window.WindowStartupLocation = WindowStartupLocation.CenterScreen;
 
                 Grid grid = new Grid();
                 System.Windows.Controls.TextBox textBox = new System.Windows.Controls.TextBox();
@@ -128,7 +134,7 @@ namespace WpfApp.Behaviors
 
                 tabItem.Content = winformControl;
 
-                this.mainWindow.tablControl.Items.Add(tabItem);
+                this.mainWindow.tabControl.Items.Add(tabItem);
             });
 
             mainVm.ParsingHistoryAction = (() =>
@@ -148,8 +154,19 @@ namespace WpfApp.Behaviors
 
                 tabItem.Content = winformControl;
 
-                this.mainWindow.tablControl.Items.Add(tabItem);
+                this.mainWindow.tabControl.Items.Add(tabItem);
             });
+        }
+
+        private void OnDocumentCreate(object sender, Document e)
+        {
+            var mainVm = this.mainWindow.DataContext as MainViewModel;
+
+            var newDocument = new DocumentViewModel();
+            newDocument.Document = e;
+            mainVm.Documents.Add(newDocument);
+
+
         }
 
         private void TabItem_GotFocus(object sender, RoutedEventArgs e)

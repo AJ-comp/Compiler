@@ -14,6 +14,7 @@
 
 using CommonServiceLocator;
 using GalaSoft.MvvmLight.Ioc;
+using GalaSoft.MvvmLight.Messaging;
 
 namespace WpfApp.ViewModels
 {
@@ -42,6 +43,7 @@ namespace WpfApp.ViewModels
             ////}
 
             SimpleIoc.Default.Register<MainViewModel>();
+            SimpleIoc.Default.Register<NewFileWindowViewModel>();
         }
 
         public MainViewModel Main
@@ -51,7 +53,22 @@ namespace WpfApp.ViewModels
                 return ServiceLocator.Current.GetInstance<MainViewModel>();
             }
         }
-        
+
+        public NewFileWindowViewModel NewFileWindow
+        {
+            get
+            {
+                var result = ServiceLocator.Current.GetInstance<NewFileWindowViewModel>();
+//                result.CancelRequest += (() => )
+
+                return result;
+            }            
+        }
+
+        private void NotifyUserMethod(NotificationMessage message)
+        {
+        }
+
         public static void Cleanup()
         {
             // TODO Clear the ViewModels

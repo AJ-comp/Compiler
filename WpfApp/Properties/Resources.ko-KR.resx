@@ -177,4 +177,10 @@
   <data name="MiniCFileExplain" xml:space="preserve">
     <value>Mini C 파일을 생성합니다</value>
   </data>
+  <data name="Open" xml:space="preserve">
+    <value>열기</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>취소</value>
+  </data>
 </root>

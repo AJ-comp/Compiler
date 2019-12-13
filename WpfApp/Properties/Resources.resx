@@ -190,4 +190,10 @@
   <data name="MiniCFileExplain" xml:space="preserve">
     <value>It generates the Mini C file</value>
   </data>
+  <data name="Open" xml:space="preserve">
+    <value>Open</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
 </root>

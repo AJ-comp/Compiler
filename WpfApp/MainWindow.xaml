@@ -43,24 +43,20 @@
             <ContentControl Content="{StaticResource MainWindowStatusBar}"/>
         </DockPanel>
 
-        <TabControl Grid.Row="1" x:Name="tablControl"
-                    Background="Transparent"
-                    Foreground="WhiteSmoke">
+        <DockPanel DockPanel.Dock="Bottom">
+            <view:AlarmList DataContext="{Binding AlarmListVM}" Height="120"/>
+        </DockPanel>
+
+        <TabControl Grid.Row="1" x:Name="tabControl"
+                            Background="Transparent" Foreground="WhiteSmoke">
             <wpfcontrols:ClosableTab Title="Editor">
                 <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="4*"/>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="auto"/>
-                    </Grid.RowDefinitions>
-
-                    <syntaxeditor:SyntaxEditor x:Name="syntaxEditor"  Grid.Row="0"
+                    <syntaxeditor:SyntaxEditor x:Name="syntaxEditor"
                                         FontSize="15" 
                                         FontFamily="Arial"
                                         IsLineNumberingVisible="True"  LineNumberForeColor="DarkGreen"
                                         KeywordForeground="Blue"
-                                        LineCommentForeground="ForestGreen"
-                                        >
+                                        LineCommentForeground="ForestGreen">
 
                         <!--<i:Interaction.Triggers>
                             <i:EventTrigger EventName="TextBoxBase.TextChanged">
@@ -69,10 +65,6 @@
                         </i:Interaction.Triggers>-->
 
                     </syntaxeditor:SyntaxEditor>
-
-                    <Grid Grid.Row="1">
-                        <view:AlarmList DataContext="{Binding AlarmListVM}"/>
-                    </Grid>
                 </Grid>
                 <!--                <syntaxeditor:SyntaxEditor Name="editor" IsLineNumberMarginVisible="True" 
                                            IsOutliningMarginVisible="True"

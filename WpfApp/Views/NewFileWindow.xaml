@@ -5,30 +5,53 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp.Views"
         xmlns:localViewmodels="clr-namespace:WpfApp.ViewModels"
+        xmlns:localConverters="clr-namespace:WpfApp.Converters"
+        xmlns:lex="http://wpflocalizeextension.codeplex.com" 
         mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
+        DataContext="{Binding NewFileWindow, Source={StaticResource Locator}}"
         Title="NewFileWindow" Height="450" Width="600">
 
-    <Window.DataContext>
-        <localViewmodels:NewFileWindowViewModel/>
-    </Window.DataContext>
-
     <Grid>
-        <ListBox ItemsSource="{Binding NewFileDataCollection}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="30"/>
+        </Grid.RowDefinitions>
+        
+        <ListBox ItemsSource="{Binding NewFileDataCollection}" HorizontalContentAlignment="Stretch">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <VirtualizingStackPanel Name="vStack" Orientation="Horizontal">
-                        <Image Source="{Binding ImageSource}"  Width="48" Height="48" Margin="0,0,2,0"/>
-                        <TextBlock Text="{Binding ItemName}" Width="100"/>
-                        <TextBlock Text="{Binding Explain}" FontSize="8"/>
-                    </VirtualizingStackPanel>
+                    <Border x:Name="border" BorderThickness="1" VerticalAlignment="Stretch">
+                        <VirtualizingStackPanel Name="vStack" Orientation="Horizontal">
+                            <Image Source="{Binding ImageSource}"  Width="48" Height="48" Margin="0,0,2,0"/>
+                            <TextBlock Text="{Binding ItemName}" Width="100"/>
+                            <TextBlock Text="{Binding Explain}" FontSize="8"/>
+                        </VirtualizingStackPanel>
+                    </Border>
                     <DataTemplate.Triggers>
                         <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ListBoxItem}},Path=IsSelected}" Value="True">
                             <!--<Setter TargetName="vStack" Property="Background" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>-->
-                            <Setter TargetName="vStack" Property="Background" Value="Yellow"/>
+                            <Setter TargetName="border" Property="Background" Value="Yellow"/>
                         </DataTrigger>
                     </DataTemplate.Triggers>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
+
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button MinWidth="80" Height="20" Margin="0, 0, 10, 0" 
+                    Content="{lex:Loc Key=Open}" 
+                    Command="{Binding CreateCommand}"
+                    CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, 
+                    AncestorType={x:Type local:NewFileWindow}}, 
+                    Converter={localConverters:WindowCloseLogicConverter}}"/>
+            
+            <Button MinWidth="80" Height="20" Margin="0, 0, 10, 0"
+                    Content="{lex:Loc Key=Cancel}"
+                    Command="{Binding CancelCommand}"
+                    CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, 
+                    AncestorType={x:Type local:NewFileWindow}}, 
+                    Converter={localConverters:WindowCloseLogicConverter}}"/>
+        </StackPanel>
     </Grid>
 </Window>
