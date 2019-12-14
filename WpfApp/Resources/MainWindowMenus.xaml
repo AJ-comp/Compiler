@@ -17,8 +17,6 @@
         <MenuItem Header="{lex:Loc Key=_Edit}" InputGestureText="Alt+E"/>
         <MenuItem Header="{lex:Loc Key=View}" InputGestureText="Alt+V">
             <MenuItem Header="{lex:Loc Key=Grammar}" InputGestureText="Alt+G" Command="{Binding GrammarCommand}"/>
-            <MenuItem Header="{lex:Loc Key=CanonicalTable}" InputGestureText="Alt+C" Command="{Binding CanonicalTableCommand}"/>
-            <MenuItem Header="{lex:Loc Key=ParsingTable}" InputGestureText="Ctrl+Shift+P" Command="{Binding ParsingTableCommand}"/>
             <MenuItem Header="{lex:Loc Key=ParsingHistory}" InputGestureText="Ctrl+Shift+H" Command="{Binding ParsingHistoryCommand}"/>
             <MenuItem Header="{lex:Loc Key=ParseTree}" InputGestureText="Ctrl+Shift+T" Command="{Binding ParseTreeCommand}"/>
         </MenuItem>

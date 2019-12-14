@@ -44,6 +44,8 @@ namespace WpfApp.ViewModels
 
             SimpleIoc.Default.Register<MainViewModel>();
             SimpleIoc.Default.Register<NewFileWindowViewModel>();
+            SimpleIoc.Default.Register<DocumentViewModel>();
+            SimpleIoc.Default.Register<GrammarInfoViewModel>();
         }
 
         public MainViewModel Main
@@ -63,6 +65,16 @@ namespace WpfApp.ViewModels
 
                 return result;
             }            
+        }
+
+        public DocumentViewModel Document
+        {
+            get => ServiceLocator.Current.GetInstance<DocumentViewModel>();
+        }
+
+        public GrammarInfoViewModel GrammarInfo
+        {
+            get => ServiceLocator.Current.GetInstance<GrammarInfoViewModel>();
         }
 
         private void NotifyUserMethod(NotificationMessage message)

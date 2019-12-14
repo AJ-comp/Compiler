@@ -94,8 +94,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AttachedProperties\WindowsFormsHostMap.cs" />
     <Compile Include="Behaviors\AlarmListViewModelBehavior.cs" />
+    <Compile Include="Behaviors\DataGridViewAllocateBehavior.cs" />
     <Compile Include="Behaviors\WindowLoadBehavior.cs" />
+    <Compile Include="Converters\GrammarToLRParserConverter.cs" />
     <Compile Include="Converters\WindowCloseLogicConverter.cs" />
     <Compile Include="Converters\EnumToImageConverter.cs" />
     <Compile Include="Converters\EventArgsConverterExtension.cs" />
@@ -109,11 +112,15 @@
     </Compile>
     <Compile Include="ViewModels\AlarmListViewModel.cs" />
     <Compile Include="ViewModels\DocumentViewModel.cs" />
+    <Compile Include="ViewModels\GrammarInfoViewModel.cs" />
     <Compile Include="ViewModels\NewFileWindowViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\ViewModelLocator.cs" />
     <Compile Include="Views\AlarmList.xaml.cs">
       <DependentUpon>AlarmList.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\GrammarInfoWindow.xaml.cs">
+      <DependentUpon>GrammarInfoWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\NewFileWindow.xaml.cs">
       <DependentUpon>NewFileWindow.xaml</DependentUpon>
@@ -130,6 +137,14 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Resources\DataTemplates\DocumentTemplate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\DataTemplates\EtcTemplate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Resources\MainWindowStatusBar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -139,6 +154,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\AlarmList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\GrammarInfoWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -214,8 +233,6 @@
   <ItemGroup>
     <Resource Include="Resources\typec24.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Resources\DataTemplates\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

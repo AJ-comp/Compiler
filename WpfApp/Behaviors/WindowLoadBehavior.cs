@@ -1,5 +1,4 @@
-﻿using CommonServiceLocator;
-using Parse.FrontEnd.Parsers.Collections;
+﻿using Parse.FrontEnd.Parsers.Collections;
 using Parse.WpfControls;
 using Parse.WpfControls.SyntaxEditor.EventArgs;
 using System;
@@ -85,67 +84,28 @@ namespace WpfApp.Behaviors
 
             mainVm.GrammarAction = (() =>
             {
-                Window window = new Window();
-                window.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+                GrammarInfoWindow window = new GrammarInfoWindow();
+                var vm = window.DataContext as GrammarInfoViewModel;
+                vm.Grammars.Add(new Parse.FrontEnd.Grammars.MiniC.MiniCGrammar());
 
-                Grid grid = new Grid();
-                System.Windows.Controls.TextBox textBox = new System.Windows.Controls.TextBox();
-                textBox.Text = this.mainWindow.syntaxEditor.Parser.Grammar.ToString();
-                textBox.VerticalScrollBarVisibility = ScrollBarVisibility.Auto;
-                textBox.HorizontalScrollBarVisibility = ScrollBarVisibility.Auto;
-                textBox.IsReadOnly = true;
-                grid.Children.Add(textBox);
-                window.Content = grid;
-
-                window.Show();
-            });
-
-            mainVm.CanonicalTableAction = (() =>
-            {
-                Window window = new Window();
-                window.WindowStartupLocation = WindowStartupLocation.CenterScreen;
-
-                Grid grid = new Grid();
-                System.Windows.Controls.TextBox textBox = new System.Windows.Controls.TextBox();
-                textBox.Text = this.mainWindow.syntaxEditor.Parser.C0.ToString();
-                textBox.VerticalScrollBarVisibility = ScrollBarVisibility.Auto;
-                textBox.HorizontalScrollBarVisibility = ScrollBarVisibility.Auto;
-                textBox.IsReadOnly = true;
-                grid.Children.Add(textBox);
-                window.Content = grid;
-
-                window.Show();
-            });
-
-            mainVm.ParsingTableAction = (() =>
-            {
-                var tabItem = new ClosableTab();
-                tabItem.Title = Properties.Resources.ParsingTable;
-                var winformControl = new WindowsFormsHost();
-                winformControl.VerticalAlignment = VerticalAlignment.Stretch;
-                winformControl.HorizontalAlignment = System.Windows.HorizontalAlignment.Stretch;
-
-                winformControl.Child = new DataGridView();
-                DataGridView parsingTableView = winformControl.Child as DataGridView;
-                parsingTableView.EditMode = DataGridViewEditMode.EditProgrammatically;
-                parsingTableView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
-                parsingTableView.DataSource = mainWindow.syntaxEditor.Parser.ParsingTable;
-                parsingTableView.CellMouseEnter += new DataGridViewCellEventHandler(this.tableGridView_CellMouseEnter);
-
-                tabItem.Content = winformControl;
-
-                this.mainWindow.tabControl.Items.Add(tabItem);
+                window.ShowDialog();
             });
 
             mainVm.ParsingHistoryAction = (() =>
             {
-                var tabItem = new ClosableTab();
-                tabItem.Title = Properties.Resources.ParsingHistory;
-                var winformControl = new WindowsFormsHost();
-                winformControl.VerticalAlignment = VerticalAlignment.Stretch;
-                winformControl.HorizontalAlignment = System.Windows.HorizontalAlignment.Stretch;
+                var tabItem = new ClosableTab
+                {
+                    Title = Properties.Resources.ParsingHistory
+                };
 
-                winformControl.Child = new DataGridView();
+                var winformControl = new WindowsFormsHost
+                {
+                    VerticalAlignment = VerticalAlignment.Stretch,
+                    HorizontalAlignment = System.Windows.HorizontalAlignment.Stretch,
+
+                    Child = new DataGridView()
+                };
+
                 DataGridView parsingHistoryView = winformControl.Child as DataGridView;
                 parsingHistoryView.EditMode = DataGridViewEditMode.EditProgrammatically;
                 parsingHistoryView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
@@ -163,7 +123,6 @@ namespace WpfApp.Behaviors
             var mainVm = this.mainWindow.DataContext as MainViewModel;
 
             var newDocument = new DocumentViewModel();
-            newDocument.Document = e;
             mainVm.Documents.Add(newDocument);
 
 
@@ -188,8 +147,10 @@ namespace WpfApp.Behaviors
                 if (item.Status == AlarmStatus.None) continue;
 
                 var message = string.Format(AlarmCodes.CE0000, item.ParsingFailedArgs.PossibleSet.ToString());
-                var alarmData = new AlarmData(sender, item.Status, AlarmCodes.CE0000, message, item.ProjectName, item.FileName, item.TokenIndex, item.Line);
-                alarmData.IndicateLogic = this.mainWindow.syntaxEditor.TextArea.MoveCaretToToken;
+                var alarmData = new AlarmData(sender, item.Status, AlarmCodes.CE0000, message, item.ProjectName, item.FileName, item.TokenIndex, item.Line)
+                {
+                    IndicateLogic = this.mainWindow.syntaxEditor.TextArea.MoveCaretToToken
+                };
                 alarmList.Add(alarmData);
             }
 
@@ -206,7 +167,7 @@ namespace WpfApp.Behaviors
             return result;
         }
 
-        private void tableGridView_CellMouseEnter(object sender, DataGridViewCellEventArgs e)
+        private void TableGridView_CellMouseEnter(object sender, DataGridViewCellEventArgs e)
         {
             if (this.recentColIdx == e.ColumnIndex && this.recentRowIdx == e.RowIndex) return;
             this.recentColIdx = e.ColumnIndex;

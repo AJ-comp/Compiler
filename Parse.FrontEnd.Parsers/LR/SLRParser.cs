@@ -137,8 +137,10 @@ namespace Parse.FrontEnd.Parsers.LR
             if (args.InputValue.Kind == new EndMarker())
             {
                 args.ErrorPosition = ErrorPosition.OnEndMarker;
-                args = new ParsingFailedEventArgs(args.PrevStack, args.CurrentStack, this.prevToken, args.ActionData, args.PossibleSet);
-                args.ErrorIndex = this.curTokenIndex - 1;   // because prev token index
+                args = new ParsingFailedEventArgs(args.PrevStack, args.CurrentStack, this.prevToken, args.ActionData, args.PossibleSet)
+                {
+                    ErrorIndex = this.curTokenIndex - 1   // because prev token index
+                };
             }
             else
             {

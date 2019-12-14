@@ -1,5 +1,8 @@
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using Parse.FrontEnd.Grammars;
+using Parse.FrontEnd.Grammars.MiniC;
+using Parse.FrontEnd.Grammars.PracticeGrammars;
 using System;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
@@ -45,6 +48,10 @@ namespace WpfApp.ViewModels
                     document.RequestClose -= Document_RequestClose;
         }
 
+        public ViewModelBase ActivatedDialog { get; }
+
+        public Collection<Grammar> SupplyGrammars = new Collection<Grammar>();
+
         private void Document_RequestClose(object sender, EventArgs e) => this._documents.Remove(sender as DocumentViewModel);
 
         public AlarmListViewModel AlarmListVM { get; } = new AlarmListViewModel();
@@ -52,8 +59,6 @@ namespace WpfApp.ViewModels
         public Action NewFileAction = null;
         public Action NewProjectAction = null;
         public Action GrammarAction = null;
-        public Action CanonicalTableAction = null;
-        public Action ParsingTableAction = null;
         public Action ParsingHistoryAction = null;
         public Action ParseTreeAction = null;
 
@@ -78,30 +83,6 @@ namespace WpfApp.ViewModels
                     _grammarCommand = new RelayCommand(this.OnGrammar);
 
                 return _grammarCommand;
-            }
-        }
-
-        private RelayCommand _canonicalTableCommand;
-        public RelayCommand CanonicalTableCommand
-        {
-            get
-            {
-                if (_canonicalTableCommand == null)
-                    _canonicalTableCommand = new RelayCommand(this.OnCanonicalTable);
-
-                return _canonicalTableCommand;
-            }
-        }
-
-        private RelayCommand _parsingTableCommand;
-        public RelayCommand ParsingTableCommand
-        {
-            get
-            {
-                if (_parsingTableCommand == null)
-                    _parsingTableCommand = new RelayCommand(this.OnParsingTable);
-
-                return _parsingTableCommand;
             }
         }
 
@@ -131,8 +112,6 @@ namespace WpfApp.ViewModels
 
         private void OnNewFile() => this.NewFileAction?.Invoke();
         private void OnGrammar() => this.GrammarAction?.Invoke();
-        private void OnCanonicalTable() => this.CanonicalTableAction?.Invoke();
-        private void OnParsingTable() => this.ParsingTableAction?.Invoke();
         private void OnParsingHistory() => this.ParsingHistoryAction?.Invoke();
         private void OnParseTree() => this.ParseTreeAction?.Invoke();
 
@@ -141,6 +120,9 @@ namespace WpfApp.ViewModels
         /// </summary>
         public MainViewModel()
         {
+            this.SupplyGrammars.Add(new MiniCGrammar());
+            this.SupplyGrammars.Add(new LRTest1Grammar());
+
             if (IsInDesignMode)
             {
                 // Code runs in Blend --> create design time data.

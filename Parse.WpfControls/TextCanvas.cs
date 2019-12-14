@@ -62,10 +62,12 @@ namespace Parse.WpfControls
             {
                 TextDecorationCollection textDecorations = new TextDecorationCollection();
 
-                TextDecoration underline = new TextDecoration();
-                underline.Location = TextDecorationLocation.Underline;
-                underline.Pen = new Pen(Brushes.Red, 1);
-                underline.PenThicknessUnit = TextDecorationUnit.FontRecommended;
+                TextDecoration underline = new TextDecoration
+                {
+                    Location = TextDecorationLocation.Underline,
+                    Pen = new Pen(Brushes.Red, 1),
+                    PenThicknessUnit = TextDecorationUnit.FontRecommended
+                };
 
                 textDecorations.Add(underline);
 

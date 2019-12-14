@@ -70,6 +70,7 @@
                                            IsOutliningMarginVisible="True"
                                            DocumentTextChanged="editor_DocumentTextChanged"/>-->
             </wpfcontrols:ClosableTab>
+            <wpfcontrols:ClosableTab Title="Editor2" Content="{Binding Document, Source={StaticResource Locator}}"/>
         </TabControl>
 
     </DockPanel>

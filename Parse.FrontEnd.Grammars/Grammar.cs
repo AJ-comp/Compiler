@@ -32,6 +32,18 @@ namespace Parse.FrontEnd.Grammars
         public string VarLetterPattern { get; } = "[_a-zA-Z]";
         public string DigitPattern { get; } = "[0-9]+";
 
+        public string EbnfExpression
+        {
+            get
+            {
+                string result = string.Empty;
+
+                foreach (var symbol in this.NonTerminalMultiples) result += symbol.ToGrammarString() + Environment.NewLine;
+
+                return result;
+            }
+        }
+
         public Grammar()
         {
 //            this.Tokens.IdPattern = varLetter + "[_a-zA-Z0-9]*";
@@ -216,14 +228,7 @@ namespace Parse.FrontEnd.Grammars
         }
 
 
-        public override string ToString()
-        {
-            string result = string.Empty;
-
-            foreach (var symbol in this.NonTerminalMultiples) result += symbol.ToGrammarString() + Environment.NewLine;
-
-            return result;
-        }
+        public override string ToString() => this.GetType().Name;
     }
 
 
