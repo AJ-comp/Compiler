@@ -190,7 +190,9 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="packages.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -219,6 +221,14 @@
     <ProjectReference Include="..\Parse\Parse.FrontEnd.csproj">
       <Project>{54EC5CEA-8D91-4165-9EBB-6A0693A96C4F}</Project>
       <Name>Parse.FrontEnd</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Wpf.UI.Themes\Wpf.UI.BlueTheme\Wpf.UI.BlueTheme.csproj">
+      <Project>{fd4818dc-866a-4eef-833c-895d65d0ecfb}</Project>
+      <Name>Wpf.UI.BlueTheme</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Wpf.UI.Themes\Wpf.UI.DarkTheme\Wpf.UI.DarkTheme.csproj">
+      <Project>{b7676b4f-9ee6-4c46-8af8-cf32033b15fb}</Project>
+      <Name>Wpf.UI.DarkTheme</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

@@ -11,12 +11,13 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Resources/DataTemplates/DocumentTemplate.xaml"/>
                 <ResourceDictionary Source="Resources/DataTemplates/EtcTemplate.xaml"/>
+                
+                <ResourceDictionary Source="/Wpf.UI.BlueTheme;component/ThemeResources.xaml" />
+                <ResourceDictionary Source="/Wpf.UI.DarkTheme;component/ThemeResources.xaml" />
+                
             </ResourceDictionary.MergedDictionaries>
+            
             <vm:ViewModelLocator x:Key="Locator" d:IsDataSource="True" xmlns:vm="clr-namespace:WpfApp.ViewModels" />
-
-            <DataTemplate DataType="{x:Type localViewModels:NewFileWindowViewModel}">
-                <localViews:NewFileWindow/>
-            </DataTemplate>
 
         </ResourceDictionary>
     </Application.Resources>

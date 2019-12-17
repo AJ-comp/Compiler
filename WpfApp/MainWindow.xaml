@@ -14,7 +14,7 @@
     xmlns:localViewModels="clr-namespace:WpfApp.ViewModels"
     xmlns:view="clr-namespace:WpfApp.Views"
     xmlns:lex="http://wpflocalizeextension.codeplex.com" 
-        lex:LocalizeDictionary.DesignCulture="en"
+    lex:LocalizeDictionary.DesignCulture="en"
       lex:ResxLocalizationProvider.DefaultAssembly="WpfApp"
       lex:ResxLocalizationProvider.DefaultDictionary="Resources"
     mc:Ignorable="d"
@@ -23,6 +23,9 @@
         BorderThickness="1"
         ResizeMode="CanResizeWithGrip"
         WindowState="Maximized"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Style="{DynamicResource MainWindow}"
     DataContext="{Binding Main, Source={StaticResource Locator}}">
 
     <Window.Resources>
@@ -48,7 +51,8 @@
         </DockPanel>
 
         <TabControl Grid.Row="1" x:Name="tabControl"
-                            Background="Transparent" Foreground="WhiteSmoke">
+                            Background="Transparent" Foreground="WhiteSmoke" 
+                            >
             <wpfcontrols:ClosableTab Title="Editor">
                 <Grid>
                     <syntaxeditor:SyntaxEditor x:Name="syntaxEditor"
@@ -58,19 +62,9 @@
                                         KeywordForeground="Blue"
                                         LineCommentForeground="ForestGreen">
 
-                        <!--<i:Interaction.Triggers>
-                            <i:EventTrigger EventName="TextBoxBase.TextChanged">
-                                <mvvm:EventToCommand Command="{Binding TextChangedCommand}" PassEventArgsToCommand="True"/>
-                            </i:EventTrigger>
-                        </i:Interaction.Triggers>-->
-
                     </syntaxeditor:SyntaxEditor>
                 </Grid>
-                <!--                <syntaxeditor:SyntaxEditor Name="editor" IsLineNumberMarginVisible="True" 
-                                           IsOutliningMarginVisible="True"
-                                           DocumentTextChanged="editor_DocumentTextChanged"/>-->
             </wpfcontrols:ClosableTab>
-            <wpfcontrols:ClosableTab Title="Editor2" Content="{Binding Document, Source={StaticResource Locator}}"/>
         </TabControl>
 
     </DockPanel>

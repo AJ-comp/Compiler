@@ -6,7 +6,13 @@
                     xmlns:lex="http://wpflocalizeextension.codeplex.com" 
                     xmlns:wpfcontrolConverters="clr-namespace:Parse.WpfControls.Converters;assembly=Parse.WpfControls"
                     xmlns:local="clr-namespace:WpfApp.Resources.DataTemplates"
+                    xmlns:localViewModels="clr-namespace:WpfApp.ViewModels"
+                    xmlns:localViews="clr-namespace:WpfApp.Views"
                     xmlns:localAP="clr-namespace:WpfApp.AttachedProperties">
+
+    <DataTemplate DataType="{x:Type localViewModels:NewFileWindowViewModel}">
+        <localViews:NewFileWindow/>
+    </DataTemplate>
 
     <DataTemplate DataType="{x:Type parsers:SLRParser}">
         <TabControl>
