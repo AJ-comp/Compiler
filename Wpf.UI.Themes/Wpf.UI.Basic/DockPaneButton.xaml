@@ -1,6 +1,6 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:local="clr-namespace:Wpf.UI.BlueTheme">
+                    xmlns:local="clr-namespace:Wpf.UI.Basic">
 
     <!-- DockPane button style -->
     <Style x:Key="DockPaneButton" TargetType="{x:Type ButtonBase}" BasedOn="{StaticResource FlatButton}">

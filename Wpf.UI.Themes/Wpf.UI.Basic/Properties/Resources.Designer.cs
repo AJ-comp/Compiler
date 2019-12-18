@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Wpf.UI.BlueTheme.Properties {
+namespace Wpf.UI.Basic.Properties {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace Wpf.UI.BlueTheme.Properties {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Wpf.UI.BlueTheme.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Wpf.UI.Basic.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -93,9 +93,9 @@ namespace Wpf.UI.BlueTheme.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
-        internal static System.Drawing.Bitmap Restore {
+        internal static System.Drawing.Bitmap NormalWindow {
             get {
-                object obj = ResourceManager.GetObject("Restore", resourceCulture);
+                object obj = ResourceManager.GetObject("NormalWindow", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

@@ -1,0 +1,17 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:Wpf.UI.Basic">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/Wpf.UI.Basic;component/DarkTheme/CommonBrushes.xaml" />
+        <ResourceDictionary Source="/Wpf.UI.Basic;component/DarkTheme/ButtonBrushes.xaml" />
+        <ResourceDictionary Source="/Wpf.UI.Basic;component/DarkTheme/WindowBrushes.xaml" />
+        
+        <ResourceDictionary Source="/Wpf.UI.Basic;component/DarkTheme/WindowImages.xaml" />
+
+        <ResourceDictionary Source="/Wpf.UI.Basic;component/FlatButton.xaml" />
+        <ResourceDictionary Source="/Wpf.UI.Basic;component/DockPaneButton.xaml" />
+        <ResourceDictionary Source="/Wpf.UI.Basic;component/Window.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
+</ResourceDictionary>

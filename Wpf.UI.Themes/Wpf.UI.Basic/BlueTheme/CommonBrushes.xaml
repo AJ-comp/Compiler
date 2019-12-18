@@ -1,7 +1,11 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:local="clr-namespace:Wpf.UI.BlueTheme">
-    
+                    xmlns:local="clr-namespace:Wpf.UI.Basic">
+
+    <!-- The text color of the this theme -->
+    <SolidColorBrush x:Key="ActiveTextBrush" Color="Black" />
+    <SolidColorBrush x:Key="InActiveTextBrush" Color="Gray" />
+
     <!-- Background for the footer of the dialog box -->
     <SolidColorBrush x:Key="DialogFooterBrush" Color="#FFE6E8E9" />
 
@@ -28,40 +32,8 @@
         </DrawingBrush.Drawing>
     </DrawingBrush>
 
-    <!-- Main window border brush -->
-    <SolidColorBrush x:Key="MainWindowBorderBrush" Color="#ACA3A3A3" />
 
-    <!-- Main window background brush -->
-    <LinearGradientBrush x:Key="MainWindowBackgroundBrush" EndPoint="0.5,0.5" StartPoint="0.5,0" SpreadMethod="Reflect">
-        <GradientStop Color="#FFA3D7FF" />
-        <GradientStop Color="#FFF2F9FF" Offset="1" />
-    </LinearGradientBrush>
 
-    <!-- Main window title bar's separator's brush -->
-    <LinearGradientBrush x:Key="MainWindowTitleBarSeparator" EndPoint="0.5,0.25" SpreadMethod="Reflect">
-        <GradientStop Color="#FFA3D7FF" />
-        <GradientStop Color="#33FFFFFF" Offset="1" />
-    </LinearGradientBrush>
-
-    <!-- Normal background for flat button -->
-    <LinearGradientBrush x:Key="FlatButtonNormalBackground" EndPoint="0,1" StartPoint="0,0">
-        <GradientStop Color="#F3F3F3" Offset="0" />
-        <GradientStop Color="#EBEBEB" Offset="0.5" />
-        <GradientStop Color="#DDDDDD" Offset="0.5" />
-        <GradientStop Color="#CDCDCD" Offset="1" />
-    </LinearGradientBrush>
-
-    <!-- Normal border brush for flat button -->
-    <SolidColorBrush x:Key="FlatButtonNormalBorder" Color="#FF707070" />
-
-    <!-- Hover background for flat button -->
-    <SolidColorBrush x:Key="FlatButtonHoverBackgroundBrush" Color="#FFC5E4FC" />
-
-    <!-- Hover border brush for flat button -->
-    <SolidColorBrush x:Key="FlatButtonHoverBorderBrush" Color="#FFA5BCF8" />
-
-    <!-- Disabled text color for flat button -->
-    <SolidColorBrush x:Key="FlatButtonDisabledForegroundBrush" Color="#ADADAD" />
 
     <!-- Backgound brush for dock pane header -->
     <SolidColorBrush x:Key="DockPaneBackgroundBrush" Color="#FF293955" />

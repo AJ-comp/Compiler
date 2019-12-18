@@ -305,10 +305,11 @@ namespace Parse.WpfControls
                 foreBrush = this.textStyleDic[pattern].ForeGround;
 
             HighlightToken ft = new HighlightToken(text, CultureInfo.InvariantCulture, FlowDirection.LeftToRight,
-                new Typeface(FontFamily, FontStyle, FontWeight, FontStretch), this.FontSize, foreBrush, VisualTreeHelper.GetDpi(this).PixelsPerDip);
-
-            ft.Trimming = TextTrimming.None;
-            ft.LineHeight = this.LineHeight;
+                new Typeface(FontFamily, FontStyle, FontWeight, FontStretch), this.FontSize, foreBrush, VisualTreeHelper.GetDpi(this).PixelsPerDip)
+            {
+                Trimming = TextTrimming.None,
+                LineHeight = this.LineHeight
+            };
 
             if ((status & DrawOption.Selected) == DrawOption.Selected)
                 ft.AppearanceInfo.Selected = true;

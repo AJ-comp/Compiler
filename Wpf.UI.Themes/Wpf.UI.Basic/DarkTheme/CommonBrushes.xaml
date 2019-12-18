@@ -1,6 +1,10 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:local="clr-namespace:Wpf.UI.DarkTheme">
+                    xmlns:local="clr-namespace:Wpf.UI.Basic.DarkTheme">
+
+    <!-- The text color of the this theme -->
+    <SolidColorBrush x:Key="ActiveTextBrush" Color="WhiteSmoke" />
+    <SolidColorBrush x:Key="InActiveTextBrush" Color="DimGray" />
 
     <!-- Background for the footer of the dialog box -->
     <SolidColorBrush x:Key="DialogFooterBrush" Color="#FFE6E8E9" />

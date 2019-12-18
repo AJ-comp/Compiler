@@ -4,6 +4,7 @@
                     xmlns:local="clr-namespace:WpfApp.Resources">
     <Menu x:Key="MainWindowMenus"
           Background="Transparent"
+          Foreground="{DynamicResource ActiveTextBrush}"
           VerticalAlignment="Center"
           DockPanel.Dock="Left"
           HorizontalAlignment="Left"

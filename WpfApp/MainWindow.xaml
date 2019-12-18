@@ -1,4 +1,4 @@
-﻿<Window
+﻿<basicControls:CustomWindow
         x:Class="WpfApp.MainWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
@@ -6,6 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:basicControls="clr-namespace:Wpf.UI.Basic;assembly=Wpf.UI.Basic"
     xmlns:wpfcontrols="clr-namespace:Parse.WpfControls;assembly=Parse.WpfControls"
     xmlns:localConverters="clr-namespace:WpfApp.Converters"
     xmlns:converter="clr-namespace:Parse.WpfControls.Converters;assembly=Parse.WpfControls"
@@ -22,20 +23,18 @@
         WindowStartupLocation="CenterScreen"
         BorderThickness="1"
         ResizeMode="CanResizeWithGrip"
-        WindowState="Maximized"
-        WindowStyle="None"
-        AllowsTransparency="True"
+    TitleBarHeight="20"
         Style="{DynamicResource MainWindow}"
     DataContext="{Binding Main, Source={StaticResource Locator}}">
 
-    <Window.Resources>
+    <basicControls:CustomWindow.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Resources/MainWindowMenus.xaml"/>
                 <ResourceDictionary Source="Resources/MainWindowStatusBar.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
-    </Window.Resources>
+    </basicControls:CustomWindow.Resources>
 
     <DockPanel>
         <DockPanel DockPanel.Dock="Top">
@@ -74,4 +73,4 @@
         <behaviors:WindowLoadBehavior/>
     </i:Interaction.Behaviors>
 
-</Window>
+</basicControls:CustomWindow>
