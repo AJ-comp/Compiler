@@ -29,10 +29,8 @@
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Background" TargetName="border"
-                                    Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Background}" />
-                            <Setter Property="BorderBrush" TargetName="border"
-                                    Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=BorderBrush}" />
+                            <Setter Property="Background" TargetName="border" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Background}" />
+                            <Setter Property="BorderBrush" TargetName="border" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=BorderBrush}" />
                         </Trigger>
                         <Trigger Property="IsKeyboardFocused" Value="true" />
                         <Trigger Property="ToggleButton.IsChecked" Value="true" />

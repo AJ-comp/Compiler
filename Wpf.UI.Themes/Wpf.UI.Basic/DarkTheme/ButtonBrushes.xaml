@@ -2,6 +2,11 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:Wpf.UI.Basic.DarkTheme">
 
+    <!-- Global Defaults -->
+    <Style TargetType="{x:Type ButtonBase}" BasedOn="{StaticResource {x:Type ButtonBase}}">
+        <Setter Property="Background"  Value="Transparent" />
+    </Style>
+
     <!-- Normal background for flat button -->
     <LinearGradientBrush x:Key="FlatButtonNormalBackground" EndPoint="0,1" StartPoint="0,0">
         <GradientStop Color="#2C2C30" Offset="0" />

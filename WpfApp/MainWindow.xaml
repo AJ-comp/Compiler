@@ -50,8 +50,7 @@
         </DockPanel>
 
         <TabControl Grid.Row="1" x:Name="tabControl"
-                            Background="Transparent" Foreground="WhiteSmoke" 
-                            >
+                            Background="Transparent" Foreground="WhiteSmoke">
             <wpfcontrols:ClosableTab Title="Editor">
                 <Grid>
                     <syntaxeditor:SyntaxEditor x:Name="syntaxEditor"

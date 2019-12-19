@@ -2,13 +2,7 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:lex="http://wpflocalizeextension.codeplex.com" 
                     xmlns:local="clr-namespace:WpfApp.Resources">
-    <Menu x:Key="MainWindowMenus"
-          Background="Transparent"
-          Foreground="{DynamicResource ActiveTextBrush}"
-          VerticalAlignment="Center"
-          DockPanel.Dock="Left"
-          HorizontalAlignment="Left"
-          Margin="8,0,0,0">
+    <Menu x:Key="MainWindowMenus" VerticalAlignment="Center" DockPanel.Dock="Left" HorizontalAlignment="Left" Margin="8,0,0,0">
         <MenuItem Header="{lex:Loc Key=_File}" InputGestureText="Alt+F">
             <MenuItem Header="{lex:Loc Key=New}" InputGestureText="Alt+N">
                 <MenuItem Header="{lex:Loc Key=Project}" InputGestureText="Ctrl+Shift+N"/>

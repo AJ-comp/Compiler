@@ -6,6 +6,36 @@
     <SolidColorBrush x:Key="ActiveTextBrush" Color="WhiteSmoke" />
     <SolidColorBrush x:Key="InActiveTextBrush" Color="DimGray" />
 
+    <!-- Related to BackGround color -->
+    <SolidColorBrush x:Key="ActiveBackGroundBrush" Color="#2C2C30" />
+    <SolidColorBrush x:Key="InActiveBackGroundBrush" Color="#3f3f46" />
+
+    <!-- Related to Border color -->
+    <SolidColorBrush x:Key="ActiveBorderBrush" Color="#3f3f46" />
+    <SolidColorBrush x:Key="InActiveBorderBrush" Color="#3f3f46" />
+
+    <!-- Related to when hover -->
+    <SolidColorBrush x:Key="HoverBackgroundBrush" Color="#3f3f46" />
+    <SolidColorBrush x:Key="HoverBorderBrush" Color="#3f3f46" />
+
+    <SolidColorBrush x:Key="SolidBorderBrush" Color="#888" />
+    <SolidColorBrush x:Key="LightBorderBrush" Color="#AAA" />
+    
+    <SolidColorBrush x:Key="SelectedBackgroundBrush" Color="#3e3e40" />
+    <SolidColorBrush x:Key="SelectedBackgroundBrushType2" Color="#007acc" />
+
+    <LinearGradientBrush x:Key="PressedBrush" StartPoint="0,0" EndPoint="0,1">
+        <GradientBrush.GradientStops>
+            <GradientStopCollection>
+                <GradientStop Color="#BBB" Offset="0.0"/>
+                <GradientStop Color="#EEE" Offset="0.1"/>
+                <GradientStop Color="#EEE" Offset="0.9"/>
+                <GradientStop Color="#FFF" Offset="1.0"/>
+            </GradientStopCollection>
+        </GradientBrush.GradientStops>
+    </LinearGradientBrush>
+
+
     <!-- Background for the footer of the dialog box -->
     <SolidColorBrush x:Key="DialogFooterBrush" Color="#FFE6E8E9" />
 
