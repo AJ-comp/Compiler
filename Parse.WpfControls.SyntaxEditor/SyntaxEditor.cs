@@ -185,11 +185,11 @@ namespace Parse.WpfControls.SyntaxEditor
                 else if (terminal.TokenType == TokenType.Digit16)
                     this.TextArea.AddSyntaxHighLightInfo(terminal.Value, terminal, this.HexForeground, terminal.CanDerived);
                 else if (terminal.TokenType == TokenType.Operator)
-                    this.TextArea.AddSyntaxHighLightInfo(terminal.Value, terminal, Brushes.Black, terminal.CanDerived, true);
+                    this.TextArea.AddSyntaxHighLightInfo(terminal.Value, terminal, this.TextArea.DefaultTextBrush, terminal.CanDerived, true);
                 else if (terminal.TokenType == TokenType.Delimiter)
                     this.TextArea.AddSyntaxHighLightInfo(terminal.Value, terminal, Brushes.Black, terminal.CanDerived, true);
                 else if(terminal.TokenType == TokenType.Identifier)
-                    this.TextArea.AddSyntaxHighLightInfo(terminal.Value, terminal, Brushes.Black, terminal.CanDerived);
+                    this.TextArea.AddSyntaxHighLightInfo(terminal.Value, terminal, this.TextArea.DefaultTextBrush, terminal.CanDerived);
             }
 
             foreach (var delimiter in grammar.DelimiterDic)

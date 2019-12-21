@@ -25,7 +25,6 @@ namespace Parse.WpfControls
 
         /// <summary>For cache</summary>
         private bool bSingleCharacterAdded = false;
-
         /// <summary>This member means maximum showable line count at one go.</summary>
         private int maxViewLineOnce = 100;
 
@@ -83,6 +82,18 @@ namespace Parse.WpfControls
             TextBlock.SetLineStackingStrategy(area, LineStackingStrategy.BlockLineHeight);
             TextBlock.SetLineHeight(area, (double)args.NewValue);
         }
+
+
+        public Brush DefaultTextBrush
+        {
+            get { return (Brush)GetValue(DefaultTextBrushProperty); }
+            set { SetValue(DefaultTextBrushProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for DefaultTextBrush.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty DefaultTextBrushProperty =
+            DependencyProperty.Register("DefaultTextBrush", typeof(Brush), typeof(HighlightTextBox), new PropertyMetadata(Brushes.Black));
+
 
         public Brush SelectionLineBrush
         {
@@ -152,13 +163,6 @@ namespace Parse.WpfControls
 
 //            this.AddHandler(ListBox.MouseLeftButtonDownEvent, new RoutedEventHandler(this.OnMouseLeftClick), true);
 
-            Loaded += (s, e) =>
-            {
-                this.scrollViewer.ScrollChanged += OnScrollChanged;
-
-                InvalidateVisual();
-            };
-
             SizeChanged += (s, e) =>
             {
                 if (e.HeightChanged == false) return;
@@ -187,6 +191,8 @@ namespace Parse.WpfControls
 
             this.renderCanvas = (TextCanvas)Template.FindName("PART_RenderCanvas", this);
             this.scrollViewer = (ScrollViewer)Template.FindName("PART_ContentHost", this);
+
+            this.scrollViewer.ScrollChanged += OnScrollChanged;
         }
 
         private int GetStartLineOnViewPos(double topViewPos) => (int)(topViewPos / this.LineHeight);
@@ -300,7 +306,7 @@ namespace Parse.WpfControls
 
         private HighlightToken GetHighlightToken(string text, string pattern, DrawOption status)
         {
-            Brush foreBrush = Brushes.Black;
+            Brush foreBrush = this.DefaultTextBrush;
             if (this.textStyleDic.ContainsKey(pattern))
                 foreBrush = this.textStyleDic[pattern].ForeGround;
 

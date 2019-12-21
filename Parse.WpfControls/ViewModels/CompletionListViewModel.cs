@@ -170,14 +170,14 @@ namespace Parse.WpfControls.ViewModels
         public void Up()
         {
             if (this.selectedIndex <= 0) return;
-            if (this.availableCollection.Count == 0) return;
+            if (this.CandidateCollection.Count == 0) return;
 
             this.SelectedIndex--;
         }
 
         public void Down()
         {
-            if (this.selectedIndex >= this.availableCollection.Count - 1) return;
+            if (this.selectedIndex >= this.CandidateCollection.Count - 1) return;
 
             this.SelectedIndex++;
         }

@@ -19,6 +19,8 @@
         <Setter Property="SelectionLineBorderBrush" Value="DarkGray"/>
         <Setter Property="FontSize" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=FontSize, Mode=TwoWay}"/>
         <Setter Property="LineHeight" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=LineHeight}"/>
+        <Setter Property="DefaultTextBrush" Value="{DynamicResource ActiveTextBrush}"/>
+        <Setter Property="CaretBrush" Value="{DynamicResource ActiveCaretBrush}"/>
         <Setter Property="attached:TextBoxBehavior.TabSizeEnable" Value="True"/>
         <Setter Property="attached:TextBoxBehavior.TabSize" Value="{Binding RelativeSource={RelativeSource Mode=Self}, Path=TabSize}"/>
 

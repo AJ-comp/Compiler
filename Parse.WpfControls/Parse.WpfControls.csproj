@@ -87,7 +87,6 @@
     <Compile Include="AttachedProperties\TextBlockExtension.cs" />
     <Compile Include="AttachedProperties\TextBoxBehavior.cs" />
     <Compile Include="Behaviors\CompletionListBehavior.cs" />
-    <Compile Include="ClosableTab.cs" />
     <Compile Include="Common\ExtensionTextBox.cs" />
     <Compile Include="Common\TokenizeTextBox.cs" />
     <Compile Include="Converters\EventArgConverterExtension.cs" />
@@ -181,6 +180,10 @@
     <ProjectReference Include="..\Parse.FrontEnd\Parse.csproj">
       <Project>{46590802-ce40-49c9-86e1-cd6f3487ff5b}</Project>
       <Name>Parse</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Wpf.UI.Themes\Wpf.UI.Basic\Wpf.UI.Basic.csproj">
+      <Project>{fd4818dc-866a-4eef-833c-895d65d0ecfb}</Project>
+      <Name>Wpf.UI.Basic</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

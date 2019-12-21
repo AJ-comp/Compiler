@@ -10,6 +10,7 @@
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
         DataContext="{Binding NewFileWindow, Source={StaticResource Locator}}"
+        Style="{DynamicResource MainWindow}"
         Title="NewFileWindow" Height="450" Width="600">
 
     <Grid>

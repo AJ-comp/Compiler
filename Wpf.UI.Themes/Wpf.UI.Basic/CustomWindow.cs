@@ -43,7 +43,6 @@ namespace Wpf.UI.Basic
     [TemplatePart(Name = "PART_RIGHT_BORDER", Type = typeof(UIElement))]
     [TemplatePart(Name = "PART_TOP_BORDER", Type = typeof(UIElement))]
     [TemplatePart(Name = "PART_BOTTOM_BORDER", Type = typeof(UIElement))]
-
     /// <summary>
     /// Custom Window
     /// </summary>
@@ -59,18 +58,18 @@ namespace Wpf.UI.Basic
 
         // Using a DependencyProperty as the backing store for TitleBarHeight.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty TitleBarHeightProperty =
-            DependencyProperty.Register("TitleBarHeight", typeof(int), typeof(CustomWindow), new PropertyMetadata(TitleBarHeightChanged));
+            DependencyProperty.Register("TitleBarHeight", typeof(int), typeof(CustomWindow), new PropertyMetadata(30));
 
-        public static void TitleBarHeightChanged(DependencyObject dp, DependencyPropertyChangedEventArgs args)
+
+        public int TitleBarFontSize
         {
-            CustomWindow window = dp as CustomWindow;
-
-            Border titleBar = window.TitleBar as Border;
-            if (titleBar == null) return;
-
-            titleBar.Height = (int)args.NewValue;
+            get { return (int)GetValue(TitleBarFontSizeProperty); }
+            set { SetValue(TitleBarFontSizeProperty, value); }
         }
 
+        // Using a DependencyProperty as the backing store for TitleBarFontSize.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty TitleBarFontSizeProperty =
+            DependencyProperty.Register("TitleBarFontSize", typeof(int), typeof(CustomWindow), new PropertyMetadata(12));
 
 
         public SolidColorBrush TitleTextBrush

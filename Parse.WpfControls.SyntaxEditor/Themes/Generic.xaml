@@ -4,4 +4,7 @@
     xmlns:local="clr-namespace:Parse.WpfControls.SyntaxEditor">
     <ResourceDictionary.MergedDictionaries>
     </ResourceDictionary.MergedDictionaries>
+
+    <Style TargetType="local:SyntaxEditor">
+    </Style>
 </ResourceDictionary>

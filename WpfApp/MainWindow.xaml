@@ -7,6 +7,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:basicControls="clr-namespace:Wpf.UI.Basic;assembly=Wpf.UI.Basic"
+    xmlns:advanceControls="clr-namespace:Wpf.UI.Advance;assembly=Wpf.UI.Advance"
     xmlns:wpfcontrols="clr-namespace:Parse.WpfControls;assembly=Parse.WpfControls"
     xmlns:localConverters="clr-namespace:WpfApp.Converters"
     xmlns:converter="clr-namespace:Parse.WpfControls.Converters;assembly=Parse.WpfControls"
@@ -19,11 +20,11 @@
       lex:ResxLocalizationProvider.DefaultAssembly="WpfApp"
       lex:ResxLocalizationProvider.DefaultDictionary="Resources"
     mc:Ignorable="d"
-        Title="MainWindow" Height="600" Width="800"
+        Title="MainWindow" Height="800" Width="1200"
         WindowStartupLocation="CenterScreen"
         BorderThickness="1"
         ResizeMode="CanResizeWithGrip"
-    TitleBarHeight="20"
+    TitleBarFontSize="12"
         Style="{DynamicResource MainWindow}"
     DataContext="{Binding Main, Source={StaticResource Locator}}">
 
@@ -51,18 +52,20 @@
 
         <TabControl Grid.Row="1" x:Name="tabControl"
                             Background="Transparent" Foreground="WhiteSmoke">
-            <wpfcontrols:ClosableTab Title="Editor">
-                <Grid>
-                    <syntaxeditor:SyntaxEditor x:Name="syntaxEditor"
+            <advanceControls:ClosableTabItem Header="Editor">
+                <syntaxeditor:SyntaxEditor x:Name="syntaxEditor"
                                         FontSize="15" 
                                         FontFamily="Arial"
                                         IsLineNumberingVisible="True"  LineNumberForeColor="DarkGreen"
-                                        KeywordForeground="Blue"
+                                        KeywordForeground="LightBlue"
                                         LineCommentForeground="ForestGreen">
 
-                    </syntaxeditor:SyntaxEditor>
-                </Grid>
-            </wpfcontrols:ClosableTab>
+                </syntaxeditor:SyntaxEditor>
+            </advanceControls:ClosableTabItem>
+
+            <advanceControls:ClosableTabItem Header="test tab">
+                <TextBox/>
+            </advanceControls:ClosableTabItem>
         </TabControl>
 
     </DockPanel>

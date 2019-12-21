@@ -128,18 +128,15 @@ namespace Parse.WpfControls
 
             this.lineNumbersCanvas = (TextCanvas)Template.FindName("PART_LineNumbersCanvas", this);
             this.TextArea = (HighlightTextBox)Template.FindName("PART_TextArea", this);
+
+            //                lineNumbersCanvas.Width = GetFormattedTextWidth(string.Format("{0:0000}", totalLineCount)) + 5;
+            //                scrollViewer.ScrollChanged += OnScrollChanged;
+
+            this.TextArea.Rendered += TextArea_Rendered;
         }
 
         public Editor()
         {
-            Loaded += (s, e) =>
-            {
-                //                lineNumbersCanvas.Width = GetFormattedTextWidth(string.Format("{0:0000}", totalLineCount)) + 5;
-                //                scrollViewer.ScrollChanged += OnScrollChanged;
-                this.TextArea.Rendered += TextArea_Rendered;
-
-                InvalidateVisual();
-            };
         }
 
         private void TextArea_Rendered(object sender, RoutedEventArgs e)
