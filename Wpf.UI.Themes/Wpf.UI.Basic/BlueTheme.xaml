@@ -7,8 +7,6 @@
         <ResourceDictionary Source="/Wpf.UI.Basic;component/BlueTheme/ButtonBrushes.xaml" />
         <ResourceDictionary Source="/Wpf.UI.Basic;component/BlueTheme/WindowBrushes.xaml" />
 
-        <ResourceDictionary Source="/Wpf.UI.Basic;component/BlueTheme/WindowImages.xaml" />
-
         <ResourceDictionary Source="/Wpf.UI.Basic;component/ControlStyle.xaml" />
         <ResourceDictionary Source="/Wpf.UI.Basic;component/Controls/ComboBox.xaml" />
         <ResourceDictionary Source="/Wpf.UI.Basic;component/Controls/MenuItem.xaml" />

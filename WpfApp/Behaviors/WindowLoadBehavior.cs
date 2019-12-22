@@ -9,6 +9,7 @@ using System.Windows.Controls;
 using System.Windows.Forms;
 using System.Windows.Forms.Integration;
 using System.Windows.Interactivity;
+using Wpf.UI.Advance;
 using WpfApp.Models;
 using WpfApp.Properties;
 using WpfApp.ViewModels;
@@ -93,28 +94,28 @@ namespace WpfApp.Behaviors
 
             mainVm.ParsingHistoryAction = (() =>
             {
-                //var tabItem = new closable
-                //{
-                //    Title = Properties.Resources.ParsingHistory
-                //};
+                var tabItem = new TabItem
+                {
+                    Header = Properties.Resources.ParsingHistory
+                };
 
-                //var winformControl = new WindowsFormsHost
-                //{
-                //    VerticalAlignment = VerticalAlignment.Stretch,
-                //    HorizontalAlignment = System.Windows.HorizontalAlignment.Stretch,
+                var winformControl = new WindowsFormsHost
+                {
+                    VerticalAlignment = VerticalAlignment.Stretch,
+                    HorizontalAlignment = System.Windows.HorizontalAlignment.Stretch,
 
-                //    Child = new DataGridView()
-                //};
+                    Child = new DataGridView()
+                };
 
-                //DataGridView parsingHistoryView = winformControl.Child as DataGridView;
-                //parsingHistoryView.EditMode = DataGridViewEditMode.EditProgrammatically;
-                //parsingHistoryView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
-                //parsingHistoryView.DataSource = mainWindow.syntaxEditor.Parser.ParsingHistory;
-                //tabItem.GotFocus += TabItem_GotFocus;
+                DataGridView parsingHistoryView = winformControl.Child as DataGridView;
+                parsingHistoryView.EditMode = DataGridViewEditMode.EditProgrammatically;
+                parsingHistoryView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+                parsingHistoryView.DataSource = mainWindow.syntaxEditor.Parser.ParsingHistory;
+                tabItem.GotFocus += TabItem_GotFocus;
 
-                //tabItem.Content = winformControl;
+                tabItem.Content = winformControl;
 
-                //this.mainWindow.tabControl.Items.Add(tabItem);
+                this.mainWindow.tabControl.Items.Add(tabItem);
             });
         }
 

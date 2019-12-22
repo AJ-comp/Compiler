@@ -6,10 +6,8 @@
         <ResourceDictionary Source="/Wpf.UI.Basic;component/DarkTheme/ButtonBrushes.xaml" />
         <ResourceDictionary Source="/Wpf.UI.Basic;component/DarkTheme/CommonBrushes.xaml" />
         <ResourceDictionary Source="/Wpf.UI.Basic;component/DarkTheme/ComboBoxBrushes.xaml" />
-        <ResourceDictionary Source="/Wpf.UI.Basic;component/DarkTheme/ScrollViewerBrushes.xaml" />
+        <ResourceDictionary Source="/Wpf.UI.Basic;component/DarkTheme/ScrollBarBrushes.xaml" />
         <ResourceDictionary Source="/Wpf.UI.Basic;component/DarkTheme/WindowBrushes.xaml" />
-        
-        <ResourceDictionary Source="/Wpf.UI.Basic;component/DarkTheme/WindowImages.xaml" />
 
         <ResourceDictionary Source="/Wpf.UI.Basic;component/ControlStyle.xaml" />
         <ResourceDictionary Source="/Wpf.UI.Basic;component/Controls/ComboBox.xaml" />
@@ -22,6 +20,7 @@
         <ResourceDictionary Source="/Wpf.UI.Basic;component/Controls/ListViewItem.xaml" />
         <ResourceDictionary Source="/Wpf.UI.Basic;component/Controls/Menu.xaml" />
         <ResourceDictionary Source="/Wpf.UI.Basic;component/Controls/MenuItem.xaml" />
+        <ResourceDictionary Source="/Wpf.UI.Basic;component/Controls/ScrollBar.xaml" />
         <ResourceDictionary Source="/Wpf.UI.Basic;component/Controls/ScrollViewer.xaml" />
         <ResourceDictionary Source="/Wpf.UI.Basic;component/Controls/TabControl.xaml" />
         <ResourceDictionary Source="/Wpf.UI.Basic;component/Controls/TabItem.xaml" />

@@ -1,0 +1,14 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:Wpf.UI.Advance">
+
+    <BitmapImage x:Key="MinimizeImage" UriSource="/Wpf.UI.Advance;component/Resources/Minimize.png"/>
+    <BitmapImage x:Key="RestoreImage" UriSource="/Wpf.UI.Advance;component/Resources/NormalWindow.png"/>
+    <BitmapImage x:Key="MaximizeImage" UriSource="/Wpf.UI.Advance;component/Resources/Maximize.png"/>
+    <BitmapImage x:Key="CloseImage" UriSource="/Wpf.UI.Advance;component/Resources/Close.png"/>
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/Wpf.UI.Advance;component/Themes/Generic.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
+</ResourceDictionary>

@@ -20,9 +20,10 @@
 
     <SolidColorBrush x:Key="SolidBorderBrush" Color="#888" />
     <SolidColorBrush x:Key="LightBorderBrush" Color="#AAA" />
-    
+
     <SolidColorBrush x:Key="SelectedBackgroundBrush" Color="#3e3e40" />
-    <SolidColorBrush x:Key="SelectedBackgroundBrushType2" Color="#007acc" />
+    <SolidColorBrush x:Key="FocusedSelectedBackgroundBrush" Color="#007acc"/>
+    <SolidColorBrush x:Key="UnFocusedSelectedBackgroundBrush" Color="#3f3f46"/>
 
     <SolidColorBrush x:Key="ActiveCaretBrush" Color="WhiteSmoke" />
     <SolidColorBrush x:Key="InActiveCaretBrush" Color="#2C2C30" />
