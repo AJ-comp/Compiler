@@ -9,10 +9,12 @@
         <ResourceDictionary Source="/Wpf.UI.Basic;component/DarkTheme/ScrollBarBrushes.xaml" />
         <ResourceDictionary Source="/Wpf.UI.Basic;component/DarkTheme/WindowBrushes.xaml" />
 
+        <ResourceDictionary Source="/Wpf.UI.Basic;component/Controls/Button.xaml" />
         <ResourceDictionary Source="/Wpf.UI.Basic;component/ControlStyle.xaml" />
         <ResourceDictionary Source="/Wpf.UI.Basic;component/Controls/ComboBox.xaml" />
+        <ResourceDictionary Source="/Wpf.UI.Basic;component/Controls/ContextMenu.xaml" />
+        <ResourceDictionary Source="/Wpf.UI.Basic;component/Controls/DataGrid.xaml" />
         <ResourceDictionary Source="/Wpf.UI.Basic;component/Controls/DockPaneButton.xaml" />
-        <ResourceDictionary Source="/Wpf.UI.Basic;component/Controls/FlatButton.xaml" />
         <ResourceDictionary Source="/Wpf.UI.Basic;component/Controls/Label.xaml" />
         <ResourceDictionary Source="/Wpf.UI.Basic;component/Controls/ListBox.xaml" />
         <ResourceDictionary Source="/Wpf.UI.Basic;component/Controls/ListBoxItem.xaml" />

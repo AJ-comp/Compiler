@@ -22,12 +22,12 @@
         </TabControl>
     </DataTemplate>
     
-    <!--<DataTemplate DataType="{x:Type systemData:DataTable}">
+    <DataTemplate DataType="{x:Type systemData:DataTable}">
         <WindowsFormsHost>
             <WindowsFormsHost.Child>
                 <wf:DataGridView EditMode="EditProgrammatically" AutoSizeColumnsMode="AllCells" />
             </WindowsFormsHost.Child>
         </WindowsFormsHost>
-    </DataTemplate>-->
+    </DataTemplate>
     
 </ResourceDictionary>

@@ -3,6 +3,7 @@
                 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/Wpf.UI.Advance;component/Themes/FlatButton.xaml"/>
         <ResourceDictionary Source="/Wpf.UI.Advance;component/Themes/ClosableTabItem.xaml"/>
         <ResourceDictionary Source="/Wpf.UI.Advance;component/Themes/AdvancedWindow.xaml"/>
     </ResourceDictionary.MergedDictionaries>

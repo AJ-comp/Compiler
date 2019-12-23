@@ -6,6 +6,7 @@ using Parse.FrontEnd.Grammars.PracticeGrammars;
 using System;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
+using WpfApp.ViewModels.DocumentTypeViewModels;
 
 namespace WpfApp.ViewModels
 {

@@ -19,11 +19,9 @@
                                 <Button x:Name="PART_CloseButton"
                                             DockPanel.Dock="Right"
                                             Margin="0,0,4,0"
-                                            Style="{DynamicResource FlatButton}"
                                             VerticalAlignment="Center"
-                                            Background="{DynamicResource DockPaneHoverBackgroundBrush}"
+                                            Style="{DynamicResource FlatButton}"
                                             Visibility="Visible"
-                                            Foreground="{TemplateBinding Foreground}"
                                             CommandParameter="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=DataContext}">
 
                                     <Path Height="16"

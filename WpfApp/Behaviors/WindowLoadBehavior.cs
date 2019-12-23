@@ -13,6 +13,7 @@ using Wpf.UI.Advance;
 using WpfApp.Models;
 using WpfApp.Properties;
 using WpfApp.ViewModels;
+using WpfApp.ViewModels.DocumentTypeViewModels;
 using WpfApp.Views;
 
 namespace WpfApp.Behaviors
@@ -44,8 +45,8 @@ namespace WpfApp.Behaviors
 
             MainViewModel mainVm = this.mainWindow.DataContext as MainViewModel;
 
-            if(mainVm != null)
-                this.mainWindow.syntaxEditor.AlarmFired += SyntaxEditor_AlarmFired;
+            //if(mainVm != null)
+            //    this.mainWindow.syntaxEditor.AlarmFired += SyntaxEditor_AlarmFired;
 
             this.ExecuteMenuCommand(mainVm);
 
@@ -99,23 +100,30 @@ namespace WpfApp.Behaviors
                     Header = Properties.Resources.ParsingHistory
                 };
 
-                var winformControl = new WindowsFormsHost
-                {
-                    VerticalAlignment = VerticalAlignment.Stretch,
-                    HorizontalAlignment = System.Windows.HorizontalAlignment.Stretch,
+                //var winformControl = new WindowsFormsHost
+                //{
+                //    VerticalAlignment = VerticalAlignment.Stretch,
+                //    HorizontalAlignment = System.Windows.HorizontalAlignment.Stretch,
 
-                    Child = new DataGridView()
-                };
+                //    Child = new DataGridView()
+                //};
 
-                DataGridView parsingHistoryView = winformControl.Child as DataGridView;
-                parsingHistoryView.EditMode = DataGridViewEditMode.EditProgrammatically;
-                parsingHistoryView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
-                parsingHistoryView.DataSource = mainWindow.syntaxEditor.Parser.ParsingHistory;
-                tabItem.GotFocus += TabItem_GotFocus;
+                //DataGridView parsingHistoryView = winformControl.Child as DataGridView;
+                //parsingHistoryView.EditMode = DataGridViewEditMode.EditProgrammatically;
+                //parsingHistoryView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+                //parsingHistoryView.DataSource = mainWindow.syntaxEditor.Parser.ParsingHistory;
 
-                tabItem.Content = winformControl;
+                //tabItem.Content = winformControl;
 
-                this.mainWindow.tabControl.Items.Add(tabItem);
+                var dataGrid = new System.Windows.Controls.DataGrid();
+                dataGrid.IsReadOnly = true;
+                //                dataGrid.ItemsSource = mainWindow.syntaxEditor.Parser.ParsingHistory.DefaultView;
+//                dataGrid.ItemsSource = mainWindow.syntaxEditor.Parser.ParsingTable.DefaultView;
+
+                tabItem.Content = dataGrid;
+
+                var context = this.mainWindow.DataContext as MainViewModel;
+                context.Documents.Add(new ParsingHistoryViewModel(Properties.Resources.ParsingHistory));
             });
         }
 
@@ -123,39 +131,30 @@ namespace WpfApp.Behaviors
         {
             var mainVm = this.mainWindow.DataContext as MainViewModel;
 
-            var newDocument = new DocumentViewModel();
+            var newDocument = new EditorTypeViewModel("New Document");
             mainVm.Documents.Add(newDocument);
 
 
         }
 
-        private void TabItem_GotFocus(object sender, RoutedEventArgs e)
-        {
-            TabItem tabItem = sender as TabItem;
-
-            var winformControl = tabItem.Content as WindowsFormsHost;
-            DataGridView parsingHistoryView = winformControl.Child as DataGridView;
-            parsingHistoryView.DataSource = mainWindow.syntaxEditor.Parser.ParsingHistory;
-        }
-
         private void SyntaxEditor_AlarmFired(object sender, AlarmCollection e)
         {
-            MainViewModel mainVM = this.mainWindow.DataContext as MainViewModel;
+            //MainViewModel mainVM = this.mainWindow.DataContext as MainViewModel;
 
-            List<AlarmData> alarmList = new List<AlarmData>();
-            foreach (var item in e)
-            {
-                if (item.Status == AlarmStatus.None) continue;
+            //List<AlarmData> alarmList = new List<AlarmData>();
+            //foreach (var item in e)
+            //{
+            //    if (item.Status == AlarmStatus.None) continue;
 
-                var message = string.Format(AlarmCodes.CE0000, item.ParsingFailedArgs.PossibleSet.ToString());
-                var alarmData = new AlarmData(sender, item.Status, AlarmCodes.CE0000, message, item.ProjectName, item.FileName, item.TokenIndex, item.Line)
-                {
-                    IndicateLogic = this.mainWindow.syntaxEditor.TextArea.MoveCaretToToken
-                };
-                alarmList.Add(alarmData);
-            }
+            //    var message = string.Format(AlarmCodes.CE0000, item.ParsingFailedArgs.PossibleSet.ToString());
+            //    var alarmData = new AlarmData(sender, item.Status, AlarmCodes.CE0000, message, item.ProjectName, item.FileName, item.TokenIndex, item.Line)
+            //    {
+            //        IndicateLogic = this.mainWindow.syntaxEditor.TextArea.MoveCaretToToken
+            //    };
+            //    alarmList.Add(alarmData);
+            //}
 
-            mainVM.AlarmListVM.AddAlarmList(sender, alarmList);
+            //mainVM.AlarmListVM.AddAlarmList(sender, alarmList);
         }
 
         private DataGridView DataGridWinformInit(System.Windows.Forms.Control winformControl)
@@ -170,27 +169,27 @@ namespace WpfApp.Behaviors
 
         private void TableGridView_CellMouseEnter(object sender, DataGridViewCellEventArgs e)
         {
-            if (this.recentColIdx == e.ColumnIndex && this.recentRowIdx == e.RowIndex) return;
-            this.recentColIdx = e.ColumnIndex;
-            this.recentRowIdx = e.RowIndex;
+            //if (this.recentColIdx == e.ColumnIndex && this.recentRowIdx == e.RowIndex) return;
+            //this.recentColIdx = e.ColumnIndex;
+            //this.recentRowIdx = e.RowIndex;
 
-            DataGridView tableGridView = sender as DataGridView;
+            //DataGridView tableGridView = sender as DataGridView;
 
-            this.toolTip.Hide(tableGridView);
-            if (e.ColumnIndex != 0 || e.RowIndex == -1) return;
+            //this.toolTip.Hide(tableGridView);
+            //if (e.ColumnIndex != 0 || e.RowIndex == -1) return;
 
-            tableGridView.ShowCellToolTips = false;
+            //tableGridView.ShowCellToolTips = false;
 
-            var cell = tableGridView[e.ColumnIndex, e.RowIndex];
-            Canonical canonical = mainWindow.syntaxEditor.Parser.C0.GetStatusFromIxIndex(Convert.ToInt32(cell.Value.ToString().Substring(1)));
+            //var cell = tableGridView[e.ColumnIndex, e.RowIndex];
+            //Canonical canonical = mainWindow.syntaxEditor.Parser.C0.GetStatusFromIxIndex(Convert.ToInt32(cell.Value.ToString().Substring(1)));
 
-            var data = canonical.ToLineString();
-            var lineCount = Regex.Matches(data, Environment.NewLine).Count;
-            if (lineCount == 0 || lineCount == -1) lineCount = 1;
+            //var data = canonical.ToLineString();
+            //var lineCount = Regex.Matches(data, Environment.NewLine).Count;
+            //if (lineCount == 0 || lineCount == -1) lineCount = 1;
 
-            var popDelay = 3000 * lineCount;
-            if (popDelay > 30000) popDelay = 30000;
-            this.toolTip.Show(canonical.ToLineString(), tableGridView, popDelay);
+            //var popDelay = 3000 * lineCount;
+            //if (popDelay > 30000) popDelay = 30000;
+            //this.toolTip.Show(canonical.ToLineString(), tableGridView, popDelay);
         }
     }
 }

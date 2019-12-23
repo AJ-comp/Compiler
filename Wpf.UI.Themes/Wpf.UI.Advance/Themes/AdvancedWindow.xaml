@@ -53,13 +53,13 @@
                                                    TextWrapping="NoWrap"
                                                    Text="{TemplateBinding Title}"
                                                    FontSize="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:AdvancedWindow}, Path=TitleBarFontSize}" />
-                                        <Button x:Name="PART_CLOSE" DockPanel.Dock="Right" Style="{DynamicResource FlatButton}" VerticalAlignment="Center" Margin="0,0,4,0">
+                                        <Button x:Name="PART_CLOSE" DockPanel.Dock="Right" VerticalAlignment="Center" Margin="0,0,4,0" Style="{DynamicResource FlatButton}">
                                             <Image Source="{DynamicResource CloseImage}" Stretch="None" Margin="4" />
                                         </Button>
                                         <Button x:Name="PART_MAXIMIZE_RESTORE" DockPanel.Dock="Right" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{DynamicResource FlatButton}">
                                             <Image x:Name="MaximizeRestoreImage" Source="{DynamicResource RestoreImage}" Stretch="None" Margin="4"/>
                                         </Button>
-                                        <Button x:Name="PART_MINIMIZE" DockPanel.Dock="Right" HorizontalAlignment="Center" Style="{DynamicResource FlatButton}" VerticalAlignment="Center">
+                                        <Button x:Name="PART_MINIMIZE" DockPanel.Dock="Right" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{DynamicResource FlatButton}">
                                             <Image Margin="4" Source="{DynamicResource MinimizeImage}" Stretch="None" />
                                         </Button>
                                         <ContentControl x:Name="PART_CUSTOM" DockPanel.Dock="Right"/>

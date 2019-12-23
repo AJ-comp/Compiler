@@ -32,6 +32,7 @@
     <advanceControls:AdvancedWindow.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Resources/DataTemplates/DocumentTemplate.xaml"/>
                 <ResourceDictionary Source="Resources/MainWindowMenus.xaml"/>
                 <ResourceDictionary Source="Resources/MainWindowStatusBar.xaml"/>
             </ResourceDictionary.MergedDictionaries>
@@ -51,23 +52,9 @@
             <view:AlarmList DataContext="{Binding AlarmListVM}" Height="120"/>
         </DockPanel>
 
-        <TabControl Grid.Row="1" x:Name="tabControl"
-                            Background="Transparent" Foreground="WhiteSmoke">
-            <advanceControls:ClosableTabItem Header="Editor">
-                <syntaxeditor:SyntaxEditor x:Name="syntaxEditor"
-                                        FontSize="15" 
-                                        FontFamily="Arial"
-                                        IsLineNumberingVisible="True"  LineNumberForeColor="DarkGreen"
-                                        KeywordForeground="LightBlue"
-                                        LineCommentForeground="ForestGreen">
-
-                </syntaxeditor:SyntaxEditor>
-            </advanceControls:ClosableTabItem>
-
-            <advanceControls:ClosableTabItem Header="test tab">
-                <TextBox/>
-            </advanceControls:ClosableTabItem>
-        </TabControl>
+        <TabControl Grid.Row="1" x:Name="tabControl" 
+                            ItemsSource="{Binding Documents}"
+                            ItemTemplate="{StaticResource DocumentItemTemplate}"/>
 
     </DockPanel>
 

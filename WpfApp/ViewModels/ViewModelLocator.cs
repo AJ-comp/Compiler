@@ -15,6 +15,7 @@
 using CommonServiceLocator;
 using GalaSoft.MvvmLight.Ioc;
 using GalaSoft.MvvmLight.Messaging;
+using WpfApp.ViewModels.DocumentTypeViewModels;
 
 namespace WpfApp.ViewModels
 {
@@ -44,7 +45,6 @@ namespace WpfApp.ViewModels
 
             SimpleIoc.Default.Register<MainViewModel>();
             SimpleIoc.Default.Register<NewFileWindowViewModel>();
-            SimpleIoc.Default.Register<DocumentViewModel>();
             SimpleIoc.Default.Register<GrammarInfoViewModel>();
         }
 
@@ -65,11 +65,6 @@ namespace WpfApp.ViewModels
 
                 return result;
             }            
-        }
-
-        public DocumentViewModel Document
-        {
-            get => ServiceLocator.Current.GetInstance<DocumentViewModel>();
         }
 
         public GrammarInfoViewModel GrammarInfo

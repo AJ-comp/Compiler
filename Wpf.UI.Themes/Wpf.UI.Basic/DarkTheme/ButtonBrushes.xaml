@@ -2,11 +2,6 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:Wpf.UI.Basic.DarkTheme">
 
-    <!-- Global Defaults -->
-    <Style TargetType="{x:Type ButtonBase}" BasedOn="{StaticResource {x:Type ButtonBase}}">
-        <Setter Property="Background"  Value="Transparent" />
-    </Style>
-
     <!-- Normal background for flat button -->
     <LinearGradientBrush x:Key="FlatButtonNormalBackground" EndPoint="0,1" StartPoint="0,0">
         <GradientStop Color="#2C2C30" Offset="0" />
@@ -15,16 +10,11 @@
         <GradientStop Color="#2C2C30" Offset="1" />
     </LinearGradientBrush>
 
-    <!-- Normal border brush for flat button -->
-    <SolidColorBrush x:Key="FlatButtonNormalBorder" Color="#2C2C30" />
+    <!-- Related to Button color -->
+    <SolidColorBrush x:Key="ActiveButtonBackGroundBrush" Color="#3f3f46" />
+    <SolidColorBrush x:Key="InActiveButtonBackGroundBrush" Color="#3f3f46" />
 
-    <!-- Hover background for flat button -->
-    <SolidColorBrush x:Key="FlatButtonHoverBackgroundBrush" Color="#323236" />
-
-    <!-- Hover border brush for flat button -->
-    <SolidColorBrush x:Key="FlatButtonHoverBorderBrush" Color="#323236" />
-
-    <!-- Disabled text color for flat button -->
-    <SolidColorBrush x:Key="FlatButtonDisabledForegroundBrush" Color="#ADADAD" />
+    <SolidColorBrush x:Key="ActiveButtonBorderBrush" Color="#555555" />
+    <SolidColorBrush x:Key="InActiveButtonBorderBrush" Color="#3f3f46" />
 
 </ResourceDictionary>
