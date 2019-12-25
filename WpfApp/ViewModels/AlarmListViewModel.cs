@@ -1,14 +1,18 @@
 ﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using Parse.WpfControls.SyntaxEditor.EventArgs;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using WpfApp.Models;
+using WpfApp.Properties;
+using WpfApp.ViewModels.DocumentTypeViewModels;
 
 namespace WpfApp.ViewModels
 {
     public class AlarmListViewModel : ViewModelBase
     {
+        private ObservableCollection<EditorTypeViewModel> editors = new ObservableCollection<EditorTypeViewModel>();
         public ObservableCollection<AlarmData> AlarmLists { get; } = new ObservableCollection<AlarmData>();
 
         private RelayCommand<int> _cmdMouseDoubleClick;
@@ -42,6 +46,34 @@ namespace WpfApp.ViewModels
             this.RemoveAllMatched(fromControl);
 
             foreach (var item in e) this.AlarmLists.Add(item);
+        }
+
+        /// <summary>
+        /// This function adds the control to communicate the alarm list.
+        /// </summary>
+        /// <param name="editor"></param>
+        public void AddEditors(EditorTypeViewModel editor)
+        {
+            editor.AlarmFired += Editor_AlarmFired;
+            this.editors.Add(editor);
+        }
+
+        private void Editor_AlarmFired(object sender, AlarmCollection e)
+        {
+            List<AlarmData> alarmList = new List<AlarmData>();
+            foreach (var item in e)
+            {
+                if (item.Status == AlarmStatus.None) continue;
+
+                var message = string.Format(AlarmCodes.CE0000, item.ParsingFailedArgs.PossibleSet.ToString());
+                var alarmData = new AlarmData(sender, item.Status, AlarmCodes.CE0000, message, item.ProjectName, item.FileName, item.TokenIndex, item.Line)
+                {
+//                    IndicateLogic = this.mainWindow.syntaxEditor.TextArea.MoveCaretToToken
+                };
+                alarmList.Add(alarmData);
+            }
+
+            this.AddAlarmList(sender, alarmList);
         }
     }
 }

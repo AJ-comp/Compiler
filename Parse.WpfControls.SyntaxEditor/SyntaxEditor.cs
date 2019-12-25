@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media;
 
 namespace Parse.WpfControls.SyntaxEditor
@@ -20,6 +21,17 @@ namespace Parse.WpfControls.SyntaxEditor
         private bool bParsing = false;
         private AlarmCollection alarmList = new AlarmCollection();
         private List<TokenCell> reserveTokenCells = new List<TokenCell>();
+
+        private LRParser parser;
+        public LRParser Parser
+        {
+            get => this.parser;
+            private set
+            {
+                this.parser = value;
+                this.OnParserChanged?.Invoke(this);
+            }
+        }
 
         public delegate void OnParserChangedEventHandler(object sender);
         public event OnParserChangedEventHandler OnParserChanged;
@@ -35,19 +47,6 @@ namespace Parse.WpfControls.SyntaxEditor
         // Using a DependencyProperty as the backing store for MyProperty.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty MyPropertyProperty =
             DependencyProperty.Register("MyProperty", typeof(int), typeof(SyntaxEditor), new PropertyMetadata(0));
-
-
-
-        private LRParser parser;
-        public LRParser Parser
-        {
-            get => this.parser;
-            private set
-            {
-                this.parser = value;
-                this.OnParserChanged?.Invoke(this);
-            }
-        }
 
 
         public Brush KeywordForeground
@@ -174,7 +173,7 @@ namespace Parse.WpfControls.SyntaxEditor
                     this.TextArea.AddCompletionList(CompletionItemType.Keyword, terminal.Value);
                     this.TextArea.AddSyntaxHighLightInfo(terminal.Value, terminal, this.KeywordForeground, terminal.CanDerived);
                 }
-                else if(terminal.TokenType == TokenType.Comment)
+                else if (terminal.TokenType == TokenType.Comment)
                     this.TextArea.AddSyntaxHighLightInfo(terminal.Value, terminal, this.LineCommentForeground, terminal.CanDerived);
                 else if (terminal.TokenType == TokenType.Digit10)
                     this.TextArea.AddSyntaxHighLightInfo(terminal.Value, terminal, this.DigitForeground, terminal.CanDerived);
@@ -188,7 +187,7 @@ namespace Parse.WpfControls.SyntaxEditor
                     this.TextArea.AddSyntaxHighLightInfo(terminal.Value, terminal, this.TextArea.DefaultTextBrush, terminal.CanDerived, true);
                 else if (terminal.TokenType == TokenType.Delimiter)
                     this.TextArea.AddSyntaxHighLightInfo(terminal.Value, terminal, Brushes.Black, terminal.CanDerived, true);
-                else if(terminal.TokenType == TokenType.Identifier)
+                else if (terminal.TokenType == TokenType.Identifier)
                     this.TextArea.AddSyntaxHighLightInfo(terminal.Value, terminal, this.TextArea.DefaultTextBrush, terminal.CanDerived);
             }
 
@@ -221,7 +220,7 @@ namespace Parse.WpfControls.SyntaxEditor
         {
             AlarmCollection correctList = new AlarmCollection();
 
-            foreach(var item in this.alarmList)
+            foreach (var item in this.alarmList)
             {
                 int tokenIndex = item.ParsingFailedArgs.ErrorIndex;
                 if (this.TextArea.Tokens[tokenIndex] == item.ParsingFailedArgs.InputValue.TokenCell) correctList.Add(item);
@@ -236,10 +235,10 @@ namespace Parse.WpfControls.SyntaxEditor
             */
 
             this.alarmList.Clear();
-            foreach(var item in correctList) this.alarmList.Add(item);
+            foreach (var item in correctList) this.alarmList.Add(item);
         }
 
-        private async void TextArea_TextChanged(object sender, TextChangedEventArgs e)
+        private void TextArea_TextChanged(object sender, TextChangedEventArgs e)
         {
             this.alarmList.Clear();
 

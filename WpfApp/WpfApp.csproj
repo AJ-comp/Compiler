@@ -97,8 +97,10 @@
     <Compile Include="AttachedProperties\WindowsFormsHostMap.cs" />
     <Compile Include="Behaviors\AlarmListViewModelBehavior.cs" />
     <Compile Include="Behaviors\DataGridViewAllocateBehavior.cs" />
+    <Compile Include="Behaviors\EventToCommandBehavior.cs" />
     <Compile Include="Behaviors\WindowLoadBehavior.cs" />
     <Compile Include="Converters\GrammarToLRParserConverter.cs" />
+    <Compile Include="Converters\RemoveObjectConverter.cs" />
     <Compile Include="Converters\WindowCloseLogicConverter.cs" />
     <Compile Include="Converters\EnumToImageConverter.cs" />
     <Compile Include="Converters\EventArgsConverterExtension.cs" />

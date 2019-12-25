@@ -183,4 +183,10 @@
   <data name="Cancel" xml:space="preserve">
     <value>취소</value>
   </data>
+  <data name="Close" xml:space="preserve">
+    <value>닫기</value>
+  </data>
+  <data name="AllCloseExceptThisWindow" xml:space="preserve">
+    <value>이 창을 제외하고 모두 닫기</value>
+  </data>
 </root>

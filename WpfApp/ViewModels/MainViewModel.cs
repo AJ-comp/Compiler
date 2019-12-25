@@ -49,6 +49,17 @@ namespace WpfApp.ViewModels
                     document.RequestClose -= Document_RequestClose;
         }
 
+        private DocumentViewModel selectedDocument;
+        public DocumentViewModel SelectedDocument
+        {
+            get => this.selectedDocument;
+            set
+            {
+                this.selectedDocument = value;
+                this.RaisePropertyChanged("SelectedDocument");
+            }
+        }
+
         public ViewModelBase ActivatedDialog { get; }
 
         public Collection<Grammar> SupplyGrammars = new Collection<Grammar>();

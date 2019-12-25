@@ -112,9 +112,6 @@
     <Compile Include="Models\CodeContentInfo.cs" />
     <Compile Include="TextViewWindow.cs" />
     <Compile Include="Utilities\RegexUtility.cs" />
-    <Compile Include="Views\ClosableHeader.xaml.cs">
-      <DependentUpon>ClosableHeader.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\CompletionList.xaml.cs">
       <DependentUpon>CompletionList.xaml</DependentUpon>
     </Compile>
@@ -127,17 +124,11 @@
     <Compile Include="TextStyle.cs" />
     <Compile Include="ViewModels\CompletionListViewModel.cs" />
     <Compile Include="Utilities\StringUtility.cs" />
-    <Compile Include="ViewModel\MainViewModel.cs" />
-    <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Page Include="Themes\Editor.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Themes\TextViewWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\ClosableHeader.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -188,6 +179,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\Collections\" />
+    <Folder Include="Resources\DataTemplates\" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\property.png" />

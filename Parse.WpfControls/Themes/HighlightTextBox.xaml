@@ -37,10 +37,19 @@
                                              LineHeight="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=LineHeight}"/>
 
                             <ScrollViewer x:Name="PART_ContentHost" Background="#00FFFFFF"/>
-
                         </Grid>
                     </Border>
                 </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+
+        <Setter Property="ContextMenu">
+            <Setter.Value>
+                <ContextMenu FontSize="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Path=FontSize}" >
+                    <MenuItem Command="Cut"/>
+                    <MenuItem Command="Copy"/>
+                    <MenuItem Command="Paste"/>
+                </ContextMenu>
             </Setter.Value>
         </Setter>
     </Style>

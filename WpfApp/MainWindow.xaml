@@ -54,7 +54,9 @@
 
         <TabControl Grid.Row="1" x:Name="tabControl" 
                             ItemsSource="{Binding Documents}"
-                            ItemTemplate="{StaticResource DocumentItemTemplate}"/>
+                            ItemTemplate="{StaticResource DocumentItemTemplate}"
+                            SelectedIndex="{Binding SelectedDocumentIndex}"
+                            SelectedItem="{Binding SelectedDocument}"/>
 
     </DockPanel>
 

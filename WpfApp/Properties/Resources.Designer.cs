@@ -79,6 +79,15 @@ namespace WpfApp.Properties {
         }
         
         /// <summary>
+        ///   All close except this window과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        internal static string AllCloseExceptThisWindow {
+            get {
+                return ResourceManager.GetString("AllCloseExceptThisWindow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Cancel과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         internal static string Cancel {
@@ -93,6 +102,15 @@ namespace WpfApp.Properties {
         internal static string CanonicalTable {
             get {
                 return ResourceManager.GetString("CanonicalTable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Close과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        internal static string Close {
+            get {
+                return ResourceManager.GetString("Close", resourceCulture);
             }
         }
         

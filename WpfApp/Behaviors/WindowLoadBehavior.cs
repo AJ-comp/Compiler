@@ -1,17 +1,9 @@
-﻿using Parse.FrontEnd.Parsers.Collections;
-using Parse.WpfControls;
-using Parse.WpfControls.SyntaxEditor.EventArgs;
-using System;
-using System.Collections.Generic;
-using System.Text.RegularExpressions;
+﻿using Parse.WpfControls.SyntaxEditor.EventArgs;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Forms;
-using System.Windows.Forms.Integration;
 using System.Windows.Interactivity;
-using Wpf.UI.Advance;
 using WpfApp.Models;
-using WpfApp.Properties;
 using WpfApp.ViewModels;
 using WpfApp.ViewModels.DocumentTypeViewModels;
 using WpfApp.Views;
@@ -133,28 +125,14 @@ namespace WpfApp.Behaviors
 
             var newDocument = new EditorTypeViewModel("New Document");
             mainVm.Documents.Add(newDocument);
+            mainVm.SelectedDocument = newDocument;
 
-
+            mainVm.AlarmListVM.AddEditors(newDocument);
         }
 
         private void SyntaxEditor_AlarmFired(object sender, AlarmCollection e)
         {
-            //MainViewModel mainVM = this.mainWindow.DataContext as MainViewModel;
 
-            //List<AlarmData> alarmList = new List<AlarmData>();
-            //foreach (var item in e)
-            //{
-            //    if (item.Status == AlarmStatus.None) continue;
-
-            //    var message = string.Format(AlarmCodes.CE0000, item.ParsingFailedArgs.PossibleSet.ToString());
-            //    var alarmData = new AlarmData(sender, item.Status, AlarmCodes.CE0000, message, item.ProjectName, item.FileName, item.TokenIndex, item.Line)
-            //    {
-            //        IndicateLogic = this.mainWindow.syntaxEditor.TextArea.MoveCaretToToken
-            //    };
-            //    alarmList.Add(alarmData);
-            //}
-
-            //mainVM.AlarmListVM.AddAlarmList(sender, alarmList);
         }
 
         private DataGridView DataGridWinformInit(System.Windows.Forms.Control winformControl)
