@@ -264,6 +264,16 @@ namespace WpfApp.Properties {
         }
         
         /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap newfile {
+            get {
+                object obj = ResourceManager.GetObject("newfile", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Open과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         internal static string Open {

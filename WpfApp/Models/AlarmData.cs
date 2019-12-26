@@ -15,8 +15,6 @@ namespace WpfApp.Models
         public int TokenIndex { get; }
         public int Line { get; }
 
-        public Action<int> IndicateLogic { get; set; } = null;
-
         public AlarmData(object fromControl, AlarmStatus status, string code, string message, string projectName, string fileName, int tokenIndex, int line)
         {
             this.Status = status;

@@ -238,6 +238,8 @@ namespace Parse.WpfControls.SyntaxEditor
             foreach (var item in correctList) this.alarmList.Add(item);
         }
 
+        private void MoveCaretToToken(int tokenIndex) => this.TextArea.MoveCaretToToken(tokenIndex);
+
         private void TextArea_TextChanged(object sender, TextChangedEventArgs e)
         {
             this.alarmList.Clear();

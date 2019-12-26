@@ -3,6 +3,10 @@
                     xmlns:host="clr-namespace:Parse.WpfControls"
                     xmlns:attached="clr-namespace:Parse.WpfControls.AttachedProperties">
 
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/Parse.WpfControls;component/Resources/Styles/ImageStyle.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+    
     <Style TargetType="{x:Type host:HighlightTextBox}">
         <Style.Triggers>
             <!--<DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=
@@ -33,8 +37,8 @@
 
                         <Grid Margin="{TemplateBinding Padding}" x:Name="PART_Grid">
                             <host:TextCanvas x:Name="PART_RenderCanvas" ClipToBounds="True"
-                                                            TextOptions.TextRenderingMode="ClearType" TextOptions.TextFormattingMode="Display"
-                                             LineHeight="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=LineHeight}"/>
+                                                        TextOptions.TextRenderingMode="ClearType" TextOptions.TextFormattingMode="Display"
+                                                        LineHeight="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=LineHeight}"/>
 
                             <ScrollViewer x:Name="PART_ContentHost" Background="#00FFFFFF"/>
                         </Grid>
@@ -46,9 +50,27 @@
         <Setter Property="ContextMenu">
             <Setter.Value>
                 <ContextMenu FontSize="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Path=FontSize}" >
-                    <MenuItem Command="Cut"/>
-                    <MenuItem Command="Copy"/>
-                    <MenuItem Command="Paste"/>
+                    <MenuItem x:Name="CutMenu" Command="Cut">
+                        <MenuItem.Icon>
+                            <Image Source="/Parse.WpfControls;component/Resources/cut.png" 
+                                        Width="16" Height="16" 
+                                        Style="{StaticResource EnableDisableImageStyle}"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Command="Copy">
+                        <MenuItem.Icon>
+                            <Image Source="/Parse.WpfControls;component/Resources/copy.png" 
+                                        Width="16" Height="16" 
+                                        Style="{StaticResource EnableDisableImageStyle}"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Command="Paste">
+                        <MenuItem.Icon>
+                            <Image Source="/Parse.WpfControls;component/Resources/paste.png" 
+                                        Width="16" Height="16" 
+                                        Style="{StaticResource EnableDisableImageStyle}"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
                 </ContextMenu>
             </Setter.Value>
         </Setter>

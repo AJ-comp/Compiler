@@ -124,6 +124,10 @@
     <Compile Include="TextStyle.cs" />
     <Compile Include="ViewModels\CompletionListViewModel.cs" />
     <Compile Include="Utilities\StringUtility.cs" />
+    <Page Include="Resources\Styles\ImageStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Themes\Editor.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -216,6 +220,15 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\field.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\cut.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\copy.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\paste.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

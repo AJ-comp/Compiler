@@ -15,12 +15,14 @@
 
     <DataTemplate DataType="{x:Type documentViewModels:EditorTypeViewModel}">
         <syntaxEditor:SyntaxEditor FontSize="15" FontFamily="Arial"
+                                                FileName="{Binding Title}"
                                                 IsLineNumberingVisible="True"  LineNumberForeColor="DarkGreen"
                                                 KeywordForeground="LightBlue"
                                                 LineCommentForeground="ForestGreen">
 
             <i:Interaction.Behaviors>
                 <localBehaviors:EventToCommandBehavior Command="{Binding AlarmFiredCommand}" Event="AlarmFired" PassArguments="True" />
+                <localBehaviors:ViewViewModelConnector ViewModelDelegate="{Binding MoveCaretInvoker}" ViewMethod="MoveCaretToToken"/>
             </i:Interaction.Behaviors>
             
             

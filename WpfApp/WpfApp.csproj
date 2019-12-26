@@ -98,6 +98,7 @@
     <Compile Include="Behaviors\AlarmListViewModelBehavior.cs" />
     <Compile Include="Behaviors\DataGridViewAllocateBehavior.cs" />
     <Compile Include="Behaviors\EventToCommandBehavior.cs" />
+    <Compile Include="Behaviors\ViewViewModelConnector.cs" />
     <Compile Include="Behaviors\WindowLoadBehavior.cs" />
     <Compile Include="Converters\GrammarToLRParserConverter.cs" />
     <Compile Include="Converters\RemoveObjectConverter.cs" />
@@ -107,6 +108,7 @@
     <Compile Include="Converters\MouseDoubleClickIndexConverter.cs" />
     <Compile Include="Models\AlarmData.cs" />
     <Compile Include="Models\Document.cs" />
+    <Compile Include="Models\Invokers\Invoker.cs" />
     <Compile Include="Properties\AlarmCodes.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -141,7 +143,7 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Resources\ContextMenuForDocument.xaml">
+    <Page Include="Resources\Menus\ContextMenuForDocument.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -153,11 +155,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Resources\MainWindowStatusBar.xaml">
+    <Page Include="Resources\Menus\MainWindowStatusBar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Resources\MainWindowMenus.xaml">
+    <Page Include="Resources\Menus\MainWindowMenus.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -263,5 +265,13 @@
   <ItemGroup>
     <Resource Include="Resources\logo_dark_16.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\newfile.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties DocumentXCommentEditorState="&lt;HtmlEditState&gt;&#xA;  &lt;Attributes&gt;&#xA;    &lt;Attribute key=&quot;scrollPosition&quot; valuetype=&quot;integer&quot;&gt;0&lt;/Attribute&gt;&#xA;  &lt;/Attributes&gt;&#xA;&lt;/HtmlEditState&gt;" />
+    </VisualStudio>
+  </ProjectExtensions>
 </Project>

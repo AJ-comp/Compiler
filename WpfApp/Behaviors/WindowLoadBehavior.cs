@@ -107,10 +107,12 @@ namespace WpfApp.Behaviors
 
                 //tabItem.Content = winformControl;
 
-                var dataGrid = new System.Windows.Controls.DataGrid();
-                dataGrid.IsReadOnly = true;
+                var dataGrid = new System.Windows.Controls.DataGrid
+                {
+                    IsReadOnly = true
+                };
                 //                dataGrid.ItemsSource = mainWindow.syntaxEditor.Parser.ParsingHistory.DefaultView;
-//                dataGrid.ItemsSource = mainWindow.syntaxEditor.Parser.ParsingTable.DefaultView;
+                //                dataGrid.ItemsSource = mainWindow.syntaxEditor.Parser.ParsingTable.DefaultView;
 
                 tabItem.Content = dataGrid;
 

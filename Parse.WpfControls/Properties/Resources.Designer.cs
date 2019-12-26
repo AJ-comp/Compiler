@@ -47,8 +47,8 @@ namespace Parse.WpfControls.Properties {
         }
         
         /// <summary>
-        ///   이 강력한 형식의 리소스 클래스를 사용하여 모든 리소스 조회에 대한 현재 스레드의 CurrentUICulture
-        ///   속성을 재정의합니다.
+        ///   이 강력한 형식의 리소스 클래스를 사용하여 모든 리소스 조회에 대해 현재 스레드의 CurrentUICulture 속성을
+        ///   재정의합니다.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
         internal static global::System.Globalization.CultureInfo Culture {
@@ -159,6 +159,26 @@ namespace Parse.WpfControls.Properties {
         }
         
         /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap copy {
+            get {
+                object obj = ResourceManager.GetObject("copy", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap cut {
+            get {
+                object obj = ResourceManager.GetObject("cut", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Delegate과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         internal static string Delegate {
@@ -257,6 +277,16 @@ namespace Parse.WpfControls.Properties {
         internal static string Namespace {
             get {
                 return ResourceManager.GetString("Namespace", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap paste {
+            get {
+                object obj = ResourceManager.GetObject("paste", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         

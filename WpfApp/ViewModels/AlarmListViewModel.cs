@@ -27,10 +27,34 @@ namespace WpfApp.ViewModels
             }
         }
 
+        private EditorTypeViewModel FindEditorIndexOfAlarmData(AlarmData alarmData)
+        {
+            EditorTypeViewModel result = null;
+
+            foreach(var editor in this.editors)
+            {
+                if (!(editor is EditorTypeViewModel)) continue;
+
+                if(editor.Title == alarmData.FileName)
+                {
+                    result = editor;
+                    break;
+                }
+            }
+
+            return result;
+        }
+
         private void ExecuteMouseDoubleClick(int index)
         {
-            int tokenIndex = this.AlarmLists[index].TokenIndex;
-            this.AlarmLists[index].IndicateLogic(tokenIndex);
+            var editor = this.FindEditorIndexOfAlarmData(this.AlarmLists[index]);
+            if (editor == null)
+            {
+                // it have to be removed from AlarmList.
+                return;
+            }
+
+            editor.MoveCaretInvoker.Call(new object[] { this.AlarmLists[index].TokenIndex });
         }
 
         private void RemoveAllMatched(object fromControl)
@@ -66,10 +90,7 @@ namespace WpfApp.ViewModels
                 if (item.Status == AlarmStatus.None) continue;
 
                 var message = string.Format(AlarmCodes.CE0000, item.ParsingFailedArgs.PossibleSet.ToString());
-                var alarmData = new AlarmData(sender, item.Status, AlarmCodes.CE0000, message, item.ProjectName, item.FileName, item.TokenIndex, item.Line)
-                {
-//                    IndicateLogic = this.mainWindow.syntaxEditor.TextArea.MoveCaretToToken
-                };
+                var alarmData = new AlarmData(sender, item.Status, AlarmCodes.CE0000, message, item.ProjectName, item.FileName, item.TokenIndex, item.Line);
                 alarmList.Add(alarmData);
             }
 

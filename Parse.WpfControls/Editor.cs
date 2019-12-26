@@ -43,11 +43,21 @@ namespace Parse.WpfControls
         private double recentHorizontalOffset = 0;
         private int startLine = 0;
         private int endLine = 1;
-        public string FileName { get; } = "test.txt";
-
         private TextCanvas lineNumbersCanvas;
 
+
         #region Dependency Properties
+        public string FileName
+        {
+            get { return (string)GetValue(FileNameProperty); }
+            set { SetValue(FileNameProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for FileName.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty FileNameProperty =
+            DependencyProperty.Register("FileName", typeof(string), typeof(Editor), new PropertyMetadata("New Document.txt"));
+
+
         public HighlightTextBox TextArea
         {
             get { return (HighlightTextBox)GetValue(TextAreaProperty); }
@@ -57,6 +67,7 @@ namespace Parse.WpfControls
         // Using a DependencyProperty as the backing store for TextArea.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty TextAreaProperty =
             DependencyProperty.Register("TextArea", typeof(HighlightTextBox), typeof(Editor), new PropertyMetadata(null));
+
 
         public Brush LineNumberBackColor
         {
