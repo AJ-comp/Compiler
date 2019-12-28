@@ -4,9 +4,9 @@ namespace WpfApp.ViewModels.DocumentTypeViewModels
 {
     public class ParsingHistoryViewModel : DocumentViewModel
     {
-        public DataGrid ParsingHistory { get; }
+        public DataGrid ParsingHistory { get; set; }
 
-        public ParsingHistoryViewModel(string title) : base(title)
+        public ParsingHistoryViewModel() : base(Properties.Resources.ParsingHistory)
         {
         }
     }

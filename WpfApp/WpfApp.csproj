@@ -114,19 +114,19 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>AlarmCodes.resx</DependentUpon>
     </Compile>
+    <Compile Include="Utilities\ViewCache.cs" />
+    <Compile Include="Utilities\ViewFactory.cs" />
     <Compile Include="ViewModels\AlarmListViewModel.cs" />
     <Compile Include="ViewModels\DocumentTypeViewModels\DocumentViewModel.cs" />
     <Compile Include="ViewModels\DocumentTypeViewModels\EditorTypeViewModel.cs" />
     <Compile Include="ViewModels\DocumentTypeViewModels\ParsingHistoryViewModel.cs" />
-    <Compile Include="ViewModels\GrammarInfoViewModel.cs" />
-    <Compile Include="ViewModels\NewFileWindowViewModel.cs" />
+    <Compile Include="ViewModels\DocumentTypeViewModels\GrammarInfoViewModel.cs" />
+    <Compile Include="ViewModels\DialogViewModels\NewFileDialogViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\ViewModelLocator.cs" />
+    <Compile Include="ViewModels\DialogViewModels\DialogViewModel.cs" />
     <Compile Include="Views\AlarmList.xaml.cs">
       <DependentUpon>AlarmList.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\GrammarInfoWindow.xaml.cs">
-      <DependentUpon>GrammarInfoWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\NewFileWindow.xaml.cs">
       <DependentUpon>NewFileWindow.xaml</DependentUpon>
@@ -143,6 +143,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Resources\DataTemplates\WindowTemplate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Resources\Menus\ContextMenuForDocument.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -164,10 +168,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\AlarmList.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\GrammarInfoWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -267,6 +267,11 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\newfile.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="ViewModels\WindowViewModels\" />
+    <Folder Include="Views\DialogViews\" />
+    <Folder Include="Views\WindowViews\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>

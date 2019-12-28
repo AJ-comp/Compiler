@@ -10,6 +10,7 @@
                     xmlns:advanceControls="clr-namespace:Wpf.UI.Advance;assembly=Wpf.UI.Advance"
                     xmlns:wpfControls="clr-namespace:Parse.WpfControls;assembly=Parse.WpfControls"
                     xmlns:documentViewModels="clr-namespace:WpfApp.ViewModels.DocumentTypeViewModels"
+                    xmlns:utilities="clr-namespace:Parse.WpfControls.Utilities;assembly=Parse.WpfControls"
                     xmlns:localViews="clr-namespace:WpfApp.Views"
                     xmlns:local="clr-namespace:WpfApp.Resources.DataTemplates">
 
@@ -24,16 +25,38 @@
                 <localBehaviors:EventToCommandBehavior Command="{Binding AlarmFiredCommand}" Event="AlarmFired" PassArguments="True" />
                 <localBehaviors:ViewViewModelConnector ViewModelDelegate="{Binding MoveCaretInvoker}" ViewMethod="MoveCaretToToken"/>
             </i:Interaction.Behaviors>
-            
-            
+
         </syntaxEditor:SyntaxEditor>
 
     </DataTemplate>
+
 
     <DataTemplate DataType="{x:Type documentViewModels:ParsingHistoryViewModel}">
         <DataGrid IsReadOnly="True" ItemsSource="{Binding ParsingHistory}"/>
     </DataTemplate>
 
+
+    <DataTemplate DataType="{x:Type documentViewModels:GrammarInfoViewModel}">
+        <DockPanel>
+            <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Background="Transparent">
+                <TextBlock Width="100" HorizontalAlignment="Right"
+                       Margin="0 0 10 0"
+                       Text="{lex:Loc Key=Grammar}"/>
+                <ComboBox Width="150" HorizontalAlignment="Right" 
+                      ItemsSource="{Binding Grammars}" SelectedItem="{Binding SelectedItem}">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="Loaded">
+                            <mvvm:EventToCommand Command="{Binding LoadCommand}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </ComboBox>
+            </StackPanel>
+
+            <Grid>
+                <ContentControl Content="{Binding SelectedItem, Converter={localConverters:GrammarToLRParserConverter}}"/>
+            </Grid>
+        </DockPanel>
+    </DataTemplate>
 
     <DataTemplate x:Key="DocumentItemTemplate">
         <DockPanel>
@@ -43,7 +66,7 @@
                         VerticalAlignment="Center"
                         Style="{DynamicResource FlatButton}"
                         Visibility="Visible"
-                        CommandParameter="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=DataContext}">
+                        Command="{Binding CloseCommand}">
 
                 <Path Height="16"
                             Width="16"
@@ -56,11 +79,11 @@
                         HorizontalAlignment="Center"
                         Margin="12,2,12,2"
                         Content="{Binding Title}">
-                
+
                 <Label.ContextMenu>
                     <ContextMenu>
-                        <MenuItem Header="{lex:Loc Key=Close}"/>
-                        <MenuItem Header="{lex:Loc Key=AllCloseExceptThisWindow}"/>
+                        <MenuItem Header="{lex:Loc Key=Close}" Command="{Binding CloseCommand}"/>
+                        <MenuItem Header="{lex:Loc Key=AllCloseExceptThisWindow}" Command="{Binding AllCloseExceptThisCommand}"/>
 
                     </ContextMenu>
 

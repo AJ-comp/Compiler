@@ -3,12 +3,12 @@ using GalaSoft.MvvmLight.Command;
 using Parse.FrontEnd.Grammars;
 using System.Collections.ObjectModel;
 
-namespace WpfApp.ViewModels
+namespace WpfApp.ViewModels.DocumentTypeViewModels
 {
     /// <summary>
     /// This ViewModel only shows the Grammar information parsed by the SLRParser.
     /// </summary>
-    public class GrammarInfoViewModel : ViewModelBase
+    public class GrammarInfoViewModel : DocumentViewModel
     {
         public ObservableCollection<Grammar> Grammars { get; } = new ObservableCollection<Grammar>();
 
@@ -32,6 +32,10 @@ namespace WpfApp.ViewModels
 
                 return this.loadCommand;
             }
+        }
+
+        public GrammarInfoViewModel() : base(Properties.Resources.GrammarInfoWindow)
+        {
         }
 
         private void OnLoad()

@@ -189,4 +189,7 @@
   <data name="AllCloseExceptThisWindow" xml:space="preserve">
     <value>이 창을 제외하고 모두 닫기</value>
   </data>
+  <data name="GrammarInfoWindow" xml:space="preserve">
+    <value>문법정보 창</value>
+  </data>
 </root>

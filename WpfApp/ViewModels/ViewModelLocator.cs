@@ -15,6 +15,7 @@
 using CommonServiceLocator;
 using GalaSoft.MvvmLight.Ioc;
 using GalaSoft.MvvmLight.Messaging;
+using WpfApp.ViewModels.DialogViewModels;
 using WpfApp.ViewModels.DocumentTypeViewModels;
 
 namespace WpfApp.ViewModels
@@ -44,33 +45,13 @@ namespace WpfApp.ViewModels
             ////}
 
             SimpleIoc.Default.Register<MainViewModel>();
-            SimpleIoc.Default.Register<NewFileWindowViewModel>();
+            SimpleIoc.Default.Register<NewFileDialogViewModel>();
             SimpleIoc.Default.Register<GrammarInfoViewModel>();
+            SimpleIoc.Default.Register<ParsingHistoryViewModel>();
         }
 
-        public MainViewModel Main
-        {
-            get
-            {
-                return ServiceLocator.Current.GetInstance<MainViewModel>();
-            }
-        }
-
-        public NewFileWindowViewModel NewFileWindow
-        {
-            get
-            {
-                var result = ServiceLocator.Current.GetInstance<NewFileWindowViewModel>();
-//                result.CancelRequest += (() => )
-
-                return result;
-            }            
-        }
-
-        public GrammarInfoViewModel GrammarInfo
-        {
-            get => ServiceLocator.Current.GetInstance<GrammarInfoViewModel>();
-        }
+        public MainViewModel Main { get => ServiceLocator.Current.GetInstance<MainViewModel>(); }
+        public NewFileDialogViewModel NewFileWindow { get => ServiceLocator.Current.GetInstance<NewFileDialogViewModel>(); }
 
         private void NotifyUserMethod(NotificationMessage message)
         {

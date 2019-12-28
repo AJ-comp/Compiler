@@ -5,6 +5,7 @@ using System.Windows.Forms;
 using System.Windows.Interactivity;
 using WpfApp.Models;
 using WpfApp.ViewModels;
+using WpfApp.ViewModels.DialogViewModels;
 using WpfApp.ViewModels.DocumentTypeViewModels;
 using WpfApp.Views;
 
@@ -68,56 +69,12 @@ namespace WpfApp.Behaviors
             mainVm.NewFileAction = (() =>
             {
                 NewFileWindow window = new NewFileWindow();
-                var vm = window.DataContext as NewFileWindowViewModel;
+                var vm = window.DataContext as NewFileDialogViewModel;
 
                 vm.CreateRequest -= OnDocumentCreate;
                 vm.CreateRequest += OnDocumentCreate;
 
                 window.ShowDialog();
-            });
-
-            mainVm.GrammarAction = (() =>
-            {
-                GrammarInfoWindow window = new GrammarInfoWindow();
-                var vm = window.DataContext as GrammarInfoViewModel;
-                vm.Grammars.Add(new Parse.FrontEnd.Grammars.MiniC.MiniCGrammar());
-
-                window.ShowDialog();
-            });
-
-            mainVm.ParsingHistoryAction = (() =>
-            {
-                var tabItem = new TabItem
-                {
-                    Header = Properties.Resources.ParsingHistory
-                };
-
-                //var winformControl = new WindowsFormsHost
-                //{
-                //    VerticalAlignment = VerticalAlignment.Stretch,
-                //    HorizontalAlignment = System.Windows.HorizontalAlignment.Stretch,
-
-                //    Child = new DataGridView()
-                //};
-
-                //DataGridView parsingHistoryView = winformControl.Child as DataGridView;
-                //parsingHistoryView.EditMode = DataGridViewEditMode.EditProgrammatically;
-                //parsingHistoryView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
-                //parsingHistoryView.DataSource = mainWindow.syntaxEditor.Parser.ParsingHistory;
-
-                //tabItem.Content = winformControl;
-
-                var dataGrid = new System.Windows.Controls.DataGrid
-                {
-                    IsReadOnly = true
-                };
-                //                dataGrid.ItemsSource = mainWindow.syntaxEditor.Parser.ParsingHistory.DefaultView;
-                //                dataGrid.ItemsSource = mainWindow.syntaxEditor.Parser.ParsingTable.DefaultView;
-
-                tabItem.Content = dataGrid;
-
-                var context = this.mainWindow.DataContext as MainViewModel;
-                context.Documents.Add(new ParsingHistoryViewModel(Properties.Resources.ParsingHistory));
             });
         }
 

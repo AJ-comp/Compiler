@@ -4,9 +4,9 @@ using System;
 using System.Collections.ObjectModel;
 using WpfApp.Models;
 
-namespace WpfApp.ViewModels
+namespace WpfApp.ViewModels.DialogViewModels
 {
-    public class NewFileWindowViewModel : ViewModelBase
+    public class NewFileDialogViewModel : DialogViewModel
     {
         private bool _cancelSignal;
         public bool CancelSignal
@@ -22,7 +22,7 @@ namespace WpfApp.ViewModels
         public int CurSelected { get; set; } = 0;
         public ObservableCollection<Document> NewFileDataCollection { get; } = new ObservableCollection<Document>();
 
-        public NewFileWindowViewModel()
+        public NewFileDialogViewModel()
         {
             this.NewFileDataCollection.Add(new Document("pack://application:,,,/WpfApp;component/Resources/typec24.png", Properties.Resources.MiniCFile, Properties.Resources.MiniCFileExplain));
         }

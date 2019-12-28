@@ -1,11 +1,14 @@
+using CommonServiceLocator;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using Parse.FrontEnd.Grammars;
 using Parse.FrontEnd.Grammars.MiniC;
 using Parse.FrontEnd.Grammars.PracticeGrammars;
+using Parse.FrontEnd.Parsers.LR;
 using System;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
+using WpfApp.ViewModels.DialogViewModels;
 using WpfApp.ViewModels.DocumentTypeViewModels;
 
 namespace WpfApp.ViewModels
@@ -24,6 +27,9 @@ namespace WpfApp.ViewModels
     /// </summary>
     public class MainViewModel : ViewModelBase
     {
+        private Collection<Grammar> supplyGrammars = new Collection<Grammar>();
+
+        #region Property related to Document
         private ObservableCollection<DocumentViewModel> _documents;
         public ObservableCollection<DocumentViewModel> Documents
         {
@@ -43,10 +49,27 @@ namespace WpfApp.ViewModels
         {
             if (e.NewItems != null && e.NewItems.Count != 0)
                 foreach (DocumentViewModel document in e.NewItems)
-                    document.RequestClose += Document_RequestClose;
+                {
+                    document.CloseRequest += Document_RequestClose;
+                    document.AllCloseExceptThisRequest += Document_AllCloseExceptThisRequest;
+                }
             if (e.OldItems != null && e.OldItems.Count != 0)
-                foreach (DocumentViewModel document in e.NewItems)
-                    document.RequestClose -= Document_RequestClose;
+                foreach (DocumentViewModel document in e.OldItems)
+                {
+                    document.CloseRequest -= Document_RequestClose;
+                    document.AllCloseExceptThisRequest -= Document_AllCloseExceptThisRequest;
+                }
+        }
+
+        private void Document_AllCloseExceptThisRequest(object sender, EventArgs e)
+        {
+            this._documents.Clear();
+            this._documents.Add(sender as DocumentViewModel);
+        }
+
+        private void Document_RequestClose(object sender, EventArgs e)
+        {
+            this._documents.Remove(sender as DocumentViewModel);
         }
 
         private DocumentViewModel selectedDocument;
@@ -59,19 +82,28 @@ namespace WpfApp.ViewModels
                 this.RaisePropertyChanged("SelectedDocument");
             }
         }
+        #endregion
+
+        private ObservableCollection<DialogViewModel> window;
+        public ObservableCollection<DialogViewModel> Window
+        {
+            get
+            {
+                if (this.window == null)
+                {
+                    this.window = new ObservableCollection<DialogViewModel>();
+                    this.window.CollectionChanged += _documents_CollectionChanged;
+                }
+
+                return this.window;
+            }
+        }
 
         public ViewModelBase ActivatedDialog { get; }
-
-        public Collection<Grammar> SupplyGrammars = new Collection<Grammar>();
-
-        private void Document_RequestClose(object sender, EventArgs e) => this._documents.Remove(sender as DocumentViewModel);
-
         public AlarmListViewModel AlarmListVM { get; } = new AlarmListViewModel();
 
         public Action NewFileAction = null;
         public Action NewProjectAction = null;
-        public Action GrammarAction = null;
-        public Action ParsingHistoryAction = null;
         public Action ParseTreeAction = null;
 
         private RelayCommand _newFileCommand;
@@ -123,8 +155,21 @@ namespace WpfApp.ViewModels
         }
 
         private void OnNewFile() => this.NewFileAction?.Invoke();
-        private void OnGrammar() => this.GrammarAction?.Invoke();
-        private void OnParsingHistory() => this.ParsingHistoryAction?.Invoke();
+        private void OnGrammar()
+        {
+            var document = ServiceLocator.Current.GetInstance<GrammarInfoViewModel>();
+
+            if(this._documents.Contains(document) == false) this._documents.Add(document);
+            this.SelectedDocument = document;
+        }
+        private void OnParsingHistory()
+        {
+            var document = ServiceLocator.Current.GetInstance<ParsingHistoryViewModel>();
+//            document.ParsingHistory = 
+
+            if (this._documents.Contains(document) == false) this._documents.Add(document);
+            this.selectedDocument = document;
+        }
         private void OnParseTree() => this.ParseTreeAction?.Invoke();
 
         /// <summary>
@@ -132,8 +177,14 @@ namespace WpfApp.ViewModels
         /// </summary>
         public MainViewModel()
         {
-            this.SupplyGrammars.Add(new MiniCGrammar());
-            this.SupplyGrammars.Add(new LRTest1Grammar());
+            this.supplyGrammars.Add(new MiniCGrammar());
+            this.supplyGrammars.Add(new LRTest1Grammar());
+
+            var grmmarViewModel = ServiceLocator.Current.GetInstance<GrammarInfoViewModel>();
+
+            foreach(var grammar in this.supplyGrammars)
+                grmmarViewModel.Grammars.Add(grammar);
+
 
             if (IsInDesignMode)
             {
