@@ -28,6 +28,7 @@
         <ResourceDictionary Source="/Wpf.UI.Basic;component/Controls/TabItem.xaml" />
         <ResourceDictionary Source="/Wpf.UI.Basic;component/Controls/TextBlock.xaml" />
         <ResourceDictionary Source="/Wpf.UI.Basic;component/Controls/TextBox.xaml" />
+        <ResourceDictionary Source="/Wpf.UI.Basic;component/Controls/TreeView.xaml" />
         <ResourceDictionary Source="/Wpf.UI.Basic;component/Controls/Window.xaml" />
     </ResourceDictionary.MergedDictionaries>
 

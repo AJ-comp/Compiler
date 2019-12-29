@@ -4,10 +4,12 @@ using System.Windows.Controls;
 using System.Windows.Forms;
 using System.Windows.Interactivity;
 using WpfApp.Models;
+using WpfApp.Utilities;
 using WpfApp.ViewModels;
 using WpfApp.ViewModels.DialogViewModels;
 using WpfApp.ViewModels.DocumentTypeViewModels;
 using WpfApp.Views;
+using WpfApp.Views.DialogViews;
 
 namespace WpfApp.Behaviors
 {
@@ -43,6 +45,8 @@ namespace WpfApp.Behaviors
 
             this.ExecuteMenuCommand(mainVm);
 
+            
+
 
             //            this.editor.SetComponents(this.parser);
 
@@ -68,13 +72,25 @@ namespace WpfApp.Behaviors
         {
             mainVm.NewFileAction = (() =>
             {
-                NewFileWindow window = new NewFileWindow();
-                var vm = window.DataContext as NewFileDialogViewModel;
+                NewFileDialog dialog = new NewFileDialog();
+                var vm = dialog.DataContext as NewFileDialogViewModel;
 
                 vm.CreateRequest -= OnDocumentCreate;
                 vm.CreateRequest += OnDocumentCreate;
 
-                window.ShowDialog();
+                dialog.Owner = this.mainWindow;
+                dialog.ShowInTaskbar = false;
+                dialog.ShowDialog();
+            });
+
+            mainVm.NewProjectAction = (() =>
+            {
+                NewProjectDialog dialog = new NewProjectDialog();
+                var vm = dialog.DataContext as NewProjectViewModel;
+
+                dialog.Owner = this.mainWindow;
+                dialog.ShowInTaskbar = false;
+                dialog.ShowDialog();
             });
         }
 
@@ -82,7 +98,7 @@ namespace WpfApp.Behaviors
         {
             var mainVm = this.mainWindow.DataContext as MainViewModel;
 
-            var newDocument = new EditorTypeViewModel("New Document");
+            var newDocument = new EditorTypeViewModel();
             mainVm.Documents.Add(newDocument);
             mainVm.SelectedDocument = newDocument;
 

@@ -9,7 +9,7 @@
                     <Image Source="/WpfApp;component/Resources/newfile.png"
                                 Width="16" Height="16"/>
                 </MenuItem.Icon>
-                <MenuItem Header="{lex:Loc Key=Project}" InputGestureText="Ctrl+Shift+N"/>
+                <MenuItem Header="{lex:Loc Key=Project}" InputGestureText="Ctrl+Shift+N" Command="{Binding NewProjectCommand}"/>
                 <MenuItem Header="{lex:Loc Key=_File}" InputGestureText="Ctrl+N" Command="{Binding NewFileCommand}"/>
             </MenuItem>
         </MenuItem>

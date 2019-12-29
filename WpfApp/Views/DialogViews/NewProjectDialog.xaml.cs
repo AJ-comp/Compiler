@@ -10,16 +10,17 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace WpfApp.Views
+namespace WpfApp.Views.DialogViews
 {
     /// <summary>
-    /// NewFileWindow.xaml에 대한 상호 작용 논리
+    /// NewProjectDialog.xaml에 대한 상호 작용 논리
     /// </summary>
-    public partial class NewFileWindow : Window
+    public partial class NewProjectDialog : Window
     {
-        public NewFileWindow()
+        public NewProjectDialog()
         {
             InitializeComponent();
         }

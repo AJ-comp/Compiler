@@ -192,4 +192,25 @@
   <data name="GrammarInfoWindow" xml:space="preserve">
     <value>문법정보 창</value>
   </data>
+  <data name="Name" xml:space="preserve">
+    <value>이름</value>
+  </data>
+  <data name="Position" xml:space="preserve">
+    <value>위치</value>
+  </data>
+  <data name="SolutionPath" xml:space="preserve">
+    <value>솔루션 경로</value>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>찾아보기</value>
+  </data>
+  <data name="CreateSolutionDir" xml:space="preserve">
+    <value>솔루션용 디렉토리 만들기</value>
+  </data>
+  <data name="NewProject" xml:space="preserve">
+    <value>새 프로젝트</value>
+  </data>
+  <data name="Ok" xml:space="preserve">
+    <value>확인</value>
+  </data>
 </root>

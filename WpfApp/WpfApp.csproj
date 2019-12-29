@@ -55,6 +55,12 @@
     <Reference Include="GalaSoft.MvvmLight.Platform, Version=5.4.1.0, Culture=neutral, PublicKeyToken=5f873c45e98af8a1, processorArchitecture=MSIL">
       <HintPath>..\packages\MvvmLightLibs.5.4.1.1\lib\net45\GalaSoft.MvvmLight.Platform.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.WindowsAPICodePack, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\WindowsAPICodePack-Core.1.1.1\lib\Microsoft.WindowsAPICodePack.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.WindowsAPICodePack.Shell, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\WindowsAPICodePack-Shell.1.1.1\lib\Microsoft.WindowsAPICodePack.Shell.dll</HintPath>
+    </Reference>
     <Reference Include="ReachFramework" />
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -114,9 +120,15 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>AlarmCodes.resx</DependentUpon>
     </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Utilities\ViewCache.cs" />
     <Compile Include="Utilities\ViewFactory.cs" />
     <Compile Include="ViewModels\AlarmListViewModel.cs" />
+    <Compile Include="ViewModels\DialogViewModels\NewProjectViewModel.cs" />
     <Compile Include="ViewModels\DocumentTypeViewModels\DocumentViewModel.cs" />
     <Compile Include="ViewModels\DocumentTypeViewModels\EditorTypeViewModel.cs" />
     <Compile Include="ViewModels\DocumentTypeViewModels\ParsingHistoryViewModel.cs" />
@@ -128,8 +140,11 @@
     <Compile Include="Views\AlarmList.xaml.cs">
       <DependentUpon>AlarmList.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\NewFileWindow.xaml.cs">
-      <DependentUpon>NewFileWindow.xaml</DependentUpon>
+    <Compile Include="Views\DialogViews\NewProjectDialog.xaml.cs">
+      <DependentUpon>NewProjectDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DialogViews\NewFileDialog.xaml.cs">
+      <DependentUpon>NewFileDialog.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -143,6 +158,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Resources\DataTemplates\StaticTemplate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Resources\DataTemplates\WindowTemplate.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -171,7 +190,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\NewFileWindow.xaml">
+    <Page Include="Views\DialogViews\NewProjectDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\DialogViews\NewFileDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -179,11 +202,6 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -270,7 +288,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ViewModels\WindowViewModels\" />
-    <Folder Include="Views\DialogViews\" />
     <Folder Include="Views\WindowViews\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

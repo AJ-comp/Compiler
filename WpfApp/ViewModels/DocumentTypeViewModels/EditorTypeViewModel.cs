@@ -21,7 +21,7 @@ namespace WpfApp.ViewModels.DocumentTypeViewModels
             }
         }
 
-        public EditorTypeViewModel(string title) : base(title)
+        public EditorTypeViewModel() : base("New Document")
         {
         }
 

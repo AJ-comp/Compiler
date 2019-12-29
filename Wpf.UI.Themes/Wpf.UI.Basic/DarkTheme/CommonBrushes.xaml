@@ -8,6 +8,7 @@
 
     <!-- Related to BackGround color -->
     <SolidColorBrush x:Key="ActiveBackGroundBrush" Color="#2C2C30" />
+    <SolidColorBrush x:Key="ActiveBackGroundBrush2" Color="#252526" />
     <SolidColorBrush x:Key="InActiveBackGroundBrush" Color="#3f3f46" />
 
     <!-- Related to Border color -->

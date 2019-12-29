@@ -124,6 +124,15 @@ namespace WpfApp.Properties {
         }
         
         /// <summary>
+        ///   Create directory for solution과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        internal static string CreateSolutionDir {
+            get {
+                return ResourceManager.GetString("CreateSolutionDir", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Current Documentation과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         internal static string CurrentDocumentation {
@@ -264,6 +273,15 @@ namespace WpfApp.Properties {
         }
         
         /// <summary>
+        ///   Name과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        internal static string Name {
+            get {
+                return ResourceManager.GetString("Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   New Create과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         internal static string New {
@@ -279,6 +297,24 @@ namespace WpfApp.Properties {
             get {
                 object obj = ResourceManager.GetObject("newfile", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   New Project과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        internal static string NewProject {
+            get {
+                return ResourceManager.GetString("NewProject", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ok과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        internal static string Ok {
+            get {
+                return ResourceManager.GetString("Ok", resourceCulture);
             }
         }
         
@@ -319,11 +355,38 @@ namespace WpfApp.Properties {
         }
         
         /// <summary>
+        ///   Position과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        internal static string Position {
+            get {
+                return ResourceManager.GetString("Position", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Project과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         internal static string Project {
             get {
                 return ResourceManager.GetString("Project", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Search과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        internal static string Search {
+            get {
+                return ResourceManager.GetString("Search", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Solution Path과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        internal static string SolutionPath {
+            get {
+                return ResourceManager.GetString("SolutionPath", resourceCulture);
             }
         }
         

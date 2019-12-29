@@ -41,23 +41,10 @@ namespace WpfApp.ViewModels.DialogViewModels
             }
         }
 
-        private RelayCommand<Action> _cancelCommand;
-        public RelayCommand<Action> CancelCommand
-        {
-            get
-            {
-                if (_cancelCommand == null)
-                    _cancelCommand = new RelayCommand<Action>(this.OnCancel);
-
-                return _cancelCommand;
-            }
-        }
-
         private void OnCreate(Action action)
         {
             this.CreateRequest?.Invoke(this, this.NewFileDataCollection[this.CurSelected]);
             action?.Invoke();
         }
-        private void OnCancel(Action action) => action?.Invoke();
     }
 }

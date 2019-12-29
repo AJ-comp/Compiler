@@ -118,6 +118,18 @@ namespace WpfApp.ViewModels
             }
         }
 
+        private RelayCommand newProjectCommand;
+        public RelayCommand NewProjectCommand
+        {
+            get
+            {
+                if (newProjectCommand == null)
+                    newProjectCommand = new RelayCommand(this.OnNewProject);
+
+                return newProjectCommand;
+            }
+        }
+
         private RelayCommand _grammarCommand;
         public RelayCommand GrammarCommand
         {
@@ -155,6 +167,7 @@ namespace WpfApp.ViewModels
         }
 
         private void OnNewFile() => this.NewFileAction?.Invoke();
+        private void OnNewProject() => this.NewProjectAction?.Invoke();
         private void OnGrammar()
         {
             var document = ServiceLocator.Current.GetInstance<GrammarInfoViewModel>();
