@@ -115,6 +115,7 @@
     <Compile Include="Models\AlarmData.cs" />
     <Compile Include="Models\Document.cs" />
     <Compile Include="Models\Invokers\Invoker.cs" />
+    <Compile Include="Models\SolutionStruct.cs" />
     <Compile Include="Properties\AlarmCodes.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -125,6 +126,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Utilities\Generator.cs" />
+    <Compile Include="Utilities\Loader.cs" />
     <Compile Include="Utilities\ViewCache.cs" />
     <Compile Include="Utilities\ViewFactory.cs" />
     <Compile Include="ViewModels\AlarmListViewModel.cs" />
@@ -137,6 +140,7 @@
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\ViewModelLocator.cs" />
     <Compile Include="ViewModels\DialogViewModels\DialogViewModel.cs" />
+    <Compile Include="ViewModels\WindowViewModels\SolutionExplorerViewModel.cs" />
     <Compile Include="Views\AlarmList.xaml.cs">
       <DependentUpon>AlarmList.xaml</DependentUpon>
     </Compile>
@@ -145,6 +149,9 @@
     </Compile>
     <Compile Include="Views\DialogViews\NewFileDialog.xaml.cs">
       <DependentUpon>NewFileDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\WindowViews\SolutionExplorer.xaml.cs">
+      <DependentUpon>SolutionExplorer.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -195,6 +202,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\DialogViews\NewFileDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\WindowViews\SolutionExplorer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -286,10 +297,7 @@
   <ItemGroup>
     <Resource Include="Resources\newfile.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="ViewModels\WindowViewModels\" />
-    <Folder Include="Views\WindowViews\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>

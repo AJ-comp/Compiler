@@ -11,8 +11,8 @@
              xmlns:lex="http://wpflocalizeextension.codeplex.com" 
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              lex:LocalizeDictionary.DesignCulture="en"
-             mc:Ignorable="d" 
-             d:DesignHeight="200" d:DesignWidth="600">
+             mc:Ignorable="d" >
+    
     <UserControl.DataContext>
         <localViewmodel:AlarmListViewModel/>
     </UserControl.DataContext>
@@ -25,7 +25,7 @@
         </Grid.RowDefinitions>
         
         <StackPanel Grid.Row="0" Orientation="Horizontal">
-            <ComboBox Width="150" Margin="0 0 10 0" SelectedIndex="0">
+            <ComboBox MinWidth="150" Margin="0 0 10 0" SelectedIndex="0">
                 <ComboBoxItem Content="{lex:Loc Key=WholeSolution}"/>
                 <ComboBoxItem Content="{lex:Loc Key=CurrentProject}"/>
                 <ComboBoxItem Content="{lex:Loc Key=CurrentDocumentation}"/>
@@ -33,27 +33,27 @@
             <ToggleButton Background="Transparent" Margin=" 0 0 5 0">
                 <StackPanel Orientation="Horizontal">
                     <Image Source="pack://application:,,,/WpfApp;component/Resources/error.png"
-                           Width="16" Height="16" Margin="0,0,2,0"/>
+                                Width="16" Height="16" Margin="0,0,2,0"/>
                 </StackPanel>
             </ToggleButton>
             <ToggleButton Background="Transparent" Margin="0 0 5 0">
                 <StackPanel Orientation="Horizontal">
                     <Image Source="pack://application:,,,/WpfApp;component/Resources/warning.png"
-                           Width="16" Height="16" Margin="0,0,2,0"/>
+                                Width="16" Height="16" Margin="0,0,2,0"/>
                 </StackPanel>
             </ToggleButton>
         </StackPanel>
 
 
         <ListView Name="alarmList" Grid.Row="1" ItemsSource="{Binding AlarmLists}" 
-                  HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                       HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header=" ">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <Image Source="{Binding Status, Converter={localConverters:EnumToImageConverter}}" 
-                                       Width="16" Height="16" Margin="0,0,2,0"/>
+                                             Width="16" Height="16" Margin="0,0,2,0"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>

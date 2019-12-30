@@ -94,6 +94,7 @@
                             HorizontalAlignment="Stretch" VerticalAlignment="Center"
                             Text="{Binding SolutionFullPath, Mode=OneWay}"/>
             <CheckBox Grid.Row="3" Grid.Column="2" Margin="10 0 0 0"
+                                IsChecked="{Binding CreateSolutionFolder}"
                                 Content="{lex:Loc Key=CreateSolutionDir}"  VerticalAlignment="Center"/>
             
         </Grid>

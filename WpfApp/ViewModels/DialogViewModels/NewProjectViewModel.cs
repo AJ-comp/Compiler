@@ -1,14 +1,16 @@
 ﻿using GalaSoft.MvvmLight.Command;
 using Microsoft.WindowsAPICodePack.Dialogs;
+using System;
 using System.Linq;
-using System.Windows.Forms;
+using WpfApp.Utilities;
 
 namespace WpfApp.ViewModels.DialogViewModels
 {
     public class NewProjectViewModel : DialogViewModel
     {
+        private Generator projectGenerator = new Generator();
 
-        private string solutionName;
+        private string solutionName = string.Empty;
         public string SolutionName
         {
             get => this.solutionName;
@@ -20,7 +22,7 @@ namespace WpfApp.ViewModels.DialogViewModels
             }
         }
 
-        private string solutionPath;
+        private string solutionPath = string.Empty;
         public string SolutionPath
         {
             get => this.solutionPath;
@@ -37,6 +39,7 @@ namespace WpfApp.ViewModels.DialogViewModels
             }
         }
 
+        public bool CreateSolutionFolder { get; set; }
         public string SolutionFullPath { get => this.SolutionPath + this.solutionName; }
 
         private RelayCommand searchCommand;
@@ -60,6 +63,14 @@ namespace WpfApp.ViewModels.DialogViewModels
             {
                 this.SolutionPath = selectFolderDialog.FileName + "\\";
             }
+        }
+
+        protected override void OnCreate(Action action)
+        {
+            projectGenerator.GenerateSolution(this.SolutionPath, this.SolutionName, this.CreateSolutionFolder);
+
+
+            base.OnCreate(action);
         }
     }
 }
