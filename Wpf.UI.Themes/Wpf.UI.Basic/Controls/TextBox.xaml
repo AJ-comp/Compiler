@@ -2,7 +2,7 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:Wpf.UI.Basic.Controls">
 
-    <Style x:Key="{x:Type TextBox}" TargetType="{x:Type TextBoxBase}">
+    <Style TargetType="{x:Type TextBox}">
         <Setter Property="SnapsToDevicePixels" Value="True"/>
         <Setter Property="OverridesDefaultStyle" Value="True"/>
         <Setter Property="KeyboardNavigation.TabNavigation" Value="None"/>
@@ -16,15 +16,15 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type TextBoxBase}">
                     <Border Name="Border" CornerRadius="2" Padding="2"
-                              Background="{DynamicResource ActiveBackGroundBrush}"
-                              BorderBrush="{DynamicResource ActiveBorderBrush}"
+                              Background="{DynamicResource ActiveTextBoxBackGroundBrush}"
+                              BorderBrush="{DynamicResource ActiveTextBoxBorderBrush}"
                               BorderThickness="1" >
-                        <ScrollViewer Margin="0" x:Name="PART_ContentHost"/>
+                        <ScrollViewer Margin="0" x:Name="PART_ContentHost" Background="{DynamicResource ActiveTextBoxBackGroundBrush}"/>
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsEnabled" Value="False">
-                            <Setter TargetName="Border" Property="Background" Value="{DynamicResource InActiveBackGroundBrush}"/>
-                            <Setter TargetName="Border" Property="BorderBrush" Value="{DynamicResource InActiveBorderBrush}"/>
+                            <Setter TargetName="Border" Property="Background" Value="{DynamicResource InActiveTextBoxBackGroundBrush}"/>
+                            <Setter TargetName="Border" Property="BorderBrush" Value="{DynamicResource InActiveTextBoxBorderBrush}"/>
                             <Setter Property="Foreground" Value="{DynamicResource InActiveTextBrush}"/>
                             <Setter Property="CaretBrush" Value="{DynamicResource InActiveCaretBrush}"/>
                         </Trigger>
@@ -62,15 +62,15 @@
                     <Border Name="Border"
                                   CornerRadius="2" 
                                   Padding="2" 
-                                  Background="{DynamicResource ActiveBackGroundBrush}"
-                                  BorderBrush="{DynamicResource ActiveBorderBrush}"
+                                  Background="{DynamicResource ActiveTextBoxBackGroundBrush}"
+                                  BorderBrush="{DynamicResource ActiveTextBoxBorderBrush}"
                                   BorderThickness="1" >
-                        <ScrollViewer x:Name="PART_ContentHost" />
+                        <ScrollViewer x:Name="PART_ContentHost" Background="{DynamicResource ActiveTextBoxBackGroundBrush}" />
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsEnabled" Value="False">
-                            <Setter TargetName="Border" Property="Background" Value="{DynamicResource InActiveBackGroundBrush}"/>
-                            <Setter TargetName="Border" Property="BorderBrush" Value="{DynamicResource InActiveBorderBrush}"/>
+                            <Setter TargetName="Border" Property="Background" Value="{DynamicResource InActiveTextBoxBackGroundBrush}"/>
+                            <Setter TargetName="Border" Property="BorderBrush" Value="{DynamicResource InActiveTextBoxBorderBrush}"/>
                             <Setter Property="Foreground" Value="{DynamicResource InActiveTextBrush}"/>
                         </Trigger>
                     </ControlTemplate.Triggers>

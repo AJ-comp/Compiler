@@ -26,9 +26,6 @@
     <SolidColorBrush x:Key="FocusedSelectedBackgroundBrush" Color="#007acc"/>
     <SolidColorBrush x:Key="UnFocusedSelectedBackgroundBrush" Color="#3f3f46"/>
 
-    <SolidColorBrush x:Key="ActiveCaretBrush" Color="WhiteSmoke" />
-    <SolidColorBrush x:Key="InActiveCaretBrush" Color="#2C2C30" />
-
 
     <LinearGradientBrush x:Key="PressedBrush" StartPoint="0,0" EndPoint="0,1">
         <GradientBrush.GradientStops>

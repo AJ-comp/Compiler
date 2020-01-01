@@ -2,6 +2,7 @@
 using Parse.WpfControls.Common;
 using Parse.WpfControls.EventArgs;
 using Parse.WpfControls.Models;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;

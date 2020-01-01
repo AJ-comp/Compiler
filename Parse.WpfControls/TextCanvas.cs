@@ -181,7 +181,7 @@ namespace Parse.WpfControls
 
             var dc = this.selectionLineAppearance.RenderOpen();
             Pen pen = new Pen(appearanceInfo.BorderBrush, appearanceInfo.BorderThickness);
-            Rect rect = new Rect(2, this.algorithm.GetDrawingYPosition(index), this.ActualWidth-2, this.LineHeight);
+            Rect rect = new Rect(0, this.algorithm.GetDrawingYPosition(index), this.ActualWidth, this.LineHeight);
 
             dc.DrawRectangle(appearanceInfo.BackGroundBrush, pen, rect);
 

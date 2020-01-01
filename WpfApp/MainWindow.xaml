@@ -42,7 +42,7 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="20"/>
+            <RowDefinition Height="30"/>
             <RowDefinition Height="4*"/>
             <RowDefinition Height="5"/>
             <RowDefinition Height="*"/>
@@ -61,22 +61,23 @@
             <ContentControl Grid.Column="0" Content="{Binding Documents}" 
                                 ContentTemplate="{StaticResource DocumentTemplate}"/>
 
-            <GridSplitter Grid.Column="1" VerticalAlignment="Stretch"
+            <GridSplitter Grid.Column="1" HorizontalAlignment="Stretch"
                                 Background="{DynamicResource ActiveBackGroundBrush}"/>
 
             <windowViews:SolutionExplorer Grid.Column="2"/>
 
         </Grid>
-
+        
         <GridSplitter Grid.Row="2" HorizontalAlignment="Stretch"
                             Background="{DynamicResource ActiveBackGroundBrush}"/>
 
         <view:AlarmList Grid.Row="3" 
                                 HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
-                                DataContext="{Binding AlarmListVM}" Height="120"/>
+                                DataContext="{Binding AlarmListVM}"/>
 
         <ContentControl Grid.Row="4"
                                  Content="{StaticResource MainWindowStatusBar}"/>
+
 
     </Grid>
 

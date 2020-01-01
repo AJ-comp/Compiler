@@ -24,6 +24,7 @@ namespace Parse.WpfControls
             this.HorizontalPosInitial();
 
             this.DrawingStartingPoint = new Point(2 - this.horizontalOffset, yPos - this.verticalOffset);
+//            this.DrawingStartingPoint = new Point(this.horizontalOffset, yPos - this.verticalOffset);
         }
 
         public void VerticalPosInitial()

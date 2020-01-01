@@ -7,6 +7,7 @@
         <ResourceDictionary Source="/Wpf.UI.Basic;component/DarkTheme/CommonBrushes.xaml" />
         <ResourceDictionary Source="/Wpf.UI.Basic;component/DarkTheme/ComboBoxBrushes.xaml" />
         <ResourceDictionary Source="/Wpf.UI.Basic;component/DarkTheme/ScrollBarBrushes.xaml" />
+        <ResourceDictionary Source="/Wpf.UI.Basic;component/DarkTheme/TextBoxBrushes.xaml" />
         <ResourceDictionary Source="/Wpf.UI.Basic;component/DarkTheme/WindowBrushes.xaml" />
 
         <ResourceDictionary Source="/Wpf.UI.Basic;component/Controls/Button.xaml" />
