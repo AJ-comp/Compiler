@@ -1,4 +1,6 @@
-﻿using System.Collections.ObjectModel;
+﻿using System.Collections;
+using System.Collections.ObjectModel;
+using System.Windows.Data;
 
 namespace WpfApp.Models
 {
@@ -15,17 +17,41 @@ namespace WpfApp.Models
 
     public class ProjectStruct : HirStruct
     {
-        public ObservableCollection<GroupStruct> Groups { get; set; } = new ObservableCollection<GroupStruct>();
-        public ObservableCollection<ItemStruct> Items { get; set; } = new ObservableCollection<ItemStruct>();
+        public ObservableCollection<FolderStruct> Folders { get; set; } = new ObservableCollection<FolderStruct>();
+        public ObservableCollection<FileStruct> Items { get; set; } = new ObservableCollection<FileStruct>();
+
+        public IList Children
+        {
+            get
+            {
+                return new CompositeCollection()
+                {
+                    new CollectionContainer() { Collection = Folders },
+                    new CollectionContainer() { Collection = Items }
+                };
+            }
+        }
     }
 
-    public class GroupStruct : HirStruct
+    public class FolderStruct : HirStruct
     {
-        public ObservableCollection<ItemStruct> Items { get; set; } = new ObservableCollection<ItemStruct>();
+        public ObservableCollection<FolderStruct> Folders { get; set; } = new ObservableCollection<FolderStruct>();
+        public ObservableCollection<FileStruct> Items { get; set; } = new ObservableCollection<FileStruct>();
+
+        public IList Children
+        {
+            get
+            {
+                return new CompositeCollection()
+                {
+                    new CollectionContainer() { Collection = Folders },
+                    new CollectionContainer() { Collection = Items }
+                };
+            }
+        }
     }
 
-    public class ItemStruct : HirStruct
+    public class FileStruct : HirStruct
     {
-
     }
 }

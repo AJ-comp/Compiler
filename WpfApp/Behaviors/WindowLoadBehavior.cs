@@ -45,8 +45,6 @@ namespace WpfApp.Behaviors
 
             this.ExecuteMenuCommand(mainVm);
 
-            
-
 
             //            this.editor.SetComponents(this.parser);
 

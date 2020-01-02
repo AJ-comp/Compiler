@@ -33,7 +33,6 @@
     <advanceControls:AdvancedWindow.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="Resources/DataTemplates/DocumentTemplate.xaml"/>
                 <ResourceDictionary Source="Resources/Menus/MainWindowMenus.xaml"/>
                 <ResourceDictionary Source="Resources/Menus/MainWindowStatusBar.xaml"/>
             </ResourceDictionary.MergedDictionaries>

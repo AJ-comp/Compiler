@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:model="clr-namespace:WpfApp.Models"
              xmlns:local="clr-namespace:WpfApp.Views.WindowViews"
              mc:Ignorable="d" 
              DataContext="{Binding SolutionExplorerWindow, Source={StaticResource Locator}}"
@@ -17,13 +18,8 @@
 
         <TextBox Grid.Row="0"/>
         <TextBox Grid.Row="1"/>
-        <TreeView Grid.Row="2">
-            <TreeView.ItemTemplate>
-                <HierarchicalDataTemplate ItemsSource="{Binding Solution}">
-                    <TextBlock Text="{Binding Name}"/>
-                </HierarchicalDataTemplate>
-            </TreeView.ItemTemplate>
-            
-        </TreeView>
+        <TreeView Grid.Row="2" ItemsSource="{Binding Solutions}" />
+
+
     </Grid>
 </UserControl>

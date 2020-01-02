@@ -6,7 +6,6 @@
                     xmlns:lex="http://wpflocalizeextension.codeplex.com" 
                     xmlns:wpfcontrolConverters="clr-namespace:Parse.WpfControls.Converters;assembly=Parse.WpfControls"
                     xmlns:local="clr-namespace:WpfApp.Resources.DataTemplates"
-                    xmlns:localViews="clr-namespace:WpfApp.Views"
                     xmlns:localAP="clr-namespace:WpfApp.AttachedProperties">
 
     <DataTemplate DataType="{x:Type parsers:SLRParser}">
@@ -16,7 +15,7 @@
             <TabItem Header="{lex:Loc Key=ParsingTable}" Content="{Binding ParsingTable}"/>
         </TabControl>
     </DataTemplate>
-    
+
     <DataTemplate DataType="{x:Type systemData:DataTable}">
         <WindowsFormsHost>
             <WindowsFormsHost.Child>
@@ -24,5 +23,5 @@
             </WindowsFormsHost.Child>
         </WindowsFormsHost>
     </DataTemplate>
-    
+
 </ResourceDictionary>
