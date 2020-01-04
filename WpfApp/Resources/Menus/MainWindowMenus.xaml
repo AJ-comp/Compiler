@@ -6,7 +6,7 @@
         <MenuItem Header="{lex:Loc Key=_File}" InputGestureText="Alt+F">
             <MenuItem Header="{lex:Loc Key=New}" InputGestureText="Alt+N">
                 <MenuItem.Icon>
-                    <Image Source="/WpfApp;component/Resources/newfile.png"
+                    <Image Source="{StaticResource NewFileMenuImagePath}"
                                 Width="16" Height="16"/>
                 </MenuItem.Icon>
                 <MenuItem Header="{lex:Loc Key=Project}" InputGestureText="Ctrl+Shift+N" Command="{Binding NewProjectCommand}"/>
@@ -18,6 +18,10 @@
             <MenuItem Header="{lex:Loc Key=Grammar}" InputGestureText="Alt+G" Command="{Binding GrammarCommand}"/>
             <MenuItem Header="{lex:Loc Key=ParsingHistory}" InputGestureText="Ctrl+Shift+H" Command="{Binding ParsingHistoryCommand}"/>
             <MenuItem Header="{lex:Loc Key=ParseTree}" InputGestureText="Ctrl+Shift+T" Command="{Binding ParseTreeCommand}"/>
+        </MenuItem>
+
+        <MenuItem Header="{lex:Loc Key=Tools}" InputGestureText="Alt+T">
+            <MenuItem Header="{lex:Loc Key=Options}" InputGestureText="Alt+O" Command="{Binding OptionCommand}"/>
         </MenuItem>
     </Menu>
 </ResourceDictionary>

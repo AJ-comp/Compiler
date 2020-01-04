@@ -12,7 +12,7 @@
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              lex:LocalizeDictionary.DesignCulture="en"
              mc:Ignorable="d" >
-    
+
     <UserControl.DataContext>
         <localViewmodel:AlarmListViewModel/>
     </UserControl.DataContext>
@@ -32,13 +32,13 @@
             </ComboBox>
             <ToggleButton Background="Transparent" Margin=" 0 0 5 0">
                 <StackPanel Orientation="Horizontal">
-                    <Image Source="pack://application:,,,/WpfApp;component/Resources/error.png"
+                    <Image Source="{StaticResource ErrorImagePath}"
                                 Width="16" Height="16" Margin="0,0,2,0"/>
                 </StackPanel>
             </ToggleButton>
             <ToggleButton Background="Transparent" Margin="0 0 5 0">
                 <StackPanel Orientation="Horizontal">
-                    <Image Source="pack://application:,,,/WpfApp;component/Resources/warning.png"
+                    <Image Source="{StaticResource WarningImagePath}"
                                 Width="16" Height="16" Margin="0,0,2,0"/>
                 </StackPanel>
             </ToggleButton>

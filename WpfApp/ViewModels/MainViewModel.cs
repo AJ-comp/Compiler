@@ -6,8 +6,11 @@ using Parse.FrontEnd.Grammars.MiniC;
 using Parse.FrontEnd.Grammars.PracticeGrammars;
 using Parse.FrontEnd.Parsers.LR;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
+using System.Windows;
+using WpfApp.Models;
 using WpfApp.ViewModels.DialogViewModels;
 using WpfApp.ViewModels.DocumentTypeViewModels;
 
@@ -106,6 +109,7 @@ namespace WpfApp.ViewModels
         public Action NewProjectAction = null;
         public Action ParseTreeAction = null;
 
+        #region Command related to NewFile
         private RelayCommand _newFileCommand;
         public RelayCommand NewFileCommand
         {
@@ -117,7 +121,10 @@ namespace WpfApp.ViewModels
                 return _newFileCommand;
             }
         }
+        private void OnNewFile() => this.NewFileAction?.Invoke();
+        #endregion
 
+        #region Command related to NewProject
         private RelayCommand newProjectCommand;
         public RelayCommand NewProjectCommand
         {
@@ -129,7 +136,10 @@ namespace WpfApp.ViewModels
                 return newProjectCommand;
             }
         }
+        private void OnNewProject() => this.NewProjectAction?.Invoke();
+        #endregion
 
+        #region Command related to Grammar
         private RelayCommand _grammarCommand;
         public RelayCommand GrammarCommand
         {
@@ -141,7 +151,16 @@ namespace WpfApp.ViewModels
                 return _grammarCommand;
             }
         }
+        private void OnGrammar()
+        {
+            var document = ServiceLocator.Current.GetInstance<GrammarInfoViewModel>();
 
+            if (this._documents.Contains(document) == false) this._documents.Add(document);
+            this.SelectedDocument = document;
+        }
+        #endregion
+
+        #region Command related to ParsingHistory
         private RelayCommand _parsingHistoryCommand;
         public RelayCommand ParsingHistoryCommand
         {
@@ -153,7 +172,17 @@ namespace WpfApp.ViewModels
                 return _parsingHistoryCommand;
             }
         }
+        private void OnParsingHistory()
+        {
+            var document = ServiceLocator.Current.GetInstance<ParsingHistoryViewModel>();
+            //            document.ParsingHistory = 
 
+            if (this._documents.Contains(document) == false) this._documents.Add(document);
+            this.selectedDocument = document;
+        }
+        #endregion
+
+        #region Command related to ParseTree
         private RelayCommand _parseTreeCommand;
         public RelayCommand ParseTreeCommand
         {
@@ -165,25 +194,35 @@ namespace WpfApp.ViewModels
                 return _parseTreeCommand;
             }
         }
-
-        private void OnNewFile() => this.NewFileAction?.Invoke();
-        private void OnNewProject() => this.NewProjectAction?.Invoke();
-        private void OnGrammar()
-        {
-            var document = ServiceLocator.Current.GetInstance<GrammarInfoViewModel>();
-
-            if(this._documents.Contains(document) == false) this._documents.Add(document);
-            this.SelectedDocument = document;
-        }
-        private void OnParsingHistory()
-        {
-            var document = ServiceLocator.Current.GetInstance<ParsingHistoryViewModel>();
-//            document.ParsingHistory = 
-
-            if (this._documents.Contains(document) == false) this._documents.Add(document);
-            this.selectedDocument = document;
-        }
         private void OnParseTree() => this.ParseTreeAction?.Invoke();
+        #endregion
+
+        #region Command related to Option
+        private RelayCommand optionCommand;
+        public RelayCommand OptionCommand
+        {
+            get
+            {
+                if (optionCommand == null)
+                    optionCommand = new RelayCommand(this.OnOption);
+
+                return optionCommand;
+            }
+        }
+        private void OnOption()
+        {
+            // for test
+            var app = (App)Application.Current;
+
+            List<Uri> uris = new List<Uri>();
+            uris.Add(new Uri("Resources/BasicImageResources.xaml", UriKind.RelativeOrAbsolute));
+            uris.Add(new Uri("/Wpf.UI.Basic;component/BlueTheme.xaml", UriKind.RelativeOrAbsolute));
+            uris.Add(new Uri("/Wpf.UI.Advance;component/BlueTheme.xaml", UriKind.RelativeOrAbsolute));
+
+            app.ChangeTheme(uris);
+        }
+        #endregion
+
 
         /// <summary>
         /// Initializes a new instance of the MainViewModel class.
@@ -198,6 +237,8 @@ namespace WpfApp.ViewModels
             foreach(var grammar in this.supplyGrammars)
                 grmmarViewModel.Grammars.Add(grammar);
 
+
+            Theme.Instance.ThemeKind = ThemeKind.Dark;
 
             if (IsInDesignMode)
             {

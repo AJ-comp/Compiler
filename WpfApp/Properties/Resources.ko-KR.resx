@@ -213,4 +213,7 @@
   <data name="Ok" xml:space="preserve">
     <value>확인</value>
   </data>
+  <data name="Tools" xml:space="preserve">
+    <value>도구</value>
+  </data>
 </root>

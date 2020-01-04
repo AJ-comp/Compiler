@@ -3,6 +3,7 @@ using System;
 using System.Globalization;
 using System.Windows.Data;
 using System.Windows.Markup;
+using WpfApp.Models;
 
 namespace WpfApp.Converters
 {
@@ -12,7 +13,7 @@ namespace WpfApp.Converters
         {
             AlarmStatus status = (AlarmStatus)value;
 
-            string path = "pack://application:,,,/WpfApp;component/Resources/";
+            string path = "/Resources/Images/Basic/";
 
             if (status == AlarmStatus.ParsingError) return path + "error.png";
             else if (status == AlarmStatus.ParsingWarning) return path + "warning.png";

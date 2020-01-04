@@ -160,16 +160,6 @@ namespace WpfApp.Properties {
         }
         
         /// <summary>
-        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
-        /// </summary>
-        internal static System.Drawing.Bitmap error {
-            get {
-                object obj = ResourceManager.GetObject("error", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
         ///   Explanation과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         internal static string Explanation {
@@ -215,46 +205,6 @@ namespace WpfApp.Properties {
         }
         
         /// <summary>
-        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
-        /// </summary>
-        internal static System.Drawing.Bitmap logo_16 {
-            get {
-                object obj = ResourceManager.GetObject("logo_16", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
-        /// </summary>
-        internal static System.Drawing.Bitmap logo_24 {
-            get {
-                object obj = ResourceManager.GetObject("logo_24", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
-        /// </summary>
-        internal static System.Drawing.Bitmap logo_dark_16 {
-            get {
-                object obj = ResourceManager.GetObject("logo_dark_16", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
-        /// </summary>
-        internal static System.Drawing.Bitmap logo_dark_24 {
-            get {
-                object obj = ResourceManager.GetObject("logo_dark_24", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
         ///   Mini C File과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         internal static string MiniCFile {
@@ -287,16 +237,6 @@ namespace WpfApp.Properties {
         internal static string New {
             get {
                 return ResourceManager.GetString("New", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
-        /// </summary>
-        internal static System.Drawing.Bitmap newfile {
-            get {
-                object obj = ResourceManager.GetObject("newfile", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
@@ -391,22 +331,11 @@ namespace WpfApp.Properties {
         }
         
         /// <summary>
-        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        ///   Tools과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
-        internal static System.Drawing.Bitmap typec16 {
+        internal static string Tools {
             get {
-                object obj = ResourceManager.GetObject("typec16", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
-        /// </summary>
-        internal static System.Drawing.Bitmap typec24 {
-            get {
-                object obj = ResourceManager.GetObject("typec24", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
+                return ResourceManager.GetString("Tools", resourceCulture);
             }
         }
         
@@ -416,16 +345,6 @@ namespace WpfApp.Properties {
         internal static string View {
             get {
                 return ResourceManager.GetString("View", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
-        /// </summary>
-        internal static System.Drawing.Bitmap warning {
-            get {
-                object obj = ResourceManager.GetObject("warning", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
             }
         }
         

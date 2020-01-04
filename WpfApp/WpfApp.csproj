@@ -108,6 +108,7 @@
     <Compile Include="Behaviors\WindowLoadBehavior.cs" />
     <Compile Include="Converters\GrammarToLRParserConverter.cs" />
     <Compile Include="Converters\RemoveObjectConverter.cs" />
+    <Compile Include="Converters\ToImageByThemeConverter.cs" />
     <Compile Include="Converters\WindowCloseLogicConverter.cs" />
     <Compile Include="Converters\EnumToImageConverter.cs" />
     <Compile Include="Converters\EventArgsConverterExtension.cs" />
@@ -116,6 +117,7 @@
     <Compile Include="Models\Document.cs" />
     <Compile Include="Models\Invokers\Invoker.cs" />
     <Compile Include="Models\SolutionStruct.cs" />
+    <Compile Include="Models\Theme.cs" />
     <Compile Include="Properties\AlarmCodes.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -165,6 +167,14 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Resources\BasicImageResources.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\DarkThemeImageResources.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Resources\DataTemplates\HierarchicalDataTemplates.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -232,6 +242,7 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <None Include="packages.config">
       <SubType>Designer</SubType>
@@ -275,31 +286,41 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\typec16.png" />
+    <Resource Include="Resources\Images\Basic\cfile_16.png" />
+    <Resource Include="Resources\Images\Basic\cfile_24.png" />
+    <Resource Include="Resources\Images\DarkTheme\cfile_16.png" />
+    <Resource Include="Resources\Images\DarkTheme\cfile_24.png" />
+    <Resource Include="Resources\Images\DarkTheme\cfile_48.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\error.png" />
+    <Resource Include="Resources\Images\Basic\error.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\warning.png" />
+    <Resource Include="Resources\Images\Basic\warning.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\typec24.png" />
+    <Resource Include="Resources\Images\Basic\newfile.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\logo_24.png" />
+    <Resource Include="Resources\Images\Basic\logo_24.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\logo_16.png" />
+    <Resource Include="Resources\Images\DarkTheme\logo_24.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\logo_dark_24.png" />
+    <Resource Include="Resources\Images\DarkTheme\logo_16.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\logo_dark_16.png" />
+    <Resource Include="Resources\Images\Basic\logo_16.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\newfile.png" />
+    <Resource Include="Resources\Images\DarkTheme\solution.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\DarkTheme\project.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Basic\cfile_48.png" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

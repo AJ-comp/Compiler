@@ -13,7 +13,10 @@ namespace WpfApp.ViewModels.DialogViewModels
 
         public NewFileDialogViewModel()
         {
-            this.NewFileDataCollection.Add(new Document("pack://application:,,,/WpfApp;component/Resources/typec24.png", Properties.Resources.MiniCFile, Properties.Resources.MiniCFileExplain));
+            string image = string.Empty;
+            image = (Theme.Instance.ThemeKind == ThemeKind.Dark) ? "/Resources/Images/DarkTheme/cfile_48.png" : "/Resources/Images/Basic/cfile_48.png";
+
+            this.NewFileDataCollection.Add(new Document(image, Properties.Resources.MiniCFile, Properties.Resources.MiniCFileExplain));
         }
 
         public event EventHandler<Document> CreateRequest;
