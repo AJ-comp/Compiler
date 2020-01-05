@@ -53,7 +53,7 @@
 
     <Style x:Key="GridViewColumnHeaderGripper" TargetType="Thumb">
         <Setter Property="Width" Value="18"/>
-        <Setter Property="Background" Value="{DynamicResource ActiveBackGroundBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource CommonEnableBackgroundBrush}"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Thumb}">
@@ -68,14 +68,14 @@
     <Style x:Key="{x:Type GridViewColumnHeader}" TargetType="GridViewColumnHeader">
         <Setter Property="HorizontalContentAlignment" Value="Center"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
-        <Setter Property="Foreground" Value="{DynamicResource ActiveTextBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource CommonEnableTextBrush}"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="GridViewColumnHeader">
                     <Grid>
                         <Border Name="HeaderBorder" BorderThickness="0,1,0,1" Padding="2,0,2,0"
-                                    BorderBrush="{DynamicResource ActiveBorderBrush}"
-                                    Background="{DynamicResource ActiveBackGroundBrush}">
+                                    BorderBrush="{DynamicResource CommonEnableBorderBrush}"
+                                    Background="{DynamicResource CommonEnableBackgroundBrush}">
                             <ContentPresenter Name="HeaderContent" Margin="0,0,0,1" RecognizesAccessKey="True"
                                                         VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                                         HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
@@ -86,14 +86,14 @@
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="true">
-                            <Setter TargetName="HeaderBorder" Property="Background" Value="{DynamicResource ActiveBackGroundBrush}"/>
+                            <Setter TargetName="HeaderBorder" Property="Background" Value="{DynamicResource CommonEnableBackgroundBrush}"/>
                         </Trigger>
                         <Trigger Property="IsPressed" Value="true">
-                            <Setter TargetName="HeaderBorder" Property="Background" Value="{DynamicResource PressedBrush}"/>
+                            <Setter TargetName="HeaderBorder" Property="Background" Value="{DynamicResource CommonPressedBrush}"/>
                             <Setter TargetName="HeaderContent" Property="Margin" Value="1,1,0,0"/>
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="false">
-                            <Setter Property="Foreground" Value="{DynamicResource InActiveTextBrush}"/>
+                            <Setter Property="Foreground" Value="{DynamicResource CommonDisableTextBrush}"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -120,8 +120,8 @@
                         <ControlTemplate TargetType="GridViewColumnHeader">
                             <Border Name="HeaderBorder"
                                           BorderThickness="0,1,0,1"
-                                          BorderBrush="{DynamicResource ActiveBorderBrush}"
-                                          Background="{DynamicResource ActiveBackGroundBrush}"/>
+                                          BorderBrush="{DynamicResource CommonEnableBorderBrush}"
+                                          Background="{DynamicResource CommonEnableBackgroundBrush}"/>
                         </ControlTemplate>
                     </Setter.Value>
                 </Setter>
@@ -141,7 +141,7 @@
                 <ControlTemplate TargetType="ListView">
                     <Border Name="Border"
                                   BorderThickness="1"
-                                  BorderBrush="{DynamicResource ActiveBorderBrush}"
+                                  BorderBrush="{DynamicResource CommonEnableBorderBrush}"
                                   Background="#252526">
                         <ScrollViewer Style="{DynamicResource {x:Static GridView.GridViewScrollViewerStyleKey}}">
                             <ItemsPresenter />
@@ -152,7 +152,7 @@
                             <Setter Property="ScrollViewer.CanContentScroll" Value="false"/>
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="false">
-                            <Setter TargetName="Border" Property="Background" Value="{DynamicResource InActiveBorderBrush}"/>
+                            <Setter TargetName="Border" Property="Background" Value="{DynamicResource CommonDisableBorderBrush}"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

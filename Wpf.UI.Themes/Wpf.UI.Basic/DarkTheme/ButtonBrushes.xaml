@@ -11,10 +11,21 @@
     </LinearGradientBrush>
 
     <!-- Related to Button color -->
-    <SolidColorBrush x:Key="ActiveButtonBackGroundBrush" Color="#3f3f46" />
-    <SolidColorBrush x:Key="InActiveButtonBackGroundBrush" Color="#3f3f46" />
+    <SolidColorBrush x:Key="ButtonEnableBackgroundBrush" Color="#3f3f46" />
+    <SolidColorBrush x:Key="ButtonDisableBackgroundBrush" Color="#2d2d30" />
+    <Color x:Key="ButtonDisableBackgroundColor">#2d2d30</Color>
 
-    <SolidColorBrush x:Key="ActiveButtonBorderBrush" Color="#555555" />
-    <SolidColorBrush x:Key="InActiveButtonBorderBrush" Color="#3f3f46" />
+    <SolidColorBrush x:Key="ButtonEnableBorderBrush" Color="#555555" />
+    <SolidColorBrush x:Key="ButtonDisableBorderBrush" Color="#3f3f46" />
+    <Color x:Key="ButtonDisableBorderColor">#3f3f46</Color>
+
+    <SolidColorBrush x:Key="ButtonPressedBackgroundBrush" Color="#555555" />
+    <SolidColorBrush x:Key="ButtonPressedBorderBrush" Color="#3f3f46" />
+    <Color x:Key="ButtonPressedBackgroundColor">#555555</Color>
+    <Color x:Key="ButtonPressedBorderColor">#555555</Color>
+    
+
+    <SolidColorBrush x:Key="ButtonHoverBackgroundBrush" Color="#555555" />
+    <SolidColorBrush x:Key="ButtonHoverBorderBrush" Color="#555555" />
 
 </ResourceDictionary>

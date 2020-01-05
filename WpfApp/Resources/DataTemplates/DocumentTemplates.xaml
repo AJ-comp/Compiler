@@ -71,7 +71,7 @@
                 <Path Height="16"
                             Width="16"
                             Data="M4,4 L12,12 M12,4 L4,12"
-                            Stroke="{DynamicResource ActiveTextBrush}"/>
+                            Stroke="{DynamicResource CommonEnableTextBrush}"/>
             </Button>
 
             <Label x:Name="ContentSite"

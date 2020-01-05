@@ -11,10 +11,10 @@
                 <ControlTemplate TargetType="{x:Type local:AdvancedWindow}">
                     <Grid>
                         <Border x:Name="MainBorder"
-                                BorderBrush="{DynamicResource ActiveBorderBrush}"
+                                BorderBrush="{DynamicResource CommonEnableBorderBrush}"
                                 BorderThickness="1"
                                 CornerRadius="2"
-                                Background="{DynamicResource ActiveBackGroundBrush}">
+                                Background="{DynamicResource CommonEnableBackgroundBrush}">
                             <DockPanel LastChildFill="True">
                                 <Rectangle x:Name="PART_LEFT_BORDER" Width="2" Cursor="SizeWE">
                                     <Rectangle.Fill>

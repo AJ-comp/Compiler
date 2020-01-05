@@ -2,11 +2,11 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:Wpf.UI.Basic.DarkTheme">
 
-    <SolidColorBrush x:Key="ScrollViewerBackGroundBrush" Color="#3e3e42" />
-    <SolidColorBrush x:Key="ScrollViewerForeGroundBrush" Color="#686868" />
+    <SolidColorBrush x:Key="ScrollViewerEnableBackgroundBrush" Color="#3e3e42" />
+    <SolidColorBrush x:Key="ScrollViewerEnableForegroundBrush" Color="#686868" />
 
-    <SolidColorBrush x:Key="VSBBackGroundBrush" Color="#3e3e42" />
-    <SolidColorBrush x:Key="HSBBackGroundBrush" Color="#3e3e42" />
+    <SolidColorBrush x:Key="VSBBackgroundBrush" Color="#3e3e42" />
+    <SolidColorBrush x:Key="HSBBackgroundBrush" Color="#3e3e42" />
     
     <!--Control colors.-->
     <Color x:Key="ControlLightColor">#3e3e42</Color>

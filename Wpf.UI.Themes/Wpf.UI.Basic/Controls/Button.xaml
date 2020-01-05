@@ -2,13 +2,71 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:Wpf.UI.Basic">
 
-    <Style x:Key="{x:Type Button}" TargetType="{x:Type Button}">
-        <Setter Property="Background" Value="{DynamicResource ActiveButtonBackGroundBrush}" />
-        <Setter Property="BorderBrush" Value="{DynamicResource ActiveButtonBorderBrush}" />
+    <!--<Style TargetType="{x:Type Button}" BasedOn="{StaticResource {x:Type Button}}">
+        <Setter Property="Background" Value="{DynamicResource ButtonEnableBackgroundBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource ButtonEnableBorderBrush}" />
         <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" />
         <Setter Property="HorizontalContentAlignment" Value="Center" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="Padding" Value="1" />
+
+        <Style.Triggers>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Background" Value="{DynamicResource ButtonDisableBackgroundBrush}"/>
+                <Setter Property="Foreground" Value="{DynamicResource CommonDisableTextBrush}"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="ButtonFocusVisual">
+        <Setter Property="Control.Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Border>
+                        <Rectangle Margin="2"
+                                         StrokeThickness="1"
+                                         Stroke="#60000000"
+                                         StrokeDashArray="1 2" />
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>-->
+
+
+    <!-- Button -->
+    <Style TargetType="Button">
+        <Setter Property="SnapsToDevicePixels" Value="true" />
+        <Setter Property="OverridesDefaultStyle" Value="true" />
+        <Setter Property="FocusVisualStyle" Value="{StaticResource ButtonFocusVisual}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border TextBlock.Foreground="{TemplateBinding Foreground}"
+                                    x:Name="Border"
+                                    CornerRadius="2"
+                                    BorderThickness="1"
+                                    Background="{DynamicResource CommonEnableBackgroundBrush}"
+                                    BorderBrush="{DynamicResource CommonEnableBorderBrush}">
+
+
+                        <ContentPresenter Margin="2"
+                                                    HorizontalAlignment="Center"
+                                                    VerticalAlignment="Center"
+                                                    RecognizesAccessKey="True" />
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="Border" Property="Background" Value="{DynamicResource ButtonDisableBackgroundBrush}"/>
+                        </Trigger>
+
+                        <Trigger Property="IsMouseOver" Value="true">
+                            <Setter TargetName="Border" Property="BorderBrush" Value="LightBlue"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
     </Style>
 
 </ResourceDictionary>

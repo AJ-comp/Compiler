@@ -8,7 +8,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Separator">
-                    <Border BorderBrush="{DynamicResource SolidBorderBrush}" BorderThickness="1"/>
+                    <Border BorderBrush="{DynamicResource CommonSolidBorderBrush}" BorderThickness="1"/>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
@@ -21,8 +21,8 @@
                 <ContentPresenter Margin="6,3,6,3" ContentSource="Header" RecognizesAccessKey="True" />
                 <Popup Name="Popup" Placement="Bottom" AllowsTransparency="True" Focusable="False" PopupAnimation="Fade" IsOpen="{TemplateBinding IsSubmenuOpen}">
                     <Border Name="SubmenuBorder" SnapsToDevicePixels="True" BorderThickness="1"                              
-                              Background="{DynamicResource ActiveBackGroundBrush}"
-                              BorderBrush="{DynamicResource SolidBorderBrush}">
+                              Background="{DynamicResource CommonEnableBackgroundBrush}"
+                              BorderBrush="{DynamicResource CommonSolidBorderBrush}">
                         <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Cycle" />
                     </Border>
                 </Popup>
@@ -33,7 +33,7 @@
                 <Setter TargetName="Popup" Property="PopupAnimation" Value="None"/>
             </Trigger>
             <Trigger Property="IsHighlighted" Value="true">
-                <Setter TargetName="Border" Property="Background" Value="{DynamicResource SelectedBackgroundBrush}"/>
+                <Setter TargetName="Border" Property="Background" Value="{DynamicResource CommonSelectedBackgroundBrush}"/>
                 <Setter TargetName="Border" Property="BorderBrush" Value="Transparent"/>
             </Trigger>
             <Trigger SourceName="Popup" Property="Popup.AllowsTransparency" Value="True">
@@ -41,7 +41,7 @@
                 <Setter TargetName="SubmenuBorder" Property="Padding" Value="0,0,0,3"/>
             </Trigger>
             <Trigger Property="IsEnabled" Value="False">
-                <Setter Property="Foreground" Value="{DynamicResource InActiveTextBrush}"/>
+                <Setter Property="Foreground" Value="{DynamicResource CommonDisableTextBrush}"/>
             </Trigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
@@ -55,14 +55,14 @@
         </Border>
         <ControlTemplate.Triggers>
             <Trigger Property="IsHighlighted" Value="true">
-                <Setter TargetName="Border" Property="Background" Value="{DynamicResource SelectedBackgroundBrush}"/>
+                <Setter TargetName="Border" Property="Background" Value="{DynamicResource CommonSelectedBackgroundBrush}"/>
                 <Setter TargetName="Border" Property="BorderBrush" Value="Transparent"/>
             </Trigger>
             <Trigger Property="IsEnabled" Value="False">
-                <Setter Property="Foreground" Value="{DynamicResource InActiveTextBrush}"/>
+                <Setter Property="Foreground" Value="{DynamicResource CommonDisableTextBrush}"/>
             </Trigger>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background"  Value="{DynamicResource HoverBackgroundBrush}"/>
+                <Setter Property="Background"  Value="{DynamicResource CommonHoverBackgroundBrush}"/>
             </Trigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
@@ -79,8 +79,8 @@
                 </Grid.ColumnDefinitions>
                 <ContentPresenter Name="Icon" Margin="6,0,6,0" VerticalAlignment="Center" ContentSource="Icon"/>
                 <Border Name="Check" Width="13" Height="13" Visibility="Collapsed" Margin="6,0,6,0" BorderThickness="1"
-                            Background="{DynamicResource ActiveBackGroundBrush}"
-                            BorderBrush="{DynamicResource ActiveBorderBrush}">
+                            Background="{DynamicResource CommonEnableBackgroundBrush}"
+                            BorderBrush="{DynamicResource CommonEnableBorderBrush}">
                     <Path Name="CheckMark" Width="7" Height="7" Visibility="Hidden" SnapsToDevicePixels="False" StrokeThickness="2"
                               Stroke="{DynamicResource GlyphBrush}"
                               Data="M 0 0 L 7 7 M 0 7 L 7 0" />
@@ -102,10 +102,10 @@
                 <Setter TargetName="Icon" Property="Visibility" Value="Hidden"/>
             </Trigger>
             <Trigger Property="IsHighlighted" Value="true">
-                <Setter TargetName="Border" Property="Background" Value="{DynamicResource SelectedBackgroundBrush}"/>
+                <Setter TargetName="Border" Property="Background" Value="{DynamicResource CommonSelectedBackgroundBrush}"/>
             </Trigger>
             <Trigger Property="IsEnabled" Value="false">
-                <Setter Property="Foreground" Value="{DynamicResource InActiveTextBrush}"/>
+                <Setter Property="Foreground" Value="{DynamicResource CommonDisableTextBrush}"/>
             </Trigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
@@ -143,8 +143,8 @@
                 <Popup Name="Popup" Placement="Right" HorizontalOffset="-4" AllowsTransparency="True" Focusable="False" PopupAnimation="Fade"
                             IsOpen="{TemplateBinding IsSubmenuOpen}">
                     <Border Name="SubmenuBorder" SnapsToDevicePixels="True" BorderThickness="1"
-                                  Background="{DynamicResource ActiveBackGroundBrush}"
-                                  BorderBrush="{DynamicResource SolidBorderBrush}">
+                                  Background="{DynamicResource CommonEnableBackgroundBrush}"
+                                  BorderBrush="{DynamicResource CommonSolidBorderBrush}">
                         <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Cycle" />
                     </Border>
                 </Popup>
@@ -155,14 +155,14 @@
                 <Setter TargetName="Icon" Property="Visibility" Value="Collapsed"/>
             </Trigger>
             <Trigger Property="IsHighlighted" Value="true">
-                <Setter TargetName="Border" Property="Background" Value="{DynamicResource SelectedBackgroundBrush}"/>
+                <Setter TargetName="Border" Property="Background" Value="{DynamicResource CommonSelectedBackgroundBrush}"/>
             </Trigger>
             <Trigger SourceName="Popup" Property="Popup.AllowsTransparency" Value="True">
                 <Setter TargetName="SubmenuBorder" Property="CornerRadius" Value="4"/>
                 <Setter TargetName="SubmenuBorder" Property="Padding" Value="0,3,0,3"/>
             </Trigger>
             <Trigger Property="IsEnabled" Value="false">
-                <Setter Property="Foreground" Value="{DynamicResource InActiveTextBrush}"/>
+                <Setter Property="Foreground" Value="{DynamicResource CommonDisableTextBrush}"/>
             </Trigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>

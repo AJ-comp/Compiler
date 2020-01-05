@@ -4,7 +4,7 @@
 
     <Style x:Key="FlatButton" TargetType="{x:Type Button}" BasedOn="{StaticResource {x:Type Button}}">
         <Setter Property="Background" Value="Transparent" />
-        <Setter Property="BorderBrush" Value="{DynamicResource ActiveBorderBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource CommonEnableBorderBrush}" />
         <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" />
         <Setter Property="HorizontalContentAlignment" Value="Center" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
@@ -34,7 +34,7 @@
                         <Trigger Property="IsKeyboardFocused" Value="true" />
                         <Trigger Property="ToggleButton.IsChecked" Value="true" />
                         <Trigger Property="IsEnabled" Value="false">
-                            <Setter Property="Foreground" Value="{DynamicResource InActiveTextBrush}" />
+                            <Setter Property="Foreground" Value="{DynamicResource CommonDisableTextBrush}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

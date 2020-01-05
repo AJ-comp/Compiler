@@ -3,20 +3,21 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:localConverters="clr-namespace:WpfApp.Converters"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:lex="http://wpflocalizeextension.codeplex.com" 
              xmlns:local="clr-namespace:WpfApp.Views.DialogViews"
+             xmlns:localConverters="clr-namespace:WpfApp.Converters"
+             xmlns:localBehaviors="clr-namespace:WpfApp.Behaviors"
+             xmlns:ap="clr-namespace:WpfApp.AttachedProperties"
              xmlns:viewModels="clr-namespace:WpfApp.ViewModels.DialogViewModels"
              mc:Ignorable="d" 
              WindowStyle="ToolWindow"
              WindowStartupLocation="CenterScreen"
              Style="{DynamicResource NormalWindow}"
              Title="{lex:Loc Key=NewProject}"
+             DataContext="{Binding NewProjectWindow, Source={StaticResource Locator}}"
              Height="600" Width="800">
-    <Window.DataContext>
-        <viewModels:NewProjectViewModel/>
-    </Window.DataContext>
-    
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="3*"/>
@@ -31,8 +32,12 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <TreeView Grid.Row="0" Grid.Column="0">
+            <TreeView Grid.Row="0" Grid.Column="0" 
+                      ItemsSource="{Binding MicroControllers}">
 
+                <i:Interaction.Behaviors>
+                    <localBehaviors:BindableSelectedItemBehavior SelectedItem="{Binding SelectedItem, Mode=TwoWay}" />
+                </i:Interaction.Behaviors>
             </TreeView>
 
             <ListBox Grid.Row="0" Grid.Column="1"
@@ -54,7 +59,7 @@
             <TextBlock Grid.Row="0" Grid.Column="2"/>
         </Grid>
 
-        <Grid Grid.Row="1" Background="{DynamicResource ActiveBackGroundBrush2}">
+        <Grid Grid.Row="1" Background="{DynamicResource CommonEnableBackgroundBrush2}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="5"/>
                 <RowDefinition Height="*"/>
@@ -100,7 +105,7 @@
         </Grid>
 
 
-        <Grid Grid.Row="2" Background="{DynamicResource ActiveBackGroundBrush2}">
+        <Grid Grid.Row="2" Background="{DynamicResource CommonEnableBackgroundBrush2}">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <Button MinWidth="80" Height="20" Margin="0, 0, 10, 0" 
                     Content="{lex:Loc Key=Ok}" 

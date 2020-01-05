@@ -61,14 +61,14 @@
                                 ContentTemplate="{StaticResource DocumentTemplate}"/>
 
             <GridSplitter Grid.Column="1" HorizontalAlignment="Stretch"
-                                Background="{DynamicResource ActiveBackGroundBrush}"/>
+                                Background="{DynamicResource CommonEnableBackgroundBrush}"/>
 
             <windowViews:SolutionExplorer Grid.Column="2"/>
 
         </Grid>
         
         <GridSplitter Grid.Row="2" HorizontalAlignment="Stretch"
-                            Background="{DynamicResource ActiveBackGroundBrush}"/>
+                            Background="{DynamicResource CommonEnableBackgroundBrush}"/>
 
         <view:AlarmList Grid.Row="3" 
                                 HorizontalAlignment="Stretch" VerticalAlignment="Stretch"

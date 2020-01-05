@@ -19,7 +19,7 @@
                                 <Condition Property="IsFocused" Value="true"/>
                             </MultiTrigger.Conditions>
                             <MultiTrigger.Setters>
-                                <Setter TargetName="Border" Property="Background" Value="{DynamicResource FocusedSelectedBackgroundBrush}"/>
+                                <Setter TargetName="Border" Property="Background" Value="{DynamicResource CommonFocusedSelectedBackgroundBrush}"/>
                             </MultiTrigger.Setters>
                         </MultiTrigger>
 
@@ -29,7 +29,7 @@
                                 <Condition Property="IsFocused" Value="false"/>
                             </MultiTrigger.Conditions>
                             <MultiTrigger.Setters>
-                                <Setter TargetName="Border" Property="Background" Value="{DynamicResource UnFocusedSelectedBackgroundBrush}"/>
+                                <Setter TargetName="Border" Property="Background" Value="{DynamicResource CommonUnfocusedSelectedBackgroundBrush}"/>
                             </MultiTrigger.Setters>
                         </MultiTrigger>
                         

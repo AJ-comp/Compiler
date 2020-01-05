@@ -22,8 +22,8 @@
                                         Background="Transparent" />
                         <Border Name="Border" 
                                     Grid.Row="1" 
-                                    Background="{DynamicResource ActiveBackGroundBrush}" 
-                                    BorderBrush="{DynamicResource ActiveBorderBrush}"
+                                    Background="{DynamicResource CommonEnableBackgroundBrush}" 
+                                    BorderBrush="{DynamicResource CommonEnableBorderBrush}"
                                     BorderThickness="1" 
                                     CornerRadius="2" 
                                     KeyboardNavigation.TabNavigation="Local"
@@ -36,8 +36,8 @@
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsEnabled" Value="False">
-                            <Setter Property="Foreground" Value="{DynamicResource InActiveTextBrush}" />
-                            <Setter TargetName="Border" Property="BorderBrush" Value="{DynamicResource InActiveBorderBrush}" />
+                            <Setter Property="Foreground" Value="{DynamicResource CommonDisableTextBrush}" />
+                            <Setter TargetName="Border" Property="BorderBrush" Value="{DynamicResource CommonDisableBorderBrush}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

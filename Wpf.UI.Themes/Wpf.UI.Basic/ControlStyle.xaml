@@ -5,13 +5,13 @@
     <!-- Global Defaults -->
     <Style TargetType="{x:Type ButtonBase}" BasedOn="{StaticResource {x:Type ButtonBase}}">
         <Setter Property="Background"  Value="Transparent" />
-        <Setter Property="Foreground" Value="{DynamicResource ActiveTextBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource CommonEnableTextBrush}"/>
         <Style.Triggers>
             <Trigger Property="IsEnabled" Value="false">
-                <Setter Property="Foreground" Value="{DynamicResource InActiveTextBrush}"/>
+                <Setter Property="Foreground" Value="{DynamicResource CommonDisableTextBrush}"/>
             </Trigger>
             <Trigger Property="IsEnabled" Value="true">
-                <Setter Property="Foreground" Value="{DynamicResource ActiveTextBrush}"/>
+                <Setter Property="Foreground" Value="{DynamicResource CommonEnableTextBrush}"/>
             </Trigger>
         </Style.Triggers>
     </Style>
@@ -20,7 +20,7 @@
     <!-- Global Defaults -->
     <Style x:Key="SkinListView" TargetType="{x:Type ListView}">
         <Setter Property="Background" Value="Transparent"/>
-        <Setter Property="Foreground" Value="{DynamicResource ActiveTextBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource CommonEnableTextBrush}"/>
     </Style>
 
 </ResourceDictionary>

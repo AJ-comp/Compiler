@@ -21,10 +21,22 @@ namespace WpfApp.ViewModels.DialogViewModels
 
         public event EventHandler<Document> CreateRequest;
 
-        protected override void OnCreate(Action action)
+
+        private RelayCommand<Action> _createCommand;
+        public RelayCommand<Action> CreateCommand
+        {
+            get
+            {
+                if (this._createCommand == null)
+                    this._createCommand = new RelayCommand<Action>(this.OnCreate);
+
+                return this._createCommand;
+            }
+        }
+        private void OnCreate(Action action)
         {
             this.CreateRequest?.Invoke(this, this.NewFileDataCollection[this.CurSelected]);
-            base.OnCreate(action);
+            action?.Invoke();
         }
     }
 }

@@ -3,9 +3,9 @@
                     xmlns:local="clr-namespace:Wpf.UI.Basic.Controls">
 
     <Style TargetType="ContextMenu">
-        <Setter Property="Background" Value="{DynamicResource ActiveBackGroundBrush}"/>
-        <Setter Property="BorderBrush" Value="{DynamicResource ActiveBorderBrush}"/>
-        <Setter Property="Foreground" Value="{DynamicResource ActiveTextBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource CommonEnableBackgroundBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource CommonEnableBorderBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource CommonEnableTextBrush}"/>
         <Setter Property="SnapsToDevicePixels" Value="True"/>
         <Setter Property="OverridesDefaultStyle" Value="True"/>
         <Setter Property="Grid.IsSharedSizeScope" Value="true"/>
@@ -14,8 +14,8 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ContextMenu}">
                     <Border x:Name="Border"
-                                Background="{DynamicResource ActiveBackGroundBrush}"
-                                BorderBrush="{DynamicResource ActiveBorderBrush}"
+                                Background="{DynamicResource CommonEnableBackgroundBrush}"
+                                BorderBrush="{DynamicResource CommonEnableBorderBrush}"
                                 BorderThickness="1">
                         <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Cycle" />
                     </Border>

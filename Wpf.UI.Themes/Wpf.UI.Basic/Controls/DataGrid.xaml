@@ -675,33 +675,33 @@
     </Style>-->
 
     <Style TargetType="DataGrid">
-        <Setter Property="Background" Value="{DynamicResource ActiveBackGroundBrush}"/>
-        <Setter Property="BorderBrush" Value="{DynamicResource ActiveBorderBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource CommonEnableBackgroundBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource CommonEnableBorderBrush}"/>
     </Style>
 
     <Style TargetType="DataGridColumnHeader">
         <Setter Property="Background" Value="Transparent"/>
-        <Setter Property="BorderBrush" Value="{DynamicResource ActiveBorderBrush}"/>
-        <Setter Property="Foreground" Value="{DynamicResource ActiveTextBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource CommonEnableBorderBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource CommonEnableTextBrush}"/>
         <Setter Property="Padding" Value="5 0 5 0"/>
     </Style>
 
     <Style TargetType="DataGridRowHeader">
         <Setter Property="Background" Value="Transparent"/>
-        <Setter Property="BorderBrush" Value="{DynamicResource ActiveBorderBrush}"/>
-        <Setter Property="Foreground" Value="{DynamicResource ActiveTextBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource CommonEnableBorderBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource CommonEnableTextBrush}"/>
     </Style>
 
     <Style TargetType="DataGridCell">
         <Setter Property="Background" Value="Transparent"/>
-        <Setter Property="BorderBrush" Value="{DynamicResource ActiveBorderBrush}"/>
-        <Setter Property="Foreground" Value="{DynamicResource ActiveTextBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource CommonEnableBorderBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource CommonEnableTextBrush}"/>
     </Style>
 
     <Style TargetType="DataGridRow">
         <Setter Property="Background" Value="Transparent"/>
-        <Setter Property="BorderBrush" Value="{DynamicResource ActiveBorderBrush}"/>
-        <Setter Property="Foreground" Value="{DynamicResource ActiveTextBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource CommonEnableBorderBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource CommonEnableTextBrush}"/>
     </Style>
 
 </ResourceDictionary>

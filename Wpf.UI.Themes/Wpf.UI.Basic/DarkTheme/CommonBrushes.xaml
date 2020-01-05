@@ -3,31 +3,34 @@
                     xmlns:local="clr-namespace:Wpf.UI.Basic">
 
     <!-- The text color of the this theme -->
-    <SolidColorBrush x:Key="ActiveTextBrush" Color="WhiteSmoke" />
-    <SolidColorBrush x:Key="InActiveTextBrush" Color="DimGray" />
+    <SolidColorBrush x:Key="CommonEnableTextBrush" Color="WhiteSmoke" />
+    <SolidColorBrush x:Key="CommonDisableTextBrush" Color="DimGray" />
+    <Color x:Key="CommonDisableTextColor">DimGray</Color>
 
     <!-- Related to BackGround color -->
-    <SolidColorBrush x:Key="ActiveBackGroundBrush" Color="#2C2C30" />
-    <SolidColorBrush x:Key="ActiveBackGroundBrush2" Color="#252526" />
-    <SolidColorBrush x:Key="InActiveBackGroundBrush" Color="#3f3f46" />
+    <SolidColorBrush x:Key="CommonEnableBackgroundBrush" Color="#2C2C30" />
+    <SolidColorBrush x:Key="CommonEnableBackgroundBrush2" Color="#252526" />
+    <SolidColorBrush x:Key="CommonDisableBackgroundBrush" Color="#3f3f46" />
 
     <!-- Related to Border color -->
-    <SolidColorBrush x:Key="ActiveBorderBrush" Color="#3f3f46" />
-    <SolidColorBrush x:Key="InActiveBorderBrush" Color="#3f3f46" />
+    <SolidColorBrush x:Key="CommonEnableBorderBrush" Color="#3f3f46" />
+    <SolidColorBrush x:Key="CommonDisableBorderBrush" Color="#3f3f46" />
 
     <!-- Related to when hover -->
-    <SolidColorBrush x:Key="HoverBackgroundBrush" Color="#3f3f46" />
-    <SolidColorBrush x:Key="HoverBorderBrush" Color="#3f3f46" />
+    <SolidColorBrush x:Key="CommonHoverBackgroundBrush" Color="#3f3f46" />
+    <SolidColorBrush x:Key="CommonHoverBorderBrush" Color="#3f3f46" />
+    <Color x:Key="CommonHoverBackgroundColor">#3f3f46</Color>
+    <Color x:Key="CommonHoverBorderColor">#3f3f46</Color>
 
-    <SolidColorBrush x:Key="SolidBorderBrush" Color="#888" />
-    <SolidColorBrush x:Key="LightBorderBrush" Color="#AAA" />
+    <SolidColorBrush x:Key="CommonSolidBorderBrush" Color="#888" />
+    <SolidColorBrush x:Key="CommonLightBorderBrush" Color="#AAA" />
 
-    <SolidColorBrush x:Key="SelectedBackgroundBrush" Color="#3e3e40" />
-    <SolidColorBrush x:Key="FocusedSelectedBackgroundBrush" Color="#007acc"/>
-    <SolidColorBrush x:Key="UnFocusedSelectedBackgroundBrush" Color="#3f3f46"/>
+    <SolidColorBrush x:Key="CommonSelectedBackgroundBrush" Color="#3e3e40" />
+    <SolidColorBrush x:Key="CommonFocusedSelectedBackgroundBrush" Color="#007acc"/>
+    <SolidColorBrush x:Key="CommonUnfocusedSelectedBackgroundBrush" Color="#3f3f46"/>
 
 
-    <LinearGradientBrush x:Key="PressedBrush" StartPoint="0,0" EndPoint="0,1">
+    <LinearGradientBrush x:Key="CommonPressedBrush" StartPoint="0,0" EndPoint="0,1">
         <GradientBrush.GradientStops>
             <GradientStopCollection>
                 <GradientStop Color="#BBB" Offset="0.0"/>

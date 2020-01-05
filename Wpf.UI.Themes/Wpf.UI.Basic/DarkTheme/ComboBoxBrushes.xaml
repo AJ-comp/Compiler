@@ -4,8 +4,8 @@
 
     <!-- Fill Brushes -->
 
-    <SolidColorBrush x:Key="ComboBoxHoverBackGroundBrush" Color="#1f1f20" />
-    <SolidColorBrush x:Key="ComboBoxCheckedBackGroundBrush" Color="#1f1f20" />
+    <SolidColorBrush x:Key="ComboBoxHoverBackgroundBrush" Color="#1f1f20" />
+    <SolidColorBrush x:Key="ComboBoxCheckedBackgroundBrush" Color="#1f1f20" />
     
 
     <LinearGradientBrush x:Key="HorizontalNormalBrush" StartPoint="0,0" EndPoint="1,0">

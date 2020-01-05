@@ -4,7 +4,7 @@
 
     <Style x:Key="{x:Type ListViewItem}" TargetType="ListViewItem">
         <Setter Property="Background" Value="Transparent"/>
-        <Setter Property="Foreground" Value="{DynamicResource ActiveTextBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource CommonEnableTextBrush}"/>
         <Setter Property="SnapsToDevicePixels" Value="true" />
         <Setter Property="OverridesDefaultStyle" Value="true" />
         <Setter Property="Template">
@@ -20,7 +20,7 @@
                                 <Condition Property="IsFocused" Value="true"/>
                             </MultiTrigger.Conditions>
                             <MultiTrigger.Setters>
-                                <Setter TargetName="Border" Property="Background" Value="{DynamicResource FocusedSelectedBackgroundBrush}"/>
+                                <Setter TargetName="Border" Property="Background" Value="{DynamicResource CommonFocusedSelectedBackgroundBrush}"/>
                             </MultiTrigger.Setters>
                         </MultiTrigger>
 
@@ -30,7 +30,7 @@
                                 <Condition Property="IsFocused" Value="false"/>
                             </MultiTrigger.Conditions>
                             <MultiTrigger.Setters>
-                                <Setter TargetName="Border" Property="Background" Value="{DynamicResource UnFocusedSelectedBackgroundBrush}"/>
+                                <Setter TargetName="Border" Property="Background" Value="{DynamicResource CommonUnfocusedSelectedBackgroundBrush}"/>
                             </MultiTrigger.Setters>
                         </MultiTrigger>
                     </ControlTemplate.Triggers>

@@ -17,4 +17,10 @@
     <BitmapImage x:Key="CFile24ImagePath" UriSource="/Resources/Images/DarkTheme/cfile_24.png"/>
     <BitmapImage x:Key="CFile48ImagePath" UriSource="/Resources/Images/DarkTheme/cfile_48.png"/>
 
+    <!-- Images related to Solution Explorer -->
+    <BitmapImage x:Key="SolutionImagePath" UriSource="/Resources/Images/DarkTheme/solution.png"/>
+    <BitmapImage x:Key="ProjectImagePath" UriSource="/Resources/Images/DarkTheme/project.png"/>
+
+    <!-- Images related to ARM -->
+    <BitmapImage x:Key="ARMImagePath" UriSource="/Resources/Images/DarkTheme/solution.png"/>
 </ResourceDictionary>

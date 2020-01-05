@@ -3,15 +3,15 @@
                     xmlns:local="clr-namespace:Wpf.UI.Advance">
 
     <Style TargetType="{x:Type local:ClosableTabItem}" BasedOn="{StaticResource {x:Type TabItem}}">
-        <Setter Property="Foreground" Value="{DynamicResource ActiveTextBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource CommonEnableTextBrush}"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type local:ClosableTabItem}">
                     <Grid>
                         <Border Name="Border"
                                     Margin="0,0,-4,0" 
-                                    Background="{DynamicResource ActiveBackGroundBrush}"
-                                    BorderBrush="{DynamicResource ActiveBorderBrush}" 
+                                    Background="{DynamicResource CommonEnableBackgroundBrush}"
+                                    BorderBrush="{DynamicResource CommonEnableBorderBrush}" 
                                     BorderThickness="1,1,1,1" 
                                     CornerRadius="2,12,0,0" >
 
@@ -43,13 +43,13 @@
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsSelected" Value="True">
                             <Setter Property="Panel.ZIndex" Value="100" />
-                            <Setter TargetName="Border" Property="Background" Value="{DynamicResource FocusedSelectedBackgroundBrush}" />
+                            <Setter TargetName="Border" Property="Background" Value="{DynamicResource CommonFocusedSelectedBackgroundBrush}" />
                             <Setter TargetName="Border" Property="BorderThickness" Value="1,1,1,0" />
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
-                            <Setter TargetName="Border" Property="Background" Value="{DynamicResource InActiveBackGroundBrush}" />
-                            <Setter TargetName="Border" Property="BorderBrush" Value="{DynamicResource InActiveBorderBrush}" />
-                            <Setter Property="Foreground" Value="{DynamicResource InActiveTextBrush}" />
+                            <Setter TargetName="Border" Property="Background" Value="{DynamicResource CommonDisableBackgroundBrush}" />
+                            <Setter TargetName="Border" Property="BorderBrush" Value="{DynamicResource CommonDisableBorderBrush}" />
+                            <Setter Property="Foreground" Value="{DynamicResource CommonDisableTextBrush}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

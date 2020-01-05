@@ -47,12 +47,14 @@ namespace WpfApp.ViewModels
 
             SimpleIoc.Default.Register<MainViewModel>();
             SimpleIoc.Default.Register<NewFileDialogViewModel>();
+            SimpleIoc.Default.Register<NewProjectViewModel>();
             SimpleIoc.Default.Register<GrammarInfoViewModel>();
             SimpleIoc.Default.Register<SolutionExplorerViewModel>();
         }
 
         public MainViewModel Main { get => ServiceLocator.Current.GetInstance<MainViewModel>(); }
         public NewFileDialogViewModel NewFileWindow { get => ServiceLocator.Current.GetInstance<NewFileDialogViewModel>(); }
+        public NewProjectViewModel NewProjectWindow { get => ServiceLocator.Current.GetInstance<NewProjectViewModel>(); }
         public SolutionExplorerViewModel SolutionExplorerWindow { get => ServiceLocator.Current.GetInstance<SolutionExplorerViewModel>(); }
 
         private void NotifyUserMethod(NotificationMessage message)

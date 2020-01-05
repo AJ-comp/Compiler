@@ -29,6 +29,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wpf.UI.Basic", "Wpf.UI.Them
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wpf.UI.Advance", "Wpf.UI.Themes\Wpf.UI.Advance\Wpf.UI.Advance.csproj", "{3B5B2207-4E4D-4CFF-A8C5-3C0D75D4BB93}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Application", "Application", "{397493D9-A8A6-4976-9EE9-ECEF4533F3E9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

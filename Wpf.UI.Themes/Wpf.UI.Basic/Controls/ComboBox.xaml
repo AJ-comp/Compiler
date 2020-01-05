@@ -9,26 +9,26 @@
                 <ColumnDefinition Width="20" />
             </Grid.ColumnDefinitions>
             <Border x:Name="Border"  Grid.ColumnSpan="2" CornerRadius="2" BorderThickness="1"
-                          Background="{DynamicResource ActiveBackGroundBrush}"
-                          BorderBrush="{DynamicResource ActiveBorderBrush}"/>
+                          Background="{DynamicResource CommonEnableBackgroundBrush}"
+                          BorderBrush="{DynamicResource CommonEnableBorderBrush}"/>
             <Border Grid.Column="0" CornerRadius="2,0,0,2"  Margin="1" BorderThickness="0,0,1,0" 
-                          Background="{DynamicResource ActiveBackGroundBrush}"
-                          BorderBrush="{DynamicResource ActiveBorderBrush}"/>
+                          Background="{DynamicResource CommonEnableBackgroundBrush}"
+                          BorderBrush="{DynamicResource CommonEnableBorderBrush}"/>
             <Path x:Name="Arrow" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Data="M 0 0 L 4 4 L 8 0 Z"
                         Fill="{DynamicResource GlyphBrush}"/>
         </Grid>
         <ControlTemplate.Triggers>
             <Trigger Property="ToggleButton.IsMouseOver" Value="true">
-                <Setter TargetName="Border" Property="Background" Value="{DynamicResource ComboBoxHoverBackGroundBrush}" />
+                <Setter TargetName="Border" Property="Background" Value="{DynamicResource ComboBoxHoverBackgroundBrush}" />
             </Trigger>
             <Trigger Property="ToggleButton.IsChecked" Value="true">
-                <Setter TargetName="Border" Property="Background" Value="{DynamicResource ComboBoxCheckedBackGroundBrush}" />
+                <Setter TargetName="Border" Property="Background" Value="{DynamicResource ComboBoxCheckedBackgroundBrush}" />
             </Trigger>
             <Trigger Property="IsEnabled" Value="False">
-                <Setter TargetName="Border" Property="Background" Value="{DynamicResource InActiveBackGroundBrush}" />
-                <Setter TargetName="Border" Property="BorderBrush" Value="{DynamicResource InActiveBorderBrush}" />
-                <Setter Property="Foreground" Value="{DynamicResource InActiveTextBrush}"/>
-                <Setter TargetName="Arrow" Property="Fill" Value="{DynamicResource InActiveTextBrush}" />
+                <Setter TargetName="Border" Property="Background" Value="{DynamicResource CommonDisableBackgroundBrush}" />
+                <Setter TargetName="Border" Property="BorderBrush" Value="{DynamicResource CommonDisableBorderBrush}" />
+                <Setter Property="Foreground" Value="{DynamicResource CommonDisableTextBrush}"/>
+                <Setter TargetName="Arrow" Property="Fill" Value="{DynamicResource CommonDisableTextBrush}" />
             </Trigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
@@ -43,7 +43,7 @@
         <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
         <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
         <Setter Property="ScrollViewer.CanContentScroll" Value="true"/>
-        <Setter Property="Foreground" Value="{DynamicResource ActiveTextBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource CommonEnableTextBrush}"/>
         <Setter Property="MinWidth" Value="120"/>
         <Setter Property="MinHeight" Value="20"/>
         <Setter Property="Template">
@@ -74,8 +74,8 @@
                                   MinWidth="{TemplateBinding ActualWidth}"
                                   MaxHeight="{TemplateBinding MaxDropDownHeight}">
                                 <Border x:Name="DropDownBorder" BorderThickness="1"
-                                    Background="{DynamicResource ActiveBackGroundBrush}"
-                                    BorderBrush="{DynamicResource ActiveBorderBrush}"/>
+                                    Background="{DynamicResource CommonEnableBackgroundBrush}"
+                                    BorderBrush="{DynamicResource CommonEnableBorderBrush}"/>
                                 <ScrollViewer Margin="4,6,4,6" SnapsToDevicePixels="True">
                                     <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Contained" />
                                 </ScrollViewer>
@@ -87,7 +87,7 @@
                             <Setter TargetName="DropDownBorder" Property="MinHeight" Value="95"/>
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="false">
-                            <Setter Property="Foreground" Value="{DynamicResource InActiveTextBrush}"/>
+                            <Setter Property="Foreground" Value="{DynamicResource CommonDisableTextBrush}"/>
                         </Trigger>
                         <Trigger Property="IsGrouping" Value="true">
                             <Setter Property="ScrollViewer.CanContentScroll" Value="false"/>

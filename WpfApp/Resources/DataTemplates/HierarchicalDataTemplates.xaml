@@ -6,17 +6,14 @@
 
     <HierarchicalDataTemplate DataType="{x:Type models:SolutionStruct}" ItemsSource="{Binding Projects}">
         <StackPanel Orientation="Horizontal">
-            <Image Width="16" Height="16" Margin="0 0 5 0"
-                        Source="{Binding Converter={converters:ToImageByThemeConverter}, ConverterParameter='Solution'}" >
-            </Image>
+            <Image Width="16" Height="16" Margin="0 0 5 0" Source="{DynamicResource SolutionImagePath}" />
             <TextBlock Text="{Binding Name}"/>
         </StackPanel>
     </HierarchicalDataTemplate>
 
     <HierarchicalDataTemplate DataType="{x:Type models:ProjectStruct}" ItemsSource="{Binding Children}">
         <StackPanel Orientation="Horizontal">
-            <Image Width="16" Height="16" Margin="0 0 5 0"
-                        Source="{Binding Converter={converters:ToImageByThemeConverter}, ConverterParameter='Project'}"/>
+            <Image Width="16" Height="16" Margin="0 0 5 0" Source="{DynamicResource ProjectImagePath}"/>
             <TextBlock Text="{Binding Name}"/>
         </StackPanel>
     </HierarchicalDataTemplate>

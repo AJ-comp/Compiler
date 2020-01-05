@@ -80,7 +80,7 @@
                                 Margin="1"
                                 CornerRadius="2"
                                 BorderThickness="1"
-                                Background="{DynamicResource ActiveBackGroundBrush}">
+                                Background="{DynamicResource CommonEnableBackgroundBrush}">
 
                         <Border.BorderBrush>
                             <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">

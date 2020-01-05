@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System.Collections.Specialized;
+using System.IO;
 using System.Xml;
 
 namespace WpfApp.Utilities
@@ -11,7 +12,7 @@ namespace WpfApp.Utilities
 
         public enum Configure { Debug, Release }
 
-        private XmlNode GetDefaultPropertyNode(Configure conf)
+        private XmlNode CreateDefaultPropertyNode(Configure conf)
         {
             XmlNode propertyGroup = xDoc.CreateElement("PropertyGroup");
             XmlNode configure = xDoc.CreateElement("Configuration");
@@ -29,8 +30,33 @@ namespace WpfApp.Utilities
             return propertyGroup;
         }
 
+        private XmlNode CreateReferenceNode(StringCollection items)
+        {
+            XmlNode referGroup = xDoc.CreateElement("ReferenceGroup");
 
-        private XmlNode GetProjectInfoNode(string projectPath, string projectName)
+            foreach(var item in items)
+            {
+                XmlNode referItem = xDoc.CreateElement("Item");
+                referItem.InnerText = item;
+                referGroup.AppendChild(referItem);
+            }
+
+            return referGroup;
+        }
+
+        private XmlNode CreateItemNode(string item)
+        {
+            XmlNode itemGroup = xDoc.CreateElement("ItemGroup");
+
+            XmlNode itemNode = xDoc.CreateElement("Item");
+            itemNode.InnerText = item;
+            itemGroup.AppendChild(itemNode);
+
+            return itemGroup;
+        }
+
+
+        private XmlNode CreateProjectInfoNode(string projectPath, string projectName)
         {
             XmlNode project = xDoc.CreateElement("Project");
             XmlNode name = xDoc.CreateElement("Name");
@@ -66,7 +92,7 @@ namespace WpfApp.Utilities
 
             // when create solution, soultion name is project name.
             var projectRelativePath = solutionName;
-            root.AppendChild(this.GetProjectInfoNode(projectRelativePath, solutionName));
+            root.AppendChild(this.CreateProjectInfoNode(projectRelativePath, solutionName));
 
             xDoc.AppendChild(root);
             xDoc.Save(Path.Combine(solutionPath, solutionName) + this.solutionExtension);
@@ -83,8 +109,10 @@ namespace WpfApp.Utilities
             attr.Value = "1.0";
             root.Attributes.Append(attr);
 
-            root.AppendChild(this.GetDefaultPropertyNode(Configure.Debug));
-            root.AppendChild(this.GetDefaultPropertyNode(Configure.Release));
+            root.AppendChild(this.CreateDefaultPropertyNode(Configure.Debug));
+            root.AppendChild(this.CreateDefaultPropertyNode(Configure.Release));
+            root.AppendChild(this.CreateReferenceNode(new StringCollection() { "System", "System.Data", "System.Collection" }));
+            root.AppendChild(this.CreateItemNode("Class.aj"));
 
             xDoc.AppendChild(root);
             xDoc.Save(Path.Combine(projectPath, projectName) + this.projectExtension);

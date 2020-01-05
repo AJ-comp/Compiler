@@ -3,13 +3,14 @@
                     xmlns:local="clr-namespace:Wpf.UI.Basic.Controls">
 
     <Style TargetType="TreeView">
-        <Setter Property="Background" Value="{DynamicResource ActiveBackGroundBrush}"/>
-        <Setter Property="Foreground" Value="{DynamicResource ActiveTextBrush}"/>
-        <Setter Property="BorderBrush" Value="{DynamicResource ActiveBorderBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource CommonEnableBackgroundBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource CommonEnableTextBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource CommonEnableBorderBrush}"/>
     </Style>
 
     <Style TargetType="TreeViewItem">
         <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Foreground" Value="{DynamicResource CommonEnableTextBrush}"/>
     </Style>
     
 </ResourceDictionary>

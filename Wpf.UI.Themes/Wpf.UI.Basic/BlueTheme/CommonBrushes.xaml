@@ -3,19 +3,19 @@
                     xmlns:local="clr-namespace:Wpf.UI.Basic">
 
     <!-- The text color of the this theme -->
-    <SolidColorBrush x:Key="ActiveTextBrush" Color="Black" />
-    <SolidColorBrush x:Key="InActiveTextBrush" Color="Gray" />
+    <SolidColorBrush x:Key="CommonEnableTextBrush" Color="Black" />
+    <SolidColorBrush x:Key="CommonDisableTextBrush" Color="Gray" />
 
-    <SolidColorBrush x:Key="ActiveBackGroundBrush" Color="#2C2C30" />
-    <SolidColorBrush x:Key="InActiveBackGroundBrush" Color="DarkGray" />
+    <SolidColorBrush x:Key="CommonEnableBackgroundBrush" Color="#2C2C30" />
+    <SolidColorBrush x:Key="CommonDisableBackgroundBrush" Color="DarkGray" />
 
-    <SolidColorBrush x:Key="ActiveBorderBrush" Color="DarkGray" />
-    <SolidColorBrush x:Key="InActiveBorderBrush" Color="DarkGray" />
+    <SolidColorBrush x:Key="CommonEnableBorderBrush" Color="DarkGray" />
+    <SolidColorBrush x:Key="CommonDisableBorderBrush" Color="DarkGray" />
 
     <!-- Hover background for flat button -->
-    <SolidColorBrush x:Key="HoverBackgroundBrush" Color="#FFC5E4FC" />
+    <SolidColorBrush x:Key="CommonHoverBackgroundBrush" Color="#FFC5E4FC" />
     <!-- Hover border brush for flat button -->
-    <SolidColorBrush x:Key="HoverBorderBrush" Color="#FFA5BCF8" />
+    <SolidColorBrush x:Key="CommonHoverBorderBrush" Color="#FFA5BCF8" />
 
     <!-- Background for the footer of the dialog box -->
     <SolidColorBrush x:Key="DialogFooterBrush" Color="#FFE6E8E9" />

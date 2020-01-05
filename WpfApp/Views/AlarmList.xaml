@@ -32,13 +32,13 @@
             </ComboBox>
             <ToggleButton Background="Transparent" Margin=" 0 0 5 0">
                 <StackPanel Orientation="Horizontal">
-                    <Image Source="{StaticResource ErrorImagePath}"
+                    <Image Source="{DynamicResource ErrorImagePath}"
                                 Width="16" Height="16" Margin="0,0,2,0"/>
                 </StackPanel>
             </ToggleButton>
             <ToggleButton Background="Transparent" Margin="0 0 5 0">
                 <StackPanel Orientation="Horizontal">
-                    <Image Source="{StaticResource WarningImagePath}"
+                    <Image Source="{DynamicResource WarningImagePath}"
                                 Width="16" Height="16" Margin="0,0,2,0"/>
                 </StackPanel>
             </ToggleButton>

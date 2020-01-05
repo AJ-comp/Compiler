@@ -3,12 +3,12 @@
                     xmlns:local="clr-namespace:Wpf.UI.Basic">
 
     <Style x:Key="NormalWindow"  TargetType="{x:Type Window}">
-        <Setter Property="Background" Value="{DynamicResource ActiveBackGroundBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource CommonEnableBackgroundBrush}"/>
         <Setter Property="SnapsToDevicePixels" Value="true" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Window}">
-                    <Grid Background="{DynamicResource ActiveBackGroundBrush}">
+                    <Grid Background="{DynamicResource CommonEnableBackgroundBrush}">
                         <AdornerDecorator>
                             <ContentPresenter />
                         </AdornerDecorator>

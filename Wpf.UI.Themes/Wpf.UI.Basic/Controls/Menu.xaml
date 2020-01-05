@@ -4,8 +4,8 @@
 
     <Style x:Key="{x:Type Menu}" TargetType="Menu">
         <Setter Property="SnapsToDevicePixels" Value="True"/>
-        <Setter Property="Foreground" Value="{DynamicResource ActiveTextBrush}"/>
-        <Setter Property="Background" Value="{DynamicResource ActiveBackGroundBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource CommonEnableTextBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource CommonEnableBackgroundBrush}"/>
     </Style>
 
 </ResourceDictionary>

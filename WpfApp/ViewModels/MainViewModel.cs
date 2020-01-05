@@ -4,15 +4,16 @@ using GalaSoft.MvvmLight.Command;
 using Parse.FrontEnd.Grammars;
 using Parse.FrontEnd.Grammars.MiniC;
 using Parse.FrontEnd.Grammars.PracticeGrammars;
-using Parse.FrontEnd.Parsers.LR;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Windows;
-using WpfApp.Models;
+using WpfApp.Models.MicroControllerModels.ArmModels;
+using WpfApp.Utilities;
 using WpfApp.ViewModels.DialogViewModels;
 using WpfApp.ViewModels.DocumentTypeViewModels;
+using WpfApp.ViewModels.WindowViewModels;
 
 namespace WpfApp.ViewModels
 {
@@ -224,6 +225,26 @@ namespace WpfApp.ViewModels
         #endregion
 
 
+        private void InitGrammarWindow()
+        {
+            var grmmarViewModel = ServiceLocator.Current.GetInstance<GrammarInfoViewModel>();
+            foreach (var grammar in this.supplyGrammars)
+                grmmarViewModel.Grammars.Add(grammar);
+        }
+
+        private void InitNewProjectWindow()
+        {
+            var newProject = ServiceLocator.Current.GetInstance<NewProjectViewModel>();
+            newProject.MicroControllers.Add(new ARM());
+        }
+
+        private void InitSolutionExplorer()
+        {
+            var solutionExplorer = ServiceLocator.Current.GetInstance<SolutionExplorerViewModel>();
+            Loader loader = new Loader();
+            solutionExplorer.Solutions.Add(loader.LoadSolution("C:\\Users\\A\\Desktop\\Å×½ºÆ®\\test", "test.aj"));
+        }
+
         /// <summary>
         /// Initializes a new instance of the MainViewModel class.
         /// </summary>
@@ -232,13 +253,9 @@ namespace WpfApp.ViewModels
             this.supplyGrammars.Add(new MiniCGrammar());
             this.supplyGrammars.Add(new LRTest1Grammar());
 
-            var grmmarViewModel = ServiceLocator.Current.GetInstance<GrammarInfoViewModel>();
-
-            foreach(var grammar in this.supplyGrammars)
-                grmmarViewModel.Grammars.Add(grammar);
-
-
-            Theme.Instance.ThemeKind = ThemeKind.Dark;
+            this.InitGrammarWindow();
+            this.InitNewProjectWindow();
+            this.InitSolutionExplorer();
 
             if (IsInDesignMode)
             {

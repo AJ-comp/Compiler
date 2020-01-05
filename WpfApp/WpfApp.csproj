@@ -102,20 +102,23 @@
     </ApplicationDefinition>
     <Compile Include="AttachedProperties\WindowsFormsHostMap.cs" />
     <Compile Include="Behaviors\AlarmListViewModelBehavior.cs" />
+    <Compile Include="Behaviors\BindableSelectedItemBehavior.cs" />
     <Compile Include="Behaviors\DataGridViewAllocateBehavior.cs" />
     <Compile Include="Behaviors\EventToCommandBehavior.cs" />
     <Compile Include="Behaviors\ViewViewModelConnector.cs" />
     <Compile Include="Behaviors\WindowLoadBehavior.cs" />
     <Compile Include="Converters\GrammarToLRParserConverter.cs" />
     <Compile Include="Converters\RemoveObjectConverter.cs" />
-    <Compile Include="Converters\ToImageByThemeConverter.cs" />
     <Compile Include="Converters\WindowCloseLogicConverter.cs" />
     <Compile Include="Converters\EnumToImageConverter.cs" />
     <Compile Include="Converters\EventArgsConverterExtension.cs" />
     <Compile Include="Converters\MouseDoubleClickIndexConverter.cs" />
     <Compile Include="Models\AlarmData.cs" />
     <Compile Include="Models\Document.cs" />
+    <Compile Include="Models\IHierarchical.cs" />
     <Compile Include="Models\Invokers\Invoker.cs" />
+    <Compile Include="Models\MicroControllerModels\ArmModels\ARM.cs" />
+    <Compile Include="Models\MicroControllerModels\MicroController.cs" />
     <Compile Include="Models\SolutionStruct.cs" />
     <Compile Include="Models\Theme.cs" />
     <Compile Include="Properties\AlarmCodes.Designer.cs">
@@ -176,6 +179,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Resources\DataTemplates\HierarchicalDataTemplates.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\DataTemplates\MCUDataTemplates\ARMDataTemplates.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\DataTemplates\MCUDataTemplates\AVRDataTemplates.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -322,7 +333,9 @@
   <ItemGroup>
     <Resource Include="Resources\Images\Basic\cfile_48.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Models\MicroControllerModels\AvrModels\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>

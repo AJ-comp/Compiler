@@ -47,7 +47,7 @@
 
 
     <Style TargetType="{x:Type ScrollViewer}">
-        <Setter Property="BorderBrush" Value="{DynamicResource ActiveBorderBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource CommonEnableBorderBrush}"/>
         <Setter Property="OverridesDefaultStyle" Value="True"/>
         <Setter Property="Template">
             <Setter.Value>
@@ -71,8 +71,8 @@
                         <ScrollBar Name="PART_VerticalScrollBar"
                                         Grid.Row="0" Grid.Column="1"
                                         Value="{TemplateBinding VerticalOffset}"
-                                        Background="{DynamicResource ScrollViewerBackGroundBrush}"
-                                        Foreground="{DynamicResource ScrollViewerForeGroundBrush}"
+                                        Background="{DynamicResource ScrollViewerBackgroundBrush}"
+                                        Foreground="{DynamicResource ScrollViewerForegroundBrush}"
                                         Maximum="{TemplateBinding ScrollableHeight}"
                                         ViewportSize="{TemplateBinding ViewportHeight}"
                                         Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}"/>
@@ -80,8 +80,8 @@
                         <ScrollBar Name="PART_HorizontalScrollBar"
                                         Orientation="Horizontal"
                                         Grid.Row="1" Grid.Column="0"
-                                        Background="{DynamicResource ScrollViewerBackGroundBrush}"
-                                        Foreground="{DynamicResource ScrollViewerForeGroundBrush}"
+                                        Background="{DynamicResource ScrollViewerBackgroundBrush}"
+                                        Foreground="{DynamicResource ScrollViewerForegroundBrush}"
                                         Value="{TemplateBinding HorizontalOffset}"
                                         Maximum="{TemplateBinding ScrollableWidth}"
                                         ViewportSize="{TemplateBinding ViewportWidth}"

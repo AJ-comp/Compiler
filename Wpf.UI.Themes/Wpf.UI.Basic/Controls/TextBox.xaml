@@ -10,22 +10,22 @@
         <Setter Property="MinWidth" Value="120"/>
         <Setter Property="MinHeight" Value="20"/>
         <Setter Property="AllowDrop" Value="true"/>
-        <Setter Property="Foreground" Value="{DynamicResource ActiveTextBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource CommonEnableTextBrush}"/>
         <Setter Property="CaretBrush" Value="{DynamicResource ActiveCaretBrush}"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type TextBoxBase}">
                     <Border Name="Border" CornerRadius="2" Padding="2"
-                              Background="{DynamicResource ActiveTextBoxBackGroundBrush}"
-                              BorderBrush="{DynamicResource ActiveTextBoxBorderBrush}"
+                              Background="{DynamicResource TextBoxEnableBackgroundBrush}"
+                              BorderBrush="{DynamicResource TextBoxEnableBorderBrush}"
                               BorderThickness="1" >
-                        <ScrollViewer Margin="0" x:Name="PART_ContentHost" Background="{DynamicResource ActiveTextBoxBackGroundBrush}"/>
+                        <ScrollViewer Margin="0" x:Name="PART_ContentHost" Background="{DynamicResource TextBoxEnableBackgroundBrush}"/>
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsEnabled" Value="False">
-                            <Setter TargetName="Border" Property="Background" Value="{DynamicResource InActiveTextBoxBackGroundBrush}"/>
-                            <Setter TargetName="Border" Property="BorderBrush" Value="{DynamicResource InActiveTextBoxBorderBrush}"/>
-                            <Setter Property="Foreground" Value="{DynamicResource InActiveTextBrush}"/>
+                            <Setter TargetName="Border" Property="Background" Value="{DynamicResource TextBoxDisableBackgroundBrush}"/>
+                            <Setter TargetName="Border" Property="BorderBrush" Value="{DynamicResource TextBoxDisableBorderBrush}"/>
+                            <Setter Property="Foreground" Value="{DynamicResource CommonDisableTextBrush}"/>
                             <Setter Property="CaretBrush" Value="{DynamicResource InActiveCaretBrush}"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
@@ -62,16 +62,16 @@
                     <Border Name="Border"
                                   CornerRadius="2" 
                                   Padding="2" 
-                                  Background="{DynamicResource ActiveTextBoxBackGroundBrush}"
-                                  BorderBrush="{DynamicResource ActiveTextBoxBorderBrush}"
+                                  Background="{DynamicResource TextBoxEnableBackgroundBrush}"
+                                  BorderBrush="{DynamicResource TextBoxEnableBorderBrush}"
                                   BorderThickness="1" >
-                        <ScrollViewer x:Name="PART_ContentHost" Background="{DynamicResource ActiveTextBoxBackGroundBrush}" />
+                        <ScrollViewer x:Name="PART_ContentHost" Background="{DynamicResource TextBoxEnableBackgroundBrush}" />
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsEnabled" Value="False">
-                            <Setter TargetName="Border" Property="Background" Value="{DynamicResource InActiveTextBoxBackGroundBrush}"/>
-                            <Setter TargetName="Border" Property="BorderBrush" Value="{DynamicResource InActiveTextBoxBorderBrush}"/>
-                            <Setter Property="Foreground" Value="{DynamicResource InActiveTextBrush}"/>
+                            <Setter TargetName="Border" Property="Background" Value="{DynamicResource TextBoxDisableBackgroundBrush}"/>
+                            <Setter TargetName="Border" Property="BorderBrush" Value="{DynamicResource TextBoxDisableBorderBrush}"/>
+                            <Setter Property="Foreground" Value="{DynamicResource CommonDisableTextBrush}"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

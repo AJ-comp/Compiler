@@ -14,8 +14,8 @@
             <Setter.Value>
                 <ControlTemplate TargetType="ListBox">
                     <Border Name="Border" 
-                                  Background="{DynamicResource ActiveBackGroundBrush}"
-                                  BorderBrush="{DynamicResource ActiveBorderBrush}"
+                                  Background="{DynamicResource CommonEnableBackgroundBrush}"
+                                  BorderBrush="{DynamicResource CommonEnableBorderBrush}"
                                   BorderThickness="1"
                                   CornerRadius="2">
                         <ScrollViewer Margin="0" Focusable="false">
@@ -24,8 +24,8 @@
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsEnabled" Value="false">
-                            <Setter TargetName="Border" Property="Background" Value="{DynamicResource InActiveBackGroundBrush}" />
-                            <Setter TargetName="Border" Property="BorderBrush" Value="{DynamicResource InActiveBorderBrush}" />
+                            <Setter TargetName="Border" Property="Background" Value="{DynamicResource CommonDisableBackgroundBrush}" />
+                            <Setter TargetName="Border" Property="BorderBrush" Value="{DynamicResource CommonDisableBorderBrush}" />
                         </Trigger>
                         <Trigger Property="IsGrouping" Value="true">
                             <Setter Property="ScrollViewer.CanContentScroll" Value="false"/>
