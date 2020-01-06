@@ -216,4 +216,7 @@
   <data name="Tools" xml:space="preserve">
     <value>Tools</value>
   </data>
+  <data name="MicroController" xml:space="preserve">
+    <value>Micro Controller</value>
+  </data>
 </root>

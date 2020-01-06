@@ -205,6 +205,15 @@ namespace WpfApp.Properties {
         }
         
         /// <summary>
+        ///   Micro Controller과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        internal static string MicroController {
+            get {
+                return ResourceManager.GetString("MicroController", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Mini C File과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         internal static string MiniCFile {

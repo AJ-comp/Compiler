@@ -4,13 +4,14 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{94516CA9-C59E-4A2D-8AC2-02E0397B0499}</ProjectGuid>
+    <ProjectGuid>{453A6E15-D65D-408F-856A-718CE73CAC42}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Parse.BackEnd</RootNamespace>
-    <AssemblyName>Parse.BackEnd</AssemblyName>
+    <RootNamespace>Parse.BackEnd.Target.ARMv7</RootNamespace>
+    <AssemblyName>Parse.BackEnd.Target.ARMv7</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -40,15 +41,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="TargetAssembly.cs" />
+    <Compile Include="MSeries\ARMv7_M.cs" />
+    <Compile Include="MSeries\CortexM3Models\CortexM3.cs" />
+    <Compile Include="MSeries\CortexM3Models\Stm32L1Series\Stm32L152RB.cs" />
+    <Compile Include="MSeries\CortexM3Models\Stm32L1Series\Stm32L152VB.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Parse\Parse.FrontEnd.csproj">
-      <Project>{54EC5CEA-8D91-4165-9EBB-6A0693A96C4F}</Project>
-      <Name>Parse.FrontEnd</Name>
+    <Folder Include="MSeries\CortexM3Models\Stm32F1Series\" />
+    <Folder Include="MSeries\CortexM4Models\" />
+    <Folder Include="RSeries\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Parse.BackEnd.Target\Parse.BackEnd.Target.csproj">
+      <Project>{6fe9d3fa-798d-42ec-b6f0-890d5d320384}</Project>
+      <Name>Parse.BackEnd.Target</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

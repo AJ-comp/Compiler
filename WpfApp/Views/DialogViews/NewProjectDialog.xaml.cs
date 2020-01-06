@@ -24,5 +24,10 @@ namespace WpfApp.Views.DialogViews
         {
             InitializeComponent();
         }
+
+        private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)
+        {
+
+        }
     }
 }

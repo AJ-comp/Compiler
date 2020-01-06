@@ -7,8 +7,10 @@
              xmlns:lex="http://wpflocalizeextension.codeplex.com" 
              xmlns:local="clr-namespace:WpfApp.Views.DialogViews"
              xmlns:localConverters="clr-namespace:WpfApp.Converters"
+             xmlns:localSelectors="clr-namespace:WpfApp.Selectors"
              xmlns:localBehaviors="clr-namespace:WpfApp.Behaviors"
              xmlns:ap="clr-namespace:WpfApp.AttachedProperties"
+             xmlns:mvvm="http://www.galasoft.ch/mvvmlight"
              xmlns:viewModels="clr-namespace:WpfApp.ViewModels.DialogViewModels"
              mc:Ignorable="d" 
              WindowStyle="ToolWindow"
@@ -17,6 +19,45 @@
              Title="{lex:Loc Key=NewProject}"
              DataContext="{Binding NewProjectWindow, Source={StaticResource Locator}}"
              Height="600" Width="800">
+
+    <Window.Resources>
+        <HierarchicalDataTemplate x:Key="GroupTemplate" ItemsSource="{Binding Path=Items}">
+            <TextBlock Text="{Binding Path=Name}" FontWeight="Bold"/>
+        </HierarchicalDataTemplate>
+
+        <DataTemplate x:Key="pTemplate">
+            <TextBlock Text="{Binding Path=LanguageCovered }"/>
+        </DataTemplate>
+
+        <DataTemplate x:Key="rTemplate">
+            <TextBlock Text="{Binding Path=NumRecipes}"/>
+        </DataTemplate>
+        <DataTemplate x:Key="dTemplate">
+            <TextBlock Text="{Binding Path=Size}"/>
+        </DataTemplate>
+        <localConverters:GroupByType x:Key="gt" />
+        <localSelectors:Selector x:Key="s"/>
+        <CollectionViewSource Source="{Binding}" x:Key="cvs">
+            <CollectionViewSource.GroupDescriptions>
+                <PropertyGroupDescription>
+                    <PropertyGroupDescription.Converter>
+                        <localConverters:GroupByType type="root"/>
+                    </PropertyGroupDescription.Converter>
+                </PropertyGroupDescription>
+                <PropertyGroupDescription>
+                    <PropertyGroupDescription.Converter>
+                        <localConverters:GroupByType type="subs"/>
+                    </PropertyGroupDescription.Converter>
+                </PropertyGroupDescription>
+                <PropertyGroupDescription>
+                    <PropertyGroupDescription.Converter>
+                        <localConverters:GroupByType type="main"/>
+                    </PropertyGroupDescription.Converter>
+                </PropertyGroupDescription>
+            </CollectionViewSource.GroupDescriptions>
+        </CollectionViewSource>
+    </Window.Resources>
+    
 
     <Grid>
         <Grid.RowDefinitions>
@@ -32,17 +73,52 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <TreeView Grid.Row="0" Grid.Column="0" 
-                      ItemsSource="{Binding MicroControllers}">
+            <Grid Grid.Row="0" Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="20"/>
+                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="50"/>
+                </Grid.RowDefinitions>
 
-                <i:Interaction.Behaviors>
-                    <localBehaviors:BindableSelectedItemBehavior SelectedItem="{Binding SelectedItem, Mode=TwoWay}" />
-                </i:Interaction.Behaviors>
-            </TreeView>
+                <!--<TreeView Grid.Row="1" BorderThickness="0" 
+                                    ItemsSource="{Binding Source={StaticResource cvs}, Path=Groups}" 
+                                    ItemTemplateSelector="{StaticResource s}"/>-->
+                
+                <TreeView Grid.Row="1" BorderThickness="0"
+                                ItemsSource="{Binding MicroControllers}">
+                    <i:Interaction.Behaviors>
+                        <localBehaviors:BindableSelectedItemBehavior SelectedItem="{Binding SelectedItem, Mode=TwoWay}" />
+                    </i:Interaction.Behaviors>
+                </TreeView>
 
-            <ListBox Grid.Row="0" Grid.Column="1"
-                      HorizontalContentAlignment="Stretch"
-                      ItemsSource="{Binding NewFileDataCollection}" >
+                <TextBlock Grid.Row="2" TextWrapping="WrapWithOverflow" 
+                                    Text="{Binding SelectedTerminalItem.Explain}"/>
+
+                <TextBlock Grid.Row="3" TextWrapping="WrapWithOverflow">
+                    <Hyperlink NavigateUri="{Binding Path}" RequestNavigate="Hyperlink_RequestNavigate">
+                        <Hyperlink.Style>
+                            <Style TargetType="Hyperlink"
+                                       BasedOn="{StaticResource {x:Type Hyperlink}}">
+                                <Setter Property="Foreground" Value="#0C0"/>
+                            </Style>
+                        </Hyperlink.Style>
+                            <TextBlock TextWrapping="WrapWithOverflow" 
+                                        Text="{Binding SelectedTerminalItem.DataSheetPath}" />
+                        
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="RequestNavigate">
+                                <mvvm:EventToCommand Command="{Binding NavigateCommand}"
+                                                     PassEventArgsToCommand="True"
+                                                     EventArgsConverter="{localConverters:NavigateUriToStringConverter}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </Hyperlink>
+                </TextBlock>
+            </Grid>
+
+            <ListBox Grid.Row="0" Grid.Column="1" HorizontalContentAlignment="Stretch"
+                            ItemsSource="{Binding NewFileDataCollection}" >
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <Border x:Name="border" BorderThickness="1" VerticalAlignment="Stretch">
@@ -75,30 +151,36 @@
             </Grid.ColumnDefinitions>
 
             <TextBlock Grid.Row="1" Grid.Column="0" Margin="10 0 0 0"
+                                VerticalAlignment="Center" Text="{lex:Loc Key=MicroController}"/>
+            <TextBox Grid.Row="1" Grid.Column="1" IsReadOnly="True"
+                            HorizontalAlignment="Stretch" VerticalAlignment="Center"
+                            Text="{Binding SelectedTerminalItem.Name, Mode=OneWay}"/>
+
+            <TextBlock Grid.Row="2" Grid.Column="0" Margin="10 0 0 0"
                                 VerticalAlignment="Center" Text="{lex:Loc Key=Name}"/>
-            <TextBox Grid.Row="1" Grid.Column="1" 
+            <TextBox Grid.Row="2" Grid.Column="1" 
                             HorizontalAlignment="Stretch" VerticalAlignment="Center"
                             Text="{Binding SolutionName, UpdateSourceTrigger=PropertyChanged}"/>
 
 
-            <TextBlock Grid.Row="2" Grid.Column="0" Margin="10 0 0 0"
+            <TextBlock Grid.Row="3" Grid.Column="0" Margin="10 0 0 0"
                                 VerticalAlignment="Center" Text="{lex:Loc Key=Position}"/>
-            <TextBox Grid.Row="2" Grid.Column="1" 
+            <TextBox Grid.Row="3" Grid.Column="1" 
                                 Text="{Binding SolutionPath}"
                                 HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
-            <Button Grid.Row="2" Grid.Column="2" 
+            <Button Grid.Row="3" Grid.Column="2" 
                             Padding="10 0" Margin="10 0 0 0"
                             Content="{lex:Loc Key=Search}"
                             Command="{Binding SearchCommand}"
                             VerticalAlignment="Center" HorizontalAlignment="Left"/>
 
 
-            <TextBlock Grid.Row="3" Grid.Column="0" Margin="10 0 0 0"
+            <TextBlock Grid.Row="4" Grid.Column="0" Margin="10 0 0 0"
                                 VerticalAlignment="Center" Text="{lex:Loc Key=SolutionPath}"/>
-            <TextBox Grid.Row="3" Grid.Column="1" IsReadOnly="True"
+            <TextBox Grid.Row="4" Grid.Column="1" IsReadOnly="True"
                             HorizontalAlignment="Stretch" VerticalAlignment="Center"
                             Text="{Binding SolutionFullPath, Mode=OneWay}"/>
-            <CheckBox Grid.Row="3" Grid.Column="2" Margin="10 0 0 0"
+            <CheckBox Grid.Row="4" Grid.Column="2" Margin="10 0 0 0"
                                 IsChecked="{Binding CreateSolutionFolder}"
                                 Content="{lex:Loc Key=CreateSolutionDir}"  VerticalAlignment="Center"/>
             

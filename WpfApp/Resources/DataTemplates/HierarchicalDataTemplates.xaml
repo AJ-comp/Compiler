@@ -2,6 +2,7 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:models="clr-namespace:WpfApp.Models"
                     xmlns:converters="clr-namespace:WpfApp.Converters"
+                    xmlns:selectors="clr-namespace:WpfApp.Selectors"
                     xmlns:local="clr-namespace:WpfApp.Resources.DataTemplates">
 
     <HierarchicalDataTemplate DataType="{x:Type models:SolutionStruct}" ItemsSource="{Binding Projects}">
@@ -25,5 +26,6 @@
     <DataTemplate DataType="{x:Type models:FileStruct}">
         <TextBlock Text="{Binding Name}"/>
     </DataTemplate>
+
 
 </ResourceDictionary>

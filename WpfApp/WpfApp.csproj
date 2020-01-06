@@ -108,6 +108,8 @@
     <Compile Include="Behaviors\ViewViewModelConnector.cs" />
     <Compile Include="Behaviors\WindowLoadBehavior.cs" />
     <Compile Include="Converters\GrammarToLRParserConverter.cs" />
+    <Compile Include="Converters\GroupByType.cs" />
+    <Compile Include="Converters\NavigateUriToStringConverter.cs" />
     <Compile Include="Converters\RemoveObjectConverter.cs" />
     <Compile Include="Converters\WindowCloseLogicConverter.cs" />
     <Compile Include="Converters\EnumToImageConverter.cs" />
@@ -131,6 +133,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Selectors\Selector.cs" />
     <Compile Include="Utilities\Generator.cs" />
     <Compile Include="Utilities\Loader.cs" />
     <Compile Include="Utilities\ViewCache.cs" />
@@ -267,6 +270,14 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Parse.BackEnd.Target\Parse.BackEnd.Target.ARMv7\Parse.BackEnd.Target.ARMv7.csproj">
+      <Project>{453a6e15-d65d-408f-856a-718ce73cac42}</Project>
+      <Name>Parse.BackEnd.Target.ARMv7</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Parse.BackEnd.Target\Parse.BackEnd.Target\Parse.BackEnd.Target.csproj">
+      <Project>{6fe9d3fa-798d-42ec-b6f0-890d5d320384}</Project>
+      <Name>Parse.BackEnd.Target</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Parse.FrontEnd.Grammars\Parse.FrontEnd.Grammars.csproj">
       <Project>{A0661596-8C09-42A8-B412-8702108FD935}</Project>
       <Name>Parse.FrontEnd.Grammars</Name>

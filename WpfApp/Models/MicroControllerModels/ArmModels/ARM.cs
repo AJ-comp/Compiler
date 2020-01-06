@@ -63,6 +63,9 @@ namespace WpfApp.Models.MicroControllerModels.ArmModels
         public Stm32L152RB()
         {
             this.Name = "Stm32L152RB";
+
+            this.Explain = "test";
+            this.DataSheetPath = "https://www.st.com/resource/en/datasheet/stm32l152rb.pdf";
         }
     }
 }

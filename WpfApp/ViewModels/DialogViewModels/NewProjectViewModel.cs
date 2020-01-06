@@ -1,7 +1,9 @@
 ﻿using GalaSoft.MvvmLight.Command;
 using Microsoft.WindowsAPICodePack.Dialogs;
+using Parse.BackEnd.Target;
 using System;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using WpfApp.Models;
 using WpfApp.Models.MicroControllerModels;
@@ -12,9 +14,11 @@ namespace WpfApp.ViewModels.DialogViewModels
     public class NewProjectViewModel : DialogViewModel
     {
         private Generator projectGenerator = new Generator();
+
+        public ObservableCollection<ITarget> targets { get; } = new ObservableCollection<ITarget>();
         public ObservableCollection<MicroController> MicroControllers { get; } = new ObservableCollection<MicroController>();
 
-        private MicroController selectedTerminalItem;
+        public MicroController SelectedTerminalItem { get; private set; }
 
         private MicroController selectedItem;
         public MicroController SelectedItem
@@ -25,8 +29,9 @@ namespace WpfApp.ViewModels.DialogViewModels
                 if (this.selectedItem == value) return;
                 this.selectedItem = value;
 
-                this.selectedTerminalItem = (this.selectedItem is IHierarchical<MicroController>) ? null : this.selectedItem;
+                this.SelectedTerminalItem = (this.selectedItem is IHierarchical<MicroController>) ? null : this.selectedItem;
                 this.RaisePropertyChanged("SelectedItem");
+                this.RaisePropertyChanged("SelectedTerminalItem");
 
                 CreateCommand.RaiseCanExecuteChanged();
             }
@@ -113,11 +118,32 @@ namespace WpfApp.ViewModels.DialogViewModels
 
         private bool CanExecuteCreate(Action action)
         {
-            if (this.selectedTerminalItem == null) return false;
+            if (this.SelectedTerminalItem == null) return false;
             if (string.IsNullOrEmpty(this.solutionPath)) return false;
             if (string.IsNullOrEmpty(this.solutionName)) return false;
 
             return true;
+        }
+
+
+        RelayCommand<string> navigateCommand;
+        RelayCommand<string> NavigateCommand
+        {
+            get
+            {
+                if (this.navigateCommand == null)
+                    this.navigateCommand = new RelayCommand<string>((uri) =>
+                    {
+                        Process.Start(new ProcessStartInfo(uri));
+                    });
+
+                return navigateCommand;
+            }
+        }
+
+        public NewProjectViewModel()
+        {
+//            this.targets.Add(new ARM());
         }
     }
 }
