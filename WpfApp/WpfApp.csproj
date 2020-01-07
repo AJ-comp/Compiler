@@ -36,10 +36,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="ActiproSoftware.Editors.Wpf, Version=18.1.673.0, Culture=neutral, PublicKeyToken=36ff2196ab5654b9, processorArchitecture=MSIL" />
-    <Reference Include="ActiproSoftware.Shared.Wpf, Version=18.1.673.0, Culture=neutral, PublicKeyToken=36ff2196ab5654b9, processorArchitecture=MSIL" />
-    <Reference Include="ActiproSoftware.SyntaxEditor.Wpf, Version=18.1.673.0, Culture=neutral, PublicKeyToken=36ff2196ab5654b9, processorArchitecture=MSIL" />
-    <Reference Include="ActiproSoftware.Text.Wpf, Version=18.1.673.0, Culture=neutral, PublicKeyToken=36ff2196ab5654b9, processorArchitecture=MSIL" />
     <Reference Include="CommonServiceLocator, Version=2.0.2.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
       <HintPath>..\packages\CommonServiceLocator.2.0.2\lib\net47\CommonServiceLocator.dll</HintPath>
     </Reference>
@@ -108,19 +104,18 @@
     <Compile Include="Behaviors\ViewViewModelConnector.cs" />
     <Compile Include="Behaviors\WindowLoadBehavior.cs" />
     <Compile Include="Converters\GrammarToLRParserConverter.cs" />
-    <Compile Include="Converters\GroupByType.cs" />
     <Compile Include="Converters\NavigateUriToStringConverter.cs" />
     <Compile Include="Converters\RemoveObjectConverter.cs" />
+    <Compile Include="Converters\SelectedItemConverter.cs" />
     <Compile Include="Converters\WindowCloseLogicConverter.cs" />
     <Compile Include="Converters\EnumToImageConverter.cs" />
     <Compile Include="Converters\EventArgsConverterExtension.cs" />
     <Compile Include="Converters\MouseDoubleClickIndexConverter.cs" />
     <Compile Include="Models\AlarmData.cs" />
     <Compile Include="Models\Document.cs" />
+    <Compile Include="Models\ClassHierarchyData.cs" />
     <Compile Include="Models\IHierarchical.cs" />
     <Compile Include="Models\Invokers\Invoker.cs" />
-    <Compile Include="Models\MicroControllerModels\ArmModels\ARM.cs" />
-    <Compile Include="Models\MicroControllerModels\MicroController.cs" />
     <Compile Include="Models\SolutionStruct.cs" />
     <Compile Include="Models\Theme.cs" />
     <Compile Include="Properties\AlarmCodes.Designer.cs">
@@ -133,7 +128,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Selectors\Selector.cs" />
+    <Compile Include="Utilities\ClassHierarchyGenerator.cs" />
     <Compile Include="Utilities\Generator.cs" />
     <Compile Include="Utilities\Loader.cs" />
     <Compile Include="Utilities\ViewCache.cs" />
@@ -344,9 +339,7 @@
   <ItemGroup>
     <Resource Include="Resources\Images\Basic\cfile_48.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Models\MicroControllerModels\AvrModels\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>

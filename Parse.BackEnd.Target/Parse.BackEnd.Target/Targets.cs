@@ -1,28 +1,21 @@
 ﻿namespace Parse.BackEnd.Target
 {
-    public interface ITarget
-    {
-        string Name { get; }
-
-        string Explain { get; }
-    }
-
-    public class ARM : ITarget
+    public class Target
     {
         public string Name { get; protected set; }
         public string Explain { get; protected set; }
+    }
 
+    public class ARM : Target
+    {
         public ARM()
         {
             this.Name = "ARM";
         }
     }
 
-    public class AVR : ITarget
+    public class AVR : Target
     {
-        public string Name { get; protected set; }
-        public string Explain { get; protected set; }
-
         public AVR()
         {
             this.Name = "AVR";

@@ -6,7 +6,6 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
 using WpfApp.Models;
-using WpfApp.Models.MicroControllerModels;
 using WpfApp.Utilities;
 
 namespace WpfApp.ViewModels.DialogViewModels
@@ -15,23 +14,45 @@ namespace WpfApp.ViewModels.DialogViewModels
     {
         private Generator projectGenerator = new Generator();
 
-        public ObservableCollection<ITarget> targets { get; } = new ObservableCollection<ITarget>();
-        public ObservableCollection<MicroController> MicroControllers { get; } = new ObservableCollection<MicroController>();
+        public ObservableCollection<ClassHierarchyData> TotalCPUs { get; private set; } = new ObservableCollection<ClassHierarchyData>();
+        public ObservableCollection<DetailType> FilterCPUs { get; private set; } = new ObservableCollection<DetailType>();
 
-        public MicroController SelectedTerminalItem { get; private set; }
+        public bool FilterMode { get; private set; } = false;
 
-        private MicroController selectedItem;
-        public MicroController SelectedItem
+        private string cpuSearch;
+        public string CPUSearch
+        {
+            get => this.cpuSearch;
+            set
+            {
+                if (this.cpuSearch == value) return;
+                this.cpuSearch = value;
+                this.FilterCPUs.Add(new DetailType(typeof(Target), "abc"));
+            }
+        }
+
+        private Type selectedTerminalItem;
+        public Type SelectedTerminalItem
+        {
+            get => this.selectedTerminalItem;
+            private set
+            {
+                if (this.selectedTerminalItem == value) return;
+                this.selectedTerminalItem = value;
+
+                this.RaisePropertyChanged("SelectedTerminalItem");
+            }
+        }
+
+        private Type selectedItem;
+        public Type SelectedItem
         {
             get => selectedItem;
             set
             {
                 if (this.selectedItem == value) return;
                 this.selectedItem = value;
-
-                this.SelectedTerminalItem = (this.selectedItem is IHierarchical<MicroController>) ? null : this.selectedItem;
                 this.RaisePropertyChanged("SelectedItem");
-                this.RaisePropertyChanged("SelectedTerminalItem");
 
                 CreateCommand.RaiseCanExecuteChanged();
             }
@@ -125,9 +146,27 @@ namespace WpfApp.ViewModels.DialogViewModels
             return true;
         }
 
+        private RelayCommand<ClassHierarchyData> cpuSelectedCommand;
+        public RelayCommand<ClassHierarchyData> CPUSelectedCommand
+        {
+            get
+            {
+                if (this.cpuSelectedCommand == null)
+                    this.cpuSelectedCommand = new RelayCommand<ClassHierarchyData>(OnCPUSelected);
 
-        RelayCommand<string> navigateCommand;
-        RelayCommand<string> NavigateCommand
+                return this.cpuSelectedCommand;
+            }
+        }
+
+        private void OnCPUSelected(ClassHierarchyData selected)
+        {
+            this.SelectedItem = selected.Data;
+            this.SelectedTerminalItem = (selected.Items.Count == 0) ? selected.Data : null;
+        }
+
+
+        private RelayCommand<string> navigateCommand;
+        public RelayCommand<string> NavigateCommand
         {
             get
             {
@@ -143,7 +182,28 @@ namespace WpfApp.ViewModels.DialogViewModels
 
         public NewProjectViewModel()
         {
-//            this.targets.Add(new ARM());
+            ClassHierarchyGenerator classHierarchyGenerator = new ClassHierarchyGenerator();
+
+            this.TotalCPUs.Add(classHierarchyGenerator.ToHierarchyData(typeof(Target)));
+            this.FilterCPUs.CollectionChanged += FilterCPUs_CollectionChanged;
+        }
+
+        private void FilterCPUs_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            this.FilterMode = (this.FilterCPUs.Count > 0) ? true : false;
+        }
+    }
+
+
+    public class DetailType
+    {
+        public Type Type { get; }
+        public string Path { get; }
+
+        public DetailType(Type type, string path)
+        {
+            Type = type;
+            Path = path;
         }
     }
 }

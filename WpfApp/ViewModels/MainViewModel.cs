@@ -9,7 +9,6 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Windows;
-using WpfApp.Models.MicroControllerModels.ArmModels;
 using WpfApp.Utilities;
 using WpfApp.ViewModels.DialogViewModels;
 using WpfApp.ViewModels.DocumentTypeViewModels;
@@ -235,7 +234,6 @@ namespace WpfApp.ViewModels
         private void InitNewProjectWindow()
         {
             var newProject = ServiceLocator.Current.GetInstance<NewProjectViewModel>();
-            newProject.MicroControllers.Add(new ARM());
         }
 
         private void InitSolutionExplorer()

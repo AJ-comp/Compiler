@@ -28,4 +28,10 @@
     </DataTemplate>
 
 
+
+    <HierarchicalDataTemplate DataType="{x:Type models:ClassHierarchyData}" ItemsSource="{Binding Items}">
+        <TextBlock Text="{Binding Data.Name}"/>
+    </HierarchicalDataTemplate>
+
+
 </ResourceDictionary>

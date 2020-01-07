@@ -7,8 +7,7 @@
              xmlns:lex="http://wpflocalizeextension.codeplex.com" 
              xmlns:local="clr-namespace:WpfApp.Views.DialogViews"
              xmlns:localConverters="clr-namespace:WpfApp.Converters"
-             xmlns:localSelectors="clr-namespace:WpfApp.Selectors"
-             xmlns:localBehaviors="clr-namespace:WpfApp.Behaviors"
+             xmlns:targets="clr-namespace:Parse.BackEnd.Target;assembly=Parse.BackEnd.Target"
              xmlns:ap="clr-namespace:WpfApp.AttachedProperties"
              xmlns:mvvm="http://www.galasoft.ch/mvvmlight"
              xmlns:viewModels="clr-namespace:WpfApp.ViewModels.DialogViewModels"
@@ -19,45 +18,6 @@
              Title="{lex:Loc Key=NewProject}"
              DataContext="{Binding NewProjectWindow, Source={StaticResource Locator}}"
              Height="600" Width="800">
-
-    <Window.Resources>
-        <HierarchicalDataTemplate x:Key="GroupTemplate" ItemsSource="{Binding Path=Items}">
-            <TextBlock Text="{Binding Path=Name}" FontWeight="Bold"/>
-        </HierarchicalDataTemplate>
-
-        <DataTemplate x:Key="pTemplate">
-            <TextBlock Text="{Binding Path=LanguageCovered }"/>
-        </DataTemplate>
-
-        <DataTemplate x:Key="rTemplate">
-            <TextBlock Text="{Binding Path=NumRecipes}"/>
-        </DataTemplate>
-        <DataTemplate x:Key="dTemplate">
-            <TextBlock Text="{Binding Path=Size}"/>
-        </DataTemplate>
-        <localConverters:GroupByType x:Key="gt" />
-        <localSelectors:Selector x:Key="s"/>
-        <CollectionViewSource Source="{Binding}" x:Key="cvs">
-            <CollectionViewSource.GroupDescriptions>
-                <PropertyGroupDescription>
-                    <PropertyGroupDescription.Converter>
-                        <localConverters:GroupByType type="root"/>
-                    </PropertyGroupDescription.Converter>
-                </PropertyGroupDescription>
-                <PropertyGroupDescription>
-                    <PropertyGroupDescription.Converter>
-                        <localConverters:GroupByType type="subs"/>
-                    </PropertyGroupDescription.Converter>
-                </PropertyGroupDescription>
-                <PropertyGroupDescription>
-                    <PropertyGroupDescription.Converter>
-                        <localConverters:GroupByType type="main"/>
-                    </PropertyGroupDescription.Converter>
-                </PropertyGroupDescription>
-            </CollectionViewSource.GroupDescriptions>
-        </CollectionViewSource>
-    </Window.Resources>
-    
 
     <Grid>
         <Grid.RowDefinitions>
@@ -81,16 +41,42 @@
                     <RowDefinition Height="50"/>
                 </Grid.RowDefinitions>
 
-                <!--<TreeView Grid.Row="1" BorderThickness="0" 
-                                    ItemsSource="{Binding Source={StaticResource cvs}, Path=Groups}" 
-                                    ItemTemplateSelector="{StaticResource s}"/>-->
-                
-                <TreeView Grid.Row="1" BorderThickness="0"
-                                ItemsSource="{Binding MicroControllers}">
-                    <i:Interaction.Behaviors>
-                        <localBehaviors:BindableSelectedItemBehavior SelectedItem="{Binding SelectedItem, Mode=TwoWay}" />
-                    </i:Interaction.Behaviors>
-                </TreeView>
+                <TextBox Grid.Row="0" Text="{Binding CPUSearch, UpdateSourceTrigger=PropertyChanged}"/>
+
+                <Grid Grid.Row="1">
+                    <TreeView x:Name="treeView" BorderThickness="0" Visibility="Visible"
+                                ItemsSource="{Binding TotalCPUs}">
+                        <TreeView.Style>
+                            <Style TargetType="{x:Type TreeView}">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding FilterMode}" Value="true">
+                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                    </DataTrigger>
+                                </Style.Triggers>                                
+                            </Style>
+                        </TreeView.Style>
+                        
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="SelectedItemChanged">
+                                <mvvm:EventToCommand Command="{Binding CPUSelectedCommand}"
+                                                 PassEventArgsToCommand="True"
+                                                 EventArgsConverter="{localConverters:SelectedItemConverter}" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </TreeView>
+
+                    <ListBox x:Name="listBox" BorderThickness="0" Visibility="Collapsed">
+                        <ListBox.Style>
+                            <Style TargetType="{x:Type ListBox}">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding FilterMode}" Value="true">
+                                        <Setter Property="Visibility" Value="Visible"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </ListBox.Style>
+                    </ListBox>
+                </Grid>
 
                 <TextBlock Grid.Row="2" TextWrapping="WrapWithOverflow" 
                                     Text="{Binding SelectedTerminalItem.Explain}"/>
