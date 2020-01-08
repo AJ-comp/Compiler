@@ -116,6 +116,7 @@
     <Compile Include="Models\ClassHierarchyData.cs" />
     <Compile Include="Models\IHierarchical.cs" />
     <Compile Include="Models\Invokers\Invoker.cs" />
+    <Compile Include="Models\ProjectData.cs" />
     <Compile Include="Models\SolutionStruct.cs" />
     <Compile Include="Models\Theme.cs" />
     <Compile Include="Properties\AlarmCodes.Designer.cs">

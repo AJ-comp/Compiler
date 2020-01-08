@@ -35,7 +35,7 @@
 
             <Grid Grid.Row="0" Grid.Column="0">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="20"/>
+                    <RowDefinition Height="22"/>
                     <RowDefinition Height="2*"/>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="50"/>
@@ -44,7 +44,7 @@
                 <TextBox Grid.Row="0" Text="{Binding CPUSearch, UpdateSourceTrigger=PropertyChanged}"/>
 
                 <Grid Grid.Row="1">
-                    <TreeView x:Name="treeView" BorderThickness="0" Visibility="Visible"
+                    <TreeView x:Name="treeView" BorderThickness="0"
                                 ItemsSource="{Binding TotalCPUs}">
                         <TreeView.Style>
                             <Style TargetType="{x:Type TreeView}">
@@ -52,10 +52,13 @@
                                     <DataTrigger Binding="{Binding FilterMode}" Value="true">
                                         <Setter Property="Visibility" Value="Collapsed"/>
                                     </DataTrigger>
-                                </Style.Triggers>                                
+                                    <DataTrigger Binding="{Binding FilterMode}" Value="false">
+                                        <Setter Property="Visibility" Value="Visible"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
                             </Style>
                         </TreeView.Style>
-                        
+
                         <i:Interaction.Triggers>
                             <i:EventTrigger EventName="SelectedItemChanged">
                                 <mvvm:EventToCommand Command="{Binding CPUSelectedCommand}"
@@ -65,13 +68,30 @@
                         </i:Interaction.Triggers>
                     </TreeView>
 
-                    <ListBox x:Name="listBox" BorderThickness="0" Visibility="Collapsed">
+                    <ListBox x:Name="listBox" BorderThickness="0"
+                                    ItemsSource="{Binding FilterCPUs}"
+                                    SelectedIndex="{Binding FilterSelectedIndex}">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Margin="0 0 0 10">
+                                    <TextBlock Text="{Binding Type.Name}"/>
+                                    <TextBlock FontSize="8" Text="{Binding Classification}" Margin="0 3 0 0"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+
                         <ListBox.Style>
-                            <Style TargetType="{x:Type ListBox}">
+                            <Style TargetType="{x:Type ListBox}" BasedOn="{StaticResource {x:Type ListBox}}">
                                 <Style.Triggers>
                                     <DataTrigger Binding="{Binding FilterMode}" Value="true">
                                         <Setter Property="Visibility" Value="Visible"/>
                                     </DataTrigger>
+                                    <DataTrigger Binding="{Binding FilterMode}" Value="false">
+                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                    </DataTrigger>
+                                    <Trigger Property="IsSelected" Value="true">
+                                        <Setter Property="BorderThickness" Value="0"/>
+                                    </Trigger>
                                 </Style.Triggers>
                             </Style>
                         </ListBox.Style>
@@ -103,20 +123,23 @@
                 </TextBlock>
             </Grid>
 
-            <ListBox Grid.Row="0" Grid.Column="1" HorizontalContentAlignment="Stretch"
-                            ItemsSource="{Binding NewFileDataCollection}" >
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <Border x:Name="border" BorderThickness="1" VerticalAlignment="Stretch">
-                            <VirtualizingStackPanel Name="vStack" Orientation="Horizontal">
-                                <Image Source="{Binding ImageSource}"  Width="48" Height="48" Margin="0,0,2,0"/>
-                                <TextBlock Text="{Binding ItemName}" Width="100"/>
-                                <TextBlock Text="{Binding Explain}" FontSize="8"/>
-                            </VirtualizingStackPanel>
-                        </Border>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
+            <Grid Grid.Row="0" Grid.Column="1">
+                <ListBox Grid.Row="0" HorizontalContentAlignment="Stretch"
+                            ItemsSource="{Binding AvailableProjectList}"
+                            SelectedIndex="{Binding SelectedProjectIndex}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Border x:Name="border" BorderThickness="1" VerticalAlignment="Stretch">
+                                <VirtualizingStackPanel Name="vStack" Orientation="Horizontal">
+                                    <Image Source="{Binding ImageSrc}"  Width="48" Height="48" Margin="0,0,2,0"/>
+                                    <TextBlock Text="{Binding Name}" Width="100"/>
+                                    <TextBlock Text="{Binding ProjectType}" FontSize="10"/>
+                                </VirtualizingStackPanel>
+                            </Border>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </Grid>
 
             <TextBlock Grid.Row="0" Grid.Column="2"/>
         </Grid>

@@ -1,7 +1,9 @@
 ﻿using GalaSoft.MvvmLight.Command;
 using Microsoft.WindowsAPICodePack.Dialogs;
 using Parse.BackEnd.Target;
+using Parse.WpfControls.Algorithms;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
@@ -12,12 +14,45 @@ namespace WpfApp.ViewModels.DialogViewModels
 {
     public class NewProjectViewModel : DialogViewModel
     {
+        private Type backupData;
         private Generator projectGenerator = new Generator();
+        private List<DetailType> terminalList = new List<DetailType>();
+        private ISimilarityComparison similarity = new LikeVSSimilarityComparison();
 
+        public ObservableCollection<ProjectData> TotalProjectList { get; private set; } = new ObservableCollection<ProjectData>();
+        public ObservableCollection<ProjectData> AvailableProjectList { get; private set; } = new ObservableCollection<ProjectData>();
+        public ObservableCollection<string> SupportLanguages { get; private set; } = new ObservableCollection<string>();
         public ObservableCollection<ClassHierarchyData> TotalCPUs { get; private set; } = new ObservableCollection<ClassHierarchyData>();
         public ObservableCollection<DetailType> FilterCPUs { get; private set; } = new ObservableCollection<DetailType>();
 
-        public bool FilterMode { get; private set; } = false;
+        private bool filterMode;
+        public bool FilterMode
+        {
+            get => this.filterMode;
+            set
+            {
+                if (this.filterMode == value) return;
+                this.filterMode = value;
+                if (this.filterMode) backupData = this.selectedTerminalItem;
+                else this.SelectedTerminalItem = backupData;
+                this.RaisePropertyChanged("FilterMode");
+            }
+        }
+
+        private int filterSelectedIndex = -1;
+        public int FilterSelectedIndex
+        {
+            get => this.filterSelectedIndex;
+            set
+            {
+                if (this.filterSelectedIndex == value) return;
+                this.filterSelectedIndex = value;
+                this.RaisePropertyChanged("FilterSelectedIndex");
+
+                if (this.filterSelectedIndex >= 0)
+                    this.SelectedTerminalItem = this.terminalList[this.filterSelectedIndex].Type;
+            }
+        }
 
         private string cpuSearch;
         public string CPUSearch
@@ -27,7 +62,21 @@ namespace WpfApp.ViewModels.DialogViewModels
             {
                 if (this.cpuSearch == value) return;
                 this.cpuSearch = value;
-                this.FilterCPUs.Add(new DetailType(typeof(Target), "abc"));
+                this.FilterCPUs.Clear();
+
+                if(this.cpuSearch.Length > 0)
+                {
+                    this.terminalList.ForEach((t) =>
+                    {
+                        List<uint> matchedIndexes = new List<uint>();
+                        this.similarity.SimilarityValue(t.Type.Name, this.CPUSearch, out matchedIndexes);
+
+                        if (matchedIndexes.Count > 0)
+                        {
+                            this.FilterCPUs.Add(t);
+                        }
+                    });
+                }
             }
         }
 
@@ -38,7 +87,18 @@ namespace WpfApp.ViewModels.DialogViewModels
             private set
             {
                 if (this.selectedTerminalItem == value) return;
+
                 this.selectedTerminalItem = value;
+                this.AvailableProjectList.Clear();
+
+                // if selected terminal item then show project list
+                if (this.selectedTerminalItem != null)
+                {
+                    foreach(var item in this.TotalProjectList)
+                    {
+                        this.AvailableProjectList.Add(item);
+                    }
+                }
 
                 this.RaisePropertyChanged("SelectedTerminalItem");
             }
@@ -50,7 +110,6 @@ namespace WpfApp.ViewModels.DialogViewModels
             get => selectedItem;
             set
             {
-                if (this.selectedItem == value) return;
                 this.selectedItem = value;
                 this.RaisePropertyChanged("SelectedItem");
 
@@ -58,6 +117,18 @@ namespace WpfApp.ViewModels.DialogViewModels
             }
         }
 
+        private int selectedProjectIndex = -1;
+        public int SelectedProjectIndex
+        {
+            get => this.selectedProjectIndex;
+            set
+            {
+                this.selectedProjectIndex = value;
+                this.RaisePropertyChanged("SelectedProjectIndex");
+            }
+        }
+
+        #region Functionality related to Total Display
         private string solutionName = string.Empty;
         public string SolutionName
         {
@@ -133,13 +204,14 @@ namespace WpfApp.ViewModels.DialogViewModels
         }
         private void OnCreate(Action action)
         {
-            projectGenerator.GenerateSolution(this.SolutionPath, this.SolutionName, this.CreateSolutionFolder);
+//            projectGenerator.GenerateSolution(this.SolutionPath, this.SolutionName, this.CreateSolutionFolder, , this.SelectedTerminalItem);
             action?.Invoke();
         }
 
         private bool CanExecuteCreate(Action action)
         {
             if (this.SelectedTerminalItem == null) return false;
+            if (this.SelectedProjectIndex < 0) return false;
             if (string.IsNullOrEmpty(this.solutionPath)) return false;
             if (string.IsNullOrEmpty(this.solutionName)) return false;
 
@@ -179,31 +251,24 @@ namespace WpfApp.ViewModels.DialogViewModels
                 return navigateCommand;
             }
         }
+        #endregion
 
         public NewProjectViewModel()
         {
+            this.TotalProjectList.Add(new ProjectData() { ImageSrc = "", Name = "MiniC", ProjectType = ProjectData.ProjectTypes.Project });
+
             ClassHierarchyGenerator classHierarchyGenerator = new ClassHierarchyGenerator();
 
             this.TotalCPUs.Add(classHierarchyGenerator.ToHierarchyData(typeof(Target)));
+            foreach(var item in this.TotalCPUs)
+                this.terminalList.AddRange(item.GetTerminalCollection());
+
             this.FilterCPUs.CollectionChanged += FilterCPUs_CollectionChanged;
         }
 
         private void FilterCPUs_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
             this.FilterMode = (this.FilterCPUs.Count > 0) ? true : false;
-        }
-    }
-
-
-    public class DetailType
-    {
-        public Type Type { get; }
-        public string Path { get; }
-
-        public DetailType(Type type, string path)
-        {
-            Type = type;
-            Path = path;
         }
     }
 }
