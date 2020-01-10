@@ -4,7 +4,7 @@ using System.IO;
 using System.Reflection;
 using WpfApp.Models;
 
-namespace WpfApp.Utilities
+namespace WpfApp.Utilities.GeneratorPackages.ProjectStructs
 {
     public class ClassHierarchyGenerator
     {

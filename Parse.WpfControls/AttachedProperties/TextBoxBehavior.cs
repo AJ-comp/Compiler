@@ -4,7 +4,7 @@ using System.Windows.Input;
 
 namespace Parse.WpfControls.AttachedProperties
 {
-    class TextBoxBehavior : DependencyObject
+    public class TextBoxBehavior : DependencyObject
     {
         private static bool backupAcceptTab = false;
 

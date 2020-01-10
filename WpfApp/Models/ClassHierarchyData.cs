@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
 namespace WpfApp.Models
@@ -36,6 +37,7 @@ namespace WpfApp.Models
     {
         public Type Type { get; }
         public string Classification { get; }
+        public List<uint> MatchedIndexes { get; set; } = new List<uint>();
 
         public DetailType(Type type, string classification)
         {

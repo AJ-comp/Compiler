@@ -1,6 +1,7 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:models="clr-namespace:WpfApp.Models"
+                    xmlns:projectStructs="clr-namespace:WpfApp.Utilities.GeneratorPackages.ProjectStructs"
                     xmlns:converters="clr-namespace:WpfApp.Converters"
                     xmlns:selectors="clr-namespace:WpfApp.Selectors"
                     xmlns:local="clr-namespace:WpfApp.Resources.DataTemplates">
@@ -12,18 +13,27 @@
         </StackPanel>
     </HierarchicalDataTemplate>
 
-    <HierarchicalDataTemplate DataType="{x:Type models:ProjectStruct}" ItemsSource="{Binding Children}">
+    <HierarchicalDataTemplate DataType="{x:Type projectStructs:ProjectStruct}" ItemsSource="{Binding Children}">
         <StackPanel Orientation="Horizontal">
             <Image Width="16" Height="16" Margin="0 0 5 0" Source="{DynamicResource ProjectImagePath}"/>
             <TextBlock Text="{Binding Name}"/>
         </StackPanel>
     </HierarchicalDataTemplate>
 
-    <HierarchicalDataTemplate DataType="{x:Type models:FolderStruct}" ItemsSource="{Binding Children}">
+
+    <HierarchicalDataTemplate DataType="{x:Type projectStructs:ReferenceStruct}">
         <TextBlock Text="{Binding Name}"/>
     </HierarchicalDataTemplate>
 
-    <DataTemplate DataType="{x:Type models:FileStruct}">
+    <HierarchicalDataTemplate DataType="{x:Type projectStructs:FolderStruct}" ItemsSource="{Binding Children}">
+        <TextBlock Text="{Binding Name}"/>
+    </HierarchicalDataTemplate>
+
+    <DataTemplate DataType="{x:Type projectStructs:ReferenceFileStruct}">
+        <TextBlock Text="{Binding Name}"/>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type projectStructs:FileStruct}">
         <TextBlock Text="{Binding Name}"/>
     </DataTemplate>
 

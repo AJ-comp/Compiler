@@ -41,17 +41,20 @@ namespace Parse.WpfControls.Algorithms
         /// <returns></returns>
         public double SimilarityValue(string target, string source, out List<uint> matchedIndexes)
         {
+            int x = 0;
+            int y = 0;
+            bool prefixMode = true;
             matchedIndexes = new List<UInt32>();
 
             if (source.Length <= 0 || target.Length <= 0) return 0;
             if (source.Length > target.Length) return 0;
-            if (char.ToUpper(source[0]) != char.ToUpper(target[0])) return 0;
+            if (char.ToUpper(source[0]) == char.ToUpper(target[0]))
+            {
+                x = 1; y = 1;
+                prefixMode = false;
+                matchedIndexes.Add(0); // s[0] and t[0] is compared.
+            }
 
-            bool prefixMode = false;
-
-            int x = 1;
-            int y = 1;
-            matchedIndexes.Add(0); // already s[0] and t[0] is compared.
             while (true)
             {
                 if (x >= target.Length) break;
@@ -72,7 +75,7 @@ namespace Parse.WpfControls.Algorithms
                 }
                 else
                 {
-                    if (t == s)
+                    if (char.ToUpper(t) == char.ToUpper(s))
                     {
                         y++;
                         matchedIndexes.Add((uint)x);

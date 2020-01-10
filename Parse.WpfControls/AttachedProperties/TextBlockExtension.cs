@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -8,7 +7,7 @@ using System.Windows.Documents;
 
 namespace Parse.WpfControls.AttachedProperties
 {
-    class TextBlockExtension : DependencyObject
+    public class TextBlockExtension : DependencyObject
     {
         #region BoldIndexes
         public static string GetBoldIndexes(DependencyObject item)

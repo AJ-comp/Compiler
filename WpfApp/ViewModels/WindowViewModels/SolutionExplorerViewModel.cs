@@ -1,6 +1,8 @@
 ﻿using GalaSoft.MvvmLight;
 using System.Collections.ObjectModel;
+using WpfApp.Messages;
 using WpfApp.Models;
+using WpfApp.Utilities;
 
 namespace WpfApp.ViewModels.WindowViewModels
 {
@@ -11,6 +13,12 @@ namespace WpfApp.ViewModels.WindowViewModels
         // for test
         public SolutionExplorerViewModel()
         {
+        }
+
+        public void ReceivedLoadSolutionMessage(LoadSolutionMessage message)
+        {
+            SolutionLoader loader = new SolutionLoader();
+            this.Solutions.Add(loader.LoadSolution(message.SolutionPath, message.SolutionName));
         }
     }
 }

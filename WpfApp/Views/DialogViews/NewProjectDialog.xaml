@@ -8,7 +8,8 @@
              xmlns:local="clr-namespace:WpfApp.Views.DialogViews"
              xmlns:localConverters="clr-namespace:WpfApp.Converters"
              xmlns:targets="clr-namespace:Parse.BackEnd.Target;assembly=Parse.BackEnd.Target"
-             xmlns:ap="clr-namespace:WpfApp.AttachedProperties"
+             xmlns:wpfControlsAP="clr-namespace:Parse.WpfControls.AttachedProperties;assembly=Parse.WpfControls"
+             xmlns:wpfControlsConverters="clr-namespace:Parse.WpfControls.Converters;assembly=Parse.WpfControls"
              xmlns:mvvm="http://www.galasoft.ch/mvvmlight"
              xmlns:viewModels="clr-namespace:WpfApp.ViewModels.DialogViewModels"
              mc:Ignorable="d" 
@@ -74,7 +75,9 @@
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel Margin="0 0 0 10">
-                                    <TextBlock Text="{Binding Type.Name}"/>
+                                    <TextBlock Text="{Binding Type.Name}" 
+                                               wpfControlsAP:TextBlockExtension.BoldIndexes="{Binding MatchedIndexes, 
+                                                Converter={wpfControlsConverters:UIntListToStringConverter}}"/>
                                     <TextBlock FontSize="8" Text="{Binding Classification}" Margin="0 3 0 0"/>
                                 </StackPanel>
                             </DataTemplate>
@@ -126,14 +129,14 @@
             <Grid Grid.Row="0" Grid.Column="1">
                 <ListBox Grid.Row="0" HorizontalContentAlignment="Stretch"
                             ItemsSource="{Binding AvailableProjectList}"
-                            SelectedIndex="{Binding SelectedProjectIndex}">
+                            SelectedItem="{Binding SelectedProject}">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <Border x:Name="border" BorderThickness="1" VerticalAlignment="Stretch">
                                 <VirtualizingStackPanel Name="vStack" Orientation="Horizontal">
                                     <Image Source="{Binding ImageSrc}"  Width="48" Height="48" Margin="0,0,2,0"/>
-                                    <TextBlock Text="{Binding Name}" Width="100"/>
-                                    <TextBlock Text="{Binding ProjectType}" FontSize="10"/>
+                                    <TextBlock Text="{Binding ProjectType}" Width="100"/>
+                                    <TextBlock Text="{Binding Grammar}" />
                                 </VirtualizingStackPanel>
                             </Border>
                         </DataTemplate>

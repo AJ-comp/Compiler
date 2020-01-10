@@ -1,6 +1,7 @@
 using CommonServiceLocator;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Messaging;
 using Parse.FrontEnd.Grammars;
 using Parse.FrontEnd.Grammars.MiniC;
 using Parse.FrontEnd.Grammars.PracticeGrammars;
@@ -9,6 +10,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Windows;
+using WpfApp.Messages;
 using WpfApp.Utilities;
 using WpfApp.ViewModels.DialogViewModels;
 using WpfApp.ViewModels.DocumentTypeViewModels;
@@ -239,8 +241,7 @@ namespace WpfApp.ViewModels
         private void InitSolutionExplorer()
         {
             var solutionExplorer = ServiceLocator.Current.GetInstance<SolutionExplorerViewModel>();
-            Loader loader = new Loader();
-            solutionExplorer.Solutions.Add(loader.LoadSolution("C:\\Users\\A\\Desktop\\Å×½ºÆ®\\test", "test.aj"));
+            Messenger.Default.Register<LoadSolutionMessage>(this, solutionExplorer.ReceivedLoadSolutionMessage);
         }
 
         /// <summary>

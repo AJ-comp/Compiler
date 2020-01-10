@@ -1,21 +1,26 @@
 ﻿using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Messaging;
 using Microsoft.WindowsAPICodePack.Dialogs;
 using Parse.BackEnd.Target;
+using Parse.FrontEnd.Grammars;
+using Parse.FrontEnd.Grammars.MiniC;
 using Parse.WpfControls.Algorithms;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
+using WpfApp.Messages;
 using WpfApp.Models;
 using WpfApp.Utilities;
+using WpfApp.Utilities.GeneratorPackages.ProjectStructs;
 
 namespace WpfApp.ViewModels.DialogViewModels
 {
     public class NewProjectViewModel : DialogViewModel
     {
         private Type backupData;
-        private Generator projectGenerator = new Generator();
+        private SolutionGenerator solutionGenerator = new SolutionGenerator();
         private List<DetailType> terminalList = new List<DetailType>();
         private ISimilarityComparison similarity = new LikeVSSimilarityComparison();
 
@@ -64,19 +69,33 @@ namespace WpfApp.ViewModels.DialogViewModels
                 this.cpuSearch = value;
                 this.FilterCPUs.Clear();
 
+                int topSimilityIndex = -1;
                 if(this.cpuSearch.Length > 0)
                 {
-                    this.terminalList.ForEach((t) =>
+                    double topSimility = 0;
+
+                    for(int i=0; i<this.terminalList.Count; i++)
                     {
+                        var t = this.terminalList[i];
+
                         List<uint> matchedIndexes = new List<uint>();
-                        this.similarity.SimilarityValue(t.Type.Name, this.CPUSearch, out matchedIndexes);
+                        var candidateSimility = this.similarity.SimilarityValue(t.Type.Name, this.CPUSearch, out matchedIndexes);
+                        t.MatchedIndexes = matchedIndexes;
 
                         if (matchedIndexes.Count > 0)
                         {
                             this.FilterCPUs.Add(t);
                         }
-                    });
+
+                        if (candidateSimility > topSimility)
+                        {
+                            topSimility = candidateSimility;
+                            topSimilityIndex = i;
+                        }
+                    }
                 }
+
+                if (topSimilityIndex >= 0) this.FilterSelectedIndex = topSimilityIndex;
             }
         }
 
@@ -101,6 +120,7 @@ namespace WpfApp.ViewModels.DialogViewModels
                 }
 
                 this.RaisePropertyChanged("SelectedTerminalItem");
+                CreateCommand.RaiseCanExecuteChanged();
             }
         }
 
@@ -112,19 +132,18 @@ namespace WpfApp.ViewModels.DialogViewModels
             {
                 this.selectedItem = value;
                 this.RaisePropertyChanged("SelectedItem");
-
-                CreateCommand.RaiseCanExecuteChanged();
             }
         }
 
-        private int selectedProjectIndex = -1;
-        public int SelectedProjectIndex
+        private ProjectData selectedProject;
+        public ProjectData SelectedProject
         {
-            get => this.selectedProjectIndex;
+            get => this.selectedProject;
             set
             {
-                this.selectedProjectIndex = value;
-                this.RaisePropertyChanged("SelectedProjectIndex");
+                this.selectedProject = value;
+                this.RaisePropertyChanged("SelectedProject");
+                CreateCommand.RaiseCanExecuteChanged();
             }
         }
 
@@ -204,14 +223,20 @@ namespace WpfApp.ViewModels.DialogViewModels
         }
         private void OnCreate(Action action)
         {
-//            projectGenerator.GenerateSolution(this.SolutionPath, this.SolutionName, this.CreateSolutionFolder, , this.SelectedTerminalItem);
+            Target target = Activator.CreateInstance(this.SelectedTerminalItem) as Target;
+            solutionGenerator.GenerateSolution(this.SolutionPath, this.SolutionName, this.CreateSolutionFolder, this.SelectedProject.Grammar, target);
+
+            var solutionPath = (this.CreateSolutionFolder) ? this.SolutionPath + this.SolutionName : this.SolutionPath;
+            var solutionName = this.SolutionName + solutionGenerator.SolutionExtension;
+            Messenger.Default.Send(new LoadSolutionMessage(solutionPath, solutionName));
+
             action?.Invoke();
         }
 
         private bool CanExecuteCreate(Action action)
         {
             if (this.SelectedTerminalItem == null) return false;
-            if (this.SelectedProjectIndex < 0) return false;
+            if (this.SelectedProject == null) return false;
             if (string.IsNullOrEmpty(this.solutionPath)) return false;
             if (string.IsNullOrEmpty(this.solutionName)) return false;
 
@@ -255,7 +280,10 @@ namespace WpfApp.ViewModels.DialogViewModels
 
         public NewProjectViewModel()
         {
-            this.TotalProjectList.Add(new ProjectData() { ImageSrc = "", Name = "MiniC", ProjectType = ProjectData.ProjectTypes.Project });
+            this.TotalProjectList.Add(new ProjectData() { ImageSrc = "", Grammar = new MiniCGrammar(), ProjectType = ProjectData.ProjectTypes.Project });
+            this.TotalProjectList.Add(new ProjectData() { ImageSrc = "", Grammar = new MiniCGrammar(), ProjectType = ProjectData.ProjectTypes.LibraryProject });
+            this.TotalProjectList.Add(new ProjectData() { ImageSrc = "", Grammar = new AJGrammar(), ProjectType = ProjectData.ProjectTypes.Project });
+            this.TotalProjectList.Add(new ProjectData() { ImageSrc = "", Grammar = new AJGrammar(), ProjectType = ProjectData.ProjectTypes.LibraryProject });
 
             ClassHierarchyGenerator classHierarchyGenerator = new ClassHierarchyGenerator();
 

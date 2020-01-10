@@ -6,7 +6,7 @@ using System.Windows.Markup;
 
 namespace Parse.WpfControls.Converters
 {
-    class UIntListToStringConverter : MarkupExtension, IValueConverter
+    public class UIntListToStringConverter : MarkupExtension, IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
