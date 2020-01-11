@@ -214,24 +214,6 @@ namespace WpfApp.Properties {
         }
         
         /// <summary>
-        ///   Mini C File과(와) 유사한 지역화된 문자열을 찾습니다.
-        /// </summary>
-        internal static string MiniCFile {
-            get {
-                return ResourceManager.GetString("MiniCFile", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   It generates the Mini C file과(와) 유사한 지역화된 문자열을 찾습니다.
-        /// </summary>
-        internal static string MiniCFileExplain {
-            get {
-                return ResourceManager.GetString("MiniCFileExplain", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Name과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         internal static string Name {
@@ -282,15 +264,6 @@ namespace WpfApp.Properties {
         internal static string ParseTree {
             get {
                 return ResourceManager.GetString("ParseTree", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Parsing History과(와) 유사한 지역화된 문자열을 찾습니다.
-        /// </summary>
-        internal static string ParsingHistory {
-            get {
-                return ResourceManager.GetString("ParsingHistory", resourceCulture);
             }
         }
         

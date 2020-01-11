@@ -60,6 +60,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Algorithms\ISimilarityComparison.cs" />
+    <Compile Include="Algorithms\LikeVSSimilarityComparison.cs" />
+    <Compile Include="Algorithms\NaiveSimilarityComparison.cs" />
     <Compile Include="Extensions\DataTableExtensionMethods.cs" />
     <Compile Include="Extensions\EtcExtensionMethods.cs" />
     <Compile Include="Extensions\HashSetExtensionMethods.cs" />

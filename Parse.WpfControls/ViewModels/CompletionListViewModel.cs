@@ -1,8 +1,8 @@
 ﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
-using Parse.WpfControls.Algorithms;
-using Parse.WpfControls.Properties;
+using Parse.Algorithms;
 using Parse.WpfControls.Models;
+using Parse.WpfControls.Properties;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;

@@ -12,11 +12,11 @@
   See http://www.galasoft.ch/mvvm
 */
 
+using ApplicationLayer.ViewModels.DialogViewModels;
+using ApplicationLayer.ViewModels.DocumentTypeViewModels;
 using CommonServiceLocator;
 using GalaSoft.MvvmLight.Ioc;
 using GalaSoft.MvvmLight.Messaging;
-using WpfApp.ViewModels.DialogViewModels;
-using WpfApp.ViewModels.DocumentTypeViewModels;
 using WpfApp.ViewModels.WindowViewModels;
 
 namespace WpfApp.ViewModels

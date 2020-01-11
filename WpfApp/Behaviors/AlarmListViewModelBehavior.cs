@@ -1,5 +1,5 @@
-﻿using System.Windows.Interactivity;
-using WpfApp.ViewModels;
+﻿using ApplicationLayer.ViewModels;
+using System.Windows.Interactivity;
 using WpfApp.Views;
 
 namespace WpfApp.Behaviors

@@ -1,5 +1,5 @@
-﻿using System.Windows;
-using WpfApp.Models;
+﻿using ApplicationLayer.Common.Utilities;
+using System.Windows;
 
 namespace WpfApp.Converters
 {

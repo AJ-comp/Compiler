@@ -11,7 +11,6 @@
              xmlns:wpfControlsAP="clr-namespace:Parse.WpfControls.AttachedProperties;assembly=Parse.WpfControls"
              xmlns:wpfControlsConverters="clr-namespace:Parse.WpfControls.Converters;assembly=Parse.WpfControls"
              xmlns:mvvm="http://www.galasoft.ch/mvvmlight"
-             xmlns:viewModels="clr-namespace:WpfApp.ViewModels.DialogViewModels"
              mc:Ignorable="d" 
              WindowStyle="ToolWindow"
              WindowStartupLocation="CenterScreen"
@@ -184,6 +183,9 @@
                             Padding="10 0" Margin="10 0 0 0"
                             Content="{lex:Loc Key=Search}"
                             Command="{Binding SearchCommand}"
+                            CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, 
+                            AncestorType={x:Type local:NewProjectDialog}}, 
+                            Converter={localConverters:NewProjectSearchLogicConverter}}"
                             VerticalAlignment="Center" HorizontalAlignment="Left"/>
 
 

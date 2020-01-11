@@ -81,9 +81,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Algorithms\ISimilarityComparison.cs" />
-    <Compile Include="Algorithms\NaiveSimilarityComparison.cs" />
-    <Compile Include="Algorithms\LikeVSSimilarityComparison.cs" />
     <Compile Include="AttachedProperties\TextBlockExtension.cs" />
     <Compile Include="AttachedProperties\TextBoxBehavior.cs" />
     <Compile Include="Behaviors\CompletionListBehavior.cs" />

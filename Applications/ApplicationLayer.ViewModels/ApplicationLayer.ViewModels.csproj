@@ -1,0 +1,131 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{ACDEA7B0-F5D4-4B92-BF1A-F2976C0787D9}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ApplicationLayer.ViewModels</RootNamespace>
+    <AssemblyName>ApplicationLayer.ViewModels</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CommonServiceLocator, Version=2.0.2.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\CommonServiceLocator.2.0.2\lib\net47\CommonServiceLocator.dll</HintPath>
+    </Reference>
+    <Reference Include="GalaSoft.MvvmLight, Version=5.4.1.0, Culture=neutral, PublicKeyToken=e7570ab207bcb616, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\MvvmLightLibs.5.4.1.1\lib\net45\GalaSoft.MvvmLight.dll</HintPath>
+    </Reference>
+    <Reference Include="GalaSoft.MvvmLight.Extras, Version=5.4.1.0, Culture=neutral, PublicKeyToken=669f0b5e8f868abf, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\MvvmLightLibs.5.4.1.1\lib\net45\GalaSoft.MvvmLight.Extras.dll</HintPath>
+    </Reference>
+    <Reference Include="GalaSoft.MvvmLight.Platform, Version=5.4.1.0, Culture=neutral, PublicKeyToken=5f873c45e98af8a1, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\MvvmLightLibs.5.4.1.1\lib\net45\GalaSoft.MvvmLight.Platform.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\MvvmLightLibs.5.4.1.1\lib\net45\System.Windows.Interactivity.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AlarmListViewModel.cs" />
+    <Compile Include="DialogViewModels\DialogViewModel.cs" />
+    <Compile Include="DialogViewModels\NewFileDialogViewModel.cs" />
+    <Compile Include="DialogViewModels\NewProjectViewModel.cs" />
+    <Compile Include="DocumentTypeViewModels\DocumentViewModel.cs" />
+    <Compile Include="DocumentTypeViewModels\EditorTypeViewModel.cs" />
+    <Compile Include="DocumentTypeViewModels\GrammarInfoViewModel.cs" />
+    <Compile Include="DocumentTypeViewModels\ParsingHistoryViewModel.cs" />
+    <Compile Include="Messages\SolutionExplorerMessages.cs" />
+    <Compile Include="Properties\AlarmCodes.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AlarmCodes.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resource.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resource.resx</DependentUpon>
+    </Compile>
+    <Compile Include="WindowViewModels\SolutionExplorerViewModel.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Parse.BackEnd.Target\Parse.BackEnd.Target\Parse.BackEnd.Target.csproj">
+      <Project>{6FE9D3FA-798D-42EC-B6F0-890D5D320384}</Project>
+      <Name>Parse.BackEnd.Target</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Parse.FrontEnd.Grammars\Parse.FrontEnd.Grammars.csproj">
+      <Project>{A0661596-8C09-42A8-B412-8702108FD935}</Project>
+      <Name>Parse.FrontEnd.Grammars</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Parse.FrontEnd.Parsers\Parse.FrontEnd.Parsers.csproj">
+      <Project>{EAF7D943-D2F9-4BB0-929F-04DB7B59D9D5}</Project>
+      <Name>Parse.FrontEnd.Parsers</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Parse.FrontEnd\Parse.csproj">
+      <Project>{46590802-CE40-49C9-86E1-CD6F3487FF5B}</Project>
+      <Name>Parse</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Parse.WpfControls.SyntaxEditor\Parse.WpfControls.SyntaxEditor.csproj">
+      <Project>{DCCEDEB5-9CA4-41FE-AB6B-50E4BCC64EE6}</Project>
+      <Name>Parse.WpfControls.SyntaxEditor</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Parse\Parse.FrontEnd.csproj">
+      <Project>{54EC5CEA-8D91-4165-9EBB-6A0693A96C4F}</Project>
+      <Name>Parse.FrontEnd</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ApplicationLayer.Common\ApplicationLayer.Common.csproj">
+      <Project>{9B7EBE4D-C2B3-40E8-9516-107340A07111}</Project>
+      <Name>ApplicationLayer.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ApplicationLayer.Model\ApplicationLayer.Models.csproj">
+      <Project>{9B9BD94E-15E9-4113-8BCA-543A925F34AB}</Project>
+      <Name>ApplicationLayer.Models</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\AlarmCodes.ko-KR.resx" />
+    <EmbeddedResource Include="Properties\AlarmCodes.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>AlarmCodes.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resource.ko-KR.resx" />
+    <EmbeddedResource Include="Properties\Resource.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resource.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

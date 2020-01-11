@@ -1,9 +1,7 @@
-﻿using System;
-using System.Linq;
+﻿using ApplicationLayer.Models.Invokers;
 using System.Reflection;
 using System.Windows;
 using System.Windows.Interactivity;
-using WpfApp.Models.Invokers;
 
 namespace WpfApp.Behaviors
 {

@@ -3,7 +3,6 @@ using System;
 using System.Globalization;
 using System.Windows.Data;
 using System.Windows.Markup;
-using WpfApp.Models;
 
 namespace WpfApp.Converters
 {

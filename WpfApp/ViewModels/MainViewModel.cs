@@ -1,3 +1,7 @@
+using ApplicationLayer.ViewModels;
+using ApplicationLayer.ViewModels.DialogViewModels;
+using ApplicationLayer.ViewModels.DocumentTypeViewModels;
+using ApplicationLayer.ViewModels.Messages;
 using CommonServiceLocator;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
@@ -10,10 +14,6 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Windows;
-using WpfApp.Messages;
-using WpfApp.Utilities;
-using WpfApp.ViewModels.DialogViewModels;
-using WpfApp.ViewModels.DocumentTypeViewModels;
 using WpfApp.ViewModels.WindowViewModels;
 
 namespace WpfApp.ViewModels

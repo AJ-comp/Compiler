@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:WpfApp.Views"
              xmlns:mvvm="http://www.galasoft.ch/mvvmlight"
-             xmlns:localViewmodel="clr-namespace:WpfApp.ViewModels"
+             xmlns:localViewModel="clr-namespace:ApplicationLayer.ViewModels;assembly=ApplicationLayer.ViewModels"
              xmlns:localBehaviors="clr-namespace:WpfApp.Behaviors"
              xmlns:localConverters="clr-namespace:WpfApp.Converters"
              xmlns:lex="http://wpflocalizeextension.codeplex.com" 
@@ -14,7 +14,7 @@
              mc:Ignorable="d" >
 
     <UserControl.DataContext>
-        <localViewmodel:AlarmListViewModel/>
+        <localViewModel:AlarmListViewModel/>
     </UserControl.DataContext>
 
     <Grid>

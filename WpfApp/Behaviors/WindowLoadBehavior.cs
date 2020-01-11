@@ -1,11 +1,11 @@
-﻿using Parse.WpfControls.SyntaxEditor.EventArgs;
+﻿using ApplicationLayer.Models;
+using ApplicationLayer.ViewModels.DialogViewModels;
+using ApplicationLayer.ViewModels.DocumentTypeViewModels;
+using Parse.WpfControls.SyntaxEditor.EventArgs;
 using System.Windows;
 using System.Windows.Forms;
 using System.Windows.Interactivity;
-using WpfApp.Models;
 using WpfApp.ViewModels;
-using WpfApp.ViewModels.DialogViewModels;
-using WpfApp.ViewModels.DocumentTypeViewModels;
 using WpfApp.Views.DialogViews;
 
 namespace WpfApp.Behaviors

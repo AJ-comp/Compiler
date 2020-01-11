@@ -105,56 +105,20 @@
     <Compile Include="Behaviors\WindowLoadBehavior.cs" />
     <Compile Include="Converters\GrammarToLRParserConverter.cs" />
     <Compile Include="Converters\NavigateUriToStringConverter.cs" />
+    <Compile Include="Converters\NewProjectSearchLogicConverter.cs" />
     <Compile Include="Converters\RemoveObjectConverter.cs" />
     <Compile Include="Converters\SelectedItemConverter.cs" />
     <Compile Include="Converters\WindowCloseLogicConverter.cs" />
     <Compile Include="Converters\EnumToImageConverter.cs" />
     <Compile Include="Converters\EventArgsConverterExtension.cs" />
     <Compile Include="Converters\MouseDoubleClickIndexConverter.cs" />
-    <Compile Include="Messages\SolutionExplorerMessages.cs" />
-    <Compile Include="Models\AlarmData.cs" />
-    <Compile Include="Models\Document.cs" />
-    <Compile Include="Models\ClassHierarchyData.cs" />
-    <Compile Include="Models\IHierarchical.cs" />
-    <Compile Include="Models\Invokers\Invoker.cs" />
-    <Compile Include="Models\ProjectData.cs" />
-    <Compile Include="Models\SolutionStruct.cs" />
-    <Compile Include="Models\Theme.cs" />
-    <Compile Include="Properties\AlarmCodes.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>AlarmCodes.resx</DependentUpon>
-    </Compile>
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Utilities\ClassHierarchyGenerator.cs" />
-    <Compile Include="Utilities\CollectionChangedAnalysor.cs" />
-    <Compile Include="Utilities\GeneratorPackages\ProjectLoaders\MiniCLoader.cs" />
-    <Compile Include="Utilities\GeneratorPackages\ProjectLoaders\ProjectLoader.cs" />
-    <Compile Include="Utilities\GeneratorPackages\ProjectStructs\MiniCProjectStruct.cs" />
-    <Compile Include="Utilities\GeneratorPackages\ProjectStructs\ProjectStruct.cs" />
-    <Compile Include="Utilities\ProjectManager.cs" />
-    <Compile Include="Utilities\SolutionGenerator.cs" />
-    <Compile Include="Utilities\SolutionLoader.cs" />
-    <Compile Include="Utilities\GeneratorPackages\ProjectGenerators\MiniCGenerator.cs" />
-    <Compile Include="Utilities\GeneratorPackages\ProjectGenerators\ProjectGenerator.cs" />
-    <Compile Include="Utilities\SolutionManager.cs" />
-    <Compile Include="Utilities\ViewCache.cs" />
-    <Compile Include="Utilities\ViewFactory.cs" />
-    <Compile Include="ViewModels\AlarmListViewModel.cs" />
-    <Compile Include="ViewModels\DialogViewModels\NewProjectViewModel.cs" />
-    <Compile Include="ViewModels\DocumentTypeViewModels\DocumentViewModel.cs" />
-    <Compile Include="ViewModels\DocumentTypeViewModels\EditorTypeViewModel.cs" />
-    <Compile Include="ViewModels\DocumentTypeViewModels\ParsingHistoryViewModel.cs" />
-    <Compile Include="ViewModels\DocumentTypeViewModels\GrammarInfoViewModel.cs" />
-    <Compile Include="ViewModels\DialogViewModels\NewFileDialogViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\ViewModelLocator.cs" />
-    <Compile Include="ViewModels\DialogViewModels\DialogViewModel.cs" />
-    <Compile Include="ViewModels\WindowViewModels\SolutionExplorerViewModel.cs" />
     <Compile Include="Views\AlarmList.xaml.cs">
       <DependentUpon>AlarmList.xaml</DependentUpon>
     </Compile>
@@ -253,11 +217,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <EmbeddedResource Include="Properties\AlarmCodes.ko-KR.resx" />
-    <EmbeddedResource Include="Properties\AlarmCodes.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>AlarmCodes.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.ko-KR.resx" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -276,6 +235,26 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Applications\ApplicationLayer.Common\ApplicationLayer.Common.csproj">
+      <Project>{9b7ebe4d-c2b3-40e8-9516-107340a07111}</Project>
+      <Name>ApplicationLayer.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Applications\ApplicationLayer.Define\ApplicationLayer.Define.csproj">
+      <Project>{2b6881f9-2dbf-412b-9797-76d6d81abc14}</Project>
+      <Name>ApplicationLayer.Define</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Applications\ApplicationLayer.Model\ApplicationLayer.Models.csproj">
+      <Project>{9b9bd94e-15e9-4113-8bca-543a925f34ab}</Project>
+      <Name>ApplicationLayer.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Applications\ApplicationLayer.ViewModels\ApplicationLayer.ViewModels.csproj">
+      <Project>{acdea7b0-f5d4-4b92-bf1a-f2976c0787d9}</Project>
+      <Name>ApplicationLayer.ViewModels</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Applications\WpfApp\ApplicationLayer.Views\ApplicationLayer.Views.csproj">
+      <Project>{b7a57007-09c3-464b-8772-ff308797c87f}</Project>
+      <Name>ApplicationLayer.Views</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Parse.BackEnd.Target\Parse.BackEnd.Target.ARMv7\Parse.BackEnd.Target.ARMv7.csproj">
       <Project>{453a6e15-d65d-408f-856a-718ce73cac42}</Project>
       <Name>Parse.BackEnd.Target.ARMv7</Name>

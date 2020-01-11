@@ -165,17 +165,8 @@
   <data name="ParsingTable" xml:space="preserve">
     <value>파싱 테이블</value>
   </data>
-  <data name="ParsingHistory" xml:space="preserve">
-    <value>파싱 히스토리</value>
-  </data>
   <data name="ParseTree" xml:space="preserve">
     <value>파스 트리</value>
-  </data>
-  <data name="MiniCFile" xml:space="preserve">
-    <value>Mini C 파일</value>
-  </data>
-  <data name="MiniCFileExplain" xml:space="preserve">
-    <value>Mini C 파일을 생성합니다</value>
   </data>
   <data name="Open" xml:space="preserve">
     <value>열기</value>

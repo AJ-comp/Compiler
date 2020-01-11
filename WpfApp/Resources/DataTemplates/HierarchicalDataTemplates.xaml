@@ -1,19 +1,19 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:models="clr-namespace:WpfApp.Models"
-                    xmlns:projectStructs="clr-namespace:WpfApp.Utilities.GeneratorPackages.ProjectStructs"
+                    xmlns:models="clr-namespace:ApplicationLayer.Models;assembly=ApplicationLayer.Models"
+                    xmlns:solutionPackage="clr-namespace:ApplicationLayer.Models.SolutionPackage;assembly=ApplicationLayer.Models"
+                    xmlns:utilities="clr-namespace:ApplicationLayer.Common.Utilities;assembly=ApplicationLayer.Common"
                     xmlns:converters="clr-namespace:WpfApp.Converters"
-                    xmlns:selectors="clr-namespace:WpfApp.Selectors"
                     xmlns:local="clr-namespace:WpfApp.Resources.DataTemplates">
 
-    <HierarchicalDataTemplate DataType="{x:Type models:SolutionStruct}" ItemsSource="{Binding Projects}">
+    <HierarchicalDataTemplate DataType="{x:Type solutionPackage:SolutionStruct}" ItemsSource="{Binding Projects}">
         <StackPanel Orientation="Horizontal">
             <Image Width="16" Height="16" Margin="0 0 5 0" Source="{DynamicResource SolutionImagePath}" />
             <TextBlock Text="{Binding NameWithoutExtension}"/>
         </StackPanel>
     </HierarchicalDataTemplate>
 
-    <HierarchicalDataTemplate DataType="{x:Type projectStructs:ProjectStruct}" ItemsSource="{Binding Children}">
+    <HierarchicalDataTemplate DataType="{x:Type solutionPackage:ProjectStruct}" ItemsSource="{Binding Children}">
         <StackPanel Orientation="Horizontal">
             <Image Width="16" Height="16" Margin="0 0 5 0" Source="{DynamicResource ProjectImagePath}"/>
             <TextBlock Text="{Binding NameWithoutExtension}"/>
@@ -21,26 +21,26 @@
     </HierarchicalDataTemplate>
 
 
-    <HierarchicalDataTemplate DataType="{x:Type projectStructs:ReferenceStruct}">
+    <HierarchicalDataTemplate DataType="{x:Type solutionPackage:ReferenceStruct}">
         <TextBlock Text="{Binding NameWithoutExtension}"/>
     </HierarchicalDataTemplate>
 
-    <HierarchicalDataTemplate DataType="{x:Type projectStructs:FolderStruct}" ItemsSource="{Binding Children}">
+    <HierarchicalDataTemplate DataType="{x:Type solutionPackage:FolderStruct}" ItemsSource="{Binding Children}">
         <TextBlock Text="{Binding FullName}"/>
     </HierarchicalDataTemplate>
 
 
-    <DataTemplate DataType="{x:Type projectStructs:ReferenceFileStruct}">
+    <DataTemplate DataType="{x:Type solutionPackage:ReferenceFileStruct}">
         <TextBlock Text="{Binding FullName}"/>
     </DataTemplate>
 
-    <DataTemplate DataType="{x:Type projectStructs:FileStruct}">
+    <DataTemplate DataType="{x:Type solutionPackage:FileStruct}">
         <TextBlock Text="{Binding FullName}"/>
     </DataTemplate>
 
 
 
-    <HierarchicalDataTemplate DataType="{x:Type models:ClassHierarchyData}" ItemsSource="{Binding Items}">
+    <HierarchicalDataTemplate DataType="{x:Type utilities:ClassHierarchyData}" ItemsSource="{Binding Items}">
         <TextBlock Text="{Binding Data.Name}"/>
     </HierarchicalDataTemplate>
 
