@@ -4,6 +4,7 @@ using Parse.FrontEnd.Grammars.MiniC;
 using System.Collections.Generic;
 using System.IO;
 using System.Xml;
+using WpfApp.Models;
 using WpfApp.Utilities.GeneratorPackages.ProjectGenerators;
 
 namespace WpfApp.Utilities
@@ -22,64 +23,24 @@ namespace WpfApp.Utilities
             this.langExeDic.Add(new AJGrammar().ToString(), "aj");
         }
 
-        private XmlNode CreateProjectInfoNode(string projectPath, string projectName, string extension)
+        public SolutionStruct Generate(string solutionPath, string solutionName, bool bCreateSolutionFolder, Grammar grammar, Target target)
         {
-            XmlNode project = xDoc.CreateElement("Project");
-            XmlNode name = xDoc.CreateElement("Name");
-            name.InnerText = projectName;
-            project.AppendChild(name);
+            SolutionStruct result = new SolutionStruct();
 
-            XmlNode path = xDoc.CreateElement("FullPath");
-            path.InnerText = string.Format("{0}.{1}", Path.Combine(projectPath, projectName), extension + "proj");
-            project.AppendChild(path);
-
-            return project;
-        }
-
-        public void GenerateSolution(string solutionPath, string solutionName, bool bCreateSolutionFolder, Grammar grammar, Target target)
-        {
-            if (grammar is MiniCGrammar)
-                this.projectGenerator = new MiniCGenerator();
-
-            string projectPath = solutionPath;
-
-            if(bCreateSolutionFolder)
-            {
+            if (bCreateSolutionFolder)
                 solutionPath = Path.Combine(solutionPath, solutionName);
-                Directory.CreateDirectory(solutionPath);
-            }
 
-            projectPath = solutionPath + "\\" + solutionName;
-            this.GenerateProject(projectPath, solutionName, grammar, target);
+            result.Path = solutionPath;
+            result.FullName = solutionName + ".ajn";
+            result.Version = 1.0;
 
-            this.xDoc = new XmlDocument();
-            
-            XmlNode root = xDoc.CreateElement("Solution");
-            XmlAttribute attr = xDoc.CreateAttribute("ToolVersion");
-            attr.Value = "1.0";
-            root.Attributes.Append(attr);
-
-            // when create solution, soultion name is project name.
-            var projectRelativePath = solutionName;
-            root.AppendChild(this.CreateProjectInfoNode(projectRelativePath, solutionName, this.projectGenerator.Extension));
-
-            xDoc.AppendChild(root);
-            xDoc.Save(Path.Combine(solutionPath, solutionName) + this.SolutionExtension);
-        }
-
-        /// <summary>
-        /// This function is a gateway to generate a project.
-        /// </summary>
-        /// <param name="projectPath">The project path</param>
-        /// <param name="projectName">The project name</param>
-        /// <param name="grammar">The grmmar to use in the project</param>
-        /// <param name="target">The target to use in the project</param>
-        public void GenerateProject(string projectPath, string projectName, Grammar grammar, Target target)
-        {
             if (grammar is MiniCGrammar)
                 this.projectGenerator = new MiniCGenerator();
 
-            this.projectGenerator.Generator(projectPath, projectName, target);
+            var projectPath = solutionPath + "\\" + solutionName;
+            result.Projects.Add(this.projectGenerator.Generator(projectPath, solutionName, target));
+
+            return result;
         }
     }
 }

@@ -111,7 +111,7 @@
     <Compile Include="Converters\EnumToImageConverter.cs" />
     <Compile Include="Converters\EventArgsConverterExtension.cs" />
     <Compile Include="Converters\MouseDoubleClickIndexConverter.cs" />
-    <Compile Include="Messages\LoadSolutionMessage.cs" />
+    <Compile Include="Messages\SolutionExplorerMessages.cs" />
     <Compile Include="Models\AlarmData.cs" />
     <Compile Include="Models\Document.cs" />
     <Compile Include="Models\ClassHierarchyData.cs" />
@@ -131,13 +131,17 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Utilities\ClassHierarchyGenerator.cs" />
+    <Compile Include="Utilities\CollectionChangedAnalysor.cs" />
     <Compile Include="Utilities\GeneratorPackages\ProjectLoaders\MiniCLoader.cs" />
+    <Compile Include="Utilities\GeneratorPackages\ProjectLoaders\ProjectLoader.cs" />
     <Compile Include="Utilities\GeneratorPackages\ProjectStructs\MiniCProjectStruct.cs" />
     <Compile Include="Utilities\GeneratorPackages\ProjectStructs\ProjectStruct.cs" />
+    <Compile Include="Utilities\ProjectManager.cs" />
     <Compile Include="Utilities\SolutionGenerator.cs" />
     <Compile Include="Utilities\SolutionLoader.cs" />
     <Compile Include="Utilities\GeneratorPackages\ProjectGenerators\MiniCGenerator.cs" />
     <Compile Include="Utilities\GeneratorPackages\ProjectGenerators\ProjectGenerator.cs" />
+    <Compile Include="Utilities\SolutionManager.cs" />
     <Compile Include="Utilities\ViewCache.cs" />
     <Compile Include="Utilities\ViewFactory.cs" />
     <Compile Include="ViewModels\AlarmListViewModel.cs" />
@@ -346,9 +350,7 @@
   <ItemGroup>
     <Resource Include="Resources\Images\Basic\cfile_48.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Utilities\ProjectGenerators\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>

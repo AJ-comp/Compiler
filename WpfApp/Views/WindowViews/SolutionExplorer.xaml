@@ -6,8 +6,7 @@
              xmlns:model="clr-namespace:WpfApp.Models"
              xmlns:local="clr-namespace:WpfApp.Views.WindowViews"
              mc:Ignorable="d" 
-             DataContext="{Binding SolutionExplorerWindow, Source={StaticResource Locator}}"
-             d:DesignHeight="450" d:DesignWidth="800">
+             DataContext="{Binding SolutionExplorerWindow, Source={StaticResource Locator}}">
 
     <Grid>
         <Grid.RowDefinitions>
@@ -18,7 +17,7 @@
 
         <TextBox Grid.Row="0"/>
         <TextBox Grid.Row="1"/>
-        <TreeView Grid.Row="2" ItemsSource="{Binding Solutions}" />
+        <TreeView Grid.Row="2" FontSize="13" ItemsSource="{Binding Solutions}" />
 
 
     </Grid>

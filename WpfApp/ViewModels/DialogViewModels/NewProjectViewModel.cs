@@ -224,11 +224,7 @@ namespace WpfApp.ViewModels.DialogViewModels
         private void OnCreate(Action action)
         {
             Target target = Activator.CreateInstance(this.SelectedTerminalItem) as Target;
-            solutionGenerator.GenerateSolution(this.SolutionPath, this.SolutionName, this.CreateSolutionFolder, this.SelectedProject.Grammar, target);
-
-            var solutionPath = (this.CreateSolutionFolder) ? this.SolutionPath + this.SolutionName : this.SolutionPath;
-            var solutionName = this.SolutionName + solutionGenerator.SolutionExtension;
-            Messenger.Default.Send(new LoadSolutionMessage(solutionPath, solutionName));
+            Messenger.Default.Send(new CreateSolutionMessage(this.SolutionPath, this.SolutionName, this.CreateSolutionFolder, this.SelectedProject.Grammar, target));
 
             action?.Invoke();
         }

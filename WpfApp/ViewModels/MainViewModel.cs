@@ -241,6 +241,7 @@ namespace WpfApp.ViewModels
         private void InitSolutionExplorer()
         {
             var solutionExplorer = ServiceLocator.Current.GetInstance<SolutionExplorerViewModel>();
+            Messenger.Default.Register<CreateSolutionMessage>(this, solutionExplorer.ReceivedCreateSolutionMessage);
             Messenger.Default.Register<LoadSolutionMessage>(this, solutionExplorer.ReceivedLoadSolutionMessage);
         }
 

@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace WpfApp.Utilities.GeneratorPackages.ProjectLoaders
+﻿namespace WpfApp.Utilities.GeneratorPackages.ProjectLoaders
 {
-    class MiniCLoader
+    public class MiniCLoader : ProjectLoader
     {
     }
 }

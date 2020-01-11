@@ -2,6 +2,8 @@
 using System.Collections.Specialized;
 using System.IO;
 using System.Xml;
+using WpfApp.Utilities.GeneratorPackages.ProjectStructs;
+using static WpfApp.Utilities.GeneratorPackages.ProjectStructs.ProjectProperty;
 
 namespace WpfApp.Utilities.GeneratorPackages.ProjectGenerators
 {
@@ -55,27 +57,50 @@ namespace WpfApp.Utilities.GeneratorPackages.ProjectGenerators
         }
 
 
-        public override void Generator(string projectPath, string projectName, Target target)
+        public override ProjectStruct Generator(string projectPath, string projectName, Target target)
         {
-            Directory.CreateDirectory(projectPath);
+            ProjectStruct result = new ProjectStruct();
 
-            this.xDoc = new XmlDocument();
+            result.Path = projectPath;
+            result.FullName = string.Format("{0}.{1}", projectName, "." + this.Extension + "proj");
+            result.Version = 1.0;
 
-            XmlNode root = xDoc.CreateElement("Project");
-            XmlAttribute attr = xDoc.CreateAttribute("ToolVersion");
-            attr.Value = "1.0";
-            root.Attributes.Append(attr);
+            ProjectProperty debugProperty = new ProjectProperty();
+            debugProperty.Mode = Configure.Debug;
+            debugProperty.Target = target;
+            debugProperty.OptimizeLevel = 0;
 
-            string fileName = string.Format("main.{0}", this.Extension);
-            root.AppendChild(this.CreateDefaultPropertyNode(Configure.Debug, target));
-            root.AppendChild(this.CreateDefaultPropertyNode(Configure.Release, target));
-            root.AppendChild(this.CreateReferenceNode(new StringCollection() { "System", "System.Data", "System.Collection" }));
-            root.AppendChild(this.CreateItemNode(fileName));
+            ProjectProperty releaseProperty = new ProjectProperty();
+            releaseProperty.Mode = Configure.Release;
+            releaseProperty.Target = target;
+            releaseProperty.OptimizeLevel = 0;
 
-            xDoc.AppendChild(root);
+            result.Properties.Add(debugProperty);
+            result.Properties.Add(releaseProperty);
 
-            File.Create(Path.Combine(projectPath, fileName));
-            xDoc.Save(string.Format("{0}.{1}", Path.Combine(projectPath, projectName), this.Extension + "proj"));
+            //            result.ReferenceFolder
+
+            return result;
+
+            //Directory.CreateDirectory(projectPath);
+
+            //this.xDoc = new XmlDocument();
+
+            //XmlNode root = xDoc.CreateElement("Project");
+            //XmlAttribute attr = xDoc.CreateAttribute("ToolVersion");
+            //attr.Value = "1.0";
+            //root.Attributes.Append(attr);
+
+            //string fileName = string.Format("main.{0}", this.Extension);
+            //root.AppendChild(this.CreateDefaultPropertyNode(Configure.Debug, target));
+            //root.AppendChild(this.CreateDefaultPropertyNode(Configure.Release, target));
+            //root.AppendChild(this.CreateReferenceNode(new StringCollection() { "System", "System.Data", "System.Collection" }));
+            //root.AppendChild(this.CreateItemNode(fileName));
+
+            //xDoc.AppendChild(root);
+
+            //File.Create(Path.Combine(projectPath, fileName));
+            //xDoc.Save(string.Format("{0}.{1}", Path.Combine(projectPath, projectName), this.Extension + "proj"));
         }
     }
 }

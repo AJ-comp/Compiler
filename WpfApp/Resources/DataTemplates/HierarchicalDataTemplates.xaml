@@ -9,32 +9,33 @@
     <HierarchicalDataTemplate DataType="{x:Type models:SolutionStruct}" ItemsSource="{Binding Projects}">
         <StackPanel Orientation="Horizontal">
             <Image Width="16" Height="16" Margin="0 0 5 0" Source="{DynamicResource SolutionImagePath}" />
-            <TextBlock Text="{Binding Name}"/>
+            <TextBlock Text="{Binding NameWithoutExtension}"/>
         </StackPanel>
     </HierarchicalDataTemplate>
 
     <HierarchicalDataTemplate DataType="{x:Type projectStructs:ProjectStruct}" ItemsSource="{Binding Children}">
         <StackPanel Orientation="Horizontal">
             <Image Width="16" Height="16" Margin="0 0 5 0" Source="{DynamicResource ProjectImagePath}"/>
-            <TextBlock Text="{Binding Name}"/>
+            <TextBlock Text="{Binding NameWithoutExtension}"/>
         </StackPanel>
     </HierarchicalDataTemplate>
 
 
     <HierarchicalDataTemplate DataType="{x:Type projectStructs:ReferenceStruct}">
-        <TextBlock Text="{Binding Name}"/>
+        <TextBlock Text="{Binding NameWithoutExtension}"/>
     </HierarchicalDataTemplate>
 
     <HierarchicalDataTemplate DataType="{x:Type projectStructs:FolderStruct}" ItemsSource="{Binding Children}">
-        <TextBlock Text="{Binding Name}"/>
+        <TextBlock Text="{Binding FullName}"/>
     </HierarchicalDataTemplate>
 
+
     <DataTemplate DataType="{x:Type projectStructs:ReferenceFileStruct}">
-        <TextBlock Text="{Binding Name}"/>
+        <TextBlock Text="{Binding FullName}"/>
     </DataTemplate>
 
     <DataTemplate DataType="{x:Type projectStructs:FileStruct}">
-        <TextBlock Text="{Binding Name}"/>
+        <TextBlock Text="{Binding FullName}"/>
     </DataTemplate>
 
 
