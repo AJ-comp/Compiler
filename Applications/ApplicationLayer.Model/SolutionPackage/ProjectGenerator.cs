@@ -9,6 +9,7 @@ namespace ApplicationLayer.Models.SolutionPackage
         public abstract string Extension { get; }
 
 
-        public abstract ProjectStruct Generator(string projectPath, string projectName, Target target);
+        public abstract ProjectStruct CreateEmptyProject(string projectPath, string projectName, Target target, HirStruct parent);
+        public abstract ProjectStruct CreateDefaultProject(string projectPath, string projectName, Target target, HirStruct parent);
     }
 }

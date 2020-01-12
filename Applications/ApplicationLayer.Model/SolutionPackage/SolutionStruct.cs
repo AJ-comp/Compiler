@@ -2,6 +2,7 @@
 using Parse.FrontEnd.Grammars;
 using Parse.FrontEnd.Grammars.MiniC;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.IO;
 using System.Xml;
 using System.Xml.Schema;
@@ -11,19 +12,46 @@ namespace ApplicationLayer.Models.SolutionPackage
 {
     public class HirStruct
     {
-        public string OPath { get; set; }
-        public string FullName { get; set; }
+        [XmlIgnore]
+        public string OPath { get; set; } = string.Empty;
+        [XmlIgnore]
+        public string FullName { get; set; } = string.Empty;
+        [XmlIgnore]
         public string ImageSource { get; set; }
-
-        public string FullPath => Path.Combine(this.OPath, this.FullName);
+        [XmlIgnore]
+        public HirStruct Parent { get; internal set; } = null;
+        [XmlIgnore]
         public string NameWithoutExtension => Path.GetFileNameWithoutExtension(this.FullName);
+        [XmlIgnore]
+        public string FullPath => Path.Combine(this.BasePath, this.FullName);
+
+        [XmlIgnore]
+        public string BasePath
+        {
+            get
+            {
+                string result = this.OPath;
+
+                HirStruct current = this;
+                while(current.Parent != null)
+                {
+                    result = Path.Combine(current.Parent.OPath, result);
+                    current = current.Parent;
+                }
+
+                return result;
+            }
+        }
     }
 
+    [XmlInclude(typeof(ProjectStruct))]
     public class SolutionStruct : HirStruct, IXmlSerializable
     {
+        [XmlIgnore]
         public static string Extension => "ajn";
         public double Version { get; set; }
 
+        private StringCollection projectPaths = new StringCollection();
         public ObservableCollection<ProjectStruct> Projects { get; set; } = new ObservableCollection<ProjectStruct>();
 
         public SolutionStruct()
@@ -31,15 +59,16 @@ namespace ApplicationLayer.Models.SolutionPackage
             this.Projects.CollectionChanged += Projects_CollectionChanged;
         }
 
-        private void Projects_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        private void Projects_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             for(int i=e.NewStartingIndex; i<e.NewItems.Count; i++)
             {
                 ProjectStruct child = e.NewItems[i] as ProjectStruct;
+                child.Parent = this;
 
                 if (File.Exists(child.FullPath)) continue;
 
-                Directory.CreateDirectory(child.OPath);
+                Directory.CreateDirectory(child.BasePath);
 
                 using (StreamWriter wr = new StreamWriter(child.FullPath))
                 {
@@ -54,22 +83,35 @@ namespace ApplicationLayer.Models.SolutionPackage
         public void ReadXml(XmlReader reader)
         {
             reader.MoveToContent();
-            this.Version = double.Parse(reader.GetAttribute("Ver"));
+            this.Version = double.Parse(reader.GetAttribute("Version"));
 
-            //reader.Read();
-            //this.Name = reader.ReadElementContentAsString("Name", "");
-            //this.Dept = reader.ReadElementContentAsString("Dept", "");
+            while(reader.MoveToAttribute("Project"))
+                this.projectPaths.Add(reader.GetAttribute("Include"));
+
+            foreach(var path in projectPaths)
+            {
+                ProjectStruct loadProject = new ProjectStruct();
+
+                var fullPath = Path.Combine(this.BasePath, path);
+                using (StreamReader wr= new StreamReader(fullPath))
+                {
+                    XmlSerializer xs = new XmlSerializer(typeof(ProjectStruct));
+                    loadProject = xs.Deserialize(wr) as ProjectStruct;
+
+                    this.Projects.Add(loadProject);
+                }
+            }
         }
 
         public void WriteXml(XmlWriter writer)
         {
-            writer.WriteAttributeString("Ver", this.Version.ToString());
+            writer.WriteAttributeString("Version", this.Version.ToString());
 
-            foreach(var project in this.Projects)
+            foreach (var project in this.Projects)
             {
                 writer.WriteStartElement("Project");
-                writer.WriteElementString("Path", project.OPath);
-                writer.WriteElementString("Name", project.FullName);
+                var relatePath = Path.Combine(project.OPath, project.FullName);
+                writer.WriteAttributeString("Include", relatePath);
                 writer.WriteEndElement();
             }
         }
@@ -96,8 +138,8 @@ namespace ApplicationLayer.Models.SolutionPackage
 
             if (projectGenerator == null) return result;
 
-            var projectPath = solutionPath + "\\" + solutionName;
-            result.Projects.Add(projectGenerator.Generator(projectPath, solutionName, target));
+            result.Projects.Add(projectGenerator.CreateDefaultProject(solutionName, solutionName, target, result));
+            result.Projects.Add(projectGenerator.CreateDefaultProject(solutionName, solutionName+"abc", target, result));
 
             return result;
         }
