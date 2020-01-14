@@ -1,0 +1,222 @@
+﻿<Window x:Class="ApplicationLayer.WpfApp.Views.DialogViews.NewProjectDialog"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:lex="http://wpflocalizeextension.codeplex.com" 
+             xmlns:local="clr-namespace:ApplicationLayer.WpfApp.Views.DialogViews"
+             xmlns:localConverters="clr-namespace:ApplicationLayer.WpfApp.Converters"
+             xmlns:targets="clr-namespace:Parse.BackEnd.Target;assembly=Parse.BackEnd.Target"
+             xmlns:wpfControlsAP="clr-namespace:Parse.WpfControls.AttachedProperties;assembly=Parse.WpfControls"
+             xmlns:wpfControlsConverters="clr-namespace:Parse.WpfControls.Converters;assembly=Parse.WpfControls"
+             xmlns:mvvm="http://www.galasoft.ch/mvvmlight"
+             mc:Ignorable="d" 
+             WindowStyle="ToolWindow"
+             WindowStartupLocation="CenterScreen"
+             Style="{DynamicResource NormalWindow}"
+             Title="{lex:Loc Key=NewProject}"
+             DataContext="{Binding NewProjectWindow, Source={StaticResource Locator}}"
+             Height="600" Width="800">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="30"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid Grid.Row="0" Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="22"/>
+                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="50"/>
+                </Grid.RowDefinitions>
+
+                <TextBox Grid.Row="0" Text="{Binding CPUSearch, UpdateSourceTrigger=PropertyChanged}"/>
+
+                <Grid Grid.Row="1">
+                    <TreeView x:Name="treeView" BorderThickness="0"
+                                ItemsSource="{Binding TotalCPUs}">
+                        <TreeView.Style>
+                            <Style TargetType="{x:Type TreeView}">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding FilterMode}" Value="true">
+                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding FilterMode}" Value="false">
+                                        <Setter Property="Visibility" Value="Visible"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TreeView.Style>
+
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="SelectedItemChanged">
+                                <mvvm:EventToCommand Command="{Binding CPUSelectedCommand}"
+                                                 PassEventArgsToCommand="True"
+                                                 EventArgsConverter="{localConverters:SelectedItemConverter}" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </TreeView>
+
+                    <ListBox x:Name="listBox" BorderThickness="0"
+                                    ItemsSource="{Binding FilterCPUs}"
+                                    SelectedIndex="{Binding FilterSelectedIndex}">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Margin="0 0 0 10">
+                                    <TextBlock Text="{Binding Type.Name}" 
+                                               wpfControlsAP:TextBlockExtension.BoldIndexes="{Binding MatchedIndexes, 
+                                                Converter={wpfControlsConverters:UIntListToStringConverter}}"/>
+                                    <TextBlock FontSize="8" Text="{Binding Classification}" Margin="0 3 0 0"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+
+                        <ListBox.Style>
+                            <Style TargetType="{x:Type ListBox}" BasedOn="{StaticResource {x:Type ListBox}}">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding FilterMode}" Value="true">
+                                        <Setter Property="Visibility" Value="Visible"/>
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding FilterMode}" Value="false">
+                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                    </DataTrigger>
+                                    <Trigger Property="IsSelected" Value="true">
+                                        <Setter Property="BorderThickness" Value="0"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </ListBox.Style>
+                    </ListBox>
+                </Grid>
+
+                <TextBlock Grid.Row="2" TextWrapping="WrapWithOverflow" 
+                                    Text="{Binding SelectedTerminalItem.Explain}"/>
+
+                <TextBlock Grid.Row="3" TextWrapping="WrapWithOverflow">
+                    <Hyperlink NavigateUri="{Binding Path}" RequestNavigate="Hyperlink_RequestNavigate">
+                        <Hyperlink.Style>
+                            <Style TargetType="Hyperlink"
+                                       BasedOn="{StaticResource {x:Type Hyperlink}}">
+                                <Setter Property="Foreground" Value="#0C0"/>
+                            </Style>
+                        </Hyperlink.Style>
+                            <TextBlock TextWrapping="WrapWithOverflow" 
+                                        Text="{Binding SelectedTerminalItem.DataSheetPath}" />
+                        
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="RequestNavigate">
+                                <mvvm:EventToCommand Command="{Binding NavigateCommand}"
+                                                     PassEventArgsToCommand="True"
+                                                     EventArgsConverter="{localConverters:NavigateUriToStringConverter}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </Hyperlink>
+                </TextBlock>
+            </Grid>
+
+            <Grid Grid.Row="0" Grid.Column="1">
+                <ListBox Grid.Row="0" HorizontalContentAlignment="Stretch"
+                            ItemsSource="{Binding AvailableProjectList}"
+                            SelectedItem="{Binding SelectedProject}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Border x:Name="border" BorderThickness="1" VerticalAlignment="Stretch">
+                                <VirtualizingStackPanel Name="vStack" Orientation="Horizontal">
+                                    <Image Source="{Binding ImageSrc}"  Width="48" Height="48" Margin="0,0,2,0"/>
+                                    <TextBlock Text="{Binding ProjectType}" Width="100"/>
+                                    <TextBlock Text="{Binding Grammar}" />
+                                </VirtualizingStackPanel>
+                            </Border>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </Grid>
+
+            <TextBlock Grid.Row="0" Grid.Column="2"/>
+        </Grid>
+
+        <Grid Grid.Row="1" Background="{DynamicResource CommonEnableBackgroundBrush2}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="5"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Grid.Row="1" Grid.Column="0" Margin="10 0 0 0"
+                                VerticalAlignment="Center" Text="{lex:Loc Key=MicroController}"/>
+            <TextBox Grid.Row="1" Grid.Column="1" IsReadOnly="True"
+                            HorizontalAlignment="Stretch" VerticalAlignment="Center"
+                            Text="{Binding SelectedTerminalItem.Name, Mode=OneWay}"/>
+
+            <TextBlock Grid.Row="2" Grid.Column="0" Margin="10 0 0 0"
+                                VerticalAlignment="Center" Text="{lex:Loc Key=Name}"/>
+            <TextBox Grid.Row="2" Grid.Column="1" 
+                            HorizontalAlignment="Stretch" VerticalAlignment="Center"
+                            Text="{Binding SolutionName, UpdateSourceTrigger=PropertyChanged}"/>
+
+
+            <TextBlock Grid.Row="3" Grid.Column="0" Margin="10 0 0 0"
+                                VerticalAlignment="Center" Text="{lex:Loc Key=Position}"/>
+            <TextBox Grid.Row="3" Grid.Column="1" 
+                                Text="{Binding SolutionPath}"
+                                HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
+            <Button Grid.Row="3" Grid.Column="2" 
+                            Padding="10 0" Margin="10 0 0 0"
+                            Content="{lex:Loc Key=Search}"
+                            Command="{Binding SearchCommand}"
+                            CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, 
+                            AncestorType={x:Type local:NewProjectDialog}}, 
+                            Converter={localConverters:NewProjectSearchLogicConverter}}"
+                            VerticalAlignment="Center" HorizontalAlignment="Left"/>
+
+
+            <TextBlock Grid.Row="4" Grid.Column="0" Margin="10 0 0 0"
+                                VerticalAlignment="Center" Text="{lex:Loc Key=SolutionPath}"/>
+            <TextBox Grid.Row="4" Grid.Column="1" IsReadOnly="True"
+                            HorizontalAlignment="Stretch" VerticalAlignment="Center"
+                            Text="{Binding SolutionFullPath, Mode=OneWay}"/>
+            <CheckBox Grid.Row="4" Grid.Column="2" Margin="10 0 0 0"
+                                IsChecked="{Binding CreateSolutionFolder}"
+                                Content="{lex:Loc Key=CreateSolutionDir}"  VerticalAlignment="Center"/>
+            
+        </Grid>
+
+
+        <Grid Grid.Row="2" Background="{DynamicResource CommonEnableBackgroundBrush2}">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button MinWidth="80" Height="20" Margin="0, 0, 10, 0" 
+                    Content="{lex:Loc Key=Ok}" 
+                    Command="{Binding CreateCommand}"
+                    CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, 
+                    AncestorType={x:Type local:NewProjectDialog}}, 
+                    Converter={localConverters:WindowCloseLogicConverter}}"/>
+
+                <Button MinWidth="80" Height="20" Margin="0, 0, 10, 0"
+                    Content="{lex:Loc Key=Cancel}"
+                    Command="{Binding CancelCommand}"
+                    CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, 
+                    AncestorType={x:Type local:NewProjectDialog}}, 
+                    Converter={localConverters:WindowCloseLogicConverter}}"/>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Window>

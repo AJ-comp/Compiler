@@ -61,7 +61,7 @@ namespace ApplicationLayer.Models.SolutionPackage
 
         private void Projects_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
-            for(int i=e.NewStartingIndex; i<e.NewItems.Count; i++)
+            for(int i=0; i<e.NewItems.Count; i++)
             {
                 ProjectStruct child = e.NewItems[i] as ProjectStruct;
                 child.Parent = this;

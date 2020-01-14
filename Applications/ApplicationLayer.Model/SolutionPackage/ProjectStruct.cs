@@ -10,31 +10,15 @@ using System.Xml.Serialization;
 
 namespace ApplicationLayer.Models.SolutionPackage
 {
-    public class ProjectProperty
-    {
-        public enum Configure { Debug, Release }
-
-        public Configure Mode { get; set; }
-        public string Target { get; set; }
-        public int OptimizeLevel { get; set; }
-    }
-
     [XmlInclude(typeof(ProjectProperty))]
     [XmlInclude(typeof(FolderStruct))]
     [XmlInclude(typeof(FileStruct))]
     public class ProjectStruct : HirStruct, IXmlSerializable
     {
-        #region for communication xml
-        private StringCollection referenceFiles = new StringCollection();
-        private StringCollection importedFiles = new StringCollection();
-
-        #endregion
-
-
         public double Version { get; set; }
-        public ReferenceStruct ReferenceFolder { get; } = new ReferenceStruct();
 
         public ObservableCollection<ProjectProperty> Properties { get; } = new ObservableCollection<ProjectProperty>();
+        public ObservableCollection<ReferenceStruct> ReferenceFolder { get; } = new ObservableCollection<ReferenceStruct>();
         public ObservableCollection<FolderStruct> Folders { get; } = new ObservableCollection<FolderStruct>();
         public ObservableCollection<FileStruct> Items { get; } = new ObservableCollection<FileStruct>();
 
@@ -44,6 +28,7 @@ namespace ApplicationLayer.Models.SolutionPackage
             {
                 return new CompositeCollection()
                 {
+                    new CollectionContainer() { Collection = ReferenceFolder },
                     new CollectionContainer() { Collection = Folders },
                     new CollectionContainer() { Collection = Items }
                 };
@@ -52,13 +37,15 @@ namespace ApplicationLayer.Models.SolutionPackage
 
         public ProjectStruct()
         {
+            this.ReferenceFolder.Add(new ReferenceStruct() { OPath = "C:\\Program Files (x86)\\AJ\\IDE\\Reference Assemblies", FullName = "Reference" });
+
             this.Folders.CollectionChanged += Folders_CollectionChanged;
             this.Items.CollectionChanged += Items_CollectionChanged;
         }
 
         private void Folders_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
-            for (int i = e.NewStartingIndex; i < e.NewItems.Count; i++)
+            for (int i = 0; i < e.NewItems.Count; i++)
             {
                 FolderStruct folder = e.NewItems[i] as FolderStruct;
                 folder.Parent = this;
@@ -67,14 +54,11 @@ namespace ApplicationLayer.Models.SolutionPackage
 
         private void Items_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
-            this.importedFiles.Clear();
-
             for (int i = 0; i < e.NewItems.Count; i++)
             {
                 FileStruct item = e.NewItems[i] as FileStruct;
                 item.Parent = this;
 
-                this.importedFiles.Add(Path.Combine(item.OPath, item.FullName));
                 if (File.Exists(item.FullPath)) continue;
 
                 Directory.CreateDirectory(item.BasePath);
@@ -89,8 +73,9 @@ namespace ApplicationLayer.Models.SolutionPackage
             reader.MoveToContent();
             this.Version = double.Parse(reader.GetAttribute("Version"));
 
+            StringCollection importedFiles = new StringCollection();
             while (reader.MoveToAttribute("ItemGroup"))
-                this.importedFiles.Add(reader.GetAttribute("Include"));
+                importedFiles.Add(reader.GetAttribute("Include"));
 
             // If files have not extension how?
             foreach (var path in importedFiles)
@@ -100,15 +85,6 @@ namespace ApplicationLayer.Models.SolutionPackage
                 loadProject.Folders.Add(folderStruct);
 
                 if (File.Exists(Path.Combine(this.BasePath, path)) == false) continue;
-
-                //var fullPath = Path.Combine(this.BasePath, path);
-                //using (StreamReader wr = new StreamReader(fullPath))
-                //{
-                //    XmlSerializer xs = new XmlSerializer(typeof(ProjectStruct));
-                //    loadProject = xs.Deserialize(wr) as ProjectStruct;
-
-                //    this.Projects.Add(loadProject);
-                //}
             }
         }
 
@@ -125,17 +101,18 @@ namespace ApplicationLayer.Models.SolutionPackage
                 writer.WriteEndElement();
             }
 
-            foreach(var item in this.referenceFiles)
+            var referenceFileStructs = this.ReferenceFolder[0].Items;
+            foreach (var item in referenceFileStructs)
             {
                 writer.WriteStartElement("Reference");
-                writer.WriteAttributeString("Include", item);
+                writer.WriteAttributeString("Include", item.FullPath);
                 writer.WriteEndElement();
             }
 
-            foreach (var item in this.importedFiles)
+            foreach (var item in this.Items)
             {
                 writer.WriteStartElement("ItemGroup");
-                writer.WriteAttributeString("Include", item);
+                writer.WriteAttributeString("Include", Path.Combine(item.OPath, item.FullName));
                 writer.WriteEndElement();
             }
         }
@@ -155,7 +132,11 @@ namespace ApplicationLayer.Models.SolutionPackage
 
         private void ReferenceFiles_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
-
+            for (int i = 0; i < e.NewItems.Count; i++)
+            {
+                ReferenceFileStruct item = e.NewItems[i] as ReferenceFileStruct;
+                item.Parent = this;
+            }
         }
     }
 

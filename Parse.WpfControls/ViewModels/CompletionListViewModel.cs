@@ -125,8 +125,7 @@ namespace Parse.WpfControls.ViewModels
             var repeatCollection = (bFilteringState) ? this.filteredAvailableCollection : this.availableCollection;
             foreach (var item in repeatCollection)
             {
-                List<uint> matchedIndex;
-                double value = this.similarity.SimilarityValue(item.ItemName, this.inputString, out matchedIndex);
+                double value = this.similarity.SimilarityValue(item.ItemName, this.inputString, out List<uint> matchedIndex);
                 if (value == 0)
                 {
                     if (IsIncludeZeroSimilarity == false) continue;

@@ -52,6 +52,7 @@
     <Compile Include="SolutionPackage\MiniCGenerator.cs" />
     <Compile Include="SolutionPackage\MiniCProjectStruct.cs" />
     <Compile Include="SolutionPackage\ProjectGenerator.cs" />
+    <Compile Include="SolutionPackage\ProjectProperty.cs" />
     <Compile Include="SolutionPackage\ProjectStruct.cs" />
     <Compile Include="SolutionPackage\SolutionStruct.cs" />
     <Compile Include="Theme.cs" />
@@ -69,6 +70,9 @@
       <Project>{DCCEDEB5-9CA4-41FE-AB6B-50E4BCC64EE6}</Project>
       <Name>Parse.WpfControls.SyntaxEditor</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

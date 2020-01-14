@@ -11,9 +11,9 @@ namespace ApplicationLayer.Models.SolutionPackage
         {
             ProjectStruct result = this.CreateEmptyProject(projectPath, projectName, target, parent);
 
-            result.ReferenceFolder.Items.Add(new ReferenceFileStruct() { OPath = "C:\\Program Files (x86)\\AJ\\IDE\\Reference Assemblies", FullName = "System.dll" });
-            result.ReferenceFolder.Items.Add(new ReferenceFileStruct() { OPath = "C:\\Program Files (x86)\\AJ\\IDE\\Reference Assemblies", FullName = "System.IO.dll" });
-            result.ReferenceFolder.Items.Add(new ReferenceFileStruct() { OPath = "C:\\Program Files (x86)\\AJ\\IDE\\Reference Assemblies", FullName = "System.Data.dll" });
+            result.ReferenceFolder[0].Items.Add(new ReferenceFileStruct() { OPath = "MiniC", FullName = "System.dll" });
+            result.ReferenceFolder[0].Items.Add(new ReferenceFileStruct() { OPath = "MiniC", FullName = "System.IO.dll" });
+            result.ReferenceFolder[0].Items.Add(new ReferenceFileStruct() { OPath = "MiniC", FullName = "System.Data.dll" });
 
             result.Items.Add(new FileStruct()
             {

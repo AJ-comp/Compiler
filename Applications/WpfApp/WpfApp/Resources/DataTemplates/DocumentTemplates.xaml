@@ -1,0 +1,124 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+                    xmlns:lex="http://wpflocalizeextension.codeplex.com"
+                    xmlns:mvvm="http://www.galasoft.ch/mvvmlight"
+                    xmlns:syntaxEditor="clr-namespace:Parse.WpfControls.SyntaxEditor;assembly=Parse.WpfControls.SyntaxEditor"
+                    xmlns:localConverters="clr-namespace:ApplicationLayer.WpfApp.Converters"
+                    xmlns:localBehaviors="clr-namespace:ApplicationLayer.WpfApp.Behaviors"
+                    xmlns:advanceControls="clr-namespace:Wpf.UI.Advance;assembly=Wpf.UI.Advance"
+                    xmlns:wpfControls="clr-namespace:Parse.WpfControls;assembly=Parse.WpfControls"
+                    xmlns:documentViewModels="clr-namespace:ApplicationLayer.ViewModels.DocumentTypeViewModels;assembly=ApplicationLayer.ViewModels"
+                    xmlns:utilities="clr-namespace:Parse.WpfControls.Utilities;assembly=Parse.WpfControls">
+
+    <DataTemplate DataType="{x:Type documentViewModels:EditorTypeViewModel}">
+        <syntaxEditor:SyntaxEditor FontSize="15" FontFamily="Arial"
+                                                FileName="{Binding Title}"
+                                                IsLineNumberingVisible="True"  LineNumberForeColor="DarkGreen"
+                                                KeywordForeground="LightBlue"
+                                                LineCommentForeground="ForestGreen">
+
+            <i:Interaction.Behaviors>
+                <localBehaviors:EventToCommandBehavior Command="{Binding AlarmFiredCommand}" Event="AlarmFired" PassArguments="True" />
+                <localBehaviors:ViewViewModelConnector ViewModelDelegate="{Binding MoveCaretInvoker}" ViewMethod="MoveCaretToToken"/>
+            </i:Interaction.Behaviors>
+
+        </syntaxEditor:SyntaxEditor>
+
+    </DataTemplate>
+
+
+    <DataTemplate DataType="{x:Type documentViewModels:ParsingHistoryViewModel}">
+        <DataGrid IsReadOnly="True" ItemsSource="{Binding ParsingHistory}"/>
+    </DataTemplate>
+
+
+    <DataTemplate DataType="{x:Type documentViewModels:GrammarInfoViewModel}">
+        <DockPanel>
+            <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Background="Transparent">
+                <TextBlock Width="100" HorizontalAlignment="Right"
+                       Margin="0 0 10 0"
+                       Text="{lex:Loc Key=Grammar}"/>
+                <ComboBox Width="150" HorizontalAlignment="Right" 
+                      ItemsSource="{Binding Grammars}" SelectedItem="{Binding SelectedItem}">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="Loaded">
+                            <i:InvokeCommandAction Command="{Binding LoadCommand}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </ComboBox>
+            </StackPanel>
+
+            <Grid>
+                <ContentControl Content="{Binding SelectedItem, Converter={localConverters:GrammarToLRParserConverter}}"/>
+            </Grid>
+        </DockPanel>
+    </DataTemplate>
+
+    <DataTemplate x:Key="DocumentItemTemplate">
+        <DockPanel>
+            <Button x:Name="PART_CloseButton"
+                        DockPanel.Dock="Right"
+                        Margin="0,0,4,0"
+                        VerticalAlignment="Center"
+                        Style="{DynamicResource FlatButton}"
+                        Visibility="Visible"
+                        Command="{Binding CloseCommand}">
+
+                <Path Height="16"
+                            Width="16"
+                            Data="M4,4 L12,12 M12,4 L4,12"
+                            Stroke="{DynamicResource CommonEnableTextBrush}"/>
+            </Button>
+
+            <Label x:Name="ContentSite"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Center"
+                        Margin="12,2,12,2"
+                        Content="{Binding Title}">
+
+                <Label.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="{lex:Loc Key=Close}" Command="{Binding CloseCommand}"/>
+                        <MenuItem Header="{lex:Loc Key=AllCloseExceptThisWindow}" Command="{Binding AllCloseExceptThisCommand}"/>
+
+                    </ContextMenu>
+
+                </Label.ContextMenu>
+            </Label>
+
+        </DockPanel>
+    </DataTemplate>
+
+
+    <DataTemplate x:Key="DocumentTemplate">
+        <TabControl
+                            ItemsSource="{Binding}"
+                            ItemTemplate="{StaticResource DocumentItemTemplate}"
+                            SelectedIndex="{Binding SelectedDocumentIndex}"
+                            SelectedItem="{Binding SelectedDocument}"/>
+        
+        <!--<TabControl>
+            <TabItem Header="test 1">
+                <syntaxEditor:SyntaxEditor FontSize="15" FontFamily="Arial"
+                                                FileName="{Binding Title}"
+                                                IsLineNumberingVisible="True"  LineNumberForeColor="DarkGreen"
+                                                KeywordForeground="LightBlue"
+                                                LineCommentForeground="ForestGreen"/>
+            </TabItem>
+            <TabItem Header="test 2">
+                <syntaxEditor:SyntaxEditor FontSize="15" FontFamily="Arial"
+                                                FileName="{Binding Title}"
+                                                IsLineNumberingVisible="True"  LineNumberForeColor="DarkGreen"
+                                                KeywordForeground="LightBlue"
+                                                LineCommentForeground="ForestGreen"/>
+            </TabItem>
+            <TabItem Header="test 3">
+                <documentViewModels:EditorTypeViewModel/>
+            </TabItem>
+        </TabControl>-->
+
+
+    </DataTemplate>
+
+</ResourceDictionary>

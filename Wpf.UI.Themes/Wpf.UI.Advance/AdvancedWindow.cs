@@ -62,8 +62,7 @@ namespace Wpf.UI.Advance
         {
             AdvancedWindow window = dp as AdvancedWindow;
 
-            Border titleBar = window.TitleBar as Border;
-            if (titleBar == null) return;
+            if (!(window.TitleBar is Border titleBar)) return;
 
             // find the textblock control of the children of the titlebar and change the value of the foreground of the control.
         }
