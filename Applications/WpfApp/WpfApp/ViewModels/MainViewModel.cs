@@ -1,3 +1,4 @@
+using ApplicationLayer.Models;
 using ApplicationLayer.ViewModels;
 using ApplicationLayer.ViewModels.DialogViewModels;
 using ApplicationLayer.ViewModels.DocumentTypeViewModels;
@@ -107,38 +108,69 @@ namespace ApplicationLayer.WpfApp.ViewModels
         public ViewModelBase ActivatedDialog { get; }
         public AlarmListViewModel AlarmListVM { get; } = new AlarmListViewModel();
 
-        public Action NewFileAction = null;
-        public Action NewProjectAction = null;
         public Action ParseTreeAction = null;
 
         #region Command related to NewFile
-        private RelayCommand _newFileCommand;
-        public RelayCommand NewFileCommand
+        private RelayCommand<Func<Document>> _newFileCommand;
+        public RelayCommand<Func<Document>> NewFileCommand
         {
             get
             {
                 if (_newFileCommand == null)
-                    _newFileCommand = new RelayCommand(this.OnNewFile);
+                    _newFileCommand = new RelayCommand<Func<Document>>(this.OnNewFile);
 
                 return _newFileCommand;
             }
         }
-        private void OnNewFile() => this.NewFileAction?.Invoke();
+        private void OnNewFile(Func<Document> func)
+        {
+            if (func == null) return;
+
+            var document = func.Invoke();
+            if (document == null) return;
+
+            var newDocument = new EditorTypeViewModel();
+            this.Documents.Add(newDocument);
+            this.SelectedDocument = newDocument;
+
+            this.AlarmListVM.AddEditors(newDocument);
+        }
         #endregion
 
         #region Command related to NewProject
-        private RelayCommand newProjectCommand;
-        public RelayCommand NewProjectCommand
+        private RelayCommand<Action> newProjectCommand;
+        public RelayCommand<Action> NewProjectCommand
         {
             get
             {
                 if (newProjectCommand == null)
-                    newProjectCommand = new RelayCommand(this.OnNewProject);
+                    newProjectCommand = new RelayCommand<Action>(this.OnNewProject);
 
                 return newProjectCommand;
             }
         }
-        private void OnNewProject() => this.NewProjectAction?.Invoke();
+        private void OnNewProject(Action action) => action?.Invoke();
+        #endregion
+
+        #region Command related to Open
+        private RelayCommand<Func<string>> openCommand;
+        public RelayCommand<Func<string>> OpenCommand
+        {
+            get
+            {
+                if (openCommand == null)
+                    openCommand = new RelayCommand<Func<string>>(this.OnOpenProject);
+
+                return openCommand;
+            }
+        }
+        private void OnOpenProject(Func<string> func)
+        {
+            string selSolutionFullPath = func?.Invoke();
+            if (string.IsNullOrEmpty(selSolutionFullPath)) return;
+
+            Messenger.Default.Send(new LoadSolutionMessage(selSolutionFullPath));
+        }
         #endregion
 
         #region Command related to Grammar
@@ -243,8 +275,9 @@ namespace ApplicationLayer.WpfApp.ViewModels
         private void InitSolutionExplorer()
         {
             var solutionExplorer = ServiceLocator.Current.GetInstance<SolutionExplorerViewModel>();
-            Messenger.Default.Register<CreateSolutionMessage>(this, solutionExplorer.ReceivedCreateSolutionMessage);
-            Messenger.Default.Register<LoadSolutionMessage>(this, solutionExplorer.ReceivedLoadSolutionMessage);
+
+            Messenger.Default.Register<CreateSolutionMessage>(solutionExplorer, solutionExplorer.ReceivedCreateSolutionMessage);
+            Messenger.Default.Register<LoadSolutionMessage>(solutionExplorer, solutionExplorer.ReceivedLoadSolutionMessage);
         }
 
         /// <summary>
@@ -259,6 +292,8 @@ namespace ApplicationLayer.WpfApp.ViewModels
             this.InitNewProjectWindow();
             this.InitSolutionExplorer();
 
+            Messenger.Default.Register<OpenFileMessage>(this, this.ReceivedOpenFileMessage);
+
             if (IsInDesignMode)
             {
                 // Code runs in Blend --> create design time data.
@@ -267,6 +302,12 @@ namespace ApplicationLayer.WpfApp.ViewModels
             {
                 // Code runs "for real"
             }
+        }
+
+
+        public void ReceivedOpenFileMessage(OpenFileMessage message)
+        {
+//            this.Documents.Add(message.SelectedFile);
         }
     }
 }

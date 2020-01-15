@@ -7,8 +7,18 @@ namespace ApplicationLayer.ViewModels.DialogViewModels
 {
     public class NewFileDialogViewModel : DialogViewModel
     {
-        public int CurSelected { get; set; } = 0;
         public ObservableCollection<Document> NewFileDataCollection { get; } = new ObservableCollection<Document>();
+
+        private Document selectedItem;
+        public Document SeletedItem
+        {
+            get => this.selectedItem;
+            set
+            {
+                this.selectedItem = value;
+                this.RaisePropertyChanged("SeletedItem");
+            }
+        }
 
         public NewFileDialogViewModel()
         {
@@ -34,7 +44,7 @@ namespace ApplicationLayer.ViewModels.DialogViewModels
         }
         private void OnCreate(Action action)
         {
-            this.CreateRequest?.Invoke(this, this.NewFileDataCollection[this.CurSelected]);
+            this.CreateRequest?.Invoke(this, this.SeletedItem);
             action?.Invoke();
         }
     }

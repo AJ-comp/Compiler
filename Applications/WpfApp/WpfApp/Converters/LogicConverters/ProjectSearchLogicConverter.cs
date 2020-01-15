@@ -6,9 +6,9 @@ using System.Windows;
 using System.Windows.Data;
 using System.Windows.Markup;
 
-namespace ApplicationLayer.WpfApp.Converters
+namespace ApplicationLayer.WpfApp.Converters.LogicConverters
 {
-    class NewProjectSearchLogicConverter : MarkupExtension, IValueConverter
+    class ProjectSearchLogicConverter : MarkupExtension, IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {

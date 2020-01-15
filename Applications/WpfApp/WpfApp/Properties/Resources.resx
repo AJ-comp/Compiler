@@ -210,4 +210,7 @@
   <data name="MicroController" xml:space="preserve">
     <value>Micro Controller</value>
   </data>
+  <data name="ProjectOrSolution" xml:space="preserve">
+    <value>Project/Solution</value>
+  </data>
 </root>

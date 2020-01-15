@@ -70,6 +70,10 @@
       <Project>{DCCEDEB5-9CA4-41FE-AB6B-50E4BCC64EE6}</Project>
       <Name>Parse.WpfControls.SyntaxEditor</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ApplicationLayer.Common\ApplicationLayer.Common.csproj">
+      <Project>{9B7EBE4D-C2B3-40E8-9516-107340A07111}</Project>
+      <Name>ApplicationLayer.Common</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

@@ -1,6 +1,4 @@
-﻿using System.Collections.ObjectModel;
-
-namespace ApplicationLayer.Models.SolutionPackage
+﻿namespace ApplicationLayer.Models.SolutionPackage
 {
     public class ProjectProperty : HirStruct
     {

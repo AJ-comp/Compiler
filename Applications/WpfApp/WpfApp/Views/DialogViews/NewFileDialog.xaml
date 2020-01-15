@@ -4,8 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ApplicationLayer.WpfApp.Views.DialogViews"
-        xmlns:localViewmodels="clr-namespace:WpfApp.ViewModels"
-        xmlns:localConverters="clr-namespace:ApplicationLayer.WpfApp.Converters"
+        xmlns:logicConverters="clr-namespace:ApplicationLayer.WpfApp.Converters.LogicConverters"
         xmlns:lex="http://wpflocalizeextension.codeplex.com" 
         mc:Ignorable="d"
         WindowStyle="ToolWindow"
@@ -20,7 +19,9 @@
             <RowDefinition Height="30"/>
         </Grid.RowDefinitions>
         
-        <ListBox ItemsSource="{Binding NewFileDataCollection}" HorizontalContentAlignment="Stretch">
+        <ListBox HorizontalContentAlignment="Stretch"
+                        ItemsSource="{Binding NewFileDataCollection}" 
+                        SelectedItem="{Binding SelectedItem}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Border x:Name="border" BorderThickness="1" VerticalAlignment="Stretch">
@@ -40,14 +41,14 @@
                     Command="{Binding CreateCommand}"
                     CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, 
                     AncestorType={x:Type local:NewFileDialog}}, 
-                    Converter={localConverters:WindowCloseLogicConverter}}"/>
+                    Converter={logicConverters:WindowCloseLogicConverter}}"/>
             
             <Button MinWidth="80" Height="20" Margin="0, 0, 10, 0"
                     Content="{lex:Loc Key=Cancel}"
                     Command="{Binding CancelCommand}"
                     CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, 
                     AncestorType={x:Type local:NewFileDialog}}, 
-                    Converter={localConverters:WindowCloseLogicConverter}}"/>
+                    Converter={logicConverters:WindowCloseLogicConverter}}"/>
         </StackPanel>
     </Grid>
 </Window>

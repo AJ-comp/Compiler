@@ -17,7 +17,6 @@
     </UserControl.DataContext>
 
     <Grid>
-
         <Grid.RowDefinitions>
             <RowDefinition Height="20"/>
             <RowDefinition Height="*"/>

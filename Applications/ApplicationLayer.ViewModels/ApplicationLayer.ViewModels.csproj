@@ -64,7 +64,8 @@
     <Compile Include="DocumentTypeViewModels\EditorTypeViewModel.cs" />
     <Compile Include="DocumentTypeViewModels\GrammarInfoViewModel.cs" />
     <Compile Include="DocumentTypeViewModels\ParsingHistoryViewModel.cs" />
-    <Compile Include="Messages\SolutionExplorerMessages.cs" />
+    <Compile Include="Messages\FromSolutionExplorerMessages.cs" />
+    <Compile Include="Messages\ToSolutionExplorerMessages.cs" />
     <Compile Include="Properties\AlarmCodes.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

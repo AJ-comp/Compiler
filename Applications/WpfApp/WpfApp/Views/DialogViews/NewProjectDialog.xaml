@@ -7,6 +7,7 @@
              xmlns:lex="http://wpflocalizeextension.codeplex.com" 
              xmlns:local="clr-namespace:ApplicationLayer.WpfApp.Views.DialogViews"
              xmlns:localConverters="clr-namespace:ApplicationLayer.WpfApp.Converters"
+             xmlns:logicConverters="clr-namespace:ApplicationLayer.WpfApp.Converters.LogicConverters"
              xmlns:targets="clr-namespace:Parse.BackEnd.Target;assembly=Parse.BackEnd.Target"
              xmlns:wpfControlsAP="clr-namespace:Parse.WpfControls.AttachedProperties;assembly=Parse.WpfControls"
              xmlns:wpfControlsConverters="clr-namespace:Parse.WpfControls.Converters;assembly=Parse.WpfControls"
@@ -185,7 +186,7 @@
                             Command="{Binding SearchCommand}"
                             CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, 
                             AncestorType={x:Type local:NewProjectDialog}}, 
-                            Converter={localConverters:NewProjectSearchLogicConverter}}"
+                            Converter={logicConverters:ProjectSearchLogicConverter}}"
                             VerticalAlignment="Center" HorizontalAlignment="Left"/>
 
 
@@ -208,14 +209,14 @@
                     Command="{Binding CreateCommand}"
                     CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, 
                     AncestorType={x:Type local:NewProjectDialog}}, 
-                    Converter={localConverters:WindowCloseLogicConverter}}"/>
+                    Converter={logicConverters:WindowCloseLogicConverter}}"/>
 
                 <Button MinWidth="80" Height="20" Margin="0, 0, 10, 0"
                     Content="{lex:Loc Key=Cancel}"
                     Command="{Binding CancelCommand}"
                     CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, 
                     AncestorType={x:Type local:NewProjectDialog}}, 
-                    Converter={localConverters:WindowCloseLogicConverter}}"/>
+                    Converter={logicConverters:WindowCloseLogicConverter}}"/>
             </StackPanel>
         </Grid>
     </Grid>

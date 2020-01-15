@@ -4,9 +4,9 @@ using System.Windows;
 using System.Windows.Data;
 using System.Windows.Markup;
 
-namespace ApplicationLayer.WpfApp.Converters
+namespace ApplicationLayer.WpfApp.Converters.LogicConverters
 {
-    public class WindowCloseLogicConverter : MarkupExtension, IValueConverter
+    class WindowCloseLogicConverter : MarkupExtension, IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {

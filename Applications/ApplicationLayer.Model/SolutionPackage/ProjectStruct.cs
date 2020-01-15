@@ -1,27 +1,32 @@
-﻿using Parse.BackEnd.Target;
+﻿using ApplicationLayer.Common.Helpers;
 using System.Collections;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.IO;
 using System.Windows.Data;
-using System.Xml;
-using System.Xml.Schema;
 using System.Xml.Serialization;
 
 namespace ApplicationLayer.Models.SolutionPackage
 {
     [XmlInclude(typeof(ProjectProperty))]
-    [XmlInclude(typeof(FolderStruct))]
-    [XmlInclude(typeof(FileStruct))]
-    public class ProjectStruct : HirStruct, IXmlSerializable
+    [XmlInclude(typeof(ReferenceStruct))]
+    public class ProjectStruct : HirStruct
     {
         public double Version { get; set; }
 
         public ObservableCollection<ProjectProperty> Properties { get; } = new ObservableCollection<ProjectProperty>();
+
+        public StringCollection referencePaths { get; } = new StringCollection();
+        public StringCollection ItemPaths { get; } = new StringCollection();
+
+        [XmlIgnore]
         public ObservableCollection<ReferenceStruct> ReferenceFolder { get; } = new ObservableCollection<ReferenceStruct>();
+        [XmlIgnore]
         public ObservableCollection<FolderStruct> Folders { get; } = new ObservableCollection<FolderStruct>();
+        [XmlIgnore]
         public ObservableCollection<FileStruct> Items { get; } = new ObservableCollection<FileStruct>();
 
+        [XmlIgnore]
         public IList Children
         {
             get
@@ -39,8 +44,19 @@ namespace ApplicationLayer.Models.SolutionPackage
         {
             this.ReferenceFolder.Add(new ReferenceStruct() { OPath = "C:\\Program Files (x86)\\AJ\\IDE\\Reference Assemblies", FullName = "Reference" });
 
+            this.ReferenceFolder[0].Items.CollectionChanged += ReferenceItems_CollectionChanged;
             this.Folders.CollectionChanged += Folders_CollectionChanged;
             this.Items.CollectionChanged += Items_CollectionChanged;
+        }
+
+        private void ReferenceItems_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            for (int i = 0; i < e.NewItems.Count; i++)
+            {
+                ReferenceFileStruct referenceFile = e.NewItems[i] as ReferenceFileStruct;
+
+                if (this.referencePaths.Contains(referenceFile.FullPath) == false) this.referencePaths.Add(referenceFile.FullPath);
+            }
         }
 
         private void Folders_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
@@ -49,6 +65,11 @@ namespace ApplicationLayer.Models.SolutionPackage
             {
                 FolderStruct folder = e.NewItems[i] as FolderStruct;
                 folder.Parent = this;
+
+                if (this.ItemPaths.Contains(folder.RelativePath) == false) this.ItemPaths.Add(folder.RelativePath);
+
+                folder.Folders.CollectionChanged += SubFolders_CollectionChanged;
+                folder.Items.CollectionChanged += SubItems_CollectionChanged;
             }
         }
 
@@ -59,6 +80,8 @@ namespace ApplicationLayer.Models.SolutionPackage
                 FileStruct item = e.NewItems[i] as FileStruct;
                 item.Parent = this;
 
+                if (this.ItemPaths.Contains(item.RelativePath) == false) this.ItemPaths.Add(item.RelativePath);
+
                 if (File.Exists(item.FullPath)) continue;
 
                 Directory.CreateDirectory(item.BasePath);
@@ -66,61 +89,70 @@ namespace ApplicationLayer.Models.SolutionPackage
             }
         }
 
-        public XmlSchema GetSchema() => null;
-
-        public void ReadXml(XmlReader reader)
+        private void SubFolders_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
-            reader.MoveToContent();
-            this.Version = double.Parse(reader.GetAttribute("Version"));
-
-            StringCollection importedFiles = new StringCollection();
-            while (reader.MoveToAttribute("ItemGroup"))
-                importedFiles.Add(reader.GetAttribute("Include"));
-
-            // If files have not extension how?
-            foreach (var path in importedFiles)
+            for (int i = 0; i < e.NewItems.Count; i++)
             {
-                ProjectStruct loadProject = new ProjectStruct();
-                FolderStruct folderStruct = FolderStruct.GetFolderSet(this.BasePath, path);
-                loadProject.Folders.Add(folderStruct);
+                FolderStruct folder = e.NewItems[i] as FolderStruct;
+                if (this.ItemPaths.Contains(folder.BasePath))
+                {
+                    int index = this.ItemPaths.FindIndex(folder.BasePath);
+                    if (index >= 0) this.ItemPaths[index] = folder.FullPath;
+                }
 
-                if (File.Exists(Path.Combine(this.BasePath, path)) == false) continue;
+                folder.Folders.CollectionChanged += SubFolders_CollectionChanged;
+                folder.Items.CollectionChanged += SubItems_CollectionChanged;
             }
         }
 
-        public void WriteXml(XmlWriter writer)
+        private void SubItems_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
-            writer.WriteElementString("Version", this.Version.ToString());
-
-            foreach (var property in this.Properties)
+            for (int i = 0; i < e.NewItems.Count; i++)
             {
-                writer.WriteStartElement("PropertyGroup");
-                writer.WriteElementString("Mode", property.Mode.ToString());
-                writer.WriteElementString("Target", property.Target.ToString());
-                writer.WriteElementString("OptimizeLevel", property.OptimizeLevel.ToString());
-                writer.WriteEndElement();
+                FileStruct folder = e.NewItems[i] as FileStruct;
+                if (this.ItemPaths.Contains(folder.BasePath))
+                {
+                    int index = this.ItemPaths.FindIndex(folder.BasePath);
+                    if (index >= 0) this.ItemPaths[index] = folder.FullPath;
+                }
+            }
+        }
+
+        /// <summary>
+        /// This function Syncronize with XML data.
+        /// </summary>
+        public void SyncWithXMLData()
+        {
+            this.ReferenceFolder[0].Items.Clear();
+            foreach (var item in this.referencePaths)
+            {
+                var directoryName = Path.GetDirectoryName(item);
+                var fileName = Path.GetFileName(item);
+
+                this.ReferenceFolder[0].Items.Add(new ReferenceFileStruct() { OPath = directoryName, FullName = fileName });
             }
 
-            var referenceFileStructs = this.ReferenceFolder[0].Items;
-            foreach (var item in referenceFileStructs)
+            this.Folders.Clear();
+            this.Items.Clear();
+            foreach (var item in this.ItemPaths)
             {
-                writer.WriteStartElement("Reference");
-                writer.WriteAttributeString("Include", item.FullPath);
-                writer.WriteEndElement();
-            }
+                var directoryName = Path.GetDirectoryName(item);
+                var fileName = Path.GetFileName(item);
 
-            foreach (var item in this.Items)
-            {
-                writer.WriteStartElement("ItemGroup");
-                writer.WriteAttributeString("Include", Path.Combine(item.OPath, item.FullName));
-                writer.WriteEndElement();
+                if (string.IsNullOrEmpty(directoryName))
+                    this.Items.Add(new FileStruct() { FullName = fileName });
+                else
+                {
+                    FolderStruct subFolder = FolderStruct.GetFolderSet(this.BasePath, directoryName);
+                    subFolder.Items.Add(new FileStruct() { FullName = fileName });
+                    this.Folders.Add(subFolder);
+                }
             }
         }
     }
 
 
-
-
+    [XmlInclude(typeof(ReferenceFileStruct))]
     public class ReferenceStruct : HirStruct
     {
         public ObservableCollection<ReferenceFileStruct> Items { get; } = new ObservableCollection<ReferenceFileStruct>();

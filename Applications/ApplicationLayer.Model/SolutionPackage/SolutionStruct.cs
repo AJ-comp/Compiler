@@ -4,8 +4,6 @@ using Parse.FrontEnd.Grammars.MiniC;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.IO;
-using System.Xml;
-using System.Xml.Schema;
 using System.Xml.Serialization;
 
 namespace ApplicationLayer.Models.SolutionPackage
@@ -24,6 +22,8 @@ namespace ApplicationLayer.Models.SolutionPackage
         public string NameWithoutExtension => Path.GetFileNameWithoutExtension(this.FullName);
         [XmlIgnore]
         public string FullPath => Path.Combine(this.BasePath, this.FullName);
+        [XmlIgnore]
+        public string RelativePath => Path.Combine(this.OPath, this.FullName);
 
         [XmlIgnore]
         public string BasePath
@@ -45,14 +45,16 @@ namespace ApplicationLayer.Models.SolutionPackage
     }
 
     [XmlInclude(typeof(ProjectStruct))]
-    public class SolutionStruct : HirStruct, IXmlSerializable
+    public class SolutionStruct : HirStruct
     {
         [XmlIgnore]
         public static string Extension => "ajn";
         public double Version { get; set; }
 
-        private StringCollection projectPaths = new StringCollection();
-        public ObservableCollection<ProjectStruct> Projects { get; set; } = new ObservableCollection<ProjectStruct>();
+        public StringCollection ProjectPaths { get; } = new StringCollection();
+
+        [XmlIgnore]
+        public ObservableCollection<ProjectStruct> Projects { get; } = new ObservableCollection<ProjectStruct>();
 
         public SolutionStruct()
         {
@@ -69,67 +71,22 @@ namespace ApplicationLayer.Models.SolutionPackage
                 if (File.Exists(child.FullPath)) continue;
 
                 Directory.CreateDirectory(child.BasePath);
-
-                using (StreamWriter wr = new StreamWriter(child.FullPath))
-                {
-                    XmlSerializer xs = new XmlSerializer(typeof(ProjectStruct));
-                    xs.Serialize(wr, child);
-                }
+                this.ProjectPaths.Add(child.RelativePath);
             }
         }
 
-        public XmlSchema GetSchema() => null;
-
-        public void ReadXml(XmlReader reader)
+        public void Load(string fullPath)
         {
-            reader.MoveToContent();
-            this.Version = double.Parse(reader.GetAttribute("Version"));
-
-            while(reader.MoveToAttribute("Project"))
-                this.projectPaths.Add(reader.GetAttribute("Include"));
-
-            foreach(var path in projectPaths)
-            {
-                ProjectStruct loadProject = new ProjectStruct();
-
-                var fullPath = Path.Combine(this.BasePath, path);
-                using (StreamReader wr= new StreamReader(fullPath))
-                {
-                    XmlSerializer xs = new XmlSerializer(typeof(ProjectStruct));
-                    loadProject = xs.Deserialize(wr) as ProjectStruct;
-
-                    this.Projects.Add(loadProject);
-                }
-            }
+            this.OPath = Path.GetDirectoryName(fullPath);
         }
 
-        public void WriteXml(XmlWriter writer)
-        {
-            writer.WriteAttributeString("Version", this.Version.ToString());
-
-            foreach (var project in this.Projects)
-            {
-                writer.WriteStartElement("Project");
-                var relatePath = Path.Combine(project.OPath, project.FullName);
-                writer.WriteAttributeString("Include", relatePath);
-                writer.WriteEndElement();
-            }
-        }
-
-        public void Load(string path, string name)
-        {
-
-        }
-
-        public static SolutionStruct Create(string solutionPath, string solutionName, bool bCreateSolutionFolder, Grammar grammar, Target target)
+        public static SolutionStruct Create(string solutionPath, string solutionName, Grammar grammar, Target target)
         {
             SolutionStruct result = new SolutionStruct();
-
-            if (bCreateSolutionFolder)
-                solutionPath = Path.Combine(solutionPath, solutionName);
+            string solutionNameWithExtension = Path.GetFileNameWithoutExtension(solutionName);
 
             result.OPath = solutionPath;
-            result.FullName = string.Format("{0}.{1}", solutionName, SolutionStruct.Extension);
+            result.FullName = solutionName;
             result.Version = 1.0;
 
             ProjectGenerator projectGenerator = null;
@@ -138,8 +95,8 @@ namespace ApplicationLayer.Models.SolutionPackage
 
             if (projectGenerator == null) return result;
 
-            result.Projects.Add(projectGenerator.CreateDefaultProject(solutionName, solutionName, target, result));
-            result.Projects.Add(projectGenerator.CreateDefaultProject(solutionName, solutionName+"abc", target, result));
+            result.Projects.Add(projectGenerator.CreateDefaultProject(solutionNameWithExtension, solutionNameWithExtension, target, result));
+            result.Projects.Add(projectGenerator.CreateDefaultProject(solutionNameWithExtension, solutionNameWithExtension + "abc", target, result));
 
             return result;
         }

@@ -37,12 +37,6 @@ namespace ApplicationLayer.WpfApp.Behaviors
 
             MainViewModel mainVm = this.mainWindow.DataContext as MainViewModel;
 
-            //if(mainVm != null)
-            //    this.mainWindow.syntaxEditor.AlarmFired += SyntaxEditor_AlarmFired;
-
-            this.ExecuteMenuCommand(mainVm);
-
-
             //            this.editor.SetComponents(this.parser);
 
             /*
@@ -61,43 +55,6 @@ namespace ApplicationLayer.WpfApp.Behaviors
 
             this.editor.IntelliPrompt.Sessions.Add(session);    // <-- error [NullReferenceException]
             */
-        }
-
-        private void ExecuteMenuCommand(MainViewModel mainVm)
-        {
-            mainVm.NewFileAction = (() =>
-            {
-                NewFileDialog dialog = new NewFileDialog();
-                var vm = dialog.DataContext as NewFileDialogViewModel;
-
-                vm.CreateRequest -= OnDocumentCreate;
-                vm.CreateRequest += OnDocumentCreate;
-
-                dialog.Owner = this.mainWindow;
-                dialog.ShowInTaskbar = false;
-                dialog.ShowDialog();
-            });
-
-            mainVm.NewProjectAction = (() =>
-            {
-                NewProjectDialog dialog = new NewProjectDialog();
-                var vm = dialog.DataContext as NewProjectViewModel;
-
-                dialog.Owner = this.mainWindow;
-                dialog.ShowInTaskbar = false;
-                dialog.ShowDialog();
-            });
-        }
-
-        private void OnDocumentCreate(object sender, Document e)
-        {
-            var mainVm = this.mainWindow.DataContext as MainViewModel;
-
-            var newDocument = new EditorTypeViewModel();
-            mainVm.Documents.Add(newDocument);
-            mainVm.SelectedDocument = newDocument;
-
-            mainVm.AlarmListVM.AddEditors(newDocument);
         }
 
         private void SyntaxEditor_AlarmFired(object sender, AlarmCollection e)
