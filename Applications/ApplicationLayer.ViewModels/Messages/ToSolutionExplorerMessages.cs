@@ -14,7 +14,7 @@ namespace ApplicationLayer.ViewModels.Messages
         public Target MachineTarget { get; }
 
         public string SoltionName => this.SolutionNameWithOutExtension + this.Extension;
-        public string FullPath => Path.Combine(this.SolutionPath, this.SoltionName);
+        public string SolutionFullPath => Path.Combine(this.SolutionPath, this.SoltionName);
 
         public CreateSolutionMessage(string solutionPath, string solutionNameWithOutExtension, bool isCreateSolutionFolder,
                                                 Grammar language, Target machineTarget)
@@ -31,6 +31,10 @@ namespace ApplicationLayer.ViewModels.Messages
     public class LoadSolutionMessage : MessageBase
     {
         public string SolutionFullPath { get; }
+
+        public string SolutionPath => Path.GetDirectoryName(this.SolutionFullPath);
+        public string SolutionName => Path.GetFileName(this.SolutionFullPath);
+        public string SolutionNameWithOutExtension => Path.GetFileNameWithoutExtension(this.SolutionFullPath);
 
         public LoadSolutionMessage(string solutionFullPath)
         {

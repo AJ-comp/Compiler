@@ -12,6 +12,8 @@ namespace ApplicationLayer.Models.SolutionPackage
     [XmlInclude(typeof(ReferenceStruct))]
     public class ProjectStruct : HirStruct
     {
+        [XmlIgnore]
+        public string Extension => Path.GetExtension(this.FullName);
         public double Version { get; set; }
 
         public ObservableCollection<ProjectProperty> Properties { get; } = new ObservableCollection<ProjectProperty>();
@@ -51,7 +53,7 @@ namespace ApplicationLayer.Models.SolutionPackage
 
         private void ReferenceItems_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
-            for (int i = 0; i < e.NewItems.Count; i++)
+            for (int i = 0; i < e.NewItems?.Count; i++)
             {
                 ReferenceFileStruct referenceFile = e.NewItems[i] as ReferenceFileStruct;
 
@@ -61,7 +63,7 @@ namespace ApplicationLayer.Models.SolutionPackage
 
         private void Folders_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
-            for (int i = 0; i < e.NewItems.Count; i++)
+            for (int i = 0; i < e.NewItems?.Count; i++)
             {
                 FolderStruct folder = e.NewItems[i] as FolderStruct;
                 folder.Parent = this;
@@ -75,7 +77,7 @@ namespace ApplicationLayer.Models.SolutionPackage
 
         private void Items_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
-            for (int i = 0; i < e.NewItems.Count; i++)
+            for (int i = 0; i < e.NewItems?.Count; i++)
             {
                 FileStruct item = e.NewItems[i] as FileStruct;
                 item.Parent = this;
@@ -91,7 +93,7 @@ namespace ApplicationLayer.Models.SolutionPackage
 
         private void SubFolders_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
-            for (int i = 0; i < e.NewItems.Count; i++)
+            for (int i = 0; i < e.NewItems?.Count; i++)
             {
                 FolderStruct folder = e.NewItems[i] as FolderStruct;
                 if (this.ItemPaths.Contains(folder.BasePath))
@@ -107,7 +109,7 @@ namespace ApplicationLayer.Models.SolutionPackage
 
         private void SubItems_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
-            for (int i = 0; i < e.NewItems.Count; i++)
+            for (int i = 0; i < e.NewItems?.Count; i++)
             {
                 FileStruct folder = e.NewItems[i] as FileStruct;
                 if (this.ItemPaths.Contains(folder.BasePath))
@@ -164,7 +166,7 @@ namespace ApplicationLayer.Models.SolutionPackage
 
         private void ReferenceFiles_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
-            for (int i = 0; i < e.NewItems.Count; i++)
+            for (int i = 0; i < e.NewItems?.Count; i++)
             {
                 ReferenceFileStruct item = e.NewItems[i] as ReferenceFileStruct;
                 item.Parent = this;

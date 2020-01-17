@@ -35,7 +35,7 @@ namespace ApplicationLayer.Models.SolutionPackage
 
         private void Folders_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
-            for (int i = e.NewStartingIndex; i < e.NewItems.Count; i++)
+            for (int i = 0; i < e.NewItems?.Count; i++)
             {
                 FolderStruct item = e.NewItems[i] as FolderStruct;
                 item.Parent = this;

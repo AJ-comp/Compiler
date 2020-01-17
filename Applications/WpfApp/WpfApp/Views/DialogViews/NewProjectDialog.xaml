@@ -64,7 +64,9 @@
                             <i:EventTrigger EventName="SelectedItemChanged">
                                 <mvvm:EventToCommand Command="{Binding CPUSelectedCommand}"
                                                  PassEventArgsToCommand="True"
-                                                 EventArgsConverter="{localConverters:SelectedItemConverter}" />
+                                                 EventArgsConverter="{localConverters:SelectedItemConverter}" 
+                                                 EventArgsConverterParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, 
+                                                                                                            AncestorType={x:Type local:NewProjectDialog}}}"/>
                             </i:EventTrigger>
                         </i:Interaction.Triggers>
                     </TreeView>

@@ -20,6 +20,7 @@
     <!-- Images related to Solution Explorer -->
     <BitmapImage x:Key="SolutionImagePath" UriSource="/Resources/Images/DarkTheme/solution.png"/>
     <BitmapImage x:Key="ProjectImagePath" UriSource="/Resources/Images/DarkTheme/project.png"/>
+    <BitmapImage x:Key="MiniCProjectImagePath" UriSource="/Resources/Images/DarkTheme/mcproject.png"/>
 
     <!-- Images related to ARM -->
     <BitmapImage x:Key="ARMImagePath" UriSource="/Resources/Images/DarkTheme/solution.png"/>

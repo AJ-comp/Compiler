@@ -2,6 +2,7 @@
 using ApplicationLayer.ViewModels.Messages;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Messaging;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.IO;
@@ -13,7 +14,26 @@ namespace WpfApp.ViewModels.WindowViewModels
     {
         public ObservableCollection<SolutionStruct> Solutions { get; } = new ObservableCollection<SolutionStruct>();
 
-        public RelayCommand doubleClickCommand;
+        private RelayCommand<HirStruct> selectedCommand;
+        public RelayCommand<HirStruct> SelectedCommand
+        {
+            get
+            {
+                if (this.selectedCommand == null)
+                    this.selectedCommand = new RelayCommand<HirStruct>(this.OnSelected);
+
+                return this.selectedCommand;
+            }
+        }
+        private void OnSelected(HirStruct selectedItem)
+        {
+            if(selectedItem is FileStruct)
+            {
+                Messenger.Default.Send(new OpenFileMessage(selectedItem as FileStruct));
+            }
+        }
+
+        private RelayCommand doubleClickCommand;
         public RelayCommand DoubleClickCommand
         {
             get
@@ -49,11 +69,9 @@ namespace WpfApp.ViewModels.WindowViewModels
 
         public void ReceivedCreateSolutionMessage(CreateSolutionMessage message)
         {
-            //this.solutionManager.Generator.GenerateSolution(message.SolutionPath, message.SolutionName, message.IsCreateSolutionFolder,
-            //                                                                message.Language, message.MachineTarget);
             this.Solutions.Add(SolutionStruct.Create(message.SolutionPath, message.SoltionName, message.Language, message.MachineTarget));
 
-            using (StreamWriter wr = new StreamWriter(message.FullPath))
+            using (StreamWriter wr = new StreamWriter(message.SolutionFullPath))
             {
                 XmlSerializer xs = new XmlSerializer(typeof(SolutionStruct));
                 xs.Serialize(wr, this.Solutions[0]);
@@ -75,18 +93,24 @@ namespace WpfApp.ViewModels.WindowViewModels
             using (StreamReader sr = new StreamReader(message.SolutionFullPath))
             {
                 XmlSerializer xs = new XmlSerializer(typeof(SolutionStruct));
-                this.Solutions.Add(xs.Deserialize(sr) as SolutionStruct);
+                SolutionStruct solution = xs.Deserialize(sr) as SolutionStruct;
+                solution.OPath = message.SolutionPath;
+                solution.FullName = message.SolutionName;
+
+                this.Solutions.Add(solution);
             }
 
             foreach(var item in this.Solutions[0].ProjectPaths)
             {
-                using (StreamReader sr = new StreamReader(Path.Combine(message.SolutionFullPath, item)))
+                using (StreamReader sr = new StreamReader(Path.Combine(message.SolutionPath, item)))
                 {
                     XmlSerializer xs = new XmlSerializer(typeof(ProjectStruct));
                     ProjectStruct project = xs.Deserialize(sr) as ProjectStruct;
+                    project.OPath = Path.GetDirectoryName(item);
+                    project.FullName = Path.GetFileName(item);
+                    this.Solutions[0].Projects.Add(project);    // for connect with the parent node (solution)
 
                     project.SyncWithXMLData();
-                    this.Solutions[0].Projects.Add(project);
                 }
             }
         }

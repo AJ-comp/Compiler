@@ -5,6 +5,8 @@
              xmlns:mvvm="http://www.galasoft.ch/mvvmlight"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:localConverters="clr-namespace:ApplicationLayer.WpfApp.Converters"
+             xmlns:logicConverters="clr-namespace:ApplicationLayer.WpfApp.Converters.LogicConverters"
              xmlns:local="clr-namespace:ApplicationLayer.WpfApp.Views.WindowViews"
              mc:Ignorable="d" 
              DataContext="{Binding SolutionExplorerWindow, Source={StaticResource Locator}}">
@@ -19,9 +21,18 @@
         <TextBox Grid.Row="0"/>
         <TextBox Grid.Row="1"/>
         <TreeView Grid.Row="2" FontSize="13" ItemsSource="{Binding Solutions}">
+            <TreeView.ItemContainerStyle>
+                <Style TargetType="TreeViewItem">
+                    <Setter Property="IsSelected" Value="{Binding IsSelected, Mode=TwoWay}"/>
+                </Style>
+            </TreeView.ItemContainerStyle>
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="SelectedItemChanged">
-                    <mvvm:EventToCommand Command="{Binding SelectedCommand}"/>
+                    <mvvm:EventToCommand Command="{Binding SelectedCommand}"
+                                                            PassEventArgsToCommand="True"
+                                                            EventArgsConverter="{localConverters:SelectedItemConverter}"
+                                                            EventArgsConverterParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, 
+                                                                                                                        AncestorType={x:Type local:SolutionExplorer}}}"/>
                 </i:EventTrigger>
                 <i:EventTrigger EventName="MouseDoubleClick">
                     <mvvm:EventToCommand Command="{Binding MouseDoubleClickCommand}"/>

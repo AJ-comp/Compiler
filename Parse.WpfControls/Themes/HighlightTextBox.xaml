@@ -7,14 +7,8 @@
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="/Parse.WpfControls;component/Resources/Styles/ImageStyle.xaml"/>
     </ResourceDictionary.MergedDictionaries>
-    
-    <Style TargetType="{x:Type host:HighlightTextBox}">
-        <Style.Triggers>
-            <!--<DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=
-                        {x:Type views:CompletionList}}, Path=IsFilteringKeyword}" Value="True">
-                </DataTrigger>-->
-        </Style.Triggers>
 
+    <Style TargetType="{x:Type host:HighlightTextBox}">
         <Setter Property="AcceptsReturn" Value="True" />
         <Setter Property="HorizontalScrollBarVisibility" Value="Visible" />
         <Setter Property="VerticalScrollBarVisibility" Value="Visible" />

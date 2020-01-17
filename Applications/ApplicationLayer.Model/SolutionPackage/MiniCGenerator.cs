@@ -5,7 +5,7 @@ namespace ApplicationLayer.Models.SolutionPackage
 {
     public class MiniCGenerator : ProjectGenerator
     {
-        public override string Extension { get; } = "mc";
+        public override string Extension { get; } = LanguageExtensions.MiniC;
 
         public override ProjectStruct CreateDefaultProject(string projectPath, string projectName, Target target, HirStruct parent)
         {

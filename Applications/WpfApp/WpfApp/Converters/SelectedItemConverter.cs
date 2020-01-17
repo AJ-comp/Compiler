@@ -1,4 +1,7 @@
 ﻿using ApplicationLayer.Common.Utilities;
+using ApplicationLayer.Models.SolutionPackage;
+using ApplicationLayer.WpfApp.Views.DialogViews;
+using ApplicationLayer.WpfApp.Views.WindowViews;
 using System.Windows;
 
 namespace ApplicationLayer.WpfApp.Converters
@@ -7,10 +10,22 @@ namespace ApplicationLayer.WpfApp.Converters
     {
         public override object Convert(object value, object parameter)
         {
-
             if (!(value is RoutedPropertyChangedEventArgs<object> arg) || arg.NewValue == null) return null;
 
-            return arg.NewValue as ClassHierarchyData;
+            object result = null;
+            if (parameter is NewProjectDialog) result = arg.NewValue as ClassHierarchyData;
+            else if (parameter is SolutionExplorer) result = arg.NewValue as HirStruct;
+
+            return result;
+        }
+    }
+
+    class ItemRightClickConverter : EventArgsConverterExtension<ItemRightClickConverter>
+    {
+        public override object Convert(object value, object parameter)
+        {
+            //MouseButtonEventArgs
+            throw new System.NotImplementedException();
         }
     }
 }

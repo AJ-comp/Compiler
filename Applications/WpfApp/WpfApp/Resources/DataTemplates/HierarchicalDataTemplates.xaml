@@ -1,41 +1,135 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+                    xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
+                    xmlns:lex="http://wpflocalizeextension.codeplex.com"
                     xmlns:models="clr-namespace:ApplicationLayer.Models;assembly=ApplicationLayer.Models"
+                    xmlns:system="clr-namespace:System.Data;assembly=System.Data"
+                    xmlns:localConverters="clr-namespace:ApplicationLayer.WpfApp.Converters"
                     xmlns:solutionPackage="clr-namespace:ApplicationLayer.Models.SolutionPackage;assembly=ApplicationLayer.Models"
-                    xmlns:utilities="clr-namespace:ApplicationLayer.Common.Utilities;assembly=ApplicationLayer.Common"
-                    xmlns:converters="clr-namespace:WpfApp.Converters"
-                    xmlns:local="clr-namespace:WpfApp.Resources.DataTemplates">
+                    xmlns:utilities="clr-namespace:ApplicationLayer.Common.Utilities;assembly=ApplicationLayer.Common">
 
     <HierarchicalDataTemplate DataType="{x:Type solutionPackage:SolutionStruct}" ItemsSource="{Binding Projects}">
-        <StackPanel Orientation="Horizontal">
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch">
             <Image Width="16" Height="16" Margin="0 0 5 0" Source="{DynamicResource SolutionImagePath}" />
             <TextBlock Text="{Binding NameWithoutExtension}"/>
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="PreviewMouseRightButtonDown">
+                    <ei:ChangePropertyAction PropertyName="IsSelected" Value="true" TargetObject="{Binding}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+            <StackPanel.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="{lex:Loc Key=Open}"/>
+                    <Separator/>
+                    <MenuItem Command="Cut"/>
+                    <MenuItem Command="Copy"/>
+                </ContextMenu>
+            </StackPanel.ContextMenu>
         </StackPanel>
     </HierarchicalDataTemplate>
 
     <HierarchicalDataTemplate DataType="{x:Type solutionPackage:ProjectStruct}" ItemsSource="{Binding Children}">
         <StackPanel Orientation="Horizontal">
-            <Image Width="16" Height="16" Margin="0 0 5 0" Source="{DynamicResource ProjectImagePath}"/>
+            <Image x:Name="projectImage" Width="16" Height="16" Margin="0 0 5 0" 
+                        Source="{Binding Extension, Converter={localConverters:ToResourceKeyConverter}, ConverterParameter='Extension'}"/>
             <TextBlock Text="{Binding NameWithoutExtension}"/>
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="PreviewMouseRightButtonDown">
+                    <ei:ChangePropertyAction PropertyName="IsSelected" Value="true" TargetObject="{Binding}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+            <StackPanel.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="{lex:Loc Key=Open}"/>
+                    <Separator/>
+                    <MenuItem Command="Cut"/>
+                    <MenuItem Command="Copy"/>
+                </ContextMenu>
+            </StackPanel.ContextMenu>
         </StackPanel>
     </HierarchicalDataTemplate>
 
 
-    <HierarchicalDataTemplate DataType="{x:Type solutionPackage:ReferenceStruct}">
-        <TextBlock Text="{Binding NameWithoutExtension}"/>
+    <HierarchicalDataTemplate DataType="{x:Type solutionPackage:ReferenceStruct}" ItemsSource="{Binding Items}">
+        <StackPanel Orientation="Horizontal">
+            <Image Width="16" Height="16" Margin="0 0 5 0" Source="{DynamicResource ProjectImagePath}"/>
+            <TextBlock Text="{Binding NameWithoutExtension}"/>
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="PreviewMouseRightButtonDown">
+                    <ei:ChangePropertyAction PropertyName="IsSelected" Value="true" TargetObject="{Binding}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+            <StackPanel.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="{lex:Loc Key=Open}"/>
+                    <Separator/>
+                    <MenuItem Command="Cut"/>
+                    <MenuItem Command="Copy"/>
+                </ContextMenu>
+            </StackPanel.ContextMenu>
+        </StackPanel>
     </HierarchicalDataTemplate>
 
     <HierarchicalDataTemplate DataType="{x:Type solutionPackage:FolderStruct}" ItemsSource="{Binding Children}">
-        <TextBlock Text="{Binding FullName}"/>
+        <StackPanel Orientation="Horizontal">
+            <Image Width="16" Height="16" Margin="0 0 5 0" Source="{DynamicResource ProjectImagePath}"/>
+            <TextBlock Text="{Binding FullName}"/>
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="PreviewMouseRightButtonDown">
+                    <ei:ChangePropertyAction PropertyName="IsSelected" Value="true" TargetObject="{Binding}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+            <StackPanel.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="{lex:Loc Key=Open}"/>
+                    <Separator/>
+                    <MenuItem Command="Cut"/>
+                    <MenuItem Command="Copy"/>
+                </ContextMenu>
+            </StackPanel.ContextMenu>
+        </StackPanel>
     </HierarchicalDataTemplate>
 
 
     <DataTemplate DataType="{x:Type solutionPackage:ReferenceFileStruct}">
-        <TextBlock Text="{Binding FullName}"/>
+        <StackPanel Orientation="Horizontal">
+            <Image Width="16" Height="16" Margin="0 0 5 0" Source="{DynamicResource ProjectImagePath}"/>
+            <TextBlock Text="{Binding NameWithoutExtension}"/>
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="PreviewMouseRightButtonDown">
+                    <ei:ChangePropertyAction PropertyName="IsSelected" Value="true" TargetObject="{Binding}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+            <StackPanel.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="{lex:Loc Key=Open}"/>
+                    <Separator/>
+                    <MenuItem Command="Cut"/>
+                    <MenuItem Command="Copy"/>
+                </ContextMenu>
+            </StackPanel.ContextMenu>
+        </StackPanel>
     </DataTemplate>
 
     <DataTemplate DataType="{x:Type solutionPackage:FileStruct}">
-        <TextBlock Text="{Binding FullName}"/>
+        <StackPanel Orientation="Horizontal">
+            <Image Width="16" Height="16" Margin="0 0 5 0" Source="{DynamicResource ProjectImagePath}"/>
+            <TextBlock Text="{Binding FullName}"/>
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="PreviewMouseRightButtonDown">
+                    <ei:ChangePropertyAction PropertyName="IsSelected" Value="true" TargetObject="{Binding}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+            <StackPanel.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="{lex:Loc Key=Open}"/>
+                    <Separator/>
+                    <MenuItem Command="Cut"/>
+                    <MenuItem Command="Copy"/>
+                </ContextMenu>
+            </StackPanel.ContextMenu>
+        </StackPanel>
     </DataTemplate>
 
 

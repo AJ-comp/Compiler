@@ -1,8 +1,4 @@
-﻿using ApplicationLayer.Models;
-using ApplicationLayer.ViewModels.DialogViewModels;
-using ApplicationLayer.ViewModels.DocumentTypeViewModels;
-using ApplicationLayer.WpfApp.ViewModels;
-using ApplicationLayer.WpfApp.Views.DialogViews;
+﻿using ApplicationLayer.WpfApp.ViewModels;
 using Parse.WpfControls.SyntaxEditor.EventArgs;
 using System.Windows;
 using System.Windows.Forms;

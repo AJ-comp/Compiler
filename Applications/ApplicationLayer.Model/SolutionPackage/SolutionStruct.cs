@@ -3,12 +3,13 @@ using Parse.FrontEnd.Grammars;
 using Parse.FrontEnd.Grammars.MiniC;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
+using System.ComponentModel;
 using System.IO;
 using System.Xml.Serialization;
 
 namespace ApplicationLayer.Models.SolutionPackage
 {
-    public class HirStruct
+    public class HirStruct : INotifyPropertyChanged
     {
         [XmlIgnore]
         public string OPath { get; set; } = string.Empty;
@@ -25,6 +26,18 @@ namespace ApplicationLayer.Models.SolutionPackage
         [XmlIgnore]
         public string RelativePath => Path.Combine(this.OPath, this.FullName);
 
+        private bool isSelected;
+        [XmlIgnore]
+        public bool IsSelected
+        {
+            get => this.isSelected;
+            set
+            {
+                this.isSelected = value;
+                this.OnPropertyChanged("IsSelected");
+            }
+        }
+
         [XmlIgnore]
         public string BasePath
         {
@@ -40,6 +53,17 @@ namespace ApplicationLayer.Models.SolutionPackage
                 }
 
                 return result;
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected void OnPropertyChanged(string name)
+        {
+            PropertyChangedEventHandler handler = PropertyChanged;
+            if (handler != null)
+            {
+                handler(this, new PropertyChangedEventArgs(name));
             }
         }
     }
@@ -63,7 +87,7 @@ namespace ApplicationLayer.Models.SolutionPackage
 
         private void Projects_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
-            for(int i=0; i<e.NewItems.Count; i++)
+            for(int i=0; i<e.NewItems?.Count; i++)
             {
                 ProjectStruct child = e.NewItems[i] as ProjectStruct;
                 child.Parent = this;
