@@ -79,6 +79,15 @@ namespace ApplicationLayer.WpfApp.Properties {
         }
         
         /// <summary>
+        ///   Add과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        internal static string Add {
+            get {
+                return ResourceManager.GetString("Add", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   All close except this window과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         internal static string AllCloseExceptThisWindow {
@@ -160,6 +169,15 @@ namespace ApplicationLayer.WpfApp.Properties {
         }
         
         /// <summary>
+        ///   Existing Item과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        internal static string ExistItem {
+            get {
+                return ResourceManager.GetString("ExistItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Explanation과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         internal static string Explanation {
@@ -228,6 +246,24 @@ namespace ApplicationLayer.WpfApp.Properties {
         internal static string New {
             get {
                 return ResourceManager.GetString("New", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   New Folder과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        internal static string NewFolder {
+            get {
+                return ResourceManager.GetString("NewFolder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   New Item과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        internal static string NewItem {
+            get {
+                return ResourceManager.GetString("NewItem", resourceCulture);
             }
         }
         

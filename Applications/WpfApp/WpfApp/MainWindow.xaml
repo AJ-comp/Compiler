@@ -8,6 +8,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:advanceControls="clr-namespace:Wpf.UI.Advance;assembly=Wpf.UI.Advance"
     xmlns:behaviors="clr-namespace:ApplicationLayer.WpfApp.Behaviors"
+    xmlns:logicConverters="clr-namespace:ApplicationLayer.WpfApp.Converters.LogicConverters"
     xmlns:windowViews="clr-namespace:ApplicationLayer.WpfApp.Views.WindowViews"
     xmlns:lex="http://wpflocalizeextension.codeplex.com" 
     lex:LocalizeDictionary.DesignCulture="en"
@@ -31,6 +32,10 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </advanceControls:AdvancedWindow.Resources>
+
+    <advanceControls:AdvancedWindow.InputBindings>
+        <KeyBinding Key="N" Modifiers="Ctrl+Shift" Command="{Binding NewProjectCommand}"/>
+    </advanceControls:AdvancedWindow.InputBindings>
 
     <Grid>
         <Grid.RowDefinitions>

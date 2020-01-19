@@ -3,6 +3,7 @@ using ApplicationLayer.ViewModels.DialogViewModels;
 using ApplicationLayer.WpfApp.Views.DialogViews;
 using System;
 using System.Globalization;
+using System.Windows;
 using System.Windows.Data;
 using System.Windows.Markup;
 
@@ -12,7 +13,7 @@ namespace ApplicationLayer.WpfApp.Converters.LogicConverters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            MainWindow parentWindow = value as MainWindow;
+            Window parentWindow = value as Window;
 
             return new Func<Document>(() =>
             {

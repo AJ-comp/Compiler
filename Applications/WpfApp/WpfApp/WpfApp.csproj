@@ -343,6 +343,18 @@
   <ItemGroup>
     <Resource Include="Resources\Images\DarkTheme\mcproject.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Basic\close_folder_16.png" />
+    <Resource Include="Resources\Images\Basic\close_folder_20.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Basic\open_folder_16.png" />
+    <Resource Include="Resources\Images\Basic\open_folder_20.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\DarkTheme\reference_16.png" />
+    <Resource Include="Resources\Images\DarkTheme\reference_20.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>

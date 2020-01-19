@@ -22,6 +22,7 @@
                 <ContextMenu>
                     <MenuItem Header="{lex:Loc Key=Open}"/>
                     <Separator/>
+                    <MenuItem Style="{DynamicResource NewProjectMenuItem}"/>
                     <MenuItem Command="Cut"/>
                     <MenuItem Command="Copy"/>
                 </ContextMenu>
@@ -43,7 +44,11 @@
                 <ContextMenu>
                     <MenuItem Header="{lex:Loc Key=Open}"/>
                     <Separator/>
-                    <MenuItem Command="Cut"/>
+                    <MenuItem Header="{lex:Loc Key=Add}">
+                        <MenuItem Header="{lex:Loc Key=NewItem}"/>
+                        <MenuItem Header="{lex:Loc Key=ExistItem}"/>
+                        <MenuItem Header="{lex:Loc Key=NewFolder}"/>
+                    </MenuItem>
                     <MenuItem Command="Copy"/>
                 </ContextMenu>
             </StackPanel.ContextMenu>
@@ -53,7 +58,7 @@
 
     <HierarchicalDataTemplate DataType="{x:Type solutionPackage:ReferenceStruct}" ItemsSource="{Binding Items}">
         <StackPanel Orientation="Horizontal">
-            <Image Width="16" Height="16" Margin="0 0 5 0" Source="{DynamicResource ProjectImagePath}"/>
+            <Image Width="16" Height="16" Margin="0 0 5 0" Source="{DynamicResource ReferenceImagePath}"/>
             <TextBlock Text="{Binding NameWithoutExtension}"/>
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="PreviewMouseRightButtonDown">
@@ -73,7 +78,7 @@
 
     <HierarchicalDataTemplate DataType="{x:Type solutionPackage:FolderStruct}" ItemsSource="{Binding Children}">
         <StackPanel Orientation="Horizontal">
-            <Image Width="16" Height="16" Margin="0 0 5 0" Source="{DynamicResource ProjectImagePath}"/>
+            <Image x:Name="image" Margin="0 0 5 0" Source="{DynamicResource CloseFolderImagePath}"/>
             <TextBlock Text="{Binding FullName}"/>
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="PreviewMouseRightButtonDown">
@@ -94,7 +99,7 @@
 
     <DataTemplate DataType="{x:Type solutionPackage:ReferenceFileStruct}">
         <StackPanel Orientation="Horizontal">
-            <Image Width="16" Height="16" Margin="0 0 5 0" Source="{DynamicResource ProjectImagePath}"/>
+            <Image Width="16" Height="16" Margin="0 0 5 0" Source="{DynamicResource ReferenceImagePath}"/>
             <TextBlock Text="{Binding NameWithoutExtension}"/>
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="PreviewMouseRightButtonDown">

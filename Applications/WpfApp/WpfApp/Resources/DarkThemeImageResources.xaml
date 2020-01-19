@@ -21,6 +21,9 @@
     <BitmapImage x:Key="SolutionImagePath" UriSource="/Resources/Images/DarkTheme/solution.png"/>
     <BitmapImage x:Key="ProjectImagePath" UriSource="/Resources/Images/DarkTheme/project.png"/>
     <BitmapImage x:Key="MiniCProjectImagePath" UriSource="/Resources/Images/DarkTheme/mcproject.png"/>
+    <BitmapImage x:Key="ReferenceImagePath" UriSource="/Resources/Images/DarkTheme/reference_20.png"/>
+    <BitmapImage x:Key="CloseFolderImagePath" UriSource="/Resources/Images/Basic/close_folder_20.png"/>
+    <BitmapImage x:Key="OpenFolderImagePath" UriSource="/Resources/Images/Basic/open_folder_20.png"/>
 
     <!-- Images related to ARM -->
     <BitmapImage x:Key="ARMImagePath" UriSource="/Resources/Images/DarkTheme/solution.png"/>

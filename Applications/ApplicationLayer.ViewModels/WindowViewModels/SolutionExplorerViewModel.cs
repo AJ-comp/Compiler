@@ -49,6 +49,57 @@ namespace WpfApp.ViewModels.WindowViewModels
 
         }
 
+
+        #region Command related to ContextMenu
+        private RelayCommand newItemCommand;
+        public RelayCommand NewItemCommand
+        {
+            get
+            {
+                if (this.newItemCommand == null)
+                    this.newItemCommand = new RelayCommand(this.OnNewItemMenuClick);
+
+                return this.newItemCommand;
+            }
+        }
+        private void OnNewItemMenuClick()
+        {
+
+        }
+
+        private RelayCommand existItemCommand;
+        public RelayCommand ExistItemCommand
+        {
+            get
+            {
+                if (this.existItemCommand == null)
+                    this.existItemCommand = new RelayCommand(this.OnExistItemMenuClick);
+
+                return this.existItemCommand;
+            }
+        }
+        private void OnExistItemMenuClick()
+        {
+        }
+
+        private RelayCommand newFolderCommand;
+        public RelayCommand NewFolderCommand
+        {
+            get
+            {
+                if (this.newFolderCommand == null)
+                    this.newFolderCommand = new RelayCommand(this.OnNewFolderMenuClick);
+
+                return this.newFolderCommand;
+            }
+        }
+        private void OnNewFolderMenuClick()
+        {
+
+        }
+        #endregion
+
+
         // for test
         public SolutionExplorerViewModel()
         {

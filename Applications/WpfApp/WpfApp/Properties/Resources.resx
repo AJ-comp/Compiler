@@ -213,4 +213,16 @@
   <data name="ProjectOrSolution" xml:space="preserve">
     <value>Project/Solution</value>
   </data>
+  <data name="Add" xml:space="preserve">
+    <value>Add</value>
+  </data>
+  <data name="NewItem" xml:space="preserve">
+    <value>New Item</value>
+  </data>
+  <data name="ExistItem" xml:space="preserve">
+    <value>Existing Item</value>
+  </data>
+  <data name="NewFolder" xml:space="preserve">
+    <value>New Folder</value>
+  </data>
 </root>

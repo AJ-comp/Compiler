@@ -4,24 +4,42 @@
                     xmlns:logicConverters="clr-namespace:ApplicationLayer.WpfApp.Converters.LogicConverters"
                     xmlns:main="clr-namespace:ApplicationLayer.WpfApp"
                     xmlns:local="clr-namespace:WpfApp.Resources">
+
+    <Style x:Key="NewProjectMenuItem" TargetType="{x:Type MenuItem}">
+        <Setter Property="Header" Value="{lex:Loc Key=Project}"/>
+        <Setter Property="InputGestureText" Value="Ctrl+Shift+N"/>
+        <Setter Property="Command" Value="{Binding NewProjectCommand}"/>
+        <Setter Property="CommandParameter" Value="{Binding RelativeSource={RelativeSource Mode=FindAncestor, 
+                                                                                            AncestorType={x:Type main:MainWindow}}, 
+                                                                                            Converter={logicConverters:ProjectCreateLogicConverter}}"/>
+    </Style>
+
     <Menu x:Key="MainWindowMenus" VerticalAlignment="Center" DockPanel.Dock="Left" HorizontalAlignment="Left" Margin="8,0,0,0">
         <MenuItem Header="{lex:Loc Key=_File}" InputGestureText="Alt+F">
             <!-- New -->
             <MenuItem Header="{lex:Loc Key=New}" InputGestureText="Alt+N">
+                <MenuItem.InputBindings>
+                    <KeyBinding Key="N" Modifiers="Alt"/>
+                </MenuItem.InputBindings>
                 <MenuItem.Icon>
                     <Image Width="16" Height="16" Source="{StaticResource NewFileMenuImagePath}"/>
                 </MenuItem.Icon>
-                <MenuItem Header="{lex:Loc Key=Project}" InputGestureText="Ctrl+Shift+N" 
-                                    Command="{Binding NewProjectCommand}"
-                                    CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, 
-                                                                                    AncestorType={x:Type main:MainWindow}}, 
-                                                                                    Converter={logicConverters:ProjectCreateLogicConverter}}"/>
-                <MenuItem Header="{lex:Loc Key=_File}" InputGestureText="Ctrl+N" 
+                
+                <!-- Project -->
+                <MenuItem Style="{StaticResource NewProjectMenuItem}"/>
+
+                <!-- File -->
+                <MenuItem Header="{lex:Loc Key=_File}" InputGestureText="Ctrl+N">
+                    <MenuItem.InputBindings>
+                        <KeyBinding Key="N" Modifiers="Ctrl"
                                     Command="{Binding NewFileCommand}"
                                     CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, 
                                                                                         AncestorType={x:Type main:MainWindow}}, 
                                                                                         Converter={logicConverters:FileCreateLogicConverter}}"/>
+                    </MenuItem.InputBindings>
+                </MenuItem>
             </MenuItem>
+            
             <!-- Open -->
             <MenuItem Header="{lex:Loc Key=Open}" InputGestureText="Ctrl+O" >
                 <MenuItem.Icon>
@@ -32,15 +50,18 @@
                                     CommandParameter="{Binding Converter={logicConverters:OpenSolutionLogicConverter}}"/>
             </MenuItem>
         </MenuItem>
-        
+
+        <!-- Edit -->
         <MenuItem Header="{lex:Loc Key=_Edit}" InputGestureText="Alt+E"/>
-        
+
+        <!-- View -->
         <MenuItem Header="{lex:Loc Key=View}" InputGestureText="Alt+V">
             <MenuItem Header="{lex:Loc Key=Grammar}" InputGestureText="Alt+G" Command="{Binding GrammarCommand}"/>
             <MenuItem Header="{lex:Loc Key=ParsingHistory}" InputGestureText="Ctrl+Shift+H" Command="{Binding ParsingHistoryCommand}"/>
             <MenuItem Header="{lex:Loc Key=ParseTree}" InputGestureText="Ctrl+Shift+T" Command="{Binding ParseTreeCommand}"/>
         </MenuItem>
 
+        <!-- Tools -->
         <MenuItem Header="{lex:Loc Key=Tools}" InputGestureText="Alt+T">
             <MenuItem Header="{lex:Loc Key=Options}" InputGestureText="Alt+O" Command="{Binding OptionCommand}"/>
         </MenuItem>
