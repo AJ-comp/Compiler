@@ -225,4 +225,7 @@
   <data name="NewFolder" xml:space="preserve">
     <value>새 폴더</value>
   </data>
+  <data name="ProjectPath" xml:space="preserve">
+    <value>프로젝트 경로</value>
+  </data>
 </root>

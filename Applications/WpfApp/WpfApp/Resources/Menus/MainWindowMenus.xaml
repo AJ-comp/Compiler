@@ -2,17 +2,8 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:lex="http://wpflocalizeextension.codeplex.com" 
                     xmlns:logicConverters="clr-namespace:ApplicationLayer.WpfApp.Converters.LogicConverters"
-                    xmlns:main="clr-namespace:ApplicationLayer.WpfApp"
-                    xmlns:local="clr-namespace:WpfApp.Resources">
-
-    <Style x:Key="NewProjectMenuItem" TargetType="{x:Type MenuItem}">
-        <Setter Property="Header" Value="{lex:Loc Key=Project}"/>
-        <Setter Property="InputGestureText" Value="Ctrl+Shift+N"/>
-        <Setter Property="Command" Value="{Binding NewProjectCommand}"/>
-        <Setter Property="CommandParameter" Value="{Binding RelativeSource={RelativeSource Mode=FindAncestor, 
-                                                                                            AncestorType={x:Type main:MainWindow}}, 
-                                                                                            Converter={logicConverters:ProjectCreateLogicConverter}}"/>
-    </Style>
+                    xmlns:commands="clr-namespace:ApplicationLayer.WpfApp.Commands"
+                    xmlns:main="clr-namespace:ApplicationLayer.WpfApp">
 
     <Menu x:Key="MainWindowMenus" VerticalAlignment="Center" DockPanel.Dock="Left" HorizontalAlignment="Left" Margin="8,0,0,0">
         <MenuItem Header="{lex:Loc Key=_File}" InputGestureText="Alt+F">
@@ -26,7 +17,7 @@
                 </MenuItem.Icon>
                 
                 <!-- Project -->
-                <MenuItem Style="{StaticResource NewProjectMenuItem}"/>
+                <MenuItem Command="{x:Static commands:MenuActionCommands.CreateNewSolution}"/>
 
                 <!-- File -->
                 <MenuItem Header="{lex:Loc Key=_File}" InputGestureText="Ctrl+N">

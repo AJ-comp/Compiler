@@ -3,8 +3,7 @@
                     xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
                     xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
                     xmlns:lex="http://wpflocalizeextension.codeplex.com"
-                    xmlns:models="clr-namespace:ApplicationLayer.Models;assembly=ApplicationLayer.Models"
-                    xmlns:system="clr-namespace:System.Data;assembly=System.Data"
+                    xmlns:commands="clr-namespace:ApplicationLayer.WpfApp.Commands"
                     xmlns:localConverters="clr-namespace:ApplicationLayer.WpfApp.Converters"
                     xmlns:solutionPackage="clr-namespace:ApplicationLayer.Models.SolutionPackage;assembly=ApplicationLayer.Models"
                     xmlns:utilities="clr-namespace:ApplicationLayer.Common.Utilities;assembly=ApplicationLayer.Common">
@@ -22,7 +21,7 @@
                 <ContextMenu>
                     <MenuItem Header="{lex:Loc Key=Open}"/>
                     <Separator/>
-                    <MenuItem Style="{DynamicResource NewProjectMenuItem}"/>
+                    <MenuItem Header="{lex:Loc Key=Project}" Command="{x:Static commands:MenuActionCommands.AddNewProject}"/>
                     <MenuItem Command="Cut"/>
                     <MenuItem Command="Copy"/>
                 </ContextMenu>

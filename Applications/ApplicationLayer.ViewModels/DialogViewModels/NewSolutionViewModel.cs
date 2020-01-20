@@ -4,42 +4,53 @@ using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using Parse.BackEnd.Target;
 using System;
-using System.IO;
+using System.Linq;
 
 namespace ApplicationLayer.ViewModels.DialogViewModels
 {
-    public class NewProjectViewModel : DialogViewModel
+    public class NewSolutionViewModel : DialogViewModel
     {
         public ProjectSelectionViewModel ProjectSelection { get; } = new ProjectSelectionViewModel();
 
-        public string SolutionFullPath { get; set; } = string.Empty;
-        public string SolutionPath => Path.GetDirectoryName(this.SolutionFullPath);
-
-        private string projectPath = string.Empty;
-        public string ProjectPath
+        private string solutionName = string.Empty;
+        public string SolutionName
         {
-            get => this.projectPath;
+            get => this.solutionName;
             set
             {
-                this.projectPath = value;
-                this.RaisePropertyChanged("ProjectPath");
-            }
-        }
+                if (this.solutionName == value) return;
 
-        private string projectName = string.Empty;
-        public string ProjectName
-        {
-            get => this.projectName;
-            set
-            {
-                if (this.projectName == value) return;
-
-                this.projectName = value;
-                this.RaisePropertyChanged("ProjectName");
+                this.solutionName = value;
+                this.RaisePropertyChanged("SolutionName");
+                this.RaisePropertyChanged("SolutionFullPath");
 
                 CreateCommand.RaiseCanExecuteChanged();
             }
         }
+
+        private string solutionPath = string.Empty;
+        public string SolutionPath
+        {
+            get => this.solutionPath;
+            set
+            {
+                if (this.solutionPath == value) return;
+
+                this.solutionPath = value;
+                if (this.SolutionPath.Length > 0)
+                {
+                    if (this.solutionPath.Last() != '\\')
+                        this.solutionPath += "\\";
+                }
+                this.RaisePropertyChanged("SolutionPath");
+                this.RaisePropertyChanged("SolutionFullPath");
+
+                CreateCommand.RaiseCanExecuteChanged();
+            }
+        }
+
+        public bool CreateSolutionFolder { get; set; }
+        public string SolutionFullPath { get => this.SolutionPath + this.solutionName; }
 
         private RelayCommand<Action> searchCommand;
         public RelayCommand<Action> SearchCommand
@@ -70,7 +81,7 @@ namespace ApplicationLayer.ViewModels.DialogViewModels
         private void OnCreate(Action action)
         {
             Target target = Activator.CreateInstance(this.ProjectSelection.SelectedTerminalItem) as Target;
-            Messenger.Default.Send(new AddProjectMessage(this.SolutionFullPath, this.projectPath, this.projectName, this.ProjectSelection.SelectedProject.Grammar, target));
+            Messenger.Default.Send(new CreateSolutionMessage(this.SolutionPath, this.SolutionName, this.CreateSolutionFolder, this.ProjectSelection.SelectedProject.Grammar, target));
 
             action?.Invoke();
         }
@@ -79,21 +90,21 @@ namespace ApplicationLayer.ViewModels.DialogViewModels
         {
             if (this.ProjectSelection.SelectedTerminalItem == null) return false;
             if (this.ProjectSelection.SelectedProject == null) return false;
-            if (string.IsNullOrEmpty(this.SolutionFullPath)) return false;
-            if (string.IsNullOrEmpty(this.projectName)) return false;
+            if (string.IsNullOrEmpty(this.solutionPath)) return false;
+            if (string.IsNullOrEmpty(this.solutionName)) return false;
 
             return true;
         }
 
-        public NewProjectViewModel()
+        public NewSolutionViewModel()
         {
             this.ProjectSelection.PropertyChanged += ProjectSelection_PropertyChanged;
         }
 
         private void ProjectSelection_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            if(e.PropertyName == "SelectedTerminalItem") CreateCommand.RaiseCanExecuteChanged();
-            else if(e.PropertyName == "SelectedProject") CreateCommand.RaiseCanExecuteChanged();
+            if (e.PropertyName == "SelectedTerminalItem") CreateCommand.RaiseCanExecuteChanged();
+            else if (e.PropertyName == "SelectedProject") CreateCommand.RaiseCanExecuteChanged();
         }
     }
 }

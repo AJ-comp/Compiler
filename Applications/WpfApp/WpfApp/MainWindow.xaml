@@ -8,7 +8,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:advanceControls="clr-namespace:Wpf.UI.Advance;assembly=Wpf.UI.Advance"
     xmlns:behaviors="clr-namespace:ApplicationLayer.WpfApp.Behaviors"
-    xmlns:logicConverters="clr-namespace:ApplicationLayer.WpfApp.Converters.LogicConverters"
+    xmlns:commands="clr-namespace:ApplicationLayer.WpfApp.Commands"
     xmlns:windowViews="clr-namespace:ApplicationLayer.WpfApp.Views.WindowViews"
     xmlns:lex="http://wpflocalizeextension.codeplex.com" 
     lex:LocalizeDictionary.DesignCulture="en"
@@ -34,7 +34,7 @@
     </advanceControls:AdvancedWindow.Resources>
 
     <advanceControls:AdvancedWindow.InputBindings>
-        <KeyBinding Key="N" Modifiers="Ctrl+Shift" Command="{Binding NewProjectCommand}"/>
+        <KeyBinding Key="N" Modifiers="Ctrl+Shift" Command="{x:Static commands:MenuActionCommands.CreateNewSolution}"/>
     </advanceControls:AdvancedWindow.InputBindings>
 
     <Grid>
@@ -74,8 +74,6 @@
 
         <ContentControl Grid.Row="4"
                                  Content="{StaticResource MainWindowStatusBar}"/>
-
-
     </Grid>
 
     <i:Interaction.Behaviors>

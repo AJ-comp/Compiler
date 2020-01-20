@@ -41,4 +41,33 @@ namespace ApplicationLayer.ViewModels.Messages
             this.SolutionFullPath = solutionFullPath;
         }
     }
+
+    public class AddProjectMessage : MessageBase
+    {
+        public string SolutionFullPath { get; }
+        public string ProjectPath { get; }
+        public string ProjectName { get; }
+        public Grammar Language { get; }
+        public Target MachineTarget { get; }
+
+        public string ProjectFullPath => Path.Combine(this.ProjectPath, this.ProjectName);
+
+        public AddProjectMessage(string SolutionFullPath, string projectPath, string projectName, Grammar language, Target machineTarget)
+        {
+            this.ProjectPath = projectPath;
+            this.ProjectName = projectName;
+            this.Language = language;
+            this.MachineTarget = machineTarget;
+        }
+    }
+
+    public class LoadProjectMessage : MessageBase
+    {
+        public string ProjectFullPath { get; }
+
+        public LoadProjectMessage(string projectFullPath)
+        {
+            ProjectFullPath = projectFullPath;
+        }
+    }
 }

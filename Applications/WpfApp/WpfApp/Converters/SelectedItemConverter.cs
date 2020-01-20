@@ -1,6 +1,6 @@
 ﻿using ApplicationLayer.Common.Utilities;
 using ApplicationLayer.Models.SolutionPackage;
-using ApplicationLayer.WpfApp.Views.DialogViews;
+using ApplicationLayer.WpfApp.Views.SubViews;
 using ApplicationLayer.WpfApp.Views.WindowViews;
 using System.Windows;
 
@@ -13,7 +13,7 @@ namespace ApplicationLayer.WpfApp.Converters
             if (!(value is RoutedPropertyChangedEventArgs<object> arg) || arg.NewValue == null) return null;
 
             object result = null;
-            if (parameter is NewProjectDialog) result = arg.NewValue as ClassHierarchyData;
+            if (parameter is ProjectSelectionView) result = arg.NewValue as ClassHierarchyData;
             else if (parameter is SolutionExplorer) result = arg.NewValue as HirStruct;
 
             return result;

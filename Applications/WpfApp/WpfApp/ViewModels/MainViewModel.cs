@@ -35,6 +35,17 @@ namespace ApplicationLayer.WpfApp.ViewModels
     {
         private Collection<Grammar> supplyGrammars = new Collection<Grammar>();
 
+        private bool isDebugStatus;
+        public bool IsDebugStatus
+        {
+            get => this.isDebugStatus;
+            set
+            {
+                this.isDebugStatus = value;
+                this.RaisePropertyChanged("IsDebugStatus");
+            }
+        }
+
         #region Property related to Document
         private ObservableCollection<DocumentViewModel> _documents;
         public ObservableCollection<DocumentViewModel> Documents
@@ -135,21 +146,6 @@ namespace ApplicationLayer.WpfApp.ViewModels
 
             this.AlarmListVM.AddEditors(newDocument);
         }
-        #endregion
-
-        #region Command related to NewProject
-        private RelayCommand<Action> newProjectCommand;
-        public RelayCommand<Action> NewProjectCommand
-        {
-            get
-            {
-                if (newProjectCommand == null)
-                    newProjectCommand = new RelayCommand<Action>(this.OnNewProject);
-
-                return newProjectCommand;
-            }
-        }
-        private void OnNewProject(Action action) => action?.Invoke();
         #endregion
 
         #region Command related to Open
@@ -267,16 +263,12 @@ namespace ApplicationLayer.WpfApp.ViewModels
                 grmmarViewModel.Grammars.Add(grammar);
         }
 
-        private void InitNewProjectWindow()
-        {
-            var newProject = ServiceLocator.Current.GetInstance<NewProjectViewModel>();
-        }
-
         private void InitSolutionExplorer()
         {
             var solutionExplorer = ServiceLocator.Current.GetInstance<SolutionExplorerViewModel>();
 
             Messenger.Default.Register<CreateSolutionMessage>(solutionExplorer, solutionExplorer.ReceivedCreateSolutionMessage);
+            Messenger.Default.Register<AddProjectMessage>(solutionExplorer, solutionExplorer.ReceivedAddNewProjectMessage);
             Messenger.Default.Register<LoadSolutionMessage>(solutionExplorer, solutionExplorer.ReceivedLoadSolutionMessage);
         }
 
@@ -289,7 +281,6 @@ namespace ApplicationLayer.WpfApp.ViewModels
             this.supplyGrammars.Add(new LRTest1Grammar());
 
             this.InitGrammarWindow();
-            this.InitNewProjectWindow();
             this.InitSolutionExplorer();
 
             Messenger.Default.Register<OpenFileMessage>(this, this.ReceivedOpenFileMessage);

@@ -4,14 +4,18 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ApplicationLayer.WpfApp.Views.DialogViews"
+        xmlns:viewModels="clr-namespace:ApplicationLayer.ViewModels.DialogViewModels;assembly=ApplicationLayer.ViewModels"
         xmlns:logicConverters="clr-namespace:ApplicationLayer.WpfApp.Converters.LogicConverters"
         xmlns:lex="http://wpflocalizeextension.codeplex.com" 
         mc:Ignorable="d"
         WindowStyle="ToolWindow"
         WindowStartupLocation="CenterScreen"
         Style="{DynamicResource NormalWindow}"
-        DataContext="{Binding NewFileWindow, Source={StaticResource Locator}}"
         Title="NewFileWindow" Height="450" Width="600">
+
+    <Window.DataContext>
+        <viewModels:NewFileDialogViewModel/>
+    </Window.DataContext>
 
     <Grid>
         <Grid.RowDefinitions>

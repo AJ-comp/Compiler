@@ -340,6 +340,15 @@ namespace ApplicationLayer.WpfApp.Properties {
         }
         
         /// <summary>
+        ///   Project Path과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        internal static string ProjectPath {
+            get {
+                return ResourceManager.GetString("ProjectPath", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Search과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         internal static string Search {

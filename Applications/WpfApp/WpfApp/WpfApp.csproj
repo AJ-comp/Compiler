@@ -110,14 +110,15 @@
     <Compile Include="Behaviors\SolutionTreeViewBehavior.cs" />
     <Compile Include="Behaviors\ViewViewModelConnector.cs" />
     <Compile Include="Behaviors\WindowLoadBehavior.cs" />
+    <Compile Include="Commands\MenuActionCommands.cs" />
+    <Compile Include="Commands\RelayUICommand.cs" />
     <Compile Include="Converters\GrammarToLRParserConverter.cs" />
     <Compile Include="Converters\NavigateUriToStringConverter.cs" />
     <Compile Include="Converters\LogicConverters\FileCreateLogicConverter.cs" />
-    <Compile Include="Converters\LogicConverters\ProjectSearchLogicConverter.cs" />
+    <Compile Include="Converters\LogicConverters\SearchLogicConverter.cs" />
     <Compile Include="Converters\LogicConverters\OpenSolutionLogicConverter.cs" />
     <Compile Include="Converters\RemoveObjectConverter.cs" />
     <Compile Include="Converters\SelectedItemConverter.cs" />
-    <Compile Include="Converters\LogicConverters\ProjectCreateLogicConverter.cs" />
     <Compile Include="Converters\LogicConverters\WindowCloseLogicConverter.cs" />
     <Compile Include="Converters\EnumToImageConverter.cs" />
     <Compile Include="Converters\EventArgsConverterExtension.cs" />
@@ -130,6 +131,12 @@
     </Compile>
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\ViewModelLocator.cs" />
+    <Compile Include="Views\DialogViews\NewSolutionDialog.xaml.cs">
+      <DependentUpon>NewSolutionDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SubViews\ProjectSelectionView.xaml.cs">
+      <DependentUpon>ProjectSelectionView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\WindowViews\AlarmList.xaml.cs">
       <DependentUpon>AlarmList.xaml</DependentUpon>
     </Compile>
@@ -199,6 +206,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Resources\Menus\MainWindowMenus.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\DialogViews\NewSolutionDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SubViews\ProjectSelectionView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -355,6 +370,7 @@
     <Resource Include="Resources\Images\DarkTheme\reference_16.png" />
     <Resource Include="Resources\Images\DarkTheme\reference_20.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>

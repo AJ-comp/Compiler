@@ -60,6 +60,7 @@
     <Compile Include="DialogViewModels\DialogViewModel.cs" />
     <Compile Include="DialogViewModels\NewFileDialogViewModel.cs" />
     <Compile Include="DialogViewModels\NewProjectViewModel.cs" />
+    <Compile Include="DialogViewModels\NewSolutionViewModel.cs" />
     <Compile Include="DocumentTypeViewModels\DocumentViewModel.cs" />
     <Compile Include="DocumentTypeViewModels\EditorTypeViewModel.cs" />
     <Compile Include="DocumentTypeViewModels\GrammarInfoViewModel.cs" />
@@ -77,6 +78,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resource.resx</DependentUpon>
     </Compile>
+    <Compile Include="SubViewModels\ProjectSelectionViewModel.cs" />
     <Compile Include="WindowViewModels\SolutionExplorerViewModel.cs" />
   </ItemGroup>
   <ItemGroup>

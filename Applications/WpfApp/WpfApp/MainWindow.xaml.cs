@@ -1,4 +1,4 @@
-﻿using WpfApp.ViewModels;
+﻿using ApplicationLayer.WpfApp.Commands;
 
 namespace ApplicationLayer.WpfApp
 {
@@ -10,6 +10,8 @@ namespace ApplicationLayer.WpfApp
         public MainWindow()
         {
             InitializeComponent();
+
+            MenuActionCommands.parentWindow = this;
         }
     }
 }

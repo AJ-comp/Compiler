@@ -225,4 +225,7 @@
   <data name="NewFolder" xml:space="preserve">
     <value>New Folder</value>
   </data>
+  <data name="ProjectPath" xml:space="preserve">
+    <value>Project Path</value>
+  </data>
 </root>

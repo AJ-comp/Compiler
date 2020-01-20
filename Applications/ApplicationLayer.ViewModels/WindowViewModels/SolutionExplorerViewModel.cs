@@ -118,6 +118,10 @@ namespace WpfApp.ViewModels.WindowViewModels
             }
         }
 
+        /// <summary>
+        /// Message handler for CreateSolutionMessage
+        /// </summary>
+        /// <param name="message"></param>
         public void ReceivedCreateSolutionMessage(CreateSolutionMessage message)
         {
             this.Solutions.Add(SolutionStruct.Create(message.SolutionPath, message.SoltionName, message.Language, message.MachineTarget));
@@ -139,6 +143,19 @@ namespace WpfApp.ViewModels.WindowViewModels
             //            this.Solutions.Add(this.solutionManager.Loader.LoadSolution(message.SolutionPath, message.SolutionName));
         }
 
+        /// <summary>
+        /// This message handler addes new project to the solution.
+        /// </summary>
+        /// <param name="message"></param>
+        public void ReceivedAddNewProjectMessage(AddProjectMessage message)
+        {
+
+        }
+
+        /// <summary>
+        /// Message handler for LoadSolutionMessage
+        /// </summary>
+        /// <param name="message"></param>
         public void ReceivedLoadSolutionMessage(LoadSolutionMessage message)
         {
             using (StreamReader sr = new StreamReader(message.SolutionFullPath))
