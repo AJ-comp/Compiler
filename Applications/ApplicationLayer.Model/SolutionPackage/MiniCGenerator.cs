@@ -1,4 +1,5 @@
 ﻿using Parse.BackEnd.Target;
+using System.IO;
 using static ApplicationLayer.Models.SolutionPackage.ProjectProperty;
 
 namespace ApplicationLayer.Models.SolutionPackage
@@ -7,9 +8,9 @@ namespace ApplicationLayer.Models.SolutionPackage
     {
         public override string Extension { get; } = LanguageExtensions.MiniC;
 
-        public override ProjectStruct CreateDefaultProject(string projectPath, string projectName, Target target, HirStruct parent)
+        public override ProjectStruct CreateDefaultProject(string projectPath, bool isAbsolutePath, string projectName, Target target, HirStruct parent)
         {
-            ProjectStruct result = this.CreateEmptyProject(projectPath, projectName, target, parent);
+            ProjectStruct result = this.CreateEmptyProject(projectPath, isAbsolutePath, projectName, target, parent);
 
             result.ReferenceFolder[0].Items.Add(new ReferenceFileStruct() { OPath = "MiniC", FullName = "System.dll" });
             result.ReferenceFolder[0].Items.Add(new ReferenceFileStruct() { OPath = "MiniC", FullName = "System.IO.dll" });
@@ -23,11 +24,12 @@ namespace ApplicationLayer.Models.SolutionPackage
             return result;
         }
 
-        public override ProjectStruct CreateEmptyProject(string projectPath, string projectName, Target target, HirStruct parent)
+        public override ProjectStruct CreateEmptyProject(string projectPath, bool isAbsolutePath, string projectName, Target target, HirStruct parent)
         {
             ProjectStruct result = new ProjectStruct
             {
                 Parent = parent,
+                IsAbsolutePath = isAbsolutePath,
 
                 OPath = projectPath,
                 FullName = string.Format("{0}.{1}", projectName, this.Extension + "proj"),

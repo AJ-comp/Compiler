@@ -79,5 +79,10 @@
     <i:Interaction.Behaviors>
         <behaviors:WindowLoadBehavior/>
     </i:Interaction.Behaviors>
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="CloseButtonClicked">
+            <mvvm:EventToCommand Command="{Binding CloseCommand}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
 
 </advanceControls:AdvancedWindow>

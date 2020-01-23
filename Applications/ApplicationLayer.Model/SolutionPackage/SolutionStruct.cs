@@ -1,73 +1,13 @@
 ﻿using Parse.BackEnd.Target;
 using Parse.FrontEnd.Grammars;
-using Parse.FrontEnd.Grammars.MiniC;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
-using System.ComponentModel;
 using System.IO;
 using System.Xml.Serialization;
 
 namespace ApplicationLayer.Models.SolutionPackage
 {
-    public class HirStruct : INotifyPropertyChanged
-    {
-        [XmlIgnore]
-        public string OPath { get; set; } = string.Empty;
-        [XmlIgnore]
-        public string FullName { get; set; } = string.Empty;
-        [XmlIgnore]
-        public string ImageSource { get; set; }
-        [XmlIgnore]
-        public HirStruct Parent { get; internal set; } = null;
-        [XmlIgnore]
-        public string NameWithoutExtension => Path.GetFileNameWithoutExtension(this.FullName);
-        [XmlIgnore]
-        public string FullPath => Path.Combine(this.BasePath, this.FullName);
-        [XmlIgnore]
-        public string RelativePath => Path.Combine(this.OPath, this.FullName);
-
-        private bool isSelected;
-        [XmlIgnore]
-        public bool IsSelected
-        {
-            get => this.isSelected;
-            set
-            {
-                this.isSelected = value;
-                this.OnPropertyChanged("IsSelected");
-            }
-        }
-
-        [XmlIgnore]
-        public string BasePath
-        {
-            get
-            {
-                string result = this.OPath;
-
-                HirStruct current = this;
-                while(current.Parent != null)
-                {
-                    result = Path.Combine(current.Parent.OPath, result);
-                    current = current.Parent;
-                }
-
-                return result;
-            }
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected void OnPropertyChanged(string name)
-        {
-            PropertyChangedEventHandler handler = PropertyChanged;
-            if (handler != null)
-            {
-                handler(this, new PropertyChangedEventArgs(name));
-            }
-        }
-    }
-
     [XmlInclude(typeof(ProjectStruct))]
     public class SolutionStruct : HirStruct
     {
@@ -75,10 +15,15 @@ namespace ApplicationLayer.Models.SolutionPackage
         public static string Extension => "ajn";
         public double Version { get; set; }
 
-        public StringCollection ProjectPaths { get; } = new StringCollection();
+        [XmlIgnore]
+        public List<PathInfo> CurrentProjectPath { get; } = new List<PathInfo>();
+        public List<PathInfo> SyncWithXMLProjectPaths { get; } = new List<PathInfo>();
 
         [XmlIgnore]
         public ObservableCollection<ProjectStruct> Projects { get; } = new ObservableCollection<ProjectStruct>();
+
+        [XmlIgnore]
+        public bool IsChanged => (this.CurrentProjectPath.Equals(this.SyncWithXMLProjectPaths)) ? false : true;
 
         public SolutionStruct()
         {
@@ -95,13 +40,8 @@ namespace ApplicationLayer.Models.SolutionPackage
                 if (File.Exists(child.FullPath)) continue;
 
                 Directory.CreateDirectory(child.BasePath);
-                this.ProjectPaths.Add(child.RelativePath);
+                this.CurrentProjectPath.Add(new PathInfo(child.RelativePath, child.IsAbsolutePath));
             }
-        }
-
-        public void Load(string fullPath)
-        {
-            this.OPath = Path.GetDirectoryName(fullPath);
         }
 
         public static SolutionStruct Create(string solutionPath, string solutionName, Grammar grammar, Target target)
@@ -113,16 +53,28 @@ namespace ApplicationLayer.Models.SolutionPackage
             result.FullName = solutionName;
             result.Version = 1.0;
 
-            ProjectGenerator projectGenerator = null;
-            if (grammar is MiniCGrammar)
-                projectGenerator = new MiniCGenerator();
-
+            ProjectGenerator projectGenerator = ProjectGenerator.CreateProjectGenerator(grammar);
             if (projectGenerator == null) return result;
 
-            result.Projects.Add(projectGenerator.CreateDefaultProject(solutionNameWithExtension, solutionNameWithExtension, target, result));
-            result.Projects.Add(projectGenerator.CreateDefaultProject(solutionNameWithExtension, solutionNameWithExtension + "abc", target, result));
+            result.Projects.Add(projectGenerator.CreateDefaultProject(solutionNameWithExtension, false, solutionNameWithExtension, target, result));
+            result.Projects.Add(projectGenerator.CreateDefaultProject(solutionNameWithExtension + "abc", false, solutionNameWithExtension + "abc", target, result));
 
             return result;
+        }
+    }
+
+
+    public class PathInfo
+    {
+        public string Path { get; set; }
+        public bool IsAbsolute { get; set; }
+
+        public PathInfo() { }
+
+        public PathInfo(string path, bool isAbsolute)
+        {
+            Path = path;
+            IsAbsolute = isAbsolute;
         }
     }
 }

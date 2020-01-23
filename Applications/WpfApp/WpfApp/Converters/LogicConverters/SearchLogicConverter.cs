@@ -8,6 +8,9 @@ using System.Windows.Markup;
 
 namespace ApplicationLayer.WpfApp.Converters.LogicConverters
 {
+    /// <summary>
+    /// This converter has the solution path search logic to generate.
+    /// </summary>
     class SolutionPathSearchLogicConverter : MarkupExtension, IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
@@ -38,6 +41,10 @@ namespace ApplicationLayer.WpfApp.Converters.LogicConverters
         public override object ProvideValue(IServiceProvider serviceProvider) => this;
     }
 
+
+    /// <summary>
+    /// This converter has the project path search logic to generate.
+    /// </summary>
     class ProjectSearchLogicConverter : MarkupExtension, IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
@@ -56,8 +63,6 @@ namespace ApplicationLayer.WpfApp.Converters.LogicConverters
                 {
                     NewProjectViewModel viewModel = window.DataContext as NewProjectViewModel;
                     viewModel.ProjectPath = selectFolderDialog.FileName + "\\";
-                    // if selection project path is out of the solution path
-                    //                    if (viewModel.ProjectPath.Contains(viewModel.SolutionPath))
                 }
             });
         }

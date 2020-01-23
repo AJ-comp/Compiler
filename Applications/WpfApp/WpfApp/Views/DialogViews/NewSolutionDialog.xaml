@@ -63,7 +63,7 @@
                             Command="{Binding SearchCommand}"
                             CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, 
                             AncestorType={x:Type local:NewSolutionDialog}}, 
-                            Converter={logicConverters:ProjectSearchLogicConverter}}"
+                            Converter={logicConverters:SolutionPathSearchLogicConverter}}"
                             VerticalAlignment="Center" HorizontalAlignment="Left"/>
 
 
@@ -75,8 +75,6 @@
             <CheckBox Grid.Row="4" Grid.Column="2" Margin="10 0 0 0"
                                 IsChecked="{Binding CreateSolutionFolder}"
                                 Content="{lex:Loc Key=CreateSolutionDir}"  VerticalAlignment="Center"/>
-
-            <RadioButton Grid.Row="5" Grid.Column="2" Content="abc"/>
 
         </Grid>
 

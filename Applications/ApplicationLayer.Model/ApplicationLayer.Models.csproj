@@ -49,6 +49,7 @@
     <Compile Include="ProjectData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SolutionPackage\FolderStruct.cs" />
+    <Compile Include="SolutionPackage\HirStruct.cs" />
     <Compile Include="SolutionPackage\MiniCGenerator.cs" />
     <Compile Include="SolutionPackage\MiniCProjectStruct.cs" />
     <Compile Include="SolutionPackage\ProjectGenerator.cs" />

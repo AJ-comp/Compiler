@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -24,6 +20,7 @@ namespace Wpf.UI.Advance
     /// </summary>
     public partial class AdvancedWindow : Window
     {
+        public delegate void CloseButtonEventHandler();
 
         #region Dependency Properties for appearance.
         public int TitleBarHeight
@@ -94,6 +91,8 @@ namespace Wpf.UI.Advance
             else this.WindowState = WindowState.Normal;
         }
 
+        public event EventHandler<ClosedEventArgs> CloseButtonClicked;
+
         /// <summary>
         /// Creates the command bindings
         /// </summary>
@@ -102,7 +101,16 @@ namespace Wpf.UI.Advance
             // Command binding for close button
             CommandBindings.Add(new CommandBinding(
                 ApplicationCommands.Close,
-                (a, b) => { Close(); }));
+                (a, b) => 
+                {
+                    //if(CloseButtonClicked != null)
+                    //{
+                    //    if (CloseButtonClicked.Invoke(this, null) == false) return;
+                    //}
+//                    CloseButtonClicked?.Invoke(this, );
+
+                    Close();
+                }));
 
             // Command binding for minimize button
             CommandBindings.Add(new CommandBinding(
@@ -593,5 +601,11 @@ namespace Wpf.UI.Advance
         /// Maximize / Restore command
         /// </summary>
         private readonly RoutedUICommand MaximizeRestoreCommand = new RoutedUICommand("MaximizeRestore", "MaximizeRestore", typeof(AdvancedWindow));
+    }
+
+
+    public class ClosedEventArgs : EventArgs
+    {
+        public bool Closed { get; } = true;
     }
 }

@@ -12,9 +12,6 @@ namespace ApplicationLayer.ViewModels.DialogViewModels
     {
         public ProjectSelectionViewModel ProjectSelection { get; } = new ProjectSelectionViewModel();
 
-        public string SolutionFullPath { get; set; } = string.Empty;
-        public string SolutionPath => Path.GetDirectoryName(this.SolutionFullPath);
-
         private string projectPath = string.Empty;
         public string ProjectPath
         {
@@ -23,6 +20,8 @@ namespace ApplicationLayer.ViewModels.DialogViewModels
             {
                 this.projectPath = value;
                 this.RaisePropertyChanged("ProjectPath");
+
+                CreateCommand.RaiseCanExecuteChanged();
             }
         }
 
@@ -70,7 +69,7 @@ namespace ApplicationLayer.ViewModels.DialogViewModels
         private void OnCreate(Action action)
         {
             Target target = Activator.CreateInstance(this.ProjectSelection.SelectedTerminalItem) as Target;
-            Messenger.Default.Send(new AddProjectMessage(this.SolutionFullPath, this.projectPath, this.projectName, this.ProjectSelection.SelectedProject.Grammar, target));
+            Messenger.Default.Send(new AddProjectMessage(Path.Combine(this.projectPath, this.projectName), this.projectName, this.ProjectSelection.SelectedProject.Grammar, target));
 
             action?.Invoke();
         }
@@ -79,7 +78,7 @@ namespace ApplicationLayer.ViewModels.DialogViewModels
         {
             if (this.ProjectSelection.SelectedTerminalItem == null) return false;
             if (this.ProjectSelection.SelectedProject == null) return false;
-            if (string.IsNullOrEmpty(this.SolutionFullPath)) return false;
+            if (string.IsNullOrEmpty(this.projectPath)) return false;
             if (string.IsNullOrEmpty(this.projectName)) return false;
 
             return true;

@@ -255,7 +255,6 @@ namespace ApplicationLayer.WpfApp.ViewModels
         }
         #endregion
 
-
         private void InitGrammarWindow()
         {
             var grmmarViewModel = ServiceLocator.Current.GetInstance<GrammarInfoViewModel>();
@@ -268,8 +267,8 @@ namespace ApplicationLayer.WpfApp.ViewModels
             var solutionExplorer = ServiceLocator.Current.GetInstance<SolutionExplorerViewModel>();
 
             Messenger.Default.Register<CreateSolutionMessage>(solutionExplorer, solutionExplorer.ReceivedCreateSolutionMessage);
-            Messenger.Default.Register<AddProjectMessage>(solutionExplorer, solutionExplorer.ReceivedAddNewProjectMessage);
             Messenger.Default.Register<LoadSolutionMessage>(solutionExplorer, solutionExplorer.ReceivedLoadSolutionMessage);
+            Messenger.Default.Register<AddProjectMessage>(solutionExplorer, solutionExplorer.ReceivedAddNewProjectMessage);
         }
 
         /// <summary>
@@ -284,6 +283,7 @@ namespace ApplicationLayer.WpfApp.ViewModels
             this.InitSolutionExplorer();
 
             Messenger.Default.Register<OpenFileMessage>(this, this.ReceivedOpenFileMessage);
+            Messenger.Default.Register<ChangedFileListMessage>(this, this.ReceivedChangedFileListMessage);
 
             if (IsInDesignMode)
             {
@@ -299,6 +299,12 @@ namespace ApplicationLayer.WpfApp.ViewModels
         public void ReceivedOpenFileMessage(OpenFileMessage message)
         {
 //            this.Documents.Add(message.SelectedFile);
+        }
+
+
+        public void ReceivedChangedFileListMessage(ChangedFileListMessage message)
+        {
+
         }
     }
 }

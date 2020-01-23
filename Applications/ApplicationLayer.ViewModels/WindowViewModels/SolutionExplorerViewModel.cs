@@ -3,6 +3,8 @@ using ApplicationLayer.ViewModels.Messages;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
+using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.IO;
@@ -108,6 +110,8 @@ namespace WpfApp.ViewModels.WindowViewModels
 
         private void Solutions_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
+            if (e.NewItems == null) return;
+
             for (int i = e.NewStartingIndex; i < e.NewItems.Count; i++)
             {
                 SolutionStruct child = e.NewItems[i] as SolutionStruct;
@@ -118,15 +122,9 @@ namespace WpfApp.ViewModels.WindowViewModels
             }
         }
 
-        /// <summary>
-        /// Message handler for CreateSolutionMessage
-        /// </summary>
-        /// <param name="message"></param>
-        public void ReceivedCreateSolutionMessage(CreateSolutionMessage message)
+        private void ToXML(SolutionStruct solution)
         {
-            this.Solutions.Add(SolutionStruct.Create(message.SolutionPath, message.SoltionName, message.Language, message.MachineTarget));
-
-            using (StreamWriter wr = new StreamWriter(message.SolutionFullPath))
+            using (StreamWriter wr = new StreamWriter(solution.FullPath))
             {
                 XmlSerializer xs = new XmlSerializer(typeof(SolutionStruct));
                 xs.Serialize(wr, this.Solutions[0]);
@@ -140,16 +138,17 @@ namespace WpfApp.ViewModels.WindowViewModels
                     xs.Serialize(wr, item);
                 }
             }
-            //            this.Solutions.Add(this.solutionManager.Loader.LoadSolution(message.SolutionPath, message.SolutionName));
         }
 
         /// <summary>
-        /// This message handler addes new project to the solution.
+        /// Message handler for CreateSolutionMessage
         /// </summary>
         /// <param name="message"></param>
-        public void ReceivedAddNewProjectMessage(AddProjectMessage message)
+        public void ReceivedCreateSolutionMessage(CreateSolutionMessage message)
         {
+            this.Solutions.Add(SolutionStruct.Create(message.SolutionPath, message.SoltionName, message.Language, message.MachineTarget));
 
+            this.ToXML(this.Solutions[0]);
         }
 
         /// <summary>
@@ -158,29 +157,72 @@ namespace WpfApp.ViewModels.WindowViewModels
         /// <param name="message"></param>
         public void ReceivedLoadSolutionMessage(LoadSolutionMessage message)
         {
+            this.Solutions.Clear();
+
             using (StreamReader sr = new StreamReader(message.SolutionFullPath))
             {
                 XmlSerializer xs = new XmlSerializer(typeof(SolutionStruct));
                 SolutionStruct solution = xs.Deserialize(sr) as SolutionStruct;
                 solution.OPath = message.SolutionPath;
                 solution.FullName = message.SolutionName;
+                foreach (var path in solution.SyncWithXMLProjectPaths) solution.CurrentProjectPath.Add(path);
 
                 this.Solutions.Add(solution);
             }
 
-            foreach(var item in this.Solutions[0].ProjectPaths)
+            foreach (var item in this.Solutions[0].SyncWithXMLProjectPaths)
             {
-                using (StreamReader sr = new StreamReader(Path.Combine(message.SolutionPath, item)))
+                string fullPath = (item.IsAbsolute) ? item.Path : Path.Combine(message.SolutionPath, item.Path);
+
+                using (StreamReader sr = new StreamReader(fullPath))
                 {
                     XmlSerializer xs = new XmlSerializer(typeof(ProjectStruct));
                     ProjectStruct project = xs.Deserialize(sr) as ProjectStruct;
-                    project.OPath = Path.GetDirectoryName(item);
-                    project.FullName = Path.GetFileName(item);
+
+                    project.IsAbsolutePath = item.IsAbsolute;
+                    project.OPath = Path.GetDirectoryName(item.Path);
+                    project.FullName = Path.GetFileName(item.Path);
                     this.Solutions[0].Projects.Add(project);    // for connect with the parent node (solution)
 
                     project.SyncWithXMLData();
                 }
             }
+        }
+
+        /// <summary>
+        /// This message handler addes new project to the solution.
+        /// </summary>
+        /// <param name="message"></param>
+        public void ReceivedAddNewProjectMessage(AddProjectMessage message)
+        {
+            if (this.Solutions.Count == 0) return;
+
+            // if project path is in the solution path.
+            var solutionPath = this.Solutions[0].OPath;
+            int matchedPos = message.ProjectPath.IndexOf(solutionPath) + solutionPath.Length;
+            bool isAbsolutePath = (matchedPos < 0);
+
+            ProjectGenerator projectGenerator = ProjectGenerator.CreateProjectGenerator(message.Language);
+            if (projectGenerator == null) return;
+
+            string projectPath = (isAbsolutePath) ? message.ProjectPath : message.ProjectPath.Substring(matchedPos);
+            if (projectPath[0] == '\\') projectPath = projectPath.Remove(0, 1);
+
+            ProjectStruct newProject = projectGenerator.CreateDefaultProject(projectPath, isAbsolutePath, message.ProjectName, message.MachineTarget, this.Solutions[0]);
+            this.Solutions[0].Projects.Add(newProject);
+
+            // create project files into the folder.
+            using (StreamWriter wr = new StreamWriter(newProject.FullPath))
+            {
+                XmlSerializer xs = new XmlSerializer(typeof(ProjectStruct));
+                xs.Serialize(wr, newProject);
+            }
+
+            // Notify the changed data to the out.
+            var changedData = new ChangedFileListMessage.ChangedFile(this.Solutions[0], ChangedFileListMessage.ChangedStatus.Changed);
+            var changedFileListMessage = new ChangedFileListMessage();
+            changedFileListMessage.AddFile(changedData);
+            Messenger.Default.Send<ChangedFileListMessage>(changedFileListMessage);
         }
     }
 }

@@ -37,9 +37,6 @@ namespace ApplicationLayer.WpfApp.Commands
         {
             NewProjectDialog dialog = new NewProjectDialog();
             var vm = dialog.DataContext as NewProjectViewModel;
-            var solutionExplorer = ServiceLocator.Current.GetInstance<SolutionExplorerViewModel>();
-            if (solutionExplorer.Solutions.Count == 0) return;
-            vm.SolutionFullPath = solutionExplorer.Solutions[0].FullPath;
 
             dialog.Owner = parentWindow;
             dialog.ShowInTaskbar = false;

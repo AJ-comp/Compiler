@@ -18,7 +18,7 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="3*"/>
+            <RowDefinition Height="4*"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="30"/>
         </Grid.RowDefinitions>
@@ -28,7 +28,6 @@
         <Grid Grid.Row="1" Background="{DynamicResource CommonEnableBackgroundBrush2}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="5"/>
-                <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
@@ -50,13 +49,13 @@
                                 VerticalAlignment="Center" Text="{lex:Loc Key=Name}"/>
             <TextBox Grid.Row="2" Grid.Column="1" 
                             HorizontalAlignment="Stretch" VerticalAlignment="Center"
-                            Text="{Binding SolutionName, UpdateSourceTrigger=PropertyChanged}"/>
+                            Text="{Binding ProjectName, UpdateSourceTrigger=PropertyChanged}"/>
 
 
             <TextBlock Grid.Row="3" Grid.Column="0" Margin="10 0 0 0"
                                 VerticalAlignment="Center" Text="{lex:Loc Key=Position}"/>
             <TextBox Grid.Row="3" Grid.Column="1" 
-                                Text="{Binding SolutionPath}"
+                                Text="{Binding ProjectPath, Mode=OneWay}"
                                 HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
             <Button Grid.Row="3" Grid.Column="2" 
                             Padding="10 0" Margin="10 0 0 0"
@@ -66,13 +65,6 @@
                             AncestorType={x:Type local:NewProjectDialog}}, 
                             Converter={logicConverters:ProjectSearchLogicConverter}}"
                             VerticalAlignment="Center" HorizontalAlignment="Left"/>
-
-
-            <TextBlock Grid.Row="4" Grid.Column="0" Margin="10 0 0 0"
-                                VerticalAlignment="Center" Text="{lex:Loc Key=SolutionPath}"/>
-            <TextBox Grid.Row="4" Grid.Column="1" IsReadOnly="True"
-                            HorizontalAlignment="Stretch" VerticalAlignment="Center"
-                            Text="{Binding SolutionFullPath, Mode=OneWay}"/>
         </Grid>
 
 

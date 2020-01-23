@@ -44,7 +44,6 @@ namespace ApplicationLayer.ViewModels.Messages
 
     public class AddProjectMessage : MessageBase
     {
-        public string SolutionFullPath { get; }
         public string ProjectPath { get; }
         public string ProjectName { get; }
         public Grammar Language { get; }
@@ -52,7 +51,7 @@ namespace ApplicationLayer.ViewModels.Messages
 
         public string ProjectFullPath => Path.Combine(this.ProjectPath, this.ProjectName);
 
-        public AddProjectMessage(string SolutionFullPath, string projectPath, string projectName, Grammar language, Target machineTarget)
+        public AddProjectMessage(string projectPath, string projectName, Grammar language, Target machineTarget)
         {
             this.ProjectPath = projectPath;
             this.ProjectName = projectName;
