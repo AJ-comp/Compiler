@@ -7,6 +7,7 @@ namespace Parse.Tokenize
     public class TokenStorage
     {
         private Dictionary<TokenPatternInfo, List<int>> tableForAllPatterns = new Dictionary<TokenPatternInfo, List<int>>();
+
         public List<TokenCell> AllTokens { get; } = new List<TokenCell>();
 
         /// <summary>
@@ -40,6 +41,11 @@ namespace Parse.Tokenize
                 this.tableForAllPatterns.Add(item, new List<int>());
             }
 
+            this.tableForAllPatterns.Add(TokenPatternInfo.NotDefinedToken, new List<int>());
+        }
+
+        public TokenStorage()
+        {
             this.tableForAllPatterns.Add(TokenPatternInfo.NotDefinedToken, new List<int>());
         }
 

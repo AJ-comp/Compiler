@@ -14,6 +14,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
+using System.IO;
 using System.Windows;
 using WpfApp.ViewModels.WindowViewModels;
 
@@ -298,7 +299,18 @@ namespace ApplicationLayer.WpfApp.ViewModels
 
         public void ReceivedOpenFileMessage(OpenFileMessage message)
         {
-//            this.Documents.Add(message.SelectedFile);
+            string fileName = message.SelectedFile.FullPath;
+
+            if (File.Exists(fileName) == false) return;
+            string content = File.ReadAllText(fileName);
+
+            var editor = new EditorTypeViewModel(fileName, content);
+            if (this.Documents.Contains(editor)) return;
+
+            this.Documents.Add(editor);
+            this.SelectedDocument = editor;
+
+            this.AlarmListVM.AddEditors(editor);
         }
 
 

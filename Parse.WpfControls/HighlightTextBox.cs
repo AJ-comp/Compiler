@@ -164,6 +164,11 @@ namespace Parse.WpfControls
 
 //            this.AddHandler(ListBox.MouseLeftButtonDownEvent, new RoutedEventHandler(this.OnMouseLeftClick), true);
 
+            Loaded += (s,e) =>
+            {
+                this.InvalidateVisual();
+            };
+
             SizeChanged += (s, e) =>
             {
                 if (e.HeightChanged == false) return;
@@ -182,7 +187,7 @@ namespace Parse.WpfControls
                 string addString = this.Text.Substring(changeInfo.Offset, changeInfo.AddedLength);
                 if (changeInfo.RemovedLength == 0 && addString.Length == 1) this.bSingleCharacterAdded = true;
 
-                InvalidateVisual();
+                this.InvalidateVisual();
             };
         }
 
@@ -190,10 +195,10 @@ namespace Parse.WpfControls
         {
             base.OnApplyTemplate();
 
-            this.renderCanvas = (TextCanvas)Template.FindName("PART_RenderCanvas", this);
             this.scrollViewer = (ScrollViewer)Template.FindName("PART_ContentHost", this);
-
             this.scrollViewer.ScrollChanged += OnScrollChanged;
+
+            this.renderCanvas = (TextCanvas)Template.FindName("PART_RenderCanvas", this);
         }
 
         private int GetStartLineOnViewPos(double topViewPos) => (int)(topViewPos / this.LineHeight);
@@ -207,7 +212,7 @@ namespace Parse.WpfControls
                 BackGroundBrush = Brushes.Transparent
             };
             int addedLineIndex = this.LineIndex - this.GetStartLineOnViewPos(this.VerticalOffset);
-            this.renderCanvas.DrawSelectedLineAppearance(addedLineIndex, appearance);
+            this.renderCanvas?.DrawSelectedLineAppearance(addedLineIndex, appearance);
         }
 
         private void AddLineString(ref LineHighlightText from, List<LineHighlightText> to, int lineIndex)
@@ -380,7 +385,6 @@ namespace Parse.WpfControls
         /// <param name="drawingContext"></param>
         protected override void OnRender(DrawingContext drawingContext)
         {
-            //            if (!IsLoaded || renderCanvas == null || lineNumbersCanvas == null) return;
             if (!IsLoaded || renderCanvas == null) return;
 
             if (this.bSingleCharacterAdded)

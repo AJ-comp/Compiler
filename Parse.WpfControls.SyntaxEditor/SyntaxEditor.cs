@@ -17,6 +17,7 @@ namespace Parse.WpfControls.SyntaxEditor
     public class SyntaxEditor : Editor
     {
         private bool bParsing = false;
+        private bool bReserveRegistKeywords = false;
         private AlarmCollection alarmList = new AlarmCollection();
         private List<TokenCell> reserveTokenCells = new List<TokenCell>();
 
@@ -36,17 +37,6 @@ namespace Parse.WpfControls.SyntaxEditor
 
         public event EventHandler<AlarmCollection> AlarmFired;
 
-        public int MyProperty
-        {
-            get { return (int)GetValue(MyPropertyProperty); }
-            set { SetValue(MyPropertyProperty, value); }
-        }
-
-        // Using a DependencyProperty as the backing store for MyProperty.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty MyPropertyProperty =
-            DependencyProperty.Register("MyProperty", typeof(int), typeof(SyntaxEditor), new PropertyMetadata(0));
-
-
         public Brush KeywordForeground
         {
             get { return (Brush)GetValue(KeywordForegroundProperty); }
@@ -56,6 +46,36 @@ namespace Parse.WpfControls.SyntaxEditor
         // Using a DependencyProperty as the backing store for KeywordForeground.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty KeywordForegroundProperty =
             DependencyProperty.Register("KeywordForeground", typeof(Brush), typeof(SyntaxEditor), new PropertyMetadata(Brushes.Black));
+
+
+
+        public Grammar Grammar
+        {
+            get { return (Grammar)GetValue(GrammarProperty); }
+            set { SetValue(GrammarProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for Grammar.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty GrammarProperty =
+            DependencyProperty.Register("Grammar", typeof(Grammar), typeof(SyntaxEditor), new PropertyMetadata(null, GrammarChanged));
+
+        public static void GrammarChanged(DependencyObject dp, DependencyPropertyChangedEventArgs args)
+        {
+            SyntaxEditor editor = dp as SyntaxEditor;
+            Grammar grammar = args.NewValue as Grammar;
+
+            editor.Parser = new SLRParser(grammar);
+            if (editor.TextArea == null) editor.bReserveRegistKeywords = true;
+            else
+            {
+                editor.RegisterKeywords(grammar);
+
+                // It is started a tokenize process because allocated a new tokenize rules.
+                var tempText = editor.Text;
+                editor.Text = string.Empty;
+                editor.Text = tempText;
+            }
+        }
 
 
         #region Dependency Properties related to numeral foreground color
@@ -129,13 +149,28 @@ namespace Parse.WpfControls.SyntaxEditor
 
         public SyntaxEditor()
         {
+            Loaded += (s, e) =>
+            {
+                if (this.bReserveRegistKeywords)
+                {
+                    this.RegisterKeywords(this.Grammar);
+
+                    // It is started a tokenize process because allocated a new tokenize rules.
+                    var tempText = this.Text;
+                    this.Text = string.Empty;
+                    this.Text = tempText;
+
+                    this.bReserveRegistKeywords = false;
+                }
+
+//                this.TextArea.InvalidateVisual();
+            };
         }
 
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
 
-            this.SetGrammar(new MiniCGrammar());
             this.TextArea.TextChanged += TextArea_TextChanged;
             this.parser.ParsingFailed += Parser_ParsingFailed;
         }
@@ -196,13 +231,6 @@ namespace Parse.WpfControls.SyntaxEditor
             // filtering test code
             this.TextArea.AddCompletionList(CompletionItemType.Property, "HighLight");
             this.TextArea.AddCompletionList(CompletionItemType.Property, "HightIlHe");
-        }
-
-        public void SetGrammar(Grammar grammar)
-        {
-            this.Parser = new SLRParser(grammar);
-
-            this.RegisterKeywords(grammar);
         }
 
         // 전처리기 등록자 (ex : #define, #undef ) 등록 함수 만들기 

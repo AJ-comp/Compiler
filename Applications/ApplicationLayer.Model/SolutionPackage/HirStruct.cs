@@ -1,10 +1,11 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.IO;
 using System.Xml.Serialization;
 
 namespace ApplicationLayer.Models.SolutionPackage
 {
-    public class HirStruct : INotifyPropertyChanged
+    public class HirStruct : INotifyPropertyChanged, IEquatable<HirStruct>
     {
         [XmlIgnore]
         public string OPath { get; set; } = string.Empty;
@@ -66,5 +67,7 @@ namespace ApplicationLayer.Models.SolutionPackage
                 handler(this, new PropertyChangedEventArgs(name));
             }
         }
+
+        public bool Equals(HirStruct other) => this.FullPath == other.FullPath;
     }
 }

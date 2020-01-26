@@ -6,15 +6,11 @@ namespace ApplicationLayer.ViewModels.DocumentTypeViewModels
 {
     public class DocumentViewModel : ViewModelBase
     {
-        public DocumentViewModel(string title)
-        {
-            Title = title;
-        }
-
         public event EventHandler CloseRequest;
         public event EventHandler AllCloseExceptThisRequest;
 
         public string Title { get; }
+        public string ToolTipText { get; }
 
         private RelayCommand closeCommand;
         public RelayCommand CloseCommand
@@ -28,6 +24,10 @@ namespace ApplicationLayer.ViewModels.DocumentTypeViewModels
 
                 return this.closeCommand;
             }
+        }
+        private void OnClose()
+        {
+            this.CloseRequest?.Invoke(this, EventArgs.Empty);
         }
 
         private RelayCommand allCloseExceptThisCommand;
@@ -43,15 +43,19 @@ namespace ApplicationLayer.ViewModels.DocumentTypeViewModels
                 return this.allCloseExceptThisCommand;
             }
         }
-
-        private void OnClose()
-        {
-            this.CloseRequest?.Invoke(this, EventArgs.Empty);
-        }
-
         private void OnAllCloseExceptThis()
         {
             this.AllCloseExceptThisRequest?.Invoke(this, EventArgs.Empty);
+        }
+
+        public DocumentViewModel(string title)
+        {
+            Title = title;
+        }
+
+        public DocumentViewModel(string title, string toolstrip) : this(title)
+        {
+            this.ToolTipText = toolstrip;
         }
     }
 }

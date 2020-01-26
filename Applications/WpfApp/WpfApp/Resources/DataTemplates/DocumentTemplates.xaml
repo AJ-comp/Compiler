@@ -13,7 +13,9 @@
                                                 FileName="{Binding Title}"
                                                 IsLineNumberingVisible="True"  LineNumberForeColor="DarkGreen"
                                                 KeywordForeground="LightBlue"
-                                                LineCommentForeground="ForestGreen">
+                                                LineCommentForeground="ForestGreen"
+                                                Text="{Binding Data}"
+                                                Grammar="{Binding Grammar}">
 
             <i:Interaction.Behaviors>
                 <localBehaviors:EventToCommandBehavior Command="{Binding AlarmFiredCommand}" Event="AlarmFired" PassArguments="True" />
@@ -53,7 +55,7 @@
     </DataTemplate>
 
     <DataTemplate x:Key="DocumentItemTemplate">
-        <DockPanel>
+        <DockPanel ToolTip="{Binding ToolTipText}">
             <Button x:Name="PART_CloseButton"
                         DockPanel.Dock="Right"
                         Margin="0,0,4,0"

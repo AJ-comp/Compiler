@@ -1,0 +1,11 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:Wpf.UI.Basic.Controls">
+
+    <Style TargetType="ToolTip">
+        <Setter Property="Background" Value="{DynamicResource CommonEnableBackgroundBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource CommonEnableBorderBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource CommonEnableTextBrush}"/>
+    </Style>
+    
+</ResourceDictionary>

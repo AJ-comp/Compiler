@@ -58,6 +58,17 @@ namespace Parse.WpfControls
             DependencyProperty.Register("FileName", typeof(string), typeof(Editor), new PropertyMetadata("New Document.txt"));
 
 
+        public string Text
+        {
+            get { return (string)GetValue(TextProperty); }
+            set { SetValue(TextProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for Text.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty TextProperty =
+            DependencyProperty.Register("Text", typeof(string), typeof(Editor), new PropertyMetadata(""));
+
+
         public HighlightTextBox TextArea
         {
             get { return (HighlightTextBox)GetValue(TextAreaProperty); }
@@ -138,8 +149,8 @@ namespace Parse.WpfControls
             base.OnApplyTemplate();
 
             this.lineNumbersCanvas = (TextCanvas)Template.FindName("PART_LineNumbersCanvas", this);
-            this.TextArea = (HighlightTextBox)Template.FindName("PART_TextArea", this);
 
+            this.TextArea = (HighlightTextBox)Template.FindName("PART_TextArea", this);
             this.TextArea.Rendered += TextArea_Rendered;
         }
 

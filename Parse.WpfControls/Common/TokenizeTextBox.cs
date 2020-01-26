@@ -120,7 +120,7 @@ namespace Parse.WpfControls.Common
         public int GetTokenIndexForCaretIndex(int caretIndex, RecognitionWay recognitionWay) => this.tokenizeFactory.StorageTeam.TokenIndexForOffset(caretIndex, recognitionWay);
 
         /// <summary>
-        /// This function regist a pattern for tokenizing.
+        /// This function register a pattern for tokenizing.
         /// </summary>
         /// <param name="text"></param>
         /// <param name="optionData"></param>
@@ -132,7 +132,7 @@ namespace Parse.WpfControls.Common
         }
 
         /// <summary>
-        /// This function moves the caret to the token of index.
+        /// This function moves to the caret to the token of an index.
         /// </summary>
         /// <param name="tokenIndex"></param>
         public void MoveCaretToToken(int tokenIndex)

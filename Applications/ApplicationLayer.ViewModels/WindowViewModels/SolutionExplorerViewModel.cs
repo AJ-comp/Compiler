@@ -1,9 +1,9 @@
-﻿using ApplicationLayer.Models.SolutionPackage;
+﻿using ApplicationLayer.Common.Helpers;
+using ApplicationLayer.Models.SolutionPackage;
 using ApplicationLayer.ViewModels.Messages;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
@@ -14,6 +14,8 @@ namespace WpfApp.ViewModels.WindowViewModels
 {
     public class SolutionExplorerViewModel : ViewModelBase
     {
+        private HashSet<HirStruct> changedList = new HashSet<HirStruct>();
+
         public ObservableCollection<SolutionStruct> Solutions { get; } = new ObservableCollection<SolutionStruct>();
 
         private RelayCommand<HirStruct> selectedCommand;
@@ -51,24 +53,6 @@ namespace WpfApp.ViewModels.WindowViewModels
 
         }
 
-
-        #region Command related to ContextMenu
-        private RelayCommand newItemCommand;
-        public RelayCommand NewItemCommand
-        {
-            get
-            {
-                if (this.newItemCommand == null)
-                    this.newItemCommand = new RelayCommand(this.OnNewItemMenuClick);
-
-                return this.newItemCommand;
-            }
-        }
-        private void OnNewItemMenuClick()
-        {
-
-        }
-
         private RelayCommand existItemCommand;
         public RelayCommand ExistItemCommand
         {
@@ -99,7 +83,6 @@ namespace WpfApp.ViewModels.WindowViewModels
         {
 
         }
-        #endregion
 
 
         // for test
@@ -200,7 +183,7 @@ namespace WpfApp.ViewModels.WindowViewModels
             // if project path is in the solution path.
             var solutionPath = this.Solutions[0].OPath;
             int matchedPos = message.ProjectPath.IndexOf(solutionPath) + solutionPath.Length;
-            bool isAbsolutePath = (matchedPos < 0);
+            bool isAbsolutePath = (PathHelper.ComparePath(solutionPath, message.ProjectPath) == false);
 
             ProjectGenerator projectGenerator = ProjectGenerator.CreateProjectGenerator(message.Language);
             if (projectGenerator == null) return;
@@ -218,11 +201,14 @@ namespace WpfApp.ViewModels.WindowViewModels
                 xs.Serialize(wr, newProject);
             }
 
-            // Notify the changed data to the out.
-            var changedData = new ChangedFileListMessage.ChangedFile(this.Solutions[0], ChangedFileListMessage.ChangedStatus.Changed);
-            var changedFileListMessage = new ChangedFileListMessage();
-            changedFileListMessage.AddFile(changedData);
-            Messenger.Default.Send<ChangedFileListMessage>(changedFileListMessage);
+
+            changedList.Add(this.Solutions[0]);
+
+            //// Notify the changed data to the out.
+            //var changedData = new ChangedFileListMessage.ChangedFile(this.Solutions[0], ChangedFileListMessage.ChangedStatus.Changed);
+            //var changedFileListMessage = new ChangedFileListMessage();
+            //changedFileListMessage.AddFile(changedData);
+            //Messenger.Default.Send<ChangedFileListMessage>(changedFileListMessage);
         }
     }
 }

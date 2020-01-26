@@ -33,19 +33,24 @@ namespace Parse.Tokenize
         {
             List<TokenCell> result = new List<TokenCell>();
             int prevEI = 0;
-            foreach (var data in Regex.Matches(targetString, tokenizeRule, RegexOptions.Multiline | RegexOptions.ExplicitCapture))
+            // If tokenizerule is not defined then don't work tokenize.
+            if(string.IsNullOrEmpty(tokenizeRule)) result.Add(new TokenCell(0, targetString, null));
+            else
             {
-                var matchData = data as Match;
+                foreach (var data in Regex.Matches(targetString, tokenizeRule, RegexOptions.Multiline | RegexOptions.ExplicitCapture))
+                {
+                    var matchData = data as Match;
 
-                this.Matched?.Invoke(matchData);
-                result.AddRange(this.AddToken(prevEI, basisIndex, targetString, matchData));
+                    this.Matched?.Invoke(matchData);
+                    result.AddRange(this.AddToken(prevEI, basisIndex, targetString, matchData));
 
-                prevEI = matchData.Index + matchData.Length;
+                    prevEI = matchData.Index + matchData.Length;
+                }
+
+                // if a string is remained then add to the token.
+                if (prevEI < targetString.Length)
+                    result.Add(new TokenCell(basisIndex + prevEI, targetString.Substring(prevEI, targetString.Length - prevEI), null));
             }
-
-            // if a string is remained then add to the token.
-            if (prevEI < targetString.Length)
-                result.Add(new TokenCell(basisIndex + prevEI, targetString.Substring(prevEI, targetString.Length - prevEI), null));
 
             this.TokenizeCompleted?.Invoke(result);
 
