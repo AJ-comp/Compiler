@@ -18,4 +18,19 @@ namespace ApplicationLayer.WpfApp.Commands
             this.Text = text;
         }
     }
+
+    public class RelayUICommand<T> : RelayCommand<T>
+    {
+        public string Text { get; set; }
+
+        public RelayUICommand(string text, Action<T> execute, bool keepTargetAlive = false) : base(execute, keepTargetAlive)
+        {
+            this.Text = text;
+        }
+
+        public RelayUICommand(string text, Action<T> execute, Func<T, bool> canExecute, bool keepTargetAlive = false) : base(execute, canExecute, keepTargetAlive)
+        {
+            this.Text = text;
+        }
+    }
 }

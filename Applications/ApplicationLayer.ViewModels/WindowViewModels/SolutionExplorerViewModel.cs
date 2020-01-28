@@ -101,7 +101,7 @@ namespace WpfApp.ViewModels.WindowViewModels
 
                 if (File.Exists(child.FullPath)) continue;
 
-                Directory.CreateDirectory(child.OPath);
+                Directory.CreateDirectory(child.CurOPath);
             }
         }
 
@@ -146,7 +146,7 @@ namespace WpfApp.ViewModels.WindowViewModels
             {
                 XmlSerializer xs = new XmlSerializer(typeof(SolutionStruct));
                 SolutionStruct solution = xs.Deserialize(sr) as SolutionStruct;
-                solution.OPath = message.SolutionPath;
+                solution.CurOPath = message.SolutionPath;
                 solution.FullName = message.SolutionName;
                 foreach (var path in solution.SyncWithXMLProjectPaths) solution.CurrentProjectPath.Add(path);
 
@@ -162,12 +162,11 @@ namespace WpfApp.ViewModels.WindowViewModels
                     XmlSerializer xs = new XmlSerializer(typeof(ProjectStruct));
                     ProjectStruct project = xs.Deserialize(sr) as ProjectStruct;
 
-                    project.IsAbsolutePath = item.IsAbsolute;
-                    project.OPath = Path.GetDirectoryName(item.Path);
+                    project.CurOPath = Path.GetDirectoryName(item.Path);
                     project.FullName = Path.GetFileName(item.Path);
                     this.Solutions[0].Projects.Add(project);    // for connect with the parent node (solution)
 
-                    project.SyncWithXMLData();
+                    project.SyncXmlToObject();
                 }
             }
         }
@@ -181,7 +180,7 @@ namespace WpfApp.ViewModels.WindowViewModels
             if (this.Solutions.Count == 0) return;
 
             // if project path is in the solution path.
-            var solutionPath = this.Solutions[0].OPath;
+            var solutionPath = this.Solutions[0].CurOPath;
             int matchedPos = message.ProjectPath.IndexOf(solutionPath) + solutionPath.Length;
             bool isAbsolutePath = (PathHelper.ComparePath(solutionPath, message.ProjectPath) == false);
 

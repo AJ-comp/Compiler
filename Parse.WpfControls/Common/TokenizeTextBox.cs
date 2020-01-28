@@ -33,6 +33,11 @@ namespace Parse.WpfControls.Common
 
         public TokenizeTextBox()
         {
+            // Register default a tokenize rules.
+            this.tokenizeFactory.AddTokenRule(" ", null, false, true);
+            this.tokenizeFactory.AddTokenRule("\r", null, false, true);
+            this.tokenizeFactory.AddTokenRule("\n", null, false, true);
+
             this.Loaded += (s, e) =>
             {
             };
@@ -154,5 +159,8 @@ namespace Parse.WpfControls.Common
             this.scopeSyntaxes.Add(new Tuple<int, int>(startScopeKey, endScopeKey));
             */
         }
+
+
+        public virtual void TokenizeRuleClear() => this.tokenizeFactory = new TokenizeFactory();
     }
 }

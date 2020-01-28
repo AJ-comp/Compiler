@@ -228,4 +228,7 @@
   <data name="ProjectPath" xml:space="preserve">
     <value>프로젝트 경로</value>
   </data>
+  <data name="OpenFolderFromExplorer" xml:space="preserve">
+    <value>파일 탐색기에서 폴더 열기</value>
+  </data>
 </root>

@@ -416,6 +416,14 @@ namespace Parse.WpfControls
             this.textStyleDic.Add(text, new TextStyle(foreBrush, Brushes.Transparent));
             this.AddTokenPattern(text, optionData, bCanDerived, bOperator);
         }
+
+        public override void TokenizeRuleClear()
+        {
+            base.TokenizeRuleClear();
+
+            this.textStyleDic.Clear();
+            this.CompletionItems.Clear();
+        }
     }
 
 

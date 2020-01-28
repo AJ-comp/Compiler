@@ -15,7 +15,7 @@ namespace ApplicationLayer.WpfApp.Converters.LogicConverters
                 string result = string.Empty;
                 OpenFileDialog selectFolderDialog = new OpenFileDialog
                 {
-//                    Filter = "*.ajn | *.mcproj",
+                    Filter = "AJ Solution files (*.ajn)|*.ajn",
                     InitialDirectory = "C:\\Users",
                 };
 

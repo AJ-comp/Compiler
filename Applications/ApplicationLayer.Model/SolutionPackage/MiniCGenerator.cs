@@ -12,9 +12,9 @@ namespace ApplicationLayer.Models.SolutionPackage
         {
             ProjectStruct result = this.CreateEmptyProject(projectPath, isAbsolutePath, projectName, target, parent);
 
-            result.ReferenceFolder[0].Items.Add(new ReferenceFileStruct() { OPath = "MiniC", FullName = "System.dll" });
-            result.ReferenceFolder[0].Items.Add(new ReferenceFileStruct() { OPath = "MiniC", FullName = "System.IO.dll" });
-            result.ReferenceFolder[0].Items.Add(new ReferenceFileStruct() { OPath = "MiniC", FullName = "System.Data.dll" });
+            result.ReferenceFolder[0].Items.Add(new ReferenceFileStruct() { CurOPath = "MiniC", FullName = "System.dll" });
+            result.ReferenceFolder[0].Items.Add(new ReferenceFileStruct() { CurOPath = "MiniC", FullName = "System.IO.dll" });
+            result.ReferenceFolder[0].Items.Add(new ReferenceFileStruct() { CurOPath = "MiniC", FullName = "System.Data.dll" });
 
             result.Items.Add(new FileStruct()
             {
@@ -29,9 +29,8 @@ namespace ApplicationLayer.Models.SolutionPackage
             ProjectStruct result = new ProjectStruct
             {
                 Parent = parent,
-                IsAbsolutePath = isAbsolutePath,
 
-                OPath = projectPath,
+                CurOPath = projectPath,
                 FullName = string.Format("{0}.{1}", projectName, this.Extension + "proj"),
                 Version = 1.0
             };

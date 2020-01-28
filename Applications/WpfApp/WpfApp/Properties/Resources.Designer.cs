@@ -295,6 +295,15 @@ namespace ApplicationLayer.WpfApp.Properties {
         }
         
         /// <summary>
+        ///   Open folder from explorer과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        internal static string OpenFolderFromExplorer {
+            get {
+                return ResourceManager.GetString("OpenFolderFromExplorer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Parse Tree과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         internal static string ParseTree {

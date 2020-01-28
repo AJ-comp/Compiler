@@ -18,5 +18,13 @@ namespace ApplicationLayer.Common.Helpers
 
             return $"{path.Trim()}{Path.DirectorySeparatorChar}".ToLower();
         }
+
+        public static bool IsDrivePath(string path)
+        {
+            if (string.IsNullOrEmpty(path)) return false;
+
+            string filterPath = Path.GetPathRoot(path);
+            return (filterPath.Length > 2 && filterPath.Contains(":"));
+        }
     }
 }

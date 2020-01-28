@@ -59,7 +59,7 @@ namespace ApplicationLayer.Models.SolutionPackage
                 if (root.Length == 0) break;
 
                 path = path.Substring(0, root.Length);
-                FolderStruct child = new FolderStruct() { OPath = root };
+                FolderStruct child = new FolderStruct() { CurOPath = root };
                 current.Folders.Add(child);
 
                 current = child;
@@ -85,7 +85,7 @@ namespace ApplicationLayer.Models.SolutionPackage
                 if (Directory.Exists(Path.Combine(basePath, accumDirectory)) == false) continue;
 
                 path = path.Substring(0, root.Length);
-                FolderStruct child = new FolderStruct() { OPath = root };
+                FolderStruct child = new FolderStruct() { CurOPath = root };
                 current.Folders.Add(child);
 
                 current = child;

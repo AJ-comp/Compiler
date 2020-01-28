@@ -17,7 +17,7 @@ namespace ApplicationLayer.Models.SolutionPackage
 
         [XmlIgnore]
         public List<PathInfo> CurrentProjectPath { get; } = new List<PathInfo>();
-        public List<PathInfo> SyncWithXMLProjectPaths { get; } = new List<PathInfo>();
+        public List<PathInfo> SyncWithXMLProjectPaths { get; private set; } = new List<PathInfo>();
 
         [XmlIgnore]
         public ObservableCollection<ProjectStruct> Projects { get; } = new ObservableCollection<ProjectStruct>();
@@ -39,7 +39,7 @@ namespace ApplicationLayer.Models.SolutionPackage
 
                 if (File.Exists(child.FullPath)) continue;
 
-                Directory.CreateDirectory(child.BasePath);
+                Directory.CreateDirectory(child.BaseOPath);
                 this.CurrentProjectPath.Add(new PathInfo(child.RelativePath, child.IsAbsolutePath));
             }
         }
@@ -49,7 +49,7 @@ namespace ApplicationLayer.Models.SolutionPackage
             SolutionStruct result = new SolutionStruct();
             string solutionNameWithExtension = Path.GetFileNameWithoutExtension(solutionName);
 
-            result.OPath = solutionPath;
+            result.CurOPath = solutionPath;
             result.FullName = solutionName;
             result.Version = 1.0;
 
@@ -59,7 +59,14 @@ namespace ApplicationLayer.Models.SolutionPackage
             result.Projects.Add(projectGenerator.CreateDefaultProject(solutionNameWithExtension, false, solutionNameWithExtension, target, result));
             result.Projects.Add(projectGenerator.CreateDefaultProject(solutionNameWithExtension + "abc", false, solutionNameWithExtension + "abc", target, result));
 
+            result.SyncWithXML();
+
             return result;
+        }
+
+        public void SyncWithXML()
+        {
+            this.SyncWithXMLProjectPaths = new List<PathInfo>(this.CurrentProjectPath);
         }
     }
 
@@ -75,6 +82,18 @@ namespace ApplicationLayer.Models.SolutionPackage
         {
             Path = path;
             IsAbsolute = isAbsolute;
+        }
+
+        public override bool Equals(object obj)
+        {
+            var info = obj as PathInfo;
+            return info != null &&
+                   Path == info.Path;
+        }
+
+        public override int GetHashCode()
+        {
+            return 467214278 + EqualityComparer<string>.Default.GetHashCode(Path);
         }
     }
 }

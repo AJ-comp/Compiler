@@ -128,6 +128,9 @@ namespace Parse.WpfControls
                 foreach (var token in line)
                 {
                     this.SetDecoration(token);
+
+                    // If token.Text included "\r\n" then not works correctly. (separted shape is ok i.e "\r", "\n")
+                    // So do I have to erase "\r\n" ? What is the better way?
                     dc.DrawText(token, new Point(this.algorithm.DrawingPointX, this.algorithm.DrawingPointY));
 
                     this.algorithm.CalculateNextXPoint(token.WidthIncludingTrailingWhitespace);

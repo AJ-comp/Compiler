@@ -123,6 +123,7 @@
     <Compile Include="Converters\EnumToImageConverter.cs" />
     <Compile Include="Converters\EventArgsConverterExtension.cs" />
     <Compile Include="Converters\MouseDoubleClickIndexConverter.cs" />
+    <Compile Include="Converters\TestConverter.cs" />
     <Compile Include="Converters\ToResourceKeyConverter.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>

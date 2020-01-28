@@ -1,5 +1,4 @@
 ﻿using Parse.FrontEnd.Grammars;
-using Parse.FrontEnd.Grammars.MiniC;
 using Parse.FrontEnd.Parsers.EventArgs;
 using Parse.FrontEnd.Parsers.LR;
 using Parse.Tokenize;
@@ -162,8 +161,6 @@ namespace Parse.WpfControls.SyntaxEditor
 
                     this.bReserveRegistKeywords = false;
                 }
-
-//                this.TextArea.InvalidateVisual();
             };
         }
 
@@ -195,6 +192,8 @@ namespace Parse.WpfControls.SyntaxEditor
 
         private void RegisterKeywords(Grammar grammar)
         {
+            this.TextArea.TokenizeRuleClear();
+
             // The keyword type doesn't have delimitable ability.
             // The terminal that has the derive ability also doesn't have delimitable ability.
             // Only operator type has delimitable ability.
@@ -225,7 +224,10 @@ namespace Parse.WpfControls.SyntaxEditor
             }
 
             foreach (var delimiter in grammar.DelimiterDic)
-                this.TextArea.DelimiterSet.Add(delimiter.Key);
+            {
+                if(this.TextArea.DelimiterSet.Contains(delimiter.Key) == false)
+                    this.TextArea.DelimiterSet.Add(delimiter.Key);
+            }
 
 
             // filtering test code

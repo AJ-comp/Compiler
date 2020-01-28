@@ -24,6 +24,9 @@
                     <MenuItem Header="{lex:Loc Key=Project}" Command="{x:Static commands:MenuActionCommands.AddNewProject}"/>
                     <MenuItem Command="Cut"/>
                     <MenuItem Command="Copy"/>
+                    <Separator/>
+                    <MenuItem Command="{x:Static commands:MenuActionCommands.OpenFolder}" CommandParameter="{Binding}"/>
+                    <Separator/>
                 </ContextMenu>
             </StackPanel.ContextMenu>
         </StackPanel>
@@ -45,10 +48,13 @@
                     <Separator/>
                     <MenuItem Header="{lex:Loc Key=Add}">
                         <MenuItem Header="{lex:Loc Key=NewItem}"/>
-                        <MenuItem Header="{lex:Loc Key=ExistItem}"/>
-                        <MenuItem Header="{lex:Loc Key=NewFolder}"/>
+                        <MenuItem Command="{x:Static commands:MenuActionCommands.AddExistItem}" CommandParameter="{Binding}"/>
+                        <MenuItem Command="{x:Static commands:MenuActionCommands.AddNewFolder}" CommandParameter="{Binding}"/>
                     </MenuItem>
                     <MenuItem Command="Copy"/>
+                    <Separator/>
+                    <MenuItem Command="{x:Static commands:MenuActionCommands.OpenFolder}" CommandParameter="{Binding}"/>
+                    <Separator/>
                 </ContextMenu>
             </StackPanel.ContextMenu>
         </StackPanel>
@@ -77,7 +83,7 @@
 
     <HierarchicalDataTemplate DataType="{x:Type solutionPackage:FolderStruct}" ItemsSource="{Binding Children}">
         <StackPanel Orientation="Horizontal">
-            <Image x:Name="image" Margin="0 0 5 0" Source="{DynamicResource CloseFolderImagePath}"/>
+            <Image x:Name="image" Width="16" Height="16" Margin="0 0 5 0" Source="{DynamicResource CloseFolderImagePath}"/>
             <TextBlock Text="{Binding FullName}"/>
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="PreviewMouseRightButtonDown">
@@ -90,6 +96,9 @@
                     <Separator/>
                     <MenuItem Command="Cut"/>
                     <MenuItem Command="Copy"/>
+                    <Separator/>
+                    <MenuItem Command="{x:Static commands:MenuActionCommands.OpenFolder}" CommandParameter="{Binding}"/>
+                    <Separator/>
                 </ContextMenu>
             </StackPanel.ContextMenu>
         </StackPanel>

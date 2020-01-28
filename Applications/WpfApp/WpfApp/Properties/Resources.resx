@@ -228,4 +228,7 @@
   <data name="ProjectPath" xml:space="preserve">
     <value>Project Path</value>
   </data>
+  <data name="OpenFolderFromExplorer" xml:space="preserve">
+    <value>Open folder from explorer</value>
+  </data>
 </root>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ApplicationLayer.Common.Helpers;
+using System;
 using System.ComponentModel;
 using System.IO;
 using System.Xml.Serialization;
@@ -8,7 +9,7 @@ namespace ApplicationLayer.Models.SolutionPackage
     public class HirStruct : INotifyPropertyChanged, IEquatable<HirStruct>
     {
         [XmlIgnore]
-        public string OPath { get; set; } = string.Empty;
+        public string CurOPath { get; set; } = string.Empty;
         [XmlIgnore]
         public string FullName { get; set; } = string.Empty;
         [XmlIgnore]
@@ -18,12 +19,40 @@ namespace ApplicationLayer.Models.SolutionPackage
         [XmlIgnore]
         public string NameWithoutExtension => Path.GetFileNameWithoutExtension(this.FullName);
         [XmlIgnore]
-        public string FullPath => Path.Combine(this.BasePath, this.FullName);
+        public string FullPath => Path.Combine(this.BaseOPath, this.FullName);
         [XmlIgnore]
-        public string RelativePath => Path.Combine(this.OPath, this.FullName);
+        public string RelativePath => Path.Combine(this.CurOPath, this.FullName);
+        [XmlIgnore]
+        public string AutoPath => (this.IsAbsolutePath) ? this.FullPath : this.RelativePath;
+        [XmlIgnore]
+        public bool IsRoot => (this.Parent == null);
+        [XmlIgnore]
+        public bool IsInRootPath => PathHelper.ComparePath(this.Root.BaseOPath, this.BaseOPath);
+        [XmlIgnore]
+        public bool IsAbsolutePath
+        {
+            get
+            {
+                if (this.CurOPath.Length == 0) return false;
+                // If CurOPath doesn't include drive path then is the relatve path.
+                if(PathHelper.IsDrivePath(this.CurOPath) == false) return false;
+
+                return (PathHelper.ComparePath(this.Root.BaseOPath, this.CurOPath) == false);
+            }
+        }
 
         [XmlIgnore]
-        public bool IsAbsolutePath { get; set; } = false;
+        public HirStruct Root
+        {
+            get
+            {
+                HirStruct current = this;
+                while (current.Parent != null) current = current.Parent;
+
+                return current;
+            }
+        }
+
 
         private bool isSelected;
         [XmlIgnore]
@@ -38,18 +67,18 @@ namespace ApplicationLayer.Models.SolutionPackage
         }
 
         [XmlIgnore]
-        public string BasePath
+        public string BaseOPath
         {
             get
             {
-                string result = this.OPath;
+                string result = this.CurOPath;
 
-                if (this.IsAbsolutePath) return result;
+                if (PathHelper.IsDrivePath(result)) return result;
 
                 HirStruct current = this;
                 while (current.Parent != null)
                 {
-                    result = Path.Combine(current.Parent.OPath, result);
+                    result = Path.Combine(current.Parent.CurOPath, result);
                     current = current.Parent;
                 }
 
