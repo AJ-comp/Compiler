@@ -69,8 +69,8 @@ namespace ApplicationLayer.WpfApp.Commands
         /// <summary>
         /// Load Existing Item Command
         /// </summary>
-        public static readonly RelayUICommand<ProjectStruct> AddExistItem = new RelayUICommand<ProjectStruct>(Properties.Resources.ExistItem,
-            (projectStruct) =>
+        public static readonly RelayUICommand<HirStruct> AddExistItem = new RelayUICommand<HirStruct>(Properties.Resources.ExistItem,
+            (hirStruct) =>
             {
                 OpenFileDialog dialog = new OpenFileDialog();
                 dialog.Filter = "mini C files (*.mc)|*.mc|All files (*.*)|*.*";
@@ -78,13 +78,72 @@ namespace ApplicationLayer.WpfApp.Commands
 
                 foreach(var fileName in dialog.FileNames)
                 {
-//                    fileName.
+                    // If file is not in the current path then copy it to the current path.
+                    if(hirStruct.BaseOPath != Path.GetDirectoryName(fileName))
+                    {
+                        string destPath = Path.Combine(hirStruct.BaseOPath, Path.GetFileName(fileName));
+                        if (File.Exists(destPath))
+                        {
+                            DialogResult dResult = MessageBox.Show(Properties.Resources.AlreadyExistFile, string.Empty, MessageBoxButtons.YesNo);
+
+                            if (dResult == DialogResult.Yes) File.Copy(fileName, destPath);
+                            else return;
+                        }
+                        else File.Copy(fileName, destPath);
+                    }
+
+                    var fileStruct = new FileStruct()
+                    {
+                        FullName = Path.GetFileName(fileName),
+                        Data = File.ReadAllText(fileName)
+                    };
+
+                    if (hirStruct is ProjectStruct) (hirStruct as ProjectStruct).Items.Add(fileStruct);
+                    else if (hirStruct is FolderStruct) (hirStruct as FolderStruct).Items.Add(fileStruct);
                 }
             }, (condition) =>
             {
                 var vm = parentWindow.DataContext as MainViewModel;
                 return (vm.IsDebugStatus == false);
             });
+
+
+        /// <summary>
+        /// Item delete command
+        /// </summary>
+        public static readonly RelayUICommand<HirStruct> DelItem = new RelayUICommand<HirStruct>(Properties.Resources.Delete,
+            (selectedStruct) =>
+            {
+                HirStruct parent = selectedStruct.Parent;
+                if (parent == null) return;
+
+                DialogResult dResult = MessageBox.Show(Properties.Resources.DeleteWarning, string.Empty, MessageBoxButtons.YesNo);
+
+                if (dResult == DialogResult.Yes)
+                {
+                    if (selectedStruct is FolderStruct) Directory.Delete(selectedStruct.FullPath);
+                    else File.Delete(selectedStruct.FullPath);
+                }
+                else return;
+
+                if (parent is SolutionStruct)
+                {
+                    (parent as SolutionStruct).RemoveChild(selectedStruct);
+                }
+                else if (parent is ProjectStruct)
+                {
+                    (parent as ProjectStruct).RemoveChild(selectedStruct);
+                }
+                else if (parent is FolderStruct)
+                {
+                    (parent as FolderStruct).RemoveChild(selectedStruct);
+                }
+            }, (condition) =>
+            {
+                var vm = parentWindow.DataContext as MainViewModel;
+                return (vm.IsDebugStatus == false);
+            });
+
 
         /// <summary>
         /// New Folder Command
@@ -107,7 +166,7 @@ namespace ApplicationLayer.WpfApp.Commands
                     }
                 }
 
-                projectStruct.Folders.Add(new FolderStruct() { FullName = newFolderName });
+                projectStruct.Folders.Add(new FolderStruct() { CurOPath = newFolderName, FullName = newFolderName });
                 
             }, (condition) =>
             {

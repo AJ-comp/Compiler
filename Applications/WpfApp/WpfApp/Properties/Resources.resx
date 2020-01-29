@@ -231,4 +231,13 @@
   <data name="OpenFolderFromExplorer" xml:space="preserve">
     <value>Open folder from explorer</value>
   </data>
+  <data name="AlreadyExistFile" xml:space="preserve">
+    <value>File aleady exist replace it?</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="DeleteWarning" xml:space="preserve">
+    <value>You will really delete it?</value>
+  </data>
 </root>

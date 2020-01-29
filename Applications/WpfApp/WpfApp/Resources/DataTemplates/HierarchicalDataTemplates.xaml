@@ -24,6 +24,7 @@
                     <MenuItem Header="{lex:Loc Key=Project}" Command="{x:Static commands:MenuActionCommands.AddNewProject}"/>
                     <MenuItem Command="Cut"/>
                     <MenuItem Command="Copy"/>
+                    <MenuItem Command="{x:Static commands:MenuActionCommands.DelItem}" CommandParameter="{Binding}"/>
                     <Separator/>
                     <MenuItem Command="{x:Static commands:MenuActionCommands.OpenFolder}" CommandParameter="{Binding}"/>
                     <Separator/>
@@ -32,6 +33,7 @@
         </StackPanel>
     </HierarchicalDataTemplate>
 
+    
     <HierarchicalDataTemplate DataType="{x:Type solutionPackage:ProjectStruct}" ItemsSource="{Binding Children}">
         <StackPanel Orientation="Horizontal">
             <Image x:Name="projectImage" Width="16" Height="16" Margin="0 0 5 0" 
@@ -52,6 +54,7 @@
                         <MenuItem Command="{x:Static commands:MenuActionCommands.AddNewFolder}" CommandParameter="{Binding}"/>
                     </MenuItem>
                     <MenuItem Command="Copy"/>
+                    <MenuItem Command="{x:Static commands:MenuActionCommands.DelItem}" CommandParameter="{Binding}"/>
                     <Separator/>
                     <MenuItem Command="{x:Static commands:MenuActionCommands.OpenFolder}" CommandParameter="{Binding}"/>
                     <Separator/>
@@ -81,6 +84,7 @@
         </StackPanel>
     </HierarchicalDataTemplate>
 
+    
     <HierarchicalDataTemplate DataType="{x:Type solutionPackage:FolderStruct}" ItemsSource="{Binding Children}">
         <StackPanel Orientation="Horizontal">
             <Image x:Name="image" Width="16" Height="16" Margin="0 0 5 0" Source="{DynamicResource CloseFolderImagePath}"/>
@@ -94,8 +98,14 @@
                 <ContextMenu>
                     <MenuItem Header="{lex:Loc Key=Open}"/>
                     <Separator/>
+                    <MenuItem Header="{lex:Loc Key=Add}">
+                        <MenuItem Header="{lex:Loc Key=NewItem}"/>
+                        <MenuItem Command="{x:Static commands:MenuActionCommands.AddExistItem}" CommandParameter="{Binding}"/>
+                        <MenuItem Command="{x:Static commands:MenuActionCommands.AddNewFolder}" CommandParameter="{Binding}"/>
+                    </MenuItem>
                     <MenuItem Command="Cut"/>
                     <MenuItem Command="Copy"/>
+                    <MenuItem Command="{x:Static commands:MenuActionCommands.DelItem}" CommandParameter="{Binding}"/>
                     <Separator/>
                     <MenuItem Command="{x:Static commands:MenuActionCommands.OpenFolder}" CommandParameter="{Binding}"/>
                     <Separator/>
@@ -125,6 +135,7 @@
         </StackPanel>
     </DataTemplate>
 
+    
     <DataTemplate DataType="{x:Type solutionPackage:FileStruct}">
         <StackPanel Orientation="Horizontal">
             <Image Width="16" Height="16" Margin="0 0 5 0" Source="{DynamicResource ProjectImagePath}"/>
@@ -140,6 +151,7 @@
                     <Separator/>
                     <MenuItem Command="Cut"/>
                     <MenuItem Command="Copy"/>
+                    <MenuItem Command="{x:Static commands:MenuActionCommands.DelItem}" CommandParameter="{Binding}"/>
                 </ContextMenu>
             </StackPanel.ContextMenu>
         </StackPanel>

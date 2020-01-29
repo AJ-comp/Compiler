@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.IO;
 using System.Windows.Data;
 using System.Xml;
@@ -27,13 +28,36 @@ namespace ApplicationLayer.Models.SolutionPackage
             }
         }
 
+        public StringCollection AllItemPaths
+        {
+            get
+            {
+                StringCollection result = new StringCollection();
+
+                if (this.Items.Count == 0 && this.Folders.Count == 0) result.Add(this.CurOPath);
+
+                foreach(var item in this.Items)
+                {
+                    result.Add(Path.Combine(this.CurOPath, item.AutoPath));
+                }
+
+                foreach (var folder in this.Folders)
+                {
+                    foreach(var item in folder.AllItemPaths)
+                        result.Add(Path.Combine(this.CurOPath, item));
+                }
+
+                return result;
+            }
+        }
+
         public FolderStruct()
         {
             this.Folders.CollectionChanged += Folders_CollectionChanged;
             this.Items.CollectionChanged += Items_CollectionChanged;
         }
 
-        private void Folders_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        private void Folders_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             for (int i = 0; i < e.NewItems?.Count; i++)
             {
@@ -42,9 +66,23 @@ namespace ApplicationLayer.Models.SolutionPackage
             }
         }
 
-        private void Items_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        private void Items_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
+            for (int i = 0; i < e.NewItems?.Count; i++)
+            {
+                FileStruct item = e.NewItems[i] as FileStruct;
+                item.Parent = this;
+            }
+        }
 
+        /// <summary>
+        /// This function removes the child after find child type.
+        /// </summary>
+        /// <param name="child">child to remove</param>
+        public void RemoveChild(HirStruct child)
+        {
+            if (child is FolderStruct) this.Folders.Remove(child as FolderStruct);
+            else if (child is FileStruct) this.Items.Remove(child as FileStruct);
         }
 
         public static FolderStruct GetFolderSet(string path)

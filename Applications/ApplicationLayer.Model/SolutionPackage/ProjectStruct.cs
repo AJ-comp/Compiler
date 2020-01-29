@@ -1,5 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using ApplicationLayer.Common.Helpers;
+using System.Collections;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.IO;
@@ -19,9 +19,7 @@ namespace ApplicationLayer.Models.SolutionPackage
         public ObservableCollection<ProjectProperty> Properties { get; } = new ObservableCollection<ProjectProperty>();
 
         public StringCollection referencePaths { get; } = new StringCollection();
-
-        [XmlIgnore]
-        public List<PathInfo> ItemPaths { get; } = new List<PathInfo>();
+        public StringCollection ItemPaths { get; } = new StringCollection();
 
         [XmlIgnore]
         public ObservableCollection<ReferenceStruct> ReferenceFolder { get; } = new ObservableCollection<ReferenceStruct>();
@@ -70,7 +68,8 @@ namespace ApplicationLayer.Models.SolutionPackage
                 FolderStruct folder = e.NewItems[i] as FolderStruct;
                 folder.Parent = this;
 
-                var pathInfo = (folder.IsAbsolutePath) ? new PathInfo(folder.FullPath, true) : new PathInfo(folder.RelativePath, false);
+                // The folder or file path always uses only relative path.
+                var pathInfo = folder.RelativePath;
                 if (this.ItemPaths.Contains(pathInfo) == false) this.ItemPaths.Add(pathInfo);
 
                 folder.Folders.CollectionChanged += SubFolders_CollectionChanged;
@@ -85,13 +84,9 @@ namespace ApplicationLayer.Models.SolutionPackage
                 FileStruct item = e.NewItems[i] as FileStruct;
                 item.Parent = this;
 
-                var pathInfo = (item.IsAbsolutePath) ? new PathInfo(item.FullPath, true) : new PathInfo(item.RelativePath, false);
+                // The folder or file path always uses only relative path.
+                var pathInfo = item.RelativePath;
                 if (this.ItemPaths.Contains(pathInfo) == false) this.ItemPaths.Add(pathInfo);
-
-                if (File.Exists(item.FullPath)) continue;
-
-                Directory.CreateDirectory(item.BaseOPath);
-                File.WriteAllText(item.FullPath, item.Data);
             }
         }
 
@@ -100,10 +95,12 @@ namespace ApplicationLayer.Models.SolutionPackage
             for (int i = 0; i < e.NewItems?.Count; i++)
             {
                 FolderStruct folder = e.NewItems[i] as FolderStruct;
-                var findPath = new PathInfo(folder.AutoPath, true);
-                int index = this.ItemPaths.FindIndex(a => (a == findPath));
+
+                // The folder or file path always uses only relative path.
+                var findPath = folder.RelativePath;
+                int index = this.ItemPaths.FindIndex(findPath);
                 if (index >= 0)
-                    this.ItemPaths[index].Path = folder.FullPath;
+                    this.ItemPaths[index] = folder.FullPath;
 
                 folder.Folders.CollectionChanged += SubFolders_CollectionChanged;
                 folder.Items.CollectionChanged += SubItems_CollectionChanged;
@@ -115,10 +112,12 @@ namespace ApplicationLayer.Models.SolutionPackage
             for (int i = 0; i < e.NewItems?.Count; i++)
             {
                 FileStruct item = e.NewItems[i] as FileStruct;
-                var findPath = new PathInfo(item.AutoPath, true);
-                int index = this.ItemPaths.FindIndex(a => (a == findPath));
+
+                // The folder or file path always uses only relative path.
+                var findPath = item.RelativePath;
+                int index = this.ItemPaths.FindIndex(findPath);
                 if (index >= 0)
-                    this.ItemPaths[index].Path = item.FullPath;
+                    this.ItemPaths[index] = item.FullPath;
             }
         }
 
@@ -139,6 +138,17 @@ namespace ApplicationLayer.Models.SolutionPackage
         }
 
         /// <summary>
+        /// This function removes the child after find child type.
+        /// </summary>
+        /// <param name="child">child to remove</param>
+        public void RemoveChild(HirStruct child)
+        {
+            if (child is FolderStruct) this.Folders.Remove(child as FolderStruct);
+            else if (child is FileStruct) this.Items.Remove(child as FileStruct);
+            else if (child is ReferenceFileStruct) this.ReferenceFolder[0].Items.Remove(child as ReferenceFileStruct);
+        }
+
+        /// <summary>
         /// This function syncronize with object based on xml.
         /// </summary>
         public void SyncXmlToObject()
@@ -156,8 +166,8 @@ namespace ApplicationLayer.Models.SolutionPackage
             this.Items.Clear();
             foreach (var item in this.ItemPaths)
             {
-                var directoryName = Path.GetDirectoryName(item.Path);
-                var fileName = Path.GetFileName(item.Path);
+                var directoryName = Path.GetDirectoryName(item);
+                var fileName = Path.GetFileName(item);
 
                 if (string.IsNullOrEmpty(directoryName))
                     this.Items.Add(new FileStruct() { FullName = fileName });
@@ -176,13 +186,24 @@ namespace ApplicationLayer.Models.SolutionPackage
         public void SyncObjectToXml()
         {
             this.referencePaths.Clear();
-
             if(this.ReferenceFolder.Count > 0)
             {
                 foreach(var item in this.ReferenceFolder[0].Items) this.referencePaths.Add(item.FullPath);
             }
 
+            this.ItemPaths.Clear();
+            foreach(var folder in this.Folders)
+            {
+                // The folders or files in the ProjectStruct uses only relative path.
+                foreach(var item in folder.AllItemPaths)
+                    this.ItemPaths.Add(item);
+            }
 
+            foreach(var item in this.Items)
+            {
+                // The folders or files in the ProjectStruct uses only relative path.
+                this.ItemPaths.Add(item.FullName);
+            }
         }
     }
 

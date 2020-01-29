@@ -16,10 +16,19 @@ namespace ApplicationLayer.Models.SolutionPackage
             result.ReferenceFolder[0].Items.Add(new ReferenceFileStruct() { CurOPath = "MiniC", FullName = "System.IO.dll" });
             result.ReferenceFolder[0].Items.Add(new ReferenceFileStruct() { CurOPath = "MiniC", FullName = "System.Data.dll" });
 
+            string fileName = string.Format("main.{0}", this.Extension);
+            string fileData = string.Empty;
+
+            Directory.CreateDirectory(result.BaseOPath);
+            File.WriteAllText(Path.Combine(result.BaseOPath, fileName), fileData);
+
             result.Items.Add(new FileStruct()
             {
-                FullName = string.Format("main.{0}", this.Extension)
+                FullName = fileName,
+                Data = fileData
             });
+
+            result.SyncObjectToXml();
 
             return result;
         }

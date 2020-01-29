@@ -44,6 +44,20 @@ namespace ApplicationLayer.Models.SolutionPackage
             }
         }
 
+        public void SyncWithXML()
+        {
+            this.SyncWithXMLProjectPaths = new List<PathInfo>(this.CurrentProjectPath);
+        }
+
+        /// <summary>
+        /// This function removes the child after find child type.
+        /// </summary>
+        /// <param name="child">child to remove</param>
+        public void RemoveChild(HirStruct child)
+        {
+            if (child is ProjectStruct) this.Projects.Remove(child as ProjectStruct);
+        }
+
         public static SolutionStruct Create(string solutionPath, string solutionName, Grammar grammar, Target target)
         {
             SolutionStruct result = new SolutionStruct();
@@ -62,11 +76,6 @@ namespace ApplicationLayer.Models.SolutionPackage
             result.SyncWithXML();
 
             return result;
-        }
-
-        public void SyncWithXML()
-        {
-            this.SyncWithXMLProjectPaths = new List<PathInfo>(this.CurrentProjectPath);
         }
     }
 
@@ -95,5 +104,7 @@ namespace ApplicationLayer.Models.SolutionPackage
         {
             return 467214278 + EqualityComparer<string>.Default.GetHashCode(Path);
         }
+
+        public override string ToString() => string.Format("[{0},{1}]", this.Path, this.IsAbsolute);
     }
 }

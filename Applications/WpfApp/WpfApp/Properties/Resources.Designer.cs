@@ -97,6 +97,15 @@ namespace ApplicationLayer.WpfApp.Properties {
         }
         
         /// <summary>
+        ///   File aleady exist replace it?과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        internal static string AlreadyExistFile {
+            get {
+                return ResourceManager.GetString("AlreadyExistFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Cancel과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         internal static string Cancel {
@@ -156,6 +165,24 @@ namespace ApplicationLayer.WpfApp.Properties {
         internal static string CurrentProject {
             get {
                 return ResourceManager.GetString("CurrentProject", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Delete과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        internal static string Delete {
+            get {
+                return ResourceManager.GetString("Delete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   You will really delete it?과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        internal static string DeleteWarning {
+            get {
+                return ResourceManager.GetString("DeleteWarning", resourceCulture);
             }
         }
         
