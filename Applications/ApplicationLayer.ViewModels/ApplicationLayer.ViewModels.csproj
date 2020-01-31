@@ -59,6 +59,7 @@
     <Compile Include="AlarmListViewModel.cs" />
     <Compile Include="DialogViewModels\DialogViewModel.cs" />
     <Compile Include="DialogViewModels\NewFileDialogViewModel.cs" />
+    <Compile Include="DialogViewModels\NewItemViewModel.cs" />
     <Compile Include="DialogViewModels\NewProjectViewModel.cs" />
     <Compile Include="DialogViewModels\NewSolutionViewModel.cs" />
     <Compile Include="DocumentTypeViewModels\DocumentViewModel.cs" />

@@ -51,16 +51,28 @@ namespace ApplicationLayer.WpfApp.Commands
         /// <summary>
         /// New Item Command
         /// </summary>
-        public static readonly RelayUICommand AddNewItem = new RelayUICommand(Properties.Resources.NewItem,
-            () =>
+        public static readonly RelayUICommand<HirStruct> AddNewItem = new RelayUICommand<HirStruct>(Properties.Resources.NewItem,
+            (hirStruct) =>
             {
-                NewProjectDialog dialog = new NewProjectDialog();
-                var vm = dialog.DataContext as NewProjectViewModel;
+                NewItemDialog dialog = new NewItemDialog();
+                var vm = dialog.DataContext as NewItemViewModel;
+                //vm.CreateRequest += (s,e) =>
+                //{
+                //    var fileStruct = new FileStruct()
+                //    {
+                //        FullName = vm.SeletedItem.ItemName,
+                //        Data = vm.SeletedItem.Data
+                //    };
+
+                //    if (hirStruct is ProjectStruct) (hirStruct as ProjectStruct).Items.Add(fileStruct);
+                //    else if (hirStruct is FolderStruct) (hirStruct as FolderStruct).Items.Add(fileStruct);
+                //};
 
                 dialog.Owner = parentWindow;
                 dialog.ShowInTaskbar = false;
                 dialog.ShowDialog();
-            }, () =>
+
+            }, (condition) =>
             {
                 var vm = parentWindow.DataContext as MainViewModel;
                 return (vm.IsDebugStatus == false);

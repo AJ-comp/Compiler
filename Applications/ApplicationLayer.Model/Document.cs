@@ -5,6 +5,7 @@
         public string ImageSource { get; }
         public string ItemName { get; }
         public string Explain { get; }
+        public string Data { get; }
 
         public Document(string imageSource, string itemName, string explain)
         {

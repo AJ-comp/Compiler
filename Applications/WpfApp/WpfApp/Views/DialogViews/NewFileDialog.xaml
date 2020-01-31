@@ -25,7 +25,7 @@
         
         <ListBox HorizontalContentAlignment="Stretch"
                         ItemsSource="{Binding NewFileDataCollection}" 
-                        SelectedItem="{Binding SelectedItem}">
+                        SelectedIndex="{Binding SelectedIndex}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Border x:Name="border" BorderThickness="1" VerticalAlignment="Stretch">

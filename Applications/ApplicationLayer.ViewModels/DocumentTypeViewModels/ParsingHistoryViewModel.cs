@@ -4,7 +4,7 @@
     {
 //        public DataGrid ParsingHistory { get; set; }
 
-        public ParsingHistoryViewModel() : base(ApplicationLayer.ViewModels.Properties.Resource.ParsingHistory)
+        public ParsingHistoryViewModel() : base(Properties.Resource.ParsingHistory)
         {
         }
     }

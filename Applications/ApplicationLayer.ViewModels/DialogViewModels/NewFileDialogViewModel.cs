@@ -9,6 +9,20 @@ namespace ApplicationLayer.ViewModels.DialogViewModels
     {
         public ObservableCollection<Document> NewFileDataCollection { get; } = new ObservableCollection<Document>();
 
+        private int selectedIndex = -1;
+        public int SelectedIndex
+        {
+            get => this.selectedIndex;
+            set
+            {
+                this.selectedIndex = value;
+                this.RaisePropertyChanged("SelectedIndex");
+
+                if (this.selectedIndex >= 0 && this.selectedIndex < this.NewFileDataCollection.Count)
+                    this.SeletedItem = this.NewFileDataCollection[this.selectedIndex];
+            }
+        }
+
         private Document selectedItem;
         public Document SeletedItem
         {

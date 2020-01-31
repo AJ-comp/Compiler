@@ -21,7 +21,7 @@
                 <ContextMenu>
                     <MenuItem Header="{lex:Loc Key=Open}"/>
                     <Separator/>
-                    <MenuItem Header="{lex:Loc Key=Project}" Command="{x:Static commands:MenuActionCommands.AddNewProject}"/>
+                    <MenuItem Command="{x:Static commands:MenuActionCommands.AddNewProject}"/>
                     <MenuItem Command="Cut"/>
                     <MenuItem Command="Copy"/>
                     <MenuItem Command="{x:Static commands:MenuActionCommands.DelItem}" CommandParameter="{Binding}"/>
@@ -49,7 +49,7 @@
                     <MenuItem Header="{lex:Loc Key=Open}"/>
                     <Separator/>
                     <MenuItem Header="{lex:Loc Key=Add}">
-                        <MenuItem Header="{lex:Loc Key=NewItem}"/>
+                        <MenuItem Command="{x:Static commands:MenuActionCommands.AddNewItem}" CommandParameter="{Binding}"/>
                         <MenuItem Command="{x:Static commands:MenuActionCommands.AddExistItem}" CommandParameter="{Binding}"/>
                         <MenuItem Command="{x:Static commands:MenuActionCommands.AddNewFolder}" CommandParameter="{Binding}"/>
                     </MenuItem>
@@ -99,7 +99,7 @@
                     <MenuItem Header="{lex:Loc Key=Open}"/>
                     <Separator/>
                     <MenuItem Header="{lex:Loc Key=Add}">
-                        <MenuItem Header="{lex:Loc Key=NewItem}"/>
+                        <MenuItem Command="{x:Static commands:MenuActionCommands.AddNewItem}" CommandParameter="{Binding}"/>
                         <MenuItem Command="{x:Static commands:MenuActionCommands.AddExistItem}" CommandParameter="{Binding}"/>
                         <MenuItem Command="{x:Static commands:MenuActionCommands.AddNewFolder}" CommandParameter="{Binding}"/>
                     </MenuItem>

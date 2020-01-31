@@ -45,6 +45,9 @@
   <ItemGroup>
     <Compile Include="AlarmData.cs" />
     <Compile Include="Document.cs" />
+    <Compile Include="GrammarPackages\IGrammarFactory.cs" />
+    <Compile Include="GrammarPackages\MiniCPackage\MiniCFactory.cs" />
+    <Compile Include="GrammarPackages\NewItem.cs" />
     <Compile Include="Invokers\Invoker.cs" />
     <Compile Include="ProjectData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -79,5 +82,6 @@
   <ItemGroup>
     <None Include="app.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
