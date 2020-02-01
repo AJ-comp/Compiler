@@ -4,6 +4,6 @@ namespace ApplicationLayer.Models.GrammarPackages
 {
     public interface IGrammarFactory
     {
-        ObservableCollection<NewItem> ItemList { get; }
+        ObservableCollection<Document> ItemList { get; }
     }
 }

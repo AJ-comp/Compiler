@@ -1,4 +1,5 @@
 ﻿using ApplicationLayer.Common.Helpers;
+using ApplicationLayer.Models;
 using ApplicationLayer.Models.SolutionPackage;
 using ApplicationLayer.ViewModels.Messages;
 using GalaSoft.MvvmLight;
@@ -14,6 +15,7 @@ namespace WpfApp.ViewModels.WindowViewModels
 {
     public class SolutionExplorerViewModel : ViewModelBase
     {
+        private IMessageBoxService messageBoxService;
         private HashSet<HirStruct> changedList = new HashSet<HirStruct>();
 
         public ObservableCollection<SolutionStruct> Solutions { get; } = new ObservableCollection<SolutionStruct>();
@@ -85,9 +87,9 @@ namespace WpfApp.ViewModels.WindowViewModels
         }
 
 
-        // for test
-        public SolutionExplorerViewModel()
+        public SolutionExplorerViewModel(IMessageBoxService messageBoxService)
         {
+            this.messageBoxService = messageBoxService;
             this.Solutions.CollectionChanged += Solutions_CollectionChanged;
         }
 
@@ -153,22 +155,40 @@ namespace WpfApp.ViewModels.WindowViewModels
                 this.Solutions.Add(solution);
             }
 
+            bool bFiredError = false;
+
             foreach (var item in this.Solutions[0].SyncWithXMLProjectPaths)
             {
                 string fullPath = (item.IsAbsolute) ? item.Path : Path.Combine(message.SolutionPath, item.Path);
 
-                using (StreamReader sr = new StreamReader(fullPath))
+                try
                 {
-                    XmlSerializer xs = new XmlSerializer(typeof(ProjectStruct));
-                    ProjectStruct project = xs.Deserialize(sr) as ProjectStruct;
+                    using (StreamReader sr = new StreamReader(fullPath))
+                    {
+                        XmlSerializer xs = new XmlSerializer(typeof(ProjectStruct));
+                        ProjectStruct project = xs.Deserialize(sr) as ProjectStruct;
 
-                    project.CurOPath = Path.GetDirectoryName(item.Path);
-                    project.FullName = Path.GetFileName(item.Path);
-                    this.Solutions[0].Projects.Add(project);    // for connect with the parent node (solution)
+                        project.CurOPath = Path.GetDirectoryName(item.Path);
+                        project.FullName = Path.GetFileName(item.Path);
+                        this.Solutions[0].Projects.Add(project);    // for connect with the parent node (solution)
 
-                    project.SyncXmlToObject();
+                        project.SyncXmlToObject();
+                    }
+                }
+                catch
+                {
+                    bFiredError = true;
+                    ErrorProjectStruct project = new ErrorProjectStruct()
+                    {
+                        FullName = item.Path,
+                        CurOPath = Path.GetDirectoryName(item.Path)
+                    };
+
+                    this.Solutions[0].ErrorProjects.Add(project);
                 }
             }
+
+            if (bFiredError) this.messageBoxService?.ShowWarning("Fired more one error when project load.", "");
         }
 
         /// <summary>

@@ -208,6 +208,12 @@ namespace ApplicationLayer.Models.SolutionPackage
     }
 
 
+    public class ErrorProjectStruct : HirStruct
+    {
+        public string DisplayName => NameWithoutExtension + " (not load)";
+    }
+
+
     [XmlInclude(typeof(ReferenceFileStruct))]
     public class ReferenceStruct : HirStruct
     {

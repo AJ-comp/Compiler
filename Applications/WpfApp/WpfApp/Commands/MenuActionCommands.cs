@@ -56,17 +56,13 @@ namespace ApplicationLayer.WpfApp.Commands
             {
                 NewItemDialog dialog = new NewItemDialog();
                 var vm = dialog.DataContext as NewItemViewModel;
-                //vm.CreateRequest += (s,e) =>
-                //{
-                //    var fileStruct = new FileStruct()
-                //    {
-                //        FullName = vm.SeletedItem.ItemName,
-                //        Data = vm.SeletedItem.Data
-                //    };
+                vm.CreateRequest += (s, e) =>
+                {
+                    var fileStruct = vm.SelectedItem.FileStruct;
 
-                //    if (hirStruct is ProjectStruct) (hirStruct as ProjectStruct).Items.Add(fileStruct);
-                //    else if (hirStruct is FolderStruct) (hirStruct as FolderStruct).Items.Add(fileStruct);
-                //};
+                    if (hirStruct is ProjectStruct) (hirStruct as ProjectStruct).Items.Add(fileStruct);
+                    else if (hirStruct is FolderStruct) (hirStruct as FolderStruct).Items.Add(fileStruct);
+                };
 
                 dialog.Owner = parentWindow;
                 dialog.ShowInTaskbar = false;

@@ -95,7 +95,7 @@
                     AncestorType={x:Type Window}}, 
                     Converter={logicConverters:WindowCloseLogicConverter}}"/>-->
 
-                <Button Style="{DynamicResource WindowCloseButton}"
+                <Button Style="{DynamicResource WindowCloseButton}" Margin="0 0 10 0" 
                                 Content="{lex:Loc Key=Cancel}" />
             </StackPanel>
         </Grid>

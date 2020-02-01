@@ -24,7 +24,7 @@ namespace ApplicationLayer.WpfApp.Converters.LogicConverters
                 dialog.ShowInTaskbar = false;
                 dialog.ShowDialog();
 
-                return vm.SeletedItem;
+                return vm.SelectedItem;
             });
         }
 

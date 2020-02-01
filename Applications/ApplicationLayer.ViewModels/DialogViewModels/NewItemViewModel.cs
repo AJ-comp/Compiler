@@ -1,6 +1,9 @@
-﻿using ApplicationLayer.Models.GrammarPackages;
+﻿using ApplicationLayer.Models;
+using ApplicationLayer.Models.GrammarPackages;
 using ApplicationLayer.Models.GrammarPackages.MiniCPackage;
 using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
+using System;
 using System.Collections.ObjectModel;
 
 namespace ApplicationLayer.ViewModels.DialogViewModels
@@ -24,7 +27,7 @@ namespace ApplicationLayer.ViewModels.DialogViewModels
         }
 
 
-        public ObservableCollection<NewItem> CurrentItems { get; } = new ObservableCollection<NewItem>();
+        public ObservableCollection<Document> CurrentItems { get; } = new ObservableCollection<Document>();
 
         private int selectedItemIndex = -1;
         public int SelectedItemIndex
@@ -39,8 +42,8 @@ namespace ApplicationLayer.ViewModels.DialogViewModels
             }
         }
 
-        private NewItem selectedItem;
-        public NewItem SelectedItem
+        private Document selectedItem;
+        public Document SelectedItem
         {
             get => this.selectedItem;
             private set
@@ -48,6 +51,25 @@ namespace ApplicationLayer.ViewModels.DialogViewModels
                 this.selectedItem = value;
                 this.RaisePropertyChanged("SelectedItem");
             }
+        }
+
+        public event EventHandler<Document> CreateRequest;
+
+        private RelayCommand<Action> _createCommand;
+        public RelayCommand<Action> CreateCommand
+        {
+            get
+            {
+                if (this._createCommand == null)
+                    this._createCommand = new RelayCommand<Action>(this.OnCreate);
+
+                return this._createCommand;
+            }
+        }
+        private void OnCreate(Action action)
+        {
+            this.CreateRequest?.Invoke(this, this.SelectedItem);
+            action?.Invoke();
         }
 
 

@@ -1,9 +1,11 @@
 ﻿using Parse.BackEnd.Target;
 using Parse.FrontEnd.Grammars;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.IO;
+using System.Windows.Data;
 using System.Xml.Serialization;
 
 namespace ApplicationLayer.Models.SolutionPackage
@@ -21,9 +23,24 @@ namespace ApplicationLayer.Models.SolutionPackage
 
         [XmlIgnore]
         public ObservableCollection<ProjectStruct> Projects { get; } = new ObservableCollection<ProjectStruct>();
+        [XmlIgnore]
+        public ObservableCollection<ErrorProjectStruct> ErrorProjects { get; } = new ObservableCollection<ErrorProjectStruct>();
 
         [XmlIgnore]
         public bool IsChanged => (this.CurrentProjectPath.Equals(this.SyncWithXMLProjectPaths)) ? false : true;
+
+        [XmlIgnore]
+        public IList Children
+        {
+            get
+            {
+                return new CompositeCollection()
+                {
+                    new CollectionContainer() { Collection = Projects },
+                    new CollectionContainer() { Collection = ErrorProjects }
+                };
+            }
+        }
 
         public SolutionStruct()
         {

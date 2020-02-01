@@ -8,7 +8,7 @@
                     xmlns:solutionPackage="clr-namespace:ApplicationLayer.Models.SolutionPackage;assembly=ApplicationLayer.Models"
                     xmlns:utilities="clr-namespace:ApplicationLayer.Common.Utilities;assembly=ApplicationLayer.Common">
 
-    <HierarchicalDataTemplate DataType="{x:Type solutionPackage:SolutionStruct}" ItemsSource="{Binding Projects}">
+    <HierarchicalDataTemplate DataType="{x:Type solutionPackage:SolutionStruct}" ItemsSource="{Binding Children}">
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch">
             <Image Width="16" Height="16" Margin="0 0 5 0" Source="{DynamicResource SolutionImagePath}" />
             <TextBlock Text="{Binding NameWithoutExtension}"/>
@@ -18,7 +18,7 @@
                 </i:EventTrigger>
             </i:Interaction.Triggers>
             <StackPanel.ContextMenu>
-                <ContextMenu>
+                <ContextMenu FontSize="11.5">
                     <MenuItem Header="{lex:Loc Key=Open}"/>
                     <Separator/>
                     <MenuItem Command="{x:Static commands:MenuActionCommands.AddNewProject}"/>
@@ -33,6 +33,24 @@
         </StackPanel>
     </HierarchicalDataTemplate>
 
+
+    <HierarchicalDataTemplate DataType="{x:Type solutionPackage:ErrorProjectStruct}" ItemsSource="{Binding Children}">
+        <StackPanel Orientation="Horizontal">
+            <Image x:Name="projectImage" Width="16" Height="16" Margin="0 0 5 0" Source="{DynamicResource ErrorProjectImagePath}"/>
+            <TextBlock Text="{Binding DisplayName}"/>
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="PreviewMouseRightButtonDown">
+                    <ei:ChangePropertyAction PropertyName="IsSelected" Value="true" TargetObject="{Binding}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+            <StackPanel.ContextMenu>
+                <ContextMenu FontSize="11.5">
+                    
+                </ContextMenu>
+            </StackPanel.ContextMenu>
+        </StackPanel>
+    </HierarchicalDataTemplate>
+    
     
     <HierarchicalDataTemplate DataType="{x:Type solutionPackage:ProjectStruct}" ItemsSource="{Binding Children}">
         <StackPanel Orientation="Horizontal">
@@ -45,7 +63,7 @@
                 </i:EventTrigger>
             </i:Interaction.Triggers>
             <StackPanel.ContextMenu>
-                <ContextMenu>
+                <ContextMenu FontSize="11.5">
                     <MenuItem Header="{lex:Loc Key=Open}"/>
                     <Separator/>
                     <MenuItem Header="{lex:Loc Key=Add}">
@@ -74,7 +92,7 @@
                 </i:EventTrigger>
             </i:Interaction.Triggers>
             <StackPanel.ContextMenu>
-                <ContextMenu>
+                <ContextMenu FontSize="11.5">
                     <MenuItem Header="{lex:Loc Key=Open}"/>
                     <Separator/>
                     <MenuItem Command="Cut"/>
@@ -95,7 +113,7 @@
                 </i:EventTrigger>
             </i:Interaction.Triggers>
             <StackPanel.ContextMenu>
-                <ContextMenu>
+                <ContextMenu FontSize="11.5">
                     <MenuItem Header="{lex:Loc Key=Open}"/>
                     <Separator/>
                     <MenuItem Header="{lex:Loc Key=Add}">
@@ -125,7 +143,7 @@
                 </i:EventTrigger>
             </i:Interaction.Triggers>
             <StackPanel.ContextMenu>
-                <ContextMenu>
+                <ContextMenu FontSize="11.5">
                     <MenuItem Header="{lex:Loc Key=Open}"/>
                     <Separator/>
                     <MenuItem Command="Cut"/>
@@ -146,7 +164,7 @@
                 </i:EventTrigger>
             </i:Interaction.Triggers>
             <StackPanel.ContextMenu>
-                <ContextMenu>
+                <ContextMenu FontSize="11.5">
                     <MenuItem Header="{lex:Loc Key=Open}"/>
                     <Separator/>
                     <MenuItem Command="Cut"/>

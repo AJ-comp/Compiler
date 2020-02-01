@@ -19,18 +19,18 @@ namespace ApplicationLayer.ViewModels.DialogViewModels
                 this.RaisePropertyChanged("SelectedIndex");
 
                 if (this.selectedIndex >= 0 && this.selectedIndex < this.NewFileDataCollection.Count)
-                    this.SeletedItem = this.NewFileDataCollection[this.selectedIndex];
+                    this.SelectedItem = this.NewFileDataCollection[this.selectedIndex];
             }
         }
 
         private Document selectedItem;
-        public Document SeletedItem
+        public Document SelectedItem
         {
             get => this.selectedItem;
             set
             {
                 this.selectedItem = value;
-                this.RaisePropertyChanged("SeletedItem");
+                this.RaisePropertyChanged("SelectedItem");
             }
         }
 
@@ -39,11 +39,10 @@ namespace ApplicationLayer.ViewModels.DialogViewModels
             string image = string.Empty;
             image = (Theme.Instance.ThemeKind == ThemeKind.Dark) ? "/Resources/Images/DarkTheme/cfile_48.png" : "/Resources/Images/Basic/cfile_48.png";
 
-            this.NewFileDataCollection.Add(new Document(image, Properties.Resource.MiniCFile, Properties.Resource.MiniCFileExplain));
+            this.NewFileDataCollection.Add(new Document(image, Properties.Resource.MiniCFile, Properties.Resource.MiniCFileExplain, "", "Empty.mc"));
         }
 
         public event EventHandler<Document> CreateRequest;
-
 
         private RelayCommand<Action> _createCommand;
         public RelayCommand<Action> CreateCommand
@@ -58,7 +57,7 @@ namespace ApplicationLayer.ViewModels.DialogViewModels
         }
         private void OnCreate(Action action)
         {
-            this.CreateRequest?.Invoke(this, this.SeletedItem);
+            this.CreateRequest?.Invoke(this, this.SelectedItem);
             action?.Invoke();
         }
     }

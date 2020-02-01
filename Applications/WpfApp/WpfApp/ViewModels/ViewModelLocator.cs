@@ -12,7 +12,7 @@
   See http://www.galasoft.ch/mvvm
 */
 
-using ApplicationLayer.ViewModels.DialogViewModels;
+using ApplicationLayer.Models;
 using ApplicationLayer.ViewModels.DocumentTypeViewModels;
 using CommonServiceLocator;
 using GalaSoft.MvvmLight.Ioc;
@@ -45,9 +45,12 @@ namespace ApplicationLayer.WpfApp.ViewModels
             ////    SimpleIoc.Default.Register<IDataService, DataService>();
             ////}
 
+            SimpleIoc.Default.Register<IMessageBoxService, MessageBoxLogic>();
+
             SimpleIoc.Default.Register<MainViewModel>();
             SimpleIoc.Default.Register<GrammarInfoViewModel>();
             SimpleIoc.Default.Register<SolutionExplorerViewModel>();
+            SimpleIoc.Default.Register<ParsingHistoryViewModel>();
         }
 
         public MainViewModel Main { get => ServiceLocator.Current.GetInstance<MainViewModel>(); }
