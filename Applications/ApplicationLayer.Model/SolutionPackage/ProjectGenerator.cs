@@ -1,4 +1,5 @@
-﻿using Parse.BackEnd.Target;
+﻿using ApplicationLayer.Models.GrammarPackages.MiniCPackage;
+using Parse.BackEnd.Target;
 using Parse.FrontEnd.Grammars;
 using Parse.FrontEnd.Grammars.MiniC;
 
@@ -6,12 +7,12 @@ namespace ApplicationLayer.Models.SolutionPackage
 {
     public abstract class ProjectGenerator
     {
-        public ProjectStruct ProjectStructure;
+        public DefaultProjectStruct ProjectStructure;
         
         public abstract string Extension { get; }
 
-        public abstract ProjectStruct CreateEmptyProject(string projectPath, bool isAbsolutePath, string projectName, Target target, HirStruct parent);
-        public abstract ProjectStruct CreateDefaultProject(string projectPath, bool isAbsolutePath, string projectName, Target target, HirStruct parent);
+        public abstract DefaultProjectStruct CreateEmptyProject(string projectPath, bool isAbsolutePath, string projectName, Target target, HirStruct parent);
+        public abstract DefaultProjectStruct CreateDefaultProject(string projectPath, bool isAbsolutePath, string projectName, Target target, HirStruct parent);
 
         public static ProjectGenerator CreateProjectGenerator(Grammar grammar)
         {

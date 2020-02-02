@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:lex="http://wpflocalizeextension.codeplex.com" 
         xmlns:local="clr-namespace:ApplicationLayer.WpfApp.Views.DialogViews"
+        xmlns:logicConverters="clr-namespace:ApplicationLayer.WpfApp.Converters.LogicConverters"
         xmlns:viewModels="clr-namespace:ApplicationLayer.ViewModels.DialogViewModels;assembly=ApplicationLayer.ViewModels"
         mc:Ignorable="d"
         WindowStyle="ToolWindow"
@@ -32,6 +33,7 @@
             <StackPanel Grid.Column="0">
                 <StackPanel Orientation="Horizontal">
                     <ComboBox Width="400" BorderThickness="0"
+                                        SelectedIndex="0"
                                         ItemsSource="{Binding SupportedGrammars}"
                                         SelectedItem="{Binding SelectedGrammarFactory}"/>
                 </StackPanel>
@@ -62,10 +64,11 @@
         </StackPanel>
 
         <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right">
-            <Button MinWidth="80" Height="20" Content="{lex:Loc Key=OK}" Margin="0 0 10 0"
-                            Command=""/>
+            <Button Style="{DynamicResource WindowCloseButton}" 
+                            Content="{lex:Loc Key=Ok}"
+                            Command="{Binding CreateCommand}"/>
             <Button Style="{DynamicResource WindowCloseButton}" Margin="0 0 10 0" 
-                                Content="{lex:Loc Key=Cancel}" />
+                            Content="{lex:Loc Key=Cancel}" />
         </StackPanel>
     </Grid>
 </Window>

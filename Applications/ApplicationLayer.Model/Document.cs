@@ -13,7 +13,7 @@ namespace ApplicationLayer.Models
         public string DetailExplain
         {
             get => detailExplain;
-            set
+            private set
             {
                 detailExplain = value;
                 OnPropertyChanged("DetailExplain");
@@ -30,7 +30,17 @@ namespace ApplicationLayer.Models
                 OnPropertyChanged("ItemName");
             }
         }
-        public string Data { get; }
+
+        private string data;
+        public string Data
+        {
+            get => data;
+            set
+            {
+                data = value;
+                OnPropertyChanged("Data");
+            }
+        }
 
         public Document(string imageSource, string itemType, string explain, string detailExplain, string itemName)
         {
@@ -42,18 +52,16 @@ namespace ApplicationLayer.Models
         }
 
 
-        public FileStruct FileStruct
+        public DefaultFileStruct FileStruct(HirStruct parent)
         {
-            get
+            DefaultFileStruct result = new DefaultFileStruct()
             {
-                FileStruct result = new FileStruct()
-                {
-                    ImageSource = ImageSource,
-                    FullName = ItemName
-                };
+                Parent = parent,
+                ImageSource = ImageSource,
+                FullName = ItemName
+            };
 
-                return result;
-            }
+            return result;
         }
 
 

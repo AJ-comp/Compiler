@@ -1,16 +1,14 @@
 ﻿using Parse.BackEnd.Target;
 using Parse.FrontEnd.Grammars;
-using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.IO;
-using System.Windows.Data;
 using System.Xml.Serialization;
 
 namespace ApplicationLayer.Models.SolutionPackage
 {
-    [XmlInclude(typeof(ProjectStruct))]
+    [XmlInclude(typeof(DefaultProjectStruct))]
     public class SolutionStruct : HirStruct
     {
         [XmlIgnore]
@@ -23,24 +21,9 @@ namespace ApplicationLayer.Models.SolutionPackage
 
         [XmlIgnore]
         public ObservableCollection<ProjectStruct> Projects { get; } = new ObservableCollection<ProjectStruct>();
-        [XmlIgnore]
-        public ObservableCollection<ErrorProjectStruct> ErrorProjects { get; } = new ObservableCollection<ErrorProjectStruct>();
 
         [XmlIgnore]
         public bool IsChanged => (this.CurrentProjectPath.Equals(this.SyncWithXMLProjectPaths)) ? false : true;
-
-        [XmlIgnore]
-        public IList Children
-        {
-            get
-            {
-                return new CompositeCollection()
-                {
-                    new CollectionContainer() { Collection = Projects },
-                    new CollectionContainer() { Collection = ErrorProjects }
-                };
-            }
-        }
 
         public SolutionStruct()
         {
@@ -54,10 +37,16 @@ namespace ApplicationLayer.Models.SolutionPackage
                 ProjectStruct child = e.NewItems[i] as ProjectStruct;
                 child.Parent = this;
 
-                if (File.Exists(child.FullPath)) continue;
-
-                Directory.CreateDirectory(child.BaseOPath);
                 this.CurrentProjectPath.Add(new PathInfo(child.RelativePath, child.IsAbsolutePath));
+            }
+        }
+
+        private void ErrorProjects_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            for (int i = 0; i < e.NewItems?.Count; i++)
+            {
+                ErrorProjectStruct child = e.NewItems[i] as ErrorProjectStruct;
+                child.Parent = this;
             }
         }
 

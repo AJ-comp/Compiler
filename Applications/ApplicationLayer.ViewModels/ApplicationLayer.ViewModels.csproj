@@ -115,6 +115,10 @@
       <Project>{9B7EBE4D-C2B3-40E8-9516-107340A07111}</Project>
       <Name>ApplicationLayer.Common</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ApplicationLayer.Define\ApplicationLayer.Define.csproj">
+      <Project>{2b6881f9-2dbf-412b-9797-76d6d81abc14}</Project>
+      <Name>ApplicationLayer.Define</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ApplicationLayer.Model\ApplicationLayer.Models.csproj">
       <Project>{9B9BD94E-15E9-4113-8BCA-543A925F34AB}</Project>
       <Name>ApplicationLayer.Models</Name>

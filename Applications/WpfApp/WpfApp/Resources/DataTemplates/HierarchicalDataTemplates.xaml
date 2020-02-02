@@ -8,7 +8,7 @@
                     xmlns:solutionPackage="clr-namespace:ApplicationLayer.Models.SolutionPackage;assembly=ApplicationLayer.Models"
                     xmlns:utilities="clr-namespace:ApplicationLayer.Common.Utilities;assembly=ApplicationLayer.Common">
 
-    <HierarchicalDataTemplate DataType="{x:Type solutionPackage:SolutionStruct}" ItemsSource="{Binding Children}">
+    <HierarchicalDataTemplate DataType="{x:Type solutionPackage:SolutionStruct}" ItemsSource="{Binding Projects}">
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch">
             <Image Width="16" Height="16" Margin="0 0 5 0" Source="{DynamicResource SolutionImagePath}" />
             <TextBlock Text="{Binding NameWithoutExtension}"/>
@@ -24,7 +24,6 @@
                     <MenuItem Command="{x:Static commands:MenuActionCommands.AddNewProject}"/>
                     <MenuItem Command="Cut"/>
                     <MenuItem Command="Copy"/>
-                    <MenuItem Command="{x:Static commands:MenuActionCommands.DelItem}" CommandParameter="{Binding}"/>
                     <Separator/>
                     <MenuItem Command="{x:Static commands:MenuActionCommands.OpenFolder}" CommandParameter="{Binding}"/>
                     <Separator/>
@@ -45,14 +44,14 @@
             </i:Interaction.Triggers>
             <StackPanel.ContextMenu>
                 <ContextMenu FontSize="11.5">
-                    
+                    <MenuItem Command="{x:Static commands:MenuActionCommands.DelItem}" CommandParameter="{Binding}"/>
                 </ContextMenu>
             </StackPanel.ContextMenu>
         </StackPanel>
     </HierarchicalDataTemplate>
     
     
-    <HierarchicalDataTemplate DataType="{x:Type solutionPackage:ProjectStruct}" ItemsSource="{Binding Children}">
+    <HierarchicalDataTemplate DataType="{x:Type solutionPackage:DefaultProjectStruct}" ItemsSource="{Binding Children}">
         <StackPanel Orientation="Horizontal">
             <Image x:Name="projectImage" Width="16" Height="16" Margin="0 0 5 0" 
                         Source="{Binding Extension, Converter={localConverters:ToResourceKeyConverter}, ConverterParameter='Extension'}"/>
@@ -153,8 +152,26 @@
         </StackPanel>
     </DataTemplate>
 
+
+    <DataTemplate DataType="{x:Type solutionPackage:ErrorFileStruct}">
+        <StackPanel Orientation="Horizontal">
+            <Image x:Name="projectImage" Width="16" Height="16" Margin="0 0 5 0" Source="{DynamicResource ErrorProjectImagePath}"/>
+            <TextBlock Text="{Binding FullName}"/>
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="PreviewMouseRightButtonDown">
+                    <ei:ChangePropertyAction PropertyName="IsSelected" Value="true" TargetObject="{Binding}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+            <StackPanel.ContextMenu>
+                <ContextMenu FontSize="11.5">
+                    <MenuItem Command="{x:Static commands:MenuActionCommands.DelItem}" CommandParameter="{Binding}"/>
+                </ContextMenu>
+            </StackPanel.ContextMenu>
+        </StackPanel>
+    </DataTemplate>
     
-    <DataTemplate DataType="{x:Type solutionPackage:FileStruct}">
+    
+    <DataTemplate DataType="{x:Type solutionPackage:DefaultFileStruct}">
         <StackPanel Orientation="Horizontal">
             <Image Width="16" Height="16" Margin="0 0 5 0" Source="{DynamicResource ProjectImagePath}"/>
             <TextBlock Text="{Binding FullName}"/>

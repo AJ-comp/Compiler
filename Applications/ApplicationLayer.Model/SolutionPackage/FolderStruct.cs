@@ -10,11 +10,11 @@ using System.Xml.Serialization;
 namespace ApplicationLayer.Models.SolutionPackage
 {
     [XmlInclude(typeof(FolderStruct))]
-    [XmlInclude(typeof(FileStruct))]
+    [XmlInclude(typeof(DefaultFileStruct))]
     public class FolderStruct : HirStruct
     {
         public ObservableCollection<FolderStruct> Folders { get; } = new ObservableCollection<FolderStruct>();
-        public ObservableCollection<FileStruct> Items { get; } = new ObservableCollection<FileStruct>();
+        public ObservableCollection<DefaultFileStruct> Items { get; } = new ObservableCollection<DefaultFileStruct>();
 
         public IList Children
         {
@@ -28,13 +28,14 @@ namespace ApplicationLayer.Models.SolutionPackage
             }
         }
 
-        public StringCollection AllItemPaths
+        /// <summary>
+        /// This property returns all paths that have an item.
+        /// </summary>
+        public StringCollection HasItemAllPaths
         {
             get
             {
                 StringCollection result = new StringCollection();
-
-                if (this.Items.Count == 0 && this.Folders.Count == 0) result.Add(this.CurOPath);
 
                 foreach(var item in this.Items)
                 {
@@ -43,7 +44,28 @@ namespace ApplicationLayer.Models.SolutionPackage
 
                 foreach (var folder in this.Folders)
                 {
-                    foreach(var item in folder.AllItemPaths)
+                    foreach(var item in folder.HasItemAllPaths)
+                        result.Add(Path.Combine(this.CurOPath, item));
+                }
+
+                return result;
+            }
+        }
+
+        /// <summary>
+        /// This property returns all paths that have not an item.
+        /// </summary>
+        public StringCollection HasNotItemAllPaths
+        {
+            get
+            {
+                StringCollection result = new StringCollection();
+
+                if (this.Items.Count == 0 && this.Folders.Count == 0) result.Add(this.CurOPath);
+
+                foreach (var folder in this.Folders)
+                {
+                    foreach (var item in folder.HasNotItemAllPaths)
                         result.Add(Path.Combine(this.CurOPath, item));
                 }
 
@@ -70,7 +92,7 @@ namespace ApplicationLayer.Models.SolutionPackage
         {
             for (int i = 0; i < e.NewItems?.Count; i++)
             {
-                FileStruct item = e.NewItems[i] as FileStruct;
+                DefaultFileStruct item = e.NewItems[i] as DefaultFileStruct;
                 item.Parent = this;
             }
         }
@@ -82,7 +104,7 @@ namespace ApplicationLayer.Models.SolutionPackage
         public void RemoveChild(HirStruct child)
         {
             if (child is FolderStruct) this.Folders.Remove(child as FolderStruct);
-            else if (child is FileStruct) this.Items.Remove(child as FileStruct);
+            else if (child is DefaultFileStruct) this.Items.Remove(child as DefaultFileStruct);
         }
 
         public static FolderStruct GetFolderSet(string path)

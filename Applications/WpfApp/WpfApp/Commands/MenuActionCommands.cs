@@ -2,6 +2,7 @@
 using ApplicationLayer.ViewModels.DialogViewModels;
 using ApplicationLayer.WpfApp.ViewModels;
 using ApplicationLayer.WpfApp.Views.DialogViews;
+using System;
 using System.Diagnostics;
 using System.IO;
 using System.Windows.Forms;
@@ -58,9 +59,10 @@ namespace ApplicationLayer.WpfApp.Commands
                 var vm = dialog.DataContext as NewItemViewModel;
                 vm.CreateRequest += (s, e) =>
                 {
-                    var fileStruct = vm.SelectedItem.FileStruct;
+                    var fileStruct = vm.SelectedItem.FileStruct(hirStruct);
+                    fileStruct.CreateFile();
 
-                    if (hirStruct is ProjectStruct) (hirStruct as ProjectStruct).Items.Add(fileStruct);
+                    if (hirStruct is DefaultProjectStruct) (hirStruct as DefaultProjectStruct).Items.Add(fileStruct);
                     else if (hirStruct is FolderStruct) (hirStruct as FolderStruct).Items.Add(fileStruct);
                 };
 
@@ -100,13 +102,13 @@ namespace ApplicationLayer.WpfApp.Commands
                         else File.Copy(fileName, destPath);
                     }
 
-                    var fileStruct = new FileStruct()
+                    var fileStruct = new DefaultFileStruct()
                     {
                         FullName = Path.GetFileName(fileName),
                         Data = File.ReadAllText(fileName)
                     };
 
-                    if (hirStruct is ProjectStruct) (hirStruct as ProjectStruct).Items.Add(fileStruct);
+                    if (hirStruct is DefaultProjectStruct) (hirStruct as DefaultProjectStruct).Items.Add(fileStruct);
                     else if (hirStruct is FolderStruct) (hirStruct as FolderStruct).Items.Add(fileStruct);
                 }
             }, (condition) =>
@@ -129,23 +131,19 @@ namespace ApplicationLayer.WpfApp.Commands
 
                 if (dResult == DialogResult.Yes)
                 {
-                    if (selectedStruct is FolderStruct) Directory.Delete(selectedStruct.FullPath);
-                    else File.Delete(selectedStruct.FullPath);
+                    try
+                    {
+                        if (selectedStruct is ProjectStruct) Directory.Delete(selectedStruct.BaseOPath, true);
+                        else if (selectedStruct is FolderStruct) Directory.Delete(selectedStruct.FullPath, true);
+                        else File.Delete(selectedStruct.FullPath);
+                    }
+                    catch { }
                 }
                 else return;
 
-                if (parent is SolutionStruct)
-                {
-                    (parent as SolutionStruct).RemoveChild(selectedStruct);
-                }
-                else if (parent is ProjectStruct)
-                {
-                    (parent as ProjectStruct).RemoveChild(selectedStruct);
-                }
-                else if (parent is FolderStruct)
-                {
-                    (parent as FolderStruct).RemoveChild(selectedStruct);
-                }
+                if (parent is SolutionStruct) (parent as SolutionStruct).RemoveChild(selectedStruct);
+                else if (parent is DefaultProjectStruct) (parent as DefaultProjectStruct).RemoveChild(selectedStruct);
+                else if (parent is FolderStruct) (parent as FolderStruct).RemoveChild(selectedStruct);
             }, (condition) =>
             {
                 var vm = parentWindow.DataContext as MainViewModel;
@@ -156,7 +154,7 @@ namespace ApplicationLayer.WpfApp.Commands
         /// <summary>
         /// New Folder Command
         /// </summary>
-        public static readonly RelayUICommand<ProjectStruct> AddNewFolder = new RelayUICommand<ProjectStruct>(Properties.Resources.NewFolder,
+        public static readonly RelayUICommand<DefaultProjectStruct> AddNewFolder = new RelayUICommand<DefaultProjectStruct>(Properties.Resources.NewFolder,
             (projectStruct) =>
             {
                 string newFolderName = "New Folder";

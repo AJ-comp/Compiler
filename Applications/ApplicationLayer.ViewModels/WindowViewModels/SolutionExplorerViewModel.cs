@@ -5,11 +5,13 @@ using ApplicationLayer.ViewModels.Messages;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.IO;
 using System.Xml.Serialization;
+using static ApplicationLayer.Define.Properties.Resource;
 
 namespace WpfApp.ViewModels.WindowViewModels
 {
@@ -33,9 +35,9 @@ namespace WpfApp.ViewModels.WindowViewModels
         }
         private void OnSelected(HirStruct selectedItem)
         {
-            if(selectedItem is FileStruct)
+            if(selectedItem is DefaultFileStruct)
             {
-                Messenger.Default.Send(new OpenFileMessage(selectedItem as FileStruct));
+                Messenger.Default.Send(new OpenFileMessage(selectedItem as DefaultFileStruct));
             }
         }
 
@@ -119,7 +121,7 @@ namespace WpfApp.ViewModels.WindowViewModels
             {
                 using (StreamWriter wr = new StreamWriter(item.FullPath))
                 {
-                    XmlSerializer xs = new XmlSerializer(typeof(ProjectStruct));
+                    XmlSerializer xs = new XmlSerializer(typeof(DefaultProjectStruct));
                     xs.Serialize(wr, item);
                 }
             }
@@ -165,8 +167,8 @@ namespace WpfApp.ViewModels.WindowViewModels
                 {
                     using (StreamReader sr = new StreamReader(fullPath))
                     {
-                        XmlSerializer xs = new XmlSerializer(typeof(ProjectStruct));
-                        ProjectStruct project = xs.Deserialize(sr) as ProjectStruct;
+                        XmlSerializer xs = new XmlSerializer(typeof(DefaultProjectStruct));
+                        DefaultProjectStruct project = xs.Deserialize(sr) as DefaultProjectStruct;
 
                         project.CurOPath = Path.GetDirectoryName(item.Path);
                         project.FullName = Path.GetFileName(item.Path);
@@ -175,7 +177,7 @@ namespace WpfApp.ViewModels.WindowViewModels
                         project.SyncXmlToObject();
                     }
                 }
-                catch
+                catch(Exception ex)
                 {
                     bFiredError = true;
                     ErrorProjectStruct project = new ErrorProjectStruct()
@@ -184,11 +186,11 @@ namespace WpfApp.ViewModels.WindowViewModels
                         CurOPath = Path.GetDirectoryName(item.Path)
                     };
 
-                    this.Solutions[0].ErrorProjects.Add(project);
+                    this.Solutions[0].Projects.Add(project);
                 }
             }
 
-            if (bFiredError) this.messageBoxService?.ShowWarning("Fired more one error when project load.", "");
+            if (bFiredError) this.messageBoxService?.ShowWarning(WarningOnLoad, "");
         }
 
         /// <summary>
@@ -210,13 +212,13 @@ namespace WpfApp.ViewModels.WindowViewModels
             string projectPath = (isAbsolutePath) ? message.ProjectPath : message.ProjectPath.Substring(matchedPos);
             if (projectPath[0] == '\\') projectPath = projectPath.Remove(0, 1);
 
-            ProjectStruct newProject = projectGenerator.CreateDefaultProject(projectPath, isAbsolutePath, message.ProjectName, message.MachineTarget, this.Solutions[0]);
+            DefaultProjectStruct newProject = projectGenerator.CreateDefaultProject(projectPath, isAbsolutePath, message.ProjectName, message.MachineTarget, this.Solutions[0]);
             this.Solutions[0].Projects.Add(newProject);
 
             // create project files into the folder.
             using (StreamWriter wr = new StreamWriter(newProject.FullPath))
             {
-                XmlSerializer xs = new XmlSerializer(typeof(ProjectStruct));
+                XmlSerializer xs = new XmlSerializer(typeof(DefaultProjectStruct));
                 xs.Serialize(wr, newProject);
             }
 

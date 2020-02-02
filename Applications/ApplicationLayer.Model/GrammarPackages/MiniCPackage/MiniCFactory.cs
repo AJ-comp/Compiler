@@ -10,8 +10,16 @@ namespace ApplicationLayer.Models.GrammarPackages.MiniCPackage
             {
                 ObservableCollection<Document> result = new ObservableCollection<Document>();
 
-                result.Add(new Document(string.Empty, "Class", "MiniC Category", "This is a definition that empty class", "Class.cs"));
-                result.Add(new Document(string.Empty, "Interface", "MiniC Category", "This is a definition that empty interface", "Interface.cs"));
+                result.Add(new Document(string.Empty, "Class", Properties.Resource.MiniCCategory, Properties.Resource.EmptyMiniCItem, "Class.mc")
+                {
+                    Data = "void class()\r\n{\r\n}"
+                });
+
+                // for test
+                result.Add(new Document(string.Empty, "Interface", "MiniC Category", "This is a definition that empty interface", "Interface.mc")
+                {
+                    Data = "void interface()\r\n{\r\n}"
+                });
 
                 return result;
             }

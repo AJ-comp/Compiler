@@ -7,9 +7,9 @@ namespace ApplicationLayer.ViewModels.Messages
 {
     public class OpenFileMessage : MessageBase
     {
-        public FileStruct SelectedFile { get; }
+        public DefaultFileStruct SelectedFile { get; }
 
-        public OpenFileMessage(FileStruct selectedFile)
+        public OpenFileMessage(DefaultFileStruct selectedFile)
         {
             this.SelectedFile = selectedFile;
         }

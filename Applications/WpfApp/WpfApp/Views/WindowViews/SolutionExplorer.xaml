@@ -12,6 +12,7 @@
              DataContext="{Binding SolutionExplorerWindow, Source={StaticResource Locator}}">
     <UserControl.Resources>
         <Style x:Key="SolutionTreeViewItemStyle" TargetType="TreeViewItem" >
+            <Setter Property="IsExpanded" Value="True"/>
             <Setter Property="IsSelected" Value="{Binding IsSelected, Mode=TwoWay}"/>
             <Setter Property="Template">
                 <Setter.Value>

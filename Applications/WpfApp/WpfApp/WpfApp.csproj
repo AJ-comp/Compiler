@@ -113,7 +113,6 @@
     <Compile Include="Commands\MenuActionCommands.cs" />
     <Compile Include="Commands\RelayUICommand.cs" />
     <Compile Include="Converters\GrammarToLRParserConverter.cs" />
-    <Compile Include="Converters\LogicConverters\WindowCloseLogicConverter.cs" />
     <Compile Include="Converters\NavigateUriToStringConverter.cs" />
     <Compile Include="Converters\LogicConverters\FileCreateLogicConverter.cs" />
     <Compile Include="Converters\LogicConverters\SearchLogicConverter.cs" />

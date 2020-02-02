@@ -6,19 +6,27 @@ using System.IO;
 using System.Windows.Data;
 using System.Xml.Serialization;
 
+using static ApplicationLayer.Define.Properties.Resource;
+
 namespace ApplicationLayer.Models.SolutionPackage
 {
+    public class ProjectStruct : HirStruct
+    {
+        public double Version { get; set; }
+    }
+
+
     [XmlInclude(typeof(ProjectProperty))]
     [XmlInclude(typeof(ReferenceStruct))]
-    public class ProjectStruct : HirStruct
+    public class DefaultProjectStruct : ProjectStruct
     {
         [XmlIgnore]
         public string Extension => Path.GetExtension(this.FullName);
-        public double Version { get; set; }
 
         public ObservableCollection<ProjectProperty> Properties { get; } = new ObservableCollection<ProjectProperty>();
 
-        public StringCollection referencePaths { get; } = new StringCollection();
+        public StringCollection ReferencePaths { get; } = new StringCollection();
+        public StringCollection HasNotItemPaths { get; } = new StringCollection();
         public StringCollection ItemPaths { get; } = new StringCollection();
 
         [XmlIgnore]
@@ -42,7 +50,7 @@ namespace ApplicationLayer.Models.SolutionPackage
             }
         }
 
-        public ProjectStruct()
+        public DefaultProjectStruct()
         {
             this.ReferenceFolder.Add(new ReferenceStruct() { CurOPath = "C:\\Program Files (x86)\\AJ\\IDE\\Reference Assemblies", FullName = "Reference" });
 
@@ -57,7 +65,7 @@ namespace ApplicationLayer.Models.SolutionPackage
             {
                 ReferenceFileStruct referenceFile = e.NewItems[i] as ReferenceFileStruct;
 
-                if (this.referencePaths.Contains(referenceFile.FullPath) == false) this.referencePaths.Add(referenceFile.FullPath);
+                if (this.ReferencePaths.Contains(referenceFile.FullPath) == false) this.ReferencePaths.Add(referenceFile.FullPath);
             }
         }
 
@@ -111,7 +119,7 @@ namespace ApplicationLayer.Models.SolutionPackage
         {
             for (int i = 0; i < e.NewItems?.Count; i++)
             {
-                FileStruct item = e.NewItems[i] as FileStruct;
+                DefaultFileStruct item = e.NewItems[i] as DefaultFileStruct;
 
                 // The folder or file path always uses only relative path.
                 var findPath = item.RelativePath;
@@ -154,7 +162,7 @@ namespace ApplicationLayer.Models.SolutionPackage
         public void SyncXmlToObject()
         {
             this.ReferenceFolder[0].Items.Clear();
-            foreach (var item in this.referencePaths)
+            foreach (var item in this.ReferencePaths)
             {
                 var directoryName = Path.GetDirectoryName(item);
                 var fileName = Path.GetFileName(item);
@@ -164,18 +172,29 @@ namespace ApplicationLayer.Models.SolutionPackage
 
             this.Folders.Clear();
             this.Items.Clear();
+            foreach(var item in this.HasNotItemPaths)
+            {
+                var directoryName = Path.GetFileName(item);
+
+                this.Folders.Add(FolderStruct.GetFolderSet(this.BaseOPath, directoryName));
+            }
+
             foreach (var item in this.ItemPaths)
             {
                 var directoryName = Path.GetDirectoryName(item);
                 var fileName = Path.GetFileName(item);
 
                 if (string.IsNullOrEmpty(directoryName))
-                    this.Items.Add(new FileStruct() { FullName = fileName });
+                {
+                    if (File.Exists(Path.Combine(this.BaseOPath, fileName))) this.Items.Add(new DefaultFileStruct() { FullName = fileName });
+                    else this.Items.Add(new ErrorFileStruct() { FullName = fileName });
+                }
                 else
                 {
-                    FolderStruct subFolder = FolderStruct.GetFolderSet(this.BaseOPath, directoryName);
-                    subFolder.Items.Add(new FileStruct() { FullName = fileName });
-                    this.Folders.Add(subFolder);
+                    FolderStruct folderStruct = FolderStruct.GetFolderSet(this.BaseOPath, directoryName);
+                    DefaultFileStruct fileStruct = new DefaultFileStruct() { Parent = folderStruct, FullName = fileName };
+                    if(File.Exists(fileStruct.FullPath)) folderStruct.Items.Add(fileStruct);
+                    this.Folders.Add(folderStruct);
                 }
             }
         }
@@ -185,18 +204,18 @@ namespace ApplicationLayer.Models.SolutionPackage
         /// </summary>
         public void SyncObjectToXml()
         {
-            this.referencePaths.Clear();
+            this.ReferencePaths.Clear();
             if(this.ReferenceFolder.Count > 0)
             {
-                foreach(var item in this.ReferenceFolder[0].Items) this.referencePaths.Add(item.FullPath);
+                foreach(var item in this.ReferenceFolder[0].Items) this.ReferencePaths.Add(item.FullPath);
             }
 
             this.ItemPaths.Clear();
             foreach(var folder in this.Folders)
             {
                 // The folders or files in the ProjectStruct uses only relative path.
-                foreach(var item in folder.AllItemPaths)
-                    this.ItemPaths.Add(item);
+                foreach (var item in folder.HasItemAllPaths) this.ItemPaths.Add(item);
+                foreach (var item in folder.HasNotItemAllPaths) this.HasNotItemPaths.Add(item);
             }
 
             foreach(var item in this.Items)
@@ -208,39 +227,8 @@ namespace ApplicationLayer.Models.SolutionPackage
     }
 
 
-    public class ErrorProjectStruct : HirStruct
+    public class ErrorProjectStruct : ProjectStruct
     {
-        public string DisplayName => NameWithoutExtension + " (not load)";
-    }
-
-
-    [XmlInclude(typeof(ReferenceFileStruct))]
-    public class ReferenceStruct : HirStruct
-    {
-        public ObservableCollection<ReferenceFileStruct> Items { get; } = new ObservableCollection<ReferenceFileStruct>();
-
-        public ReferenceStruct()
-        {
-            this.Items.CollectionChanged += ReferenceFiles_CollectionChanged;
-        }
-
-        private void ReferenceFiles_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
-        {
-            for (int i = 0; i < e.NewItems?.Count; i++)
-            {
-                ReferenceFileStruct item = e.NewItems[i] as ReferenceFileStruct;
-                item.Parent = this;
-            }
-        }
-    }
-
-    public class ReferenceFileStruct : HirStruct
-    {
-    }
-
-
-    public class FileStruct : HirStruct
-    {
-        public string Data { get; set; }
+        public string DisplayName => NameWithoutExtension + string.Format(" ({0})", NotLoad);
     }
 }
