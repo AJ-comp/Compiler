@@ -5,8 +5,6 @@ using ApplicationLayer.ViewModels.Messages;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.IO;
@@ -17,8 +15,8 @@ namespace WpfApp.ViewModels.WindowViewModels
 {
     public class SolutionExplorerViewModel : ViewModelBase
     {
+        private ShowSaveDialogMessage saveMessage = new ShowSaveDialogMessage();
         private IMessageBoxService messageBoxService;
-        private HashSet<HirStruct> changedList = new HashSet<HirStruct>();
 
         public ObservableCollection<SolutionStruct> Solutions { get; } = new ObservableCollection<SolutionStruct>();
 
@@ -138,12 +136,30 @@ namespace WpfApp.ViewModels.WindowViewModels
             this.ToXML(this.Solutions[0]);
         }
 
+        private void PreprocessChangedFileList(Collection<HirStruct> hirStructs)
+        {
+            if(hirStructs.Count > 0)
+            {
+                saveMessage = new ShowSaveDialogMessage();
+                Messenger.Default.Send<ShowSaveDialogMessage>(saveMessage);
+            }
+        }
+
         /// <summary>
         /// Message handler for LoadSolutionMessage
         /// </summary>
         /// <param name="message"></param>
         public void ReceivedLoadSolutionMessage(LoadSolutionMessage message)
         {
+            var process = new GetChangedListMessage(string.Empty, PreprocessChangedFileList);
+            Messenger.Default.Send<GetChangedListMessage>(process);
+
+            if (saveMessage.ResultStatus == ShowSaveDialogMessage.Result.Yes)
+            {
+
+            }
+            else if (saveMessage.ResultStatus == ShowSaveDialogMessage.Result.Cancel) return;
+
             this.Solutions.Clear();
 
             using (StreamReader sr = new StreamReader(message.SolutionFullPath))
@@ -177,7 +193,7 @@ namespace WpfApp.ViewModels.WindowViewModels
                         project.SyncXmlToObject();
                     }
                 }
-                catch(Exception ex)
+                catch
                 {
                     bFiredError = true;
                     ErrorProjectStruct project = new ErrorProjectStruct()
@@ -222,8 +238,8 @@ namespace WpfApp.ViewModels.WindowViewModels
                 xs.Serialize(wr, newProject);
             }
 
-
-            changedList.Add(this.Solutions[0]);
+            var changedInfo = new ChangedFileMessage(this.Solutions[0], ChangedFileMessage.ChangedStatus.Changed);
+            Messenger.Default.Send<ChangedFileMessage>(changedInfo);
 
             //// Notify the changed data to the out.
             //var changedData = new ChangedFileListMessage.ChangedFile(this.Solutions[0], ChangedFileListMessage.ChangedStatus.Changed);

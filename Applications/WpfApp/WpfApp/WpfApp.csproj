@@ -138,6 +138,9 @@
     <Compile Include="Views\DialogViews\NewSolutionDialog.xaml.cs">
       <DependentUpon>NewSolutionDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\DialogViews\QuestionToSaveDialog.xaml.cs">
+      <DependentUpon>QuestionToSaveDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\SubViews\ProjectSelectionView.xaml.cs">
       <DependentUpon>ProjectSelectionView.xaml</DependentUpon>
     </Compile>
@@ -218,6 +221,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\DialogViews\NewSolutionDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\DialogViews\QuestionToSaveDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

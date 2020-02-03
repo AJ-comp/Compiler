@@ -1,4 +1,9 @@
-﻿using ApplicationLayer.WpfApp.ViewModels;
+﻿using ApplicationLayer.ViewModels.DialogViewModels;
+using ApplicationLayer.ViewModels.Messages;
+using ApplicationLayer.WpfApp.Commands;
+using ApplicationLayer.WpfApp.ViewModels;
+using ApplicationLayer.WpfApp.Views.DialogViews;
+using GalaSoft.MvvmLight.Messaging;
 using Parse.WpfControls.SyntaxEditor.EventArgs;
 using System.Windows;
 using System.Windows.Forms;
@@ -10,6 +15,7 @@ namespace ApplicationLayer.WpfApp.Behaviors
     {
         private MainWindow mainWindow;
         private ToolTip toolTip = new ToolTip();
+        private QuestionToSaveDialog questionToSaveDialog = new QuestionToSaveDialog();
         private int recentRowIdx = -1;
         private int recentColIdx = -1;
 
@@ -41,6 +47,22 @@ namespace ApplicationLayer.WpfApp.Behaviors
             this.mainWindow = sender as MainWindow;
 
             MainViewModel mainVm = this.mainWindow.DataContext as MainViewModel;
+
+            MenuActionCommands.parentWindow = mainWindow;
+            this.questionToSaveDialog.Owner = mainWindow;
+            this.questionToSaveDialog.ShowInTaskbar = false;
+
+            Messenger.Default.Register<ShowSaveDialogMessage>(this, (msg) => 
+            {
+                var viewModel = this.questionToSaveDialog.DataContext as QuestionToSaveViewModel;
+                viewModel.SaveRequest += (s, ei) => msg.ResultStatus = ShowSaveDialogMessage.Result.Yes;
+                viewModel.IgnoreRequest += (s, ei) => msg.ResultStatus = ShowSaveDialogMessage.Result.No;
+                viewModel.CancelRequest += (s, ei) => msg.ResultStatus = ShowSaveDialogMessage.Result.Cancel;
+
+                this.questionToSaveDialog.ShowDialog();
+                this.questionToSaveDialog = new QuestionToSaveDialog();
+            });
+
 
             //            this.editor.SetComponents(this.parser);
 

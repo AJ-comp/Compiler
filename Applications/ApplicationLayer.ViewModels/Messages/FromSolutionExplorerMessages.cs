@@ -1,7 +1,8 @@
-﻿using ApplicationLayer.Models.SolutionPackage;
-using GalaSoft.MvvmLight.Messaging;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using ApplicationLayer.Models.SolutionPackage;
+using GalaSoft.MvvmLight.Messaging;
 
 namespace ApplicationLayer.ViewModels.Messages
 {
@@ -15,38 +16,31 @@ namespace ApplicationLayer.ViewModels.Messages
         }
     }
 
-    public class ChangedFileListMessage : MessageBase
+    /// <summary>
+    /// This message informs to the target that a changed file is.
+    /// </summary>
+    public class ChangedFileMessage : MessageBase
     {
         public enum ChangedStatus { Changed, Restored }
 
-        public class ChangedFile
-        {
-            public HirStruct Item { get; }
-            public ChangedStatus ChangedStatus { get; }
+        public HirStruct Item { get; }
+        public ChangedStatus Status { get; }
 
-            public ChangedFile(HirStruct item, ChangedStatus changedStatus)
-            {
-                Item = item;
-                ChangedStatus = changedStatus;
-            }
+        public ChangedFileMessage()
+        {
         }
 
-        public List<ChangedFile> ChangedFiles { get; } = new List<ChangedFile>();
-
-        public ChangedFileListMessage()
+        public ChangedFileMessage(HirStruct item, ChangedStatus status)
         {
-            this.ChangedFiles = new List<ChangedFile>();
+            this.Item = item;
+            this.Status = status;
         }
+    }
 
-        public ChangedFileListMessage(List<ChangedFile> changedFiles)
+    public class GetChangedListMessage : NotificationMessageAction<Collection<HirStruct>>
+    {
+        public GetChangedListMessage(string notification, Action<Collection<HirStruct>> callback) : base(notification, callback)
         {
-            this.ChangedFiles = changedFiles;
-        }
-
-
-        public void AddFile(ChangedFile changedFile)
-        {
-            this.ChangedFiles.Add(changedFile);
         }
     }
 }

@@ -5,6 +5,9 @@ using System.IO;
 
 namespace ApplicationLayer.ViewModels.Messages
 {
+    /// <summary>
+    /// This message informs that target has to create a solution.
+    /// </summary>
     public class CreateSolutionMessage : MessageBase
     {
         public string SolutionPath { get; }
@@ -28,6 +31,9 @@ namespace ApplicationLayer.ViewModels.Messages
         }
     }
 
+    /// <summary>
+    /// This message informs that target has to load a solution.
+    /// </summary>
     public class LoadSolutionMessage : MessageBase
     {
         public string SolutionFullPath { get; }
@@ -42,6 +48,9 @@ namespace ApplicationLayer.ViewModels.Messages
         }
     }
 
+    /// <summary>
+    /// This message informs that target has to add a new project to the solution.
+    /// </summary>
     public class AddProjectMessage : MessageBase
     {
         public string ProjectPath { get; }
@@ -60,6 +69,9 @@ namespace ApplicationLayer.ViewModels.Messages
         }
     }
 
+    /// <summary>
+    /// This messages informs that target has to load a new project to the solution.
+    /// </summary>
     public class LoadProjectMessage : MessageBase
     {
         public string ProjectFullPath { get; }

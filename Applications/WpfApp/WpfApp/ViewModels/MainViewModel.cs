@@ -272,6 +272,14 @@ namespace ApplicationLayer.WpfApp.ViewModels
             Messenger.Default.Register<AddProjectMessage>(solutionExplorer, solutionExplorer.ReceivedAddNewProjectMessage);
         }
 
+        private void InitQuestionToSaveDialog()
+        {
+            var questionToSaveDialog = ServiceLocator.Current.GetInstance<QuestionToSaveViewModel>();
+
+            Messenger.Default.Register<ChangedFileMessage>(questionToSaveDialog, questionToSaveDialog.ReceivedUpdateChangedFileMessage);
+            Messenger.Default.Register<GetChangedListMessage>(questionToSaveDialog, questionToSaveDialog.ReceivedGetChangedFileListMessage);
+        }
+
         /// <summary>
         /// Initializes a new instance of the MainViewModel class.
         /// </summary>
@@ -282,9 +290,9 @@ namespace ApplicationLayer.WpfApp.ViewModels
 
             this.InitGrammarWindow();
             this.InitSolutionExplorer();
+            this.InitQuestionToSaveDialog();
 
             Messenger.Default.Register<OpenFileMessage>(this, this.ReceivedOpenFileMessage);
-            Messenger.Default.Register<ChangedFileListMessage>(this, this.ReceivedChangedFileListMessage);
 
             if (IsInDesignMode)
             {
@@ -314,7 +322,7 @@ namespace ApplicationLayer.WpfApp.ViewModels
         }
 
 
-        public void ReceivedChangedFileListMessage(ChangedFileListMessage message)
+        public void ReceivedChangedFileListMessage(ChangedFileMessage message)
         {
 
         }

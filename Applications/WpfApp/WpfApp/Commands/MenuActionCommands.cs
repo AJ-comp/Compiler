@@ -1,7 +1,9 @@
 ﻿using ApplicationLayer.Models.SolutionPackage;
 using ApplicationLayer.ViewModels.DialogViewModels;
+using ApplicationLayer.ViewModels.Messages;
 using ApplicationLayer.WpfApp.ViewModels;
 using ApplicationLayer.WpfApp.Views.DialogViews;
+using GalaSoft.MvvmLight.Messaging;
 using System;
 using System.Diagnostics;
 using System.IO;
@@ -144,6 +146,8 @@ namespace ApplicationLayer.WpfApp.Commands
                 if (parent is SolutionStruct) (parent as SolutionStruct).RemoveChild(selectedStruct);
                 else if (parent is DefaultProjectStruct) (parent as DefaultProjectStruct).RemoveChild(selectedStruct);
                 else if (parent is FolderStruct) (parent as FolderStruct).RemoveChild(selectedStruct);
+
+                Messenger.Default.Send<ChangedFileMessage>(new ChangedFileMessage(parent, ChangedFileMessage.ChangedStatus.Changed));
             }, (condition) =>
             {
                 var vm = parentWindow.DataContext as MainViewModel;

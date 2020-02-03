@@ -62,10 +62,12 @@
     <Compile Include="DialogViewModels\NewItemViewModel.cs" />
     <Compile Include="DialogViewModels\NewProjectViewModel.cs" />
     <Compile Include="DialogViewModels\NewSolutionViewModel.cs" />
+    <Compile Include="DialogViewModels\QuestionToSaveViewModel.cs" />
     <Compile Include="DocumentTypeViewModels\DocumentViewModel.cs" />
     <Compile Include="DocumentTypeViewModels\EditorTypeViewModel.cs" />
     <Compile Include="DocumentTypeViewModels\GrammarInfoViewModel.cs" />
     <Compile Include="DocumentTypeViewModels\ParsingHistoryViewModel.cs" />
+    <Compile Include="Messages\DialogMessages.cs" />
     <Compile Include="Messages\FromSolutionExplorerMessages.cs" />
     <Compile Include="Messages\ToSolutionExplorerMessages.cs" />
     <Compile Include="Properties\AlarmCodes.Designer.cs">

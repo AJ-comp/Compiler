@@ -13,6 +13,7 @@
 */
 
 using ApplicationLayer.Models;
+using ApplicationLayer.ViewModels.DialogViewModels;
 using ApplicationLayer.ViewModels.DocumentTypeViewModels;
 using CommonServiceLocator;
 using GalaSoft.MvvmLight.Ioc;
@@ -51,10 +52,12 @@ namespace ApplicationLayer.WpfApp.ViewModels
             SimpleIoc.Default.Register<GrammarInfoViewModel>();
             SimpleIoc.Default.Register<SolutionExplorerViewModel>();
             SimpleIoc.Default.Register<ParsingHistoryViewModel>();
+            SimpleIoc.Default.Register<QuestionToSaveViewModel>();
         }
 
         public MainViewModel Main { get => ServiceLocator.Current.GetInstance<MainViewModel>(); }
         public SolutionExplorerViewModel SolutionExplorerWindow { get => ServiceLocator.Current.GetInstance<SolutionExplorerViewModel>(); }
+        public QuestionToSaveViewModel QuestionToSave { get => ServiceLocator.Current.GetInstance<QuestionToSaveViewModel>(); }
 
         private void NotifyUserMethod(NotificationMessage message)
         {

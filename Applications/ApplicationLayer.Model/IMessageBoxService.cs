@@ -2,6 +2,8 @@
 
 namespace ApplicationLayer.Models
 {
+    public enum MessageResult { Yes, No, Cancel }
+
     public interface IMessageBoxService
     {
         void ShowError(Exception Error, string Title);
@@ -10,5 +12,7 @@ namespace ApplicationLayer.Models
         void ShowMessage(string Message, string Title);
         bool ShowQuestion(string Message, string Title);
         void ShowWarning(string Message, string Title);
+
+        MessageResult ShowSelectMessage(string Message, string Title);
     }
 }
