@@ -10,4 +10,12 @@
         <Setter Property="ap:WindowCloseBehavior.EnableWindowClose" Value="True"/>
     </Style>
 
+
+    <Style x:Key="WindowHideButton" TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
+        <Setter Property="MinWidth" Value="80"/>
+        <Setter Property="Height"  Value="20"/>
+        <Setter Property="Margin"  Value="0, 0, 10, 0"/>
+        <Setter Property="ap:WindowCloseBehavior.EnableWindowHide" Value="True"/>
+    </Style>
+
 </ResourceDictionary>

@@ -10,6 +10,12 @@ namespace ApplicationLayer.WpfApp.Views.DialogViews
         public QuestionToSaveDialog()
         {
             InitializeComponent();
+
+            this.Closing += (s, e) =>
+            {
+                e.Cancel = true;
+                this.Hide();
+            };
         }
     }
 }

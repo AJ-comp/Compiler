@@ -5,9 +5,11 @@ using ApplicationLayer.WpfApp.ViewModels;
 using ApplicationLayer.WpfApp.Views.DialogViews;
 using GalaSoft.MvvmLight.Messaging;
 using Parse.WpfControls.SyntaxEditor.EventArgs;
+using System.Globalization;
 using System.Windows;
 using System.Windows.Forms;
 using System.Windows.Interactivity;
+using WPFLocalizeExtension.Engine;
 
 namespace ApplicationLayer.WpfApp.Behaviors
 {
@@ -60,8 +62,10 @@ namespace ApplicationLayer.WpfApp.Behaviors
                 viewModel.CancelRequest += (s, ei) => msg.ResultStatus = ShowSaveDialogMessage.Result.Cancel;
 
                 this.questionToSaveDialog.ShowDialog();
-                this.questionToSaveDialog = new QuestionToSaveDialog();
             });
+
+            LocalizeDictionary.Instance.SetCurrentThreadCulture = true;
+            LocalizeDictionary.Instance.Culture = CultureInfo.CurrentCulture; //new CultureInfo("ko-KR");
 
 
             //            this.editor.SetComponents(this.parser);

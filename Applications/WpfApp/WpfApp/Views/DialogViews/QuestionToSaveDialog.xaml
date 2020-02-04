@@ -10,6 +10,7 @@
         WindowStartupLocation="CenterScreen"
         Style="{DynamicResource NormalWindow}"
         DataContext="{Binding QuestionToSave, Source={StaticResource Locator}}"
+        lex:ResxLocalizationProvider.DefaultAssembly="ApplicationLayer.Define"
         Title="AJPGS" Height="300" Width="500">
     <Grid>
         <Grid.RowDefinitions>
@@ -25,19 +26,19 @@
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <VirtualizingStackPanel>
-                        
+                        <TextBlock Text="{Binding FullPath}"/>
                     </VirtualizingStackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
         <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Right">
-            <Button Style="{DynamicResource WindowCloseButton}" Margin="0 0 10 0"
+            <Button Style="{DynamicResource WindowHideButton}" Margin="0 0 10 0"
                             Content="{lex:Loc Key=Yes}" 
                             Command="{Binding SaveCommand}"/>
-            <Button Style="{DynamicResource WindowCloseButton}" Margin="0 0 10 0"
+            <Button Style="{DynamicResource WindowHideButton}" Margin="0 0 10 0"
                             Content="{lex:Loc Key=No}" 
                             Command="{Binding IgnoreCommand}"/>
-            <Button Style="{DynamicResource WindowCloseButton}" Margin="0 0 10 0"
+            <Button Style="{DynamicResource WindowHideButton}" Margin="0 0 10 0"
                             Content="{lex:Loc Key=Cancel}" 
                             Command="{Binding CancelCommand}"/>
         </StackPanel>

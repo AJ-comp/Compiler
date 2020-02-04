@@ -6,7 +6,7 @@ namespace ApplicationLayer.ViewModels.Messages
     {
         public enum Result { Yes, No, Cancel }
 
-        public Result ResultStatus { get; set; } = Result.No;
+        public Result ResultStatus { get; set; } = Result.Cancel;
     }
 
     public class HideSaveDialogMessage : MessageBase

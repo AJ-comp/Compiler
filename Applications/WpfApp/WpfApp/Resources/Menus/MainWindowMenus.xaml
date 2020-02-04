@@ -55,6 +55,12 @@
         <!-- Tools -->
         <MenuItem Header="{lex:Loc Key=Tools}" InputGestureText="Alt+T">
             <MenuItem Header="{lex:Loc Key=Options}" InputGestureText="Alt+O" Command="{Binding OptionCommand}"/>
+            <MenuItem Header="{lex:Loc Key=ChangeLang}" InputGestureText="Alt+L">
+                <MenuItem Command="{x:Static commands:MenuActionCommands.ChangeToKorean}"/>
+                <MenuItem Command="{x:Static commands:MenuActionCommands.ChangeToEnglish}"/>
+                <MenuItem Command="{x:Static commands:MenuActionCommands.ChangeToChinese}"/>
+                <MenuItem Command="{x:Static commands:MenuActionCommands.ChangeToJapanese}"/>
+            </MenuItem>
         </MenuItem>
     </Menu>
 </ResourceDictionary>

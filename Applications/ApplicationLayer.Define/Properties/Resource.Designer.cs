@@ -61,6 +61,15 @@ namespace ApplicationLayer.Define.Properties {
         }
         
         /// <summary>
+        ///   No과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string No {
+            get {
+                return ResourceManager.GetString("No", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Not loaded과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string NotLoad {
@@ -75,6 +84,15 @@ namespace ApplicationLayer.Define.Properties {
         public static string WarningOnLoad {
             get {
                 return ResourceManager.GetString("WarningOnLoad", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Yes과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string Yes {
+            get {
+                return ResourceManager.GetString("Yes", resourceCulture);
             }
         }
     }

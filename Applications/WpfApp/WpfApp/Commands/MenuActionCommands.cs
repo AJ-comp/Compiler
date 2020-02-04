@@ -6,8 +6,10 @@ using ApplicationLayer.WpfApp.Views.DialogViews;
 using GalaSoft.MvvmLight.Messaging;
 using System;
 using System.Diagnostics;
+using System.Globalization;
 using System.IO;
 using System.Windows.Forms;
+using WPFLocalizeExtension.Engine;
 
 namespace ApplicationLayer.WpfApp.Commands
 {
@@ -196,6 +198,68 @@ namespace ApplicationLayer.WpfApp.Commands
             }, (condition) =>
             {
                 return true;
+            });
+
+
+
+
+
+
+
+        /// <summary>
+        /// This command open changes character set to Korean.
+        /// </summary>
+        public static readonly RelayUICommand<HirStruct> ChangeToKorean = new RelayUICommand<HirStruct>(Properties.Resources.OpenFolderFromExplorer,
+            (hirStruct) =>
+            {
+                LocalizeDictionary.Instance.SetCurrentThreadCulture = true;
+                LocalizeDictionary.Instance.Culture = new CultureInfo("ko-KR");
+            }, (condition) =>
+            {
+                var vm = parentWindow.DataContext as MainViewModel;
+                return (vm.IsDebugStatus == false);
+            });
+
+        /// <summary>
+        /// This command open changes character set to English.
+        /// </summary>
+        public static readonly RelayUICommand<HirStruct> ChangeToEnglish = new RelayUICommand<HirStruct>(Properties.Resources.OpenFolderFromExplorer,
+            (hirStruct) =>
+            {
+                LocalizeDictionary.Instance.SetCurrentThreadCulture = true;
+                LocalizeDictionary.Instance.Culture = new CultureInfo("en-US");
+            }, (condition) =>
+            {
+                var vm = parentWindow.DataContext as MainViewModel;
+                return (vm.IsDebugStatus == false);
+            });
+
+        /// <summary>
+        /// This command open changes character set to Chinese.
+        /// </summary>
+        public static readonly RelayUICommand<HirStruct> ChangeToChinese = new RelayUICommand<HirStruct>(Properties.Resources.OpenFolderFromExplorer,
+            (hirStruct) =>
+            {
+                LocalizeDictionary.Instance.SetCurrentThreadCulture = true;
+//                LocalizeDictionary.Instance.Culture = new CultureInfo("ko-KR");
+            }, (condition) =>
+            {
+                var vm = parentWindow.DataContext as MainViewModel;
+                return (vm.IsDebugStatus == false);
+            });
+
+        /// <summary>
+        /// This command open changes character set to Japanese.
+        /// </summary>
+        public static readonly RelayUICommand<HirStruct> ChangeToJapanese = new RelayUICommand<HirStruct>(Properties.Resources.OpenFolderFromExplorer,
+            (hirStruct) =>
+            {
+                LocalizeDictionary.Instance.SetCurrentThreadCulture = true;
+//                LocalizeDictionary.Instance.Culture = new CultureInfo("ko-KR");
+            }, (condition) =>
+            {
+                var vm = parentWindow.DataContext as MainViewModel;
+                return (vm.IsDebugStatus == false);
             });
     }
 }

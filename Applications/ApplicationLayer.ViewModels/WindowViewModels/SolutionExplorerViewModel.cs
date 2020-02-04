@@ -15,7 +15,7 @@ namespace WpfApp.ViewModels.WindowViewModels
 {
     public class SolutionExplorerViewModel : ViewModelBase
     {
-        private ShowSaveDialogMessage saveMessage = new ShowSaveDialogMessage();
+        private ShowSaveDialogMessage saveMessage;
         private IMessageBoxService messageBoxService;
 
         public ObservableCollection<SolutionStruct> Solutions { get; } = new ObservableCollection<SolutionStruct>();
@@ -145,21 +145,9 @@ namespace WpfApp.ViewModels.WindowViewModels
             }
         }
 
-        /// <summary>
-        /// Message handler for LoadSolutionMessage
-        /// </summary>
-        /// <param name="message"></param>
-        public void ReceivedLoadSolutionMessage(LoadSolutionMessage message)
+
+        private bool LoadSolution(LoadSolutionMessage message)
         {
-            var process = new GetChangedListMessage(string.Empty, PreprocessChangedFileList);
-            Messenger.Default.Send<GetChangedListMessage>(process);
-
-            if (saveMessage.ResultStatus == ShowSaveDialogMessage.Result.Yes)
-            {
-
-            }
-            else if (saveMessage.ResultStatus == ShowSaveDialogMessage.Result.Cancel) return;
-
             this.Solutions.Clear();
 
             using (StreamReader sr = new StreamReader(message.SolutionFullPath))
@@ -174,7 +162,6 @@ namespace WpfApp.ViewModels.WindowViewModels
             }
 
             bool bFiredError = false;
-
             foreach (var item in this.Solutions[0].SyncWithXMLProjectPaths)
             {
                 string fullPath = (item.IsAbsolute) ? item.Path : Path.Combine(message.SolutionPath, item.Path);
@@ -206,7 +193,29 @@ namespace WpfApp.ViewModels.WindowViewModels
                 }
             }
 
-            if (bFiredError) this.messageBoxService?.ShowWarning(WarningOnLoad, "");
+            return bFiredError;
+        }
+
+        /// <summary>
+        /// Message handler for LoadSolutionMessage
+        /// </summary>
+        /// <param name="message"></param>
+        public void ReceivedLoadSolutionMessage(LoadSolutionMessage message)
+        {
+            saveMessage = null;
+            var process = new GetChangedListMessage(string.Empty, PreprocessChangedFileList);
+            Messenger.Default.Send<GetChangedListMessage>(process);
+
+            if(saveMessage != null)
+            {
+                if (saveMessage.ResultStatus == ShowSaveDialogMessage.Result.Yes)
+                {
+
+                }
+                else if (saveMessage.ResultStatus == ShowSaveDialogMessage.Result.Cancel) return;
+            }
+
+            if (this.LoadSolution(message)) this.messageBoxService?.ShowWarning(WarningOnLoad, "");
         }
 
         /// <summary>
