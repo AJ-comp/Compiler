@@ -2,6 +2,8 @@
 using Parse.FrontEnd.Grammars;
 using System.Collections.ObjectModel;
 
+using CommonResource = ApplicationLayer.Define.Properties.Resources;
+
 namespace ApplicationLayer.ViewModels.DocumentTypeViewModels
 {
     /// <summary>
@@ -33,7 +35,7 @@ namespace ApplicationLayer.ViewModels.DocumentTypeViewModels
             }
         }
 
-        public GrammarInfoViewModel() : base(ApplicationLayer.ViewModels.Properties.Resource.GrammarInfoWindow)
+        public GrammarInfoViewModel() : base(CommonResource.GrammarInfoWindow)
         {
         }
 

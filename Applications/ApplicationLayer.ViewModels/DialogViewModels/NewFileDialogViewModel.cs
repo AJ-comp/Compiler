@@ -3,6 +3,8 @@ using GalaSoft.MvvmLight.Command;
 using System;
 using System.Collections.ObjectModel;
 
+using CommonResource = ApplicationLayer.Define.Properties.Resources;
+
 namespace ApplicationLayer.ViewModels.DialogViewModels
 {
     public class NewFileDialogViewModel : DialogViewModel
@@ -39,7 +41,7 @@ namespace ApplicationLayer.ViewModels.DialogViewModels
             string image = string.Empty;
             image = (Theme.Instance.ThemeKind == ThemeKind.Dark) ? "/Resources/Images/DarkTheme/cfile_48.png" : "/Resources/Images/Basic/cfile_48.png";
 
-            this.NewFileDataCollection.Add(new Document(image, Properties.Resource.MiniCFile, Properties.Resource.MiniCFileExplain, "", "Empty.mc"));
+            this.NewFileDataCollection.Add(new Document(image, CommonResource.MiniCFile, CommonResource.MiniCFileExplain, "", "Empty.mc"));
         }
 
         public event EventHandler<Document> CreateRequest;

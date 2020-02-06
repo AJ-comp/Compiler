@@ -97,6 +97,162 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="No" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="NotLoad" xml:space="preserve">
+    <value>Not loaded</value>
+  </data>
+  <data name="WarningOnLoad" xml:space="preserve">
+    <value>Fired more one error when project load.</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>Yes</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="ToSaveModifiedItem" xml:space="preserve">
+    <value>There are a modified item. Do you want to save?</value>
+  </data>
+  <data name="_Edit" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="_File" xml:space="preserve">
+    <value>File</value>
+  </data>
+  <data name="Add" xml:space="preserve">
+    <value>Add</value>
+  </data>
+  <data name="AllCloseExceptThisWindow" xml:space="preserve">
+    <value>All close except this window</value>
+  </data>
+  <data name="AlreadyExistFile" xml:space="preserve">
+    <value>File aleady exist replace it?</value>
+  </data>
+  <data name="CanonicalTable" xml:space="preserve">
+    <value>Canonical Table</value>
+  </data>
+  <data name="Close" xml:space="preserve">
+    <value>Close</value>
+  </data>
+  <data name="Code" xml:space="preserve">
+    <value>Code</value>
+  </data>
+  <data name="CreateSolutionDir" xml:space="preserve">
+    <value>Create directory for solution</value>
+  </data>
+  <data name="CurrentDocumentation" xml:space="preserve">
+    <value>Current Documentation</value>
+  </data>
+  <data name="CurrentProject" xml:space="preserve">
+    <value>Current Project</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="DeleteWarning" xml:space="preserve">
+    <value>You will really delete it?</value>
+  </data>
+  <data name="Documentation" xml:space="preserve">
+    <value>Documentation</value>
+  </data>
+  <data name="ExistItem" xml:space="preserve">
+    <value>Existing Item</value>
+  </data>
+  <data name="Explanation" xml:space="preserve">
+    <value>Explanation</value>
+  </data>
+  <data name="File" xml:space="preserve">
+    <value>File</value>
+  </data>
+  <data name="Grammar" xml:space="preserve">
+    <value>Grammar</value>
+  </data>
+  <data name="GrammarInfoWindow" xml:space="preserve">
+    <value>Grammar information window</value>
+  </data>
+  <data name="Line" xml:space="preserve">
+    <value>Line</value>
+  </data>
+  <data name="MicroController" xml:space="preserve">
+    <value>Micro Controller</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="New" xml:space="preserve">
+    <value>New Create</value>
+  </data>
+  <data name="NewFolder" xml:space="preserve">
+    <value>New Folder</value>
+  </data>
+  <data name="NewItem" xml:space="preserve">
+    <value>New Item</value>
+  </data>
+  <data name="NewProject" xml:space="preserve">
+    <value>New Project</value>
+  </data>
+  <data name="Ok" xml:space="preserve">
+    <value>Ok</value>
+  </data>
+  <data name="Open" xml:space="preserve">
+    <value>Open</value>
+  </data>
+  <data name="OpenFolderFromExplorer" xml:space="preserve">
+    <value>Open folder from explorer</value>
+  </data>
+  <data name="ParseTree" xml:space="preserve">
+    <value>Parse Tree</value>
+  </data>
+  <data name="ParsingTable" xml:space="preserve">
+    <value>Parsing Table</value>
+  </data>
+  <data name="Position" xml:space="preserve">
+    <value>Position</value>
+  </data>
+  <data name="Project" xml:space="preserve">
+    <value>Project</value>
+  </data>
+  <data name="ProjectOrSolution" xml:space="preserve">
+    <value>Project/Solution</value>
+  </data>
+  <data name="ProjectPath" xml:space="preserve">
+    <value>Project Path</value>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>Search</value>
+  </data>
+  <data name="SolutionPath" xml:space="preserve">
+    <value>Solution Path</value>
+  </data>
+  <data name="Tools" xml:space="preserve">
+    <value>Tools</value>
+  </data>
+  <data name="View" xml:space="preserve">
+    <value>View</value>
+  </data>
+  <data name="WholeSolution" xml:space="preserve">
+    <value>Whole Solution</value>
+  </data>
+  <data name="Korean" xml:space="preserve">
+    <value>Korean</value>
+  </data>
+  <data name="English" xml:space="preserve">
+    <value>English</value>
+  </data>
+  <data name="Chinese" xml:space="preserve">
+    <value>Chinese</value>
+  </data>
+  <data name="Japanese" xml:space="preserve">
+    <value>Japanese</value>
+  </data>
+  <data name="EmptyMiniCItem" xml:space="preserve">
+    <value>This is an empty MiniC file.</value>
+  </data>
+  <data name="MiniCCategory" xml:space="preserve">
+    <value>MiniC category</value>
+  </data>
   <data name="MiniCFile" xml:space="preserve">
     <value>Mini C File</value>
   </data>
@@ -105,8 +261,5 @@
   </data>
   <data name="ParsingHistory" xml:space="preserve">
     <value>Parsing History</value>
-  </data>
-  <data name="GrammarInfoWindow" xml:space="preserve">
-    <value>Grammar information window</value>
   </data>
 </root>

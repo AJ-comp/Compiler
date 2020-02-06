@@ -117,10 +117,169 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="MiniCCategory" xml:space="preserve">
-    <value>MiniC 분류</value>
+  <data name="No" xml:space="preserve">
+    <value>아니오</value>
+  </data>
+  <data name="NotLoad" xml:space="preserve">
+    <value>로드되지 않음</value>
+  </data>
+  <data name="WarningOnLoad" xml:space="preserve">
+    <value>프로젝트 로드 시 하나이상의 오류가 발생했습니다.</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>예</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>취소</value>
+  </data>
+  <data name="ToSaveModifiedItem" xml:space="preserve">
+    <value>수정된 항목이 있습니다. 저장하시겠습니까?</value>
+  </data>
+  <data name="_Edit" xml:space="preserve">
+    <value>편집</value>
+  </data>
+  <data name="_File" xml:space="preserve">
+    <value>파일</value>
+  </data>
+  <data name="Add" xml:space="preserve">
+    <value>추가</value>
+  </data>
+  <data name="AllCloseExceptThisWindow" xml:space="preserve">
+    <value>이 창을 제외하고 모두 닫기</value>
+  </data>
+  <data name="AlreadyExistFile" xml:space="preserve">
+    <value>파일이 이미 존재합니다 대체하시겠습니까?</value>
+  </data>
+  <data name="CanonicalTable" xml:space="preserve">
+    <value>Canonical 테이블</value>
+  </data>
+  <data name="Close" xml:space="preserve">
+    <value>닫기</value>
+  </data>
+  <data name="Code" xml:space="preserve">
+    <value>코드</value>
+  </data>
+  <data name="CreateSolutionDir" xml:space="preserve">
+    <value>솔루션용 디렉토리 만들기</value>
+  </data>
+  <data name="CurrentDocumentation" xml:space="preserve">
+    <value>현재 문서</value>
+  </data>
+  <data name="CurrentProject" xml:space="preserve">
+    <value>현재 프로젝트</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>삭제</value>
+  </data>
+  <data name="DeleteWarning" xml:space="preserve">
+    <value>정말로 삭제하시겠습니까?</value>
+  </data>
+  <data name="Documentation" xml:space="preserve">
+    <value>문서</value>
+  </data>
+  <data name="ExistItem" xml:space="preserve">
+    <value>기존 항목</value>
+  </data>
+  <data name="Explanation" xml:space="preserve">
+    <value>설명</value>
+  </data>
+  <data name="File" xml:space="preserve">
+    <value>파일</value>
+  </data>
+  <data name="Grammar" xml:space="preserve">
+    <value>문법</value>
+  </data>
+  <data name="GrammarInfoWindow" xml:space="preserve">
+    <value>문법정보 창</value>
+  </data>
+  <data name="Line" xml:space="preserve">
+    <value>줄</value>
+  </data>
+  <data name="MicroController" xml:space="preserve">
+    <value>마이크로 컨트롤러</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>이름</value>
+  </data>
+  <data name="New" xml:space="preserve">
+    <value>새로 만들기</value>
+  </data>
+  <data name="NewFolder" xml:space="preserve">
+    <value>새 폴더</value>
+  </data>
+  <data name="NewItem" xml:space="preserve">
+    <value>새 항목</value>
+  </data>
+  <data name="NewProject" xml:space="preserve">
+    <value>새 프로젝트</value>
+  </data>
+  <data name="Ok" xml:space="preserve">
+    <value>확인</value>
+  </data>
+  <data name="Open" xml:space="preserve">
+    <value>열기</value>
+  </data>
+  <data name="OpenFolderFromExplorer" xml:space="preserve">
+    <value>파일 탐색기에서 폴더 열기</value>
+  </data>
+  <data name="ParseTree" xml:space="preserve">
+    <value>파스 트리</value>
+  </data>
+  <data name="ParsingTable" xml:space="preserve">
+    <value>파싱 테이블</value>
+  </data>
+  <data name="Position" xml:space="preserve">
+    <value>위치</value>
+  </data>
+  <data name="Project" xml:space="preserve">
+    <value>프로젝트</value>
+  </data>
+  <data name="ProjectOrSolution" xml:space="preserve">
+    <value>프로젝트/솔루션</value>
+  </data>
+  <data name="ProjectPath" xml:space="preserve">
+    <value>프로젝트 경로</value>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>찾아보기</value>
+  </data>
+  <data name="SolutionPath" xml:space="preserve">
+    <value>솔루션 경로</value>
+  </data>
+  <data name="Tools" xml:space="preserve">
+    <value>도구</value>
+  </data>
+  <data name="View" xml:space="preserve">
+    <value>보기</value>
+  </data>
+  <data name="WholeSolution" xml:space="preserve">
+    <value>전체 솔루션</value>
+  </data>
+  <data name="Korean" xml:space="preserve">
+    <value>한국어</value>
+  </data>
+  <data name="English" xml:space="preserve">
+    <value>영어</value>
+  </data>
+  <data name="Chinese" xml:space="preserve">
+    <value>중국어</value>
+  </data>
+  <data name="Japanese" xml:space="preserve">
+    <value>일본어</value>
   </data>
   <data name="EmptyMiniCItem" xml:space="preserve">
     <value>빈 MiniC 파일입니다.</value>
+  </data>
+  <data name="MiniCCategory" xml:space="preserve">
+    <value>MiniC 분류</value>
+  </data>
+  <data name="MiniCFile" xml:space="preserve">
+    <value>Mini C 파일</value>
+  </data>
+  <data name="MiniCFileExplain" xml:space="preserve">
+    <value>Mini C 파일을 생성합니다</value>
+  </data>
+  <data name="ParsingHistory" xml:space="preserve">
+    <value>파싱 히스토리</value>
   </data>
 </root>

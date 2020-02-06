@@ -18,6 +18,7 @@
             <RowDefinition Height="20"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="20"/>
+            <RowDefinition Height="10"/>
         </Grid.RowDefinitions>
 
         <TextBlock Grid.Row="1" Text="{lex:Loc Key=ToSaveModifiedItem}"/>

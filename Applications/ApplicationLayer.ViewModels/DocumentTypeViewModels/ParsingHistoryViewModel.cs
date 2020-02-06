@@ -1,10 +1,12 @@
-﻿namespace ApplicationLayer.ViewModels.DocumentTypeViewModels
+﻿using CommonResource = ApplicationLayer.Define.Properties.Resources;
+
+namespace ApplicationLayer.ViewModels.DocumentTypeViewModels
 {
     public class ParsingHistoryViewModel : DocumentViewModel
     {
 //        public DataGrid ParsingHistory { get; set; }
 
-        public ParsingHistoryViewModel() : base(Properties.Resource.ParsingHistory)
+        public ParsingHistoryViewModel() : base(CommonResource.ParsingHistory)
         {
         }
     }

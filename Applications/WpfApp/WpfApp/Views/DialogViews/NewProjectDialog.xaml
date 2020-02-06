@@ -9,6 +9,7 @@
              xmlns:viewModels="clr-namespace:ApplicationLayer.ViewModels.DialogViewModels;assembly=ApplicationLayer.ViewModels"
              xmlns:logicConverters="clr-namespace:ApplicationLayer.WpfApp.Converters.LogicConverters"
              xmlns:targets="clr-namespace:Parse.BackEnd.Target;assembly=Parse.BackEnd.Target"
+             lex:ResxLocalizationProvider.DefaultAssembly="ApplicationLayer.Define"
              mc:Ignorable="d" 
              WindowStyle="ToolWindow"
              WindowStartupLocation="CenterScreen"

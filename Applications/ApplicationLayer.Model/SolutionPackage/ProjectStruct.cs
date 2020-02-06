@@ -6,7 +6,7 @@ using System.IO;
 using System.Windows.Data;
 using System.Xml.Serialization;
 
-using static ApplicationLayer.Define.Properties.Resource;
+using CommonResource = ApplicationLayer.Define.Properties.Resources;
 
 namespace ApplicationLayer.Models.SolutionPackage
 {
@@ -186,14 +186,14 @@ namespace ApplicationLayer.Models.SolutionPackage
 
                 if (string.IsNullOrEmpty(directoryName))
                 {
-                    if (File.Exists(Path.Combine(this.BaseOPath, fileName))) this.Items.Add(new DefaultFileStruct() { FullName = fileName });
+                    if (System.IO.File.Exists(Path.Combine(this.BaseOPath, fileName))) this.Items.Add(new DefaultFileStruct() { FullName = fileName });
                     else this.Items.Add(new ErrorFileStruct() { FullName = fileName });
                 }
                 else
                 {
                     FolderStruct folderStruct = FolderStruct.GetFolderSet(this.BaseOPath, directoryName);
                     DefaultFileStruct fileStruct = new DefaultFileStruct() { Parent = folderStruct, FullName = fileName };
-                    if(File.Exists(fileStruct.FullPath)) folderStruct.Items.Add(fileStruct);
+                    if(System.IO.File.Exists(fileStruct.FullPath)) folderStruct.Items.Add(fileStruct);
                     this.Folders.Add(folderStruct);
                 }
             }
@@ -229,6 +229,6 @@ namespace ApplicationLayer.Models.SolutionPackage
 
     public class ErrorProjectStruct : ProjectStruct
     {
-        public string DisplayName => NameWithoutExtension + string.Format(" ({0})", NotLoad);
+        public string DisplayName => NameWithoutExtension + string.Format(" ({0})", CommonResource.NotLoad);
     }
 }

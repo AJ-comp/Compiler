@@ -4,12 +4,13 @@ using ApplicationLayer.ViewModels.Messages;
 using ApplicationLayer.WpfApp.ViewModels;
 using ApplicationLayer.WpfApp.Views.DialogViews;
 using GalaSoft.MvvmLight.Messaging;
-using System;
 using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Windows.Forms;
 using WPFLocalizeExtension.Engine;
+
+using static ApplicationLayer.Define.Properties.Resources;
 
 namespace ApplicationLayer.WpfApp.Commands
 {
@@ -20,7 +21,7 @@ namespace ApplicationLayer.WpfApp.Commands
         /// <summary>
         /// New Solution Command
         /// </summary>
-        public static readonly RelayUICommand CreateNewSolution = new RelayUICommand(Properties.Resources.Project,
+        public static readonly RelayUICommand CreateNewSolution = new RelayUICommand(Project,
             () =>
         {
             NewSolutionDialog dialog = new NewSolutionDialog();
@@ -38,7 +39,7 @@ namespace ApplicationLayer.WpfApp.Commands
         /// <summary>
         /// New Project Command
         /// </summary>
-        public static readonly RelayUICommand AddNewProject = new RelayUICommand(Properties.Resources.Project, 
+        public static readonly RelayUICommand AddNewProject = new RelayUICommand(Project, 
             () =>
         {
             NewProjectDialog dialog = new NewProjectDialog();
@@ -56,7 +57,7 @@ namespace ApplicationLayer.WpfApp.Commands
         /// <summary>
         /// New Item Command
         /// </summary>
-        public static readonly RelayUICommand<HirStruct> AddNewItem = new RelayUICommand<HirStruct>(Properties.Resources.NewItem,
+        public static readonly RelayUICommand<HirStruct> AddNewItem = new RelayUICommand<HirStruct>(NewItem,
             (hirStruct) =>
             {
                 NewItemDialog dialog = new NewItemDialog();
@@ -83,7 +84,7 @@ namespace ApplicationLayer.WpfApp.Commands
         /// <summary>
         /// Load Existing Item Command
         /// </summary>
-        public static readonly RelayUICommand<HirStruct> AddExistItem = new RelayUICommand<HirStruct>(Properties.Resources.ExistItem,
+        public static readonly RelayUICommand<HirStruct> AddExistItem = new RelayUICommand<HirStruct>(ExistItem,
             (hirStruct) =>
             {
                 OpenFileDialog dialog = new OpenFileDialog();
@@ -96,20 +97,20 @@ namespace ApplicationLayer.WpfApp.Commands
                     if(hirStruct.BaseOPath != Path.GetDirectoryName(fileName))
                     {
                         string destPath = Path.Combine(hirStruct.BaseOPath, Path.GetFileName(fileName));
-                        if (File.Exists(destPath))
+                        if (System.IO.File.Exists(destPath))
                         {
-                            DialogResult dResult = MessageBox.Show(Properties.Resources.AlreadyExistFile, string.Empty, MessageBoxButtons.YesNo);
+                            DialogResult dResult = MessageBox.Show(AlreadyExistFile, string.Empty, MessageBoxButtons.YesNo);
 
-                            if (dResult == DialogResult.Yes) File.Copy(fileName, destPath);
+                            if (dResult == DialogResult.Yes) System.IO.File.Copy(fileName, destPath);
                             else return;
                         }
-                        else File.Copy(fileName, destPath);
+                        else System.IO.File.Copy(fileName, destPath);
                     }
 
                     var fileStruct = new DefaultFileStruct()
                     {
                         FullName = Path.GetFileName(fileName),
-                        Data = File.ReadAllText(fileName)
+                        Data = System.IO.File.ReadAllText(fileName)
                     };
 
                     if (hirStruct is DefaultProjectStruct) (hirStruct as DefaultProjectStruct).Items.Add(fileStruct);
@@ -125,13 +126,13 @@ namespace ApplicationLayer.WpfApp.Commands
         /// <summary>
         /// Item delete command
         /// </summary>
-        public static readonly RelayUICommand<HirStruct> DelItem = new RelayUICommand<HirStruct>(Properties.Resources.Delete,
+        public static readonly RelayUICommand<HirStruct> DelItem = new RelayUICommand<HirStruct>(Delete,
             (selectedStruct) =>
             {
                 HirStruct parent = selectedStruct.Parent;
                 if (parent == null) return;
 
-                DialogResult dResult = MessageBox.Show(Properties.Resources.DeleteWarning, string.Empty, MessageBoxButtons.YesNo);
+                DialogResult dResult = MessageBox.Show(DeleteWarning, string.Empty, MessageBoxButtons.YesNo);
 
                 if (dResult == DialogResult.Yes)
                 {
@@ -139,7 +140,7 @@ namespace ApplicationLayer.WpfApp.Commands
                     {
                         if (selectedStruct is ProjectStruct) Directory.Delete(selectedStruct.BaseOPath, true);
                         else if (selectedStruct is FolderStruct) Directory.Delete(selectedStruct.FullPath, true);
-                        else File.Delete(selectedStruct.FullPath);
+                        else System.IO.File.Delete(selectedStruct.FullPath);
                     }
                     catch { }
                 }
@@ -160,7 +161,7 @@ namespace ApplicationLayer.WpfApp.Commands
         /// <summary>
         /// New Folder Command
         /// </summary>
-        public static readonly RelayUICommand<DefaultProjectStruct> AddNewFolder = new RelayUICommand<DefaultProjectStruct>(Properties.Resources.NewFolder,
+        public static readonly RelayUICommand<DefaultProjectStruct> AddNewFolder = new RelayUICommand<DefaultProjectStruct>(NewFolder,
             (projectStruct) =>
             {
                 string newFolderName = "New Folder";
@@ -190,7 +191,7 @@ namespace ApplicationLayer.WpfApp.Commands
         /// <summary>
         /// This command open folder from file explorer
         /// </summary>
-        public static readonly RelayUICommand<HirStruct> OpenFolder = new RelayUICommand<HirStruct>(Properties.Resources.OpenFolderFromExplorer,
+        public static readonly RelayUICommand<HirStruct> OpenFolder = new RelayUICommand<HirStruct>(OpenFolderFromExplorer,
             (hirStruct) =>
             {
                 // opens explorer, showing some other folder)
@@ -209,7 +210,7 @@ namespace ApplicationLayer.WpfApp.Commands
         /// <summary>
         /// This command open changes character set to Korean.
         /// </summary>
-        public static readonly RelayUICommand<HirStruct> ChangeToKorean = new RelayUICommand<HirStruct>(Properties.Resources.OpenFolderFromExplorer,
+        public static readonly RelayUICommand<HirStruct> ChangeToKorean = new RelayUICommand<HirStruct>(Korean,
             (hirStruct) =>
             {
                 LocalizeDictionary.Instance.SetCurrentThreadCulture = true;
@@ -223,7 +224,7 @@ namespace ApplicationLayer.WpfApp.Commands
         /// <summary>
         /// This command open changes character set to English.
         /// </summary>
-        public static readonly RelayUICommand<HirStruct> ChangeToEnglish = new RelayUICommand<HirStruct>(Properties.Resources.OpenFolderFromExplorer,
+        public static readonly RelayUICommand<HirStruct> ChangeToEnglish = new RelayUICommand<HirStruct>(English,
             (hirStruct) =>
             {
                 LocalizeDictionary.Instance.SetCurrentThreadCulture = true;
@@ -237,7 +238,7 @@ namespace ApplicationLayer.WpfApp.Commands
         /// <summary>
         /// This command open changes character set to Chinese.
         /// </summary>
-        public static readonly RelayUICommand<HirStruct> ChangeToChinese = new RelayUICommand<HirStruct>(Properties.Resources.OpenFolderFromExplorer,
+        public static readonly RelayUICommand<HirStruct> ChangeToChinese = new RelayUICommand<HirStruct>(Chinese,
             (hirStruct) =>
             {
                 LocalizeDictionary.Instance.SetCurrentThreadCulture = true;
@@ -251,7 +252,7 @@ namespace ApplicationLayer.WpfApp.Commands
         /// <summary>
         /// This command open changes character set to Japanese.
         /// </summary>
-        public static readonly RelayUICommand<HirStruct> ChangeToJapanese = new RelayUICommand<HirStruct>(Properties.Resources.OpenFolderFromExplorer,
+        public static readonly RelayUICommand<HirStruct> ChangeToJapanese = new RelayUICommand<HirStruct>(Japanese,
             (hirStruct) =>
             {
                 LocalizeDictionary.Instance.SetCurrentThreadCulture = true;

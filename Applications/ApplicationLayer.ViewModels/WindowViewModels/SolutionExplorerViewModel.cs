@@ -9,7 +9,8 @@ using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.IO;
 using System.Xml.Serialization;
-using static ApplicationLayer.Define.Properties.Resource;
+
+using CommonResource = ApplicationLayer.Define.Properties.Resources;
 
 namespace WpfApp.ViewModels.WindowViewModels
 {
@@ -101,7 +102,7 @@ namespace WpfApp.ViewModels.WindowViewModels
             {
                 SolutionStruct child = e.NewItems[i] as SolutionStruct;
 
-                if (File.Exists(child.FullPath)) continue;
+                if (System.IO.File.Exists(child.FullPath)) continue;
 
                 Directory.CreateDirectory(child.CurOPath);
             }
@@ -215,7 +216,7 @@ namespace WpfApp.ViewModels.WindowViewModels
                 else if (saveMessage.ResultStatus == ShowSaveDialogMessage.Result.Cancel) return;
             }
 
-            if (this.LoadSolution(message)) this.messageBoxService?.ShowWarning(WarningOnLoad, "");
+            if (this.LoadSolution(message)) this.messageBoxService?.ShowWarning(CommonResource.WarningOnLoad, "");
         }
 
         /// <summary>

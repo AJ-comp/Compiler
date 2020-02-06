@@ -5,7 +5,8 @@
                     xmlns:commands="clr-namespace:ApplicationLayer.WpfApp.Commands"
                     xmlns:main="clr-namespace:ApplicationLayer.WpfApp">
 
-    <Menu x:Key="MainWindowMenus" VerticalAlignment="Center" DockPanel.Dock="Left" HorizontalAlignment="Left" Margin="8,0,0,0">
+    <Menu x:Key="MainWindowMenus" lex:ResxLocalizationProvider.DefaultAssembly="ApplicationLayer.Define"
+                VerticalAlignment="Center" DockPanel.Dock="Left" HorizontalAlignment="Left" Margin="8,0,0,0">
         <MenuItem Header="{lex:Loc Key=_File}" InputGestureText="Alt+F">
             <!-- New -->
             <MenuItem Header="{lex:Loc Key=New}" InputGestureText="Alt+N">

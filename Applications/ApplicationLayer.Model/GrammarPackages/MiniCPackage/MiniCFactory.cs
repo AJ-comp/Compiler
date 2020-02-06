@@ -1,5 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 
+using CommonResource = ApplicationLayer.Define.Properties.Resources;
+
 namespace ApplicationLayer.Models.GrammarPackages.MiniCPackage
 {
     public class MiniCFactory : IGrammarFactory
@@ -10,7 +12,7 @@ namespace ApplicationLayer.Models.GrammarPackages.MiniCPackage
             {
                 ObservableCollection<Document> result = new ObservableCollection<Document>();
 
-                result.Add(new Document(string.Empty, "Class", Properties.Resource.MiniCCategory, Properties.Resource.EmptyMiniCItem, "Class.mc")
+                result.Add(new Document(string.Empty, "Class", CommonResource.MiniCCategory, CommonResource.EmptyMiniCItem, "Class.mc")
                 {
                     Data = "void class()\r\n{\r\n}"
                 });
