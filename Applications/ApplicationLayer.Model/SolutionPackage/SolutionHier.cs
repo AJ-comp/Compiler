@@ -8,24 +8,39 @@ using System.Xml.Serialization;
 
 namespace ApplicationLayer.Models.SolutionPackage
 {
-    [XmlInclude(typeof(DefaultProjectStruct))]
-    public class SolutionStruct : HirStruct
+    [XmlInclude(typeof(DefaultProjectHier))]
+    public class SolutionHier : HierarchicalData, IChangeTrackable
     {
         [XmlIgnore]
         public static string Extension => "ajn";
+
+        private double originalVersion;
         public double Version { get; set; }
 
-        [XmlIgnore]
-        public List<PathInfo> CurrentProjectPath { get; } = new List<PathInfo>();
-        public List<PathInfo> SyncWithXMLProjectPaths { get; private set; } = new List<PathInfo>();
+        public Collection<PathInfo> ProjectPaths { get; private set; } = new Collection<PathInfo>();
 
         [XmlIgnore]
-        public ObservableCollection<ProjectStruct> Projects { get; } = new ObservableCollection<ProjectStruct>();
+        public ObservableCollection<ProjectHier> Projects { get; } = new ObservableCollection<ProjectHier>();
 
         [XmlIgnore]
-        public bool IsChanged => (this.CurrentProjectPath.Equals(this.SyncWithXMLProjectPaths)) ? false : true;
+        public bool IsChanged
+        {
+            get
+            {
+                if (originalVersion != Version) return true;
 
-        public SolutionStruct()
+                if (ProjectPaths.Count != Projects.Count) return true;
+                foreach(var project in Projects)
+                {
+                    var path = new PathInfo(project.AutoPath, project.IsAbsolutePath);
+                    if (ProjectPaths.Contains(path) == false) return true;
+                }
+
+                return false;
+            }
+        }
+
+        public SolutionHier()
         {
             this.Projects.CollectionChanged += Projects_CollectionChanged;
         }
@@ -34,10 +49,8 @@ namespace ApplicationLayer.Models.SolutionPackage
         {
             for(int i=0; i<e.NewItems?.Count; i++)
             {
-                ProjectStruct child = e.NewItems[i] as ProjectStruct;
+                ProjectHier child = e.NewItems[i] as ProjectHier;
                 child.Parent = this;
-
-                this.CurrentProjectPath.Add(new PathInfo(child.RelativePath, child.IsAbsolutePath));
             }
         }
 
@@ -45,28 +58,23 @@ namespace ApplicationLayer.Models.SolutionPackage
         {
             for (int i = 0; i < e.NewItems?.Count; i++)
             {
-                ErrorProjectStruct child = e.NewItems[i] as ErrorProjectStruct;
+                ErrorProjectHier child = e.NewItems[i] as ErrorProjectHier;
                 child.Parent = this;
             }
-        }
-
-        public void SyncWithXML()
-        {
-            this.SyncWithXMLProjectPaths = new List<PathInfo>(this.CurrentProjectPath);
         }
 
         /// <summary>
         /// This function removes the child after find child type.
         /// </summary>
         /// <param name="child">child to remove</param>
-        public void RemoveChild(HirStruct child)
+        public void RemoveChild(HierarchicalData child)
         {
-            if (child is ProjectStruct) this.Projects.Remove(child as ProjectStruct);
+            if (child is ProjectHier) this.Projects.Remove(child as ProjectHier);
         }
 
-        public static SolutionStruct Create(string solutionPath, string solutionName, Grammar grammar, Target target)
+        public static SolutionHier Create(string solutionPath, string solutionName, Grammar grammar, Target target)
         {
-            SolutionStruct result = new SolutionStruct();
+            SolutionHier result = new SolutionHier();
             string solutionNameWithExtension = Path.GetFileNameWithoutExtension(solutionName);
 
             result.CurOPath = solutionPath;
@@ -79,9 +87,23 @@ namespace ApplicationLayer.Models.SolutionPackage
             result.Projects.Add(projectGenerator.CreateDefaultProject(solutionNameWithExtension, false, solutionNameWithExtension, target, result));
             result.Projects.Add(projectGenerator.CreateDefaultProject(solutionNameWithExtension + "abc", false, solutionNameWithExtension + "abc", target, result));
 
-            result.SyncWithXML();
+            result.Commit();
 
             return result;
+        }
+
+        public void RollBack()
+        {
+            Version = originalVersion;
+        }
+
+        public void Commit()
+        {
+            originalVersion = Version;
+
+            ProjectPaths.Clear();
+            foreach (var project in Projects)
+                ProjectPaths.Add(new PathInfo(project.AutoPath, project.IsAbsolutePath));
         }
     }
 

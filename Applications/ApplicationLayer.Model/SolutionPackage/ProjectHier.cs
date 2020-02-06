@@ -10,19 +10,26 @@ using CommonResource = ApplicationLayer.Define.Properties.Resources;
 
 namespace ApplicationLayer.Models.SolutionPackage
 {
-    public class ProjectStruct : HirStruct
+    public abstract class ProjectHier : HierarchicalData, IChangeTrackable
     {
-        public double Version { get; set; }
+        public abstract bool IsChanged { get; }
+
+        public abstract void Commit();
+        public abstract void RollBack();
     }
 
 
     [XmlInclude(typeof(ProjectProperty))]
-    [XmlInclude(typeof(ReferenceStruct))]
-    public class DefaultProjectStruct : ProjectStruct
+    [XmlInclude(typeof(ReferenceHier))]
+    public class DefaultProjectHier : ProjectHier
     {
         [XmlIgnore]
         public string Extension => Path.GetExtension(this.FullName);
 
+        private double originalVersion = 0.0;
+        public double Version { get; set; }
+
+        private Collection<ProjectProperty> originalProperties = new Collection<ProjectProperty>();
         public ObservableCollection<ProjectProperty> Properties { get; } = new ObservableCollection<ProjectProperty>();
 
         public StringCollection ReferencePaths { get; } = new StringCollection();
@@ -30,11 +37,11 @@ namespace ApplicationLayer.Models.SolutionPackage
         public StringCollection ItemPaths { get; } = new StringCollection();
 
         [XmlIgnore]
-        public ObservableCollection<ReferenceStruct> ReferenceFolder { get; } = new ObservableCollection<ReferenceStruct>();
+        public ObservableCollection<ReferenceHier> ReferenceFolder { get; } = new ObservableCollection<ReferenceHier>();
         [XmlIgnore]
-        public ObservableCollection<FolderStruct> Folders { get; } = new ObservableCollection<FolderStruct>();
+        public ObservableCollection<FolderHier> Folders { get; } = new ObservableCollection<FolderHier>();
         [XmlIgnore]
-        public ObservableCollection<FileStruct> Items { get; } = new ObservableCollection<FileStruct>();
+        public ObservableCollection<FileHier> Items { get; } = new ObservableCollection<FileHier>();
 
         [XmlIgnore]
         public IList Children
@@ -50,9 +57,43 @@ namespace ApplicationLayer.Models.SolutionPackage
             }
         }
 
-        public DefaultProjectStruct()
+        public override bool IsChanged
         {
-            this.ReferenceFolder.Add(new ReferenceStruct() { CurOPath = "C:\\Program Files (x86)\\AJ\\IDE\\Reference Assemblies", FullName = "Reference" });
+            get
+            {
+                // compare with Version whether equals.
+                if (originalVersion != Version) return true;
+
+                // compare with Properties whether equals.
+                if (originalProperties.Count != Properties.Count) return true;
+                foreach(var property in Properties)
+                {
+                    if (originalProperties.Contains(property) == false) return true;
+                }
+
+                // compare with ReferencePath whether equals.
+                StringCollection referencePaths = new StringCollection();
+                foreach (var item in ReferenceFolder[0].Items) referencePaths.Add(item.FullPath);
+                if (ReferenceFolder[0].Items.Equals(referencePaths) == false) return true;
+
+                // compare with HasNotItemPaths whether equals.
+                StringCollection hasNotItemPaths = new StringCollection();
+                foreach (var folder in Folders) hasNotItemPaths.AddRange(folder.HasNotItemAllPaths.ToArray());
+                if (HasNotItemPaths.Equals(hasNotItemPaths) == false) return true;
+
+                // compare with Items whether equals.
+                StringCollection itemPaths = new StringCollection();
+                foreach (var folder in Folders) itemPaths.AddRange(folder.HasItemAllPaths.ToArray());
+                foreach (var item in Items) ItemPaths.Add(item.AutoPath);
+                if (itemPaths.Equals(hasNotItemPaths) == false) return true;
+
+                return false;
+            }
+        }
+
+        public DefaultProjectHier()
+        {
+            this.ReferenceFolder.Add(new ReferenceHier() { CurOPath = "C:\\Program Files (x86)\\AJ\\IDE\\Reference Assemblies", FullName = "Reference" });
 
             this.ReferenceFolder[0].Items.CollectionChanged += ReferenceItems_CollectionChanged;
             this.Folders.CollectionChanged += Folders_CollectionChanged;
@@ -63,9 +104,6 @@ namespace ApplicationLayer.Models.SolutionPackage
         {
             for (int i = 0; i < e.NewItems?.Count; i++)
             {
-                ReferenceFileStruct referenceFile = e.NewItems[i] as ReferenceFileStruct;
-
-                if (this.ReferencePaths.Contains(referenceFile.FullPath) == false) this.ReferencePaths.Add(referenceFile.FullPath);
             }
         }
 
@@ -73,12 +111,8 @@ namespace ApplicationLayer.Models.SolutionPackage
         {
             for (int i = 0; i < e.NewItems?.Count; i++)
             {
-                FolderStruct folder = e.NewItems[i] as FolderStruct;
+                FolderHier folder = e.NewItems[i] as FolderHier;
                 folder.Parent = this;
-
-                // The folder or file path always uses only relative path.
-                var pathInfo = folder.RelativePath;
-                if (this.ItemPaths.Contains(pathInfo) == false) this.ItemPaths.Add(pathInfo);
 
                 folder.Folders.CollectionChanged += SubFolders_CollectionChanged;
                 folder.Items.CollectionChanged += SubItems_CollectionChanged;
@@ -89,12 +123,8 @@ namespace ApplicationLayer.Models.SolutionPackage
         {
             for (int i = 0; i < e.NewItems?.Count; i++)
             {
-                FileStruct item = e.NewItems[i] as FileStruct;
+                FileHier item = e.NewItems[i] as FileHier;
                 item.Parent = this;
-
-                // The folder or file path always uses only relative path.
-                var pathInfo = item.RelativePath;
-                if (this.ItemPaths.Contains(pathInfo) == false) this.ItemPaths.Add(pathInfo);
             }
         }
 
@@ -102,13 +132,7 @@ namespace ApplicationLayer.Models.SolutionPackage
         {
             for (int i = 0; i < e.NewItems?.Count; i++)
             {
-                FolderStruct folder = e.NewItems[i] as FolderStruct;
-
-                // The folder or file path always uses only relative path.
-                var findPath = folder.RelativePath;
-                int index = this.ItemPaths.FindIndex(findPath);
-                if (index >= 0)
-                    this.ItemPaths[index] = folder.FullPath;
+                FolderHier folder = e.NewItems[i] as FolderHier;
 
                 folder.Folders.CollectionChanged += SubFolders_CollectionChanged;
                 folder.Items.CollectionChanged += SubItems_CollectionChanged;
@@ -117,19 +141,9 @@ namespace ApplicationLayer.Models.SolutionPackage
 
         private void SubItems_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
-            for (int i = 0; i < e.NewItems?.Count; i++)
-            {
-                DefaultFileStruct item = e.NewItems[i] as DefaultFileStruct;
-
-                // The folder or file path always uses only relative path.
-                var findPath = item.RelativePath;
-                int index = this.ItemPaths.FindIndex(findPath);
-                if (index >= 0)
-                    this.ItemPaths[index] = item.FullPath;
-            }
         }
 
-        private string FindExistPathFromItemPaths(HirStruct findTarget)
+        private string FindExistPathFromItemPaths(HierarchicalData findTarget)
         {
             string result = string.Empty;
 
@@ -149,17 +163,14 @@ namespace ApplicationLayer.Models.SolutionPackage
         /// This function removes the child after find child type.
         /// </summary>
         /// <param name="child">child to remove</param>
-        public void RemoveChild(HirStruct child)
+        public void RemoveChild(HierarchicalData child)
         {
-            if (child is FolderStruct) this.Folders.Remove(child as FolderStruct);
-            else if (child is FileStruct) this.Items.Remove(child as FileStruct);
+            if (child is FolderHier) this.Folders.Remove(child as FolderHier);
+            else if (child is FileHier) this.Items.Remove(child as FileHier);
             else if (child is ReferenceFileStruct) this.ReferenceFolder[0].Items.Remove(child as ReferenceFileStruct);
         }
 
-        /// <summary>
-        /// This function syncronize with object based on xml.
-        /// </summary>
-        public void SyncXmlToObject()
+        public override void RollBack()
         {
             this.ReferenceFolder[0].Items.Clear();
             foreach (var item in this.ReferencePaths)
@@ -172,11 +183,11 @@ namespace ApplicationLayer.Models.SolutionPackage
 
             this.Folders.Clear();
             this.Items.Clear();
-            foreach(var item in this.HasNotItemPaths)
+            foreach (var item in this.HasNotItemPaths)
             {
                 var directoryName = Path.GetFileName(item);
 
-                this.Folders.Add(FolderStruct.GetFolderSet(this.BaseOPath, directoryName));
+                this.Folders.Add(FolderHier.GetFolderSet(this.BaseOPath, directoryName));
             }
 
             foreach (var item in this.ItemPaths)
@@ -186,39 +197,36 @@ namespace ApplicationLayer.Models.SolutionPackage
 
                 if (string.IsNullOrEmpty(directoryName))
                 {
-                    if (System.IO.File.Exists(Path.Combine(this.BaseOPath, fileName))) this.Items.Add(new DefaultFileStruct() { FullName = fileName });
-                    else this.Items.Add(new ErrorFileStruct() { FullName = fileName });
+                    if (System.IO.File.Exists(Path.Combine(this.BaseOPath, fileName))) this.Items.Add(new DefaultFileHier() { FullName = fileName });
+                    else this.Items.Add(new ErrorFileHier() { FullName = fileName });
                 }
                 else
                 {
-                    FolderStruct folderStruct = FolderStruct.GetFolderSet(this.BaseOPath, directoryName);
-                    DefaultFileStruct fileStruct = new DefaultFileStruct() { Parent = folderStruct, FullName = fileName };
-                    if(System.IO.File.Exists(fileStruct.FullPath)) folderStruct.Items.Add(fileStruct);
+                    FolderHier folderStruct = FolderHier.GetFolderSet(this.BaseOPath, directoryName);
+                    DefaultFileHier fileStruct = new DefaultFileHier() { Parent = folderStruct, FullName = fileName };
+                    if (System.IO.File.Exists(fileStruct.FullPath)) folderStruct.Items.Add(fileStruct);
                     this.Folders.Add(folderStruct);
                 }
             }
         }
 
-        /// <summary>
-        /// This function syncronize with xml based on object.
-        /// </summary>
-        public void SyncObjectToXml()
+        public override void Commit()
         {
             this.ReferencePaths.Clear();
-            if(this.ReferenceFolder.Count > 0)
+            if (this.ReferenceFolder.Count > 0)
             {
-                foreach(var item in this.ReferenceFolder[0].Items) this.ReferencePaths.Add(item.FullPath);
+                foreach (var item in this.ReferenceFolder[0].Items) this.ReferencePaths.Add(item.FullPath);
             }
 
             this.ItemPaths.Clear();
-            foreach(var folder in this.Folders)
+            foreach (var folder in this.Folders)
             {
                 // The folders or files in the ProjectStruct uses only relative path.
                 foreach (var item in folder.HasItemAllPaths) this.ItemPaths.Add(item);
                 foreach (var item in folder.HasNotItemAllPaths) this.HasNotItemPaths.Add(item);
             }
 
-            foreach(var item in this.Items)
+            foreach (var item in this.Items)
             {
                 // The folders or files in the ProjectStruct uses only relative path.
                 this.ItemPaths.Add(item.FullName);
@@ -227,8 +235,18 @@ namespace ApplicationLayer.Models.SolutionPackage
     }
 
 
-    public class ErrorProjectStruct : ProjectStruct
+    public class ErrorProjectHier : ProjectHier
     {
         public string DisplayName => NameWithoutExtension + string.Format(" ({0})", CommonResource.NotLoad);
+
+        public override bool IsChanged => false;
+
+        public override void Commit()
+        {
+        }
+
+        public override void RollBack()
+        {
+        }
     }
 }

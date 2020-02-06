@@ -9,9 +9,9 @@ namespace ApplicationLayer.Models.GrammarPackages.MiniCPackage
     {
         public override string Extension { get; } = LanguageExtensions.MiniC;
 
-        public override DefaultProjectStruct CreateDefaultProject(string projectPath, bool isAbsolutePath, string projectName, Target target, HirStruct parent)
+        public override DefaultProjectHier CreateDefaultProject(string projectPath, bool isAbsolutePath, string projectName, Target target, HierarchicalData parent)
         {
-            DefaultProjectStruct result = this.CreateEmptyProject(projectPath, isAbsolutePath, projectName, target, parent);
+            DefaultProjectHier result = this.CreateEmptyProject(projectPath, isAbsolutePath, projectName, target, parent);
 
             result.ReferenceFolder[0].Items.Add(new ReferenceFileStruct() { CurOPath = "MiniC", FullName = "System.dll" });
             result.ReferenceFolder[0].Items.Add(new ReferenceFileStruct() { CurOPath = "MiniC", FullName = "System.IO.dll" });
@@ -23,20 +23,20 @@ namespace ApplicationLayer.Models.GrammarPackages.MiniCPackage
             Directory.CreateDirectory(result.BaseOPath);
             File.WriteAllText(Path.Combine(result.BaseOPath, fileName), fileData);
 
-            result.Items.Add(new DefaultFileStruct()
+            result.Items.Add(new DefaultFileHier()
             {
                 FullName = fileName,
                 Data = fileData
             });
 
-            result.SyncObjectToXml();
+            result.Commit();
 
             return result;
         }
 
-        public override DefaultProjectStruct CreateEmptyProject(string projectPath, bool isAbsolutePath, string projectName, Target target, HirStruct parent)
+        public override DefaultProjectHier CreateEmptyProject(string projectPath, bool isAbsolutePath, string projectName, Target target, HierarchicalData parent)
         {
-            DefaultProjectStruct result = new DefaultProjectStruct
+            DefaultProjectHier result = new DefaultProjectHier
             {
                 Parent = parent,
 

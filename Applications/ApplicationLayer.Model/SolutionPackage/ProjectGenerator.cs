@@ -7,12 +7,12 @@ namespace ApplicationLayer.Models.SolutionPackage
 {
     public abstract class ProjectGenerator
     {
-        public DefaultProjectStruct ProjectStructure;
+        public DefaultProjectHier ProjectStructure;
         
         public abstract string Extension { get; }
 
-        public abstract DefaultProjectStruct CreateEmptyProject(string projectPath, bool isAbsolutePath, string projectName, Target target, HirStruct parent);
-        public abstract DefaultProjectStruct CreateDefaultProject(string projectPath, bool isAbsolutePath, string projectName, Target target, HirStruct parent);
+        public abstract DefaultProjectHier CreateEmptyProject(string projectPath, bool isAbsolutePath, string projectName, Target target, HierarchicalData parent);
+        public abstract DefaultProjectHier CreateDefaultProject(string projectPath, bool isAbsolutePath, string projectName, Target target, HierarchicalData parent);
 
         public static ProjectGenerator CreateProjectGenerator(Grammar grammar)
         {

@@ -19,24 +19,24 @@ namespace WpfApp.ViewModels.WindowViewModels
         private ShowSaveDialogMessage saveMessage;
         private IMessageBoxService messageBoxService;
 
-        public ObservableCollection<SolutionStruct> Solutions { get; } = new ObservableCollection<SolutionStruct>();
+        public ObservableCollection<SolutionHier> Solutions { get; } = new ObservableCollection<SolutionHier>();
 
-        private RelayCommand<HirStruct> selectedCommand;
-        public RelayCommand<HirStruct> SelectedCommand
+        private RelayCommand<HierarchicalData> selectedCommand;
+        public RelayCommand<HierarchicalData> SelectedCommand
         {
             get
             {
                 if (this.selectedCommand == null)
-                    this.selectedCommand = new RelayCommand<HirStruct>(this.OnSelected);
+                    this.selectedCommand = new RelayCommand<HierarchicalData>(this.OnSelected);
 
                 return this.selectedCommand;
             }
         }
-        private void OnSelected(HirStruct selectedItem)
+        private void OnSelected(HierarchicalData selectedItem)
         {
-            if(selectedItem is DefaultFileStruct)
+            if(selectedItem is DefaultFileHier)
             {
-                Messenger.Default.Send(new OpenFileMessage(selectedItem as DefaultFileStruct));
+                Messenger.Default.Send(new OpenFileMessage(selectedItem as DefaultFileHier));
             }
         }
 
@@ -100,7 +100,7 @@ namespace WpfApp.ViewModels.WindowViewModels
 
             for (int i = e.NewStartingIndex; i < e.NewItems.Count; i++)
             {
-                SolutionStruct child = e.NewItems[i] as SolutionStruct;
+                SolutionHier child = e.NewItems[i] as SolutionHier;
 
                 if (System.IO.File.Exists(child.FullPath)) continue;
 
@@ -108,11 +108,11 @@ namespace WpfApp.ViewModels.WindowViewModels
             }
         }
 
-        private void ToXML(SolutionStruct solution)
+        private void ToXML(SolutionHier solution)
         {
             using (StreamWriter wr = new StreamWriter(solution.FullPath))
             {
-                XmlSerializer xs = new XmlSerializer(typeof(SolutionStruct));
+                XmlSerializer xs = new XmlSerializer(typeof(SolutionHier));
                 xs.Serialize(wr, this.Solutions[0]);
             }
 
@@ -120,7 +120,7 @@ namespace WpfApp.ViewModels.WindowViewModels
             {
                 using (StreamWriter wr = new StreamWriter(item.FullPath))
                 {
-                    XmlSerializer xs = new XmlSerializer(typeof(DefaultProjectStruct));
+                    XmlSerializer xs = new XmlSerializer(typeof(DefaultProjectHier));
                     xs.Serialize(wr, item);
                 }
             }
@@ -132,17 +132,24 @@ namespace WpfApp.ViewModels.WindowViewModels
         /// <param name="message"></param>
         public void ReceivedCreateSolutionMessage(CreateSolutionMessage message)
         {
-            this.Solutions.Add(SolutionStruct.Create(message.SolutionPath, message.SoltionName, message.Language, message.MachineTarget));
+            this.Solutions.Add(SolutionHier.Create(message.SolutionPath, message.SoltionName, message.Language, message.MachineTarget));
 
             this.ToXML(this.Solutions[0]);
         }
 
-        private void PreprocessChangedFileList(Collection<HirStruct> hirStructs)
+        private void PreprocessChangedFileList(Collection<HierarchicalData> hirStructs)
         {
             if(hirStructs.Count > 0)
             {
                 saveMessage = new ShowSaveDialogMessage();
                 Messenger.Default.Send<ShowSaveDialogMessage>(saveMessage);
+
+                if (saveMessage.ResultStatus == ShowSaveDialogMessage.Result.Yes)
+                {
+                    foreach(var item in hirStructs)
+                    {
+                    }
+                }
             }
         }
 
@@ -153,17 +160,16 @@ namespace WpfApp.ViewModels.WindowViewModels
 
             using (StreamReader sr = new StreamReader(message.SolutionFullPath))
             {
-                XmlSerializer xs = new XmlSerializer(typeof(SolutionStruct));
-                SolutionStruct solution = xs.Deserialize(sr) as SolutionStruct;
+                XmlSerializer xs = new XmlSerializer(typeof(SolutionHier));
+                SolutionHier solution = xs.Deserialize(sr) as SolutionHier;
                 solution.CurOPath = message.SolutionPath;
                 solution.FullName = message.SolutionName;
-                foreach (var path in solution.SyncWithXMLProjectPaths) solution.CurrentProjectPath.Add(path);
 
                 this.Solutions.Add(solution);
             }
 
             bool bFiredError = false;
-            foreach (var item in this.Solutions[0].SyncWithXMLProjectPaths)
+            foreach (var item in this.Solutions[0].ProjectPaths)
             {
                 string fullPath = (item.IsAbsolute) ? item.Path : Path.Combine(message.SolutionPath, item.Path);
 
@@ -171,20 +177,20 @@ namespace WpfApp.ViewModels.WindowViewModels
                 {
                     using (StreamReader sr = new StreamReader(fullPath))
                     {
-                        XmlSerializer xs = new XmlSerializer(typeof(DefaultProjectStruct));
-                        DefaultProjectStruct project = xs.Deserialize(sr) as DefaultProjectStruct;
+                        XmlSerializer xs = new XmlSerializer(typeof(DefaultProjectHier));
+                        DefaultProjectHier project = xs.Deserialize(sr) as DefaultProjectHier;
 
                         project.CurOPath = Path.GetDirectoryName(item.Path);
                         project.FullName = Path.GetFileName(item.Path);
                         this.Solutions[0].Projects.Add(project);    // for connect with the parent node (solution)
 
-                        project.SyncXmlToObject();
+                        project.RollBack();
                     }
                 }
                 catch
                 {
                     bFiredError = true;
-                    ErrorProjectStruct project = new ErrorProjectStruct()
+                    ErrorProjectHier project = new ErrorProjectHier()
                     {
                         FullName = item.Path,
                         CurOPath = Path.GetDirectoryName(item.Path)
@@ -238,13 +244,13 @@ namespace WpfApp.ViewModels.WindowViewModels
             string projectPath = (isAbsolutePath) ? message.ProjectPath : message.ProjectPath.Substring(matchedPos);
             if (projectPath[0] == '\\') projectPath = projectPath.Remove(0, 1);
 
-            DefaultProjectStruct newProject = projectGenerator.CreateDefaultProject(projectPath, isAbsolutePath, message.ProjectName, message.MachineTarget, this.Solutions[0]);
+            DefaultProjectHier newProject = projectGenerator.CreateDefaultProject(projectPath, isAbsolutePath, message.ProjectName, message.MachineTarget, this.Solutions[0]);
             this.Solutions[0].Projects.Add(newProject);
 
             // create project files into the folder.
             using (StreamWriter wr = new StreamWriter(newProject.FullPath))
             {
-                XmlSerializer xs = new XmlSerializer(typeof(DefaultProjectStruct));
+                XmlSerializer xs = new XmlSerializer(typeof(DefaultProjectHier));
                 xs.Serialize(wr, newProject);
             }
 

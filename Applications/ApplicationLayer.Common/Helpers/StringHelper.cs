@@ -1,4 +1,5 @@
-﻿using System.Collections.Specialized;
+﻿using System.Collections.Generic;
+using System.Collections.Specialized;
 
 namespace ApplicationLayer.Common.Helpers
 {
@@ -24,6 +25,15 @@ namespace ApplicationLayer.Common.Helpers
             }
 
             return result;
+        }
+
+        public static string[] ToArray(this StringCollection collection)
+        {
+            List<string> result = new List<string>();
+
+            foreach (var item in collection) result.Add(item);
+
+            return result.ToArray();
         }
     }
 }

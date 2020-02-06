@@ -52,9 +52,9 @@ namespace ApplicationLayer.Models
         }
 
 
-        public DefaultFileStruct FileStruct(HirStruct parent)
+        public DefaultFileHier FileStruct(HierarchicalData parent)
         {
-            DefaultFileStruct result = new DefaultFileStruct()
+            DefaultFileHier result = new DefaultFileHier()
             {
                 Parent = parent,
                 ImageSource = ImageSource,

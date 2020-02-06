@@ -8,9 +8,9 @@ namespace ApplicationLayer.ViewModels.Messages
 {
     public class OpenFileMessage : MessageBase
     {
-        public DefaultFileStruct SelectedFile { get; }
+        public DefaultFileHier SelectedFile { get; }
 
-        public OpenFileMessage(DefaultFileStruct selectedFile)
+        public OpenFileMessage(DefaultFileHier selectedFile)
         {
             this.SelectedFile = selectedFile;
         }
@@ -23,23 +23,23 @@ namespace ApplicationLayer.ViewModels.Messages
     {
         public enum ChangedStatus { Changed, Restored }
 
-        public HirStruct Item { get; }
+        public HierarchicalData Item { get; }
         public ChangedStatus Status { get; }
 
         public ChangedFileMessage()
         {
         }
 
-        public ChangedFileMessage(HirStruct item, ChangedStatus status)
+        public ChangedFileMessage(HierarchicalData item, ChangedStatus status)
         {
             this.Item = item;
             this.Status = status;
         }
     }
 
-    public class GetChangedListMessage : NotificationMessageAction<Collection<HirStruct>>
+    public class GetChangedListMessage : NotificationMessageAction<Collection<HierarchicalData>>
     {
-        public GetChangedListMessage(string notification, Action<Collection<HirStruct>> callback) : base(notification, callback)
+        public GetChangedListMessage(string notification, Action<Collection<HierarchicalData>> callback) : base(notification, callback)
         {
         }
     }

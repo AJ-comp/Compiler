@@ -8,7 +8,7 @@
                     xmlns:solutionPackage="clr-namespace:ApplicationLayer.Models.SolutionPackage;assembly=ApplicationLayer.Models"
                     xmlns:utilities="clr-namespace:ApplicationLayer.Common.Utilities;assembly=ApplicationLayer.Common">
 
-    <HierarchicalDataTemplate DataType="{x:Type solutionPackage:SolutionStruct}" ItemsSource="{Binding Projects}">
+    <HierarchicalDataTemplate DataType="{x:Type solutionPackage:SolutionHier}" ItemsSource="{Binding Projects}">
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch">
             <Image Width="16" Height="16" Margin="0 0 5 0" Source="{DynamicResource SolutionImagePath}" />
             <TextBlock Text="{Binding NameWithoutExtension}"/>
@@ -33,7 +33,7 @@
     </HierarchicalDataTemplate>
 
 
-    <HierarchicalDataTemplate DataType="{x:Type solutionPackage:ErrorProjectStruct}" ItemsSource="{Binding Children}">
+    <HierarchicalDataTemplate DataType="{x:Type solutionPackage:ErrorProjectHier}" ItemsSource="{Binding Children}">
         <StackPanel Orientation="Horizontal">
             <Image x:Name="projectImage" Width="16" Height="16" Margin="0 0 5 0" Source="{DynamicResource ErrorProjectImagePath}"/>
             <TextBlock Text="{Binding DisplayName}"/>
@@ -51,7 +51,7 @@
     </HierarchicalDataTemplate>
     
     
-    <HierarchicalDataTemplate DataType="{x:Type solutionPackage:DefaultProjectStruct}" ItemsSource="{Binding Children}">
+    <HierarchicalDataTemplate DataType="{x:Type solutionPackage:DefaultProjectHier}" ItemsSource="{Binding Children}">
         <StackPanel Orientation="Horizontal">
             <Image x:Name="projectImage" Width="16" Height="16" Margin="0 0 5 0" 
                         Source="{Binding Extension, Converter={localConverters:ToResourceKeyConverter}, ConverterParameter='Extension'}"/>
@@ -81,7 +81,7 @@
     </HierarchicalDataTemplate>
 
 
-    <HierarchicalDataTemplate DataType="{x:Type solutionPackage:ReferenceStruct}" ItemsSource="{Binding Items}">
+    <HierarchicalDataTemplate DataType="{x:Type solutionPackage:ReferenceHier}" ItemsSource="{Binding Items}">
         <StackPanel Orientation="Horizontal">
             <Image Width="16" Height="16" Margin="0 0 5 0" Source="{DynamicResource ReferenceImagePath}"/>
             <TextBlock Text="{Binding NameWithoutExtension}"/>
@@ -102,7 +102,7 @@
     </HierarchicalDataTemplate>
 
     
-    <HierarchicalDataTemplate DataType="{x:Type solutionPackage:FolderStruct}" ItemsSource="{Binding Children}">
+    <HierarchicalDataTemplate DataType="{x:Type solutionPackage:FolderHier}" ItemsSource="{Binding Children}">
         <StackPanel Orientation="Horizontal">
             <Image x:Name="image" Width="16" Height="16" Margin="0 0 5 0" Source="{DynamicResource CloseFolderImagePath}"/>
             <TextBlock Text="{Binding FullName}"/>
@@ -153,7 +153,7 @@
     </DataTemplate>
 
 
-    <DataTemplate DataType="{x:Type solutionPackage:ErrorFileStruct}">
+    <DataTemplate DataType="{x:Type solutionPackage:ErrorFileHier}">
         <StackPanel Orientation="Horizontal">
             <Image x:Name="projectImage" Width="16" Height="16" Margin="0 0 5 0" Source="{DynamicResource ErrorProjectImagePath}"/>
             <TextBlock Text="{Binding FullName}"/>
@@ -171,7 +171,7 @@
     </DataTemplate>
     
     
-    <DataTemplate DataType="{x:Type solutionPackage:DefaultFileStruct}">
+    <DataTemplate DataType="{x:Type solutionPackage:DefaultFileHier}">
         <StackPanel Orientation="Horizontal">
             <Image Width="16" Height="16" Margin="0 0 5 0" Source="{DynamicResource ProjectImagePath}"/>
             <TextBlock Text="{Binding FullName}"/>

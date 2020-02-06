@@ -3,18 +3,16 @@ using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.IO;
 using System.Windows.Data;
-using System.Xml;
-using System.Xml.Schema;
 using System.Xml.Serialization;
 
 namespace ApplicationLayer.Models.SolutionPackage
 {
-    [XmlInclude(typeof(FolderStruct))]
-    [XmlInclude(typeof(DefaultFileStruct))]
-    public class FolderStruct : HirStruct
+    [XmlInclude(typeof(FolderHier))]
+    [XmlInclude(typeof(DefaultFileHier))]
+    public class FolderHier : HierarchicalData
     {
-        public ObservableCollection<FolderStruct> Folders { get; } = new ObservableCollection<FolderStruct>();
-        public ObservableCollection<DefaultFileStruct> Items { get; } = new ObservableCollection<DefaultFileStruct>();
+        public ObservableCollection<FolderHier> Folders { get; } = new ObservableCollection<FolderHier>();
+        public ObservableCollection<DefaultFileHier> Items { get; } = new ObservableCollection<DefaultFileHier>();
 
         public IList Children
         {
@@ -73,7 +71,7 @@ namespace ApplicationLayer.Models.SolutionPackage
             }
         }
 
-        public FolderStruct()
+        public FolderHier()
         {
             this.Folders.CollectionChanged += Folders_CollectionChanged;
             this.Items.CollectionChanged += Items_CollectionChanged;
@@ -83,7 +81,7 @@ namespace ApplicationLayer.Models.SolutionPackage
         {
             for (int i = 0; i < e.NewItems?.Count; i++)
             {
-                FolderStruct item = e.NewItems[i] as FolderStruct;
+                FolderHier item = e.NewItems[i] as FolderHier;
                 item.Parent = this;
             }
         }
@@ -92,8 +90,40 @@ namespace ApplicationLayer.Models.SolutionPackage
         {
             for (int i = 0; i < e.NewItems?.Count; i++)
             {
-                DefaultFileStruct item = e.NewItems[i] as DefaultFileStruct;
+                DefaultFileHier item = e.NewItems[i] as DefaultFileHier;
                 item.Parent = this;
+            }
+        }
+
+        public ProjectHier ProjectTypeParent
+        {
+            get
+            {
+                HierarchicalData current = this;
+
+                while(true)
+                {
+                    if (current == null) return null;
+                    else if (current is ProjectHier) return current as ProjectHier;
+
+                    current = current.Parent;
+                }
+            }
+        }
+
+        public SolutionHier SolutionTypeParent
+        {
+            get
+            {
+                HierarchicalData current = this;
+
+                while (true)
+                {
+                    if (current == null) return null;
+                    else if (current is SolutionHier) return current as SolutionHier;
+
+                    current = current.Parent;
+                }
             }
         }
 
@@ -101,25 +131,25 @@ namespace ApplicationLayer.Models.SolutionPackage
         /// This function removes the child after find child type.
         /// </summary>
         /// <param name="child">child to remove</param>
-        public void RemoveChild(HirStruct child)
+        public void RemoveChild(HierarchicalData child)
         {
-            if (child is FolderStruct) this.Folders.Remove(child as FolderStruct);
-            else if (child is DefaultFileStruct) this.Items.Remove(child as DefaultFileStruct);
+            if (child is FolderHier) this.Folders.Remove(child as FolderHier);
+            else if (child is DefaultFileHier) this.Items.Remove(child as DefaultFileHier);
         }
 
-        public static FolderStruct GetFolderSet(string path)
+        public static FolderHier GetFolderSet(string path)
         {
-            FolderStruct result = new FolderStruct();
+            FolderHier result = new FolderHier();
             path = Path.GetDirectoryName(path);
 
-            FolderStruct current = result;
+            FolderHier current = result;
             while(true)
             {
                 var root = Path.GetPathRoot(path);
                 if (root.Length == 0) break;
 
                 path = path.Substring(0, root.Length);
-                FolderStruct child = new FolderStruct() { CurOPath = root };
+                FolderHier child = new FolderHier() { CurOPath = root };
                 current.Folders.Add(child);
 
                 current = child;
@@ -128,13 +158,13 @@ namespace ApplicationLayer.Models.SolutionPackage
             return result;
         }
 
-        public static FolderStruct GetFolderSet(string basePath, string path)
+        public static FolderHier GetFolderSet(string basePath, string path)
         {
-            FolderStruct result = new FolderStruct();
+            FolderHier result = new FolderHier();
             path = Path.GetDirectoryName(path);
 
             string accumDirectory = string.Empty;
-            FolderStruct current = result;
+            FolderHier current = result;
             while (true)
             {
                 var root = Path.GetPathRoot(path);
@@ -145,7 +175,7 @@ namespace ApplicationLayer.Models.SolutionPackage
                 if (Directory.Exists(Path.Combine(basePath, accumDirectory)) == false) continue;
 
                 path = path.Substring(0, root.Length);
-                FolderStruct child = new FolderStruct() { CurOPath = root };
+                FolderHier child = new FolderHier() { CurOPath = root };
                 current.Folders.Add(child);
 
                 current = child;
@@ -153,6 +183,5 @@ namespace ApplicationLayer.Models.SolutionPackage
 
             return result;
         }
-
     }
 }

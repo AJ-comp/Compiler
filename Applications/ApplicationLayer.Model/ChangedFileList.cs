@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace ApplicationLayer.Models
 {
-    public class ChangedFileList : List<HirStruct>
+    public class ChangedFileList : List<HierarchicalData>
     {
 
         private static ChangedFileList own;

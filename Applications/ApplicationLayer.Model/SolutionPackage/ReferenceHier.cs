@@ -5,11 +5,11 @@ using System.Xml.Serialization;
 namespace ApplicationLayer.Models.SolutionPackage
 {
     [XmlInclude(typeof(ReferenceFileStruct))]
-    public class ReferenceStruct : HirStruct
+    public class ReferenceHier : HierarchicalData
     {
         public ObservableCollection<ReferenceFileStruct> Items { get; } = new ObservableCollection<ReferenceFileStruct>();
 
-        public ReferenceStruct()
+        public ReferenceHier()
         {
             this.Items.CollectionChanged += ReferenceFiles_CollectionChanged;
         }
@@ -24,7 +24,7 @@ namespace ApplicationLayer.Models.SolutionPackage
         }
     }
 
-    public class ReferenceFileStruct : HirStruct
+    public class ReferenceFileStruct : HierarchicalData
     {
     }
 }

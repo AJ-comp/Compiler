@@ -9,7 +9,7 @@ namespace ApplicationLayer.ViewModels.DialogViewModels
 {
     public class QuestionToSaveViewModel : ViewModelBase
     {
-        public ObservableCollection<HirStruct> ChangedFileList { get; } = new ObservableCollection<HirStruct>();
+        public ObservableCollection<HierarchicalData> ChangedFileList { get; } = new ObservableCollection<HierarchicalData>();
 
 
         public EventHandler<EventArgs> SaveRequest;

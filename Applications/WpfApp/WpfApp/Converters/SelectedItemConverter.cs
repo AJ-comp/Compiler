@@ -14,7 +14,7 @@ namespace ApplicationLayer.WpfApp.Converters
 
             object result = null;
             if (parameter is ProjectSelectionView) result = arg.NewValue as ClassHierarchyData;
-            else if (parameter is SolutionExplorer) result = arg.NewValue as HirStruct;
+            else if (parameter is SolutionExplorer) result = arg.NewValue as HierarchicalData;
 
             return result;
         }

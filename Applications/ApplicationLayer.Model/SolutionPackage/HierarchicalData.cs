@@ -6,7 +6,7 @@ using System.Xml.Serialization;
 
 namespace ApplicationLayer.Models.SolutionPackage
 {
-    public class HirStruct : INotifyPropertyChanged, IEquatable<HirStruct>
+    public abstract class HierarchicalData : INotifyPropertyChanged, IEquatable<HierarchicalData>
     {
         [XmlIgnore]
         public string CurOPath { get; set; } = string.Empty;
@@ -15,7 +15,7 @@ namespace ApplicationLayer.Models.SolutionPackage
         [XmlIgnore]
         public string ImageSource { get; set; }
         [XmlIgnore]
-        public HirStruct Parent { get; internal set; } = null;
+        public HierarchicalData Parent { get; internal set; } = null;
         [XmlIgnore]
         public string NameWithoutExtension => Path.GetFileNameWithoutExtension(this.FullName);
         [XmlIgnore]
@@ -42,11 +42,11 @@ namespace ApplicationLayer.Models.SolutionPackage
         }
 
         [XmlIgnore]
-        public HirStruct Root
+        public HierarchicalData Root
         {
             get
             {
-                HirStruct current = this;
+                HierarchicalData current = this;
                 while (current.Parent != null) current = current.Parent;
 
                 return current;
@@ -75,7 +75,7 @@ namespace ApplicationLayer.Models.SolutionPackage
 
                 if (PathHelper.IsDrivePath(result)) return result;
 
-                HirStruct current = this;
+                HierarchicalData current = this;
                 while (current.Parent != null)
                 {
                     result = Path.Combine(current.Parent.CurOPath, result);
@@ -97,6 +97,6 @@ namespace ApplicationLayer.Models.SolutionPackage
             }
         }
 
-        public bool Equals(HirStruct other) => this.FullPath == other.FullPath;
+        public bool Equals(HierarchicalData other) => this.FullPath == other.FullPath;
     }
 }
