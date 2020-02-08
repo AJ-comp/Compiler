@@ -18,14 +18,14 @@ namespace ApplicationLayer.ViewModels.DocumentTypeViewModels
         public string Data { get; } = string.Empty;
         public Grammar Grammar { get; } = new MiniCGrammar();
 
-        public int caretIndex = 0;
+        private int caretIndex = 0;
         public int CaretIndex
         {
             get => caretIndex;
             set
             {
                 this.caretIndex = value;
-                this.RaisePropertyChanged("CaretIndex");
+                this.RaisePropertyChanged(nameof(CaretIndex));
             }
         }
 

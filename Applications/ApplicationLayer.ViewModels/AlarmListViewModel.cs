@@ -69,6 +69,7 @@ namespace ApplicationLayer.ViewModels
         {
             this.RemoveAllMatched(fromControl);
 
+            if (e is null) return;
             foreach (var item in e) this.AlarmLists.Add(item);
         }
 
@@ -78,6 +79,8 @@ namespace ApplicationLayer.ViewModels
         /// <param name="editor"></param>
         public void AddEditors(EditorTypeViewModel editor)
         {
+            if (editor is null) return;
+
             editor.AlarmFired += Editor_AlarmFired;
             this.editors.Add(editor);
         }

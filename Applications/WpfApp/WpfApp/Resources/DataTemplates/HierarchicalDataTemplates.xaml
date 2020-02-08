@@ -105,7 +105,7 @@
     <HierarchicalDataTemplate DataType="{x:Type solutionPackage:FolderHier}" ItemsSource="{Binding Children}">
         <StackPanel Orientation="Horizontal">
             <Image x:Name="image" Width="16" Height="16" Margin="0 0 5 0" Source="{DynamicResource CloseFolderImagePath}"/>
-            <TextBlock Text="{Binding FullName}"/>
+            <TextBlock Text="{Binding CurOPath}"/>
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="PreviewMouseRightButtonDown">
                     <ei:ChangePropertyAction PropertyName="IsSelected" Value="true" TargetObject="{Binding}"/>

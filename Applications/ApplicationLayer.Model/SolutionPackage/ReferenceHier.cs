@@ -22,9 +22,18 @@ namespace ApplicationLayer.Models.SolutionPackage
                 item.Parent = this;
             }
         }
+
+        public override void Save()
+        {
+            // nothing need do
+        }
     }
 
     public class ReferenceFileStruct : HierarchicalData
     {
+        public override void Save()
+        {
+            // nothing need do.
+        }
     }
 }

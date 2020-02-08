@@ -76,26 +76,28 @@ namespace Parse.FrontEnd.Parsers.Collections
             // action table
             foreach (var item in this.RefTerminalSet)
             {
-                DataColumn column = new DataColumn();
-
-                column.DataType = typeof(string);
-                column.ColumnName = item.ToString();
-                column.Caption = item.ToString();
-                column.ReadOnly = true;
-                column.DefaultValue = "";
+                DataColumn column = new DataColumn
+                {
+                    DataType = typeof(string),
+                    ColumnName = item.ToString(),
+                    Caption = item.ToString(),
+                    ReadOnly = true,
+                    DefaultValue = ""
+                };
                 dataTable.Columns.Add(column);
             }
 
             // goto table
             foreach (var item in this.RefNonTerminalSet)
             {
-                DataColumn column = new DataColumn();
-
-                column.DataType = typeof(string);
-                column.ColumnName = item.ToString();
-                column.Caption = item.ToString();
-                column.ReadOnly = true;
-                column.DefaultValue = "";
+                DataColumn column = new DataColumn
+                {
+                    DataType = typeof(string),
+                    ColumnName = item.ToString(),
+                    Caption = item.ToString(),
+                    ReadOnly = true,
+                    DefaultValue = ""
+                };
                 dataTable.Columns.Add(column);
             }
         }
@@ -122,8 +124,10 @@ namespace Parse.FrontEnd.Parsers.Collections
 
         private ActionData Process(Tuple<ActionDir,object>matchedValue, TokenData inputValue, Stack<object> prevStack)
         {
-            ActionData result = new ActionData();
-            result.ActionDest = matchedValue.Item2;
+            ActionData result = new ActionData
+            {
+                ActionDest = matchedValue.Item2
+            };
 
             if (matchedValue.Item1 == ActionDir.shift)
             {

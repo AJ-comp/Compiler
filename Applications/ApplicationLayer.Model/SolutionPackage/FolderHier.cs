@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using ApplicationLayer.Common.Helpers;
+using System.Collections;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.IO;
@@ -95,6 +96,22 @@ namespace ApplicationLayer.Models.SolutionPackage
             }
         }
 
+        public FolderHier RootFolder
+        {
+            get
+            {
+                FolderHier result = this;
+                while(true)
+                {
+                    if (result.Parent is FolderHier)
+                        result = result.Parent as FolderHier;
+                    else break;
+                }
+
+                return result;
+            }
+        }
+
         public ProjectHier ProjectTypeParent
         {
             get
@@ -158,30 +175,48 @@ namespace ApplicationLayer.Models.SolutionPackage
             return result;
         }
 
-        public static FolderHier GetFolderSet(string basePath, string path)
+        public static FolderHier GetFolderSet(string basePath, string dirPath, bool bGetLastHierRef = false)
         {
             FolderHier result = new FolderHier();
-            path = Path.GetDirectoryName(path);
 
             string accumDirectory = string.Empty;
             FolderHier current = result;
+
+            bool bFirst = true;
             while (true)
             {
-                var root = Path.GetPathRoot(path);
+                var root = PathHelper.GetRootDirectory(dirPath);
                 if (root.Length == 0) break;
 
                 // If real folder not exist then ignore.
                 accumDirectory = Path.Combine(accumDirectory, root);
-                if (Directory.Exists(Path.Combine(basePath, accumDirectory)) == false) continue;
+                if (Directory.Exists(Path.Combine(basePath, accumDirectory)) == false) break;
 
-                path = path.Substring(0, root.Length);
-                FolderHier child = new FolderHier() { CurOPath = root };
-                current.Folders.Add(child);
+                dirPath = PathHelper.GetDirectoryPathExceptRoot(dirPath);
 
-                current = child;
+                if (bFirst)
+                {
+                    result = new FolderHier() { CurOPath = root };
+                    current = result;
+
+                    bFirst = false;
+                }
+                else
+                {
+                    FolderHier child = new FolderHier() { CurOPath = root };
+                    current.Folders.Add(child);
+                    current = child;
+
+                    if (bGetLastHierRef) result = current;
+                }
             }
 
             return result;
+        }
+
+        public override void Save()
+        {
+            // nothing need do
         }
     }
 }

@@ -19,7 +19,7 @@ namespace ApplicationLayer.ViewModels.DialogViewModels
             set
             {
                 this.projectPath = value;
-                this.RaisePropertyChanged("ProjectPath");
+                this.RaisePropertyChanged(nameof(ProjectPath));
 
                 CreateCommand.RaiseCanExecuteChanged();
             }
@@ -34,7 +34,7 @@ namespace ApplicationLayer.ViewModels.DialogViewModels
                 if (this.projectName == value) return;
 
                 this.projectName = value;
-                this.RaisePropertyChanged("ProjectName");
+                this.RaisePropertyChanged(nameof(ProjectName));
 
                 CreateCommand.RaiseCanExecuteChanged();
             }

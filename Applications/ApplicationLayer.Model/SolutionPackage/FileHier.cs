@@ -1,8 +1,9 @@
-﻿using System.IO;
+﻿using ApplicationLayer.Common.Interfaces;
+using System.IO;
 
 namespace ApplicationLayer.Models.SolutionPackage
 {
-    public abstract class FileHier : HierarchicalData, IChangeTrackable
+    public abstract class FileHier : HierarchicalData, ISaveAndChangeTrackable
     {
         public abstract bool IsChanged { get; }
 
@@ -19,6 +20,10 @@ namespace ApplicationLayer.Models.SolutionPackage
         }
 
         public override void RollBack()
+        {
+        }
+
+        public override void Save()
         {
         }
     }
@@ -46,6 +51,12 @@ namespace ApplicationLayer.Models.SolutionPackage
         public override void RollBack()
         {
             Data = prevData;
+        }
+
+        public override void Save()
+        {
+            Directory.CreateDirectory(Path.GetDirectoryName(this.FullPath));
+            File.WriteAllText(this.FullPath, Data);
         }
     }
 }

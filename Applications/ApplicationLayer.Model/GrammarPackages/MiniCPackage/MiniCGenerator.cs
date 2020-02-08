@@ -18,16 +18,15 @@ namespace ApplicationLayer.Models.GrammarPackages.MiniCPackage
             result.ReferenceFolder[0].Items.Add(new ReferenceFileStruct() { CurOPath = "MiniC", FullName = "System.Data.dll" });
 
             string fileName = string.Format("main.{0}", this.Extension);
-            string fileData = string.Empty;
+            string fileData = "void main()\r\n{\r\n}";
 
-            Directory.CreateDirectory(result.BaseOPath);
-            File.WriteAllText(Path.Combine(result.BaseOPath, fileName), fileData);
-
-            result.Items.Add(new DefaultFileHier()
+            var fileHier = new DefaultFileHier()
             {
                 FullName = fileName,
                 Data = fileData
-            });
+            };
+            result.Items.Add(fileHier);
+            fileHier.Save();
 
             result.Commit();
 
@@ -45,15 +44,19 @@ namespace ApplicationLayer.Models.GrammarPackages.MiniCPackage
                 Version = 1.0
             };
 
-            ProjectProperty debugProperty = new ProjectProperty();
-            debugProperty.Mode = Configure.Debug;
-            debugProperty.Target = target.Name;
-            debugProperty.OptimizeLevel = 0;
+            ProjectProperty debugProperty = new ProjectProperty
+            {
+                Mode = Configure.Debug,
+                Target = target.Name,
+                OptimizeLevel = 0
+            };
 
-            ProjectProperty releaseProperty = new ProjectProperty();
-            releaseProperty.Mode = Configure.Release;
-            releaseProperty.Target = target.Name;
-            releaseProperty.OptimizeLevel = 0;
+            ProjectProperty releaseProperty = new ProjectProperty
+            {
+                Mode = Configure.Release,
+                Target = target.Name,
+                OptimizeLevel = 0
+            };
 
             result.Properties.Add(debugProperty);
             result.Properties.Add(releaseProperty);

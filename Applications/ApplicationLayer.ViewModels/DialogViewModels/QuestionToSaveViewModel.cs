@@ -1,4 +1,5 @@
-﻿using ApplicationLayer.Models.SolutionPackage;
+﻿using ApplicationLayer.Common.Interfaces;
+using ApplicationLayer.Models;
 using ApplicationLayer.ViewModels.Messages;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
@@ -9,10 +10,10 @@ namespace ApplicationLayer.ViewModels.DialogViewModels
 {
     public class QuestionToSaveViewModel : ViewModelBase
     {
-        public ObservableCollection<HierarchicalData> ChangedFileList { get; } = new ObservableCollection<HierarchicalData>();
+        public ObservableCollection<ISaveAndChangeTrackable> ChangedFileList { get; } = new ObservableCollection<ISaveAndChangeTrackable>();
 
 
-        public EventHandler<EventArgs> SaveRequest;
+        public EventHandler<EventArgs> SaveRequest { get; set; }
         private RelayCommand saveCommand;
         public RelayCommand SaveCommand
         {
@@ -27,7 +28,7 @@ namespace ApplicationLayer.ViewModels.DialogViewModels
         private void OnSave() => this.SaveRequest?.Invoke(this, null);
 
 
-        public EventHandler<EventArgs> IgnoreRequest;
+        public EventHandler<EventArgs> IgnoreRequest { get; set; }
         private RelayCommand ignoreCommand;
         public RelayCommand IgnoreCommand
         {
@@ -42,7 +43,7 @@ namespace ApplicationLayer.ViewModels.DialogViewModels
         private void OnIgnore() => this.IgnoreRequest?.Invoke(this, null);
 
 
-        public EventHandler<EventArgs> CancelRequest;
+        public EventHandler<EventArgs> CancelRequest { get; set; }
         private RelayCommand cancelCommand;
         public RelayCommand CancelCommand
         {
@@ -59,7 +60,9 @@ namespace ApplicationLayer.ViewModels.DialogViewModels
 
         public void ReceivedUpdateChangedFileMessage(ChangedFileMessage message)
         {
-            if(message.Status == ChangedFileMessage.ChangedStatus.Changed)
+            if (message is null) return;
+
+            if (message.Status == ChangedFileMessage.ChangedStatus.Changed)
             {
                 if (this.ChangedFileList.Contains(message.Item) == false)
                     this.ChangedFileList.Add(message.Item);
@@ -72,6 +75,8 @@ namespace ApplicationLayer.ViewModels.DialogViewModels
 
         public void ReceivedGetChangedFileListMessage(GetChangedListMessage message)
         {
+            if (message is null) return;
+
             message.Execute(this.ChangedFileList);
         }
     }

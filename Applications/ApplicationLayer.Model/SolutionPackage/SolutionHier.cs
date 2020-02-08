@@ -1,4 +1,5 @@
-﻿using Parse.BackEnd.Target;
+﻿using ApplicationLayer.Common.Interfaces;
+using Parse.BackEnd.Target;
 using Parse.FrontEnd.Grammars;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -9,7 +10,7 @@ using System.Xml.Serialization;
 namespace ApplicationLayer.Models.SolutionPackage
 {
     [XmlInclude(typeof(DefaultProjectHier))]
-    public class SolutionHier : HierarchicalData, IChangeTrackable
+    public class SolutionHier : HierarchicalData, ISaveAndChangeTrackable
     {
         [XmlIgnore]
         public static string Extension => "ajn";
@@ -85,7 +86,6 @@ namespace ApplicationLayer.Models.SolutionPackage
             if (projectGenerator == null) return result;
 
             result.Projects.Add(projectGenerator.CreateDefaultProject(solutionNameWithExtension, false, solutionNameWithExtension, target, result));
-            result.Projects.Add(projectGenerator.CreateDefaultProject(solutionNameWithExtension + "abc", false, solutionNameWithExtension + "abc", target, result));
 
             result.Commit();
 
@@ -104,6 +104,15 @@ namespace ApplicationLayer.Models.SolutionPackage
             ProjectPaths.Clear();
             foreach (var project in Projects)
                 ProjectPaths.Add(new PathInfo(project.AutoPath, project.IsAbsolutePath));
+        }
+
+        public override void Save()
+        {
+            using (StreamWriter wr = new StreamWriter(this.FullPath))
+            {
+                XmlSerializer xs = new XmlSerializer(typeof(SolutionHier));
+                xs.Serialize(wr, this);
+            }
         }
     }
 

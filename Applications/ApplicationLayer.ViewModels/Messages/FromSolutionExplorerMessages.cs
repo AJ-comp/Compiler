@@ -1,8 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using ApplicationLayer.Common.Interfaces;
 using ApplicationLayer.Models.SolutionPackage;
 using GalaSoft.MvvmLight.Messaging;
+using System;
+using System.Collections.ObjectModel;
 
 namespace ApplicationLayer.ViewModels.Messages
 {
@@ -23,23 +23,23 @@ namespace ApplicationLayer.ViewModels.Messages
     {
         public enum ChangedStatus { Changed, Restored }
 
-        public HierarchicalData Item { get; }
+        public ISaveAndChangeTrackable Item { get; }
         public ChangedStatus Status { get; }
 
         public ChangedFileMessage()
         {
         }
 
-        public ChangedFileMessage(HierarchicalData item, ChangedStatus status)
+        public ChangedFileMessage(ISaveAndChangeTrackable item, ChangedStatus status)
         {
             this.Item = item;
             this.Status = status;
         }
     }
 
-    public class GetChangedListMessage : NotificationMessageAction<Collection<HierarchicalData>>
+    public class GetChangedListMessage : NotificationMessageAction<Collection<ISaveAndChangeTrackable>>
     {
-        public GetChangedListMessage(string notification, Action<Collection<HierarchicalData>> callback) : base(notification, callback)
+        public GetChangedListMessage(string notification, Action<Collection<ISaveAndChangeTrackable>> callback) : base(notification, callback)
         {
         }
     }

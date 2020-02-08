@@ -21,8 +21,8 @@ namespace ApplicationLayer.ViewModels.DialogViewModels
                 if (this.solutionName == value) return;
 
                 this.solutionName = value;
-                this.RaisePropertyChanged("SolutionName");
-                this.RaisePropertyChanged("SolutionFullPath");
+                this.RaisePropertyChanged(nameof(SolutionName));
+                this.RaisePropertyChanged(nameof(SolutionFullPath));
 
                 CreateCommand.RaiseCanExecuteChanged();
             }
@@ -42,8 +42,8 @@ namespace ApplicationLayer.ViewModels.DialogViewModels
                     if (this.solutionPath.Last() != '\\')
                         this.solutionPath += "\\";
                 }
-                this.RaisePropertyChanged("SolutionPath");
-                this.RaisePropertyChanged("SolutionFullPath");
+                this.RaisePropertyChanged(nameof(SolutionPath));
+                this.RaisePropertyChanged(nameof(SolutionFullPath));
 
                 CreateCommand.RaiseCanExecuteChanged();
             }

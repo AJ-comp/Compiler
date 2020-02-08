@@ -16,7 +16,7 @@ namespace ApplicationLayer.WpfApp.Commands
 {
     public static class MenuActionCommands
     {
-        public static MainWindow parentWindow { get; set; }
+        public static MainWindow ParentWindow { get; set; }
 
         /// <summary>
         /// New Solution Command
@@ -27,12 +27,12 @@ namespace ApplicationLayer.WpfApp.Commands
             NewSolutionDialog dialog = new NewSolutionDialog();
             var vm = dialog.DataContext as NewSolutionViewModel;
 
-            dialog.Owner = parentWindow;
+            dialog.Owner = ParentWindow;
             dialog.ShowInTaskbar = false;
             dialog.ShowDialog();
         }, () =>
         {
-            var vm = parentWindow.DataContext as MainViewModel;
+            var vm = ParentWindow.DataContext as MainViewModel;
             return (vm.IsDebugStatus == false);
         });
 
@@ -45,12 +45,12 @@ namespace ApplicationLayer.WpfApp.Commands
             NewProjectDialog dialog = new NewProjectDialog();
             var vm = dialog.DataContext as NewProjectViewModel;
 
-            dialog.Owner = parentWindow;
+            dialog.Owner = ParentWindow;
             dialog.ShowInTaskbar = false;
             dialog.ShowDialog();
         }, () => 
         {
-            var vm = parentWindow.DataContext as MainViewModel;
+            var vm = ParentWindow.DataContext as MainViewModel;
             return (vm.IsDebugStatus == false);
         });
 
@@ -85,13 +85,13 @@ namespace ApplicationLayer.WpfApp.Commands
                     }
                 };
 
-                dialog.Owner = parentWindow;
+                dialog.Owner = ParentWindow;
                 dialog.ShowInTaskbar = false;
                 dialog.ShowDialog();
 
             }, (condition) =>
             {
-                var vm = parentWindow.DataContext as MainViewModel;
+                var vm = ParentWindow.DataContext as MainViewModel;
                 return (vm.IsDebugStatus == false);
             });
 
@@ -101,8 +101,10 @@ namespace ApplicationLayer.WpfApp.Commands
         public static readonly RelayUICommand<HierarchicalData> AddExistItem = new RelayUICommand<HierarchicalData>(ExistItem,
             (hirStruct) =>
             {
-                OpenFileDialog dialog = new OpenFileDialog();
-                dialog.Filter = "mini C files (*.mc)|*.mc|All files (*.*)|*.*";
+                OpenFileDialog dialog = new OpenFileDialog
+                {
+                    Filter = "mini C files (*.mc)|*.mc|All files (*.*)|*.*"
+                };
                 dialog.ShowDialog();
 
                 foreach(var fileName in dialog.FileNames)
@@ -132,7 +134,7 @@ namespace ApplicationLayer.WpfApp.Commands
                 }
             }, (condition) =>
             {
-                var vm = parentWindow.DataContext as MainViewModel;
+                var vm = ParentWindow.DataContext as MainViewModel;
                 return (vm.IsDebugStatus == false);
             });
 
@@ -160,14 +162,32 @@ namespace ApplicationLayer.WpfApp.Commands
                 }
                 else return;
 
-                if (parent is SolutionHier) (parent as SolutionHier).RemoveChild(selectedStruct);
-                else if (parent is DefaultProjectHier) (parent as DefaultProjectHier).RemoveChild(selectedStruct);
-                else if (parent is FolderHier) (parent as FolderHier).RemoveChild(selectedStruct);
+                if (parent is SolutionHier)
+                {
+                    var solutionHier = parent as SolutionHier;
 
-                Messenger.Default.Send<ChangedFileMessage>(new ChangedFileMessage(parent, ChangedFileMessage.ChangedStatus.Changed));
+                    solutionHier.RemoveChild(selectedStruct);
+                    if (solutionHier.IsChanged) Messenger.Default.Send<ChangedFileMessage>(new ChangedFileMessage(parent as SolutionHier, ChangedFileMessage.ChangedStatus.Changed));
+                }
+                else if (parent is DefaultProjectHier)
+                {
+                    var projectHier = parent as DefaultProjectHier;
+                    projectHier.RemoveChild(selectedStruct);
+
+                    if (projectHier.IsChanged) Messenger.Default.Send<ChangedFileMessage>(new ChangedFileMessage(parent as DefaultProjectHier, ChangedFileMessage.ChangedStatus.Changed));
+                }
+                else if (parent is FolderHier)
+                {
+                    var folderHier = parent as FolderHier;
+                    folderHier.RemoveChild(selectedStruct);
+
+                    var projectParent = folderHier.ProjectTypeParent;
+                    if (projectParent == null) return;
+                    if (projectParent.IsChanged) Messenger.Default.Send<ChangedFileMessage>(new ChangedFileMessage(projectParent, ChangedFileMessage.ChangedStatus.Changed));
+                }
             }, (condition) =>
             {
-                var vm = parentWindow.DataContext as MainViewModel;
+                var vm = ParentWindow.DataContext as MainViewModel;
                 return (vm.IsDebugStatus == false);
             });
 
@@ -175,15 +195,15 @@ namespace ApplicationLayer.WpfApp.Commands
         /// <summary>
         /// New Folder Command
         /// </summary>
-        public static readonly RelayUICommand<DefaultProjectHier> AddNewFolder = new RelayUICommand<DefaultProjectHier>(NewFolder,
-            (projectStruct) =>
+        public static readonly RelayUICommand<HierarchicalData> AddNewFolder = new RelayUICommand<HierarchicalData>(NewFolder,
+            (selHier) =>
             {
                 string newFolderName = "New Folder";
 
                 int index = 1;
                 while(true)
                 {
-                    string newFolderFullPath = Path.Combine(projectStruct.BaseOPath, newFolderName);
+                    string newFolderFullPath = Path.Combine(selHier.BaseOPath, newFolderName);
 
                     if (Directory.Exists(newFolderFullPath)) newFolderName = "New Folder" + index++;
                     else
@@ -193,11 +213,27 @@ namespace ApplicationLayer.WpfApp.Commands
                     }
                 }
 
-                projectStruct.Folders.Add(new FolderHier() { CurOPath = newFolderName, FullName = newFolderName });
+                if (selHier is DefaultProjectHier)
+                {
+                    var projectHier = selHier as DefaultProjectHier;
+                    projectHier.Folders.Add(new FolderHier() { CurOPath = newFolderName, FullName = newFolderName });
+
+                    if (projectHier.IsChanged) Messenger.Default.Send<ChangedFileMessage>(new ChangedFileMessage(projectHier, ChangedFileMessage.ChangedStatus.Changed));
+                }
+                else if (selHier is FolderHier)
+                {
+                    var folderHier = selHier as FolderHier;
+                    var projectHier = folderHier.ProjectTypeParent;
+
+                    folderHier.Folders.Add(new FolderHier() { CurOPath = newFolderName, FullName = newFolderName });
+
+                    if (projectHier is null) return;
+                    if (projectHier.IsChanged) Messenger.Default.Send<ChangedFileMessage>(new ChangedFileMessage(projectHier, ChangedFileMessage.ChangedStatus.Changed));
+                }
                 
             }, (condition) =>
             {
-                var vm = parentWindow.DataContext as MainViewModel;
+                var vm = ParentWindow.DataContext as MainViewModel;
                 return (vm.IsDebugStatus == false);
             });
 
@@ -231,7 +267,7 @@ namespace ApplicationLayer.WpfApp.Commands
                 LocalizeDictionary.Instance.Culture = new CultureInfo("ko-KR");
             }, (condition) =>
             {
-                var vm = parentWindow.DataContext as MainViewModel;
+                var vm = ParentWindow.DataContext as MainViewModel;
                 return (vm.IsDebugStatus == false);
             });
 
@@ -245,7 +281,7 @@ namespace ApplicationLayer.WpfApp.Commands
                 LocalizeDictionary.Instance.Culture = new CultureInfo("en-US");
             }, (condition) =>
             {
-                var vm = parentWindow.DataContext as MainViewModel;
+                var vm = ParentWindow.DataContext as MainViewModel;
                 return (vm.IsDebugStatus == false);
             });
 
@@ -259,7 +295,7 @@ namespace ApplicationLayer.WpfApp.Commands
 //                LocalizeDictionary.Instance.Culture = new CultureInfo("ko-KR");
             }, (condition) =>
             {
-                var vm = parentWindow.DataContext as MainViewModel;
+                var vm = ParentWindow.DataContext as MainViewModel;
                 return (vm.IsDebugStatus == false);
             });
 
@@ -273,7 +309,7 @@ namespace ApplicationLayer.WpfApp.Commands
 //                LocalizeDictionary.Instance.Culture = new CultureInfo("ko-KR");
             }, (condition) =>
             {
-                var vm = parentWindow.DataContext as MainViewModel;
+                var vm = ParentWindow.DataContext as MainViewModel;
                 return (vm.IsDebugStatus == false);
             });
     }

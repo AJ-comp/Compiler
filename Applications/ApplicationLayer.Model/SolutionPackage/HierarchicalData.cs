@@ -1,4 +1,5 @@
 ﻿using ApplicationLayer.Common.Helpers;
+using ApplicationLayer.Common.Interfaces;
 using System;
 using System.ComponentModel;
 using System.IO;
@@ -6,7 +7,7 @@ using System.Xml.Serialization;
 
 namespace ApplicationLayer.Models.SolutionPackage
 {
-    public abstract class HierarchicalData : INotifyPropertyChanged, IEquatable<HierarchicalData>
+    public abstract class HierarchicalData : INotifyPropertyChanged, ISaveable, IEquatable<HierarchicalData>
     {
         [XmlIgnore]
         public string CurOPath { get; set; } = string.Empty;
@@ -98,5 +99,6 @@ namespace ApplicationLayer.Models.SolutionPackage
         }
 
         public bool Equals(HierarchicalData other) => this.FullPath == other.FullPath;
+        public abstract void Save();
     }
 }

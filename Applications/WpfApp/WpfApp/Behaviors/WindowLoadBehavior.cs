@@ -50,7 +50,7 @@ namespace ApplicationLayer.WpfApp.Behaviors
 
             MainViewModel mainVm = this.mainWindow.DataContext as MainViewModel;
 
-            MenuActionCommands.parentWindow = mainWindow;
+            MenuActionCommands.ParentWindow = mainWindow;
             this.questionToSaveDialog.Owner = mainWindow;
             this.questionToSaveDialog.ShowInTaskbar = false;
 
@@ -86,11 +86,6 @@ namespace ApplicationLayer.WpfApp.Behaviors
 
             this.editor.IntelliPrompt.Sessions.Add(session);    // <-- error [NullReferenceException]
             */
-        }
-
-        private void SyntaxEditor_AlarmFired(object sender, AlarmCollection e)
-        {
-
         }
 
         private DataGridView DataGridWinformInit(System.Windows.Forms.Control winformControl)

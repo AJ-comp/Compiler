@@ -20,7 +20,7 @@ namespace ApplicationLayer.ViewModels.DocumentTypeViewModels
             set
             {
                 this._selectedItem = value;
-                this.RaisePropertyChanged("SelectedItem");
+                this.RaisePropertyChanged(nameof(SelectedItem));
             }
         }
 

@@ -43,6 +43,9 @@
   <ItemGroup>
     <Compile Include="Helpers\PathHelper.cs" />
     <Compile Include="Helpers\StringHelper.cs" />
+    <Compile Include="Interfaces\IChangeTrackable.cs" />
+    <Compile Include="Interfaces\ISaveable.cs" />
+    <Compile Include="Interfaces\ISaveAndChangeTrackable.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utilities\ClassHierarchyData.cs" />
     <Compile Include="Utilities\ClassHierarchyGenerator.cs" />

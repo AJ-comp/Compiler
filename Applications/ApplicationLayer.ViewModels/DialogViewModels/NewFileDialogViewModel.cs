@@ -18,7 +18,7 @@ namespace ApplicationLayer.ViewModels.DialogViewModels
             set
             {
                 this.selectedIndex = value;
-                this.RaisePropertyChanged("SelectedIndex");
+                this.RaisePropertyChanged(nameof(SelectedIndex));
 
                 if (this.selectedIndex >= 0 && this.selectedIndex < this.NewFileDataCollection.Count)
                     this.SelectedItem = this.NewFileDataCollection[this.selectedIndex];
@@ -32,7 +32,7 @@ namespace ApplicationLayer.ViewModels.DialogViewModels
             set
             {
                 this.selectedItem = value;
-                this.RaisePropertyChanged("SelectedItem");
+                this.RaisePropertyChanged(nameof(SelectedItem));
             }
         }
 

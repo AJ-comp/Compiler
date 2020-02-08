@@ -8,8 +8,6 @@ namespace ApplicationLayer.Models
 
     public class Theme : INotifyPropertyChanged
     {
-        private Random random;
-
         private ThemeKind themeKind;
         public ThemeKind ThemeKind
         {

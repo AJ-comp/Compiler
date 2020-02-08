@@ -68,7 +68,7 @@ namespace ApplicationLayer.ViewModels.SubViewModels
                 this.filterMode = value;
                 if (this.filterMode) backupData = this.selectedTerminalItem;
                 else this.SelectedTerminalItem = backupData;
-                this.RaisePropertyChanged("FilterMode");
+                this.RaisePropertyChanged(nameof(FilterMode));
             }
         }
 
@@ -80,7 +80,7 @@ namespace ApplicationLayer.ViewModels.SubViewModels
             {
                 if (this.filterSelectedIndex == value) return;
                 this.filterSelectedIndex = value;
-                this.RaisePropertyChanged("FilterSelectedIndex");
+                this.RaisePropertyChanged(nameof(FilterSelectedIndex));
 
                 if (this.filterSelectedIndex >= 0)
                     this.SelectedTerminalItem = this.terminalList[this.filterSelectedIndex].Type;
@@ -98,7 +98,7 @@ namespace ApplicationLayer.ViewModels.SubViewModels
                 this.FilterCPUs.Clear();
 
                 int topSimilityIndex = -1;
-                if (this.cpuSearch.Length > 0)
+                if (this.cpuSearch?.Length > 0)
                 {
                     double topSimility = 0;
 
@@ -147,7 +147,7 @@ namespace ApplicationLayer.ViewModels.SubViewModels
                     }
                 }
 
-                this.RaisePropertyChanged("SelectedTerminalItem");
+                this.RaisePropertyChanged(nameof(SelectedTerminalItem));
             }
         }
 
@@ -158,7 +158,7 @@ namespace ApplicationLayer.ViewModels.SubViewModels
             set
             {
                 this.selectedItem = value;
-                this.RaisePropertyChanged("SelectedItem");
+                this.RaisePropertyChanged(nameof(SelectedItem));
             }
         }
 
@@ -169,7 +169,7 @@ namespace ApplicationLayer.ViewModels.SubViewModels
             set
             {
                 this.selectedProject = value;
-                this.RaisePropertyChanged("SelectedProject");
+                this.RaisePropertyChanged(nameof(SelectedProject));
             }
         }
 

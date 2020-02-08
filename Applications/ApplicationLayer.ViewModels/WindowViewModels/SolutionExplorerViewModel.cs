@@ -1,4 +1,5 @@
 ﻿using ApplicationLayer.Common.Helpers;
+using ApplicationLayer.Common.Interfaces;
 using ApplicationLayer.Models;
 using ApplicationLayer.Models.SolutionPackage;
 using ApplicationLayer.ViewModels.Messages;
@@ -108,36 +109,23 @@ namespace WpfApp.ViewModels.WindowViewModels
             }
         }
 
-        private void ToXML(SolutionHier solution)
-        {
-            using (StreamWriter wr = new StreamWriter(solution.FullPath))
-            {
-                XmlSerializer xs = new XmlSerializer(typeof(SolutionHier));
-                xs.Serialize(wr, this.Solutions[0]);
-            }
-
-            foreach (var item in this.Solutions[0].Projects)
-            {
-                using (StreamWriter wr = new StreamWriter(item.FullPath))
-                {
-                    XmlSerializer xs = new XmlSerializer(typeof(DefaultProjectHier));
-                    xs.Serialize(wr, item);
-                }
-            }
-        }
-
         /// <summary>
         /// Message handler for CreateSolutionMessage
         /// </summary>
         /// <param name="message"></param>
         public void ReceivedCreateSolutionMessage(CreateSolutionMessage message)
         {
-            this.Solutions.Add(SolutionHier.Create(message.SolutionPath, message.SoltionName, message.Language, message.MachineTarget));
+            if (message is null) return;
 
-            this.ToXML(this.Solutions[0]);
+            var solution = SolutionHier.Create(message.SolutionPath, message.SoltionName, message.Language, message.MachineTarget);
+
+            solution.Save();
+            foreach (var project in solution.Projects) project.Save();
+
+            this.Solutions.Add(solution);
         }
 
-        private void PreprocessChangedFileList(Collection<HierarchicalData> hirStructs)
+        private void PreprocessChangedFileList(Collection<ISaveAndChangeTrackable> hirStructs)
         {
             if(hirStructs.Count > 0)
             {
@@ -146,8 +134,18 @@ namespace WpfApp.ViewModels.WindowViewModels
 
                 if (saveMessage.ResultStatus == ShowSaveDialogMessage.Result.Yes)
                 {
-                    foreach(var item in hirStructs)
+                    foreach (var item in hirStructs)
                     {
+                        item.Commit();
+                        item.Save();
+                    }
+                }
+                else if (saveMessage.ResultStatus == ShowSaveDialogMessage.Result.No)
+                {
+                    foreach (var item in hirStructs)
+                    {
+                        item.RollBack();
+                        item.Save();
                     }
                 }
             }
@@ -182,6 +180,7 @@ namespace WpfApp.ViewModels.WindowViewModels
 
                         project.CurOPath = Path.GetDirectoryName(item.Path);
                         project.FullName = Path.GetFileName(item.Path);
+
                         this.Solutions[0].Projects.Add(project);    // for connect with the parent node (solution)
 
                         project.RollBack();
@@ -213,15 +212,9 @@ namespace WpfApp.ViewModels.WindowViewModels
             var process = new GetChangedListMessage(string.Empty, PreprocessChangedFileList);
             Messenger.Default.Send<GetChangedListMessage>(process);
 
-            if(saveMessage != null)
-            {
-                if (saveMessage.ResultStatus == ShowSaveDialogMessage.Result.Yes)
-                {
+            if (saveMessage?.ResultStatus == ShowSaveDialogMessage.Result.Cancel) return;
 
-                }
-                else if (saveMessage.ResultStatus == ShowSaveDialogMessage.Result.Cancel) return;
-            }
-
+            if (message is null) return;
             if (this.LoadSolution(message)) this.messageBoxService?.ShowWarning(CommonResource.WarningOnLoad, "");
         }
 
@@ -231,6 +224,7 @@ namespace WpfApp.ViewModels.WindowViewModels
         /// <param name="message"></param>
         public void ReceivedAddNewProjectMessage(AddProjectMessage message)
         {
+            if (message is null) return;
             if (this.Solutions.Count == 0) return;
 
             // if project path is in the solution path.
@@ -245,14 +239,9 @@ namespace WpfApp.ViewModels.WindowViewModels
             if (projectPath[0] == '\\') projectPath = projectPath.Remove(0, 1);
 
             DefaultProjectHier newProject = projectGenerator.CreateDefaultProject(projectPath, isAbsolutePath, message.ProjectName, message.MachineTarget, this.Solutions[0]);
-            this.Solutions[0].Projects.Add(newProject);
+            newProject.Save();
 
-            // create project files into the folder.
-            using (StreamWriter wr = new StreamWriter(newProject.FullPath))
-            {
-                XmlSerializer xs = new XmlSerializer(typeof(DefaultProjectHier));
-                xs.Serialize(wr, newProject);
-            }
+            this.Solutions[0].Projects.Add(newProject);
 
             var changedInfo = new ChangedFileMessage(this.Solutions[0], ChangedFileMessage.ChangedStatus.Changed);
             Messenger.Default.Send<ChangedFileMessage>(changedInfo);

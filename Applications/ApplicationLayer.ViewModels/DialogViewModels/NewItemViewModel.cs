@@ -19,7 +19,7 @@ namespace ApplicationLayer.ViewModels.DialogViewModels
             set
             {
                 this.selectedGrammarFactory = value;
-                this.RaisePropertyChanged("SelectedGrammarFactory");
+                this.RaisePropertyChanged(nameof(SelectedGrammarFactory));
 
                 this.CurrentItems.Clear();
                 foreach(var item in this.selectedGrammarFactory?.ItemList) this.CurrentItems.Add(item);
@@ -36,7 +36,7 @@ namespace ApplicationLayer.ViewModels.DialogViewModels
             set
             {
                 this.selectedItemIndex = value;
-                this.RaisePropertyChanged("SelectedItemIndex");
+                this.RaisePropertyChanged(nameof(SelectedItemIndex));
 
                 this.SelectedItem = (this.SelectedItemIndex >= 0) ? this.CurrentItems[this.selectedItemIndex] : null;
             }
@@ -49,7 +49,7 @@ namespace ApplicationLayer.ViewModels.DialogViewModels
             private set
             {
                 this.selectedItem = value;
-                this.RaisePropertyChanged("SelectedItem");
+                this.RaisePropertyChanged(nameof(SelectedItem));
             }
         }
 

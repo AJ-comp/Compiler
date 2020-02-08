@@ -1,4 +1,5 @@
 ﻿using ApplicationLayer.Common.Helpers;
+using ApplicationLayer.Common.Interfaces;
 using System.Collections;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
@@ -10,7 +11,7 @@ using CommonResource = ApplicationLayer.Define.Properties.Resources;
 
 namespace ApplicationLayer.Models.SolutionPackage
 {
-    public abstract class ProjectHier : HierarchicalData, IChangeTrackable
+    public abstract class ProjectHier : HierarchicalData, ISaveAndChangeTrackable
     {
         public abstract bool IsChanged { get; }
 
@@ -187,7 +188,7 @@ namespace ApplicationLayer.Models.SolutionPackage
             {
                 var directoryName = Path.GetFileName(item);
 
-                this.Folders.Add(FolderHier.GetFolderSet(this.BaseOPath, directoryName));
+                this.Folders.Add(FolderHier.GetFolderSet(this.BaseOPath, item));
             }
 
             foreach (var item in this.ItemPaths)
@@ -197,15 +198,16 @@ namespace ApplicationLayer.Models.SolutionPackage
 
                 if (string.IsNullOrEmpty(directoryName))
                 {
-                    if (System.IO.File.Exists(Path.Combine(this.BaseOPath, fileName))) this.Items.Add(new DefaultFileHier() { FullName = fileName });
+                    if (File.Exists(Path.Combine(this.BaseOPath, fileName))) this.Items.Add(new DefaultFileHier() { FullName = fileName });
                     else this.Items.Add(new ErrorFileHier() { FullName = fileName });
                 }
                 else
                 {
-                    FolderHier folderStruct = FolderHier.GetFolderSet(this.BaseOPath, directoryName);
+                    FolderHier folderStruct = FolderHier.GetFolderSet(this.BaseOPath, directoryName, true);
+                    this.Folders.Add(folderStruct.RootFolder);
                     DefaultFileHier fileStruct = new DefaultFileHier() { Parent = folderStruct, FullName = fileName };
-                    if (System.IO.File.Exists(fileStruct.FullPath)) folderStruct.Items.Add(fileStruct);
-                    this.Folders.Add(folderStruct);
+
+                    if (File.Exists(fileStruct.FullPath)) folderStruct.Items.Add(fileStruct);
                 }
             }
         }
@@ -218,6 +220,7 @@ namespace ApplicationLayer.Models.SolutionPackage
                 foreach (var item in this.ReferenceFolder[0].Items) this.ReferencePaths.Add(item.FullPath);
             }
 
+            this.HasNotItemPaths.Clear();
             this.ItemPaths.Clear();
             foreach (var folder in this.Folders)
             {
@@ -230,6 +233,18 @@ namespace ApplicationLayer.Models.SolutionPackage
             {
                 // The folders or files in the ProjectStruct uses only relative path.
                 this.ItemPaths.Add(item.FullName);
+            }
+        }
+
+        public override void Save()
+        {
+            string fullPath = this.FullPath;
+            Directory.CreateDirectory(Path.GetDirectoryName(fullPath));
+
+            using (StreamWriter wr = new StreamWriter(fullPath))
+            {
+                XmlSerializer xs = new XmlSerializer(typeof(DefaultProjectHier));
+                xs.Serialize(wr, this);
             }
         }
     }
@@ -246,6 +261,10 @@ namespace ApplicationLayer.Models.SolutionPackage
         }
 
         public override void RollBack()
+        {
+        }
+
+        public override void Save()
         {
         }
     }
