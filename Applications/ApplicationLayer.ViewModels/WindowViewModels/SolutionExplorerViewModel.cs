@@ -139,6 +139,8 @@ namespace WpfApp.ViewModels.WindowViewModels
                         item.Commit();
                         item.Save();
                     }
+
+                    Messenger.Default.Send<RemoveChangedFileMessage>(null);
                 }
                 else if (saveMessage.ResultStatus == ShowSaveDialogMessage.Result.No)
                 {
@@ -147,6 +149,8 @@ namespace WpfApp.ViewModels.WindowViewModels
                         item.RollBack();
                         item.Save();
                     }
+
+                    Messenger.Default.Send<RemoveChangedFileMessage>(null);
                 }
             }
         }
@@ -155,16 +159,7 @@ namespace WpfApp.ViewModels.WindowViewModels
         private bool LoadSolution(LoadSolutionMessage message)
         {
             this.Solutions.Clear();
-
-            using (StreamReader sr = new StreamReader(message.SolutionFullPath))
-            {
-                XmlSerializer xs = new XmlSerializer(typeof(SolutionHier));
-                SolutionHier solution = xs.Deserialize(sr) as SolutionHier;
-                solution.CurOPath = message.SolutionPath;
-                solution.FullName = message.SolutionName;
-
-                this.Solutions.Add(solution);
-            }
+            this.Solutions.Add(SolutionHier.Load(message.SolutionPath, message.SolutionName, message.SolutionFullPath));
 
             bool bFiredError = false;
             foreach (var item in this.Solutions[0].ProjectPaths)
@@ -173,18 +168,9 @@ namespace WpfApp.ViewModels.WindowViewModels
 
                 try
                 {
-                    using (StreamReader sr = new StreamReader(fullPath))
-                    {
-                        XmlSerializer xs = new XmlSerializer(typeof(DefaultProjectHier));
-                        DefaultProjectHier project = xs.Deserialize(sr) as DefaultProjectHier;
+                    var project = DefaultProjectHier.Load(Path.GetDirectoryName(item.Path), Path.GetFileName(item.Path), fullPath, this.Solutions[0]);
 
-                        project.CurOPath = Path.GetDirectoryName(item.Path);
-                        project.FullName = Path.GetFileName(item.Path);
-
-                        this.Solutions[0].Projects.Add(project);    // for connect with the parent node (solution)
-
-                        project.RollBack();
-                    }
+                    this.Solutions[0].Projects.Add(project);    // for connect with the parent node (solution)
                 }
                 catch
                 {
@@ -243,8 +229,8 @@ namespace WpfApp.ViewModels.WindowViewModels
 
             this.Solutions[0].Projects.Add(newProject);
 
-            var changedInfo = new ChangedFileMessage(this.Solutions[0], ChangedFileMessage.ChangedStatus.Changed);
-            Messenger.Default.Send<ChangedFileMessage>(changedInfo);
+            var changedInfo = new AddChangedFileMessage(this.Solutions[0]);
+            Messenger.Default.Send<AddChangedFileMessage>(changedInfo);
 
             //// Notify the changed data to the out.
             //var changedData = new ChangedFileListMessage.ChangedFile(this.Solutions[0], ChangedFileListMessage.ChangedStatus.Changed);

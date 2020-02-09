@@ -41,7 +41,7 @@ namespace ApplicationLayer.Models.GrammarPackages.MiniCPackage
 
                 CurOPath = projectPath,
                 FullName = string.Format("{0}.{1}", projectName, this.Extension + "proj"),
-                Version = 1.0
+                CurrentVersion = 1.0
             };
 
             ProjectProperty debugProperty = new ProjectProperty
@@ -58,8 +58,8 @@ namespace ApplicationLayer.Models.GrammarPackages.MiniCPackage
                 OptimizeLevel = 0
             };
 
-            result.Properties.Add(debugProperty);
-            result.Properties.Add(releaseProperty);
+            result.CurrentProperties.Add(debugProperty);
+            result.CurrentProperties.Add(releaseProperty);
 
             //            result.ReferenceFolder
 

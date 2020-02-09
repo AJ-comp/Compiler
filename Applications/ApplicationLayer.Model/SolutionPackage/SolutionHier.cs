@@ -10,13 +10,16 @@ using System.Xml.Serialization;
 namespace ApplicationLayer.Models.SolutionPackage
 {
     [XmlInclude(typeof(DefaultProjectHier))]
+    [XmlRoot ("Solution")]
     public class SolutionHier : HierarchicalData, ISaveAndChangeTrackable
     {
         [XmlIgnore]
         public static string Extension => "ajn";
 
-        private double originalVersion;
-        public double Version { get; set; }
+        [XmlIgnore]
+        public double CurrentVersion { get; set; }
+        [XmlElement("Version")]
+        public double OriginalVersion { get; set; }
 
         public Collection<PathInfo> ProjectPaths { get; private set; } = new Collection<PathInfo>();
 
@@ -28,7 +31,7 @@ namespace ApplicationLayer.Models.SolutionPackage
         {
             get
             {
-                if (originalVersion != Version) return true;
+                if (OriginalVersion != CurrentVersion) return true;
 
                 if (ProjectPaths.Count != Projects.Count) return true;
                 foreach(var project in Projects)
@@ -80,13 +83,12 @@ namespace ApplicationLayer.Models.SolutionPackage
 
             result.CurOPath = solutionPath;
             result.FullName = solutionName;
-            result.Version = 1.0;
+            result.CurrentVersion = 1.0;
 
             ProjectGenerator projectGenerator = ProjectGenerator.CreateProjectGenerator(grammar);
             if (projectGenerator == null) return result;
 
             result.Projects.Add(projectGenerator.CreateDefaultProject(solutionNameWithExtension, false, solutionNameWithExtension, target, result));
-
             result.Commit();
 
             return result;
@@ -94,12 +96,12 @@ namespace ApplicationLayer.Models.SolutionPackage
 
         public void RollBack()
         {
-            Version = originalVersion;
+            CurrentVersion = OriginalVersion;
         }
 
         public void Commit()
         {
-            originalVersion = Version;
+            OriginalVersion = CurrentVersion;
 
             ProjectPaths.Clear();
             foreach (var project in Projects)
@@ -113,6 +115,23 @@ namespace ApplicationLayer.Models.SolutionPackage
                 XmlSerializer xs = new XmlSerializer(typeof(SolutionHier));
                 xs.Serialize(wr, this);
             }
+        }
+
+        public static SolutionHier Load(string curOpath, string fullName, string fullPath)
+        {
+            SolutionHier result = new SolutionHier();
+
+            using (StreamReader sr = new StreamReader(fullPath))
+            {
+                XmlSerializer xs = new XmlSerializer(typeof(SolutionHier));
+                result = xs.Deserialize(sr) as SolutionHier;
+                result.CurOPath = curOpath;
+                result.FullName = fullName;
+
+                result.RollBack();
+            }
+
+            return result;
         }
     }
 

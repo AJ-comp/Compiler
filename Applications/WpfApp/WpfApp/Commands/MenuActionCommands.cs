@@ -72,7 +72,8 @@ namespace ApplicationLayer.WpfApp.Commands
                         var hier = hirStruct as DefaultProjectHier;
                         hier.Items.Add(fileStruct);
 
-                        if(hier.IsChanged) Messenger.Default.Send<ChangedFileMessage>(new ChangedFileMessage(hier, ChangedFileMessage.ChangedStatus.Changed));
+                        if(hier.IsChanged) Messenger.Default.Send<AddChangedFileMessage>(new AddChangedFileMessage(hier));
+                        else Messenger.Default.Send<RemoveChangedFileMessage>(new RemoveChangedFileMessage(hier));
                     }
                     else if (hirStruct is FolderHier)
                     {
@@ -81,7 +82,9 @@ namespace ApplicationLayer.WpfApp.Commands
                         folderHier.Items.Add(fileStruct);
 
                         if (parent == null) return;
-                        if (parent.IsChanged) Messenger.Default.Send<ChangedFileMessage>(new ChangedFileMessage(parent, ChangedFileMessage.ChangedStatus.Changed));
+
+                        if (parent.IsChanged) Messenger.Default.Send<AddChangedFileMessage>(new AddChangedFileMessage(parent));
+                        else Messenger.Default.Send<RemoveChangedFileMessage>(new RemoveChangedFileMessage(parent));
                     }
                 };
 
@@ -167,14 +170,16 @@ namespace ApplicationLayer.WpfApp.Commands
                     var solutionHier = parent as SolutionHier;
 
                     solutionHier.RemoveChild(selectedStruct);
-                    if (solutionHier.IsChanged) Messenger.Default.Send<ChangedFileMessage>(new ChangedFileMessage(parent as SolutionHier, ChangedFileMessage.ChangedStatus.Changed));
+                    if (solutionHier.IsChanged) Messenger.Default.Send<AddChangedFileMessage>(new AddChangedFileMessage(parent as SolutionHier));
+                    else Messenger.Default.Send<RemoveChangedFileMessage>(new RemoveChangedFileMessage(parent as SolutionHier));
                 }
                 else if (parent is DefaultProjectHier)
                 {
                     var projectHier = parent as DefaultProjectHier;
                     projectHier.RemoveChild(selectedStruct);
 
-                    if (projectHier.IsChanged) Messenger.Default.Send<ChangedFileMessage>(new ChangedFileMessage(parent as DefaultProjectHier, ChangedFileMessage.ChangedStatus.Changed));
+                    if (projectHier.IsChanged) Messenger.Default.Send<AddChangedFileMessage>(new AddChangedFileMessage(parent as DefaultProjectHier));
+                    else Messenger.Default.Send<RemoveChangedFileMessage>(new RemoveChangedFileMessage(parent as DefaultProjectHier));
                 }
                 else if (parent is FolderHier)
                 {
@@ -183,7 +188,9 @@ namespace ApplicationLayer.WpfApp.Commands
 
                     var projectParent = folderHier.ProjectTypeParent;
                     if (projectParent == null) return;
-                    if (projectParent.IsChanged) Messenger.Default.Send<ChangedFileMessage>(new ChangedFileMessage(projectParent, ChangedFileMessage.ChangedStatus.Changed));
+
+                    if (projectParent.IsChanged) Messenger.Default.Send<AddChangedFileMessage>(new AddChangedFileMessage(projectParent));
+                    else Messenger.Default.Send<RemoveChangedFileMessage>(new RemoveChangedFileMessage(projectParent));
                 }
             }, (condition) =>
             {
@@ -216,19 +223,22 @@ namespace ApplicationLayer.WpfApp.Commands
                 if (selHier is DefaultProjectHier)
                 {
                     var projectHier = selHier as DefaultProjectHier;
-                    projectHier.Folders.Add(new FolderHier() { CurOPath = newFolderName, FullName = newFolderName });
+                    projectHier.Folders.Add(new FolderHier() { CurOPath = newFolderName });
 
-                    if (projectHier.IsChanged) Messenger.Default.Send<ChangedFileMessage>(new ChangedFileMessage(projectHier, ChangedFileMessage.ChangedStatus.Changed));
+                    if (projectHier.IsChanged) Messenger.Default.Send<AddChangedFileMessage>(new AddChangedFileMessage(projectHier));
+                    else Messenger.Default.Send<RemoveChangedFileMessage>(new RemoveChangedFileMessage(projectHier));
                 }
                 else if (selHier is FolderHier)
                 {
                     var folderHier = selHier as FolderHier;
                     var projectHier = folderHier.ProjectTypeParent;
 
-                    folderHier.Folders.Add(new FolderHier() { CurOPath = newFolderName, FullName = newFolderName });
+                    folderHier.Folders.Add(new FolderHier() { CurOPath = newFolderName });
 
                     if (projectHier is null) return;
-                    if (projectHier.IsChanged) Messenger.Default.Send<ChangedFileMessage>(new ChangedFileMessage(projectHier, ChangedFileMessage.ChangedStatus.Changed));
+
+                    if (projectHier.IsChanged) Messenger.Default.Send<AddChangedFileMessage>(new AddChangedFileMessage(projectHier));
+                    else Messenger.Default.Send<RemoveChangedFileMessage>(new RemoveChangedFileMessage(projectHier));
                 }
                 
             }, (condition) =>

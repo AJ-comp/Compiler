@@ -22,19 +22,27 @@ namespace ApplicationLayer.Models.SolutionPackage
 
     [XmlInclude(typeof(ProjectProperty))]
     [XmlInclude(typeof(ReferenceHier))]
+    [XmlRoot ("Project")]
     public class DefaultProjectHier : ProjectHier
     {
         [XmlIgnore]
         public string Extension => Path.GetExtension(this.FullName);
 
-        private double originalVersion = 0.0;
-        public double Version { get; set; }
+        [XmlIgnore]
+        public double CurrentVersion { get; set; }
+        [XmlElement("Version")]
+        public double OriginalVersion { get; set; } = 0.0;
 
-        private Collection<ProjectProperty> originalProperties = new Collection<ProjectProperty>();
-        public ObservableCollection<ProjectProperty> Properties { get; } = new ObservableCollection<ProjectProperty>();
+        [XmlIgnore]
+        public ObservableCollection<ProjectProperty> CurrentProperties { get; } = new ObservableCollection<ProjectProperty>();
+        [XmlElement("Properties")]
+        public Collection<ProjectProperty> OriginalProperties { get; } = new Collection<ProjectProperty>();
 
+        [XmlArrayItem("IncludePath")]
         public StringCollection ReferencePaths { get; } = new StringCollection();
+        [XmlArrayItem("IncludePath")]
         public StringCollection HasNotItemPaths { get; } = new StringCollection();
+        [XmlArrayItem("IncludePath")]
         public StringCollection ItemPaths { get; } = new StringCollection();
 
         [XmlIgnore]
@@ -63,30 +71,30 @@ namespace ApplicationLayer.Models.SolutionPackage
             get
             {
                 // compare with Version whether equals.
-                if (originalVersion != Version) return true;
+                if (OriginalVersion != CurrentVersion) return true;
 
                 // compare with Properties whether equals.
-                if (originalProperties.Count != Properties.Count) return true;
-                foreach(var property in Properties)
+                if (OriginalProperties.Count != CurrentProperties.Count) return true;
+                foreach(var property in CurrentProperties)
                 {
-                    if (originalProperties.Contains(property) == false) return true;
+                    if (OriginalProperties.Contains(property) == false) return true;
                 }
 
                 // compare with ReferencePath whether equals.
                 StringCollection referencePaths = new StringCollection();
                 foreach (var item in ReferenceFolder[0].Items) referencePaths.Add(item.FullPath);
-                if (ReferenceFolder[0].Items.Equals(referencePaths) == false) return true;
+                if (ReferencePaths.Compare(referencePaths) == false) return true;
 
                 // compare with HasNotItemPaths whether equals.
                 StringCollection hasNotItemPaths = new StringCollection();
                 foreach (var folder in Folders) hasNotItemPaths.AddRange(folder.HasNotItemAllPaths.ToArray());
-                if (HasNotItemPaths.Equals(hasNotItemPaths) == false) return true;
+                if (HasNotItemPaths.Compare(hasNotItemPaths) == false) return true;
 
                 // compare with Items whether equals.
                 StringCollection itemPaths = new StringCollection();
                 foreach (var folder in Folders) itemPaths.AddRange(folder.HasItemAllPaths.ToArray());
-                foreach (var item in Items) ItemPaths.Add(item.AutoPath);
-                if (itemPaths.Equals(hasNotItemPaths) == false) return true;
+                foreach (var item in Items) itemPaths.Add(item.AutoPath);
+                if (ItemPaths.Compare(itemPaths) == false) return true;
 
                 return false;
             }
@@ -173,6 +181,11 @@ namespace ApplicationLayer.Models.SolutionPackage
 
         public override void RollBack()
         {
+            this.CurrentVersion = this.OriginalVersion;
+
+            this.CurrentProperties.Clear();
+            foreach (var item in this.OriginalProperties) this.CurrentProperties.Add(item);
+
             this.ReferenceFolder[0].Items.Clear();
             foreach (var item in this.ReferencePaths)
             {
@@ -186,9 +199,8 @@ namespace ApplicationLayer.Models.SolutionPackage
             this.Items.Clear();
             foreach (var item in this.HasNotItemPaths)
             {
-                var directoryName = Path.GetFileName(item);
-
-                this.Folders.Add(FolderHier.GetFolderSet(this.BaseOPath, item));
+                var pathChain = PathChain.CreateChainCheckItem(this.BaseOPath, item);
+                FolderHier.AddPathChainToFolderHiers(this.Folders, pathChain);
             }
 
             foreach (var item in this.ItemPaths)
@@ -203,17 +215,23 @@ namespace ApplicationLayer.Models.SolutionPackage
                 }
                 else
                 {
-                    FolderHier folderStruct = FolderHier.GetFolderSet(this.BaseOPath, directoryName, true);
-                    this.Folders.Add(folderStruct.RootFolder);
-                    DefaultFileHier fileStruct = new DefaultFileHier() { Parent = folderStruct, FullName = fileName };
+                    var pathChain = PathChain.CreateChainCheckItem(this.BaseOPath, directoryName);
+                    FolderHier.AddPathChainToFolderHiers(this.Folders, pathChain);
+                    FolderHier leafFolderHier = FolderHier.GetLeafFolderHier(this.Folders, pathChain);
+                    DefaultFileHier fileStruct = new DefaultFileHier() { Parent = leafFolderHier, FullName = fileName };
 
-                    if (File.Exists(fileStruct.FullPath)) folderStruct.Items.Add(fileStruct);
+                    if (File.Exists(fileStruct.FullPath)) leafFolderHier.Items.Add(fileStruct);
                 }
             }
         }
 
         public override void Commit()
         {
+            this.OriginalVersion = this.CurrentVersion;
+
+            this.OriginalProperties.Clear();
+            foreach (var item in this.CurrentProperties) this.OriginalProperties.Add(item);
+
             this.ReferencePaths.Clear();
             if (this.ReferenceFolder.Count > 0)
             {
@@ -246,6 +264,24 @@ namespace ApplicationLayer.Models.SolutionPackage
                 XmlSerializer xs = new XmlSerializer(typeof(DefaultProjectHier));
                 xs.Serialize(wr, this);
             }
+        }
+
+        public static DefaultProjectHier Load(string curOpath, string fullName, string fullPath, HierarchicalData parent)
+        {
+            DefaultProjectHier result = new DefaultProjectHier();
+
+            using (StreamReader sr = new StreamReader(fullPath))
+            {
+                XmlSerializer xs = new XmlSerializer(typeof(DefaultProjectHier));
+                result = xs.Deserialize(sr) as DefaultProjectHier;
+                result.CurOPath = curOpath;
+                result.FullName = fullName;
+                result.Parent = parent;
+
+                result.RollBack();
+            }
+
+            return result;
         }
     }
 

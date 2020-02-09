@@ -214,6 +214,48 @@ namespace ApplicationLayer.Models.SolutionPackage
             return result;
         }
 
+        public static FolderHier FindEqualFolderHier(Collection<FolderHier> folderHiers, string name)
+        {
+            FolderHier result = null;
+
+            foreach(var folderHier in folderHiers)
+            {
+                if (folderHier.CurOPath == name)
+                {
+                    result = folderHier;
+                    break;
+                }
+            }
+
+            return result;
+        }
+
+        public static FolderHier GetLeafFolderHier(Collection<FolderHier> folderHiers, PathChain pathChain)
+        {
+            if (pathChain == null) return null;
+
+            var foundHier = FolderHier.FindEqualFolderHier(folderHiers, pathChain.Name);
+            if (foundHier == null) return null;
+            else if (pathChain.IsLast) return foundHier;
+            else return FolderHier.GetLeafFolderHier(foundHier.Folders, pathChain.Next);
+        }
+
+        public static void AddPathChainToFolderHiers(Collection<FolderHier> folderHiers, PathChain pathChain)
+        {
+            if (pathChain == null) return;
+
+            var foundHier = FolderHier.FindEqualFolderHier(folderHiers, pathChain.Name);
+            if (foundHier == null)
+            {
+                var newFolderHier = new FolderHier() { CurOPath = pathChain.Name };
+
+                folderHiers.Add(newFolderHier);
+                FolderHier.AddPathChainToFolderHiers(newFolderHier.Folders, pathChain.Next);
+            }
+            else
+                FolderHier.AddPathChainToFolderHiers(foundHier.Folders, pathChain.Next);
+        }
+
         public override void Save()
         {
             // nothing need do

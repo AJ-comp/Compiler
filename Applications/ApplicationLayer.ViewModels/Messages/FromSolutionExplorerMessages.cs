@@ -17,23 +17,33 @@ namespace ApplicationLayer.ViewModels.Messages
     }
 
     /// <summary>
-    /// This message informs to the target that a changed file is.
+    /// This message informs to the target that a changed file to add is.
     /// </summary>
-    public class ChangedFileMessage : MessageBase
+    public class AddChangedFileMessage : MessageBase
     {
-        public enum ChangedStatus { Changed, Restored }
-
         public ISaveAndChangeTrackable Item { get; }
-        public ChangedStatus Status { get; }
 
-        public ChangedFileMessage()
+        public AddChangedFileMessage()
         {
         }
 
-        public ChangedFileMessage(ISaveAndChangeTrackable item, ChangedStatus status)
+        public AddChangedFileMessage(ISaveAndChangeTrackable item)
         {
             this.Item = item;
-            this.Status = status;
+        }
+    }
+
+    public class RemoveChangedFileMessage : MessageBase
+    {
+        public ISaveAndChangeTrackable Item { get; }
+
+        public RemoveChangedFileMessage()
+        {
+        }
+
+        public RemoveChangedFileMessage(ISaveAndChangeTrackable item)
+        {
+            Item = item;
         }
     }
 

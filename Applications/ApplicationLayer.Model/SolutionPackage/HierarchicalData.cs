@@ -1,13 +1,13 @@
 ﻿using ApplicationLayer.Common.Helpers;
 using ApplicationLayer.Common.Interfaces;
-using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Xml.Serialization;
 
 namespace ApplicationLayer.Models.SolutionPackage
 {
-    public abstract class HierarchicalData : INotifyPropertyChanged, ISaveable, IEquatable<HierarchicalData>
+    public abstract class HierarchicalData : INotifyPropertyChanged, ISaveable
     {
         [XmlIgnore]
         public string CurOPath { get; set; } = string.Empty;
@@ -98,7 +98,17 @@ namespace ApplicationLayer.Models.SolutionPackage
             }
         }
 
-        public bool Equals(HierarchicalData other) => this.FullPath == other.FullPath;
         public abstract void Save();
+
+        public override bool Equals(object obj)
+        {
+            return obj is HierarchicalData data &&
+                   FullPath == data.FullPath;
+        }
+
+        public override int GetHashCode()
+        {
+            return 2018552787 + EqualityComparer<string>.Default.GetHashCode(FullPath);
+        }
     }
 }

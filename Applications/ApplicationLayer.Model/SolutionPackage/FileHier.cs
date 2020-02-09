@@ -30,10 +30,10 @@ namespace ApplicationLayer.Models.SolutionPackage
 
     public class DefaultFileHier : FileHier
     {
-        private string prevData;
+        private string originalData;
         public string Data { get; set; }
 
-        public override bool IsChanged => (prevData != Data);
+        public override bool IsChanged => (originalData != Data);
 
         public void CreateFile()
         {
@@ -45,12 +45,12 @@ namespace ApplicationLayer.Models.SolutionPackage
 
         public override void Commit()
         {
-            prevData = Data;
+            originalData = Data;
         }
 
         public override void RollBack()
         {
-            Data = prevData;
+            Data = originalData;
         }
 
         public override void Save()

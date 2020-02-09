@@ -276,7 +276,8 @@ namespace ApplicationLayer.WpfApp.ViewModels
         {
             var questionToSaveDialog = ServiceLocator.Current.GetInstance<QuestionToSaveViewModel>();
 
-            Messenger.Default.Register<ChangedFileMessage>(questionToSaveDialog, questionToSaveDialog.ReceivedUpdateChangedFileMessage);
+            Messenger.Default.Register<AddChangedFileMessage>(questionToSaveDialog, questionToSaveDialog.ReceivedAddChangedFileMessage);
+            Messenger.Default.Register<RemoveChangedFileMessage>(questionToSaveDialog, questionToSaveDialog.ReceivedRemoveChangedFileMessage);
             Messenger.Default.Register<GetChangedListMessage>(questionToSaveDialog, questionToSaveDialog.ReceivedGetChangedFileListMessage);
         }
 
@@ -319,12 +320,6 @@ namespace ApplicationLayer.WpfApp.ViewModels
             this.SelectedDocument = editor;
 
             this.AlarmListVM.AddEditors(editor);
-        }
-
-
-        public void ReceivedChangedFileListMessage(ChangedFileMessage message)
-        {
-
         }
     }
 }

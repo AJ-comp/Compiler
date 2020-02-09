@@ -35,5 +35,17 @@ namespace ApplicationLayer.Common.Helpers
 
             return result.ToArray();
         }
+
+        public static bool Compare (this StringCollection src, StringCollection target)
+        {
+            if (src.Count != target.Count) return false;
+
+            foreach(var item in src)
+            {
+                if (target.Contains(item) == false) return false;
+            }
+
+            return true;
+        }
     }
 }

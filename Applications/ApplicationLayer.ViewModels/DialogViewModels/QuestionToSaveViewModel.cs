@@ -58,19 +58,18 @@ namespace ApplicationLayer.ViewModels.DialogViewModels
         private void OnCancel() => this.CancelRequest?.Invoke(this, null);
 
 
-        public void ReceivedUpdateChangedFileMessage(ChangedFileMessage message)
+        public void ReceivedAddChangedFileMessage(AddChangedFileMessage message)
         {
             if (message is null) return;
 
-            if (message.Status == ChangedFileMessage.ChangedStatus.Changed)
-            {
-                if (this.ChangedFileList.Contains(message.Item) == false)
-                    this.ChangedFileList.Add(message.Item);
-            }
-            else if(message.Status == ChangedFileMessage.ChangedStatus.Restored)
-            {
-                this.ChangedFileList.Remove(message.Item);
-            }
+            if (this.ChangedFileList.Contains(message.Item) == false)
+                this.ChangedFileList.Add(message.Item);
+        }
+
+        public void ReceivedRemoveChangedFileMessage(RemoveChangedFileMessage message)
+        {
+            if (message is null) this.ChangedFileList.Clear();
+            else this.ChangedFileList.Remove(message.Item);
         }
 
         public void ReceivedGetChangedFileListMessage(GetChangedListMessage message)
