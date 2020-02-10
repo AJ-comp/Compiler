@@ -1,0 +1,79 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:c="clr-namespace:System.Collections;assembly=mscorlib"
+                    xmlns:lex="http://wpflocalizeextension.codeplex.com"
+                    xmlns:commands="clr-namespace:ApplicationLayer.WpfApp.Commands"
+                    xmlns:local="clr-namespace:ApplicationLayer.WpfApp.Resources.Menus">
+
+    <c:ArrayList x:Key="SolutionMenuItems" x:Shared="False">
+        <MenuItem Header="Open"/>
+        <Separator/>
+        <MenuItem Command="{x:Static commands:MenuActionCommands.AddNewProject}"/>
+        <MenuItem Command="Cut"/>
+        <MenuItem Command="Copy"/>
+        <Separator/>
+        <MenuItem Command="{x:Static commands:MenuActionCommands.OpenFolder}" CommandParameter="{Binding}"/>
+        <Separator/>
+    </c:ArrayList>
+
+
+    <c:ArrayList x:Key="DefaultProjectMenuItems" x:Shared="False">
+        <MenuItem Header="{lex:Loc Key=Open}"/>
+        <Separator/>
+        <MenuItem Header="{lex:Loc Key=Add}">
+            <MenuItem Command="{x:Static commands:MenuActionCommands.AddNewItem}" CommandParameter="{Binding}"/>
+            <MenuItem Command="{x:Static commands:MenuActionCommands.AddExistItem}" CommandParameter="{Binding}"/>
+            <MenuItem Command="{x:Static commands:MenuActionCommands.AddNewFolder}" CommandParameter="{Binding}"/>
+        </MenuItem>
+        <MenuItem Command="Copy"/>
+        <MenuItem Command="{x:Static commands:MenuActionCommands.DelItem}" CommandParameter="{Binding}"/>
+        <Separator/>
+        <MenuItem Command="{x:Static commands:MenuActionCommands.OpenFolder}" CommandParameter="{Binding}"/>
+        <Separator/>
+    </c:ArrayList>
+
+
+    <c:ArrayList x:Key="ErrorMenuItems" x:Shared="False">
+        <MenuItem Command="{x:Static commands:MenuActionCommands.DelItem}" CommandParameter="{Binding}"/>
+    </c:ArrayList>
+
+
+    <c:ArrayList x:Key="ReferenceFolderMenuItems" x:Shared="False">
+        <MenuItem Header="{lex:Loc Key=Add}"/>
+    </c:ArrayList>
+
+
+    <c:ArrayList x:Key="ReferenceItemMenuItems" x:Shared="False">
+        <MenuItem Header="{lex:Loc Key=Open}"/>
+        <Separator/>
+        <MenuItem Command="{x:Static commands:MenuActionCommands.DelItem}" CommandParameter="{Binding}"/>
+        <Separator/>
+    </c:ArrayList>
+
+
+    <c:ArrayList x:Key="FolderMenuItems" x:Shared="False">
+        <MenuItem Header="{lex:Loc Key=Open}"/>
+        <Separator/>
+        <MenuItem Header="{lex:Loc Key=Add}">
+            <MenuItem Command="{x:Static commands:MenuActionCommands.AddNewItem}" CommandParameter="{Binding}"/>
+            <MenuItem Command="{x:Static commands:MenuActionCommands.AddExistItem}" CommandParameter="{Binding}"/>
+            <MenuItem Command="{x:Static commands:MenuActionCommands.AddNewFolder}" CommandParameter="{Binding}"/>
+        </MenuItem>
+        <MenuItem Command="Cut"/>
+        <MenuItem Command="Copy"/>
+        <MenuItem Command="{x:Static commands:MenuActionCommands.DelItem}" CommandParameter="{Binding}"/>
+        <Separator/>
+        <MenuItem Command="{x:Static commands:MenuActionCommands.OpenFolder}" CommandParameter="{Binding}"/>
+        <Separator/>
+    </c:ArrayList>
+
+
+    <c:ArrayList x:Key="FileMenuItems" x:Shared="False">
+        <MenuItem Header="Open"/>
+        <Separator/>
+        <MenuItem Command="Cut"/>
+        <MenuItem Command="Copy"/>
+        <MenuItem Command="{x:Static commands:MenuActionCommands.DelItem}" CommandParameter="{Binding}"/>
+    </c:ArrayList>
+
+</ResourceDictionary>

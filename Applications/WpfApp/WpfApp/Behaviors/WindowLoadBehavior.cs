@@ -4,7 +4,6 @@ using ApplicationLayer.WpfApp.Commands;
 using ApplicationLayer.WpfApp.ViewModels;
 using ApplicationLayer.WpfApp.Views.DialogViews;
 using GalaSoft.MvvmLight.Messaging;
-using Parse.WpfControls.SyntaxEditor.EventArgs;
 using System.Globalization;
 using System.Windows;
 using System.Windows.Forms;

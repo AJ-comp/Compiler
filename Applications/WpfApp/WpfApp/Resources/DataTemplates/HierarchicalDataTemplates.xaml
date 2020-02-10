@@ -8,6 +8,11 @@
                     xmlns:solutionPackage="clr-namespace:ApplicationLayer.Models.SolutionPackage;assembly=ApplicationLayer.Models"
                     xmlns:utilities="clr-namespace:ApplicationLayer.Common.Utilities;assembly=ApplicationLayer.Common">
 
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/Resources/Menus/SolutionExplorerMenus.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+
+    
     <HierarchicalDataTemplate DataType="{x:Type solutionPackage:SolutionHier}" ItemsSource="{Binding Projects}">
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch">
             <Image Width="16" Height="16" Margin="0 0 5 0" Source="{DynamicResource SolutionImagePath}" />
@@ -18,16 +23,7 @@
                 </i:EventTrigger>
             </i:Interaction.Triggers>
             <StackPanel.ContextMenu>
-                <ContextMenu FontSize="11.5">
-                    <MenuItem Header="{lex:Loc Key=Open}"/>
-                    <Separator/>
-                    <MenuItem Command="{x:Static commands:MenuActionCommands.AddNewProject}"/>
-                    <MenuItem Command="Cut"/>
-                    <MenuItem Command="Copy"/>
-                    <Separator/>
-                    <MenuItem Command="{x:Static commands:MenuActionCommands.OpenFolder}" CommandParameter="{Binding}"/>
-                    <Separator/>
-                </ContextMenu>
+                <ContextMenu FontSize="11.5" ItemsSource="{StaticResource SolutionMenuItems}"/>
             </StackPanel.ContextMenu>
         </StackPanel>
     </HierarchicalDataTemplate>
@@ -43,9 +39,7 @@
                 </i:EventTrigger>
             </i:Interaction.Triggers>
             <StackPanel.ContextMenu>
-                <ContextMenu FontSize="11.5">
-                    <MenuItem Command="{x:Static commands:MenuActionCommands.DelItem}" CommandParameter="{Binding}"/>
-                </ContextMenu>
+                <ContextMenu FontSize="11.5" ItemsSource="{StaticResource ErrorMenuItems}"/>
             </StackPanel.ContextMenu>
         </StackPanel>
     </HierarchicalDataTemplate>
@@ -62,20 +56,7 @@
                 </i:EventTrigger>
             </i:Interaction.Triggers>
             <StackPanel.ContextMenu>
-                <ContextMenu FontSize="11.5">
-                    <MenuItem Header="{lex:Loc Key=Open}"/>
-                    <Separator/>
-                    <MenuItem Header="{lex:Loc Key=Add}">
-                        <MenuItem Command="{x:Static commands:MenuActionCommands.AddNewItem}" CommandParameter="{Binding}"/>
-                        <MenuItem Command="{x:Static commands:MenuActionCommands.AddExistItem}" CommandParameter="{Binding}"/>
-                        <MenuItem Command="{x:Static commands:MenuActionCommands.AddNewFolder}" CommandParameter="{Binding}"/>
-                    </MenuItem>
-                    <MenuItem Command="Copy"/>
-                    <MenuItem Command="{x:Static commands:MenuActionCommands.DelItem}" CommandParameter="{Binding}"/>
-                    <Separator/>
-                    <MenuItem Command="{x:Static commands:MenuActionCommands.OpenFolder}" CommandParameter="{Binding}"/>
-                    <Separator/>
-                </ContextMenu>
+                <ContextMenu FontSize="11.5" ItemsSource="{StaticResource DefaultProjectMenuItems}"/>
             </StackPanel.ContextMenu>
         </StackPanel>
     </HierarchicalDataTemplate>
@@ -91,42 +72,7 @@
                 </i:EventTrigger>
             </i:Interaction.Triggers>
             <StackPanel.ContextMenu>
-                <ContextMenu FontSize="11.5">
-                    <MenuItem Header="{lex:Loc Key=Open}"/>
-                    <Separator/>
-                    <MenuItem Command="Cut"/>
-                    <MenuItem Command="Copy"/>
-                </ContextMenu>
-            </StackPanel.ContextMenu>
-        </StackPanel>
-    </HierarchicalDataTemplate>
-
-    
-    <HierarchicalDataTemplate DataType="{x:Type solutionPackage:FolderHier}" ItemsSource="{Binding Children}">
-        <StackPanel Orientation="Horizontal">
-            <Image x:Name="image" Width="16" Height="16" Margin="0 0 5 0" Source="{DynamicResource CloseFolderImagePath}"/>
-            <TextBlock Text="{Binding CurOPath}"/>
-            <i:Interaction.Triggers>
-                <i:EventTrigger EventName="PreviewMouseRightButtonDown">
-                    <ei:ChangePropertyAction PropertyName="IsSelected" Value="true" TargetObject="{Binding}"/>
-                </i:EventTrigger>
-            </i:Interaction.Triggers>
-            <StackPanel.ContextMenu>
-                <ContextMenu FontSize="11.5">
-                    <MenuItem Header="{lex:Loc Key=Open}"/>
-                    <Separator/>
-                    <MenuItem Header="{lex:Loc Key=Add}">
-                        <MenuItem Command="{x:Static commands:MenuActionCommands.AddNewItem}" CommandParameter="{Binding}"/>
-                        <MenuItem Command="{x:Static commands:MenuActionCommands.AddExistItem}" CommandParameter="{Binding}"/>
-                        <MenuItem Command="{x:Static commands:MenuActionCommands.AddNewFolder}" CommandParameter="{Binding}"/>
-                    </MenuItem>
-                    <MenuItem Command="Cut"/>
-                    <MenuItem Command="Copy"/>
-                    <MenuItem Command="{x:Static commands:MenuActionCommands.DelItem}" CommandParameter="{Binding}"/>
-                    <Separator/>
-                    <MenuItem Command="{x:Static commands:MenuActionCommands.OpenFolder}" CommandParameter="{Binding}"/>
-                    <Separator/>
-                </ContextMenu>
+                <ContextMenu FontSize="11.5" ItemsSource="{StaticResource ReferenceFolderMenuItems}"/>
             </StackPanel.ContextMenu>
         </StackPanel>
     </HierarchicalDataTemplate>
@@ -142,15 +88,26 @@
                 </i:EventTrigger>
             </i:Interaction.Triggers>
             <StackPanel.ContextMenu>
-                <ContextMenu FontSize="11.5">
-                    <MenuItem Header="{lex:Loc Key=Open}"/>
-                    <Separator/>
-                    <MenuItem Command="Cut"/>
-                    <MenuItem Command="Copy"/>
-                </ContextMenu>
+                <ContextMenu FontSize="11.5" ItemsSource="{StaticResource ReferenceItemMenuItems}"/>
             </StackPanel.ContextMenu>
         </StackPanel>
     </DataTemplate>
+
+
+    <HierarchicalDataTemplate DataType="{x:Type solutionPackage:FolderHier}" ItemsSource="{Binding Children}">
+        <StackPanel Orientation="Horizontal">
+            <Image x:Name="image" Width="16" Height="16" Margin="0 0 5 0" Source="{DynamicResource CloseFolderImagePath}"/>
+            <TextBlock Text="{Binding CurOPath}"/>
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="PreviewMouseRightButtonDown">
+                    <ei:ChangePropertyAction PropertyName="IsSelected" Value="true" TargetObject="{Binding}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+            <StackPanel.ContextMenu>
+                <ContextMenu FontSize="11.5" ItemsSource="{StaticResource FolderMenuItems}"/>
+            </StackPanel.ContextMenu>
+        </StackPanel>
+    </HierarchicalDataTemplate>
 
 
     <DataTemplate DataType="{x:Type solutionPackage:ErrorFileHier}">
@@ -163,33 +120,54 @@
                 </i:EventTrigger>
             </i:Interaction.Triggers>
             <StackPanel.ContextMenu>
-                <ContextMenu FontSize="11.5">
-                    <MenuItem Command="{x:Static commands:MenuActionCommands.DelItem}" CommandParameter="{Binding}"/>
-                </ContextMenu>
+                <ContextMenu FontSize="11.5" ItemsSource="{StaticResource ErrorMenuItems}"/>
             </StackPanel.ContextMenu>
         </StackPanel>
     </DataTemplate>
-    
-    
+
+
+    <Style x:Key="EditableTextBox" TargetType="{x:Type TextBox}">
+        <Setter Property="Background" Value="White"/>
+        <Setter Property="Foreground"  Value="Black"/>
+        <Setter Property="Height" Value="16"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+    </Style>
+
+
     <DataTemplate DataType="{x:Type solutionPackage:DefaultFileHier}">
-        <StackPanel Orientation="Horizontal">
-            <Image Width="16" Height="16" Margin="0 0 5 0" Source="{DynamicResource ProjectImagePath}"/>
-            <TextBlock Text="{Binding FullName}"/>
-            <i:Interaction.Triggers>
-                <i:EventTrigger EventName="PreviewMouseRightButtonDown">
-                    <ei:ChangePropertyAction PropertyName="IsSelected" Value="true" TargetObject="{Binding}"/>
-                </i:EventTrigger>
-            </i:Interaction.Triggers>
-            <StackPanel.ContextMenu>
-                <ContextMenu FontSize="11.5">
-                    <MenuItem Header="{lex:Loc Key=Open}"/>
-                    <Separator/>
-                    <MenuItem Command="Cut"/>
-                    <MenuItem Command="Copy"/>
-                    <MenuItem Command="{x:Static commands:MenuActionCommands.DelItem}" CommandParameter="{Binding}"/>
-                </ContextMenu>
-            </StackPanel.ContextMenu>
-        </StackPanel>
+        <DataTemplate.Resources>
+            <!-- Normal Mode -->
+            <DataTemplate x:Key="NormalTemplate">
+                <StackPanel Orientation="Horizontal">
+                    <Image Width="16" Height="16" Margin="0 0 5 0" Source="{DynamicResource ProjectImagePath}"/>
+                    <TextBlock Text="{Binding FullName}"/>
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="PreviewMouseRightButtonDown">
+                            <ei:ChangePropertyAction PropertyName="IsSelected" Value="true" TargetObject="{Binding}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                    <StackPanel.ContextMenu>
+                        <ContextMenu FontSize="11.5" ItemsSource="{DynamicResource FileMenuItems}"/>
+                    </StackPanel.ContextMenu>
+                </StackPanel>
+            </DataTemplate>
+            <!-- Editable Mode -->
+            <DataTemplate x:Key="EditableTemplate">
+                <StackPanel Orientation="Horizontal">
+                    <Image Width="16" Height="16" Margin="0 0 5 0" Source="{DynamicResource ProjectImagePath}"/>
+                    <TextBox Text="{Binding FullName}" Style="{StaticResource EditableTextBox}"/>
+                </StackPanel>
+            </DataTemplate>
+        </DataTemplate.Resources>
+        
+        <ContentPresenter Content="{Binding}">
+            <ContentPresenter.Style>
+                <Style TargetType="{x:Type ContentPresenter}">
+                    <Setter Property="ContentTemplate" Value="{StaticResource NormalTemplate}"/>
+                </Style>
+            </ContentPresenter.Style>
+        </ContentPresenter>
+        
     </DataTemplate>
 
 
