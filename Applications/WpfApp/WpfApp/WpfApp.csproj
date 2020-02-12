@@ -102,6 +102,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AttachedProperties\EditableTextBox.cs" />
     <Compile Include="AttachedProperties\WindowsFormsHostMap.cs" />
     <Compile Include="Behaviors\AlarmListViewModelBehavior.cs" />
     <Compile Include="Behaviors\BindableSelectedItemBehavior.cs" />
@@ -118,6 +119,7 @@
     <Compile Include="Converters\LogicConverters\SearchLogicConverter.cs" />
     <Compile Include="Converters\LogicConverters\OpenSolutionLogicConverter.cs" />
     <Compile Include="Converters\RemoveObjectConverter.cs" />
+    <Compile Include="Converters\RenameHotKeyConverter.cs" />
     <Compile Include="Converters\SelectedItemConverter.cs" />
     <Compile Include="Converters\EnumToImageConverter.cs" />
     <Compile Include="Converters\EventArgsConverterExtension.cs" />
@@ -292,10 +294,6 @@
       <Project>{acdea7b0-f5d4-4b92-bf1a-f2976c0787d9}</Project>
       <Name>ApplicationLayer.ViewModels</Name>
     </ProjectReference>
-    <ProjectReference Include="..\ApplicationLayer.Views\ApplicationLayer.Views.csproj">
-      <Project>{b7a57007-09c3-464b-8772-ff308797c87f}</Project>
-      <Name>ApplicationLayer.Views</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\..\Parse.BackEnd.Target\Parse.BackEnd.Target.ARMv7\Parse.BackEnd.Target.ARMv7.csproj">
       <Project>{453a6e15-d65d-408f-856a-718ce73cac42}</Project>
       <Name>Parse.BackEnd.Target.ARMv7</Name>
@@ -331,6 +329,10 @@
     <ProjectReference Include="..\..\..\Wpf.UI.Themes\Wpf.UI.Basic\Wpf.UI.Basic.csproj">
       <Project>{fd4818dc-866a-4eef-833c-895d65d0ecfb}</Project>
       <Name>Wpf.UI.Basic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ApplicationLayer.Views\ApplicationLayer.Views.csproj">
+      <Project>{b7a57007-09c3-464b-8772-ff308797c87f}</Project>
+      <Name>ApplicationLayer.Views</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
@@ -389,6 +391,7 @@
     <Resource Include="Resources\Images\Basic\not_exist_16.png" />
     <Resource Include="Resources\Images\Basic\not_exist_20.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>

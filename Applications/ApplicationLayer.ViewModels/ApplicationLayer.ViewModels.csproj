@@ -64,6 +64,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AlarmListViewModel.cs" />
+    <Compile Include="CommandArgs\SolutionExplorerKeyDownArgs.cs" />
     <Compile Include="DialogViewModels\DialogViewModel.cs" />
     <Compile Include="DialogViewModels\NewFileDialogViewModel.cs" />
     <Compile Include="DialogViewModels\NewItemViewModel.cs" />

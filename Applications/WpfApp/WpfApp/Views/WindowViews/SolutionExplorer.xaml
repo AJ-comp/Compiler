@@ -87,6 +87,13 @@
                 <i:EventTrigger EventName="MouseDoubleClick">
                     <mvvm:EventToCommand Command="{Binding MouseDoubleClickCommand}"/>
                 </i:EventTrigger>
+                <i:EventTrigger EventName="KeyDown">
+                    <mvvm:EventToCommand Command="{Binding KeyDownCommand}"
+                                                            PassEventArgsToCommand="True"
+                                                            EventArgsConverter="{localConverters:RenameHotKeyConverter}"
+                                                            EventArgsConverterParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, 
+                                                                                                                        AncestorType={x:Type local:SolutionExplorer}}}"/>
+                </i:EventTrigger>
             </i:Interaction.Triggers>
         </TreeView>
 

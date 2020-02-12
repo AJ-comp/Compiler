@@ -19,13 +19,4 @@ namespace ApplicationLayer.WpfApp.Converters
             return result;
         }
     }
-
-    class ItemRightClickConverter : EventArgsConverterExtension<ItemRightClickConverter>
-    {
-        public override object Convert(object value, object parameter)
-        {
-            //MouseButtonEventArgs
-            throw new System.NotImplementedException();
-        }
-    }
 }

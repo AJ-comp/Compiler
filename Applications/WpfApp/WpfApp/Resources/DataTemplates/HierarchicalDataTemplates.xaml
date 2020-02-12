@@ -2,8 +2,7 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
                     xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
-                    xmlns:lex="http://wpflocalizeextension.codeplex.com"
-                    xmlns:commands="clr-namespace:ApplicationLayer.WpfApp.Commands"
+                    xmlns:ap="clr-namespace:ApplicationLayer.WpfApp.AttachedProperties"
                     xmlns:localConverters="clr-namespace:ApplicationLayer.WpfApp.Converters"
                     xmlns:solutionPackage="clr-namespace:ApplicationLayer.Models.SolutionPackage;assembly=ApplicationLayer.Models"
                     xmlns:utilities="clr-namespace:ApplicationLayer.Common.Utilities;assembly=ApplicationLayer.Common">
@@ -129,45 +128,40 @@
     <Style x:Key="EditableTextBox" TargetType="{x:Type TextBox}">
         <Setter Property="Background" Value="White"/>
         <Setter Property="Foreground"  Value="Black"/>
-        <Setter Property="Height" Value="16"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="FontSize" Value="12"/>
     </Style>
 
 
     <DataTemplate DataType="{x:Type solutionPackage:DefaultFileHier}">
-        <DataTemplate.Resources>
-            <!-- Normal Mode -->
-            <DataTemplate x:Key="NormalTemplate">
-                <StackPanel Orientation="Horizontal">
-                    <Image Width="16" Height="16" Margin="0 0 5 0" Source="{DynamicResource ProjectImagePath}"/>
-                    <TextBlock Text="{Binding FullName}"/>
-                    <i:Interaction.Triggers>
-                        <i:EventTrigger EventName="PreviewMouseRightButtonDown">
-                            <ei:ChangePropertyAction PropertyName="IsSelected" Value="true" TargetObject="{Binding}"/>
-                        </i:EventTrigger>
-                    </i:Interaction.Triggers>
-                    <StackPanel.ContextMenu>
-                        <ContextMenu FontSize="11.5" ItemsSource="{DynamicResource FileMenuItems}"/>
-                    </StackPanel.ContextMenu>
-                </StackPanel>
-            </DataTemplate>
-            <!-- Editable Mode -->
-            <DataTemplate x:Key="EditableTemplate">
-                <StackPanel Orientation="Horizontal">
-                    <Image Width="16" Height="16" Margin="0 0 5 0" Source="{DynamicResource ProjectImagePath}"/>
-                    <TextBox Text="{Binding FullName}" Style="{StaticResource EditableTextBox}"/>
-                </StackPanel>
-            </DataTemplate>
-        </DataTemplate.Resources>
-        
-        <ContentPresenter Content="{Binding}">
-            <ContentPresenter.Style>
-                <Style TargetType="{x:Type ContentPresenter}">
-                    <Setter Property="ContentTemplate" Value="{StaticResource NormalTemplate}"/>
-                </Style>
-            </ContentPresenter.Style>
-        </ContentPresenter>
-        
+
+        <VirtualizingStackPanel Orientation="Horizontal">
+            <Image Width="16" Height="16" Margin="0 0 5 0" Source="{DynamicResource ProjectImagePath}"/>
+            <TextBlock x:Name="normalText" Text="{Binding FullName}"/>
+            <TextBox x:Name="editText" Visibility="Collapsed" 
+                            Text="{Binding FullName, Mode=OneTime, UpdateSourceTrigger=LostFocus}" 
+                            Style="{StaticResource EditableTextBox}"/>
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="PreviewMouseRightButtonDown">
+                    <ei:ChangePropertyAction PropertyName="IsSelected" Value="true" TargetObject="{Binding}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+            <VirtualizingStackPanel.ContextMenu>
+                <ContextMenu FontSize="11.5" ItemsSource="{DynamicResource FileMenuItems}"/>
+            </VirtualizingStackPanel.ContextMenu>
+        </VirtualizingStackPanel>
+
+        <DataTemplate.Triggers>
+            <DataTrigger Binding="{Binding IsEditMode}" Value="true">
+                <Setter TargetName="normalText" Property="Visibility" Value="Collapsed"/>
+                <Setter TargetName="editText" Property="Visibility" Value="Visible"/>
+            </DataTrigger>
+            <DataTrigger Binding="{Binding IsEditMode}" Value="false">
+                <Setter TargetName="normalText" Property="Visibility" Value="Visible"/>
+                <Setter TargetName="editText" Property="Visibility" Value="Collapsed"/>                
+            </DataTrigger>
+        </DataTemplate.Triggers>
+
     </DataTemplate>
 
 

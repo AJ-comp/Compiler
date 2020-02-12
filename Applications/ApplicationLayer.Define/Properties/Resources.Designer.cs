@@ -484,6 +484,15 @@ namespace ApplicationLayer.Define.Properties {
         }
         
         /// <summary>
+        ///   Rename과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string Rename {
+            get {
+                return ResourceManager.GetString("Rename", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Search과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string Search {

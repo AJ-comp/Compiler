@@ -10,7 +10,7 @@ using System.IO;
 using System.Windows.Forms;
 using WPFLocalizeExtension.Engine;
 
-using static ApplicationLayer.Define.Properties.Resources;
+using CommonResource = ApplicationLayer.Define.Properties.Resources;
 
 namespace ApplicationLayer.WpfApp.Commands
 {
@@ -21,7 +21,7 @@ namespace ApplicationLayer.WpfApp.Commands
         /// <summary>
         /// New Solution Command
         /// </summary>
-        public static readonly RelayUICommand CreateNewSolution = new RelayUICommand(Project,
+        public static readonly RelayUICommand CreateNewSolution = new RelayUICommand(CommonResource.Project,
             () =>
         {
             NewSolutionDialog dialog = new NewSolutionDialog();
@@ -39,7 +39,7 @@ namespace ApplicationLayer.WpfApp.Commands
         /// <summary>
         /// New Project Command
         /// </summary>
-        public static readonly RelayUICommand AddNewProject = new RelayUICommand(Project, 
+        public static readonly RelayUICommand AddNewProject = new RelayUICommand(CommonResource.Project, 
             () =>
         {
             NewProjectDialog dialog = new NewProjectDialog();
@@ -57,7 +57,7 @@ namespace ApplicationLayer.WpfApp.Commands
         /// <summary>
         /// New Item Command
         /// </summary>
-        public static readonly RelayUICommand<HierarchicalData> AddNewItem = new RelayUICommand<HierarchicalData>(NewItem,
+        public static readonly RelayUICommand<HierarchicalData> AddNewItem = new RelayUICommand<HierarchicalData>(CommonResource.NewItem,
             (hirStruct) =>
             {
                 NewItemDialog dialog = new NewItemDialog();
@@ -101,7 +101,7 @@ namespace ApplicationLayer.WpfApp.Commands
         /// <summary>
         /// Load Existing Item Command
         /// </summary>
-        public static readonly RelayUICommand<HierarchicalData> AddExistItem = new RelayUICommand<HierarchicalData>(ExistItem,
+        public static readonly RelayUICommand<HierarchicalData> AddExistItem = new RelayUICommand<HierarchicalData>(CommonResource.ExistItem,
             (hirStruct) =>
             {
                 OpenFileDialog dialog = new OpenFileDialog
@@ -118,7 +118,7 @@ namespace ApplicationLayer.WpfApp.Commands
                         string destPath = Path.Combine(hirStruct.BaseOPath, Path.GetFileName(fileName));
                         if (System.IO.File.Exists(destPath))
                         {
-                            DialogResult dResult = MessageBox.Show(AlreadyExistFile, string.Empty, MessageBoxButtons.YesNo);
+                            DialogResult dResult = MessageBox.Show(CommonResource.AlreadyExistFile, string.Empty, MessageBoxButtons.YesNo);
 
                             if (dResult == DialogResult.Yes) System.IO.File.Copy(fileName, destPath);
                             else return;
@@ -145,13 +145,13 @@ namespace ApplicationLayer.WpfApp.Commands
         /// <summary>
         /// Item delete command
         /// </summary>
-        public static readonly RelayUICommand<HierarchicalData> DelItem = new RelayUICommand<HierarchicalData>(Delete,
+        public static readonly RelayUICommand<HierarchicalData> DelItem = new RelayUICommand<HierarchicalData>(CommonResource.Delete,
             (selectedStruct) =>
             {
                 HierarchicalData parent = selectedStruct.Parent;
                 if (parent == null) return;
 
-                DialogResult dResult = MessageBox.Show(DeleteWarning, string.Empty, MessageBoxButtons.YesNo);
+                DialogResult dResult = MessageBox.Show(CommonResource.DeleteWarning, string.Empty, MessageBoxButtons.YesNo);
 
                 if (dResult == DialogResult.Yes)
                 {
@@ -159,7 +159,7 @@ namespace ApplicationLayer.WpfApp.Commands
                     {
                         if (selectedStruct is ProjectHier) Directory.Delete(selectedStruct.BaseOPath, true);
                         else if (selectedStruct is FolderHier) Directory.Delete(selectedStruct.FullPath, true);
-                        else System.IO.File.Delete(selectedStruct.FullPath);
+                        else File.Delete(selectedStruct.FullPath);
                     }
                     catch { }
                 }
@@ -202,7 +202,7 @@ namespace ApplicationLayer.WpfApp.Commands
         /// <summary>
         /// New Folder Command
         /// </summary>
-        public static readonly RelayUICommand<HierarchicalData> AddNewFolder = new RelayUICommand<HierarchicalData>(NewFolder,
+        public static readonly RelayUICommand<HierarchicalData> AddNewFolder = new RelayUICommand<HierarchicalData>(CommonResource.NewFolder,
             (selHier) =>
             {
                 string newFolderName = "New Folder";
@@ -251,7 +251,7 @@ namespace ApplicationLayer.WpfApp.Commands
         /// <summary>
         /// This command open folder from file explorer
         /// </summary>
-        public static readonly RelayUICommand<HierarchicalData> OpenFolder = new RelayUICommand<HierarchicalData>(OpenFolderFromExplorer,
+        public static readonly RelayUICommand<HierarchicalData> OpenFolder = new RelayUICommand<HierarchicalData>(CommonResource.OpenFolderFromExplorer,
             (hirStruct) =>
             {
                 // opens explorer, showing some other folder)
@@ -270,7 +270,7 @@ namespace ApplicationLayer.WpfApp.Commands
         /// <summary>
         /// This command open changes character set to Korean.
         /// </summary>
-        public static readonly RelayUICommand<HierarchicalData> ChangeToKorean = new RelayUICommand<HierarchicalData>(Korean,
+        public static readonly RelayUICommand<HierarchicalData> ChangeToKorean = new RelayUICommand<HierarchicalData>(CommonResource.Korean,
             (hirStruct) =>
             {
                 LocalizeDictionary.Instance.SetCurrentThreadCulture = true;
@@ -284,7 +284,7 @@ namespace ApplicationLayer.WpfApp.Commands
         /// <summary>
         /// This command open changes character set to English.
         /// </summary>
-        public static readonly RelayUICommand<HierarchicalData> ChangeToEnglish = new RelayUICommand<HierarchicalData>(English,
+        public static readonly RelayUICommand<HierarchicalData> ChangeToEnglish = new RelayUICommand<HierarchicalData>(CommonResource.English,
             (hirStruct) =>
             {
                 LocalizeDictionary.Instance.SetCurrentThreadCulture = true;
@@ -298,7 +298,7 @@ namespace ApplicationLayer.WpfApp.Commands
         /// <summary>
         /// This command open changes character set to Chinese.
         /// </summary>
-        public static readonly RelayUICommand<HierarchicalData> ChangeToChinese = new RelayUICommand<HierarchicalData>(Chinese,
+        public static readonly RelayUICommand<HierarchicalData> ChangeToChinese = new RelayUICommand<HierarchicalData>(CommonResource.Chinese,
             (hirStruct) =>
             {
                 LocalizeDictionary.Instance.SetCurrentThreadCulture = true;
@@ -312,7 +312,7 @@ namespace ApplicationLayer.WpfApp.Commands
         /// <summary>
         /// This command open changes character set to Japanese.
         /// </summary>
-        public static readonly RelayUICommand<HierarchicalData> ChangeToJapanese = new RelayUICommand<HierarchicalData>(Japanese,
+        public static readonly RelayUICommand<HierarchicalData> ChangeToJapanese = new RelayUICommand<HierarchicalData>(CommonResource.Japanese,
             (hirStruct) =>
             {
                 LocalizeDictionary.Instance.SetCurrentThreadCulture = true;

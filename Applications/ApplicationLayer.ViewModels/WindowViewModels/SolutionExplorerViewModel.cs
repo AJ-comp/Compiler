@@ -2,6 +2,7 @@
 using ApplicationLayer.Common.Interfaces;
 using ApplicationLayer.Models;
 using ApplicationLayer.Models.SolutionPackage;
+using ApplicationLayer.ViewModels.CommandArgs;
 using ApplicationLayer.ViewModels.Messages;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
@@ -9,7 +10,6 @@ using GalaSoft.MvvmLight.Messaging;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.IO;
-using System.Xml.Serialization;
 
 using CommonResource = ApplicationLayer.Define.Properties.Resources;
 
@@ -21,6 +21,8 @@ namespace WpfApp.ViewModels.WindowViewModels
         private IMessageBoxService messageBoxService;
 
         public ObservableCollection<SolutionHier> Solutions { get; } = new ObservableCollection<SolutionHier>();
+
+        public HierarchicalData SelectedItem { get; private set; }
 
         private RelayCommand<HierarchicalData> selectedCommand;
         public RelayCommand<HierarchicalData> SelectedCommand
@@ -35,6 +37,8 @@ namespace WpfApp.ViewModels.WindowViewModels
         }
         private void OnSelected(HierarchicalData selectedItem)
         {
+            this.SelectedItem = selectedItem;
+
             if(selectedItem is DefaultFileHier)
             {
                 Messenger.Default.Send(new OpenFileMessage(selectedItem as DefaultFileHier));
@@ -72,22 +76,47 @@ namespace WpfApp.ViewModels.WindowViewModels
         {
         }
 
-        private RelayCommand newFolderCommand;
-        public RelayCommand NewFolderCommand
+        private RelayCommand<HierarchicalData> newFolderCommand;
+        public RelayCommand<HierarchicalData> NewFolderCommand
         {
             get
             {
                 if (this.newFolderCommand == null)
-                    this.newFolderCommand = new RelayCommand(this.OnNewFolderMenuClick);
+                    this.newFolderCommand = new RelayCommand<HierarchicalData>(this.OnNewFolderMenuClick);
 
                 return this.newFolderCommand;
             }
         }
-        private void OnNewFolderMenuClick()
+        private void OnNewFolderMenuClick(HierarchicalData selectedItem)
         {
 
         }
 
+        private RelayCommand<SolutionExplorerKeyDownArgs> keydownCommand;
+        public RelayCommand<SolutionExplorerKeyDownArgs> KeyDownCommand
+        {
+            get
+            {
+                if (this.keydownCommand == null)
+                    this.keydownCommand = new RelayCommand<SolutionExplorerKeyDownArgs>(this.OnRename);
+
+                return this.keydownCommand;
+            }
+        }
+        private void OnRename(SolutionExplorerKeyDownArgs target)
+        {
+            if (target == null) return;
+
+            if (target.Key == SolutionExplorerKeyDownArgs.PressedKey.F2) target.Item.IsEditMode = true;
+            else if (target.Key == SolutionExplorerKeyDownArgs.PressedKey.Esc)
+            {
+                target.Item.IsEditMode = false;
+            }
+            else if (target.Key == SolutionExplorerKeyDownArgs.PressedKey.Enter)
+            {
+                target.Item.IsEditMode = false;
+            }
+        }
 
         public SolutionExplorerViewModel(IMessageBoxService messageBoxService)
         {

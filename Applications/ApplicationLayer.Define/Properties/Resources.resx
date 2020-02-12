@@ -262,4 +262,7 @@
   <data name="ParsingHistory" xml:space="preserve">
     <value>Parsing History</value>
   </data>
+  <data name="Rename" xml:space="preserve">
+    <value>Rename</value>
+  </data>
 </root>

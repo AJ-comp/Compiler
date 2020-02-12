@@ -282,4 +282,7 @@
   <data name="ParsingHistory" xml:space="preserve">
     <value>파싱 히스토리</value>
   </data>
+  <data name="Rename" xml:space="preserve">
+    <value>이름 바꾸기</value>
+  </data>
 </root>

@@ -63,7 +63,20 @@ namespace ApplicationLayer.Models.SolutionPackage
             set
             {
                 this.isSelected = value;
-                this.OnPropertyChanged("IsSelected");
+                this.OnPropertyChanged(nameof(IsSelected));
+            }
+        }
+
+
+        private bool isEditMode;
+        [XmlIgnore]
+        public bool IsEditMode
+        {
+            get => this.isEditMode;
+            set
+            {
+                this.isEditMode = value;
+                this.OnPropertyChanged(nameof(IsEditMode));
             }
         }
 
