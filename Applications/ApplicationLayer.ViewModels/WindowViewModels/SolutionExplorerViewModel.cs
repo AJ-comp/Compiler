@@ -115,6 +115,8 @@ namespace WpfApp.ViewModels.WindowViewModels
             else if (target.Key == SolutionExplorerKeyDownArgs.PressedKey.Enter)
             {
                 target.Item.IsEditMode = false;
+
+                target.Item.ChangeDisplayName();
             }
         }
 
@@ -204,11 +206,7 @@ namespace WpfApp.ViewModels.WindowViewModels
                 catch
                 {
                     bFiredError = true;
-                    ErrorProjectHier project = new ErrorProjectHier()
-                    {
-                        FullName = item.Path,
-                        CurOPath = Path.GetDirectoryName(item.Path)
-                    };
+                    ErrorProjectHier project = new ErrorProjectHier(Path.GetDirectoryName(item.Path), item.Path);
 
                     this.Solutions[0].Projects.Add(project);
                 }

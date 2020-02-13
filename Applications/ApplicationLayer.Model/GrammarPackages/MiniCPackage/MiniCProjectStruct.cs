@@ -2,9 +2,9 @@
 
 namespace ApplicationLayer.Models.GrammarPackages.MiniCPackage
 {
-    public class MiniCProjectStruct : DefaultProjectHier
-    {
-    }
+    //public class MiniCProjectStruct : DefaultProjectHier
+    //{
+    //}
 
 
 }

@@ -72,10 +72,12 @@ namespace ApplicationLayer.Models.SolutionPackage
             }
         }
 
-        public FolderHier()
+        public FolderHier(string curOpath) : base(curOpath, string.Empty)
         {
             this.Folders.CollectionChanged += Folders_CollectionChanged;
             this.Items.CollectionChanged += Items_CollectionChanged;
+
+            this.ToChangeDisplayName = this.DisplayName;
         }
 
         private void Folders_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
@@ -144,6 +146,8 @@ namespace ApplicationLayer.Models.SolutionPackage
             }
         }
 
+        public override string DisplayName => this.CurOPath;
+
         /// <summary>
         /// This function removes the child after find child type.
         /// </summary>
@@ -154,30 +158,9 @@ namespace ApplicationLayer.Models.SolutionPackage
             else if (child is DefaultFileHier) this.Items.Remove(child as DefaultFileHier);
         }
 
-        public static FolderHier GetFolderSet(string path)
-        {
-            FolderHier result = new FolderHier();
-            path = Path.GetDirectoryName(path);
-
-            FolderHier current = result;
-            while(true)
-            {
-                var root = Path.GetPathRoot(path);
-                if (root.Length == 0) break;
-
-                path = path.Substring(0, root.Length);
-                FolderHier child = new FolderHier() { CurOPath = root };
-                current.Folders.Add(child);
-
-                current = child;
-            }
-
-            return result;
-        }
-
         public static FolderHier GetFolderSet(string basePath, string dirPath, bool bGetLastHierRef = false)
         {
-            FolderHier result = new FolderHier();
+            FolderHier result = null;
 
             string accumDirectory = string.Empty;
             FolderHier current = result;
@@ -196,14 +179,14 @@ namespace ApplicationLayer.Models.SolutionPackage
 
                 if (bFirst)
                 {
-                    result = new FolderHier() { CurOPath = root };
+                    result = new FolderHier(root);
                     current = result;
 
                     bFirst = false;
                 }
                 else
                 {
-                    FolderHier child = new FolderHier() { CurOPath = root };
+                    FolderHier child = new FolderHier(root);
                     current.Folders.Add(child);
                     current = child;
 
@@ -247,7 +230,7 @@ namespace ApplicationLayer.Models.SolutionPackage
             var foundHier = FolderHier.FindEqualFolderHier(folderHiers, pathChain.Name);
             if (foundHier == null)
             {
-                var newFolderHier = new FolderHier() { CurOPath = pathChain.Name };
+                var newFolderHier = new FolderHier(pathChain.Name);
 
                 folderHiers.Add(newFolderHier);
                 FolderHier.AddPathChainToFolderHiers(newFolderHier.Folders, pathChain.Next);
@@ -260,5 +243,8 @@ namespace ApplicationLayer.Models.SolutionPackage
         {
             // nothing need do
         }
+
+        public override void ChangeDisplayName() => this.CurOPath = this.ToChangeDisplayName;
+        public override void CancelChangeDisplayName() => this.ToChangeDisplayName = this.CurOPath;
     }
 }

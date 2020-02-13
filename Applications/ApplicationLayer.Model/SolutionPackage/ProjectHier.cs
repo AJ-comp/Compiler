@@ -17,6 +17,26 @@ namespace ApplicationLayer.Models.SolutionPackage
 
         public abstract void Commit();
         public abstract void RollBack();
+
+        public override string DisplayName => this.NameWithoutExtension;
+
+        private ProjectHier() : base(string.Empty, string.Empty)
+        {
+        }
+
+        public ProjectHier(string curOpath, string fullName) : base(curOpath, fullName)
+        {
+            this.ToChangeDisplayName = this.DisplayName;
+        }
+
+        public override void ChangeDisplayName()
+        {
+            string extension = Path.GetExtension(this.FullName);
+
+            this.FullName = this.ToChangeDisplayName + "." + extension;
+        }
+
+        public override void CancelChangeDisplayName() => this.ToChangeDisplayName = this.NameWithoutExtension;
     }
 
 
@@ -100,9 +120,13 @@ namespace ApplicationLayer.Models.SolutionPackage
             }
         }
 
-        public DefaultProjectHier()
+        private DefaultProjectHier() : this(string.Empty, string.Empty)
         {
-            this.ReferenceFolder.Add(new ReferenceHier() { CurOPath = "C:\\Program Files (x86)\\AJ\\IDE\\Reference Assemblies", FullName = "Reference" });
+        }
+
+        public DefaultProjectHier(string curOpath, string fullName) : base(curOpath, fullName)
+        {
+            this.ReferenceFolder.Add(new ReferenceHier("C:\\Program Files (x86)\\AJ\\IDE\\Reference Assemblies", "Reference"));
 
             this.ReferenceFolder[0].Items.CollectionChanged += ReferenceItems_CollectionChanged;
             this.Folders.CollectionChanged += Folders_CollectionChanged;
@@ -192,7 +216,7 @@ namespace ApplicationLayer.Models.SolutionPackage
                 var directoryName = Path.GetDirectoryName(item);
                 var fileName = Path.GetFileName(item);
 
-                this.ReferenceFolder[0].Items.Add(new ReferenceFileStruct() { CurOPath = directoryName, FullName = fileName });
+                this.ReferenceFolder[0].Items.Add(new ReferenceFileStruct(directoryName, fileName));
             }
 
             this.Folders.Clear();
@@ -210,15 +234,15 @@ namespace ApplicationLayer.Models.SolutionPackage
 
                 if (string.IsNullOrEmpty(directoryName))
                 {
-                    if (File.Exists(Path.Combine(this.BaseOPath, fileName))) this.Items.Add(new DefaultFileHier() { FullName = fileName });
-                    else this.Items.Add(new ErrorFileHier() { FullName = fileName });
+                    if (File.Exists(Path.Combine(this.BaseOPath, fileName))) this.Items.Add(new DefaultFileHier(fileName));
+                    else this.Items.Add(new ErrorFileHier(fileName));
                 }
                 else
                 {
                     var pathChain = PathChain.CreateChainCheckItem(this.BaseOPath, directoryName);
                     FolderHier.AddPathChainToFolderHiers(this.Folders, pathChain);
                     FolderHier leafFolderHier = FolderHier.GetLeafFolderHier(this.Folders, pathChain);
-                    DefaultFileHier fileStruct = new DefaultFileHier() { Parent = leafFolderHier, FullName = fileName };
+                    DefaultFileHier fileStruct = new DefaultFileHier(fileName) { Parent = leafFolderHier };
 
                     if (File.Exists(fileStruct.FullPath)) leafFolderHier.Items.Add(fileStruct);
                 }
@@ -268,7 +292,7 @@ namespace ApplicationLayer.Models.SolutionPackage
 
         public static DefaultProjectHier Load(string curOpath, string fullName, string fullPath, HierarchicalData parent)
         {
-            DefaultProjectHier result = new DefaultProjectHier();
+            DefaultProjectHier result = new DefaultProjectHier(curOpath, fullName);
 
             using (StreamReader sr = new StreamReader(fullPath))
             {
@@ -276,6 +300,7 @@ namespace ApplicationLayer.Models.SolutionPackage
                 result = xs.Deserialize(sr) as DefaultProjectHier;
                 result.CurOPath = curOpath;
                 result.FullName = fullName;
+                result.ToChangeDisplayName = result.DisplayName;
                 result.Parent = parent;
 
                 result.RollBack();
@@ -288,7 +313,7 @@ namespace ApplicationLayer.Models.SolutionPackage
 
     public class ErrorProjectHier : ProjectHier
     {
-        public string DisplayName => NameWithoutExtension + string.Format(" ({0})", CommonResource.NotLoad);
+        public override string DisplayName => base.DisplayName + string.Format(" ({0})", CommonResource.NotLoad);
 
         public override bool IsChanged => false;
 
@@ -302,6 +327,15 @@ namespace ApplicationLayer.Models.SolutionPackage
 
         public override void Save()
         {
+        }
+
+        private ErrorProjectHier() : this(string.Empty, string.Empty)
+        {
+        }
+
+        public ErrorProjectHier(string curOpath, string fullName) : base(curOpath, fullName)
+        {
+            this.ToChangeDisplayName = this.DisplayName;
         }
     }
 }

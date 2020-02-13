@@ -54,11 +54,10 @@ namespace ApplicationLayer.Models
 
         public DefaultFileHier FileStruct(HierarchicalData parent)
         {
-            DefaultFileHier result = new DefaultFileHier()
+            DefaultFileHier result = new DefaultFileHier(ItemName)
             {
                 Parent = parent,
                 ImageSource = ImageSource,
-                FullName = ItemName
             };
 
             return result;

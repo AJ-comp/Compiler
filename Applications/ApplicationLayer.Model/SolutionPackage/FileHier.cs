@@ -9,6 +9,16 @@ namespace ApplicationLayer.Models.SolutionPackage
 
         public abstract void Commit();
         public abstract void RollBack();
+
+        public override string DisplayName { get => this.FullName; }
+
+        public FileHier(string fullName) : base(string.Empty, fullName)
+        {
+            ToChangeDisplayName = DisplayName;
+        }
+
+        public override void ChangeDisplayName() => this.FullName = this.ToChangeDisplayName;
+        public override void CancelChangeDisplayName() => this.ToChangeDisplayName = this.FullName;
     }
 
     public class ErrorFileHier : FileHier
@@ -26,11 +36,16 @@ namespace ApplicationLayer.Models.SolutionPackage
         public override void Save()
         {
         }
+
+        public ErrorFileHier(string fullName) : base(fullName)
+        {
+        }
     }
 
     public class DefaultFileHier : FileHier
     {
         private string originalData;
+
         public string Data { get; set; }
 
         public override bool IsChanged => (originalData != Data);
@@ -57,6 +72,10 @@ namespace ApplicationLayer.Models.SolutionPackage
         {
             Directory.CreateDirectory(Path.GetDirectoryName(this.FullPath));
             File.WriteAllText(this.FullPath, Data);
+        }
+
+        public DefaultFileHier(string fullName) : base(fullName)
+        {
         }
     }
 }

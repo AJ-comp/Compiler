@@ -13,16 +13,15 @@ namespace ApplicationLayer.Models.GrammarPackages.MiniCPackage
         {
             DefaultProjectHier result = this.CreateEmptyProject(projectPath, isAbsolutePath, projectName, target, parent);
 
-            result.ReferenceFolder[0].Items.Add(new ReferenceFileStruct() { CurOPath = "MiniC", FullName = "System.dll" });
-            result.ReferenceFolder[0].Items.Add(new ReferenceFileStruct() { CurOPath = "MiniC", FullName = "System.IO.dll" });
-            result.ReferenceFolder[0].Items.Add(new ReferenceFileStruct() { CurOPath = "MiniC", FullName = "System.Data.dll" });
+            result.ReferenceFolder[0].Items.Add(new ReferenceFileStruct("MiniC", "System.dll"));
+            result.ReferenceFolder[0].Items.Add(new ReferenceFileStruct("MiniC", "System.IO.dll"));
+            result.ReferenceFolder[0].Items.Add(new ReferenceFileStruct("MiniC", "System.Data.dll"));
 
             string fileName = string.Format("main.{0}", this.Extension);
             string fileData = "void main()\r\n{\r\n}";
 
-            var fileHier = new DefaultFileHier()
+            var fileHier = new DefaultFileHier(fileName)
             {
-                FullName = fileName,
                 Data = fileData
             };
             result.Items.Add(fileHier);
@@ -35,12 +34,9 @@ namespace ApplicationLayer.Models.GrammarPackages.MiniCPackage
 
         public override DefaultProjectHier CreateEmptyProject(string projectPath, bool isAbsolutePath, string projectName, Target target, HierarchicalData parent)
         {
-            DefaultProjectHier result = new DefaultProjectHier
+            DefaultProjectHier result = new DefaultProjectHier(projectPath, string.Format("{0}.{1}", projectName, this.Extension + "proj"))
             {
                 Parent = parent,
-
-                CurOPath = projectPath,
-                FullName = string.Format("{0}.{1}", projectName, this.Extension + "proj"),
                 CurrentVersion = 1.0
             };
 

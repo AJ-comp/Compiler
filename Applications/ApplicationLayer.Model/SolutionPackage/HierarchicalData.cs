@@ -11,8 +11,17 @@ namespace ApplicationLayer.Models.SolutionPackage
     {
         [XmlIgnore]
         public string CurOPath { get; set; } = string.Empty;
+        private string fullName = string.Empty;
         [XmlIgnore]
-        public string FullName { get; set; } = string.Empty;
+        public string FullName
+        {
+            get => this.fullName;
+            set
+            {
+                this.fullName = value;
+                this.OnPropertyChanged(nameof(FullName));
+            }
+        }
         [XmlIgnore]
         public string ImageSource { get; set; }
         [XmlIgnore]
@@ -63,6 +72,7 @@ namespace ApplicationLayer.Models.SolutionPackage
             set
             {
                 this.isSelected = value;
+                this.IsEditMode = false;
                 this.OnPropertyChanged(nameof(IsSelected));
             }
         }
@@ -100,6 +110,10 @@ namespace ApplicationLayer.Models.SolutionPackage
             }
         }
 
+        public abstract string DisplayName { get; }
+        [XmlIgnore]
+        public string ToChangeDisplayName { get; set; }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected void OnPropertyChanged(string name)
@@ -111,7 +125,15 @@ namespace ApplicationLayer.Models.SolutionPackage
             }
         }
 
+        public HierarchicalData(string curOpath, string fullName)
+        {
+            CurOPath = curOpath;
+            FullName = fullName;
+        }
+
         public abstract void Save();
+        public abstract void ChangeDisplayName();
+        public abstract void CancelChangeDisplayName();
 
         public override bool Equals(object obj)
         {

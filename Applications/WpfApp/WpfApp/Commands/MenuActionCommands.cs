@@ -126,10 +126,9 @@ namespace ApplicationLayer.WpfApp.Commands
                         else System.IO.File.Copy(fileName, destPath);
                     }
 
-                    var fileStruct = new DefaultFileHier()
+                    var fileStruct = new DefaultFileHier(Path.GetFileName(fileName))
                     {
-                        FullName = Path.GetFileName(fileName),
-                        Data = System.IO.File.ReadAllText(fileName)
+                        Data = File.ReadAllText(fileName)
                     };
 
                     if (hirStruct is DefaultProjectHier) (hirStruct as DefaultProjectHier).Items.Add(fileStruct);
@@ -223,7 +222,7 @@ namespace ApplicationLayer.WpfApp.Commands
                 if (selHier is DefaultProjectHier)
                 {
                     var projectHier = selHier as DefaultProjectHier;
-                    projectHier.Folders.Add(new FolderHier() { CurOPath = newFolderName });
+                    projectHier.Folders.Add(new FolderHier(newFolderName));
 
                     if (projectHier.IsChanged) Messenger.Default.Send<AddChangedFileMessage>(new AddChangedFileMessage(projectHier));
                     else Messenger.Default.Send<RemoveChangedFileMessage>(new RemoveChangedFileMessage(projectHier));
@@ -233,7 +232,7 @@ namespace ApplicationLayer.WpfApp.Commands
                     var folderHier = selHier as FolderHier;
                     var projectHier = folderHier.ProjectTypeParent;
 
-                    folderHier.Folders.Add(new FolderHier() { CurOPath = newFolderName });
+                    folderHier.Folders.Add(new FolderHier(newFolderName));
 
                     if (projectHier is null) return;
 

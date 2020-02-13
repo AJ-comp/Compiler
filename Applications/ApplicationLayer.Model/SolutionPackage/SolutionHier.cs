@@ -1,6 +1,7 @@
 ﻿using ApplicationLayer.Common.Interfaces;
 using Parse.BackEnd.Target;
 using Parse.FrontEnd.Grammars;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
@@ -44,9 +45,18 @@ namespace ApplicationLayer.Models.SolutionPackage
             }
         }
 
-        public SolutionHier()
+        public override string DisplayName { get => NameWithoutExtension; }
+
+        private SolutionHier() : base(string.Empty, string.Empty)
         {
             this.Projects.CollectionChanged += Projects_CollectionChanged;
+        }
+
+        public SolutionHier(string curOpath, string fullName) : base(curOpath, fullName)
+        {
+            this.Projects.CollectionChanged += Projects_CollectionChanged;
+
+            this.ToChangeDisplayName = this.DisplayName;
         }
 
         private void Projects_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
@@ -78,11 +88,8 @@ namespace ApplicationLayer.Models.SolutionPackage
 
         public static SolutionHier Create(string solutionPath, string solutionName, Grammar grammar, Target target)
         {
-            SolutionHier result = new SolutionHier();
+            SolutionHier result = new SolutionHier(solutionPath, solutionName);
             string solutionNameWithExtension = Path.GetFileNameWithoutExtension(solutionName);
-
-            result.CurOPath = solutionPath;
-            result.FullName = solutionName;
             result.CurrentVersion = 1.0;
 
             ProjectGenerator projectGenerator = ProjectGenerator.CreateProjectGenerator(grammar);
@@ -117,9 +124,19 @@ namespace ApplicationLayer.Models.SolutionPackage
             }
         }
 
+        public override void ChangeDisplayName()
+        {
+            string extension = Path.GetExtension(this.FullName);
+
+            this.FullName = this.ToChangeDisplayName + "." + extension;
+        }
+
+        public override void CancelChangeDisplayName() => this.ToChangeDisplayName = this.NameWithoutExtension;
+
+
         public static SolutionHier Load(string curOpath, string fullName, string fullPath)
         {
-            SolutionHier result = new SolutionHier();
+            SolutionHier result = new SolutionHier(curOpath, fullName);
 
             using (StreamReader sr = new StreamReader(fullPath))
             {
@@ -127,6 +144,7 @@ namespace ApplicationLayer.Models.SolutionPackage
                 result = xs.Deserialize(sr) as SolutionHier;
                 result.CurOPath = curOpath;
                 result.FullName = fullName;
+                result.ToChangeDisplayName = result.DisplayName;
 
                 result.RollBack();
             }
