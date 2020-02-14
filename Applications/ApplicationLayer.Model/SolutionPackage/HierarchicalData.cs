@@ -3,7 +3,10 @@ using ApplicationLayer.Common.Interfaces;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
+using System.Text.RegularExpressions;
 using System.Xml.Serialization;
+
+using CommonResource = ApplicationLayer.Define.Properties.Resources;
 
 namespace ApplicationLayer.Models.SolutionPackage
 {
@@ -111,8 +114,17 @@ namespace ApplicationLayer.Models.SolutionPackage
         }
 
         public abstract string DisplayName { get; }
+        private string toChangeDisplayName = string.Empty;
         [XmlIgnore]
-        public string ToChangeDisplayName { get; set; }
+        public string ToChangeDisplayName
+        {
+            get => this.toChangeDisplayName;
+            set
+            {
+                this.toChangeDisplayName = value;
+                this.OnPropertyChanged(nameof(ToChangeDisplayName));
+            }
+        }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -134,6 +146,17 @@ namespace ApplicationLayer.Models.SolutionPackage
         public abstract void Save();
         public abstract void ChangeDisplayName();
         public abstract void CancelChangeDisplayName();
+        public virtual ExceptionData IsValidToChange()
+        {
+            ExceptionData result = null;
+
+            if (this.ToChangeDisplayName == string.Empty)
+                result = new ExceptionData(ExceptionKind.Error, CommonResource.MustInputName);
+            else if (Regex.IsMatch("[A-Za-z0-9_-]*\\.*[A-Za-z0-9]{3,4}", this.toChangeDisplayName))
+                result = new ExceptionData(ExceptionKind.Error, CommonResource.MustInputName);
+
+            return result;
+        }
 
         public override bool Equals(object obj)
         {

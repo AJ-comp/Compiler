@@ -270,6 +270,7 @@ namespace ApplicationLayer.WpfApp.ViewModels
             Messenger.Default.Register<CreateSolutionMessage>(solutionExplorer, solutionExplorer.ReceivedCreateSolutionMessage);
             Messenger.Default.Register<LoadSolutionMessage>(solutionExplorer, solutionExplorer.ReceivedLoadSolutionMessage);
             Messenger.Default.Register<AddProjectMessage>(solutionExplorer, solutionExplorer.ReceivedAddNewProjectMessage);
+            Messenger.Default.Register<AddMissedChangedFiles>(solutionExplorer, solutionExplorer.ReceiveAddMissedChangedFilesMessage);
         }
 
         private void InitQuestionToSaveDialog()

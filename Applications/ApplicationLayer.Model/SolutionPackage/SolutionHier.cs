@@ -1,8 +1,6 @@
 ﻿using ApplicationLayer.Common.Interfaces;
 using Parse.BackEnd.Target;
 using Parse.FrontEnd.Grammars;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.IO;
@@ -47,10 +45,8 @@ namespace ApplicationLayer.Models.SolutionPackage
 
         public override string DisplayName { get => NameWithoutExtension; }
 
-        private SolutionHier() : base(string.Empty, string.Empty)
-        {
-            this.Projects.CollectionChanged += Projects_CollectionChanged;
-        }
+        private SolutionHier() : this(string.Empty, string.Empty)
+        { }
 
         public SolutionHier(string curOpath, string fullName) : base(curOpath, fullName)
         {
@@ -101,10 +97,7 @@ namespace ApplicationLayer.Models.SolutionPackage
             return result;
         }
 
-        public void RollBack()
-        {
-            CurrentVersion = OriginalVersion;
-        }
+        public void RollBack() => CurrentVersion = OriginalVersion;
 
         public void Commit()
         {
@@ -151,34 +144,5 @@ namespace ApplicationLayer.Models.SolutionPackage
 
             return result;
         }
-    }
-
-
-    public class PathInfo
-    {
-        public string Path { get; set; }
-        public bool IsAbsolute { get; set; }
-
-        public PathInfo() { }
-
-        public PathInfo(string path, bool isAbsolute)
-        {
-            Path = path;
-            IsAbsolute = isAbsolute;
-        }
-
-        public override bool Equals(object obj)
-        {
-            var info = obj as PathInfo;
-            return info != null &&
-                   Path == info.Path;
-        }
-
-        public override int GetHashCode()
-        {
-            return 467214278 + EqualityComparer<string>.Default.GetHashCode(Path);
-        }
-
-        public override string ToString() => string.Format("[{0},{1}]", this.Path, this.IsAbsolute);
     }
 }

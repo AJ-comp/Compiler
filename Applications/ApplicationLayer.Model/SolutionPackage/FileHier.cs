@@ -17,7 +17,13 @@ namespace ApplicationLayer.Models.SolutionPackage
             ToChangeDisplayName = DisplayName;
         }
 
-        public override void ChangeDisplayName() => this.FullName = this.ToChangeDisplayName;
+        public override void ChangeDisplayName()
+        {
+            string destFullPath = Path.Combine(this.BaseOPath, this.ToChangeDisplayName);
+            File.Move(this.FullPath, destFullPath);
+
+            this.FullName = this.ToChangeDisplayName;
+        }
         public override void CancelChangeDisplayName() => this.ToChangeDisplayName = this.FullName;
     }
 

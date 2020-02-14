@@ -10,10 +10,7 @@ namespace ApplicationLayer.ViewModels.Messages
     {
         public DefaultFileHier SelectedFile { get; }
 
-        public OpenFileMessage(DefaultFileHier selectedFile)
-        {
-            this.SelectedFile = selectedFile;
-        }
+        public OpenFileMessage(DefaultFileHier selectedFile) => this.SelectedFile = selectedFile;
     }
 
     /// <summary>
@@ -24,13 +21,9 @@ namespace ApplicationLayer.ViewModels.Messages
         public ISaveAndChangeTrackable Item { get; }
 
         public AddChangedFileMessage()
-        {
-        }
+        { }
 
-        public AddChangedFileMessage(ISaveAndChangeTrackable item)
-        {
-            this.Item = item;
-        }
+        public AddChangedFileMessage(ISaveAndChangeTrackable item) => this.Item = item;
     }
 
     public class RemoveChangedFileMessage : MessageBase
@@ -38,19 +31,14 @@ namespace ApplicationLayer.ViewModels.Messages
         public ISaveAndChangeTrackable Item { get; }
 
         public RemoveChangedFileMessage()
-        {
-        }
+        { }
 
-        public RemoveChangedFileMessage(ISaveAndChangeTrackable item)
-        {
-            Item = item;
-        }
+        public RemoveChangedFileMessage(ISaveAndChangeTrackable item) => Item = item;
     }
 
     public class GetChangedListMessage : NotificationMessageAction<Collection<ISaveAndChangeTrackable>>
     {
         public GetChangedListMessage(string notification, Action<Collection<ISaveAndChangeTrackable>> callback) : base(notification, callback)
-        {
-        }
+        { }
     }
 }

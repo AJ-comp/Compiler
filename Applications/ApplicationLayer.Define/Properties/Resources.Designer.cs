@@ -331,6 +331,15 @@ namespace ApplicationLayer.Define.Properties {
         }
         
         /// <summary>
+        ///   You have to input a name과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string MustInputName {
+            get {
+                return ResourceManager.GetString("MustInputName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Name과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string Name {

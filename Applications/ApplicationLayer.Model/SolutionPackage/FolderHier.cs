@@ -6,6 +6,8 @@ using System.IO;
 using System.Windows.Data;
 using System.Xml.Serialization;
 
+using CommonResource = ApplicationLayer.Define.Properties.Resources;
+
 namespace ApplicationLayer.Models.SolutionPackage
 {
     [XmlInclude(typeof(FolderHier))]

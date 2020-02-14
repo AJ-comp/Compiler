@@ -1,5 +1,4 @@
 ﻿using ApplicationLayer.Common.Interfaces;
-using ApplicationLayer.Models;
 using ApplicationLayer.ViewModels.Messages;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;

@@ -47,11 +47,13 @@
     <Compile Include="AlarmData.cs" />
     <Compile Include="ChangedFileList.cs" />
     <Compile Include="Document.cs" />
+    <Compile Include="ExceptionData.cs" />
     <Compile Include="GrammarPackages\IGrammarFactory.cs" />
     <Compile Include="GrammarPackages\MiniCPackage\MiniCFactory.cs" />
     <Compile Include="IMessageBoxService.cs" />
     <Compile Include="Invokers\Invoker.cs" />
     <Compile Include="PathChain.cs" />
+    <Compile Include="PathInfo.cs" />
     <Compile Include="ProjectData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SolutionPackage\FileHier.cs" />

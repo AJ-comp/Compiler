@@ -121,8 +121,7 @@ namespace ApplicationLayer.Models.SolutionPackage
         }
 
         private DefaultProjectHier() : this(string.Empty, string.Empty)
-        {
-        }
+        { }
 
         public DefaultProjectHier(string curOpath, string fullName) : base(curOpath, fullName)
         {
@@ -174,22 +173,6 @@ namespace ApplicationLayer.Models.SolutionPackage
 
         private void SubItems_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
-        }
-
-        private string FindExistPathFromItemPaths(HierarchicalData findTarget)
-        {
-            string result = string.Empty;
-
-            if(findTarget.IsAbsolutePath)
-            {
-//                if(findTarget.FullPath)
-            }
-            else
-            {
-
-            }
-
-            return result;
         }
 
         /// <summary>

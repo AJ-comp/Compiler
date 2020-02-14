@@ -7,6 +7,7 @@ using ApplicationLayer.ViewModels.Messages;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
+using System;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.IO;
@@ -111,12 +112,21 @@ namespace WpfApp.ViewModels.WindowViewModels
             else if (target.Key == SolutionExplorerKeyDownArgs.PressedKey.Esc)
             {
                 target.Item.IsEditMode = false;
+
+                target.Item.CancelChangeDisplayName();
             }
             else if (target.Key == SolutionExplorerKeyDownArgs.PressedKey.Enter)
             {
-                target.Item.IsEditMode = false;
-
-                target.Item.ChangeDisplayName();
+                ExceptionData exceptData = target.Item.IsValidToChange();
+                if(exceptData == null)
+                {
+                    target.Item.IsEditMode = false;
+                    target.Item.ChangeDisplayName();
+                }
+                else if(exceptData.Kind == ExceptionKind.Error)
+                    messageBoxService.ShowError(exceptData.Message, string.Empty);
+                else if(exceptData.Kind == ExceptionKind.Warning)
+                    messageBoxService.ShowWarning(exceptData.Message, string.Empty);
             }
         }
 
@@ -134,7 +144,7 @@ namespace WpfApp.ViewModels.WindowViewModels
             {
                 SolutionHier child = e.NewItems[i] as SolutionHier;
 
-                if (System.IO.File.Exists(child.FullPath)) continue;
+                if (File.Exists(child.FullPath)) continue;
 
                 Directory.CreateDirectory(child.CurOPath);
             }
@@ -216,12 +226,14 @@ namespace WpfApp.ViewModels.WindowViewModels
         }
 
         /// <summary>
-        /// Message handler for LoadSolutionMessage
+        /// This message handler loads the Solution.
         /// </summary>
-        /// <param name="message"></param>
+        /// <param name="message">Information about the solution to load</param>
         public void ReceivedLoadSolutionMessage(LoadSolutionMessage message)
         {
             saveMessage = null;
+            Messenger.Default.Send<AddMissedChangedFiles>(new AddMissedChangedFiles());
+
             var process = new GetChangedListMessage(string.Empty, PreprocessChangedFileList);
             Messenger.Default.Send<GetChangedListMessage>(process);
 
@@ -234,7 +246,7 @@ namespace WpfApp.ViewModels.WindowViewModels
         /// <summary>
         /// This message handler addes new project to the solution.
         /// </summary>
-        /// <param name="message"></param>
+        /// <param name="message">Information about the project to add</param>
         public void ReceivedAddNewProjectMessage(AddProjectMessage message)
         {
             if (message is null) return;
@@ -264,6 +276,25 @@ namespace WpfApp.ViewModels.WindowViewModels
             //var changedFileListMessage = new ChangedFileListMessage();
             //changedFileListMessage.AddFile(changedData);
             //Messenger.Default.Send<ChangedFileListMessage>(changedFileListMessage);
+        }
+
+        /// <summary>
+        /// This message handler addes a changed files that missed.
+        /// </summary>
+        /// <param name="message">not use (to match the shape)</param>
+        public void ReceiveAddMissedChangedFilesMessage(AddMissedChangedFiles message)
+        {
+            if (message == null) return;
+            if (this.Solutions.Count == 0) return;
+
+            if (this.Solutions[0].IsChanged) Messenger.Default.Send<AddChangedFileMessage>(new AddChangedFileMessage(this.Solutions[0]));
+            else Messenger.Default.Send<RemoveChangedFileMessage>(new RemoveChangedFileMessage(this.Solutions[0]));
+
+            foreach(var project in this.Solutions[0].Projects)
+            {
+                if (project.IsChanged) Messenger.Default.Send<AddChangedFileMessage>(new AddChangedFileMessage(project));
+                else Messenger.Default.Send<RemoveChangedFileMessage>(new RemoveChangedFileMessage(project));
+            }
         }
     }
 }
