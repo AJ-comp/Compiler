@@ -12,8 +12,18 @@ namespace ApplicationLayer.Models.SolutionPackage
 {
     public abstract class HierarchicalData : INotifyPropertyChanged, ISaveable
     {
+        private string curOpath = string.Empty;
         [XmlIgnore]
-        public string CurOPath { get; set; } = string.Empty;
+        public string CurOPath
+        {
+            get => this.curOpath;
+            set
+            {
+                this.curOpath = value;
+                this.OnPropertyChanged(nameof(CurOPath));
+                this.OnPropertyChanged(nameof(DisplayName));
+            }
+        }
         private string fullName = string.Empty;
         [XmlIgnore]
         public string FullName
@@ -23,6 +33,7 @@ namespace ApplicationLayer.Models.SolutionPackage
             {
                 this.fullName = value;
                 this.OnPropertyChanged(nameof(FullName));
+                this.OnPropertyChanged(nameof(DisplayName));
             }
         }
         [XmlIgnore]

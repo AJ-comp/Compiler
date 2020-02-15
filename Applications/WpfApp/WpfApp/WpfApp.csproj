@@ -36,6 +36,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ActiproSoftware.Docking.Wpf, Version=18.1.675.0, Culture=neutral, PublicKeyToken=36ff2196ab5654b9, processorArchitecture=MSIL" />
+    <Reference Include="ActiproSoftware.Shared.Wpf, Version=18.1.675.0, Culture=neutral, PublicKeyToken=36ff2196ab5654b9, processorArchitecture=MSIL" />
     <Reference Include="CommonServiceLocator, Version=2.0.5.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\CommonServiceLocator.2.0.5\lib\net47\CommonServiceLocator.dll</HintPath>
     </Reference>
@@ -278,6 +280,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Wpf.UI.Themes\Wpf.UI.Basic\Wpf.UI.Basic.csproj">
+      <Project>{fd4818dc-866a-4eef-833c-895d65d0ecfb}</Project>
+      <Name>Wpf.UI.Basic</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\ApplicationLayer.Common\ApplicationLayer.Common.csproj">
       <Project>{9b7ebe4d-c2b3-40e8-9516-107340a07111}</Project>
       <Name>ApplicationLayer.Common</Name>
@@ -325,10 +331,6 @@
     <ProjectReference Include="..\..\..\Wpf.UI.Themes\Wpf.UI.Advance\Wpf.UI.Advance.csproj">
       <Project>{3b5b2207-4e4d-4cff-a8c5-3c0d75d4bb93}</Project>
       <Name>Wpf.UI.Advance</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\Wpf.UI.Themes\Wpf.UI.Basic\Wpf.UI.Basic.csproj">
-      <Project>{fd4818dc-866a-4eef-833c-895d65d0ecfb}</Project>
-      <Name>Wpf.UI.Basic</Name>
     </ProjectReference>
     <ProjectReference Include="..\ApplicationLayer.Views\ApplicationLayer.Views.csproj">
       <Project>{b7a57007-09c3-464b-8772-ff308797c87f}</Project>

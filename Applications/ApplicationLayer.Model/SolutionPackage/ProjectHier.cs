@@ -33,7 +33,10 @@ namespace ApplicationLayer.Models.SolutionPackage
         {
             string extension = Path.GetExtension(this.FullName);
 
-            this.FullName = this.ToChangeDisplayName + "." + extension;
+            string destFullPath = Path.Combine(this.BaseOPath, this.ToChangeDisplayName + extension);
+            File.Move(this.FullPath, destFullPath);
+
+            this.FullName = this.ToChangeDisplayName + extension;
         }
 
         public override void CancelChangeDisplayName() => this.ToChangeDisplayName = this.NameWithoutExtension;
@@ -207,6 +210,8 @@ namespace ApplicationLayer.Models.SolutionPackage
             foreach (var item in this.HasNotItemPaths)
             {
                 var pathChain = PathChain.CreateChainCheckItem(this.BaseOPath, item);
+                if (pathChain == null) continue;
+
                 FolderHier.AddPathChainToFolderHiers(this.Folders, pathChain);
             }
 

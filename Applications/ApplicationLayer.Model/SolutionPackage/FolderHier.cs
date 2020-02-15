@@ -246,7 +246,15 @@ namespace ApplicationLayer.Models.SolutionPackage
             // nothing need do
         }
 
-        public override void ChangeDisplayName() => this.CurOPath = this.ToChangeDisplayName;
+        public override void ChangeDisplayName()
+        {
+            string curFolderPath = this.BaseOPath;
+
+            this.CurOPath = this.ToChangeDisplayName;
+            string toChangefolderPath = this.BaseOPath;
+
+            Directory.Move(curFolderPath, toChangefolderPath);
+        }
         public override void CancelChangeDisplayName() => this.ToChangeDisplayName = this.CurOPath;
     }
 }

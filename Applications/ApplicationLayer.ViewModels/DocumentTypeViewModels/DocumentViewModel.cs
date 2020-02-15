@@ -9,7 +9,7 @@ namespace ApplicationLayer.ViewModels.DocumentTypeViewModels
         public event EventHandler CloseRequest;
         public event EventHandler AllCloseExceptThisRequest;
 
-        public string Title { get; }
+        public string Title { get; set; }
         public string ToolTipText { get; }
 
         private RelayCommand closeCommand;

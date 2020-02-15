@@ -62,7 +62,7 @@ namespace ApplicationLayer.Models
 
         public static PathChain CreateChainCheckItem(string baseOpath, string dirPath)
         {
-            PathChain result = new PathChain();
+            PathChain result = null;
 
             string accumDirectory = string.Empty;
             PathChain current = result;

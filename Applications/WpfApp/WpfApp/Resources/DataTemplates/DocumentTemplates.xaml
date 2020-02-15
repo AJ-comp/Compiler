@@ -2,11 +2,29 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
                     xmlns:lex="http://wpflocalizeextension.codeplex.com"
+                    xmlns:docking="http://schemas.actiprosoftware.com/winfx/xaml/docking"
                     xmlns:syntaxEditor="clr-namespace:Parse.WpfControls.SyntaxEditor;assembly=Parse.WpfControls.SyntaxEditor"
                     xmlns:localConverters="clr-namespace:ApplicationLayer.WpfApp.Converters"
                     xmlns:localBehaviors="clr-namespace:ApplicationLayer.WpfApp.Behaviors"
                     xmlns:documentViewModels="clr-namespace:ApplicationLayer.ViewModels.DocumentTypeViewModels;assembly=ApplicationLayer.ViewModels"
                     xmlns:utilities="clr-namespace:Parse.WpfControls.Utilities;assembly=Parse.WpfControls">
+
+    <Style x:Key="DockingWindowStyle" TargetType="docking:DockingWindow">
+        <Setter Property="Description" Value="{Binding Path=Description, Mode=TwoWay}" />
+        <Setter Property="ImageSource" Value="{Binding Path=ImageSource, Mode=TwoWay}" />
+        <Setter Property="IsActive" Value="True" />
+        <Setter Property="IsFloating" Value="{Binding Path=IsFloating, Mode=TwoWay}" />
+        <Setter Property="IsOpen" Value="{Binding Path=IsOpen, Mode=TwoWay}" />
+        <Setter Property="IsSelected" Value="{Binding Path=IsSelected, Mode=TwoWay}" />
+        <Setter Property="SerializationId" Value="{Binding Path=SerializationId, Mode=TwoWay}" />
+        <Setter Property="Title" Value="{Binding Path=Title, Mode=TwoWay}" />
+        <Setter Property="WindowGroupName" Value="{Binding Path=WindowGroupName, Mode=TwoWay}" />
+    </Style>
+
+    <Style x:Key="DocumentWindowStyle" TargetType="docking:DocumentWindow" BasedOn="{StaticResource DockingWindowStyle}">
+        <Setter Property="FileName" Value="{Binding Path=FileName, Mode=TwoWay}" />
+        <Setter Property="IsReadOnly" Value="{Binding Path=IsReadOnly, Mode=TwoWay}" />
+    </Style>
 
     <DataTemplate DataType="{x:Type documentViewModels:EditorTypeViewModel}">
         <syntaxEditor:SyntaxEditor FontSize="15" FontFamily="Arial"
@@ -91,32 +109,10 @@
 
 
     <DataTemplate x:Key="DocumentTemplate">
-        <TabControl
-                            ItemsSource="{Binding}"
+        <TabControl ItemsSource="{Binding}"
                             ItemTemplate="{StaticResource DocumentItemTemplate}"
                             SelectedIndex="{Binding SelectedDocumentIndex}"
                             SelectedItem="{Binding SelectedDocument}"/>
-        
-        <!--<TabControl>
-            <TabItem Header="test 1">
-                <syntaxEditor:SyntaxEditor FontSize="15" FontFamily="Arial"
-                                                FileName="{Binding Title}"
-                                                IsLineNumberingVisible="True"  LineNumberForeColor="DarkGreen"
-                                                KeywordForeground="LightBlue"
-                                                LineCommentForeground="ForestGreen"/>
-            </TabItem>
-            <TabItem Header="test 2">
-                <syntaxEditor:SyntaxEditor FontSize="15" FontFamily="Arial"
-                                                FileName="{Binding Title}"
-                                                IsLineNumberingVisible="True"  LineNumberForeColor="DarkGreen"
-                                                KeywordForeground="LightBlue"
-                                                LineCommentForeground="ForestGreen"/>
-            </TabItem>
-            <TabItem Header="test 3">
-                <documentViewModels:EditorTypeViewModel/>
-            </TabItem>
-        </TabControl>-->
-
 
     </DataTemplate>
 

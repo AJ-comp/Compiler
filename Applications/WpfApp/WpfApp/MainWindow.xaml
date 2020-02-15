@@ -1,4 +1,4 @@
-﻿<advanceControls:AdvancedWindow
+﻿<Window xmlns:eo="http://schemas.essentialobjects.com/wpf/" 
         x:Class="ApplicationLayer.WpfApp.MainWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
@@ -11,69 +11,83 @@
     xmlns:commands="clr-namespace:ApplicationLayer.WpfApp.Commands"
     xmlns:windowViews="clr-namespace:ApplicationLayer.WpfApp.Views.WindowViews"
     xmlns:lex="http://wpflocalizeextension.codeplex.com" 
-    lex:LocalizeDictionary.DesignCulture="en"
+    xmlns:themes="http://schemas.actiprosoftware.com/winfx/xaml/themes"
+    xmlns:docking="http://schemas.actiprosoftware.com/winfx/xaml/docking"
+        lex:LocalizeDictionary.DesignCulture="en"
       lex:ResxLocalizationProvider.DefaultAssembly="WpfApp"
       lex:ResxLocalizationProvider.DefaultDictionary="Resources"
     mc:Ignorable="d"
-    Icon="{StaticResource logo24ImagePath}"
         Title="MainWindow" Height="800" Width="1200"
         WindowStartupLocation="CenterScreen"
         BorderThickness="1"
         ResizeMode="CanResizeWithGrip"
-    TitleBarFontSize="12"
-        Style="{DynamicResource AdvancedWindow}"
-    DataContext="{Binding Main, Source={StaticResource Locator}}">
+        Background="{DynamicResource CommonEnableBackgroundBrush}"
+        DataContext="{Binding Main, Source={StaticResource Locator}}">
 
-    <advanceControls:AdvancedWindow.Resources>
+    <themes:WindowChrome.Chrome>
+        <themes:WindowChrome IconMargin="10 1 10 1" IconSource="{StaticResource logo24ImagePath}"/>
+    </themes:WindowChrome.Chrome>
+
+    <Window.Resources>
         <ResourceDictionary>
+            <DataTemplate x:Key="DocItemTemplate">
+                <TextBlock Text="Yippee!" />
+            </DataTemplate>
+
             <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Resources/DataTemplates/DocumentTemplates.xaml"/>
                 <ResourceDictionary Source="Resources/Menus/MainWindowMenus.xaml"/>
                 <ResourceDictionary Source="Resources/Menus/MainWindowStatusBar.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
-    </advanceControls:AdvancedWindow.Resources>
+    </Window.Resources>
 
-    <advanceControls:AdvancedWindow.InputBindings>
+    <Window.InputBindings>
         <KeyBinding Key="N" Modifiers="Ctrl+Shift" Command="{x:Static commands:MenuActionCommands.CreateNewSolution}"/>
-    </advanceControls:AdvancedWindow.InputBindings>
+    </Window.InputBindings>
 
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="30"/>
-            <RowDefinition Height="4*"/>
-            <RowDefinition Height="5"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="20"/>
+            <RowDefinition Height="25"/>
         </Grid.RowDefinitions>
 
-        <ContentControl Grid.Row="0" Content="{StaticResource MainWindowMenus}"/>
+        <ContentControl Grid.Row="0" Content="{StaticResource MainWindowMenus}" />
 
-        <Grid Grid.Row="1">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="4*"/>
-                <ColumnDefinition Width="5"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
+        <docking:DockSite Grid.Row="1" 
+                          DocumentItemsSource="{Binding Documents}"
+                          DocumentItemContainerStyle="{StaticResource DocumentWindowStyle}">
 
-            <ContentControl Grid.Column="0" Content="{Binding Documents}" 
-                                ContentTemplate="{StaticResource DocumentTemplate}"/>
+            <docking:SplitContainer Orientation="Vertical">
+                <docking:SplitContainer>
+                    <docking:Workspace>
+                        <docking:TabbedMdiHost />
+                    </docking:Workspace>
 
-            <GridSplitter Grid.Column="1" HorizontalAlignment="Stretch"
-                                Background="{DynamicResource CommonEnableBackgroundBrush}"/>
+                    <docking:ToolWindowContainer>
+                        <docking:ToolWindow Title="Solution Explorer">
+                            <windowViews:SolutionExplorer/>
+                        </docking:ToolWindow>
+                    </docking:ToolWindowContainer>
 
-            <windowViews:SolutionExplorer Grid.Column="2"/>
+                </docking:SplitContainer>
 
-        </Grid>
-        
-        <GridSplitter Grid.Row="2" HorizontalAlignment="Stretch"
-                            Background="{DynamicResource CommonEnableBackgroundBrush}"/>
-
-        <windowViews:AlarmList Grid.Row="3" 
+                <docking:ToolWindowContainer>
+                    <docking:ToolWindow Title="Alarm List">
+                        <windowViews:AlarmList Grid.Row="3" 
                                 HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
                                 DataContext="{Binding AlarmListVM}"/>
+                    </docking:ToolWindow>
+                </docking:ToolWindowContainer>
 
-        <ContentControl Grid.Row="4"
+            </docking:SplitContainer>
+
+        </docking:DockSite>
+
+        <ContentControl Grid.Row="2"
                                  Content="{StaticResource MainWindowStatusBar}"/>
+
     </Grid>
 
     <i:Interaction.Behaviors>
@@ -85,4 +99,4 @@
         </i:EventTrigger>
     </i:Interaction.Triggers>
 
-</advanceControls:AdvancedWindow>
+</Window>
