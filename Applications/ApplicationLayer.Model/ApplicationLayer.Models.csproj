@@ -67,6 +67,8 @@
     <Compile Include="SolutionPackage\ReferenceHier.cs" />
     <Compile Include="SolutionPackage\SolutionHier.cs" />
     <Compile Include="Theme.cs" />
+    <Compile Include="ToolWindowStatus\ToolItemDockSide.cs" />
+    <Compile Include="ToolWindowStatus\ToolItemState.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Parse.BackEnd.Target\Parse.BackEnd.Target\Parse.BackEnd.Target.csproj">

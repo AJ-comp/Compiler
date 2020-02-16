@@ -23,7 +23,6 @@ namespace ApplicationLayer.WpfApp.Behaviors
         protected override void OnDetaching()
         {
             this.AssociatedObject.Loaded -= AssociatedObject_Loaded;
-//            this.AssociatedObject.CloseButtonClicked -= AssociatedObject_CloseButtonClicked;
 
             base.OnDetaching();
         }
@@ -33,14 +32,6 @@ namespace ApplicationLayer.WpfApp.Behaviors
             base.OnAttached();
 
             this.AssociatedObject.Loaded += AssociatedObject_Loaded;
-//            this.AssociatedObject.CloseButtonClicked += AssociatedObject_CloseButtonClicked;
-        }
-
-        private void AssociatedObject_CloseButtonClicked(object sender, Wpf.UI.Advance.ClosedEventArgs e)
-        {
-            MainViewModel vm = mainWindow.DataContext as MainViewModel;
-
-
         }
 
         private void AssociatedObject_Loaded(object sender, RoutedEventArgs e)

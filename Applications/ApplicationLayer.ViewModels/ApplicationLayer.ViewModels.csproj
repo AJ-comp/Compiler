@@ -63,7 +63,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AlarmListViewModel.cs" />
+    <Compile Include="Messages\ToAlarmListMessages.cs" />
+    <Compile Include="ToolWindowViewModels\AlarmListViewModel.cs" />
     <Compile Include="CommandArgs\SolutionExplorerKeyDownArgs.cs" />
     <Compile Include="DialogViewModels\DialogViewModel.cs" />
     <Compile Include="DialogViewModels\NewFileDialogViewModel.cs" />
@@ -71,6 +72,7 @@
     <Compile Include="DialogViewModels\NewProjectViewModel.cs" />
     <Compile Include="DialogViewModels\NewSolutionViewModel.cs" />
     <Compile Include="DialogViewModels\QuestionToSaveViewModel.cs" />
+    <Compile Include="DockingItemViewModels\DockingItemViewModel.cs" />
     <Compile Include="DocumentTypeViewModels\DocumentViewModel.cs" />
     <Compile Include="DocumentTypeViewModels\EditorTypeViewModel.cs" />
     <Compile Include="DocumentTypeViewModels\GrammarInfoViewModel.cs" />
@@ -85,7 +87,8 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SubViewModels\ProjectSelectionViewModel.cs" />
-    <Compile Include="WindowViewModels\SolutionExplorerViewModel.cs" />
+    <Compile Include="ToolWindowViewModels\SolutionExplorerViewModel.cs" />
+    <Compile Include="ToolWindowViewModels\ToolWindowViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

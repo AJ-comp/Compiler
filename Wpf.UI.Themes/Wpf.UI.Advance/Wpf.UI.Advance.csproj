@@ -72,7 +72,6 @@
     <Compile Include="AdvancedWindow.cs" />
     <Compile Include="Behaviors\WindowCloseBehavior.cs" />
     <Compile Include="ClosableTabItem.cs" />
-    <Compile Include="DockableWindow.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -107,10 +106,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="AdvancedWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="DockableWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

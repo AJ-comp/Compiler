@@ -4,19 +4,17 @@ using ApplicationLayer.Models;
 using ApplicationLayer.Models.SolutionPackage;
 using ApplicationLayer.ViewModels.CommandArgs;
 using ApplicationLayer.ViewModels.Messages;
-using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
-using System;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.IO;
 
 using CommonResource = ApplicationLayer.Define.Properties.Resources;
 
-namespace WpfApp.ViewModels.WindowViewModels
+namespace ApplicationLayer.ViewModels.ToolWindowViewModels
 {
-    public class SolutionExplorerViewModel : ViewModelBase
+    public class SolutionExplorerViewModel : ToolWindowViewModel
     {
         private ShowSaveDialogMessage saveMessage;
         private IMessageBoxService messageBoxService;
@@ -134,6 +132,10 @@ namespace WpfApp.ViewModels.WindowViewModels
         {
             this.messageBoxService = messageBoxService;
             this.Solutions.CollectionChanged += Solutions_CollectionChanged;
+
+            this.DefaultDockSide = Models.ToolWindowStatus.ToolItemDockSide.Right;
+            this.State = Models.ToolWindowStatus.ToolItemState.Docked;
+            this.Title = CommonResource.SolutionExplorer;
         }
 
         private void Solutions_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
@@ -282,7 +284,7 @@ namespace WpfApp.ViewModels.WindowViewModels
         /// This message handler addes a changed files that missed.
         /// </summary>
         /// <param name="message">not use (to match the shape)</param>
-        public void ReceiveAddMissedChangedFilesMessage(AddMissedChangedFiles message)
+        public void ReceivedAddMissedChangedFilesMessage(AddMissedChangedFiles message)
         {
             if (message == null) return;
             if (this.Solutions.Count == 0) return;

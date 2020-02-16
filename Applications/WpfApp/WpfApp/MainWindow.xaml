@@ -30,12 +30,9 @@
 
     <Window.Resources>
         <ResourceDictionary>
-            <DataTemplate x:Key="DocItemTemplate">
-                <TextBlock Text="Yippee!" />
-            </DataTemplate>
-
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Resources/DataTemplates/DocumentTemplates.xaml"/>
+                <ResourceDictionary Source="Resources/DataTemplates/ToolWindowTemplates.xaml"/>
                 <ResourceDictionary Source="Resources/Menus/MainWindowMenus.xaml"/>
                 <ResourceDictionary Source="Resources/Menus/MainWindowStatusBar.xaml"/>
             </ResourceDictionary.MergedDictionaries>
@@ -57,7 +54,9 @@
 
         <docking:DockSite Grid.Row="1" 
                           DocumentItemsSource="{Binding Documents}"
-                          DocumentItemContainerStyle="{StaticResource DocumentWindowStyle}">
+                          DocumentItemContainerStyle="{StaticResource DocumentWindowStyle}"
+                          ToolItemsSource="{Binding ToolItems}"
+                          ToolItemContainerStyle="{StaticResource ToolWindowStyle}">
 
             <docking:SplitContainer Orientation="Vertical">
                 <docking:SplitContainer>
@@ -65,21 +64,13 @@
                         <docking:TabbedMdiHost />
                     </docking:Workspace>
 
-                    <docking:ToolWindowContainer>
-                        <docking:ToolWindow Title="Solution Explorer">
-                            <windowViews:SolutionExplorer/>
-                        </docking:ToolWindow>
-                    </docking:ToolWindowContainer>
-
                 </docking:SplitContainer>
 
-                <docking:ToolWindowContainer>
+                <!--<docking:ToolWindowContainer>
                     <docking:ToolWindow Title="Alarm List">
-                        <windowViews:AlarmList Grid.Row="3" 
-                                HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
-                                DataContext="{Binding AlarmListVM}"/>
+                        <windowViews:AlarmList DataContext="{Binding AlarmListVM}"/>
                     </docking:ToolWindow>
-                </docking:ToolWindowContainer>
+                </docking:ToolWindowContainer>-->
 
             </docking:SplitContainer>
 

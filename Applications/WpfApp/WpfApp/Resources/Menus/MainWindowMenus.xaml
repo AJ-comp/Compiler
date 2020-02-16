@@ -51,6 +51,15 @@
             <MenuItem Header="{lex:Loc Key=Grammar}" InputGestureText="Alt+G" Command="{Binding GrammarCommand}"/>
             <MenuItem Header="{lex:Loc Key=ParsingHistory}" InputGestureText="Ctrl+Shift+H" Command="{Binding ParsingHistoryCommand}"/>
             <MenuItem Header="{lex:Loc Key=ParseTree}" InputGestureText="Ctrl+Shift+T" Command="{Binding ParseTreeCommand}"/>
+            <MenuItem Header="{lex:Loc Key=OtherWindow}">
+                <MenuItem.Icon>
+                    <Image Width="16" Height="16"/>
+                </MenuItem.Icon>
+                <MenuItem Header="{lex:Loc Key=SolutionExplorer}" Command="{Binding ShowToolWindowCommand}" 
+                                    CommandParameter="{Binding SolutionExplorerWindow, Source={StaticResource Locator}}"/>
+                <MenuItem Header="{lex:Loc Key=ErrorList}" Command="{Binding ShowToolWindowCommand}"
+                                    CommandParameter="{Binding AlarmListWindow, Source={StaticResource Locator}}"/>
+            </MenuItem>
         </MenuItem>
 
         <!-- Tools -->

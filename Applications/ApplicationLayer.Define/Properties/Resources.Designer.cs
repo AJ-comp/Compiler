@@ -223,6 +223,15 @@ namespace ApplicationLayer.Define.Properties {
         }
         
         /// <summary>
+        ///   Error List과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string ErrorList {
+            get {
+                return ResourceManager.GetString("ErrorList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Existing Item과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string ExistItem {
@@ -430,6 +439,24 @@ namespace ApplicationLayer.Define.Properties {
         }
         
         /// <summary>
+        ///   Other Window과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string OtherWindow {
+            get {
+                return ResourceManager.GetString("OtherWindow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Output과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string Output {
+            get {
+                return ResourceManager.GetString("Output", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Parse Tree과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string ParseTree {
@@ -507,6 +534,15 @@ namespace ApplicationLayer.Define.Properties {
         public static string Search {
             get {
                 return ResourceManager.GetString("Search", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Solution Explorer과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string SolutionExplorer {
+            get {
+                return ResourceManager.GetString("SolutionExplorer", resourceCulture);
             }
         }
         

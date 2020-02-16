@@ -268,4 +268,16 @@
   <data name="MustInputName" xml:space="preserve">
     <value>You have to input a name</value>
   </data>
+  <data name="ErrorList" xml:space="preserve">
+    <value>Error List</value>
+  </data>
+  <data name="Output" xml:space="preserve">
+    <value>Output</value>
+  </data>
+  <data name="SolutionExplorer" xml:space="preserve">
+    <value>Solution Explorer</value>
+  </data>
+  <data name="OtherWindow" xml:space="preserve">
+    <value>Other Window</value>
+  </data>
 </root>

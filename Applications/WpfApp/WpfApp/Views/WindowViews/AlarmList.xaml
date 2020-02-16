@@ -6,15 +6,11 @@
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:local="clr-namespace:ApplicationLayer.WpfApp.Views.WindowViews"
              xmlns:mvvm="http://www.galasoft.ch/mvvmlight"
-             xmlns:localViewModel="clr-namespace:ApplicationLayer.ViewModels;assembly=ApplicationLayer.ViewModels"
              xmlns:localConverters="clr-namespace:ApplicationLayer.WpfApp.Converters"
              xmlns:lex="http://wpflocalizeextension.codeplex.com" 
              lex:ResxLocalizationProvider.DefaultAssembly="ApplicationLayer.Define"
-             mc:Ignorable="d" >
-
-    <UserControl.DataContext>
-        <localViewModel:AlarmListViewModel/>
-    </UserControl.DataContext>
+             mc:Ignorable="d" 
+             DataContext="{Binding AlarmListWindow, Source={StaticResource Locator}}">
 
     <Grid>
         <Grid.RowDefinitions>

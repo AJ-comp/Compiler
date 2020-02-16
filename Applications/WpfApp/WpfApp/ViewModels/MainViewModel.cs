@@ -3,6 +3,7 @@ using ApplicationLayer.ViewModels;
 using ApplicationLayer.ViewModels.DialogViewModels;
 using ApplicationLayer.ViewModels.DocumentTypeViewModels;
 using ApplicationLayer.ViewModels.Messages;
+using ApplicationLayer.ViewModels.ToolWindowViewModels;
 using CommonServiceLocator;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
@@ -16,7 +17,6 @@ using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.IO;
 using System.Windows;
-using WpfApp.ViewModels.WindowViewModels;
 
 namespace ApplicationLayer.WpfApp.ViewModels
 {
@@ -102,6 +102,8 @@ namespace ApplicationLayer.WpfApp.ViewModels
         }
         #endregion
 
+        public ObservableCollection<ToolWindowViewModel> ToolItems { get; } = new ObservableCollection<ToolWindowViewModel>();
+
         private ObservableCollection<DialogViewModel> window;
         public ObservableCollection<DialogViewModel> Window
         {
@@ -145,7 +147,7 @@ namespace ApplicationLayer.WpfApp.ViewModels
             this.Documents.Add(newDocument);
             this.SelectedDocument = newDocument;
 
-            this.AlarmListVM.AddEditors(newDocument);
+            Messenger.Default.Send<AddEditorMessage>(new AddEditorMessage(newDocument));
         }
         #endregion
 
@@ -256,6 +258,40 @@ namespace ApplicationLayer.WpfApp.ViewModels
         }
         #endregion
 
+        private RelayCommand closeCommand;
+        public RelayCommand CloseCommand
+        {
+            get
+            {
+                if (this.closeCommand == null)
+                    this.closeCommand = new RelayCommand(OnClose);
+
+                return this.closeCommand;
+            }
+        }
+        private void OnClose()
+        {
+
+        }
+
+        private RelayCommand<ToolWindowViewModel> showToolWindowCommand;
+        public RelayCommand<ToolWindowViewModel> ShowToolWindowCommand
+        {
+            get
+            {
+                if (this.showToolWindowCommand == null)
+                    this.showToolWindowCommand = new RelayCommand<ToolWindowViewModel>(OnShowToolWindow);
+
+                return this.showToolWindowCommand;
+            }
+        }
+        private void OnShowToolWindow(ToolWindowViewModel obj)
+        {
+            if (obj == null) return;
+
+            this.ToolItems.Add(obj);
+        }
+
         private void InitGrammarWindow()
         {
             var grmmarViewModel = ServiceLocator.Current.GetInstance<GrammarInfoViewModel>();
@@ -270,7 +306,14 @@ namespace ApplicationLayer.WpfApp.ViewModels
             Messenger.Default.Register<CreateSolutionMessage>(solutionExplorer, solutionExplorer.ReceivedCreateSolutionMessage);
             Messenger.Default.Register<LoadSolutionMessage>(solutionExplorer, solutionExplorer.ReceivedLoadSolutionMessage);
             Messenger.Default.Register<AddProjectMessage>(solutionExplorer, solutionExplorer.ReceivedAddNewProjectMessage);
-            Messenger.Default.Register<AddMissedChangedFiles>(solutionExplorer, solutionExplorer.ReceiveAddMissedChangedFilesMessage);
+            Messenger.Default.Register<AddMissedChangedFiles>(solutionExplorer, solutionExplorer.ReceivedAddMissedChangedFilesMessage);
+        }
+
+        private void InitAlarmList()
+        {
+            var alarmList = ServiceLocator.Current.GetInstance<AlarmListViewModel>();
+
+            Messenger.Default.Register<AddEditorMessage>(alarmList, alarmList.ReceivedAddEditorMessage);
         }
 
         private void InitQuestionToSaveDialog()
@@ -292,6 +335,7 @@ namespace ApplicationLayer.WpfApp.ViewModels
 
             this.InitGrammarWindow();
             this.InitSolutionExplorer();
+            this.InitAlarmList();
             this.InitQuestionToSaveDialog();
 
             Messenger.Default.Register<OpenFileMessage>(this, this.ReceivedOpenFileMessage);
@@ -320,7 +364,7 @@ namespace ApplicationLayer.WpfApp.ViewModels
             this.Documents.Add(editor);
             this.SelectedDocument = editor;
 
-            this.AlarmListVM.AddEditors(editor);
+            Messenger.Default.Send<AddEditorMessage>(new AddEditorMessage(editor));
         }
     }
 }

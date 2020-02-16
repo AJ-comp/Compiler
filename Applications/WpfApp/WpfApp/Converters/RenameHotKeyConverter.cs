@@ -1,7 +1,7 @@
 ﻿using ApplicationLayer.ViewModels.CommandArgs;
+using ApplicationLayer.ViewModels.ToolWindowViewModels;
 using ApplicationLayer.WpfApp.Views.WindowViews;
 using System.Windows.Input;
-using WpfApp.ViewModels.WindowViewModels;
 
 namespace ApplicationLayer.WpfApp.Converters
 {

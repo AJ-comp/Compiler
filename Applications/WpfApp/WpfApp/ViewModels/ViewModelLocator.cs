@@ -15,10 +15,10 @@
 using ApplicationLayer.Models;
 using ApplicationLayer.ViewModels.DialogViewModels;
 using ApplicationLayer.ViewModels.DocumentTypeViewModels;
+using ApplicationLayer.ViewModels.ToolWindowViewModels;
 using CommonServiceLocator;
 using GalaSoft.MvvmLight.Ioc;
 using GalaSoft.MvvmLight.Messaging;
-using WpfApp.ViewModels.WindowViewModels;
 
 namespace ApplicationLayer.WpfApp.ViewModels
 {
@@ -50,14 +50,21 @@ namespace ApplicationLayer.WpfApp.ViewModels
 
             SimpleIoc.Default.Register<MainViewModel>();
             SimpleIoc.Default.Register<GrammarInfoViewModel>();
-            SimpleIoc.Default.Register<SolutionExplorerViewModel>();
             SimpleIoc.Default.Register<ParsingHistoryViewModel>();
             SimpleIoc.Default.Register<QuestionToSaveViewModel>();
+
+            /// Related to ToolWindow
+            SimpleIoc.Default.Register<SolutionExplorerViewModel>();
+            SimpleIoc.Default.Register<AlarmListViewModel>();
         }
 
         public MainViewModel Main { get => ServiceLocator.Current.GetInstance<MainViewModel>(); }
-        public SolutionExplorerViewModel SolutionExplorerWindow { get => ServiceLocator.Current.GetInstance<SolutionExplorerViewModel>(); }
         public QuestionToSaveViewModel QuestionToSave { get => ServiceLocator.Current.GetInstance<QuestionToSaveViewModel>(); }
+
+
+        public SolutionExplorerViewModel SolutionExplorerWindow { get => ServiceLocator.Current.GetInstance<SolutionExplorerViewModel>(); }
+        public AlarmListViewModel AlarmListWindow { get => ServiceLocator.Current.GetInstance<AlarmListViewModel>(); }
+
 
         private void NotifyUserMethod(NotificationMessage message)
         {

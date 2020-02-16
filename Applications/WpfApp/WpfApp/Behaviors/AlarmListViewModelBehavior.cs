@@ -1,4 +1,4 @@
-﻿using ApplicationLayer.ViewModels;
+﻿using ApplicationLayer.ViewModels.ToolWindowViewModels;
 using ApplicationLayer.WpfApp.Views.WindowViews;
 using System.Windows.Interactivity;
 

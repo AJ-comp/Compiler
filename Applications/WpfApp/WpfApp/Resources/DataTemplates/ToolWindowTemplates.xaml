@@ -1,0 +1,26 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:docking="http://schemas.actiprosoftware.com/winfx/xaml/docking"
+                    xmlns:converters="clr-namespace:ApplicationLayer.WpfApp.Converters"
+                    xmlns:toolWindowVMs="clr-namespace:ApplicationLayer.ViewModels.ToolWindowViewModels;assembly=ApplicationLayer.ViewModels"
+                    xmlns:toolWindows="clr-namespace:ApplicationLayer.WpfApp.Views.WindowViews"
+                    xmlns:local="clr-namespace:ApplicationLayer.WpfApp.Resources.DataTemplates">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="DocumentTemplates.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+
+    <Style x:Key="ToolWindowStyle" TargetType="docking:ToolWindow" BasedOn="{StaticResource DockingWindowStyle}">
+        <Setter Property="DefaultDockSide" Value="{Binding Path=DefaultDockSide, Mode=TwoWay, Converter={converters:ToolItemDockSideConverter}}" />
+        <Setter Property="State" Value="{Binding Path=State, Mode=TwoWay, Converter={converters:ToolItemStateConverter}}" />
+    </Style>
+
+    <DataTemplate DataType="{x:Type toolWindowVMs:SolutionExplorerViewModel}">
+        <toolWindows:SolutionExplorer/>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type toolWindowVMs:AlarmListViewModel}">
+        <toolWindows:AlarmList/>
+    </DataTemplate>
+
+</ResourceDictionary>

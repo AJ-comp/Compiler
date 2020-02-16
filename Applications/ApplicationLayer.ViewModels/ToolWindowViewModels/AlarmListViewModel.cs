@@ -1,16 +1,18 @@
 ﻿using ApplicationLayer.Models;
 using ApplicationLayer.ViewModels.DocumentTypeViewModels;
+using ApplicationLayer.ViewModels.Messages;
 using ApplicationLayer.ViewModels.Properties;
-using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using Parse.WpfControls.SyntaxEditor.EventArgs;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 
-namespace ApplicationLayer.ViewModels
+using CommonResource = ApplicationLayer.Define.Properties.Resources;
+
+namespace ApplicationLayer.ViewModels.ToolWindowViewModels
 {
-    public class AlarmListViewModel : ViewModelBase
+    public class AlarmListViewModel : ToolWindowViewModel
     {
         private ObservableCollection<EditorTypeViewModel> editors = new ObservableCollection<EditorTypeViewModel>();
         public ObservableCollection<AlarmData> AlarmLists { get; } = new ObservableCollection<AlarmData>();
@@ -25,6 +27,13 @@ namespace ApplicationLayer.ViewModels
 
                 return _cmdMouseDoubleClick;
             }
+        }
+
+        public AlarmListViewModel()
+        {
+            this.DefaultDockSide = Models.ToolWindowStatus.ToolItemDockSide.Bottom;
+            this.State = Models.ToolWindowStatus.ToolItemState.Docked;
+            this.Title = CommonResource.ErrorList;
         }
 
         private EditorTypeViewModel FindEditorIndexOfAlarmData(AlarmData alarmData)
@@ -83,6 +92,13 @@ namespace ApplicationLayer.ViewModels
 
             editor.AlarmFired += Editor_AlarmFired;
             this.editors.Add(editor);
+        }
+
+        public void ReceivedAddEditorMessage(AddEditorMessage message)
+        {
+            if (message is null) return;
+
+            this.AddEditors(message.AddEditor);
         }
 
         private void Editor_AlarmFired(object sender, AlarmCollection e)

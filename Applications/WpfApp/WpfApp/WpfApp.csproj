@@ -126,6 +126,8 @@
     <Compile Include="Converters\EnumToImageConverter.cs" />
     <Compile Include="Converters\EventArgsConverterExtension.cs" />
     <Compile Include="Converters\MouseDoubleClickIndexConverter.cs" />
+    <Compile Include="Converters\ToolItemDockSideConverter.cs" />
+    <Compile Include="Converters\ToolItemStateConverter.cs" />
     <Compile Include="Converters\ToResourceKeyConverter.cs" />
     <Compile Include="DialogLogic.cs" />
     <Compile Include="MessageBoxLogic.cs" />
@@ -193,6 +195,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Resources\DataTemplates\StaticTemplate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\DataTemplates\ToolWindowTemplates.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

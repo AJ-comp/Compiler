@@ -10,6 +10,7 @@
              xmlns:local="clr-namespace:ApplicationLayer.WpfApp.Views.WindowViews"
              mc:Ignorable="d" 
              DataContext="{Binding SolutionExplorerWindow, Source={StaticResource Locator}}">
+    
     <UserControl.Resources>
         <Style x:Key="SolutionTreeViewItemStyle" TargetType="TreeViewItem" >
             <Setter Property="IsExpanded" Value="True"/>
