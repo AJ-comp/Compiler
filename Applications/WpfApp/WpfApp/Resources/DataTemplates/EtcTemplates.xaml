@@ -10,8 +10,18 @@
 
     <DataTemplate DataType="{x:Type parsers:SLRParser}">
         <TabControl>
-            <TabItem Header="{lex:Loc Key=Grammar}" Content="{Binding Grammar.EbnfExpression}"/>
-            <TabItem Header="{lex:Loc Key=CanonicalTable}" Content="{Binding C0, Converter={wpfcontrolConverters:PropertyValueToStringConverter}}"/>
+            <TabItem Header="{lex:Loc Key=Grammar}">
+                <TextBox Text="{Binding Grammar.EbnfExpression, Mode=OneWay}" 
+                                IsReadOnly="True"
+                                ScrollViewer.VerticalScrollBarVisibility="Visible" 
+                                ScrollViewer.HorizontalScrollBarVisibility="Visible"/>
+            </TabItem>
+            <TabItem Header="{lex:Loc Key=CanonicalTable}">
+                <TextBox Text="{Binding C0, Converter={wpfcontrolConverters:PropertyValueToStringConverter}, Mode=OneWay}"
+                                IsReadOnly="True"
+                                ScrollViewer.VerticalScrollBarVisibility="Visible" 
+                                ScrollViewer.HorizontalScrollBarVisibility="Visible"/>
+            </TabItem>
             <TabItem Header="{lex:Loc Key=ParsingTable}" Content="{Binding ParsingTable}"/>
         </TabControl>
     </DataTemplate>

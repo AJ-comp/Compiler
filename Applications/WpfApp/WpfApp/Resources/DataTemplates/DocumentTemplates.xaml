@@ -46,18 +46,32 @@
 
 
     <DataTemplate DataType="{x:Type documentViewModels:ParsingHistoryViewModel}">
-        <DataGrid IsReadOnly="True" ItemsSource="{Binding ParsingHistory}"/>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <ComboBox Grid.Row="0" ItemsSource="{Binding Documents}">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Title}"/>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+            <DataGrid Grid.Row="1" IsReadOnly="True" ItemsSource="{Binding ParsingHistory}"/>
+        </Grid>
     </DataTemplate>
 
 
     <DataTemplate DataType="{x:Type documentViewModels:GrammarInfoViewModel}">
         <DockPanel>
             <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Background="Transparent">
-                <TextBlock Width="100" HorizontalAlignment="Right"
-                       Margin="0 0 10 0"
-                       Text="{lex:Loc Key=Grammar}"/>
+                <TextBlock Width="100" Margin="0 0 10 0"
+                                   HorizontalAlignment="Right"
+                                   Text="{lex:Loc Key=Grammar}"/>
                 <ComboBox Width="150" HorizontalAlignment="Right" 
-                      ItemsSource="{Binding Grammars}" SelectedItem="{Binding SelectedItem}">
+                                  ItemsSource="{Binding Grammars}" SelectedItem="{Binding SelectedItem}">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="Loaded">
                             <i:InvokeCommandAction Command="{Binding LoadCommand}"/>

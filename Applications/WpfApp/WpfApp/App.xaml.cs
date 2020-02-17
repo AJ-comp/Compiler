@@ -1,8 +1,11 @@
-﻿using ActiproSoftware.Windows.Themes;
+﻿using ActiproSoftware.Products.Docking;
+using ActiproSoftware.Windows.Themes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
+
+using CommonResource = ApplicationLayer.Define.Properties.Resources;
 
 namespace ApplicationLayer.WpfApp
 {
@@ -37,11 +40,31 @@ namespace ApplicationLayer.WpfApp
             }
         }
 
+        private void ActiProControlLocalize()
+        {
+            SR.SetCustomString(SRName.UIToolWindowContainerCloseButtonToolTip.ToString(), CommonResource.Close);
+            SR.SetCustomString(SRName.UIToolWindowContainerToggleAutoHideButtonToolTip.ToString(), CommonResource.AutoHide);
+            SR.SetCustomString(SRName.UIToolWindowContainerOptionsButtonToolTip.ToString(), CommonResource.WindowPosition);
+
+            SR.SetCustomString(SRName.UICommandMakeFloatingWindowText.ToString(), CommonResource.Float);
+            SR.SetCustomString(SRName.UICommandMakeDockedWindowText.ToString(), CommonResource.Dock);
+            SR.SetCustomString(SRName.UICommandMakeDocumentWindowText.ToString(), CommonResource.DockAsDocument);
+            SR.SetCustomString(SRName.UICommandToggleWindowAutoHideStateText.ToString(), CommonResource.AutoHide);
+            SR.SetCustomString(SRName.UICommandCloseWindowText.ToString(), CommonResource.Close);
+            SR.SetCustomString(SRName.UICommandCloseOthersText.ToString(), CommonResource.AllCloseExceptThisWindow);
+            SR.SetCustomString(SRName.UICommandCloseAllInContainerText.ToString(), CommonResource.CloseTabGroup);
+            SR.SetCustomString(SRName.UICommandCloseAllDocumentsText.ToString(), CommonResource.CloseAll);
+            SR.SetCustomString(SRName.UICommandPinTabText.ToString(), CommonResource.PinTab);
+
+        }
+
         protected override void OnStartup(StartupEventArgs e)
         {
             ThemeManager.BeginUpdate();
             try
             {
+                this.ActiProControlLocalize();
+
                 // The Office 2010 and Luna themes are in separate assemblies and must be registered if you will use them in the application
                 // ThemesOfficeThemeCatalogRegistrar.Register();
                 // ThemesLunaThemeCatalogRegistrar.Register();

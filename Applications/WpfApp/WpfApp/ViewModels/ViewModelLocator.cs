@@ -46,8 +46,6 @@ namespace ApplicationLayer.WpfApp.ViewModels
             ////    SimpleIoc.Default.Register<IDataService, DataService>();
             ////}
 
-            SimpleIoc.Default.Register<IMessageBoxService, MessageBoxLogic>();
-
             SimpleIoc.Default.Register<MainViewModel>();
             SimpleIoc.Default.Register<GrammarInfoViewModel>();
             SimpleIoc.Default.Register<ParsingHistoryViewModel>();

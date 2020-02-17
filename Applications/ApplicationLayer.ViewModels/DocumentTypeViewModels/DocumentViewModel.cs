@@ -1,15 +1,15 @@
-﻿using GalaSoft.MvvmLight;
+﻿using ApplicationLayer.ViewModels.DockingItemViewModels;
+using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using System;
 
 namespace ApplicationLayer.ViewModels.DocumentTypeViewModels
 {
-    public class DocumentViewModel : ViewModelBase
+    public class DocumentViewModel : DockingItemViewModel
     {
         public event EventHandler CloseRequest;
         public event EventHandler AllCloseExceptThisRequest;
 
-        public string Title { get; set; }
         public string ToolTipText { get; }
 
         private RelayCommand closeCommand;
@@ -43,6 +43,9 @@ namespace ApplicationLayer.ViewModels.DocumentTypeViewModels
                 return this.allCloseExceptThisCommand;
             }
         }
+
+        public override bool IsTool => false;
+
         private void OnAllCloseExceptThis()
         {
             this.AllCloseExceptThisRequest?.Invoke(this, EventArgs.Empty);

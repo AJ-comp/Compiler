@@ -88,7 +88,7 @@ namespace ApplicationLayer.Define.Properties {
         }
         
         /// <summary>
-        ///   All close except this window과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   Close Others과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string AllCloseExceptThisWindow {
             get {
@@ -102,6 +102,15 @@ namespace ApplicationLayer.Define.Properties {
         public static string AlreadyExistFile {
             get {
                 return ResourceManager.GetString("AlreadyExistFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Auto-Hide과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string AutoHide {
+            get {
+                return ResourceManager.GetString("AutoHide", resourceCulture);
             }
         }
         
@@ -138,6 +147,24 @@ namespace ApplicationLayer.Define.Properties {
         public static string Close {
             get {
                 return ResourceManager.GetString("Close", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Close All Documents과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string CloseAll {
+            get {
+                return ResourceManager.GetString("CloseAll", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Close Tab Group과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string CloseTabGroup {
+            get {
+                return ResourceManager.GetString("CloseTabGroup", resourceCulture);
             }
         }
         
@@ -192,6 +219,24 @@ namespace ApplicationLayer.Define.Properties {
         public static string DeleteWarning {
             get {
                 return ResourceManager.GetString("DeleteWarning", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Dock과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string Dock {
+            get {
+                return ResourceManager.GetString("Dock", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Dock as Document과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string DockAsDocument {
+            get {
+                return ResourceManager.GetString("DockAsDocument", resourceCulture);
             }
         }
         
@@ -255,6 +300,15 @@ namespace ApplicationLayer.Define.Properties {
         public static string File {
             get {
                 return ResourceManager.GetString("File", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Float과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string Float {
+            get {
+                return ResourceManager.GetString("Float", resourceCulture);
             }
         }
         
@@ -484,6 +538,15 @@ namespace ApplicationLayer.Define.Properties {
         }
         
         /// <summary>
+        ///   Pin Tab과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string PinTab {
+            get {
+                return ResourceManager.GetString("PinTab", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Position과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string Position {
@@ -597,6 +660,15 @@ namespace ApplicationLayer.Define.Properties {
         public static string WholeSolution {
             get {
                 return ResourceManager.GetString("WholeSolution", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Window position과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string WindowPosition {
+            get {
+                return ResourceManager.GetString("WindowPosition", resourceCulture);
             }
         }
         

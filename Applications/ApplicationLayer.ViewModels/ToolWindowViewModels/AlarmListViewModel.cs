@@ -31,6 +31,7 @@ namespace ApplicationLayer.ViewModels.ToolWindowViewModels
 
         public AlarmListViewModel()
         {
+            this.SerializationId = "AL";
             this.DefaultDockSide = Models.ToolWindowStatus.ToolItemDockSide.Bottom;
             this.State = Models.ToolWindowStatus.ToolItemState.Docked;
             this.Title = CommonResource.ErrorList;

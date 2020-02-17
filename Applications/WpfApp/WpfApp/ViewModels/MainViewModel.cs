@@ -1,6 +1,6 @@
 using ApplicationLayer.Models;
-using ApplicationLayer.ViewModels;
 using ApplicationLayer.ViewModels.DialogViewModels;
+using ApplicationLayer.ViewModels.DockingItemViewModels;
 using ApplicationLayer.ViewModels.DocumentTypeViewModels;
 using ApplicationLayer.ViewModels.Messages;
 using ApplicationLayer.ViewModels.ToolWindowViewModels;
@@ -17,6 +17,7 @@ using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.IO;
 using System.Windows;
+using System.Xml.Serialization;
 
 namespace ApplicationLayer.WpfApp.ViewModels
 {
@@ -32,6 +33,7 @@ namespace ApplicationLayer.WpfApp.ViewModels
     /// See http://www.galasoft.ch/mvvm
     /// </para>
     /// </summary>
+    [XmlInclude(typeof(AlarmListViewModel))]
     public class MainViewModel : ViewModelBase
     {
         private Collection<Grammar> supplyGrammars = new Collection<Grammar>();
@@ -49,6 +51,7 @@ namespace ApplicationLayer.WpfApp.ViewModels
 
         #region Property related to Document
         private ObservableCollection<DocumentViewModel> _documents;
+        [XmlIgnore]
         public ObservableCollection<DocumentViewModel> Documents
         {
             get
@@ -91,6 +94,7 @@ namespace ApplicationLayer.WpfApp.ViewModels
         }
 
         private DocumentViewModel selectedDocument;
+        [XmlIgnore]
         public DocumentViewModel SelectedDocument
         {
             get => this.selectedDocument;
@@ -104,24 +108,7 @@ namespace ApplicationLayer.WpfApp.ViewModels
 
         public ObservableCollection<ToolWindowViewModel> ToolItems { get; } = new ObservableCollection<ToolWindowViewModel>();
 
-        private ObservableCollection<DialogViewModel> window;
-        public ObservableCollection<DialogViewModel> Window
-        {
-            get
-            {
-                if (this.window == null)
-                {
-                    this.window = new ObservableCollection<DialogViewModel>();
-                    this.window.CollectionChanged += _documents_CollectionChanged;
-                }
-
-                return this.window;
-            }
-        }
-
-        public ViewModelBase ActivatedDialog { get; }
-        public AlarmListViewModel AlarmListVM { get; } = new AlarmListViewModel();
-
+        [XmlIgnore]
         public Action ParseTreeAction = null;
 
         #region Command related to NewFile
@@ -258,22 +245,6 @@ namespace ApplicationLayer.WpfApp.ViewModels
         }
         #endregion
 
-        private RelayCommand closeCommand;
-        public RelayCommand CloseCommand
-        {
-            get
-            {
-                if (this.closeCommand == null)
-                    this.closeCommand = new RelayCommand(OnClose);
-
-                return this.closeCommand;
-            }
-        }
-        private void OnClose()
-        {
-
-        }
-
         private RelayCommand<ToolWindowViewModel> showToolWindowCommand;
         public RelayCommand<ToolWindowViewModel> ShowToolWindowCommand
         {
@@ -288,13 +259,37 @@ namespace ApplicationLayer.WpfApp.ViewModels
         private void OnShowToolWindow(ToolWindowViewModel obj)
         {
             if (obj == null) return;
+            if (this.ToolItems.Contains(obj)) return;
 
             this.ToolItems.Add(obj);
+        }
+
+        private RelayCommand<List<DockingItemViewModel>> unregisterDockingWindowCommand;
+        public RelayCommand<List<DockingItemViewModel>> UnRegisterDockingWindowCommand
+        {
+            get
+            {
+                if (this.unregisterDockingWindowCommand == null)
+                    this.unregisterDockingWindowCommand = new RelayCommand<List<DockingItemViewModel>>(OnUnRegisterDockingWindow);
+
+                return this.unregisterDockingWindowCommand;
+            }
+        }
+        private void OnUnRegisterDockingWindow(List<DockingItemViewModel> obj)
+        {
+            if (obj == null) return;
+
+            foreach(var item in obj)
+            {
+                if (item is EditorTypeViewModel) this.Documents.Remove(item as EditorTypeViewModel);
+                else if (item is ToolWindowViewModel) this.ToolItems.Remove(item as ToolWindowViewModel);
+            }
         }
 
         private void InitGrammarWindow()
         {
             var grmmarViewModel = ServiceLocator.Current.GetInstance<GrammarInfoViewModel>();
+
             foreach (var grammar in this.supplyGrammars)
                 grmmarViewModel.Grammars.Add(grammar);
         }
@@ -338,6 +333,7 @@ namespace ApplicationLayer.WpfApp.ViewModels
             this.InitAlarmList();
             this.InitQuestionToSaveDialog();
 
+            Messenger.Default.Register<DisplayMessage>(MessageBoxLogic.Own, MessageBoxLogic.Own.ShowMessage);
             Messenger.Default.Register<OpenFileMessage>(this, this.ReceivedOpenFileMessage);
 
             if (IsInDesignMode)

@@ -157,14 +157,14 @@ namespace ApplicationLayer.Models.SolutionPackage
         public abstract void Save();
         public abstract void ChangeDisplayName();
         public abstract void CancelChangeDisplayName();
-        public virtual ExceptionData IsValidToChange()
+        public virtual MessageData IsValidToChange()
         {
-            ExceptionData result = null;
+            MessageData result = null;
 
             if (this.ToChangeDisplayName == string.Empty)
-                result = new ExceptionData(ExceptionKind.Error, CommonResource.MustInputName);
+                result = new MessageData(MessageKind.Error, CommonResource.MustInputName);
             else if (Regex.IsMatch("[A-Za-z0-9_-]*\\.*[A-Za-z0-9]{3,4}", this.toChangeDisplayName))
-                result = new ExceptionData(ExceptionKind.Error, CommonResource.MustInputName);
+                result = new MessageData(MessageKind.Error, CommonResource.MustInputName);
 
             return result;
         }

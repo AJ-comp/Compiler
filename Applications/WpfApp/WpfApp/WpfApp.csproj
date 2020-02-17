@@ -37,6 +37,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="ActiproSoftware.Docking.Wpf, Version=18.1.675.0, Culture=neutral, PublicKeyToken=36ff2196ab5654b9, processorArchitecture=MSIL" />
+    <Reference Include="ActiproSoftware.Navigation.Wpf, Version=18.1.675.0, Culture=neutral, PublicKeyToken=36ff2196ab5654b9, processorArchitecture=MSIL" />
     <Reference Include="ActiproSoftware.Shared.Wpf, Version=18.1.675.0, Culture=neutral, PublicKeyToken=36ff2196ab5654b9, processorArchitecture=MSIL" />
     <Reference Include="CommonServiceLocator, Version=2.0.5.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\CommonServiceLocator.2.0.5\lib\net47\CommonServiceLocator.dll</HintPath>
@@ -105,6 +106,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="AttachedProperties\EditableTextBox.cs" />
+    <Compile Include="AttachedProperties\MainWindowHook.cs" />
     <Compile Include="AttachedProperties\WindowsFormsHostMap.cs" />
     <Compile Include="Behaviors\AlarmListViewModelBehavior.cs" />
     <Compile Include="Behaviors\BindableSelectedItemBehavior.cs" />
@@ -115,6 +117,7 @@
     <Compile Include="Behaviors\WindowLoadBehavior.cs" />
     <Compile Include="Commands\MenuActionCommands.cs" />
     <Compile Include="Commands\RelayUICommand.cs" />
+    <Compile Include="Converters\DockingWindowEventConverter.cs" />
     <Compile Include="Converters\GrammarToLRParserConverter.cs" />
     <Compile Include="Converters\NavigateUriToStringConverter.cs" />
     <Compile Include="Converters\LogicConverters\FileCreateLogicConverter.cs" />

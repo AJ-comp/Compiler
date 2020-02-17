@@ -63,6 +63,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Messages\DisplayMessage.cs" />
     <Compile Include="Messages\ToAlarmListMessages.cs" />
     <Compile Include="ToolWindowViewModels\AlarmListViewModel.cs" />
     <Compile Include="CommandArgs\SolutionExplorerKeyDownArgs.cs" />

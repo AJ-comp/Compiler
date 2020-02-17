@@ -1,4 +1,6 @@
-﻿using ApplicationLayer.Models.SolutionPackage;
+﻿using ActiproSoftware.Windows.Controls.Docking;
+using ActiproSoftware.Windows.Controls.Docking.Serialization;
+using ApplicationLayer.Models.SolutionPackage;
 using ApplicationLayer.ViewModels.DialogViewModels;
 using ApplicationLayer.ViewModels.Messages;
 using ApplicationLayer.WpfApp.ViewModels;
@@ -261,6 +263,34 @@ namespace ApplicationLayer.WpfApp.Commands
             });
 
 
+
+
+
+
+
+        /// <summary>
+        /// This command saves layout information to the file.
+        /// </summary>
+        public static readonly RelayUICommand<DockSite> SaveLayout = new RelayUICommand<DockSite>(string.Empty,
+            (dockSite) =>
+            {
+                new DockSiteLayoutSerializer().SaveToFile("user.layout", dockSite);
+            }, (condition) =>
+            {
+                return true;
+            });
+
+        /// <summary>
+        /// This command loads layout information from file.
+        /// </summary>
+        public static readonly RelayUICommand<DockSite> LoadLayout = new RelayUICommand<DockSite>(string.Empty,
+            (dockSite) =>
+            {
+                new DockSiteLayoutSerializer().LoadFromFile("user.layout", dockSite);
+            }, (condition) =>
+            {
+                return true;
+            });
 
 
 

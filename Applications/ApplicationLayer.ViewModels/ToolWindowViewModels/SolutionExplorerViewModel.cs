@@ -17,7 +17,6 @@ namespace ApplicationLayer.ViewModels.ToolWindowViewModels
     public class SolutionExplorerViewModel : ToolWindowViewModel
     {
         private ShowSaveDialogMessage saveMessage;
-        private IMessageBoxService messageBoxService;
 
         public ObservableCollection<SolutionHier> Solutions { get; } = new ObservableCollection<SolutionHier>();
 
@@ -115,24 +114,22 @@ namespace ApplicationLayer.ViewModels.ToolWindowViewModels
             }
             else if (target.Key == SolutionExplorerKeyDownArgs.PressedKey.Enter)
             {
-                ExceptionData exceptData = target.Item.IsValidToChange();
-                if(exceptData == null)
+                MessageData exceptData = target.Item.IsValidToChange();
+                if (exceptData == null)
                 {
                     target.Item.IsEditMode = false;
                     target.Item.ChangeDisplayName();
                 }
-                else if(exceptData.Kind == ExceptionKind.Error)
-                    messageBoxService.ShowError(exceptData.Message, string.Empty);
-                else if(exceptData.Kind == ExceptionKind.Warning)
-                    messageBoxService.ShowWarning(exceptData.Message, string.Empty);
+                
+                Messenger.Default.Send<DisplayMessage>(new DisplayMessage(exceptData, string.Empty));
             }
         }
 
-        public SolutionExplorerViewModel(IMessageBoxService messageBoxService)
+        public SolutionExplorerViewModel()
         {
-            this.messageBoxService = messageBoxService;
             this.Solutions.CollectionChanged += Solutions_CollectionChanged;
 
+            this.SerializationId = "SE";
             this.DefaultDockSide = Models.ToolWindowStatus.ToolItemDockSide.Right;
             this.State = Models.ToolWindowStatus.ToolItemState.Docked;
             this.Title = CommonResource.SolutionExplorer;
@@ -242,7 +239,7 @@ namespace ApplicationLayer.ViewModels.ToolWindowViewModels
             if (saveMessage?.ResultStatus == ShowSaveDialogMessage.Result.Cancel) return;
 
             if (message is null) return;
-            if (this.LoadSolution(message)) this.messageBoxService?.ShowWarning(CommonResource.WarningOnLoad, "");
+            if (this.LoadSolution(message)) Messenger.Default.Send<DisplayMessage>(new DisplayMessage(CommonResource.WarningOnLoad, ""));
         }
 
         /// <summary>

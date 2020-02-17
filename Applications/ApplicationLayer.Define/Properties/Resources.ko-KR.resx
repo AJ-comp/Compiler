@@ -300,4 +300,28 @@
   <data name="OtherWindow" xml:space="preserve">
     <value>다른 창</value>
   </data>
+  <data name="AutoHide" xml:space="preserve">
+    <value>자동 숨김</value>
+  </data>
+  <data name="WindowPosition" xml:space="preserve">
+    <value>창 위치</value>
+  </data>
+  <data name="Dock" xml:space="preserve">
+    <value>도킹</value>
+  </data>
+  <data name="Float" xml:space="preserve">
+    <value>부동</value>
+  </data>
+  <data name="DockAsDocument" xml:space="preserve">
+    <value>탭 문서로 도킹</value>
+  </data>
+  <data name="CloseAll" xml:space="preserve">
+    <value>모든 문서 닫기</value>
+  </data>
+  <data name="CloseTabGroup" xml:space="preserve">
+    <value>컨테이너 내의 모든 문서 닫기</value>
+  </data>
+  <data name="PinTab" xml:space="preserve">
+    <value>탭 고정</value>
+  </data>
 </root>
