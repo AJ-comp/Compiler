@@ -1,17 +1,12 @@
-﻿using ActiproSoftware.Windows.Controls.Docking;
-using ActiproSoftware.Windows.Controls.Docking.Serialization;
-using ApplicationLayer.WpfApp.ViewModels;
-using System.IO;
+﻿using System;
+using System.ComponentModel;
 using System.Windows;
-using System.Xml.Serialization;
+using System.Windows.Input;
 
 namespace ApplicationLayer.WpfApp.AttachedProperties
 {
     public static class MainWindowHook
     {
-        private static string mainFormLayoutFileName = "FormInformation.layout";
-        private static string dockingLayoutFileName = "DeployInformation.layout";
-
         #region EnableHookLoaded
         public static bool GetEnableHookLoaded(DependencyObject obj)
         {
@@ -39,17 +34,51 @@ namespace ApplicationLayer.WpfApp.AttachedProperties
 
         private static void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            var mainWindow = (sender as Window);
+            var command = MainWindowHook.GetLoadedCommand(sender as MainWindow);
+            if (command == null) return;
 
-            var dockSite = LogicalTreeHelper.FindLogicalNode(mainWindow, "dockSite") as DockSite;
+            var parameter = MainWindowHook.GetLoadedCommandParameter(sender as MainWindow);
+            var commandParam = new Tuple<object, RoutedEventArgs>(parameter, e);
+            if (command.CanExecute(commandParam) == false) return;
 
-            try
-            {
-                new DockSiteLayoutSerializer().LoadFromFile(dockingLayoutFileName, dockSite);
-            }
-            catch { }
+            command.Execute(commandParam);
         }
+
+
+        public static ICommand GetLoadedCommand(DependencyObject obj)
+        {
+            return (ICommand)obj.GetValue(LoadedCommandProperty);
+        }
+
+        public static void SetLoadedCommand(DependencyObject obj, ICommand value)
+        {
+            obj.SetValue(LoadedCommandProperty, value);
+        }
+
+        // Using a DependencyProperty as the backing store for LoadedCommand.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty LoadedCommandProperty =
+            DependencyProperty.RegisterAttached("LoadedCommand", typeof(ICommand), typeof(MainWindowHook), new PropertyMetadata(null));
+
+
+
+        public static object GetLoadedCommandParameter(DependencyObject obj)
+        {
+            return (object)obj.GetValue(LoadedCommandParameterProperty);
+        }
+
+        public static void SetLoadedCommandParameter(DependencyObject obj, object value)
+        {
+            obj.SetValue(LoadedCommandParameterProperty, value);
+        }
+
+        // Using a DependencyProperty as the backing store for LoadedCommandParameter.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty LoadedCommandParameterProperty =
+            DependencyProperty.RegisterAttached("LoadedCommandParameter", typeof(object), typeof(MainWindowHook), new PropertyMetadata(null));
+
         #endregion
+
+
+
 
         #region EnableHookClosing
         public static bool GetEnableHookClosing(DependencyObject obj)
@@ -77,15 +106,48 @@ namespace ApplicationLayer.WpfApp.AttachedProperties
             else window.Closing -= Window_Closing;
         }
 
-        private static void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        private static void Window_Closing(object sender, CancelEventArgs e)
         {
-            var mainWindow = (sender as Window);
+            var command = MainWindowHook.GetClosingCommand(sender as MainWindow);
+            if (command == null) return;
 
-            var mainViewModel = mainWindow.DataContext as MainViewModel;
+            var parameter = MainWindowHook.GetLoadedCommandParameter(sender as MainWindow);
+            var commandParam = new Tuple<object, CancelEventArgs>(parameter, e);
+            if (command.CanExecute(commandParam) == false) return;
 
-            var dockSite = LogicalTreeHelper.FindLogicalNode(mainWindow, "dockSite") as DockSite;
-            new DockSiteLayoutSerializer().SaveToFile(dockingLayoutFileName, dockSite);
+            command.Execute(commandParam);
         }
+
+
+        public static ICommand GetClosingCommand(DependencyObject obj)
+        {
+            return (ICommand)obj.GetValue(ClosingCommandProperty);
+        }
+
+        public static void SetClosingCommand(DependencyObject obj, ICommand value)
+        {
+            obj.SetValue(ClosingCommandProperty, value);
+        }
+
+        // Using a DependencyProperty as the backing store for ClosingCommand.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty ClosingCommandProperty =
+            DependencyProperty.RegisterAttached("ClosingCommand", typeof(ICommand), typeof(MainWindowHook), new PropertyMetadata(null));
+
+
+
+        public static object GetClosingCommandParameter(DependencyObject obj)
+        {
+            return (object)obj.GetValue(ClosingCommandParameterProperty);
+        }
+
+        public static void SetClosingCommandParameter(DependencyObject obj, object value)
+        {
+            obj.SetValue(ClosingCommandParameterProperty, value);
+        }
+
+        // Using a DependencyProperty as the backing store for ClosingCommandParameter.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty ClosingCommandParameterProperty =
+            DependencyProperty.RegisterAttached("ClosingCommandParameter", typeof(object), typeof(MainWindowHook), new PropertyMetadata(null));
 
         #endregion
     }

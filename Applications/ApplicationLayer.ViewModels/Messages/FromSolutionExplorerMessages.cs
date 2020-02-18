@@ -6,13 +6,6 @@ using System.Collections.ObjectModel;
 
 namespace ApplicationLayer.ViewModels.Messages
 {
-    public class OpenFileMessage : MessageBase
-    {
-        public DefaultFileHier SelectedFile { get; }
-
-        public OpenFileMessage(DefaultFileHier selectedFile) => this.SelectedFile = selectedFile;
-    }
-
     /// <summary>
     /// This message informs to the target that a changed file to add is.
     /// </summary>

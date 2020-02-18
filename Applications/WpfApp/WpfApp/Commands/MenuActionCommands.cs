@@ -2,13 +2,20 @@
 using ActiproSoftware.Windows.Controls.Docking.Serialization;
 using ApplicationLayer.Models.SolutionPackage;
 using ApplicationLayer.ViewModels.DialogViewModels;
+using ApplicationLayer.ViewModels.DockingItemViewModels;
+using ApplicationLayer.ViewModels.DocumentTypeViewModels;
 using ApplicationLayer.ViewModels.Messages;
+using ApplicationLayer.ViewModels.ToolWindowViewModels;
 using ApplicationLayer.WpfApp.ViewModels;
 using ApplicationLayer.WpfApp.Views.DialogViews;
 using GalaSoft.MvvmLight.Messaging;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Globalization;
 using System.IO;
+using System.Windows;
 using System.Windows.Forms;
 using WPFLocalizeExtension.Engine;
 
@@ -18,7 +25,10 @@ namespace ApplicationLayer.WpfApp.Commands
 {
     public static class MenuActionCommands
     {
-        public static MainWindow ParentWindow { get; set; }
+        public static MainWindow RootWindow { get; set; }
+
+        private static string visibleToolItems = "VisibleToolItems.layout";
+        private static string dockingLayoutFileName = "DeployInformation.layout";
 
         /// <summary>
         /// New Solution Command
@@ -29,12 +39,12 @@ namespace ApplicationLayer.WpfApp.Commands
             NewSolutionDialog dialog = new NewSolutionDialog();
             var vm = dialog.DataContext as NewSolutionViewModel;
 
-            dialog.Owner = ParentWindow;
+            dialog.Owner = RootWindow;
             dialog.ShowInTaskbar = false;
             dialog.ShowDialog();
         }, () =>
         {
-            var vm = ParentWindow.DataContext as MainViewModel;
+            var vm = RootWindow.DataContext as MainViewModel;
             return (vm.IsDebugStatus == false);
         });
 
@@ -47,12 +57,12 @@ namespace ApplicationLayer.WpfApp.Commands
             NewProjectDialog dialog = new NewProjectDialog();
             var vm = dialog.DataContext as NewProjectViewModel;
 
-            dialog.Owner = ParentWindow;
+            dialog.Owner = RootWindow;
             dialog.ShowInTaskbar = false;
             dialog.ShowDialog();
         }, () => 
         {
-            var vm = ParentWindow.DataContext as MainViewModel;
+            var vm = RootWindow.DataContext as MainViewModel;
             return (vm.IsDebugStatus == false);
         });
 
@@ -90,13 +100,13 @@ namespace ApplicationLayer.WpfApp.Commands
                     }
                 };
 
-                dialog.Owner = ParentWindow;
+                dialog.Owner = RootWindow;
                 dialog.ShowInTaskbar = false;
                 dialog.ShowDialog();
 
             }, (condition) =>
             {
-                var vm = ParentWindow.DataContext as MainViewModel;
+                var vm = RootWindow.DataContext as MainViewModel;
                 return (vm.IsDebugStatus == false);
             });
 
@@ -120,7 +130,7 @@ namespace ApplicationLayer.WpfApp.Commands
                         string destPath = Path.Combine(hirStruct.BaseOPath, Path.GetFileName(fileName));
                         if (System.IO.File.Exists(destPath))
                         {
-                            DialogResult dResult = MessageBox.Show(CommonResource.AlreadyExistFile, string.Empty, MessageBoxButtons.YesNo);
+                            DialogResult dResult = System.Windows.Forms.MessageBox.Show(CommonResource.AlreadyExistFile, string.Empty, MessageBoxButtons.YesNo);
 
                             if (dResult == DialogResult.Yes) System.IO.File.Copy(fileName, destPath);
                             else return;
@@ -138,7 +148,7 @@ namespace ApplicationLayer.WpfApp.Commands
                 }
             }, (condition) =>
             {
-                var vm = ParentWindow.DataContext as MainViewModel;
+                var vm = RootWindow.DataContext as MainViewModel;
                 return (vm.IsDebugStatus == false);
             });
 
@@ -152,7 +162,7 @@ namespace ApplicationLayer.WpfApp.Commands
                 HierarchicalData parent = selectedStruct.Parent;
                 if (parent == null) return;
 
-                DialogResult dResult = MessageBox.Show(CommonResource.DeleteWarning, string.Empty, MessageBoxButtons.YesNo);
+                DialogResult dResult = System.Windows.Forms.MessageBox.Show(CommonResource.DeleteWarning, string.Empty, MessageBoxButtons.YesNo);
 
                 if (dResult == DialogResult.Yes)
                 {
@@ -195,7 +205,7 @@ namespace ApplicationLayer.WpfApp.Commands
                 }
             }, (condition) =>
             {
-                var vm = ParentWindow.DataContext as MainViewModel;
+                var vm = RootWindow.DataContext as MainViewModel;
                 return (vm.IsDebugStatus == false);
             });
 
@@ -244,7 +254,7 @@ namespace ApplicationLayer.WpfApp.Commands
                 
             }, (condition) =>
             {
-                var vm = ParentWindow.DataContext as MainViewModel;
+                var vm = RootWindow.DataContext as MainViewModel;
                 return (vm.IsDebugStatus == false);
             });
 
@@ -269,29 +279,118 @@ namespace ApplicationLayer.WpfApp.Commands
 
 
         /// <summary>
-        /// This command saves layout information to the file.
+        /// This command shows parsing history for selected document.
         /// </summary>
-        public static readonly RelayUICommand<DockSite> SaveLayout = new RelayUICommand<DockSite>(string.Empty,
-            (dockSite) =>
+        public static readonly RelayUICommand ParsingHistory = new RelayUICommand(CommonResource.ParsingHistory,
+            () =>
             {
-                new DockSiteLayoutSerializer().SaveToFile("user.layout", dockSite);
+                var mainViewModel = RootWindow.DataContext as MainViewModel;
+
+//                mainViewModel.Documents.Add(new ParsingHistoryViewModel());
+            }, () =>
+            {
+                return true;
+            });
+
+
+        /// <summary>
+        /// This command is executed if docking windows were closed.
+        /// </summary>
+        public static readonly RelayUICommand<Tuple<object, DockingWindowsEventArgs>> DockingWindowClosed = 
+            new RelayUICommand<Tuple<object, DockingWindowsEventArgs>>(CommonResource.Close, (eventArgs) =>
+            {
+                if (eventArgs == null) return;
+                if (eventArgs.Item1 == null) return;
+
+                var mainWindow = eventArgs.Item1 as MainWindow;
+                var mainViewModel = mainWindow.DataContext as MainViewModel;
+
+                List<DockingItemViewModel> result = new List<DockingItemViewModel>();
+                foreach (var window in eventArgs.Item2.Windows)
+                {
+                    result.Add(window.DataContext as DockingItemViewModel);
+                }
+
+                foreach (var item in result)
+                {
+                    if (item is DocumentViewModel) mainViewModel.SolutionExplorer.Documents.Remove(item as DocumentViewModel);
+                    else if (item is ToolWindowViewModel) mainViewModel.VisibleToolItems.Remove(item as ToolWindowViewModel);
+                }
+            }, (condition) =>
+            {
+                return true;
+            });
+
+
+        /// <summary>
+        /// This command is executed after the main window is loaded.
+        /// </summary>
+        public static readonly RelayUICommand<Tuple<object, RoutedEventArgs>> MainWindowLoaded = new RelayUICommand<Tuple<object, RoutedEventArgs>>(string.Empty,
+            (e) =>
+            {
+                RootWindow = e.Item1 as MainWindow;
+                if (RootWindow == null) return;
+                var mainViewModel = RootWindow.DataContext as MainViewModel;
+
+                try
+                {
+                    var dockSite = LogicalTreeHelper.FindLogicalNode(RootWindow, "dockSite") as DockSite;
+                    new DockSiteLayoutSerializer().LoadFromFile(dockingLayoutFileName, dockSite);
+                }
+                catch { }
+
+                try
+                {
+                    var toolItems = File.ReadAllText(visibleToolItems);
+                    foreach (var toolItemId in toolItems.Split(new string[] { Environment.NewLine}, StringSplitOptions.RemoveEmptyEntries))
+                    {
+                        foreach (var toolItem in mainViewModel.AllToolItems)
+                        {
+                            if (toolItem.SerializationId == toolItemId) mainViewModel.VisibleToolItems.Add(toolItem);
+                        }
+                    }
+                }
+                catch { }
             }, (condition) =>
             {
                 return true;
             });
 
         /// <summary>
-        /// This command loads layout information from file.
+        /// This command is executed before the main window is closed.
         /// </summary>
-        public static readonly RelayUICommand<DockSite> LoadLayout = new RelayUICommand<DockSite>(string.Empty,
-            (dockSite) =>
+        public static readonly RelayUICommand<Tuple<object, CancelEventArgs>> MainWindowClosing = 
+            new RelayUICommand<Tuple<object, CancelEventArgs>>(CommonResource.Close, (e) =>
             {
-                new DockSiteLayoutSerializer().LoadFromFile("user.layout", dockSite);
+                if (RootWindow == null) return;
+                var mainViewModel = RootWindow.DataContext as MainViewModel;
+
+                if (mainViewModel.IsDebugStatus)
+                {
+                    // You have to implement the logic that exit from debug mode.
+                }
+                else
+                {
+                    var answer = SolutionExplorerViewModel.CheckChangedFiles();
+
+                    if (answer?.ResultStatus == ShowSaveDialogMessage.Result.Cancel)
+                    {
+                        e.Item2.Cancel = true;
+                        return;
+                    }
+                }
+
+                string content = string.Empty;
+                foreach (var item in mainViewModel.VisibleToolItems)
+                    content += item.SerializationId + Environment.NewLine;
+                File.WriteAllText(visibleToolItems, content);
+
+                var dockSite = LogicalTreeHelper.FindLogicalNode(RootWindow, "dockSite") as DockSite;
+                new DockSiteLayoutSerializer().SaveToFile(dockingLayoutFileName, dockSite);
             }, (condition) =>
             {
                 return true;
             });
-
 
 
 
@@ -299,56 +398,56 @@ namespace ApplicationLayer.WpfApp.Commands
         /// <summary>
         /// This command open changes character set to Korean.
         /// </summary>
-        public static readonly RelayUICommand<HierarchicalData> ChangeToKorean = new RelayUICommand<HierarchicalData>(CommonResource.Korean,
-            (hirStruct) =>
+        public static readonly RelayUICommand ChangeToKorean = new RelayUICommand(CommonResource.Korean,
+            () =>
             {
                 LocalizeDictionary.Instance.SetCurrentThreadCulture = true;
                 LocalizeDictionary.Instance.Culture = new CultureInfo("ko-KR");
-            }, (condition) =>
+            }, () =>
             {
-                var vm = ParentWindow.DataContext as MainViewModel;
+                var vm = RootWindow.DataContext as MainViewModel;
                 return (vm.IsDebugStatus == false);
             });
 
         /// <summary>
         /// This command open changes character set to English.
         /// </summary>
-        public static readonly RelayUICommand<HierarchicalData> ChangeToEnglish = new RelayUICommand<HierarchicalData>(CommonResource.English,
-            (hirStruct) =>
+        public static readonly RelayUICommand ChangeToEnglish = new RelayUICommand(CommonResource.English,
+            () =>
             {
                 LocalizeDictionary.Instance.SetCurrentThreadCulture = true;
                 LocalizeDictionary.Instance.Culture = new CultureInfo("en-US");
-            }, (condition) =>
+            }, () =>
             {
-                var vm = ParentWindow.DataContext as MainViewModel;
+                var vm = RootWindow.DataContext as MainViewModel;
                 return (vm.IsDebugStatus == false);
             });
 
         /// <summary>
         /// This command open changes character set to Chinese.
         /// </summary>
-        public static readonly RelayUICommand<HierarchicalData> ChangeToChinese = new RelayUICommand<HierarchicalData>(CommonResource.Chinese,
-            (hirStruct) =>
+        public static readonly RelayUICommand ChangeToChinese = new RelayUICommand(CommonResource.Chinese,
+            () =>
             {
                 LocalizeDictionary.Instance.SetCurrentThreadCulture = true;
 //                LocalizeDictionary.Instance.Culture = new CultureInfo("ko-KR");
-            }, (condition) =>
+            }, () =>
             {
-                var vm = ParentWindow.DataContext as MainViewModel;
+                var vm = RootWindow.DataContext as MainViewModel;
                 return (vm.IsDebugStatus == false);
             });
 
         /// <summary>
         /// This command open changes character set to Japanese.
         /// </summary>
-        public static readonly RelayUICommand<HierarchicalData> ChangeToJapanese = new RelayUICommand<HierarchicalData>(CommonResource.Japanese,
-            (hirStruct) =>
+        public static readonly RelayUICommand ChangeToJapanese = new RelayUICommand(CommonResource.Japanese,
+            () =>
             {
                 LocalizeDictionary.Instance.SetCurrentThreadCulture = true;
 //                LocalizeDictionary.Instance.Culture = new CultureInfo("ko-KR");
-            }, (condition) =>
+            }, () =>
             {
-                var vm = ParentWindow.DataContext as MainViewModel;
+                var vm = RootWindow.DataContext as MainViewModel;
                 return (vm.IsDebugStatus == false);
             });
     }

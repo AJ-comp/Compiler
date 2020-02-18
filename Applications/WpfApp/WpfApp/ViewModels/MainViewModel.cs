@@ -17,7 +17,6 @@ using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.IO;
 using System.Windows;
-using System.Xml.Serialization;
 
 namespace ApplicationLayer.WpfApp.ViewModels
 {
@@ -33,7 +32,6 @@ namespace ApplicationLayer.WpfApp.ViewModels
     /// See http://www.galasoft.ch/mvvm
     /// </para>
     /// </summary>
-    [XmlInclude(typeof(AlarmListViewModel))]
     public class MainViewModel : ViewModelBase
     {
         private Collection<Grammar> supplyGrammars = new Collection<Grammar>();
@@ -49,68 +47,16 @@ namespace ApplicationLayer.WpfApp.ViewModels
             }
         }
 
-        #region Property related to Document
-        private ObservableCollection<DocumentViewModel> _documents;
-        [XmlIgnore]
-        public ObservableCollection<DocumentViewModel> Documents
-        {
-            get
-            {
-                if (this._documents == null)
-                {
-                    this._documents = new ObservableCollection<DocumentViewModel>();
-                    this._documents.CollectionChanged += _documents_CollectionChanged;
-                }
+        public SolutionExplorerViewModel SolutionExplorer { get; } = ServiceLocator.Current.GetInstance<SolutionExplorerViewModel>();
 
-                return this._documents;
-            }
-        }
+        private List<ToolWindowViewModel> allToolItems = new List<ToolWindowViewModel>();
+        public ReadOnlyCollection<ToolWindowViewModel> AllToolItems => new ReadOnlyCollection<ToolWindowViewModel>(allToolItems);
 
-        private void _documents_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
-        {
-            if (e.NewItems != null && e.NewItems.Count != 0)
-                foreach (DocumentViewModel document in e.NewItems)
-                {
-                    document.CloseRequest += Document_RequestClose;
-                    document.AllCloseExceptThisRequest += Document_AllCloseExceptThisRequest;
-                }
-            if (e.OldItems != null && e.OldItems.Count != 0)
-                foreach (DocumentViewModel document in e.OldItems)
-                {
-                    document.CloseRequest -= Document_RequestClose;
-                    document.AllCloseExceptThisRequest -= Document_AllCloseExceptThisRequest;
-                }
-        }
+        public ObservableCollection<ToolWindowViewModel> VisibleToolItems { get; } = new ObservableCollection<ToolWindowViewModel>();
 
-        private void Document_AllCloseExceptThisRequest(object sender, EventArgs e)
-        {
-            this._documents.Clear();
-            this._documents.Add(sender as DocumentViewModel);
-        }
-
-        private void Document_RequestClose(object sender, EventArgs e)
-        {
-            this._documents.Remove(sender as DocumentViewModel);
-        }
-
-        private DocumentViewModel selectedDocument;
-        [XmlIgnore]
-        public DocumentViewModel SelectedDocument
-        {
-            get => this.selectedDocument;
-            set
-            {
-                this.selectedDocument = value;
-                this.RaisePropertyChanged("SelectedDocument");
-            }
-        }
-        #endregion
-
-        public ObservableCollection<ToolWindowViewModel> ToolItems { get; } = new ObservableCollection<ToolWindowViewModel>();
-
-        [XmlIgnore]
         public Action ParseTreeAction = null;
 
+        /*
         #region Command related to NewFile
         private RelayCommand<Func<Document>> _newFileCommand;
         public RelayCommand<Func<Document>> NewFileCommand
@@ -137,6 +83,7 @@ namespace ApplicationLayer.WpfApp.ViewModels
             Messenger.Default.Send<AddEditorMessage>(new AddEditorMessage(newDocument));
         }
         #endregion
+        */
 
         #region Command related to Open
         private RelayCommand<Func<string>> openCommand;
@@ -175,30 +122,8 @@ namespace ApplicationLayer.WpfApp.ViewModels
         {
             var document = ServiceLocator.Current.GetInstance<GrammarInfoViewModel>();
 
-            if (this._documents.Contains(document) == false) this._documents.Add(document);
-            this.SelectedDocument = document;
-        }
-        #endregion
-
-        #region Command related to ParsingHistory
-        private RelayCommand _parsingHistoryCommand;
-        public RelayCommand ParsingHistoryCommand
-        {
-            get
-            {
-                if (_parsingHistoryCommand == null)
-                    _parsingHistoryCommand = new RelayCommand(this.OnParsingHistory);
-
-                return _parsingHistoryCommand;
-            }
-        }
-        private void OnParsingHistory()
-        {
-            var document = ServiceLocator.Current.GetInstance<ParsingHistoryViewModel>();
-            //            document.ParsingHistory = 
-
-            if (this._documents.Contains(document) == false) this._documents.Add(document);
-            this.selectedDocument = document;
+            if (this.SolutionExplorer.Documents.Contains(document) == false) this.SolutionExplorer.Documents.Add(document);
+            this.SolutionExplorer.SelectedDocument = document;
         }
         #endregion
 
@@ -259,31 +184,9 @@ namespace ApplicationLayer.WpfApp.ViewModels
         private void OnShowToolWindow(ToolWindowViewModel obj)
         {
             if (obj == null) return;
-            if (this.ToolItems.Contains(obj)) return;
+            if (this.VisibleToolItems.Contains(obj)) return;
 
-            this.ToolItems.Add(obj);
-        }
-
-        private RelayCommand<List<DockingItemViewModel>> unregisterDockingWindowCommand;
-        public RelayCommand<List<DockingItemViewModel>> UnRegisterDockingWindowCommand
-        {
-            get
-            {
-                if (this.unregisterDockingWindowCommand == null)
-                    this.unregisterDockingWindowCommand = new RelayCommand<List<DockingItemViewModel>>(OnUnRegisterDockingWindow);
-
-                return this.unregisterDockingWindowCommand;
-            }
-        }
-        private void OnUnRegisterDockingWindow(List<DockingItemViewModel> obj)
-        {
-            if (obj == null) return;
-
-            foreach(var item in obj)
-            {
-                if (item is EditorTypeViewModel) this.Documents.Remove(item as EditorTypeViewModel);
-                else if (item is ToolWindowViewModel) this.ToolItems.Remove(item as ToolWindowViewModel);
-            }
+            this.VisibleToolItems.Add(obj);
         }
 
         private void InitGrammarWindow()
@@ -301,7 +204,7 @@ namespace ApplicationLayer.WpfApp.ViewModels
             Messenger.Default.Register<CreateSolutionMessage>(solutionExplorer, solutionExplorer.ReceivedCreateSolutionMessage);
             Messenger.Default.Register<LoadSolutionMessage>(solutionExplorer, solutionExplorer.ReceivedLoadSolutionMessage);
             Messenger.Default.Register<AddProjectMessage>(solutionExplorer, solutionExplorer.ReceivedAddNewProjectMessage);
-            Messenger.Default.Register<AddMissedChangedFiles>(solutionExplorer, solutionExplorer.ReceivedAddMissedChangedFilesMessage);
+            Messenger.Default.Register<AddMissedChangedFilesMessage>(solutionExplorer, solutionExplorer.ReceivedAddMissedChangedFilesMessage);
         }
 
         private void InitAlarmList()
@@ -325,6 +228,9 @@ namespace ApplicationLayer.WpfApp.ViewModels
         /// </summary>
         public MainViewModel()
         {
+            this.allToolItems.Add(ServiceLocator.Current.GetInstance<SolutionExplorerViewModel>());
+            this.allToolItems.Add(ServiceLocator.Current.GetInstance<AlarmListViewModel>());
+
             this.supplyGrammars.Add(new MiniCGrammar());
             this.supplyGrammars.Add(new LRTest1Grammar());
 
@@ -334,7 +240,6 @@ namespace ApplicationLayer.WpfApp.ViewModels
             this.InitQuestionToSaveDialog();
 
             Messenger.Default.Register<DisplayMessage>(MessageBoxLogic.Own, MessageBoxLogic.Own.ShowMessage);
-            Messenger.Default.Register<OpenFileMessage>(this, this.ReceivedOpenFileMessage);
 
             if (IsInDesignMode)
             {
@@ -344,23 +249,6 @@ namespace ApplicationLayer.WpfApp.ViewModels
             {
                 // Code runs "for real"
             }
-        }
-
-
-        public void ReceivedOpenFileMessage(OpenFileMessage message)
-        {
-            string fileName = message.SelectedFile.FullPath;
-
-            if (File.Exists(fileName) == false) return;
-            string content = File.ReadAllText(fileName);
-
-            var editor = new EditorTypeViewModel(fileName, content);
-            if (this.Documents.Contains(editor)) return;
-
-            this.Documents.Add(editor);
-            this.SelectedDocument = editor;
-
-            Messenger.Default.Send<AddEditorMessage>(new AddEditorMessage(editor));
         }
     }
 }

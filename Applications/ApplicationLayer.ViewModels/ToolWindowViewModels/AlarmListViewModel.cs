@@ -28,6 +28,17 @@ namespace ApplicationLayer.ViewModels.ToolWindowViewModels
                 return _cmdMouseDoubleClick;
             }
         }
+        private void ExecuteMouseDoubleClick(int index)
+        {
+            var editor = this.FindEditorIndexOfAlarmData(this.AlarmLists[index]);
+            if (editor == null)
+            {
+                // it have to be removed from AlarmList.
+                return;
+            }
+
+            editor.MoveCaretInvoker.Call(new object[] { this.AlarmLists[index].TokenIndex });
+        }
 
         public AlarmListViewModel()
         {
@@ -53,18 +64,6 @@ namespace ApplicationLayer.ViewModels.ToolWindowViewModels
             }
 
             return result;
-        }
-
-        private void ExecuteMouseDoubleClick(int index)
-        {
-            var editor = this.FindEditorIndexOfAlarmData(this.AlarmLists[index]);
-            if (editor == null)
-            {
-                // it have to be removed from AlarmList.
-                return;
-            }
-
-            editor.MoveCaretInvoker.Call(new object[] { this.AlarmLists[index].TokenIndex });
         }
 
         private void RemoveAllMatched(object fromControl)

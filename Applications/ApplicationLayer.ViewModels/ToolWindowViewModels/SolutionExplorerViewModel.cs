@@ -1,11 +1,12 @@
 ﻿using ApplicationLayer.Common.Helpers;
-using ApplicationLayer.Common.Interfaces;
 using ApplicationLayer.Models;
 using ApplicationLayer.Models.SolutionPackage;
 using ApplicationLayer.ViewModels.CommandArgs;
+using ApplicationLayer.ViewModels.DocumentTypeViewModels;
 using ApplicationLayer.ViewModels.Messages;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
+using System;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.IO;
@@ -16,9 +17,63 @@ namespace ApplicationLayer.ViewModels.ToolWindowViewModels
 {
     public class SolutionExplorerViewModel : ToolWindowViewModel
     {
-        private ShowSaveDialogMessage saveMessage;
-
         public ObservableCollection<SolutionHier> Solutions { get; } = new ObservableCollection<SolutionHier>();
+
+        #region Property related to Document
+        private ObservableCollection<DocumentViewModel> _documents;
+        public ObservableCollection<DocumentViewModel> Documents
+        {
+            get
+            {
+                if (this._documents == null)
+                {
+                    this._documents = new ObservableCollection<DocumentViewModel>();
+                    this._documents.CollectionChanged += _documents_CollectionChanged;
+                }
+
+                return this._documents;
+            }
+        }
+
+        private void _documents_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            if (e.NewItems != null && e.NewItems.Count != 0)
+                foreach (DocumentViewModel document in e.NewItems)
+                {
+                    document.CloseRequest += Document_RequestClose;
+                    document.AllCloseExceptThisRequest += Document_AllCloseExceptThisRequest;
+                }
+            if (e.OldItems != null && e.OldItems.Count != 0)
+                foreach (DocumentViewModel document in e.OldItems)
+                {
+                    document.CloseRequest -= Document_RequestClose;
+                    document.AllCloseExceptThisRequest -= Document_AllCloseExceptThisRequest;
+                }
+        }
+
+        private void Document_AllCloseExceptThisRequest(object sender, EventArgs e)
+        {
+            this._documents.Clear();
+            this._documents.Add(sender as DocumentViewModel);
+        }
+
+        private void Document_RequestClose(object sender, EventArgs e)
+        {
+            this._documents.Remove(sender as DocumentViewModel);
+        }
+
+        private DocumentViewModel selectedDocument;
+        public DocumentViewModel SelectedDocument
+        {
+            get => this.selectedDocument;
+            set
+            {
+                this.selectedDocument = value;
+                this.RaisePropertyChanged(nameof(SelectedDocument));
+            }
+        }
+        #endregion
+
 
         public HierarchicalData SelectedItem { get; private set; }
 
@@ -39,7 +94,18 @@ namespace ApplicationLayer.ViewModels.ToolWindowViewModels
 
             if(selectedItem is DefaultFileHier)
             {
-                Messenger.Default.Send(new OpenFileMessage(selectedItem as DefaultFileHier));
+                string fileName = selectedItem.FullPath;
+
+                if (File.Exists(fileName) == false) return;
+                string content = File.ReadAllText(fileName);
+
+                var editor = new EditorTypeViewModel(fileName, content);
+                if (this.Documents.Contains(editor)) return;
+
+                this.Documents.Add(editor);
+                this.SelectedDocument = editor;
+
+                Messenger.Default.Send<AddEditorMessage>(new AddEditorMessage(editor));
             }
         }
 
@@ -120,8 +186,7 @@ namespace ApplicationLayer.ViewModels.ToolWindowViewModels
                     target.Item.IsEditMode = false;
                     target.Item.ChangeDisplayName();
                 }
-                
-                Messenger.Default.Send<DisplayMessage>(new DisplayMessage(exceptData, string.Empty));
+                else Messenger.Default.Send<DisplayMessage>(new DisplayMessage(exceptData, string.Empty));
             }
         }
 
@@ -165,37 +230,6 @@ namespace ApplicationLayer.ViewModels.ToolWindowViewModels
             this.Solutions.Add(solution);
         }
 
-        private void PreprocessChangedFileList(Collection<ISaveAndChangeTrackable> hirStructs)
-        {
-            if(hirStructs.Count > 0)
-            {
-                saveMessage = new ShowSaveDialogMessage();
-                Messenger.Default.Send<ShowSaveDialogMessage>(saveMessage);
-
-                if (saveMessage.ResultStatus == ShowSaveDialogMessage.Result.Yes)
-                {
-                    foreach (var item in hirStructs)
-                    {
-                        item.Commit();
-                        item.Save();
-                    }
-
-                    Messenger.Default.Send<RemoveChangedFileMessage>(null);
-                }
-                else if (saveMessage.ResultStatus == ShowSaveDialogMessage.Result.No)
-                {
-                    foreach (var item in hirStructs)
-                    {
-                        item.RollBack();
-                        item.Save();
-                    }
-
-                    Messenger.Default.Send<RemoveChangedFileMessage>(null);
-                }
-            }
-        }
-
-
         private bool LoadSolution(LoadSolutionMessage message)
         {
             this.Solutions.Clear();
@@ -225,18 +259,58 @@ namespace ApplicationLayer.ViewModels.ToolWindowViewModels
         }
 
         /// <summary>
+        /// This function checks whether changed files are.
+        /// </summary>
+        /// <returns>If changed files not exist return null, if changed files exist return a user's answer after process for answer.</returns>
+        public static ShowSaveDialogMessage CheckChangedFiles()
+        {
+            ShowSaveDialogMessage result = null;
+
+            Messenger.Default.Send<AddMissedChangedFilesMessage>(new AddMissedChangedFilesMessage());
+
+            var process = new GetChangedListMessage(string.Empty, (hirStructs) => 
+            {
+                if (hirStructs.Count <= 0) return;
+
+                result = new ShowSaveDialogMessage();
+                Messenger.Default.Send<ShowSaveDialogMessage>(result);
+
+                if (result.ResultStatus == ShowSaveDialogMessage.Result.Yes)
+                {
+                    foreach (var item in hirStructs)
+                    {
+                        item.Commit();
+                        item.Save();
+                    }
+
+                    Messenger.Default.Send<RemoveChangedFileMessage>(null);
+                }
+                else if (result.ResultStatus == ShowSaveDialogMessage.Result.No)
+                {
+                    foreach (var item in hirStructs)
+                    {
+                        item.RollBack();
+                        item.Save();
+                    }
+
+                    Messenger.Default.Send<RemoveChangedFileMessage>(null);
+                }
+            });
+
+            Messenger.Default.Send<GetChangedListMessage>(process);
+
+            return result;
+        }
+
+        /// <summary>
         /// This message handler loads the Solution.
         /// </summary>
         /// <param name="message">Information about the solution to load</param>
         public void ReceivedLoadSolutionMessage(LoadSolutionMessage message)
         {
-            saveMessage = null;
-            Messenger.Default.Send<AddMissedChangedFiles>(new AddMissedChangedFiles());
+            var answer = SolutionExplorerViewModel.CheckChangedFiles();
 
-            var process = new GetChangedListMessage(string.Empty, PreprocessChangedFileList);
-            Messenger.Default.Send<GetChangedListMessage>(process);
-
-            if (saveMessage?.ResultStatus == ShowSaveDialogMessage.Result.Cancel) return;
+            if (answer?.ResultStatus == ShowSaveDialogMessage.Result.Cancel) return;
 
             if (message is null) return;
             if (this.LoadSolution(message)) Messenger.Default.Send<DisplayMessage>(new DisplayMessage(CommonResource.WarningOnLoad, ""));
@@ -281,7 +355,7 @@ namespace ApplicationLayer.ViewModels.ToolWindowViewModels
         /// This message handler addes a changed files that missed.
         /// </summary>
         /// <param name="message">not use (to match the shape)</param>
-        public void ReceivedAddMissedChangedFilesMessage(AddMissedChangedFiles message)
+        public void ReceivedAddMissedChangedFilesMessage(AddMissedChangedFilesMessage message)
         {
             if (message == null) return;
             if (this.Solutions.Count == 0) return;

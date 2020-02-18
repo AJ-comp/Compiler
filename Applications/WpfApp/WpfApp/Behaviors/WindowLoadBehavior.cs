@@ -38,9 +38,6 @@ namespace ApplicationLayer.WpfApp.Behaviors
         {
             this.mainWindow = sender as MainWindow;
 
-            MainViewModel mainVm = this.mainWindow.DataContext as MainViewModel;
-
-            MenuActionCommands.ParentWindow = mainWindow;
             this.questionToSaveDialog.Owner = mainWindow;
             this.questionToSaveDialog.ShowInTaskbar = false;
 
@@ -78,7 +75,7 @@ namespace ApplicationLayer.WpfApp.Behaviors
             */
         }
 
-        private DataGridView DataGridWinformInit(System.Windows.Forms.Control winformControl)
+        private DataGridView DataGridWinformInit(Control winformControl)
         {
             winformControl = new DataGridView();
             DataGridView result = winformControl as DataGridView;

@@ -85,7 +85,7 @@ namespace ApplicationLayer.ViewModels.Messages
     /// <summary>
     /// This message informs that the target has to add a changed project or solution files that missed.
     /// </summary>
-    public class AddMissedChangedFiles : MessageBase
+    public class AddMissedChangedFilesMessage : MessageBase
     {
     }
 

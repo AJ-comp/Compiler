@@ -105,6 +105,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AttachedProperties\DockSiteHook.cs" />
     <Compile Include="AttachedProperties\EditableTextBox.cs" />
     <Compile Include="AttachedProperties\MainWindowHook.cs" />
     <Compile Include="AttachedProperties\WindowsFormsHostMap.cs" />
@@ -117,7 +118,6 @@
     <Compile Include="Behaviors\WindowLoadBehavior.cs" />
     <Compile Include="Commands\MenuActionCommands.cs" />
     <Compile Include="Commands\RelayUICommand.cs" />
-    <Compile Include="Converters\DockingWindowEventConverter.cs" />
     <Compile Include="Converters\GrammarToLRParserConverter.cs" />
     <Compile Include="Converters\NavigateUriToStringConverter.cs" />
     <Compile Include="Converters\LogicConverters\FileCreateLogicConverter.cs" />
