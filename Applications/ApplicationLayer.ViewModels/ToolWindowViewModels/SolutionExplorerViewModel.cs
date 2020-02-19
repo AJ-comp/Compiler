@@ -28,14 +28,14 @@ namespace ApplicationLayer.ViewModels.ToolWindowViewModels
                 if (this._documents == null)
                 {
                     this._documents = new ObservableCollection<DocumentViewModel>();
-                    this._documents.CollectionChanged += _documents_CollectionChanged;
+                    this._documents.CollectionChanged += Documents_CollectionChanged;
                 }
 
                 return this._documents;
             }
         }
 
-        private void _documents_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        private void Documents_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             if (e.NewItems != null && e.NewItems.Count != 0)
                 foreach (DocumentViewModel document in e.NewItems)

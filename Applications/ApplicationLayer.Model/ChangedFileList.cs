@@ -6,14 +6,14 @@ namespace ApplicationLayer.Models
     public class ChangedFileList : List<HierarchicalData>
     {
 
-        private static ChangedFileList own;
+        private static ChangedFileList instance;
         public static ChangedFileList Instance
         {
             get
             {
-                if (ChangedFileList.own == null) ChangedFileList.own = new ChangedFileList();
+                if (ChangedFileList.instance == null) ChangedFileList.instance = new ChangedFileList();
 
-                return ChangedFileList.own;
+                return ChangedFileList.instance;
             }
         }
     }

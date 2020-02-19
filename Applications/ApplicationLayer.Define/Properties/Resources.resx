@@ -304,4 +304,13 @@
   <data name="PinTab" xml:space="preserve">
     <value>Pin Tab</value>
   </data>
+  <data name="NewHorTabGroup" xml:space="preserve">
+    <value>New Horizontal Tab Group</value>
+  </data>
+  <data name="NewVerTabGroup" xml:space="preserve">
+    <value>New Vertical Tab Group</value>
+  </data>
+  <data name="PreviousTabGroup" xml:space="preserve">
+    <value>Move To Previous Tab Group</value>
+  </data>
 </root>

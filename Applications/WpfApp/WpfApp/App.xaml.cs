@@ -55,6 +55,10 @@ namespace ApplicationLayer.WpfApp
             SR.SetCustomString(SRName.UICommandCloseAllInContainerText.ToString(), CommonResource.CloseTabGroup);
             SR.SetCustomString(SRName.UICommandCloseAllDocumentsText.ToString(), CommonResource.CloseAll);
             SR.SetCustomString(SRName.UICommandPinTabText.ToString(), CommonResource.PinTab);
+            SR.SetCustomString(SRName.UICommandMoveToNewHorizontalContainerText.ToString(), CommonResource.NewHorTabGroup);
+            SR.SetCustomString(SRName.UICommandMoveToNewVerticalContainerText.ToString(), CommonResource.NewVerTabGroup);
+            SR.SetCustomString(SRName.UICommandMoveToPreviousContainerText.ToString(), CommonResource.PreviousTabGroup);
+            //SR.SetCustomString(SRName.UICommandMoveToPrimaryMdiHostText.ToString(), CommonResource.PinTab);
 
         }
 

@@ -66,6 +66,36 @@ namespace ApplicationLayer.WpfApp.Commands
             return (vm.IsDebugStatus == false);
         });
 
+
+        /*
+#region Command related to NewFile
+private RelayCommand<Func<Document>> _newFileCommand;
+public RelayCommand<Func<Document>> NewFileCommand
+{
+    get
+    {
+        if (_newFileCommand == null)
+            _newFileCommand = new RelayCommand<Func<Document>>(this.OnNewFile);
+
+        return _newFileCommand;
+    }
+}
+private void OnNewFile(Func<Document> func)
+{
+    if (func == null) return;
+
+    var document = func.Invoke();
+    if (document == null) return;
+
+    var newDocument = new EditorTypeViewModel();
+    this.Documents.Add(newDocument);
+    this.SelectedDocument = newDocument;
+
+    Messenger.Default.Send<AddEditorMessage>(new AddEditorMessage(newDocument));
+}
+#endregion
+*/
+
         /// <summary>
         /// New Item Command
         /// </summary>
@@ -335,14 +365,18 @@ namespace ApplicationLayer.WpfApp.Commands
                 try
                 {
                     var dockSite = LogicalTreeHelper.FindLogicalNode(RootWindow, "dockSite") as DockSite;
-                    new DockSiteLayoutSerializer().LoadFromFile(dockingLayoutFileName, dockSite);
+                    var content = File.ReadAllText(dockingLayoutFileName);
+                    var serializer = new DockSiteLayoutSerializer();
+                    serializer.LoadFromString(content, dockSite);
+
+                    var data = dockSite.ToolItemsSource;
                 }
                 catch { }
 
                 try
                 {
                     var toolItems = File.ReadAllText(visibleToolItems);
-                    foreach (var toolItemId in toolItems.Split(new string[] { Environment.NewLine}, StringSplitOptions.RemoveEmptyEntries))
+                    foreach (var toolItemId in toolItems.Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries))
                     {
                         foreach (var toolItem in mainViewModel.AllToolItems)
                         {
@@ -386,7 +420,9 @@ namespace ApplicationLayer.WpfApp.Commands
                 File.WriteAllText(visibleToolItems, content);
 
                 var dockSite = LogicalTreeHelper.FindLogicalNode(RootWindow, "dockSite") as DockSite;
-                new DockSiteLayoutSerializer().SaveToFile(dockingLayoutFileName, dockSite);
+                var serializer = new DockSiteLayoutSerializer();
+                serializer.SerializationBehavior = DockSiteSerializationBehavior.ToolWindowsOnly;
+                serializer.SaveToFile(dockingLayoutFileName, dockSite);
             }, (condition) =>
             {
                 return true;

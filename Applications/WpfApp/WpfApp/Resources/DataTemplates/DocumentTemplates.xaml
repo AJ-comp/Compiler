@@ -67,7 +67,7 @@
             </StackPanel>
 
             <Grid>
-                <ContentControl Content="{Binding SelectedItem, Converter={localConverters:GrammarToLRParserConverter}}"/>
+                <ContentControl Content="{Binding SelectedItem, Converter={localConverters:FindParserConverter}}"/>
             </Grid>
         </DockPanel>
     </DataTemplate>

@@ -1,6 +1,5 @@
-using ApplicationLayer.Models;
+using ApplicationLayer.Common.Utilities;
 using ApplicationLayer.ViewModels.DialogViewModels;
-using ApplicationLayer.ViewModels.DockingItemViewModels;
 using ApplicationLayer.ViewModels.DocumentTypeViewModels;
 using ApplicationLayer.ViewModels.Messages;
 using ApplicationLayer.ViewModels.ToolWindowViewModels;
@@ -14,8 +13,6 @@ using Parse.FrontEnd.Grammars.PracticeGrammars;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Collections.Specialized;
-using System.IO;
 using System.Windows;
 
 namespace ApplicationLayer.WpfApp.ViewModels
@@ -43,7 +40,7 @@ namespace ApplicationLayer.WpfApp.ViewModels
             set
             {
                 this.isDebugStatus = value;
-                this.RaisePropertyChanged("IsDebugStatus");
+                this.RaisePropertyChanged(nameof(IsDebugStatus));
             }
         }
 
@@ -55,35 +52,6 @@ namespace ApplicationLayer.WpfApp.ViewModels
         public ObservableCollection<ToolWindowViewModel> VisibleToolItems { get; } = new ObservableCollection<ToolWindowViewModel>();
 
         public Action ParseTreeAction = null;
-
-        /*
-        #region Command related to NewFile
-        private RelayCommand<Func<Document>> _newFileCommand;
-        public RelayCommand<Func<Document>> NewFileCommand
-        {
-            get
-            {
-                if (_newFileCommand == null)
-                    _newFileCommand = new RelayCommand<Func<Document>>(this.OnNewFile);
-
-                return _newFileCommand;
-            }
-        }
-        private void OnNewFile(Func<Document> func)
-        {
-            if (func == null) return;
-
-            var document = func.Invoke();
-            if (document == null) return;
-
-            var newDocument = new EditorTypeViewModel();
-            this.Documents.Add(newDocument);
-            this.SelectedDocument = newDocument;
-
-            Messenger.Default.Send<AddEditorMessage>(new AddEditorMessage(newDocument));
-        }
-        #endregion
-        */
 
         #region Command related to Open
         private RelayCommand<Func<string>> openCommand;
@@ -189,6 +157,12 @@ namespace ApplicationLayer.WpfApp.ViewModels
             this.VisibleToolItems.Add(obj);
         }
 
+        private void InitParserToUse()
+        {
+            foreach(var grammar in this.supplyGrammars)
+                ParserFactory.Instance.RegisterParser(ParserFactory.ParserKind.SLR_Parser, grammar);
+        }
+
         private void InitGrammarWindow()
         {
             var grmmarViewModel = ServiceLocator.Current.GetInstance<GrammarInfoViewModel>();
@@ -234,12 +208,13 @@ namespace ApplicationLayer.WpfApp.ViewModels
             this.supplyGrammars.Add(new MiniCGrammar());
             this.supplyGrammars.Add(new LRTest1Grammar());
 
+            this.InitParserToUse();
             this.InitGrammarWindow();
             this.InitSolutionExplorer();
             this.InitAlarmList();
             this.InitQuestionToSaveDialog();
 
-            Messenger.Default.Register<DisplayMessage>(MessageBoxLogic.Own, MessageBoxLogic.Own.ShowMessage);
+            Messenger.Default.Register<DisplayMessage>(MessageBoxLogic.Instance, MessageBoxLogic.Instance.ShowMessage);
 
             if (IsInDesignMode)
             {

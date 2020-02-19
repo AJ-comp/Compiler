@@ -430,6 +430,15 @@ namespace ApplicationLayer.Define.Properties {
         }
         
         /// <summary>
+        ///   New Horizontal Tab Group과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string NewHorTabGroup {
+            get {
+                return ResourceManager.GetString("NewHorTabGroup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   New Item과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string NewItem {
@@ -444,6 +453,15 @@ namespace ApplicationLayer.Define.Properties {
         public static string NewProject {
             get {
                 return ResourceManager.GetString("NewProject", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   New Vertical Tab Group과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string NewVerTabGroup {
+            get {
+                return ResourceManager.GetString("NewVerTabGroup", resourceCulture);
             }
         }
         
@@ -552,6 +570,15 @@ namespace ApplicationLayer.Define.Properties {
         public static string Position {
             get {
                 return ResourceManager.GetString("Position", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Move To Previous Tab Group과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string PreviousTabGroup {
+            get {
+                return ResourceManager.GetString("PreviousTabGroup", resourceCulture);
             }
         }
         

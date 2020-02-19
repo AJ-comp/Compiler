@@ -324,4 +324,13 @@
   <data name="PinTab" xml:space="preserve">
     <value>탭 고정</value>
   </data>
+  <data name="NewHorTabGroup" xml:space="preserve">
+    <value>새 가로 문서 그룹</value>
+  </data>
+  <data name="NewVerTabGroup" xml:space="preserve">
+    <value>새 세로 문서 그룹</value>
+  </data>
+  <data name="PreviousTabGroup" xml:space="preserve">
+    <value>이전 문서 그룹으로 이동</value>
+  </data>
 </root>

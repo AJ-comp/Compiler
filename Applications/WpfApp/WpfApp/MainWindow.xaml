@@ -33,6 +33,15 @@
 
     <Window.Resources>
         <ResourceDictionary>
+            <Style x:Key="TestDockSite" TargetType="{x:Type docking:DockSite}">
+                <Setter Property="ap:DockSiteHook.EnableMenuItemHook" Value="True"/>
+                <Setter Property="ap:DockSiteHook.DocumentMenuItemToAdd">
+                    <Setter.Value>
+                        <MenuItem Command="{x:Static commands:MenuActionCommands.ParsingHistory}"/>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Resources/DataTemplates/DocumentTemplates.xaml"/>
                 <ResourceDictionary Source="Resources/DataTemplates/ToolWindowTemplates.xaml"/>
@@ -60,7 +69,8 @@
                           DocumentItemContainerStyle="{StaticResource DocumentWindowStyle}"
                           ToolItemsSource="{Binding VisibleToolItems}"
                           ToolItemContainerStyle="{StaticResource ToolWindowStyle}"
-                          ap:DockSiteHook.WindowClosedHook="True"
+                          Style="{StaticResource TestDockSite}"
+                          ap:DockSiteHook.EnableWindowClosedHook="True"
                           ap:DockSiteHook.WindowClosedCommand="{x:Static commands:MenuActionCommands.DockingWindowClosed}"
                           ap:DockSiteHook.WindowClosedCommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:MainWindow}}}">
 

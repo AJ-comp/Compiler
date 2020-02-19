@@ -9,14 +9,14 @@ namespace ApplicationLayer.WpfApp
     {
         //        public bool ShowQuestion(string Message, string Title) => MessageBox.Show(Message, Title, MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes;
 
-        private static MessageBoxLogic own;
-        public static MessageBoxLogic Own
+        private static MessageBoxLogic instance;
+        public static MessageBoxLogic Instance
         {
             get
             {
-                if (MessageBoxLogic.own == null) own = new MessageBoxLogic();
+                if (MessageBoxLogic.instance == null) instance = new MessageBoxLogic();
 
-                return own;
+                return instance;
             }
         }
 
