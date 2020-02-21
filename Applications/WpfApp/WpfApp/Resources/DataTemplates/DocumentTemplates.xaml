@@ -33,7 +33,7 @@
                                                 KeywordForeground="LightBlue"
                                                 LineCommentForeground="ForestGreen"
                                                 Text="{Binding Data}"
-                                                Grammar="{Binding Grammar}">
+                                                ParserSnippet="{Binding ParserSnippet}">
 
             <i:Interaction.Behaviors>
                 <localBehaviors:EventToCommandBehavior Command="{Binding AlarmFiredCommand}" Event="AlarmFired" PassArguments="True" />

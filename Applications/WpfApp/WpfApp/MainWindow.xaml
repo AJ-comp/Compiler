@@ -6,6 +6,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:behaviors="clr-namespace:ApplicationLayer.WpfApp.Behaviors"
     xmlns:commands="clr-namespace:ApplicationLayer.WpfApp.Commands"
+        xmlns:docVm="clr-namespace:ApplicationLayer.ViewModels.DocumentTypeViewModels;assembly=ApplicationLayer.ViewModels"
     xmlns:ap="clr-namespace:ApplicationLayer.WpfApp.AttachedProperties"
     xmlns:lex="http://wpflocalizeextension.codeplex.com" 
     xmlns:themes="http://schemas.actiprosoftware.com/winfx/xaml/themes"
@@ -40,6 +41,8 @@
                         <MenuItem Command="{x:Static commands:MenuActionCommands.ParsingHistory}"/>
                     </Setter.Value>
                 </Setter>
+                <Setter Property="ap:DockSiteHook.FilterDocumentMenuItemToAdd"
+                            Value="{x:Type docVm:EditorTypeViewModel}"/>
             </Style>
             
             <ResourceDictionary.MergedDictionaries>
@@ -72,7 +75,10 @@
                           Style="{StaticResource TestDockSite}"
                           ap:DockSiteHook.EnableWindowClosedHook="True"
                           ap:DockSiteHook.WindowClosedCommand="{x:Static commands:MenuActionCommands.DockingWindowClosed}"
-                          ap:DockSiteHook.WindowClosedCommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:MainWindow}}}">
+                          ap:DockSiteHook.WindowClosedCommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:MainWindow}}}"
+                          ap:DockSiteHook.EnablePrimaryDocumentChangedHook="True"
+                          ap:DockSiteHook.PrimaryDocumentChangedCommand="{x:Static commands:MenuActionCommands.PrimaryDocumentCommand}"
+                          ap:DockSiteHook.PrimaryDocumentChangedCommandParameter="{Binding}">
 
             <docking:SplitContainer Orientation="Vertical">
                 <docking:SplitContainer>

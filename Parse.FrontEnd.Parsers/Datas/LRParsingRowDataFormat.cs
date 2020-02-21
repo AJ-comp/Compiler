@@ -2,16 +2,15 @@
 using Parse.FrontEnd.RegularGrammar;
 using System;
 using System.Collections.Generic;
+using static Parse.FrontEnd.Parsers.Datas.LRParsingRowDataFormat;
 
 namespace Parse.FrontEnd.Parsers.Datas
 {
-    public class LRParsingData
+    public class LRParsingRowDataFormat : ParsingRowDataFormat<Canonical, Symbol, Tuple<ActionDir, object>>
     {
         public enum ActionDir { shift, reduce, epsilon_reduce, moveto, accept, failed }
 
-        public Canonical Ix { get; }
-        public Dictionary<Symbol, Tuple<ActionDir, object>> MatchedValueSet { get; }
-        public TerminalSet PossibleTerminalSet
+        public override TerminalSet PossibleTerminalSet
         {
             get
             {
@@ -25,7 +24,7 @@ namespace Parse.FrontEnd.Parsers.Datas
                 return result;
             }
         }
-        public HashSet<NonTerminal> PossibleNonTerminalSet
+        public override HashSet<NonTerminal> PossibleNonTerminalSet
         {
             get
             {
@@ -40,17 +39,8 @@ namespace Parse.FrontEnd.Parsers.Datas
             }
         }
 
-        public LRParsingData(Canonical ix, Dictionary<Symbol, Tuple<ActionDir, object>> matchedValueSet)
+        public LRParsingRowDataFormat(Canonical ix, Dictionary<Symbol, Tuple<ActionDir, object>> matchedValueSet) : base(ix, matchedValueSet)
         {
-            this.Ix = ix;
-            this.MatchedValueSet = matchedValueSet;
         }
-
-        /*
-        public Tuple<Symbol, ActionInfo, object> GetMatchedValue(Symbol symbol)
-        {
-
-        }
-        */
     }
 }

@@ -314,9 +314,11 @@ private void OnNewFile(Func<Document> func)
         public static readonly RelayUICommand ParsingHistory = new RelayUICommand(CommonResource.ParsingHistory,
             () =>
             {
+//                if ((docViewModel is EditorTypeViewModel) == false) return;
                 var mainViewModel = RootWindow.DataContext as MainViewModel;
 
-//                mainViewModel.Documents.Add(new ParsingHistoryViewModel());
+                var selDoc = mainViewModel.SolutionExplorer.SelectedDocument;
+                mainViewModel.SolutionExplorer.Documents.Add(new ParsingHistoryViewModel());
             }, () =>
             {
                 return true;
@@ -420,13 +422,33 @@ private void OnNewFile(Func<Document> func)
                 File.WriteAllText(visibleToolItems, content);
 
                 var dockSite = LogicalTreeHelper.FindLogicalNode(RootWindow, "dockSite") as DockSite;
-                var serializer = new DockSiteLayoutSerializer();
-                serializer.SerializationBehavior = DockSiteSerializationBehavior.ToolWindowsOnly;
+                var serializer = new DockSiteLayoutSerializer
+                {
+                    SerializationBehavior = DockSiteSerializationBehavior.ToolWindowsOnly
+                };
                 serializer.SaveToFile(dockingLayoutFileName, dockSite);
             }, (condition) =>
             {
                 return true;
             });
+
+
+
+        public static readonly RelayUICommand<Tuple<object, DockingWindowEventArgs>> PrimaryDocumentCommand =
+            new RelayUICommand<Tuple<object, DockingWindowEventArgs>>(string.Empty, (eventArgs) =>
+            {
+                if (eventArgs == null) return;
+                if (eventArgs.Item1 == null) return;
+
+                var mainVm = eventArgs.Item1 as MainViewModel;
+                mainVm.SolutionExplorer.SelectedDocument = eventArgs.Item2.Window.DataContext as DocumentViewModel;
+
+            }, (condition) =>
+            {
+                return true;
+            });
+
+
 
 
 

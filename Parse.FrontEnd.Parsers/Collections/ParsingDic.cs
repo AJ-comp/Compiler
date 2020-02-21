@@ -10,6 +10,7 @@ namespace Parse.FrontEnd.Parsers.Collections
         private string introduce = "Vn/Vt";
         private List<Tuple<Terminal, NonTerminal, NonTerminalSingle>> duplicateList = new List<Tuple<Terminal, NonTerminal, NonTerminalSingle>>();
 
+
         public NonTerminalSingle this[Terminal item1, NonTerminal item2]
         {
             get => this[new Tuple<Terminal, NonTerminal>(item1, item2)];

@@ -1,11 +1,15 @@
 ﻿using Parse.FrontEnd.Grammars;
+using Parse.FrontEnd.Parsers;
 using Parse.FrontEnd.Parsers.EventArgs;
+using Parse.FrontEnd.Parsers.Logical;
 using Parse.FrontEnd.Parsers.LR;
+using Parse.FrontEnd.RegularGrammar;
 using Parse.Tokenize;
 using Parse.WpfControls.Models;
 using Parse.WpfControls.SyntaxEditor.EventArgs;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -20,16 +24,41 @@ namespace Parse.WpfControls.SyntaxEditor
         private AlarmCollection alarmList = new AlarmCollection();
         private List<TokenCell> reserveTokenCells = new List<TokenCell>();
 
-        private LRParser parser;
-        public LRParser Parser
+        public ParserSnippet ParserSnippet
         {
-            get => this.parser;
-            private set
+            get { return (ParserSnippet)GetValue(ParserSnippetProperty); }
+            set { SetValue(ParserSnippetProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for ParserSnippet.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty ParserSnippetProperty =
+            DependencyProperty.Register("ParserSnippet", typeof(ParserSnippet), typeof(SyntaxEditor), new PropertyMetadata(null, ParserChanged));
+
+
+        public static void ParserChanged(DependencyObject dp, DependencyPropertyChangedEventArgs args)
+        {
+            SyntaxEditor editor = dp as SyntaxEditor;
+            if(args.NewValue == null)
             {
-                this.parser = value;
-                this.OnParserChanged?.Invoke(this);
+                editor.TextArea.TokenizeRuleClear();
+                return;
+            }
+
+            ParserSnippet parserSnippet = args.NewValue as ParserSnippet;
+            if (editor.TextArea == null) editor.bReserveRegistKeywords = true;
+            else
+            {
+                editor.RegisterKeywords(parserSnippet.Parser.Grammar);
+
+                // It is started a tokenize process because allocated a new tokenize rules.
+                var tempText = editor.Text;
+                editor.Text = string.Empty;
+                editor.Text = tempText;
             }
         }
+
+
+
 
         public delegate void OnParserChangedEventHandler(object sender);
         public event OnParserChangedEventHandler OnParserChanged;
@@ -45,36 +74,6 @@ namespace Parse.WpfControls.SyntaxEditor
         // Using a DependencyProperty as the backing store for KeywordForeground.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty KeywordForegroundProperty =
             DependencyProperty.Register("KeywordForeground", typeof(Brush), typeof(SyntaxEditor), new PropertyMetadata(Brushes.Black));
-
-
-
-        public Grammar Grammar
-        {
-            get { return (Grammar)GetValue(GrammarProperty); }
-            set { SetValue(GrammarProperty, value); }
-        }
-
-        // Using a DependencyProperty as the backing store for Grammar.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty GrammarProperty =
-            DependencyProperty.Register("Grammar", typeof(Grammar), typeof(SyntaxEditor), new PropertyMetadata(null, GrammarChanged));
-
-        public static void GrammarChanged(DependencyObject dp, DependencyPropertyChangedEventArgs args)
-        {
-            SyntaxEditor editor = dp as SyntaxEditor;
-            Grammar grammar = args.NewValue as Grammar;
-
-            editor.Parser = new SLRParser(grammar);
-            if (editor.TextArea == null) editor.bReserveRegistKeywords = true;
-            else
-            {
-                editor.RegisterKeywords(grammar);
-
-                // It is started a tokenize process because allocated a new tokenize rules.
-                var tempText = editor.Text;
-                editor.Text = string.Empty;
-                editor.Text = tempText;
-            }
-        }
 
 
         #region Dependency Properties related to numeral foreground color
@@ -150,9 +149,11 @@ namespace Parse.WpfControls.SyntaxEditor
         {
             Loaded += (s, e) =>
             {
+                if (this.ParserSnippet == null) return;
+
                 if (this.bReserveRegistKeywords)
                 {
-                    this.RegisterKeywords(this.Grammar);
+                    this.RegisterKeywords(this.ParserSnippet.Parser.Grammar);
 
                     // It is started a tokenize process because allocated a new tokenize rules.
                     var tempText = this.Text;
@@ -169,12 +170,12 @@ namespace Parse.WpfControls.SyntaxEditor
             base.OnApplyTemplate();
 
             this.TextArea.TextChanged += TextArea_TextChanged;
-            this.parser.ParsingFailed += Parser_ParsingFailed;
+            this.ParserSnippet.ParsingFailed += Parser_ParsingFailed;
         }
 
         private void Parser_ParsingFailed(object sender, ParsingFailedEventArgs e)
         {
-            // If fired the error on Endmarker.
+            // If fired the error on EndMarker.
             DrawOption status = DrawOption.None;
             if (e.InputValue.TokenCell.ValueOptionData != null)
                 status = (DrawOption)e.InputValue.TokenCell.ValueOptionData;
@@ -186,7 +187,11 @@ namespace Parse.WpfControls.SyntaxEditor
 
             e.InputValue.TokenCell.ValueOptionData = status;
 
-            var point = this.TextArea.GetIndexInfoFromCaretIndex(e.InputValue.TokenCell.StartIndex);
+            // If fired the error on EndMarker then error point is last line.
+            var point = (e.InputValue.Kind != new EndMarker()) ? 
+                this.TextArea.GetIndexInfoFromCaretIndex(e.InputValue.TokenCell.StartIndex) : 
+                new System.Drawing.Point(0, this.TextArea.LineIndexes.Last());
+
             this.alarmList.Add(new AlarmEventArgs(string.Empty, this.FileName, e.ErrorIndex, point.Y + 1, e));
         }
 
@@ -228,11 +233,6 @@ namespace Parse.WpfControls.SyntaxEditor
                 if(this.TextArea.DelimiterSet.Contains(delimiter.Key) == false)
                     this.TextArea.DelimiterSet.Add(delimiter.Key);
             }
-
-
-            // filtering test code
-            this.TextArea.AddCompletionList(CompletionItemType.Property, "HighLight");
-            this.TextArea.AddCompletionList(CompletionItemType.Property, "HightIlHe");
         }
 
         // 전처리기 등록자 (ex : #define, #undef ) 등록 함수 만들기 
@@ -272,7 +272,7 @@ namespace Parse.WpfControls.SyntaxEditor
         {
             this.alarmList.Clear();
 
-            if (this.Parser.Parse(this.TextArea.Tokens.ToArray()))
+            if (this.ParserSnippet.Parsing(this.TextArea.Tokens.ToArray()))
                 this.alarmList.Add(new AlarmEventArgs(string.Empty, this.FileName));
             else this.AdjustToValidAlarmList();
 

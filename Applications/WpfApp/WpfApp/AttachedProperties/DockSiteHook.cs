@@ -41,7 +41,7 @@ namespace ApplicationLayer.WpfApp.AttachedProperties
                 if (docFilter != null)
                 {
                     // filtering
-                    if (docFilter.Equals(e.Window))
+                    if (docFilter == e.Window.GetType() || docFilter == e.Window.DataContext.GetType())
                         menuItem = DockSiteHook.GetDocumentMenuItemToAdd(sender as DockSite) as MenuItem;
                 }
                 else menuItem = DockSiteHook.GetDocumentMenuItemToAdd(sender as DockSite) as MenuItem;
@@ -55,7 +55,7 @@ namespace ApplicationLayer.WpfApp.AttachedProperties
                 if (toolWindowFilter != null)
                 {
                     // filtering
-                    if (toolWindowFilter.Equals(e.Window))
+                    if (toolWindowFilter == e.Window.GetType() || toolWindowFilter == e.Window.DataContext.GetType())
                         menuItem = DockSiteHook.GetToolWindowMenuItemToAdd(sender as DockSite) as MenuItem;
                 }
                 else menuItem = DockSiteHook.GetToolWindowMenuItemToAdd(sender as DockSite) as MenuItem;
@@ -114,6 +114,70 @@ namespace ApplicationLayer.WpfApp.AttachedProperties
         // Using a DependencyProperty as the backing store for FilterToolWindowMenuItemToAdd.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty FilterToolWindowMenuItemToAddProperty =
             DependencyProperty.RegisterAttached("FilterToolWindowMenuItemToAdd", typeof(Type), typeof(DockSiteHook), new PropertyMetadata(null));
+
+        
+
+
+
+
+        /////////////////////////////////////////////////////////////////////////////////////////////////////
+        // This AP set up whether hooks a primary document changed event.
+        /////////////////////////////////////////////////////////////////////////////////////////////////////
+        public static bool GetEnablePrimaryDocumentChangedHook(DependencyObject obj) => (bool)obj.GetValue(EnablePrimaryDocumentChangedHookProperty);
+        public static void SetEnablePrimaryDocumentChangedHook(DependencyObject obj, bool value) => obj.SetValue(EnablePrimaryDocumentChangedHookProperty, value);
+
+        // Using a DependencyProperty as the backing store for EnablePrimaryDocumentChangedHook.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty EnablePrimaryDocumentChangedHookProperty =
+            DependencyProperty.RegisterAttached("EnablePrimaryDocumentChangedHook", typeof(bool), typeof(DockSiteHook), new PropertyMetadata(OnPrimaryDocumentChangedEventHookChanged));
+
+        private static void OnPrimaryDocumentChangedEventHookChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            var dockSite = (sender as DockSite);
+            if (dockSite == null) return;
+
+            bool on = (bool)e.NewValue;
+            if (on) dockSite.PrimaryDocumentChanged += DockSite_PrimaryDocumentChanged;
+            else dockSite.PrimaryDocumentChanged -= DockSite_PrimaryDocumentChanged;
+        }
+
+        private static void DockSite_PrimaryDocumentChanged(object sender, DockingWindowEventArgs e)
+        {
+            var command = DockSiteHook.GetPrimaryDocumentChangedCommand(sender as DockSite);
+            if (command == null) return;
+
+            var parameter = DockSiteHook.GetPrimaryDocumentChangedCommandParameter(sender as DockSite);
+            var commandParam = new Tuple<object, DockingWindowEventArgs>(parameter, e);
+            if (command.CanExecute(commandParam) == false) return;
+
+            command.Execute(commandParam);
+        }
+
+
+
+        /////////////////////////////////////////////////////////////////////////////////////////////////////
+        // This AP has command to execute when a primary document changed event fired.
+        /////////////////////////////////////////////////////////////////////////////////////////////////////
+        public static ICommand GetPrimaryDocumentChangedCommand(DependencyObject obj) => (ICommand)obj.GetValue(PrimaryDocumentChangedCommandProperty);
+        public static void SetPrimaryDocumentChangedCommand(DependencyObject obj, ICommand value) => obj.SetValue(PrimaryDocumentChangedCommandProperty, value);
+
+        // Using a DependencyProperty as the backing store for PrimaryDocumentChangedCommand.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty PrimaryDocumentChangedCommandProperty =
+            DependencyProperty.RegisterAttached("PrimaryDocumentChangedCommand", typeof(ICommand), typeof(DockSiteHook), new PropertyMetadata(null));
+
+
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // This AP has command parameter to pass to the command when a primary document changed event fired.
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        public static object GetPrimaryDocumentChangedCommandParameter(DependencyObject obj) => (object)obj.GetValue(PrimaryDocumentChangedCommandParameterProperty);
+        public static void SetPrimaryDocumentChangedCommandParameter(DependencyObject obj, object value) => obj.SetValue(PrimaryDocumentChangedCommandParameterProperty, value);
+
+        // Using a DependencyProperty as the backing store for PrimaryDocumentChangedCommandParameter.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty PrimaryDocumentChangedCommandParameterProperty =
+            DependencyProperty.RegisterAttached("PrimaryDocumentChangedCommandParameter", typeof(object), typeof(DockSiteHook), new PropertyMetadata(null));
+
+
+
 
 
 

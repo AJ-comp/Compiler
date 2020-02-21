@@ -51,15 +51,27 @@
     <Compile Include="Collections\ParsingHistory.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Collections\ParsingRule.cs" />
+    <Compile Include="Collections\LRParsingTable.cs" />
+    <Compile Include="Collections\ParsingTable.cs" />
     <Compile Include="Collections\SymbolTable.cs" />
     <Compile Include="Collections\SymbolTableStack.cs" />
     <Compile Include="Datas\ActionData.cs" />
     <Compile Include="Datas\CanonicalItem.cs" />
-    <Compile Include="Datas\LRParsingData.cs" />
+    <Compile Include="Datas\LLParsingRowDataFormat.cs" />
+    <Compile Include="Datas\LRParsingRowDataFormat.cs" />
+    <Compile Include="Datas\LRParsingResult.cs" />
+    <Compile Include="Datas\LRParsingProcessResult.cs" />
+    <Compile Include="Datas\ParsingResult.cs" />
+    <Compile Include="Datas\ParsingProcessResult.cs" />
+    <Compile Include="Datas\ParsingRowDataFormat.cs" />
     <Compile Include="Datas\SymbolRowData.cs" />
+    <Compile Include="EventArgs\LLParsingFailedEventArgs.cs" />
     <Compile Include="EventArgs\LRParsingEventArgs.cs" />
+    <Compile Include="EventArgs\LRParsingFailedEventArgs.cs" />
     <Compile Include="EventArgs\ParsingFailedEventArgs.cs" />
+    <Compile Include="Logical\LLParserSnippet.cs" />
+    <Compile Include="Logical\LRParserSnippet.cs" />
+    <Compile Include="Logical\ParserSnippet.cs" />
     <Compile Include="LR\LALRParser.cs" />
     <Compile Include="LLParser.cs" />
     <Compile Include="LR\LRParser.cs" />

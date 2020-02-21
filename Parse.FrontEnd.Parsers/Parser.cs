@@ -1,8 +1,9 @@
-﻿using Parse.FrontEnd.Ast;
-using Parse.FrontEnd.Grammars;
+﻿using Parse.FrontEnd.Grammars;
 using Parse.FrontEnd.Parsers.Collections;
+using Parse.FrontEnd.Parsers.Datas;
+using Parse.FrontEnd.Parsers.EventArgs;
+using Parse.FrontEnd.Parsers.Logical;
 using Parse.FrontEnd.RegularGrammar;
-using Parse.Tokenize;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -41,31 +42,20 @@ namespace Parse.FrontEnd.Parsers
             }
         }
 
-        /// <summary> Get the permissible terminal set from current status </summary>
-        public abstract TerminalSet PossibleTerminalSet { get; }
         /// <summary> Get the analysis result with string format. </summary>
         public abstract string AnalysisResult { get; }
         /// <summary> Get the parsing table with data table format. </summary>
-        public abstract DataTable ParsingTable { get; }
-        /// <summary> Get the parsing history with data table format.</summary>
-        public abstract DataTable ParsingHistory { get; }
-        public abstract List<AstSymbol> ParseTree { get; }
+        public abstract IParsingTable ParsingTable { get; }
 
-
-        public Parser(Grammar grammar)
+        protected Parser(Grammar grammar)
         {
             this.Grammar = grammar;
         }
 
         /// <summary>
-        /// Start parsing for parameter.
+        /// This function creates a new snippet for parsing.
         /// </summary>
-        /// <param name="tokens"></param>
-        /// <returns> Return true if succeed. </returns>
-        public abstract bool Parse(TokenCell[] tokens);
-
-        /// <summary> Get the parsing tree with string format. </summary>
-        /// <returns>tree string</returns>
-        public abstract string ToParsingTreeString();
+        /// <returns>The parser snippet that created.</returns>
+        public abstract ParserSnippet NewParserSnippet();
     }
 }

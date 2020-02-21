@@ -22,7 +22,7 @@ namespace ApplicationLayer.Common.Utilities
 
         public enum ParserKind { LL_Parser, SLR_Parser, LALR_Parser, GLR_Parser };
 
-        private Dictionary<Tuple<ParserKind, Grammar>, Parser> parserCache = new Dictionary<Tuple<ParserKind, Grammar>, Parser>();
+        private Dictionary<Tuple<ParserKind, Type>, Parser> parserCache = new Dictionary<Tuple<ParserKind, Type>, Parser>();
 
         /// <summary>
         /// This function returns a parser that parameters matched.
@@ -32,8 +32,10 @@ namespace ApplicationLayer.Common.Utilities
         /// <returns>If it doesn't exist return null. If it exists return parser instance.</returns>
         public Parser GetParser(ParserKind parserKind, Grammar grammar)
         {
-            var key = new Tuple<ParserKind, Grammar>(parserKind, grammar);
-            return (this.parserCache.ContainsKey(key)) ? this.parserCache[key] : null;
+            var key = new Tuple<ParserKind, Type>(parserKind, grammar.GetType());
+            var result = (this.parserCache.ContainsKey(key)) ? this.parserCache[key] : null;
+
+            return result;
         }
 
         /// <summary>
@@ -47,7 +49,7 @@ namespace ApplicationLayer.Common.Utilities
 
             if (value == null)
             {
-                var key = new Tuple<ParserKind, Grammar>(parserKind, grammar);
+                var key = new Tuple<ParserKind, Type>(parserKind, grammar.GetType());
 
                 if (parserKind == ParserKind.SLR_Parser) this.parserCache.Add(key, new SLRParser(grammar));
                 else if (parserKind == ParserKind.LL_Parser) this.parserCache.Add(key, new LLParser(grammar));

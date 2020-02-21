@@ -1,13 +1,13 @@
-﻿using Parse.FrontEnd.Ast;
-using Parse.Extensions;
+﻿using Parse.Extensions;
 using Parse.FrontEnd.Grammars;
 using Parse.FrontEnd.Parsers.Collections;
+using Parse.FrontEnd.Parsers.Datas;
+using Parse.FrontEnd.Parsers.Logical;
 using Parse.FrontEnd.RegularGrammar;
 using ParsingLibrary.Parsers.RelationAnalyzers;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using Parse.Tokenize;
 
 namespace Parse.FrontEnd.Parsers
 {
@@ -18,11 +18,9 @@ namespace Parse.FrontEnd.Parsers
         private Stack<Symbol> stack = new Stack<Symbol>();
 
         public string ShowStack => string.Join("", this.stack);
-        public override DataTable ParsingHistory => this.parsingHistory;
-        public override DataTable ParsingTable => this.relationAnalyzer.ParsingDic.ToDataTable(this.Grammar.NonTerminalMultiples);
-        public override List<AstSymbol> ParseTree { get; }
+        public override IParsingTable ParsingTable => null;
 
-        public override TerminalSet PossibleTerminalSet
+        public TerminalSet PossibleTerminalSet
         {
             get
             {
@@ -57,16 +55,7 @@ namespace Parse.FrontEnd.Parsers
         public LLParser(Grammar grammar) : base(grammar)
         {
             DataTableExtensionMethods.ASCIIBorder();
-            this.CreateParsingTableTemplate();
             this.SetGrammar(grammar);
-        }
-
-        private void CreateParsingTableTemplate()
-        {
-            this.parsingHistory.AddColumn("stack");
-            this.parsingHistory.AddColumn("input");
-            this.parsingHistory.AddColumn("action");
-            this.parsingHistory.AddColumn("target", typeof(NonTerminalSingle));
         }
 
         /// <summary>
@@ -177,22 +166,7 @@ namespace Parse.FrontEnd.Parsers
         }
         */
 
-        public override string ToParsingTreeString()
-        {
-            string result = string.Empty;
-
-            ushort depth = 1;
-            foreach (DataRow item in this.parsingHistory.Rows)
-            {
-                if (item[2].ToString() != "expand") continue;
-
-                result += (item[3] as NonTerminalSingle).ToTreeString(depth++);
-            }
-
-            return result;
-        }
-
-        public override bool Parse(TokenCell[] tokens)
+        public override ParserSnippet NewParserSnippet()
         {
             throw new NotImplementedException();
         }

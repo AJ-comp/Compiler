@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static Parse.FrontEnd.Parsers.Datas.LRParsingData;
+﻿using static Parse.FrontEnd.Parsers.Datas.LRParsingRowDataFormat;
 
 namespace Parse.FrontEnd.Parsers.Datas
 {

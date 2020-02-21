@@ -2,7 +2,7 @@
 using Parse.FrontEnd.RegularGrammar;
 using System;
 using System.Collections.Generic;
-using static Parse.FrontEnd.Parsers.Datas.LRParsingData;
+using static Parse.FrontEnd.Parsers.Datas.LRParsingRowDataFormat;
 
 namespace Parse.FrontEnd.Parsers.Collections
 {

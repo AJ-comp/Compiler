@@ -1,7 +1,9 @@
-﻿using ApplicationLayer.Models.Invokers;
+﻿using ApplicationLayer.Common.Utilities;
+using ApplicationLayer.Models.Invokers;
 using GalaSoft.MvvmLight.Command;
-using Parse.FrontEnd.Grammars;
 using Parse.FrontEnd.Grammars.MiniC;
+using Parse.FrontEnd.Parsers;
+using Parse.FrontEnd.Parsers.Logical;
 using Parse.WpfControls.SyntaxEditor.EventArgs;
 using System;
 using System.Collections.Generic;
@@ -16,7 +18,8 @@ namespace ApplicationLayer.ViewModels.DocumentTypeViewModels
 
         public string FullPath { get; } = string.Empty;
         public string Data { get; } = string.Empty;
-        public Grammar Grammar { get; } = new MiniCGrammar();
+
+        public ParserSnippet ParserSnippet { get; } = ParserFactory.Instance.GetParser(ParserFactory.ParserKind.SLR_Parser, new MiniCGrammar()).NewParserSnippet();
 
         private int caretIndex = 0;
         public int CaretIndex
