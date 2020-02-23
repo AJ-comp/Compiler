@@ -4,51 +4,52 @@ namespace Parse.FrontEnd.Grammars.MiniC
 {
     public class MiniCGrammar : Grammar
     {
-        private Terminal @if = new Terminal(TokenType.Keyword, "if");
-        private Terminal @else = new Terminal(TokenType.Keyword, "else");
-        private Terminal @while = new Terminal(TokenType.Keyword, "while");
-        private Terminal @return = new Terminal(TokenType.Keyword, "return");
-        private Terminal @const = new Terminal(TokenType.Keyword, "const");
-        private Terminal @int = new Terminal(TokenType.Keyword, "int");
-        private Terminal @void = new Terminal(TokenType.Keyword, "void");
-        private Terminal ident = new Terminal(TokenType.Identifier, "[_a-zA-Z][_a-zA-Z0-9]*", "ident", true, true);
-        private Terminal number = new Terminal(TokenType.Digit10, "[0-9]+", "number", true, true);
-        private Terminal lineComment = new Terminal(TokenType.Comment, "//.*$", false, true);
+        public Terminal @if { get; } = new Terminal(TokenType.Keyword, "if");
+        public Terminal @else { get; } = new Terminal(TokenType.Keyword, "else");
+        public Terminal @while { get; } = new Terminal(TokenType.Keyword, "while");
+        public Terminal @return { get; } = new Terminal(TokenType.Keyword, "return");
+        public Terminal @const { get; } = new Terminal(TokenType.Keyword, "const");
+        public Terminal @int { get; } = new Terminal(TokenType.Keyword, "int");
+        public Terminal @void { get; } = new Terminal(TokenType.Keyword, "void");
+        public Terminal ident { get; } = new Terminal(TokenType.Identifier, "[_a-zA-Z][_a-zA-Z0-9]*", "ident", true, true);
+        public Terminal number { get; } = new Terminal(TokenType.Digit10, "[0-9]+", "number", true, true);
+        public Terminal lineComment { get; } = new Terminal(TokenType.Comment, "//.*$", false, true);
 
-        private Terminal openParenthesis = new Terminal(TokenType.Operator, "(");
-        private Terminal closeParenthesis = new Terminal(TokenType.Operator, ")");
-        private Terminal openCurlyBrace = new Terminal(TokenType.Operator, "{");
-        private Terminal closeCurlyBrace = new Terminal(TokenType.Operator, "}");
-        private Terminal openSquareBrace = new Terminal(TokenType.Operator, "[");
-        private Terminal closeSquareBrace = new Terminal(TokenType.Operator, "]");
+        public Terminal openParenthesis { get; } = new Terminal(TokenType.Operator, "(");
+        public Terminal closeParenthesis { get; } = new Terminal(TokenType.Operator, ")");
+        public Terminal openCurlyBrace { get; } = new Terminal(TokenType.Operator, "{");
+        public Terminal closeCurlyBrace { get; } = new Terminal(TokenType.Operator, "}");
+        public Terminal openSquareBrace { get; } = new Terminal(TokenType.Operator, "[");
+        public Terminal closeSquareBrace { get; } = new Terminal(TokenType.Operator, "]");
 
         private Terminal scopeCommentStart = new Terminal(TokenType.Operator, "/*");
         private Terminal scopeCommentEnd = new Terminal(TokenType.Operator, "*/");
-        private Terminal inc = new Terminal(TokenType.Operator, "++");
-        private Terminal dec = new Terminal(TokenType.Operator, "--");
-        private Terminal add = new Terminal(TokenType.Operator, "+");
-        private Terminal sub = new Terminal(TokenType.Operator, "-");
-        private Terminal mul = new Terminal(TokenType.Operator, "*");
-        private Terminal div = new Terminal(TokenType.Operator, "/");
-        private Terminal mod = new Terminal(TokenType.Operator, "%");
-        private Terminal assign = new Terminal(TokenType.Operator, "=");
-        private Terminal addAssign = new Terminal(TokenType.Operator, "+=");
-        private Terminal subAssign = new Terminal(TokenType.Operator, "-=");
-        private Terminal mulAssign = new Terminal(TokenType.Operator, "*=");
-        private Terminal divAssign = new Terminal(TokenType.Operator, "/=");
-        private Terminal modAssign = new Terminal(TokenType.Operator, "%=");
-        private Terminal equal = new Terminal(TokenType.Operator, "==");
-        private Terminal notEqual = new Terminal(TokenType.Operator, "!=");
-        private Terminal greaterThan = new Terminal(TokenType.Operator, ">");
-        private Terminal lessThan = new Terminal(TokenType.Operator, "<");
-        private Terminal greaterEqual = new Terminal(TokenType.Operator, ">=");
-        private Terminal lessEqual = new Terminal(TokenType.Operator, "<=");
-        private Terminal semiColon = new Terminal(TokenType.Operator, ";");
-        private Terminal comma = new Terminal(TokenType.Operator, ",");
 
-        private Terminal logicalOr = new Terminal(TokenType.Operator, "||");
-        private Terminal logicalAnd = new Terminal(TokenType.Operator, "&&");
-        private Terminal logicalNot = new Terminal(TokenType.Operator, "!");
+        public Terminal inc { get; } = new Terminal(TokenType.Operator, "++");
+        public Terminal dec { get; } = new Terminal(TokenType.Operator, "--");
+        public Terminal add { get; } = new Terminal(TokenType.Operator, "+");
+        public Terminal sub { get; } = new Terminal(TokenType.Operator, "-");
+        public Terminal mul { get; } = new Terminal(TokenType.Operator, "*");
+        public Terminal div { get; } = new Terminal(TokenType.Operator, "/");
+        public Terminal mod { get; } = new Terminal(TokenType.Operator, "%");
+        public Terminal assign { get; } = new Terminal(TokenType.Operator, "=");
+        public Terminal addAssign { get; } = new Terminal(TokenType.Operator, "+=");
+        public Terminal subAssign { get; } = new Terminal(TokenType.Operator, "-=");
+        public Terminal mulAssign { get; } = new Terminal(TokenType.Operator, "*=");
+        public Terminal divAssign { get; } = new Terminal(TokenType.Operator, "/=");
+        public Terminal modAssign { get; } = new Terminal(TokenType.Operator, "%=");
+        public Terminal equal { get; } = new Terminal(TokenType.Operator, "==");
+        public Terminal notEqual { get; } = new Terminal(TokenType.Operator, "!=");
+        public Terminal greaterThan { get; } = new Terminal(TokenType.Operator, ">");
+        public Terminal lessThan { get; } = new Terminal(TokenType.Operator, "<");
+        public Terminal greaterEqual { get; } = new Terminal(TokenType.Operator, ">=");
+        public Terminal lessEqual { get; } = new Terminal(TokenType.Operator, "<=");
+        public Terminal semiColon { get; } = new Terminal(TokenType.Operator, ";");
+        public Terminal comma { get; } = new Terminal(TokenType.Operator, ",");
+
+        public Terminal logicalOr { get; } = new Terminal(TokenType.Operator, "||");
+        public Terminal logicalAnd { get; } = new Terminal(TokenType.Operator, "&&");
+        public Terminal logicalNot { get; } = new Terminal(TokenType.Operator, "!");
 
 
         private NonTerminal miniC = new NonTerminal("mini_c", true);

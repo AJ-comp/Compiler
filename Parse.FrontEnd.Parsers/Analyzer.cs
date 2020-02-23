@@ -113,11 +113,11 @@ namespace Parse.FrontEnd.Parsers
         /// <param name="exploredSet">explored node until now</param>
         /// <returns></returns>
         /// <see cref="https://www.lucidchart.com/documents/edit/515ff26b-2649-4150-86ec-80288ef51570/0?beaconFlowId=67B120E7DA8E4FC0"/>
-        public static Canonical Closure(Canonical iStatus, HashSet<NonTerminal> exploredSet = null)
+        public static CanonicalItemSet Closure(CanonicalItemSet iStatus, HashSet<NonTerminal> exploredSet = null)
         {
             if (exploredSet == null) exploredSet = new HashSet<NonTerminal>();
 
-            var result = new Canonical();
+            var result = new CanonicalItemSet();
 
             foreach(var item in iStatus)
             {
@@ -133,7 +133,7 @@ namespace Parse.FrontEnd.Parsers
                 if (exploredSet.Contains(multipleNT)) continue;
 
                 exploredSet.Add(multipleNT);
-                Canonical param = new Canonical();
+                CanonicalItemSet param = new CanonicalItemSet();
                 foreach (NonTerminalSingle single in multipleNT)
                 {
                     param.Add(new CanonicalItem(single));
@@ -145,10 +145,10 @@ namespace Parse.FrontEnd.Parsers
             return result;
         }
 
-        public static Canonical Goto(Canonical iStatus, Symbol toSeeSymbol)
+        public static CanonicalItemSet Goto(CanonicalItemSet iStatus, Symbol toSeeSymbol)
         {
             if (toSeeSymbol == null) return null;
-            var param = new Canonical();
+            var param = new CanonicalItemSet();
 
             foreach(var item in iStatus)
             {

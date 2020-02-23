@@ -251,7 +251,8 @@ namespace Parse.WpfControls.SyntaxEditor
             foreach (var item in this.alarmList)
             {
                 int tokenIndex = item.ParsingFailedArgs.ErrorIndex;
-                if (this.TextArea.Tokens[tokenIndex] == item.ParsingFailedArgs.InputValue.TokenCell) correctList.Add(item);
+                //                if (this.TextArea.Tokens[tokenIndex] == item.ParsingFailedArgs.InputValue.TokenCell) correctList.Add(item);
+                correctList.Add(item);
             }
 
             /*

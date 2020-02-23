@@ -3,6 +3,7 @@
                     xmlns:systemData="clr-namespace:System.Data;assembly=System.Data"
                     xmlns:wf="clr-namespace:System.Windows.Forms;assembly=System.Windows.Forms"
                     xmlns:parsers="clr-namespace:Parse.FrontEnd.Parsers.LR;assembly=Parse.FrontEnd.Parsers"
+                    xmlns:parserLogic="clr-namespace:Parse.FrontEnd.Parsers.Logical;assembly=Parse.FrontEnd.Parsers"
                     xmlns:lex="http://wpflocalizeextension.codeplex.com" 
                     xmlns:wpfcontrolConverters="clr-namespace:Parse.WpfControls.Converters;assembly=Parse.WpfControls"
                     xmlns:local="clr-namespace:WpfApp.Resources.DataTemplates"

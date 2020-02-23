@@ -6,7 +6,7 @@ using static Parse.FrontEnd.Parsers.Datas.LRParsingRowDataFormat;
 
 namespace Parse.FrontEnd.Parsers.Datas
 {
-    public class LRParsingRowDataFormat : ParsingRowDataFormat<Canonical, Symbol, Tuple<ActionDir, object>>
+    public class LRParsingRowDataFormat : ParsingRowDataFormat<CanonicalItemSet, Symbol, Tuple<ActionDir, object>>
     {
         public enum ActionDir { shift, reduce, epsilon_reduce, moveto, accept, failed }
 
@@ -39,7 +39,7 @@ namespace Parse.FrontEnd.Parsers.Datas
             }
         }
 
-        public LRParsingRowDataFormat(Canonical ix, Dictionary<Symbol, Tuple<ActionDir, object>> matchedValueSet) : base(ix, matchedValueSet)
+        public LRParsingRowDataFormat(CanonicalItemSet ix, Dictionary<Symbol, Tuple<ActionDir, object>> matchedValueSet) : base(ix, matchedValueSet)
         {
         }
     }

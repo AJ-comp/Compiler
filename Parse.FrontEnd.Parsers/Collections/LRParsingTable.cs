@@ -1,19 +1,13 @@
-﻿using Parse.Extensions;
-using Parse.FrontEnd.Parsers.Datas;
-using Parse.FrontEnd.Parsers.EventArgs;
+﻿using Parse.FrontEnd.Parsers.Datas;
 using Parse.FrontEnd.RegularGrammar;
-using Parse.Tokenize;
-using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using static Parse.FrontEnd.Parsers.Datas.LRParsingRowDataFormat;
 
 namespace Parse.FrontEnd.Parsers.Collections
 {
     public class LRParsingTable : List<LRParsingRowDataFormat>, IParsingTable
     {
-        private TerminalSet RefTerminalSet
+        public TerminalSet RefTerminalSet
         {
             get
             {
@@ -33,7 +27,7 @@ namespace Parse.FrontEnd.Parsers.Collections
             }
         }
 
-        private HashSet<NonTerminal> RefNonTerminalSet
+        public HashSet<NonTerminal> RefNonTerminalSet
         {
             get
             {

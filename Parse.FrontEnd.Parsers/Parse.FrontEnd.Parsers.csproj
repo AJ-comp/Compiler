@@ -45,7 +45,7 @@
   <ItemGroup>
     <Compile Include="AmbiguityDeleter.cs" />
     <Compile Include="Analyzer.cs" />
-    <Compile Include="Collections\Canonical.cs" />
+    <Compile Include="Collections\CanonicalItemSet.cs" />
     <Compile Include="Collections\CanonicalTable.cs" />
     <Compile Include="Collections\ParsingDic.cs" />
     <Compile Include="Collections\ParsingHistory.cs">
@@ -65,6 +65,10 @@
     <Compile Include="Datas\ParsingProcessResult.cs" />
     <Compile Include="Datas\ParsingRowDataFormat.cs" />
     <Compile Include="Datas\SymbolRowData.cs" />
+    <Compile Include="ErrorHandling\ErrorHandlingResult.cs" />
+    <Compile Include="ErrorHandling\GrammarPrivate\MiniC_LRErrorHandler.cs" />
+    <Compile Include="ErrorHandling\IErrorAlgorithm.cs" />
+    <Compile Include="ErrorHandling\PanicMode.cs" />
     <Compile Include="EventArgs\LLParsingFailedEventArgs.cs" />
     <Compile Include="EventArgs\LRParsingEventArgs.cs" />
     <Compile Include="EventArgs\LRParsingFailedEventArgs.cs" />
@@ -109,6 +113,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="ErrorHandling\LL\" />
+    <Folder Include="ErrorHandling\LR\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

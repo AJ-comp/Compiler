@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace Parse.FrontEnd.Parsers.Collections
 {
-    public class Canonical : HashSet<CanonicalItem>
+    public class CanonicalItemSet : HashSet<CanonicalItem>
     {
         public SymbolSet MarkSymbolSet
         {

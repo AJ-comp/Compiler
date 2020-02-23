@@ -1,12 +1,9 @@
 ﻿using Parse.FrontEnd.Grammars;
 using Parse.FrontEnd.Parsers.Collections;
-using Parse.FrontEnd.Parsers.Datas;
-using Parse.FrontEnd.Parsers.EventArgs;
 using Parse.FrontEnd.Parsers.Logical;
 using Parse.FrontEnd.RegularGrammar;
 using System;
 using System.Collections.Generic;
-using System.Data;
 
 namespace Parse.FrontEnd.Parsers
 {
@@ -46,6 +43,7 @@ namespace Parse.FrontEnd.Parsers
         public abstract string AnalysisResult { get; }
         /// <summary> Get the parsing table with data table format. </summary>
         public abstract IParsingTable ParsingTable { get; }
+
 
         protected Parser(Grammar grammar)
         {

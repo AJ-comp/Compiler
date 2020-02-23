@@ -48,7 +48,6 @@ namespace ApplicationLayer.WpfApp.ViewModels
 
             SimpleIoc.Default.Register<MainViewModel>();
             SimpleIoc.Default.Register<GrammarInfoViewModel>();
-            SimpleIoc.Default.Register<ParsingHistoryViewModel>();
             SimpleIoc.Default.Register<QuestionToSaveViewModel>();
 
             /// Related to ToolWindow

@@ -2,6 +2,7 @@
 using Parse.FrontEnd.Ast;
 using Parse.FrontEnd.Parsers.Collections;
 using Parse.FrontEnd.Parsers.Datas;
+using Parse.FrontEnd.Parsers.ErrorHandling.GrammarPrivate;
 using Parse.FrontEnd.Parsers.EventArgs;
 using Parse.FrontEnd.Parsers.Properties;
 using Parse.FrontEnd.RegularGrammar;
@@ -128,11 +129,11 @@ namespace Parse.FrontEnd.Parsers.Logical
 
             if (args.InputValue.Kind == new EndMarker())
             {
-                args.ErrorPosition = ErrorPosition.OnEndMarker;
                 args = new LRParsingFailedEventArgs(args.PrevStack, args.CurrentStack, this.prevToken, args.ActionData, args.PossibleSet)
                 {
                     ErrorIndex = this.curTokenIndex - 1   // because prev token index
                 };
+                args.ErrorPosition = ErrorPosition.OnEndMarker;
             }
             else
             {
@@ -187,21 +188,29 @@ namespace Parse.FrontEnd.Parsers.Logical
         /// <param name="prevStack"></param>
         /// <param name="stack"></param>
         /// <returns></returns>
-        private ActionDir ShiftAndReduce(TokenData inputValue, Stack<object> prevStack, Stack<object> stack)
+        private LRParsingProcessResult ShiftAndReduce(TokenData inputValue, Stack<object> prevStack, Stack<object> stack)
         {
             var topData = stack.Peek();
 
-            if (topData is NonTerminalSingle) return ActionDir.failed;
+            if (topData is NonTerminalSingle) return new LRParsingProcessResult(ActionDir.failed, stack);
 
             LRParsingTable parsingTable = this.Parser.ParsingTable as LRParsingTable;
             var IxMetrix = parsingTable[(int)topData];
 
-            // invalid input symbol, can't shift
+            // invalid input symbol, can't shift (error handler also not exist)
             if (!IxMetrix.MatchedValueSet.ContainsKey(inputValue.Kind))
             {
                 var data = new LRParsingEventArgs(prevStack, stack, inputValue, new ActionData(ActionDir.failed, null));
                 this.ActionFailed?.Invoke(this, new LRParsingFailedEventArgs(prevStack, stack, inputValue, new ActionData(ActionDir.failed, null), IxMetrix.PossibleTerminalSet));
-                return ActionDir.failed;
+                return new LRParsingProcessResult(ActionDir.failed, stack);
+            }
+            // invalid input symbol, can't shift (error handler exists)
+            else if (IxMetrix.MatchedValueSet[inputValue.Kind].Item2.GetType() == typeof(ErrorHandler))
+            {
+                var value = IxMetrix.MatchedValueSet[inputValue.Kind];
+                var data = new LRParsingEventArgs(prevStack, stack, inputValue, new ActionData(ActionDir.failed, null));
+                this.ActionFailed?.Invoke(this, new LRParsingFailedEventArgs(prevStack, stack, inputValue, new ActionData(ActionDir.failed, null), IxMetrix.PossibleTerminalSet));
+                return new LRParsingProcessResult(value.Item1, stack, value.Item2 as ErrorHandler);
             }
 
             var matchedValue = IxMetrix.MatchedValueSet[inputValue.Kind];
@@ -209,7 +218,7 @@ namespace Parse.FrontEnd.Parsers.Logical
 
             this.ActionCompleted?.Invoke(this, new LRParsingEventArgs(prevStack, stack, inputValue, result));
 
-            return result.ActionDirection;
+            return new LRParsingProcessResult(result.ActionDirection, stack);
         }
 
         /// <summary>
@@ -258,13 +267,13 @@ namespace Parse.FrontEnd.Parsers.Logical
         /// <returns></returns>
         public LRParsingProcessResult Parsing(Stack<object> stack, TokenData inputValue)
         {
-            ActionDir actionDir = ActionDir.failed;
             Stack<object> prevStack = stack.Clone();
+            LRParsingProcessResult result;
 
-            if (this.GoTo(inputValue, prevStack, stack)) actionDir = ActionDir.moveto;
-            else actionDir = this.ShiftAndReduce(inputValue, prevStack, stack);
+            if (this.GoTo(inputValue, prevStack, stack)) result = new LRParsingProcessResult(ActionDir.moveto, stack);
+            else result = this.ShiftAndReduce(inputValue, prevStack, stack);
 
-            return new LRParsingProcessResult(actionDir, stack);
+            return result;
         }
 
         public override bool Parsing(TokenCell[] tokenCells)
@@ -272,6 +281,7 @@ namespace Parse.FrontEnd.Parsers.Logical
             if (tokenCells.Length <= 0) return true;
 
             bool result = false;
+            this.ParsingHistory.Clear();
             Stack<object> stack = new Stack<object>();
             stack.Push(0);
 
@@ -303,7 +313,13 @@ namespace Parse.FrontEnd.Parsers.Logical
                 if (parsingResult.ActionDir == ActionDir.failed)
                 {
                     result = false;
-                    break;
+                    if (parsingResult.ErrorHandler == null) break;
+                    else
+                    {
+                        var handleResult = parsingResult.ErrorHandler.Call(parsingResult.Stack, tokens.ToArray(), curTokenIndex);
+                        stack = handleResult.Stack;
+                        curTokenIndex = handleResult.SeeingTokenIndex;
+                    }
                 }
                 else if (parsingResult.ActionDir == ActionDir.accept)
                 {

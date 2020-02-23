@@ -12,7 +12,7 @@ namespace Parse.FrontEnd.Parsers.Collections
     /// Third : current status index
     /// Fourth : current canonical
     /// </summary>
-    public class CanonicalTable : Dictionary<Tuple<int, Symbol>, Tuple<int, Canonical>>
+    public class CanonicalTable : Dictionary<Tuple<int, Symbol>, Tuple<int, CanonicalItemSet>>
     {
         private NonTerminal virtualStartSymbol = null;
 
@@ -35,11 +35,11 @@ namespace Parse.FrontEnd.Parsers.Collections
         public void Calculate(NonTerminal virtualStartSymbol)
         {
             this.virtualStartSymbol = virtualStartSymbol;
-            Queue<Canonical> tempC0 = new Queue<Canonical>();
+            Queue<CanonicalItemSet> tempC0 = new Queue<CanonicalItemSet>();
             //I0
             foreach (var singleNT in virtualStartSymbol)
             {
-                Canonical param = new Canonical();
+                CanonicalItemSet param = new CanonicalItemSet();
                 param.Add(new CanonicalItem(singleNT));
 
                 var curStatus = Analyzer.Closure(param);
@@ -64,12 +64,12 @@ namespace Parse.FrontEnd.Parsers.Collections
         /// Add first canonical.
         /// </summary>
         /// <param name="curStatus"></param>
-        public void AddFirstCanonical(Canonical curStatus)
+        public void AddFirstCanonical(CanonicalItemSet curStatus)
         {
             this.Clear();
 
             var key = new Tuple<int, Symbol>(-1, null);
-            var value = new Tuple<int, Canonical>(0, curStatus);
+            var value = new Tuple<int, CanonicalItemSet>(0, curStatus);
 
             this.Add(key, value);
         }
@@ -81,7 +81,7 @@ namespace Parse.FrontEnd.Parsers.Collections
         /// <param name="markSymbol">mark symbol</param>
         /// <param name="curStatus">current status</param>
         /// <returns>Return true if added new current status, return false if already exist the current status on the history.  </returns>
-        public bool Add(Canonical prevStatus, Symbol markSymbol, Canonical curStatus)
+        public bool Add(CanonicalItemSet prevStatus, Symbol markSymbol, CanonicalItemSet curStatus)
         {
             int prevIndex = 0;
             int curIndex = this.MaxIxIndex + 1;
@@ -105,7 +105,7 @@ namespace Parse.FrontEnd.Parsers.Collections
             }
 
             var key = new Tuple<int, Symbol>(prevIndex, markSymbol);
-            var value = new Tuple<int, Canonical>(curIndex, curStatus);
+            var value = new Tuple<int, CanonicalItemSet>(curIndex, curStatus);
 
             bool result = !this.ContainsKey(key);
             if(result)  this.Add(key, value);
@@ -118,9 +118,9 @@ namespace Parse.FrontEnd.Parsers.Collections
         /// </summary>
         /// <param name="IxIndex">Ix index</param>
         /// <returns></returns>
-        public Canonical GetStatusFromIxIndex(int IxIndex)
+        public CanonicalItemSet GetStatusFromIxIndex(int IxIndex)
         {
-            Canonical result = null;
+            CanonicalItemSet result = null;
 
             foreach(var item in this)
             {
@@ -140,7 +140,7 @@ namespace Parse.FrontEnd.Parsers.Collections
         {
             var result = new Dictionary<Symbol, Tuple<ActionDir, object>>();
             var tempStorage = new Dictionary<Symbol, uint>();
-            Canonical curStatus = this.GetStatusFromIxIndex(IxIndex);
+            CanonicalItemSet curStatus = this.GetStatusFromIxIndex(IxIndex);
 
             // add shift action
             foreach (var item in this)

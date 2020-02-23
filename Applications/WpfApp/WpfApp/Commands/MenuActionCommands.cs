@@ -318,7 +318,9 @@ private void OnNewFile(Func<Document> func)
                 var mainViewModel = RootWindow.DataContext as MainViewModel;
 
                 var selDoc = mainViewModel.SolutionExplorer.SelectedDocument;
-                mainViewModel.SolutionExplorer.Documents.Add(new ParsingHistoryViewModel());
+                if ((selDoc is EditorTypeViewModel) == false) return;
+                var editorViewModel = mainViewModel.SolutionExplorer.SelectedDocument as EditorTypeViewModel;
+                mainViewModel.SolutionExplorer.Documents.Add(new ParsingHistoryViewModel(editorViewModel.ParserSnippet.ParsingHistory));
             }, () =>
             {
                 return true;

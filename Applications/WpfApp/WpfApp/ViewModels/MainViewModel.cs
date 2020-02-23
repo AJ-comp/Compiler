@@ -10,6 +10,8 @@ using GalaSoft.MvvmLight.Messaging;
 using Parse.FrontEnd.Grammars;
 using Parse.FrontEnd.Grammars.MiniC;
 using Parse.FrontEnd.Grammars.PracticeGrammars;
+using Parse.FrontEnd.Parsers.ErrorHandling.GrammarPrivate;
+using Parse.FrontEnd.Parsers.LR;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -160,7 +162,15 @@ namespace ApplicationLayer.WpfApp.ViewModels
         private void InitParserToUse()
         {
             foreach(var grammar in this.supplyGrammars)
+            {
                 ParserFactory.Instance.RegisterParser(ParserFactory.ParserKind.SLR_Parser, grammar);
+
+                if (grammar.ToString() == new MiniCGrammar().ToString())
+                {
+                    LRParser parser = ParserFactory.Instance.GetParser(ParserFactory.ParserKind.SLR_Parser, grammar) as LRParser;
+                    MiniC_LRErrorHandler.Instance.AddErrorHandler(parser);
+                }
+            }
         }
 
         private void InitGrammarWindow()
