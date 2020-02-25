@@ -1,5 +1,6 @@
 ﻿using Parse.FrontEnd.Ast;
 using Parse.FrontEnd.Parsers.Collections;
+using Parse.FrontEnd.Parsers.Datas;
 using Parse.FrontEnd.Parsers.EventArgs;
 using Parse.Tokenize;
 using System;
@@ -21,13 +22,6 @@ namespace Parse.FrontEnd.Parsers.Logical
         public List<AstSymbol> ParseTree { get; } = new List<AstSymbol>();
         public Stack<AstSymbol> MeaningStack { get; } = new Stack<AstSymbol>();
 
-        public event EventHandler<ParsingFailedEventArgs> ParsingFailed;
-
-        public void OnParsingFailed(ParsingFailedEventArgs e)
-        {
-            this.ParsingFailed?.Invoke(this, e);
-        }
-
         protected ParserSnippet(Parser parser)
         {
             this.Parser = parser;
@@ -46,6 +40,6 @@ namespace Parse.FrontEnd.Parsers.Logical
         /// </summary>
         /// <param name="tokenCells"></param>
         /// <returns>Returns true if successed.</returns>
-        public abstract bool Parsing(TokenCell[] tokenCells);
+        public abstract ParsingResult Parsing(TokenCell[] tokenCells);
     }
 }

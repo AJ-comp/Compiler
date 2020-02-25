@@ -91,22 +91,6 @@ namespace ApplicationLayer.ViewModels.ToolWindowViewModels
         private void OnSelected(HierarchicalData selectedItem)
         {
             this.SelectedItem = selectedItem;
-
-            if(selectedItem is DefaultFileHier)
-            {
-                string fileName = selectedItem.FullPath;
-
-                if (File.Exists(fileName) == false) return;
-                string content = File.ReadAllText(fileName);
-
-                var editor = new EditorTypeViewModel(fileName, content);
-                if (this.Documents.Contains(editor)) return;
-
-                this.Documents.Add(editor);
-                this.SelectedDocument = editor;
-
-                Messenger.Default.Send<AddEditorMessage>(new AddEditorMessage(editor));
-            }
         }
 
         private RelayCommand doubleClickCommand;
@@ -122,7 +106,25 @@ namespace ApplicationLayer.ViewModels.ToolWindowViewModels
         }
         private void OnMouseDoubleClick()
         {
+            if (SelectedItem is DefaultFileHier)
+            {
+                string fileName = SelectedItem.FullPath;
 
+                if (File.Exists(fileName) == false) return;
+                string content = File.ReadAllText(fileName);
+
+                var editor = new EditorTypeViewModel(fileName, content);
+                if (this.Documents.Contains(editor))
+                {
+                    this.SelectedDocument = editor;
+                    return;
+                }
+
+                this.Documents.Add(editor);
+                this.SelectedDocument = editor;
+
+                Messenger.Default.Send<AddEditorMessage>(new AddEditorMessage(editor));
+            }
         }
 
         private RelayCommand existItemCommand;

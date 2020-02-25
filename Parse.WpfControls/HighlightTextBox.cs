@@ -14,6 +14,7 @@ using System.Windows.Media;
 
 namespace Parse.WpfControls
 {
+    [Flags]
     public enum DrawOption { None = 0, Underline = 1, EndPointUnderline=2, Selected = 4 }
 
     public class HighlightTextBox : TokenizeTextBox

@@ -86,7 +86,7 @@
                                                                                                                         AncestorType={x:Type local:SolutionExplorer}}}"/>
                 </i:EventTrigger>
                 <i:EventTrigger EventName="MouseDoubleClick">
-                    <mvvm:EventToCommand Command="{Binding MouseDoubleClickCommand}"/>
+                    <mvvm:EventToCommand Command="{Binding DoubleClickCommand}"/>
                 </i:EventTrigger>
                 <i:EventTrigger EventName="KeyDown">
                     <mvvm:EventToCommand Command="{Binding KeyDownCommand}"

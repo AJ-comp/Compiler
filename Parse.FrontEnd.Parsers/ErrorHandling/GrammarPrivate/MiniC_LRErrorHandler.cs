@@ -11,7 +11,6 @@ namespace Parse.FrontEnd.Parsers.ErrorHandling.GrammarPrivate
 {
     public class MiniC_LRErrorHandler
     {
-        private PanicMode defaultHandler = new PanicMode();
         private MiniCGrammar grammar = new MiniCGrammar();
         private LRParsingTable parsingTable;
 
@@ -58,9 +57,11 @@ namespace Parse.FrontEnd.Parsers.ErrorHandling.GrammarPrivate
 
         private ErrorHandlingResult DefaultErrorHandler(int ixIndex, Stack<object> stack, TokenCell[] tokens, int seeingTokenIndex)
         {
-            var syncronizeTokens = new HashSet<Terminal>();
-            syncronizeTokens.Add(this.grammar.semiColon);
-            syncronizeTokens.Add(this.grammar.closeCurlyBrace);
+            var syncronizeTokens = new HashSet<Terminal>
+            {
+                this.grammar.semiColon,
+                this.grammar.closeCurlyBrace
+            };
 
             return PanicMode.LRProcess(parsingTable, stack, tokens, seeingTokenIndex, syncronizeTokens);
         }

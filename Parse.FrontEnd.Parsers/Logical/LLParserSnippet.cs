@@ -1,4 +1,5 @@
-﻿using Parse.FrontEnd.RegularGrammar;
+﻿using Parse.FrontEnd.Parsers.Datas;
+using Parse.FrontEnd.RegularGrammar;
 using Parse.Tokenize;
 using System.Data;
 
@@ -30,7 +31,7 @@ namespace Parse.FrontEnd.Parsers.Logical
             return result;
         }
 
-        public override bool Parsing(TokenCell[] tokenCells)
+        public override ParsingResult Parsing(TokenCell[] tokenCells)
         {
             throw new System.NotImplementedException();
         }

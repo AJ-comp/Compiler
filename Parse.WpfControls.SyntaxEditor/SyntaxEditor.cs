@@ -1,5 +1,6 @@
 ﻿using Parse.FrontEnd.Grammars;
 using Parse.FrontEnd.Parsers;
+using Parse.FrontEnd.Parsers.Datas;
 using Parse.FrontEnd.Parsers.EventArgs;
 using Parse.FrontEnd.Parsers.Logical;
 using Parse.FrontEnd.Parsers.LR;
@@ -22,7 +23,6 @@ namespace Parse.WpfControls.SyntaxEditor
         private bool bParsing = false;
         private bool bReserveRegistKeywords = false;
         private AlarmCollection alarmList = new AlarmCollection();
-        private List<TokenCell> reserveTokenCells = new List<TokenCell>();
 
         public ParserSnippet ParserSnippet
         {
@@ -170,29 +170,6 @@ namespace Parse.WpfControls.SyntaxEditor
             base.OnApplyTemplate();
 
             this.TextArea.TextChanged += TextArea_TextChanged;
-            this.ParserSnippet.ParsingFailed += Parser_ParsingFailed;
-        }
-
-        private void Parser_ParsingFailed(object sender, ParsingFailedEventArgs e)
-        {
-            // If fired the error on EndMarker.
-            DrawOption status = DrawOption.None;
-            if (e.InputValue.TokenCell.ValueOptionData != null)
-                status = (DrawOption)e.InputValue.TokenCell.ValueOptionData;
-
-            if (e.ErrorPosition == ErrorPosition.OnEndMarker)
-                status |= DrawOption.EndPointUnderline;
-            else
-                status |= DrawOption.Underline;
-
-            e.InputValue.TokenCell.ValueOptionData = status;
-
-            // If fired the error on EndMarker then error point is last line.
-            var point = (e.InputValue.Kind != new EndMarker()) ? 
-                this.TextArea.GetIndexInfoFromCaretIndex(e.InputValue.TokenCell.StartIndex) : 
-                new System.Drawing.Point(0, this.TextArea.LineIndexes.Last());
-
-            this.alarmList.Add(new AlarmEventArgs(string.Empty, this.FileName, e.ErrorIndex, point.Y + 1, e));
         }
 
         private void RegisterKeywords(Grammar grammar)
@@ -269,13 +246,50 @@ namespace Parse.WpfControls.SyntaxEditor
 
         private void MoveCaretToToken(int tokenIndex) => this.TextArea.MoveCaretToToken(tokenIndex);
 
+
+
+
+        private void ParsingFailedListPreProcess(ParsingResult e)
+        {
+            // If fired the error on EndMarker.
+            DrawOption status = DrawOption.None;
+
+            foreach(var failedInfo in e.FailedList)
+            {
+                if (failedInfo.InputValue.TokenCell.ValueOptionData != null)
+                    status = (DrawOption)failedInfo.InputValue.TokenCell.ValueOptionData;
+
+                if (failedInfo.ErrorPosition == ErrorPosition.OnEndMarker)
+                    status |= DrawOption.EndPointUnderline;
+                else
+                    status |= DrawOption.Underline;
+
+                failedInfo.InputValue.TokenCell.ValueOptionData = status;
+
+                // If fired the error on EndMarker then error point is last line.
+                var point = (failedInfo.InputValue.Kind != new EndMarker()) ?
+                    this.TextArea.GetIndexInfoFromCaretIndex(failedInfo.InputValue.TokenCell.StartIndex) :
+                    new System.Drawing.Point(0, this.TextArea.LineIndexes.Count-1);
+
+                this.alarmList.Add(new AlarmEventArgs(string.Empty, this.FileName, failedInfo.ErrorIndex, point.Y + 1, failedInfo));
+            }
+        }
+
+
         private void TextArea_TextChanged(object sender, TextChangedEventArgs e)
         {
             this.alarmList.Clear();
 
-            if (this.ParserSnippet.Parsing(this.TextArea.Tokens.ToArray()))
+            var parsingResult = this.ParserSnippet.Parsing(this.TextArea.Tokens.ToArray());
+            if (parsingResult.Success)
+            {
                 this.alarmList.Add(new AlarmEventArgs(string.Empty, this.FileName));
-            else this.AdjustToValidAlarmList();
+            }
+            else
+            {
+                this.ParsingFailedListPreProcess(parsingResult);
+                this.AdjustToValidAlarmList();
+            }
 
             this.AlarmFired?.Invoke(this, this.alarmList);
             this.TextArea.InvalidateVisual();

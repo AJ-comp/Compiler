@@ -1,4 +1,5 @@
-﻿using Parse.FrontEnd.Parsers.EventArgs;
+﻿using Parse.FrontEnd.Parsers.Datas;
+using Parse.FrontEnd.Parsers.EventArgs;
 
 namespace Parse.WpfControls.SyntaxEditor.EventArgs
 {
@@ -13,7 +14,7 @@ namespace Parse.WpfControls.SyntaxEditor.EventArgs
         public string ProjectName { get; }
         public string FileName { get; }
 
-        public ParsingFailedEventArgs ParsingFailedArgs { get; } = null;
+        public ParsingFailResult ParsingFailedArgs { get; } = null;
 
         public AlarmEventArgs(string projectName, string fileName)
         {
@@ -23,7 +24,7 @@ namespace Parse.WpfControls.SyntaxEditor.EventArgs
             this.ParsingFailedArgs = null;
         }
 
-        public AlarmEventArgs(string projectName, string fileName, int tokenIndex, int line, ParsingFailedEventArgs e)
+        public AlarmEventArgs(string projectName, string fileName, int tokenIndex, int line, ParsingFailResult e)
         {
             this.Status = AlarmStatus.ParsingError;
             this.ProjectName = projectName;

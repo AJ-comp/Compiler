@@ -7,16 +7,36 @@ namespace Parse.FrontEnd.Parsers.Datas
 {
     public abstract class ParsingResult
     {
-        public bool Success { get; }
-        public ParsingHistory ParsingHistory { get; }
-        public Stack<AstSymbol> meaningStack { get; } = new Stack<AstSymbol>();
-        public List<AstSymbol> ParseTree => this.meaningStack.Reverse().ToList();
+        public bool Success { get; private set; }
+        public ParsingHistory ParsingHistory { get; private set; }
+        public Stack<AstSymbol> MeaningStack { get; private set; } = new Stack<AstSymbol>();
+        public IReadOnlyList<AstSymbol> ParseTree => this.MeaningStack.Reverse().ToList();
 
-        protected ParsingResult(bool success, ParsingHistory parsingHistory, Stack<AstSymbol> meaningStack)
+        private List<ParsingFailResult> failedList = new List<ParsingFailResult>();
+        public IReadOnlyList<ParsingFailResult> FailedList => failedList;
+
+        protected ParsingResult(bool success)
         {
             Success = success;
-            ParsingHistory = parsingHistory;
-            this.meaningStack = meaningStack;
+        }
+
+        internal void AddFailedList(ParsingFailResult data)
+        {
+            this.Success = false;
+
+            this.failedList.Add(data);
+        }
+
+        public void SetData(ParsingHistory parsingHistory, Stack<AstSymbol> meaningStack)
+        {
+            this.ParsingHistory = parsingHistory;
+            this.MeaningStack = meaningStack;
+        }
+
+        public void SetSuccess()
+        {
+            this.Success = true;
+            this.failedList.Clear();
         }
     }
 }

@@ -66,7 +66,7 @@ namespace Parse.FrontEnd.Parsers
         /// <returns></returns>
         private bool Expand(Symbol curStatus, TokenData input)
         {
-            bool result = false;
+            bool result;
 
             if (curStatus is Terminal)
             {

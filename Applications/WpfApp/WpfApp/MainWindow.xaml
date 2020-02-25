@@ -73,6 +73,7 @@
                           ToolItemsSource="{Binding VisibleToolItems}"
                           ToolItemContainerStyle="{StaticResource ToolWindowStyle}"
                           Style="{StaticResource TestDockSite}"
+                          ap:DockSiteHook.PrimaryDocument="{Binding SolutionExplorer.SelectedDocument, Mode=OneWay}"
                           ap:DockSiteHook.EnableWindowClosedHook="True"
                           ap:DockSiteHook.WindowClosedCommand="{x:Static commands:MenuActionCommands.DockingWindowClosed}"
                           ap:DockSiteHook.WindowClosedCommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:MainWindow}}}"

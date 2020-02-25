@@ -68,10 +68,16 @@ namespace ApplicationLayer.ViewModels.ToolWindowViewModels
 
         private void RemoveAllMatched(object fromControl)
         {
-            var list = this.AlarmLists.Except(this.AlarmLists.Where(x => x.FromControl == fromControl));
+            var editorViewModel = fromControl as EditorTypeViewModel;
+            var where = this.AlarmLists.Where(x => x.FullPath == editorViewModel.FullPath);
 
-            this.AlarmLists.Clear();
-            foreach (var item in list) this.AlarmLists.Add(item);
+            if(where.Any())
+            {
+                var list = new ObservableCollection<AlarmData>(this.AlarmLists.Except(where));
+
+                this.AlarmLists.Clear();
+                foreach (var item in list) this.AlarmLists.Add(item);
+            }
         }
 
         public void AddAlarmList(object fromControl, List<AlarmData> e)
@@ -104,12 +110,14 @@ namespace ApplicationLayer.ViewModels.ToolWindowViewModels
         private void Editor_AlarmFired(object sender, AlarmCollection e)
         {
             List<AlarmData> alarmList = new List<AlarmData>();
+            var editorViewModel = sender as EditorTypeViewModel;
+
             foreach (var item in e)
             {
                 if (item.Status == AlarmStatus.None) continue;
 
-                var message = string.Format(AlarmCodes.CE0000, item.ParsingFailedArgs.PossibleSet.ToString());
-                var alarmData = new AlarmData(sender, item.Status, AlarmCodes.CE0000, message, item.ProjectName, item.FileName, item.TokenIndex, item.Line);
+                var message = string.Format(AlarmCodes.CE0000, item.ParsingFailedArgs.PossibleTerminalSet.ToString());
+                var alarmData = new AlarmData(sender, item.Status, AlarmCodes.CE0000, message, editorViewModel.FullPath, item.ProjectName, item.FileName, item.TokenIndex, item.Line);
                 alarmList.Add(alarmData);
             }
 

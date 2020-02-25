@@ -58,9 +58,10 @@
     <Compile Include="Datas\ActionData.cs" />
     <Compile Include="Datas\CanonicalItem.cs" />
     <Compile Include="Datas\LLParsingRowDataFormat.cs" />
+    <Compile Include="Datas\ParsingFailResult.cs" />
     <Compile Include="Datas\LRParsingRowDataFormat.cs" />
     <Compile Include="Datas\LRParsingResult.cs" />
-    <Compile Include="Datas\LRParsingProcessResult.cs" />
+    <Compile Include="Datas\LRParsingSuccessResult.cs" />
     <Compile Include="Datas\ParsingResult.cs" />
     <Compile Include="Datas\ParsingProcessResult.cs" />
     <Compile Include="Datas\ParsingRowDataFormat.cs" />

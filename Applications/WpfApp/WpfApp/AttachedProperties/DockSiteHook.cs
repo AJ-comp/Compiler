@@ -1,4 +1,5 @@
 ﻿using ActiproSoftware.Windows.Controls.Docking;
+using ApplicationLayer.ViewModels.DocumentTypeViewModels;
 using System;
 using System.Windows;
 using System.Windows.Controls;
@@ -239,6 +240,33 @@ namespace ApplicationLayer.WpfApp.AttachedProperties
             DependencyProperty.RegisterAttached("WindowClosedCommandParameter", typeof(object), typeof(DockSiteHook), new PropertyMetadata(null));
 
 
+
+        public static DocumentViewModel GetPrimaryDocument(DependencyObject obj) => (DocumentViewModel)obj.GetValue(PrimaryDocumentProperty);
+        public static void SetPrimaryDocument(DependencyObject obj, DocumentViewModel value) => obj.SetValue(PrimaryDocumentProperty, value);
+
+        // Using a DependencyProperty as the backing store for PrimaryDocument.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty PrimaryDocumentProperty =
+            DependencyProperty.RegisterAttached("PrimaryDocument", typeof(DocumentViewModel), typeof(DockSiteHook), new PropertyMetadata(null, OnPrimaryDocumentEventHookChanged));
+
+        private static void OnPrimaryDocumentEventHookChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            var dockSite = (sender as DockSite);
+            if (dockSite == null) return;
+
+            foreach(var document in dockSite.Documents)
+            {
+                if ((document.DataContext is DocumentViewModel) == false) continue;
+
+                var docViewModel = document.DataContext as DocumentViewModel;
+                var selDocViewModel = e.NewValue as DocumentViewModel;
+
+                if (docViewModel.ToolTipText == selDocViewModel.ToolTipText)
+                {
+                    document.Activate();
+                    break;
+                }
+            }
+        }
 
     }
 }

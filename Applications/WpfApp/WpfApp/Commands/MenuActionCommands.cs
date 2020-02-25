@@ -453,8 +453,6 @@ private void OnNewFile(Func<Document> func)
 
 
 
-
-
         /// <summary>
         /// This command open changes character set to Korean.
         /// </summary>
