@@ -11,7 +11,7 @@
                 <ResourceDictionary x:Name="TemplateResources">
                   <ResourceDictionary.MergedDictionaries>
                     <ResourceDictionary Source="Resources/DataTemplates/DocumentTemplates.xaml" />
-                    <ResourceDictionary Source="Resources/DataTemplates/EtcTemplates.xaml" />
+                    <ResourceDictionary Source="Resources/DataTemplates/GrammarMenuTemplates.xaml" />
                     <ResourceDictionary Source="Resources/DataTemplates/HierarchicalDataTemplates.xaml" />
                     <ResourceDictionary Source="Resources/DataTemplates/MCUDataTemplates/ARMDataTemplates.xaml" />
                     <ResourceDictionary Source="Resources/DataTemplates/MCUDataTemplates/AVRDataTemplates.xaml" />

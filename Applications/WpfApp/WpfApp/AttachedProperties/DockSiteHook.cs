@@ -1,6 +1,7 @@
 ﻿using ActiproSoftware.Windows.Controls.Docking;
 using ApplicationLayer.ViewModels.DocumentTypeViewModels;
 using System;
+using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -31,7 +32,7 @@ namespace ApplicationLayer.WpfApp.AttachedProperties
 
         private static void DockSite_MenuOpening(object sender, DockingMenuEventArgs e)
         {
-            MenuItem menuItem = null;
+            Menu menu = null;
 
             if (e.Window is DocumentWindow)
             {
@@ -43,13 +44,13 @@ namespace ApplicationLayer.WpfApp.AttachedProperties
                 {
                     // filtering
                     if (docFilter == e.Window.GetType() || docFilter == e.Window.DataContext.GetType())
-                        menuItem = DockSiteHook.GetDocumentMenuItemToAdd(sender as DockSite) as MenuItem;
+                        menu = DockSiteHook.GetDocumentMenuItemsToAdd(sender as DockSite) as Menu;
                 }
-                else menuItem = DockSiteHook.GetDocumentMenuItemToAdd(sender as DockSite) as MenuItem;
+                else menu = DockSiteHook.GetDocumentMenuItemsToAdd(sender as DockSite) as Menu;
             }
             else if(e.Window is ToolWindow)
             {
-                var toolWindowFilter = DockSiteHook.GetFilterToolWindowMenuItemToAdd(sender as DockSite) as Type;
+                var toolWindowFilter = DockSiteHook.GetFilterToolWindowMenuItemsToAdd(sender as DockSite) as Type;
 
                 // if toolWindowFilter is null then filtering off
                 // if toolWindowFilter is not null then filtering on 
@@ -57,28 +58,31 @@ namespace ApplicationLayer.WpfApp.AttachedProperties
                 {
                     // filtering
                     if (toolWindowFilter == e.Window.GetType() || toolWindowFilter == e.Window.DataContext.GetType())
-                        menuItem = DockSiteHook.GetToolWindowMenuItemToAdd(sender as DockSite) as MenuItem;
+                        menu = DockSiteHook.GetToolWindowMenuItemsToAdd(sender as DockSite) as Menu;
                 }
-                else menuItem = DockSiteHook.GetToolWindowMenuItemToAdd(sender as DockSite) as MenuItem;
+                else menu = DockSiteHook.GetToolWindowMenuItemsToAdd(sender as DockSite) as Menu;
             }
 
-            if (menuItem == null) return;
+            if (menu == null) return;
 
             e.Menu.Items.Add(new Separator());
-            var addItem = new MenuItem() { Header = menuItem.Header, Command = menuItem.Command, CommandParameter = menuItem.CommandParameter };
-            e.Menu.Items.Add(addItem);
+            foreach(MenuItem menuItem in menu.Items)
+            {
+                var addItem = new MenuItem() { Header = menuItem.Header, Command = menuItem.Command, CommandParameter = menuItem.CommandParameter };
+                e.Menu.Items.Add(addItem);
+            }
         }
 
 
         /////////////////////////////////////////////////////////////////////////////////////////////////////
         // This AP registers a menu item to add into the Document.
         /////////////////////////////////////////////////////////////////////////////////////////////////////
-        public static MenuItem GetDocumentMenuItemToAdd(DependencyObject obj) => (MenuItem)obj.GetValue(DocumentMenuItemToAddProperty);
-        public static void SetDocumentMenuItemToAdd(DependencyObject obj, MenuItem value) => obj.SetValue(DocumentMenuItemToAddProperty, value);
+        public static Menu GetDocumentMenuItemsToAdd(DependencyObject obj) => (Menu)obj.GetValue(DocumentMenuItemsToAddProperty);
+        public static void SetDocumentMenuItemsToAdd(DependencyObject obj, Menu value) => obj.SetValue(DocumentMenuItemsToAddProperty, value);
 
-        // Using a DependencyProperty as the backing store for DocumentMenuItemToAdd.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty DocumentMenuItemToAddProperty =
-            DependencyProperty.RegisterAttached("DocumentMenuItemToAdd", typeof(MenuItem), typeof(DockSiteHook), new PropertyMetadata(null));
+        // Using a DependencyProperty as the backing store for DocumentMenuItemsToAdd.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty DocumentMenuItemsToAddProperty =
+            DependencyProperty.RegisterAttached("DocumentMenuItemsToAdd", typeof(Menu), typeof(DockSiteHook), new PropertyMetadata(null));
 
 
 
@@ -97,23 +101,23 @@ namespace ApplicationLayer.WpfApp.AttachedProperties
         /////////////////////////////////////////////////////////////////////////////////////////////////////
         // This AP registers a menu item to add into the ToolWindow.
         /////////////////////////////////////////////////////////////////////////////////////////////////////
-        public static MenuItem GetToolWindowMenuItemToAdd(DependencyObject obj) => (MenuItem)obj.GetValue(ToolWindowMenuItemToAddProperty);
-        public static void SetToolWindowMenuItemToAdd(DependencyObject obj, MenuItem value) => obj.SetValue(ToolWindowMenuItemToAddProperty, value);
+        public static Menu GetToolWindowMenuItemsToAdd(DependencyObject obj) => (Menu)obj.GetValue(ToolWindowMenuItemsToAddProperty);
+        public static void SetToolWindowMenuItemToAdd(DependencyObject obj, Menu value) => obj.SetValue(ToolWindowMenuItemsToAddProperty, value);
 
         // Using a DependencyProperty as the backing store for ToolWindowMenuItemToAdd.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty ToolWindowMenuItemToAddProperty =
-            DependencyProperty.RegisterAttached("ToolWindowMenuItemToAdd", typeof(MenuItem), typeof(DockSiteHook), new PropertyMetadata(null));
+        public static readonly DependencyProperty ToolWindowMenuItemsToAddProperty =
+            DependencyProperty.RegisterAttached("ToolWindowMenuItemToAdd", typeof(Menu), typeof(DockSiteHook), new PropertyMetadata(null));
 
 
 
         /////////////////////////////////////////////////////////////////////////////////////////////////////
         // This AP registers a filter for menu item to add into the ToolWindow.
         /////////////////////////////////////////////////////////////////////////////////////////////////////
-        public static Type GetFilterToolWindowMenuItemToAdd(DependencyObject obj) => (Type)obj.GetValue(FilterToolWindowMenuItemToAddProperty);
-        public static void SetFilterToolWindowMenuItemToAdd(DependencyObject obj, Type value) => obj.SetValue(FilterToolWindowMenuItemToAddProperty, value);
+        public static Type GetFilterToolWindowMenuItemsToAdd(DependencyObject obj) => (Type)obj.GetValue(FilterToolWindowMenuItemsToAddProperty);
+        public static void SetFilterToolWindowMenuItemsToAdd(DependencyObject obj, Type value) => obj.SetValue(FilterToolWindowMenuItemsToAddProperty, value);
 
         // Using a DependencyProperty as the backing store for FilterToolWindowMenuItemToAdd.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty FilterToolWindowMenuItemToAddProperty =
+        public static readonly DependencyProperty FilterToolWindowMenuItemsToAddProperty =
             DependencyProperty.RegisterAttached("FilterToolWindowMenuItemToAdd", typeof(Type), typeof(DockSiteHook), new PropertyMetadata(null));
 
         

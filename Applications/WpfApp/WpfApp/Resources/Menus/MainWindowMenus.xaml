@@ -43,10 +43,6 @@
                                     Command="{Binding OpenCommand}" 
                                     CommandParameter="{Binding Converter={logicConverters:OpenSolutionLogicConverter}}"/>
             </MenuItem>
-
-            <MenuItem Header="{lex:Loc Key=Save}" InputGestureText="Ctrl+S" >
-                
-            </MenuItem>
         </MenuItem>
 
         <!-- Edit -->
@@ -56,7 +52,6 @@
         <MenuItem Header="{lex:Loc Key=View}" InputGestureText="Alt+V">
             <MenuItem Header="{lex:Loc Key=Grammar}" InputGestureText="Alt+G" Command="{Binding GrammarCommand}"/>
             <MenuItem Header="{lex:Loc Key=ParsingHistory}" InputGestureText="Ctrl+Shift+H" Command="{Binding ParsingHistoryCommand}"/>
-            <MenuItem Header="{lex:Loc Key=ParseTree}" InputGestureText="Ctrl+Shift+T" Command="{Binding ParseTreeCommand}"/>
             <MenuItem Header="{lex:Loc Key=OtherWindow}">
                 <MenuItem.Icon>
                     <Image Width="16" Height="16"/>

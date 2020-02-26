@@ -4,6 +4,8 @@
                     xmlns:lex="http://wpflocalizeextension.codeplex.com"
                     xmlns:docking="http://schemas.actiprosoftware.com/winfx/xaml/docking"
                     xmlns:syntaxEditor="clr-namespace:Parse.WpfControls.SyntaxEditor;assembly=Parse.WpfControls.SyntaxEditor"
+                    xmlns:ap="clr-namespace:ApplicationLayer.WpfApp.AttachedProperties"
+                    xmlns:localCommands="clr-namespace:ApplicationLayer.WpfApp.Commands"
                     xmlns:localConverters="clr-namespace:ApplicationLayer.WpfApp.Converters"
                     xmlns:localBehaviors="clr-namespace:ApplicationLayer.WpfApp.Behaviors"
                     xmlns:documentViewModels="clr-namespace:ApplicationLayer.ViewModels.DocumentTypeViewModels;assembly=ApplicationLayer.ViewModels"
@@ -42,6 +44,11 @@
 
         </syntaxEditor:SyntaxEditor>
 
+    </DataTemplate>
+
+
+    <DataTemplate DataType="{x:Type documentViewModels:ParseTreeViewModel}">
+        <TreeView ItemsSource="{Binding ParseTree}" />
     </DataTemplate>
 
     <DataTemplate DataType="{x:Type documentViewModels:ParsingHistoryViewModel}">

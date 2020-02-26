@@ -9,14 +9,19 @@ using ApplicationLayer.ViewModels.ToolWindowViewModels;
 using ApplicationLayer.WpfApp.ViewModels;
 using ApplicationLayer.WpfApp.Views.DialogViews;
 using GalaSoft.MvvmLight.Messaging;
+using Parse.FrontEnd.Parsers;
+using Parse.FrontEnd.Parsers.Collections;
+using Parse.FrontEnd.Parsers.LR;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Globalization;
 using System.IO;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Forms;
+using System.Windows.Forms.Integration;
 using WPFLocalizeExtension.Engine;
 
 using CommonResource = ApplicationLayer.Define.Properties.Resources;
@@ -322,6 +327,72 @@ private void OnNewFile(Func<Document> func)
                 var editorViewModel = mainViewModel.SolutionExplorer.SelectedDocument as EditorTypeViewModel;
                 mainViewModel.SolutionExplorer.Documents.Add(new ParsingHistoryViewModel(editorViewModel.ParserSnippet.ParsingHistory));
             }, () =>
+            {
+                return true;
+            });
+
+
+        /// This command shows parse tree for selected document.
+        public static readonly RelayUICommand ShowParseTreeCommand = new RelayUICommand(CommonResource.ParseTree, 
+            () =>
+            {
+                //                if ((docViewModel is EditorTypeViewModel) == false) return;
+                var mainViewModel = RootWindow.DataContext as MainViewModel;
+
+                var selDoc = mainViewModel.SolutionExplorer.SelectedDocument;
+                if ((selDoc is EditorTypeViewModel) == false) return;
+                var editorViewModel = mainViewModel.SolutionExplorer.SelectedDocument as EditorTypeViewModel;
+                mainViewModel.SolutionExplorer.Documents.Add(new ParseTreeViewModel(editorViewModel.ParserSnippet.ParseTree));
+            }, () =>
+            {
+                return true;
+            });
+
+
+        /// This command shows parsing table
+        public static readonly RelayUICommand<Tuple<object, object, RoutedEventArgs>> ShowParsingTableCommand = 
+            new RelayUICommand<Tuple<object, object, RoutedEventArgs>>(CommonResource.ParsingTable, (param) =>
+            {
+                int recentRowIdx = -1;
+                int recentColIdx = -1;
+                ToolTip toolTip = new ToolTip();
+
+                var dataSource = param.Item1 as Parser;
+                var windowsFormsHost = param.Item2 as WindowsFormsHost;
+
+                windowsFormsHost.Child = new DataGridView();
+                var dataGridView = windowsFormsHost.Child as DataGridView;
+                dataGridView.EditMode = DataGridViewEditMode.EditProgrammatically;
+                dataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+                dataGridView.DataSource = dataSource.ParsingTable.ToTableFormat;
+                dataGridView.CellMouseEnter += (s, e) =>
+                {
+                    if (recentColIdx == e.ColumnIndex && recentRowIdx == e.RowIndex) return;
+                    recentColIdx = e.ColumnIndex;
+                    recentRowIdx = e.RowIndex;
+
+                    toolTip.Hide(dataGridView);
+                    if (e.ColumnIndex != 0 || e.RowIndex == -1) return;
+
+                    dataGridView.ShowCellToolTips = false;
+
+                    var cell = dataGridView[e.ColumnIndex, e.RowIndex];
+
+                    if(dataSource is LRParser)
+                    {
+                        var lrParser = dataSource as LRParser;
+                        CanonicalItemSet canonical = lrParser.C0.GetStatusFromIxIndex(Convert.ToInt32(cell.Value.ToString().Substring(1)));
+
+                        var data = canonical.ToLineString();
+                        var lineCount = Regex.Matches(data, Environment.NewLine).Count;
+                        if (lineCount == 0 || lineCount == -1) lineCount = 1;
+
+                        var popDelay = 3000 * lineCount;
+                        if (popDelay > 30000) popDelay = 30000;
+                        toolTip.Show(canonical.ToLineString(), dataGridView, popDelay);
+                    }
+                };
+            }, (condition) =>
             {
                 return true;
             });

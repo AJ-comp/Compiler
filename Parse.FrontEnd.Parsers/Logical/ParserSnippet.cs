@@ -1,10 +1,9 @@
 ﻿using Parse.FrontEnd.Ast;
 using Parse.FrontEnd.Parsers.Collections;
 using Parse.FrontEnd.Parsers.Datas;
-using Parse.FrontEnd.Parsers.EventArgs;
 using Parse.Tokenize;
-using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Parse.FrontEnd.Parsers.Logical
 {
@@ -19,7 +18,7 @@ namespace Parse.FrontEnd.Parsers.Logical
         public ParsingHistory ParsingHistory { get; } = new ParsingHistory();
 
         /// <summary> Get the parse tree </summary>
-        public List<AstSymbol> ParseTree { get; } = new List<AstSymbol>();
+        public IReadOnlyList<AstSymbol> ParseTree => this.MeaningStack.Reverse().ToList();
         public Stack<AstSymbol> MeaningStack { get; } = new Stack<AstSymbol>();
 
         protected ParserSnippet(Parser parser)

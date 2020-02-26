@@ -4,7 +4,7 @@ namespace Parse.FrontEnd.RegularGrammar
 {
     public abstract class Symbol : IShowable, IQuantifiable
     {
-        internal UInt32 uniqueKey = 0xffffffff;
+        internal UInt32 uniqueKey = UInt32.MaxValue;
 
         public abstract string ToGrammarString();
         public abstract string ToTreeString(ushort depth = 1);

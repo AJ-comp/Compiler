@@ -1,16 +1,11 @@
 ﻿using Parse.FrontEnd.Grammars;
-using Parse.FrontEnd.Parsers;
 using Parse.FrontEnd.Parsers.Datas;
 using Parse.FrontEnd.Parsers.EventArgs;
 using Parse.FrontEnd.Parsers.Logical;
-using Parse.FrontEnd.Parsers.LR;
 using Parse.FrontEnd.RegularGrammar;
-using Parse.Tokenize;
 using Parse.WpfControls.Models;
 using Parse.WpfControls.SyntaxEditor.EventArgs;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;

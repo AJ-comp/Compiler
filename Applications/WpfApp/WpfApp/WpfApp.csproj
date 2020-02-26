@@ -108,7 +108,8 @@
     <Compile Include="AttachedProperties\DockSiteHook.cs" />
     <Compile Include="AttachedProperties\EditableTextBox.cs" />
     <Compile Include="AttachedProperties\MainWindowHook.cs" />
-    <Compile Include="AttachedProperties\WindowsFormsHostMap.cs" />
+    <Compile Include="AttachedProperties\TreeViewHook.cs" />
+    <Compile Include="AttachedProperties\WindowsFormsHostHook.cs" />
     <Compile Include="Behaviors\BindableSelectedItemBehavior.cs" />
     <Compile Include="Behaviors\DataGridViewAllocateBehavior.cs" />
     <Compile Include="Behaviors\EventToCommandBehavior.cs" />
@@ -212,7 +213,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Resources\DataTemplates\EtcTemplates.xaml">
+    <Page Include="Resources\DataTemplates\GrammarMenuTemplates.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

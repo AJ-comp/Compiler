@@ -36,9 +36,12 @@
         <ResourceDictionary>
             <Style x:Key="TestDockSite" TargetType="{x:Type docking:DockSite}">
                 <Setter Property="ap:DockSiteHook.EnableMenuItemHook" Value="True"/>
-                <Setter Property="ap:DockSiteHook.DocumentMenuItemToAdd">
+                <Setter Property="ap:DockSiteHook.DocumentMenuItemsToAdd">
                     <Setter.Value>
-                        <MenuItem Command="{x:Static commands:MenuActionCommands.ParsingHistory}"/>
+                        <Menu>
+                            <MenuItem Command="{x:Static commands:MenuActionCommands.ParsingHistory}"/>
+                            <MenuItem Command="{x:Static commands:MenuActionCommands.ShowParseTreeCommand}"/>
+                        </Menu>
                     </Setter.Value>
                 </Setter>
                 <Setter Property="ap:DockSiteHook.FilterDocumentMenuItemToAdd"

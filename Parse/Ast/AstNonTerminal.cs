@@ -2,15 +2,15 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Parse.FrontEnd.Ast
 {
     public class AstNonTerminal : AstSymbol, IList<AstSymbol>
     {
+        public NonTerminalSingle SignPost { get; private set; } = null;
+
         private List<AstSymbol> symbols = new List<AstSymbol>();
+        public IReadOnlyList<AstSymbol> Items => symbols;
 
         public string Name => this.SignPost.MeaningUnit?.Name;
 

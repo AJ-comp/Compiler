@@ -70,9 +70,7 @@
     <Compile Include="ErrorHandling\GrammarPrivate\MiniC_LRErrorHandler.cs" />
     <Compile Include="ErrorHandling\IErrorAlgorithm.cs" />
     <Compile Include="ErrorHandling\PanicMode.cs" />
-    <Compile Include="EventArgs\LLParsingFailedEventArgs.cs" />
     <Compile Include="EventArgs\LRParsingEventArgs.cs" />
-    <Compile Include="EventArgs\LRParsingFailedEventArgs.cs" />
     <Compile Include="EventArgs\ParsingFailedEventArgs.cs" />
     <Compile Include="Logical\LLParserSnippet.cs" />
     <Compile Include="Logical\LRParserSnippet.cs" />
