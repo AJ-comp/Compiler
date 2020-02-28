@@ -1,9 +1,13 @@
 ﻿using Parse.FrontEnd.Ast;
+using static Parse.FrontEnd.Grammars.MiniC.MiniCSymbolItems;
 
 namespace Parse.FrontEnd.Grammars.MiniC
 {
     public class MiniCSdts : Sdts
     {
+        // The cache role for speed up
+        private MiniCGrammar grammar;
+
         public MeaningUnit Program { get; } = new MeaningUnit("Program");
         public MeaningUnit FuncDef { get; } = new MeaningUnit("FuncDef");
         public MeaningUnit FuncHead { get; } = new MeaningUnit("FuncHead");
@@ -29,254 +33,291 @@ namespace Parse.FrontEnd.Grammars.MiniC
         public MeaningUnit Cell { get; } = new MeaningUnit("Cell");
         public MeaningUnit ActualParam { get; } = new MeaningUnit("ActualParam");
 
-        private void ActionProgram(AstNonTerminal node)
+        /// <summary>
+        /// This function define common logic if node included items that only TreeNonTerminal type.
+        /// </summary>
+        /// <param name="node"></param>
+        /// <returns></returns>
+        private SymbolTable ActionCommonLogic(TreeNonTerminal node)
         {
+            MiniCSymbolTable result = new MiniCSymbolTable();
+            MiniCSymbolItems itemInfo = new MiniCSymbolItems();
 
+            foreach (var item in node.Items)
+            {
+                if (item is TreeNonTerminal)
+                {
+                    var astNonTerminal = item as TreeNonTerminal;
+
+                    result = result.Merge(astNonTerminal.ActionLogic()) as MiniCSymbolTable;
+                }
+            }
+            return result;
         }
 
-        private void ActionFuncDef(AstNonTerminal node)
-        {
+        private SymbolTable ActionProgram(TreeNonTerminal node) => ActionCommonLogic(node);
 
+        private SymbolTable ActionFuncDef(TreeNonTerminal node) => ActionCommonLogic(node);
+
+        private SymbolTable ActionFuncHead(TreeNonTerminal node) => ActionCommonLogic(node);
+
+        private SymbolTable ActionDclSpec(TreeNonTerminal node)
+        {
+            MiniCSymbolTable result = new MiniCSymbolTable();
+            MiniCSymbolItems itemInfo = new MiniCSymbolItems();
+
+            foreach(var item in node.Items)
+            {
+                if(item is TreeNonTerminal)
+                {
+                    var astNonTerminal = item as TreeNonTerminal;
+
+                    result = result.Merge(astNonTerminal.ActionLogic()) as MiniCSymbolTable;
+                }
+                else if (item is TreeTerminal)
+                {
+                    var astTerminal = item as TreeTerminal;
+
+                    if (astTerminal.Token.Kind == this.grammar.@const) itemInfo.Const = true;
+                    else if (astTerminal.Token.Kind == this.grammar.@void) itemInfo.Type = DataType.VOID;
+                    else if (astTerminal.Token.Kind == this.grammar.@int) itemInfo.Type = DataType.INT;
+
+                    result.AddItem(itemInfo);
+                }
+            }
+            return result;
         }
 
-        private void ActionFuncHead(AstNonTerminal node)
+        private SymbolTable ActionConstNode(TreeNonTerminal node)
         {
-
+            return null;
         }
 
-        private void ActionDclSpec(AstNonTerminal node)
+        private SymbolTable ActionIntNode(TreeNonTerminal node)
         {
-
+            return null;
         }
 
-        private void ActionConstNode(AstNonTerminal node)
+        private SymbolTable ActionVoidNode(TreeNonTerminal node)
         {
-
+            return null;
         }
 
-        private void ActionIntNode(AstNonTerminal node)
+        private SymbolTable ActionFormalPara(TreeNonTerminal node)
         {
-
+            return null;
         }
 
-        private void ActionVoidNode(AstNonTerminal node)
+        private SymbolTable ActionParamDcl(TreeNonTerminal node)
         {
-
+            return null;
         }
 
-        private void ActionFormalPara(AstNonTerminal node)
+        private SymbolTable ActionCompoundSt(TreeNonTerminal node)
         {
-
+            return null;
         }
 
-        private void ActionParamDcl(AstNonTerminal node)
+        private SymbolTable ActionDclList(TreeNonTerminal node)
         {
-
+            return null;
         }
 
-        private void ActionCompoundSt(AstNonTerminal node)
+        private SymbolTable ActionDcl(TreeNonTerminal node)
         {
-
+            return null;
         }
 
-        private void ActionDclList(AstNonTerminal node)
+        private SymbolTable ActionDclItem(TreeNonTerminal node)
         {
-
+            return null;
         }
 
-        private void ActionDcl(AstNonTerminal node)
+        private SymbolTable ActionSimpleVar(TreeNonTerminal node)
         {
-
+            return null;
         }
 
-        private void ActionDclItem(AstNonTerminal node)
+        private SymbolTable ActionArrayVar(TreeNonTerminal node)
         {
-
+            return null;
         }
 
-        private void ActionSimpleVar(AstNonTerminal node)
+        private SymbolTable ActionStatList(TreeNonTerminal node)
         {
-
+            return null;
         }
 
-        private void ActionArrayVar(AstNonTerminal node)
+        private SymbolTable ActionExpSt(TreeNonTerminal node)
         {
-
+            return null;
         }
 
-        private void ActionStatList(AstNonTerminal node)
+        private SymbolTable ActionIfSt(TreeNonTerminal node)
         {
-
+            return null;
         }
 
-        private void ActionExpSt(AstNonTerminal node)
+        private SymbolTable ActionIfElseSt(TreeNonTerminal node)
         {
-
+            return null;
         }
 
-        private void ActionIfSt(AstNonTerminal node)
+        private SymbolTable ActionWhileSt(TreeNonTerminal node)
         {
-
+            return null;
         }
 
-        private void ActionIfElseSt(AstNonTerminal node)
+        private SymbolTable ActionReturnSt(TreeNonTerminal node)
         {
-
+            return null;
         }
 
-        private void ActionWhileSt(AstNonTerminal node)
+        private SymbolTable ActionIndex(TreeNonTerminal node)
         {
-
+            return null;
         }
 
-        private void ActionReturnSt(AstNonTerminal node)
+        private SymbolTable ActionCell(TreeNonTerminal node)
         {
-
+            return null;
         }
 
-        private void ActionIndex(AstNonTerminal node)
+        private SymbolTable ActionActualParam(TreeNonTerminal node)
         {
-
+            return null;
         }
 
-        private void ActionCell(AstNonTerminal node)
+        private SymbolTable ActionAdd(TreeNonTerminal node)
         {
-
+            return null;
         }
 
-        private void ActionActualParam(AstNonTerminal node)
+        private SymbolTable ActionSub(TreeNonTerminal node)
         {
-
+            return null;
         }
 
-        private void ActionAdd(AstNonTerminal node)
+        private SymbolTable ActionMul(TreeNonTerminal node)
         {
-
+            return null;
         }
 
-        private void ActionSub(AstNonTerminal node)
+        private SymbolTable ActionDiv(TreeNonTerminal node)
         {
-
+            return null;
         }
 
-        private void ActionMul(AstNonTerminal node)
+        private SymbolTable ActionMod(TreeNonTerminal node)
         {
-
+            return null;
         }
 
-        private void ActionDiv(AstNonTerminal node)
+        private SymbolTable ActionAssign(TreeNonTerminal node)
         {
-
+            return null;
         }
 
-        private void ActionMod(AstNonTerminal node)
+        private SymbolTable ActionAddAssign(TreeNonTerminal node)
         {
-
+            return null;
         }
 
-        private void ActionAssign(AstNonTerminal node)
+        private SymbolTable ActionSubAssign(TreeNonTerminal node)
         {
-
+            return null;
         }
 
-        private void ActionAddAssign(AstNonTerminal node)
+        private SymbolTable ActionMulAssign(TreeNonTerminal node)
         {
-
+            return null;
         }
 
-        private void ActionSubAssign(AstNonTerminal node)
+        private SymbolTable ActionDivAssign(TreeNonTerminal node)
         {
-
+            return null;
         }
 
-        private void ActionMulAssign(AstNonTerminal node)
+        private SymbolTable ActionModAssign(TreeNonTerminal node)
         {
-
+            return null;
         }
 
-        private void ActionDivAssign(AstNonTerminal node)
+        private SymbolTable ActionLogicalOr(TreeNonTerminal node)
         {
-
+            return null;
         }
 
-        private void ActionModAssign(AstNonTerminal node)
+        private SymbolTable ActionLogicalAnd(TreeNonTerminal node)
         {
-
+            return null;
         }
 
-        private void ActionLogicalOr(AstNonTerminal node)
+        private SymbolTable ActionLogicalNot(TreeNonTerminal node)
         {
-
+            return null;
         }
 
-        private void ActionLogicalAnd(AstNonTerminal node)
+        private SymbolTable ActionEqual(TreeNonTerminal node)
         {
-
+            return null;
         }
 
-        private void ActionLogicalNot(AstNonTerminal node)
+        private SymbolTable ActionNotEqual(TreeNonTerminal node)
         {
-
+            return null;
         }
 
-        private void ActionEqual(AstNonTerminal node)
+        private SymbolTable ActionGreaterThan(TreeNonTerminal node)
         {
-
+            return null;
         }
 
-        private void ActionNotEqual(AstNonTerminal node)
+        private SymbolTable ActionLessThan(TreeNonTerminal node)
         {
-
+            return null;
         }
 
-        private void ActionGreaterThan(AstNonTerminal node)
+        private SymbolTable ActionGreatherEqual(TreeNonTerminal node)
         {
-
+            return null;
         }
 
-        private void ActionLessThan(AstNonTerminal node)
+        private SymbolTable ActionLessEqual(TreeNonTerminal node)
         {
-
+            return null;
         }
 
-        private void ActionGreatherEqual(AstNonTerminal node)
+        private SymbolTable ActionUnaryMinus(TreeNonTerminal node)
         {
-
+            return null;
         }
 
-        private void ActionLessEqual(AstNonTerminal node)
+        private SymbolTable ActionPreInc(TreeNonTerminal node)
         {
-
+            return null;
         }
 
-        private void ActionUnaryMinus(AstNonTerminal node)
+        private SymbolTable ActionPreDec(TreeNonTerminal node)
         {
-
+            return null;
         }
 
-        private void ActionPreInc(AstNonTerminal node)
+        private SymbolTable ActionPostInc(TreeNonTerminal node)
         {
-
+            return null;
         }
 
-        private void ActionPreDec(AstNonTerminal node)
+        private SymbolTable ActionPostDec(TreeNonTerminal node)
         {
-
-        }
-
-        private void ActionPostInc(AstNonTerminal node)
-        {
-
-        }
-
-        private void ActionPostDec(AstNonTerminal node)
-        {
-
+            return null;
         }
 
 
-        public MiniCSdts(KeyManager keyManager) : base(keyManager)
+        public MiniCSdts(KeyManager keyManager, MiniCGrammar grammar) : base(keyManager)
         {
+            this.grammar = grammar;
+
             this.Program.ActionLogic = this.ActionProgram;
             this.FuncDef.ActionLogic = this.ActionFuncDef;
             this.FuncHead.ActionLogic = this.ActionFuncHead;

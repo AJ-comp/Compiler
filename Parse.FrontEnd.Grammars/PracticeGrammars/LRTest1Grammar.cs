@@ -27,14 +27,14 @@ namespace Parse.FrontEnd.Grammars.PracticeGrammars
 
     public class LRTest1Sdts : Sdts
     {
-        private void ActionAdd(AstNonTerminal node)
+        private SymbolTable ActionAdd(TreeNonTerminal node)
         {
-
+            return null;
         }
 
-        private void ActionMul(AstNonTerminal node)
+        private SymbolTable ActionMul(TreeNonTerminal node)
         {
-
+            return null;
         }
 
         public LRTest1Sdts(KeyManager keyManager) : base(keyManager)

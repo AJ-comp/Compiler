@@ -2,11 +2,11 @@
 
 namespace Parse.FrontEnd.Ast
 {
-    public class AstTerminal : AstSymbol
+    public class TreeTerminal : TreeSymbol
     {
         public TokenData Token { get; }
 
-        public AstTerminal(TokenData tokenData)
+        public TreeTerminal(TokenData tokenData)
         {
             this.Token = tokenData;
         }

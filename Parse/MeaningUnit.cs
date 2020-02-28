@@ -8,7 +8,7 @@ namespace Parse.FrontEnd
         internal uint uniqueKey;
 
         public string Name { get; } = string.Empty;
-        public Action<AstNonTerminal> ActionLogic { get; set; }
+        public Func<TreeNonTerminal, SymbolTable> ActionLogic { get; set; }
 
         public MeaningUnit(string name)
         {

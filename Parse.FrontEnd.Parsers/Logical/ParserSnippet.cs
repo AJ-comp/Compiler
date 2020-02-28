@@ -18,8 +18,12 @@ namespace Parse.FrontEnd.Parsers.Logical
         public ParsingHistory ParsingHistory { get; } = new ParsingHistory();
 
         /// <summary> Get the parse tree </summary>
-        public IReadOnlyList<AstSymbol> ParseTree => this.MeaningStack.Reverse().ToList();
-        public Stack<AstSymbol> MeaningStack { get; } = new Stack<AstSymbol>();
+        public IReadOnlyList<TreeSymbol> ParseTree => this.AllStack.Reverse().ToList();
+        public IReadOnlyList<TreeSymbol> Ast => this.MeaningStack.Reverse().ToList();
+
+        public Stack<TreeSymbol> AllStack { get; } = new Stack<TreeSymbol>();
+        public Stack<TreeSymbol> MeaningStack { get; } = new Stack<TreeSymbol>();
+        public Queue<TreeSymbol> MeaningQueue { get; } = new Queue<TreeSymbol>();
 
         protected ParserSnippet(Parser parser)
         {

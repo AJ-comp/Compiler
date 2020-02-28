@@ -32,14 +32,14 @@ namespace Parse.FrontEnd.Grammars.ExampleGrammars
 
     public class Ex8_10Sdts : Sdts
     {
-        private void ActionAdd(AstNonTerminal node)
+        private SymbolTable ActionAdd(TreeNonTerminal node)
         {
-
+            return null;
         }
 
-        private void ActionMul(AstNonTerminal node)
+        private SymbolTable ActionMul(TreeNonTerminal node)
         {
-
+            return null;
         }
 
         public Ex8_10Sdts(KeyManager keyManager) : base(keyManager)

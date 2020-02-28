@@ -50,6 +50,7 @@
     <Compile Include="ExampleGrammars\Ex8_9Grammar.cs" />
     <Compile Include="Grammar.cs" />
     <Compile Include="MiniC\MiniCSdts.cs" />
+    <Compile Include="MiniC\MiniCSymbolTable.cs" />
     <Compile Include="Sdts.cs" />
     <Compile Include="PracticeGrammars\LRTest1Grammar.cs" />
     <Compile Include="MiniC\MiniCGrammar.cs" />

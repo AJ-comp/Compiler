@@ -12,13 +12,6 @@
                     xmlns:local="clr-namespace:WpfApp.Resources.DataTemplates"
                     xmlns:localAP="clr-namespace:WpfApp.AttachedProperties">
 
-    <DataTemplate x:Key="ParserDataTable">
-        <WindowsFormsHost ap:WindowsFormsHostHook.EnableLoadedHook="True"
-                                        ap:WindowsFormsHostHook.LoadedCommand="{x:Static commands:MenuActionCommands.ShowParseTreeCommand}"
-                                        ap:WindowsFormsHostHook.LoadedCommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}}"
-                                        ap:WindowsFormsHostHook.DataSource="{Binding}"/>
-    </DataTemplate>
-
     <DataTemplate DataType="{x:Type parsers:SLRParser}">
         <TabControl>
             <TabItem Header="{lex:Loc Key=Grammar}">
@@ -44,11 +37,11 @@
         </TabControl>
     </DataTemplate>
 
-    <HierarchicalDataTemplate DataType="{x:Type ast:AstNonTerminal}" ItemsSource="{Binding Items}">
+    <HierarchicalDataTemplate DataType="{x:Type ast:TreeNonTerminal}" ItemsSource="{Binding Items}">
         <TextBlock Text="{Binding SignPost.Name}"/>
     </HierarchicalDataTemplate>
 
-    <DataTemplate DataType="{x:Type ast:AstTerminal}">
+    <DataTemplate DataType="{x:Type ast:TreeTerminal}">
         <TextBlock Text="{Binding Token.Kind.Value}"/>
     </DataTemplate>
 

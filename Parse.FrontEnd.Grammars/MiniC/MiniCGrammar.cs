@@ -102,14 +102,14 @@ namespace Parse.FrontEnd.Grammars.MiniC
         {
             this.ScopeInfos.Add(new ScopeInfo(this.scopeCommentStart, this.scopeCommentEnd));
 
-            MiniCSdts sdts = new MiniCSdts(this.keyManager);
+            MiniCSdts sdts = new MiniCSdts(this.keyManager, this);
 
             this.miniC.AddItem(this.translationUnit, sdts.Program);
             this.translationUnit.AddItem(this.externalDcl | this.translationUnit + this.externalDcl);
             this.externalDcl.AddItem(this.functionDef | this.declaration);
             this.functionDef.AddItem(this.functionHeader + this.compoundSt, sdts.FuncDef);
             this.functionHeader.AddItem(this.dclSpec + this.functionName + this.formalParam, sdts.FuncHead);
-            this.dclSpec.AddItem(this.dclSpecifiers,sdts.DclSpec);
+            this.dclSpec.AddItem(this.dclSpecifiers, sdts.DclSpec);
             this.dclSpecifiers.AddItem(this.dclSpecifier | this.dclSpecifiers + this.dclSpecifier);
             this.dclSpecifier.AddItem(this.typeQualifier | this.typeSpecifier);
             this.typeQualifier.AddItem(this.@const, sdts.ConstNode);

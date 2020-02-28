@@ -9,8 +9,8 @@ namespace Parse.FrontEnd.Parsers.Datas
     {
         public bool Success { get; private set; }
         public ParsingHistory ParsingHistory { get; private set; }
-        public Stack<AstSymbol> MeaningStack { get; private set; } = new Stack<AstSymbol>();
-        public IReadOnlyList<AstSymbol> ParseTree => this.MeaningStack.Reverse().ToList();
+        public Stack<TreeSymbol> MeaningStack { get; private set; } = new Stack<TreeSymbol>();
+        public IReadOnlyList<TreeSymbol> ParseTree => this.MeaningStack.Reverse().ToList();
 
         private List<ParsingFailResult> failedList = new List<ParsingFailResult>();
         public IReadOnlyList<ParsingFailResult> FailedList => failedList;
@@ -27,7 +27,7 @@ namespace Parse.FrontEnd.Parsers.Datas
             this.failedList.Add(data);
         }
 
-        public void SetData(ParsingHistory parsingHistory, Stack<AstSymbol> meaningStack)
+        public void SetData(ParsingHistory parsingHistory, Stack<TreeSymbol> meaningStack)
         {
             this.ParsingHistory = parsingHistory;
             this.MeaningStack = meaningStack;

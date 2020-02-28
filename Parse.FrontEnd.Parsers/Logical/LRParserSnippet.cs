@@ -4,7 +4,6 @@ using Parse.FrontEnd.Parsers.Collections;
 using Parse.FrontEnd.Parsers.Datas;
 using Parse.FrontEnd.Parsers.ErrorHandling.GrammarPrivate;
 using Parse.FrontEnd.Parsers.EventArgs;
-using Parse.FrontEnd.Parsers.Properties;
 using Parse.FrontEnd.RegularGrammar;
 using Parse.Tokenize;
 using System;
@@ -63,26 +62,64 @@ namespace Parse.FrontEnd.Parsers.Logical
             {
                 //                if (!args.InputValue.Kind.Meaning) return;
 
-                this.MeaningStack.Push(new AstTerminal(datas.InputValue));
+                this.AllStack.Push(new TreeTerminal(datas.InputValue));
             }
             else if (datas.ActionData.ActionDirection == ActionDir.reduce)
             {
                 var item = datas.ActionData.ActionDest as NonTerminalSingle;
 
-                AstNonTerminal nonTerminal = new AstNonTerminal(item);
-                for (int i = 0; i < item.Count; i++) nonTerminal.Insert(0, this.MeaningStack.Pop());
-                this.MeaningStack.Push(nonTerminal);
+                TreeNonTerminal nonTerminal = new TreeNonTerminal(item);
+                for (int i = 0; i < item.Count; i++) nonTerminal.Insert(0, this.AllStack.Pop());
 
-                item.MeaningUnit?.ActionLogic(nonTerminal);
+                this.AllStack.Push(nonTerminal);
             }
             else if (datas.ActionData.ActionDirection == ActionDir.epsilon_reduce)
             {
                 var item = datas.ActionData.ActionDest as NonTerminalSingle;
-                AstNonTerminal nonTerminal = new AstNonTerminal(item);
+                TreeNonTerminal nonTerminal = new TreeNonTerminal(item);
 
-                this.MeaningStack.Push(nonTerminal);
+                this.AllStack.Push(nonTerminal);
+            }
+        }
 
-                item.MeaningUnit?.ActionLogic(nonTerminal);
+        private void BuildAST(LRParsingSuccessResult datas)
+        {
+            if (datas.ActionData.ActionDirection == ActionDir.shift)
+            {
+                if (!datas.InputValue.Kind.Meaning) return;
+
+                this.MeaningStack.Push(new TreeTerminal(datas.InputValue));
+            }
+            else if (datas.ActionData.ActionDirection == ActionDir.reduce)
+            {
+                var item = datas.ActionData.ActionDest as NonTerminalSingle;
+
+                if (item.MeaningUnit != null)
+                {
+                    TreeNonTerminal nonTerminal = new TreeNonTerminal(item);
+                    for (int i = 0; i < item.Count; i++)
+                    {
+                        var symbol = this.MeaningStack.Pop();
+                        if(symbol is TreeNonTerminal)
+                        {
+                            var nonTerminalSymbol = symbol as TreeNonTerminal;
+                            if (nonTerminalSymbol.Items.Count == 0)  // epsilon
+                                continue;
+                        }
+                        nonTerminal.Insert(0, symbol);
+                    }
+                    this.MeaningStack.Push(nonTerminal);
+                }
+            }
+            else if (datas.ActionData.ActionDirection == ActionDir.epsilon_reduce)
+            {
+                var item = datas.ActionData.ActionDest as NonTerminalSingle;
+
+//                if (item.MeaningUnit != null)
+//                {
+                    TreeNonTerminal nonTerminal = new TreeNonTerminal(item);
+                    this.MeaningStack.Push(nonTerminal);
+//                }
             }
         }
 
@@ -260,6 +297,8 @@ namespace Parse.FrontEnd.Parsers.Logical
             if (tokenCells.Length <= 0) return result;
 
             this.ParsingHistory.Clear();
+            this.AllStack.Clear();
+            this.MeaningQueue.Clear();
             Stack<object> stack = new Stack<object>();
             stack.Push(0);
 
@@ -295,11 +334,14 @@ namespace Parse.FrontEnd.Parsers.Logical
                 {
                     var successResult = parsingResult as LRParsingSuccessResult;
                     this.BuildParseTree(successResult);
+                    this.BuildAST(successResult);
 
+                    // syntax analysis complete
                     if (successResult.ActionData.ActionDirection == ActionDir.accept)
                     {
-                        result.SetData(this.ParsingHistory, this.MeaningStack);
+                        result.SetData(this.ParsingHistory, this.AllStack);
                         result.SetSuccess();
+                        (this.MeaningStack.Pop() as TreeNonTerminal).ActionLogic();
                         break;
                     }
                     else if (successResult.ActionData.ActionDirection == ActionDir.reduce ||

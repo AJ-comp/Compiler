@@ -40,9 +40,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Ast\AstNonTerminal.cs" />
-    <Compile Include="Ast\AstSymbol.cs" />
-    <Compile Include="Ast\AstTerminal.cs" />
+    <Compile Include="Ast\TreeNonTerminal.cs" />
+    <Compile Include="Ast\TreeSymbol.cs" />
+    <Compile Include="Ast\TreeTerminal.cs" />
     <Compile Include="AutoGenerator.cs" />
     <Compile Include="ChangeableDataSet.cs" />
     <Compile Include="Convert.cs" />
@@ -64,6 +64,7 @@
     <Compile Include="RegularGrammar\Terminal.cs" />
     <Compile Include="RegularGrammar\TerminalSet.cs" />
     <Compile Include="RelationData.cs" />
+    <Compile Include="SymbolTable.cs" />
     <Compile Include="TokenData.cs" />
   </ItemGroup>
   <ItemGroup>

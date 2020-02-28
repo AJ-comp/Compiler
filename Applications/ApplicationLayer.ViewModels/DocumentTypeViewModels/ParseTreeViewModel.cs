@@ -7,9 +7,9 @@ namespace ApplicationLayer.ViewModels.DocumentTypeViewModels
 {
     public class ParseTreeViewModel : DocumentViewModel
     {
-        public ObservableCollection<AstSymbol> ParseTree { get; } = new ObservableCollection<AstSymbol>();
+        public ObservableCollection<TreeSymbol> ParseTree { get; } = new ObservableCollection<TreeSymbol>();
 
-        public ParseTreeViewModel(IReadOnlyList<AstSymbol> parseTree) : base(CommonResource.ParseTree)
+        public ParseTreeViewModel(IReadOnlyList<TreeSymbol> parseTree) : base(CommonResource.ParseTree)
         {
             if (parseTree is null) return;
 
