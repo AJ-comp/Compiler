@@ -14,6 +14,8 @@ namespace Parse.FrontEnd.Grammars.ExampleGrammars
         private NonTerminal D = new NonTerminal("D");
         private NonTerminal S = new NonTerminal("S");
 
+        public override Sdts SDTS => throw new System.NotImplementedException();
+
 
         public Ex8_8Grammar()
         {

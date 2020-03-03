@@ -15,4 +15,10 @@ namespace Parse.FrontEnd
         /// <returns>The SymbolTable that merged</returns>
         public abstract SymbolTable Merge(SymbolTable target);
     }
+
+
+    public abstract class SymbolItemSnippet : ICloneable
+    {
+        public abstract object Clone();
+    }
 }

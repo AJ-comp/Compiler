@@ -15,37 +15,43 @@ namespace Parse.FrontEnd.Grammars.ExampleGrammars
         private NonTerminal T = new NonTerminal("T");
         private NonTerminal F = new NonTerminal("F");
 
+        public override Sdts SDTS { get; }
 
         public Ex8_10Grammar()
         {
-            Ex8_10Sdts sdts = new Ex8_10Sdts(this.keyManager);
+            this.SDTS = new Ex8_10Sdts(this.keyManager);
 
-            this.E.AddItem((E + plus + T), sdts.Add);
+            this.E.AddItem((E + plus + T), SDTS.Add);
             this.E.AddItem(T);
-            this.T.AddItem((T + mul + F), sdts.Mul);
+            this.T.AddItem((T + mul + F), SDTS.Mul);
             this.T.AddItem(F);
             this.F.SetItem((open + E + close)|ident);
 
             this.Optimization();
         }
+
+
     }
 
     public class Ex8_10Sdts : Sdts
     {
-        private SymbolTable ActionAdd(TreeNonTerminal node)
+        private object ActionAdd(TreeNonTerminal node)
         {
             return null;
         }
 
-        private SymbolTable ActionMul(TreeNonTerminal node)
+        private object ActionMul(TreeNonTerminal node)
         {
             return null;
         }
 
         public Ex8_10Sdts(KeyManager keyManager) : base(keyManager)
         {
-            this.Add.ActionLogic = this.ActionAdd;
-            this.Mul.ActionLogic = this.ActionMul;
+        }
+
+        public override MeaningAnalysisResult Process(TreeSymbol node)
+        {
+            return null;
         }
     }
 }

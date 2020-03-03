@@ -1,5 +1,6 @@
 ﻿using Parse.FrontEnd.Ast;
 using Parse.FrontEnd.RegularGrammar;
+using static Parse.FrontEnd.Grammars.Sdts;
 
 namespace Parse.FrontEnd.Grammars.PracticeGrammars
 {
@@ -12,12 +13,14 @@ namespace Parse.FrontEnd.Grammars.PracticeGrammars
         private NonTerminal E = new NonTerminal("E", true);
         private NonTerminal T = new NonTerminal("T");
 
+        public override Sdts SDTS { get; }
+
         public LRTest1Grammar()
         {
-            Sdts sdts = new Sdts(this.keyManager);
+            this.SDTS = new LRTest1Sdts(this.keyManager);
 
-            E.AddItem((E + plus + T), sdts.Add);
-            E.AddItem((E + mul + T), sdts.Mul);
+            E.AddItem((E + plus + T), SDTS.Add);
+            E.AddItem((E + mul + T), SDTS.Mul);
             E.AddItem(T);
             T.SetChildren(a);
 
@@ -27,20 +30,21 @@ namespace Parse.FrontEnd.Grammars.PracticeGrammars
 
     public class LRTest1Sdts : Sdts
     {
-        private SymbolTable ActionAdd(TreeNonTerminal node)
+        private void ActionAdd(TreeSymbol node)
         {
-            return null;
         }
 
-        private SymbolTable ActionMul(TreeNonTerminal node)
+        private void ActionMul(TreeSymbol node)
         {
-            return null;
         }
 
         public LRTest1Sdts(KeyManager keyManager) : base(keyManager)
         {
-            this.Add.ActionLogic = this.ActionAdd;
-            this.Mul.ActionLogic = this.ActionMul;
+        }
+
+        public override MeaningAnalysisResult Process(TreeSymbol node)
+        {
+            return null;
         }
     }
 }

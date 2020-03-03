@@ -1,5 +1,6 @@
 ﻿using Parse.FrontEnd.Ast;
 using System;
+using System.Collections.Generic;
 
 namespace Parse.FrontEnd
 {
@@ -8,7 +9,7 @@ namespace Parse.FrontEnd
         internal uint uniqueKey;
 
         public string Name { get; } = string.Empty;
-        public Func<TreeNonTerminal, SymbolTable> ActionLogic { get; set; }
+        public Func<TreeNonTerminal, SymbolTable, int, MeaningErrInfoList, object> ActionLogic { get; set; }
 
         public MeaningUnit(string name)
         {
@@ -56,6 +57,30 @@ namespace Parse.FrontEnd
             }
 
             return !left.Equals(right);
+        }
+    }
+
+
+    public class MeaningErrInfo
+    {
+        public int ErrorIndex { get; }
+        public string ErrorMessage { get; }
+    }
+
+    public class MeaningErrInfoList : List<MeaningErrInfo>
+    {
+    }
+
+
+    public class MeaningAnalysisResult
+    {
+        MeaningErrInfoList MeaningErrInfos { get; } = new MeaningErrInfoList();
+        SymbolTable SymbolTable { get; }
+
+        public MeaningAnalysisResult(MeaningErrInfoList meaningErrInfos, SymbolTable symbolTable)
+        {
+            MeaningErrInfos = meaningErrInfos;
+            SymbolTable = symbolTable;
         }
     }
 }

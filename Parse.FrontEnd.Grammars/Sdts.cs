@@ -1,12 +1,10 @@
 ﻿using Parse.FrontEnd.Ast;
 using System;
-using System.Collections.Generic;
 using System.Reflection;
-using System.Threading;
 
 namespace Parse.FrontEnd.Grammars
 {
-    public class Sdts
+    public abstract class Sdts
     {
         public MeaningUnit Add { get; } = new MeaningUnit("Add");
         public MeaningUnit Sub { get; } = new MeaningUnit("Sub");
@@ -53,5 +51,7 @@ namespace Parse.FrontEnd.Grammars
                 }
             }
         }
+
+        public abstract MeaningAnalysisResult Process(TreeSymbol symbol);
     }
 }

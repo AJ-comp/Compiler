@@ -27,6 +27,9 @@ namespace Parse.FrontEnd.Grammars
         public TerminalSet TerminalSet { get; } = new TerminalSet();
         public NonTerminal StartSymbol { get; private set; } = null;
 
+        public abstract Sdts SDTS { get; }
+
+
         public string IdentPattern { get; } = "[_a-zA-Z][_a-zA-Z0-9]*";
         public string LetterPattern { get; } = "[a-zA-Z]";
         public string VarLetterPattern { get; } = "[_a-zA-Z]";

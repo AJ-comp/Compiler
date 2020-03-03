@@ -98,11 +98,14 @@ namespace Parse.FrontEnd.Grammars.MiniC
         private NonTerminal actualParamList = new NonTerminal("actual_param_list");
         private NonTerminal primaryExp = new NonTerminal("primary_exp");
 
+        public override Sdts SDTS { get; }
+
         public MiniCGrammar()
         {
             this.ScopeInfos.Add(new ScopeInfo(this.scopeCommentStart, this.scopeCommentEnd));
 
-            MiniCSdts sdts = new MiniCSdts(this.keyManager, this);
+            this.SDTS = new MiniCSdts(this.keyManager, this);
+            var sdts = this.SDTS as MiniCSdts;
 
             this.miniC.AddItem(this.translationUnit, sdts.Program);
             this.translationUnit.AddItem(this.externalDcl | this.translationUnit + this.externalDcl);

@@ -1,4 +1,5 @@
-﻿using Parse.FrontEnd.RegularGrammar;
+﻿using Parse.FrontEnd.Grammars.MiniC;
+using Parse.FrontEnd.RegularGrammar;
 
 namespace Parse.FrontEnd.Grammars
 {
@@ -60,6 +61,8 @@ namespace Parse.FrontEnd.Grammars
 
         private NonTerminal accessor = new NonTerminal("Accessor");
         private NonTerminal varType = new NonTerminal("VarType");
+
+        public override Sdts SDTS { get; }
 
 
         public AJGrammar()

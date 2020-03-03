@@ -341,7 +341,7 @@ namespace Parse.FrontEnd.Parsers.Logical
                     {
                         result.SetData(this.ParsingHistory, this.AllStack);
                         result.SetSuccess();
-                        (this.MeaningStack.Pop() as TreeNonTerminal).ActionLogic();
+                        this.Parser.Grammar.SDTS.Process(this.MeaningStack.Pop() as TreeSymbol);
                         break;
                     }
                     else if (successResult.ActionData.ActionDirection == ActionDir.reduce ||
