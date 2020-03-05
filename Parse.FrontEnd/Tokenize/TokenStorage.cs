@@ -1,27 +1,27 @@
 ﻿using Parse.Extensions;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Parse.Tokenize
 {
-    public class TokenStorage
+    public class TokenStorage : ICloneable
     {
         private Dictionary<TokenPatternInfo, List<int>> tableForAllPatterns = new Dictionary<TokenPatternInfo, List<int>>();
 
-        public List<TokenCell> AllTokens { get; } = new List<TokenCell>();
+        internal List<TokenCell> allTokens = new List<TokenCell>();
 
-        /// <summary>
-        ///  This property returns a whole table has columns that have positions for each TokenPatternInfo.
-        /// </summary>
+        public IReadOnlyList<TokenCell> AllTokens => allTokens;
+        /// <summary> This property returns a whole table has columns that have positions for each TokenPatternInfo. </summary>
         public Dictionary<TokenPatternInfo, List<int>> TableForAllPatterns => this.tableForAllPatterns;
 
         internal void UpdateTableForAllPatterns()
         {
             foreach (KeyValuePair<TokenPatternInfo, List<int>> item in this.tableForAllPatterns) item.Value.Clear();
 
-            Parallel.For(0, this.AllTokens.Count, i =>
+            Parallel.For(0, this.allTokens.Count, i =>
             {
-                var token = this.AllTokens[i];
+                var token = this.allTokens[i];
 
                 lock (this.tableForAllPatterns[token.PatternInfo])
                     this.tableForAllPatterns[token.PatternInfo].Add(i);
@@ -32,7 +32,7 @@ namespace Parse.Tokenize
         /// This function initializes the token table into the argument value.
         /// </summary>
         /// <param name="tokenPatternList">The value of the token pattern list to initialize.</param>
-        internal void InitTokenTable(List<TokenPatternInfo> tokenPatternList)
+        internal void InitTokenTable(IReadOnlyList<TokenPatternInfo> tokenPatternList)
         {
             this.tableForAllPatterns.Clear();
 
@@ -44,9 +44,11 @@ namespace Parse.Tokenize
             this.tableForAllPatterns.Add(TokenPatternInfo.NotDefinedToken, new List<int>());
         }
 
-        public TokenStorage()
+        private TokenStorage() { }
+
+        public TokenStorage(IReadOnlyList<TokenPatternInfo> tokenPatternList)
         {
-            this.tableForAllPatterns.Add(TokenPatternInfo.NotDefinedToken, new List<int>());
+            this.InitTokenTable(tokenPatternList);
         }
 
         /// <summary>
@@ -176,6 +178,28 @@ namespace Parse.Tokenize
             return result;
         }
 
+        /// <summary>
+        /// This function returns a part string that applied the PartSelectionBag in the SelectionTokensContainer.
+        /// </summary>
+        /// <param name="tokenIndex"></param>
+        /// <param name="rangeInfo"></param>
+        /// <returns>The merged string.</returns>
+        public string GetPartString(int tokenIndex, SelectionTokensContainer rangeInfo)
+        {
+            string result = string.Empty;
+
+            int index = rangeInfo.GetIndexInPartSelectionBag(tokenIndex);
+            if (index >= 0)
+            {
+                var startIndexToRemove = rangeInfo.PartSelectionBag[index].Item2;
+                var removeLength = rangeInfo.PartSelectionBag[index].Item3;
+
+                result = this.AllTokens[tokenIndex].Data.Remove(startIndexToRemove, removeLength);
+            }
+
+            return result;
+        }
+
 
         /// <summary>
         /// This function returns a token index from the caretIndex.
@@ -187,9 +211,9 @@ namespace Parse.Tokenize
         {
             int index = -1;
 
-            Parallel.For(0, this.AllTokens.Count, (i, loopState) =>
+            Parallel.For(0, this.allTokens.Count, (i, loopState) =>
             {
-                TokenCell tokenInfo = this.AllTokens[i];
+                TokenCell tokenInfo = this.allTokens[i];
 
                 if (tokenInfo.Contains(offset, recognWay))
                 {
@@ -232,7 +256,7 @@ namespace Parse.Tokenize
                 });
 
             fromIndex = (fromIndex == -1) ? 0 : fromIndex;
-            toIndex = (toIndex == -1) ? this.AllTokens.Count - 1 : toIndex;
+            toIndex = (toIndex == -1) ? this.allTokens.Count - 1 : toIndex;
 
             return new Range(fromIndex, toIndex - fromIndex + 1);
         }
@@ -247,7 +271,7 @@ namespace Parse.Tokenize
             string result = string.Empty;
 
             for (int i = range.StartIndex; i <= range.EndIndex; i++)
-                result += this.AllTokens[i].Data;
+                result += this.allTokens[i].Data;
 
             return result;
         }
@@ -263,10 +287,10 @@ namespace Parse.Tokenize
             foreach (var item in replaceTokenList) addLength += item.Data.Length;
 
             for (int i = range.StartIndex; i <= range.EndIndex; i++)
-                addLength = addLength - this.AllTokens[i].Data.Length;
+                addLength = addLength - this.allTokens[i].Data.Length;
 
-            int contentIndex = (range.StartIndex == 0) ? 0 : this.AllTokens[range.StartIndex].StartIndex;
-            this.AllTokens.RemoveRange(range.StartIndex, range.Count);
+            int contentIndex = (range.StartIndex == 0) ? 0 : this.allTokens[range.StartIndex].StartIndex;
+            this.allTokens.RemoveRange(range.StartIndex, range.Count);
 
             int startIndex = range.StartIndex;
             replaceTokenList.ForEach(i =>
@@ -274,7 +298,7 @@ namespace Parse.Tokenize
                 i.StartIndex = contentIndex;
                 contentIndex = i.EndIndex + 1;
 
-                this.AllTokens.Insert(startIndex++, i);
+                this.allTokens.Insert(startIndex++, i);
             });
 
             Parallel.Invoke(
@@ -284,11 +308,28 @@ namespace Parse.Tokenize
                 },
                 () =>
                 {
-                    Parallel.For(startIndex, this.AllTokens.Count, i =>
+                    Parallel.For(startIndex, this.allTokens.Count, i =>
                     {
-                        this.AllTokens[i].StartIndex += addLength;
+                        this.allTokens[i].StartIndex += addLength;
                     });
                 });
+        }
+
+        public object Clone()
+        {
+            TokenStorage result = new TokenStorage();
+
+            Parallel.Invoke(
+                () =>
+                {
+                    result.allTokens = new List<TokenCell>(this.allTokens);
+                },
+                () =>
+                {
+                    result.tableForAllPatterns = new Dictionary<TokenPatternInfo, List<int>>(this.tableForAllPatterns);
+                });
+
+            return result;
         }
     }
 }

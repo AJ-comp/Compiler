@@ -14,9 +14,10 @@ namespace Parse.WpfControls.Common
         private List<Tuple<int, int>> scopeSyntaxes = new List<Tuple<int, int>>();
         private Dictionary<int, List<int>> tokenIndexesTable = new Dictionary<int, List<int>>();
         private SelectionTokensContainer selectionBlocks = new SelectionTokensContainer();
-        private TokenizeFactory tokenizeFactory = new TokenizeFactory();
+        private Lexer lexer = new Lexer();
+        private TokenStorage tokens;
 
-        public List<TokenCell> Tokens { get => this.tokenizeFactory.StorageTeam.AllTokens; }
+        public IReadOnlyList<TokenCell> Tokens => tokens.AllTokens;
         public SyntaxPairCollection syntaxPairs = new SyntaxPairCollection();
 
 
@@ -34,9 +35,9 @@ namespace Parse.WpfControls.Common
         public TokenizeTextBox()
         {
             // Register default a tokenize rules.
-            this.tokenizeFactory.AddTokenRule(" ", null, false, true);
-            this.tokenizeFactory.AddTokenRule("\r", null, false, true);
-            this.tokenizeFactory.AddTokenRule("\n", null, false, true);
+            this.lexer.AddTokenRule(" ", null, false, true);
+            this.lexer.AddTokenRule("\r", null, false, true);
+            this.lexer.AddTokenRule("\n", null, false, true);
 
             this.Loaded += (s, e) =>
             {
@@ -44,6 +45,8 @@ namespace Parse.WpfControls.Common
 
             this.SelectionChanged += (s, e) =>
             {
+                if (tokens == null) return;
+
                 this.UpdateTokenIndex();
             };
 
@@ -55,7 +58,7 @@ namespace Parse.WpfControls.Common
 
         private void UpdateTokenIndex()
         {
-            this.TokenIndex = this.tokenizeFactory.StorageTeam.TokenIndexForOffset(this.CaretIndex);
+            this.TokenIndex = this.tokens.TokenIndexForOffset(this.CaretIndex);
 
             this.selectionBlocks = this.GetSelectionTokenInfos(this.SelectionStart, this.SelectionLength);
         }
@@ -109,7 +112,7 @@ namespace Parse.WpfControls.Common
             var delInfos = (this.selectionBlocks.IsEmpty()) ? 
                 this.GetSelectionTokenInfos(changeInfo.Offset, changeInfo.RemovedLength) : this.selectionBlocks;
 
-            this.tokenizeFactory.ReceiveOrder(delInfos);
+            this.tokens = this.lexer.Lexing(this.tokens, delInfos, out _);
         }
 
         private void UpdateTokenInfos(TextChange changeInfo)
@@ -119,10 +122,10 @@ namespace Parse.WpfControls.Common
             if (changeInfo.AddedLength == 0) return;
 
             string addString = this.Text.Substring(changeInfo.Offset, changeInfo.AddedLength);
-            this.tokenizeFactory.ReceiveOrder(changeInfo.Offset, addString);
+            this.tokens = this.lexer.Lexing(this.tokens, changeInfo.Offset, addString, out _);
         }
 
-        public int GetTokenIndexForCaretIndex(int caretIndex, RecognitionWay recognitionWay) => this.tokenizeFactory.StorageTeam.TokenIndexForOffset(caretIndex, recognitionWay);
+        public int GetTokenIndexForCaretIndex(int caretIndex, RecognitionWay recognitionWay) => this.tokens.TokenIndexForOffset(caretIndex, recognitionWay);
 
         /// <summary>
         /// This function register a pattern for tokenizing.
@@ -133,7 +136,7 @@ namespace Parse.WpfControls.Common
         /// <param name="bOperator"></param>
         public void AddTokenPattern(string text, object optionData = null, bool bCanDerived = false, bool bOperator = false)
         {
-            this.tokenizeFactory.AddTokenRule(text, optionData, bCanDerived, bOperator);
+            this.lexer.AddTokenRule(text, optionData, bCanDerived, bOperator);
         }
 
         /// <summary>
@@ -161,6 +164,6 @@ namespace Parse.WpfControls.Common
         }
 
 
-        public virtual void TokenizeRuleClear() => this.tokenizeFactory = new TokenizeFactory();
+        public virtual void TokenizeRuleClear() => this.lexer = new Lexer();
     }
 }

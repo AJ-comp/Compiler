@@ -72,7 +72,8 @@
     <Compile Include="ScopeSyntax.cs" />
     <Compile Include="SelectionTokensContainer.cs" />
     <Compile Include="Tokenize\TokenCell.cs" />
-    <Compile Include="Tokenize\TokenizeFactory.cs" />
+    <Compile Include="Tokenize\Lexer.cs" />
+    <Compile Include="Tokenize\TokenizeHistory.cs" />
     <Compile Include="Tokenize\Tokenizer.cs" />
     <Compile Include="Tokenize\TokenPatternInfo.cs" />
     <Compile Include="Tokenize\TokenStorage.cs" />

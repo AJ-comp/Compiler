@@ -38,23 +38,7 @@ namespace Parse.FrontEnd.Grammars.MiniC
         /// </summary>
         /// <param name="node"></param>
         /// <returns></returns>
-        private object ActionCommonLogic(TreeNonTerminal node, SymbolTable table, int startToken, MeaningErrInfoList errList)
-        {
-            MiniCSymbolTable result = new MiniCSymbolTable();
-
-            foreach (var item in node.Items)
-            {
-                if (item is TreeNonTerminal)
-                {
-                    var astNonTerminal = item as TreeNonTerminal;
-                    astNonTerminal.ActionLogic(table, startToken, errList);
-                }
-            }
-
-            return result;
-        }
-
-        private object ActionProgram(TreeNonTerminal node, SymbolTable table, int startToken, MeaningErrInfoList errList)
+        private object ActionCommonLogic(TreeNonTerminal node, SymbolTable table, MeaningParsingInfo parsingInfo, MeaningErrInfoList errList)
         {
             bool result = true;
 
@@ -63,246 +47,305 @@ namespace Parse.FrontEnd.Grammars.MiniC
                 if ((item is TreeNonTerminal) == false) return false;
 
                 var astNonTerminal = item as TreeNonTerminal;
-                if ((bool)astNonTerminal.ActionLogic(table, startToken, errList) == false) result = false;
+                if ((bool)astNonTerminal.ActionLogic(table, parsingInfo, errList) == false) result = false;
             }
 
             return result;
         }
 
-        private object ActionFuncDef(TreeNonTerminal node, SymbolTable table, int startToken, MeaningErrInfoList errList)
-        {
-            return false;
-        }
-
-        private object ActionFuncHead(TreeNonTerminal node, SymbolTable table, int startToken, MeaningErrInfoList errList)
-        {
-            return false;
-        }
-
-        private object ActionDclSpec(TreeNonTerminal node, SymbolTable table, int startToken, MeaningErrInfoList errList)
+        private object ActionProgram(TreeNonTerminal node, SymbolTable table, MeaningParsingInfo parsingInfo, MeaningErrInfoList errList)
         {
             bool result = true;
-            MiniCVarInfoSnippet snippet = new MiniCVarInfoSnippet();
+
+            foreach (var item in node.Items)
+            {
+                if ((item is TreeNonTerminal) == false) return false;
+
+                var astNonTerminal = item as TreeNonTerminal;
+                if ((bool)astNonTerminal.ActionLogic(table, parsingInfo, errList) == false) result = false;
+            }
+
+            return result;
+        }
+
+        private object ActionFuncDef(TreeNonTerminal node, SymbolTable table, MeaningParsingInfo parsingInfo, MeaningErrInfoList errList)
+            => ActionCommonLogic(node, table, parsingInfo, errList);
+
+        /// <summary>
+        /// FuncHead
+        ///     DclSpec
+        ///     ident
+        ///     FormalParam
+        /// </summary>
+        /// <param name="node"></param>
+        /// <param name="table"></param>
+        /// <param name="parsingInfo"></param>
+        /// <param name="errList"></param>
+        /// <returns></returns>
+        private object ActionFuncHead(TreeNonTerminal node, SymbolTable table, MeaningParsingInfo parsingInfo, MeaningErrInfoList errList)
+        {
+            foreach(var item in node.Items)
+            {
+                // ident
+                if(item is TreeTerminal)
+                {
+                    var token = item as TreeTerminal;
+
+//                    token.Token.Input
+                }
+            }
+
+            return false;
+        }
+
+        private object ActionDclSpec(TreeNonTerminal node, SymbolTable table, MeaningParsingInfo parsingInfo, MeaningErrInfoList errList)
+        {
+            bool result = true;
+            parsingInfo.SnippetToAdd = new MiniCVarInfoSnippet();
 
             foreach (var item in node.Items)
             {
                 if ((item is TreeNonTerminal) == false) continue;
 
                 var astNonTerminal = item as TreeNonTerminal;
-                if (astNonTerminal.signPost.MeaningUnit == this.ConstNode) { startToken++; snippet.Const = true; }
-                else if (astNonTerminal.signPost.MeaningUnit == this.VoidNode) { startToken++; snippet.Type = DataType.VOID; }
-                else if (astNonTerminal.signPost.MeaningUnit == this.IntNode) { startToken++; snippet.Type = DataType.INT; }
+                if (astNonTerminal.signPost.MeaningUnit == this.ConstNode) 
+                { 
+                    parsingInfo.IncTokenIndex();
+
+                    var snippet = parsingInfo.SnippetToAdd as MiniCVarInfoSnippet;
+                    snippet.Const = true; 
+                }
+                else if (astNonTerminal.signPost.MeaningUnit == this.VoidNode) 
+                { 
+                    parsingInfo.IncTokenIndex();
+
+                    var snippet = parsingInfo.SnippetToAdd as MiniCVarInfoSnippet;
+                    snippet.Type = DataType.VOID; 
+                }
+                else if (astNonTerminal.signPost.MeaningUnit == this.IntNode) 
+                { 
+                    parsingInfo.IncTokenIndex();
+
+                    var snippet = parsingInfo.SnippetToAdd as MiniCVarInfoSnippet;
+                    snippet.Type = DataType.INT; 
+                }
             }
 
             return result;
         }
 
-        private object ActionFormalPara(TreeNonTerminal node, SymbolTable table, int startToken, MeaningErrInfoList errList)
+        private object ActionFormalPara(TreeNonTerminal node, SymbolTable table, MeaningParsingInfo parsingInfo, MeaningErrInfoList errList)
         {
             return null;
         }
 
-        private object ActionParamDcl(TreeNonTerminal node, SymbolTable table, int startToken, MeaningErrInfoList errList)
+        private object ActionParamDcl(TreeNonTerminal node, SymbolTable table, MeaningParsingInfo parsingInfo, MeaningErrInfoList errList)
         {
             return null;
         }
 
-        private object ActionCompoundSt(TreeNonTerminal node, SymbolTable table, int startToken, MeaningErrInfoList errList)
-        {
-            return null;
-        }
-
-        private object ActionDclList(TreeNonTerminal node, SymbolTable table, int startToken, MeaningErrInfoList errList)
-        {
-            return null;
-        }
-
-        private object ActionDcl(TreeNonTerminal node, SymbolTable table, int startToken, MeaningErrInfoList errList)
+        private object ActionCompoundSt(TreeNonTerminal node, SymbolTable table, MeaningParsingInfo parsingInfo, MeaningErrInfoList errList)
         {
             return false;
         }
 
-        private object ActionDclItem(TreeNonTerminal node, SymbolTable table, int startToken, MeaningErrInfoList errList)
+        private object ActionDclList(TreeNonTerminal node, SymbolTable table, MeaningParsingInfo parsingInfo, MeaningErrInfoList errList)
         {
             return null;
         }
 
-        private object ActionSimpleVar(TreeNonTerminal node, SymbolTable table, int startToken, MeaningErrInfoList errList)
+        private object ActionDcl(TreeNonTerminal node, SymbolTable table, MeaningParsingInfo parsingInfo, MeaningErrInfoList errList) 
+            => ActionCommonLogic(node, table, parsingInfo, errList);
+
+        private object ActionDclItem(TreeNonTerminal node, SymbolTable table, MeaningParsingInfo parsingInfo, MeaningErrInfoList errList)
+        {
+            return false;
+        }
+
+        private object ActionSimpleVar(TreeNonTerminal node, SymbolTable table, MeaningParsingInfo parsingInfo, MeaningErrInfoList errList)
+        {
+            if (node.Items.Count == 0)
+            {
+                parsingInfo.SnippetToAdd = null;
+                return false;
+            }
+
+            var item = node.Items[0] as TreeNonTerminal;
+
+            return true;
+        }
+
+        private object ActionArrayVar(TreeNonTerminal node, SymbolTable table, MeaningParsingInfo parsingInfo, MeaningErrInfoList errList)
         {
             return null;
         }
 
-        private object ActionArrayVar(TreeNonTerminal node, SymbolTable table, int startToken, MeaningErrInfoList errList)
+        private object ActionStatList(TreeNonTerminal node, SymbolTable table, MeaningParsingInfo parsingInfo, MeaningErrInfoList errList)
         {
             return null;
         }
 
-        private object ActionStatList(TreeNonTerminal node, SymbolTable table, int startToken, MeaningErrInfoList errList)
+        private object ActionExpSt(TreeNonTerminal node, SymbolTable table, MeaningParsingInfo parsingInfo, MeaningErrInfoList errList)
         {
             return null;
         }
 
-        private object ActionExpSt(TreeNonTerminal node, SymbolTable table, int startToken, MeaningErrInfoList errList)
+        private object ActionIfSt(TreeNonTerminal node, SymbolTable table, MeaningParsingInfo parsingInfo, MeaningErrInfoList errList)
         {
             return null;
         }
 
-        private object ActionIfSt(TreeNonTerminal node, SymbolTable table, int startToken, MeaningErrInfoList errList)
+        private object ActionIfElseSt(TreeNonTerminal node, SymbolTable table, MeaningParsingInfo parsingInfo, MeaningErrInfoList errList)
         {
             return null;
         }
 
-        private object ActionIfElseSt(TreeNonTerminal node, SymbolTable table, int startToken, MeaningErrInfoList errList)
+        private object ActionWhileSt(TreeNonTerminal node, SymbolTable table, MeaningParsingInfo parsingInfo, MeaningErrInfoList errList)
         {
             return null;
         }
 
-        private object ActionWhileSt(TreeNonTerminal node, SymbolTable table, int startToken, MeaningErrInfoList errList)
+        private object ActionReturnSt(TreeNonTerminal node, SymbolTable table, MeaningParsingInfo parsingInfo, MeaningErrInfoList errList)
         {
             return null;
         }
 
-        private object ActionReturnSt(TreeNonTerminal node, SymbolTable table, int startToken, MeaningErrInfoList errList)
+        private object ActionIndex(TreeNonTerminal node, SymbolTable table, MeaningParsingInfo parsingInfo, MeaningErrInfoList errList)
         {
             return null;
         }
 
-        private object ActionIndex(TreeNonTerminal node, SymbolTable table, int startToken, MeaningErrInfoList errList)
+        private object ActionCell(TreeNonTerminal node, SymbolTable table, MeaningParsingInfo parsingInfo, MeaningErrInfoList errList)
         {
             return null;
         }
 
-        private object ActionCell(TreeNonTerminal node, SymbolTable table, int startToken, MeaningErrInfoList errList)
+        private object ActionActualParam(TreeNonTerminal node, SymbolTable table, MeaningParsingInfo parsingInfo, MeaningErrInfoList errList)
         {
             return null;
         }
 
-        private object ActionActualParam(TreeNonTerminal node, SymbolTable table, int startToken, MeaningErrInfoList errList)
+        private object ActionAdd(TreeNonTerminal node, SymbolTable table, MeaningParsingInfo parsingInfo, MeaningErrInfoList errList)
         {
             return null;
         }
 
-        private object ActionAdd(TreeNonTerminal node, SymbolTable table, int startToken, MeaningErrInfoList errList)
+        private object ActionSub(TreeNonTerminal node, SymbolTable table, MeaningParsingInfo parsingInfo, MeaningErrInfoList errList)
         {
             return null;
         }
 
-        private object ActionSub(TreeNonTerminal node, SymbolTable table, int startToken, MeaningErrInfoList errList)
+        private object ActionMul(TreeNonTerminal node, SymbolTable table, MeaningParsingInfo parsingInfo, MeaningErrInfoList errList)
         {
             return null;
         }
 
-        private object ActionMul(TreeNonTerminal node, SymbolTable table, int startToken, MeaningErrInfoList errList)
+        private object ActionDiv(TreeNonTerminal node, SymbolTable table, MeaningParsingInfo parsingInfo, MeaningErrInfoList errList)
         {
             return null;
         }
 
-        private object ActionDiv(TreeNonTerminal node, SymbolTable table, int startToken, MeaningErrInfoList errList)
+        private object ActionMod(TreeNonTerminal node, SymbolTable table, MeaningParsingInfo parsingInfo, MeaningErrInfoList errList)
         {
             return null;
         }
 
-        private object ActionMod(TreeNonTerminal node, SymbolTable table, int startToken, MeaningErrInfoList errList)
+        private object ActionAssign(TreeNonTerminal node, SymbolTable table, MeaningParsingInfo parsingInfo, MeaningErrInfoList errList)
         {
             return null;
         }
 
-        private object ActionAssign(TreeNonTerminal node, SymbolTable table, int startToken, MeaningErrInfoList errList)
+        private object ActionAddAssign(TreeNonTerminal node, SymbolTable table, MeaningParsingInfo parsingInfo, MeaningErrInfoList errList)
         {
             return null;
         }
 
-        private object ActionAddAssign(TreeNonTerminal node, SymbolTable table, int startToken, MeaningErrInfoList errList)
+        private object ActionSubAssign(TreeNonTerminal node, SymbolTable table, MeaningParsingInfo parsingInfo, MeaningErrInfoList errList)
         {
             return null;
         }
 
-        private object ActionSubAssign(TreeNonTerminal node, SymbolTable table, int startToken, MeaningErrInfoList errList)
+        private object ActionMulAssign(TreeNonTerminal node, SymbolTable table, MeaningParsingInfo parsingInfo, MeaningErrInfoList errList)
         {
             return null;
         }
 
-        private object ActionMulAssign(TreeNonTerminal node, SymbolTable table, int startToken, MeaningErrInfoList errList)
+        private object ActionDivAssign(TreeNonTerminal node, SymbolTable table, MeaningParsingInfo parsingInfo, MeaningErrInfoList errList)
         {
             return null;
         }
 
-        private object ActionDivAssign(TreeNonTerminal node, SymbolTable table, int startToken, MeaningErrInfoList errList)
+        private object ActionModAssign(TreeNonTerminal node, SymbolTable table, MeaningParsingInfo parsingInfo, MeaningErrInfoList errList)
         {
             return null;
         }
 
-        private object ActionModAssign(TreeNonTerminal node, SymbolTable table, int startToken, MeaningErrInfoList errList)
+        private object ActionLogicalOr(TreeNonTerminal node, SymbolTable table, MeaningParsingInfo parsingInfo, MeaningErrInfoList errList)
         {
             return null;
         }
 
-        private object ActionLogicalOr(TreeNonTerminal node, SymbolTable table, int startToken, MeaningErrInfoList errList)
+        private object ActionLogicalAnd(TreeNonTerminal node, SymbolTable table, MeaningParsingInfo parsingInfo, MeaningErrInfoList errList)
         {
             return null;
         }
 
-        private object ActionLogicalAnd(TreeNonTerminal node, SymbolTable table, int startToken, MeaningErrInfoList errList)
+        private object ActionLogicalNot(TreeNonTerminal node, SymbolTable table, MeaningParsingInfo parsingInfo, MeaningErrInfoList errList)
         {
             return null;
         }
 
-        private object ActionLogicalNot(TreeNonTerminal node, SymbolTable table, int startToken, MeaningErrInfoList errList)
+        private object ActionEqual(TreeNonTerminal node, SymbolTable table, MeaningParsingInfo parsingInfo, MeaningErrInfoList errList)
         {
             return null;
         }
 
-        private object ActionEqual(TreeNonTerminal node, SymbolTable table, int startToken, MeaningErrInfoList errList)
+        private object ActionNotEqual(TreeNonTerminal node, SymbolTable table, MeaningParsingInfo parsingInfo, MeaningErrInfoList errList)
         {
             return null;
         }
 
-        private object ActionNotEqual(TreeNonTerminal node, SymbolTable table, int startToken, MeaningErrInfoList errList)
+        private object ActionGreaterThan(TreeNonTerminal node, SymbolTable table, MeaningParsingInfo parsingInfo, MeaningErrInfoList errList)
         {
             return null;
         }
 
-        private object ActionGreaterThan(TreeNonTerminal node, SymbolTable table, int startToken, MeaningErrInfoList errList)
+        private object ActionLessThan(TreeNonTerminal node, SymbolTable table, MeaningParsingInfo parsingInfo, MeaningErrInfoList errList)
         {
             return null;
         }
 
-        private object ActionLessThan(TreeNonTerminal node, SymbolTable table, int startToken, MeaningErrInfoList errList)
+        private object ActionGreatherEqual(TreeNonTerminal node, SymbolTable table, MeaningParsingInfo parsingInfo, MeaningErrInfoList errList)
         {
             return null;
         }
 
-        private object ActionGreatherEqual(TreeNonTerminal node, SymbolTable table, int startToken, MeaningErrInfoList errList)
+        private object ActionLessEqual(TreeNonTerminal node, SymbolTable table, MeaningParsingInfo parsingInfo, MeaningErrInfoList errList)
         {
             return null;
         }
 
-        private object ActionLessEqual(TreeNonTerminal node, SymbolTable table, int startToken, MeaningErrInfoList errList)
+        private object ActionUnaryMinus(TreeNonTerminal node, SymbolTable table, MeaningParsingInfo parsingInfo, MeaningErrInfoList errList)
         {
             return null;
         }
 
-        private object ActionUnaryMinus(TreeNonTerminal node, SymbolTable table, int startToken, MeaningErrInfoList errList)
+        private object ActionPreInc(TreeNonTerminal node, SymbolTable table, MeaningParsingInfo parsingInfo, MeaningErrInfoList errList)
         {
             return null;
         }
 
-        private object ActionPreInc(TreeNonTerminal node, SymbolTable table, int startToken, MeaningErrInfoList errList)
+        private object ActionPreDec(TreeNonTerminal node, SymbolTable table, MeaningParsingInfo parsingInfo, MeaningErrInfoList errList)
         {
             return null;
         }
 
-        private object ActionPreDec(TreeNonTerminal node, SymbolTable table, int startToken, MeaningErrInfoList errList)
+        private object ActionPostInc(TreeNonTerminal node, SymbolTable table, MeaningParsingInfo parsingInfo, MeaningErrInfoList errList)
         {
             return null;
         }
 
-        private object ActionPostInc(TreeNonTerminal node, SymbolTable table, int startToken, MeaningErrInfoList errList)
-        {
-            return null;
-        }
-
-        private object ActionPostDec(TreeNonTerminal node, SymbolTable table, int startToken, MeaningErrInfoList errList)
+        private object ActionPostDec(TreeNonTerminal node, SymbolTable table, MeaningParsingInfo parsingInfo, MeaningErrInfoList errList)
         {
             return null;
         }
@@ -312,7 +355,7 @@ namespace Parse.FrontEnd.Grammars.MiniC
             MeaningErrInfoList errList = new MeaningErrInfoList();
             MiniCSymbolTable table = new MiniCSymbolTable();
 
-            this.ActionProgram(symbol as TreeNonTerminal, table, 0, errList);
+            this.ActionProgram(symbol as TreeNonTerminal, table, new MeaningParsingInfo(), errList);
             return new MeaningAnalysisResult(errList, table);
         }
 

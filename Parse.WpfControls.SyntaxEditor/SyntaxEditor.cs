@@ -6,6 +6,7 @@ using Parse.FrontEnd.RegularGrammar;
 using Parse.WpfControls.Models;
 using Parse.WpfControls.SyntaxEditor.EventArgs;
 using System;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;

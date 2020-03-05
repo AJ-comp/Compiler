@@ -268,7 +268,7 @@ namespace Parse.WpfControls
         /// <param name="startLine">The start line that gets line-string-collection</param>
         /// <param name="cnt">Line count</param>
         /// <returns></returns>
-        private List<LineHighlightText> GetLineStringCollection(int startLine, int cnt)
+        private List<LineHighlightText> GetLineDrawingTokenList(int startLine, int cnt)
         {
             List<LineHighlightText> result = new List<LineHighlightText>();
             var tokenStartIndex = this.GetTokenIndexForCaretIndex(this.GetStartingCaretIndexOfLineIndex(startLine), RecognitionWay.Front);
@@ -352,7 +352,7 @@ namespace Parse.WpfControls
             int addedLineIndex = this.LineIndex - this.GetStartLineOnViewPos(this.VerticalOffset);
             if (addedLineIndex < 0) return;
 
-            var ViewLineString = this.GetLineStringCollection(this.LineIndex, 1);
+            var ViewLineString = this.GetLineDrawingTokenList(this.LineIndex, 1);
             if (ViewLineString.Count == 0) return;
 
             this.renderCanvas.DrawLine(addedLineIndex, ViewLineString.First());
@@ -361,7 +361,7 @@ namespace Parse.WpfControls
         private void AllRender(DrawingContext drawingContext)
         {
             int startLine = this.GetStartLineOnViewPos(this.VerticalOffset);
-            var ViewLineString = this.GetLineStringCollection(startLine, this.maxViewLineOnce);
+            var ViewLineString = this.GetLineDrawingTokenList(startLine, this.maxViewLineOnce);
             int startNumber = 1;
             int endNumber = 1;
 

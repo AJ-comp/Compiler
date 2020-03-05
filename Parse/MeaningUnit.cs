@@ -9,7 +9,7 @@ namespace Parse.FrontEnd
         internal uint uniqueKey;
 
         public string Name { get; } = string.Empty;
-        public Func<TreeNonTerminal, SymbolTable, int, MeaningErrInfoList, object> ActionLogic { get; set; }
+        public Func<TreeNonTerminal, SymbolTable, MeaningParsingInfo, MeaningErrInfoList, object> ActionLogic { get; set; }
 
         public MeaningUnit(string name)
         {
@@ -82,5 +82,20 @@ namespace Parse.FrontEnd
             MeaningErrInfos = meaningErrInfos;
             SymbolTable = symbolTable;
         }
+    }
+
+
+    public class MeaningParsingInfo
+    {
+        public int TokenIndex { get; private set; } = 0;
+        public int BlockDepth { get; private set; } = 0;
+        public int Offset { get; private set; } = 0;
+        public SymbolItemSnippet SnippetToAdd { get; set; }
+
+        public void IncTokenIndex() => TokenIndex++;
+        public void IncBlockDepth() => BlockDepth++;
+        public void DecBlockDepth() => BlockDepth--;
+        public void IncOffset() => Offset++;
+        public void DecOffset() => Offset--;
     }
 }
