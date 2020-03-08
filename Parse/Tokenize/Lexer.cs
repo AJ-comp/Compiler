@@ -14,6 +14,7 @@ namespace Parse.Tokenize
         private Tokenizer tokenizeTeam = new Tokenizer();
 
         public IReadOnlyList<TokenPatternInfo> TokenPatternList => tokenPatternList;
+        public TokenizeImpactRanges ImpactRanges { get; } = new TokenizeImpactRanges();
 
         public Lexer()
         {
@@ -143,27 +144,6 @@ namespace Parse.Tokenize
         }
 
         /// <summary>
-        /// This function works the merge and the tokenize. (from fromIndex to the toIndex[fromIndex + count - 1])
-        /// </summary>
-        /// <param name="targetStorage"></param>
-        /// <param name="fromIndex"></param>
-        /// <param name="count"></param>
-        /// <returns>The tokens after processed in range.</returns>
-        private List<TokenCell> RangeMergeAndTokenizeProcess(TokenStorage targetStorage, int fromIndex, int count)
-        {
-            if (fromIndex + count > targetStorage.AllTokens.Count) return new List<TokenCell>();
-
-            string mergeString = string.Empty;
-            foreach(var item in targetStorage.AllTokens.Skip(fromIndex).Take(count))
-                mergeString += item.Data;
-
-            var partTokenList = this.tokenizeTeam.Tokenize(this.tokenizeRule, mergeString);
-            targetStorage.ReplaceToken(new Range(fromIndex, count), partTokenList);
-
-            return partTokenList;
-        }
-
-        /// <summary>
         /// This function process the following algorithm.
         /// 1. Generate tokens by tokenizing the mergeString argument.
         /// 2. Replace token of the replaceIndex argument to the generated tokens.
@@ -173,10 +153,11 @@ namespace Parse.Tokenize
         /// <param name="replaceIndex"></param>
         /// <param name="mergeString"></param>
         /// <returns></returns>
-        private Range TokenizeAfterReplace(TokenStorage targetStorage, int replaceIndex, string mergeString)
+        private TokenStorage TokenizeAfterReplace(TokenStorage targetStorage, int replaceIndex, string mergeString)
         {
             var impactRange = targetStorage.FindImpactRange(replaceIndex);
 
+            TokenStorage result = targetStorage.Clone() as TokenStorage;
             var firstString = targetStorage.GetMergeStringOfRange(new Range(impactRange.StartIndex, replaceIndex - impactRange.StartIndex));
             var lastString = targetStorage.GetMergeStringOfRange(new Range(replaceIndex + 1, impactRange.EndIndex - replaceIndex));
             mergeString = firstString + mergeString + lastString;
@@ -184,18 +165,25 @@ namespace Parse.Tokenize
             // If a basisIndex is used then it can increase the performance of the ReplaceToken function because of need not arrange.
             // But the logic is not written yet.
             var tokenList = this.tokenizeTeam.Tokenize(this.tokenizeRule, mergeString);
-            targetStorage.ReplaceToken(impactRange, tokenList);
+            result.ReplaceToken(impactRange, tokenList);
+            this.ImpactRanges.PrevRanges.Add(impactRange);
+            this.ImpactRanges.CurRanges.Add(new Range(impactRange.StartIndex, tokenList.Count));
 
-            while(true)
+            /// ex : void main()\r\n{}\r\n -> void main(//)\r\n{}\r\n
+            ///       process 1 : "void", " ", "main", "(", "//)", "\r", "\n"
+            while (true)
             {
-                impactRange = targetStorage.FindImpactRange(impactRange.StartIndex, impactRange.EndIndex);
-                var beforeTokens = targetStorage.AllTokens.Skip(impactRange.StartIndex).Take(impactRange.Count).ToList();
-                var processedTokens = this.RangeMergeAndTokenizeProcess(targetStorage, impactRange.StartIndex, impactRange.Count);
+                impactRange = result.FindImpactRange(impactRange.StartIndex - 1, impactRange.EndIndex + 1);
+                var beforeTokens = result.AllTokens.Skip(impactRange.StartIndex).Take(impactRange.Count).ToList();
+                var processedTokens = this.tokenizeTeam.Tokenize(this.tokenizeRule, result.GetMergeStringOfRange(new Range(impactRange.StartIndex, impactRange.Count)));
+                result.ReplaceToken(impactRange, processedTokens);
 
                 if (beforeTokens.IsEqual(processedTokens)) break;
+                this.ImpactRanges.PrevRanges.Add(impactRange);
+                this.ImpactRanges.CurRanges.Add(new Range(impactRange.StartIndex, processedTokens.Count));
             }
 
-            return impactRange;
+            return result;
         }
 
         /// <summary>
@@ -203,16 +191,14 @@ namespace Parse.Tokenize
         /// </summary>
         /// <param name="data">The string data to lex</param>
         /// <returns></returns>
-        public TokenStorage Lexing(string data, out TokenizeHistory tokenizeHistory)
+        public TokenStorage Lexing(string data)
         {
-            tokenizeHistory = new TokenizeHistory();
             TokenStorage result = new TokenStorage(this.tokenPatternList);
 
             this.tokenizeTeam.Tokenize(this.tokenizeRule, data).ForEach(i => result.allTokens.Add(i));
-            for (int i = 0; i < result.allTokens.Count; i++)
-
             result.UpdateTableForAllPatterns();
-            if(result.allTokens.Count > 0)  tokenizeHistory.addedIndexes.Add(new Range(0, result.allTokens.Count));
+
+            if(result.allTokens.Count > 0)  this.ImpactRanges.CurRanges.Add(new Range(0, result.allTokens.Count));
 
             return result;
         }
@@ -222,15 +208,14 @@ namespace Parse.Tokenize
         /// </summary>
         /// <param name="prevTokens">The target tokens</param>
         /// <param name="dataToAdd">The data to add</param>
-        /// <param name="tokenizeHistory">(option) lexing detail information</param>
         /// <see cref="https://www.lucidchart.com/documents/edit/f4366425-61f9-4b4f-9abc-72ce4efe864c/ZYtDEhwbkIBA?beaconFlowId=53B1C199D7307981"/>
         /// <returns></returns>
-        public TokenStorage Lexing(TokenStorage prevTokens, string dataToAdd, out TokenizeHistory tokenizeHistory)
+        public TokenStorage Lexing(TokenStorage prevTokens, string dataToAdd)
         {
-            if (prevTokens == null) return this.Lexing(dataToAdd, out tokenizeHistory);
+            if (prevTokens == null) return this.Lexing(dataToAdd);
 
             int offset = prevTokens.AllTokens.Count - 1;
-            return this.Lexing(prevTokens, offset, dataToAdd, out tokenizeHistory);
+            return this.Lexing(prevTokens, offset, dataToAdd);
         }
 
         /// <summary>
@@ -239,15 +224,13 @@ namespace Parse.Tokenize
         /// <param name="prevTokens">The target tokens</param>
         /// <param name="offset">The position to add</param>
         /// <param name="dataToAdd">The data to add</param>
-        /// <param name="tokenizeHistory">(option) lexing detail information</param>
         /// <see cref="https://www.lucidchart.com/documents/edit/f4366425-61f9-4b4f-9abc-72ce4efe864c/ZYtDEhwbkIBA?beaconFlowId=53B1C199D7307981"/>
         /// <returns></returns>
-        public TokenStorage Lexing(TokenStorage prevTokens, int offset, string dataToAdd, out TokenizeHistory tokenizeHistory)
+        public TokenStorage Lexing(TokenStorage prevTokens, int offset, string dataToAdd)
         {
-            if (prevTokens == null) return this.Lexing(dataToAdd, out tokenizeHistory);
-            if (prevTokens.AllTokens.Count == 0) return this.Lexing(dataToAdd, out tokenizeHistory);
+            if (prevTokens == null) return this.Lexing(dataToAdd);
+            if (prevTokens.AllTokens.Count == 0) return this.Lexing(dataToAdd);
 
-            tokenizeHistory = new TokenizeHistory();
             TokenStorage result = prevTokens.Clone() as TokenStorage;
 
             RecognitionWay recognitionWay = RecognitionWay.Back;
@@ -256,12 +239,12 @@ namespace Parse.Tokenize
             if(curTokenIndex == -1)
             {
                 TokenCell token = result.AllTokens[0];
-                tokenizeHistory.addedIndexes.Add(this.TokenizeAfterReplace(result, 0, token.MergeString(offset, dataToAdd, recognitionWay)));
+                result = this.TokenizeAfterReplace(result, 0, token.MergeString(offset, dataToAdd, recognitionWay));
             }
             else
             {
                 TokenCell token = result.AllTokens[curTokenIndex];
-                tokenizeHistory.addedIndexes.Add(this.TokenizeAfterReplace(result, curTokenIndex, token.MergeString(offset, dataToAdd, recognitionWay)));
+                result = this.TokenizeAfterReplace(result, curTokenIndex, token.MergeString(offset, dataToAdd, recognitionWay));
             }
 
 
@@ -274,15 +257,13 @@ namespace Parse.Tokenize
         /// <param name="targetStorage"></param>
         /// <param name="delInfos"></param>
         /// /// <returns></returns>
-        public TokenStorage Lexing(TokenStorage targetStorage, SelectionTokensContainer delInfos, out TokenizeHistory tokenizeHistory)
+        public TokenStorage Lexing(TokenStorage targetStorage, SelectionTokensContainer delInfos)
         {
-            tokenizeHistory = new TokenizeHistory();
             if (delInfos.IsEmpty()) return targetStorage;
 
             TokenStorage result = targetStorage.Clone() as TokenStorage;
 
             var indexInfo = delInfos.Range;
-            tokenizeHistory.deletedIndexes.Add(indexInfo);
 
             ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             // The following process needs because of the following.
@@ -308,6 +289,8 @@ namespace Parse.Tokenize
 
             var toInsertTokens = this.tokenizeTeam.Tokenize(this.tokenizeRule, mergeString);
             result.ReplaceToken(impactRange, toInsertTokens);
+            this.ImpactRanges.PrevRanges.Add(impactRange);
+            this.ImpactRanges.CurRanges.Add(new Range(impactRange.StartIndex, toInsertTokens.Count));
             ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
             return result;

@@ -9,13 +9,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Parse.FrontEnd.Grammars", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Parse.MiddleEnd.Utilities", "Parse.MiddleEnd.Utilities\Parse.MiddleEnd.Utilities.csproj", "{1CB34127-F46B-49F3-A7C8-3304A2DBADEB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Parse.FrontEnd", "Parse\Parse.FrontEnd.csproj", "{54EC5CEA-8D91-4165-9EBB-6A0693A96C4F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Parse", "Parse\Parse.csproj", "{54EC5CEA-8D91-4165-9EBB-6A0693A96C4F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Parse.WpfControls", "Parse.WpfControls\Parse.WpfControls.csproj", "{1D389520-0862-434B-82F9-AD0C41C2DB5F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Parse.WpfControls.SyntaxEditor", "Parse.WpfControls.SyntaxEditor\Parse.WpfControls.SyntaxEditor.csproj", "{DCCEDEB5-9CA4-41FE-AB6B-50E4BCC64EE6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Parse", "Parse.FrontEnd\Parse.csproj", "{46590802-CE40-49C9-86E1-CD6F3487FF5B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Parse.FrontEnd", "Parse.FrontEnd\Parse.FrontEnd.csproj", "{46590802-CE40-49C9-86E1-CD6F3487FF5B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Wpf.UI", "Wpf.UI", "{F06688AF-2C86-47D4-A159-BEDAFF072A49}"
 EndProject
@@ -53,7 +53,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfApp", "Applications\WpfA
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Parse.BackEnd", "Parse.BackEnd\Parse.BackEnd.csproj", "{94516CA9-C59E-4A2D-8AC2-02E0397B0499}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Parse.FrontEnd.InterLanguages", "Parse.FrontEnd.InterLanguages\Parse.FrontEnd.InterLanguages.csproj", "{6C587349-D0D2-4401-A408-4B9792E68852}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Parse.FrontEnd.InterLanguages", "Parse.FrontEnd.InterLanguages\Parse.FrontEnd.InterLanguages.csproj", "{6C587349-D0D2-4401-A408-4B9792E68852}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

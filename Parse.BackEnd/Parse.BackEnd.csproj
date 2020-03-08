@@ -44,11 +44,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Parse\Parse.FrontEnd.csproj">
-      <Project>{54EC5CEA-8D91-4165-9EBB-6A0693A96C4F}</Project>
+    <ProjectReference Include="..\Parse.FrontEnd\Parse.FrontEnd.csproj">
+      <Project>{46590802-ce40-49c9-86e1-cd6f3487ff5b}</Project>
       <Name>Parse.FrontEnd</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

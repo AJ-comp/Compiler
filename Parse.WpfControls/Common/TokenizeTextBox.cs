@@ -16,9 +16,11 @@ namespace Parse.WpfControls.Common
         private SelectionTokensContainer selectionBlocks = new SelectionTokensContainer();
         private Lexer lexer = new Lexer();
         private TokenStorage tokens;
+        private TokenizeImpactRanges recentTokenizeHistory;
 
-        public IReadOnlyList<TokenCell> Tokens => tokens.AllTokens;
         public SyntaxPairCollection syntaxPairs = new SyntaxPairCollection();
+        public IReadOnlyList<TokenCell> Tokens => tokens.AllTokens;
+        public TokenizeImpactRanges RecentTokenizeHistory => recentTokenizeHistory;
 
 
         public int TokenIndex
@@ -112,17 +114,20 @@ namespace Parse.WpfControls.Common
             var delInfos = (this.selectionBlocks.IsEmpty()) ? 
                 this.GetSelectionTokenInfos(changeInfo.Offset, changeInfo.RemovedLength) : this.selectionBlocks;
 
-            this.tokens = this.lexer.Lexing(this.tokens, delInfos, out _);
+            this.tokens = this.lexer.Lexing(this.tokens, delInfos);
+            this.recentTokenizeHistory = this.lexer.ImpactRanges;
         }
 
         private void UpdateTokenInfos(TextChange changeInfo)
         {
+            this.lexer.ImpactRanges.Clear();
             this.DelTokens(changeInfo);
 
             if (changeInfo.AddedLength == 0) return;
 
             string addString = this.Text.Substring(changeInfo.Offset, changeInfo.AddedLength);
-            this.tokens = this.lexer.Lexing(this.tokens, changeInfo.Offset, addString, out _);
+            this.tokens = this.lexer.Lexing(this.tokens, changeInfo.Offset, addString);
+            this.recentTokenizeHistory = this.lexer.ImpactRanges;
         }
 
         public int GetTokenIndexForCaretIndex(int caretIndex, RecognitionWay recognitionWay) => this.tokens.TokenIndexForOffset(caretIndex, recognitionWay);

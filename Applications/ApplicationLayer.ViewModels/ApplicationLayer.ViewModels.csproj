@@ -109,17 +109,17 @@
       <Project>{EAF7D943-D2F9-4BB0-929F-04DB7B59D9D5}</Project>
       <Name>Parse.FrontEnd.Parsers</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Parse.FrontEnd\Parse.csproj">
-      <Project>{46590802-CE40-49C9-86E1-CD6F3487FF5B}</Project>
-      <Name>Parse</Name>
+    <ProjectReference Include="..\..\Parse.FrontEnd\Parse.FrontEnd.csproj">
+      <Project>{46590802-ce40-49c9-86e1-cd6f3487ff5b}</Project>
+      <Name>Parse.FrontEnd</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Parse.WpfControls.SyntaxEditor\Parse.WpfControls.SyntaxEditor.csproj">
       <Project>{DCCEDEB5-9CA4-41FE-AB6B-50E4BCC64EE6}</Project>
       <Name>Parse.WpfControls.SyntaxEditor</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Parse\Parse.FrontEnd.csproj">
-      <Project>{54EC5CEA-8D91-4165-9EBB-6A0693A96C4F}</Project>
-      <Name>Parse.FrontEnd</Name>
+    <ProjectReference Include="..\..\Parse\Parse.csproj">
+      <Project>{54ec5cea-8d91-4165-9ebb-6a0693a96c4f}</Project>
+      <Name>Parse</Name>
     </ProjectReference>
     <ProjectReference Include="..\ApplicationLayer.Common\ApplicationLayer.Common.csproj">
       <Project>{9B7EBE4D-C2B3-40E8-9516-107340A07111}</Project>

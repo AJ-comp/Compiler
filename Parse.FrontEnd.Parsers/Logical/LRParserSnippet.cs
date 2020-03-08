@@ -372,5 +372,13 @@ namespace Parse.FrontEnd.Parsers.Logical
 
             return result;
         }
+
+        /*
+        public ParsingResult Parsing(TokenCell[] tokenCells, ParsingResult prevParsingInfo, TokenizeImpactRanges rangeToParse)
+        {
+            this.AllStack.Reverse
+            prevParsingInfo.
+        }
+        */
     }
 }

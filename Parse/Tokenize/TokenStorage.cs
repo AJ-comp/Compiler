@@ -241,7 +241,7 @@ namespace Parse.Tokenize
         /// <returns>The first value : index, The second value : count </returns>
         public Range FindImpactRange(int startTokenIndex, int endTokenIndex)
         {
-            var indexes = this.GetIndexesForSpecialPattern(" ", "\n");
+            var indexes = this.GetIndexesForSpecialPattern(" ", "\t", "\r", "\n");
             var fromIndex = -1;
             var toIndex = -1;
 
@@ -255,8 +255,9 @@ namespace Parse.Tokenize
                     toIndex = indexes.GetIndexNearestMoreThanValue(endTokenIndex);
                 });
 
-            fromIndex = (fromIndex == -1) ? 0 : fromIndex;
-            toIndex = (toIndex == -1) ? this.allTokens.Count - 1 : toIndex;
+            // Except PerfactDelimiter
+            fromIndex = (fromIndex == -1) ? 0 : fromIndex - 1;
+            toIndex = (toIndex == -1) ? this.allTokens.Count - 1 : toIndex + 1;
 
             return new Range(fromIndex, toIndex - fromIndex + 1);
         }
