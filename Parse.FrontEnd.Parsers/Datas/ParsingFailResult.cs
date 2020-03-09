@@ -2,7 +2,6 @@
 using Parse.FrontEnd.Parsers.EventArgs;
 using Parse.FrontEnd.Parsers.Properties;
 using Parse.FrontEnd.RegularGrammar;
-using System.Collections.Generic;
 
 namespace Parse.FrontEnd.Parsers.Datas
 {
@@ -13,9 +12,8 @@ namespace Parse.FrontEnd.Parsers.Datas
         public string ErrorMessage { get; }
         public ErrorPosition ErrorPosition { get; } = ErrorPosition.OnNormalToken;
 
-        public ParsingFailResult(Stack<object> prevStack, Stack<object> currentStack, TokenData inputValue, TerminalSet possibleTerminalSet, 
-                                                int errorIndex, ErrorHandler errorHandler = null)
-            : base(prevStack, currentStack, inputValue, possibleTerminalSet)
+        public ParsingFailResult(BlockStackItem blockItem, TokenData inputValue, TerminalSet possibleTerminalSet, int errorIndex, ErrorHandler errorHandler = null)
+            : base(blockItem, inputValue, possibleTerminalSet)
         {
             ErrorHandler = errorHandler;
             ErrorMessage = Resource.CantShift + " " + this.PossibleTerminalSet + " " + Resource.MustCome;

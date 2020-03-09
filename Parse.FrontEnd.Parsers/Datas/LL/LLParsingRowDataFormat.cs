@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Parse.FrontEnd.Parsers.Datas
+namespace Parse.FrontEnd.Parsers.Datas.LL
 {
     public class LLParsingRowDataFormat : ParsingRowDataFormat<NonTerminal, Terminal, NonTerminalSingle>
     {

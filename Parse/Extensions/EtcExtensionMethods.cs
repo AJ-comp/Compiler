@@ -44,5 +44,15 @@ namespace Parse.Extensions
 
             return result;
         }
+
+        public static Stack<T> PushRange<T>(this Stack<T> obj, IEnumerable<T> target)
+        {
+            Contract.Requires(obj != null);
+
+            Stack<T> result = new Stack<T>(obj);
+            foreach(var item in target) result.Push(item);
+
+            return result;
+        }
     }
 }

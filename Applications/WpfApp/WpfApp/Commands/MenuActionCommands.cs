@@ -325,7 +325,7 @@ private void OnNewFile(Func<Document> func)
                 var selDoc = mainViewModel.SolutionExplorer.SelectedDocument;
                 if ((selDoc is EditorTypeViewModel) == false) return;
                 var editorViewModel = mainViewModel.SolutionExplorer.SelectedDocument as EditorTypeViewModel;
-                mainViewModel.SolutionExplorer.Documents.Add(new ParsingHistoryViewModel(editorViewModel.ParserSnippet.ParsingHistory));
+                mainViewModel.SolutionExplorer.Documents.Add(new ParsingHistoryViewModel(editorViewModel.ParsingHistory));
             }, () =>
             {
                 return true;
@@ -342,7 +342,7 @@ private void OnNewFile(Func<Document> func)
                 var selDoc = mainViewModel.SolutionExplorer.SelectedDocument;
                 if ((selDoc is EditorTypeViewModel) == false) return;
                 var editorViewModel = mainViewModel.SolutionExplorer.SelectedDocument as EditorTypeViewModel;
-                mainViewModel.SolutionExplorer.Documents.Add(new ParseTreeViewModel(editorViewModel.ParserSnippet.ParseTree));
+                mainViewModel.SolutionExplorer.Documents.Add(new ParseTreeViewModel(editorViewModel.ParseTree));
             }, () =>
             {
                 return true;

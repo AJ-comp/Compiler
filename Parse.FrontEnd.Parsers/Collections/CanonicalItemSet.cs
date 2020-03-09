@@ -1,4 +1,4 @@
-﻿using Parse.FrontEnd.Parsers.Datas;
+﻿using Parse.FrontEnd.Parsers.Datas.LR;
 using Parse.FrontEnd.RegularGrammar;
 using System;
 using System.Collections.Generic;

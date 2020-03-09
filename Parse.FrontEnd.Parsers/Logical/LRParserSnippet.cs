@@ -2,6 +2,7 @@
 using Parse.FrontEnd.Ast;
 using Parse.FrontEnd.Parsers.Collections;
 using Parse.FrontEnd.Parsers.Datas;
+using Parse.FrontEnd.Parsers.Datas.LR;
 using Parse.FrontEnd.Parsers.ErrorHandling.GrammarPrivate;
 using Parse.FrontEnd.Parsers.EventArgs;
 using Parse.FrontEnd.RegularGrammar;
@@ -9,7 +10,7 @@ using Parse.Tokenize;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using static Parse.FrontEnd.Parsers.Datas.LRParsingRowDataFormat;
+using static Parse.FrontEnd.Parsers.Datas.LR.LRParsingRowDataFormat;
 
 namespace Parse.FrontEnd.Parsers.Logical
 {
@@ -34,61 +35,43 @@ namespace Parse.FrontEnd.Parsers.Logical
         /// </summary>
         public event EventHandler<LRParsingEventArgs> ActionSuccessed;
 
-        protected override void CreateParsingHistoryTemplate()
-        {
-            this.ParsingHistory.AddColumn("prev stack");
-            this.ParsingHistory.AddColumn("input symbol");
-            this.ParsingHistory.AddColumn("action information");
-            this.ParsingHistory.AddColumn("current stack");
-        }
-
-        public override string ToParsingTreeString()
-        {
-            string result = string.Empty;
-
-            foreach (var item in this.ParsingHistory.TreeInfo.ToReverseList())
-                result += item.ToTreeString();
-
-            return result;
-        }
-
         public LRParserSnippet(Parser parser) : base(parser)
         {
         }
 
-        private void BuildParseTree(LRParsingSuccessResult datas)
+        private void BuildParseTree(LRParsingSuccessResult datas, ParsingResult parsingResult)
         {
             if (datas.ActionData.ActionDirection == ActionDir.shift)
             {
                 //                if (!args.InputValue.Kind.Meaning) return;
 
-                this.AllStack.Push(new TreeTerminal(datas.InputValue));
+                parsingResult.MeaningStack.Push(new TreeTerminal(datas.InputValue));
             }
             else if (datas.ActionData.ActionDirection == ActionDir.reduce)
             {
                 var item = datas.ActionData.ActionDest as NonTerminalSingle;
 
                 TreeNonTerminal nonTerminal = new TreeNonTerminal(item);
-                for (int i = 0; i < item.Count; i++) nonTerminal.Insert(0, this.AllStack.Pop());
+                for (int i = 0; i < item.Count; i++) nonTerminal.Insert(0, parsingResult.MeaningStack.Pop());
 
-                this.AllStack.Push(nonTerminal);
+                parsingResult.MeaningStack.Push(nonTerminal);
             }
             else if (datas.ActionData.ActionDirection == ActionDir.epsilon_reduce)
             {
                 var item = datas.ActionData.ActionDest as NonTerminalSingle;
                 TreeNonTerminal nonTerminal = new TreeNonTerminal(item);
 
-                this.AllStack.Push(nonTerminal);
+                parsingResult.MeaningStack.Push(nonTerminal);
             }
         }
 
-        private void BuildAST(LRParsingSuccessResult datas)
+        private void BuildAST(LRParsingSuccessResult datas, ParsingResult parsingResult)
         {
             if (datas.ActionData.ActionDirection == ActionDir.shift)
             {
                 if (!datas.InputValue.Kind.Meaning) return;
 
-                this.MeaningStack.Push(new TreeTerminal(datas.InputValue));
+                parsingResult.MeaningStack.Push(new TreeTerminal(datas.InputValue));
             }
             else if (datas.ActionData.ActionDirection == ActionDir.reduce)
             {
@@ -99,7 +82,7 @@ namespace Parse.FrontEnd.Parsers.Logical
                     TreeNonTerminal nonTerminal = new TreeNonTerminal(item);
                     for (int i = 0; i < item.Count; i++)
                     {
-                        var symbol = this.MeaningStack.Pop();
+                        var symbol = parsingResult.MeaningStack.Pop();
                         if(symbol is TreeNonTerminal)
                         {
                             var nonTerminalSymbol = symbol as TreeNonTerminal;
@@ -108,7 +91,7 @@ namespace Parse.FrontEnd.Parsers.Logical
                         }
                         nonTerminal.Insert(0, symbol);
                     }
-                    this.MeaningStack.Push(nonTerminal);
+                    parsingResult.MeaningStack.Push(nonTerminal);
                 }
             }
             else if (datas.ActionData.ActionDirection == ActionDir.epsilon_reduce)
@@ -118,7 +101,7 @@ namespace Parse.FrontEnd.Parsers.Logical
 //                if (item.MeaningUnit != null)
 //                {
                     TreeNonTerminal nonTerminal = new TreeNonTerminal(item);
-                    this.MeaningStack.Push(nonTerminal);
+                    parsingResult.MeaningStack.Push(nonTerminal);
 //                }
             }
         }
@@ -128,32 +111,32 @@ namespace Parse.FrontEnd.Parsers.Logical
         /// This function is a gateway to enter to the ParsingHistory.
         /// </summary>
         /// <param name="data">parsing process information</param>
-        private void AddParsingHistory(ParsingProcessResult data)
+        private void AddParsingHistory(ParsingProcessResult data, ParsingResult parsingResult)
         {
             if (data is LRParsingSuccessResult)
-                this.AddSuccessInfoToParsingHistory(data as LRParsingSuccessResult);
+                this.AddSuccessInfoToParsingHistory(data as LRParsingSuccessResult, parsingResult);
             else
-                this.AddFailedInfoToParsingHistory(data as ParsingFailResult);
+                this.AddFailedInfoToParsingHistory(data as ParsingFailResult, parsingResult);
         }
 
         /// <summary>
         /// This function writes parsing process information to the parsingHistory.
         /// </summary>
         /// <param name="data">parsing process information</param>
-        private void AddSuccessInfoToParsingHistory(LRParsingSuccessResult data)
+        private void AddSuccessInfoToParsingHistory(LRParsingSuccessResult data, ParsingResult parsingResult)
         {
-            var param1 = Convert.ToString(data.PrevStack.Reverse(), " ");
+            var param1 = Convert.ToString(data.BlockItem.BeforeStack.Reverse(), " ");
             var param2 = data.InputValue.ToString();
             var param3 = data.ActionData.ActionDirection.ToString() + " ";
-            var param4 = Convert.ToString(data.CurrentStack.Reverse(), " ");
+            var param4 = Convert.ToString(data.BlockItem.AfterStack.Reverse(), " ");
 
             if (data.ActionData.ActionDirection != ActionDir.accept)
                 param3 += (data.ActionData.ActionDest is NonTerminalSingle) ? (data.ActionData.ActionDest as NonTerminalSingle).ToGrammarString() : data.ActionData.ActionDest.ToString();
 
             if (data.ActionData.ActionDirection == ActionDir.reduce)
-                this.ParsingHistory.AddTreeInfo(data.ActionData.ActionDest as NonTerminalSingle);
+                parsingResult.ParsingHistory.AddTreeInfo(data.ActionData.ActionDest as NonTerminalSingle);
 
-            this.ParsingHistory.AddRow(param1, param2, param3, param4);
+            parsingResult.ParsingHistory.AddRow(param1, param2, param3, param4);
         }
 
         /// <summary>
@@ -161,19 +144,25 @@ namespace Parse.FrontEnd.Parsers.Logical
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="data">parsing process information when error generated</param>
-        private void AddFailedInfoToParsingHistory(ParsingFailResult data)
+        private void AddFailedInfoToParsingHistory(ParsingFailResult data, ParsingResult parsingResult)
         {
-            var param1 = Convert.ToString(data.PrevStack.Reverse(), " ");
+            var param1 = Convert.ToString(data.BlockItem.BeforeStack.Reverse(), " ");
             var param2 = data.InputValue.ToString();
             //            var param3 = args.ActionData.ActionDirection.ToString() + " ";
 
-            this.ParsingHistory.AddRow(param1, param2, data.ErrorMessage, string.Empty);
+            parsingResult.ParsingHistory.AddRow(param1, param2, data.ErrorMessage, string.Empty);
         }
 
 
 
 
-
+        /// <summary>
+        /// This function writes a value into stack following to action value (matchedValue).
+        /// </summary>
+        /// <param name="matchedValue"></param>
+        /// <param name="inputValue"></param>
+        /// <param name="stack"></param>
+        /// <returns></returns>
         private ActionData Process(Tuple<ActionDir, object> matchedValue, TokenData inputValue, Stack<object> stack)
         {
             ActionData result = new ActionData
@@ -214,11 +203,11 @@ namespace Parse.FrontEnd.Parsers.Logical
         /// <param name="prevStack"></param>
         /// <param name="stack"></param>
         /// <returns></returns>
-        private ParsingProcessResult ShiftAndReduce(TokenData inputValue, Stack<object> prevStack, Stack<object> stack)
+        private ParsingProcessResult ShiftAndReduce(TokenData inputValue, BlockStackItem blockItem)
         {
-            var topData = stack.Peek();
+            var topData = blockItem.BeforeStack.Peek();
 
-            if (topData is NonTerminalSingle) return new ParsingFailResult(prevStack, stack, inputValue, null, this.curTokenIndex);
+            if (topData is NonTerminalSingle) return new ParsingFailResult(blockItem, inputValue, null, this.curTokenIndex);
 
             LRParsingTable parsingTable = this.Parser.ParsingTable as LRParsingTable;
             var IxMetrix = parsingTable[(int)topData];
@@ -226,51 +215,50 @@ namespace Parse.FrontEnd.Parsers.Logical
             // invalid input symbol, can't shift (error handler also not exist)
             if (!IxMetrix.MatchedValueSet.ContainsKey(inputValue.Kind))
             {
-                return new ParsingFailResult(prevStack, stack, inputValue, IxMetrix.PossibleTerminalSet, this.curTokenIndex);
+                return new ParsingFailResult(blockItem, inputValue, IxMetrix.PossibleTerminalSet, this.curTokenIndex);
             }
             // invalid input symbol, can't shift (error handler exists)
             else if (IxMetrix.MatchedValueSet[inputValue.Kind].Item2.GetType() == typeof(ErrorHandler))
             {
                 var value = IxMetrix.MatchedValueSet[inputValue.Kind];
-                return new ParsingFailResult(prevStack, stack, inputValue, IxMetrix.PossibleTerminalSet, this.curTokenIndex, value.Item2 as ErrorHandler);
+                return new ParsingFailResult(blockItem, inputValue, IxMetrix.PossibleTerminalSet, this.curTokenIndex, value.Item2 as ErrorHandler);
             }
 
             var matchedValue = IxMetrix.MatchedValueSet[inputValue.Kind];
-            var result = this.Process(matchedValue, inputValue, stack);
+            var result = this.Process(matchedValue, inputValue, blockItem.AfterStack);
 
-            return new LRParsingSuccessResult(result, prevStack, stack, inputValue, IxMetrix.PossibleTerminalSet);
+            return new LRParsingSuccessResult(result, blockItem, inputValue, IxMetrix.PossibleTerminalSet);
         }
 
         /// <summary>
         /// This function processes goto process.
         /// </summary>
         /// <param name="inputValue"></param>
-        /// <param name="prevStack"></param>
-        /// <param name="stack"></param>
+        /// <param name="blockItem"></param>
         /// <returns></returns>
-        private ParsingProcessResult GoTo(TokenData inputValue, Stack<object> prevStack, Stack<object> stack)
+        private ParsingProcessResult GoTo(TokenData inputValue, BlockStackItem blockItem)
         {
-            var topData = stack.Peek();
+            var topData = blockItem.BeforeStack.Peek();
 
-            if (!(topData is NonTerminalSingle)) return new ParsingFailResult(prevStack, stack, inputValue, null, this.curTokenIndex);
+            if (!(topData is NonTerminalSingle)) return new ParsingFailResult(blockItem, inputValue, null, this.curTokenIndex);
 
             var seenSingleNT = topData as NonTerminalSingle;
-            var secondData = stack.SecondItemPeek();
+            var secondData = blockItem.BeforeStack.SecondItemPeek();
             LRParsingTable parsingTable = this.Parser.ParsingTable as LRParsingTable;
             var IxMetrix = parsingTable[(int)secondData];
 
             // can't goto action
             if (!IxMetrix.MatchedValueSet.ContainsKey(seenSingleNT.ToNonTerminal()))
             {
-                return new ParsingFailResult(prevStack, stack, inputValue, IxMetrix.PossibleTerminalSet, this.curTokenIndex);
+                return new ParsingFailResult(blockItem, inputValue, IxMetrix.PossibleTerminalSet, this.curTokenIndex);
             }
             else
             {
                 var matchedValue = IxMetrix.MatchedValueSet[seenSingleNT.ToNonTerminal()];
 
-                stack.Push((int)matchedValue.Item2);
+                blockItem.AfterStack.Push((int)matchedValue.Item2);
                 var actionData = new ActionData(matchedValue.Item1, matchedValue.Item2);
-                return new LRParsingSuccessResult(actionData, prevStack, stack, inputValue, IxMetrix.PossibleTerminalSet);
+                return new LRParsingSuccessResult(actionData, blockItem, inputValue, IxMetrix.PossibleTerminalSet);
             }
         }
 
@@ -280,12 +268,12 @@ namespace Parse.FrontEnd.Parsers.Logical
         /// <param name="stack">current stack</param>
         /// <param name="inputValue">input terminal</param>
         /// <returns></returns>
-        public ParsingProcessResult Parsing(Stack<object> stack, TokenData inputValue)
+        private ParsingProcessResult Parsing(BlockParsingStack blockStack, TokenData inputValue)
         {
-            Stack<object> prevStack = stack.Clone();
+            blockStack.Stacks.Last().CopyBeforeStackToAfterStack();
 
-            ParsingProcessResult result = this.GoTo(inputValue, prevStack, stack);
-            if (result is ParsingFailResult) result = this.ShiftAndReduce(inputValue, prevStack, stack);
+            ParsingProcessResult result = this.GoTo(inputValue, blockStack.Stacks.Last());
+            if (result is ParsingFailResult) result = this.ShiftAndReduce(inputValue, blockStack.Stacks.Last());
 
             return result;
         }
@@ -296,19 +284,24 @@ namespace Parse.FrontEnd.Parsers.Logical
 
             if (tokenCells.Length <= 0) return result;
 
-            this.ParsingHistory.Clear();
-            this.AllStack.Clear();
-            this.MeaningQueue.Clear();
-            Stack<object> stack = new Stack<object>();
-            stack.Push(0);
-
             var tokens = tokenCells.ToList();
             tokens.Add(new TokenCell(-1, new EndMarker().Value, null));
 
+            bool bAdd = true;
             for (int i = 0; i < tokens.Count; i++)
             {
                 this.curTokenIndex = i;
                 var item = tokens[i];
+                if (bAdd)
+                {
+                    var stack = (result.ParsingStack.Count == 0) ? new BlockStackItem() : new BlockStackItem(result.ParsingStack.Last().Stacks.Last().AfterStack);
+                    result.ParsingStack.Add(new BlockParsingStack(stack, item));    // add new parsing block.
+                }
+                else
+                {
+                    result.ParsingStack.Last().AddParsingItem(); // add new parsing item on current parsing block.
+                }
+                bAdd = true;
 
                 Terminal type = new Epsilon();
                 if (item.Data == new EndMarker().Value && i == tokens.Count - 1) type = new EndMarker();
@@ -316,8 +309,12 @@ namespace Parse.FrontEnd.Parsers.Logical
                 {
                     var typeData = item.PatternInfo.OptionData as Terminal;
                     if (typeData == null) type = new NotDefined();
-                    else if (typeData.TokenType == TokenType.Delimiter) { prevToken = new TokenData(item.Data, type, item); continue; }
-                    else if (typeData.TokenType == TokenType.Comment) { prevToken = new TokenData(item.Data, type, item); continue; }
+                    else if (typeData.TokenType == TokenType.Delimiter || typeData.TokenType == TokenType.Comment) 
+                    { 
+                        prevToken = new TokenData(item.Data, type, item);
+                        result.ParsingStack.Last().Stacks.Last().CopyBeforeStackToAfterStack();
+                        continue; 
+                    }
                     else type = typeData;
                 }
 
@@ -327,42 +324,41 @@ namespace Parse.FrontEnd.Parsers.Logical
                 {
                 }
 
-                var parsingResult = this.Parsing(stack, token);
-                this.AddParsingHistory(parsingResult);
+                var processResult = this.Parsing(result.ParsingStack.Last(), token);
+                this.AddParsingHistory(processResult, result);
 
-                if(parsingResult is LRParsingSuccessResult)
+                if(processResult is LRParsingSuccessResult)
                 {
-                    var successResult = parsingResult as LRParsingSuccessResult;
-                    this.BuildParseTree(successResult);
-                    this.BuildAST(successResult);
+                    var successResult = processResult as LRParsingSuccessResult;
+                    this.BuildParseTree(successResult, result);
+                    this.BuildAST(successResult, result);
 
                     // syntax analysis complete
                     if (successResult.ActionData.ActionDirection == ActionDir.accept)
                     {
-                        result.SetData(this.ParsingHistory, this.AllStack);
                         result.SetSuccess();
-                        this.Parser.Grammar.SDTS.Process(this.MeaningStack.Pop() as TreeSymbol);
+                        this.Parser.Grammar.SDTS.Process(result.MeaningStack.Pop() as TreeSymbol);
                         break;
                     }
                     else if (successResult.ActionData.ActionDirection == ActionDir.reduce ||
                                 successResult.ActionData.ActionDirection == ActionDir.epsilon_reduce ||
                                 successResult.ActionData.ActionDirection == ActionDir.moveto)
                     {
-                        this.ActionSuccessed?.Invoke(this, new LRParsingEventArgs(parsingResult.PrevStack, parsingResult.CurrentStack, parsingResult.InputValue, successResult.ActionData));
-                        i--;
+                        this.ActionSuccessed?.Invoke(this, new LRParsingEventArgs(result.ParsingStack.Last().Stacks.Last(), processResult.InputValue, successResult.ActionData));
+                        bAdd = false; i--;
                     }
                 }
-                else if(parsingResult is ParsingFailResult)
+                else if(processResult is ParsingFailResult)
                 {
-                    var failedResult = parsingResult as ParsingFailResult;
+                    var failedResult = processResult as ParsingFailResult;
                     result.AddFailedList(failedResult);
                     this.ActionFailed?.Invoke(this, failedResult);
 
                     if (failedResult.ErrorHandler == null) break;
                     else
                     {
-                        var handleResult = failedResult.ErrorHandler.Call(failedResult.CurrentStack, tokens.ToArray(), curTokenIndex);
-                        stack = handleResult.Stack;
+                        var handleResult = failedResult.ErrorHandler.Call(failedResult.BlockItem.AfterStack, tokens.ToArray(), curTokenIndex);
+                        failedResult.BlockItem.AfterStack = handleResult.Stack;
                         curTokenIndex = handleResult.SeeingTokenIndex;
                     }
                 }
@@ -376,7 +372,7 @@ namespace Parse.FrontEnd.Parsers.Logical
         /*
         public ParsingResult Parsing(TokenCell[] tokenCells, ParsingResult prevParsingInfo, TokenizeImpactRanges rangeToParse)
         {
-            this.AllStack.Reverse
+            var totalList = this.AllStack.ToList()
             prevParsingInfo.
         }
         */

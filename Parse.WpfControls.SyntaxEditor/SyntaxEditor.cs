@@ -16,7 +16,6 @@ namespace Parse.WpfControls.SyntaxEditor
     [TemplatePart(Name = "TextArea", Type = typeof(HighlightTextBox))]
     public class SyntaxEditor : Editor
     {
-        private bool bParsing = false;
         private bool bReserveRegistKeywords = false;
         private AlarmCollection alarmList = new AlarmCollection();
 

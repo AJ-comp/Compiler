@@ -1,8 +1,10 @@
 ﻿using ApplicationLayer.Common.Utilities;
 using ApplicationLayer.Models.Invokers;
 using GalaSoft.MvvmLight.Command;
+using Parse.FrontEnd.Ast;
 using Parse.FrontEnd.Grammars.MiniC;
 using Parse.FrontEnd.Parsers;
+using Parse.FrontEnd.Parsers.Collections;
 using Parse.FrontEnd.Parsers.Logical;
 using Parse.WpfControls.SyntaxEditor.EventArgs;
 using System;
@@ -20,6 +22,8 @@ namespace ApplicationLayer.ViewModels.DocumentTypeViewModels
         public string Data { get; } = string.Empty;
 
         public ParserSnippet ParserSnippet { get; } = ParserFactory.Instance.GetParser(ParserFactory.ParserKind.SLR_Parser, new MiniCGrammar()).NewParserSnippet();
+        public IReadOnlyList<TreeSymbol> ParseTree { get; private set; }
+        public ParsingHistory ParsingHistory { get; private set; }
 
         private int caretIndex = 0;
         public int CaretIndex

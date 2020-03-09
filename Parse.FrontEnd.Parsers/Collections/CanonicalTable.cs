@@ -1,8 +1,8 @@
-﻿using Parse.FrontEnd.Parsers.Datas;
+﻿using Parse.FrontEnd.Parsers.Datas.LR;
 using Parse.FrontEnd.RegularGrammar;
 using System;
 using System.Collections.Generic;
-using static Parse.FrontEnd.Parsers.Datas.LRParsingRowDataFormat;
+using static Parse.FrontEnd.Parsers.Datas.LR.LRParsingRowDataFormat;
 
 namespace Parse.FrontEnd.Parsers.Collections
 {

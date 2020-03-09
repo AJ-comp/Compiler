@@ -1,7 +1,7 @@
 ﻿using Parse.FrontEnd.RegularGrammar;
 using System;
 
-namespace Parse.FrontEnd.Parsers.Datas
+namespace Parse.FrontEnd.Parsers.Datas.LR
 {
     public class CanonicalItem : ICloneable
     {

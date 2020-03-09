@@ -86,7 +86,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Parse.FrontEnd.Grammars\Parse.FrontEnd.Grammars.csproj">
-      <Project>{A0661596-8C09-42A8-B412-8702108FD935}</Project>
+      <Project>{a0661596-8c09-42a8-b412-8702108fd935}</Project>
       <Name>Parse.FrontEnd.Grammars</Name>
     </ProjectReference>
     <ProjectReference Include="..\Parse.FrontEnd.Parsers\Parse.FrontEnd.Parsers.csproj">

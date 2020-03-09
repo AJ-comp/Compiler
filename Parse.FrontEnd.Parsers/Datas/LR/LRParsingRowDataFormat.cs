@@ -2,9 +2,9 @@
 using Parse.FrontEnd.RegularGrammar;
 using System;
 using System.Collections.Generic;
-using static Parse.FrontEnd.Parsers.Datas.LRParsingRowDataFormat;
+using static Parse.FrontEnd.Parsers.Datas.LR.LRParsingRowDataFormat;
 
-namespace Parse.FrontEnd.Parsers.Datas
+namespace Parse.FrontEnd.Parsers.Datas.LR
 {
     public class LRParsingRowDataFormat : ParsingRowDataFormat<CanonicalItemSet, Symbol, Tuple<ActionDir, object>>
     {
