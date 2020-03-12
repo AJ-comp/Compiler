@@ -1,5 +1,6 @@
 ﻿using Parse.FrontEnd.Grammars.MiniC;
 using Parse.FrontEnd.Parsers.Collections;
+using Parse.FrontEnd.Parsers.Datas;
 using Parse.FrontEnd.Parsers.LR;
 using Parse.FrontEnd.RegularGrammar;
 using Parse.Tokenize;
@@ -39,7 +40,7 @@ namespace Parse.FrontEnd.Parsers.ErrorHandling.GrammarPrivate
                 {
                     if (rowData.MatchedValueSet.ContainsKey(terminal)) continue;
 
-                    if (terminal == grammar.@if)
+                    if (terminal == grammar.If)
                         rowData.MatchedValueSet.Add(terminal, new Tuple<ActionDir, object>(ActionDir.failed, new ErrorHandler(ErrorHandler_IF, ixIndex)));
                     else
                         rowData.MatchedValueSet.Add(terminal, new Tuple<ActionDir, object>(ActionDir.failed, new ErrorHandler(DefaultErrorHandler, ixIndex)));
@@ -47,37 +48,38 @@ namespace Parse.FrontEnd.Parsers.ErrorHandling.GrammarPrivate
             }
         }
 
-        private ErrorHandlingResult ErrorHandler_IF(int ixIndex, Stack<object> stack, TokenCell[] tokens, int seeingTokenIndex)
+        private ErrorHandlingResult ErrorHandler_IF(int ixIndex, ParsingResult parsingResult, TokenCell[] tokens, int seeingTokenIndex)
         {
             /// Here, someone has to error handling logic for ixIndex.
             //            if (ixIndex == 0)
 
-            return this.DefaultErrorHandler(ixIndex, stack, tokens, seeingTokenIndex);
+            return this.DefaultErrorHandler(ixIndex, parsingResult, tokens, seeingTokenIndex);
         }
 
-        private ErrorHandlingResult DefaultErrorHandler(int ixIndex, Stack<object> stack, TokenCell[] tokens, int seeingTokenIndex)
+        private ErrorHandlingResult DefaultErrorHandler(int ixIndex, ParsingResult parsingResult, TokenCell[] tokens, int seeingTokenIndex)
         {
-            var syncronizeTokens = new HashSet<Terminal>
+            var synchronizeTokens = new HashSet<Terminal>
             {
-                this.grammar.semiColon,
-                this.grammar.closeCurlyBrace
+                this.grammar.SemiColon,
+                this.grammar.CloseCurlyBrace,
+                new EndMarker()
             };
 
-            return PanicMode.LRProcess(parsingTable, stack, tokens, seeingTokenIndex, syncronizeTokens);
+            return PanicMode.LRProcess(parsingTable, parsingResult, tokens, seeingTokenIndex, synchronizeTokens);
         }
     }
 
     public class ErrorHandler
     {
-        private Func<int, Stack<object>, TokenCell[], int, ErrorHandlingResult> handler;
+        private Func<int, ParsingResult, TokenCell[], int, ErrorHandlingResult> handler;
         private int param;
 
-        public ErrorHandler(Func<int, Stack<object>, TokenCell[], int, ErrorHandlingResult> handler, int param)
+        public ErrorHandler(Func<int, ParsingResult, TokenCell[], int, ErrorHandlingResult> handler, int param)
         {
             this.handler = handler;
             this.param = param;
         }
 
-        public ErrorHandlingResult Call(Stack<object> stack, TokenCell[] tokens, int seeingTokenIndex) => handler(param, stack, tokens, seeingTokenIndex);
+        public ErrorHandlingResult Call(ParsingResult parsingResult, TokenCell[] tokens, int seeingTokenIndex) => handler(param, parsingResult, tokens, seeingTokenIndex);
     }
 }

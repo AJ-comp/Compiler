@@ -59,6 +59,7 @@ namespace Parse.WpfControls.SyntaxEditor
         public event OnParserChangedEventHandler OnParserChanged;
 
         public event EventHandler<AlarmCollection> AlarmFired;
+        public event EventHandler<ParsingCompletedEventArgs> ParsingCompleted;
 
         public Brush KeywordForeground
         {
@@ -222,7 +223,7 @@ namespace Parse.WpfControls.SyntaxEditor
 
             foreach (var item in this.alarmList)
             {
-                int tokenIndex = item.ParsingFailedArgs.ErrorIndex;
+                int tokenIndex = item.TokenIndex;
                 //                if (this.TextArea.Tokens[tokenIndex] == item.ParsingFailedArgs.InputValue.TokenCell) correctList.Add(item);
                 correctList.Add(item);
             }
@@ -249,24 +250,28 @@ namespace Parse.WpfControls.SyntaxEditor
             // If fired the error on EndMarker.
             DrawOption status = DrawOption.None;
 
-            foreach(var failedInfo in e.FailedList)
+            for(int i=0; i<e.Count; i++)
             {
-                if (failedInfo.InputValue.TokenCell.ValueOptionData != null)
-                    status = (DrawOption)failedInfo.InputValue.TokenCell.ValueOptionData;
+                var failedInfo = e[i];
+                foreach (var errorUnit in failedInfo.ErrorUnits)
+                {
+                    if (errorUnit.InputValue.TokenCell.ValueOptionData != null)
+                        status = (DrawOption)errorUnit.InputValue.TokenCell.ValueOptionData;
 
-                if (failedInfo.ErrorPosition == ErrorPosition.OnEndMarker)
-                    status |= DrawOption.EndPointUnderline;
-                else
-                    status |= DrawOption.Underline;
+                    if (errorUnit.ErrorPosition == ErrorPosition.OnEndMarker)
+                        status |= DrawOption.EndPointUnderline;
+                    else
+                        status |= DrawOption.Underline;
 
-                failedInfo.InputValue.TokenCell.ValueOptionData = status;
+                    errorUnit.InputValue.TokenCell.ValueOptionData = status;
 
-                // If fired the error on EndMarker then error point is last line.
-                var point = (failedInfo.InputValue.Kind != new EndMarker()) ?
-                    this.TextArea.GetIndexInfoFromCaretIndex(failedInfo.InputValue.TokenCell.StartIndex) :
-                    new System.Drawing.Point(0, this.TextArea.LineIndexes.Count-1);
+                    // If fired the error on EndMarker then error point is last line.
+                    var point = (errorUnit.InputValue.Kind != new EndMarker()) ?
+                        this.TextArea.GetIndexInfoFromCaretIndex(errorUnit.InputValue.TokenCell.StartIndex) :
+                        new System.Drawing.Point(0, this.TextArea.LineIndexes.Count - 1);
 
-                this.alarmList.Add(new AlarmEventArgs(string.Empty, this.FileName, failedInfo.ErrorIndex, point.Y + 1, failedInfo));
+                    this.alarmList.Add(new AlarmEventArgs(string.Empty, this.FileName, i, point.Y + 1, errorUnit));
+                }
             }
         }
 
@@ -276,6 +281,7 @@ namespace Parse.WpfControls.SyntaxEditor
             this.alarmList.Clear();
 
             var parsingResult = this.ParserSnippet.Parsing(this.TextArea.Tokens.ToArray());
+
             if (parsingResult.Success)
             {
                 this.alarmList.Add(new AlarmEventArgs(string.Empty, this.FileName));
@@ -287,6 +293,7 @@ namespace Parse.WpfControls.SyntaxEditor
             }
 
             this.AlarmFired?.Invoke(this, this.alarmList);
+            this.ParsingCompleted?.Invoke(this, new ParsingCompletedEventArgs(parsingResult, this.alarmList));
             this.TextArea.InvalidateVisual();
         }
     }

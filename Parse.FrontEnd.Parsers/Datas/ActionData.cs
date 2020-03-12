@@ -4,15 +4,17 @@ namespace Parse.FrontEnd.Parsers.Datas
 {
     public class ActionData
     {
-        public ActionDir ActionDirection { get; internal set; } = ActionDir.failed;
-        public object ActionDest { get; internal set; } = null;
+        public ActionDir Direction { get; internal set; } = ActionDir.failed;
+        public object Dest { get; internal set; } = null;
 
         public ActionData() { }
 
         public ActionData(ActionDir actionDir, object actionDest)
         {
-            this.ActionDirection = actionDir;
-            this.ActionDest = actionDest;
+            this.Direction = actionDir;
+            this.Dest = actionDest;
         }
+
+        public override string ToString() => string.Format("{0} {1}", Direction.ToString(), Dest.ToString());
     }
 }

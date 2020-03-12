@@ -3,12 +3,12 @@ using ApplicationLayer.Models.Invokers;
 using GalaSoft.MvvmLight.Command;
 using Parse.FrontEnd.Ast;
 using Parse.FrontEnd.Grammars.MiniC;
-using Parse.FrontEnd.Parsers;
 using Parse.FrontEnd.Parsers.Collections;
 using Parse.FrontEnd.Parsers.Logical;
 using Parse.WpfControls.SyntaxEditor.EventArgs;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.IO;
 
 namespace ApplicationLayer.ViewModels.DocumentTypeViewModels
@@ -23,7 +23,7 @@ namespace ApplicationLayer.ViewModels.DocumentTypeViewModels
 
         public ParserSnippet ParserSnippet { get; } = ParserFactory.Instance.GetParser(ParserFactory.ParserKind.SLR_Parser, new MiniCGrammar()).NewParserSnippet();
         public IReadOnlyList<TreeSymbol> ParseTree { get; private set; }
-        public ParsingHistory ParsingHistory { get; private set; }
+        public DataTable ParsingHistory { get; private set; }
 
         private int caretIndex = 0;
         public int CaretIndex
@@ -50,21 +50,25 @@ namespace ApplicationLayer.ViewModels.DocumentTypeViewModels
             this.Data = data;
         }
 
-        private RelayCommand<AlarmCollection> alarmFiredCommand = null;
-        public RelayCommand<AlarmCollection> AlarmFiredCommand
+        private RelayCommand<ParsingCompletedEventArgs> parsingCompletedCommand = null;
+        public RelayCommand<ParsingCompletedEventArgs> ParsingCompletedCommand
         {
             get
             {
-                if (this.alarmFiredCommand == null)
-                    this.alarmFiredCommand = new RelayCommand<AlarmCollection>(this.OnAlarmFired);
+                if (this.parsingCompletedCommand == null)
+                    this.parsingCompletedCommand = new RelayCommand<ParsingCompletedEventArgs>(this.OnParsingCompleted);
 
-                return this.alarmFiredCommand;
+                return this.parsingCompletedCommand;
             }
         }
 
-        private void OnAlarmFired(AlarmCollection alarmInfos)
+        private void OnParsingCompleted(ParsingCompletedEventArgs parsingCompletedInfo)
         {
-            this.AlarmFired?.Invoke(this, alarmInfos);
+//            this.ParseTree = parsingCompletedInfo.ParsingResult.ToParseTree;
+            this.ParsingHistory = parsingCompletedInfo.ParsingResult.ToParsingHistory;
+
+            // inform to alarm list view.
+            this.AlarmFired?.Invoke(this, parsingCompletedInfo.AlarmCollection);
         }
 
         public override bool Equals(object obj)

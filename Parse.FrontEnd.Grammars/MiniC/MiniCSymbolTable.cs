@@ -13,10 +13,11 @@ namespace Parse.FrontEnd.Grammars.MiniC
 
         public override object Clone()
         {
-            MiniCItemInfoSnippet result = new MiniCItemInfoSnippet();
-
-            result.Type = this.Type;
-            result.BlockLevel = this.BlockLevel;
+            MiniCItemInfoSnippet result = new MiniCItemInfoSnippet
+            {
+                Type = this.Type,
+                BlockLevel = this.BlockLevel
+            };
 
             return result;
         }

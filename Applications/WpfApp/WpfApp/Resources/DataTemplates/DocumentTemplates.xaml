@@ -38,7 +38,7 @@
                                                 ParserSnippet="{Binding ParserSnippet}">
 
             <i:Interaction.Behaviors>
-                <localBehaviors:EventToCommandBehavior Command="{Binding AlarmFiredCommand}" Event="AlarmFired" PassArguments="True" />
+                <localBehaviors:EventToCommandBehavior Command="{Binding ParsingCompletedCommand}" Event="ParsingCompleted" PassArguments="True" />
                 <localBehaviors:ViewViewModelConnector ViewModelDelegate="{Binding MoveCaretInvoker}" ViewMethod="MoveCaretToToken"/>
             </i:Interaction.Behaviors>
 

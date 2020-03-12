@@ -47,7 +47,7 @@ namespace Parse.FrontEnd.Grammars
             }
         }
 
-        public Grammar()
+        protected Grammar()
         {
 //            this.Tokens.IdPattern = varLetter + "[_a-zA-Z0-9]*";
 //            this.Tokens.LineCommentPattern = "//";

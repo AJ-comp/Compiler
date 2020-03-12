@@ -6,14 +6,14 @@ namespace Parse.FrontEnd.Parsers.Datas
     public abstract class ParsingProcessResult
     {
         /// <summary> This property value is always valid. </summary>
-        public BlockStackItem BlockItem { get; }
+        public ParsingUnit BlockItem { get; }
         /// <summary> This property value is always valid. </summary>
         public TokenData InputValue { get; }
 
         /// <summary> This property value is not valid in a specific case. </summary>
         public TerminalSet PossibleTerminalSet { get; }
 
-        protected ParsingProcessResult(BlockStackItem blockItem, TokenData inputValue, TerminalSet possibleTerminalSet)
+        protected ParsingProcessResult(ParsingUnit blockItem, TokenData inputValue, TerminalSet possibleTerminalSet)
         {
             BlockItem = blockItem;
             InputValue = inputValue;

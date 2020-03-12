@@ -1,5 +1,4 @@
-﻿using Parse;
-using System;
+﻿using System;
 
 namespace Parse.FrontEnd.RegularGrammar
 {
@@ -82,5 +81,7 @@ namespace Parse.FrontEnd.RegularGrammar
         {
             this.uniqueKey = KeyManager.EndMarkerKey;
         }
+
+        public override string ToString() => string.Format("This is EndMarker! char : {0}", EndMarkerChar);
     }
 }

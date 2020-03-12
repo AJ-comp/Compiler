@@ -1,13 +1,13 @@
-﻿using Parse.FrontEnd.Parsers.Collections;
+﻿using System.Data;
 using CommonResource = ApplicationLayer.Define.Properties.Resources;
 
 namespace ApplicationLayer.ViewModels.DocumentTypeViewModels
 {
     public class ParsingHistoryViewModel : DocumentViewModel
     {
-        public ParsingHistory ParsingHistory { get; set; }
+        public DataTable ParsingHistory { get; set; }
 
-        public ParsingHistoryViewModel(ParsingHistory parsingHistory) : base(CommonResource.ParsingHistory)
+        public ParsingHistoryViewModel(DataTable parsingHistory) : base(CommonResource.ParsingHistory)
         {
             this.ParsingHistory = parsingHistory;
         }

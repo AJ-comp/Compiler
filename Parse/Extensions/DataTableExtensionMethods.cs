@@ -494,7 +494,7 @@ namespace Parse.Extensions
             {
                 object obj = row[columns[i]];
 
-                string str = null;
+                string str;
                 if (toString != null)
                 {
                     str = toString(obj, row, columns[i]);
@@ -1019,7 +1019,7 @@ namespace Parse.Extensions
             if (string.IsNullOrEmpty(value))
                 return;
 
-            byte[] buffer = null;
+            byte[] buffer;
 
             if (args == null)
                 buffer = encoding.GetBytes(value);
@@ -1031,7 +1031,7 @@ namespace Parse.Extensions
 
         private static void StreamWriteLine(Stream stream, Encoding encoding, string value = null, params object[] args)
         {
-            byte[] buffer = null;
+            byte[] buffer;
 
             if (string.IsNullOrEmpty(value) == false)
             {

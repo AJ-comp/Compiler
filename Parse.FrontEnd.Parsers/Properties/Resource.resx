@@ -103,4 +103,7 @@
   <data name="MustCome" xml:space="preserve">
     <value>must come here</value>
   </data>
+  <data name="RecoverWithPanicMode" xml:space="preserve">
+    <value>recovering with panic mode</value>
+  </data>
 </root>

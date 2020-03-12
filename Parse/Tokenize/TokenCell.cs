@@ -90,7 +90,8 @@ namespace Parse.Tokenize
             convertedString = convertedString.Replace("\n", "\\n");
             convertedString = convertedString.Replace("\t", "\\t");
 
-            return string.Format("{0}, \"{1}\", {2}", this.StartIndex, convertedString, PatternInfo.OptionData);
+            return (PatternInfo.OptionData == null) ? string.Format("{0}, \"{1}\", {2}", this.StartIndex, convertedString, "null") :
+                string.Format("{0}, \"{1}\", {2}", this.StartIndex, convertedString, PatternInfo.OptionData);
         }
 
         public override int GetHashCode()

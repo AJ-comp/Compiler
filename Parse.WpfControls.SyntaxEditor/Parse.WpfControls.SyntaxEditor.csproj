@@ -56,6 +56,7 @@
     </Page>
     <Compile Include="EventArgs\AlarmCollection.cs" />
     <Compile Include="EventArgs\AlarmEventArgs.cs" />
+    <Compile Include="EventArgs\ParsingCompletedEventArgs.cs" />
     <Compile Include="SyntaxEditor.cs">
       <SubType>Code</SubType>
     </Compile>

@@ -1,15 +1,15 @@
-﻿using System.Collections.Generic;
+﻿using Parse.FrontEnd.Parsers.Datas;
 
 namespace Parse.FrontEnd.Parsers.ErrorHandling
 {
     public class ErrorHandlingResult
     {
-        public Stack<object> Stack { get; }
+        public ParsingResult ParsingResult { get; }
         public int SeeingTokenIndex { get; }
 
-        public ErrorHandlingResult(Stack<object> stack, int seeingTokenIndex)
+        public ErrorHandlingResult(ParsingResult parsingResult, int seeingTokenIndex)
         {
-            Stack = stack;
+            ParsingResult = parsingResult;
             SeeingTokenIndex = seeingTokenIndex;
         }
     }

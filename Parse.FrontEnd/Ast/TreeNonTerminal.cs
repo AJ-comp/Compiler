@@ -102,6 +102,6 @@ namespace Parse.FrontEnd.Ast
             return result;
         }
 
-        public override string ToString() => this.Name.ToString();
+        public override string ToString() => this.Name?.ToString();
     }
 }

@@ -16,9 +16,11 @@ namespace Parse.FrontEnd.Parsers.Datas.LR
             {
                 TerminalSet result = new TerminalSet();
 
-                foreach(var symbol in this.MatchedValueSet.Keys)
+                foreach(var valueSet in this.MatchedValueSet)
                 {
-                    if (symbol is Terminal) result.Add(symbol as Terminal);
+                    if (valueSet.Value.Item1 == ActionDir.failed) continue;
+
+                    if (valueSet.Key is Terminal) result.Add(valueSet.Key as Terminal);
                 }
 
                 return result;
@@ -30,9 +32,11 @@ namespace Parse.FrontEnd.Parsers.Datas.LR
             {
                 HashSet<NonTerminal> result = new HashSet<NonTerminal>();
 
-                foreach(var symbol in this.MatchedValueSet.Keys)
+                foreach(var valueSet in this.MatchedValueSet)
                 {
-                    if (symbol is NonTerminal) result.Add(symbol as NonTerminal);
+                    if (valueSet.Value.Item1 == ActionDir.failed) continue;
+
+                    if (valueSet.Key is NonTerminal) result.Add(valueSet.Key as NonTerminal);
                 }
 
                 return result;

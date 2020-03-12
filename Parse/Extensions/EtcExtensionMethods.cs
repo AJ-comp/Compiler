@@ -16,7 +16,7 @@ namespace Parse.Extensions
         {
             Contract.Requires(obj != null);
 
-            T result = default(T);
+            T result = default;
             if (obj.Count < 2) return result;
 
             T temp = obj.Pop();

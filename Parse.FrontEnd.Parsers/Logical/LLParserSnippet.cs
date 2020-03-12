@@ -7,13 +7,13 @@ namespace Parse.FrontEnd.Parsers.Logical
 {
     public class LLParserSnippet : ParserSnippet
     {
+        public LLParserSnippet(Parser parser) : base(parser)
+        {
+        }
+
         public override ParsingResult Parsing(TokenCell[] tokenCells)
         {
             throw new System.NotImplementedException();
-        }
-
-        public LLParserSnippet(Parser parser) : base(parser)
-        {
         }
     }
 }

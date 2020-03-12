@@ -20,10 +20,11 @@ namespace Parse.FrontEnd.Parsers.Logical
         }
 
         /// <summary>
-        /// Start parsing with tokenCells.
+        /// This function performs whole parsing for tokenCells
         /// </summary>
-        /// <param name="tokenCells"></param>
-        /// <returns>Returns true if successed.</returns>
+        /// <param name="tokenCells">The tokenCells to parsing</param>
+        /// <param name="bFullSource">If this param is true checks the end marker.</param>
+        /// <returns>The parsing result</returns>
         public abstract ParsingResult Parsing(TokenCell[] tokenCells);
     }
 }
