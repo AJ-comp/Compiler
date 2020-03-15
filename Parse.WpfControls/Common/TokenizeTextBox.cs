@@ -19,7 +19,7 @@ namespace Parse.WpfControls.Common
         private TokenizeImpactRanges recentTokenizeHistory;
 
         public SyntaxPairCollection syntaxPairs = new SyntaxPairCollection();
-        public IReadOnlyList<TokenCell> Tokens => tokens.AllTokens;
+        public IReadOnlyList<TokenCell> Tokens => tokens.TokensToView;
         public TokenizeImpactRanges RecentTokenizeHistory => recentTokenizeHistory;
 
 

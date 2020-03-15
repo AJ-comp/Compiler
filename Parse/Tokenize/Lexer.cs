@@ -174,7 +174,7 @@ namespace Parse.Tokenize
             while (true)
             {
                 impactRange = result.FindImpactRange(impactRange.StartIndex - 1, impactRange.EndIndex + 1);
-                var beforeTokens = result.AllTokens.Skip(impactRange.StartIndex).Take(impactRange.Count).ToList();
+                var beforeTokens = result.TokensToView.Skip(impactRange.StartIndex).Take(impactRange.Count).ToList();
                 var processedTokens = this.tokenizeTeam.Tokenize(this.tokenizeRule, result.GetMergeStringOfRange(new Range(impactRange.StartIndex, impactRange.Count)));
                 result.ReplaceToken(impactRange, processedTokens);
 
@@ -195,10 +195,10 @@ namespace Parse.Tokenize
         {
             TokenStorage result = new TokenStorage(this.tokenPatternList);
 
-            this.tokenizeTeam.Tokenize(this.tokenizeRule, data).ForEach(i => result.allTokens.Add(i));
+            this.tokenizeTeam.Tokenize(this.tokenizeRule, data).ForEach(i => result.tokensToView.Add(i));
             result.UpdateTableForAllPatterns();
 
-            if(result.allTokens.Count > 0)  this.ImpactRanges.CurRanges.Add(new Range(0, result.allTokens.Count));
+            if(result.tokensToView.Count > 0)  this.ImpactRanges.CurRanges.Add(new Range(0, result.tokensToView.Count));
 
             return result;
         }
@@ -214,7 +214,7 @@ namespace Parse.Tokenize
         {
             if (prevTokens == null) return this.Lexing(dataToAdd);
 
-            int offset = prevTokens.AllTokens.Count - 1;
+            int offset = prevTokens.TokensToView.Count - 1;
             return this.Lexing(prevTokens, offset, dataToAdd);
         }
 
@@ -229,7 +229,7 @@ namespace Parse.Tokenize
         public TokenStorage Lexing(TokenStorage prevTokens, int offset, string dataToAdd)
         {
             if (prevTokens == null) return this.Lexing(dataToAdd);
-            if (prevTokens.AllTokens.Count == 0) return this.Lexing(dataToAdd);
+            if (prevTokens.TokensToView.Count == 0) return this.Lexing(dataToAdd);
 
             TokenStorage result = prevTokens.Clone() as TokenStorage;
 
@@ -238,12 +238,12 @@ namespace Parse.Tokenize
 
             if(curTokenIndex == -1)
             {
-                TokenCell token = result.AllTokens[0];
-                result = this.TokenizeAfterReplace(result, 0, token.MergeString(offset, dataToAdd, recognitionWay));
+                TokenCell token = result.TokensToView[0];
+                result = this.TokenizeAfterReplace(result, 0, token.MergeString(offset, dataToAdd, RecognitionWay.Front));
             }
             else
             {
-                TokenCell token = result.AllTokens[curTokenIndex];
+                TokenCell token = result.TokensToView[curTokenIndex];
                 result = this.TokenizeAfterReplace(result, curTokenIndex, token.MergeString(offset, dataToAdd, recognitionWay));
             }
 

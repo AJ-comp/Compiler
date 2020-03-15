@@ -52,27 +52,6 @@ namespace Parse.FrontEnd.Parsers
         }
 
         /// <summary>
-        /// This function returns a Terminal by converting a TokenCell after filtering.
-        /// </summary>
-        /// <param name="tokenCell">The tokenCell to convert</param>
-        /// <param name="bEndIndex">This param means whether tokenCell is the last token.</param>
-        /// <returns>Returns Terminal type converted if tokenCell has to be parsed, else Returns null.</returns>
-        public static Terminal GetTargetTerminalFromTokenCell(TokenCell tokenCell, bool bEndIndex)
-        {
-            Terminal result = new Epsilon();
-            if (tokenCell.Data == new EndMarker().Value && bEndIndex) result = new EndMarker();
-            else
-            {
-                var typeData = tokenCell.PatternInfo.OptionData as Terminal;
-                if (typeData == null) result = new NotDefined();
-                else if (typeData.TokenType == TokenType.Delimiter || typeData.TokenType == TokenType.Comment) result = null;
-                else result = typeData;
-            }
-
-            return result;
-        }
-
-        /// <summary>
         /// This function creates a new snippet for parsing.
         /// </summary>
         /// <returns>The parser snippet that created.</returns>

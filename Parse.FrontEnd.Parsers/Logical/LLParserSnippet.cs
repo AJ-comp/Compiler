@@ -1,6 +1,7 @@
 ﻿using Parse.FrontEnd.Parsers.Datas;
 using Parse.FrontEnd.RegularGrammar;
 using Parse.Tokenize;
+using System.Collections.Generic;
 using System.Data;
 
 namespace Parse.FrontEnd.Parsers.Logical
@@ -11,7 +12,12 @@ namespace Parse.FrontEnd.Parsers.Logical
         {
         }
 
-        public override ParsingResult Parsing(TokenCell[] tokenCells)
+        public override ParsingResult Parsing(IReadOnlyList<TokenCell> tokenCells)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public override ParsingResult Parsing(IReadOnlyList<TokenCell> tokenCells, ParsingResult prevParsingInfo, TokenizeImpactRanges rangeToParse)
         {
             throw new System.NotImplementedException();
         }

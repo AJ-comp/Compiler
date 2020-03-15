@@ -1,11 +1,13 @@
 ﻿using Parse.FrontEnd.Grammars.MiniC;
 using Parse.FrontEnd.Parsers.Collections;
 using Parse.FrontEnd.Parsers.Datas;
+using Parse.FrontEnd.Parsers.Logical;
 using Parse.FrontEnd.Parsers.LR;
 using Parse.FrontEnd.RegularGrammar;
 using Parse.Tokenize;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using static Parse.FrontEnd.Parsers.Datas.LR.LRParsingRowDataFormat;
 
 namespace Parse.FrontEnd.Parsers.ErrorHandling.GrammarPrivate
@@ -42,21 +44,45 @@ namespace Parse.FrontEnd.Parsers.ErrorHandling.GrammarPrivate
 
                     if (terminal == grammar.If)
                         rowData.MatchedValueSet.Add(terminal, new Tuple<ActionDir, object>(ActionDir.failed, new ErrorHandler(ErrorHandler_IF, ixIndex)));
+                    else if(terminal == grammar.Ident)
+                        rowData.MatchedValueSet.Add(terminal, new Tuple<ActionDir, object>(ActionDir.failed, new ErrorHandler(ErrorHandler_Ident, ixIndex)));
                     else
                         rowData.MatchedValueSet.Add(terminal, new Tuple<ActionDir, object>(ActionDir.failed, new ErrorHandler(DefaultErrorHandler, ixIndex)));
                 }
             }
         }
 
-        private ErrorHandlingResult ErrorHandler_IF(int ixIndex, ParsingResult parsingResult, TokenCell[] tokens, int seeingTokenIndex)
+        private ErrorHandlingResult ErrorHandler_IF(int ixIndex, ParserSnippet snippet, ParsingResult parsingResult, IReadOnlyList<TokenData> tokens, int seeingTokenIndex)
         {
-            /// Here, someone has to error handling logic for ixIndex.
+            /// Here, someone has to add error handling logic for ixIndex.
             //            if (ixIndex == 0)
 
-            return this.DefaultErrorHandler(ixIndex, parsingResult, tokens, seeingTokenIndex);
+            return this.DefaultErrorHandler(ixIndex, snippet, parsingResult, tokens, seeingTokenIndex);
         }
 
-        private ErrorHandlingResult DefaultErrorHandler(int ixIndex, ParsingResult parsingResult, TokenCell[] tokens, int seeingTokenIndex)
+        private ErrorHandlingResult ErrorHandler_Ident(int ixIndex, ParserSnippet snippet, ParsingResult parsingResult, IReadOnlyList<TokenData> tokens, int seeingTokenIndex)
+        {
+            /// Here, someone has to add error handling logic for ixIndex.
+            if (ixIndex == 0)
+            {
+                var virtualToken = new TokenData(grammar.Int, new TokenCell(-1, grammar.Int.Value, null));
+                var param = new TokenData[] { virtualToken, tokens[seeingTokenIndex] };
+
+                LRParserSnippet lrSnippet = snippet as LRParserSnippet;
+                var blockParsingResult = lrSnippet.BlockParsing(param, parsingResult.Last());
+
+                if (blockParsingResult != LRParserSnippet.SuccessedKind.NotApplicable)
+                {
+                    return new ErrorHandlingResult(parsingResult, seeingTokenIndex + 1, true);
+                }
+                else
+                    return new ErrorHandlingResult(parsingResult, -1, false);
+            }
+            else
+                return this.DefaultErrorHandler(ixIndex, snippet, parsingResult, tokens, seeingTokenIndex);
+        }
+
+        private ErrorHandlingResult DefaultErrorHandler(int ixIndex, ParserSnippet snippet, ParsingResult parsingResult, IReadOnlyList<TokenData> tokens, int seeingTokenIndex)
         {
             var synchronizeTokens = new HashSet<Terminal>
             {
@@ -71,15 +97,15 @@ namespace Parse.FrontEnd.Parsers.ErrorHandling.GrammarPrivate
 
     public class ErrorHandler
     {
-        private Func<int, ParsingResult, TokenCell[], int, ErrorHandlingResult> handler;
+        private Func<int, ParserSnippet, ParsingResult, IReadOnlyList<TokenData>, int, ErrorHandlingResult> handler;
         private int param;
 
-        public ErrorHandler(Func<int, ParsingResult, TokenCell[], int, ErrorHandlingResult> handler, int param)
+        public ErrorHandler(Func<int, ParserSnippet, ParsingResult, IReadOnlyList<TokenData>, int, ErrorHandlingResult> handler, int param)
         {
             this.handler = handler;
             this.param = param;
         }
 
-        public ErrorHandlingResult Call(ParsingResult parsingResult, TokenCell[] tokens, int seeingTokenIndex) => handler(param, parsingResult, tokens, seeingTokenIndex);
+        public ErrorHandlingResult Call(ParserSnippet snippet, ParsingResult parsingResult, IReadOnlyList<TokenData> tokens, int seeingTokenIndex) => handler(param, snippet, parsingResult, tokens, seeingTokenIndex);
     }
 }

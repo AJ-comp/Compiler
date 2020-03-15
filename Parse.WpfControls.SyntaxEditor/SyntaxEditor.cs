@@ -18,6 +18,7 @@ namespace Parse.WpfControls.SyntaxEditor
     {
         private bool bReserveRegistKeywords = false;
         private AlarmCollection alarmList = new AlarmCollection();
+        private ParsingResult parsingResult = new ParsingResult();
 
         public ParserSnippet ParserSnippet
         {
@@ -280,7 +281,7 @@ namespace Parse.WpfControls.SyntaxEditor
         {
             this.alarmList.Clear();
 
-            var parsingResult = this.ParserSnippet.Parsing(this.TextArea.Tokens.ToArray());
+            this.parsingResult = this.ParserSnippet.Parsing(this.TextArea.Tokens.ToArray(), this.parsingResult, this.TextArea.RecentTokenizeHistory);
 
             if (parsingResult.Success)
             {

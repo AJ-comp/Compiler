@@ -61,8 +61,6 @@
     <Compile Include="Datas\ParseTree.cs" />
     <Compile Include="Datas\ParsingBlock.cs" />
     <Compile Include="Datas\LR\LRParsingRowDataFormat.cs" />
-    <Compile Include="Datas\LR\LRParsingSuccessResult.cs" />
-    <Compile Include="Datas\ParsingProcessResult.cs" />
     <Compile Include="Datas\ParsingRowDataFormat.cs" />
     <Compile Include="Datas\ParsingResult.cs" />
     <Compile Include="Datas\SymbolRowData.cs" />

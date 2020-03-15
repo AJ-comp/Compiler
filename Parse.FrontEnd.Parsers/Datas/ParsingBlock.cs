@@ -17,8 +17,7 @@ namespace Parse.FrontEnd.Parsers.Datas
     public class ParsingBlock
     {
         internal List<ParsingUnit> units = new List<ParsingUnit>();
-
-        public TokenCell Token { get; } = null;
+        public TokenData Token { get; } = null;
         public IReadOnlyList<ParsingUnit> Units => this.units;
         public IReadOnlyList<ParsingUnit> ErrorUnits
         {
@@ -38,18 +37,51 @@ namespace Parse.FrontEnd.Parsers.Datas
             }
         }
 
-        public ParsingBlock(ParsingUnit parsingUnit, TokenCell token)
+        public ParsingBlock(TokenData token)
         {
-            this.units.Add(parsingUnit);
-            Token = token;
+            this.Token = token;
         }
 
         /// <summary>
-        /// This function add a new parsing item on current parsing block.
+        /// This constructor creates instance has parsingUnit and token.
         /// </summary>
-        public void AddParsingItem()
+        /// <param name="parsingUnit"></param>
+        /// <param name="token"></param>
+        public ParsingBlock(ParsingUnit parsingUnit, TokenData token) : this(token)
         {
-            this.units.Add(new ParsingUnit(this.Units.Last().AfterStack));
+            this.units.Add(parsingUnit);
+        }
+
+        public ParsingBlock(IEnumerable<ParsingUnit> parsingUnits, TokenData token) : this(token)
+        {
+            this.units = new List<ParsingUnit>(parsingUnits);
+        }
+
+        /// <summary>
+        /// This function returns the value after adding a new parsing item on the current parsing block.
+        /// </summary>
+        public ParsingUnit AddParsingItem()
+        {
+            if (this.units.Count == 0) this.units.Add(ParsingUnit.FirstParsingUnit);
+            else this.units.Add(new ParsingUnit(this.Units.Last().AfterStack));
+
+            return this.units.Last();
+        }
+
+        /// <summary>
+        /// This function creates ParsingBlock that has ParsingUnit that next to prevParsingUnit.
+        /// </summary>
+        /// <param name="prevParsingUnit"></param>
+        /// <param name="token"></param>
+        /// <returns></returns>
+        public static ParsingBlock CreateNextParsingBlock(ParsingUnit prevParsingUnit, TokenData token)
+        {
+            var result = new ParsingBlock(token);
+
+            ParsingUnit unitToAdd = (prevParsingUnit == null) ? ParsingUnit.FirstParsingUnit : new ParsingUnit(prevParsingUnit.AfterStack);
+            result.units.Add(unitToAdd);
+
+            return result;
         }
 
         public override string ToString() => string.Format("TokenCell : {0}, Unit count : {1}", this.Token, this.units.Count);
@@ -74,22 +106,24 @@ namespace Parse.FrontEnd.Parsers.Datas
         public ErrorPosition ErrorPosition { get; private set; } = ErrorPosition.OnNormalToken;
 
         /// <summary>
-        /// This constructor creates with initial stack state.
+        /// This property creates a ParsingUnit instance with initial stack state.
         /// </summary>
-        public ParsingUnit()
+        public static ParsingUnit FirstParsingUnit
         {
-            BeforeStack.Push(0);
+            get
+            {
+                var result = new ParsingUnit();
+                result.BeforeStack.Push(0);
+
+                return result;
+            }
         }
+
+        public ParsingUnit() { }
 
         public ParsingUnit(Stack<object> beforeStack)
         {
             BeforeStack = beforeStack;
-        }
-
-        public ParsingUnit(Stack<object> beforeStack, Stack<object> afterStack)
-        {
-            BeforeStack = beforeStack;
-            AfterStack = afterStack;
         }
 
         /// <summary>
@@ -125,6 +159,11 @@ namespace Parse.FrontEnd.Parsers.Datas
             this.ErrorMessage = string.Empty;
         }
 
-        public override string ToString() => string.Format("{0}, {1}",InputValue.Input, Action.ToString());
+        public override string ToString()
+        {
+            var inputString = (InputValue == null) ? "null" : this.InputValue.Input;
+
+            return string.Format("BeforeStack count : {0}, AfterStack count : {1}, InputValue : {2}, Action : {3}", BeforeStack.Count, AfterStack.Count, inputString, Action.ToString());
+        }
     }
 }

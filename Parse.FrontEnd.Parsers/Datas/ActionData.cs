@@ -15,6 +15,11 @@ namespace Parse.FrontEnd.Parsers.Datas
             this.Dest = actionDest;
         }
 
-        public override string ToString() => string.Format("{0} {1}", Direction.ToString(), Dest.ToString());
+        public override string ToString()
+        {
+            var destString = (Dest == null) ? "null" : Dest.ToString();
+
+            return string.Format("{0} {1}", Direction.ToString(), destString);
+        }
     }
 }

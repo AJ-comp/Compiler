@@ -7,24 +7,32 @@ namespace Parse.Tokenize
 {
     public class TokenStorage : ICloneable
     {
-        private Dictionary<TokenPatternInfo, List<int>> tableForAllPatterns = new Dictionary<TokenPatternInfo, List<int>>();
+        private Dictionary<TokenPatternInfo, List<int>> tableForAllPatternsOnParsing = new Dictionary<TokenPatternInfo, List<int>>();
+        private Dictionary<TokenPatternInfo, List<int>> tableForAllPatternsOnView = new Dictionary<TokenPatternInfo, List<int>>();
 
-        internal List<TokenCell> allTokens = new List<TokenCell>();
+        internal List<TokenCell> tokensToParsing = new List<TokenCell>();
+        internal List<TokenCell> tokensToView = new List<TokenCell>();
 
-        public IReadOnlyList<TokenCell> AllTokens => allTokens;
+        /// <summary> The tokens to parsing (This doesn't include like delimiter(ex " ", "\t", "\r", "\n") and comment tokens) </summary>
+        public IReadOnlyList<TokenCell> TokensToParsing => tokensToParsing;
+        /// <summary> The tokens to view (This include all tokens) </summary>
+        public IReadOnlyList<TokenCell> TokensToView => tokensToView;
+
         /// <summary> This property returns a whole table has columns that have positions for each TokenPatternInfo. </summary>
-        public Dictionary<TokenPatternInfo, List<int>> TableForAllPatterns => this.tableForAllPatterns;
+        public Dictionary<TokenPatternInfo, List<int>> TableForAllPatternsOnParsing => this.TableForAllPatternsOnParsing;
+        public Dictionary<TokenPatternInfo, List<int>> TableForAllPatternsOnView => this.tableForAllPatternsOnView;
+
 
         internal void UpdateTableForAllPatterns()
         {
-            foreach (KeyValuePair<TokenPatternInfo, List<int>> item in this.tableForAllPatterns) item.Value.Clear();
+            foreach (KeyValuePair<TokenPatternInfo, List<int>> item in this.tableForAllPatternsOnView) item.Value.Clear();
 
-            Parallel.For(0, this.allTokens.Count, i =>
+            Parallel.For(0, this.tokensToView.Count, i =>
             {
-                var token = this.allTokens[i];
+                var token = this.tokensToView[i];
 
-                lock (this.tableForAllPatterns[token.PatternInfo])
-                    this.tableForAllPatterns[token.PatternInfo].Add(i);
+                lock (this.tableForAllPatternsOnView[token.PatternInfo])
+                    this.tableForAllPatternsOnView[token.PatternInfo].Add(i);
             });
         }
 
@@ -34,14 +42,14 @@ namespace Parse.Tokenize
         /// <param name="tokenPatternList">The value of the token pattern list to initialize.</param>
         internal void InitTokenTable(IReadOnlyList<TokenPatternInfo> tokenPatternList)
         {
-            this.tableForAllPatterns.Clear();
+            this.tableForAllPatternsOnView.Clear();
 
             foreach(var item in tokenPatternList)
             {
-                this.tableForAllPatterns.Add(item, new List<int>());
+                this.tableForAllPatternsOnView.Add(item, new List<int>());
             }
 
-            this.tableForAllPatterns.Add(TokenPatternInfo.NotDefinedToken, new List<int>());
+            this.tableForAllPatternsOnView.Add(TokenPatternInfo.NotDefinedToken, new List<int>());
         }
 
         private TokenStorage() { }
@@ -58,7 +66,7 @@ namespace Parse.Tokenize
         /// <returns></returns>
         public List<int> GetIndexesForSpecialPattern(TokenPatternInfo pattern)
         {
-            var table = this.TableForAllPatterns;
+            var table = this.TableForAllPatternsOnView;
             List<int> result = new List<int>();
 
             if (table.ContainsKey(pattern))
@@ -70,7 +78,7 @@ namespace Parse.Tokenize
 
         public KeyValuePair<TokenPatternInfo, List<int>> GetTokenPatternInfoFromString(string pattern)
         {
-            var table = this.TableForAllPatterns;
+            var table = this.TableForAllPatternsOnView;
             KeyValuePair<TokenPatternInfo, List<int>> result = new KeyValuePair<TokenPatternInfo, List<int>>();
 
             foreach (KeyValuePair<TokenPatternInfo, List<int>> items in table)
@@ -98,7 +106,7 @@ namespace Parse.Tokenize
 
         public List<int> GetIndexesForSpecialPattern(params string[] patterns)
         {
-            var table = this.TableForAllPatterns;
+            var table = this.TableForAllPatternsOnView;
             List<int> result = new List<int>();
 
             foreach (KeyValuePair<TokenPatternInfo, List<int>> items in table)
@@ -194,7 +202,7 @@ namespace Parse.Tokenize
                 var startIndexToRemove = rangeInfo.PartSelectionBag[index].Item2;
                 var removeLength = rangeInfo.PartSelectionBag[index].Item3;
 
-                result = this.AllTokens[tokenIndex].Data.Remove(startIndexToRemove, removeLength);
+                result = this.TokensToView[tokenIndex].Data.Remove(startIndexToRemove, removeLength);
             }
 
             return result;
@@ -211,9 +219,9 @@ namespace Parse.Tokenize
         {
             int index = -1;
 
-            Parallel.For(0, this.allTokens.Count, (i, loopState) =>
+            Parallel.For(0, this.tokensToView.Count, (i, loopState) =>
             {
-                TokenCell tokenInfo = this.allTokens[i];
+                TokenCell tokenInfo = this.tokensToView[i];
 
                 if (tokenInfo.Contains(offset, recognWay))
                 {
@@ -257,7 +265,7 @@ namespace Parse.Tokenize
 
             // Except PerfactDelimiter
             fromIndex = (fromIndex == -1) ? 0 : fromIndex - 1;
-            toIndex = (toIndex == -1) ? this.allTokens.Count - 1 : toIndex + 1;
+            toIndex = (toIndex == -1) ? this.tokensToView.Count - 1 : toIndex + 1;
 
             return new Range(fromIndex, toIndex - fromIndex + 1);
         }
@@ -272,7 +280,7 @@ namespace Parse.Tokenize
             string result = string.Empty;
 
             for (int i = range.StartIndex; i <= range.EndIndex; i++)
-                result += this.allTokens[i].Data;
+                result += this.tokensToView[i].Data;
 
             return result;
         }
@@ -288,10 +296,10 @@ namespace Parse.Tokenize
             foreach (var item in replaceTokenList) addLength += item.Data.Length;
 
             for (int i = range.StartIndex; i <= range.EndIndex; i++)
-                addLength = addLength - this.allTokens[i].Data.Length;
+                addLength = addLength - this.tokensToView[i].Data.Length;
 
-            int contentIndex = (range.StartIndex == 0) ? 0 : this.allTokens[range.StartIndex].StartIndex;
-            this.allTokens.RemoveRange(range.StartIndex, range.Count);
+            int contentIndex = (range.StartIndex == 0) ? 0 : this.tokensToView[range.StartIndex].StartIndex;
+            this.tokensToView.RemoveRange(range.StartIndex, range.Count);
 
             int startIndex = range.StartIndex;
             replaceTokenList.ForEach(i =>
@@ -299,7 +307,7 @@ namespace Parse.Tokenize
                 i.StartIndex = contentIndex;
                 contentIndex = i.EndIndex + 1;
 
-                this.allTokens.Insert(startIndex++, i);
+                this.tokensToView.Insert(startIndex++, i);
             });
 
             Parallel.Invoke(
@@ -309,9 +317,9 @@ namespace Parse.Tokenize
                 },
                 () =>
                 {
-                    Parallel.For(startIndex, this.allTokens.Count, i =>
+                    Parallel.For(startIndex, this.tokensToView.Count, i =>
                     {
-                        this.allTokens[i].StartIndex += addLength;
+                        this.tokensToView[i].StartIndex += addLength;
                     });
                 });
         }
@@ -323,11 +331,12 @@ namespace Parse.Tokenize
             Parallel.Invoke(
                 () =>
                 {
-                    result.allTokens = new List<TokenCell>(this.allTokens);
+                    result.tokensToView = new List<TokenCell>(this.tokensToView);
+                    result.tokensToParsing = new List<TokenCell>(this.tokensToParsing);
                 },
                 () =>
                 {
-                    result.tableForAllPatterns = new Dictionary<TokenPatternInfo, List<int>>(this.tableForAllPatterns);
+                    result.tableForAllPatternsOnView = new Dictionary<TokenPatternInfo, List<int>>(this.tableForAllPatternsOnView);
                 });
 
             return result;

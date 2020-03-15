@@ -219,12 +219,12 @@ namespace Parse
         }
 
         public void CopyTo(Range[] array, int arrayIndex) => this.ranges.CopyTo(array, arrayIndex);
-        public IEnumerator<Range> GetEnumerator() => this.GetEnumerator();
+        public IEnumerator<Range> GetEnumerator() => ((IList<Range>)ranges).GetEnumerator();
         public int IndexOf(Range item) => this.IndexOf(item);
         public void Insert(int index, Range item) => this.Insert(index, item);
         public bool Remove(Range item) => this.Remove(item);
         public void RemoveAt(int index) => this.RemoveAt(index);
-        IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
+        IEnumerator IEnumerable.GetEnumerator() => ((IList<Range>)ranges).GetEnumerator();
 
         public bool IsInclude(Range range)
         {
