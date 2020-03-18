@@ -1,4 +1,5 @@
 ﻿using Parse.Utilities;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -92,6 +93,13 @@ namespace Parse
             hashCode = hashCode * -1521134295 + StartIndex.GetHashCode();
             hashCode = hashCode * -1521134295 + Count.GetHashCode();
             return hashCode;
+        }
+    }
+
+    public class RangePair : Tuple<Range, Range>
+    {
+        public RangePair(Range item1, Range item2) : base(item1, item2)
+        {
         }
     }
 

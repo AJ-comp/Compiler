@@ -52,37 +52,44 @@ namespace Parse.FrontEnd.Parsers.ErrorHandling.GrammarPrivate
             }
         }
 
-        private ErrorHandlingResult ErrorHandler_IF(int ixIndex, ParserSnippet snippet, ParsingResult parsingResult, IReadOnlyList<TokenData> tokens, int seeingTokenIndex)
+        private ErrorHandlingResult ErrorHandler_IF(int ixIndex, ParserSnippet snippet, ParsingResult parsingResult, int seeingTokenIndex)
         {
             /// Here, someone has to add error handling logic for ixIndex.
             //            if (ixIndex == 0)
 
-            return this.DefaultErrorHandler(ixIndex, snippet, parsingResult, tokens, seeingTokenIndex);
+            return this.DefaultErrorHandler(ixIndex, snippet, parsingResult, seeingTokenIndex);
         }
 
-        private ErrorHandlingResult ErrorHandler_Ident(int ixIndex, ParserSnippet snippet, ParsingResult parsingResult, IReadOnlyList<TokenData> tokens, int seeingTokenIndex)
+        private ErrorHandlingResult ErrorHandler_Ident(int ixIndex, ParserSnippet snippet, ParsingResult parsingResult, int seeingTokenIndex)
         {
             /// Here, someone has to add error handling logic for ixIndex.
             if (ixIndex == 0)
             {
+                // insert temporary type keyword (ex : int) because the type keyword is omitted.
                 var virtualToken = new TokenData(grammar.Int, new TokenCell(-1, grammar.Int.Value, null));
-                var param = new TokenData[] { virtualToken, tokens[seeingTokenIndex] };
+                var token = parsingResult[seeingTokenIndex].Token;
+                List<TokenData> param = new List<TokenData>() { virtualToken, token };
 
                 LRParserSnippet lrSnippet = snippet as LRParserSnippet;
-                var blockParsingResult = lrSnippet.BlockParsing(param, parsingResult.Last());
+                var blockParsingResult = lrSnippet.BlockParsing(parsingResult[seeingTokenIndex], param);
 
-                if (blockParsingResult != LRParserSnippet.SuccessedKind.NotApplicable)
-                {
-                    return new ErrorHandlingResult(parsingResult, seeingTokenIndex + 1, true);
-                }
-                else
-                    return new ErrorHandlingResult(parsingResult, -1, false);
+                return (blockParsingResult == LRParserSnippet.SuccessedKind.NotApplicable) ?
+                    new ErrorHandlingResult(parsingResult, -1, false) : new ErrorHandlingResult(parsingResult, seeingTokenIndex + 1, true);
+            }
+            else if(ixIndex == 19)
+            {
+                // skip current token because of this token is useless.
+                var prevBlockLastParsingUnit = parsingResult[seeingTokenIndex - 1].Units.Last();
+                var currentBlock = parsingResult[seeingTokenIndex];
+                currentBlock.units.Add(new ParsingUnit(prevBlockLastParsingUnit.AfterStack, prevBlockLastParsingUnit.AfterStack, currentBlock.Token));
+
+                return new ErrorHandlingResult(parsingResult, seeingTokenIndex + 1, true);
             }
             else
-                return this.DefaultErrorHandler(ixIndex, snippet, parsingResult, tokens, seeingTokenIndex);
+                return this.DefaultErrorHandler(ixIndex, snippet, parsingResult, seeingTokenIndex);
         }
 
-        private ErrorHandlingResult DefaultErrorHandler(int ixIndex, ParserSnippet snippet, ParsingResult parsingResult, IReadOnlyList<TokenData> tokens, int seeingTokenIndex)
+        private ErrorHandlingResult DefaultErrorHandler(int ixIndex, ParserSnippet snippet, ParsingResult parsingResult, int seeingTokenIndex)
         {
             var synchronizeTokens = new HashSet<Terminal>
             {
@@ -91,21 +98,21 @@ namespace Parse.FrontEnd.Parsers.ErrorHandling.GrammarPrivate
                 new EndMarker()
             };
 
-            return PanicMode.LRProcess(parsingTable, parsingResult, tokens, seeingTokenIndex, synchronizeTokens);
+            return PanicMode.LRProcess(snippet as LRParserSnippet, parsingTable, parsingResult, seeingTokenIndex, synchronizeTokens);
         }
     }
 
     public class ErrorHandler
     {
-        private Func<int, ParserSnippet, ParsingResult, IReadOnlyList<TokenData>, int, ErrorHandlingResult> handler;
+        private Func<int, ParserSnippet, ParsingResult, int, ErrorHandlingResult> handler;
         private int param;
 
-        public ErrorHandler(Func<int, ParserSnippet, ParsingResult, IReadOnlyList<TokenData>, int, ErrorHandlingResult> handler, int param)
+        public ErrorHandler(Func<int, ParserSnippet, ParsingResult, int, ErrorHandlingResult> handler, int param)
         {
             this.handler = handler;
             this.param = param;
         }
 
-        public ErrorHandlingResult Call(ParserSnippet snippet, ParsingResult parsingResult, IReadOnlyList<TokenData> tokens, int seeingTokenIndex) => handler(param, snippet, parsingResult, tokens, seeingTokenIndex);
+        public ErrorHandlingResult Call(ParserSnippet snippet, ParsingResult parsingResult, int seeingTokenIndex) => handler(param, snippet, parsingResult, seeingTokenIndex);
     }
 }

@@ -281,9 +281,20 @@ namespace Parse.WpfControls.SyntaxEditor
         {
             this.alarmList.Clear();
 
-            this.parsingResult = this.ParserSnippet.Parsing(this.TextArea.Tokens.ToArray(), this.parsingResult, this.TextArea.RecentTokenizeHistory);
+            if(this.parsingResult.Success)  // if prev parsing successed.
+            {
+                // partial parsing
+                var tokens = ParserSnippet.ToTokenDataList(this.TextArea.Tokens.ToArray());
+                this.parsingResult = this.ParserSnippet.Parsing(tokens, this.parsingResult, this.TextArea.RecentTokenizeHistory);
+            }
+            else
+            {
+                // whole parsing
+                var tokens = ParserSnippet.ToTokenDataList(this.TextArea.Tokens.ToArray());
+                this.parsingResult = this.ParserSnippet.Parsing(tokens);
+            }
 
-            if (parsingResult.Success)
+            if (parsingResult.HasError == false)
             {
                 this.alarmList.Add(new AlarmEventArgs(string.Empty, this.FileName));
             }

@@ -12,12 +12,12 @@ namespace Parse.FrontEnd.Parsers.Logical
         {
         }
 
-        public override ParsingResult Parsing(IReadOnlyList<TokenCell> tokenCells)
+        public override ParsingResult Parsing(IReadOnlyList<TokenData> tokens)
         {
             throw new System.NotImplementedException();
         }
 
-        public override ParsingResult Parsing(IReadOnlyList<TokenCell> tokenCells, ParsingResult prevParsingInfo, TokenizeImpactRanges rangeToParse)
+        public override ParsingResult Parsing(IReadOnlyList<TokenData> tokens, ParsingResult prevParsingInfo, TokenizeImpactRanges rangeToParse)
         {
             throw new System.NotImplementedException();
         }

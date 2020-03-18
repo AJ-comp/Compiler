@@ -166,8 +166,7 @@ namespace Parse.Tokenize
             // But the logic is not written yet.
             var tokenList = this.tokenizeTeam.Tokenize(this.tokenizeRule, mergeString);
             result.ReplaceToken(impactRange, tokenList);
-            this.ImpactRanges.PrevRanges.Add(impactRange);
-            this.ImpactRanges.CurRanges.Add(new Range(impactRange.StartIndex, tokenList.Count));
+            this.ImpactRanges.Add(new RangePair(impactRange, new Range(impactRange.StartIndex, tokenList.Count)));
 
             /// ex : void main()\r\n{}\r\n -> void main(//)\r\n{}\r\n
             ///       process 1 : "void", " ", "main", "(", "//)", "\r", "\n"
@@ -179,8 +178,7 @@ namespace Parse.Tokenize
                 result.ReplaceToken(impactRange, processedTokens);
 
                 if (beforeTokens.IsEqual(processedTokens)) break;
-                this.ImpactRanges.PrevRanges.Add(impactRange);
-                this.ImpactRanges.CurRanges.Add(new Range(impactRange.StartIndex, processedTokens.Count));
+                this.ImpactRanges.Add(new RangePair(impactRange, new Range(impactRange.StartIndex, processedTokens.Count)));
             }
 
             return result;
@@ -198,7 +196,7 @@ namespace Parse.Tokenize
             this.tokenizeTeam.Tokenize(this.tokenizeRule, data).ForEach(i => result.tokensToView.Add(i));
             result.UpdateTableForAllPatterns();
 
-            if(result.tokensToView.Count > 0)  this.ImpactRanges.CurRanges.Add(new Range(0, result.tokensToView.Count));
+            if(result.tokensToView.Count > 0)  this.ImpactRanges.Add(new RangePair(new Range(-1, 0), new Range(0, result.tokensToView.Count)));
 
             return result;
         }
@@ -289,8 +287,7 @@ namespace Parse.Tokenize
 
             var toInsertTokens = this.tokenizeTeam.Tokenize(this.tokenizeRule, mergeString);
             result.ReplaceToken(impactRange, toInsertTokens);
-            this.ImpactRanges.PrevRanges.Add(impactRange);
-            this.ImpactRanges.CurRanges.Add(new Range(impactRange.StartIndex, toInsertTokens.Count));
+            this.ImpactRanges.Add(new RangePair(impactRange, new Range(impactRange.StartIndex, toInsertTokens.Count)));
             ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
             return result;

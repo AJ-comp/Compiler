@@ -63,6 +63,7 @@
     <Compile Include="Datas\LR\LRParsingRowDataFormat.cs" />
     <Compile Include="Datas\ParsingRowDataFormat.cs" />
     <Compile Include="Datas\ParsingResult.cs" />
+    <Compile Include="Datas\ParsingUnit.cs" />
     <Compile Include="Datas\SymbolRowData.cs" />
     <Compile Include="ErrorHandling\ErrorHandlingResult.cs" />
     <Compile Include="ErrorHandling\GrammarPrivate\MiniC_LRErrorHandler.cs" />

@@ -3,6 +3,7 @@ using Parse.FrontEnd.RegularGrammar;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Linq;
 using System.Threading.Tasks;
 using static Parse.FrontEnd.Parsers.Datas.LR.LRParsingRowDataFormat;
 
@@ -19,13 +20,26 @@ namespace Parse.FrontEnd.Parsers.Datas
         {
             get
             {
-                bool result = true;
+                if (this.Count == 0) return false;
+
+                var lastUnit = this.Last().Units.Last();
+                if (lastUnit == null) return false;
+
+                return (lastUnit.Action.Direction == ActionDir.accept) ? true : false;
+            }
+        }
+
+        public bool HasError
+        {
+            get
+            {
+                bool result = false;
 
                 Parallel.ForEach(this, (block, loopOption) =>
                 {
                     if (block.ErrorUnits.Count > 0)
                     {
-                        result = false;
+                        result = true;
                         loopOption.Stop();
                     }
                 });
@@ -49,8 +63,8 @@ namespace Parse.FrontEnd.Parsers.Datas
                 {
                     foreach(var record in block.Units)
                     {
-                        // InputValue value is null means that a token is not target to parsing. (ex : " ", "\r", "\n", etc)
-                        if (record.InputValue == null) continue;
+                        // InputValue value is null or InputValue.Kind is null means that a token is not target to parsing. (ex : " ", "\r", "\n", etc)
+                        if (record.InputValue == null || record.InputValue.Kind == null) continue;
 
                         var param1 = Convert.ToString(record.BeforeStack.Reverse(), " ");
                         var param2 = record.InputValue.ToString();
@@ -110,6 +124,9 @@ namespace Parse.FrontEnd.Parsers.Datas
             for (int i = 0; i < datas.Length; i++) row[i] = datas[i];
             table.Rows.Add(row);
         }
+
+        public ParsingResult() { }
+        public ParsingResult(IEnumerable<ParsingBlock> parsingBlocks) => this.AddRange(parsingBlocks);
 
 
         /*  LLParsing Tree

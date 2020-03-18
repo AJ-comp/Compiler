@@ -1,5 +1,6 @@
 ﻿using Parse.FrontEnd.Parsers.Collections;
 using Parse.FrontEnd.Parsers.Datas;
+using Parse.FrontEnd.Parsers.Logical;
 using Parse.FrontEnd.Parsers.Properties;
 using Parse.FrontEnd.RegularGrammar;
 using System;
@@ -58,30 +59,29 @@ namespace Parse.FrontEnd.Parsers.ErrorHandling
             return result;
         }
 
-        private static int AdjustToken(ParsingResult parsingResult, IReadOnlyList<TokenData> tokens, int seeingTokenIndex, HashSet<Terminal> synchronizeTokens)
+        private static int AdjustToken(ParsingResult parsingResult, int seeingTokenIndex, HashSet<Terminal> synchronizeTokens)
         {
-            ParsingUnit lastParsingUnit = parsingResult.Last().Units.Last();
-
-            while (seeingTokenIndex < tokens.Count - 1)
+            while (seeingTokenIndex < parsingResult.Count - 1)
             {
                 //                var ixMetrix = parsingTable[curStatus];
-                TokenData curToken = tokens[++seeingTokenIndex];
+
+                ParsingBlock curBlock = parsingResult[seeingTokenIndex];
+                ParsingUnit curBlockLastUnit = curBlock.Units.Last();
+                TokenData curToken = curBlock.Token;
 
                 // create a new unit
-                ParsingUnit newParsingUnit = new ParsingUnit(lastParsingUnit.AfterStack);
+                ParsingUnit newParsingUnit = new ParsingUnit(curBlockLastUnit.AfterStack);
                 newParsingUnit.InputValue = curToken;
                 newParsingUnit.CopyBeforeStackToAfterStack();   // stack sync because to throw away token.
 
-                // create a new block
-                ParsingBlock lastParsingBlock = new ParsingBlock(newParsingUnit, curToken);
-                parsingResult.Add(lastParsingBlock);
-
-                lastParsingUnit = newParsingUnit;
-                lastParsingUnit.ChangeToFailedState(Resource.RecoverWithPanicMode);
+                curBlockLastUnit = newParsingUnit;
+                curBlockLastUnit.ChangeToFailedState(Resource.RecoverWithPanicMode);
 
                 // check
-                var targetTerminal = lastParsingBlock.Token.Kind;
+                var targetTerminal = curToken.Kind;
                 if (targetTerminal != null && synchronizeTokens.Contains(targetTerminal)) break;
+
+                seeingTokenIndex++;
 
                 //                if (ixMetrix.PossibleTerminalSet.Contains(curToken.Data)) break;
                 //                else lastParsingUnit.ChangeToFailedState(Resource.RecoverWithPanicMode);
@@ -99,33 +99,37 @@ namespace Parse.FrontEnd.Parsers.ErrorHandling
         /// <param name="seeingTokenIndex"></param>
         /// <param name="synchronizeTokens">The token set to process</param>
         /// <returns></returns>
-        public static ErrorHandlingResult LRProcess(LRParsingTable parsingTable, ParsingResult parsingResult, IReadOnlyList<TokenData> tokens, int seeingTokenIndex, HashSet<Terminal> synchronizeTokens)
+        public static ErrorHandlingResult LRProcess(LRParserSnippet snippet, LRParsingTable parsingTable, ParsingResult parsingResult, int seeingTokenIndex, HashSet<Terminal> synchronizeTokens)
         {
             ErrorHandlingResult result = new ErrorHandlingResult(parsingResult, seeingTokenIndex, false);
 
             try
             {
                 if (synchronizeTokens.Count == 0) return result;
-                var tokenData = tokens[seeingTokenIndex];
+                var tokenData = parsingResult[seeingTokenIndex].Token;
                 var targetTerminal = tokenData.Kind;
 
                 // if the terminal of the seeing token is not a synchronizeTokens kind then skip token until to see a synchronizeTokens kind.
                 if (synchronizeTokens.Contains(targetTerminal) == false)
                 {
-                    seeingTokenIndex = PanicMode.AdjustToken(parsingResult, tokens, seeingTokenIndex, synchronizeTokens);
-                    tokenData = tokens[seeingTokenIndex];
+                    seeingTokenIndex = PanicMode.AdjustToken(parsingResult, seeingTokenIndex, synchronizeTokens);
+                    tokenData = parsingResult[seeingTokenIndex].Token;
                     targetTerminal = tokenData.Kind;
                 }
 
                 // add a new parsing unit and initialize
-                ParsingUnit lastParsingUnit = parsingResult.Last().AddParsingItem();
-                lastParsingUnit.InputValue = tokenData;
-                lastParsingUnit.CopyBeforeStackToAfterStack();
-                lastParsingUnit.ChangeToFailedState(Resource.RecoverWithPanicMode);
+                ParsingUnit seeingParsingUnit = parsingResult[seeingTokenIndex].AddParsingItem();
+                seeingParsingUnit.InputValue = tokenData;
+                seeingParsingUnit.CopyBeforeStackToAfterStack();
+                seeingParsingUnit.ChangeToFailedState(Resource.RecoverWithPanicMode);
 
                 // find a matrix index that can process a modified token.
-                var processStack = new Stack<object>(parsingResult.Last().Units.Last().AfterStack.Reverse());
-                if (AdjustStack(parsingTable, processStack, targetTerminal)) parsingResult.Last().Units.Last().AfterStack = processStack;
+                var processStack = new Stack<object>(seeingParsingUnit.AfterStack.Reverse());
+                if (AdjustStack(parsingTable, processStack, targetTerminal))
+                {
+                    seeingParsingUnit.AfterStack = processStack;
+                    snippet.BlockParsing(parsingResult[seeingTokenIndex]);
+                }
                 else return result;
 
                 return new ErrorHandlingResult(parsingResult, seeingTokenIndex, true);

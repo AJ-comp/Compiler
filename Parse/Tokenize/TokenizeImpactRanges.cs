@@ -1,19 +1,15 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace Parse.Tokenize
 {
-    public class TokenizeImpactRanges
+    public class TokenizeImpactRanges : List<RangePair>
     {
-        public RangeList PrevRanges { get; } = new RangeList();
-        public RangeList CurRanges { get; } = new RangeList();
+        /// PrevRange : CurRange
+        /// The following property pair means PrevRange : CurRange
+        /// Therefore the start index of PrevRange equals the start index of CurRagne.
 
-
-        public void Clear()
-        {
-            this.PrevRanges.Clear();
-            this.CurRanges.Clear();
-        }
         /*
         public void Add(IReadOnlyList<TokenCell> allTokens, Range rangeToSee, IReadOnlyList<TokenCell> tokensToReplace)
         {

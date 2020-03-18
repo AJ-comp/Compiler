@@ -1,5 +1,6 @@
 ﻿using Parse.FrontEnd.RegularGrammar;
 using Parse.Tokenize;
+using System.Collections.Generic;
 
 namespace Parse.FrontEnd
 {
@@ -32,5 +33,16 @@ namespace Parse.FrontEnd
         }
 
         public override string ToString() => this.Input;
+
+        public override bool Equals(object obj)
+        {
+            return obj is TokenData data &&
+                   EqualityComparer<Terminal>.Default.Equals(Kind, data.Kind);
+        }
+
+        public override int GetHashCode()
+        {
+            return -2026186021 + EqualityComparer<Terminal>.Default.GetHashCode(Kind);
+        }
     }
 }

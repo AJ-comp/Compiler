@@ -194,15 +194,15 @@ namespace Parse.FrontEnd.Parsers.Logical
         /// <param name="tokens">The whole tokens, this needs to recover an error.</param>
         /// <param name="curTokenIndex">The token index seeing current</param>
         /// <returns>Returns ErrorHandlingResult if an error was recovered (this means that it can parse continue) else returns null.</returns>
-        private ErrorHandlingResult ParsingFailedProcess(ParsingResult parsingResult, IReadOnlyList<TokenData> tokens, int curTokenIndex)
+        private ErrorHandlingResult ParsingFailedProcess(ParsingResult parsingResult, int curTokenIndex)
         {
             ErrorHandlingResult result = null;
-            ParsingUnit lastParsingUnit = parsingResult.Last().Units.Last();
+            ParsingUnit lastParsingUnit = parsingResult[curTokenIndex].Units.Last();
 
             this.ActionFailed?.Invoke(this, lastParsingUnit);
 
             if (lastParsingUnit.ErrorHandler != null)
-                result = lastParsingUnit.ErrorHandler.Call(this, parsingResult, tokens.ToArray(), curTokenIndex);
+                result = lastParsingUnit.ErrorHandler.Call(this, parsingResult, curTokenIndex);
 
             return result;
         }
@@ -215,59 +215,120 @@ namespace Parse.FrontEnd.Parsers.Logical
         /// <param name="tokens"></param>
         /// <param name="bErrorRecover"></param>
         /// <param name="index"></param>
-        /// <returns>Return true if a token that must to parse does not exist (Completed, Failed (Error is not Handling)), else Return false.</returns>
-        private bool PostProcessing(SuccessedKind successedType, ParsingResult parsingResult, IReadOnlyList<TokenData> tokens, bool bErrorRecover, ref int index)
+        /// <returns>Return true if a token that must to parse does not exist (Completed), else Return false.</returns>
+        /// <exception cref="">If error handling failed then throw exception.</exception>
+        private bool PostProcessing(SuccessedKind successedType, ParsingResult parsingResult, bool bErrorRecover, ref int index)
         {
             bool result = false;
 
+            // ReduceOrGoto state can't arrive in this function because it is processed in 'BlockParsing' function.
+            // Therefore this function doesn't process ReduceOrGoto state.
             if (successedType == SuccessedKind.Completed) result = true;
-            else if (successedType == SuccessedKind.ReduceOrGoto) index--;
             else if (successedType == SuccessedKind.Shift) { }
             else if (bErrorRecover)
             {
-                var errorRecoverInfo = this.ParsingFailedProcess(parsingResult, tokens, index);
-                if (errorRecoverInfo == null) result = true;
-                else if (errorRecoverInfo.SuccessRecover == false) result = true;
+                var errorRecoverInfo = this.ParsingFailedProcess(parsingResult, index);
+                if (errorRecoverInfo.SuccessRecover == false) throw new Exception();
                 else
                 {
                     index = errorRecoverInfo.TokenIndexToSee;
-                    if (index > 0) index--;
+//                    if (index > 0) index--;
                 }
             }
 
             return result;
         }
 
-        /// <summary>
-        /// This function is parsing after creates a new block on the basis of the prev parsing unit information.
-        /// </summary>
-        /// <param name="tokenDatas">The tokens to parse</param>
-        /// <param name="blockToken">The block token</param>
-        /// <param name="prevAfterStack">The prev parsing unit information</param>
-        /// <returns></returns>
-        public Tuple<SuccessedKind, ParsingBlock> BlockParsing(IReadOnlyList<TokenData> tokenDatas, TokenData blockToken, ParsingUnit prevParsingUnit = null)
+        private ParsingResult ReplaceRange(ParsingResult srcResult, Range range, IReadOnlyList<TokenData> newTokens, Range newRange)
         {
-            ParsingBlock newParsingBlock = ParsingBlock.CreateNextParsingBlock(prevParsingUnit, blockToken);
+            var prevParsingResult = new ParsingResult(srcResult.Take(range.StartIndex));
+            var postParsingResult = new ParsingResult(srcResult.Skip(range.EndIndex + 1));
 
-            var resultItem1 = this.BlockParsing(tokenDatas, newParsingBlock, false);
-            return new Tuple<SuccessedKind, ParsingBlock>(resultItem1, newParsingBlock);
+            for (int i = newRange.StartIndex; i <= newRange.EndIndex; i++)
+            {
+                prevParsingResult.Add(new ParsingBlock(newTokens[i]));
+            }
+
+            prevParsingResult.AddRange(postParsingResult);
+
+            return prevParsingResult;
+        }
+
+        private ParsingResult ReplaceRanges(ParsingResult srcResult, IReadOnlyList<TokenData> newTokens, TokenizeImpactRanges ranges)
+        {
+            int addVal = 0;
+
+            foreach(var range in ranges)
+            {
+                var adjustRange = new Range(range.Item1.StartIndex + addVal, range.Item1.Count);
+
+                srcResult = this.ReplaceRange(srcResult, adjustRange, newTokens, range.Item2);
+                addVal += range.Item2.Count - range.Item1.Count;
+            }
+
+            return srcResult;
         }
 
         /// <summary>
-        /// This function is parsing continue from the current parsing block.
+        /// This function is parsing after creates a new block on the basis of the prev parsing unit information.
         /// </summary>
-        /// <param name="tokenDatas">The tokens to parse</param>
-        /// <param name="parsingBlock">The current parsing block</param>
-        /// <param name="bFromLastNext"></param>
+        /// <param name="parsingBlock">The prev parsing unit information</param>
+        /// <param name="tokens">The param is used when the units of the block must have multiple tokens</param>
         /// <returns></returns>
-        public SuccessedKind BlockParsing(IReadOnlyList<TokenData> tokenDatas, ParsingBlock parsingBlock, bool bFromLastNext = true)
+        public SuccessedKind BlockParsing(ParsingBlock parsingBlock, IReadOnlyList<TokenData> tokens)
+        {
+            SuccessedKind result = SuccessedKind.NotApplicable;
+            foreach(var token in tokens)
+            {
+                var lastUnit = parsingBlock.Units.Last();
+                parsingBlock.units.Add(new ParsingUnit(lastUnit.AfterStack) { InputValue = token });
+
+                result = this.BlockParsing(parsingBlock, false);
+
+                if (result == LRParserSnippet.SuccessedKind.NotApplicable) break;
+            }
+
+            return result;
+        }
+
+        public SuccessedKind BlockParsing(ParsingBlock parsingBlock, bool bFromLastNext = true)
         {
             SuccessedKind result = SuccessedKind.NotApplicable;
             if (parsingBlock == null) return result;
 
-            for (int i = 0; i < tokenDatas.Count; i++)
+            var token = parsingBlock.Token;
+            ParsingUnit newParsingUnit = (bFromLastNext) ? parsingBlock.AddParsingItem() : parsingBlock.Units.Last();
+            newParsingUnit.InputValue = token;
+
+            while (this.Parsing(newParsingUnit, token))
             {
-                var token = tokenDatas[i];
+                result = this.ParsingSuccessedProcess(newParsingUnit);
+
+                if (token.Kind == null) result = SuccessedKind.Shift;
+                if (result != SuccessedKind.ReduceOrGoto) break;
+
+                // ready for next parsing.
+                newParsingUnit = parsingBlock.AddParsingItem();
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// This function parsing continue from the current parsing block.
+        /// </summary>
+        /// <param name="tokens">The tokens to parse</param>
+        /// <param name="parsingBlock">The current parsing block</param>
+        /// <param name="bFromLastNext"></param>
+        /// <returns></returns>
+        public SuccessedKind BlockParsing(IReadOnlyList<TokenData> tokens, ParsingBlock parsingBlock, bool bFromLastNext = true)
+        {
+            SuccessedKind result = SuccessedKind.NotApplicable;
+            if (parsingBlock == null) return result;
+
+            for (int i = 0; i < tokens.Count; i++)
+            {
+                var token = tokens[i];
                 ParsingUnit newParsingUnit = (bFromLastNext) ? parsingBlock.AddParsingItem() : parsingBlock.Units.Last();
                 bFromLastNext = true;
                 newParsingUnit.InputValue = token;
@@ -284,32 +345,49 @@ namespace Parse.FrontEnd.Parsers.Logical
             return result;
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="tokenDatas"></param>
-        /// <param name="parsingResult"></param>
-        /// <param name="bErrorRecover"></param>
-        /// <returns></returns>
-        public ParsingResult ParsingCore(IReadOnlyList<TokenData> tokenDatas, ParsingResult parsingResult, bool bErrorRecover = true)
+        public void PartialParsing(ParsingResult target, TokenizeImpactRanges rangesToParse, IReadOnlyList<TokenData> tokens)
         {
-            ParsingResult result = (parsingResult == null) ? new ParsingResult() : parsingResult;
-            if (tokenDatas.Count <= 0) return result;
+            int indexToSee = 0;
 
-            for (int i = 0; i < tokenDatas.Count; i++)
+            foreach(var range in rangesToParse)
             {
-                var token = tokenDatas[i];
-                var prevStack = (result.Count == 0) ? null : result.Last().Units.Last();
+                if (range.Item2.StartIndex < indexToSee && indexToSee < range.Item2.EndIndex)
+                {
+                }
+                else if (indexToSee > range.Item2.EndIndex) continue;
 
-                var tokens = new List<TokenData>();
-                tokens.Add(token);
-                var blockParsingResult = this.BlockParsing(tokens, token, prevStack);
-                parsingResult.Add(blockParsingResult.Item2);
+                // parsing update range.
+                for (int i = range.Item2.StartIndex; i <= range.Item2.EndIndex; i++)
+                {
+                    if (i == 0) target[i] = new ParsingBlock(ParsingUnit.FirstParsingUnit, target[i].Token);
+                    else
+                    {
+                        target[i] = new ParsingBlock(new ParsingUnit(target[i - 1].Units.Last().AfterStack), target[i].Token);
+                        var successKind = this.BlockParsing(target[i], false);
 
-                if (this.PostProcessing(blockParsingResult.Item1, parsingResult, tokenDatas, bErrorRecover, ref i)) break;
+                        this.PostProcessing(successKind, target, true, ref i);
+                    }
+
+                    indexToSee = i + 1;
+                }
+
+                // parsing post range until sync.
+                for (int i = indexToSee; i < target.Count; i++)
+                {
+                    var targetToCompare = target[i];
+                    target[i] = new ParsingBlock(new ParsingUnit(target[i - 1].Units.Last().AfterStack), target[i].Token);
+                    var successKind = this.BlockParsing(target[i], false);
+                    if (targetToCompare.Units.Last().AfterStack.SequenceEqual(target[i].Units.Last().AfterStack))
+//                        if (ElementsEquals(targetToCompare.Units.Last().AfterStack.ToList(), target[i].Units.Last().AfterStack.ToList()))
+                    {
+                        indexToSee = i + 1;
+                        break;
+                    }
+
+                    this.PostProcessing(successKind, target, true, ref i);
+                    indexToSee = i + 1;
+                }
             }
-
-            return result;
         }
 
         /// <summary>
@@ -334,52 +412,66 @@ namespace Parse.FrontEnd.Parsers.Logical
             return result;
         }
 
-        public override ParsingResult Parsing(IReadOnlyList<TokenCell> tokenCells)
+        /// <summary>
+        /// This function performs the following process
+        /// It parsing next to 'basis' from 'seeingIndex' of 'wholeTokens' as much as 'rangeToParse'.
+        /// </summary>
+        /// <param name="basis"></param>
+        /// <param name="wholeTokens"></param>
+        /// <param name="rangeToParse"></param>
+        /// <param name="seeingIndex"></param>
+        /// <returns></returns>
+        private void AllParsing(ParsingResult target)
         {
-            if (tokenCells.Count <= 0) return new ParsingResult();
+            for (int i = 0; i < target.Count; i++)
+            {
+                var token = target[i].Token;
+                var unit = (i == 0) ? ParsingUnit.FirstParsingUnit : new ParsingUnit(target[i - 1].Units.Last().AfterStack);
+                unit.InputValue = token;
+                target[i].units.Add(unit);
 
-            var tokens = tokenCells.ToList();
-            tokens.Add(new TokenCell(-1, new EndMarker().Value, null));
+                var blockParsingResult = this.BlockParsing(target[i], false);
 
-            var result = new ParsingResult();
-            var tokenDatas = this.ToTokenDataList(tokens);
-            return this.ParsingCore(tokenDatas, result);
+                if (this.PostProcessing(blockParsingResult, target, true, ref i)) break;
+            }
         }
 
-        public override ParsingResult Parsing(IReadOnlyList<TokenCell> tokenCells, ParsingResult prevParsingInfo, TokenizeImpactRanges rangeToParse)
+        public override ParsingResult Parsing(IReadOnlyList<TokenData> tokens)
         {
-            if (prevParsingInfo == null) return this.Parsing(tokenCells);
-            if (rangeToParse == null) return this.Parsing(tokenCells);
-
             ParsingResult result = new ParsingResult();
-//            var totalList = prevParsingInfo.ParsingStack.Count;
-
-            foreach (var range in rangeToParse.CurRanges)
+            try
             {
-                var tokensToParse = tokenCells.Skip(range.StartIndex).Take(range.Count);
-                var prevParsingBlock = prevParsingInfo.Take(range.EndIndex);
+                if (tokens == null) return result;
+                if (tokens.Count <= 0) return result;
 
-                if (tokensToParse.Count() == 0) return this.Parsing(tokenCells);
-                if (prevParsingBlock.Count() == 0) return this.Parsing(tokenCells);
+                result = new ParsingResult();
+                foreach (var item in tokens)
+                    result.Add(new ParsingBlock(item));
 
-                if (range.StartIndex == 0)
-                {
-                    if (tokenCells.Count() == range.Count) return this.Parsing(tokenCells);
-                    else
-                    {
-                        var postParsingResult = prevParsingInfo.Take(range.EndIndex + 1);
-                        var tokenDatas = this.ToTokenDataList(tokenCells);
-                        result = this.ParsingCore(tokenDatas, new ParsingResult());
-                        result.AddRange(postParsingResult); // merge ParsingResult with ParsingResult.
-                    }
-                }
-                else
-                {
+                this.AllParsing(result);
+            }
+            catch(Exception ex)
+            {
 
-                }
+            }
 
+            return result;
+        }
 
-                //                result = this.ParsingCore(tokensToParse.ToArray(), ) as ParsingResult;
+        public override ParsingResult Parsing(IReadOnlyList<TokenData> tokens, ParsingResult prevParsingInfo, TokenizeImpactRanges rangeToParse)
+        {
+            if (prevParsingInfo == null) return this.Parsing(tokens);
+            if (prevParsingInfo.Success == false) return this.Parsing(tokens);
+            if (rangeToParse == null) return this.Parsing(tokens);
+
+            ParsingResult result = null;
+            try
+            {
+                result = this.ReplaceRanges(prevParsingInfo, tokens, rangeToParse);
+                this.PartialParsing(result, rangeToParse, tokens);
+            }
+            catch(Exception ex)
+            {
             }
 
             return result;

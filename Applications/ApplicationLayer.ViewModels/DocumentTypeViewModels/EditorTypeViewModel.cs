@@ -3,7 +3,6 @@ using ApplicationLayer.Models.Invokers;
 using GalaSoft.MvvmLight.Command;
 using Parse.FrontEnd.Ast;
 using Parse.FrontEnd.Grammars.MiniC;
-using Parse.FrontEnd.Parsers.Collections;
 using Parse.FrontEnd.Parsers.Logical;
 using Parse.WpfControls.SyntaxEditor.EventArgs;
 using System;
