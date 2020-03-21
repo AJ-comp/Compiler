@@ -22,8 +22,12 @@ namespace Parse.FrontEnd.Parsers.Datas
 
         public bool IsError { get; private set; } = false;
         public ErrorHandler ErrorHandler { get; private set; }
-        public string ErrorMessage { get; private set; }
+        public string ErrorMessage { get; private set; } = string.Empty;
         public ErrorPosition ErrorPosition { get; private set; } = ErrorPosition.OnNormalToken;
+
+        public bool IsRecovery { get; private set; } = false;
+        public string RecoveryMessage { get; private set; } = string.Empty;
+
 
         /// <summary>
         /// This property creates a ParsingUnit instance with initial stack state.
@@ -71,7 +75,7 @@ namespace Parse.FrontEnd.Parsers.Datas
             this.AfterStack = this.BeforeStack.Clone();
         }
 
-        public void ChangeToFailedState(ErrorHandler errorHandler = null) => this.ChangeToFailedState(Resource.CantShift + " " + this.PossibleTerminalSet + " " + Resource.MustCome, errorHandler);
+        public void ChangeToFailedState(ErrorHandler errorHandler = null) => this.ChangeToFailedState("(" + Resource.CantShift + " " + this.PossibleTerminalSet + " " + Resource.MustCome + ")", errorHandler);
 
         public void ChangeToFailedState(string errorMessage, ErrorHandler errorHandler = null)
         {
@@ -89,9 +93,17 @@ namespace Parse.FrontEnd.Parsers.Datas
             }
         }
 
+        public void SetRecoveryMessage(string recoveryMessage)
+        {
+            this.IsError = true;
+            this.IsRecovery = true;
+            this.RecoveryMessage = recoveryMessage;
+        }
+
         public void ChangeToNormalState()
         {
             this.IsError = false;
+            this.IsRecovery = false;
             this.ErrorHandler = null;
             this.ErrorMessage = string.Empty;
         }

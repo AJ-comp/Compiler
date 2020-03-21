@@ -22,7 +22,7 @@ namespace Parse.FrontEnd.Parsers.Properties {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Resource {
+    public class Resource {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,7 +36,7 @@ namespace Parse.FrontEnd.Parsers.Properties {
         ///   이 클래스에서 사용하는 캐시된 ResourceManager 인스턴스를 반환합니다.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Parse.FrontEnd.Parsers.Properties.Resource", typeof(Resource).Assembly);
@@ -51,7 +51,7 @@ namespace Parse.FrontEnd.Parsers.Properties {
         ///   재정의합니다.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -63,27 +63,81 @@ namespace Parse.FrontEnd.Parsers.Properties {
         /// <summary>
         ///   can&apos;t shift과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
-        internal static string CantShift {
+        public static string CantShift {
             get {
                 return ResourceManager.GetString("CantShift", resourceCulture);
             }
         }
         
         /// <summary>
+        ///   Insert a virtual token : {0}과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string InsertVirtualToken {
+            get {
+                return ResourceManager.GetString("InsertVirtualToken", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   must come here과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
-        internal static string MustCome {
+        public static string MustCome {
             get {
                 return ResourceManager.GetString("MustCome", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   recovering with panic mode과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   recover with private LR handler ix : {0}, token type : {1}과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
-        internal static string RecoverWithPanicMode {
+        public static string RecoverWithLRHandler {
+            get {
+                return ResourceManager.GetString("RecoverWithLRHandler", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   recover with panic mode과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string RecoverWithPanicMode {
             get {
                 return ResourceManager.GetString("RecoverWithPanicMode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   failed a recovery과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string RecoveryFailed {
+            get {
+                return ResourceManager.GetString("RecoveryFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   successed a recovery과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string RecoverySuccessed {
+            get {
+                return ResourceManager.GetString("RecoverySuccessed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   skip this token과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string SkipToken {
+            get {
+                return ResourceManager.GetString("SkipToken", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   try to adjust a stack with this token과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string TryAdjustStackWithThisToken {
+            get {
+                return ResourceManager.GetString("TryAdjustStackWithThisToken", resourceCulture);
             }
         }
     }

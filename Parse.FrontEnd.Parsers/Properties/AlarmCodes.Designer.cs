@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ApplicationLayer.ViewModels.Properties {
+namespace Parse.FrontEnd.Parsers.Properties {
     using System;
     
     
@@ -19,10 +19,10 @@ namespace ApplicationLayer.ViewModels.Properties {
     // 클래스에서 자동으로 생성되었습니다.
     // 멤버를 추가하거나 제거하려면 .ResX 파일을 편집한 다음 /str 옵션을 사용하여 ResGen을
     // 다시 실행하거나 VS 프로젝트를 다시 빌드하십시오.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class AlarmCodes {
+    public class AlarmCodes {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,10 +36,10 @@ namespace ApplicationLayer.ViewModels.Properties {
         ///   이 클래스에서 사용하는 캐시된 ResourceManager 인스턴스를 반환합니다.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("ApplicationLayer.ViewModels.Properties.AlarmCodes", typeof(AlarmCodes).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Parse.FrontEnd.Parsers.Properties.AlarmCodes", typeof(AlarmCodes).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -51,7 +51,7 @@ namespace ApplicationLayer.ViewModels.Properties {
         ///   재정의합니다.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -61,11 +61,20 @@ namespace ApplicationLayer.ViewModels.Properties {
         }
         
         /// <summary>
-        ///   {0} expected과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   {0} is expected과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
-        internal static string CE0000 {
+        public static string CE0000 {
             get {
                 return ResourceManager.GetString("CE0000", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   {0} is inappropriate token on this position.과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string CE0001 {
+            get {
+                return ResourceManager.GetString("CE0001", resourceCulture);
             }
         }
     }

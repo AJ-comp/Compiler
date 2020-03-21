@@ -228,7 +228,8 @@ namespace Parse.FrontEnd.Parsers.Logical
             else if (bErrorRecover)
             {
                 var errorRecoverInfo = this.ParsingFailedProcess(parsingResult, index);
-                if (errorRecoverInfo.SuccessRecover == false) throw new Exception();
+                if(errorRecoverInfo == null) throw new ParsingException(index);
+                else if (errorRecoverInfo.SuccessRecover == false) throw new ParsingException(errorRecoverInfo.TokenIndexToSee);
                 else
                 {
                     index = errorRecoverInfo.TokenIndexToSee;
@@ -270,20 +271,34 @@ namespace Parse.FrontEnd.Parsers.Logical
         }
 
         /// <summary>
-        /// This function is parsing after creates a new block on the basis of the prev parsing unit information.
+        /// This function is parsing for a tokens of the multiple type in the one token block.
         /// </summary>
         /// <param name="parsingBlock">The prev parsing unit information</param>
-        /// <param name="tokens">The param is used when the units of the block must have multiple tokens</param>
+        /// <param name="recoveryTokenInfos">The param is used when the units of the block must have multiple tokens</param>
         /// <returns></returns>
-        public SuccessedKind BlockParsing(ParsingBlock parsingBlock, IReadOnlyList<TokenData> tokens)
+        public SuccessedKind RecoveryBlockParsing(ParsingBlock parsingBlock, IReadOnlyList<ParsingRecoveryData> recoveryTokenInfos)
         {
             SuccessedKind result = SuccessedKind.NotApplicable;
-            foreach(var token in tokens)
+            foreach(var recoveryInfo in recoveryTokenInfos)
             {
                 var lastUnit = parsingBlock.Units.Last();
-                parsingBlock.units.Add(new ParsingUnit(lastUnit.AfterStack) { InputValue = token });
+                var newUnit = new ParsingUnit(lastUnit.AfterStack) { InputValue = recoveryInfo.RecoveryToken };
+                parsingBlock.units.Add(newUnit);
+                lastUnit = parsingBlock.Units.Last();
 
-                result = this.BlockParsing(parsingBlock, false);
+                while (this.UnitParsing(lastUnit, recoveryInfo.RecoveryToken))
+                {
+                    result = this.ParsingSuccessedProcess(lastUnit);
+                    newUnit.SetRecoveryMessage(recoveryInfo.RecoveryMessage); // Replace the message that may exist to the recovery message.
+
+                    if (recoveryInfo.RecoveryToken.Kind == null) result = SuccessedKind.Shift;
+                    if (result != SuccessedKind.ReduceOrGoto) break;
+
+                    // ready for next parsing.
+                    newUnit = new ParsingUnit(lastUnit.AfterStack) { InputValue = recoveryInfo.RecoveryToken };
+                    parsingBlock.units.Add(newUnit);
+                    lastUnit = parsingBlock.Units.Last();
+                }
 
                 if (result == LRParserSnippet.SuccessedKind.NotApplicable) break;
             }
@@ -300,7 +315,7 @@ namespace Parse.FrontEnd.Parsers.Logical
             ParsingUnit newParsingUnit = (bFromLastNext) ? parsingBlock.AddParsingItem() : parsingBlock.Units.Last();
             newParsingUnit.InputValue = token;
 
-            while (this.Parsing(newParsingUnit, token))
+            while (this.UnitParsing(newParsingUnit, token))
             {
                 result = this.ParsingSuccessedProcess(newParsingUnit);
 
@@ -333,7 +348,7 @@ namespace Parse.FrontEnd.Parsers.Logical
                 bFromLastNext = true;
                 newParsingUnit.InputValue = token;
 
-                if (this.Parsing(newParsingUnit, token))
+                if (this.UnitParsing(newParsingUnit, token))
                 {
                     result = this.ParsingSuccessedProcess(newParsingUnit);
                     if (token.Kind == null) result = SuccessedKind.Shift;
@@ -345,7 +360,7 @@ namespace Parse.FrontEnd.Parsers.Logical
             return result;
         }
 
-        public void PartialParsing(ParsingResult target, TokenizeImpactRanges rangesToParse, IReadOnlyList<TokenData> tokens)
+        public void PartialParsing(ParsingResult target, TokenizeImpactRanges rangesToParse)
         {
             int indexToSee = 0;
 
@@ -360,13 +375,10 @@ namespace Parse.FrontEnd.Parsers.Logical
                 for (int i = range.Item2.StartIndex; i <= range.Item2.EndIndex; i++)
                 {
                     if (i == 0) target[i] = new ParsingBlock(ParsingUnit.FirstParsingUnit, target[i].Token);
-                    else
-                    {
-                        target[i] = new ParsingBlock(new ParsingUnit(target[i - 1].Units.Last().AfterStack), target[i].Token);
-                        var successKind = this.BlockParsing(target[i], false);
+                    else target[i] = new ParsingBlock(new ParsingUnit(target[i - 1].Units.Last().AfterStack), target[i].Token);
 
-                        this.PostProcessing(successKind, target, true, ref i);
-                    }
+                    var successKind = this.BlockParsing(target[i], false);
+                    this.PostProcessing(successKind, target, true, ref i);
 
                     indexToSee = i + 1;
                 }
@@ -397,7 +409,7 @@ namespace Parse.FrontEnd.Parsers.Logical
         /// <param name="parsingBlock"></param>
         /// <param name="token">input terminal</param>
         /// <returns></returns>
-        public bool Parsing(ParsingUnit parsingUnit, TokenData token)
+        public bool UnitParsing(ParsingUnit parsingUnit, TokenData token)
         {
             parsingUnit.InputValue = token;
             parsingUnit.CopyBeforeStackToAfterStack();
@@ -449,10 +461,12 @@ namespace Parse.FrontEnd.Parsers.Logical
                     result.Add(new ParsingBlock(item));
 
                 this.AllParsing(result);
+                result.Success = true;
             }
-            catch(Exception ex)
+            catch(ParsingException ex)
             {
-
+                result = new ParsingResult(result.Take(ex.SeeingIndex + 1));
+                result.Success = false;
             }
 
             return result;
@@ -468,10 +482,13 @@ namespace Parse.FrontEnd.Parsers.Logical
             try
             {
                 result = this.ReplaceRanges(prevParsingInfo, tokens, rangeToParse);
-                this.PartialParsing(result, rangeToParse, tokens);
+                this.PartialParsing(result, rangeToParse);
+                result.Success = true;
             }
-            catch(Exception ex)
+            catch(ParsingException ex)
             {
+                result = new ParsingResult(result.Take(ex.SeeingIndex + 1));
+                result.Success = false;
             }
 
             return result;

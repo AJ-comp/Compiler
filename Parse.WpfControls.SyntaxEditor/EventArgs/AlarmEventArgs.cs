@@ -14,7 +14,7 @@ namespace Parse.WpfControls.SyntaxEditor.EventArgs
         public string ProjectName { get; }
         public string FileName { get; }
 
-        public ParsingUnit ParsingFailedArgs { get; } = null;
+        public ParsingBlock ParsingFailedArgs { get; } = null;
 
         public AlarmEventArgs(string projectName, string fileName)
         {
@@ -24,7 +24,7 @@ namespace Parse.WpfControls.SyntaxEditor.EventArgs
             this.ParsingFailedArgs = null;
         }
 
-        public AlarmEventArgs(string projectName, string fileName, int tokenIndex, int line, ParsingUnit e)
+        public AlarmEventArgs(string projectName, string fileName, int tokenIndex, int line, ParsingBlock e)
         {
             this.Status = AlarmStatus.ParsingError;
             this.ProjectName = projectName;

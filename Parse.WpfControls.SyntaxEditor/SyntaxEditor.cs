@@ -253,26 +253,28 @@ namespace Parse.WpfControls.SyntaxEditor
 
             for(int i=0; i<e.Count; i++)
             {
-                var failedInfo = e[i];
-                foreach (var errorUnit in failedInfo.ErrorUnits)
-                {
-                    if (errorUnit.InputValue.TokenCell.ValueOptionData != null)
-                        status = (DrawOption)errorUnit.InputValue.TokenCell.ValueOptionData;
+                var block = e[i];
+                if (block.ErrorUnits.Count == 0) continue;
+                if (block.Token.Kind == null) continue;
 
-                    if (errorUnit.ErrorPosition == ErrorPosition.OnEndMarker)
-                        status |= DrawOption.EndPointUnderline;
-                    else
-                        status |= DrawOption.Underline;
+                var errToken = block.Token;
 
-                    errorUnit.InputValue.TokenCell.ValueOptionData = status;
+                if (errToken.TokenCell.ValueOptionData != null)
+                    status = (DrawOption)errToken.TokenCell.ValueOptionData;
 
-                    // If fired the error on EndMarker then error point is last line.
-                    var point = (errorUnit.InputValue.Kind != new EndMarker()) ?
-                        this.TextArea.GetIndexInfoFromCaretIndex(errorUnit.InputValue.TokenCell.StartIndex) :
-                        new System.Drawing.Point(0, this.TextArea.LineIndexes.Count - 1);
+                if (errToken.Kind == new EndMarker())
+                    status |= DrawOption.EndPointUnderline;
+                else
+                    status |= DrawOption.Underline;
 
-                    this.alarmList.Add(new AlarmEventArgs(string.Empty, this.FileName, i, point.Y + 1, errorUnit));
-                }
+                errToken.TokenCell.ValueOptionData = status;
+
+                // If fired the error on EndMarker then error point is last line.
+                var point = (errToken.Kind != new EndMarker()) ?
+                    this.TextArea.GetIndexInfoFromCaretIndex(errToken.TokenCell.StartIndex) :
+                    new System.Drawing.Point(0, this.TextArea.LineIndexes.Count - 1);
+
+                this.alarmList.Add(new AlarmEventArgs(string.Empty, this.FileName, i, point.Y + 1, block));
             }
         }
 

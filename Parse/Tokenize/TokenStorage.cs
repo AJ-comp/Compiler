@@ -7,14 +7,10 @@ namespace Parse.Tokenize
 {
     public class TokenStorage : ICloneable
     {
-        private Dictionary<TokenPatternInfo, List<int>> tableForAllPatternsOnParsing = new Dictionary<TokenPatternInfo, List<int>>();
         private Dictionary<TokenPatternInfo, List<int>> tableForAllPatternsOnView = new Dictionary<TokenPatternInfo, List<int>>();
 
-        internal List<TokenCell> tokensToParsing = new List<TokenCell>();
         internal List<TokenCell> tokensToView = new List<TokenCell>();
 
-        /// <summary> The tokens to parsing (This doesn't include like delimiter(ex " ", "\t", "\r", "\n") and comment tokens) </summary>
-        public IReadOnlyList<TokenCell> TokensToParsing => tokensToParsing;
         /// <summary> The tokens to view (This include all tokens) </summary>
         public IReadOnlyList<TokenCell> TokensToView => tokensToView;
 
@@ -264,8 +260,11 @@ namespace Parse.Tokenize
                 });
 
             // Except PerfactDelimiter
-            fromIndex = (fromIndex == -1) ? 0 : fromIndex - 1;
-            toIndex = (toIndex == -1) ? this.tokensToView.Count - 1 : toIndex + 1;
+            //            fromIndex = (fromIndex == 0 || fromIndex == -1) ? 0 : fromIndex - 1;
+            //            toIndex = (toIndex == -1 || toIndex >= this.tokensToView.Count - 1) ? this.tokensToView.Count - 1 : toIndex + 1;
+
+            fromIndex = (fromIndex == -1) ? 0 : fromIndex;
+            toIndex = (toIndex == -1) ? this.tokensToView.Count - 1 : toIndex;
 
             return new Range(fromIndex, toIndex - fromIndex + 1);
         }
@@ -332,7 +331,6 @@ namespace Parse.Tokenize
                 () =>
                 {
                     result.tokensToView = new List<TokenCell>(this.tokensToView);
-                    result.tokensToParsing = new List<TokenCell>(this.tokensToParsing);
                 },
                 () =>
                 {

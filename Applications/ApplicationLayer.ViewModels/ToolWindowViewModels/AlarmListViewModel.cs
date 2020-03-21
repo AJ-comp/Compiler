@@ -1,14 +1,15 @@
 ﻿using ApplicationLayer.Models;
 using ApplicationLayer.ViewModels.DocumentTypeViewModels;
 using ApplicationLayer.ViewModels.Messages;
-using ApplicationLayer.ViewModels.Properties;
 using GalaSoft.MvvmLight.Command;
 using Parse.WpfControls.SyntaxEditor.EventArgs;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 
 using CommonResource = ApplicationLayer.Define.Properties.Resources;
+using ParserResource = Parse.FrontEnd.Parsers.Properties;
 
 namespace ApplicationLayer.ViewModels.ToolWindowViewModels
 {
@@ -116,9 +117,12 @@ namespace ApplicationLayer.ViewModels.ToolWindowViewModels
             {
                 if (item.Status == AlarmStatus.None) continue;
 
-                var message = string.Format(AlarmCodes.CE0000, item.ParsingFailedArgs.PossibleTerminalSet.ToString());
-                var alarmData = new AlarmData(sender, item.Status, AlarmCodes.CE0000, message, editorViewModel.FullPath, item.ProjectName, item.FileName, item.TokenIndex, item.Line);
-                alarmList.Add(alarmData);
+                var errInfo = item.ParsingFailedArgs.ErrorInfo;
+                if(errInfo != null)
+                {
+                    var alarmData = new AlarmData(sender, item.Status, errInfo.Code, errInfo.Message, editorViewModel.FullPath, item.ProjectName, item.FileName, item.TokenIndex, item.Line);
+                    alarmList.Add(alarmData);
+                }
             }
 
             this.AddAlarmList(sender, alarmList);

@@ -109,25 +109,37 @@ namespace Parse.WpfControls.Common
 
         private void DelTokens(TextChange changeInfo)
         {
-            if (changeInfo.RemovedLength == 0) return;
-
-            var delInfos = (this.selectionBlocks.IsEmpty()) ? 
-                this.GetSelectionTokenInfos(changeInfo.Offset, changeInfo.RemovedLength) : this.selectionBlocks;
+            //            var delInfos = (this.selectionBlocks.IsEmpty()) ? 
+            //                this.GetSelectionTokenInfos(changeInfo.Offset, changeInfo.RemovedLength) : this.selectionBlocks;
+            var delInfos = this.GetSelectionTokenInfos(changeInfo.Offset, changeInfo.RemovedLength);
 
             this.tokens = this.lexer.Lexing(this.tokens, delInfos);
+            this.recentTokenizeHistory = this.lexer.ImpactRanges;
+        }
+
+        private void UpdateTokens(TextChange changeInfo)
+        {
+            //            var delInfos = (this.selectionBlocks.IsEmpty()) ?
+            //                this.GetSelectionTokenInfos(changeInfo.Offset, changeInfo.RemovedLength) : this.selectionBlocks;
+            var delInfos = this.GetSelectionTokenInfos(changeInfo.Offset, changeInfo.RemovedLength);
+
+            string addString = this.Text.Substring(changeInfo.Offset, changeInfo.AddedLength);
+            this.tokens = this.lexer.Lexing(this.tokens, delInfos, addString);
             this.recentTokenizeHistory = this.lexer.ImpactRanges;
         }
 
         private void UpdateTokenInfos(TextChange changeInfo)
         {
             this.lexer.ImpactRanges.Clear();
-            this.DelTokens(changeInfo);
 
-            if (changeInfo.AddedLength == 0) return;
-
-            string addString = this.Text.Substring(changeInfo.Offset, changeInfo.AddedLength);
-            this.tokens = this.lexer.Lexing(this.tokens, changeInfo.Offset, addString);
-            this.recentTokenizeHistory = this.lexer.ImpactRanges;
+            if (changeInfo.RemovedLength > 0 && changeInfo.AddedLength > 0) this.UpdateTokens(changeInfo);
+            else if (changeInfo.RemovedLength > 0) this.DelTokens(changeInfo);
+            else if (changeInfo.AddedLength > 0)
+            {
+                string addString = this.Text.Substring(changeInfo.Offset, changeInfo.AddedLength);
+                this.tokens = this.lexer.Lexing(this.tokens, changeInfo.Offset, addString);
+                this.recentTokenizeHistory = this.lexer.ImpactRanges;
+            }
         }
 
         public int GetTokenIndexForCaretIndex(int caretIndex, RecognitionWay recognitionWay) => this.tokens.TokenIndexForOffset(caretIndex, recognitionWay);

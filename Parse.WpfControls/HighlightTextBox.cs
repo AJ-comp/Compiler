@@ -388,6 +388,7 @@ namespace Parse.WpfControls
         {
             if (!IsLoaded || renderCanvas == null) return;
 
+            /*
             if (this.bSingleCharacterAdded)
             {
                 this.SingleLineRender(drawingContext);
@@ -395,6 +396,7 @@ namespace Parse.WpfControls
                 return;
             }
             else
+            */
                 this.AllRender(drawingContext);
 
             this.DrawSelectionLineAppearance();

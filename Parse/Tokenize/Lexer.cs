@@ -104,6 +104,27 @@ namespace Parse.Tokenize
             });
         }
 
+        private string GetImpactedStringFromDelInfo(TokenStorage result, SelectionTokensContainer delInfos, string replaceString = "")
+        {
+            var indexInfo = delInfos.Range;
+
+            // A string that exists on the front on the basis of the deletion token.
+            var impactRange = result.FindImpactRange(indexInfo.StartIndex, indexInfo.EndIndex);
+            string mergeString = result.GetMergeStringOfRange(new Range(impactRange.StartIndex, indexInfo.StartIndex - impactRange.StartIndex));
+
+            // A string that remained after deleted.
+            mergeString += result.GetPartString(indexInfo.StartIndex, delInfos);
+            // A string replaced.
+            mergeString += replaceString;
+
+            // A string that exists on the back on the basis of the deletion token.
+            if (indexInfo.StartIndex != indexInfo.EndIndex) mergeString += result.GetPartString(indexInfo.EndIndex, delInfos);
+            int endIndex = indexInfo.EndIndex + 1;
+            mergeString += result.GetMergeStringOfRange(new Range(endIndex, impactRange.EndIndex - indexInfo.EndIndex));
+
+            return mergeString;
+        }
+
 
         public TokenPatternInfo GetPatternInfo(string pattern)
         {
@@ -172,7 +193,7 @@ namespace Parse.Tokenize
             ///       process 1 : "void", " ", "main", "(", "//)", "\r", "\n"
             while (true)
             {
-                impactRange = result.FindImpactRange(impactRange.StartIndex - 1, impactRange.EndIndex + 1);
+                impactRange = result.FindImpactRange(impactRange.StartIndex, impactRange.EndIndex);
                 var beforeTokens = result.TokensToView.Skip(impactRange.StartIndex).Take(impactRange.Count).ToList();
                 var processedTokens = this.tokenizeTeam.Tokenize(this.tokenizeRule, result.GetMergeStringOfRange(new Range(impactRange.StartIndex, impactRange.Count)));
                 result.ReplaceToken(impactRange, processedTokens);
@@ -261,8 +282,6 @@ namespace Parse.Tokenize
 
             TokenStorage result = targetStorage.Clone() as TokenStorage;
 
-            var indexInfo = delInfos.Range;
-
             ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             // The following process needs because of the following.
             // Ex 1 : void main()A
@@ -277,13 +296,10 @@ namespace Parse.Tokenize
             //       4. The separate result is "main", "{", "}".
             //       5. The separated tokens replace the "main{}" token.
             //       6. The deletion result is "void", " ", "main", "{", "}".
-            var impactRange = result.FindImpactRange(indexInfo.StartIndex, indexInfo.EndIndex);
-            string mergeString = result.GetMergeStringOfRange(new Range(impactRange.StartIndex, indexInfo.StartIndex - impactRange.StartIndex));
-            mergeString += result.GetPartString(indexInfo.StartIndex, delInfos);
 
-            if (indexInfo.StartIndex != indexInfo.EndIndex) mergeString += result.GetPartString(indexInfo.EndIndex, delInfos);
-            int endIndex = indexInfo.EndIndex + 1;
-            mergeString += result.GetMergeStringOfRange(new Range(endIndex, impactRange.EndIndex - indexInfo.EndIndex));
+            var indexInfo = delInfos.Range;
+            var impactRange = result.FindImpactRange(indexInfo.StartIndex, indexInfo.EndIndex);
+            string mergeString = this.GetImpactedStringFromDelInfo(result, delInfos);
 
             var toInsertTokens = this.tokenizeTeam.Tokenize(this.tokenizeRule, mergeString);
             result.ReplaceToken(impactRange, toInsertTokens);
@@ -294,6 +310,24 @@ namespace Parse.Tokenize
 
             // The Rectangle Deletion operation need to write other algorithm also the algorithm will very complicate so I don't write it yet.
             // (The above data struct can be used on the Rectangle Deletion operation.)
+        }
+
+        public TokenStorage Lexing(TokenStorage targetStorage, SelectionTokensContainer delInfos, string replaceString)
+        {
+            if (delInfos.IsEmpty()) return targetStorage;
+            if (replaceString.Length == 0) return targetStorage;
+
+            TokenStorage result = targetStorage.Clone() as TokenStorage;
+
+            var indexInfo = delInfos.Range;
+            var impactRange = result.FindImpactRange(indexInfo.StartIndex, indexInfo.EndIndex);
+            string mergeString = this.GetImpactedStringFromDelInfo(result, delInfos, replaceString);
+
+            var toInsertTokens = this.tokenizeTeam.Tokenize(this.tokenizeRule, mergeString);
+            result.ReplaceToken(impactRange, toInsertTokens);
+            this.ImpactRanges.Add(new RangePair(impactRange, new Range(impactRange.StartIndex, toInsertTokens.Count)));
+
+            return result;
         }
 
     }

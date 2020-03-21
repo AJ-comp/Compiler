@@ -104,6 +104,24 @@
     <value>must come here</value>
   </data>
   <data name="RecoverWithPanicMode" xml:space="preserve">
-    <value>recovering with panic mode</value>
+    <value>recover with panic mode</value>
+  </data>
+  <data name="RecoverWithLRHandler" xml:space="preserve">
+    <value>recover with private LR handler ix : {0}, token type : {1}</value>
+  </data>
+  <data name="InsertVirtualToken" xml:space="preserve">
+    <value>Insert a virtual token : {0}</value>
+  </data>
+  <data name="SkipToken" xml:space="preserve">
+    <value>skip this token</value>
+  </data>
+  <data name="TryAdjustStackWithThisToken" xml:space="preserve">
+    <value>try to adjust a stack with this token</value>
+  </data>
+  <data name="RecoverySuccessed" xml:space="preserve">
+    <value>successed a recovery</value>
+  </data>
+  <data name="RecoveryFailed" xml:space="preserve">
+    <value>failed a recovery</value>
   </data>
 </root>

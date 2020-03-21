@@ -124,6 +124,24 @@
     <value>shift 할 수 없습니다</value>
   </data>
   <data name="RecoverWithPanicMode" xml:space="preserve">
-    <value>패닉모드로 복구 진행 중</value>
+    <value>패닉모드로 복구</value>
+  </data>
+  <data name="RecoverWithLRHandler" xml:space="preserve">
+    <value>LR 전용 오류 처리기로 복구  ix : {0}, 토큰타입 : {1}</value>
+  </data>
+  <data name="InsertVirtualToken" xml:space="preserve">
+    <value>가상 토큰 삽입 : {0}</value>
+  </data>
+  <data name="SkipToken" xml:space="preserve">
+    <value>이 토큰은 파싱하지 않음</value>
+  </data>
+  <data name="TryAdjustStackWithThisToken" xml:space="preserve">
+    <value>이 토큰으로 스택 조정 시도</value>
+  </data>
+  <data name="RecoverySuccessed" xml:space="preserve">
+    <value>복구 성공</value>
+  </data>
+  <data name="RecoveryFailed" xml:space="preserve">
+    <value>복구 실패</value>
   </data>
 </root>

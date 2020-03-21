@@ -3,6 +3,7 @@ using Parse.FrontEnd.Parsers.Collections;
 using Parse.FrontEnd.Parsers.Datas;
 using Parse.FrontEnd.Parsers.Logical;
 using Parse.FrontEnd.Parsers.LR;
+using Parse.FrontEnd.Parsers.Properties;
 using Parse.FrontEnd.RegularGrammar;
 using Parse.Tokenize;
 using System;
@@ -67,23 +68,34 @@ namespace Parse.FrontEnd.Parsers.ErrorHandling.GrammarPrivate
             {
                 // insert temporary type keyword (ex : int) because the type keyword is omitted.
                 var virtualToken = new TokenData(grammar.Int, new TokenCell(-1, grammar.Int.Value, null));
-                var token = parsingResult[seeingTokenIndex].Token;
-                List<TokenData> param = new List<TokenData>() { virtualToken, token };
+                var curBlock = parsingResult[seeingTokenIndex];
+                var token = curBlock.Token;
+
+                List<ParsingRecoveryData> param = new List<ParsingRecoveryData>();
+                var recoveryMessage1 = string.Format("(" + Resource.RecoverWithLRHandler + ", " + Resource.InsertVirtualToken + ")", ixIndex, token.Kind.ToString(), virtualToken.Input);
+                var recoveryMessage2 = string.Format("(" + Resource.RecoverWithLRHandler + ")", ixIndex, token.Kind.ToString());
+                param.Add(new ParsingRecoveryData(virtualToken, recoveryMessage1));
+                param.Add(new ParsingRecoveryData(token, recoveryMessage2));
+                curBlock.ErrorInfo = new ParsingErrorInfo(ParsingErrorInfo.ErrorType.Error, nameof(AlarmCodes.CE0000), string.Format(AlarmCodes.CE0000, virtualToken.Input));
 
                 LRParserSnippet lrSnippet = snippet as LRParserSnippet;
-                var blockParsingResult = lrSnippet.BlockParsing(parsingResult[seeingTokenIndex], param);
+                var blockParsingResult = lrSnippet.RecoveryBlockParsing(curBlock, param);
 
                 return (blockParsingResult == LRParserSnippet.SuccessedKind.NotApplicable) ?
-                    new ErrorHandlingResult(parsingResult, -1, false) : new ErrorHandlingResult(parsingResult, seeingTokenIndex + 1, true);
+                    new ErrorHandlingResult(parsingResult, seeingTokenIndex, false) : new ErrorHandlingResult(parsingResult, seeingTokenIndex, true);
             }
             else if(ixIndex == 19)
             {
                 // skip current token because of this token is useless.
                 var prevBlockLastParsingUnit = parsingResult[seeingTokenIndex - 1].Units.Last();
-                var currentBlock = parsingResult[seeingTokenIndex];
-                currentBlock.units.Add(new ParsingUnit(prevBlockLastParsingUnit.AfterStack, prevBlockLastParsingUnit.AfterStack, currentBlock.Token));
+                var curBlock = parsingResult[seeingTokenIndex];
+                var newUnit = new ParsingUnit(prevBlockLastParsingUnit.AfterStack, prevBlockLastParsingUnit.AfterStack, curBlock.Token);
+                var recoveryMessage = string.Format("(" + Resource.RecoverWithLRHandler + ", " + Resource.SkipToken + ")", ixIndex, curBlock.Token.Kind.ToString());
 
-                return new ErrorHandlingResult(parsingResult, seeingTokenIndex + 1, true);
+                newUnit.SetRecoveryMessage(recoveryMessage);
+                curBlock.units.Add(newUnit);
+
+                return new ErrorHandlingResult(parsingResult, seeingTokenIndex, true);
             }
             else
                 return this.DefaultErrorHandler(ixIndex, snippet, parsingResult, seeingTokenIndex);

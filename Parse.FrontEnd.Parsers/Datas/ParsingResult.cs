@@ -18,7 +18,8 @@ namespace Parse.FrontEnd.Parsers.Datas
 
         public bool Success
         {
-            get
+            get; internal set;
+                /*
             {
                 if (this.Count == 0) return false;
 
@@ -27,6 +28,7 @@ namespace Parse.FrontEnd.Parsers.Datas
 
                 return (lastUnit.Action.Direction == ActionDir.accept) ? true : false;
             }
+            */
         }
 
         public bool HasError
@@ -57,6 +59,7 @@ namespace Parse.FrontEnd.Parsers.Datas
                 this.AddColumn(result, "prev stack");
                 this.AddColumn(result, "input symbol");
                 this.AddColumn(result, "action information");
+                this.AddColumn(result, "recovery message");
                 this.AddColumn(result, "current stack");
 
                 foreach (var block in this)
@@ -68,18 +71,15 @@ namespace Parse.FrontEnd.Parsers.Datas
 
                         var param1 = Convert.ToString(record.BeforeStack.Reverse(), " ");
                         var param2 = record.InputValue.ToString();
-                        var param3 = record.Action.Direction.ToString() + " ";
-                        var param4 = Convert.ToString(record.AfterStack.Reverse(), " ");
+                        var param3 = record.Action.ToString() + " ";
+                        var param4 = record.RecoveryMessage;
+                        var param5 = Convert.ToString(record.AfterStack.Reverse(), " ");
 
-                        if (record.Action.Direction == ActionDir.failed)
-                        {
-                            param3 += record.ErrorMessage;
-                            param4 += string.Empty;
-                        }
+                        if (record.IsError) param3 += record.ErrorMessage;
                         else if (record.Action.Direction != ActionDir.accept)
-                            param3 += (record.Action.Dest is NonTerminalSingle) ? (record.Action.Dest as NonTerminalSingle).ToGrammarString() : record.Action.Dest.ToString();
+                            param3 += (record.Action.Dest is NonTerminalSingle) ? (record.Action.Dest as NonTerminalSingle).ToGrammarString() : string.Empty;
 
-                        this.AddRow(result, param1, param2, param3, param4);
+                        this.AddRow(result, param1, param2, param3, param4, param5);
                     }
                 }
 

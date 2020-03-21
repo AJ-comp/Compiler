@@ -118,6 +118,9 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="CE0000" xml:space="preserve">
-    <value>{0} 예상됩니다</value>
+    <value>{0} 이(가) 예상됩니다</value>
+  </data>
+  <data name="CE0001" xml:space="preserve">
+    <value>{0} 은(는) 현재 위치에 적절하지 않은 토큰입니다.</value>
   </data>
 </root>

@@ -61,6 +61,7 @@
     <Compile Include="Datas\ParseTree.cs" />
     <Compile Include="Datas\ParsingBlock.cs" />
     <Compile Include="Datas\LR\LRParsingRowDataFormat.cs" />
+    <Compile Include="Datas\ParsingErrorInfo.cs" />
     <Compile Include="Datas\ParsingRowDataFormat.cs" />
     <Compile Include="Datas\ParsingResult.cs" />
     <Compile Include="Datas\ParsingUnit.cs" />
@@ -69,6 +70,7 @@
     <Compile Include="ErrorHandling\GrammarPrivate\MiniC_LRErrorHandler.cs" />
     <Compile Include="ErrorHandling\IErrorAlgorithm.cs" />
     <Compile Include="ErrorHandling\PanicMode.cs" />
+    <Compile Include="ErrorHandling\ParsingRecoveryData.cs" />
     <Compile Include="EventArgs\LRParsingEventArgs.cs" />
     <Compile Include="EventArgs\ParsingFailedEventArgs.cs" />
     <Compile Include="Logical\LLParserSnippet.cs" />
@@ -78,6 +80,17 @@
     <Compile Include="LLParser.cs" />
     <Compile Include="LR\LRParser.cs" />
     <Compile Include="Parser.cs" />
+    <Compile Include="ParsingException.cs" />
+    <Compile Include="Properties\AlarmCodes.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AlarmCodes.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AlarmCodes.ko-KR.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AlarmCodes.ko-KR.resx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resource.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -103,9 +116,17 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Properties\AlarmCodes.ko-KR.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AlarmCodes.ko-KR.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\AlarmCodes.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AlarmCodes.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resource.ko-KR.resx" />
     <EmbeddedResource Include="Properties\Resource.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resource.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>

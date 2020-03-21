@@ -30,6 +30,7 @@ namespace Parse.FrontEnd.Parsers.Datas
                 return result;
             }
         }
+        public ParsingErrorInfo ErrorInfo { get; internal set; }
 
         public ParsingBlock(TokenData token)
         {
