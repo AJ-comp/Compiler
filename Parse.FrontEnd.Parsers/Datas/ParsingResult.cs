@@ -39,7 +39,8 @@ namespace Parse.FrontEnd.Parsers.Datas
 
                 Parallel.ForEach(this, (block, loopOption) =>
                 {
-                    if (block.ErrorUnits.Count > 0)
+//                    if (block.ErrorUnits.Count > 0)
+                    if(block.ErrorInfos.Count > 0)
                     {
                         result = true;
                         loopOption.Stop();
@@ -127,6 +128,27 @@ namespace Parse.FrontEnd.Parsers.Datas
 
         public ParsingResult() { }
         public ParsingResult(IEnumerable<ParsingBlock> parsingBlocks) => this.AddRange(parsingBlocks);
+
+        /// <summary>
+        /// This function returns ParsingBlock that can be parsing and exist anterior from the block of the current index.
+        /// </summary>
+        /// <param name="index"></param>
+        /// <returns></returns>
+        public ParsingBlock GetFrontBlockCanParse(int index)
+        {
+            ParsingBlock result = null;
+            if (index <= 0) return result;
+
+            for (int i = index - 1; i >= 0; i--)
+            {
+                if (this[i].Token.Kind == null) continue;
+
+                result = this[i];
+                break;
+            }
+
+            return result;
+        }
 
 
         /*  LLParsing Tree

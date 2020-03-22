@@ -9,7 +9,6 @@ namespace ApplicationLayer.WpfApp.Converters
             var index = (int)parameter;
 
             if (!(value is MouseButtonEventArgs e)) return null;
-            if (e.ClickCount != 2) return null;
 
             return index;
         }

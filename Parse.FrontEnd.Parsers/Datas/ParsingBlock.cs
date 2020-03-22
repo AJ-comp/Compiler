@@ -11,8 +11,11 @@ namespace Parse.FrontEnd.Parsers.Datas
     public class ParsingBlock
     {
         internal List<ParsingUnit> units = new List<ParsingUnit>();
+        internal List<ParsingErrorInfo> errorInfos = new List<ParsingErrorInfo>();
+
         public TokenData Token { get; } = null;
         public IReadOnlyList<ParsingUnit> Units => this.units;
+        public IReadOnlyList<ParsingErrorInfo> ErrorInfos => errorInfos;
         public IReadOnlyList<ParsingUnit> ErrorUnits
         {
             get
@@ -30,7 +33,6 @@ namespace Parse.FrontEnd.Parsers.Datas
                 return result;
             }
         }
-        public ParsingErrorInfo ErrorInfo { get; internal set; }
 
         public ParsingBlock(TokenData token)
         {

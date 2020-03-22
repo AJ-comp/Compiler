@@ -6,7 +6,9 @@ using Parse.FrontEnd.RegularGrammar;
 using Parse.WpfControls.Models;
 using Parse.WpfControls.SyntaxEditor.EventArgs;
 using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -248,17 +250,21 @@ namespace Parse.WpfControls.SyntaxEditor
 
         private void ParsingFailedListPreProcess(ParsingResult e)
         {
-            // If fired the error on EndMarker.
-            DrawOption status = DrawOption.None;
+            List<Tuple<int, ParsingBlock>> errorBlocks = new List<Tuple<int, ParsingBlock>>();
 
-            for(int i=0; i<e.Count; i++)
+            Parallel.For(0, e.Count, i =>
             {
                 var block = e[i];
-                if (block.ErrorUnits.Count == 0) continue;
-                if (block.Token.Kind == null) continue;
+                if (block.Token.Kind == null) return;
+                if (block.ErrorInfos.Count == 0)
+                {
+                    block.Token.TokenCell.ValueOptionData = DrawOption.None;
+                    return;
+                }
 
                 var errToken = block.Token;
 
+                DrawOption status = DrawOption.None;
                 if (errToken.TokenCell.ValueOptionData != null)
                     status = (DrawOption)errToken.TokenCell.ValueOptionData;
 
@@ -269,12 +275,22 @@ namespace Parse.WpfControls.SyntaxEditor
 
                 errToken.TokenCell.ValueOptionData = status;
 
-                // If fired the error on EndMarker then error point is last line.
-                var point = (errToken.Kind != new EndMarker()) ?
-                    this.TextArea.GetIndexInfoFromCaretIndex(errToken.TokenCell.StartIndex) :
-                    new System.Drawing.Point(0, this.TextArea.LineIndexes.Count - 1);
+                lock (errorBlocks) errorBlocks.Add(new Tuple<int, ParsingBlock>(i, block));
+            });
 
-                this.alarmList.Add(new AlarmEventArgs(string.Empty, this.FileName, i, point.Y + 1, block));
+
+            for(int i=0; i<errorBlocks.Count; i++)
+            {
+                var tokenIndex = errorBlocks[i].Item1;
+                var block = errorBlocks[i].Item2;
+                var errToken = block.Token;
+
+                // If the error fired on EndMarker then error point is last line.
+                var point = (errToken.Kind != new EndMarker()) ?
+                                    this.TextArea.GetIndexInfoFromCaretIndex(errToken.TokenCell.StartIndex) :
+                                    new System.Drawing.Point(0, this.TextArea.LineIndexes.Count - 1);
+
+                this.alarmList.Add(new AlarmEventArgs(string.Empty, this.FileName, tokenIndex, point.Y + 1, block));
             }
         }
 
@@ -286,25 +302,20 @@ namespace Parse.WpfControls.SyntaxEditor
             if(this.parsingResult.Success)  // if prev parsing successed.
             {
                 // partial parsing
-                var tokens = ParserSnippet.ToTokenDataList(this.TextArea.Tokens.ToArray());
+                var tokens = ParserSnippet.ToTokenDataList(this.TextArea.Tokens);
                 this.parsingResult = this.ParserSnippet.Parsing(tokens, this.parsingResult, this.TextArea.RecentTokenizeHistory);
             }
             else
             {
                 // whole parsing
-                var tokens = ParserSnippet.ToTokenDataList(this.TextArea.Tokens.ToArray());
+                var tokens = ParserSnippet.ToTokenDataList(this.TextArea.Tokens);
                 this.parsingResult = this.ParserSnippet.Parsing(tokens);
             }
 
-            if (parsingResult.HasError == false)
-            {
-                this.alarmList.Add(new AlarmEventArgs(string.Empty, this.FileName));
-            }
-            else
-            {
-                this.ParsingFailedListPreProcess(parsingResult);
-                this.AdjustToValidAlarmList();
-            }
+            this.ParsingFailedListPreProcess(parsingResult);
+
+            if (parsingResult.HasError == false) this.alarmList.Add(new AlarmEventArgs(string.Empty, this.FileName));
+            else this.AdjustToValidAlarmList();
 
             this.AlarmFired?.Invoke(this, this.alarmList);
             this.ParsingCompleted?.Invoke(this, new ParsingCompletedEventArgs(parsingResult, this.alarmList));

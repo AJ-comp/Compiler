@@ -289,7 +289,7 @@ namespace Parse.Tokenize
         /// </summary>
         /// <param name="range">The range of token for replacing.</param>
         /// <param name="replaceTokenList">The new tokens to replace.</param>
-        public void ReplaceToken(Range range, List<TokenCell> replaceTokenList)
+        public void ReplaceToken(Range range, IReadOnlyList<TokenCell> replaceTokenList)
         {
             int addLength = 0;
             foreach (var item in replaceTokenList) addLength += item.Data.Length;
@@ -301,13 +301,13 @@ namespace Parse.Tokenize
             this.tokensToView.RemoveRange(range.StartIndex, range.Count);
 
             int startIndex = range.StartIndex;
-            replaceTokenList.ForEach(i =>
+            foreach(var item in replaceTokenList)
             {
-                i.StartIndex = contentIndex;
-                contentIndex = i.EndIndex + 1;
+                item.StartIndex = contentIndex;
+                contentIndex = item.EndIndex + 1;
 
-                this.tokensToView.Insert(startIndex++, i);
-            });
+                this.tokensToView.Insert(startIndex++, item);
+            }
 
             Parallel.Invoke(
                 () =>

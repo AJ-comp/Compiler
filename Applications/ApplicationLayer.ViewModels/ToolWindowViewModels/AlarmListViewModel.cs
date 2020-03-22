@@ -3,13 +3,11 @@ using ApplicationLayer.ViewModels.DocumentTypeViewModels;
 using ApplicationLayer.ViewModels.Messages;
 using GalaSoft.MvvmLight.Command;
 using Parse.WpfControls.SyntaxEditor.EventArgs;
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 
 using CommonResource = ApplicationLayer.Define.Properties.Resources;
-using ParserResource = Parse.FrontEnd.Parsers.Properties;
 
 namespace ApplicationLayer.ViewModels.ToolWindowViewModels
 {
@@ -31,6 +29,8 @@ namespace ApplicationLayer.ViewModels.ToolWindowViewModels
         }
         private void ExecuteMouseDoubleClick(int index)
         {
+            if (index < 0) return;
+
             var editor = this.FindEditorIndexOfAlarmData(this.AlarmLists[index]);
             if (editor == null)
             {
@@ -117,8 +117,8 @@ namespace ApplicationLayer.ViewModels.ToolWindowViewModels
             {
                 if (item.Status == AlarmStatus.None) continue;
 
-                var errInfo = item.ParsingFailedArgs.ErrorInfo;
-                if(errInfo != null)
+                var errInfos = item.ParsingFailedArgs.ErrorInfos;
+                foreach(var errInfo in errInfos)
                 {
                     var alarmData = new AlarmData(sender, item.Status, errInfo.Code, errInfo.Message, editorViewModel.FullPath, item.ProjectName, item.FileName, item.TokenIndex, item.Line);
                     alarmList.Add(alarmData);

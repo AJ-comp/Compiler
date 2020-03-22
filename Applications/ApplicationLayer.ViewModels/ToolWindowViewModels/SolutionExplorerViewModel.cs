@@ -248,7 +248,7 @@ namespace ApplicationLayer.ViewModels.ToolWindowViewModels
 
                     this.Solutions[0].Projects.Add(project);    // for connect with the parent node (solution)
                 }
-                catch
+                catch (Exception)
                 {
                     bFiredError = true;
                     ErrorProjectHier project = new ErrorProjectHier(Path.GetDirectoryName(item.Path), item.Path);

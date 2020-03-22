@@ -271,7 +271,7 @@ namespace Parse.FrontEnd.Parsers.Logical
         }
 
         /// <summary>
-        /// This function is parsing for a tokens of the multiple type in the one token block.
+        /// This function is parsing for block that an error fired.
         /// </summary>
         /// <param name="parsingBlock">The prev parsing unit information</param>
         /// <param name="recoveryTokenInfos">The param is used when the units of the block must have multiple tokens</param>
@@ -311,6 +311,9 @@ namespace Parse.FrontEnd.Parsers.Logical
             SuccessedKind result = SuccessedKind.NotApplicable;
             if (parsingBlock == null) return result;
 
+            // remove prev information before block parsing.
+            parsingBlock.errorInfos.Clear();
+
             var token = parsingBlock.Token;
             ParsingUnit newParsingUnit = (bFromLastNext) ? parsingBlock.AddParsingItem() : parsingBlock.Units.Last();
             newParsingUnit.InputValue = token;
@@ -324,37 +327,6 @@ namespace Parse.FrontEnd.Parsers.Logical
 
                 // ready for next parsing.
                 newParsingUnit = parsingBlock.AddParsingItem();
-            }
-
-            return result;
-        }
-
-        /// <summary>
-        /// This function parsing continue from the current parsing block.
-        /// </summary>
-        /// <param name="tokens">The tokens to parse</param>
-        /// <param name="parsingBlock">The current parsing block</param>
-        /// <param name="bFromLastNext"></param>
-        /// <returns></returns>
-        public SuccessedKind BlockParsing(IReadOnlyList<TokenData> tokens, ParsingBlock parsingBlock, bool bFromLastNext = true)
-        {
-            SuccessedKind result = SuccessedKind.NotApplicable;
-            if (parsingBlock == null) return result;
-
-            for (int i = 0; i < tokens.Count; i++)
-            {
-                var token = tokens[i];
-                ParsingUnit newParsingUnit = (bFromLastNext) ? parsingBlock.AddParsingItem() : parsingBlock.Units.Last();
-                bFromLastNext = true;
-                newParsingUnit.InputValue = token;
-
-                if (this.UnitParsing(newParsingUnit, token))
-                {
-                    result = this.ParsingSuccessedProcess(newParsingUnit);
-                    if (token.Kind == null) result = SuccessedKind.Shift;
-                    if (result == SuccessedKind.ReduceOrGoto) i--;
-                }
-                else break;
             }
 
             return result;
@@ -383,7 +355,7 @@ namespace Parse.FrontEnd.Parsers.Logical
                     indexToSee = i + 1;
                 }
 
-                // parsing post range until sync.
+                // parsing for post range until sync.
                 for (int i = indexToSee; i < target.Count; i++)
                 {
                     var targetToCompare = target[i];
@@ -465,7 +437,13 @@ namespace Parse.FrontEnd.Parsers.Logical
             }
             catch(ParsingException ex)
             {
-                result = new ParsingResult(result.Take(ex.SeeingIndex + 1));
+                result = new ParsingResult(result.Take(ex.SeeingIndex + 1))
+                {
+                    Success = false
+                };
+            }
+            catch (Exception)
+            {
                 result.Success = false;
             }
 
@@ -487,7 +465,13 @@ namespace Parse.FrontEnd.Parsers.Logical
             }
             catch(ParsingException ex)
             {
-                result = new ParsingResult(result.Take(ex.SeeingIndex + 1));
+                result = new ParsingResult(result.Take(ex.SeeingIndex + 1))
+                {
+                    Success = false
+                };
+            }
+            catch (Exception)
+            {
                 result.Success = false;
             }
 

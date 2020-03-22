@@ -10,5 +10,7 @@
             RecoveryToken = recoveryToken;
             RecoveryMessage = reconveryMessage;
         }
+
+        public override string ToString() => RecoveryMessage;
     }
 }

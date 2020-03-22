@@ -61,7 +61,7 @@ namespace Parse.FrontEnd.Parsers.Properties {
         }
         
         /// <summary>
-        ///   {0} is expected과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   {0} is expected.과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string CE0000 {
             get {
@@ -75,6 +75,33 @@ namespace Parse.FrontEnd.Parsers.Properties {
         public static string CE0001 {
             get {
                 return ResourceManager.GetString("CE0001", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   {0} is useless token.과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string CE0002 {
+            get {
+                return ResourceManager.GetString("CE0002", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   syntax error. see a token that before {0}.과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string CE0003 {
+            get {
+                return ResourceManager.GetString("CE0003", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   syntax error. {0} was missed.과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string CE0004 {
+            get {
+                return ResourceManager.GetString("CE0004", resourceCulture);
             }
         }
     }

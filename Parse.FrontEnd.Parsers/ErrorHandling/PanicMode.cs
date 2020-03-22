@@ -88,9 +88,10 @@ namespace Parse.FrontEnd.Parsers.ErrorHandling
                 newParsingUnit.InputValue = curToken;
                 newParsingUnit.CopyBeforeStackToAfterStack();   // stack sync because to throw away token.
                 newParsingUnit.SetRecoveryMessage(string.Format("({0}, {1})", Resource.RecoverWithPanicMode, Resource.SkipToken));
-
                 blockToSkip.units.Add(newParsingUnit);
-                blockToSkip.ErrorInfo = new ParsingErrorInfo(ParsingErrorInfo.ErrorType.Error, nameof(AlarmCodes.CE0001), string.Format(AlarmCodes.CE0001, blockToSkip.Token.Input));
+
+                var parsingErrInfo = ParsingErrorInfo.CreateParsingError(nameof(AlarmCodes.CE0001), string.Format(AlarmCodes.CE0001, blockToSkip.Token.Input));
+                blockToSkip.errorInfos.Add(parsingErrInfo);
 
                 //                if (ixMetrix.PossibleTerminalSet.Contains(curToken.Data)) break;
                 //                else lastParsingUnit.ChangeToFailedState(Resource.RecoverWithPanicMode);
@@ -100,8 +101,31 @@ namespace Parse.FrontEnd.Parsers.ErrorHandling
         }
 
         /// <summary>
+        /// This function returns ParsingBlock that to recover an error.
+        /// </summary>
+        /// <param name="parsingResult"></param>
+        /// <param name="seeingTokenIndex"></param>
+        /// <param name="tokenData"></param>
+        /// <returns></returns>
+        private static ParsingBlock CreateParsingBlockToTryRecovery(ParsingResult parsingResult, int seeingTokenIndex, TokenData tokenData)
+        {
+            ParsingBlock prevBlock = (seeingTokenIndex == 0) ? null : parsingResult[seeingTokenIndex - 1];
+            var curBlock = parsingResult[seeingTokenIndex];
+            curBlock.units.Clear();
+
+            var seeingParsingUnit = (prevBlock == null) ? ParsingUnit.FirstParsingUnit : new ParsingUnit(prevBlock.Units.Last().AfterStack);
+            seeingParsingUnit.InputValue = tokenData;
+            seeingParsingUnit.SetRecoveryMessage(string.Format("({0}, {1})", Resource.RecoverWithPanicMode, Resource.TryAdjustStackWithThisToken));
+            curBlock.units.Add(seeingParsingUnit);
+            curBlock.errorInfos.Add(ParsingErrorInfo.CreateParsingError(nameof(AlarmCodes.CE0003), string.Format(AlarmCodes.CE0003, tokenData.Input)));
+
+            return curBlock;
+        }
+
+        /// <summary>
         /// This function is an error handler for LR parsing.
         /// </summary>
+        /// <param name="snippet"></param>
         /// <param name="parsingTable"></param>
         /// <param name="parsingResult"></param>
         /// <param name="tokens"></param>
@@ -111,8 +135,7 @@ namespace Parse.FrontEnd.Parsers.ErrorHandling
         public static ErrorHandlingResult LRProcess(LRParserSnippet snippet, LRParsingTable parsingTable, ParsingResult parsingResult, int seeingTokenIndex, HashSet<Terminal> synchronizeTokens)
         {
             ErrorHandlingResult result = new ErrorHandlingResult(parsingResult, seeingTokenIndex, false);
-            ParsingUnit seeingParsingUnit = null;
-            ParsingBlock curBlock = null;
+            ParsingBlock blockToRecover = null;
 
             try
             {
@@ -129,12 +152,8 @@ namespace Parse.FrontEnd.Parsers.ErrorHandling
                 }
 
                 // add a new parsing unit and initialize
-                ParsingBlock prevBlock = (seeingTokenIndex == 0) ? null : parsingResult[seeingTokenIndex - 1];
-                curBlock = parsingResult[seeingTokenIndex];
-                seeingParsingUnit = (prevBlock == null) ? ParsingUnit.FirstParsingUnit : new ParsingUnit(prevBlock.Units.Last().AfterStack);
-                seeingParsingUnit.InputValue = tokenData;
-                seeingParsingUnit.SetRecoveryMessage(string.Format("({0}, {1})", Resource.RecoverWithPanicMode, Resource.TryAdjustStackWithThisToken));
-                curBlock.units.Add(seeingParsingUnit);
+                blockToRecover = CreateParsingBlockToTryRecovery(parsingResult, seeingTokenIndex, tokenData);
+                var seeingParsingUnit = blockToRecover.Units.Last();
 
                 // find a matrix index that can process a modified token.
                 var stackToProcess = new Stack<object>(seeingParsingUnit.BeforeStack.Reverse());
@@ -143,19 +162,23 @@ namespace Parse.FrontEnd.Parsers.ErrorHandling
                     seeingParsingUnit.AfterStack = stackToProcess;
                     snippet.BlockParsing(parsingResult[seeingTokenIndex], true);
                     parsingResult[seeingTokenIndex].Units.Last().SetRecoveryMessage(string.Format("({0})", Resource.RecoverySuccessed));
+                    blockToRecover.errorInfos.Add(ParsingErrorInfo.CreateParsingError(nameof(AlarmCodes.CE0003), string.Format(AlarmCodes.CE0003, tokenData.Input)));
                 }
                 else return result;
 
                 return new ErrorHandlingResult(parsingResult, seeingTokenIndex, true);
             }
-            catch(Exception ex)
+            catch (Exception)
             {
-                if(curBlock != null)
+                if(blockToRecover != null)
                 {
-                    var newUnit = new ParsingUnit(seeingParsingUnit.AfterStack);
-                    newUnit.InputValue = seeingParsingUnit.InputValue;
+                    var seeingParsingUnit = blockToRecover.Units.Last();
+                    var newUnit = new ParsingUnit(seeingParsingUnit.AfterStack)
+                    {
+                        InputValue = seeingParsingUnit.InputValue
+                    };
                     newUnit.SetRecoveryMessage(string.Format("({0})", Resource.RecoveryFailed));
-                    curBlock.units.Add(newUnit);
+                    blockToRecover.units.Add(newUnit);
                 }
 
                 return new ErrorHandlingResult(parsingResult, seeingTokenIndex, false);

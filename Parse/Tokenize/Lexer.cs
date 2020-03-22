@@ -187,20 +187,29 @@ namespace Parse.Tokenize
             // But the logic is not written yet.
             var tokenList = this.tokenizeTeam.Tokenize(this.tokenizeRule, mergeString);
             result.ReplaceToken(impactRange, tokenList);
-            this.ImpactRanges.Add(new RangePair(impactRange, new Range(impactRange.StartIndex, tokenList.Count)));
+            var rangePairToRegist = new RangePair(impactRange, new Range(impactRange.StartIndex, tokenList.Count));
 
+            /// The comment can include all tokens therefore if a comment exists the process is performed as below.
             /// ex : void main()\r\n{}\r\n -> void main(//)\r\n{}\r\n
-            ///       process 1 : "void", " ", "main", "(", "//)", "\r", "\n"
+            ///       process 1 : "void", " ", "main", "(", "//)", "\r", "\n" -> The tokens in the impact range.
+            ///                        "void main(//)\r\n"                            -> The string that merged.
+            ///                        "void", " ", "main", "(", "//)\r\n"          -> The tokens after splite.
+            ///       process 2 : "void", " ", "main", "(", "//)\r\n", "{", "}", "\r", "\n" -> The tokens in the impact range.
+            ///                        "void main(//)\r\n{}\r\n"                                     -> The string that merged.
+            ///                        "void", " ", "main", "(", "//)\r\n{}\r\n"                   -> The tokens after splite.
             while (true)
             {
-                impactRange = result.FindImpactRange(impactRange.StartIndex, impactRange.EndIndex);
-                var beforeTokens = result.TokensToView.Skip(impactRange.StartIndex).Take(impactRange.Count).ToList();
-                var processedTokens = this.tokenizeTeam.Tokenize(this.tokenizeRule, result.GetMergeStringOfRange(new Range(impactRange.StartIndex, impactRange.Count)));
-                result.ReplaceToken(impactRange, processedTokens);
+                var impactRangeToParse = result.FindImpactRange(rangePairToRegist.Item1.StartIndex, rangePairToRegist.Item1.EndIndex);
+                var beforeTokens = result.TokensToView.Skip(impactRangeToParse.StartIndex).Take(impactRangeToParse.Count).ToList();
+                var basisIndex = (beforeTokens.Count > 0) ? beforeTokens[0].StartIndex : 0;
+                var processedTokens = this.tokenizeTeam.Tokenize(this.tokenizeRule, result.GetMergeStringOfRange(impactRangeToParse), basisIndex);
 
                 if (beforeTokens.IsEqual(processedTokens)) break;
-                this.ImpactRanges.Add(new RangePair(impactRange, new Range(impactRange.StartIndex, processedTokens.Count)));
+                result.ReplaceToken(impactRangeToParse, processedTokens);
+                rangePairToRegist = new RangePair(impactRangeToParse, new Range(impactRangeToParse.StartIndex, processedTokens.Count));
             }
+
+            this.ImpactRanges.Add(rangePairToRegist);
 
             return result;
         }
