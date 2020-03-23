@@ -2,7 +2,6 @@
 using Parse.FrontEnd.Parsers.Collections;
 using Parse.FrontEnd.Parsers.Datas;
 using Parse.FrontEnd.Parsers.ErrorHandling;
-using Parse.FrontEnd.Parsers.ErrorHandling.GrammarPrivate;
 using Parse.FrontEnd.RegularGrammar;
 using Parse.Tokenize;
 using System;
@@ -105,11 +104,11 @@ namespace Parse.FrontEnd.Parsers.Logical
                 return false;
             }
             // invalid input symbol, can't shift (error handler exists)
-            else if (IxMetrix.MatchedValueSet[inputValue.Kind].Item2.GetType() == typeof(ErrorHandler))
+            else if (IxMetrix.MatchedValueSet[inputValue.Kind].Item2 is IErrorHandlable)
             {
                 var value = IxMetrix.MatchedValueSet[inputValue.Kind];
                 parsingUnit.PossibleTerminalSet = IxMetrix.PossibleTerminalSet;
-                parsingUnit.ChangeToFailedState(value.Item2 as ErrorHandler);
+                parsingUnit.ChangeToFailedState(value.Item2 as IErrorHandlable);
                 return false;
             }
 
@@ -361,7 +360,7 @@ namespace Parse.FrontEnd.Parsers.Logical
                     var targetToCompare = target[i];
                     target[i] = new ParsingBlock(new ParsingUnit(target[i - 1].Units.Last().AfterStack), target[i].Token);
                     var successKind = this.BlockParsing(target[i], false);
-                    if (targetToCompare.Units.Last().AfterStack.SequenceEqual(target[i].Units.Last().AfterStack))
+                    if (targetToCompare.Units.First().AfterStack.SequenceEqual(target[i].Units.Last().AfterStack))
 //                        if (ElementsEquals(targetToCompare.Units.Last().AfterStack.ToList(), target[i].Units.Last().AfterStack.ToList()))
                     {
                         indexToSee = i + 1;

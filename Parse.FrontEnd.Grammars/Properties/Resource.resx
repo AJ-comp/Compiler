@@ -97,34 +97,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="CantShift" xml:space="preserve">
-    <value>can't shift</value>
+  <data name="Ident" xml:space="preserve">
+    <value>identifier</value>
   </data>
-  <data name="MustCome" xml:space="preserve">
-    <value>must come here</value>
-  </data>
-  <data name="RecoverWithPanicMode" xml:space="preserve">
-    <value>recover with panic mode</value>
-  </data>
-  <data name="RecoverWithLRHandler" xml:space="preserve">
-    <value>recover with private LR handler ix : {0}, token type : {1}</value>
-  </data>
-  <data name="InsertVirtualToken" xml:space="preserve">
-    <value>Insert a virtual token : {0}</value>
-  </data>
-  <data name="SkipToken" xml:space="preserve">
-    <value>skip this token</value>
-  </data>
-  <data name="TryAdjustStackWithThisToken" xml:space="preserve">
-    <value>try to adjust a stack with this token</value>
-  </data>
-  <data name="RecoverySuccessed" xml:space="preserve">
-    <value>successed a recovery</value>
-  </data>
-  <data name="RecoveryFailed" xml:space="preserve">
-    <value>failed a recovery</value>
-  </data>
-  <data name="ReplaceVirtualToken" xml:space="preserve">
-    <value>replace to a virtual token : {0}</value>
+  <data name="Number" xml:space="preserve">
+    <value>number</value>
   </data>
 </root>

@@ -1,4 +1,5 @@
 ﻿using Parse.Extensions;
+using Parse.FrontEnd.Parsers.ErrorHandling;
 using Parse.FrontEnd.Parsers.ErrorHandling.GrammarPrivate;
 using Parse.FrontEnd.Parsers.EventArgs;
 using Parse.FrontEnd.Parsers.Properties;
@@ -21,7 +22,7 @@ namespace Parse.FrontEnd.Parsers.Datas
 
 
         public bool IsError { get; private set; } = false;
-        public ErrorHandler ErrorHandler { get; private set; }
+        public IErrorHandlable ErrorHandler { get; private set; }
         public string ErrorMessage { get; private set; } = string.Empty;
         public ErrorPosition ErrorPosition { get; private set; } = ErrorPosition.OnNormalToken;
 
@@ -75,9 +76,9 @@ namespace Parse.FrontEnd.Parsers.Datas
             this.AfterStack = this.BeforeStack.Clone();
         }
 
-        public void ChangeToFailedState(ErrorHandler errorHandler = null) => this.ChangeToFailedState("(" + Resource.CantShift + " " + this.PossibleTerminalSet + " " + Resource.MustCome + ")", errorHandler);
+        public void ChangeToFailedState(IErrorHandlable errorHandler = null) => this.ChangeToFailedState("(" + Resource.CantShift + " " + this.PossibleTerminalSet + " " + Resource.MustCome + ")", errorHandler);
 
-        public void ChangeToFailedState(string errorMessage, ErrorHandler errorHandler = null)
+        public void ChangeToFailedState(string errorMessage, IErrorHandlable errorHandler = null)
         {
             this.IsError = true;
             this.ErrorHandler = errorHandler;

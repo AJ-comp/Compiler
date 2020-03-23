@@ -6,8 +6,8 @@ namespace Parse.FrontEnd.Grammars.PracticeGrammars
 {
     public class LRTest1Grammar : Grammar
     {
-        private Terminal plus = new Terminal(TokenType.Keyword, "+", false);
-        private Terminal mul = new Terminal(TokenType.Keyword, "*", false);
+        private Terminal plus = new Terminal(TokenType.Operator, "+", false);
+        private Terminal mul = new Terminal(TokenType.Operator, "*", false);
         private Terminal a = new Terminal(TokenType.Identifier, "a");
 
         private NonTerminal E = new NonTerminal("E", true);

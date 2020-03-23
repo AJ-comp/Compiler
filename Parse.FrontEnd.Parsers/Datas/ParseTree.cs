@@ -1,5 +1,4 @@
 ﻿using Parse.FrontEnd.Ast;
-using Parse.FrontEnd.Parsers.Datas.LR;
 using Parse.FrontEnd.RegularGrammar;
 using System.Collections.Generic;
 using System.Linq;

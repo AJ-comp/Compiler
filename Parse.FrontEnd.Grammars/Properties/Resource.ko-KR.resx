@@ -117,34 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="MustCome" xml:space="preserve">
-    <value>와야 합니다</value>
+  <data name="Ident" xml:space="preserve">
+    <value>식별자</value>
   </data>
-  <data name="CantShift" xml:space="preserve">
-    <value>shift 할 수 없습니다</value>
-  </data>
-  <data name="RecoverWithPanicMode" xml:space="preserve">
-    <value>패닉모드로 복구</value>
-  </data>
-  <data name="RecoverWithLRHandler" xml:space="preserve">
-    <value>LR 전용 오류 처리기로 복구  ix : {0}, 토큰타입 : {1}</value>
-  </data>
-  <data name="InsertVirtualToken" xml:space="preserve">
-    <value>가상 토큰 삽입 : {0}</value>
-  </data>
-  <data name="SkipToken" xml:space="preserve">
-    <value>이 토큰은 파싱하지 않음</value>
-  </data>
-  <data name="TryAdjustStackWithThisToken" xml:space="preserve">
-    <value>이 토큰으로 스택 조정 시도</value>
-  </data>
-  <data name="RecoverySuccessed" xml:space="preserve">
-    <value>복구 성공</value>
-  </data>
-  <data name="RecoveryFailed" xml:space="preserve">
-    <value>복구 실패</value>
-  </data>
-  <data name="ReplaceVirtualToken" xml:space="preserve">
-    <value>가상 토큰으로 대체 : {0}</value>
+  <data name="Number" xml:space="preserve">
+    <value>숫자</value>
   </data>
 </root>

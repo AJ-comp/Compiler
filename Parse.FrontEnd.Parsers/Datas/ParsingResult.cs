@@ -77,8 +77,8 @@ namespace Parse.FrontEnd.Parsers.Datas
                         var param5 = Convert.ToString(record.AfterStack.Reverse(), " ");
 
                         if (record.IsError) param3 += record.ErrorMessage;
-                        else if (record.Action.Direction != ActionDir.accept)
-                            param3 += (record.Action.Dest is NonTerminalSingle) ? (record.Action.Dest as NonTerminalSingle).ToGrammarString() : string.Empty;
+//                        else if (record.Action.Direction != ActionDir.accept)
+//                            param3 += (record.Action.Dest is NonTerminalSingle) ? (record.Action.Dest as NonTerminalSingle).ToGrammarString() : string.Empty;
 
                         this.AddRow(result, param1, param2, param3, param4, param5);
                     }
@@ -128,6 +128,31 @@ namespace Parse.FrontEnd.Parsers.Datas
 
         public ParsingResult() { }
         public ParsingResult(IEnumerable<ParsingBlock> parsingBlocks) => this.AddRange(parsingBlocks);
+
+
+        /// <summary>
+        /// This function returns it after adding a new ParsingUnit on current ParsingBlock.
+        /// </summary>
+        /// <param name="blockIndex"></param>
+        /// <returns></returns>
+        internal ParsingUnit AddUnitOnCurBlock(int blockIndex)
+        {
+            var prevBlock = this.GetFrontBlock(blockIndex);
+            var curBlock = this[blockIndex];
+
+            ParsingUnit result = (curBlock.Units.Count > 0) ? new ParsingUnit(curBlock.Units.Last().AfterStack) : 
+                                            (prevBlock == null) ? ParsingUnit.FirstParsingUnit : new ParsingUnit(prevBlock.Units.Last().AfterStack);
+            result.InputValue = this[blockIndex].Token;
+
+            return result;
+        }
+
+        /// <summary>
+        /// This function returns ParsingBlock that exist anterior from the block of the current index.
+        /// </summary>
+        /// <param name="index"></param>
+        /// <returns></returns>
+        public ParsingBlock GetFrontBlock(int index) => (index <= 0) ? null : this[index - 1];
 
         /// <summary>
         /// This function returns ParsingBlock that can be parsing and exist anterior from the block of the current index.

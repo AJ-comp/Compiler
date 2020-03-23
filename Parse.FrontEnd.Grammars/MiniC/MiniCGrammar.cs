@@ -1,18 +1,19 @@
-﻿using Parse.FrontEnd.RegularGrammar;
+﻿using Parse.FrontEnd.Grammars.Properties;
+using Parse.FrontEnd.RegularGrammar;
 
 namespace Parse.FrontEnd.Grammars.MiniC
 {
     public class MiniCGrammar : Grammar
     {
-        public Terminal If { get; } = new Terminal(TokenType.Keyword, "if");
-        public Terminal Else { get; } = new Terminal(TokenType.Keyword, "else");
-        public Terminal While { get; } = new Terminal(TokenType.Keyword, "while");
-        public Terminal Return { get; } = new Terminal(TokenType.Keyword, "return");
-        public Terminal Const { get; } = new Terminal(TokenType.Keyword, "const");
-        public Terminal Int { get; } = new Terminal(TokenType.Keyword, "int");
-        public Terminal Void { get; } = new Terminal(TokenType.Keyword, "void");
-        public Terminal Ident { get; } = new Terminal(TokenType.Identifier, "[_a-zA-Z][_a-zA-Z0-9]*", "ident", true, true);
-        public Terminal Number { get; } = new Terminal(TokenType.Digit10, "[0-9]+", "number", true, true);
+        public Terminal If { get; } = new Terminal(TokenType.ControlKeyword, "if");
+        public Terminal Else { get; } = new Terminal(TokenType.ControlKeyword, "else");
+        public Terminal While { get; } = new Terminal(TokenType.RepeateKeyword, "while");
+        public Terminal Return { get; } = new Terminal(TokenType.ControlKeyword, "return");
+        public Terminal Const { get; } = new Terminal(TokenType.DefinedDataType, "const");
+        public Terminal Int { get; } = new Terminal(TokenType.DefinedDataType, "int");
+        public Terminal Void { get; } = new Terminal(TokenType.DefinedDataType, "void");
+        public Terminal Ident { get; } = new Terminal(TokenType.Identifier, "[_a-zA-Z][_a-zA-Z0-9]*", Resource.Ident, true, true);
+        public Terminal Number { get; } = new Terminal(TokenType.Digit10, "[0-9]+", Resource.Number, true, true);
         public Terminal LineComment { get; } = new Terminal(TokenType.Comment, "//.*$", false, true);
 
         public Terminal OpenParenthesis { get; } = new Terminal(TokenType.Operator, "(");

@@ -4,9 +4,9 @@ namespace Parse.FrontEnd.Grammars.ExampleGrammars
 {
     public class Ex8_9Grammar : Grammar
     {
-        private Terminal a = new Terminal(TokenType.Keyword, "a");
-        private Terminal b = new Terminal(TokenType.Keyword, "b");
-        private Terminal c = new Terminal(TokenType.Keyword, "c");
+        private Terminal a = new Terminal(TokenType.DefinedDataType, "a");
+        private Terminal b = new Terminal(TokenType.DefinedDataType, "b");
+        private Terminal c = new Terminal(TokenType.DefinedDataType, "c");
 
         private NonTerminal A = new NonTerminal("A", true);
         private NonTerminal B = new NonTerminal("B");

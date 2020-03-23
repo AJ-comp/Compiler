@@ -4,8 +4,8 @@ namespace Parse.FrontEnd.Grammars.ExampleGrammars
 {
     public class Ex1Grammar : Grammar
     {
-        private Terminal a = new Terminal(TokenType.Keyword, "a");
-        private Terminal e = new Terminal(TokenType.Keyword, "e");
+        private Terminal a = new Terminal(TokenType.DefinedDataType, "a");
+        private Terminal e = new Terminal(TokenType.DefinedDataType, "e");
         private Terminal @dot = new Terminal(TokenType.Operator, ".");
         private Terminal @replace = new Terminal(TokenType.Operator, "=");
         private Terminal @openSquareBrace = new Terminal(TokenType.Operator, "[");

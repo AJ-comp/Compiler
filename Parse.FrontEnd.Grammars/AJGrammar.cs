@@ -1,34 +1,35 @@
 ﻿using Parse.FrontEnd.Grammars.MiniC;
+using Parse.FrontEnd.Grammars.Properties;
 using Parse.FrontEnd.RegularGrammar;
 
 namespace Parse.FrontEnd.Grammars
 {
     public class AJGrammar : Grammar
     {
-        private Terminal @identifier = new Terminal(TokenType.Identifier, "[_a-zA-Z][_a-zA-Z0-9]*", "ident");
-        private Terminal @digit = new Terminal(TokenType.Identifier, "[0-9]*", "digit");
+        private Terminal @identifier = new Terminal(TokenType.Identifier, "[_a-zA-Z][_a-zA-Z0-9]*", Resource.Ident);
+        private Terminal @digit = new Terminal(TokenType.Identifier, "[0-9]*", Resource.Number);
 
-        private Terminal @namespace = new Terminal(TokenType.Keyword, "namespace");
-        private Terminal @private = new Terminal(TokenType.Keyword, "private");
-        private Terminal @internal = new Terminal(TokenType.Keyword, "internal");
-        private Terminal @protected = new Terminal(TokenType.Keyword, "protected");
-        private Terminal @public = new Terminal(TokenType.Keyword, "public");
+        private Terminal @namespace = new Terminal(TokenType.NormalKeyword, "namespace");
+        private Terminal @private = new Terminal(TokenType.AccesserKeyword, "private");
+        private Terminal @internal = new Terminal(TokenType.AccesserKeyword, "internal");
+        private Terminal @protected = new Terminal(TokenType.AccesserKeyword, "protected");
+        private Terminal @public = new Terminal(TokenType.AccesserKeyword, "public");
 
-        private Terminal @class = new Terminal(TokenType.Keyword, "class");
-        private Terminal @enum = new Terminal(TokenType.Keyword, "enum");
+        private Terminal @class = new Terminal(TokenType.NormalKeyword, "class");
+        private Terminal @enum = new Terminal(TokenType.NormalKeyword, "enum");
 
-        private Terminal @const = new Terminal(TokenType.Keyword, "const");
-        private Terminal @var = new Terminal(TokenType.Keyword, "var");
-        private Terminal @void = new Terminal(TokenType.Keyword, "void");
-        private Terminal @char = new Terminal(TokenType.Keyword, "char");
-        private Terminal @short = new Terminal(TokenType.Keyword, "short");
-        private Terminal @int = new Terminal(TokenType.Keyword, "int");
-        private Terminal @long = new Terminal(TokenType.Keyword, "long");
-        private Terminal @float = new Terminal(TokenType.Keyword, "float");
-        private Terminal @double = new Terminal(TokenType.Keyword, "double");
+        private Terminal @const = new Terminal(TokenType.DefinedDataType, "const");
+        private Terminal @var = new Terminal(TokenType.DefinedDataType, "var");
+        private Terminal @void = new Terminal(TokenType.DefinedDataType, "void");
+        private Terminal @char = new Terminal(TokenType.DefinedDataType, "char");
+        private Terminal @short = new Terminal(TokenType.DefinedDataType, "short");
+        private Terminal @int = new Terminal(TokenType.DefinedDataType, "int");
+        private Terminal @long = new Terminal(TokenType.DefinedDataType, "long");
+        private Terminal @float = new Terminal(TokenType.DefinedDataType, "float");
+        private Terminal @double = new Terminal(TokenType.DefinedDataType, "double");
 
-        private Terminal @for = new Terminal(TokenType.Keyword, "for");
-        private Terminal @if = new Terminal(TokenType.Keyword, "if");
+        private Terminal @for = new Terminal(TokenType.RepeateKeyword, "for");
+        private Terminal @if = new Terminal(TokenType.ControlKeyword, "if");
 
         private Terminal @dot = new Terminal(TokenType.Operator, ".");
         private Terminal @plus = new Terminal(TokenType.Operator, "+");

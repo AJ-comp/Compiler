@@ -61,7 +61,6 @@ namespace Parse.WpfControls.SyntaxEditor
         public delegate void OnParserChangedEventHandler(object sender);
         public event OnParserChangedEventHandler OnParserChanged;
 
-        public event EventHandler<AlarmCollection> AlarmFired;
         public event EventHandler<ParsingCompletedEventArgs> ParsingCompleted;
 
         public Brush KeywordForeground
@@ -181,7 +180,10 @@ namespace Parse.WpfControls.SyntaxEditor
 
             foreach (var terminal in grammar.TerminalSet)
             {
-                if (terminal.TokenType == TokenType.Keyword)
+                if (terminal.TokenType == TokenType.DefinedDataType ||
+                    terminal.TokenType == TokenType.RepeateKeyword ||
+                    terminal.TokenType == TokenType.NormalKeyword ||
+                    terminal.TokenType == TokenType.ControlKeyword)
                 {
                     this.TextArea.AddCompletionList(CompletionItemType.Keyword, terminal.Value);
                     this.TextArea.AddSyntaxHighLightInfo(terminal.Value, terminal, this.KeywordForeground, terminal.CanDerived);
@@ -317,7 +319,6 @@ namespace Parse.WpfControls.SyntaxEditor
             if (parsingResult.HasError == false) this.alarmList.Add(new AlarmEventArgs(string.Empty, this.FileName));
             else this.AdjustToValidAlarmList();
 
-            this.AlarmFired?.Invoke(this, this.alarmList);
             this.ParsingCompleted?.Invoke(this, new ParsingCompletedEventArgs(parsingResult, this.alarmList));
             this.TextArea.InvalidateVisual();
         }

@@ -124,6 +124,15 @@ namespace Parse.FrontEnd.Parsers.Properties {
         }
         
         /// <summary>
+        ///   replace to a virtual token : {0}과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string ReplaceVirtualToken {
+            get {
+                return ResourceManager.GetString("ReplaceVirtualToken", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   skip this token과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string SkipToken {

@@ -1,4 +1,5 @@
 ﻿using Parse.FrontEnd.Ast;
+using Parse.FrontEnd.Grammars.Properties;
 using Parse.FrontEnd.RegularGrammar;
 
 namespace Parse.FrontEnd.Grammars.ExampleGrammars
@@ -9,7 +10,7 @@ namespace Parse.FrontEnd.Grammars.ExampleGrammars
         private Terminal mul = new Terminal(TokenType.Operator, "*", false);
         private Terminal open = new Terminal(TokenType.Operator, "(");
         private Terminal close = new Terminal(TokenType.Operator, ")");
-        private Terminal ident = new Terminal(TokenType.Identifier, "[_a-zA-Z][_a-zA-Z0-9]*", "ident", true, true);
+        private Terminal ident = new Terminal(TokenType.Identifier, "[_a-zA-Z][_a-zA-Z0-9]*", Resource.Ident, true, true);
 
         private NonTerminal E = new NonTerminal("E", true);
         private NonTerminal T = new NonTerminal("T");
