@@ -5,9 +5,9 @@ using Parse.FrontEnd.Parsers.Logical;
 
 namespace Parse.FrontEnd.Parsers.ErrorHandling.GrammarPrivate.MiniC_LR
 {
-    public class While_ErrorHandler : GrammarPrivateLRErrorHandler
+    public class Return_ErrorHandler : GrammarPrivateLRErrorHandler
     {
-        public While_ErrorHandler(Grammar grammar, int ixIndex) : base(grammar, ixIndex)
+        public Return_ErrorHandler(Grammar grammar, int ixIndex) : base(grammar, ixIndex)
         {
         }
 
@@ -25,7 +25,7 @@ namespace Parse.FrontEnd.Parsers.ErrorHandling.GrammarPrivate.MiniC_LR
 
         public override ErrorHandlingResult Call(ParserSnippet snippet, ParsingResult parsingResult, int seeingTokenIndex)
         {
-            return While_ErrorHandler.ErrorHandlingLogic(this.grammar as MiniCGrammar, this.ixIndex, snippet, parsingResult, seeingTokenIndex);
+            return Return_ErrorHandler.ErrorHandlingLogic(this.grammar as MiniCGrammar, this.ixIndex, snippet, parsingResult, seeingTokenIndex);
         }
     }
 }

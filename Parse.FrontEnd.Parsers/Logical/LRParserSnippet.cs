@@ -1,4 +1,5 @@
 ﻿using Parse.Extensions;
+using Parse.FrontEnd.Ast;
 using Parse.FrontEnd.Parsers.Collections;
 using Parse.FrontEnd.Parsers.Datas;
 using Parse.FrontEnd.Parsers.ErrorHandling;
@@ -52,7 +53,7 @@ namespace Parse.FrontEnd.Parsers.Logical
 
             if (matchedValue.Item1 == ActionDir.shift)
             {
-                stack.Push(inputValue);
+                stack.Push(new TreeTerminal(inputValue));
                 stack.Push(matchedValue.Item2);
 
                 result.Direction = ActionDir.shift;
@@ -60,14 +61,20 @@ namespace Parse.FrontEnd.Parsers.Logical
             else if (matchedValue.Item1 == ActionDir.reduce)
             {
                 var reduceDest = matchedValue.Item2 as NonTerminalSingle;
+                var dataToInsert = new TreeNonTerminal(reduceDest);
 
-                for (int i = 0; i < reduceDest.Count * 2; i++) stack.Pop();
-                stack.Push(reduceDest);
+                for (int i = 0; i < reduceDest.Count * 2; i++)
+                {
+                    var data = stack.Pop();
+                    if (i % 2 > 0)
+                        dataToInsert.Add(data as TreeSymbol);
+                }
+                stack.Push(dataToInsert);
                 result.Direction = ActionDir.reduce;
             }
             else if (matchedValue.Item1 == ActionDir.epsilon_reduce)
             {
-                stack.Push(matchedValue.Item2 as NonTerminalSingle);
+                stack.Push(new TreeNonTerminal(matchedValue.Item2 as NonTerminalSingle));
 
                 result.Direction = ActionDir.epsilon_reduce;
             }
@@ -87,7 +94,7 @@ namespace Parse.FrontEnd.Parsers.Logical
             parsingUnit.ChangeToNormalState();
             var topData = parsingUnit.BeforeStack.Peek();
 
-            if (topData is NonTerminalSingle)
+            if (topData is TreeNonTerminal)
             {
                 parsingUnit.ChangeToFailedState();
                 return false;
@@ -97,7 +104,7 @@ namespace Parse.FrontEnd.Parsers.Logical
             var IxMetrix = parsingTable[(int)topData];
 
             // invalid input symbol, can't shift (error handler also not exist)
-            if (!IxMetrix.MatchedValueSet.ContainsKey(inputValue.Kind))
+            if (IxMetrix.MatchedValueSet.ContainsKey(inputValue.Kind) == false)
             {
                 parsingUnit.PossibleTerminalSet = IxMetrix.PossibleTerminalSet;
                 parsingUnit.ChangeToFailedState();
@@ -130,25 +137,25 @@ namespace Parse.FrontEnd.Parsers.Logical
             parsingUnit.ChangeToNormalState();
             var topData = parsingUnit.BeforeStack.Peek();
 
-            if (!(topData is NonTerminalSingle))
+            if (!(topData is TreeNonTerminal))
             {
                 parsingUnit.ChangeToFailedState();
                 return false;
             }
 
-            var seenSingleNT = topData as NonTerminalSingle;
+            var seenSingleNT = topData as TreeNonTerminal;
             var secondData = parsingUnit.BeforeStack.SecondItemPeek();
             LRParsingTable parsingTable = this.Parser.ParsingTable as LRParsingTable;
             var IxMetrix = parsingTable[(int)secondData];
 
             // can't goto action
-            if (!IxMetrix.MatchedValueSet.ContainsKey(seenSingleNT.ToNonTerminal()))
+            if (!IxMetrix.MatchedValueSet.ContainsKey(seenSingleNT.ToNonTerminal))
             {
                 parsingUnit.ChangeToFailedState();
                 return false;
             }
 
-            var matchedValue = IxMetrix.MatchedValueSet[seenSingleNT.ToNonTerminal()];
+            var matchedValue = IxMetrix.MatchedValueSet[seenSingleNT.ToNonTerminal];
 
             var actionData = new ActionData(matchedValue.Item1, matchedValue.Item2);
             parsingUnit.AfterStack.Push((int)matchedValue.Item2);
@@ -379,7 +386,7 @@ namespace Parse.FrontEnd.Parsers.Logical
         /// </summary>
         /// <param name="parsingBlock"></param>
         /// <param name="token">input terminal</param>
-        /// <returns></returns>
+        /// <returns>It returns true if successed else returns false</returns>
         public bool UnitParsing(ParsingUnit parsingUnit, TokenData token)
         {
             parsingUnit.InputValue = token;
@@ -391,6 +398,8 @@ namespace Parse.FrontEnd.Parsers.Logical
 
             bool result = this.GoTo(token, parsingUnit);
             if (result == false) result = this.ShiftAndReduce(token, parsingUnit);
+
+            if (result) ParseTreeBuilder.BuildTree(parsingUnit);
 
             return result;
         }
@@ -428,8 +437,7 @@ namespace Parse.FrontEnd.Parsers.Logical
                 if (tokens.Count <= 0) return result;
 
                 result = new ParsingResult();
-                foreach (var item in tokens)
-                    result.Add(new ParsingBlock(item));
+                foreach (var item in tokens) result.Add(new ParsingBlock(item));
 
                 this.AllParsing(result);
                 result.Success = true;

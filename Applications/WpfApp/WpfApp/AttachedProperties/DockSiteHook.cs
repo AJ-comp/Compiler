@@ -264,7 +264,7 @@ namespace ApplicationLayer.WpfApp.AttachedProperties
                 var docViewModel = document.DataContext as DocumentViewModel;
                 var selDocViewModel = e.NewValue as DocumentViewModel;
 
-                if (docViewModel.ToolTipText == selDocViewModel.ToolTipText)
+                if (docViewModel.SerializationId == selDocViewModel.SerializationId)
                 {
                     document.Activate();
                     break;

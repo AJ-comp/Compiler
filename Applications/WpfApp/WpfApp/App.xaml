@@ -23,6 +23,7 @@
                     <ResourceDictionary Source="/Wpf.UI.Advance;component/AdvancedWindow.xaml" />
                     <!-- Controls -->
                     <ResourceDictionary Source="/Parse.WpfControls;component/Themes/Generic.xaml" />
+                    <ResourceDictionary Source="/ApplicationLayer.Views;component/Resources/GraphTemplates.xaml" />
                 </ResourceDictionary.MergedDictionaries>
             </ResourceDictionary>
             <ResourceDictionary x:Name="ThemeResources">

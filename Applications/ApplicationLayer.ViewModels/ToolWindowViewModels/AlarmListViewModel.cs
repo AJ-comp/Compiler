@@ -6,7 +6,7 @@ using Parse.WpfControls.SyntaxEditor.EventArgs;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-
+using System.Threading.Tasks;
 using CommonResource = ApplicationLayer.Define.Properties.Resources;
 
 namespace ApplicationLayer.ViewModels.ToolWindowViewModels
@@ -113,17 +113,17 @@ namespace ApplicationLayer.ViewModels.ToolWindowViewModels
             List<AlarmData> alarmList = new List<AlarmData>();
             var editorViewModel = sender as EditorTypeViewModel;
 
-            foreach (var item in e)
+            Parallel.ForEach(e, item =>
             {
-                if (item.Status == AlarmStatus.None) continue;
+                if (item.Status == AlarmStatus.None) return;
 
                 var errInfos = item.ParsingFailedArgs.ErrorInfos;
-                foreach(var errInfo in errInfos)
+                foreach (var errInfo in errInfos)
                 {
                     var alarmData = new AlarmData(sender, item.Status, errInfo.Code, errInfo.Message, editorViewModel.FullPath, item.ProjectName, item.FileName, item.TokenIndex, item.Line);
                     alarmList.Add(alarmData);
                 }
-            }
+            });
 
             this.AddAlarmList(sender, alarmList);
         }

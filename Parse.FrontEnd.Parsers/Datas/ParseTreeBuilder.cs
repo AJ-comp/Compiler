@@ -1,48 +1,45 @@
 ﻿using Parse.FrontEnd.Ast;
 using Parse.FrontEnd.RegularGrammar;
-using System.Collections.Generic;
-using System.Linq;
 using static Parse.FrontEnd.Parsers.Datas.LR.LRParsingRowDataFormat;
 
 namespace Parse.FrontEnd.Parsers.Datas
 {
-    public class ParseTree
+    public class ParseTreeBuilder
     {
-        private Stack<TreeSymbol> data = new Stack<TreeSymbol>();
-
-        public IReadOnlyList<TreeSymbol> Tree => data.ToList();
-        public IReadOnlyList<TreeSymbol> ReverseTree => data.Reverse().ToList();
-
+        /*
         /// <summary>
         /// This function builds a parse tree.
         /// </summary>
         /// <param name="successResult">The result when the 1 level parsing is a success</param>
-        private void BuildParseTree(ParsingUnit successResult)
+        private static void BuildParseTree(ParsingUnit successResult)
         {
             if (successResult.Action.Direction == ActionDir.shift)
             {
                 //                if (!args.InputValue.Kind.Meaning) return;
 
-                this.data.Push(new TreeTerminal(successResult.InputValue));
+                successResult.ParseTreeStack.Push(new TreeTerminal(successResult.InputValue));
             }
             else if (successResult.Action.Direction == ActionDir.reduce)
             {
                 var item = successResult.Action.Dest as NonTerminalSingle;
 
                 TreeNonTerminal nonTerminal = new TreeNonTerminal(item);
-                for (int i = 0; i < item.Count; i++) nonTerminal.Insert(0, this.data.Pop());
+                for (int i = 0; i < item.Count; i++) nonTerminal.Insert(0, successResult.ParseTreeStack.Pop());
 
-                this.data.Push(nonTerminal);
+                successResult.ParseTreeStack.Push(nonTerminal);
             }
             else if (successResult.Action.Direction == ActionDir.epsilon_reduce)
             {
                 var item = successResult.Action.Dest as NonTerminalSingle;
                 TreeNonTerminal nonTerminal = new TreeNonTerminal(item);
 
-                this.data.Push(nonTerminal);
+                successResult.ParseTreeStack.Push(nonTerminal);
             }
         }
+        */
 
+
+        /*
         /// <summary>
         /// This function builds an AST
         /// </summary>
@@ -87,15 +84,16 @@ namespace Parse.FrontEnd.Parsers.Datas
                 //                }
             }
         }
+        */
 
         /// <summary>
         /// This function builds a ParseTree and an AST.
         /// </summary>
         /// <param name="successResult">The result when the 1 level parsing is a success</param>
-        public void BuildTree(ParsingUnit successResult)
+        public static void BuildTree(ParsingUnit successResult)
         {
-            this.BuildParseTree(successResult);
-            this.BuildAST(successResult);
+//            ParseTreeBuilder.BuildParseTree(successResult);
+//            this.BuildAST(successResult);
         }
     }
 }

@@ -83,13 +83,8 @@ namespace Parse.FrontEnd.Parsers.ErrorHandling.GrammarPrivate
         protected static ErrorHandlingResult DelCurToken(int ixIndex, ParsingResult parsingResult, int seeingTokenIndex)
         {
             // skip current token because of this token is useless
-            var frontBlock = parsingResult.GetFrontBlockCanParse(seeingTokenIndex);
-            var frontBlockLastParsingUnit = (frontBlock != null) ? frontBlock.Units.Last() : null;
             var curBlock = parsingResult[seeingTokenIndex];
-            var newUnit = (frontBlockLastParsingUnit == null) ?
-                                ParsingUnit.FirstParsingUnit :
-                                new ParsingUnit(frontBlockLastParsingUnit.AfterStack, frontBlockLastParsingUnit.AfterStack, curBlock.Token);
-
+            var newUnit = parsingResult.AddUnitOnCurBlock(seeingTokenIndex);
             var recoveryMessage = string.Format(Resource.RecoverWithLRHandler + ", " + Resource.SkipToken, ixIndex, curBlock.Token.Kind.ToString());
 
             // set error infomations
@@ -97,6 +92,7 @@ namespace Parse.FrontEnd.Parsers.ErrorHandling.GrammarPrivate
             curBlock.errorInfos.Add(parsingErrInfo);
 
             newUnit.SetRecoveryMessage(recoveryMessage);
+            newUnit.CopyBeforeStackToAfterStack();
             curBlock.units.Add(newUnit);
 
             return new ErrorHandlingResult(parsingResult, seeingTokenIndex, true);

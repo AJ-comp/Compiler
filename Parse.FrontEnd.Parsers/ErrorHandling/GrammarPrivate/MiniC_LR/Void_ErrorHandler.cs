@@ -15,9 +15,7 @@ namespace Parse.FrontEnd.Parsers.ErrorHandling.GrammarPrivate.MiniC_LR
         private static ErrorHandlingResult ErrorHandlingLogic(MiniCGrammar grammar, int ixIndex, ParserSnippet snippet, ParsingResult parsingResult, int seeingTokenIndex)
         {
             /// Here, someone has to add error handling logic for ixIndex.
-            if (ixIndex == 0)
-                ;
-            else if (ixIndex == 107)
+            if (ixIndex == 107)
                 return GrammarPrivateLRErrorHandler.DelCurToken(ixIndex, parsingResult, seeingTokenIndex);
 
             return DefaultErrorHandler.Process(grammar, snippet, parsingResult, seeingTokenIndex);

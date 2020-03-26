@@ -11,8 +11,8 @@ namespace Parse.FrontEnd.Ast
 
         private List<TreeSymbol> symbols = new List<TreeSymbol>();
         public IReadOnlyList<TreeSymbol> Items => symbols;
-
         public string Name => this.signPost.MeaningUnit?.Name;
+        public NonTerminal ToNonTerminal => this.signPost.ToNonTerminal();
 
         public TreeSymbol this[int index] { get => ((IList<TreeSymbol>)symbols)[index]; set => ((IList<TreeSymbol>)symbols)[index] = value; }
         public int Count => ((IList<TreeSymbol>)symbols).Count;
@@ -102,6 +102,6 @@ namespace Parse.FrontEnd.Ast
             return result;
         }
 
-        public override string ToString() => this.Name?.ToString();
+        public override string ToString() => this.ToNonTerminal.ToString();  //this.Name?.ToString();
     }
 }

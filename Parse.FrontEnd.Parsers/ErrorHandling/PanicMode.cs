@@ -68,12 +68,17 @@ namespace Parse.FrontEnd.Parsers.ErrorHandling
         /// <returns></returns>
         private static int AdjustToken(ParsingResult parsingResult, int seeingTokenIndex, HashSet<Terminal> synchronizeTokens)
         {
+            int firstIndex = seeingTokenIndex;
+
             while (seeingTokenIndex < parsingResult.Count - 1)
             {
                 //                var ixMetrix = parsingTable[curStatus];
                 ParsingBlock blockToSkip = parsingResult[seeingTokenIndex];
                 TokenData curToken = blockToSkip.Token;
-                blockToSkip.units.Clear(); // it has to delete an all unit because a block to skip.
+
+                // The token of the first index may fire an error while parsing. because history has to be, Clear function doesn't call.
+                if(seeingTokenIndex > firstIndex)
+                    blockToSkip.units.Clear(); // it has to delete an all unit because a block to skip.
 
                 // check
                 var targetTerminal = curToken.Kind;

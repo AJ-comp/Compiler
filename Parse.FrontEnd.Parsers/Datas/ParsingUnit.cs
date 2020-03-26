@@ -1,4 +1,5 @@
 ﻿using Parse.Extensions;
+using Parse.FrontEnd.Ast;
 using Parse.FrontEnd.Parsers.ErrorHandling;
 using Parse.FrontEnd.Parsers.ErrorHandling.GrammarPrivate;
 using Parse.FrontEnd.Parsers.EventArgs;

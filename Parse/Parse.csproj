@@ -59,6 +59,7 @@
     <Compile Include="Tokenize\TokenStorage.cs" />
     <Compile Include="TokenType.cs" />
     <Compile Include="Utilities\Arranger.cs" />
+    <Compile Include="Utilities\DGMLWriter.cs" />
     <Compile Include="Utilities\Singleton.cs" />
     <Compile Include="Utilities\StringUtility.cs" />
   </ItemGroup>

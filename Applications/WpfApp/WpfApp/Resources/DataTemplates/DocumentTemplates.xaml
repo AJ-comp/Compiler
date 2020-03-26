@@ -5,6 +5,7 @@
                     xmlns:docking="http://schemas.actiprosoftware.com/winfx/xaml/docking"
                     xmlns:syntaxEditor="clr-namespace:Parse.WpfControls.SyntaxEditor;assembly=Parse.WpfControls.SyntaxEditor"
                     xmlns:ap="clr-namespace:ApplicationLayer.WpfApp.AttachedProperties"
+                    xmlns:views="clr-namespace:ApplicationLayer.Views.DocumentTypeViews;assembly=ApplicationLayer.Views"
                     xmlns:localCommands="clr-namespace:ApplicationLayer.WpfApp.Commands"
                     xmlns:localConverters="clr-namespace:ApplicationLayer.WpfApp.Converters"
                     xmlns:localBehaviors="clr-namespace:ApplicationLayer.WpfApp.Behaviors"
@@ -48,8 +49,9 @@
 
 
     <DataTemplate DataType="{x:Type documentViewModels:ParseTreeViewModel}">
-        <TreeView ItemsSource="{Binding ParseTree}" />
+        <views:ParseTreeView/>
     </DataTemplate>
+
 
     <DataTemplate DataType="{x:Type documentViewModels:ParsingHistoryViewModel}">
         <DataGrid IsReadOnly="True" ItemsSource="{Binding ParsingHistory}"/>
@@ -78,6 +80,8 @@
         </DockPanel>
     </DataTemplate>
 
+        
+        
     <DataTemplate x:Key="DocumentItemTemplate">
         <DockPanel ToolTip="{Binding ToolTipText}">
             <Button x:Name="PART_CloseButton"

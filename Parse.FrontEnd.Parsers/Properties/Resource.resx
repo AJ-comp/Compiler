@@ -127,4 +127,19 @@
   <data name="ReplaceVirtualToken" xml:space="preserve">
     <value>replace to a virtual token : {0}</value>
   </data>
+  <data name="StackBeforeParsing" xml:space="preserve">
+    <value>The stack before parsing</value>
+  </data>
+  <data name="InputSymbol" xml:space="preserve">
+    <value>An input symbol</value>
+  </data>
+  <data name="ActionInfo" xml:space="preserve">
+    <value>The action information</value>
+  </data>
+  <data name="RecoveryInfo" xml:space="preserve">
+    <value>The recovery information</value>
+  </data>
+  <data name="StackAfterParsing" xml:space="preserve">
+    <value>The stack after parsing</value>
+  </data>
 </root>

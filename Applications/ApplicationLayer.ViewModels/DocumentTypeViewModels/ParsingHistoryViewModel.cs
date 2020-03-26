@@ -7,7 +7,8 @@ namespace ApplicationLayer.ViewModels.DocumentTypeViewModels
     {
         public DataTable ParsingHistory { get; set; }
 
-        public ParsingHistoryViewModel(DataTable parsingHistory) : base(CommonResource.ParsingHistory)
+        public ParsingHistoryViewModel(DataTable parsingHistory, string srcPath)
+            : base(CommonResource.ParsingHistory, CommonResource.ParsingHistory + srcPath, CommonResource.ParsingHistory + srcPath)
         {
             this.ParsingHistory = parsingHistory;
         }

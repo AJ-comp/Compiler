@@ -25,6 +25,14 @@ namespace Parse.FrontEnd.Parsers.ErrorHandling.GrammarPrivate.MiniC_LR
                 return (blockParsingResult == LRParserSnippet.SuccessedKind.NotApplicable) ?
                     new ErrorHandlingResult(parsingResult, seeingTokenIndex, false) : new ErrorHandlingResult(parsingResult, seeingTokenIndex, true);
             }
+            else if (ixIndex == 16)
+            {
+                var virtualToken = new TokenData(grammar.Int, new TokenCell(-1, grammar.Int.Value, null));
+                var blockParsingResult = GrammarPrivateLRErrorHandler.ReplaceToVirtualToken(ixIndex, snippet, parsingResult[seeingTokenIndex], virtualToken);
+
+                return (blockParsingResult == LRParserSnippet.SuccessedKind.NotApplicable) ?
+                    new ErrorHandlingResult(parsingResult, seeingTokenIndex, false) : new ErrorHandlingResult(parsingResult, seeingTokenIndex, true);
+            }
             else if (ixIndex == 19)
                 return GrammarPrivateLRErrorHandler.DelCurToken(ixIndex, parsingResult, seeingTokenIndex);
             else if (ixIndex == 29)

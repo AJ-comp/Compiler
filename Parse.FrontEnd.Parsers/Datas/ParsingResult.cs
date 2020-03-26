@@ -1,4 +1,6 @@
 ﻿using Parse.Extensions;
+using Parse.FrontEnd.Ast;
+using Parse.FrontEnd.Parsers.Properties;
 using Parse.FrontEnd.RegularGrammar;
 using System;
 using System.Collections.Generic;
@@ -15,7 +17,6 @@ namespace Parse.FrontEnd.Parsers.Datas
     /// <see cref="https://www.lucidchart.com/documents/edit/c96f0bde-4111-4957-bf65-75b56d8074dc/0_0?beaconFlowId=687BBA49A656D177"/>
     public class ParsingResult : List<ParsingBlock>
     {
-
         public bool Success
         {
             get; internal set;
@@ -57,11 +58,11 @@ namespace Parse.FrontEnd.Parsers.Datas
             {
                 DataTable result = new DataTable();
 
-                this.AddColumn(result, "prev stack");
-                this.AddColumn(result, "input symbol");
-                this.AddColumn(result, "action information");
-                this.AddColumn(result, "recovery message");
-                this.AddColumn(result, "current stack");
+                this.AddColumn(result, Resource.StackBeforeParsing);
+                this.AddColumn(result, Resource.InputSymbol);
+                this.AddColumn(result, Resource.ActionInfo);
+                this.AddColumn(result, Resource.RecoveryInfo);
+                this.AddColumn(result, Resource.StackAfterParsing);
 
                 foreach (var block in this)
                 {
@@ -88,22 +89,14 @@ namespace Parse.FrontEnd.Parsers.Datas
             }
         }
 
-        public IReadOnlyList<NonTerminalSingle> ToParseTree
+        public TreeSymbol ToParseTree
         {
             get
             {
-                List<NonTerminalSingle> result = new List<NonTerminalSingle>();
+                TreeSymbol result = null;
+                if (this.Success == false) return result;
 
-                foreach (var block in this)
-                {
-                    foreach (var record in block.Units)
-                    {
-                        if (record.Action.Direction == ActionDir.reduce)
-                            result.Add(record.Action.Dest as NonTerminalSingle);
-                    }
-                }
-
-                return result;
+                return this.Last().Units.Last().AfterStack.SecondItemPeek() as TreeSymbol;
             }
         }
 

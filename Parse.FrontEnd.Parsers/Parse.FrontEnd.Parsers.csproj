@@ -58,7 +58,7 @@
     <Compile Include="Datas\ActionData.cs" />
     <Compile Include="Datas\LR\CanonicalItem.cs" />
     <Compile Include="Datas\LL\LLParsingRowDataFormat.cs" />
-    <Compile Include="Datas\ParseTree.cs" />
+    <Compile Include="Datas\ParseTreeBuilder.cs" />
     <Compile Include="Datas\ParsingBlock.cs" />
     <Compile Include="Datas\LR\LRParsingRowDataFormat.cs" />
     <Compile Include="Datas\ParsingErrorInfo.cs" />
@@ -72,6 +72,7 @@
     <Compile Include="ErrorHandling\GrammarPrivate\MiniC_LR\EndMarker_ErrorHandler.cs" />
     <Compile Include="ErrorHandling\GrammarPrivate\MiniC_LR\OpenCurlyBrace_ErrorHandler.cs" />
     <Compile Include="ErrorHandling\GrammarPrivate\MiniC_LR\OpenParenthesis_ErrorHandler.cs" />
+    <Compile Include="ErrorHandling\GrammarPrivate\MiniC_LR\Return_ErrorHandler.cs" />
     <Compile Include="ErrorHandling\GrammarPrivate\MiniC_LR\Void_ErrorHandler.cs" />
     <Compile Include="ErrorHandling\GrammarPrivate\MiniC_LR\While_ErrorHandler.cs" />
     <Compile Include="ErrorHandling\IErrorHandlable.cs" />

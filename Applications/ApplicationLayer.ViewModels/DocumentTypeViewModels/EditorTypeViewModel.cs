@@ -21,7 +21,7 @@ namespace ApplicationLayer.ViewModels.DocumentTypeViewModels
         public string Data { get; } = string.Empty;
 
         public ParserSnippet ParserSnippet { get; } = ParserFactory.Instance.GetParser(ParserFactory.ParserKind.SLR_Parser, new MiniCGrammar()).NewParserSnippet();
-        public IReadOnlyList<TreeSymbol> ParseTree { get; private set; }
+        public TreeSymbol ParseTree { get; private set; }
         public DataTable ParsingHistory { get; private set; }
 
         private int caretIndex = 0;
@@ -39,7 +39,7 @@ namespace ApplicationLayer.ViewModels.DocumentTypeViewModels
         {
         }
 
-        public EditorTypeViewModel(string fullPath) : base(Path.GetFileName(fullPath), fullPath)
+        public EditorTypeViewModel(string fullPath) : base(Path.GetFileName(fullPath), fullPath, fullPath)
         {
             this.FullPath = fullPath;
         }
@@ -65,6 +65,8 @@ namespace ApplicationLayer.ViewModels.DocumentTypeViewModels
         {
 //            this.ParseTree = parsingCompletedInfo.ParsingResult.ToParseTree;
             this.ParsingHistory = parsingCompletedInfo.ParsingResult.ToParsingHistory;
+
+            this.ParseTree = parsingCompletedInfo.ParsingResult.ToParseTree;
 
             // inform to alarm list view.
             this.AlarmFired?.Invoke(this, parsingCompletedInfo.AlarmCollection);

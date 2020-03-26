@@ -325,7 +325,9 @@ private void OnNewFile(Func<Document> func)
                 var selDoc = mainViewModel.SolutionExplorer.SelectedDocument;
                 if ((selDoc is EditorTypeViewModel) == false) return;
                 var editorViewModel = mainViewModel.SolutionExplorer.SelectedDocument as EditorTypeViewModel;
-                mainViewModel.SolutionExplorer.Documents.Add(new ParsingHistoryViewModel(editorViewModel.ParsingHistory));
+                var parsingHistoryDoc = new ParsingHistoryViewModel(editorViewModel.ParsingHistory, selDoc.ToolTipText);
+                mainViewModel.SolutionExplorer.Documents.Add(parsingHistoryDoc);
+                mainViewModel.SolutionExplorer.SelectedDocument = parsingHistoryDoc;
             }, () =>
             {
                 return true;
@@ -342,7 +344,9 @@ private void OnNewFile(Func<Document> func)
                 var selDoc = mainViewModel.SolutionExplorer.SelectedDocument;
                 if ((selDoc is EditorTypeViewModel) == false) return;
                 var editorViewModel = mainViewModel.SolutionExplorer.SelectedDocument as EditorTypeViewModel;
-                mainViewModel.SolutionExplorer.Documents.Add(new ParseTreeViewModel(editorViewModel.ParseTree));
+                var parseTreeDoc = new ParseTreeViewModel(editorViewModel.ParseTree, selDoc.ToolTipText);
+                mainViewModel.SolutionExplorer.Documents.Add(parseTreeDoc);
+                mainViewModel.SolutionExplorer.SelectedDocument = parseTreeDoc;
             }, () =>
             {
                 return true;
@@ -512,6 +516,7 @@ private void OnNewFile(Func<Document> func)
             {
                 if (eventArgs == null) return;
                 if (eventArgs.Item1 == null) return;
+                if (eventArgs.Item2.Window == null) return;
 
                 var mainVm = eventArgs.Item1 as MainViewModel;
                 mainVm.SolutionExplorer.SelectedDocument = eventArgs.Item2.Window.DataContext as DocumentViewModel;

@@ -147,4 +147,19 @@
   <data name="ReplaceVirtualToken" xml:space="preserve">
     <value>가상 토큰으로 대체 : {0}</value>
   </data>
+  <data name="StackBeforeParsing" xml:space="preserve">
+    <value>파싱 이전 스택</value>
+  </data>
+  <data name="InputSymbol" xml:space="preserve">
+    <value>입력 심벌</value>
+  </data>
+  <data name="ActionInfo" xml:space="preserve">
+    <value>액션 정보</value>
+  </data>
+  <data name="RecoveryInfo" xml:space="preserve">
+    <value>복구 정보</value>
+  </data>
+  <data name="StackAfterParsing" xml:space="preserve">
+    <value>파싱 이후 스택</value>
+  </data>
 </root>

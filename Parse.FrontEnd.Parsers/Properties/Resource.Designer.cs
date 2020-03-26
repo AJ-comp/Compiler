@@ -61,11 +61,29 @@ namespace Parse.FrontEnd.Parsers.Properties {
         }
         
         /// <summary>
+        ///   The action information과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string ActionInfo {
+            get {
+                return ResourceManager.GetString("ActionInfo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   can&apos;t shift과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string CantShift {
             get {
                 return ResourceManager.GetString("CantShift", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   An input symbol과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string InputSymbol {
+            get {
+                return ResourceManager.GetString("InputSymbol", resourceCulture);
             }
         }
         
@@ -115,6 +133,15 @@ namespace Parse.FrontEnd.Parsers.Properties {
         }
         
         /// <summary>
+        ///   The recovery information과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string RecoveryInfo {
+            get {
+                return ResourceManager.GetString("RecoveryInfo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   successed a recovery과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string RecoverySuccessed {
@@ -138,6 +165,24 @@ namespace Parse.FrontEnd.Parsers.Properties {
         public static string SkipToken {
             get {
                 return ResourceManager.GetString("SkipToken", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   The stack after parsing과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string StackAfterParsing {
+            get {
+                return ResourceManager.GetString("StackAfterParsing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   The stack before parsing과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string StackBeforeParsing {
+            get {
+                return ResourceManager.GetString("StackBeforeParsing", resourceCulture);
             }
         }
         

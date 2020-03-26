@@ -1,5 +1,4 @@
 ﻿using ApplicationLayer.ViewModels.DockingItemViewModels;
-using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using System;
 
@@ -59,6 +58,11 @@ namespace ApplicationLayer.ViewModels.DocumentTypeViewModels
         public DocumentViewModel(string title, string toolstrip) : this(title)
         {
             this.ToolTipText = toolstrip;
+        }
+
+        public DocumentViewModel(string title, string toolstrip, string serializationId) : this(title, toolstrip)
+        {
+            this.SerializationId = serializationId;
         }
     }
 }
