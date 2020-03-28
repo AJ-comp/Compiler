@@ -2,40 +2,9 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:systemData="clr-namespace:System.Data;assembly=System.Data"
                     xmlns:wf="clr-namespace:System.Windows.Forms;assembly=System.Windows.Forms"
-                    xmlns:parsers="clr-namespace:Parse.FrontEnd.Parsers.LR;assembly=Parse.FrontEnd.Parsers"
                     xmlns:ast="clr-namespace:Parse.FrontEnd.Ast;assembly=Parse.FrontEnd"
-                    xmlns:ap="clr-namespace:ApplicationLayer.WpfApp.AttachedProperties"
-                    xmlns:commands="clr-namespace:ApplicationLayer.WpfApp.Commands"
-                    xmlns:parserLogic="clr-namespace:Parse.FrontEnd.Parsers.Logical;assembly=Parse.FrontEnd.Parsers"
-                    xmlns:lex="http://wpflocalizeextension.codeplex.com" 
-                    xmlns:wpfcontrolConverters="clr-namespace:Parse.WpfControls.Converters;assembly=Parse.WpfControls"
                     xmlns:local="clr-namespace:WpfApp.Resources.DataTemplates"
                     xmlns:localAP="clr-namespace:WpfApp.AttachedProperties">
-
-    <DataTemplate DataType="{x:Type parsers:SLRParser}">
-        <TabControl>
-            <TabItem Header="{lex:Loc Key=Grammar}">
-                <TextBox Text="{Binding Grammar.EbnfExpression, Mode=OneWay}" 
-                                IsReadOnly="True"
-                                ScrollViewer.VerticalScrollBarVisibility="Visible" 
-                                ScrollViewer.HorizontalScrollBarVisibility="Visible"/>
-            </TabItem>
-            <TabItem Header="{lex:Loc Key=CanonicalTable}">
-                <TextBox Text="{Binding C0, Converter={wpfcontrolConverters:PropertyValueToStringConverter}, Mode=OneWay}"
-                                IsReadOnly="True"
-                                ScrollViewer.VerticalScrollBarVisibility="Visible" 
-                                ScrollViewer.HorizontalScrollBarVisibility="Visible"/>
-            </TabItem>
-            <TabItem Header="{lex:Loc Key=ParsingTable}">
-                <TabItem.Content>
-                    <WindowsFormsHost ap:WindowsFormsHostHook.EnableLoadedHook="True"
-                                        ap:WindowsFormsHostHook.LoadedCommand="{x:Static commands:MenuActionCommands.ShowParsingTableCommand}"
-                                        ap:WindowsFormsHostHook.LoadedCommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}}"
-                                        ap:WindowsFormsHostHook.DataSource="{Binding}"/>
-                </TabItem.Content>
-            </TabItem>
-        </TabControl>
-    </DataTemplate>
 
     <HierarchicalDataTemplate DataType="{x:Type ast:TreeNonTerminal}" ItemsSource="{Binding Items}">
         <TextBlock Text="{Binding SignPost.Name}"/>

@@ -22,5 +22,14 @@ namespace ApplicationLayer.Models.GraphModels
         {
             ID = id;
         }
+
+        public static PocEdge AddNewGraphEdge(PocGraph target, PocVertex from, PocVertex to)
+        {
+            string edgeString = string.Format("{0}-{1} Connected", from.ID, to.ID);
+
+            PocEdge newEdge = new PocEdge(edgeString, from, to);
+            target.AddEdge(newEdge);
+            return newEdge;
+        }
     }
 }

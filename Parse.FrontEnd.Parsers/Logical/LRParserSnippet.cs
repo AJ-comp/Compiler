@@ -67,7 +67,7 @@ namespace Parse.FrontEnd.Parsers.Logical
                 {
                     var data = stack.Pop();
                     if (i % 2 > 0)
-                        dataToInsert.Add(data as TreeSymbol);
+                        dataToInsert.Insert(0, (data as TreeSymbol));
                 }
                 stack.Push(dataToInsert);
                 result.Direction = ActionDir.reduce;

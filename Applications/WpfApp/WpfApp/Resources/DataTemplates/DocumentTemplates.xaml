@@ -5,11 +5,13 @@
                     xmlns:docking="http://schemas.actiprosoftware.com/winfx/xaml/docking"
                     xmlns:syntaxEditor="clr-namespace:Parse.WpfControls.SyntaxEditor;assembly=Parse.WpfControls.SyntaxEditor"
                     xmlns:ap="clr-namespace:ApplicationLayer.WpfApp.AttachedProperties"
-                    xmlns:views="clr-namespace:ApplicationLayer.Views.DocumentTypeViews;assembly=ApplicationLayer.Views"
                     xmlns:localCommands="clr-namespace:ApplicationLayer.WpfApp.Commands"
                     xmlns:localConverters="clr-namespace:ApplicationLayer.WpfApp.Converters"
                     xmlns:localBehaviors="clr-namespace:ApplicationLayer.WpfApp.Behaviors"
                     xmlns:documentViewModels="clr-namespace:ApplicationLayer.ViewModels.DocumentTypeViewModels;assembly=ApplicationLayer.ViewModels"
+                    xmlns:documentViews="clr-namespace:ApplicationLayer.Views.DocumentTypeViews;assembly=ApplicationLayer.Views"
+                    xmlns:subViews="clr-namespace:ApplicationLayer.Views.SubViews;assembly=ApplicationLayer.Views"
+                    xmlns:subViewModels="clr-namespace:ApplicationLayer.ViewModels.SubViewModels;assembly=ApplicationLayer.ViewModels"
                     xmlns:utilities="clr-namespace:Parse.WpfControls.Utilities;assembly=Parse.WpfControls">
 
     <Style x:Key="DockingWindowStyle" TargetType="docking:DockingWindow">
@@ -49,7 +51,7 @@
 
 
     <DataTemplate DataType="{x:Type documentViewModels:ParseTreeViewModel}">
-        <views:ParseTreeView/>
+        <documentViews:ParseTreeView/>
     </DataTemplate>
 
 
@@ -59,29 +61,16 @@
 
 
     <DataTemplate DataType="{x:Type documentViewModels:GrammarInfoViewModel}">
-        <DockPanel>
-            <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Background="Transparent">
-                <TextBlock Width="100" Margin="0 0 10 0"
-                                   HorizontalAlignment="Right"
-                                   Text="{lex:Loc Key=Grammar}"/>
-                <ComboBox Width="150" HorizontalAlignment="Right" 
-                                  ItemsSource="{Binding Grammars}" SelectedItem="{Binding SelectedItem}">
-                    <i:Interaction.Triggers>
-                        <i:EventTrigger EventName="Loaded">
-                            <i:InvokeCommandAction Command="{Binding LoadCommand}"/>
-                        </i:EventTrigger>
-                    </i:Interaction.Triggers>
-                </ComboBox>
-            </StackPanel>
-
-            <Grid>
-                <ContentControl Content="{Binding SelectedItem, Converter={localConverters:FindParserConverter}}"/>
-            </Grid>
-        </DockPanel>
+        <documentViews:GrammarInfoView/>
     </DataTemplate>
 
-        
-        
+
+    <DataTemplate DataType="{x:Type subViewModels:LRParserViewModel}">
+        <subViews:LRParserView/>
+    </DataTemplate>
+
+
+
     <DataTemplate x:Key="DocumentItemTemplate">
         <DockPanel ToolTip="{Binding ToolTipText}">
             <Button x:Name="PART_CloseButton"

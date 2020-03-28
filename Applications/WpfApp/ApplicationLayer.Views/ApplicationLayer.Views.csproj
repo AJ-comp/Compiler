@@ -67,6 +67,8 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Management" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\MvvmLightLibs.5.4.1.1\lib\net45\System.Windows.Interactivity.dll</HintPath>
@@ -87,8 +89,18 @@
     <Reference Include="WPFExtensions, Version=1.0.3437.34043, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\WPFExtensions.1.0.0\lib\WPFExtensions.dll</HintPath>
     </Reference>
+    <Reference Include="WPFLocalizeExtension, Version=3.3.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\WPFLocalizeExtension.3.3.1\lib\net452\WPFLocalizeExtension.dll</HintPath>
+    </Reference>
+    <Reference Include="XAMLMarkupExtensions, Version=1.5.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\XAMLMarkupExtensions.1.5.1\lib\net452\XAMLMarkupExtensions.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AttachedProperties\LayoutParametersHook.cs" />
+    <Compile Include="DocumentTypeViews\GrammarInfoView.xaml.cs">
+      <DependentUpon>GrammarInfoView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="DocumentTypeViews\ParseTreeView.xaml.cs">
       <DependentUpon>ParseTreeView.xaml</DependentUpon>
     </Compile>
@@ -105,6 +117,12 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="SubViews\LLParserView.xaml.cs">
+      <DependentUpon>LLParserView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SubViews\LRParserView.xaml.cs">
+      <DependentUpon>LRParserView.xaml</DependentUpon>
     </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -136,14 +154,26 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="AttachedProperties\" />
+    <Folder Include="Converters\" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="DocumentTypeViews\GrammarInfoView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="DocumentTypeViews\ParseTreeView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Resources\GraphTemplates.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SubViews\LLParserView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SubViews\LRParserView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

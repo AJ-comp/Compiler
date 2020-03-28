@@ -1,5 +1,8 @@
-﻿using GalaSoft.MvvmLight.Command;
+﻿using ApplicationLayer.Common.Utilities;
+using ApplicationLayer.ViewModels.SubViewModels;
+using GalaSoft.MvvmLight.Command;
 using Parse.FrontEnd.Grammars;
+using Parse.FrontEnd.Parsers.LR;
 using System.Collections.ObjectModel;
 
 using CommonResource = ApplicationLayer.Define.Properties.Resources;
@@ -20,7 +23,20 @@ namespace ApplicationLayer.ViewModels.DocumentTypeViewModels
             set
             {
                 this._selectedItem = value;
+                ParserFactory.Instance.RegisterParser(ParserFactory.ParserKind.SLR_Parser, _selectedItem);
+                ParserViewModel = new LRParserViewModel(ParserFactory.Instance.GetParser(ParserFactory.ParserKind.SLR_Parser, _selectedItem) as LRParser);
                 this.RaisePropertyChanged(nameof(SelectedItem));
+            }
+        }
+
+        private ParserViewModel parserViewModel;
+        public ParserViewModel ParserViewModel
+        {
+            get => parserViewModel;
+            set
+            {
+                this.parserViewModel = value;
+                this.RaisePropertyChanged(nameof(ParserViewModel));
             }
         }
 

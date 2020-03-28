@@ -1,0 +1,59 @@
+﻿<UserControl x:Class="ApplicationLayer.Views.SubViews.LRParserView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:lex="http://wpflocalizeextension.codeplex.com"
+             xmlns:zoom="clr-namespace:WPFExtensions.Controls;assembly=WPFExtensions"
+             xmlns:root="clr-namespace:ApplicationLayer.Views"
+             xmlns:local="clr-namespace:ApplicationLayer.Views.SubViews"
+             mc:Ignorable="d" >
+    <TabControl>
+        <TabItem Header="{lex:Loc Key=Grammar}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="150"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <ListBox Grid.Column="0" ItemsSource="{Binding NonTerminals}" SelectedItem="{Binding SelectedNonTerminal}"/>
+                <zoom:ZoomControl Grid.Column="1" Zoom="0.2" ZoomBoxOpacity="0.5" Background="Transparent">
+                    <root:PocGraphLayout Margin="10"
+                                            Graph="{Binding Path=EbnfGraph, Mode=OneWay}"
+                                            LayoutAlgorithmType="{Binding Path=GrammarLayoutAlgorithmType, Mode=OneWay}"
+                                            OverlapRemovalAlgorithmType="FSA"
+                                            HighlightAlgorithmType="Simple">
+                    </root:PocGraphLayout>
+
+                </zoom:ZoomControl>
+            </Grid>
+        </TabItem>
+        <TabItem Header="{lex:Loc Key=CanonicalTable}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="50"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <ListBox Grid.Column="0" ItemsSource="{Binding Canonicals}" SelectedIndex="{Binding SelectedCanonical}"/>
+                <zoom:ZoomControl Grid.Column="1" Zoom="0.2" ZoomBoxOpacity="0.5" Background="Transparent">
+                    <root:PocGraphLayout Margin="10"
+                                            Graph="{Binding Path=CanonicalGraph, Mode=OneWay}"
+                                            LayoutAlgorithmType="{Binding Path=CanonicalLayoutAlgorithmType, Mode=OneWay}"
+                                            OverlapRemovalAlgorithmType="FSA"
+                                            HighlightAlgorithmType="Simple">
+                    </root:PocGraphLayout>
+
+                </zoom:ZoomControl>
+            </Grid>
+        </TabItem>
+        <TabItem Header="{lex:Loc Key=ParsingTable}">
+            <!--<TabItem.Content>
+                <WindowsFormsHost ap:WindowsFormsHostHook.EnableLoadedHook="True"
+                                        ap:WindowsFormsHostHook.LoadedCommand="{x:Static commands:MenuActionCommands.ShowParsingTableCommand}"
+                                        ap:WindowsFormsHostHook.LoadedCommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}}"
+                                        ap:WindowsFormsHostHook.DataSource="{Binding}"/>
+            </TabItem.Content>-->
+        </TabItem>
+    </TabControl>
+</UserControl>

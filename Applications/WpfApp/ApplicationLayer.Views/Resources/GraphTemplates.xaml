@@ -34,9 +34,14 @@
         </Setter>
     </Style>
 
+
+    <DataTemplate x:Key="edgeTemplate" DataType="{x:Type models:PocEdge}">
+        <TextBlock Text="{Binding Path=ID, Mode=OneWay}" Foreground="{DynamicResource CommonEnableTextBrush}"/>
+    </DataTemplate>
+
     <Style TargetType="{x:Type graphsharp:EdgeControl}">
         <Style.Resources>
-            <ToolTip x:Key="ToolTipContent">
+            <ToolTip x:Key="ToolTipContent" Visibility="Visible">
                 <StackPanel>
                     <TextBlock FontWeight="Bold" Text="Edge.ID"/>
                     <TextBlock Text="{Binding ID}"/>
@@ -44,6 +49,8 @@
             </ToolTip>
         </Style.Resources>
         <Setter Property="ToolTip" Value="{StaticResource ToolTipContent}"/>
+        <Setter Property="Tag" Value="abc"/>
     </Style>
+
 
 </ResourceDictionary>

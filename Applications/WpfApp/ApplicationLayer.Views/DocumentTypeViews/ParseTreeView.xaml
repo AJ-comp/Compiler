@@ -7,22 +7,36 @@
              xmlns:tree="clr-namespace:GraphSharp.Algorithms.Layout.Simple.Tree;assembly=GraphSharp"
              xmlns:zoom="clr-namespace:WPFExtensions.Controls;assembly=WPFExtensions"
              xmlns:root="clr-namespace:ApplicationLayer.Views"
+             xmlns:ap="clr-namespace:ApplicationLayer.Views.AttachedProperties"
              xmlns:local="clr-namespace:ApplicationLayer.Views.DocumentTypeViews"
              mc:Ignorable="d" >
-    <zoom:ZoomControl Zoom="0.2" ZoomBoxOpacity="0.5" Background="Transparent">
-        <root:PocGraphLayout Margin="10"
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Orientation="Horizontal">
+            <TextBlock Text="Width" Margin="10 0 10 0"/>
+            <Slider x:Name="widthSlider" Minimum="0" Maximum="100" Width="100"/>
+        </StackPanel>
+
+        <zoom:ZoomControl Grid.Row="1" Zoom="0.2" ZoomBoxOpacity="0.5" Background="Transparent">
+            <root:PocGraphLayout Margin="10"
                                             Graph="{Binding Path=Graph, Mode=OneWay}"
                                             LayoutAlgorithmType="{Binding Path=LayoutAlgorithmType, Mode=OneWay}"
                                             OverlapRemovalAlgorithmType="FSA"
                                             HighlightAlgorithmType="Simple">
-            <root:PocGraphLayout.LayoutParameters>
-                <tree:SimpleTreeLayoutParameters WidthPerHeight="2.0" 
-                                                                        VertexGap="10.0" LayerGap="10.0" 
+                <root:PocGraphLayout.LayoutParameters>
+                    <tree:SimpleTreeLayoutParameters WidthPerHeight="2.0"
+                                                                        VertexGap="50.0" LayerGap="50.0" 
                                                                         OptimizeWidthAndHeight="false"
                                                                         Direction="TopToBottom"
                                                                         SpanningTreeGeneration="DFS"/>
-            </root:PocGraphLayout.LayoutParameters>
-        </root:PocGraphLayout>
+                </root:PocGraphLayout.LayoutParameters>
+            </root:PocGraphLayout>
 
-    </zoom:ZoomControl>
+        </zoom:ZoomControl>
+    </Grid>
 </UserControl>
