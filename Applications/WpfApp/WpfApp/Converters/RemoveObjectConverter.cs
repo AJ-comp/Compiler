@@ -1,4 +1,5 @@
-﻿using Parse.WpfControls.SyntaxEditor.EventArgs;
+﻿using ApplicationLayer.Views.Converters;
+using Parse.WpfControls.SyntaxEditor.EventArgs;
 
 namespace ApplicationLayer.WpfApp.Converters
 {

@@ -1,0 +1,7 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <BitmapImage x:Key="ErrorImagePath" UriSource="/ApplicationLayer.Views;component/Resources/Images/Basic/error.png"/>
+    <BitmapImage x:Key="WarningImagePath" UriSource="/ApplicationLayer.Views;component/Resources/Images/Basic/warning.png"/>
+
+</ResourceDictionary>

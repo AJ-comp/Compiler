@@ -13,6 +13,7 @@
                     <ResourceDictionary Source="Resources/DataTemplates/DocumentTemplates.xaml" />
                     <ResourceDictionary Source="Resources/DataTemplates/GrammarMenuTemplates.xaml" />
                     <ResourceDictionary Source="Resources/DataTemplates/HierarchicalDataTemplates.xaml" />
+                    <ResourceDictionary Source="Resources/DataTemplates/WindowTemplates.xaml" />
                     <ResourceDictionary Source="Resources/DataTemplates/MCUDataTemplates/ARMDataTemplates.xaml" />
                     <ResourceDictionary Source="Resources/DataTemplates/MCUDataTemplates/AVRDataTemplates.xaml" />
                 </ResourceDictionary.MergedDictionaries>
@@ -28,7 +29,7 @@
             </ResourceDictionary>
             <ResourceDictionary x:Name="ThemeResources">
                     <ResourceDictionary.MergedDictionaries>
-                        <ResourceDictionary Source="Resources/DarkThemeImageResources.xaml" />
+                        <ResourceDictionary Source="/ApplicationLayer.Views;component/Resources/DarkThemeImageResources.xaml" />
                         <ResourceDictionary Source="/Wpf.UI.Basic;component/DarkTheme.xaml" />
                         <ResourceDictionary Source="/Wpf.UI.Advance;component/DarkTheme.xaml" />
                     </ResourceDictionary.MergedDictionaries>

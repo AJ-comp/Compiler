@@ -175,10 +175,10 @@ namespace ApplicationLayer.ViewModels.SubViewModels
 
         public ProjectSelectionViewModel()
         {
-            this.TotalProjectList.Add(new ProjectData() { ImageSrc = "", Grammar = new MiniCGrammar(), ProjectType = ProjectData.ProjectTypes.Project });
-            this.TotalProjectList.Add(new ProjectData() { ImageSrc = "", Grammar = new MiniCGrammar(), ProjectType = ProjectData.ProjectTypes.LibraryProject });
-            this.TotalProjectList.Add(new ProjectData() { ImageSrc = "", Grammar = new AJGrammar(), ProjectType = ProjectData.ProjectTypes.Project });
-            this.TotalProjectList.Add(new ProjectData() { ImageSrc = "", Grammar = new AJGrammar(), ProjectType = ProjectData.ProjectTypes.LibraryProject });
+            this.TotalProjectList.Add(new ProjectData() { Grammar = new MiniCGrammar(), ProjectType = ProjectData.ProjectTypes.Project });
+            this.TotalProjectList.Add(new ProjectData() { Grammar = new MiniCGrammar(), ProjectType = ProjectData.ProjectTypes.LibraryProject });
+            this.TotalProjectList.Add(new ProjectData() { Grammar = new AJGrammar(), ProjectType = ProjectData.ProjectTypes.Project });
+            this.TotalProjectList.Add(new ProjectData() { Grammar = new AJGrammar(), ProjectType = ProjectData.ProjectTypes.LibraryProject });
 
             ClassHierarchyGenerator classHierarchyGenerator = new ClassHierarchyGenerator();
 

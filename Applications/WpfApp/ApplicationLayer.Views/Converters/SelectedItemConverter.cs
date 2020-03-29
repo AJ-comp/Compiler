@@ -1,10 +1,8 @@
 ﻿using ApplicationLayer.Common.Utilities;
-using ApplicationLayer.Models.SolutionPackage;
-using ApplicationLayer.WpfApp.Views.SubViews;
-using ApplicationLayer.WpfApp.Views.WindowViews;
+using ApplicationLayer.Views.SubViews;
 using System.Windows;
 
-namespace ApplicationLayer.WpfApp.Converters
+namespace ApplicationLayer.Views.Converters
 {
     class SelectedItemConverter : EventArgsConverterExtension<SelectedItemConverter>
     {
@@ -14,7 +12,6 @@ namespace ApplicationLayer.WpfApp.Converters
 
             object result = null;
             if (parameter is ProjectSelectionView) result = arg.NewValue as ClassHierarchyData;
-            else if (parameter is SolutionExplorer) result = arg.NewValue as HierarchicalData;
 
             return result;
         }

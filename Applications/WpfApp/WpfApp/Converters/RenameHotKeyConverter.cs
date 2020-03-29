@@ -1,5 +1,6 @@
 ﻿using ApplicationLayer.ViewModels.CommandArgs;
 using ApplicationLayer.ViewModels.ToolWindowViewModels;
+using ApplicationLayer.Views.Converters;
 using ApplicationLayer.WpfApp.Views.WindowViews;
 using System.Windows.Input;
 

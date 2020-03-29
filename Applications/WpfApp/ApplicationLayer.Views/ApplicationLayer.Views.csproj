@@ -98,6 +98,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AttachedProperties\LayoutParametersHook.cs" />
+    <Compile Include="AttachedProperties\WindowsFormsHostHook.cs" />
+    <Compile Include="Converters\EventArgsConverterExtension.cs" />
+    <Compile Include="Converters\SelectedItemConverter.cs" />
     <Compile Include="DocumentTypeViews\GrammarInfoView.xaml.cs">
       <DependentUpon>GrammarInfoView.xaml</DependentUpon>
     </Compile>
@@ -124,6 +127,10 @@
     <Compile Include="SubViews\LRParserView.xaml.cs">
       <DependentUpon>LRParserView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="SubViews\ProjectSelectionView.xaml.cs">
+      <DependentUpon>ProjectSelectionView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewCommands.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -144,6 +151,18 @@
       <Project>{A0661596-8C09-42A8-B412-8702108FD935}</Project>
       <Name>Parse.FrontEnd.Grammars</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\Parse.WpfControls\Parse.WpfControls.csproj">
+      <Project>{1d389520-0862-434b-82f9-ad0c41c2db5f}</Project>
+      <Name>Parse.WpfControls</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\ApplicationLayer.Common\ApplicationLayer.Common.csproj">
+      <Project>{9b7ebe4d-c2b3-40e8-9516-107340a07111}</Project>
+      <Name>ApplicationLayer.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\ApplicationLayer.Define\ApplicationLayer.Define.csproj">
+      <Project>{2b6881f9-2dbf-412b-9797-76d6d81abc14}</Project>
+      <Name>ApplicationLayer.Define</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\ApplicationLayer.Model\ApplicationLayer.Models.csproj">
       <Project>{9B9BD94E-15E9-4113-8BCA-543A925F34AB}</Project>
       <Name>ApplicationLayer.Models</Name>
@@ -153,9 +172,7 @@
       <Name>ApplicationLayer.ViewModels</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Converters\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Page Include="DocumentTypeViews\GrammarInfoView.xaml">
       <SubType>Designer</SubType>
@@ -164,6 +181,14 @@
     <Page Include="DocumentTypeViews\ParseTreeView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\BasicImageResources.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\DarkThemeImageResources.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Resources\GraphTemplates.xaml">
       <SubType>Designer</SubType>
@@ -177,6 +202,52 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="SubViews\ProjectSelectionView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Basic\cfile_16.png" />
+    <Resource Include="Resources\Images\Basic\cfile_24.png" />
+    <Resource Include="Resources\Images\Basic\cfile_48.png" />
+    <Resource Include="Resources\Images\Basic\close_folder_16.png" />
+    <Resource Include="Resources\Images\Basic\close_folder_20.png" />
+    <Resource Include="Resources\Images\Basic\error.png" />
+    <Resource Include="Resources\Images\Basic\logo_16.png" />
+    <Resource Include="Resources\Images\Basic\logo_24.png" />
+    <Resource Include="Resources\Images\Basic\mclibproject_16.png" />
+    <Resource Include="Resources\Images\Basic\mclibproject_24.png" />
+    <Resource Include="Resources\Images\Basic\mclibproject_48.png" />
+    <Resource Include="Resources\Images\Basic\mcproject_16.png" />
+    <Resource Include="Resources\Images\Basic\mcproject_24.png" />
+    <Resource Include="Resources\Images\Basic\mcproject_48.png" />
+    <Resource Include="Resources\Images\Basic\newfile.png" />
+    <Resource Include="Resources\Images\Basic\not_exist_16.png" />
+    <Resource Include="Resources\Images\Basic\not_exist_20.png" />
+    <Resource Include="Resources\Images\Basic\open_folder_16.png" />
+    <Resource Include="Resources\Images\Basic\open_folder_20.png" />
+    <Resource Include="Resources\Images\Basic\reference_16.png" />
+    <Resource Include="Resources\Images\Basic\reference_20.png" />
+    <Resource Include="Resources\Images\Basic\warning.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\DarkTheme\cfile_16.png" />
+    <Resource Include="Resources\Images\DarkTheme\cfile_24.png" />
+    <Resource Include="Resources\Images\DarkTheme\cfile_48.png" />
+    <Resource Include="Resources\Images\DarkTheme\logo_16.png" />
+    <Resource Include="Resources\Images\DarkTheme\logo_24.png" />
+    <Resource Include="Resources\Images\DarkTheme\mclibproject_16.png" />
+    <Resource Include="Resources\Images\DarkTheme\mclibproject_24.png" />
+    <Resource Include="Resources\Images\DarkTheme\mclibproject_48.png" />
+    <Resource Include="Resources\Images\DarkTheme\mcproject.png" />
+    <Resource Include="Resources\Images\DarkTheme\mcproject_16.png" />
+    <Resource Include="Resources\Images\DarkTheme\mcproject_24.png" />
+    <Resource Include="Resources\Images\DarkTheme\mcproject_48.png" />
+    <Resource Include="Resources\Images\DarkTheme\project.png" />
+    <Resource Include="Resources\Images\DarkTheme\reference_16.png" />
+    <Resource Include="Resources\Images\DarkTheme\reference_20.png" />
+    <Resource Include="Resources\Images\DarkTheme\solution.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

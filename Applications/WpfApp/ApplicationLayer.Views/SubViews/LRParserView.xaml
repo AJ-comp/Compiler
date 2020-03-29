@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:ap="clr-namespace:ApplicationLayer.Views.AttachedProperties"
              xmlns:lex="http://wpflocalizeextension.codeplex.com"
              xmlns:zoom="clr-namespace:WPFExtensions.Controls;assembly=WPFExtensions"
              xmlns:root="clr-namespace:ApplicationLayer.Views"
@@ -48,12 +49,13 @@
             </Grid>
         </TabItem>
         <TabItem Header="{lex:Loc Key=ParsingTable}">
-            <!--<TabItem.Content>
+            <TabItem.Content>
                 <WindowsFormsHost ap:WindowsFormsHostHook.EnableLoadedHook="True"
-                                        ap:WindowsFormsHostHook.LoadedCommand="{x:Static commands:MenuActionCommands.ShowParsingTableCommand}"
+                                        ap:WindowsFormsHostHook.LoadedCommand="{x:Static root:ViewCommands.ShowParsingTableCommand}"
                                         ap:WindowsFormsHostHook.LoadedCommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}}"
-                                        ap:WindowsFormsHostHook.DataSource="{Binding}"/>
-            </TabItem.Content>-->
+                                        ap:WindowsFormsHostHook.LoadedCommandParameter2="{Binding ToolTipDatas}"
+                                        ap:WindowsFormsHostHook.DataSource="{Binding ParsingTable}"/>
+            </TabItem.Content>
         </TabItem>
     </TabControl>
 </UserControl>

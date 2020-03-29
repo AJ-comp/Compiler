@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:lex="http://wpflocalizeextension.codeplex.com" 
              xmlns:local="clr-namespace:ApplicationLayer.WpfApp.Views.DialogViews"
-             xmlns:subViews="clr-namespace:ApplicationLayer.WpfApp.Views.SubViews"
+             xmlns:subViews="clr-namespace:ApplicationLayer.Views.SubViews;assembly=ApplicationLayer.Views"
              xmlns:viewModels="clr-namespace:ApplicationLayer.ViewModels.DialogViewModels;assembly=ApplicationLayer.ViewModels"
              xmlns:logicConverters="clr-namespace:ApplicationLayer.WpfApp.Converters.LogicConverters"
              xmlns:targets="clr-namespace:Parse.BackEnd.Target;assembly=Parse.BackEnd.Target"

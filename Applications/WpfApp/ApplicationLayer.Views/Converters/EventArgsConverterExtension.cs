@@ -2,7 +2,7 @@
 using System;
 using System.Windows.Markup;
 
-namespace ApplicationLayer.WpfApp.Converters
+namespace ApplicationLayer.Views.Converters
 {
     public abstract class EventArgsConverterExtension<T> : MarkupExtension, IEventArgsConverter where T : class, new()
     {

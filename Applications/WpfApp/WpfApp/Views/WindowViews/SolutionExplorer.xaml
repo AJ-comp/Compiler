@@ -81,7 +81,7 @@
                 <i:EventTrigger EventName="SelectedItemChanged">
                     <mvvm:EventToCommand Command="{Binding SelectedCommand}"
                                                             PassEventArgsToCommand="True"
-                                                            EventArgsConverter="{localConverters:SelectedItemConverter}"
+                                                            EventArgsConverter="{localConverters:ToHierarchicalDataConverter}"
                                                             EventArgsConverterParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, 
                                                                                                                         AncestorType={x:Type local:SolutionExplorer}}}"/>
                 </i:EventTrigger>

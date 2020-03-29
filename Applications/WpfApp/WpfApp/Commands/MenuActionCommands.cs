@@ -353,55 +353,6 @@ private void OnNewFile(Func<Document> func)
             });
 
 
-        /// This command shows parsing table
-        public static readonly RelayUICommand<Tuple<object, object, RoutedEventArgs>> ShowParsingTableCommand = 
-            new RelayUICommand<Tuple<object, object, RoutedEventArgs>>(CommonResource.ParsingTable, (param) =>
-            {
-                int recentRowIdx = -1;
-                int recentColIdx = -1;
-                ToolTip toolTip = new ToolTip();
-
-                var dataSource = param.Item1 as Parser;
-                var windowsFormsHost = param.Item2 as WindowsFormsHost;
-
-                windowsFormsHost.Child = new DataGridView();
-                var dataGridView = windowsFormsHost.Child as DataGridView;
-                dataGridView.EditMode = DataGridViewEditMode.EditProgrammatically;
-                dataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
-                dataGridView.DataSource = dataSource.ParsingTable.ToTableFormat;
-                dataGridView.CellMouseEnter += (s, e) =>
-                {
-                    if (recentColIdx == e.ColumnIndex && recentRowIdx == e.RowIndex) return;
-                    recentColIdx = e.ColumnIndex;
-                    recentRowIdx = e.RowIndex;
-
-                    toolTip.Hide(dataGridView);
-                    if (e.ColumnIndex != 0 || e.RowIndex == -1) return;
-
-                    dataGridView.ShowCellToolTips = false;
-
-                    var cell = dataGridView[e.ColumnIndex, e.RowIndex];
-
-                    if(dataSource is LRParser)
-                    {
-                        var lrParser = dataSource as LRParser;
-                        CanonicalItemSet canonical = lrParser.C0.GetStatusFromIxIndex(Convert.ToInt32(cell.Value.ToString().Substring(1)));
-
-                        var data = canonical.ToLineString();
-                        var lineCount = Regex.Matches(data, Environment.NewLine).Count;
-                        if (lineCount == 0 || lineCount == -1) lineCount = 1;
-
-                        var popDelay = 3000 * lineCount;
-                        if (popDelay > 30000) popDelay = 30000;
-                        toolTip.Show(canonical.ToLineString(), dataGridView, popDelay);
-                    }
-                };
-            }, (condition) =>
-            {
-                return true;
-            });
-
-
         /// <summary>
         /// This command is executed if docking windows were closed.
         /// </summary>

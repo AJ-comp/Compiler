@@ -1,9 +1,11 @@
 ﻿using ApplicationLayer.Models.GraphModels;
+using Parse.FrontEnd.Parsers.Collections;
 using Parse.FrontEnd.Parsers.LR;
 using Parse.FrontEnd.RegularGrammar;
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.Data;
 using System.Threading.Tasks;
 
 namespace ApplicationLayer.ViewModels.SubViewModels
@@ -14,9 +16,9 @@ namespace ApplicationLayer.ViewModels.SubViewModels
         private string canonicalLayoutAlgorithmType;
         private NonTerminal selectedNonTerminal;
         private int selectedCanonical;
-        private List<string> layoutAlgorithmTypes = new List<string>();
         private PocGraph ebnfGraph;
         private PocGraph canonicalGraph;
+        private List<string> layoutAlgorithmTypes = new List<string>();
 
         public LRParser LRParser { get; private set; }
         public List<string> LayoutAlgorithmTypes
@@ -103,6 +105,23 @@ namespace ApplicationLayer.ViewModels.SubViewModels
         }
 
         #endregion
+
+        public DataView ParsingTable => LRParser.ParsingTable.ToTableFormat.DefaultView;
+        public List<string> ToolTipDatas
+        {
+            get
+            {
+                List<string> result = new List<string>();
+
+                for (int i = 0; i <= this.LRParser.C0.MaxIxIndex; i++)
+                {
+                    CanonicalItemSet canonical = this.LRParser.C0.GetStatusFromIxIndex(i);
+                    result.Add(canonical.ToLineString());
+                }
+
+                return result;
+            }
+        }
 
         public LRParserViewModel(LRParser lrParser)
         {

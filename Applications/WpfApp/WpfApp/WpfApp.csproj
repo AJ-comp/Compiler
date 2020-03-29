@@ -130,7 +130,6 @@
     <Compile Include="AttachedProperties\EditableTextBox.cs" />
     <Compile Include="AttachedProperties\MainWindowHook.cs" />
     <Compile Include="AttachedProperties\TreeViewHook.cs" />
-    <Compile Include="AttachedProperties\WindowsFormsHostHook.cs" />
     <Compile Include="Behaviors\BindableSelectedItemBehavior.cs" />
     <Compile Include="Behaviors\DataGridViewAllocateBehavior.cs" />
     <Compile Include="Behaviors\EventToCommandBehavior.cs" />
@@ -145,10 +144,9 @@
     <Compile Include="Converters\LogicConverters\OpenSolutionLogicConverter.cs" />
     <Compile Include="Converters\RemoveObjectConverter.cs" />
     <Compile Include="Converters\RenameHotKeyConverter.cs" />
-    <Compile Include="Converters\SelectedItemConverter.cs" />
     <Compile Include="Converters\EnumToImageConverter.cs" />
-    <Compile Include="Converters\EventArgsConverterExtension.cs" />
     <Compile Include="Converters\MouseDoubleClickIndexConverter.cs" />
+    <Compile Include="Converters\ToHierarchicalDataConverter.cs" />
     <Compile Include="Converters\ToolItemDockSideConverter.cs" />
     <Compile Include="Converters\ToolItemStateConverter.cs" />
     <Compile Include="Converters\ToResourceKeyConverter.cs" />
@@ -169,9 +167,6 @@
     </Compile>
     <Compile Include="Views\DialogViews\QuestionToSaveDialog.xaml.cs">
       <DependentUpon>QuestionToSaveDialog.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\SubViews\ProjectSelectionView.xaml.cs">
-      <DependentUpon>ProjectSelectionView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\WindowViews\AlarmList.xaml.cs">
       <DependentUpon>AlarmList.xaml</DependentUpon>
@@ -197,14 +192,6 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Resources\BasicImageResources.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Resources\DarkThemeImageResources.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Resources\DataTemplates\HierarchicalDataTemplates.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -225,7 +212,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Resources\DataTemplates\WindowTemplate.xaml">
+    <Page Include="Resources\DataTemplates\WindowTemplates.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -258,10 +245,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\DialogViews\QuestionToSaveDialog.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\SubViews\ProjectSelectionView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -370,63 +353,6 @@
       <Name>ApplicationLayer.Views</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\Images\Basic\cfile_16.png" />
-    <Resource Include="Resources\Images\Basic\cfile_24.png" />
-    <Resource Include="Resources\Images\DarkTheme\cfile_16.png" />
-    <Resource Include="Resources\Images\DarkTheme\cfile_24.png" />
-    <Resource Include="Resources\Images\DarkTheme\cfile_48.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\Images\Basic\error.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\Images\Basic\warning.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\Images\Basic\newfile.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\Images\Basic\logo_24.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\Images\DarkTheme\logo_24.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\Images\DarkTheme\logo_16.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\Images\Basic\logo_16.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\Images\DarkTheme\solution.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\Images\DarkTheme\project.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\Images\Basic\cfile_48.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\Images\DarkTheme\mcproject.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\Images\Basic\close_folder_16.png" />
-    <Resource Include="Resources\Images\Basic\close_folder_20.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\Images\Basic\open_folder_16.png" />
-    <Resource Include="Resources\Images\Basic\open_folder_20.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\Images\DarkTheme\reference_16.png" />
-    <Resource Include="Resources\Images\DarkTheme\reference_20.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\Images\Basic\not_exist_16.png" />
-    <Resource Include="Resources\Images\Basic\not_exist_20.png" />
-  </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>

@@ -1,4 +1,5 @@
-﻿using System.Windows.Navigation;
+﻿using ApplicationLayer.Views.Converters;
+using System.Windows.Navigation;
 
 namespace ApplicationLayer.WpfApp.Converters
 {

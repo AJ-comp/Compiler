@@ -4,7 +4,7 @@ using System.Windows.Forms.Integration;
 using System.Windows.Input;
 using System.Windows.Media;
 
-namespace ApplicationLayer.WpfApp.AttachedProperties
+namespace ApplicationLayer.Views.AttachedProperties
 {
     public static class WindowsFormsHostHook
     {
@@ -31,7 +31,8 @@ namespace ApplicationLayer.WpfApp.AttachedProperties
 
             var datasource = WindowsFormsHostHook.GetDataSource(sender as WindowsFormsHost);
             var parameter = WindowsFormsHostHook.GetLoadedCommandParameter(sender as WindowsFormsHost);
-            var commandParam = new Tuple<object, object, RoutedEventArgs>(datasource, parameter, e);
+            var parameter2 = WindowsFormsHostHook.GetLoadedCommandParameter2(sender as WindowsFormsHost);
+            var commandParam = new Tuple<object, object, object, RoutedEventArgs>(datasource, parameter, parameter2, e);
             if (command.CanExecute(commandParam) == false) return;
 
             command.Execute(commandParam);
@@ -53,6 +54,17 @@ namespace ApplicationLayer.WpfApp.AttachedProperties
         // Using a DependencyProperty as the backing store for LoadedCommandParameter.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty LoadedCommandParameterProperty =
             DependencyProperty.RegisterAttached("LoadedCommandParameter", typeof(object), typeof(WindowsFormsHostHook), new PropertyMetadata(null));
+
+
+
+
+        public static object GetLoadedCommandParameter2(DependencyObject obj) => (object)obj.GetValue(LoadedCommandParameter2Property);
+        public static void SetLoadedCommandParameter2(DependencyObject obj, object value) => obj.SetValue(LoadedCommandParameter2Property, value);
+
+        // Using a DependencyProperty as the backing store for LoadedCommandParameter2.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty LoadedCommandParameter2Property =
+            DependencyProperty.RegisterAttached("LoadedCommandParameter2", typeof(object), typeof(WindowsFormsHostHook), new PropertyMetadata(null));
+
 
 
 

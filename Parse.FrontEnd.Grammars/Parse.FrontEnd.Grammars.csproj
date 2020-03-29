@@ -51,6 +51,8 @@
     <Compile Include="Grammar.cs" />
     <Compile Include="MiniC\MiniCSdts.cs" />
     <Compile Include="MiniC\MiniCSymbolTable.cs" />
+    <Compile Include="MiniC\SymbolTableFormat\FuncSymbolTable.cs" />
+    <Compile Include="MiniC\SymbolTableFormat\VarSymbolTable.cs" />
     <Compile Include="Properties\Resource.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

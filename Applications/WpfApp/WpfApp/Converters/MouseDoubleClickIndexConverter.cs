@@ -1,4 +1,5 @@
-﻿using System.Windows.Input;
+﻿using ApplicationLayer.Views.Converters;
+using System.Windows.Input;
 
 namespace ApplicationLayer.WpfApp.Converters
 {
