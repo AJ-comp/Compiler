@@ -41,6 +41,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AJGrammar.cs" />
+    <Compile Include="Properties\AlarmCodes.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AlarmCodes.resx</DependentUpon>
+    </Compile>
+    <Compile Include="SementicErrorArgs.cs" />
     <Compile Include="ExampleGrammars\Ex1Grammar.cs" />
     <Compile Include="ExampleGrammars\Ex7_14Grammar.cs" />
     <Compile Include="ExampleGrammars\Ex7_15Grammar.cs" />
@@ -49,10 +55,10 @@
     <Compile Include="ExampleGrammars\Ex8_8Grammar.cs" />
     <Compile Include="ExampleGrammars\Ex8_9Grammar.cs" />
     <Compile Include="Grammar.cs" />
+    <Compile Include="IStorableToHashTable.cs" />
     <Compile Include="MiniC\MiniCSdts.cs" />
-    <Compile Include="MiniC\MiniCSymbolTable.cs" />
-    <Compile Include="MiniC\SymbolTableFormat\FuncSymbolTable.cs" />
-    <Compile Include="MiniC\SymbolTableFormat\VarSymbolTable.cs" />
+    <Compile Include="MiniC\SymbolTableFormat\FuncData.cs" />
+    <Compile Include="MiniC\SymbolTableFormat\VarTable.cs" />
     <Compile Include="Properties\Resource.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -74,6 +80,11 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Properties\AlarmCodes.ko-KR.resx" />
+    <EmbeddedResource Include="Properties\AlarmCodes.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>AlarmCodes.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resource.ko-KR.resx" />
     <EmbeddedResource Include="Properties\Resource.resx">
       <Generator>ResXFileCodeGenerator</Generator>

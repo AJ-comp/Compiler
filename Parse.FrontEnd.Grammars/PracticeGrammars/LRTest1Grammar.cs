@@ -1,5 +1,6 @@
 ﻿using Parse.FrontEnd.Ast;
 using Parse.FrontEnd.RegularGrammar;
+using System;
 using static Parse.FrontEnd.Grammars.Sdts;
 
 namespace Parse.FrontEnd.Grammars.PracticeGrammars
@@ -30,6 +31,8 @@ namespace Parse.FrontEnd.Grammars.PracticeGrammars
 
     public class LRTest1Sdts : Sdts
     {
+        public override event EventHandler<SementicErrorArgs> SementicErrorEventHandler;
+
         private void ActionAdd(TreeSymbol node)
         {
         }
@@ -42,7 +45,7 @@ namespace Parse.FrontEnd.Grammars.PracticeGrammars
         {
         }
 
-        public override MeaningAnalysisResult Process(TreeSymbol node)
+        public override SementicAnalysisResult Process(TreeSymbol node)
         {
             return null;
         }

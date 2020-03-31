@@ -1,13 +1,11 @@
 ﻿using Parse.FrontEnd.Grammars;
 using Parse.FrontEnd.Parsers.Datas;
-using Parse.FrontEnd.Parsers.EventArgs;
 using Parse.FrontEnd.Parsers.Logical;
 using Parse.FrontEnd.RegularGrammar;
 using Parse.WpfControls.Models;
 using Parse.WpfControls.SyntaxEditor.EventArgs;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -148,6 +146,16 @@ namespace Parse.WpfControls.SyntaxEditor
             Loaded += (s, e) =>
             {
                 if (this.ParserSnippet == null) return;
+
+                this.ParserSnippet.Parser.Grammar.SDTS.SementicErrorEventHandler += (sdts, errorInfo) =>
+                {
+                    if (errorInfo.ErrorType == ErrorType.Error)
+                    {
+                        errorInfo.Token.TokenCell.ValueOptionData = DrawOption.Underline;
+
+                        // you have to send error message to the AlarmList.
+                    }
+                };
 
                 if (this.bReserveRegistKeywords)
                 {
@@ -313,6 +321,8 @@ namespace Parse.WpfControls.SyntaxEditor
                 var tokens = ParserSnippet.ToTokenDataList(this.TextArea.Tokens);
                 this.parsingResult = this.ParserSnippet.Parsing(tokens);
             }
+
+            this.ParserSnippet.Parser.Grammar.SDTS.Process(this.parsingResult.ToAST);
 
             this.ParsingFailedListPreProcess(parsingResult);
 

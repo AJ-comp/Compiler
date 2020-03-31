@@ -100,6 +100,49 @@ namespace Parse.FrontEnd.Parsers.Datas
             }
         }
 
+        public TreeSymbol ToAST
+        {
+            get
+            {
+                var rootTree = this.ToParseTree;
+                if (rootTree == null) return rootTree;
+
+                return this.CreateAst(null, rootTree);
+            }
+        }
+
+        private TreeNonTerminal CreateAst(TreeSymbol newParentTree, TreeSymbol curTree)
+        {
+            TreeNonTerminal result = null;
+
+            if (curTree is TreeTerminal)
+            {
+                var convertedParentTree = curTree as TreeTerminal;
+                if (convertedParentTree.Token.Kind.Meaning)
+                    (newParentTree as TreeNonTerminal).Add(convertedParentTree);
+            }
+            else
+            {
+                var convertedParentTree = curTree as TreeNonTerminal;
+                if (convertedParentTree.signPost.MeaningUnit != null)
+                {
+                    result = new TreeNonTerminal(convertedParentTree.signPost);
+
+                    if (newParentTree == null) newParentTree = result;
+                    else if(newParentTree != result)
+                    {
+                        (newParentTree as TreeNonTerminal).Add(result);
+                        newParentTree = result;
+                    }
+                }
+
+                // it can't use Parallel because order.
+                foreach (var node in convertedParentTree) this.CreateAst(newParentTree, node);
+            }
+
+            return result;
+        }
+
         private void AddColumn(DataTable table, string columnName)
         {
             table.Columns.Add(columnName);

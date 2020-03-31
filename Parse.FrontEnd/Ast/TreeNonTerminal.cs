@@ -23,8 +23,8 @@ namespace Parse.FrontEnd.Ast
             this.signPost = singleNT;
         }
 
-        public object ActionLogic(SymbolTable symbolTable, MeaningParsingInfo parsingInfo, MeaningErrInfoList errList) 
-            => this.signPost?.MeaningUnit?.ActionLogic(this, symbolTable, parsingInfo, errList);
+        public object ActionLogic(SymbolTable symbolTable, int blockLevel, MeaningErrInfoList errList) 
+            => this.signPost?.MeaningUnit?.ActionLogic(this, symbolTable, blockLevel, errList);
 
         public void Add(TreeSymbol item)
         {

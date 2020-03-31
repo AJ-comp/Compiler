@@ -1,6 +1,7 @@
 ﻿using Parse.FrontEnd.Ast;
 using Parse.FrontEnd.Grammars.Properties;
 using Parse.FrontEnd.RegularGrammar;
+using System;
 
 namespace Parse.FrontEnd.Grammars.ExampleGrammars
 {
@@ -36,6 +37,8 @@ namespace Parse.FrontEnd.Grammars.ExampleGrammars
 
     public class Ex8_10Sdts : Sdts
     {
+        public override event EventHandler<SementicErrorArgs> SementicErrorEventHandler;
+
         private object ActionAdd(TreeNonTerminal node)
         {
             return null;
@@ -50,7 +53,7 @@ namespace Parse.FrontEnd.Grammars.ExampleGrammars
         {
         }
 
-        public override MeaningAnalysisResult Process(TreeSymbol node)
+        public override SementicAnalysisResult Process(TreeSymbol node)
         {
             return null;
         }
