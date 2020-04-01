@@ -5,7 +5,7 @@ namespace ApplicationLayer.Models
 {
     public class AlarmData
     {
-        public AlarmStatus Status { get; }
+        public int Status { get; }
 
         public object FromControl { get; }
         public string Code { get; }
@@ -16,7 +16,7 @@ namespace ApplicationLayer.Models
         public int TokenIndex { get; }
         public int Line { get; }
 
-        public AlarmData(object fromControl, AlarmStatus status, string code, string message, string fullPath, string projectName, string fileName, int tokenIndex, int line)
+        public AlarmData(object fromControl, int status, string code, string message, string fullPath, string projectName, string fileName, int tokenIndex, int line)
         {
             this.Status = status;
 

@@ -112,9 +112,7 @@ namespace Parse.FrontEnd.Grammars.MiniC
                 {
                     var token = item as TreeTerminal;
 
-                    result.Name = token.Token.Input;
                     result.NameToken = token.Token;
-//                    token.Token.Input
                 }
                 else
                 {
@@ -143,7 +141,6 @@ namespace Parse.FrontEnd.Grammars.MiniC
                 var astNonTerminal = item as TreeNonTerminal;
                 if (astNonTerminal.signPost.MeaningUnit == this.ConstNode)
                 {
-                    result.Const = true;
                     result.ConstToken = (astNonTerminal.Items[0] as TreeTerminal).Token;
                 }
                 else if (astNonTerminal.signPost.MeaningUnit == this.VoidNode)
@@ -225,6 +222,8 @@ namespace Parse.FrontEnd.Grammars.MiniC
 
             foreach(var item in node.Items)
             {
+                if (item is TreeTerminal) continue; // skip ; token
+
                 var astNonTerminal = item as TreeNonTerminal;
                 if (astNonTerminal.signPost.MeaningUnit == this.DclSpec)
                     result.DclSpecData = this.ActionDclSpec(astNonTerminal, table, blockLevel, errList) as DclSpecData;
@@ -237,19 +236,29 @@ namespace Parse.FrontEnd.Grammars.MiniC
 
         private object ActionDclItem(TreeNonTerminal node, SymbolTable table, int blockLevel, MeaningErrInfoList errList)
         {
-            return false;
+            DclItemData result = new DclItemData();
+
+            foreach (var item in node.Items)
+            {
+                if (item is TreeTerminal) continue;
+
+                var astNonTerminal = item as TreeNonTerminal;
+                if (astNonTerminal.signPost.MeaningUnit == this.SimpleVar)
+                    result = this.ActionSimpleVar(astNonTerminal, table, blockLevel, errList) as DclItemData;
+                else if (astNonTerminal.signPost.MeaningUnit == this.ArrayVar)
+                    result = this.ActionArrayVar(astNonTerminal, table, blockLevel, errList) as DclItemData;
+            }
+
+            return result;
         }
 
         private object ActionSimpleVar(TreeNonTerminal node, SymbolTable table, int blockLevel, MeaningErrInfoList errList)
         {
-            if (node.Items.Count == 0)
-            {
-                return false;
-            }
+            DclItemData result = new DclItemData();
 
-            var item = node.Items[0] as TreeNonTerminal;
+            result.NameToken = (node.Items[0] as TreeTerminal).Token;
 
-            return true;
+            return result;
         }
 
         private object ActionArrayVar(TreeNonTerminal node, SymbolTable table, int blockLevel, MeaningErrInfoList errList)

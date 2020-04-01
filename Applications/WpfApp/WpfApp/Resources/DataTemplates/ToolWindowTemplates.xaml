@@ -3,7 +3,7 @@
                     xmlns:docking="http://schemas.actiprosoftware.com/winfx/xaml/docking"
                     xmlns:converters="clr-namespace:ApplicationLayer.WpfApp.Converters"
                     xmlns:toolWindowVMs="clr-namespace:ApplicationLayer.ViewModels.ToolWindowViewModels;assembly=ApplicationLayer.ViewModels"
-                    xmlns:toolWindows="clr-namespace:ApplicationLayer.WpfApp.Views.WindowViews"
+                    xmlns:toolWindows="clr-namespace:ApplicationLayer.Views.WindowViews;assembly=ApplicationLayer.Views"
                     xmlns:local="clr-namespace:ApplicationLayer.WpfApp.Resources.DataTemplates">
 
     <ResourceDictionary.MergedDictionaries>
@@ -21,6 +21,10 @@
 
     <DataTemplate DataType="{x:Type toolWindowVMs:AlarmListViewModel}">
         <toolWindows:AlarmList/>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type toolWindowVMs:TestToolWindowViewModel}">
+        <toolWindows:TestToolWindowView/>
     </DataTemplate>
 
 </ResourceDictionary>

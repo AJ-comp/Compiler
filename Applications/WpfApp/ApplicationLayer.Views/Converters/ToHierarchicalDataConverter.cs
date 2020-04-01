@@ -1,14 +1,8 @@
 ﻿using ApplicationLayer.Models.SolutionPackage;
-using ApplicationLayer.Views.Converters;
-using ApplicationLayer.WpfApp.Views.WindowViews;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using ApplicationLayer.Views.WindowViews;
 using System.Windows;
 
-namespace ApplicationLayer.WpfApp.Converters
+namespace ApplicationLayer.Views.Converters
 {
     class ToHierarchicalDataConverter : EventArgsConverterExtension<ToHierarchicalDataConverter>
     {

@@ -144,10 +144,6 @@
     <Compile Include="Converters\LogicConverters\SearchLogicConverter.cs" />
     <Compile Include="Converters\LogicConverters\OpenSolutionLogicConverter.cs" />
     <Compile Include="Converters\RemoveObjectConverter.cs" />
-    <Compile Include="Converters\RenameHotKeyConverter.cs" />
-    <Compile Include="Converters\EnumToImageConverter.cs" />
-    <Compile Include="Converters\MouseDoubleClickIndexConverter.cs" />
-    <Compile Include="Converters\ToHierarchicalDataConverter.cs" />
     <Compile Include="Converters\ToolItemDockSideConverter.cs" />
     <Compile Include="Converters\ToolItemStateConverter.cs" />
     <Compile Include="Converters\ToResourceKeyConverter.cs" />
@@ -169,17 +165,11 @@
     <Compile Include="Views\DialogViews\QuestionToSaveDialog.xaml.cs">
       <DependentUpon>QuestionToSaveDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\WindowViews\AlarmList.xaml.cs">
-      <DependentUpon>AlarmList.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\DialogViews\NewProjectDialog.xaml.cs">
       <DependentUpon>NewProjectDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\DialogViews\NewFileDialog.xaml.cs">
       <DependentUpon>NewFileDialog.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\WindowViews\SolutionExplorer.xaml.cs">
-      <DependentUpon>SolutionExplorer.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -249,19 +239,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\WindowViews\AlarmList.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Views\DialogViews\NewProjectDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\DialogViews\NewFileDialog.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\WindowViews\SolutionExplorer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -120,7 +120,11 @@ namespace ApplicationLayer.ViewModels.ToolWindowViewModels
                 var errInfos = item.ParsingFailedArgs.ErrorInfos;
                 foreach (var errInfo in errInfos)
                 {
-                    var alarmData = new AlarmData(sender, item.Status, errInfo.Code, errInfo.Message, editorViewModel.FullPath, item.ProjectName, item.FileName, item.TokenIndex, item.Line);
+                    int status = -1;
+                    if (item.Status == AlarmStatus.ParsingError) status = 0;
+                    else if (item.Status == AlarmStatus.ParsingWarning) status = 1;
+
+                    var alarmData = new AlarmData(sender, status, errInfo.Code, errInfo.Message, editorViewModel.FullPath, item.ProjectName, item.FileName, item.TokenIndex, item.Line);
                     alarmList.Add(alarmData);
                 }
             });

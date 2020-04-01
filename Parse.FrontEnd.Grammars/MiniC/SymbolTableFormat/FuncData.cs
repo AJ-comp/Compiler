@@ -5,7 +5,7 @@ namespace Parse.FrontEnd.Grammars.MiniC.SymbolTableFormat
     public class FuncData : IStorableToHashTable
     {
         public DclSpecData DclSpecData { get; internal set; }
-        public string Name { get; internal set; }
+        public string Name => NameToken?.Input;
         public TokenData NameToken { get; internal set; }
         public List<VarData> LocalVars { get; internal set; } = new List<VarData>();
 

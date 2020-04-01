@@ -89,6 +89,7 @@
     <Compile Include="SolutionPackage\ProjectHier.cs" />
     <Compile Include="SolutionPackage\ReferenceHier.cs" />
     <Compile Include="SolutionPackage\SolutionHier.cs" />
+    <Compile Include="SolutionPackage\TreeNodeModel.cs" />
     <Compile Include="Theme.cs" />
     <Compile Include="ToolWindowStatus\ToolItemDockSide.cs" />
     <Compile Include="ToolWindowStatus\ToolItemState.cs" />

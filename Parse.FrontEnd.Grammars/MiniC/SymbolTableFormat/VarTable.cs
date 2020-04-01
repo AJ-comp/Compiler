@@ -18,9 +18,13 @@ namespace Parse.FrontEnd.Grammars.MiniC.SymbolTableFormat
 
     public class DclItemData : IStorableToHashTable
     {
-        public string Name { get; internal set; }
+        public string Name { get => NameToken?.Input; }
         public int Level { get; internal set; }
         public int Dimension { get; internal set; }
+
+        public TokenData NameToken { get; internal set; }
+        public TokenData LevelToken { get; internal set; }
+        public TokenData DimensionToken { get; internal set; }
 
         public string KeyString => string.Format("{0}", Name);
 
@@ -29,10 +33,10 @@ namespace Parse.FrontEnd.Grammars.MiniC.SymbolTableFormat
 
     public class DclSpecData : IStorableToHashTable
     {
-        public bool Const { get; internal set; }
+        public bool Const => (ConstToken == null) ? false : true;
         public DataType DataType { get; internal set; }
 
-        public TokenData ConstToken { get; internal set; }
+        public TokenData ConstToken { get; internal set; } = null;
         public TokenData DataTypeToken { get; internal set; }
 
         public string KeyString => string.Empty;

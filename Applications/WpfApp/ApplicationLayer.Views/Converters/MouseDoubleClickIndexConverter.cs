@@ -1,7 +1,7 @@
 ﻿using ApplicationLayer.Views.Converters;
 using System.Windows.Input;
 
-namespace ApplicationLayer.WpfApp.Converters
+namespace ApplicationLayer.Views.Converters
 {
     public class MouseDoubleClickIndexConverter : EventArgsConverterExtension<MouseDoubleClickIndexConverter>
     {

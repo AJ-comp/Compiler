@@ -1,10 +1,9 @@
 ﻿using ApplicationLayer.ViewModels.CommandArgs;
 using ApplicationLayer.ViewModels.ToolWindowViewModels;
-using ApplicationLayer.Views.Converters;
-using ApplicationLayer.WpfApp.Views.WindowViews;
+using ApplicationLayer.Views.WindowViews;
 using System.Windows.Input;
 
-namespace ApplicationLayer.WpfApp.Converters
+namespace ApplicationLayer.Views.Converters
 {
     class RenameHotKeyConverter : EventArgsConverterExtension<RenameHotKeyConverter>
     {

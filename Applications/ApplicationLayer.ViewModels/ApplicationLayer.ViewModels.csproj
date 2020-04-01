@@ -89,6 +89,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SubViewModels\ProjectSelectionViewModel.cs" />
     <Compile Include="ToolWindowViewModels\SolutionExplorerViewModel.cs" />
+    <Compile Include="ToolWindowViewModels\TestToolWindowViewModel.cs" />
     <Compile Include="ToolWindowViewModels\ToolWindowViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
