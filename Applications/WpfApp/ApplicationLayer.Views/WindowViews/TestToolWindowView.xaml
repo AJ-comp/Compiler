@@ -3,31 +3,15 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:lex="http://wpflocalizeextension.codeplex.com"
              xmlns:common="clr-namespace:ApplicationLayer.Models.SolutionPackage;assembly=ApplicationLayer.Models"
+             xmlns:mcModels="clr-namespace:ApplicationLayer.Models.SolutionPackage.MiniCPackage;assembly=ApplicationLayer.Models"
              xmlns:grids="http://schemas.actiprosoftware.com/winfx/xaml/grids"
+             xmlns:localConverter="clr-namespace:ApplicationLayer.Views.Converters"
              xmlns:local="clr-namespace:ApplicationLayer.Views.WindowViews"
              xmlns:views="clr-namespace:ApplicationLayer.Views"
              mc:Ignorable="d" >
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="20"/>
-            <RowDefinition Height="20"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-        
-        <grids:TreeListBox Grid.Row="2" IsRootItemVisible="True" HorizontalAlignment="Left" TopLevelIndent="2">
-            <grids:TreeListBox.ItemAdapter>
-                <views:DefaultTreeListBoxItemAdapter />
-            </grids:TreeListBox.ItemAdapter>
 
-            <grids:TreeListBox.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Margin="4,0,0,0" Text="{Binding Name}" TextTrimming="CharacterEllipsis" VerticalAlignment="Center" />
-                    </StackPanel>
-                </DataTemplate>
-            </grids:TreeListBox.ItemTemplate>
-            
-        </grids:TreeListBox>
     </Grid>
 </UserControl>

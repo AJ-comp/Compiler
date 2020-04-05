@@ -9,8 +9,7 @@
              xmlns:localConverters="clr-namespace:ApplicationLayer.Views.Converters"
              xmlns:lex="http://wpflocalizeextension.codeplex.com" 
              lex:ResxLocalizationProvider.DefaultAssembly="ApplicationLayer.Define"
-             mc:Ignorable="d" 
-             DataContext="{Binding AlarmListWindow, Source={StaticResource Locator}}">
+             mc:Ignorable="d" >
 
     <Grid>
         <Grid.RowDefinitions>

@@ -51,19 +51,6 @@ namespace ApplicationLayer.Models
             ItemName = itemName;
         }
 
-
-        public DefaultFileHier FileStruct(HierarchicalData parent)
-        {
-            DefaultFileHier result = new DefaultFileHier(ItemName)
-            {
-                Parent = parent,
-                ImageSource = ImageSource,
-            };
-
-            return result;
-        }
-
-
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected void OnPropertyChanged(string name)

@@ -295,6 +295,15 @@ namespace ApplicationLayer.Define.Properties {
         }
         
         /// <summary>
+        ///   Extern dependency과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string ExternDependency {
+            get {
+                return ResourceManager.GetString("ExternDependency", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   File과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string File {
@@ -327,6 +336,15 @@ namespace ApplicationLayer.Define.Properties {
         public static string GrammarInfoWindow {
             get {
                 return ResourceManager.GetString("GrammarInfoWindow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Header files과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string HeaderFiles {
+            get {
+                return ResourceManager.GetString("HeaderFiles", resourceCulture);
             }
         }
         
@@ -610,6 +628,15 @@ namespace ApplicationLayer.Define.Properties {
         }
         
         /// <summary>
+        ///   References과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string References {
+            get {
+                return ResourceManager.GetString("References", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Rename과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string Rename {
@@ -619,11 +646,29 @@ namespace ApplicationLayer.Define.Properties {
         }
         
         /// <summary>
+        ///   Resource files과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string ResourceFiles {
+            get {
+                return ResourceManager.GetString("ResourceFiles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Search과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string Search {
             get {
                 return ResourceManager.GetString("Search", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Solution과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string Solution {
+            get {
+                return ResourceManager.GetString("Solution", resourceCulture);
             }
         }
         
@@ -642,6 +687,15 @@ namespace ApplicationLayer.Define.Properties {
         public static string SolutionPath {
             get {
                 return ResourceManager.GetString("SolutionPath", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Source files과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string SourceFiles {
+            get {
+                return ResourceManager.GetString("SourceFiles", resourceCulture);
             }
         }
         

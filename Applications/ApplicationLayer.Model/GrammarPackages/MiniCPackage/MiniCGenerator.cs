@@ -1,7 +1,8 @@
 ﻿using ApplicationLayer.Models.SolutionPackage;
+using ApplicationLayer.Models.SolutionPackage.MiniCPackage;
 using Parse.BackEnd.Target;
-using System.IO;
-using static ApplicationLayer.Models.SolutionPackage.ProjectProperty;
+
+using CommonResource = ApplicationLayer.Define.Properties.Resources;
 
 namespace ApplicationLayer.Models.GrammarPackages.MiniCPackage
 {
@@ -9,55 +10,42 @@ namespace ApplicationLayer.Models.GrammarPackages.MiniCPackage
     {
         public override string Extension { get; } = LanguageExtensions.MiniC;
 
-        public override DefaultProjectHier CreateDefaultProject(string projectPath, bool isAbsolutePath, string projectName, Target target, HierarchicalData parent)
+        public override ProjectTreeNodeModel CreateEmptyProject(string projectPath, bool isAbsolutePath, string projectName, Target target)
         {
-            DefaultProjectHier result = this.CreateEmptyProject(projectPath, isAbsolutePath, projectName, target, parent);
+            MiniCProjectTreeNodeModel result = new MiniCProjectTreeNodeModel(projectPath, projectName, target);
 
-            result.ReferenceFolder[0].Items.Add(new ReferenceFileStruct("MiniC", "System.dll"));
-            result.ReferenceFolder[0].Items.Add(new ReferenceFileStruct("MiniC", "System.IO.dll"));
-            result.ReferenceFolder[0].Items.Add(new ReferenceFileStruct("MiniC", "System.Data.dll"));
+            result.OuterDependencies = new FilterTreeNodeModel(CommonResource.ExternDependency);
 
-            string fileName = string.Format("main.{0}", this.Extension);
-            string fileData = "void main()\r\n{\r\n}";
+            var resourceFilter = new FilterTreeNodeModel(CommonResource.ResourceFiles);
+            result.Filters.Add(resourceFilter);
 
-            var fileHier = new DefaultFileHier(fileName)
-            {
-                Data = fileData
-            };
-            result.Items.Add(fileHier);
-            fileHier.Save();
+            var headerFilter = new FilterTreeNodeModel(CommonResource.HeaderFiles);
+            result.Filters.Add(headerFilter);
 
-            result.Commit();
+            var sourceFilter = new FilterTreeNodeModel(CommonResource.SourceFiles);
+            result.Filters.Add(sourceFilter);
 
             return result;
         }
 
-        public override DefaultProjectHier CreateEmptyProject(string projectPath, bool isAbsolutePath, string projectName, Target target, HierarchicalData parent)
+        public override ProjectTreeNodeModel CreateDefaultProject(string projectPath, bool isAbsolutePath, string projectName, Target target)
         {
-            DefaultProjectHier result = new DefaultProjectHier(projectPath, string.Format("{0}.{1}", projectName, this.Extension + "proj"))
-            {
-                Parent = parent,
-                CurrentVersion = 1.0
-            };
+            MiniCProjectTreeNodeModel result = new MiniCProjectTreeNodeModel(projectPath, projectName, target);
 
-            ProjectProperty debugProperty = new ProjectProperty
-            {
-                Mode = Configure.Debug,
-                Target = target.Name,
-                OptimizeLevel = 0
-            };
+            result.OuterDependencies = new FilterTreeNodeModel(CommonResource.ExternDependency);
 
-            ProjectProperty releaseProperty = new ProjectProperty
-            {
-                Mode = Configure.Release,
-                Target = target.Name,
-                OptimizeLevel = 0
-            };
+            var resourceFilter = new FilterTreeNodeModel(CommonResource.ResourceFiles);
+            result.Filters.Add(resourceFilter);
 
-            result.CurrentProperties.Add(debugProperty);
-            result.CurrentProperties.Add(releaseProperty);
+            var headerFilter = new FilterTreeNodeModel(CommonResource.HeaderFiles);
+            result.Filters.Add(headerFilter);
 
-            //            result.ReferenceFolder
+            var sourceFilter = new FilterTreeNodeModel(CommonResource.SourceFiles);
+            var sourceFile = new MiniCFileTreeNodeModel(projectPath, string.Format("main.{0}", this.Extension));
+            sourceFilter.Files.Add(sourceFile);
+            result.Filters.Add(sourceFilter);
+
+            result.SyncWithCurrentValue();
 
             return result;
         }

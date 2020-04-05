@@ -10,6 +10,7 @@ using CommonResource = ApplicationLayer.Define.Properties.Resources;
 
 namespace ApplicationLayer.Models.SolutionPackage
 {
+    /*
     [XmlInclude(typeof(FolderHier))]
     [XmlInclude(typeof(DefaultFileHier))]
     public class FolderHier : HierarchicalData
@@ -257,4 +258,5 @@ namespace ApplicationLayer.Models.SolutionPackage
         }
         public override void CancelChangeDisplayName() => this.ToChangeDisplayName = this.CurOPath;
     }
+    */
 }

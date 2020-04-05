@@ -71,7 +71,6 @@
     <Compile Include="SubViewModels\LRParserViewModel.cs" />
     <Compile Include="SubViewModels\ParserViewModel.cs" />
     <Compile Include="ToolWindowViewModels\AlarmListViewModel.cs" />
-    <Compile Include="CommandArgs\SolutionExplorerKeyDownArgs.cs" />
     <Compile Include="DialogViewModels\DialogViewModel.cs" />
     <Compile Include="DialogViewModels\NewFileDialogViewModel.cs" />
     <Compile Include="DialogViewModels\NewItemViewModel.cs" />
@@ -135,6 +134,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="CommandArgs\" />
     <Folder Include="Commands\" />
   </ItemGroup>
   <ItemGroup>

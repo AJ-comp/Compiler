@@ -1,11 +1,17 @@
 ﻿using System.Collections.Generic;
+using System.Xml.Serialization;
 
 namespace ApplicationLayer.Models
 {
     public class PathInfo
     {
+        public string Type { get; set; }
         public string Path { get; set; }
+        public string FileName { get; set; }
         public bool IsAbsolute { get; set; }
+
+        [XmlIgnore]
+        public string FullPath => System.IO.Path.Combine(Path, FileName);
 
         public PathInfo() { }
 
@@ -13,6 +19,12 @@ namespace ApplicationLayer.Models
         {
             Path = path;
             IsAbsolute = isAbsolute;
+        }
+
+        public PathInfo(string path, string fileName, string type, bool isAbsolute) : this(path, isAbsolute)
+        {
+            Type = type;
+            FileName = fileName;
         }
 
         public override bool Equals(object obj)

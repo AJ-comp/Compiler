@@ -1,17 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using ApplicationLayer.Common.Interfaces;
+using System;
+using System.Collections.Specialized;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace ApplicationLayer.Models.SolutionPackage
 {
-    public class TreeNodeModel : INotifyPropertyChanged
-    {
-		private ObservableCollection<TreeNodeModel> children = new ObservableCollection<TreeNodeModel>();
-//		private DelegateCommand<object> defaultActionCommand;
+	public abstract class TreeNodeModel : INotifyPropertyChanged, IComparable, IChangeTrackable
+	{
 		private bool isDraggable = true;
 		private bool isEditable;
 		private bool isEditing;
@@ -19,46 +15,19 @@ namespace ApplicationLayer.Models.SolutionPackage
 		private bool isLoading;
 		private bool isSelectable = true;
 		private bool isSelected;
-		private string name;
 		private object tag;
+
+		public TreeNodeModel()
+		{
+			this.tag = this;
+		}
+
+		[XmlIgnore]
+		public TreeNodeModel Parent { get; internal set; }
 
 		/////////////////////////////////////////////////////////////////////////////////////////////////////
 		// PUBLIC PROCEDURES
 		/////////////////////////////////////////////////////////////////////////////////////////////////////
-
-		/// <summary>
-		/// Gets the collection of child nodes.
-		/// </summary>
-		/// <value>The collection of child nodes.</value>
-		public ObservableCollection<TreeNodeModel> Children
-		{
-			get
-			{
-				if (children == null)
-					children = new ObservableCollection<TreeNodeModel>();
-
-				return children;
-			}
-		}
-
-		/*
-		/// <summary>
-		/// Gets or sets the default action command.
-		/// </summary>
-		/// <value>The default action command.</value>
-		public DelegateCommand<object> DefaultActionCommand
-		{
-			get
-			{
-				return defaultActionCommand;
-			}
-			set
-			{
-				defaultActionCommand = value;
-				this.OnPropertyChanged("DefaultActionCommand");
-			}
-		}
-		*/
 
 		/// <summary>
 		/// Gets or sets whether the node is draggable.
@@ -66,16 +35,13 @@ namespace ApplicationLayer.Models.SolutionPackage
 		/// <value>
 		/// <c>true</c> if the node is draggable; otherwise, <c>false</c>.
 		/// </value>
+		[XmlIgnore]
 		public bool IsDraggable
 		{
-			get
-			{
-				return isDraggable;
-			}
+			get => isDraggable;
 			set
 			{
-				if (isDraggable == value)
-					return;
+				if (isDraggable == value) return;
 
 				isDraggable = value;
 				this.OnPropertyChanged("IsDraggable");
@@ -88,16 +54,13 @@ namespace ApplicationLayer.Models.SolutionPackage
 		/// <value>
 		/// <c>true</c> if the node is editable; otherwise, <c>false</c>.
 		/// </value>
+		[XmlIgnore]
 		public bool IsEditable
 		{
-			get
-			{
-				return isEditable;
-			}
+			get => isEditable;
 			set
 			{
-				if (isEditable == value)
-					return;
+				if (isEditable == value) return;
 
 				isEditable = value;
 				this.OnPropertyChanged("IsEditable");
@@ -110,16 +73,13 @@ namespace ApplicationLayer.Models.SolutionPackage
 		/// <value>
 		/// <c>true</c> if the node is currently being edited; otherwise, <c>false</c>.
 		/// </value>
+		[XmlIgnore]
 		public bool IsEditing
 		{
-			get
-			{
-				return isEditing;
-			}
+			get => isEditing;
 			set
 			{
-				if (isEditing == value)
-					return;
+				if (isEditing == value) return;
 
 				isEditing = value;
 				this.OnPropertyChanged("IsEditing");
@@ -132,16 +92,13 @@ namespace ApplicationLayer.Models.SolutionPackage
 		/// <value>
 		/// <c>true</c> if the node is expanded; otherwise, <c>false</c>.
 		/// </value>
+		[XmlIgnore]
 		public bool IsExpanded
 		{
-			get
-			{
-				return isExpanded;
-			}
+			get => isExpanded;
 			set
 			{
-				if (isExpanded == value)
-					return;
+				if (isExpanded == value) return;
 
 				isExpanded = value;
 				this.OnPropertyChanged("IsExpanded");
@@ -154,16 +111,13 @@ namespace ApplicationLayer.Models.SolutionPackage
 		/// <value>
 		/// <c>true</c> if the node is currently loading children asynchronously; otherwise, <c>false</c>.
 		/// </value>
+		[XmlIgnore]
 		public bool IsLoading
 		{
-			get
-			{
-				return isLoading;
-			}
+			get => isLoading;
 			set
 			{
-				if (isLoading == value)
-					return;
+				if (isLoading == value) return;
 
 				isLoading = value;
 				this.OnPropertyChanged("IsLoading");
@@ -176,16 +130,13 @@ namespace ApplicationLayer.Models.SolutionPackage
 		/// <value>
 		/// <c>true</c> if the node is capable of being selected; otherwise, <c>false</c>.
 		/// </value>
+		[XmlIgnore]
 		public bool IsSelectable
 		{
-			get
-			{
-				return isSelectable;
-			}
+			get => isSelectable;
 			set
 			{
-				if (isSelectable == value)
-					return;
+				if (isSelectable == value) return;
 
 				isSelectable = value;
 				this.OnPropertyChanged("IsSelectable");
@@ -198,16 +149,13 @@ namespace ApplicationLayer.Models.SolutionPackage
 		/// <value>
 		/// <c>true</c> if the node is selected; otherwise, <c>false</c>.
 		/// </value>
+		[XmlIgnore]
 		public bool IsSelected
 		{
-			get
-			{
-				return isSelected;
-			}
+			get => isSelected;
 			set
 			{
-				if (isSelected == value)
-					return;
+				if (isSelected == value) return;
 
 				isSelected = value;
 				this.OnPropertyChanged("IsSelected");
@@ -218,42 +166,30 @@ namespace ApplicationLayer.Models.SolutionPackage
 		/// Gets or sets the name of the node.
 		/// </summary>
 		/// <value>The name of the node.</value>
-		public string Name
-		{
-			get
-			{
-				return name;
-			}
-			set
-			{
-				if (name == value)
-					return;
-
-				if (!string.IsNullOrEmpty(value))
-					name = value;
-				this.OnPropertyChanged("Name");
-			}
-		}
+		[XmlIgnore]
+		public abstract string DisplayName { get; }
 
 		/// <summary>
 		/// Gets or sets custom data for the node.
 		/// </summary>
 		/// <value>The custom data for the node.</value>
+		[XmlIgnore]
 		public object Tag
 		{
-			get
-			{
-				return tag;
-			}
+			get => tag;
 			set
 			{
-				if (tag == value)
-					return;
+				if (tag == value) return;
 
 				tag = value;
 				this.OnPropertyChanged(nameof(Tag));
 			}
 		}
+
+		[XmlIgnore]
+		public abstract bool IsChanged { get; }
+		[XmlIgnore]
+		public abstract string FullOnlyPath { get; }
 
 		public event PropertyChangedEventHandler PropertyChanged;
 
@@ -274,8 +210,26 @@ namespace ApplicationLayer.Models.SolutionPackage
 		/// </returns>
 		public override string ToString()
 		{
-			return string.Format("{0}[Name={1}]", this.GetType().Name, this.Name);
+			return string.Format("{0}[Name={1}]", this.GetType().Name, this.DisplayName);
 		}
 
+		public int CompareTo(object obj)
+		{
+			var treeNodeModel = obj as TreeNodeModel;
+			return DisplayName.CompareTo(treeNodeModel.DisplayName);
+		}
+
+		public static void CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+		{
+			for (int i = 0; i < e.NewItems?.Count; i++)
+			{
+				TreeNodeModel item = e.NewItems[i] as TreeNodeModel;
+				item.Parent = sender as TreeNodeModel;
+			}
+		}
+
+
+		public abstract void SyncWithLoadValue();
+		public abstract void SyncWithCurrentValue();
 	}
 }

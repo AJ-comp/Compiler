@@ -8,22 +8,15 @@ using ApplicationLayer.ViewModels.Messages;
 using ApplicationLayer.ViewModels.ToolWindowViewModels;
 using ApplicationLayer.WpfApp.ViewModels;
 using ApplicationLayer.WpfApp.Views.DialogViews;
-using GalaSoft.MvvmLight.Messaging;
-using Parse.FrontEnd.Parsers;
-using Parse.FrontEnd.Parsers.Collections;
-using Parse.FrontEnd.Parsers.LR;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Globalization;
 using System.IO;
-using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Forms;
-using System.Windows.Forms.Integration;
 using WPFLocalizeExtension.Engine;
-
 using CommonResource = ApplicationLayer.Define.Properties.Resources;
 
 namespace ApplicationLayer.WpfApp.Commands
@@ -104,11 +97,12 @@ private void OnNewFile(Func<Document> func)
         /// <summary>
         /// New Item Command
         /// </summary>
-        public static readonly RelayUICommand<HierarchicalData> AddNewItem = new RelayUICommand<HierarchicalData>(CommonResource.NewItem,
-            (hirStruct) =>
+        public static readonly RelayUICommand<TreeNodeModel> AddNewItem = new RelayUICommand<TreeNodeModel>(CommonResource.NewItem,
+            (treeNode) =>
             {
                 NewItemDialog dialog = new NewItemDialog();
                 var vm = dialog.DataContext as NewItemViewModel;
+                /*
                 vm.CreateRequest += (s, e) =>
                 {
                     var fileStruct = vm.SelectedItem.FileStruct(hirStruct);
@@ -134,6 +128,7 @@ private void OnNewFile(Func<Document> func)
                         else Messenger.Default.Send<RemoveChangedFileMessage>(new RemoveChangedFileMessage(parent));
                     }
                 };
+                */
 
                 dialog.Owner = RootWindow;
                 dialog.ShowInTaskbar = false;
@@ -148,8 +143,8 @@ private void OnNewFile(Func<Document> func)
         /// <summary>
         /// Load Existing Item Command
         /// </summary>
-        public static readonly RelayUICommand<HierarchicalData> AddExistItem = new RelayUICommand<HierarchicalData>(CommonResource.ExistItem,
-            (hirStruct) =>
+        public static readonly RelayUICommand<TreeNodeModel> AddExistItem = new RelayUICommand<TreeNodeModel>(CommonResource.ExistItem,
+            (treeNode) =>
             {
                 OpenFileDialog dialog = new OpenFileDialog
                 {
@@ -157,6 +152,7 @@ private void OnNewFile(Func<Document> func)
                 };
                 dialog.ShowDialog();
 
+                /*
                 foreach(var fileName in dialog.FileNames)
                 {
                     // If file is not in the current path then copy it to the current path.
@@ -181,6 +177,7 @@ private void OnNewFile(Func<Document> func)
                     if (hirStruct is DefaultProjectHier) (hirStruct as DefaultProjectHier).Items.Add(fileStruct);
                     else if (hirStruct is FolderHier) (hirStruct as FolderHier).Items.Add(fileStruct);
                 }
+                */
             }, (condition) =>
             {
                 var vm = RootWindow.DataContext as MainViewModel;
@@ -191,14 +188,15 @@ private void OnNewFile(Func<Document> func)
         /// <summary>
         /// Item delete command
         /// </summary>
-        public static readonly RelayUICommand<HierarchicalData> DelItem = new RelayUICommand<HierarchicalData>(CommonResource.Delete,
+        public static readonly RelayUICommand<TreeNodeModel> DelItem = new RelayUICommand<TreeNodeModel>(CommonResource.Delete,
             (selectedStruct) =>
             {
-                HierarchicalData parent = selectedStruct.Parent;
+                TreeNodeModel parent = selectedStruct.Parent;
                 if (parent == null) return;
 
                 DialogResult dResult = System.Windows.Forms.MessageBox.Show(CommonResource.DeleteWarning, string.Empty, MessageBoxButtons.YesNo);
 
+                /*
                 if (dResult == DialogResult.Yes)
                 {
                     try
@@ -238,6 +236,7 @@ private void OnNewFile(Func<Document> func)
                     if (projectParent.IsChanged) Messenger.Default.Send<AddChangedFileMessage>(new AddChangedFileMessage(projectParent));
                     else Messenger.Default.Send<RemoveChangedFileMessage>(new RemoveChangedFileMessage(projectParent));
                 }
+                */
             }, (condition) =>
             {
                 var vm = RootWindow.DataContext as MainViewModel;
@@ -248,11 +247,12 @@ private void OnNewFile(Func<Document> func)
         /// <summary>
         /// New Folder Command
         /// </summary>
-        public static readonly RelayUICommand<HierarchicalData> AddNewFolder = new RelayUICommand<HierarchicalData>(CommonResource.NewFolder,
+        public static readonly RelayUICommand<TreeNodeModel> AddNewFolder = new RelayUICommand<TreeNodeModel>(CommonResource.NewFolder,
             (selHier) =>
             {
                 string newFolderName = "New Folder";
 
+                /*
                 int index = 1;
                 while(true)
                 {
@@ -286,6 +286,7 @@ private void OnNewFile(Func<Document> func)
                     if (projectHier.IsChanged) Messenger.Default.Send<AddChangedFileMessage>(new AddChangedFileMessage(projectHier));
                     else Messenger.Default.Send<RemoveChangedFileMessage>(new RemoveChangedFileMessage(projectHier));
                 }
+                */
                 
             }, (condition) =>
             {
@@ -297,11 +298,11 @@ private void OnNewFile(Func<Document> func)
         /// <summary>
         /// This command open folder from file explorer
         /// </summary>
-        public static readonly RelayUICommand<HierarchicalData> OpenFolder = new RelayUICommand<HierarchicalData>(CommonResource.OpenFolderFromExplorer,
-            (hirStruct) =>
+        public static readonly RelayUICommand<TreeNodeModel> OpenFolder = new RelayUICommand<TreeNodeModel>(CommonResource.OpenFolderFromExplorer,
+            (treeNode) =>
             {
                 // opens explorer, showing some other folder)
-                Process.Start("explorer.exe", hirStruct.BaseOPath);
+                Process.Start("explorer.exe", treeNode.FullOnlyPath);
             }, (condition) =>
             {
                 return true;

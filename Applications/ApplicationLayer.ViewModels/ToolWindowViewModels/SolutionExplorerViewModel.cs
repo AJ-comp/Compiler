@@ -1,7 +1,6 @@
 ﻿using ApplicationLayer.Common.Helpers;
-using ApplicationLayer.Models;
 using ApplicationLayer.Models.SolutionPackage;
-using ApplicationLayer.ViewModels.CommandArgs;
+using ApplicationLayer.Models.SolutionPackage.MiniCPackage;
 using ApplicationLayer.ViewModels.DocumentTypeViewModels;
 using ApplicationLayer.ViewModels.Messages;
 using GalaSoft.MvvmLight.Command;
@@ -10,14 +9,25 @@ using System;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.IO;
-
+using System.Xml.Serialization;
 using CommonResource = ApplicationLayer.Define.Properties.Resources;
 
 namespace ApplicationLayer.ViewModels.ToolWindowViewModels
 {
     public class SolutionExplorerViewModel : ToolWindowViewModel
     {
-        public ObservableCollection<SolutionHier> Solutions { get; } = new ObservableCollection<SolutionHier>();
+        private SolutionTreeNodeModel solution;
+        private TreeNodeModel selectedItem;
+
+        public SolutionTreeNodeModel Solution
+        {
+            get => solution;
+            private set
+            {
+                solution = value;
+                RaisePropertyChanged(nameof(Solution));
+            }
+        }
 
         #region Property related to Document
         private ObservableCollection<DocumentViewModel> _documents;
@@ -75,20 +85,28 @@ namespace ApplicationLayer.ViewModels.ToolWindowViewModels
         #endregion
 
 
-        public HierarchicalData SelectedItem { get; private set; }
+        public TreeNodeModel SelectedItem
+        {
+            get => selectedItem;
+            set
+            {
+                selectedItem = value;
+                RaisePropertyChanged(nameof(SelectedItem));
+            }
+        }
 
-        private RelayCommand<HierarchicalData> selectedCommand;
-        public RelayCommand<HierarchicalData> SelectedCommand
+        private RelayCommand<TreeNodeModel> selectedCommand;
+        public RelayCommand<TreeNodeModel> SelectedCommand
         {
             get
             {
                 if (this.selectedCommand == null)
-                    this.selectedCommand = new RelayCommand<HierarchicalData>(this.OnSelected);
+                    this.selectedCommand = new RelayCommand<TreeNodeModel>(this.OnSelected);
 
                 return this.selectedCommand;
             }
         }
-        private void OnSelected(HierarchicalData selectedItem)
+        private void OnSelected(TreeNodeModel selectedItem)
         {
             this.SelectedItem = selectedItem;
         }
@@ -106,9 +124,9 @@ namespace ApplicationLayer.ViewModels.ToolWindowViewModels
         }
         private void OnMouseDoubleClick()
         {
-            if (SelectedItem is DefaultFileHier)
+            if (SelectedItem is FileTreeNodeModel)
             {
-                string fileName = SelectedItem.FullPath;
+                string fileName = (SelectedItem as FileTreeNodeModel).PathWithFileName;
 
                 if (File.Exists(fileName) == false) return;
                 string content = File.ReadAllText(fileName);
@@ -142,37 +160,25 @@ namespace ApplicationLayer.ViewModels.ToolWindowViewModels
         {
         }
 
-        private RelayCommand<HierarchicalData> newFolderCommand;
-        public RelayCommand<HierarchicalData> NewFolderCommand
+        private RelayCommand<TreeNodeModel> newFolderCommand;
+        public RelayCommand<TreeNodeModel> NewFolderCommand
         {
             get
             {
                 if (this.newFolderCommand == null)
-                    this.newFolderCommand = new RelayCommand<HierarchicalData>(this.OnNewFolderMenuClick);
+                    this.newFolderCommand = new RelayCommand<TreeNodeModel>(this.OnNewFolderMenuClick);
 
                 return this.newFolderCommand;
             }
         }
-        private void OnNewFolderMenuClick(HierarchicalData selectedItem)
+        private void OnNewFolderMenuClick(TreeNodeModel selectedItem)
         {
 
         }
 
-        private RelayCommand<SolutionExplorerKeyDownArgs> keydownCommand;
-        public RelayCommand<SolutionExplorerKeyDownArgs> KeyDownCommand
+        private void OnRename()
         {
-            get
-            {
-                if (this.keydownCommand == null)
-                    this.keydownCommand = new RelayCommand<SolutionExplorerKeyDownArgs>(this.OnRename);
-
-                return this.keydownCommand;
-            }
-        }
-        private void OnRename(SolutionExplorerKeyDownArgs target)
-        {
-            if (target == null) return;
-
+            /*
             if (target.Key == SolutionExplorerKeyDownArgs.PressedKey.F2) target.Item.IsEditMode = true;
             else if (target.Key == SolutionExplorerKeyDownArgs.PressedKey.Esc)
             {
@@ -190,30 +196,62 @@ namespace ApplicationLayer.ViewModels.ToolWindowViewModels
                 }
                 else Messenger.Default.Send<DisplayMessage>(new DisplayMessage(exceptData, string.Empty));
             }
+            */
         }
 
         public SolutionExplorerViewModel()
         {
-            this.Solutions.CollectionChanged += Solutions_CollectionChanged;
-
             this.SerializationId = "SE";
             this.DefaultDockSide = Models.ToolWindowStatus.ToolItemDockSide.Right;
-            this.State = Models.ToolWindowStatus.ToolItemState.Docked;
+            this.WindowState = Models.ToolWindowStatus.ToolItemState.Docked;
             this.Title = CommonResource.SolutionExplorer;
         }
 
-        private void Solutions_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        public void Save()
         {
-            if (e.NewItems == null) return;
+            if (Solution == null) return;
 
-            for (int i = e.NewStartingIndex; i < e.NewItems.Count; i++)
+            Directory.CreateDirectory(Solution.Path);
+            using (StreamWriter wr = new StreamWriter(Solution.PathWithFileName))
             {
-                SolutionHier child = e.NewItems[i] as SolutionHier;
-
-                if (File.Exists(child.FullPath)) continue;
-
-                Directory.CreateDirectory(child.CurOPath);
+                XmlSerializer xs = new XmlSerializer(typeof(SolutionTreeNodeModel));
+                xs.Serialize(wr, Solution);
             }
+
+            foreach (var item in Solution.Projects)
+            {
+                var project = item as ProjectTreeNodeModel;
+                string projPath = Path.Combine(Solution.Path, project.Path);
+                Directory.CreateDirectory(projPath);
+                string fullPath = Path.Combine(projPath, project.FileName);
+
+                Type type = typeof(ProjectTreeNodeModel);
+                if (Path.GetExtension(project.FileName) == string.Format(".{0}proj", LanguageExtensions.MiniC))
+                    type = typeof(MiniCProjectTreeNodeModel);
+
+                using (StreamWriter wr = new StreamWriter(fullPath))
+                {
+                    XmlSerializer xs = new XmlSerializer(type);
+                    xs.Serialize(wr, project);
+                }
+            }
+        }
+
+        public void Load(string path, string solutionFileName)
+        {
+            SolutionTreeNodeModel result = new SolutionTreeNodeModel(path, solutionFileName);
+
+            using (StreamReader sr = new StreamReader(Path.Combine(path, solutionFileName)))
+            {
+                XmlSerializer xs = new XmlSerializer(typeof(SolutionTreeNodeModel));
+                result = xs.Deserialize(sr) as SolutionTreeNodeModel;
+                result.Path = path;
+                result.FileName = solutionFileName;
+            }
+
+            this.Solution = result;
+            this.Solution.LoadProject();
+            this.Solution.IsExpanded = true;
         }
 
         /// <summary>
@@ -224,14 +262,13 @@ namespace ApplicationLayer.ViewModels.ToolWindowViewModels
         {
             if (message is null) return;
 
-            var solution = SolutionHier.Create(message.SolutionPath, message.SoltionName, message.Language, message.MachineTarget);
+            this.Solution = SolutionTreeNodeModel.Create(message.SolutionPath, message.SoltionName, message.Language, message.MachineTarget);
+            this.Solution.IsExpanded = true;
 
-            solution.Save();
-            foreach (var project in solution.Projects) project.Save();
-
-            this.Solutions.Add(solution);
+            this.Save();
         }
 
+        /*
         private bool LoadSolution(LoadSolutionMessage message)
         {
             this.Solutions.Clear();
@@ -259,6 +296,7 @@ namespace ApplicationLayer.ViewModels.ToolWindowViewModels
 
             return bFiredError;
         }
+        */
 
         /// <summary>
         /// This function checks whether changed files are.
@@ -281,7 +319,7 @@ namespace ApplicationLayer.ViewModels.ToolWindowViewModels
                 {
                     foreach (var item in hirStructs)
                     {
-                        item.Commit();
+                        item.SyncWithCurrentValue();
                         item.Save();
                     }
 
@@ -291,7 +329,7 @@ namespace ApplicationLayer.ViewModels.ToolWindowViewModels
                 {
                     foreach (var item in hirStructs)
                     {
-                        item.RollBack();
+                        item.SyncWithLoadValue();
                         item.Save();
                     }
 
@@ -315,7 +353,9 @@ namespace ApplicationLayer.ViewModels.ToolWindowViewModels
             if (answer?.ResultStatus == ShowSaveDialogMessage.Result.Cancel) return;
 
             if (message is null) return;
-            if (this.LoadSolution(message)) Messenger.Default.Send<DisplayMessage>(new DisplayMessage(CommonResource.WarningOnLoad, ""));
+            this.Load(message.SolutionPath, message.SolutionName);
+
+            //            if (this.LoadSolution(message)) Messenger.Default.Send<DisplayMessage>(new DisplayMessage(CommonResource.WarningOnLoad, ""));
         }
 
         /// <summary>
@@ -325,10 +365,10 @@ namespace ApplicationLayer.ViewModels.ToolWindowViewModels
         public void ReceivedAddNewProjectMessage(AddProjectMessage message)
         {
             if (message is null) return;
-            if (this.Solutions.Count == 0) return;
+            if (this.Solution is null) return;
 
             // if project path is in the solution path.
-            var solutionPath = this.Solutions[0].CurOPath;
+            var solutionPath = this.Solution.Path;
             int matchedPos = message.ProjectPath.IndexOf(solutionPath) + solutionPath.Length;
             bool isAbsolutePath = (PathHelper.ComparePath(solutionPath, message.ProjectPath) == false);
 
@@ -338,13 +378,13 @@ namespace ApplicationLayer.ViewModels.ToolWindowViewModels
             string projectPath = (isAbsolutePath) ? message.ProjectPath : message.ProjectPath.Substring(matchedPos);
             if (projectPath[0] == '\\') projectPath = projectPath.Remove(0, 1);
 
-            DefaultProjectHier newProject = projectGenerator.CreateDefaultProject(projectPath, isAbsolutePath, message.ProjectName, message.MachineTarget, this.Solutions[0]);
-            newProject.Save();
+            ProjectTreeNodeModel newProject = projectGenerator.CreateDefaultProject(projectPath, isAbsolutePath, message.ProjectName, message.MachineTarget);
+//            newProject.Save();
 
-            this.Solutions[0].Projects.Add(newProject);
+            this.Solution.Projects.Add(newProject);
 
-            var changedInfo = new AddChangedFileMessage(this.Solutions[0]);
-            Messenger.Default.Send<AddChangedFileMessage>(changedInfo);
+//            var changedInfo = new AddChangedFileMessage(this.Solution);
+//            Messenger.Default.Send<AddChangedFileMessage>(changedInfo);
 
             //// Notify the changed data to the out.
             //var changedData = new ChangedFileListMessage.ChangedFile(this.Solutions[0], ChangedFileListMessage.ChangedStatus.Changed);
@@ -360,8 +400,9 @@ namespace ApplicationLayer.ViewModels.ToolWindowViewModels
         public void ReceivedAddMissedChangedFilesMessage(AddMissedChangedFilesMessage message)
         {
             if (message == null) return;
-            if (this.Solutions.Count == 0) return;
+            if (this.Solution == null) return;
 
+            /*
             if (this.Solutions[0].IsChanged) Messenger.Default.Send<AddChangedFileMessage>(new AddChangedFileMessage(this.Solutions[0]));
             else Messenger.Default.Send<RemoveChangedFileMessage>(new RemoveChangedFileMessage(this.Solutions[0]));
 
@@ -370,6 +411,7 @@ namespace ApplicationLayer.ViewModels.ToolWindowViewModels
                 if (project.IsChanged) Messenger.Default.Send<AddChangedFileMessage>(new AddChangedFileMessage(project));
                 else Messenger.Default.Send<RemoveChangedFileMessage>(new RemoveChangedFileMessage(project));
             }
+            */
         }
     }
 }

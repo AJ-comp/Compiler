@@ -313,4 +313,22 @@
   <data name="PreviousTabGroup" xml:space="preserve">
     <value>Move To Previous Tab Group</value>
   </data>
+  <data name="ExternDependency" xml:space="preserve">
+    <value>Extern dependency</value>
+  </data>
+  <data name="ResourceFiles" xml:space="preserve">
+    <value>Resource files</value>
+  </data>
+  <data name="HeaderFiles" xml:space="preserve">
+    <value>Header files</value>
+  </data>
+  <data name="SourceFiles" xml:space="preserve">
+    <value>Source files</value>
+  </data>
+  <data name="References" xml:space="preserve">
+    <value>References</value>
+  </data>
+  <data name="Solution" xml:space="preserve">
+    <value>Solution</value>
+  </data>
 </root>

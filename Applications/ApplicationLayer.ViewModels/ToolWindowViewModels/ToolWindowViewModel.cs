@@ -6,7 +6,7 @@ namespace ApplicationLayer.ViewModels.ToolWindowViewModels
     public class ToolWindowViewModel : DockingItemViewModel
     {
         private ToolItemDockSide defaultDockSide = ToolItemDockSide.Right;
-        private ToolItemState state = ToolItemState.Docked;
+        private ToolItemState windowState = ToolItemState.Docked;
 
 		/// <summary>
 		/// Gets or sets the default side that the tool window will dock towards when no prior location is known.
@@ -28,15 +28,15 @@ namespace ApplicationLayer.ViewModels.ToolWindowViewModels
 		/// Gets or sets the current state of the view.
 		/// </summary>
 		/// <value>The current state of the view.</value>
-		public ToolItemState State
+		public ToolItemState WindowState
 		{
-			get => this.state;
+			get => this.windowState;
 			set
 			{
-				if (this.state == value) return;
+				if (this.windowState == value) return;
 
-				this.state = value;
-				this.RaisePropertyChanged(nameof(State));
+				this.windowState = value;
+				this.RaisePropertyChanged(nameof(WindowState));
 			}
 		}
 

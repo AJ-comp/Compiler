@@ -1,19 +1,21 @@
 ﻿using ActiproSoftware.Windows.Controls.Grids;
 using ApplicationLayer.Models.SolutionPackage;
+using ApplicationLayer.Models.SolutionPackage.MiniCPackage;
 using System.Collections;
+using System.Collections.Generic;
 
 namespace ApplicationLayer.Views
 {
-	public class DefaultTreeListBoxItemAdapter : TreeListBoxItemAdapter
+	public class MiniCProjectTreeListBoxItemAdapter : TreeListBoxItemAdapter
 	{
 		/////////////////////////////////////////////////////////////////////////////////////////////////////
 		// OBJECT
 		/////////////////////////////////////////////////////////////////////////////////////////////////////
 
 		/// <summary>
-		/// Initializes a new instance of the <see cref="DefaultTreeListBoxItemAdapter"/> class.
+		/// Initializes a new instance of the <see cref="MiniCProjectTreeListBoxItemAdapter"/> class.
 		/// </summary>
-		public DefaultTreeListBoxItemAdapter()
+		public MiniCProjectTreeListBoxItemAdapter()
 		{
 			// Setting these properties tells the adapter which properties to watch for INotifyPropertyChanged updates
 			//   so that the UI can receive the updated values without binding usage
@@ -23,6 +25,58 @@ namespace ApplicationLayer.Views
 			this.IsLoadingPath = "IsLoading";
 			this.IsSelectablePath = "IsSelectable";
 			this.IsSelectedPath = "IsSelected";
+		}
+
+		private IEnumerable GetSolutionTypeChildren(TreeListBox ownerControl, object item, bool bSort = true)
+		{
+			var model = item as SolutionTreeNodeModel;
+			List<ProjectTreeNodeModel> result = new List<ProjectTreeNodeModel>();
+
+			List<ProjectTreeNodeModel> projects = new List<ProjectTreeNodeModel>();
+			foreach (var project in model.Projects) projects.Add(project);
+			if (bSort) projects.Sort();
+			result.AddRange(projects);
+
+			return result;
+		}
+
+		private IEnumerable GetProjectTypeChildren(TreeListBox ownerControl, object item, bool bSort = true)
+		{
+			var model = item as MiniCProjectTreeNodeModel;
+			List<TreeNodeModel> result = new List<TreeNodeModel>();
+
+			result.Add(model.References);
+			result.Add(model.OuterDependencies);
+
+			List<TreeNodeModel> filters = new List<TreeNodeModel>();
+			foreach (var filter in model.Filters) filters.Add(filter);
+			if(bSort) filters.Sort();
+			result.AddRange(filters);
+
+			List<TreeNodeModel> files = new List<TreeNodeModel>();
+			foreach (var file in model.Files) files.Add(file);
+			if(bSort) files.Sort();
+			result.AddRange(files);
+
+			return result;
+		}
+
+		private IEnumerable GetFilterTypeChildren(TreeListBox ownerControl, object item, bool bSort = true)
+		{
+			var model = item as FilterTreeNodeModel;
+			List<TreeNodeModel> result = new List<TreeNodeModel>();
+
+			List<TreeNodeModel> filters = new List<TreeNodeModel>();
+			foreach (var filter in model.Filters) filters.Add(filter);
+			if (bSort) filters.Sort();
+			result.AddRange(filters);
+
+			List<TreeNodeModel> files = new List<TreeNodeModel>();
+			foreach (var file in model.Files) files.Add(file);
+			if (bSort) files.Sort();
+			result.AddRange(files);
+
+			return result;
 		}
 
 		/////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -37,8 +91,10 @@ namespace ApplicationLayer.Views
 		/// <returns>An <see cref="IEnumerable"/> that will be used to provide child items for the specified parent item.</returns>
 		public override IEnumerable GetChildren(TreeListBox ownerControl, object item)
 		{
-			var model = item as TreeNodeModel;
-			return (model != null ? model.Children : null);
+			if (item is SolutionTreeNodeModel) return GetSolutionTypeChildren(ownerControl, item);
+			else if (item is MiniCProjectTreeNodeModel) return GetProjectTypeChildren(ownerControl, item);
+			else if (item is FilterTreeNodeModel) return GetFilterTypeChildren(ownerControl, item);
+			else return null;
 		}
 
 		/// <summary>
@@ -153,7 +209,7 @@ namespace ApplicationLayer.Views
 		public override string GetPath(TreeListBox ownerControl, object item)
 		{
 			var model = item as TreeNodeModel;
-			return (model != null ? model.Name : null);
+			return (model != null ? model.DisplayName : null);
 		}
 
 		/// <summary>
@@ -165,7 +221,7 @@ namespace ApplicationLayer.Views
 		public override string GetSearchText(TreeListBox ownerControl, object item)
 		{
 			var model = item as TreeNodeModel;
-			return (model != null ? model.Name : null);
+			return (model != null ? model.DisplayName : null);
 		}
 
 		/// <summary>

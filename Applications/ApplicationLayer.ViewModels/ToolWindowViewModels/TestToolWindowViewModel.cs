@@ -1,25 +1,22 @@
 ﻿using ApplicationLayer.Models.SolutionPackage;
+using ApplicationLayer.Models.SolutionPackage.MiniCPackage;
+using ApplicationLayer.ViewModels.Messages;
+using Parse.FrontEnd.Grammars.MiniC;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.IO;
+using System.Xml.Serialization;
 
 namespace ApplicationLayer.ViewModels.ToolWindowViewModels
 {
     public class TestToolWindowViewModel : ToolWindowViewModel
     {
-        public TreeNodeModel Children { get; } = new TreeNodeModel();
+        public SolutionTreeNodeModel Solution { get; private set; }
 
         public TestToolWindowViewModel()
         {
             this.DefaultDockSide = Models.ToolWindowStatus.ToolItemDockSide.Right;
-            this.State = Models.ToolWindowStatus.ToolItemState.Docked;
+            this.WindowState = Models.ToolWindowStatus.ToolItemState.Docked;
             this.Title = "TestView";
-
-            this.Children = new TreeNodeModel();
-            this.Children.Children.Add(new TreeNodeModel() { Name = "test (child)" });
-            this.Children.Name = "test";
         }
     }
 }

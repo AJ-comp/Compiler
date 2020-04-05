@@ -11,7 +11,7 @@ namespace ApplicationLayer.Views.Converters
             if (!(value is RoutedPropertyChangedEventArgs<object> arg) || arg.NewValue == null) return null;
 
             object result = null;
-            if (parameter is SolutionExplorer) result = arg.NewValue as HierarchicalData;
+            if (parameter is SolutionExplorer) result = arg.NewValue as TreeNodeModel;
 
             return result;
         }

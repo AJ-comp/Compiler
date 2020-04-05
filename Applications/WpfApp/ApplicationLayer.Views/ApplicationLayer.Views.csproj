@@ -100,12 +100,12 @@
   <ItemGroup>
     <Compile Include="AttachedProperties\LayoutParametersHook.cs" />
     <Compile Include="AttachedProperties\WindowsFormsHostHook.cs" />
+    <Compile Include="Converters\DataTypeConverter.cs" />
     <Compile Include="Converters\EventArgsConverterExtension.cs" />
     <Compile Include="Converters\MouseDoubleClickIndexConverter.cs" />
-    <Compile Include="Converters\RenameHotKeyConverter.cs" />
     <Compile Include="Converters\SelectedItemConverter.cs" />
     <Compile Include="Converters\ToHierarchicalDataConverter.cs" />
-    <Compile Include="DefaultTreeListBoxItemAdapter.cs" />
+    <Compile Include="MiniCProjectTreeListBoxItemAdapter.cs" />
     <Compile Include="DocumentTypeViews\GrammarInfoView.xaml.cs">
       <DependentUpon>GrammarInfoView.xaml</DependentUpon>
     </Compile>
@@ -189,7 +189,9 @@
       <Name>ApplicationLayer.ViewModels</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Resources\Images\Basic\Solution16.png" />
+  </ItemGroup>
   <ItemGroup>
     <Page Include="DocumentTypeViews\GrammarInfoView.xaml">
       <SubType>Designer</SubType>
@@ -277,10 +279,21 @@
     <Resource Include="Resources\Images\DarkTheme\mcproject_16.png" />
     <Resource Include="Resources\Images\DarkTheme\mcproject_24.png" />
     <Resource Include="Resources\Images\DarkTheme\mcproject_48.png" />
-    <Resource Include="Resources\Images\DarkTheme\project.png" />
     <Resource Include="Resources\Images\DarkTheme\reference_16.png" />
     <Resource Include="Resources\Images\DarkTheme\reference_20.png" />
-    <Resource Include="Resources\Images\DarkTheme\solution.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Basic\closed_dependency_filter_16.png" />
+    <Resource Include="Resources\Images\Basic\closed_folder_16.png" />
+    <Resource Include="Resources\Images\Basic\mcfile_16.png" />
+    <Resource Include="Resources\Images\Basic\mcfile_24.png" />
+    <Resource Include="Resources\Images\Basic\mcfile_48.png" />
+    <Resource Include="Resources\Images\Basic\open_dependency_filter_16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\DarkTheme\mcfile_16.png" />
+    <Resource Include="Resources\Images\DarkTheme\mcfile_24.png" />
+    <Resource Include="Resources\Images\DarkTheme\mcfile_48.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

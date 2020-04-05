@@ -333,4 +333,22 @@
   <data name="PreviousTabGroup" xml:space="preserve">
     <value>이전 문서 그룹으로 이동</value>
   </data>
+  <data name="ExternDependency" xml:space="preserve">
+    <value>외부 종속성</value>
+  </data>
+  <data name="ResourceFiles" xml:space="preserve">
+    <value>리소스 파일</value>
+  </data>
+  <data name="HeaderFiles" xml:space="preserve">
+    <value>헤더 파일</value>
+  </data>
+  <data name="SourceFiles" xml:space="preserve">
+    <value>소스 파일</value>
+  </data>
+  <data name="References" xml:space="preserve">
+    <value>참조</value>
+  </data>
+  <data name="Solution" xml:space="preserve">
+    <value>솔루션</value>
+  </data>
 </root>

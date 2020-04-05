@@ -12,25 +12,25 @@
     <BitmapImage x:Key="NewFileMenuImagePath" UriSource="/ApplicationLayer.Views;component/Resources/Images/Basic/newfile.png"/>
     
     <!-- Images related to NewFile & NewProject Window-->
-    <BitmapImage x:Key="CFile16ImagePath" UriSource="/ApplicationLayer.Views;component/Resources/Images/DarkTheme/cfile_16.png"/>
-    <BitmapImage x:Key="CFile24ImagePath" UriSource="/ApplicationLayer.Views;component/Resources/Images/DarkTheme/cfile_24.png"/>
-    <BitmapImage x:Key="CFile48ImagePath" UriSource="/ApplicationLayer.Views;component/Resources/Images/DarkTheme/cfile_48.png"/>
-    <BitmapImage x:Key="Project16ImagePath" UriSource="/ApplicationLayer.Views;component/Resources/Images/DarkTheme/mcproject_16.png"/>
-    <BitmapImage x:Key="Project24ImagePath" UriSource="/ApplicationLayer.Views;component/Resources/Images/DarkTheme/mcproject_24.png"/>
-    <BitmapImage x:Key="Project48ImagePath" UriSource="/ApplicationLayer.Views;component/Resources/Images/DarkTheme/mcproject_48.png"/>
-    <BitmapImage x:Key="LibProject16ImagePath" UriSource="/ApplicationLayer.Views;component/Resources/Images/DarkTheme/mclibproject_16.png"/>
-    <BitmapImage x:Key="LibProject24ImagePath" UriSource="/ApplicationLayer.Views;component/Resources/Images/DarkTheme/mclibproject_24.png"/>
-    <BitmapImage x:Key="LibProject48ImagePath" UriSource="/ApplicationLayer.Views;component/Resources/Images/DarkTheme/mclibproject_48.png"/>
+    <BitmapImage x:Key="CFile16ImagePath" UriSource="/ApplicationLayer.Views;component/Resources/Images/DarkTheme/mcfile_16.png"/>
+    <BitmapImage x:Key="CFile24ImagePath" UriSource="/ApplicationLayer.Views;component/Resources/Images/DarkTheme/mcfile_24.png"/>
+    <BitmapImage x:Key="CFile48ImagePath" UriSource="/ApplicationLayer.Views;component/Resources/Images/DarkTheme/mcfile_48.png"/>
+    <BitmapImage x:Key="MCProject16ImagePath" UriSource="/ApplicationLayer.Views;component/Resources/Images/DarkTheme/mcproject_16.png"/>
+    <BitmapImage x:Key="MCProject24ImagePath" UriSource="/ApplicationLayer.Views;component/Resources/Images/DarkTheme/mcproject_24.png"/>
+    <BitmapImage x:Key="MCProject48ImagePath" UriSource="/ApplicationLayer.Views;component/Resources/Images/DarkTheme/mcproject_48.png"/>
+    <BitmapImage x:Key="MCLibProject16ImagePath" UriSource="/ApplicationLayer.Views;component/Resources/Images/DarkTheme/mclibproject_16.png"/>
+    <BitmapImage x:Key="MCLibProject24ImagePath" UriSource="/ApplicationLayer.Views;component/Resources/Images/DarkTheme/mclibproject_24.png"/>
+    <BitmapImage x:Key="MCLibProject48ImagePath" UriSource="/ApplicationLayer.Views;component/Resources/Images/DarkTheme/mclibproject_48.png"/>
 
     <!-- Images related to Solution Explorer -->
-    <BitmapImage x:Key="SolutionImagePath" UriSource="/ApplicationLayer.Views;component/Resources/Images/DarkTheme/solution.png"/>
-    <BitmapImage x:Key="ProjectImagePath" UriSource="/ApplicationLayer.Views;component/Resources/Images/DarkTheme/project.png"/>
+    <BitmapImage x:Key="SolutionImagePath" UriSource="/ApplicationLayer.Views;component/Resources/Images/Basic/Solution16.png"/>
     <BitmapImage x:Key="MiniCProjectImagePath" UriSource="/ApplicationLayer.Views;component/Resources/Images/DarkTheme/mcproject.png"/>
     <BitmapImage x:Key="ErrorProjectImagePath" UriSource="/ApplicationLayer.Views;component/Resources/Images/Basic/not_exist_16.png"/>
     <BitmapImage x:Key="ReferenceImagePath" UriSource="/ApplicationLayer.Views;component/Resources/Images/DarkTheme/reference_20.png"/>
-    <BitmapImage x:Key="CloseFolderImagePath" UriSource="/ApplicationLayer.Views;component/Resources/Images/Basic/close_folder_20.png"/>
-    <BitmapImage x:Key="OpenFolderImagePath" UriSource="/ApplicationLayer.Views;component/Resources/Images/Basic/open_folder_20.png"/>
+    <BitmapImage x:Key="CloseFolderImagePath" UriSource="/ApplicationLayer.Views;component/Resources/Images/Basic/closed_folder_16.png"/>
+    <BitmapImage x:Key="OpenFolderImagePath" UriSource="/ApplicationLayer.Views;component/Resources/Images/Basic/open_folder_16.png"/>
+    <BitmapImage x:Key="CloseDepFilterImagePath" UriSource="/ApplicationLayer.Views;component/Resources/Images/Basic/closed_dependency_filter_16.png"/>
+    <BitmapImage x:Key="OpenDepFilterImagePath" UriSource="/ApplicationLayer.Views;component/Resources/Images/Basic/open_dependency_filter_16.png"/>
 
     <!-- Images related to ARM -->
-    <BitmapImage x:Key="ARMImagePath" UriSource="/ApplicationLayer.Views;component/Resources/Images/DarkTheme/solution.png"/>
 </ResourceDictionary>

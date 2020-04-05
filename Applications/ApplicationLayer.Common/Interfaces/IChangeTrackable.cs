@@ -1,10 +1,10 @@
 ﻿namespace ApplicationLayer.Common.Interfaces
 {
-    public interface IChangeTrackable : ISaveable
+    public interface IChangeTrackable
     {
         bool IsChanged { get; }
 
-        void RollBack();
-        void Commit();
+        void SyncWithLoadValue();
+        void SyncWithCurrentValue();
     }
 }
