@@ -5,7 +5,7 @@ namespace ApplicationLayer.Models
 {
     public class PathInfo
     {
-        public string Type { get; set; }
+        public string Type { get; set; } = string.Empty;
         public string Path { get; set; }
         public string FileName { get; set; }
         public bool IsAbsolute { get; set; }
@@ -27,18 +27,21 @@ namespace ApplicationLayer.Models
             FileName = fileName;
         }
 
+        public override string ToString() => string.Format("[{0},{1}]", this.Path, this.IsAbsolute);
+
         public override bool Equals(object obj)
         {
-            var info = obj as PathInfo;
-            return info != null &&
-                   Path == info.Path;
+            return obj is PathInfo info &&
+                   Type == info.Type &&
+                   FullPath == info.FullPath;
         }
 
         public override int GetHashCode()
         {
-            return 467214278 + EqualityComparer<string>.Default.GetHashCode(Path);
+            int hashCode = 2078297872;
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Type);
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(FullPath);
+            return hashCode;
         }
-
-        public override string ToString() => string.Format("[{0},{1}]", this.Path, this.IsAbsolute);
     }
 }

@@ -1,4 +1,5 @@
-﻿using ApplicationLayer.Models.SolutionPackage.MiniCPackage;
+﻿using ApplicationLayer.Common.Interfaces;
+using ApplicationLayer.Models.SolutionPackage.MiniCPackage;
 using Parse.BackEnd.Target;
 using Parse.FrontEnd.Grammars;
 using System;
@@ -11,9 +12,10 @@ using CommonResource = ApplicationLayer.Define.Properties.Resources;
 namespace ApplicationLayer.Models.SolutionPackage
 {
     [XmlRoot ("Solution")]
-    public class SolutionTreeNodeModel : PathTreeNodeModel
+    public class SolutionTreeNodeModel : PathTreeNodeModel, IManagableElements
     {
         private double versionRecentSaved;
+        private ObservableCollection<ProjectTreeNodeModel> projects = new ObservableCollection<ProjectTreeNodeModel>();
 
         public double Version { get; set; }
 
@@ -29,17 +31,15 @@ namespace ApplicationLayer.Models.SolutionPackage
         }
 
         [XmlIgnore]
-        public ObservableCollection<ProjectTreeNodeModel> Projects { get; } = new ObservableCollection<ProjectTreeNodeModel>();
+        public ObservableCollection<ProjectTreeNodeModel> Projects => projects;
 
         [XmlElement("Project")]
         public Collection<PathInfo> ProjectPaths { get; private set; } = new Collection<PathInfo>();
 
-        public override bool IsChanged
+        public bool IsChanged
         {
             get
             {
-                if (base.IsChanged) return true;
-
                 if (versionRecentSaved != Version) return true;
                 if (ProjectPaths.Count != Projects.Count) return true;
 
@@ -62,7 +62,6 @@ namespace ApplicationLayer.Models.SolutionPackage
 
         public SolutionTreeNodeModel() : base(string.Empty, string.Empty)
         {
-            this.Projects.CollectionChanged += TreeNodeModel.CollectionChanged;
         }
 
         public SolutionTreeNodeModel(string solutionPath, string solutionName) : base(solutionPath, solutionName + ".ajn", true)
@@ -70,8 +69,47 @@ namespace ApplicationLayer.Models.SolutionPackage
             this.Path = solutionPath;
             this.SolutionName = solutionName;
             this.SyncWithCurrentValue();
+        }
 
-            this.Projects.CollectionChanged += TreeNodeModel.CollectionChanged;
+        /// <summary>
+        /// If the project name was changed then it has to synchronize because of the project file name was already changed.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ProjectNode_Renamed(object sender, Tuple<PathInfo, PathInfo> e)
+        {
+            var foundIndex = this.ProjectPaths.IndexOf(e.Item1);
+            if (foundIndex < 0) return;
+
+            this.ProjectPaths[foundIndex] = e.Item2;
+        }
+
+        /// <summary>
+        /// If the project was deleted then it has to synchronize because of the project file was already deleted.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ProjectNode_Deleted(object sender, PathInfo e)
+        {
+            var foundIndex = this.ProjectPaths.IndexOf(e);
+            if (foundIndex < 0) return;
+
+            this.ProjectPaths.RemoveAt(foundIndex);
+        }
+
+        /// <summary>
+        /// Even though the project was unloaded synchronize process is not performed because of the project file exists.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ProjectNode_Unloaded(object sender, PathInfo e)
+        {
+        }
+
+        public void AddProject(ProjectTreeNodeModel newProject)
+        {
+            newProject.Parent = this;
+            this.projects.Add(newProject);
         }
 
         public static SolutionTreeNodeModel Create(string solutionPath, string solutionName, Grammar grammar, Target target)
@@ -82,7 +120,8 @@ namespace ApplicationLayer.Models.SolutionPackage
             ProjectGenerator projectGenerator = ProjectGenerator.CreateProjectGenerator(grammar);
             if (projectGenerator == null) return result;
 
-            result.Projects.Add(projectGenerator.CreateDefaultProject(solutionName, false, solutionName, target));
+            var newProject = projectGenerator.CreateDefaultProject(solutionName, false, solutionName, target);
+            result.AddProject(newProject);
             result.SyncWithCurrentValue();
 
             return result;
@@ -112,19 +151,35 @@ namespace ApplicationLayer.Models.SolutionPackage
                 result.LoadElement();
                 result.SyncWithCurrentValue();
 
-                this.Projects.Add(result);
+                this.AddProject(result);
             }
         }
 
-        public override void SyncWithLoadValue() => Version = versionRecentSaved;
+        public override void RemoveChild(TreeNodeModel nodeToRemove)
+        {
+            if(nodeToRemove is ProjectTreeNodeModel)
+                this.projects.Remove(nodeToRemove as ProjectTreeNodeModel);
+        }
 
-        public override void SyncWithCurrentValue()
+        public void SyncWithLoadValue() => Version = versionRecentSaved;
+
+        public void SyncWithCurrentValue()
         {
             versionRecentSaved = Version;
 
             ProjectPaths.Clear();
             foreach (var project in Projects)
                 ProjectPaths.Add(new PathInfo(project.Path, project.FileName, project.ProjectType, project.IsAbsolute));
+        }
+
+        public void Save()
+        {
+            Directory.CreateDirectory(this.Path);
+            using (StreamWriter wr = new StreamWriter(this.PathWithFileName))
+            {
+                XmlSerializer xs = new XmlSerializer(typeof(SolutionTreeNodeModel));
+                xs.Serialize(wr, this);
+            }
         }
     }
 }

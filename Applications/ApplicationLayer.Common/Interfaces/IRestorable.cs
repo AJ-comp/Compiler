@@ -1,6 +1,6 @@
 ﻿namespace ApplicationLayer.Common.Interfaces
 {
-    public interface IChangeTrackable
+    public interface IRestorable
     {
         bool IsChanged { get; }
 

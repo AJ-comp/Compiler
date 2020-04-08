@@ -301,7 +301,7 @@ namespace ApplicationLayer.ViewModels.ToolWindowViewModels
         /// <summary>
         /// This function checks whether changed files are.
         /// </summary>
-        /// <returns>If changed files not exist return null, if changed files exist return a user's answer after process for answer.</returns>
+        /// <returns>If a changed files not exist return null, if a changed files exist return a user's answer after process for answer.</returns>
         public static ShowSaveDialogMessage CheckChangedFiles()
         {
             ShowSaveDialogMessage result = null;
@@ -381,7 +381,7 @@ namespace ApplicationLayer.ViewModels.ToolWindowViewModels
             ProjectTreeNodeModel newProject = projectGenerator.CreateDefaultProject(projectPath, isAbsolutePath, message.ProjectName, message.MachineTarget);
 //            newProject.Save();
 
-            this.Solution.Projects.Add(newProject);
+            this.Solution.AddProject(newProject);
 
 //            var changedInfo = new AddChangedFileMessage(this.Solution);
 //            Messenger.Default.Send<AddChangedFileMessage>(changedInfo);

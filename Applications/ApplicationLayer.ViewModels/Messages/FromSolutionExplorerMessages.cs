@@ -11,27 +11,27 @@ namespace ApplicationLayer.ViewModels.Messages
     /// </summary>
     public class AddChangedFileMessage : MessageBase
     {
-        public ISaveAndChangeTrackable Item { get; }
+        public IManagableElements Item { get; }
 
         public AddChangedFileMessage()
         { }
 
-        public AddChangedFileMessage(ISaveAndChangeTrackable item) => this.Item = item;
+        public AddChangedFileMessage(IManagableElements item) => this.Item = item;
     }
 
     public class RemoveChangedFileMessage : MessageBase
     {
-        public ISaveAndChangeTrackable Item { get; }
+        public IManagableElements Item { get; }
 
         public RemoveChangedFileMessage()
         { }
 
-        public RemoveChangedFileMessage(ISaveAndChangeTrackable item) => Item = item;
+        public RemoveChangedFileMessage(IManagableElements item) => Item = item;
     }
 
-    public class GetChangedListMessage : NotificationMessageAction<Collection<ISaveAndChangeTrackable>>
+    public class GetChangedListMessage : NotificationMessageAction<Collection<IManagableElements>>
     {
-        public GetChangedListMessage(string notification, Action<Collection<ISaveAndChangeTrackable>> callback) : base(notification, callback)
+        public GetChangedListMessage(string notification, Action<Collection<IManagableElements>> callback) : base(notification, callback)
         { }
     }
 }

@@ -92,7 +92,7 @@ namespace ApplicationLayer.Views
 		public override IEnumerable GetChildren(TreeListBox ownerControl, object item)
 		{
 			if (item is SolutionTreeNodeModel) return GetSolutionTypeChildren(ownerControl, item);
-			else if (item is MiniCProjectTreeNodeModel) return GetProjectTypeChildren(ownerControl, item);
+			else if (item is ProjectTreeNodeModel) return GetProjectTypeChildren(ownerControl, item);
 			else if (item is FilterTreeNodeModel) return GetFilterTypeChildren(ownerControl, item);
 			else return null;
 		}

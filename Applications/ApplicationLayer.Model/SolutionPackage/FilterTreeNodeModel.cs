@@ -1,25 +1,27 @@
-﻿using System.Collections.Generic;
+﻿using ApplicationLayer.Common.Interfaces;
+using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.IO;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
 
 namespace ApplicationLayer.Models.SolutionPackage
 {
-    public class FilterTreeNodeModel : TreeNodeModel
+    public class FilterTreeNodeModel : TreeNodeModel, IManagedable
     {
-        private string filterNameRecentSaved = string.Empty;
-        private ObservableCollection<FilterTreeNodeModel> filtersWhenLoad = new ObservableCollection<FilterTreeNodeModel>();
-        private ObservableCollection<FileTreeNodeModel> filesWhenLoad = new ObservableCollection<FileTreeNodeModel>();
+        private ObservableCollection<FilterTreeNodeModel> filters = new ObservableCollection<FilterTreeNodeModel>();
+        private ObservableCollection<FileTreeNodeModel> files = new ObservableCollection<FileTreeNodeModel>();
 
         [XmlIgnore]
         public string FilterName { get; set; }
 
         [XmlIgnore]
-        public ObservableCollection<FilterTreeNodeModel> Filters { get; private set; } = new ObservableCollection<FilterTreeNodeModel>();
+        public ObservableCollection<FilterTreeNodeModel> Filters => filters;
 
         [XmlIgnore]
-        public ObservableCollection<FileTreeNodeModel> Files { get; private set; } = new ObservableCollection<FileTreeNodeModel>();
+        public ObservableCollection<FileTreeNodeModel> Files => files;
 
         [XmlIgnore]
         public List<FilterFileTreeNodeModel> ToFilterFileTreeNodeModel
@@ -53,29 +55,26 @@ namespace ApplicationLayer.Models.SolutionPackage
             }
         }
 
-        public override bool IsChanged
+        public StringCollection ToPathString
         {
             get
             {
-                if (filterNameRecentSaved != FilterName) return true;
-                if (Files.Count != filesWhenLoad.Count) return true;
-                if (Filters.Count != filtersWhenLoad.Count) return true;
+                StringCollection result = new StringCollection();
 
-                bool result = false;
-                Parallel.For(0, Files.Count, (i,loopOption) =>
+                Parallel.For(0, Files.Count, (index) =>
                 {
-                    if (Files.Contains(filesWhenLoad[i]) == false)
-                    {
-                        result = true;
-                        loopOption.Stop();
-                    }
+                    var file = Files[index];
+                        result.Add(Path.Combine(this.FilterName, file.FileName));
                 });
-                if (result) return true;
 
-                foreach (var filter in Filters)
-                    if (filter.IsChanged) return true;
+                Parallel.For(0, Filters.Count, (index) =>
+                {
+                    var filter = Filters[index];
+                    foreach (var pathString in filter.ToPathString)
+                        result.Add(Path.Combine(this.FilterName, pathString));
+                });
 
-                return false;
+                return result;
             }
         }
 
@@ -83,29 +82,46 @@ namespace ApplicationLayer.Models.SolutionPackage
 
         public override string FullOnlyPath => Parent.FullOnlyPath;
 
+        public IManagableElements ManagerTree
+        {
+            get
+            {
+                TreeNodeModel current = this;
+
+                while (true)
+                {
+                    if (current == null) return null;
+                    else if (current is SolutionTreeNodeModel) return current as SolutionTreeNodeModel;
+                    else if (current is ProjectTreeNodeModel) return current as ProjectTreeNodeModel;
+
+                    current = current.Parent;
+                }
+            }
+        }
+
         public FilterTreeNodeModel(string name)
         {
-            this.filterNameRecentSaved = name;
-            this.Filters.CollectionChanged += TreeNodeModel.CollectionChanged;
-            this.Files.CollectionChanged += TreeNodeModel.CollectionChanged;
-
-            this.SyncWithLoadValue();
+            this.FilterName = name;
         }
 
-        public override void SyncWithLoadValue()
+        public void AddFilter(FilterTreeNodeModel item)
         {
-            FilterName = filterNameRecentSaved;
-
-            Filters = filtersWhenLoad;
-            Files = filesWhenLoad;
+            item.Parent = this;
+            this.filters.Add(item);
         }
 
-        public override void SyncWithCurrentValue()
+        public void AddFile(FileTreeNodeModel item)
         {
-            filterNameRecentSaved = FilterName;
+            item.Parent = this;
+            this.files.Add(item);
+        }
 
-            filtersWhenLoad = Filters;
-            filesWhenLoad = Files;
+        public override void RemoveChild(TreeNodeModel nodeToRemove)
+        {
+            if (nodeToRemove is FilterTreeNodeModel)
+                this.filters.Remove(nodeToRemove as FilterTreeNodeModel);
+            else if (nodeToRemove is FileTreeNodeModel)
+                this.files.Remove(nodeToRemove as FileTreeNodeModel);
         }
     }
 }

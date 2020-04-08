@@ -99,12 +99,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AttachedProperties\LayoutParametersHook.cs" />
+    <Compile Include="AttachedProperties\TreeListBoxHook.cs" />
     <Compile Include="AttachedProperties\WindowsFormsHostHook.cs" />
-    <Compile Include="Converters\DataTypeConverter.cs" />
     <Compile Include="Converters\EventArgsConverterExtension.cs" />
     <Compile Include="Converters\MouseDoubleClickIndexConverter.cs" />
     <Compile Include="Converters\SelectedItemConverter.cs" />
-    <Compile Include="Converters\ToHierarchicalDataConverter.cs" />
+    <Compile Include="MenusForTarget.cs" />
+    <Compile Include="MenusForTargetCollection.cs" />
     <Compile Include="MiniCProjectTreeListBoxItemAdapter.cs" />
     <Compile Include="DocumentTypeViews\GrammarInfoView.xaml.cs">
       <DependentUpon>GrammarInfoView.xaml</DependentUpon>
@@ -139,12 +140,6 @@
       <DependentUpon>SymbolTableView.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewCommands.cs" />
-    <Compile Include="WindowViews\AlarmList.xaml.cs">
-      <DependentUpon>AlarmList.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="WindowViews\SolutionExplorer.xaml.cs">
-      <DependentUpon>SolutionExplorer.xaml</DependentUpon>
-    </Compile>
     <Compile Include="WindowViews\TestToolWindowView.xaml.cs">
       <DependentUpon>TestToolWindowView.xaml</DependentUpon>
     </Compile>
@@ -228,14 +223,6 @@
     <Page Include="SubViews\SymbolTableView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="WindowViews\AlarmList.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="WindowViews\SolutionExplorer.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
     </Page>
     <Page Include="WindowViews\TestToolWindowView.xaml">
       <Generator>MSBuild:Compile</Generator>

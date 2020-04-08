@@ -6,7 +6,7 @@ using System.Xml.Serialization;
 
 namespace ApplicationLayer.Models.SolutionPackage
 {
-	public abstract class TreeNodeModel : INotifyPropertyChanged, IComparable, IChangeTrackable
+	public abstract class TreeNodeModel : INotifyPropertyChanged, IComparable
 	{
 		private bool isDraggable = true;
 		private bool isEditable;
@@ -187,8 +187,6 @@ namespace ApplicationLayer.Models.SolutionPackage
 		}
 
 		[XmlIgnore]
-		public abstract bool IsChanged { get; }
-		[XmlIgnore]
 		public abstract string FullOnlyPath { get; }
 
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -221,15 +219,8 @@ namespace ApplicationLayer.Models.SolutionPackage
 
 		public static void CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
 		{
-			for (int i = 0; i < e.NewItems?.Count; i++)
-			{
-				TreeNodeModel item = e.NewItems[i] as TreeNodeModel;
-				item.Parent = sender as TreeNodeModel;
-			}
 		}
 
-
-		public abstract void SyncWithLoadValue();
-		public abstract void SyncWithCurrentValue();
+		public abstract void RemoveChild(TreeNodeModel nodeToRemove);
 	}
 }

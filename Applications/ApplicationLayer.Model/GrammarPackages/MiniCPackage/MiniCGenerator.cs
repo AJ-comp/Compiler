@@ -17,13 +17,13 @@ namespace ApplicationLayer.Models.GrammarPackages.MiniCPackage
             result.OuterDependencies = new FilterTreeNodeModel(CommonResource.ExternDependency);
 
             var resourceFilter = new FilterTreeNodeModel(CommonResource.ResourceFiles);
-            result.Filters.Add(resourceFilter);
+            result.AddFilter(resourceFilter);
 
             var headerFilter = new FilterTreeNodeModel(CommonResource.HeaderFiles);
-            result.Filters.Add(headerFilter);
+            result.AddFilter(headerFilter);
 
             var sourceFilter = new FilterTreeNodeModel(CommonResource.SourceFiles);
-            result.Filters.Add(sourceFilter);
+            result.AddFilter(sourceFilter);
 
             return result;
         }
@@ -35,15 +35,15 @@ namespace ApplicationLayer.Models.GrammarPackages.MiniCPackage
             result.OuterDependencies = new FilterTreeNodeModel(CommonResource.ExternDependency);
 
             var resourceFilter = new FilterTreeNodeModel(CommonResource.ResourceFiles);
-            result.Filters.Add(resourceFilter);
+            result.AddFilter(resourceFilter);
 
             var headerFilter = new FilterTreeNodeModel(CommonResource.HeaderFiles);
-            result.Filters.Add(headerFilter);
+            result.AddFilter(headerFilter);
 
             var sourceFilter = new FilterTreeNodeModel(CommonResource.SourceFiles);
             var sourceFile = new MiniCFileTreeNodeModel(projectPath, string.Format("main.{0}", this.Extension));
-            sourceFilter.Files.Add(sourceFile);
-            result.Filters.Add(sourceFilter);
+            sourceFilter.AddFile(sourceFile);
+            result.AddFilter(sourceFilter);
 
             result.SyncWithCurrentValue();
 

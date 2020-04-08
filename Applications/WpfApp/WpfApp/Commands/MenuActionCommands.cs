@@ -1,5 +1,6 @@
 ﻿using ActiproSoftware.Windows.Controls.Docking;
 using ActiproSoftware.Windows.Controls.Docking.Serialization;
+using ApplicationLayer.Common.Interfaces;
 using ApplicationLayer.Models.SolutionPackage;
 using ApplicationLayer.ViewModels.DialogViewModels;
 using ApplicationLayer.ViewModels.DockingItemViewModels;
@@ -8,6 +9,7 @@ using ApplicationLayer.ViewModels.Messages;
 using ApplicationLayer.ViewModels.ToolWindowViewModels;
 using ApplicationLayer.WpfApp.ViewModels;
 using ApplicationLayer.WpfApp.Views.DialogViews;
+using GalaSoft.MvvmLight.Messaging;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -189,54 +191,57 @@ private void OnNewFile(Func<Document> func)
         /// Item delete command
         /// </summary>
         public static readonly RelayUICommand<TreeNodeModel> DelItem = new RelayUICommand<TreeNodeModel>(CommonResource.Delete,
-            (selectedStruct) =>
+            (selectedNode) =>
             {
-                TreeNodeModel parent = selectedStruct.Parent;
+                TreeNodeModel parent = selectedNode.Parent;
                 if (parent == null) return;
 
                 DialogResult dResult = System.Windows.Forms.MessageBox.Show(CommonResource.DeleteWarning, string.Empty, MessageBoxButtons.YesNo);
 
-                /*
                 if (dResult == DialogResult.Yes)
                 {
+                    // remove the real file.
                     try
                     {
-                        if (selectedStruct is ProjectHier) Directory.Delete(selectedStruct.BaseOPath, true);
-                        else if (selectedStruct is FolderHier) Directory.Delete(selectedStruct.FullPath, true);
-                        else File.Delete(selectedStruct.FullPath);
+                        if (selectedNode is ProjectTreeNodeModel)
+                        {
+                            var nodeToDel = selectedNode as ProjectTreeNodeModel;
+                            Directory.Delete(Path.Combine(nodeToDel.FullOnlyPath, nodeToDel.FileName), true);
+                        }
+                        else if (selectedNode is FolderTreeNodeModel)
+                        {
+                            var nodeToDel = selectedNode as FolderTreeNodeModel;
+                            Directory.Delete(Path.Combine(nodeToDel.FullOnlyPath, nodeToDel.FileName), true);
+                        }
+                        else if (selectedNode is FileTreeNodeModel)
+                        {
+                            var nodeToDel = selectedNode as FileTreeNodeModel;
+//                            File.Delete(Path.Combine(nodeToDel.FullOnlyPath, nodeToDel.FileName));
+                        }
                     }
                     catch { }
                 }
                 else return;
 
-                if (parent is SolutionHier)
+                // disconnect a connection of the tree node.
+                IManagableElements manager = null;
+                parent.RemoveChild(selectedNode);
+                if (parent is FolderTreeNodeModel)
                 {
-                    var solutionHier = parent as SolutionHier;
-
-                    solutionHier.RemoveChild(selectedStruct);
-                    if (solutionHier.IsChanged) Messenger.Default.Send<AddChangedFileMessage>(new AddChangedFileMessage(parent as SolutionHier));
-                    else Messenger.Default.Send<RemoveChangedFileMessage>(new RemoveChangedFileMessage(parent as SolutionHier));
+                    var folderNode = parent as FolderTreeNodeModel;
+                    manager = folderNode.ManagerTree;
                 }
-                else if (parent is DefaultProjectHier)
+                else if(parent is FilterTreeNodeModel)
                 {
-                    var projectHier = parent as DefaultProjectHier;
-                    projectHier.RemoveChild(selectedStruct);
-
-                    if (projectHier.IsChanged) Messenger.Default.Send<AddChangedFileMessage>(new AddChangedFileMessage(parent as DefaultProjectHier));
-                    else Messenger.Default.Send<RemoveChangedFileMessage>(new RemoveChangedFileMessage(parent as DefaultProjectHier));
+                    var filterNode = parent as FilterTreeNodeModel;
+                    manager = filterNode.ManagerTree;
                 }
-                else if (parent is FolderHier)
-                {
-                    var folderHier = parent as FolderHier;
-                    folderHier.RemoveChild(selectedStruct);
 
-                    var projectParent = folderHier.ProjectTypeParent;
-                    if (projectParent == null) return;
+                if (manager == null) return;
 
-                    if (projectParent.IsChanged) Messenger.Default.Send<AddChangedFileMessage>(new AddChangedFileMessage(projectParent));
-                    else Messenger.Default.Send<RemoveChangedFileMessage>(new RemoveChangedFileMessage(projectParent));
-                }
-                */
+                if (manager.IsChanged) Messenger.Default.Send<AddChangedFileMessage>(new AddChangedFileMessage(manager));
+                else Messenger.Default.Send<RemoveChangedFileMessage>(new RemoveChangedFileMessage(manager));
+
             }, (condition) =>
             {
                 var vm = RootWindow.DataContext as MainViewModel;

@@ -4,6 +4,7 @@
                     xmlns:converters="clr-namespace:ApplicationLayer.WpfApp.Converters"
                     xmlns:toolWindowVMs="clr-namespace:ApplicationLayer.ViewModels.ToolWindowViewModels;assembly=ApplicationLayer.ViewModels"
                     xmlns:toolWindows="clr-namespace:ApplicationLayer.Views.WindowViews;assembly=ApplicationLayer.Views"
+                    xmlns:windows="clr-namespace:ApplicationLayer.WpfApp.Views.WindowViews"
                     xmlns:local="clr-namespace:ApplicationLayer.WpfApp.Resources.DataTemplates">
 
     <ResourceDictionary.MergedDictionaries>
@@ -15,12 +16,12 @@
         <Setter Property="State" Value="{Binding Path=State, Mode=TwoWay, Converter={converters:ToolItemStateConverter}}" />
     </Style>
 
-    <DataTemplate DataType="{x:Type toolWindowVMs:SolutionExplorerViewModel}">
-        <toolWindows:SolutionExplorer/>
+    <DataTemplate DataType="{x:Type toolWindowVMs:AlarmListViewModel}">
+        <windows:AlarmList/>
     </DataTemplate>
 
-    <DataTemplate DataType="{x:Type toolWindowVMs:AlarmListViewModel}">
-        <toolWindows:AlarmList/>
+    <DataTemplate DataType="{x:Type toolWindowVMs:SolutionExplorerViewModel}">
+        <windows:SolutionExplorer/>
     </DataTemplate>
 
     <DataTemplate DataType="{x:Type toolWindowVMs:TestToolWindowViewModel}">

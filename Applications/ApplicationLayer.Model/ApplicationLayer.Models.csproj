@@ -37,7 +37,6 @@
     <Reference Include="GraphSharp.Controls, Version=1.1.0.0, Culture=neutral, PublicKeyToken=f9c24778325a6b82, processorArchitecture=MSIL">
       <HintPath>..\..\packages\GraphSharp.1.1.0.0\lib\net40\GraphSharp.Controls.dll</HintPath>
     </Reference>
-    <Reference Include="PresentationFramework" />
     <Reference Include="QuickGraph, Version=3.6.61114.0, Culture=neutral, PublicKeyToken=f3fb40175eec2af3, processorArchitecture=MSIL">
       <HintPath>..\..\packages\QuickGraph.3.6.61119.7\lib\net4\QuickGraph.dll</HintPath>
     </Reference>
@@ -111,6 +110,10 @@
     <ProjectReference Include="..\..\Parse.WpfControls.SyntaxEditor\Parse.WpfControls.SyntaxEditor.csproj">
       <Project>{DCCEDEB5-9CA4-41FE-AB6B-50E4BCC64EE6}</Project>
       <Name>Parse.WpfControls.SyntaxEditor</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Parse\Parse.csproj">
+      <Project>{54EC5CEA-8D91-4165-9EBB-6A0693A96C4F}</Project>
+      <Name>Parse</Name>
     </ProjectReference>
     <ProjectReference Include="..\ApplicationLayer.Common\ApplicationLayer.Common.csproj">
       <Project>{9B7EBE4D-C2B3-40E8-9516-107340A07111}</Project>
