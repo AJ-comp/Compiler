@@ -1,29 +1,28 @@
 ﻿using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using System.Xml.Serialization;
 
-namespace ApplicationLayer.Models
+namespace ApplicationLayer.Common
 {
     public class PathInfo
     {
-        public string Type { get; set; } = string.Empty;
         public string Path { get; set; }
         public string FileName { get; set; }
-        public bool IsAbsolute { get; set; }
 
-        [XmlIgnore]
-        public string FullPath => System.IO.Path.Combine(Path, FileName);
+        [XmlIgnore] public bool IsAbsolute => DriveInfo.GetDrives().Any(x => x.Name == Path);
+
+        [XmlIgnore] public string FullPath => System.IO.Path.Combine(Path, FileName);
 
         public PathInfo() { }
 
-        public PathInfo(string path, bool isAbsolute)
+        public PathInfo(string path)
         {
             Path = path;
-            IsAbsolute = isAbsolute;
         }
 
-        public PathInfo(string path, string fileName, string type, bool isAbsolute) : this(path, isAbsolute)
+        public PathInfo(string path, string fileName) : this(path)
         {
-            Type = type;
             FileName = fileName;
         }
 
@@ -32,14 +31,12 @@ namespace ApplicationLayer.Models
         public override bool Equals(object obj)
         {
             return obj is PathInfo info &&
-                   Type == info.Type &&
                    FullPath == info.FullPath;
         }
 
         public override int GetHashCode()
         {
             int hashCode = 2078297872;
-            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Type);
             hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(FullPath);
             return hashCode;
         }

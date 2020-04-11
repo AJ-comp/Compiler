@@ -1,5 +1,5 @@
-﻿using ApplicationLayer.Common.Interfaces;
-using ApplicationLayer.Models.SolutionPackage.MiniCPackage;
+﻿using ApplicationLayer.Common;
+using ApplicationLayer.Common.Interfaces;
 using Parse.BackEnd.Target;
 using Parse.FrontEnd.Grammars;
 using System;
@@ -7,34 +7,24 @@ using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.IO;
 using System.Xml.Serialization;
-using CommonResource = ApplicationLayer.Define.Properties.Resources;
 
 namespace ApplicationLayer.Models.SolutionPackage
 {
     [XmlRoot ("Solution")]
     public class SolutionTreeNodeModel : PathTreeNodeModel, IManagableElements
     {
+        /********************************************************************************************
+         * private field section
+         ********************************************************************************************/
         private double versionRecentSaved;
         private ObservableCollection<ProjectTreeNodeModel> projects = new ObservableCollection<ProjectTreeNodeModel>();
 
+
+
+        /********************************************************************************************
+         * property section
+         ********************************************************************************************/
         public double Version { get; set; }
-
-        [XmlIgnore]
-        public string SolutionName
-        {
-            get => System.IO.Path.GetFileNameWithoutExtension(FileName);
-            set
-            {
-                var ext = System.IO.Path.GetExtension(FileName);
-                FileName = string.Format("{0}{1}", value, ext);
-            }
-        }
-
-        [XmlIgnore]
-        public ObservableCollection<ProjectTreeNodeModel> Projects => projects;
-
-        [XmlElement("Project")]
-        public Collection<PathInfo> ProjectPaths { get; private set; } = new Collection<PathInfo>();
 
         public bool IsChanged
         {
@@ -45,7 +35,7 @@ namespace ApplicationLayer.Models.SolutionPackage
 
                 foreach (var project in Projects)
                 {
-                    var path = new PathInfo(project.Path, project.IsAbsolute);
+                    var path = new PathInfo(project.Path, project.FileName);
                     if (ProjectPaths.Contains(path) == false) return true;
                 }
 
@@ -53,65 +43,147 @@ namespace ApplicationLayer.Models.SolutionPackage
             }
         }
 
-        public override string DisplayName => 
-            string.Format(CommonResource.Solution, SolutionName, "(" + this.Projects.Count + " " + CommonResource.Project + ")");
+        [XmlIgnore] public string SolutionName
+        {
+            get => System.IO.Path.GetFileNameWithoutExtension(FileName);
+            set
+            {
+                var ext = System.IO.Path.GetExtension(FileName);
+                FileName = string.Format("{0}{1}", value, ext);
+            }
+        }
+
+        [XmlIgnore] public int LoadedProjectCount => Projects.Count;
+
+        [XmlIgnore] public ObservableCollection<ProjectTreeNodeModel> Projects => projects;
+
+        [XmlElement("Project")] public Collection<PathInfo> ProjectPaths { get; private set; } = new Collection<PathInfo>();
+
+
+
+        /********************************************************************************************
+         * override property section
+         ********************************************************************************************/
+        public override string DisplayName
+        {
+            get => SolutionName;
+            set
+            {
+                var extension = System.IO.Path.GetExtension(this.FileName);
+
+                var originalFullPath = System.IO.Path.Combine(this.FullOnlyPath, this.FileName);
+                this.FileName = string.Format("{0}{1}", value, extension);
+                var toChangeFullPath = System.IO.Path.Combine(this.FullOnlyPath, this.FileName);
+
+                if (File.Exists(originalFullPath) == false)
+                {
+                    // It has to change a current status to error status.
+                    return;
+                }
+                File.Move(originalFullPath, toChangeFullPath);
+            }
+        }
 
         public override string FullOnlyPath => Path;
 
 
 
+        /********************************************************************************************
+         * public event handler section
+         ********************************************************************************************/
+        public event EventHandler<FileChangedEventArgs> Changed;
+        public event EventHandler<FileChangedEventArgs> ChildrenChanged;
+
+
+
+        /********************************************************************************************
+         * constructor section
+         ********************************************************************************************/
         public SolutionTreeNodeModel() : base(string.Empty, string.Empty)
         {
+            this.IsEditable = true;
+            this.Projects.CollectionChanged += Projects_CollectionChanged;
         }
 
-        public SolutionTreeNodeModel(string solutionPath, string solutionName) : base(solutionPath, solutionName + ".ajn", true)
+        public SolutionTreeNodeModel(string solutionPath, string solutionName) : base(solutionPath, solutionName + ".ajn")
         {
             this.Path = solutionPath;
             this.SolutionName = solutionName;
+            this.IsEditable = true;
             this.SyncWithCurrentValue();
         }
 
-        /// <summary>
-        /// If the project name was changed then it has to synchronize because of the project file name was already changed.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void ProjectNode_Renamed(object sender, Tuple<PathInfo, PathInfo> e)
-        {
-            var foundIndex = this.ProjectPaths.IndexOf(e.Item1);
-            if (foundIndex < 0) return;
 
-            this.ProjectPaths[foundIndex] = e.Item2;
+
+        /********************************************************************************************
+         * private method section
+         ********************************************************************************************/
+        private void Projects_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            if (e.NewItems == null) return;
+
+            foreach(var item in e.NewItems)
+            {
+                ProjectTreeNodeModel project = item as ProjectTreeNodeModel;
+                project.Changed += Project_Changed;
+            }
         }
 
-        /// <summary>
-        /// If the project was deleted then it has to synchronize because of the project file was already deleted.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void ProjectNode_Deleted(object sender, PathInfo e)
+        private void Project_Changed(object sender, FileChangedEventArgs e)
         {
-            var foundIndex = this.ProjectPaths.IndexOf(e);
-            if (foundIndex < 0) return;
-
-            this.ProjectPaths.RemoveAt(foundIndex);
+            this.ChildrenChanged?.Invoke(sender, e);
         }
 
-        /// <summary>
-        /// Even though the project was unloaded synchronize process is not performed because of the project file exists.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void ProjectNode_Unloaded(object sender, PathInfo e)
-        {
-        }
 
+
+        /********************************************************************************************
+         * public method section
+         ********************************************************************************************/
         public void AddProject(ProjectTreeNodeModel newProject)
         {
             newProject.Parent = this;
             this.projects.Add(newProject);
         }
 
+        /// <summary>
+        /// This function loads projects in the ProjectPaths.
+        /// </summary>
+        /// <returns>Returns true if all project loaded successful else returns false.</returns>
+        public bool LoadProject()
+        {
+            bool result = true;
+
+            foreach(var projectPath in ProjectPaths)
+            {
+                var projectTreeNode = ProjectTreeNodeModel.CreateProjectTreeNodeModel(this.Path, projectPath);
+                if (projectTreeNode == null)
+                {
+                    result = false;
+                    projectTreeNode = new ErrorProjectTreeNodeModel(projectPath.Path, projectPath.FileName);
+                }
+
+                this.AddProject(projectTreeNode);
+            }
+
+            return result;
+        }
+
+
+
+        /********************************************************************************************
+         * override method section
+         ********************************************************************************************/
+        public override void RemoveChild(TreeNodeModel nodeToRemove)
+        {
+            if(nodeToRemove is ProjectTreeNodeModel)
+                this.projects.Remove(nodeToRemove as ProjectTreeNodeModel);
+        }
+
+
+
+        /********************************************************************************************
+         * public static method section
+         ********************************************************************************************/
         public static SolutionTreeNodeModel Create(string solutionPath, string solutionName, Grammar grammar, Target target)
         {
             SolutionTreeNodeModel result = new SolutionTreeNodeModel(solutionPath, solutionName);
@@ -127,40 +199,11 @@ namespace ApplicationLayer.Models.SolutionPackage
             return result;
         }
 
-        public void LoadProject()
-        {
-            foreach(var projectPath in ProjectPaths)
-            {
-                Type type = typeof(ProjectTreeNodeModel);
-                if (projectPath.Type == LanguageExtensions.MiniC)
-                {
-//                    result = new MiniCProjectTreeNodeModel();
-                    type = typeof(MiniCProjectTreeNodeModel);
-                }
 
-                string fullPath = (projectPath.IsAbsolute) ? projectPath.FullPath : System.IO.Path.Combine(this.Path, projectPath.FullPath);
 
-                ProjectTreeNodeModel result;
-                using (StreamReader sr = new StreamReader(fullPath))
-                {
-                    XmlSerializer xs = new XmlSerializer(type);
-                    result = xs.Deserialize(sr) as ProjectTreeNodeModel;
-                    result.Path = projectPath.Path;
-                    result.FileName = projectPath.FileName;
-                }
-                result.LoadElement();
-                result.SyncWithCurrentValue();
-
-                this.AddProject(result);
-            }
-        }
-
-        public override void RemoveChild(TreeNodeModel nodeToRemove)
-        {
-            if(nodeToRemove is ProjectTreeNodeModel)
-                this.projects.Remove(nodeToRemove as ProjectTreeNodeModel);
-        }
-
+        /********************************************************************************************
+         * interface method section
+         ********************************************************************************************/
         public void SyncWithLoadValue() => Version = versionRecentSaved;
 
         public void SyncWithCurrentValue()
@@ -169,7 +212,7 @@ namespace ApplicationLayer.Models.SolutionPackage
 
             ProjectPaths.Clear();
             foreach (var project in Projects)
-                ProjectPaths.Add(new PathInfo(project.Path, project.FileName, project.ProjectType, project.IsAbsolute));
+                ProjectPaths.Add(new PathInfo(project.Path, project.FileName));
         }
 
         public void Save()

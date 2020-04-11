@@ -37,6 +37,8 @@ namespace ApplicationLayer.Views
 			if (bSort) projects.Sort();
 			result.AddRange(projects);
 
+			this.ChildrenPath = nameof(model.Projects);
+
 			return result;
 		}
 
@@ -79,6 +81,24 @@ namespace ApplicationLayer.Views
 			return result;
 		}
 
+		private IEnumerable GetFileTypeChildren(TreeListBox ownerControl, object item, bool bSort = true)
+		{
+			var model = item as MiniCFileTreeNodeModel;
+			List<TreeNodeModel> result = new List<TreeNodeModel>();
+
+			List<TreeNodeModel> vars = new List<TreeNodeModel>();
+			foreach (var var in model.Vars) vars.Add(var);
+			if (bSort) vars.Sort();
+			result.AddRange(vars);
+
+			List<TreeNodeModel> funcs = new List<TreeNodeModel>();
+			foreach (var func in model.Funcs) funcs.Add(func);
+			if (bSort) funcs.Sort();
+			result.AddRange(funcs);
+
+			return result;
+		}
+
 		/////////////////////////////////////////////////////////////////////////////////////////////////////
 		// PUBLIC PROCEDURES
 		/////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -92,8 +112,9 @@ namespace ApplicationLayer.Views
 		public override IEnumerable GetChildren(TreeListBox ownerControl, object item)
 		{
 			if (item is SolutionTreeNodeModel) return GetSolutionTypeChildren(ownerControl, item);
-			else if (item is ProjectTreeNodeModel) return GetProjectTypeChildren(ownerControl, item);
+			else if (item is MiniCProjectTreeNodeModel) return GetProjectTypeChildren(ownerControl, item);
 			else if (item is FilterTreeNodeModel) return GetFilterTypeChildren(ownerControl, item);
+			else if (item is MiniCFileTreeNodeModel) return GetFileTypeChildren(ownerControl, item);
 			else return null;
 		}
 

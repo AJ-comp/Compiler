@@ -14,6 +14,9 @@ namespace ApplicationLayer.Models.SolutionPackage.MiniCPackage
     [XmlRoot("MiniC Project")]
     public class MiniCProjectTreeNodeModel : ProjectTreeNodeModel
     {
+        /********************************************************************************************
+         * private field section
+         ********************************************************************************************/
         private ProjectProperty debugConfigureRecentSaved = new ProjectProperty();
         private ProjectProperty releaseConfigureRecentSaved = new ProjectProperty();
 
@@ -23,50 +26,24 @@ namespace ApplicationLayer.Models.SolutionPackage.MiniCPackage
         private ObservableCollection<FilterTreeNodeModel> filters = new ObservableCollection<FilterTreeNodeModel>();
         private ObservableCollection<FileTreeNodeModel> files = new ObservableCollection<FileTreeNodeModel>();
 
-        [XmlElement("Debug Property")]
-        public ProjectProperty DebugConfigure { get; set; } = new ProjectProperty();
 
-        [XmlElement("Release Property")]
-        public ProjectProperty ReleaseConfigure { get; set; } = new ProjectProperty();
 
-        [XmlIgnore]
-        public FilterTreeNodeModel References
-        {
-            get => references;
-            set
-            {
-                references = value;
-                OnPropertyChanged(nameof(References));
-            }
-        }
-        [XmlIgnore]
-        public FilterTreeNodeModel OuterDependencies
-        {
-            get => outerDependenies;
-            set
-            {
-                outerDependenies = value;
-                OnPropertyChanged(nameof(OuterDependencies));
-            }
-        }
+        /********************************************************************************************
+         * property section [XML ELEMENT]
+         ********************************************************************************************/
+        [XmlElement("Debug Property")] public ProjectProperty DebugConfigure { get; set; } = new ProjectProperty();
 
-        [XmlIgnore]
-        public ObservableCollection<FilterTreeNodeModel> Filters => filters;
+        [XmlElement("Release Property")] public ProjectProperty ReleaseConfigure { get; set; } = new ProjectProperty();
 
-        [XmlIgnore]
-        public ObservableCollection<FileTreeNodeModel> Files => files;
+        [XmlElement("FilterAndFiles")] public List<FilterFileTreeNodeModel> FilterFiles { get; set; } = new List<FilterFileTreeNodeModel>();
 
-        [XmlElement("FilterAndFiles")]
-        public List<FilterFileTreeNodeModel> FilterFiles { get; set; } = new List<FilterFileTreeNodeModel>();
-
-        [XmlArrayItem("IncludePath")]
-        public StringCollection ReferencePaths
+        [XmlArrayItem("IncludePath")] public StringCollection ReferencePaths
         {
             get
             {
                 StringCollection result = new StringCollection();
 
-                foreach(var item in References.Files)
+                foreach (var item in References.Files)
                 {
                     FileTreeNodeModel referenceFile = item as FileTreeNodeModel;
 
@@ -77,7 +54,7 @@ namespace ApplicationLayer.Models.SolutionPackage.MiniCPackage
             }
             set
             {
-                foreach(var item in value)
+                foreach (var item in value)
                 {
                     string path = System.IO.Path.GetDirectoryName(item);
                     string fileName = System.IO.Path.GetFileName(item);
@@ -86,8 +63,7 @@ namespace ApplicationLayer.Models.SolutionPackage.MiniCPackage
             }
         }
 
-        [XmlArrayItem("IncludePath")]
-        public StringCollection OuterDependencyPaths
+        [XmlArrayItem("IncludePath")] public StringCollection OuterDependencyPaths
         {
             get
             {
@@ -113,6 +89,40 @@ namespace ApplicationLayer.Models.SolutionPackage.MiniCPackage
             }
         }
 
+
+
+        /********************************************************************************************
+         * property section [XML ignore]
+         ********************************************************************************************/
+        [XmlIgnore] public FilterTreeNodeModel References
+        {
+            get => references;
+            set
+            {
+                references = value;
+                OnPropertyChanged(nameof(References));
+            }
+        }
+
+        [XmlIgnore] public FilterTreeNodeModel OuterDependencies
+        {
+            get => outerDependenies;
+            set
+            {
+                outerDependenies = value;
+                OnPropertyChanged(nameof(OuterDependencies));
+            }
+        }
+
+        [XmlIgnore] public ObservableCollection<FilterTreeNodeModel> Filters => filters;
+
+        [XmlIgnore] public ObservableCollection<FileTreeNodeModel> Files => files;
+
+
+
+        /********************************************************************************************
+         * override property section
+         ********************************************************************************************/
         public override string ProjectType => LanguageExtensions.MiniC;
 
         public override bool IsChanged
@@ -139,8 +149,15 @@ namespace ApplicationLayer.Models.SolutionPackage.MiniCPackage
             }
         }
 
+
+
+        /********************************************************************************************
+         * constructor section
+         ********************************************************************************************/
         public MiniCProjectTreeNodeModel() : base(string.Empty, string.Empty)
         {
+            this.references.IsEditable = false;
+            this.outerDependenies.IsEditable = false;
         }
 
         public MiniCProjectTreeNodeModel(string path, string projName, Target target) : base(path, projName + string.Format(".{0}proj", LanguageExtensions.MiniC))
@@ -148,9 +165,17 @@ namespace ApplicationLayer.Models.SolutionPackage.MiniCPackage
             this.DebugConfigure.Target = target?.Name;
             this.ReleaseConfigure.Target = target?.Name;
 
+            this.references.IsEditable = false;
+            this.outerDependenies.IsEditable = false;
+
             this.SyncWithCurrentValue();
         }
 
+
+
+        /********************************************************************************************
+         * public method section
+         ********************************************************************************************/
         public void AddFilter(FilterTreeNodeModel item)
         {
             item.Parent = this;
@@ -163,6 +188,11 @@ namespace ApplicationLayer.Models.SolutionPackage.MiniCPackage
             this.files.Add(item);
         }
 
+
+
+        /********************************************************************************************
+         * override method section
+         ********************************************************************************************/
         public override void RemoveChild(TreeNodeModel nodeToRemove)
         {
             if (nodeToRemove is FilterTreeNodeModel)

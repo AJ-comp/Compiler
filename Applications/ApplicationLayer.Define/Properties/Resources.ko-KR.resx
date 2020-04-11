@@ -172,7 +172,7 @@
     <value>삭제</value>
   </data>
   <data name="DeleteWarning" xml:space="preserve">
-    <value>정말로 삭제하시겠습니까?</value>
+    <value>정말로 삭제하시겠습니까? 파일이 삭제됩니다.</value>
   </data>
   <data name="Documentation" xml:space="preserve">
     <value>문서</value>
@@ -350,5 +350,23 @@
   </data>
   <data name="Solution" xml:space="preserve">
     <value>솔루션</value>
+  </data>
+  <data name="Remove" xml:space="preserve">
+    <value>제거</value>
+  </data>
+  <data name="Unload" xml:space="preserve">
+    <value>언로드</value>
+  </data>
+  <data name="RemoveWarning" xml:space="preserve">
+    <value>제거하시겠습니까? 파일은 삭제되지 않습니다.</value>
+  </data>
+  <data name="ExistProject" xml:space="preserve">
+    <value>기존 프로젝트</value>
+  </data>
+  <data name="AllProjectFiles" xml:space="preserve">
+    <value>모든 프로젝트 파일</value>
+  </data>
+  <data name="AllFiles" xml:space="preserve">
+    <value>모든 파일</value>
   </data>
 </root>

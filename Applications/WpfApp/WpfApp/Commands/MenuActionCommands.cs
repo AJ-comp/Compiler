@@ -1,5 +1,7 @@
 ﻿using ActiproSoftware.Windows.Controls.Docking;
 using ActiproSoftware.Windows.Controls.Docking.Serialization;
+using ApplicationLayer.Common;
+using ApplicationLayer.Common.Helpers;
 using ApplicationLayer.Common.Interfaces;
 using ApplicationLayer.Models.SolutionPackage;
 using ApplicationLayer.ViewModels.DialogViewModels;
@@ -49,9 +51,9 @@ namespace ApplicationLayer.WpfApp.Commands
         });
 
         /// <summary>
-        /// New Project Command
+        /// Add New Project Command
         /// </summary>
-        public static readonly RelayUICommand AddNewProject = new RelayUICommand(CommonResource.Project, 
+        public static readonly RelayUICommand AddNewProject = new RelayUICommand(CommonResource.NewProject, 
             () =>
         {
             NewProjectDialog dialog = new NewProjectDialog();
@@ -65,6 +67,41 @@ namespace ApplicationLayer.WpfApp.Commands
             var vm = RootWindow.DataContext as MainViewModel;
             return (vm.IsDebugStatus == false);
         });
+
+        /// <summary>
+        /// Add Exist Project Command
+        /// </summary>
+        public static readonly RelayUICommand<SolutionTreeNodeModel>AddExistProject = new RelayUICommand<SolutionTreeNodeModel>(CommonResource.ExistProject, 
+            (solutionNode) =>
+            {
+                OpenFileDialog dialog = new OpenFileDialog
+                {
+                    Filter = string.Format("{0} {1}", CommonResource.AllProjectFiles, "(*.mcproj;*.ajproj;)|*.mcproj;.ajproj;")
+                };
+                dialog.ShowDialog();
+
+                foreach(var fullPath in dialog.FileNames)
+                {
+                    // If file is not in the solution path then the project path is absolute.
+                    var projPath = Path.GetDirectoryName(fullPath);
+                    var fileName = Path.GetFileName(fullPath);
+                    bool isAbsolute = (PathHelper.ComparePath(solutionNode.Path, projPath) == false);
+                    var path = (isAbsolute) ? projPath : projPath.Substring(projPath.IndexOf(solutionNode.Path) + solutionNode.Path.Length + 1);
+
+                    var projectTreeNode = ProjectTreeNodeModel.CreateProjectTreeNodeModel(solutionNode.Path, new PathInfo(path, fileName));
+                    if (projectTreeNode == null)
+                        projectTreeNode = new ErrorProjectTreeNodeModel(path, fileName);
+
+                    solutionNode.AddProject(projectTreeNode);
+
+                    if(solutionNode.IsChanged) Messenger.Default.Send<AddChangedFileMessage>(new AddChangedFileMessage(solutionNode));
+                    else Messenger.Default.Send<RemoveChangedFileMessage>(new RemoveChangedFileMessage(solutionNode));
+                }
+            }, (condition) =>
+            {
+                var vm = RootWindow.DataContext as MainViewModel;
+                return (vm.IsDebugStatus == false);
+            });
 
 
         /*
@@ -150,7 +187,8 @@ private void OnNewFile(Func<Document> func)
             {
                 OpenFileDialog dialog = new OpenFileDialog
                 {
-                    Filter = "mini C files (*.mc)|*.mc|All files (*.*)|*.*"
+                    Filter = string.Format("{0} {1}|{2} {3}", CommonResource.MiniCFile, "(*.mc)|*.mc", 
+                                                                                CommonResource.AllFiles, "(*.*)|*.*")
                 };
                 dialog.ShowDialog();
 
@@ -186,6 +224,56 @@ private void OnNewFile(Func<Document> func)
                 return (vm.IsDebugStatus == false);
             });
 
+
+        private static void RemoveItem(TreeNodeModel target)
+        {
+            TreeNodeModel parent = target.Parent;
+            if (parent == null) return;
+
+            // disconnect a connection of the tree node.
+            IManagableElements manager = null;
+            parent.RemoveChild(target);
+            if (parent is SolutionTreeNodeModel) manager = parent as IManagableElements;
+            else if (parent is ProjectTreeNodeModel) manager = parent as IManagableElements;
+            else if (parent is FolderTreeNodeModel)
+            {
+                var folderNode = parent as FolderTreeNodeModel;
+                manager = folderNode.ManagerTree;
+            }
+            else if (parent is FilterTreeNodeModel)
+            {
+                var filterNode = parent as FilterTreeNodeModel;
+                manager = filterNode.ManagerTree;
+            }
+
+            if (manager == null) return;
+
+            if (manager.IsChanged) Messenger.Default.Send<AddChangedFileMessage>(new AddChangedFileMessage(manager));
+            else Messenger.Default.Send<RemoveChangedFileMessage>(new RemoveChangedFileMessage(manager));
+        }
+
+        /// <summary>
+        /// Item Unload command
+        /// </summary>
+        public static readonly RelayUICommand<TreeNodeModel> Remove = new RelayUICommand<TreeNodeModel>(CommonResource.Remove,
+            (selectedNode) =>
+            {
+                TreeNodeModel parent = selectedNode.Parent;
+                if (parent == null) return;
+
+                DialogResult dResult = System.Windows.Forms.MessageBox.Show(CommonResource.RemoveWarning, string.Empty, MessageBoxButtons.YesNo);
+
+                if (dResult == DialogResult.Yes)
+                {
+                    RemoveItem(selectedNode);
+                }
+                else return;
+
+            }, (condition) =>
+            {
+                var vm = RootWindow.DataContext as MainViewModel;
+                return (vm.IsDebugStatus == false);
+            });
 
         /// <summary>
         /// Item delete command
@@ -223,25 +311,22 @@ private void OnNewFile(Func<Document> func)
                 }
                 else return;
 
-                // disconnect a connection of the tree node.
-                IManagableElements manager = null;
-                parent.RemoveChild(selectedNode);
-                if (parent is FolderTreeNodeModel)
-                {
-                    var folderNode = parent as FolderTreeNodeModel;
-                    manager = folderNode.ManagerTree;
-                }
-                else if(parent is FilterTreeNodeModel)
-                {
-                    var filterNode = parent as FilterTreeNodeModel;
-                    manager = filterNode.ManagerTree;
-                }
+                RemoveItem(selectedNode);
 
-                if (manager == null) return;
+            }, (condition) =>
+            {
+                var vm = RootWindow.DataContext as MainViewModel;
+                return (vm.IsDebugStatus == false);
+            });
 
-                if (manager.IsChanged) Messenger.Default.Send<AddChangedFileMessage>(new AddChangedFileMessage(manager));
-                else Messenger.Default.Send<RemoveChangedFileMessage>(new RemoveChangedFileMessage(manager));
 
+        /// <summary>
+        /// Item rename command
+        /// </summary>
+        public static readonly RelayUICommand<TreeNodeModel> Rename = new RelayUICommand<TreeNodeModel>(CommonResource.Rename,
+            (selectedNode) =>
+            {
+                if (selectedNode.IsEditable) selectedNode.IsEditing = true;
             }, (condition) =>
             {
                 var vm = RootWindow.DataContext as MainViewModel;

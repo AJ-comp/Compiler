@@ -16,7 +16,7 @@
                     <KeyBinding Key="N" Modifiers="Alt"/>
                 </MenuItem.InputBindings>
                 <MenuItem.Icon>
-                    <Image Width="16" Height="16" Source="{StaticResource NewFileMenuImagePath}"/>
+                    <Image Width="16" Height="16" Source="{StaticResource NewCreateMenuImagePath}"/>
                 </MenuItem.Icon>
                 
                 <!-- Project -->
@@ -37,7 +37,7 @@
             <!-- Open -->
             <MenuItem Header="{lex:Loc Key=Open}" InputGestureText="Ctrl+O" >
                 <MenuItem.Icon>
-                    <Image Width="16" Height="16" Source="{StaticResource NewFileMenuImagePath}"/>
+                    <Image Width="16" Height="16" Source="{StaticResource OpenMenuImagePath}"/>
                 </MenuItem.Icon>
                 <MenuItem Header="{lex:Loc Key=ProjectOrSolution}" InputGestureText="Ctrl+Shift+O" 
                                     Command="{Binding OpenCommand}" 

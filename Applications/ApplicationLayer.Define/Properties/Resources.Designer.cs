@@ -97,6 +97,24 @@ namespace ApplicationLayer.Define.Properties {
         }
         
         /// <summary>
+        ///   All files과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string AllFiles {
+            get {
+                return ResourceManager.GetString("AllFiles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   All project files과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string AllProjectFiles {
+            get {
+                return ResourceManager.GetString("AllProjectFiles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   File aleady exist replace it?과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string AlreadyExistFile {
@@ -214,7 +232,7 @@ namespace ApplicationLayer.Define.Properties {
         }
         
         /// <summary>
-        ///   You will really delete it?과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   Do you will really delete it? The file is deleted.과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string DeleteWarning {
             get {
@@ -282,6 +300,15 @@ namespace ApplicationLayer.Define.Properties {
         public static string ExistItem {
             get {
                 return ResourceManager.GetString("ExistItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Existing Project과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string ExistProject {
+            get {
+                return ResourceManager.GetString("ExistProject", resourceCulture);
             }
         }
         
@@ -637,6 +664,24 @@ namespace ApplicationLayer.Define.Properties {
         }
         
         /// <summary>
+        ///   Remove과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string Remove {
+            get {
+                return ResourceManager.GetString("Remove", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Do you will remove it? The file is not deleted.과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string RemoveWarning {
+            get {
+                return ResourceManager.GetString("RemoveWarning", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Rename과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string Rename {
@@ -714,6 +759,15 @@ namespace ApplicationLayer.Define.Properties {
         public static string ToSaveModifiedItem {
             get {
                 return ResourceManager.GetString("ToSaveModifiedItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Unload과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string Unload {
+            get {
+                return ResourceManager.GetString("Unload", resourceCulture);
             }
         }
         

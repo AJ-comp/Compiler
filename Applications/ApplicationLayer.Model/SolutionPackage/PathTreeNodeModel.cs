@@ -1,28 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.IO;
 using System.Xml.Serialization;
 
 namespace ApplicationLayer.Models.SolutionPackage
 {
     public abstract class PathTreeNodeModel : TreeNodeModel
     {
-        [XmlIgnore]
-        public string Path { get; set; }
+        [XmlIgnore] public string Path { get; set; }
 
-        [XmlIgnore]
-        public string FileName { get; set; }
+        [XmlIgnore] public string FileName { get; set; }
 
-        [XmlIgnore]
-        public bool IsAbsolute { get; set; }
+        [XmlIgnore] public bool IsAbsolute => Directory.Exists(System.IO.Path.GetPathRoot(Path));
 
-        [XmlIgnore]
-        public string PathWithFileName => System.IO.Path.Combine(Path, FileName);
+        [XmlIgnore] public string PathWithFileName => System.IO.Path.Combine(Path, FileName);
 
-        public PathTreeNodeModel(string path, string name, bool isAbsolute = false)
+        public PathTreeNodeModel(string path, string name)
         {
             this.Path = path;
             this.FileName = name;
-            this.IsAbsolute = isAbsolute;
         }
 
         public override bool Equals(object obj)

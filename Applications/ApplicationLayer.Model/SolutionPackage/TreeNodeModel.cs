@@ -167,7 +167,7 @@ namespace ApplicationLayer.Models.SolutionPackage
 		/// </summary>
 		/// <value>The name of the node.</value>
 		[XmlIgnore]
-		public abstract string DisplayName { get; }
+		public abstract string DisplayName { get; set; }
 
 		/// <summary>
 		/// Gets or sets custom data for the node.

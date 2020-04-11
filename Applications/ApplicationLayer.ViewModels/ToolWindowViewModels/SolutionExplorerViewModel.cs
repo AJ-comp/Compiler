@@ -1,4 +1,5 @@
-﻿using ApplicationLayer.Common.Helpers;
+﻿using ApplicationLayer.Common;
+using ApplicationLayer.Common.Helpers;
 using ApplicationLayer.Models.SolutionPackage;
 using ApplicationLayer.Models.SolutionPackage.MiniCPackage;
 using ApplicationLayer.ViewModels.DocumentTypeViewModels;
@@ -176,35 +177,17 @@ namespace ApplicationLayer.ViewModels.ToolWindowViewModels
 
         }
 
-        private void OnRename()
-        {
-            /*
-            if (target.Key == SolutionExplorerKeyDownArgs.PressedKey.F2) target.Item.IsEditMode = true;
-            else if (target.Key == SolutionExplorerKeyDownArgs.PressedKey.Esc)
-            {
-                target.Item.IsEditMode = false;
-
-                target.Item.CancelChangeDisplayName();
-            }
-            else if (target.Key == SolutionExplorerKeyDownArgs.PressedKey.Enter)
-            {
-                MessageData exceptData = target.Item.IsValidToChange();
-                if (exceptData == null)
-                {
-                    target.Item.IsEditMode = false;
-                    target.Item.ChangeDisplayName();
-                }
-                else Messenger.Default.Send<DisplayMessage>(new DisplayMessage(exceptData, string.Empty));
-            }
-            */
-        }
-
         public SolutionExplorerViewModel()
         {
             this.SerializationId = "SE";
             this.DefaultDockSide = Models.ToolWindowStatus.ToolItemDockSide.Right;
             this.WindowState = Models.ToolWindowStatus.ToolItemState.Docked;
             this.Title = CommonResource.SolutionExplorer;
+        }
+
+        private void ConnectEventHandler()
+        {
+            this.Solution.ChildrenChanged += Solution_ChildrenChanged;
         }
 
         public void Save()
@@ -246,12 +229,32 @@ namespace ApplicationLayer.ViewModels.ToolWindowViewModels
                 XmlSerializer xs = new XmlSerializer(typeof(SolutionTreeNodeModel));
                 result = xs.Deserialize(sr) as SolutionTreeNodeModel;
                 result.Path = path;
-                result.FileName = solutionFileName;
+                result.SolutionName = solutionFileName;
             }
 
             this.Solution = result;
-            this.Solution.LoadProject();
+            if(this.Solution.LoadProject() == false)
+                Messenger.Default.Send<DisplayMessage>(new DisplayMessage(new Models.MessageData(Models.MessageKind.Information, CommonResource.WarningOnLoad), string.Empty));
+
             this.Solution.IsExpanded = true;
+
+            this.ConnectEventHandler();
+        }
+
+        /// <summary>
+        /// This function is called when a child (project) self is changed.
+        /// (ex project rename, delete, unload, add)
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Solution_ChildrenChanged(object sender, FileChangedEventArgs e)
+        {
+            if (this.solution.IsChanged) Messenger.Default.Send<AddChangedFileMessage>(new AddChangedFileMessage(this.solution));
+            else Messenger.Default.Send<RemoveChangedFileMessage>(new RemoveChangedFileMessage(this.solution));
+        }
+
+        private void Project_ChildrenChanged(object sender, EventArgs e)
+        {
         }
 
         /// <summary>
@@ -266,37 +269,8 @@ namespace ApplicationLayer.ViewModels.ToolWindowViewModels
             this.Solution.IsExpanded = true;
 
             this.Save();
+            this.ConnectEventHandler();
         }
-
-        /*
-        private bool LoadSolution(LoadSolutionMessage message)
-        {
-            this.Solutions.Clear();
-            this.Solutions.Add(SolutionHier.Load(message.SolutionPath, message.SolutionName, message.SolutionFullPath));
-
-            bool bFiredError = false;
-            foreach (var item in this.Solutions[0].ProjectPaths)
-            {
-                string fullPath = (item.IsAbsolute) ? item.Path : Path.Combine(message.SolutionPath, item.Path);
-
-                try
-                {
-                    var project = DefaultProjectHier.Load(Path.GetDirectoryName(item.Path), Path.GetFileName(item.Path), fullPath, this.Solutions[0]);
-
-                    this.Solutions[0].Projects.Add(project);    // for connect with the parent node (solution)
-                }
-                catch (Exception)
-                {
-                    bFiredError = true;
-                    ErrorProjectHier project = new ErrorProjectHier(Path.GetDirectoryName(item.Path), item.Path);
-
-                    this.Solutions[0].Projects.Add(project);
-                }
-            }
-
-            return bFiredError;
-        }
-        */
 
         /// <summary>
         /// This function checks whether changed files are.

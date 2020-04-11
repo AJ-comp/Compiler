@@ -1,5 +1,4 @@
-﻿using ApplicationLayer.Models.SolutionPackage;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 
 namespace ApplicationLayer.Models
 {
@@ -16,7 +15,7 @@ namespace ApplicationLayer.Models
             private set
             {
                 detailExplain = value;
-                OnPropertyChanged("DetailExplain");
+                OnPropertyChanged(nameof(DetailExplain));
             }
         }
 
@@ -27,7 +26,7 @@ namespace ApplicationLayer.Models
             set
             {
                 itemName = value;
-                OnPropertyChanged("ItemName");
+                OnPropertyChanged(nameof(ItemName));
             }
         }
 
@@ -38,7 +37,7 @@ namespace ApplicationLayer.Models
             set
             {
                 data = value;
-                OnPropertyChanged("Data");
+                OnPropertyChanged(nameof(Data));
             }
         }
 

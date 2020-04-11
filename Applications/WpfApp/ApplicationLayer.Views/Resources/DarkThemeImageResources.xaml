@@ -9,8 +9,9 @@
     <BitmapImage x:Key="WarningImagePath" UriSource="/ApplicationLayer.Views;component/Resources/Images/Basic/warning.png"/>
     
     <!-- Images related to MainMenu -->
-    <BitmapImage x:Key="NewFileMenuImagePath" UriSource="/ApplicationLayer.Views;component/Resources/Images/Basic/newfile.png"/>
-    
+    <BitmapImage x:Key="NewCreateMenuImagePath" UriSource="/ApplicationLayer.Views;component/Resources/Images/Basic/new_create_menu_16.png"/>
+    <BitmapImage x:Key="OpenMenuImagePath" UriSource="/ApplicationLayer.Views;component/Resources/Images/DarkTheme/openmenu_16.png"/>
+
     <!-- Images related to NewFile & NewProject Window-->
     <BitmapImage x:Key="CFile16ImagePath" UriSource="/ApplicationLayer.Views;component/Resources/Images/DarkTheme/mcfile_16.png"/>
     <BitmapImage x:Key="CFile24ImagePath" UriSource="/ApplicationLayer.Views;component/Resources/Images/DarkTheme/mcfile_24.png"/>
@@ -31,6 +32,8 @@
     <BitmapImage x:Key="OpenFolderImagePath" UriSource="/ApplicationLayer.Views;component/Resources/Images/Basic/open_folder_16.png"/>
     <BitmapImage x:Key="CloseDepFilterImagePath" UriSource="/ApplicationLayer.Views;component/Resources/Images/Basic/closed_dependency_filter_16.png"/>
     <BitmapImage x:Key="OpenDepFilterImagePath" UriSource="/ApplicationLayer.Views;component/Resources/Images/Basic/open_dependency_filter_16.png"/>
+    <BitmapImage x:Key="Func16ImagePath" UriSource="/ApplicationLayer.Views;component/Resources/Images/Basic/func_16.png"/>
+    <BitmapImage x:Key="Var16ImagePath" UriSource="/ApplicationLayer.Views;component/Resources/Images/Basic/var_16.png"/>
 
     <!-- Images related to ARM -->
 </ResourceDictionary>

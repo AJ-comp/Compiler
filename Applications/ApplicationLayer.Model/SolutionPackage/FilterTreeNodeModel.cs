@@ -1,4 +1,5 @@
-﻿using ApplicationLayer.Common.Interfaces;
+﻿using ApplicationLayer.Common;
+using ApplicationLayer.Common.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -11,20 +12,24 @@ namespace ApplicationLayer.Models.SolutionPackage
 {
     public class FilterTreeNodeModel : TreeNodeModel, IManagedable
     {
+        /********************************************************************************************
+         * private field section
+         ********************************************************************************************/
         private ObservableCollection<FilterTreeNodeModel> filters = new ObservableCollection<FilterTreeNodeModel>();
         private ObservableCollection<FileTreeNodeModel> files = new ObservableCollection<FileTreeNodeModel>();
 
-        [XmlIgnore]
-        public string FilterName { get; set; }
 
-        [XmlIgnore]
-        public ObservableCollection<FilterTreeNodeModel> Filters => filters;
 
-        [XmlIgnore]
-        public ObservableCollection<FileTreeNodeModel> Files => files;
+        /********************************************************************************************
+         * property section
+         ********************************************************************************************/
+        [XmlIgnore] public string FilterName { get; set; }
 
-        [XmlIgnore]
-        public List<FilterFileTreeNodeModel> ToFilterFileTreeNodeModel
+        [XmlIgnore] public ObservableCollection<FilterTreeNodeModel> Filters => filters;
+
+        [XmlIgnore] public ObservableCollection<FileTreeNodeModel> Files => files;
+
+        [XmlIgnore] public List<FilterFileTreeNodeModel> ToFilterFileTreeNodeModel
         {
             get
             {
@@ -78,10 +83,24 @@ namespace ApplicationLayer.Models.SolutionPackage
             }
         }
 
-        public override string DisplayName => FilterName;
+
+
+        /********************************************************************************************
+         * override property section
+         ********************************************************************************************/
+        public override string DisplayName
+        {
+            get => FilterName;
+            set => FilterName = value;
+        }
 
         public override string FullOnlyPath => Parent.FullOnlyPath;
 
+
+
+        /********************************************************************************************
+         * interface property field section
+         ********************************************************************************************/
         public IManagableElements ManagerTree
         {
             get
@@ -99,11 +118,29 @@ namespace ApplicationLayer.Models.SolutionPackage
             }
         }
 
+
+
+        /********************************************************************************************
+         * event handler section
+         ********************************************************************************************/
+        public event EventHandler<FileChangedEventArgs> Changed;
+
+
+
+        /********************************************************************************************
+         * constructor section
+         ********************************************************************************************/
         public FilterTreeNodeModel(string name)
         {
             this.FilterName = name;
+            this.IsEditable = true;
         }
 
+
+
+        /********************************************************************************************
+         * public method section
+         ********************************************************************************************/
         public void AddFilter(FilterTreeNodeModel item)
         {
             item.Parent = this;
@@ -116,6 +153,11 @@ namespace ApplicationLayer.Models.SolutionPackage
             this.files.Add(item);
         }
 
+
+
+        /********************************************************************************************
+         * override method section
+         ********************************************************************************************/
         public override void RemoveChild(TreeNodeModel nodeToRemove)
         {
             if (nodeToRemove is FilterTreeNodeModel)

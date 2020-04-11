@@ -5,18 +5,23 @@ namespace ApplicationLayer.Common.Helpers
 {
     public class PathHelper
     {
-        public static bool ComparePath(string path1, string path2)
-        {
-            return NormalizePath(path2).Contains(NormalizePath(path1));
-        }
-
-        public static string NormalizePath(string path)
+        private static string NormalizePath(string path)
         {
             if (path.Trim().Last().Equals(Path.DirectorySeparatorChar))
                 return path.Trim().ToLower();
 
-
             return $"{path.Trim()}{Path.DirectorySeparatorChar}".ToLower();
+        }
+
+        /// <summary>
+        /// This function compares whether the path2 is included in the path1.
+        /// </summary>
+        /// <param name="path1"></param>
+        /// <param name="path2"></param>
+        /// <returns>Returns true if path2 is included in path1 else returns false.</returns>
+        public static bool ComparePath(string path1, string path2)
+        {
+            return NormalizePath(path2).Contains(NormalizePath(path1));
         }
 
         /// <summary>

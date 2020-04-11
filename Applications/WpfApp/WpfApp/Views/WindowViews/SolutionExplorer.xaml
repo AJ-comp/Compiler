@@ -6,12 +6,15 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:lex="http://wpflocalizeextension.codeplex.com"
+             lex:ResxLocalizationProvider.DefaultAssembly="ApplicationLayer.Define"
+             lex:ResxLocalizationProvider.DefaultDictionary="Resources"
              xmlns:ap="clr-namespace:ApplicationLayer.Views.AttachedProperties;assembly=ApplicationLayer.Views"
              xmlns:common="clr-namespace:ApplicationLayer.Models.SolutionPackage;assembly=ApplicationLayer.Models"
              xmlns:commands="clr-namespace:ApplicationLayer.WpfApp.Commands"
              xmlns:minicPackage="clr-namespace:ApplicationLayer.Models.SolutionPackage.MiniCPackage;assembly=ApplicationLayer.Models"
              xmlns:mcModels="clr-namespace:ApplicationLayer.Models.SolutionPackage.MiniCPackage;assembly=ApplicationLayer.Models"
              xmlns:grids="http://schemas.actiprosoftware.com/winfx/xaml/grids"
+             xmlns:shared="http://schemas.actiprosoftware.com/winfx/xaml/shared"
              xmlns:viewModels="clr-namespace:ApplicationLayer.ViewModels.ToolWindowViewModels;assembly=ApplicationLayer.ViewModels"
              xmlns:views="clr-namespace:ApplicationLayer.Views;assembly=ApplicationLayer.Views"
              xmlns:converter="clr-namespace:ApplicationLayer.WpfApp.Converters"
@@ -22,10 +25,11 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/Resources/Menus/SolutionExplorerMenus.xaml" />
+                <ResourceDictionary Source="/Resources/DataTemplates/HierarchicalDataTemplates.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>
-    
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="20"/>
@@ -48,20 +52,28 @@
                 <DataTemplate>
                     <StackPanel x:Name="stackPanel" Orientation="Horizontal">
                         <Image x:Name="image" Width="16" Height="16" Margin="0 0 3 0"/>
-                        <TextBlock Margin="4,0,0,0" Text="{Binding DisplayName}" 
-                                   TextTrimming="CharacterEllipsis" VerticalAlignment="Center" />
+                        <shared:EditableContentControl x:Name="edit" Style="{StaticResource NormalTreeNodeStyle}" />
                     </StackPanel>
 
                     <DataTemplate.Triggers>
-                         <!-- setting a solution icon -->
+                        <!-- setting a solution state -->
                         <DataTrigger Binding="{Binding Tag, 
                                             Converter={converter:DataTypeConverter}}" 
                                              Value="{x:Type common:SolutionTreeNodeModel}">
                             <Setter TargetName="image" Property="Source" Value="{DynamicResource SolutionImagePath}"/>
                             <Setter TargetName="stackPanel" Property="ContextMenu" Value="{StaticResource SolutionMenus}"/>
+                            <Setter TargetName="edit" Property="Style" Value="{StaticResource SolutionTreeNodeStyle}"/>
                         </DataTrigger>
 
-                         <!-- setting MiniC Project icon -->
+                        <!-- setting Error Project icon -->
+                        <DataTrigger Binding="{Binding Tag, 
+                                            Converter={converter:DataTypeConverter}}" 
+                                            Value="{x:Type common:ErrorProjectTreeNodeModel}">
+                            <Setter TargetName="image" Property="Source" Value="{DynamicResource ErrorImagePath}"/>
+                            <Setter TargetName="stackPanel" Property="ContextMenu" Value="{StaticResource ErrorMenus}"/>
+                        </DataTrigger>
+
+                        <!-- setting MiniC Project icon -->
                         <DataTrigger Binding="{Binding Tag, 
                                             Converter={converter:DataTypeConverter}}" 
                                             Value="{x:Type mcModels:MiniCProjectTreeNodeModel}">
@@ -82,6 +94,18 @@
                                             Converter={converter:DataTypeConverter}}" 
                                             Value="{x:Type common:FilterTreeNodeModel}">
                             <Setter TargetName="stackPanel" Property="ContextMenu" Value="{StaticResource FolderMenuItems}"/>
+                        </DataTrigger>
+
+                        <DataTrigger Binding="{Binding Tag,
+                                            Converter={converter:DataTypeConverter}}"
+                                            Value="{x:Type mcModels:VarTreeNodeModel}">
+                            <Setter TargetName="image" Property="Source" Value="{DynamicResource Var16ImagePath}"/>
+                        </DataTrigger>
+
+                        <DataTrigger Binding="{Binding Tag,
+                                            Converter={converter:DataTypeConverter}}"
+                                            Value="{x:Type mcModels:FuncTreeNodeModel}">
+                            <Setter TargetName="image" Property="Source" Value="{DynamicResource Func16ImagePath}"/>
                         </DataTrigger>
 
                         <MultiDataTrigger>

@@ -152,7 +152,7 @@
     <value>Delete</value>
   </data>
   <data name="DeleteWarning" xml:space="preserve">
-    <value>You will really delete it?</value>
+    <value>Do you will really delete it? The file is deleted.</value>
   </data>
   <data name="Documentation" xml:space="preserve">
     <value>Documentation</value>
@@ -330,5 +330,23 @@
   </data>
   <data name="Solution" xml:space="preserve">
     <value>Solution</value>
+  </data>
+  <data name="Remove" xml:space="preserve">
+    <value>Remove</value>
+  </data>
+  <data name="Unload" xml:space="preserve">
+    <value>Unload</value>
+  </data>
+  <data name="RemoveWarning" xml:space="preserve">
+    <value>Do you will remove it? The file is not deleted.</value>
+  </data>
+  <data name="ExistProject" xml:space="preserve">
+    <value>Existing Project</value>
+  </data>
+  <data name="AllProjectFiles" xml:space="preserve">
+    <value>All project files</value>
+  </data>
+  <data name="AllFiles" xml:space="preserve">
+    <value>All files</value>
   </data>
 </root>
