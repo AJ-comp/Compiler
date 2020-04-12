@@ -1,7 +1,9 @@
 ﻿using ApplicationLayer.Common;
 using ApplicationLayer.Common.Interfaces;
 using System;
+using System.Collections.ObjectModel;
 using System.IO;
+using System.Xml.Serialization;
 
 namespace ApplicationLayer.Models.SolutionPackage
 {
@@ -23,6 +25,11 @@ namespace ApplicationLayer.Models.SolutionPackage
             }
         }
 
+
+
+        /********************************************************************************************
+         * override property section
+         ********************************************************************************************/
         public override string DisplayName
         {
             get => FileName;
@@ -43,13 +50,27 @@ namespace ApplicationLayer.Models.SolutionPackage
 
         public override string FullOnlyPath => System.IO.Path.Combine(Parent.FullOnlyPath, Path);
 
+
+
+        /********************************************************************************************
+         * event handler section
+         ********************************************************************************************/
         public event EventHandler<FileChangedEventArgs> Changed;
 
+
+
+        /********************************************************************************************
+         * constructor section
+         ********************************************************************************************/
         public FolderTreeNodeModel(string path, string folderName) : base(path, folderName)
         {
         }
-        public void Save() { }
 
+
+
+        /********************************************************************************************
+         * override method section
+         ********************************************************************************************/
         public override void RemoveChild(TreeNodeModel nodeToRemove) { }
     }
 }

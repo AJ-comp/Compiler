@@ -65,6 +65,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DocumentTypeViewModels\ParseTreeViewModel.cs" />
+    <Compile Include="Interfaces\IPathSearchable.cs" />
     <Compile Include="Messages\DisplayMessage.cs" />
     <Compile Include="Messages\ToAlarmListMessages.cs" />
     <Compile Include="SubViewModels\LLParserViewModel.cs" />

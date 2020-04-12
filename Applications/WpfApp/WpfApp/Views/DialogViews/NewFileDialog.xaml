@@ -4,8 +4,10 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ApplicationLayer.WpfApp.Views.DialogViews"
+        xmlns:models="clr-namespace:ApplicationLayer.Models;assembly=ApplicationLayer.Models"
         xmlns:viewModels="clr-namespace:ApplicationLayer.ViewModels.DialogViewModels;assembly=ApplicationLayer.ViewModels"
         xmlns:logicConverters="clr-namespace:ApplicationLayer.WpfApp.Converters.LogicConverters"
+        xmlns:localConverters="clr-namespace:ApplicationLayer.WpfApp.Converters"
         xmlns:lex="http://wpflocalizeextension.codeplex.com" 
         lex:ResxLocalizationProvider.DefaultAssembly="ApplicationLayer.Define"
         mc:Ignorable="d"
@@ -22,6 +24,8 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
         </Grid.RowDefinitions>
         
         <ListBox HorizontalContentAlignment="Stretch"
@@ -31,16 +35,47 @@
                 <DataTemplate>
                     <Border x:Name="border" BorderThickness="1" VerticalAlignment="Stretch">
                         <VirtualizingStackPanel Name="vStack" Orientation="Horizontal">
-                            <Image Source="{Binding ImageSource}"  Width="48" Height="48" Margin="0,0,2,0"/>
-                            <TextBlock Text="{Binding ItemName}" Width="100"/>
-                            <TextBlock Text="{Binding Explain}" FontSize="8"/>
+                            <Image x:Name="image"  Width="48" Height="48" Margin="0,0,5,0"/>
+                            <TextBlock Text="{Binding ItemName}" Width="100" VerticalAlignment="Center" />
+                            <TextBlock Text="{Binding Explain}" FontSize="8" VerticalAlignment="Center" />
                         </VirtualizingStackPanel>
                     </Border>
+
+                    <DataTemplate.Triggers>
+                        <DataTrigger Binding="{Binding DocumentType}"
+                                            Value="{x:Static models:DocumentType.MiniCHeader}">
+                            <Setter TargetName="image" Property="Source" Value="{DynamicResource CHeader48ImagePath}"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding DocumentType}"
+                                            Value="{x:Static models:DocumentType.MiniCSource}">
+                            <Setter TargetName="image" Property="Source" Value="{DynamicResource CFile48ImagePath}"/>
+                        </DataTrigger>
+                    </DataTemplate.Triggers>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
 
-        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right">
+        <StackPanel Grid.Row="1" Orientation="Horizontal">
+            <TextBlock Text="{lex:Loc Key=Name}" Width="50" Margin="15 0 0 0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            <TextBlock Text=" : " Margin="0 0 15 0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            <TextBox Text="{Binding FileName}" Width="350" Height="25"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="2" Orientation="Horizontal">
+            <TextBlock Text="{lex:Loc Key=Position}" Width="50" Margin="15 0 0 0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            <TextBlock Text=" : " Margin="0 0 15 0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            <TextBox Text="{Binding Path}" Width="350" Height="25"/>
+
+            <Button Padding="10 0" Margin="10 0"
+                            Content="{lex:Loc Key=Search}"
+                            Command="{Binding SearchCommand}"
+                            CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, 
+                            AncestorType={x:Type local:NewFileDialog}}, 
+                            Converter={logicConverters:PathSearchLogicConverter}}"
+                            VerticalAlignment="Center" HorizontalAlignment="Left"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Right">
             <Button Style="{DynamicResource WindowCloseButton}" Margin="0 0 10 0" 
                     Content="{lex:Loc Key=Open}" 
                     Command="{Binding CreateCommand}"/>

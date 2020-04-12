@@ -1,4 +1,5 @@
-﻿using ApplicationLayer.ViewModels.Messages;
+﻿using ApplicationLayer.ViewModels.Interfaces;
+using ApplicationLayer.ViewModels.Messages;
 using ApplicationLayer.ViewModels.SubViewModels;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
@@ -8,11 +9,23 @@ using System.Linq;
 
 namespace ApplicationLayer.ViewModels.DialogViewModels
 {
-    public class NewSolutionViewModel : DialogViewModel
+    public class NewSolutionViewModel : DialogViewModel, IPathSearchable
     {
+        /********************************************************************************************
+         * private field section
+         ********************************************************************************************/
+        private string solutionName = string.Empty;
+        private string solutionPath = string.Empty;
+        private RelayCommand<Action<string>> searchCommand;
+        private RelayCommand<Action> _createCommand;
+
+
+
+        /********************************************************************************************
+         * property section
+         ********************************************************************************************/
         public ProjectSelectionViewModel ProjectSelection { get; } = new ProjectSelectionViewModel();
 
-        private string solutionName = string.Empty;
         public string SolutionName
         {
             get => this.solutionName;
@@ -28,8 +41,7 @@ namespace ApplicationLayer.ViewModels.DialogViewModels
             }
         }
 
-        private string solutionPath = string.Empty;
-        public string SolutionPath
+        public string Path
         {
             get => this.solutionPath;
             set
@@ -37,12 +49,12 @@ namespace ApplicationLayer.ViewModels.DialogViewModels
                 if (this.solutionPath == value) return;
 
                 this.solutionPath = value;
-                if (this.SolutionPath.Length > 0)
+                if (this.Path.Length > 0)
                 {
                     if (this.solutionPath.Last() != '\\')
                         this.solutionPath += "\\";
                 }
-                this.RaisePropertyChanged(nameof(SolutionPath));
+                this.RaisePropertyChanged(nameof(Path));
                 this.RaisePropertyChanged(nameof(SolutionFullPath));
 
                 CreateCommand.RaiseCanExecuteChanged();
@@ -50,24 +62,23 @@ namespace ApplicationLayer.ViewModels.DialogViewModels
         }
 
         public bool CreateSolutionFolder { get; set; }
-        public string SolutionFullPath { get => this.SolutionPath + this.solutionName; }
+        public string SolutionFullPath { get => this.Path + this.solutionName; }
 
-        private RelayCommand<Action> searchCommand;
-        public RelayCommand<Action> SearchCommand
+
+
+        /********************************************************************************************
+         * command property section
+         ********************************************************************************************/
+        public RelayCommand<Action<string>> SearchCommand
         {
             get
             {
-                if (this.searchCommand == null) this.searchCommand = new RelayCommand<Action>(this.OnSearch);
+                if (this.searchCommand == null) this.searchCommand = new RelayCommand<Action<string>>(this.OnSearch);
 
                 return this.searchCommand;
             }
         }
-        private void OnSearch(Action action)
-        {
-            action?.Invoke();
-        }
 
-        private RelayCommand<Action> _createCommand;
         public RelayCommand<Action> CreateCommand
         {
             get
@@ -78,10 +89,31 @@ namespace ApplicationLayer.ViewModels.DialogViewModels
                 return this._createCommand;
             }
         }
+
+
+
+        /********************************************************************************************
+         * constructor section
+         ********************************************************************************************/
+        public NewSolutionViewModel()
+        {
+            this.ProjectSelection.PropertyChanged += ProjectSelection_PropertyChanged;
+        }
+
+
+
+        /********************************************************************************************
+         * command action method section
+         ********************************************************************************************/
+        private void OnSearch(Action<string> action)
+        {
+            action?.Invoke(this.Path);
+        }
+
         private void OnCreate(Action action)
         {
             Target target = Activator.CreateInstance(this.ProjectSelection.SelectedTerminalItem) as Target;
-            Messenger.Default.Send(new CreateSolutionMessage(this.SolutionPath, this.SolutionName, this.CreateSolutionFolder, this.ProjectSelection.SelectedProject.Grammar, target));
+            Messenger.Default.Send(new CreateSolutionMessage(this.Path, this.SolutionName, this.CreateSolutionFolder, this.ProjectSelection.SelectedProject.Grammar, target));
 
             action?.Invoke();
         }
@@ -96,11 +128,11 @@ namespace ApplicationLayer.ViewModels.DialogViewModels
             return true;
         }
 
-        public NewSolutionViewModel()
-        {
-            this.ProjectSelection.PropertyChanged += ProjectSelection_PropertyChanged;
-        }
 
+
+        /********************************************************************************************
+         * event handler section
+         ********************************************************************************************/
         private void ProjectSelection_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             if (e.PropertyName == "SelectedTerminalItem") CreateCommand.RaiseCanExecuteChanged();

@@ -10,7 +10,15 @@ namespace ApplicationLayer.Models.SolutionPackage
 
         [XmlIgnore] public string FileName { get; set; }
 
-        [XmlIgnore] public bool IsAbsolute => Directory.Exists(System.IO.Path.GetPathRoot(Path));
+        [XmlIgnore] public bool IsAbsolute
+        {
+            get
+            {
+                if (Path.Length == 0) return false;
+
+                return Directory.Exists(System.IO.Path.GetPathRoot(Path));
+            }
+        }
 
         [XmlIgnore] public string PathWithFileName => System.IO.Path.Combine(Path, FileName);
 

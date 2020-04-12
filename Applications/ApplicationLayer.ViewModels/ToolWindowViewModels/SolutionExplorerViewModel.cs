@@ -17,9 +17,23 @@ namespace ApplicationLayer.ViewModels.ToolWindowViewModels
 {
     public class SolutionExplorerViewModel : ToolWindowViewModel
     {
+        /********************************************************************************************
+         * private field section
+         ********************************************************************************************/
         private SolutionTreeNodeModel solution;
         private TreeNodeModel selectedItem;
+        private ObservableCollection<DocumentViewModel> _documents;
+        private DocumentViewModel selectedDocument;
+        private RelayCommand doubleClickCommand;
+        private RelayCommand existItemCommand;
+        private RelayCommand<TreeNodeModel> selectedCommand;
+        private RelayCommand<TreeNodeModel> newFolderCommand;
 
+
+
+        /********************************************************************************************
+         * property section
+         ********************************************************************************************/
         public SolutionTreeNodeModel Solution
         {
             get => solution;
@@ -30,8 +44,6 @@ namespace ApplicationLayer.ViewModels.ToolWindowViewModels
             }
         }
 
-        #region Property related to Document
-        private ObservableCollection<DocumentViewModel> _documents;
         public ObservableCollection<DocumentViewModel> Documents
         {
             get
@@ -46,34 +58,6 @@ namespace ApplicationLayer.ViewModels.ToolWindowViewModels
             }
         }
 
-        private void Documents_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
-        {
-            if (e.NewItems != null && e.NewItems.Count != 0)
-                foreach (DocumentViewModel document in e.NewItems)
-                {
-                    document.CloseRequest += Document_RequestClose;
-                    document.AllCloseExceptThisRequest += Document_AllCloseExceptThisRequest;
-                }
-            if (e.OldItems != null && e.OldItems.Count != 0)
-                foreach (DocumentViewModel document in e.OldItems)
-                {
-                    document.CloseRequest -= Document_RequestClose;
-                    document.AllCloseExceptThisRequest -= Document_AllCloseExceptThisRequest;
-                }
-        }
-
-        private void Document_AllCloseExceptThisRequest(object sender, EventArgs e)
-        {
-            this._documents.Clear();
-            this._documents.Add(sender as DocumentViewModel);
-        }
-
-        private void Document_RequestClose(object sender, EventArgs e)
-        {
-            this._documents.Remove(sender as DocumentViewModel);
-        }
-
-        private DocumentViewModel selectedDocument;
         public DocumentViewModel SelectedDocument
         {
             get => this.selectedDocument;
@@ -83,8 +67,6 @@ namespace ApplicationLayer.ViewModels.ToolWindowViewModels
                 this.RaisePropertyChanged(nameof(SelectedDocument));
             }
         }
-        #endregion
-
 
         public TreeNodeModel SelectedItem
         {
@@ -96,7 +78,11 @@ namespace ApplicationLayer.ViewModels.ToolWindowViewModels
             }
         }
 
-        private RelayCommand<TreeNodeModel> selectedCommand;
+
+
+        /********************************************************************************************
+         * command property section
+         ********************************************************************************************/
         public RelayCommand<TreeNodeModel> SelectedCommand
         {
             get
@@ -107,12 +93,7 @@ namespace ApplicationLayer.ViewModels.ToolWindowViewModels
                 return this.selectedCommand;
             }
         }
-        private void OnSelected(TreeNodeModel selectedItem)
-        {
-            this.SelectedItem = selectedItem;
-        }
 
-        private RelayCommand doubleClickCommand;
         public RelayCommand DoubleClickCommand
         {
             get
@@ -123,30 +104,7 @@ namespace ApplicationLayer.ViewModels.ToolWindowViewModels
                 return this.doubleClickCommand;
             }
         }
-        private void OnMouseDoubleClick()
-        {
-            if (SelectedItem is FileTreeNodeModel)
-            {
-                string fileName = (SelectedItem as FileTreeNodeModel).PathWithFileName;
 
-                if (File.Exists(fileName) == false) return;
-                string content = File.ReadAllText(fileName);
-
-                var editor = new EditorTypeViewModel(fileName, content);
-                if (this.Documents.Contains(editor))
-                {
-                    this.SelectedDocument = editor;
-                    return;
-                }
-
-                this.Documents.Add(editor);
-                this.SelectedDocument = editor;
-
-                Messenger.Default.Send<AddEditorMessage>(new AddEditorMessage(editor));
-            }
-        }
-
-        private RelayCommand existItemCommand;
         public RelayCommand ExistItemCommand
         {
             get
@@ -157,11 +115,7 @@ namespace ApplicationLayer.ViewModels.ToolWindowViewModels
                 return this.existItemCommand;
             }
         }
-        private void OnExistItemMenuClick()
-        {
-        }
 
-        private RelayCommand<TreeNodeModel> newFolderCommand;
         public RelayCommand<TreeNodeModel> NewFolderCommand
         {
             get
@@ -172,11 +126,12 @@ namespace ApplicationLayer.ViewModels.ToolWindowViewModels
                 return this.newFolderCommand;
             }
         }
-        private void OnNewFolderMenuClick(TreeNodeModel selectedItem)
-        {
 
-        }
 
+
+        /********************************************************************************************
+         * constructor section
+         ********************************************************************************************/
         public SolutionExplorerViewModel()
         {
             this.SerializationId = "SE";
@@ -185,11 +140,11 @@ namespace ApplicationLayer.ViewModels.ToolWindowViewModels
             this.Title = CommonResource.SolutionExplorer;
         }
 
-        private void ConnectEventHandler()
-        {
-            this.Solution.ChildrenChanged += Solution_ChildrenChanged;
-        }
 
+
+        /********************************************************************************************
+         * public method section
+         ********************************************************************************************/
         public void Save()
         {
             if (Solution == null) return;
@@ -201,7 +156,7 @@ namespace ApplicationLayer.ViewModels.ToolWindowViewModels
                 xs.Serialize(wr, Solution);
             }
 
-            foreach (var item in Solution.Projects)
+            foreach (var item in Solution.Children)
             {
                 var project = item as ProjectTreeNodeModel;
                 string projPath = Path.Combine(Solution.Path, project.Path);
@@ -241,6 +196,16 @@ namespace ApplicationLayer.ViewModels.ToolWindowViewModels
             this.ConnectEventHandler();
         }
 
+        private void ConnectEventHandler()
+        {
+            this.Solution.ChildrenChanged += Solution_ChildrenChanged;
+        }
+
+
+
+        /********************************************************************************************
+         * event handler section
+         ********************************************************************************************/
         /// <summary>
         /// This function is called when a child (project) self is changed.
         /// (ex project rename, delete, unload, add)
@@ -272,6 +237,38 @@ namespace ApplicationLayer.ViewModels.ToolWindowViewModels
             this.ConnectEventHandler();
         }
 
+        private void Documents_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            if (e.NewItems != null && e.NewItems.Count != 0)
+                foreach (DocumentViewModel document in e.NewItems)
+                {
+                    document.CloseRequest += Document_RequestClose;
+                    document.AllCloseExceptThisRequest += Document_AllCloseExceptThisRequest;
+                }
+            if (e.OldItems != null && e.OldItems.Count != 0)
+                foreach (DocumentViewModel document in e.OldItems)
+                {
+                    document.CloseRequest -= Document_RequestClose;
+                    document.AllCloseExceptThisRequest -= Document_AllCloseExceptThisRequest;
+                }
+        }
+
+        private void Document_AllCloseExceptThisRequest(object sender, EventArgs e)
+        {
+            this._documents.Clear();
+            this._documents.Add(sender as DocumentViewModel);
+        }
+
+        private void Document_RequestClose(object sender, EventArgs e)
+        {
+            this._documents.Remove(sender as DocumentViewModel);
+        }
+
+
+
+        /********************************************************************************************
+         * static method section
+         ********************************************************************************************/
         /// <summary>
         /// This function checks whether changed files are.
         /// </summary>
@@ -316,6 +313,11 @@ namespace ApplicationLayer.ViewModels.ToolWindowViewModels
             return result;
         }
 
+
+
+        /********************************************************************************************
+         * message action method section
+         ********************************************************************************************/
         /// <summary>
         /// This message handler loads the Solution.
         /// </summary>
@@ -386,6 +388,48 @@ namespace ApplicationLayer.ViewModels.ToolWindowViewModels
                 else Messenger.Default.Send<RemoveChangedFileMessage>(new RemoveChangedFileMessage(project));
             }
             */
+        }
+
+
+
+        /********************************************************************************************
+         * command action method section
+         ********************************************************************************************/
+        private void OnSelected(TreeNodeModel selectedItem)
+        {
+            this.SelectedItem = selectedItem;
+        }
+
+        private void OnMouseDoubleClick()
+        {
+            if (SelectedItem is FileTreeNodeModel)
+            {
+                string fileName = (SelectedItem as FileTreeNodeModel).PathWithFileName;
+
+                if (File.Exists(fileName) == false) return;
+                string content = File.ReadAllText(fileName);
+
+                var editor = new EditorTypeViewModel(fileName, content);
+                if (this.Documents.Contains(editor))
+                {
+                    this.SelectedDocument = editor;
+                    return;
+                }
+
+                this.Documents.Add(editor);
+                this.SelectedDocument = editor;
+
+                Messenger.Default.Send<AddEditorMessage>(new AddEditorMessage(editor));
+            }
+        }
+
+        private void OnExistItemMenuClick()
+        {
+        }
+
+        private void OnNewFolderMenuClick(TreeNodeModel selectedItem)
+        {
+
         }
     }
 }

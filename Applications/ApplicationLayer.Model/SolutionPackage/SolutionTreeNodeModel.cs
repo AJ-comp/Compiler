@@ -17,7 +17,6 @@ namespace ApplicationLayer.Models.SolutionPackage
          * private field section
          ********************************************************************************************/
         private double versionRecentSaved;
-        private ObservableCollection<ProjectTreeNodeModel> projects = new ObservableCollection<ProjectTreeNodeModel>();
 
 
 
@@ -31,12 +30,16 @@ namespace ApplicationLayer.Models.SolutionPackage
             get
             {
                 if (versionRecentSaved != Version) return true;
-                if (ProjectPaths.Count != Projects.Count) return true;
+                if (ProjectPaths.Count != Children.Count) return true;
 
-                foreach (var project in Projects)
+                foreach (var child in Children)
                 {
-                    var path = new PathInfo(project.Path, project.FileName);
-                    if (ProjectPaths.Contains(path) == false) return true;
+                    if(child is ProjectTreeNodeModel)
+                    {
+                        var project = child as ProjectTreeNodeModel;
+                        var path = new PathInfo(project.Path, project.FileName);
+                        if (ProjectPaths.Contains(path) == false) return true;
+                    }
                 }
 
                 return false;
@@ -53,9 +56,7 @@ namespace ApplicationLayer.Models.SolutionPackage
             }
         }
 
-        [XmlIgnore] public int LoadedProjectCount => Projects.Count;
-
-        [XmlIgnore] public ObservableCollection<ProjectTreeNodeModel> Projects => projects;
+        [XmlIgnore] public int LoadedProjectCount => Children.Count;
 
         [XmlElement("Project")] public Collection<PathInfo> ProjectPaths { get; private set; } = new Collection<PathInfo>();
 
@@ -102,7 +103,7 @@ namespace ApplicationLayer.Models.SolutionPackage
         public SolutionTreeNodeModel() : base(string.Empty, string.Empty)
         {
             this.IsEditable = true;
-            this.Projects.CollectionChanged += Projects_CollectionChanged;
+            this.Children.CollectionChanged += Projects_CollectionChanged;
         }
 
         public SolutionTreeNodeModel(string solutionPath, string solutionName) : base(solutionPath, solutionName + ".ajn")
@@ -111,6 +112,8 @@ namespace ApplicationLayer.Models.SolutionPackage
             this.SolutionName = solutionName;
             this.IsEditable = true;
             this.SyncWithCurrentValue();
+
+            this.Children.CollectionChanged += Projects_CollectionChanged;
         }
 
 
@@ -124,8 +127,11 @@ namespace ApplicationLayer.Models.SolutionPackage
 
             foreach(var item in e.NewItems)
             {
-                ProjectTreeNodeModel project = item as ProjectTreeNodeModel;
-                project.Changed += Project_Changed;
+                if(item is ProjectTreeNodeModel)
+                {
+                    ProjectTreeNodeModel project = item as ProjectTreeNodeModel;
+                    project.Changed += Project_Changed;
+                }
             }
         }
 
@@ -142,7 +148,7 @@ namespace ApplicationLayer.Models.SolutionPackage
         public void AddProject(ProjectTreeNodeModel newProject)
         {
             newProject.Parent = this;
-            this.projects.Add(newProject);
+            this.Children.Add(newProject);
         }
 
         /// <summary>
@@ -176,7 +182,7 @@ namespace ApplicationLayer.Models.SolutionPackage
         public override void RemoveChild(TreeNodeModel nodeToRemove)
         {
             if(nodeToRemove is ProjectTreeNodeModel)
-                this.projects.Remove(nodeToRemove as ProjectTreeNodeModel);
+                this.Children.Remove(nodeToRemove as ProjectTreeNodeModel);
         }
 
 
@@ -211,8 +217,14 @@ namespace ApplicationLayer.Models.SolutionPackage
             versionRecentSaved = Version;
 
             ProjectPaths.Clear();
-            foreach (var project in Projects)
-                ProjectPaths.Add(new PathInfo(project.Path, project.FileName));
+            foreach (var child in Children)
+            {
+                if(child is ProjectTreeNodeModel)
+                {
+                    ProjectTreeNodeModel project = child as ProjectTreeNodeModel;
+                    ProjectPaths.Add(new PathInfo(project.Path, project.FileName));
+                }
+            }
         }
 
         public void Save()

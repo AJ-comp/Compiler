@@ -430,11 +430,20 @@ namespace ApplicationLayer.Define.Properties {
         }
         
         /// <summary>
-        ///   It generates the Mini C file과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   It generates the Mini C header file과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
-        public static string MiniCFileExplain {
+        public static string MiniCHeaderFileExplain {
             get {
-                return ResourceManager.GetString("MiniCFileExplain", resourceCulture);
+                return ResourceManager.GetString("MiniCHeaderFileExplain", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   It generates the Mini C source file과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string MiniCSourceFileExplain {
+            get {
+                return ResourceManager.GetString("MiniCSourceFileExplain", resourceCulture);
             }
         }
         

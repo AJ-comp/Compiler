@@ -19,6 +19,7 @@ namespace ApplicationLayer.Views
 		{
 			// Setting these properties tells the adapter which properties to watch for INotifyPropertyChanged updates
 			//   so that the UI can receive the updated values without binding usage
+
 			this.ChildrenPath = "Children";
 			this.IsEditingPath = "IsEditing";
 			this.IsExpandedPath = "IsExpanded";
@@ -30,14 +31,12 @@ namespace ApplicationLayer.Views
 		private IEnumerable GetSolutionTypeChildren(TreeListBox ownerControl, object item, bool bSort = true)
 		{
 			var model = item as SolutionTreeNodeModel;
-			List<ProjectTreeNodeModel> result = new List<ProjectTreeNodeModel>();
+			List<TreeNodeModel> result = new List<TreeNodeModel>();
 
-			List<ProjectTreeNodeModel> projects = new List<ProjectTreeNodeModel>();
-			foreach (var project in model.Projects) projects.Add(project);
+			List<TreeNodeModel> projects = new List<TreeNodeModel>();
+			foreach (var project in model.Children) projects.Add(project);
 			if (bSort) projects.Sort();
 			result.AddRange(projects);
-
-			this.ChildrenPath = nameof(model.Projects);
 
 			return result;
 		}
@@ -51,13 +50,23 @@ namespace ApplicationLayer.Views
 			result.Add(model.OuterDependencies);
 
 			List<TreeNodeModel> filters = new List<TreeNodeModel>();
-			foreach (var filter in model.Filters) filters.Add(filter);
-			if(bSort) filters.Sort();
-			result.AddRange(filters);
-
 			List<TreeNodeModel> files = new List<TreeNodeModel>();
-			foreach (var file in model.Files) files.Add(file);
-			if(bSort) files.Sort();
+			foreach (var child in model.Children)
+			{
+				if (child is FilterTreeNodeModel)
+				{
+					var filter = child as FilterTreeNodeModel;
+					filters.Add(filter);
+					if (bSort) filters.Sort();
+				}
+				else if (child is FileTreeNodeModel)
+				{
+					var file = child as FileTreeNodeModel;
+					files.Add(file);
+					if (bSort) files.Sort();
+				}
+			}
+			result.AddRange(filters);
 			result.AddRange(files);
 
 			return result;
@@ -69,13 +78,23 @@ namespace ApplicationLayer.Views
 			List<TreeNodeModel> result = new List<TreeNodeModel>();
 
 			List<TreeNodeModel> filters = new List<TreeNodeModel>();
-			foreach (var filter in model.Filters) filters.Add(filter);
-			if (bSort) filters.Sort();
-			result.AddRange(filters);
-
 			List<TreeNodeModel> files = new List<TreeNodeModel>();
-			foreach (var file in model.Files) files.Add(file);
-			if (bSort) files.Sort();
+			foreach (var child in model.Children)
+			{
+				if(child is FilterTreeNodeModel)
+				{
+					var filter = child as FilterTreeNodeModel;
+					filters.Add(filter);
+					if (bSort) filters.Sort();
+				}
+				else if(child is FileTreeNodeModel)
+				{
+					var file = child as FileTreeNodeModel;
+					files.Add(file);
+					if (bSort) files.Sort();
+				}
+			}
+			result.AddRange(filters);
 			result.AddRange(files);
 
 			return result;
@@ -87,13 +106,23 @@ namespace ApplicationLayer.Views
 			List<TreeNodeModel> result = new List<TreeNodeModel>();
 
 			List<TreeNodeModel> vars = new List<TreeNodeModel>();
-			foreach (var var in model.Vars) vars.Add(var);
-			if (bSort) vars.Sort();
-			result.AddRange(vars);
-
 			List<TreeNodeModel> funcs = new List<TreeNodeModel>();
-			foreach (var func in model.Funcs) funcs.Add(func);
-			if (bSort) funcs.Sort();
+			foreach (var child in model.Children)
+			{
+				if(child is VarTreeNodeModel)
+				{
+					var var = child as VarTreeNodeModel;
+					vars.Add(var);
+					if (bSort) vars.Sort();
+				}
+				else if(child is FuncTreeNodeModel)
+				{
+					var func = child as FuncTreeNodeModel;
+					funcs.Add(func);
+					if (bSort) funcs.Sort();
+				}
+			}
+			result.AddRange(vars);
 			result.AddRange(funcs);
 
 			return result;
@@ -111,11 +140,14 @@ namespace ApplicationLayer.Views
 		/// <returns>An <see cref="IEnumerable"/> that will be used to provide child items for the specified parent item.</returns>
 		public override IEnumerable GetChildren(TreeListBox ownerControl, object item)
 		{
-			if (item is SolutionTreeNodeModel) return GetSolutionTypeChildren(ownerControl, item);
-			else if (item is MiniCProjectTreeNodeModel) return GetProjectTypeChildren(ownerControl, item);
-			else if (item is FilterTreeNodeModel) return GetFilterTypeChildren(ownerControl, item);
-			else if (item is MiniCFileTreeNodeModel) return GetFileTypeChildren(ownerControl, item);
-			else return null;
+			IEnumerable result = null;
+
+			if (item is SolutionTreeNodeModel) result = GetSolutionTypeChildren(ownerControl, item);
+			else if (item is MiniCProjectTreeNodeModel) result = GetProjectTypeChildren(ownerControl, item);
+			else if (item is FilterTreeNodeModel) result = GetFilterTypeChildren(ownerControl, item);
+			else if (item is MiniCFileTreeNodeModel) result = GetFileTypeChildren(ownerControl, item);
+
+			return result;
 		}
 
 		/// <summary>

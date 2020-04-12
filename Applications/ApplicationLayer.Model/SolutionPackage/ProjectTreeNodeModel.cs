@@ -1,6 +1,7 @@
 ﻿using ApplicationLayer.Common;
 using ApplicationLayer.Common.Interfaces;
 using System;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Xml.Serialization;
 
@@ -11,7 +12,17 @@ namespace ApplicationLayer.Models.SolutionPackage
         /********************************************************************************************
          * override property section
          ********************************************************************************************/
-        public override string FullOnlyPath => System.IO.Path.Combine(Parent.FullOnlyPath, Path);
+        public override string FullOnlyPath
+        {
+            get
+            {
+                if (Parent == null) return Path;
+                if (Parent.FullOnlyPath == null) return Path;
+
+                return System.IO.Path.Combine(Parent?.FullOnlyPath, Path);
+            }
+        }
+
         public override string DisplayName
         {
             get => System.IO.Path.GetFileNameWithoutExtension(this.FileName);
@@ -91,7 +102,7 @@ namespace ApplicationLayer.Models.SolutionPackage
         /********************************************************************************************
          * static method section
          ********************************************************************************************/
-         public static ProjectTreeNodeModel CreateProjectTreeNodeModel(string solutionPath, PathInfo projectPath)
+        public static ProjectTreeNodeModel CreateProjectTreeNodeModel(string solutionPath, PathInfo projectPath)
         {
             Type type = FileTreeNodeCreator.GetType(projectPath.FileName);
             string fullPath = (projectPath.IsAbsolute) ? projectPath.FullPath : System.IO.Path.Combine(solutionPath, projectPath.FullPath);
@@ -117,6 +128,7 @@ namespace ApplicationLayer.Models.SolutionPackage
             }
         }
 
+        
 
         /********************************************************************************************
          * abstract function section

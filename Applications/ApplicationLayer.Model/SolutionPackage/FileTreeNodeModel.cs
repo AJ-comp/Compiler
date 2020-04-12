@@ -8,6 +8,13 @@ namespace ApplicationLayer.Models.SolutionPackage
     public class FileTreeNodeModel : PathTreeNodeModel, IManagedable
     {
         /********************************************************************************************
+         * property section
+         ********************************************************************************************/
+        public string Data { get; set; }
+
+
+
+        /********************************************************************************************
          * override property section
          ********************************************************************************************/
         public override string DisplayName

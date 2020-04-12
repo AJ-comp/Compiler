@@ -16,6 +16,9 @@
     <BitmapImage x:Key="CFile16ImagePath" UriSource="/ApplicationLayer.Views;component/Resources/Images/DarkTheme/mcfile_16.png"/>
     <BitmapImage x:Key="CFile24ImagePath" UriSource="/ApplicationLayer.Views;component/Resources/Images/DarkTheme/mcfile_24.png"/>
     <BitmapImage x:Key="CFile48ImagePath" UriSource="/ApplicationLayer.Views;component/Resources/Images/DarkTheme/mcfile_48.png"/>
+    <BitmapImage x:Key="CHeader16ImagePath" UriSource="/ApplicationLayer.Views;component/Resources/Images/DarkTheme/header_16.png"/>
+    <BitmapImage x:Key="CHeader24ImagePath" UriSource="/ApplicationLayer.Views;component/Resources/Images/DarkTheme/header_24.png"/>
+    <BitmapImage x:Key="CHeader48ImagePath" UriSource="/ApplicationLayer.Views;component/Resources/Images/DarkTheme/header_48.png"/>
     <BitmapImage x:Key="MCProject16ImagePath" UriSource="/ApplicationLayer.Views;component/Resources/Images/DarkTheme/mcproject_16.png"/>
     <BitmapImage x:Key="MCProject24ImagePath" UriSource="/ApplicationLayer.Views;component/Resources/Images/DarkTheme/mcproject_24.png"/>
     <BitmapImage x:Key="MCProject48ImagePath" UriSource="/ApplicationLayer.Views;component/Resources/Images/DarkTheme/mcproject_48.png"/>

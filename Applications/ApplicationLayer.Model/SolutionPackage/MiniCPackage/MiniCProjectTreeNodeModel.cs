@@ -1,8 +1,6 @@
 ﻿using Parse.BackEnd.Target;
 using Parse.Extensions;
-using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.IO;
 using System.Xml.Serialization;
@@ -23,9 +21,6 @@ namespace ApplicationLayer.Models.SolutionPackage.MiniCPackage
         private FilterTreeNodeModel references = new FilterTreeNodeModel(CommonResource.References);
         private FilterTreeNodeModel outerDependenies = new FilterTreeNodeModel(CommonResource.ExternDependency);
 
-        private ObservableCollection<FilterTreeNodeModel> filters = new ObservableCollection<FilterTreeNodeModel>();
-        private ObservableCollection<FileTreeNodeModel> files = new ObservableCollection<FileTreeNodeModel>();
-
 
 
         /********************************************************************************************
@@ -43,7 +38,7 @@ namespace ApplicationLayer.Models.SolutionPackage.MiniCPackage
             {
                 StringCollection result = new StringCollection();
 
-                foreach (var item in References.Files)
+                foreach (var item in References.Children)
                 {
                     FileTreeNodeModel referenceFile = item as FileTreeNodeModel;
 
@@ -69,7 +64,7 @@ namespace ApplicationLayer.Models.SolutionPackage.MiniCPackage
             {
                 StringCollection result = new StringCollection();
 
-                foreach (var item in OuterDependencies.Files)
+                foreach (var item in OuterDependencies.Children)
                 {
                     FileTreeNodeModel outerDepFile = item as FileTreeNodeModel;
 
@@ -114,10 +109,6 @@ namespace ApplicationLayer.Models.SolutionPackage.MiniCPackage
             }
         }
 
-        [XmlIgnore] public ObservableCollection<FilterTreeNodeModel> Filters => filters;
-
-        [XmlIgnore] public ObservableCollection<FileTreeNodeModel> Files => files;
-
 
 
         /********************************************************************************************
@@ -133,14 +124,20 @@ namespace ApplicationLayer.Models.SolutionPackage.MiniCPackage
                 if (releaseConfigureRecentSaved.Equals(ReleaseConfigure) == false) return true;
 
                 List<FilterFileTreeNodeModel> dataToCompare = new List<FilterFileTreeNodeModel>();
-                foreach (var filter in this.filters)
-                    dataToCompare.AddRange(filter.ToFilterFileTreeNodeModel);
-
-                foreach(var file in this.files)
+                foreach(var child in this.Children)
                 {
-                    FilterFileTreeNodeModel curNode = new FilterFileTreeNodeModel(string.Empty, file.Path, file.FileName);
+                    if(child is FilterTreeNodeModel)
+                    {
+                        FilterTreeNodeModel filter = child as FilterTreeNodeModel;
+                        dataToCompare.AddRange(filter.ToFilterFileTreeNodeModel);
+                    }
+                    else if(child is FileTreeNodeModel)
+                    {
+                        FileTreeNodeModel file = child as FileTreeNodeModel;
+                        FilterFileTreeNodeModel curNode = new FilterFileTreeNodeModel(string.Empty, file.Path, file.FileName);
 
-                    dataToCompare.Add(curNode);
+                        dataToCompare.Add(curNode);
+                    }
                 }
 
                 if (this.FilterFiles.IsEqual(dataToCompare) == false) return true;
@@ -179,13 +176,13 @@ namespace ApplicationLayer.Models.SolutionPackage.MiniCPackage
         public void AddFilter(FilterTreeNodeModel item)
         {
             item.Parent = this;
-            this.filters.Add(item);
+            this.Children.Add(item);
         }
 
         public void AddFile(FileTreeNodeModel item)
         {
             item.Parent = this;
-            this.files.Add(item);
+            this.Children.Add(item);
         }
 
 
@@ -196,9 +193,9 @@ namespace ApplicationLayer.Models.SolutionPackage.MiniCPackage
         public override void RemoveChild(TreeNodeModel nodeToRemove)
         {
             if (nodeToRemove is FilterTreeNodeModel)
-                this.filters.Remove(nodeToRemove as FilterTreeNodeModel);
+                this.Children.Remove(nodeToRemove as FilterTreeNodeModel);
             else if (nodeToRemove is FileTreeNodeModel)
-                this.files.Remove(nodeToRemove as FileTreeNodeModel);
+                this.Children.Remove(nodeToRemove as FileTreeNodeModel);
         }
 
         public override void SyncWithLoadValue()
@@ -209,9 +206,18 @@ namespace ApplicationLayer.Models.SolutionPackage.MiniCPackage
         public override void SyncWithCurrentValue()
         {
             FilterFiles.Clear();
-            foreach (var item in Filters)
+            foreach(var child in Children)
             {
-                foreach (var ffitem in item.ToFilterFileTreeNodeModel) FilterFiles.Add(ffitem);
+                if(child is FilterTreeNodeModel)
+                {
+                    FilterTreeNodeModel filter = child as FilterTreeNodeModel;
+                    foreach (var ffitem in filter.ToFilterFileTreeNodeModel) FilterFiles.Add(ffitem);
+                }
+                else if(child is FileTreeNodeModel)
+                {
+                    FileTreeNodeModel file = child as FileTreeNodeModel;
+                    FilterFiles.Add(new FilterFileTreeNodeModel(string.Empty, file.Path, file.FileName));
+                }
             }
         }
 
@@ -239,10 +245,7 @@ namespace ApplicationLayer.Models.SolutionPackage.MiniCPackage
         {
             Directory.CreateDirectory(this.FullOnlyPath);
             string fullPath = System.IO.Path.Combine(this.FullOnlyPath, this.FileName);
-
-            Type type = typeof(ProjectTreeNodeModel);
-            if (System.IO.Path.GetExtension(this.FileName) == string.Format(".{0}proj", LanguageExtensions.MiniC))
-                type = typeof(MiniCProjectTreeNodeModel);
+            var type = FileTreeNodeCreator.GetType(this.FileName);
 
             using (StreamWriter wr = new StreamWriter(fullPath))
             {

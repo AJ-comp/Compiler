@@ -1,5 +1,5 @@
-﻿using ApplicationLayer.Common.Interfaces;
-using System;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Xml.Serialization;
@@ -22,8 +22,9 @@ namespace ApplicationLayer.Models.SolutionPackage
 			this.tag = this;
 		}
 
-		[XmlIgnore]
-		public TreeNodeModel Parent { get; internal set; }
+		[XmlIgnore] public ObservableCollection<TreeNodeModel> Children { get; } = new ObservableCollection<TreeNodeModel>();
+
+		[XmlIgnore] public TreeNodeModel Parent { get; internal set; }
 
 		/////////////////////////////////////////////////////////////////////////////////////////////////////
 		// PUBLIC PROCEDURES
@@ -35,8 +36,7 @@ namespace ApplicationLayer.Models.SolutionPackage
 		/// <value>
 		/// <c>true</c> if the node is draggable; otherwise, <c>false</c>.
 		/// </value>
-		[XmlIgnore]
-		public bool IsDraggable
+		[XmlIgnore] public bool IsDraggable
 		{
 			get => isDraggable;
 			set
@@ -54,8 +54,7 @@ namespace ApplicationLayer.Models.SolutionPackage
 		/// <value>
 		/// <c>true</c> if the node is editable; otherwise, <c>false</c>.
 		/// </value>
-		[XmlIgnore]
-		public bool IsEditable
+		[XmlIgnore] public bool IsEditable
 		{
 			get => isEditable;
 			set
@@ -73,8 +72,7 @@ namespace ApplicationLayer.Models.SolutionPackage
 		/// <value>
 		/// <c>true</c> if the node is currently being edited; otherwise, <c>false</c>.
 		/// </value>
-		[XmlIgnore]
-		public bool IsEditing
+		[XmlIgnore] public bool IsEditing
 		{
 			get => isEditing;
 			set
@@ -92,8 +90,7 @@ namespace ApplicationLayer.Models.SolutionPackage
 		/// <value>
 		/// <c>true</c> if the node is expanded; otherwise, <c>false</c>.
 		/// </value>
-		[XmlIgnore]
-		public bool IsExpanded
+		[XmlIgnore] public bool IsExpanded
 		{
 			get => isExpanded;
 			set
@@ -111,8 +108,7 @@ namespace ApplicationLayer.Models.SolutionPackage
 		/// <value>
 		/// <c>true</c> if the node is currently loading children asynchronously; otherwise, <c>false</c>.
 		/// </value>
-		[XmlIgnore]
-		public bool IsLoading
+		[XmlIgnore] public bool IsLoading
 		{
 			get => isLoading;
 			set
@@ -130,8 +126,7 @@ namespace ApplicationLayer.Models.SolutionPackage
 		/// <value>
 		/// <c>true</c> if the node is capable of being selected; otherwise, <c>false</c>.
 		/// </value>
-		[XmlIgnore]
-		public bool IsSelectable
+		[XmlIgnore] public bool IsSelectable
 		{
 			get => isSelectable;
 			set
@@ -149,8 +144,7 @@ namespace ApplicationLayer.Models.SolutionPackage
 		/// <value>
 		/// <c>true</c> if the node is selected; otherwise, <c>false</c>.
 		/// </value>
-		[XmlIgnore]
-		public bool IsSelected
+		[XmlIgnore] public bool IsSelected
 		{
 			get => isSelected;
 			set
@@ -166,15 +160,13 @@ namespace ApplicationLayer.Models.SolutionPackage
 		/// Gets or sets the name of the node.
 		/// </summary>
 		/// <value>The name of the node.</value>
-		[XmlIgnore]
-		public abstract string DisplayName { get; set; }
+		[XmlIgnore] public abstract string DisplayName { get; set; }
 
 		/// <summary>
 		/// Gets or sets custom data for the node.
 		/// </summary>
 		/// <value>The custom data for the node.</value>
-		[XmlIgnore]
-		public object Tag
+		[XmlIgnore] public object Tag
 		{
 			get => tag;
 			set
@@ -186,10 +178,23 @@ namespace ApplicationLayer.Models.SolutionPackage
 			}
 		}
 
-		[XmlIgnore]
-		public abstract string FullOnlyPath { get; }
+		[XmlIgnore] public abstract string FullOnlyPath { get; }
 
 		public event PropertyChangedEventHandler PropertyChanged;
+
+
+
+
+		/********************************************************************************************
+         * public method section
+         ********************************************************************************************/
+		public void AddChildren(TreeNodeModel item)
+		{
+			item.Parent = this;
+			this.Children.Add(item);
+		}
+
+
 
 		protected void OnPropertyChanged(string name)
 		{

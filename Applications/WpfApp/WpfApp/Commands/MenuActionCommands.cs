@@ -3,6 +3,7 @@ using ActiproSoftware.Windows.Controls.Docking.Serialization;
 using ApplicationLayer.Common;
 using ApplicationLayer.Common.Helpers;
 using ApplicationLayer.Common.Interfaces;
+using ApplicationLayer.Common.Utilities;
 using ApplicationLayer.Models.SolutionPackage;
 using ApplicationLayer.ViewModels.DialogViewModels;
 using ApplicationLayer.ViewModels.DockingItemViewModels;
@@ -53,16 +54,17 @@ namespace ApplicationLayer.WpfApp.Commands
         /// <summary>
         /// Add New Project Command
         /// </summary>
-        public static readonly RelayUICommand AddNewProject = new RelayUICommand(CommonResource.NewProject, 
-            () =>
+        public static readonly RelayUICommand<SolutionTreeNodeModel> AddNewProject = new RelayUICommand<SolutionTreeNodeModel>(CommonResource.NewProject, 
+            (solutionNode) =>
         {
             NewProjectDialog dialog = new NewProjectDialog();
             var vm = dialog.DataContext as NewProjectViewModel;
+            vm.Path = solutionNode.FullOnlyPath;
 
             dialog.Owner = RootWindow;
             dialog.ShowInTaskbar = false;
             dialog.ShowDialog();
-        }, () => 
+        }, (condition) => 
         {
             var vm = RootWindow.DataContext as MainViewModel;
             return (vm.IsDebugStatus == false);
@@ -104,70 +106,29 @@ namespace ApplicationLayer.WpfApp.Commands
             });
 
 
-        /*
-#region Command related to NewFile
-private RelayCommand<Func<Document>> _newFileCommand;
-public RelayCommand<Func<Document>> NewFileCommand
-{
-    get
-    {
-        if (_newFileCommand == null)
-            _newFileCommand = new RelayCommand<Func<Document>>(this.OnNewFile);
-
-        return _newFileCommand;
-    }
-}
-private void OnNewFile(Func<Document> func)
-{
-    if (func == null) return;
-
-    var document = func.Invoke();
-    if (document == null) return;
-
-    var newDocument = new EditorTypeViewModel();
-    this.Documents.Add(newDocument);
-    this.SelectedDocument = newDocument;
-
-    Messenger.Default.Send<AddEditorMessage>(new AddEditorMessage(newDocument));
-}
-#endregion
-*/
-
         /// <summary>
         /// New Item Command
         /// </summary>
         public static readonly RelayUICommand<TreeNodeModel> AddNewItem = new RelayUICommand<TreeNodeModel>(CommonResource.NewItem,
-            (treeNode) =>
+            (selectedNode) =>
             {
-                NewItemDialog dialog = new NewItemDialog();
-                var vm = dialog.DataContext as NewItemViewModel;
-                /*
+                if ((selectedNode is IManagableElements) == false) return;
+
+                NewFileDialog dialog = new NewFileDialog();
+                var vm = dialog.DataContext as NewFileDialogViewModel;
+                vm.Path = selectedNode.FullOnlyPath;
+
                 vm.CreateRequest += (s, e) =>
                 {
-                    var fileStruct = vm.SelectedItem.FileStruct(hirStruct);
-                    fileStruct.CreateFile();
+                    FileExtend.CreateFile(vm.Path, vm.FileName);
+                    var newFileNode = FileTreeNodeCreator.CreateFileTreeNodeModel(vm.Path, selectedNode.FullOnlyPath, vm.FileName);
 
-                    if (hirStruct is DefaultProjectHier)
-                    {
-                        var hier = hirStruct as DefaultProjectHier;
-                        hier.Items.Add(fileStruct);
-
-                        if(hier.IsChanged) Messenger.Default.Send<AddChangedFileMessage>(new AddChangedFileMessage(hier));
-                        else Messenger.Default.Send<RemoveChangedFileMessage>(new RemoveChangedFileMessage(hier));
-                    }
-                    else if (hirStruct is FolderHier)
-                    {
-                        var folderHier = hirStruct as FolderHier;
-                        var parent = folderHier.ProjectTypeParent;
-                        folderHier.Items.Add(fileStruct);
-
-                        if (parent == null) return;
-
-                        if (parent.IsChanged) Messenger.Default.Send<AddChangedFileMessage>(new AddChangedFileMessage(parent));
-                        else Messenger.Default.Send<RemoveChangedFileMessage>(new RemoveChangedFileMessage(parent));
-                    }
+                    selectedNode.AddChildren(newFileNode);
+                    var managableNode = selectedNode as IManagableElements;
+                    if (managableNode.IsChanged) Messenger.Default.Send<AddChangedFileMessage>(new AddChangedFileMessage(managableNode));
+                    else Messenger.Default.Send<RemoveChangedFileMessage>(new RemoveChangedFileMessage(managableNode));
                 };
-                */
+
 
                 dialog.Owner = RootWindow;
                 dialog.ShowInTaskbar = false;
@@ -183,7 +144,7 @@ private void OnNewFile(Func<Document> func)
         /// Load Existing Item Command
         /// </summary>
         public static readonly RelayUICommand<TreeNodeModel> AddExistItem = new RelayUICommand<TreeNodeModel>(CommonResource.ExistItem,
-            (treeNode) =>
+            (selectedNode) =>
             {
                 OpenFileDialog dialog = new OpenFileDialog
                 {
@@ -192,32 +153,34 @@ private void OnNewFile(Func<Document> func)
                 };
                 dialog.ShowDialog();
 
-                /*
-                foreach(var fileName in dialog.FileNames)
+
+                foreach (var fullPath in dialog.FileNames)
                 {
-                    // If file is not in the current path then copy it to the current path.
-                    if(hirStruct.BaseOPath != Path.GetDirectoryName(fileName))
+                    var filePath = Path.GetDirectoryName(fullPath);
+                    var fileName = Path.GetFileName(fullPath);
+                    bool isAbsolute = (PathHelper.ComparePath(selectedNode.FullOnlyPath, filePath) == false);
+                    var path = (isAbsolute) ? filePath : filePath.Substring(filePath.IndexOf(selectedNode.FullOnlyPath) + selectedNode.FullOnlyPath.Length + 1);
+
+                    // If file is not in the current path then copy it into the current path.
+                    if (isAbsolute)
                     {
-                        string destPath = Path.Combine(hirStruct.BaseOPath, Path.GetFileName(fileName));
-                        if (System.IO.File.Exists(destPath))
+                        string destPath = Path.Combine(selectedNode.FullOnlyPath, fileName);
+                        if (File.Exists(destPath))
                         {
                             DialogResult dResult = System.Windows.Forms.MessageBox.Show(CommonResource.AlreadyExistFile, string.Empty, MessageBoxButtons.YesNo);
 
-                            if (dResult == DialogResult.Yes) System.IO.File.Copy(fileName, destPath);
+                            if (dResult == DialogResult.Yes) File.Copy(fullPath, destPath);
                             else return;
                         }
-                        else System.IO.File.Copy(fileName, destPath);
+                        else File.Copy(fullPath, destPath);
                     }
 
-                    var fileStruct = new DefaultFileHier(Path.GetFileName(fileName))
-                    {
-                        Data = File.ReadAllText(fileName)
-                    };
+                    FileTreeNodeModel fileNode = FileTreeNodeCreator.CreateFileTreeNodeModel(path, fileName);
+                    fileNode.Data = File.ReadAllText(fullPath);
 
-                    if (hirStruct is DefaultProjectHier) (hirStruct as DefaultProjectHier).Items.Add(fileStruct);
-                    else if (hirStruct is FolderHier) (hirStruct as FolderHier).Items.Add(fileStruct);
+                    selectedNode.AddChildren(fileNode);
                 }
-                */
+
             }, (condition) =>
             {
                 var vm = RootWindow.DataContext as MainViewModel;

@@ -139,10 +139,11 @@
     <Compile Include="Behaviors\WindowLoadBehavior.cs" />
     <Compile Include="Commands\MenuActionCommands.cs" />
     <Compile Include="Commands\RelayUICommand.cs" />
+    <Compile Include="Commands\SolutionExplorerCommands.cs" />
     <Compile Include="Converters\DataTypeConverter.cs" />
     <Compile Include="Converters\NavigateUriToStringConverter.cs" />
     <Compile Include="Converters\LogicConverters\FileCreateLogicConverter.cs" />
-    <Compile Include="Converters\LogicConverters\SearchLogicConverter.cs" />
+    <Compile Include="Converters\LogicConverters\PathSearchLogicConverter.cs" />
     <Compile Include="Converters\LogicConverters\OpenSolutionLogicConverter.cs" />
     <Compile Include="Converters\RemoveObjectConverter.cs" />
     <Compile Include="Converters\ToHierarchicalDataConverter.cs" />

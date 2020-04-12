@@ -1,14 +1,21 @@
-﻿using System.ComponentModel;
+﻿using ApplicationLayer.Models.SolutionPackage;
+using System.ComponentModel;
 
 namespace ApplicationLayer.Models
 {
+    public enum DocumentType { MiniCHeader, MiniCSource };
+
     public class Document : INotifyPropertyChanged
     {
-        public string ImageSource { get; }
+        private string itemName;
+        private string detailExplain;
+        private string data;
+
+
+
+        public DocumentType DocumentType { get; }
         public string ItemType { get; }
         public string Explain { get; }
-
-        private string detailExplain;
         public string DetailExplain
         {
             get => detailExplain;
@@ -19,7 +26,6 @@ namespace ApplicationLayer.Models
             }
         }
 
-        private string itemName;
         public string ItemName
         {
             get => itemName;
@@ -30,7 +36,6 @@ namespace ApplicationLayer.Models
             }
         }
 
-        private string data;
         public string Data
         {
             get => data;
@@ -41,16 +46,20 @@ namespace ApplicationLayer.Models
             }
         }
 
-        public Document(string imageSource, string itemType, string explain, string detailExplain, string itemName)
+
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+
+
+        public Document(DocumentType documentType, string itemType, string explain, string detailExplain, string itemName)
         {
-            ImageSource = imageSource;
+            DocumentType = documentType;
             ItemType = itemType;
             Explain = explain;
             DetailExplain = detailExplain;
             ItemName = itemName;
         }
-
-        public event PropertyChangedEventHandler PropertyChanged;
 
         protected void OnPropertyChanged(string name)
         {

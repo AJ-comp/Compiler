@@ -1,4 +1,5 @@
-﻿using ApplicationLayer.Models.SolutionPackage.MiniCPackage;
+﻿using ApplicationLayer.Common.Helpers;
+using ApplicationLayer.Models.SolutionPackage.MiniCPackage;
 using Parse.BackEnd.Target;
 using System;
 using System.IO;
@@ -10,6 +11,22 @@ namespace ApplicationLayer.Models.SolutionPackage
         public static FileTreeNodeModel CreateFileTreeNodeModel(string path, string fileName)
         {
             FileTreeNodeModel result = null;
+
+            if (Path.GetExtension(fileName) == "." + LanguageExtensions.MiniC)
+                result = new MiniCFileTreeNodeModel(path, fileName);
+
+            return result;
+        }
+
+        public static FileTreeNodeModel CreateFileTreeNodeModel(string realFilePath, string parentPath, string fileName)
+        {
+            FileTreeNodeModel result = null;
+
+            if (PathHelper.ComparePath(realFilePath, parentPath) == false) return result;
+
+            string path = string.Empty;
+            if (realFilePath.Length != parentPath.Length)
+                path = realFilePath.Substring(realFilePath.IndexOf(parentPath) + parentPath.Length + 1);
 
             if (Path.GetExtension(fileName) == "." + LanguageExtensions.MiniC)
                 result = new MiniCFileTreeNodeModel(path, fileName);

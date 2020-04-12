@@ -12,7 +12,7 @@
         <MenuItem Header="{lex:Loc Key=Open}"/>
         <Separator/>
         <MenuItem Header="{lex:Loc Key=Add}">
-            <MenuItem Command="{x:Static commands:MenuActionCommands.AddNewProject}"/>
+            <MenuItem Command="{x:Static commands:MenuActionCommands.AddNewProject}" CommandParameter="{Binding}"/>
             <MenuItem Command="{x:Static commands:MenuActionCommands.AddExistProject}" CommandParameter="{Binding}"/>
         </MenuItem>
         <Separator/>
@@ -32,7 +32,7 @@
         </MenuItem>
         <MenuItem Header="{lex:Loc Key=_Edit}">
             <MenuItem Command="Copy"/>
-            <MenuItem Command="{x:Static commands:MenuActionCommands.DelItem}" CommandParameter="{Binding}"/>
+            <MenuItem Command="{x:Static commands:MenuActionCommands.Remove}" CommandParameter="{Binding}"/>
             <MenuItem Command="{x:Static commands:MenuActionCommands.Rename}" CommandParameter="{Binding}"/>
         </MenuItem>
         <Separator/>

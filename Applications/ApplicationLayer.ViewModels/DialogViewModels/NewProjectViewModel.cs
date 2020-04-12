@@ -1,31 +1,42 @@
-﻿using ApplicationLayer.ViewModels.Messages;
+﻿using ApplicationLayer.ViewModels.Interfaces;
+using ApplicationLayer.ViewModels.Messages;
 using ApplicationLayer.ViewModels.SubViewModels;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using Parse.BackEnd.Target;
 using System;
-using System.IO;
 
 namespace ApplicationLayer.ViewModels.DialogViewModels
 {
-    public class NewProjectViewModel : DialogViewModel
+    public class NewProjectViewModel : DialogViewModel, IPathSearchable
     {
+        /********************************************************************************************
+         * private field section
+         ********************************************************************************************/
+        private string projectPath = string.Empty;
+        private string projectName = string.Empty;
+        private RelayCommand<Action<string>> searchCommand;
+        private RelayCommand<Action> _createCommand;
+
+
+
+        /********************************************************************************************
+         * property section
+         ********************************************************************************************/
         public ProjectSelectionViewModel ProjectSelection { get; } = new ProjectSelectionViewModel();
 
-        private string projectPath = string.Empty;
-        public string ProjectPath
+        public string Path
         {
             get => this.projectPath;
             set
             {
                 this.projectPath = value;
-                this.RaisePropertyChanged(nameof(ProjectPath));
+                this.RaisePropertyChanged(nameof(Path));
 
                 CreateCommand.RaiseCanExecuteChanged();
             }
         }
 
-        private string projectName = string.Empty;
         public string ProjectName
         {
             get => this.projectName;
@@ -40,22 +51,21 @@ namespace ApplicationLayer.ViewModels.DialogViewModels
             }
         }
 
-        private RelayCommand<Action> searchCommand;
-        public RelayCommand<Action> SearchCommand
+
+
+        /********************************************************************************************
+         * command property section
+         ********************************************************************************************/
+        public RelayCommand<Action<string>> SearchCommand
         {
             get
             {
-                if (this.searchCommand == null) this.searchCommand = new RelayCommand<Action>(this.OnSearch);
+                if (this.searchCommand == null) this.searchCommand = new RelayCommand<Action<string>>(this.OnSearch);
 
                 return this.searchCommand;
             }
         }
-        private void OnSearch(Action action)
-        {
-            action?.Invoke();
-        }
 
-        private RelayCommand<Action> _createCommand;
         public RelayCommand<Action> CreateCommand
         {
             get
@@ -66,10 +76,31 @@ namespace ApplicationLayer.ViewModels.DialogViewModels
                 return this._createCommand;
             }
         }
+
+
+
+        /********************************************************************************************
+         * constructor section
+         ********************************************************************************************/
+        public NewProjectViewModel()
+        {
+            this.ProjectSelection.PropertyChanged += ProjectSelection_PropertyChanged;
+        }
+
+
+
+        /********************************************************************************************
+         * command action method section
+         ********************************************************************************************/
+        private void OnSearch(Action<string> action)
+        {
+            action?.Invoke(this.projectPath);
+        }
+
         private void OnCreate(Action action)
         {
             Target target = Activator.CreateInstance(this.ProjectSelection.SelectedTerminalItem) as Target;
-            Messenger.Default.Send(new AddProjectMessage(Path.Combine(this.projectPath, this.projectName), this.projectName, this.ProjectSelection.SelectedProject.Grammar, target));
+            Messenger.Default.Send(new AddProjectMessage(System.IO.Path.Combine(this.projectPath, this.projectName), this.projectName, this.ProjectSelection.SelectedProject.Grammar, target));
 
             action?.Invoke();
         }
@@ -84,11 +115,11 @@ namespace ApplicationLayer.ViewModels.DialogViewModels
             return true;
         }
 
-        public NewProjectViewModel()
-        {
-            this.ProjectSelection.PropertyChanged += ProjectSelection_PropertyChanged;
-        }
 
+
+        /********************************************************************************************
+         * event handler section
+         ********************************************************************************************/
         private void ProjectSelection_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             if(e.PropertyName == "SelectedTerminalItem") CreateCommand.RaiseCanExecuteChanged();

@@ -256,8 +256,8 @@
   <data name="MiniCFile" xml:space="preserve">
     <value>Mini C File</value>
   </data>
-  <data name="MiniCFileExplain" xml:space="preserve">
-    <value>It generates the Mini C file</value>
+  <data name="MiniCHeaderFileExplain" xml:space="preserve">
+    <value>It generates the Mini C header file</value>
   </data>
   <data name="ParsingHistory" xml:space="preserve">
     <value>Parsing History</value>
@@ -348,5 +348,8 @@
   </data>
   <data name="AllFiles" xml:space="preserve">
     <value>All files</value>
+  </data>
+  <data name="MiniCSourceFileExplain" xml:space="preserve">
+    <value>It generates the Mini C source file</value>
   </data>
 </root>
