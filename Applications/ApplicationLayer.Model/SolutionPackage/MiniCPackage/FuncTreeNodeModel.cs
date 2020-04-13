@@ -1,4 +1,5 @@
-﻿using Parse.FrontEnd.Grammars.MiniC.SymbolTableFormat;
+﻿using ApplicationLayer.Common;
+using Parse.FrontEnd.Grammars.MiniC.SymbolTableFormat;
 using System;
 using System.Collections.Generic;
 
@@ -32,6 +33,8 @@ namespace ApplicationLayer.Models.SolutionPackage.MiniCPackage
         }
 
         public override string FullOnlyPath => string.Empty;
+
+        public override event EventHandler<FileChangedEventArgs> Changed;
 
         public override void RemoveChild(TreeNodeModel nodeToRemove)
         {

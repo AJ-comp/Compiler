@@ -65,7 +65,7 @@
                             <Setter TargetName="edit" Property="Style" Value="{StaticResource SolutionTreeNodeStyle}"/>
                         </DataTrigger>
 
-                        <!-- setting Error Project icon -->
+                        <!-- setting an error project node -->
                         <DataTrigger Binding="{Binding Tag, 
                                             Converter={converter:DataTypeConverter}}" 
                                             Value="{x:Type common:ErrorProjectTreeNodeModel}">
@@ -73,35 +73,50 @@
                             <Setter TargetName="stackPanel" Property="ContextMenu" Value="{StaticResource ErrorMenus}"/>
                         </DataTrigger>
 
-                        <!-- setting MiniC Project icon -->
+                        <!-- setting MiniC Project node -->
                         <DataTrigger Binding="{Binding Tag, 
                                             Converter={converter:DataTypeConverter}}" 
                                             Value="{x:Type mcModels:MiniCProjectTreeNodeModel}">
                             <Setter TargetName="image" Property="Source" Value="{DynamicResource MCProject16ImagePath}"/>
-                            <Setter TargetName="stackPanel" Property="ContextMenu" Value="{StaticResource DefaultProjectMenus}"/>
+                            <Setter TargetName="stackPanel" Property="ContextMenu" Value="{StaticResource MiniCProjectMenus}"/>
                         </DataTrigger>
 
-                         <!-- setting MiniC file icon -->
-                        <DataTrigger Binding="{Binding Tag, 
-                                            Converter={converter:DataTypeConverter}}" 
-                                            Value="{x:Type mcModels:MiniCFileTreeNodeModel}">
+                        <!-- setting file node -->
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding Tag, Converter={converter:DataTypeConverter}}" 
+                                                Value="{x:Type common:FileTreeNodeModel}"/>
+                                <Condition Binding="{Binding IsExistFile}" Value="false"/>
+                            </MultiDataTrigger.Conditions>
+                            <Setter TargetName="image" Property="Source" Value="{DynamicResource UnknownFile16Path}"/>
+                            <Setter TargetName="stackPanel" Property="ContextMenu" Value="{StaticResource ErrorMenus}"/>
+                        </MultiDataTrigger>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding Tag, Converter={converter:DataTypeConverter}}" 
+                                                Value="{x:Type common:FileTreeNodeModel}"/>
+                                <Condition Binding="{Binding IsExistFile}" Value="true"/>
+                                <Condition Binding="{Binding FileType}" Value="{x:Static common:LanguageExtensions.MiniC}"/>
+                            </MultiDataTrigger.Conditions>
                             <Setter TargetName="image" Property="Source" Value="{DynamicResource CFile16ImagePath}"/>
-                            <Setter TargetName="stackPanel" Property="ContextMenu" Value="{StaticResource FileMenuItems}"/>
-                        </DataTrigger>
+                            <Setter TargetName="stackPanel" Property="ContextMenu" Value="{StaticResource MiniCMenus}"/>
+                        </MultiDataTrigger>
 
-                         <!-- setting a filter icon -->
+                        <!-- setting a filter node -->
                         <DataTrigger Binding="{Binding Tag, 
                                             Converter={converter:DataTypeConverter}}" 
                                             Value="{x:Type common:FilterTreeNodeModel}">
                             <Setter TargetName="stackPanel" Property="ContextMenu" Value="{StaticResource FolderMenuItems}"/>
                         </DataTrigger>
 
+                        <!-- setting a variable node -->
                         <DataTrigger Binding="{Binding Tag,
                                             Converter={converter:DataTypeConverter}}"
                                             Value="{x:Type mcModels:VarTreeNodeModel}">
                             <Setter TargetName="image" Property="Source" Value="{DynamicResource Var16ImagePath}"/>
                         </DataTrigger>
 
+                        <!-- setting a function node -->
                         <DataTrigger Binding="{Binding Tag,
                                             Converter={converter:DataTypeConverter}}"
                                             Value="{x:Type mcModels:FuncTreeNodeModel}">

@@ -39,7 +39,7 @@ namespace ApplicationLayer.Models.SolutionPackage
                     }
                     else if (FileName.Length > 0)
                     {
-                        var treeToAdd = FileTreeNodeCreator.CreateFileTreeNodeModel(Path, FileName);
+                        var treeToAdd = new FileTreeNodeModel(Path, FileName);
 
                         curTree.AddFile(treeToAdd);
                         break;
@@ -59,7 +59,7 @@ namespace ApplicationLayer.Models.SolutionPackage
                 if (FilterPath.Length > 0) return null;
                 if (FileName.Length == 0) return null;
 
-                return FileTreeNodeCreator.CreateFileTreeNodeModel(Path, FileName);
+                return new FileTreeNodeModel(Path, FileName);
             }
         }
 

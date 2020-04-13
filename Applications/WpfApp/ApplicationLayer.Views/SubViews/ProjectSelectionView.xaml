@@ -128,10 +128,10 @@
 
                         <DataTemplate.Triggers>
                             <DataTrigger Binding="{Binding ProjectType}" Value="Project">
-                                <Setter TargetName="image" Property="Source" Value="{DynamicResource Project24ImagePath}"/>
+                                <Setter TargetName="image" Property="Source" Value="{DynamicResource MCProject24ImagePath}"/>
                             </DataTrigger>
                             <DataTrigger Binding="{Binding ProjectType}" Value="LibraryProject">
-                                <Setter TargetName="image" Property="Source" Value="{DynamicResource LibProject24ImagePath}"/>
+                                <Setter TargetName="image" Property="Source" Value="{DynamicResource MCLibProject24ImagePath}"/>
                             </DataTrigger>
                         </DataTemplate.Triggers>
                     </DataTemplate>

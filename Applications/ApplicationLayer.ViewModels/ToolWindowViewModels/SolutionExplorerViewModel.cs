@@ -1,5 +1,6 @@
 ﻿using ApplicationLayer.Common;
 using ApplicationLayer.Common.Helpers;
+using ApplicationLayer.Common.Interfaces;
 using ApplicationLayer.Models.SolutionPackage;
 using ApplicationLayer.Models.SolutionPackage.MiniCPackage;
 using ApplicationLayer.ViewModels.DocumentTypeViewModels;
@@ -148,30 +149,12 @@ namespace ApplicationLayer.ViewModels.ToolWindowViewModels
         public void Save()
         {
             if (Solution == null) return;
-
-            Directory.CreateDirectory(Solution.Path);
-            using (StreamWriter wr = new StreamWriter(Solution.PathWithFileName))
-            {
-                XmlSerializer xs = new XmlSerializer(typeof(SolutionTreeNodeModel));
-                xs.Serialize(wr, Solution);
-            }
+            this.Solution.Save();
 
             foreach (var item in Solution.Children)
             {
                 var project = item as ProjectTreeNodeModel;
-                string projPath = Path.Combine(Solution.Path, project.Path);
-                Directory.CreateDirectory(projPath);
-                string fullPath = Path.Combine(projPath, project.FileName);
-
-                Type type = typeof(ProjectTreeNodeModel);
-                if (Path.GetExtension(project.FileName) == string.Format(".{0}proj", LanguageExtensions.MiniC))
-                    type = typeof(MiniCProjectTreeNodeModel);
-
-                using (StreamWriter wr = new StreamWriter(fullPath))
-                {
-                    XmlSerializer xs = new XmlSerializer(type);
-                    xs.Serialize(wr, project);
-                }
+                project.Save();
             }
         }
 
@@ -198,7 +181,16 @@ namespace ApplicationLayer.ViewModels.ToolWindowViewModels
 
         private void ConnectEventHandler()
         {
-            this.Solution.ChildrenChanged += Solution_ChildrenChanged;
+            this.Solution.ChildrenChanged += ChildrenChanged;
+
+            foreach(var child in this.solution.Children)
+            {
+                if(child is ProjectTreeNodeModel)
+                {
+                    var projNode = child as ProjectTreeNodeModel;
+                    projNode.ChildrenChanged += ChildrenChanged;
+                }
+            }
         }
 
 
@@ -212,14 +204,12 @@ namespace ApplicationLayer.ViewModels.ToolWindowViewModels
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void Solution_ChildrenChanged(object sender, FileChangedEventArgs e)
+        private void ChildrenChanged(object sender, FileChangedEventArgs e)
         {
-            if (this.solution.IsChanged) Messenger.Default.Send<AddChangedFileMessage>(new AddChangedFileMessage(this.solution));
-            else Messenger.Default.Send<RemoveChangedFileMessage>(new RemoveChangedFileMessage(this.solution));
-        }
+            IManagableElements manager = sender as IManagableElements;
 
-        private void Project_ChildrenChanged(object sender, EventArgs e)
-        {
+            if (manager.IsChanged) Messenger.Default.Send<AddChangedFileMessage>(new AddChangedFileMessage(manager));
+            else Messenger.Default.Send<RemoveChangedFileMessage>(new RemoveChangedFileMessage(manager));
         }
 
         /// <summary>
@@ -230,7 +220,7 @@ namespace ApplicationLayer.ViewModels.ToolWindowViewModels
         {
             if (message is null) return;
 
-            this.Solution = SolutionTreeNodeModel.Create(message.SolutionPath, message.SoltionName, message.Language, message.MachineTarget);
+            this.Solution = SolutionTreeNodeModel.Create(message.SolutionPath, message.SolutionName, message.Language, message.MachineTarget);
             this.Solution.IsExpanded = true;
 
             this.Save();
@@ -354,7 +344,7 @@ namespace ApplicationLayer.ViewModels.ToolWindowViewModels
             string projectPath = (isAbsolutePath) ? message.ProjectPath : message.ProjectPath.Substring(matchedPos);
             if (projectPath[0] == '\\') projectPath = projectPath.Remove(0, 1);
 
-            ProjectTreeNodeModel newProject = projectGenerator.CreateDefaultProject(projectPath, isAbsolutePath, message.ProjectName, message.MachineTarget);
+            ProjectTreeNodeModel newProject = projectGenerator.CreateDefaultProject(solutionPath, projectPath, message.ProjectName, message.MachineTarget);
 //            newProject.Save();
 
             this.Solution.AddProject(newProject);

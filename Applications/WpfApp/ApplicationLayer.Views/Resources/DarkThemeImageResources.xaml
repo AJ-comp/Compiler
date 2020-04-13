@@ -6,6 +6,7 @@
     <BitmapImage x:Key="logo24ImagePath" UriSource="/ApplicationLayer.Views;component/Resources/Images/DarkTheme/logo_24.png"/>
 
     <BitmapImage x:Key="ErrorImagePath" UriSource="/ApplicationLayer.Views;component/Resources/Images/Basic/error.png"/>
+    <BitmapImage x:Key="UnknownFile16Path" UriSource="/ApplicationLayer.Views;component/Resources/Images/Basic/unknown_16.png"/>
     <BitmapImage x:Key="WarningImagePath" UriSource="/ApplicationLayer.Views;component/Resources/Images/Basic/warning.png"/>
     
     <!-- Images related to MainMenu -->

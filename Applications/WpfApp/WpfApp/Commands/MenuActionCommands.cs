@@ -121,7 +121,7 @@ namespace ApplicationLayer.WpfApp.Commands
                 vm.CreateRequest += (s, e) =>
                 {
                     FileExtend.CreateFile(vm.Path, vm.FileName);
-                    var newFileNode = FileTreeNodeCreator.CreateFileTreeNodeModel(vm.Path, selectedNode.FullOnlyPath, vm.FileName);
+                    var newFileNode = TreeNodeCreator.CreateFileTreeNodeModel(vm.Path, selectedNode.FullOnlyPath, vm.FileName);
 
                     selectedNode.AddChildren(newFileNode);
                     var managableNode = selectedNode as IManagableElements;
@@ -159,7 +159,6 @@ namespace ApplicationLayer.WpfApp.Commands
                     var filePath = Path.GetDirectoryName(fullPath);
                     var fileName = Path.GetFileName(fullPath);
                     bool isAbsolute = (PathHelper.ComparePath(selectedNode.FullOnlyPath, filePath) == false);
-                    var path = (isAbsolute) ? filePath : filePath.Substring(filePath.IndexOf(selectedNode.FullOnlyPath) + selectedNode.FullOnlyPath.Length + 1);
 
                     // If file is not in the current path then copy it into the current path.
                     if (isAbsolute)
@@ -175,10 +174,12 @@ namespace ApplicationLayer.WpfApp.Commands
                         else File.Copy(fullPath, destPath);
                     }
 
-                    FileTreeNodeModel fileNode = FileTreeNodeCreator.CreateFileTreeNodeModel(path, fileName);
+                    var fileNode = TreeNodeCreator.CreateFileTreeNodeModel(filePath, selectedNode.FullOnlyPath, fileName);
                     fileNode.Data = File.ReadAllText(fullPath);
 
                     selectedNode.AddChildren(fileNode);
+
+                    ChangedFileMessage(selectedNode);
                 }
 
             }, (condition) =>
@@ -188,31 +189,25 @@ namespace ApplicationLayer.WpfApp.Commands
             });
 
 
+        private static void ChangedFileMessage(TreeNodeModel node)
+        {
+            var manager = TreeNodeHelper.GetNearestManager(node);
+            if (manager == null) return;
+
+            if (manager.IsChanged) Messenger.Default.Send<AddChangedFileMessage>(new AddChangedFileMessage(manager));
+            else Messenger.Default.Send<RemoveChangedFileMessage>(new RemoveChangedFileMessage(manager));
+        }
+
+
         private static void RemoveItem(TreeNodeModel target)
         {
             TreeNodeModel parent = target.Parent;
             if (parent == null) return;
 
             // disconnect a connection of the tree node.
-            IManagableElements manager = null;
             parent.RemoveChild(target);
-            if (parent is SolutionTreeNodeModel) manager = parent as IManagableElements;
-            else if (parent is ProjectTreeNodeModel) manager = parent as IManagableElements;
-            else if (parent is FolderTreeNodeModel)
-            {
-                var folderNode = parent as FolderTreeNodeModel;
-                manager = folderNode.ManagerTree;
-            }
-            else if (parent is FilterTreeNodeModel)
-            {
-                var filterNode = parent as FilterTreeNodeModel;
-                manager = filterNode.ManagerTree;
-            }
 
-            if (manager == null) return;
-
-            if (manager.IsChanged) Messenger.Default.Send<AddChangedFileMessage>(new AddChangedFileMessage(manager));
-            else Messenger.Default.Send<RemoveChangedFileMessage>(new RemoveChangedFileMessage(manager));
+            ChangedFileMessage(parent);
         }
 
         /// <summary>
@@ -267,7 +262,7 @@ namespace ApplicationLayer.WpfApp.Commands
                         else if (selectedNode is FileTreeNodeModel)
                         {
                             var nodeToDel = selectedNode as FileTreeNodeModel;
-//                            File.Delete(Path.Combine(nodeToDel.FullOnlyPath, nodeToDel.FileName));
+                            File.Delete(Path.Combine(nodeToDel.FullOnlyPath, nodeToDel.FileName));
                         }
                     }
                     catch { }
@@ -298,7 +293,24 @@ namespace ApplicationLayer.WpfApp.Commands
 
 
         /// <summary>
-        /// New Folder Command
+        /// Add a new filter command
+        /// </summary>
+        public static readonly RelayUICommand<TreeNodeModel> AddNewFilter = new RelayUICommand<TreeNodeModel>(CommonResource.NewFilter,
+            (selectedNode) =>
+            {
+                var filterName = TreeNodeCreator.CreateFilterTreeNodeModel(selectedNode, "Filter");
+                selectedNode.Children.Add(filterName);
+
+                ChangedFileMessage(selectedNode);
+            }, (condition) =>
+            {
+                var vm = RootWindow.DataContext as MainViewModel;
+                return (vm.IsDebugStatus == false);
+            });
+
+
+        /// <summary>
+        /// Add a new folder command
         /// </summary>
         public static readonly RelayUICommand<TreeNodeModel> AddNewFolder = new RelayUICommand<TreeNodeModel>(CommonResource.NewFolder,
             (selHier) =>

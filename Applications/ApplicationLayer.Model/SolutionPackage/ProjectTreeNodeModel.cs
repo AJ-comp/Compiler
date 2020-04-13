@@ -1,7 +1,6 @@
 ﻿using ApplicationLayer.Common;
 using ApplicationLayer.Common.Interfaces;
 using System;
-using System.Collections.ObjectModel;
 using System.IO;
 using System.Xml.Serialization;
 
@@ -12,16 +11,9 @@ namespace ApplicationLayer.Models.SolutionPackage
         /********************************************************************************************
          * override property section
          ********************************************************************************************/
-        public override string FullOnlyPath
-        {
-            get
-            {
-                if (Parent == null) return Path;
-                if (Parent.FullOnlyPath == null) return Path;
-
-                return System.IO.Path.Combine(Parent?.FullOnlyPath, Path);
-            }
-        }
+        public override string FullOnlyPath => (Parent == null) ? Path : System.IO.Path.Combine(Parent?.FullOnlyPath, Path);
+        public override string FullPath => System.IO.Path.Combine(this.FullOnlyPath, this.FileName);
+        public override bool IsExistFile => File.Exists(FullPath);
 
         public override string DisplayName
         {
@@ -77,9 +69,9 @@ namespace ApplicationLayer.Models.SolutionPackage
 
 
         /********************************************************************************************
-         * public Event Handler section
+         * event section
          ********************************************************************************************/
-        public event EventHandler<FileChangedEventArgs> Changed;
+        public override event EventHandler<FileChangedEventArgs> Changed;
         public event EventHandler<FileChangedEventArgs> ChildrenChanged;
 
 
@@ -90,11 +82,13 @@ namespace ApplicationLayer.Models.SolutionPackage
         public ProjectTreeNodeModel() : base(string.Empty, string.Empty)
         {
             this.IsEditable = true;
+            this.Children.CollectionChanged += Children_CollectionChanged;
         }
 
         public ProjectTreeNodeModel(string path, string projName) : base(path, projName)
         {
             this.IsEditable = true;
+            this.Children.CollectionChanged += Children_CollectionChanged;
         }
 
 
@@ -104,7 +98,7 @@ namespace ApplicationLayer.Models.SolutionPackage
          ********************************************************************************************/
         public static ProjectTreeNodeModel CreateProjectTreeNodeModel(string solutionPath, PathInfo projectPath)
         {
-            Type type = FileTreeNodeCreator.GetType(projectPath.FileName);
+            Type type = TreeNodeCreator.GetType(projectPath.FileName);
             string fullPath = (projectPath.IsAbsolute) ? projectPath.FullPath : System.IO.Path.Combine(solutionPath, projectPath.FullPath);
 
             try
@@ -137,5 +131,26 @@ namespace ApplicationLayer.Models.SolutionPackage
         public abstract void Save();
         public abstract void SyncWithLoadValue();
         public abstract void SyncWithCurrentValue();
+
+
+
+        /********************************************************************************************
+         * event handler section
+         ********************************************************************************************/
+        private void Children_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            if (e.NewItems == null) return;
+
+            foreach (var item in e.NewItems)
+            {
+                var node = item as TreeNodeModel;
+                node.Changed += Node_Changed; ;
+            }
+        }
+
+        private void Node_Changed(object sender, FileChangedEventArgs e)
+        {
+            ChildrenChanged?.Invoke(this, e);
+        }
     }
 }

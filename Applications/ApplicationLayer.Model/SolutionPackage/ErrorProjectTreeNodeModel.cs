@@ -8,6 +8,8 @@ namespace ApplicationLayer.Models.SolutionPackage
 
         public override bool IsChanged => false;
 
+        public override string FullPath => System.IO.Path.Combine(this.FullOnlyPath, this.FileName);
+
         public ErrorProjectTreeNodeModel(string path, string projName) : base(path, projName)
         {
             this.IsEditable = false;

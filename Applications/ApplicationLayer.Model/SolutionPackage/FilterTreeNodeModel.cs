@@ -85,7 +85,13 @@ namespace ApplicationLayer.Models.SolutionPackage
         public override string DisplayName
         {
             get => FilterName;
-            set => FilterName = value;
+            set
+            {
+                var prevFilterName = FilterName;
+                FilterName = value;
+
+                this.Changed?.Invoke(this, new FileChangedEventArgs(FileChangedKind.Rename, prevFilterName, FilterName));
+            }
         }
 
         public override string FullOnlyPath => Parent.FullOnlyPath;
@@ -117,7 +123,7 @@ namespace ApplicationLayer.Models.SolutionPackage
         /********************************************************************************************
          * event handler section
          ********************************************************************************************/
-        public event EventHandler<FileChangedEventArgs> Changed;
+        public override event EventHandler<FileChangedEventArgs> Changed;
 
 
 

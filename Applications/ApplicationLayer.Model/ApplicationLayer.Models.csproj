@@ -78,7 +78,7 @@
     <Compile Include="ProjectData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SolutionPackage\ErrorProjectTreeNodeModel.cs" />
-    <Compile Include="SolutionPackage\FileTreeNodeCreator.cs" />
+    <Compile Include="SolutionPackage\TreeNodeCreator.cs" />
     <Compile Include="SolutionPackage\FileTreeNodeModel.cs" />
     <Compile Include="SolutionPackage\FilterFileTreeNodeModel.cs" />
     <Compile Include="SolutionPackage\FilterTreeNodeModel.cs" />
@@ -86,7 +86,6 @@
     <Compile Include="SolutionPackage\FolderTreeNodeModel.cs" />
     <Compile Include="GrammarPackages\MiniCPackage\MiniCGenerator.cs" />
     <Compile Include="SolutionPackage\MiniCPackage\FuncTreeNodeModel.cs" />
-    <Compile Include="SolutionPackage\MiniCPackage\MiniCFileTreeNodeModel.cs" />
     <Compile Include="SolutionPackage\MiniCPackage\MiniCProjectTreeNodeModel.cs" />
     <Compile Include="SolutionPackage\MiniCPackage\VarTreeNodeModel.cs" />
     <Compile Include="SolutionPackage\PathTreeNodeModel.cs" />
@@ -94,6 +93,7 @@
     <Compile Include="SolutionPackage\ProjectProperty.cs" />
     <Compile Include="SolutionPackage\ProjectTreeNodeModel.cs" />
     <Compile Include="SolutionPackage\SolutionTreeNodeModel.cs" />
+    <Compile Include="SolutionPackage\TreeNodeHelper.cs" />
     <Compile Include="SolutionPackage\TreeNodeModel.cs" />
     <Compile Include="Theme.cs" />
     <Compile Include="ToolWindowStatus\ToolItemDockSide.cs" />

@@ -1,4 +1,5 @@
-﻿using Parse.FrontEnd.Grammars.MiniC.SymbolTableFormat;
+﻿using ApplicationLayer.Common;
+using Parse.FrontEnd.Grammars.MiniC.SymbolTableFormat;
 using System;
 
 namespace ApplicationLayer.Models.SolutionPackage.MiniCPackage
@@ -16,6 +17,8 @@ namespace ApplicationLayer.Models.SolutionPackage.MiniCPackage
         }
 
         public override string FullOnlyPath => string.Empty;
+
+        public override event EventHandler<FileChangedEventArgs> Changed;
 
         public VarTreeNodeModel(DataType dataType, string varName)
         {

@@ -102,7 +102,7 @@ namespace ApplicationLayer.Views
 
 		private IEnumerable GetFileTypeChildren(TreeListBox ownerControl, object item, bool bSort = true)
 		{
-			var model = item as MiniCFileTreeNodeModel;
+			var model = item as FileTreeNodeModel;
 			List<TreeNodeModel> result = new List<TreeNodeModel>();
 
 			List<TreeNodeModel> vars = new List<TreeNodeModel>();
@@ -145,7 +145,7 @@ namespace ApplicationLayer.Views
 			if (item is SolutionTreeNodeModel) result = GetSolutionTypeChildren(ownerControl, item);
 			else if (item is MiniCProjectTreeNodeModel) result = GetProjectTypeChildren(ownerControl, item);
 			else if (item is FilterTreeNodeModel) result = GetFilterTypeChildren(ownerControl, item);
-			else if (item is MiniCFileTreeNodeModel) result = GetFileTypeChildren(ownerControl, item);
+			else if (item is FileTreeNodeModel) result = GetFileTypeChildren(ownerControl, item);
 
 			return result;
 		}

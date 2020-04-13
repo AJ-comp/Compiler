@@ -86,13 +86,15 @@ namespace ApplicationLayer.Models.SolutionPackage
         }
 
         public override string FullOnlyPath => Path;
+        public override string FullPath => System.IO.Path.Combine(this.FullOnlyPath, this.FileName);
+        public override bool IsExistFile => File.Exists(FullPath);
 
 
 
         /********************************************************************************************
          * public event handler section
          ********************************************************************************************/
-        public event EventHandler<FileChangedEventArgs> Changed;
+        public override event EventHandler<FileChangedEventArgs> Changed;
         public event EventHandler<FileChangedEventArgs> ChildrenChanged;
 
 
@@ -137,7 +139,7 @@ namespace ApplicationLayer.Models.SolutionPackage
 
         private void Project_Changed(object sender, FileChangedEventArgs e)
         {
-            this.ChildrenChanged?.Invoke(sender, e);
+            this.ChildrenChanged?.Invoke(this, e);
         }
 
 
@@ -198,7 +200,7 @@ namespace ApplicationLayer.Models.SolutionPackage
             ProjectGenerator projectGenerator = ProjectGenerator.CreateProjectGenerator(grammar);
             if (projectGenerator == null) return result;
 
-            var newProject = projectGenerator.CreateDefaultProject(solutionName, false, solutionName, target);
+            var newProject = projectGenerator.CreateDefaultProject(solutionPath, result.FileNameWithoutExtension, result.FileNameWithoutExtension, target);
             result.AddProject(newProject);
             result.SyncWithCurrentValue();
 

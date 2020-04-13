@@ -352,4 +352,7 @@
   <data name="MiniCSourceFileExplain" xml:space="preserve">
     <value>It generates the Mini C source file</value>
   </data>
+  <data name="NewFilter" xml:space="preserve">
+    <value>New Filter</value>
+  </data>
 </root>

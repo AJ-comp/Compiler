@@ -9,8 +9,8 @@ namespace ApplicationLayer.Models.SolutionPackage
     {        
         public abstract string Extension { get; }
 
-        public abstract ProjectTreeNodeModel CreateEmptyProject(string projectPath, bool isAbsolutePath, string projectName, Target target);
-        public abstract ProjectTreeNodeModel CreateDefaultProject(string projectPath, bool isAbsolutePath, string projectName, Target target);
+        public abstract ProjectTreeNodeModel CreateEmptyProject(string solutionPath, string projectPath, string projectName, Target target);
+        public abstract ProjectTreeNodeModel CreateDefaultProject(string solutionPath, string projectPath, string projectName, Target target);
 
         public static ProjectGenerator CreateProjectGenerator(Grammar grammar)
         {

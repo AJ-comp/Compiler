@@ -10,6 +10,9 @@ namespace ApplicationLayer.Models.SolutionPackage
 
         [XmlIgnore] public string FileName { get; set; }
 
+        [XmlIgnore]
+        public string FileNameWithoutExtension => System.IO.Path.GetFileNameWithoutExtension(FileName);
+
         [XmlIgnore] public bool IsAbsolute
         {
             get
@@ -21,6 +24,9 @@ namespace ApplicationLayer.Models.SolutionPackage
         }
 
         [XmlIgnore] public string PathWithFileName => System.IO.Path.Combine(Path, FileName);
+
+        [XmlIgnore] public abstract string FullPath { get; }
+        [XmlIgnore] public abstract bool IsExistFile { get; }
 
         public PathTreeNodeModel(string path, string name)
         {

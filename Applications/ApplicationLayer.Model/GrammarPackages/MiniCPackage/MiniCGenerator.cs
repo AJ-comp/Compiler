@@ -1,7 +1,8 @@
-﻿using ApplicationLayer.Models.SolutionPackage;
+﻿using ApplicationLayer.Common.Utilities;
+using ApplicationLayer.Models.SolutionPackage;
 using ApplicationLayer.Models.SolutionPackage.MiniCPackage;
 using Parse.BackEnd.Target;
-
+using System.IO;
 using CommonResource = ApplicationLayer.Define.Properties.Resources;
 
 namespace ApplicationLayer.Models.GrammarPackages.MiniCPackage
@@ -10,7 +11,7 @@ namespace ApplicationLayer.Models.GrammarPackages.MiniCPackage
     {
         public override string Extension { get; } = LanguageExtensions.MiniC;
 
-        public override ProjectTreeNodeModel CreateEmptyProject(string projectPath, bool isAbsolutePath, string projectName, Target target)
+        public override ProjectTreeNodeModel CreateEmptyProject(string solutionPath, string projectPath, string projectName, Target target)
         {
             MiniCProjectTreeNodeModel result = new MiniCProjectTreeNodeModel(projectPath, projectName, target);
 
@@ -28,7 +29,7 @@ namespace ApplicationLayer.Models.GrammarPackages.MiniCPackage
             return result;
         }
 
-        public override ProjectTreeNodeModel CreateDefaultProject(string projectPath, bool isAbsolutePath, string projectName, Target target)
+        public override ProjectTreeNodeModel CreateDefaultProject(string solutionPath, string projectPath, string projectName, Target target)
         {
             MiniCProjectTreeNodeModel result = new MiniCProjectTreeNodeModel(projectPath, projectName, target);
 
@@ -40,8 +41,13 @@ namespace ApplicationLayer.Models.GrammarPackages.MiniCPackage
             var headerFilter = new FilterTreeNodeModel(CommonResource.HeaderFiles);
             result.AddFilter(headerFilter);
 
+            string path = System.IO.Path.Combine(solutionPath, projectPath);
+            string fileName = string.Format("main.{0}", this.Extension);
+            Directory.CreateDirectory(path);
+            fileName = FileExtend.CreateFile(path, fileName);
+
             var sourceFilter = new FilterTreeNodeModel(CommonResource.SourceFiles);
-            var sourceFile = new MiniCFileTreeNodeModel(projectPath, string.Format("main.{0}", this.Extension));
+            var sourceFile = new FileTreeNodeModel(projectPath, fileName);
             sourceFilter.AddFile(sourceFile);
             result.AddFilter(sourceFilter);
 

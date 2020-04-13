@@ -245,7 +245,7 @@ namespace ApplicationLayer.Models.SolutionPackage.MiniCPackage
         {
             Directory.CreateDirectory(this.FullOnlyPath);
             string fullPath = System.IO.Path.Combine(this.FullOnlyPath, this.FileName);
-            var type = FileTreeNodeCreator.GetType(this.FileName);
+            var type = TreeNodeCreator.GetType(this.FileName);
 
             using (StreamWriter wr = new StreamWriter(fullPath))
             {

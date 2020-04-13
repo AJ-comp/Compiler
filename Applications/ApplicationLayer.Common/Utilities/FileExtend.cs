@@ -4,7 +4,13 @@ namespace ApplicationLayer.Common.Utilities
 {
     public static class FileExtend
     {
-        public static void CreateFile(string path, string fileName)
+        /// <summary>
+        /// This function creates File after modify fileName if fileName already exists.
+        /// </summary>
+        /// <param name="path"></param>
+        /// <param name="fileName"></param>
+        /// <returns>Returns a generated file name</returns>
+        public static string CreateFile(string path, string fileName)
         {
             var extension = Path.GetExtension(fileName);
             var fileNameWithoutExt = Path.GetFileNameWithoutExtension(fileName);
@@ -24,6 +30,8 @@ namespace ApplicationLayer.Common.Utilities
                 File.Create(fullPath);
                 break;
             }
+
+            return fileName;
         }
     }
 }

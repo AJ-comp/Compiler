@@ -315,5 +315,10 @@
     <Resource Include="Resources\Images\DarkTheme\header_24.png" />
     <Resource Include="Resources\Images\DarkTheme\header_48.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Basic\unknown_16.png" />
+    <Resource Include="Resources\Images\Basic\unknown_24.png" />
+    <Resource Include="Resources\Images\Basic\unknown_48.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

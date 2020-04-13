@@ -141,6 +141,7 @@
     <Compile Include="Commands\RelayUICommand.cs" />
     <Compile Include="Commands\SolutionExplorerCommands.cs" />
     <Compile Include="Converters\DataTypeConverter.cs" />
+    <Compile Include="Converters\FileCheckConverter.cs" />
     <Compile Include="Converters\NavigateUriToStringConverter.cs" />
     <Compile Include="Converters\LogicConverters\FileCreateLogicConverter.cs" />
     <Compile Include="Converters\LogicConverters\PathSearchLogicConverter.cs" />

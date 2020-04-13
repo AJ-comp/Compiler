@@ -22,13 +22,13 @@
     </ContextMenu>
 
 
-    <ContextMenu x:Key="DefaultProjectMenus" x:Shared="False" Style="{StaticResource SolutionExplorerContextMenuStyle}">
+    <ContextMenu x:Key="MiniCProjectMenus" x:Shared="False" Style="{StaticResource SolutionExplorerContextMenuStyle}">
         <MenuItem Header="{lex:Loc Key=Open}"/>
         <Separator/>
         <MenuItem Header="{lex:Loc Key=Add}">
             <MenuItem Command="{x:Static commands:MenuActionCommands.AddNewItem}" CommandParameter="{Binding}"/>
             <MenuItem Command="{x:Static commands:MenuActionCommands.AddExistItem}" CommandParameter="{Binding}"/>
-            <MenuItem Command="{x:Static commands:MenuActionCommands.AddNewFolder}" CommandParameter="{Binding}"/>
+            <MenuItem Command="{x:Static commands:MenuActionCommands.AddNewFilter}" CommandParameter="{Binding}"/>
         </MenuItem>
         <MenuItem Header="{lex:Loc Key=_Edit}">
             <MenuItem Command="Copy"/>
@@ -39,6 +39,7 @@
         <MenuItem Command="{x:Static commands:MenuActionCommands.OpenFolder}" CommandParameter="{Binding}"/>
         <Separator/>
     </ContextMenu>
+
 
 
     <ContextMenu x:Key="ErrorMenus" x:Shared="False" Style="{StaticResource SolutionExplorerContextMenuStyle}">
@@ -79,7 +80,17 @@
     </ContextMenu>
 
 
-    <ContextMenu x:Key="FileMenuItems" x:Shared="False" Style="{StaticResource SolutionExplorerContextMenuStyle}">
+    <ContextMenu x:Key="FileMenus" x:Shared="False" Style="{StaticResource SolutionExplorerContextMenuStyle}">
+        <MenuItem Header="{lex:Loc Key=Open}"/>
+        <Separator/>
+        <MenuItem Command="Cut"/>
+        <MenuItem Command="Copy"/>
+        <MenuItem Command="{x:Static commands:MenuActionCommands.DelItem}" CommandParameter="{Binding}"/>
+        <MenuItem Command="{x:Static commands:MenuActionCommands.Rename}" CommandParameter="{Binding}"/>
+    </ContextMenu>
+
+
+    <ContextMenu x:Key="MiniCMenus" x:Shared="False" Style="{StaticResource SolutionExplorerContextMenuStyle}">
         <MenuItem Header="{lex:Loc Key=Open}"/>
         <Separator/>
         <MenuItem Command="Cut"/>

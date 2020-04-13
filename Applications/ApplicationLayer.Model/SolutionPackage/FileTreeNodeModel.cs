@@ -1,6 +1,9 @@
 ﻿using ApplicationLayer.Common;
 using ApplicationLayer.Common.Interfaces;
+using ApplicationLayer.Models.SolutionPackage.MiniCPackage;
+using Parse.FrontEnd.Grammars.MiniC.SymbolTableFormat;
 using System;
+using System.Collections.Generic;
 using System.IO;
 
 namespace ApplicationLayer.Models.SolutionPackage
@@ -11,6 +14,7 @@ namespace ApplicationLayer.Models.SolutionPackage
          * property section
          ********************************************************************************************/
         public string Data { get; set; }
+        public string FileType => System.IO.Path.GetExtension(this.FileName).Replace(".", "");
 
 
 
@@ -32,10 +36,14 @@ namespace ApplicationLayer.Models.SolutionPackage
                     return;
                 }
                 File.Move(originalFullPath, toChangeFullPath);
+
+                this.Changed?.Invoke(this, new FileChangedEventArgs(FileChangedKind.Rename, originalFullPath, toChangeFullPath));
             }
         }
 
-        public override string FullOnlyPath => Parent.FullOnlyPath;
+        public override string FullOnlyPath => (Parent == null) ? string.Empty : Parent.FullOnlyPath;
+        public override bool IsExistFile => File.Exists(FullPath);
+        public override string FullPath => System.IO.Path.Combine(this.FullOnlyPath, this.FileName);
 
 
 
@@ -63,7 +71,7 @@ namespace ApplicationLayer.Models.SolutionPackage
         /********************************************************************************************
          * event handler section
          ********************************************************************************************/
-        public event EventHandler<FileChangedEventArgs> Changed;
+        public override event EventHandler<FileChangedEventArgs> Changed;
 
 
 
@@ -73,6 +81,13 @@ namespace ApplicationLayer.Models.SolutionPackage
         public FileTreeNodeModel(string path, string filename) : base(path, filename)
         {
             this.IsEditable = true;
+
+            Children.Add(new VarTreeNodeModel(DataType.Int, "test"));
+
+            List<VarTreeNodeModel> paramList = new List<VarTreeNodeModel>();
+            paramList.Add(new VarTreeNodeModel(DataType.Int, "param1"));
+            paramList.Add(new VarTreeNodeModel(DataType.Int, "param2"));
+            Children.Add(new FuncTreeNodeModel() { Params = paramList, ReturnType = DataType.Int, FuncName = "func" });
         }
 
 

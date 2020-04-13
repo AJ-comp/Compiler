@@ -372,4 +372,7 @@
   <data name="MiniCSourceFileExplain" xml:space="preserve">
     <value>Mini C 소스 파일을 생성합니다</value>
   </data>
+  <data name="NewFilter" xml:space="preserve">
+    <value>새 필터</value>
+  </data>
 </root>

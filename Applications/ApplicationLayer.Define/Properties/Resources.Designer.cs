@@ -475,6 +475,15 @@ namespace ApplicationLayer.Define.Properties {
         }
         
         /// <summary>
+        ///   New Filter과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string NewFilter {
+            get {
+                return ResourceManager.GetString("NewFilter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   New Folder과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string NewFolder {

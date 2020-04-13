@@ -11,21 +11,17 @@ namespace ApplicationLayer.ViewModels.Messages
     public class CreateSolutionMessage : MessageBase
     {
         public string SolutionPath { get; }
-        public string SolutionNameWithOutExtension { get; }
-        public string Extension { get; } = ".ajn";
+        public string SolutionName { get; }
         public Grammar Language { get; }
         public Target MachineTarget { get; }
 
-        public string SoltionName => this.SolutionNameWithOutExtension + this.Extension;
-        public string SolutionFullPath => Path.Combine(this.SolutionPath, this.SoltionName);
-
-        public CreateSolutionMessage(string solutionPath, string solutionNameWithOutExtension, bool isCreateSolutionFolder,
+        public CreateSolutionMessage(string solutionPath, string solutionName, bool isCreateSolutionFolder,
                                                 Grammar language, Target machineTarget)
         {
             if (isCreateSolutionFolder)
-                this.SolutionPath = Path.Combine(solutionPath, solutionNameWithOutExtension);
+                this.SolutionPath = Path.Combine(solutionPath, solutionName);
 
-            this.SolutionNameWithOutExtension = solutionNameWithOutExtension;
+            this.SolutionName = solutionName;
             this.Language = language;
             this.MachineTarget = machineTarget;
         }
