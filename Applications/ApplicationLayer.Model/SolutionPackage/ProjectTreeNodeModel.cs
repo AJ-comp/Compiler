@@ -82,13 +82,13 @@ namespace ApplicationLayer.Models.SolutionPackage
         public ProjectTreeNodeModel() : base(string.Empty, string.Empty)
         {
             this.IsEditable = true;
-            this.Children.CollectionChanged += Children_CollectionChanged;
+            this.children.CollectionChanged += Children_CollectionChanged;
         }
 
         public ProjectTreeNodeModel(string path, string projName) : base(path, projName)
         {
             this.IsEditable = true;
-            this.Children.CollectionChanged += Children_CollectionChanged;
+            this.children.CollectionChanged += Children_CollectionChanged;
         }
 
 

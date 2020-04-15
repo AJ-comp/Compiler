@@ -69,8 +69,6 @@
             <MenuItem Command="{x:Static commands:MenuActionCommands.AddNewFolder}" CommandParameter="{Binding}"/>
         </MenuItem>
         <MenuItem Header="{lex:Loc Key=_Edit}">
-            <MenuItem Command="Cut"/>
-            <MenuItem Command="Copy"/>
             <MenuItem Command="{x:Static commands:MenuActionCommands.DelItem}" CommandParameter="{Binding}"/>
             <MenuItem Command="{x:Static commands:MenuActionCommands.Rename}" CommandParameter="{Binding}"/>
         </MenuItem>
@@ -78,6 +76,21 @@
         <MenuItem Command="{x:Static commands:MenuActionCommands.OpenFolder}" CommandParameter="{Binding}"/>
         <Separator/>
     </ContextMenu>
+
+
+    <ContextMenu x:Key="FilterMenuItems" x:Shared="False" Style="{StaticResource SolutionExplorerContextMenuStyle}">
+        <MenuItem Header="{lex:Loc Key=Add}">
+            <MenuItem Command="{x:Static commands:MenuActionCommands.AddNewItem}" CommandParameter="{Binding}"/>
+            <MenuItem Command="{x:Static commands:MenuActionCommands.AddExistItem}" CommandParameter="{Binding}"/>
+            <MenuItem Command="{x:Static commands:MenuActionCommands.AddNewFilter}" CommandParameter="{Binding}"/>
+        </MenuItem>
+        <MenuItem Command="{x:Static commands:MenuActionCommands.Remove}" CommandParameter="{Binding}"/>
+        <MenuItem Command="{x:Static commands:MenuActionCommands.Rename}" CommandParameter="{Binding}"/>
+        <Separator/>
+        <MenuItem Command="{x:Static commands:MenuActionCommands.OpenFolder}" CommandParameter="{Binding}"/>
+        <Separator/>
+    </ContextMenu>
+
 
 
     <ContextMenu x:Key="FileMenus" x:Shared="False" Style="{StaticResource SolutionExplorerContextMenuStyle}">

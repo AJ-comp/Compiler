@@ -10,7 +10,7 @@ namespace ApplicationLayer.Common.Utilities
         /// <param name="path"></param>
         /// <param name="fileName"></param>
         /// <returns>Returns a generated file name</returns>
-        public static string CreateFile(string path, string fileName)
+        public static string CreateFile(string path, string fileName, string data)
         {
             var extension = Path.GetExtension(fileName);
             var fileNameWithoutExt = Path.GetFileNameWithoutExtension(fileName);
@@ -27,7 +27,7 @@ namespace ApplicationLayer.Common.Utilities
                     continue;
                 }
 
-                File.Create(fullPath);
+                File.WriteAllText(fullPath, data);
                 break;
             }
 

@@ -2,7 +2,6 @@
 using Parse.WpfControls.Common;
 using Parse.WpfControls.EventArgs;
 using Parse.WpfControls.Models;
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
@@ -14,9 +13,6 @@ using System.Windows.Media;
 
 namespace Parse.WpfControls
 {
-    [Flags]
-    public enum DrawOption { None = 0, Underline = 1, EndPointUnderline=2, Selected = 4 }
-
     public class HighlightTextBox : TokenizeTextBox
     {
         private TextCanvas renderCanvas;

@@ -1,4 +1,5 @@
-﻿using ApplicationLayer.Common.Utilities;
+﻿using ApplicationLayer.Common;
+using ApplicationLayer.Common.Utilities;
 using ApplicationLayer.Models.SolutionPackage;
 using ApplicationLayer.Models.SolutionPackage.MiniCPackage;
 using Parse.BackEnd.Target;
@@ -9,7 +10,7 @@ namespace ApplicationLayer.Models.GrammarPackages.MiniCPackage
 {
     public class MiniCGenerator : ProjectGenerator
     {
-        public override string Extension { get; } = LanguageExtensions.MiniC;
+        public override string Extension { get; } = LanguageExtensions.MiniCSource;
 
         public override ProjectTreeNodeModel CreateEmptyProject(string solutionPath, string projectPath, string projectName, Target target)
         {
@@ -43,11 +44,13 @@ namespace ApplicationLayer.Models.GrammarPackages.MiniCPackage
 
             string path = System.IO.Path.Combine(solutionPath, projectPath);
             string fileName = string.Format("main.{0}", this.Extension);
+            string defaultContent = "void main()\r\n{\r\n}";
+
             Directory.CreateDirectory(path);
-            fileName = FileExtend.CreateFile(path, fileName);
+            fileName = FileExtend.CreateFile(path, fileName, defaultContent);
 
             var sourceFilter = new FilterTreeNodeModel(CommonResource.SourceFiles);
-            var sourceFile = new FileTreeNodeModel(projectPath, fileName);
+            var sourceFile = new FileTreeNodeModel(string.Empty, fileName);
             sourceFilter.AddFile(sourceFile);
             result.AddFilter(sourceFilter);
 

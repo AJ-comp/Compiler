@@ -257,7 +257,6 @@ namespace Parse.WpfControls.SyntaxEditor
 
 
 
-
         private void ParsingFailedListPreProcess(ParsingResult e)
         {
             List<Tuple<int, ParsingBlock>> errorBlocks = new List<Tuple<int, ParsingBlock>>();
@@ -322,8 +321,7 @@ namespace Parse.WpfControls.SyntaxEditor
                 this.parsingResult = this.ParserSnippet.Parsing(tokens);
             }
 
-            this.ParserSnippet.Parser.Grammar.SDTS.Process(this.parsingResult.ToAST);
-
+            var sementicResult = this.ParserSnippet.Parser.Grammar.SDTS.Process(this.parsingResult.ToAST);
             this.ParsingFailedListPreProcess(parsingResult);
 
             if (parsingResult.HasError == false) this.alarmList.Add(new AlarmEventArgs(string.Empty, this.FileName));

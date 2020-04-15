@@ -1,4 +1,5 @@
-﻿using Parse.BackEnd.Target;
+﻿using ApplicationLayer.Common;
+using Parse.BackEnd.Target;
 using Parse.Extensions;
 using System.Collections.Generic;
 using System.Collections.Specialized;
@@ -114,7 +115,7 @@ namespace ApplicationLayer.Models.SolutionPackage.MiniCPackage
         /********************************************************************************************
          * override property section
          ********************************************************************************************/
-        public override string ProjectType => LanguageExtensions.MiniC;
+        public override string ProjectType => LanguageExtensions.MiniCSource;
 
         public override bool IsChanged
         {
@@ -157,7 +158,7 @@ namespace ApplicationLayer.Models.SolutionPackage.MiniCPackage
             this.outerDependenies.IsEditable = false;
         }
 
-        public MiniCProjectTreeNodeModel(string path, string projName, Target target) : base(path, projName + string.Format(".{0}proj", LanguageExtensions.MiniC))
+        public MiniCProjectTreeNodeModel(string path, string projName, Target target) : base(path, projName + string.Format(".{0}proj", LanguageExtensions.MiniCSource))
         {
             this.DebugConfigure.Target = target?.Name;
             this.ReleaseConfigure.Target = target?.Name;
@@ -176,13 +177,13 @@ namespace ApplicationLayer.Models.SolutionPackage.MiniCPackage
         public void AddFilter(FilterTreeNodeModel item)
         {
             item.Parent = this;
-            this.Children.Add(item);
+            this.children.Add(item);
         }
 
         public void AddFile(FileTreeNodeModel item)
         {
             item.Parent = this;
-            this.Children.Add(item);
+            this.children.Add(item);
         }
 
 
@@ -193,9 +194,9 @@ namespace ApplicationLayer.Models.SolutionPackage.MiniCPackage
         public override void RemoveChild(TreeNodeModel nodeToRemove)
         {
             if (nodeToRemove is FilterTreeNodeModel)
-                this.Children.Remove(nodeToRemove as FilterTreeNodeModel);
+                this.children.Remove(nodeToRemove as FilterTreeNodeModel);
             else if (nodeToRemove is FileTreeNodeModel)
-                this.Children.Remove(nodeToRemove as FileTreeNodeModel);
+                this.children.Remove(nodeToRemove as FileTreeNodeModel);
         }
 
         public override void SyncWithLoadValue()

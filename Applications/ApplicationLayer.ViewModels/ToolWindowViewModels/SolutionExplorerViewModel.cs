@@ -2,12 +2,13 @@
 using ApplicationLayer.Common.Helpers;
 using ApplicationLayer.Common.Interfaces;
 using ApplicationLayer.Models.SolutionPackage;
-using ApplicationLayer.Models.SolutionPackage.MiniCPackage;
 using ApplicationLayer.ViewModels.DocumentTypeViewModels;
 using ApplicationLayer.ViewModels.Messages;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
+using Parse.FrontEnd.Parsers.Datas;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.IO;
@@ -26,9 +27,8 @@ namespace ApplicationLayer.ViewModels.ToolWindowViewModels
         private ObservableCollection<DocumentViewModel> _documents;
         private DocumentViewModel selectedDocument;
         private RelayCommand doubleClickCommand;
-        private RelayCommand existItemCommand;
         private RelayCommand<TreeNodeModel> selectedCommand;
-        private RelayCommand<TreeNodeModel> newFolderCommand;
+        private List<Tuple<FileTreeNodeModel, ParsingResult>> files = new List<Tuple<FileTreeNodeModel, ParsingResult>>();
 
 
 
@@ -76,6 +76,16 @@ namespace ApplicationLayer.ViewModels.ToolWindowViewModels
             {
                 selectedItem = value;
                 RaisePropertyChanged(nameof(SelectedItem));
+                RaisePropertyChanged(nameof(IsSelectedItemLeafNode));
+            }
+        }
+
+        public bool IsSelectedItemLeafNode
+        {
+            get
+            {
+                if (selectedItem == null) return false;
+                return (selectedItem is FileTreeNodeModel) ? true : false;
             }
         }
 
@@ -103,28 +113,6 @@ namespace ApplicationLayer.ViewModels.ToolWindowViewModels
                     this.doubleClickCommand = new RelayCommand(this.OnMouseDoubleClick);
 
                 return this.doubleClickCommand;
-            }
-        }
-
-        public RelayCommand ExistItemCommand
-        {
-            get
-            {
-                if (this.existItemCommand == null)
-                    this.existItemCommand = new RelayCommand(this.OnExistItemMenuClick);
-
-                return this.existItemCommand;
-            }
-        }
-
-        public RelayCommand<TreeNodeModel> NewFolderCommand
-        {
-            get
-            {
-                if (this.newFolderCommand == null)
-                    this.newFolderCommand = new RelayCommand<TreeNodeModel>(this.OnNewFolderMenuClick);
-
-                return this.newFolderCommand;
             }
         }
 
@@ -345,18 +333,10 @@ namespace ApplicationLayer.ViewModels.ToolWindowViewModels
             if (projectPath[0] == '\\') projectPath = projectPath.Remove(0, 1);
 
             ProjectTreeNodeModel newProject = projectGenerator.CreateDefaultProject(solutionPath, projectPath, message.ProjectName, message.MachineTarget);
-//            newProject.Save();
-
             this.Solution.AddProject(newProject);
+            newProject.Save();
 
-//            var changedInfo = new AddChangedFileMessage(this.Solution);
-//            Messenger.Default.Send<AddChangedFileMessage>(changedInfo);
-
-            //// Notify the changed data to the out.
-            //var changedData = new ChangedFileListMessage.ChangedFile(this.Solutions[0], ChangedFileListMessage.ChangedStatus.Changed);
-            //var changedFileListMessage = new ChangedFileListMessage();
-            //changedFileListMessage.AddFile(changedData);
-            //Messenger.Default.Send<ChangedFileListMessage>(changedFileListMessage);
+            this.ChildrenChanged(this.Solution, null);
         }
 
         /// <summary>
@@ -394,12 +374,12 @@ namespace ApplicationLayer.ViewModels.ToolWindowViewModels
         {
             if (SelectedItem is FileTreeNodeModel)
             {
-                string fileName = (SelectedItem as FileTreeNodeModel).PathWithFileName;
+                var fileNode = (SelectedItem as FileTreeNodeModel);
+                if (fileNode.IsExistFile == false) return;
 
-                if (File.Exists(fileName) == false) return;
-                string content = File.ReadAllText(fileName);
+                string content = File.ReadAllText(fileNode.FullPath);
 
-                var editor = new EditorTypeViewModel(fileName, content);
+                var editor = new EditorTypeViewModel(fileNode);
                 if (this.Documents.Contains(editor))
                 {
                     this.SelectedDocument = editor;
@@ -411,15 +391,6 @@ namespace ApplicationLayer.ViewModels.ToolWindowViewModels
 
                 Messenger.Default.Send<AddEditorMessage>(new AddEditorMessage(editor));
             }
-        }
-
-        private void OnExistItemMenuClick()
-        {
-        }
-
-        private void OnNewFolderMenuClick(TreeNodeModel selectedItem)
-        {
-
         }
     }
 }

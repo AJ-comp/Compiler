@@ -1,4 +1,5 @@
-﻿using ApplicationLayer.Common.Helpers;
+﻿using ApplicationLayer.Common;
+using ApplicationLayer.Common.Helpers;
 using ApplicationLayer.Models.SolutionPackage.MiniCPackage;
 using Parse.BackEnd.Target;
 using System;
@@ -59,14 +60,17 @@ namespace ApplicationLayer.Models.SolutionPackage
                 if (bDuplicate == false) break;
             }
 
-            return new FilterTreeNodeModel(filterName);
+            var result = new FilterTreeNodeModel(filterName);
+            parent.AddChildren(result);
+
+            return result;
         }
 
         public static ProjectTreeNodeModel CreateProjectTreeNodeModel(string path, string fileName, Target target)
         {
             ProjectTreeNodeModel result = null;
 
-            if (Path.GetExtension(fileName) == "." + LanguageExtensions.MiniC + "proj")
+            if (Path.GetExtension(fileName) == "." + LanguageExtensions.MiniCSource + "proj")
                 result = new MiniCProjectTreeNodeModel(path, fileName, target);
 
             return result;
@@ -79,7 +83,7 @@ namespace ApplicationLayer.Models.SolutionPackage
                 extension.Substring(1, extension.IndexOf("proj") - 1) : extension.Substring(1);
 
             Type result = typeof(ProjectTreeNodeModel);
-            if (typeString == LanguageExtensions.MiniC)
+            if (typeString == LanguageExtensions.MiniCSource)
                 result = typeof(MiniCProjectTreeNodeModel);
 
             return result;

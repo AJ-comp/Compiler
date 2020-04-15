@@ -142,7 +142,11 @@ namespace Parse.WpfControls.Common
             }
         }
 
-        public int GetTokenIndexForCaretIndex(int caretIndex, RecognitionWay recognitionWay) => this.tokens.TokenIndexForOffset(caretIndex, recognitionWay);
+        public int GetTokenIndexForCaretIndex(int caretIndex, RecognitionWay recognitionWay)
+        {
+            if (this.tokens == null) return -1;
+            return this.tokens.TokenIndexForOffset(caretIndex, recognitionWay);
+        }
 
         /// <summary>
         /// This function register a pattern for tokenizing.

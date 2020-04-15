@@ -20,11 +20,4 @@ namespace ApplicationLayer.Models.SolutionPackage
             return result;
         }
     }
-
-
-    public class LanguageExtensions
-    {
-        public static string MiniC { get; } = "mc";
-        public static string AJ { get; } = "aj";
-    }
 }

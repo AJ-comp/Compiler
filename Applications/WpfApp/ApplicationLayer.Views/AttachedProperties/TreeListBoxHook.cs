@@ -1,84 +1,56 @@
 ﻿using ActiproSoftware.Windows.Controls.Grids;
-using System.Collections.ObjectModel;
 using System.Windows;
-using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace ApplicationLayer.Views.AttachedProperties
 {
     public static class TreeListBoxHook
     {
-        public static bool GetItemMenuRequestedHook(DependencyObject obj) => (bool)obj.GetValue(ItemMenuRequestedHookProperty);
-        public static void SetItemMenuRequestedHook(DependencyObject obj, bool value) => obj.SetValue(ItemMenuRequestedHookProperty, value);
+        public static bool GetDefaultActionHook(DependencyObject obj) => (bool)obj.GetValue(DefaultActionHookProperty);
+        public static void SetDefaultActionHook(DependencyObject obj, bool value) => obj.SetValue(DefaultActionHookProperty, value);
 
-        // Using a DependencyProperty as the backing store for ItemMenuRequestedHook.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty ItemMenuRequestedHookProperty =
-            DependencyProperty.RegisterAttached("ItemMenuRequestedHook", typeof(bool), typeof(TreeListBoxHook), new PropertyMetadata(false, OnItemMenuRequestedChanged));
+        // Using a DependencyProperty as the backing store for DefaultActionHook.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty DefaultActionHookProperty =
+            DependencyProperty.RegisterAttached("DefaultActionHook", typeof(bool), typeof(TreeListBoxHook), new PropertyMetadata(false, OnDefaultActionHookChanged));
 
-        private static void OnItemMenuRequestedChanged(object sender, DependencyPropertyChangedEventArgs e)
+        private static void OnDefaultActionHookChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
-            var control = (sender as TreeListBox);
-            if (control == null) return;
+            var treeView = (sender as TreeListBox);
+            if (treeView == null) return;
 
-            control.ContextMenu = new ContextMenu() { DataContext = control.DataContext };
-            bool value = (bool)e.NewValue;
-            if(value) control.ItemMenuRequested += Control_ItemMenuRequested;
-            else control.ItemMenuRequested -= Control_ItemMenuRequested;
+            bool on = (bool)e.NewValue;
+            if (on) treeView.ItemDefaultActionExecuting += TreeView_ItemDefaultActionExecuting;
+            else treeView.ItemDefaultActionExecuting -= TreeView_ItemDefaultActionExecuting;
         }
 
-        private static void Control_ItemMenuRequested(object sender, TreeListBoxItemMenuEventArgs e)
+        private static void TreeView_ItemDefaultActionExecuting(object sender, TreeListBoxItemEventArgs e)
         {
-            var treeListBox = sender as TreeListBox;
+            e.Cancel = TreeListBoxHook.GetCancelCondition(sender as TreeListBox);
+            if (e.Cancel == false) return;
 
-            e.Menu = new ContextMenu();
-            e.Menu.DataContext = treeListBox.DataContext;
-            var menusForTargets = TreeListBoxHook.GetMenusForTargetCollection(sender as TreeListBox);
+            var command = TreeListBoxHook.GetDefaultActionCommand(sender as TreeListBox);
 
-            /*
-            foreach (var item in menusForTargets)
-            {
-                if (treeListBox.SelectedItem.GetType() != item.TargetType) continue;
-
-                foreach(var menuItem in item.Menu)
-                {
-                    if (menuItem is MenuItem)
-                    {
-                        var typeItem = menuItem as MenuItem;
-
-                        var addItem = new MenuItem()
-                        {
-                            DataContext = treeListBox.DataContext,
-                            Header = typeItem.Header, 
-                            Command = typeItem.Command, 
-                            CommandParameter = typeItem.CommandParameter 
-                        };
-                        e.Menu.Items.Add(addItem);
-                    }
-                    else if (menuItem is Separator)
-                    {
-                        e.Menu.Items.Add(new Separator());
-                    }
-                }
-            }
-            */
+            if (command == null) return;
+            if (command.CanExecute(e.Item)) command.Execute(e.Item);
         }
 
 
-        public static MenusForTargetCollection GetMenusForTargetCollection(DependencyObject obj)
-        {
-            return (MenusForTargetCollection)obj.GetValue(MenusForTargetCollectionProperty);
-        }
 
-        public static void SetMenusForTargetCollection(DependencyObject obj, MenusForTargetCollection value)
-        {
-            obj.SetValue(MenusForTargetCollectionProperty, value);
-        }
+        public static bool GetCancelCondition(DependencyObject obj) => (bool)obj.GetValue(CancelConditionProperty);
+        public static void SetCancelCondition(DependencyObject obj, bool value) => obj.SetValue(CancelConditionProperty, value);
 
-        // Using a DependencyProperty as the backing store for MenusForTargetCollection.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty MenusForTargetCollectionProperty =
-            DependencyProperty.RegisterAttached("MenusForTargetCollection", typeof(MenusForTargetCollection), typeof(TreeListBoxHook), new PropertyMetadata(default(MenusForTargetCollection)));
+        // Using a DependencyProperty as the backing store for CancelCondition.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty CancelConditionProperty =
+            DependencyProperty.RegisterAttached("CancelCondition", typeof(bool), typeof(TreeListBoxHook), new PropertyMetadata(false));
 
 
 
 
+        public static ICommand GetDefaultActionCommand(DependencyObject obj) => (ICommand)obj.GetValue(DefaultActionCommandProperty);
+        public static void SetDefaultActionCommand(DependencyObject obj, ICommand value) => obj.SetValue(DefaultActionCommandProperty, value);
+
+        // Using a DependencyProperty as the backing store for DefaultActionCommand.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty DefaultActionCommandProperty =
+            DependencyProperty.RegisterAttached("DefaultActionCommand", typeof(ICommand), typeof(TreeListBoxHook), new PropertyMetadata(null));
     }
 }

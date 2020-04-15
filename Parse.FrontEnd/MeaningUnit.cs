@@ -74,8 +74,8 @@ namespace Parse.FrontEnd
 
     public class SementicAnalysisResult
     {
-        MeaningErrInfoList MeaningErrInfos { get; } = new MeaningErrInfoList();
-        SymbolTable SymbolTable { get; }
+        public MeaningErrInfoList MeaningErrInfos { get; } = new MeaningErrInfoList();
+        public SymbolTable SymbolTable { get; }
 
         public SementicAnalysisResult(MeaningErrInfoList meaningErrInfos, SymbolTable symbolTable)
         {

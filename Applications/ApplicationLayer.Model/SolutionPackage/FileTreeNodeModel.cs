@@ -15,6 +15,7 @@ namespace ApplicationLayer.Models.SolutionPackage
          ********************************************************************************************/
         public string Data { get; set; }
         public string FileType => System.IO.Path.GetExtension(this.FileName).Replace(".", "");
+        public bool IsLoaded { get; set; } = false;
 
 
 
@@ -82,12 +83,12 @@ namespace ApplicationLayer.Models.SolutionPackage
         {
             this.IsEditable = true;
 
-            Children.Add(new VarTreeNodeModel(DataType.Int, "test"));
+            AddChildren(new VarTreeNodeModel(DataType.Int, "test"));
 
             List<VarTreeNodeModel> paramList = new List<VarTreeNodeModel>();
             paramList.Add(new VarTreeNodeModel(DataType.Int, "param1"));
             paramList.Add(new VarTreeNodeModel(DataType.Int, "param2"));
-            Children.Add(new FuncTreeNodeModel() { Params = paramList, ReturnType = DataType.Int, FuncName = "func" });
+            AddChildren(new FuncTreeNodeModel() { Params = paramList, ReturnType = DataType.Int, FuncName = "func" });
         }
 
 

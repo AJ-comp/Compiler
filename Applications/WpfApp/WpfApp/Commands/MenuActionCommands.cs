@@ -112,23 +112,18 @@ namespace ApplicationLayer.WpfApp.Commands
         public static readonly RelayUICommand<TreeNodeModel> AddNewItem = new RelayUICommand<TreeNodeModel>(CommonResource.NewItem,
             (selectedNode) =>
             {
-                if ((selectedNode is IManagableElements) == false) return;
-
                 NewFileDialog dialog = new NewFileDialog();
                 var vm = dialog.DataContext as NewFileDialogViewModel;
                 vm.Path = selectedNode.FullOnlyPath;
 
                 vm.CreateRequest += (s, e) =>
                 {
-                    FileExtend.CreateFile(vm.Path, vm.FileName);
+                    FileExtend.CreateFile(vm.Path, vm.FileName, vm.SelectedItem.Data);
                     var newFileNode = TreeNodeCreator.CreateFileTreeNodeModel(vm.Path, selectedNode.FullOnlyPath, vm.FileName);
 
                     selectedNode.AddChildren(newFileNode);
-                    var managableNode = selectedNode as IManagableElements;
-                    if (managableNode.IsChanged) Messenger.Default.Send<AddChangedFileMessage>(new AddChangedFileMessage(managableNode));
-                    else Messenger.Default.Send<RemoveChangedFileMessage>(new RemoveChangedFileMessage(managableNode));
+                    ChangedFileMessage(selectedNode);
                 };
-
 
                 dialog.Owner = RootWindow;
                 dialog.ShowInTaskbar = false;
@@ -196,6 +191,8 @@ namespace ApplicationLayer.WpfApp.Commands
 
             if (manager.IsChanged) Messenger.Default.Send<AddChangedFileMessage>(new AddChangedFileMessage(manager));
             else Messenger.Default.Send<RemoveChangedFileMessage>(new RemoveChangedFileMessage(manager));
+
+            node.NotifyChildrenChanged();
         }
 
 
@@ -299,7 +296,6 @@ namespace ApplicationLayer.WpfApp.Commands
             (selectedNode) =>
             {
                 var filterName = TreeNodeCreator.CreateFilterTreeNodeModel(selectedNode, "Filter");
-                selectedNode.Children.Add(filterName);
 
                 ChangedFileMessage(selectedNode);
             }, (condition) =>

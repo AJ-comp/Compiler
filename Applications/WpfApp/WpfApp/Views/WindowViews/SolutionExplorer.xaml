@@ -9,7 +9,8 @@
              lex:ResxLocalizationProvider.DefaultAssembly="ApplicationLayer.Define"
              lex:ResxLocalizationProvider.DefaultDictionary="Resources"
              xmlns:ap="clr-namespace:ApplicationLayer.Views.AttachedProperties;assembly=ApplicationLayer.Views"
-             xmlns:common="clr-namespace:ApplicationLayer.Models.SolutionPackage;assembly=ApplicationLayer.Models"
+             xmlns:common="clr-namespace:ApplicationLayer.Common;assembly=ApplicationLayer.Common"
+             xmlns:models="clr-namespace:ApplicationLayer.Models.SolutionPackage;assembly=ApplicationLayer.Models"
              xmlns:commands="clr-namespace:ApplicationLayer.WpfApp.Commands"
              xmlns:minicPackage="clr-namespace:ApplicationLayer.Models.SolutionPackage.MiniCPackage;assembly=ApplicationLayer.Models"
              xmlns:mcModels="clr-namespace:ApplicationLayer.Models.SolutionPackage.MiniCPackage;assembly=ApplicationLayer.Models"
@@ -41,7 +42,10 @@
         <TextBox Grid.Row="1"/>
         <grids:TreeListBox x:Name="treeListBox" Grid.Row="2" IsRootItemVisible="True" TopLevelIndent="2"
                                     RootItem="{Binding Solution, Mode=OneWay}"
-                                    SelectedItem="{Binding SelectedItem}">
+                                    SelectedItem="{Binding SelectedItem}"
+                                    ap:TreeListBoxHook.DefaultActionHook="True"
+                                    ap:TreeListBoxHook.CancelCondition="{Binding IsSelectedItemLeafNode}"
+                                    ap:TreeListBoxHook.DefaultActionCommand="{Binding DoubleClickCommand}">
 
             <!-- setting adapter to process a tree node -->
             <grids:TreeListBox.ItemAdapter>
@@ -59,7 +63,7 @@
                         <!-- setting a solution state -->
                         <DataTrigger Binding="{Binding Tag, 
                                             Converter={converter:DataTypeConverter}}" 
-                                             Value="{x:Type common:SolutionTreeNodeModel}">
+                                             Value="{x:Type models:SolutionTreeNodeModel}">
                             <Setter TargetName="image" Property="Source" Value="{DynamicResource SolutionImagePath}"/>
                             <Setter TargetName="stackPanel" Property="ContextMenu" Value="{StaticResource SolutionMenus}"/>
                             <Setter TargetName="edit" Property="Style" Value="{StaticResource SolutionTreeNodeStyle}"/>
@@ -68,7 +72,7 @@
                         <!-- setting an error project node -->
                         <DataTrigger Binding="{Binding Tag, 
                                             Converter={converter:DataTypeConverter}}" 
-                                            Value="{x:Type common:ErrorProjectTreeNodeModel}">
+                                            Value="{x:Type models:ErrorProjectTreeNodeModel}">
                             <Setter TargetName="image" Property="Source" Value="{DynamicResource ErrorImagePath}"/>
                             <Setter TargetName="stackPanel" Property="ContextMenu" Value="{StaticResource ErrorMenus}"/>
                         </DataTrigger>
@@ -85,7 +89,7 @@
                         <MultiDataTrigger>
                             <MultiDataTrigger.Conditions>
                                 <Condition Binding="{Binding Tag, Converter={converter:DataTypeConverter}}" 
-                                                Value="{x:Type common:FileTreeNodeModel}"/>
+                                                Value="{x:Type models:FileTreeNodeModel}"/>
                                 <Condition Binding="{Binding IsExistFile}" Value="false"/>
                             </MultiDataTrigger.Conditions>
                             <Setter TargetName="image" Property="Source" Value="{DynamicResource UnknownFile16Path}"/>
@@ -94,19 +98,29 @@
                         <MultiDataTrigger>
                             <MultiDataTrigger.Conditions>
                                 <Condition Binding="{Binding Tag, Converter={converter:DataTypeConverter}}" 
-                                                Value="{x:Type common:FileTreeNodeModel}"/>
+                                                Value="{x:Type models:FileTreeNodeModel}"/>
                                 <Condition Binding="{Binding IsExistFile}" Value="true"/>
-                                <Condition Binding="{Binding FileType}" Value="{x:Static common:LanguageExtensions.MiniC}"/>
+                                <Condition Binding="{Binding FileType}" Value="{x:Static common:LanguageExtensions.MiniCSource}"/>
                             </MultiDataTrigger.Conditions>
                             <Setter TargetName="image" Property="Source" Value="{DynamicResource CFile16ImagePath}"/>
+                            <Setter TargetName="stackPanel" Property="ContextMenu" Value="{StaticResource MiniCMenus}"/>
+                        </MultiDataTrigger>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding Tag, Converter={converter:DataTypeConverter}}" 
+                                                Value="{x:Type models:FileTreeNodeModel}"/>
+                                <Condition Binding="{Binding IsExistFile}" Value="true"/>
+                                <Condition Binding="{Binding FileType}" Value="{x:Static common:LanguageExtensions.Header}"/>
+                            </MultiDataTrigger.Conditions>
+                            <Setter TargetName="image" Property="Source" Value="{DynamicResource CHeader16ImagePath}"/>
                             <Setter TargetName="stackPanel" Property="ContextMenu" Value="{StaticResource MiniCMenus}"/>
                         </MultiDataTrigger>
 
                         <!-- setting a filter node -->
                         <DataTrigger Binding="{Binding Tag, 
                                             Converter={converter:DataTypeConverter}}" 
-                                            Value="{x:Type common:FilterTreeNodeModel}">
-                            <Setter TargetName="stackPanel" Property="ContextMenu" Value="{StaticResource FolderMenuItems}"/>
+                                            Value="{x:Type models:FilterTreeNodeModel}">
+                            <Setter TargetName="stackPanel" Property="ContextMenu" Value="{StaticResource FilterMenuItems}"/>
                         </DataTrigger>
 
                         <!-- setting a variable node -->
@@ -126,7 +140,7 @@
                         <MultiDataTrigger>
                             <MultiDataTrigger.Conditions>
                                 <Condition Binding="{Binding Tag, Converter={converter:DataTypeConverter}}" 
-                                                Value="{x:Type common:FilterTreeNodeModel}"/>
+                                                Value="{x:Type models:FilterTreeNodeModel}"/>
                                 <Condition Binding="{Binding IsExpanded}" Value="true"/>
                             </MultiDataTrigger.Conditions>
                             <Setter TargetName="image" Property="Source" Value="{DynamicResource OpenFolderImagePath}"/>
@@ -134,7 +148,7 @@
                         <MultiDataTrigger>
                             <MultiDataTrigger.Conditions>
                                 <Condition Binding="{Binding Tag, Converter={converter:DataTypeConverter}}" 
-                                                Value="{x:Type common:FilterTreeNodeModel}"/>
+                                                Value="{x:Type models:FilterTreeNodeModel}"/>
                                 <Condition Binding="{Binding IsExpanded}" Value="false"/>
                             </MultiDataTrigger.Conditions>
                             <Setter TargetName="image" Property="Source" Value="{DynamicResource CloseFolderImagePath}"/>
@@ -144,7 +158,7 @@
                         <MultiDataTrigger>
                             <MultiDataTrigger.Conditions>
                                 <Condition Binding="{Binding Tag, Converter={converter:DataTypeConverter}}" 
-                                                Value="{x:Type common:FilterTreeNodeModel}"/>
+                                                Value="{x:Type models:FilterTreeNodeModel}"/>
                                 <Condition Binding="{Binding DisplayName}" Value="{lex:Loc Key=ExternDependency}"/>
                                 <Condition Binding="{Binding IsExpanded}" Value="true"/>
                             </MultiDataTrigger.Conditions>
@@ -153,7 +167,7 @@
                         <MultiDataTrigger>
                             <MultiDataTrigger.Conditions>
                                 <Condition Binding="{Binding Tag, Converter={converter:DataTypeConverter}}" 
-                                                Value="{x:Type common:FilterTreeNodeModel}"/>
+                                                Value="{x:Type models:FilterTreeNodeModel}"/>
                                 <Condition Binding="{Binding DisplayName}" Value="{lex:Loc Key=ExternDependency}"/>
                                 <Condition Binding="{Binding IsExpanded}" Value="false"/>
                             </MultiDataTrigger.Conditions>
