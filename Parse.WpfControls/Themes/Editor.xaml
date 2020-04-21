@@ -32,9 +32,6 @@
                                 <Grid Margin="{TemplateBinding Padding}">
                                     <host:HighlightTextBox x:Name="PART_TextArea" Text="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=Text}">
                                         <i:Interaction.Behaviors>
-                                            <behaviors:CompletionListBehavior LineHeight="{Binding ElementName=PART_TextArea, Path=LineHeight}"
-                                                                            CloseCharacters="{Binding ElementName=PART_TextArea, Path=DelimiterSet}"
-                                                                              Items="{Binding ElementName=PART_TextArea, Path=CompletionItems}"/>
                                             <behaviors:ZoomScrollBehavior />
                                         </i:Interaction.Behaviors>
                                     </host:HighlightTextBox>

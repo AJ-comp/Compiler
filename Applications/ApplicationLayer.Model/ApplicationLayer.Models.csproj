@@ -108,6 +108,10 @@
       <Project>{A0661596-8C09-42A8-B412-8702108FD935}</Project>
       <Name>Parse.FrontEnd.Grammars</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Parse.FrontEnd\Parse.FrontEnd.csproj">
+      <Project>{46590802-CE40-49C9-86E1-CD6F3487FF5B}</Project>
+      <Name>Parse.FrontEnd</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Parse.WpfControls.SyntaxEditor\Parse.WpfControls.SyntaxEditor.csproj">
       <Project>{DCCEDEB5-9CA4-41FE-AB6B-50E4BCC64EE6}</Project>
       <Name>Parse.WpfControls.SyntaxEditor</Name>

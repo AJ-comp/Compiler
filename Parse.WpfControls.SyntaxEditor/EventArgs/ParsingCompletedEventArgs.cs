@@ -1,16 +1,17 @@
 ﻿using Parse.FrontEnd.Parsers.Datas;
+using System.Collections.Generic;
 
 namespace Parse.WpfControls.SyntaxEditor.EventArgs
 {
     public class ParsingCompletedEventArgs
     {
-        public ParsingResult ParsingResult { get; }
-        public AlarmCollection AlarmCollection { get; }
+//        private List<AlarmEventArgs>
 
-        public ParsingCompletedEventArgs(ParsingResult parsingResult, AlarmCollection alarmCollection)
+        public ParsingResult ParsingResult { get; }
+
+        public ParsingCompletedEventArgs(ParsingResult parsingResult)
         {
             ParsingResult = parsingResult;
-            AlarmCollection = alarmCollection;
         }
     }
 }

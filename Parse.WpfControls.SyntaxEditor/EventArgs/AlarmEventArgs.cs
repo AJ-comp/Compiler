@@ -1,5 +1,6 @@
-﻿using Parse.FrontEnd.Parsers.Datas;
-using Parse.FrontEnd.Parsers.EventArgs;
+﻿using Parse.FrontEnd;
+using Parse.FrontEnd.Parsers.Datas;
+using System.Collections.Generic;
 
 namespace Parse.WpfControls.SyntaxEditor.EventArgs
 {
@@ -13,25 +14,28 @@ namespace Parse.WpfControls.SyntaxEditor.EventArgs
         public int Line { get; }
         public string ProjectName { get; }
         public string FileName { get; }
-
-        public ParsingBlock ParsingFailedArgs { get; } = null;
+        public TokenData Token { get; }
+        public IReadOnlyList<ParsingErrorInfo> AlarmInfos { get; }
 
         public AlarmEventArgs(string projectName, string fileName)
         {
             this.Status = AlarmStatus.None;
             this.ProjectName = projectName;
             this.FileName = fileName;
-            this.ParsingFailedArgs = null;
         }
 
-        public AlarmEventArgs(string projectName, string fileName, int tokenIndex, int line, ParsingBlock e)
+        public AlarmEventArgs(string projectName, string fileName, int tokenIndex, int line, TokenData token, IReadOnlyList<ParsingErrorInfo> alarmInfos)
         {
             this.Status = AlarmStatus.ParsingError;
             this.ProjectName = projectName;
             this.FileName = fileName;
             this.TokenIndex = tokenIndex;
             this.Line = line;
-            this.ParsingFailedArgs = e;
+            this.Token = token;
+            this.AlarmInfos = alarmInfos;
         }
+
+        public override string ToString() => string.Format("Status : {0}, TokenIndex : {1}, Token : {2}, Line : {3}, AlarmCount : {4}", 
+                                                                                    this.Status, this.TokenIndex, this.Token, this.Line, this.AlarmInfos.Count);
     }
 }

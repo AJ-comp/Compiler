@@ -10,11 +10,11 @@ using Parse.FrontEnd.Grammars.MiniC;
 using Parse.FrontEnd.Parsers.Datas;
 using Parse.FrontEnd.Parsers.Logical;
 using Parse.FrontEnd.RegularGrammar;
+using Parse.Tokenize;
 using Parse.WpfControls.SyntaxEditor.EventArgs;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.IO;
 using System.Threading.Tasks;
 
 namespace ApplicationLayer.ViewModels.DocumentTypeViewModels
@@ -24,8 +24,8 @@ namespace ApplicationLayer.ViewModels.DocumentTypeViewModels
         /********************************************************************************************
          * private field section
          ********************************************************************************************/
+        private object lockObject = new object();
         private int caretIndex = 0;
-        private AlarmCollection alarmList = new AlarmCollection();
         private FileTreeNodeModel fileNode;
         private RelayCommand<ParsingCompletedEventArgs> parsingCompletedCommand = null;
 
@@ -40,6 +40,7 @@ namespace ApplicationLayer.ViewModels.DocumentTypeViewModels
         public string Data => fileNode.Data;
         public string FileName => fileNode.FileName;
 
+        public TokenizeImpactRanges RecentTokenizeHistory { get; } = new TokenizeImpactRanges();
         public ParserSnippet ParserSnippet { get; } = ParserFactory.Instance.GetParser(ParserFactory.ParserKind.SLR_Parser, new MiniCGrammar()).NewParserSnippet();
         public TreeSymbol ParseTree { get; private set; }
         public DataTable ParsingHistory { get; private set; }
@@ -53,13 +54,6 @@ namespace ApplicationLayer.ViewModels.DocumentTypeViewModels
                 this.RaisePropertyChanged(nameof(CaretIndex));
             }
         }
-
-
-
-        /********************************************************************************************
-         * event section
-         ********************************************************************************************/
-        public event EventHandler<AlarmCollection> AlarmFired = null;
 
 
 
@@ -88,24 +82,27 @@ namespace ApplicationLayer.ViewModels.DocumentTypeViewModels
         }
 
 
+
         /********************************************************************************************
          * event handler section
          ********************************************************************************************/
         private void OnParsingCompleted(ParsingCompletedEventArgs parsingCompletedInfo)
         {
             var parsingResult = parsingCompletedInfo.ParsingResult;
-            var sementicResult = this.ParserSnippet.Parser.Grammar.SDTS.Process(parsingResult.ToAST);
-            this.ParsingFailedListPreProcess(parsingResult);
 
-            if (parsingResult.HasError == false) this.alarmList.Add(new AlarmEventArgs(string.Empty, this.FileName));
-            else this.AdjustToValidAlarmList();
+            AlarmCollection alarmList = new AlarmCollection();
+            if (parsingResult.HasError == false) alarmList.Add(new AlarmEventArgs(string.Empty, this.FileName));
+            else
+            {
+                this.AddAlarmData(parsingResult, alarmList);
+                this.AdjustToValidAlarmList(alarmList);
+            }
 
             this.ParsingHistory = parsingCompletedInfo.ParsingResult.ToParsingHistory;
             this.ParseTree = parsingCompletedInfo.ParsingResult.ToParseTree;
 
             // inform to alarm list view.
-            Messenger.Default.Send<AlarmMessage>(new AlarmMessage(this));
-            this.AlarmFired?.Invoke(this, parsingCompletedInfo.AlarmCollection);
+            Messenger.Default.Send<AlarmMessage>(new AlarmMessage(this, alarmList));
         }
 
 
@@ -116,11 +113,11 @@ namespace ApplicationLayer.ViewModels.DocumentTypeViewModels
         /// <summary>
         /// This function deletes useless alarm from the AlarmList.
         /// </summary>
-        private void AdjustToValidAlarmList()
+        private void AdjustToValidAlarmList(AlarmCollection alarmList)
         {
             AlarmCollection correctList = new AlarmCollection();
 
-            foreach (var item in this.alarmList)
+            foreach (var item in alarmList)
             {
                 int tokenIndex = item.TokenIndex;
                 //                if (this.TextArea.Tokens[tokenIndex] == item.ParsingFailedArgs.InputValue.TokenCell) correctList.Add(item);
@@ -135,45 +132,19 @@ namespace ApplicationLayer.ViewModels.DocumentTypeViewModels
             });
             */
 
-            this.alarmList.Clear();
-            foreach (var item in correctList) this.alarmList.Add(item);
+            alarmList.Clear();
+            foreach (var item in correctList) alarmList.Add(item);
         }
 
-        private void ParsingFailedListPreProcess(ParsingResult e)
+        private void AddAlarmData(ParsingResult e, AlarmCollection alarmList)
         {
-            List<Tuple<int, ParsingBlock>> errorBlocks = new List<Tuple<int, ParsingBlock>>();
-
-            Parallel.For(0, e.Count, i =>
+            int lineIndex = 0;
+            Parallel.For(0, e.Count, tokenIndex => 
             {
-                var block = e[i];
-                if (block.Token.Kind == null) return;
-                if (block.ErrorInfos.Count == 0)
-                {
-                    block.Token.TokenCell.ValueOptionData = DrawOption.None;
-                    return;
-                }
+                var block = e[tokenIndex];
+                if (block.Token.Input == "\n") lineIndex++;                // this may need to use a lock object.
+                if (block.ErrorInfos.Count == 0) return;
 
-                var errToken = block.Token;
-
-                DrawOption status = DrawOption.None;
-                if (errToken.TokenCell.ValueOptionData != null)
-                    status = (DrawOption)errToken.TokenCell.ValueOptionData;
-
-                if (errToken.Kind == new EndMarker())
-                    status |= DrawOption.EndPointUnderline;
-                else
-                    status |= DrawOption.Underline;
-
-                errToken.TokenCell.ValueOptionData = status;
-
-                lock (errorBlocks) errorBlocks.Add(new Tuple<int, ParsingBlock>(i, block));
-            });
-
-
-            for (int i = 0; i < errorBlocks.Count; i++)
-            {
-                var tokenIndex = errorBlocks[i].Item1;
-                var block = errorBlocks[i].Item2;
                 var errToken = block.Token;
 
                 // If the error fired on EndMarker then error point is last line.
@@ -181,8 +152,11 @@ namespace ApplicationLayer.ViewModels.DocumentTypeViewModels
                 //                    this.TextArea.GetIndexInfoFromCaretIndex(errToken.TokenCell.StartIndex) :
                 //                    new System.Drawing.Point(0, this.TextArea.LineIndexes.Count - 1);
 
-                //this.alarmList.Add(new AlarmEventArgs(string.Empty, this.FileName, tokenIndex, point.Y + 1, block));
-            }
+                ProjectTreeNodeModel projNode = fileNode.ManagerTree as ProjectTreeNodeModel;
+
+                lock(lockObject)
+                    alarmList.Add(new AlarmEventArgs(projNode?.FileNameWithoutExtension, FileName, tokenIndex, lineIndex + 1, errToken, block.ErrorInfos));
+            });
         }
 
 

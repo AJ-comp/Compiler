@@ -1,4 +1,5 @@
-﻿using Parse.WpfControls.SyntaxEditor.EventArgs;
+﻿using Parse.FrontEnd;
+using Parse.WpfControls.SyntaxEditor.EventArgs;
 using System.Collections.Generic;
 
 namespace ApplicationLayer.Models
@@ -14,9 +15,10 @@ namespace ApplicationLayer.Models
         public string ProjectName { get; }
         public string FileName { get; }
         public int TokenIndex { get; }
+        public TokenData TokenData { get; }
         public int Line { get; }
 
-        public AlarmData(object fromControl, int status, string code, string message, string fullPath, string projectName, string fileName, int tokenIndex, int line)
+        public AlarmData(object fromControl, int status, string code, string message, string fullPath, string projectName, string fileName, int tokenIndex, TokenData tokenData, int line)
         {
             this.Status = status;
 
@@ -27,6 +29,7 @@ namespace ApplicationLayer.Models
             this.ProjectName = projectName;
             this.FileName = fileName;
             this.TokenIndex = tokenIndex;
+            this.TokenData = tokenData;
             this.Line = line;
         }
 

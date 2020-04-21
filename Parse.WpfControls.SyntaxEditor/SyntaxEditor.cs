@@ -1,4 +1,5 @@
-﻿using Parse.FrontEnd.Grammars;
+﻿using Parse.FrontEnd;
+using Parse.FrontEnd.Grammars;
 using Parse.FrontEnd.Parsers.Datas;
 using Parse.FrontEnd.Parsers.Logical;
 using Parse.FrontEnd.RegularGrammar;
@@ -6,19 +7,28 @@ using Parse.WpfControls.Models;
 using Parse.WpfControls.SyntaxEditor.EventArgs;
 using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
+using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using System.Windows.Threading;
 
 namespace Parse.WpfControls.SyntaxEditor
 {
     [TemplatePart(Name = "TextArea", Type = typeof(HighlightTextBox))]
     public class SyntaxEditor : Editor
     {
+        private Thread _workerManager;
+        private CompletionList completionList;
         private bool bReserveRegistKeywords = false;
-        private AlarmCollection alarmList = new AlarmCollection();
         private ParsingResult parsingResult = new ParsingResult();
+
+        // Critical Section member
+        private object _lockObject = new object();
+        private Tuple<ParsingResult, TextChange> _csPostProcessData;
 
         public ParserSnippet ParserSnippet
         {
@@ -54,6 +64,18 @@ namespace Parse.WpfControls.SyntaxEditor
         }
 
 
+        #region CloseCharacters DP
+        public StringCollection CloseCharacters
+        {
+            get { return (StringCollection)GetValue(CloseCharactersProperty); }
+            set { SetValue(CloseCharactersProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for CloseCharacters.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty CloseCharactersProperty =
+            DependencyProperty.Register("CloseCharacters", typeof(StringCollection), typeof(SyntaxEditor), new PropertyMetadata(new StringCollection()));
+
+        #endregion
 
 
         public delegate void OnParserChangedEventHandler(object sender);
@@ -176,6 +198,68 @@ namespace Parse.WpfControls.SyntaxEditor
             base.OnApplyTemplate();
 
             this.TextArea.TextChanged += TextArea_TextChanged;
+            this.completionList = new CompletionList(this.TextArea);
+            this.completionList.RegisterKey(CompletionItemType.Class, new KeyData("pack://application:,,,/Parse.WpfControls;component/Resources/class.png",
+                                                                                                                    "pack://application:,,,/Parse.WpfControls;component/Resources/class.png", "class"));
+            this.completionList.RegisterKey(CompletionItemType.CodeSnipp, new KeyData("pack://application:,,,/Parse.WpfControls;component/Resources/codesnipp.png",
+                                                                                                        "pack://application:,,,/Parse.WpfControls;component/Resources/codesnipp.png", "code snipp"));
+            this.completionList.RegisterKey(CompletionItemType.Delegate, new KeyData("pack://application:,,,/Parse.WpfControls;component/Resources/delegate.png",
+                                                                                                        "pack://application:,,,/Parse.WpfControls;component/Resources/delegate.png", "delegate"));
+            this.completionList.RegisterKey(CompletionItemType.Enum, new KeyData("pack://application:,,,/Parse.WpfControls;component/Resources/enum.png",
+                                                                                                        "pack://application:,,,/Parse.WpfControls;component/Resources/enum.png", "enum"));
+            this.completionList.RegisterKey(CompletionItemType.Event, new KeyData("pack://application:,,,/Parse.WpfControls;component/Resources/event.png",
+                                                                                                        "pack://application:,,,/Parse.WpfControls;component/Resources/event.png", "event"));
+            this.completionList.RegisterKey(CompletionItemType.Field, new KeyData("pack://application:,,,/Parse.WpfControls;component/Resources/field.png",
+                                                                                                        "pack://application:,,,/Parse.WpfControls;component/Resources/field.png", "field"));
+            this.completionList.RegisterKey(CompletionItemType.Function, new KeyData("pack://application:,,,/Parse.WpfControls;component/Resources/function_active.png",
+                                                                                                        "pack://application:,,,/Parse.WpfControls;component/Resources/function.png", "function"));
+            this.completionList.RegisterKey(CompletionItemType.Interface, new KeyData("pack://application:,,,/Parse.WpfControls;component/Resources/interface.png",
+                                                                                                        "pack://application:,,,/Parse.WpfControls;component/Resources/interface.png", "interface"));
+            this.completionList.RegisterKey(CompletionItemType.Keyword, new KeyData("pack://application:,,,/Parse.WpfControls;component/Resources/keyword.png",
+                                                                                                        "pack://application:,,,/Parse.WpfControls;component/Resources/keyword.png", "keyword"));
+            this.completionList.RegisterKey(CompletionItemType.Namespace, new KeyData("pack://application:,,,/Parse.WpfControls;component/Resources/namespace.png",
+                                                                                                        "pack://application:,,,/Parse.WpfControls;component/Resources/namespace.png", "namespace"));
+            this.completionList.RegisterKey(CompletionItemType.Property, new KeyData("pack://application:,,,/Parse.WpfControls;component/Resources/property.png",
+                                                                                                        "pack://application:,,,/Parse.WpfControls;component/Resources/property.png", "property"));
+            this.completionList.RegisterKey(CompletionItemType.Struct, new KeyData("pack://application:,,,/Parse.WpfControls;component/Resources/struct.png",
+                                                                                                        "pack://application:,,,/Parse.WpfControls;component/Resources/struct.png", "struct"));
+
+            this._workerManager = new Thread(WokerManagerLogic);
+            this._workerManager.IsBackground = true;
+            this._workerManager.Priority = ThreadPriority.Lowest;
+            this._workerManager.Start();
+        }
+
+        private void WokerManagerLogic()
+        {
+            ParsingResult localResult;
+            TextChange localTextChange;
+
+            while(true)
+            {
+                Thread.Sleep(50);
+
+                lock (_lockObject)
+                {
+                    if (_csPostProcessData == null) continue;
+
+                    localResult = _csPostProcessData.Item1;
+                    localTextChange = _csPostProcessData.Item2;
+                    _csPostProcessData = null;
+                }
+
+                var list = this.GetCompletionList();
+                Dispatcher.Invoke(() =>
+                {
+                    this.ShowIntellisense(localTextChange, list);
+                }, DispatcherPriority.ApplicationIdle);
+
+                this.SementicAnalysis(localResult);
+                Dispatcher.Invoke(() =>
+                {
+                    this.ParsingCompleted?.Invoke(this, new ParsingCompletedEventArgs(localResult));
+                });
+            }
         }
 
         private void RegisterKeywords(Grammar grammar)
@@ -227,37 +311,20 @@ namespace Parse.WpfControls.SyntaxEditor
         // 전처리기 액션자 (ex : #if ~ #elsif ~ #else ~ #endif) 등록 함수 만들기
         // (파라메터 : 1.액션자 syntax, 액션자 범주에서 행동 요소), 3.액션자의 Highlight Color)
 
-        /// <summary>
-        /// This function deletes useless alarm from the AlarmList.
-        /// </summary>
-        private void AdjustToValidAlarmList()
+        private void MoveCaretToToken(int tokenIndex, TokenData tokenData)
         {
-            AlarmCollection correctList = new AlarmCollection();
+            if (tokenIndex >= this.parsingResult.Count) return;
+            var tokenDataToCompare = this.parsingResult[tokenIndex].Token;
 
-            foreach (var item in this.alarmList)
-            {
-                int tokenIndex = item.TokenIndex;
-                //                if (this.TextArea.Tokens[tokenIndex] == item.ParsingFailedArgs.InputValue.TokenCell) correctList.Add(item);
-                correctList.Add(item);
-            }
+            if (tokenDataToCompare.Equals(tokenData) == false) return;
+            if (tokenDataToCompare.Input != tokenData.Input) return;
 
-            /*
-            var correctList = this.alarmList.Where(x =>
-            {
-                int tokenIndex = x.ParsingFailedArgs.ErrorIndex;
-                return (this.TextArea.Tokens[tokenIndex] == x.ParsingFailedArgs.InputValue.TokenCell);
-            });
-            */
-
-            this.alarmList.Clear();
-            foreach (var item in correctList) this.alarmList.Add(item);
+            this.TextArea.MoveCaretToToken(tokenIndex);
         }
 
-        private void MoveCaretToToken(int tokenIndex) => this.TextArea.MoveCaretToToken(tokenIndex);
 
 
-
-        private void ParsingFailedListPreProcess(ParsingResult e)
+        private static void ParsingFailedListPreProcess(ParsingResult e)
         {
             List<Tuple<int, ParsingBlock>> errorBlocks = new List<Tuple<int, ParsingBlock>>();
 
@@ -286,29 +353,63 @@ namespace Parse.WpfControls.SyntaxEditor
 
                 lock (errorBlocks) errorBlocks.Add(new Tuple<int, ParsingBlock>(i, block));
             });
+        }
 
+        private void SementicAnalysis(ParsingResult target)
+        {
+//            var sementicResult = this.ParserSnippet.Parser.Grammar.SDTS.Process(target.ToAST);
+            ParsingFailedListPreProcess(target);
+        }
 
-            for(int i=0; i<errorBlocks.Count; i++)
+        private List<ItemData> GetCompletionList()
+        {
+            List<ItemData> result = new List<ItemData>();
+            result.Add(new ItemData(CompletionItemType.Class, "class", "test tooltip"));
+            result.Add(new ItemData(CompletionItemType.CodeSnipp, "codesnipp", "test tooltip"));
+            result.Add(new ItemData(CompletionItemType.Delegate, "delegate", "test tooltip"));
+            result.Add(new ItemData(CompletionItemType.Enum, "enum", "test tooltip"));
+            result.Add(new ItemData(CompletionItemType.Event, "event", "test tooltip"));
+            result.Add(new ItemData(CompletionItemType.Field, "field", "test tooltip"));
+            result.Add(new ItemData(CompletionItemType.Function, "function", "test tooltip"));
+
+            return result;
+        }
+
+        private bool IsBackSpace(TextChange changeInfo) => (changeInfo.RemovedLength >= 1 && changeInfo.AddedLength == 0);
+
+        private void ShowIntellisense(TextChange changeInfo, List<ItemData> items)
+        {
+            var addString = TextArea.Text.Substring(changeInfo.Offset, changeInfo.AddedLength);
+            if (addString.Length > 1) { completionList.Close(); return; }
+            if (CloseCharacters.Contains(addString)) { completionList.Close(); return; }
+
+            if (IsBackSpace(changeInfo))
             {
-                var tokenIndex = errorBlocks[i].Item1;
-                var block = errorBlocks[i].Item2;
-                var errToken = block.Token;
-
-                // If the error fired on EndMarker then error point is last line.
-                var point = (errToken.Kind != new EndMarker()) ?
-                                    this.TextArea.GetIndexInfoFromCaretIndex(errToken.TokenCell.StartIndex) :
-                                    new System.Drawing.Point(0, this.TextArea.LineIndexes.Count - 1);
-
-                this.alarmList.Add(new AlarmEventArgs(string.Empty, this.FileName, tokenIndex, point.Y + 1, block));
+                if (TextArea.CaretIndex <= completionList.CaretIndexWhenCLOccur) { completionList.Close(); return; }
             }
+            else if (completionList.IsOpen == false)
+            {
+                if (addString.Length == 1)
+                {
+                    completionList.CaretIndexWhenCLOccur = TextArea.CaretIndex - 1;
+                }
+            }
+
+            var rect = TextArea.GetRectFromCharacterIndex(TextArea.CaretIndex);
+            double x = rect.X;
+            double y = (LineHeight > 0) ? rect.Y + LineHeight : rect.Y + TextArea.FontSize;
+            var inputString = TextArea.Text.Substring(completionList.CaretIndexWhenCLOccur, TextArea.CaretIndex - completionList.CaretIndexWhenCLOccur);
+
+            if (completionList.IsOpen) completionList.Show(inputString, x, y);
+            else completionList.Create(items, x, y);
+
+            
         }
 
 
         private void TextArea_TextChanged(object sender, TextChangedEventArgs e)
         {
-            this.alarmList.Clear();
-
-            if(this.parsingResult.Success)  // if prev parsing successed.
+            if (this.parsingResult.Success)  // if prev parsing successed.
             {
                 // partial parsing
                 var tokens = ParserSnippet.ToTokenDataList(this.TextArea.Tokens);
@@ -321,13 +422,11 @@ namespace Parse.WpfControls.SyntaxEditor
                 this.parsingResult = this.ParserSnippet.Parsing(tokens);
             }
 
-            var sementicResult = this.ParserSnippet.Parser.Grammar.SDTS.Process(this.parsingResult.ToAST);
-            this.ParsingFailedListPreProcess(parsingResult);
+            // shallow copy
+            var newParsingResult = this.parsingResult.Clone() as ParsingResult;
+            lock (_lockObject)
+                _csPostProcessData = new Tuple<ParsingResult, TextChange>(newParsingResult, e.Changes.First());
 
-            if (parsingResult.HasError == false) this.alarmList.Add(new AlarmEventArgs(string.Empty, this.FileName));
-            else this.AdjustToValidAlarmList();
-
-            this.ParsingCompleted?.Invoke(this, new ParsingCompletedEventArgs(parsingResult, this.alarmList));
             this.TextArea.InvalidateVisual();
         }
     }

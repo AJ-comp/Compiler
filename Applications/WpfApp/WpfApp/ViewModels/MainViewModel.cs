@@ -195,7 +195,7 @@ namespace ApplicationLayer.WpfApp.ViewModels
         {
             var alarmList = ServiceLocator.Current.GetInstance<AlarmListViewModel>();
 
-            Messenger.Default.Register<AddEditorMessage>(alarmList, alarmList.ReceivedAddEditorMessage);
+            Messenger.Default.Register<AlarmMessage>(alarmList, alarmList.ReceivedAlarmMessage);
         }
 
         private void InitQuestionToSaveDialog()

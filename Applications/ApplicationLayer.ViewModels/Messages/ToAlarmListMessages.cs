@@ -1,25 +1,18 @@
 ﻿using ApplicationLayer.ViewModels.DocumentTypeViewModels;
 using GalaSoft.MvvmLight.Messaging;
+using Parse.WpfControls.SyntaxEditor.EventArgs;
 
 namespace ApplicationLayer.ViewModels.Messages
 {
-    public class AddEditorMessage : MessageBase
-    {
-        public EditorTypeViewModel AddEditor { get; }
-
-        public AddEditorMessage(EditorTypeViewModel addEditor)
-        {
-            AddEditor = addEditor;
-        }
-    }
-
     public class AlarmMessage : MessageBase
     {
         public EditorTypeViewModel Editor { get; }
+        public AlarmCollection AlarmDatas { get; }
 
-        public AlarmMessage(EditorTypeViewModel editor)
+        public AlarmMessage(EditorTypeViewModel editor, AlarmCollection alarmDatas)
         {
             Editor = editor;
+            AlarmDatas = alarmDatas;
         }
     }
 }

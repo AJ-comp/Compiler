@@ -5,7 +5,7 @@ namespace Parse.Extensions
 {
     public static class ListExtensionMethods
     {
-        public static List<T> ToReverseList<T>(this List<T> obj)
+        public static List<T> ToReverseList<T>(this IList<T> obj)
         {
             List<T> result = new List<T>(obj);
             result.Reverse();
@@ -13,7 +13,7 @@ namespace Parse.Extensions
             return result;
         }
 
-        public static bool IsEqual<T>(this List<T> obj, List<T> target)
+        public static bool IsEqual<T>(this IList<T> obj, IReadOnlyList<T> target)
         {
             if (obj.Count != target.Count) return false;
 
@@ -23,6 +23,18 @@ namespace Parse.Extensions
             }
 
             return true;
+        }
+
+        public static void RemoveList<T>(this IList<T> obj, List<int> indexesToRemove)
+        {
+            indexesToRemove.Sort();
+            int adjustCounter = 0;
+            for (int i = 0; i < indexesToRemove.Count; i++)
+            {
+                if (i + adjustCounter >= obj.Count) break;
+
+                obj.RemoveAt((i + adjustCounter--));
+            }
         }
 
         /// <summary>

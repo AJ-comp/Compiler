@@ -13,7 +13,16 @@ namespace ApplicationLayer.Models.SolutionPackage
         /********************************************************************************************
          * property section
          ********************************************************************************************/
-        public string Data { get; set; }
+        public string Data
+        {
+            get => (this.IsExistFile) ? File.ReadAllText(this.FullPath) : string.Empty;
+            set
+            {
+                if(this.IsExistFile == false)  return;
+
+                File.WriteAllText(this.FullPath, value);
+            }
+        }
         public string FileType => System.IO.Path.GetExtension(this.FileName).Replace(".", "");
         public bool IsLoaded { get; set; } = false;
 

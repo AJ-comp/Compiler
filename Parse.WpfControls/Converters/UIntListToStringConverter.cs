@@ -12,6 +12,7 @@ namespace Parse.WpfControls.Converters
         {
             string result = string.Empty;
             List<uint> src = value as List<uint>;
+            if (src == null) return result;
 
             foreach(var item in src)
                 result += item.ToString() + ",";

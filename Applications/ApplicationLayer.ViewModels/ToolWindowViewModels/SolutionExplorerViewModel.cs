@@ -28,7 +28,6 @@ namespace ApplicationLayer.ViewModels.ToolWindowViewModels
         private DocumentViewModel selectedDocument;
         private RelayCommand doubleClickCommand;
         private RelayCommand<TreeNodeModel> selectedCommand;
-        private List<Tuple<FileTreeNodeModel, ParsingResult>> files = new List<Tuple<FileTreeNodeModel, ParsingResult>>();
 
 
 
@@ -388,8 +387,6 @@ namespace ApplicationLayer.ViewModels.ToolWindowViewModels
 
                 this.Documents.Add(editor);
                 this.SelectedDocument = editor;
-
-                Messenger.Default.Send<AddEditorMessage>(new AddEditorMessage(editor));
             }
         }
     }

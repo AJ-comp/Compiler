@@ -4,8 +4,7 @@
                     xmlns:lex="http://wpflocalizeextension.codeplex.com"
                     xmlns:docking="http://schemas.actiprosoftware.com/winfx/xaml/docking"
                     xmlns:syntaxEditor="clr-namespace:Parse.WpfControls.SyntaxEditor;assembly=Parse.WpfControls.SyntaxEditor"
-                    xmlns:ap="clr-namespace:ApplicationLayer.WpfApp.AttachedProperties"
-                    xmlns:localCommands="clr-namespace:ApplicationLayer.WpfApp.Commands"
+                    xmlns:ap="clr-namespace:ApplicationLayer.Views.AttachedProperties;assembly=ApplicationLayer.Views"
                     xmlns:localConverters="clr-namespace:ApplicationLayer.WpfApp.Converters"
                     xmlns:localBehaviors="clr-namespace:ApplicationLayer.WpfApp.Behaviors"
                     xmlns:documentViewModels="clr-namespace:ApplicationLayer.ViewModels.DocumentTypeViewModels;assembly=ApplicationLayer.ViewModels"
@@ -27,7 +26,7 @@
     </Style>
 
     <Style x:Key="DocumentWindowStyle" TargetType="docking:DocumentWindow" BasedOn="{StaticResource DockingWindowStyle}">
-        <Setter Property="FileName" Value="{Binding Path=FileName, Mode=TwoWay}" />
+        <Setter Property="FileName" Value="{Binding Path=FileName}" />
         <Setter Property="IsReadOnly" Value="{Binding Path=IsReadOnly, Mode=TwoWay}" />
     </Style>
 

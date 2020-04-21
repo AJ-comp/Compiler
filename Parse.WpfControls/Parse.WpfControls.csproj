@@ -79,9 +79,9 @@
   <ItemGroup>
     <Compile Include="AttachedProperties\TextBlockExtension.cs" />
     <Compile Include="AttachedProperties\TextBoxBehavior.cs" />
-    <Compile Include="Behaviors\CompletionListBehavior.cs" />
     <Compile Include="Common\ExtensionTextBox.cs" />
     <Compile Include="Common\TokenizeTextBox.cs" />
+    <Compile Include="CompletionList.cs" />
     <Compile Include="Converters\EventArgConverterExtension.cs" />
     <Compile Include="Converters\FontReleateConverter.cs" />
     <Compile Include="Converters\LineHeightBasedFontSizeConverter.cs" />
@@ -99,15 +99,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Behaviors\DynamicToggleButtonCreateBehavior.cs" />
     <Compile Include="Behaviors\RedirectRoutedEventBehavior.cs" />
     <Compile Include="Behaviors\ZoomScrollBehavior.cs" />
     <Compile Include="Models\CodeContentInfo.cs" />
     <Compile Include="TextViewWindow.cs" />
     <Compile Include="Utilities\RegexUtility.cs" />
-    <Compile Include="Views\CompletionList.xaml.cs">
-      <DependentUpon>CompletionList.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Common\DrawingAlgorithm.cs" />
     <Compile Include="EventArgs\EditorScrollChangedEventArgs.cs" />
     <Compile Include="EventArgs\EditorRenderedEventArgs.cs" />
@@ -115,9 +111,12 @@
     <Compile Include="HighlightTextBox.cs" />
     <Compile Include="TextCanvas.cs" />
     <Compile Include="TextStyle.cs" />
-    <Compile Include="ViewModels\CompletionListViewModel.cs" />
     <Compile Include="Utilities\StringUtility.cs" />
     <Page Include="Resources\Styles\ImageStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\CompletionList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -126,10 +125,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Themes\TextViewWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\CompletionList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -222,6 +217,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\paste.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\function_active.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

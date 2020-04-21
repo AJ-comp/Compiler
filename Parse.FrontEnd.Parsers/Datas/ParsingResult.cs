@@ -1,13 +1,11 @@
 ﻿using Parse.Extensions;
 using Parse.FrontEnd.Ast;
 using Parse.FrontEnd.Parsers.Properties;
-using Parse.FrontEnd.RegularGrammar;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
-using static Parse.FrontEnd.Parsers.Datas.LR.LRParsingRowDataFormat;
 
 namespace Parse.FrontEnd.Parsers.Datas
 {
@@ -15,7 +13,7 @@ namespace Parse.FrontEnd.Parsers.Datas
     /// 
     /// </summary>
     /// <see cref="https://www.lucidchart.com/documents/edit/c96f0bde-4111-4957-bf65-75b56d8074dc/0_0?beaconFlowId=687BBA49A656D177"/>
-    public class ParsingResult : List<ParsingBlock>
+    public class ParsingResult : List<ParsingBlock>, ICloneable
     {
         public bool Success
         {
@@ -210,6 +208,8 @@ namespace Parse.FrontEnd.Parsers.Datas
 
             return result;
         }
+
+        public object Clone() => new ParsingResult(this) { Success = this.Success };
 
 
         /*  LLParsing Tree

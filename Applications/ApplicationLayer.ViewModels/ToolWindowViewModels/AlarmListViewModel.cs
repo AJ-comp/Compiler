@@ -13,6 +13,7 @@ namespace ApplicationLayer.ViewModels.ToolWindowViewModels
 {
     public class AlarmListViewModel : ToolWindowViewModel
     {
+        private object lockObject = new object();
         private ObservableCollection<EditorTypeViewModel> editors = new ObservableCollection<EditorTypeViewModel>();
         public ObservableCollection<AlarmData> AlarmLists { get; } = new ObservableCollection<AlarmData>();
 
@@ -31,14 +32,8 @@ namespace ApplicationLayer.ViewModels.ToolWindowViewModels
         {
             if (index < 0) return;
 
-            var editor = this.FindEditorIndexOfAlarmData(this.AlarmLists[index]);
-            if (editor == null)
-            {
-                // it have to be removed from AlarmList.
-                return;
-            }
-
-            editor.MoveCaretInvoker.Call(new object[] { this.AlarmLists[index].TokenIndex });
+            var editor = this.AlarmLists[index].FromControl as EditorTypeViewModel;
+            editor.MoveCaretInvoker.Call(new object[] { this.AlarmLists[index].TokenIndex, this.AlarmLists[index].TokenData });
         }
 
         public AlarmListViewModel()
@@ -89,47 +84,28 @@ namespace ApplicationLayer.ViewModels.ToolWindowViewModels
             foreach (var item in e) this.AlarmLists.Add(item);
         }
 
-        /// <summary>
-        /// This function adds the control to communicate the alarm list.
-        /// </summary>
-        /// <param name="editor"></param>
-        public void AddEditors(EditorTypeViewModel editor)
-        {
-            if (editor is null) return;
-
-            editor.AlarmFired += Editor_AlarmFired;
-            this.editors.Add(editor);
-        }
-
-        public void ReceivedAddEditorMessage(AddEditorMessage message)
-        {
-            if (message is null) return;
-
-            this.AddEditors(message.AddEditor);
-        }
-
-        private void Editor_AlarmFired(object sender, AlarmCollection e)
+        public void ReceivedAlarmMessage(AlarmMessage message)
         {
             List<AlarmData> alarmList = new List<AlarmData>();
-            var editorViewModel = sender as EditorTypeViewModel;
+            var editorViewModel = message.Editor as EditorTypeViewModel;
 
-            Parallel.ForEach(e, item =>
+            Parallel.ForEach(message.AlarmDatas, item =>
             {
                 if (item.Status == AlarmStatus.None) return;
 
-                var errInfos = item.ParsingFailedArgs.ErrorInfos;
+                var errInfos = item.AlarmInfos;
                 foreach (var errInfo in errInfos)
                 {
                     int status = -1;
                     if (item.Status == AlarmStatus.ParsingError) status = 0;
                     else if (item.Status == AlarmStatus.ParsingWarning) status = 1;
 
-                    var alarmData = new AlarmData(sender, status, errInfo.Code, errInfo.Message, editorViewModel.FullPath, item.ProjectName, item.FileName, item.TokenIndex, item.Line);
-                    alarmList.Add(alarmData);
+                    var alarmData = new AlarmData(editorViewModel, status, errInfo.Code, errInfo.Message, editorViewModel.FullPath, item.ProjectName, item.FileName, item.TokenIndex, item.Token, item.Line);
+                    lock (lockObject) alarmList.Add(alarmData);
                 }
             });
 
-            this.AddAlarmList(sender, alarmList);
+            this.AddAlarmList(editorViewModel, alarmList);
         }
     }
 }
