@@ -4,16 +4,15 @@ using ApplicationLayer.Models.SolutionPackage;
 using ApplicationLayer.ViewModels.Messages;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
-using Parse;
 using Parse.FrontEnd.Ast;
 using Parse.FrontEnd.Grammars.MiniC;
 using Parse.FrontEnd.Parsers.Datas;
 using Parse.FrontEnd.Parsers.Logical;
-using Parse.FrontEnd.RegularGrammar;
 using Parse.Tokenize;
 using Parse.WpfControls.SyntaxEditor.EventArgs;
 using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Data;
 using System.Threading.Tasks;
 
@@ -39,6 +38,7 @@ namespace ApplicationLayer.ViewModels.DocumentTypeViewModels
         public string FullPath => fileNode.FullPath;
         public string Data => fileNode.Data;
         public string FileName => fileNode.FileName;
+        public StringCollection CloseCharacters { get; } = new StringCollection();
 
         public TokenizeImpactRanges RecentTokenizeHistory { get; } = new TokenizeImpactRanges();
         public ParserSnippet ParserSnippet { get; } = ParserFactory.Instance.GetParser(ParserFactory.ParserKind.SLR_Parser, new MiniCGrammar()).NewParserSnippet();
@@ -79,6 +79,13 @@ namespace ApplicationLayer.ViewModels.DocumentTypeViewModels
         public EditorTypeViewModel(FileTreeNodeModel fileNode) : base(fileNode.FileName, fileNode.FullPath, fileNode.FullPath)
         {
             this.fileNode = fileNode;
+            this.CloseCharacters.Add("{");
+            this.CloseCharacters.Add("}");
+            this.CloseCharacters.Add("(");
+            this.CloseCharacters.Add(")");
+            this.CloseCharacters.Add("\t");
+            this.CloseCharacters.Add(" ");
+            this.CloseCharacters.Add(Environment.NewLine);
         }
 
 

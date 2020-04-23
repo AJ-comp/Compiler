@@ -64,15 +64,15 @@ namespace Parse.WpfControls.Models
     {
         public KeyData() { }
 
-        public KeyData(string activeImgSource, string inActiveImgSource, string toolTipExplain)
+        public KeyData(BitmapImage activeImgSource, BitmapImage inActiveImgSource, string toolTipExplain)
         {
             ActiveImgSource = activeImgSource;
             InActiveImgSource = inActiveImgSource;
             ToolTipData = toolTipExplain;
         }
 
-        public string ActiveImgSource { get; } = string.Empty;
-        public string InActiveImgSource { get; } = string.Empty;
+        public BitmapImage ActiveImgSource { get; }
+        public BitmapImage InActiveImgSource { get; }
         public string ToolTipData { get; } = string.Empty;
     }
 

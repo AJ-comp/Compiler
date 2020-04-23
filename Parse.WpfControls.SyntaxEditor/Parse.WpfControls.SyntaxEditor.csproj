@@ -50,6 +50,10 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Resources\ImageResources.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Themes\Generic.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -57,6 +61,13 @@
     <Compile Include="EventArgs\AlarmCollection.cs" />
     <Compile Include="EventArgs\AlarmEventArgs.cs" />
     <Compile Include="EventArgs\ParsingCompletedEventArgs.cs" />
+    <Compile Include="HighlightingMap.cs" />
+    <Compile Include="HighlightingMapItem.cs" />
+    <Compile Include="Properties\Resources.ko-KR.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.ko-KR.resx</DependentUpon>
+    </Compile>
     <Compile Include="SyntaxEditor.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -75,8 +86,12 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <EmbeddedResource Include="Properties\Resources.ko-KR.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.ko-KR.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="app.config" />
@@ -106,6 +121,54 @@
       <Project>{54ec5cea-8d91-4165-9ebb-6a0693a96c4f}</Project>
       <Name>Parse</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Basic\class_active_16.png" />
+    <Resource Include="Resources\Images\Basic\class_inactive_16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Basic\codesnippet_active_16.png" />
+    <Resource Include="Resources\Images\Basic\codesnippet_inactive_16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Basic\event_active_16.png" />
+    <Resource Include="Resources\Images\Basic\event_inactive_16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Basic\delegate_active_16.png" />
+    <Resource Include="Resources\Images\Basic\delegate_inactive_16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Basic\enum_active_16.png" />
+    <Resource Include="Resources\Images\Basic\enum_inactive_16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Basic\field_active_16.png" />
+    <Resource Include="Resources\Images\Basic\field_inactive_16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Basic\function_active_16.png" />
+    <Resource Include="Resources\Images\Basic\function_inactive_16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Basic\interface_active_16.png" />
+    <Resource Include="Resources\Images\Basic\interface_inactive_16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Basic\keyword_active_16.png" />
+    <Resource Include="Resources\Images\Basic\keyword_inactive_16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Basic\namespace_active_16.png" />
+    <Resource Include="Resources\Images\Basic\namespace_inactive_16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Basic\property_active_16.png" />
+    <Resource Include="Resources\Images\Basic\property_inactive_16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Basic\struct_active_16.png" />
+    <Resource Include="Resources\Images\Basic\struct_inactive_16.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -117,50 +117,43 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Property_" xml:space="preserve">
-    <value>Property</value>
+  <data name="Class_" xml:space="preserve">
+    <value>클래스</value>
   </data>
-  <data name="Keyword_" xml:space="preserve">
-    <value>Keyword</value>
-  </data>
-  <data name="Function_" xml:space="preserve">
-    <value>Function</value>
-  </data>
-  <data name="Namespace" xml:space="preserve">
-    <value>Namespace</value>
-  </data>
-  <data name="CodeSnipp" xml:space="preserve">
-    <value>CodeSnipp</value>
-  </data>
-  <data name="Enumerate" xml:space="preserve">
-    <value>Enum</value>
-  </data>
-  <data name="Event" xml:space="preserve">
-    <value>Event</value>
+  <data name="CodeSnippet" xml:space="preserve">
+    <value>코드조각</value>
   </data>
   <data name="Delegate" xml:space="preserve">
-    <value>Delegate</value>
+    <value>델리게이트</value>
   </data>
-  <data name="Class_" xml:space="preserve">
-    <value>Class</value>
+  <data name="Enumerate" xml:space="preserve">
+    <value>열거자</value>
   </data>
-  <data name="Interface_" xml:space="preserve">
-    <value>Interface</value>
-  </data>
-  <data name="Structure" xml:space="preserve">
-    <value>Structure</value>
+  <data name="Event" xml:space="preserve">
+    <value>이벤트</value>
   </data>
   <data name="Field_" xml:space="preserve">
-    <value>Field</value>
+    <value>필드</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="cut" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\cut.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Function_" xml:space="preserve">
+    <value>함수</value>
   </data>
-  <data name="copy" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\copy.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Interface_" xml:space="preserve">
+    <value>인터페이스</value>
   </data>
-  <data name="paste" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\paste.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Keyword_" xml:space="preserve">
+    <value>키워드</value>
+  </data>
+  <data name="Namespace" xml:space="preserve">
+    <value>네임스페이스</value>
+  </data>
+  <data name="Property_" xml:space="preserve">
+    <value>속성</value>
+  </data>
+  <data name="Structure" xml:space="preserve">
+    <value>구조체</value>
+  </data>
+  <data name="DisplayOnly" xml:space="preserve">
+    <value>{0}만 표시</value>
   </data>
 </root>

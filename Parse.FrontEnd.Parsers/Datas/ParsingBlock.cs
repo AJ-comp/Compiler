@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Parse.FrontEnd.RegularGrammar;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -33,6 +34,7 @@ namespace Parse.FrontEnd.Parsers.Datas
                 return result;
             }
         }
+        public TerminalSet PossibleTerminalSet => (this.units.Count == 0) ? new TerminalSet() : this.units.Last().PossibleTerminalSet;
 
         public ParsingBlock(TokenData token)
         {

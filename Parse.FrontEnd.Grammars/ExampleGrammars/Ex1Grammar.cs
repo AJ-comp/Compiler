@@ -4,12 +4,12 @@ namespace Parse.FrontEnd.Grammars.ExampleGrammars
 {
     public class Ex1Grammar : Grammar
     {
-        private Terminal a = new Terminal(TokenType.DefinedDataType, "a");
-        private Terminal e = new Terminal(TokenType.DefinedDataType, "e");
+        private Terminal a = new Terminal(TokenType.Keyword.DefinedDataType, "a");
+        private Terminal e = new Terminal(TokenType.Keyword.DefinedDataType, "e");
         private Terminal @dot = new Terminal(TokenType.Operator, ".");
         private Terminal @replace = new Terminal(TokenType.Operator, "=");
-        private Terminal @openSquareBrace = new Terminal(TokenType.Operator, "[");
-        private Terminal @closeSquareBrace = new Terminal(TokenType.Operator, "]");
+        private Terminal @openSquareBrace = new Terminal(TokenType.Operator.Square, "[");
+        private Terminal @closeSquareBrace = new Terminal(TokenType.Operator.Square, "]");
 
         private NonTerminal A = new NonTerminal("A", true);
         private NonTerminal B = new NonTerminal("B");

@@ -37,7 +37,8 @@
                                                 KeywordForeground="LightBlue"
                                                 LineCommentForeground="ForestGreen"
                                                 Text="{Binding Data}"
-                                                ParserSnippet="{Binding ParserSnippet}">
+                                                ParserSnippet="{Binding ParserSnippet}"
+                                                CloseCharacters="{Binding CloseCharacters}">
 
             <i:Interaction.Behaviors>
                 <localBehaviors:EventToCommandBehavior Command="{Binding ParsingCompletedCommand}" Event="ParsingCompleted" PassArguments="True" />

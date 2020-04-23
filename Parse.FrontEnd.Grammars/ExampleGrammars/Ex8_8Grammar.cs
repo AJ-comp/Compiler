@@ -4,11 +4,11 @@ namespace Parse.FrontEnd.Grammars.ExampleGrammars
 {
     public class Ex8_8Grammar : Grammar
     {
-        private Terminal b = new Terminal(TokenType.DefinedDataType, "b");
-        private Terminal d = new Terminal(TokenType.DefinedDataType, "d");
-        private Terminal e = new Terminal(TokenType.DefinedDataType, "e");
-        private Terminal s = new Terminal(TokenType.DefinedDataType, "s");
-        private Terminal semicolon = new Terminal(TokenType.DefinedDataType, ";");
+        private Terminal b = new Terminal(TokenType.Keyword.DefinedDataType, "b");
+        private Terminal d = new Terminal(TokenType.Keyword.DefinedDataType, "d");
+        private Terminal e = new Terminal(TokenType.Keyword.DefinedDataType, "e");
+        private Terminal s = new Terminal(TokenType.Keyword.DefinedDataType, "s");
+        private Terminal semicolon = new Terminal(TokenType.Operator, ";");
 
         private NonTerminal P = new NonTerminal("P", true);
         private NonTerminal D = new NonTerminal("D");

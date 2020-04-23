@@ -1,8 +1,8 @@
 <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:attached="clr-namespace:Parse.WpfControls.AttachedProperties"
-                    xmlns:converter="clr-namespace:Parse.WpfControls.Converters"
-                    xmlns:local="clr-namespace:Parse.WpfControls.Themes">
+                    xmlns:converter="clr-namespace:Parse.WpfControls.Converters">
+    
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="/Parse.WpfControls;component/Themes/TextViewWindow.xaml"/>
         <ResourceDictionary Source="/Parse.WpfControls;component/Themes/HighlightTextBox.xaml"/>

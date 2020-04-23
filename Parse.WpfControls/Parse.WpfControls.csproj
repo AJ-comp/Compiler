@@ -94,14 +94,14 @@
     <Compile Include="Models\BlockManager.cs" />
     <Compile Include="Models\HighlightText.cs" />
     <Compile Include="Models\SyntaxPair.cs" />
+    <Compile Include="Behaviors\RedirectRoutedEventBehavior.cs" />
+    <Compile Include="Behaviors\ZoomScrollBehavior.cs" />
+    <Compile Include="Models\CodeContentInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Behaviors\RedirectRoutedEventBehavior.cs" />
-    <Compile Include="Behaviors\ZoomScrollBehavior.cs" />
-    <Compile Include="Models\CodeContentInfo.cs" />
     <Compile Include="TextViewWindow.cs" />
     <Compile Include="Utilities\RegexUtility.cs" />
     <Compile Include="Common\DrawingAlgorithm.cs" />
@@ -174,42 +174,6 @@
     <Folder Include="Resources\DataTemplates\" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\property.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\keyword.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\function.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\codesnipp.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\enum.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\namespace.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\event.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\class.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\delegate.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\interface.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\struct.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\field.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Resources\cut.png" />
   </ItemGroup>
   <ItemGroup>
@@ -217,9 +181,6 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\paste.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\function_active.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

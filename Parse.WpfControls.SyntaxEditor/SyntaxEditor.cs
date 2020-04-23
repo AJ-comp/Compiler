@@ -14,6 +14,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using System.Windows.Threading;
 
 namespace Parse.WpfControls.SyntaxEditor
@@ -82,6 +83,20 @@ namespace Parse.WpfControls.SyntaxEditor
         public event OnParserChangedEventHandler OnParserChanged;
 
         public event EventHandler<ParsingCompletedEventArgs> ParsingCompleted;
+
+
+
+        public HighlightingMap HighlightingMap
+        {
+            get { return (HighlightingMap)GetValue(HighlightingMapProperty); }
+            set { SetValue(HighlightingMapProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for HighlightingMap.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty HighlightingMapProperty =
+            DependencyProperty.Register("HighlightingMap", typeof(HighlightingMap), typeof(SyntaxEditor), new PropertyMetadata(default(HighlightingMap)));
+
+
 
         public Brush KeywordForeground
         {
@@ -199,30 +214,42 @@ namespace Parse.WpfControls.SyntaxEditor
 
             this.TextArea.TextChanged += TextArea_TextChanged;
             this.completionList = new CompletionList(this.TextArea);
-            this.completionList.RegisterKey(CompletionItemType.Class, new KeyData("pack://application:,,,/Parse.WpfControls;component/Resources/class.png",
-                                                                                                                    "pack://application:,,,/Parse.WpfControls;component/Resources/class.png", "class"));
-            this.completionList.RegisterKey(CompletionItemType.CodeSnipp, new KeyData("pack://application:,,,/Parse.WpfControls;component/Resources/codesnipp.png",
-                                                                                                        "pack://application:,,,/Parse.WpfControls;component/Resources/codesnipp.png", "code snipp"));
-            this.completionList.RegisterKey(CompletionItemType.Delegate, new KeyData("pack://application:,,,/Parse.WpfControls;component/Resources/delegate.png",
-                                                                                                        "pack://application:,,,/Parse.WpfControls;component/Resources/delegate.png", "delegate"));
-            this.completionList.RegisterKey(CompletionItemType.Enum, new KeyData("pack://application:,,,/Parse.WpfControls;component/Resources/enum.png",
-                                                                                                        "pack://application:,,,/Parse.WpfControls;component/Resources/enum.png", "enum"));
-            this.completionList.RegisterKey(CompletionItemType.Event, new KeyData("pack://application:,,,/Parse.WpfControls;component/Resources/event.png",
-                                                                                                        "pack://application:,,,/Parse.WpfControls;component/Resources/event.png", "event"));
-            this.completionList.RegisterKey(CompletionItemType.Field, new KeyData("pack://application:,,,/Parse.WpfControls;component/Resources/field.png",
-                                                                                                        "pack://application:,,,/Parse.WpfControls;component/Resources/field.png", "field"));
-            this.completionList.RegisterKey(CompletionItemType.Function, new KeyData("pack://application:,,,/Parse.WpfControls;component/Resources/function_active.png",
-                                                                                                        "pack://application:,,,/Parse.WpfControls;component/Resources/function.png", "function"));
-            this.completionList.RegisterKey(CompletionItemType.Interface, new KeyData("pack://application:,,,/Parse.WpfControls;component/Resources/interface.png",
-                                                                                                        "pack://application:,,,/Parse.WpfControls;component/Resources/interface.png", "interface"));
-            this.completionList.RegisterKey(CompletionItemType.Keyword, new KeyData("pack://application:,,,/Parse.WpfControls;component/Resources/keyword.png",
-                                                                                                        "pack://application:,,,/Parse.WpfControls;component/Resources/keyword.png", "keyword"));
-            this.completionList.RegisterKey(CompletionItemType.Namespace, new KeyData("pack://application:,,,/Parse.WpfControls;component/Resources/namespace.png",
-                                                                                                        "pack://application:,,,/Parse.WpfControls;component/Resources/namespace.png", "namespace"));
-            this.completionList.RegisterKey(CompletionItemType.Property, new KeyData("pack://application:,,,/Parse.WpfControls;component/Resources/property.png",
-                                                                                                        "pack://application:,,,/Parse.WpfControls;component/Resources/property.png", "property"));
-            this.completionList.RegisterKey(CompletionItemType.Struct, new KeyData("pack://application:,,,/Parse.WpfControls;component/Resources/struct.png",
-                                                                                                        "pack://application:,,,/Parse.WpfControls;component/Resources/struct.png", "struct"));
+            this.completionList.RegisterKey(CompletionItemType.Class, new KeyData(FindResource("ClassActive16Path") as BitmapImage,
+                                                                                                                    FindResource("ClassInActive16Path") as BitmapImage, 
+                                                                                                                    string.Format(Properties.Resources.DisplayOnly, Properties.Resources.Class_)));
+            this.completionList.RegisterKey(CompletionItemType.CodeSnipp, new KeyData(FindResource("CodeSnippetActive16Path") as BitmapImage,
+                                                                                                                            FindResource("CodeSnippetInActive16Path") as BitmapImage,
+                                                                                                                            string.Format(Properties.Resources.DisplayOnly, Properties.Resources.CodeSnippet)));
+            this.completionList.RegisterKey(CompletionItemType.Delegate, new KeyData(FindResource("DelegateActive16Path") as BitmapImage,
+                                                                                                                          FindResource("DelegateInActive16Path") as BitmapImage,
+                                                                                                                          string.Format(Properties.Resources.DisplayOnly, Properties.Resources.Delegate)));
+            this.completionList.RegisterKey(CompletionItemType.Enum, new KeyData(FindResource("EnumActive16Path") as BitmapImage,
+                                                                                                                     FindResource("EnumInActive16Path") as BitmapImage,
+                                                                                                                     string.Format(Properties.Resources.DisplayOnly, Properties.Resources.Enumerate)));
+            this.completionList.RegisterKey(CompletionItemType.Event, new KeyData(FindResource("EventActive16Path") as BitmapImage,
+                                                                                                                     FindResource("EventInActive16Path") as BitmapImage,
+                                                                                                                     string.Format(Properties.Resources.DisplayOnly, Properties.Resources.Event)));
+            this.completionList.RegisterKey(CompletionItemType.Field, new KeyData(FindResource("FieldActive16Path") as BitmapImage,
+                                                                                                                    FindResource("FieldInActive16Path") as BitmapImage,
+                                                                                                                    string.Format(Properties.Resources.DisplayOnly, Properties.Resources.Field_)));
+            this.completionList.RegisterKey(CompletionItemType.Function, new KeyData(FindResource("FunctionActive16Path") as BitmapImage,
+                                                                                                                         FindResource("FunctionInActive16Path") as BitmapImage,
+                                                                                                                         string.Format(Properties.Resources.DisplayOnly, Properties.Resources.Function_)));
+            this.completionList.RegisterKey(CompletionItemType.Interface, new KeyData(FindResource("InterfaceActive16Path") as BitmapImage,
+                                                                                                                          FindResource("InterfaceInActive16Path") as BitmapImage,
+                                                                                                                          string.Format(Properties.Resources.DisplayOnly, Properties.Resources.Interface_)));
+            this.completionList.RegisterKey(CompletionItemType.Keyword, new KeyData(FindResource("KeywordActive16Path") as BitmapImage,
+                                                                                                                          FindResource("KeywordInActive16Path") as BitmapImage,
+                                                                                                                          string.Format(Properties.Resources.DisplayOnly, Properties.Resources.Keyword_)));
+            this.completionList.RegisterKey(CompletionItemType.Namespace, new KeyData(FindResource("NamespaceActive16Path") as BitmapImage,
+                                                                                                                             FindResource("NamespaceInActive16Path") as BitmapImage,
+                                                                                                                             string.Format(Properties.Resources.DisplayOnly, Properties.Resources.Namespace)));
+            this.completionList.RegisterKey(CompletionItemType.Property, new KeyData(FindResource("PropertyActive16Path") as BitmapImage,
+                                                                                                                         FindResource("PropertyInActive16Path") as BitmapImage,
+                                                                                                                         string.Format(Properties.Resources.DisplayOnly, Properties.Resources.Property_)));
+            this.completionList.RegisterKey(CompletionItemType.Struct, new KeyData(FindResource("StructActive16Path") as BitmapImage,
+                                                                                                                      FindResource("StructInActive16Path") as BitmapImage,
+                                                                                                                      string.Format(Properties.Resources.DisplayOnly, Properties.Resources.Structure)));
 
             this._workerManager = new Thread(WokerManagerLogic);
             this._workerManager.IsBackground = true;
@@ -248,7 +275,14 @@ namespace Parse.WpfControls.SyntaxEditor
                     _csPostProcessData = null;
                 }
 
-                var list = this.GetCompletionList();
+                int tokenIndex = -1;
+                Dispatcher.Invoke(() =>
+                {
+                    tokenIndex = this.TextArea.GetTokenIndexForCaretIndex(this.TextArea.CaretIndex, Tokenize.RecognitionWay.Back);
+                });
+
+                var list = this.GetCompletionList(localResult, tokenIndex);
+
                 Dispatcher.Invoke(() =>
                 {
                     this.ShowIntellisense(localTextChange, list);
@@ -272,29 +306,27 @@ namespace Parse.WpfControls.SyntaxEditor
 
             foreach (var terminal in grammar.TerminalSet)
             {
-                if (terminal.TokenType == TokenType.DefinedDataType ||
-                    terminal.TokenType == TokenType.RepeateKeyword ||
-                    terminal.TokenType == TokenType.NormalKeyword ||
-                    terminal.TokenType == TokenType.ControlKeyword)
+                
+                if (terminal.TokenType is Keyword)
                 {
                     this.TextArea.AddCompletionList(CompletionItemType.Keyword, terminal.Value);
                     this.TextArea.AddSyntaxHighLightInfo(terminal.Value, terminal, this.KeywordForeground, terminal.CanDerived);
                 }
-                else if (terminal.TokenType == TokenType.Comment)
+                else if (terminal.TokenType is Comment)
                     this.TextArea.AddSyntaxHighLightInfo(terminal.Value, terminal, this.LineCommentForeground, terminal.CanDerived);
-                else if (terminal.TokenType == TokenType.Digit10)
+                else if (terminal.TokenType is Digit10)
                     this.TextArea.AddSyntaxHighLightInfo(terminal.Value, terminal, this.DigitForeground, terminal.CanDerived);
-                else if (terminal.TokenType == TokenType.Digit2)
+                else if (terminal.TokenType is Digit2)
                     this.TextArea.AddSyntaxHighLightInfo(terminal.Value, terminal, this.BinaryForeground, terminal.CanDerived);
-                else if (terminal.TokenType == TokenType.Digit8)
+                else if (terminal.TokenType is Digit8)
                     this.TextArea.AddSyntaxHighLightInfo(terminal.Value, terminal, this.OctalForeground, terminal.CanDerived);
-                else if (terminal.TokenType == TokenType.Digit16)
+                else if (terminal.TokenType is Digit16)
                     this.TextArea.AddSyntaxHighLightInfo(terminal.Value, terminal, this.HexForeground, terminal.CanDerived);
-                else if (terminal.TokenType == TokenType.Operator)
+                else if (terminal.TokenType is Operator)
                     this.TextArea.AddSyntaxHighLightInfo(terminal.Value, terminal, this.TextArea.DefaultTextBrush, terminal.CanDerived, true);
-                else if (terminal.TokenType == TokenType.Delimiter)
+                else if (terminal.TokenType is Delimiter)
                     this.TextArea.AddSyntaxHighLightInfo(terminal.Value, terminal, Brushes.Black, terminal.CanDerived, true);
-                else if (terminal.TokenType == TokenType.Identifier)
+                else if (terminal.TokenType is Identifier)
                     this.TextArea.AddSyntaxHighLightInfo(terminal.Value, terminal, this.TextArea.DefaultTextBrush, terminal.CanDerived);
             }
 
@@ -361,16 +393,16 @@ namespace Parse.WpfControls.SyntaxEditor
             ParsingFailedListPreProcess(target);
         }
 
-        private List<ItemData> GetCompletionList()
+        private List<ItemData> GetCompletionList(ParsingResult parsingResult, int tokenIndex)
         {
             List<ItemData> result = new List<ItemData>();
-            result.Add(new ItemData(CompletionItemType.Class, "class", "test tooltip"));
-            result.Add(new ItemData(CompletionItemType.CodeSnipp, "codesnipp", "test tooltip"));
-            result.Add(new ItemData(CompletionItemType.Delegate, "delegate", "test tooltip"));
-            result.Add(new ItemData(CompletionItemType.Enum, "enum", "test tooltip"));
-            result.Add(new ItemData(CompletionItemType.Event, "event", "test tooltip"));
-            result.Add(new ItemData(CompletionItemType.Field, "field", "test tooltip"));
-            result.Add(new ItemData(CompletionItemType.Function, "function", "test tooltip"));
+            if (tokenIndex < 0) return result;
+            if (parsingResult.Count == 0) return result;
+
+            foreach (var item in parsingResult[tokenIndex].PossibleTerminalSet)
+            {
+                result.Add(new ItemData(CompletionItemType.Keyword, item.Value, string.Empty));
+            }
 
             return result;
         }
@@ -387,7 +419,7 @@ namespace Parse.WpfControls.SyntaxEditor
             {
                 if (TextArea.CaretIndex <= completionList.CaretIndexWhenCLOccur) { completionList.Close(); return; }
             }
-            else if (completionList.IsOpen == false)
+            else if (completionList.IsOpened == false)
             {
                 if (addString.Length == 1)
                 {
@@ -400,10 +432,10 @@ namespace Parse.WpfControls.SyntaxEditor
             double y = (LineHeight > 0) ? rect.Y + LineHeight : rect.Y + TextArea.FontSize;
             var inputString = TextArea.Text.Substring(completionList.CaretIndexWhenCLOccur, TextArea.CaretIndex - completionList.CaretIndexWhenCLOccur);
 
-            if (completionList.IsOpen) completionList.Show(inputString, x, y);
+            if (completionList.IsOpened) completionList.Show(inputString, x, y);
             else completionList.Create(items, x, y);
 
-            
+
         }
 
 

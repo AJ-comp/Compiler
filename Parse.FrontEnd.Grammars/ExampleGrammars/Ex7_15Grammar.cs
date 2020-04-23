@@ -4,8 +4,8 @@ namespace Parse.FrontEnd.Grammars.ExampleGrammars
 {
     public class Ex7_15Grammar : Grammar
     {
-        private Terminal a = new Terminal(TokenType.DefinedDataType, "a");
-        private Terminal b = new Terminal(TokenType.DefinedDataType, "b");
+        private Terminal a = new Terminal(TokenType.Keyword.DefinedDataType, "a");
+        private Terminal b = new Terminal(TokenType.Keyword.DefinedDataType, "b");
 
         private NonTerminal S = new NonTerminal("S", true);
         private NonTerminal SL = new NonTerminal("S`");

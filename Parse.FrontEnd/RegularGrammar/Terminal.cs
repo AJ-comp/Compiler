@@ -59,7 +59,7 @@ namespace Parse.FrontEnd.RegularGrammar
 
     public class NotDefined : Terminal
     {
-        public NotDefined(string value = "") : base(TokenType.NotDefined, value)
+        public NotDefined(string value = "") : base(TokenType.SpecialToken.NotDefined, value)
         {
             this.uniqueKey = KeyManager.NotDefinedKey;
         }
@@ -67,7 +67,7 @@ namespace Parse.FrontEnd.RegularGrammar
 
     public class Epsilon : Terminal
     {
-        public Epsilon() : base(TokenType.Epsilon, "ε", "epsilon")
+        public Epsilon() : base(TokenType.SpecialToken.Epsilon, "ε", "epsilon")
         {
             this.uniqueKey = KeyManager.EpsilonKey;
         }
@@ -77,7 +77,7 @@ namespace Parse.FrontEnd.RegularGrammar
     {
         static string EndMarkerChar = "щ";
 
-        public EndMarker() : base(TokenType.Marker, EndMarkerChar)
+        public EndMarker() : base(TokenType.SpecialToken.Marker, EndMarkerChar)
         {
             this.uniqueKey = KeyManager.EndMarkerKey;
         }

@@ -114,4 +114,43 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="DisplayOnly" xml:space="preserve">
+    <value>Display only {0}</value>
+  </data>
+  <data name="Class_" xml:space="preserve">
+    <value>class</value>
+  </data>
+  <data name="CodeSnippet" xml:space="preserve">
+    <value>code snippet</value>
+  </data>
+  <data name="Delegate" xml:space="preserve">
+    <value>delegate</value>
+  </data>
+  <data name="Enumerate" xml:space="preserve">
+    <value>enum</value>
+  </data>
+  <data name="Event" xml:space="preserve">
+    <value>event</value>
+  </data>
+  <data name="Field_" xml:space="preserve">
+    <value>field</value>
+  </data>
+  <data name="Function_" xml:space="preserve">
+    <value>function</value>
+  </data>
+  <data name="Interface_" xml:space="preserve">
+    <value>interface</value>
+  </data>
+  <data name="Keyword_" xml:space="preserve">
+    <value>keyword</value>
+  </data>
+  <data name="Namespace" xml:space="preserve">
+    <value>namespace</value>
+  </data>
+  <data name="Property_" xml:space="preserve">
+    <value>property</value>
+  </data>
+  <data name="Structure" xml:space="preserve">
+    <value>structure</value>
+  </data>
 </root>

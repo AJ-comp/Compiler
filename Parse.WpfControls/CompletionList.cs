@@ -4,20 +4,12 @@ using Parse.WpfControls.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Collections.Specialized;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Parse.WpfControls
 {
@@ -67,7 +59,8 @@ namespace Parse.WpfControls
          * private field section [Not Control]
          ********************************************************************************************/
         private int caretIndexWhenCLOccur;
-        private HashSet<Enum> checkedTypeList = new HashSet<Enum>();
+        private bool isIncludeZeroSimilarity;
+        private string lastInputString = string.Empty;
         private Dictionary<Enum, KeyData> Keys = new Dictionary<Enum, KeyData>();
         private ObservableCollection<ItemData> AllItems = new ObservableCollection<ItemData>();
         private ObservableCollection<ItemData> VisibleItems = new ObservableCollection<ItemData>();
@@ -81,10 +74,12 @@ namespace Parse.WpfControls
             set => caretIndexWhenCLOccur = value;
         }
 
-        public bool IsOpen
+        public bool IsOpened => (_parentPopup == null) ? false : _parentPopup.IsOpen;
+
+        private bool IsOpen
         {
             get { return (bool)GetValue(IsOpenProperty); }
-            private set { SetValue(IsOpenProperty, value); }
+            set { SetValue(IsOpenProperty, value); }
         }
 
         public bool StaysOpen
@@ -227,6 +222,8 @@ namespace Parse.WpfControls
         public CompletionList(TextBox textBox)
         {
             this.parent = textBox;
+
+            this.parent.PreviewKeyDown += Parent_PreviewKeyDown;
         }
         #endregion
 
@@ -241,11 +238,10 @@ namespace Parse.WpfControls
             this.listBox.SelectionChanged += ((s, le) => this.listBox.ScrollIntoView(this.listBox.SelectedItem));
             this.listBox.SelectionChanged += ((s, le) => this.parent.Focus());
             this.listBox.MouseDoubleClick += ListBox_MouseDoubleClick;
-            this.PreviewKeyDown += CompletionList_PreviewKeyDown;
         }
 
         #region event handler
-        private void CompletionList_PreviewKeyDown(object sender, KeyEventArgs e)
+        private void Parent_PreviewKeyDown(object sender, KeyEventArgs e)
         {
             if (this.IsOpen)
             {
@@ -284,40 +280,41 @@ namespace Parse.WpfControls
         private void FilteringButton_Checked(object sender, RoutedEventArgs e)
         {
             var filterButton = sender as ToggleButton;
-            this.checkedTypeList.Add(filterButton.Tag as Enum);
 
             var border = filterButton.Content as Border;
             var brush = FilterButtonMouseEnterBackgroundColor;
             border.Background = brush;
+
+            this.Refresh();
         }
 
         private void FilteringButton_Unchecked(object sender, RoutedEventArgs e)
         {
             var filterButton = sender as ToggleButton;
-            this.checkedTypeList.Remove(filterButton.Tag as Enum);
 
             var border = filterButton.Content as Border;
             border.Background = Brushes.Transparent;
+
+            this.Refresh();
         }
         #endregion
 
         #region private methods
-        /// <summary>
-        /// This function returns BitmapImage from 'imgSource'.
-        /// </summary>
-        /// <param name="imgSource"></param>
-        /// <returns></returns>
-        private BitmapImage GetBitmapImage(string imgSource)
+        private IReadOnlyList<Enum> GetCheckedFilterType()
         {
-            BitmapImage result = new BitmapImage();
-            result.BeginInit();
-            result.UriSource = new Uri(imgSource, UriKind.RelativeOrAbsolute);
-            result.EndInit();
+            List<Enum> result = new List<Enum>();
+
+            foreach(var item in this.stackPanel.Children)
+            {
+                var filterButton = item as ToggleButton;
+
+                if (filterButton?.IsChecked == true) result.Add(filterButton.Tag as Enum);
+            }
 
             return result;
         }
 
-        private object GetFilterContent(ImageSource imageSource, double width, double height)
+        private object GetFilterContent(ImageSource imageSource, double width, double height, bool bChecked)
         {
             Border border = new Border
             {
@@ -326,6 +323,9 @@ namespace Parse.WpfControls
                 BorderThickness = new Thickness(0),
                 Child = new Image() { Source = imageSource, Width = width, Height = height }
             };
+
+            if (bChecked) border.Background = FilterButtonCheckedBackgroundColor;
+            else border.Background = Brushes.Transparent;
 
             return border;
         }
@@ -338,7 +338,7 @@ namespace Parse.WpfControls
             {
                 ToggleButton filterButton = filter as ToggleButton;
 
-                if (filterButton.Tag as Enum == type) result = filterButton;
+                if ((filterButton.Tag as Enum).Equals(type)) result = filterButton;
             }
 
             return result;
@@ -350,15 +350,17 @@ namespace Parse.WpfControls
             {
                 ToggleButton filterButton = filter as ToggleButton;
 
-                var bitmapImage = this.GetBitmapImage(this.Keys[filterButton.Tag as Enum].InActiveImgSource);
-                filterButton.Content = new Image() { Source = bitmapImage, Width = 16, Height = 16 };
+                var bitmapImage = this.Keys[filterButton.Tag as Enum].InActiveImgSource;
+                bool bChecked = (bool)filterButton.IsChecked;
+                filterButton.Content = this.GetFilterContent(bitmapImage, 16, 16, bChecked);
             }
 
             foreach(var item in itemDatas)
             {
                 ToggleButton filterButton = this.GetFilterButtonFromEnum(item.Type);
-                var bitmapImage = this.GetBitmapImage(this.Keys[item.Type as Enum].ActiveImgSource);
-                filterButton.Content = new Image() { Source = bitmapImage, Width = 16, Height = 16 };
+                var bitmapImage = this.Keys[item.Type as Enum].ActiveImgSource;
+                bool bChecked = (bool)filterButton.IsChecked;
+                filterButton.Content = this.GetFilterContent(bitmapImage, 16, 16, bChecked);
             }
         }
 
@@ -453,30 +455,34 @@ namespace Parse.WpfControls
         private void CreateFilterButtons()
         {
             List<Enum> enums = new List<Enum>();
-            List<Tuple<Enum, BitmapImage>> tgbuttonItemList = new List<Tuple<Enum, BitmapImage>>();
 
+            // extract enum list from all items without duplicate.
             foreach (var element in this.AllItems)
             {
                 if (enums.Contains(element.Type)) continue;
 
                 enums.Add(element.Type);
-                tgbuttonItemList.Add(new Tuple<Enum, BitmapImage>(element.Type, element.ImageSource));
             }
 
+            // create filter buttons with extracted enum list.
             this.stackPanel.Children.Clear();
-            foreach (var tgbuttonItem in tgbuttonItemList)
+            foreach (var @enum in enums)
             {
+                if (Keys.ContainsKey(@enum) == false) continue;
+
+                var keyData = Keys[@enum];
                 var filterButton = new ToggleButton()
                 {
-                    Tag = tgbuttonItem.Item1,
+                    Tag = @enum,
                     BorderThickness = new Thickness(0),
                     BorderBrush = Brushes.Transparent,
                     Width = 24,
                     Height = 24,
                     Background = Brushes.Transparent,
                     Focusable = false,
+                    ToolTip = keyData.ToolTipData,
 
-                    Content = this.GetFilterContent(tgbuttonItem.Item2, 16, 16)
+                    Content = this.GetFilterContent(keyData.ActiveImgSource, 16, 16, false)
                     //                    Content = new Image() { Source = tgbuttonItem.Item2, Width=16, Height=16 }
                 };
 
@@ -488,13 +494,14 @@ namespace Parse.WpfControls
                 this.stackPanel.Children.Add(filterButton);
             }
 
-            if (tgbuttonItemList.Count > 0) _parentPopup.Width = 24 * tgbuttonItemList.Count;
+            if (enums.Count > 0) _parentPopup.Width = 24 * enums.Count;
         }
 
         private IReadOnlyList<ItemData> GetFilteredListByFilterButton(IReadOnlyList<ItemData> itemDatas)
         {
             List<ItemData> result = new List<ItemData>();
 
+            var checkedTypeList = this.GetCheckedFilterType();
             foreach (var checkedType in checkedTypeList)
             {
                 foreach (var item in itemDatas)
@@ -505,7 +512,7 @@ namespace Parse.WpfControls
 
             if (checkedTypeList.Count == 0)
             {
-                foreach (var item in itemDatas) this.VisibleItems.Add(item);
+                foreach (var item in itemDatas) result.Add(item);
             }
 
             return result;
@@ -514,7 +521,7 @@ namespace Parse.WpfControls
         private bool RegisterItem(ItemData item)
         {
             if (this.Keys.ContainsKey(item.Type) == false) this.Keys.Add(item.Type, new KeyData());
-            item.ImageSource = this.GetBitmapImage((this.Keys.ContainsKey(item.Type)) ? this.Keys[item.Type].ActiveImgSource : string.Empty);
+            item.ImageSource = this.Keys[item.Type].ActiveImgSource;
 
             this.AllItems.Add(item);
 
@@ -550,33 +557,48 @@ namespace Parse.WpfControls
             this.CreateFilterButtons();
         }
 
-        public void Show(string inputString, double x, double y, bool IsIncludeZeroSimilarity = false)
+        public void Refresh()
         {
             var filteredList = this.GetFilteredListByFilterButton(this.AllItems);
-            var similarityList = this.GetSimilarityList(filteredList, inputString);
-
             this.ChangeFilterState(filteredList);
 
             this.VisibleItems.Clear();
             foreach (var item in filteredList) this.VisibleItems.Add(item);
 
-            this.SelectTopCandidate(similarityList);
-
-            if (IsIncludeZeroSimilarity == false)
+            if (this.lastInputString.Length > 0)
             {
-                List<int> removeIndexes = new List<int>();
-                for (int i = 0; i < similarityList.Count; i++)
+                var similarityList = this.GetSimilarityList(filteredList, this.lastInputString);
+
+                this.SelectTopCandidate(similarityList);
+
+                if (this.isIncludeZeroSimilarity == false)
                 {
-                    if (similarityList[i] == 0) removeIndexes.Add(i);
+                    List<int> removeIndexes = new List<int>();
+                    for (int i = 0; i < similarityList.Count; i++)
+                    {
+                        if (similarityList[i] == 0) removeIndexes.Add(i);
+                    }
+
+                    this.VisibleItems.RemoveList(removeIndexes);
                 }
-
-                this.VisibleItems.RemoveList(removeIndexes);
             }
+        }
 
+        public void Show(string inputString, double x, double y, bool IsIncludeZeroSimilarity = false)
+        {
+            this.lastInputString = inputString;
+            this.isIncludeZeroSimilarity = IsIncludeZeroSimilarity;
+
+            this.Refresh();
+
+            this.StaysOpen = false;
+            this.Placement = PlacementMode.Relative;
+            this.PlacementTarget = this.parent;
+            this.HorizontalOffset = x;
+            this.VerticalOffset = y;
             this.IsOpen = true;
         }
 
-        
         public void Close() => this.IsOpen = false;
         #endregion
     }
