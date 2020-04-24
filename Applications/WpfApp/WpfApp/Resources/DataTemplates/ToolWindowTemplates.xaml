@@ -4,8 +4,7 @@
                     xmlns:converters="clr-namespace:ApplicationLayer.WpfApp.Converters"
                     xmlns:toolWindowVMs="clr-namespace:ApplicationLayer.ViewModels.ToolWindowViewModels;assembly=ApplicationLayer.ViewModels"
                     xmlns:toolWindows="clr-namespace:ApplicationLayer.Views.WindowViews;assembly=ApplicationLayer.Views"
-                    xmlns:windows="clr-namespace:ApplicationLayer.WpfApp.Views.WindowViews"
-                    xmlns:local="clr-namespace:ApplicationLayer.WpfApp.Resources.DataTemplates">
+                    xmlns:windows="clr-namespace:ApplicationLayer.WpfApp.Views.WindowViews">
 
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="DocumentTemplates.xaml"/>

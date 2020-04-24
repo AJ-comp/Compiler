@@ -4,13 +4,14 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{54EC5CEA-8D91-4165-9EBB-6A0693A96C4F}</ProjectGuid>
+    <ProjectGuid>{5CF0E8B7-18D1-493F-B465-ED65E657178A}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Parse</RootNamespace>
-    <AssemblyName>Parse</AssemblyName>
+    <RootNamespace>Parse.FrontEnd.DrawingSupport</RootNamespace>
+    <AssemblyName>Parse.FrontEnd.DrawingSupport</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -32,6 +33,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -40,28 +42,26 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Algorithms\ISimilarityComparison.cs" />
-    <Compile Include="Algorithms\LikeVSSimilarityComparison.cs" />
-    <Compile Include="Algorithms\NaiveSimilarityComparison.cs" />
-    <Compile Include="Extensions\DataTableExtensionMethods.cs" />
-    <Compile Include="Extensions\EtcExtensionMethods.cs" />
-    <Compile Include="Extensions\HashSetExtensionMethods.cs" />
-    <Compile Include="Extensions\ListExtensionMethods.cs" />
+    <Compile Include="HighlightMapItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Range.cs" />
-    <Compile Include="ScopeSyntax.cs" />
-    <Compile Include="SelectionTokensContainer.cs" />
-    <Compile Include="Tokenize\Lexer.cs" />
-    <Compile Include="Tokenize\TokenCell.cs" />
-    <Compile Include="Tokenize\TokenizeImpactRanges.cs" />
-    <Compile Include="Tokenize\Tokenizer.cs" />
-    <Compile Include="Tokenize\TokenPatternInfo.cs" />
-    <Compile Include="Tokenize\TokenStorage.cs" />
-    <Compile Include="TokenType.cs" />
-    <Compile Include="Utilities\Arranger.cs" />
-    <Compile Include="Utilities\DGMLWriter.cs" />
-    <Compile Include="Utilities\Singleton.cs" />
-    <Compile Include="Utilities\StringUtility.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Parse\Parse.csproj">
+      <Project>{54ec5cea-8d91-4165-9ebb-6a0693a96c4f}</Project>
+      <Name>Parse</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.ko-KR.resx" />
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

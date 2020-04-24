@@ -11,7 +11,7 @@ namespace Parse.FrontEnd.Grammars
     {
         protected KeyManager keyManager = new KeyManager();
 
-        protected Terminal space = new Terminal(TokenType.Keyword.Accessword, " ");
+        protected Terminal space = new Terminal(TokenType.SpecialToken.Delimiter, " ");
         protected Terminal tab = new Terminal(TokenType.SpecialToken.Delimiter, "\t");
         protected Terminal lineFeed = new Terminal(TokenType.SpecialToken.Delimiter, "\r");
         protected Terminal lineBreak = new Terminal(TokenType.SpecialToken.Delimiter, "\n");

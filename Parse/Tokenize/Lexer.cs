@@ -1,4 +1,5 @@
 ﻿using Parse.Extensions;
+using Parse.Utilities;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -41,14 +42,20 @@ namespace Parse.Tokenize
             this.tokenPatternList = tokenPatternList;
 
             string result = string.Empty;
-            string generateString = string.Empty;
+            HashSet<string> allHashCode = new HashSet<string>();
             foreach (var pattern in tokenPatternList)
             {
                 if (pattern.OriginalPattern == string.Empty) continue;
 
-                generateString += "a";
-                result += string.Format("(?<{1}>{0})|", pattern.Pattern, generateString);
+                string key = string.Empty;
+                do
+                {
+                    key = StringUtility.RandomString(3, false);
+                } while (allHashCode.Contains(key));
+
+                result += string.Format("(?<{0}>{1})|", key, pattern.Pattern);
                 //                    patternSum += string.Format("({0})|", pattern.Pattern);
+                allHashCode.Add(key);
             }
 
             return result.Substring(0, result.Length - 1);

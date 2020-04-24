@@ -402,18 +402,6 @@ namespace Parse
             }
         }
 
-        public Skip Skip
-        {
-            get
-            {
-                var data = "Skip";
-                var hashCode = GetHashCode(data);
-                var cacheType = GetTokenType(hashCode);
-
-                return (cacheType == null) ? new Skip(hashCode, data) : cacheType as Skip;
-            }
-        }
-
         public Delimiter Delimiter
         {
             get
@@ -466,11 +454,40 @@ namespace Parse
     public class Comment : SpecialToken
     {
         public Comment(int hashCode, string value) : base(hashCode, value) { }
+
+        public LineComment LineComment
+        {
+            get
+            {
+                var data = "LineComment";
+                var hashCode = GetHashCode(data);
+                var cacheType = GetTokenType(hashCode);
+
+                return (cacheType == null) ? new LineComment(hashCode, data) : cacheType as LineComment;
+            }
+        }
+
+        public ScopeComment ScopeComment
+        {
+            get
+            {
+                var data = "ScopeComment";
+                var hashCode = GetHashCode(data);
+                var cacheType = GetTokenType(hashCode);
+
+                return (cacheType == null) ? new ScopeComment(hashCode, data) : cacheType as ScopeComment;
+            }
+        }
     }
 
-    public class Skip : SpecialToken
+    public class LineComment : Comment
     {
-        public Skip(int hashCode, string value) : base(hashCode, value) { }
+        public LineComment(int hashCode, string value) : base(hashCode, value) { }
+    }
+
+    public class ScopeComment : Comment
+    {
+        public ScopeComment(int hashCode, string value) : base(hashCode, value) { }
     }
 
     public class Delimiter : SpecialToken

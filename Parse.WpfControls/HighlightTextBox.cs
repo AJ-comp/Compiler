@@ -408,8 +408,8 @@ namespace Parse.WpfControls
         /// </summary>
         /// <param name="text">This argument means text to highlight. This argument can be a pattern.</param>
         /// <param name="foreBrush">This argument means the foreground color of the text.</param>
-        /// <param name="bCanDerived">This argument means whether a text argument can create a derived text.</param>
-        /// <param name="bOperator">This argument means whether text is operator.</param>
+        /// <param name="bCanDerived">If this argument is false regex expression is displayed like as (ex : ++ -> \b++\b)</param>
+        /// <param name="bOperator">If this argument is true regex expression is displayed like as (ex : ++ -> \+\+)</param>
         public void AddSyntaxHighLightInfo(string text, object optionData, Brush foreBrush, bool bCanDerived, bool bOperator = false)
         {
             this.textStyleDic.Add(text, new TextStyle(foreBrush, Brushes.Transparent));

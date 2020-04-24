@@ -31,6 +31,7 @@ namespace Parse.WpfControls.SyntaxEditor
         private object _lockObject = new object();
         private Tuple<ParsingResult, TextChange> _csPostProcessData;
 
+
         public ParserSnippet ParserSnippet
         {
             get { return (ParserSnippet)GetValue(ParserSnippetProperty); }
@@ -83,19 +84,6 @@ namespace Parse.WpfControls.SyntaxEditor
         public event OnParserChangedEventHandler OnParserChanged;
 
         public event EventHandler<ParsingCompletedEventArgs> ParsingCompleted;
-
-
-
-        public HighlightingMap HighlightingMap
-        {
-            get { return (HighlightingMap)GetValue(HighlightingMapProperty); }
-            set { SetValue(HighlightingMapProperty, value); }
-        }
-
-        // Using a DependencyProperty as the backing store for HighlightingMap.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty HighlightingMapProperty =
-            DependencyProperty.Register("HighlightingMap", typeof(HighlightingMap), typeof(SyntaxEditor), new PropertyMetadata(default(HighlightingMap)));
-
 
 
         public Brush KeywordForeground
@@ -312,8 +300,10 @@ namespace Parse.WpfControls.SyntaxEditor
                     this.TextArea.AddCompletionList(CompletionItemType.Keyword, terminal.Value);
                     this.TextArea.AddSyntaxHighLightInfo(terminal.Value, terminal, this.KeywordForeground, terminal.CanDerived);
                 }
-                else if (terminal.TokenType is Comment)
+                else if (terminal.TokenType is LineComment)
                     this.TextArea.AddSyntaxHighLightInfo(terminal.Value, terminal, this.LineCommentForeground, terminal.CanDerived);
+                else if(terminal.TokenType is ScopeComment)
+                    this.TextArea.AddSyntaxHighLightInfo(terminal.Value, terminal, this.LineCommentForeground, terminal.CanDerived, true);
                 else if (terminal.TokenType is Digit10)
                     this.TextArea.AddSyntaxHighLightInfo(terminal.Value, terminal, this.DigitForeground, terminal.CanDerived);
                 else if (terminal.TokenType is Digit2)

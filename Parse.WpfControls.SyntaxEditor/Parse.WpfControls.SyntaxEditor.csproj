@@ -61,8 +61,6 @@
     <Compile Include="EventArgs\AlarmCollection.cs" />
     <Compile Include="EventArgs\AlarmEventArgs.cs" />
     <Compile Include="EventArgs\ParsingCompletedEventArgs.cs" />
-    <Compile Include="HighlightingMap.cs" />
-    <Compile Include="HighlightingMapItem.cs" />
     <Compile Include="Properties\Resources.ko-KR.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

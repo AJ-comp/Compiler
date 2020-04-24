@@ -53,6 +53,7 @@
     <Reference Include="QuickGraph, Version=3.6.61114.0, Culture=neutral, PublicKeyToken=f3fb40175eec2af3" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\..\packages\MvvmLightLibs.5.4.1.1\lib\net45\System.Windows.Interactivity.dll</HintPath>
     </Reference>
@@ -64,6 +65,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DialogViewModels\OptionViewModels\FontsAndColorsViewModel.cs" />
+    <Compile Include="DialogViewModels\OptionViewModels\OptionViewModel.cs" />
     <Compile Include="DocumentTypeViewModels\ParseTreeViewModel.cs" />
     <Compile Include="Interfaces\IPathSearchable.cs" />
     <Compile Include="Messages\DisplayMessage.cs" />
@@ -100,6 +103,10 @@
     <ProjectReference Include="..\..\Parse.BackEnd.Target\Parse.BackEnd.Target\Parse.BackEnd.Target.csproj">
       <Project>{6FE9D3FA-798D-42EC-B6F0-890D5D320384}</Project>
       <Name>Parse.BackEnd.Target</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Parse.FrontEnd.DrawingSupport\Parse.FrontEnd.DrawingSupport.csproj">
+      <Project>{5CF0E8B7-18D1-493F-B465-ED65E657178A}</Project>
+      <Name>Parse.FrontEnd.DrawingSupport</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Parse.FrontEnd.Grammars\Parse.FrontEnd.Grammars.csproj">
       <Project>{A0661596-8C09-42A8-B412-8702108FD935}</Project>

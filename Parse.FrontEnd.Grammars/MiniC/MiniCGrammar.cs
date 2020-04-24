@@ -23,8 +23,8 @@ namespace Parse.FrontEnd.Grammars.MiniC
         public Terminal OpenSquareBrace { get; } = new Terminal(TokenType.Operator.Square, "[");
         public Terminal CloseSquareBrace { get; } = new Terminal(TokenType.Operator.Square, "]");
 
-        private Terminal scopeCommentStart = new Terminal(TokenType.SpecialToken.Comment, "/*");
-        private Terminal scopeCommentEnd = new Terminal(TokenType.SpecialToken.Comment, "*/");
+        private Terminal scopeCommentStart = new Terminal(TokenType.SpecialToken.Comment.ScopeComment, "/*");
+        private Terminal scopeCommentEnd = new Terminal(TokenType.SpecialToken.Comment.ScopeComment, "*/");
 
         public Terminal Inc { get; } = new Terminal(TokenType.Operator.NormalOperator, "++");
         public Terminal Dec { get; } = new Terminal(TokenType.Operator.NormalOperator, "--");

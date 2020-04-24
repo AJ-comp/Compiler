@@ -106,6 +106,15 @@
     <Compile Include="Converters\EventArgsConverterExtension.cs" />
     <Compile Include="Converters\MouseDoubleClickIndexConverter.cs" />
     <Compile Include="Converters\SelectedItemConverter.cs" />
+    <Compile Include="DialogViews\OptionViews\FontsAndColorsView.xaml.cs">
+      <DependentUpon>FontsAndColorsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="DialogViews\OptionViews\OptionDialog.xaml.cs">
+      <DependentUpon>OptionDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="DialogViews\OptionViews\OptionDialogMainView.xaml.cs">
+      <DependentUpon>OptionDialogMainView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MenusForTarget.cs" />
     <Compile Include="MenusForTargetCollection.cs" />
     <Compile Include="MiniCProjectTreeListBoxItemAdapter.cs" />
@@ -173,6 +182,10 @@
       <Project>{1d389520-0862-434b-82f9-ad0c41c2db5f}</Project>
       <Name>Parse.WpfControls</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\Parse\Parse.csproj">
+      <Project>{54EC5CEA-8D91-4165-9EBB-6A0693A96C4F}</Project>
+      <Name>Parse</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\ApplicationLayer.Common\ApplicationLayer.Common.csproj">
       <Project>{9b7ebe4d-c2b3-40e8-9516-107340a07111}</Project>
       <Name>ApplicationLayer.Common</Name>
@@ -194,6 +207,18 @@
     <Resource Include="Resources\Images\Basic\Solution16.png" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="DialogViews\OptionViews\FontsAndColorsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DialogViews\OptionViews\OptionDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DialogViews\OptionViews\OptionDialogMainView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="DocumentTypeViews\GrammarInfoView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -326,5 +351,6 @@
     <Resource Include="Resources\Images\Basic\unknown_24.png" />
     <Resource Include="Resources\Images\Basic\unknown_48.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
