@@ -37,7 +37,7 @@
 
     <Style TargetType="ListBox">
         <Setter Property="SnapsToDevicePixels" Value="true"/>
-        <Setter Property="Background" Value="{DynamicResource CommonEnableBackgroundBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource CommonEnableBackgroundBrush2}"/>
         <Setter Property="BorderBrush" Value="{DynamicResource CommonEnableBorderBrush}"/>
         <Setter Property="Foreground" Value="{DynamicResource CommonEnableTextBrush}"/>
         <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>

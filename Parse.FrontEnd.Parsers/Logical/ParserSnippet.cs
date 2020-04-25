@@ -29,11 +29,14 @@ namespace Parse.FrontEnd.Parsers.Logical
             if (tokenCells.Count == 0) return null;
             var result = new TokenData[tokenCells.Count + 1];
 
-            Parallel.For(0, tokenCells.Count, (i) =>
+            for (int i = 0; i < tokenCells.Count; i++)
+//            Parallel.For(0, tokenCells.Count, (i) =>
             {
                 var tokenCell = tokenCells[i];
+
+                //****  this function may creates a key for TokenType (NotDefined) so this function is not thread safe. ****
                 result[i] = TokenData.CreateFromTokenCell(tokenCell, (i == tokenCells.Count - 1));
-            });
+            }
 
             var endMarker = new EndMarker();
             result[result.Length - 1] = new TokenData(endMarker, new TokenCell(-1, endMarker.Value, null));

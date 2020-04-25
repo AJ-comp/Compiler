@@ -66,6 +66,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DialogViewModels\OptionViewModels\FontsAndColorsViewModel.cs" />
+    <Compile Include="DialogViewModels\OptionViewModels\OptionDialogMainViewModel.cs" />
     <Compile Include="DialogViewModels\OptionViewModels\OptionViewModel.cs" />
     <Compile Include="DocumentTypeViewModels\ParseTreeViewModel.cs" />
     <Compile Include="Interfaces\IPathSearchable.cs" />

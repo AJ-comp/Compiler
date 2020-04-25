@@ -106,14 +106,12 @@
     <Compile Include="Converters\EventArgsConverterExtension.cs" />
     <Compile Include="Converters\MouseDoubleClickIndexConverter.cs" />
     <Compile Include="Converters\SelectedItemConverter.cs" />
+    <Compile Include="DefaultTreeListBoxItemAdapter.cs" />
     <Compile Include="DialogViews\OptionViews\FontsAndColorsView.xaml.cs">
       <DependentUpon>FontsAndColorsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="DialogViews\OptionViews\OptionDialog.xaml.cs">
       <DependentUpon>OptionDialog.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="DialogViews\OptionViews\OptionDialogMainView.xaml.cs">
-      <DependentUpon>OptionDialogMainView.xaml</DependentUpon>
     </Compile>
     <Compile Include="MenusForTarget.cs" />
     <Compile Include="MenusForTargetCollection.cs" />
@@ -212,10 +210,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="DialogViews\OptionViews\OptionDialog.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="DialogViews\OptionViews\OptionDialogMainView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -6,10 +6,12 @@ using ApplicationLayer.Common.Interfaces;
 using ApplicationLayer.Common.Utilities;
 using ApplicationLayer.Models.SolutionPackage;
 using ApplicationLayer.ViewModels.DialogViewModels;
+using ApplicationLayer.ViewModels.DialogViewModels.OptionViewModels;
 using ApplicationLayer.ViewModels.DockingItemViewModels;
 using ApplicationLayer.ViewModels.DocumentTypeViewModels;
 using ApplicationLayer.ViewModels.Messages;
 using ApplicationLayer.ViewModels.ToolWindowViewModels;
+using ApplicationLayer.Views.DialogViews.OptionViews;
 using ApplicationLayer.WpfApp.ViewModels;
 using ApplicationLayer.WpfApp.Views.DialogViews;
 using GalaSoft.MvvmLight.Messaging;
@@ -41,6 +43,21 @@ namespace ApplicationLayer.WpfApp.Commands
         {
             NewSolutionDialog dialog = new NewSolutionDialog();
             var vm = dialog.DataContext as NewSolutionViewModel;
+
+            dialog.Owner = RootWindow;
+            dialog.ShowInTaskbar = false;
+            dialog.ShowDialog();
+        }, () =>
+        {
+            var vm = RootWindow.DataContext as MainViewModel;
+            return (vm.IsDebugStatus == false);
+        });
+
+        public static readonly RelayUICommand ShowOptionDialog = new RelayUICommand(CommonResource.Option,
+            () =>
+        {
+            OptionDialog dialog = new OptionDialog();
+            var vm = dialog.DataContext as OptionViewModel;
 
             dialog.Owner = RootWindow;
             dialog.ShowInTaskbar = false;

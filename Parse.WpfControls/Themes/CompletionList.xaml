@@ -96,7 +96,7 @@
                                 </ListBox.ItemTemplate>
                             </ListBox>
 
-                            <StackPanel Grid.Row="1" x:Name="PART_StackPanel" Orientation="Horizontal"/>
+                            <StackPanel Grid.Row="1" x:Name="PART_StackPanel" Orientation="Horizontal" Background="{DynamicResource CommonEnableBackgroundBrush2}"/>
                         </Grid>
 
                     </Border>

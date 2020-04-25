@@ -51,6 +51,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -70,6 +71,7 @@
     <Compile Include="GraphModels\PocEdge.cs" />
     <Compile Include="GraphModels\PocGraph.cs" />
     <Compile Include="GraphModels\PocVertex.cs" />
+    <Compile Include="HighlightTreeNodeModel.cs" />
     <Compile Include="MessageData.cs" />
     <Compile Include="GrammarPackages\IGrammarFactory.cs" />
     <Compile Include="GrammarPackages\MiniCPackage\MiniCFactory.cs" />
@@ -103,6 +105,10 @@
     <ProjectReference Include="..\..\Parse.BackEnd.Target\Parse.BackEnd.Target\Parse.BackEnd.Target.csproj">
       <Project>{6FE9D3FA-798D-42EC-B6F0-890D5D320384}</Project>
       <Name>Parse.BackEnd.Target</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Parse.FrontEnd.DrawingSupport\Parse.FrontEnd.DrawingSupport.csproj">
+      <Project>{5CF0E8B7-18D1-493F-B465-ED65E657178A}</Project>
+      <Name>Parse.FrontEnd.DrawingSupport</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Parse.FrontEnd.Grammars\Parse.FrontEnd.Grammars.csproj">
       <Project>{A0661596-8C09-42A8-B412-8702108FD935}</Project>

@@ -574,6 +574,15 @@ namespace ApplicationLayer.Define.Properties {
         }
         
         /// <summary>
+        ///   Option과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string Option {
+            get {
+                return ResourceManager.GetString("Option", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Other Window과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string OtherWindow {

@@ -182,7 +182,7 @@ namespace ApplicationLayer.ViewModels.SubViewModels
 
             ClassHierarchyGenerator classHierarchyGenerator = new ClassHierarchyGenerator();
 
-            this.TotalCPUs.Add(classHierarchyGenerator.ToHierarchyData(typeof(Target)));
+            this.TotalCPUs.Add(classHierarchyGenerator.ToHierarchyDataDirectionChild(typeof(Target)));
             foreach (var item in this.TotalCPUs)
                 this.terminalList.AddRange(item.GetTerminalCollection());
 

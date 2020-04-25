@@ -1,4 +1,6 @@
-﻿using GalaSoft.MvvmLight;
+﻿using ApplicationLayer.Common.Utilities;
+using ApplicationLayer.Models;
+using GalaSoft.MvvmLight;
 using Parse;
 using Parse.FrontEnd.DrawingSupport;
 using Parse.FrontEnd.Grammars;
@@ -12,9 +14,13 @@ using System.Threading.Tasks;
 
 namespace ApplicationLayer.ViewModels.DialogViewModels.OptionViewModels
 {
-    public class FontsAndColorsViewModel : ViewModelBase
+    public class FontsAndColorsViewModel : OptionDialogMainViewModel
     {
+        private HashSet<TokenType> _ignoreTokenList = new HashSet<TokenType>();
+
         public Grammar Grammar { get; set; }
+
+        public HighlightTreeNodeModel Root { get; } = new HighlightTreeNodeModel();
         public ObservableCollection<HighlightMapItem> HighlightMapCollection { get; } = new ObservableCollection<HighlightMapItem>();
 
         public FontsAndColorsViewModel(Grammar grammar)
@@ -22,10 +28,20 @@ namespace ApplicationLayer.ViewModels.DialogViewModels.OptionViewModels
             Grammar = grammar;
             if (grammar == null) return;
 
-            foreach(var terminal in grammar.TerminalSet)
+            _ignoreTokenList.Add(TokenType.SpecialToken.Delimiter);
+            _ignoreTokenList.Add(TokenType.SpecialToken.NotDefined);
+            _ignoreTokenList.Add(TokenType.SpecialToken.Epsilon);
+            _ignoreTokenList.Add(TokenType.SpecialToken.Marker);
+
+            HashSet<Type> tokenTypes = new HashSet<Type>();
+            foreach (var terminal in grammar.TerminalSet)
             {
-                HighlightMapCollection.Add(new HighlightMapItem(terminal.TokenType, Brushes.LightCyan, Brushes.Transparent));
+                if (_ignoreTokenList.Contains(terminal.TokenType)) continue;
+
+                tokenTypes.Add(terminal.TokenType.GetType());
             }
+
+            Root.Assign(ClassHierarchyGenerator.ToHierarchyDataDirectionParent(tokenTypes, typeof(TokenType)));
         }
     }
 }

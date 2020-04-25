@@ -36,7 +36,7 @@ namespace ApplicationLayer.Common.Utilities
             return parentTypeHier;
         }
 
-        public ClassHierarchyData ToHierarchyData(Type rootType)
+        private IReadOnlyList<Assembly> GetAllLoadedAssemblyList()
         {
             //                var loadedAssemblies = AppDomain.CurrentDomain.GetAssemblies().ToList();
             //                var loadedPaths = loadedAssemblies.Select(a => a.Location).ToArray();
@@ -47,10 +47,45 @@ namespace ApplicationLayer.Common.Utilities
 
             AssemblyName[] assemblyNameArray = Assembly.GetExecutingAssembly().GetReferencedAssemblies();
 
-            List<Assembly> loadedAssemblyList = new List<Assembly>();
+            List<Assembly> result = new List<Assembly>();
 
             foreach (var fileName in referencedPaths)
-                loadedAssemblyList.Add(Assembly.Load(AssemblyName.GetAssemblyName(fileName)));
+                result.Add(Assembly.Load(AssemblyName.GetAssemblyName(fileName)));
+
+            return result;
+        }
+
+        private static ClassHierarchyData FindNode(HashSet<ClassHierarchyData> list, Type targetToFind)
+        {
+            ClassHierarchyData result = null;
+
+            foreach (var item in list)
+            {
+                if(item.Data == targetToFind)
+                {
+                    result = item;
+                    break;
+                }
+            }
+
+            return result;
+        }
+
+        public IReadOnlyList<Type> GetAllTypesOfLoadedAssemblies(IReadOnlyList<Assembly> loadedAssemblies)
+        {
+            List<Type> result = new List<Type>();
+
+            foreach (Assembly assembly in loadedAssemblies)
+            {
+                foreach (Type type in assembly.GetTypes()) result.Add(type);
+            }
+
+            return result;
+        }
+
+        public ClassHierarchyData ToHierarchyDataDirectionChild(Type rootType)
+        {
+            var loadedAssemblyList = this.GetAllLoadedAssemblyList();
 
             this.sortedList.Add(rootType.Name, rootType);
 
@@ -65,5 +100,62 @@ namespace ApplicationLayer.Common.Utilities
             ClassHierarchyData rootTypeHier = new ClassHierarchyData() { Data = rootType };
             return Populate(rootTypeHier);
         }
+
+        public static ClassHierarchyData ToHierarchyDataDirectionParent(Type type, Type toType = null)
+        {
+            ClassHierarchyData current = new ClassHierarchyData() { Data = type };
+
+            while (true)
+            {
+                ClassHierarchyData parent = new ClassHierarchyData() { Data = current.Data.BaseType };
+
+                bool breakCondition = (toType == null) ? current.Data.BaseType != null : current.Data == toType;
+                if (breakCondition) break;
+
+                parent.Items.Add(current);
+                current = parent;
+            }
+
+            return current;
+        }
+
+        public static ClassHierarchyData ToHierarchyDataDirectionParent(HashSet<Type> typeList, Type toType = null)
+        {
+            HashSet<ClassHierarchyData> createdTypeList = new HashSet<ClassHierarchyData>();
+
+            foreach (var type in typeList)
+            {
+                var classHierData = ToHierarchyDataDirectionParent(type, toType);
+                int maxDepthLevel = classHierData.MaxDepthLevel;
+
+                for (int i = 0; i < maxDepthLevel; i++)
+                {
+                    var parent = classHierData.GetFirstClassHierarchyDataByDepth(i);
+                    var firstChild = classHierData.GetFirstClassHierarchyDataByDepth(i + 1);
+
+                    if (parent == null) continue;
+
+                    if (createdTypeList.Contains(parent) == false)
+                    {
+                        createdTypeList.Add(parent);
+
+                        if (firstChild == null) continue;
+                        createdTypeList.Add(firstChild);
+                    }
+                    else if(createdTypeList.Contains(firstChild) == false)
+                    {
+                        if (firstChild == null) continue;
+
+                        createdTypeList.TryGetValue(parent, out var parentData);
+                        createdTypeList.Add(firstChild);
+                        if (parentData.Items.Contains(firstChild) == false) parentData.Items.Add(firstChild);
+                    }
+                }
+            }
+
+            return FindNode(createdTypeList, toType);
+        }
+
+
     }
 }

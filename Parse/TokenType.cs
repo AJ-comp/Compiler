@@ -126,7 +126,7 @@ namespace Parse
     #region Keyword related
     public class Keyword : TokenType
     {
-        public Keyword(int hashCode, string value) : base(hashCode, value) { }
+        internal Keyword(int hashCode, string value) : base(hashCode, value) { }
 
         public NormalKeyword NormalKeyword
         {
@@ -191,34 +191,34 @@ namespace Parse
 
     public class NormalKeyword : Keyword
     {
-        public NormalKeyword(int hashCode, string value) : base(hashCode, value) { }
+        internal NormalKeyword(int hashCode, string value) : base(hashCode, value) { }
     }
 
     public class Repeateword : Keyword
     {
-        public Repeateword(int hashCode, string value) : base(hashCode, value) { }
+        internal Repeateword(int hashCode, string value) : base(hashCode, value) { }
     }
 
     public class Controlword : Keyword
     {
-        public Controlword(int hashCode, string value) : base(hashCode, value) { }
+        internal Controlword(int hashCode, string value) : base(hashCode, value) { }
     }
 
     public class Accessword : Keyword
     {
-        public Accessword(int hashCode, string value) : base(hashCode, value) { }
+        internal Accessword(int hashCode, string value) : base(hashCode, value) { }
     }
 
     public class DefinedDataType : Keyword
     {
-        public DefinedDataType(int hashCode, string value) : base(hashCode, value) { }
+        internal DefinedDataType(int hashCode, string value) : base(hashCode, value) { }
     }
     #endregion
 
     #region Digit related
     public class Digit : TokenType
     {
-        public Digit(int hashCode, string value) : base(hashCode, value) { }
+        internal Digit(int hashCode, string value) : base(hashCode, value) { }
 
         public Digit2 Digit2
         {
@@ -271,29 +271,29 @@ namespace Parse
 
     public class Digit2 : Digit
     {
-        public Digit2(int hashCode, string value) : base(hashCode, value) { }
+        internal Digit2(int hashCode, string value) : base(hashCode, value) { }
     }
 
     public class Digit8 : Digit
     {
-        public Digit8(int hashCode, string value) : base(hashCode, value) { }
+        internal Digit8(int hashCode, string value) : base(hashCode, value) { }
     }
 
     public class Digit10 : Digit
     {
-        public Digit10(int hashCode, string value) : base(hashCode, value) { }
+        internal Digit10(int hashCode, string value) : base(hashCode, value) { }
     }
 
     public class Digit16 : Digit
     {
-        public Digit16(int hashCode, string value) : base(hashCode, value) { }
+        internal Digit16(int hashCode, string value) : base(hashCode, value) { }
     }
     #endregion
 
     #region Operator related
     public class Operator : TokenType
     {
-        public Operator(int hashCode, string value) : base(hashCode, value) { }
+        internal Operator(int hashCode, string value) : base(hashCode, value) { }
 
         public NormalOperator NormalOperator
         {
@@ -361,34 +361,34 @@ namespace Parse
 
     public class NormalOperator : Operator
     {
-        public NormalOperator(int hashCode, string value) : base(hashCode, value) { }
+        internal NormalOperator(int hashCode, string value) : base(hashCode, value) { }
     }
 
     public class Comma : Operator
     {
-        public Comma(int hashCode, string value) : base(hashCode, value) { }
+        internal Comma(int hashCode, string value) : base(hashCode, value) { }
     }
 
     public class Square : Operator
     {
-        public Square(int hashCode, string value) : base(hashCode, value) { }
+        internal Square(int hashCode, string value) : base(hashCode, value) { }
     }
 
     public class Parenthesis : Operator
     {
-        public Parenthesis(int hashCode, string value) : base(hashCode, value) { }
+        internal Parenthesis(int hashCode, string value) : base(hashCode, value) { }
     }
 
     public class CurlyBrace : Operator
     {
-        public CurlyBrace(int hashCode, string value) : base(hashCode, value) { }
+        internal CurlyBrace(int hashCode, string value) : base(hashCode, value) { }
     }
     #endregion
 
     #region SpecialToken related
     public class SpecialToken : TokenType
     {
-        public SpecialToken(int hashCode, string value) : base(hashCode, value) { }
+        internal SpecialToken(int hashCode, string value) : base(hashCode, value) { }
 
         public Comment Comment
         {
@@ -453,7 +453,7 @@ namespace Parse
 
     public class Comment : SpecialToken
     {
-        public Comment(int hashCode, string value) : base(hashCode, value) { }
+        internal Comment(int hashCode, string value) : base(hashCode, value) { }
 
         public LineComment LineComment
         {
@@ -482,39 +482,39 @@ namespace Parse
 
     public class LineComment : Comment
     {
-        public LineComment(int hashCode, string value) : base(hashCode, value) { }
+        internal LineComment(int hashCode, string value) : base(hashCode, value) { }
     }
 
     public class ScopeComment : Comment
     {
-        public ScopeComment(int hashCode, string value) : base(hashCode, value) { }
+        internal ScopeComment(int hashCode, string value) : base(hashCode, value) { }
     }
 
     public class Delimiter : SpecialToken
     {
-        public Delimiter(int hashCode, string value) : base(hashCode, value) { }
+        internal Delimiter(int hashCode, string value) : base(hashCode, value) { }
     }
 
     public class NotDefinedType : SpecialToken
     {
-        public NotDefinedType(int hashCode, string value) : base(hashCode, value) { }
+        internal NotDefinedType(int hashCode, string value) : base(hashCode, value) { }
     }
 
     public class EpsilonType : SpecialToken
     {
-        public EpsilonType(int hashCode, string value) : base(hashCode, value) { }
+        internal EpsilonType(int hashCode, string value) : base(hashCode, value) { }
     }
 
     public class Marker : SpecialToken
     {
-        public Marker(int hashCode, string value) : base(hashCode, value) { }
+        internal Marker(int hashCode, string value) : base(hashCode, value) { }
     }
     #endregion
 
     #region Identifier related
     public class Identifier : TokenType
     {
-        public Identifier(int hashCode, string value) : base(hashCode, value) { }
+        internal Identifier(int hashCode, string value) : base(hashCode, value) { }
     }
     #endregion
 }

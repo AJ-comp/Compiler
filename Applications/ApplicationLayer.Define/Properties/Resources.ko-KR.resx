@@ -375,4 +375,7 @@
   <data name="NewFilter" xml:space="preserve">
     <value>새 필터</value>
   </data>
+  <data name="Option" xml:space="preserve">
+    <value>옵션</value>
+  </data>
 </root>

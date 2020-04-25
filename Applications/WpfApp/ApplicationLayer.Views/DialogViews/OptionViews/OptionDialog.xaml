@@ -21,13 +21,14 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <StackPanel Grid.Column="0">
+        <StackPanel Grid.Column="0" Margin="0 0 10 0">
             <TextBox Height="30"/>
             <ListBox ItemsSource="{Binding Menus}"
                          SelectedItem="{Binding SelectedItem}"
-                         Height="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=Height}"/>
+                         Height="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type StackPanel}}, 
+                         Path=ActualHeight}"/>
         </StackPanel>
 
-        <local:OptionDialogMainView Grid.Column="1" DataContext="{Binding CurrentView}"/>
+        <ContentPresenter Grid.Column="1" Content="{Binding CurrentView}"/>
     </Grid>
 </Window>

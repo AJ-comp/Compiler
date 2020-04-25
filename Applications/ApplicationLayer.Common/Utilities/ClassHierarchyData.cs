@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace ApplicationLayer.Common.Utilities
 {
@@ -11,6 +12,22 @@ namespace ApplicationLayer.Common.Utilities
         public ObservableCollection<ClassHierarchyData> Items { get; set; } = new ObservableCollection<ClassHierarchyData>();
 
         public bool Terminal { get => this.Items.Count == 0; }
+
+        public int MaxDepthLevel
+        {
+            get
+            {
+                List<int> sum = new List<int>();
+
+                foreach (var item in this.Items) sum.Add(item.MaxDepthLevel);
+
+                sum.Sort();
+                int result = (sum.Count > 0) ? sum.Last() : 0;
+
+                // child depth level + own
+                return result + 1;
+            }
+        }
 
         public Collection<DetailType> GetTerminalCollection(string accumClassification = "")
         {
@@ -29,6 +46,31 @@ namespace ApplicationLayer.Common.Utilities
             }
 
             return result;
+        }
+
+        public ClassHierarchyData GetFirstClassHierarchyDataByDepth(int depthIndexToGet)
+        {
+            ClassHierarchyData result = this;
+
+            for (int i = 0; i < depthIndexToGet; i++)
+            {
+                if (result == null) break;
+
+                result = (result.Terminal) ? null : result.Items[0];
+            }
+
+            return result;
+        }
+
+        public override bool Equals(object obj)
+        {
+            return obj is ClassHierarchyData data &&
+                   EqualityComparer<Type>.Default.Equals(Data, data.Data);
+        }
+
+        public override int GetHashCode()
+        {
+            return -301143667 + EqualityComparer<Type>.Default.GetHashCode(Data);
         }
     }
 

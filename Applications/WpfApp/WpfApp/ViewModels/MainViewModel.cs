@@ -33,6 +33,8 @@ namespace ApplicationLayer.WpfApp.ViewModels
     /// </summary>
     public class MainViewModel : ViewModelBase
     {
+        private RelayCommand _optionCommand;
+        private RelayCommand _changeThemeCommand;
         private Collection<Grammar> supplyGrammars = new Collection<Grammar>();
 
         private bool isDebugStatus;
@@ -113,18 +115,34 @@ namespace ApplicationLayer.WpfApp.ViewModels
         #endregion
 
         #region Command related to Option
-        private RelayCommand optionCommand;
+        public RelayCommand ChangeThemeCommand
+        {
+            get
+            {
+                if (_changeThemeCommand == null)
+                    _changeThemeCommand = new RelayCommand(this.OnChangeTheme);
+
+                return _changeThemeCommand;
+            }
+        }
+
         public RelayCommand OptionCommand
         {
             get
             {
-                if (optionCommand == null)
-                    optionCommand = new RelayCommand(this.OnOption);
+                if (_optionCommand == null)
+                    _optionCommand = new RelayCommand(this.OnOption);
 
-                return optionCommand;
+                return _optionCommand;
             }
         }
+
         private void OnOption()
+        {
+
+        }
+
+        private void OnChangeTheme()
         {
             // for test
             var app = (App)Application.Current;
