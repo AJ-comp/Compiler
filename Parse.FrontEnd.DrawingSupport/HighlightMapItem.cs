@@ -7,7 +7,7 @@ namespace Parse.FrontEnd.DrawingSupport
 {
     public class HighlightMapItem
     {
-        public TokenType TokenType { get; }
+        public Type Type { get; }
 
         public Brush ForegroundBrush { get; }
         public Brush BackgroundBrush { get; }
@@ -57,9 +57,9 @@ namespace Parse.FrontEnd.DrawingSupport
         }
 
 
-        public HighlightMapItem(TokenType tokenType, Brush foregroundBrush, Brush backgroundBrush)
+        public HighlightMapItem(Type type, Brush foregroundBrush, Brush backgroundBrush)
         {
-            TokenType = tokenType;
+            Type = type;
             ForegroundBrush = foregroundBrush;
             BackgroundBrush = backgroundBrush;
         }

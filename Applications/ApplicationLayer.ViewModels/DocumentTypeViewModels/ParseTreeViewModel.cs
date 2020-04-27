@@ -1,5 +1,6 @@
 ﻿using ApplicationLayer.Models.GraphModels;
 using Parse.FrontEnd.Ast;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using CommonResource = ApplicationLayer.Define.Properties.Resources;
@@ -61,7 +62,8 @@ namespace ApplicationLayer.ViewModels.DocumentTypeViewModels
         #region Private Methods
         private PocEdge AddNewGraphEdge(PocVertex from, PocVertex to)
         {
-            string edgeString = string.Format("{0}-{1} Connected", from.ID, to.ID);
+            string edgeString = FormattableString.Invariant($"{from.ID}-{to.ID} Connected");
+//            string edgeString = string.Format("{0}-{1} Connected", from.ID, to.ID);
 
             PocEdge newEdge = new PocEdge(edgeString, from, to);
             Graph.AddEdge(newEdge);
@@ -71,7 +73,7 @@ namespace ApplicationLayer.ViewModels.DocumentTypeViewModels
         private PocVertex CreateNode(TreeSymbol curTree)
         {
             // Create vertex
-            PocVertex curNode = null;
+            PocVertex curNode;
             if (curTree is TreeTerminal)
             {
                 var treeTerminal = curTree as TreeTerminal;

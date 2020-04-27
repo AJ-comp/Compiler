@@ -1,6 +1,5 @@
 ﻿using ApplicationLayer.Common.Utilities;
 using ApplicationLayer.Models;
-using GalaSoft.MvvmLight;
 using Parse;
 using Parse.FrontEnd.DrawingSupport;
 using Parse.FrontEnd.Grammars;
@@ -8,23 +7,59 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ApplicationLayer.ViewModels.DialogViewModels.OptionViewModels
 {
     public class FontsAndColorsViewModel : OptionDialogMainViewModel
     {
+        private int _fontSizeSelected = 10;
+        private FontFamily _fontSelected;
         private HashSet<TokenType> _ignoreTokenList = new HashSet<TokenType>();
 
         public Grammar Grammar { get; set; }
 
         public HighlightTreeNodeModel Root { get; } = new HighlightTreeNodeModel();
-        public ObservableCollection<HighlightMapItem> HighlightMapCollection { get; } = new ObservableCollection<HighlightMapItem>();
+        public ObservableCollection<FontFamily> FontList { get; } = new ObservableCollection<FontFamily>();
+        public IReadOnlyList<HighlightMapItem> HighlightMapCollection
+        {
+            get
+            {
+                List<HighlightMapItem> result = new List<HighlightMapItem>();
+                foreach(var item in Root.ToList)
+                    result.Add(new HighlightMapItem(item.Type, item.ForegroundBrush, item.BackgroundBrush));
+
+                return result;
+            }
+        }
+
+        public int FontSizeSelected
+        {
+            get => _fontSizeSelected;
+            set
+            {
+                _fontSizeSelected = value;
+                RaisePropertyChanged(nameof(FontSizeSelected));
+            }
+        }
+
+        public FontFamily FontSelected
+        {
+            get => _fontSelected;
+            set
+            {
+                _fontSelected = value;
+                RaisePropertyChanged(nameof(FontSelected));
+            }
+        }
 
         public FontsAndColorsViewModel(Grammar grammar)
         {
+            foreach (var item in FontFamily.Families)
+            {
+                if (item.Name.Length == 0) continue;
+                FontList.Add(item);
+            }
+
             Grammar = grammar;
             if (grammar == null) return;
 

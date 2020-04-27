@@ -252,8 +252,6 @@ namespace Parse.WpfControls
 
         private void ListBox_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            var listbox = sender as ListBox;
-
             this.InputProcessOnCompletionList(this.parent, Key.Enter);
         }
 

@@ -61,6 +61,24 @@ namespace ApplicationLayer.Define.Properties {
         }
         
         /// <summary>
+        ///   Background color과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string BackgroundColor {
+            get {
+                return ResourceManager.GetString("BackgroundColor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Customize과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string Custom {
+            get {
+                return ResourceManager.GetString("Custom", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Display contents과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string DisplayContent {
@@ -84,6 +102,24 @@ namespace ApplicationLayer.Define.Properties {
         public static string FontsAndColors {
             get {
                 return ResourceManager.GetString("FontsAndColors", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Font size과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string FontSize {
+            get {
+                return ResourceManager.GetString("FontSize", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Foreground color과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string ForegroundColor {
+            get {
+                return ResourceManager.GetString("ForegroundColor", resourceCulture);
             }
         }
         

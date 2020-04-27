@@ -7,42 +7,112 @@
              xmlns:grids="http://schemas.actiprosoftware.com/winfx/xaml/grids"
              xmlns:local="clr-namespace:ApplicationLayer.Views.DialogViews.OptionViews"
              xmlns:views="clr-namespace:ApplicationLayer.Views"
-             mc:Ignorable="d" >
+             xmlns:shared="http://schemas.actiprosoftware.com/winfx/xaml/shared"
+             xmlns:utilities="clr-namespace:ApplicationLayer.Common.Utilities;assembly=ApplicationLayer.Common"
+             mc:Ignorable="d" 
+             lex:ResxLocalizationProvider.DefaultAssembly="ApplicationLayer.Define"
+             lex:ResxLocalizationProvider.DefaultDictionary="OptionDialogResources">
+    <UserControl.Resources>
+        <StackPanel x:Key="CustomFontControl">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Grid.Column="0" Margin="0 0 20 0">
+                    <TextBlock Text="{lex:Loc Key=Font}" Margin="0 0 0 5"/>
+                    <ComboBox ItemsSource="{Binding FontList}"
+                                        SelectedItem="{Binding FontSelected}">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Name}"/>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                </StackPanel>
+
+                <StackPanel Grid.Column="1">
+                    <TextBlock Text="{lex:Loc Key=FontSize}" Margin="0 0 0 5"/>
+                    <TextBox Text="{Binding FontSizeSelected}"/>
+                </StackPanel>
+            </Grid>
+        </StackPanel>
+        
+        
+        <StackPanel x:Key="CustomForeColorControl">
+            <TextBlock Text="{lex:Loc Key=ForegroundColor}" Margin="0 0 0 5"/>
+
+            <Grid Height="20">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <ComboBox Grid.Column="0" Margin="0 0 20 0"/>
+                <Button Grid.Column="1" Content="{lex:Loc Key=Custom}" Padding="0 0 10 0"/>
+            </Grid>
+        </StackPanel>
+
+        <StackPanel x:Key="CustomBackColorControl">
+            <TextBlock Text="{lex:Loc Key=BackgroundColor}" Margin="0 0 0 5"/>
+
+            <Grid Height="20">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <ComboBox Grid.Column="0" Margin="0 0 20 0"/>
+                <Button Grid.Column="1" Content="{lex:Loc Key=Custom}" Padding="0 0 10 0"/>
+            </Grid>
+        </StackPanel>
+    </UserControl.Resources>
+
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="100"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        
-        <StackPanel Grid.Row="0">
-            <TextBlock Text="{lex:Loc Key=Font}"/>
-            <ComboBox/>
-        </StackPanel>
 
-        <StackPanel Grid.Row="1">
-            <TextBlock Text="{lex:Loc Key=DisplayContent}"/>
-            <grids:TreeListBox RootItem="{Binding Root, Mode=OneWay}">
+        <ContentPresenter Grid.Row="0" Content="{StaticResource CustomFontControl}" DataContext="{Binding}"/>
 
-                <grids:TreeListBox.ItemAdapter>
-                    <views:DefaultTreeListBoxItemAdapter/>
-                </grids:TreeListBox.ItemAdapter>
+        <Grid x:Name="grid" Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition MinWidth="100"/>
+                <ColumnDefinition Width="*" MinWidth="300"/>
+            </Grid.ColumnDefinitions>
 
-                <grids:TreeListBox.ItemTemplate>
-                    <DataTemplate>
-                        <TextBlock Text="{Binding DisplayName}" />
-                    </DataTemplate>
-                </grids:TreeListBox.ItemTemplate>
-            </grids:TreeListBox>
-            
-            <!--<ListBox ItemsSource="{Binding HighlightMapCollection}">
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <VirtualizingStackPanel>
-                            <TextBlock Text="{Binding TokenTypeString}"/>
-                        </VirtualizingStackPanel>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>-->
-        </StackPanel>
+            <DockPanel Grid.Column="0" Margin="0 0 10 0">
+                <TextBlock DockPanel.Dock="Top" Text="{lex:Loc Key=DisplayContent}" Margin="0 0 0 5"/>
+                <grids:TreeListBox RootItem="{Binding Root, Mode=OneWay}" 
+                                            ScrollViewer.VerticalScrollBarVisibility="Visible"
+                                            ScrollViewer.CanContentScroll="True">
+
+                    <grids:TreeListBox.ItemAdapter>
+                        <views:DefaultTreeListBoxItemAdapter/>
+                    </grids:TreeListBox.ItemAdapter>
+
+                    <grids:TreeListBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding DisplayName}" />
+                        </DataTemplate>
+                    </grids:TreeListBox.ItemTemplate>
+                </grids:TreeListBox>
+            </DockPanel>
+
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="60"/>
+                    <RowDefinition Height="60"/>
+                    <RowDefinition Height="3*"/>
+                </Grid.RowDefinitions>
+
+                <ContentPresenter Grid.Row="0" Content="{StaticResource CustomForeColorControl}" Margin="0 0 0 10"/>
+                <ContentPresenter Grid.Row="1" Content="{StaticResource CustomBackColorControl}" Margin="0 0 0 10"/>
+
+            </Grid>
+        </Grid>
     </Grid>
 </UserControl>

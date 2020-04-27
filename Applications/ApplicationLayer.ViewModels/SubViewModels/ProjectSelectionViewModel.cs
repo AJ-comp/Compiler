@@ -106,8 +106,7 @@ namespace ApplicationLayer.ViewModels.SubViewModels
                     {
                         var t = this.terminalList[i];
 
-                        List<uint> matchedIndexes = new List<uint>();
-                        var candidateSimility = this.similarity.SimilarityValue(t.Type.Name, this.CPUSearch, out matchedIndexes);
+                        var candidateSimility = this.similarity.SimilarityValue(t.Type.Name, this.CPUSearch, out var matchedIndexes);
                         t.MatchedIndexes = matchedIndexes;
 
                         if (matchedIndexes.Count > 0)

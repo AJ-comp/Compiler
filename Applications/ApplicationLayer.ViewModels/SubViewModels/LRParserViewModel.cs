@@ -147,8 +147,9 @@ namespace ApplicationLayer.ViewModels.SubViewModels
             foreach (var item in this.LRParser.Grammar.NonTerminalMultiples)
                 NonTerminals.Add(item);
 
-            for (int i = 0; i <= this.LRParser.C0.MaxIxIndex; i++) 
-                Canonicals.Add(string.Format("I{0}", i));
+            for (int i = 0; i <= this.LRParser.C0.MaxIxIndex; i++)
+                //                Canonicals.Add(string.Format("I{0}", i));
+                Canonicals.Add(FormattableString.Invariant($"I{i}"));
         }
 
         private void CreateEbnfNode(NonTerminal curNT)
@@ -186,7 +187,8 @@ namespace ApplicationLayer.ViewModels.SubViewModels
             {
                 if (data.Value.Item1 != index) return;
 
-                result = string.Format("I{0} : ", data.Value.Item1) + Environment.NewLine;
+                result = FormattableString.Invariant($"I{data.Value.Item1}") + Environment.NewLine;
+//                result = string.Format("I{0} : ", data.Value.Item1) + Environment.NewLine;
                 result += data.Value.Item2.ToLineString();
 
                 loopOption.Stop();
@@ -203,8 +205,10 @@ namespace ApplicationLayer.ViewModels.SubViewModels
             {
                 if (data.Key.Item1 != index) return;
 
-                string cx = string.Format("Goto(I{0},{1})", data.Key.Item1, data.Key.Item2) + Environment.NewLine;
-                cx += string.Format("I{0} : ", data.Value.Item1) + Environment.NewLine;
+                string cx = FormattableString.Invariant($"Goto(I{data.Key.Item1},{data.Key.Item2})") + Environment.NewLine;
+//                string cx = string.Format("Goto(I{0},{1})", data.Key.Item1, data.Key.Item2) + Environment.NewLine;
+                cx += FormattableString.Invariant($"I{data.Value.Item1} : ") + Environment.NewLine;
+//                cx += string.Format("I{0} : ", data.Value.Item1) + Environment.NewLine;
                 cx += data.Value.Item2.ToLineString();
 
                 result.Add(cx);

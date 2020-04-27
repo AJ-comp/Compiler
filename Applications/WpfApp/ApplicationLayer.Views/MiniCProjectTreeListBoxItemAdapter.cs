@@ -44,10 +44,11 @@ namespace ApplicationLayer.Views
 		private IEnumerable GetProjectTypeChildren(TreeListBox ownerControl, object item, bool bSort = true)
 		{
 			var model = item as MiniCProjectTreeNodeModel;
-			List<TreeNodeModel> result = new List<TreeNodeModel>();
-
-			result.Add(model.References);
-			result.Add(model.OuterDependencies);
+			List<TreeNodeModel> result = new List<TreeNodeModel>
+			{
+				model.References,
+				model.OuterDependencies
+			};
 
 			List<TreeNodeModel> filters = new List<TreeNodeModel>();
 			List<TreeNodeModel> files = new List<TreeNodeModel>();
@@ -262,7 +263,7 @@ namespace ApplicationLayer.Views
 		public override string GetPath(TreeListBox ownerControl, object item)
 		{
 			var model = item as TreeNodeModel;
-			return (model != null ? model.DisplayName : null);
+			return (model?.DisplayName);
 		}
 
 		/// <summary>
@@ -274,7 +275,7 @@ namespace ApplicationLayer.Views
 		public override string GetSearchText(TreeListBox ownerControl, object item)
 		{
 			var model = item as TreeNodeModel;
-			return (model != null ? model.DisplayName : null);
+			return (model?.DisplayName);
 		}
 
 		/// <summary>

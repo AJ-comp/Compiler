@@ -3,32 +3,47 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:lex="http://wpflocalizeextension.codeplex.com"
         xmlns:viewmodels="clr-namespace:ApplicationLayer.ViewModels.DialogViewModels.OptionViewModels;assembly=ApplicationLayer.ViewModels"
         xmlns:local="clr-namespace:ApplicationLayer.Views.DialogViews.OptionViews"
         mc:Ignorable="d"
         WindowStyle="ToolWindow"
         WindowStartupLocation="CenterScreen"
         Style="{DynamicResource NormalWindow}"
-        Title="OptionDialog" Height="500" Width="800">
+        Title="{lex:Loc Key=Option}" 
+        MinHeight="500" MinWidth="800"
+        Height="500" Width="800">
     
     <Window.DataContext>
         <viewmodels:OptionViewModel/>
     </Window.DataContext>
 
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="200"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <StackPanel Grid.Column="0" Margin="0 0 10 0">
-            <TextBox Height="30"/>
+        <DockPanel Grid.Row="0" Grid.Column="0">
+            <TextBox DockPanel.Dock="Top"/>
             <ListBox ItemsSource="{Binding Menus}"
-                         SelectedItem="{Binding SelectedItem}"
-                         Height="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type StackPanel}}, 
-                         Path=ActualHeight}"/>
-        </StackPanel>
+                         SelectedItem="{Binding SelectedItem}"/>
+        </DockPanel>
 
-        <ContentPresenter Grid.Column="1" Content="{Binding CurrentView}"/>
+        <ContentPresenter Grid.Row="0" Grid.Column="1" Content="{Binding CurrentView}" Margin="20 0 0 0"/>
+        <StackPanel Grid.Row="1" Grid.Column="1" 
+                            Orientation="Horizontal" 
+                            HorizontalAlignment="Right" VerticalAlignment="Center">
+            <Button Content="{lex:Loc Key=Ok}" 
+                        Style="{DynamicResource WindowCloseButton}"
+                        Margin="0 0 10 0"/>
+            <Button Content="{lex:Loc Key=Cancel}"
+                        Style="{DynamicResource WindowCloseButton}"/>
+        </StackPanel>
     </Grid>
 </Window>

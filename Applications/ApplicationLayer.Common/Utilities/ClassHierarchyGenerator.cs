@@ -45,8 +45,6 @@ namespace ApplicationLayer.Common.Utilities
             //                var toLoad = referencedPaths.Where(r => !loadedPaths.Contains(r, StringComparer.InvariantCultureIgnoreCase)).ToList();
             //                toLoad.ForEach(path => loadedAssemblies.Add(AppDomain.CurrentDomain.Load(AssemblyName.GetAssemblyName(path))));
 
-            AssemblyName[] assemblyNameArray = Assembly.GetExecutingAssembly().GetReferencedAssemblies();
-
             List<Assembly> result = new List<Assembly>();
 
             foreach (var fileName in referencedPaths)

@@ -107,6 +107,9 @@
     <Compile Include="Converters\MouseDoubleClickIndexConverter.cs" />
     <Compile Include="Converters\SelectedItemConverter.cs" />
     <Compile Include="DefaultTreeListBoxItemAdapter.cs" />
+    <Compile Include="DialogViews\ColorPickerView.xaml.cs">
+      <DependentUpon>ColorPickerView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="DialogViews\OptionViews\FontsAndColorsView.xaml.cs">
       <DependentUpon>FontsAndColorsView.xaml</DependentUpon>
     </Compile>
@@ -205,6 +208,10 @@
     <Resource Include="Resources\Images\Basic\Solution16.png" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="DialogViews\ColorPickerView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="DialogViews\OptionViews\FontsAndColorsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -218,6 +225,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="DocumentTypeViews\ParseTreeView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\ApplicationStyles\PanelStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\ApplicationStyles\TextBlockStyles.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

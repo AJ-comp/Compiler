@@ -132,4 +132,16 @@
   <data name="DisplayContent" xml:space="preserve">
     <value>표시 항목</value>
   </data>
+  <data name="ForegroundColor" xml:space="preserve">
+    <value>전경색</value>
+  </data>
+  <data name="BackgroundColor" xml:space="preserve">
+    <value>배경색</value>
+  </data>
+  <data name="FontSize" xml:space="preserve">
+    <value>크기</value>
+  </data>
+  <data name="Custom" xml:space="preserve">
+    <value>사용자 지정</value>
+  </data>
 </root>

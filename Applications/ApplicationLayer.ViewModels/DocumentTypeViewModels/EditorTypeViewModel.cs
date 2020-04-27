@@ -126,7 +126,6 @@ namespace ApplicationLayer.ViewModels.DocumentTypeViewModels
 
             foreach (var item in alarmList)
             {
-                int tokenIndex = item.TokenIndex;
                 //                if (this.TextArea.Tokens[tokenIndex] == item.ParsingFailedArgs.InputValue.TokenCell) correctList.Add(item);
                 correctList.Add(item);
             }

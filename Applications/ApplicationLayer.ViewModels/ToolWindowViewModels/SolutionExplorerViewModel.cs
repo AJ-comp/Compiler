@@ -320,9 +320,9 @@ namespace ApplicationLayer.ViewModels.ToolWindowViewModels
             if (message is null) return;
             if (this.Solution is null) return;
 
-            // if project path is in the solution path.
+            // if a project path is in the solution path.
             var solutionPath = this.Solution.Path;
-            int matchedPos = message.ProjectPath.IndexOf(solutionPath) + solutionPath.Length;
+            int matchedPos = message.ProjectPath.IndexOf(solutionPath, StringComparison.Ordinal) + solutionPath.Length;
             bool isAbsolutePath = (PathHelper.ComparePath(solutionPath, message.ProjectPath) == false);
 
             ProjectGenerator projectGenerator = ProjectGenerator.CreateProjectGenerator(message.Language);
@@ -375,8 +375,6 @@ namespace ApplicationLayer.ViewModels.ToolWindowViewModels
             {
                 var fileNode = (SelectedItem as FileTreeNodeModel);
                 if (fileNode.IsExistFile == false) return;
-
-                string content = File.ReadAllText(fileNode.FullPath);
 
                 var editor = new EditorTypeViewModel(fileNode);
                 if (this.Documents.Contains(editor))

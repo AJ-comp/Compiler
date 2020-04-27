@@ -94,9 +94,11 @@ namespace ApplicationLayer.Models.SolutionPackage
 
             AddChildren(new VarTreeNodeModel(DataType.Int, "test"));
 
-            List<VarTreeNodeModel> paramList = new List<VarTreeNodeModel>();
-            paramList.Add(new VarTreeNodeModel(DataType.Int, "param1"));
-            paramList.Add(new VarTreeNodeModel(DataType.Int, "param2"));
+            List<VarTreeNodeModel> paramList = new List<VarTreeNodeModel>
+            {
+                new VarTreeNodeModel(DataType.Int, "param1"),
+                new VarTreeNodeModel(DataType.Int, "param2")
+            };
             AddChildren(new FuncTreeNodeModel() { Params = paramList, ReturnType = DataType.Int, FuncName = "func" });
         }
 

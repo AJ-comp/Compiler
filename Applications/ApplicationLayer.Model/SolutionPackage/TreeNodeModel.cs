@@ -20,7 +20,7 @@ namespace ApplicationLayer.Models.SolutionPackage
 
 		protected ObservableCollection<TreeNodeModel> children = new ObservableCollection<TreeNodeModel>();
 
-		public TreeNodeModel()
+		protected TreeNodeModel()
 		{
 			this.tag = this;
 		}
