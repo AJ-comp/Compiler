@@ -5,6 +5,7 @@
                     xmlns:docking="http://schemas.actiprosoftware.com/winfx/xaml/docking"
                     xmlns:syntaxEditor="clr-namespace:Parse.WpfControls.SyntaxEditor;assembly=Parse.WpfControls.SyntaxEditor"
                     xmlns:ap="clr-namespace:ApplicationLayer.Views.AttachedProperties;assembly=ApplicationLayer.Views"
+                    xmlns:viewConverters="clr-namespace:ApplicationLayer.Views.Converters;assembly=ApplicationLayer.Views"
                     xmlns:localConverters="clr-namespace:ApplicationLayer.WpfApp.Converters"
                     xmlns:localBehaviors="clr-namespace:ApplicationLayer.WpfApp.Behaviors"
                     xmlns:documentViewModels="clr-namespace:ApplicationLayer.ViewModels.DocumentTypeViewModels;assembly=ApplicationLayer.ViewModels"
@@ -31,11 +32,12 @@
     </Style>
 
     <DataTemplate DataType="{x:Type documentViewModels:EditorTypeViewModel}">
-        <syntaxEditor:SyntaxEditor FontSize="15" FontFamily="Arial"
+        <syntaxEditor:SyntaxEditor FontSize="{Binding FontsAndColorsVM.FontSizeSelected}"
+                                                FontFamilyTest="{Binding FontsAndColorsVM.FontSelected, Converter={viewConverters:StringToFontFamilyConverter}}"
                                                 FileName="{Binding Title}"
                                                 IsLineNumberingVisible="True"  LineNumberForeColor="DarkGreen"
-                                                KeywordForeground="LightBlue"
                                                 LineCommentForeground="ForestGreen"
+                                                HighlightMap="{Binding FontsAndColorsVM.HighlightMap}"
                                                 Text="{Binding Data}"
                                                 ParserSnippet="{Binding ParserSnippet}"
                                                 CloseCharacters="{Binding CloseCharacters}">

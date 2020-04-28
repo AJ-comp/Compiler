@@ -1,10 +1,12 @@
 ﻿using ApplicationLayer.Common.Utilities;
 using ApplicationLayer.Models.Invokers;
 using ApplicationLayer.Models.SolutionPackage;
+using ApplicationLayer.ViewModels.DialogViewModels.OptionViewModels;
 using ApplicationLayer.ViewModels.Messages;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using Parse.FrontEnd.Ast;
+using Parse.FrontEnd.DrawingSupport;
 using Parse.FrontEnd.Grammars.MiniC;
 using Parse.FrontEnd.Parsers.Datas;
 using Parse.FrontEnd.Parsers.Logical;
@@ -25,8 +27,10 @@ namespace ApplicationLayer.ViewModels.DocumentTypeViewModels
          ********************************************************************************************/
         private object lockObject = new object();
         private int caretIndex = 0;
-        private FileTreeNodeModel fileNode;
+        private FileTreeNodeModel _fileNode;
+        private List<HighlightMapItem> highlightMaps = new List<HighlightMapItem>();
         private RelayCommand<ParsingCompletedEventArgs> parsingCompletedCommand = null;
+        private FontsAndColorsViewModel _fontsAndColorsVM;
 
 
 
@@ -35,9 +39,9 @@ namespace ApplicationLayer.ViewModels.DocumentTypeViewModels
          ********************************************************************************************/
         public Invoker MoveCaretInvoker { get; } = new Invoker();
 
-        public string FullPath => fileNode.FullPath;
-        public string Data => fileNode.Data;
-        public string FileName => fileNode.FileName;
+        public string FullPath => _fileNode.FullPath;
+        public string Data => _fileNode.Data;
+        public string FileName => _fileNode.FileName;
         public StringCollection CloseCharacters { get; } = new StringCollection();
 
         public TokenizeImpactRanges RecentTokenizeHistory { get; } = new TokenizeImpactRanges();
@@ -54,6 +58,8 @@ namespace ApplicationLayer.ViewModels.DocumentTypeViewModels
                 this.RaisePropertyChanged(nameof(CaretIndex));
             }
         }
+
+        public FontsAndColorsViewModel FontsAndColorsVM => _fontsAndColorsVM;
 
 
 
@@ -76,9 +82,11 @@ namespace ApplicationLayer.ViewModels.DocumentTypeViewModels
         /********************************************************************************************
          * constructor section
          ********************************************************************************************/
-        public EditorTypeViewModel(FileTreeNodeModel fileNode) : base(fileNode.FileName, fileNode.FullPath, fileNode.FullPath)
+        public EditorTypeViewModel(FileTreeNodeModel fileNode, FontsAndColorsViewModel fontsAndColorsVM) : base(fileNode?.FileName, fileNode?.FullPath, fileNode?.FullPath)
         {
-            this.fileNode = fileNode;
+            this._fileNode = fileNode;
+            this._fontsAndColorsVM = fontsAndColorsVM;
+
             this.CloseCharacters.Add("{");
             this.CloseCharacters.Add("}");
             this.CloseCharacters.Add("(");
@@ -158,7 +166,7 @@ namespace ApplicationLayer.ViewModels.DocumentTypeViewModels
                 //                    this.TextArea.GetIndexInfoFromCaretIndex(errToken.TokenCell.StartIndex) :
                 //                    new System.Drawing.Point(0, this.TextArea.LineIndexes.Count - 1);
 
-                ProjectTreeNodeModel projNode = fileNode.ManagerTree as ProjectTreeNodeModel;
+                ProjectTreeNodeModel projNode = _fileNode.ManagerTree as ProjectTreeNodeModel;
 
                 lock(lockObject)
                     alarmList.Add(new AlarmEventArgs(projNode?.FileNameWithoutExtension, FileName, tokenIndex, lineIndex + 1, errToken, block.ErrorInfos));

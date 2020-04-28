@@ -99,6 +99,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Parse.FrontEnd.DrawingSupport\Parse.FrontEnd.DrawingSupport.csproj">
+      <Project>{5CF0E8B7-18D1-493F-B465-ED65E657178A}</Project>
+      <Name>Parse.FrontEnd.DrawingSupport</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Parse.FrontEnd.Grammars\Parse.FrontEnd.Grammars.csproj">
       <Project>{a0661596-8c09-42a8-b412-8702108fd935}</Project>
       <Name>Parse.FrontEnd.Grammars</Name>

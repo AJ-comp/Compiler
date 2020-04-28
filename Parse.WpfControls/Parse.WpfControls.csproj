@@ -103,6 +103,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="TextViewWindow.cs" />
+    <Compile Include="Utilities\ColorUtility.cs" />
     <Compile Include="Utilities\RegexUtility.cs" />
     <Compile Include="Common\DrawingAlgorithm.cs" />
     <Compile Include="EventArgs\EditorScrollChangedEventArgs.cs" />

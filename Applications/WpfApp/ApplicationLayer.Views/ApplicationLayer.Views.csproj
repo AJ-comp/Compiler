@@ -35,6 +35,7 @@
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ActiproSoftware.Editors.Wpf, Version=18.1.675.0, Culture=neutral, PublicKeyToken=36ff2196ab5654b9, processorArchitecture=MSIL" />
     <Reference Include="ActiproSoftware.Grids.Wpf, Version=18.1.675.0, Culture=neutral, PublicKeyToken=36ff2196ab5654b9, processorArchitecture=MSIL" />
     <Reference Include="ActiproSoftware.Shared.Wpf, Version=18.1.675.0, Culture=neutral, PublicKeyToken=36ff2196ab5654b9, processorArchitecture=MSIL" />
     <Reference Include="CommonServiceLocator, Version=2.0.2.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
@@ -103,9 +104,11 @@
     <Compile Include="AttachedProperties\SyntaxEditorHook.cs" />
     <Compile Include="AttachedProperties\TreeListBoxHook.cs" />
     <Compile Include="AttachedProperties\WindowsFormsHostHook.cs" />
+    <Compile Include="Converters\ColorToBrushConverter.cs" />
     <Compile Include="Converters\EventArgsConverterExtension.cs" />
     <Compile Include="Converters\MouseDoubleClickIndexConverter.cs" />
     <Compile Include="Converters\SelectedItemConverter.cs" />
+    <Compile Include="Converters\StringToFontFamilyConverter.cs" />
     <Compile Include="DefaultTreeListBoxItemAdapter.cs" />
     <Compile Include="DialogViews\ColorPickerView.xaml.cs">
       <DependentUpon>ColorPickerView.xaml</DependentUpon>

@@ -140,5 +140,14 @@ namespace ApplicationLayer.Define.Properties {
                 return ResourceManager.GetString("ProjectAndSolution", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Select known color과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string SelectKnownColor {
+            get {
+                return ResourceManager.GetString("SelectKnownColor", resourceCulture);
+            }
+        }
     }
 }

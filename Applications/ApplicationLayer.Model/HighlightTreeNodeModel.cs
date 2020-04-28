@@ -10,29 +10,29 @@ namespace ApplicationLayer.Models
 {
     public class HighlightTreeNodeModel : TreeNodeModel
     {
-        public Type Type { get; set; }
-        public Brush ForegroundBrush { get; }
-        public Brush BackgroundBrush { get; }
+        public Type Type { get; private set; }
+        public Color ForegroundColor { get; set; }
+        public Color BackgroundColor { get; set; }
 
-        public Brush ValidForegroundBrush
+        public Color ValidForegroundColor
         {
             get
             {
-                if (this.ForegroundBrush != null) return this.ForegroundBrush;
-                if (this.Parent == null) return null;
+                if (this.ForegroundColor != Color.Transparent) return this.ForegroundColor;
+                if (this.Parent == null) return Color.Transparent;
 
-                return (this.Parent as HighlightTreeNodeModel).ValidForegroundBrush;
+                return (this.Parent as HighlightTreeNodeModel).ValidForegroundColor;
             }
         }
 
-        public Brush ValidBackgroundBrush
+        public Color ValidBackgroundColor
         {
             get
             {
-                if (this.BackgroundBrush != null) return this.BackgroundBrush;
-                if (this.Parent == null) return null;
+                if (this.BackgroundColor != Color.Transparent) return this.BackgroundColor;
+                if (this.Parent == null) return Color.Transparent;
 
-                return (this.Parent as HighlightTreeNodeModel).ValidBackgroundBrush;
+                return (this.Parent as HighlightTreeNodeModel).ValidBackgroundColor;
             }
         }
 
@@ -41,6 +41,7 @@ namespace ApplicationLayer.Models
             get
             {
                 List<HighlightTreeNodeModel> result = new List<HighlightTreeNodeModel>();
+                if (this.children.Count == 0) result.Add(this);
 
                 foreach(var item in this.children)
                 {
@@ -55,7 +56,7 @@ namespace ApplicationLayer.Models
 
         public override string DisplayName
         {
-            get => HighlightMapItem.TokenTypeString(Type);
+            get => HighlightMapHelper.Instance.TokenTypeString(Type);
             set => throw new NotImplementedException();
         }
 
@@ -74,6 +75,15 @@ namespace ApplicationLayer.Models
 
                 this.AddChildren(newNode);
             }
+        }
+
+        public void AssignDefaultValue()
+        {
+            this.ForegroundColor = HighlightMapHelper.Instance.DefaultForegroundColor(this.Type);
+            this.BackgroundColor = HighlightMapHelper.Instance.DefaultBackgroundColor(this.Type);
+
+            foreach (var item in this.children)
+                (item as HighlightTreeNodeModel).AssignDefaultValue();
         }
 
         public override void RemoveChild(TreeNodeModel nodeToRemove)

@@ -35,7 +35,8 @@ namespace ApplicationLayer.ViewModels.DialogViewModels.OptionViewModels
 
         public OptionViewModel()
         {
-            _menuViewMap.Add(OptionDialogResources.FontsAndColors, new FontsAndColorsViewModel(new MiniCGrammar()));
+            var fontsAndColorsView = FontsAndColorsViewModel.Instance;
+            _menuViewMap.Add(OptionDialogResources.FontsAndColors, fontsAndColorsView);
 
 //            Menus.Add(OptionDialogResources.ProjectAndSolution);
             Menus.Add(OptionDialogResources.FontsAndColors);

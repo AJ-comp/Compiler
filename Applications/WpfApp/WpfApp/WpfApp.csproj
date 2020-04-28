@@ -292,6 +292,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Parse.FrontEnd.DrawingSupport\Parse.FrontEnd.DrawingSupport.csproj">
+      <Project>{5cf0e8b7-18d1-493f-b465-ed65e657178a}</Project>
+      <Name>Parse.FrontEnd.DrawingSupport</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\Parse.FrontEnd\Parse.FrontEnd.csproj">
       <Project>{46590802-ce40-49c9-86e1-cd6f3487ff5b}</Project>
       <Name>Parse.FrontEnd</Name>

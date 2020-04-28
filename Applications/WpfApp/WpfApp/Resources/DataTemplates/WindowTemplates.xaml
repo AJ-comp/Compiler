@@ -2,11 +2,10 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:subViewModels="clr-namespace:ApplicationLayer.ViewModels.SubViewModels;assembly=ApplicationLayer.ViewModels"
                     xmlns:subViews="clr-namespace:ApplicationLayer.Views.SubViews;assembly=ApplicationLayer.Views"
+                    xmlns:dialogViewModels="clr-namespace:ApplicationLayer.ViewModels.DialogViewModels;assembly=ApplicationLayer.ViewModels"
+                    xmlns:dialogViews="clr-namespace:ApplicationLayer.Views.DialogViews;assembly=ApplicationLayer.Views"
                     xmlns:optionViewModels="clr-namespace:ApplicationLayer.ViewModels.DialogViewModels.OptionViewModels;assembly=ApplicationLayer.ViewModels"
-                    xmlns:optionViews="clr-namespace:ApplicationLayer.Views.DialogViews.OptionViews;assembly=ApplicationLayer.Views"
-                    xmlns:local="clr-namespace:WpfApp.Resources.DataTemplates"
-                    xmlns:localViewModels="clr-namespace:WpfApp.ViewModels.WindowViewModels"
-                    xmlns:localViews="clr-namespace:WpfApp.Views">
+                    xmlns:optionViews="clr-namespace:ApplicationLayer.Views.DialogViews.OptionViews;assembly=ApplicationLayer.Views">
 
     <DataTemplate DataType="{x:Type subViewModels:ProjectSelectionViewModel}">
         <subViews:ProjectSelectionView/>

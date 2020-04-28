@@ -124,4 +124,7 @@
   <data name="Custom" xml:space="preserve">
     <value>Customize</value>
   </data>
+  <data name="SelectKnownColor" xml:space="preserve">
+    <value>Select known color</value>
+  </data>
 </root>

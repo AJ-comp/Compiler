@@ -2,13 +2,12 @@
 using ApplicationLayer.Common.Helpers;
 using ApplicationLayer.Common.Interfaces;
 using ApplicationLayer.Models.SolutionPackage;
+using ApplicationLayer.ViewModels.DialogViewModels.OptionViewModels;
 using ApplicationLayer.ViewModels.DocumentTypeViewModels;
 using ApplicationLayer.ViewModels.Messages;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
-using Parse.FrontEnd.Parsers.Datas;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.IO;
@@ -376,7 +375,7 @@ namespace ApplicationLayer.ViewModels.ToolWindowViewModels
                 var fileNode = (SelectedItem as FileTreeNodeModel);
                 if (fileNode.IsExistFile == false) return;
 
-                var editor = new EditorTypeViewModel(fileNode);
+                var editor = new EditorTypeViewModel(fileNode, FontsAndColorsViewModel.Instance);
                 if (this.Documents.Contains(editor))
                 {
                     this.SelectedDocument = editor;

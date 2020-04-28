@@ -1,10 +1,12 @@
 ﻿using Parse.FrontEnd;
+using Parse.FrontEnd.DrawingSupport;
 using Parse.FrontEnd.Grammars;
 using Parse.FrontEnd.Parsers.Datas;
 using Parse.FrontEnd.Parsers.Logical;
 using Parse.FrontEnd.RegularGrammar;
 using Parse.WpfControls.Models;
 using Parse.WpfControls.SyntaxEditor.EventArgs;
+using Parse.WpfControls.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
@@ -86,15 +88,47 @@ namespace Parse.WpfControls.SyntaxEditor
         public event EventHandler<ParsingCompletedEventArgs> ParsingCompleted;
 
 
-        public Brush KeywordForeground
+        public string FontFamilyTest
         {
-            get { return (Brush)GetValue(KeywordForegroundProperty); }
-            set { SetValue(KeywordForegroundProperty, value); }
+            get { return (string)GetValue(FontFamilyTestProperty); }
+            set { SetValue(FontFamilyTestProperty, value); }
         }
 
-        // Using a DependencyProperty as the backing store for KeywordForeground.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty KeywordForegroundProperty =
-            DependencyProperty.Register("KeywordForeground", typeof(Brush), typeof(SyntaxEditor), new PropertyMetadata(Brushes.Black));
+        // Using a DependencyProperty as the backing store for FontFamilyTest.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty FontFamilyTestProperty =
+            DependencyProperty.Register("FontFamilyTest", typeof(string), typeof(SyntaxEditor), new PropertyMetadata(string.Empty, OnFontFamilyChanged));
+
+        public static void OnFontFamilyChanged(DependencyObject dp, DependencyPropertyChangedEventArgs args)
+        {
+            SyntaxEditor editor = dp as SyntaxEditor;
+            try
+            {
+                editor.FontFamily = new FontFamily(args.NewValue as string);
+                if (editor.TextArea != null)
+                    editor.TextArea.FontFamily = editor.FontFamily;
+            }
+            catch
+            {
+            }
+        }
+
+
+        public HighlightMap HighlightMap
+        {
+            get { return (HighlightMap)GetValue(HighlightMapProperty); }
+            set { SetValue(HighlightMapProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for HighlightMap.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty HighlightMapProperty =
+            DependencyProperty.Register("HighlightMap", typeof(HighlightMap), typeof(SyntaxEditor), new PropertyMetadata(null, OnHighlightMapChanged));
+
+
+        public static void OnHighlightMapChanged(DependencyObject dp, DependencyPropertyChangedEventArgs args)
+        {
+            SyntaxEditor editor = dp as SyntaxEditor;
+            if (editor.TextArea == null) editor.bReserveRegistKeywords = true;
+        }
 
 
         #region Dependency Properties related to numeral foreground color
@@ -186,7 +220,7 @@ namespace Parse.WpfControls.SyntaxEditor
                 {
                     this.RegisterKeywords(this.ParserSnippet.Parser.Grammar);
 
-                    // It is started a tokenize process because allocated a new tokenize rules.
+                    // It is started a tokenize process because a new tokenize rules are allocated.
                     var tempText = this.Text;
                     this.Text = string.Empty;
                     this.Text = tempText;
@@ -292,37 +326,31 @@ namespace Parse.WpfControls.SyntaxEditor
             // The terminal that has the derive ability also doesn't have delimitable ability.
             // Only operator type has delimitable ability.
 
-            foreach (var terminal in grammar.TerminalSet)
+            foreach (var terminal in this.ParserSnippet.Parser.Grammar.TerminalSet)
             {
-                
-                if (terminal.TokenType is Keyword)
+                bool bOper = false;
+                if (terminal.TokenType is ScopeComment) bOper = true;
+                else if (terminal.TokenType is Operator) bOper = true;
+                else if (terminal.TokenType is Delimiter) bOper = true;
+
+                // setting color for token.
+                var item = this.HighlightMap.GetItem(terminal.TokenType.GetType());
+                if (item is null)
                 {
-                    this.TextArea.AddCompletionList(CompletionItemType.Keyword, terminal.Value);
-                    this.TextArea.AddSyntaxHighLightInfo(terminal.Value, terminal, this.KeywordForeground, terminal.CanDerived);
+                    this.TextArea.AddTokenPattern(terminal.Value, terminal, terminal.CanDerived, bOper);
+                    continue;
                 }
-                else if (terminal.TokenType is LineComment)
-                    this.TextArea.AddSyntaxHighLightInfo(terminal.Value, terminal, this.LineCommentForeground, terminal.CanDerived);
-                else if(terminal.TokenType is ScopeComment)
-                    this.TextArea.AddSyntaxHighLightInfo(terminal.Value, terminal, this.LineCommentForeground, terminal.CanDerived, true);
-                else if (terminal.TokenType is Digit10)
-                    this.TextArea.AddSyntaxHighLightInfo(terminal.Value, terminal, this.DigitForeground, terminal.CanDerived);
-                else if (terminal.TokenType is Digit2)
-                    this.TextArea.AddSyntaxHighLightInfo(terminal.Value, terminal, this.BinaryForeground, terminal.CanDerived);
-                else if (terminal.TokenType is Digit8)
-                    this.TextArea.AddSyntaxHighLightInfo(terminal.Value, terminal, this.OctalForeground, terminal.CanDerived);
-                else if (terminal.TokenType is Digit16)
-                    this.TextArea.AddSyntaxHighLightInfo(terminal.Value, terminal, this.HexForeground, terminal.CanDerived);
-                else if (terminal.TokenType is Operator)
-                    this.TextArea.AddSyntaxHighLightInfo(terminal.Value, terminal, this.TextArea.DefaultTextBrush, terminal.CanDerived, true);
-                else if (terminal.TokenType is Delimiter)
-                    this.TextArea.AddSyntaxHighLightInfo(terminal.Value, terminal, Brushes.Black, terminal.CanDerived, true);
-                else if (terminal.TokenType is Identifier)
-                    this.TextArea.AddSyntaxHighLightInfo(terminal.Value, terminal, this.TextArea.DefaultTextBrush, terminal.CanDerived);
+
+                var mediaForeground = ColorUtility.ToMediaBrush(item.ForegroundColor);
+                var mediaBackground = ColorUtility.ToMediaBrush(item.BackgroundColor);
+
+                if (terminal.TokenType.GetType() == item.Type)
+                    this.TextArea.AddSyntaxHighLightInfo(mediaForeground, mediaBackground, terminal.Value, terminal, terminal.CanDerived, bOper);
             }
 
-            foreach (var delimiter in grammar.DelimiterDic)
+            foreach (var delimiter in this.ParserSnippet.Parser.Grammar.DelimiterDic)
             {
-                if(this.TextArea.DelimiterSet.Contains(delimiter.Key) == false)
+                if (this.TextArea.DelimiterSet.Contains(delimiter.Key) == false)
                     this.TextArea.DelimiterSet.Add(delimiter.Key);
             }
         }

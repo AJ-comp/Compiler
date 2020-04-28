@@ -12,7 +12,6 @@
   See http://www.galasoft.ch/mvvm
 */
 
-using ApplicationLayer.Models;
 using ApplicationLayer.ViewModels.DialogViewModels;
 using ApplicationLayer.ViewModels.DocumentTypeViewModels;
 using ApplicationLayer.ViewModels.ToolWindowViewModels;

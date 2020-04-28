@@ -7,12 +7,52 @@
              xmlns:grids="http://schemas.actiprosoftware.com/winfx/xaml/grids"
              xmlns:local="clr-namespace:ApplicationLayer.Views.DialogViews.OptionViews"
              xmlns:views="clr-namespace:ApplicationLayer.Views"
+             xmlns:converter="clr-namespace:ApplicationLayer.Views.Converters"
+             xmlns:editors="http://schemas.actiprosoftware.com/winfx/xaml/editors"
              xmlns:shared="http://schemas.actiprosoftware.com/winfx/xaml/shared"
              xmlns:utilities="clr-namespace:ApplicationLayer.Common.Utilities;assembly=ApplicationLayer.Common"
              mc:Ignorable="d" 
              lex:ResxLocalizationProvider.DefaultAssembly="ApplicationLayer.Define"
              lex:ResxLocalizationProvider.DefaultDictionary="OptionDialogResources">
     <UserControl.Resources>
+        <Style x:Key="fontsComboBoxItemStyle" TargetType="ComboBoxItem">
+            <Setter Property="SnapsToDevicePixels" Value="true"/>
+            <Setter Property="OverridesDefaultStyle" Value="true"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ComboBoxItem">
+                        <TextBlock Text="{Binding Name}"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <DataTemplate x:Key="fontsComboBoxItemTemplate">
+            <TextBlock Text="{Binding Name}"/>
+        </DataTemplate>
+
+
+        <Style x:Key="colorsComboBoxItemStyle" TargetType="ComboBoxItem">
+            <Setter Property="SnapsToDevicePixels" Value="true"/>
+            <Setter Property="OverridesDefaultStyle" Value="true"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ComboBoxItem">
+                        <VirtualizingStackPanel Orientation="Horizontal">
+                            <Rectangle Width="10" Height="10" Margin="0 0 5 0"
+                                                    Fill="{Binding ColorValue, Converter={converter:ColorToBrushConverter}}"/>
+                            <TextBlock Text="{Binding ColorName}"/>
+                        </VirtualizingStackPanel>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <DataTemplate x:Key="colorsComboBoxItemTemplate">
+            <TextBlock Text=""/>    <!-- nothing display -->
+        </DataTemplate>
+
+
         <StackPanel x:Key="CustomFontControl">
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -23,18 +63,14 @@
                 <StackPanel Grid.Column="0" Margin="0 0 20 0">
                     <TextBlock Text="{lex:Loc Key=Font}" Margin="0 0 0 5"/>
                     <ComboBox ItemsSource="{Binding FontList}"
-                                        SelectedItem="{Binding FontSelected}">
-                        <ComboBox.ItemTemplate>
-                            <DataTemplate>
-                                <TextBlock Text="{Binding Name}"/>
-                            </DataTemplate>
-                        </ComboBox.ItemTemplate>
-                    </ComboBox>
+                                        ItemContainerStyle="{StaticResource fontsComboBoxItemStyle}"
+                                        ItemTemplate="{StaticResource fontsComboBoxItemTemplate}"
+                                        SelectedItem="{Binding FontSelected}"/>
                 </StackPanel>
 
                 <StackPanel Grid.Column="1">
                     <TextBlock Text="{lex:Loc Key=FontSize}" Margin="0 0 0 5"/>
-                    <TextBox Text="{Binding FontSizeSelected}"/>
+                    <editors:Int16EditBox Value="{Binding FontSizeSelected}" HasPopup="False"/>
                 </StackPanel>
             </Grid>
         </StackPanel>
@@ -49,8 +85,15 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
-                <ComboBox Grid.Column="0" Margin="0 0 20 0"/>
-                <Button Grid.Column="1" Content="{lex:Loc Key=Custom}" Padding="0 0 10 0"/>
+                <editors:ColorEditBox Grid.Column="0" Value="{Binding ForegroundColor, Mode=TwoWay}" Margin="0 0 10 0"/>
+                <ComboBox Grid.Column="1" Padding="0 0 10 0"
+                                    ItemsSource="{Binding CandidateColorList}"
+                                    ItemContainerStyle="{StaticResource colorsComboBoxItemStyle}"
+                                    ItemTemplate="{StaticResource colorsComboBoxItemTemplate}"
+                                    SelectedItem="{Binding SelectedForeKnownColor}"
+                                    IsEnabled="{Binding KnownColorEnabled}"/>
+                <TextBlock Grid.Column="1" IsHitTestVisible="False" Margin="10,2,0,0" Foreground="Gray" 
+                                    Text="{lex:Loc Key=SelectKnownColor}"/>
             </Grid>
         </StackPanel>
 
@@ -63,8 +106,15 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
-                <ComboBox Grid.Column="0" Margin="0 0 20 0"/>
-                <Button Grid.Column="1" Content="{lex:Loc Key=Custom}" Padding="0 0 10 0"/>
+                <editors:ColorEditBox Grid.Column="0" Value="{Binding BackgroundColor, Mode=TwoWay}" Margin="0 0 10 0"/>
+                <ComboBox Grid.Column="1" Padding="0 0 10 0" 
+                                    ItemsSource="{Binding CandidateColorList}"
+                                    ItemContainerStyle="{StaticResource colorsComboBoxItemStyle}"
+                                    ItemTemplate="{StaticResource colorsComboBoxItemTemplate}"
+                                    SelectedItem="{Binding SelectedBackKnownColor}"
+                                    IsEnabled="{Binding KnownColorEnabled}"/>
+                <TextBlock Grid.Column="1" IsHitTestVisible="False" Margin="10,2,0,0" Foreground="Gray" 
+                                    Text="{lex:Loc Key=SelectKnownColor}"/>
             </Grid>
         </StackPanel>
     </UserControl.Resources>
@@ -88,7 +138,8 @@
                 <TextBlock DockPanel.Dock="Top" Text="{lex:Loc Key=DisplayContent}" Margin="0 0 0 5"/>
                 <grids:TreeListBox RootItem="{Binding Root, Mode=OneWay}" 
                                             ScrollViewer.VerticalScrollBarVisibility="Visible"
-                                            ScrollViewer.CanContentScroll="True">
+                                            ScrollViewer.CanContentScroll="True"
+                                            SelectedItem="{Binding SelectedItem}">
 
                     <grids:TreeListBox.ItemAdapter>
                         <views:DefaultTreeListBoxItemAdapter/>

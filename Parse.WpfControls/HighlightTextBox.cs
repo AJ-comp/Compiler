@@ -404,13 +404,13 @@ namespace Parse.WpfControls
         }
 
         /// <summary>
-        /// This function adds information which to syntax-highlight to the editor.
+        /// This function adds information which for syntax-highlighting to the editor.
         /// </summary>
         /// <param name="text">This argument means text to highlight. This argument can be a pattern.</param>
         /// <param name="foreBrush">This argument means the foreground color of the text.</param>
         /// <param name="bCanDerived">If this argument is false regex expression is displayed like as (ex : ++ -> \b++\b)</param>
         /// <param name="bOperator">If this argument is true regex expression is displayed like as (ex : ++ -> \+\+)</param>
-        public void AddSyntaxHighLightInfo(string text, object optionData, Brush foreBrush, bool bCanDerived, bool bOperator = false)
+        public void AddSyntaxHighLightInfo(Brush foreBrush, Brush backBrush, string text, object optionData, bool bCanDerived, bool bOperator = false)
         {
             this.textStyleDic.Add(text, new TextStyle(foreBrush, Brushes.Transparent));
             this.AddTokenPattern(text, optionData, bCanDerived, bOperator);
