@@ -1,4 +1,5 @@
-﻿using GalaSoft.MvvmLight.Messaging;
+﻿using ApplicationLayer.Models.SolutionPackage;
+using GalaSoft.MvvmLight.Messaging;
 using Parse.BackEnd.Target;
 using Parse.FrontEnd.Grammars;
 using System.IO;
@@ -84,5 +85,4 @@ namespace ApplicationLayer.ViewModels.Messages
     public class AddMissedChangedFilesMessage : MessageBase
     {
     }
-
 }

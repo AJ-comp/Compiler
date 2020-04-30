@@ -144,13 +144,13 @@ namespace ApplicationLayer.Models.SolutionPackage
         public void AddFilter(FilterTreeNodeModel item)
         {
             item.Parent = this;
-            this.children.Add(item);
+            this._children.Add(item);
         }
 
         public void AddFile(FileTreeNodeModel item)
         {
             item.Parent = this;
-            this.children.Add(item);
+            this._children.Add(item);
         }
 
 
@@ -161,9 +161,9 @@ namespace ApplicationLayer.Models.SolutionPackage
         public override void RemoveChild(TreeNodeModel nodeToRemove)
         {
             if (nodeToRemove is FilterTreeNodeModel)
-                this.children.Remove(nodeToRemove as FilterTreeNodeModel);
+                this._children.Remove(nodeToRemove as FilterTreeNodeModel);
             else if (nodeToRemove is FileTreeNodeModel)
-                this.children.Remove(nodeToRemove as FileTreeNodeModel);
+                this._children.Remove(nodeToRemove as FileTreeNodeModel);
         }
     }
 }

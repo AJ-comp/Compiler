@@ -7,6 +7,8 @@
         xmlns:viewmodels="clr-namespace:ApplicationLayer.ViewModels.DialogViewModels.OptionViewModels;assembly=ApplicationLayer.ViewModels"
         xmlns:local="clr-namespace:ApplicationLayer.Views.DialogViews.OptionViews"
         mc:Ignorable="d"
+        lex:ResxLocalizationProvider.DefaultAssembly="ApplicationLayer.Define"
+        lex:ResxLocalizationProvider.DefaultDictionary="Resources"
         WindowStyle="ToolWindow"
         WindowStartupLocation="CenterScreen"
         Style="{DynamicResource NormalWindow}"
@@ -41,9 +43,11 @@
                             HorizontalAlignment="Right" VerticalAlignment="Center">
             <Button Content="{lex:Loc Key=Ok}" 
                         Style="{DynamicResource WindowCloseButton}"
-                        Margin="0 0 10 0"/>
+                        Margin="0 0 10 0"
+                        Command="{Binding ApplyCommand}"/>
             <Button Content="{lex:Loc Key=Cancel}"
-                        Style="{DynamicResource WindowCloseButton}"/>
+                        Style="{DynamicResource WindowCloseButton}"
+                        Command="{Binding CancelCommand}"/>
         </StackPanel>
     </Grid>
 </Window>

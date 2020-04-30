@@ -12,6 +12,21 @@
              lex:ResxLocalizationProvider.DefaultAssembly="ApplicationLayer.Define"
              mc:Ignorable="d" 
              DataContext="{Binding AlarmListWindow, Source={StaticResource Locator}}">
+    <UserControl.Resources>
+        <DataTemplate x:Key="gridViewCellTemplate">
+            <Image x:Name="image" Width="16" Height="16" Margin="0,0,2,0"/>
+
+            <DataTemplate.Triggers>
+                <DataTrigger Binding="{Binding Status}" Value="0">
+                    <Setter TargetName="image" Property="Source" Value="{DynamicResource ErrorImagePath}"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Status}" Value="1">
+                    <Setter TargetName="image" Property="Source" Value="{DynamicResource WarningImagePath}"/>
+                </DataTrigger>
+            </DataTemplate.Triggers>
+        </DataTemplate>
+    </UserControl.Resources>
+    
 
     <Grid>
         <Grid.RowDefinitions>
@@ -21,9 +36,9 @@
         
         <StackPanel Grid.Row="0" Orientation="Horizontal">
             <ComboBox MinWidth="150" Margin="0 0 10 0" SelectedIndex="0">
-                <ComboBoxItem Content="{lex:Loc Key=WholeSolution}"/>
-                <ComboBoxItem Content="{lex:Loc Key=CurrentProject}"/>
-                <ComboBoxItem Content="{lex:Loc Key=CurrentDocumentation}"/>
+                <ComboBoxItem Content="{lex:Loc Resources:WholeSolution}"/>
+                <ComboBoxItem Content="{lex:Loc Resources:CurrentProject}"/>
+                <ComboBoxItem Content="{lex:Loc Resources:CurrentDocumentation}"/>
             </ComboBox>
             <ToggleButton Background="Transparent" Margin=" 0 0 5 0">
                 <StackPanel Orientation="Horizontal">
@@ -44,27 +59,13 @@
                        HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header=" ">
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <Image x:Name="image" Width="16" Height="16" Margin="0,0,2,0"/>
+                    <GridViewColumn Header=" " CellTemplate="{StaticResource gridViewCellTemplate}"/>
 
-                                <DataTemplate.Triggers>
-                                    <DataTrigger Binding="{Binding Status}" Value="0">
-                                        <Setter TargetName="image" Property="Source" Value="{DynamicResource ErrorImagePath}"/>
-                                    </DataTrigger>
-                                    <DataTrigger Binding="{Binding Status}" Value="1">
-                                        <Setter TargetName="image" Property="Source" Value="{DynamicResource WarningImagePath}"/>
-                                    </DataTrigger>
-                                </DataTemplate.Triggers>
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
-                    <GridViewColumn Header="{lex:Loc Key=Code}" DisplayMemberBinding="{Binding Code}" />
-                    <GridViewColumn Header="{lex:Loc Key=Explanation}" Width="200" DisplayMemberBinding="{Binding Message}"/>
-                    <GridViewColumn Header="{lex:Loc Key=Project}" DisplayMemberBinding="{Binding ProjectName}"/>
-                    <GridViewColumn Header="{lex:Loc Key=File}" DisplayMemberBinding="{Binding FileName}"/>
-                    <GridViewColumn Header="{lex:Loc Key=Line}" DisplayMemberBinding="{Binding Line}"/>
+                    <GridViewColumn Header="{lex:Loc Resources:Code}" DisplayMemberBinding="{Binding Code}" />
+                    <GridViewColumn Header="{lex:Loc Resources:Explanation}" Width="200" DisplayMemberBinding="{Binding Message}"/>
+                    <GridViewColumn Header="{lex:Loc Resources:Project}" DisplayMemberBinding="{Binding ProjectName}"/>
+                    <GridViewColumn Header="{lex:Loc Resources:File}" DisplayMemberBinding="{Binding FileName}"/>
+                    <GridViewColumn Header="{lex:Loc Resources:Line}" DisplayMemberBinding="{Binding Line}"/>
                 </GridView>
             </ListView.View>
 

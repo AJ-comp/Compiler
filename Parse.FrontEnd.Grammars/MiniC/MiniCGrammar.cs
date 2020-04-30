@@ -5,7 +5,7 @@ namespace Parse.FrontEnd.Grammars.MiniC
 {
     public class MiniCGrammar : Grammar
     {
-        public Terminal If { get; } = new Terminal(TokenType.Keyword.NormalKeyword, "if");
+        public Terminal If { get; } = new Terminal(TokenType.Keyword.Controlword, "if");
         public Terminal Else { get; } = new Terminal(TokenType.Keyword.Controlword, "else");
         public Terminal While { get; } = new Terminal(TokenType.Keyword.Repeateword, "while");
         public Terminal Return { get; } = new Terminal(TokenType.Keyword.Controlword, "return");

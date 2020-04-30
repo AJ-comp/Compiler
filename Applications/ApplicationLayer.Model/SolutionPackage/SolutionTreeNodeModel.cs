@@ -105,7 +105,7 @@ namespace ApplicationLayer.Models.SolutionPackage
         public SolutionTreeNodeModel() : base(string.Empty, string.Empty)
         {
             this.IsEditable = true;
-            this.children.CollectionChanged += Projects_CollectionChanged;
+            this._children.CollectionChanged += Projects_CollectionChanged;
         }
 
         public SolutionTreeNodeModel(string solutionPath, string solutionName) : base(solutionPath, solutionName + ".ajn")
@@ -115,7 +115,7 @@ namespace ApplicationLayer.Models.SolutionPackage
             this.IsEditable = true;
             this.SyncWithCurrentValue();
 
-            this.children.CollectionChanged += Projects_CollectionChanged;
+            this._children.CollectionChanged += Projects_CollectionChanged;
         }
 
 
@@ -150,7 +150,7 @@ namespace ApplicationLayer.Models.SolutionPackage
         public void AddProject(ProjectTreeNodeModel newProject)
         {
             newProject.Parent = this;
-            this.children.Add(newProject);
+            this._children.Add(newProject);
         }
 
         /// <summary>
@@ -184,7 +184,7 @@ namespace ApplicationLayer.Models.SolutionPackage
         public override void RemoveChild(TreeNodeModel nodeToRemove)
         {
             if(nodeToRemove is ProjectTreeNodeModel)
-                this.children.Remove(nodeToRemove as ProjectTreeNodeModel);
+                this._children.Remove(nodeToRemove as ProjectTreeNodeModel);
         }
 
 

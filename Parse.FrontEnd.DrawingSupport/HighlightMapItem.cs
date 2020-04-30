@@ -10,8 +10,8 @@ namespace Parse.FrontEnd.DrawingSupport
     {
         public Type Type { get; }
 
-        public Color ForegroundColor { get; }
-        public Color BackgroundColor { get; }
+        public Color ForegroundColor { get; set; } = Color.Transparent;
+        public Color BackgroundColor { get; set; } = Color.Transparent;
 
         public HighlightMapItem(Type type, Color foregroundColor, Color backgroundColor)
         {

@@ -1,13 +1,10 @@
 ﻿using GalaSoft.MvvmLight;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ApplicationLayer.ViewModels.DialogViewModels.OptionViewModels
 {
-    public class OptionDialogMainViewModel : ViewModelBase
+    public abstract class OptionDialogMainViewModel : ViewModelBase
     {
+        public abstract void Commit();
+        public abstract void RollBack();
     }
 }

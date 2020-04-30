@@ -1,10 +1,28 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace Parse.FrontEnd.Grammars.MiniC.SymbolTableFormat
 {
     public enum DataType { Unknown, Void, Int }
     public enum EtcInfo { Normal, Extern, Param }
+
+    public class VarDataList : List<VarData>
+    {
+        public VarDataList Parent { get; } = new VarDataList();
+        public VarDataList Child { get; } = new VarDataList();
+
+        public VarDataList GetVarListByBlockLevel(int blockLevel)
+        {
+            var result = new VarDataList();
+
+            var data = from t in this
+                            where t.DclData.BlockLevel == blockLevel
+                            select t;
+
+            result.AddRange(data);
+            return result;
+        }
+    }
 
     public class VarData : IStorableToHashTable
     {

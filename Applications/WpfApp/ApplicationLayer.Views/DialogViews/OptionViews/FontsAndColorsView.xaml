@@ -85,7 +85,9 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
-                <editors:ColorEditBox Grid.Column="0" Value="{Binding ForegroundColor, Mode=TwoWay}" Margin="0 0 10 0"/>
+                <editors:ColorEditBox Grid.Column="0" Margin="0 0 10 0" 
+                                                Value="{Binding ForegroundColor, Mode=TwoWay, 
+                                                Converter={converter:DrawingColorToMediaColorConverter}}" />
                 <ComboBox Grid.Column="1" Padding="0 0 10 0"
                                     ItemsSource="{Binding CandidateColorList}"
                                     ItemContainerStyle="{StaticResource colorsComboBoxItemStyle}"
@@ -106,7 +108,9 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
-                <editors:ColorEditBox Grid.Column="0" Value="{Binding BackgroundColor, Mode=TwoWay}" Margin="0 0 10 0"/>
+                <editors:ColorEditBox Grid.Column="0" Margin="0 0 10 0"
+                                                Value="{Binding BackgroundColor, Mode=TwoWay, 
+                                                Converter={converter:DrawingColorToMediaColorConverter}}" />
                 <ComboBox Grid.Column="1" Padding="0 0 10 0" 
                                     ItemsSource="{Binding CandidateColorList}"
                                     ItemContainerStyle="{StaticResource colorsComboBoxItemStyle}"

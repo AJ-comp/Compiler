@@ -2,7 +2,6 @@
 using ApplicationLayer.Common.Helpers;
 using ApplicationLayer.Common.Interfaces;
 using ApplicationLayer.Models.SolutionPackage;
-using ApplicationLayer.ViewModels.DialogViewModels.OptionViewModels;
 using ApplicationLayer.ViewModels.DocumentTypeViewModels;
 using ApplicationLayer.ViewModels.Messages;
 using GalaSoft.MvvmLight.Command;
@@ -21,7 +20,7 @@ namespace ApplicationLayer.ViewModels.ToolWindowViewModels
         /********************************************************************************************
          * private field section
          ********************************************************************************************/
-        private SolutionTreeNodeModel solution;
+        private SolutionTreeNodeModel _solution;
         private TreeNodeModel selectedItem;
         private ObservableCollection<DocumentViewModel> _documents;
         private DocumentViewModel selectedDocument;
@@ -35,10 +34,10 @@ namespace ApplicationLayer.ViewModels.ToolWindowViewModels
          ********************************************************************************************/
         public SolutionTreeNodeModel Solution
         {
-            get => solution;
+            get => _solution;
             private set
             {
-                solution = value;
+                _solution = value;
                 RaisePropertyChanged(nameof(Solution));
             }
         }
@@ -169,7 +168,7 @@ namespace ApplicationLayer.ViewModels.ToolWindowViewModels
         {
             this.Solution.ChildrenChanged += ChildrenChanged;
 
-            foreach(var child in this.solution.Children)
+            foreach(var child in this._solution.Children)
             {
                 if(child is ProjectTreeNodeModel)
                 {
@@ -375,7 +374,7 @@ namespace ApplicationLayer.ViewModels.ToolWindowViewModels
                 var fileNode = (SelectedItem as FileTreeNodeModel);
                 if (fileNode.IsExistFile == false) return;
 
-                var editor = new EditorTypeViewModel(fileNode, FontsAndColorsViewModel.Instance);
+                var editor = new EditorTypeViewModel(fileNode);
                 if (this.Documents.Contains(editor))
                 {
                     this.SelectedDocument = editor;

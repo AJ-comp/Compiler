@@ -41,15 +41,15 @@ namespace ApplicationLayer.Models
             get
             {
                 List<HighlightTreeNodeModel> result = new List<HighlightTreeNodeModel>();
-                if (this.children.Count == 0) result.Add(this);
 
-                foreach(var item in this.children)
+                foreach(var item in this._children)
                 {
                     var convertItem = item as HighlightTreeNodeModel;
 
                     result.AddRange(convertItem.ToList);
                 }
 
+                result.Add(this);
                 return result;
             }
         }
@@ -82,7 +82,7 @@ namespace ApplicationLayer.Models
             this.ForegroundColor = HighlightMapHelper.Instance.DefaultForegroundColor(this.Type);
             this.BackgroundColor = HighlightMapHelper.Instance.DefaultBackgroundColor(this.Type);
 
-            foreach (var item in this.children)
+            foreach (var item in this._children)
                 (item as HighlightTreeNodeModel).AssignDefaultValue();
         }
 

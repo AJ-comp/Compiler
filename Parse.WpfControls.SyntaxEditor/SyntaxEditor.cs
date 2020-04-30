@@ -186,17 +186,6 @@ namespace Parse.WpfControls.SyntaxEditor
         // Using a DependencyProperty as the backing store for LineCommentForeground.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty LineCommentForegroundProperty =
             DependencyProperty.Register("LineCommentForeground", typeof(Brush), typeof(SyntaxEditor), new PropertyMetadata(Brushes.Green));
-
-
-        public Brush ScopeCommentForeground
-        {
-            get { return (Brush)GetValue(ScopeCommentForegroundProperty); }
-            set { SetValue(ScopeCommentForegroundProperty, value); }
-        }
-
-        // Using a DependencyProperty as the backing store for ScopeCommentForeground.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty ScopeCommentForegroundProperty =
-            DependencyProperty.Register("ScopeCommentForeground", typeof(Brush), typeof(SyntaxEditor), new PropertyMetadata(Brushes.Green));
         #endregion
 
 
@@ -310,10 +299,10 @@ namespace Parse.WpfControls.SyntaxEditor
                     this.ShowIntellisense(localTextChange, list);
                 }, DispatcherPriority.ApplicationIdle);
 
-                this.SementicAnalysis(localResult);
                 Dispatcher.Invoke(() =>
                 {
-                    this.ParsingCompleted?.Invoke(this, new ParsingCompletedEventArgs(localResult));
+                    var sementicResult = this.SementicAnalysis(localResult);
+                    this.ParsingCompleted?.Invoke(this, new ParsingCompletedEventArgs(localResult, sementicResult));
                 });
             }
         }
@@ -405,17 +394,19 @@ namespace Parse.WpfControls.SyntaxEditor
             });
         }
 
-        private void SementicAnalysis(ParsingResult target)
+        private SementicAnalysisResult SementicAnalysis(ParsingResult target)
         {
-//            var sementicResult = this.ParserSnippet.Parser.Grammar.SDTS.Process(target.ToAST);
+            var sementicResult = this.ParserSnippet.Parser.Grammar.SDTS.Process(target.ToAST);
             ParsingFailedListPreProcess(target);
+
+            return sementicResult;
         }
 
         private List<ItemData> GetCompletionList(ParsingResult parsingResult, int tokenIndex)
         {
             List<ItemData> result = new List<ItemData>();
             if (tokenIndex < 0) return result;
-            if (parsingResult.Count == 0) return result;
+            if (parsingResult.Count <= tokenIndex) return result;
 
             foreach (var item in parsingResult[tokenIndex].PossibleTerminalSet)
             {
@@ -429,6 +420,8 @@ namespace Parse.WpfControls.SyntaxEditor
 
         private void ShowIntellisense(TextChange changeInfo, List<ItemData> items)
         {
+            if (items.Count == 0) return;
+
             var addString = TextArea.Text.Substring(changeInfo.Offset, changeInfo.AddedLength);
             if (addString.Length > 1) { completionList.Close(); return; }
             if (CloseCharacters.Contains(addString)) { completionList.Close(); return; }

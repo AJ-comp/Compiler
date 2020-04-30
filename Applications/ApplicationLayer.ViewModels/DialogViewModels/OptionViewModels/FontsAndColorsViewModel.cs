@@ -21,11 +21,14 @@ namespace ApplicationLayer.ViewModels.DialogViewModels.OptionViewModels
         private HighlightTreeNodeModel _selectedItem;
         private Color _foregroundColor;
         private Color _backgroundColor;
+        private Color _tempForegroundColor;
+        private Color _tempBackgroundColor;
         private ColorItem _selectedForeKnownColor;
         private ColorItem _selectedBackKnownColor;
         private double _fontSizeSelected = 10;
         private FontFamily _fontSelected = new FontFamily("Arial");
         private RelayCommand<Action<string>> _customCommand;
+        private HashSet<HighlightMapItem> _newMapItems = new HashSet<HighlightMapItem>();
         private HashSet<TokenType> _ignoreTokenList = new HashSet<TokenType>();
 
         public Grammar Grammar
@@ -64,6 +67,7 @@ namespace ApplicationLayer.ViewModels.DialogViewModels.OptionViewModels
                 {
                     _instance = new FontsAndColorsViewModel();
                     _instance.Grammar = new MiniCGrammar();   // temp
+                    _instance.SelectedItem = _instance.Root.Children[0] as HighlightTreeNodeModel;
                 }
 
                 return _instance;
@@ -110,14 +114,25 @@ namespace ApplicationLayer.ViewModels.DialogViewModels.OptionViewModels
             get => _selectedItem;
             set
             {
+                // fall off to the infinite roop if this logic doesn't exist.
+                if (value == null) return;
+
                 _selectedItem = value;
                 RaisePropertyChanged(nameof(SelectedItem));
-                RaisePropertyChanged(nameof(KnownColorEnabled));
 
                 if (_selectedItem == null) return;
-                ForegroundColor = _selectedItem.ForegroundColor;
-                BackgroundColor = _selectedItem.BackgroundColor;
-//                RaisePropertyChanged(nameof(IsSelectedItemLeafNode));
+
+                var newMapItem = GetNewMapItem(SelectedItem);
+                if(newMapItem == null)
+                {
+                    ForegroundColor = _selectedItem.ForegroundColor;
+                    BackgroundColor = _selectedItem.BackgroundColor;
+                }
+                else
+                {
+                    ForegroundColor = newMapItem.ForegroundColor;
+                    BackgroundColor = newMapItem.BackgroundColor;
+                }
             }
         }
 
@@ -128,6 +143,14 @@ namespace ApplicationLayer.ViewModels.DialogViewModels.OptionViewModels
             {
                 _foregroundColor = value;
                 RaisePropertyChanged(nameof(ForegroundColor));
+
+                if (_foregroundColor == _selectedItem.ForegroundColor) return;
+
+                var newMapItem = GetNewMapItem(_selectedItem);
+                if (newMapItem != null)
+                    newMapItem.ForegroundColor = _foregroundColor;
+                else
+                    _newMapItems.Add(new HighlightMapItem(_selectedItem.Type, _foregroundColor, Color.Transparent));
             }
         }
 
@@ -138,6 +161,34 @@ namespace ApplicationLayer.ViewModels.DialogViewModels.OptionViewModels
             {
                 _backgroundColor = value;
                 RaisePropertyChanged(nameof(BackgroundColor));
+
+                if (_backgroundColor == _selectedItem.BackgroundColor) return;
+
+                var newMapItem = GetNewMapItem(_selectedItem);
+                if (newMapItem != null)
+                    newMapItem.BackgroundColor = _backgroundColor;
+                else
+                    _newMapItems.Add(new HighlightMapItem(_selectedItem.Type, Color.Transparent, _backgroundColor));
+            }
+        }
+
+        public Color TempForegroundColor
+        {
+            get => _tempForegroundColor;
+            set
+            {
+                _tempForegroundColor = value;
+                RaisePropertyChanged(nameof(TempForegroundColor));
+            }
+        }
+
+        public Color TempBackgroundColor
+        {
+            get => _tempBackgroundColor;
+            set
+            {
+                _tempBackgroundColor = value;
+                RaisePropertyChanged(nameof(TempBackgroundColor));
             }
         }
 
@@ -171,8 +222,6 @@ namespace ApplicationLayer.ViewModels.DialogViewModels.OptionViewModels
             }
         }
 
-        public bool KnownColorEnabled => (SelectedItem != null);
-
         public RelayCommand<Action<string>> CustomCommand
         {
             get
@@ -197,8 +246,19 @@ namespace ApplicationLayer.ViewModels.DialogViewModels.OptionViewModels
             {
                 CandidateColorList.Add(new ColorItem(color));
             });
+        }
 
+        private HighlightMapItem GetNewMapItem(HighlightTreeNodeModel selectedItem)
+        {
+            HighlightMapItem result = null;
+            if (selectedItem == null) return result;
 
+            foreach (var item in _newMapItems)
+            {
+                if (item.Type == selectedItem.Type) { result = item; break; }
+            }
+
+            return result;
         }
 
         private ColorItem GetColorIndexFromCandidate(Color colorToFind)
@@ -225,6 +285,30 @@ namespace ApplicationLayer.ViewModels.DialogViewModels.OptionViewModels
         private void OnCustom(Action<string> action)
         {
 //            action?.Invoke(this.Path);
+        }
+
+        public override void Commit()
+        {
+            var allItemList = Root.ToList;
+
+            foreach(var item in allItemList)
+            {
+                foreach (var itemToCompare in _newMapItems)
+                {
+                    if(item.Type.Equals(itemToCompare.Type))
+                    {
+                        item.ForegroundColor = itemToCompare.ForegroundColor;
+                        item.BackgroundColor = itemToCompare.BackgroundColor;
+                    }
+                }
+            }
+
+            _newMapItems.Clear();
+        }
+
+        public override void RollBack()
+        {
+            _newMapItems.Clear();
         }
     }
 

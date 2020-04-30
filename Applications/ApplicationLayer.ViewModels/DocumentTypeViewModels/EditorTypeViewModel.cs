@@ -1,6 +1,7 @@
 ﻿using ApplicationLayer.Common.Utilities;
 using ApplicationLayer.Models.Invokers;
 using ApplicationLayer.Models.SolutionPackage;
+using ApplicationLayer.Models.SolutionPackage.MiniCPackage;
 using ApplicationLayer.ViewModels.DialogViewModels.OptionViewModels;
 using ApplicationLayer.ViewModels.Messages;
 using GalaSoft.MvvmLight.Command;
@@ -25,12 +26,11 @@ namespace ApplicationLayer.ViewModels.DocumentTypeViewModels
         /********************************************************************************************
          * private field section
          ********************************************************************************************/
-        private object lockObject = new object();
-        private int caretIndex = 0;
+        private object _lockObject = new object();
+        private int _caretIndex = 0;
         private FileTreeNodeModel _fileNode;
-        private List<HighlightMapItem> highlightMaps = new List<HighlightMapItem>();
-        private RelayCommand<ParsingCompletedEventArgs> parsingCompletedCommand = null;
-        private FontsAndColorsViewModel _fontsAndColorsVM;
+        private List<HighlightMapItem> _highlightMaps = new List<HighlightMapItem>();
+        private RelayCommand<ParsingCompletedEventArgs> _parsingCompletedCommand = null;
 
 
 
@@ -51,15 +51,15 @@ namespace ApplicationLayer.ViewModels.DocumentTypeViewModels
 
         public int CaretIndex
         {
-            get => caretIndex;
+            get => _caretIndex;
             set
             {
-                this.caretIndex = value;
+                this._caretIndex = value;
                 this.RaisePropertyChanged(nameof(CaretIndex));
             }
         }
 
-        public FontsAndColorsViewModel FontsAndColorsVM => _fontsAndColorsVM;
+        public FontsAndColorsViewModel FontsAndColorsVM => FontsAndColorsViewModel.Instance;
 
 
 
@@ -70,10 +70,10 @@ namespace ApplicationLayer.ViewModels.DocumentTypeViewModels
         {
             get
             {
-                if (this.parsingCompletedCommand == null)
-                    this.parsingCompletedCommand = new RelayCommand<ParsingCompletedEventArgs>(this.OnParsingCompleted);
+                if (this._parsingCompletedCommand == null)
+                    this._parsingCompletedCommand = new RelayCommand<ParsingCompletedEventArgs>(this.OnParsingCompleted);
 
-                return this.parsingCompletedCommand;
+                return this._parsingCompletedCommand;
             }
         }
 
@@ -82,10 +82,9 @@ namespace ApplicationLayer.ViewModels.DocumentTypeViewModels
         /********************************************************************************************
          * constructor section
          ********************************************************************************************/
-        public EditorTypeViewModel(FileTreeNodeModel fileNode, FontsAndColorsViewModel fontsAndColorsVM) : base(fileNode?.FileName, fileNode?.FullPath, fileNode?.FullPath)
+        public EditorTypeViewModel(FileTreeNodeModel fileNode) : base(fileNode?.FileName, fileNode?.FullPath, fileNode?.FullPath)
         {
             this._fileNode = fileNode;
-            this._fontsAndColorsVM = fontsAndColorsVM;
 
             this.CloseCharacters.Add("{");
             this.CloseCharacters.Add("}");
@@ -118,6 +117,15 @@ namespace ApplicationLayer.ViewModels.DocumentTypeViewModels
 
             // inform to alarm list view.
             Messenger.Default.Send<AlarmMessage>(new AlarmMessage(this, alarmList));
+
+            // Add sementic parsing information to the current FileTreeNode.
+            _fileNode.Clear();
+            var sementicResult = parsingCompletedInfo.SementicResult;
+            var funcTreeNode = new FuncTreeNodeModel();
+            funcTreeNode.FuncName = "test";
+            funcTreeNode.ReturnType = Parse.FrontEnd.Grammars.MiniC.SymbolTableFormat.DataType.Void;
+
+            _fileNode.AddChildren(funcTreeNode);
         }
 
 
@@ -168,7 +176,7 @@ namespace ApplicationLayer.ViewModels.DocumentTypeViewModels
 
                 ProjectTreeNodeModel projNode = _fileNode.ManagerTree as ProjectTreeNodeModel;
 
-                lock(lockObject)
+                lock(_lockObject)
                     alarmList.Add(new AlarmEventArgs(projNode?.FileNameWithoutExtension, FileName, tokenIndex, lineIndex + 1, errToken, block.ErrorInfos));
             });
         }

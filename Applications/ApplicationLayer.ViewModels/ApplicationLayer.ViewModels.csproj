@@ -65,7 +65,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DialogViewModels\ColorPickerViewModel.cs" />
     <Compile Include="DialogViewModels\OptionViewModels\FontsAndColorsViewModel.cs" />
     <Compile Include="DialogViewModels\OptionViewModels\OptionDialogMainViewModel.cs" />
     <Compile Include="DialogViewModels\OptionViewModels\OptionViewModel.cs" />

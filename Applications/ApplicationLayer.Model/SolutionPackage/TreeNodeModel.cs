@@ -18,14 +18,14 @@ namespace ApplicationLayer.Models.SolutionPackage
 		private bool isSelected;
 		private object tag;
 
-		protected ObservableCollection<TreeNodeModel> children = new ObservableCollection<TreeNodeModel>();
+		protected ObservableCollection<TreeNodeModel> _children = new ObservableCollection<TreeNodeModel>();
 
 		protected TreeNodeModel()
 		{
 			this.tag = this;
 		}
 
-		[XmlIgnore] public ReadOnlyObservableCollection<TreeNodeModel> Children => new ReadOnlyObservableCollection<TreeNodeModel>(children);
+		[XmlIgnore] public ReadOnlyObservableCollection<TreeNodeModel> Children => new ReadOnlyObservableCollection<TreeNodeModel>(_children);
 
 		[XmlIgnore] public TreeNodeModel Parent { get; internal set; }
 
@@ -194,7 +194,14 @@ namespace ApplicationLayer.Models.SolutionPackage
 		public void AddChildren(TreeNodeModel item)
 		{
 			item.Parent = this;
-			this.children.Add(item);
+			this._children.Add(item);
+			this.NotifyChildrenChanged();
+		}
+
+		public void Clear()
+		{
+			_children.Clear();
+			this.NotifyChildrenChanged();
 		}
 
 		public void NotifyChildrenChanged() => this.OnPropertyChanged(nameof(Children));
