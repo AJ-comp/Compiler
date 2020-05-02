@@ -12,11 +12,15 @@ namespace ApplicationLayer.Models.GraphModels
     {
         public string ID { get; private set; }
         public bool IsAst { get; private set; }
+        public bool IsVirtual { get; private set; }
+        public bool HasVirtualChild { get; private set; }
 
-        public PocVertex(string id, bool isAst)
+        public PocVertex(string id, bool isAst, bool isVirtual = false, bool hasVirtualChild = false)
         {
             ID = id;
             IsAst = isAst;
+            IsVirtual = isVirtual;
+            HasVirtualChild = hasVirtualChild;
         }
 
         public override string ToString()

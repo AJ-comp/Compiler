@@ -78,14 +78,17 @@ namespace ApplicationLayer.ViewModels.DocumentTypeViewModels
             {
                 var treeTerminal = curTree as TreeTerminal;
                 bool bAst = treeTerminal.Token.Kind.Meaning;
-                curNode = new PocVertex(treeTerminal.ToString(), bAst);
+                bool bVirtual = treeTerminal.IsVirtual;
+                curNode = new PocVertex(treeTerminal.ToString(), bAst, bVirtual, false);
                 Graph.AddVertex(curNode);
             }
             else
             {
                 var treeNonTerminal = curTree as TreeNonTerminal;
-                bool bAst = (treeNonTerminal.signPost.MeaningUnit == null) ? false : true;
-                curNode = new PocVertex(treeNonTerminal.ToString(), bAst);
+                bool bAst = (treeNonTerminal._signPost.MeaningUnit == null) ? false : true;
+                bool bVirtual = treeNonTerminal.IsVirtual;
+                bool bHasVirtualChild = treeNonTerminal.HasVirtualChild;
+                curNode = new PocVertex(treeNonTerminal.ToString(), bAst, bVirtual, bHasVirtualChild);
                 Graph.AddVertex(curNode);
 
                 foreach (var childTree in treeNonTerminal.Items)

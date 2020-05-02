@@ -47,12 +47,12 @@ namespace Parse.FrontEnd.Grammars.MiniC
             {
                 var astNonTerminal = item as TreeNonTerminal;
 
-                if (astNonTerminal.signPost.MeaningUnit == this.Dcl)
+                if (astNonTerminal._signPost.MeaningUnit == this.Dcl)
                 {
                     var dclData = this.ActionDcl(astNonTerminal, table, blockLevel, errList) as DclData;
                     table.Add(dclData.KeyString, new VarData() { DclData = dclData, Offset = offset++ });
                 }
-                else if(astNonTerminal.signPost.MeaningUnit == this.FuncDef)
+                else if(astNonTerminal._signPost.MeaningUnit == this.FuncDef)
                 {
                     this.ActionFuncDef(astNonTerminal, table, blockLevel, errList);
                 }
@@ -69,7 +69,7 @@ namespace Parse.FrontEnd.Grammars.MiniC
             {
                 var astNonTerminal = item as TreeNonTerminal;
 
-                if (astNonTerminal.signPost.MeaningUnit == this.FuncHead)
+                if (astNonTerminal._signPost.MeaningUnit == this.FuncHead)
                 {
                     var funcData = this.ActionFuncHead(item as TreeNonTerminal, table, blockLevel + 1, errList) as FuncData;
                     if (table.ContainsKey(funcData.KeyString))
@@ -80,7 +80,7 @@ namespace Parse.FrontEnd.Grammars.MiniC
                     }
                     else table.Add(funcData.KeyString, funcData);
                 }
-                else if (astNonTerminal.signPost.MeaningUnit == this.CompoundSt)
+                else if (astNonTerminal._signPost.MeaningUnit == this.CompoundSt)
                 {
                     var varDatas = this.ActionCompoundSt(item as TreeNonTerminal, table, blockLevel + 1, errList) as List<VarData>;
 
@@ -117,9 +117,9 @@ namespace Parse.FrontEnd.Grammars.MiniC
                 else
                 {
                     var astNonterminal = item as TreeNonTerminal;
-                    if (astNonterminal.signPost.MeaningUnit == this.DclSpec)
+                    if (astNonterminal._signPost.MeaningUnit == this.DclSpec)
                         result.DclSpecData = this.ActionDclSpec(astNonterminal, table, blockLevel, errList) as DclSpecData;
-                    else if (astNonterminal.signPost.MeaningUnit == this.FormalPara)
+                    else if (astNonterminal._signPost.MeaningUnit == this.FormalPara)
                     {
                         var varDatas = this.ActionFormalPara(astNonterminal, table, blockLevel, errList) as List<VarData>;
                         result.LocalVars.AddRange(varDatas);
@@ -139,16 +139,16 @@ namespace Parse.FrontEnd.Grammars.MiniC
                 if (item is TreeTerminal) continue;
 
                 var astNonTerminal = item as TreeNonTerminal;
-                if (astNonTerminal.signPost.MeaningUnit == this.ConstNode)
+                if (astNonTerminal._signPost.MeaningUnit == this.ConstNode)
                 {
                     result.ConstToken = (astNonTerminal.Items[0] as TreeTerminal).Token;
                 }
-                else if (astNonTerminal.signPost.MeaningUnit == this.VoidNode)
+                else if (astNonTerminal._signPost.MeaningUnit == this.VoidNode)
                 {
                     result.DataType = DataType.Void;
                     result.DataTypeToken = (astNonTerminal.Items[0] as TreeTerminal).Token;
                 }
-                else if (astNonTerminal.signPost.MeaningUnit == this.IntNode)
+                else if (astNonTerminal._signPost.MeaningUnit == this.IntNode)
                 {
                     result.DataType = DataType.Int;
                     result.DataTypeToken = (astNonTerminal.Items[0] as TreeTerminal).Token;
@@ -168,7 +168,7 @@ namespace Parse.FrontEnd.Grammars.MiniC
 
                 VarData varData = new VarData();
                 var astNonterminal = item as TreeNonTerminal;
-                if (astNonterminal.signPost.MeaningUnit == this.ParamDcl)
+                if (astNonterminal._signPost.MeaningUnit == this.ParamDcl)
                 {
                     varData.DclData = this.ActionParamDcl(astNonterminal, table, blockLevel, errList) as DclData;
                     result.Add(varData);
@@ -197,7 +197,7 @@ namespace Parse.FrontEnd.Grammars.MiniC
                 else
                 {
                     var astNonterminal = item as TreeNonTerminal;
-                    if (astNonterminal.signPost.MeaningUnit == this.DclSpec)
+                    if (astNonterminal._signPost.MeaningUnit == this.DclSpec)
                         result.DclSpecData = this.ActionDclSpec(astNonterminal, table, blockLevel, errList) as DclSpecData;
                 }
             }
@@ -225,9 +225,9 @@ namespace Parse.FrontEnd.Grammars.MiniC
                 if (item is TreeTerminal) continue; // skip ; token
 
                 var astNonTerminal = item as TreeNonTerminal;
-                if (astNonTerminal.signPost.MeaningUnit == this.DclSpec)
+                if (astNonTerminal._signPost.MeaningUnit == this.DclSpec)
                     result.DclSpecData = this.ActionDclSpec(astNonTerminal, table, blockLevel, errList) as DclSpecData;
-                else if (astNonTerminal.signPost.MeaningUnit == this.DclItem)
+                else if (astNonTerminal._signPost.MeaningUnit == this.DclItem)
                     result.DclItemData = this.ActionDclItem(astNonTerminal, table, blockLevel, errList) as DclItemData;
             }
 
@@ -243,9 +243,9 @@ namespace Parse.FrontEnd.Grammars.MiniC
                 if (item is TreeTerminal) continue;
 
                 var astNonTerminal = item as TreeNonTerminal;
-                if (astNonTerminal.signPost.MeaningUnit == this.SimpleVar)
+                if (astNonTerminal._signPost.MeaningUnit == this.SimpleVar)
                     result = this.ActionSimpleVar(astNonTerminal, table, blockLevel, errList) as DclItemData;
-                else if (astNonTerminal.signPost.MeaningUnit == this.ArrayVar)
+                else if (astNonTerminal._signPost.MeaningUnit == this.ArrayVar)
                     result = this.ActionArrayVar(astNonTerminal, table, blockLevel, errList) as DclItemData;
             }
 

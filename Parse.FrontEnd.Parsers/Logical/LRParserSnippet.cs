@@ -36,7 +36,6 @@ namespace Parse.FrontEnd.Parsers.Logical
         {
         }
 
-
         /// <summary>
         /// This function writes a value into stack following to action value (matchedValue).
         /// </summary>
@@ -53,7 +52,7 @@ namespace Parse.FrontEnd.Parsers.Logical
 
             if (matchedValue.Item1 == ActionDir.shift)
             {
-                stack.Push(new TreeTerminal(inputValue));
+                stack.Push(new TreeTerminal(inputValue, inputValue.IsVirtual));
                 stack.Push(matchedValue.Item2);
 
                 result.Direction = ActionDir.shift;
@@ -137,7 +136,7 @@ namespace Parse.FrontEnd.Parsers.Logical
             parsingUnit.ChangeToNormalState();
             var topData = parsingUnit.BeforeStack.Peek();
 
-            if (!(topData is TreeNonTerminal))
+            if ((topData is TreeNonTerminal) == false)
             {
                 parsingUnit.ChangeToFailedState();
                 return false;
@@ -396,10 +395,11 @@ namespace Parse.FrontEnd.Parsers.Logical
             if (token.Kind == null) return true;
             if (token.Kind == new NotDefined()) { }
 
+            // recover error if an error does exist.
+
+
             bool result = this.GoTo(token, parsingUnit);
             if (result == false) result = this.ShiftAndReduce(token, parsingUnit);
-
-            if (result) ParseTreeBuilder.BuildTree(parsingUnit);
 
             return result;
         }

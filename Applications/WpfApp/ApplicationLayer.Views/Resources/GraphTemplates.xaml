@@ -7,13 +7,24 @@
 
     <DataTemplate x:Key="demoTemplate" DataType="{x:Type models:PocVertex}">
         <StackPanel Orientation="Horizontal" Margin="5">
-            <!--<Image x:Name="img" Source="../Images/boy.ico" Width="20" Height="20" />-->
+            <TextBlock x:Name="removableTag" Text="[RM]" Foreground="Red" FontWeight="Bold" Visibility="Collapsed"/>
+            <TextBlock x:Name="virtualTag" Text="[V]" Foreground="Green" FontWeight="Bold" Visibility="Collapsed"/>
+            <TextBlock x:Name="childVirtualTag" Text="[HVC]" Foreground="Blue" FontWeight="Bold" Visibility="Collapsed"/>
             <TextBlock x:Name="textbox" Text="{Binding Path=ID, Mode=OneWay}" Foreground="{DynamicResource CommonEnableTextBrush}"/>
         </StackPanel>
         <DataTemplate.Triggers>
             <DataTrigger Binding="{Binding IsAst}" Value="false">
-                <!--<Setter TargetName="img" Property="Source" Value="../Images/girl.ico" />-->
+                <Setter TargetName="removableTag" Property="Visibility" Value="Visible"/>
+                <Setter TargetName="textbox" Property="Margin"  Value="5 0 0 0"/>
                 <Setter TargetName="textbox" Property="Foreground" Value="Red"/>
+            </DataTrigger>
+            <DataTrigger Binding="{Binding IsVirtual}" Value="true">
+                <Setter TargetName="virtualTag" Property="Visibility" Value="Visible"/>
+                <Setter TargetName="textbox" Property="Margin"  Value="5 0 0 0"/>
+            </DataTrigger>
+            <DataTrigger Binding="{Binding HasVirtualChild}" Value="true">
+                <Setter TargetName="childVirtualTag" Property="Visibility" Value="Visible"/>
+                <Setter TargetName="textbox" Property="Margin"  Value="5 0 0 0"/>
             </DataTrigger>
         </DataTemplate.Triggers>
     </DataTemplate>

@@ -58,7 +58,6 @@
     <Compile Include="Datas\ActionData.cs" />
     <Compile Include="Datas\LR\CanonicalItem.cs" />
     <Compile Include="Datas\LL\LLParsingRowDataFormat.cs" />
-    <Compile Include="Datas\ParseTreeBuilder.cs" />
     <Compile Include="Datas\ParsingBlock.cs" />
     <Compile Include="Datas\LR\LRParsingRowDataFormat.cs" />
     <Compile Include="Datas\ParsingErrorInfo.cs" />

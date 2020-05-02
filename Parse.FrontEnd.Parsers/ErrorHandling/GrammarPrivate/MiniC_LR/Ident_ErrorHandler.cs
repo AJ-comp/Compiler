@@ -19,7 +19,7 @@ namespace Parse.FrontEnd.Parsers.ErrorHandling.GrammarPrivate.MiniC_LR
             if (ixIndex == 0)
             {
                 // insert temporary type keyword (ex : int) because the type keyword is omitted.
-                var virtualToken = new TokenData(grammar.Int, new TokenCell(-1, grammar.Int.Value, null));
+                var virtualToken = new TokenData(grammar.Int, new TokenCell(-1, grammar.Int.Value, null), true);
                 var blockParsingResult = GrammarPrivateLRErrorHandler.ReplaceToVirtualToken(ixIndex, snippet, parsingResult[seeingTokenIndex], virtualToken);
 
                 return (blockParsingResult == LRParserSnippet.SuccessedKind.NotApplicable) ?
@@ -27,7 +27,7 @@ namespace Parse.FrontEnd.Parsers.ErrorHandling.GrammarPrivate.MiniC_LR
             }
             else if (ixIndex == 16)
             {
-                var virtualToken = new TokenData(grammar.Int, new TokenCell(-1, grammar.Int.Value, null));
+                var virtualToken = new TokenData(grammar.Int, new TokenCell(-1, grammar.Int.Value, null), true);
                 var blockParsingResult = GrammarPrivateLRErrorHandler.ReplaceToVirtualToken(ixIndex, snippet, parsingResult[seeingTokenIndex], virtualToken);
 
                 return (blockParsingResult == LRParserSnippet.SuccessedKind.NotApplicable) ?
@@ -38,7 +38,7 @@ namespace Parse.FrontEnd.Parsers.ErrorHandling.GrammarPrivate.MiniC_LR
             else if (ixIndex == 29)
             {
                 // insert temporary type keyword (ex : int) because the type keyword is omitted.
-                var virtualToken = new TokenData(grammar.Int, new TokenCell(-1, grammar.Int.Value, null));
+                var virtualToken = new TokenData(grammar.Int, new TokenCell(-1, grammar.Int.Value, null), true);
                 var blockParsingResult = GrammarPrivateLRErrorHandler.ReplaceToVirtualToken(ixIndex, snippet, parsingResult[seeingTokenIndex], virtualToken);
 
                 return (blockParsingResult == LRParserSnippet.SuccessedKind.NotApplicable) ?

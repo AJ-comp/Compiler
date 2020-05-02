@@ -8,8 +8,8 @@ namespace Parse.FrontEnd.Grammars.MiniC.SymbolTableFormat
 
     public class VarDataList : List<VarData>
     {
-        public VarDataList Parent { get; } = new VarDataList();
-        public VarDataList Child { get; } = new VarDataList();
+        public VarDataList Parent { get; }
+        public VarDataList Child { get; }
 
         public VarDataList GetVarListByBlockLevel(int blockLevel)
         {

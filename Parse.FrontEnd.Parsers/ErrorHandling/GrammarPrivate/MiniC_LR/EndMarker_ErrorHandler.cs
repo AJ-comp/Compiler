@@ -18,7 +18,7 @@ namespace Parse.FrontEnd.Parsers.ErrorHandling.GrammarPrivate.MiniC_LR
             /// Here, someone has to add error handling logic for ixIndex.
             if (ixIndex == 37)
             {
-                var virtualToken = new TokenData(grammar.CloseCurlyBrace, new TokenCell(-1, grammar.CloseCurlyBrace.Value, null));
+                var virtualToken = new TokenData(grammar.CloseCurlyBrace, new TokenCell(-1, grammar.CloseCurlyBrace.Value, null), true);
                 var frontBlock = parsingResult.GetFrontBlockCanParse(seeingTokenIndex);
                 var blockParsingResult = GrammarPrivateLRErrorHandler.InsertVirtualToken(ixIndex, snippet, frontBlock, parsingResult[seeingTokenIndex], virtualToken);
 

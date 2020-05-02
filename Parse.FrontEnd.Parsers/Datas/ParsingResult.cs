@@ -122,9 +122,9 @@ namespace Parse.FrontEnd.Parsers.Datas
             else
             {
                 var convertedParentTree = curTree as TreeNonTerminal;
-                if (convertedParentTree.signPost.MeaningUnit != null)
+                if (convertedParentTree._signPost.MeaningUnit != null)
                 {
-                    result = new TreeNonTerminal(convertedParentTree.signPost);
+                    result = new TreeNonTerminal(convertedParentTree._signPost);
 
                     if (newParentTree == null) newParentTree = result;
                     else if(newParentTree != result)

@@ -9,11 +9,13 @@ namespace Parse.FrontEnd
         public string Input => TokenCell?.Data;
         public Terminal Kind { get; } = new NotDefined();
         public TokenCell TokenCell { get; }
+        public bool IsVirtual { get; private set; }
 
-        public TokenData(Terminal kindTerminal, TokenCell tokenCell)
+        public TokenData(Terminal kindTerminal, TokenCell tokenCell, bool isVirtual = false)
         {
             this.Kind = kindTerminal;
             this.TokenCell = tokenCell;
+            this.IsVirtual = isVirtual;
         }
 
         public static TokenData CreateFromTokenCell(TokenCell tokenCell, bool bEndIndex)

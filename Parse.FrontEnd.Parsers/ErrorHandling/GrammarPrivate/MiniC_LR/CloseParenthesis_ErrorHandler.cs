@@ -20,7 +20,7 @@ namespace Parse.FrontEnd.Parsers.ErrorHandling.GrammarPrivate.MiniC_LR
                 ;
             else if(ixIndex == 12)
             {
-                var virtualToken = new TokenData(grammar.Ident, new TokenCell(-1, "temp", null));
+                var virtualToken = new TokenData(grammar.Ident, new TokenCell(-1, "temp", null), true);
                 var frontBlock = parsingResult.GetFrontBlockCanParse(seeingTokenIndex);
                 var blockParsingResult = GrammarPrivateLRErrorHandler.InsertVirtualToken(ixIndex, snippet, frontBlock, parsingResult[seeingTokenIndex], virtualToken);
 

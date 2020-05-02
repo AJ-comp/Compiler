@@ -7,73 +7,100 @@ namespace Parse.FrontEnd.Ast
 {
     public class TreeNonTerminal : TreeSymbol, IList<TreeSymbol>
     {
-        public NonTerminalSingle signPost = null;
+        public NonTerminalSingle _signPost = null;
+        private List<TreeSymbol> _symbols = new List<TreeSymbol>();
 
-        private List<TreeSymbol> symbols = new List<TreeSymbol>();
-        public IReadOnlyList<TreeSymbol> Items => symbols;
-        public string Name => this.signPost.MeaningUnit?.Name;
-        public NonTerminal ToNonTerminal => this.signPost.ToNonTerminal();
+        public IReadOnlyList<TreeSymbol> Items => _symbols;
+        public string Name => this._signPost.MeaningUnit?.Name;
+        public NonTerminal ToNonTerminal => this._signPost.ToNonTerminal();
 
-        public TreeSymbol this[int index] { get => ((IList<TreeSymbol>)symbols)[index]; set => ((IList<TreeSymbol>)symbols)[index] = value; }
-        public int Count => ((IList<TreeSymbol>)symbols).Count;
-        public bool IsReadOnly => ((IList<TreeSymbol>)symbols).IsReadOnly;
+        public TreeSymbol this[int index] { get => ((IList<TreeSymbol>)_symbols)[index]; set => ((IList<TreeSymbol>)_symbols)[index] = value; }
+        public int Count => ((IList<TreeSymbol>)_symbols).Count;
+        public bool IsReadOnly => ((IList<TreeSymbol>)_symbols).IsReadOnly;
+        public override bool HasVirtualChild
+        {
+            get
+            {
+                foreach (var item in _symbols)
+                {
+                    if (item.IsVirtual) return true;
+                    if (item.HasVirtualChild) return true;
+                }
+
+                return false;
+            }
+        }
+        public override bool IsVirtual
+        {
+            get
+            {
+                if (_symbols.Count == 0) return false;
+
+                foreach(var item in _symbols)
+                {
+                    if (item.IsVirtual == false) return false;
+                }
+
+                return true;
+            }
+        }
 
         public TreeNonTerminal(NonTerminalSingle singleNT)
         {
-            this.signPost = singleNT;
+            this._signPost = singleNT;
         }
 
         public object ActionLogic(SymbolTable symbolTable, int blockLevel, MeaningErrInfoList errList) 
-            => this.signPost?.MeaningUnit?.ActionLogic(this, symbolTable, blockLevel, errList);
+            => this._signPost?.MeaningUnit?.ActionLogic(this, symbolTable, blockLevel, errList);
 
         public void Add(TreeSymbol item)
         {
-            ((IList<TreeSymbol>)symbols).Add(item);
+            ((IList<TreeSymbol>)_symbols).Add(item);
         }
 
         public void Clear()
         {
-            ((IList<TreeSymbol>)symbols).Clear();
+            ((IList<TreeSymbol>)_symbols).Clear();
         }
 
         public bool Contains(TreeSymbol item)
         {
-            return ((IList<TreeSymbol>)symbols).Contains(item);
+            return ((IList<TreeSymbol>)_symbols).Contains(item);
         }
 
         public void CopyTo(TreeSymbol[] array, int arrayIndex)
         {
-            ((IList<TreeSymbol>)symbols).CopyTo(array, arrayIndex);
+            ((IList<TreeSymbol>)_symbols).CopyTo(array, arrayIndex);
         }
 
         public IEnumerator<TreeSymbol> GetEnumerator()
         {
-            return ((IList<TreeSymbol>)symbols).GetEnumerator();
+            return ((IList<TreeSymbol>)_symbols).GetEnumerator();
         }
 
         public int IndexOf(TreeSymbol item)
         {
-            return ((IList<TreeSymbol>)symbols).IndexOf(item);
+            return ((IList<TreeSymbol>)_symbols).IndexOf(item);
         }
 
         public void Insert(int index, TreeSymbol item)
         {
-            ((IList<TreeSymbol>)symbols).Insert(index, item);
+            ((IList<TreeSymbol>)_symbols).Insert(index, item);
         }
 
         public bool Remove(TreeSymbol item)
         {
-            return ((IList<TreeSymbol>)symbols).Remove(item);
+            return ((IList<TreeSymbol>)_symbols).Remove(item);
         }
 
         public void RemoveAt(int index)
         {
-            ((IList<TreeSymbol>)symbols).RemoveAt(index);
+            ((IList<TreeSymbol>)_symbols).RemoveAt(index);
         }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return ((IList<TreeSymbol>)symbols).GetEnumerator();
+            return ((IList<TreeSymbol>)_symbols).GetEnumerator();
         }
 
         public override string ToGrammarString()
@@ -89,7 +116,7 @@ namespace Parse.FrontEnd.Ast
 
             result += "Nonterminal : " + this.Name + Environment.NewLine;
 
-            foreach (var symbol in this.symbols)
+            foreach (var symbol in this._symbols)
             {
                 if (symbol is TreeTerminal)
                 {
