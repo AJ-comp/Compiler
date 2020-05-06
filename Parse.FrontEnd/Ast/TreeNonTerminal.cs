@@ -14,9 +14,21 @@ namespace Parse.FrontEnd.Ast
         public string Name => this._signPost.MeaningUnit?.Name;
         public NonTerminal ToNonTerminal => this._signPost.ToNonTerminal();
 
-        public TreeSymbol this[int index] { get => ((IList<TreeSymbol>)_symbols)[index]; set => ((IList<TreeSymbol>)_symbols)[index] = value; }
+        public TreeSymbol this[int index]
+        {
+            get => ((IList<TreeSymbol>)_symbols)[index];
+            set
+            {
+                value.Parent = this;
+                if (_symbols[index] != null) _symbols[index].Parent = null;
+
+                ((IList<TreeSymbol>)_symbols)[index] = value;
+            }
+        }
         public int Count => ((IList<TreeSymbol>)_symbols).Count;
         public bool IsReadOnly => ((IList<TreeSymbol>)_symbols).IsReadOnly;
+        public SymbolTable ConnectedSymbolTable { get; set; }
+        public MeaningErrInfoList ConnectedErrInfoList { get; set; }
         public override bool HasVirtualChild
         {
             get
@@ -50,16 +62,20 @@ namespace Parse.FrontEnd.Ast
             this._signPost = singleNT;
         }
 
-        public object ActionLogic(SymbolTable symbolTable, int blockLevel, MeaningErrInfoList errList) 
-            => this._signPost?.MeaningUnit?.ActionLogic(this, symbolTable, blockLevel, errList);
+        public object ActionLogic(SymbolTable symbolTable, int blockLevel, int offset, MeaningErrInfoList errList) 
+            => this._signPost?.MeaningUnit?.ActionLogic(this, blockLevel, offset, errList);
 
         public void Add(TreeSymbol item)
         {
+            item.Parent = this;
+
             ((IList<TreeSymbol>)_symbols).Add(item);
         }
 
         public void Clear()
         {
+            foreach (var item in _symbols) item.Parent = null;
+
             ((IList<TreeSymbol>)_symbols).Clear();
         }
 
@@ -85,16 +101,24 @@ namespace Parse.FrontEnd.Ast
 
         public void Insert(int index, TreeSymbol item)
         {
+            item.Parent = this;
+
             ((IList<TreeSymbol>)_symbols).Insert(index, item);
         }
 
         public bool Remove(TreeSymbol item)
         {
+            item.Parent = null;
+
             return ((IList<TreeSymbol>)_symbols).Remove(item);
         }
 
         public void RemoveAt(int index)
         {
+            if (index < 0) return;
+            if (_symbols.Count <= index) return;
+            _symbols[index].Parent = null;
+
             ((IList<TreeSymbol>)_symbols).RemoveAt(index);
         }
 

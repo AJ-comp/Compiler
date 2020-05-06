@@ -1,10 +1,10 @@
 ﻿using System;
-using System.Collections;
 
 namespace Parse.FrontEnd
 {
-    public class SymbolTable : Hashtable
+    public abstract class SymbolTable : ICloneable
     {
+        public abstract object Clone();
     }
 
 

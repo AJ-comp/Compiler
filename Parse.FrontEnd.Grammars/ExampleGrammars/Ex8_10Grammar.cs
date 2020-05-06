@@ -57,5 +57,10 @@ namespace Parse.FrontEnd.Grammars.ExampleGrammars
         {
             return null;
         }
+
+        public override string GenerateCode(TreeSymbol symbol)
+        {
+            return string.Empty;
+        }
     }
 }

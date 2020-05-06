@@ -4,6 +4,8 @@ namespace Parse.FrontEnd.Ast
 {
     public abstract class TreeSymbol : IShowable
     {
+        public TreeSymbol Parent { get; internal set; } = null;
+
         public abstract bool IsVirtual { get; }
         public abstract bool HasVirtualChild { get; }
 

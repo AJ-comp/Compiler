@@ -1,4 +1,5 @@
-﻿using Parse.FrontEnd.RegularGrammar;
+﻿using Parse.FrontEnd.Ast;
+using Parse.FrontEnd.RegularGrammar;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -15,6 +16,7 @@ namespace Parse.FrontEnd.Parsers.Datas
         internal List<ParsingErrorInfo> errorInfos = new List<ParsingErrorInfo>();
 
         public TokenData Token { get; } = null;
+        public TreeTerminal TokenTree { get; set; } = null;
         public IReadOnlyList<ParsingUnit> Units => this.units;
         public IReadOnlyList<ParsingErrorInfo> ErrorInfos => errorInfos;
         public IReadOnlyList<ParsingUnit> ErrorUnits

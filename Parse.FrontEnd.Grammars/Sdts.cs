@@ -55,5 +55,6 @@ namespace Parse.FrontEnd.Grammars
         public abstract event EventHandler<SementicErrorArgs> SementicErrorEventHandler;
 
         public abstract SementicAnalysisResult Process(TreeSymbol symbol);
+        public abstract string GenerateCode(TreeSymbol symbol);
     }
 }

@@ -37,49 +37,37 @@ namespace Parse.FrontEnd.Parsers.Logical
         }
 
         /// <summary>
-        /// This function writes a value into stack following to action value (matchedValue).
+        /// This function builds a stack and parse tree information following action rule (parsingUnit.Action).
         /// </summary>
-        /// <param name="matchedValue"></param>
-        /// <param name="inputValue"></param>
-        /// <param name="stack"></param>
-        /// <returns></returns>
-        private ActionData Process(Tuple<ActionDir, object> matchedValue, TokenData inputValue, Stack<object> stack)
+        /// <param name="parsingBlock"></param>
+        private void BuildStackAndParseTree(ParsingBlock parsingBlock)
         {
-            ActionData result = new ActionData
-            {
-                Dest = matchedValue.Item2
-            };
+            ParsingUnit parsingUnit = parsingBlock.Units.Last();
 
-            if (matchedValue.Item1 == ActionDir.shift)
+            if (parsingUnit.Action.Direction == ActionDir.shift)
             {
-                stack.Push(new TreeTerminal(inputValue, inputValue.IsVirtual));
-                stack.Push(matchedValue.Item2);
-
-                result.Direction = ActionDir.shift;
+                var treeTerminal = new TreeTerminal(parsingUnit.InputValue);
+                parsingBlock.TokenTree = treeTerminal;
+                parsingUnit.AfterStack.Push(treeTerminal);
+                parsingUnit.AfterStack.Push(parsingUnit.Action.Dest);
             }
-            else if (matchedValue.Item1 == ActionDir.reduce)
+            else if (parsingUnit.Action.Direction == ActionDir.reduce)
             {
-                var reduceDest = matchedValue.Item2 as NonTerminalSingle;
+                var reduceDest = parsingUnit.Action.Dest as NonTerminalSingle;
                 var dataToInsert = new TreeNonTerminal(reduceDest);
 
                 for (int i = 0; i < reduceDest.Count * 2; i++)
                 {
-                    var data = stack.Pop();
+                    var data = parsingUnit.AfterStack.Pop();
                     if (i % 2 > 0)
                         dataToInsert.Insert(0, (data as TreeSymbol));
                 }
-                stack.Push(dataToInsert);
-                result.Direction = ActionDir.reduce;
+                parsingUnit.AfterStack.Push(dataToInsert);
             }
-            else if (matchedValue.Item1 == ActionDir.epsilon_reduce)
-            {
-                stack.Push(new TreeNonTerminal(matchedValue.Item2 as NonTerminalSingle));
-
-                result.Direction = ActionDir.epsilon_reduce;
-            }
-            else if (matchedValue.Item1 == ActionDir.accept) result.Direction = ActionDir.accept;
-
-            return result;
+            else if (parsingUnit.Action.Direction == ActionDir.epsilon_reduce)
+                parsingUnit.AfterStack.Push(new TreeNonTerminal(parsingUnit.Action.Dest as NonTerminalSingle));
+            else if(parsingUnit.Action.Direction == ActionDir.moveto)
+                parsingUnit.AfterStack.Push((int)parsingUnit.Action.Dest);
         }
 
         /// <summary>
@@ -119,9 +107,9 @@ namespace Parse.FrontEnd.Parsers.Logical
             }
 
             var matchedValue = IxMetrix.MatchedValueSet[inputValue.Kind];
-            parsingUnit.Action = this.Process(matchedValue, inputValue, parsingUnit.AfterStack);
-
+            parsingUnit.Action = new ActionData(matchedValue.Item1, matchedValue.Item2);
             parsingUnit.PossibleTerminalSet = IxMetrix.PossibleTerminalSet;
+
             return true;
         }
 
@@ -156,10 +144,7 @@ namespace Parse.FrontEnd.Parsers.Logical
 
             var matchedValue = IxMetrix.MatchedValueSet[seenSingleNT.ToNonTerminal];
 
-            var actionData = new ActionData(matchedValue.Item1, matchedValue.Item2);
-            parsingUnit.AfterStack.Push((int)matchedValue.Item2);
-            parsingUnit.Action = actionData;
-            parsingUnit.InputValue = inputValue;
+            parsingUnit.Action = new ActionData(matchedValue.Item1, matchedValue.Item2);
             parsingUnit.PossibleTerminalSet = IxMetrix.PossibleTerminalSet;
 
             return true;
@@ -293,6 +278,8 @@ namespace Parse.FrontEnd.Parsers.Logical
 
                 while (this.UnitParsing(lastUnit, recoveryInfo.RecoveryToken))
                 {
+                    this.BuildStackAndParseTree(parsingBlock);
+
                     result = this.ParsingSuccessedProcess(lastUnit);
                     newUnit.SetRecoveryMessage(recoveryInfo.RecoveryMessage); // Replace the message that may exist to the recovery message.
 
@@ -325,6 +312,7 @@ namespace Parse.FrontEnd.Parsers.Logical
 
             while (this.UnitParsing(newParsingUnit, token))
             {
+                this.BuildStackAndParseTree(parsingBlock);
                 result = this.ParsingSuccessedProcess(newParsingUnit);
 
                 if (token.Kind == null) result = SuccessedKind.Shift;
@@ -398,6 +386,7 @@ namespace Parse.FrontEnd.Parsers.Logical
             // recover error if an error does exist.
 
 
+            parsingUnit.InputValue = token;
             bool result = this.GoTo(token, parsingUnit);
             if (result == false) result = this.ShiftAndReduce(token, parsingUnit);
 

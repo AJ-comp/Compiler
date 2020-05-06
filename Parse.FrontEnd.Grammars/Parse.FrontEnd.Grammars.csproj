@@ -41,6 +41,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AJGrammar.cs" />
+    <Compile Include="MiniC\SymbolTableFormat\MiniCSymbolTable.cs" />
+    <Compile Include="NodeCheckResult.cs" />
     <Compile Include="Properties\AlarmCodes.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -70,6 +72,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Parse.FrontEnd.InterLanguages\Parse.FrontEnd.InterLanguages.csproj">
+      <Project>{745e9d98-ab21-4f88-8118-5c2f02056840}</Project>
+      <Name>Parse.FrontEnd.InterLanguages</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Parse.FrontEnd\Parse.FrontEnd.csproj">
       <Project>{46590802-ce40-49c9-86e1-cd6f3487ff5b}</Project>
       <Name>Parse.FrontEnd</Name>
