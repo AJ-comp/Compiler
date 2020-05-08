@@ -3,9 +3,12 @@
                     xmlns:models="clr-namespace:ApplicationLayer.Models.GraphModels;assembly=ApplicationLayer.Models"
                     xmlns:viewModels="clr-namespace:ApplicationLayer.ViewModels.DocumentTypeViewModels;assembly=ApplicationLayer.ViewModels"
                     xmlns:graphsharp="clr-namespace:GraphSharp.Controls;assembly=GraphSharp.Controls"
+                    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+                    xmlns:ap="clr-namespace:ApplicationLayer.Views.AttachedProperties"
                     xmlns:local="clr-namespace:ApplicationLayer.Views">
 
-    <DataTemplate x:Key="demoTemplate" DataType="{x:Type models:PocVertex}">
+    <local:VertexDataTemplateSelector x:Key="VertexTemplateSelector"/>
+    <DataTemplate x:Key="treeSymbolVertexTemplate" DataType="{x:Type models:TreeSymbolVertex}">
         <StackPanel Orientation="Horizontal" Margin="5">
             <TextBlock x:Name="removableTag" Text="[RM]" Foreground="Red" FontWeight="Bold" Visibility="Collapsed"/>
             <TextBlock x:Name="virtualTag" Text="[V]" Foreground="Green" FontWeight="Bold" Visibility="Collapsed"/>
@@ -29,13 +32,20 @@
         </DataTemplate.Triggers>
     </DataTemplate>
 
+    <DataTemplate x:Key="ebnfTreeVertexTemplate" DataType="{x:Type models:EbnfTreeVertex}">
+        <StackPanel Orientation="Horizontal" Margin="5">
+            <TextBlock x:Name="textbox" Text="{Binding Path=ID, Mode=OneWay}" Foreground="{DynamicResource CommonEnableTextBrush}"/>
+        </StackPanel>
+    </DataTemplate>
+
     <Style TargetType="{x:Type graphsharp:VertexControl}">
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type graphsharp:VertexControl}">
                     <Border BorderBrush="White" Background="Black" BorderThickness="2" CornerRadius="10,10,10,10" Padding="{TemplateBinding Padding}">
-                        <ContentPresenter Content="{TemplateBinding Vertex}" ContentTemplate="{StaticResource demoTemplate}"/>
-
+                        <ContentPresenter Content="{TemplateBinding Vertex}" 
+                                                    ContentTemplateSelector="{StaticResource VertexTemplateSelector}" 
+                                                    ap:FrameworkElementHook.MouseDownHookEnable="True"/>
                         <Border.Effect>
                             <DropShadowEffect BlurRadius="2" Color="LightGray" Opacity="0.3" Direction="315"/>
                         </Border.Effect>

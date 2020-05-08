@@ -23,6 +23,10 @@
         <windows:SolutionExplorer/>
     </DataTemplate>
 
+    <DataTemplate DataType="{x:Type toolWindowVMs:TreeSymbolDetailViewModel}">
+        <windows:TreeSymbolDetailView/>
+    </DataTemplate>
+
     <DataTemplate DataType="{x:Type toolWindowVMs:TestToolWindowViewModel}">
         <toolWindows:TestToolWindowView/>
     </DataTemplate>

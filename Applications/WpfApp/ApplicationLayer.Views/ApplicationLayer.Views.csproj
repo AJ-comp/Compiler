@@ -104,8 +104,11 @@
     <Compile Include="AttachedProperties\LayoutParametersHook.cs" />
     <Compile Include="AttachedProperties\SyntaxEditorHook.cs" />
     <Compile Include="AttachedProperties\TreeListBoxHook.cs" />
+    <Compile Include="AttachedProperties\FrameworkElementHook.cs" />
     <Compile Include="AttachedProperties\WindowsFormsHostHook.cs" />
+    <Compile Include="Behaviors\EventToCommandBehavior.cs" />
     <Compile Include="Converters\ColorToBrushConverter.cs" />
+    <Compile Include="Converters\DataContextTestConverter.cs" />
     <Compile Include="Converters\DrawingColorToMediaColorConverter.cs" />
     <Compile Include="Converters\EventArgsConverterExtension.cs" />
     <Compile Include="Converters\MouseDoubleClickIndexConverter.cs" />
@@ -153,6 +156,7 @@
     <Compile Include="SubViews\SymbolTableView.xaml.cs">
       <DependentUpon>SymbolTableView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="VertexDataTemplateSelector.cs" />
     <Compile Include="ViewCommands.cs" />
     <Compile Include="WindowViews\TestToolWindowView.xaml.cs">
       <DependentUpon>TestToolWindowView.xaml</DependentUpon>

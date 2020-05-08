@@ -9,7 +9,7 @@ namespace Parse.FrontEnd
         internal uint uniqueKey;
 
         public string Name { get; } = string.Empty;
-        public Func<TreeNonTerminal, int, int, MeaningErrInfoList, object> ActionLogic { get; set; }
+        public Func<TreeNonTerminal, int, int, object> ActionLogic { get; set; }
 
         public MeaningUnit(string name)
         {

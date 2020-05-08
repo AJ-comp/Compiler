@@ -2,9 +2,8 @@
 
 namespace Parse.FrontEnd
 {
-    public abstract class SymbolTable : ICloneable
+    public abstract class SymbolTable
     {
-        public abstract object Clone();
     }
 
 

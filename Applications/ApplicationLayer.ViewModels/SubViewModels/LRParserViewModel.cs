@@ -155,7 +155,7 @@ namespace ApplicationLayer.ViewModels.SubViewModels
         private void CreateEbnfNode(NonTerminal curNT)
         {
             // Create vertex
-            PocVertex curNode = new PocVertex(curNT.ToString(), true);
+            PocVertex curNode = new EbnfTreeVertex(curNT.ToString(), true);
             EbnfGraph.AddVertex(curNode);
 
             foreach (var singleExpr in curNT)
@@ -164,7 +164,7 @@ namespace ApplicationLayer.ViewModels.SubViewModels
 
                 foreach (var child in singleExpr) strToAdd += child.ToString() + " ";
 
-                PocVertex childNode = new PocVertex(strToAdd, true);
+                PocVertex childNode = new EbnfTreeVertex(strToAdd, true);
                 EbnfGraph.AddVertex(childNode);
                 PocEdge.AddNewGraphEdge(EbnfGraph, curNode, childNode);
             }
@@ -226,11 +226,11 @@ namespace ApplicationLayer.ViewModels.SubViewModels
 
             if (host.Length == 0) return;
 
-            PocVertex hostVertex = new PocVertex(host, true);
+            PocVertex hostVertex = new EbnfTreeVertex(host, true);
             CanonicalGraph.AddVertex(hostVertex);
             foreach(var item in movableList)
             {
-                PocVertex movableVertex = new PocVertex(item, true);
+                PocVertex movableVertex = new EbnfTreeVertex(item, true);
                 CanonicalGraph.AddVertex(movableVertex);
                 PocEdge.AddNewGraphEdge(CanonicalGraph, hostVertex, movableVertex);
             }

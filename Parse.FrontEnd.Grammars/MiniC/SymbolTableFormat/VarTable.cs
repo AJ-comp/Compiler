@@ -11,6 +11,21 @@ namespace Parse.FrontEnd.Grammars.MiniC.SymbolTableFormat
         public VarDataList Parent { get; }
         public VarDataList Child { get; }
 
+        public VarDataList ThisList
+        {
+            get
+            {
+                var result = new VarDataList();
+
+                var data = from t in this
+                           where t.This == true
+                           select t;
+
+                result.AddRange(data);
+                return result;
+            }
+        }
+
         public VarDataList GetVarListByBlockLevel(int blockLevel)
         {
             var result = new VarDataList();
@@ -28,6 +43,7 @@ namespace Parse.FrontEnd.Grammars.MiniC.SymbolTableFormat
     {
         public DclData DclData { get; internal set; }
         public int Offset { get; internal set; }
+        public bool This { get; internal set; } = false;
 
         public string KeyString => string.Format("{0}", DclData.KeyString);
 

@@ -7,6 +7,7 @@
                     xmlns:ap="clr-namespace:ApplicationLayer.Views.AttachedProperties;assembly=ApplicationLayer.Views"
                     xmlns:viewConverters="clr-namespace:ApplicationLayer.Views.Converters;assembly=ApplicationLayer.Views"
                     xmlns:localConverters="clr-namespace:ApplicationLayer.WpfApp.Converters"
+                    xmlns:exportBehaviors="clr-namespace:ApplicationLayer.Views.Behaviors;assembly=ApplicationLayer.Views"
                     xmlns:localBehaviors="clr-namespace:ApplicationLayer.WpfApp.Behaviors"
                     xmlns:documentViewModels="clr-namespace:ApplicationLayer.ViewModels.DocumentTypeViewModels;assembly=ApplicationLayer.ViewModels"
                     xmlns:documentViews="clr-namespace:ApplicationLayer.Views.DocumentTypeViews;assembly=ApplicationLayer.Views"
@@ -43,7 +44,7 @@
                                                 CloseCharacters="{Binding CloseCharacters}">
 
             <i:Interaction.Behaviors>
-                <localBehaviors:EventToCommandBehavior Command="{Binding ParsingCompletedCommand}" Event="ParsingCompleted" PassArguments="True" />
+                <exportBehaviors:EventToCommandBehavior Command="{Binding ParsingCompletedCommand}" Event="ParsingCompleted" PassArguments="True" />
                 <localBehaviors:ViewViewModelConnector ViewModelDelegate="{Binding MoveCaretInvoker}" ViewMethod="MoveCaretToToken"/>
             </i:Interaction.Behaviors>
 

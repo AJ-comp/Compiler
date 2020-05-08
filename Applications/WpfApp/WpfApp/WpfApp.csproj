@@ -133,7 +133,6 @@
     <Compile Include="AttachedProperties\TreeViewHook.cs" />
     <Compile Include="Behaviors\BindableSelectedItemBehavior.cs" />
     <Compile Include="Behaviors\DataGridViewAllocateBehavior.cs" />
-    <Compile Include="Behaviors\EventToCommandBehavior.cs" />
     <Compile Include="Behaviors\SolutionTreeViewBehavior.cs" />
     <Compile Include="Behaviors\ViewViewModelConnector.cs" />
     <Compile Include="Behaviors\WindowLoadBehavior.cs" />
@@ -179,6 +178,9 @@
     </Compile>
     <Compile Include="Views\WindowViews\SolutionExplorer.xaml.cs">
       <DependentUpon>SolutionExplorer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\WindowViews\TreeSymbolDetailView.xaml.cs">
+      <DependentUpon>TreeSymbolDetailView.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -263,6 +265,10 @@
     <Page Include="Views\WindowViews\SolutionExplorer.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\WindowViews\TreeSymbolDetailView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>

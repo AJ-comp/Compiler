@@ -358,4 +358,7 @@
   <data name="Option" xml:space="preserve">
     <value>Option</value>
   </data>
+  <data name="TreeSymbolDetailView" xml:space="preserve">
+    <value>Tree symbol detail view</value>
+  </data>
 </root>

@@ -4,7 +4,7 @@ using System.Windows;
 using System.Windows.Input;
 using System.Windows.Interactivity;
 
-namespace ApplicationLayer.WpfApp.Behaviors
+namespace ApplicationLayer.Views.Behaviors
 {
     public class EventToCommandBehavior : Behavior<FrameworkElement>
     {

@@ -2,17 +2,13 @@
 {
     public class MiniCSymbolTable : SymbolTable
     {
+        public MiniCSymbolTable Base { get; }
         public VarDataList VarDataList { get; } = new VarDataList();
         public FuncDataList FuncDataList { get; } = new FuncDataList();
 
-        public override object Clone()
+        public MiniCSymbolTable(MiniCSymbolTable @base = null)
         {
-            MiniCSymbolTable result = new MiniCSymbolTable();
-
-            result.VarDataList.AddRange(this.VarDataList);
-            result.FuncDataList.AddRange(this.FuncDataList);
-
-            return result;
+            Base = @base;
         }
     }
 }

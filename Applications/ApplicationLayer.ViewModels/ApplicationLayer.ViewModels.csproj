@@ -95,6 +95,7 @@
     <Compile Include="ToolWindowViewModels\SolutionExplorerViewModel.cs" />
     <Compile Include="ToolWindowViewModels\TestToolWindowViewModel.cs" />
     <Compile Include="ToolWindowViewModels\ToolWindowViewModel.cs" />
+    <Compile Include="ToolWindowViewModels\TreeSymbolDetailViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

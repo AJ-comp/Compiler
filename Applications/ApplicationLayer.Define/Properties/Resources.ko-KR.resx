@@ -378,4 +378,7 @@
   <data name="Option" xml:space="preserve">
     <value>옵션</value>
   </data>
+  <data name="TreeSymbolDetailView" xml:space="preserve">
+    <value>심벌 세부 정보 창</value>
+  </data>
 </root>

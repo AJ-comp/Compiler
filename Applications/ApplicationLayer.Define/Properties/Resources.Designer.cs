@@ -790,6 +790,15 @@ namespace ApplicationLayer.Define.Properties {
         }
         
         /// <summary>
+        ///   Tree symbol detail view과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string TreeSymbolDetailView {
+            get {
+                return ResourceManager.GetString("TreeSymbolDetailView", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Unload과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string Unload {

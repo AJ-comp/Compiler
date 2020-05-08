@@ -1,6 +1,5 @@
 ﻿using Parse.FrontEnd.Ast;
 using Parse.FrontEnd.Grammars.MiniC.SymbolTableFormat;
-using Parse.FrontEnd.Grammars.Properties;
 using Parse.FrontEnd.InterLanguages;
 using System;
 using System.Collections.Generic;
@@ -40,7 +39,7 @@ namespace Parse.FrontEnd.Grammars.MiniC
         public MeaningUnit ActualParam { get; } = new MeaningUnit("ActualParam");
 
 
-        private object ActionProgram(TreeNonTerminal node, int blockLevel, int offset, MeaningErrInfoList errList)
+        private object ActionProgram(TreeNonTerminal node, int blockLevel, int offset)
         {
             string result = string.Empty;
 
@@ -52,9 +51,9 @@ namespace Parse.FrontEnd.Grammars.MiniC
                 var astNonTerminal = item as TreeNonTerminal;
 
                 if (astNonTerminal._signPost.MeaningUnit == this.Dcl)
-                    result += this.ActionDcl(astNonTerminal, blockLevel, offset++, errList);
+                    result += this.ActionDcl(astNonTerminal, blockLevel, offset++);
                 else if(astNonTerminal._signPost.MeaningUnit == this.FuncDef)
-                    result += this.ActionFuncDef(astNonTerminal, blockLevel, 0, errList);
+                    result += this.ActionFuncDef(astNonTerminal, blockLevel, 0);
             }
 
             return result;
@@ -62,9 +61,6 @@ namespace Parse.FrontEnd.Grammars.MiniC
 
         private object CheckProgramNode(TreeNonTerminal node, MiniCSymbolTable baseSymbolTable, int blockLevel, int offset)
         {
-            // it is can parsed only perfect tree.
-            if (node.HasVirtualChild) return null;
-
             foreach (var item in node.Items)
             {
                 var astNonTerminal = item as TreeNonTerminal;
@@ -83,9 +79,8 @@ namespace Parse.FrontEnd.Grammars.MiniC
             return null;
         }
 
-        private object ActionFuncDef(TreeNonTerminal node, int blockLevel, int offset, MeaningErrInfoList errList)
+        private object ActionFuncDef(TreeNonTerminal node, int blockLevel, int offset)
         {
-            FuncData funcData = new FuncData();
             string result = string.Empty;
             string compoundSt = string.Empty;
 
@@ -93,25 +88,26 @@ namespace Parse.FrontEnd.Grammars.MiniC
             {
                 var astNonTerminal = item as TreeNonTerminal;
 
-                if (astNonTerminal._signPost.MeaningUnit == this.FuncHead)
-                {
-                    funcData = this.ActionFuncHead(item as TreeNonTerminal, blockLevel + 1, offset, errList) as FuncData;
-                    offset = funcData.LocalVars.Count;
-                }
-                else if (astNonTerminal._signPost.MeaningUnit == this.CompoundSt)
-                    compoundSt += this.ActionCompoundSt(item as TreeNonTerminal, blockLevel + 1, offset, errList);
+                if (astNonTerminal._signPost.MeaningUnit == this.CompoundSt)
+                    compoundSt += this.ActionCompoundSt(item as TreeNonTerminal, blockLevel + 1, offset);
             }
 
-            result += UCode.ProcStart(funcData.Name, funcData.LocalVars.Count, blockLevel, funcData.Name + " function");
+            var symbolTable = node.ConnectedSymbolTable as MiniCSymbolTable;
+            var funcData = symbolTable.FuncDataList.ThisFuncData;
+            if (funcData == null) return result;
+
+            result += UCode.ProcStart(funcData.Name, 0, blockLevel, funcData.Name + " function");
             result += compoundSt;
             result += UCode.ProcEnd();
 
             return result;
         }
 
-        private NodeCheckResult CheckFuncDefNode(TreeNonTerminal node, MiniCSymbolTable baseSymbolTable, int blockLevel, int offset)
+        private NodeCheckResult CheckFuncDefNode(TreeNonTerminal curNode, MiniCSymbolTable baseSymbolTable, int blockLevel, int offset)
         {
-            foreach (var item in node.Items)
+            var newSymbolTable = new MiniCSymbolTable(baseSymbolTable);
+
+            foreach (var item in curNode.Items)
             {
                 var astNonTerminal = item as TreeNonTerminal;
 
@@ -120,6 +116,12 @@ namespace Parse.FrontEnd.Grammars.MiniC
                     var nodeCheckResult = this.CheckFuncHeadNode(item as TreeNonTerminal, baseSymbolTable, blockLevel + 1, offset);
                     var funcData = nodeCheckResult.Data as FuncData;
                     offset = funcData.LocalVars.Count;
+
+                    funcData.This = true;
+                    baseSymbolTable.FuncDataList.Add(funcData);
+                    baseSymbolTable.VarDataList.AddRange(funcData.LocalVars);
+
+                    curNode.ConnectedSymbolTable = baseSymbolTable;
                 }
                 else if (astNonTerminal._signPost.MeaningUnit == this.CompoundSt)
                 {
@@ -141,7 +143,7 @@ namespace Parse.FrontEnd.Grammars.MiniC
         /// <param name="parsingInfo"></param>
         /// <param name="errList"></param>
         /// <returns></returns>
-        private object ActionFuncHead(TreeNonTerminal node, int blockLevel, int offset, MeaningErrInfoList errList)
+        private object ActionFuncHead(TreeNonTerminal node, int blockLevel, int offset)
         {
             FuncData result = new FuncData();
 
@@ -158,10 +160,10 @@ namespace Parse.FrontEnd.Grammars.MiniC
                 {
                     var astNonterminal = item as TreeNonTerminal;
                     if (astNonterminal._signPost.MeaningUnit == this.DclSpec)
-                        result.DclSpecData = this.ActionDclSpec(astNonterminal, blockLevel, offset, errList) as DclSpecData;
+                        result.DclSpecData = this.ActionDclSpec(astNonterminal, blockLevel, offset) as DclSpecData;
                     else if (astNonterminal._signPost.MeaningUnit == this.FormalPara)
                     {
-                        var varDatas = this.ActionFormalPara(astNonterminal, blockLevel, offset, errList) as List<VarData>;
+                        var varDatas = this.ActionFormalPara(astNonterminal, blockLevel, offset) as List<VarData>;
                         result.LocalVars.AddRange(varDatas);
                     }
                 }
@@ -200,14 +202,11 @@ namespace Parse.FrontEnd.Grammars.MiniC
                 }
             }
 
-            var newSymbolTable = baseSymbolTable.Clone() as MiniCSymbolTable;
-            newSymbolTable.FuncDataList.Add(result);
-
-            return new NodeCheckResult(result, newSymbolTable);
+            return new NodeCheckResult(result, null);
         }
 
 
-        private object ActionDclSpec(TreeNonTerminal node, int blockLevel, int offset, MeaningErrInfoList errList)
+        private object ActionDclSpec(TreeNonTerminal node, int blockLevel, int offset)
         {
             DclSpecData result = new DclSpecData();
 
@@ -263,7 +262,7 @@ namespace Parse.FrontEnd.Grammars.MiniC
             return new NodeCheckResult(result, baseSymbolTable);
         }
 
-        private object ActionFormalPara(TreeNonTerminal node, int blockLevel, int offset, MeaningErrInfoList errList)
+        private object ActionFormalPara(TreeNonTerminal node, int blockLevel, int offset)
         {
             List<VarData> result = new List<VarData>();
 
@@ -275,7 +274,7 @@ namespace Parse.FrontEnd.Grammars.MiniC
                 var astNonterminal = item as TreeNonTerminal;
                 if (astNonterminal._signPost.MeaningUnit == this.ParamDcl)
                 {
-                    varData.DclData = this.ActionParamDcl(astNonterminal, blockLevel, offset, errList) as DclData;
+                    varData.DclData = this.ActionParamDcl(astNonterminal, blockLevel, offset) as DclData;
                     result.Add(varData);
                 }
             }
@@ -304,7 +303,7 @@ namespace Parse.FrontEnd.Grammars.MiniC
             return new NodeCheckResult(result, baseSymbolTable);
         }
 
-        private object ActionParamDcl(TreeNonTerminal node, int blockLevel, int offset, MeaningErrInfoList errList)
+        private object ActionParamDcl(TreeNonTerminal node, int blockLevel, int offset)
         {
             DclData result = new DclData();
             result.BlockLevel = blockLevel;
@@ -324,7 +323,7 @@ namespace Parse.FrontEnd.Grammars.MiniC
                 {
                     var astNonterminal = item as TreeNonTerminal;
                     if (astNonterminal._signPost.MeaningUnit == this.DclSpec)
-                        result.DclSpecData = this.ActionDclSpec(astNonterminal, blockLevel, offset, errList) as DclSpecData;
+                        result.DclSpecData = this.ActionDclSpec(astNonterminal, blockLevel, offset) as DclSpecData;
                 }
             }
 
@@ -355,13 +354,23 @@ namespace Parse.FrontEnd.Grammars.MiniC
                         var nodeCheckResult = this.CheckDclSpecNode(astNonterminal, baseSymbolTable, blockLevel, offset);
                         result.DclSpecData = nodeCheckResult.Data as DclSpecData;
                     }
+                    else if (astNonterminal._signPost.MeaningUnit == this.SimpleVar)
+                    {
+                        var nodeCheckResult = this.CheckSimpleVarNode(astNonterminal, baseSymbolTable, blockLevel, offset);
+                        result.DclItemData = nodeCheckResult.Data as DclItemData;
+                    }
+                    else if (astNonterminal._signPost.MeaningUnit == this.ArrayVar)
+                    {
+                        var nodeCheckResult = this.CheckArrayVarNode(astNonterminal, baseSymbolTable, blockLevel, offset);
+                        result.DclItemData = nodeCheckResult.Data as DclItemData;
+                    }
                 }
             }
 
             return new NodeCheckResult(result, baseSymbolTable);
         }
 
-        private object ActionCompoundSt(TreeNonTerminal node, int blockLevel, int offset, MeaningErrInfoList errList)
+        private object ActionCompoundSt(TreeNonTerminal node, int blockLevel, int offset)
         {
             string result = string.Empty;
 
@@ -373,9 +382,9 @@ namespace Parse.FrontEnd.Grammars.MiniC
                 {
                     var astNonterminal = item as TreeNonTerminal;
                     if (astNonterminal._signPost.MeaningUnit == this.DclList)
-                        result += this.ActionDclList(astNonterminal, blockLevel, offset, errList);
+                        result += this.ActionDclList(astNonterminal, blockLevel, offset);
                     else if (astNonterminal._signPost.MeaningUnit == this.StatList)
-                        result += this.ActionStatList(astNonterminal, blockLevel, offset, errList);
+                        result += this.ActionStatList(astNonterminal, blockLevel, offset);
                 }
             }
 
@@ -384,7 +393,7 @@ namespace Parse.FrontEnd.Grammars.MiniC
 
         private NodeCheckResult CheckCompoundStNode(TreeNonTerminal node, MiniCSymbolTable baseSymbolTable, int blockLevel, int offset)
         {
-            var newSymbolTable = baseSymbolTable.Clone() as MiniCSymbolTable;
+            var newSymbolTable = new MiniCSymbolTable(baseSymbolTable);
 
             foreach (var item in node.Items)
             {
@@ -410,7 +419,7 @@ namespace Parse.FrontEnd.Grammars.MiniC
             return new NodeCheckResult(null, newSymbolTable);
         }
 
-        private object ActionDclList(TreeNonTerminal node, int blockLevel, int offset, MeaningErrInfoList errList)
+        private object ActionDclList(TreeNonTerminal node, int blockLevel, int offset)
         {
             string result = string.Empty;
 
@@ -422,7 +431,7 @@ namespace Parse.FrontEnd.Grammars.MiniC
                 {
                     var astNonterminal = item as TreeNonTerminal;
                     if (astNonterminal._signPost.MeaningUnit == this.Dcl)
-                        result += this.ActionDcl(astNonterminal, blockLevel, offset, errList);
+                        result += this.ActionDcl(astNonterminal, blockLevel, offset);
                 }
             }
 
@@ -431,9 +440,7 @@ namespace Parse.FrontEnd.Grammars.MiniC
 
         private NodeCheckResult CheckDclListNode(TreeNonTerminal node, MiniCSymbolTable baseSymbolTable, int blockLevel, int offset)
         {
-            MiniCSymbolTable newSymbolTable
-                = (baseSymbolTable != null) ? baseSymbolTable.Clone() as MiniCSymbolTable
-                                                            : new MiniCSymbolTable();
+            MiniCSymbolTable newSymbolTable = new MiniCSymbolTable(baseSymbolTable);
 
             foreach (var item in node.Items)
             {
@@ -461,7 +468,7 @@ namespace Parse.FrontEnd.Grammars.MiniC
             return new NodeCheckResult(null, newSymbolTable);
         }
 
-        private object ActionDcl(TreeNonTerminal node, int blockLevel, int offset, MeaningErrInfoList errList)
+        private object ActionDcl(TreeNonTerminal node, int blockLevel, int offset)
         {
             DclData result = new DclData();
             result.BlockLevel = blockLevel;
@@ -473,9 +480,9 @@ namespace Parse.FrontEnd.Grammars.MiniC
 
                 var astNonTerminal = item as TreeNonTerminal;
                 if (astNonTerminal._signPost.MeaningUnit == this.DclSpec)
-                    result.DclSpecData = this.ActionDclSpec(astNonTerminal, blockLevel, offset, errList) as DclSpecData;    // const? (void | int | char)
+                    result.DclSpecData = this.ActionDclSpec(astNonTerminal, blockLevel, offset) as DclSpecData;    // const? (void | int | char)
                 else if (astNonTerminal._signPost.MeaningUnit == this.DclItem)
-                    result.DclItemData = this.ActionDclItem(astNonTerminal, blockLevel, offset, errList) as DclItemData;    // identifier ([integer])?
+                    result.DclItemData = this.ActionDclItem(astNonTerminal, blockLevel, offset) as DclItemData;    // identifier ([integer])?
             }
  
             return UCode.DclVar(result.BlockLevel, offset, 1, result.DclItemData.Name);
@@ -507,7 +514,7 @@ namespace Parse.FrontEnd.Grammars.MiniC
             return new NodeCheckResult(result, baseSymbolTable);
         }
 
-        private object ActionDclItem(TreeNonTerminal node, int blockLevel, int offset, MeaningErrInfoList errList)
+        private object ActionDclItem(TreeNonTerminal node, int blockLevel, int offset)
         {
             DclItemData result = new DclItemData();
 
@@ -517,9 +524,9 @@ namespace Parse.FrontEnd.Grammars.MiniC
 
                 var astNonTerminal = item as TreeNonTerminal;
                 if (astNonTerminal._signPost.MeaningUnit == this.SimpleVar)
-                    result = this.ActionSimpleVar(astNonTerminal, blockLevel, offset, errList) as DclItemData;
+                    result = this.ActionSimpleVar(astNonTerminal, blockLevel, offset) as DclItemData;
                 else if (astNonTerminal._signPost.MeaningUnit == this.ArrayVar)
-                    result = this.ActionArrayVar(astNonTerminal, blockLevel, offset, errList) as DclItemData;
+                    result = this.ActionArrayVar(astNonTerminal, blockLevel, offset) as DclItemData;
             }
 
             return result;
@@ -543,7 +550,7 @@ namespace Parse.FrontEnd.Grammars.MiniC
             return new NodeCheckResult(result, baseSymbolTable);
         }
 
-        private object ActionSimpleVar(TreeNonTerminal node, int blockLevel, int offset, MeaningErrInfoList errList)
+        private object ActionSimpleVar(TreeNonTerminal node, int blockLevel, int offset)
         {
             DclItemData result = new DclItemData();
 
@@ -558,10 +565,10 @@ namespace Parse.FrontEnd.Grammars.MiniC
 
             result.NameToken = (node.Items[0] as TreeTerminal).Token;
 
-            return new NodeCheckResult(result, baseSymbolTable);
+            return new NodeCheckResult(result, null);
         }
 
-        private object ActionArrayVar(TreeNonTerminal node, int blockLevel, int offset, MeaningErrInfoList errList)
+        private object ActionArrayVar(TreeNonTerminal node, int blockLevel, int offset)
         {
             return null;
         }
@@ -571,7 +578,7 @@ namespace Parse.FrontEnd.Grammars.MiniC
             return null;
         }
 
-        private object ActionStatList(TreeNonTerminal node, int blockLevel, int offset, MeaningErrInfoList errList)
+        private object ActionStatList(TreeNonTerminal node, int blockLevel, int offset)
         {
             string result = string.Empty;
 
@@ -581,11 +588,11 @@ namespace Parse.FrontEnd.Grammars.MiniC
 
                 var astNonTerminal = item as TreeNonTerminal;
                 if (astNonTerminal._signPost.MeaningUnit == this.IfSt)
-                    result += this.ActionIfSt(astNonTerminal, blockLevel, offset, errList);
+                    result += this.ActionIfSt(astNonTerminal, blockLevel, offset);
                 else if (astNonTerminal._signPost.MeaningUnit == this.IfElseSt)
-                    result += this.ActionIfElseSt(astNonTerminal, blockLevel, offset, errList);
+                    result += this.ActionIfElseSt(astNonTerminal, blockLevel, offset);
                 else if (astNonTerminal._signPost.MeaningUnit == this.WhileSt)
-                    result += this.ActionWhileSt(astNonTerminal, blockLevel, offset, errList);
+                    result += this.ActionWhileSt(astNonTerminal, blockLevel, offset);
             }
 
             return result;
@@ -611,12 +618,12 @@ namespace Parse.FrontEnd.Grammars.MiniC
             return new NodeCheckResult(null, baseSymbolTable);
         }
 
-        private object ActionExpSt(TreeNonTerminal node, int blockLevel, int offset, MeaningErrInfoList errList)
+        private object ActionExpSt(TreeNonTerminal node, int blockLevel, int offset)
         {
             return null;
         }
 
-        private object ActionIfSt(TreeNonTerminal node, int blockLevel, int offset, MeaningErrInfoList errList)
+        private object ActionIfSt(TreeNonTerminal node, int blockLevel, int offset)
         {
             return null;
         }
@@ -626,7 +633,7 @@ namespace Parse.FrontEnd.Grammars.MiniC
             return null;
         }
 
-        private object ActionIfElseSt(TreeNonTerminal node, int blockLevel, int offset, MeaningErrInfoList errList)
+        private object ActionIfElseSt(TreeNonTerminal node, int blockLevel, int offset)
         {
             return null;
         }
@@ -636,7 +643,7 @@ namespace Parse.FrontEnd.Grammars.MiniC
             return null;
         }
 
-        private object ActionWhileSt(TreeNonTerminal node, int blockLevel, int offset, MeaningErrInfoList errList)
+        private object ActionWhileSt(TreeNonTerminal node, int blockLevel, int offset)
         {
             return null;
         }
@@ -646,147 +653,147 @@ namespace Parse.FrontEnd.Grammars.MiniC
             return null;
         }
 
-        private object ActionReturnSt(TreeNonTerminal node, int blockLevel, int offset, MeaningErrInfoList errList)
+        private object ActionReturnSt(TreeNonTerminal node, int blockLevel, int offset)
         {
             return null;
         }
 
-        private object ActionIndex(TreeNonTerminal node, int blockLevel, int offset, MeaningErrInfoList errList)
+        private object ActionIndex(TreeNonTerminal node, int blockLevel, int offset)
         {
             return null;
         }
 
-        private object ActionCell(TreeNonTerminal node, int blockLevel, int offset, MeaningErrInfoList errList)
+        private object ActionCell(TreeNonTerminal node, int blockLevel, int offset)
         {
             return null;
         }
 
-        private object ActionActualParam(TreeNonTerminal node, int blockLevel, int offset, MeaningErrInfoList errList)
+        private object ActionActualParam(TreeNonTerminal node, int blockLevel, int offset)
         {
             return null;
         }
 
-        private object ActionAdd(TreeNonTerminal node, int blockLevel, int offset, MeaningErrInfoList errList)
+        private object ActionAdd(TreeNonTerminal node, int blockLevel, int offset)
         {
             return null;
         }
 
-        private object ActionSub(TreeNonTerminal node, int blockLevel, int offset, MeaningErrInfoList errList)
+        private object ActionSub(TreeNonTerminal node, int blockLevel, int offset)
         {
             return null;
         }
 
-        private object ActionMul(TreeNonTerminal node, int blockLevel, int offset, MeaningErrInfoList errList)
+        private object ActionMul(TreeNonTerminal node, int blockLevel, int offset)
         {
             return null;
         }
 
-        private object ActionDiv(TreeNonTerminal node, int blockLevel, int offset, MeaningErrInfoList errList)
+        private object ActionDiv(TreeNonTerminal node, int blockLevel, int offset)
         {
             return null;
         }
 
-        private object ActionMod(TreeNonTerminal node, int blockLevel, int offset, MeaningErrInfoList errList)
+        private object ActionMod(TreeNonTerminal node, int blockLevel, int offset)
         {
             return null;
         }
 
-        private object ActionAssign(TreeNonTerminal node, int blockLevel, int offset, MeaningErrInfoList errList)
+        private object ActionAssign(TreeNonTerminal node, int blockLevel, int offset)
         {
             return null;
         }
 
-        private object ActionAddAssign(TreeNonTerminal node, int blockLevel, int offset, MeaningErrInfoList errList)
+        private object ActionAddAssign(TreeNonTerminal node, int blockLevel, int offset)
         {
             return null;
         }
 
-        private object ActionSubAssign(TreeNonTerminal node, int blockLevel, int offset, MeaningErrInfoList errList)
+        private object ActionSubAssign(TreeNonTerminal node, int blockLevel, int offset)
         {
             return null;
         }
 
-        private object ActionMulAssign(TreeNonTerminal node, int blockLevel, int offset, MeaningErrInfoList errList)
+        private object ActionMulAssign(TreeNonTerminal node, int blockLevel, int offset)
         {
             return null;
         }
 
-        private object ActionDivAssign(TreeNonTerminal node, int blockLevel, int offset, MeaningErrInfoList errList)
+        private object ActionDivAssign(TreeNonTerminal node, int blockLevel, int offset)
         {
             return null;
         }
 
-        private object ActionModAssign(TreeNonTerminal node, int blockLevel, int offset, MeaningErrInfoList errList)
+        private object ActionModAssign(TreeNonTerminal node, int blockLevel, int offset)
         {
             return null;
         }
 
-        private object ActionLogicalOr(TreeNonTerminal node, int blockLevel, int offset, MeaningErrInfoList errList)
+        private object ActionLogicalOr(TreeNonTerminal node, int blockLevel, int offset)
         {
             return null;
         }
 
-        private object ActionLogicalAnd(TreeNonTerminal node, int blockLevel, int offset, MeaningErrInfoList errList)
+        private object ActionLogicalAnd(TreeNonTerminal node, int blockLevel, int offset)
         {
             return null;
         }
 
-        private object ActionLogicalNot(TreeNonTerminal node, int blockLevel, int offset, MeaningErrInfoList errList)
+        private object ActionLogicalNot(TreeNonTerminal node, int blockLevel, int offset)
         {
             return null;
         }
 
-        private object ActionEqual(TreeNonTerminal node, int blockLevel, int offset, MeaningErrInfoList errList)
+        private object ActionEqual(TreeNonTerminal node, int blockLevel, int offset)
         {
             return null;
         }
 
-        private object ActionNotEqual(TreeNonTerminal node, int blockLevel, int offset, MeaningErrInfoList errList)
+        private object ActionNotEqual(TreeNonTerminal node, int blockLevel, int offset)
         {
             return null;
         }
 
-        private object ActionGreaterThan(TreeNonTerminal node, int blockLevel, int offset, MeaningErrInfoList errList)
+        private object ActionGreaterThan(TreeNonTerminal node, int blockLevel, int offset)
         {
             return null;
         }
 
-        private object ActionLessThan(TreeNonTerminal node, int blockLevel, int offset, MeaningErrInfoList errList)
+        private object ActionLessThan(TreeNonTerminal node, int blockLevel, int offset)
         {
             return null;
         }
 
-        private object ActionGreatherEqual(TreeNonTerminal node, int blockLevel, int offset, MeaningErrInfoList errList)
+        private object ActionGreatherEqual(TreeNonTerminal node, int blockLevel, int offset)
         {
             return null;
         }
 
-        private object ActionLessEqual(TreeNonTerminal node, int blockLevel, int offset, MeaningErrInfoList errList)
+        private object ActionLessEqual(TreeNonTerminal node, int blockLevel, int offset)
         {
             return null;
         }
 
-        private object ActionUnaryMinus(TreeNonTerminal node, int blockLevel, int offset, MeaningErrInfoList errList)
+        private object ActionUnaryMinus(TreeNonTerminal node, int blockLevel, int offset)
         {
             return null;
         }
 
-        private object ActionPreInc(TreeNonTerminal node, int blockLevel, int offset, MeaningErrInfoList errList)
+        private object ActionPreInc(TreeNonTerminal node, int blockLevel, int offset)
         {
             return null;
         }
 
-        private object ActionPreDec(TreeNonTerminal node, int blockLevel, int offset, MeaningErrInfoList errList)
+        private object ActionPreDec(TreeNonTerminal node, int blockLevel, int offset)
         {
             return null;
         }
 
-        private object ActionPostInc(TreeNonTerminal node, int blockLevel, int offset, MeaningErrInfoList errList)
+        private object ActionPostInc(TreeNonTerminal node, int blockLevel, int offset)
         {
             return null;
         }
 
-        private object ActionPostDec(TreeNonTerminal node, int blockLevel, int offset, MeaningErrInfoList errList)
+        private object ActionPostDec(TreeNonTerminal node, int blockLevel, int offset)
         {
             return null;
         }
@@ -800,7 +807,7 @@ namespace Parse.FrontEnd.Grammars.MiniC
 
             if (symbol != null)
             {
-                this.ActionProgram(symbol as TreeNonTerminal, 0, 0, errList);
+                this.CheckProgramNode(symbol as TreeNonTerminal, new MiniCSymbolTable(), 0, 0);
                 return new SementicAnalysisResult(errList, null);
             }
             else return null;
@@ -808,7 +815,7 @@ namespace Parse.FrontEnd.Grammars.MiniC
 
         public override string GenerateCode(TreeSymbol symbol)
         {
-            return (symbol != null) ? this.ActionProgram(symbol as TreeNonTerminal, 0, 0, null) as string : string.Empty;
+            return (symbol != null) ? this.ActionProgram(symbol as TreeNonTerminal, 0, 0) as string : string.Empty;
         }
 
 

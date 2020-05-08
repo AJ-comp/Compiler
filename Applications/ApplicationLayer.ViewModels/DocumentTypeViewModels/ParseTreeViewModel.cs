@@ -1,14 +1,16 @@
 ﻿using ApplicationLayer.Models.GraphModels;
+using GalaSoft.MvvmLight.Command;
 using Parse.FrontEnd.Ast;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using CommonResource = ApplicationLayer.Define.Properties.Resources;
 
 namespace ApplicationLayer.ViewModels.DocumentTypeViewModels
 {
     public class ParseTreeViewModel : DocumentViewModel
     {
+        private RelayCommand<PocVertex> _mouseDownCmd;
+
         #region Public Properties
         public TreeSymbol ParseTree { get; } = null;
 
@@ -38,6 +40,21 @@ namespace ApplicationLayer.ViewModels.DocumentTypeViewModels
         }
         #endregion
 
+        public RelayCommand<PocVertex> MouseDownCommand
+        {
+            get
+            {
+                if (_mouseDownCmd == null)
+                    _mouseDownCmd = new RelayCommand<PocVertex>(OnMouseDown);
+
+                return _mouseDownCmd;
+            }
+        }
+
+        private void OnMouseDown(PocVertex vertex)
+        {
+
+        }
 
         public ParseTreeViewModel(TreeSymbol parseTree, string srcPath)
             : base(CommonResource.ParseTree, CommonResource.ParseTree + srcPath, CommonResource.ParseTree + srcPath)
@@ -79,7 +96,7 @@ namespace ApplicationLayer.ViewModels.DocumentTypeViewModels
                 var treeTerminal = curTree as TreeTerminal;
                 bool bAst = treeTerminal.Token.Kind.Meaning;
                 bool bVirtual = treeTerminal.IsVirtual;
-                curNode = new PocVertex(treeTerminal.ToString(), bAst, bVirtual, false);
+                curNode = new TreeSymbolVertex(treeTerminal);
                 Graph.AddVertex(curNode);
             }
             else
@@ -88,7 +105,7 @@ namespace ApplicationLayer.ViewModels.DocumentTypeViewModels
                 bool bAst = (treeNonTerminal._signPost.MeaningUnit == null) ? false : true;
                 bool bVirtual = treeNonTerminal.IsVirtual;
                 bool bHasVirtualChild = treeNonTerminal.HasVirtualChild;
-                curNode = new PocVertex(treeNonTerminal.ToString(), bAst, bVirtual, bHasVirtualChild);
+                curNode = new TreeSymbolVertex(treeNonTerminal);
                 Graph.AddVertex(curNode);
 
                 foreach (var childTree in treeNonTerminal.Items)
