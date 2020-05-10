@@ -62,6 +62,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.ko-KR.resx</DependentUpon>
     </Compile>
+    <Compile Include="Properties\WindowViewResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WindowViewResources.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\OptionDialogResources.ko-KR.resx">
@@ -79,6 +84,11 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\WindowViewResources.ko-KR.resx" />
+    <EmbeddedResource Include="Properties\WindowViewResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>WindowViewResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

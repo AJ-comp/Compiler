@@ -91,15 +91,6 @@ namespace ApplicationLayer.Models.SolutionPackage
         public FileTreeNodeModel(string path, string filename) : base(path, filename)
         {
             this.IsEditable = true;
-
-            AddChildren(new VarTreeNodeModel(DataType.Int, "test"));
-
-            List<VarTreeNodeModel> paramList = new List<VarTreeNodeModel>
-            {
-                new VarTreeNodeModel(DataType.Int, "param1"),
-                new VarTreeNodeModel(DataType.Int, "param2")
-            };
-            AddChildren(new FuncTreeNodeModel() { Params = paramList, ReturnType = DataType.Int, FuncName = "func" });
         }
 
 

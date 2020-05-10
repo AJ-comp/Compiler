@@ -47,6 +47,7 @@ namespace ApplicationLayer.ViewModels.DocumentTypeViewModels
         public TokenizeImpactRanges RecentTokenizeHistory { get; } = new TokenizeImpactRanges();
         public ParserSnippet ParserSnippet { get; } = ParserFactory.Instance.GetParser(ParserFactory.ParserKind.SLR_Parser, new MiniCGrammar()).NewParserSnippet();
         public TreeSymbol ParseTree { get; private set; }
+        public TreeSymbol Ast { get; private set; }
         public DataTable ParsingHistory { get; private set; }
 
         public int CaretIndex
@@ -113,14 +114,14 @@ namespace ApplicationLayer.ViewModels.DocumentTypeViewModels
             }
 
             this.ParsingHistory = parsingCompletedInfo.ParsingResult.ToParsingHistory;
-            this.ParseTree = parsingCompletedInfo.ParsingResult.ToParseTree;
+            this.ParseTree = parsingCompletedInfo.Ast;
+            this.Ast = parsingCompletedInfo.Ast;
 
             // inform to alarm list view.
             Messenger.Default.Send<AlarmMessage>(new AlarmMessage(this, alarmList));
 
             // Add sementic parsing information to the current FileTreeNode.
             _fileNode.Clear();
-            var sementicResult = parsingCompletedInfo.SementicResult;
             var funcTreeNode = new FuncTreeNodeModel();
             funcTreeNode.FuncName = "test";
             funcTreeNode.ReturnType = Parse.FrontEnd.Grammars.MiniC.SymbolTableFormat.DataType.Void;

@@ -6,9 +6,14 @@ namespace ApplicationLayer.Models.SolutionPackage.MiniCPackage
 {
     public class VarTreeNodeModel : TreeNodeModel
     {
-        public DataType DataType { get; } = DataType.Unknown;
+        private DclData _dclData;
 
-        public string VarName { get; } = string.Empty;
+        public bool IsConst => (_dclData != null) ? _dclData.DclSpecData.Const : false;
+        public string DataType => (_dclData != null) ? _dclData.DclSpecData.DataType.ToString() : string.Empty;
+        public string VarName => (_dclData != null) ? _dclData.DclItemData.Name : string.Empty;
+        public string Dimension => (_dclData != null) ? _dclData.DclItemData.Dimension.ToString() : string.Empty;
+        public string BlockIndex => (_dclData != null) ? _dclData.BlockLevel.ToString() : string.Empty;
+        public string Offset { get; private set; }
 
         public override string DisplayName
         {
@@ -20,10 +25,10 @@ namespace ApplicationLayer.Models.SolutionPackage.MiniCPackage
 
         public override event EventHandler<FileChangedEventArgs> Changed;
 
-        public VarTreeNodeModel(DataType dataType, string varName)
+        public VarTreeNodeModel(DclData dclData, int offset)
         {
-            DataType = dataType;
-            VarName = varName;
+            _dclData = dclData;
+            Offset = offset.ToString();
         }
 
         public override void RemoveChild(TreeNodeModel nodeToRemove)

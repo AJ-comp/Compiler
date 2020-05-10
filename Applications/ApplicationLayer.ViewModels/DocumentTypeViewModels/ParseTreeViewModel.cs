@@ -1,5 +1,7 @@
 ﻿using ApplicationLayer.Models.GraphModels;
+using ApplicationLayer.ViewModels.Messages;
 using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Messaging;
 using Parse.FrontEnd.Ast;
 using System;
 using System.Collections.Generic;
@@ -9,7 +11,7 @@ namespace ApplicationLayer.ViewModels.DocumentTypeViewModels
 {
     public class ParseTreeViewModel : DocumentViewModel
     {
-        private RelayCommand<PocVertex> _mouseDownCmd;
+        private RelayCommand<TreeSymbolVertex> _mouseDownCmd;
 
         #region Public Properties
         public TreeSymbol ParseTree { get; } = null;
@@ -40,20 +42,20 @@ namespace ApplicationLayer.ViewModels.DocumentTypeViewModels
         }
         #endregion
 
-        public RelayCommand<PocVertex> MouseDownCommand
+        public RelayCommand<TreeSymbolVertex> MouseDownCommand
         {
             get
             {
                 if (_mouseDownCmd == null)
-                    _mouseDownCmd = new RelayCommand<PocVertex>(OnMouseDown);
+                    _mouseDownCmd = new RelayCommand<TreeSymbolVertex>(OnMouseDown);
 
                 return _mouseDownCmd;
             }
         }
 
-        private void OnMouseDown(PocVertex vertex)
+        private void OnMouseDown(TreeSymbolVertex vertex)
         {
-
+            Messenger.Default.Send<TreeSymbolMessage>(new TreeSymbolMessage(vertex.TreeSymbol));
         }
 
         public ParseTreeViewModel(TreeSymbol parseTree, string srcPath)

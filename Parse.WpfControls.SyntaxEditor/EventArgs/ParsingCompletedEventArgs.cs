@@ -1,4 +1,5 @@
 ﻿using Parse.FrontEnd;
+using Parse.FrontEnd.Ast;
 using Parse.FrontEnd.Parsers.Datas;
 using System.Collections.Generic;
 
@@ -9,12 +10,12 @@ namespace Parse.WpfControls.SyntaxEditor.EventArgs
 //        private List<AlarmEventArgs>
 
         public ParsingResult ParsingResult { get; }
-        public SementicAnalysisResult SementicResult { get; }
+        public TreeSymbol Ast { get; }
 
-        public ParsingCompletedEventArgs(ParsingResult parsingResult, SementicAnalysisResult sementicResult)
+        public ParsingCompletedEventArgs(ParsingResult parsingResult, TreeSymbol ast)
         {
             ParsingResult = parsingResult;
-            SementicResult = sementicResult;
+            Ast = ast;
         }
     }
 }

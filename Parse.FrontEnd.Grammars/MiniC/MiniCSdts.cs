@@ -68,7 +68,13 @@ namespace Parse.FrontEnd.Grammars.MiniC
                 if (astNonTerminal._signPost.MeaningUnit == this.Dcl)
                 {
                     var nodeCheckResult = this.CheckDclNode(astNonTerminal, baseSymbolTable, blockLevel, offset++);
-                    baseSymbolTable = nodeCheckResult.symbolTable as MiniCSymbolTable;
+                    VarData varData = new VarData
+                    {
+                        DclData = nodeCheckResult.Data as DclData,
+                        Offset = offset
+                    };
+                    baseSymbolTable.VarDataList.Add(varData);
+                    node.ConnectedSymbolTable = baseSymbolTable;
                 }
                 else if (astNonTerminal._signPost.MeaningUnit == this.FuncDef)
                 {
@@ -113,23 +119,23 @@ namespace Parse.FrontEnd.Grammars.MiniC
 
                 if (astNonTerminal._signPost.MeaningUnit == this.FuncHead)
                 {
-                    var nodeCheckResult = this.CheckFuncHeadNode(item as TreeNonTerminal, baseSymbolTable, blockLevel + 1, offset);
+                    var nodeCheckResult = this.CheckFuncHeadNode(item as TreeNonTerminal, newSymbolTable, blockLevel + 1, offset);
                     var funcData = nodeCheckResult.Data as FuncData;
                     offset = funcData.LocalVars.Count;
 
                     funcData.This = true;
-                    baseSymbolTable.FuncDataList.Add(funcData);
-                    baseSymbolTable.VarDataList.AddRange(funcData.LocalVars);
+                    newSymbolTable.FuncDataList.Add(funcData);
+                    newSymbolTable.VarDataList.AddRange(funcData.LocalVars);
 
-                    curNode.ConnectedSymbolTable = baseSymbolTable;
+                    curNode.ConnectedSymbolTable = newSymbolTable;
                 }
                 else if (astNonTerminal._signPost.MeaningUnit == this.CompoundSt)
                 {
-                    this.CheckCompoundStNode(item as TreeNonTerminal, baseSymbolTable, blockLevel + 1, offset);
+                    this.CheckCompoundStNode(item as TreeNonTerminal, newSymbolTable, blockLevel + 1, offset);
                 }
             }
 
-            return new NodeCheckResult(null, baseSymbolTable);
+            return new NodeCheckResult(null, newSymbolTable);
         }
 
         /// <summary>
@@ -547,7 +553,7 @@ namespace Parse.FrontEnd.Grammars.MiniC
                     result = this.CheckArrayVarNode(astNonTerminal, baseSymbolTable, blockLevel, offset);
             }
 
-            return new NodeCheckResult(result, baseSymbolTable);
+            return result;
         }
 
         private object ActionSimpleVar(TreeNonTerminal node, int blockLevel, int offset)

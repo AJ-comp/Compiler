@@ -194,8 +194,15 @@ namespace ApplicationLayer.Models.SolutionPackage
 		public void AddChildren(TreeNodeModel item)
 		{
 			item.Parent = this;
-			this._children.Add(item);
-			this.NotifyChildrenChanged();
+			_children.Add(item);
+			NotifyChildrenChanged();
+		}
+
+		public void AddChildrenToFirst(TreeNodeModel item)
+		{
+			item.Parent = this;
+			_children.Insert(0, item);
+			NotifyChildrenChanged();
 		}
 
 		public void Clear()

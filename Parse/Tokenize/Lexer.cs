@@ -197,13 +197,13 @@ namespace Parse.Tokenize
             var rangePairToRegist = new RangePair(impactRange, new Range(impactRange.StartIndex, tokenList.Count));
 
             /// The comment can include all tokens therefore if a comment exists the process is performed as below.
-            /// ex : void main()\r\n{}\r\n -> void main(//)\r\n{}\r\n
-            ///       process 1 : "void", " ", "main", "(", "//)", "\r", "\n" -> The tokens in the impact range.
-            ///                        "void main(//)\r\n"                            -> The string that merged.
-            ///                        "void", " ", "main", "(", "//)\r\n"          -> The tokens after splite.
-            ///       process 2 : "void", " ", "main", "(", "//)\r\n", "{", "}", "\r", "\n" -> The tokens in the impact range.
-            ///                        "void main(//)\r\n{}\r\n"                                     -> The string that merged.
-            ///                        "void", " ", "main", "(", "//)\r\n{}\r\n"                   -> The tokens after splite.
+            /// ex : void main()\r\n{}\r\n -> void main(/*)\r\n{}\r\n
+            ///       process 1 : "void", " ", "main", "(", "/*)", "\r", "\n" -> The tokens in the impact range.
+            ///                        "void main(/*)\r\n"                            -> The string that merged.
+            ///                        "void", " ", "main", "(", "/*)\r\n"          -> The tokens after splite.
+            ///       process 2 : "void", " ", "main", "(", "/*)\r\n", "{", "}", "\r", "\n" -> The tokens in the impact range.
+            ///                        "void main(/*)\r\n{}\r\n"                                     -> The string that merged.
+            ///                        "void", " ", "main", "(", "/*)\r\n{}\r\n"                   -> The tokens after splite.
             while (true)
             {
                 var impactRangeToParse = result.FindImpactRange(rangePairToRegist.Item1.StartIndex, rangePairToRegist.Item1.EndIndex);

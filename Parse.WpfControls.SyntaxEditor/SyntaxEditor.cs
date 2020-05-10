@@ -1,4 +1,5 @@
 ﻿using Parse.FrontEnd;
+using Parse.FrontEnd.Ast;
 using Parse.FrontEnd.DrawingSupport;
 using Parse.FrontEnd.Grammars;
 using Parse.FrontEnd.Parsers.Datas;
@@ -301,8 +302,8 @@ namespace Parse.WpfControls.SyntaxEditor
 
                 Dispatcher.Invoke(() =>
                 {
-                    var sementicResult = this.SementicAnalysis(localResult);
-                    this.ParsingCompleted?.Invoke(this, new ParsingCompletedEventArgs(localResult, sementicResult));
+                    var ast = this.SementicAnalysis(localResult);
+                    this.ParsingCompleted?.Invoke(this, new ParsingCompletedEventArgs(localResult, ast));
                 });
             }
         }
@@ -394,12 +395,13 @@ namespace Parse.WpfControls.SyntaxEditor
             });
         }
 
-        private SementicAnalysisResult SementicAnalysis(ParsingResult target)
+        private TreeSymbol SementicAnalysis(ParsingResult target)
         {
-            var sementicResult = this.ParserSnippet.Parser.Grammar.SDTS.Process(target.ToAST);
+            TreeSymbol rootSymbol = target.ToAST;
+            this.ParserSnippet.Parser.Grammar.SDTS.Process(rootSymbol);
             ParsingFailedListPreProcess(target);
 
-            return sementicResult;
+            return rootSymbol;
         }
 
         private List<ItemData> GetCompletionList(ParsingResult parsingResult, int tokenIndex)

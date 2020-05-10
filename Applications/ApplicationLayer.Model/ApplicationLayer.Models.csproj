@@ -81,6 +81,7 @@
     <Compile Include="PathChain.cs" />
     <Compile Include="ProjectData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SolutionPackage\CategoryTreeNodeModel.cs" />
     <Compile Include="SolutionPackage\ErrorProjectTreeNodeModel.cs" />
     <Compile Include="SolutionPackage\TreeNodeCreator.cs" />
     <Compile Include="SolutionPackage\FileTreeNodeModel.cs" />

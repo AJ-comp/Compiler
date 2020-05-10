@@ -216,6 +216,13 @@ namespace ApplicationLayer.WpfApp.ViewModels
             Messenger.Default.Register<AlarmMessage>(alarmList, alarmList.ReceivedAlarmMessage);
         }
 
+        private void InitTreeSymbolDetailView()
+        {
+            var treeSymbolDetailView = ServiceLocator.Current.GetInstance<TreeSymbolDetailViewModel>();
+
+            Messenger.Default.Register<TreeSymbolMessage>(treeSymbolDetailView, treeSymbolDetailView.ReceivedTreeSymbolDetailMessage);
+        }
+
         private void InitQuestionToSaveDialog()
         {
             var questionToSaveDialog = ServiceLocator.Current.GetInstance<QuestionToSaveViewModel>();
@@ -240,6 +247,7 @@ namespace ApplicationLayer.WpfApp.ViewModels
             this.InitGrammarWindow();
             this.InitSolutionExplorer();
             this.InitAlarmList();
+            this.InitTreeSymbolDetailView();
             this.InitQuestionToSaveDialog();
 
             Messenger.Default.Register<DisplayMessage>(MessageBoxLogic.Instance, MessageBoxLogic.Instance.ShowMessage);

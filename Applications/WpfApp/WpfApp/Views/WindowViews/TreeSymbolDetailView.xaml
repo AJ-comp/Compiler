@@ -4,15 +4,88 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:grids="http://schemas.actiprosoftware.com/winfx/xaml/grids"
+             xmlns:views="clr-namespace:ApplicationLayer.Views;assembly=ApplicationLayer.Views"
+             xmlns:lex="http://wpflocalizeextension.codeplex.com"
+             lex:ResxLocalizationProvider.DefaultAssembly="ApplicationLayer.Define"
              xmlns:local="clr-namespace:ApplicationLayer.WpfApp.Views.WindowViews"
              mc:Ignorable="d" >
+    <UserControl.Resources>
+        <Style x:Key="CellTextBlockStyle" TargetType="TextBlock" BasedOn="{StaticResource {x:Type TextBlock}}">
+            <Setter Property="TextTrimming" Value="CharacterEllipsis"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+        </Style>
+
+        <Style x:Key="CellCheckBoxStyle" TargetType="CheckBox" BasedOn="{StaticResource {x:Type CheckBox}}">
+            <Setter Property="IsHitTestVisible" Value="False"/>
+            <Setter Property="Focusable" Value="False"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+        </Style>
+        
+        <DataTemplate x:Key="CategoryCellTemplate">
+            <TextBlock Text="{Binding DisplayName}" TextTrimming="CharacterEllipsis" VerticalAlignment="Center"/>
+        </DataTemplate>
+
+        <DataTemplate x:Key="VariableCellTemplate">
+            <TextBlock Text="Variable" Style="{StaticResource CellTextBlockStyle}"/>
+        </DataTemplate>
+
+        <DataTemplate x:Key="ConstCellTemplate">
+            <CheckBox IsChecked="{Binding IsConst, Mode=OneWay}" Style="{StaticResource CellCheckBoxStyle}"/>
+        </DataTemplate>
+
+        <DataTemplate x:Key="TypeCellTemplate">
+            <TextBlock Text="{Binding DataType}" Style="{StaticResource CellTextBlockStyle}"/>
+        </DataTemplate>
+
+        <DataTemplate x:Key="SymbolNameCellTemplate">
+            <TextBlock Text="{Binding VarName}" Style="{StaticResource CellTextBlockStyle}"/>
+        </DataTemplate>
+
+        <DataTemplate x:Key="LevelCellTemplate">
+            <TextBlock Text="{Binding Dimension}" Style="{StaticResource CellTextBlockStyle}"/>
+        </DataTemplate>
+
+        <DataTemplate x:Key="BlockIndexCellTemplate">
+            <TextBlock Text="{Binding BlockIndex}" Style="{StaticResource CellTextBlockStyle}"/>
+        </DataTemplate>
+
+        <DataTemplate x:Key="OffsetCellTemplate">
+            <TextBlock Text="{Binding Offset}" Style="{StaticResource CellTextBlockStyle}"/>
+        </DataTemplate>
+    </UserControl.Resources>
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="5"/>
         </Grid.RowDefinitions>
 
-        <grids:PropertyGrid Grid.Row="0"/>
-        <ListBox Grid.Row="1"/>
+        <grids:TreeListView Grid.Row="0" RootItem="{Binding Vars}">
+            <grids:TreeListBox.ItemAdapter>
+                <views:DefaultTreeListBoxItemAdapter/>
+            </grids:TreeListBox.ItemAdapter>
+            <grids:TreeListView.Columns>
+                <!-- Common -->
+                <grids:TreeListViewColumn Header="{lex:Loc Key=WindowViewResources:Category}" 
+                                                        CellTemplate="{StaticResource CategoryCellTemplate}" />
+                <grids:TreeListViewColumn Header="{lex:Loc Key=WindowViewResources:SymbolKind}" 
+                                                        CellTemplate="{StaticResource VariableCellTemplate}" />
+                <grids:TreeListViewColumn Header="{lex:Loc Key=WindowViewResources:SymbolName}" 
+                                                        CellTemplate="{StaticResource SymbolNameCellTemplate}"/>
+                <!-- Var -->
+                <grids:TreeListViewColumn Header="{lex:Loc Key=WindowViewResources:Const}" 
+                                                        CellTemplate="{StaticResource ConstCellTemplate}" />
+                <grids:TreeListViewColumn Header="{lex:Loc Key=WindowViewResources:Type}" 
+                                                        CellTemplate="{StaticResource TypeCellTemplate}" />
+                <grids:TreeListViewColumn Header="{lex:Loc Key=WindowViewResources:Level}" 
+                                                        CellTemplate="{StaticResource LevelCellTemplate}" />
+                <grids:TreeListViewColumn Header="{lex:Loc Key=WindowViewResources:BlockIndex}" 
+                                                        CellTemplate="{StaticResource BlockIndexCellTemplate}" />
+                <grids:TreeListViewColumn Header="{lex:Loc Key=WindowViewResources:Offset}" 
+                                                        CellTemplate="{StaticResource OffsetCellTemplate}" />
+            </grids:TreeListView.Columns>
+        </grids:TreeListView>
     </Grid>
 </UserControl>

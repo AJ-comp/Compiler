@@ -72,6 +72,7 @@
     <Compile Include="Interfaces\IPathSearchable.cs" />
     <Compile Include="Messages\DisplayMessage.cs" />
     <Compile Include="Messages\ToAlarmListMessages.cs" />
+    <Compile Include="Messages\TreeSymbolMessage.cs" />
     <Compile Include="SubViewModels\LLParserViewModel.cs" />
     <Compile Include="SubViewModels\LRParserViewModel.cs" />
     <Compile Include="SubViewModels\ParserViewModel.cs" />
