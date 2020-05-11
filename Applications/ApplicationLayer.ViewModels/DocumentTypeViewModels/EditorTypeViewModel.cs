@@ -9,6 +9,7 @@ using GalaSoft.MvvmLight.Messaging;
 using Parse.FrontEnd.Ast;
 using Parse.FrontEnd.DrawingSupport;
 using Parse.FrontEnd.Grammars.MiniC;
+using Parse.FrontEnd.Grammars.MiniC.SymbolTableFormat;
 using Parse.FrontEnd.Parsers.Datas;
 using Parse.FrontEnd.Parsers.Logical;
 using Parse.Tokenize;
@@ -122,11 +123,25 @@ namespace ApplicationLayer.ViewModels.DocumentTypeViewModels
 
             // Add sementic parsing information to the current FileTreeNode.
             _fileNode.Clear();
-            var funcTreeNode = new FuncTreeNodeModel();
-            funcTreeNode.FuncName = "test";
-            funcTreeNode.ReturnType = Parse.FrontEnd.Grammars.MiniC.SymbolTableFormat.DataType.Void;
 
-            _fileNode.AddChildren(funcTreeNode);
+            var astRoot = parsingCompletedInfo.Ast as TreeNonTerminal;
+            var grammarSymbolTable = astRoot?.ConnectedSymbolTable as MiniCSymbolTable;
+            if (grammarSymbolTable == null) return;
+
+            // Add abstract variable list information to the current FileTreeNode.
+            int offset = 0;
+            foreach(var item in grammarSymbolTable.VarDataList)
+            {
+                var varTreeNode = new VarTreeNodeModel(item.DclData, offset++);
+                _fileNode.AddChildren(varTreeNode);
+            }
+
+            // Add abstract function list information to the current FileTreeNode.
+            foreach(var item in grammarSymbolTable.FuncDataList)
+            {
+                var funcTreeNode = new FuncTreeNodeModel(item);
+                _fileNode.AddChildren(funcTreeNode);
+            }
         }
 
 

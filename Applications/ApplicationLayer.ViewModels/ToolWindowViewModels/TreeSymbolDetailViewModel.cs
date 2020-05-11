@@ -1,7 +1,6 @@
 ﻿using ApplicationLayer.Models.SolutionPackage;
 using ApplicationLayer.Models.SolutionPackage.MiniCPackage;
 using ApplicationLayer.ViewModels.Messages;
-using ApplicationLayer.ViewModels.SubViewModels;
 using Parse.FrontEnd.Ast;
 using Parse.FrontEnd.Grammars.MiniC.SymbolTableFormat;
 using System.Collections.ObjectModel;
@@ -16,7 +15,7 @@ namespace ApplicationLayer.ViewModels.ToolWindowViewModels
 
         public ReadOnlyObservableCollection<string> MeaningErrors => new ReadOnlyObservableCollection<string>(_meaningErrors);
 
-        public TreeNodeModel Vars { get; } = new VarTreeNodeModel(null, 0);
+        public TreeNodeModel SymbolDatas { get; } = new VarTreeNodeModel(null, 0);
 
         public TreeSymbolDetailViewModel()
         {
@@ -31,14 +30,15 @@ namespace ApplicationLayer.ViewModels.ToolWindowViewModels
             if (message is null) return;
             if (message.TreeSymbol is TreeTerminal) return;
 
-            Vars.Clear();
+            SymbolDatas.Clear();
             var treeNonterminal = message.TreeSymbol as TreeNonTerminal;
-            if(treeNonterminal.ConnectedSymbolTable is MiniCSymbolTable)
+            var clickedTree = treeNonterminal;
+            if (treeNonterminal.ConnectedSymbolTable is MiniCSymbolTable)
             {
                 var symbolTable = treeNonterminal.ConnectedSymbolTable as MiniCSymbolTable;
-                while(symbolTable != null)
+                while (symbolTable != null)
                 {
-                    if (symbolTable.VarDataList.Count == 0)
+                    if (symbolTable.VarDataList.Count == 0 && symbolTable.FuncDataList.Count == 0)
                     {
                         treeNonterminal = null;
                         symbolTable = symbolTable.Base as MiniCSymbolTable;
@@ -47,11 +47,14 @@ namespace ApplicationLayer.ViewModels.ToolWindowViewModels
 
                     int offset = 0;
                     string categoryName = (treeNonterminal != null) ? treeNonterminal.ToString() : "Base";
-                    Vars.AddChildrenToFirst(new CategoryTreeNodeModel(categoryName));
-                    Vars.IsExpanded = true;
+                    SymbolDatas.AddChildrenToFirst(new CategoryTreeNodeModel(categoryName));
+                    SymbolDatas.IsExpanded = true;
 
                     foreach (var item in symbolTable.VarDataList)
-                        Vars.Children.First().AddChildren(new VarTreeNodeModel(item.DclData, offset++));
+                        SymbolDatas.Children.First().AddChildren(new VarTreeNodeModel(item.DclData, offset++));
+
+                    foreach (var item in symbolTable.FuncDataList)
+                        SymbolDatas.Children.First().AddChildren(new FuncTreeNodeModel(item));
 
                     treeNonterminal = null;
                     symbolTable = symbolTable.Base as MiniCSymbolTable;

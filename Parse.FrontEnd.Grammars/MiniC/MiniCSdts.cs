@@ -46,13 +46,14 @@ namespace Parse.FrontEnd.Grammars.MiniC
             // it is can parsed only perfect tree.
             if (node.HasVirtualChild) return result;
 
+            foreach(var item in (node.ConnectedSymbolTable as MiniCSymbolTable).VarDataList)
+                UCode.DclVar(item.DclData.BlockLevel, item.Offset, item.DclData.DclItemData.Dimension, item.DclData.DclItemData.Name);
+
             foreach (var item in node.Items)
             {
                 var astNonTerminal = item as TreeNonTerminal;
 
-                if (astNonTerminal._signPost.MeaningUnit == this.Dcl)
-                    result += this.ActionDcl(astNonTerminal, blockLevel, offset++);
-                else if(astNonTerminal._signPost.MeaningUnit == this.FuncDef)
+                if(astNonTerminal._signPost.MeaningUnit == this.FuncDef)
                     result += this.ActionFuncDef(astNonTerminal, blockLevel, 0);
             }
 
@@ -61,10 +62,12 @@ namespace Parse.FrontEnd.Grammars.MiniC
 
         private object CheckProgramNode(TreeNonTerminal node, MiniCSymbolTable baseSymbolTable, int blockLevel, int offset)
         {
+            int funcOffset = 0;
             foreach (var item in node.Items)
             {
                 var astNonTerminal = item as TreeNonTerminal;
 
+                // Global variable
                 if (astNonTerminal._signPost.MeaningUnit == this.Dcl)
                 {
                     var nodeCheckResult = this.CheckDclNode(astNonTerminal, baseSymbolTable, blockLevel, offset++);
@@ -76,9 +79,13 @@ namespace Parse.FrontEnd.Grammars.MiniC
                     baseSymbolTable.VarDataList.Add(varData);
                     node.ConnectedSymbolTable = baseSymbolTable;
                 }
+                // Global function
                 else if (astNonTerminal._signPost.MeaningUnit == this.FuncDef)
                 {
-                    this.CheckFuncDefNode(astNonTerminal, baseSymbolTable, blockLevel, 0);
+                    var nodeCheckResult = this.CheckFuncDefNode(astNonTerminal, baseSymbolTable, blockLevel, 0);
+                    var funcData = nodeCheckResult.Data as FuncData;
+                    funcData.Offset = funcOffset++;
+                    baseSymbolTable.FuncDataList.Add(funcData);
                 }
             }
 
@@ -90,6 +97,10 @@ namespace Parse.FrontEnd.Grammars.MiniC
             string result = string.Empty;
             string compoundSt = string.Empty;
 
+            var symbolTable = node.ConnectedSymbolTable as MiniCSymbolTable;
+            var funcData = symbolTable.FuncDataList.ThisFuncData;
+            if (funcData == null) return result;
+
             foreach (var item in node.Items)
             {
                 var astNonTerminal = item as TreeNonTerminal;
@@ -97,10 +108,6 @@ namespace Parse.FrontEnd.Grammars.MiniC
                 if (astNonTerminal._signPost.MeaningUnit == this.CompoundSt)
                     compoundSt += this.ActionCompoundSt(item as TreeNonTerminal, blockLevel + 1, offset);
             }
-
-            var symbolTable = node.ConnectedSymbolTable as MiniCSymbolTable;
-            var funcData = symbolTable.FuncDataList.ThisFuncData;
-            if (funcData == null) return result;
 
             result += UCode.ProcStart(funcData.Name, 0, blockLevel, funcData.Name + " function");
             result += compoundSt;
@@ -111,6 +118,7 @@ namespace Parse.FrontEnd.Grammars.MiniC
 
         private NodeCheckResult CheckFuncDefNode(TreeNonTerminal curNode, MiniCSymbolTable baseSymbolTable, int blockLevel, int offset)
         {
+            FuncData funcHeadData = new FuncData();
             var newSymbolTable = new MiniCSymbolTable(baseSymbolTable);
 
             foreach (var item in curNode.Items)
@@ -120,12 +128,12 @@ namespace Parse.FrontEnd.Grammars.MiniC
                 if (astNonTerminal._signPost.MeaningUnit == this.FuncHead)
                 {
                     var nodeCheckResult = this.CheckFuncHeadNode(item as TreeNonTerminal, newSymbolTable, blockLevel + 1, offset);
-                    var funcData = nodeCheckResult.Data as FuncData;
-                    offset = funcData.LocalVars.Count;
+                    funcHeadData = nodeCheckResult.Data as FuncData;
+                    offset = funcHeadData.ParamVars.Count;
 
-                    funcData.This = true;
-                    newSymbolTable.FuncDataList.Add(funcData);
-                    newSymbolTable.VarDataList.AddRange(funcData.LocalVars);
+                    funcHeadData.This = true;
+                    newSymbolTable.FuncDataList.Add(funcHeadData);
+                    newSymbolTable.VarDataList.AddRange(funcHeadData.ParamVars);
 
                     curNode.ConnectedSymbolTable = newSymbolTable;
                 }
@@ -135,7 +143,7 @@ namespace Parse.FrontEnd.Grammars.MiniC
                 }
             }
 
-            return new NodeCheckResult(null, newSymbolTable);
+            return new NodeCheckResult(funcHeadData, newSymbolTable);
         }
 
         /// <summary>
@@ -170,7 +178,7 @@ namespace Parse.FrontEnd.Grammars.MiniC
                     else if (astNonterminal._signPost.MeaningUnit == this.FormalPara)
                     {
                         var varDatas = this.ActionFormalPara(astNonterminal, blockLevel, offset) as List<VarData>;
-                        result.LocalVars.AddRange(varDatas);
+                        result.ParamVars.AddRange(varDatas);
                     }
                 }
             }
@@ -203,7 +211,7 @@ namespace Parse.FrontEnd.Grammars.MiniC
                     {
                         var nodeCheckResult = this.CheckFormalParaNode(astNonterminal, baseSymbolTable, blockLevel, offset);
                         var datas = nodeCheckResult.Data as List<VarData>;
-                        result.LocalVars.AddRange(datas);
+                        result.ParamVars.AddRange(datas);
                     }
                 }
             }
@@ -340,6 +348,7 @@ namespace Parse.FrontEnd.Grammars.MiniC
         {
             DclData result = new DclData();
             result.BlockLevel = blockLevel;
+            result.Etc = EtcInfo.Param;
 
             foreach (var item in node.Items)
             {

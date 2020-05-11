@@ -10,14 +10,16 @@ namespace ApplicationLayer.Models.SolutionPackage.MiniCPackage
 
         public bool IsConst => (_dclData != null) ? _dclData.DclSpecData.Const : false;
         public string DataType => (_dclData != null) ? _dclData.DclSpecData.DataType.ToString() : string.Empty;
-        public string VarName => (_dclData != null) ? _dclData.DclItemData.Name : string.Empty;
+        public string Name => (_dclData != null) ? _dclData.DclItemData.Name : string.Empty;
         public string Dimension => (_dclData != null) ? _dclData.DclItemData.Dimension.ToString() : string.Empty;
         public string BlockIndex => (_dclData != null) ? _dclData.BlockLevel.ToString() : string.Empty;
         public string Offset { get; private set; }
+        public bool IsGlobal => (_dclData?.BlockLevel == 0) ? true : false;
+        public bool IsParam => (_dclData?.Etc == EtcInfo.Param) ? true : false;
 
         public override string DisplayName
         {
-            get => string.Format("{0} : {1}", VarName, DataType);
+            get => string.Format("{0} : {1}", Name, DataType);
             set => throw new Exception();
         }
 

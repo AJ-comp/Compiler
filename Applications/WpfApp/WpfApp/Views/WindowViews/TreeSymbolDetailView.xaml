@@ -8,8 +8,10 @@
              xmlns:lex="http://wpflocalizeextension.codeplex.com"
              lex:ResxLocalizationProvider.DefaultAssembly="ApplicationLayer.Define"
              xmlns:local="clr-namespace:ApplicationLayer.WpfApp.Views.WindowViews"
+             xmlns:base="clr-namespace:ApplicationLayer.WpfApp"
              mc:Ignorable="d" >
     <UserControl.Resources>
+        <base:CellTemplateSelector x:Key="CellTemplateSelectorKey"/>
         <Style x:Key="CellTextBlockStyle" TargetType="TextBlock" BasedOn="{StaticResource {x:Type TextBlock}}">
             <Setter Property="TextTrimming" Value="CharacterEllipsis"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
@@ -22,17 +24,40 @@
             <Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="HorizontalAlignment" Value="Center"/>
         </Style>
-        
+
+        <Style x:Key="CellRadioButtonStyle" TargetType="RadioButton" BasedOn="{StaticResource {x:Type RadioButton}}">
+            <Setter Property="IsHitTestVisible" Value="False"/>
+            <Setter Property="Focusable" Value="False"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+        </Style>
+
+        <DataTemplate x:Key="VarCellTemplate">
+            <TextBlock Text="Variable" Style="{StaticResource CellTextBlockStyle}"/>
+        </DataTemplate>
+
+        <DataTemplate x:Key="FuncCellTemplate">
+            <TextBlock Text="Function" Style="{StaticResource CellTextBlockStyle}"/>
+        </DataTemplate>
+
+        <DataTemplate x:Key="EmptyCellTemplate">
+            <TextBlock Text="" Style="{StaticResource CellTextBlockStyle}"/>
+        </DataTemplate>
+
         <DataTemplate x:Key="CategoryCellTemplate">
             <TextBlock Text="{Binding DisplayName}" TextTrimming="CharacterEllipsis" VerticalAlignment="Center"/>
         </DataTemplate>
 
-        <DataTemplate x:Key="VariableCellTemplate">
-            <TextBlock Text="Variable" Style="{StaticResource CellTextBlockStyle}"/>
-        </DataTemplate>
-
         <DataTemplate x:Key="ConstCellTemplate">
             <CheckBox IsChecked="{Binding IsConst, Mode=OneWay}" Style="{StaticResource CellCheckBoxStyle}"/>
+        </DataTemplate>
+
+        <DataTemplate x:Key="GlobalCellTemplate">
+            <RadioButton IsChecked="{Binding IsGlobal, Mode=OneWay}" Style="{StaticResource CellRadioButtonStyle}"/>
+        </DataTemplate>
+
+        <DataTemplate x:Key="ParamCellTemplate">
+            <RadioButton IsChecked="{Binding IsParam, Mode=OneWay}" Style="{StaticResource CellRadioButtonStyle}"/>
         </DataTemplate>
 
         <DataTemplate x:Key="TypeCellTemplate">
@@ -40,7 +65,7 @@
         </DataTemplate>
 
         <DataTemplate x:Key="SymbolNameCellTemplate">
-            <TextBlock Text="{Binding VarName}" Style="{StaticResource CellTextBlockStyle}"/>
+            <TextBlock Text="{Binding Name}" Style="{StaticResource CellTextBlockStyle}"/>
         </DataTemplate>
 
         <DataTemplate x:Key="LevelCellTemplate">
@@ -54,6 +79,11 @@
         <DataTemplate x:Key="OffsetCellTemplate">
             <TextBlock Text="{Binding Offset}" Style="{StaticResource CellTextBlockStyle}"/>
         </DataTemplate>
+
+        <!-- Func -->
+        <DataTemplate x:Key="ReturnTypeCellTemplate">
+            <TextBlock Text="{Binding ReturnType}" Style="{StaticResource CellTextBlockStyle}"/>
+        </DataTemplate>
     </UserControl.Resources>
     
     <Grid>
@@ -62,7 +92,7 @@
             <RowDefinition Height="5"/>
         </Grid.RowDefinitions>
 
-        <grids:TreeListView Grid.Row="0" RootItem="{Binding Vars}">
+        <grids:TreeListView Grid.Row="0" RootItem="{Binding SymbolDatas}">
             <grids:TreeListBox.ItemAdapter>
                 <views:DefaultTreeListBoxItemAdapter/>
             </grids:TreeListBox.ItemAdapter>
@@ -71,12 +101,16 @@
                 <grids:TreeListViewColumn Header="{lex:Loc Key=WindowViewResources:Category}" 
                                                         CellTemplate="{StaticResource CategoryCellTemplate}" />
                 <grids:TreeListViewColumn Header="{lex:Loc Key=WindowViewResources:SymbolKind}" 
-                                                        CellTemplate="{StaticResource VariableCellTemplate}" />
+                                                        CellTemplateSelector="{StaticResource CellTemplateSelectorKey}"/>
                 <grids:TreeListViewColumn Header="{lex:Loc Key=WindowViewResources:SymbolName}" 
                                                         CellTemplate="{StaticResource SymbolNameCellTemplate}"/>
                 <!-- Var -->
                 <grids:TreeListViewColumn Header="{lex:Loc Key=WindowViewResources:Const}" 
                                                         CellTemplate="{StaticResource ConstCellTemplate}" />
+                <grids:TreeListViewColumn Header="{lex:Loc Key=WindowViewResources:Global}" 
+                                                        CellTemplate="{StaticResource GlobalCellTemplate}" />
+                <grids:TreeListViewColumn Header="{lex:Loc Key=WindowViewResources:Param}" 
+                                                        CellTemplate="{StaticResource ParamCellTemplate}" />
                 <grids:TreeListViewColumn Header="{lex:Loc Key=WindowViewResources:Type}" 
                                                         CellTemplate="{StaticResource TypeCellTemplate}" />
                 <grids:TreeListViewColumn Header="{lex:Loc Key=WindowViewResources:Level}" 
@@ -85,6 +119,10 @@
                                                         CellTemplate="{StaticResource BlockIndexCellTemplate}" />
                 <grids:TreeListViewColumn Header="{lex:Loc Key=WindowViewResources:Offset}" 
                                                         CellTemplate="{StaticResource OffsetCellTemplate}" />
+
+                <!-- Func -->
+                <grids:TreeListViewColumn Header="{lex:Loc Key=WindowViewResources:ReturnType}" 
+                                                        CellTemplate="{StaticResource ReturnTypeCellTemplate}" />
             </grids:TreeListView.Columns>
         </grids:TreeListView>
     </Grid>

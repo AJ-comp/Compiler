@@ -136,6 +136,7 @@
     <Compile Include="Behaviors\SolutionTreeViewBehavior.cs" />
     <Compile Include="Behaviors\ViewViewModelConnector.cs" />
     <Compile Include="Behaviors\WindowLoadBehavior.cs" />
+    <Compile Include="CellTemplateSelector.cs" />
     <Compile Include="Commands\MenuActionCommands.cs" />
     <Compile Include="Commands\RelayUICommand.cs" />
     <Compile Include="Commands\SolutionExplorerCommands.cs" />

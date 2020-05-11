@@ -69,6 +69,7 @@
     <Compile Include="DialogViewModels\OptionViewModels\OptionDialogMainViewModel.cs" />
     <Compile Include="DialogViewModels\OptionViewModels\OptionViewModel.cs" />
     <Compile Include="DocumentTypeViewModels\ParseTreeViewModel.cs" />
+    <Compile Include="DocumentTypeViewModels\TextViewModel.cs" />
     <Compile Include="Interfaces\IPathSearchable.cs" />
     <Compile Include="Messages\DisplayMessage.cs" />
     <Compile Include="Messages\ToAlarmListMessages.cs" />

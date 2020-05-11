@@ -57,14 +57,16 @@
         <documentViews:ParseTreeView/>
     </DataTemplate>
 
-
     <DataTemplate DataType="{x:Type documentViewModels:ParsingHistoryViewModel}">
         <DataGrid IsReadOnly="True" ItemsSource="{Binding ParsingHistory}"/>
     </DataTemplate>
 
-
     <DataTemplate DataType="{x:Type documentViewModels:GrammarInfoViewModel}">
         <documentViews:GrammarInfoView/>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type documentViewModels:TextViewModel}">
+        <documentViews:TextView/>
     </DataTemplate>
 
 

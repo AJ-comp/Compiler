@@ -121,6 +121,9 @@
     <Compile Include="DialogViews\OptionViews\OptionDialog.xaml.cs">
       <DependentUpon>OptionDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="DocumentTypeViews\TextView.xaml.cs">
+      <DependentUpon>TextView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MenusForTarget.cs" />
     <Compile Include="MenusForTargetCollection.cs" />
     <Compile Include="MiniCProjectTreeListBoxItemAdapter.cs" />
@@ -227,6 +230,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="DocumentTypeViews\ParseTreeView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DocumentTypeViews\TextView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

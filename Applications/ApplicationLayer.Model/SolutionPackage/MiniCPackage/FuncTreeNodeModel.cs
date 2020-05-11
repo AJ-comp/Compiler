@@ -7,25 +7,26 @@ namespace ApplicationLayer.Models.SolutionPackage.MiniCPackage
 {
     public class FuncTreeNodeModel : TreeNodeModel
     {
-        public List<VarTreeNodeModel> Params { get; set; } = new List<VarTreeNodeModel>();
+        private FuncData _funcData;
 
-        public DataType ReturnType { get; set; } = DataType.Unknown;
-
-        public string FuncName { get; set; } = string.Empty;
+        public string ReturnType => (_funcData == null) ? string.Empty : _funcData.DclSpecData.DataType.ToString();
+        public string Name => _funcData.Name;
+        public string Offset => _funcData.Offset.ToString();
+        public bool CanReference { get; } = true;
 
         public override string DisplayName
         {
             get
             {
-                string result = FuncName + "(";
-                foreach(var param in Params)
+                string result = Name + "(";
+                foreach(var param in _funcData.ParamVars)
                 {
-                    result += param.DataType + ",";
+                    result += param.DclData.DclSpecData.DataType + ",";
                 }
-                if (Params.Count > 0) result = result.Substring(0, result.Length - 1);
+                if (_funcData.ParamVars.Count > 0) result = result.Substring(0, result.Length - 1);
                 result += ")";
 
-                if (ReturnType != DataType.Void) result += " : " + ReturnType;
+                if (ReturnType != DataType.Void.ToString()) result += " : " + ReturnType.ToString();
 
                 return result;
             }
@@ -35,6 +36,12 @@ namespace ApplicationLayer.Models.SolutionPackage.MiniCPackage
         public override string FullOnlyPath => string.Empty;
 
         public override event EventHandler<FileChangedEventArgs> Changed;
+
+        public FuncTreeNodeModel(FuncData funcData, bool canReference = true)
+        {
+            _funcData = funcData;
+            CanReference = canReference;
+        }
 
         public override void RemoveChild(TreeNodeModel nodeToRemove)
         {

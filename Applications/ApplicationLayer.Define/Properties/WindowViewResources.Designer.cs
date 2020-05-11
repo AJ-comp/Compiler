@@ -88,6 +88,15 @@ namespace ApplicationLayer.Define.Properties {
         }
         
         /// <summary>
+        ///   Global과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string Global {
+            get {
+                return ResourceManager.GetString("Global", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Level과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string Level {
@@ -102,6 +111,24 @@ namespace ApplicationLayer.Define.Properties {
         public static string Offset {
             get {
                 return ResourceManager.GetString("Offset", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Parameter과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string Param {
+            get {
+                return ResourceManager.GetString("Param", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Return type과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string ReturnType {
+            get {
+                return ResourceManager.GetString("ReturnType", resourceCulture);
             }
         }
         
