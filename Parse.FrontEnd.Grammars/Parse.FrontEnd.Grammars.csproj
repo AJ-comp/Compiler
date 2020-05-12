@@ -42,7 +42,7 @@
   <ItemGroup>
     <Compile Include="AJGrammar.cs" />
     <Compile Include="MiniC\SymbolTableFormat\MiniCSymbolTable.cs" />
-    <Compile Include="NodeCheckResult.cs" />
+    <Compile Include="NodeBuildResult.cs" />
     <Compile Include="Properties\AlarmCodes.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -97,6 +97,7 @@
       <LastGenOutput>Resource.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>

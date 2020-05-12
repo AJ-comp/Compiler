@@ -4,7 +4,7 @@
     {
         public string Source { get; private set; }
 
-        public TextViewModel(string source, string title = "text") : base(title)
+        public TextViewModel(string source, string title) : base(title)
         {
             Source = source;
         }

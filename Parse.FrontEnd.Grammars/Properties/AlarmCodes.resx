@@ -100,4 +100,13 @@
   <data name="MCL0000" xml:space="preserve">
     <value>{0} function is already defined.</value>
   </data>
+  <data name="MCL0001" xml:space="preserve">
+    <value>{0} is not defined.</value>
+  </data>
+  <data name="MCL0002" xml:space="preserve">
+    <value>Value can not be changed because the constant type.</value>
+  </data>
+  <data name="MCL0003" xml:space="preserve">
+    <value>It can not be allocated because the data type differs.</value>
+  </data>
 </root>

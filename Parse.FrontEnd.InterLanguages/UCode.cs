@@ -30,6 +30,8 @@ namespace Parse.FrontEnd.InterLanguages
 
         public static string DclVar(int bIndex, int oIndex, int length, string comment = "") => UCodeFormat(LabelSpace, "sym", comment, bIndex, oIndex, length);
 
+        public static string LoadVar(int bIndex, int oIndex, string comment = "") => UCodeFormat(LabelSpace, "lod", comment, bIndex, oIndex);
+
         public static string DclValue(int value, string comment = "") => UCodeFormat(LabelSpace, "ldc", comment, value);
 
         public static string ProcStart(string procName, int totalLength, int bIndex, string comment = "")
@@ -78,6 +80,7 @@ namespace Parse.FrontEnd.InterLanguages
             return UCodeFormat(LabelSpace, command, comment, destLabelName);
         }
 
+        public static string Store(int bIndex, int oIndex, string comment = "") => UCodeFormat(LabelSpace, "str", comment, bIndex, oIndex);
         public static string Add(string comment = "") => UCodeFormat(LabelSpace, "add", comment);
         public static string Sub(string comment = "") => UCodeFormat(LabelSpace, "sub", comment);
         public static string Multiple(string comment = "") => UCodeFormat(LabelSpace, "mult", comment);

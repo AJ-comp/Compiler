@@ -26,6 +26,19 @@ namespace Parse.FrontEnd.Grammars.MiniC.SymbolTableFormat
             }
         }
 
+        public VarData GetVarByName(string name)
+        {
+            VarData result = null;
+
+            foreach(var item in this)
+            {
+                if (item.DclData.DclItemData.Name == name)
+                    result = item;
+            }
+
+            return result;
+        }
+
         public VarDataList GetVarListByBlockLevel(int blockLevel)
         {
             var result = new VarDataList();

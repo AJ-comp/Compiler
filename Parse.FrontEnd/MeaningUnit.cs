@@ -63,8 +63,14 @@ namespace Parse.FrontEnd
 
     public class MeaningErrInfo
     {
-        public int ErrorIndex { get; }
+        public TokenData ErrorToken { get; }
         public string ErrorMessage { get; }
+
+        public MeaningErrInfo(TokenData errorToken, string errorMessage)
+        {
+            ErrorToken = errorToken;
+            ErrorMessage = errorMessage;
+        }
     }
 
     public class MeaningErrInfoList : List<MeaningErrInfo>

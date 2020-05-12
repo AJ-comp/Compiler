@@ -68,5 +68,32 @@ namespace Parse.FrontEnd.Grammars.Properties {
                 return ResourceManager.GetString("MCL0000", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   {0} is not defined.과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        internal static string MCL0001 {
+            get {
+                return ResourceManager.GetString("MCL0001", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Value can not be changed because the constant type.과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        internal static string MCL0002 {
+            get {
+                return ResourceManager.GetString("MCL0002", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   It can not be allocated because the data type differs.과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        internal static string MCL0003 {
+            get {
+                return ResourceManager.GetString("MCL0003", resourceCulture);
+            }
+        }
     }
 }

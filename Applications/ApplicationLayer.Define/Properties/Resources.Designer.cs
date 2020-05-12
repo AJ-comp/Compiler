@@ -376,6 +376,15 @@ namespace ApplicationLayer.Define.Properties {
         }
         
         /// <summary>
+        ///   Inter language과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string InterLanguage {
+            get {
+                return ResourceManager.GetString("InterLanguage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Japanese과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string Japanese {

@@ -51,7 +51,7 @@ namespace ApplicationLayer.ViewModels.ToolWindowViewModels
                     SymbolDatas.IsExpanded = true;
 
                     foreach (var item in symbolTable.VarDataList)
-                        SymbolDatas.Children.First().AddChildren(new VarTreeNodeModel(item.DclData, offset++));
+                        SymbolDatas.Children.First().AddChildren(new VarTreeNodeModel(item.DclData, item.Offset));
 
                     foreach (var item in symbolTable.FuncDataList)
                         SymbolDatas.Children.First().AddChildren(new FuncTreeNodeModel(item));

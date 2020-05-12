@@ -28,7 +28,8 @@ namespace Parse.FrontEnd.Ast
         public int Count => ((IList<TreeSymbol>)_symbols).Count;
         public bool IsReadOnly => ((IList<TreeSymbol>)_symbols).IsReadOnly;
         public SymbolTable ConnectedSymbolTable { get; set; }
-        public MeaningErrInfoList ConnectedErrInfoList { get; set; }
+        public MeaningErrInfoList ConnectedErrInfoList { get; } = new MeaningErrInfoList();
+        public string ConnectedInterLanguage { get; set; } = string.Empty;
         public override bool HasVirtualChild
         {
             get
@@ -65,6 +66,16 @@ namespace Parse.FrontEnd.Ast
         public object ActionLogic(SymbolTable symbolTable, int blockLevel, int offset) 
             => this._signPost?.MeaningUnit?.ActionLogic(this, blockLevel, offset);
 
+        /// <summary>
+        /// Remove all connected information on this tree.
+        /// </summary>
+        public void ClearConnectedInfo()
+        {
+            ConnectedSymbolTable = null;
+            ConnectedErrInfoList.Clear();
+            ConnectedInterLanguage = string.Empty;
+        }
+
         public void Add(TreeSymbol item)
         {
             item.Parent = this;
@@ -77,6 +88,7 @@ namespace Parse.FrontEnd.Ast
             foreach (var item in _symbols) item.Parent = null;
 
             ((IList<TreeSymbol>)_symbols).Clear();
+            ClearConnectedInfo();
         }
 
         public bool Contains(TreeSymbol item)

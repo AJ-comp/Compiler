@@ -42,6 +42,7 @@
                         <Menu>
                             <MenuItem Command="{x:Static commands:MenuActionCommands.ParsingHistory}"/>
                             <MenuItem Command="{x:Static commands:MenuActionCommands.ShowParseTreeCommand}"/>
+                            <MenuItem Command="{x:Static commands:MenuActionCommands.ShowInterLanguageCommand}"/>
                         </Menu>
                     </Setter.Value>
                 </Setter>

@@ -120,4 +120,13 @@
   <data name="MCL0000" xml:space="preserve">
     <value>{0} 함수가 이미 정의되었습니다.</value>
   </data>
+  <data name="MCL0001" xml:space="preserve">
+    <value>{0} 가 선언되지 않았습니다.</value>
+  </data>
+  <data name="MCL0002" xml:space="preserve">
+    <value>상수타입이므로 값을 변경할 수 없습니다.</value>
+  </data>
+  <data name="MCL0003" xml:space="preserve">
+    <value>데이터 타입이 다르므로 할당할 수 없습니다.</value>
+  </data>
 </root>

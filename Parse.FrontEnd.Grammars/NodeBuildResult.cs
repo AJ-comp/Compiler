@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace Parse.FrontEnd.Grammars
 {
-    public class NodeCheckResult
+    public class NodeBuildResult
     {
         public object Data { get; }
         public SymbolTable symbolTable { get; }
 
-        public NodeCheckResult(object data, SymbolTable symbolTable)
+        public NodeBuildResult(object data, SymbolTable symbolTable)
         {
             Data = data;
             this.symbolTable = symbolTable;

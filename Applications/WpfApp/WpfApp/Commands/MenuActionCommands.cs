@@ -432,6 +432,25 @@ namespace ApplicationLayer.WpfApp.Commands
             });
 
 
+        /// This command shows inter-language for selected document.
+        public static readonly RelayUICommand ShowInterLanguageCommand = new RelayUICommand(CommonResource.InterLanguage,
+            () =>
+            {
+                //                if ((docViewModel is EditorTypeViewModel) == false) return;
+                var mainViewModel = RootWindow.DataContext as MainViewModel;
+
+                var selDoc = mainViewModel.SolutionExplorer.SelectedDocument;
+                if ((selDoc is EditorTypeViewModel) == false) return;
+                var editorViewModel = mainViewModel.SolutionExplorer.SelectedDocument as EditorTypeViewModel;
+                var textDoc = new TextViewModel(editorViewModel.InterLanguage, selDoc.Title + " " + CommonResource.InterLanguage);
+                mainViewModel.SolutionExplorer.Documents.Add(textDoc);
+                mainViewModel.SolutionExplorer.SelectedDocument = textDoc;
+            }, () =>
+            {
+                return true;
+            });
+
+
         /// <summary>
         /// This command is executed if docking windows were closed.
         /// </summary>

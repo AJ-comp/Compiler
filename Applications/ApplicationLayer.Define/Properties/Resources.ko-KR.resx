@@ -381,4 +381,7 @@
   <data name="TreeSymbolDetailView" xml:space="preserve">
     <value>심벌 세부 정보 창</value>
   </data>
+  <data name="InterLanguage" xml:space="preserve">
+    <value>중간 언어</value>
+  </data>
 </root>

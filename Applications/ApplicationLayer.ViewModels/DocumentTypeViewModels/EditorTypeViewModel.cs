@@ -50,6 +50,7 @@ namespace ApplicationLayer.ViewModels.DocumentTypeViewModels
         public TreeSymbol ParseTree { get; private set; }
         public TreeSymbol Ast { get; private set; }
         public DataTable ParsingHistory { get; private set; }
+        public string InterLanguage { get; private set; }
 
         public int CaretIndex
         {
@@ -142,6 +143,8 @@ namespace ApplicationLayer.ViewModels.DocumentTypeViewModels
                 var funcTreeNode = new FuncTreeNodeModel(item);
                 _fileNode.AddChildren(funcTreeNode);
             }
+
+            InterLanguage = this.ParserSnippet.Parser.Grammar.SDTS.GenerateCode(astRoot);
         }
 
 

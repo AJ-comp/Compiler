@@ -361,4 +361,7 @@
   <data name="TreeSymbolDetailView" xml:space="preserve">
     <value>Tree symbol detail view</value>
   </data>
+  <data name="InterLanguage" xml:space="preserve">
+    <value>Inter language</value>
+  </data>
 </root>
