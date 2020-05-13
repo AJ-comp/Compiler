@@ -114,6 +114,8 @@
     <Compile Include="Converters\MouseDoubleClickIndexConverter.cs" />
     <Compile Include="Converters\SelectedItemConverter.cs" />
     <Compile Include="Converters\StringToFontFamilyConverter.cs" />
+    <Compile Include="CustomStyleSelector.cs" />
+    <Compile Include="CustomTemplateSelector.cs" />
     <Compile Include="DefaultTreeListBoxItemAdapter.cs" />
     <Compile Include="DialogViews\OptionViews\FontsAndColorsView.xaml.cs">
       <DependentUpon>FontsAndColorsView.xaml</DependentUpon>
@@ -121,8 +123,8 @@
     <Compile Include="DialogViews\OptionViews\OptionDialog.xaml.cs">
       <DependentUpon>OptionDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="DocumentTypeViews\TextView.xaml.cs">
-      <DependentUpon>TextView.xaml</DependentUpon>
+    <Compile Include="DocumentTypeViews\UCodeView.xaml.cs">
+      <DependentUpon>UCodeView.xaml</DependentUpon>
     </Compile>
     <Compile Include="MenusForTarget.cs" />
     <Compile Include="MenusForTargetCollection.cs" />
@@ -233,7 +235,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="DocumentTypeViews\TextView.xaml">
+    <Page Include="DocumentTypeViews\UCodeView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

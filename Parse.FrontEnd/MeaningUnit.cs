@@ -58,6 +58,8 @@ namespace Parse.FrontEnd
 
             return !left.Equals(right);
         }
+
+        public override string ToString() => Name;
     }
 
 

@@ -5,6 +5,7 @@ using ApplicationLayer.Common.Helpers;
 using ApplicationLayer.Common.Interfaces;
 using ApplicationLayer.Common.Utilities;
 using ApplicationLayer.Models.SolutionPackage;
+using ApplicationLayer.ViewModels;
 using ApplicationLayer.ViewModels.DialogViewModels;
 using ApplicationLayer.ViewModels.DialogViewModels.OptionViewModels;
 using ApplicationLayer.ViewModels.DockingItemViewModels;
@@ -441,8 +442,10 @@ namespace ApplicationLayer.WpfApp.Commands
 
                 var selDoc = mainViewModel.SolutionExplorer.SelectedDocument;
                 if ((selDoc is EditorTypeViewModel) == false) return;
+
                 var editorViewModel = mainViewModel.SolutionExplorer.SelectedDocument as EditorTypeViewModel;
-                var textDoc = new TextViewModel(editorViewModel.InterLanguage, selDoc.Title + " " + CommonResource.InterLanguage);
+                var modelsToDisplay = UcodeDisplayEditor.Edit(editorViewModel.InterLanguage, editorViewModel.Grammar);
+                var textDoc = new UCodeViewModel(modelsToDisplay, selDoc.Title + " " + CommonResource.InterLanguage);
                 mainViewModel.SolutionExplorer.Documents.Add(textDoc);
                 mainViewModel.SolutionExplorer.SelectedDocument = textDoc;
             }, () =>

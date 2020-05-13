@@ -65,8 +65,8 @@
         <documentViews:GrammarInfoView/>
     </DataTemplate>
 
-    <DataTemplate DataType="{x:Type documentViewModels:TextViewModel}">
-        <documentViews:TextView/>
+    <DataTemplate DataType="{x:Type documentViewModels:UCodeViewModel}">
+        <documentViews:UCodeView/>
     </DataTemplate>
 
 

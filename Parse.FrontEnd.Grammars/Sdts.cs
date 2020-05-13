@@ -1,5 +1,6 @@
 ﻿using Parse.FrontEnd.Ast;
 using System;
+using System.Collections.Generic;
 using System.Reflection;
 
 namespace Parse.FrontEnd.Grammars
@@ -55,6 +56,6 @@ namespace Parse.FrontEnd.Grammars
         public abstract event EventHandler<SementicErrorArgs> SementicErrorEventHandler;
 
         public abstract SementicAnalysisResult Process(TreeSymbol symbol);
-        public abstract string GenerateCode(TreeSymbol symbol);
+        public abstract IReadOnlyList<TreeNonTerminal> GenerateCode(TreeSymbol symbol);
     }
 }

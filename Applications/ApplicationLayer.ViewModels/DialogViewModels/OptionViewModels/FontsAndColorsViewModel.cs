@@ -65,8 +65,10 @@ namespace ApplicationLayer.ViewModels.DialogViewModels.OptionViewModels
             {
                 if (_instance == null)
                 {
-                    _instance = new FontsAndColorsViewModel();
-                    _instance.Grammar = new MiniCGrammar();   // temp
+                    _instance = new FontsAndColorsViewModel
+                    {
+                        Grammar = new MiniCGrammar()   // temp
+                    };
                     _instance.SelectedItem = _instance.Root.Children[0] as HighlightTreeNodeModel;
                 }
 

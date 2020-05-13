@@ -18,9 +18,9 @@ namespace ApplicationLayer.Views.DocumentTypeViews
     /// <summary>
     /// TextView.xaml에 대한 상호 작용 논리
     /// </summary>
-    public partial class TextView : UserControl
+    public partial class UCodeView : UserControl
     {
-        public TextView()
+        public UCodeView()
         {
             InitializeComponent();
         }

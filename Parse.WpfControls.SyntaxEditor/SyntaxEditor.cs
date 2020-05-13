@@ -263,9 +263,11 @@ namespace Parse.WpfControls.SyntaxEditor
                                                                                                                       FindResource("StructInActive16Path") as BitmapImage,
                                                                                                                       string.Format(Properties.Resources.DisplayOnly, Properties.Resources.Structure)));
 
-            this._workerManager = new Thread(WokerManagerLogic);
-            this._workerManager.IsBackground = true;
-            this._workerManager.Priority = ThreadPriority.Lowest;
+            this._workerManager = new Thread(WokerManagerLogic)
+            {
+                IsBackground = true,
+                Priority = ThreadPriority.Lowest
+            };
             this._workerManager.Start();
         }
 

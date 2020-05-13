@@ -8,6 +8,7 @@ using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using Parse.FrontEnd.Ast;
 using Parse.FrontEnd.DrawingSupport;
+using Parse.FrontEnd.Grammars;
 using Parse.FrontEnd.Grammars.MiniC;
 using Parse.FrontEnd.Grammars.MiniC.SymbolTableFormat;
 using Parse.FrontEnd.Parsers.Datas;
@@ -30,6 +31,7 @@ namespace ApplicationLayer.ViewModels.DocumentTypeViewModels
         private object _lockObject = new object();
         private int _caretIndex = 0;
         private FileTreeNodeModel _fileNode;
+        private ParserSnippet _parserSnippet;
         private List<HighlightMapItem> _highlightMaps = new List<HighlightMapItem>();
         private RelayCommand<ParsingCompletedEventArgs> _parsingCompletedCommand = null;
 
@@ -44,13 +46,14 @@ namespace ApplicationLayer.ViewModels.DocumentTypeViewModels
         public string Data => _fileNode.Data;
         public string FileName => _fileNode.FileName;
         public StringCollection CloseCharacters { get; } = new StringCollection();
+        public Grammar Grammar { get; } = new MiniCGrammar();
 
         public TokenizeImpactRanges RecentTokenizeHistory { get; } = new TokenizeImpactRanges();
-        public ParserSnippet ParserSnippet { get; } = ParserFactory.Instance.GetParser(ParserFactory.ParserKind.SLR_Parser, new MiniCGrammar()).NewParserSnippet();
+        public ParserSnippet ParserSnippet => _parserSnippet;
         public TreeSymbol ParseTree { get; private set; }
         public TreeSymbol Ast { get; private set; }
         public DataTable ParsingHistory { get; private set; }
-        public string InterLanguage { get; private set; }
+        public IReadOnlyList<TreeNonTerminal> InterLanguage { get; private set; }
 
         public int CaretIndex
         {
@@ -88,6 +91,7 @@ namespace ApplicationLayer.ViewModels.DocumentTypeViewModels
         public EditorTypeViewModel(FileTreeNodeModel fileNode) : base(fileNode?.FileName, fileNode?.FullPath, fileNode?.FullPath)
         {
             this._fileNode = fileNode;
+            this._parserSnippet = ParserFactory.Instance.GetParser(ParserFactory.ParserKind.SLR_Parser, Grammar).NewParserSnippet();
 
             this.CloseCharacters.Add("{");
             this.CloseCharacters.Add("}");

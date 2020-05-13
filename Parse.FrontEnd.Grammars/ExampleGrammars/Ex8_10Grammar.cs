@@ -2,6 +2,7 @@
 using Parse.FrontEnd.Grammars.Properties;
 using Parse.FrontEnd.RegularGrammar;
 using System;
+using System.Collections.Generic;
 
 namespace Parse.FrontEnd.Grammars.ExampleGrammars
 {
@@ -58,9 +59,9 @@ namespace Parse.FrontEnd.Grammars.ExampleGrammars
             return null;
         }
 
-        public override string GenerateCode(TreeSymbol symbol)
+        public override IReadOnlyList<TreeNonTerminal> GenerateCode(TreeSymbol symbol)
         {
-            return string.Empty;
+            return null;
         }
     }
 }

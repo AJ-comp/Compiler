@@ -41,6 +41,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AJGrammar.cs" />
+    <Compile Include="MiniC\Sdts\MiniCSdtsBuildDcl.cs" />
+    <Compile Include="MiniC\Sdts\MiniCSdtsBuildExpression.cs" />
+    <Compile Include="MiniC\Sdts\MiniCSdtsBuildStatement.cs" />
+    <Compile Include="MiniC\Sdts\MiniCSdtsFactory.cs" />
     <Compile Include="MiniC\SymbolTableFormat\MiniCSymbolTable.cs" />
     <Compile Include="NodeBuildResult.cs" />
     <Compile Include="Properties\AlarmCodes.Designer.cs">
@@ -58,7 +62,7 @@
     <Compile Include="ExampleGrammars\Ex8_9Grammar.cs" />
     <Compile Include="Grammar.cs" />
     <Compile Include="IStorableToHashTable.cs" />
-    <Compile Include="MiniC\MiniCSdts.cs" />
+    <Compile Include="MiniC\Sdts\MiniCSdtsAction.cs" />
     <Compile Include="MiniC\SymbolTableFormat\FuncData.cs" />
     <Compile Include="MiniC\SymbolTableFormat\VarTable.cs" />
     <Compile Include="Properties\Resource.Designer.cs">

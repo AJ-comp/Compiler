@@ -1,6 +1,7 @@
 ﻿using Parse.FrontEnd.Ast;
 using Parse.FrontEnd.RegularGrammar;
 using System;
+using System.Collections.Generic;
 using static Parse.FrontEnd.Grammars.Sdts;
 
 namespace Parse.FrontEnd.Grammars.PracticeGrammars
@@ -50,9 +51,9 @@ namespace Parse.FrontEnd.Grammars.PracticeGrammars
             return null;
         }
 
-        public override string GenerateCode(TreeSymbol symbol)
+        public override IReadOnlyList<TreeNonTerminal> GenerateCode(TreeSymbol symbol)
         {
-            return string.Empty;
+            return null;
         }
     }
 }

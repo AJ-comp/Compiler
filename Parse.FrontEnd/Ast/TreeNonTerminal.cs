@@ -29,7 +29,7 @@ namespace Parse.FrontEnd.Ast
         public bool IsReadOnly => ((IList<TreeSymbol>)_symbols).IsReadOnly;
         public SymbolTable ConnectedSymbolTable { get; set; }
         public MeaningErrInfoList ConnectedErrInfoList { get; } = new MeaningErrInfoList();
-        public string ConnectedInterLanguage { get; set; } = string.Empty;
+        public List<object> ConnectedInterLanguage { get; } = new List<object>();
         public override bool HasVirtualChild
         {
             get
@@ -58,6 +58,22 @@ namespace Parse.FrontEnd.Ast
             }
         }
 
+        public string AllInputDatas
+        {
+            get
+            {
+                string result = string.Empty;
+
+                foreach (var item in Items)
+                {
+                    if (item is TreeTerminal) result += (item as TreeTerminal).Token.Input + " ";
+                    else if (item is TreeNonTerminal) result += (item as TreeNonTerminal).AllInputDatas;
+                }
+
+                return result;
+            }
+        }
+
         public TreeNonTerminal(NonTerminalSingle singleNT)
         {
             this._signPost = singleNT;
@@ -73,7 +89,7 @@ namespace Parse.FrontEnd.Ast
         {
             ConnectedSymbolTable = null;
             ConnectedErrInfoList.Clear();
-            ConnectedInterLanguage = string.Empty;
+            ConnectedInterLanguage.Clear();
         }
 
         public void Add(TreeSymbol item)

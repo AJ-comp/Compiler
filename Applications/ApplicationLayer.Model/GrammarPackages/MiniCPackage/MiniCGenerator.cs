@@ -14,9 +14,10 @@ namespace ApplicationLayer.Models.GrammarPackages.MiniCPackage
 
         public override ProjectTreeNodeModel CreateEmptyProject(string solutionPath, string projectPath, string projectName, Target target)
         {
-            MiniCProjectTreeNodeModel result = new MiniCProjectTreeNodeModel(projectPath, projectName, target);
-
-            result.OuterDependencies = new FilterTreeNodeModel(CommonResource.ExternDependency);
+            MiniCProjectTreeNodeModel result = new MiniCProjectTreeNodeModel(projectPath, projectName, target)
+            {
+                OuterDependencies = new FilterTreeNodeModel(CommonResource.ExternDependency)
+            };
 
             var resourceFilter = new FilterTreeNodeModel(CommonResource.ResourceFiles);
             result.AddFilter(resourceFilter);
@@ -32,9 +33,10 @@ namespace ApplicationLayer.Models.GrammarPackages.MiniCPackage
 
         public override ProjectTreeNodeModel CreateDefaultProject(string solutionPath, string projectPath, string projectName, Target target)
         {
-            MiniCProjectTreeNodeModel result = new MiniCProjectTreeNodeModel(projectPath, projectName, target);
-
-            result.OuterDependencies = new FilterTreeNodeModel(CommonResource.ExternDependency);
+            MiniCProjectTreeNodeModel result = new MiniCProjectTreeNodeModel(projectPath, projectName, target)
+            {
+                OuterDependencies = new FilterTreeNodeModel(CommonResource.ExternDependency)
+            };
 
             var resourceFilter = new FilterTreeNodeModel(CommonResource.ResourceFiles);
             result.AddFilter(resourceFilter);

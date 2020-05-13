@@ -192,10 +192,12 @@ namespace Parse.WpfControls
         }
         private void HookupParentPopup()
         {
-            _parentPopup = new Popup();
-            _parentPopup.MinWidth = 100;
-            _parentPopup.MinHeight = 16;
-            _parentPopup.AllowsTransparency = true;
+            _parentPopup = new Popup
+            {
+                MinWidth = 100,
+                MinHeight = 16,
+                AllowsTransparency = true
+            };
             Popup.CreateRootPopup(_parentPopup, this);
         }
         #endregion

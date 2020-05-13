@@ -189,8 +189,10 @@ namespace Parse.FrontEnd.RegularGrammar
 
         public object Clone()
         {
-            NonTerminalConcat result = new NonTerminalConcat(this.Priority, this.symbols.ToArray());
-            result.MeaningUnit = this.MeaningUnit;
+            NonTerminalConcat result = new NonTerminalConcat(this.Priority, this.symbols.ToArray())
+            {
+                MeaningUnit = this.MeaningUnit
+            };
 
             return result;
         }

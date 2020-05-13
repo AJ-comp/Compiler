@@ -1,5 +1,6 @@
 ﻿using Parse.FrontEnd.Grammars.Properties;
 using Parse.FrontEnd.RegularGrammar;
+using Parse.FrontEnd.Grammars.MiniC.Sdts;
 
 namespace Parse.FrontEnd.Grammars.MiniC
 {
@@ -99,7 +100,7 @@ namespace Parse.FrontEnd.Grammars.MiniC
         private NonTerminal actualParamList = new NonTerminal("actual_param_list");
         private NonTerminal primaryExp = new NonTerminal("primary_exp");
 
-        public override Sdts SDTS { get; }
+        public override Grammars.Sdts SDTS { get; }
 
         public MiniCGrammar()
         {
