@@ -397,9 +397,9 @@ namespace Parse.WpfControls.SyntaxEditor
             });
         }
 
-        private TreeSymbol SementicAnalysis(ParsingResult target)
+        private AstSymbol SementicAnalysis(ParsingResult target)
         {
-            TreeSymbol rootSymbol = target.ToAST;
+            AstSymbol rootSymbol = target.ToParseTree?.ToAst;
             this.ParserSnippet.Parser.Grammar.SDTS.Process(rootSymbol);
             ParsingFailedListPreProcess(target);
 

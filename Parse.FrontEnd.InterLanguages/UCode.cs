@@ -40,6 +40,15 @@ namespace Parse.FrontEnd.InterLanguages
 
                 foreach (var operand in operands) Operands.Add(operand.ToString());
             }
+
+            public override string ToString()
+            {
+                string result = string.Format("{0} {1}", Label, OpCode);
+
+                foreach (var item in Operands) result += " " + item;
+
+                return result + Comment;
+            }
         }
 
         public class Command

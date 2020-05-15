@@ -68,11 +68,12 @@
     <Compile Include="AlarmData.cs" />
     <Compile Include="ChangedFileList.cs" />
     <Compile Include="Document.cs" />
+    <Compile Include="GraphModels\AstSymbolVertex.cs" />
     <Compile Include="GraphModels\EbnfTreeVertex.cs" />
     <Compile Include="GraphModels\PocEdge.cs" />
     <Compile Include="GraphModels\PocGraph.cs" />
     <Compile Include="GraphModels\PocVertex.cs" />
-    <Compile Include="GraphModels\TreeSymbolVertex.cs" />
+    <Compile Include="GraphModels\ParseTreeSymbolVertex.cs" />
     <Compile Include="HighlightTreeNodeModel.cs" />
     <Compile Include="MessageData.cs" />
     <Compile Include="GrammarPackages\IGrammarFactory.cs" />

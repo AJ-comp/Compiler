@@ -46,7 +46,7 @@ namespace Parse.FrontEnd.Parsers.Logical
 
             if (parsingUnit.Action.Direction == ActionDir.shift)
             {
-                var treeTerminal = new TreeTerminal(parsingUnit.InputValue);
+                var treeTerminal = new ParseTreeTerminal(parsingUnit.InputValue);
                 parsingBlock.TokenTree = treeTerminal;
                 parsingUnit.AfterStack.Push(treeTerminal);
                 parsingUnit.AfterStack.Push(parsingUnit.Action.Dest);
@@ -54,18 +54,18 @@ namespace Parse.FrontEnd.Parsers.Logical
             else if (parsingUnit.Action.Direction == ActionDir.reduce)
             {
                 var reduceDest = parsingUnit.Action.Dest as NonTerminalSingle;
-                var dataToInsert = new TreeNonTerminal(reduceDest);
+                var dataToInsert = new ParseTreeNonTerminal(reduceDest);
 
                 for (int i = 0; i < reduceDest.Count * 2; i++)
                 {
                     var data = parsingUnit.AfterStack.Pop();
                     if (i % 2 > 0)
-                        dataToInsert.Insert(0, (data as TreeSymbol));
+                        dataToInsert.Insert(0, (data as ParseTreeSymbol));
                 }
                 parsingUnit.AfterStack.Push(dataToInsert);
             }
             else if (parsingUnit.Action.Direction == ActionDir.epsilon_reduce)
-                parsingUnit.AfterStack.Push(new TreeNonTerminal(parsingUnit.Action.Dest as NonTerminalSingle));
+                parsingUnit.AfterStack.Push(new ParseTreeNonTerminal(parsingUnit.Action.Dest as NonTerminalSingle));
             else if(parsingUnit.Action.Direction == ActionDir.moveto)
                 parsingUnit.AfterStack.Push((int)parsingUnit.Action.Dest);
         }
@@ -81,7 +81,7 @@ namespace Parse.FrontEnd.Parsers.Logical
             parsingUnit.ChangeToNormalState();
             var topData = parsingUnit.BeforeStack.Peek();
 
-            if (topData is TreeNonTerminal)
+            if (topData is ParseTreeNonTerminal)
             {
                 parsingUnit.ChangeToFailedState();
                 return false;
@@ -124,13 +124,13 @@ namespace Parse.FrontEnd.Parsers.Logical
             parsingUnit.ChangeToNormalState();
             var topData = parsingUnit.BeforeStack.Peek();
 
-            if ((topData is TreeNonTerminal) == false)
+            if ((topData is ParseTreeNonTerminal) == false)
             {
                 parsingUnit.ChangeToFailedState();
                 return false;
             }
 
-            var seenSingleNT = topData as TreeNonTerminal;
+            var seenSingleNT = topData as ParseTreeNonTerminal;
             var secondData = parsingUnit.BeforeStack.SecondItemPeek();
             LRParsingTable parsingTable = this.Parser.ParsingTable as LRParsingTable;
             var IxMetrix = parsingTable[(int)secondData];

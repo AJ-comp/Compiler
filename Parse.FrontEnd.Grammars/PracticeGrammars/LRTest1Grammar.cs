@@ -34,11 +34,11 @@ namespace Parse.FrontEnd.Grammars.PracticeGrammars
     {
         public override event EventHandler<SementicErrorArgs> SementicErrorEventHandler;
 
-        private void ActionAdd(TreeSymbol node)
+        private void ActionAdd(AstSymbol node)
         {
         }
 
-        private void ActionMul(TreeSymbol node)
+        private void ActionMul(AstSymbol node)
         {
         }
 
@@ -46,12 +46,12 @@ namespace Parse.FrontEnd.Grammars.PracticeGrammars
         {
         }
 
-        public override SementicAnalysisResult Process(TreeSymbol node)
+        public override SementicAnalysisResult Process(AstSymbol node)
         {
             return null;
         }
 
-        public override IReadOnlyList<TreeNonTerminal> GenerateCode(TreeSymbol symbol)
+        public override IReadOnlyList<AstNonTerminal> GenerateCode(AstSymbol symbol)
         {
             return null;
         }

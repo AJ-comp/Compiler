@@ -401,9 +401,9 @@ namespace ApplicationLayer.WpfApp.Commands
             {
 //                if ((docViewModel is EditorTypeViewModel) == false) return;
                 var mainViewModel = RootWindow.DataContext as MainViewModel;
-
                 var selDoc = mainViewModel.SolutionExplorer.SelectedDocument;
                 if ((selDoc is EditorTypeViewModel) == false) return;
+
                 var editorViewModel = mainViewModel.SolutionExplorer.SelectedDocument as EditorTypeViewModel;
                 var parsingHistoryDoc = new ParsingHistoryViewModel(editorViewModel.ParsingHistory, selDoc.ToolTipText);
                 mainViewModel.SolutionExplorer.Documents.Add(parsingHistoryDoc);
@@ -420,11 +420,11 @@ namespace ApplicationLayer.WpfApp.Commands
             {
                 //                if ((docViewModel is EditorTypeViewModel) == false) return;
                 var mainViewModel = RootWindow.DataContext as MainViewModel;
-
                 var selDoc = mainViewModel.SolutionExplorer.SelectedDocument;
                 if ((selDoc is EditorTypeViewModel) == false) return;
+
                 var editorViewModel = mainViewModel.SolutionExplorer.SelectedDocument as EditorTypeViewModel;
-                var parseTreeDoc = new ParseTreeViewModel(editorViewModel.ParseTree, selDoc.ToolTipText);
+                var parseTreeDoc = new ParseTreeViewModel(editorViewModel.ParseTree, editorViewModel.Ast, selDoc.ToolTipText);
                 mainViewModel.SolutionExplorer.Documents.Add(parseTreeDoc);
                 mainViewModel.SolutionExplorer.SelectedDocument = parseTreeDoc;
             }, () =>
@@ -439,12 +439,11 @@ namespace ApplicationLayer.WpfApp.Commands
             {
                 //                if ((docViewModel is EditorTypeViewModel) == false) return;
                 var mainViewModel = RootWindow.DataContext as MainViewModel;
-
                 var selDoc = mainViewModel.SolutionExplorer.SelectedDocument;
                 if ((selDoc is EditorTypeViewModel) == false) return;
 
                 var editorViewModel = mainViewModel.SolutionExplorer.SelectedDocument as EditorTypeViewModel;
-                var modelsToDisplay = UcodeDisplayEditor.Edit(editorViewModel.InterLanguage, editorViewModel.Grammar);
+                var modelsToDisplay = UcodeDisplayConverter.Convert(editorViewModel.InterLanguage, editorViewModel.Grammar);
                 var textDoc = new UCodeViewModel(modelsToDisplay, selDoc.Title + " " + CommonResource.InterLanguage);
                 mainViewModel.SolutionExplorer.Documents.Add(textDoc);
                 mainViewModel.SolutionExplorer.SelectedDocument = textDoc;

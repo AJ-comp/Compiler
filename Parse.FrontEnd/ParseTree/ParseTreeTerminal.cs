@@ -2,14 +2,15 @@
 
 namespace Parse.FrontEnd.Ast
 {
-    public class TreeTerminal : TreeSymbol
+    public class ParseTreeTerminal : ParseTreeSymbol
     {
         public TokenData Token { get; }
 
         public override bool IsVirtual => Token.IsVirtual;
         public override bool HasVirtualChild => false;
+        public override AstSymbol ToAst => (Token.Kind.Meaning) ? new AstTerminal(Token) : null;
 
-        public TreeTerminal(TokenData tokenData)
+        public ParseTreeTerminal(TokenData tokenData)
         {
             this.Token = tokenData;
         }

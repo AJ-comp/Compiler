@@ -9,37 +9,56 @@ namespace ApplicationLayer.ViewModels.DocumentTypeViewModels
     {
         public CategoryTreeNodeModel Root { get; }
 
+        private UCodeTreeNodeModel CreateUcodeTreeNodeModel(UCode.Format data)
+        {
+            var ucodeNode = new UCodeTreeNodeModel();
+
+            ucodeNode.Label = data.Label;
+            ucodeNode.OpCode = data.OpCode;
+            ucodeNode.Comment = data.Comment;
+
+            ucodeNode.Operand1 = (data.Operands.Count > 0) ? data.Operands[0] : string.Empty;
+            ucodeNode.Operand2 = (data.Operands.Count > 1) ? data.Operands[1] : string.Empty;
+            ucodeNode.Operand3 = (data.Operands.Count > 2) ? data.Operands[2] : string.Empty;
+
+            return ucodeNode;
+        }
+
         public UCodeViewModel(IReadOnlyList<UCodeDisplayModel> trees, string title) : base(title)
         {
             if (trees is null) return;
 
+            List<object> leftUnDoneList = new List<object>();
             Root = new CategoryTreeNodeModel("root");
             var parentNode = Root;
-            foreach(var nodeInfo in trees)
+
+            for (int i = 0; i < trees.Count; i++)
             {
+                var nodeInfo = trees[i];
                 var node = nodeInfo.Node;
 
-                if(nodeInfo.CategoryVisible)
+                if(nodeInfo.CategoryPos == UCodeDisplayModel.AttatchCategoryPosition.Own)
                 {
-                    parentNode = new CategoryTreeNodeModel(node.AllInputDatas);
+                    parentNode = new CategoryTreeNodeModel(node.ConnectedParseTree?.AllInputDatas);
                     Root.AddChildren(parentNode);
                 }
-
-                foreach (var statement in node.ConnectedInterLanguage)
+                else if(nodeInfo.CategoryPos == UCodeDisplayModel.AttatchCategoryPosition.Down)
                 {
-                    var ucodeNode = new UCodeTreeNodeModel();
-
-                    var format = statement as UCode.Format;
-                    ucodeNode.Label = format.Label;
-                    ucodeNode.OpCode = format.OpCode;
-                    ucodeNode.Comment = format.Comment;
-
-                    ucodeNode.Operand1 = (format.Operands.Count > 0) ? format.Operands[0] : string.Empty;
-                    ucodeNode.Operand2 = (format.Operands.Count > 1) ? format.Operands[1] : string.Empty;
-                    ucodeNode.Operand3 = (format.Operands.Count > 2) ? format.Operands[2] : string.Empty;
-
-                    parentNode.AddChildren(ucodeNode);
+                    // if current node is not a last node
+                    if(i != trees.Count - 1)
+                    {
+                        leftUnDoneList.AddRange(node.ConnectedInterLanguage);
+                        continue;
+                    }
                 }
+
+                // add a leftundone list
+                foreach (var statement in leftUnDoneList)
+                    parentNode.AddChildren(CreateUcodeTreeNodeModel(statement as UCode.Format));
+
+                // add a list on current node
+                foreach (var statement in node.ConnectedInterLanguage)
+                    parentNode.AddChildren(CreateUcodeTreeNodeModel(statement as UCode.Format));
             }
         }
     }

@@ -60,9 +60,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Ast\TreeNonTerminal.cs" />
-    <Compile Include="Ast\TreeSymbol.cs" />
-    <Compile Include="Ast\TreeTerminal.cs" />
+    <Compile Include="Ast\AstNonTerminal.cs" />
+    <Compile Include="Ast\AstSymbol.cs" />
+    <Compile Include="Ast\AstTerminal.cs" />
+    <Compile Include="ParseTree\ParseTreeNonTerminal.cs" />
+    <Compile Include="ParseTree\ParseTreeSymbol.cs" />
+    <Compile Include="ParseTree\ParseTreeTerminal.cs" />
     <Compile Include="AutoGenerator.cs" />
     <Compile Include="ChangeableDataSet.cs" />
     <Compile Include="Convert.cs" />
@@ -103,5 +106,6 @@
       <Name>Parse</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

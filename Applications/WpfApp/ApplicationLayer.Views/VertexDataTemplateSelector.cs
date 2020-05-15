@@ -12,7 +12,8 @@ namespace ApplicationLayer.Views
 
             string resourceKey = string.Empty;
             if (item.GetType() == typeof(EbnfTreeVertex)) resourceKey = "ebnfTreeVertexTemplate";
-            else if (item.GetType() == typeof(TreeSymbolVertex)) resourceKey = "treeSymbolVertexTemplate";
+            else if (item.GetType() == typeof(ParseTreeSymbolVertex)) resourceKey = "treeSymbolVertexTemplate";
+            else if (item.GetType() == typeof(AstSymbolVertex)) resourceKey = "treeSymbolVertexTemplate";
 
             return (DataTemplate)frameworkElement.FindResource(resourceKey);
         }

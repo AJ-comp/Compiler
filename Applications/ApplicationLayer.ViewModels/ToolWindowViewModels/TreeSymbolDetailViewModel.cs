@@ -28,10 +28,10 @@ namespace ApplicationLayer.ViewModels.ToolWindowViewModels
         public void ReceivedTreeSymbolDetailMessage(TreeSymbolMessage message)
         {
             if (message is null) return;
-            if (message.TreeSymbol is TreeTerminal) return;
+            if (message.TreeSymbol is AstTerminal) return;
 
             SymbolDatas.Clear();
-            var treeNonterminal = message.TreeSymbol as TreeNonTerminal;
+            var treeNonterminal = message.TreeSymbol as AstNonTerminal;
             var clickedTree = treeNonterminal;
             if (treeNonterminal.ConnectedSymbolTable is MiniCSymbolTable)
             {

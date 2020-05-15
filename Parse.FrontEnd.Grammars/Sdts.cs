@@ -38,13 +38,12 @@ namespace Parse.FrontEnd.Grammars
             Type type = this.GetType();
 
             BindingFlags Flags = BindingFlags.Instance
-                                           | BindingFlags.GetField
-                                           | BindingFlags.SetField
+                                           | BindingFlags.Public
                                            | BindingFlags.NonPublic;
 
-            foreach (var member in type.GetFields(Flags))
+            foreach (var member in type.GetProperties(Flags))
             {
-                if (member.FieldType.FullName == typeof(MeaningUnit).ToString())
+                if (member.PropertyType.FullName == typeof(MeaningUnit).ToString())
                 {
                     MeaningUnit param = member.GetValue(this) as MeaningUnit;
 
@@ -55,7 +54,7 @@ namespace Parse.FrontEnd.Grammars
 
         public abstract event EventHandler<SementicErrorArgs> SementicErrorEventHandler;
 
-        public abstract SementicAnalysisResult Process(TreeSymbol symbol);
-        public abstract IReadOnlyList<TreeNonTerminal> GenerateCode(TreeSymbol symbol);
+        public abstract SementicAnalysisResult Process(AstSymbol symbol);
+        public abstract IReadOnlyList<AstNonTerminal> GenerateCode(AstSymbol symbol);
     }
 }

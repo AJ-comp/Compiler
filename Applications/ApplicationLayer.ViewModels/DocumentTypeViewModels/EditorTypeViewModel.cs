@@ -50,10 +50,10 @@ namespace ApplicationLayer.ViewModels.DocumentTypeViewModels
 
         public TokenizeImpactRanges RecentTokenizeHistory { get; } = new TokenizeImpactRanges();
         public ParserSnippet ParserSnippet => _parserSnippet;
-        public TreeSymbol ParseTree { get; private set; }
-        public TreeSymbol Ast { get; private set; }
+        public ParseTreeSymbol ParseTree { get; private set; }
+        public AstSymbol Ast { get; private set; }
         public DataTable ParsingHistory { get; private set; }
-        public IReadOnlyList<TreeNonTerminal> InterLanguage { get; private set; }
+        public IReadOnlyList<AstNonTerminal> InterLanguage { get; private set; }
 
         public int CaretIndex
         {
@@ -120,7 +120,7 @@ namespace ApplicationLayer.ViewModels.DocumentTypeViewModels
             }
 
             this.ParsingHistory = parsingCompletedInfo.ParsingResult.ToParsingHistory;
-            this.ParseTree = parsingCompletedInfo.Ast;
+            this.ParseTree = parsingCompletedInfo.ParsingResult.ToParseTree;
             this.Ast = parsingCompletedInfo.Ast;
 
             // inform to alarm list view.
@@ -129,7 +129,7 @@ namespace ApplicationLayer.ViewModels.DocumentTypeViewModels
             // Add sementic parsing information to the current FileTreeNode.
             _fileNode.Clear();
 
-            var astRoot = parsingCompletedInfo.Ast as TreeNonTerminal;
+            var astRoot = parsingCompletedInfo.Ast as AstNonTerminal;
             var grammarSymbolTable = astRoot?.ConnectedSymbolTable as MiniCSymbolTable;
             if (grammarSymbolTable == null) return;
 

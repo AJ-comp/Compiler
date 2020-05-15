@@ -17,12 +17,12 @@ namespace Parse.FrontEnd.Grammars.MiniC
         public Terminal Number { get; } = new Terminal(TokenType.Digit.Digit10, "[0-9]+", Resource.Number, true, true);
         public Terminal LineComment { get; } = new Terminal(TokenType.SpecialToken.Comment, "//.*$", false, true);
 
-        public Terminal OpenParenthesis { get; } = new Terminal(TokenType.Operator.Parenthesis, "(");
-        public Terminal CloseParenthesis { get; } = new Terminal(TokenType.Operator.Parenthesis, ")");
-        public Terminal OpenCurlyBrace { get; } = new Terminal(TokenType.Operator.CurlyBrace, "{");
-        public Terminal CloseCurlyBrace { get; } = new Terminal(TokenType.Operator.CurlyBrace, "}");
-        public Terminal OpenSquareBrace { get; } = new Terminal(TokenType.Operator.Square, "[");
-        public Terminal CloseSquareBrace { get; } = new Terminal(TokenType.Operator.Square, "]");
+        public Terminal OpenParenthesis { get; } = new Terminal(TokenType.Operator.Parenthesis, "(", false);
+        public Terminal CloseParenthesis { get; } = new Terminal(TokenType.Operator.Parenthesis, ")", false);
+        public Terminal OpenCurlyBrace { get; } = new Terminal(TokenType.Operator.CurlyBrace, "{", false);
+        public Terminal CloseCurlyBrace { get; } = new Terminal(TokenType.Operator.CurlyBrace, "}", false);
+        public Terminal OpenSquareBrace { get; } = new Terminal(TokenType.Operator.Square, "[", false);
+        public Terminal CloseSquareBrace { get; } = new Terminal(TokenType.Operator.Square, "]", false);
 
         private Terminal scopeCommentStart = new Terminal(TokenType.SpecialToken.Comment.ScopeComment, "/*");
         private Terminal scopeCommentEnd = new Terminal(TokenType.SpecialToken.Comment.ScopeComment, "*/");
@@ -46,8 +46,8 @@ namespace Parse.FrontEnd.Grammars.MiniC
         public Terminal LessThan { get; } = new Terminal(TokenType.Operator.NormalOperator, "<");
         public Terminal GreaterEqual { get; } = new Terminal(TokenType.Operator.NormalOperator, ">=");
         public Terminal LessEqual { get; } = new Terminal(TokenType.Operator.NormalOperator, "<=");
-        public Terminal SemiColon { get; } = new Terminal(TokenType.Operator.NormalOperator, ";");
-        public Terminal Comma { get; } = new Terminal(TokenType.Operator.Comma, ",");
+        public Terminal SemiColon { get; } = new Terminal(TokenType.Operator.NormalOperator, ";", false);
+        public Terminal Comma { get; } = new Terminal(TokenType.Operator.Comma, ",", false);
 
         public Terminal LogicalOr { get; } = new Terminal(TokenType.Operator, "||");
         public Terminal LogicalAnd { get; } = new Terminal(TokenType.Operator, "&&");
@@ -99,6 +99,7 @@ namespace Parse.FrontEnd.Grammars.MiniC
         private NonTerminal actualParam = new NonTerminal("actual_param");
         private NonTerminal actualParamList = new NonTerminal("actual_param_list");
         private NonTerminal primaryExp = new NonTerminal("primary_exp");
+        private NonTerminal assignmentLeftExp = new NonTerminal("assignment_left_exp");
 
         public override Grammars.Sdts SDTS { get; }
 
@@ -154,12 +155,12 @@ namespace Parse.FrontEnd.Grammars.MiniC
             this.expression.AddItem(this.assignmentExp);
 
             this.assignmentExp.AddItem(this.logicalOrExp);
-            this.assignmentExp.AddItem(this.unaryExp + this.Assign + this.assignmentExp, sdts.Assign);
-            this.assignmentExp.AddItem(this.unaryExp + this.AddAssign + this.assignmentExp, sdts.AddAssign);
-            this.assignmentExp.AddItem(this.unaryExp + this.SubAssign + this.assignmentExp, sdts.SubAssign);
-            this.assignmentExp.AddItem(this.unaryExp + this.MulAssign + this.assignmentExp, sdts.MulAssign);
-            this.assignmentExp.AddItem(this.unaryExp + this.DivAssign + this.assignmentExp, sdts.DivAssign);
-            this.assignmentExp.AddItem(this.unaryExp + this.ModAssign + this.assignmentExp, sdts.ModAssign);
+            this.assignmentExp.AddItem(this.assignmentLeftExp + this.Assign + this.assignmentExp, sdts.Assign);
+            this.assignmentExp.AddItem(this.assignmentLeftExp + this.AddAssign + this.assignmentExp, sdts.AddAssign);
+            this.assignmentExp.AddItem(this.assignmentLeftExp + this.SubAssign + this.assignmentExp, sdts.SubAssign);
+            this.assignmentExp.AddItem(this.assignmentLeftExp + this.MulAssign + this.assignmentExp, sdts.MulAssign);
+            this.assignmentExp.AddItem(this.assignmentLeftExp + this.DivAssign + this.assignmentExp, sdts.DivAssign);
+            this.assignmentExp.AddItem(this.assignmentLeftExp + this.ModAssign + this.assignmentExp, sdts.ModAssign);
 
             this.logicalOrExp.AddItem(this.logicalAndExp);
             this.logicalOrExp.AddItem(this.logicalOrExp + this.LogicalOr + this.logicalAndExp, sdts.LogicalOr);
@@ -205,6 +206,8 @@ namespace Parse.FrontEnd.Grammars.MiniC
             this.actualParamList.AddItem(this.actualParamList + this.Comma + this.assignmentExp);
 
             this.primaryExp.AddItem(this.Ident | this.Number | this.OpenParenthesis + this.expression + this.CloseParenthesis);
+
+            this.assignmentLeftExp.AddItem(this.Ident | this.OpenParenthesis + this.Ident + this.CloseParenthesis);
 
 
             this.Optimization();

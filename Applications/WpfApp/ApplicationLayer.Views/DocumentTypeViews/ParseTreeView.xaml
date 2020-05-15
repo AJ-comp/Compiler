@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:lex="http://wpflocalizeextension.codeplex.com"
              xmlns:graphsharp="clr-namespace:GraphSharp.Controls;assembly=GraphSharp.Controls"
              xmlns:tree="clr-namespace:GraphSharp.Algorithms.Layout.Simple.Tree;assembly=GraphSharp"
              xmlns:zoom="clr-namespace:WPFExtensions.Controls;assembly=WPFExtensions"
@@ -19,6 +20,10 @@
 
         <StackPanel Grid.Row="0" Orientation="Horizontal">
             <TextBlock Text="Width" Margin="10 0 10 0"/>
+            <RadioButton Content="{lex:Loc Key=ViewParseTree}" 
+                                IsChecked="{Binding SelectedParseTreeViewMode}" Margin="0 0 10 0"/>
+            <RadioButton Content="{lex:Loc Key=ViewAst}"
+                                IsChecked="{Binding SelectedAstViewMode}" Margin="0 0 10 0"/>
             <Slider x:Name="widthSlider" Minimum="0" Maximum="100" Width="100"/>
         </StackPanel>
 

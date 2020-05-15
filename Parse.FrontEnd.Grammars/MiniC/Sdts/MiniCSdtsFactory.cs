@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Parse.FrontEnd.Ast;
+using Parse.FrontEnd.Grammars.MiniC.SymbolTableFormat;
+using System;
+using System.Collections.Generic;
 
 namespace Parse.FrontEnd.Grammars.MiniC.Sdts
 {
@@ -87,6 +90,34 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
             this.PostInc.ActionLogic = this.ActionPostInc;
             this.PostDec.ActionLogic = this.ActionPostDec;
 
+        }
+
+        public override SementicAnalysisResult Process(AstSymbol symbol)
+        {
+            MeaningErrInfoList errList = new MeaningErrInfoList();
+            if (symbol == null) return new SementicAnalysisResult(errList, null);
+
+            try
+            {
+                this.BuildProgramNode(symbol as AstNonTerminal, new MiniCSymbolTable(), 0, 0);
+                return new SementicAnalysisResult(errList, null);
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
+        public override IReadOnlyList<AstNonTerminal> GenerateCode(AstSymbol symbol)
+        {
+            List<AstNonTerminal> result = new List<AstNonTerminal>();
+
+            if (symbol != null)
+            {
+                result = this.ActionProgram(symbol as AstNonTerminal, 0, 0) as List<AstNonTerminal>;
+            }
+
+            return result;
         }
     }
 }

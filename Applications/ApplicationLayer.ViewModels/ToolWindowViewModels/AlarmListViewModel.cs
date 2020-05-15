@@ -86,6 +86,8 @@ namespace ApplicationLayer.ViewModels.ToolWindowViewModels
 
         public void ReceivedAlarmMessage(AlarmMessage message)
         {
+            if (message is null) return;
+
             List<AlarmData> alarmList = new List<AlarmData>();
             var editorViewModel = message.Editor as EditorTypeViewModel;
 

@@ -7,18 +7,17 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
 {
     public partial class MiniCSdts
     {
-        private object BuildProgramNode(TreeNonTerminal curNode, MiniCSymbolTable baseSymbolTable, int blockLevel, int offset)
+        private object BuildProgramNode(AstNonTerminal curNode, MiniCSymbolTable baseSymbolTable, int blockLevel, int offset)
         {
             int funcOffset = 0;
             curNode.ClearConnectedInfo();
-            if (curNode.HasVirtualChild) return null;
 
             foreach (var item in curNode.Items)
             {
-                var astNonTerminal = item as TreeNonTerminal;
+                var astNonTerminal = item as AstNonTerminal;
 
                 // Global variable
-                if (astNonTerminal._signPost.MeaningUnit == this.Dcl)
+                if (astNonTerminal.SignPost.MeaningUnit == this.Dcl)
                 {
                     var nodeCheckResult = this.BuildDclNode(astNonTerminal, baseSymbolTable, blockLevel, offset++);
                     VarData varData = new VarData
@@ -30,7 +29,7 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
                     curNode.ConnectedSymbolTable = baseSymbolTable;
                 }
                 // Global function
-                else if (astNonTerminal._signPost.MeaningUnit == this.FuncDef)
+                else if (astNonTerminal.SignPost.MeaningUnit == this.FuncDef)
                 {
                     var nodeCheckResult = this.BuildFuncDefNode(astNonTerminal, baseSymbolTable, blockLevel, 0);
                     var funcData = nodeCheckResult.Data as FuncData;
@@ -42,20 +41,19 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
             return null;
         }
 
-        private NodeBuildResult BuildFuncDefNode(TreeNonTerminal curNode, MiniCSymbolTable baseSymbolTable, int blockLevel, int offset)
+        private NodeBuildResult BuildFuncDefNode(AstNonTerminal curNode, MiniCSymbolTable baseSymbolTable, int blockLevel, int offset)
         {
             FuncData funcHeadData = new FuncData();
             var newSymbolTable = new MiniCSymbolTable(baseSymbolTable);
             curNode.ClearConnectedInfo();
-            if (curNode.HasVirtualChild) return new NodeBuildResult(funcHeadData, newSymbolTable);
 
             foreach (var item in curNode.Items)
             {
-                var astNonTerminal = item as TreeNonTerminal;
+                var astNonTerminal = item as AstNonTerminal;
 
-                if (astNonTerminal._signPost.MeaningUnit == this.FuncHead)
+                if (astNonTerminal.SignPost.MeaningUnit == this.FuncHead)
                 {
-                    var nodeCheckResult = this.BuildFuncHeadNode(item as TreeNonTerminal, newSymbolTable, blockLevel + 1, offset);
+                    var nodeCheckResult = this.BuildFuncHeadNode(item as AstNonTerminal, newSymbolTable, blockLevel + 1, offset);
                     funcHeadData = nodeCheckResult.Data as FuncData;
                     offset = funcHeadData.ParamVars.Count;
 
@@ -65,8 +63,8 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
 
                     curNode.ConnectedSymbolTable = newSymbolTable;
                 }
-                else if (astNonTerminal._signPost.MeaningUnit == this.CompoundSt)
-                    this.BuildCompoundStNode(item as TreeNonTerminal, newSymbolTable, blockLevel + 1, offset);
+                else if (astNonTerminal.SignPost.MeaningUnit == this.CompoundSt)
+                    this.BuildCompoundStNode(item as AstNonTerminal, newSymbolTable, blockLevel + 1, offset);
             }
 
             return new NodeBuildResult(funcHeadData, newSymbolTable);
@@ -74,30 +72,29 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
 
         // format summary
         // DclSpec Ident FormalPara
-        private NodeBuildResult BuildFuncHeadNode(TreeNonTerminal curNode, MiniCSymbolTable baseSymbolTable, int blockLevel, int offset)
+        private NodeBuildResult BuildFuncHeadNode(AstNonTerminal curNode, MiniCSymbolTable baseSymbolTable, int blockLevel, int offset)
         {
             FuncData result = new FuncData();
             curNode.ClearConnectedInfo();
-            if (curNode.HasVirtualChild) return new NodeBuildResult(result, null);
 
             foreach (var item in curNode.Items)
             {
                 // ident
-                if (item is TreeTerminal)
+                if (item is AstTerminal)
                 {
-                    var token = item as TreeTerminal;
+                    var token = item as AstTerminal;
 
                     result.NameToken = token.Token;
                 }
                 else
                 {
-                    var astNonterminal = item as TreeNonTerminal;
-                    if (astNonterminal._signPost.MeaningUnit == this.DclSpec)   // return type
+                    var astNonterminal = item as AstNonTerminal;
+                    if (astNonterminal.SignPost.MeaningUnit == this.DclSpec)   // return type
                     {
                         var nodeCheckResult = this.BuildDclSpecNode(astNonterminal, baseSymbolTable, blockLevel, offset);
                         result.DclSpecData = nodeCheckResult.Data as DclSpecData;
                     }
-                    else if (astNonterminal._signPost.MeaningUnit == this.FormalPara)
+                    else if (astNonterminal.SignPost.MeaningUnit == this.FormalPara)
                     {
                         var nodeCheckResult = this.BuildFormalParaNode(astNonterminal, baseSymbolTable, blockLevel, offset);
                         var datas = nodeCheckResult.Data as List<VarData>;
@@ -112,30 +109,29 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
             return new NodeBuildResult(result, null);
         }
 
-        private NodeBuildResult BuildDclSpecNode(TreeNonTerminal curNode, SymbolTable baseSymbolTable, int blockLevel, int offset)
+        private NodeBuildResult BuildDclSpecNode(AstNonTerminal curNode, SymbolTable baseSymbolTable, int blockLevel, int offset)
         {
             DclSpecData result = new DclSpecData();
             curNode.ClearConnectedInfo();
-            if (curNode.HasVirtualChild) return new NodeBuildResult(result, baseSymbolTable);
 
             foreach (var item in curNode.Items)
             {
-                if (item is TreeTerminal) continue;
+                if (item is AstTerminal) continue;
 
-                var astNonTerminal = item as TreeNonTerminal;
-                if (astNonTerminal._signPost.MeaningUnit == this.ConstNode)
+                var astNonTerminal = item as AstNonTerminal;
+                if (astNonTerminal.SignPost.MeaningUnit == this.ConstNode)
                 {
-                    result.ConstToken = (astNonTerminal.Items[0] as TreeTerminal).Token;
+                    result.ConstToken = (astNonTerminal.Items[0] as AstTerminal).Token;
                 }
-                else if (astNonTerminal._signPost.MeaningUnit == this.VoidNode)
+                else if (astNonTerminal.SignPost.MeaningUnit == this.VoidNode)
                 {
                     result.DataType = DataType.Void;
-                    result.DataTypeToken = (astNonTerminal.Items[0] as TreeTerminal).Token;
+                    result.DataTypeToken = (astNonTerminal.Items[0] as AstTerminal).Token;
                 }
-                else if (astNonTerminal._signPost.MeaningUnit == this.IntNode)
+                else if (astNonTerminal.SignPost.MeaningUnit == this.IntNode)
                 {
                     result.DataType = DataType.Int;
-                    result.DataTypeToken = (astNonTerminal.Items[0] as TreeTerminal).Token;
+                    result.DataTypeToken = (astNonTerminal.Items[0] as AstTerminal).Token;
                 }
             }
 
@@ -144,19 +140,18 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
 
         // format summary
         // ( ParamDcl? )
-        private NodeBuildResult BuildFormalParaNode(TreeNonTerminal curNode, MiniCSymbolTable baseSymbolTable, int blockLevel, int offset)
+        private NodeBuildResult BuildFormalParaNode(AstNonTerminal curNode, MiniCSymbolTable baseSymbolTable, int blockLevel, int offset)
         {
             List<VarData> result = new List<VarData>();
             curNode.ClearConnectedInfo();
-            if (curNode.HasVirtualChild) return new NodeBuildResult(result, baseSymbolTable);
 
             foreach (var item in curNode.Items)
             {
-                if (item is TreeTerminal) continue;   // skip ( token and ) token
+                if (item is AstTerminal) continue;   // skip ( token and ) token
 
                 VarData varData = new VarData();
-                var astNonterminal = item as TreeNonTerminal;
-                if (astNonterminal._signPost.MeaningUnit == this.ParamDcl)
+                var astNonterminal = item as AstNonTerminal;
+                if (astNonterminal.SignPost.MeaningUnit == this.ParamDcl)
                 {
                     var nodeCheckResult = this.BuildParamDcl(astNonterminal, baseSymbolTable, blockLevel, offset);
                     varData.DclData = nodeCheckResult.Data as DclData;
@@ -176,7 +171,7 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
 
         // format summary
         // DclSpec (SimpleVar | ArrayVar)
-        private NodeBuildResult BuildParamDcl(TreeNonTerminal curNode, MiniCSymbolTable baseSymbolTable, int blockLevel, int offset)
+        private NodeBuildResult BuildParamDcl(AstNonTerminal curNode, MiniCSymbolTable baseSymbolTable, int blockLevel, int offset)
         {
             DclData result = new DclData
             {
@@ -185,25 +180,24 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
             };
 
             curNode.ClearConnectedInfo();
-            if (curNode.HasVirtualChild) return new NodeBuildResult(result, baseSymbolTable);
 
             foreach (var item in curNode.Items)
             {
                 // ident
-                if (item is TreeTerminal) continue;
+                if (item is AstTerminal) continue;
 
-                var astNonterminal = item as TreeNonTerminal;
-                if (astNonterminal._signPost.MeaningUnit == this.DclSpec)
+                var astNonterminal = item as AstNonTerminal;
+                if (astNonterminal.SignPost.MeaningUnit == this.DclSpec)
                 {
                     var nodeCheckResult = this.BuildDclSpecNode(astNonterminal, baseSymbolTable, blockLevel, offset);
                     result.DclSpecData = nodeCheckResult.Data as DclSpecData;
                 }
-                else if (astNonterminal._signPost.MeaningUnit == this.SimpleVar)
+                else if (astNonterminal.SignPost.MeaningUnit == this.SimpleVar)
                 {
                     var nodeCheckResult = this.BuildSimpleVarNode(astNonterminal, baseSymbolTable, blockLevel, offset);
                     result.DclItemData = nodeCheckResult.Data as DclItemData;
                 }
-                else if (astNonterminal._signPost.MeaningUnit == this.ArrayVar)
+                else if (astNonterminal.SignPost.MeaningUnit == this.ArrayVar)
                 {
                     var nodeCheckResult = this.BuildArrayVarNode(astNonterminal, baseSymbolTable, blockLevel, offset);
                     result.DclItemData = nodeCheckResult.Data as DclItemData;
@@ -215,17 +209,17 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
             return new NodeBuildResult(result, baseSymbolTable);
         }
 
-        private NodeBuildResult BuildDclListNode(TreeNonTerminal node, MiniCSymbolTable baseSymbolTable, int blockLevel, int offset)
+        private NodeBuildResult BuildDclListNode(AstNonTerminal node, MiniCSymbolTable baseSymbolTable, int blockLevel, int offset)
         {
             MiniCSymbolTable newSymbolTable = new MiniCSymbolTable(baseSymbolTable);
 
             foreach (var item in node.Items)
             {
                 // ident
-                if (item is TreeTerminal) continue;
+                if (item is AstTerminal) continue;
 
-                var astNonterminal = item as TreeNonTerminal;
-                if (astNonterminal._signPost.MeaningUnit == this.Dcl)
+                var astNonterminal = item as AstNonTerminal;
+                if (astNonterminal.SignPost.MeaningUnit == this.Dcl)
                 {
                     var nodeCheckResult = this.BuildDclNode(astNonterminal, baseSymbolTable, blockLevel, offset);
 
@@ -245,25 +239,24 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
 
         // format summary
         // const? (void | int | char) identifier ([integer])? ;
-        private NodeBuildResult BuildDclNode(TreeNonTerminal node, SymbolTable baseSymbolTable, int blockLevel, int offset)
+        private NodeBuildResult BuildDclNode(AstNonTerminal node, SymbolTable baseSymbolTable, int blockLevel, int offset)
         {
             DclData result = new DclData
             {
                 BlockLevel = blockLevel
             };
-            if (node.HasVirtualChild) return new NodeBuildResult(result, baseSymbolTable);
 
             foreach (var item in node.Items)
             {
-                if (item is TreeTerminal) continue; // skip ; token
+                if (item is AstTerminal) continue; // skip ; token
 
-                var astNonTerminal = item as TreeNonTerminal;
-                if (astNonTerminal._signPost.MeaningUnit == this.DclSpec)
+                var astNonTerminal = item as AstNonTerminal;
+                if (astNonTerminal.SignPost.MeaningUnit == this.DclSpec)
                 {
                     var nodeCheckResult = this.BuildDclSpecNode(astNonTerminal, baseSymbolTable, blockLevel, offset);    // const? (void | int | char)
                     result.DclSpecData = nodeCheckResult.Data as DclSpecData;
                 }
-                else if (astNonTerminal._signPost.MeaningUnit == this.DclItem)
+                else if (astNonTerminal.SignPost.MeaningUnit == this.DclItem)
                 {
                     var nodeCheckResult = this.BuildDclItemNode(astNonTerminal, baseSymbolTable, blockLevel, offset);    // identifier ([integer])?
                     result.DclItemData = nodeCheckResult.Data as DclItemData;
@@ -275,35 +268,35 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
             return new NodeBuildResult(result, baseSymbolTable);
         }
 
-        private NodeBuildResult BuildDclItemNode(TreeNonTerminal node, SymbolTable baseSymbolTable, int blockLevel, int offset)
+        private NodeBuildResult BuildDclItemNode(AstNonTerminal node, SymbolTable baseSymbolTable, int blockLevel, int offset)
         {
             NodeBuildResult result = null;
 
             foreach (var item in node.Items)
             {
-                if (item is TreeTerminal) continue;
+                if (item is AstTerminal) continue;
 
-                var astNonTerminal = item as TreeNonTerminal;
-                if (astNonTerminal._signPost.MeaningUnit == this.SimpleVar)
+                var astNonTerminal = item as AstNonTerminal;
+                if (astNonTerminal.SignPost.MeaningUnit == this.SimpleVar)
                     result = this.BuildSimpleVarNode(astNonTerminal, baseSymbolTable, blockLevel, offset);
-                else if (astNonTerminal._signPost.MeaningUnit == this.ArrayVar)
+                else if (astNonTerminal.SignPost.MeaningUnit == this.ArrayVar)
                     result = this.BuildArrayVarNode(astNonTerminal, baseSymbolTable, blockLevel, offset);
             }
 
             return result;
         }
 
-        private NodeBuildResult BuildSimpleVarNode(TreeNonTerminal node, SymbolTable baseSymbolTable, int blockLevel, int offset)
+        private NodeBuildResult BuildSimpleVarNode(AstNonTerminal node, SymbolTable baseSymbolTable, int blockLevel, int offset)
         {
             DclItemData result = new DclItemData
             {
-                NameToken = (node.Items[0] as TreeTerminal).Token
+                NameToken = (node.Items[0] as AstTerminal).Token
             };
 
             return new NodeBuildResult(result, null);
         }
 
-        private NodeBuildResult BuildArrayVarNode(TreeNonTerminal node, SymbolTable baseSymbolTable, int blockLevel, int offset)
+        private NodeBuildResult BuildArrayVarNode(AstNonTerminal node, SymbolTable baseSymbolTable, int blockLevel, int offset)
         {
             return null;
         }

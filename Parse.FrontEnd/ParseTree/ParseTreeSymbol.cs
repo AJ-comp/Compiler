@@ -2,12 +2,13 @@
 
 namespace Parse.FrontEnd.Ast
 {
-    public abstract class TreeSymbol : IShowable
+    public abstract class ParseTreeSymbol : IShowable
     {
-        public TreeSymbol Parent { get; internal set; } = null;
+        public ParseTreeSymbol Parent { get; internal set; } = null;
 
         public abstract bool IsVirtual { get; }
         public abstract bool HasVirtualChild { get; }
+        public abstract AstSymbol ToAst { get; }
 
         public abstract string ToGrammarString();
         public abstract string ToTreeString(ushort depth = 1);

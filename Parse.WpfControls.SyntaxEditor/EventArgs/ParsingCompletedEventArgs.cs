@@ -10,9 +10,9 @@ namespace Parse.WpfControls.SyntaxEditor.EventArgs
 //        private List<AlarmEventArgs>
 
         public ParsingResult ParsingResult { get; }
-        public TreeSymbol Ast { get; }
+        public AstSymbol Ast { get; }
 
-        public ParsingCompletedEventArgs(ParsingResult parsingResult, TreeSymbol ast)
+        public ParsingCompletedEventArgs(ParsingResult parsingResult, AstSymbol ast)
         {
             ParsingResult = parsingResult;
             Ast = ast;

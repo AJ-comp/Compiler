@@ -8,7 +8,7 @@
                     xmlns:local="clr-namespace:ApplicationLayer.Views">
 
     <local:VertexDataTemplateSelector x:Key="VertexTemplateSelector"/>
-    <DataTemplate x:Key="treeSymbolVertexTemplate" DataType="{x:Type models:TreeSymbolVertex}">
+    <DataTemplate x:Key="treeSymbolVertexTemplate" DataType="{x:Type models:ParseTreeSymbolVertex}">
         <StackPanel Orientation="Horizontal" Margin="5">
             <TextBlock x:Name="removableTag" Text="[RM]" Foreground="Red" FontWeight="Bold" Visibility="Collapsed"/>
             <TextBlock x:Name="virtualTag" Text="[V]" Foreground="Green" FontWeight="Bold" Visibility="Collapsed"/>

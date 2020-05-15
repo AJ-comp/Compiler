@@ -1,6 +1,5 @@
 ﻿using Parse.FrontEnd.Ast;
 using Parse.FrontEnd.Grammars.MiniC.SymbolTableFormat;
-using Parse.FrontEnd.Grammars.Properties;
 using Parse.FrontEnd.InterLanguages;
 
 namespace Parse.FrontEnd.Grammars.MiniC.Sdts
@@ -9,196 +8,99 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
     {
         private enum ExpressionKind { None, Add, Sub, Mul, Div, Mod };
 
-        /// <summary>
-        /// This function checks whether exist variable in the 'baseSymbolTable'.
-        /// </summary>
-        /// <param name="childNodeToCheck">The child node to check</param>
-        /// <param name="baseSymbolTable">The symbol table to reference</param>
-        /// <returns></returns>
-        private VarData CheckExistVarInSymbolTable(TreeTerminal childNodeToCheck, MiniCSymbolTable baseSymbolTable)
-        {
-            VarData result = null;
-
-            if (childNodeToCheck.Token.Kind.TokenType is Identifier)
-                result = baseSymbolTable.AllVarList.GetVarByName(childNodeToCheck.Token.Input);
-
-            return result;
-        }
-
-        private VarData BuildSimpleAssignForVar(TreeNonTerminal node, int varIndex)
-        {
-            TreeTerminal varNode = node[varIndex] as TreeTerminal;
-            var varData = CheckExistVarInSymbolTable(varNode, node.ConnectedSymbolTable as MiniCSymbolTable);
-            if (varData == null)
-            {
-                node.ConnectedErrInfoList.Add(new MeaningErrInfo(varNode.Token,
-                                                                                            string.Format(AlarmCodes.MCL0001, varNode.Token.Input)));
-            }
-            else if (varData.DclData.DclSpecData.Const)
-                node.ConnectedErrInfoList.Add(new MeaningErrInfo(varNode.Token, AlarmCodes.MCL0002));
-            else
-                node.ConnectedInterLanguage.Add(UCode.Command.LoadVar(varData.DclData.BlockLevel, varData.Offset, varData.DclData.DclItemData.Name));
-
-            return varData;
-        }
-
-        private bool ReadyIdentCalculateIdent(TreeNonTerminal node, int leftIndex, int rightIndex)
-        {
-            var leftData = BuildSimpleAssignForVar(node, leftIndex);
-            var rightData = BuildSimpleAssignForVar(node, rightIndex);
-
-            if (leftData == null || rightData == null)
-            {
-                node.ConnectedInterLanguage.Clear();
-                return false;
-            }
-
-            var rightNode = node[rightIndex] as TreeTerminal;
-
-            if (leftData.DclData.DclSpecData.DataType != rightData.DclData.DclSpecData.DataType)
-            {
-                node.ConnectedErrInfoList.Add(new MeaningErrInfo(rightNode.Token, AlarmCodes.MCL0003));
-                return false;
-            }
-
-            return true;
-        }
-
-        private bool ReadyIdentCalculateDigit(TreeNonTerminal node, int leftIndex, int rightIndex)
-        {
-            var leftData = BuildSimpleAssignForVar(node, leftIndex);
-
-            if (leftData == null)
-            {
-                node.ConnectedInterLanguage.Clear();
-                return false;
-            }
-
-            var valueNode = node[rightIndex] as TreeTerminal;
-            node.ConnectedInterLanguage.Add(UCode.Command.DclValue(System.Convert.ToInt32(valueNode.Token.Input), valueNode.Token.Input));
-
-            return true;
-        }
-
-        private bool ReadyDigitCalculateDigit(TreeNonTerminal node, int leftIndex, int rightIndex)
-        {
-            var leftValueNode = node[leftIndex] as TreeTerminal;
-            node.ConnectedInterLanguage.Add(UCode.Command.DclValue(System.Convert.ToInt32(leftValueNode.Token.Input), leftValueNode.Token.Input));
-
-            var rightValueNode = node[rightIndex] as TreeTerminal;
-            node.ConnectedInterLanguage.Add(UCode.Command.DclValue(System.Convert.ToInt32(rightValueNode.Token.Input), rightValueNode.Token.Input));
-
-            return true;
-        }
-
-        private NodeBuildResult BuildCommonCalculateNode(TreeNonTerminal curNode, MiniCSymbolTable baseSymbolTable, ExpressionKind expressionKind, bool bAssign = false)
+        // format summary
+        // ( ident | (ident) ) = (ident | digit | Add | Sub | Mul | Div | Mod)
+        private NodeBuildResult BuildAssignNode(AstNonTerminal curNode, MiniCSymbolTable baseSymbolTable, int blockLevel, int offset)
         {
             curNode.ClearConnectedInfo();
-            var result = new NodeBuildResult(null, baseSymbolTable);
-            if (curNode.HasVirtualChild) return result;
-
             curNode.ConnectedSymbolTable = baseSymbolTable;
+            var result = new NodeBuildResult(null, baseSymbolTable);
 
-            // if valueTerminal is Ident
-            TreeTerminal leftNode = curNode[0] as TreeTerminal;
-            TreeTerminal rightNode = curNode[2] as TreeTerminal;
-            if (leftNode.Token.Kind.TokenType is Identifier && rightNode.Token.Kind.TokenType is Identifier)
+            // leftExp is always TreeTerminal so it has to only check rightExp.
+            if (curNode[2] is AstNonTerminal)
             {
-                if (ReadyIdentCalculateIdent(curNode, 0, 2) == false) return result;
-            }
-            else if (leftNode.Token.Kind.TokenType is Identifier && rightNode.Token.Kind.TokenType is Digit)
-            {
-                if (ReadyIdentCalculateDigit(curNode, 0, 2) == false) return result;
-            }
-            else if (leftNode.Token.Kind.TokenType is Digit && rightNode.Token.Kind.TokenType is Identifier)
-            {
-                if (ReadyIdentCalculateDigit(curNode, 2, 0) == false) return result;
-            }
-            else if (leftNode.Token.Kind.TokenType is Digit && rightNode.Token.Kind.TokenType is Digit)
-            {
-                if (ReadyDigitCalculateDigit(curNode, 0, 2) == false) return result;
-            }
-            else return result;
+                if(ConnectSimpleVarCode(curNode, 0))
+                {
+                    curNode.ConnectedInterLanguage.Clear();
+                    var varData = baseSymbolTable.AllVarList.GetVarByName((curNode[0] as AstTerminal).Token.Input);
+                    curNode.ConnectedInterLanguage.Add(UCode.Command.Store(varData.DclData.BlockLevel, varData.Offset, varData.DclData.DclItemData.Name));
+                }
 
-            if (expressionKind == ExpressionKind.Add)
-                curNode.ConnectedInterLanguage.Add(UCode.Command.Add());
-            else if (expressionKind == ExpressionKind.Sub)
-                curNode.ConnectedInterLanguage.Add(UCode.Command.Sub());
-            else if (expressionKind == ExpressionKind.Mul)
-                curNode.ConnectedInterLanguage.Add(UCode.Command.Multiple());
-            else if (expressionKind == ExpressionKind.Div)
-                curNode.ConnectedInterLanguage.Add(UCode.Command.Div());
-            else if (expressionKind == ExpressionKind.Mod)
-                curNode.ConnectedInterLanguage.Add(UCode.Command.Mod());
-
-            if(bAssign)
-            {
-                TreeTerminal varNode = curNode[0] as TreeTerminal;
-                var varData = CheckExistVarInSymbolTable(varNode, curNode.ConnectedSymbolTable as MiniCSymbolTable);
-                curNode.ConnectedInterLanguage.Add(UCode.Command.Store(varData.DclData.BlockLevel, varData.Offset, varData.DclData.DclItemData.Name));
+                var astNonTerminal = curNode[2] as AstNonTerminal;
+                if(astNonTerminal.SignPost.MeaningUnit == this.Add)
+                    result = BuildAddNode(astNonTerminal, baseSymbolTable, blockLevel, offset);
             }
+            else
+                result = BuildCommonCalculateNode(curNode, baseSymbolTable, blockLevel, offset, ExpressionKind.None, true);
+
             return result;
         }
-
-        // format summary
-        // ident = (ident | digit)
-        //  [0]   [1]   [2]
-        private NodeBuildResult BuildAssignNode(TreeNonTerminal curNode, MiniCSymbolTable baseSymbolTable, int blockLevel, int offset)
-            => BuildCommonCalculateNode(curNode, baseSymbolTable, ExpressionKind.None, true);
 
         // format summary
         // ident += (ident | digit)
         //  [0]   [1]   [2]
-        private NodeBuildResult BuildAddAssignNode(TreeNonTerminal curNode, MiniCSymbolTable baseSymbolTable, int blockLevel, int offset)
-            => BuildCommonCalculateNode(curNode, baseSymbolTable, ExpressionKind.Add, true);
+        private NodeBuildResult BuildAddAssignNode(AstNonTerminal curNode, MiniCSymbolTable baseSymbolTable, int blockLevel, int offset)
+            => BuildCommonCalculateNode(curNode, baseSymbolTable, blockLevel, offset, ExpressionKind.Add, true);
 
         // format summary
         // ident -= (ident | digit)
         //  [0]   [1]   [2]
-        private NodeBuildResult BuildSubAssignNode(TreeNonTerminal curNode, MiniCSymbolTable baseSymbolTable, int blockLevel, int offset)
-            => BuildCommonCalculateNode(curNode, baseSymbolTable, ExpressionKind.Sub, true);
+        private NodeBuildResult BuildSubAssignNode(AstNonTerminal curNode, MiniCSymbolTable baseSymbolTable, int blockLevel, int offset)
+            => BuildCommonCalculateNode(curNode, baseSymbolTable, blockLevel, offset, ExpressionKind.Sub, true);
 
         // format summary
         // ident *= (ident | digit)
         //  [0]   [1]   [2]
-        private NodeBuildResult BuildMulAssignNode(TreeNonTerminal curNode, MiniCSymbolTable baseSymbolTable, int blockLevel, int offset)
-            => BuildCommonCalculateNode(curNode, baseSymbolTable, ExpressionKind.Mul, true);
+        private NodeBuildResult BuildMulAssignNode(AstNonTerminal curNode, MiniCSymbolTable baseSymbolTable, int blockLevel, int offset)
+            => BuildCommonCalculateNode(curNode, baseSymbolTable, blockLevel, offset, ExpressionKind.Mul, true);
 
         // format summary
         // ident /= (ident | digit)
         //  [0]   [1]   [2]
-        private NodeBuildResult BuildDivAssignNode(TreeNonTerminal curNode, MiniCSymbolTable baseSymbolTable, int blockLevel, int offset)
-            => BuildCommonCalculateNode(curNode, baseSymbolTable, ExpressionKind.Div, true);
+        private NodeBuildResult BuildDivAssignNode(AstNonTerminal curNode, MiniCSymbolTable baseSymbolTable, int blockLevel, int offset)
+            => BuildCommonCalculateNode(curNode, baseSymbolTable, blockLevel, offset, ExpressionKind.Div, true);
 
         // format summary
         // ident %= (ident | digit)
         //  [0]   [1]   [2]
-        private NodeBuildResult BuildModAssignNode(TreeNonTerminal curNode, MiniCSymbolTable baseSymbolTable, int blockLevel, int offset)
-            => BuildCommonCalculateNode(curNode, baseSymbolTable, ExpressionKind.Mod, true);
+        private NodeBuildResult BuildModAssignNode(AstNonTerminal curNode, MiniCSymbolTable baseSymbolTable, int blockLevel, int offset)
+            => BuildCommonCalculateNode(curNode, baseSymbolTable, blockLevel, offset, ExpressionKind.Mod, true);
 
-        // format summary
-        // (ident | digit) + (ident | digit)
-        private NodeBuildResult BuildAddNode(TreeNonTerminal curNode, MiniCSymbolTable baseSymbolTable, int blockLevel, int offset)
-            => BuildCommonCalculateNode(curNode, baseSymbolTable, ExpressionKind.Add);
+        /// <summary>
+        /// This function builds an AddNode following the below process.
+        /// 1. The type of the 0 index may be TreeNonTerminal or TreeTerminal.
+        /// 2. The type of the 2 index may be TreeNonTerminal or TreeTerminal.
+        /// 3. Token type of the TreeTerminal may be Identifier or Digit type.
+        /// 4. If 0 or 2 index both is TreeTerminal type call BuildCommonCalculateNode function.
+        /// 5. If 0 or 2 index is TreeNonTerminal type call BuildCalculateNode function.
+        /// 6. If 0 or 2 index is TreeTerminal type call ConnectVarOrDigitUCode function.
+        /// </summary>
+        /// <param name="curNode"></param>
+        /// <param name="baseSymbolTable"></param>
+        /// <param name="blockLevel"></param>
+        /// <param name="offset"></param>
+        /// <returns></returns>
+        private NodeBuildResult BuildAddNode(AstNonTerminal curNode, MiniCSymbolTable baseSymbolTable, int blockLevel, int offset)
+            => BuildCommonCalculateNode(curNode, baseSymbolTable, blockLevel, offset, ExpressionKind.Add);
 
         // format summary
         // (ident | digit) - (ident | digit)
-        private NodeBuildResult BuildSubNode(TreeNonTerminal curNode, MiniCSymbolTable baseSymbolTable, int blockLevel, int offset)
-            => BuildCommonCalculateNode(curNode, baseSymbolTable, ExpressionKind.Sub);
+        private NodeBuildResult BuildSubNode(AstNonTerminal curNode, MiniCSymbolTable baseSymbolTable, int blockLevel, int offset)
+            => BuildCommonCalculateNode(curNode, baseSymbolTable, blockLevel, offset, ExpressionKind.Sub);
 
         // format summary
         // (ident | digit) * (ident | digit)
-        private NodeBuildResult BuildMulNode(TreeNonTerminal curNode, MiniCSymbolTable baseSymbolTable, int blockLevel, int offset)
-            => BuildCommonCalculateNode(curNode, baseSymbolTable, ExpressionKind.Mul);
+        private NodeBuildResult BuildMulNode(AstNonTerminal curNode, MiniCSymbolTable baseSymbolTable, int blockLevel, int offset)
+            => BuildCommonCalculateNode(curNode, baseSymbolTable, blockLevel, offset, ExpressionKind.Mul);
 
         // format summary
         // (ident | digit) / (ident | digit)
-        private NodeBuildResult BuildDivNode(TreeNonTerminal curNode, MiniCSymbolTable baseSymbolTable, int blockLevel, int offset)
-            => BuildCommonCalculateNode(curNode, baseSymbolTable, ExpressionKind.Div);
+        private NodeBuildResult BuildDivNode(AstNonTerminal curNode, MiniCSymbolTable baseSymbolTable, int blockLevel, int offset)
+            => BuildCommonCalculateNode(curNode, baseSymbolTable, blockLevel, offset, ExpressionKind.Div);
 
         // format summary
         // (ident | digit) % (ident | digit)
-        private NodeBuildResult BuildModNode(TreeNonTerminal curNode, MiniCSymbolTable baseSymbolTable, int blockLevel, int offset)
-            => BuildCommonCalculateNode(curNode, baseSymbolTable, ExpressionKind.Mod);
+        private NodeBuildResult BuildModNode(AstNonTerminal curNode, MiniCSymbolTable baseSymbolTable, int blockLevel, int offset)
+            => BuildCommonCalculateNode(curNode, baseSymbolTable, blockLevel, offset, ExpressionKind.Mod);
     }
 }

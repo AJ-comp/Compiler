@@ -4,21 +4,21 @@ using System.Diagnostics;
 namespace ApplicationLayer.Models.GraphModels
 {
     [DebuggerDisplay("{ID}-{IsAst}")]
-    public class TreeSymbolVertex : PocVertex
+    public class ParseTreeSymbolVertex : PocVertex
     {
-        public override string ID => TreeSymbol.ToString();
+        public ParseTreeSymbol TreeSymbol { get; private set; }
         public bool IsAst
         {
             get
             {
                 bool result = false;
 
-                if (TreeSymbol is TreeTerminal)
-                    result = (TreeSymbol as TreeTerminal).Token.Kind.Meaning;
-                else if(TreeSymbol is TreeNonTerminal)
+                if (TreeSymbol is ParseTreeTerminal)
+                    result = (TreeSymbol as ParseTreeTerminal).Token.Kind.Meaning;
+                else if(TreeSymbol is ParseTreeNonTerminal)
                 {
-                    var treeNonTerminal = (TreeSymbol as TreeNonTerminal);
-                    result = (treeNonTerminal._signPost.MeaningUnit == null) ? false : true;
+                    var treeNonTerminal = (TreeSymbol as ParseTreeNonTerminal);
+                    result = (treeNonTerminal.SignPost.MeaningUnit == null) ? false : true;
                 }
 
                 return result;
@@ -27,9 +27,9 @@ namespace ApplicationLayer.Models.GraphModels
         public bool IsVirtual => TreeSymbol.IsVirtual;
         public bool HasVirtualChild => TreeSymbol.HasVirtualChild;
 
-        public TreeSymbol TreeSymbol { get; private set; }
+        public override string ID => TreeSymbol.ToString();
 
-        public TreeSymbolVertex(TreeSymbol treeSymbol)
+        public ParseTreeSymbolVertex(ParseTreeSymbol treeSymbol)
         {
             TreeSymbol = treeSymbol;
         }

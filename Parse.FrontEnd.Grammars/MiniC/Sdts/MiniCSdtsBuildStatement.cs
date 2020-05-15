@@ -5,24 +5,23 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
 {
     public partial class MiniCSdts
     {
-        private NodeBuildResult BuildCompoundStNode(TreeNonTerminal curNode, MiniCSymbolTable baseSymbolTable, int blockLevel, int offset)
+        private NodeBuildResult BuildCompoundStNode(AstNonTerminal curNode, MiniCSymbolTable baseSymbolTable, int blockLevel, int offset)
         {
             var newSymbolTable = new MiniCSymbolTable(baseSymbolTable);
             curNode.ClearConnectedInfo();
-            if (curNode.HasVirtualChild) return new NodeBuildResult(null, newSymbolTable);
 
             foreach (var item in curNode.Items)
             {
                 // ident
-                if (item is TreeTerminal) continue;
+                if (item is AstTerminal) continue;
 
-                var astNonterminal = item as TreeNonTerminal;
-                if (astNonterminal._signPost.MeaningUnit == this.DclList)
+                var astNonterminal = item as AstNonTerminal;
+                if (astNonterminal.SignPost.MeaningUnit == this.DclList)
                 {
                     var nodeCheckResult = this.BuildDclListNode(astNonterminal, baseSymbolTable, blockLevel, offset);
                     newSymbolTable = nodeCheckResult.symbolTable as MiniCSymbolTable;
                 }
-                else if (astNonterminal._signPost.MeaningUnit == this.StatList)
+                else if (astNonterminal.SignPost.MeaningUnit == this.StatList)
                 {
                     var nodeCheckResult = this.BuildStatListNode(astNonterminal, newSymbolTable, blockLevel, offset);
                 }
@@ -35,25 +34,23 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
 
         // format summary
         // IfSt | IfElseSt | WhileSt | ExpSt
-        private NodeBuildResult BuildStatListNode(TreeNonTerminal curNode, MiniCSymbolTable baseSymbolTable, int blockLevel, int offset)
+        private NodeBuildResult BuildStatListNode(AstNonTerminal curNode, MiniCSymbolTable baseSymbolTable, int blockLevel, int offset)
         {
-            string result = string.Empty;
             curNode.ClearConnectedInfo();
-            if (curNode.HasVirtualChild) return new NodeBuildResult(null, baseSymbolTable);
 
             foreach (var item in curNode.Items)
             {
-                if (item is TreeTerminal) continue;
+                if (item is AstTerminal) continue;
 
-                var astNonTerminal = item as TreeNonTerminal;
-                if (astNonTerminal._signPost.MeaningUnit == this.IfSt)
-                    result += this.BuildIfStNode(astNonTerminal, baseSymbolTable, blockLevel, offset);
-                else if (astNonTerminal._signPost.MeaningUnit == this.IfElseSt)
-                    result += this.BuildIfElseStNode(astNonTerminal, baseSymbolTable, blockLevel, offset);
-                else if (astNonTerminal._signPost.MeaningUnit == this.WhileSt)
-                    result += this.BuildWhileStNode(astNonTerminal, baseSymbolTable, blockLevel, offset);
-                else if (astNonTerminal._signPost.MeaningUnit == this.ExpSt)
-                    result += this.BuildExpStNode(astNonTerminal, baseSymbolTable, blockLevel, offset);
+                var astNonTerminal = item as AstNonTerminal;
+                if (astNonTerminal.SignPost.MeaningUnit == this.IfSt)
+                    this.BuildIfStNode(astNonTerminal, baseSymbolTable, blockLevel, offset);
+                else if (astNonTerminal.SignPost.MeaningUnit == this.IfElseSt)
+                    this.BuildIfElseStNode(astNonTerminal, baseSymbolTable, blockLevel, offset);
+                else if (astNonTerminal.SignPost.MeaningUnit == this.WhileSt)
+                    this.BuildWhileStNode(astNonTerminal, baseSymbolTable, blockLevel, offset);
+                else if (astNonTerminal.SignPost.MeaningUnit == this.ExpSt)
+                    this.BuildExpStNode(astNonTerminal, baseSymbolTable, blockLevel, offset);
             }
 
             return new NodeBuildResult(null, baseSymbolTable);
@@ -61,56 +58,54 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
 
         // format summary
         // (AddAssign | SubAssign | MulAssign | DivAssign) ;
-        private NodeBuildResult BuildExpStNode(TreeNonTerminal curNode, MiniCSymbolTable baseSymbolTable, int blockLevel, int offset)
+        private NodeBuildResult BuildExpStNode(AstNonTerminal curNode, MiniCSymbolTable baseSymbolTable, int blockLevel, int offset)
         {
-            string result = string.Empty;
             curNode.ClearConnectedInfo();
-            if (curNode.HasVirtualChild) return new NodeBuildResult(null, baseSymbolTable);
 
             foreach (var item in curNode.Items)
             {
-                if (item is TreeTerminal) continue;
+                if (item is AstTerminal) continue;
 
-                var astNonTerminal = item as TreeNonTerminal;
-                if (astNonTerminal._signPost.MeaningUnit == this.Assign)
-                    result += this.BuildAssignNode(astNonTerminal, baseSymbolTable, blockLevel, offset);
-                else if (astNonTerminal._signPost.MeaningUnit == this.AddAssign)
-                    result += this.BuildAddAssignNode(astNonTerminal, baseSymbolTable, blockLevel, offset);
-                else if (astNonTerminal._signPost.MeaningUnit == this.SubAssign)
-                    result += this.BuildSubAssignNode(astNonTerminal, baseSymbolTable, blockLevel, offset);
-                else if (astNonTerminal._signPost.MeaningUnit == this.MulAssign)
-                    result += this.BuildMulAssignNode(astNonTerminal, baseSymbolTable, blockLevel, offset);
-                else if (astNonTerminal._signPost.MeaningUnit == this.DivAssign)
-                    result += this.BuildDivAssignNode(astNonTerminal, baseSymbolTable, blockLevel, offset);
-                else if (astNonTerminal._signPost.MeaningUnit == this.ModAssign)
-                    result += this.BuildModAssignNode(astNonTerminal, baseSymbolTable, blockLevel, offset);
-                else if (astNonTerminal._signPost.MeaningUnit == this.Add)
-                    result += this.BuildAddNode(astNonTerminal, baseSymbolTable, blockLevel, offset);
-                else if (astNonTerminal._signPost.MeaningUnit == this.Sub)
-                    result += this.BuildSubNode(astNonTerminal, baseSymbolTable, blockLevel, offset);
-                else if (astNonTerminal._signPost.MeaningUnit == this.Mul)
-                    result += this.BuildMulNode(astNonTerminal, baseSymbolTable, blockLevel, offset);
-                else if (astNonTerminal._signPost.MeaningUnit == this.Div)
-                    result += this.BuildDivNode(astNonTerminal, baseSymbolTable, blockLevel, offset);
-                else if (astNonTerminal._signPost.MeaningUnit == this.Mod)
-                    result += this.BuildModNode(astNonTerminal, baseSymbolTable, blockLevel, offset);
+                var astNonTerminal = item as AstNonTerminal;
+                if (astNonTerminal.SignPost.MeaningUnit == this.Assign)
+                    this.BuildAssignNode(astNonTerminal, baseSymbolTable, blockLevel, offset);
+                else if (astNonTerminal.SignPost.MeaningUnit == this.AddAssign)
+                    this.BuildAddAssignNode(astNonTerminal, baseSymbolTable, blockLevel, offset);
+                else if (astNonTerminal.SignPost.MeaningUnit == this.SubAssign)
+                    this.BuildSubAssignNode(astNonTerminal, baseSymbolTable, blockLevel, offset);
+                else if (astNonTerminal.SignPost.MeaningUnit == this.MulAssign)
+                    this.BuildMulAssignNode(astNonTerminal, baseSymbolTable, blockLevel, offset);
+                else if (astNonTerminal.SignPost.MeaningUnit == this.DivAssign)
+                    this.BuildDivAssignNode(astNonTerminal, baseSymbolTable, blockLevel, offset);
+                else if (astNonTerminal.SignPost.MeaningUnit == this.ModAssign)
+                    this.BuildModAssignNode(astNonTerminal, baseSymbolTable, blockLevel, offset);
+                else if (astNonTerminal.SignPost.MeaningUnit == this.Add)
+                    this.BuildAddNode(astNonTerminal, baseSymbolTable, blockLevel, offset);
+                else if (astNonTerminal.SignPost.MeaningUnit == this.Sub)
+                    this.BuildSubNode(astNonTerminal, baseSymbolTable, blockLevel, offset);
+                else if (astNonTerminal.SignPost.MeaningUnit == this.Mul)
+                    this.BuildMulNode(astNonTerminal, baseSymbolTable, blockLevel, offset);
+                else if (astNonTerminal.SignPost.MeaningUnit == this.Div)
+                    this.BuildDivNode(astNonTerminal, baseSymbolTable, blockLevel, offset);
+                else if (astNonTerminal.SignPost.MeaningUnit == this.Mod)
+                    this.BuildModNode(astNonTerminal, baseSymbolTable, blockLevel, offset);
 
             }
 
             return new NodeBuildResult(null, baseSymbolTable);
         }
 
-        private NodeBuildResult BuildIfStNode(TreeNonTerminal node, MiniCSymbolTable baseSymbolTable, int blockLevel, int offset)
+        private NodeBuildResult BuildIfStNode(AstNonTerminal node, MiniCSymbolTable baseSymbolTable, int blockLevel, int offset)
         {
             return null;
         }
 
-        private NodeBuildResult BuildIfElseStNode(TreeNonTerminal node, MiniCSymbolTable baseSymbolTable, int blockLevel, int offset)
+        private NodeBuildResult BuildIfElseStNode(AstNonTerminal node, MiniCSymbolTable baseSymbolTable, int blockLevel, int offset)
         {
             return null;
         }
 
-        private NodeBuildResult BuildWhileStNode(TreeNonTerminal node, MiniCSymbolTable baseSymbolTable, int blockLevel, int offset)
+        private NodeBuildResult BuildWhileStNode(AstNonTerminal node, MiniCSymbolTable baseSymbolTable, int blockLevel, int offset)
         {
             return null;
         }
