@@ -2,6 +2,7 @@
 using Parse.FrontEnd.Grammars.MiniC.SymbolTableFormat;
 using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 
 namespace Parse.FrontEnd.Grammars.MiniC.Sdts
 {
@@ -9,6 +10,21 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
     {
         // The cache role for speed up
         private MiniCGrammar grammar;
+        private StringCollection _labels = new StringCollection();
+        private string _reservedLabel = string.Empty;
+
+        // Auto clear when a reference
+        public string ReservedLabel
+        {
+            get
+            {
+                string result = _reservedLabel;
+
+                _reservedLabel = string.Empty;
+                return result;
+            }
+            private set => _reservedLabel = value;
+        }
 
         public override event EventHandler<SementicErrorArgs> SementicErrorEventHandler;
 

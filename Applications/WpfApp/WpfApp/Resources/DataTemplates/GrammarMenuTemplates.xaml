@@ -2,7 +2,7 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:systemData="clr-namespace:System.Data;assembly=System.Data"
                     xmlns:wf="clr-namespace:System.Windows.Forms;assembly=System.Windows.Forms"
-                    xmlns:parseTree="clr-namespace:Parse.FrontEnd.Ast;assembly=Parse.FrontEnd">
+                    xmlns:parseTree="clr-namespace:Parse.FrontEnd.ParseTree;assembly=Parse.FrontEnd">
 
     <HierarchicalDataTemplate DataType="{x:Type parseTree:ParseTreeNonTerminal}" ItemsSource="{Binding Items}">
         <TextBlock Text="{Binding SignPost.Name}"/>

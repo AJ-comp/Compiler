@@ -27,28 +27,26 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
             return result;
         }
 
-        private object ActionFuncDef(AstNonTerminal node, int blockLevel, int offset)
+        // [0] : FuncHead (AstNonTerminal)
+        // [1] : CompoundSt (AstNonTerminal)
+        private object ActionFuncDef(AstNonTerminal curNode, int blockLevel, int offset)
         {
             List<AstNonTerminal> result = new List<AstNonTerminal>();
 
-            var symbolTable = node.ConnectedSymbolTable as MiniCSymbolTable;
+            var symbolTable = curNode.ConnectedSymbolTable as MiniCSymbolTable;
             var funcData = symbolTable.FuncDataList.ThisFuncData;
             if (funcData == null) return result;
             offset = funcData.ParamVars.Count;
 
-            foreach (var item in node.Items)
-            {
-                var astNonTerminal = item as AstNonTerminal;
-
-                if (astNonTerminal.SignPost.MeaningUnit == this.FuncHead)
-                    result.AddRange(this.ActionFuncHead(astNonTerminal, blockLevel, offset) as IReadOnlyList<AstNonTerminal>);
-                else if (astNonTerminal.SignPost.MeaningUnit == this.CompoundSt)
-                    result.AddRange(this.ActionCompoundSt(astNonTerminal, blockLevel + 1, offset) as IReadOnlyList<AstNonTerminal>);
-            }
+            result.AddRange((curNode[0] as AstNonTerminal).ActionLogic(blockLevel, offset) as IReadOnlyCollection<AstNonTerminal>);
+            result.AddRange((curNode[1] as AstNonTerminal).ActionLogic(blockLevel + 1, offset) as IReadOnlyList<AstNonTerminal>);
 
             return result;
         }
 
+        // [0] : DclSpec (AstNonTerminal)
+        // [1] : Name (AstTerminal)
+        // [2] : FormalPara (AstNonTerminal)
         private object ActionFuncHead(AstNonTerminal curNode, int blockLevel, int offset)
         {
             List<AstNonTerminal> result = new List<AstNonTerminal>
@@ -217,46 +215,69 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
             return null;
         }
 
-        private object ActionStatList(AstNonTerminal node, int blockLevel, int offset)
+        private object ActionStatList(AstNonTerminal curNode, int blockLevel, int offset)
         {
             List<AstNonTerminal> result = new List<AstNonTerminal>();
 
-            foreach (var item in node.Items)
+            foreach (var item in curNode.Items)
             {
                 if (item is AstTerminal) continue;
 
                 var astNonTerminal = item as AstNonTerminal;
-                if (astNonTerminal.SignPost.MeaningUnit == this.IfSt)
+                if (astNonTerminal.SignPost.MeaningUnit == this.ExpSt)
+                    result.AddRange(this.ActionExpSt(astNonTerminal, blockLevel, offset) as IReadOnlyList<AstNonTerminal>);
+                else if (astNonTerminal.SignPost.MeaningUnit == this.IfSt)
                     result.AddRange(this.ActionIfSt(astNonTerminal, blockLevel, offset) as IReadOnlyList<AstNonTerminal>);
                 else if (astNonTerminal.SignPost.MeaningUnit == this.IfElseSt)
                     result.AddRange(this.ActionIfElseSt(astNonTerminal, blockLevel, offset) as IReadOnlyList<AstNonTerminal>);
                 else if (astNonTerminal.SignPost.MeaningUnit == this.WhileSt)
                     result.AddRange(this.ActionWhileSt(astNonTerminal, blockLevel, offset) as IReadOnlyList<AstNonTerminal>);
-                else if (astNonTerminal.SignPost.MeaningUnit == this.ExpSt)
-                    result.AddRange(this.ActionExpSt(astNonTerminal, blockLevel, offset) as IReadOnlyList<AstNonTerminal>);
+                else if (astNonTerminal.SignPost.MeaningUnit == this.ReturnSt)
+                    result.AddRange(this.ActionReturnSt(astNonTerminal, blockLevel, offset) as IReadOnlyList<AstNonTerminal>);
             }
 
             return result;
         }
 
-        private object ActionIfSt(AstNonTerminal node, int blockLevel, int offset)
+
+        // [0] : if (Terminal)
+        // [1] : logical_exp (NonTerminal)
+        // [2] : statement (NonTerminal)
+        private object ActionIfSt(AstNonTerminal curNode, int blockLevel, int offset)
         {
-            return null;
+            List<AstNonTerminal> result = new List<AstNonTerminal>();
+
+            result.AddRange(CommonLogicalExpression(curNode[1] as AstNonTerminal, blockLevel, offset) as IReadOnlyList<AstNonTerminal>);
+            result.Add(curNode);
+            result.AddRange((curNode[2] as AstNonTerminal).ActionLogic(blockLevel, offset) as IReadOnlyList<AstNonTerminal>);
+
+            return result;
         }
 
         private object ActionIfElseSt(AstNonTerminal node, int blockLevel, int offset)
         {
-            return null;
+            List<AstNonTerminal> result = new List<AstNonTerminal>();
+
+            return result;
         }
 
-        private object ActionWhileSt(AstNonTerminal node, int blockLevel, int offset)
+        private object ActionWhileSt(AstNonTerminal curNode, int blockLevel, int offset)
         {
-            return null;
+            List<AstNonTerminal> result = new List<AstNonTerminal>();
+
+            return result;
         }
 
-        private object ActionReturnSt(AstNonTerminal node, int blockLevel, int offset)
+        // [0] : return (AstTerminal)
+        // [1] : ExpSt (AstNonTerminal)
+        private object ActionReturnSt(AstNonTerminal curNode, int blockLevel, int offset)
         {
-            return null;
+            List<AstNonTerminal> result = new List<AstNonTerminal>();
+
+            result.AddRange((curNode[1] as AstNonTerminal).ActionLogic(blockLevel, offset) as IReadOnlyList<AstNonTerminal>);
+            result.Add(curNode);
+
+            return result;
         }
 
         private object ActionIndex(AstNonTerminal node, int blockLevel, int offset)

@@ -1,6 +1,7 @@
-﻿using Parse.FrontEnd.RegularGrammar;
+﻿using Parse.FrontEnd.Ast;
+using Parse.FrontEnd.RegularGrammar;
 
-namespace Parse.FrontEnd.Ast
+namespace Parse.FrontEnd.ParseTree
 {
     public abstract class ParseTreeSymbol : IShowable
     {

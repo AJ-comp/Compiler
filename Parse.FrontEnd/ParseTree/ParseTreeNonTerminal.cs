@@ -1,9 +1,10 @@
-﻿using Parse.FrontEnd.RegularGrammar;
+﻿using Parse.FrontEnd.Ast;
+using Parse.FrontEnd.RegularGrammar;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace Parse.FrontEnd.Ast
+namespace Parse.FrontEnd.ParseTree
 {
     public class ParseTreeNonTerminal : ParseTreeSymbol, IList<ParseTreeSymbol>
     {
@@ -72,37 +73,43 @@ namespace Parse.FrontEnd.Ast
             }
         }
 
-        public override AstSymbol ToAst
-        {
-            get
-            {
-                // If curNode is Ast returns curNode else returns childAst.
-                AstSymbol result = null;
-                AstNonTerminal curNode = null;
-                if (SignPost.MeaningUnit != null)
-                {
-                    curNode = new AstNonTerminal(SignPost);
-                    curNode.ConnectedParseTree = this;
-                    result = curNode;
-                }
-
-                foreach (var item in Items)
-                {
-                    var childAst = item.ToAst;
-                    if(childAst != null)
-                    {
-                        if (curNode == null) result = childAst;
-                        else curNode.Add(childAst);
-                    }
-                }
-
-                return result;
-            }
-        }
+        public override AstSymbol ToAst => CreateAst(null, this);
 
         public ParseTreeNonTerminal(NonTerminalSingle singleNT)
         {
             this.SignPost = singleNT;
+        }
+
+        private static AstNonTerminal CreateAst(AstNonTerminal newParentTree, ParseTreeSymbol curTree)
+        {
+            AstNonTerminal result = null;
+
+            if (curTree is ParseTreeTerminal)
+            {
+                var ast = curTree.ToAst;
+                if (ast != null) newParentTree.Add(ast);
+            }
+            else
+            {
+                var convertedParentTree = curTree as ParseTreeNonTerminal;
+                if (convertedParentTree.SignPost.MeaningUnit != null)
+                {
+                    result = new AstNonTerminal(convertedParentTree.SignPost);
+                    result.ConnectedParseTree = curTree as ParseTreeNonTerminal;
+
+                    if (newParentTree == null) newParentTree = result;
+                    else if (newParentTree != result)
+                    {
+                        (newParentTree as AstNonTerminal).Add(result);
+                        newParentTree = result;
+                    }
+                }
+
+                // it can't use Parallel because order.
+                foreach (var node in convertedParentTree) CreateAst(newParentTree, node);
+            }
+
+            return result;
         }
 
         public void Add(ParseTreeSymbol item)

@@ -64,80 +64,78 @@ namespace Parse.FrontEnd.InterLanguages
                 }
             }
 
-            private static Format UCodeFormat(string label, string opCode, string comment = "", params object[] operands)
-            {
-                return new Format(label, opCode, comment, operands);
-            }
+            private static Format UCodeFormat(string labelName, string opCode, string comment = "", params object[] operands)
+                => new Format(labelName, opCode, comment, operands);
 
-            public static Format DclVar(int bIndex, int oIndex, int length, string comment = "") => UCodeFormat(LabelSpace, "sym", comment, bIndex, oIndex, length);
+            public static Format DclVar(string labelName, int bIndex, int oIndex, int length, string comment = "")
+                => UCodeFormat(labelName, "sym", comment, bIndex, oIndex, length);
 
-            public static Format LoadVar(int bIndex, int oIndex, string comment = "") => UCodeFormat(LabelSpace, "lod", comment, bIndex, oIndex);
+            public static Format LoadVar(string labelName, int bIndex, int oIndex, string comment = "")
+                => UCodeFormat(labelName, "lod", comment, bIndex, oIndex);
 
-            public static Format DclValue(int value, string comment = "") => UCodeFormat(LabelSpace, "ldc", comment, value);
+            public static Format DclValue(string labelName, int value, string comment = "")
+                => UCodeFormat(labelName, "ldc", comment, value);
 
             public static Format ProcStart(string procName, int totalLength, int bIndex, string comment = "")
-            {
-                if (procName.Length > 10)
-                    procName = procName.Substring(0, 10);
+                => UCodeFormat(procName, "proc", comment, totalLength, bIndex, 2);
 
-                for (int i = procName.Length; i < 11; i++) procName += " ";
+            public static Format ProcEnd(string labelName, string comment = "")
+                => UCodeFormat(labelName, "end", comment);
 
-                return UCodeFormat(procName, "proc", comment, totalLength, bIndex, 2);
-            }
-
-            public static Format ProcEnd(string comment = "") => UCodeFormat(LabelSpace, "end", comment);
-
-            public static IReadOnlyList<Format> ProcCall(string procName, params ParamData[] param)
+            public static IReadOnlyList<Format> ProcCall(string labelName, string procName, params ParamData[] param)
             {
                 List<Format> result = new List<Format>
                 {
-                    UCodeFormat(LabelSpace, "ldp")
+                    UCodeFormat(labelName, "ldp")
                 };
 
                 foreach (var item in param)
                 {
                     if (item.PassWay == VarPassWay.CallByValue)
-                        result.Add(UCodeFormat(LabelSpace, "lod", item.Comment, item.BIndex, item.OIndex));
+                        result.Add(UCodeFormat("", "lod", item.Comment, item.BIndex, item.OIndex));
                     else if (item.PassWay == VarPassWay.CallByAddress)
-                        result.Add(UCodeFormat(LabelSpace, "lda", item.Comment, item.BIndex, item.OIndex));
+                        result.Add(UCodeFormat("", "lda", item.Comment, item.BIndex, item.OIndex));
 
-                    result.Add(UCodeFormat(LabelSpace, "call", procName));
+                    result.Add(UCodeFormat("", "call", procName));
                 }
 
                 return result;
             }
 
-            public static Format RetFromProc(string comment = "") => UCodeFormat(LabelSpace, "ret", comment);
+            public static Format RetFromProc(string labelName, string comment = "")
+                => UCodeFormat(labelName, "ret", comment);
 
-            public static Format UnconditionalJump(string destLableName, string comment = "") => UCodeFormat(LabelSpace, "ujp", comment, destLableName);
+            public static Format UnconditionalJump(string labelName, string destLableName, string comment = "")
+                => UCodeFormat(labelName, "ujp", comment, destLableName);
 
-            public static Format ConditionalJump(string destLabelName, string comment = "", bool bTrue = true)
+            public static Format ConditionalJump(string labelName, string destLabelName, bool bTrue = true, string comment = "")
             {
                 string command = (bTrue) ? "tjp" : "fjp";
 
-                return UCodeFormat(LabelSpace, command, comment, destLabelName);
+                return UCodeFormat(labelName, command, comment, destLabelName);
             }
 
-            public static Format Store(int bIndex, int oIndex, string comment = "") => UCodeFormat(LabelSpace, "str", comment, bIndex, oIndex);
-            public static Format Add(string comment = "") => UCodeFormat(LabelSpace, "add", comment);
-            public static Format Sub(string comment = "") => UCodeFormat(LabelSpace, "sub", comment);
-            public static Format Multiple(string comment = "") => UCodeFormat(LabelSpace, "mult", comment);
-            public static Format Div(string comment = "") => UCodeFormat(LabelSpace, "div", comment);
-            public static Format Mod(string comment = "") => UCodeFormat(LabelSpace, "mod", comment);
-            public static Format Swap(string comment = "") => UCodeFormat(LabelSpace, "swp", comment);
-            public static Format And(string comment = "") => UCodeFormat(LabelSpace, "and", comment);
-            public static Format Or(string comment = "") => UCodeFormat(LabelSpace, "or", comment);
-            public static Format GreaterThan(string comment = "") => UCodeFormat(LabelSpace, "gt", comment);
-            public static Format LessThan(string comment = "") => UCodeFormat(LabelSpace, "lt", comment);
-            public static Format GreaterEqual(string comment = "") => UCodeFormat(LabelSpace, "ge", comment);
-            public static Format LessEqual(string comment = "") => UCodeFormat(LabelSpace, "le", comment);
-            public static Format Equal(string comment = "") => UCodeFormat(LabelSpace, "le", comment);
-            public static Format NegativeEqual(string comment = "") => UCodeFormat(LabelSpace, "ne", comment);
-            public static Format NotOperand(string comment = "") => UCodeFormat(LabelSpace, "notop", comment);
-            public static Format Negative(string comment = "") => UCodeFormat(LabelSpace, "neg", comment);
-            public static Format Increment(string comment = "") => UCodeFormat(LabelSpace, "inc", comment);
-            public static Format Decrement(string comment = "") => UCodeFormat(LabelSpace, "dec", comment);
-            public static Format Duplicate(string comment = "") => UCodeFormat(LabelSpace, "dup", comment);
+            public static Format Store(string labelName, int bIndex, int oIndex, string comment = "") => UCodeFormat(labelName, "str", comment, bIndex, oIndex);
+            public static Format Add(string labelName, string comment = "") => UCodeFormat(labelName, "add", comment);
+            public static Format Sub(string labelName, string comment = "") => UCodeFormat(labelName, "sub", comment);
+            public static Format Multiple(string labelName, string comment = "") => UCodeFormat(labelName, "mult", comment);
+            public static Format Div(string labelName, string comment = "") => UCodeFormat(labelName, "div", comment);
+            public static Format Mod(string labelName, string comment = "") => UCodeFormat(labelName, "mod", comment);
+            public static Format Swap(string labelName, string comment = "") => UCodeFormat(labelName, "swp", comment);
+            public static Format And(string labelName, string comment = "") => UCodeFormat(labelName, "and", comment);
+            public static Format Or(string labelName, string comment = "") => UCodeFormat(labelName, "or", comment);
+            public static Format GreaterThan(string labelName, string comment = "") => UCodeFormat(labelName, "gt", comment);
+            public static Format LessThan(string labelName, string comment = "") => UCodeFormat(labelName, "lt", comment);
+            public static Format GreaterEqual(string labelName, string comment = "") => UCodeFormat(labelName, "ge", comment);
+            public static Format LessEqual(string labelName, string comment = "") => UCodeFormat(labelName, "le", comment);
+            public static Format Equal(string labelName, string comment = "") => UCodeFormat(labelName, "eq", comment);
+            public static Format NegativeEqual(string labelName, string comment = "") => UCodeFormat(labelName, "ne", comment);
+            public static Format Not(string labelName, string comment = "") => UCodeFormat(labelName, "not", comment);
+            public static Format Negative(string labelName, string comment = "") => UCodeFormat(labelName, "neg", comment);
+            public static Format Increment(string labelName, string comment = "") => UCodeFormat(labelName, "inc", comment);
+            public static Format Decrement(string labelName, string comment = "") => UCodeFormat(labelName, "dec", comment);
+            public static Format Duplicate(string labelName, string comment = "") => UCodeFormat(labelName, "dup", comment);
+            public static Format NoOperate(string labelName, string comment = "") => UCodeFormat(labelName, "nop", comment);
         }
     }
 

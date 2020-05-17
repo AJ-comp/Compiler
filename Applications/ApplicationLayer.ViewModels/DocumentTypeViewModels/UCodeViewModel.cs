@@ -39,7 +39,10 @@ namespace ApplicationLayer.ViewModels.DocumentTypeViewModels
 
                 if(nodeInfo.CategoryPos == UCodeDisplayModel.AttatchCategoryPosition.Own)
                 {
-                    parentNode = new CategoryTreeNodeModel(node.ConnectedParseTree?.AllInputDatas);
+                    var data = (string.IsNullOrEmpty(nodeInfo.CategoryName))
+                                ? node.ConnectedParseTree?.AllInputDatas : nodeInfo.CategoryName;
+
+                    parentNode = new CategoryTreeNodeModel(data);
                     Root.AddChildren(parentNode);
                 }
                 else if(nodeInfo.CategoryPos == UCodeDisplayModel.AttatchCategoryPosition.Down)
@@ -55,6 +58,7 @@ namespace ApplicationLayer.ViewModels.DocumentTypeViewModels
                 // add a leftundone list
                 foreach (var statement in leftUnDoneList)
                     parentNode.AddChildren(CreateUcodeTreeNodeModel(statement as UCode.Format));
+                leftUnDoneList.Clear();
 
                 // add a list on current node
                 foreach (var statement in node.ConnectedInterLanguage)

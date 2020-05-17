@@ -7,9 +7,12 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
 {
     public partial class MiniCSdts
     {
+        // [0 ~ x] : Dcl (AstNonTerminal)
+        // [x+1 ~ y] : FuncDef (AstNonTerminal)
         private object BuildProgramNode(AstNonTerminal curNode, MiniCSymbolTable baseSymbolTable, int blockLevel, int offset)
         {
             int funcOffset = 0;
+            _labels.Clear();
             curNode.ClearConnectedInfo();
 
             foreach (var item in curNode.Items)
@@ -19,7 +22,7 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
                 // Global variable
                 if (astNonTerminal.SignPost.MeaningUnit == this.Dcl)
                 {
-                    var nodeCheckResult = this.BuildDclNode(astNonTerminal, baseSymbolTable, blockLevel, offset++);
+                    var nodeCheckResult = this.BuildDclNode(astNonTerminal, baseSymbolTable, blockLevel, offset);
                     VarData varData = new VarData
                     {
                         DclData = nodeCheckResult.Data as DclData,
@@ -27,6 +30,7 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
                     };
                     baseSymbolTable.VarDataList.Add(varData);
                     curNode.ConnectedSymbolTable = baseSymbolTable;
+                    offset++;
                 }
                 // Global function
                 else if (astNonTerminal.SignPost.MeaningUnit == this.FuncDef)
@@ -53,18 +57,24 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
 
                 if (astNonTerminal.SignPost.MeaningUnit == this.FuncHead)
                 {
-                    var nodeCheckResult = this.BuildFuncHeadNode(item as AstNonTerminal, newSymbolTable, blockLevel + 1, offset);
+                    var nodeCheckResult = this.BuildFuncHeadNode(astNonTerminal, newSymbolTable, blockLevel + 1, offset);
                     funcHeadData = nodeCheckResult.Data as FuncData;
                     offset = funcHeadData.ParamVars.Count;
 
                     funcHeadData.This = true;
+                    _labels.Add(funcHeadData.Name);
                     newSymbolTable.FuncDataList.Add(funcHeadData);
                     newSymbolTable.VarDataList.AddRange(funcHeadData.ParamVars);
 
                     curNode.ConnectedSymbolTable = newSymbolTable;
                 }
                 else if (astNonTerminal.SignPost.MeaningUnit == this.CompoundSt)
-                    this.BuildCompoundStNode(item as AstNonTerminal, newSymbolTable, blockLevel + 1, offset);
+                {
+                    var nodeCheckResult = this.BuildCompoundStNode(astNonTerminal, newSymbolTable, blockLevel + 1, offset);
+                    if (nodeCheckResult.Result)
+                        curNode.ConnectedInterLanguage.Add(UCode.Command.RetFromProc(ReservedLabel));
+
+                }
             }
 
             return new NodeBuildResult(funcHeadData, newSymbolTable);
@@ -162,9 +172,8 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
 
             // params
             foreach (var item in result)
-                curNode.ConnectedInterLanguage.Add(UCode.Command.DclVar(item.DclData.BlockLevel, item.Offset,
-                                                                                                            item.DclData.DclItemData.Dimension,
-                                                                                                            item.DclData.DclItemData.Name));
+                curNode.ConnectedInterLanguage.Add(UCode.Command.DclVar(ReservedLabel, item.DclData.BlockLevel, item.Offset,
+                                                                                                            item.DclData.DclItemData.Dimension, item.DclData.DclItemData.Name));
 
             return new NodeBuildResult(result, baseSymbolTable);
         }
@@ -204,7 +213,8 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
                 }
             }
 
-            curNode.ConnectedInterLanguage.Add(UCode.Command.DclVar(result.BlockLevel, offset, result.DclItemData.Dimension, result.DclItemData.Name));
+            curNode.ConnectedInterLanguage.Add(UCode.Command.DclVar(ReservedLabel, result.BlockLevel, offset, 
+                                                                                                        result.DclItemData.Dimension, result.DclItemData.Name));
 
             return new NodeBuildResult(result, baseSymbolTable);
         }
@@ -263,7 +273,8 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
                 }
             }
 
-            node.ConnectedInterLanguage.Add(UCode.Command.DclVar(result.BlockLevel, offset, result.DclItemData.Dimension, result.DclItemData.Name));
+            node.ConnectedInterLanguage.Add(UCode.Command.DclVar(ReservedLabel, result.BlockLevel, offset, 
+                                                                                                    result.DclItemData.Dimension, result.DclItemData.Name));
 
             return new NodeBuildResult(result, baseSymbolTable);
         }

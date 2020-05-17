@@ -1,4 +1,5 @@
-﻿using Parse.FrontEnd.RegularGrammar;
+﻿using Parse.FrontEnd.ParseTree;
+using Parse.FrontEnd.RegularGrammar;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -37,7 +38,7 @@ namespace Parse.FrontEnd.Ast
             this.SignPost = singleNT;
         }
 
-        public object ActionLogic(SymbolTable symbolTable, int blockLevel, int offset)
+        public object ActionLogic(int blockLevel, int offset)
             => this.SignPost?.MeaningUnit?.ActionLogic(this, blockLevel, offset);
 
         /// <summary>

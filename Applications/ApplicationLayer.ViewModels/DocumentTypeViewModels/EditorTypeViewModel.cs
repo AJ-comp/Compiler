@@ -13,6 +13,7 @@ using Parse.FrontEnd.Grammars.MiniC;
 using Parse.FrontEnd.Grammars.MiniC.SymbolTableFormat;
 using Parse.FrontEnd.Parsers.Datas;
 using Parse.FrontEnd.Parsers.Logical;
+using Parse.FrontEnd.ParseTree;
 using Parse.Tokenize;
 using Parse.WpfControls.SyntaxEditor.EventArgs;
 using System;

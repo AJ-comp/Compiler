@@ -3,6 +3,7 @@ using ApplicationLayer.ViewModels.Messages;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using Parse.FrontEnd.Ast;
+using Parse.FrontEnd.ParseTree;
 using System;
 using System.Collections.Generic;
 using CommonResource = ApplicationLayer.Define.Properties.Resources;
@@ -24,6 +25,7 @@ namespace ApplicationLayer.ViewModels.DocumentTypeViewModels
             get => _selectedParseTreeViewMode;
             set
             {
+                _selectedParseTreeViewMode = value;
                 Graph = new PocGraph(true);
 
                 CreateNode(ParseTree);
@@ -36,6 +38,7 @@ namespace ApplicationLayer.ViewModels.DocumentTypeViewModels
             get => _selectedAstViewMode;
             set
             {
+                _selectedAstViewMode = value;
                 Graph = new PocGraph(true);
 
                 CreateNode(Ast);

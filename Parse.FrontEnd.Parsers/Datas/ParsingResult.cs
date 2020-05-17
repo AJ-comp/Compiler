@@ -1,6 +1,6 @@
 ﻿using Parse.Extensions;
-using Parse.FrontEnd.Ast;
 using Parse.FrontEnd.Parsers.Properties;
+using Parse.FrontEnd.ParseTree;
 using System;
 using System.Collections.Generic;
 using System.Data;

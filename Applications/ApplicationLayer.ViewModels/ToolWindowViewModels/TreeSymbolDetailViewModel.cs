@@ -45,7 +45,6 @@ namespace ApplicationLayer.ViewModels.ToolWindowViewModels
                         continue;
                     }
 
-                    int offset = 0;
                     string categoryName = (treeNonterminal != null) ? treeNonterminal.ToString() : "Base";
                     SymbolDatas.AddChildrenToFirst(new CategoryTreeNodeModel(categoryName));
                     SymbolDatas.IsExpanded = true;

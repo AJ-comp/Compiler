@@ -6,7 +6,8 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
 {
     public partial class MiniCSdts
     {
-        private enum ExpressionKind { None, Add, Sub, Mul, Div, Mod };
+        private enum CalculateKind { None, Add, Sub, Mul, Div, Mod };
+        private enum LogicalKind { None, Not, Or, And, EQ, NotEQ, GT, LT, GE, LE };
 
         // format summary
         // ( ident | (ident) ) = (ident | digit | Add | Sub | Mul | Div | Mod)
@@ -23,7 +24,8 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
                 {
                     curNode.ConnectedInterLanguage.Clear();
                     var varData = baseSymbolTable.AllVarList.GetVarByName((curNode[0] as AstTerminal).Token.Input);
-                    curNode.ConnectedInterLanguage.Add(UCode.Command.Store(varData.DclData.BlockLevel, varData.Offset, varData.DclData.DclItemData.Name));
+                    curNode.ConnectedInterLanguage.Add(UCode.Command.Store(ReservedLabel, varData.DclData.BlockLevel, 
+                                                                                                                varData.Offset, varData.DclData.DclItemData.Name));
                 }
 
                 var astNonTerminal = curNode[2] as AstNonTerminal;
@@ -31,7 +33,7 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
                     result = BuildAddNode(astNonTerminal, baseSymbolTable, blockLevel, offset);
             }
             else
-                result = BuildCommonCalculateNode(curNode, baseSymbolTable, blockLevel, offset, ExpressionKind.None, true);
+                result = BuildCommonCalculateNode(curNode, baseSymbolTable, blockLevel, offset, CalculateKind.None, true);
 
             return result;
         }
@@ -40,67 +42,71 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
         // ident += (ident | digit)
         //  [0]   [1]   [2]
         private NodeBuildResult BuildAddAssignNode(AstNonTerminal curNode, MiniCSymbolTable baseSymbolTable, int blockLevel, int offset)
-            => BuildCommonCalculateNode(curNode, baseSymbolTable, blockLevel, offset, ExpressionKind.Add, true);
+            => BuildCommonCalculateNode(curNode, baseSymbolTable, blockLevel, offset, CalculateKind.Add, true);
 
         // format summary
         // ident -= (ident | digit)
         //  [0]   [1]   [2]
         private NodeBuildResult BuildSubAssignNode(AstNonTerminal curNode, MiniCSymbolTable baseSymbolTable, int blockLevel, int offset)
-            => BuildCommonCalculateNode(curNode, baseSymbolTable, blockLevel, offset, ExpressionKind.Sub, true);
+            => BuildCommonCalculateNode(curNode, baseSymbolTable, blockLevel, offset, CalculateKind.Sub, true);
 
         // format summary
         // ident *= (ident | digit)
         //  [0]   [1]   [2]
         private NodeBuildResult BuildMulAssignNode(AstNonTerminal curNode, MiniCSymbolTable baseSymbolTable, int blockLevel, int offset)
-            => BuildCommonCalculateNode(curNode, baseSymbolTable, blockLevel, offset, ExpressionKind.Mul, true);
+            => BuildCommonCalculateNode(curNode, baseSymbolTable, blockLevel, offset, CalculateKind.Mul, true);
 
         // format summary
         // ident /= (ident | digit)
         //  [0]   [1]   [2]
         private NodeBuildResult BuildDivAssignNode(AstNonTerminal curNode, MiniCSymbolTable baseSymbolTable, int blockLevel, int offset)
-            => BuildCommonCalculateNode(curNode, baseSymbolTable, blockLevel, offset, ExpressionKind.Div, true);
+            => BuildCommonCalculateNode(curNode, baseSymbolTable, blockLevel, offset, CalculateKind.Div, true);
 
         // format summary
         // ident %= (ident | digit)
         //  [0]   [1]   [2]
         private NodeBuildResult BuildModAssignNode(AstNonTerminal curNode, MiniCSymbolTable baseSymbolTable, int blockLevel, int offset)
-            => BuildCommonCalculateNode(curNode, baseSymbolTable, blockLevel, offset, ExpressionKind.Mod, true);
+            => BuildCommonCalculateNode(curNode, baseSymbolTable, blockLevel, offset, CalculateKind.Mod, true);
 
-        /// <summary>
-        /// This function builds an AddNode following the below process.
-        /// 1. The type of the 0 index may be TreeNonTerminal or TreeTerminal.
-        /// 2. The type of the 2 index may be TreeNonTerminal or TreeTerminal.
-        /// 3. Token type of the TreeTerminal may be Identifier or Digit type.
-        /// 4. If 0 or 2 index both is TreeTerminal type call BuildCommonCalculateNode function.
-        /// 5. If 0 or 2 index is TreeNonTerminal type call BuildCalculateNode function.
-        /// 6. If 0 or 2 index is TreeTerminal type call ConnectVarOrDigitUCode function.
-        /// </summary>
-        /// <param name="curNode"></param>
-        /// <param name="baseSymbolTable"></param>
-        /// <param name="blockLevel"></param>
-        /// <param name="offset"></param>
-        /// <returns></returns>
         private NodeBuildResult BuildAddNode(AstNonTerminal curNode, MiniCSymbolTable baseSymbolTable, int blockLevel, int offset)
-            => BuildCommonCalculateNode(curNode, baseSymbolTable, blockLevel, offset, ExpressionKind.Add);
+            => BuildCommonCalculateNode(curNode, baseSymbolTable, blockLevel, offset, CalculateKind.Add);
 
         // format summary
         // (ident | digit) - (ident | digit)
         private NodeBuildResult BuildSubNode(AstNonTerminal curNode, MiniCSymbolTable baseSymbolTable, int blockLevel, int offset)
-            => BuildCommonCalculateNode(curNode, baseSymbolTable, blockLevel, offset, ExpressionKind.Sub);
+            => BuildCommonCalculateNode(curNode, baseSymbolTable, blockLevel, offset, CalculateKind.Sub);
 
         // format summary
         // (ident | digit) * (ident | digit)
         private NodeBuildResult BuildMulNode(AstNonTerminal curNode, MiniCSymbolTable baseSymbolTable, int blockLevel, int offset)
-            => BuildCommonCalculateNode(curNode, baseSymbolTable, blockLevel, offset, ExpressionKind.Mul);
+            => BuildCommonCalculateNode(curNode, baseSymbolTable, blockLevel, offset, CalculateKind.Mul);
 
         // format summary
         // (ident | digit) / (ident | digit)
         private NodeBuildResult BuildDivNode(AstNonTerminal curNode, MiniCSymbolTable baseSymbolTable, int blockLevel, int offset)
-            => BuildCommonCalculateNode(curNode, baseSymbolTable, blockLevel, offset, ExpressionKind.Div);
+            => BuildCommonCalculateNode(curNode, baseSymbolTable, blockLevel, offset, CalculateKind.Div);
 
         // format summary
         // (ident | digit) % (ident | digit)
         private NodeBuildResult BuildModNode(AstNonTerminal curNode, MiniCSymbolTable baseSymbolTable, int blockLevel, int offset)
-            => BuildCommonCalculateNode(curNode, baseSymbolTable, blockLevel, offset, ExpressionKind.Mod);
+            => BuildCommonCalculateNode(curNode, baseSymbolTable, blockLevel, offset, CalculateKind.Mod);
+
+        #region Build function related to Logical expression
+        private NodeBuildResult BuildLogicalOr(AstNonTerminal curNode, MiniCSymbolTable baseSymbolTable, int blockLevel, int offset)
+            => BuildCommonLogicalNode(curNode, baseSymbolTable, blockLevel, offset, LogicalKind.Or);
+
+        private NodeBuildResult BuildLogicalAnd(AstNonTerminal curNode, MiniCSymbolTable baseSymbolTable, int blockLevel, int offset)
+            => BuildCommonLogicalNode(curNode, baseSymbolTable, blockLevel, offset, LogicalKind.And);
+
+        private NodeBuildResult BuildLogicalNot(AstNonTerminal curNode, MiniCSymbolTable baseSymbolTable, int blockLevel, int offset)
+            => BuildCommonLogicalNode(curNode, baseSymbolTable, blockLevel, offset, LogicalKind.Not);
+
+        private NodeBuildResult BuildEqual(AstNonTerminal curNode, MiniCSymbolTable baseSymbolTable, int blockLevel, int offset)
+            => BuildCommonLogicalNode(curNode, baseSymbolTable, blockLevel, offset, LogicalKind.EQ);
+
+        private NodeBuildResult BuildNotEqual(AstNonTerminal curNode, MiniCSymbolTable baseSymbolTable, int blockLevel, int offset)
+            => BuildCommonLogicalNode(curNode, baseSymbolTable, blockLevel, offset, LogicalKind.NotEQ);
+
+        #endregion
     }
 }

@@ -1,6 +1,7 @@
-﻿using System;
+﻿using Parse.FrontEnd.Ast;
+using System;
 
-namespace Parse.FrontEnd.Ast
+namespace Parse.FrontEnd.ParseTree
 {
     public class ParseTreeTerminal : ParseTreeSymbol
     {

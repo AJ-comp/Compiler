@@ -1,4 +1,4 @@
-﻿using Parse.FrontEnd.Ast;
+﻿using Parse.FrontEnd.ParseTree;
 using System.Diagnostics;
 
 namespace ApplicationLayer.Models.GraphModels

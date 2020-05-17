@@ -23,7 +23,23 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
             return result;
         }
 
-        private object ActionAdd(AstNonTerminal curNode, int blockLevel, int offset)
+        private object CommonLogical(AstNonTerminal curNode, int blockLevel, int offset)
+        {
+            List<AstNonTerminal> result = new List<AstNonTerminal>();
+
+            if (curNode.SignPost.MeaningUnit == this.LogicalOr)
+                result.AddRange(ActionLogicalOr(curNode, blockLevel, offset) as List<AstNonTerminal>);
+            else if (curNode.SignPost.MeaningUnit == this.LogicalAnd)
+                result.AddRange(ActionLogicalAnd(curNode, blockLevel, offset) as List<AstNonTerminal>);
+            else if (curNode.SignPost.MeaningUnit == this.LogicalNot)
+                result.AddRange(ActionLogicalNot(curNode, blockLevel, offset) as List<AstNonTerminal>);
+            else if (curNode.SignPost.MeaningUnit == this.Equal)
+                result.AddRange(ActionEqual(curNode, blockLevel, offset) as List<AstNonTerminal>);
+
+            return result;
+        }
+
+        private object CommonCalculateExpression(AstNonTerminal curNode, int blockLevel, int offset)
         {
             List<AstNonTerminal> result = new List<AstNonTerminal>();
 
@@ -46,13 +62,38 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
             return result;
         }
 
-        private object ActionSub(AstNonTerminal curNode, int blockLevel, int offset) => curNode;
+        private object CommonLogicalExpression(AstNonTerminal curNode, int blockLevel, int offset)
+        {
+            List<AstNonTerminal> result = new List<AstNonTerminal>();
 
-        private object ActionMul(AstNonTerminal curNode, int blockLevel, int offset) => curNode;
+            // if TreeNonTerminal doesn't exist.
+            if (curNode[0] is AstTerminal && curNode[2] is AstTerminal)
+            {
+                result.Add(curNode);
+                return result;
+            }
 
-        private object ActionDiv(AstNonTerminal curNode, int blockLevel, int offset) => curNode;
+            // if at least one TreeNonTerminal exist.
+            if (curNode[0] is AstNonTerminal)
+                result.AddRange(CommonLogical(curNode[0] as AstNonTerminal, blockLevel, offset) as List<AstNonTerminal>);
+            else result.Add(curNode);
 
-        private object ActionMod(AstNonTerminal curNode, int blockLevel, int offset) => curNode;
+            if (curNode[2] is AstNonTerminal)
+                result.AddRange(CommonLogical(curNode[2] as AstNonTerminal, blockLevel, offset) as List<AstNonTerminal>);
+            else result.Add(curNode);
+
+            return result;
+        }
+
+        private object ActionAdd(AstNonTerminal curNode, int blockLevel, int offset) => CommonCalculateExpression(curNode, blockLevel, offset);
+
+        private object ActionSub(AstNonTerminal curNode, int blockLevel, int offset) => CommonCalculateExpression(curNode, blockLevel, offset);
+
+        private object ActionMul(AstNonTerminal curNode, int blockLevel, int offset) => CommonCalculateExpression(curNode, blockLevel, offset);
+
+        private object ActionDiv(AstNonTerminal curNode, int blockLevel, int offset) => CommonCalculateExpression(curNode, blockLevel, offset);
+
+        private object ActionMod(AstNonTerminal curNode, int blockLevel, int offset) => CommonCalculateExpression(curNode, blockLevel, offset);
 
         private object ActionAssign(AstNonTerminal curNode, int blockLevel, int offset)
         {
@@ -79,25 +120,13 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
 
         private object ActionModAssign(AstNonTerminal curNode, int blockLevel, int offset) => curNode;
 
-        private object ActionLogicalOr(AstNonTerminal node, int blockLevel, int offset)
-        {
-            return null;
-        }
+        private object ActionLogicalOr(AstNonTerminal curNode, int blockLevel, int offset) => CommonLogicalExpression(curNode, blockLevel, offset);
 
-        private object ActionLogicalAnd(AstNonTerminal node, int blockLevel, int offset)
-        {
-            return null;
-        }
+        private object ActionLogicalAnd(AstNonTerminal curNode, int blockLevel, int offset) => CommonLogicalExpression(curNode, blockLevel, offset);
 
-        private object ActionLogicalNot(AstNonTerminal node, int blockLevel, int offset)
-        {
-            return null;
-        }
+        private object ActionLogicalNot(AstNonTerminal curNode, int blockLevel, int offset) => CommonLogicalExpression(curNode, blockLevel, offset);
 
-        private object ActionEqual(AstNonTerminal node, int blockLevel, int offset)
-        {
-            return null;
-        }
+        private object ActionEqual(AstNonTerminal curNode, int blockLevel, int offset) => CommonLogicalExpression(curNode, blockLevel, offset);
 
         private object ActionNotEqual(AstNonTerminal node, int blockLevel, int offset)
         {

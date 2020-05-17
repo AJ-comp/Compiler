@@ -4,6 +4,6 @@ namespace Parse.BackEnd
 {
     public abstract class TargetAssembly
     {
-        public abstract void GenerateCode(ParseTreeNonTerminal asTree);
+        public abstract void GenerateCode(AstNonTerminal asTree);
     }
 }

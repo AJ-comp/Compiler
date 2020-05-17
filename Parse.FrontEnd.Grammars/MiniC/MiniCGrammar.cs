@@ -151,7 +151,7 @@ namespace Parse.FrontEnd.Grammars.MiniC
             this.ifSt.AddItem(this.If + this.OpenParenthesis + this.expression + this.CloseParenthesis + this.statement + this.Else + this.statement, 0, sdts.IfElseSt);
 
             this.whileSt.AddItem(this.While + this.OpenParenthesis + this.expression + this.CloseParenthesis + this.statement, sdts.WhileSt);
-            this.returnSt.AddItem(this.Return + this.optExpression + this.SemiColon, sdts.ReturnSt);
+            this.returnSt.AddItem(this.Return + this.expressionSt, sdts.ReturnSt);
             this.expression.AddItem(this.assignmentExp);
 
             this.assignmentExp.AddItem(this.logicalOrExp);

@@ -36,7 +36,14 @@ namespace ApplicationLayer.ViewModels
             foreach(var nodeInfo in result)
             {
                 if (nodeInfo.Node?.SignPost.MeaningUnit == sdts.ParamDcl) nodeInfo.CategoryPos = UCodeDisplayModel.AttatchCategoryPosition.Up;
-                if (nodeInfo.Node?.SignPost.MeaningUnit == sdts.Add) nodeInfo.CategoryPos = UCodeDisplayModel.AttatchCategoryPosition.Down;
+                else if (nodeInfo.Node?.SignPost.MeaningUnit == sdts.Add) nodeInfo.CategoryPos = UCodeDisplayModel.AttatchCategoryPosition.Down;
+                else if (nodeInfo.Node?.SignPost.MeaningUnit == sdts.Equal) nodeInfo.CategoryPos = UCodeDisplayModel.AttatchCategoryPosition.Down;
+                else if (nodeInfo.Node?.SignPost.MeaningUnit == sdts.NotEqual) nodeInfo.CategoryPos = UCodeDisplayModel.AttatchCategoryPosition.Down;
+                else if (nodeInfo.Node?.SignPost.MeaningUnit == sdts.LogicalNot) nodeInfo.CategoryPos = UCodeDisplayModel.AttatchCategoryPosition.Down;
+                else if (nodeInfo.Node?.SignPost.MeaningUnit == sdts.LogicalAnd) nodeInfo.CategoryPos = UCodeDisplayModel.AttatchCategoryPosition.Down;
+                else if (nodeInfo.Node?.SignPost.MeaningUnit == sdts.LogicalOr) nodeInfo.CategoryPos = UCodeDisplayModel.AttatchCategoryPosition.Down;
+                else if (nodeInfo.Node?.SignPost.MeaningUnit == sdts.IfSt)
+                    nodeInfo.CategoryName = "if ( " + (nodeInfo.Node[1] as AstNonTerminal).ConnectedParseTree.AllInputDatas + ")";
 
                 prevNode = nodeInfo;
             }
@@ -51,6 +58,7 @@ namespace ApplicationLayer.ViewModels
 
         public AstNonTerminal Node { get; }
         public AttatchCategoryPosition CategoryPos { get; set; } = AttatchCategoryPosition.Own;
+        public string CategoryName { get; set; } = string.Empty;
 
         public UCodeDisplayModel(AstNonTerminal node)
         {
