@@ -399,11 +399,18 @@ namespace Parse.WpfControls.SyntaxEditor
 
         private AstSymbol SementicAnalysis(ParsingResult target)
         {
-            AstSymbol rootSymbol = target.ToParseTree?.ToAst;
-            this.ParserSnippet.Parser.Grammar.SDTS.Process(rootSymbol);
-            ParsingFailedListPreProcess(target);
+            try
+            {
+                AstSymbol rootSymbol = target.ToParseTree?.ToAst;
+                this.ParserSnippet.Parser.Grammar.SDTS.Process(rootSymbol);
+                ParsingFailedListPreProcess(target);
 
-            return rootSymbol;
+                return rootSymbol;
+            }
+            catch
+            {
+                return null;
+            }
         }
 
         private List<ItemData> GetCompletionList(ParsingResult parsingResult, int tokenIndex)

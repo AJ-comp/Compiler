@@ -1,9 +1,6 @@
 ﻿using Parse.FrontEnd.Ast;
 using Parse.FrontEnd.Grammars.MiniC.SymbolTableFormat;
-using Parse.FrontEnd.InterLanguages;
-using System;
 using System.Collections.Generic;
-using AlarmCodes = Parse.FrontEnd.Grammars.Properties.AlarmCodes;
 
 namespace Parse.FrontEnd.Grammars.MiniC.Sdts
 {
@@ -136,31 +133,36 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
             return result;
         }
 
+        private object ActionExpressionHub(AstNonTerminal curNode, int blockLevel, int offset)
+        {
+            List<AstNonTerminal> result = new List<AstNonTerminal>();
+            if (curNode == null) return result;
+
+            if (curNode.SignPost.MeaningUnit == this.Assign)
+                result.AddRange(this.ActionAssign(curNode, blockLevel, offset) as List<AstNonTerminal>);
+            else if (curNode.SignPost.MeaningUnit == this.AddAssign)
+                result.AddRange(this.ActionAddAssign(curNode, blockLevel, offset) as List<AstNonTerminal>);
+            else if (curNode.SignPost.MeaningUnit == this.SubAssign)
+                result.AddRange(this.ActionSubAssign(curNode, blockLevel, offset) as List<AstNonTerminal>);
+            else if (curNode.SignPost.MeaningUnit == this.MulAssign)
+                result.AddRange(this.ActionMulAssign(curNode, blockLevel, offset) as List<AstNonTerminal>);
+            else if (curNode.SignPost.MeaningUnit == this.DivAssign)
+                result.AddRange(this.ActionDivAssign(curNode, blockLevel, offset) as List<AstNonTerminal>);
+            else if (curNode.SignPost.MeaningUnit == this.ModAssign)
+                result.AddRange(this.ActionModAssign(curNode, blockLevel, offset) as List<AstNonTerminal>);
+            else if (curNode.SignPost.MeaningUnit == this.Call)
+                result.AddRange(this.ActionCall(curNode, blockLevel, offset) as List<AstNonTerminal>);
+
+            return result;
+        }
+
         private object ActionExpSt(AstNonTerminal curNode, int blockLevel, int offset)
         {
             List<AstNonTerminal> result = new List<AstNonTerminal>();
+            if (curNode.Count == 0) return result;
 
-            foreach (var item in curNode.Items)
-            {
-                if (item is AstTerminal) continue;
-
-                var astNonTerminal = item as AstNonTerminal;
-                if (astNonTerminal.SignPost.MeaningUnit == this.Assign)
-                    result.AddRange(this.ActionAssign(astNonTerminal, blockLevel, offset) as List<AstNonTerminal>);
-                else if (astNonTerminal.SignPost.MeaningUnit == this.AddAssign)
-                    result.AddRange(this.ActionAddAssign(astNonTerminal, blockLevel, offset) as List<AstNonTerminal>);
-                else if (astNonTerminal.SignPost.MeaningUnit == this.SubAssign)
-                    result.AddRange(this.ActionSubAssign(astNonTerminal, blockLevel, offset) as List<AstNonTerminal>);
-                else if (astNonTerminal.SignPost.MeaningUnit == this.MulAssign)
-                    result.AddRange(this.ActionMulAssign(astNonTerminal, blockLevel, offset) as List<AstNonTerminal>);
-                else if (astNonTerminal.SignPost.MeaningUnit == this.DivAssign)
-                    result.AddRange(this.ActionDivAssign(astNonTerminal, blockLevel, offset) as List<AstNonTerminal>);
-                else if (astNonTerminal.SignPost.MeaningUnit == this.ModAssign)
-                    result.AddRange(this.ActionModAssign(astNonTerminal, blockLevel, offset) as List<AstNonTerminal>);
-
-            }
-
-            return result;
+            var astNonTerminal = curNode[0] as AstNonTerminal;
+            return ActionExpressionHub(astNonTerminal, blockLevel, offset);
         }
 
         private object ActionDclList(AstNonTerminal node, int blockLevel, int offset)
@@ -285,14 +287,27 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
             return null;
         }
 
-        private object ActionCell(AstNonTerminal node, int blockLevel, int offset)
+        // [0] : Ident (AstTerminal)
+        // [1] : ActualParam (AstNonTerminal)
+        private object ActionCall(AstNonTerminal curNode, int blockLevel, int offset)
         {
-            return null;
+            List<AstNonTerminal> result = new List<AstNonTerminal>();
+
+            result.AddRange((curNode[1] as AstNonTerminal).ActionLogic(blockLevel, offset) as IReadOnlyList<AstNonTerminal>);
+            result.Add(curNode);
+
+            return result;
         }
 
-        private object ActionActualParam(AstNonTerminal node, int blockLevel, int offset)
+        private object ActionActualParam(AstNonTerminal curNode, int blockLevel, int offset)
         {
-            return null;
+            List<AstNonTerminal> result = new List<AstNonTerminal>();
+            if (curNode.Count == 0) return result;
+
+            AstNonTerminal astNonTerminal = curNode[0] as AstNonTerminal;
+            result.AddRange(astNonTerminal.ActionLogic(blockLevel, offset) as IReadOnlyList<AstNonTerminal>);
+
+            return result;
         }
     }
 }

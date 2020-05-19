@@ -3,6 +3,7 @@ using Parse.FrontEnd.RegularGrammar;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Data;
 
 namespace Parse.FrontEnd.ParseTree
 {
@@ -46,6 +47,7 @@ namespace Parse.FrontEnd.ParseTree
         {
             get
             {
+                if (SignPost.IsInduceEpsilon) return false;
                 if (_symbols.Count == 0) return false;
 
                 foreach(var item in _symbols)
@@ -54,6 +56,29 @@ namespace Parse.FrontEnd.ParseTree
                 }
 
                 return true;
+            }
+        }
+
+        public bool HasMeaningChildren
+        {
+            get
+            {
+                foreach (var item in _symbols)
+                {
+                    if (item is ParseTreeTerminal)
+                    {
+                        if ((item as ParseTreeTerminal).Token.Kind.Meaning)
+                            return true;
+                    }
+
+                    else if(item is ParseTreeNonTerminal)
+                    {
+                        if ((item as ParseTreeNonTerminal).SignPost.MeaningUnit != null)
+                            return true;
+                    }
+                }
+
+                return false;
             }
         }
 
@@ -73,40 +98,85 @@ namespace Parse.FrontEnd.ParseTree
             }
         }
 
-        public override AstSymbol ToAst => CreateAst(null, this);
+        public override AstSymbol ToAst
+        {
+            get
+            {
+                bool bTracking = true;
+                return CreateAst(null, null, this, ref bTracking);
+            }
+        }
 
         public ParseTreeNonTerminal(NonTerminalSingle singleNT)
         {
             this.SignPost = singleNT;
         }
 
-        private static AstNonTerminal CreateAst(AstNonTerminal newParentTree, ParseTreeSymbol curTree)
+        /// <summary>
+        /// This function make an AST.
+        /// </summary>
+        /// <param name="newParentTree"></param>
+        /// <param name="epsilonableTree"></param>
+        /// <param name="curTree"></param>
+        /// <param name="bTracking"></param>
+        /// <see cref="https://app.lucidchart.com/documents/edit/589fb725-e547-4eb0-bd15-3408f0692062/0_0"/>
+        /// <returns></returns>
+        private static AstNonTerminal CreateAst(AstNonTerminal newParentTree, AstNonTerminal epsilonableTree, ParseTreeSymbol curTree, ref bool bTracking)
         {
             AstNonTerminal result = null;
+
+            // Ast must not have a virtual node.
+            if (curTree.IsVirtual)
+            {
+                // if epsilonableTree is null can't build Ast.
+                if (epsilonableTree == null) throw new Exception();
+
+                bTracking = false;
+                epsilonableTree.Clear();
+
+                return result;
+            }
 
             if (curTree is ParseTreeTerminal)
             {
                 var ast = curTree.ToAst;
                 if (ast != null) newParentTree.Add(ast);
+
+                return result;
             }
-            else
+
+            // if curTree is ParseTreeNonTerminal
+            var convertedParentTree = curTree as ParseTreeNonTerminal;
+
+            if (convertedParentTree.SignPost.MeaningUnit != null)
             {
-                var convertedParentTree = curTree as ParseTreeNonTerminal;
-                if (convertedParentTree.SignPost.MeaningUnit != null)
+                result = new AstNonTerminal(convertedParentTree.SignPost);
+                result.ConnectedParseTree = curTree as ParseTreeNonTerminal;
+
+                if (result.SignPost.IsInduceEpsilon) epsilonableTree = result;
+                // if 'curTree' is Ast and Ast doesn't exist of the children tree then it(curTree) can same that induce epsilon in the Ast rule.
+                else if (convertedParentTree.HasMeaningChildren == false) epsilonableTree = result;
+
+                if (newParentTree == null) newParentTree = result;
+                else if (newParentTree != result)
                 {
-                    result = new AstNonTerminal(convertedParentTree.SignPost);
-                    result.ConnectedParseTree = curTree as ParseTreeNonTerminal;
-
-                    if (newParentTree == null) newParentTree = result;
-                    else if (newParentTree != result)
-                    {
-                        (newParentTree as AstNonTerminal).Add(result);
-                        newParentTree = result;
-                    }
+                    (newParentTree as AstNonTerminal).Add(result);
+                    newParentTree = result;
                 }
+            }
 
-                // it can't use Parallel because order.
-                foreach (var node in convertedParentTree) CreateAst(newParentTree, node);
+            // it can't use Parallel because order.
+            foreach (var node in convertedParentTree)
+            {
+                if (bTracking) CreateAst(newParentTree, epsilonableTree, node, ref bTracking);
+
+                // if a bTracking value was changed in the CreateAst function.
+                if (bTracking == false)
+                {
+                    // cancel tracking until curTree is a parent of the epsilonableTree.
+                    if (convertedParentTree.SignPost == epsilonableTree.SignPost) bTracking = true;
+                    break;
+                }
             }
 
             return result;

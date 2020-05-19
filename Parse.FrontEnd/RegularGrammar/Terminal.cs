@@ -48,7 +48,7 @@ namespace Parse.FrontEnd.RegularGrammar
     {
         public InputTerminal(Terminal terminal) : base(terminal.TokenType, terminal.Value)
         {
-            this.uniqueKey = terminal.uniqueKey;
+            this.UniqueKey = terminal.UniqueKey;
         }
 
         public override string ToString()
@@ -61,7 +61,7 @@ namespace Parse.FrontEnd.RegularGrammar
     {
         public NotDefined(string value = "") : base(TokenType.SpecialToken.NotDefined, value)
         {
-            this.uniqueKey = KeyManager.NotDefinedKey;
+            this.UniqueKey = KeyManager.NotDefinedKey;
         }
     }
 
@@ -69,7 +69,7 @@ namespace Parse.FrontEnd.RegularGrammar
     {
         public Epsilon() : base(TokenType.SpecialToken.Epsilon, "ε", "epsilon")
         {
-            this.uniqueKey = KeyManager.EpsilonKey;
+            this.UniqueKey = KeyManager.EpsilonKey;
         }
     }
 
@@ -79,7 +79,7 @@ namespace Parse.FrontEnd.RegularGrammar
 
         public EndMarker() : base(TokenType.SpecialToken.Marker, EndMarkerChar)
         {
-            this.uniqueKey = KeyManager.EndMarkerKey;
+            this.UniqueKey = KeyManager.EndMarkerKey;
         }
 
         public override string ToString() => string.Format("This is EndMarker! char : {0}", EndMarkerChar);

@@ -5,71 +5,46 @@ using GalaSoft.MvvmLight.Messaging;
 using Parse.FrontEnd.Ast;
 using Parse.FrontEnd.ParseTree;
 using System;
-using System.Collections.Generic;
 using CommonResource = ApplicationLayer.Define.Properties.Resources;
 
 namespace ApplicationLayer.ViewModels.DocumentTypeViewModels
 {
     public class ParseTreeViewModel : DocumentViewModel
     {
-        private bool _selectedParseTreeViewMode;
-        private bool _selectedAstViewMode;
+        private bool _selectedParseTree;
+        private bool _selectedAst;
         private RelayCommand<object> _mouseDownCmd;
 
         #region Public Properties
-        public ParseTreeSymbol ParseTree { get; } = null;
-        public AstSymbol Ast { get; } = null;
-
-        public bool SelectedParseTreeViewMode
+        public bool SelectedParseTree
         {
-            get => _selectedParseTreeViewMode;
+            get => _selectedParseTree;
             set
             {
-                _selectedParseTreeViewMode = value;
-                Graph = new PocGraph(true);
+                _selectedParseTree = value;
+                bool visible = _selectedParseTree ? true : false;
 
-                CreateNode(ParseTree);
-                RaisePropertyChanged(nameof(SelectedParseTreeViewMode));
+                if (AstGraphVM != null) AstGraphVM.IsVisible = !visible;
+                if (ParseTreeGraphVM != null) ParseTreeGraphVM.IsVisible = visible;
+
+                RaisePropertyChanged(nameof(SelectedParseTree));
             }
         }
 
-        public bool SelectedAstViewMode
+        public bool SelectedAst
         {
-            get => _selectedAstViewMode;
+            get => _selectedAst;
             set
             {
-                _selectedAstViewMode = value;
-                Graph = new PocGraph(true);
+                _selectedAst = value;
 
-                CreateNode(Ast);
-                RaisePropertyChanged(nameof(SelectedAstViewMode));
+                RaisePropertyChanged(nameof(SelectedAst));
             }
         }
 
-        public List<string> LayoutAlgorithmTypes
-        {
-            get { return layoutAlgorithmTypes; }
-        }
+        public GraphLayoutViewModel ParseTreeGraphVM { get; private set; }
+        public GraphLayoutViewModel AstGraphVM { get; private set; }
 
-        public string LayoutAlgorithmType
-        {
-            get { return layoutAlgorithmType; }
-            set
-            {
-                layoutAlgorithmType = value;
-                this.RaisePropertyChanged(nameof(LayoutAlgorithmType));
-            }
-        }
-
-        public PocGraph Graph
-        {
-            get { return graph; }
-            set
-            {
-                graph = value;
-                this.RaisePropertyChanged(nameof(Graph));
-            }
-        }
         #endregion
 
         public RelayCommand<object> MouseDownCommand
@@ -96,119 +71,87 @@ namespace ApplicationLayer.ViewModels.DocumentTypeViewModels
             : base(CommonResource.ParseTree, CommonResource.ParseTree + srcPath, CommonResource.ParseTree + srcPath)
         {
             if (parseTree is null) return;
-            this.ParseTree = parseTree;
-            this.Ast = ast;
 
-            //Add Layout Algorithm Types
-            layoutAlgorithmTypes.Add("BoundedFR");
-            layoutAlgorithmTypes.Add("Circular");
-            layoutAlgorithmTypes.Add("CompoundFDP");
-            layoutAlgorithmTypes.Add("EfficientSugiyama");
-            layoutAlgorithmTypes.Add("FR");
-            layoutAlgorithmTypes.Add("ISOM");
-            layoutAlgorithmTypes.Add("KK");
-            layoutAlgorithmTypes.Add("LinLog");
-            layoutAlgorithmTypes.Add("Tree");
+            PocGraph parseTreeGraph = new PocGraph(true);
+            CreateNode(parseTreeGraph, parseTree);
+            ParseTreeGraphVM = new GraphLayoutViewModel(parseTreeGraph);
 
-            //Pick a default Layout Algorithm Type
-            LayoutAlgorithmType = "Tree";
+            if (ast is null) return;
 
-            SelectedParseTreeViewMode = true;
+            PocGraph astGraph = new PocGraph(true);
+            CreateNode(astGraph, ast);
+            AstGraphVM = new GraphLayoutViewModel(astGraph);
+
+            SelectedParseTree = true;
         }
 
-
-
-        #region Data
-        private string layoutAlgorithmType;
-        private PocGraph graph;
-        private List<string> layoutAlgorithmTypes = new List<string>();
-        #endregion
-
-        #region Ctor
-        #endregion
-
         #region Private Methods
-        private PocEdge AddNewGraphEdge(PocVertex from, PocVertex to)
+        private PocEdge AddNewGraphEdge(PocGraph graph, PocVertex from, PocVertex to)
         {
             string edgeString = FormattableString.Invariant($"{from.ID}-{to.ID} Connected");
 //            string edgeString = string.Format("{0}-{1} Connected", from.ID, to.ID);
 
             PocEdge newEdge = new PocEdge(edgeString, from, to);
-            Graph.AddEdge(newEdge);
+            graph.AddEdge(newEdge);
             return newEdge;
         }
 
-        private PocVertex CreateNode(ParseTreeSymbol curTree)
+        private PocVertex CreateNode(PocGraph graph, ParseTreeSymbol curTree)
         {
             // Create vertex
-            PocVertex curNode;
+            PocVertex curNode = null;
+            if (curTree == null) return curNode;
+
             if (curTree is ParseTreeTerminal)
             {
                 var treeTerminal = curTree as ParseTreeTerminal;
-                bool bAst = treeTerminal.Token.Kind.Meaning;
-                bool bVirtual = treeTerminal.IsVirtual;
                 curNode = new ParseTreeSymbolVertex(treeTerminal);
-                Graph.AddVertex(curNode);
+                graph.AddVertex(curNode);
             }
             else
             {
                 var treeNonTerminal = curTree as ParseTreeNonTerminal;
-                bool bAst = (treeNonTerminal.SignPost.MeaningUnit == null) ? false : true;
-                bool bVirtual = treeNonTerminal.IsVirtual;
-                bool bHasVirtualChild = treeNonTerminal.HasVirtualChild;
                 curNode = new ParseTreeSymbolVertex(treeNonTerminal);
-                Graph.AddVertex(curNode);
+                graph.AddVertex(curNode);
 
                 foreach (var childTree in treeNonTerminal.Items)
                 {
                     //add some edges to the graph
-                    var childNode = CreateNode(childTree);
-                    AddNewGraphEdge(curNode, childNode);
+                    var childNode = CreateNode(graph, childTree);
+                    AddNewGraphEdge(graph, curNode, childNode);
                 }
             }
 
             return curNode;
         }
 
-        private PocVertex CreateNode(AstSymbol curTree)
+        private PocVertex CreateNode(PocGraph graph, AstSymbol curTree)
         {
             // Create vertex
-            PocVertex curNode;
+            PocVertex curNode = null;
+            if (curTree == null) return curNode;
+
             if (curTree is AstTerminal)
             {
                 var treeTerminal = curTree as AstTerminal;
                 curNode = new AstSymbolVertex(treeTerminal);
-                Graph.AddVertex(curNode);
+                graph.AddVertex(curNode);
             }
             else
             {
                 var treeNonTerminal = curTree as AstNonTerminal;
                 curNode = new AstSymbolVertex(treeNonTerminal);
-                Graph.AddVertex(curNode);
+                graph.AddVertex(curNode);
 
                 foreach (var childTree in treeNonTerminal.Items)
                 {
                     //add some edges to the graph
-                    var childNode = CreateNode(childTree);
-                    AddNewGraphEdge(curNode, childNode);
+                    var childNode = CreateNode(graph, childTree);
+                    AddNewGraphEdge(graph, curNode, childNode);
                 }
             }
 
             return curNode;
-        }
-
-        private void CreateGraph(ParseTreeSymbol curTree)
-        {
-            Graph = new PocGraph(true);
-
-            CreateNode(curTree);
-            /*
-            string edgeString = string.Format("{0}-{1} Connected", existingVertices[0].ID, existingVertices[0].ID);
-            Graph.AddEdge(new PocEdge(edgeString, existingVertices[0], existingVertices[1]));
-            Graph.AddEdge(new PocEdge(edgeString, existingVertices[0], existingVertices[1]));
-            Graph.AddEdge(new PocEdge(edgeString, existingVertices[0], existingVertices[1]));
-            Graph.AddEdge(new PocEdge(edgeString, existingVertices[0], existingVertices[1]));
-            */
         }
 
         #endregion

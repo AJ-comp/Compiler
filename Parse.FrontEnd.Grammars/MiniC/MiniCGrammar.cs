@@ -194,7 +194,7 @@ namespace Parse.FrontEnd.Grammars.MiniC
 
             this.postfixExp.AddItem(this.primaryExp);
             this.postfixExp.AddItem(this.postfixExp + this.OpenSquareBrace + this.expression + this.CloseSquareBrace, sdts.Index);
-            this.postfixExp.AddItem(this.postfixExp + this.OpenParenthesis + this.optActualParam + this.CloseParenthesis, sdts.Cell);
+            this.postfixExp.AddItem(this.functionName + this.OpenParenthesis + this.optActualParam + this.CloseParenthesis, sdts.Call);
             this.postfixExp.AddItem(this.postfixExp + this.Inc, sdts.PostInc);
             this.postfixExp.AddItem(this.postfixExp + this.Dec, sdts.PostDec);
 

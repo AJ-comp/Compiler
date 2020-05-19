@@ -14,6 +14,7 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
             int funcOffset = 0;
             _labels.Clear();
             curNode.ClearConnectedInfo();
+            curNode.ConnectedSymbolTable = baseSymbolTable;
 
             foreach (var item in curNode.Items)
             {
@@ -29,7 +30,6 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
                         Offset = offset
                     };
                     baseSymbolTable.VarDataList.Add(varData);
-                    curNode.ConnectedSymbolTable = baseSymbolTable;
                     offset++;
                 }
                 // Global function
@@ -71,9 +71,6 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
                 else if (astNonTerminal.SignPost.MeaningUnit == this.CompoundSt)
                 {
                     var nodeCheckResult = this.BuildCompoundStNode(astNonTerminal, newSymbolTable, blockLevel + 1, offset);
-                    if (nodeCheckResult.Result)
-                        curNode.ConnectedInterLanguage.Add(UCode.Command.RetFromProc(ReservedLabel));
-
                 }
             }
 

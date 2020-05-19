@@ -50,7 +50,7 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
         public MeaningUnit WhileSt { get; } = new MeaningUnit("WhileSt");
         public MeaningUnit ReturnSt { get; } = new MeaningUnit("ReturnSt");
         public MeaningUnit Index { get; } = new MeaningUnit("Index");
-        public MeaningUnit Cell { get; } = new MeaningUnit("Cell");
+        public MeaningUnit Call { get; } = new MeaningUnit("Call");
         public MeaningUnit ActualParam { get; } = new MeaningUnit("ActualParam");
 
 
@@ -77,7 +77,7 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
             this.WhileSt.ActionLogic = this.ActionWhileSt;
             this.ReturnSt.ActionLogic = this.ActionReturnSt;
             this.Index.ActionLogic = this.ActionIndex;
-            this.Cell.ActionLogic = this.ActionCell;
+            this.Call.ActionLogic = this.ActionCall;
             this.ActualParam.ActionLogic = this.ActionActualParam;
 
             this.Add.ActionLogic = this.ActionAdd;
@@ -128,9 +128,16 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
         {
             List<AstNonTerminal> result = new List<AstNonTerminal>();
 
-            if (symbol != null)
+            try
             {
-                result = this.ActionProgram(symbol as AstNonTerminal, 0, 0) as List<AstNonTerminal>;
+                if (symbol != null)
+                {
+                    result = this.ActionProgram(symbol as AstNonTerminal, 0, 0) as List<AstNonTerminal>;
+                }
+            }
+            catch (Exception ex)
+            {
+                return null;
             }
 
             return result;

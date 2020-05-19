@@ -82,25 +82,8 @@ namespace Parse.FrontEnd.InterLanguages
             public static Format ProcEnd(string labelName, string comment = "")
                 => UCodeFormat(labelName, "end", comment);
 
-            public static IReadOnlyList<Format> ProcCall(string labelName, string procName, params ParamData[] param)
-            {
-                List<Format> result = new List<Format>
-                {
-                    UCodeFormat(labelName, "ldp")
-                };
-
-                foreach (var item in param)
-                {
-                    if (item.PassWay == VarPassWay.CallByValue)
-                        result.Add(UCodeFormat("", "lod", item.Comment, item.BIndex, item.OIndex));
-                    else if (item.PassWay == VarPassWay.CallByAddress)
-                        result.Add(UCodeFormat("", "lda", item.Comment, item.BIndex, item.OIndex));
-
-                    result.Add(UCodeFormat("", "call", procName));
-                }
-
-                return result;
-            }
+            public static Format ProcCall(string labelName, string procName, params ParamData[] param)
+                => UCodeFormat(labelName, "call", procName, procName);
 
             public static Format RetFromProc(string labelName, string comment = "")
                 => UCodeFormat(labelName, "ret", comment);

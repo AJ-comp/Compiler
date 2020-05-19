@@ -4,7 +4,7 @@ namespace Parse.FrontEnd.RegularGrammar
 {
     public abstract class Symbol : IShowable, IQuantifiable
     {
-        internal UInt32 uniqueKey = UInt32.MaxValue;
+        public UInt32 UniqueKey { get; internal set; } = UInt32.MaxValue;
 
         public abstract string ToGrammarString();
         public abstract string ToTreeString(ushort depth = 1);
@@ -20,7 +20,7 @@ namespace Parse.FrontEnd.RegularGrammar
             return (this.GetHashCode() == other.GetHashCode());
         }
 
-        public override int GetHashCode() => (int)this.uniqueKey;
+        public override int GetHashCode() => (int)this.UniqueKey;
 
         public override bool Equals(object obj)
         {

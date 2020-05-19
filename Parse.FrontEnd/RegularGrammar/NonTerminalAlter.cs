@@ -8,8 +8,22 @@ namespace Parse.FrontEnd.RegularGrammar
         private HashSet<NonTerminalConcat> concatSymbols = new HashSet<NonTerminalConcat>();
 
         public int Count => ((ISet<NonTerminalConcat>)concatSymbols).Count;
-
         public bool IsReadOnly => ((ISet<NonTerminalConcat>)concatSymbols).IsReadOnly;
+
+        public bool IsInduceEpsilon
+        {
+            get
+            {
+                bool result = false;
+
+                foreach(var item in concatSymbols)
+                {
+                    if (item.IsEpsilon) result = true;
+                }
+
+                return result;
+            }
+        }
 
         public void AddAsConcat(params Symbol[] symbols)
         {

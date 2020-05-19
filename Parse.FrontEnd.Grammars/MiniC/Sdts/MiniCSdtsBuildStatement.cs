@@ -2,13 +2,14 @@
 using Parse.FrontEnd.Grammars.MiniC.SymbolTableFormat;
 using Parse.FrontEnd.InterLanguages;
 using Parse.Utilities;
+using System;
 
 namespace Parse.FrontEnd.Grammars.MiniC.Sdts
 {
     public partial class MiniCSdts
     {
         // [0] : DclList (AstNonTerminal)
-        // [1] : StatList (AstNonTerminal)
+        // [1] : StatList (AstNonTerminal) [epsilon able]
         private NodeBuildResult BuildCompoundStNode(AstNonTerminal curNode, MiniCSymbolTable baseSymbolTable, int blockLevel, int offset)
         {
             bool result = true;
@@ -17,6 +18,7 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
             // DclList
             var dclResult = this.BuildDclListNode(curNode[0] as AstNonTerminal, baseSymbolTable, blockLevel, offset);
             var newSymbolTable = dclResult.symbolTable as MiniCSymbolTable;
+            if (curNode.Count == 1) return new NodeBuildResult(null, newSymbolTable, dclResult.Result);
 
             // StatList
             var statResult = this.BuildStatListNode(curNode[1] as AstNonTerminal, newSymbolTable, blockLevel, offset);
@@ -32,6 +34,7 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
         private NodeBuildResult BuildStatListNode(AstNonTerminal curNode, MiniCSymbolTable baseSymbolTable, int blockLevel, int offset)
         {
             curNode.ClearConnectedInfo();
+            if (curNode.Count == 0) return new NodeBuildResult(null, baseSymbolTable, true);
 
             foreach (var item in curNode.Items)
             {
@@ -41,7 +44,7 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
                 StatementHub(astNonTerminal, baseSymbolTable, blockLevel, offset);
             }
 
-            return new NodeBuildResult(null, baseSymbolTable);
+            return new NodeBuildResult(null, baseSymbolTable, true);
         }
 
         // format summary
@@ -53,28 +56,35 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
             if(curNode.Count == 0) return new NodeBuildResult(null, baseSymbolTable, true);
 
             var astNonTerminal = curNode[0] as AstNonTerminal;
-            if (astNonTerminal.SignPost.MeaningUnit == this.Assign)
-                return this.BuildAssignNode(astNonTerminal, baseSymbolTable, blockLevel, offset);
-            if (astNonTerminal.SignPost.MeaningUnit == this.AddAssign)
-                return this.BuildAddAssignNode(astNonTerminal, baseSymbolTable, blockLevel, offset);
-            if (astNonTerminal.SignPost.MeaningUnit == this.SubAssign)
-                return this.BuildSubAssignNode(astNonTerminal, baseSymbolTable, blockLevel, offset);
-            if (astNonTerminal.SignPost.MeaningUnit == this.MulAssign)
-                return this.BuildMulAssignNode(astNonTerminal, baseSymbolTable, blockLevel, offset);
-            if (astNonTerminal.SignPost.MeaningUnit == this.DivAssign)
-                return this.BuildDivAssignNode(astNonTerminal, baseSymbolTable, blockLevel, offset);
-            if (astNonTerminal.SignPost.MeaningUnit == this.ModAssign)
-                return this.BuildModAssignNode(astNonTerminal, baseSymbolTable, blockLevel, offset);
-            if (astNonTerminal.SignPost.MeaningUnit == this.Add)
-                return this.BuildAddNode(astNonTerminal, baseSymbolTable, blockLevel, offset);
-            if (astNonTerminal.SignPost.MeaningUnit == this.Sub)
-                return this.BuildSubNode(astNonTerminal, baseSymbolTable, blockLevel, offset);
-            if (astNonTerminal.SignPost.MeaningUnit == this.Mul)
-                return this.BuildMulNode(astNonTerminal, baseSymbolTable, blockLevel, offset);
-            if (astNonTerminal.SignPost.MeaningUnit == this.Div)
-                return this.BuildDivNode(astNonTerminal, baseSymbolTable, blockLevel, offset);
-            if (astNonTerminal.SignPost.MeaningUnit == this.Mod)
-                return this.BuildModNode(astNonTerminal, baseSymbolTable, blockLevel, offset);
+            return ExpressionStatementHub(astNonTerminal, baseSymbolTable, blockLevel, offset);
+        }
+
+        private NodeBuildResult ExpressionStatementHub(AstNonTerminal curNode, MiniCSymbolTable baseSymbolTable, int blockLevel, int offset)
+        {
+            if (curNode.SignPost.MeaningUnit == this.Assign)
+                return this.BuildAssignNode(curNode, baseSymbolTable, blockLevel, offset);
+            if (curNode.SignPost.MeaningUnit == this.AddAssign)
+                return this.BuildAddAssignNode(curNode, baseSymbolTable, blockLevel, offset);
+            if (curNode.SignPost.MeaningUnit == this.SubAssign)
+                return this.BuildSubAssignNode(curNode, baseSymbolTable, blockLevel, offset);
+            if (curNode.SignPost.MeaningUnit == this.MulAssign)
+                return this.BuildMulAssignNode(curNode, baseSymbolTable, blockLevel, offset);
+            if (curNode.SignPost.MeaningUnit == this.DivAssign)
+                return this.BuildDivAssignNode(curNode, baseSymbolTable, blockLevel, offset);
+            if (curNode.SignPost.MeaningUnit == this.ModAssign)
+                return this.BuildModAssignNode(curNode, baseSymbolTable, blockLevel, offset);
+            if (curNode.SignPost.MeaningUnit == this.Add)
+                return this.BuildAddNode(curNode, baseSymbolTable, blockLevel, offset);
+            if (curNode.SignPost.MeaningUnit == this.Sub)
+                return this.BuildSubNode(curNode, baseSymbolTable, blockLevel, offset);
+            if (curNode.SignPost.MeaningUnit == this.Mul)
+                return this.BuildMulNode(curNode, baseSymbolTable, blockLevel, offset);
+            if (curNode.SignPost.MeaningUnit == this.Div)
+                return this.BuildDivNode(curNode, baseSymbolTable, blockLevel, offset);
+            if (curNode.SignPost.MeaningUnit == this.Mod)
+                return this.BuildModNode(curNode, baseSymbolTable, blockLevel, offset);
+            if (curNode.SignPost.MeaningUnit == this.Call)
+                return this.BuildCallNode(curNode, baseSymbolTable, blockLevel, offset);
 
             return new NodeBuildResult(null, baseSymbolTable);
         }
@@ -120,12 +130,12 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
             return result;
         }
 
-        private NodeBuildResult BuildIfElseStNode(AstNonTerminal node, MiniCSymbolTable baseSymbolTable, int blockLevel, int offset)
+        private NodeBuildResult BuildIfElseStNode(AstNonTerminal curNode, MiniCSymbolTable baseSymbolTable, int blockLevel, int offset)
         {
             return null;
         }
 
-        private NodeBuildResult BuildWhileStNode(AstNonTerminal node, MiniCSymbolTable baseSymbolTable, int blockLevel, int offset)
+        private NodeBuildResult BuildWhileStNode(AstNonTerminal curNode, MiniCSymbolTable baseSymbolTable, int blockLevel, int offset)
         {
             return null;
         }
@@ -141,6 +151,34 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
                 curNode.ConnectedInterLanguage.Add(UCode.Command.RetFromProc(ReservedLabel));
 
             return stResult;
+        }
+
+        // [0] : Ident (AstTerminal)
+        // [1] : ActualParam (AstNonTerminal)
+        private NodeBuildResult BuildCallNode(AstNonTerminal curNode, MiniCSymbolTable baseSymbolTable, int blockLevel, int offset)
+        {
+            curNode.ClearConnectedInfo();
+
+            var funcName = curNode[0] as AstTerminal;
+            var result = BuildActualParam(curNode[1] as AstNonTerminal, baseSymbolTable, blockLevel, offset);
+            if (result.Result)
+                curNode.ConnectedInterLanguage.Add(UCode.Command.ProcCall(ReservedLabel, funcName.Token.Input));
+
+            return result;
+        }
+
+        private NodeBuildResult BuildActualParam(AstNonTerminal curNode, MiniCSymbolTable baseSymbolTable, int blockLevel, int offset)
+        {
+            bool result = true;
+            curNode.ClearConnectedInfo();
+
+            foreach(var item in curNode.Items)
+            {
+                if (ExpressionStatementHub(item as AstNonTerminal, baseSymbolTable, blockLevel, offset).Result == false)
+                    result = false;
+            }
+
+            return new NodeBuildResult(null, baseSymbolTable, result);
         }
     }
 }
