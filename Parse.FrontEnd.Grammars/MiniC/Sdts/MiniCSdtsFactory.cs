@@ -98,7 +98,7 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
             this.NotEqual.ActionLogic = this.ActionNotEqual;
             this.GreaterThan.ActionLogic = this.ActionGreaterThan;
             this.LessThan.ActionLogic = this.ActionLessThan;
-            this.GreatherEqual.ActionLogic = this.ActionGreatherEqual;
+            this.GreaterEqual.ActionLogic = this.ActionGreatherEqual;
             this.LessEqual.ActionLogic = this.ActionLessEqual;
             this.UnaryMinus.ActionLogic = this.ActionUnaryMinus;
             this.PreInc.ActionLogic = this.ActionPreInc;
@@ -106,6 +106,55 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
             this.PostInc.ActionLogic = this.ActionPostInc;
             this.PostDec.ActionLogic = this.ActionPostDec;
 
+
+
+            this.Program.BuildLogic = this.BuildProgramNode;
+            this.FuncDef.BuildLogic = this.BuildFuncDefNode;
+            this.FuncHead.BuildLogic = this.BuildFuncHeadNode;
+            this.DclSpec.BuildLogic = this.BuildDclSpecNode;
+            this.FormalPara.BuildLogic = this.BuildFormalParaNode;
+            this.ParamDcl.BuildLogic = this.BuildParamDcl;
+            this.CompoundSt.BuildLogic = this.BuildCompoundStNode;
+            this.DclList.BuildLogic = this.BuildDclListNode;
+            this.Dcl.BuildLogic = this.BuildDclNode;
+            this.DclItem.BuildLogic = this.BuildDclItemNode;
+            this.SimpleVar.BuildLogic = this.BuildSimpleVarNode;
+            this.ArrayVar.BuildLogic = this.BuildArrayVarNode;
+            this.StatList.BuildLogic = this.BuildStatListNode;
+            this.ExpSt.BuildLogic = this.BuildExpStNode;
+            this.IfSt.BuildLogic = this.BuildIfStNode;
+            this.IfElseSt.BuildLogic = this.BuildIfElseStNode;
+            this.WhileSt.BuildLogic = this.BuildWhileStNode;
+            this.ReturnSt.BuildLogic = this.BuildReturnStNode;
+//            this.Index.BuildLogic = this.buildin;
+            this.Call.BuildLogic = this.BuildCallNode;
+            this.ActualParam.BuildLogic = this.BuildActualParam;
+
+            this.Add.BuildLogic = this.BuildAdd;
+            this.Sub.BuildLogic = this.BuildSub;
+            this.Mul.BuildLogic = this.BuildMul;
+            this.Div.BuildLogic = this.BuildDiv;
+            this.Mod.BuildLogic = this.BuildMod;
+            this.Assign.BuildLogic = this.BuildAssign;
+            this.AddAssign.BuildLogic = this.BuildAddAssign;
+            this.SubAssign.BuildLogic = this.BuildSubAssign;
+            this.MulAssign.BuildLogic = this.BuildMulAssign;
+            this.DivAssign.BuildLogic = this.BuildDivAssign;
+            this.ModAssign.BuildLogic = this.BuildModAssign;
+            this.LogicalOr.BuildLogic = this.BuildExpressionNode;
+            this.LogicalAnd.BuildLogic = this.BuildExpressionNode;
+            this.LogicalNot.BuildLogic = this.BuildExpressionNode;
+            this.Equal.BuildLogic = this.BuildExpressionNode;
+            this.NotEqual.BuildLogic = this.BuildExpressionNode;
+            this.GreaterThan.BuildLogic = this.BuildExpressionNode;
+            this.LessThan.BuildLogic = this.BuildExpressionNode;
+            this.GreaterEqual.BuildLogic = this.BuildExpressionNode;
+            this.LessEqual.BuildLogic = this.BuildExpressionNode;
+            //this.UnaryMinus.BuildLogic = this.ActionUnaryMinus;
+            //this.PreInc.BuildLogic = this.ActionPreInc;
+            //this.PreDec.BuildLogic = this.ActionPreDec;
+            //this.PostInc.BuildLogic = this.ActionPostInc;
+            //this.PostDec.BuildLogic = this.ActionPostDec;
         }
 
         public override SementicAnalysisResult Process(AstSymbol symbol)
@@ -118,24 +167,24 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
                 this.BuildProgramNode(symbol as AstNonTerminal, new MiniCSymbolTable(), 0, 0);
                 return new SementicAnalysisResult(errList, null);
             }
-            catch (Exception ex)
+            catch
             {
                 return null;
             }
         }
 
-        public override IReadOnlyList<AstNonTerminal> GenerateCode(AstSymbol symbol)
+        public override IReadOnlyList<AstSymbol> GenerateCode(AstSymbol symbol)
         {
-            List<AstNonTerminal> result = new List<AstNonTerminal>();
+            List<AstSymbol> result = new List<AstSymbol>();
 
             try
             {
                 if (symbol != null)
                 {
-                    result = this.ActionProgram(symbol as AstNonTerminal, 0, 0) as List<AstNonTerminal>;
+                    result = this.ActionProgram(symbol as AstNonTerminal) as List<AstSymbol>;
                 }
             }
-            catch (Exception ex)
+            catch
             {
                 return null;
             }

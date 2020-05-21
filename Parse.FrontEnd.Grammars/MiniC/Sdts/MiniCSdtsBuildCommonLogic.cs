@@ -14,12 +14,12 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
         /// <param name="childNodeToCheck">The child node to check</param>
         /// <param name="baseSymbolTable">The symbol table to reference</param>
         /// <returns></returns>
-        private VarData CheckExistVarInSymbolTable(AstTerminal childNodeToCheck, MiniCSymbolTable baseSymbolTable)
+        private VarData CheckExistVarInSymbolTable(AstTerminal childNodeToCheck, SymbolTable baseSymbolTable)
         {
             VarData result = null;
 
             if (childNodeToCheck.Token.Kind.TokenType is Identifier)
-                result = baseSymbolTable.AllVarList.GetVarByName(childNodeToCheck.Token.Input);
+                result = (baseSymbolTable as MiniCSymbolTable).AllVarList.GetVarByName(childNodeToCheck.Token.Input);
 
             return result;
         }
@@ -28,22 +28,21 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
         /// This function connect an Ucode for declaring variable to the 'curNode'.
         /// If it can't perform then MeaningErrInfo is connected to the 'curNode'.
         /// percondition for operation.
-        /// 1. symbol table has to be connected to the 'node'.
-        /// 2. The type 'node[varIndex]' has to be TreeTerminal.
+        /// 1. symbol table has to be connected to the parent node of the 'curNode'.
         /// </summary>
         /// <param name="curNode"></param>
         /// <param name="varIndex"></param>
         /// <returns></returns>
-        private bool ConnectSimpleVarCode(AstNonTerminal curNode, int varIndex)
+        private bool ConnectSimpleVarCode(AstTerminal curNode)
         {
             bool result = false;
-            AstTerminal varNode = curNode[varIndex] as AstTerminal;
-
-            var varData = CheckExistVarInSymbolTable(varNode, curNode.ConnectedSymbolTable as MiniCSymbolTable);
+            curNode.ClearConnectedInfo();
+            var symbolTable = curNode.Parent.ConnectedSymbolTable;
+            var varData = CheckExistVarInSymbolTable(curNode, symbolTable as MiniCSymbolTable);
             if (varData == null)
             {
                 result = false;
-                curNode.ConnectedErrInfoList.Add(new MeaningErrInfo(varNode.Token, string.Format(AlarmCodes.MCL0001, varNode.Token.Input)));
+                curNode.ConnectedErrInfoList.Add(new MeaningErrInfo(curNode.Token, string.Format(AlarmCodes.MCL0001, curNode.Token.Input)));
             }
             else
             {
@@ -58,8 +57,8 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
         private bool ReadyForIdentCalculateIdent(AstNonTerminal node, int leftIndex, int rightIndex)
         {
             bool result = true;
-            var leftResult = ConnectSimpleVarCode(node, leftIndex);
-            var rightResult = ConnectSimpleVarCode(node, rightIndex);
+            var leftResult = ConnectSimpleVarCode(node[leftIndex] as AstTerminal);
+            var rightResult = ConnectSimpleVarCode(node[rightIndex] as AstTerminal);
 
             if (leftResult == false || rightResult == false)
             {
@@ -67,15 +66,12 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
                 return false;
             }
 
-            var leftNode = node[leftIndex] as AstTerminal;
-            var rightNode = node[rightIndex] as AstTerminal;
-
             return result;
         }
 
         private bool ReadyForIdentCalculateDigit(AstNonTerminal node, int leftIndex, int rightIndex)
         {
-            var leftResult = ConnectSimpleVarCode(node, leftIndex);
+            var leftResult = ConnectSimpleVarCode(node[leftIndex] as AstTerminal);
 
             if (leftResult == false)
             {
@@ -106,15 +102,15 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
             return true;
         }
 
-        private bool ConnectVarOrDigitCode(AstNonTerminal curNode, int index)
+        private bool ConnectVarOrDigitCode(AstTerminal curNode)
         {
             bool result = true;
 
-            AstTerminal valueNode = curNode[index] as AstTerminal;
-            if (valueNode.Token.Kind.TokenType is Identifier)
-            {
-                result = ConnectSimpleVarCode(curNode, index);
-            }
+            if (curNode.Token.Kind.TokenType is Identifier)
+                result = ConnectSimpleVarCode(curNode);
+            else if (curNode.Token.Kind.TokenType is Digit)
+                curNode.ConnectedInterLanguage.Add(UCode.Command.DclValue(ReservedLabel, System.Convert.ToInt32(curNode.Token.Input)));
+            else result = false;
 
             return result;
         }
@@ -188,51 +184,43 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
             return result;
         }
 
-        private bool BuildCommonCalculateNodeCore(AstNonTerminal curNode, MiniCSymbolTable baseSymbolTable, CalculateKind expressionKind, bool bAssign = false)
+        private bool BuildOnlyExpressionNode(AstNonTerminal curNode, SymbolTable baseSymbolTable)
         {
             curNode.ClearConnectedInfo();
             curNode.ConnectedSymbolTable = baseSymbolTable;
 
-            if (ReadyForExpression(curNode, 0, 2) == false) return false;
+//            if (ReadyForExpression(curNode, 0, 2) == false) return false;
 
-            if (expressionKind == CalculateKind.Add)
+            if (curNode.SignPost.MeaningUnit == this.Add)
                 curNode.ConnectedInterLanguage.Add(UCode.Command.Add(ReservedLabel));
-            else if (expressionKind == CalculateKind.Sub)
+            else if (curNode.SignPost.MeaningUnit == this.Sub)
                 curNode.ConnectedInterLanguage.Add(UCode.Command.Sub(ReservedLabel));
-            else if (expressionKind == CalculateKind.Mul)
+            else if (curNode.SignPost.MeaningUnit == this.Mul)
                 curNode.ConnectedInterLanguage.Add(UCode.Command.Multiple(ReservedLabel));
-            else if (expressionKind == CalculateKind.Div)
+            else if (curNode.SignPost.MeaningUnit == this.Div)
                 curNode.ConnectedInterLanguage.Add(UCode.Command.Div(ReservedLabel));
-            else if (expressionKind == CalculateKind.Mod)
+            else if (curNode.SignPost.MeaningUnit == this.Mod)
                 curNode.ConnectedInterLanguage.Add(UCode.Command.Mod(ReservedLabel));
+            else if (curNode.SignPost.MeaningUnit == this.LogicalNot)
+                curNode.ConnectedInterLanguage.Add(UCode.Command.Not(ReservedLabel));
+            else if (curNode.SignPost.MeaningUnit == this.LogicalAnd)
+                curNode.ConnectedInterLanguage.Add(UCode.Command.And(ReservedLabel));
+            else if (curNode.SignPost.MeaningUnit == this.LogicalOr)
+                curNode.ConnectedInterLanguage.Add(UCode.Command.Or(ReservedLabel));
+            else if (curNode.SignPost.MeaningUnit == this.Equal)
+                curNode.ConnectedInterLanguage.Add(UCode.Command.Equal(ReservedLabel));
+            else if (curNode.SignPost.MeaningUnit == this.NotEqual)
+                curNode.ConnectedInterLanguage.Add(UCode.Command.NegativeEqual(ReservedLabel));
+            else if (curNode.SignPost.MeaningUnit == this.GreaterThan)
+                curNode.ConnectedInterLanguage.Add(UCode.Command.GreaterThan(ReservedLabel));
+            else if (curNode.SignPost.MeaningUnit == this.GreaterEqual)
+                curNode.ConnectedInterLanguage.Add(UCode.Command.GreaterEqual(ReservedLabel));
+            else if (curNode.SignPost.MeaningUnit == this.LessThan)
+                curNode.ConnectedInterLanguage.Add(UCode.Command.LessThan(ReservedLabel));
+            else if (curNode.SignPost.MeaningUnit == this.LessEqual)
+                curNode.ConnectedInterLanguage.Add(UCode.Command.LessEqual(ReservedLabel));
 
-            bool result = true;
-            if (bAssign) result = ConnectAssignCode(curNode, 0, 2);
-
-            return result;
-        }
-
-        private NodeBuildResult BuildCommonCalculateNode(AstNonTerminal curNode, MiniCSymbolTable baseSymbolTable, 
-                                                                                    int blockLevel, int offset, CalculateKind expressionKind, bool bAssign = false)
-        {
-            curNode.ClearConnectedInfo();
-            curNode.ConnectedSymbolTable = baseSymbolTable;
-
-            // if TreeNonTerminal doesn't exist.
-            if (curNode[0] is AstTerminal && curNode[2] is AstTerminal)
-            {
-                var calculateResult = BuildCommonCalculateNodeCore(curNode, baseSymbolTable, expressionKind, bAssign);
-                return new NodeBuildResult(null, baseSymbolTable, calculateResult);
-            }
-
-            // if at least one TreeNonTerminal exist.
-            var leftResult = BuildHalfCalculateExpression(curNode, baseSymbolTable, blockLevel, offset, 0);
-            var rightResult = BuildHalfCalculateExpression(curNode, baseSymbolTable, blockLevel, offset, 2);
-
-            var result = true;
-            if (leftResult == false || rightResult == false) result = false;
-
-            return new NodeBuildResult(null, baseSymbolTable, result);
+            return true;
         }
 
         /// <summary>
@@ -244,108 +232,31 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
         /// <param name="offset"></param>
         /// <param name="index"></param>
         /// <returns></returns>
-        private bool BuildHalfCalculateExpression(AstNonTerminal curNode, MiniCSymbolTable baseSymbolTable, int blockLevel, int offset, int index)
+        private bool BuildHalfExpression(AstSymbol curNode, SymbolTable baseSymbolTable, int blockLevel, int offset)
         {
             bool result = false;
 
-            if (curNode[index] is AstNonTerminal)
-                result = BuildCalculateNode(curNode[index] as AstNonTerminal, baseSymbolTable, blockLevel, offset).Result;
+            if (curNode is AstNonTerminal)
+                result = BuildExpressionNode(curNode as AstNonTerminal, baseSymbolTable, blockLevel, offset).Result;
             else
-                result = ConnectVarOrDigitCode(curNode, index);
+                result = ConnectVarOrDigitCode(curNode as AstTerminal);
 
             return result;
         }
 
-        private NodeBuildResult BuildCalculateNode(AstNonTerminal curNode, MiniCSymbolTable baseSymbolTable, int blockLevel, int offset)
-        {
-            var result = new NodeBuildResult(null, baseSymbolTable);
-
-            if (curNode.SignPost.MeaningUnit == this.Add)
-                result = this.BuildAddNode(curNode, baseSymbolTable, blockLevel, offset);
-            else if (curNode.SignPost.MeaningUnit == this.Sub)
-                result = this.BuildSubNode(curNode, baseSymbolTable, blockLevel, offset);
-            else if (curNode.SignPost.MeaningUnit == this.Mul)
-                result = this.BuildMulNode(curNode, baseSymbolTable, blockLevel, offset);
-            else if (curNode.SignPost.MeaningUnit == this.Div)
-                result = this.BuildDivNode(curNode, baseSymbolTable, blockLevel, offset);
-            else if (curNode.SignPost.MeaningUnit == this.Mod)
-                result = this.BuildModNode(curNode, baseSymbolTable, blockLevel, offset);
-
-            return result;
-        }
-
-
-        #region Functions related to Logical
-        private bool BuildCommonLogicalNodeCore(AstNonTerminal curNode, MiniCSymbolTable baseSymbolTable, LogicalKind logicalKind)
+        private AstBuildResult BuildExpressionNode(AstNonTerminal curNode, SymbolTable baseSymbolTable, int blockLevel, int offset)
         {
             curNode.ClearConnectedInfo();
             curNode.ConnectedSymbolTable = baseSymbolTable;
 
-            if (ReadyForExpression(curNode, 0, 2) == false) return false;
-
-            if (logicalKind == LogicalKind.Not)
-                curNode.ConnectedInterLanguage.Add(UCode.Command.Not(ReservedLabel));
-            else if (logicalKind == LogicalKind.And)
-                curNode.ConnectedInterLanguage.Add(UCode.Command.And(ReservedLabel));
-            else if (logicalKind == LogicalKind.Or)
-                curNode.ConnectedInterLanguage.Add(UCode.Command.Or(ReservedLabel));
-            else if (logicalKind == LogicalKind.EQ)
-                curNode.ConnectedInterLanguage.Add(UCode.Command.Equal(ReservedLabel));
-//            else if (logicalKind == LogicalKind.NotEQ)
-//                curNode.ConnectedInterLanguage.Add(UCode.Command.());
-
-            return true;
-        }
-
-        private NodeBuildResult BuildCommonLogicalNode(AstNonTerminal curNode, MiniCSymbolTable baseSymbolTable, int blockLevel, int offset, LogicalKind logicalKind)
-        {
-            curNode.ClearConnectedInfo();
-            curNode.ConnectedSymbolTable = baseSymbolTable;
-
-            // if TreeNonTerminal doesn't exist.
-            if (curNode[0] is AstTerminal && curNode[2] is AstTerminal)
-            {
-                var calculateResult = BuildCommonLogicalNodeCore(curNode, baseSymbolTable, logicalKind);
-                return new NodeBuildResult(null, baseSymbolTable, calculateResult);
-            }
-
-            // if at least one TreeNonTerminal exist.
-            var leftResult = BuildHalfLogicalExpression(curNode, baseSymbolTable, blockLevel, offset, 0);
-            var rightResult = BuildHalfLogicalExpression(curNode, baseSymbolTable, blockLevel, offset, 2);
+            var leftResult = BuildHalfExpression(curNode[0], baseSymbolTable, blockLevel, offset);
+            var rightResult = BuildHalfExpression(curNode[2], baseSymbolTable, blockLevel, offset);
+            BuildOnlyExpressionNode(curNode, baseSymbolTable);
 
             var result = true;
             if (leftResult == false || rightResult == false) result = false;
 
-            return new NodeBuildResult(null, baseSymbolTable, result);
+            return new AstBuildResult(null, baseSymbolTable, result);
         }
-
-        private bool BuildHalfLogicalExpression(AstNonTerminal curNode, MiniCSymbolTable baseSymbolTable, int blockLevel, int offset, int index)
-        {
-            bool result = false;
-
-            if (curNode[index] is AstNonTerminal)
-                result = BuildLogicalNode(curNode[index] as AstNonTerminal, baseSymbolTable, blockLevel, offset).Result;
-            else
-                result = ConnectVarOrDigitCode(curNode, index);
-
-            return result;
-        }
-
-        private NodeBuildResult BuildLogicalNode(AstNonTerminal curNode, MiniCSymbolTable baseSymbolTable, int blockLevel, int offset)
-        {
-            var result = new NodeBuildResult(null, baseSymbolTable);
-
-            if (curNode.SignPost.MeaningUnit == this.LogicalNot)
-                result = this.BuildLogicalNot(curNode, baseSymbolTable, blockLevel, offset);
-            else if (curNode.SignPost.MeaningUnit == this.LogicalOr)
-                result = this.BuildLogicalOr(curNode, baseSymbolTable, blockLevel, offset);
-            else if (curNode.SignPost.MeaningUnit == this.LogicalAnd)
-                result = this.BuildLogicalAnd(curNode, baseSymbolTable, blockLevel, offset);
-            else if (curNode.SignPost.MeaningUnit == this.Equal)
-                result = this.BuildEqual(curNode, baseSymbolTable, blockLevel, offset);
-
-            return result;
-        }
-        #endregion
     }
 }

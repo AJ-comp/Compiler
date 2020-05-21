@@ -25,7 +25,7 @@ namespace Parse.FrontEnd.Grammars
         public MeaningUnit NotEqual { get; } = new MeaningUnit("NotEqual");
         public MeaningUnit GreaterThan { get; } = new MeaningUnit("GreaterThan");
         public MeaningUnit LessThan { get; } = new MeaningUnit("LessThan");
-        public MeaningUnit GreatherEqual { get; } = new MeaningUnit("GreatherEqual");
+        public MeaningUnit GreaterEqual { get; } = new MeaningUnit("GreatherEqual");
         public MeaningUnit LessEqual { get; } = new MeaningUnit("LessEqual");
         public MeaningUnit UnaryMinus { get; } = new MeaningUnit("UnaryMinus");
         public MeaningUnit PreInc { get; } = new MeaningUnit("PreInc");
@@ -55,6 +55,6 @@ namespace Parse.FrontEnd.Grammars
         public abstract event EventHandler<SementicErrorArgs> SementicErrorEventHandler;
 
         public abstract SementicAnalysisResult Process(AstSymbol symbol);
-        public abstract IReadOnlyList<AstNonTerminal> GenerateCode(AstSymbol symbol);
+        public abstract IReadOnlyList<AstSymbol> GenerateCode(AstSymbol symbol);
     }
 }

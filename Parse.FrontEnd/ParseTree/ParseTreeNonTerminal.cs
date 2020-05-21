@@ -150,8 +150,10 @@ namespace Parse.FrontEnd.ParseTree
 
             if (convertedParentTree.SignPost.MeaningUnit != null)
             {
-                result = new AstNonTerminal(convertedParentTree.SignPost);
-                result.ConnectedParseTree = curTree as ParseTreeNonTerminal;
+                result = new AstNonTerminal(convertedParentTree.SignPost)
+                {
+                    ConnectedParseTree = curTree as ParseTreeNonTerminal
+                };
 
                 if (result.SignPost.IsInduceEpsilon) epsilonableTree = result;
                 // if 'curTree' is Ast and Ast doesn't exist of the children tree then it(curTree) can same that induce epsilon in the Ast rule.

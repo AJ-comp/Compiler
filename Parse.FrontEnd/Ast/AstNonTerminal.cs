@@ -28,9 +28,7 @@ namespace Parse.FrontEnd.Ast
         }
         public int Count => ((IList<AstSymbol>)_symbols).Count;
         public bool IsReadOnly => ((IList<AstSymbol>)_symbols).IsReadOnly;
-        public SymbolTable ConnectedSymbolTable { get; set; }
-        public MeaningErrInfoList ConnectedErrInfoList { get; } = new MeaningErrInfoList();
-        public List<object> ConnectedInterLanguage { get; } = new List<object>();
+
         public ParseTreeNonTerminal ConnectedParseTree { get; internal set; }
 
         public AstNonTerminal(NonTerminalSingle singleNT)
@@ -38,18 +36,10 @@ namespace Parse.FrontEnd.Ast
             this.SignPost = singleNT;
         }
 
-        public object ActionLogic(int blockLevel, int offset)
-            => this.SignPost?.MeaningUnit?.ActionLogic(this, blockLevel, offset);
+        public object ActionLogic() => this.SignPost?.MeaningUnit?.ActionLogic(this);
+        public AstBuildResult BuildLogic(SymbolTable symbolTable, int blockLevel, int offset)
+            => this.SignPost?.MeaningUnit?.BuildLogic(this, symbolTable, blockLevel, offset);
 
-        /// <summary>
-        /// Remove all connected information on this tree.
-        /// </summary>
-        public void ClearConnectedInfo()
-        {
-            ConnectedSymbolTable = null;
-            ConnectedErrInfoList.Clear();
-            ConnectedInterLanguage.Clear();
-        }
 
         public void Add(AstSymbol item)
         {

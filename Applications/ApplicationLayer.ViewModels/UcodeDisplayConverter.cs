@@ -9,7 +9,7 @@ namespace ApplicationLayer.ViewModels
 {
     public static class UcodeDisplayConverter
     {
-        public static IReadOnlyList<UCodeDisplayModel> Convert(IReadOnlyList<AstNonTerminal> nodes, Grammar grammar)
+        public static IReadOnlyList<UCodeDisplayModel> Convert(IReadOnlyList<AstSymbol> nodes, Grammar grammar)
         {
             if (grammar is null) return null;
 
@@ -20,7 +20,7 @@ namespace ApplicationLayer.ViewModels
             else return null;
         }
 
-        private static IReadOnlyList<UCodeDisplayModel> Convert(IReadOnlyList<AstNonTerminal> nodes, MiniCSdts sdts)
+        private static IReadOnlyList<UCodeDisplayModel> Convert(IReadOnlyList<AstSymbol> nodes, MiniCSdts sdts)
         {
             if (nodes is null) return null;
             if (sdts is null) return null;
@@ -35,15 +35,30 @@ namespace ApplicationLayer.ViewModels
             UCodeDisplayModel prevNode = null;
             foreach(var nodeInfo in result)
             {
-                if (nodeInfo.Node?.SignPost.MeaningUnit == sdts.ParamDcl) nodeInfo.CategoryPos = UCodeDisplayModel.AttatchCategoryPosition.Up;
-                else if (nodeInfo.Node?.SignPost.MeaningUnit == sdts.Add) nodeInfo.CategoryPos = UCodeDisplayModel.AttatchCategoryPosition.Down;
-                else if (nodeInfo.Node?.SignPost.MeaningUnit == sdts.Equal) nodeInfo.CategoryPos = UCodeDisplayModel.AttatchCategoryPosition.Down;
-                else if (nodeInfo.Node?.SignPost.MeaningUnit == sdts.NotEqual) nodeInfo.CategoryPos = UCodeDisplayModel.AttatchCategoryPosition.Down;
-                else if (nodeInfo.Node?.SignPost.MeaningUnit == sdts.LogicalNot) nodeInfo.CategoryPos = UCodeDisplayModel.AttatchCategoryPosition.Down;
-                else if (nodeInfo.Node?.SignPost.MeaningUnit == sdts.LogicalAnd) nodeInfo.CategoryPos = UCodeDisplayModel.AttatchCategoryPosition.Down;
-                else if (nodeInfo.Node?.SignPost.MeaningUnit == sdts.LogicalOr) nodeInfo.CategoryPos = UCodeDisplayModel.AttatchCategoryPosition.Down;
-                else if (nodeInfo.Node?.SignPost.MeaningUnit == sdts.IfSt)
-                    nodeInfo.CategoryName = "if ( " + (nodeInfo.Node[1] as AstNonTerminal).ConnectedParseTree.AllInputDatas + ")";
+                if (nodeInfo.Node is AstTerminal)
+                {
+                    nodeInfo.CategoryPos = UCodeDisplayModel.AttatchCategoryPosition.Down;
+                    continue;
+                }
+
+                var astNonTerminal = nodeInfo.Node as AstNonTerminal;
+                if (astNonTerminal.SignPost.MeaningUnit == sdts.ParamDcl) nodeInfo.CategoryPos = UCodeDisplayModel.AttatchCategoryPosition.Up;
+                else if (astNonTerminal.SignPost.MeaningUnit == sdts.Add) nodeInfo.CategoryPos = UCodeDisplayModel.AttatchCategoryPosition.Down;
+                else if (astNonTerminal.SignPost.MeaningUnit == sdts.Sub) nodeInfo.CategoryPos = UCodeDisplayModel.AttatchCategoryPosition.Down;
+                else if (astNonTerminal.SignPost.MeaningUnit == sdts.Mul) nodeInfo.CategoryPos = UCodeDisplayModel.AttatchCategoryPosition.Down;
+                else if (astNonTerminal.SignPost.MeaningUnit == sdts.Div) nodeInfo.CategoryPos = UCodeDisplayModel.AttatchCategoryPosition.Down;
+                else if (astNonTerminal.SignPost.MeaningUnit == sdts.Mod) nodeInfo.CategoryPos = UCodeDisplayModel.AttatchCategoryPosition.Down;
+                else if (astNonTerminal.SignPost.MeaningUnit == sdts.Equal) nodeInfo.CategoryPos = UCodeDisplayModel.AttatchCategoryPosition.Down;
+                else if (astNonTerminal.SignPost.MeaningUnit == sdts.NotEqual) nodeInfo.CategoryPos = UCodeDisplayModel.AttatchCategoryPosition.Down;
+                else if (astNonTerminal.SignPost.MeaningUnit == sdts.LogicalNot) nodeInfo.CategoryPos = UCodeDisplayModel.AttatchCategoryPosition.Down;
+                else if (astNonTerminal.SignPost.MeaningUnit == sdts.LogicalAnd) nodeInfo.CategoryPos = UCodeDisplayModel.AttatchCategoryPosition.Down;
+                else if (astNonTerminal.SignPost.MeaningUnit == sdts.LogicalOr) nodeInfo.CategoryPos = UCodeDisplayModel.AttatchCategoryPosition.Down;
+                else if (astNonTerminal.SignPost.MeaningUnit == sdts.GreaterThan) nodeInfo.CategoryPos = UCodeDisplayModel.AttatchCategoryPosition.Down;
+                else if (astNonTerminal.SignPost.MeaningUnit == sdts.GreaterEqual) nodeInfo.CategoryPos = UCodeDisplayModel.AttatchCategoryPosition.Down;
+                else if (astNonTerminal.SignPost.MeaningUnit == sdts.LessThan) nodeInfo.CategoryPos = UCodeDisplayModel.AttatchCategoryPosition.Down;
+                else if (astNonTerminal.SignPost.MeaningUnit == sdts.LessEqual) nodeInfo.CategoryPos = UCodeDisplayModel.AttatchCategoryPosition.Down;
+                else if (astNonTerminal.SignPost.MeaningUnit == sdts.IfSt)
+                    nodeInfo.CategoryName = "if ( " + (astNonTerminal[1] as AstNonTerminal).ConnectedParseTree.AllInputDatas + ")";
 
                 prevNode = nodeInfo;
             }
@@ -56,11 +71,11 @@ namespace ApplicationLayer.ViewModels
     {
         public enum AttatchCategoryPosition { Up, Down, Own };
 
-        public AstNonTerminal Node { get; }
+        public AstSymbol Node { get; }
         public AttatchCategoryPosition CategoryPos { get; set; } = AttatchCategoryPosition.Own;
         public string CategoryName { get; set; } = string.Empty;
 
-        public UCodeDisplayModel(AstNonTerminal node)
+        public UCodeDisplayModel(AstSymbol node)
         {
             Node = node;
         }

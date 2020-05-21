@@ -54,7 +54,7 @@ namespace ApplicationLayer.ViewModels.DocumentTypeViewModels
         public ParseTreeSymbol ParseTree { get; private set; }
         public AstSymbol Ast { get; private set; }
         public DataTable ParsingHistory { get; private set; }
-        public IReadOnlyList<AstNonTerminal> InterLanguage { get; private set; }
+        public IReadOnlyList<AstSymbol> InterLanguage { get; private set; }
 
         public int CaretIndex
         {

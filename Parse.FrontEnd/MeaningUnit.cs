@@ -1,4 +1,5 @@
 ﻿using Parse.FrontEnd.Ast;
+using Parse.FrontEnd.RegularGrammar;
 using System;
 using System.Collections.Generic;
 
@@ -9,7 +10,8 @@ namespace Parse.FrontEnd
         internal uint uniqueKey;
 
         public string Name { get; } = string.Empty;
-        public Func<AstNonTerminal, int, int, object> ActionLogic { get; set; }
+        public Func<AstNonTerminal, object> ActionLogic { get; set; }
+        public Func<AstNonTerminal, SymbolTable, int, int, AstBuildResult> BuildLogic { get; set; }
 
         public MeaningUnit(string name)
         {

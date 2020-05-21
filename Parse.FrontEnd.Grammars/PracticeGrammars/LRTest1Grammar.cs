@@ -51,7 +51,7 @@ namespace Parse.FrontEnd.Grammars.PracticeGrammars
             return null;
         }
 
-        public override IReadOnlyList<AstNonTerminal> GenerateCode(AstSymbol symbol)
+        public override IReadOnlyList<AstSymbol> GenerateCode(AstSymbol symbol)
         {
             return null;
         }

@@ -175,7 +175,7 @@ namespace Parse.FrontEnd.Grammars.MiniC
             this.relationalExp.AddItem(this.additiveExp);
             this.relationalExp.AddItem(this.relationalExp + this.GreaterThan + this.additiveExp, sdts.GreaterThan);
             this.relationalExp.AddItem(this.relationalExp + this.LessThan + this.additiveExp, sdts.LessThan);
-            this.relationalExp.AddItem(this.relationalExp + this.GreaterEqual + this.additiveExp, sdts.GreatherEqual);
+            this.relationalExp.AddItem(this.relationalExp + this.GreaterEqual + this.additiveExp, sdts.GreaterEqual);
 
             this.additiveExp.AddItem(this.multiplicativeExp);
             this.additiveExp.AddItem(this.additiveExp + this.Add + this.multiplicativeExp, sdts.Add);

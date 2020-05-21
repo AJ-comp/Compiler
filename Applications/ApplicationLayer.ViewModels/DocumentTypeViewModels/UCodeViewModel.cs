@@ -1,5 +1,6 @@
 ﻿using ApplicationLayer.Models;
 using ApplicationLayer.Models.SolutionPackage;
+using Parse.FrontEnd.Ast;
 using Parse.FrontEnd.InterLanguages;
 using System.Collections.Generic;
 
@@ -11,15 +12,16 @@ namespace ApplicationLayer.ViewModels.DocumentTypeViewModels
 
         private UCodeTreeNodeModel CreateUcodeTreeNodeModel(UCode.Format data)
         {
-            var ucodeNode = new UCodeTreeNodeModel();
+            var ucodeNode = new UCodeTreeNodeModel
+            {
+                Label = data.Label,
+                OpCode = data.OpCode,
+                Comment = data.Comment,
 
-            ucodeNode.Label = data.Label;
-            ucodeNode.OpCode = data.OpCode;
-            ucodeNode.Comment = data.Comment;
-
-            ucodeNode.Operand1 = (data.Operands.Count > 0) ? data.Operands[0] : string.Empty;
-            ucodeNode.Operand2 = (data.Operands.Count > 1) ? data.Operands[1] : string.Empty;
-            ucodeNode.Operand3 = (data.Operands.Count > 2) ? data.Operands[2] : string.Empty;
+                Operand1 = (data.Operands.Count > 0) ? data.Operands[0] : string.Empty,
+                Operand2 = (data.Operands.Count > 1) ? data.Operands[1] : string.Empty,
+                Operand3 = (data.Operands.Count > 2) ? data.Operands[2] : string.Empty
+            };
 
             return ucodeNode;
         }
@@ -39,11 +41,16 @@ namespace ApplicationLayer.ViewModels.DocumentTypeViewModels
 
                 if(nodeInfo.CategoryPos == UCodeDisplayModel.AttatchCategoryPosition.Own)
                 {
-                    var data = (string.IsNullOrEmpty(nodeInfo.CategoryName))
-                                ? node.ConnectedParseTree?.AllInputDatas : nodeInfo.CategoryName;
+                    if(nodeInfo.Node is AstNonTerminal)
+                    {
+                        var astNonTerminal = node as AstNonTerminal;
 
-                    parentNode = new CategoryTreeNodeModel(data);
-                    Root.AddChildren(parentNode);
+                        var data = (string.IsNullOrEmpty(nodeInfo.CategoryName))
+                            ? astNonTerminal.ConnectedParseTree?.AllInputDatas : nodeInfo.CategoryName;
+
+                        parentNode = new CategoryTreeNodeModel(data);
+                        Root.AddChildren(parentNode);
+                    }
                 }
                 else if(nodeInfo.CategoryPos == UCodeDisplayModel.AttatchCategoryPosition.Down)
                 {

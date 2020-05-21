@@ -59,7 +59,7 @@ namespace Parse.FrontEnd.Grammars.ExampleGrammars
             return null;
         }
 
-        public override IReadOnlyList<AstNonTerminal> GenerateCode(AstSymbol symbol)
+        public override IReadOnlyList<AstSymbol> GenerateCode(AstSymbol symbol)
         {
             return null;
         }
