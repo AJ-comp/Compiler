@@ -1,17 +1,18 @@
 ﻿using Parse.FrontEnd.Ast;
-using Parse.FrontEnd.RegularGrammar;
 using System;
 using System.Collections.Generic;
 
 namespace Parse.FrontEnd
 {
+    public enum ErrorType { Error, Warning, Information };
+
     public class MeaningUnit
     {
         internal uint uniqueKey;
 
         public string Name { get; } = string.Empty;
         public Func<AstNonTerminal, object> ActionLogic { get; set; }
-        public Func<AstNonTerminal, SymbolTable, int, int, AstBuildResult> BuildLogic { get; set; }
+        public Func<AstNonTerminal, SymbolTable, int, int, AstBuildOption, AstBuildResult> BuildLogic { get; set; }
 
         public MeaningUnit(string name)
         {
@@ -67,13 +68,33 @@ namespace Parse.FrontEnd
 
     public class MeaningErrInfo
     {
-        public TokenData ErrorToken { get; }
+        private AstSymbol _errorSymbol;
+
+        public ErrorType ErrorType { get; private set; }
+        public IReadOnlyList<TokenData> ErrorTokens
+        {
+            get
+            {
+                List<TokenData> result = new List<TokenData>();
+
+                if (_errorSymbol is AstTerminal)
+                    result.Add((_errorSymbol as AstTerminal).Token);
+                else
+                {
+                    var errNT = (_errorSymbol as AstNonTerminal).ConnectedParseTree;
+                    result.AddRange(errNT.AllTokens);
+                }
+
+                return result;
+            }
+        }
         public string ErrorMessage { get; }
 
-        public MeaningErrInfo(TokenData errorToken, string errorMessage)
+        public MeaningErrInfo(AstSymbol errorSymbol, string errorMessage, ErrorType errorType = ErrorType.Error)
         {
-            ErrorToken = errorToken;
+            _errorSymbol = errorSymbol;
             ErrorMessage = errorMessage;
+            ErrorType = errorType;
         }
     }
 

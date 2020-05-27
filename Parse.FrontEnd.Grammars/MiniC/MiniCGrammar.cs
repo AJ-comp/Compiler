@@ -27,8 +27,8 @@ namespace Parse.FrontEnd.Grammars.MiniC
         private Terminal scopeCommentStart = new Terminal(TokenType.SpecialToken.Comment.ScopeComment, "/*");
         private Terminal scopeCommentEnd = new Terminal(TokenType.SpecialToken.Comment.ScopeComment, "*/");
 
-        public Terminal Inc { get; } = new Terminal(TokenType.Operator.NormalOperator, "++");
-        public Terminal Dec { get; } = new Terminal(TokenType.Operator.NormalOperator, "--");
+        public Terminal Inc { get; } = new Terminal(TokenType.Operator.NormalOperator, "++", false);
+        public Terminal Dec { get; } = new Terminal(TokenType.Operator.NormalOperator, "--", false);
         public Terminal Add { get; } = new Terminal(TokenType.Operator.NormalOperator, "+");
         public Terminal Sub { get; } = new Terminal(TokenType.Operator.NormalOperator, "-");
         public Terminal Mul { get; } = new Terminal(TokenType.Operator.NormalOperator, "*");
@@ -99,7 +99,6 @@ namespace Parse.FrontEnd.Grammars.MiniC
         private NonTerminal actualParam = new NonTerminal("actual_param");
         private NonTerminal actualParamList = new NonTerminal("actual_param_list");
         private NonTerminal primaryExp = new NonTerminal("primary_exp");
-        private NonTerminal assignmentLeftExp = new NonTerminal("assignment_left_exp");
 
         public override Grammars.Sdts SDTS { get; }
 
@@ -155,12 +154,12 @@ namespace Parse.FrontEnd.Grammars.MiniC
             this.expression.AddItem(this.assignmentExp);
 
             this.assignmentExp.AddItem(this.logicalOrExp);
-            this.assignmentExp.AddItem(this.assignmentLeftExp + this.Assign + this.assignmentExp, sdts.Assign);
-            this.assignmentExp.AddItem(this.assignmentLeftExp + this.AddAssign + this.assignmentExp, sdts.AddAssign);
-            this.assignmentExp.AddItem(this.assignmentLeftExp + this.SubAssign + this.assignmentExp, sdts.SubAssign);
-            this.assignmentExp.AddItem(this.assignmentLeftExp + this.MulAssign + this.assignmentExp, sdts.MulAssign);
-            this.assignmentExp.AddItem(this.assignmentLeftExp + this.DivAssign + this.assignmentExp, sdts.DivAssign);
-            this.assignmentExp.AddItem(this.assignmentLeftExp + this.ModAssign + this.assignmentExp, sdts.ModAssign);
+            this.assignmentExp.AddItem(this.assignmentExp + this.Assign + this.assignmentExp, sdts.Assign);
+            this.assignmentExp.AddItem(this.assignmentExp + this.AddAssign + this.assignmentExp, sdts.AddAssign);
+            this.assignmentExp.AddItem(this.assignmentExp + this.SubAssign + this.assignmentExp, sdts.SubAssign);
+            this.assignmentExp.AddItem(this.assignmentExp + this.MulAssign + this.assignmentExp, sdts.MulAssign);
+            this.assignmentExp.AddItem(this.assignmentExp + this.DivAssign + this.assignmentExp, sdts.DivAssign);
+            this.assignmentExp.AddItem(this.assignmentExp + this.ModAssign + this.assignmentExp, sdts.ModAssign);
 
             this.logicalOrExp.AddItem(this.logicalAndExp);
             this.logicalOrExp.AddItem(this.logicalOrExp + this.LogicalOr + this.logicalAndExp, sdts.LogicalOr);
@@ -194,7 +193,7 @@ namespace Parse.FrontEnd.Grammars.MiniC
 
             this.postfixExp.AddItem(this.primaryExp);
             this.postfixExp.AddItem(this.postfixExp + this.OpenSquareBrace + this.expression + this.CloseSquareBrace, sdts.Index);
-            this.postfixExp.AddItem(this.functionName + this.OpenParenthesis + this.optActualParam + this.CloseParenthesis, sdts.Call);
+            this.postfixExp.AddItem(this.postfixExp + this.OpenParenthesis + this.optActualParam + this.CloseParenthesis, sdts.Call);
             this.postfixExp.AddItem(this.postfixExp + this.Inc, sdts.PostInc);
             this.postfixExp.AddItem(this.postfixExp + this.Dec, sdts.PostDec);
 
@@ -205,9 +204,9 @@ namespace Parse.FrontEnd.Grammars.MiniC
             this.actualParamList.AddItem(this.assignmentExp);
             this.actualParamList.AddItem(this.actualParamList + this.Comma + this.assignmentExp);
 
-            this.primaryExp.AddItem(this.Ident | this.Number | this.OpenParenthesis + this.expression + this.CloseParenthesis);
-
-            this.assignmentLeftExp.AddItem(this.Ident | this.OpenParenthesis + this.Ident + this.CloseParenthesis);
+            this.primaryExp.AddItem(this.Ident, sdts.VariableNode);
+            this.primaryExp.AddItem(this.Number, sdts.IntLiteralNode);
+            this.primaryExp.AddItem(this.OpenParenthesis + this.expression + this.CloseParenthesis);
 
 
             this.Optimization();

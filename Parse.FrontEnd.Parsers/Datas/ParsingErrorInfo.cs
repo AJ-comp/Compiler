@@ -2,8 +2,6 @@
 {
     public class ParsingErrorInfo
     {
-        public enum ErrorType { Error, Warning, Information };
-
         public ErrorType Type { get; }
         public string Code { get; }
         public string Message { get; }

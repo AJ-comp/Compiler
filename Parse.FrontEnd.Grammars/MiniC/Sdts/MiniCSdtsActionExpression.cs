@@ -22,15 +22,15 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
             return result;
         }
 
-        private object BuildOnlyAssignExpression(AstNonTerminal curNode)
+        private object CommonIncDecExpression(AstNonTerminal curNode)
         {
             List<AstSymbol> result = new List<AstSymbol>();
 
             // leftExp is always TreeTerminal so it has to only check rightExp.
-            if (curNode[2] is AstNonTerminal)
-                result.AddRange((curNode[2] as AstNonTerminal).ActionLogic() as IReadOnlyList<AstSymbol>);
-            else 
-                result.Add(curNode[2]);
+            if (curNode[0] is AstNonTerminal)
+                result.AddRange((curNode[0] as AstNonTerminal).ActionLogic() as IReadOnlyList<AstSymbol>);
+            else
+                result.Add(curNode[0]);
 
             result.Add(curNode);
 
@@ -47,7 +47,7 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
 
         private object ActionMod(AstNonTerminal curNode) => CommonExpressionLogic(curNode);
 
-        private object ActionAssign(AstNonTerminal curNode) => BuildOnlyAssignExpression(curNode);
+        private object ActionAssign(AstNonTerminal curNode) => CommonExpressionLogic(curNode);
 
         private object ActionAddAssign(AstNonTerminal curNode) => CommonExpressionLogic(curNode);
 
@@ -82,24 +82,12 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
             return null;
         }
 
-        private object ActionPreInc(AstNonTerminal curNode)
-        {
-            return null;
-        }
+        private object ActionPreInc(AstNonTerminal curNode) => CommonIncDecExpression(curNode);
 
-        private object ActionPreDec(AstNonTerminal curNode)
-        {
-            return null;
-        }
+        private object ActionPreDec(AstNonTerminal curNode) => CommonIncDecExpression(curNode);
 
-        private object ActionPostInc(AstNonTerminal curNode)
-        {
-            return null;
-        }
+        private object ActionPostInc(AstNonTerminal curNode) => CommonIncDecExpression(curNode);
 
-        private object ActionPostDec(AstNonTerminal curNode)
-        {
-            return null;
-        }
+        private object ActionPostDec(AstNonTerminal curNode) => CommonIncDecExpression(curNode);
     }
 }

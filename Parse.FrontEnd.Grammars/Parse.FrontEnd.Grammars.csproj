@@ -41,19 +41,31 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AJGrammar.cs" />
+    <Compile Include="MiniC\AstNodes\AstNode.cs" />
+    <Compile Include="MiniC\AstNodes\ConstNode.cs" />
+    <Compile Include="MiniC\AstNodes\DclSpecNode.cs" />
+    <Compile Include="MiniC\AstNodes\ExprNodes\ExprNode.cs" />
+    <Compile Include="MiniC\AstNodes\ExprNodes\LiteralNodes\CharLiteralNode.cs" />
+    <Compile Include="MiniC\AstNodes\ExprNodes\LiteralNodes\IntegerLiteralNode.cs" />
+    <Compile Include="MiniC\AstNodes\ExprNodes\LiteralNodes\IntLiteralNode.cs" />
+    <Compile Include="MiniC\AstNodes\ExprNodes\LiteralNodes\LiteralNode.cs" />
+    <Compile Include="MiniC\AstNodes\ExprNodes\LiteralNodes\StringLiteralNode.cs" />
+    <Compile Include="MiniC\MiniCAstBuildParams.cs" />
     <Compile Include="MiniC\Sdts\MiniCSdtsActionExpression.cs" />
     <Compile Include="MiniC\Sdts\MiniCSdtsBuildCommonLogic.cs" />
     <Compile Include="MiniC\Sdts\MiniCSdtsBuildDcl.cs" />
     <Compile Include="MiniC\Sdts\MiniCSdtsBuildExpression.cs" />
     <Compile Include="MiniC\Sdts\MiniCSdtsBuildStatement.cs" />
     <Compile Include="MiniC\Sdts\MiniCSdtsFactory.cs" />
+    <Compile Include="MiniC\TypeChecker.cs" />
     <Compile Include="MiniC\SymbolTableFormat\MiniCSymbolTable.cs" />
+    <Compile Include="MiniC\SymbolTableFormat\LiteralData.cs" />
     <Compile Include="Properties\AlarmCodes.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>AlarmCodes.resx</DependentUpon>
     </Compile>
-    <Compile Include="SementicErrorArgs.cs" />
+    <Compile Include="SemanticErrorArgs.cs" />
     <Compile Include="ExampleGrammars\Ex1Grammar.cs" />
     <Compile Include="ExampleGrammars\Ex7_14Grammar.cs" />
     <Compile Include="ExampleGrammars\Ex7_15Grammar.cs" />

@@ -82,16 +82,55 @@ namespace Parse.FrontEnd.ParseTree
             }
         }
 
+        public IReadOnlyList<ParseTreeTerminal> AllTreeTerminal
+        {
+            get
+            {
+                List<ParseTreeTerminal> result = new List<ParseTreeTerminal>();
+
+                foreach (var item in Items)
+                {
+                    if (item is ParseTreeTerminal) result.Add((item as ParseTreeTerminal));
+                    else if (item is ParseTreeNonTerminal) result.AddRange((item as ParseTreeNonTerminal).AllTreeTerminal);
+                }
+
+                return result;
+            }
+        }
+
+        public IReadOnlyList<TokenData> AllTokens
+        {
+            get
+            {
+                List<TokenData> result = new List<TokenData>();
+
+                foreach (var item in Items)
+                {
+                    if (item is ParseTreeTerminal) result.Add((item as ParseTreeTerminal).Token);
+                    else if (item is ParseTreeNonTerminal) result.AddRange((item as ParseTreeNonTerminal).AllTokens);
+                }
+
+                return result;
+            }
+        }
+
         public string AllInputDatas
         {
             get
             {
                 string result = string.Empty;
 
-                foreach (var item in Items)
+                bool bSpaceReady = false;
+                foreach (var token in AllTokens)
                 {
-                    if (item is ParseTreeTerminal) result += (item as ParseTreeTerminal).Token.Input + " ";
-                    else if (item is ParseTreeNonTerminal) result += (item as ParseTreeNonTerminal).AllInputDatas;
+                    string space = string.Empty;
+
+                    if (token.Kind.TokenType is Operator) bSpaceReady = false;
+                    else if (token.Kind.TokenType is Delimiter) bSpaceReady = false;
+                    else if (bSpaceReady == false) bSpaceReady = true;
+                    else if (bSpaceReady) space = " ";
+
+                    result += token.Input + space;
                 }
 
                 return result;

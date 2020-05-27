@@ -26,7 +26,7 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
             private set => _reservedLabel = value;
         }
 
-        public override event EventHandler<SementicErrorArgs> SementicErrorEventHandler;
+        public override event EventHandler<SemanticErrorArgs> SementicErrorEventHandler;
 
         public MeaningUnit Program { get; } = new MeaningUnit("Program");
         public MeaningUnit FuncDef { get; } = new MeaningUnit("FuncDef");
@@ -52,6 +52,8 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
         public MeaningUnit Index { get; } = new MeaningUnit("Index");
         public MeaningUnit Call { get; } = new MeaningUnit("Call");
         public MeaningUnit ActualParam { get; } = new MeaningUnit("ActualParam");
+        public MeaningUnit VariableNode { get; } = new MeaningUnit("VariableNode");
+        public MeaningUnit IntLiteralNode { get; } = new MeaningUnit("IntLiteralNode");
 
 
         public MiniCSdts(KeyManager keyManager, MiniCGrammar grammar) : base(keyManager)
@@ -79,6 +81,11 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
             this.Index.ActionLogic = this.ActionIndex;
             this.Call.ActionLogic = this.ActionCall;
             this.ActualParam.ActionLogic = this.ActionActualParam;
+            this.ConstNode.ActionLogic = this.ActionConstNode;
+            this.VoidNode.ActionLogic = this.ActionVoidNode;
+            this.IntNode.ActionLogic = this.ActionIntNode;
+            this.VariableNode.ActionLogic = this.ActionVarNode;
+            this.IntLiteralNode.ActionLogic = this.ActionIntLiteralNode;
 
             this.Add.ActionLogic = this.ActionAdd;
             this.Sub.ActionLogic = this.ActionSub;
@@ -126,9 +133,12 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
             this.IfElseSt.BuildLogic = this.BuildIfElseStNode;
             this.WhileSt.BuildLogic = this.BuildWhileStNode;
             this.ReturnSt.BuildLogic = this.BuildReturnStNode;
-//            this.Index.BuildLogic = this.buildin;
+            this.Index.BuildLogic = this.BuildIndex;
             this.Call.BuildLogic = this.BuildCallNode;
             this.ActualParam.BuildLogic = this.BuildActualParam;
+            this.VariableNode.BuildLogic = this.BuildVarNode;
+            this.IntLiteralNode.BuildLogic = this.BuildIntLiteralNode;
+
 
             this.Add.BuildLogic = this.BuildAdd;
             this.Sub.BuildLogic = this.BuildSub;
@@ -141,20 +151,20 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
             this.MulAssign.BuildLogic = this.BuildMulAssign;
             this.DivAssign.BuildLogic = this.BuildDivAssign;
             this.ModAssign.BuildLogic = this.BuildModAssign;
-            this.LogicalOr.BuildLogic = this.BuildExpressionNode;
-            this.LogicalAnd.BuildLogic = this.BuildExpressionNode;
-            this.LogicalNot.BuildLogic = this.BuildExpressionNode;
-            this.Equal.BuildLogic = this.BuildExpressionNode;
-            this.NotEqual.BuildLogic = this.BuildExpressionNode;
-            this.GreaterThan.BuildLogic = this.BuildExpressionNode;
-            this.LessThan.BuildLogic = this.BuildExpressionNode;
-            this.GreaterEqual.BuildLogic = this.BuildExpressionNode;
-            this.LessEqual.BuildLogic = this.BuildExpressionNode;
+            this.LogicalOr.BuildLogic = this.BuildOpNode;
+            this.LogicalAnd.BuildLogic = this.BuildOpNode;
+            this.LogicalNot.BuildLogic = this.BuildOpNode;
+            this.Equal.BuildLogic = this.BuildOpNode;
+            this.NotEqual.BuildLogic = this.BuildOpNode;
+            this.GreaterThan.BuildLogic = this.BuildOpNode;
+            this.LessThan.BuildLogic = this.BuildOpNode;
+            this.GreaterEqual.BuildLogic = this.BuildOpNode;
+            this.LessEqual.BuildLogic = this.BuildOpNode;
             //this.UnaryMinus.BuildLogic = this.ActionUnaryMinus;
-            //this.PreInc.BuildLogic = this.ActionPreInc;
-            //this.PreDec.BuildLogic = this.ActionPreDec;
-            //this.PostInc.BuildLogic = this.ActionPostInc;
-            //this.PostDec.BuildLogic = this.ActionPostDec;
+            this.PreInc.BuildLogic = this.BuildPreInc;
+            this.PreDec.BuildLogic = this.BuildPreDec;
+            this.PostInc.BuildLogic = this.BuildPostInc;
+            this.PostDec.BuildLogic = this.BuildPostDec;
         }
 
         public override SementicAnalysisResult Process(AstSymbol symbol)

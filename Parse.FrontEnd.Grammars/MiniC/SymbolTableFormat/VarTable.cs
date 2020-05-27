@@ -33,7 +33,10 @@ namespace Parse.FrontEnd.Grammars.MiniC.SymbolTableFormat
             foreach(var item in this)
             {
                 if (item.DclData.DclItemData.Name == name)
+                {
                     result = item;
+                    break;
+                }
             }
 
             return result;
@@ -55,8 +58,12 @@ namespace Parse.FrontEnd.Grammars.MiniC.SymbolTableFormat
     public class VarData : IStorableToHashTable
     {
         public DclData DclData { get; internal set; }
+        public string VarName => DclData.DclItemData.Name;
         public int Offset { get; internal set; }
         public bool This { get; internal set; } = false;
+        public bool IsCalculatable => (Value is UnknownLiteralData) ? false : true;
+
+        public LiteralData Value { get; internal set; } = new UnknownLiteralData(UnknownState.NotInitialized, null);
 
         public string KeyString => string.Format("{0}", DclData.KeyString);
 
@@ -65,9 +72,9 @@ namespace Parse.FrontEnd.Grammars.MiniC.SymbolTableFormat
 
     public class DclItemData : IStorableToHashTable
     {
-        public string Name { get => NameToken?.Input; }
-        public int Level { get; internal set; }
-        public int Dimension { get; internal set; }
+        public string Name => NameToken?.Input;
+        public int Level => System.Convert.ToInt32(LevelToken?.Input);
+        public int Dimension => System.Convert.ToInt32(DimensionToken?.Input);
 
         public TokenData NameToken { get; internal set; }
         public TokenData LevelToken { get; internal set; }

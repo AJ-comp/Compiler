@@ -33,7 +33,7 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
         /// <param name="curNode"></param>
         /// <param name="varIndex"></param>
         /// <returns></returns>
-        private bool ConnectSimpleVarCode(AstTerminal curNode)
+        private VarData ConnectSimpleVarCode(AstTerminal curNode, bool bAddress = false)
         {
             bool result = false;
             curNode.ClearConnectedInfo();
@@ -42,16 +42,20 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
             if (varData == null)
             {
                 result = false;
-                curNode.ConnectedErrInfoList.Add(new MeaningErrInfo(curNode.Token, string.Format(AlarmCodes.MCL0001, curNode.Token.Input)));
+                curNode.ConnectedErrInfoList.Add(new MeaningErrInfo(curNode, string.Format(AlarmCodes.MCL0001, curNode.Token.Input)));
             }
             else
             {
                 result = true;
-                curNode.ConnectedInterLanguage.Add(UCode.Command.LoadVar(ReservedLabel, varData.DclData.BlockLevel, 
-                                                                                                                varData.Offset, varData.DclData.DclItemData.Name));
+                if(bAddress)
+                    curNode.ConnectedInterLanguage.Add(UCode.Command.LoadVarAddress(ReservedLabel, varData.DclData.BlockLevel,
+                                                                                                                    varData.Offset, varData.DclData.DclItemData.Name));
+                else
+                    curNode.ConnectedInterLanguage.Add(UCode.Command.LoadVarValue(ReservedLabel, varData.DclData.BlockLevel, 
+                                                                                                                    varData.Offset, varData.DclData.DclItemData.Name));
             }
 
-            return result;
+            return varData;
         }
 
         private bool ReadyForIdentCalculateIdent(AstNonTerminal node, int leftIndex, int rightIndex)
@@ -60,7 +64,7 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
             var leftResult = ConnectSimpleVarCode(node[leftIndex] as AstTerminal);
             var rightResult = ConnectSimpleVarCode(node[rightIndex] as AstTerminal);
 
-            if (leftResult == false || rightResult == false)
+            if (leftResult == null || rightResult == null)
             {
                 node.ConnectedInterLanguage.Clear();
                 return false;
@@ -73,7 +77,7 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
         {
             var leftResult = ConnectSimpleVarCode(node[leftIndex] as AstTerminal);
 
-            if (leftResult == false)
+            if (leftResult == null)
             {
                 node.ConnectedInterLanguage.Clear();
                 return false;
@@ -102,17 +106,9 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
             return true;
         }
 
-        private bool ConnectVarOrDigitCode(AstTerminal curNode)
+        private VarData BuildExpressAsAddress(AstTerminal curNode)
         {
-            bool result = true;
-
-            if (curNode.Token.Kind.TokenType is Identifier)
-                result = ConnectSimpleVarCode(curNode);
-            else if (curNode.Token.Kind.TokenType is Digit)
-                curNode.ConnectedInterLanguage.Add(UCode.Command.DclValue(ReservedLabel, System.Convert.ToInt32(curNode.Token.Input)));
-            else result = false;
-
-            return result;
+            return (curNode.Token.Kind.TokenType is Identifier) ? ConnectSimpleVarCode(curNode, true) : null;
         }
 
         private bool ReadyForExpression(AstNonTerminal curNode, int leftIndex, int rightIndex)
@@ -168,13 +164,13 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
                 if (leftVarData.DclData.DclSpecData.Const)
                 {
                     result = false;
-                    curNode.ConnectedErrInfoList.Add(new MeaningErrInfo(leftVarNode.Token, AlarmCodes.MCL0002));
+                    curNode.ConnectedErrInfoList.Add(new MeaningErrInfo(leftVarNode, AlarmCodes.MCL0002));
                 }
 
                 if (leftVarData.DclData.DclSpecData.DataType != rightVarData.DclData.DclSpecData.DataType)
                 {
                     result = false;
-                    curNode.ConnectedErrInfoList.Add(new MeaningErrInfo(rightVarNode.Token, AlarmCodes.MCL0003));
+                    curNode.ConnectedErrInfoList.Add(new MeaningErrInfo(rightVarNode, AlarmCodes.MCL0003));
                 }
             }
 
@@ -184,23 +180,38 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
             return result;
         }
 
-        private bool BuildOnlyExpressionNode(AstNonTerminal curNode, SymbolTable baseSymbolTable)
+        private LiteralData BuildOperator(AstNonTerminal curNode, LiteralData left, LiteralData right)
         {
             curNode.ClearConnectedInfo();
-            curNode.ConnectedSymbolTable = baseSymbolTable;
 
-//            if (ReadyForExpression(curNode, 0, 2) == false) return false;
+            TypeChecker.Check(curNode, left, right);
+            LiteralData result = null;
 
             if (curNode.SignPost.MeaningUnit == this.Add)
+            {
+                result = left.Add(right);
                 curNode.ConnectedInterLanguage.Add(UCode.Command.Add(ReservedLabel));
+            }
             else if (curNode.SignPost.MeaningUnit == this.Sub)
+            {
+                result = left.Sub(right);
                 curNode.ConnectedInterLanguage.Add(UCode.Command.Sub(ReservedLabel));
+            }
             else if (curNode.SignPost.MeaningUnit == this.Mul)
+            {
+                result = left.Mul(right);
                 curNode.ConnectedInterLanguage.Add(UCode.Command.Multiple(ReservedLabel));
+            }
             else if (curNode.SignPost.MeaningUnit == this.Div)
+            {
+                result = left.Div(right);
                 curNode.ConnectedInterLanguage.Add(UCode.Command.Div(ReservedLabel));
+            }
             else if (curNode.SignPost.MeaningUnit == this.Mod)
+            {
+                result = left.Mod(right);
                 curNode.ConnectedInterLanguage.Add(UCode.Command.Mod(ReservedLabel));
+            }
             else if (curNode.SignPost.MeaningUnit == this.LogicalNot)
                 curNode.ConnectedInterLanguage.Add(UCode.Command.Not(ReservedLabel));
             else if (curNode.SignPost.MeaningUnit == this.LogicalAnd)
@@ -220,43 +231,38 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
             else if (curNode.SignPost.MeaningUnit == this.LessEqual)
                 curNode.ConnectedInterLanguage.Add(UCode.Command.LessEqual(ReservedLabel));
 
-            return true;
-        }
-
-        /// <summary>
-        /// This function builds for the expression on the basis of an operator.
-        /// </summary>
-        /// <param name="curNode"></param>
-        /// <param name="baseSymbolTable"></param>
-        /// <param name="blockLevel"></param>
-        /// <param name="offset"></param>
-        /// <param name="index"></param>
-        /// <returns></returns>
-        private bool BuildHalfExpression(AstSymbol curNode, SymbolTable baseSymbolTable, int blockLevel, int offset)
-        {
-            bool result = false;
-
-            if (curNode is AstNonTerminal)
-                result = BuildExpressionNode(curNode as AstNonTerminal, baseSymbolTable, blockLevel, offset).Result;
-            else
-                result = ConnectVarOrDigitCode(curNode as AstTerminal);
-
             return result;
         }
 
-        private AstBuildResult BuildExpressionNode(AstNonTerminal curNode, SymbolTable baseSymbolTable, int blockLevel, int offset)
+        private AstBuildResult BuildOpNode(AstNonTerminal curNode, SymbolTable baseSymbolTable,
+                                                                        int blockLevel, int offset, AstBuildOption buildOption)
         {
-            curNode.ClearConnectedInfo();
-            curNode.ConnectedSymbolTable = baseSymbolTable;
+            bool result = true;
+            LiteralData literalData = null;
 
-            var leftResult = BuildHalfExpression(curNode[0], baseSymbolTable, blockLevel, offset);
-            var rightResult = BuildHalfExpression(curNode[2], baseSymbolTable, blockLevel, offset);
-            BuildOnlyExpressionNode(curNode, baseSymbolTable);
+            try
+            {
+                curNode.ClearConnectedInfo();
+                curNode.ConnectedSymbolTable = baseSymbolTable;
 
-            var result = true;
-            if (leftResult == false || rightResult == false) result = false;
+                var leftResult = (curNode[0] as AstNonTerminal).BuildLogic(baseSymbolTable, blockLevel, offset, buildOption);
+                var rightResult = (curNode[2] as AstNonTerminal).BuildLogic(baseSymbolTable, blockLevel, offset, buildOption);
 
-            return new AstBuildResult(null, baseSymbolTable, result);
+                var leftParam = (leftResult.Data is VarData) ? (leftResult.Data as VarData).Value : leftResult.Data as LiteralData;
+                var rightParam = (rightResult.Data is VarData) ? (rightResult.Data as VarData).Value : rightResult.Data as LiteralData;
+
+                literalData = BuildOperator(curNode, leftParam, rightParam);
+
+                if (leftResult.Result == false || rightResult.Result == false) result = false;
+
+            }
+            catch
+            {
+                result = false;
+                curNode.ConnectedInterLanguage.Clear();
+            }
+
+            return new AstBuildResult(literalData, baseSymbolTable, result);
         }
     }
 }

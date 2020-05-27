@@ -1,5 +1,8 @@
 ﻿using Parse.FrontEnd.Ast;
+using Parse.FrontEnd.Grammars.MiniC.AstNodes;
+using Parse.FrontEnd.Grammars.MiniC.AstNodes.ExprNodes.LiteralNodes;
 using Parse.FrontEnd.Grammars.MiniC.SymbolTableFormat;
+using Parse.FrontEnd.Grammars.Properties;
 using Parse.FrontEnd.InterLanguages;
 using System.Collections.Generic;
 
@@ -9,7 +12,8 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
     {
         // [0:n] : Dcl (AstNonTerminal)
         // [n+1:y] : FuncDef (AstNonTerminal)
-        private AstBuildResult BuildProgramNode(AstNonTerminal curNode, SymbolTable baseSymbolTable, int blockLevel, int offset)
+        private AstBuildResult BuildProgramNode(AstNonTerminal curNode, SymbolTable baseSymbolTable,
+                                                                    int blockLevel, int offset, AstBuildOption buildOption = AstBuildOption.None)
         {
             int funcOffset = 0;
             _labels.Clear();
@@ -45,7 +49,8 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
             return null;
         }
 
-        private AstBuildResult BuildFuncDefNode(AstNonTerminal curNode, SymbolTable baseSymbolTable, int blockLevel, int offset)
+        private AstBuildResult BuildFuncDefNode(AstNonTerminal curNode, SymbolTable baseSymbolTable,
+                                                                    int blockLevel, int offset, AstBuildOption buildOption = AstBuildOption.None)
         {
             FuncData funcHeadData = new FuncData();
             var newSymbolTable = new MiniCSymbolTable(baseSymbolTable as MiniCSymbolTable);
@@ -79,7 +84,8 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
 
         // format summary
         // DclSpec Ident FormalPara
-        private AstBuildResult BuildFuncHeadNode(AstNonTerminal curNode, SymbolTable baseSymbolTable, int blockLevel, int offset)
+        private AstBuildResult BuildFuncHeadNode(AstNonTerminal curNode, SymbolTable baseSymbolTable,
+                                                                        int blockLevel, int offset, AstBuildOption buildOption = AstBuildOption.None)
         {
             FuncData result = new FuncData();
             curNode.ClearConnectedInfo();
@@ -96,7 +102,7 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
                 }
 
                 var astNonterminal = item as AstNonTerminal;
-                var nodeCheckResult = astNonterminal.BuildLogic(baseSymbolTable, blockLevel, offset);
+                var nodeCheckResult = astNonterminal.BuildLogic(baseSymbolTable, blockLevel, offset, buildOption);
 
                 if (astNonterminal.SignPost.MeaningUnit == this.DclSpec)   // return type
                 {
@@ -115,7 +121,8 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
             return new AstBuildResult(result, null);
         }
 
-        private AstBuildResult BuildDclSpecNode(AstNonTerminal curNode, SymbolTable baseSymbolTable, int blockLevel, int offset)
+        private AstBuildResult BuildDclSpecNode(AstNonTerminal curNode, SymbolTable baseSymbolTable,
+                                                                    int blockLevel, int offset, AstBuildOption buildOption = AstBuildOption.None)
         {
             DclSpecData result = new DclSpecData();
             curNode.ClearConnectedInfo();
@@ -146,7 +153,8 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
 
         // format summary [Can induce epsilon]
         // [0:n] : ParamDcl (AstNonTerminal)
-        private AstBuildResult BuildFormalParaNode(AstNonTerminal curNode, SymbolTable baseSymbolTable, int blockLevel, int offset)
+        private AstBuildResult BuildFormalParaNode(AstNonTerminal curNode, SymbolTable baseSymbolTable,
+                                                                        int blockLevel, int offset, AstBuildOption buildOption = AstBuildOption.None)
         {
             List<VarData> result = new List<VarData>();
             curNode.ClearConnectedInfo();
@@ -159,8 +167,8 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
                 var astNonterminal = item as AstNonTerminal;
                 if (astNonterminal.SignPost.MeaningUnit == this.ParamDcl)
                 {
-                    var nodeCheckResult = astNonterminal.BuildLogic(baseSymbolTable, blockLevel, offset);
-                    varData.DclData = nodeCheckResult.Data as DclData;
+                    var nodeBuildResult = astNonterminal.BuildLogic(baseSymbolTable, blockLevel, offset, buildOption);
+                    varData.DclData = nodeBuildResult.Data as DclData;
                     varData.Offset = offset++;
                     result.Add(varData);
                 }
@@ -176,7 +184,8 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
 
         // format summary
         // DclSpec (SimpleVar | ArrayVar)
-        private AstBuildResult BuildParamDcl(AstNonTerminal curNode, SymbolTable baseSymbolTable, int blockLevel, int offset)
+        private AstBuildResult BuildParamDcl(AstNonTerminal curNode, SymbolTable baseSymbolTable,
+                                                                int blockLevel, int offset, AstBuildOption buildOption = AstBuildOption.None)
         {
             DclData result = new DclData
             {
@@ -192,7 +201,7 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
                 if (item is AstTerminal) continue;
 
                 var astNonterminal = item as AstNonTerminal;
-                var nodeCheckResult = astNonterminal.BuildLogic(baseSymbolTable, blockLevel, offset);
+                var nodeCheckResult = astNonterminal.BuildLogic(baseSymbolTable, blockLevel, offset, buildOption);
 
                 if (astNonterminal.SignPost.MeaningUnit == this.DclSpec)
                     result.DclSpecData = nodeCheckResult.Data as DclSpecData;
@@ -210,7 +219,8 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
 
         // format summary [Can induce epsilon]
         // [0:n] : Dcl (AstNonTerminal)
-        private AstBuildResult BuildDclListNode(AstNonTerminal node, SymbolTable baseSymbolTable, int blockLevel, int offset)
+        private AstBuildResult BuildDclListNode(AstNonTerminal node, SymbolTable baseSymbolTable,
+                                                                int blockLevel, int offset, AstBuildOption buildOption = AstBuildOption.None)
         {
             MiniCSymbolTable newSymbolTable = new MiniCSymbolTable(baseSymbolTable as MiniCSymbolTable);
 
@@ -222,7 +232,7 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
                 var astNonterminal = item as AstNonTerminal;
                 if (astNonterminal.SignPost.MeaningUnit == this.Dcl)
                 {
-                    var nodeCheckResult = astNonterminal.BuildLogic(baseSymbolTable, blockLevel, offset);
+                    var nodeCheckResult = astNonterminal.BuildLogic(baseSymbolTable, blockLevel, offset, buildOption);
 
                     // add symbol information to the symbol table.
                     VarData varData = new VarData
@@ -240,7 +250,8 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
 
         // format summary
         // const? (void | int | char) identifier ([integer])? ;
-        private AstBuildResult BuildDclNode(AstNonTerminal curNode, SymbolTable baseSymbolTable, int blockLevel, int offset)
+        private AstBuildResult BuildDclNode(AstNonTerminal curNode, SymbolTable baseSymbolTable,
+                                                            int blockLevel, int offset, AstBuildOption buildOption = AstBuildOption.None)
         {
             DclData result = new DclData
             {
@@ -252,7 +263,7 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
                 if (item is AstTerminal) continue; // skip ; token
 
                 var astNonTerminal = item as AstNonTerminal;
-                var nodeCheckResult = astNonTerminal.BuildLogic(baseSymbolTable, blockLevel, offset);
+                var nodeCheckResult = astNonTerminal.BuildLogic(baseSymbolTable, blockLevel, offset, buildOption);
 
                 if (astNonTerminal.SignPost.MeaningUnit == this.DclSpec)    // const? (void | int | char)
                     result.DclSpecData = nodeCheckResult.Data as DclSpecData;
@@ -268,7 +279,8 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
 
         // format summary
         // [0] : (SimpleVar | ArrayVar) (AstNonTerminal)
-        private AstBuildResult BuildDclItemNode(AstNonTerminal curNode, SymbolTable baseSymbolTable, int blockLevel, int offset)
+        private AstBuildResult BuildDclItemNode(AstNonTerminal curNode, SymbolTable baseSymbolTable,
+                                                                    int blockLevel, int offset, AstBuildOption buildOption = AstBuildOption.None)
         {
             AstBuildResult result = null;
 
@@ -277,7 +289,7 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
                 if (item is AstTerminal) continue;
 
                 var astNonTerminal = item as AstNonTerminal;
-                result = astNonTerminal.BuildLogic(baseSymbolTable, blockLevel, offset);
+                result = astNonTerminal.BuildLogic(baseSymbolTable, blockLevel, offset, buildOption);
             }
 
             return result;
@@ -285,22 +297,50 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
 
         // format summary
         // [0] : Ident (AstTerminal)
-        private AstBuildResult BuildSimpleVarNode(AstNonTerminal curNode, SymbolTable baseSymbolTable, int blockLevel, int offset)
+        private AstBuildResult BuildSimpleVarNode(AstNonTerminal curNode, SymbolTable baseSymbolTable,
+                                                                        int blockLevel, int offset, AstBuildOption buildOption = AstBuildOption.None)
         {
             DclItemData result = new DclItemData
             {
                 NameToken = (curNode.Items[0] as AstTerminal).Token
             };
 
-            return new AstBuildResult(result, null);
+            return new AstBuildResult(result, null, true);
         }
 
         // format summary
-        // [0] : Ident (AstTerminal)
-        // [1] : Number (AstTerminal)
-        private AstBuildResult BuildArrayVarNode(AstNonTerminal curNode, SymbolTable baseSymbolTable, int blockLevel, int offset)
+        // [0] : ident (AstTerminal)
+        // [1] : number (AstTerminal)
+        private AstBuildResult BuildArrayVarNode(AstNonTerminal curNode, SymbolTable baseSymbolTable,
+                                                                    int blockLevel, int offset, AstBuildOption buildOption = AstBuildOption.None)
         {
-            return null;
+            DclItemData result = new DclItemData
+            {
+                NameToken = (curNode.Items[0] as AstTerminal).Token,
+                DimensionToken = (curNode.Items[1] as AstTerminal).Token
+            };
+
+            return new AstBuildResult(result, null, true);
+        }
+
+        private AstBuildResult BuildVarNode(AstNonTerminal curNode, SymbolTable baseSymbolTable,
+                                                            int blockLevel, int offset, AstBuildOption buildOption = AstBuildOption.None)
+        {
+            bool result = true;
+
+            bool bAddress = AstBuildOptionChecker.HasOption(buildOption, AstBuildOption.Reference);
+            var varData = ConnectSimpleVarCode(curNode.Items[0] as AstTerminal, bAddress);
+            if (varData == null) result = false;
+            return new AstBuildResult(varData, baseSymbolTable, result);
+        }
+
+        private AstBuildResult BuildIntLiteralNode(AstNonTerminal curNode, SymbolTable baseSymbolTable,
+                                                            int blockLevel, int offset, AstBuildOption buildOption = AstBuildOption.None)
+        {
+            IntLiteralData result = new IntLiteralData((curNode.Items[0] as AstTerminal).Token);
+            curNode.ConnectedInterLanguage.Add(UCode.Command.DclValue(ReservedLabel, result.Value));
+
+            return new AstBuildResult(result, baseSymbolTable, true);
         }
     }
 }

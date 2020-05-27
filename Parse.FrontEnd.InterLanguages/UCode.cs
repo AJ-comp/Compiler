@@ -70,8 +70,11 @@ namespace Parse.FrontEnd.InterLanguages
             public static Format DclVar(string labelName, int bIndex, int oIndex, int length, string comment = "")
                 => UCodeFormat(labelName, "sym", comment, bIndex, oIndex, length);
 
-            public static Format LoadVar(string labelName, int bIndex, int oIndex, string comment = "")
+            public static Format LoadVarValue(string labelName, int bIndex, int oIndex, string comment = "")
                 => UCodeFormat(labelName, "lod", comment, bIndex, oIndex);
+
+            public static Format LoadVarAddress(string labelName, int bIndex, int oIndex, string comment = "")
+                => UCodeFormat(labelName, "lda", comment, bIndex, oIndex);
 
             public static Format DclValue(string labelName, int value, string comment = "")
                 => UCodeFormat(labelName, "ldc", comment, value);
@@ -98,7 +101,10 @@ namespace Parse.FrontEnd.InterLanguages
                 return UCodeFormat(labelName, command, comment, destLabelName);
             }
 
+            public static Format Pop(string labelName, string comment = "") => UCodeFormat(labelName, "pop", comment);
             public static Format Store(string labelName, int bIndex, int oIndex, string comment = "") => UCodeFormat(labelName, "str", comment, bIndex, oIndex);
+            public static Format Sti(string labelName, string comment = "") => UCodeFormat(labelName, "sti", comment);
+            public static Format Ldi(string labelName, string comment = "") => UCodeFormat(labelName, "ldi", comment);
             public static Format Add(string labelName, string comment = "") => UCodeFormat(labelName, "add", comment);
             public static Format Sub(string labelName, string comment = "") => UCodeFormat(labelName, "sub", comment);
             public static Format Multiple(string labelName, string comment = "") => UCodeFormat(labelName, "mult", comment);

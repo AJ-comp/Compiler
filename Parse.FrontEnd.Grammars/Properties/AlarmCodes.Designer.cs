@@ -95,5 +95,41 @@ namespace Parse.FrontEnd.Grammars.Properties {
                 return ResourceManager.GetString("MCL0003", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   lvalue have to be modifiable format.과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        internal static string MCL0004 {
+            get {
+                return ResourceManager.GetString("MCL0004", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   {0} variable that not initialized is using.과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        internal static string MCL0005 {
+            get {
+                return ResourceManager.GetString("MCL0005", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Integer or enum type has to be to expression.과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        internal static string MCL0006 {
+            get {
+                return ResourceManager.GetString("MCL0006", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Buffer overflow fired while write {0}. writable byte is {1} but in fact write {2} byte.과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        internal static string MCL0007 {
+            get {
+                return ResourceManager.GetString("MCL0007", resourceCulture);
+            }
+        }
     }
 }

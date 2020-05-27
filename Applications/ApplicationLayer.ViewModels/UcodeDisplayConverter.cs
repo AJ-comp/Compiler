@@ -57,6 +57,10 @@ namespace ApplicationLayer.ViewModels
                 else if (astNonTerminal.SignPost.MeaningUnit == sdts.GreaterEqual) nodeInfo.CategoryPos = UCodeDisplayModel.AttatchCategoryPosition.Down;
                 else if (astNonTerminal.SignPost.MeaningUnit == sdts.LessThan) nodeInfo.CategoryPos = UCodeDisplayModel.AttatchCategoryPosition.Down;
                 else if (astNonTerminal.SignPost.MeaningUnit == sdts.LessEqual) nodeInfo.CategoryPos = UCodeDisplayModel.AttatchCategoryPosition.Down;
+                else if (astNonTerminal.SignPost.MeaningUnit == sdts.PreInc) nodeInfo.CategoryPos = UCodeDisplayModel.AttatchCategoryPosition.Down;
+                else if (astNonTerminal.SignPost.MeaningUnit == sdts.PreDec) nodeInfo.CategoryPos = UCodeDisplayModel.AttatchCategoryPosition.Down;
+                else if (astNonTerminal.SignPost.MeaningUnit == sdts.PostInc) nodeInfo.CategoryPos = UCodeDisplayModel.AttatchCategoryPosition.Down;
+                else if (astNonTerminal.SignPost.MeaningUnit == sdts.PostDec) nodeInfo.CategoryPos = UCodeDisplayModel.AttatchCategoryPosition.Down;
                 else if (astNonTerminal.SignPost.MeaningUnit == sdts.IfSt)
                     nodeInfo.CategoryName = "if ( " + (astNonTerminal[1] as AstNonTerminal).ConnectedParseTree.AllInputDatas + ")";
 

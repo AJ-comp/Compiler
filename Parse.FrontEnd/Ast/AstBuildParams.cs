@@ -1,11 +1,11 @@
 ﻿namespace Parse.FrontEnd.Ast
 {
-    public class AstParams
+    public class AstBuildParams
     {
         public AstNonTerminal CurNode { get; }
         public SymbolTable BaseSymbolTable { get; }
 
-        public AstParams(AstNonTerminal curNode, SymbolTable baseSymbolTable)
+        public AstBuildParams(AstNonTerminal curNode, SymbolTable baseSymbolTable)
         {
             CurNode = curNode;
             BaseSymbolTable = baseSymbolTable;

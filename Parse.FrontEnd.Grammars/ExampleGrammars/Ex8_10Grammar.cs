@@ -38,7 +38,7 @@ namespace Parse.FrontEnd.Grammars.ExampleGrammars
 
     public class Ex8_10Sdts : Sdts
     {
-        public override event EventHandler<SementicErrorArgs> SementicErrorEventHandler;
+        public override event EventHandler<SemanticErrorArgs> SementicErrorEventHandler;
 
         private object ActionAdd(AstNonTerminal node)
         {

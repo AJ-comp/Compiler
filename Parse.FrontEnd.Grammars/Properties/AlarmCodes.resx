@@ -109,4 +109,16 @@
   <data name="MCL0003" xml:space="preserve">
     <value>It can not be allocated because the data type differs.</value>
   </data>
+  <data name="MCL0004" xml:space="preserve">
+    <value>lvalue have to be modifiable format.</value>
+  </data>
+  <data name="MCL0005" xml:space="preserve">
+    <value>{0} variable that not initialized is using.</value>
+  </data>
+  <data name="MCL0006" xml:space="preserve">
+    <value>Integer or enum type has to be to expression.</value>
+  </data>
+  <data name="MCL0007" xml:space="preserve">
+    <value>Buffer overflow fired while write {0}. writable byte is {1} but in fact write {2} byte.</value>
+  </data>
 </root>

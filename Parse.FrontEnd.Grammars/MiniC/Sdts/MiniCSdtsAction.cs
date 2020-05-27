@@ -1,5 +1,6 @@
 ﻿using Parse.FrontEnd.Ast;
 using Parse.FrontEnd.Grammars.MiniC.SymbolTableFormat;
+using System;
 using System.Collections.Generic;
 
 namespace Parse.FrontEnd.Grammars.MiniC.Sdts
@@ -73,24 +74,32 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
                 if (item is AstTerminal) continue;
 
                 var astNonTerminal = item as AstNonTerminal;
+
                 if (astNonTerminal.SignPost.MeaningUnit == this.ConstNode)
                 {
-                    result.ConstToken = (astNonTerminal.Items[0] as AstTerminal).Token;
+                    result.ConstToken = astNonTerminal.ActionLogic() as TokenData;
                 }
                 else if (astNonTerminal.SignPost.MeaningUnit == this.VoidNode)
                 {
                     result.DataType = DataType.Void;
-                    result.DataTypeToken = (astNonTerminal.Items[0] as AstTerminal).Token;
+                    result.DataTypeToken = astNonTerminal.ActionLogic() as TokenData;
                 }
                 else if (astNonTerminal.SignPost.MeaningUnit == this.IntNode)
                 {
                     result.DataType = DataType.Int;
-                    result.DataTypeToken = (astNonTerminal.Items[0] as AstTerminal).Token;
+                    result.DataTypeToken = astNonTerminal.ActionLogic() as TokenData;
                 }
             }
 
             return result;
         }
+
+        private object ActionTerminalNode(AstNonTerminal node) => (node.Items[0] as AstTerminal).Token;
+        private object ActionConstNode(AstNonTerminal node) => ActionTerminalNode(node);
+        private object ActionVoidNode(AstNonTerminal node) => ActionTerminalNode(node);
+        private object ActionIntNode(AstNonTerminal node) => ActionTerminalNode(node);
+        private object ActionVarNode(AstNonTerminal node) => ActionTerminalNode(node);
+        private object ActionIntLiteralNode(AstNonTerminal node) => ActionTerminalNode(node);
 
         private object ActionFormalPara(AstNonTerminal node)
         {
@@ -100,7 +109,6 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
             {
                 if (item is AstTerminal) continue;   // skip ( token and ) token
 
-                VarData varData = new VarData();
                 var astNonterminal = item as AstNonTerminal;
                 if (astNonterminal.SignPost.MeaningUnit == this.ParamDcl)
                 {
@@ -132,36 +140,16 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
             return result;
         }
 
-        private object ActionExpressionHub(AstNonTerminal curNode)
-        {
-            List<AstSymbol> result = new List<AstSymbol>();
-            if (curNode == null) return result;
-
-            if (curNode.SignPost.MeaningUnit == this.Assign)
-                result.AddRange(this.ActionAssign(curNode) as IReadOnlyList<AstSymbol>);
-            else if (curNode.SignPost.MeaningUnit == this.AddAssign)
-                result.AddRange(this.ActionAddAssign(curNode) as IReadOnlyList<AstSymbol>);
-            else if (curNode.SignPost.MeaningUnit == this.SubAssign)
-                result.AddRange(this.ActionSubAssign(curNode) as IReadOnlyList<AstSymbol>);
-            else if (curNode.SignPost.MeaningUnit == this.MulAssign)
-                result.AddRange(this.ActionMulAssign(curNode) as IReadOnlyList<AstSymbol>);
-            else if (curNode.SignPost.MeaningUnit == this.DivAssign)
-                result.AddRange(this.ActionDivAssign(curNode) as IReadOnlyList<AstSymbol>);
-            else if (curNode.SignPost.MeaningUnit == this.ModAssign)
-                result.AddRange(this.ActionModAssign(curNode) as IReadOnlyList<AstSymbol>);
-            else if (curNode.SignPost.MeaningUnit == this.Call)
-                result.AddRange(this.ActionCall(curNode) as IReadOnlyList<AstSymbol>);
-
-            return result;
-        }
-
         private object ActionExpSt(AstNonTerminal curNode)
         {
             List<AstSymbol> result = new List<AstSymbol>();
             if (curNode.Count == 0) return result;
 
             var astNonTerminal = curNode[0] as AstNonTerminal;
-            return ActionExpressionHub(astNonTerminal);
+            result.AddRange(astNonTerminal.ActionLogic() as IReadOnlyList<AstSymbol>);
+            result.Add(curNode);
+
+            return result;
         }
 
         private object ActionDclList(AstNonTerminal node)
@@ -201,19 +189,28 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
             return result;
         }
 
-        private object ActionSimpleVar(AstNonTerminal node)
+        private object ActionSimpleVar(AstNonTerminal curNode)
         {
             DclItemData result = new DclItemData
             {
-                NameToken = (node.Items[0] as AstTerminal).Token
+                NameToken = (curNode.Items[0] as AstTerminal).Token
             };
 
             return result;
         }
 
-        private object ActionArrayVar(AstNonTerminal node)
+        // format summary
+        // [0] : ident (AstTerminal)
+        // [1] : number (AstTerminal)
+        private object ActionArrayVar(AstNonTerminal curNode)
         {
-            return null;
+            DclItemData result = new DclItemData
+            {
+                NameToken = (curNode.Items[0] as AstTerminal).Token,
+                DimensionToken = (curNode.Items[1] as AstTerminal).Token
+            };
+
+            return result;
         }
 
         private object ActionStatList(AstNonTerminal curNode)
@@ -281,9 +278,21 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
             return result;
         }
 
-        private object ActionIndex(AstNonTerminal node)
+        // format summary
+        // [0] : ident (AstTerminal)
+        // [1] : exp (AstNonTerminal) | number (AstTerminal)
+        private object ActionIndex(AstNonTerminal curNode)
         {
-            return null;
+            List<AstSymbol> result = new List<AstSymbol>();
+
+            if (curNode[1] is AstNonTerminal)
+                result.AddRange((curNode[1] as AstNonTerminal).ActionLogic() as IReadOnlyList<AstSymbol>);
+            else result.Add(curNode[1]);
+
+            result.Add(curNode[0]);
+            result.Add(curNode);
+
+            return result;
         }
 
         // [0] : Ident (AstTerminal)

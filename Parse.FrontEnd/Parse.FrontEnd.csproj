@@ -60,9 +60,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Ast\AstBuildOption.cs" />
     <Compile Include="Ast\AstBuildResult.cs" />
     <Compile Include="Ast\AstNonTerminal.cs" />
-    <Compile Include="Ast\AstParams.cs" />
+    <Compile Include="Ast\AstBuildParams.cs" />
     <Compile Include="Ast\AstSymbol.cs" />
     <Compile Include="Ast\AstTerminal.cs" />
     <Compile Include="ParseTree\ParseTreeNonTerminal.cs" />

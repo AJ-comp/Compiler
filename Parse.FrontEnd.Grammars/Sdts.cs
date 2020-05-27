@@ -52,7 +52,7 @@ namespace Parse.FrontEnd.Grammars
             }
         }
 
-        public abstract event EventHandler<SementicErrorArgs> SementicErrorEventHandler;
+        public abstract event EventHandler<SemanticErrorArgs> SementicErrorEventHandler;
 
         public abstract SementicAnalysisResult Process(AstSymbol symbol);
         public abstract IReadOnlyList<AstSymbol> GenerateCode(AstSymbol symbol);

@@ -32,7 +32,7 @@ namespace Parse.FrontEnd.Grammars.PracticeGrammars
 
     public class LRTest1Sdts : Sdts
     {
-        public override event EventHandler<SementicErrorArgs> SementicErrorEventHandler;
+        public override event EventHandler<SemanticErrorArgs> SementicErrorEventHandler;
 
         private void ActionAdd(AstSymbol node)
         {

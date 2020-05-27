@@ -9,7 +9,8 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
     {
         // [0] : DclList (AstNonTerminal)
         // [1] : StatList (AstNonTerminal) [epsilon able]
-        private AstBuildResult BuildCompoundStNode(AstNonTerminal curNode, SymbolTable baseSymbolTable, int blockLevel, int offset)
+        private AstBuildResult BuildCompoundStNode(AstNonTerminal curNode, SymbolTable baseSymbolTable,
+                                                                            int blockLevel, int offset, AstBuildOption buildOption = AstBuildOption.None)
         {
             bool result = true;
             curNode.ClearConnectedInfo();
@@ -30,7 +31,8 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
 
         // format summary
         // IfSt | IfElseSt | WhileSt | ExpSt
-        private AstBuildResult BuildStatListNode(AstNonTerminal curNode, SymbolTable baseSymbolTable, int blockLevel, int offset)
+        private AstBuildResult BuildStatListNode(AstNonTerminal curNode, SymbolTable baseSymbolTable,
+                                                                    int blockLevel, int offset, AstBuildOption buildOption = AstBuildOption.None)
         {
             curNode.ClearConnectedInfo();
             if (curNode.Count == 0) return new AstBuildResult(null, baseSymbolTable, true);
@@ -40,7 +42,7 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
                 if (item is AstTerminal) continue;
 
                 var astNonTerminal = item as AstNonTerminal;
-                astNonTerminal.BuildLogic(baseSymbolTable, blockLevel, offset);
+                astNonTerminal.BuildLogic(baseSymbolTable, blockLevel, offset, buildOption);
             }
 
             return new AstBuildResult(null, baseSymbolTable, true);
@@ -48,24 +50,27 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
 
         // format summary
         // (AddAssign | SubAssign | MulAssign | DivAssign | ...) ;
-        private AstBuildResult BuildExpStNode(AstNonTerminal curNode, SymbolTable baseSymbolTable, int blockLevel, int offset)
+        private AstBuildResult BuildExpStNode(AstNonTerminal curNode, SymbolTable baseSymbolTable,
+                                                                int blockLevel, int offset, AstBuildOption buildOption = AstBuildOption.None)
         {
             curNode.ClearConnectedInfo();
             // epsilon
             if(curNode.Count == 0) return new AstBuildResult(null, baseSymbolTable, true);
 
             var astNonTerminal = curNode[0] as AstNonTerminal;
-            return astNonTerminal.BuildLogic(baseSymbolTable, blockLevel, offset);
+            return astNonTerminal.BuildLogic(baseSymbolTable, blockLevel, offset, buildOption);
         }
 
         // [0] : if (Terminal)
         // [1] : logical_exp (NonTerminal)
         // [2] : statement (NonTerminal)
-        private AstBuildResult BuildIfStNode(AstNonTerminal curNode, SymbolTable baseSymbolTable, int blockLevel, int offset)
+        private AstBuildResult BuildIfStNode(AstNonTerminal curNode, SymbolTable baseSymbolTable,
+                                                            int blockLevel, int offset, AstBuildOption buildOption = AstBuildOption.None)
         {
             curNode.ClearConnectedInfo();
 
-            BuildExpressionNode(curNode[1] as AstNonTerminal, baseSymbolTable, blockLevel, offset);
+            // logical_exp
+            BuildOpNode(curNode[1] as AstNonTerminal, baseSymbolTable, blockLevel, offset, buildOption);
 
             string labelString;
             do
@@ -75,25 +80,31 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
             _labels.Add(labelString);
 
             curNode.ConnectedInterLanguage.Add(UCode.Command.ConditionalJump(ReservedLabel, labelString, false));
-            var result = (curNode[2] as AstNonTerminal).BuildLogic(baseSymbolTable, blockLevel, offset);
+
+            // statement
+            buildOption |= AstBuildOption.NotAssign;
+            var result = (curNode[2] as AstNonTerminal).BuildLogic(baseSymbolTable, blockLevel, offset, buildOption);
             ReservedLabel = labelString;
 
             return result;
         }
 
-        private AstBuildResult BuildIfElseStNode(AstNonTerminal curNode, SymbolTable baseSymbolTable, int blockLevel, int offset)
+        private AstBuildResult BuildIfElseStNode(AstNonTerminal curNode, SymbolTable baseSymbolTable,
+                                                                    int blockLevel, int offset, AstBuildOption buildOption = AstBuildOption.None)
         {
             return null;
         }
 
-        private AstBuildResult BuildWhileStNode(AstNonTerminal curNode, SymbolTable baseSymbolTable, int blockLevel, int offset)
+        private AstBuildResult BuildWhileStNode(AstNonTerminal curNode, SymbolTable baseSymbolTable,
+                                                                    int blockLevel, int offset, AstBuildOption buildOption = AstBuildOption.None)
         {
             return null;
         }
 
         // [0] : return (AstTerminal)
         // [1] : ExpSt (AstNonTerminal)
-        private AstBuildResult BuildReturnStNode(AstNonTerminal curNode, SymbolTable baseSymbolTable, int blockLevel, int offset)
+        private AstBuildResult BuildReturnStNode(AstNonTerminal curNode, SymbolTable baseSymbolTable,
+                                                                    int blockLevel, int offset, AstBuildOption buildOption = AstBuildOption.None)
         {
             curNode.ClearConnectedInfo();
 
@@ -106,7 +117,8 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
 
         // [0] : Ident (AstTerminal)
         // [1] : ActualParam (AstNonTerminal)
-        private AstBuildResult BuildCallNode(AstNonTerminal curNode, SymbolTable baseSymbolTable, int blockLevel, int offset)
+        private AstBuildResult BuildCallNode(AstNonTerminal curNode, SymbolTable baseSymbolTable,
+                                                            int blockLevel, int offset, AstBuildOption buildOption = AstBuildOption.None)
         {
             curNode.ClearConnectedInfo();
 
@@ -118,7 +130,8 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
             return result;
         }
 
-        private AstBuildResult BuildActualParam(AstNonTerminal curNode, SymbolTable baseSymbolTable, int blockLevel, int offset)
+        private AstBuildResult BuildActualParam(AstNonTerminal curNode, SymbolTable baseSymbolTable,
+                                                                    int blockLevel, int offset, AstBuildOption buildOption = AstBuildOption.None)
         {
             bool result = true;
             curNode.ClearConnectedInfo();
@@ -126,7 +139,7 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
             foreach(var item in curNode.Items)
             {
                 var astNonTerminal = item as AstNonTerminal;
-                if (astNonTerminal.BuildLogic(baseSymbolTable, blockLevel, offset).Result == false)
+                if (astNonTerminal.BuildLogic(baseSymbolTable, blockLevel, offset, buildOption).Result == false)
                     result = false;
             }
 
