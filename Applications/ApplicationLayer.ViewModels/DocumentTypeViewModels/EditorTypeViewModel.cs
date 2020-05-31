@@ -6,10 +6,12 @@ using ApplicationLayer.ViewModels.DialogViewModels.OptionViewModels;
 using ApplicationLayer.ViewModels.Messages;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
+using Parse.FrontEnd;
 using Parse.FrontEnd.Ast;
 using Parse.FrontEnd.DrawingSupport;
 using Parse.FrontEnd.Grammars;
 using Parse.FrontEnd.Grammars.MiniC;
+using Parse.FrontEnd.Grammars.MiniC.SymbolDataFormat.VarDataFormat;
 using Parse.FrontEnd.Grammars.MiniC.SymbolTableFormat;
 using Parse.FrontEnd.Parsers.Datas;
 using Parse.FrontEnd.Parsers.Logical;
@@ -20,6 +22,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Data;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace ApplicationLayer.ViewModels.DocumentTypeViewModels
@@ -112,33 +115,32 @@ namespace ApplicationLayer.ViewModels.DocumentTypeViewModels
         {
             var parsingResult = parsingCompletedInfo.ParsingResult;
 
-            AlarmCollection alarmList = new AlarmCollection();
-            if (parsingResult.HasError == false) alarmList.Add(new AlarmEventArgs(string.Empty, this.FileName));
-            else
-            {
-                this.AddAlarmData(parsingResult, alarmList);
-                this.AdjustToValidAlarmList(alarmList);
-            }
-
             this.ParsingHistory = parsingCompletedInfo.ParsingResult.ToParsingHistory;
             this.ParseTree = parsingCompletedInfo.ParsingResult.ToParseTree;
-            this.Ast = parsingCompletedInfo.Ast;
+            this.Ast = parsingCompletedInfo.RootAst;
+
+            AlarmCollection alarmCollection = GetSyntaxAlarmCollection(parsingResult);
+            alarmCollection.AddRange(GetSemanticAlarmCollection(parsingCompletedInfo.AllNodes, parsingCompletedInfo.FiredException));
+            if (alarmCollection.Count == 0) alarmCollection.Add(new AlarmEventArgs(string.Empty, this.FileName));
 
             // inform to alarm list view.
-            Messenger.Default.Send<AlarmMessage>(new AlarmMessage(this, alarmList));
+            Messenger.Default.Send<AlarmMessage>(new AlarmMessage(this, alarmCollection));
 
             // Add sementic parsing information to the current FileTreeNode.
             _fileNode.Clear();
 
-            var astRoot = parsingCompletedInfo.Ast as AstNonTerminal;
+            var astRoot = parsingCompletedInfo.RootAst as AstNonTerminal;
             var grammarSymbolTable = astRoot?.ConnectedSymbolTable as MiniCSymbolTable;
             if (grammarSymbolTable == null) return;
 
             // Add abstract variable list information to the current FileTreeNode.
-            int offset = 0;
             foreach(var item in grammarSymbolTable.VarDataList)
             {
-                var varTreeNode = new VarTreeNodeModel(item.DclData, offset++);
+                if (item is VirtualVarData) continue;
+
+                var cItem = item as RealVarData;
+
+                var varTreeNode = new VarTreeNodeModel(cItem.DclData);
                 _fileNode.AddChildren(varTreeNode);
             }
 
@@ -149,7 +151,7 @@ namespace ApplicationLayer.ViewModels.DocumentTypeViewModels
                 _fileNode.AddChildren(funcTreeNode);
             }
 
-            InterLanguage = this.ParserSnippet.Parser.Grammar.SDTS.GenerateCode(astRoot);
+            InterLanguage = (parsingCompletedInfo.FiredException == null) ? parsingCompletedInfo.AllNodes : null;
         }
 
 
@@ -182,6 +184,44 @@ namespace ApplicationLayer.ViewModels.DocumentTypeViewModels
             foreach (var item in correctList) alarmList.Add(item);
         }
 
+        private AlarmCollection GetSyntaxAlarmCollection(ParsingResult parsingResult)
+        {
+            AlarmCollection alarmList = new AlarmCollection();
+            if (parsingResult.HasError)
+            {
+                this.AddAlarmData(parsingResult, alarmList);
+                this.AdjustToValidAlarmList(alarmList);
+            }
+
+            return alarmList;
+        }
+
+        private AlarmCollection GetSemanticAlarmCollection(IReadOnlyList<AstSymbol> astNodes, Exception e)
+        {
+            AlarmCollection alarmList = new AlarmCollection();
+
+            ProjectTreeNodeModel projNode = _fileNode.ManagerTree as ProjectTreeNodeModel;
+
+            if(e != null)
+            {
+                var alarm = ParsingErrorInfo.CreateParsingError("EX0000", e.Message);
+                alarmList.Add(new AlarmEventArgs(projNode?.FileNameWithoutExtension, FileName, 0, 0, null, alarm));
+            }
+
+            if (astNodes == null) return alarmList;
+
+            foreach (var item in astNodes)
+            {
+                foreach(var alarm in item.ConnectedErrInfoList)
+                {
+                    var errToken = alarm.ErrorTokens[0];
+                    alarmList.Add(new AlarmEventArgs(projNode?.FileNameWithoutExtension, FileName, 0, 0, errToken, alarm));
+                }
+            }
+
+            return alarmList;
+        }
+
         private void AddAlarmData(ParsingResult e, AlarmCollection alarmList)
         {
             int lineIndex = 0;
@@ -201,7 +241,10 @@ namespace ApplicationLayer.ViewModels.DocumentTypeViewModels
                 ProjectTreeNodeModel projNode = _fileNode.ManagerTree as ProjectTreeNodeModel;
 
                 lock(_lockObject)
-                    alarmList.Add(new AlarmEventArgs(projNode?.FileNameWithoutExtension, FileName, tokenIndex, lineIndex + 1, errToken, block.ErrorInfos));
+                {
+                    foreach(var errorInfo in block.ErrorInfos)
+                        alarmList.Add(new AlarmEventArgs(projNode?.FileNameWithoutExtension, FileName, tokenIndex, lineIndex + 1, errToken, errorInfo));
+                }
             });
         }
 

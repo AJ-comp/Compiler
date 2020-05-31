@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using Parse.FrontEnd.Grammars.MiniC.SymbolDataFormat.LiteralDataFormat;
+using Parse.FrontEnd.Grammars.MiniC.SymbolDataFormat.VarDataFormat;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Parse.FrontEnd.Grammars.MiniC.SymbolTableFormat
@@ -11,20 +13,20 @@ namespace Parse.FrontEnd.Grammars.MiniC.SymbolTableFormat
         public VarDataList Parent { get; }
         public VarDataList Child { get; }
 
-        public VarDataList ThisList
-        {
-            get
-            {
-                var result = new VarDataList();
+        //public VarDataList ThisList
+        //{
+        //    get
+        //    {
+        //        var result = new VarDataList();
 
-                var data = from t in this
-                           where t.This == true
-                           select t;
+        //        var data = from t in this
+        //                   where t.This == true
+        //                   select t;
 
-                result.AddRange(data);
-                return result;
-            }
-        }
+        //        result.AddRange(data);
+        //        return result;
+        //    }
+        //}
 
         public VarData GetVarByName(string name)
         {
@@ -32,7 +34,7 @@ namespace Parse.FrontEnd.Grammars.MiniC.SymbolTableFormat
 
             foreach(var item in this)
             {
-                if (item.DclData.DclItemData.Name == name)
+                if(item.IsMatchWithVarName(name))
                 {
                     result = item;
                     break;
@@ -42,32 +44,17 @@ namespace Parse.FrontEnd.Grammars.MiniC.SymbolTableFormat
             return result;
         }
 
-        public VarDataList GetVarListByBlockLevel(int blockLevel)
-        {
-            var result = new VarDataList();
+        //public VarDataList GetVarListByBlockLevel(int blockLevel)
+        //{
+        //    var result = new VarDataList();
 
-            var data = from t in this
-                            where t.DclData.BlockLevel == blockLevel
-                            select t;
+        //    var data = from t in this
+        //                    where t.DclData.BlockLevel == blockLevel
+        //                    select t;
 
-            result.AddRange(data);
-            return result;
-        }
-    }
-
-    public class VarData : IStorableToHashTable
-    {
-        public DclData DclData { get; internal set; }
-        public string VarName => DclData.DclItemData.Name;
-        public int Offset { get; internal set; }
-        public bool This { get; internal set; } = false;
-        public bool IsCalculatable => (Value is UnknownLiteralData) ? false : true;
-
-        public LiteralData Value { get; internal set; } = new UnknownLiteralData(UnknownState.NotInitialized, null);
-
-        public string KeyString => string.Format("{0}", DclData.KeyString);
-
-        public override string ToString() => string.Format("{0}, Offset : {1}", DclData.ToString(), Offset.ToString());
+        //    result.AddRange(data);
+        //    return result;
+        //}
     }
 
     public class DclItemData : IStorableToHashTable
@@ -79,6 +66,7 @@ namespace Parse.FrontEnd.Grammars.MiniC.SymbolTableFormat
         public TokenData NameToken { get; internal set; }
         public TokenData LevelToken { get; internal set; }
         public TokenData DimensionToken { get; internal set; }
+        public LiteralData Value { get; internal set; } = new UnknownLiteralData(UnknownState.NotInitialized, null);
 
         public string KeyString => string.Format("{0}", Name);
 
@@ -104,6 +92,7 @@ namespace Parse.FrontEnd.Grammars.MiniC.SymbolTableFormat
         public DclSpecData DclSpecData { get; internal set; }
         public DclItemData DclItemData { get; internal set; }
         public int BlockLevel { get; internal set; }
+        public int Offset { get; internal set; }
         public EtcInfo Etc { get; internal set; }
 
         public string KeyString => string.Format("{0} {1}", DclItemData.KeyString, BlockLevel.ToString());

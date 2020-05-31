@@ -15,7 +15,7 @@ namespace Parse.WpfControls.SyntaxEditor.EventArgs
         public string ProjectName { get; }
         public string FileName { get; }
         public TokenData Token { get; }
-        public IReadOnlyList<ParsingErrorInfo> AlarmInfos { get; }
+        public ParsingErrorInfo AlarmInfo { get; }
 
         public AlarmEventArgs(string projectName, string fileName)
         {
@@ -24,7 +24,7 @@ namespace Parse.WpfControls.SyntaxEditor.EventArgs
             this.FileName = fileName;
         }
 
-        public AlarmEventArgs(string projectName, string fileName, int tokenIndex, int line, TokenData token, IReadOnlyList<ParsingErrorInfo> alarmInfos)
+        public AlarmEventArgs(string projectName, string fileName, int tokenIndex, int line, TokenData token, ParsingErrorInfo alarmInfo)
         {
             this.Status = AlarmStatus.ParsingError;
             this.ProjectName = projectName;
@@ -32,10 +32,10 @@ namespace Parse.WpfControls.SyntaxEditor.EventArgs
             this.TokenIndex = tokenIndex;
             this.Line = line;
             this.Token = token;
-            this.AlarmInfos = alarmInfos;
+            this.AlarmInfo = alarmInfo;
         }
 
-        public override string ToString() => string.Format("Status : {0}, TokenIndex : {1}, Token : {2}, Line : {3}, AlarmCount : {4}", 
-                                                                                    this.Status, this.TokenIndex, this.Token, this.Line, this.AlarmInfos.Count);
+        public override string ToString() => string.Format("Status : {0}, TokenIndex : {1}, Token : {2}, Line : {3}, AlarmInfo : {4}", 
+                                                                                    this.Status, this.TokenIndex, this.Token, this.Line, this.AlarmInfo);
     }
 }

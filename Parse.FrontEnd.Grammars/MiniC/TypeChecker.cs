@@ -1,5 +1,6 @@
 ﻿using Parse.FrontEnd.Ast;
-using Parse.FrontEnd.Grammars.MiniC.SymbolTableFormat;
+using Parse.FrontEnd.Grammars.MiniC.SymbolDataFormat.LiteralDataFormat;
+using Parse.FrontEnd.Grammars.MiniC.SymbolDataFormat.VarDataFormat;
 using Parse.FrontEnd.Grammars.Properties;
 
 namespace Parse.FrontEnd.Grammars.MiniC
@@ -15,9 +16,9 @@ namespace Parse.FrontEnd.Grammars.MiniC
             {
                 var convertedLhs = varData.Value as UnknownLiteralData;
                 if (convertedLhs.IsOnlyNotInit)
-                    result.Add(new MeaningErrInfo(hs, string.Format(AlarmCodes.MCL0005, varData.VarName)));
+                    result.Add(new MeaningErrInfo(hs, nameof(AlarmCodes.MCL0005), string.Format(AlarmCodes.MCL0005, varData.VarName)));
                 else if (convertedLhs.IsNotInitAndDynamicAlloc)
-                    result.Add(new MeaningErrInfo(hs, string.Format(AlarmCodes.MCL0005, varData.VarName), ErrorType.Warning));
+                    result.Add(new MeaningErrInfo(hs, nameof(AlarmCodes.MCL0005), string.Format(AlarmCodes.MCL0005, varData.VarName), ErrorType.Warning));
             }
 
             return result;
@@ -53,9 +54,9 @@ namespace Parse.FrontEnd.Grammars.MiniC
             {
                 var convertedLhs = literalData as UnknownLiteralData;
                 if (convertedLhs.IsOnlyNotInit)
-                    result.Add(new MeaningErrInfo(hs, string.Format(AlarmCodes.MCL0005, literalData.LiteralName)));
+                    result.Add(new MeaningErrInfo(hs, nameof(AlarmCodes.MCL0005), string.Format(AlarmCodes.MCL0005, literalData.LiteralName)));
                 else if (convertedLhs.IsNotInitAndDynamicAlloc)
-                    result.Add(new MeaningErrInfo(hs, string.Format(AlarmCodes.MCL0005, literalData.LiteralName), ErrorType.Warning));
+                    result.Add(new MeaningErrInfo(hs, nameof(AlarmCodes.MCL0005), string.Format(AlarmCodes.MCL0005, literalData.LiteralName), ErrorType.Warning));
             }
 
             return result;

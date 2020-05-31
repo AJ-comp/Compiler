@@ -540,7 +540,7 @@ namespace Parse.WpfControls
         public void ClearKeySet() => this.Keys.Clear();
 
 
-        public void Create(List<ItemData> items, double x, double y)
+        public void Create(IReadOnlyList<ItemData> items, double x, double y)
         {
             this.ClearItems();
             foreach (var item in items) this.RegisterItem(item);

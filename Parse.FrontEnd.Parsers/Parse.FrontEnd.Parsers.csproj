@@ -60,7 +60,6 @@
     <Compile Include="Datas\LL\LLParsingRowDataFormat.cs" />
     <Compile Include="Datas\ParsingBlock.cs" />
     <Compile Include="Datas\LR\LRParsingRowDataFormat.cs" />
-    <Compile Include="Datas\ParsingErrorInfo.cs" />
     <Compile Include="Datas\ParsingRowDataFormat.cs" />
     <Compile Include="Datas\ParsingResult.cs" />
     <Compile Include="Datas\ParsingUnit.cs" />

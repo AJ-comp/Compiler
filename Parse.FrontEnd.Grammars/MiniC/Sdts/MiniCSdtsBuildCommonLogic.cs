@@ -1,8 +1,10 @@
 ﻿using Parse.FrontEnd.Ast;
+using Parse.FrontEnd.Grammars.MiniC.SymbolDataFormat.LiteralDataFormat;
+using Parse.FrontEnd.Grammars.MiniC.SymbolDataFormat.VarDataFormat;
 using Parse.FrontEnd.Grammars.MiniC.SymbolTableFormat;
 using Parse.FrontEnd.Grammars.Properties;
 using Parse.FrontEnd.InterLanguages;
-using System;
+using System.Collections.Generic;
 
 namespace Parse.FrontEnd.Grammars.MiniC.Sdts
 {
@@ -33,151 +35,31 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
         /// <param name="curNode"></param>
         /// <param name="varIndex"></param>
         /// <returns></returns>
-        private VarData ConnectSimpleVarCode(AstTerminal curNode, bool bAddress = false)
+        private VarData ConnectSimpleVarCode(AstTerminal curNode, AstBuildParams p)
         {
-            bool result = false;
             curNode.ClearConnectedInfo();
             var symbolTable = curNode.Parent.ConnectedSymbolTable;
-            var varData = CheckExistVarInSymbolTable(curNode, symbolTable as MiniCSymbolTable);
+            var buildParams = p as MiniCAstBuildParams;
+
+            VarData varData = CheckExistVarInSymbolTable(curNode, symbolTable as MiniCSymbolTable);
             if (varData == null)
             {
-                result = false;
-                curNode.ConnectedErrInfoList.Add(new MeaningErrInfo(curNode, string.Format(AlarmCodes.MCL0001, curNode.Token.Input)));
+                curNode.ConnectedErrInfoList.Add(new MeaningErrInfo(curNode, nameof(AlarmCodes.MCL0001), string.Format(AlarmCodes.MCL0001, curNode.Token.Input)));
+                varData = new VirtualVarData(curNode.Token, buildParams.BlockLevel, buildParams.Offset, 0);
+                (curNode.Parent.ConnectedSymbolTable as MiniCSymbolTable).VarDataList.Add(varData);
             }
-            else
+            else if(varData is RealVarData)
             {
-                result = true;
-                if(bAddress)
-                    curNode.ConnectedInterLanguage.Add(UCode.Command.LoadVarAddress(ReservedLabel, varData.DclData.BlockLevel,
-                                                                                                                    varData.Offset, varData.DclData.DclItemData.Name));
+                var realVarData = varData as RealVarData;
+                bool bAddress = AstBuildOptionChecker.HasOption(buildParams.BuildOption, AstBuildOption.Reference);
+
+                if (bAddress)
+                    curNode.ConnectedInterLanguage.Add(UCode.Command.LoadVarAddress(ReservedLabel, realVarData.BlockLevel, realVarData.Offset, realVarData.VarName));
                 else
-                    curNode.ConnectedInterLanguage.Add(UCode.Command.LoadVarValue(ReservedLabel, varData.DclData.BlockLevel, 
-                                                                                                                    varData.Offset, varData.DclData.DclItemData.Name));
+                    curNode.ConnectedInterLanguage.Add(UCode.Command.LoadVarValue(ReservedLabel, realVarData.BlockLevel, realVarData.Offset, realVarData.VarName));
             }
 
             return varData;
-        }
-
-        private bool ReadyForIdentCalculateIdent(AstNonTerminal node, int leftIndex, int rightIndex)
-        {
-            bool result = true;
-            var leftResult = ConnectSimpleVarCode(node[leftIndex] as AstTerminal);
-            var rightResult = ConnectSimpleVarCode(node[rightIndex] as AstTerminal);
-
-            if (leftResult == null || rightResult == null)
-            {
-                node.ConnectedInterLanguage.Clear();
-                return false;
-            }
-
-            return result;
-        }
-
-        private bool ReadyForIdentCalculateDigit(AstNonTerminal node, int leftIndex, int rightIndex)
-        {
-            var leftResult = ConnectSimpleVarCode(node[leftIndex] as AstTerminal);
-
-            if (leftResult == null)
-            {
-                node.ConnectedInterLanguage.Clear();
-                return false;
-            }
-
-            var valueNode = node[rightIndex] as AstTerminal;
-            node.ConnectedInterLanguage.Add(UCode.Command.DclValue(ReservedLabel, 
-                                                                                                        System.Convert.ToInt32(valueNode.Token.Input), 
-                                                                                                        valueNode.Token.Input));
-
-            return true;
-        }
-
-        private bool ReadyForDigitCalculateDigit(AstNonTerminal node, int leftIndex, int rightIndex)
-        {
-            var leftValueNode = node[leftIndex] as AstTerminal;
-            node.ConnectedInterLanguage.Add(UCode.Command.DclValue(ReservedLabel, 
-                                                                                                        System.Convert.ToInt32(leftValueNode.Token.Input), 
-                                                                                                        leftValueNode.Token.Input));
-
-            var rightValueNode = node[rightIndex] as AstTerminal;
-            node.ConnectedInterLanguage.Add(UCode.Command.DclValue(ReservedLabel, 
-                                                                                                        System.Convert.ToInt32(rightValueNode.Token.Input), 
-                                                                                                        rightValueNode.Token.Input));
-
-            return true;
-        }
-
-        private VarData BuildExpressAsAddress(AstTerminal curNode)
-        {
-            return (curNode.Token.Kind.TokenType is Identifier) ? ConnectSimpleVarCode(curNode, true) : null;
-        }
-
-        private bool ReadyForExpression(AstNonTerminal curNode, int leftIndex, int rightIndex)
-        {
-            bool result = true;
-
-            AstTerminal leftNode = curNode[leftIndex] as AstTerminal;
-            AstTerminal rightNode = curNode[rightIndex] as AstTerminal;
-            if (leftNode.Token.Kind.TokenType is Identifier && rightNode.Token.Kind.TokenType is Identifier)
-            {
-                result = ReadyForIdentCalculateIdent(curNode, leftIndex, rightIndex);
-            }
-            else if (leftNode.Token.Kind.TokenType is Identifier && rightNode.Token.Kind.TokenType is Digit)
-            {
-                result = ReadyForIdentCalculateDigit(curNode, leftIndex, rightIndex);
-            }
-            else if (leftNode.Token.Kind.TokenType is Digit && rightNode.Token.Kind.TokenType is Identifier)
-            {
-                result = ReadyForIdentCalculateDigit(curNode, rightIndex, leftIndex);
-            }
-            else if (leftNode.Token.Kind.TokenType is Digit && rightNode.Token.Kind.TokenType is Digit)
-            {
-                result = ReadyForDigitCalculateDigit(curNode, leftIndex, rightIndex);
-            }
-            else result = false;
-
-            return result;
-        }
-
-        /// <summary>
-        /// This function connect an Ucode for assignment to the 'curNode'.
-        /// If it can't perform then MeaningErrInfo is connected to the 'curNode'.
-        /// percondition for operation.
-        /// 1. 'curNode[leftIndex]' has to be TreeTerminal.
-        /// 2. 'curNode[rightIndex]' has to be TreeTerminal.
-        /// </summary>
-        /// <param name="curNode">The target node to connect an Ucode or MeaningErrInfo</param>
-        /// <param name="leftIndex">The index of the left expression</param>
-        /// <param name="rightIndex">The index of the right expression</param>
-        /// <returns>If Ucode was connected returns true, MeaningErrInfo has connected returns false.</returns>
-        private bool ConnectAssignCode(AstNonTerminal curNode, int leftIndex, int rightIndex)
-        {
-            bool result = true;
-
-            AstTerminal leftVarNode = curNode[leftIndex] as AstTerminal;
-            AstTerminal rightVarNode = curNode[rightIndex] as AstTerminal;
-
-            var leftVarData = CheckExistVarInSymbolTable(leftVarNode, curNode.ConnectedSymbolTable as MiniCSymbolTable);
-            var rightVarData = CheckExistVarInSymbolTable(rightVarNode, curNode.ConnectedSymbolTable as MiniCSymbolTable);
-
-            if(leftVarData != null && rightVarData != null)
-            {
-                if (leftVarData.DclData.DclSpecData.Const)
-                {
-                    result = false;
-                    curNode.ConnectedErrInfoList.Add(new MeaningErrInfo(leftVarNode, AlarmCodes.MCL0002));
-                }
-
-                if (leftVarData.DclData.DclSpecData.DataType != rightVarData.DclData.DclSpecData.DataType)
-                {
-                    result = false;
-                    curNode.ConnectedErrInfoList.Add(new MeaningErrInfo(rightVarNode, AlarmCodes.MCL0003));
-                }
-            }
-
-            curNode.ConnectedInterLanguage.Add(UCode.Command.Store(ReservedLabel, leftVarData.DclData.BlockLevel, 
-                                                                                                        leftVarData.Offset, leftVarData.DclData.DclItemData.Name));
-
-            return result;
         }
 
         private LiteralData BuildOperator(AstNonTerminal curNode, LiteralData left, LiteralData right)
@@ -234,35 +116,26 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
             return result;
         }
 
-        private AstBuildResult BuildOpNode(AstNonTerminal curNode, SymbolTable baseSymbolTable,
-                                                                        int blockLevel, int offset, AstBuildOption buildOption)
+        private AstBuildResult BuildOpNode(AstNonTerminal curNode, AstBuildParams p, List<AstSymbol> astNodes)
         {
-            bool result = true;
-            LiteralData literalData = null;
+            curNode.ClearConnectedInfo();
+            curNode.ConnectedSymbolTable = p.SymbolTable;
 
-            try
-            {
-                curNode.ClearConnectedInfo();
-                curNode.ConnectedSymbolTable = baseSymbolTable;
+            // build right ExpSt node
+            var rightResult = (curNode[1] as AstNonTerminal).BuildLogic(p, astNodes);
+            // build left ExpSt node
+            var leftResult = (curNode[0] as AstNonTerminal).BuildLogic(p, astNodes);
 
-                var leftResult = (curNode[0] as AstNonTerminal).BuildLogic(baseSymbolTable, blockLevel, offset, buildOption);
-                var rightResult = (curNode[2] as AstNonTerminal).BuildLogic(baseSymbolTable, blockLevel, offset, buildOption);
+            // set data
+            var leftParam = (leftResult.Data is VarData) ? (leftResult.Data as VarData).Value : leftResult.Data as LiteralData;
+            var rightParam = (rightResult.Data is VarData) ? (rightResult.Data as VarData).Value : rightResult.Data as LiteralData;
 
-                var leftParam = (leftResult.Data is VarData) ? (leftResult.Data as VarData).Value : leftResult.Data as LiteralData;
-                var rightParam = (rightResult.Data is VarData) ? (rightResult.Data as VarData).Value : rightResult.Data as LiteralData;
+            // calculate to generate temporary data calculated.
+            var literalData = BuildOperator(curNode, leftParam, rightParam);
+            astNodes.Add(curNode);   // because of BuildOperator function add IE or ME.
+            var result = (leftResult.Result == false || rightResult.Result == false) ? false : true;
 
-                literalData = BuildOperator(curNode, leftParam, rightParam);
-
-                if (leftResult.Result == false || rightResult.Result == false) result = false;
-
-            }
-            catch
-            {
-                result = false;
-                curNode.ConnectedInterLanguage.Clear();
-            }
-
-            return new AstBuildResult(literalData, baseSymbolTable, result);
+            return new AstBuildResult(literalData, null, result);
         }
     }
 }

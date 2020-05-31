@@ -29,29 +29,29 @@ namespace Parse.FrontEnd.Grammars.MiniC
 
         public Terminal Inc { get; } = new Terminal(TokenType.Operator.NormalOperator, "++", false);
         public Terminal Dec { get; } = new Terminal(TokenType.Operator.NormalOperator, "--", false);
-        public Terminal Add { get; } = new Terminal(TokenType.Operator.NormalOperator, "+");
-        public Terminal Sub { get; } = new Terminal(TokenType.Operator.NormalOperator, "-");
-        public Terminal Mul { get; } = new Terminal(TokenType.Operator.NormalOperator, "*");
-        public Terminal Div { get; } = new Terminal(TokenType.Operator.NormalOperator, "/");
-        public Terminal Mod { get; } = new Terminal(TokenType.Operator.NormalOperator, "%");
-        public Terminal Assign { get; } = new Terminal(TokenType.Operator.NormalOperator, "=");
-        public Terminal AddAssign { get; } = new Terminal(TokenType.Operator.NormalOperator, "+=");
-        public Terminal SubAssign { get; } = new Terminal(TokenType.Operator.NormalOperator, "-=");
-        public Terminal MulAssign { get; } = new Terminal(TokenType.Operator.NormalOperator, "*=");
-        public Terminal DivAssign { get; } = new Terminal(TokenType.Operator.NormalOperator, "/=");
-        public Terminal ModAssign { get; } = new Terminal(TokenType.Operator.NormalOperator, "%=");
-        public Terminal Equal { get; } = new Terminal(TokenType.Operator.NormalOperator, "==");
-        public Terminal NotEqual { get; } = new Terminal(TokenType.Operator.NormalOperator, "!=");
-        public Terminal GreaterThan { get; } = new Terminal(TokenType.Operator.NormalOperator, ">");
-        public Terminal LessThan { get; } = new Terminal(TokenType.Operator.NormalOperator, "<");
-        public Terminal GreaterEqual { get; } = new Terminal(TokenType.Operator.NormalOperator, ">=");
-        public Terminal LessEqual { get; } = new Terminal(TokenType.Operator.NormalOperator, "<=");
+        public Terminal Add { get; } = new Terminal(TokenType.Operator.NormalOperator, "+", false);
+        public Terminal Sub { get; } = new Terminal(TokenType.Operator.NormalOperator, "-", false);
+        public Terminal Mul { get; } = new Terminal(TokenType.Operator.NormalOperator, "*", false);
+        public Terminal Div { get; } = new Terminal(TokenType.Operator.NormalOperator, "/", false);
+        public Terminal Mod { get; } = new Terminal(TokenType.Operator.NormalOperator, "%", false);
+        public Terminal Assign { get; } = new Terminal(TokenType.Operator.NormalOperator, "=", false);
+        public Terminal AddAssign { get; } = new Terminal(TokenType.Operator.NormalOperator, "+=", false);
+        public Terminal SubAssign { get; } = new Terminal(TokenType.Operator.NormalOperator, "-=", false);
+        public Terminal MulAssign { get; } = new Terminal(TokenType.Operator.NormalOperator, "*=", false);
+        public Terminal DivAssign { get; } = new Terminal(TokenType.Operator.NormalOperator, "/=", false);
+        public Terminal ModAssign { get; } = new Terminal(TokenType.Operator.NormalOperator, "%=", false);
+        public Terminal Equal { get; } = new Terminal(TokenType.Operator.NormalOperator, "==", false);
+        public Terminal NotEqual { get; } = new Terminal(TokenType.Operator.NormalOperator, "!=", false);
+        public Terminal GreaterThan { get; } = new Terminal(TokenType.Operator.NormalOperator, ">", false);
+        public Terminal LessThan { get; } = new Terminal(TokenType.Operator.NormalOperator, "<", false);
+        public Terminal GreaterEqual { get; } = new Terminal(TokenType.Operator.NormalOperator, ">=", false);
+        public Terminal LessEqual { get; } = new Terminal(TokenType.Operator.NormalOperator, "<=", false);
         public Terminal SemiColon { get; } = new Terminal(TokenType.Operator.NormalOperator, ";", false);
         public Terminal Comma { get; } = new Terminal(TokenType.Operator.Comma, ",", false);
 
-        public Terminal LogicalOr { get; } = new Terminal(TokenType.Operator, "||");
-        public Terminal LogicalAnd { get; } = new Terminal(TokenType.Operator, "&&");
-        public Terminal LogicalNot { get; } = new Terminal(TokenType.Operator, "!");
+        public Terminal LogicalOr { get; } = new Terminal(TokenType.Operator, "||", false);
+        public Terminal LogicalAnd { get; } = new Terminal(TokenType.Operator, "&&", false);
+        public Terminal LogicalNot { get; } = new Terminal(TokenType.Operator, "!", false);
 
 
         private NonTerminal miniC = new NonTerminal("mini_c", true);
@@ -131,8 +131,7 @@ namespace Parse.FrontEnd.Grammars.MiniC
             this.declaration.AddItem(this.dclSpec + this.initDclList + this.SemiColon, sdts.Dcl);
             this.initDclList.AddItem(this.initDeclarator | this.initDclList + this.Comma + this.initDeclarator);
 
-            this.initDeclarator.AddItem(this.declarator, sdts.DclItem);
-            this.initDeclarator.AddItem(this.declarator + this.Assign + this.Number, sdts.DclItem);
+            this.initDeclarator.AddItem(this.declarator + (this.Assign + this.expression).Optional(), sdts.DclItem);
 
             this.declarator.AddItem(this.Ident, sdts.SimpleVar);
             this.declarator.AddItem(this.Ident + this.OpenSquareBrace + this.optNumber + this.CloseSquareBrace, sdts.ArrayVar);

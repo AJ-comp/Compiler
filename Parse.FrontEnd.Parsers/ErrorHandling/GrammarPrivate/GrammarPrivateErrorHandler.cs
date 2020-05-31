@@ -8,7 +8,7 @@ namespace Parse.FrontEnd.Parsers.ErrorHandling.GrammarPrivate
     {
         protected Grammar grammar;
 
-        public GrammarPrivateErrorHandler(Grammar grammar)
+        protected GrammarPrivateErrorHandler(Grammar grammar)
         {
             this.grammar = grammar;
         }

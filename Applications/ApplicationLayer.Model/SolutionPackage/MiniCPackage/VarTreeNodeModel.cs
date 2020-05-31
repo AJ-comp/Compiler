@@ -13,7 +13,7 @@ namespace ApplicationLayer.Models.SolutionPackage.MiniCPackage
         public string Name => (_dclData != null) ? _dclData.DclItemData.Name : string.Empty;
         public string Dimension => (_dclData != null) ? _dclData.DclItemData.Dimension.ToString() : string.Empty;
         public string BlockIndex => (_dclData != null) ? _dclData.BlockLevel.ToString() : string.Empty;
-        public string Offset { get; private set; }
+        public string Offset => (_dclData != null) ? _dclData.Offset.ToString() : string.Empty;
         public bool IsGlobal => (_dclData?.BlockLevel == 0) ? true : false;
         public bool IsParam => (_dclData?.Etc == EtcInfo.Param) ? true : false;
 
@@ -27,10 +27,9 @@ namespace ApplicationLayer.Models.SolutionPackage.MiniCPackage
 
         public override event EventHandler<FileChangedEventArgs> Changed;
 
-        public VarTreeNodeModel(DclData dclData, int offset)
+        public VarTreeNodeModel(DclData dclData)
         {
             _dclData = dclData;
-            Offset = offset.ToString();
         }
 
         public override void RemoveChild(TreeNodeModel nodeToRemove)

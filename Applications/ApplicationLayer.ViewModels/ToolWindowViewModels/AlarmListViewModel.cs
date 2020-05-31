@@ -95,16 +95,14 @@ namespace ApplicationLayer.ViewModels.ToolWindowViewModels
             {
                 if (item.Status == AlarmStatus.None) return;
 
-                var errInfos = item.AlarmInfos;
-                foreach (var errInfo in errInfos)
-                {
-                    int status = -1;
-                    if (item.Status == AlarmStatus.ParsingError) status = 0;
-                    else if (item.Status == AlarmStatus.ParsingWarning) status = 1;
+                var errInfo = item.AlarmInfo;
 
-                    var alarmData = new AlarmData(editorViewModel, status, errInfo.Code, errInfo.Message, editorViewModel.FullPath, item.ProjectName, item.FileName, item.TokenIndex, item.Token, item.Line);
-                    lock (lockObject) alarmList.Add(alarmData);
-                }
+                int status = -1;
+                if (item.Status == AlarmStatus.ParsingError) status = 0;
+                else if (item.Status == AlarmStatus.ParsingWarning) status = 1;
+
+                var alarmData = new AlarmData(editorViewModel, status, errInfo.Code, errInfo.Message, editorViewModel.FullPath, item.ProjectName, item.FileName, item.TokenIndex, item.Token, item.Line);
+                lock (lockObject) alarmList.Add(alarmData);
             });
 
             this.AddAlarmList(editorViewModel, alarmList);

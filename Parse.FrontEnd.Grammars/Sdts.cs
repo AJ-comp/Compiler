@@ -33,7 +33,7 @@ namespace Parse.FrontEnd.Grammars
         public MeaningUnit PostInc { get; } = new MeaningUnit("PostInc");
         public MeaningUnit PostDec { get; } = new MeaningUnit("PostDec");
 
-        public Sdts(KeyManager keyManager)
+        protected Sdts(KeyManager keyManager)
         {
             Type type = this.GetType();
 
@@ -52,9 +52,8 @@ namespace Parse.FrontEnd.Grammars
             }
         }
 
-        public abstract event EventHandler<SemanticErrorArgs> SementicErrorEventHandler;
+        public abstract event EventHandler<SemanticErrorArgs> SemanticErrorEventHandler;
 
-        public abstract SementicAnalysisResult Process(AstSymbol symbol);
-        public abstract IReadOnlyList<AstSymbol> GenerateCode(AstSymbol symbol);
+        public abstract SemanticAnalysisResult Process(AstSymbol symbol);
     }
 }

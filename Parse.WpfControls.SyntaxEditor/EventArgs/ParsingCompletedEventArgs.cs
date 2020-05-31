@@ -1,21 +1,24 @@
 ﻿using Parse.FrontEnd;
 using Parse.FrontEnd.Ast;
 using Parse.FrontEnd.Parsers.Datas;
+using System;
 using System.Collections.Generic;
 
 namespace Parse.WpfControls.SyntaxEditor.EventArgs
 {
     public class ParsingCompletedEventArgs
     {
-//        private List<AlarmEventArgs>
-
         public ParsingResult ParsingResult { get; }
-        public AstSymbol Ast { get; }
+        public AstSymbol RootAst { get; }
+        public IReadOnlyList<AstSymbol> AllNodes { get; }
+        public Exception FiredException { get; }
 
-        public ParsingCompletedEventArgs(ParsingResult parsingResult, AstSymbol ast)
+        public ParsingCompletedEventArgs(ParsingResult parsingResult, AstSymbol rootNode, IReadOnlyList<AstSymbol> allNodes, Exception firedException)
         {
             ParsingResult = parsingResult;
-            Ast = ast;
+            RootAst = rootNode;
+            AllNodes = allNodes;
+            FiredException = firedException;
         }
     }
 }

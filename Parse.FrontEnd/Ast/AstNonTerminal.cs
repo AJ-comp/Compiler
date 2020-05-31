@@ -36,9 +36,8 @@ namespace Parse.FrontEnd.Ast
             this.SignPost = singleNT;
         }
 
-        public object ActionLogic() => this.SignPost?.MeaningUnit?.ActionLogic(this);
-        public AstBuildResult BuildLogic(SymbolTable symbolTable, int blockLevel, int offset, AstBuildOption buildOption)
-            => this.SignPost?.MeaningUnit?.BuildLogic(this, symbolTable, blockLevel, offset, buildOption);
+        public AstBuildResult BuildLogic(AstBuildParams buildParams, List<AstSymbol> astNodes)
+            => this.SignPost?.MeaningUnit?.BuildLogic(this, buildParams, astNodes);
 
 
         public void Add(AstSymbol item)

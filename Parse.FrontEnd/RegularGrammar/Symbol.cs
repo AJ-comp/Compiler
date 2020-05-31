@@ -9,7 +9,7 @@ namespace Parse.FrontEnd.RegularGrammar
         public abstract string ToGrammarString();
         public abstract string ToTreeString(ushort depth = 1);
 
-        public Symbol()
+        protected Symbol()
         {
         }
 

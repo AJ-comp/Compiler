@@ -11,8 +11,7 @@ namespace Parse.FrontEnd
         internal uint uniqueKey;
 
         public string Name { get; } = string.Empty;
-        public Func<AstNonTerminal, object> ActionLogic { get; set; }
-        public Func<AstNonTerminal, SymbolTable, int, int, AstBuildOption, AstBuildResult> BuildLogic { get; set; }
+        public Func<AstNonTerminal, AstBuildParams, List<AstSymbol>, AstBuildResult> BuildLogic { get; set; }
 
         public MeaningUnit(string name)
         {
@@ -66,11 +65,10 @@ namespace Parse.FrontEnd
     }
 
 
-    public class MeaningErrInfo
+    public class MeaningErrInfo : ParsingErrorInfo
     {
         private AstSymbol _errorSymbol;
 
-        public ErrorType ErrorType { get; private set; }
         public IReadOnlyList<TokenData> ErrorTokens
         {
             get
@@ -88,13 +86,11 @@ namespace Parse.FrontEnd
                 return result;
             }
         }
-        public string ErrorMessage { get; }
 
-        public MeaningErrInfo(AstSymbol errorSymbol, string errorMessage, ErrorType errorType = ErrorType.Error)
+        public MeaningErrInfo(AstSymbol errorSymbol, string code, string errorMessage, ErrorType errorType = ErrorType.Error)
+            : base(errorType, code, errorMessage)
         {
             _errorSymbol = errorSymbol;
-            ErrorMessage = errorMessage;
-            ErrorType = errorType;
         }
     }
 
@@ -103,15 +99,17 @@ namespace Parse.FrontEnd
     }
 
 
-    public class SementicAnalysisResult
+    public class SemanticAnalysisResult
     {
-        public MeaningErrInfoList MeaningErrInfos { get; } = new MeaningErrInfoList();
-        public SymbolTable SymbolTable { get; }
+        public AstSymbol RootAst { get; }
+        public IReadOnlyList<AstSymbol> AllNodes { get; }
+        public Exception FiredException { get; }
 
-        public SementicAnalysisResult(MeaningErrInfoList meaningErrInfos, SymbolTable symbolTable)
+        public SemanticAnalysisResult(AstSymbol rootAst, IReadOnlyList<AstSymbol> allNodes, Exception exception = null)
         {
-            MeaningErrInfos = meaningErrInfos;
-            SymbolTable = symbolTable;
+            RootAst = rootAst;
+            AllNodes = allNodes;
+            FiredException = exception;
         }
     }
 }

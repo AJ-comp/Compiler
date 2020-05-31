@@ -196,7 +196,7 @@ namespace Parse.WpfControls.SyntaxEditor
             {
                 if (this.ParserSnippet == null) return;
 
-                this.ParserSnippet.Parser.Grammar.SDTS.SementicErrorEventHandler += (sdts, errorInfo) =>
+                this.ParserSnippet.Parser.Grammar.SDTS.SemanticErrorEventHandler += (sdts, errorInfo) =>
                 {
                     if (errorInfo.ErrorType == ErrorType.Error)
                     {
@@ -304,8 +304,8 @@ namespace Parse.WpfControls.SyntaxEditor
 
                 Dispatcher.Invoke(() =>
                 {
-                    var ast = this.SementicAnalysis(localResult);
-                    this.ParsingCompleted?.Invoke(this, new ParsingCompletedEventArgs(localResult, ast));
+                    var result = this.SementicAnalysis(localResult);
+                    this.ParsingCompleted?.Invoke(this, new ParsingCompletedEventArgs(localResult, result.RootAst, result.AllNodes, result.FiredException));
                 });
             }
         }
@@ -397,15 +397,15 @@ namespace Parse.WpfControls.SyntaxEditor
             });
         }
 
-        private AstSymbol SementicAnalysis(ParsingResult target)
+        private SemanticAnalysisResult SementicAnalysis(ParsingResult target)
         {
             try
             {
                 AstSymbol rootSymbol = target.ToParseTree?.ToAst;
-                this.ParserSnippet.Parser.Grammar.SDTS.Process(rootSymbol);
+                var result = this.ParserSnippet.Parser.Grammar.SDTS.Process(rootSymbol);
                 ParsingFailedListPreProcess(target);
 
-                return rootSymbol;
+                return result;
             }
             catch
             {
@@ -413,7 +413,7 @@ namespace Parse.WpfControls.SyntaxEditor
             }
         }
 
-        private List<ItemData> GetCompletionList(ParsingResult parsingResult, int tokenIndex)
+        private IReadOnlyList<ItemData> GetCompletionList(ParsingResult parsingResult, int tokenIndex)
         {
             List<ItemData> result = new List<ItemData>();
             if (tokenIndex < 0) return result;
@@ -421,6 +421,7 @@ namespace Parse.WpfControls.SyntaxEditor
 
             foreach (var item in parsingResult[tokenIndex].PossibleTerminalSet)
             {
+                if (item.Meaning == false) continue;
                 result.Add(new ItemData(CompletionItemType.Keyword, item.Value, string.Empty));
             }
 
@@ -429,7 +430,7 @@ namespace Parse.WpfControls.SyntaxEditor
 
         private bool IsBackSpace(TextChange changeInfo) => (changeInfo.RemovedLength >= 1 && changeInfo.AddedLength == 0);
 
-        private void ShowIntellisense(TextChange changeInfo, List<ItemData> items)
+        private void ShowIntellisense(TextChange changeInfo, IReadOnlyList<ItemData> items)
         {
             if (items.Count == 0) return;
 

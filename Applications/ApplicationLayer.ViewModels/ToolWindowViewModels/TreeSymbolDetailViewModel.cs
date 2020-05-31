@@ -2,6 +2,7 @@
 using ApplicationLayer.Models.SolutionPackage.MiniCPackage;
 using ApplicationLayer.ViewModels.Messages;
 using Parse.FrontEnd.Ast;
+using Parse.FrontEnd.Grammars.MiniC.SymbolDataFormat.VarDataFormat;
 using Parse.FrontEnd.Grammars.MiniC.SymbolTableFormat;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -15,7 +16,7 @@ namespace ApplicationLayer.ViewModels.ToolWindowViewModels
 
         public ReadOnlyObservableCollection<string> MeaningErrors => new ReadOnlyObservableCollection<string>(_meaningErrors);
 
-        public TreeNodeModel SymbolDatas { get; } = new VarTreeNodeModel(null, 0);
+        public TreeNodeModel SymbolDatas { get; } = new VarTreeNodeModel(null);
 
         public TreeSymbolDetailViewModel()
         {
@@ -50,7 +51,12 @@ namespace ApplicationLayer.ViewModels.ToolWindowViewModels
                     SymbolDatas.IsExpanded = true;
 
                     foreach (var item in symbolTable.VarDataList)
-                        SymbolDatas.Children.First().AddChildren(new VarTreeNodeModel(item.DclData, item.Offset));
+                    {
+                        if (item is VirtualVarData) continue;
+
+                        var cItem = item as RealVarData;
+                        SymbolDatas.Children.First().AddChildren(new VarTreeNodeModel(cItem.DclData));
+                    }
 
                     foreach (var item in symbolTable.FuncDataList)
                         SymbolDatas.Children.First().AddChildren(new FuncTreeNodeModel(item));

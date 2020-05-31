@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Parse.FrontEnd.Grammars.MiniC.SymbolDataFormat.VarDataFormat;
+using System.Collections.Generic;
 
 namespace Parse.FrontEnd.Grammars.MiniC.SymbolTableFormat
 {
@@ -32,7 +33,7 @@ namespace Parse.FrontEnd.Grammars.MiniC.SymbolTableFormat
         public DclSpecData DclSpecData { get; internal set; }
         public string Name => NameToken?.Input;
         public TokenData NameToken { get; internal set; }
-        public List<VarData> ParamVars { get; internal set; } = new List<VarData>();
+        public List<RealVarData> ParamVars { get; internal set; } = new List<RealVarData>();
         public bool This { get; internal set; } = false;
         public int Offset { get; internal set; }
 

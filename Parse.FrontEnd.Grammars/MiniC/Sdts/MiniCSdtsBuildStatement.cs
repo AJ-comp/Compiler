@@ -1,7 +1,8 @@
 ﻿using Parse.FrontEnd.Ast;
 using Parse.FrontEnd.Grammars.MiniC.SymbolTableFormat;
 using Parse.FrontEnd.InterLanguages;
-using Parse.Utilities;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Parse.FrontEnd.Grammars.MiniC.Sdts
 {
@@ -9,141 +10,164 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
     {
         // [0] : DclList (AstNonTerminal)
         // [1] : StatList (AstNonTerminal) [epsilon able]
-        private AstBuildResult BuildCompoundStNode(AstNonTerminal curNode, SymbolTable baseSymbolTable,
-                                                                            int blockLevel, int offset, AstBuildOption buildOption = AstBuildOption.None)
+        private AstBuildResult BuildCompoundStNode(AstNonTerminal curNode, AstBuildParams p, List<AstSymbol> astNodes)
         {
             bool result = true;
             curNode.ClearConnectedInfo();
 
-            // DclList
-            var dclResult = this.BuildDclListNode(curNode[0] as AstNonTerminal, baseSymbolTable, blockLevel, offset);
+            // build DclList node
+            var dclNode = curNode[0] as AstNonTerminal;
+            var dclResult = dclNode.BuildLogic(p, astNodes);
             var newSymbolTable = dclResult.SymbolTable as MiniCSymbolTable;
-            if (curNode.Count == 1) return new AstBuildResult(null, newSymbolTable, dclResult.Result);
+            curNode.ConnectedSymbolTable = newSymbolTable;
 
-            // StatList
-            var statResult = this.BuildStatListNode(curNode[1] as AstNonTerminal, newSymbolTable, blockLevel, offset);
+            if (curNode.Count == 1) // case only DclList exist
+                return new AstBuildResult(null, newSymbolTable, dclResult.Result);
+
+            // build StatList node
+            var statNode = curNode[1] as AstNonTerminal;
+            var statResult = statNode.BuildLogic(p, astNodes);
 
             if (dclResult.Result == false || statResult.Result == false) result = false;
 
-            curNode.ConnectedSymbolTable = newSymbolTable;
             return new AstBuildResult(null, newSymbolTable, result);
         }
 
         // format summary
         // IfSt | IfElseSt | WhileSt | ExpSt
-        private AstBuildResult BuildStatListNode(AstNonTerminal curNode, SymbolTable baseSymbolTable,
-                                                                    int blockLevel, int offset, AstBuildOption buildOption = AstBuildOption.None)
+        private AstBuildResult BuildStatListNode(AstNonTerminal curNode, AstBuildParams p, List<AstSymbol> astNodes)
         {
             curNode.ClearConnectedInfo();
-            if (curNode.Count == 0) return new AstBuildResult(null, baseSymbolTable, true);
+            if (curNode.Count == 0) return new AstBuildResult(null, null, true);
 
             foreach (var item in curNode.Items)
             {
-                if (item is AstTerminal) continue;
-
                 var astNonTerminal = item as AstNonTerminal;
-                astNonTerminal.BuildLogic(baseSymbolTable, blockLevel, offset, buildOption);
+                var statResult = astNonTerminal.BuildLogic(p, astNodes);
             }
 
-            return new AstBuildResult(null, baseSymbolTable, true);
+            return new AstBuildResult(null, null, true);
         }
 
         // format summary
         // (AddAssign | SubAssign | MulAssign | DivAssign | ...) ;
-        private AstBuildResult BuildExpStNode(AstNonTerminal curNode, SymbolTable baseSymbolTable,
-                                                                int blockLevel, int offset, AstBuildOption buildOption = AstBuildOption.None)
+        private AstBuildResult BuildExpStNode(AstNonTerminal curNode, AstBuildParams p, List<AstSymbol> astNodes)
         {
             curNode.ClearConnectedInfo();
             // epsilon
-            if(curNode.Count == 0) return new AstBuildResult(null, baseSymbolTable, true);
+            if (curNode.Count == 0) return new AstBuildResult(null, null, true);
 
             var astNonTerminal = curNode[0] as AstNonTerminal;
-            return astNonTerminal.BuildLogic(baseSymbolTable, blockLevel, offset, buildOption);
+            var expResult = astNonTerminal.BuildLogic(p, astNodes);
+
+            return expResult;
         }
 
         // [0] : if (Terminal)
         // [1] : logical_exp (NonTerminal)
         // [2] : statement (NonTerminal)
-        private AstBuildResult BuildIfStNode(AstNonTerminal curNode, SymbolTable baseSymbolTable,
-                                                            int blockLevel, int offset, AstBuildOption buildOption = AstBuildOption.None)
+        private AstBuildResult BuildIfStNode(AstNonTerminal curNode, AstBuildParams p, List<AstSymbol> astNodes)
         {
             curNode.ClearConnectedInfo();
 
-            // logical_exp
-            BuildOpNode(curNode[1] as AstNonTerminal, baseSymbolTable, blockLevel, offset, buildOption);
+            // build logical_exp node
+            var logicalResult = (curNode[1] as AstNonTerminal).BuildLogic(p, astNodes);
 
-            string labelString;
-            do
-            {
-                labelString = StringUtility.RandomString(5, false);
-            } while (_labels.Contains(labelString));
-            _labels.Add(labelString);
+            string newLabel = NewReservedLabel();
+            curNode.ConnectedInterLanguage.Add(UCode.Command.ConditionalJump(string.Empty, newLabel, false));
+            astNodes.Add(curNode);
 
-            curNode.ConnectedInterLanguage.Add(UCode.Command.ConditionalJump(ReservedLabel, labelString, false));
+            // build statement node
+            var buildParams = p.Clone() as MiniCAstBuildParams;
+            buildParams.BuildOption |= AstBuildOption.NotAssign;
+            var stmtResult = (curNode[2] as AstNonTerminal).BuildLogic(buildParams, astNodes);
+            ReservedLabel = newLabel;
 
-            // statement
-            buildOption |= AstBuildOption.NotAssign;
-            var result = (curNode[2] as AstNonTerminal).BuildLogic(baseSymbolTable, blockLevel, offset, buildOption);
-            ReservedLabel = labelString;
-
-            return result;
+            return new AstBuildResult(null, null, true);
         }
 
-        private AstBuildResult BuildIfElseStNode(AstNonTerminal curNode, SymbolTable baseSymbolTable,
-                                                                    int blockLevel, int offset, AstBuildOption buildOption = AstBuildOption.None)
+        private AstBuildResult BuildIfElseStNode(AstNonTerminal curNode, AstBuildParams p, List<AstSymbol> astNodes)
         {
             return null;
         }
 
-        private AstBuildResult BuildWhileStNode(AstNonTerminal curNode, SymbolTable baseSymbolTable,
-                                                                    int blockLevel, int offset, AstBuildOption buildOption = AstBuildOption.None)
+        // [0] : while (Terminal)
+        // [1] : logical_exp (NonTerminal)
+        // [2] : statement (NonTerminal)
+        private AstBuildResult BuildWhileStNode(AstNonTerminal curNode, AstBuildParams p, List<AstSymbol> astNodes)
         {
-            return null;
+            curNode.ClearConnectedInfo();
+
+            string startLabel = NewReservedLabel();
+            ReservedLabel = startLabel;
+
+            // build logical_exp node
+            var logicalResult = (curNode[1] as AstNonTerminal).BuildLogic(p, astNodes);
+
+            string newLabel = NewReservedLabel();
+            curNode.ConnectedInterLanguage.Add(UCode.Command.ConditionalJump(string.Empty, newLabel, false));
+            astNodes.Add(curNode);
+
+            // build statement node
+            var buildParams = p.Clone() as MiniCAstBuildParams;
+            buildParams.BuildOption |= AstBuildOption.NotAssign;
+            var stmtResult = (curNode[2] as AstNonTerminal).BuildLogic(buildParams, astNodes);
+            ReservedLabel = newLabel;
+
+            // add UJP label (to back to start)
+            stmtResult.Nodes.Last().ConnectedInterLanguage.Add(UCode.Command.UnconditionalJump(string.Empty, startLabel));
+
+            return new AstBuildResult(null, null, true);
         }
 
         // [0] : return (AstTerminal)
         // [1] : ExpSt (AstNonTerminal)
-        private AstBuildResult BuildReturnStNode(AstNonTerminal curNode, SymbolTable baseSymbolTable,
-                                                                    int blockLevel, int offset, AstBuildOption buildOption = AstBuildOption.None)
+        private AstBuildResult BuildReturnStNode(AstNonTerminal curNode, AstBuildParams p, List<AstSymbol> astNodes)
         {
             curNode.ClearConnectedInfo();
 
-            var stResult = this.BuildExpStNode(curNode[1] as AstNonTerminal, baseSymbolTable, blockLevel, offset);
-            if (stResult.Result)
-                curNode.ConnectedInterLanguage.Add(UCode.Command.RetFromProc(ReservedLabel));
+            // build ExpSt node
+            var expNode = curNode[1] as AstNonTerminal;
+            var expResult = expNode.BuildLogic(p, astNodes);
 
-            return stResult;
+            curNode.ConnectedInterLanguage.Add(UCode.Command.RetFromProc(ReservedLabel));
+            astNodes.Add(curNode);
+
+            return expResult;
         }
 
         // [0] : Ident (AstTerminal)
         // [1] : ActualParam (AstNonTerminal)
-        private AstBuildResult BuildCallNode(AstNonTerminal curNode, SymbolTable baseSymbolTable,
-                                                            int blockLevel, int offset, AstBuildOption buildOption = AstBuildOption.None)
+        private AstBuildResult BuildCallNode(AstNonTerminal curNode, AstBuildParams p, List<AstSymbol> astNodes)
         {
             curNode.ClearConnectedInfo();
 
             var funcName = curNode[0] as AstTerminal;
-            var result = BuildActualParam(curNode[1] as AstNonTerminal, baseSymbolTable, blockLevel, offset);
-            if (result.Result)
-                curNode.ConnectedInterLanguage.Add(UCode.Command.ProcCall(ReservedLabel, funcName.Token.Input));
+
+            // build ActualParam node
+            var node1 = curNode[1] as AstNonTerminal;
+            var result = node1.BuildLogic(p, astNodes);
+
+            curNode.ConnectedInterLanguage.Add(UCode.Command.ProcCall(ReservedLabel, funcName.Token.Input));
+            astNodes.Add(curNode);
 
             return result;
         }
 
-        private AstBuildResult BuildActualParam(AstNonTerminal curNode, SymbolTable baseSymbolTable,
-                                                                    int blockLevel, int offset, AstBuildOption buildOption = AstBuildOption.None)
+        private AstBuildResult BuildActualParam(AstNonTerminal curNode, AstBuildParams p, List<AstSymbol> astNodes)
         {
             bool result = true;
             curNode.ClearConnectedInfo();
 
             foreach(var item in curNode.Items)
             {
-                var astNonTerminal = item as AstNonTerminal;
-                if (astNonTerminal.BuildLogic(baseSymbolTable, blockLevel, offset, buildOption).Result == false)
-                    result = false;
+                var nodeX = item as AstNonTerminal;
+                var itemResult = nodeX.BuildLogic(p, astNodes);
+
+                if (itemResult.Result == false) result = false;
             }
 
-            return new AstBuildResult(null, baseSymbolTable, result);
+            return new AstBuildResult(null, null, result);
         }
     }
 }

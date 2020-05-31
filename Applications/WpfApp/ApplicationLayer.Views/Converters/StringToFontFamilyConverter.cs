@@ -15,7 +15,7 @@ namespace ApplicationLayer.Views.Converters
                 var name = value as FontFamily;
                 return new FontFamily(name.Name);
             }
-            catch(Exception ex)
+            catch
             {
                 return new FontFamily("Arial");
             }

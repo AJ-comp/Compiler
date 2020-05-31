@@ -1,5 +1,6 @@
 ﻿using Parse.FrontEnd.Ast;
 using Parse.FrontEnd.Grammars.MiniC.SymbolTableFormat;
+using Parse.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
@@ -26,7 +27,19 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
             private set => _reservedLabel = value;
         }
 
-        public override event EventHandler<SemanticErrorArgs> SementicErrorEventHandler;
+        private string NewReservedLabel()
+        {
+            string labelString;
+            do
+            {
+                labelString = StringUtility.RandomString(5, false);
+            } while (_labels.Contains(labelString));
+            _labels.Add(labelString);
+
+            return labelString;
+        }
+
+        public override event EventHandler<SemanticErrorArgs> SemanticErrorEventHandler;
 
         public MeaningUnit Program { get; } = new MeaningUnit("Program");
         public MeaningUnit FuncDef { get; } = new MeaningUnit("FuncDef");
@@ -59,61 +72,6 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
         public MiniCSdts(KeyManager keyManager, MiniCGrammar grammar) : base(keyManager)
         {
             this.grammar = grammar;
-
-            this.Program.ActionLogic = this.ActionProgram;
-            this.FuncDef.ActionLogic = this.ActionFuncDef;
-            this.FuncHead.ActionLogic = this.ActionFuncHead;
-            this.DclSpec.ActionLogic = this.ActionDclSpec;
-            this.FormalPara.ActionLogic = this.ActionFormalPara;
-            this.ParamDcl.ActionLogic = this.ActionParamDcl;
-            this.CompoundSt.ActionLogic = this.ActionCompoundSt;
-            this.DclList.ActionLogic = this.ActionDclList;
-            this.Dcl.ActionLogic = this.ActionDcl;
-            this.DclItem.ActionLogic = this.ActionDclItem;
-            this.SimpleVar.ActionLogic = this.ActionSimpleVar;
-            this.ArrayVar.ActionLogic = this.ActionArrayVar;
-            this.StatList.ActionLogic = this.ActionStatList;
-            this.ExpSt.ActionLogic = this.ActionExpSt;
-            this.IfSt.ActionLogic = this.ActionIfSt;
-            this.IfElseSt.ActionLogic = this.ActionIfElseSt;
-            this.WhileSt.ActionLogic = this.ActionWhileSt;
-            this.ReturnSt.ActionLogic = this.ActionReturnSt;
-            this.Index.ActionLogic = this.ActionIndex;
-            this.Call.ActionLogic = this.ActionCall;
-            this.ActualParam.ActionLogic = this.ActionActualParam;
-            this.ConstNode.ActionLogic = this.ActionConstNode;
-            this.VoidNode.ActionLogic = this.ActionVoidNode;
-            this.IntNode.ActionLogic = this.ActionIntNode;
-            this.VariableNode.ActionLogic = this.ActionVarNode;
-            this.IntLiteralNode.ActionLogic = this.ActionIntLiteralNode;
-
-            this.Add.ActionLogic = this.ActionAdd;
-            this.Sub.ActionLogic = this.ActionSub;
-            this.Mul.ActionLogic = this.ActionMul;
-            this.Div.ActionLogic = this.ActionDiv;
-            this.Mod.ActionLogic = this.ActionMod;
-            this.Assign.ActionLogic = this.ActionAssign;
-            this.AddAssign.ActionLogic = this.ActionAddAssign;
-            this.SubAssign.ActionLogic = this.ActionSubAssign;
-            this.MulAssign.ActionLogic = this.ActionMulAssign;
-            this.DivAssign.ActionLogic = this.ActionDivAssign;
-            this.ModAssign.ActionLogic = this.ActionModAssign;
-            this.LogicalOr.ActionLogic = this.ActionLogicalOr;
-            this.LogicalAnd.ActionLogic = this.ActionLogicalAnd;
-            this.LogicalNot.ActionLogic = this.ActionLogicalNot;
-            this.Equal.ActionLogic = this.ActionEqual;
-            this.NotEqual.ActionLogic = this.ActionNotEqual;
-            this.GreaterThan.ActionLogic = this.ActionGreaterThan;
-            this.LessThan.ActionLogic = this.ActionLessThan;
-            this.GreaterEqual.ActionLogic = this.ActionGreatherEqual;
-            this.LessEqual.ActionLogic = this.ActionLessEqual;
-            this.UnaryMinus.ActionLogic = this.ActionUnaryMinus;
-            this.PreInc.ActionLogic = this.ActionPreInc;
-            this.PreDec.ActionLogic = this.ActionPreDec;
-            this.PostInc.ActionLogic = this.ActionPostInc;
-            this.PostDec.ActionLogic = this.ActionPostDec;
-
-
 
             this.Program.BuildLogic = this.BuildProgramNode;
             this.FuncDef.BuildLogic = this.BuildFuncDefNode;
@@ -167,39 +125,21 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
             this.PostDec.BuildLogic = this.BuildPostDec;
         }
 
-        public override SementicAnalysisResult Process(AstSymbol symbol)
+        public override SemanticAnalysisResult Process(AstSymbol symbol)
         {
-            MeaningErrInfoList errList = new MeaningErrInfoList();
-            if (symbol == null) return new SementicAnalysisResult(errList, null);
+            if (symbol == null) return new SemanticAnalysisResult(null, null);
+            var buildParams = new MiniCAstBuildParams(new MiniCSymbolTable(), 0, 0);
+            var searchedList = new List<AstSymbol>();
 
             try
             {
-                this.BuildProgramNode(symbol as AstNonTerminal, new MiniCSymbolTable(), 0, 0);
-                return new SementicAnalysisResult(errList, null);
+                var result = this.BuildProgramNode(symbol as AstNonTerminal, buildParams, searchedList);
+                return new SemanticAnalysisResult(symbol, searchedList);
             }
-            catch
+            catch(Exception ex)
             {
-                return null;
+                return new SemanticAnalysisResult(symbol, searchedList, ex);
             }
-        }
-
-        public override IReadOnlyList<AstSymbol> GenerateCode(AstSymbol symbol)
-        {
-            List<AstSymbol> result = new List<AstSymbol>();
-
-            try
-            {
-                if (symbol != null)
-                {
-                    result = this.ActionProgram(symbol as AstNonTerminal) as List<AstSymbol>;
-                }
-            }
-            catch
-            {
-                return null;
-            }
-
-            return result;
         }
     }
 }

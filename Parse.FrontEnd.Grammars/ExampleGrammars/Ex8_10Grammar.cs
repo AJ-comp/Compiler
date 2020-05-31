@@ -38,7 +38,7 @@ namespace Parse.FrontEnd.Grammars.ExampleGrammars
 
     public class Ex8_10Sdts : Sdts
     {
-        public override event EventHandler<SemanticErrorArgs> SementicErrorEventHandler;
+        public override event EventHandler<SemanticErrorArgs> SemanticErrorEventHandler;
 
         private object ActionAdd(AstNonTerminal node)
         {
@@ -54,12 +54,7 @@ namespace Parse.FrontEnd.Grammars.ExampleGrammars
         {
         }
 
-        public override SementicAnalysisResult Process(AstSymbol node)
-        {
-            return null;
-        }
-
-        public override IReadOnlyList<AstSymbol> GenerateCode(AstSymbol symbol)
+        public override SemanticAnalysisResult Process(AstSymbol node)
         {
             return null;
         }

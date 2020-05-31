@@ -1,4 +1,4 @@
-﻿namespace Parse.FrontEnd.Parsers.Datas
+﻿namespace Parse.FrontEnd
 {
     public class ParsingErrorInfo
     {
@@ -6,7 +6,7 @@
         public string Code { get; }
         public string Message { get; }
 
-        private ParsingErrorInfo(ErrorType type, string code, string message)
+        protected ParsingErrorInfo(ErrorType type, string code, string message)
         {
             Type = type;
             Code = code;
@@ -17,6 +17,6 @@
         public static ParsingErrorInfo CreateParsingWarning(string code, string message) => new ParsingErrorInfo(ErrorType.Warning, code, message);
         public static ParsingErrorInfo CreateParsingInfomation(string code, string message) => new ParsingErrorInfo(ErrorType.Information, code, message);
 
-        public override string ToString() => string.Format("code : {0}, message {1}", Code, Message);
+        public override string ToString() => string.Format("code : {0}, message : {1}", Code, Message);
     }
 }

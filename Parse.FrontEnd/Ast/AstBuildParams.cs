@@ -1,14 +1,16 @@
-﻿namespace Parse.FrontEnd.Ast
-{
-    public class AstBuildParams
-    {
-        public AstNonTerminal CurNode { get; }
-        public SymbolTable BaseSymbolTable { get; }
+﻿using System;
 
-        public AstBuildParams(AstNonTerminal curNode, SymbolTable baseSymbolTable)
+namespace Parse.FrontEnd.Ast
+{
+    public abstract class AstBuildParams : ICloneable
+    {
+        public SymbolTable SymbolTable { get; set; }
+
+        protected AstBuildParams(SymbolTable SymbolTable)
         {
-            CurNode = curNode;
-            BaseSymbolTable = baseSymbolTable;
+            this.SymbolTable = SymbolTable;
         }
+
+        public abstract object Clone();
     }
 }

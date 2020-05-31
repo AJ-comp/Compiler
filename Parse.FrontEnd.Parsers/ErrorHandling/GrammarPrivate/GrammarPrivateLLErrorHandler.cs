@@ -4,7 +4,7 @@ namespace Parse.FrontEnd.Parsers.ErrorHandling.GrammarPrivate
 {
     public abstract class GrammarPrivateLLErrorHandler : GrammarPrivateErrorHandler
     {
-        public GrammarPrivateLLErrorHandler(Grammar grammar) : base(grammar)
+        protected GrammarPrivateLLErrorHandler(Grammar grammar) : base(grammar)
         {
         }
     }

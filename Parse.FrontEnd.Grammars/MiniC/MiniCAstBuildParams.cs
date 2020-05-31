@@ -1,19 +1,32 @@
 ﻿using Parse.FrontEnd.Ast;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Parse.FrontEnd.Grammars.MiniC
 {
     public class MiniCAstBuildParams : AstBuildParams
     {
-        public int BlockLevel { get; private set; }
-        public int Offset { get; private set; }
+        public int BlockLevel { get; internal set; }
+        public int Offset { get; internal set; }
+        public AstBuildOption BuildOption { get; internal set; } = AstBuildOption.None;
 
-        public MiniCAstBuildParams(AstNonTerminal curNode, SymbolTable baseSymbolTable) : base(curNode, baseSymbolTable)
+        public MiniCAstBuildParams(SymbolTable baseSymbolTable) : base(baseSymbolTable)
         {
+        }
+
+        public MiniCAstBuildParams(SymbolTable baseSymbolTable, int blockLevel, int offset) : this(baseSymbolTable)
+        {
+            BlockLevel = blockLevel;
+            Offset = offset;
+        }
+
+        public MiniCAstBuildParams(SymbolTable baseSymbolTable, int blockLevel, int offset, AstBuildOption astBuildOption) : this(baseSymbolTable, blockLevel, offset)
+        {
+            BuildOption = astBuildOption;
+        }
+
+        public override object Clone()
+        {
+            return new MiniCAstBuildParams(SymbolTable, BlockLevel, Offset, BuildOption);
         }
     }
 }
