@@ -68,6 +68,7 @@
     <Compile Include="AlarmData.cs" />
     <Compile Include="ChangedFileList.cs" />
     <Compile Include="Document.cs" />
+    <Compile Include="ExceptionTreeNodeModel.cs" />
     <Compile Include="GraphModels\AstSymbolVertex.cs" />
     <Compile Include="GraphModels\EbnfTreeVertex.cs" />
     <Compile Include="GraphModels\PocEdge.cs" />

@@ -1,4 +1,5 @@
 ﻿using Parse.FrontEnd.Ast;
+using Parse.FrontEnd.Grammars.MiniC.AstNodes;
 using Parse.FrontEnd.Grammars.MiniC.SymbolTableFormat;
 using Parse.FrontEnd.InterLanguages;
 using System.Collections.Generic;
@@ -18,19 +19,23 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
             // build DclList node
             var dclNode = curNode[0] as AstNonTerminal;
             var dclResult = dclNode.BuildLogic(p, astNodes);
-            var newSymbolTable = dclResult.SymbolTable as MiniCSymbolTable;
-            curNode.ConnectedSymbolTable = newSymbolTable;
+            var buildParams = p.Clone() as MiniCAstBuildParams;
+            buildParams.SymbolTable = dclResult.SymbolTable as MiniCSymbolTable;
+            curNode.ConnectedSymbolTable = buildParams.SymbolTable;
 
             if (curNode.Count == 1) // case only DclList exist
-                return new AstBuildResult(null, newSymbolTable, dclResult.Result);
+                return new AstBuildResult(null, buildParams.SymbolTable, dclResult.Result);
 
             // build StatList node
             var statNode = curNode[1] as AstNonTerminal;
-            var statResult = statNode.BuildLogic(p, astNodes);
+            var statResult = statNode.BuildLogic(buildParams, astNodes);
+
+            // Even if doesn't exist a information in the node, it has to add.
+            astNodes.Add(curNode);
 
             if (dclResult.Result == false || statResult.Result == false) result = false;
 
-            return new AstBuildResult(null, newSymbolTable, result);
+            return new AstBuildResult(null, buildParams.SymbolTable, result);
         }
 
         // format summary
@@ -46,6 +51,9 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
                 var statResult = astNonTerminal.BuildLogic(p, astNodes);
             }
 
+            // Even if doesn't exist a information in the node, it has to add.
+            astNodes.Add(curNode);
+
             return new AstBuildResult(null, null, true);
         }
 
@@ -59,6 +67,9 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
 
             var astNonTerminal = curNode[0] as AstNonTerminal;
             var expResult = astNonTerminal.BuildLogic(p, astNodes);
+
+            // Even if doesn't exist a information in the node, it has to add.
+            astNodes.Add(curNode);
 
             return expResult;
         }
@@ -88,6 +99,9 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
 
         private AstBuildResult BuildIfElseStNode(AstNonTerminal curNode, AstBuildParams p, List<AstSymbol> astNodes)
         {
+            // Even if doesn't exist a information in the node, it has to add.
+            astNodes.Add(curNode);
+
             return null;
         }
 
@@ -115,7 +129,7 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
             ReservedLabel = newLabel;
 
             // add UJP label (to back to start)
-            stmtResult.Nodes.Last().ConnectedInterLanguage.Add(UCode.Command.UnconditionalJump(string.Empty, startLabel));
+            astNodes.Last().ConnectedInterLanguage.Add(UCode.Command.UnconditionalJump(string.Empty, startLabel));
 
             return new AstBuildResult(null, null, true);
         }
@@ -166,6 +180,9 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
 
                 if (itemResult.Result == false) result = false;
             }
+
+            // Even if doesn't exist a information in the node, it has to add.
+            astNodes.Add(curNode);
 
             return new AstBuildResult(null, null, result);
         }

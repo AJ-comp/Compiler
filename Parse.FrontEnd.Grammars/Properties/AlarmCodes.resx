@@ -121,4 +121,7 @@
   <data name="MCL0007" xml:space="preserve">
     <value>Buffer overflow fired while write {0}. writable byte is {1} but in fact write {2} byte.</value>
   </data>
+  <data name="MCL0008" xml:space="preserve">
+    <value>The operand of Inc or Dec operator has to be variable, property or indexer.</value>
+  </data>
 </root>

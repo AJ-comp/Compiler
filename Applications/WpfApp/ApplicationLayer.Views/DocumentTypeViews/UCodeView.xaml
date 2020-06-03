@@ -16,6 +16,10 @@
                     <Setter Property="Background" Value="#20808080" />
                 </Style>
             </base:CustomStyleSelector.GroupStyle>
+            <base:CustomStyleSelector.ExceptionStyle>
+                <Style TargetType="grids:TreeListBoxItem">
+                </Style>
+            </base:CustomStyleSelector.ExceptionStyle>
             <base:CustomStyleSelector.UCodeStyle>
                 <Style TargetType="grids:TreeListBoxItem">
                 </Style>
@@ -28,6 +32,13 @@
                     <TextBlock Margin="0,2" Text="{Binding DisplayName}" FontWeight="Bold" TextTrimming="CharacterEllipsis" VerticalAlignment="Center" />
                 </DataTemplate>
             </base:CustomTemplateSelector.GroupTemplate>
+            <base:CustomTemplateSelector.ExceptionTemplate>
+                <DataTemplate>
+                    <TextBlock Margin="0,2" Text="{Binding DisplayName}" FontWeight="Bold" 
+                                    Foreground="OrangeRed"
+                                    TextTrimming="CharacterEllipsis" VerticalAlignment="Center" />
+                </DataTemplate>
+            </base:CustomTemplateSelector.ExceptionTemplate>
             <base:CustomTemplateSelector.UCodeTemplate>
                 <DataTemplate>
                     <Grid Margin="0,2,0,0">

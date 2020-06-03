@@ -11,6 +11,8 @@ namespace Parse.FrontEnd.Ast
         public MeaningErrInfoList ConnectedErrInfoList { get; } = new MeaningErrInfoList();
         public List<object> ConnectedInterLanguage { get; } = new List<object>();
 
+        public bool IsDummy => (ConnectedErrInfoList.Count == 0 && ConnectedInterLanguage.Count == 0) ? true : false;
+
         /// <summary>
         /// Remove all connected information on this tree.
         /// </summary>

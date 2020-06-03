@@ -41,26 +41,26 @@
             </Grid.ColumnDefinitions>
 
             <TextBlock Grid.Row="1" Grid.Column="0" Margin="10 0 0 0"
-                                VerticalAlignment="Center" Text="{lex:Loc Key=MicroController}"/>
+                                VerticalAlignment="Center" Text="{lex:Loc Resources:MicroController}"/>
             <TextBox Grid.Row="1" Grid.Column="1" IsReadOnly="True"
                             HorizontalAlignment="Stretch" VerticalAlignment="Center"
                             Text="{Binding ProjectSelection.SelectedTerminalItem.Name, Mode=OneWay}"/>
 
             <TextBlock Grid.Row="2" Grid.Column="0" Margin="10 0 0 0"
-                                VerticalAlignment="Center" Text="{lex:Loc Key=Name}"/>
+                                VerticalAlignment="Center" Text="{lex:Loc Resources:Name}"/>
             <TextBox Grid.Row="2" Grid.Column="1" 
                             HorizontalAlignment="Stretch" VerticalAlignment="Center"
                             Text="{Binding SolutionName, UpdateSourceTrigger=PropertyChanged}"/>
 
 
             <TextBlock Grid.Row="3" Grid.Column="0" Margin="10 0 0 0"
-                                VerticalAlignment="Center" Text="{lex:Loc Key=Position}"/>
+                                VerticalAlignment="Center" Text="{lex:Loc Resources:Position}"/>
             <TextBox Grid.Row="3" Grid.Column="1" 
                                 Text="{Binding Path}"
                                 HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
             <Button Grid.Row="3" Grid.Column="2" 
                             Padding="10 0" Margin="10 0 0 0"
-                            Content="{lex:Loc Key=Search}"
+                            Content="{lex:Loc Resources:Search}"
                             Command="{Binding SearchCommand}"
                             CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, 
                             AncestorType={x:Type local:NewSolutionDialog}}, 
@@ -69,13 +69,13 @@
 
 
             <TextBlock Grid.Row="4" Grid.Column="0" Margin="10 0 0 0"
-                                VerticalAlignment="Center" Text="{lex:Loc Key=SolutionPath}"/>
+                                VerticalAlignment="Center" Text="{lex:Loc Resources:SolutionPath}"/>
             <TextBox Grid.Row="4" Grid.Column="1" IsReadOnly="True"
                             HorizontalAlignment="Stretch" VerticalAlignment="Center"
                             Text="{Binding SolutionFullPath, Mode=OneWay}"/>
-            <CheckBox Grid.Row="4" Grid.Column="2" Margin="10 0 0 0"
+            <CheckBox Grid.Row="4" Grid.Column="2" Margin="10,5,0,5"
                                 IsChecked="{Binding CreateSolutionFolder}"
-                                Content="{lex:Loc Key=CreateSolutionDir}"  VerticalAlignment="Center"/>
+                                Content="{lex:Loc Resources:CreateSolutionDir}"  VerticalAlignment="Center"/>
 
         </Grid>
 
@@ -83,11 +83,11 @@
         <Grid Grid.Row="2" Background="{DynamicResource CommonEnableBackgroundBrush2}">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <Button Style="{DynamicResource WindowCloseButton}" Margin="0 0 10 0" 
-                    Content="{lex:Loc Key=Ok}" 
+                    Content="{lex:Loc Resources:Ok}" 
                     Command="{Binding CreateCommand}"/>
 
                 <Button Style="{DynamicResource WindowCloseButton}" Margin="0 0 10 0" 
-                                Content="{lex:Loc Key=Cancel}" />
+                                Content="{lex:Loc Resources:Cancel}" />
             </StackPanel>
         </Grid>
     </Grid>

@@ -1,7 +1,9 @@
 ﻿using ApplicationLayer.Models;
 using ApplicationLayer.Models.SolutionPackage;
+using Parse.FrontEnd;
 using Parse.FrontEnd.Ast;
 using Parse.FrontEnd.InterLanguages;
+using System;
 using System.Collections.Generic;
 
 namespace ApplicationLayer.ViewModels.DocumentTypeViewModels
@@ -10,7 +12,18 @@ namespace ApplicationLayer.ViewModels.DocumentTypeViewModels
     {
         public CategoryTreeNodeModel Root { get; }
 
-        private UCodeTreeNodeModel CreateUcodeTreeNodeModel(UCode.Format data)
+        private TreeNodeModel CreateTreeNodeModel(object data)
+        {
+            if (data is MeaningErrInfo)
+            {
+                var cData = (data as MeaningErrInfo).Message;
+                return CreateTreeNodeModel(cData);
+            }
+            else
+                return CreateTreeNodeModel(data as UCode.Format);
+        }
+
+        private UCodeTreeNodeModel CreateTreeNodeModel(UCode.Format data)
         {
             var ucodeNode = new UCodeTreeNodeModel
             {
@@ -26,6 +39,8 @@ namespace ApplicationLayer.ViewModels.DocumentTypeViewModels
             return ucodeNode;
         }
 
+        private ExceptionTreeNodeModel CreateTreeNodeModel(string exception) => new ExceptionTreeNodeModel() { DisplayName = exception };
+
         public UCodeViewModel(IReadOnlyList<UCodeDisplayModel> trees, string title) : base(title)
         {
             if (trees is null) return;
@@ -39,38 +54,54 @@ namespace ApplicationLayer.ViewModels.DocumentTypeViewModels
                 var nodeInfo = trees[i];
                 var node = nodeInfo.Node;
 
-                if(nodeInfo.CategoryPos == UCodeDisplayModel.AttatchCategoryPosition.Own)
+                if (node is AstTerminal)
                 {
-                    if(nodeInfo.Node is AstNonTerminal)
-                    {
-                        var astNonTerminal = node as AstNonTerminal;
-
-                        var data = (string.IsNullOrEmpty(nodeInfo.CategoryName))
-                            ? astNonTerminal.ConnectedParseTree?.AllInputDatas : nodeInfo.CategoryName;
-
-                        parentNode = new CategoryTreeNodeModel(data);
-                        Root.AddChildren(parentNode);
-                    }
-                }
-                else if(nodeInfo.CategoryPos == UCodeDisplayModel.AttatchCategoryPosition.Down)
-                {
-                    // if current node is not a last node
-                    if(i != trees.Count - 1)
-                    {
+                    if (node.ConnectedErrInfoList.Count > 0)
+                        leftUnDoneList.AddRange(node.ConnectedErrInfoList);
+                    else
                         leftUnDoneList.AddRange(node.ConnectedInterLanguage);
-                        continue;
-                    }
+
+                    continue;
                 }
 
-                // add a leftundone list
-                foreach (var statement in leftUnDoneList)
-                    parentNode.AddChildren(CreateUcodeTreeNodeModel(statement as UCode.Format));
-                leftUnDoneList.Clear();
+                var astNonTerminal = node as AstNonTerminal;
 
-                // add a list on current node
-                foreach (var statement in node.ConnectedInterLanguage)
-                    parentNode.AddChildren(CreateUcodeTreeNodeModel(statement as UCode.Format));
+                if (nodeInfo.CategoryVisible == false)
+                {
+                    if(nodeInfo.CategoryAttachPos == UCodeDisplayModel.AttatchCategoryPosition.Down)
+                        leftUnDoneList.AddRange(node.ConnectedInterLanguage);
+                    else
+                    {
+                        // add a IL of the current node to the parent node
+                        foreach (var il in node.ConnectedInterLanguage)
+                            parentNode.AddChildren(CreateTreeNodeModel(il));
+                    }
+
+                }
+                else
+                {
+                    var data = (string.IsNullOrEmpty(nodeInfo.CategoryName))
+                        ? astNonTerminal.ConnectedParseTree?.AllInputDatas : nodeInfo.CategoryName;
+
+                    parentNode = new CategoryTreeNodeModel(data);
+
+                    // add a leftundone list
+                    foreach (var statement in leftUnDoneList)
+                        parentNode.AddChildren(CreateTreeNodeModel(statement));
+                    leftUnDoneList.Clear();
+
+                    // add a IL of the current node to the parent node
+                    foreach (var il in node.ConnectedInterLanguage)
+                        parentNode.AddChildren(CreateTreeNodeModel(il));
+
+                    Root.AddChildren(parentNode);
+                }
             }
+
+            // add a leftundone list
+            foreach (var statement in leftUnDoneList)
+                parentNode.AddChildren(CreateTreeNodeModel(statement));
+            leftUnDoneList.Clear();
         }
     }
 }

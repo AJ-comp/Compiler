@@ -128,9 +128,9 @@ namespace Parse.FrontEnd.ParseTree
                     if (token.Kind.TokenType is Operator) bSpaceReady = false;
                     else if (token.Kind.TokenType is Delimiter) bSpaceReady = false;
                     else if (bSpaceReady == false) bSpaceReady = true;
-                    else if (bSpaceReady) space = " ";
+                    else space = " ";
 
-                    result += token.Input + space;
+                    result += space + token.Input;
                 }
 
                 return result;

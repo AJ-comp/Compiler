@@ -98,6 +98,7 @@ namespace Parse.FrontEnd.Grammars.MiniC.SymbolTableFormat
         public string KeyString => string.Format("{0} {1}", DclItemData.KeyString, BlockLevel.ToString());
 
         public override string ToString()
-            => string.Format("{0}, {1}, block level : {2}, Etc : {3}", DclSpecData.ToString(), DclItemData.ToString(), BlockLevel.ToString(), Etc.ToString());
+            => string.Format("{0}, {1}, block level : {2}, offset : {3}, Etc : {4}", 
+                                        DclSpecData.ToString(), DclItemData.ToString(), BlockLevel, Offset, Etc.ToString());
     }
 }

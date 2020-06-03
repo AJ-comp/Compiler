@@ -23,6 +23,8 @@ namespace ApplicationLayer.Views
 		/// <value>The <see cref="DataTemplate"/> to use for mail.</value>
 		public DataTemplate UCodeTemplate { get; set; }
 
+		public DataTemplate ExceptionTemplate { get; set; }
+
 		/// <summary>
 		/// Returns a <see cref="DataTemplate"/> based on custom logic.
 		/// </summary>
@@ -37,6 +39,8 @@ namespace ApplicationLayer.Views
 #endif
 			if (item is UCodeTreeNodeModel)
 				return this.UCodeTemplate;
+			else if (item is ExceptionTreeNodeModel)
+				return this.ExceptionTemplate;
 			else
 				return this.GroupTemplate;
 		}

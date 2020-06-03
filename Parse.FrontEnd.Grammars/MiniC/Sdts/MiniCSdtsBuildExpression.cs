@@ -89,36 +89,41 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
             curNode.ConnectedSymbolTable = p.SymbolTable;
 
             var result = (curNode[0] as AstNonTerminal).BuildLogic(p, astNodes);
-            var varData = (p.SymbolTable as MiniCSymbolTable).AllVarList.GetVarByName((curNode[0] as AstTerminal).Token.Input);
+            if(result.Data is LiteralData)
+                curNode.ConnectedErrInfoList.Add(new MeaningErrInfo(curNode, nameof(AlarmCodes.MCL0008), AlarmCodes.MCL0008));
+            else
+            {
+                var varData = (p.SymbolTable as MiniCSymbolTable).AllVarList.GetVarByName((result.Data as VarData).VarName);
 
-            if (curNode.SignPost.MeaningUnit == this.PreInc)
-            {
-                curNode.ConnectedInterLanguage.Add(UCode.Command.Increment(ReservedLabel));
-                curNode.ConnectedInterLanguage.Add(UCode.Command.Store(ReservedLabel, varData.BlockLevel, varData.Offset));
-            }
-            else if (curNode.SignPost.MeaningUnit == this.PreDec)
-            {
-                curNode.ConnectedInterLanguage.Add(UCode.Command.Decrement(ReservedLabel));
-                curNode.ConnectedInterLanguage.Add(UCode.Command.Store(ReservedLabel, varData.BlockLevel, varData.Offset));
-            }
-            else if (curNode.SignPost.MeaningUnit == this.PostInc)
-            {
-                curNode.ConnectedInterLanguage.Add(UCode.Command.Duplicate(ReservedLabel));
-                curNode.ConnectedInterLanguage.Add(UCode.Command.Increment(ReservedLabel));
-                curNode.ConnectedInterLanguage.Add(UCode.Command.Store(ReservedLabel, varData.BlockLevel, varData.Offset));
-                curNode.ConnectedInterLanguage.Add(UCode.Command.Pop(ReservedLabel));
-            }
-            else if (curNode.SignPost.MeaningUnit == this.PostDec)
-            {
-                curNode.ConnectedInterLanguage.Add(UCode.Command.Duplicate(ReservedLabel));
-                curNode.ConnectedInterLanguage.Add(UCode.Command.Decrement(ReservedLabel));
-                curNode.ConnectedInterLanguage.Add(UCode.Command.Store(ReservedLabel, varData.BlockLevel, varData.Offset));
-                curNode.ConnectedInterLanguage.Add(UCode.Command.Pop(ReservedLabel));
+                if (curNode.SignPost.MeaningUnit == this.PreInc)
+                {
+                    curNode.ConnectedInterLanguage.Add(UCode.Command.Increment(ReservedLabel));
+                    curNode.ConnectedInterLanguage.Add(UCode.Command.Store(ReservedLabel, varData.BlockLevel, varData.Offset));
+                }
+                else if (curNode.SignPost.MeaningUnit == this.PreDec)
+                {
+                    curNode.ConnectedInterLanguage.Add(UCode.Command.Decrement(ReservedLabel));
+                    curNode.ConnectedInterLanguage.Add(UCode.Command.Store(ReservedLabel, varData.BlockLevel, varData.Offset));
+                }
+                else if (curNode.SignPost.MeaningUnit == this.PostInc)
+                {
+                    curNode.ConnectedInterLanguage.Add(UCode.Command.Duplicate(ReservedLabel));
+                    curNode.ConnectedInterLanguage.Add(UCode.Command.Increment(ReservedLabel));
+                    curNode.ConnectedInterLanguage.Add(UCode.Command.Store(ReservedLabel, varData.BlockLevel, varData.Offset));
+                    curNode.ConnectedInterLanguage.Add(UCode.Command.Pop(ReservedLabel));
+                }
+                else if (curNode.SignPost.MeaningUnit == this.PostDec)
+                {
+                    curNode.ConnectedInterLanguage.Add(UCode.Command.Duplicate(ReservedLabel));
+                    curNode.ConnectedInterLanguage.Add(UCode.Command.Decrement(ReservedLabel));
+                    curNode.ConnectedInterLanguage.Add(UCode.Command.Store(ReservedLabel, varData.BlockLevel, varData.Offset));
+                    curNode.ConnectedInterLanguage.Add(UCode.Command.Pop(ReservedLabel));
+                }
             }
 
             astNodes.Add(curNode);
 
-            return new AstBuildResult(varData, null, true);
+            return new AstBuildResult(result.Data, null, true);
         }
 
         // format summary

@@ -27,6 +27,7 @@ namespace ApplicationLayer.Views
 		/// </summary>
 		/// <value>The <see cref="Style"/> to use for mail.</value>
 		public Style UCodeStyle { get; set; }
+		public Style ExceptionStyle { get; set; }
 
 		/// <summary>
 		/// Returns a <see cref="Style"/> based on custom logic.
@@ -42,6 +43,8 @@ namespace ApplicationLayer.Views
 #endif
 			if (item is UCodeTreeNodeModel)
 				return this.UCodeStyle;
+			else if (item is ExceptionTreeNodeModel)
+				return this.ExceptionStyle;
 			else
 				return this.GroupStyle;
 		}

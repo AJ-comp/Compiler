@@ -49,6 +49,9 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
                 }
             }
 
+            // Even if doesn't exist a information in the node, it has to add.
+            astNodes.Add(curNode);
+
             return new AstBuildResult(null, null, true);
         }
 
@@ -79,6 +82,9 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
             // build CompoundSt node
             var node1 = curNode[1] as AstNonTerminal;
             var compStResult = node1.BuildLogic(buildParams, astNodes);
+
+            // Even if doesn't exist a information in the node, it has to add.
+            astNodes.Add(curNode);
 
             return new AstBuildResult(funcHeadData, newSymbolTable, true);
         }
@@ -141,6 +147,9 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
                 }
             }
 
+            // Even if doesn't exist a information in the node, it has to add.
+            astNodes.Add(curNode);
+
             return new AstBuildResult(result, null, true);
         }
 
@@ -162,6 +171,9 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
 
                 result.Add(new RealVarData(paramDclResult.Data as DclData));
             }
+
+            // Even if doesn't exist a information in the node, it has to add.
+            astNodes.Add(curNode);
 
             return new AstBuildResult(result, buildParams.SymbolTable, true);
         }
@@ -231,6 +243,9 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
                 }
             }
 
+            // Even if doesn't exist a information in the node, it has to add.
+            astNodes.Add(curNode);
+
             return new AstBuildResult(null, newSymbolTable, true);
         }
 
@@ -289,6 +304,9 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
                 data.Value = literalData;
             }
 
+            // Even if doesn't exist a information in the node, it has to add.
+            astNodes.Add(curNode);
+
             return new AstBuildResult(data, null, true);
         }
 
@@ -300,6 +318,9 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
             {
                 NameToken = (curNode.Items[0] as AstTerminal).Token
             };
+
+            // Even if doesn't exist a information in the node, it has to add.
+            astNodes.Add(curNode);
 
             return new AstBuildResult(result, null, true);
         }
@@ -315,6 +336,9 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
                 DimensionToken = (curNode.Items[1] as AstTerminal).Token
             };
 
+            // Even if doesn't exist a information in the node, it has to add.
+            astNodes.Add(curNode);
+
             return new AstBuildResult(result, null, true);
         }
 
@@ -329,6 +353,10 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
 
             // it has to add 'curNode.Items[0]' to the AstNodes because IL or ME is added in the ConnectSimpleVarCode function.            
             astNodes.Add(curNode.Items[0]);
+
+            // Even if doesn't exist a information in the node, it has to add.
+            astNodes.Add(curNode);
+
             return new AstBuildResult(varData, null, result);
         }
 

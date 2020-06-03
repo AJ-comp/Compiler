@@ -141,4 +141,7 @@
   <data name="MCL0007" xml:space="preserve">
     <value>{0}에 쓰는 동안 버퍼오버런이 발생했습니다. 쓰기 가능한 바이트는 {1} 인데 실제로 {2}만큼 쓰고 있습니다.</value>
   </data>
+  <data name="MCL0008" xml:space="preserve">
+    <value>증가 연산자 또는 감소 연산자의 피연산자는 변수, 속성 또는 인덱서여야 합니다.</value>
+  </data>
 </root>

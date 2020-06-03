@@ -131,5 +131,14 @@ namespace Parse.FrontEnd.Grammars.Properties {
                 return ResourceManager.GetString("MCL0007", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   The operand of Inc or Dec operator has to be variable, property or indexer.과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        internal static string MCL0008 {
+            get {
+                return ResourceManager.GetString("MCL0008", resourceCulture);
+            }
+        }
     }
 }

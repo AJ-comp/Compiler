@@ -7,7 +7,6 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:lex="http://wpflocalizeextension.codeplex.com"
              lex:ResxLocalizationProvider.DefaultAssembly="ApplicationLayer.Define"
-             lex:ResxLocalizationProvider.DefaultDictionary="Resources"
              xmlns:ap="clr-namespace:ApplicationLayer.Views.AttachedProperties;assembly=ApplicationLayer.Views"
              xmlns:common="clr-namespace:ApplicationLayer.Common;assembly=ApplicationLayer.Common"
              xmlns:models="clr-namespace:ApplicationLayer.Models.SolutionPackage;assembly=ApplicationLayer.Models"
@@ -159,7 +158,7 @@
                             <MultiDataTrigger.Conditions>
                                 <Condition Binding="{Binding Tag, Converter={converter:DataTypeConverter}}" 
                                                 Value="{x:Type models:FilterTreeNodeModel}"/>
-                                <Condition Binding="{Binding DisplayName}" Value="{lex:Loc Key=ExternDependency}"/>
+                                <Condition Binding="{Binding DisplayName}" Value="{lex:Loc Resources:ExternDependency}"/>
                                 <Condition Binding="{Binding IsExpanded}" Value="true"/>
                             </MultiDataTrigger.Conditions>
                             <Setter TargetName="image" Property="Source" Value="{DynamicResource OpenDepFilterImagePath}"/>
@@ -168,7 +167,7 @@
                             <MultiDataTrigger.Conditions>
                                 <Condition Binding="{Binding Tag, Converter={converter:DataTypeConverter}}" 
                                                 Value="{x:Type models:FilterTreeNodeModel}"/>
-                                <Condition Binding="{Binding DisplayName}" Value="{lex:Loc Key=ExternDependency}"/>
+                                <Condition Binding="{Binding DisplayName}" Value="{lex:Loc Resources:ExternDependency}"/>
                                 <Condition Binding="{Binding IsExpanded}" Value="false"/>
                             </MultiDataTrigger.Conditions>
                             <Setter TargetName="image" Property="Source" Value="{DynamicResource CloseDepFilterImagePath}"/>
