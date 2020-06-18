@@ -67,6 +67,16 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.ko-KR.resx</DependentUpon>
     </Compile>
+    <Compile Include="Properties\WindowMenuResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WindowMenuResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\WindowMenuResources.ko-KR.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WindowMenuResources.ko-KR.resx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\WindowViewResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -94,6 +104,14 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\WindowMenuResources.ko-KR.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>WindowMenuResources.ko-KR.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\WindowMenuResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>WindowMenuResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\WindowViewResources.ko-KR.resx" />
     <EmbeddedResource Include="Properties\WindowViewResources.resx">

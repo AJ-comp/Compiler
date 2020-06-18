@@ -20,10 +20,10 @@ namespace ApplicationLayer.ViewModels.DocumentTypeViewModels
                 return CreateTreeNodeModel(cData);
             }
             else
-                return CreateTreeNodeModel(data as UCode.Format);
+                return CreateTreeNodeModel(data as IRBuilder.Format);
         }
 
-        private UCodeTreeNodeModel CreateTreeNodeModel(UCode.Format data)
+        private UCodeTreeNodeModel CreateTreeNodeModel(IRBuilder.Format data)
         {
             var ucodeNode = new UCodeTreeNodeModel
             {
@@ -59,7 +59,7 @@ namespace ApplicationLayer.ViewModels.DocumentTypeViewModels
                     if (node.ConnectedErrInfoList.Count > 0)
                         leftUnDoneList.AddRange(node.ConnectedErrInfoList);
                     else
-                        leftUnDoneList.AddRange(node.ConnectedInterLanguage);
+                        leftUnDoneList.AddRange(node.ConnectedIrUnits);
 
                     continue;
                 }
@@ -69,11 +69,11 @@ namespace ApplicationLayer.ViewModels.DocumentTypeViewModels
                 if (nodeInfo.CategoryVisible == false)
                 {
                     if(nodeInfo.CategoryAttachPos == UCodeDisplayModel.AttatchCategoryPosition.Down)
-                        leftUnDoneList.AddRange(node.ConnectedInterLanguage);
+                        leftUnDoneList.AddRange(node.ConnectedIrUnits);
                     else
                     {
                         // add a IL of the current node to the parent node
-                        foreach (var il in node.ConnectedInterLanguage)
+                        foreach (var il in node.ConnectedIrUnits)
                             parentNode.AddChildren(CreateTreeNodeModel(il));
                     }
 
@@ -91,7 +91,7 @@ namespace ApplicationLayer.ViewModels.DocumentTypeViewModels
                     leftUnDoneList.Clear();
 
                     // add a IL of the current node to the parent node
-                    foreach (var il in node.ConnectedInterLanguage)
+                    foreach (var il in node.ConnectedIrUnits)
                         parentNode.AddChildren(CreateTreeNodeModel(il));
 
                     Root.AddChildren(parentNode);

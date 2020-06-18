@@ -6,6 +6,8 @@ using Parse.FrontEnd.Grammars.Properties;
 using Parse.FrontEnd.InterLanguages;
 using System.Collections.Generic;
 
+using IR = Parse.FrontEnd.InterLanguages.Datas;
+
 namespace Parse.FrontEnd.Grammars.MiniC.Sdts
 {
     public partial class MiniCSdts
@@ -22,6 +24,51 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
 
             if (childNodeToCheck.Token.Kind.TokenType is Identifier)
                 result = (baseSymbolTable as MiniCSymbolTable).AllVarList.GetVarByName(childNodeToCheck.Token.Input);
+
+            return result;
+        }
+
+        private bool ConnectDclVarIRToNode(AstNonTerminal curNode, MiniCAstBuildParams p, DclData dclData)
+        {
+            bool result = false;
+
+            var symbolTable = (p.SymbolTable as MiniCSymbolTable);
+            if (symbolTable.VarDataList.GetVarByName(dclData.DclItemData.Name) != null)
+            {
+                curNode.ConnectedErrInfoList.Add(new MeaningErrInfo(curNode, nameof(AlarmCodes.MCL0009),
+                                                string.Format(AlarmCodes.MCL0009, dclData.DclItemData.Name)));
+            }
+            else
+            {
+                IROptions option = new IROptions(ReservedLabel);
+                IR.VarData irData = IRConverter.ToIRData(dclData);
+                curNode.ConnectedIrUnits.Add(IRBuilder.CreateDclVar(option, irData, false));
+
+                // add symbol information to the symbol table.
+                RealVarData varData = new RealVarData(dclData);
+                symbolTable.VarDataList.Add(varData);
+
+                p.Offset++;
+
+                result = true;
+            }
+
+            return result;
+        }
+
+        private bool ConnectBinOpToNode(AstNonTerminal curNode, VarData left, LiteralData right, IROperation operation)
+        {
+            bool result = false;
+
+            if ((left is VirtualVarData) == false)
+            {
+                IROptions option = new IROptions(ReservedLabel);
+                IR.VarData leftIR = IRConverter.ToIRData(left as RealVarData);
+                IR.LiteralData rightIR = IRConverter.ToIRData(right);
+                curNode.ConnectedIrUnits.Add(IRBuilder.CreateBinOP(option, leftIR, rightIR, operation));
+
+                result = true;
+            }
 
             return result;
         }
@@ -54,9 +101,9 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
                 bool bAddress = AstBuildOptionChecker.HasOption(buildParams.BuildOption, AstBuildOption.Reference);
 
                 if (bAddress)
-                    curNode.ConnectedInterLanguage.Add(UCode.Command.LoadVarAddress(ReservedLabel, realVarData.BlockLevel, realVarData.Offset, realVarData.VarName));
+                    curNode.ConnectedIrUnits.Add(UCodeBuilder.Command.LoadVarAddress(ReservedLabel, realVarData.BlockLevel, realVarData.Offset, realVarData.VarName));
                 else
-                    curNode.ConnectedInterLanguage.Add(UCode.Command.LoadVarValue(ReservedLabel, realVarData.BlockLevel, realVarData.Offset, realVarData.VarName));
+                    curNode.ConnectedIrUnits.Add(UCodeBuilder.Command.LoadVarValue(ReservedLabel, realVarData.BlockLevel, realVarData.Offset, realVarData.VarName));
             }
 
             return varData;
@@ -69,49 +116,53 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
             TypeChecker.Check(curNode, left, right);
             LiteralData result = null;
 
+            var option = new IROptions(ReservedLabel);
+            var leftIR = IRConverter.ToIRData(left);
+            var rightIR = IRConverter.ToIRData(right);
+
             if (curNode.SignPost.MeaningUnit == this.Add)
             {
                 result = left.Add(right);
-                curNode.ConnectedInterLanguage.Add(UCode.Command.Add(ReservedLabel));
+                curNode.ConnectedIrUnits.Add(IRBuilder.CreateBinOP(option, leftIR, rightIR, IROperation.Add));
             }
             else if (curNode.SignPost.MeaningUnit == this.Sub)
             {
                 result = left.Sub(right);
-                curNode.ConnectedInterLanguage.Add(UCode.Command.Sub(ReservedLabel));
+                curNode.ConnectedIrUnits.Add(IRBuilder.CreateBinOP(option, leftIR, rightIR, IROperation.Sub));
             }
             else if (curNode.SignPost.MeaningUnit == this.Mul)
             {
                 result = left.Mul(right);
-                curNode.ConnectedInterLanguage.Add(UCode.Command.Multiple(ReservedLabel));
+                curNode.ConnectedIrUnits.Add(IRBuilder.CreateBinOP(option, leftIR, rightIR, IROperation.Mul));
             }
             else if (curNode.SignPost.MeaningUnit == this.Div)
             {
                 result = left.Div(right);
-                curNode.ConnectedInterLanguage.Add(UCode.Command.Div(ReservedLabel));
+                curNode.ConnectedIrUnits.Add(IRBuilder.CreateBinOP(option, leftIR, rightIR, IROperation.Div));
             }
             else if (curNode.SignPost.MeaningUnit == this.Mod)
             {
                 result = left.Mod(right);
-                curNode.ConnectedInterLanguage.Add(UCode.Command.Mod(ReservedLabel));
+                curNode.ConnectedIrUnits.Add(IRBuilder.CreateBinOP(option, leftIR, rightIR, IROperation.Mod));
             }
             else if (curNode.SignPost.MeaningUnit == this.LogicalNot)
-                curNode.ConnectedInterLanguage.Add(UCode.Command.Not(ReservedLabel));
+                curNode.ConnectedIrUnits.Add(IRBuilder.Command.Not(ReservedLabel));
             else if (curNode.SignPost.MeaningUnit == this.LogicalAnd)
-                curNode.ConnectedInterLanguage.Add(UCode.Command.And(ReservedLabel));
+                curNode.ConnectedIrUnits.Add(UCodeBuilder.Command.And(ReservedLabel));
             else if (curNode.SignPost.MeaningUnit == this.LogicalOr)
-                curNode.ConnectedInterLanguage.Add(UCode.Command.Or(ReservedLabel));
+                curNode.ConnectedIrUnits.Add(UCodeBuilder.Command.Or(ReservedLabel));
             else if (curNode.SignPost.MeaningUnit == this.Equal)
-                curNode.ConnectedInterLanguage.Add(UCode.Command.Equal(ReservedLabel));
+                curNode.ConnectedIrUnits.Add(UCodeBuilder.Command.Equal(ReservedLabel));
             else if (curNode.SignPost.MeaningUnit == this.NotEqual)
-                curNode.ConnectedInterLanguage.Add(UCode.Command.NegativeEqual(ReservedLabel));
+                curNode.ConnectedIrUnits.Add(UCodeBuilder.Command.NegativeEqual(ReservedLabel));
             else if (curNode.SignPost.MeaningUnit == this.GreaterThan)
-                curNode.ConnectedInterLanguage.Add(UCode.Command.GreaterThan(ReservedLabel));
+                curNode.ConnectedIrUnits.Add(UCodeBuilder.Command.GreaterThan(ReservedLabel));
             else if (curNode.SignPost.MeaningUnit == this.GreaterEqual)
-                curNode.ConnectedInterLanguage.Add(UCode.Command.GreaterEqual(ReservedLabel));
+                curNode.ConnectedIrUnits.Add(UCodeBuilder.Command.GreaterEqual(ReservedLabel));
             else if (curNode.SignPost.MeaningUnit == this.LessThan)
-                curNode.ConnectedInterLanguage.Add(UCode.Command.LessThan(ReservedLabel));
+                curNode.ConnectedIrUnits.Add(UCodeBuilder.Command.LessThan(ReservedLabel));
             else if (curNode.SignPost.MeaningUnit == this.LessEqual)
-                curNode.ConnectedInterLanguage.Add(UCode.Command.LessEqual(ReservedLabel));
+                curNode.ConnectedIrUnits.Add(UCodeBuilder.Command.LessEqual(ReservedLabel));
 
             return result;
         }

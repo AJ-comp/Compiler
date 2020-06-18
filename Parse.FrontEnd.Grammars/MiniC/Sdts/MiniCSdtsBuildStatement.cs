@@ -4,6 +4,7 @@ using Parse.FrontEnd.Grammars.MiniC.SymbolTableFormat;
 using Parse.FrontEnd.InterLanguages;
 using System.Collections.Generic;
 using System.Linq;
+using IR = Parse.FrontEnd.InterLanguages.Datas;
 
 namespace Parse.FrontEnd.Grammars.MiniC.Sdts
 {
@@ -85,7 +86,7 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
             var logicalResult = (curNode[1] as AstNonTerminal).BuildLogic(p, astNodes);
 
             string newLabel = NewReservedLabel();
-            curNode.ConnectedInterLanguage.Add(UCode.Command.ConditionalJump(string.Empty, newLabel, false));
+            curNode.ConnectedIrUnits.Add(UCodeBuilder.Command.ConditionalJump(string.Empty, newLabel, false));
             astNodes.Add(curNode);
 
             // build statement node
@@ -119,7 +120,7 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
             var logicalResult = (curNode[1] as AstNonTerminal).BuildLogic(p, astNodes);
 
             string newLabel = NewReservedLabel();
-            curNode.ConnectedInterLanguage.Add(UCode.Command.ConditionalJump(string.Empty, newLabel, false));
+            curNode.ConnectedIrUnits.Add(UCodeBuilder.Command.ConditionalJump(string.Empty, newLabel, false));
             astNodes.Add(curNode);
 
             // build statement node
@@ -129,7 +130,7 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
             ReservedLabel = newLabel;
 
             // add UJP label (to back to start)
-            astNodes.Last().ConnectedInterLanguage.Add(UCode.Command.UnconditionalJump(string.Empty, startLabel));
+            astNodes.Last().ConnectedIrUnits.Add(UCodeBuilder.Command.UnconditionalJump(string.Empty, startLabel));
 
             return new AstBuildResult(null, null, true);
         }
@@ -144,7 +145,7 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
             var expNode = curNode[1] as AstNonTerminal;
             var expResult = expNode.BuildLogic(p, astNodes);
 
-            curNode.ConnectedInterLanguage.Add(UCode.Command.RetFromProc(ReservedLabel));
+            curNode.ConnectedIrUnits.Add(UCodeBuilder.Command.RetFromProc(ReservedLabel));
             astNodes.Add(curNode);
 
             return expResult;
@@ -162,7 +163,8 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
             var node1 = curNode[1] as AstNonTerminal;
             var result = node1.BuildLogic(p, astNodes);
 
-            curNode.ConnectedInterLanguage.Add(UCode.Command.ProcCall(ReservedLabel, funcName.Token.Input));
+            var options = new IROptions(ReservedLabel);
+            curNode.ConnectedIrUnits.Add(IRBuilder.CreateCall(options, funcName.Token.Input));
             astNodes.Add(curNode);
 
             return result;

@@ -20,27 +20,27 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
             if (curNode.SignPost.MeaningUnit == this.AddAssign)
             {
                 result = left.Value.Add(right);
-                curNode.ConnectedInterLanguage.Add(UCode.Command.Add(ReservedLabel));
+                ConnectBinOpToNode(curNode, left, right, IROperation.Add);
             }
             else if (curNode.SignPost.MeaningUnit == this.SubAssign)
             {
                 result = left.Value.Sub(right);
-                curNode.ConnectedInterLanguage.Add(UCode.Command.Sub(ReservedLabel));
+                ConnectBinOpToNode(curNode, left, right, IROperation.Sub);
             }
             else if (curNode.SignPost.MeaningUnit == this.MulAssign)
             {
                 result = left.Value.Mul(right);
-                curNode.ConnectedInterLanguage.Add(UCode.Command.Multiple(ReservedLabel));
+                ConnectBinOpToNode(curNode, left, right, IROperation.Mul);
             }
             else if (curNode.SignPost.MeaningUnit == this.DivAssign)
             {
                 result = left.Value.Div(right);
-                curNode.ConnectedInterLanguage.Add(UCode.Command.Div(ReservedLabel));
+                ConnectBinOpToNode(curNode, left, right, IROperation.Div);
             }
             else if (curNode.SignPost.MeaningUnit == this.ModAssign)
             {
                 result = left.Value.Mod(right);
-                curNode.ConnectedInterLanguage.Add(UCode.Command.Mod(ReservedLabel));
+                ConnectBinOpToNode(curNode, left, right, IROperation.Mod);
             }
 
             return result;
@@ -76,7 +76,7 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
             var calResult = CommonCalculateAssign(curNode, left, right);
 
             left.Value = calResult;
-            curNode.ConnectedInterLanguage.Add(UCode.Command.Store(ReservedLabel, left.BlockLevel, left.Offset, left.VarName));
+            curNode.ConnectedIrUnits.Add(UCodeBuilder.Command.Store(ReservedLabel, left.BlockLevel, left.Offset, left.VarName));
             astNodes.Add(curNode);
 
             return new AstBuildResult(null, null, true);
@@ -87,6 +87,7 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
         {
             curNode.ClearConnectedInfo();
             curNode.ConnectedSymbolTable = p.SymbolTable;
+            astNodes.Add(curNode);
 
             var result = (curNode[0] as AstNonTerminal).BuildLogic(p, astNodes);
             if(result.Data is LiteralData)
@@ -95,33 +96,21 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
             {
                 var varData = (p.SymbolTable as MiniCSymbolTable).AllVarList.GetVarByName((result.Data as VarData).VarName);
 
-                if (curNode.SignPost.MeaningUnit == this.PreInc)
-                {
-                    curNode.ConnectedInterLanguage.Add(UCode.Command.Increment(ReservedLabel));
-                    curNode.ConnectedInterLanguage.Add(UCode.Command.Store(ReservedLabel, varData.BlockLevel, varData.Offset));
-                }
-                else if (curNode.SignPost.MeaningUnit == this.PreDec)
-                {
-                    curNode.ConnectedInterLanguage.Add(UCode.Command.Decrement(ReservedLabel));
-                    curNode.ConnectedInterLanguage.Add(UCode.Command.Store(ReservedLabel, varData.BlockLevel, varData.Offset));
-                }
-                else if (curNode.SignPost.MeaningUnit == this.PostInc)
-                {
-                    curNode.ConnectedInterLanguage.Add(UCode.Command.Duplicate(ReservedLabel));
-                    curNode.ConnectedInterLanguage.Add(UCode.Command.Increment(ReservedLabel));
-                    curNode.ConnectedInterLanguage.Add(UCode.Command.Store(ReservedLabel, varData.BlockLevel, varData.Offset));
-                    curNode.ConnectedInterLanguage.Add(UCode.Command.Pop(ReservedLabel));
-                }
-                else if (curNode.SignPost.MeaningUnit == this.PostDec)
-                {
-                    curNode.ConnectedInterLanguage.Add(UCode.Command.Duplicate(ReservedLabel));
-                    curNode.ConnectedInterLanguage.Add(UCode.Command.Decrement(ReservedLabel));
-                    curNode.ConnectedInterLanguage.Add(UCode.Command.Store(ReservedLabel, varData.BlockLevel, varData.Offset));
-                    curNode.ConnectedInterLanguage.Add(UCode.Command.Pop(ReservedLabel));
-                }
-            }
+                var options = new IROptions(ReservedLabel);
+                if ((varData is VirtualVarData))
+                    return new AstBuildResult(result.Data, null, true);
 
-            astNodes.Add(curNode);
+                var irVarData = IRConverter.ToIRData(varData as RealVarData);
+
+                if (curNode.SignPost.MeaningUnit == this.PreInc)
+                    curNode.ConnectedIrUnits.Add(IRBuilder.CreatePreInc(options, irVarData));
+                else if (curNode.SignPost.MeaningUnit == this.PreDec)
+                    curNode.ConnectedIrUnits.Add(IRBuilder.CreatePreDec(options, irVarData));
+                else if (curNode.SignPost.MeaningUnit == this.PostInc)
+                    curNode.ConnectedIrUnits.Add(IRBuilder.CreatePostInc(options, irVarData));
+                else if (curNode.SignPost.MeaningUnit == this.PostDec)
+                    curNode.ConnectedIrUnits.Add(IRBuilder.CreatePostDec(options, irVarData));
+            }
 
             return new AstBuildResult(result.Data, null, true);
         }
@@ -153,8 +142,8 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
                 int factByte = intLiteralData.Value;
                 curNode.ConnectedErrInfoList.Add(new MeaningErrInfo(curNode, nameof(AlarmCodes.MCL0007), string.Format(AlarmCodes.MCL0007, varData.VarName, canByte, factByte)));
             }
-            curNode.ConnectedInterLanguage.Add(UCode.Command.Add(ReservedLabel));
-            curNode.ConnectedInterLanguage.Add(UCode.Command.Sti(ReservedLabel));
+            curNode.ConnectedIrUnits.Add(UCodeBuilder.Command.Add(ReservedLabel));
+            curNode.ConnectedIrUnits.Add(UCodeBuilder.Command.Sti(ReservedLabel));
 
             // collect nodes
             astNodes.Add(curNode);

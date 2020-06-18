@@ -7,4 +7,12 @@
             this.Name = "ARMv7_M";
         }
     }
+
+    public class ArmALFormat
+    {
+        public string OpCode { get; set; }
+        public string Operand1 { get; set; }
+        public string Operand2 { get; set; }
+        public string Comment { get; set; }
+    }
 }

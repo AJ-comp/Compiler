@@ -97,34 +97,19 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="MCL0000" xml:space="preserve">
-    <value>{0} function is already defined.</value>
+  <data name="Build" xml:space="preserve">
+    <value>Build</value>
   </data>
-  <data name="MCL0001" xml:space="preserve">
-    <value>{0} is not defined.</value>
+  <data name="BuildSolution" xml:space="preserve">
+    <value>Build solution</value>
   </data>
-  <data name="MCL0002" xml:space="preserve">
-    <value>Value can not be changed because the constant type.</value>
+  <data name="RebuildSolution" xml:space="preserve">
+    <value>Rebuild solution</value>
   </data>
-  <data name="MCL0003" xml:space="preserve">
-    <value>It can not be allocated because the data type differs.</value>
+  <data name="CleanBuild" xml:space="preserve">
+    <value>Clean solution</value>
   </data>
-  <data name="MCL0004" xml:space="preserve">
-    <value>lvalue have to be modifiable format.</value>
-  </data>
-  <data name="MCL0005" xml:space="preserve">
-    <value>{0} variable that not initialized is using.</value>
-  </data>
-  <data name="MCL0006" xml:space="preserve">
-    <value>Integer or enum type has to be to expression.</value>
-  </data>
-  <data name="MCL0007" xml:space="preserve">
-    <value>Buffer overflow fired while write {0}. writable byte is {1} but in fact write {2} byte.</value>
-  </data>
-  <data name="MCL0008" xml:space="preserve">
-    <value>The operand of Inc or Dec operator has to be variable, property or indexer.</value>
-  </data>
-  <data name="MCL0009" xml:space="preserve">
-    <value>The {0} identifier was already defined in the current block.</value>
+  <data name="DownloadAndDebug" xml:space="preserve">
+    <value>Download and debug</value>
   </data>
 </root>

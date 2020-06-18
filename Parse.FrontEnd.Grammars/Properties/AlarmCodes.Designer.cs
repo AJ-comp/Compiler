@@ -140,5 +140,14 @@ namespace Parse.FrontEnd.Grammars.Properties {
                 return ResourceManager.GetString("MCL0008", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   The {0} identifier was already defined in the current block.과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        internal static string MCL0009 {
+            get {
+                return ResourceManager.GetString("MCL0009", resourceCulture);
+            }
+        }
     }
 }

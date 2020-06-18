@@ -4,6 +4,10 @@ namespace Parse.FrontEnd.Grammars.MiniC.SymbolDataFormat.LiteralDataFormat
 {
     public class LongLiteralData : DecidedLiteralData
     {
+        private long _value = 0;
+
+        public long Value => (IsVirtual) ? _value : System.Convert.ToInt64(ValueToken?.Input);
+
         public LongLiteralData(object value, TokenData valueToken) : base(valueToken)
         {
         }

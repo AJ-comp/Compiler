@@ -2,8 +2,11 @@
 using Parse.FrontEnd.Grammars.MiniC.SymbolDataFormat.LiteralDataFormat;
 using Parse.FrontEnd.Grammars.MiniC.SymbolDataFormat.VarDataFormat;
 using Parse.FrontEnd.Grammars.MiniC.SymbolTableFormat;
+using Parse.FrontEnd.Grammars.Properties;
 using Parse.FrontEnd.InterLanguages;
 using System.Collections.Generic;
+
+using IR = Parse.FrontEnd.InterLanguages.Datas;
 
 namespace Parse.FrontEnd.Grammars.MiniC.Sdts
 {
@@ -83,7 +86,9 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
             var node1 = curNode[1] as AstNonTerminal;
             var compStResult = node1.BuildLogic(buildParams, astNodes);
 
-            // Even if doesn't exist a information in the node, it has to add.
+            IROptions options = new IROptions(ReservedLabel);
+            IR.FuncData funcData = IRConverter.ToIRData(funcHeadData);
+            curNode.ConnectedIrUnits.Add(IRBuilder.CreateDefineFunction(options, funcData, );
             astNodes.Add(curNode);
 
             return new AstBuildResult(funcHeadData, newSymbolTable, true);
@@ -109,8 +114,9 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
             var token = curNode[1] as AstTerminal;
             result.NameToken = token.Token;
 
-            // add function start IL
-            curNode.ConnectedInterLanguage.Add(UCode.Command.ProcStart(result.Name, 0, buildParams.BlockLevel, result.Name + " function"));
+            // add function start IR
+            //            curNode.ConnectedIrUnits.Add(IRBuilder.(result.Name, 0, buildParams.BlockLevel, result.Name + " function"));
+            // Even if doesn't exist a information in the node, it has to add.
             astNodes.Add(curNode);
 
             // build FormalPara node
@@ -137,12 +143,12 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
                 }
                 else if (astNonTerminal.SignPost.MeaningUnit == this.VoidNode)
                 {
-                    result.DataType = DataType.Void;
+                    result.DataType = SymbolTableFormat.DataType.Void;
                     result.DataTypeToken = (astNonTerminal.Items[0] as AstTerminal).Token;
                 }
                 else if (astNonTerminal.SignPost.MeaningUnit == this.IntNode)
                 {
-                    result.DataType = DataType.Int;
+                    result.DataType = SymbolTableFormat.DataType.Int;
                     result.DataTypeToken = (astNonTerminal.Items[0] as AstTerminal).Token;
                 }
             }
@@ -211,8 +217,7 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
                     result.DclItemData = nodeCheckResult.Data as DclItemData;
             }
 
-            curNode.ConnectedInterLanguage.Add(UCode.Command.DclVar(ReservedLabel, result.BlockLevel, result.Offset, 
-                                                                                                        result.DclItemData.Dimension, result.DclItemData.Name));
+            ConnectDclVarIRToNode(curNode, buildParams, result);
 
             astNodes.Add(curNode);
 
@@ -233,14 +238,6 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
 
                 var dclNode = item as AstNonTerminal;
                 var dclBuildResult = dclNode.BuildLogic(p, astNodes);
-
-                // set data
-                foreach(var dclData in dclBuildResult.Data as List<DclData>)
-                {
-                    // add symbol information to the symbol table.
-                    RealVarData varData = new RealVarData(dclData);
-                    newSymbolTable.VarDataList.Add(varData);
-                }
             }
 
             // Even if doesn't exist a information in the node, it has to add.
@@ -271,17 +268,16 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
                 var declBuildResult = declNT.BuildLogic(buildParams, astNodes);
                 var dclItemData = declBuildResult.Data as DclItemData;
 
-                result.Add(new DclData()
+                var dclData = new DclData()
                 {
                     BlockLevel = buildParams.BlockLevel,
                     Offset = buildParams.Offset,
                     DclSpecData = specData,
                     DclItemData = dclItemData
-                });
+                };
+                result.Add(dclData);
 
-                curNode.ConnectedInterLanguage.Add(UCode.Command.DclVar(ReservedLabel, buildParams.BlockLevel, 
-                                                                                                            buildParams.Offset, dclItemData.Dimension, dclItemData.Name));
-                buildParams.Offset++;
+                ConnectDclVarIRToNode(curNode, buildParams, dclData);
             }
 
             astNodes.Add(curNode);
@@ -366,7 +362,7 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
             curNode.ConnectedSymbolTable = p.SymbolTable;
 
             IntLiteralData result = new IntLiteralData((curNode.Items[0] as AstTerminal).Token);
-            curNode.ConnectedInterLanguage.Add(UCode.Command.DclValue(ReservedLabel, result.Value));
+            curNode.ConnectedIrUnits.Add(UCodeBuilder.Command.DclValue(ReservedLabel, result.Value));
             astNodes.Add(curNode);
 
             return new AstBuildResult(result, null, true);

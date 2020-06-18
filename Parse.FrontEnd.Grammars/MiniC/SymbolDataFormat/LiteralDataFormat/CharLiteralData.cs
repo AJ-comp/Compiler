@@ -4,6 +4,9 @@ namespace Parse.FrontEnd.Grammars.MiniC.SymbolDataFormat.LiteralDataFormat
 {
     public class CharLiteralData : DecidedLiteralData
     {
+        private char _value;
+
+        public char Value => (IsVirtual) ? _value : System.Convert.ToChar(ValueToken?.Input);
         public CharLiteralData(object value, TokenData valueToken) : base(valueToken)
         {
         }

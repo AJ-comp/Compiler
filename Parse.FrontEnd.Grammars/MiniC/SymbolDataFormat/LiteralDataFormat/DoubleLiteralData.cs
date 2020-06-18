@@ -4,6 +4,10 @@ namespace Parse.FrontEnd.Grammars.MiniC.SymbolDataFormat.LiteralDataFormat
 {
     public class DoubleLiteralData : DecidedLiteralData
     {
+        private double _value = 0;
+
+        public double Value => (IsVirtual) ? _value : System.Convert.ToDouble(ValueToken?.Input);
+
         public DoubleLiteralData(object value, TokenData valueToken) : base(valueToken)
         {
         }

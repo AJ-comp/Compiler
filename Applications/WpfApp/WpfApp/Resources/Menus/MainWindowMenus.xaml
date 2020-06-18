@@ -67,6 +67,14 @@
             </MenuItem>
         </MenuItem>
 
+        <!-- Build -->
+        <MenuItem Header="{lex:Loc WindowMenuResources:Build}" InputGestureText="Alt+B">
+            <MenuItem Header="{lex:Loc WindowMenuResources:BuildSolution}" InputGestureText="F6" Command="{Binding BuildSolutionCommand}"/>
+            <MenuItem Header="{lex:Loc WindowMenuResources:ReBuildSolution}" Command="{Binding ReBuildSolutionCommand}"/>
+            <MenuItem Header="{lex:Loc WindowMenuResources:CleanSolution}" Command="{Binding CleanSolutionCommand}"/>
+            <MenuItem Header="{lex:Loc WindowMenuResources:DownloadAndDebug}" Command="{Binding DownloadAndDebugCommand}"/>
+        </MenuItem>
+
         <!-- Tools -->
         <MenuItem Header="{lex:Loc Key=Tools}" InputGestureText="Alt+T">
             <MenuItem Command="{x:Static commands:MenuActionCommands.ShowOptionDialog}"/>

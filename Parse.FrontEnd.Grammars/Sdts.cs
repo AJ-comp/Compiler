@@ -1,6 +1,7 @@
 ﻿using Parse.FrontEnd.Ast;
+using Parse.FrontEnd.InterLanguages;
+using Parse.FrontEnd.InterLanguages.UCode;
 using System;
-using System.Collections.Generic;
 using System.Reflection;
 
 namespace Parse.FrontEnd.Grammars
@@ -32,6 +33,8 @@ namespace Parse.FrontEnd.Grammars
         public MeaningUnit PreDec { get; } = new MeaningUnit("PreDec");
         public MeaningUnit PostInc { get; } = new MeaningUnit("PostInc");
         public MeaningUnit PostDec { get; } = new MeaningUnit("PostDec");
+
+        public IRBuilder IRBuilder { get; set; } = new UCodeBuilder();
 
         protected Sdts(KeyManager keyManager)
         {

@@ -1,4 +1,7 @@
-﻿namespace Parse.BackEnd.Target.ARMv7.MSeries.CortexM3Models
+﻿using Parse.FrontEnd.InterLanguages;
+using System.Collections.Generic;
+
+namespace Parse.BackEnd.Target.ARMv7.MSeries.CortexM3Models
 {
     public class CortexM3 : ARMv7_M
     {
@@ -6,6 +9,8 @@
         public MemoryInfo FlashMemory { get; set; }
         public MemoryInfo RAM { get; set; }
         public MemoryInfo EEPROM { get; set; }
+
+        public int seq = 0;
 
         public CortexM3()
         {

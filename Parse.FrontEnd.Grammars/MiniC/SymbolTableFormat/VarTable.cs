@@ -1,7 +1,6 @@
 ﻿using Parse.FrontEnd.Grammars.MiniC.SymbolDataFormat.LiteralDataFormat;
 using Parse.FrontEnd.Grammars.MiniC.SymbolDataFormat.VarDataFormat;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace Parse.FrontEnd.Grammars.MiniC.SymbolTableFormat
 {

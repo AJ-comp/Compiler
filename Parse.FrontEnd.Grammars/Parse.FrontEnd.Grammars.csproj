@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AJGrammar.cs" />
+    <Compile Include="IRConverter.cs" />
     <Compile Include="MiniC\AstNodes\AstNode.cs" />
     <Compile Include="MiniC\AstNodes\ConstNode.cs" />
     <Compile Include="MiniC\AstNodes\DclSpecNode.cs" />

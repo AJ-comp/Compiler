@@ -2,6 +2,7 @@
 using Parse.FrontEnd.Grammars;
 using Parse.FrontEnd.Grammars.MiniC;
 using Parse.FrontEnd.Grammars.MiniC.Sdts;
+using System;
 using System.Collections.Generic;
 
 namespace ApplicationLayer.ViewModels
@@ -22,6 +23,16 @@ namespace ApplicationLayer.ViewModels
             }
 
             return result;
+        }
+
+        private static void ConfCategoryVisible(AstSymbol astSymbol, IReadOnlyList<UCodeDisplayModel> allNode)
+        {
+            var model = FindMatchedModel(astSymbol, allNode);
+            if (model != null)
+            {
+                model.CategoryVisible = true;
+                model.CategoryConfAction?.Invoke(model, allNode);
+            }
         }
 
         /// <summary>
@@ -45,27 +56,30 @@ namespace ApplicationLayer.ViewModels
 
         private static void ExpStCategoryConf(UCodeDisplayModel nodeInfo, IReadOnlyList<UCodeDisplayModel> allNode)
         {
-            if (nodeInfo.CategoryVisible)
-            {
-                var astNonTerminal = nodeInfo.Node as AstNonTerminal;
+            if (nodeInfo.CategoryVisible == false) return;
 
-                var model = FindMatchedModel(astNonTerminal[0], allNode);
-                if (model != null) model.CategoryVisible = true;
-            }
+            var astNonTerminal = nodeInfo.Node as AstNonTerminal;
+
+            ConfCategoryVisible(astNonTerminal[0], allNode);
+        }
+
+        private static void AllChangeableCategoryConf(UCodeDisplayModel nodeInfo, IReadOnlyList<UCodeDisplayModel> allNode)
+        {
+            if (nodeInfo.CategoryVisible == false) return;
+
+            var astNonTerminal = nodeInfo.Node as AstNonTerminal;
+
+            foreach (var item in astNonTerminal) ConfCategoryVisible(item, allNode);
         }
 
         private static void CompoundStCategoryConf(UCodeDisplayModel nodeInfo, IReadOnlyList<UCodeDisplayModel> allNode)
         {
-            if (nodeInfo.CategoryVisible)
-            {
-                var astNonTerminal = nodeInfo.Node as AstNonTerminal;
+            if (nodeInfo.CategoryVisible == false) return;
 
-                var model = FindMatchedModel(astNonTerminal[0], allNode);
-                if (model != null) model.CategoryVisible = true;
+            var astNonTerminal = nodeInfo.Node as AstNonTerminal;
 
-                model = FindMatchedModel(astNonTerminal[1], allNode);
-                if (model != null) model.CategoryVisible = true;
-            }
+            ConfCategoryVisible(astNonTerminal[0], allNode);
+            ConfCategoryVisible(astNonTerminal[1], allNode);
         }
 
         private static void IfStCategoryConf(UCodeDisplayModel nodeInfo, IReadOnlyList<UCodeDisplayModel> allNode)
@@ -75,8 +89,7 @@ namespace ApplicationLayer.ViewModels
             nodeInfo.CategoryVisible = true;
             nodeInfo.CategoryName = "if ( " + (astNonTerminal[1] as AstNonTerminal).ConnectedParseTree.AllInputDatas + " )";
 
-            var model = FindMatchedModel(astNonTerminal[2], allNode);
-            if (model != null) model.CategoryVisible = true;
+            ConfCategoryVisible(astNonTerminal[2], allNode);
         }
 
         private static void WhileStCategoryConf(UCodeDisplayModel nodeInfo, IReadOnlyList<UCodeDisplayModel> allNode)
@@ -86,8 +99,7 @@ namespace ApplicationLayer.ViewModels
             nodeInfo.CategoryVisible = true;
             nodeInfo.CategoryName = "while ( " + (astNonTerminal[1] as AstNonTerminal).ConnectedParseTree.AllInputDatas + " )";
 
-            var model = FindMatchedModel(astNonTerminal[2], allNode);
-            if (model != null) model.CategoryVisible = true;
+            ConfCategoryVisible(astNonTerminal[2], allNode);
         }
 
         private static IReadOnlyList<UCodeDisplayModel> Convert(IReadOnlyList<AstSymbol> nodes, MiniCSdts sdts)
@@ -114,11 +126,16 @@ namespace ApplicationLayer.ViewModels
                 if (astNonTerminal.SignPost.MeaningUnit == sdts.FuncHead) nodeInfo.CategoryVisible = true;
                 else if (astNonTerminal.SignPost.MeaningUnit == sdts.Dcl) nodeInfo.CategoryVisible = true;
                 else if (astNonTerminal.SignPost.MeaningUnit == sdts.ParamDcl) nodeInfo.CategoryAttachPos = UCodeDisplayModel.AttatchCategoryPosition.Up;
-                else if (astNonTerminal.SignPost.MeaningUnit == sdts.ExpSt) ExpStCategoryConf(nodeInfo, allNode);
-                else if (astNonTerminal.SignPost.MeaningUnit == sdts.CompoundSt) CompoundStCategoryConf(nodeInfo, allNode);
-                else if (astNonTerminal.SignPost.MeaningUnit == sdts.IfSt) IfStCategoryConf(nodeInfo, allNode);
-                else if (astNonTerminal.SignPost.MeaningUnit == sdts.WhileSt) WhileStCategoryConf(nodeInfo, allNode);
+                else if (astNonTerminal.SignPost.MeaningUnit == sdts.DclList) nodeInfo.CategoryConfAction = AllChangeableCategoryConf;
+                else if (astNonTerminal.SignPost.MeaningUnit == sdts.StatList) nodeInfo.CategoryConfAction = AllChangeableCategoryConf;
+                else if (astNonTerminal.SignPost.MeaningUnit == sdts.ExpSt) nodeInfo.CategoryConfAction = ExpStCategoryConf;
+                else if (astNonTerminal.SignPost.MeaningUnit == sdts.CompoundSt) nodeInfo.CategoryConfAction = CompoundStCategoryConf;
+                else if (astNonTerminal.SignPost.MeaningUnit == sdts.IfSt) nodeInfo.CategoryConfAction = IfStCategoryConf;
+                else if (astNonTerminal.SignPost.MeaningUnit == sdts.WhileSt) nodeInfo.CategoryConfAction = WhileStCategoryConf;
             }
+
+            foreach (var nodeInfo in allNode)
+                nodeInfo.CategoryConfAction?.Invoke(nodeInfo, allNode);
 
             return RemoveUselessNodes(allNode);
         }
@@ -144,6 +161,8 @@ namespace ApplicationLayer.ViewModels
         public bool CategoryVisible { get; set; } = false;
         public string CategoryName { get; set; } = string.Empty;
 
+        public Action<UCodeDisplayModel, IReadOnlyList<UCodeDisplayModel>> CategoryConfAction { get; set; }
+
         public UCodeDisplayModel(AstSymbol node)
         {
             Node = node;
@@ -151,20 +170,23 @@ namespace ApplicationLayer.ViewModels
 
         public override string ToString()
         {
-            string result = string.Empty;
+            string result0 = string.Empty;
+            string format = "{0}, {1}";
 
             if(Node is AstTerminal)
             {
                 var ast = Node as AstTerminal;
-                result = ast.Token.Input;
+                result0 = ast.Token.Input;
             }
             else if(Node is AstNonTerminal)
             {
                 var ast = Node as AstNonTerminal;
-                result = ast.SignPost.Name;
+                result0 = ast.SignPost.Name;
             }
 
-            return result;
+            var result1 = CategoryVisible ? true : false;
+
+            return string.Format(format, result0, result1);
         }
     }
 }

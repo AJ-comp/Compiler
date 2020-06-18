@@ -158,6 +158,7 @@ namespace ApplicationLayer.WpfApp.ViewModels
         }
         #endregion
 
+        #region Command related to ShowToolWindow
         private RelayCommand<ToolWindowViewModel> showToolWindowCommand;
         public RelayCommand<ToolWindowViewModel> ShowToolWindowCommand
         {
@@ -176,6 +177,25 @@ namespace ApplicationLayer.WpfApp.ViewModels
 
             this.VisibleToolItems.Add(obj);
         }
+        #endregion
+
+        #region Command related to BuildSolutionCommand
+        private RelayCommand buildSolutionCommand;
+        public RelayCommand BuildSolutionCommand
+        {
+            get
+            {
+                if (buildSolutionCommand == null)
+                    buildSolutionCommand = new RelayCommand(OnBuildSolution);
+
+                return buildSolutionCommand;
+            }
+        }
+
+        private void OnBuildSolution()
+        {
+        }
+        #endregion
 
         private void InitParserToUse()
         {
