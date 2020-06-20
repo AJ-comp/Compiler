@@ -24,14 +24,14 @@ namespace Parse.FrontEnd.InterLanguages.LLVM.Models
             return newItem;
         }
 
-        public GlobalSSVar CreateNewGlobalTable(VarData varData)
+        public GlobalSSVar CreateNewGlobalTable(IRVarData varData)
         {
             GlobalSSVar newItem = new GlobalSSVar(varData.Type, varData);
 
             return newItem;
         }
 
-        public LocalSSVar CreateToLocalTable(VarData varData)
+        public LocalSSVar CreateToLocalTable(IRVarData varData)
         {
             LocalSSVar newItem = new LocalSSVar(NextOffset, varData.Type, varData);
 
@@ -50,7 +50,7 @@ namespace Parse.FrontEnd.InterLanguages.LLVM.Models
         /// </summary>
         /// <param name="varData"></param>
         /// <returns></returns>
-        public SSVarData Get(VarData varData)
+        public SSVarData Get(IRVarData varData)
         {
             SSVarData result = null;
 

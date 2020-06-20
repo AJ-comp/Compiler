@@ -2,7 +2,7 @@
 {
     public class LLVMConverter
     {
-        public static string ToString(DataType type)
+        public static string ToInstructionName(DataType type)
         {
             string result = string.Empty;
 
@@ -26,7 +26,7 @@
             return result;
         }
 
-        public static string ToString(ReturnType type)
+        public static string ToInstructionName(ReturnType type)
         {
             string result = string.Empty;
 
@@ -39,19 +39,17 @@
             return result;
         }
 
-        public static string ToString(IROperation operation)
+        public static string ToInstructionName(IROperation operation)
         {
             string result = string.Empty;
 
             if (operation == IROperation.Add) result = "add";
             else if (operation == IROperation.Sub) result = "sub";
             else if (operation == IROperation.Mul) result = "mul";
-            else if (operation == IROperation.Div) result = "div";
-            else if (operation == IROperation.Mod) result = "mod";
+            else if (operation == IROperation.Div) result = "sdiv";
+            else if (operation == IROperation.Mod) result = "srem";
 
             return result;
         }
-
-        public static string LocalOffsetName(int offset) => "%" + offset;
     }
 }

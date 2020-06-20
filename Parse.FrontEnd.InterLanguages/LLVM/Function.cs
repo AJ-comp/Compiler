@@ -7,18 +7,18 @@ namespace Parse.FrontEnd.InterLanguages.LLVM
     public class Function : List<IRUnit>, IRUnit
     {
         private string _comment;
-        private FuncData _funcData;
+        private IRFuncData _funcData;
 
         public string Label;
 
         public string Comment => ";" + _comment;
 
-        public Function(FuncData funcData)
+        public Function(IRFuncData funcData)
         {
             _funcData = funcData;
         }
 
-        public Function(FuncData funcData, IRBlock block) : this(funcData)
+        public Function(IRFuncData funcData, IRBlock block) : this(funcData)
         {
             this.AddRange(block);
         }

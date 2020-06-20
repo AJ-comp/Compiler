@@ -17,44 +17,27 @@ namespace Parse.FrontEnd.InterLanguages.UCode
     {
         public override bool IsSSA => false;
 
-        public override int OffsetForSSA { get; set; }
-
-        public override IRFormat CreateBinOP(IROptions options, VarData left, VarData right, IROperation operation)
+        public override IRFormat CreateBinOP(IROptions options, IRData left, IRData right, IROperation operation)
         {
             throw new System.NotImplementedException();
         }
 
-        public override IRFormat CreateBinOP(IROptions options, VarData left, LiteralData right, IROperation operation)
+        public override IRFormat CreateCall(IROptions options, IRFuncData funcData, params IRVarData[] paramDatas)
         {
             throw new System.NotImplementedException();
         }
 
-        public override IRFormat CreateBinOP(IROptions options, LiteralData left, VarData right, IROperation operation)
+        public override IRFormat CreateDclFunction(IROptions options, IRFuncData funcData)
         {
             throw new System.NotImplementedException();
         }
 
-        public override IRFormat CreateBinOP(IROptions options, LiteralData left, LiteralData right, IROperation operation)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public override IRFormat CreateCall(IROptions options, FuncData funcData, params VarData[] paramDatas)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public override IRFormat CreateDclFunction(IROptions options, FuncData funcData)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public override IRFormat CreateDclVar(IROptions options, VarData varData, bool bGlobal)
+        public override IRFormat CreateDclVar(IROptions options, IRVarData varData, bool bGlobal)
         {
             return new IRFormat(Command.DclVar(options.Label, varData.Block, varData.Offset, varData.Length, options.Comment));
         }
 
-        public override IRFormat CreateDclVarAndInit(IROptions options, VarData varData, VarData initInfo, bool bGlobal)
+        public override IRFormat CreateDclVarAndInit(IROptions options, IRVarData varData, IRVarData initInfo, bool bGlobal)
         {
             var block = new IRBlock()
             {
@@ -65,37 +48,37 @@ namespace Parse.FrontEnd.InterLanguages.UCode
             return new IRFormat(block);
         }
 
-        public override IRFormat CreateDclVarAndInit(IROptions options, VarData VarData, LiteralData initValue, bool bGlobal)
+        public override IRFormat CreateDclVarAndInit(IROptions options, IRVarData VarData, IRLiteralData initValue, bool bGlobal)
         {
             throw new System.NotImplementedException();
         }
 
-        public override IRFormat CreateDefineFunction(IROptions options, FuncData funcData, IRBlock stmt)
+        public override IRFormat CreateDefineFunction(IROptions options, IRFuncData funcData, IRBlock stmt)
         {
             throw new System.NotImplementedException();
         }
 
-        public override IRFormat CreateLoadVar(IROptions options, VarData VarData, bool bGlobal)
+        public override IRFormat CreateLoadVar(IROptions options, IRVarData VarData, bool bGlobal)
         {
             throw new System.NotImplementedException();
         }
 
-        public override IRFormat CreatePostDec(IROptions options, VarData varData)
+        public override IRFormat CreatePostDec(IROptions options, IRVarData varData)
         {
             throw new System.NotImplementedException();
         }
 
-        public override IRFormat CreatePostInc(IROptions options, VarData varData)
+        public override IRFormat CreatePostInc(IROptions options, IRVarData varData)
         {
             throw new System.NotImplementedException();
         }
 
-        public override IRFormat CreatePreDec(IROptions options, VarData varData)
+        public override IRFormat CreatePreDec(IROptions options, IRVarData varData)
         {
             throw new System.NotImplementedException();
         }
 
-        public override IRFormat CreatePreInc(IROptions options, VarData varData)
+        public override IRFormat CreatePreInc(IROptions options, IRVarData varData)
         {
             throw new System.NotImplementedException();
         }
@@ -123,7 +106,7 @@ namespace Parse.FrontEnd.InterLanguages.UCode
             public static Instruction ProcEnd(string labelName, string comment = "")
                 => UCodeFormat(labelName, OpCodeKind.end, comment);
 
-            public static Instruction ProcCall(string labelName, string procName, params ParamData[] param)
+            public static Instruction ProcCall(string labelName, string procName, params IRParamData[] param)
                 => UCodeFormat(labelName, OpCodeKind.call, procName, procName);
 
             public static Instruction RetFromProc(string labelName, string comment = "")

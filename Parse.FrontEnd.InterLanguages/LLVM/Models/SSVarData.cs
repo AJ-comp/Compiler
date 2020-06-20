@@ -2,7 +2,7 @@
 
 namespace Parse.FrontEnd.InterLanguages.LLVM.Models
 {
-    public abstract class SSVarData
+    public abstract class SSVarData : IRData
     {
         public abstract int Offset { get; }
         public abstract DataType Type { get; }
@@ -14,9 +14,9 @@ namespace Parse.FrontEnd.InterLanguages.LLVM.Models
             {
                 string result = "%" + Offset;
 
-                if (LinkedObject is VarData)
+                if (LinkedObject is IRVarData)
                 {
-                    var linkedData = LinkedObject as VarData;
+                    var linkedData = LinkedObject as IRVarData;
                     if (linkedData.IsGlobal) result = "@" + linkedData.Name;
                 }
 

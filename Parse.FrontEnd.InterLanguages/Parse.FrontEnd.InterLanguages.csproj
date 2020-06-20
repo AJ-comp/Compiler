@@ -41,13 +41,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Datas\FuncData.cs" />
+    <Compile Include="Datas\LiteralDatas\IRDoubleLiteralData.cs" />
+    <Compile Include="Datas\IRFuncData.cs" />
+    <Compile Include="Datas\LiteralDatas\IRIntegerLiteralData.cs" />
+    <Compile Include="Datas\IRData.cs" />
+    <Compile Include="IRConverter.cs" />
     <Compile Include="LLVM\Models\GlobalSSVar.cs" />
     <Compile Include="LLVM\Models\LocalSSVar.cs" />
     <Compile Include="LLVM\Models\SSVarTable.cs" />
     <Compile Include="IRBlock.cs" />
     <Compile Include="IRFormat.cs" />
-    <Compile Include="Datas\LiteralData.cs" />
+    <Compile Include="Datas\LiteralDatas\IRLiteralData.cs" />
     <Compile Include="IRUnit.cs" />
     <Compile Include="LLVM\LLVMChecker.cs" />
     <Compile Include="LLVM\LLVMConverter.cs" />
@@ -57,9 +61,9 @@
     <Compile Include="IRBuilder.cs" />
     <Compile Include="IROperation.cs" />
     <Compile Include="IROptions.cs" />
-    <Compile Include="Datas\VarData.cs" />
+    <Compile Include="Datas\IRVarData.cs" />
     <Compile Include="IRTypes.cs" />
-    <Compile Include="Datas\ParamData.cs" />
+    <Compile Include="Datas\IRParamData.cs" />
     <Compile Include="LLVM\Models\SSVarData.cs" />
     <Compile Include="UCode\UCodeBuilder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

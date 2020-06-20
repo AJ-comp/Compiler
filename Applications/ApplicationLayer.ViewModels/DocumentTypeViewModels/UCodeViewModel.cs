@@ -59,7 +59,7 @@ namespace ApplicationLayer.ViewModels.DocumentTypeViewModels
                     if (node.ConnectedErrInfoList.Count > 0)
                         leftUnDoneList.AddRange(node.ConnectedErrInfoList);
                     else
-                        leftUnDoneList.AddRange(node.ConnectedIrUnits);
+                        leftUnDoneList.Add(node.ConnectedIrUnit);
 
                     continue;
                 }
@@ -69,11 +69,11 @@ namespace ApplicationLayer.ViewModels.DocumentTypeViewModels
                 if (nodeInfo.CategoryVisible == false)
                 {
                     if(nodeInfo.CategoryAttachPos == UCodeDisplayModel.AttatchCategoryPosition.Down)
-                        leftUnDoneList.AddRange(node.ConnectedIrUnits);
+                        leftUnDoneList.Add(node.ConnectedIrUnit);
                     else
                     {
                         // add a IL of the current node to the parent node
-                        foreach (var il in node.ConnectedIrUnits)
+                        foreach (var il in node.ConnectedIrUnit)
                             parentNode.AddChildren(CreateTreeNodeModel(il));
                     }
 
@@ -91,7 +91,7 @@ namespace ApplicationLayer.ViewModels.DocumentTypeViewModels
                     leftUnDoneList.Clear();
 
                     // add a IL of the current node to the parent node
-                    foreach (var il in node.ConnectedIrUnits)
+                    foreach (var il in node.ConnectedIrUnit)
                         parentNode.AddChildren(CreateTreeNodeModel(il));
 
                     Root.AddChildren(parentNode);

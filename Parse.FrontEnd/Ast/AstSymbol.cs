@@ -9,9 +9,9 @@ namespace Parse.FrontEnd.Ast
 
         public SymbolTable ConnectedSymbolTable { get; set; }
         public MeaningErrInfoList ConnectedErrInfoList { get; } = new MeaningErrInfoList();
-        public List<object> ConnectedIrUnits { get; } = new List<object>();
+        public object ConnectedIrUnit { get; set; }
 
-        public bool IsDummy => (ConnectedErrInfoList.Count == 0 && ConnectedIrUnits.Count == 0) ? true : false;
+        public bool IsDummy => (ConnectedErrInfoList.Count == 0 && ConnectedIrUnit == null) ? true : false;
 
         /// <summary>
         /// Remove all connected information on this tree.
@@ -20,7 +20,6 @@ namespace Parse.FrontEnd.Ast
         {
             ConnectedSymbolTable = null;
             ConnectedErrInfoList.Clear();
-            ConnectedIrUnits.Clear();
         }
 
         public abstract string ToGrammarString();

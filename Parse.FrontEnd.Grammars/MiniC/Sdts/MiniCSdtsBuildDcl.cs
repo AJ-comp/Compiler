@@ -87,8 +87,8 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
             var compStResult = node1.BuildLogic(buildParams, astNodes);
 
             IROptions options = new IROptions(ReservedLabel);
-            IR.FuncData funcData = IRConverter.ToIRData(funcHeadData);
-            curNode.ConnectedIrUnits.Add(IRBuilder.CreateDefineFunction(options, funcData, );
+            IR.IRFuncData funcData = IRConverter.ToIRData(funcHeadData);
+            curNode.ConnectedIrUnit = IRBuilder.CreateDefineFunction(options, funcData, );
             astNodes.Add(curNode);
 
             return new AstBuildResult(funcHeadData, newSymbolTable, true);
@@ -362,7 +362,7 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
             curNode.ConnectedSymbolTable = p.SymbolTable;
 
             IntLiteralData result = new IntLiteralData((curNode.Items[0] as AstTerminal).Token);
-            curNode.ConnectedIrUnits.Add(UCodeBuilder.Command.DclValue(ReservedLabel, result.Value));
+            curNode.ConnectedIrUnit = UCodeBuilder.Command.DclValue(ReservedLabel, result.Value);
             astNodes.Add(curNode);
 
             return new AstBuildResult(result, null, true);

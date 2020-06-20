@@ -2,7 +2,7 @@
 
 namespace Parse.FrontEnd.InterLanguages.Datas
 {
-    public class VarData
+    public class IRVarData : IRData
     {
         public DataType Type { get; }
         public string Name { get; }
@@ -12,7 +12,7 @@ namespace Parse.FrontEnd.InterLanguages.Datas
         public int Length { get; }
         public bool IsGlobal => (Block == 0) ? true : false;
 
-        public VarData(DataType type, string name, int block, int offset, int length)
+        public IRVarData(DataType type, string name, int block, int offset, int length)
         {
             Type = type;
             Name = name;
@@ -23,7 +23,7 @@ namespace Parse.FrontEnd.InterLanguages.Datas
 
         public override bool Equals(object obj)
         {
-            return obj is VarData data &&
+            return obj is IRVarData data &&
                    Name == data.Name &&
                    Block == data.Block &&
                    Offset == data.Offset;

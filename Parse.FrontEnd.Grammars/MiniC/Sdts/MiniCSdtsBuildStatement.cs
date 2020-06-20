@@ -86,7 +86,7 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
             var logicalResult = (curNode[1] as AstNonTerminal).BuildLogic(p, astNodes);
 
             string newLabel = NewReservedLabel();
-            curNode.ConnectedIrUnits.Add(UCodeBuilder.Command.ConditionalJump(string.Empty, newLabel, false));
+            curNode.ConnectedIrUnit = UCodeBuilder.Command.ConditionalJump(string.Empty, newLabel, false);
             astNodes.Add(curNode);
 
             // build statement node
@@ -120,7 +120,7 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
             var logicalResult = (curNode[1] as AstNonTerminal).BuildLogic(p, astNodes);
 
             string newLabel = NewReservedLabel();
-            curNode.ConnectedIrUnits.Add(UCodeBuilder.Command.ConditionalJump(string.Empty, newLabel, false));
+            curNode.ConnectedIrUnit = UCodeBuilder.Command.ConditionalJump(string.Empty, newLabel, false);
             astNodes.Add(curNode);
 
             // build statement node
@@ -130,7 +130,7 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
             ReservedLabel = newLabel;
 
             // add UJP label (to back to start)
-            astNodes.Last().ConnectedIrUnits.Add(UCodeBuilder.Command.UnconditionalJump(string.Empty, startLabel));
+            astNodes.Last().ConnectedIrUnit = UCodeBuilder.Command.UnconditionalJump(string.Empty, startLabel);
 
             return new AstBuildResult(null, null, true);
         }
@@ -145,7 +145,7 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
             var expNode = curNode[1] as AstNonTerminal;
             var expResult = expNode.BuildLogic(p, astNodes);
 
-            curNode.ConnectedIrUnits.Add(UCodeBuilder.Command.RetFromProc(ReservedLabel));
+            curNode.ConnectedIrUnit = UCodeBuilder.Command.RetFromProc(ReservedLabel);
             astNodes.Add(curNode);
 
             return expResult;
@@ -164,7 +164,7 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
             var result = node1.BuildLogic(p, astNodes);
 
             var options = new IROptions(ReservedLabel);
-            curNode.ConnectedIrUnits.Add(IRBuilder.CreateCall(options, funcName.Token.Input));
+            curNode.ConnectedIrUnit = IRBuilder.CreateCall(options, funcName.Token.Input);
             astNodes.Add(curNode);
 
             return result;

@@ -4,6 +4,7 @@ using Parse.FrontEnd.Grammars.MiniC.SymbolDataFormat.VarDataFormat;
 using Parse.FrontEnd.Grammars.MiniC.SymbolTableFormat;
 using Parse.FrontEnd.Grammars.Properties;
 using Parse.FrontEnd.InterLanguages;
+using Parse.FrontEnd.InterLanguages.Datas;
 using System;
 using System.Collections.Generic;
 
@@ -76,7 +77,7 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
             var calResult = CommonCalculateAssign(curNode, left, right);
 
             left.Value = calResult;
-            curNode.ConnectedIrUnits.Add(UCodeBuilder.Command.Store(ReservedLabel, left.BlockLevel, left.Offset, left.VarName));
+            curNode.ConnectedIrUnit = UCodeBuilder.Command.Store(ReservedLabel, left.BlockLevel, left.Offset, left.VarName);
             astNodes.Add(curNode);
 
             return new AstBuildResult(null, null, true);
@@ -100,16 +101,16 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
                 if ((varData is VirtualVarData))
                     return new AstBuildResult(result.Data, null, true);
 
-                var irVarData = IRConverter.ToIRData(varData as RealVarData);
+                var irVarData = IRConverter.ToIRData(varData as RealVarData) as IRVarData;
 
                 if (curNode.SignPost.MeaningUnit == this.PreInc)
-                    curNode.ConnectedIrUnits.Add(IRBuilder.CreatePreInc(options, irVarData));
+                    curNode.ConnectedIrUnit = IRBuilder.CreatePreInc(options, irVarData);
                 else if (curNode.SignPost.MeaningUnit == this.PreDec)
-                    curNode.ConnectedIrUnits.Add(IRBuilder.CreatePreDec(options, irVarData));
+                    curNode.ConnectedIrUnit = IRBuilder.CreatePreDec(options, irVarData);
                 else if (curNode.SignPost.MeaningUnit == this.PostInc)
-                    curNode.ConnectedIrUnits.Add(IRBuilder.CreatePostInc(options, irVarData));
+                    curNode.ConnectedIrUnit = IRBuilder.CreatePostInc(options, irVarData);
                 else if (curNode.SignPost.MeaningUnit == this.PostDec)
-                    curNode.ConnectedIrUnits.Add(IRBuilder.CreatePostDec(options, irVarData));
+                    curNode.ConnectedIrUnit = IRBuilder.CreatePostDec(options, irVarData);
             }
 
             return new AstBuildResult(result.Data, null, true);
@@ -142,8 +143,8 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
                 int factByte = intLiteralData.Value;
                 curNode.ConnectedErrInfoList.Add(new MeaningErrInfo(curNode, nameof(AlarmCodes.MCL0007), string.Format(AlarmCodes.MCL0007, varData.VarName, canByte, factByte)));
             }
-            curNode.ConnectedIrUnits.Add(UCodeBuilder.Command.Add(ReservedLabel));
-            curNode.ConnectedIrUnits.Add(UCodeBuilder.Command.Sti(ReservedLabel));
+            curNode.ConnectedIrUnit = UCodeBuilder.Command.Add(ReservedLabel);
+            curNode.ConnectedIrUnit = UCodeBuilder.Command.Sti(ReservedLabel);
 
             // collect nodes
             astNodes.Add(curNode);
