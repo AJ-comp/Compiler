@@ -119,25 +119,13 @@ namespace Parse.FrontEnd.RegularGrammar
             return result.Substring(0, result.Length - Convert.ToBridgeSymbol(BridgeType.Concatenation).Length);
         }
 
-        public int IndexOf(Symbol item)
-        {
-            return ((IList<Symbol>)symbols).IndexOf(item);
-        }
+        public int IndexOf(Symbol item) => ((IList<Symbol>)symbols).IndexOf(item);
 
-        public void Insert(int index, Symbol item)
-        {
-            ((IList<Symbol>)symbols).Insert(index, item);
-        }
+        public void Insert(int index, Symbol item) => ((IList<Symbol>)symbols).Insert(index, item);
 
-        public void RemoveAt(int index)
-        {
-            ((IList<Symbol>)symbols).RemoveAt(index);
-        }
+        public void RemoveAt(int index) => ((IList<Symbol>)symbols).RemoveAt(index);
 
-        public void Add(Symbol item)
-        {
-            ((IList<Symbol>)symbols).Add(item);
-        }
+        public void Add(Symbol item) => ((IList<Symbol>)symbols).Add(item);
 
         public void AddRange(params Symbol[] symbols)
         {
@@ -149,35 +137,17 @@ namespace Parse.FrontEnd.RegularGrammar
             foreach (var symbol in symbols) this.Add(symbol);
         }
 
-        public void Clear()
-        {
-            ((IList<Symbol>)symbols).Clear();
-        }
+        public void Clear() => ((IList<Symbol>)symbols).Clear();
 
-        public bool Contains(Symbol item)
-        {
-            return ((IList<Symbol>)symbols).Contains(item);
-        }
+        public bool Contains(Symbol item) => ((IList<Symbol>)symbols).Contains(item);
 
-        public void CopyTo(Symbol[] array, int arrayIndex)
-        {
-            ((IList<Symbol>)symbols).CopyTo(array, arrayIndex);
-        }
+        public void CopyTo(Symbol[] array, int arrayIndex) => ((IList<Symbol>)symbols).CopyTo(array, arrayIndex);
 
-        public bool Remove(Symbol item)
-        {
-            return ((IList<Symbol>)symbols).Remove(item);
-        }
+        public bool Remove(Symbol item) => ((IList<Symbol>)symbols).Remove(item);
 
-        public IEnumerator<Symbol> GetEnumerator()
-        {
-            return ((IList<Symbol>)symbols).GetEnumerator();
-        }
+        public IEnumerator<Symbol> GetEnumerator() => ((IList<Symbol>)symbols).GetEnumerator();
 
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return ((IList<Symbol>)symbols).GetEnumerator();
-        }
+        IEnumerator IEnumerable.GetEnumerator() => ((IList<Symbol>)symbols).GetEnumerator();
 
         public NonTerminalConcat ToReverse()
         {

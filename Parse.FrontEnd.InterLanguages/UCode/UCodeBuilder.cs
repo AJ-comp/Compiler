@@ -17,6 +17,11 @@ namespace Parse.FrontEnd.InterLanguages.UCode
     {
         public override bool IsSSA => false;
 
+        public override IRFormat CreateAnd(IROptions options, IRData left, IRData right)
+        {
+            throw new System.NotImplementedException();
+        }
+
         public override IRFormat CreateBinOP(IROptions options, IRData left, IRData right, IROperation operation)
         {
             throw new System.NotImplementedException();
@@ -58,7 +63,22 @@ namespace Parse.FrontEnd.InterLanguages.UCode
             throw new System.NotImplementedException();
         }
 
+        public override IRFormat CreateEqual(IROptions options, IRData left, IRData right)
+        {
+            throw new System.NotImplementedException();
+        }
+
         public override IRFormat CreateLoadVar(IROptions options, IRVarData VarData, bool bGlobal)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public override IRFormat CreateNot(IROptions options, IRData data)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public override IRFormat CreateNotEqual(IROptions options, IRData left, IRData right)
         {
             throw new System.NotImplementedException();
         }

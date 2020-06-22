@@ -31,6 +31,11 @@ namespace Parse.FrontEnd.InterLanguages
         public abstract IRFormat CreatePostInc(IROptions options, IRVarData varData);
         public abstract IRFormat CreatePostDec(IROptions options, IRVarData varData);
 
+        public abstract IRFormat CreateNot(IROptions options, IRData data);
+        public abstract IRFormat CreateAnd(IROptions options, IRData left, IRData right);
+        public abstract IRFormat CreateLogicalOp(IROptions options, IRData left, IRData right, IRCondition cond);
+
+
         public abstract IRFormat CreateCall(IROptions options, IRFuncData funcData, params IRVarData[] paramDatas);
     }
 }

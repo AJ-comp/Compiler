@@ -1,4 +1,9 @@
-﻿namespace Parse.FrontEnd.InterLanguages.LLVM
+﻿using Parse.FrontEnd.InterLanguages.Datas;
+using Parse.FrontEnd.InterLanguages.LLVM.Models;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace Parse.FrontEnd.InterLanguages.LLVM
 {
     public class LLVMConverter
     {
@@ -48,6 +53,24 @@
             else if (operation == IROperation.Mul) result = "mul";
             else if (operation == IROperation.Div) result = "sdiv";
             else if (operation == IROperation.Mod) result = "srem";
+
+            return result;
+        }
+
+        public static string ToInstructionName(IRCondition condition)
+        {
+            string result = string.Empty;
+
+            if (condition == IRCondition.EQ) result = "eq";
+            else if (condition == IRCondition.NE) result = "ne";
+            else if (condition == IRCondition.UGT) result = "ugt";
+            else if (condition == IRCondition.UGE) result = "uge";
+            else if (condition == IRCondition.ULT) result = "ult";
+            else if (condition == IRCondition.ULE) result = "ule";
+            else if (condition == IRCondition.SGT) result = "sgt";
+            else if (condition == IRCondition.SGE) result = "sge";
+            else if (condition == IRCondition.SLT) result = "slt";
+            else if (condition == IRCondition.SLE) result = "sle";
 
             return result;
         }

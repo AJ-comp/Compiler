@@ -2,5 +2,6 @@
 {
     public abstract class IRData
     {
+        public abstract DataType Type { get; }
     }
 }

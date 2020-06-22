@@ -1,16 +1,15 @@
-﻿using Parse.FrontEnd.InterLanguages.Datas;
+﻿using Parse.Extensions;
+using Parse.FrontEnd.InterLanguages.Datas;
 using Parse.FrontEnd.InterLanguages.LLVM.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection.Emit;
 
 namespace Parse.FrontEnd.InterLanguages.LLVM
 {
-    public class LLVMAssemblyBuilder : IRBuilder
+    public partial class LLVMAssemblyBuilder : IRBuilder
     {
         private SSVarTable _ssVarTable = new SSVarTable();
-        private Stack<LocalSSVar> _reservedData = new Stack<LocalSSVar>();
 
         public override bool IsSSA => true;
 
@@ -117,11 +116,6 @@ namespace Parse.FrontEnd.InterLanguages.LLVM
             throw new System.NotImplementedException();
         }
 
-        private IRFormat CreateBinOP(IROptions options, IRVarData left, IRVarData right, IROperation operation)
-        {
-            throw new System.NotImplementedException();
-        }
-
         // sample format
         // c + 10; or 10 + c;
         // ---------------------------------------
@@ -131,8 +125,8 @@ namespace Parse.FrontEnd.InterLanguages.LLVM
         private IRFormat CreateBinOp(IROptions options, SSVarData left, IRLiteralData right, IROperation operation)
         {
             var instruction1 = Instruction.Load(left, _ssVarTable);
-            var lastSSVar = _ssVarTable.LastInLocalList();
-            var instruction2 = Instruction.BinOp(lastSSVar, right, _ssVarTable, operation);
+            var loadedVar = instruction1.Result;
+            var instruction2 = Instruction.BinOp(loadedVar, right, _ssVarTable, operation);
 
             var block = new IRBlock()
             {
@@ -153,9 +147,9 @@ namespace Parse.FrontEnd.InterLanguages.LLVM
         private IRFormat CreateBinOp(IROptions options, SSVarData left, SSVarData right, IROperation operation)
         {
             var instruction1 = Instruction.Load(left, _ssVarTable);
-            var leftNewSSVar = _ssVarTable.LastInLocalList();
+            var leftNewSSVar = instruction1.Result;
             var instruction2 = Instruction.Load(right, _ssVarTable);
-            var rightNewSSVar = _ssVarTable.LastInLocalList();
+            var rightNewSSVar = instruction2.Result;
 
             var instruction3 = Instruction.BinOp(leftNewSSVar, rightNewSSVar, _ssVarTable, operation);
 
@@ -196,8 +190,6 @@ namespace Parse.FrontEnd.InterLanguages.LLVM
 
             // if both left and right is SSVarData
             return CreateBinOp(options, leftSSVar, rightSSVar, operation);
-
-            throw new NotImplementedException();
         }
 
         public override IRFormat CreateCall(IROptions options, IRFuncData funcData, params IRVarData[] paramDatas)
@@ -222,11 +214,9 @@ namespace Parse.FrontEnd.InterLanguages.LLVM
         public override IRFormat CreatePreInc(IROptions options, IRVarData varData)
         {
             var ssVar = _ssVarTable.Get(varData); // ex : @a
-
             var result = CommonIncLogic(ssVar, options);
-            _reservedData.Push(result.Item1.Last());
 
-            return new IRFormat(result.Item2);
+            return new IRFormat(result.Item2, result.Item1.Last());
         }
 
         public override IRFormat CreatePreDec(IROptions options, IRVarData varData)
@@ -237,16 +227,86 @@ namespace Parse.FrontEnd.InterLanguages.LLVM
         public override IRFormat CreatePostInc(IROptions options, IRVarData varData)
         {
             var ssVar = _ssVarTable.Get(varData); // ex : @a
-
             var result = CommonIncLogic(ssVar, options);
-            _reservedData.Push(result.Item1.First());
 
-            return new IRFormat(result.Item2);
+            return new IRFormat(result.Item2, result.Item1.First());
         }
 
         public override IRFormat CreatePostDec(IROptions options, IRVarData varData)
         {
             throw new System.NotImplementedException();
+        }
+
+        public override IRFormat CreateNot(IROptions options, IRData data)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override IRFormat CreateAnd(IROptions options, IRData left, IRData right)
+        {
+            throw new NotImplementedException();
+        }
+
+        // sample format
+        // <result> = load <ty>, <ty>* <left>, align <left.align>
+        // [<result> = sext <ty> <op> to i32]
+        // [<result> = sitofp i32 <op> to double] || [<result> = uitofp i32 <op> to double]
+        // <result> = fcmp <cond> <ty> <left>, <right>
+        private IRFormat CreateLogicalOp(IROptions options, SSVarData left, IRLiteralData right, IRCondition cond)
+        {
+            List<Instruction> insList = new List<Instruction>();
+            var isItoFpCond = LLVMChecker.IsItoFpCondition(left.Type, right.Type);
+
+            LoadAndExp(left, isItoFpCond);
+        }
+
+        // sample format
+        // <result> = load i32, <ty>* <op>, align <align>
+        // <result> = load i32, <ty>* <op>, align <align>
+        // [<result> = sext <ty> <op> to i32]*
+        // [<result> = sitofp i32 <op> to double] || [<result> = uitofp i32 <op> to double]
+        // <result> = icmp eq i32 <op1>, <op2>
+        private IRFormat CreateLogicalOp(IROptions options, SSVarData left, SSVarData right, IRCondition cond)
+        {
+            List<Instruction> insList = new List<Instruction>();
+            var isItoFpCond = LLVMChecker.IsItoFpCondition(left.Type, right.Type);
+
+            LoadAndExp(left, isItoFpCond);
+            LoadAndExp(right, isItoFpCond);
+
+            // icmp or fcmp
+            if (LLVMChecker.IsDoubleType(left.Type, right.Type))
+                insList.Add(Instruction.Fcmp(cond, insList.SecondLast().Result as LocalDoubleSSVar, insList.Last().Result as LocalDoubleSSVar, _ssVarTable));
+            else
+                insList.Add(Instruction.Icmp(cond, insList.SecondLast().Result as LocalIntSSVar, insList.Last().Result as LocalIntSSVar, _ssVarTable));
+
+            var irBlock = new IRBlock();
+            foreach (var instruction in insList) irBlock.Add(instruction);
+
+            return new IRFormat(irBlock, insList.Last().Result);
+        }
+
+        public override IRFormat CreateLogicalOp(IROptions options, IRData left, IRData right, IRCondition cond)
+        {
+            SSVarData leftSSVar = (left is IRVarData) ? _ssVarTable.Get(left as IRVarData) :  // ssVar for left (ex : @c);
+                                            (left is SSVarData) ? left as SSVarData : null;
+
+            SSVarData rightSSVar = (right is IRVarData) ? _ssVarTable.Get(right as IRVarData) :  // ssVar for right (ex : @c)
+                                            (right is SSVarData) ? right as SSVarData : null;
+
+            if (leftSSVar is null && rightSSVar is null)
+            {
+                var literalLeft = left as IRLiteralData;
+                var literalRight = right as IRLiteralData;
+
+                return new IRFormat(null, literalLeft.LogicalOp(literalRight, cond));
+            }
+
+            if (leftSSVar is null) return CreateLogicalOp(options, rightSSVar, left as IRLiteralData, cond);
+            if (rightSSVar is null) return CreateLogicalOp(options, leftSSVar, right as IRLiteralData, cond);
+
+            // if both left and right is SSVarData
+            return CreateLogicalOp(options, leftSSVar, rightSSVar, cond);
         }
     }
 }

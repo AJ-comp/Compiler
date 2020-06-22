@@ -1,8 +1,9 @@
-﻿namespace Parse.FrontEnd.InterLanguages.Datas
+﻿using Parse.FrontEnd.InterLanguages.LLVM.Models;
+
+namespace Parse.FrontEnd.InterLanguages.Datas
 {
     public abstract class IRLiteralData : IRData
     {
-        public abstract DataType Type { get; }
         public abstract object Value { get; }
 
         public static DataType GreaterType(IRLiteralData t1, IRLiteralData t2)
@@ -12,6 +13,51 @@
 
             return (t1TypeSize >= t2TypeSize) ? t1.Type : t2.Type;
         }
+
+
+        public DecidedCondVar LogicalOp(IRLiteralData t, IRCondition cond)
+        {
+            DecidedCondVar result = null;
+            if (cond == IRCondition.EQ) result = IsEqual(t);
+            else if (cond == IRCondition.NE) result = IsNotEqual(t);
+            else if (cond == IRCondition.SGT) result = IsGreaterThan(t);
+            else if (cond == IRCondition.UGT) result = IsGreaterThan(t);
+            else if (cond == IRCondition.SLE) result = IsLessThan(t);
+            else if (cond == IRCondition.ULE) result = IsLessThan(t);
+
+            return result;
+        }
+
+        public DecidedCondVar IsEqual(IRLiteralData t)
+        {
+            var result = (Value == t.Value) ? true : false;
+
+            return new DecidedCondVar(result);
+        }
+
+        public DecidedCondVar IsNotEqual(IRLiteralData t)
+        {
+            var result = (Value != t.Value) ? true : false;
+
+            return new DecidedCondVar(result);
+        }
+
+        public DecidedCondVar IsGreaterThan(IRLiteralData t)
+        {
+            // if it is compared by maximum type then problem doesn't exist because data loss is not fired.
+            var result = ((double)Value > (double)t.Value) ? true : false;
+
+            return new DecidedCondVar(result);
+        }
+
+        public DecidedCondVar IsLessThan(IRLiteralData t)
+        {
+            // if it is compared by maximum type then problem doesn't exist because data loss is not fired.
+            var result = ((double)Value < (double)t.Value) ? true : false;
+
+            return new DecidedCondVar(result);
+        }
+
 
         public IRLiteralData BinOp(IRLiteralData t, IROperation operation)
         {

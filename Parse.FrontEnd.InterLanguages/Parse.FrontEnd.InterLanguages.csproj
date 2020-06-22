@@ -46,7 +46,13 @@
     <Compile Include="Datas\LiteralDatas\IRIntegerLiteralData.cs" />
     <Compile Include="Datas\IRData.cs" />
     <Compile Include="IRConverter.cs" />
+    <Compile Include="LLVM\LLVMAssemblyCommon.cs" />
+    <Compile Include="LLVM\LLVMCreator.cs" />
+    <Compile Include="LLVM\Models\CondVar.cs" />
+    <Compile Include="LLVM\Models\DecidedCondVar.cs" />
     <Compile Include="LLVM\Models\GlobalSSVar.cs" />
+    <Compile Include="LLVM\Models\LocalDoubleSSVar.cs" />
+    <Compile Include="LLVM\Models\LocalIntSSVar.cs" />
     <Compile Include="LLVM\Models\LocalSSVar.cs" />
     <Compile Include="LLVM\Models\SSVarTable.cs" />
     <Compile Include="IRBlock.cs" />
@@ -65,10 +71,16 @@
     <Compile Include="IRTypes.cs" />
     <Compile Include="Datas\IRParamData.cs" />
     <Compile Include="LLVM\Models\SSVarData.cs" />
+    <Compile Include="LLVM\Models\UndecidedCondVar.cs" />
     <Compile Include="UCode\UCodeBuilder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UCode\Instruction.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\Parse\Parse.csproj">
+      <Project>{54ec5cea-8d91-4165-9ebb-6a0693a96c4f}</Project>
+      <Name>Parse</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

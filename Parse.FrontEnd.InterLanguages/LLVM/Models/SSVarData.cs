@@ -5,7 +5,6 @@ namespace Parse.FrontEnd.InterLanguages.LLVM.Models
     public abstract class SSVarData : IRData
     {
         public abstract int Offset { get; }
-        public abstract DataType Type { get; }
         public abstract object LinkedObject { get; internal set; }
 
         public string Name

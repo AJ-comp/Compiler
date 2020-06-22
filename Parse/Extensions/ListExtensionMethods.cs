@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 
 namespace Parse.Extensions
 {
@@ -11,6 +12,13 @@ namespace Parse.Extensions
             result.Reverse();
 
             return result;
+        }
+
+        public static T SecondLast<T>(this IList<T> obj)
+        {
+            if (obj.Count <= 1) return default(T);
+
+            return obj[obj.Count - 2];
         }
 
         public static bool IsEqual<T>(this IList<T> obj, IReadOnlyList<T> target)

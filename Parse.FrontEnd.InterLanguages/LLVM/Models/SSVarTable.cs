@@ -33,14 +33,21 @@ namespace Parse.FrontEnd.InterLanguages.LLVM.Models
 
         public LocalSSVar CreateToLocalTable(IRVarData varData)
         {
-            LocalSSVar newItem = new LocalSSVar(NextOffset, varData.Type, varData);
+            LocalSSVar newItem = LLVMCreator.CreateLocalVar(NextOffset, varData);
 
             return newItem;
         }
 
         public LocalSSVar CreateNewSSVar(SSVarData varData)
         {
-            LocalSSVar newItem = new LocalSSVar(NextOffset, varData.Type, varData);
+            LocalSSVar newItem = LLVMCreator.CreateLocalVar(NextOffset, varData);
+
+            return newItem;
+        }
+
+        public LocalSSVar CreateNewSSVar()
+        {
+            LocalSSVar newItem = new CondVar(NextOffset);
 
             return newItem;
         }

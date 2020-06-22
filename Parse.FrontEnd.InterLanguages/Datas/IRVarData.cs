@@ -4,7 +4,7 @@ namespace Parse.FrontEnd.InterLanguages.Datas
 {
     public class IRVarData : IRData
     {
-        public DataType Type { get; }
+        public override DataType Type { get; }
         public string Name { get; }
         public int Block { get; }
         public int Offset { get; }

@@ -149,8 +149,6 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
                 result = left.Mod(right);
                 curNode.ConnectedIrUnit = IRBuilder.CreateBinOP(option, leftIR, rightIR, IROperation.Mod);
             }
-            else if (curNode.SignPost.MeaningUnit == this.LogicalNot)
-                curNode.ConnectedIrUnit = IRBuilder.Command.Not(ReservedLabel);
             else if (curNode.SignPost.MeaningUnit == this.LogicalAnd)
                 curNode.ConnectedIrUnit = UCodeBuilder.Command.And(ReservedLabel);
             else if (curNode.SignPost.MeaningUnit == this.LogicalOr)
@@ -167,6 +165,8 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
                 curNode.ConnectedIrUnit = UCodeBuilder.Command.LessThan(ReservedLabel);
             else if (curNode.SignPost.MeaningUnit == this.LessEqual)
                 curNode.ConnectedIrUnit = UCodeBuilder.Command.LessEqual(ReservedLabel);
+//            else if (curNode.SignPost.MeaningUnit == this.LogicalNot)
+//                curNode.ConnectedIrUnit = IRBuilder.CreateNot(option, );
 
             return result;
         }
