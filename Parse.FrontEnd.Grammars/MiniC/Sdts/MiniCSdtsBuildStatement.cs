@@ -1,10 +1,8 @@
 ﻿using Parse.FrontEnd.Ast;
-using Parse.FrontEnd.Grammars.MiniC.AstNodes;
 using Parse.FrontEnd.Grammars.MiniC.SymbolTableFormat;
 using Parse.FrontEnd.InterLanguages;
 using System.Collections.Generic;
 using System.Linq;
-using IR = Parse.FrontEnd.InterLanguages.Datas;
 
 namespace Parse.FrontEnd.Grammars.MiniC.Sdts
 {

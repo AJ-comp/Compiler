@@ -32,7 +32,7 @@ namespace Parse.FrontEnd.Grammars
 
         public static IR.IRData ToIRData(DclData dclData)
         {
-            return new IR.IRVarData(IRConverter.ToIRDataType(dclData.DclSpecData.DataType),
+            return new IR.IRVar(IRConverter.ToIRDataType(dclData.DclSpecData.DataType),
                                                 dclData.DclItemData.Name,
                                                 dclData.BlockLevel,
                                                 dclData.Offset,
@@ -43,26 +43,26 @@ namespace Parse.FrontEnd.Grammars
         public static IR.IRData ToIRData(LiteralData literalData)
         {
             if (literalData is CharLiteralData)
-                return new IR.IRIntegerLiteralData(IRData.DataType.i8, (literalData as CharLiteralData).Value);
+                return new IR.IRIntegerLiteral(IRData.DataType.i8, (literalData as CharLiteralData).Value);
             else if (literalData is ShortLiteralData)
-                return new IR.IRIntegerLiteralData(IRData.DataType.i16, (literalData as ShortLiteralData).Value);
+                return new IR.IRIntegerLiteral(IRData.DataType.i16, (literalData as ShortLiteralData).Value);
             else if (literalData is IntLiteralData)
-                return new IR.IRIntegerLiteralData(IRData.DataType.i16, (literalData as IntLiteralData).Value);
+                return new IR.IRIntegerLiteral(IRData.DataType.i16, (literalData as IntLiteralData).Value);
             else if (literalData is LongLiteralData)
-                return new IR.IRIntegerLiteralData(IRData.DataType.i16, (int)(literalData as LongLiteralData).Value);
+                return new IR.IRIntegerLiteral(IRData.DataType.i16, (int)(literalData as LongLiteralData).Value);
             else if (literalData is DoubleLiteralData)
-                return new IR.IRDoubleLiteralData((literalData as DoubleLiteralData).Value);
+                return new IR.IRDoubleLiteral((literalData as DoubleLiteralData).Value);
 
             return null;
         }
 
         public static IR.IRFuncData ToIRData(FuncData funcData)
         {
-            List<IR.IRVarData> paramVars = new List<IR.IRVarData>();
+            List<IR.IRVar> paramVars = new List<IR.IRVar>();
 
             foreach (var param in funcData.ParamVars)
             {
-                var irData = IRConverter.ToIRData(param) as IR.IRVarData;
+                var irData = IRConverter.ToIRData(param) as IR.IRVar;
                 
                 paramVars.Add(irData);
             }

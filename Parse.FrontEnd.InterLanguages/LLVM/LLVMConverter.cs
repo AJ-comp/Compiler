@@ -1,7 +1,4 @@
 ﻿using Parse.FrontEnd.InterLanguages.Datas;
-using Parse.FrontEnd.InterLanguages.LLVM.Models;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace Parse.FrontEnd.InterLanguages.LLVM
 {
@@ -57,22 +54,56 @@ namespace Parse.FrontEnd.InterLanguages.LLVM
             return result;
         }
 
-        public static string ToInstructionName(IRCondition condition)
+        public static string ToInstructionNameForInteger(IRCondition condition, bool bSigned)
         {
             string result = string.Empty;
 
             if (condition == IRCondition.EQ) result = "eq";
             else if (condition == IRCondition.NE) result = "ne";
-            else if (condition == IRCondition.UGT) result = "ugt";
-            else if (condition == IRCondition.UGE) result = "uge";
-            else if (condition == IRCondition.ULT) result = "ult";
-            else if (condition == IRCondition.ULE) result = "ule";
-            else if (condition == IRCondition.SGT) result = "sgt";
-            else if (condition == IRCondition.SGE) result = "sge";
-            else if (condition == IRCondition.SLT) result = "slt";
-            else if (condition == IRCondition.SLE) result = "sle";
+
+            else if (bSigned)
+            {
+                if (condition == IRCondition.GT) result = "sgt";
+                else if (condition == IRCondition.GE) result = "sge";
+                else if (condition == IRCondition.LT) result = "slt";
+                else if (condition == IRCondition.LE) result = "sle";
+            }
+            else
+            {
+                if (condition == IRCondition.GT) result = "ugt";
+                else if (condition == IRCondition.GE) result = "uge";
+                else if (condition == IRCondition.LT) result = "ult";
+                else if (condition == IRCondition.LE) result = "ule";
+            }
 
             return result;
         }
+
+        public static string ToInstructionNameForDouble(IRCondition condition, bool bNans = false)
+        {
+            string result = string.Empty;
+
+                if (condition == IRCondition.EQ) result = "ueq";
+                else if (condition == IRCondition.NE) result = "une";
+
+            if (bNans)
+            {
+                if (condition == IRCondition.GT) result = "ogt";
+                else if (condition == IRCondition.GE) result = "oge";
+                else if (condition == IRCondition.LT) result = "olt";
+                else if (condition == IRCondition.LE) result = "ole";
+            }
+            else
+            {
+                if (condition == IRCondition.GT) result = "ugt";
+                else if (condition == IRCondition.GE) result = "uge";
+                else if (condition == IRCondition.LT) result = "ult";
+                else if (condition == IRCondition.LE) result = "ule";
+            }
+
+            return result;
+        }
+
+        public static IRDoubleLiteral ToDoubleLiteral(IRLiteral literal) => new IRDoubleLiteral((double)literal.Value);
     }
 }

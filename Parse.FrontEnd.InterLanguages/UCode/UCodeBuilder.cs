@@ -27,7 +27,7 @@ namespace Parse.FrontEnd.InterLanguages.UCode
             throw new System.NotImplementedException();
         }
 
-        public override IRFormat CreateCall(IROptions options, IRFuncData funcData, params IRVarData[] paramDatas)
+        public override IRFormat CreateCall(IROptions options, IRFuncData funcData, params IRVar[] paramDatas)
         {
             throw new System.NotImplementedException();
         }
@@ -37,12 +37,12 @@ namespace Parse.FrontEnd.InterLanguages.UCode
             throw new System.NotImplementedException();
         }
 
-        public override IRFormat CreateDclVar(IROptions options, IRVarData varData, bool bGlobal)
+        public override IRFormat CreateDclVar(IROptions options, IRVar varData, bool bGlobal)
         {
             return new IRFormat(Command.DclVar(options.Label, varData.Block, varData.Offset, varData.Length, options.Comment));
         }
 
-        public override IRFormat CreateDclVarAndInit(IROptions options, IRVarData varData, IRVarData initInfo, bool bGlobal)
+        public override IRFormat CreateDclVarAndInit(IROptions options, IRVar varData, IRVar initInfo, bool bGlobal)
         {
             var block = new IRBlock()
             {
@@ -53,7 +53,7 @@ namespace Parse.FrontEnd.InterLanguages.UCode
             return new IRFormat(block);
         }
 
-        public override IRFormat CreateDclVarAndInit(IROptions options, IRVarData VarData, IRLiteralData initValue, bool bGlobal)
+        public override IRFormat CreateDclVarAndInit(IROptions options, IRVar VarData, IRLiteral initValue, bool bGlobal)
         {
             throw new System.NotImplementedException();
         }
@@ -63,12 +63,12 @@ namespace Parse.FrontEnd.InterLanguages.UCode
             throw new System.NotImplementedException();
         }
 
-        public override IRFormat CreateEqual(IROptions options, IRData left, IRData right)
+        public override IRFormat CreateLoadVar(IROptions options, IRVar VarData, bool bGlobal)
         {
             throw new System.NotImplementedException();
         }
 
-        public override IRFormat CreateLoadVar(IROptions options, IRVarData VarData, bool bGlobal)
+        public override IRFormat CreateLogicalOp(IROptions options, IRData left, IRData right, IRCondition cond)
         {
             throw new System.NotImplementedException();
         }
@@ -78,27 +78,27 @@ namespace Parse.FrontEnd.InterLanguages.UCode
             throw new System.NotImplementedException();
         }
 
-        public override IRFormat CreateNotEqual(IROptions options, IRData left, IRData right)
+        public override IRFormat CreateOr(IROptions options, IRData left, IRData right)
         {
             throw new System.NotImplementedException();
         }
 
-        public override IRFormat CreatePostDec(IROptions options, IRVarData varData)
+        public override IRFormat CreatePostDec(IROptions options, IRVar varData)
         {
             throw new System.NotImplementedException();
         }
 
-        public override IRFormat CreatePostInc(IROptions options, IRVarData varData)
+        public override IRFormat CreatePostInc(IROptions options, IRVar varData)
         {
             throw new System.NotImplementedException();
         }
 
-        public override IRFormat CreatePreDec(IROptions options, IRVarData varData)
+        public override IRFormat CreatePreDec(IROptions options, IRVar varData)
         {
             throw new System.NotImplementedException();
         }
 
-        public override IRFormat CreatePreInc(IROptions options, IRVarData varData)
+        public override IRFormat CreatePreInc(IROptions options, IRVar varData)
         {
             throw new System.NotImplementedException();
         }
@@ -126,7 +126,7 @@ namespace Parse.FrontEnd.InterLanguages.UCode
             public static Instruction ProcEnd(string labelName, string comment = "")
                 => UCodeFormat(labelName, OpCodeKind.end, comment);
 
-            public static Instruction ProcCall(string labelName, string procName, params IRParamData[] param)
+            public static Instruction ProcCall(string labelName, string procName, params IRParamVar[] param)
                 => UCodeFormat(labelName, OpCodeKind.call, procName, procName);
 
             public static Instruction RetFromProc(string labelName, string comment = "")

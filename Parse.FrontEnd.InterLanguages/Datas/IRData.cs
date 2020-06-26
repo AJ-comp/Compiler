@@ -1,7 +1,9 @@
 ﻿namespace Parse.FrontEnd.InterLanguages.Datas
 {
-    public abstract class IRData
+    public interface IRData
     {
-        public abstract DataType Type { get; }
+        DataType Type { get; }
+        bool IsSigned { get; }
+        bool IsNan { get; }
     }
 }

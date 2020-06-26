@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Parse.FrontEnd.InterLanguages.LLVM;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -51,6 +52,11 @@ namespace Parse.FrontEnd.InterLanguages
         public void Add(IRUnit item)
         {
             if (item != null) _data.Add(item);
+        }
+
+        public void AddRange(IEnumerable<IRUnit> items)
+        {
+            foreach (var item in items) Add(item);
         }
 
         public void Clear() => _data.Clear();

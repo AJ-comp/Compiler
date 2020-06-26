@@ -4,14 +4,18 @@ namespace Parse.FrontEnd.InterLanguages.Datas
 {
     public class IRFuncData : IRData
     {
-        private List<IRVarData> _arguments = new List<IRVarData>();
+        private List<IRVar> _arguments = new List<IRVar>();
 
         public bool ConstReturn { get; }
         public ReturnType ReturnType { get; }
         public string Name { get; }
-        public IReadOnlyList<IRVarData> Arguments => _arguments;
+        public IReadOnlyList<IRVar> Arguments => _arguments;
 
-        public IRFuncData(IReadOnlyList<IRVarData> arguments, bool constReturn, ReturnType returnType, string name)
+        public DataType Type => throw new System.NotImplementedException();
+        public bool IsSigned => false;
+        public bool IsNan => false;
+
+        public IRFuncData(IReadOnlyList<IRVar> arguments, bool constReturn, ReturnType returnType, string name)
         {
             _arguments.AddRange(arguments);
             ConstReturn = constReturn;

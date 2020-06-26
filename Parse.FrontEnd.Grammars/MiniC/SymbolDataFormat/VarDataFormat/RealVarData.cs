@@ -7,7 +7,7 @@ namespace Parse.FrontEnd.Grammars.MiniC.SymbolDataFormat.VarDataFormat
     {
         public DclData DclData { get; }
         public bool This { get; internal set; } = false;
-        public bool IsCalculatable => (Value is UnknownLiteralData) ? false : true;
+        public bool IsCalculatable => !(Value is UnknownLiteralData);
 
         public override string VarName => DclData.DclItemData.Name;
         public override int BlockLevel => DclData.BlockLevel;

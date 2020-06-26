@@ -2,17 +2,20 @@
 
 namespace Parse.FrontEnd.InterLanguages.Datas
 {
-    public class IRVarData : IRData
+    public abstract class IRVar : IRData
     {
-        public override DataType Type { get; }
+        public DataType Type { get; }
         public string Name { get; }
         public int Block { get; }
         public int Offset { get; }
 
         public int Length { get; }
-        public bool IsGlobal => (Block == 0) ? true : false;
+        public bool IsGlobal => (Block == 0);
 
-        public IRVarData(DataType type, string name, int block, int offset, int length)
+        public abstract bool IsSigned { get; }
+        public abstract bool IsNan { get; }
+
+        public IRVar(DataType type, string name, int block, int offset, int length)
         {
             Type = type;
             Name = name;
@@ -23,7 +26,7 @@ namespace Parse.FrontEnd.InterLanguages.Datas
 
         public override bool Equals(object obj)
         {
-            return obj is IRVarData data &&
+            return obj is IRVar data &&
                    Name == data.Name &&
                    Block == data.Block &&
                    Offset == data.Offset;

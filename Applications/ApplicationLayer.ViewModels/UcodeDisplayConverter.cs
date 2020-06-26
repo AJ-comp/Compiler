@@ -184,7 +184,7 @@ namespace ApplicationLayer.ViewModels
                 result0 = ast.SignPost.Name;
             }
 
-            var result1 = CategoryVisible ? true : false;
+            var result1 = CategoryVisible;
 
             return string.Format(format, result0, result1);
         }

@@ -40,7 +40,7 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
             else
             {
                 IROptions option = new IROptions(ReservedLabel);
-                IRVarData irData = IRConverter.ToIRData(dclData) as IRVarData;
+                IRVar irData = IRConverter.ToIRData(dclData) as IRVar;
                 curNode.ConnectedIrUnit = IRBuilder.CreateDclVar(option, irData, false);
 
                 // add symbol information to the symbol table.
@@ -117,7 +117,7 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
 
             var option = new IROptions(ReservedLabel);
 
-            // if IRData exist use it. else use parameter by converting. (left or right)
+            // if IRData exist use it. otherwise use parameter by converting. (left or right)
             var leftIRFormat = curNode[0].ConnectedIrUnit as IRFormat;
             var leftIR = (leftIRFormat.IRData == null) ? IRConverter.ToIRData(left) : leftIRFormat.IRData;
 
@@ -150,23 +150,23 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
                 curNode.ConnectedIrUnit = IRBuilder.CreateBinOP(option, leftIR, rightIR, IROperation.Mod);
             }
             else if (curNode.SignPost.MeaningUnit == this.LogicalAnd)
-                curNode.ConnectedIrUnit = UCodeBuilder.Command.And(ReservedLabel);
+                curNode.ConnectedIrUnit = IRBuilder.CreateAnd(option, leftIR, rightIR);
             else if (curNode.SignPost.MeaningUnit == this.LogicalOr)
-                curNode.ConnectedIrUnit = UCodeBuilder.Command.Or(ReservedLabel);
+                curNode.ConnectedIrUnit = IRBuilder.(ReservedLabel);
             else if (curNode.SignPost.MeaningUnit == this.Equal)
-                curNode.ConnectedIrUnit = UCodeBuilder.Command.Equal(ReservedLabel);
+                curNode.ConnectedIrUnit = IRBuilder.CreateLogicalOp(option, leftIR, rightIR, InterLanguages.IRCondition.EQ);
             else if (curNode.SignPost.MeaningUnit == this.NotEqual)
-                curNode.ConnectedIrUnit = UCodeBuilder.Command.NegativeEqual(ReservedLabel);
+                curNode.ConnectedIrUnit = IRBuilder.CreateLogicalOp(option, leftIR, rightIR, InterLanguages.IRCondition.NE);
             else if (curNode.SignPost.MeaningUnit == this.GreaterThan)
-                curNode.ConnectedIrUnit = UCodeBuilder.Command.GreaterThan(ReservedLabel);
+                curNode.ConnectedIrUnit = IRBuilder.CreateLogicalOp(option, leftIR, rightIR, InterLanguages.IRCondition.GT);
             else if (curNode.SignPost.MeaningUnit == this.GreaterEqual)
-                curNode.ConnectedIrUnit = UCodeBuilder.Command.GreaterEqual(ReservedLabel);
+                curNode.ConnectedIrUnit = IRBuilder.CreateLogicalOp(option, leftIR, rightIR, InterLanguages.IRCondition.GE);
             else if (curNode.SignPost.MeaningUnit == this.LessThan)
-                curNode.ConnectedIrUnit = UCodeBuilder.Command.LessThan(ReservedLabel);
+                curNode.ConnectedIrUnit = IRBuilder.CreateLogicalOp(option, leftIR, rightIR, InterLanguages.IRCondition.LT);
             else if (curNode.SignPost.MeaningUnit == this.LessEqual)
-                curNode.ConnectedIrUnit = UCodeBuilder.Command.LessEqual(ReservedLabel);
-//            else if (curNode.SignPost.MeaningUnit == this.LogicalNot)
-//                curNode.ConnectedIrUnit = IRBuilder.CreateNot(option, );
+                curNode.ConnectedIrUnit = IRBuilder.CreateLogicalOp(option, leftIR, rightIR, InterLanguages.IRCondition.LE);
+            //            else if (curNode.SignPost.MeaningUnit == this.LogicalNot)
+            //                curNode.ConnectedIrUnit = IRBuilder.CreateNot(option, );
 
             return result;
         }
@@ -188,7 +188,7 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
             // calculate to generate temporary data calculated.
             var literalData = BuildOperator(curNode, leftParam, rightParam);
             astNodes.Add(curNode);   // because of BuildOperator function add IE or ME.
-            var result = (leftResult.Result == false || rightResult.Result == false) ? false : true;
+            var result = leftResult.Result != false && rightResult.Result != false;
 
             return new AstBuildResult(literalData, null, result);
         }

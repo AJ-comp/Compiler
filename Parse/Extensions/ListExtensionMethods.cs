@@ -16,7 +16,7 @@ namespace Parse.Extensions
 
         public static T SecondLast<T>(this IList<T> obj)
         {
-            if (obj.Count <= 1) return default(T);
+            if (obj.Count <= 1) return default;
 
             return obj[obj.Count - 2];
         }

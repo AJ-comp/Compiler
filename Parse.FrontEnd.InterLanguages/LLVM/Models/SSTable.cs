@@ -1,65 +1,49 @@
 ﻿using Parse.FrontEnd.InterLanguages.Datas;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace Parse.FrontEnd.InterLanguages.LLVM.Models
 {
-    public class SSVarTable
+    public class SSTable
     {
         private int _index = 0;
 
-        private HashSet<LocalSSVar> _localVarList = new HashSet<LocalSSVar>();
-        private HashSet<GlobalSSVar> _globalVarList = new HashSet<GlobalSSVar>();
+        private HashSet<SSNode> _localVarList = new HashSet<SSNode>();
+        private HashSet<GlobalVarItem> _globalVarList = new HashSet<GlobalVarItem>();
 
         public int LocalSSVarCount => _localVarList.Count;
         public int GlobalSSVarCount => _globalVarList.Count;
 
         public int NextOffset => _index + 1;
 
-        private LocalSSVar CreateNewSSVar(DataType dataType)
+        public GlobalVarItem CreateNewGlobalTable(IRVar varData)
         {
-            LocalSSVar newItem = new LocalSSVar(NextOffset, dataType);
-
-            _localVarList.Add(newItem);
-            return newItem;
-        }
-
-        public GlobalSSVar CreateNewGlobalTable(IRVarData varData)
-        {
-            GlobalSSVar newItem = new GlobalSSVar(varData.Type, varData);
+            GlobalVarItem newItem = new GlobalVarItem(varData);
 
             return newItem;
         }
 
-        public LocalSSVar CreateToLocalTable(IRVarData varData)
-        {
-            LocalSSVar newItem = LLVMCreator.CreateLocalVar(NextOffset, varData);
+        public SSNode NewNode(IRVar irVar)
+            => new SSNode(new LocalVar(irVar.Type, NextOffset), new GlobalVarItem(irVar));
+        public SSNode NewNode(ISSVar namedItem) 
+            => new SSNode(new LocalVar(namedItem.Type, NextOffset), namedItem);
+        public SSNode NewNode(bool value)
+            => new SSNode(new LocalVar(DataType.i1, NextOffset), new Condition(value));
+        public SSNode NewNode(int value)
+            => new SSNode(new LocalVar(DataType.i32, NextOffset), new Integer(value));
+        public SSNode NewNode(double value)
+            => new SSNode(new LocalVar(DataType.Double, NextOffset), new RealNumber(value));
 
-            return newItem;
-        }
-
-        public LocalSSVar CreateNewSSVar(SSVarData varData)
-        {
-            LocalSSVar newItem = LLVMCreator.CreateLocalVar(NextOffset, varData);
-
-            return newItem;
-        }
-
-        public LocalSSVar CreateNewSSVar()
-        {
-            LocalSSVar newItem = new CondVar(NextOffset);
-
-            return newItem;
-        }
 
         /// <summary>
         /// This function returns SSVarData whitch linked 'varData'.
         /// </summary>
         /// <param name="varData"></param>
         /// <returns></returns>
-        public SSVarData Get(IRVarData varData)
+        public ISSVar Get(IRVar varData)
         {
-            SSVarData result = null;
+            ISSVar result = null;
 
             foreach (var ssvar in this._globalVarList)
             {
@@ -81,13 +65,13 @@ namespace Parse.FrontEnd.InterLanguages.LLVM.Models
         }
 
         /// <summary>
-        /// This function returns LocalSSVar whitch linked 'ssVarData'.
+        /// This function returns LocalSSVar whitch linked with 'ssVarData'.
         /// </summary>
         /// <param name="ssVarData"></param>
         /// <returns></returns>
-        public LocalSSVar Get(SSVarData ssVarData)
+        public LocalVar Get(ISSVar ssVarData)
         {
-            LocalSSVar result = null;
+            LocalVar result = null;
 
             foreach (var ssvar in this._localVarList)
             {
@@ -104,12 +88,12 @@ namespace Parse.FrontEnd.InterLanguages.LLVM.Models
         /// This function returns a last item in the GlobalSSVarList.
         /// </summary>
         /// <returns></returns>
-        public GlobalSSVar LastInGlobalList() => _globalVarList.Last();
+        public GlobalVarItem LastInGlobalList() => _globalVarList.Last();
         /// <summary>
         /// This function returns a last item in the LocalSSVarList.
         /// </summary>
         /// <returns></returns>
-        public LocalSSVar LastInLocalList() => _localVarList.Last();
+        public SSNode LastInLocalList() => _localVarList.Last();
 
         public void Clear()
         {

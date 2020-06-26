@@ -1,4 +1,6 @@
-﻿namespace Parse.FrontEnd.InterLanguages.LLVM
+﻿using Parse.FrontEnd.InterLanguages.Datas;
+
+namespace Parse.FrontEnd.InterLanguages.LLVM
 {
     class LLVMChecker
     {
@@ -7,13 +9,19 @@
             var fromAlign = LLVMConverter.ToAlign(from);
             var toAlign = LLVMConverter.ToAlign(to);
 
-            return (fromAlign > toAlign) ? true : false;
+            return (fromAlign > toAlign);
         }
 
         public static bool IsDoubleType(DataType op1Type, DataType op2Type)
         {
-            return (op1Type == DataType.Double || op2Type == DataType.Double) ? true : false;
+            return (op1Type == DataType.Double || op2Type == DataType.Double);
         }
+
+        public static bool IsSigned(IRData op1, IRData op2) => (op1.IsSigned && op2.IsSigned);
+
+        public static bool IsNans(IRData op1, IRData op2) => (op1.IsNan && op2.IsNan);
+
+        public static bool IsExistDoubleType(IRData op1, IRData op2) => (op1.Type == DataType.Double || op2.Type == DataType.Double);
 
         public static bool IsItoFpCondition(DataType op1Type, DataType op2Type)
         {

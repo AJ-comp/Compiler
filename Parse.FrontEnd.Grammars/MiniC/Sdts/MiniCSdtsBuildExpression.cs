@@ -101,7 +101,7 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
                 if ((varData is VirtualVarData))
                     return new AstBuildResult(result.Data, null, true);
 
-                var irVarData = IRConverter.ToIRData(varData as RealVarData) as IRVarData;
+                var irVarData = IRConverter.ToIRData(varData as RealVarData) as IRVar;
 
                 if (curNode.SignPost.MeaningUnit == this.PreInc)
                     curNode.ConnectedIrUnit = IRBuilder.CreatePreInc(options, irVarData);
