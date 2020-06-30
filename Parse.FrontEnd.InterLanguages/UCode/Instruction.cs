@@ -1,6 +1,6 @@
 ﻿using System.Collections.Specialized;
 
-namespace Parse.FrontEnd.InterLanguages.UCode
+namespace Parse.MiddleEnd.IR.UCode
 {
 
     public class Instruction : IRUnit

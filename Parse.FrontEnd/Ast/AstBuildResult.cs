@@ -1,10 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using Parse.MiddleEnd.IR;
+using System.Collections.Generic;
 
 namespace Parse.FrontEnd.Ast
 {
     public class AstBuildResult
     {
         public object Data { get; }
+        public IRFormat IRFormat { get; }
         public SymbolTable SymbolTable { get; }
         public bool Result { get; internal set; }
         public List<AstSymbol> Nodes { get; } = new List<AstSymbol>();

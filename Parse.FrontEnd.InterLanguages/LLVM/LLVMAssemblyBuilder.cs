@@ -1,11 +1,12 @@
 ﻿using Parse.Extensions;
-using Parse.FrontEnd.InterLanguages.Datas;
-using Parse.FrontEnd.InterLanguages.LLVM.Models;
+using Parse.MiddleEnd.IR.Datas;
+using Parse.MiddleEnd.IR.Datas.ValueDatas;
+using Parse.MiddleEnd.IR.LLVM.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Parse.FrontEnd.InterLanguages.LLVM
+namespace Parse.MiddleEnd.IR.LLVM
 {
     public partial class LLVMAssemblyBuilder : IRBuilder
     {
@@ -69,14 +70,14 @@ namespace Parse.FrontEnd.InterLanguages.LLVM
         // ---------------------------------------
         private IRFormat AssignToLocalVar(IROptions option, IRVar t, IRVar s)
         {
-            var tSSVar = _ssVarTable.Get(t);
-            var sSSVar = _ssVarTable.Get(s);
+            var tNode = _ssVarTable.GetNode(t);
+            var sNode = _ssVarTable.GetNode(s);
 
             var block = new IRBlock(option.Label, option.Comment)
             {
                 // temperory var is not added to the localOffsetDic.
-                Instruction.Load(tSSVar, _ssVarTable),
-                Instruction.Store(sSSVar, tSSVar)
+                Instruction.Load(tNode.SSF, _ssVarTable),
+                Instruction.Store(sNode.SSF, tNode.SSF)
             };
 
             return new IRFormat(block);
@@ -105,13 +106,13 @@ namespace Parse.FrontEnd.InterLanguages.LLVM
 
         public override IRFormat CreateLoadVar(IROptions options, IRVar varData, bool bGlobal)
         {
-            var ssVar = _ssVarTable.Get(varData);
-            var instruction = Instruction.Load(ssVar, _ssVarTable, options.Comment);
+            var node = _ssVarTable.GetNode(varData);
+            var instruction = Instruction.Load(node.SSF, _ssVarTable, options.Comment);
 
             return new IRFormat(instruction);
         }
 
-        public override IRFormat CreateDclVarAndInit(IROptions options, IRVar VarData, IRLiteral initValue, bool bGlobal)
+        public override IRFormat CreateDclVarAndInit(IROptions options, IRVar VarData, IRValue initValue, bool bGlobal)
         {
             throw new System.NotImplementedException();
         }
@@ -122,7 +123,7 @@ namespace Parse.FrontEnd.InterLanguages.LLVM
         //  %1 = load i32, i32* @c, align 4
         //  %2 = add nsw i32 %1, 10
         // ---------------------------------------
-        private IRFormat CreateBinOp(IROptions options, ISSVar left, IRLiteral right, IROperation operation)
+        private IRFormat CreateBinOp(IROptions options, ISSVar left, IRValue right, IROperation operation)
         {
             var instruction1 = Instruction.Load(left, _ssVarTable);
             var loadedVar = instruction1.Result;
@@ -169,24 +170,24 @@ namespace Parse.FrontEnd.InterLanguages.LLVM
         // ---------------------------------------
         public override IRFormat CreateBinOP(IROptions options, IRData left, IRData right, IROperation operation)
         {
-            ISSVar leftSSVar = (left is IRVar) ? _ssVarTable.Get(left as IRVar) :  // ssVar for left (ex : @c);
+            ISSVar leftSSVar = (left is IRVar) ? _ssVarTable.GetNode(left as IRVar).SSF :  // ssVar for left (ex : @c);
                                             (left is ISSVar) ? left as ISSVar : null;
 
-            ISSVar rightSSVar = (right is IRVar) ? _ssVarTable.Get(right as IRVar) :  // ssVar for right (ex : @c)
+            ISSVar rightSSVar = (right is IRVar) ? _ssVarTable.GetNode(right as IRVar).SSF :  // ssVar for right (ex : @c)
                                             (right is ISSVar) ? right as ISSVar : null;
 
 
             // if both left and right is LiteralData
             if (leftSSVar is null && rightSSVar is null)
             {
-                var literalLeft = left as IRLiteral;
-                var literalRight = right as IRLiteral;
+                var literalLeft = left as IRValue;
+                var literalRight = right as IRValue;
 
                 return new IRFormat(null, literalLeft.BinOp(literalRight, operation));
             }
 
-            if (leftSSVar is null) return CreateBinOp(options, rightSSVar, left as IRLiteral, operation);
-            if (rightSSVar is null) return CreateBinOp(options, leftSSVar, right as IRLiteral, operation);
+            if (leftSSVar is null) return CreateBinOp(options, rightSSVar, left as IRValue, operation);
+            if (rightSSVar is null) return CreateBinOp(options, leftSSVar, right as IRValue, operation);
 
             // if both left and right is SSVarData
             return CreateBinOp(options, leftSSVar, rightSSVar, operation);
@@ -213,8 +214,8 @@ namespace Parse.FrontEnd.InterLanguages.LLVM
 
         public override IRFormat CreatePreInc(IROptions options, IRVar varData)
         {
-            var ssVar = _ssVarTable.Get(varData); // ex : @a
-            var result = CommonIncLogic(ssVar, options);
+            var node = _ssVarTable.GetNode(varData); // ex : @a
+            var result = CommonIncLogic(node.SSF, options);
 
             return new IRFormat(result.Item2, result.Item1.Last().SSF);
         }
@@ -226,8 +227,8 @@ namespace Parse.FrontEnd.InterLanguages.LLVM
 
         public override IRFormat CreatePostInc(IROptions options, IRVar varData)
         {
-            var ssVar = _ssVarTable.Get(varData); // ex : @a
-            var result = CommonIncLogic(ssVar, options);
+            var node = _ssVarTable.GetNode(varData); // ex : @a
+            var result = CommonIncLogic(node.SSF, options);
 
             return new IRFormat(result.Item2, result.Item1.First().SSF);
         }
@@ -247,30 +248,25 @@ namespace Parse.FrontEnd.InterLanguages.LLVM
         /// This function creates IR for And operation.
         /// </summary>
         /// <param name="options"></param>
-        /// <param name="left">it can be IRVar(variable) or IRLiteral(literal) or CondVar(bool (result of operation))</param>
-        /// <param name="right">it can be IRVar(variable) or IRLiteral(literal) or CondVar(bool (result of operation))</param>
+        /// <param name="left">it can be IRVar(variable) or IRValue(literal) or IRCondVar(bool (result of operation))</param>
+        /// <param name="right">it can be IRVar(variable) or IRValue(literal) or IRCondVar(bool (result of operation))</param>
         /// <returns></returns>
         /// ============================================================================
-        public override IRFormat CreateAnd(IROptions options, IRData left, IRData right)
+        public override IRFormat CreateAnd(IROptions options, IRCond left, IRCond right)
         {
-            if(left is IRLiteral)
-            {
-                // if value of the left is 0 it doesn't needs see all logic because And logic.
-                var literal = left as IRLiteral;
-                if (literal.IsZero) return new IRFormat(null, new IRCondVar());
-            }
+            var leftResult = CondHalfLogic(options, left);          // create load, cmp
+            if (leftResult == null) return new IRFormat(null, new IRCond(false));
 
-            var leftResult = CondHalfLogic(options, left);
-            var rightResult = CondHalfLogic(options, right);
+            var rightResult = CondHalfLogic(options, right);        // create load, cmp
+            if (rightResult == null) return new IRFormat(null, new IRCond(false));
 
-            // create br for right block
-            leftResult.Item1.Add(Instruction.CBranch((leftResult.Item1.Last() as Instruction).Result, leftResult.Item3, right));
-            leftBlock.Add(Instruction.CBranch())
-            
+            // create br for right block to the leftBlock.
+            var leftCmpNode = (leftResult.Item1.Last() as Instruction).Result;
+            leftResult.Item1.Add(Instruction.CBranch(leftCmpNode.SSF, leftResult.Item3, rightResult.Item3));
 
-//            var brIns = Instruction.CBranch(condVar, _ssVarTable.NextOffset, )
-
-
+            // create br for right block to the leftBlock.
+            var rightCmpNode = (leftResult.Item1.Last() as Instruction).Result;
+            rightResult.Item1.Add(Instruction.CBranch(rightCmpNode.SSF, leftResult.Item3, rightResult.Item3)); // ??
 
             return CreateLogicalOp(options, left, right, IRCondition.NE);
         }
@@ -280,7 +276,7 @@ namespace Parse.FrontEnd.InterLanguages.LLVM
         // [<result> = sext <ty> <op> to i32]
         // [<result> = sitofp i32 <op> to double] || [<result> = uitofp i32 <op> to double]
         // <result> = fcmp <cond> <ty> <left>, <right>
-        private IRFormat CreateLogicalOp(IROptions options, ISSVar left, IRLiteral right, IRCondition condition)
+        private IRFormat CreateLogicalOp(IROptions options, ISSVar left, IRValue right, IRCondition condition)
         {
             IRBlock irBlock = new IRBlock();
             var isItoFpCond = LLVMChecker.IsItoFpCondition(left.Type, right.Type);
@@ -333,28 +329,28 @@ namespace Parse.FrontEnd.InterLanguages.LLVM
 
         public override IRFormat CreateLogicalOp(IROptions options, IRData left, IRData right, IRCondition condition)
         {
-            ISSVar leftSSVar = (left is IRVar) ? _ssVarTable.Get(left as IRVar) :  // ssVar for left (ex : @c);
+            ISSVar leftSSVar = (left is IRVar) ? _ssVarTable.GetNode(left as IRVar).SSF :  // ssVar for left (ex : @c);
                                             (left is ISSVar) ? left as ISSVar : null;
 
-            ISSVar rightSSVar = (right is IRVar) ? _ssVarTable.Get(right as IRVar) :  // ssVar for right (ex : @c)
+            ISSVar rightSSVar = (right is IRVar) ? _ssVarTable.GetNode(right as IRVar).SSF :  // ssVar for right (ex : @c)
                                             (right is ISSVar) ? right as ISSVar : null;
 
             if (leftSSVar is null && rightSSVar is null)
             {
-                var literalLeft = left as IRLiteral;
-                var literalRight = right as IRLiteral;
+                var literalLeft = left as IRValue;
+                var literalRight = right as IRValue;
 
                 return new IRFormat(null, literalLeft.LogicalOp(literalRight, condition));
             }
 
-            if (leftSSVar is null) return CreateLogicalOp(options, rightSSVar, left as IRLiteral, condition);
-            if (rightSSVar is null) return CreateLogicalOp(options, leftSSVar, right as IRLiteral, condition);
+            if (leftSSVar is null) return CreateLogicalOp(options, rightSSVar, left as IRValue, condition);
+            if (rightSSVar is null) return CreateLogicalOp(options, leftSSVar, right as IRValue, condition);
 
             // if both left and right is SSVarData
             return CreateLogicalOp(options, leftSSVar, rightSSVar, condition);
         }
 
-        public override IRFormat CreateOr(IROptions options, IRData left, IRData right)
+        public override IRFormat CreateOr(IROptions options, IRCond left, IRCond right)
         {
             throw new NotImplementedException();
         }

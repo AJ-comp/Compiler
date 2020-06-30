@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Parse.FrontEnd.InterLanguages.LLVM.Models
+namespace Parse.MiddleEnd.IR.LLVM.Models
 {
     public class SSList : List<SSNode>
     {

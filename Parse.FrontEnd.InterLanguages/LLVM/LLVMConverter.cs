@@ -1,6 +1,6 @@
-﻿using Parse.FrontEnd.InterLanguages.Datas;
+﻿using Parse.MiddleEnd.IR.Datas;
 
-namespace Parse.FrontEnd.InterLanguages.LLVM
+namespace Parse.MiddleEnd.IR.LLVM
 {
     public class LLVMConverter
     {
@@ -104,6 +104,6 @@ namespace Parse.FrontEnd.InterLanguages.LLVM
             return result;
         }
 
-        public static IRDoubleLiteral ToDoubleLiteral(IRLiteral literal) => new IRDoubleLiteral((double)literal.Value);
+        public static IRDoubleLiteral ToDoubleLiteral(IRValue literal) => new IRDoubleLiteral((double)literal.Value);
     }
 }

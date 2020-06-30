@@ -1,7 +1,7 @@
-﻿using Parse.FrontEnd.InterLanguages.Datas;
-using Parse.FrontEnd.InterLanguages.LLVM.Models;
+﻿using Parse.MiddleEnd.IR.Datas;
+using Parse.MiddleEnd.IR.LLVM.Models;
 
-namespace Parse.FrontEnd.InterLanguages.LLVM
+namespace Parse.MiddleEnd.IR.LLVM
 {
     // factory rule
     public class LLVMCreator

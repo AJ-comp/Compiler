@@ -1,4 +1,4 @@
-﻿namespace Parse.FrontEnd.InterLanguages
+﻿namespace Parse.MiddleEnd.IR
 {
     public enum IROperation { Add, Sub, Mul, Div, Mod };
 

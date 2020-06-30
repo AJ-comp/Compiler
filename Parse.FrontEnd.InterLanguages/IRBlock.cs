@@ -1,9 +1,9 @@
-﻿using Parse.FrontEnd.InterLanguages.LLVM;
+﻿using Parse.MiddleEnd.IR.LLVM;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace Parse.FrontEnd.InterLanguages
+namespace Parse.MiddleEnd.IR
 {
     /// <summary>
     /// Null value can't be added to the IRBlock

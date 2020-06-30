@@ -1,6 +1,6 @@
-﻿using Parse.FrontEnd.InterLanguages.Datas;
+﻿using Parse.MiddleEnd.IR.Datas;
 
-namespace Parse.FrontEnd.InterLanguages.LLVM.Models
+namespace Parse.MiddleEnd.IR.LLVM.Models
 {
     public abstract class SSItem : IRData
     {

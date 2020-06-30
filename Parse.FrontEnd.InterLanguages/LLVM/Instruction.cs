@@ -1,8 +1,8 @@
-﻿using Parse.FrontEnd.InterLanguages.Datas;
-using Parse.FrontEnd.InterLanguages.LLVM.Models;
+﻿using Parse.MiddleEnd.IR.Datas;
+using Parse.MiddleEnd.IR.LLVM.Models;
 using System;
 
-namespace Parse.FrontEnd.InterLanguages.LLVM
+namespace Parse.MiddleEnd.IR.LLVM
 {
     public class Instruction : IRUnit
     {
@@ -41,12 +41,12 @@ namespace Parse.FrontEnd.InterLanguages.LLVM
 
         internal static Instruction DeclareLocalVar(IRVar varData, SSTable ssVarTable, string comment="")
         {
-            var ssVar = ssVarTable.CreateToLocalTable(varData);
+            var newNode = ssVarTable.NewNode(varData);
             var type = LLVMConverter.ToInstructionName(varData.Type);
             int align = LLVMConverter.ToAlign(varData.Type);
 
             return new Instruction(string.Format("{0} = alloca {1}, align {2}", 
-                                                                    ssVar.Name, type, align), 
+                                                                    newNode.SSF.Name, type, align), 
                                                                     comment);
         }
 
@@ -99,7 +99,7 @@ namespace Parse.FrontEnd.InterLanguages.LLVM
             }
         }
 
-        internal static Instruction BinOp(LocalVar op1, IRLiteral op2, SSTable ssVarTable, IROperation operation)
+        internal static Instruction BinOp(LocalVar op1, IRValue op2, SSTable ssVarTable, IROperation operation)
         {
             var newNode = ssVarTable.NewNode(op1);
             var binOp = LLVMConverter.ToInstructionName(operation);

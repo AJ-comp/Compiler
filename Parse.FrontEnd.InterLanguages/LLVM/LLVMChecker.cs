@@ -1,6 +1,6 @@
-﻿using Parse.FrontEnd.InterLanguages.Datas;
+﻿using Parse.MiddleEnd.IR.Datas;
 
-namespace Parse.FrontEnd.InterLanguages.LLVM
+namespace Parse.MiddleEnd.IR.LLVM
 {
     class LLVMChecker
     {

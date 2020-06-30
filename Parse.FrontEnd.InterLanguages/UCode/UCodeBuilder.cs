@@ -1,6 +1,6 @@
-﻿using Parse.FrontEnd.InterLanguages.Datas;
+﻿using Parse.MiddleEnd.IR.Datas;
 
-namespace Parse.FrontEnd.InterLanguages.UCode
+namespace Parse.MiddleEnd.IR.UCode
 {
     public enum OpCodeKind
     {
@@ -17,7 +17,7 @@ namespace Parse.FrontEnd.InterLanguages.UCode
     {
         public override bool IsSSA => false;
 
-        public override IRFormat CreateAnd(IROptions options, IRData left, IRData right)
+        public override IRFormat CreateAnd(IROptions options, IRCond left, IRCond right)
         {
             throw new System.NotImplementedException();
         }
@@ -53,7 +53,7 @@ namespace Parse.FrontEnd.InterLanguages.UCode
             return new IRFormat(block);
         }
 
-        public override IRFormat CreateDclVarAndInit(IROptions options, IRVar VarData, IRLiteral initValue, bool bGlobal)
+        public override IRFormat CreateDclVarAndInit(IROptions options, IRVar VarData, IRValue initValue, bool bGlobal)
         {
             throw new System.NotImplementedException();
         }
@@ -78,7 +78,7 @@ namespace Parse.FrontEnd.InterLanguages.UCode
             throw new System.NotImplementedException();
         }
 
-        public override IRFormat CreateOr(IROptions options, IRData left, IRData right)
+        public override IRFormat CreateOr(IROptions options, IRCond left, IRCond right)
         {
             throw new System.NotImplementedException();
         }

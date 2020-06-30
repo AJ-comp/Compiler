@@ -105,6 +105,10 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Parse.FrontEnd.InterLanguages\Parse.MiddleEnd.IR.csproj">
+      <Project>{745E9D98-AB21-4F88-8118-5C2F02056840}</Project>
+      <Name>Parse.MiddleEnd.IR</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Parse\Parse.csproj">
       <Project>{54ec5cea-8d91-4165-9ebb-6a0693a96c4f}</Project>
       <Name>Parse</Name>

@@ -1,6 +1,6 @@
-﻿using Parse.FrontEnd.InterLanguages.Datas;
+﻿using Parse.MiddleEnd.IR.Datas;
 
-namespace Parse.FrontEnd.InterLanguages
+namespace Parse.MiddleEnd.IR
 {
     /// <summary>
     /// Strategy Pattern
@@ -19,7 +19,7 @@ namespace Parse.FrontEnd.InterLanguages
 
         #region declare var and initalize
         public abstract IRFormat CreateDclVarAndInit(IROptions options, IRVar varData, IRVar initInfo, bool bGlobal);
-        public abstract IRFormat CreateDclVarAndInit(IROptions options, IRVar varData, IRLiteral initValue, bool bGlobal);
+        public abstract IRFormat CreateDclVarAndInit(IROptions options, IRVar varData, IRValue initValue, bool bGlobal);
         #endregion
 
         #region binary operation
@@ -32,8 +32,8 @@ namespace Parse.FrontEnd.InterLanguages
         public abstract IRFormat CreatePostDec(IROptions options, IRVar varData);
 
         public abstract IRFormat CreateNot(IROptions options, IRData data);
-        public abstract IRFormat CreateAnd(IROptions options, IRData left, IRData right);
-        public abstract IRFormat CreateOr(IROptions options, IRData left, IRData right);
+        public abstract IRFormat CreateAnd(IROptions options, IRCond left, IRCond right);
+        public abstract IRFormat CreateOr(IROptions options, IRCond left, IRCond right);
         public abstract IRFormat CreateLogicalOp(IROptions options, IRData left, IRData right, IRCondition cond);
 
 

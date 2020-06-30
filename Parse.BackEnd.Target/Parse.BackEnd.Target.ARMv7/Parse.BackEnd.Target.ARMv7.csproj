@@ -53,9 +53,9 @@
     <Folder Include="RSeries\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Parse.FrontEnd.InterLanguages\Parse.FrontEnd.InterLanguages.csproj">
+    <ProjectReference Include="..\..\Parse.FrontEnd.InterLanguages\Parse.MiddleEnd.IR.csproj">
       <Project>{745E9D98-AB21-4F88-8118-5C2F02056840}</Project>
-      <Name>Parse.FrontEnd.InterLanguages</Name>
+      <Name>Parse.MiddleEnd.IR</Name>
     </ProjectReference>
     <ProjectReference Include="..\Parse.BackEnd.Target\Parse.BackEnd.Target.csproj">
       <Project>{6fe9d3fa-798d-42ec-b6f0-890d5d320384}</Project>

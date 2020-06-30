@@ -41,14 +41,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Datas\LiteralDatas\IRDoubleLiteral.cs" />
+    <Compile Include="Datas\ValueDatas\IRDouble.cs" />
     <Compile Include="Datas\IRFuncData.cs" />
-    <Compile Include="Datas\LiteralDatas\IRIntegerLiteral.cs" />
+    <Compile Include="Datas\ValueDatas\IRInteger.cs" />
     <Compile Include="Datas\IRData.cs" />
+    <Compile Include="Datas\Support\ISupportSSFormat.cs" />
     <Compile Include="IRConverter.cs" />
     <Compile Include="LLVM\LLVMAssemblyCommon.cs" />
     <Compile Include="LLVM\LLVMCreator.cs" />
-    <Compile Include="Datas\IRCondVar.cs" />
+    <Compile Include="Datas\ValueDatas\IRCond.cs" />
     <Compile Include="LLVM\Models\ISSVar.cs" />
     <Compile Include="LLVM\Models\LocalVar.cs" />
     <Compile Include="LLVM\Models\Integer.cs" />
@@ -59,7 +60,7 @@
     <Compile Include="LLVM\Models\SSTable.cs" />
     <Compile Include="IRBlock.cs" />
     <Compile Include="IRFormat.cs" />
-    <Compile Include="Datas\LiteralDatas\IRLiteral.cs" />
+    <Compile Include="Datas\ValueDatas\IRValue.cs" />
     <Compile Include="IRUnit.cs" />
     <Compile Include="LLVM\LLVMChecker.cs" />
     <Compile Include="LLVM\LLVMConverter.cs" />
@@ -86,5 +87,6 @@
       <Name>Parse</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

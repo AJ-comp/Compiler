@@ -1,4 +1,4 @@
-﻿namespace Parse.FrontEnd.InterLanguages.Datas
+﻿namespace Parse.MiddleEnd.IR.Datas
 {
     public interface IRData
     {

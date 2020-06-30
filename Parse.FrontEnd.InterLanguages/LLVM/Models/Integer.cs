@@ -1,4 +1,4 @@
-﻿namespace Parse.FrontEnd.InterLanguages.LLVM.Models
+﻿namespace Parse.MiddleEnd.IR.LLVM.Models
 {
     public class Integer : NamelessItem
     {

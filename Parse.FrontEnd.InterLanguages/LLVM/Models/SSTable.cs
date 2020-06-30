@@ -1,18 +1,18 @@
-﻿using Parse.FrontEnd.InterLanguages.Datas;
+﻿using Parse.MiddleEnd.IR.Datas;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Parse.FrontEnd.InterLanguages.LLVM.Models
+namespace Parse.MiddleEnd.IR.LLVM.Models
 {
     public class SSTable
     {
         private int _index = 0;
 
-        private HashSet<SSNode> _localVarList = new HashSet<SSNode>();
+        private HashSet<SSNode> _ssNodeList = new HashSet<SSNode>();
         private HashSet<GlobalVarItem> _globalVarList = new HashSet<GlobalVarItem>();
 
-        public int LocalSSVarCount => _localVarList.Count;
+        public int LocalSSVarCount => _ssNodeList.Count;
         public int GlobalSSVarCount => _globalVarList.Count;
 
         public int NextOffset => _index + 1;
@@ -37,27 +37,29 @@ namespace Parse.FrontEnd.InterLanguages.LLVM.Models
 
 
         /// <summary>
-        /// This function returns SSVarData whitch linked 'varData'.
+        /// This function returns SSNode whitch has 'varData'.
         /// </summary>
         /// <param name="varData"></param>
         /// <returns></returns>
-        public ISSVar Get(IRVar varData)
+        public SSNode GetNode(IRVar varData)
         {
-            ISSVar result = null;
+            SSNode result = null;
+            GlobalVarItem foundItem = null;
 
-            foreach (var ssvar in this._globalVarList)
+            foreach (var globalVar in _globalVarList)
             {
-                if (ssvar.IsLinkedObject(varData) == false) continue;
+                if (!globalVar.IsEqualWithIRVar(varData)) continue;
 
-                result = ssvar;
-                return result;
+                foundItem = globalVar;
             }
 
-            foreach (var ssvar in this._localVarList)
-            {
-                if (ssvar.IsLinkedObject(varData) == false) continue;
+            if (foundItem == null) return null;
 
-                result = ssvar;
+            foreach (var ssNode in this._ssNodeList)
+            {
+                if (!ssNode.LinkedObject.Equals(foundItem)) continue;
+
+                result = ssNode;
                 return result;
             }
 
@@ -65,19 +67,19 @@ namespace Parse.FrontEnd.InterLanguages.LLVM.Models
         }
 
         /// <summary>
-        /// This function returns LocalSSVar whitch linked with 'ssVarData'.
+        /// This function returns SSNode whitch has 'localVar'.
         /// </summary>
-        /// <param name="ssVarData"></param>
+        /// <param name="varData"></param>
         /// <returns></returns>
-        public LocalVar Get(ISSVar ssVarData)
+        public SSNode GetNode(LocalVar localVar)
         {
-            LocalVar result = null;
+            SSNode result = null;
 
-            foreach (var ssvar in this._localVarList)
+            foreach (var ssNode in this._ssNodeList)
             {
-                if (ssvar.IsLinkedObject(ssVarData) == false) continue;
+                if (ssNode.SSF != localVar) continue;
 
-                result = ssvar;
+                result = ssNode;
                 return result;
             }
 
@@ -93,11 +95,11 @@ namespace Parse.FrontEnd.InterLanguages.LLVM.Models
         /// This function returns a last item in the LocalSSVarList.
         /// </summary>
         /// <returns></returns>
-        public SSNode LastInLocalList() => _localVarList.Last();
+        public SSNode LastInLocalList() => _ssNodeList.Last();
 
         public void Clear()
         {
-            _localVarList.Clear();
+            _ssNodeList.Clear();
             _globalVarList.Clear();
         }
     }

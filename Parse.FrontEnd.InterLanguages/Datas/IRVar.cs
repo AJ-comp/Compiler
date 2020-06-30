@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Parse.FrontEnd.InterLanguages.Datas
+namespace Parse.MiddleEnd.IR.Datas
 {
     public abstract class IRVar : IRData
     {

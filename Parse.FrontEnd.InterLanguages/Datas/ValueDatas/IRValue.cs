@@ -1,8 +1,8 @@
-﻿using Parse.FrontEnd.InterLanguages.LLVM.Models;
+﻿using Parse.MiddleEnd.IR.LLVM.Models;
 
-namespace Parse.FrontEnd.InterLanguages.Datas
+namespace Parse.MiddleEnd.IR.Datas.ValueDatas
 {
-    public abstract class IRLiteral : IRData
+    public abstract class IRValue : IRData
     {
         public bool IsZero => (double)Value == 0;
 
@@ -11,7 +11,7 @@ namespace Parse.FrontEnd.InterLanguages.Datas
         public abstract bool IsSigned { get; }
         public abstract bool IsNan { get; }
 
-        public static DataType GreaterType(IRLiteral t1, IRLiteral t2)
+        public static DataType GreaterType(IRValue t1, IRValue t2)
         {
             var t1TypeSize = IRConverter.ToAlign(t1.Type);
             var t2TypeSize = IRConverter.ToAlign(t2.Type);
@@ -20,7 +20,7 @@ namespace Parse.FrontEnd.InterLanguages.Datas
         }
 
 
-        public Integer LogicalOp(IRLiteral t, IRCondition cond)
+        public Integer LogicalOp(IRValue t, IRCondition cond)
         {
             Integer result = null;
             if (cond == IRCondition.EQ) result = IsEqual(t);
@@ -31,21 +31,21 @@ namespace Parse.FrontEnd.InterLanguages.Datas
             return result;
         }
 
-        public Integer IsEqual(IRLiteral t)
+        public Integer IsEqual(IRValue t)
         {
             var result = (Value == t.Value);
 
             return new Integer(result);
         }
 
-        public Integer IsNotEqual(IRLiteral t)
+        public Integer IsNotEqual(IRValue t)
         {
             var result = (Value != t.Value);
 
             return new Integer(result);
         }
 
-        public Integer IsGreaterThan(IRLiteral t)
+        public Integer IsGreaterThan(IRValue t)
         {
             // if it is compared by maximum type then problem doesn't exist because data loss is not fired.
             var result = ((double)Value > (double)t.Value);
@@ -53,7 +53,7 @@ namespace Parse.FrontEnd.InterLanguages.Datas
             return new Integer(result);
         }
 
-        public Integer IsLessThan(IRLiteral t)
+        public Integer IsLessThan(IRValue t)
         {
             // if it is compared by maximum type then problem doesn't exist because data loss is not fired.
             var result = ((double)Value < (double)t.Value);
@@ -62,9 +62,9 @@ namespace Parse.FrontEnd.InterLanguages.Datas
         }
 
 
-        public IRLiteral BinOp(IRLiteral t, IROperation operation)
+        public IRValue BinOp(IRValue t, IROperation operation)
         {
-            IRLiteral result = null;
+            IRValue result = null;
             if (operation == IROperation.Add) result = Add(t);
             else if (operation == IROperation.Sub) result = Sub(t);
             else if (operation == IROperation.Mul) result = Mul(t);
@@ -74,10 +74,10 @@ namespace Parse.FrontEnd.InterLanguages.Datas
             return result;
         }
 
-        public abstract IRLiteral Add(IRLiteral t);
-        public abstract IRLiteral Sub(IRLiteral t);
-        public abstract IRLiteral Mul(IRLiteral t);
-        public abstract IRLiteral Div(IRLiteral t);
-        public abstract IRLiteral Mod(IRLiteral t);
+        public abstract IRValue Add(IRValue t);
+        public abstract IRValue Sub(IRValue t);
+        public abstract IRValue Mul(IRValue t);
+        public abstract IRValue Div(IRValue t);
+        public abstract IRValue Mod(IRValue t);
     }
 }

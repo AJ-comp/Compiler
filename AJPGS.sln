@@ -55,7 +55,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Parse.BackEnd", "Parse.Back
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Parse.FrontEnd.DrawingSupport", "Parse.FrontEnd.DrawingSupport\Parse.FrontEnd.DrawingSupport.csproj", "{5CF0E8B7-18D1-493F-B465-ED65E657178A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Parse.FrontEnd.InterLanguages", "Parse.FrontEnd.InterLanguages\Parse.FrontEnd.InterLanguages.csproj", "{745E9D98-AB21-4F88-8118-5C2F02056840}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Parse.MiddleEnd.IR", "Parse.FrontEnd.InterLanguages\Parse.MiddleEnd.IR.csproj", "{745E9D98-AB21-4F88-8118-5C2F02056840}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestProjectOnConsole", "TestProjectOnConsole\TestProjectOnConsole.csproj", "{32380874-D848-4FD9-B070-10AA82790D43}"
 EndProject

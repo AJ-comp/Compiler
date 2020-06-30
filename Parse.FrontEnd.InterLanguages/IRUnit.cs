@@ -1,4 +1,4 @@
-﻿namespace Parse.FrontEnd.InterLanguages
+﻿namespace Parse.MiddleEnd.IR
 {
     public interface IRUnit
     {

@@ -1,8 +1,8 @@
-﻿using Parse.FrontEnd.InterLanguages.Datas;
+﻿using Parse.MiddleEnd.IR.Datas;
 using System;
 using System.Collections.Generic;
 
-namespace Parse.FrontEnd.InterLanguages.LLVM
+namespace Parse.MiddleEnd.IR.LLVM
 {
     public class Function : List<IRUnit>, IRUnit
     {
