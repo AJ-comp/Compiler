@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Parse.FrontEnd.RegularGrammar
 {
-    public class NonTerminalConcat : IList<Symbol>, ICloneable, ITemplateCreatable
+    public class NonTerminalConcat : IList<Symbol>, ICloneable<NonTerminalConcat>, ITemplateCreatable<NonTerminalConcat>
     {
         protected List<Symbol> symbols = new List<Symbol>();
 
@@ -157,7 +157,7 @@ namespace Parse.FrontEnd.RegularGrammar
             return result;
         }
 
-        public object Clone()
+        public NonTerminalConcat Clone()
         {
             NonTerminalConcat result = new NonTerminalConcat(this.Priority, this.symbols.ToArray())
             {
@@ -167,7 +167,7 @@ namespace Parse.FrontEnd.RegularGrammar
             return result;
         }
 
-        public object Template()
+        public NonTerminalConcat Template()
         {
             NonTerminalConcat result = this.Clone() as NonTerminalConcat;
             result.Clear();

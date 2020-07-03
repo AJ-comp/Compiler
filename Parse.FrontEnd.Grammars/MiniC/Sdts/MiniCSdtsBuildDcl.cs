@@ -2,11 +2,9 @@
 using Parse.FrontEnd.Grammars.MiniC.SymbolDataFormat.LiteralDataFormat;
 using Parse.FrontEnd.Grammars.MiniC.SymbolDataFormat.VarDataFormat;
 using Parse.FrontEnd.Grammars.MiniC.SymbolTableFormat;
-using Parse.FrontEnd.Grammars.Properties;
-using Parse.FrontEnd.InterLanguages;
+using Parse.MiddleEnd.IR;
+using Parse.MiddleEnd.IR.Datas;
 using System.Collections.Generic;
-
-using IR = Parse.FrontEnd.InterLanguages.Datas;
 
 namespace Parse.FrontEnd.Grammars.MiniC.Sdts
 {
@@ -87,7 +85,7 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
             var compStResult = node1.BuildLogic(buildParams, astNodes);
 
             IROptions options = new IROptions(ReservedLabel);
-            IR.IRFuncData funcData = IRConverter.ToIRData(funcHeadData);
+            IRFuncData funcData = IRConverter.ToIRData(funcHeadData);
             curNode.ConnectedIrUnit = IRBuilder.CreateDefineFunction(options, funcData, );
             astNodes.Add(curNode);
 

@@ -1,32 +1,18 @@
-﻿using Parse.MiddleEnd.IR.Datas;
+﻿using Parse.FrontEnd.InterLanguages.Datas.Types;
+using Parse.MiddleEnd.IR.Datas;
+using Parse.MiddleEnd.IR.LLVM.Models;
+using System;
 
 namespace Parse.MiddleEnd.IR.LLVM
 {
     class LLVMChecker
     {
-        public static bool IsGreater(DataType from, DataType to)
-        {
-            var fromAlign = LLVMConverter.ToAlign(from);
-            var toAlign = LLVMConverter.ToAlign(to);
-
-            return (fromAlign > toAlign);
-        }
-
-        public static bool IsDoubleType(DataType op1Type, DataType op2Type)
-        {
-            return (op1Type == DataType.Double || op2Type == DataType.Double);
-        }
-
-        public static bool IsSigned(IRData op1, IRData op2) => (op1.IsSigned && op2.IsSigned);
-
-        public static bool IsNans(IRData op1, IRData op2) => (op1.IsNan && op2.IsNan);
-
-        public static bool IsExistDoubleType(IRData op1, IRData op2) => (op1.Type == DataType.Double || op2.Type == DataType.Double);
+        public static bool IsExistDoubleType(DataType op1Type, DataType op2Type) => ((op1Type is DoubleType) || (op2Type is DoubleType));
 
         public static bool IsItoFpCondition(DataType op1Type, DataType op2Type)
         {
             if (op1Type == op2Type) return false;   // case double, double
-            if (op1Type != DataType.Double && op2Type != DataType.Double) return false; // case not double, not double
+            if (op1Type is DoubleType && op2Type is DoubleType) return false; // case not double, not double
 
             return true;
         }

@@ -1,4 +1,6 @@
-﻿using Parse.MiddleEnd.IR.Datas;
+﻿using Parse.FrontEnd.InterLanguages.Datas.Types;
+using Parse.MiddleEnd.IR.Datas;
+using Parse.MiddleEnd.IR.Datas.ValueDatas;
 
 namespace Parse.MiddleEnd.IR
 {
@@ -32,8 +34,8 @@ namespace Parse.MiddleEnd.IR
         public abstract IRFormat CreatePostDec(IROptions options, IRVar varData);
 
         public abstract IRFormat CreateNot(IROptions options, IRData data);
-        public abstract IRFormat CreateAnd(IROptions options, IRCond left, IRCond right);
-        public abstract IRFormat CreateOr(IROptions options, IRCond left, IRCond right);
+        public abstract IRFormat CreateAnd(IROptions options, IRValue<Bit> left, IRValue<Bit> right);
+        public abstract IRFormat CreateOr(IROptions options, IRValue<Bit> left, IRValue<Bit> right);
         public abstract IRFormat CreateLogicalOp(IROptions options, IRData left, IRData right, IRCondition cond);
 
 

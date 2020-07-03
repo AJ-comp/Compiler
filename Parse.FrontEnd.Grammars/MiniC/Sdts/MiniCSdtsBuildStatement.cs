@@ -1,6 +1,6 @@
 ﻿using Parse.FrontEnd.Ast;
 using Parse.FrontEnd.Grammars.MiniC.SymbolTableFormat;
-using Parse.FrontEnd.InterLanguages;
+using Parse.MiddleEnd.IR;
 using System.Collections.Generic;
 using System.Linq;
 

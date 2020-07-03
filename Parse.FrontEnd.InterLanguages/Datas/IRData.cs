@@ -1,9 +1,16 @@
-﻿namespace Parse.MiddleEnd.IR.Datas
+﻿using Parse.FrontEnd.InterLanguages.Datas.Types;
+using System;
+
+namespace Parse.MiddleEnd.IR.Datas
 {
     public interface IRData
     {
         DataType Type { get; }
-        bool IsSigned { get; }
+    }
+
+
+    public interface IRData<out T> where T : DataType
+    {
         bool IsNan { get; }
     }
 }

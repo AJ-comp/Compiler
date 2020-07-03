@@ -1,83 +1,45 @@
-﻿using Parse.MiddleEnd.IR.LLVM.Models;
+﻿using Parse.FrontEnd.InterLanguages.Datas.Types;
 
 namespace Parse.MiddleEnd.IR.Datas.ValueDatas
 {
-    public abstract class IRValue : IRData
+    public interface IRValue : IRData, IValue
     {
-        public bool IsZero => (double)Value == 0;
+        bool IsZero { get; }
 
-        public abstract object Value { get; }
-        public abstract DataType Type { get; }
-        public abstract bool IsSigned { get; }
-        public abstract bool IsNan { get; }
+        IRValue<Bit> LogicalOp(IRValue t, IRCondition cond);
 
-        public static DataType GreaterType(IRValue t1, IRValue t2)
-        {
-            var t1TypeSize = IRConverter.ToAlign(t1.Type);
-            var t2TypeSize = IRConverter.ToAlign(t2.Type);
+        bool? IsEqual(IRValue t);
+        bool? IsNotEqual(IRValue t);
+        bool? IsGreaterThan(IRValue t);
+        //{
+        //    // if it is compared by maximum type then problem doesn't exist because data loss is not fired.
+        //    return ((double)Value > (double)t.Value);
+        //}
+        bool? IsLessThan(IRValue t);
+        //{
+        //    // if it is compared by maximum type then problem doesn't exist because data loss is not fired.
+        //    return ((double)Value < (double)t.Value);
+        //}
+        IRValue BinOp(IRValue t, IROperation operation);
+        //{
+        //    IRValue result = null;
+        //    if (operation == IROperation.Add) result = Add(t);
+        //    else if (operation == IROperation.Sub) result = Sub(t);
+        //    else if (operation == IROperation.Mul) result = Mul(t);
+        //    else if (operation == IROperation.Div) result = Div(t);
+        //    else if (operation == IROperation.Mod) result = Mod(t);
 
-            return (t1TypeSize >= t2TypeSize) ? t1.Type : t2.Type;
-        }
+        //    return result;
+        //}
 
+        IRValue Add(IRValue t);
+        IRValue Sub(IRValue t);
+        IRValue Mul(IRValue t);
+        IRValue Div(IRValue t);
+        IRValue Mod(IRValue t);
+    }
 
-        public Integer LogicalOp(IRValue t, IRCondition cond)
-        {
-            Integer result = null;
-            if (cond == IRCondition.EQ) result = IsEqual(t);
-            else if (cond == IRCondition.NE) result = IsNotEqual(t);
-            else if (cond == IRCondition.GT) result = IsGreaterThan(t);
-            else if (cond == IRCondition.LE) result = IsLessThan(t);
-
-            return result;
-        }
-
-        public Integer IsEqual(IRValue t)
-        {
-            var result = (Value == t.Value);
-
-            return new Integer(result);
-        }
-
-        public Integer IsNotEqual(IRValue t)
-        {
-            var result = (Value != t.Value);
-
-            return new Integer(result);
-        }
-
-        public Integer IsGreaterThan(IRValue t)
-        {
-            // if it is compared by maximum type then problem doesn't exist because data loss is not fired.
-            var result = ((double)Value > (double)t.Value);
-
-            return new Integer(result);
-        }
-
-        public Integer IsLessThan(IRValue t)
-        {
-            // if it is compared by maximum type then problem doesn't exist because data loss is not fired.
-            var result = ((double)Value < (double)t.Value);
-
-            return new Integer(result);
-        }
-
-
-        public IRValue BinOp(IRValue t, IROperation operation)
-        {
-            IRValue result = null;
-            if (operation == IROperation.Add) result = Add(t);
-            else if (operation == IROperation.Sub) result = Sub(t);
-            else if (operation == IROperation.Mul) result = Mul(t);
-            else if (operation == IROperation.Div) result = Div(t);
-            else if (operation == IROperation.Mod) result = Mod(t);
-
-            return result;
-        }
-
-        public abstract IRValue Add(IRValue t);
-        public abstract IRValue Sub(IRValue t);
-        public abstract IRValue Mul(IRValue t);
-        public abstract IRValue Div(IRValue t);
-        public abstract IRValue Mod(IRValue t);
+    public interface IRValue<out T> : IRValue where T : DataType
+    {
     }
 }

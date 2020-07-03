@@ -1,4 +1,5 @@
 ﻿using Parse.Extensions;
+using Parse.FrontEnd.InterLanguages.Datas.Types;
 using Parse.MiddleEnd.IR.Datas;
 using Parse.MiddleEnd.IR.Datas.ValueDatas;
 using Parse.MiddleEnd.IR.LLVM.Models;
@@ -24,7 +25,7 @@ namespace Parse.MiddleEnd.IR.LLVM
             var instruction1 = Instruction.Load(ssVar, _ssVarTable);
             var firstNode = instruction1.Result;
 
-            var instruction2 = Instruction.BinOp(firstNode.SSF, new IRIntegerLiteral(1), _ssVarTable, IROperation.Add);
+            var instruction2 = Instruction.BinOp(firstNode.SSF, new SSValue<Int>(1), _ssVarTable, IROperation.Add);
             var secNode = _ssVarTable.LastInLocalList();
 
             var instruction3 = Instruction.Store(secNode.SSF, ssVar);
@@ -45,7 +46,7 @@ namespace Parse.MiddleEnd.IR.LLVM
         // @a = [common] global i32 0, align 4
         private IRFormat DclGlobalVar(IROptions options, IRVar varData)
         {
-            var instruction = Instruction.DeclareGlobalVar(varData.Name, varData.Type, options.Comment);
+            var instruction = Instruction.DeclareGlobalVar(varData, options.Comment);
 
             return new IRFormat(instruction);
         }
@@ -127,7 +128,8 @@ namespace Parse.MiddleEnd.IR.LLVM
         {
             var instruction1 = Instruction.Load(left, _ssVarTable);
             var loadedVar = instruction1.Result;
-            var instruction2 = Instruction.BinOp(loadedVar.SSF, right, _ssVarTable, operation);
+            var ssValue = LLVMConverter.ToSSValue(right);
+            var instruction2 = Instruction.BinOp(loadedVar.SSF, ssValue, _ssVarTable, operation);
 
             var block = new IRBlock()
             {
@@ -195,6 +197,7 @@ namespace Parse.MiddleEnd.IR.LLVM
 
         public override IRFormat CreateCall(IROptions options, IRFuncData funcData, params IRVar[] paramDatas)
         {
+            /*
             var result = new IRBlock();
             string callIns = (funcData.ReturnType == ReturnType.Void) ?
                 string.Format("call {0} @{1}", funcData.ReturnType, funcData.Name) :
@@ -210,6 +213,7 @@ namespace Parse.MiddleEnd.IR.LLVM
 
             result.Add(new Instruction(callIns, string.Format("call {0} func", funcData.Name)));
             return result;
+            */
         }
 
         public override IRFormat CreatePreInc(IROptions options, IRVar varData)
@@ -252,21 +256,21 @@ namespace Parse.MiddleEnd.IR.LLVM
         /// <param name="right">it can be IRVar(variable) or IRValue(literal) or IRCondVar(bool (result of operation))</param>
         /// <returns></returns>
         /// ============================================================================
-        public override IRFormat CreateAnd(IROptions options, IRCond left, IRCond right)
+        public override IRFormat CreateAnd(IROptions options, IRValue<Bit> left, IRValue<Bit> right)
         {
             var leftResult = CondHalfLogic(options, left);          // create load, cmp
-            if (leftResult == null) return new IRFormat(null, new IRCond(false));
+            if (leftResult == null) return new IRFormat(null, new SSValue<Bit>(false));
 
             var rightResult = CondHalfLogic(options, right);        // create load, cmp
-            if (rightResult == null) return new IRFormat(null, new IRCond(false));
+            if (rightResult == null) return new IRFormat(null, new SSValue<Bit>(false));
 
             // create br for right block to the leftBlock.
             var leftCmpNode = (leftResult.Item1.Last() as Instruction).Result;
-            leftResult.Item1.Add(Instruction.CBranch(leftCmpNode.SSF, leftResult.Item3, rightResult.Item3));
+            leftResult.Item1.Add(Instruction.CBranch(leftCmpNode.SSF as LocalVar<Bit>, leftResult.Item2, rightResult.Item2));
 
             // create br for right block to the leftBlock.
             var rightCmpNode = (leftResult.Item1.Last() as Instruction).Result;
-            rightResult.Item1.Add(Instruction.CBranch(rightCmpNode.SSF, leftResult.Item3, rightResult.Item3)); // ??
+            rightResult.Item1.Add(Instruction.CBranch(rightCmpNode.SSF as LocalVar<Bit>, leftResult.Item2, rightResult.Item2)); // ??
 
             return CreateLogicalOp(options, left, right, IRCondition.NE);
         }
@@ -283,16 +287,17 @@ namespace Parse.MiddleEnd.IR.LLVM
 
             irBlock.AddRange(LoadAndExtLogic(left, isItoFpCond));
 
+            var ssf = (irBlock.SecondLast() as Instruction).Result.SSF;
             // icmp or fcmp
-            if (LLVMChecker.IsDoubleType(left.Type, right.Type))
+            if (left.Type is DoubleType || right.Type is DoubleType)
                 irBlock.Add(Instruction.Fcmp(condition, 
-                                                            (irBlock.SecondLast() as Instruction).Result.SSF, 
-                                                            LLVMConverter.ToDoubleLiteral(right), 
+                                                            ssf as LocalVar<DoubleType>, 
+                                                            right as SSValue<DoubleType>, 
                                                             _ssVarTable));
             else
                 irBlock.Add(Instruction.Icmp(condition, 
-                                                            (irBlock.SecondLast() as Instruction).Result.SSF, 
-                                                            right as IRIntegerLiteral, 
+                                                            ssf as LocalVar<Int>, 
+                                                            right as SSValue<Int>, 
                                                             _ssVarTable));
 
             return new IRFormat(irBlock, (irBlock.Last() as Instruction).Result.SSF);
@@ -313,15 +318,15 @@ namespace Parse.MiddleEnd.IR.LLVM
             irBlock.AddRange(LoadAndExtLogic(right, isItoFpCond));
 
             // icmp or fcmp
-            if (LLVMChecker.IsDoubleType(left.Type, right.Type))
+            if (left.Type is DoubleType || right.Type is DoubleType)
                 irBlock.Add(Instruction.Fcmp(condition, 
-                                                            (irBlock.SecondLast() as Instruction).Result.SSF, 
-                                                            (irBlock.Last() as Instruction).Result.SSF, 
+                                                            (irBlock.SecondLast() as Instruction).Result.SSF as LocalVar<DoubleType>, 
+                                                            (irBlock.Last() as Instruction).Result.SSF as LocalVar<DoubleType>, 
                                                             _ssVarTable));
             else
                 irBlock.Add(Instruction.Icmp(condition, 
-                                                            (irBlock.SecondLast() as Instruction).Result.SSF, 
-                                                            (irBlock.Last() as Instruction).Result.SSF, 
+                                                            (irBlock.SecondLast() as Instruction).Result.SSF as LocalVar<Int>, 
+                                                            (irBlock.Last() as Instruction).Result.SSF as LocalVar<Int>, 
                                                             _ssVarTable));
 
             return new IRFormat(irBlock, (irBlock.Last() as Instruction).Result.SSF);
@@ -350,7 +355,7 @@ namespace Parse.MiddleEnd.IR.LLVM
             return CreateLogicalOp(options, leftSSVar, rightSSVar, condition);
         }
 
-        public override IRFormat CreateOr(IROptions options, IRCond left, IRCond right)
+        public override IRFormat CreateOr(IROptions options, IRValue<Bit> left, IRValue<Bit> right)
         {
             throw new NotImplementedException();
         }

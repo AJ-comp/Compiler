@@ -4,4 +4,9 @@
     {
         object Template();
     }
+
+    public interface ITemplateCreatable<T> where T : class
+    {
+        T Template();
+    }
 }

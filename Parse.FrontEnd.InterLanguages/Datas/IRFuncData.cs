@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Parse.FrontEnd.InterLanguages.Datas.Types;
+using System.Collections.Generic;
 
 namespace Parse.MiddleEnd.IR.Datas
 {

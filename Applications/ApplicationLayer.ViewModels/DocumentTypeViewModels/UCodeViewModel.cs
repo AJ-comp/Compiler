@@ -2,8 +2,6 @@
 using ApplicationLayer.Models.SolutionPackage;
 using Parse.FrontEnd;
 using Parse.FrontEnd.Ast;
-using Parse.FrontEnd.InterLanguages;
-using System;
 using System.Collections.Generic;
 
 namespace ApplicationLayer.ViewModels.DocumentTypeViewModels

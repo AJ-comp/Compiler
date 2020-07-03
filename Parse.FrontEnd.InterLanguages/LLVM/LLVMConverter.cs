@@ -1,33 +1,10 @@
-﻿using Parse.MiddleEnd.IR.Datas;
+﻿using Parse.MiddleEnd.IR.Datas.ValueDatas;
+using Parse.MiddleEnd.IR.LLVM.Models;
 
 namespace Parse.MiddleEnd.IR.LLVM
 {
     public class LLVMConverter
     {
-        public static string ToInstructionName(DataType type)
-        {
-            string result = string.Empty;
-
-            if (type == DataType.i8) result = "i8";
-            else if (type == DataType.i16) result = "i16";
-            else if (type == DataType.i32) result = "i32";
-            else if (type == DataType.Double) result = "double";
-
-            return result;
-        }
-
-        public static int ToAlign(DataType type)
-        {
-            int result = 0;
-
-            if (type == DataType.i8) result = 1;
-            else if (type == DataType.i16) result = 2;
-            else if (type == DataType.i32) result = 4;
-            else if (type == DataType.Double) result = 8;
-
-            return result;
-        }
-
         public static string ToInstructionName(ReturnType type)
         {
             string result = string.Empty;
@@ -54,7 +31,7 @@ namespace Parse.MiddleEnd.IR.LLVM
             return result;
         }
 
-        public static string ToInstructionNameForInteger(IRCondition condition, bool bSigned)
+        public static string GetInstructionNameForInteger(IRCondition condition, bool bSigned)
         {
             string result = string.Empty;
 
@@ -79,7 +56,7 @@ namespace Parse.MiddleEnd.IR.LLVM
             return result;
         }
 
-        public static string ToInstructionNameForDouble(IRCondition condition, bool bNans = false)
+        public static string GetInstructionNameForDouble(IRCondition condition, bool bNans = false)
         {
             string result = string.Empty;
 
@@ -104,6 +81,10 @@ namespace Parse.MiddleEnd.IR.LLVM
             return result;
         }
 
-        public static IRDoubleLiteral ToDoubleLiteral(IRValue literal) => new IRDoubleLiteral((double)literal.Value);
+        public static SSValue ToSSValue(IRValue irValue)
+        {
+            System.Type ssfType = typeof(SSValue<>).MakeGenericType(irValue.Type.GetType());
+            return System.Activator.CreateInstance(ssfType, irValue.Value) as SSValue;
+        }
     }
 }

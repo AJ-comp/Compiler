@@ -6,23 +6,20 @@
         /// Static Single Format
         /// </summary>
         public LocalVar SSF { get; }
-        public SSItem LinkedObject { get; }
+        public ISSItem LinkedObject { get; }
 
-        public bool IsLinkedTerminalItem => (LinkedObject is TerminalItem);
-        public object LinkedValue
-        {
-            get
-            {
-                if (!IsLinkedTerminalItem) return null;
+        //public object LinkedValue
+        //{
+        //    get
+        //    {
+        //        var linkedObject = LinkedObject as TerminalItem;
+        //        var result = (linkedObject is NamelessItem) ? (linkedObject as NamelessItem).Value : null;
 
-                var linkedObject = LinkedObject as TerminalItem;
-                var result = (linkedObject is NamelessItem) ? (linkedObject as NamelessItem).Value : null;
+        //        return result;
+        //    }
+        //}
 
-                return result;
-            }
-        }
-
-        public SSNode(LocalVar current, SSItem linkedObject)
+        public SSNode(LocalVar current, ISSItem linkedObject)
         {
             SSF = current;
             LinkedObject = linkedObject;

@@ -1,4 +1,6 @@
-﻿using Parse.MiddleEnd.IR.Datas;
+﻿using Parse.FrontEnd.InterLanguages.Datas.Types;
+using Parse.MiddleEnd.IR.Datas;
+using Parse.MiddleEnd.IR.Datas.ValueDatas;
 
 namespace Parse.MiddleEnd.IR.UCode
 {
@@ -17,7 +19,7 @@ namespace Parse.MiddleEnd.IR.UCode
     {
         public override bool IsSSA => false;
 
-        public override IRFormat CreateAnd(IROptions options, IRCond left, IRCond right)
+        public override IRFormat CreateAnd(IROptions options, IRValue<Bit> left, IRValue<Bit> right)
         {
             throw new System.NotImplementedException();
         }
@@ -78,7 +80,7 @@ namespace Parse.MiddleEnd.IR.UCode
             throw new System.NotImplementedException();
         }
 
-        public override IRFormat CreateOr(IROptions options, IRCond left, IRCond right)
+        public override IRFormat CreateOr(IROptions options, IRValue<Bit> left, IRValue<Bit> right)
         {
             throw new System.NotImplementedException();
         }

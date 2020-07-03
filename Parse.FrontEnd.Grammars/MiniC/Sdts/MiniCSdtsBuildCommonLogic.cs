@@ -3,8 +3,8 @@ using Parse.FrontEnd.Grammars.MiniC.SymbolDataFormat.LiteralDataFormat;
 using Parse.FrontEnd.Grammars.MiniC.SymbolDataFormat.VarDataFormat;
 using Parse.FrontEnd.Grammars.MiniC.SymbolTableFormat;
 using Parse.FrontEnd.Grammars.Properties;
-using Parse.FrontEnd.InterLanguages;
-using Parse.FrontEnd.InterLanguages.Datas;
+using Parse.MiddleEnd.IR;
+using Parse.MiddleEnd.IR.Datas;
 using System.Collections.Generic;
 
 namespace Parse.FrontEnd.Grammars.MiniC.Sdts
@@ -152,19 +152,19 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
             else if (curNode.SignPost.MeaningUnit == this.LogicalAnd)
                 curNode.ConnectedIrUnit = IRBuilder.CreateAnd(option, leftIR, rightIR);
             else if (curNode.SignPost.MeaningUnit == this.LogicalOr)
-                curNode.ConnectedIrUnit = IRBuilder.(ReservedLabel);
+                curNode.ConnectedIrUnit = IRBuilder.CreateOr(ReservedLabel);
             else if (curNode.SignPost.MeaningUnit == this.Equal)
-                curNode.ConnectedIrUnit = IRBuilder.CreateLogicalOp(option, leftIR, rightIR, InterLanguages.IRCondition.EQ);
+                curNode.ConnectedIrUnit = IRBuilder.CreateLogicalOp(option, leftIR, rightIR, IRCondition.EQ);
             else if (curNode.SignPost.MeaningUnit == this.NotEqual)
-                curNode.ConnectedIrUnit = IRBuilder.CreateLogicalOp(option, leftIR, rightIR, InterLanguages.IRCondition.NE);
+                curNode.ConnectedIrUnit = IRBuilder.CreateLogicalOp(option, leftIR, rightIR, IRCondition.NE);
             else if (curNode.SignPost.MeaningUnit == this.GreaterThan)
-                curNode.ConnectedIrUnit = IRBuilder.CreateLogicalOp(option, leftIR, rightIR, InterLanguages.IRCondition.GT);
+                curNode.ConnectedIrUnit = IRBuilder.CreateLogicalOp(option, leftIR, rightIR, IRCondition.GT);
             else if (curNode.SignPost.MeaningUnit == this.GreaterEqual)
-                curNode.ConnectedIrUnit = IRBuilder.CreateLogicalOp(option, leftIR, rightIR, InterLanguages.IRCondition.GE);
+                curNode.ConnectedIrUnit = IRBuilder.CreateLogicalOp(option, leftIR, rightIR, IRCondition.GE);
             else if (curNode.SignPost.MeaningUnit == this.LessThan)
-                curNode.ConnectedIrUnit = IRBuilder.CreateLogicalOp(option, leftIR, rightIR, InterLanguages.IRCondition.LT);
+                curNode.ConnectedIrUnit = IRBuilder.CreateLogicalOp(option, leftIR, rightIR, IRCondition.LT);
             else if (curNode.SignPost.MeaningUnit == this.LessEqual)
-                curNode.ConnectedIrUnit = IRBuilder.CreateLogicalOp(option, leftIR, rightIR, InterLanguages.IRCondition.LE);
+                curNode.ConnectedIrUnit = IRBuilder.CreateLogicalOp(option, leftIR, rightIR, IRCondition.LE);
             //            else if (curNode.SignPost.MeaningUnit == this.LogicalNot)
             //                curNode.ConnectedIrUnit = IRBuilder.CreateNot(option, );
 

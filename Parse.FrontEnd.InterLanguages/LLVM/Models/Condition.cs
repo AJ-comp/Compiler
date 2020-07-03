@@ -7,7 +7,7 @@ namespace Parse.MiddleEnd.IR.LLVM.Models
         public bool ValueRealType => (bool)Value;
         public IRCond ToIRCondVar => new IRCond(ValueRealType);
 
-        public Condition(bool value) : base(DataType.i1, value)
+        public Condition(bool value) : base(DataTypes.i1, value)
         {
         }
     }
