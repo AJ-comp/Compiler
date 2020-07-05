@@ -1,73 +1,32 @@
 ﻿using Parse.FrontEnd.Grammars.MiniC.SymbolTableFormat;
-using IRData = Parse.FrontEnd.InterLanguages;
-using IR = Parse.FrontEnd.InterLanguages.Datas;
-using Parse.FrontEnd.Grammars.MiniC.SymbolDataFormat.VarDataFormat;
+using Parse.MiddleEnd.IR;
+using Parse.MiddleEnd.IR.Datas;
 using System.Collections.Generic;
-using Parse.FrontEnd.Grammars.MiniC.SymbolDataFormat.LiteralDataFormat;
 
 namespace Parse.FrontEnd.Grammars
 {
     public class IRConverter
     {
-        public static IRData.DataType ToIRDataType(DataType dataType)
+        public static ReturnType ToIRReturnType(DataType returnType)
         {
-            IRData.DataType result = IRData.DataType.i32;
+            ReturnType result = ReturnType.Void;
 
-            if (dataType == DataType.Int) result = IRData.DataType.i32;
+            if (returnType == DataType.Void) result = ReturnType.Void;
+            else if (returnType == DataType.Int) result = ReturnType.i32;
 
             return result;
         }
 
-        public static IRData.ReturnType ToIRReturnType(DataType returnType)
+        public static IRFuncData ToIRData(FuncData funcData)
         {
-            IRData.ReturnType result = IRData.ReturnType.Void;
-
-            if (returnType == DataType.Void) result = IRData.ReturnType.Void;
-            else if (returnType == DataType.Int) result = IRData.ReturnType.i32;
-
-            return result;
-        }
-
-        public static IR.IRData ToIRData(RealVarData varData) => ToIRData(varData.DclData);
-
-        public static IR.IRData ToIRData(DclData dclData)
-        {
-            return new IR.IRVar(IRConverter.ToIRDataType(dclData.DclSpecData.DataType),
-                                                dclData.DclItemData.Name,
-                                                dclData.BlockLevel,
-                                                dclData.Offset,
-                                                dclData.DclItemData.Dimension
-                                                );
-        }
-
-        public static IR.IRData ToIRData(LiteralData literalData)
-        {
-            if (literalData is CharLiteralData)
-                return new IR.IRIntegerLiteral(IRData.DataType.i8, (literalData as CharLiteralData).Value);
-            else if (literalData is ShortLiteralData)
-                return new IR.IRIntegerLiteral(IRData.DataType.i16, (literalData as ShortLiteralData).Value);
-            else if (literalData is IntLiteralData)
-                return new IR.IRIntegerLiteral(IRData.DataType.i16, (literalData as IntLiteralData).Value);
-            else if (literalData is LongLiteralData)
-                return new IR.IRIntegerLiteral(IRData.DataType.i16, (int)(literalData as LongLiteralData).Value);
-            else if (literalData is DoubleLiteralData)
-                return new IR.IRDoubleLiteral((literalData as DoubleLiteralData).Value);
-
-            return null;
-        }
-
-        public static IR.IRFuncData ToIRData(FuncData funcData)
-        {
-            List<IR.IRVar> paramVars = new List<IR.IRVar>();
+            List<IRVar> paramVars = new List<IRVar>();
 
             foreach (var param in funcData.ParamVars)
             {
-                var irData = IRConverter.ToIRData(param) as IR.IRVar;
-                
-                paramVars.Add(irData);
+                paramVars.Add(param);
             }
 
-            return new IR.IRFuncData(paramVars,
+            return new IRFuncData(paramVars,
                                                 funcData.DclSpecData.Const,
                                                 IRConverter.ToIRReturnType(funcData.DclSpecData.DataType),
                                                 funcData.Name

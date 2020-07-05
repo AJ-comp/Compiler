@@ -1,5 +1,5 @@
-﻿using Parse.FrontEnd.InterLanguages.Datas.Types;
-using Parse.MiddleEnd.IR.Datas;
+﻿using Parse.MiddleEnd.IR.Datas;
+using Parse.MiddleEnd.IR.Datas.Types;
 using Parse.MiddleEnd.IR.Datas.ValueDatas;
 
 namespace Parse.MiddleEnd.IR.UCode
@@ -19,7 +19,12 @@ namespace Parse.MiddleEnd.IR.UCode
     {
         public override bool IsSSA => false;
 
-        public override IRFormat CreateAnd(IROptions options, IRValue<Bit> left, IRValue<Bit> right)
+        public override IRFormat CreateAnd(IROptions options, IRData<Bit> left, IRData<Bit> right)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public override IRFormat CreateAssign(IROptions options, IRVar left, IRData right)
         {
             throw new System.NotImplementedException();
         }
@@ -80,7 +85,7 @@ namespace Parse.MiddleEnd.IR.UCode
             throw new System.NotImplementedException();
         }
 
-        public override IRFormat CreateOr(IROptions options, IRValue<Bit> left, IRValue<Bit> right)
+        public override IRFormat CreateOr(IROptions options, IRData<Bit> left, IRData<Bit> right)
         {
             throw new System.NotImplementedException();
         }
@@ -101,6 +106,11 @@ namespace Parse.MiddleEnd.IR.UCode
         }
 
         public override IRFormat CreatePreInc(IROptions options, IRVar varData)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public override IRFormat CretaeConditionalJump(IROptions options, IRVar<Bit> cond, IRVar<Bit> trueLabel, IRVar<Bit> falseLabel)
         {
             throw new System.NotImplementedException();
         }

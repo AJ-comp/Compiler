@@ -16,9 +16,9 @@ namespace Parse.FrontEnd.Grammars.MiniC
             {
                 var convertedLhs = varData.Value as UnknownLiteralData;
                 if (convertedLhs.IsOnlyNotInit)
-                    result.Add(new MeaningErrInfo(hs, nameof(AlarmCodes.MCL0005), string.Format(AlarmCodes.MCL0005, varData.VarName)));
+                    result.Add(new MeaningErrInfo(hs, nameof(AlarmCodes.MCL0005), string.Format(AlarmCodes.MCL0005, varData.Name)));
                 else if (convertedLhs.IsNotInitAndDynamicAlloc)
-                    result.Add(new MeaningErrInfo(hs, nameof(AlarmCodes.MCL0005), string.Format(AlarmCodes.MCL0005, varData.VarName), ErrorType.Warning));
+                    result.Add(new MeaningErrInfo(hs, nameof(AlarmCodes.MCL0005), string.Format(AlarmCodes.MCL0005, varData.Name), ErrorType.Warning));
             }
 
             return result;

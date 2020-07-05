@@ -1,9 +1,8 @@
-﻿using Parse.FrontEnd.InterLanguages.Datas.Types;
-using Parse.MiddleEnd.IR.Datas;
+﻿using Parse.MiddleEnd.IR.Datas;
+using Parse.MiddleEnd.IR.Datas.Types;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
 
 namespace Parse.MiddleEnd.IR.LLVM.Models
 {
@@ -25,7 +24,7 @@ namespace Parse.MiddleEnd.IR.LLVM.Models
 
         public GlobalVar CreateNewGlobalVar(IRVar irVar)
         {
-            Type myType = typeof(GlobalVar<>).MakeGenericType(irVar.Type.GetType());
+            Type myType = typeof(GlobalVar<>).MakeGenericType(irVar.TypeName.GetType());
             GlobalVar globalVar  = Activator.CreateInstance(myType, irVar) as GlobalVar;
 
             _globalVarList.Add(globalVar);
@@ -35,25 +34,25 @@ namespace Parse.MiddleEnd.IR.LLVM.Models
         public SSNode NewNode(IRVar irVar)
         {
             // ssf
-            Type ssfType = typeof(LocalVar<>).MakeGenericType(irVar.Type.GetType());
+            Type ssfType = typeof(LocalVar<>).MakeGenericType(irVar.TypeName.GetType());
             object newSSVar = Activator.CreateInstance(ssfType, NextOffset++);
 
-            var ssNode = new SSNode(newSSVar as LocalVar, null);
-            _ssNodeList.Add(ssNode);
+            if (irVar is LocalVar)
+            {
+                var ssNode = new SSNode(newSSVar as LocalVar, irVar);
+                _ssNodeList.Add(ssNode);
 
-            return ssNode;
-        }
+                return ssNode;
+            }
+            else if(irVar is GlobalVar)
+            {
+                var ssNode = new SSNode(newSSVar as LocalVar, null);
+                _ssNodeList.Add(ssNode);
 
-        public SSNode NewNode(ISSVar namedItem)
-        {
-            // ssf
-            Type myType = typeof(LocalVar<>).MakeGenericType(namedItem.Type.GetType());
-            object instance = Activator.CreateInstance(myType, NextOffset++);
+                return ssNode;
+            }
 
-            var ssNode = new SSNode(instance as LocalVar, namedItem);
-            _ssNodeList.Add(ssNode);
-
-            return ssNode;
+            return null;
         }
 
         public SSNode NewNode(bool value)

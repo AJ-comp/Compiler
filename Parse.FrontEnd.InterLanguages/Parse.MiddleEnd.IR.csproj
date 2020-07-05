@@ -53,12 +53,9 @@
     <Compile Include="Datas\Types\Short.cs" />
     <Compile Include="Datas\IRFuncData.cs" />
     <Compile Include="Datas\IRData.cs" />
-    <Compile Include="Datas\Support\ISupportSSFormat.cs" />
     <Compile Include="IRConverter.cs" />
     <Compile Include="LLVM\LLVMAssemblyCommon.cs" />
-    <Compile Include="LLVM\Models\ISSVar.cs" />
     <Compile Include="LLVM\Models\LocalVar.cs" />
-    <Compile Include="LLVM\Models\ISSItem.cs" />
     <Compile Include="LLVM\Models\SSList.cs" />
     <Compile Include="LLVM\Models\SSNode.cs" />
     <Compile Include="LLVM\Models\SSTable.cs" />
@@ -77,7 +74,6 @@
     <Compile Include="Datas\IRVar.cs" />
     <Compile Include="IRTypes.cs" />
     <Compile Include="Datas\IRParamVar.cs" />
-    <Compile Include="LLVM\Models\Condition.cs" />
     <Compile Include="LLVM\Models\SSValue.cs" />
     <Compile Include="LLVM\Models\GlobalVar.cs" />
     <Compile Include="UCode\UCodeBuilder.cs" />

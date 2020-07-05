@@ -1,4 +1,4 @@
-﻿using Parse.FrontEnd.InterLanguages.Datas.Types;
+﻿using Parse.MiddleEnd.IR.Datas.Types;
 using System.Collections.Generic;
 
 namespace Parse.MiddleEnd.IR.Datas
@@ -9,10 +9,9 @@ namespace Parse.MiddleEnd.IR.Datas
 
         public bool ConstReturn { get; }
         public ReturnType ReturnType { get; }
+        public DType TypeName => throw new System.NotImplementedException();
         public string Name { get; }
         public IReadOnlyList<IRVar> Arguments => _arguments;
-
-        public DataType Type => throw new System.NotImplementedException();
         public bool IsSigned => false;
         public bool IsNan => false;
 

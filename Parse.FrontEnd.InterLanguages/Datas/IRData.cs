@@ -1,11 +1,10 @@
-﻿using Parse.FrontEnd.InterLanguages.Datas.Types;
-using System;
+﻿using Parse.MiddleEnd.IR.Datas.Types;
 
 namespace Parse.MiddleEnd.IR.Datas
 {
     public interface IRData
     {
-        DataType Type { get; }
+        DType TypeName { get; }
     }
 
 

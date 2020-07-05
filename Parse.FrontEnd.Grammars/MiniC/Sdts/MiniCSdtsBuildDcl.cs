@@ -141,12 +141,12 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
                 }
                 else if (astNonTerminal.SignPost.MeaningUnit == this.VoidNode)
                 {
-                    result.DataType = SymbolTableFormat.DataType.Void;
+                    result.DataType = DataType.Void;
                     result.DataTypeToken = (astNonTerminal.Items[0] as AstTerminal).Token;
                 }
                 else if (astNonTerminal.SignPost.MeaningUnit == this.IntNode)
                 {
-                    result.DataType = SymbolTableFormat.DataType.Int;
+                    result.DataType = DataType.Int;
                     result.DataTypeToken = (astNonTerminal.Items[0] as AstTerminal).Token;
                 }
             }
@@ -345,10 +345,10 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
             var varData = ConnectSimpleVarCode(curNode.Items[0] as AstTerminal, p);
             if (varData is VirtualVarData) result = false;
 
-            // it has to add 'curNode.Items[0]' to the AstNodes because IL or ME is added in the ConnectSimpleVarCode function.            
+            // it has to add 'curNode.Items[0]' to the AstNodes because IR or ME is added in the ConnectSimpleVarCode function.            
             astNodes.Add(curNode.Items[0]);
 
-            // Even if doesn't exist a information in the node, it has to add.
+            // Even if the information doesn't exist in the node, it has to add.
             astNodes.Add(curNode);
 
             return new AstBuildResult(varData, null, result);
@@ -360,7 +360,7 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
             curNode.ConnectedSymbolTable = p.SymbolTable;
 
             IntLiteralData result = new IntLiteralData((curNode.Items[0] as AstTerminal).Token);
-            curNode.ConnectedIrUnit = UCodeBuilder.Command.DclValue(ReservedLabel, result.Value);
+//            curNode.ConnectedIrUnit = UCodeBuilder.Command.DclValue(ReservedLabel, result.Value);
             astNodes.Add(curNode);
 
             return new AstBuildResult(result, null, true);

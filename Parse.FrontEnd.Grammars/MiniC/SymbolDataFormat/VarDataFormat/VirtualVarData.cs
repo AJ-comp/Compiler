@@ -11,10 +11,10 @@ namespace Parse.FrontEnd.Grammars.MiniC.SymbolDataFormat.VarDataFormat
 
         public TokenData VarToken { get; }
 
-        public override string VarName => VarToken.Input;
-        public override int BlockLevel => _blockLevel;
+        public override string Name => VarToken.Input;
+        public override int Block => _blockLevel;
         public override int Offset => _offset;
-        public override int Dimension => _dimension;
+        public override int Length => _dimension;
         public override LiteralData Value
         {
             get => _literalData;

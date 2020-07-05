@@ -1,6 +1,6 @@
 ﻿using Parse.Extensions;
-using Parse.FrontEnd.InterLanguages.Datas.Types;
 using Parse.MiddleEnd.IR.Datas;
+using Parse.MiddleEnd.IR.Datas.Types;
 using Parse.MiddleEnd.IR.Datas.ValueDatas;
 using Parse.MiddleEnd.IR.LLVM.Models;
 using System;
@@ -20,7 +20,7 @@ namespace Parse.MiddleEnd.IR.LLVM
         // %1 = load i32, i32* @a, align 4 ; <-- use this.
         // %2 = add nsw i32 %1, 1
         // store i32 %2, i32* @a, align 4
-        private Tuple<IReadOnlyList<SSNode>,IRBlock> CommonIncLogic(ISSVar ssVar, IROptions options)
+        private Tuple<IReadOnlyList<SSNode>,IRBlock> CommonIncLogic(IRVar ssVar, IROptions options)
         {
             var instruction1 = Instruction.Load(ssVar, _ssVarTable);
             var firstNode = instruction1.Result;
@@ -124,7 +124,7 @@ namespace Parse.MiddleEnd.IR.LLVM
         //  %1 = load i32, i32* @c, align 4
         //  %2 = add nsw i32 %1, 10
         // ---------------------------------------
-        private IRFormat CreateBinOp(IROptions options, ISSVar left, IRValue right, IROperation operation)
+        private IRFormat CreateBinOp(IROptions options, IRVar left, IRValue right, IROperation operation)
         {
             var instruction1 = Instruction.Load(left, _ssVarTable);
             var loadedVar = instruction1.Result;
@@ -147,7 +147,7 @@ namespace Parse.MiddleEnd.IR.LLVM
         //  %2 = load i32, i32* @b, align 4
         //  %3 = add nsw i32 %1, %2
         // ---------------------------------------
-        private IRFormat CreateBinOp(IROptions options, ISSVar left, ISSVar right, IROperation operation)
+        private IRFormat CreateBinOp(IROptions options, IRVar left, IRVar right, IROperation operation)
         {
             var instruction1 = Instruction.Load(left, _ssVarTable);
             var leftNewSSVar = instruction1.Result.SSF;
@@ -172,11 +172,11 @@ namespace Parse.MiddleEnd.IR.LLVM
         // ---------------------------------------
         public override IRFormat CreateBinOP(IROptions options, IRData left, IRData right, IROperation operation)
         {
-            ISSVar leftSSVar = (left is IRVar) ? _ssVarTable.GetNode(left as IRVar).SSF :  // ssVar for left (ex : @c);
-                                            (left is ISSVar) ? left as ISSVar : null;
+            IRVar leftSSVar = (left is IRVar) ? _ssVarTable.GetNode(left as IRVar).SSF : // ssVar for left (ex : @c);
+                                                                null;
 
-            ISSVar rightSSVar = (right is IRVar) ? _ssVarTable.GetNode(right as IRVar).SSF :  // ssVar for right (ex : @c)
-                                            (right is ISSVar) ? right as ISSVar : null;
+            IRVar rightSSVar = (right is IRVar) ? _ssVarTable.GetNode(right as IRVar).SSF :  // ssVar for right (ex : @c)
+                                                                null;
 
 
             // if both left and right is LiteralData
@@ -214,6 +214,8 @@ namespace Parse.MiddleEnd.IR.LLVM
             result.Add(new Instruction(callIns, string.Format("call {0} func", funcData.Name)));
             return result;
             */
+
+            return null;
         }
 
         public override IRFormat CreatePreInc(IROptions options, IRVar varData)
@@ -256,7 +258,7 @@ namespace Parse.MiddleEnd.IR.LLVM
         /// <param name="right">it can be IRVar(variable) or IRValue(literal) or IRCondVar(bool (result of operation))</param>
         /// <returns></returns>
         /// ============================================================================
-        public override IRFormat CreateAnd(IROptions options, IRValue<Bit> left, IRValue<Bit> right)
+        public override IRFormat CreateAnd(IROptions options, IRData<Bit> left, IRData<Bit> right)
         {
             var leftResult = CondHalfLogic(options, left);          // create load, cmp
             if (leftResult == null) return new IRFormat(null, new SSValue<Bit>(false));
@@ -280,16 +282,16 @@ namespace Parse.MiddleEnd.IR.LLVM
         // [<result> = sext <ty> <op> to i32]
         // [<result> = sitofp i32 <op> to double] || [<result> = uitofp i32 <op> to double]
         // <result> = fcmp <cond> <ty> <left>, <right>
-        private IRFormat CreateLogicalOp(IROptions options, ISSVar left, IRValue right, IRCondition condition)
+        private IRFormat CreateLogicalOp(IROptions options, IRVar left, IRValue right, IRCondition condition)
         {
             IRBlock irBlock = new IRBlock();
-            var isItoFpCond = LLVMChecker.IsItoFpCondition(left.Type, right.Type);
+            var isItoFpCond = LLVMChecker.IsItoFpCondition(left.TypeName, right.TypeName);
 
             irBlock.AddRange(LoadAndExtLogic(left, isItoFpCond));
 
             var ssf = (irBlock.SecondLast() as Instruction).Result.SSF;
             // icmp or fcmp
-            if (left.Type is DoubleType || right.Type is DoubleType)
+            if (left.TypeName == DType.Double || right.TypeName == DType.Double)
                 irBlock.Add(Instruction.Fcmp(condition, 
                                                             ssf as LocalVar<DoubleType>, 
                                                             right as SSValue<DoubleType>, 
@@ -309,16 +311,16 @@ namespace Parse.MiddleEnd.IR.LLVM
         // [<result> = sext <ty> <op> to i32]*
         // [<result> = sitofp i32 <op> to double] || [<result> = uitofp i32 <op> to double]
         // <result> = icmp eq i32 <op1>, <op2>
-        private IRFormat CreateLogicalOp(IROptions options, ISSVar left, ISSVar right, IRCondition condition)
+        private IRFormat CreateLogicalOp(IROptions options, IRVar left, IRVar right, IRCondition condition)
         {
             var irBlock = new IRBlock();
-            var isItoFpCond = LLVMChecker.IsItoFpCondition(left.Type, right.Type);
+            var isItoFpCond = LLVMChecker.IsItoFpCondition(left.TypeName, right.TypeName);
 
             irBlock.AddRange(LoadAndExtLogic(left, isItoFpCond));
             irBlock.AddRange(LoadAndExtLogic(right, isItoFpCond));
 
             // icmp or fcmp
-            if (left.Type is DoubleType || right.Type is DoubleType)
+            if (left.TypeName == DType.Double || right.TypeName == DType.Double)
                 irBlock.Add(Instruction.Fcmp(condition, 
                                                             (irBlock.SecondLast() as Instruction).Result.SSF as LocalVar<DoubleType>, 
                                                             (irBlock.Last() as Instruction).Result.SSF as LocalVar<DoubleType>, 
@@ -334,11 +336,11 @@ namespace Parse.MiddleEnd.IR.LLVM
 
         public override IRFormat CreateLogicalOp(IROptions options, IRData left, IRData right, IRCondition condition)
         {
-            ISSVar leftSSVar = (left is IRVar) ? _ssVarTable.GetNode(left as IRVar).SSF :  // ssVar for left (ex : @c);
-                                            (left is ISSVar) ? left as ISSVar : null;
+            IRVar leftSSVar = (left is IRVar) ? _ssVarTable.GetNode(left as IRVar).SSF :  // ssVar for left (ex : @c);
+                                                                null;
 
-            ISSVar rightSSVar = (right is IRVar) ? _ssVarTable.GetNode(right as IRVar).SSF :  // ssVar for right (ex : @c)
-                                            (right is ISSVar) ? right as ISSVar : null;
+            IRVar rightSSVar = (right is IRVar) ? _ssVarTable.GetNode(right as IRVar).SSF :  // ssVar for right (ex : @c)
+                                                                null;
 
             if (leftSSVar is null && rightSSVar is null)
             {
@@ -355,7 +357,17 @@ namespace Parse.MiddleEnd.IR.LLVM
             return CreateLogicalOp(options, leftSSVar, rightSSVar, condition);
         }
 
-        public override IRFormat CreateOr(IROptions options, IRValue<Bit> left, IRValue<Bit> right)
+        public override IRFormat CreateOr(IROptions options, IRData<Bit> left, IRData<Bit> right)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override IRFormat CreateAssign(IROptions options, IRVar left, IRData right)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override IRFormat CretaeConditionalJump(IROptions options, IRVar<Bit> cond, IRVar<Bit> trueLabel, IRVar<Bit> falseLabel)
         {
             throw new NotImplementedException();
         }

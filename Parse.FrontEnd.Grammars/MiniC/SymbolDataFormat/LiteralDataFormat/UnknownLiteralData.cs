@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Parse.MiddleEnd.IR;
+using Parse.MiddleEnd.IR.Datas.Types;
+using Parse.MiddleEnd.IR.Datas.ValueDatas;
+using System;
 
 namespace Parse.FrontEnd.Grammars.MiniC.SymbolDataFormat.LiteralDataFormat
 {
@@ -21,6 +24,12 @@ namespace Parse.FrontEnd.Grammars.MiniC.SymbolDataFormat.LiteralDataFormat
             }
         }
 
+        public override bool IsZero => false;
+        public override DType TypeName => DType.Unknown;
+        public override object Value => null;
+        public override bool Signed => false;
+        public override bool IsNan => true;
+
         public UnknownLiteralData(UnknownState state, TokenData valueToken) : base(valueToken)
         {
             State = state;
@@ -28,7 +37,7 @@ namespace Parse.FrontEnd.Grammars.MiniC.SymbolDataFormat.LiteralDataFormat
 
         // NotInit op x(everything) => NotInit
         // DynamicAlloc op DecidedLiteral => DynamicAlloc
-        private LiteralData CommonLogic(LiteralData right)
+        private LiteralData CommonLogic(IRValue right)
         {
             LiteralData result = this;
 
@@ -36,22 +45,52 @@ namespace Parse.FrontEnd.Grammars.MiniC.SymbolDataFormat.LiteralDataFormat
             {
                 var cRight = right as UnknownLiteralData;
 
-                if (cRight.IsIncludeNotInit) result = right;
+                if (cRight.IsIncludeNotInit) result = right as LiteralData;
             }
 
             return result;
         }
 
-        public override LiteralData Add(LiteralData right) => CommonLogic(right);
+        public override IRValue Add(IRValue right) => CommonLogic(right);
 
-        public override LiteralData Sub(LiteralData right) => CommonLogic(right);
+        public override IRValue Sub(IRValue right) => CommonLogic(right);
 
-        public override LiteralData Mul(LiteralData right) => CommonLogic(right);
+        public override IRValue Mul(IRValue right) => CommonLogic(right);
 
-        public override LiteralData Div(LiteralData right) => CommonLogic(right);
+        public override IRValue Div(IRValue right) => CommonLogic(right);
 
-        public override LiteralData Mod(LiteralData right) => CommonLogic(right);
+        public override IRValue Mod(IRValue right) => CommonLogic(right);
 
         public override object Clone() => new UnknownLiteralData(State, ValueToken);
+
+        public override IRValue<Bit> LogicalOp(IRValue t, IRCondition cond)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override bool? IsEqual(IRValue t)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override bool? IsNotEqual(IRValue t)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override bool? IsGreaterThan(IRValue t)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override bool? IsLessThan(IRValue t)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override IRValue BinOp(IRValue t, IROperation operation)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace Parse.FrontEnd.InterLanguages.Datas.Types
+﻿namespace Parse.MiddleEnd.IR.Datas.Types
 {
     public abstract class Integer : DataType
     {

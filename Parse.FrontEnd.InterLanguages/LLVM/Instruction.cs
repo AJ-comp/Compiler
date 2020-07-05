@@ -1,5 +1,5 @@
-﻿using Parse.FrontEnd.InterLanguages.Datas.Types;
-using Parse.MiddleEnd.IR.Datas;
+﻿using Parse.MiddleEnd.IR.Datas;
+using Parse.MiddleEnd.IR.Datas.Types;
 using Parse.MiddleEnd.IR.LLVM.Models;
 using System;
 
@@ -32,19 +32,19 @@ namespace Parse.MiddleEnd.IR.LLVM
 
         internal static Instruction DeclareGlobalVar(IRVar irVar, string comment="")
         {
-            var type = irVar.Type.ToString();
-            int align = irVar.Type.Size;
+            var type = LLVMConverter.ToInstructionName(irVar.TypeName);
+            int align = LLVMConverter.ToSize(irVar.TypeName);
 
             return new Instruction(string.Format("@{0} = global {1} 0, align {2}", 
                                                                     irVar.Name, type, align), 
                                                                     comment);
         }
 
-        internal static Instruction DeclareLocalVar(IRVar varData, SSTable ssVarTable, string comment="")
+        internal static Instruction DeclareLocalVar(IRVar irVar, SSTable ssVarTable, string comment="")
         {
-            var newNode = ssVarTable.NewNode(varData);
-            var type = varData.Type.ToString();
-            int align = varData.Type.Size;
+            var newNode = ssVarTable.NewNode(irVar);
+            var type = LLVMConverter.ToInstructionName(irVar.TypeName);
+            int align = LLVMConverter.ToSize(irVar.TypeName);
 
             return new Instruction(string.Format("{0} = alloca {1}, align {2}", 
                                                                     newNode.SSF.Name, type, align), 
@@ -53,7 +53,7 @@ namespace Parse.MiddleEnd.IR.LLVM
 
         // sample
         // <result> = load <ty>, <ty>* <pointer>[, align <alignment>]
-        internal static Instruction Load(ISSVar namedItem, SSTable ssVarTable, string comment = "")
+        internal static Instruction Load(IRVar namedItem, SSTable ssVarTable, string comment = "")
         {
             if(namedItem is LocalVar)
             {
@@ -65,8 +65,8 @@ namespace Parse.MiddleEnd.IR.LLVM
             }
 
             var newNode = ssVarTable.NewNode(namedItem);
-            var type = newNode.SSF.Type.ToString();
-            int align = newNode.SSF.Type.Size;
+            var type = LLVMConverter.ToInstructionName(newNode.SSF.TypeName);
+            int align = LLVMConverter.ToSize(newNode.SSF.TypeName);
 
             return new Instruction(string.Format("{0} = load {1}, {1}* {2}, align {3}", 
                                                                     newNode.SSF.Name, type, namedItem.Name, align),     // string param
@@ -76,10 +76,10 @@ namespace Parse.MiddleEnd.IR.LLVM
 
         // sample
         // store i32 %3, i32* @a, align 4
-        internal static Instruction Store(ISSVar fromSSVar, ISSVar toSSVar, string comment = "")
+        internal static Instruction Store(IRVar fromSSVar, IRVar toSSVar, string comment = "")
         {
-            var fromType = fromSSVar.Type.ToString();
-            int fromAlign = fromSSVar.Type.Size;
+            var fromType = LLVMConverter.ToInstructionName(fromSSVar.TypeName);
+            int fromAlign = LLVMConverter.ToSize(fromSSVar.TypeName);
 
             return new Instruction(string.Format("store = {0} {1}, {0}* {2}, align {3}", 
                                                                     fromType, fromSSVar.Name, toSSVar.Name, fromAlign), // string param
@@ -93,7 +93,7 @@ namespace Parse.MiddleEnd.IR.LLVM
             var newNode = ssVarTable.NewNode(op1);
             var binOp = LLVMConverter.ToInstructionName(operation);
 
-            if (op1.Type is DoubleType)
+            if (op1.TypeName == DType.Double)
             {
                 return new Instruction(string.Format("{0} = f{1} double {2}, {3}", 
                                                                         newNode.SSF.Name, binOp, op1.Name, op2.Name), 
@@ -101,7 +101,7 @@ namespace Parse.MiddleEnd.IR.LLVM
             }
             else
             {
-                var type = LLVMConverter.ToInstructionName(op1.Type);
+                var type = LLVMConverter.ToInstructionName(op1.TypeName);
 
                 return new Instruction(string.Format("{0} = {1} nsw {2} {3}, {4}", 
                                                                         newNode.SSF, binOp, type, op1.Name, op2.Name), 
@@ -114,7 +114,7 @@ namespace Parse.MiddleEnd.IR.LLVM
             var newNode = ssVarTable.NewNode(op1);
             var binOp = LLVMConverter.ToInstructionName(operation);
 
-            if (op1.Type is DoubleType)
+            if (op1.TypeName == DType.Double)
             {
                 return new Instruction(string.Format("{0} = f{1} double {2}, {3}", 
                                                                         newNode.SSF.Name, binOp, op1.Name, op2.Value), 
@@ -122,7 +122,7 @@ namespace Parse.MiddleEnd.IR.LLVM
             }
             else
             {
-                var type = LLVMConverter.ToInstructionName(op1.Type);
+                var type = LLVMConverter.ToInstructionName(op1.TypeName);
 
                 return new Instruction(string.Format("{0} = {1} nsw {2} {3}, {4}", 
                                                                         newNode.SSF.Name, binOp, type, op1.Name, op2.Value), 
@@ -135,13 +135,14 @@ namespace Parse.MiddleEnd.IR.LLVM
         internal static Instruction SExt(LocalVar<Integer> op, SSTable ssVarTable)
         {
             var newNode = ssVarTable.NewNode(op);
-            var typeSize = op.Type.Size;
+            var typeSize = LLVMConverter.ToSize(op.TypeName);
 
             var toCompare = new LocalVar<Int>(0xff);
-            return (typeSize >= toCompare.Type.Size) ? 
-                null : new Instruction(string.Format("{0} = sext {1} {2} to i32", 
-                                                                        newNode.SSF.Name, op.Type, op.Name), 
-                                                                        newNode);
+            var size = LLVMConverter.ToSize(toCompare.TypeName);
+            return (typeSize >= size) ? null : 
+                                                    new Instruction(string.Format("{0} = sext {1} {2} to i32", 
+                                                                                                    newNode.SSF.Name, op.TypeName, op.Name), 
+                                                                                                    newNode);
         }
 
         // <result> = sitofp i32 <op> to double
@@ -173,7 +174,7 @@ namespace Parse.MiddleEnd.IR.LLVM
             var condIns = LLVMConverter.GetInstructionNameForInteger(cond, isAllSigned);
 
             return new Instruction(string.Format("{0} = icmp {1} {2} {3}, {4}", 
-                                                                    newSSVar.SSF.Name, condIns, op1.Type, op1.Name, op2.Name), 
+                                                                    newSSVar.SSF.Name, condIns, op1.TypeName, op1.Name, op2.Name), 
                                                                     newSSVar);
         }
 
@@ -186,7 +187,7 @@ namespace Parse.MiddleEnd.IR.LLVM
             var condIns = LLVMConverter.GetInstructionNameForInteger(cond, isSigned);
 
             return new Instruction(string.Format("{0} = icmp {1} {2} {3}, {4}", 
-                                                                    newNode.SSF.Name, condIns, op1.Type, op1.Name, op2.Value), 
+                                                                    newNode.SSF.Name, condIns, op1.TypeName, op1.Name, op2.Value), 
                                                                     newNode);
         }
 
@@ -199,7 +200,7 @@ namespace Parse.MiddleEnd.IR.LLVM
             var condIns = LLVMConverter.GetInstructionNameForDouble(cond, isNan);
 
             return new Instruction(string.Format("{0} = fcmp {1} {2} {3}, {4}", 
-                                                                    newNode.SSF.Name, condIns, op1.Type, op1.Name, op2.Name), 
+                                                                    newNode.SSF.Name, condIns, op1.TypeName, op1.Name, op2.Name), 
                                                                     newNode);
         }
 
@@ -212,7 +213,7 @@ namespace Parse.MiddleEnd.IR.LLVM
             var condIns = LLVMConverter.GetInstructionNameForDouble(cond, isNan);
 
             return new Instruction(string.Format("{0} = fcmp {1} {2} {3}, {4}", 
-                                                                    newNode.SSF.Name, condIns, op1.Type, op1.Name, op2.Value), 
+                                                                    newNode.SSF.Name, condIns, op1.TypeName, op1.Name, op2.Value), 
                                                                     newNode);
         }
 

@@ -84,7 +84,7 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
             var logicalResult = (curNode[1] as AstNonTerminal).BuildLogic(p, astNodes);
 
             string newLabel = NewReservedLabel();
-            curNode.ConnectedIrUnit = UCodeBuilder.Command.ConditionalJump(string.Empty, newLabel, false);
+            curNode.ConnectedIrUnit = IRBuilder.CretaeConditionalJump(string.Empty, newLabel, false);
             astNodes.Add(curNode);
 
             // build statement node
@@ -118,7 +118,7 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
             var logicalResult = (curNode[1] as AstNonTerminal).BuildLogic(p, astNodes);
 
             string newLabel = NewReservedLabel();
-            curNode.ConnectedIrUnit = UCodeBuilder.Command.ConditionalJump(string.Empty, newLabel, false);
+            curNode.ConnectedIrUnit = IRBuilder.ConditionalJump(string.Empty, newLabel, false);
             astNodes.Add(curNode);
 
             // build statement node
@@ -128,7 +128,7 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
             ReservedLabel = newLabel;
 
             // add UJP label (to back to start)
-            astNodes.Last().ConnectedIrUnit = UCodeBuilder.Command.UnconditionalJump(string.Empty, startLabel);
+            astNodes.Last().ConnectedIrUnit = IRBuilder.UnconditionalJump(string.Empty, startLabel);
 
             return new AstBuildResult(null, null, true);
         }
@@ -143,7 +143,7 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
             var expNode = curNode[1] as AstNonTerminal;
             var expResult = expNode.BuildLogic(p, astNodes);
 
-            curNode.ConnectedIrUnit = UCodeBuilder.Command.RetFromProc(ReservedLabel);
+            curNode.ConnectedIrUnit = IRBuilder.Command.RetFromProc(ReservedLabel);
             astNodes.Add(curNode);
 
             return expResult;

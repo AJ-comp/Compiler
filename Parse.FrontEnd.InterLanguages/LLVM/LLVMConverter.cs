@@ -1,4 +1,5 @@
-﻿using Parse.MiddleEnd.IR.Datas.ValueDatas;
+﻿using Parse.MiddleEnd.IR.Datas.Types;
+using Parse.MiddleEnd.IR.Datas.ValueDatas;
 using Parse.MiddleEnd.IR.LLVM.Models;
 
 namespace Parse.MiddleEnd.IR.LLVM
@@ -14,6 +15,33 @@ namespace Parse.MiddleEnd.IR.LLVM
             else if (type == ReturnType.i16) result = "i16";
             else if (type == ReturnType.i32) result = "i32";
             else if (type == ReturnType.Double) result = "double";
+
+            return result;
+        }
+
+        public static string ToInstructionName(DType type)
+        {
+            string result = string.Empty;
+
+            if (type == DType.Bit) result = "i1";
+            else if (type == DType.Byte) result = "i8";
+            else if (type == DType.Short) result = "i16";
+            else if (type == DType.Int) result = "i32";
+            else if (type == DType.Double) result = "double";
+
+            return result;
+        }
+
+
+        public static int ToSize(DType type)
+        {
+            int result = 0;
+
+            if (type == DType.Bit) result = 1;
+            else if (type == DType.Byte) result = 8;
+            else if (type == DType.Short) result = 16;
+            else if (type == DType.Int) result = 32;
+            else if (type == DType.Double) result = 64;
 
             return result;
         }
@@ -83,7 +111,7 @@ namespace Parse.MiddleEnd.IR.LLVM
 
         public static SSValue ToSSValue(IRValue irValue)
         {
-            System.Type ssfType = typeof(SSValue<>).MakeGenericType(irValue.Type.GetType());
+            System.Type ssfType = typeof(SSValue<>).MakeGenericType(irValue.TypeName.GetType());
             return System.Activator.CreateInstance(ssfType, irValue.Value) as SSValue;
         }
     }

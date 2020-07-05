@@ -40,12 +40,10 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
             else
             {
                 IROptions option = new IROptions(ReservedLabel);
-                IRVar irData = IRConverter.ToIRData(dclData) as IRVar;
-                curNode.ConnectedIrUnit = IRBuilder.CreateDclVar(option, irData, false);
-
                 // add symbol information to the symbol table.
                 RealVarData varData = new RealVarData(dclData);
                 symbolTable.VarDataList.Add(varData);
+                curNode.ConnectedIrUnit = IRBuilder.CreateDclVar(option, varData, false);
 
                 p.Offset++;
 
@@ -62,9 +60,7 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
             if ((left is VirtualVarData) == false)
             {
                 IROptions option = new IROptions(ReservedLabel);
-                IRData leftIR = IRConverter.ToIRData(left as RealVarData);
-                IRData rightIR = IRConverter.ToIRData(right);
-                curNode.ConnectedIrUnit = IRBuilder.CreateBinOP(option, leftIR, rightIR, operation);
+                curNode.ConnectedIrUnit = IRBuilder.CreateBinOP(option, left, right, operation);
 
                 result = true;
             }
@@ -73,9 +69,9 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
         }
 
         /// <summary>
-        /// This function connect an Ucode for declaring variable to the 'curNode'.
+        /// This function connect an IR for declaring variable to the 'curNode'.
         /// If it can't perform then MeaningErrInfo is connected to the 'curNode'.
-        /// percondition for operation.
+        /// The percondition for operation.
         /// 1. symbol table has to be connected to the parent node of the 'curNode'.
         /// </summary>
         /// <param name="curNode"></param>
@@ -99,10 +95,12 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
                 var realVarData = varData as RealVarData;
                 bool bAddress = AstBuildOptionChecker.HasOption(buildParams.BuildOption, AstBuildOption.Reference);
 
+                /*
                 if (bAddress)
-                    curNode.ConnectedIrUnit = UCodeBuilder.Command.LoadVarAddress(ReservedLabel, realVarData.BlockLevel, realVarData.Offset, realVarData.VarName);
+                    curNode.ConnectedIrUnit = IRBuilder.LoadVarAddress(ReservedLabel, realVarData.BlockLevel, realVarData.Offset, realVarData.VarName);
                 else
-                    curNode.ConnectedIrUnit = UCodeBuilder.Command.LoadVarValue(ReservedLabel, realVarData.BlockLevel, realVarData.Offset, realVarData.VarName);
+                    curNode.ConnectedIrUnit = IRBuilder.(ReservedLabel, realVarData.BlockLevel, realVarData.Offset, realVarData.VarName);
+                */
             }
 
             return varData;
@@ -117,36 +115,37 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
 
             var option = new IROptions(ReservedLabel);
 
-            // if IRData exist use it. otherwise use parameter by converting. (left or right)
+            // if IRData exist use it. otherwise use parameter (left or right)
             var leftIRFormat = curNode[0].ConnectedIrUnit as IRFormat;
-            var leftIR = (leftIRFormat.IRData == null) ? IRConverter.ToIRData(left) : leftIRFormat.IRData;
+            var leftIR = (leftIRFormat.IRData == null) ? left : leftIRFormat.IRData;
 
             var rightIRFormat = curNode[1].ConnectedIrUnit as IRFormat;
-            var rightIR = (rightIRFormat.IRData == null) ? IRConverter.ToIRData(right) : rightIRFormat.IRData;
+            var rightIR = (rightIRFormat.IRData == null) ? right : rightIRFormat.IRData;
 
+            // condition
             if (curNode.SignPost.MeaningUnit == this.Add)
             {
-                result = left.Add(right);
+                result = left.Add(right) as LiteralData;
                 curNode.ConnectedIrUnit = IRBuilder.CreateBinOP(option, leftIR, rightIR, IROperation.Add);
             }
             else if (curNode.SignPost.MeaningUnit == this.Sub)
             {
-                result = left.Sub(right);
+                result = left.Sub(right) as LiteralData;
                 curNode.ConnectedIrUnit = IRBuilder.CreateBinOP(option, leftIR, rightIR, IROperation.Sub);
             }
             else if (curNode.SignPost.MeaningUnit == this.Mul)
             {
-                result = left.Mul(right);
+                result = left.Mul(right) as LiteralData;
                 curNode.ConnectedIrUnit = IRBuilder.CreateBinOP(option, leftIR, rightIR, IROperation.Mul);
             }
             else if (curNode.SignPost.MeaningUnit == this.Div)
             {
-                result = left.Div(right);
+                result = left.Div(right) as LiteralData;
                 curNode.ConnectedIrUnit = IRBuilder.CreateBinOP(option, leftIR, rightIR, IROperation.Div);
             }
             else if (curNode.SignPost.MeaningUnit == this.Mod)
             {
-                result = left.Mod(right);
+                result = left.Mod(right) as LiteralData;
                 curNode.ConnectedIrUnit = IRBuilder.CreateBinOP(option, leftIR, rightIR, IROperation.Mod);
             }
             else if (curNode.SignPost.MeaningUnit == this.LogicalAnd)

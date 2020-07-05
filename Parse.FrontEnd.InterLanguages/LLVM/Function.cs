@@ -6,7 +6,7 @@ namespace Parse.MiddleEnd.IR.LLVM
 {
     public class Function : List<IRUnit>, IRUnit
     {
-        private string _comment;
+        private string _comment = string.Empty;
         private IRFuncData _funcData;
 
         public string Label;
@@ -28,7 +28,7 @@ namespace Parse.MiddleEnd.IR.LLVM
             string result = string.Format("define {0} @{1}(", _funcData.ReturnType, _funcData.Name);
 
             foreach (var varData in _funcData.Arguments)
-                result += varData.Type + ",";
+                result += varData.TypeName + ",";
 
             if (_funcData.Arguments.Count > 0) result = result.Substring(0, result.Length - 1);
             result += ")";

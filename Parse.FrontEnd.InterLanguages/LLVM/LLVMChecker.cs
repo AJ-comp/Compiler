@@ -1,18 +1,15 @@
-﻿using Parse.FrontEnd.InterLanguages.Datas.Types;
-using Parse.MiddleEnd.IR.Datas;
-using Parse.MiddleEnd.IR.LLVM.Models;
-using System;
+﻿using Parse.MiddleEnd.IR.Datas.Types;
 
 namespace Parse.MiddleEnd.IR.LLVM
 {
     class LLVMChecker
     {
-        public static bool IsExistDoubleType(DataType op1Type, DataType op2Type) => ((op1Type is DoubleType) || (op2Type is DoubleType));
+        public static bool IsExistDoubleType(DType op1Type, DType op2Type) => ((op1Type == DType.Double) || (op2Type == DType.Double));
 
-        public static bool IsItoFpCondition(DataType op1Type, DataType op2Type)
+        public static bool IsItoFpCondition(DType op1Type, DType op2Type)
         {
             if (op1Type == op2Type) return false;   // case double, double
-            if (op1Type is DoubleType && op2Type is DoubleType) return false; // case not double, not double
+            if (op1Type == DType.Double && op2Type == DType.Double) return false; // case not double, not double
 
             return true;
         }

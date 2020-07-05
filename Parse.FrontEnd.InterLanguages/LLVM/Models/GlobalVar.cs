@@ -1,10 +1,10 @@
-﻿using Parse.FrontEnd.InterLanguages.Datas.Types;
-using Parse.MiddleEnd.IR.Datas;
+﻿using Parse.MiddleEnd.IR.Datas;
+using Parse.MiddleEnd.IR.Datas.Types;
 using System.Collections.Generic;
 
 namespace Parse.MiddleEnd.IR.LLVM.Models
 {
-    public abstract class GlobalVar : ISSVar
+    public abstract class GlobalVar : IRVar
     {
         protected GlobalVar(IRVar irvar)
         {
@@ -15,10 +15,13 @@ namespace Parse.MiddleEnd.IR.LLVM.Models
 
         public bool IsEqualWithIRVar(IRVar var) => _irVar.Equals(var);
 
-        public abstract DataType Type { get; }
+        public abstract DType TypeName { get; }
         public abstract object Value { get; }
         public abstract bool Signed { get; }
         public abstract bool IsNan { get; }
+        public abstract int Block { get; }
+        public abstract int Offset { get; }
+        public abstract int Length { get; }
 
         public override bool Equals(object obj)
         {
@@ -42,11 +45,12 @@ namespace Parse.MiddleEnd.IR.LLVM.Models
         {
         }
 
-        public override DataType Type => _type;
+        public override DType TypeName => DataType.GetTypeName(typeof(T));
         public override object Value { get; }
         public override bool Signed { get; }
         public override bool IsNan { get; }
-
-        private T _type;
+        public override int Block { get; }
+        public override int Offset { get; }
+        public override int Length { get; }
     }
 }

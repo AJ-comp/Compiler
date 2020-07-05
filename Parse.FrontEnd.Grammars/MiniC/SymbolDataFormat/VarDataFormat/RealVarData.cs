@@ -1,5 +1,6 @@
 ﻿using Parse.FrontEnd.Grammars.MiniC.SymbolDataFormat.LiteralDataFormat;
 using Parse.FrontEnd.Grammars.MiniC.SymbolTableFormat;
+using Parse.MiddleEnd.IR.Datas.Types;
 
 namespace Parse.FrontEnd.Grammars.MiniC.SymbolDataFormat.VarDataFormat
 {
@@ -9,10 +10,11 @@ namespace Parse.FrontEnd.Grammars.MiniC.SymbolDataFormat.VarDataFormat
         public bool This { get; internal set; } = false;
         public bool IsCalculatable => !(Value is UnknownLiteralData);
 
-        public override string VarName => DclData.DclItemData.Name;
-        public override int BlockLevel => DclData.BlockLevel;
+        public override DType TypeName => TypeConverter.ToIRDataType(DclData);
+        public override string Name => DclData.DclItemData.Name;
+        public override int Block => DclData.BlockLevel;
         public override int Offset => DclData.Offset;
-        public override int Dimension => DclData.DclItemData.Dimension;
+        public override int Length => DclData.DclItemData.Dimension;
         public override LiteralData Value
         {
             get => DclData.DclItemData.Value;

@@ -1,9 +1,9 @@
-﻿using Parse.FrontEnd.InterLanguages.Datas.Types;
-using Parse.MiddleEnd.IR.Datas;
+﻿using Parse.MiddleEnd.IR.Datas;
+using Parse.MiddleEnd.IR.Datas.Types;
 
 namespace Parse.MiddleEnd.IR.LLVM.Models
 {
-    public abstract class LocalVar : ISSVar
+    public abstract class LocalVar : IRVar
     {
         public LocalVar(int offset)
         {
@@ -13,15 +13,12 @@ namespace Parse.MiddleEnd.IR.LLVM.Models
         public string Name => "%" + Offset;
         public int Offset { get; }
 
-        public abstract DataType Type { get; }
+        public abstract DType TypeName { get; }
         public abstract object Value { get; }
         public abstract bool Signed { get; }
         public abstract bool IsNan { get; }
-
-        public IRVar ToIRVar
-        {
-
-        }
+        public abstract int Block { get; }
+        public abstract int Length { get; }
 
         public override bool Equals(object obj)
         {
@@ -35,18 +32,17 @@ namespace Parse.MiddleEnd.IR.LLVM.Models
         }
     }
 
-    public class LocalVar<T> : LocalVar where T : DataType
+    public class LocalVar<T> : LocalVar, IRVar<T> where T : DataType
     {
         public LocalVar(int offset) : base(offset)
         {
-            
         }
 
-        public override DataType Type => _type;
+        public override DType TypeName => DataType.GetTypeName(typeof(T));
         public override object Value { get; }
         public override bool Signed { get; }
         public override bool IsNan { get; }
-
-        private T _type;
+        public override int Block { get; }
+        public override int Length { get; }
     }
 }

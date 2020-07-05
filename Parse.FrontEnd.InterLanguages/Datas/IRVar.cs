@@ -1,4 +1,4 @@
-﻿using Parse.FrontEnd.InterLanguages.Datas.Types;
+﻿using Parse.MiddleEnd.IR.Datas.Types;
 
 namespace Parse.MiddleEnd.IR.Datas
 {
@@ -14,7 +14,7 @@ namespace Parse.MiddleEnd.IR.Datas
     }
 
 
-    public interface IRVar<out T> : IRVar where T : DataType
+    public interface IRVar<out T> : IRVar, IRData<T> where T : DataType
     {
     }
 }

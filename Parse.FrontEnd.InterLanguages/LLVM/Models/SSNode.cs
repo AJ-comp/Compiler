@@ -1,4 +1,6 @@
-﻿namespace Parse.MiddleEnd.IR.LLVM.Models
+﻿using Parse.MiddleEnd.IR.Datas;
+
+namespace Parse.MiddleEnd.IR.LLVM.Models
 {
     public class SSNode
     {
@@ -6,7 +8,7 @@
         /// Static Single Format
         /// </summary>
         public LocalVar SSF { get; }
-        public ISSItem LinkedObject { get; }
+        public IRData LinkedObject { get; }
 
         //public object LinkedValue
         //{
@@ -19,7 +21,7 @@
         //    }
         //}
 
-        public SSNode(LocalVar current, ISSItem linkedObject)
+        public SSNode(LocalVar current, IRData linkedObject)
         {
             SSF = current;
             LinkedObject = linkedObject;

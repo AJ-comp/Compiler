@@ -1,15 +1,14 @@
-﻿using Parse.FrontEnd.InterLanguages.Datas.Types;
+﻿using Parse.MiddleEnd.IR.Datas.Types;
 using Parse.MiddleEnd.IR.Datas.ValueDatas;
 using System;
-using System.Runtime.InteropServices;
 
 namespace Parse.MiddleEnd.IR.LLVM.Models
 {
-    public abstract class SSValue : IRValue, ISSItem
+    public abstract class SSValue : IRValue
     {
         public bool IsZero => throw new NotImplementedException();
 
-        public abstract DataType Type { get; }
+        public abstract DType TypeName { get; }
         public abstract object Value { get; }
         public abstract bool Signed { get; }
         public abstract bool IsNan { get; }
@@ -67,9 +66,9 @@ namespace Parse.MiddleEnd.IR.LLVM.Models
         }
     }
 
-    public class SSValue<T> : SSValue where T : DataType
+    public class SSValue<T> : SSValue, IRValue<T> where T : DataType
     {
-        public override DataType Type => _type;
+        public override DType TypeName => DataType.GetTypeName(typeof(T));
 
         public override object Value { get; }
         public override bool Signed { get; }
@@ -88,12 +87,10 @@ namespace Parse.MiddleEnd.IR.LLVM.Models
 
         public override IRValue Add(IRValue t)
         {
-            if (this.Type is DoubleType || t.Type is DoubleType)
+            if (this.TypeName == DType.Double || t.TypeName == DType.Double)
                 return new SSValue<DoubleType>((double)Value + (double)t.Value);
             else
                 return new SSValue<Int>((int)Value + (int)t.Value);
         }
-
-        private T _type;
     }
 }

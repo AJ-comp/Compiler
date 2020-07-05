@@ -1,4 +1,4 @@
-﻿using Parse.FrontEnd.InterLanguages.Datas.Types;
+﻿using Parse.MiddleEnd.IR.Datas.Types;
 
 namespace Parse.MiddleEnd.IR.Datas.ValueDatas
 {

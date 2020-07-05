@@ -1,4 +1,4 @@
-﻿using Parse.FrontEnd.InterLanguages.Datas.Types;
+﻿using Parse.MiddleEnd.IR.Datas.Types;
 
 namespace Parse.MiddleEnd.IR.Datas
 {
@@ -23,6 +23,7 @@ namespace Parse.MiddleEnd.IR.Datas
         public int Block => _block;
         public int Offset => _offset;
         public int Length => _length;
+        public DType TypeName => throw new System.NotImplementedException();
 
         private string _name;
         private int _block;
