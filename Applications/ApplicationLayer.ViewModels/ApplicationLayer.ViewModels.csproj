@@ -111,33 +111,17 @@
       <Project>{6FE9D3FA-798D-42EC-B6F0-890D5D320384}</Project>
       <Name>Parse.BackEnd.Target</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Parse.FrontEnd.DrawingSupport\Parse.FrontEnd.DrawingSupport.csproj">
-      <Project>{5CF0E8B7-18D1-493F-B465-ED65E657178A}</Project>
-      <Name>Parse.FrontEnd.DrawingSupport</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Parse.FrontEnd.Grammars\Parse.FrontEnd.Grammars.csproj">
       <Project>{A0661596-8C09-42A8-B412-8702108FD935}</Project>
       <Name>Parse.FrontEnd.Grammars</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Parse.FrontEnd.InterLanguages\Parse.MiddleEnd.IR.csproj">
-      <Project>{745e9d98-ab21-4f88-8118-5c2f02056840}</Project>
-      <Name>Parse.MiddleEnd.IR</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Parse.FrontEnd.Parsers\Parse.FrontEnd.Parsers.csproj">
       <Project>{EAF7D943-D2F9-4BB0-929F-04DB7B59D9D5}</Project>
       <Name>Parse.FrontEnd.Parsers</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Parse.FrontEnd\Parse.FrontEnd.csproj">
-      <Project>{46590802-ce40-49c9-86e1-cd6f3487ff5b}</Project>
-      <Name>Parse.FrontEnd</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Parse.WpfControls.SyntaxEditor\Parse.WpfControls.SyntaxEditor.csproj">
       <Project>{DCCEDEB5-9CA4-41FE-AB6B-50E4BCC64EE6}</Project>
       <Name>Parse.WpfControls.SyntaxEditor</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Parse\Parse.csproj">
-      <Project>{54ec5cea-8d91-4165-9ebb-6a0693a96c4f}</Project>
-      <Name>Parse</Name>
     </ProjectReference>
     <ProjectReference Include="..\ApplicationLayer.Common\ApplicationLayer.Common.csproj">
       <Project>{9B7EBE4D-C2B3-40E8-9516-107340A07111}</Project>

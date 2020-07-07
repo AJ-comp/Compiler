@@ -1,10 +1,8 @@
-﻿using Parse.FrontEnd.DrawingSupport.Properties;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
 
-namespace Parse.FrontEnd.DrawingSupport
+namespace Parse.FrontEnd.Support.Drawing
 {
     public class HighlightMapItem
     {

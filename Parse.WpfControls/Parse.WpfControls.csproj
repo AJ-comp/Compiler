@@ -162,10 +162,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Parse\Parse.csproj">
-      <Project>{54ec5cea-8d91-4165-9ebb-6a0693a96c4f}</Project>
-      <Name>Parse</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Wpf.UI.Themes\Wpf.UI.Basic\Wpf.UI.Basic.csproj">
       <Project>{fd4818dc-866a-4eef-833c-895d65d0ecfb}</Project>
       <Name>Wpf.UI.Basic</Name>

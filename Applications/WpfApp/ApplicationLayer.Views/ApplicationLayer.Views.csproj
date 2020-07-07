@@ -195,10 +195,6 @@
       <Project>{1d389520-0862-434b-82f9-ad0c41c2db5f}</Project>
       <Name>Parse.WpfControls</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\Parse\Parse.csproj">
-      <Project>{54EC5CEA-8D91-4165-9EBB-6A0693A96C4F}</Project>
-      <Name>Parse</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\ApplicationLayer.Common\ApplicationLayer.Common.csproj">
       <Project>{9b7ebe4d-c2b3-40e8-9516-107340a07111}</Project>
       <Name>ApplicationLayer.Common</Name>

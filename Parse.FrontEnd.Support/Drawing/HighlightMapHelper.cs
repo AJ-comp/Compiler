@@ -1,10 +1,9 @@
-﻿using Parse.FrontEnd.DrawingSupport.Properties;
-using Parse.Utilities;
+﻿using Parse.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 
-namespace Parse.FrontEnd.DrawingSupport
+namespace Parse.FrontEnd.Support.Drawing
 {
     public class HighlightMapHelper : Singleton<HighlightMapHelper>
     {

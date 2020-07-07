@@ -59,14 +59,6 @@
       <Project>{eaf7d943-d2f9-4bb0-929f-04db7b59d9d5}</Project>
       <Name>Parse.FrontEnd.Parsers</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Parse.FrontEnd\Parse.FrontEnd.csproj">
-      <Project>{46590802-ce40-49c9-86e1-cd6f3487ff5b}</Project>
-      <Name>Parse.FrontEnd</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Parse\Parse.csproj">
-      <Project>{54ec5cea-8d91-4165-9ebb-6a0693a96c4f}</Project>
-      <Name>Parse</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
