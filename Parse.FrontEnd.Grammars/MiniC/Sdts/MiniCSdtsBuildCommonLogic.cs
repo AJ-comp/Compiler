@@ -1,10 +1,14 @@
 ﻿using Parse.FrontEnd.Ast;
+using Parse.FrontEnd.Grammars.MiniC.SymbolDataFormat;
 using Parse.FrontEnd.Grammars.MiniC.SymbolDataFormat.LiteralDataFormat;
 using Parse.FrontEnd.Grammars.MiniC.SymbolDataFormat.VarDataFormat;
 using Parse.FrontEnd.Grammars.MiniC.SymbolTableFormat;
 using Parse.FrontEnd.Grammars.Properties;
 using Parse.MiddleEnd.IR;
 using Parse.MiddleEnd.IR.Datas;
+using Parse.MiddleEnd.IR.Datas.Types;
+using Parse.MiddleEnd.IR.Datas.ValueDatas;
+using Parse.MiddleEnd.IR.LLVM.Models;
 using System.Collections.Generic;
 
 namespace Parse.FrontEnd.Grammars.MiniC.Sdts
@@ -148,10 +152,6 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
                 result = left.Mod(right) as LiteralData;
                 curNode.ConnectedIrUnit = IRBuilder.CreateBinOP(option, leftIR, rightIR, IROperation.Mod);
             }
-            else if (curNode.SignPost.MeaningUnit == this.LogicalAnd)
-                curNode.ConnectedIrUnit = IRBuilder.CreateAnd(option, leftIR, rightIR);
-            else if (curNode.SignPost.MeaningUnit == this.LogicalOr)
-                curNode.ConnectedIrUnit = IRBuilder.CreateOr(ReservedLabel);
             else if (curNode.SignPost.MeaningUnit == this.Equal)
                 curNode.ConnectedIrUnit = IRBuilder.CreateLogicalOp(option, leftIR, rightIR, IRCondition.EQ);
             else if (curNode.SignPost.MeaningUnit == this.NotEqual)
@@ -168,6 +168,20 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
             //                curNode.ConnectedIrUnit = IRBuilder.CreateNot(option, );
 
             return result;
+        }
+
+        private IRValue<Bit> LogicalBuildOperator(AstNonTerminal curNode, IRData<Bit> left, IRData<Bit> right)
+        {
+            var option = new IROptions(ReservedLabel);
+
+            IRFormat result = (curNode.SignPost.MeaningUnit == this.LogicalAnd) ?
+                                        IRBuilder.CreateAnd(option, left, right) :
+                                        (curNode.SignPost.MeaningUnit == this.LogicalOr) ?
+                                        IRBuilder.CreateOr(option, left, right) : null;
+
+            curNode.ConnectedIrUnit = result;
+
+            return result.IRData as IRValue<Bit>;
         }
 
         private AstBuildResult BuildOpNode(AstNonTerminal curNode, AstBuildParams p, List<AstSymbol> astNodes)
@@ -190,6 +204,63 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
             var result = leftResult.Result != false && rightResult.Result != false;
 
             return new AstBuildResult(literalData, null, result);
+        }
+
+        private AstBuildResult BuildLogicalOpNode(AstNonTerminal curNode, AstBuildParams p, List<AstSymbol> astNodes)
+        {
+            curNode.ClearConnectedInfo();
+            curNode.ConnectedSymbolTable = p.SymbolTable;
+
+            // build right ExpSt node
+            var rightResult = (curNode[1] as AstNonTerminal).BuildLogic(p, astNodes);
+            // build left ExpSt node
+            var leftResult = (curNode[0] as AstNonTerminal).BuildLogic(p, astNodes);
+
+            // set data
+            var leftParam = VarToBitData(curNode[0], leftResult);
+            var rightParam = VarToBitData(curNode[1], rightResult);
+
+            // calculate to generate temporary data calculated.
+            var literalData = LogicalBuildOperator(curNode, leftParam, rightParam);
+            astNodes.Add(curNode);   // because of BuildOperator function add IE or ME.
+            var result = leftResult.Result != false && rightResult.Result != false;
+
+            return new AstBuildResult(literalData, null, result);
+        }
+
+        /// <summary>
+        /// This function creates a bit result about whether the value of the variable is not equal 0.
+        /// </summary>
+        /// <param name="varNode"></param>
+        /// <param name="buildResult"></param>
+        /// <returns>returns true if the value of the variable is not equal 0. else returns false.</returns>
+        private IRData<Bit> VarToBitData(AstSymbol varNode, AstBuildResult buildResult)
+        {
+            IRData<Bit> result = null;
+            if (buildResult.Data is VarData)
+            {
+                var allToken = (varNode as AstNonTerminal).ConnectedParseTree.AllTokens;
+
+                var irFormat = IRBuilder.CreateLogicalOp(null, buildResult.Data as VarData, new ValueData<Int>(allToken, 0), IRCondition.NE);
+                varNode.ConnectedIrUnit = irFormat;
+                result = irFormat.IRData as IRVar<Bit>;
+            }
+            else if(buildResult.Data is LiteralData)
+            {
+                var literalData = buildResult.Data as IRValue;
+                var allToken = (varNode as AstNonTerminal).ConnectedParseTree.AllTokens;
+
+                result = ((double)literalData.Value != 0) ? new ValueData<Bit>(allToken, true) : new ValueData<Bit>(allToken, false);
+            }
+            else if(buildResult.Data is ValueData)
+            {
+                var valueData = buildResult.Data as IRValue;
+                var allToken = (varNode as AstNonTerminal).ConnectedParseTree.AllTokens;
+
+                result = ((double)valueData.Value != 0) ? new ValueData<Bit>(allToken, true) : new ValueData<Bit>(allToken, false);
+            }
+
+            return result;
         }
     }
 }

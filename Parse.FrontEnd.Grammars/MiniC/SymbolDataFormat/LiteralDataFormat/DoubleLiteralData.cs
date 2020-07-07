@@ -2,6 +2,7 @@
 using Parse.MiddleEnd.IR.Datas.Types;
 using Parse.MiddleEnd.IR.Datas.ValueDatas;
 using System;
+using System.Collections.Generic;
 
 namespace Parse.FrontEnd.Grammars.MiniC.SymbolDataFormat.LiteralDataFormat
 {
@@ -17,7 +18,7 @@ namespace Parse.FrontEnd.Grammars.MiniC.SymbolDataFormat.LiteralDataFormat
 
         //        public double Value => (IsVirtual) ? _value : System.Convert.ToDouble(ValueToken?.Input);
 
-        public DoubleLiteralData(object value, TokenData valueToken) : base(valueToken)
+        public DoubleLiteralData(object value, IReadOnlyList<TokenData> valueToken) : base(valueToken)
         {
         }
 
@@ -57,11 +58,6 @@ namespace Parse.FrontEnd.Grammars.MiniC.SymbolDataFormat.LiteralDataFormat
         }
 
         public override bool? IsEqual(IRValue t)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override bool? IsNotEqual(IRValue t)
         {
             throw new NotImplementedException();
         }

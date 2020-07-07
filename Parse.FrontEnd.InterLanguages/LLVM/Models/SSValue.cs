@@ -15,11 +15,6 @@ namespace Parse.MiddleEnd.IR.LLVM.Models
 
         public abstract IRValue Add(IRValue t);
 
-        public IRValue BinOp(IRValue t, IROperation operation)
-        {
-            throw new NotImplementedException();
-        }
-
         public IRValue Div(IRValue t)
         {
             throw new NotImplementedException();
@@ -36,11 +31,6 @@ namespace Parse.MiddleEnd.IR.LLVM.Models
         }
 
         public bool? IsLessThan(IRValue t)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool? IsNotEqual(IRValue t)
         {
             throw new NotImplementedException();
         }

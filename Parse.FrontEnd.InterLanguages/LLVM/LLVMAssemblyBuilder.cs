@@ -371,5 +371,10 @@ namespace Parse.MiddleEnd.IR.LLVM
         {
             throw new NotImplementedException();
         }
+
+        public override IRFormat CretaeUnConditionalJump(IROptions options, IRVar<Bit> jumpLabel)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

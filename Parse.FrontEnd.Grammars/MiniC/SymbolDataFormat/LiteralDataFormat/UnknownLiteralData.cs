@@ -2,6 +2,7 @@
 using Parse.MiddleEnd.IR.Datas.Types;
 using Parse.MiddleEnd.IR.Datas.ValueDatas;
 using System;
+using System.Collections.Generic;
 
 namespace Parse.FrontEnd.Grammars.MiniC.SymbolDataFormat.LiteralDataFormat
 {
@@ -30,7 +31,7 @@ namespace Parse.FrontEnd.Grammars.MiniC.SymbolDataFormat.LiteralDataFormat
         public override bool Signed => false;
         public override bool IsNan => true;
 
-        public UnknownLiteralData(UnknownState state, TokenData valueToken) : base(valueToken)
+        public UnknownLiteralData(UnknownState state, IReadOnlyList<TokenData> valueToken) : base(valueToken)
         {
             State = state;
         }
@@ -69,11 +70,6 @@ namespace Parse.FrontEnd.Grammars.MiniC.SymbolDataFormat.LiteralDataFormat
         }
 
         public override bool? IsEqual(IRValue t)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override bool? IsNotEqual(IRValue t)
         {
             throw new NotImplementedException();
         }

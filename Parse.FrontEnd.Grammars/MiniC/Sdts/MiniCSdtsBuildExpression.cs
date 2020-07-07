@@ -4,8 +4,6 @@ using Parse.FrontEnd.Grammars.MiniC.SymbolDataFormat.VarDataFormat;
 using Parse.FrontEnd.Grammars.MiniC.SymbolTableFormat;
 using Parse.FrontEnd.Grammars.Properties;
 using Parse.MiddleEnd.IR;
-using Parse.MiddleEnd.IR.Datas;
-using Parse.MiddleEnd.IR.Datas.ValueDatas;
 using System;
 using System.Collections.Generic;
 

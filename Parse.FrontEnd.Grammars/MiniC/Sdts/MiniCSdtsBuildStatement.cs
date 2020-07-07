@@ -1,6 +1,8 @@
 ﻿using Parse.FrontEnd.Ast;
 using Parse.FrontEnd.Grammars.MiniC.SymbolTableFormat;
 using Parse.MiddleEnd.IR;
+using Parse.MiddleEnd.IR.Datas;
+using Parse.MiddleEnd.IR.Datas.Types;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -83,8 +85,11 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
             // build logical_exp node
             var logicalResult = (curNode[1] as AstNonTerminal).BuildLogic(p, astNodes);
 
-            string newLabel = NewReservedLabel();
-            curNode.ConnectedIrUnit = IRBuilder.CretaeConditionalJump(string.Empty, newLabel, false);
+            // create IR
+//            string newLabel = NewReservedLabel();
+            var options = new IROptions(ReservedLabel);
+            var irData = logicalResult.IRFormat.IRData;
+            curNode.ConnectedIrUnit = IRBuilder.CretaeConditionalJump(options, irData as IRVar<Bit>, null, null);
             astNodes.Add(curNode);
 
             // build statement node
@@ -118,7 +123,9 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
             var logicalResult = (curNode[1] as AstNonTerminal).BuildLogic(p, astNodes);
 
             string newLabel = NewReservedLabel();
-            curNode.ConnectedIrUnit = IRBuilder.ConditionalJump(string.Empty, newLabel, false);
+            var options = new IROptions(ReservedLabel);
+            var irData = logicalResult.IRFormat.IRData;
+            curNode.ConnectedIrUnit = IRBuilder.CretaeConditionalJump(options, irData as IRVar<Bit>, null, null);
             astNodes.Add(curNode);
 
             // build statement node
@@ -128,7 +135,7 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
             ReservedLabel = newLabel;
 
             // add UJP label (to back to start)
-            astNodes.Last().ConnectedIrUnit = IRBuilder.UnconditionalJump(string.Empty, startLabel);
+            astNodes.Last().ConnectedIrUnit = IRBuilder.UnConditionalJump(options, null);
 
             return new AstBuildResult(null, null, true);
         }

@@ -9,9 +9,10 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Parse.MiddleEnd.IR</RootNamespace>
     <AssemblyName>Parse.MiddleEnd.IR</AssemblyName>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
+    <LangVersion>8.0</LangVersion>
     <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -53,6 +54,7 @@
     <Compile Include="Datas\Types\Short.cs" />
     <Compile Include="Datas\IRFuncData.cs" />
     <Compile Include="Datas\IRData.cs" />
+    <Compile Include="IRChecker.cs" />
     <Compile Include="IRConverter.cs" />
     <Compile Include="LLVM\LLVMAssemblyCommon.cs" />
     <Compile Include="LLVM\Models\LocalVar.cs" />

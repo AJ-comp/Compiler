@@ -2,14 +2,24 @@
 using Parse.MiddleEnd.IR.Datas.Types;
 using Parse.MiddleEnd.IR.Datas.ValueDatas;
 using System;
+using System.Collections.Generic;
 
 namespace Parse.FrontEnd.Grammars.MiniC.SymbolDataFormat.LiteralDataFormat
 {
     public abstract class LiteralData : IRValue, ICloneable
     {
-        public string LiteralName => ValueToken?.Input;
+        public string LiteralName
+        {
+            get
+            {
+                string result = string.Empty;
+                foreach (var item in ValueToken) result += item.Input;
 
-        public TokenData ValueToken { get; }
+                return result;
+            }
+        }
+
+        public IReadOnlyList<TokenData> ValueToken => _valueTokens;
 
         public bool IsVirtual { get; protected set; } = false;
         public abstract bool IsZero { get; }
@@ -18,15 +28,14 @@ namespace Parse.FrontEnd.Grammars.MiniC.SymbolDataFormat.LiteralDataFormat
         public abstract bool Signed { get; }
         public abstract bool IsNan { get; }
 
-        protected LiteralData(TokenData valueToken)
+        protected LiteralData(IReadOnlyList<TokenData> valueToken)
         {
-            ValueToken = valueToken;
+            _valueTokens.AddRange(valueToken);
         }
 
         public abstract object Clone();
         public abstract IRValue<Bit> LogicalOp(IRValue t, IRCondition cond);
         public abstract bool? IsEqual(IRValue t);
-        public abstract bool? IsNotEqual(IRValue t);
         public abstract bool? IsGreaterThan(IRValue t);
         public abstract bool? IsLessThan(IRValue t);
         public abstract IRValue BinOp(IRValue t, IROperation operation);
@@ -35,5 +44,8 @@ namespace Parse.FrontEnd.Grammars.MiniC.SymbolDataFormat.LiteralDataFormat
         public abstract IRValue Mul(IRValue t);
         public abstract IRValue Div(IRValue t);
         public abstract IRValue Mod(IRValue t);
+
+
+        private List<TokenData> _valueTokens { get; }
     }
 }

@@ -115,6 +115,11 @@ namespace Parse.MiddleEnd.IR.UCode
             throw new System.NotImplementedException();
         }
 
+        public override IRFormat CretaeUnConditionalJump(IROptions options, IRVar<Bit> jumpLabel)
+        {
+            throw new System.NotImplementedException();
+        }
+
         public class Command
         {
             private static Instruction UCodeFormat(string labelName, OpCodeKind opCode, string comment = "", params object[] operands)
