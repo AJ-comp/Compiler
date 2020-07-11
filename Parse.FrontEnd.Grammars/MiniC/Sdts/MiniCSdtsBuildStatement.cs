@@ -96,7 +96,7 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
             var buildParams = p.Clone() as MiniCAstBuildParams;
             buildParams.BuildOption |= AstBuildOption.NotAssign;
             var stmtResult = (curNode[2] as AstNonTerminal).BuildLogic(buildParams, astNodes);
-            ReservedLabel = newLabel;
+//            ReservedLabel = newLabel;
 
             return new AstBuildResult(null, null, true);
         }
@@ -135,7 +135,7 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
             ReservedLabel = newLabel;
 
             // add UJP label (to back to start)
-            astNodes.Last().ConnectedIrUnit = IRBuilder.UnConditionalJump(options, null);
+            astNodes.Last().ConnectedIrUnit = IRBuilder.CretaeUnConditionalJump(options, null);
 
             return new AstBuildResult(null, null, true);
         }
@@ -150,7 +150,7 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
             var expNode = curNode[1] as AstNonTerminal;
             var expResult = expNode.BuildLogic(p, astNodes);
 
-            curNode.ConnectedIrUnit = IRBuilder.Command.RetFromProc(ReservedLabel);
+//            curNode.ConnectedIrUnit = IRBuilder.Command.RetFromProc(ReservedLabel);
             astNodes.Add(curNode);
 
             return expResult;
@@ -169,7 +169,7 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
             var result = node1.BuildLogic(p, astNodes);
 
             var options = new IROptions(ReservedLabel);
-            curNode.ConnectedIrUnit = IRBuilder.CreateCall(options, funcName.Token.Input);
+//            curNode.ConnectedIrUnit = IRBuilder.CreateCall(options, funcName.Token.Input);
             astNodes.Add(curNode);
 
             return result;

@@ -67,31 +67,26 @@ namespace Parse.FrontEnd
 
     public class MeaningErrInfo : ParsingErrorInfo
     {
-        private AstSymbol _errorSymbol;
+        public IReadOnlyList<TokenData> ErrTokens => _errTokens;
 
-        public IReadOnlyList<TokenData> ErrorTokens
-        {
-            get
-            {
-                List<TokenData> result = new List<TokenData>();
-
-                if (_errorSymbol is AstTerminal)
-                    result.Add((_errorSymbol as AstTerminal).Token);
-                else
-                {
-                    var errNT = (_errorSymbol as AstNonTerminal).ConnectedParseTree;
-                    result.AddRange(errNT.AllTokens);
-                }
-
-                return result;
-            }
-        }
-
-        public MeaningErrInfo(AstSymbol errorSymbol, string code, string errorMessage, ErrorType errorType = ErrorType.Error)
+        public MeaningErrInfo(string code, string errorMessage, ErrorType errorType = ErrorType.Error)
             : base(errorType, code, errorMessage)
         {
-            _errorSymbol = errorSymbol;
         }
+
+        public MeaningErrInfo(TokenData token, string code, string errorMessage, ErrorType errorType = ErrorType.Error)
+            : this(code, errorMessage, errorType)
+        {
+            _errTokens.Add(token);
+        }
+
+        public MeaningErrInfo(IReadOnlyList<TokenData> tokens, string code, string errorMessage, ErrorType errorType = ErrorType.Error)
+            : this(code, errorMessage, errorType)
+        {
+            _errTokens.AddRange(tokens);
+        }
+
+        private List<TokenData> _errTokens = new List<TokenData>();
     }
 
     public class MeaningErrInfoList : List<MeaningErrInfo>

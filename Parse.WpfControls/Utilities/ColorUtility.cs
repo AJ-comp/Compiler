@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Media;
 using SDColor = System.Drawing.Color;
-using SDBrush = System.Drawing.Brush;
+//using SDBrush = System.Drawing.Brush;
 using SWMBrush = System.Windows.Media.Brush;
 using SWMColor = System.Windows.Media.Color;
 
@@ -11,7 +11,7 @@ namespace Parse.WpfControls.Utilities
     {
         public static SWMColor ToMediaColor(SDColor color) => SWMColor.FromArgb(color.A, color.R, color.G, color.B);
         public static SDColor ToDrawingColor(SWMColor color) => SDColor.FromArgb(color.A, color.R, color.G, color.B);
-        public static SDBrush ToDrawingBrush(SDColor color) => new System.Drawing.SolidBrush(color);
+//        public static SDBrush ToDrawingBrush(SDColor color) => new System.Drawing.SolidBrush(color);
         public static SWMBrush ToMediaBrush(SDColor color) => (SolidColorBrush)(new BrushConverter().ConvertFrom(ToHexColor(color)));
         public static string ToHexColor(SDColor c) => "#" + c.R.ToString("X2") + c.G.ToString("X2") + c.B.ToString("X2");
         public static string ToRGBColor(SDColor c) => "RGB(" + c.R.ToString() + "," + c.G.ToString() + "," + c.B.ToString() + ")";

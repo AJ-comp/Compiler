@@ -1,5 +1,4 @@
-﻿using Parse.FrontEnd.Grammars.MiniC.SymbolDataFormat.LiteralDataFormat;
-using Parse.FrontEnd.Grammars.MiniC.SymbolTableFormat;
+﻿using Parse.FrontEnd.Grammars.MiniC.SymbolTableFormat;
 using Parse.MiddleEnd.IR.Datas.Types;
 
 namespace Parse.FrontEnd.Grammars.MiniC.SymbolDataFormat.VarDataFormat
@@ -8,17 +7,16 @@ namespace Parse.FrontEnd.Grammars.MiniC.SymbolDataFormat.VarDataFormat
     {
         public DclData DclData { get; }
         public bool This { get; internal set; } = false;
-        public bool IsCalculatable => !(Value is UnknownLiteralData);
 
         public override DType TypeName => TypeConverter.ToIRDataType(DclData);
         public override string Name => DclData.DclItemData.Name;
         public override int Block => DclData.BlockLevel;
         public override int Offset => DclData.Offset;
         public override int Length => DclData.DclItemData.Dimension;
-        public override LiteralData Value
+        public override ValueData Value
         {
-            get => DclData.DclItemData.Value;
-            set => DclData.DclItemData.Value = value;
+            get => DclData.Value;
+            set => DclData.Value = value;
         }
 
         public RealVarData(DclData dclData)
@@ -28,7 +26,7 @@ namespace Parse.FrontEnd.Grammars.MiniC.SymbolDataFormat.VarDataFormat
 
         public RealVarData(DclData dclData, LiteralData value) : this(dclData)
         {
-            dclData.DclItemData.Value = value;
+            dclData.Value = value;
         }
 
         public override string ToString() => string.Format("{0}", DclData.ToString());

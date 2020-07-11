@@ -1,4 +1,4 @@
-﻿using Parse.FrontEnd.Grammars.MiniC.SymbolDataFormat.LiteralDataFormat;
+﻿using Parse.MiddleEnd.IR.Datas.Types;
 
 namespace Parse.FrontEnd.Grammars.MiniC.SymbolDataFormat.VarDataFormat
 {
@@ -7,7 +7,7 @@ namespace Parse.FrontEnd.Grammars.MiniC.SymbolDataFormat.VarDataFormat
         private int _blockLevel;
         private int _offset;
         private int _dimension;
-        private LiteralData _literalData = new UnknownLiteralData(UnknownState.NotInitialized, null);
+        private ValueData _valueData;
 
         public TokenData VarToken { get; }
 
@@ -15,11 +15,13 @@ namespace Parse.FrontEnd.Grammars.MiniC.SymbolDataFormat.VarDataFormat
         public override int Block => _blockLevel;
         public override int Offset => _offset;
         public override int Length => _dimension;
-        public override LiteralData Value
+        public override ValueData Value
         {
-            get => _literalData;
-            set => _literalData = value;
+            get => _valueData;
+            set => _valueData = value;
         }
+
+        public override DType TypeName => DType.Unknown;
 
         public VirtualVarData(TokenData varToken, int blockLevel, int offset, int dimension)
         {

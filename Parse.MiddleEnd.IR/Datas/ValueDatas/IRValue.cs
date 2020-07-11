@@ -6,27 +6,41 @@ namespace Parse.MiddleEnd.IR.Datas.ValueDatas
     {
         bool IsZero { get; }
 
-        IRValue<Bit> LogicalOp(IRValue t, IRCondition cond);
+        bool? IsEqual(IRValue t)
+        {
+            if (TypeName != t.TypeName) return false;
+            if (Value != t.Value)
+            {
+                if (Value == null || t.Value == null) return null;
+                else return false;
+            }
 
-        bool? IsEqual(IRValue t);
-        bool? IsGreaterThan(IRValue t);
-        //{
-        //    // if it is compared by maximum type then problem doesn't exist because data loss is not fired.
-        //    return ((double)Value > (double)t.Value);
-        //}
-        bool? IsLessThan(IRValue t);
-        //{
-        //    // if it is compared by maximum type then problem doesn't exist because data loss is not fired.
-        //    return ((double)Value < (double)t.Value);
-        //}
+            return true;
+        }
+
+        bool? IsGreaterThan(IRValue t)
+        {
+            if (Value == null || t.Value == null) return null;
+
+            return ((double)Value > (double)t.Value);
+        }
+
+        bool? IsLessThan(IRValue t)
+        {
+            if (Value == null || t.Value == null) return null;
+
+            return ((double)Value < (double)t.Value);
+        }
 
         IRValue BinOp(IRValue t, IROperation oper)
         {
-            if (oper == IROperation.Add)
-                return Add(t);
-
-            return null;
+            return (oper == IROperation.Add) ? Add(t) :
+                        (oper == IROperation.Sub) ? Sub(t) :
+                        (oper == IROperation.Mul) ? Mul(t) :
+                        (oper == IROperation.Div) ? Div(t) :
+                        (oper == IROperation.Mod) ? Mod(t) : null;
         }
+
 
         IRValue Add(IRValue t);
         IRValue Sub(IRValue t);

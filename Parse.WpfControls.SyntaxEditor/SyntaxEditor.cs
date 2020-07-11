@@ -1,6 +1,6 @@
 ﻿using Parse.FrontEnd;
 using Parse.FrontEnd.Ast;
-using Parse.FrontEnd.DrawingSupport;
+using Parse.FrontEnd.Support.Drawing;
 using Parse.FrontEnd.Grammars;
 using Parse.FrontEnd.Parsers.Datas;
 using Parse.FrontEnd.Parsers.Logical;

@@ -1,9 +1,11 @@
 ﻿using Parse.FrontEnd.Ast;
-using Parse.FrontEnd.Grammars.MiniC.SymbolDataFormat.LiteralDataFormat;
+using Parse.FrontEnd.Grammars.MiniC.SymbolDataFormat;
 using Parse.FrontEnd.Grammars.MiniC.SymbolDataFormat.VarDataFormat;
 using Parse.FrontEnd.Grammars.MiniC.SymbolTableFormat;
 using Parse.MiddleEnd.IR;
 using Parse.MiddleEnd.IR.Datas;
+using Parse.MiddleEnd.IR.Datas.Types;
+using System;
 using System.Collections.Generic;
 
 namespace Parse.FrontEnd.Grammars.MiniC.Sdts
@@ -86,7 +88,7 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
 
             IROptions options = new IROptions(ReservedLabel);
             IRFuncData funcData = IRConverter.ToIRData(funcHeadData);
-            curNode.ConnectedIrUnit = IRBuilder.CreateDefineFunction(options, funcData, );
+//            curNode.ConnectedIrUnit = IRBuilder.CreateDefineFunction(options, funcData, );
             astNodes.Add(curNode);
 
             return new AstBuildResult(funcHeadData, newSymbolTable, true);
@@ -141,12 +143,12 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
                 }
                 else if (astNonTerminal.SignPost.MeaningUnit == this.VoidNode)
                 {
-                    result.DataType = DataType.Void;
+                    result.DataType = SymbolTableFormat.DataType.Void;
                     result.DataTypeToken = (astNonTerminal.Items[0] as AstTerminal).Token;
                 }
                 else if (astNonTerminal.SignPost.MeaningUnit == this.IntNode)
                 {
-                    result.DataType = DataType.Int;
+                    result.DataType = SymbolTableFormat.DataType.Int;
                     result.DataTypeToken = (astNonTerminal.Items[0] as AstTerminal).Token;
                 }
             }
@@ -264,14 +266,16 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
             {
                 var declNT = curNode[i] as AstNonTerminal;
                 var declBuildResult = declNT.BuildLogic(buildParams, astNodes);
-                var dclItemData = declBuildResult.Data as DclItemData;
+                var dclBuildDatas = declBuildResult.Data as Tuple<DclItemData, LiteralData>;
 
+                // it needs to check type (DclSpecData.Type with Value.Type)
                 var dclData = new DclData()
                 {
                     BlockLevel = buildParams.BlockLevel,
                     Offset = buildParams.Offset,
                     DclSpecData = specData,
-                    DclItemData = dclItemData
+                    DclItemData = dclBuildDatas.Item1,
+                    Value = dclBuildDatas.Item2
                 };
                 result.Add(dclData);
 
@@ -290,18 +294,19 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
         {
             var astNonTerminal = curNode[0] as AstNonTerminal;
             var data = astNonTerminal.BuildLogic(p, astNodes).Data as DclItemData;
+            LiteralData literalData = null;
 
             if(curNode.Count > 1)
             {
                 astNonTerminal = curNode[1] as AstNonTerminal;
-                var literalData = astNonTerminal.BuildLogic(p, astNodes).Data as LiteralData;
-                data.Value = literalData;
+                literalData = astNonTerminal.BuildLogic(p, astNodes).Data as LiteralData;
             }
 
-            // Even if doesn't exist a information in the node, it has to add.
+            // Even if a information doesn't exist in the node, it has to add.
             astNodes.Add(curNode);
 
-            return new AstBuildResult(data, null, true);
+            var result = new Tuple<DclItemData, LiteralData>(data, literalData);
+            return new AstBuildResult(result, null, true);
         }
 
         // format summary
@@ -359,7 +364,7 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
             curNode.ClearConnectedInfo();
             curNode.ConnectedSymbolTable = p.SymbolTable;
 
-            IntLiteralData result = new IntLiteralData((curNode.Items[0] as AstTerminal).Token);
+            LiteralData result = new LiteralData<Int>((curNode.Items[0] as AstTerminal).Token);
 //            curNode.ConnectedIrUnit = UCodeBuilder.Command.DclValue(ReservedLabel, result.Value);
             astNodes.Add(curNode);
 

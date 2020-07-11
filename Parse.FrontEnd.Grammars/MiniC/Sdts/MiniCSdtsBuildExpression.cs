@@ -1,11 +1,13 @@
 ﻿using Parse.FrontEnd.Ast;
-using Parse.FrontEnd.Grammars.MiniC.SymbolDataFormat.LiteralDataFormat;
+using Parse.FrontEnd.Grammars.MiniC.SymbolDataFormat;
 using Parse.FrontEnd.Grammars.MiniC.SymbolDataFormat.VarDataFormat;
 using Parse.FrontEnd.Grammars.MiniC.SymbolTableFormat;
 using Parse.FrontEnd.Grammars.Properties;
 using Parse.MiddleEnd.IR;
+using Parse.MiddleEnd.IR.Datas.Types;
 using System;
 using System.Collections.Generic;
+using System.IO.MemoryMappedFiles;
 
 namespace Parse.FrontEnd.Grammars.MiniC.Sdts
 {
@@ -13,23 +15,23 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
     {
         private enum Value { NotInitialized, UnKnown }
 
-        private LiteralData CommonCalculateAssign(AstNonTerminal curNode, VarData left, LiteralData right)
+        private ValueData CommonCalculateAssign(AstNonTerminal curNode, VarData left, ValueData right)
         {
-            var result = right.Clone() as LiteralData;
+            ValueData result = null;
 
             if (curNode.SignPost.MeaningUnit == this.AddAssign)
             {
-                result = left.Value.Add(right) as LiteralData;
+                result = left.Value.Add(right) as ValueData;
                 ConnectBinOpToNode(curNode, left, right, IROperation.Add);
             }
             else if (curNode.SignPost.MeaningUnit == this.SubAssign)
             {
-                result = left.Value.Sub(right) as LiteralData;
+                result = left.Value.Sub(right) as ValueData;
                 ConnectBinOpToNode(curNode, left, right, IROperation.Sub);
             }
             else if (curNode.SignPost.MeaningUnit == this.MulAssign)
             {
-                result = left.Value.Mul(right) as LiteralData;
+                result = left.Value.Mul(right) as ValueData;
                 ConnectBinOpToNode(curNode, left, right, IROperation.Mul);
             }
             else if (curNode.SignPost.MeaningUnit == this.DivAssign)
@@ -66,12 +68,11 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
 
             var lhsResult = node0.BuildLogic(p, astNodes);
             if (canList.Contains(node0MeaningUnit) == false)
-                node0.ConnectedErrInfoList.Add(new MeaningErrInfo(node0, nameof(AlarmCodes.MCL0004), AlarmCodes.MCL0004));
+                node0.ConnectedErrInfoList.Add(new MeaningErrInfo(nameof(AlarmCodes.MCL0004), AlarmCodes.MCL0004));
 
             // semantic parsing for operator
             var left = lhsResult.Data as VarData;
-            var right = (rhsResult.Data is VarData) ? (rhsResult.Data as VarData).Value : rhsResult.Data as LiteralData;
-            TypeChecker.Check(curNode, left, right);
+            var right = (rhsResult.Data is VarData) ? (rhsResult.Data as VarData).Value : rhsResult.Data as ValueData;
 
             var calResult = CommonCalculateAssign(curNode, left, right);
 
@@ -92,7 +93,7 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
 
             var result = (curNode[0] as AstNonTerminal).BuildLogic(p, astNodes);
             if(result.Data is LiteralData)
-                curNode.ConnectedErrInfoList.Add(new MeaningErrInfo(curNode, nameof(AlarmCodes.MCL0008), AlarmCodes.MCL0008));
+                curNode.ConnectedErrInfoList.Add(new MeaningErrInfo(nameof(AlarmCodes.MCL0008), AlarmCodes.MCL0008));
             else
             {
                 var varData = (p.SymbolTable as MiniCSymbolTable).AllVarList.GetVarByName((result.Data as VarData).Name);
@@ -132,17 +133,18 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
             var varData = leftResult.Data as VarData;
             var literalData = rightResult.Data as LiteralData;
 
-            if ((literalData is IntLiteralData) == false) throw new Exception(AlarmCodes.MCL0006);
+            if ((literalData is LiteralData<Int>) == false) throw new Exception(AlarmCodes.MCL0006);
 
-            var intLiteralData = literalData as IntLiteralData;
-            if (varData.Length <= intLiteralData.RealValue)
+            var intLiteralData = literalData as LiteralData<Int>;
+            if (varData.Length <= (int)intLiteralData.Value)
             {
                 int canByte = varData.Length;
-                int factByte = intLiteralData.RealValue;
-                curNode.ConnectedErrInfoList.Add(new MeaningErrInfo(curNode, nameof(AlarmCodes.MCL0007), string.Format(AlarmCodes.MCL0007, varData.Name, canByte, factByte)));
+                int factByte = (int)intLiteralData.Value;
+                curNode.ConnectedErrInfoList.Add(new MeaningErrInfo(nameof(AlarmCodes.MCL0007), 
+                                                                                                string.Format(AlarmCodes.MCL0007, varData.Name, canByte, factByte)));
             }
-            curNode.ConnectedIrUnit = IRBuilder.Add(ReservedLabel);
-            curNode.ConnectedIrUnit = IRBuilder.Sti(ReservedLabel);
+//            curNode.ConnectedIrUnit = IRBuilder.Add(ReservedLabel);
+//            curNode.ConnectedIrUnit = IRBuilder.Sti(ReservedLabel);
 
             // collect nodes
             astNodes.Add(curNode);

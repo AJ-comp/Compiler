@@ -7,7 +7,7 @@ using System.Windows.Media;
 
 namespace ApplicationLayer.Views.Converters
 {
-    class ColorToBrushConverter : MarkupExtension, IValueConverter
+    internal class ColorToBrushConverter : MarkupExtension, IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {

@@ -1,4 +1,5 @@
-﻿using Parse.Utilities;
+﻿using Parse.FrontEnd.DrawingSupport.Properties;
+using Parse.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Drawing;

@@ -1,6 +1,5 @@
 ﻿using Parse.FrontEnd.Ast;
 using Parse.FrontEnd.Grammars.MiniC.SymbolDataFormat;
-using Parse.FrontEnd.Grammars.MiniC.SymbolDataFormat.LiteralDataFormat;
 using Parse.FrontEnd.Grammars.MiniC.SymbolDataFormat.VarDataFormat;
 using Parse.FrontEnd.Grammars.MiniC.SymbolTableFormat;
 using Parse.FrontEnd.Grammars.Properties;
@@ -8,7 +7,6 @@ using Parse.MiddleEnd.IR;
 using Parse.MiddleEnd.IR.Datas;
 using Parse.MiddleEnd.IR.Datas.Types;
 using Parse.MiddleEnd.IR.Datas.ValueDatas;
-using Parse.MiddleEnd.IR.LLVM.Models;
 using System.Collections.Generic;
 
 namespace Parse.FrontEnd.Grammars.MiniC.Sdts
@@ -38,8 +36,8 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
             var symbolTable = (p.SymbolTable as MiniCSymbolTable);
             if (symbolTable.VarDataList.GetVarByName(dclData.DclItemData.Name) != null)
             {
-                curNode.ConnectedErrInfoList.Add(new MeaningErrInfo(curNode, nameof(AlarmCodes.MCL0009),
-                                                string.Format(AlarmCodes.MCL0009, dclData.DclItemData.Name)));
+                curNode.ConnectedErrInfoList.Add(new MeaningErrInfo(nameof(AlarmCodes.MCL0009),
+                                                                                                string.Format(AlarmCodes.MCL0009, dclData.DclItemData.Name)));
             }
             else
             {
@@ -57,7 +55,7 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
             return result;
         }
 
-        private bool ConnectBinOpToNode(AstNonTerminal curNode, VarData left, LiteralData right, IROperation operation)
+        private bool ConnectBinOpToNode(AstNonTerminal curNode, VarData left, ValueData right, IROperation operation)
         {
             bool result = false;
 
@@ -90,7 +88,10 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
             VarData varData = CheckExistVarInSymbolTable(curNode, symbolTable as MiniCSymbolTable);
             if (varData == null)
             {
-                curNode.ConnectedErrInfoList.Add(new MeaningErrInfo(curNode, nameof(AlarmCodes.MCL0001), string.Format(AlarmCodes.MCL0001, curNode.Token.Input)));
+                curNode.ConnectedErrInfoList.Add(new MeaningErrInfo(nameof(AlarmCodes.MCL0001), 
+                                                                                                string.Format(AlarmCodes.MCL0001, 
+                                                                                                curNode.Token.Input)));
+
                 varData = new VirtualVarData(curNode.Token, buildParams.BlockLevel, buildParams.Offset, 0);
                 (curNode.Parent.ConnectedSymbolTable as MiniCSymbolTable).VarDataList.Add(varData);
             }
@@ -110,46 +111,44 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
             return varData;
         }
 
-        private LiteralData BuildOperator(AstNonTerminal curNode, LiteralData left, LiteralData right)
+        private ValueData BuildOperator(AstNonTerminal curNode, ValueData left, ValueData right)
         {
             curNode.ClearConnectedInfo();
-
-            TypeChecker.Check(curNode, left, right);
-            LiteralData result = null;
+            ValueData result = null;
 
             var option = new IROptions(ReservedLabel);
 
             // if IRData exist use it. otherwise use parameter (left or right)
             var leftIRFormat = curNode[0].ConnectedIrUnit as IRFormat;
-            var leftIR = (leftIRFormat.IRData == null) ? left : leftIRFormat.IRData;
+            var leftIR = leftIRFormat.IRData ?? left;
 
             var rightIRFormat = curNode[1].ConnectedIrUnit as IRFormat;
-            var rightIR = (rightIRFormat.IRData == null) ? right : rightIRFormat.IRData;
+            var rightIR = rightIRFormat.IRData ?? right;
 
             // condition
             if (curNode.SignPost.MeaningUnit == this.Add)
             {
-                result = left.Add(right) as LiteralData;
+                result = left.Add(right) as ValueData;
                 curNode.ConnectedIrUnit = IRBuilder.CreateBinOP(option, leftIR, rightIR, IROperation.Add);
             }
             else if (curNode.SignPost.MeaningUnit == this.Sub)
             {
-                result = left.Sub(right) as LiteralData;
+                result = left.Sub(right) as ValueData;
                 curNode.ConnectedIrUnit = IRBuilder.CreateBinOP(option, leftIR, rightIR, IROperation.Sub);
             }
             else if (curNode.SignPost.MeaningUnit == this.Mul)
             {
-                result = left.Mul(right) as LiteralData;
+                result = left.Mul(right) as ValueData;
                 curNode.ConnectedIrUnit = IRBuilder.CreateBinOP(option, leftIR, rightIR, IROperation.Mul);
             }
             else if (curNode.SignPost.MeaningUnit == this.Div)
             {
-                result = left.Div(right) as LiteralData;
+                result = left.Div(right) as ValueData;
                 curNode.ConnectedIrUnit = IRBuilder.CreateBinOP(option, leftIR, rightIR, IROperation.Div);
             }
             else if (curNode.SignPost.MeaningUnit == this.Mod)
             {
-                result = left.Mod(right) as LiteralData;
+                result = left.Mod(right) as ValueData;
                 curNode.ConnectedIrUnit = IRBuilder.CreateBinOP(option, leftIR, rightIR, IROperation.Mod);
             }
             else if (curNode.SignPost.MeaningUnit == this.Equal)
@@ -241,7 +240,7 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
             {
                 var allToken = (varNode as AstNonTerminal).ConnectedParseTree.AllTokens;
 
-                var irFormat = IRBuilder.CreateLogicalOp(null, buildResult.Data as VarData, new ValueData<Int>(allToken, 0), IRCondition.NE);
+                var irFormat = IRBuilder.CreateLogicalOp(null, buildResult.Data as VarData, new ConceptValueData<Int>(allToken, 0), IRCondition.NE);
                 varNode.ConnectedIrUnit = irFormat;
                 result = irFormat.IRData as IRVar<Bit>;
             }
@@ -250,14 +249,14 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
                 var literalData = buildResult.Data as IRValue;
                 var allToken = (varNode as AstNonTerminal).ConnectedParseTree.AllTokens;
 
-                result = ((double)literalData.Value != 0) ? new ValueData<Bit>(allToken, true) : new ValueData<Bit>(allToken, false);
+                result = ((double)literalData.Value != 0) ? new ConceptValueData<Bit>(allToken, true) : new ConceptValueData<Bit>(allToken, false);
             }
-            else if(buildResult.Data is ValueData)
+            else if(buildResult.Data is ConceptValueData)
             {
                 var valueData = buildResult.Data as IRValue;
                 var allToken = (varNode as AstNonTerminal).ConnectedParseTree.AllTokens;
 
-                result = ((double)valueData.Value != 0) ? new ValueData<Bit>(allToken, true) : new ValueData<Bit>(allToken, false);
+                result = ((double)valueData.Value != 0) ? new ConceptValueData<Bit>(allToken, true) : new ConceptValueData<Bit>(allToken, false);
             }
 
             return result;

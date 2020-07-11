@@ -7,8 +7,10 @@ namespace Parse.Extensions
     {
         public static HashSet<T> Except<T>(this HashSet<T> obj, T target)
         {
-            List<T> exceptContents = new List<T>();
-            exceptContents.Add(target);
+            List<T> exceptContents = new List<T>
+            {
+                target
+            };
 
             return obj.Except(exceptContents).ToHashSet();
         }

@@ -8,7 +8,7 @@ using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using Parse.FrontEnd;
 using Parse.FrontEnd.Ast;
-using Parse.FrontEnd.DrawingSupport;
+using Parse.FrontEnd.Support.Drawing;
 using Parse.FrontEnd.Grammars;
 using Parse.FrontEnd.Grammars.MiniC;
 using Parse.FrontEnd.Grammars.MiniC.SymbolDataFormat.VarDataFormat;
@@ -214,7 +214,7 @@ namespace ApplicationLayer.ViewModels.DocumentTypeViewModels
             {
                 foreach(var alarm in item.ConnectedErrInfoList)
                 {
-                    var errToken = alarm.ErrorTokens[0];
+                    var errToken = alarm.ErrTokens[0];
                     alarmList.Add(new AlarmEventArgs(projNode?.FileNameWithoutExtension, FileName, 0, 0, errToken, alarm));
                 }
             }

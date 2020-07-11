@@ -1,373 +1,41 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{B7A57007-09C3-464B-8772-FF308797C87F}</ProjectGuid>
-    <OutputType>library</OutputType>
-    <RootNamespace>ApplicationLayer.Views</RootNamespace>
-    <AssemblyName>ApplicationLayer.Views</AssemblyName>
-    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <WarningLevel>4</WarningLevel>
-    <Deterministic>true</Deterministic>
-    <TargetFrameworkProfile />
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UseWPF>true</UseWPF>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
-  </PropertyGroup>
+
   <ItemGroup>
-    <Reference Include="ActiproSoftware.Docking.Wpf, Version=19.1.685.0, Culture=neutral, PublicKeyToken=36ff2196ab5654b9, processorArchitecture=MSIL" />
-    <Reference Include="ActiproSoftware.Editors.Wpf, Version=19.1.685.0, Culture=neutral, PublicKeyToken=36ff2196ab5654b9, processorArchitecture=MSIL" />
-    <Reference Include="ActiproSoftware.Grids.Wpf, Version=19.1.685.0, Culture=neutral, PublicKeyToken=36ff2196ab5654b9, processorArchitecture=MSIL" />
-    <Reference Include="ActiproSoftware.Shared.Wpf, Version=19.1.685.0, Culture=neutral, PublicKeyToken=36ff2196ab5654b9, processorArchitecture=MSIL" />
-    <Reference Include="CommonServiceLocator, Version=2.0.2.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\CommonServiceLocator.2.0.2\lib\net47\CommonServiceLocator.dll</HintPath>
+    <PackageReference Include="HIT.GraphSharp.Wpf" Version="1.0.0" />
+    <PackageReference Include="WPFExtensions" Version="1.0.0" />
+    <PackageReference Include="WpfLocalizeExtension" Version="3.6.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Wpf.UI.Themes\Wpf.UI.Advance\Wpf.UI.Advance.csproj" />
+    <ProjectReference Include="..\..\ApplicationLayer.Model\ApplicationLayer.Models.csproj" />
+    <ProjectReference Include="..\..\ApplicationLayer.ViewModels\ApplicationLayer.ViewModels.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="ActiproSoftware.Editors.Wpf">
+      <HintPath>..\..\..\..\..\..\..\..\..\Program Files (x86)\Actipro Software\WPF-Controls\v19.1.0685\Assemblies\ActiproSoftware.Editors.Wpf.dll</HintPath>
     </Reference>
-    <Reference Include="GalaSoft.MvvmLight, Version=5.4.1.0, Culture=neutral, PublicKeyToken=e7570ab207bcb616, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\MvvmLightLibs.5.4.1.1\lib\net45\GalaSoft.MvvmLight.dll</HintPath>
+    <Reference Include="ActiproSoftware.Grids.Wpf">
+      <HintPath>..\..\..\..\..\..\..\..\..\Program Files (x86)\Actipro Software\WPF-Controls\v19.1.0685\Assemblies\ActiproSoftware.Grids.Wpf.dll</HintPath>
     </Reference>
-    <Reference Include="GalaSoft.MvvmLight.Extras, Version=5.4.1.0, Culture=neutral, PublicKeyToken=669f0b5e8f868abf, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\MvvmLightLibs.5.4.1.1\lib\net45\GalaSoft.MvvmLight.Extras.dll</HintPath>
+    <Reference Include="ActiproSoftware.Navigation.Wpf">
+      <HintPath>..\..\..\..\..\..\..\..\..\Program Files (x86)\Actipro Software\WPF-Controls\v19.1.0685\Assemblies\ActiproSoftware.Navigation.Wpf.dll</HintPath>
     </Reference>
-    <Reference Include="GalaSoft.MvvmLight.Platform, Version=5.4.1.0, Culture=neutral, PublicKeyToken=5f873c45e98af8a1, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\MvvmLightLibs.5.4.1.1\lib\net45\GalaSoft.MvvmLight.Platform.dll</HintPath>
+    <Reference Include="ActiproSoftware.Shared.Wpf">
+      <HintPath>..\..\..\..\..\..\..\..\..\Program Files (x86)\Actipro Software\WPF-Controls\v19.1.0685\Assemblies\ActiproSoftware.Shared.Wpf.dll</HintPath>
     </Reference>
-    <Reference Include="GraphSharp, Version=1.0.2.0, Culture=neutral, PublicKeyToken=f9c24778325a6b82, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\GraphSharp.1.1.0.0\lib\net40\GraphSharp.dll</HintPath>
+    <Reference Include="ActiproSoftware.Shell.Wpf">
+      <HintPath>..\..\..\..\..\..\..\..\..\Program Files (x86)\Actipro Software\WPF-Controls\v19.1.0685\Assemblies\ActiproSoftware.Shell.Wpf.dll</HintPath>
     </Reference>
-    <Reference Include="GraphSharp.Controls, Version=1.1.0.0, Culture=neutral, PublicKeyToken=f9c24778325a6b82, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\GraphSharp.1.1.0.0\lib\net40\GraphSharp.Controls.dll</HintPath>
-    </Reference>
-    <Reference Include="QuickGraph, Version=3.6.61114.0, Culture=neutral, PublicKeyToken=f3fb40175eec2af3, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\QuickGraph.3.6.61119.7\lib\net4\QuickGraph.dll</HintPath>
-    </Reference>
-    <Reference Include="QuickGraph.Data, Version=3.6.61114.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\QuickGraph.3.6.61119.7\lib\net4\QuickGraph.Data.dll</HintPath>
-    </Reference>
-    <Reference Include="QuickGraph.Graphviz, Version=3.6.61114.0, Culture=neutral, PublicKeyToken=f3fb40175eec2af3, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\QuickGraph.3.6.61119.7\lib\net4\QuickGraph.Graphviz.dll</HintPath>
-    </Reference>
-    <Reference Include="QuickGraph.Serialization, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\QuickGraph.3.6.61119.7\lib\net4\QuickGraph.Serialization.dll</HintPath>
-    </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.Management" />
-    <Reference Include="System.Windows.Forms" />
-    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\MvvmLightLibs.5.4.1.1\lib\net45\System.Windows.Interactivity.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Xml" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Net.Http" />
-    <Reference Include="System.Xaml">
-      <RequiredTargetFramework>4.0</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="WindowsBase" />
-    <Reference Include="PresentationCore" />
-    <Reference Include="PresentationFramework" />
-    <Reference Include="WindowsFormsIntegration" />
-    <Reference Include="WPFExtensions, Version=1.0.3437.34043, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\WPFExtensions.1.0.0\lib\WPFExtensions.dll</HintPath>
-    </Reference>
-    <Reference Include="WPFLocalizeExtension, Version=3.3.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\WPFLocalizeExtension.3.3.1\lib\net452\WPFLocalizeExtension.dll</HintPath>
-    </Reference>
-    <Reference Include="XAMLMarkupExtensions, Version=1.5.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\XAMLMarkupExtensions.1.5.1\lib\net452\XAMLMarkupExtensions.dll</HintPath>
+    <Reference Include="WindowsFormsIntegration">
+      <HintPath>..\..\..\..\..\..\..\..\..\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.8\WindowsFormsIntegration.dll</HintPath>
     </Reference>
   </ItemGroup>
-  <ItemGroup>
-    <Compile Include="AttachedProperties\LayoutParametersHook.cs" />
-    <Compile Include="AttachedProperties\SyntaxEditorHook.cs" />
-    <Compile Include="AttachedProperties\TreeListBoxHook.cs" />
-    <Compile Include="AttachedProperties\FrameworkElementHook.cs" />
-    <Compile Include="AttachedProperties\WindowsFormsHostHook.cs" />
-    <Compile Include="Behaviors\EventToCommandBehavior.cs" />
-    <Compile Include="Converters\ColorToBrushConverter.cs" />
-    <Compile Include="Converters\DataContextTestConverter.cs" />
-    <Compile Include="Converters\DrawingColorToMediaColorConverter.cs" />
-    <Compile Include="Converters\EventArgsConverterExtension.cs" />
-    <Compile Include="Converters\MouseDoubleClickIndexConverter.cs" />
-    <Compile Include="Converters\SelectedItemConverter.cs" />
-    <Compile Include="Converters\StringToFontFamilyConverter.cs" />
-    <Compile Include="CustomStyleSelector.cs" />
-    <Compile Include="CustomTemplateSelector.cs" />
-    <Compile Include="DefaultTreeListBoxItemAdapter.cs" />
-    <Compile Include="DialogViews\OptionViews\FontsAndColorsView.xaml.cs">
-      <DependentUpon>FontsAndColorsView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="DialogViews\OptionViews\OptionDialog.xaml.cs">
-      <DependentUpon>OptionDialog.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="DocumentTypeViews\UCodeView.xaml.cs">
-      <DependentUpon>UCodeView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="MenusForTarget.cs" />
-    <Compile Include="MenusForTargetCollection.cs" />
-    <Compile Include="MiniCProjectTreeListBoxItemAdapter.cs" />
-    <Compile Include="DocumentTypeViews\GrammarInfoView.xaml.cs">
-      <DependentUpon>GrammarInfoView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="DocumentTypeViews\ParseTreeView.xaml.cs">
-      <DependentUpon>ParseTreeView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="GraphLayout.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
-    <Compile Include="Properties\Settings.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Settings.settings</DependentUpon>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-    </Compile>
-    <Compile Include="SubViews\LLParserView.xaml.cs">
-      <DependentUpon>LLParserView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="SubViews\LRParserView.xaml.cs">
-      <DependentUpon>LRParserView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="SubViews\ProjectSelectionView.xaml.cs">
-      <DependentUpon>ProjectSelectionView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="SubViews\SymbolTableView.xaml.cs">
-      <DependentUpon>SymbolTableView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="VertexDataTemplateSelector.cs" />
-    <Compile Include="ViewCommands.cs" />
-    <Compile Include="WindowViews\TestToolWindowView.xaml.cs">
-      <DependentUpon>TestToolWindowView.xaml</DependentUpon>
-    </Compile>
-    <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <None Include="app.config" />
-    <None Include="packages.config" />
-    <None Include="Properties\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\..\Parse.BackEnd.Target\Parse.BackEnd.Target\Parse.BackEnd.Target.csproj">
-      <Project>{6FE9D3FA-798D-42EC-B6F0-890D5D320384}</Project>
-      <Name>Parse.BackEnd.Target</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\Parse.FrontEnd.Grammars\Parse.FrontEnd.Grammars.csproj">
-      <Project>{A0661596-8C09-42A8-B412-8702108FD935}</Project>
-      <Name>Parse.FrontEnd.Grammars</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\Parse.WpfControls.SyntaxEditor\Parse.WpfControls.SyntaxEditor.csproj">
-      <Project>{DCCEDEB5-9CA4-41FE-AB6B-50E4BCC64EE6}</Project>
-      <Name>Parse.WpfControls.SyntaxEditor</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\Parse.WpfControls\Parse.WpfControls.csproj">
-      <Project>{1d389520-0862-434b-82f9-ad0c41c2db5f}</Project>
-      <Name>Parse.WpfControls</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\ApplicationLayer.Common\ApplicationLayer.Common.csproj">
-      <Project>{9b7ebe4d-c2b3-40e8-9516-107340a07111}</Project>
-      <Name>ApplicationLayer.Common</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\ApplicationLayer.Define\ApplicationLayer.Define.csproj">
-      <Project>{2b6881f9-2dbf-412b-9797-76d6d81abc14}</Project>
-      <Name>ApplicationLayer.Define</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\ApplicationLayer.Model\ApplicationLayer.Models.csproj">
-      <Project>{9B9BD94E-15E9-4113-8BCA-543A925F34AB}</Project>
-      <Name>ApplicationLayer.Models</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\ApplicationLayer.ViewModels\ApplicationLayer.ViewModels.csproj">
-      <Project>{acdea7b0-f5d4-4b92-bf1a-f2976c0787d9}</Project>
-      <Name>ApplicationLayer.ViewModels</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\Images\Basic\Solution16.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Page Include="DialogViews\OptionViews\FontsAndColorsView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="DialogViews\OptionViews\OptionDialog.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="DocumentTypeViews\GrammarInfoView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="DocumentTypeViews\ParseTreeView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="DocumentTypeViews\UCodeView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Resources\ApplicationStyles\PanelStyle.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Resources\ApplicationStyles\TextBlockStyles.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Resources\BasicImageResources.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Resources\DarkThemeImageResources.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Resources\GraphTemplates.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="SubViews\LLParserView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="SubViews\LRParserView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="SubViews\ProjectSelectionView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="SubViews\SymbolTableView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="WindowViews\TestToolWindowView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\Images\Basic\cfile_16.png" />
-    <Resource Include="Resources\Images\Basic\cfile_24.png" />
-    <Resource Include="Resources\Images\Basic\cfile_48.png" />
-    <Resource Include="Resources\Images\Basic\close_folder_16.png" />
-    <Resource Include="Resources\Images\Basic\close_folder_20.png" />
-    <Resource Include="Resources\Images\Basic\error.png" />
-    <Resource Include="Resources\Images\Basic\logo_16.png" />
-    <Resource Include="Resources\Images\Basic\logo_24.png" />
-    <Resource Include="Resources\Images\Basic\mclibproject_16.png" />
-    <Resource Include="Resources\Images\Basic\mclibproject_24.png" />
-    <Resource Include="Resources\Images\Basic\mclibproject_48.png" />
-    <Resource Include="Resources\Images\Basic\mcproject_16.png" />
-    <Resource Include="Resources\Images\Basic\mcproject_24.png" />
-    <Resource Include="Resources\Images\Basic\mcproject_48.png" />
-    <Resource Include="Resources\Images\Basic\newfile.png" />
-    <Resource Include="Resources\Images\Basic\not_exist_16.png" />
-    <Resource Include="Resources\Images\Basic\not_exist_20.png" />
-    <Resource Include="Resources\Images\Basic\open_folder_16.png" />
-    <Resource Include="Resources\Images\Basic\open_folder_20.png" />
-    <Resource Include="Resources\Images\Basic\reference_16.png" />
-    <Resource Include="Resources\Images\Basic\reference_20.png" />
-    <Resource Include="Resources\Images\Basic\warning.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\Images\DarkTheme\cfile_16.png" />
-    <Resource Include="Resources\Images\DarkTheme\cfile_24.png" />
-    <Resource Include="Resources\Images\DarkTheme\cfile_48.png" />
-    <Resource Include="Resources\Images\DarkTheme\logo_16.png" />
-    <Resource Include="Resources\Images\DarkTheme\logo_24.png" />
-    <Resource Include="Resources\Images\DarkTheme\mclibproject_16.png" />
-    <Resource Include="Resources\Images\DarkTheme\mclibproject_24.png" />
-    <Resource Include="Resources\Images\DarkTheme\mclibproject_48.png" />
-    <Resource Include="Resources\Images\DarkTheme\mcproject.png" />
-    <Resource Include="Resources\Images\DarkTheme\mcproject_16.png" />
-    <Resource Include="Resources\Images\DarkTheme\mcproject_24.png" />
-    <Resource Include="Resources\Images\DarkTheme\mcproject_48.png" />
-    <Resource Include="Resources\Images\DarkTheme\reference_16.png" />
-    <Resource Include="Resources\Images\DarkTheme\reference_20.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\Images\Basic\closed_dependency_filter_16.png" />
-    <Resource Include="Resources\Images\Basic\closed_folder_16.png" />
-    <Resource Include="Resources\Images\Basic\mcfile_16.png" />
-    <Resource Include="Resources\Images\Basic\mcfile_24.png" />
-    <Resource Include="Resources\Images\Basic\mcfile_48.png" />
-    <Resource Include="Resources\Images\Basic\open_dependency_filter_16.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\Images\DarkTheme\mcfile_16.png" />
-    <Resource Include="Resources\Images\DarkTheme\mcfile_24.png" />
-    <Resource Include="Resources\Images\DarkTheme\mcfile_48.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\Images\Basic\func_16.png" />
-    <Resource Include="Resources\Images\Basic\func_24.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\Images\Basic\var_16.png" />
-    <Resource Include="Resources\Images\Basic\var_24.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\Images\Basic\openmenu_16.png" />
-    <Resource Include="Resources\Images\Basic\openmenu_24.png" />
-    <Resource Include="Resources\Images\Basic\openmenu_48.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\Images\DarkTheme\openmenu_16.png" />
-    <Resource Include="Resources\Images\DarkTheme\openmenu_24.png" />
-    <Resource Include="Resources\Images\DarkTheme\openmenu_48.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\Images\Basic\new_create_menu_16.png" />
-    <Resource Include="Resources\Images\Basic\new_create_menu_24.png" />
-    <Resource Include="Resources\Images\Basic\new_create_menu_48.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\Images\Basic\header_16.png" />
-    <Resource Include="Resources\Images\Basic\header_24.png" />
-    <Resource Include="Resources\Images\Basic\header_48.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\Images\DarkTheme\header_16.png" />
-    <Resource Include="Resources\Images\DarkTheme\header_24.png" />
-    <Resource Include="Resources\Images\DarkTheme\header_48.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\Images\Basic\unknown_16.png" />
-    <Resource Include="Resources\Images\Basic\unknown_24.png" />
-    <Resource Include="Resources\Images\Basic\unknown_48.png" />
-  </ItemGroup>
-  <ItemGroup />
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+
 </Project>

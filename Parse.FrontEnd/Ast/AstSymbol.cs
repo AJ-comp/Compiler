@@ -1,5 +1,5 @@
 ﻿using Parse.FrontEnd.RegularGrammar;
-using System.Collections.Generic;
+using Parse.MiddleEnd.IR;
 
 namespace Parse.FrontEnd.Ast
 {
@@ -9,7 +9,7 @@ namespace Parse.FrontEnd.Ast
 
         public SymbolTable ConnectedSymbolTable { get; set; }
         public MeaningErrInfoList ConnectedErrInfoList { get; } = new MeaningErrInfoList();
-        public object ConnectedIrUnit { get; set; }
+        public IRFormat ConnectedIrUnit { get; set; }
 
         public bool IsDummy => (ConnectedErrInfoList.Count == 0 && ConnectedIrUnit == null) ? true : false;
 

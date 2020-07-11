@@ -274,7 +274,8 @@ namespace Parse.MiddleEnd.IR.LLVM
             var rightCmpNode = (leftResult.Item1.Last() as Instruction).Result;
             rightResult.Item1.Add(Instruction.CBranch(rightCmpNode.SSF as LocalVar<Bit>, leftResult.Item2, rightResult.Item2)); // ??
 
-            return CreateLogicalOp(options, left, right, IRCondition.NE);
+            return null;
+//            return CreateLogicalOp(options, left, right, IRCondition.NE);
         }
 
         // sample format
@@ -347,7 +348,8 @@ namespace Parse.MiddleEnd.IR.LLVM
                 var literalLeft = left as IRValue;
                 var literalRight = right as IRValue;
 
-                return new IRFormat(null, literalLeft.LogicalOp(literalRight, condition));
+                var result = LLVMChecker.LogicalOp(literalLeft, literalRight, condition);
+                return new IRFormat(null, result);
             }
 
             if (leftSSVar is null) return CreateLogicalOp(options, rightSSVar, left as IRValue, condition);

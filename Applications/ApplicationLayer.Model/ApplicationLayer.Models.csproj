@@ -1,138 +1,23 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{9B9BD94E-15E9-4113-8BCA-543A925F34AB}</ProjectGuid>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
     <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ApplicationLayer.Models</RootNamespace>
-    <AssemblyName>ApplicationLayer.Models</AssemblyName>
-    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <Deterministic>true</Deterministic>
-    <TargetFrameworkProfile />
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
+
   <ItemGroup>
-    <Reference Include="GraphSharp, Version=1.0.2.0, Culture=neutral, PublicKeyToken=f9c24778325a6b82, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\GraphSharp.1.1.0.0\lib\net40\GraphSharp.dll</HintPath>
-    </Reference>
-    <Reference Include="GraphSharp.Controls, Version=1.1.0.0, Culture=neutral, PublicKeyToken=f9c24778325a6b82, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\GraphSharp.1.1.0.0\lib\net40\GraphSharp.Controls.dll</HintPath>
-    </Reference>
-    <Reference Include="QuickGraph, Version=3.6.61114.0, Culture=neutral, PublicKeyToken=f3fb40175eec2af3, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\QuickGraph.3.6.61119.7\lib\net4\QuickGraph.dll</HintPath>
-    </Reference>
-    <Reference Include="QuickGraph.Data, Version=3.6.61114.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\QuickGraph.3.6.61119.7\lib\net4\QuickGraph.Data.dll</HintPath>
-    </Reference>
-    <Reference Include="QuickGraph.Graphviz, Version=3.6.61114.0, Culture=neutral, PublicKeyToken=f3fb40175eec2af3, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\QuickGraph.3.6.61119.7\lib\net4\QuickGraph.Graphviz.dll</HintPath>
-    </Reference>
-    <Reference Include="QuickGraph.Serialization, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\QuickGraph.3.6.61119.7\lib\net4\QuickGraph.Serialization.dll</HintPath>
-    </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.Runtime.Serialization" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Net.Http" />
-    <Reference Include="System.Xml" />
-    <Reference Include="WindowsBase" />
-    <Reference Include="WPFExtensions, Version=1.0.3437.34043, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\WPFExtensions.1.0.0\lib\WPFExtensions.dll</HintPath>
-    </Reference>
+    <Folder Include="Properties\" />
   </ItemGroup>
+
   <ItemGroup>
-    <Compile Include="AlarmData.cs" />
-    <Compile Include="ChangedFileList.cs" />
-    <Compile Include="Document.cs" />
-    <Compile Include="ExceptionTreeNodeModel.cs" />
-    <Compile Include="GraphModels\AstSymbolVertex.cs" />
-    <Compile Include="GraphModels\EbnfTreeVertex.cs" />
-    <Compile Include="GraphModels\PocEdge.cs" />
-    <Compile Include="GraphModels\PocGraph.cs" />
-    <Compile Include="GraphModels\PocVertex.cs" />
-    <Compile Include="GraphModels\ParseTreeSymbolVertex.cs" />
-    <Compile Include="HighlightTreeNodeModel.cs" />
-    <Compile Include="MessageData.cs" />
-    <Compile Include="GrammarPackages\IGrammarFactory.cs" />
-    <Compile Include="GrammarPackages\MiniCPackage\MiniCFactory.cs" />
-    <Compile Include="Invokers\Invoker.cs" />
-    <Compile Include="PathChain.cs" />
-    <Compile Include="ProjectData.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SolutionPackage\CategoryTreeNodeModel.cs" />
-    <Compile Include="SolutionPackage\ErrorProjectTreeNodeModel.cs" />
-    <Compile Include="SolutionPackage\TreeNodeCreator.cs" />
-    <Compile Include="SolutionPackage\FileTreeNodeModel.cs" />
-    <Compile Include="SolutionPackage\FilterFileTreeNodeModel.cs" />
-    <Compile Include="SolutionPackage\FilterTreeNodeModel.cs" />
-    <Compile Include="SolutionPackage\FolderHier.cs" />
-    <Compile Include="SolutionPackage\FolderTreeNodeModel.cs" />
-    <Compile Include="GrammarPackages\MiniCPackage\MiniCGenerator.cs" />
-    <Compile Include="SolutionPackage\MiniCPackage\FuncTreeNodeModel.cs" />
-    <Compile Include="SolutionPackage\MiniCPackage\MiniCProjectTreeNodeModel.cs" />
-    <Compile Include="SolutionPackage\MiniCPackage\VarTreeNodeModel.cs" />
-    <Compile Include="SolutionPackage\PathTreeNodeModel.cs" />
-    <Compile Include="SolutionPackage\ProjectGenerator.cs" />
-    <Compile Include="SolutionPackage\ProjectProperty.cs" />
-    <Compile Include="SolutionPackage\ProjectTreeNodeModel.cs" />
-    <Compile Include="SolutionPackage\SolutionTreeNodeModel.cs" />
-    <Compile Include="SolutionPackage\TreeNodeHelper.cs" />
-    <Compile Include="SolutionPackage\TreeNodeModel.cs" />
-    <Compile Include="Theme.cs" />
-    <Compile Include="ToolWindowStatus\ToolItemDockSide.cs" />
-    <Compile Include="ToolWindowStatus\ToolItemState.cs" />
-    <Compile Include="UCodeTreeNodeModel.cs" />
+    <PackageReference Include="HIT.GraphSharp.Wpf" Version="1.0.0" />
   </ItemGroup>
+
   <ItemGroup>
-    <ProjectReference Include="..\..\Parse.BackEnd.Target\Parse.BackEnd.Target\Parse.BackEnd.Target.csproj">
-      <Project>{6FE9D3FA-798D-42EC-B6F0-890D5D320384}</Project>
-      <Name>Parse.BackEnd.Target</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Parse.FrontEnd.Grammars\Parse.FrontEnd.Grammars.csproj">
-      <Project>{A0661596-8C09-42A8-B412-8702108FD935}</Project>
-      <Name>Parse.FrontEnd.Grammars</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Parse.WpfControls.SyntaxEditor\Parse.WpfControls.SyntaxEditor.csproj">
-      <Project>{DCCEDEB5-9CA4-41FE-AB6B-50E4BCC64EE6}</Project>
-      <Name>Parse.WpfControls.SyntaxEditor</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\ApplicationLayer.Common\ApplicationLayer.Common.csproj">
-      <Project>{9B7EBE4D-C2B3-40E8-9516-107340A07111}</Project>
-      <Name>ApplicationLayer.Common</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\ApplicationLayer.Define\ApplicationLayer.Define.csproj">
-      <Project>{2b6881f9-2dbf-412b-9797-76d6d81abc14}</Project>
-      <Name>ApplicationLayer.Define</Name>
-    </ProjectReference>
+    <ProjectReference Include="..\..\Parse.BackEnd.Target\Parse.BackEnd.Target\Parse.BackEnd.Target.csproj" />
+    <ProjectReference Include="..\..\Parse.FrontEnd.Parsers\Parse.FrontEnd.Parsers.csproj" />
+    <ProjectReference Include="..\..\Parse.FrontEnd.Support\Parse.FrontEnd.Support.csproj" />
+    <ProjectReference Include="..\ApplicationLayer.Common\ApplicationLayer.Common.csproj" />
   </ItemGroup>
-  <ItemGroup>
-    <None Include="app.config" />
-    <None Include="packages.config" />
-  </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+
 </Project>

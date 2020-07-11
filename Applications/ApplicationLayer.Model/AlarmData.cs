@@ -1,5 +1,4 @@
 ﻿using Parse.FrontEnd;
-using Parse.WpfControls.SyntaxEditor.EventArgs;
 using System.Collections.Generic;
 
 namespace ApplicationLayer.Models

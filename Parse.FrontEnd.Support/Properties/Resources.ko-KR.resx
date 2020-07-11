@@ -117,17 +117,70 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="Close" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Close.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Keyword" xml:space="preserve">
+    <value>키워드</value>
   </data>
-  <data name="Maximize" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Maximize.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Digit" xml:space="preserve">
+    <value>숫자</value>
   </data>
-  <data name="Minimize" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Minimize.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Operator" xml:space="preserve">
+    <value>연산자</value>
   </data>
-  <data name="NormalWindow" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\NormalWindow.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="SpecialWord" xml:space="preserve">
+    <value>특수문자</value>
+  </data>
+  <data name="Identifier" xml:space="preserve">
+    <value>식별자</value>
+  </data>
+  <data name="RepeatStatement" xml:space="preserve">
+    <value>반복문</value>
+  </data>
+  <data name="ControlStatement" xml:space="preserve">
+    <value>제어문</value>
+  </data>
+  <data name="Accesser" xml:space="preserve">
+    <value>한정자</value>
+  </data>
+  <data name="DefinedDataType" xml:space="preserve">
+    <value>미리정의된 자료형</value>
+  </data>
+  <data name="EtcKeyword" xml:space="preserve">
+    <value>기타 키워드</value>
+  </data>
+  <data name="Digit2" xml:space="preserve">
+    <value>2진수</value>
+  </data>
+  <data name="Digit8" xml:space="preserve">
+    <value>8진수</value>
+  </data>
+  <data name="Digit10" xml:space="preserve">
+    <value>10진수</value>
+  </data>
+  <data name="Digit16" xml:space="preserve">
+    <value>16진수</value>
+  </data>
+  <data name="EtcOperator" xml:space="preserve">
+    <value>기타 연산자</value>
+  </data>
+  <data name="Comma" xml:space="preserve">
+    <value>콤마 (,)</value>
+  </data>
+  <data name="Squre" xml:space="preserve">
+    <value>대괄호 ([ ])</value>
+  </data>
+  <data name="CurlyBrace" xml:space="preserve">
+    <value>중괄호 ({ })</value>
+  </data>
+  <data name="Parenthesis" xml:space="preserve">
+    <value>소괄호 (( ))</value>
+  </data>
+  <data name="Comment" xml:space="preserve">
+    <value>주석</value>
+  </data>
+  <data name="LineComment" xml:space="preserve">
+    <value>라인 주석</value>
+  </data>
+  <data name="ScopeComment" xml:space="preserve">
+    <value>범위 주석</value>
   </data>
 </root>

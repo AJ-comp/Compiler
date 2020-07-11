@@ -1,4 +1,4 @@
-﻿using Parse.FrontEnd.Grammars.MiniC.SymbolDataFormat.LiteralDataFormat;
+﻿using Parse.FrontEnd.Grammars.MiniC.SymbolDataFormat;
 using Parse.FrontEnd.Grammars.MiniC.SymbolDataFormat.VarDataFormat;
 using System.Collections.Generic;
 
@@ -65,7 +65,6 @@ namespace Parse.FrontEnd.Grammars.MiniC.SymbolTableFormat
         public TokenData NameToken { get; internal set; }
         public TokenData LevelToken { get; internal set; }
         public TokenData DimensionToken { get; internal set; }
-        public LiteralData Value { get; internal set; } = new UnknownLiteralData(UnknownState.NotInitialized, null);
 
         public string KeyString => string.Format("{0}", Name);
 
@@ -74,7 +73,7 @@ namespace Parse.FrontEnd.Grammars.MiniC.SymbolTableFormat
 
     public class DclSpecData : IStorableToHashTable
     {
-        public bool Const => (ConstToken == null) ? false : true;
+        public bool Const => ConstToken != null;
         public DataType DataType { get; internal set; }
 
         public TokenData ConstToken { get; internal set; } = null;
@@ -93,6 +92,7 @@ namespace Parse.FrontEnd.Grammars.MiniC.SymbolTableFormat
         public int BlockLevel { get; internal set; }
         public int Offset { get; internal set; }
         public EtcInfo Etc { get; internal set; }
+        public ValueData Value { get; internal set; }
 
         public string KeyString => string.Format("{0} {1}", DclItemData.KeyString, BlockLevel.ToString());
 

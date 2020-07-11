@@ -19,23 +19,19 @@ namespace ApplicationLayer.ViewModels.DocumentTypeViewModels
                 return CreateTreeNodeModel(cData);
             }
             else
-                return CreateTreeNodeModel(data as IRBuilder.Format);
+                return CreateTreeNodeModel(data as IRUnit);
         }
 
-        private UCodeTreeNodeModel CreateTreeNodeModel(IRBuilder.Format data)
+        private UCodeTreeNodeModel CreateTreeNodeModel(IRUnit data)
         {
-            var ucodeNode = new UCodeTreeNodeModel
+            var result = new UCodeTreeNodeModel
             {
-                Label = data.Label,
-                OpCode = data.OpCode,
                 Comment = data.Comment,
 
-                Operand1 = (data.Operands.Count > 0) ? data.Operands[0] : string.Empty,
-                Operand2 = (data.Operands.Count > 1) ? data.Operands[1] : string.Empty,
-                Operand3 = (data.Operands.Count > 2) ? data.Operands[2] : string.Empty
+                Operand2 = data.ToString()
             };
 
-            return ucodeNode;
+            return result;
         }
 
         private ExceptionTreeNodeModel CreateTreeNodeModel(string exception) => new ExceptionTreeNodeModel() { DisplayName = exception };
@@ -72,7 +68,8 @@ namespace ApplicationLayer.ViewModels.DocumentTypeViewModels
                     else
                     {
                         // add a IL of the current node to the parent node
-                        foreach (var il in node.ConnectedIrUnit)
+                        IRBlock block = node.ConnectedIrUnit.Unit as IRBlock;
+                        foreach (var il in block)
                             parentNode.AddChildren(CreateTreeNodeModel(il));
                     }
 
@@ -90,7 +87,8 @@ namespace ApplicationLayer.ViewModels.DocumentTypeViewModels
                     leftUnDoneList.Clear();
 
                     // add a IL of the current node to the parent node
-                    foreach (var il in node.ConnectedIrUnit)
+                    IRBlock block = node.ConnectedIrUnit.Unit as IRBlock;
+                    foreach (var il in block)
                         parentNode.AddChildren(CreateTreeNodeModel(il));
 
                     Root.AddChildren(parentNode);

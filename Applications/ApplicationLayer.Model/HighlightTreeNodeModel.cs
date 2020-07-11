@@ -1,7 +1,7 @@
 ﻿using ApplicationLayer.Common;
 using ApplicationLayer.Common.Utilities;
 using ApplicationLayer.Models.SolutionPackage;
-using Parse.FrontEnd.DrawingSupport;
+using Parse.FrontEnd.Support.Drawing;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
