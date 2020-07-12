@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Data;
 using System.Text.RegularExpressions;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Forms;
 using System.Windows.Forms.Integration;
 

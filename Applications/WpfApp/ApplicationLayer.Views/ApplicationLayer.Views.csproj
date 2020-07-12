@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <UseWPF>true</UseWPF>
+    <UseWindowsForms>true</UseWindowsForms>
   </PropertyGroup>
 
   <ItemGroup>
@@ -13,7 +14,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\Wpf.UI.Themes\Wpf.UI.Advance\Wpf.UI.Advance.csproj" />
-    <ProjectReference Include="..\..\ApplicationLayer.Model\ApplicationLayer.Models.csproj" />
     <ProjectReference Include="..\..\ApplicationLayer.ViewModels\ApplicationLayer.ViewModels.csproj" />
   </ItemGroup>
 
