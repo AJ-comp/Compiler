@@ -8,4 +8,10 @@
     <ProjectReference Include="..\Parse.BackEnd.Target\Parse.BackEnd.Target.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="ARMv6\" />
+    <Folder Include="ARMv7\" />
+    <Folder Include="ARMv8\" />
+  </ItemGroup>
+
 </Project>

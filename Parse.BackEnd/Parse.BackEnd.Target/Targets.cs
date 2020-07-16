@@ -6,14 +6,6 @@
         public string Explain { get; protected set; }
     }
 
-    public class ARM : Target
-    {
-        public ARM()
-        {
-            this.Name = "ARM";
-        }
-    }
-
     public class AVR : Target
     {
         public AVR()

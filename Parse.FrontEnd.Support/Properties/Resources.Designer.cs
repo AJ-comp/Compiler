@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Parse.FrontEnd.DrawingSupport.Properties {
+namespace Parse.FrontEnd.Support.Properties {
     using System;
     
     
@@ -22,7 +22,7 @@ namespace Parse.FrontEnd.DrawingSupport.Properties {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Resources {
+    public class Resources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,10 +36,10 @@ namespace Parse.FrontEnd.DrawingSupport.Properties {
         ///   이 클래스에서 사용하는 캐시된 ResourceManager 인스턴스를 반환합니다.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Parse.FrontEnd.DrawingSupport.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Parse.FrontEnd.Support.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -51,7 +51,7 @@ namespace Parse.FrontEnd.DrawingSupport.Properties {
         ///   재정의합니다.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -63,7 +63,7 @@ namespace Parse.FrontEnd.DrawingSupport.Properties {
         /// <summary>
         ///   Accesser과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
-        internal static string Accesser {
+        public static string Accesser {
             get {
                 return ResourceManager.GetString("Accesser", resourceCulture);
             }
@@ -72,7 +72,7 @@ namespace Parse.FrontEnd.DrawingSupport.Properties {
         /// <summary>
         ///   Comma (,)과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
-        internal static string Comma {
+        public static string Comma {
             get {
                 return ResourceManager.GetString("Comma", resourceCulture);
             }
@@ -81,7 +81,7 @@ namespace Parse.FrontEnd.DrawingSupport.Properties {
         /// <summary>
         ///   Comment과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
-        internal static string Comment {
+        public static string Comment {
             get {
                 return ResourceManager.GetString("Comment", resourceCulture);
             }
@@ -90,7 +90,7 @@ namespace Parse.FrontEnd.DrawingSupport.Properties {
         /// <summary>
         ///   Control statement과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
-        internal static string ControlStatement {
+        public static string ControlStatement {
             get {
                 return ResourceManager.GetString("ControlStatement", resourceCulture);
             }
@@ -99,7 +99,7 @@ namespace Parse.FrontEnd.DrawingSupport.Properties {
         /// <summary>
         ///   Curly brace ({ })과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
-        internal static string CurlyBrace {
+        public static string CurlyBrace {
             get {
                 return ResourceManager.GetString("CurlyBrace", resourceCulture);
             }
@@ -108,7 +108,7 @@ namespace Parse.FrontEnd.DrawingSupport.Properties {
         /// <summary>
         ///   Defined data type과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
-        internal static string DefinedDataType {
+        public static string DefinedDataType {
             get {
                 return ResourceManager.GetString("DefinedDataType", resourceCulture);
             }
@@ -117,7 +117,7 @@ namespace Parse.FrontEnd.DrawingSupport.Properties {
         /// <summary>
         ///   Digit과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
-        internal static string Digit {
+        public static string Digit {
             get {
                 return ResourceManager.GetString("Digit", resourceCulture);
             }
@@ -126,7 +126,7 @@ namespace Parse.FrontEnd.DrawingSupport.Properties {
         /// <summary>
         ///   Decimal number과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
-        internal static string Digit10 {
+        public static string Digit10 {
             get {
                 return ResourceManager.GetString("Digit10", resourceCulture);
             }
@@ -135,7 +135,7 @@ namespace Parse.FrontEnd.DrawingSupport.Properties {
         /// <summary>
         ///   Hexadecimal number과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
-        internal static string Digit16 {
+        public static string Digit16 {
             get {
                 return ResourceManager.GetString("Digit16", resourceCulture);
             }
@@ -144,7 +144,7 @@ namespace Parse.FrontEnd.DrawingSupport.Properties {
         /// <summary>
         ///   Binary number과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
-        internal static string Digit2 {
+        public static string Digit2 {
             get {
                 return ResourceManager.GetString("Digit2", resourceCulture);
             }
@@ -153,7 +153,7 @@ namespace Parse.FrontEnd.DrawingSupport.Properties {
         /// <summary>
         ///   Octal number과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
-        internal static string Digit8 {
+        public static string Digit8 {
             get {
                 return ResourceManager.GetString("Digit8", resourceCulture);
             }
@@ -162,7 +162,7 @@ namespace Parse.FrontEnd.DrawingSupport.Properties {
         /// <summary>
         ///   Etc keyword과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
-        internal static string EtcKeyword {
+        public static string EtcKeyword {
             get {
                 return ResourceManager.GetString("EtcKeyword", resourceCulture);
             }
@@ -171,7 +171,7 @@ namespace Parse.FrontEnd.DrawingSupport.Properties {
         /// <summary>
         ///   Etc operator과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
-        internal static string EtcOperator {
+        public static string EtcOperator {
             get {
                 return ResourceManager.GetString("EtcOperator", resourceCulture);
             }
@@ -180,7 +180,7 @@ namespace Parse.FrontEnd.DrawingSupport.Properties {
         /// <summary>
         ///   Identifier과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
-        internal static string Identifier {
+        public static string Identifier {
             get {
                 return ResourceManager.GetString("Identifier", resourceCulture);
             }
@@ -189,7 +189,7 @@ namespace Parse.FrontEnd.DrawingSupport.Properties {
         /// <summary>
         ///   Keyword과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
-        internal static string Keyword {
+        public static string Keyword {
             get {
                 return ResourceManager.GetString("Keyword", resourceCulture);
             }
@@ -198,7 +198,7 @@ namespace Parse.FrontEnd.DrawingSupport.Properties {
         /// <summary>
         ///   Line comment과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
-        internal static string LineComment {
+        public static string LineComment {
             get {
                 return ResourceManager.GetString("LineComment", resourceCulture);
             }
@@ -207,7 +207,7 @@ namespace Parse.FrontEnd.DrawingSupport.Properties {
         /// <summary>
         ///   Operator과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
-        internal static string Operator {
+        public static string Operator {
             get {
                 return ResourceManager.GetString("Operator", resourceCulture);
             }
@@ -216,7 +216,7 @@ namespace Parse.FrontEnd.DrawingSupport.Properties {
         /// <summary>
         ///   Bracket (( ))과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
-        internal static string Parenthesis {
+        public static string Parenthesis {
             get {
                 return ResourceManager.GetString("Parenthesis", resourceCulture);
             }
@@ -225,7 +225,7 @@ namespace Parse.FrontEnd.DrawingSupport.Properties {
         /// <summary>
         ///   Repeat statement과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
-        internal static string RepeatStatement {
+        public static string RepeatStatement {
             get {
                 return ResourceManager.GetString("RepeatStatement", resourceCulture);
             }
@@ -234,7 +234,7 @@ namespace Parse.FrontEnd.DrawingSupport.Properties {
         /// <summary>
         ///   Scope comment과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
-        internal static string ScopeComment {
+        public static string ScopeComment {
             get {
                 return ResourceManager.GetString("ScopeComment", resourceCulture);
             }
@@ -243,7 +243,7 @@ namespace Parse.FrontEnd.DrawingSupport.Properties {
         /// <summary>
         ///   Special word과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
-        internal static string SpecialWord {
+        public static string SpecialWord {
             get {
                 return ResourceManager.GetString("SpecialWord", resourceCulture);
             }
@@ -252,7 +252,7 @@ namespace Parse.FrontEnd.DrawingSupport.Properties {
         /// <summary>
         ///   Squre ([ ])과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
-        internal static string Squre {
+        public static string Squre {
             get {
                 return ResourceManager.GetString("Squre", resourceCulture);
             }

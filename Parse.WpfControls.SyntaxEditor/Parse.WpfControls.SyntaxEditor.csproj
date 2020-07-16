@@ -6,8 +6,62 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resources\Images\Basic\class_active_16.png" />
+    <None Remove="Resources\Images\Basic\class_inactive_16.png" />
+    <None Remove="Resources\Images\Basic\codesnippet_active_16.png" />
+    <None Remove="Resources\Images\Basic\codesnippet_inactive_16.png" />
+    <None Remove="Resources\Images\Basic\delegate_active_16.png" />
+    <None Remove="Resources\Images\Basic\delegate_inactive_16.png" />
+    <None Remove="Resources\Images\Basic\enum_active_16.png" />
+    <None Remove="Resources\Images\Basic\enum_inactive_16.png" />
+    <None Remove="Resources\Images\Basic\event_active_16.png" />
+    <None Remove="Resources\Images\Basic\event_inactive_16.png" />
+    <None Remove="Resources\Images\Basic\field_active_16.png" />
+    <None Remove="Resources\Images\Basic\field_inactive_16.png" />
+    <None Remove="Resources\Images\Basic\function_active_16.png" />
+    <None Remove="Resources\Images\Basic\function_inactive_16.png" />
+    <None Remove="Resources\Images\Basic\interface_active_16.png" />
+    <None Remove="Resources\Images\Basic\interface_inactive_16.png" />
+    <None Remove="Resources\Images\Basic\keyword_active_16.png" />
+    <None Remove="Resources\Images\Basic\keyword_inactive_16.png" />
+    <None Remove="Resources\Images\Basic\namespace_active_16.png" />
+    <None Remove="Resources\Images\Basic\namespace_inactive_16.png" />
+    <None Remove="Resources\Images\Basic\property_active_16.png" />
+    <None Remove="Resources\Images\Basic\property_inactive_16.png" />
+    <None Remove="Resources\Images\Basic\struct_active_16.png" />
+    <None Remove="Resources\Images\Basic\struct_inactive_16.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Parse.FrontEnd.Support\Parse.FrontEnd.Support.csproj" />
     <ProjectReference Include="..\Parse.WpfControls\Parse.WpfControls.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\Images\Basic\class_active_16.png" />
+    <Resource Include="Resources\Images\Basic\class_inactive_16.png" />
+    <Resource Include="Resources\Images\Basic\codesnippet_active_16.png" />
+    <Resource Include="Resources\Images\Basic\codesnippet_inactive_16.png" />
+    <Resource Include="Resources\Images\Basic\delegate_active_16.png" />
+    <Resource Include="Resources\Images\Basic\delegate_inactive_16.png" />
+    <Resource Include="Resources\Images\Basic\enum_active_16.png" />
+    <Resource Include="Resources\Images\Basic\enum_inactive_16.png" />
+    <Resource Include="Resources\Images\Basic\event_active_16.png" />
+    <Resource Include="Resources\Images\Basic\event_inactive_16.png" />
+    <Resource Include="Resources\Images\Basic\field_active_16.png" />
+    <Resource Include="Resources\Images\Basic\field_inactive_16.png" />
+    <Resource Include="Resources\Images\Basic\function_active_16.png" />
+    <Resource Include="Resources\Images\Basic\function_inactive_16.png" />
+    <Resource Include="Resources\Images\Basic\interface_active_16.png" />
+    <Resource Include="Resources\Images\Basic\interface_inactive_16.png" />
+    <Resource Include="Resources\Images\Basic\keyword_active_16.png" />
+    <Resource Include="Resources\Images\Basic\keyword_inactive_16.png" />
+    <Resource Include="Resources\Images\Basic\namespace_active_16.png" />
+    <Resource Include="Resources\Images\Basic\namespace_inactive_16.png" />
+    <Resource Include="Resources\Images\Basic\property_active_16.png" />
+    <Resource Include="Resources\Images\Basic\property_inactive_16.png" />
+    <Resource Include="Resources\Images\Basic\struct_active_16.png" />
+    <Resource Include="Resources\Images\Basic\struct_inactive_16.png" />
   </ItemGroup>
 
 </Project>

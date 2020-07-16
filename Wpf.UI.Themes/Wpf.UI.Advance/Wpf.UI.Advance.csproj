@@ -6,8 +6,22 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resources\Close.png" />
+    <None Remove="Resources\Maximize.png" />
+    <None Remove="Resources\Minimize.png" />
+    <None Remove="Resources\NormalWindow.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="CommonServiceLocator" Version="2.0.5" />
     <PackageReference Include="MvvmLight" Version="5.4.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\Close.png" />
+    <Resource Include="Resources\Maximize.png" />
+    <Resource Include="Resources\Minimize.png" />
+    <Resource Include="Resources\NormalWindow.png" />
   </ItemGroup>
 
   <ItemGroup>

@@ -1,6 +1,8 @@
-﻿namespace Parse.BackEnd.Target.ARMv7.MSeries
+﻿using Parse.BackEnd.Target.ARM;
+
+namespace Parse.BackEnd.Target.ARMv7.MSeries
 {
-    public class ARMv7_M : ARM
+    public class ARMv7_M : Arm
     {
         public ARMv7_M()
         {

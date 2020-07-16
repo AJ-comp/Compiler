@@ -20,7 +20,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\Parse.BackEnd.Target\Parse.BackEnd.Target.ARMv7\Parse.BackEnd.Target.ARMv7.csproj" />
-    <ProjectReference Include="..\..\..\Parse.BackEnd\Parse.BackEnd.Target.ARMv7\Parse.BackEnd.Target.ARMv7.csproj" />
+    <ProjectReference Include="..\..\..\Parse.BackEnd\Parse.BackEnd.Target.AVR\Parse.BackEnd.Target.AVR.csproj" />
+    <ProjectReference Include="..\..\..\Parse.BackEnd\Parse.BackEnd.Target\Parse.BackEnd.Target.csproj" />
     <ProjectReference Include="..\..\..\Parse.WpfControls.SyntaxEditor\Parse.WpfControls.SyntaxEditor.csproj" />
     <ProjectReference Include="..\..\..\Wpf.UI.Themes\Wpf.UI.Advance\Wpf.UI.Advance.csproj" />
     <ProjectReference Include="..\..\..\Wpf.UI.Themes\Wpf.UI.Basic\Wpf.UI.Basic.csproj" />
@@ -30,6 +31,9 @@
   <ItemGroup>
     <Reference Include="ActiproSoftware.Docking.Wpf">
       <HintPath>..\..\..\..\..\..\..\..\..\Program Files (x86)\Actipro Software\WPF-Controls\v19.1.0685\Assemblies\ActiproSoftware.Docking.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="ActiproSoftware.Editors.Wpf">
+      <HintPath>..\..\..\..\..\..\..\..\..\Program Files (x86)\Actipro Software\WPF-Controls\v19.1.0685\Assemblies\ActiproSoftware.Editors.Wpf.dll</HintPath>
     </Reference>
     <Reference Include="ActiproSoftware.Grids.Wpf">
       <HintPath>..\..\..\..\..\..\..\..\..\Program Files (x86)\Actipro Software\WPF-Controls\v19.1.0685\Assemblies\ActiproSoftware.Grids.Wpf.dll</HintPath>
