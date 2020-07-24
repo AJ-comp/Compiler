@@ -2,7 +2,7 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:models="clr-namespace:ApplicationLayer.Models.GraphModels;assembly=ApplicationLayer.Models"
                     xmlns:viewModels="clr-namespace:ApplicationLayer.ViewModels.DocumentTypeViewModels;assembly=ApplicationLayer.ViewModels"
-                    xmlns:graphsharp="clr-namespace:GraphSharp.Controls;assembly=GraphSharp.Wpf"
+                    xmlns:graphsharp="clr-namespace:GraphSharp.Controls;assembly=GraphSharp.Controls"
                     xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
                     xmlns:ap="clr-namespace:ApplicationLayer.Views.AttachedProperties"
                     xmlns:local="clr-namespace:ApplicationLayer.Views">

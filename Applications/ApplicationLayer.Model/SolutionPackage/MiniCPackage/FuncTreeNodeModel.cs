@@ -1,15 +1,14 @@
 ﻿using ApplicationLayer.Common;
-using Parse.FrontEnd.Grammars.MiniC.SymbolTableFormat;
+using Parse.FrontEnd.Grammars.MiniC.Sdts.Datas;
 using System;
-using System.Collections.Generic;
 
 namespace ApplicationLayer.Models.SolutionPackage.MiniCPackage
 {
     public class FuncTreeNodeModel : TreeNodeModel
     {
-        private FuncData _funcData;
+        private MiniCFuncData _funcData;
 
-        public string ReturnType => (_funcData == null) ? string.Empty : _funcData.DclSpecData.DataType.ToString();
+        public string ReturnType => (_funcData == null) ? string.Empty : _funcData.ReturnType.ToString();
         public string Name => _funcData.Name;
         public string Offset => _funcData.Offset.ToString();
         public bool CanReference { get; } = true;
@@ -21,12 +20,12 @@ namespace ApplicationLayer.Models.SolutionPackage.MiniCPackage
                 string result = Name + "(";
                 foreach(var param in _funcData.ParamVars)
                 {
-                    result += param.DclData.DclSpecData.DataType + ",";
+                    result += param.DataType + ",";
                 }
                 if (_funcData.ParamVars.Count > 0) result = result.Substring(0, result.Length - 1);
                 result += ")";
 
-                if (ReturnType != DataType.Void.ToString()) result += " : " + ReturnType.ToString();
+                if (ReturnType != MiniCDataType.Void.ToString()) result += " : " + ReturnType.ToString();
 
                 return result;
             }
@@ -37,7 +36,7 @@ namespace ApplicationLayer.Models.SolutionPackage.MiniCPackage
 
         public override event EventHandler<FileChangedEventArgs> Changed;
 
-        public FuncTreeNodeModel(FuncData funcData, bool canReference = true)
+        public FuncTreeNodeModel(MiniCFuncData funcData, bool canReference = true)
         {
             _funcData = funcData;
             CanReference = canReference;

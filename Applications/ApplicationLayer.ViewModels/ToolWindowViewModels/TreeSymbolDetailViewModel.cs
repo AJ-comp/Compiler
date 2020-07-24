@@ -1,9 +1,7 @@
 ﻿using ApplicationLayer.Models.SolutionPackage;
 using ApplicationLayer.Models.SolutionPackage.MiniCPackage;
 using ApplicationLayer.ViewModels.Messages;
-using Parse.FrontEnd.Ast;
-using Parse.FrontEnd.Grammars.MiniC.SymbolDataFormat.VarDataFormat;
-using Parse.FrontEnd.Grammars.MiniC.SymbolTableFormat;
+using Parse.FrontEnd.Grammars.MiniC.Sdts.AstNodes;
 using System.Collections.ObjectModel;
 using System.Linq;
 using CommonResource = ApplicationLayer.Define.Properties.Resources;
@@ -29,40 +27,41 @@ namespace ApplicationLayer.ViewModels.ToolWindowViewModels
         public void ReceivedTreeSymbolDetailMessage(TreeSymbolMessage message)
         {
             if (message is null) return;
-            if (message.TreeSymbol is AstTerminal) return;
 
             SymbolDatas.Clear();
-            var treeNonterminal = message.TreeSymbol as AstNonTerminal;
-            var clickedTree = treeNonterminal;
-            if (treeNonterminal.ConnectedSymbolTable is MiniCSymbolTable)
+            var sdtsNode = message.TreeSymbol;
+            var clickedTree = sdtsNode;
+
+            if (sdtsNode is MiniCNode)
             {
-                var symbolTable = treeNonterminal.ConnectedSymbolTable as MiniCSymbolTable;
+                MiniCNode miniCNode = sdtsNode as MiniCNode;
+
+                var symbolTable = miniCNode.SymbolTable;
                 while (symbolTable != null)
                 {
-                    if (symbolTable.VarDataList.Count == 0 && symbolTable.FuncDataList.Count == 0)
+                    if (symbolTable.VarList.Count == 0 && symbolTable.FuncDataList.Count == 0)
                     {
-                        treeNonterminal = null;
-                        symbolTable = symbolTable.Base as MiniCSymbolTable;
+                        sdtsNode = null;
+                        symbolTable = symbolTable.Base;
                         continue;
                     }
 
-                    string categoryName = (treeNonterminal != null) ? treeNonterminal.ToString() : "Base";
+                    string categoryName = (sdtsNode != null) ? sdtsNode.ToString() : "Base";
                     SymbolDatas.AddChildrenToFirst(new CategoryTreeNodeModel(categoryName));
                     SymbolDatas.IsExpanded = true;
 
-                    foreach (var item in symbolTable.VarDataList)
+                    foreach (var item in symbolTable.VarList)
                     {
-                        if (item is VirtualVarData) continue;
+                        if (item.IsVirtual) continue;
 
-                        var cItem = item as RealVarData;
-                        SymbolDatas.Children.First().AddChildren(new VarTreeNodeModel(cItem.DclData));
+                        SymbolDatas.Children.First().AddChildren(new VarTreeNodeModel(item));
                     }
 
                     foreach (var item in symbolTable.FuncDataList)
                         SymbolDatas.Children.First().AddChildren(new FuncTreeNodeModel(item));
 
-                    treeNonterminal = null;
-                    symbolTable = symbolTable.Base as MiniCSymbolTable;
+                    sdtsNode = null;
+                    symbolTable = symbolTable.Base;
                 }
             }
 //            (message.TreeSymbol as TreeNonTerminal).ConnectedErrInfoList

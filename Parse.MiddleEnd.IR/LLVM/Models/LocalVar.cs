@@ -14,7 +14,7 @@ namespace Parse.MiddleEnd.IR.LLVM.Models
         public int Offset { get; }
 
         public abstract DType TypeName { get; }
-        public abstract object Value { get; }
+        public abstract ValueData Value { get; set; }
         public abstract bool Signed { get; }
         public abstract bool IsNan { get; }
         public abstract int Block { get; }
@@ -39,7 +39,7 @@ namespace Parse.MiddleEnd.IR.LLVM.Models
         }
 
         public override DType TypeName => DataType.GetTypeName(typeof(T));
-        public override object Value { get; }
+        public override ValueData Value { get; set; }
         public override bool Signed { get; }
         public override bool IsNan { get; }
         public override int Block { get; }

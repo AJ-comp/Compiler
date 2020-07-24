@@ -29,6 +29,28 @@ namespace Parse.FrontEnd.ParseTree
         }
         public int Count => ((IList<ParseTreeSymbol>)_symbols).Count;
         public bool IsReadOnly => ((IList<ParseTreeSymbol>)_symbols).IsReadOnly;
+        public IReadOnlyList<ParseTreeSymbol> MeaningList
+        {
+            get
+            {
+                List<ParseTreeSymbol> result = new List<ParseTreeSymbol>();
+
+                foreach (var item in _symbols)
+                {
+                    if (item is ParseTreeTerminal)
+                    {
+                        if ((item as ParseTreeTerminal).Token.Kind.Meaning) result.Add(item);
+                    }
+
+                    else if (item is ParseTreeNonTerminal)
+                    {
+                        if ((item as ParseTreeNonTerminal).SignPost.MeaningUnit != null) result.Add(item);
+                    }
+                }
+
+                return result;
+            }
+        }
 
         public override bool HasVirtualChild
         {

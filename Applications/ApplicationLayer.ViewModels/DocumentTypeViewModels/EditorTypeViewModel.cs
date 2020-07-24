@@ -8,21 +8,19 @@ using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using Parse.FrontEnd;
 using Parse.FrontEnd.Ast;
-using Parse.FrontEnd.Support.Drawing;
 using Parse.FrontEnd.Grammars;
 using Parse.FrontEnd.Grammars.MiniC;
-using Parse.FrontEnd.Grammars.MiniC.SymbolDataFormat.VarDataFormat;
-using Parse.FrontEnd.Grammars.MiniC.SymbolTableFormat;
+using Parse.FrontEnd.Grammars.MiniC.Sdts.AstNodes;
 using Parse.FrontEnd.Parsers.Datas;
 using Parse.FrontEnd.Parsers.Logical;
 using Parse.FrontEnd.ParseTree;
+using Parse.FrontEnd.Support.Drawing;
 using Parse.Tokenize;
 using Parse.WpfControls.SyntaxEditor.EventArgs;
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Data;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace ApplicationLayer.ViewModels.DocumentTypeViewModels
@@ -55,7 +53,7 @@ namespace ApplicationLayer.ViewModels.DocumentTypeViewModels
         public TokenizeImpactRanges RecentTokenizeHistory { get; } = new TokenizeImpactRanges();
         public ParserSnippet ParserSnippet => _parserSnippet;
         public ParseTreeSymbol ParseTree { get; private set; }
-        public AstSymbol Ast { get; private set; }
+        public SdtsNode Ast { get; private set; }
         public DataTable ParsingHistory { get; private set; }
         public IReadOnlyList<AstSymbol> InterLanguage { get; private set; }
 
@@ -117,41 +115,42 @@ namespace ApplicationLayer.ViewModels.DocumentTypeViewModels
 
             this.ParsingHistory = parsingCompletedInfo.ParsingResult.ToParsingHistory;
             this.ParseTree = parsingCompletedInfo.ParsingResult.ToParseTree;
-            this.Ast = parsingCompletedInfo.RootAst;
+            this.Ast = parsingCompletedInfo.SdtsRoot;
 
             AlarmCollection alarmCollection = GetSyntaxAlarmCollection(parsingResult);
-            alarmCollection.AddRange(GetSemanticAlarmCollection(parsingCompletedInfo.AllNodes, parsingCompletedInfo.FiredException));
+            alarmCollection.AddRange(GetSemanticAlarmCollection(parsingCompletedInfo.SdtsRoot, parsingCompletedInfo.FiredException));
             if (alarmCollection.Count == 0) alarmCollection.Add(new AlarmEventArgs(string.Empty, this.FileName));
 
             // inform to alarm list view.
-            Messenger.Default.Send<AlarmMessage>(new AlarmMessage(this, alarmCollection));
+            Messenger.Default.Send(new AlarmMessage(this, alarmCollection));
 
             // Add sementic parsing information to the current FileTreeNode.
             _fileNode.Clear();
 
-            var astRoot = parsingCompletedInfo.RootAst as AstNonTerminal;
-            var grammarSymbolTable = astRoot?.ConnectedSymbolTable as MiniCSymbolTable;
-            if (grammarSymbolTable == null) return;
-
-            // Add abstract variable list information to the current FileTreeNode.
-            foreach(var item in grammarSymbolTable.VarDataList)
+            if(parsingCompletedInfo.SdtsRoot is MiniCNode)
             {
-                if (item is VirtualVarData) continue;
+                var minicRoot = parsingCompletedInfo.SdtsRoot as MiniCNode;
+                var symbolTable = minicRoot?.SymbolTable;
+                if (symbolTable == null) return;
 
-                var cItem = item as RealVarData;
+                // Add abstract variable list information to the current FileTreeNode.
+                foreach (var item in symbolTable.VarList)
+                {
+                    if (item.IsVirtual) continue;
 
-                var varTreeNode = new VarTreeNodeModel(cItem.DclData);
-                _fileNode.AddChildren(varTreeNode);
+                    var varTreeNode = new VarTreeNodeModel(item);
+                    _fileNode.AddChildren(varTreeNode);
+                }
+
+                // Add abstract function list information to the current FileTreeNode.
+                foreach (var item in symbolTable.FuncDataList)
+                {
+                    var funcTreeNode = new FuncTreeNodeModel(item);
+                    _fileNode.AddChildren(funcTreeNode);
+                }
+
+                InterLanguage = (parsingCompletedInfo.FiredException == null) ? parsingCompletedInfo.AllNodes : null;
             }
-
-            // Add abstract function list information to the current FileTreeNode.
-            foreach(var item in grammarSymbolTable.FuncDataList)
-            {
-                var funcTreeNode = new FuncTreeNodeModel(item);
-                _fileNode.AddChildren(funcTreeNode);
-            }
-
-            InterLanguage = (parsingCompletedInfo.FiredException == null) ? parsingCompletedInfo.AllNodes : null;
         }
 
 
@@ -196,7 +195,7 @@ namespace ApplicationLayer.ViewModels.DocumentTypeViewModels
             return alarmList;
         }
 
-        private AlarmCollection GetSemanticAlarmCollection(IReadOnlyList<AstSymbol> astNodes, Exception e)
+        private AlarmCollection GetSemanticAlarmCollection(SdtsNode sdtsRoot, Exception e)
         {
             AlarmCollection alarmList = new AlarmCollection();
 
@@ -208,11 +207,12 @@ namespace ApplicationLayer.ViewModels.DocumentTypeViewModels
                 alarmList.Add(new AlarmEventArgs(projNode?.FileNameWithoutExtension, FileName, 0, 0, null, alarm));
             }
 
-            if (astNodes == null) return alarmList;
+            if (sdtsRoot == null) return alarmList;
 
-            foreach (var item in astNodes)
+            var errNodes = sdtsRoot.ErrNodes;
+            foreach (var item in errNodes)
             {
-                foreach(var alarm in item.ConnectedErrInfoList)
+                foreach (var alarm in item.ConnectedErrInfoList)
                 {
                     var errToken = alarm.ErrTokens[0];
                     alarmList.Add(new AlarmEventArgs(projNode?.FileNameWithoutExtension, FileName, 0, 0, errToken, alarm));

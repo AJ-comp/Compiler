@@ -1,21 +1,19 @@
 ﻿using ApplicationLayer.Common;
-using Parse.FrontEnd.Grammars.MiniC.SymbolTableFormat;
+using Parse.FrontEnd.Grammars.MiniC.Sdts.Datas;
 using System;
 
 namespace ApplicationLayer.Models.SolutionPackage.MiniCPackage
 {
     public class VarTreeNodeModel : TreeNodeModel
     {
-        private DclData _dclData;
-
-        public bool IsConst => (_dclData != null) ? _dclData.DclSpecData.Const : false;
-        public string DataType => (_dclData != null) ? _dclData.DclSpecData.DataType.ToString() : string.Empty;
-        public string Name => (_dclData != null) ? _dclData.DclItemData.Name : string.Empty;
-        public string Dimension => (_dclData != null) ? _dclData.DclItemData.Dimension.ToString() : string.Empty;
-        public string BlockIndex => (_dclData != null) ? _dclData.BlockLevel.ToString() : string.Empty;
-        public string Offset => (_dclData != null) ? _dclData.Offset.ToString() : string.Empty;
-        public bool IsGlobal => (_dclData?.BlockLevel == 0) ? true : false;
-        public bool IsParam => (_dclData?.Etc == EtcInfo.Param) ? true : false;
+        public bool IsConst => (_varData != null) && _varData.Const;
+        public string DataType => (_varData != null) ? _varData.DataType.ToString() : string.Empty;
+        public string Name => (_varData != null) ? _varData.Name : string.Empty;
+        public string Dimension => (_varData != null) ? _varData.Dimension.ToString() : string.Empty;
+        public string BlockIndex => (_varData != null) ? _varData.Block.ToString() : string.Empty;
+        public string Offset => (_varData != null) ? _varData.Offset.ToString() : string.Empty;
+        public bool IsGlobal => (_varData?.Block== 0);
+        public bool IsParam => (_varData?.Etc == EtcInfo.Param);
 
         public override string DisplayName
         {
@@ -27,13 +25,16 @@ namespace ApplicationLayer.Models.SolutionPackage.MiniCPackage
 
         public override event EventHandler<FileChangedEventArgs> Changed;
 
-        public VarTreeNodeModel(DclData dclData)
+        public VarTreeNodeModel(MiniCVarData varData)
         {
-            _dclData = dclData;
+            _varData = varData;
         }
 
         public override void RemoveChild(TreeNodeModel nodeToRemove)
         {
         }
+
+
+        private MiniCVarData _varData;
     }
 }

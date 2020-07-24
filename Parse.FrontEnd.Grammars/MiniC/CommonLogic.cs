@@ -1,5 +1,4 @@
-﻿using Parse.FrontEnd.Grammars.MiniC.SymbolDataFormat;
-using Parse.FrontEnd.Grammars.MiniC.SymbolDataFormat.VarDataFormat;
+﻿using Parse.FrontEnd.Grammars.MiniC.Sdts.Datas;
 using Parse.MiddleEnd.IR;
 using Parse.MiddleEnd.IR.Datas;
 using Parse.MiddleEnd.IR.Datas.Types;
@@ -16,26 +15,20 @@ namespace Parse.FrontEnd.Grammars.MiniC
         {
             List<TokenData> result = new List<TokenData>();
 
-            if(data is IRVar)
+            if(data is MiniCVarData)
             {
-                if(data is RealVarData)
-                {
-                    RealVarData cd = data as RealVarData;
-                    result.Add(cd.DclData.DclItemData.NameToken);
-                }
+                MiniCVarData cd = data as MiniCVarData;
+                result.Add(cd.NameToken);
             }
-            else if(data is IRValue)
+            if (data is LiteralData)
             {
-                if (data is LiteralData)
-                {
-                    LiteralData cd = data as LiteralData;
-                    result.Add(cd.ValueToken);
-                }
-                else if (data is ConceptValueData)
-                {
-                    ConceptValueData cd = data as ConceptValueData;
-                    result.AddRange(cd.TokenList);
-                }
+                LiteralData cd = data as LiteralData;
+                result.Add(cd.ValueToken);
+            }
+            else if (data is ConceptValueData)
+            {
+                ConceptValueData cd = data as ConceptValueData;
+                result.AddRange(cd.TokenList);
             }
 
             return result;

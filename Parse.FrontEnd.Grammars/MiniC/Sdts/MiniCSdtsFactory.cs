@@ -1,7 +1,18 @@
 ﻿using Parse.FrontEnd.Ast;
-using Parse.FrontEnd.Grammars.MiniC.SymbolTableFormat;
+using Parse.FrontEnd.Grammars.MiniC.Sdts.AstNodes;
+using Parse.FrontEnd.Grammars.MiniC.Sdts.AstNodes.ExprNodes.ArithmeticExprNodes;
+using Parse.FrontEnd.Grammars.MiniC.Sdts.AstNodes.ExprNodes.AssignExprNodes;
+using Parse.FrontEnd.Grammars.MiniC.Sdts.AstNodes.ExprNodes.LogicalExprNodes;
+using Parse.FrontEnd.Grammars.MiniC.Sdts.AstNodes.LiteralNodes;
+using Parse.FrontEnd.Grammars.MiniC.Sdts.AstNodes.StatementNodes;
+using Parse.FrontEnd.Grammars.MiniC.Sdts.AstNodes.TypeNodes;
+using Parse.FrontEnd.Grammars.MiniC.Sdts.Datas;
+using Parse.MiddleEnd.IR;
+using Parse.MiddleEnd.IR.Datas;
+using Parse.MiddleEnd.IR.LLVM.Expressions;
 using Parse.Utilities;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 
@@ -9,11 +20,6 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
 {
     public partial class MiniCSdts : Grammars.Sdts
     {
-        // The cache role for speed up
-        private MiniCGrammar grammar;
-        private StringCollection _labels = new StringCollection();
-        private string _reservedLabel = string.Empty;
-
         // Auto clear when a reference
         public string ReservedLabel
         {
@@ -54,8 +60,7 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
         public MeaningUnit DclList { get; } = new MeaningUnit("DclList");
         public MeaningUnit Dcl { get; } = new MeaningUnit("Dcl");
         public MeaningUnit DclItem { get; } = new MeaningUnit("DclItem");
-        public MeaningUnit SimpleVar { get; } = new MeaningUnit("SimpleVar");
-        public MeaningUnit ArrayVar { get; } = new MeaningUnit("ArrayVar");
+        public MeaningUnit DeclareVar { get; } = new MeaningUnit("DeclareVar");
         public MeaningUnit StatList { get; } = new MeaningUnit("StatList");
         public MeaningUnit ExpSt { get; } = new MeaningUnit("ExpSt");
         public MeaningUnit IfSt { get; } = new MeaningUnit("IfSt");
@@ -65,81 +70,153 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
         public MeaningUnit Index { get; } = new MeaningUnit("Index");
         public MeaningUnit Call { get; } = new MeaningUnit("Call");
         public MeaningUnit ActualParam { get; } = new MeaningUnit("ActualParam");
-        public MeaningUnit VariableNode { get; } = new MeaningUnit("VariableNode");
+        public MeaningUnit UseVar { get; } = new MeaningUnit("UseVar");
         public MeaningUnit IntLiteralNode { get; } = new MeaningUnit("IntLiteralNode");
+
+
+        private Hashtable _sdtsFinder = new Hashtable();
+        // The cache role for speed up
+        private MiniCGrammar _grammar;
+        private StringCollection _labels = new StringCollection();
+        private string _reservedLabel = string.Empty;
 
 
         public MiniCSdts(KeyManager keyManager, MiniCGrammar grammar) : base(keyManager)
         {
-            this.grammar = grammar;
-
-            this.Program.BuildLogic = this.BuildProgramNode;
-            this.FuncDef.BuildLogic = this.BuildFuncDefNode;
-            this.FuncHead.BuildLogic = this.BuildFuncHeadNode;
-            this.DclSpec.BuildLogic = this.BuildDclSpecNode;
-            this.FormalPara.BuildLogic = this.BuildFormalParaNode;
-            this.ParamDcl.BuildLogic = this.BuildParamDcl;
-            this.CompoundSt.BuildLogic = this.BuildCompoundStNode;
-            this.DclList.BuildLogic = this.BuildDclListNode;
-            this.Dcl.BuildLogic = this.BuildDclNode;
-            this.DclItem.BuildLogic = this.BuildDclItemNode;
-            this.SimpleVar.BuildLogic = this.BuildSimpleVarNode;
-            this.ArrayVar.BuildLogic = this.BuildArrayVarNode;
-            this.StatList.BuildLogic = this.BuildStatListNode;
-            this.ExpSt.BuildLogic = this.BuildExpStNode;
-            this.IfSt.BuildLogic = this.BuildIfStNode;
-            this.IfElseSt.BuildLogic = this.BuildIfElseStNode;
-            this.WhileSt.BuildLogic = this.BuildWhileStNode;
-            this.ReturnSt.BuildLogic = this.BuildReturnStNode;
-            this.Index.BuildLogic = this.BuildIndex;
-            this.Call.BuildLogic = this.BuildCallNode;
-            this.ActualParam.BuildLogic = this.BuildActualParam;
-            this.VariableNode.BuildLogic = this.BuildVarNode;
-            this.IntLiteralNode.BuildLogic = this.BuildIntLiteralNode;
-
-
-            this.Add.BuildLogic = this.BuildAdd;
-            this.Sub.BuildLogic = this.BuildSub;
-            this.Mul.BuildLogic = this.BuildMul;
-            this.Div.BuildLogic = this.BuildDiv;
-            this.Mod.BuildLogic = this.BuildMod;
-            this.Assign.BuildLogic = this.BuildAssign;
-            this.AddAssign.BuildLogic = this.BuildAddAssign;
-            this.SubAssign.BuildLogic = this.BuildSubAssign;
-            this.MulAssign.BuildLogic = this.BuildMulAssign;
-            this.DivAssign.BuildLogic = this.BuildDivAssign;
-            this.ModAssign.BuildLogic = this.BuildModAssign;
-            this.LogicalOr.BuildLogic = this.BuildOpNode;
-            this.LogicalAnd.BuildLogic = this.BuildOpNode;
-            this.LogicalNot.BuildLogic = this.BuildOpNode;
-            this.Equal.BuildLogic = this.BuildOpNode;
-            this.NotEqual.BuildLogic = this.BuildOpNode;
-            this.GreaterThan.BuildLogic = this.BuildOpNode;
-            this.LessThan.BuildLogic = this.BuildOpNode;
-            this.GreaterEqual.BuildLogic = this.BuildOpNode;
-            this.LessEqual.BuildLogic = this.BuildOpNode;
-            //this.UnaryMinus.BuildLogic = this.ActionUnaryMinus;
-            this.PreInc.BuildLogic = this.BuildPreInc;
-            this.PreDec.BuildLogic = this.BuildPreDec;
-            this.PostInc.BuildLogic = this.BuildPostInc;
-            this.PostDec.BuildLogic = this.BuildPostDec;
+            this._grammar = grammar;
         }
 
         public override SemanticAnalysisResult Process(AstSymbol symbol)
         {
             if (symbol == null) return new SemanticAnalysisResult(null, null);
-            var buildParams = new MiniCAstBuildParams(new MiniCSymbolTable(), 0, 0);
+
+            SdtsNode result = null;
             var searchedList = new List<AstSymbol>();
 
             try
             {
-                var result = this.BuildProgramNode(symbol as AstNonTerminal, buildParams, searchedList);
-                return new SemanticAnalysisResult(symbol, searchedList);
+                var sdtsRoot = GenerateSdtsAst(symbol);
+                result = sdtsRoot.Build(new MiniCSdtsParams(0, 0));
+                return new SemanticAnalysisResult(result, searchedList);
             }
             catch(Exception ex)
             {
-                return new SemanticAnalysisResult(symbol, searchedList, ex);
+                return new SemanticAnalysisResult(result, searchedList, ex);
             }
+        }
+
+        public override SdtsNode GenerateSdtsAst(AstSymbol root)
+        {
+            MiniCNode result = null;
+
+            if (root is AstTerminal) result = new TerminalNode(root);
+            else
+            {
+                AstNonTerminal cRoot = root as AstNonTerminal;
+
+                if (cRoot.SignPost.MeaningUnit == Program) result = new ProgramNode(root);
+                else if (cRoot.SignPost.MeaningUnit == FuncDef) result = new FuncDefNode(root);
+                else if (cRoot.SignPost.MeaningUnit == FuncHead) result = new FuncHeadNode(root);
+                else if (cRoot.SignPost.MeaningUnit == FormalPara) result = new ParamListNode(root);
+                else if (cRoot.SignPost.MeaningUnit == ParamDcl) result = new ParamNode(root);
+                else if (cRoot.SignPost.MeaningUnit == CompoundSt) result = new CompoundStNode(root);
+                else if (cRoot.SignPost.MeaningUnit == IfSt) result = new IfStatementNode(root);
+                else if (cRoot.SignPost.MeaningUnit == IfElseSt) result = new IfElseStatementNode(root);
+                else if (cRoot.SignPost.MeaningUnit == WhileSt) result = new WhileStatementNode(root);
+                else if (cRoot.SignPost.MeaningUnit == ReturnSt) result = new ReturnStatementNode(root);
+                else if (cRoot.SignPost.MeaningUnit == StatList) result = new StatListNode(root);
+                else if (cRoot.SignPost.MeaningUnit == Call) result = new CallNode(root);
+                else if (cRoot.SignPost.MeaningUnit == ActualParam) result = new ActualParamNode(root);
+                else if (cRoot.SignPost.MeaningUnit == Index) result = new IndexNode(root);
+
+                else if (cRoot.SignPost.MeaningUnit == Add) result = new AddExprNode(root);
+                else if (cRoot.SignPost.MeaningUnit == Sub) result = new SubExprNode(root);
+                else if (cRoot.SignPost.MeaningUnit == Mul) result = new MulExprNode(root);
+                else if (cRoot.SignPost.MeaningUnit == Div) result = new DivExprNode(root);
+                else if (cRoot.SignPost.MeaningUnit == Mod) result = new ModExprNode(root);
+                else if (cRoot.SignPost.MeaningUnit == Assign) result = new AssignNode(root);
+                else if (cRoot.SignPost.MeaningUnit == AddAssign) result = new AddAssignNode(root);
+                else if (cRoot.SignPost.MeaningUnit == SubAssign) result = new SubAssignNode(root);
+                else if (cRoot.SignPost.MeaningUnit == MulAssign) result = new MulAssignNode(root);
+                else if (cRoot.SignPost.MeaningUnit == DivAssign) result = new DivAssignNode(root);
+                else if (cRoot.SignPost.MeaningUnit == ModAssign) result = new ModAssignNode(root);
+                else if (cRoot.SignPost.MeaningUnit == PreInc) result = new PreIncExprNode(root);
+                else if (cRoot.SignPost.MeaningUnit == PreDec) result = new PreDecExprNode(root);
+                else if (cRoot.SignPost.MeaningUnit == PostInc) result = new PostIncExprNode(root);
+                else if (cRoot.SignPost.MeaningUnit == PostDec) result = new PostDecExprNode(root);
+
+                else if (cRoot.SignPost.MeaningUnit == LogicalOr) result = new OrExprNode(root);
+                else if (cRoot.SignPost.MeaningUnit == LogicalAnd) result = new AndExprNode(root);
+                else if (cRoot.SignPost.MeaningUnit == LogicalNot) result = new NotExprNode(root);
+                else if (cRoot.SignPost.MeaningUnit == Equal) result = new EqualExprNode(root);
+                else if (cRoot.SignPost.MeaningUnit == NotEqual) result = new NotEqualExprNode(root);
+                else if (cRoot.SignPost.MeaningUnit == GreaterThan) result = new GreaterThanExprNode(root);
+                else if (cRoot.SignPost.MeaningUnit == LessThan) result = new LessThanNode(root);
+                else if (cRoot.SignPost.MeaningUnit == GreaterEqual) result = new GreaterEqualNode(root);
+                else if (cRoot.SignPost.MeaningUnit == LessEqual) result = new LessEqualNode(root);
+
+                else if (cRoot.SignPost.MeaningUnit == DclSpec) result = new VariableTypeNode(root);
+                else if (cRoot.SignPost.MeaningUnit == VoidNode) result = new VoidNode(root);
+                else if (cRoot.SignPost.MeaningUnit == IntNode) result = new IntNode(root);
+                else if (cRoot.SignPost.MeaningUnit == DclList) result = new VariableDclsListNode(root);
+                else if (cRoot.SignPost.MeaningUnit == Dcl) result = new VariableDclsNode(root);
+                else if (cRoot.SignPost.MeaningUnit == DclItem) result = new InitDeclaratorNode(root);
+                else if (cRoot.SignPost.MeaningUnit == DeclareVar) result = new DeclareVarNode(root);
+                else if (cRoot.SignPost.MeaningUnit == UseVar) result = new UseVarNode(root);
+                else if (cRoot.SignPost.MeaningUnit == IntLiteralNode) result = new IntLiteralNode(root);
+                else return null;
+
+                foreach (var item in cRoot.Items)
+                {
+                    var childNode = GenerateSdtsAst(item);
+                    if (childNode == null) return null;
+
+                    childNode.Parent = result;
+                    result.Items.Add(childNode);
+                }
+            }
+
+            return result;
+        }
+
+        public IReadOnlyList<LLVMExpression> ToLLVMExpression(SdtsNode root)
+        {
+            List<LLVMExpression> result = new List<LLVMExpression>();
+
+            foreach(var node in root.Items)
+            {
+                if(node is FuncDefNode)
+                    result.Add(CreateFuncDefLLVMExpression(node as FuncDefNode));
+                else if (node is VariableDclsListNode)
+                    result.Add(CreateVariableLLVMExpression(node as VariableDclsListNode));
+            }
+
+            return result;
+        }
+
+
+        private LLVMExpression CreateFuncDefLLVMExpression(FuncDefNode root)
+        {
+            IROptions options = new IROptions(ReservedLabel);
+            IRFuncData funcData = IRConverter.ToIRData(root);
+
+            foreach(var node in root.Items)
+            {
+                if(node is CompoundStNode)
+                {
+
+                }
+            }
+
+            //            LLVMBlockExpression blockExpression = new LLVMBlockExpression();
+            //            return LLVMExpression.FuncDef(funcData, );
+
+            return null;
+        }
+
+        private LLVMExpression CreateVariableLLVMExpression(VariableDclsListNode node)
+        {
+            return LLVMExpression.Variable();
         }
     }
 }

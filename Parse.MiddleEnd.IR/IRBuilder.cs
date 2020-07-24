@@ -43,7 +43,7 @@ namespace Parse.MiddleEnd.IR
         public abstract IRFormat CreateAssign(IROptions options, IRVar left, IRData right);
 
 
-        public abstract IRFormat CretaeConditionalJump(IROptions options, IRVar<Bit> cond, IRVar<Bit> trueLabel, IRVar<Bit> falseLabel);
+        public abstract IRFormat CreateConditionalJump(IROptions options, IRVar<Bit> cond, IRVar<Bit> trueLabel, IRVar<Bit> falseLabel);
         public abstract IRFormat CretaeUnConditionalJump(IROptions options, IRVar<Bit> jumpLabel);
     }
 }

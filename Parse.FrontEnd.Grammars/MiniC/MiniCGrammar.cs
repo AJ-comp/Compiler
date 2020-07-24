@@ -11,8 +11,8 @@ namespace Parse.FrontEnd.Grammars.MiniC
         public Terminal While { get; } = new Terminal(TokenType.Keyword.Repeateword, "while");
         public Terminal Return { get; } = new Terminal(TokenType.Keyword.Controlword, "return");
         public Terminal Const { get; } = new Terminal(TokenType.Keyword.DefinedDataType, "const");
-        public Terminal Int { get; } = new Terminal(TokenType.Keyword.DefinedDataType, "int");
-        public Terminal Void { get; } = new Terminal(TokenType.Keyword.DefinedDataType, "void");
+        public static Terminal Int { get; } = new Terminal(TokenType.Keyword.DefinedDataType, "int");
+        public static Terminal Void { get; } = new Terminal(TokenType.Keyword.DefinedDataType, "void");
         public Terminal Ident { get; } = new Terminal(TokenType.Identifier, "[_a-zA-Z][_a-zA-Z0-9]*", Resource.Ident, true, true);
         public Terminal Number { get; } = new Terminal(TokenType.Digit.Digit10, "[0-9]+", Resource.Number, true, true);
         public Terminal LineComment { get; } = new Terminal(TokenType.SpecialToken.Comment, "//.*$", false, true);
@@ -118,8 +118,8 @@ namespace Parse.FrontEnd.Grammars.MiniC
             this.dclSpecifiers.AddItem(this.dclSpecifier | this.dclSpecifiers + this.dclSpecifier);
             this.dclSpecifier.AddItem(this.typeQualifier | this.typeSpecifier);
             this.typeQualifier.AddItem(this.Const, sdts.ConstNode);
-            this.typeSpecifier.AddItem(this.Int, sdts.IntNode);
-            this.typeSpecifier.AddItem(this.Void, sdts.VoidNode);
+            this.typeSpecifier.AddItem(Int, sdts.IntNode);
+            this.typeSpecifier.AddItem(Void, sdts.VoidNode);
             this.functionName.AddItem(this.Ident);
             this.formalParam.AddItem(this.OpenParenthesis + this.optFormalParam + this.CloseParenthesis, sdts.FormalPara);
             this.optFormalParam.AddItem(this.formalParamList | new Epsilon());
@@ -133,8 +133,8 @@ namespace Parse.FrontEnd.Grammars.MiniC
 
             this.initDeclarator.AddItem(this.declarator + (this.Assign + this.expression).Optional(), sdts.DclItem);
 
-            this.declarator.AddItem(this.Ident, sdts.SimpleVar);
-            this.declarator.AddItem(this.Ident + this.OpenSquareBrace + this.optNumber + this.CloseSquareBrace, sdts.ArrayVar);
+            this.declarator.AddItem(this.Ident, sdts.DeclareVar);
+            this.declarator.AddItem(this.Ident + this.OpenSquareBrace + this.optNumber + this.CloseSquareBrace, sdts.DeclareVar);
 
             this.optNumber.AddItem(this.Number | new Epsilon());
             this.optStatList.AddItem(this.statementList, sdts.StatList);
@@ -203,7 +203,7 @@ namespace Parse.FrontEnd.Grammars.MiniC
             this.actualParamList.AddItem(this.assignmentExp);
             this.actualParamList.AddItem(this.actualParamList + this.Comma + this.assignmentExp);
 
-            this.primaryExp.AddItem(this.Ident, sdts.VariableNode);
+            this.primaryExp.AddItem(this.Ident, sdts.UseVar);
             this.primaryExp.AddItem(this.Number, sdts.IntLiteralNode);
             this.primaryExp.AddItem(this.OpenParenthesis + this.expression + this.CloseParenthesis);
 

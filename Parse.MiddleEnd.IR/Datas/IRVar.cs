@@ -11,6 +11,8 @@ namespace Parse.MiddleEnd.IR.Datas
         int Offset { get; }
 
         int Length { get; }
+
+        ValueData Value { get; }
     }
 
 

@@ -38,6 +38,7 @@ namespace ApplicationLayer.ViewModels.DocumentTypeViewModels
 
         public UCodeViewModel(IReadOnlyList<UCodeDisplayModel> trees, string title) : base(title)
         {
+            /*
             if (trees is null) return;
 
             List<object> leftUnDoneList = new List<object>();
@@ -99,6 +100,7 @@ namespace ApplicationLayer.ViewModels.DocumentTypeViewModels
             foreach (var statement in leftUnDoneList)
                 parentNode.AddChildren(CreateTreeNodeModel(statement));
             leftUnDoneList.Clear();
+            */
         }
     }
 }

@@ -16,7 +16,7 @@ namespace Parse.MiddleEnd.IR.LLVM.Models
         public bool IsEqualWithIRVar(IRVar var) => _irVar.Equals(var);
 
         public abstract DType TypeName { get; }
-        public abstract object Value { get; }
+        public abstract ValueData Value { get; }
         public abstract bool Signed { get; }
         public abstract bool IsNan { get; }
         public abstract int Block { get; }
@@ -46,7 +46,7 @@ namespace Parse.MiddleEnd.IR.LLVM.Models
         }
 
         public override DType TypeName => DataType.GetTypeName(typeof(T));
-        public override object Value { get; }
+        public override ValueData Value { get; }
         public override bool Signed { get; }
         public override bool IsNan { get; }
         public override int Block { get; }

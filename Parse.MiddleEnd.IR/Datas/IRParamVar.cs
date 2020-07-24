@@ -23,6 +23,7 @@ namespace Parse.MiddleEnd.IR.Datas
         public int Block => _block;
         public int Offset => _offset;
         public int Length => _length;
+        public ValueData Value { get; }
         public DType TypeName => throw new System.NotImplementedException();
 
         private string _name;

@@ -46,7 +46,7 @@ namespace ApplicationLayer.ViewModels
 
             foreach (var node in nodes)
             {
-                if (node.Node.IsDummy) continue;
+//                if (node.Node.IsDummy) continue;
 
                 result.Add(node);
             }

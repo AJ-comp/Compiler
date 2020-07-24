@@ -10,7 +10,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="HIT.GraphSharp.Wpf" Version="1.0.0" />
+    <PackageReference Include="GraphShape" Version="1.1.0" />
+    <PackageReference Include="GraphSharp" Version="1.1.0" />
+    <PackageReference Include="QuickGraph" Version="3.6.61119.7" />
   </ItemGroup>
 
   <ItemGroup>

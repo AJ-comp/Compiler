@@ -1,5 +1,6 @@
 ﻿using Parse.MiddleEnd.IR.Datas;
 using Parse.MiddleEnd.IR.Datas.Types;
+using Parse.MiddleEnd.IR.Datas.ValueDatas;
 using Parse.MiddleEnd.IR.LLVM.Models;
 using System;
 
@@ -48,6 +49,7 @@ namespace Parse.MiddleEnd.IR.LLVM
 
             return new Instruction(string.Format("{0} = alloca {1}, align {2}", 
                                                                     newNode.SSF.Name, type, align), 
+                                                                    newNode,
                                                                     comment);
         }
 
@@ -55,15 +57,6 @@ namespace Parse.MiddleEnd.IR.LLVM
         // <result> = load <ty>, <ty>* <pointer>[, align <alignment>]
         internal static Instruction Load(IRVar namedItem, SSTable ssVarTable, string comment = "")
         {
-            if(namedItem is LocalVar)
-            {
-
-            }
-            else if(namedItem is GlobalVar)
-            {
-
-            }
-
             var newNode = ssVarTable.NewNode(namedItem);
             var type = LLVMConverter.ToInstructionName(newNode.SSF.TypeName);
             int align = LLVMConverter.ToSize(newNode.SSF.TypeName);
@@ -84,6 +77,18 @@ namespace Parse.MiddleEnd.IR.LLVM
             return new Instruction(string.Format("store = {0} {1}, {0}* {2}, align {3}", 
                                                                     fromType, fromSSVar.Name, toSSVar.Name, fromAlign), // string param
                                                                     comment);                                                                   // comment
+        }
+
+        // sample
+        // store i32 10, i32* %1, align 4
+        internal static Instruction Store(IRValue value, IRVar toSSVar, string comment = "")
+        {
+            var fromType = LLVMConverter.ToInstructionName(toSSVar.TypeName);
+            int fromAlign = LLVMConverter.ToSize(toSSVar.TypeName);
+
+            return new Instruction(string.Format("store = {0} {1}, {0}* {2}, align {3}",
+                                                                    fromType, value.Value, toSSVar.Name, fromAlign), // string param
+                                                                    comment);                                                           // comment
         }
 
         // sample

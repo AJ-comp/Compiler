@@ -2,6 +2,7 @@
 using ApplicationLayer.ViewModels.Messages;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
+using Parse.FrontEnd;
 using Parse.FrontEnd.Ast;
 using Parse.FrontEnd.ParseTree;
 using System;
@@ -22,7 +23,7 @@ namespace ApplicationLayer.ViewModels.DocumentTypeViewModels
             set
             {
                 _selectedParseTree = value;
-                bool visible = _selectedParseTree ? true : false;
+                bool visible = _selectedParseTree;
 
                 if (AstGraphVM != null) AstGraphVM.IsVisible = !visible;
                 if (ParseTreeGraphVM != null) ParseTreeGraphVM.IsVisible = visible;
@@ -63,11 +64,11 @@ namespace ApplicationLayer.ViewModels.DocumentTypeViewModels
             if(param is AstSymbolVertex)
             {
                 var vertex = param as AstSymbolVertex;
-                Messenger.Default.Send<TreeSymbolMessage>(new TreeSymbolMessage(vertex.TreeSymbol));
+                Messenger.Default.Send(new TreeSymbolMessage(vertex.TreeSymbol));
             }
         }
 
-        public ParseTreeViewModel(ParseTreeSymbol parseTree, AstSymbol ast, string srcPath)
+        public ParseTreeViewModel(ParseTreeSymbol parseTree, SdtsNode ast, string srcPath)
             : base(CommonResource.ParseTree, CommonResource.ParseTree + srcPath, CommonResource.ParseTree + srcPath)
         {
             if (parseTree is null) return;
@@ -125,25 +126,18 @@ namespace ApplicationLayer.ViewModels.DocumentTypeViewModels
             return curNode;
         }
 
-        private PocVertex CreateNode(PocGraph graph, AstSymbol curTree)
+        private PocVertex CreateNode(PocGraph graph, SdtsNode curTree)
         {
             // Create vertex
             PocVertex curNode = null;
             if (curTree == null) return curNode;
 
-            if (curTree is AstTerminal)
-            {
-                var treeTerminal = curTree as AstTerminal;
-                curNode = new AstSymbolVertex(treeTerminal);
-                graph.AddVertex(curNode);
-            }
-            else
-            {
-                var treeNonTerminal = curTree as AstNonTerminal;
-                curNode = new AstSymbolVertex(treeNonTerminal);
-                graph.AddVertex(curNode);
+            curNode = new AstSymbolVertex(curTree);
+            graph.AddVertex(curNode);
 
-                foreach (var childTree in treeNonTerminal.Items)
+            if (curTree.Ast is AstNonTerminal)
+            {
+                foreach (var childTree in curTree.Items)
                 {
                     //add some edges to the graph
                     var childNode = CreateNode(graph, childTree);

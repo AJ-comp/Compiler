@@ -1,16 +1,17 @@
-﻿using Parse.FrontEnd.Ast;
+﻿using Parse.FrontEnd;
+using Parse.FrontEnd.Ast;
 
 namespace ApplicationLayer.Models.GraphModels
 {
     public class AstSymbolVertex : PocVertex
     {
-        public AstSymbol TreeSymbol { get; private set; }
+        public SdtsNode TreeSymbol { get; private set; }
 
-        public AstSymbolVertex(AstSymbol treeSymbol)
+        public AstSymbolVertex(SdtsNode treeSymbol)
         {
             TreeSymbol = treeSymbol;
         }
 
-        public override string ID => TreeSymbol.ToString();
+        public override string ID => TreeSymbol.GetType().Name;
     }
 }

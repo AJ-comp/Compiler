@@ -101,6 +101,7 @@ namespace Parse.FrontEnd.Grammars
             BindingFlags Flags = BindingFlags.Instance
                                            | BindingFlags.GetField
                                            | BindingFlags.SetField
+                                           | BindingFlags.Static
                                            | BindingFlags.NonPublic;
 
             this.TerminalSet.Add(new EndMarker());

@@ -305,7 +305,7 @@ namespace Parse.WpfControls.SyntaxEditor
                 Dispatcher.Invoke(() =>
                 {
                     var result = this.SementicAnalysis(localResult);
-                    this.ParsingCompleted?.Invoke(this, new ParsingCompletedEventArgs(localResult, result.RootAst, result.AllNodes, result.FiredException));
+                    this.ParsingCompleted?.Invoke(this, new ParsingCompletedEventArgs(localResult, result.SdtsRoot, result.AllNodes, result.FiredException));
                 });
             }
         }

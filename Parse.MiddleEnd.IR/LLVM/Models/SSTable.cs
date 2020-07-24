@@ -3,6 +3,7 @@ using Parse.MiddleEnd.IR.Datas.Types;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 
 namespace Parse.MiddleEnd.IR.LLVM.Models
 {
@@ -19,7 +20,7 @@ namespace Parse.MiddleEnd.IR.LLVM.Models
         public int NextOffset
         {
             get => _index + 1;
-            private set => NextOffset = value;
+            private set => _index = value;
         }
 
         public GlobalVar CreateNewGlobalVar(IRVar irVar)
@@ -34,25 +35,16 @@ namespace Parse.MiddleEnd.IR.LLVM.Models
         public SSNode NewNode(IRVar irVar)
         {
             // ssf
-            Type ssfType = typeof(LocalVar<>).MakeGenericType(irVar.TypeName.GetType());
-            object newSSVar = Activator.CreateInstance(ssfType, NextOffset++);
+            var dataType = IRConverter.GetType(irVar.TypeName);
+            Type ssfType = typeof(LocalVar<>).MakeGenericType(dataType.GetType());
+            LocalVar newSSVar = Activator.CreateInstance(ssfType, NextOffset++) as LocalVar;
+            newSSVar.Value = irVar.Value;
 
-            if (irVar is LocalVar)
-            {
-                var ssNode = new SSNode(newSSVar as LocalVar, irVar);
-                _ssNodeList.Add(ssNode);
+            var ssNode = (irVar is LocalVar) ? new SSNode(newSSVar as LocalVar, irVar) :
+                                                            new SSNode(newSSVar as LocalVar, null);
 
-                return ssNode;
-            }
-            else if(irVar is GlobalVar)
-            {
-                var ssNode = new SSNode(newSSVar as LocalVar, null);
-                _ssNodeList.Add(ssNode);
-
-                return ssNode;
-            }
-
-            return null;
+            _ssNodeList.Add(ssNode);
+            return ssNode;
         }
 
         public SSNode NewNode(bool value)

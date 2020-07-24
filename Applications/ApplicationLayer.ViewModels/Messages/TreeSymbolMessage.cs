@@ -1,13 +1,13 @@
 ﻿using GalaSoft.MvvmLight.Messaging;
-using Parse.FrontEnd.Ast;
+using Parse.FrontEnd;
 
 namespace ApplicationLayer.ViewModels.Messages
 {
     public class TreeSymbolMessage : MessageBase
     {
-        public AstSymbol TreeSymbol { get; }
+        public SdtsNode TreeSymbol { get; }
 
-        public TreeSymbolMessage(AstSymbol treeSymbol)
+        public TreeSymbolMessage(SdtsNode treeSymbol)
         {
             TreeSymbol = treeSymbol;
         }

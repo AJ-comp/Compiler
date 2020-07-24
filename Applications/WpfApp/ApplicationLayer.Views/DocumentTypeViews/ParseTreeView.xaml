@@ -24,11 +24,12 @@
             <Setter Property="HighlightAlgorithmType" Value="Simple"/>
             <Setter Property="LayoutParameters">
                 <Setter.Value>
-                    <tree:SimpleTreeLayoutParameters WidthPerHeight="2.0"
+                    <!--<tree:SimpleTreeLayoutParameters WidthPerHeight="2.0"
                                                                         VertexGap="50.0" LayerGap="50.0" 
                                                                         OptimizeWidthAndHeight="false"
                                                                         Direction="TopToBottom"
-                                                                        SpanningTreeGeneration="DFS"/>
+                                                                        SpanningTreeGeneration="DFS"/>-->
+                    <tree:SimpleTreeLayoutParameters Direction="LeftToRight"/>
                 </Setter.Value>
             </Setter>
         </Style>

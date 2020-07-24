@@ -56,7 +56,20 @@ namespace Parse.MiddleEnd.IR.LLVM
         // int a;
         // %1 = alloca i32, align 4
         private IRFormat DclLocalVar(IROptions options, IRVar varData)
-            => new IRFormat(Instruction.DeclareLocalVar(varData, _ssVarTable, options.Comment));
+        {
+            var block = new IRBlock
+            {
+                Instruction.DeclareLocalVar(varData, _ssVarTable, options.Comment)
+            };
+
+            if (varData.Value != null)
+            {
+                var ssVar = (block[0] as Instruction).Result.SSF;
+                block.Add(Instruction.Store(varData.Value, ssVar));
+            }
+
+            return new IRFormat(block);
+        }
 
         // sample format
         // a(t) = b(s);
@@ -369,7 +382,7 @@ namespace Parse.MiddleEnd.IR.LLVM
             throw new NotImplementedException();
         }
 
-        public override IRFormat CretaeConditionalJump(IROptions options, IRVar<Bit> cond, IRVar<Bit> trueLabel, IRVar<Bit> falseLabel)
+        public override IRFormat CreateConditionalJump(IROptions options, IRVar<Bit> cond, IRVar<Bit> trueLabel, IRVar<Bit> falseLabel)
         {
             throw new NotImplementedException();
         }

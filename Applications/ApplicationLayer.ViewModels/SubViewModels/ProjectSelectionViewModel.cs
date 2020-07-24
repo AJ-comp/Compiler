@@ -190,7 +190,7 @@ namespace ApplicationLayer.ViewModels.SubViewModels
 
         private void FilterCPUs_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
-            this.FilterMode = (this.FilterCPUs.Count > 0) ? true : false;
+            this.FilterMode = (this.FilterCPUs.Count > 0);
         }
     }
 }

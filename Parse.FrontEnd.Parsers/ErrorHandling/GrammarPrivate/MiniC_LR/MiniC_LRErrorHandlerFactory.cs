@@ -43,9 +43,9 @@ namespace Parse.FrontEnd.Parsers.ErrorHandling.GrammarPrivate.MiniC_LR
                         rowData.MatchedValueSet.Add(terminal, new Tuple<ActionDir, object>(ActionDir.failed, new While_ErrorHandler(grammar, ixIndex)));
                     else if (terminal == grammar.Const)
                         rowData.MatchedValueSet.Add(terminal, new Tuple<ActionDir, object>(ActionDir.failed, new Const_ErrorHandler(grammar, ixIndex)));
-                    else if (terminal == grammar.Void)
+                    else if (terminal == MiniCGrammar.Void)
                         rowData.MatchedValueSet.Add(terminal, new Tuple<ActionDir, object>(ActionDir.failed, new Void_ErrorHandler(grammar, ixIndex)));
-                    else if (terminal == grammar.Int)
+                    else if (terminal == MiniCGrammar.Int)
                         rowData.MatchedValueSet.Add(terminal, new Tuple<ActionDir, object>(ActionDir.failed, new Int_ErrorHandler(grammar, ixIndex)));
                     else if(terminal == grammar.Ident)
                         rowData.MatchedValueSet.Add(terminal, new Tuple<ActionDir, object>(ActionDir.failed, new Ident_ErrorHandler(grammar, ixIndex)));

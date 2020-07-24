@@ -11,7 +11,6 @@ namespace Parse.FrontEnd
         internal uint uniqueKey;
 
         public string Name { get; } = string.Empty;
-        public Func<AstNonTerminal, AstBuildParams, List<AstSymbol>, AstBuildResult> BuildLogic { get; set; }
 
         public MeaningUnit(string name)
         {
@@ -96,13 +95,13 @@ namespace Parse.FrontEnd
 
     public class SemanticAnalysisResult
     {
-        public AstSymbol RootAst { get; }
+        public SdtsNode SdtsRoot { get; }
         public IReadOnlyList<AstSymbol> AllNodes { get; }
         public Exception FiredException { get; }
 
-        public SemanticAnalysisResult(AstSymbol rootAst, IReadOnlyList<AstSymbol> allNodes, Exception exception = null)
+        public SemanticAnalysisResult(SdtsNode sdtsRoot, IReadOnlyList<AstSymbol> allNodes, Exception exception = null)
         {
-            RootAst = rootAst;
+            SdtsRoot = sdtsRoot;
             AllNodes = allNodes;
             FiredException = exception;
         }

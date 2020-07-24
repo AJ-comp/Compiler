@@ -58,5 +58,10 @@ namespace Parse.FrontEnd.Grammars.ExampleGrammars
         {
             return null;
         }
+
+        public override SdtsNode GenerateSdtsAst(AstSymbol root)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

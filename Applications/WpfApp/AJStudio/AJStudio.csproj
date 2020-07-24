@@ -9,8 +9,6 @@
 
   <ItemGroup>
     <PackageReference Include="CommonServiceLocation" Version="1.0.0" />
-    <PackageReference Include="HIT.GraphSharp.Wpf" Version="1.0.0" />
-    <PackageReference Include="HIT.QuickGraph" Version="1.0.0" />
     <PackageReference Include="Microsoft-WindowsAPICodePack-Core" Version="1.1.4" />
     <PackageReference Include="Microsoft-WindowsAPICodePack-Shell" Version="1.1.4" />
     <PackageReference Include="MvvmLight" Version="5.4.1.1" />

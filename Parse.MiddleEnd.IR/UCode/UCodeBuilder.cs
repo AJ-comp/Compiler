@@ -110,7 +110,7 @@ namespace Parse.MiddleEnd.IR.UCode
             throw new System.NotImplementedException();
         }
 
-        public override IRFormat CretaeConditionalJump(IROptions options, IRVar<Bit> cond, IRVar<Bit> trueLabel, IRVar<Bit> falseLabel)
+        public override IRFormat CreateConditionalJump(IROptions options, IRVar<Bit> cond, IRVar<Bit> trueLabel, IRVar<Bit> falseLabel)
         {
             throw new System.NotImplementedException();
         }

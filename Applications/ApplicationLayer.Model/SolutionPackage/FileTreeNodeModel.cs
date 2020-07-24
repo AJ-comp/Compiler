@@ -1,9 +1,6 @@
 ﻿using ApplicationLayer.Common;
 using ApplicationLayer.Common.Interfaces;
-using ApplicationLayer.Models.SolutionPackage.MiniCPackage;
-using Parse.FrontEnd.Grammars.MiniC.SymbolTableFormat;
 using System;
-using System.Collections.Generic;
 using System.IO;
 
 namespace ApplicationLayer.Models.SolutionPackage

@@ -58,5 +58,6 @@ namespace Parse.FrontEnd.Grammars
         public abstract event EventHandler<SemanticErrorArgs> SemanticErrorEventHandler;
 
         public abstract SemanticAnalysisResult Process(AstSymbol symbol);
+        public abstract SdtsNode GenerateSdtsAst(AstSymbol root);
     }
 }
