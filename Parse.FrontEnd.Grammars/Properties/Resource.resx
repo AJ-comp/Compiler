@@ -97,10 +97,4 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Ident" xml:space="preserve">
-    <value>identifier</value>
-  </data>
-  <data name="Number" xml:space="preserve">
-    <value>number</value>
-  </data>
 </root>

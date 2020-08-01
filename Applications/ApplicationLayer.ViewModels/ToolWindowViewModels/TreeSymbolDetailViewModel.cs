@@ -50,11 +50,11 @@ namespace ApplicationLayer.ViewModels.ToolWindowViewModels
                     SymbolDatas.AddChildrenToFirst(new CategoryTreeNodeModel(categoryName));
                     SymbolDatas.IsExpanded = true;
 
-                    foreach (var item in symbolTable.VarList)
+                    foreach (var varRecord in symbolTable.VarList)
                     {
-                        if (item.IsVirtual) continue;
+                        if (varRecord.VarField.IsVirtual) continue;
 
-                        SymbolDatas.Children.First().AddChildren(new VarTreeNodeModel(item));
+                        SymbolDatas.Children.First().AddChildren(new VarTreeNodeModel(varRecord.VarField));
                     }
 
                     foreach (var item in symbolTable.FuncDataList)

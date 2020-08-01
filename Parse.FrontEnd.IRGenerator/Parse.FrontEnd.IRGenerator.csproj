@@ -1,0 +1,11 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Parse.FrontEnd.Grammars.MiniC\Parse.FrontEnd.Grammars.MiniC.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,25 +1,43 @@
 ﻿using Parse.MiddleEnd.IR.Datas;
-using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Parse.MiddleEnd.IR.LLVM.Expressions
 {
-    public class LLVMFuncDefExpression : LLVMExpression
+    public class LLVMFuncDefExpression : LLVMFirstLayerExpression
     {
-        public IRFuncData funcData;
-        public LLVMBlockExpression blockExpression;
+        public IRFuncData FuncData { get; private set; }
+        public LLVMBlockExpression BlockExpression { get; private set; }
 
-        public override string GeneratedCode()
+        public LLVMFuncDefExpression(IRFuncData funcData, 
+                                                        LLVMBlockExpression blockExpression, 
+                                                        LLVMSSATable ssaTable) : base(ssaTable)
         {
-            var result = string.Format("define {0} @{1}", LLVMConverter.ToInstructionName(funcData.ReturnType), funcData.Name);
+            FuncData = funcData;
+            BlockExpression = blockExpression;
+        }
 
-            result += "(";
-            foreach (var argument in funcData.Arguments)
-                result += LLVMConverter.ToInstructionName(argument.TypeName) + ",";
+        public override IEnumerable<Instruction> Build()
+        {
+            List<Instruction> result = new List<Instruction>();
 
-            if (funcData.Arguments.Count > 0) result = result.Substring(0, result.Length - 1);
-            result += ")" + Environment.NewLine;
+            result.Add(new Instruction(string.Format("define {0} @{1}", 
+                                                                        LLVMConverter.ToInstructionName(FuncData.ReturnType), FuncData.Name)));
 
-            result += blockExpression.GeneratedCode();
+            // generate param code
+            string argumentString = "(";
+            foreach (var argument in FuncData.Arguments)
+                argumentString += LLVMConverter.ToInstructionName(argument.TypeName) + ",";
+
+            if (FuncData.Arguments.Count() > 0) argumentString = argumentString.Substring(0, argumentString.Length - 1);
+            argumentString += ")";
+
+            result.Add(new Instruction(argumentString));
+
+            // generate block code
+            result.Add(new Instruction("{"));
+            result.AddRange(BlockExpression.Build());
+            result.Add(new Instruction("}"));
 
             return result;
         }

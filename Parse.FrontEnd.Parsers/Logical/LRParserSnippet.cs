@@ -1,7 +1,6 @@
 ﻿using Parse.Extensions;
 using Parse.FrontEnd.Parsers.Collections;
 using Parse.FrontEnd.Parsers.Datas;
-using Parse.FrontEnd.Parsers.ErrorHandling;
 using Parse.FrontEnd.ParseTree;
 using Parse.FrontEnd.RegularGrammar;
 using Parse.Tokenize;

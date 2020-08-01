@@ -15,6 +15,10 @@ using ApplicationLayer.Views.DialogViews.OptionViews;
 using ApplicationLayer.WpfApp.ViewModels;
 using ApplicationLayer.WpfApp.Views.DialogViews;
 using GalaSoft.MvvmLight.Messaging;
+using Parse.FrontEnd.Grammars.MiniC.Sdts.AstNodes;
+using Parse.FrontEnd.IRGenerator;
+using Parse.MiddleEnd.IR;
+using Parse.MiddleEnd.IR.LLVM.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -443,9 +447,23 @@ namespace ApplicationLayer.WpfApp.Commands
 
                 var editorViewModel = mainViewModel.SolutionExplorer.SelectedDocument as EditorTypeViewModel;
                 var modelsToDisplay = UcodeDisplayConverter.Convert(editorViewModel.InterLanguage, editorViewModel.Grammar);
-                var textDoc = new UCodeViewModel(modelsToDisplay, selDoc.Title + " " + CommonResource.InterLanguage);
-                mainViewModel.SolutionExplorer.Documents.Add(textDoc);
-                mainViewModel.SolutionExplorer.SelectedDocument = textDoc;
+//                var textDoc = new UCodeViewModel(modelsToDisplay, selDoc.Title + " " + CommonResource.InterLanguage);
+//                mainViewModel.SolutionExplorer.Documents.Add(textDoc);
+//                mainViewModel.SolutionExplorer.SelectedDocument = textDoc;
+
+                if (editorViewModel.Ast?.ErrNodes.Count == 0)
+                {
+                    var test = IRExpressionGenerator.GenerateLLVMExpression(editorViewModel.Ast as MiniCNode);
+                    var instructionList = test.Build();
+
+                    var textDoc = new LLVMViewModel("LLVM IR");
+                    string textCode = string.Empty;
+                    foreach (var instruction in instructionList) textCode += instruction.CommandLine + Environment.NewLine;
+                    textDoc.TextContent = textCode;
+
+                    mainViewModel.SolutionExplorer.Documents.Add(textDoc);
+                    mainViewModel.SolutionExplorer.SelectedDocument = textDoc;
+                }
             }, () =>
             {
                 return true;

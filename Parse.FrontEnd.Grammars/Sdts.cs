@@ -34,8 +34,6 @@ namespace Parse.FrontEnd.Grammars
         public MeaningUnit PostInc { get; } = new MeaningUnit("PostInc");
         public MeaningUnit PostDec { get; } = new MeaningUnit("PostDec");
 
-        public IRBuilder IRBuilder { get; set; } = new LLVMAssemblyBuilder();
-
         protected Sdts(KeyManager keyManager)
         {
             Type type = this.GetType();

@@ -120,23 +120,19 @@ namespace Parse.FrontEnd.ParseTree
             }
         }
 
-        public IReadOnlyList<TokenData> AllTokens
+        public override IReadOnlyList<TokenData> AllTokens
         {
             get
             {
                 List<TokenData> result = new List<TokenData>();
 
-                foreach (var item in Items)
-                {
-                    if (item is ParseTreeTerminal) result.Add((item as ParseTreeTerminal).Token);
-                    else if (item is ParseTreeNonTerminal) result.AddRange((item as ParseTreeNonTerminal).AllTokens);
-                }
+                foreach (var item in Items) result.AddRange(item.AllTokens);
 
                 return result;
             }
         }
 
-        public string AllInputDatas
+        public override string AllInputDatas
         {
             get
             {

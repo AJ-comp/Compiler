@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 
 namespace Parse.FrontEnd.RegularGrammar
 {
     public class NonTerminalConcat : IList<Symbol>, ICloneable<NonTerminalConcat>, ITemplateCreatable<NonTerminalConcat>
     {
-        protected List<Symbol> symbols = new List<Symbol>();
+        protected List<Symbol> _symbols = new List<Symbol>();
 
         public bool IsAllTerminal
         {
@@ -37,9 +36,9 @@ namespace Parse.FrontEnd.RegularGrammar
         public uint Priority { get; internal set; } = 0;
         public MeaningUnit MeaningUnit { get; internal set; } = null;
 
-        public int Count => ((IList<Symbol>)symbols).Count;
-        public bool IsReadOnly => ((IList<Symbol>)symbols).IsReadOnly;
-        public Symbol this[int index] { get => ((IList<Symbol>)symbols)[index]; set => ((IList<Symbol>)symbols)[index] = value; }
+        public int Count => ((IList<Symbol>)_symbols).Count;
+        public bool IsReadOnly => ((IList<Symbol>)_symbols).IsReadOnly;
+        public Symbol this[int index] { get => ((IList<Symbol>)_symbols)[index]; set => ((IList<Symbol>)_symbols)[index] = value; }
 
         public NonTerminalConcat(params Symbol[] symbols)
         {
@@ -119,14 +118,10 @@ namespace Parse.FrontEnd.RegularGrammar
             return result.Substring(0, result.Length - Convert.ToBridgeSymbol(BridgeType.Concatenation).Length);
         }
 
-        public int IndexOf(Symbol item) => ((IList<Symbol>)symbols).IndexOf(item);
-
-        public void Insert(int index, Symbol item) => ((IList<Symbol>)symbols).Insert(index, item);
-
-        public void RemoveAt(int index) => ((IList<Symbol>)symbols).RemoveAt(index);
-
-        public void Add(Symbol item) => ((IList<Symbol>)symbols).Add(item);
-
+        public int IndexOf(Symbol item) => ((IList<Symbol>)_symbols).IndexOf(item);
+        public void Insert(int index, Symbol item) => ((IList<Symbol>)_symbols).Insert(index, item);
+        public void RemoveAt(int index) => ((IList<Symbol>)_symbols).RemoveAt(index);
+        public void Add(Symbol item) => ((IList<Symbol>)_symbols).Add(item);
         public void AddRange(params Symbol[] symbols)
         {
             foreach (var symbol in symbols) this.Add(symbol);
@@ -137,29 +132,24 @@ namespace Parse.FrontEnd.RegularGrammar
             foreach (var symbol in symbols) this.Add(symbol);
         }
 
-        public void Clear() => ((IList<Symbol>)symbols).Clear();
-
-        public bool Contains(Symbol item) => ((IList<Symbol>)symbols).Contains(item);
-
-        public void CopyTo(Symbol[] array, int arrayIndex) => ((IList<Symbol>)symbols).CopyTo(array, arrayIndex);
-
-        public bool Remove(Symbol item) => ((IList<Symbol>)symbols).Remove(item);
-
-        public IEnumerator<Symbol> GetEnumerator() => ((IList<Symbol>)symbols).GetEnumerator();
-
-        IEnumerator IEnumerable.GetEnumerator() => ((IList<Symbol>)symbols).GetEnumerator();
+        public void Clear() => ((IList<Symbol>)_symbols).Clear();
+        public bool Contains(Symbol item) => ((IList<Symbol>)_symbols).Contains(item);
+        public void CopyTo(Symbol[] array, int arrayIndex) => ((IList<Symbol>)_symbols).CopyTo(array, arrayIndex);
+        public bool Remove(Symbol item) => ((IList<Symbol>)_symbols).Remove(item);
+        public IEnumerator<Symbol> GetEnumerator() => ((IList<Symbol>)_symbols).GetEnumerator();
+        IEnumerator IEnumerable.GetEnumerator() => ((IList<Symbol>)_symbols).GetEnumerator();
 
         public NonTerminalConcat ToReverse()
         {
-            var result = this.Clone() as NonTerminalConcat;
-            result.symbols.Reverse();
+            var result = this.Clone();
+            result._symbols.Reverse();
 
             return result;
         }
 
         public NonTerminalConcat Clone()
         {
-            NonTerminalConcat result = new NonTerminalConcat(this.Priority, this.symbols.ToArray())
+            NonTerminalConcat result = new NonTerminalConcat(this.Priority, this._symbols.ToArray())
             {
                 MeaningUnit = this.MeaningUnit
             };
@@ -169,7 +159,7 @@ namespace Parse.FrontEnd.RegularGrammar
 
         public NonTerminalConcat Template()
         {
-            NonTerminalConcat result = this.Clone() as NonTerminalConcat;
+            NonTerminalConcat result = this.Clone();
             result.Clear();
 
             return result;

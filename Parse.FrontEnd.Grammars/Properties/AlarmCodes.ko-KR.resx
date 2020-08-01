@@ -147,4 +147,25 @@
   <data name="MCL0009" xml:space="preserve">
     <value>{0} 식별자는 현재 블록에 이미 정의되어 있습니다.</value>
   </data>
+  <data name="MCL0010" xml:space="preserve">
+    <value>Sdts 노드 구성에 실패했습니다.</value>
+  </data>
+  <data name="MCL0011" xml:space="preserve">
+    <value>'{0}' 연산은 '{1}' 및 '{2}' 형식의 피연산자에 적용할 수 없습니다.</value>
+  </data>
+  <data name="MCL0012" xml:space="preserve">
+    <value>증가 연산자 또는 감소 연산자의 피연산자는 변수, 속성 또는 인덱서여야 합니다.</value>
+  </data>
+  <data name="MCL0013" xml:space="preserve">
+    <value>'{0}' 연산자는 string 타입에 적용할 수 없습니다.</value>
+  </data>
+  <data name="MCL0014" xml:space="preserve">
+    <value>호출할 수 없는 멤버인 '{0}'은(는) 메서드처럼 사용할 수 없습니다.</value>
+  </data>
+  <data name="MCL0015" xml:space="preserve">
+    <value>인수 {0} 개를 사용하는 사용하는 '{1}' 메서드에 대한 오버로드가 없습니다.</value>
+  </data>
+  <data name="MCL0016" xml:space="preserve">
+    <value>'{0}' 메서드에서 필요한 매개 변수 '{1}'에 해당하는 제공된 인수가 없습니다.</value>
+  </data>
 </root>

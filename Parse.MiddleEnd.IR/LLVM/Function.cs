@@ -1,6 +1,7 @@
 ﻿using Parse.MiddleEnd.IR.Datas;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Parse.MiddleEnd.IR.LLVM
 {
@@ -30,7 +31,7 @@ namespace Parse.MiddleEnd.IR.LLVM
             foreach (var varData in _funcData.Arguments)
                 result += varData.TypeName + ",";
 
-            if (_funcData.Arguments.Count > 0) result = result.Substring(0, result.Length - 1);
+            if (_funcData.Arguments.Count() > 0) result = result.Substring(0, result.Length - 1);
             result += ")";
 
             result += "{" + Environment.NewLine;

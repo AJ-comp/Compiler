@@ -126,7 +126,7 @@ namespace Parse.FrontEnd.Parsers.Datas
         /// </summary>
         /// <param name="blockIndex"></param>
         /// <returns></returns>
-        internal ParsingUnit AddUnitOnCurBlock(int blockIndex)
+        public ParsingUnit AddUnitOnCurBlock(int blockIndex)
         {
             var prevBlock = this.GetFrontBlock(blockIndex);
             var curBlock = this[blockIndex];

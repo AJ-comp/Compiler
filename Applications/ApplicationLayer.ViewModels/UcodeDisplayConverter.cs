@@ -9,7 +9,7 @@ namespace ApplicationLayer.ViewModels
 {
     public static class UcodeDisplayConverter
     {
-        private static UCodeDisplayModel FindMatchedModel(AstSymbol nodeToFind, IReadOnlyList<UCodeDisplayModel> modelList)
+        private static UCodeDisplayModel FindMatchedModel(AstSymbol nodeToFind, IEnumerable<UCodeDisplayModel> modelList)
         {
             UCodeDisplayModel result = null;
 
@@ -25,7 +25,7 @@ namespace ApplicationLayer.ViewModels
             return result;
         }
 
-        private static void ConfCategoryVisible(AstSymbol astSymbol, IReadOnlyList<UCodeDisplayModel> allNode)
+        private static void ConfCategoryVisible(AstSymbol astSymbol, IEnumerable<UCodeDisplayModel> allNode)
         {
             var model = FindMatchedModel(astSymbol, allNode);
             if (model != null)
@@ -40,7 +40,7 @@ namespace ApplicationLayer.ViewModels
         /// </summary>
         /// <param name="nodes"></param>
         /// <returns>returns nodes dummy node removed</returns>
-        private static IReadOnlyList<UCodeDisplayModel> RemoveUselessNodes(IReadOnlyList<UCodeDisplayModel> nodes)
+        private static IEnumerable<UCodeDisplayModel> RemoveUselessNodes(IEnumerable<UCodeDisplayModel> nodes)
         {
             List<UCodeDisplayModel> result = new List<UCodeDisplayModel>();
 
@@ -54,7 +54,7 @@ namespace ApplicationLayer.ViewModels
             return result;
         }
 
-        private static void ExpStCategoryConf(UCodeDisplayModel nodeInfo, IReadOnlyList<UCodeDisplayModel> allNode)
+        private static void ExpStCategoryConf(UCodeDisplayModel nodeInfo, IEnumerable<UCodeDisplayModel> allNode)
         {
             if (nodeInfo.CategoryVisible == false) return;
 
@@ -63,7 +63,7 @@ namespace ApplicationLayer.ViewModels
             ConfCategoryVisible(astNonTerminal[0], allNode);
         }
 
-        private static void AllChangeableCategoryConf(UCodeDisplayModel nodeInfo, IReadOnlyList<UCodeDisplayModel> allNode)
+        private static void AllChangeableCategoryConf(UCodeDisplayModel nodeInfo, IEnumerable<UCodeDisplayModel> allNode)
         {
             if (nodeInfo.CategoryVisible == false) return;
 
@@ -72,7 +72,7 @@ namespace ApplicationLayer.ViewModels
             foreach (var item in astNonTerminal) ConfCategoryVisible(item, allNode);
         }
 
-        private static void CompoundStCategoryConf(UCodeDisplayModel nodeInfo, IReadOnlyList<UCodeDisplayModel> allNode)
+        private static void CompoundStCategoryConf(UCodeDisplayModel nodeInfo, IEnumerable<UCodeDisplayModel> allNode)
         {
             if (nodeInfo.CategoryVisible == false) return;
 
@@ -82,27 +82,27 @@ namespace ApplicationLayer.ViewModels
             ConfCategoryVisible(astNonTerminal[1], allNode);
         }
 
-        private static void IfStCategoryConf(UCodeDisplayModel nodeInfo, IReadOnlyList<UCodeDisplayModel> allNode)
+        private static void IfStCategoryConf(UCodeDisplayModel nodeInfo, IEnumerable<UCodeDisplayModel> allNode)
         {
             var astNonTerminal = nodeInfo.Node as AstNonTerminal;
 
             nodeInfo.CategoryVisible = true;
-            nodeInfo.CategoryName = "if ( " + (astNonTerminal[1] as AstNonTerminal).ConnectedParseTree.AllInputDatas + " )";
+            nodeInfo.CategoryName = "if ( " + astNonTerminal[1].ConnectedParseTree.AllInputDatas + " )";
 
             ConfCategoryVisible(astNonTerminal[2], allNode);
         }
 
-        private static void WhileStCategoryConf(UCodeDisplayModel nodeInfo, IReadOnlyList<UCodeDisplayModel> allNode)
+        private static void WhileStCategoryConf(UCodeDisplayModel nodeInfo, IEnumerable<UCodeDisplayModel> allNode)
         {
             var astNonTerminal = nodeInfo.Node as AstNonTerminal;
 
             nodeInfo.CategoryVisible = true;
-            nodeInfo.CategoryName = "while ( " + (astNonTerminal[1] as AstNonTerminal).ConnectedParseTree.AllInputDatas + " )";
+            nodeInfo.CategoryName = "while ( " + astNonTerminal[1].ConnectedParseTree.AllInputDatas + " )";
 
             ConfCategoryVisible(astNonTerminal[2], allNode);
         }
 
-        private static IReadOnlyList<UCodeDisplayModel> Convert(IReadOnlyList<AstSymbol> nodes, MiniCSdts sdts)
+        private static IEnumerable<UCodeDisplayModel> Convert(IEnumerable<AstSymbol> nodes, MiniCSdts sdts)
         {
             if (nodes is null) return null;
             if (sdts is null) return null;
@@ -140,7 +140,7 @@ namespace ApplicationLayer.ViewModels
             return RemoveUselessNodes(allNode);
         }
 
-        public static IReadOnlyList<UCodeDisplayModel> Convert(IReadOnlyList<AstSymbol> nodes, Grammar grammar)
+        public static IEnumerable<UCodeDisplayModel> Convert(IEnumerable<AstSymbol> nodes, Grammar grammar)
         {
             if (grammar is null) return null;
 
@@ -161,7 +161,7 @@ namespace ApplicationLayer.ViewModels
         public bool CategoryVisible { get; set; } = false;
         public string CategoryName { get; set; } = string.Empty;
 
-        public Action<UCodeDisplayModel, IReadOnlyList<UCodeDisplayModel>> CategoryConfAction { get; set; }
+        public Action<UCodeDisplayModel, IEnumerable<UCodeDisplayModel>> CategoryConfAction { get; set; }
 
         public UCodeDisplayModel(AstSymbol node)
         {

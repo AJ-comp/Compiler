@@ -127,4 +127,25 @@
   <data name="MCL0009" xml:space="preserve">
     <value>The {0} identifier was already defined in the current block.</value>
   </data>
+  <data name="MCL0010" xml:space="preserve">
+    <value>It was failed to struct Sdts nodes.</value>
+  </data>
+  <data name="MCL0011" xml:space="preserve">
+    <value>The calculation '{0}' is not applicated for the operand '{1}' and '{2}.</value>
+  </data>
+  <data name="MCL0012" xml:space="preserve">
+    <value>The operand of the inc or dec has to be variable, property or indexer.</value>
+  </data>
+  <data name="MCL0013" xml:space="preserve">
+    <value>The operator '{0}' is not applicated to string type.</value>
+  </data>
+  <data name="MCL0014" xml:space="preserve">
+    <value>The member '{0}' is not used as method.</value>
+  </data>
+  <data name="MCL0015" xml:space="preserve">
+    <value>There is not overload method '{1}' that use parameter {0} count.</value>
+  </data>
+  <data name="MCL0016" xml:space="preserve">
+    <value>There is not argument for parameter '{1}' that need in the '{0}' method.</value>
+  </data>
 </root>

@@ -1,6 +1,4 @@
 ﻿using Parse.MiddleEnd.IR.Datas;
-using Parse.MiddleEnd.IR.Datas.Types;
-using Parse.MiddleEnd.IR.Datas.ValueDatas;
 
 namespace Parse.MiddleEnd.IR.UCode
 {
@@ -15,111 +13,8 @@ namespace Parse.MiddleEnd.IR.UCode
         dup, nop,
     };
 
-    public class UCodeBuilder : IRBuilder
+    public class UCodeBuilder
     {
-        public override bool IsSSA => false;
-
-        public override IRFormat CreateAnd(IROptions options, IRData<Bit> left, IRData<Bit> right)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public override IRFormat CreateAssign(IROptions options, IRVar left, IRData right)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public override IRFormat CreateBinOP(IROptions options, IRData left, IRData right, IROperation operation)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public override IRFormat CreateCall(IROptions options, IRFuncData funcData, params IRVar[] paramDatas)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public override IRFormat CreateDclFunction(IROptions options, IRFuncData funcData)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public override IRFormat CreateDclVar(IROptions options, IRVar varData, bool bGlobal)
-        {
-            return new IRFormat(Command.DclVar(options.Label, varData.Block, varData.Offset, varData.Length, options.Comment));
-        }
-
-        public override IRFormat CreateDclVarAndInit(IROptions options, IRVar varData, IRVar initInfo, bool bGlobal)
-        {
-            var block = new IRBlock()
-            {
-                Command.DclVar(options.Label, varData.Block, varData.Offset, varData.Length, options.Comment),
-                Command.DclVar("", varData.Block, varData.Offset, varData.Length, options.Comment)
-            };
-
-            return new IRFormat(block);
-        }
-
-        public override IRFormat CreateDclVarAndInit(IROptions options, IRVar VarData, IRValue initValue, bool bGlobal)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public override IRFormat CreateDefineFunction(IROptions options, IRFuncData funcData, IRBlock stmt)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public override IRFormat CreateLoadVar(IROptions options, IRVar VarData, bool bGlobal)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public override IRFormat CreateLogicalOp(IROptions options, IRData left, IRData right, IRCondition cond)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public override IRFormat CreateNot(IROptions options, IRData data)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public override IRFormat CreateOr(IROptions options, IRData<Bit> left, IRData<Bit> right)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public override IRFormat CreatePostDec(IROptions options, IRVar varData)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public override IRFormat CreatePostInc(IROptions options, IRVar varData)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public override IRFormat CreatePreDec(IROptions options, IRVar varData)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public override IRFormat CreatePreInc(IROptions options, IRVar varData)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public override IRFormat CreateConditionalJump(IROptions options, IRVar<Bit> cond, IRVar<Bit> trueLabel, IRVar<Bit> falseLabel)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public override IRFormat CretaeUnConditionalJump(IROptions options, IRVar<Bit> jumpLabel)
-        {
-            throw new System.NotImplementedException();
-        }
-
         public class Command
         {
             private static Instruction UCodeFormat(string labelName, OpCodeKind opCode, string comment = "", params object[] operands)
@@ -143,8 +38,8 @@ namespace Parse.MiddleEnd.IR.UCode
             public static Instruction ProcEnd(string labelName, string comment = "")
                 => UCodeFormat(labelName, OpCodeKind.end, comment);
 
-            public static Instruction ProcCall(string labelName, string procName, params IRParamVar[] param)
-                => UCodeFormat(labelName, OpCodeKind.call, procName, procName);
+            //public static Instruction ProcCall(string labelName, string procName, params IRParamVar[] param)
+            //    => UCodeFormat(labelName, OpCodeKind.call, procName, procName);
 
             public static Instruction RetFromProc(string labelName, string comment = "")
                 => UCodeFormat(labelName, OpCodeKind.ret, comment);

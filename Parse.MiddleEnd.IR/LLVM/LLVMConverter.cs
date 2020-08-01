@@ -1,6 +1,6 @@
-﻿using Parse.MiddleEnd.IR.Datas.Types;
-using Parse.MiddleEnd.IR.Datas.ValueDatas;
-using Parse.MiddleEnd.IR.LLVM.Models;
+﻿using Parse.MiddleEnd.IR.LLVM.Expressions.ExprExpressions;
+using Parse.Types;
+using System.Collections;
 
 namespace Parse.MiddleEnd.IR.LLVM
 {
@@ -32,29 +32,16 @@ namespace Parse.MiddleEnd.IR.LLVM
             return result;
         }
 
+        public static int ToBitSize(DType type) => (type == DType.Bit) ? 1 : ToAlignSize(type) * 8;
 
-        public static int ToSize(DType type)
+        public static int ToAlignSize(DType type)
         {
             int result = 0;
 
-            if (type == DType.Bit) result = 1;
-            else if (type == DType.Byte) result = 8;
-            else if (type == DType.Short) result = 16;
-            else if (type == DType.Int) result = 32;
-            else if (type == DType.Double) result = 64;
-
-            return result;
-        }
-
-        public static string ToInstructionName(IROperation operation)
-        {
-            string result = string.Empty;
-
-            if (operation == IROperation.Add) result = "add";
-            else if (operation == IROperation.Sub) result = "sub";
-            else if (operation == IROperation.Mul) result = "mul";
-            else if (operation == IROperation.Div) result = "sdiv";
-            else if (operation == IROperation.Mod) result = "srem";
+            if (type == DType.Byte) result = 1;
+            else if (type == DType.Short) result = 2;
+            else if (type == DType.Int) result = 4;
+            else if (type == DType.Double) result = 8;
 
             return result;
         }
@@ -107,12 +94,6 @@ namespace Parse.MiddleEnd.IR.LLVM
             }
 
             return result;
-        }
-
-        public static SSValue ToSSValue(IRValue irValue)
-        {
-            System.Type ssfType = typeof(SSValue<>).MakeGenericType(irValue.TypeName.GetType());
-            return System.Activator.CreateInstance(ssfType, irValue.Value) as SSValue;
         }
     }
 }

@@ -1,7 +1,4 @@
 ﻿using Parse.Extensions;
-using Parse.FrontEnd.Ast;
-using Parse.FrontEnd.Parsers.ErrorHandling;
-using Parse.FrontEnd.Parsers.ErrorHandling.GrammarPrivate;
 using Parse.FrontEnd.Parsers.EventArgs;
 using Parse.FrontEnd.Parsers.Properties;
 using Parse.FrontEnd.RegularGrammar;
@@ -16,9 +13,9 @@ namespace Parse.FrontEnd.Parsers.Datas
     public class ParsingUnit
     {
         public Stack<object> BeforeStack { get; } = new Stack<object>();
-        public Stack<object> AfterStack { get; internal set; } = new Stack<object>();
+        public Stack<object> AfterStack { get; set; } = new Stack<object>();
         public ActionData Action { get; internal set; } = new ActionData();
-        public TokenData InputValue { get; internal set; }
+        public TokenData InputValue { get; set; }
         public TerminalSet PossibleTerminalSet { get; internal set; } = new TerminalSet();
 
 

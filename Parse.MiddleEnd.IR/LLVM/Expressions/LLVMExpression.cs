@@ -1,19 +1,20 @@
-﻿using Parse.MiddleEnd.IR.Datas;
+﻿using System.Collections.Generic;
 
 namespace Parse.MiddleEnd.IR.LLVM.Expressions
 {
     public abstract class LLVMExpression : IRExpression
     {
-        public static LLVMExpression FuncDef(IRFuncData funcData, LLVMBlockExpression blockExpression)
-        {
-            return new LLVMFuncDefExpression();
-        }
+        public List<LLVMExpression> Items = new List<LLVMExpression>();
 
-        public static LLVMExpression Variable()
-        {
-            return new LLVMVariableExpression();
-        }
+        public override string ToString() => GetType().Name;
 
-        public abstract string GeneratedCode();
+        public abstract IEnumerable<Instruction> Build();
+
+        protected LLVMSSATable _ssaTable;
+
+        protected LLVMExpression(LLVMSSATable ssaTable)
+        {
+            _ssaTable = ssaTable;
+        }
     }
 }

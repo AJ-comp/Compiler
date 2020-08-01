@@ -82,7 +82,7 @@ namespace ApplicationLayer.ViewModels.ToolWindowViewModels
             get
             {
                 if (selectedItem == null) return false;
-                return (selectedItem is FileTreeNodeModel) ? true : false;
+                return (selectedItem is FileTreeNodeModel);
             }
         }
 

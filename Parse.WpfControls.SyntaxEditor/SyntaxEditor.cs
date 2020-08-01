@@ -19,6 +19,8 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Threading;
+using Parse.FrontEnd.IRGenerator;
+using Parse.FrontEnd.Grammars.MiniC.Sdts.AstNodes;
 
 namespace Parse.WpfControls.SyntaxEditor
 {

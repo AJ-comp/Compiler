@@ -4,7 +4,7 @@ using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using Parse.Algorithms;
 using Parse.BackEnd.Target;
-using Parse.FrontEnd.Grammars;
+using Parse.FrontEnd.Grammars.AJ;
 using Parse.FrontEnd.Grammars.MiniC;
 using System;
 using System.Collections.Generic;

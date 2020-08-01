@@ -33,7 +33,7 @@ namespace Parse.FrontEnd.RegularGrammar
         public NonTerminal ToNonTerminal() => new NonTerminal(this);
         public NonTerminalConcat ToNonTerminalConcat()
         {
-            var result = new NonTerminalConcat(this.Priority, this.symbols.ToArray())
+            var result = new NonTerminalConcat(this.Priority, this._symbols.ToArray())
             {
                 MeaningUnit = this.MeaningUnit
             };

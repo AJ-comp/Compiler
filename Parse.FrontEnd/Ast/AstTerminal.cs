@@ -1,10 +1,13 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Parse.FrontEnd.Ast
 {
     public class AstTerminal : AstSymbol
     {
         public TokenData Token { get; }
+
+        public override IReadOnlyList<TokenData> AllTokens => new List<TokenData>() { Token };
 
         public AstTerminal(TokenData tokenData)
         {

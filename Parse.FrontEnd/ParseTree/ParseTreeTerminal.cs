@@ -1,5 +1,6 @@
 ﻿using Parse.FrontEnd.Ast;
 using System;
+using System.Collections.Generic;
 
 namespace Parse.FrontEnd.ParseTree
 {
@@ -10,6 +11,8 @@ namespace Parse.FrontEnd.ParseTree
         public override bool IsVirtual => Token.IsVirtual;
         public override bool HasVirtualChild => false;
         public override AstSymbol ToAst => (Token.Kind.Meaning) ? new AstTerminal(Token) : null;
+        public override IReadOnlyList<TokenData> AllTokens => new List<TokenData>() { Token };
+        public override string AllInputDatas => Token.Input;
 
         public ParseTreeTerminal(TokenData tokenData)
         {

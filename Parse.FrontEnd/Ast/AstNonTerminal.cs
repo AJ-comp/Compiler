@@ -1,5 +1,4 @@
-﻿using Parse.FrontEnd.ParseTree;
-using Parse.FrontEnd.RegularGrammar;
+﻿using Parse.FrontEnd.RegularGrammar;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -8,12 +7,13 @@ namespace Parse.FrontEnd.Ast
 {
     public class AstNonTerminal : AstSymbol, IList<AstSymbol>
     {
-        private List<AstSymbol> _symbols = new List<AstSymbol>();
-
         public NonTerminalSingle SignPost { get; set; } = null;
         public IReadOnlyList<AstSymbol> Items => _symbols;
         public string Name => this.SignPost.MeaningUnit?.Name;
         public NonTerminal ToNonTerminal => this.SignPost.ToNonTerminal();
+
+        public int Count => ((IList<AstSymbol>)_symbols).Count;
+        public bool IsReadOnly => ((IList<AstSymbol>)_symbols).IsReadOnly;
 
         public AstSymbol this[int index]
         {
@@ -26,10 +26,21 @@ namespace Parse.FrontEnd.Ast
                 ((IList<AstSymbol>)_symbols)[index] = value;
             }
         }
-        public int Count => ((IList<AstSymbol>)_symbols).Count;
-        public bool IsReadOnly => ((IList<AstSymbol>)_symbols).IsReadOnly;
 
-        public ParseTreeNonTerminal ConnectedParseTree { get; internal set; }
+        public override IReadOnlyList<TokenData> AllTokens
+        {
+            get
+            {
+                List<TokenData> result = new List<TokenData>();
+
+                foreach (var item in Items)
+                    result.AddRange(item.AllTokens);
+
+                return result;
+            }
+        }
+
+
 
         public AstNonTerminal(NonTerminalSingle singleNT)
         {
@@ -126,5 +137,8 @@ namespace Parse.FrontEnd.Ast
         }
 
         public override string ToString() => this.ToNonTerminal.ToString();  //this.Name?.ToString();
+
+
+        private List<AstSymbol> _symbols = new List<AstSymbol>();
     }
 }

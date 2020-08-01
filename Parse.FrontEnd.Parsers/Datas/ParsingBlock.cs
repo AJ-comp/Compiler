@@ -13,8 +13,10 @@ namespace Parse.FrontEnd.Parsers.Datas
     /// <see cref="https://www.lucidchart.com/documents/edit/c96f0bde-4111-4957-bf65-75b56d8074dc/0_0?beaconFlowId=687BBA49A656D177"/>
     public class ParsingBlock
     {
-        internal List<ParsingUnit> units = new List<ParsingUnit>();
-        internal List<ParsingErrorInfo> errorInfos = new List<ParsingErrorInfo>();
+        #region This has to be capsule later
+        public List<ParsingUnit> units = new List<ParsingUnit>();
+        public List<ParsingErrorInfo> errorInfos = new List<ParsingErrorInfo>();
+        #endregion
 
         public TokenData Token { get; } = null;
         public ParseTreeTerminal TokenTree { get; set; } = null;

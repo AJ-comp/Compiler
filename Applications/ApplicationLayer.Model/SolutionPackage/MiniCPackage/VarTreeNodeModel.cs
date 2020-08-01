@@ -1,5 +1,6 @@
 ﻿using ApplicationLayer.Common;
 using Parse.FrontEnd.Grammars.MiniC.Sdts.Datas;
+using Parse.FrontEnd.Grammars.MiniC.Sdts.Datas.Variables;
 using System;
 
 namespace ApplicationLayer.Models.SolutionPackage.MiniCPackage
@@ -13,7 +14,7 @@ namespace ApplicationLayer.Models.SolutionPackage.MiniCPackage
         public string BlockIndex => (_varData != null) ? _varData.Block.ToString() : string.Empty;
         public string Offset => (_varData != null) ? _varData.Offset.ToString() : string.Empty;
         public bool IsGlobal => (_varData?.Block== 0);
-        public bool IsParam => (_varData?.Etc == EtcInfo.Param);
+        public bool IsParam => (_varData?.VariableProperty == VariableMiniC.VarProperty.Param);
 
         public override string DisplayName
         {
@@ -25,7 +26,7 @@ namespace ApplicationLayer.Models.SolutionPackage.MiniCPackage
 
         public override event EventHandler<FileChangedEventArgs> Changed;
 
-        public VarTreeNodeModel(MiniCVarData varData)
+        public VarTreeNodeModel(VariableMiniC varData)
         {
             _varData = varData;
         }
@@ -35,6 +36,6 @@ namespace ApplicationLayer.Models.SolutionPackage.MiniCPackage
         }
 
 
-        private MiniCVarData _varData;
+        private VariableMiniC _varData;
     }
 }

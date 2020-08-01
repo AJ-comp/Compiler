@@ -1,5 +1,6 @@
 ﻿using Parse.FrontEnd.Ast;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 
 namespace Parse.FrontEnd
@@ -67,6 +68,21 @@ namespace Parse.FrontEnd
     public class MeaningErrInfo : ParsingErrorInfo
     {
         public IReadOnlyList<TokenData> ErrTokens => _errTokens;
+        public bool IsAllVirtualToken
+        {
+            get
+            {
+                if (ErrTokens.Count == 0) return false;
+
+                foreach (var token in ErrTokens)
+                {
+                    if (!token.IsVirtual) return false;
+                }
+
+                return true;
+            }
+        }
+
 
         public MeaningErrInfo(string code, string errorMessage, ErrorType errorType = ErrorType.Error)
             : base(errorType, code, errorMessage)
@@ -88,9 +104,38 @@ namespace Parse.FrontEnd
         private List<TokenData> _errTokens = new List<TokenData>();
     }
 
-    public class MeaningErrInfoList : List<MeaningErrInfo>
+
+
+
+    public class MeaningErrInfoList : IList<MeaningErrInfo>
     {
+        private List<MeaningErrInfo> _list = new List<MeaningErrInfo>();
+        public MeaningErrInfo this[int index] { get => _list[index]; set => throw new NotImplementedException(); }
+
+        public int Count => _list.Count;
+        public bool IsReadOnly => false;
+
+
+        public void Add(MeaningErrInfo item)
+        {
+            if (item == null) return;
+            if (item.IsAllVirtualToken) return;
+
+            _list.Add(item);
+        }
+
+        public void Clear() => _list.Clear();
+        public bool Contains(MeaningErrInfo item) => _list.Contains(item);
+        public void CopyTo(MeaningErrInfo[] array, int arrayIndex) => _list.CopyTo(array, arrayIndex);
+        public IEnumerator<MeaningErrInfo> GetEnumerator() => ((IList<MeaningErrInfo>)_list).GetEnumerator();
+        public int IndexOf(MeaningErrInfo item) => _list.IndexOf(item);
+        public void Insert(int index, MeaningErrInfo item) => _list.Insert(index, item);
+        public bool Remove(MeaningErrInfo item) => _list.Remove(item);
+        public void RemoveAt(int index) => _list.RemoveAt(index);
+        IEnumerator IEnumerable.GetEnumerator() => ((IList<MeaningErrInfo>)_list).GetEnumerator();
     }
+
+
 
 
     public class SemanticAnalysisResult

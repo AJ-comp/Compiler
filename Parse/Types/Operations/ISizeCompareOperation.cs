@@ -1,0 +1,43 @@
+﻿using Parse.Types.ConstantTypes;
+
+namespace Parse.Types.Operations
+{
+    public interface ISizeCompareOperation : IOperation
+    {
+        ///////////////////////////////////////////////////////////////////////////////////////
+        /// <summary>
+        /// This function means this > operand2.
+        /// </summary>
+        /// <param name="operand"></param>
+        /// <returns></returns>
+        ///////////////////////////////////////////////////////////////////////////////////////
+        IConstant GreaterThan(IValue operand);
+
+        ///////////////////////////////////////////////////////////////////////////////////////
+        /// <summary>
+        /// This function means this < operand2.
+        /// </summary>
+        /// <param name="operand"></param>
+        /// <returns></returns>
+        ///////////////////////////////////////////////////////////////////////////////////////
+        IConstant LessThan(IValue operand);
+
+        ///////////////////////////////////////////////////////////////////////////////////////
+        /// <summary>
+        /// This function means this >= operand2.
+        /// </summary>
+        /// <param name="operand"></param>
+        /// <returns></returns>
+        ///////////////////////////////////////////////////////////////////////////////////////
+        IConstant GreaterEqual(IValue operand);
+
+        ///////////////////////////////////////////////////////////////////////////////////////
+        /// <summary>
+        /// This function means this <= operand2.
+        /// </summary>
+        /// <param name="operand"></param>
+        /// <returns></returns>
+        ///////////////////////////////////////////////////////////////////////////////////////
+        IConstant LessEqual(IValue operand);
+    }
+}

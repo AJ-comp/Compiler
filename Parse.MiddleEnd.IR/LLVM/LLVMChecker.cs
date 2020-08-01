@@ -1,10 +1,8 @@
-﻿using Parse.MiddleEnd.IR.Datas.Types;
-using Parse.MiddleEnd.IR.Datas.ValueDatas;
-using Parse.MiddleEnd.IR.LLVM.Models;
+﻿using Parse.Types;
 
 namespace Parse.MiddleEnd.IR.LLVM
 {
-    class LLVMChecker
+    public class LLVMChecker
     {
         public static bool IsExistDoubleType(DType op1Type, DType op2Type) => ((op1Type == DType.Double) || (op2Type == DType.Double));
 
@@ -16,16 +14,18 @@ namespace Parse.MiddleEnd.IR.LLVM
             return true;
         }
 
-        public static IRValue<Bit> LogicalOp(IRValue s, IRValue t, IRCondition condition)
-        {
-            if (condition == IRCondition.EQ) return new SSValue<Bit>(s.IsEqual(t));
-            if (condition == IRCondition.NE) return new SSValue<Bit>(!s.IsEqual(t));
-            if (condition == IRCondition.GT) return new SSValue<Bit>(s.IsGreaterThan(t));
-            if (condition == IRCondition.GE) return new SSValue<Bit>(!s.IsLessThan(t));
-            if (condition == IRCondition.LT) return new SSValue<Bit>(s.IsLessThan(t));
-            if (condition == IRCondition.LE) return new SSValue<Bit>(!s.IsGreaterThan(t));
+        public static bool IsIntegerKind(DType opType) => (opType == DType.Byte || opType == DType.Short || opType == DType.Int);
 
-            return new SSValue<Bit>(false);
-        }
+        //public static BitConstantLLVM LogicalOp(IRValue s, IRValue t, IRCondition condition)
+        //{
+        //    if (condition == IRCondition.EQ) return new BitConstantLLVM(s.IsEqual(t));
+        //    if (condition == IRCondition.NE) return new BitConstantLLVM(!s.IsEqual(t));
+        //    if (condition == IRCondition.GT) return new BitConstantLLVM(s.IsGreaterThan(t));
+        //    if (condition == IRCondition.GE) return new BitConstantLLVM(!s.IsLessThan(t));
+        //    if (condition == IRCondition.LT) return new BitConstantLLVM(s.IsLessThan(t));
+        //    if (condition == IRCondition.LE) return new BitConstantLLVM(!s.IsGreaterThan(t));
+
+        //    return new BitConstantLLVM(false);
+        //}
     }
 }

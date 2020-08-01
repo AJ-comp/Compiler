@@ -55,7 +55,7 @@ namespace ApplicationLayer.ViewModels.DocumentTypeViewModels
         public ParseTreeSymbol ParseTree { get; private set; }
         public SdtsNode Ast { get; private set; }
         public DataTable ParsingHistory { get; private set; }
-        public IReadOnlyList<AstSymbol> InterLanguage { get; private set; }
+        public IEnumerable<AstSymbol> InterLanguage { get; private set; }
 
         public int CaretIndex
         {
@@ -134,11 +134,11 @@ namespace ApplicationLayer.ViewModels.DocumentTypeViewModels
                 if (symbolTable == null) return;
 
                 // Add abstract variable list information to the current FileTreeNode.
-                foreach (var item in symbolTable.VarList)
+                foreach (var varRecord in symbolTable.VarList)
                 {
-                    if (item.IsVirtual) continue;
+                    if (varRecord.VarField.IsVirtual) continue;
 
-                    var varTreeNode = new VarTreeNodeModel(item);
+                    var varTreeNode = new VarTreeNodeModel(varRecord.VarField);
                     _fileNode.AddChildren(varTreeNode);
                 }
 

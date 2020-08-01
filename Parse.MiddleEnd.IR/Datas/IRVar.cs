@@ -1,22 +1,22 @@
-﻿using Parse.MiddleEnd.IR.Datas.Types;
+﻿using Parse.Types;
+using Parse.Types.VarTypes;
 
 namespace Parse.MiddleEnd.IR.Datas
 {
-    public interface IRVar : IRData
+    public interface IRVar : IVariable
     {
         string Name { get; }
-        //        int Block { get; }
-        //        int Offset { get; }
         int Block { get; }
         int Offset { get; }
-
         int Length { get; }
-
-        ValueData Value { get; }
     }
 
 
-    public interface IRVar<out T> : IRVar, IRData<T> where T : DataType
+    public interface IRIntegerVar : IRVar, IByte, IShort, IInt
+    {
+    }
+
+    public interface IRDoubleVar : IRVar, IDouble
     {
     }
 }
