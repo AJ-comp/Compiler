@@ -1,5 +1,7 @@
-﻿using Parse.FrontEnd.Grammars.MiniC.Sdts.Datas;
+﻿using Parse.FrontEnd.Grammars.MiniC.Sdts.AstNodes.ExprNodes;
+using Parse.FrontEnd.Grammars.MiniC.Sdts.Datas;
 using Parse.FrontEnd.Grammars.MiniC.Sdts.Datas.Variables;
+using Parse.Types;
 using Parse.Types.ConstantTypes;
 using static Parse.FrontEnd.Grammars.MiniC.Sdts.Datas.Variables.VariableMiniC;
 
@@ -14,7 +16,7 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
                                                                             int blockLevel, 
                                                                             int offset, 
                                                                             VarProperty varProperty, 
-                                                                            object value)
+                                                                            ExprNode value)
         {
             VariableMiniC result = null;
 
@@ -26,13 +28,10 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
                                                                 dimensionToken,
                                                                 blockLevel,
                                                                 offset,
-                                                                varProperty, new StringConstant(string.Empty));
+                                                                varProperty, value);
             }
             else if (typeDatas.DataType == MiniCDataType.Int)
             {
-                var initValue = (value == null) ? new IntConstant(0, Types.State.NotInit, 0)
-                                                             : new IntConstant((int)value);
-
                 result = new IntVariableMiniC(typeDatas,
                                                             nameToken,
                                                             levelToken,
@@ -40,7 +39,7 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
                                                             blockLevel,
                                                             offset,
                                                             varProperty,
-                                                            initValue);
+                                                            value);
             }
 
             return result;

@@ -1,8 +1,6 @@
 ﻿using Parse.FrontEnd.Grammars.MiniC.Sdts.AstNodes;
+using Parse.FrontEnd.Grammars.MiniC.Sdts.AstNodes.ExprNodes;
 using Parse.FrontEnd.Grammars.MiniC.Sdts.Datas.Variables;
-using Parse.MiddleEnd.IR.Datas;
-using Parse.Types;
-using Parse.Types.ConstantTypes;
 using System;
 using System.Collections.Generic;
 
@@ -18,7 +16,7 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts.Datas
 
         public VariableMiniC VarField { get; private set; }
         public List<ReferenceInfo> ReferenceTable { get; } = new List<ReferenceInfo>();
-        public IConstant InitValue => ReferenceTable[0].CalculatedValue;
+        public ExprNode InitValue => ReferenceTable[0].Value;
 
         public ReferenceInfo FindReferenceNode(Type type)
         {
@@ -42,13 +40,13 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts.Datas
             ReferenceNode = referenceNode;
         }
 
-        public ReferenceInfo(MiniCNode referenceNode, IConstant calculatedValue)
+        public ReferenceInfo(MiniCNode referenceNode, ExprNode value)
         {
             ReferenceNode = referenceNode;
-            CalculatedValue = calculatedValue;
+            Value = value;
         }
 
         public MiniCNode ReferenceNode { get; private set; }
-        public IConstant CalculatedValue { get; private set; }
+        public ExprNode Value { get; private set; }
     }
 }

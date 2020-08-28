@@ -5,6 +5,8 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts.AstNodes.ExprNodes.ArithmeticExprNo
 {
     public abstract class IncDecExprNode : SingleExprNode
     {
+        public UseIdentNode UseIdentNode { get; private set; }
+
         protected IncDecExprNode(AstSymbol node, string oper) : base(node)
         {
             IsNeedWhileIRGeneration = true;
@@ -20,8 +22,8 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts.AstNodes.ExprNodes.ArithmeticExprNo
                 return this;
             }
 
-            var varNode = Items[0] as UseIdentNode;
-            if (varNode.VarData is IString)
+            UseIdentNode = Items[0] as UseIdentNode;
+            if (UseIdentNode.VarData is IString)
             {
                 AddMCL0013Exception("--");
                 return this;

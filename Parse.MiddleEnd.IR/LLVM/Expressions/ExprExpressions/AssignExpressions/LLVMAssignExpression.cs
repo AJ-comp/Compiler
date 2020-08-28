@@ -1,6 +1,7 @@
 ﻿using Parse.MiddleEnd.IR.Datas;
 using Parse.MiddleEnd.IR.LLVM.Expressions.ExprExpressions;
 using Parse.MiddleEnd.IR.LLVM.Models.VariableModels;
+using Parse.Types;
 using Parse.Types.ConstantTypes;
 using System.Collections.Generic;
 
@@ -30,6 +31,7 @@ namespace Parse.MiddleEnd.IR.LLVM.Expressions.AssignExpressions
         {
             List<Instruction> result = new List<Instruction>();
             result.AddRange(base.Build());
+            result.AddRange(ConvertToExtension(Right, DType.Int));
 
             if (Right is LLVMUseVarExpression)
             {

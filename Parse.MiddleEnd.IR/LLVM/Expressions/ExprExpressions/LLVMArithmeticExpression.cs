@@ -1,5 +1,4 @@
 ﻿using Parse.MiddleEnd.IR.LLVM.Models.VariableModels;
-using Parse.Types;
 using Parse.Types.ConstantTypes;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -46,9 +45,6 @@ namespace Parse.MiddleEnd.IR.LLVM.Expressions.ExprExpressions
         private IEnumerable<Instruction> GenerateOperInstructions(IROperation operation)
         {
             List<Instruction> instructionList = new List<Instruction>();
-
-            instructionList.AddRange(ArithmeticPrevProcess(Left, Right));
-            instructionList.AddRange(ArithmeticPrevProcess(Right, Left));
 
             if (Left.Result is VariableLLVM)
             {

@@ -23,5 +23,10 @@ namespace Parse.Types.ConstantTypes
         public IConstant Add(IValue operand) => Operation.StringAdd(this, operand);
         public IConstant Equal(IValue operand) => Operation.StringEqual(this, operand);
         public IConstant NotEqual(IValue operand) => Operation.StringNotEqual(this, operand);
+
+        public override Constant Casting(DType to)
+        {
+            return null;
+        }
     }
 }

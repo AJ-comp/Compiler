@@ -39,7 +39,7 @@ namespace ApplicationLayer.ViewModels.ToolWindowViewModels
                 var symbolTable = miniCNode.SymbolTable;
                 while (symbolTable != null)
                 {
-                    if (symbolTable.VarList.Count == 0 && symbolTable.FuncDataList.Count == 0)
+                    if (symbolTable.VarList.Count() == 0 && symbolTable.FuncDataList.Count() == 0)
                     {
                         sdtsNode = null;
                         symbolTable = symbolTable.Base;

@@ -6,8 +6,8 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts.Datas
     public class MiniCSymbolTable : SymbolTable
     {
         public MiniCSymbolTable Base { get; }
-        public IReadOnlyList<MiniCFuncData> FuncDataList => _funcList;
-        public IReadOnlyList<MiniCVarRecord> VarList => _varList;
+        public IEnumerable<MiniCFuncData> FuncDataList => _funcList;
+        public IEnumerable<MiniCVarRecord> VarList => _varList;
 
         public IEnumerable<MiniCVarRecord> AllVarList
         {

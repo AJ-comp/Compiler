@@ -1,5 +1,6 @@
 ﻿using Parse.MiddleEnd.IR.Datas;
 using Parse.MiddleEnd.IR.LLVM.Models.VariableModels;
+using Parse.Types;
 using System.Linq;
 
 namespace Parse.MiddleEnd.IR.LLVM
@@ -37,9 +38,22 @@ namespace Parse.MiddleEnd.IR.LLVM
             return rootChainVar;
         }
 
-        public DependencyChainVar NewLink(params UseDefChainVar[] targets)
+        public BitVariableLLVM RegisterLabel()
         {
-            var result = VariableLLVM.From(Offset++, targets.First());
+            var rootChainVar = new RootChainVar(new BitVariableLLVM(0, null));
+            rootChainVar.Link(new BitVariableLLVM(Offset++, null));
+
+            _localRootChainVars.Add(rootChainVar);
+
+            return rootChainVar.LinkedObject as BitVariableLLVM;
+        }
+
+        public DependencyChainVar NewLink(params UseDefChainVar[] targets)
+            => VariableLLVM.From(Offset++, targets.First(), targets.First().TypeName);
+
+        public DependencyChainVar NewLink(DType toType, params UseDefChainVar[] targets)
+        {
+            var result = VariableLLVM.From(Offset++, targets.First(), toType);
 
             foreach (var target in targets) target.Link(result);
 

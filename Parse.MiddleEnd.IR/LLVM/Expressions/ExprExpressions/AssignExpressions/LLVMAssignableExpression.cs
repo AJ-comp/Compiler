@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace Parse.MiddleEnd.IR.LLVM.Expressions.AssignExpressions
 {
-    public abstract class LLVMAssignableExpression : LLVMDependencyExpression
+    public abstract class LLVMAssignableExpression : LLVMExprExpression
     {
         public VariableLLVM Left { get; protected set; }
         public LLVMExprExpression Right { get; protected set; }

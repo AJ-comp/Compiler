@@ -27,6 +27,11 @@ namespace Parse.Types.ConstantTypes
             Signed = true;
         }
 
+        protected IntegerConstant(uint value, State valueState, uint pointerLevel) : base(value, valueState, pointerLevel)
+        {
+            Signed = true;
+        }
+
         public IConstant Equal(IValue operand) => Operation.ArithmeticEqual(this, operand);
         public IConstant NotEqual(IValue operand) => Operation.ArithmeticNotEqual(this, operand);
         public IConstant Add(IValue operand) => Operation.ArithmeticAdd(this, operand);

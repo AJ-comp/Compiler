@@ -3,6 +3,7 @@ using Parse.FrontEnd.Grammars.MiniC.Sdts.AstNodes.ExprNodes;
 using Parse.FrontEnd.Grammars.MiniC.Sdts.AstNodes.ExprNodes.ArithmeticExprNodes;
 using Parse.FrontEnd.Grammars.MiniC.Sdts.AstNodes.ExprNodes.AssignExprNodes;
 using Parse.FrontEnd.Grammars.MiniC.Sdts.AstNodes.ExprNodes.LiteralNodes;
+using Parse.FrontEnd.Grammars.MiniC.Sdts.AstNodes.ExprNodes.LogicalExprNodes;
 using Parse.FrontEnd.Grammars.MiniC.Sdts.AstNodes.StatementNodes;
 using Parse.MiddleEnd.IR;
 using Parse.MiddleEnd.IR.LLVM;
@@ -51,6 +52,17 @@ namespace Parse.FrontEnd.IRGenerator
             else if (rootNode is MulExprNode) rootNode.ConvertingToIRExpression = MulExprNodeToIRExpression;
             else if (rootNode is ModExprNode) rootNode.ConvertingToIRExpression = DivExprNodeToIRExpression;
             else if (rootNode is DivExprNode) rootNode.ConvertingToIRExpression = ModExprNodeToIRExpression;
+            else if (rootNode is EqualExprNode) rootNode.ConvertingToIRExpression = EqualExprNodeToIRExpression;
+            else if (rootNode is NotEqualExprNode) rootNode.ConvertingToIRExpression = NotEqualExprNodeToIRExpression;
+            else if (rootNode is GreaterThanNode) rootNode.ConvertingToIRExpression = GreaterThanExprNodeToIRExpression;
+            else if (rootNode is GreaterEqualNode) rootNode.ConvertingToIRExpression = GreaterEqualExprNodeToIRExpression;
+            else if (rootNode is LessThanNode) rootNode.ConvertingToIRExpression = LessThanExprNodeToIRExpression;
+            else if (rootNode is LessEqualNode) rootNode.ConvertingToIRExpression = LessEqualExprNodeToIRExpression;
+            else if (rootNode is PreIncExprNode) rootNode.ConvertingToIRExpression = PreIncExprNodeToIRExpression;
+            else if (rootNode is PostIncExprNode) rootNode.ConvertingToIRExpression = PostIncExprNodeToIRExpression;
+            else if (rootNode is PreDecExprNode) rootNode.ConvertingToIRExpression = PreDecExprNodeToIRExpression;
+            else if (rootNode is PostDecExprNode) rootNode.ConvertingToIRExpression = PostDecExprNodeToIRExpression;
+
             else if (rootNode is UseIdentNode) rootNode.ConvertingToIRExpression = UseIdentNodeToIRExpression;
             else if (rootNode is LiteralNode) rootNode.ConvertingToIRExpression = LiteralNodeToIRExpression;
 

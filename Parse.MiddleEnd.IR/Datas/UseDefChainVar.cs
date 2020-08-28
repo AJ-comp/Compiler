@@ -1,7 +1,6 @@
 ﻿using Parse.Types;
 using Parse.Types.VarTypes;
 using System;
-using System.Collections.Generic;
 
 namespace Parse.MiddleEnd.IR.Datas
 {

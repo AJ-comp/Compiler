@@ -150,7 +150,7 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
                 else if (cRoot.SignPost.MeaningUnit == LogicalNot) result = new NotExprNode(root);
                 else if (cRoot.SignPost.MeaningUnit == Equal) result = new EqualExprNode(root);
                 else if (cRoot.SignPost.MeaningUnit == NotEqual) result = new NotEqualExprNode(root);
-                else if (cRoot.SignPost.MeaningUnit == GreaterThan) result = new GreaterThanExprNode(root);
+                else if (cRoot.SignPost.MeaningUnit == GreaterThan) result = new GreaterThanNode(root);
                 else if (cRoot.SignPost.MeaningUnit == LessThan) result = new LessThanNode(root);
                 else if (cRoot.SignPost.MeaningUnit == GreaterEqual) result = new GreaterEqualNode(root);
                 else if (cRoot.SignPost.MeaningUnit == LessEqual) result = new LessEqualNode(root);

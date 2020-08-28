@@ -46,16 +46,16 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
         {
             if (varDataToCheck.IsVirtual) return false;
 
-            var varData = MiniCUtilities.GetVarDataFromReferableST(nodeToCheck, varDataToCheck.NameToken);
-            if (varData == null) return false;
-            if (varData.Value != null) return false;
+            var varRecord = MiniCUtilities.GetVarRecordFromReferableST(nodeToCheck, varDataToCheck.NameToken);
+            if (varRecord == null) return false;
+            if (varRecord.InitValue != null) return false;
 
             if(bAttachErrorInfo)
             {
                 // Add semantic error information if varData is exist in the SymbolTable.
                 nodeToCheck.ConnectedErrInfoList.Add
                     (
-                        new MeaningErrInfo(varData.NameToken, 
+                        new MeaningErrInfo(varRecord.VarField.NameToken, 
                                                         nameof(AlarmCodes.MCL0005),
                                                         string.Format(AlarmCodes.MCL0005, varDataToCheck.Name))
                     );

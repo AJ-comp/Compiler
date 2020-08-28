@@ -33,5 +33,17 @@ namespace Parse.Types.ConstantTypes
         public IConstant NotEqual(IValue operand) => Operation.BitTypeNotEqual(this, operand);
         public IConstant Or(IValue operand) => Operation.BitTypeOr(this, operand);
         public IConstant RightShift(int count) => Operation.BitTypeRightShift(this, count);
+
+        public override Constant Casting(DType to)
+        {
+            Constant result = null;
+
+            if (to == DType.Bit) result = this;
+            else if (to == DType.Byte) result = new ByteConstant((byte)Value, ValueState, PointerLevel);
+            else if (to == DType.Int) result = new IntConstant((int)Value, ValueState, PointerLevel);
+            else if (to == DType.Double) result = new DoubleConstant((double)Value, ValueState, PointerLevel);
+
+            return result;
+        }
     }
 }

@@ -2,9 +2,10 @@
 
 namespace Parse.MiddleEnd.IR.LLVM.Expressions.ExprExpressions.LogicalExpressions
 {
-    public class LLVMLogicalOpExpression : LLVMBinOpExpression
+    public abstract class LLVMLogicalOpExpression : LLVMBinOpExpression
     {
         public IRCondition Condition { get; }
+
 
         public LLVMLogicalOpExpression(LLVMExprExpression left, 
                                                         LLVMExprExpression right, 
@@ -14,9 +15,6 @@ namespace Parse.MiddleEnd.IR.LLVM.Expressions.ExprExpressions.LogicalExpressions
             Condition = condition;
         }
 
-        public override IEnumerable<Instruction> Build()
-        {
-            throw new System.NotImplementedException();
-        }
+        public override IEnumerable<Instruction> Build() => base.Build();
     }
 }

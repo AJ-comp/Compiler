@@ -5,6 +5,9 @@ using Parse.MiddleEnd.IR.LLVM;
 using Parse.MiddleEnd.IR.LLVM.Expressions;
 using Parse.MiddleEnd.IR.LLVM.Expressions.AssignExpressions;
 using Parse.MiddleEnd.IR.LLVM.Expressions.ExprExpressions;
+using Parse.MiddleEnd.IR.LLVM.Expressions.ExprExpressions.LogicalExpressions;
+using Parse.MiddleEnd.IR.LLVM.Expressions.StmtExpressions;
+using Parse.Types.ConstantTypes;
 
 namespace Parse.FrontEnd.IRGenerator
 {
@@ -15,12 +18,22 @@ namespace Parse.FrontEnd.IRGenerator
             var cNode = node as CondStatementNode;
             var ssaTable = param as LLVMSSATable;
 
-            LLVMBlockExpression result = new LLVMBlockExpression(ssaTable);
-
-            result.AddItem(cNode.Condition.ExecuteToIRExpression(ssaTable) as LLVMExpression);
-            result.AddItem(cNode.TrueStatement.ExecuteToIRExpression(ssaTable) as LLVMExpression);
-
-            return result;
+            var irExpression = cNode.Condition.ExecuteToIRExpression(ssaTable);
+            LLVMLogicalOpExpression logicalOp = null;
+            if (irExpression is LLVMLogicalOpExpression)
+            {
+                logicalOp = irExpression as LLVMLogicalOpExpression;
+            }
+            else
+            {
+                logicalOp = new LLVMCompareOpExpression(irExpression as LLVMExprExpression,
+                                                                                    new LLVMConstantExpression(new IntConstant(0), ssaTable), 
+                                                                                    IRCondition.NE, 
+                                                                                    ssaTable);
+            }
+            return new LLVMIFExpression(logicalOp,
+                                                        cNode.TrueStatement.ExecuteToIRExpression(ssaTable) as LLVMStmtExpression,
+                                                        ssaTable);
         }
 
         private static IRExpression CompoundStNodeToIRExpression(SdtsNode node, object param)
@@ -37,10 +50,13 @@ namespace Parse.FrontEnd.IRGenerator
             foreach (var varRecord in cNode.SymbolTable.VarList)
             {
                 if (varRecord.VarField.VariableProperty == VariableMiniC.VarProperty.Param) continue;
-                if (varRecord.InitValue.IsInitialized)
-                    blockExpression.AddItem(new LLVMAssignExpression(varRecord.VarField, 
-                                                                                                    new LLVMConstantExpression(varRecord.InitValue, ssaTable),
-                                                                                                    ssaTable));
+                if (varRecord.InitValue != null)
+                    blockExpression.AddItem
+                        (
+                            new LLVMAssignExpression(varRecord.VarField, 
+                                                                     varRecord.InitValue.ExecuteToIRExpression(ssaTable) as LLVMExprExpression,
+                                                                     ssaTable)
+                        );
             }
 
             // statment list (if, while, call ...)
@@ -77,7 +93,7 @@ namespace Parse.FrontEnd.IRGenerator
             var cNode = node as ExprStatementNode;
             var ssaTable = param as LLVMSSATable;
 
-            return cNode.Expr.ExecuteToIRExpression(ssaTable);
+            return new LLVMExprStmtExpression(cNode.Expr.ExecuteToIRExpression(ssaTable) as LLVMExprExpression, ssaTable);
 
 
             //List<LLVMLocalVariableExpression> irVarList = new List<LLVMLocalVariableExpression>();

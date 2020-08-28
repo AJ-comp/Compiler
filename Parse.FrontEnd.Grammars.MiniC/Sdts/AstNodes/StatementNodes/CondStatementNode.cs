@@ -20,6 +20,7 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts.AstNodes.StatementNodes
         public override SdtsNode Build(SdtsParams param)
         {
             Condition = Items[1].Build(param) as ExprNode;
+
             TrueStatement = Items[2].Build(param.CloneForNewBlock()) as StatementNode;
 
             /*

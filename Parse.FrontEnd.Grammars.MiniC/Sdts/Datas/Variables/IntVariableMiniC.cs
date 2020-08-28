@@ -1,4 +1,5 @@
-﻿using Parse.MiddleEnd.IR.Datas;
+﻿using Parse.FrontEnd.Grammars.MiniC.Sdts.AstNodes.ExprNodes;
+using Parse.MiddleEnd.IR.Datas;
 using Parse.Types;
 using Parse.Types.ConstantTypes;
 using Parse.Types.Operations;
@@ -18,7 +19,7 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts.Datas.Variables
                                             int blockLevel, 
                                             int offset, 
                                             VarProperty varProperty, 
-                                            IValue value)
+                                            ExprNode value)
                                         : base(typeDatas, nameToken, levelToken, dimensionToken,
                                                     blockLevel, offset, varProperty, value)
         {

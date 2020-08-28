@@ -35,6 +35,13 @@ namespace Parse.MiddleEnd.IR.LLVM.Expressions.ExprExpressions
             result.AddRange(Left.Build());
             result.AddRange(Right.Build());
 
+            // Convert to equal the left type and right type.
+            var toType = LLVMChecker.MaximumType(Left.Result.TypeName, Right.Result.TypeName);
+            if (toType != DType.Double) toType = DType.Int;
+
+            result.AddRange(ConvertToExtension(Left, toType));
+            result.AddRange(ConvertToExtension(Right, toType));
+
             return result;
         }
 
@@ -56,32 +63,6 @@ namespace Parse.MiddleEnd.IR.LLVM.Expressions.ExprExpressions
             if (!(Left.Result is IDouble) && !(Right.Result is IDouble)) return result;
             
             Instruction.IToFp(var, ssTable);
-
-            return result;
-        }
-
-
-        protected IEnumerable<Instruction> ArithmeticPrevProcess(LLVMExprExpression target, LLVMExprExpression toCompare)
-        {
-            // Bit type never can come to this because it is filtered by semantic analysis module.
-
-            List<Instruction> result = new List<Instruction>();
-            if (target.Result.TypeName == toCompare.Result.TypeName) return result;
-
-            if (LLVMChecker.IsIntegerKind(target.Result.TypeName))
-            {
-                if (target.Result.TypeName != DType.Int)
-                {
-                    var casting = new LLVMCastingExpression(DType.Int, target, _ssaTable);
-                    result.AddRange(casting.Build());
-                }
-            }
-
-            if (toCompare.Result.TypeName == DType.Double)
-            {
-                var casting = new LLVMCastingExpression(DType.Double, target, _ssaTable);
-                result.AddRange(casting.Build());
-            }
 
             return result;
         }

@@ -8,7 +8,7 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts.AstNodes.ExprNodes
     {
         public TokenData IdentToken { get; private set; }
 
-        public VariableMiniC VarData => MiniCUtilities.GetVarDataFromReferableST(this, IdentToken);
+        public VariableMiniC VarData => MiniCUtilities.GetVarRecordFromReferableST(this, IdentToken).VarField;
 
 
         public UseIdentNode(AstSymbol node) : base(node)
@@ -39,7 +39,7 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts.AstNodes.ExprNodes
         /// <returns></returns>
         private bool IsNotDeclared()
         {
-            var varData = MiniCUtilities.GetVarDataFromReferableST(this, IdentToken);
+            var varData = MiniCUtilities.GetVarRecordFromReferableST(this, IdentToken);
             if (varData != null) return false;
             var funcData = MiniCUtilities.GetFuncDataFromReferableST(this, IdentToken);
             if (funcData != null) return false;

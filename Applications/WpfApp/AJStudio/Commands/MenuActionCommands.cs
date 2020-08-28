@@ -458,7 +458,7 @@ namespace ApplicationLayer.WpfApp.Commands
 
                     var textDoc = new LLVMViewModel("LLVM IR");
                     string textCode = string.Empty;
-                    foreach (var instruction in instructionList) textCode += instruction.CommandLine + Environment.NewLine;
+                    foreach (var instruction in instructionList) textCode += instruction.FullData + Environment.NewLine;
                     textDoc.TextContent = textCode;
 
                     mainViewModel.SolutionExplorer.Documents.Add(textDoc);

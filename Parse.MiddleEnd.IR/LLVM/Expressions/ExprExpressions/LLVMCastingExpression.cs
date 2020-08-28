@@ -30,34 +30,34 @@ namespace Parse.MiddleEnd.IR.LLVM.Expressions.ExprExpressions
 
             if (Value.Result.TypeName == CastingType) return instructionList;
 
-            if (Value.Result is IntegerVariableLLVM)
-                instructionList.AddRange(ValueIsIntegerProcess(Value.Result as IntegerVariableLLVM, _ssaTable));
-            else if (CastingType == DType.Double)
+            if (Value.Result.TypeName == DType.Double)
                 instructionList.AddRange(ValueIsDoubleProcess(Value.Result as DoubleVariableLLVM, _ssaTable));
+            else
+                instructionList.AddRange(ValueIsNotDoubleProcess(Value.Result as VariableLLVM, _ssaTable));
 
             return instructionList;
         }
 
-        private IEnumerable<Instruction> ValueIsIntegerProcess(IntegerVariableLLVM var, LLVMSSATable ssTable)
+        private IEnumerable<Instruction> ValueIsNotDoubleProcess(VariableLLVM var, LLVMSSATable ssaTable)
         {
             List<Instruction> instructionList = new List<Instruction>();
 
             // to double
             if (CastingType == DType.Double)
             {
-                instructionList.Add(Instruction.ConvertType(var, DType.Int, ssTable));
-                instructionList.Add(Instruction.IToFp(instructionList.First().NewSSAVar as IntVariableLLVM, ssTable));
+                instructionList.Add(Instruction.ConvertType(var, DType.Int, ssaTable));
+                instructionList.Add(Instruction.IToFp(instructionList.First().NewSSAVar as IntVariableLLVM, ssaTable));
 
                 return instructionList;
             }
 
             // to integer kind
-            instructionList.Add(Instruction.ConvertType(var, CastingType, ssTable));
+            instructionList.Add(Instruction.ConvertType(var, CastingType, ssaTable));
 
             return instructionList;
         }
 
-        private IEnumerable<Instruction> ValueIsDoubleProcess(DoubleVariableLLVM var, LLVMSSATable ssTable)
-            => new List<Instruction>() { Instruction.FpToI(var, ssTable) };
+        private IEnumerable<Instruction> ValueIsDoubleProcess(DoubleVariableLLVM var, LLVMSSATable ssaTable)
+            => new List<Instruction>() { Instruction.FpToI(var, ssaTable) };
     }
 }

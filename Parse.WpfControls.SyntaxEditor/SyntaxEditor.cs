@@ -466,18 +466,14 @@ namespace Parse.WpfControls.SyntaxEditor
 
         private void TextArea_TextChanged(object sender, TextChangedEventArgs e)
         {
+            var tokens = ParserSnippet.ToTokenDataList(this.TextArea.Tokens);
+
             if (this.parsingResult.Success)  // if prev parsing successed.
-            {
                 // partial parsing
-                var tokens = ParserSnippet.ToTokenDataList(this.TextArea.Tokens);
                 this.parsingResult = this.ParserSnippet.Parsing(tokens, this.parsingResult, this.TextArea.RecentTokenizeHistory);
-            }
             else
-            {
                 // whole parsing
-                var tokens = ParserSnippet.ToTokenDataList(this.TextArea.Tokens);
                 this.parsingResult = this.ParserSnippet.Parsing(tokens);
-            }
 
             // shallow copy
             var newParsingResult = this.parsingResult.Clone() as ParsingResult;

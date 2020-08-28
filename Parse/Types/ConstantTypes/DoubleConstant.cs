@@ -29,5 +29,23 @@ namespace Parse.Types.ConstantTypes
         public IConstant Mul(IValue operand) => Operation.ArithmeticMul(this, operand);
         public IConstant NotEqual(IValue operand) => Operation.ArithmeticNotEqual(this, operand);
         public IConstant Sub(IValue operand) => Operation.ArithmeticSub(this, operand);
+
+
+        public override Constant Casting(DType to)
+        {
+            Constant result = null;
+
+            if (to == DType.Bit)
+            {
+                var data = ((int)Value == 0) ? false : true;
+                result = new BitConstant(data, ValueState, PointerLevel);
+            }
+            else if (to == DType.Byte) result = new ByteConstant((byte)Value, ValueState, PointerLevel);
+            else if (to == DType.Short) result = new ShortConstant((short)Value, ValueState, PointerLevel);
+            else if (to == DType.Int) result = new IntConstant((int)Value, ValueState, PointerLevel);
+            else if (to == DType.Double) result = this;
+
+            return result;
+        }
     }
 }

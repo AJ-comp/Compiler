@@ -46,11 +46,11 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts.AstNodes
                                                                                BlockLevel,
                                                                                Offset,
                                                                                VarProperty.Normal,
-                                                                               initDeclarator.RightValue);
+                                                                               initDeclarator.Right);
 
                 // save to SymbolTable
                 (param as MiniCSdtsParams).SymbolTable
-                                                          .AddVarData(varData, new ReferenceInfo(this, varData.ValueConstant));
+                                                          .AddVarData(varData, new ReferenceInfo(this, initDeclarator.Right));
             }
 
             return this;

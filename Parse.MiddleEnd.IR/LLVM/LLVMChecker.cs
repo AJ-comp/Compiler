@@ -16,6 +16,14 @@ namespace Parse.MiddleEnd.IR.LLVM
 
         public static bool IsIntegerKind(DType opType) => (opType == DType.Byte || opType == DType.Short || opType == DType.Int);
 
+        public static DType MaximumType(DType op1Type, DType op2Type)
+        {
+            var op1Size = LLVMConverter.ToAlignSize(op1Type);
+            var op2Size = LLVMConverter.ToAlignSize(op2Type);
+
+            return (op1Size >= op2Size) ? op1Type : op2Type;
+        }
+
         //public static BitConstantLLVM LogicalOp(IRValue s, IRValue t, IRCondition condition)
         //{
         //    if (condition == IRCondition.EQ) return new BitConstantLLVM(s.IsEqual(t));

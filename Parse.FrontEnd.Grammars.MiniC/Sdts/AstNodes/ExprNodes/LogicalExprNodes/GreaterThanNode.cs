@@ -2,9 +2,9 @@
 
 namespace Parse.FrontEnd.Grammars.MiniC.Sdts.AstNodes.ExprNodes.LogicalExprNodes
 {
-    public class GreaterThanExprNode : LogicalExprNode
+    public class GreaterThanNode : LogicalExprNode
     {
-        public GreaterThanExprNode(AstSymbol node) : base(node)
+        public GreaterThanNode(AstSymbol node) : base(node)
         {
         }
     }

@@ -15,5 +15,7 @@
             ValueState = valueState;
             PointerLevel = pointerLevel;
         }
+
+        public abstract Constant Casting(DType to);
     }
 }

@@ -1,6 +1,5 @@
 ﻿using Parse.FrontEnd.Grammars.MiniC.Sdts.AstNodes;
 using Parse.FrontEnd.Grammars.MiniC.Sdts.Datas;
-using Parse.FrontEnd.Grammars.MiniC.Sdts.Datas.Variables;
 using System.Collections.Generic;
 
 namespace Parse.FrontEnd.Grammars.MiniC.Sdts
@@ -12,7 +11,7 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
         /// first = leaf, last = root
         /// </summary>
         /// <returns></returns>
-        public static IReadOnlyList<MiniCSymbolTable> GetReferableSymbolTablelList(MiniCNode fromNode)
+        public static IEnumerable<MiniCSymbolTable> GetReferableSymbolTablelList(MiniCNode fromNode)
         {
             List<MiniCSymbolTable> result = new List<MiniCSymbolTable>();
             MiniCNode trasverNode = fromNode;
@@ -34,24 +33,23 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
         /// </summary>
         /// <param name="fromNode"></param>
         /// <returns></returns>
-        public static VariableMiniC GetVarDataFromReferableST(MiniCNode fromNode, TokenData varTokenToFind)
+        public static MiniCVarRecord GetVarRecordFromReferableST(MiniCNode fromNode, TokenData varTokenToFind)
         {
             if (varTokenToFind == null) return null;
 
-            VariableMiniC result = null;
             var tableList = GetReferableSymbolTablelList(fromNode);
 
             foreach (var table in tableList)
             {
-                var varData = table.GetVarByName(varTokenToFind.Input);
-                if (varData != null)
+                foreach (var var in table.VarList)
                 {
-                    result = varData;
-                    break;
+                    if (var.VarField.Name != varTokenToFind.Input) continue;
+
+                    return var;
                 }
             }
 
-            return result;
+            return null;
         }
 
         public static MiniCFuncData GetFuncDataFromReferableST(MiniCNode fromNode, TokenData varTokenToFind)

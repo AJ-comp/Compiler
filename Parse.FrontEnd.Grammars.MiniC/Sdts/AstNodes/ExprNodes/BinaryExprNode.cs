@@ -22,6 +22,9 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts.AstNodes.ExprNodes
             Items[0].Build(param);
             Items[1].Build(param);
 
+            if (Left is UseIdentNode) IsNotInit(Left as UseIdentNode);
+            if (Right is UseIdentNode) IsNotInit(Right as UseIdentNode);
+
             return this;
         }
 
@@ -41,6 +44,22 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts.AstNodes.ExprNodes
                     new MeaningErrInfo(MeaningTokens,
                                                     nameof(AlarmCodes.MCL0011),
                                                     string.Format(AlarmCodes.MCL0011, Left.Result.ToString(), Right.Result.ToString()))
+                );
+        }
+
+        private void IsNotInit(UseIdentNode varNode)
+        {
+            var varRecord = MiniCUtilities.GetVarRecordFromReferableST(this, varNode.IdentToken);
+            if (varRecord == null) return;
+            if (varRecord.VarField.IsVirtual) return;
+            if (varRecord.InitValue != null) return;
+
+            // Add semantic error information if varData is exist in the SymbolTable.
+            ConnectedErrInfoList.Add
+                (
+                    new MeaningErrInfo(varRecord.VarField.NameToken,
+                                                    nameof(AlarmCodes.MCL0005),
+                                                    string.Format(AlarmCodes.MCL0005, varRecord.VarField.Name))
                 );
         }
     }

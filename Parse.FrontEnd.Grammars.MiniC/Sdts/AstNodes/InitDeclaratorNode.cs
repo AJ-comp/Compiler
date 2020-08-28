@@ -2,6 +2,7 @@
 using Parse.FrontEnd.Grammars.MiniC.Sdts.AstNodes.ExprNodes;
 using Parse.FrontEnd.Grammars.MiniC.Sdts.AstNodes.ExprNodes.LiteralNodes;
 using Parse.Types;
+using Parse.Types.ConstantTypes;
 
 namespace Parse.FrontEnd.Grammars.MiniC.Sdts.AstNodes
 {
@@ -21,7 +22,6 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts.AstNodes
 
         public DeclareVarNode LeftVar { get; private set; }
         public ExprNode Right { get; private set; }
-        public object RightValue { get; private set; }
 
 
         // format summary
@@ -35,14 +35,7 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts.AstNodes
             LeftVar = Items[0].Build(param) as DeclareVarNode;
 
             if (Items.Count > 1)
-            {
                 Right = Items[1].Build(param) as ExprNode;
-
-                if (Right is IntLiteralNode)
-                    RightValue = (Right as IntLiteralNode).LiteralData.Value;
-                else if (Right is UseIdentNode)
-                    RightValue = (Right as UseIdentNode).VarData.Value;
-            }
 
             // check duplication
             MiniCChecker.IsDuplicated(this, param, NameToken);

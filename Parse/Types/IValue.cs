@@ -7,6 +7,6 @@
         DType TypeName { get; }
         object Value { get; }
         State ValueState { get; }
-        bool IsInitialized => (ValueState == State.Fixed || ValueState == State.Dynamic);
+        bool IsInitialized => (ValueState != State.NotInit);
     }
 }
