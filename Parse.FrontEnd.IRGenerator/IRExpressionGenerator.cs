@@ -41,11 +41,11 @@ namespace Parse.FrontEnd.IRGenerator
             else if (rootNode is FuncDefNode) rootNode.ConvertingToIRExpression = FuncDefNodeToIRExpression;
             else if (rootNode is CompoundStNode) rootNode.ConvertingToIRExpression = CompoundStNodeToIRExpression;
             else if (rootNode is IfStatementNode) rootNode.ConvertingToIRExpression = CommonCondStatementToIRExpression;
-            else if (rootNode is IfElseStatementNode) rootNode.ConvertingToIRExpression = IfElseStatementToIRExpression;
+            else if (rootNode is IfElseStatementNode) rootNode.ConvertingToIRExpression = CommonCondStatementToIRExpression;
             else if (rootNode is WhileStatementNode) rootNode.ConvertingToIRExpression = CommonCondStatementToIRExpression;
             else if (rootNode is ReturnStatementNode) rootNode.ConvertingToIRExpression = ReturnStatementToIRExpression;
             else if (rootNode is ExprStatementNode) rootNode.ConvertingToIRExpression = ExprStatementNodeToIRExpression;
-            //else if (rootNode is CallNode) //    rootNode.ConvertingToIRExpression = 
+            else if (rootNode is CallNode) rootNode.ConvertingToIRExpression = CallNodeToIRExpression;
             else if (rootNode is AssignNode) rootNode.ConvertingToIRExpression = AssignNodeToIRExpression;
             else if (rootNode is AddExprNode) rootNode.ConvertingToIRExpression = AddExprNodeToIRExpression;
             else if (rootNode is SubExprNode) rootNode.ConvertingToIRExpression = SubExprNodeToIRExpression;

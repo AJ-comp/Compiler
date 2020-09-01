@@ -19,6 +19,19 @@ namespace Parse.MiddleEnd.IR.LLVM
             return result;
         }
 
+        public static DType ToDType(ReturnType type)
+        {
+            DType result = DType.Unknown;
+
+            if (type == ReturnType.i1) result = DType.Bit;
+            else if (type == ReturnType.i8) result = DType.Byte;
+            else if (type == ReturnType.i16) result = DType.Short;
+            else if (type == ReturnType.i32) result = DType.Int;
+            else if (type == ReturnType.Double) result = DType.Double;
+
+            return result;
+        }
+
         public static string ToInstructionName(DType type)
         {
             string result = string.Empty;

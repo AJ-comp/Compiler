@@ -21,6 +21,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Data;
+using System.IO;
 using System.Threading.Tasks;
 
 namespace ApplicationLayer.ViewModels.DocumentTypeViewModels
@@ -34,6 +35,7 @@ namespace ApplicationLayer.ViewModels.DocumentTypeViewModels
         private int _caretIndex = 0;
         private FileTreeNodeModel _fileNode;
         private ParserSnippet _parserSnippet;
+        private RelayCommand _saveCommand;
         private List<HighlightMapItem> _highlightMaps = new List<HighlightMapItem>();
         private RelayCommand<ParsingCompletedEventArgs> _parsingCompletedCommand = null;
 
@@ -47,6 +49,12 @@ namespace ApplicationLayer.ViewModels.DocumentTypeViewModels
         public string FullPath => _fileNode.FullPath;
         public string Data => _fileNode.Data;
         public string FileName => _fileNode.FileName;
+        public string FileNameWithoutExtension => _fileNode.FileNameWithoutExtension;
+
+        // this property has to bring a information via current mode. (ex : debug or release)
+//        public ProjectProperty Project => _fileNode.ProjectTree.;
+        public string CurrentData { get; set; }
+
         public StringCollection CloseCharacters { get; } = new StringCollection();
         public Grammar Grammar { get; } = new MiniCGrammar();
 
@@ -64,6 +72,16 @@ namespace ApplicationLayer.ViewModels.DocumentTypeViewModels
             {
                 this._caretIndex = value;
                 this.RaisePropertyChanged(nameof(CaretIndex));
+            }
+        }
+
+        public RelayCommand SaveCommand
+        {
+            get
+            {
+                _saveCommand = new RelayCommand(SyncWithFile);
+
+                return _saveCommand;
             }
         }
 
@@ -87,6 +105,9 @@ namespace ApplicationLayer.ViewModels.DocumentTypeViewModels
 
 
 
+        public void SyncWithFile() => File.WriteAllText(_fileNode.FullPath, CurrentData);
+
+
         /********************************************************************************************
          * constructor section
          ********************************************************************************************/
@@ -95,6 +116,7 @@ namespace ApplicationLayer.ViewModels.DocumentTypeViewModels
             this._fileNode = fileNode;
             this._parserSnippet = ParserFactory.Instance.GetParser(ParserFactory.ParserKind.SLR_Parser, Grammar).NewParserSnippet();
 
+            this.CurrentData = Data;
             this.CloseCharacters.Add("{");
             this.CloseCharacters.Add("}");
             this.CloseCharacters.Add("(");
@@ -116,6 +138,7 @@ namespace ApplicationLayer.ViewModels.DocumentTypeViewModels
             this.ParsingHistory = parsingCompletedInfo.ParsingResult.ToParsingHistory;
             this.ParseTree = parsingCompletedInfo.ParsingResult.ToParseTree;
             this.Ast = parsingCompletedInfo.SdtsRoot;
+
 
             AlarmCollection alarmCollection = GetSyntaxAlarmCollection(parsingResult);
             alarmCollection.AddRange(GetSemanticAlarmCollection(parsingCompletedInfo.SdtsRoot, parsingCompletedInfo.FiredException));

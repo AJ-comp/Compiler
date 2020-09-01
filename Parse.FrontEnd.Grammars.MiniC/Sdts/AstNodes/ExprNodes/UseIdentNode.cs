@@ -8,7 +8,7 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts.AstNodes.ExprNodes
     {
         public TokenData IdentToken { get; private set; }
 
-        public VariableMiniC VarData => MiniCUtilities.GetVarRecordFromReferableST(this, IdentToken).VarField;
+        public VariableMiniC VarData => MiniCUtilities.GetVarRecordFromReferableST(this, IdentToken)?.VarField;
 
 
         public UseIdentNode(AstSymbol node) : base(node)
@@ -19,6 +19,7 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts.AstNodes.ExprNodes
         {
             var node = Items[0].Build(param) as TerminalNode;
             IdentToken = node.Token;
+            Result = VarData?.ValueConstant;
 
             // If varToken is not declared, add as virtual token to the SymbolTable.
             if (IsNotDeclared())

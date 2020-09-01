@@ -2,10 +2,8 @@
 
 namespace Parse.MiddleEnd.IR.Datas
 {
-    public class IRFuncData
+    public class IRFuncData : IUseDefChainable
     {
-        private List<IRVar> _arguments = new List<IRVar>();
-
         public bool ConstReturn { get; }
         public ReturnType ReturnType { get; }
         public string Name { get; }
@@ -20,5 +18,7 @@ namespace Parse.MiddleEnd.IR.Datas
             ReturnType = returnType;
             Name = name;
         }
+
+        private List<IRVar> _arguments = new List<IRVar>();
     }
 }

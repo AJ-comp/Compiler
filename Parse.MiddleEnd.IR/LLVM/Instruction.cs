@@ -5,6 +5,8 @@ using Parse.Types;
 using Parse.Types.ConstantTypes;
 using Parse.Types.VarTypes;
 using System;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace Parse.MiddleEnd.IR.LLVM
 {
@@ -281,9 +283,38 @@ namespace Parse.MiddleEnd.IR.LLVM
 
         // sample
         // br label <dest>
-        internal static Instruction UCBranch(VariableLLVM destLabel)
+        internal static Instruction UCBranch(VariableLLVM destLabel) => new Instruction(string.Format("br label {0}", destLabel.Name));
+
+        internal static Instruction Call(IRFuncData irFuncData, IReadOnlyList<IValue> passedParams, LLVMSSATable ssaTable)
         {
-            return new Instruction(string.Format("br label {0}", destLabel.Name));
+            string returnCommand = string.Empty;
+            if (irFuncData.ReturnType != ReturnType.Void)
+            {
+                var resultVar = ssaTable.NewLink(irFuncData);
+                returnCommand = resultVar.Name;
+            }
+            
+            string command = string.Format("call {0} @{1}", LLVMConverter.ToInstructionName(irFuncData.ReturnType), irFuncData.Name);
+
+            string argData = "(";
+            for (int i = 0; i < passedParams.Count; i++)
+            {
+                var passedParam = passedParams[i];
+
+                argData += LLVMConverter.ToInstructionName(passedParam.TypeName) + " ";
+
+                if (passedParam is IConstant)
+                    argData += (passedParam as IConstant).Value;
+                else if (passedParam is VariableLLVM)
+                    argData += (passedParam as VariableLLVM).Name;
+                else throw new FormatException();
+
+                if (i < passedParams.Count - 1) argData += ", ";
+            }
+            argData += ")";
+
+            return (returnCommand.Length > 0) ? new Instruction(string.Format("{0} = {1}{2}", returnCommand, command, argData))
+                                                                 : new Instruction(string.Format("{0}{1}", command, argData));
         }
 
         internal static Instruction EmptyLine(string comment="") => new Instruction(string.Empty, comment);

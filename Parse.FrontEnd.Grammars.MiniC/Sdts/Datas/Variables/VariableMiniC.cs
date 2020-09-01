@@ -26,7 +26,7 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts.Datas.Variables
 
         public VariableMiniC(MiniCTypeInfo typeDatas, TokenData nameToken,
                                         TokenData levelToken, TokenData dimensionToken,
-                                        int blockLevel, int offset, VarProperty varProperty, ExprNode value) : base(null)
+                                        int blockLevel, int offset, VarProperty varProperty, IValue value) : base(value)
         {
             ConstToken = typeDatas.ConstToken;
             DataTypeToken = typeDatas.DataTypeToken;

@@ -57,7 +57,9 @@ namespace ApplicationLayer.Models.SolutionPackage
         /********************************************************************************************
          * interface property section
          ********************************************************************************************/
-        public IManagableElements ManagerTree
+        public IManagableElements ManagerTree => ProjectTree;
+
+        public ProjectTreeNodeModel ProjectTree
         {
             get
             {

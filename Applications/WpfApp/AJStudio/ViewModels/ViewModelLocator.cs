@@ -52,6 +52,7 @@ namespace ApplicationLayer.WpfApp.ViewModels
             /// Related to ToolWindow
             SimpleIoc.Default.Register<SolutionExplorerViewModel>();
             SimpleIoc.Default.Register<AlarmListViewModel>();
+            SimpleIoc.Default.Register<OutputViewModel>();
             SimpleIoc.Default.Register<TreeSymbolDetailViewModel>();
             SimpleIoc.Default.Register<TestToolWindowViewModel>();
         }
@@ -62,6 +63,7 @@ namespace ApplicationLayer.WpfApp.ViewModels
 
         public SolutionExplorerViewModel SolutionExplorerWindow { get => ServiceLocator.Current.GetInstance<SolutionExplorerViewModel>(); }
         public AlarmListViewModel AlarmListWindow { get => ServiceLocator.Current.GetInstance<AlarmListViewModel>(); }
+        public OutputViewModel OutputWindow { get => ServiceLocator.Current.GetInstance<OutputViewModel>(); }
         public TreeSymbolDetailViewModel TreeSymbolDetailView { get => ServiceLocator.Current.GetInstance<TreeSymbolDetailViewModel>(); }
         public TestToolWindowViewModel TestToolWindow { get => ServiceLocator.Current.GetInstance<TestToolWindowViewModel>(); }
 

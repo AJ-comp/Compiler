@@ -56,6 +56,8 @@ namespace ApplicationLayer.Models.SolutionPackage
             }
         }
 
+        [XmlIgnore] public string BinFolderPath => System.IO.Path.Combine(Path, "bin");
+
         [XmlIgnore] public int LoadedProjectCount => Children.Count;
 
         [XmlElement("Project")] public Collection<PathInfo> ProjectPaths { get; private set; } = new Collection<PathInfo>();

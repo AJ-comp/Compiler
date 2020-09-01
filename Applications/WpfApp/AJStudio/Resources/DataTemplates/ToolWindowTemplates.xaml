@@ -4,7 +4,8 @@
                     xmlns:converters="clr-namespace:ApplicationLayer.WpfApp.Converters"
                     xmlns:toolWindowVMs="clr-namespace:ApplicationLayer.ViewModels.ToolWindowViewModels;assembly=ApplicationLayer.ViewModels"
                     xmlns:toolWindows="clr-namespace:ApplicationLayer.Views.WindowViews;assembly=ApplicationLayer.Views"
-                    xmlns:windows="clr-namespace:ApplicationLayer.WpfApp.Views.WindowViews">
+                    xmlns:windows="clr-namespace:ApplicationLayer.WpfApp.Views.WindowViews"
+                    >
 
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="DocumentTemplates.xaml"/>
@@ -21,6 +22,10 @@
 
     <DataTemplate DataType="{x:Type toolWindowVMs:SolutionExplorerViewModel}">
         <windows:SolutionExplorer/>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type toolWindowVMs:OutputViewModel}">
+        <toolWindows:OutputWindow/>
     </DataTemplate>
 
     <DataTemplate DataType="{x:Type toolWindowVMs:TreeSymbolDetailViewModel}">

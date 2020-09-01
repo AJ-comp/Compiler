@@ -17,8 +17,6 @@ using ApplicationLayer.WpfApp.Views.DialogViews;
 using GalaSoft.MvvmLight.Messaging;
 using Parse.FrontEnd.Grammars.MiniC.Sdts.AstNodes;
 using Parse.FrontEnd.IRGenerator;
-using Parse.MiddleEnd.IR;
-using Parse.MiddleEnd.IR.LLVM.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -210,8 +208,8 @@ namespace ApplicationLayer.WpfApp.Commands
             var manager = TreeNodeHelper.GetNearestManager(node);
             if (manager == null) return;
 
-            if (manager.IsChanged) Messenger.Default.Send<AddChangedFileMessage>(new AddChangedFileMessage(manager));
-            else Messenger.Default.Send<RemoveChangedFileMessage>(new RemoveChangedFileMessage(manager));
+            if (manager.IsChanged) Messenger.Default.Send(new AddChangedFileMessage(manager));
+            else Messenger.Default.Send(new RemoveChangedFileMessage(manager));
 
             node.NotifyChildrenChanged();
         }
@@ -393,8 +391,39 @@ namespace ApplicationLayer.WpfApp.Commands
 
 
 
+        public static readonly RelayUICommand BuildSolutionCommand = new RelayUICommand(CommonResource.ParsingHistory,
+            () =>
+            {
+                        //                if ((docViewModel is EditorTypeViewModel) == false) return;
+                var mainViewModel = RootWindow.DataContext as MainViewModel;
+                var selDoc = mainViewModel.SolutionExplorer.SelectedDocument;
 
+                // create bin folder.
+                var solution = mainViewModel.SolutionExplorer.Solution;
+                Directory.CreateDirectory(solution.BinFolderPath);
 
+                foreach (var document in mainViewModel.SolutionExplorer.Documents)
+                {
+                    if ((document is EditorTypeViewModel) == false) continue;
+
+                    EditorTypeViewModel editorDocument = document as EditorTypeViewModel;
+                    editorDocument.SyncWithFile();
+
+                    if (editorDocument.Ast?.ErrNodes.Count == 0)
+                    {
+                        var test = IRExpressionGenerator.GenerateLLVMExpression(editorDocument.Ast as MiniCNode);
+                        var instructionList = test.Build();
+
+                        string textCode = string.Empty;
+                        foreach (var instruction in instructionList) textCode += instruction.FullData + Environment.NewLine;
+
+                        File.WriteAllText(Path.Combine(solution.BinFolderPath, editorDocument.FileNameWithoutExtension + ".bc"), textCode);
+                    }
+                }
+            }, () =>
+            {
+                return true;
+            });
 
         /// <summary>
         /// This command shows parsing history for selected document.
@@ -445,6 +474,7 @@ namespace ApplicationLayer.WpfApp.Commands
                 var selDoc = mainViewModel.SolutionExplorer.SelectedDocument;
                 if ((selDoc is EditorTypeViewModel) == false) return;
 
+                var solution = mainViewModel.SolutionExplorer.Solution;
                 var editorViewModel = mainViewModel.SolutionExplorer.SelectedDocument as EditorTypeViewModel;
                 var modelsToDisplay = UcodeDisplayConverter.Convert(editorViewModel.InterLanguage, editorViewModel.Grammar);
 //                var textDoc = new UCodeViewModel(modelsToDisplay, selDoc.Title + " " + CommonResource.InterLanguage);
@@ -457,9 +487,7 @@ namespace ApplicationLayer.WpfApp.Commands
                     var instructionList = test.Build();
 
                     var textDoc = new LLVMViewModel("LLVM IR");
-                    string textCode = string.Empty;
-                    foreach (var instruction in instructionList) textCode += instruction.FullData + Environment.NewLine;
-                    textDoc.TextContent = textCode;
+                    textDoc.TextContent = File.ReadAllText(Path.Combine(solution.BinFolderPath, editorViewModel.FileNameWithoutExtension + ".bc"));
 
                     mainViewModel.SolutionExplorer.Documents.Add(textDoc);
                     mainViewModel.SolutionExplorer.SelectedDocument = textDoc;

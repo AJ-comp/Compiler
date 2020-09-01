@@ -39,7 +39,7 @@
                                                 IsLineNumberingVisible="True"  LineNumberForeColor="DarkGreen"
                                                 LineCommentForeground="ForestGreen"
                                                 HighlightMap="{Binding FontsAndColorsVM.HighlightMap}"
-                                                Text="{Binding Data}"
+                                                Text="{Binding CurrentData, Mode=TwoWay}"
                                                 ParserSnippet="{Binding ParserSnippet}"
                                                 CloseCharacters="{Binding CloseCharacters}">
 

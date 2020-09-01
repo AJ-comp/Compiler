@@ -25,7 +25,7 @@ namespace Parse.MiddleEnd.IR.LLVM.Expressions.ExprExpressions
         // a++
         // <first> = load i32, i32* <UseVar>, align 4 ; <-- use this.
         // <second> = add nsw i32 <first>, 1
-        // store i32 <second>, i32* <first>, align 4
+        // store i32 <second>, i32* <UseVar>, align 4
         // <Result> = <first> or <second>
         public override IEnumerable<Instruction> Build()
         {
@@ -40,7 +40,10 @@ namespace Parse.MiddleEnd.IR.LLVM.Expressions.ExprExpressions
             else
                 instructionList.Add(Instruction.BinOp(firstVar, new IntConstant(1), _ssaTable, IROperation.Sub));
 
-            instructionList.Add(Instruction.Store(firstVar, instructionList.Last().NewSSAVar));
+            Result = (ProcessInfo == Info.PreInc || ProcessInfo == Info.PreDec)
+                      ? instructionList.Last().NewSSAVar : firstVar;
+
+            instructionList.Add(Instruction.Store(instructionList.Last().NewSSAVar, ssVar));
 
             return instructionList;
         }

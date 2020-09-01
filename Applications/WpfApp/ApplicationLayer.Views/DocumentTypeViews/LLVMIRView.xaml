@@ -6,6 +6,8 @@
              xmlns:local="clr-namespace:ApplicationLayer.Views.DocumentTypeViews"
              mc:Ignorable="d" >
     <Grid>
-        <TextBlock Text="{Binding TextContent}"/>
+        <ScrollViewer>
+            <TextBlock Text="{Binding TextContent}" />
+        </ScrollViewer>
     </Grid>
 </UserControl>

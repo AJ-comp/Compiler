@@ -12,7 +12,7 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts.Datas
         }
 
         public bool Const => ConstToken != null;
-        public MiniCDataType DataType => MiniCTypeConverter.ToMiniCDataType(DataTypeToken.Input);
+        public MiniCDataType DataType => MiniCTypeConverter.ToMiniCDataType(DataTypeToken?.Input);
 
         public TokenData ConstToken { get; private set; }
         public TokenData DataTypeToken { get; private set; }

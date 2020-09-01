@@ -11,10 +11,14 @@ namespace Parse.FrontEnd.Grammars.MiniC
         public Terminal While { get; } = new Terminal(TokenType.Keyword.Repeateword, "while");
         public Terminal Return { get; } = new Terminal(TokenType.Keyword.Controlword, "return");
         public Terminal Const { get; } = new Terminal(TokenType.Keyword.DefinedDataType, "const");
+        public static Terminal Char { get; } = new Terminal(TokenType.Keyword.DefinedDataType, "char");
+        public static Terminal Short { get; } = new Terminal(TokenType.Keyword.DefinedDataType, "short");
         public static Terminal Int { get; } = new Terminal(TokenType.Keyword.DefinedDataType, "int");
+        public static Terminal Double { get; } = new Terminal(TokenType.Keyword.DefinedDataType, "double");
         public static Terminal Void { get; } = new Terminal(TokenType.Keyword.DefinedDataType, "void");
         public Terminal Ident { get; } = new Terminal(TokenType.Identifier, "[_a-zA-Z][_a-zA-Z0-9]*", Resource.Ident, true, true);
         public Terminal Number { get; } = new Terminal(TokenType.Digit.Digit10, "[0-9]+", Resource.Number, true, true);
+//        public Terminal RealNumber { get; } = new Terminal(TokenType.Digit.Digit10, "[0-9]+.[0-9]*", "real number", true, true);
         public Terminal LineComment { get; } = new Terminal(TokenType.SpecialToken.Comment, "//.*$", false, true);
 
         public Terminal OpenParenthesis { get; } = new Terminal(TokenType.Operator.Parenthesis, "(", false);
@@ -115,11 +119,15 @@ namespace Parse.FrontEnd.Grammars.MiniC
             this.functionDef.AddItem(this.functionHeader + this.compoundSt, sdts.FuncDef);
             this.functionHeader.AddItem(this.dclSpec + this.functionName + this.formalParam, sdts.FuncHead);
             this.dclSpec.AddItem(this.dclSpecifiers, sdts.DclSpec);
-            this.dclSpecifiers.AddItem(this.dclSpecifier | this.dclSpecifiers + this.dclSpecifier);
-            this.dclSpecifier.AddItem(this.typeQualifier | this.typeSpecifier);
+            this.dclSpecifiers.AddItem(this.typeQualifier.Optional() + this.typeSpecifier);
             this.typeQualifier.AddItem(this.Const, sdts.ConstNode);
+
+            this.typeSpecifier.AddItem(Char, sdts.CharNode);
+            this.typeSpecifier.AddItem(Short, sdts.ShortNode);
             this.typeSpecifier.AddItem(Int, sdts.IntNode);
+            this.typeSpecifier.AddItem(Double, sdts.DoubleNode);
             this.typeSpecifier.AddItem(Void, sdts.VoidNode);
+
             this.functionName.AddItem(this.Ident);
             this.formalParam.AddItem(this.OpenParenthesis + this.optFormalParam + this.CloseParenthesis, sdts.FormalPara);
             this.optFormalParam.AddItem(this.formalParamList | new Epsilon());

@@ -19,6 +19,9 @@ namespace Parse.FrontEnd.IRGenerator
             var ssaTable = param as LLVMSSATable;
 
             var irExpression = cNode.Condition.ExecuteToIRExpression(ssaTable);
+
+            // if condition statement is not logical statement, it has to convert to logical statement.
+            // (ex : (a + b)  convert to  (a + b) != 0)
             LLVMLogicalOpExpression logicalOp = null;
             if (irExpression is LLVMLogicalOpExpression)
             {
@@ -31,9 +34,20 @@ namespace Parse.FrontEnd.IRGenerator
                                                                                     IRCondition.NE, 
                                                                                     ssaTable);
             }
-            return new LLVMIFExpression(logicalOp,
-                                                        cNode.TrueStatement.ExecuteToIRExpression(ssaTable) as LLVMStmtExpression,
-                                                        ssaTable);
+
+            // process by case 
+            var trueStatement = cNode.TrueStatement.ExecuteToIRExpression(ssaTable) as LLVMStmtExpression;
+            if (cNode is IfElseStatementNode)
+            {
+                var ifElseNode = cNode as IfElseStatementNode;
+
+                var falseStatement = ifElseNode.FalseStatement.ExecuteToIRExpression(ssaTable) as LLVMStmtExpression;
+                return new LLVMIFExpression(logicalOp, trueStatement, falseStatement, ssaTable);
+            }
+            else if (cNode is IfStatementNode) return new LLVMIFExpression(logicalOp, trueStatement, null, ssaTable);
+            else if (cNode is WhileStatementNode) return new LLVMWhileExpression(logicalOp, trueStatement, ssaTable);
+
+            return null;
         }
 
         private static IRExpression CompoundStNodeToIRExpression(SdtsNode node, object param)
@@ -67,17 +81,6 @@ namespace Parse.FrontEnd.IRGenerator
             }
 
             return blockExpression;
-        }
-
-        private static IRExpression IfElseStatementToIRExpression(SdtsNode node, object param)
-        {
-            var cNode = node as IfElseStatementNode;
-            var ssaTable = param as LLVMSSATable;
-
-            var result = CommonCondStatementToIRExpression(node, ssaTable) as LLVMBlockExpression;
-            result.AddItem(cNode.FalseStatement.ExecuteToIRExpression(ssaTable) as LLVMExpression);
-
-            return result;
         }
 
         private static IRExpression ReturnStatementToIRExpression(SdtsNode node, object param)

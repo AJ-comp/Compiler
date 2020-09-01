@@ -91,6 +91,7 @@ namespace Parse.WpfControls.SyntaxEditor
         public event EventHandler<ParsingCompletedEventArgs> ParsingCompleted;
 
 
+
         public string FontFamilyTest
         {
             get { return (string)GetValue(FontFamilyTestProperty); }
@@ -466,6 +467,7 @@ namespace Parse.WpfControls.SyntaxEditor
 
         private void TextArea_TextChanged(object sender, TextChangedEventArgs e)
         {
+            Text = TextArea.Text;
             var tokens = ParserSnippet.ToTokenDataList(this.TextArea.Tokens);
 
             if (this.parsingResult.Success)  // if prev parsing successed.

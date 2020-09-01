@@ -5,7 +5,8 @@
                     xmlns:lex="http://wpflocalizeextension.codeplex.com" 
                     xmlns:logicConverters="clr-namespace:ApplicationLayer.WpfApp.Converters.LogicConverters"
                     xmlns:commands="clr-namespace:ApplicationLayer.WpfApp.Commands"
-                    xmlns:main="clr-namespace:ApplicationLayer.WpfApp">
+                    xmlns:main="clr-namespace:ApplicationLayer.WpfApp"
+                    >
 
     <Menu x:Key="MainWindowMenus" lex:ResxLocalizationProvider.DefaultAssembly="ApplicationLayer.Define"
                 VerticalAlignment="Center" DockPanel.Dock="Left" HorizontalAlignment="Left" Margin="8,0,0,0">
@@ -62,6 +63,8 @@
                                     CommandParameter="{Binding AlarmListWindow, Source={StaticResource Locator}}"/>
                 <MenuItem Header="{lex:Loc Key=TreeSymbolDetailView}" Command="{Binding ShowToolWindowCommand}"
                                     CommandParameter="{Binding TreeSymbolDetailView, Source={StaticResource Locator}}"/>
+                <MenuItem Header="{lex:Loc Key=Output}" Command="{Binding ShowToolWindowCommand}"
+                                    CommandParameter="{Binding OutputView, Source={StaticResource Locator}}"/>
                 <MenuItem Header="test" Command="{Binding ShowToolWindowCommand}"
                                     CommandParameter="{Binding TestToolWindow, Source={StaticResource Locator}}"/>
             </MenuItem>
@@ -69,7 +72,8 @@
 
         <!-- Build -->
         <MenuItem Header="{lex:Loc WindowMenuResources:Build}" InputGestureText="Alt+B">
-            <MenuItem Header="{lex:Loc WindowMenuResources:BuildSolution}" InputGestureText="F6" Command="{Binding BuildSolutionCommand}"/>
+            <MenuItem Header="{lex:Loc WindowMenuResources:BuildSolution}" InputGestureText="F6" 
+                                Command="{x:Static commands:MenuActionCommands.BuildSolutionCommand}"/>
             <MenuItem Header="{lex:Loc WindowMenuResources:ReBuildSolution}" Command="{Binding ReBuildSolutionCommand}"/>
             <MenuItem Header="{lex:Loc WindowMenuResources:CleanSolution}" Command="{Binding CleanSolutionCommand}"/>
             <MenuItem Header="{lex:Loc WindowMenuResources:DownloadAndDebug}" Command="{Binding DownloadAndDebugCommand}"/>

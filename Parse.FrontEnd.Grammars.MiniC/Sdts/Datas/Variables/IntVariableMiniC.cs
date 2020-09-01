@@ -1,8 +1,11 @@
 ﻿using Parse.FrontEnd.Grammars.MiniC.Sdts.AstNodes.ExprNodes;
+using Parse.FrontEnd.Grammars.MiniC.Sdts.AstNodes.ExprNodes.LiteralNodes;
 using Parse.MiddleEnd.IR.Datas;
 using Parse.Types;
 using Parse.Types.ConstantTypes;
 using Parse.Types.Operations;
+using Parse.Types.VarTypes;
+using System;
 
 namespace Parse.FrontEnd.Grammars.MiniC.Sdts.Datas.Variables
 {
@@ -21,9 +24,37 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts.Datas.Variables
                                             VarProperty varProperty, 
                                             ExprNode value)
                                         : base(typeDatas, nameToken, levelToken, dimensionToken,
-                                                    blockLevel, offset, varProperty, value)
+                                                    blockLevel, offset, varProperty, Convert(value))
         {
 
+        }
+
+
+        public override IConstant Assign(IValue operand)
+        {
+            if (!Operation.CanOperation(this, operand)) throw new FormatException();
+            if (!(operand is IIntegerKind)) throw new NotSupportedException();
+
+            if (operand is IVariable)
+            {
+                var valueConstant = (operand as IVariable).ValueConstant;
+
+                // operand may be not int type so it has to make int type explicity.
+                ValueConstant = new IntConstant((int)ValueConstant.Value,
+                                                                    ValueConstant.ValueState,
+                                                                    valueConstant.PointerLevel);
+            }
+            else
+            {
+                var valueConstant = (operand as IConstant);
+
+                // operand may be not int type so it has to make int type explicity.
+                ValueConstant = new IntConstant((int)ValueConstant.Value,
+                                                                    ValueConstant.ValueState,
+                                                                    valueConstant.PointerLevel);
+            }
+
+            return ValueConstant;
         }
 
 
@@ -40,5 +71,16 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts.Datas.Variables
         public IConstant BitXor(IValue operand) => Operation.IntegerKindBitXor(this, operand);
         public IConstant LeftShift(int count) => Operation.IntegerKindLeftShift(this, count);
         public IConstant RightShift(int count) => Operation.IntegerKindRightShift(this, count);
+
+
+        private static IValue Convert(ExprNode node)
+        {
+            if (node is UseIdentNode)
+                return (node as UseIdentNode).VarData;
+            else if (node is LiteralNode)
+                return (node as LiteralNode).Result;
+
+            return new IntConstant(0, State.NotInit, 0);
+        }
     }
 }

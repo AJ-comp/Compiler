@@ -51,7 +51,10 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
         public MeaningUnit FuncHead { get; } = new MeaningUnit("FuncHead");
         public MeaningUnit DclSpec { get; } = new MeaningUnit("DclSpec");
         public MeaningUnit ConstNode { get; } = new MeaningUnit("ConstNode");
+        public MeaningUnit CharNode { get; } = new MeaningUnit("CharNode");
+        public MeaningUnit ShortNode { get; } = new MeaningUnit("ShortNode");
         public MeaningUnit IntNode { get; } = new MeaningUnit("IntNode");
+        public MeaningUnit DoubleNode { get; } = new MeaningUnit("DoubleNode");
         public MeaningUnit VoidNode { get; } = new MeaningUnit("VoidNode");
         public MeaningUnit FormalPara { get; } = new MeaningUnit("FormalPara");
         public MeaningUnit ParamDcl { get; } = new MeaningUnit("ParamDcl");
@@ -156,6 +159,7 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
                 else if (cRoot.SignPost.MeaningUnit == LessEqual) result = new LessEqualNode(root);
 
                 else if (cRoot.SignPost.MeaningUnit == DclSpec) result = new VariableTypeNode(root);
+                else if (cRoot.SignPost.MeaningUnit == ConstNode) result = new ConstNode(root);
                 else if (cRoot.SignPost.MeaningUnit == VoidNode) result = new VoidNode(root);
                 else if (cRoot.SignPost.MeaningUnit == IntNode) result = new IntNode(root);
                 else if (cRoot.SignPost.MeaningUnit == DclList) result = new VariableDclsListNode(root);

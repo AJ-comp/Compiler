@@ -1,6 +1,5 @@
 ﻿using Parse.MiddleEnd.IR.LLVM.Expressions.ExprExpressions.LogicalExpressions;
 using Parse.MiddleEnd.IR.LLVM.Models.VariableModels;
-using System;
 using System.Collections.Generic;
 
 namespace Parse.MiddleEnd.IR.LLVM.Expressions.StmtExpressions
@@ -8,47 +7,74 @@ namespace Parse.MiddleEnd.IR.LLVM.Expressions.StmtExpressions
     public class LLVMIFExpression : LLVMStmtExpression
     {
         public LLVMIFExpression(LLVMLogicalOpExpression condExpression, 
-                                            LLVMStmtExpression stmtExpression, 
+                                            LLVMStmtExpression trueStmtExpression, 
+                                            LLVMStmtExpression falseStmtExpression,
                                             LLVMSSATable ssaTable) : base(ssaTable)
         {
             _condExpression = condExpression;
-            _stmtExpression = stmtExpression;
+            _trueStmtExpression = trueStmtExpression;
+            _falseStmtExpression = falseStmtExpression;
         }
 
         public override IEnumerable<Instruction> Build()
         {
+            CreateInstructionsAndLabels();
+            return ArrangeInstructions();
+        }
+
+        private void CreateInstructionsAndLabels()
+        {
+            _condInstructions = _condExpression.Build();
+            _trueLabel = _ssaTable.RegisterLabel();            // create a true label.
+
+            _trueInstructions = _trueStmtExpression.Build();
+            _falseLabel = _ssaTable.RegisterLabel();            // create a false label.
+
+            if (_falseStmtExpression != null)
+            {
+                _falseInstructions = _falseStmtExpression.Build();
+                _nextLabel = _ssaTable.RegisterLabel();            // create a next label.
+            }
+            else _nextLabel = _falseLabel;
+        }
+
+        private IEnumerable<Instruction> ArrangeInstructions()
+        {
             List<Instruction> result = new List<Instruction>();
 
-            // process 1
-            result.AddRange(_condExpression.Build());
-
-            #region process 3
-            List<Instruction> reservedInsts = new List<Instruction>();
-
-            // create a true label.
-            var trueLabel = _ssaTable.RegisterLabel();
-            reservedInsts.Add(Instruction.EmptyLine());
-            reservedInsts.Add(Instruction.EmptyLine(trueLabel.Name));
-            reservedInsts.AddRange(_stmtExpression.Build());
-
-            // create a next label
-            var nextLabel = _ssaTable.RegisterLabel();
-            reservedInsts.Add(Instruction.EmptyLine());
-            reservedInsts.Add(Instruction.EmptyLine(nextLabel.Name));
-            reservedInsts.Add(Instruction.UCBranch(nextLabel));
-            #endregion
-
-            // process 2
+            result.AddRange(_condInstructions);
             result.Add(Instruction.CBranch(_condExpression.Result as BitVariableLLVM,
-                                                            trueLabel,
-                                                            nextLabel));
+                                                            _trueLabel,
+                                                            _falseLabel));
 
-            result.AddRange(reservedInsts);
+            result.Add(Instruction.EmptyLine());
+            result.Add(Instruction.EmptyLine(_trueLabel.Name));
+            result.AddRange(_trueInstructions);
+            result.Add(Instruction.UCBranch(_nextLabel));
+
+            result.Add(Instruction.EmptyLine());
+            result.Add(Instruction.EmptyLine(_falseLabel.Name));
+            if (_falseInstructions != null)
+            {
+                result.AddRange(_falseInstructions);
+                result.Add(Instruction.UCBranch(_nextLabel));
+                result.Add(Instruction.EmptyLine());
+                result.Add(Instruction.EmptyLine(_nextLabel.Name));
+            }
 
             return result;
         }
 
         private LLVMLogicalOpExpression _condExpression;
-        private LLVMStmtExpression _stmtExpression;
+        private LLVMStmtExpression _trueStmtExpression;
+        private LLVMStmtExpression _falseStmtExpression;
+
+        private BitVariableLLVM _trueLabel;
+        private BitVariableLLVM _falseLabel;
+        private BitVariableLLVM _nextLabel;
+
+        private IEnumerable<Instruction> _condInstructions;
+        private IEnumerable<Instruction> _trueInstructions;
+        private IEnumerable<Instruction> _falseInstructions;
     }
 }

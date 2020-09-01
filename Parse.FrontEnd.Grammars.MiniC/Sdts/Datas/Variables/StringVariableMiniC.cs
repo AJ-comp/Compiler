@@ -16,7 +16,7 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts.Datas.Variables
                                                 int blockLevel, 
                                                 int offset, 
                                                 VarProperty varProperty, 
-                                                ExprNode value) : base(typeDatas, nameToken, levelToken, dimensionToken, blockLevel, offset, varProperty, value)
+                                                ExprNode value) : base(typeDatas, nameToken, levelToken, dimensionToken, blockLevel, offset, varProperty, Convert(value))
         {
         }
 
@@ -26,5 +26,11 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts.Datas.Variables
 
         public IConstant Equal(IValue operand) => Operation.StringEqual(this, operand);
         public IConstant NotEqual(IValue operand) => Operation.StringNotEqual(this, operand);
+
+
+        public static IValue Convert(ExprNode node)
+        {
+            return null;
+        }
     }
 }

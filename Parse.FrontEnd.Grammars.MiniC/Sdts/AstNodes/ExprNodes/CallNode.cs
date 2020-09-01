@@ -11,6 +11,8 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts.AstNodes.ExprNodes
 {
     public class CallNode : ExprNode
     {
+        public MiniCFuncData FuncData { get; private set; }
+
         public TokenData MethodNameToken { get; private set; }
         public IReadOnlyList<ExprNode> Params => _params;
         public IReadOnlyList<IValue> ParamsTypeList
@@ -145,6 +147,8 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts.AstNodes.ExprNodes
                 AddMCL0016Exception(result.Item1, result.Item2);
                 return;
             }
+            else
+                FuncData = funcList2.First();
         }
 
 

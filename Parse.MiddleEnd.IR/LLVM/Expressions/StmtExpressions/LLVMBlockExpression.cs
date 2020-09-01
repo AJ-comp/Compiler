@@ -1,8 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using Parse.MiddleEnd.IR.LLVM.Expressions.StmtExpressions;
+using System.Collections.Generic;
 
 namespace Parse.MiddleEnd.IR.LLVM.Expressions
 {
-    public class LLVMBlockExpression : LLVMDependencyExpression
+    public class LLVMBlockExpression : LLVMStmtExpression
     {
         public IReadOnlyList<LLVMExpression> Expressions => _expressions;
 

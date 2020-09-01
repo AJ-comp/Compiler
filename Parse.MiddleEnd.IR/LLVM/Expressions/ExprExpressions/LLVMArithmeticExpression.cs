@@ -63,6 +63,18 @@ namespace Parse.MiddleEnd.IR.LLVM.Expressions.ExprExpressions
                                                                          operation));
                 }
             }
+            else // Constant
+            {
+                if (Right.Result is VariableLLVM)
+                {
+                    instructionList.Add(Instruction.BinOp(Right.Result as VariableLLVM, 
+                                                                         Left.Result as IConstant,
+                                                                         _ssaTable, 
+                                                                         operation));
+                }
+
+                // Constant binop Constant expression never come to this. 
+            }
 
             return instructionList;
         }

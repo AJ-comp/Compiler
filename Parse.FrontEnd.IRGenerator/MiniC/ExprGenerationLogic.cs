@@ -7,11 +7,24 @@ using Parse.MiddleEnd.IR;
 using Parse.MiddleEnd.IR.LLVM;
 using Parse.MiddleEnd.IR.LLVM.Expressions.AssignExpressions;
 using Parse.MiddleEnd.IR.LLVM.Expressions.ExprExpressions;
+using System.Collections.Generic;
 
 namespace Parse.FrontEnd.IRGenerator
 {
     public partial class IRExpressionGenerator
     {
+        private static IRExpression CallNodeToIRExpression(SdtsNode node, object param)
+        {
+            var cNode = node as CallNode;
+            var ssaTable = param as LLVMSSATable;
+            List<LLVMExprExpression> paramList = new List<LLVMExprExpression>();
+
+            foreach (var p in cNode.Params)
+                paramList.Add(p.ExecuteToIRExpression(ssaTable) as LLVMExprExpression);
+
+            return new LLVMCallExpression(cNode.FuncData.ToIRFuncData(), paramList, ssaTable);
+        }
+
         private static IRExpression AssignNodeToIRExpression(SdtsNode node, object param)
         {
             var cNode = node as AssignNode;

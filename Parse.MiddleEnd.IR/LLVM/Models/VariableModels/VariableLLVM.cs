@@ -44,7 +44,7 @@ namespace Parse.MiddleEnd.IR.LLVM.Models.VariableModels
         {
             VariableLLVM result = null;
 
-            if(var.ValueConstant != null)
+            if (var.ValueConstant != null)
             {
                 IConstant castingConstant = var.ValueConstant;
                 if (castingConstant.TypeName != toType)
@@ -56,14 +56,7 @@ namespace Parse.MiddleEnd.IR.LLVM.Models.VariableModels
                 else if (castingConstant.TypeName == DType.Int) result = new IntVariableLLVM(var.Name, castingConstant as IntConstant);
                 else if (castingConstant.TypeName == DType.Double) result = new DoubleVariableLLVM(var.Name, castingConstant as DoubleConstant);
             }
-            else
-            {
-                if (toType == DType.Bit) result = new BitVariableLLVM(var.Name, null);
-                else if (toType == DType.Byte) result = new ByteVariableLLVM(var.Name, null);
-                else if (toType == DType.Short) result = new ShortVariableLLVM(var.Name, null);
-                else if (toType == DType.Int) result = new IntVariableLLVM(var.Name, null);
-                else if (toType == DType.Double) result = new DoubleVariableLLVM(var.Name, null);
-            }
+            else result = From(var.Name, toType);
 
             result.Offset = 0;
 
@@ -75,6 +68,31 @@ namespace Parse.MiddleEnd.IR.LLVM.Models.VariableModels
         public static VariableLLVM From(int offset, IRVar var, DType toType)
         {
             VariableLLVM result = From(var, toType);
+            result.IsGlobal = false;
+            result.Offset = offset;
+
+            return result;
+        }
+
+
+        public static VariableLLVM From(string name, DType toType)
+        {
+            VariableLLVM result = null;
+
+            if (toType == DType.Bit) result = new BitVariableLLVM(name, null);
+            else if (toType == DType.Byte) result = new ByteVariableLLVM(name, null);
+            else if (toType == DType.Short) result = new ShortVariableLLVM(name, null);
+            else if (toType == DType.Int) result = new IntVariableLLVM(name, null);
+            else if (toType == DType.Double) result = new DoubleVariableLLVM(name, null);
+
+            result.Offset = 0;
+
+            return result;
+        }
+
+        public static VariableLLVM From(int offset, string name, DType toType)
+        {
+            VariableLLVM result = From(name, toType);
             result.IsGlobal = false;
             result.Offset = offset;
 

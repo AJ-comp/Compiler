@@ -28,11 +28,8 @@ namespace ApplicationLayer.Models.SolutionPackage.MiniCPackage
          * property section [XML ELEMENT]
          ********************************************************************************************/
         [XmlElement("Debug Property")] public ProjectProperty DebugConfigure { get; set; } = new ProjectProperty();
-
         [XmlElement("Release Property")] public ProjectProperty ReleaseConfigure { get; set; } = new ProjectProperty();
-
         [XmlElement("FilterAndFiles")] public List<FilterFileTreeNodeModel> FilterFiles { get; set; } = new List<FilterFileTreeNodeModel>();
-
         [XmlArrayItem("IncludePath")] public StringCollection ReferencePaths
         {
             get
@@ -158,7 +155,8 @@ namespace ApplicationLayer.Models.SolutionPackage.MiniCPackage
             this.outerDependenies.IsEditable = false;
         }
 
-        public MiniCProjectTreeNodeModel(string path, string projName, Target target) : base(path, projName + string.Format(".{0}proj", LanguageExtensions.MiniCSource))
+        public MiniCProjectTreeNodeModel(string path, string projName, Target target)
+            : base(path, projName + string.Format(".{0}proj", LanguageExtensions.MiniCSource))
         {
             this.DebugConfigure.Target = target?.Name;
             this.ReleaseConfigure.Target = target?.Name;

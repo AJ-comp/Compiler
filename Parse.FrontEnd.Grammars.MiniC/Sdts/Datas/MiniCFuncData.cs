@@ -1,4 +1,5 @@
 ﻿using Parse.FrontEnd.Grammars.MiniC.Sdts.Datas.Variables;
+using Parse.MiddleEnd.IR.Datas;
 using System.Collections.Generic;
 using static Parse.FrontEnd.Grammars.MiniC.Sdts.Datas.Variables.VariableMiniC;
 
@@ -37,6 +38,21 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts.Datas
             }
 
             return result;
+        }
+
+        public IRFuncData ToIRFuncData()
+        {
+            List<IRVar> paramVars = new List<IRVar>();
+
+            foreach (var var in ParamVars)
+            {
+                if (var.VariableProperty == VarProperty.Param) paramVars.Add(var);
+            }
+
+            return new IRFuncData(paramVars,
+                                                TypeData.Const,
+                                                IRConverter.ToIRReturnType(ReturnType),
+                                                Name);
         }
     }
 }
