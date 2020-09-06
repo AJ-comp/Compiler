@@ -369,9 +369,9 @@ namespace ApplicationLayer.ViewModels.ToolWindowViewModels
 
         private void OnMouseDoubleClick()
         {
-            if (SelectedItem is FileTreeNodeModel)
+            if (SelectedItem is SourceFileTreeNodeModel)
             {
-                var fileNode = (SelectedItem as FileTreeNodeModel);
+                var fileNode = (SelectedItem as SourceFileTreeNodeModel);
                 if (fileNode.IsExistFile == false) return;
 
                 var editor = new EditorTypeViewModel(fileNode);

@@ -26,7 +26,6 @@ namespace ApplicationLayer.Models.SolutionPackage
 		}
 
 		[XmlIgnore] public ReadOnlyObservableCollection<TreeNodeModel> Children => new ReadOnlyObservableCollection<TreeNodeModel>(_children);
-
 		[XmlIgnore] public TreeNodeModel Parent { get; internal set; }
 
 		/////////////////////////////////////////////////////////////////////////////////////////////////////

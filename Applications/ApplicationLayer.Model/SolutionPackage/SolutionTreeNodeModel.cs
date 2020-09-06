@@ -46,6 +46,28 @@ namespace ApplicationLayer.Models.SolutionPackage
             }
         }
 
+        public ProjectTreeNodeModel StartingProject
+        {
+            get
+            {
+                ProjectTreeNodeModel result = null;
+
+                foreach (var child in Children)
+                {
+                    if (child is ProjectTreeNodeModel == false) continue;
+
+                    var project = child as ProjectTreeNodeModel;
+                    if (project.StartingProject)
+                    {
+                        result = project;
+                        break;
+                    }
+                }
+
+                return result;
+            }
+        }
+
         [XmlIgnore] public string SolutionName
         {
             get => System.IO.Path.GetFileNameWithoutExtension(FileName);
@@ -57,9 +79,7 @@ namespace ApplicationLayer.Models.SolutionPackage
         }
 
         [XmlIgnore] public string BinFolderPath => System.IO.Path.Combine(Path, "bin");
-
         [XmlIgnore] public int LoadedProjectCount => Children.Count;
-
         [XmlElement("Project")] public Collection<PathInfo> ProjectPaths { get; private set; } = new Collection<PathInfo>();
 
 

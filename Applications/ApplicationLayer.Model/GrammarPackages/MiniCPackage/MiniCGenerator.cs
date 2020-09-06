@@ -52,7 +52,7 @@ namespace ApplicationLayer.Models.GrammarPackages.MiniCPackage
             fileName = FileExtend.CreateFile(path, fileName, defaultContent);
 
             var sourceFilter = new FilterTreeNodeModel(CommonResource.SourceFiles);
-            var sourceFile = new FileTreeNodeModel(string.Empty, fileName);
+            var sourceFile = new SourceFileTreeNodeModel(string.Empty, fileName);
             sourceFilter.AddFile(sourceFile);
             result.AddFilter(sourceFilter);
 

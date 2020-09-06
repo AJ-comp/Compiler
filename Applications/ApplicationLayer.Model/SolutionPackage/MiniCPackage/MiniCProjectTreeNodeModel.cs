@@ -51,7 +51,7 @@ namespace ApplicationLayer.Models.SolutionPackage.MiniCPackage
                 {
                     string path = System.IO.Path.GetDirectoryName(item);
                     string fileName = System.IO.Path.GetFileName(item);
-                    References.AddFile(new FileTreeNodeModel(path, fileName));
+                    References.AddFile(FileTreeNodeModel.CreateFileTreeNodeModel(path, fileName));
                 }
             }
         }
@@ -77,7 +77,7 @@ namespace ApplicationLayer.Models.SolutionPackage.MiniCPackage
                 {
                     string path = System.IO.Path.GetDirectoryName(item);
                     string fileName = System.IO.Path.GetFileName(item);
-                    OuterDependencies.AddFile(new FileTreeNodeModel(path, fileName));
+                    OuterDependencies.AddFile(FileTreeNodeModel.CreateFileTreeNodeModel(path, fileName));
                 }
             }
         }
@@ -141,6 +141,24 @@ namespace ApplicationLayer.Models.SolutionPackage.MiniCPackage
                 if (this.FilterFiles.IsEqual(dataToCompare) == false) return true;
 
                 return false;
+            }
+        }
+
+        public override IEnumerable<FileReferenceInfo> FileReferenceInfos
+        {
+            get
+            {
+                List<FileReferenceInfo> result = new List<FileReferenceInfo>();
+
+                foreach (var file in AllFileNodes)
+                {
+                    if (file is SourceFileTreeNodeModel == false) continue;
+
+                    var cFile = file as SourceFileTreeNodeModel;
+                    result.Add(new FileReferenceInfo(FileHelper.ConvertTargetFileName(cFile.FileName)));
+                }
+
+                return result;
             }
         }
 
@@ -251,6 +269,12 @@ namespace ApplicationLayer.Models.SolutionPackage.MiniCPackage
                 XmlSerializer xs = new XmlSerializer(type);
                 xs.Serialize(wr, this);
             }
+        }
+
+        public override ProjectProperty GetProjectProperty(ProjectProperty.Configure configure)
+        {
+            return (configure == ProjectProperty.Configure.Debug) ? DebugConfigure
+                                                                                            : ReleaseConfigure;
         }
     }
 }

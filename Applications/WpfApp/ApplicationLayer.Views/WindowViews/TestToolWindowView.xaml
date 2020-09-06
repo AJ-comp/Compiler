@@ -1,15 +1,8 @@
 ﻿<UserControl x:Class="ApplicationLayer.Views.WindowViews.TestToolWindowView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:lex="http://wpflocalizeextension.codeplex.com"
-             xmlns:common="clr-namespace:ApplicationLayer.Models.SolutionPackage;assembly=ApplicationLayer.Models"
-             xmlns:mcModels="clr-namespace:ApplicationLayer.Models.SolutionPackage.MiniCPackage;assembly=ApplicationLayer.Models"
-             xmlns:grids="http://schemas.actiprosoftware.com/winfx/xaml/grids"
-             xmlns:localConverter="clr-namespace:ApplicationLayer.Views.Converters"
-             xmlns:local="clr-namespace:ApplicationLayer.Views.WindowViews"
-             xmlns:views="clr-namespace:ApplicationLayer.Views"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" >
     <Grid>
 

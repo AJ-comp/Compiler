@@ -1,6 +1,7 @@
 ﻿using ApplicationLayer.Common;
 using ApplicationLayer.Common.Interfaces;
 using System;
+using System.Collections.Generic;
 using System.IO;
 
 namespace ApplicationLayer.Models.SolutionPackage
@@ -49,6 +50,7 @@ namespace ApplicationLayer.Models.SolutionPackage
         public override string FullOnlyPath => (Parent == null) ? string.Empty : System.IO.Path.Combine(Parent.FullOnlyPath, Path);
         public override string FullPath => System.IO.Path.Combine(this.FullOnlyPath, this.FileName);
         public override bool IsExistFile => File.Exists(FullPath);
+
 
 
 

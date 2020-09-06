@@ -2,12 +2,14 @@
 
 namespace Parse.BackEnd.Target.ARMv7.MSeries
 {
-    public class ARMv7_M : Arm
+    public abstract class ARMv7_M : Arm
     {
         public ARMv7_M()
         {
-            this.Name = "ARMv7_M";
         }
+
+        public override string GCC_IR_MCPU_String() => "arm";
+        public override string LLVM_IR_MCPU_String() => "arm";
     }
 
     public class ArmALFormat

@@ -1,8 +1,12 @@
-﻿namespace ApplicationLayer.ViewModels.ToolWindowViewModels
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace ApplicationLayer.ViewModels.ToolWindowViewModels
 {
-    public class TestToolWindowViewModel : ToolWindowViewModel
+    public class CallStackViewModel : ToolWindowViewModel
     {
-        public TestToolWindowViewModel()
+        public CallStackViewModel()
         {
             this.DefaultDockSide = Models.ToolWindowStatus.ToolItemDockSide.Right;
             this.WindowState = Models.ToolWindowStatus.ToolItemState.Docked;

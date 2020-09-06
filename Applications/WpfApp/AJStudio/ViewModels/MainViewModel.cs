@@ -36,6 +36,7 @@ namespace ApplicationLayer.WpfApp.ViewModels
         private RelayCommand _optionCommand;
         private RelayCommand _changeThemeCommand;
         private Collection<Grammar> supplyGrammars = new Collection<Grammar>();
+        private List<ToolWindowViewModel> _allToolItems = new List<ToolWindowViewModel>();
 
         private bool isDebugStatus;
         public bool IsDebugStatus
@@ -49,9 +50,8 @@ namespace ApplicationLayer.WpfApp.ViewModels
         }
 
         public SolutionExplorerViewModel SolutionExplorer { get; } = ServiceLocator.Current.GetInstance<SolutionExplorerViewModel>();
-
-        private List<ToolWindowViewModel> allToolItems = new List<ToolWindowViewModel>();
-        public ReadOnlyCollection<ToolWindowViewModel> AllToolItems => new ReadOnlyCollection<ToolWindowViewModel>(allToolItems);
+        public OutputViewModel Output { get; } = ServiceLocator.Current.GetInstance<OutputViewModel>();
+        public ReadOnlyCollection<ToolWindowViewModel> AllToolItems => new ReadOnlyCollection<ToolWindowViewModel>(_allToolItems);
 
         public ObservableCollection<ToolWindowViewModel> VisibleToolItems { get; } = new ObservableCollection<ToolWindowViewModel>();
 
@@ -240,7 +240,7 @@ namespace ApplicationLayer.WpfApp.ViewModels
         {
             var output = ServiceLocator.Current.GetInstance<OutputViewModel>();
 
-//            Messenger.Default.Register<OutputViewModel>(output, alarm)
+            Messenger.Default.Register<AddBuildMessage>(output, output.ReceivedAddBuildMessage);
         }
 
         private void InitTreeSymbolDetailView()
@@ -264,9 +264,9 @@ namespace ApplicationLayer.WpfApp.ViewModels
         /// </summary>
         public MainViewModel()
         {
-            this.allToolItems.Add(ServiceLocator.Current.GetInstance<SolutionExplorerViewModel>());
-            this.allToolItems.Add(ServiceLocator.Current.GetInstance<AlarmListViewModel>());
-            this.allToolItems.Add(ServiceLocator.Current.GetInstance<OutputViewModel>());
+            this._allToolItems.Add(ServiceLocator.Current.GetInstance<SolutionExplorerViewModel>());
+            this._allToolItems.Add(ServiceLocator.Current.GetInstance<AlarmListViewModel>());
+            this._allToolItems.Add(ServiceLocator.Current.GetInstance<OutputViewModel>());
 
             this.supplyGrammars.Add(new MiniCGrammar());
             this.supplyGrammars.Add(new LRTest1Grammar());

@@ -4,14 +4,11 @@ using System.Xml.Serialization;
 
 namespace ApplicationLayer.Models.SolutionPackage
 {
-    public abstract class PathTreeNodeModel : TreeNodeModel
+    public abstract class PathTreeNodeModel : TreeNodeModel, IHasableFileNodes
     {
         [XmlIgnore] public string Path { get; set; }
-
         [XmlIgnore] public string FileName { get; set; }
-
-        [XmlIgnore]
-        public string FileNameWithoutExtension => System.IO.Path.GetFileNameWithoutExtension(FileName);
+        [XmlIgnore] public string FileNameWithoutExtension => System.IO.Path.GetFileNameWithoutExtension(FileName);
 
         [XmlIgnore] public bool IsAbsolute
         {
@@ -27,6 +24,8 @@ namespace ApplicationLayer.Models.SolutionPackage
 
         [XmlIgnore] public abstract string FullPath { get; }
         [XmlIgnore] public abstract bool IsExistFile { get; }
+
+        [XmlIgnore] public IEnumerable<FileTreeNodeModel> AllFileNodes => TreeNodeModelLogics.GetAllFileNodes(this);
 
         public PathTreeNodeModel(string path, string name)
         {

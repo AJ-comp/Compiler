@@ -16,6 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Parse.BackEnd\Parse.BackEnd.Target.ARM\Parse.BackEnd.Target.ARM.csproj" />
     <ProjectReference Include="..\..\Parse.BackEnd\Parse.BackEnd.Target.AVR\Parse.BackEnd.Target.AVR.csproj" />
     <ProjectReference Include="..\..\Parse.BackEnd\Parse.BackEnd.Target\Parse.BackEnd.Target.csproj" />
     <ProjectReference Include="..\..\Parse.FrontEnd.Grammars.MiniC\Parse.FrontEnd.Grammars.MiniC.csproj" />

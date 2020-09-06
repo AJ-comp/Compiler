@@ -1,11 +1,12 @@
 ﻿using ApplicationLayer.Common;
 using ApplicationLayer.Common.Interfaces;
+using QuikGraph;
 using System;
 using System.IO;
 
 namespace ApplicationLayer.Models.SolutionPackage
 {
-    public class FileTreeNodeModel : PathTreeNodeModel, IManagedable
+    public abstract class FileTreeNodeModel : PathTreeNodeModel, IManagedable
     {
         /********************************************************************************************
          * property section
@@ -98,5 +99,19 @@ namespace ApplicationLayer.Models.SolutionPackage
          * override method section
          ********************************************************************************************/
         public override void RemoveChild(TreeNodeModel nodeToRemove) { }
+
+
+
+
+        public static FileTreeNodeModel CreateFileTreeNodeModel(string path, string fileName)
+        {
+            var extension = System.IO.Path.GetExtension(fileName);
+
+            if (extension == ".mc" ||
+                extension == ".mh") return new SourceFileTreeNodeModel(path, fileName);
+
+            return new UndefinedTreeNodeModel(path, fileName);
+        }
+
     }
 }

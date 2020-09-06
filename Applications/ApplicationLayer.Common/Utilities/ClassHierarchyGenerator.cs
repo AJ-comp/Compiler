@@ -36,7 +36,7 @@ namespace ApplicationLayer.Common.Utilities
             return parentTypeHier;
         }
 
-        private IReadOnlyList<Assembly> GetAllLoadedAssemblyList()
+        private IEnumerable<Assembly> GetAllLoadedAssemblyList()
         {
             //                var loadedAssemblies = AppDomain.CurrentDomain.GetAssemblies().ToList();
             //                var loadedPaths = loadedAssemblies.Select(a => a.Location).ToArray();

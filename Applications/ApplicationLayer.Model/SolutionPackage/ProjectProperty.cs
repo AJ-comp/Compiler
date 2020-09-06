@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using Parse.BackEnd.Target;
+using System;
+using System.Collections.Generic;
 
 namespace ApplicationLayer.Models.SolutionPackage
 {

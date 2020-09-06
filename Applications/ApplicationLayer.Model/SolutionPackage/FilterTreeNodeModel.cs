@@ -9,7 +9,7 @@ using System.Xml.Serialization;
 
 namespace ApplicationLayer.Models.SolutionPackage
 {
-    public class FilterTreeNodeModel : TreeNodeModel, IManagedable
+    public class FilterTreeNodeModel : TreeNodeModel, IManagedable, IHasableFileNodes
     {
         /********************************************************************************************
          * property section
@@ -117,6 +117,8 @@ namespace ApplicationLayer.Models.SolutionPackage
                 }
             }
         }
+
+        public IEnumerable<FileTreeNodeModel> AllFileNodes => TreeNodeModelLogics.GetAllFileNodes(this);
 
 
 

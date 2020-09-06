@@ -6,6 +6,7 @@ using ApplicationLayer.ViewModels.DialogViewModels.OptionViewModels;
 using ApplicationLayer.ViewModels.Messages;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
+using Parse.BackEnd.Target;
 using Parse.FrontEnd;
 using Parse.FrontEnd.Ast;
 using Parse.FrontEnd.Grammars;
@@ -15,6 +16,7 @@ using Parse.FrontEnd.Parsers.Datas;
 using Parse.FrontEnd.Parsers.Logical;
 using Parse.FrontEnd.ParseTree;
 using Parse.FrontEnd.Support.Drawing;
+using Parse.MiddleEnd.IR.LLVM;
 using Parse.Tokenize;
 using Parse.WpfControls.SyntaxEditor.EventArgs;
 using System;
@@ -33,7 +35,7 @@ namespace ApplicationLayer.ViewModels.DocumentTypeViewModels
          ********************************************************************************************/
         private object _lockObject = new object();
         private int _caretIndex = 0;
-        private FileTreeNodeModel _fileNode;
+        private SourceFileTreeNodeModel _fileNode;
         private ParserSnippet _parserSnippet;
         private RelayCommand _saveCommand;
         private List<HighlightMapItem> _highlightMaps = new List<HighlightMapItem>();
@@ -50,9 +52,6 @@ namespace ApplicationLayer.ViewModels.DocumentTypeViewModels
         public string Data => _fileNode.Data;
         public string FileName => _fileNode.FileName;
         public string FileNameWithoutExtension => _fileNode.FileNameWithoutExtension;
-
-        // this property has to bring a information via current mode. (ex : debug or release)
-//        public ProjectProperty Project => _fileNode.ProjectTree.;
         public string CurrentData { get; set; }
 
         public StringCollection CloseCharacters { get; } = new StringCollection();
@@ -61,9 +60,13 @@ namespace ApplicationLayer.ViewModels.DocumentTypeViewModels
         public TokenizeImpactRanges RecentTokenizeHistory { get; } = new TokenizeImpactRanges();
         public ParserSnippet ParserSnippet => _parserSnippet;
         public ParseTreeSymbol ParseTree { get; private set; }
-        public SdtsNode Ast { get; private set; }
         public DataTable ParsingHistory { get; private set; }
         public IEnumerable<AstSymbol> InterLanguage { get; private set; }
+        public SdtsNode Ast
+        {
+            get => _fileNode.Ast;
+            set => _fileNode.Ast = value;
+        }
 
         public int CaretIndex
         {
@@ -111,7 +114,7 @@ namespace ApplicationLayer.ViewModels.DocumentTypeViewModels
         /********************************************************************************************
          * constructor section
          ********************************************************************************************/
-        public EditorTypeViewModel(FileTreeNodeModel fileNode) : base(fileNode?.FileName, fileNode?.FullPath, fileNode?.FullPath)
+        public EditorTypeViewModel(SourceFileTreeNodeModel fileNode) : base(fileNode?.FileName, fileNode?.FullPath, fileNode?.FullPath)
         {
             this._fileNode = fileNode;
             this._parserSnippet = ParserFactory.Instance.GetParser(ParserFactory.ParserKind.SLR_Parser, Grammar).NewParserSnippet();

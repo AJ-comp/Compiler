@@ -3,6 +3,7 @@ using ActiproSoftware.Windows.Controls.Docking.Serialization;
 using ApplicationLayer.Common;
 using ApplicationLayer.Common.Helpers;
 using ApplicationLayer.Common.Utilities;
+using ApplicationLayer.Models;
 using ApplicationLayer.Models.SolutionPackage;
 using ApplicationLayer.ViewModels;
 using ApplicationLayer.ViewModels.DialogViewModels;
@@ -390,36 +391,124 @@ namespace ApplicationLayer.WpfApp.Commands
 
 
 
+        public static readonly RelayUICommand<ProjectTreeNodeModel> SetStartingProject
+            = new RelayUICommand<ProjectTreeNodeModel>(CommonResource.OpenFolderFromExplorer, (treeNode) =>
+            {
+                if (treeNode.StartingProject) return;
+
+                var mainViewModel = RootWindow.DataContext as MainViewModel;
+                var solution = mainViewModel.SolutionExplorer.Solution;
+
+                foreach (var project in solution.Children)
+                {
+                    var cProject = project as ProjectTreeNodeModel;
+                    cProject.StartingProject = false;
+                }
+
+                treeNode.StartingProject = true;
+            }, (condition) =>
+            {
+                return true;
+            });
+
+
+
+        public static readonly RelayUICommand<ProjectTreeNodeModel> ProjectBuildCommand
+            = new RelayUICommand<ProjectTreeNodeModel>(CommonResource.OpenFolderFromExplorer, (projectNode) =>
+            {
+                var mainViewModel = RootWindow.DataContext as MainViewModel;
+                var solution = mainViewModel.SolutionExplorer.Solution;
+
+                CommandLogic.BuildProject(solution, projectNode);
+            }, (condition) =>
+            {
+                return true;
+            });
+
+
+
 
         public static readonly RelayUICommand BuildSolutionCommand = new RelayUICommand(CommonResource.ParsingHistory,
             () =>
             {
-                        //                if ((docViewModel is EditorTypeViewModel) == false) return;
                 var mainViewModel = RootWindow.DataContext as MainViewModel;
-                var selDoc = mainViewModel.SolutionExplorer.SelectedDocument;
+                var solution = mainViewModel.SolutionExplorer.Solution;
+
+                Messenger.Default.Send(new AddBuildMessage("starting build"));
 
                 // create bin folder.
-                var solution = mainViewModel.SolutionExplorer.Solution;
+                var binFileName = FileHelper.ConvertBinaryFileName(solution.DisplayName);
                 Directory.CreateDirectory(solution.BinFolderPath);
 
-                foreach (var document in mainViewModel.SolutionExplorer.Documents)
+                List<FileReferenceInfo> fileReferenceInfos = new List<FileReferenceInfo>();
+                foreach (var project in solution.Children)
                 {
-                    if ((document is EditorTypeViewModel) == false) continue;
+                    var cProject = project as ProjectTreeNodeModel;
 
-                    EditorTypeViewModel editorDocument = document as EditorTypeViewModel;
-                    editorDocument.SyncWithFile();
-
-                    if (editorDocument.Ast?.ErrNodes.Count == 0)
-                    {
-                        var test = IRExpressionGenerator.GenerateLLVMExpression(editorDocument.Ast as MiniCNode);
-                        var instructionList = test.Build();
-
-                        string textCode = string.Empty;
-                        foreach (var instruction in instructionList) textCode += instruction.FullData + Environment.NewLine;
-
-                        File.WriteAllText(Path.Combine(solution.BinFolderPath, editorDocument.FileNameWithoutExtension + ".bc"), textCode);
-                    }
+                    CommandLogic.BuildProject(solution, cProject);
+                    fileReferenceInfos.AddRange(cProject.FileReferenceInfos);
                 }
+
+
+                List<MakeFileStruct> allMakeFileSnippets = new List<MakeFileStruct>();
+                List<string> allObjectFiles = new List<string>();
+
+                allMakeFileSnippets.Add(MakeFileBuilder.CreateCleanSnippet());
+
+                // create makefile object snippet from file reference information
+                foreach (var fileRefInfo in fileReferenceInfos)
+                {
+                    Messenger.Default.Send(new AddBuildMessage("generateing makefile"));
+                    allMakeFileSnippets.Add(MakeFileBuilder.CreateObjectSnippet(solution.BinFolderPath, 
+                                                                                                                fileRefInfo.StandardFile, 
+                                                                                                                fileRefInfo.ReferenceFile));
+
+                    // gathering all created object files
+                    allObjectFiles.Add(FileHelper.ConvertObjectFileName(fileRefInfo.StandardFile));
+                }
+
+                // create makefile bin snippet from a entry point (the file that existing main function) of starting project
+                allMakeFileSnippets.Add(MakeFileBuilder.CreateBinSnippet(solution.BinFolderPath,
+                                                                                                        binFileName,
+                                                                                                        allObjectFiles));
+
+                // create makefile
+                allMakeFileSnippets.Reverse();
+                MakeFileBuilder.CreateMakeFile(Path.Combine(solution.BinFolderPath, "makefile"), allMakeFileSnippets);
+
+                Builder.ExecuteMakeFile(solution.BinFolderPath);
+                Builder.CreateJLinkCommanderScript(solution.BinFolderPath, binFileName);
+
+
+            }, () =>
+            {
+                return true;
+            });
+
+
+        public static readonly RelayUICommand DownloadAndDebug = new RelayUICommand(CommonResource.OpenFolderFromExplorer,
+            () =>
+            {
+                var mainViewModel = RootWindow.DataContext as MainViewModel;
+                var solution = mainViewModel.SolutionExplorer.Solution;
+                var startingProject = solution.StartingProject;
+
+                // upload bin file using JLink.exe
+                Process jlink = new Process();
+                jlink.StartInfo.FileName = string.Format("C:\\Program Files (x86)\\SEGGER\\JLink\\JLink.exe");
+                jlink.StartInfo.Arguments = string.Format("-device {0} -speed {1} -autoconnect 1 -CommanderScript {2}",
+//                                                                            startingProject.ProjectData.Target, // temperory
+                                                                            "STM32L152VD",   // temporary
+                                                                            "4000",
+                                                                            Path.Combine(solution.BinFolderPath, "CommanderScript.jlink"));
+
+                jlink.StartInfo.RedirectStandardOutput = true;
+                jlink.StartInfo.RedirectStandardError = true;
+                jlink.StartInfo.CreateNoWindow = true;
+                jlink.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+                jlink.StartInfo.UseShellExecute = false;
+                jlink.StartInfo.RedirectStandardOutput = true;
+                jlink.Start();
             }, () =>
             {
                 return true;

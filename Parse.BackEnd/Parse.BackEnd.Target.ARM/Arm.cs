@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Parse.BackEnd.Target.ARM
+﻿namespace Parse.BackEnd.Target.ARM
 {
-    public class Arm : Target
+    public abstract class Arm : Target
     {
         public Arm()
         {
-            this.Name = "ARM";
         }
     }
 }

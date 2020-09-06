@@ -1,6 +1,8 @@
 ﻿using ApplicationLayer.Common;
 using ApplicationLayer.Common.Interfaces;
+using Parse.MiddleEnd.IR.LLVM;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Xml.Serialization;
 
@@ -8,6 +10,13 @@ namespace ApplicationLayer.Models.SolutionPackage
 {
     public abstract class ProjectTreeNodeModel : PathTreeNodeModel, IManagableElements, IManagedable
     {
+        // this property has to bring a information via current mode. (ex : debug or release)
+        [XmlIgnore] public ProjectProperty ProjectData => GetProjectProperty(ProjectProperty.Configure.Debug);
+        [XmlIgnore] public string MCPUType => LLVMConverter.GetMCPUOption(ProjectData.Target);
+        [XmlIgnore] public bool StartingProject { get; set; }
+
+
+
         /********************************************************************************************
          * override property section
          ********************************************************************************************/
@@ -65,6 +74,10 @@ namespace ApplicationLayer.Models.SolutionPackage
          ********************************************************************************************/
         public abstract bool IsChanged { get; }
         public abstract string ProjectType { get; }
+        /// <summary>
+        /// This property returns the reference file list of the files in project.
+        /// </summary>
+        public abstract IEnumerable<FileReferenceInfo> FileReferenceInfos { get; }
 
 
 
@@ -131,6 +144,7 @@ namespace ApplicationLayer.Models.SolutionPackage
         public abstract void Save();
         public abstract void SyncWithLoadValue();
         public abstract void SyncWithCurrentValue();
+        public abstract ProjectProperty GetProjectProperty(ProjectProperty.Configure configure);
 
 
 

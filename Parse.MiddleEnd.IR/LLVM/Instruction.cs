@@ -77,7 +77,7 @@ namespace Parse.MiddleEnd.IR.LLVM
             var fromType = LLVMConverter.ToInstructionName(fromSSVar.TypeName);
             int fromAlign = LLVMConverter.ToAlignSize(fromSSVar.TypeName);
 
-            return new Instruction(string.Format("store = {0} {1}, {0}* {2}, align {3}", 
+            return new Instruction(string.Format("store {0} {1}, {0}* {2}, align {3}", 
                                                                     fromType, fromSSVar.Name, toSSVar.Name, fromAlign), // string param
                                                                     comment);                                                                   // comment
         }
@@ -89,9 +89,9 @@ namespace Parse.MiddleEnd.IR.LLVM
             var fromType = LLVMConverter.ToInstructionName(toSSVar.TypeName);
             int fromAlign = LLVMConverter.ToAlignSize(toSSVar.TypeName);
 
-            return new Instruction(string.Format("store = {0} {1}, {0}* {2}, align {3}",
+            return new Instruction(string.Format("store {0} {1}, {0}* {2}, align {3}",
                                                                     fromType, value.Value, toSSVar.Name, fromAlign),      // string param
-                                                                    comment);                                                      // comment
+                                                                    comment);                                                               // comment
         }
 
         // sample

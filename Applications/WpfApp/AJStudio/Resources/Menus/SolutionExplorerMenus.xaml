@@ -37,6 +37,7 @@
         </MenuItem>
         <Separator/>
         <MenuItem Command="{x:Static commands:MenuActionCommands.OpenFolder}" CommandParameter="{Binding}"/>
+        <MenuItem Command="{x:Static commands:MenuActionCommands.SetStartingProject}" CommandParameter="{Binding}"/>
         <Separator/>
     </ContextMenu>
 

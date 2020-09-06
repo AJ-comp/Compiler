@@ -28,6 +28,10 @@
         <toolWindows:OutputWindow/>
     </DataTemplate>
 
+    <DataTemplate DataType="{x:Type toolWindowVMs:CallStackViewModel}">
+        <toolWindows:CallStackWindow/>
+    </DataTemplate>
+
     <DataTemplate DataType="{x:Type toolWindowVMs:TreeSymbolDetailViewModel}">
         <windows:TreeSymbolDetailView/>
     </DataTemplate>

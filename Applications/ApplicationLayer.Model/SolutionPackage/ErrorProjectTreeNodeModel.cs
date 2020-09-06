@@ -1,14 +1,14 @@
 ﻿using ApplicationLayer.Common.Interfaces;
+using System.Collections.Generic;
 
 namespace ApplicationLayer.Models.SolutionPackage
 {
     public class ErrorProjectTreeNodeModel : ProjectTreeNodeModel, IManagedable
     {
         public override string ProjectType => "error";
-
         public override bool IsChanged => false;
-
         public override string FullPath => System.IO.Path.Combine(this.FullOnlyPath, this.FileName);
+        public override IEnumerable<FileReferenceInfo> FileReferenceInfos => throw new System.NotImplementedException();
 
         public ErrorProjectTreeNodeModel(string path, string projName) : base(path, projName)
         {
@@ -33,6 +33,11 @@ namespace ApplicationLayer.Models.SolutionPackage
 
         public override void SyncWithLoadValue()
         {
+        }
+
+        public override ProjectProperty GetProjectProperty(ProjectProperty.Configure configure)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

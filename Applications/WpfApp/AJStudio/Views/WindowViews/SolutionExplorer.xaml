@@ -97,7 +97,7 @@
                         <MultiDataTrigger>
                             <MultiDataTrigger.Conditions>
                                 <Condition Binding="{Binding Tag, Converter={converter:DataTypeConverter}}" 
-                                                Value="{x:Type models:FileTreeNodeModel}"/>
+                                                Value="{x:Type models:SourceFileTreeNodeModel}"/>
                                 <Condition Binding="{Binding IsExistFile}" Value="true"/>
                                 <Condition Binding="{Binding FileType}" Value="{x:Static common:LanguageExtensions.MiniCSource}"/>
                             </MultiDataTrigger.Conditions>

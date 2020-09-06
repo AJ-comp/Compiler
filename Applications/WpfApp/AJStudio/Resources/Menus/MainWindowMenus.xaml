@@ -64,7 +64,7 @@
                 <MenuItem Header="{lex:Loc Key=TreeSymbolDetailView}" Command="{Binding ShowToolWindowCommand}"
                                     CommandParameter="{Binding TreeSymbolDetailView, Source={StaticResource Locator}}"/>
                 <MenuItem Header="{lex:Loc Key=Output}" Command="{Binding ShowToolWindowCommand}"
-                                    CommandParameter="{Binding OutputView, Source={StaticResource Locator}}"/>
+                                    CommandParameter="{Binding OutputWindow, Source={StaticResource Locator}}"/>
                 <MenuItem Header="test" Command="{Binding ShowToolWindowCommand}"
                                     CommandParameter="{Binding TestToolWindow, Source={StaticResource Locator}}"/>
             </MenuItem>
@@ -76,7 +76,8 @@
                                 Command="{x:Static commands:MenuActionCommands.BuildSolutionCommand}"/>
             <MenuItem Header="{lex:Loc WindowMenuResources:ReBuildSolution}" Command="{Binding ReBuildSolutionCommand}"/>
             <MenuItem Header="{lex:Loc WindowMenuResources:CleanSolution}" Command="{Binding CleanSolutionCommand}"/>
-            <MenuItem Header="{lex:Loc WindowMenuResources:DownloadAndDebug}" Command="{Binding DownloadAndDebugCommand}"/>
+            <MenuItem Header="{lex:Loc WindowMenuResources:DownloadAndDebug}" 
+                                Command="{x:Static commands:MenuActionCommands.DownloadAndDebug}"/>
         </MenuItem>
 
         <!-- Tools -->

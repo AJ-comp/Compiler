@@ -108,5 +108,10 @@ namespace Parse.MiddleEnd.IR.LLVM
 
             return result;
         }
+
+        public static string GetMCPUOption(string name)
+        {
+            return (name.Contains("Stm32")) ? "cortex-m3" : string.Empty;
+        }
     }
 }

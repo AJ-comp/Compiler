@@ -12,17 +12,13 @@ namespace ApplicationLayer.Models.SolutionPackage
     {
         public static FileTreeNodeModel CreateFileTreeNodeModel(string realFilePath, string parentPath, string fileName)
         {
-            FileTreeNodeModel result = null;
-
-            if (PathHelper.ComparePath(realFilePath, parentPath) == false) return result;
+            if (PathHelper.ComparePath(realFilePath, parentPath) == false) return null;
 
             string path = string.Empty;
             if (realFilePath.Length != parentPath.Length)
                 path = realFilePath.Substring(realFilePath.IndexOf(parentPath) + parentPath.Length + 1);
 
-            result = new FileTreeNodeModel(path, fileName);
-
-            return result;
+            return FileTreeNodeModel.CreateFileTreeNodeModel(path, fileName);
         }
 
         public static FilterTreeNodeModel CreateFilterTreeNodeModel(TreeNodeModel parent, string filterName)

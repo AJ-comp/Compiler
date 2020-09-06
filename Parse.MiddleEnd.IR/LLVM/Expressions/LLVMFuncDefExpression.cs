@@ -8,13 +8,16 @@ namespace Parse.MiddleEnd.IR.LLVM.Expressions
     {
         public IRFuncData FuncData { get; private set; }
         public LLVMBlockExpression BlockExpression { get; private set; }
+        public int FuncIndex { get; private set; }
 
         public LLVMFuncDefExpression(IRFuncData funcData, 
                                                         LLVMBlockExpression blockExpression, 
-                                                        LLVMSSATable ssaTable) : base(ssaTable)
+                                                        LLVMSSATable ssaTable,
+                                                        int funcIndex) : base(ssaTable)
         {
             FuncData = funcData;
             BlockExpression = blockExpression;
+            FuncIndex = funcIndex;
         }
 
         public override IEnumerable<Instruction> Build()
@@ -30,10 +33,11 @@ namespace Parse.MiddleEnd.IR.LLVM.Expressions
             argumentString += ")";
 
 
-            result.Add(new Instruction(string.Format("define {0} @{1}{2}",
+            result.Add(new Instruction(string.Format("define {0} @{1}{2} #{3}",
                                                                         LLVMConverter.ToInstructionName(FuncData.ReturnType),
                                                                         FuncData.Name,
-                                                                        argumentString)));
+                                                                        argumentString,
+                                                                        FuncIndex)));
 
             // generate block code
             result.Add(new Instruction("{"));
@@ -41,6 +45,14 @@ namespace Parse.MiddleEnd.IR.LLVM.Expressions
             if (FuncData.ReturnType == ReturnType.Void) result.Add(new Instruction("ret void"));
             result.Add(new Instruction("}"));
             result.Add(Instruction.EmptyLine());
+
+            if(FuncData.Name == "main")
+            {
+                LLVMAttribute attribute = new LLVMAttribute(FuncIndex);
+                attribute.NounwindReadnone = true;
+                attribute.StackProtectorBufferSize = 8;
+                result.Add(new Instruction(attribute.ToString()));
+            }
 
             return result;
         }

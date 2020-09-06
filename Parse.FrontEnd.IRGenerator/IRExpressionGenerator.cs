@@ -28,11 +28,17 @@ namespace Parse.FrontEnd.IRGenerator
             return result;
         }
 
-        public static LLVMExpression GenerateLLVMExpression(MiniCNode rootNode)
+        public static LLVMExpression GenerateLLVMExpression(SdtsNode rootNode)
         {
-            ConnectGenerateHandler(rootNode);
+            if (rootNode is MiniCNode)
+            {
+                var cRootNode = rootNode as MiniCNode;
+                ConnectGenerateHandler(cRootNode);
 
-            return rootNode.ExecuteToIRExpression(new LLVMSSATable()) as LLVMExpression;
+                return cRootNode.ExecuteToIRExpression(new LLVMSSATable()) as LLVMExpression;
+            }
+
+            return null;
         }
 
         private static void ConnectGenerateHandler(MiniCNode rootNode)
@@ -84,8 +90,12 @@ namespace Parse.FrontEnd.IRGenerator
             foreach (var varRecord in cNode.SymbolTable.VarList)
                 result.FirstLayers.Add(new LLVMGlobalVariableExpression(varRecord.VarField, ssaTable));
 
+            int index = 0;
             foreach (var funcDef in cNode.FuncDefNodes)
-                result.FirstLayers.Add(funcDef.ExecuteToIRExpression(ssaTable.Clone()) as LLVMFirstLayerExpression);
+            {
+                var funcParam = new Tuple<LLVMSSATable, int>(ssaTable.Clone() as LLVMSSATable, index++);
+                result.FirstLayers.Add(funcDef.ExecuteToIRExpression(funcParam) as LLVMFirstLayerExpression);
+            }
 
             return result;
         }
@@ -94,11 +104,14 @@ namespace Parse.FrontEnd.IRGenerator
         private static IRExpression FuncDefNodeToIRExpression(SdtsNode node, object param)
         {
             var cNode = node as FuncDefNode;
-            var ssaTable = param as LLVMSSATable;
+            var cParam = param as Tuple<LLVMSSATable, int>;
+            var ssaTable = cParam.Item1;
+            var index = cParam.Item2;
 
             return new LLVMFuncDefExpression(cNode.ToIRFuncData(),
                                                                     cNode.CompoundSt.ExecuteToIRExpression(ssaTable) as LLVMBlockExpression,
-                                                                    ssaTable);
+                                                                    ssaTable,
+                                                                    index);
         }
     }
 }

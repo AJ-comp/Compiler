@@ -384,4 +384,7 @@
   <data name="InterLanguage" xml:space="preserve">
     <value>중간 언어</value>
   </data>
+  <data name="SetStartingProject" xml:space="preserve">
+    <value>시작 프로젝트로 설정</value>
+  </data>
 </root>

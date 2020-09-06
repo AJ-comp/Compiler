@@ -4,8 +4,7 @@
     {
         public Stm32L152VBT6()
         {
-            this.Name = "STM32L152VBT6";
-
+            this.Name = GetType().Name;
             this.Explain = "Brand : ST";
         }
     }
