@@ -123,6 +123,31 @@ namespace Parse
         public override string ToString() => _originalValue;
     }
 
+    #region Preprocesser keyword related
+    public class Preprocesser : TokenType
+    {
+        internal Preprocesser(int hashCode, string value) : base(hashCode, value) { }
+
+        public DefinePreprocesser Define
+        {
+            get
+            {
+                var data = "DefinePreprocesser";
+                var hashCode = GetHashCode(data);
+                var cacheType = GetTokenType(hashCode);
+
+                return (cacheType == null) ? new DefinePreprocesser(hashCode, data) : cacheType as DefinePreprocesser;
+            }
+        }
+    }
+    #endregion
+
+    public class DefinePreprocesser : Preprocesser
+    {
+        internal DefinePreprocesser(int hashCode, string value) : base(hashCode, value) { }
+    }
+
+
     #region Keyword related
     public class Keyword : TokenType
     {

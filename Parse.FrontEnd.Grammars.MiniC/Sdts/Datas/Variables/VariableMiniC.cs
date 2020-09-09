@@ -1,5 +1,4 @@
-﻿using Parse.FrontEnd.Grammars.MiniC.Sdts.AstNodes.ExprNodes;
-using Parse.MiddleEnd.IR.Datas;
+﻿using Parse.MiddleEnd.IR.Datas;
 using Parse.Types;
 using Parse.Types.ConstantTypes;
 using Parse.Types.VarTypes;
@@ -8,7 +7,7 @@ using System.ComponentModel;
 
 namespace Parse.FrontEnd.Grammars.MiniC.Sdts.Datas.Variables
 {
-    public abstract class VariableMiniC : Variable, IRVar
+    public abstract class VariableMiniC : Variable, IRVar, IHasName
     {
         public enum MiniCDataType
         {
@@ -19,6 +18,7 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts.Datas.Variables
         }
         public enum VarProperty
         {
+            [Description("global")] Global,
             [Description("normal")] Normal,
             [Description("extern")] Extern,
             [Description("param")] Param

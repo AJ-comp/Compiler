@@ -57,17 +57,17 @@ namespace Parse.FrontEnd.IRGenerator
             LLVMBlockExpression blockExpression = new LLVMBlockExpression(ssaTable);
 
             // local variable declaration
-            foreach (var varRecord in cNode.SymbolTable.VarList)
-                blockExpression.AddItem(new LLVMLocalVariableExpression(varRecord.VarField, ssaTable));
+            foreach (var varRecord in cNode.SymbolTable.VarTable)
+                blockExpression.AddItem(new LLVMLocalVariableExpression(varRecord.DefineField, ssaTable));
 
             // local variable initialize
-            foreach (var varRecord in cNode.SymbolTable.VarList)
+            foreach (var varRecord in cNode.SymbolTable.VarTable)
             {
-                if (varRecord.VarField.VariableProperty == VariableMiniC.VarProperty.Param) continue;
+                if (varRecord.DefineField.VariableProperty == VariableMiniC.VarProperty.Param) continue;
                 if (varRecord.InitValue != null)
                     blockExpression.AddItem
                         (
-                            new LLVMAssignExpression(varRecord.VarField, 
+                            new LLVMAssignExpression(varRecord.DefineField, 
                                                                      varRecord.InitValue.ExecuteToIRExpression(ssaTable) as LLVMExprExpression,
                                                                      ssaTable)
                         );

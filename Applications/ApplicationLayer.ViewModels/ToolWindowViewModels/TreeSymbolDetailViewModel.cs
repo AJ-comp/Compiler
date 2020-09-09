@@ -39,7 +39,7 @@ namespace ApplicationLayer.ViewModels.ToolWindowViewModels
                 var symbolTable = miniCNode.SymbolTable;
                 while (symbolTable != null)
                 {
-                    if (symbolTable.VarList.Count() == 0 && symbolTable.FuncDataList.Count() == 0)
+                    if (symbolTable.VarTable.Count() == 0 && symbolTable.FuncTable.Count() == 0)
                     {
                         sdtsNode = null;
                         symbolTable = symbolTable.Base;
@@ -50,15 +50,15 @@ namespace ApplicationLayer.ViewModels.ToolWindowViewModels
                     SymbolDatas.AddChildrenToFirst(new CategoryTreeNodeModel(categoryName));
                     SymbolDatas.IsExpanded = true;
 
-                    foreach (var varRecord in symbolTable.VarList)
+                    foreach (var varRecord in symbolTable.VarTable)
                     {
-                        if (varRecord.VarField.IsVirtual) continue;
+                        if (varRecord.DefineField.IsVirtual) continue;
 
-                        SymbolDatas.Children.First().AddChildren(new VarTreeNodeModel(varRecord.VarField));
+                        SymbolDatas.Children.First().AddChildren(new VarTreeNodeModel(varRecord.DefineField));
                     }
 
-                    foreach (var item in symbolTable.FuncDataList)
-                        SymbolDatas.Children.First().AddChildren(new FuncTreeNodeModel(item));
+                    foreach (var item in symbolTable.FuncTable)
+                        SymbolDatas.Children.First().AddChildren(new FuncTreeNodeModel(item.DefineField));
 
                     sdtsNode = null;
                     symbolTable = symbolTable.Base;

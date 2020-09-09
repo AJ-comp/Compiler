@@ -1,6 +1,5 @@
 ﻿using Parse.FrontEnd.Ast;
-using Parse.FrontEnd.Grammars.MiniC.Sdts.AstNodes.ExprNodes.LiteralNodes;
-using Parse.FrontEnd.Grammars.MiniC.Sdts.Datas;
+using Parse.Types.ConstantTypes;
 using System;
 
 namespace Parse.FrontEnd.Grammars.MiniC.Sdts.AstNodes.ExprNodes.ArithmeticExprNodes
@@ -17,8 +16,8 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts.AstNodes.ExprNodes.ArithmeticExprNo
 
             try
             {
-                if (Left.Result is IntLiteralData)
-                    Result = (Left.Result as IntLiteralData).Add(Right.Result);
+                if (Left.Result is IntConstant)
+                    Result = (Left.Result as IntConstant).Add(Right.Result);
             }
             catch(Exception ex)
             {

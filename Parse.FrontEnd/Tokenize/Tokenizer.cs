@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
-namespace Parse.Tokenize
+namespace Parse.FrontEnd.Tokenize
 {
     public class Tokenizer
     {
         public Action<List<TokenCell>> TokenizeCompleted = null;
         public Action<Match> Matched = null;
 
-        private List<TokenCell> AddToken(int index, int basisIndex, string targetString, Match matchData)
+        private IReadOnlyList<TokenCell> AddToken(int index, int basisIndex, string targetString, Match matchData)
         {
             List<TokenCell> result = new List<TokenCell>();
 

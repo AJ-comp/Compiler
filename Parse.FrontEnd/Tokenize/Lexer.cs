@@ -5,21 +5,21 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-namespace Parse.Tokenize
+namespace Parse.FrontEnd.Tokenize
 {
     public class Lexer
     {
-        private int key = 1;
-        private List<TokenPatternInfo> tokenPatternList = new List<TokenPatternInfo>();
-        private string tokenizeRule = string.Empty;
-        private Tokenizer tokenizeTeam = new Tokenizer();
+        private int _key = 1;
+        private List<TokenPatternInfo> _tokenPatternList = new List<TokenPatternInfo>();
+        private string _tokenizeRule = string.Empty;
+        private Tokenizer _tokenizeTeam = new Tokenizer();
 
-        public IReadOnlyList<TokenPatternInfo> TokenPatternList => tokenPatternList;
+        public IReadOnlyList<TokenPatternInfo> TokenPatternList => _tokenPatternList;
         public TokenizeImpactRanges ImpactRanges { get; } = new TokenizeImpactRanges();
 
         public Lexer()
         {
-            this.tokenizeTeam.TokenizeCompleted = TokenizeCompletedWork;
+            this._tokenizeTeam.TokenizeCompleted = TokenizeCompletedWork;
         }
 
         private void TokenizeCompletedWork(List<TokenCell> tokenCells)
@@ -37,9 +37,9 @@ namespace Parse.Tokenize
         /// This function returns the tokenize rule.
         /// </summary>
         /// <param name="tokenPatternList"></param>
-        public string GetTokenizeRule(List<TokenPatternInfo> tokenPatternList)
+        public string GetTokenizeRule(IEnumerable<TokenPatternInfo> tokenPatternList)
         {
-            this.tokenPatternList = tokenPatternList;
+            this._tokenPatternList.AddRange(tokenPatternList);
 
             string result = string.Empty;
             HashSet<string> allHashCode = new HashSet<string>();
@@ -58,7 +58,7 @@ namespace Parse.Tokenize
                 allHashCode.Add(key);
             }
 
-            return result.Substring(0, result.Length - 1);
+            return result[0..^1];
         }
 
         /// <summary>
@@ -73,12 +73,12 @@ namespace Parse.Tokenize
             if (matchInfo == null) return result;
 
             // The number of elements in the group is 1 more than the number of elements in the TokenPatternList.
-            for (int i = 0; i < this.tokenPatternList.Count + 1; i++)
+            for (int i = 0; i < this._tokenPatternList.Count + 1; i++)
             {
                 // The 0 index of the groups is always matched so it doesn't need to check.
                 if (matchInfo.Groups[i + 1].Length > 0)
                 {
-                    result = this.tokenPatternList[i];
+                    result = this._tokenPatternList[i];
                     break;
                 }
             }
@@ -94,7 +94,7 @@ namespace Parse.Tokenize
         /// </summary>
         private void SortTokenPatternList()
         {
-            this.tokenPatternList.Sort(delegate (TokenPatternInfo t, TokenPatternInfo td)
+            this._tokenPatternList.Sort((TokenPatternInfo t, TokenPatternInfo td) =>
             {
                 if (t.Operator != td.Operator)
                 {
@@ -137,9 +137,9 @@ namespace Parse.Tokenize
         {
             TokenPatternInfo result = null;
 
-            Parallel.For(0, this.tokenPatternList.Count, (i, loopOption) =>
+            Parallel.For(0, this._tokenPatternList.Count, (i, loopOption) =>
             {
-                var patternInfo = this.tokenPatternList[i];
+                var patternInfo = this._tokenPatternList[i];
 
                 if (patternInfo.OriginalPattern == pattern)
                 {
@@ -160,15 +160,15 @@ namespace Parse.Tokenize
         /// <param name="bOperator">true = delimiter, false = not delimiter.</param>
         public void AddTokenRule(string text, object optionData = null, bool bCanDerived = false, bool bOperator = false)
         {
-            foreach (var item in this.tokenPatternList)
+            foreach (var item in this._tokenPatternList)
             {
                 if (item.OriginalPattern == text) return;
             }
 
-            this.tokenPatternList.Add(new TokenPatternInfo(this.key++, text, optionData, bCanDerived, bOperator));
+            this._tokenPatternList.Add(new TokenPatternInfo(this._key++, text, optionData, bCanDerived, bOperator));
             this.SortTokenPatternList();
 
-            this.tokenizeRule = this.GetTokenizeRule(this.tokenPatternList);
+            this._tokenizeRule = this.GetTokenizeRule(this._tokenPatternList);
         }
 
         /// <summary>
@@ -192,7 +192,7 @@ namespace Parse.Tokenize
 
             // If a basisIndex is used then it can increase the performance of the ReplaceToken function because of need not arrange.
             // But the logic is not written yet.
-            var tokenList = this.tokenizeTeam.Tokenize(this.tokenizeRule, mergeString);
+            var tokenList = this._tokenizeTeam.Tokenize(this._tokenizeRule, mergeString);
             result.ReplaceToken(impactRange, tokenList);
             var rangePairToRegist = new RangePair(impactRange, new Range(impactRange.StartIndex, tokenList.Count));
 
@@ -209,7 +209,7 @@ namespace Parse.Tokenize
                 var impactRangeToParse = result.FindImpactRange(rangePairToRegist.Item1.StartIndex, rangePairToRegist.Item1.EndIndex);
                 var beforeTokens = result.TokensToView.Skip(impactRangeToParse.StartIndex).Take(impactRangeToParse.Count).ToList();
                 var basisIndex = (beforeTokens.Count > 0) ? beforeTokens[0].StartIndex : 0;
-                var processedTokens = this.tokenizeTeam.Tokenize(this.tokenizeRule, result.GetMergeStringOfRange(impactRangeToParse), basisIndex);
+                var processedTokens = this._tokenizeTeam.Tokenize(this._tokenizeRule, result.GetMergeStringOfRange(impactRangeToParse), basisIndex);
 
                 if (beforeTokens.IsEqual(processedTokens)) break;
                 result.ReplaceToken(impactRangeToParse, processedTokens);
@@ -228,9 +228,9 @@ namespace Parse.Tokenize
         /// <returns></returns>
         public TokenStorage Lexing(string data)
         {
-            TokenStorage result = new TokenStorage(this.tokenPatternList);
+            TokenStorage result = new TokenStorage(this._tokenPatternList);
 
-            this.tokenizeTeam.Tokenize(this.tokenizeRule, data).ForEach(i => result.tokensToView.Add(i));
+            this._tokenizeTeam.Tokenize(this._tokenizeRule, data).ForEach(i => result.tokensToView.Add(i));
             result.UpdateTableForAllPatterns();
 
             if(result.tokensToView.Count > 0)  this.ImpactRanges.Add(new RangePair(new Range(-1, 0), new Range(0, result.tokensToView.Count)));
@@ -317,7 +317,7 @@ namespace Parse.Tokenize
             var impactRange = result.FindImpactRange(indexInfo.StartIndex, indexInfo.EndIndex);
             string mergeString = this.GetImpactedStringFromDelInfo(result, delInfos);
 
-            var toInsertTokens = this.tokenizeTeam.Tokenize(this.tokenizeRule, mergeString);
+            var toInsertTokens = this._tokenizeTeam.Tokenize(this._tokenizeRule, mergeString);
             result.ReplaceToken(impactRange, toInsertTokens);
             this.ImpactRanges.Add(new RangePair(impactRange, new Range(impactRange.StartIndex, toInsertTokens.Count)));
             ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -339,7 +339,7 @@ namespace Parse.Tokenize
             var impactRange = result.FindImpactRange(indexInfo.StartIndex, indexInfo.EndIndex);
             string mergeString = this.GetImpactedStringFromDelInfo(result, delInfos, replaceString);
 
-            var toInsertTokens = this.tokenizeTeam.Tokenize(this.tokenizeRule, mergeString);
+            var toInsertTokens = this._tokenizeTeam.Tokenize(this._tokenizeRule, mergeString);
             result.ReplaceToken(impactRange, toInsertTokens);
             this.ImpactRanges.Add(new RangePair(impactRange, new Range(impactRange.StartIndex, toInsertTokens.Count)));
 

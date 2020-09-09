@@ -1,5 +1,4 @@
-﻿using Parse.Types;
-using Parse.Types.ConstantTypes;
+﻿using Parse.Types.ConstantTypes;
 
 namespace Parse.FrontEnd.Grammars.MiniC.Sdts.Datas
 {

@@ -1,28 +1,28 @@
 ﻿using Parse.FrontEnd.Grammars.MiniC.Sdts.AstNodes;
 using Parse.FrontEnd.Grammars.MiniC.Sdts.AstNodes.ExprNodes;
-using Parse.FrontEnd.Grammars.MiniC.Sdts.Datas.Variables;
 using System;
 using System.Collections.Generic;
 
 namespace Parse.FrontEnd.Grammars.MiniC.Sdts.Datas
 {
-    public class MiniCVarRecord
+    public class MiniCReferenceRecord<T>
     {
-        public MiniCVarRecord(VariableMiniC varField, ReferenceInfo referenceInfo)
+        public MiniCReferenceRecord(T defineField, ReferenceInfo referenceInfo)
         {
-            VarField = varField;
-            ReferenceTable.Add(referenceInfo);
+            DefineField = defineField;
+            ReferenceList.Add(referenceInfo);
         }
 
-        public VariableMiniC VarField { get; private set; }
-        public List<ReferenceInfo> ReferenceTable { get; } = new List<ReferenceInfo>();
-        public ExprNode InitValue => ReferenceTable[0].Value;
+        public T DefineField { get; private set; }
+        public List<ReferenceInfo> ReferenceList { get; } = new List<ReferenceInfo>();
+        public ExprNode InitValue => ReferenceList[0].Value;
+
 
         public ReferenceInfo FindReferenceNode(Type type)
         {
             ReferenceInfo result = null;
 
-            foreach (var record in ReferenceTable)
+            foreach (var record in ReferenceList)
             {
                 if (record.ReferenceNode.GetType() != type) continue;
 
@@ -30,6 +30,17 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts.Datas
             }
 
             return result;
+        }
+
+        public override bool Equals(object obj)
+        {
+            return obj is MiniCReferenceRecord<T> record &&
+                   EqualityComparer<T>.Default.Equals(DefineField, record.DefineField);
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(DefineField);
         }
     }
 

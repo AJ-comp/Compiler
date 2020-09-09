@@ -49,17 +49,18 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts.AstNodes.ExprNodes
 
         private void IsNotInit(UseIdentNode varNode)
         {
+//            varNode.SymbolTable.AllVarTable
             var varRecord = MiniCUtilities.GetVarRecordFromReferableST(this, varNode.IdentToken);
             if (varRecord == null) return;
-            if (varRecord.VarField.IsVirtual) return;
+            if (varRecord.DefineField.IsVirtual) return;
             if (varRecord.InitValue != null) return;
 
             // Add semantic error information if varData is exist in the SymbolTable.
             ConnectedErrInfoList.Add
                 (
-                    new MeaningErrInfo(varRecord.VarField.NameToken,
+                    new MeaningErrInfo(varRecord.DefineField.NameToken,
                                                     nameof(AlarmCodes.MCL0005),
-                                                    string.Format(AlarmCodes.MCL0005, varRecord.VarField.Name))
+                                                    string.Format(AlarmCodes.MCL0005, varRecord.DefineField.Name))
                 );
         }
     }

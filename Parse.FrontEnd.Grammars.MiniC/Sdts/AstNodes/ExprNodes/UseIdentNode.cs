@@ -8,7 +8,7 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts.AstNodes.ExprNodes
     {
         public TokenData IdentToken { get; private set; }
 
-        public VariableMiniC VarData => MiniCUtilities.GetVarRecordFromReferableST(this, IdentToken)?.VarField;
+        public VariableMiniC VarData => MiniCUtilities.GetVarRecordFromReferableST(this, IdentToken)?.DefineField;
 
 
         public UseIdentNode(AstSymbol node) : base(node)

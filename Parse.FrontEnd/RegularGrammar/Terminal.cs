@@ -9,9 +9,18 @@ namespace Parse.FrontEnd.RegularGrammar
         public TokenType TokenType { get; }
         public string Value { get; } = string.Empty;
         public bool Meaning { get; } = true;
-        public bool CanDerived { get; } = false;
+        public bool bWord { get; } = false;
+        public bool bOper => (TokenType is ScopeComment || TokenType is Operator || TokenType is Delimiter);
+        public string RegexExpression
+        {
+            get
+            {
+                return (bOper) ? RegexGenerator.GetOperatorRegex(Value)
+                                      : RegexGenerator.GetWordRegex(Value);
+            }
+        }
 
-        public Terminal(TokenType type, string value, bool meaning = true, bool CanDerived = false) : this(type, value, value, meaning, CanDerived)
+        public Terminal(TokenType type, string value, bool meaning = true, bool bWord = false) : this(type, value, value, meaning, bWord)
         {
         }
         public Terminal(TokenType type, string value, string caption, bool meaning = true, bool CanDerived = false)
@@ -20,7 +29,7 @@ namespace Parse.FrontEnd.RegularGrammar
             this.Value = value;
             this.caption = caption;
             this.Meaning = meaning;
-            this.CanDerived = CanDerived;
+            this.bWord = CanDerived;
         }
 
         public override string ToString()

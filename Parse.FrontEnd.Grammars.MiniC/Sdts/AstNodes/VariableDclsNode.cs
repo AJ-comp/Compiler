@@ -32,6 +32,7 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts.AstNodes
             {
                 var initDeclarator = Items[i].Build(param) as InitDeclaratorNode;
                 if (initDeclarator.ConnectedErrInfoList.Count > 0) continue;
+                if (initDeclarator.NameToken.IsVirtual) continue;
 
                 _initDeclarators.Add(initDeclarator);
 
@@ -45,17 +46,20 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts.AstNodes
                                                                                initDeclarator.DimensionToken,
                                                                                BlockLevel,
                                                                                Offset,
-                                                                               VarProperty.Normal,
+                                                                               (BlockLevel == 0) ? VarProperty.Global : VarProperty.Normal,
                                                                                initDeclarator.Right);
 
                 // save to SymbolTable
-                (param as MiniCSdtsParams).SymbolTable
-                                                          .AddVarData(varData, new ReferenceInfo(this, initDeclarator.Right));
+                bool result = (param as MiniCSdtsParams).SymbolTable
+                                                                             .VarTable
+                                                                             .CreateNewBlock(varData, new ReferenceInfo(this, initDeclarator.Right));
+
+                // duplicated declaration
+                if (!result) MiniCUtilities.AddDuplicatedError(this, initDeclarator.NameToken);
             }
 
             return this;
         }
-
 
         private List<InitDeclaratorNode> _initDeclarators = new List<InitDeclaratorNode>();
     }

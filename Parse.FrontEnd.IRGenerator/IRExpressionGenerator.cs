@@ -87,8 +87,8 @@ namespace Parse.FrontEnd.IRGenerator
 
             LLVMRootExpression result = new LLVMRootExpression();
 
-            foreach (var varRecord in cNode.SymbolTable.VarList)
-                result.FirstLayers.Add(new LLVMGlobalVariableExpression(varRecord.VarField, ssaTable));
+            foreach (var varRecord in cNode.SymbolTable.VarTable)
+                result.FirstLayers.Add(new LLVMGlobalVariableExpression(varRecord.DefineField, ssaTable));
 
             int index = 0;
             foreach (var funcDef in cNode.FuncDefNodes)

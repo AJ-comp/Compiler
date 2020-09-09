@@ -31,7 +31,7 @@ namespace Parse.MiddleEnd.IR.LLVM
             foreach (var varData in _funcData.Arguments)
                 result += varData.TypeName + ",";
 
-            if (_funcData.Arguments.Count() > 0) result = result.Substring(0, result.Length - 1);
+            if (_funcData.Arguments.Count() > 0) result = result[0..^1];
             result += ")";
 
             result += "{" + Environment.NewLine;

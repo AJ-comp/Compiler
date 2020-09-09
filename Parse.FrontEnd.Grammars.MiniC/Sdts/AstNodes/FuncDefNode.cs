@@ -47,9 +47,10 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts.AstNodes
         {
             List<IRVar> paramVars = new List<IRVar>();
 
-            foreach (var varRecord in SymbolTable.AllVarList)
+            foreach (var varTable in SymbolTable.AllVarTable)
             {
-                if (varRecord.VarField.VariableProperty == VariableMiniC.VarProperty.Param) paramVars.Add(varRecord.VarField);
+                foreach (var varRecord in varTable)
+                    if (varRecord.DefineField.VariableProperty == VariableMiniC.VarProperty.Param) paramVars.Add(varRecord.DefineField);
             }
 
             FuncHeadNode funcHead = FuncHead;

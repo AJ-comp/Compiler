@@ -575,8 +575,10 @@ namespace ApplicationLayer.WpfApp.Commands
                     var test = IRExpressionGenerator.GenerateLLVMExpression(editorViewModel.Ast as MiniCNode);
                     var instructionList = test.Build();
 
-                    var textDoc = new LLVMViewModel("LLVM IR");
-                    textDoc.TextContent = File.ReadAllText(Path.Combine(solution.BinFolderPath, editorViewModel.FileNameWithoutExtension + ".bc"));
+                    var textDoc = new LLVMViewModel("LLVM IR")
+                    {
+                        TextContent = File.ReadAllText(Path.Combine(solution.BinFolderPath, editorViewModel.FileNameWithoutExtension + ".bc"))
+                    };
 
                     mainViewModel.SolutionExplorer.Documents.Add(textDoc);
                     mainViewModel.SolutionExplorer.SelectedDocument = textDoc;

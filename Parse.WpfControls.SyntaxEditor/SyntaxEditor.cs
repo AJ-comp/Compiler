@@ -1,10 +1,11 @@
 ﻿using Parse.FrontEnd;
 using Parse.FrontEnd.Ast;
-using Parse.FrontEnd.Support.Drawing;
 using Parse.FrontEnd.Grammars;
 using Parse.FrontEnd.Parsers.Datas;
 using Parse.FrontEnd.Parsers.Logical;
 using Parse.FrontEnd.RegularGrammar;
+using Parse.FrontEnd.Support.Drawing;
+using Parse.FrontEnd.Tokenize;
 using Parse.WpfControls.Models;
 using Parse.WpfControls.SyntaxEditor.EventArgs;
 using Parse.WpfControls.Utilities;
@@ -19,8 +20,6 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Threading;
-using Parse.FrontEnd.IRGenerator;
-using Parse.FrontEnd.Grammars.MiniC.Sdts.AstNodes;
 
 namespace Parse.WpfControls.SyntaxEditor
 {
@@ -295,7 +294,7 @@ namespace Parse.WpfControls.SyntaxEditor
                 int tokenIndex = -1;
                 Dispatcher.Invoke(() =>
                 {
-                    tokenIndex = this.TextArea.GetTokenIndexForCaretIndex(this.TextArea.CaretIndex, Tokenize.RecognitionWay.Back);
+                    tokenIndex = this.TextArea.GetTokenIndexForCaretIndex(this.TextArea.CaretIndex, RecognitionWay.Back);
                 });
 
                 var list = this.GetCompletionList(localResult, tokenIndex);
@@ -323,16 +322,11 @@ namespace Parse.WpfControls.SyntaxEditor
 
             foreach (var terminal in this.ParserSnippet.Parser.Grammar.TerminalSet)
             {
-                bool bOper = false;
-                if (terminal.TokenType is ScopeComment) bOper = true;
-                else if (terminal.TokenType is Operator) bOper = true;
-                else if (terminal.TokenType is Delimiter) bOper = true;
-
                 // setting color for token.
                 var item = this.HighlightMap.GetItem(terminal.TokenType.GetType());
                 if (item is null)
                 {
-                    this.TextArea.AddTokenPattern(terminal.Value, terminal, terminal.CanDerived, bOper);
+                    this.TextArea.AddTokenPattern(terminal.Value, terminal, terminal.bWord, terminal.bOper);
                     continue;
                 }
 
@@ -340,7 +334,7 @@ namespace Parse.WpfControls.SyntaxEditor
                 var mediaBackground = ColorUtility.ToMediaBrush(item.BackgroundColor);
 
                 if (terminal.TokenType.GetType() == item.Type)
-                    this.TextArea.AddSyntaxHighLightInfo(mediaForeground, mediaBackground, terminal.Value, terminal, terminal.CanDerived, bOper);
+                    this.TextArea.AddSyntaxHighLightInfo(mediaForeground, mediaBackground, terminal.Value, terminal, terminal.bWord, terminal.bOper);
             }
 
             foreach (var delimiter in this.ParserSnippet.Parser.Grammar.DelimiterDic)

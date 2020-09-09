@@ -3,7 +3,7 @@ using Parse.FrontEnd.Parsers.Collections;
 using Parse.FrontEnd.Parsers.Datas;
 using Parse.FrontEnd.ParseTree;
 using Parse.FrontEnd.RegularGrammar;
-using Parse.Tokenize;
+using Parse.FrontEnd.Tokenize;
 using System;
 using System.Collections.Generic;
 using System.Linq;

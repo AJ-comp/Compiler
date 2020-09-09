@@ -24,7 +24,7 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts.Datas.Variables
                                             VarProperty varProperty, 
                                             ExprNode value)
                                         : base(typeDatas, nameToken, levelToken, dimensionToken,
-                                                    blockLevel, offset, varProperty, Convert(value))
+                                                    blockLevel, offset, varProperty, Convert(varProperty, value))
         {
 
         }
@@ -73,12 +73,12 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts.Datas.Variables
         public IConstant RightShift(int count) => Operation.IntegerKindRightShift(this, count);
 
 
-        private static IValue Convert(ExprNode node)
+        private static IValue Convert(VarProperty varProperty, ExprNode node)
         {
-            if (node is UseIdentNode)
-                return (node as UseIdentNode).VarData;
-            else if (node is LiteralNode)
-                return (node as LiteralNode).Result;
+            if (node is UseIdentNode) return (node as UseIdentNode).VarData;
+            else if (node is LiteralNode) return (node as LiteralNode).Result;
+            // Only global variable uses ExprNode.Result.
+            else if (varProperty == VarProperty.Global && node.Result != null) return node.Result;
 
             return new IntConstant(0, State.NotInit, 0);
         }

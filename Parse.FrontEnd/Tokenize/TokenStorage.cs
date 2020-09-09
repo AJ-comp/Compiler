@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Parse.Tokenize
+namespace Parse.FrontEnd.Tokenize
 {
     public class TokenStorage : ICloneable
     {
@@ -295,7 +295,7 @@ namespace Parse.Tokenize
             foreach (var item in replaceTokenList) addLength += item.Data.Length;
 
             for (int i = range.StartIndex; i <= range.EndIndex; i++)
-                addLength = addLength - this.tokensToView[i].Data.Length;
+                addLength -= this.tokensToView[i].Data.Length;
 
             int contentIndex = (range.StartIndex == 0) ? 0 : this.tokensToView[range.StartIndex].StartIndex;
             this.tokensToView.RemoveRange(range.StartIndex, range.Count);

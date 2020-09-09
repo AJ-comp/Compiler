@@ -6,7 +6,6 @@ using ApplicationLayer.ViewModels.DialogViewModels.OptionViewModels;
 using ApplicationLayer.ViewModels.Messages;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
-using Parse.BackEnd.Target;
 using Parse.FrontEnd;
 using Parse.FrontEnd.Ast;
 using Parse.FrontEnd.Grammars;
@@ -16,8 +15,7 @@ using Parse.FrontEnd.Parsers.Datas;
 using Parse.FrontEnd.Parsers.Logical;
 using Parse.FrontEnd.ParseTree;
 using Parse.FrontEnd.Support.Drawing;
-using Parse.MiddleEnd.IR.LLVM;
-using Parse.Tokenize;
+using Parse.FrontEnd.Tokenize;
 using Parse.WpfControls.SyntaxEditor.EventArgs;
 using System;
 using System.Collections.Generic;
@@ -160,18 +158,18 @@ namespace ApplicationLayer.ViewModels.DocumentTypeViewModels
                 if (symbolTable == null) return;
 
                 // Add abstract variable list information to the current FileTreeNode.
-                foreach (var varRecord in symbolTable.VarList)
+                foreach (var varRecord in symbolTable.VarTable)
                 {
-                    if (varRecord.VarField.IsVirtual) continue;
+                    if (varRecord.DefineField.IsVirtual) continue;
 
-                    var varTreeNode = new VarTreeNodeModel(varRecord.VarField);
+                    var varTreeNode = new VarTreeNodeModel(varRecord.DefineField);
                     _fileNode.AddChildren(varTreeNode);
                 }
 
                 // Add abstract function list information to the current FileTreeNode.
-                foreach (var item in symbolTable.FuncDataList)
+                foreach (var item in symbolTable.FuncTable)
                 {
-                    var funcTreeNode = new FuncTreeNodeModel(item);
+                    var funcTreeNode = new FuncTreeNodeModel(item.DefineField);
                     _fileNode.AddChildren(funcTreeNode);
                 }
 

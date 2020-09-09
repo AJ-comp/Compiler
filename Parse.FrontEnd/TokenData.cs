@@ -1,5 +1,5 @@
 ﻿using Parse.FrontEnd.RegularGrammar;
-using Parse.Tokenize;
+using Parse.FrontEnd.Tokenize;
 using System.Collections.Generic;
 
 namespace Parse.FrontEnd

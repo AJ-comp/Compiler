@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
-namespace Parse.Tokenize
+namespace Parse.FrontEnd.Tokenize
 {
     public enum RecognitionWay { Front, Back };
 

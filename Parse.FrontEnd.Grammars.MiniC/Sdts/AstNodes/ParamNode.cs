@@ -1,6 +1,7 @@
 ﻿using Parse.FrontEnd.Ast;
 using Parse.FrontEnd.Grammars.MiniC.Sdts.Datas;
 using Parse.FrontEnd.Grammars.MiniC.Sdts.Datas.Variables;
+using Parse.FrontEnd.Grammars.Properties;
 
 namespace Parse.FrontEnd.Grammars.MiniC.Sdts.AstNodes
 {
@@ -42,12 +43,16 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts.AstNodes
             DataTypeNode = Items[0].Build(param) as VariableTypeNode;
             VariableNode = Items[1].Build(param) as DeclareVarNode;
 
-            // check duplication
-            bool checkResult = MiniCChecker.IsDuplicated(this, param, VariableNode.NameToken);
-            if (checkResult) return this;
+            // If it is virtual token it has not to add to symbol table.
+            if (VariableNode.NameToken.IsVirtual) return this;
 
             // save varData to SymbolTable
-            (param as MiniCSdtsParams).SymbolTable.AddVarData(ToVarData, new ReferenceInfo(this));
+            bool result = (param as MiniCSdtsParams).SymbolTable
+                                                                         .VarTable
+                                                                         .CreateNewBlock(ToVarData, new ReferenceInfo(this));
+
+            // duplicated declaration
+            if (!result) MiniCUtilities.AddDuplicatedError(this, VariableNode.NameToken);
 
             return this;
         }

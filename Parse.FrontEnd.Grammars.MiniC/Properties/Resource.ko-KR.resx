@@ -120,7 +120,13 @@
   <data name="Ident" xml:space="preserve">
     <value>식별자</value>
   </data>
-  <data name="Number" xml:space="preserve">
-    <value>숫자</value>
+  <data name="DecimalNumber" xml:space="preserve">
+    <value>10진수</value>
+  </data>
+  <data name="HexNumber" xml:space="preserve">
+    <value>16진수</value>
+  </data>
+  <data name="BinNumber" xml:space="preserve">
+    <value>2진수</value>
   </data>
 </root>

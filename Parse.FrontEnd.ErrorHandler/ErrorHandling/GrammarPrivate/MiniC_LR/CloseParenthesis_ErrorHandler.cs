@@ -3,7 +3,7 @@ using Parse.FrontEnd.Grammars.MiniC;
 using Parse.FrontEnd.Parsers;
 using Parse.FrontEnd.Parsers.Datas;
 using Parse.FrontEnd.Parsers.Logical;
-using Parse.Tokenize;
+using Parse.FrontEnd.Tokenize;
 
 namespace Parse.FrontEnd.ErrorHandler.GrammarPrivate.MiniC_LR
 {
@@ -21,7 +21,7 @@ namespace Parse.FrontEnd.ErrorHandler.GrammarPrivate.MiniC_LR
                 ;
             else if(ixIndex == 12)
             {
-                var virtualToken = new TokenData(grammar.Ident, new TokenCell(-1, "temp", null), true);
+                var virtualToken = new TokenData(MiniCGrammar.Ident, new TokenCell(-1, "temp", null), true);
                 var frontBlock = parsingResult.GetFrontBlockCanParse(seeingTokenIndex);
                 var blockParsingResult = GrammarPrivateLRErrorHandler.InsertVirtualToken(ixIndex, snippet, frontBlock, parsingResult[seeingTokenIndex], virtualToken);
 

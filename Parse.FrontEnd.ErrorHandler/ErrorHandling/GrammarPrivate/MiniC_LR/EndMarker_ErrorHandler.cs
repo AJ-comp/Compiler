@@ -3,7 +3,7 @@ using Parse.FrontEnd.Grammars.MiniC;
 using Parse.FrontEnd.Parsers;
 using Parse.FrontEnd.Parsers.Datas;
 using Parse.FrontEnd.Parsers.Logical;
-using Parse.Tokenize;
+using Parse.FrontEnd.Tokenize;
 
 namespace Parse.FrontEnd.ErrorHandler.GrammarPrivate.MiniC_LR
 {

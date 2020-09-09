@@ -2,12 +2,7 @@
 using Parse.FrontEnd.Grammars;
 using Parse.FrontEnd.Grammars.MiniC;
 using Parse.FrontEnd.Parsers.LR;
-using Parse.Tokenize;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Parse.FrontEnd.Tokenize;
 
 namespace TestProjectOnConsole
 {
@@ -26,7 +21,7 @@ namespace TestProjectOnConsole
                 else if (terminal.TokenType is Operator) bOper = true;
                 else if (terminal.TokenType is Delimiter) bOper = true;
 
-                lexer.AddTokenRule(terminal.Value, terminal, terminal.CanDerived, bOper);
+                lexer.AddTokenRule(terminal.Value, terminal, terminal.bWord, bOper);
             }
 
             var result = lexer.Lexing("void main()\r\n");

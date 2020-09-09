@@ -5,7 +5,6 @@ using Parse.Types;
 using Parse.Types.ConstantTypes;
 using Parse.Types.VarTypes;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 
 namespace Parse.MiddleEnd.IR.LLVM
@@ -41,8 +40,8 @@ namespace Parse.MiddleEnd.IR.LLVM
             var type = LLVMConverter.ToInstructionName(var.TypeName);
             int align = LLVMConverter.ToAlignSize(var.TypeName);
 
-            return new Instruction(string.Format("{0} = global {1} 0, align {2}",
-                                                                    var.LinkedObject.Name, type, align),
+            return new Instruction(string.Format("{0} = global {1} {2}, align {3}",
+                                                                    var.LinkedObject.Name, type, var.Value, align),
                                                                     comment);
         }
 

@@ -29,7 +29,7 @@ namespace Parse.MiddleEnd.IR.LLVM.Expressions
             foreach (var argument in FuncData.Arguments)
                 argumentString += LLVMConverter.ToInstructionName(argument.TypeName) + ",";
 
-            if (FuncData.Arguments.Count() > 0) argumentString = argumentString.Substring(0, argumentString.Length - 1);
+            if (FuncData.Arguments.Count() > 0) argumentString = argumentString[0..^1];
             argumentString += ")";
 
 
@@ -48,9 +48,12 @@ namespace Parse.MiddleEnd.IR.LLVM.Expressions
 
             if(FuncData.Name == "main")
             {
-                LLVMAttribute attribute = new LLVMAttribute(FuncIndex);
-                attribute.NounwindReadnone = true;
-                attribute.StackProtectorBufferSize = 8;
+                LLVMAttribute attribute = new LLVMAttribute(FuncIndex)
+                {
+                    NounwindReadnone = true,
+                    StackProtectorBufferSize = 8
+                };
+
                 result.Add(new Instruction(attribute.ToString()));
             }
 

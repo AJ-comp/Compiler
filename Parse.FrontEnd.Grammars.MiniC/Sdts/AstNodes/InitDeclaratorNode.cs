@@ -37,9 +37,6 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts.AstNodes
             if (Items.Count > 1)
                 Right = Items[1].Build(param) as ExprNode;
 
-            // check duplication
-            MiniCChecker.IsDuplicated(this, param, NameToken);
-
             return this;
         }
     }

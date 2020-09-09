@@ -50,10 +50,10 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts.AstNodes.ExprNodes
 
             List<MiniCFuncData> matchedList = new List<MiniCFuncData>();
             var nodes = MiniCUtilities.GetReferableSymbolTablelList(this);
-            foreach (var func in nodes.Last().FuncDataList) // func list exists in the root symbol table
+            foreach (var func in nodes.Last().FuncTable) // func list exists in the root symbol table
             {
-                if (func.Name == useVarNode.IdentToken.Input)
-                    matchedList.Add(func);
+                if (func.DefineField.Name == useVarNode.IdentToken.Input)
+                    matchedList.Add(func.DefineField);
             }
 
             if (matchedList.Count == 0) AddMCL0014Exception();

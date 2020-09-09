@@ -39,10 +39,13 @@ namespace ApplicationLayer.Common
                                                             mcpuType, bitCodeFullPath, targetCodeFullPath);
 
             // execute llc.exe
-            ProcessStartInfo startInfo = new ProcessStartInfo();
-            startInfo.FileName = @"llc.exe";
-            startInfo.Arguments = command;
-            startInfo.WindowStyle = ProcessWindowStyle.Hidden;
+            ProcessStartInfo startInfo = new ProcessStartInfo
+            {
+                FileName = @"llc.exe",
+                Arguments = command,
+                WindowStyle = ProcessWindowStyle.Hidden
+            };
+
             var process = Process.Start(startInfo);
             process.WaitForExit();
         }

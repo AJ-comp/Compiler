@@ -47,6 +47,7 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
         public override event EventHandler<SemanticErrorArgs> SemanticErrorEventHandler;
 
         public MeaningUnit Program { get; } = new MeaningUnit("Program");
+        public MeaningUnit DefinePrep { get; } = new MeaningUnit("DefinePrep");
         public MeaningUnit FuncDef { get; } = new MeaningUnit("FuncDef");
         public MeaningUnit FuncHead { get; } = new MeaningUnit("FuncHead");
         public MeaningUnit DclSpec { get; } = new MeaningUnit("DclSpec");
@@ -117,6 +118,7 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
                 AstNonTerminal cRoot = root as AstNonTerminal;
 
                 if (cRoot.SignPost.MeaningUnit == Program) result = new ProgramNode(root);
+                else if (cRoot.SignPost.MeaningUnit == DefinePrep) result = new DefinePrepNode(root);
                 else if (cRoot.SignPost.MeaningUnit == FuncDef) result = new FuncDefNode(root);
                 else if (cRoot.SignPost.MeaningUnit == FuncHead) result = new FuncHeadNode(root);
                 else if (cRoot.SignPost.MeaningUnit == FormalPara) result = new ParamListNode(root);

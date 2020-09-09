@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="MCL0000" xml:space="preserve">
-    <value>{0} 함수가 이미 정의되었습니다.</value>
+    <value>{0}는(은) 이미 정의되었습니다.</value>
   </data>
   <data name="MCL0001" xml:space="preserve">
     <value>{0} 가 선언되지 않았습니다.</value>

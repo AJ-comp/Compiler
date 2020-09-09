@@ -1,4 +1,6 @@
-﻿namespace Parse.Tokenize
+﻿using Parse.FrontEnd.RegularGrammar;
+
+namespace Parse.FrontEnd.Tokenize
 {
     public class TokenPatternInfo
     {
@@ -63,5 +65,9 @@
         }
 
         public override string ToString() => string.Format("{0}, {1}, {2}, {3}", this.Key, this.Pattern, this.CanDerived.ToString().ToLower(), this.Operator.ToString().ToLower());
+
+
+
+        private Terminal _terminal;
     }
 }

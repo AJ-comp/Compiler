@@ -5,7 +5,7 @@ using static Parse.FrontEnd.Grammars.MiniC.Sdts.Datas.Variables.VariableMiniC;
 
 namespace Parse.FrontEnd.Grammars.MiniC.Sdts.Datas
 {
-    public class MiniCFuncData
+    public class MiniCFuncData : IHasName
     {
         public MiniCDataType ReturnType => TypeData.DataType;
         public string Name => NameToken.Input;

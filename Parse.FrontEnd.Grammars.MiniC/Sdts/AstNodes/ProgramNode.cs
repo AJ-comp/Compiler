@@ -40,7 +40,7 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts.AstNodes
                     param.Offset = 0;
 
                     var node = minicNode.Build(param) as FuncDefNode;
-                    SymbolTable.AddFuncData(node.FuncData);
+                    SymbolTable.FuncTable.CreateNewBlock(node.FuncData, this);
                     _funcDefNodes.Add(node);
                 }
             }

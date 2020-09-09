@@ -118,6 +118,6 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="IR0000" xml:space="preserve">
-    <value>SSA 폼에서는 오직 한번만 값을 할당할 수 있습니다. ({0} 변수에는 이미 값이 할당되어 있습니다.)</value>
+    <value>SSA 폼에서는 오직 한번만 값을 할당할 수 있습니다. {0} 변수에는 이미 값이 할당되어 있습니다.</value>
   </data>
 </root>

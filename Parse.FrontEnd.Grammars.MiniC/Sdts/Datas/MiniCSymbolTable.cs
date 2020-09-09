@@ -6,19 +6,20 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts.Datas
     public class MiniCSymbolTable : SymbolTable
     {
         public MiniCSymbolTable Base { get; }
-        public IEnumerable<MiniCFuncData> FuncDataList => _funcList;
-        public IEnumerable<MiniCVarRecord> VarList => _varList;
+        public DefinePrepTable DefineTable => _definePrepTable;
+        public FuncTable FuncTable => _funcTable;
+        public VarTable VarTable => _varTable;
 
-        public IEnumerable<MiniCVarRecord> AllVarList
+        public IEnumerable<VarTable> AllVarTable
         {
             get
             {
-                List<MiniCVarRecord> result = new List<MiniCVarRecord>();
+                List<VarTable> result = new List<VarTable>();
 
                 MiniCSymbolTable currentTable = this;
                 while(currentTable != null)
                 {
-                    result.AddRange(currentTable.VarList);
+                    result.Add(currentTable.VarTable);
                     currentTable = currentTable.Base;
                 }
 
@@ -26,31 +27,15 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts.Datas
             }
         }
 
-        public void AddVarData(VariableMiniC dataToAdd, ReferenceInfo referenceInfo)
-        {
-            if (dataToAdd.NameToken.IsVirtual) return;
-
-            _varList.Add(new MiniCVarRecord(dataToAdd, referenceInfo));
-        }
-
-        public void AddFuncData(MiniCFuncData dataToAdd)
-        {
-            if (dataToAdd.NameToken.IsVirtual) return;
-
-            _funcList.Add(dataToAdd);
-        }
-
         public VariableMiniC GetVarByName(string name)
         {
             VariableMiniC result = null;
 
-            foreach (var varRecord in AllVarList)
+            foreach (var varTable in AllVarTable)
             {
-                if (varRecord.VarField.IsMatchWithVarName(name))
-                {
-                    result = varRecord.VarField;
-                    break;
-                }
+                result = varTable.GetMatchedItemWithName(name);
+
+                if (result != null) break;
             }
 
             return result;
@@ -60,11 +45,11 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts.Datas
         {
             MiniCFuncData result = null;
 
-            foreach (var funcData in FuncDataList)
+            foreach (var funcData in FuncTable)
             {
-                if (funcData.Name == name)
+                if (funcData.DefineField.Name == name)
                 {
-                    result = funcData;
+                    result = funcData.DefineField;
                     break;
                 }
             }
@@ -77,8 +62,8 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts.Datas
             Base = @base;
         }
 
-
-        private List<MiniCVarRecord> _varList = new List<MiniCVarRecord>();
-        private List<MiniCFuncData> _funcList = new List<MiniCFuncData>();
+        private DefinePrepTable _definePrepTable = new DefinePrepTable();
+        private VarTable _varTable = new VarTable();
+        private FuncTable _funcTable = new FuncTable();
     }
 }

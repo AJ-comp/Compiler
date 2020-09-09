@@ -1,8 +1,6 @@
 ﻿using Parse.FrontEnd.Parsers.Datas;
-using Parse.FrontEnd.RegularGrammar;
-using Parse.Tokenize;
+using Parse.FrontEnd.Tokenize;
 using System.Collections.Generic;
-using System.Data;
 
 namespace Parse.FrontEnd.Parsers.Logical
 {

@@ -100,7 +100,13 @@
   <data name="Ident" xml:space="preserve">
     <value>identifier</value>
   </data>
-  <data name="Number" xml:space="preserve">
-    <value>number</value>
+  <data name="DecimalNumber" xml:space="preserve">
+    <value>decimal number</value>
+  </data>
+  <data name="HexNumber" xml:space="preserve">
+    <value>hex number</value>
+  </data>
+  <data name="BinNumber" xml:space="preserve">
+    <value>binary number</value>
   </data>
 </root>

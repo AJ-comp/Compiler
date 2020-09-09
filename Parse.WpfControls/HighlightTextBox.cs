@@ -1,4 +1,4 @@
-﻿using Parse.Tokenize;
+﻿using Parse.FrontEnd.Tokenize;
 using Parse.WpfControls.Common;
 using Parse.WpfControls.EventArgs;
 using Parse.WpfControls.Models;

@@ -61,20 +61,38 @@ namespace Parse.FrontEnd.Grammars.MiniC.Properties {
         }
         
         /// <summary>
+        ///   binary number과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string BinNumber {
+            get {
+                return ResourceManager.GetString("BinNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   decimal number과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string DecimalNumber {
+            get {
+                return ResourceManager.GetString("DecimalNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   hex number과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string HexNumber {
+            get {
+                return ResourceManager.GetString("HexNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   identifier과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string Ident {
             get {
                 return ResourceManager.GetString("Ident", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   number과(와) 유사한 지역화된 문자열을 찾습니다.
-        /// </summary>
-        public static string Number {
-            get {
-                return ResourceManager.GetString("Number", resourceCulture);
             }
         }
     }
