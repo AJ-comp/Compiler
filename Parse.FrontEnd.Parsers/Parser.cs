@@ -1,7 +1,8 @@
 ﻿using Parse.FrontEnd.Grammars;
 using Parse.FrontEnd.Parsers.Collections;
-using Parse.FrontEnd.Parsers.Logical;
+using Parse.FrontEnd.Parsers.Datas;
 using Parse.FrontEnd.RegularGrammar;
+using Parse.FrontEnd.Tokenize;
 using System;
 using System.Collections.Generic;
 
@@ -27,11 +28,11 @@ namespace Parse.FrontEnd.Parsers
         public Grammar Grammar { get; } = null;
         public string OptimizeList => Optimizer.ChangeableNodeData(this.Grammar.NonTerminalMultiples).ToString();
 
-        public List<String> DelimiterList
+        public List<string> DelimiterList
         {
             get
             {
-                List<String> result = new List<string>();
+                List<string> result = new List<string>();
 
                 foreach(var item in this.Grammar.DelimiterDic)  result.Add(item.Key);
 
@@ -44,16 +45,18 @@ namespace Parse.FrontEnd.Parsers
         /// <summary> Get the parsing table with data table format. </summary>
         public abstract IParsingTable ParsingTable { get; }
 
+        /// <summary>
+        /// This function performs whole parsing for tokenCells
+        /// </summary>
+        /// <param name="tokens">The tokenCells to parsing</param>
+        /// <returns>The parsing result</returns>
+        public abstract ParsingResult Parsing(IReadOnlyList<TokenCell> tokens);
+        public abstract ParsingResult Parsing(IReadOnlyList<TokenCell> tokens, ParsingResult prevParsingInfo, TokenizeImpactRanges rangeToParse);
+
 
         protected Parser(Grammar grammar)
         {
             this.Grammar = grammar;
         }
-
-        /// <summary>
-        /// This function creates a new snippet for parsing.
-        /// </summary>
-        /// <returns>The parser snippet that created.</returns>
-        public abstract ParserSnippet NewParserSnippet();
     }
 }

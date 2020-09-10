@@ -1,10 +1,10 @@
 ﻿using Parse.FrontEnd.Grammars;
 using Parse.FrontEnd.Parsers;
 using Parse.FrontEnd.Parsers.Datas;
-using Parse.FrontEnd.Parsers.Logical;
+using Parse.FrontEnd.Parsers.LR;
 using Parse.FrontEnd.Parsers.Properties;
 using System.Collections.Generic;
-using SuccessKind = Parse.FrontEnd.Parsers.Logical.LRParserSnippet.SuccessedKind;
+using static Parse.FrontEnd.Parsers.LR.LRParser;
 
 namespace Parse.FrontEnd.ErrorHandler.GrammarPrivate
 {
@@ -21,12 +21,12 @@ namespace Parse.FrontEnd.ErrorHandler.GrammarPrivate
         /// This function returns a parsing result after insert virtualToken front of the token of the seeingBlock.
         /// </summary>
         /// <param name="ixIndex"></param>
-        /// <param name="snippet"></param>
+        /// <param name="parser"></param>
         /// <param name="frontBlock"></param>
         /// <param name="seeingBlock"></param>
         /// <param name="virtualToken"></param>
         /// <returns></returns>
-        protected static SuccessKind InsertVirtualToken(int ixIndex, ParserSnippet snippet, ParsingBlock frontBlock, ParsingBlock seeingBlock, TokenData virtualToken)
+        protected static SuccessedKind InsertVirtualToken(int ixIndex, Parser parser, ParsingBlock frontBlock, ParsingBlock seeingBlock, TokenData virtualToken)
         {
             var token = seeingBlock.Token;
 
@@ -42,20 +42,20 @@ namespace Parse.FrontEnd.ErrorHandler.GrammarPrivate
             param.Add(new ParsingRecoveryData(virtualToken, recoveryMessage1));
             param.Add(new ParsingRecoveryData(token, recoveryMessage2));
 
-            LRParserSnippet lrSnippet = snippet as LRParserSnippet;
-            return lrSnippet.RecoveryBlockParsing(seeingBlock, param);
+            LRParser lrParser = parser as LRParser;
+            return lrParser.RecoveryBlockParsing(seeingBlock, param);
         }
 
         /// <summary>
         /// This function returns a parsing result after replaces the token that current seeing to the virtual token.
         /// </summary>
         /// <param name="ixIndex"></param>
-        /// <param name="snippet"></param>
+        /// <param name="parser"></param>
         /// <param name="parsingResult"></param>
         /// <param name="seeingTokenIndex"></param>
         /// <param name="virtualToken">The virtual token to replace a exist token</param>
         /// <returns></returns>
-        protected static SuccessKind ReplaceToVirtualToken(int ixIndex, ParserSnippet snippet, ParsingBlock seeingBlock, TokenData virtualToken)
+        protected static SuccessedKind ReplaceToVirtualToken(int ixIndex, Parser parser, ParsingBlock seeingBlock, TokenData virtualToken)
         {
             var token = seeingBlock.Token;
 
@@ -69,7 +69,7 @@ namespace Parse.FrontEnd.ErrorHandler.GrammarPrivate
             recoveryMessage += string.Format(", " + Resource.ReplaceVirtualToken, virtualToken.Input);
             param.Add(new ParsingRecoveryData(virtualToken, recoveryMessage));
 
-            LRParserSnippet lrSnippet = snippet as LRParserSnippet;
+            LRParser lrSnippet = parser as LRParser;
             return lrSnippet.RecoveryBlockParsing(seeingBlock, param);
         }
 

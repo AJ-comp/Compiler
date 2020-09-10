@@ -1,4 +1,5 @@
 ﻿using Parse.Extensions;
+using Parse.FrontEnd.RegularGrammar;
 using Parse.Utilities;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,14 +13,14 @@ namespace Parse.FrontEnd.Tokenize
         private int _key = 1;
         private List<TokenPatternInfo> _tokenPatternList = new List<TokenPatternInfo>();
         private string _tokenizeRule = string.Empty;
-        private Tokenizer _tokenizeTeam = new Tokenizer();
+        private Tokenizer _tokenizer = new Tokenizer();
 
         public IReadOnlyList<TokenPatternInfo> TokenPatternList => _tokenPatternList;
         public TokenizeImpactRanges ImpactRanges { get; } = new TokenizeImpactRanges();
 
         public Lexer()
         {
-            this._tokenizeTeam.TokenizeCompleted = TokenizeCompletedWork;
+            this._tokenizer.TokenizeCompleted = TokenizeCompletedWork;
         }
 
         private void TokenizeCompletedWork(List<TokenCell> tokenCells)
@@ -37,9 +38,9 @@ namespace Parse.FrontEnd.Tokenize
         /// This function returns the tokenize rule.
         /// </summary>
         /// <param name="tokenPatternList"></param>
-        public string GetTokenizeRule(IEnumerable<TokenPatternInfo> tokenPatternList)
+        public string GetTokenizeRule(List<TokenPatternInfo> tokenPatternList)
         {
-            this._tokenPatternList.AddRange(tokenPatternList);
+            this._tokenPatternList = tokenPatternList;
 
             string result = string.Empty;
             HashSet<string> allHashCode = new HashSet<string>();
@@ -100,9 +101,9 @@ namespace Parse.FrontEnd.Tokenize
                 {
                     return (t.Operator) ? 1 : -1;
                 }
-                else if (t.CanDerived != td.CanDerived)
+                else if (t.bWord != td.bWord)
                 {
-                    return (t.CanDerived) ? 1 : -1;
+                    return (t.bWord) ? 1 : -1;
                 }
 
                 if (t.OriginalPattern.Length > td.OriginalPattern.Length) return -1;
@@ -154,18 +155,16 @@ namespace Parse.FrontEnd.Tokenize
         /// <summary>
         /// This function adds a tokenize rule to the sub-modules of the TokenizeFactory.
         /// </summary>
-        /// <param name="text">The pattern to tokenize.</param>
-        /// <param name="optionData">If exist additional data then would add to this.</param>
-        /// <param name="bCanDerived">This argument means the first argument is the derived pattern or is a fixed pattern.</param>
-        /// <param name="bOperator">true = delimiter, false = not delimiter.</param>
-        public void AddTokenRule(string text, object optionData = null, bool bCanDerived = false, bool bOperator = false)
+        /// <param name="terminal"></param>
+        public void AddTokenRule(Terminal terminal)
         {
             foreach (var item in this._tokenPatternList)
             {
-                if (item.OriginalPattern == text) return;
+                if (item.Terminal.TokenType == terminal.TokenType &&
+                    item.Terminal.Value == terminal.Value) return;
             }
 
-            this._tokenPatternList.Add(new TokenPatternInfo(this._key++, text, optionData, bCanDerived, bOperator));
+            this._tokenPatternList.Add(new TokenPatternInfo(this._key++, terminal));
             this.SortTokenPatternList();
 
             this._tokenizeRule = this.GetTokenizeRule(this._tokenPatternList);
@@ -192,7 +191,7 @@ namespace Parse.FrontEnd.Tokenize
 
             // If a basisIndex is used then it can increase the performance of the ReplaceToken function because of need not arrange.
             // But the logic is not written yet.
-            var tokenList = this._tokenizeTeam.Tokenize(this._tokenizeRule, mergeString);
+            var tokenList = this._tokenizer.Tokenize(this._tokenizeRule, mergeString);
             result.ReplaceToken(impactRange, tokenList);
             var rangePairToRegist = new RangePair(impactRange, new Range(impactRange.StartIndex, tokenList.Count));
 
@@ -209,7 +208,7 @@ namespace Parse.FrontEnd.Tokenize
                 var impactRangeToParse = result.FindImpactRange(rangePairToRegist.Item1.StartIndex, rangePairToRegist.Item1.EndIndex);
                 var beforeTokens = result.TokensToView.Skip(impactRangeToParse.StartIndex).Take(impactRangeToParse.Count).ToList();
                 var basisIndex = (beforeTokens.Count > 0) ? beforeTokens[0].StartIndex : 0;
-                var processedTokens = this._tokenizeTeam.Tokenize(this._tokenizeRule, result.GetMergeStringOfRange(impactRangeToParse), basisIndex);
+                var processedTokens = this._tokenizer.Tokenize(this._tokenizeRule, result.GetMergeStringOfRange(impactRangeToParse), basisIndex);
 
                 if (beforeTokens.IsEqual(processedTokens)) break;
                 result.ReplaceToken(impactRangeToParse, processedTokens);
@@ -230,10 +229,10 @@ namespace Parse.FrontEnd.Tokenize
         {
             TokenStorage result = new TokenStorage(this._tokenPatternList);
 
-            this._tokenizeTeam.Tokenize(this._tokenizeRule, data).ForEach(i => result.tokensToView.Add(i));
+            this._tokenizer.Tokenize(this._tokenizeRule, data).ForEach(i => result._tokensToView.Add(i));
             result.UpdateTableForAllPatterns();
 
-            if(result.tokensToView.Count > 0)  this.ImpactRanges.Add(new RangePair(new Range(-1, 0), new Range(0, result.tokensToView.Count)));
+            if(result._tokensToView.Count > 0)  this.ImpactRanges.Add(new RangePair(new Range(-1, 0), new Range(0, result._tokensToView.Count)));
 
             return result;
         }
@@ -317,7 +316,7 @@ namespace Parse.FrontEnd.Tokenize
             var impactRange = result.FindImpactRange(indexInfo.StartIndex, indexInfo.EndIndex);
             string mergeString = this.GetImpactedStringFromDelInfo(result, delInfos);
 
-            var toInsertTokens = this._tokenizeTeam.Tokenize(this._tokenizeRule, mergeString);
+            var toInsertTokens = this._tokenizer.Tokenize(this._tokenizeRule, mergeString);
             result.ReplaceToken(impactRange, toInsertTokens);
             this.ImpactRanges.Add(new RangePair(impactRange, new Range(impactRange.StartIndex, toInsertTokens.Count)));
             ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -339,7 +338,7 @@ namespace Parse.FrontEnd.Tokenize
             var impactRange = result.FindImpactRange(indexInfo.StartIndex, indexInfo.EndIndex);
             string mergeString = this.GetImpactedStringFromDelInfo(result, delInfos, replaceString);
 
-            var toInsertTokens = this._tokenizeTeam.Tokenize(this._tokenizeRule, mergeString);
+            var toInsertTokens = this._tokenizer.Tokenize(this._tokenizeRule, mergeString);
             result.ReplaceToken(impactRange, toInsertTokens);
             this.ImpactRanges.Add(new RangePair(impactRange, new Range(impactRange.StartIndex, toInsertTokens.Count)));
 

@@ -5,39 +5,19 @@ namespace Parse.FrontEnd.Tokenize
     public class TokenPatternInfo
     {
         public int Key { get; }
-        public object OptionData { get; }
-        public string Pattern
-        {
-            get
-            {
-                if (this.Operator)
-                {
-                    string convertString = string.Empty;
-                    foreach (var c in this.OriginalPattern)
-                        convertString += "\\" + c;
+        public Terminal Terminal { get; private set; }
+        public string Pattern => Terminal.RegexExpression;
+        public string OriginalPattern => Terminal.Value;
+        public bool bWord => Terminal.bWord;
+        public bool Operator => Terminal.bOper;
 
-                    return convertString;
-                }
-                else
-                {
-                    return (this.CanDerived) ? this.OriginalPattern : "\\b" + this.OriginalPattern + "\\b";
-                }
-            }
-        }
 
-        public static TokenPatternInfo NotDefinedToken { get => new TokenPatternInfo(0, string.Empty); }
+        public static TokenPatternInfo NotDefinedToken { get => new TokenPatternInfo(0, new NotDefined()); }
 
-        public string OriginalPattern { get; }
-        public bool CanDerived { get; }
-        public bool Operator { get; }
-
-        public TokenPatternInfo(int key, string pattern, object optionData = null, bool bCanDerived = false, bool bOperator = false)
+        public TokenPatternInfo(int key, Terminal terminal)
         {
             this.Key = key;
-            this.OptionData = optionData;
-            this.OriginalPattern = pattern;
-            this.CanDerived = bCanDerived;
-            this.Operator = bOperator;
+            this.Terminal = terminal;
         }
 
 
@@ -64,10 +44,6 @@ namespace Parse.FrontEnd.Tokenize
             return result;
         }
 
-        public override string ToString() => string.Format("{0}, {1}, {2}, {3}", this.Key, this.Pattern, this.CanDerived.ToString().ToLower(), this.Operator.ToString().ToLower());
-
-
-
-        private Terminal _terminal;
+        public override string ToString() => string.Format("{0}, {1}, {2}, {3}", this.Key, this.Pattern, this.bWord.ToString().ToLower(), this.Operator.ToString().ToLower());
     }
 }

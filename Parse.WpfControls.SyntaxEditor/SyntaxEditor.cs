@@ -1,8 +1,7 @@
 ﻿using Parse.FrontEnd;
 using Parse.FrontEnd.Ast;
-using Parse.FrontEnd.Grammars;
+using Parse.FrontEnd.Parsers;
 using Parse.FrontEnd.Parsers.Datas;
-using Parse.FrontEnd.Parsers.Logical;
 using Parse.FrontEnd.RegularGrammar;
 using Parse.FrontEnd.Support.Drawing;
 using Parse.FrontEnd.Tokenize;
@@ -36,15 +35,15 @@ namespace Parse.WpfControls.SyntaxEditor
         private Tuple<ParsingResult, TextChange> _csPostProcessData;
 
 
-        public ParserSnippet ParserSnippet
+        public Parser Parser
         {
-            get { return (ParserSnippet)GetValue(ParserSnippetProperty); }
-            set { SetValue(ParserSnippetProperty, value); }
+            get { return (Parser)GetValue(ParserProperty); }
+            set { SetValue(ParserProperty, value); }
         }
 
         // Using a DependencyProperty as the backing store for ParserSnippet.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty ParserSnippetProperty =
-            DependencyProperty.Register("ParserSnippet", typeof(ParserSnippet), typeof(SyntaxEditor), new PropertyMetadata(null, ParserChanged));
+        public static readonly DependencyProperty ParserProperty =
+            DependencyProperty.Register("Parser", typeof(Parser), typeof(SyntaxEditor), new PropertyMetadata(null, ParserChanged));
 
 
         public static void ParserChanged(DependencyObject dp, DependencyPropertyChangedEventArgs args)
@@ -56,11 +55,11 @@ namespace Parse.WpfControls.SyntaxEditor
                 return;
             }
 
-            ParserSnippet parserSnippet = args.NewValue as ParserSnippet;
+            Parser parser = args.NewValue as Parser;
             if (editor.TextArea == null) editor.bReserveRegistKeywords = true;
             else
             {
-                editor.RegisterKeywords(parserSnippet.Parser.Grammar);
+                editor.RegisterKeywords();
 
                 // It is started a tokenize process because allocated a new tokenize rules.
                 var tempText = editor.Text;
@@ -196,9 +195,9 @@ namespace Parse.WpfControls.SyntaxEditor
         {
             Loaded += (s, e) =>
             {
-                if (this.ParserSnippet == null) return;
+                if (this.Parser == null) return;
 
-                this.ParserSnippet.Parser.Grammar.SDTS.SemanticErrorEventHandler += (sdts, errorInfo) =>
+                this.Parser.Grammar.SDTS.SemanticErrorEventHandler += (sdts, errorInfo) =>
                 {
                     if (errorInfo.ErrorType == ErrorType.Error)
                     {
@@ -210,9 +209,9 @@ namespace Parse.WpfControls.SyntaxEditor
 
                 if (this.bReserveRegistKeywords)
                 {
-                    this.RegisterKeywords(this.ParserSnippet.Parser.Grammar);
+                    this.RegisterKeywords();
 
-                    // It is started a tokenize process because a new tokenize rules are allocated.
+                    // a tokenize process is started because a new tokenize rules are allocated.
                     var tempText = this.Text;
                     this.Text = string.Empty;
                     this.Text = tempText;
@@ -312,7 +311,7 @@ namespace Parse.WpfControls.SyntaxEditor
             }
         }
 
-        private void RegisterKeywords(Grammar grammar)
+        private void RegisterKeywords()
         {
             this.TextArea.TokenizeRuleClear();
 
@@ -320,13 +319,13 @@ namespace Parse.WpfControls.SyntaxEditor
             // The terminal that has the derive ability also doesn't have delimitable ability.
             // Only operator type has delimitable ability.
 
-            foreach (var terminal in this.ParserSnippet.Parser.Grammar.TerminalSet)
+            foreach (var terminal in this.Parser.Grammar.TerminalSet)
             {
                 // setting color for token.
                 var item = this.HighlightMap.GetItem(terminal.TokenType.GetType());
                 if (item is null)
                 {
-                    this.TextArea.AddTokenPattern(terminal.Value, terminal, terminal.bWord, terminal.bOper);
+                    this.TextArea.AddTokenPattern(terminal);
                     continue;
                 }
 
@@ -334,10 +333,10 @@ namespace Parse.WpfControls.SyntaxEditor
                 var mediaBackground = ColorUtility.ToMediaBrush(item.BackgroundColor);
 
                 if (terminal.TokenType.GetType() == item.Type)
-                    this.TextArea.AddSyntaxHighLightInfo(mediaForeground, mediaBackground, terminal.Value, terminal, terminal.bWord, terminal.bOper);
+                    this.TextArea.AddSyntaxHighLightInfo(mediaForeground, mediaBackground, terminal);
             }
 
-            foreach (var delimiter in this.ParserSnippet.Parser.Grammar.DelimiterDic)
+            foreach (var delimiter in this.Parser.Grammar.DelimiterDic)
             {
                 if (this.TextArea.DelimiterSet.Contains(delimiter.Key) == false)
                     this.TextArea.DelimiterSet.Add(delimiter.Key);
@@ -399,7 +398,7 @@ namespace Parse.WpfControls.SyntaxEditor
             try
             {
                 AstSymbol rootSymbol = target.ToParseTree?.ToAst;
-                var result = this.ParserSnippet.Parser.Grammar.SDTS.Process(rootSymbol);
+                var result = this.Parser.Grammar.SDTS.Process(rootSymbol);
                 ParsingFailedListPreProcess(target);
 
                 return result;
@@ -462,14 +461,13 @@ namespace Parse.WpfControls.SyntaxEditor
         private void TextArea_TextChanged(object sender, TextChangedEventArgs e)
         {
             Text = TextArea.Text;
-            var tokens = ParserSnippet.ToTokenDataList(this.TextArea.Tokens);
 
             if (this.parsingResult.Success)  // if prev parsing successed.
                 // partial parsing
-                this.parsingResult = this.ParserSnippet.Parsing(tokens, this.parsingResult, this.TextArea.RecentTokenizeHistory);
+                this.parsingResult = this.Parser.Parsing(TextArea.Tokens, this.parsingResult, this.TextArea.RecentTokenizeHistory);
             else
                 // whole parsing
-                this.parsingResult = this.ParserSnippet.Parsing(tokens);
+                this.parsingResult = this.Parser.Parsing(TextArea.Tokens);
 
             // shallow copy
             var newParsingResult = this.parsingResult.Clone() as ParsingResult;

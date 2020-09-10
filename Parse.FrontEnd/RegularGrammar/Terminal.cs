@@ -10,7 +10,13 @@ namespace Parse.FrontEnd.RegularGrammar
         public string Value { get; } = string.Empty;
         public bool Meaning { get; } = true;
         public bool bWord { get; } = false;
-        public bool bOper => (TokenType is ScopeComment || TokenType is Operator || TokenType is Delimiter);
+
+        /// <summary>
+        /// If this argument is true regex expression is displayed like as (ex : ++ -> \+\+)
+        /// </summary>
+        public bool bOper => (TokenType is ScopeComment || 
+                                         TokenType is Operator || 
+                                         TokenType is Delimiter);
         public string RegexExpression
         {
             get
@@ -20,16 +26,24 @@ namespace Parse.FrontEnd.RegularGrammar
             }
         }
 
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="type"></param>
+        /// <param name="value"></param>
+        /// <param name="meaning"></param>
+        /// <param name="bWord">If this argument is false regex expression is displayed like as (ex : ++ -> \b++\b)</param>
         public Terminal(TokenType type, string value, bool meaning = true, bool bWord = false) : this(type, value, value, meaning, bWord)
         {
         }
-        public Terminal(TokenType type, string value, string caption, bool meaning = true, bool CanDerived = false)
+        public Terminal(TokenType type, string value, string caption, bool meaning = true, bool bWord = false)
         {
             this.TokenType = type;
             this.Value = value;
             this.caption = caption;
             this.Meaning = meaning;
-            this.bWord = CanDerived;
+            this.bWord = bWord;
         }
 
         public override string ToString()
@@ -71,6 +85,14 @@ namespace Parse.FrontEnd.RegularGrammar
         public NotDefined(string value = "") : base(TokenType.SpecialToken.NotDefined, value)
         {
             this.UniqueKey = KeyManager.NotDefinedKey;
+        }
+    }
+
+    public class CustomTerminal : Terminal
+    {
+        public CustomTerminal(TokenType type, string value = "") : base(type, value)
+        {
+            this.UniqueKey = KeyManager.CustomTerminalKey;
         }
     }
 

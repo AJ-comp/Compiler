@@ -3,7 +3,7 @@ using Parse.FrontEnd.Grammars.MiniC;
 using Parse.FrontEnd.Parsers;
 using Parse.FrontEnd.Parsers.Collections;
 using Parse.FrontEnd.Parsers.Datas;
-using Parse.FrontEnd.Parsers.Logical;
+using Parse.FrontEnd.Parsers.LR;
 using Parse.FrontEnd.RegularGrammar;
 using System.Collections.Generic;
 
@@ -20,12 +20,12 @@ namespace Parse.FrontEnd.ErrorHandler.GrammarPrivate.MiniC_LR
             ParsingTable = parsingTable;
         }
 
-        public ErrorHandlingResult Call(ParserSnippet snippet, ParsingResult parsingResult, int seeingTokenIndex)
+        public ErrorHandlingResult Call(Parser parser, ParsingResult parsingResult, int seeingTokenIndex)
         {
-            return DefaultErrorHandler.Process(this._grammar as MiniCGrammar, snippet, parsingResult, seeingTokenIndex);
+            return DefaultErrorHandler.Process(this._grammar as MiniCGrammar, parser, parsingResult, seeingTokenIndex);
         }
 
-        public static ErrorHandlingResult Process(MiniCGrammar grammar, ParserSnippet snippet, ParsingResult parsingResult, int seeingTokenIndex)
+        public static ErrorHandlingResult Process(MiniCGrammar grammar, Parser parser, ParsingResult parsingResult, int seeingTokenIndex)
         {
             var synchronizeTokens = new HashSet<Terminal>
             {
@@ -34,7 +34,7 @@ namespace Parse.FrontEnd.ErrorHandler.GrammarPrivate.MiniC_LR
                 new EndMarker()
             };
 
-            return PanicMode.LRProcess(snippet as LRParserSnippet, ParsingTable, parsingResult, seeingTokenIndex, synchronizeTokens);
+            return PanicMode.LRProcess(parser as LRParser, ParsingTable, parsingResult, seeingTokenIndex, synchronizeTokens);
         }
     }
 }

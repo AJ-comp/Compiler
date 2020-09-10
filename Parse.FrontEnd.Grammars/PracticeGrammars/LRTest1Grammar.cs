@@ -17,6 +17,8 @@ namespace Parse.FrontEnd.Grammars.PracticeGrammars
 
         public override Sdts SDTS { get; }
 
+        public override NonTerminal EbnfRoot => E;
+
         public LRTest1Grammar()
         {
             this.SDTS = new LRTest1Sdts(this.keyManager);

@@ -1,7 +1,7 @@
 ﻿using Parse.FrontEnd.Parsers;
 using Parse.FrontEnd.Parsers.Collections;
 using Parse.FrontEnd.Parsers.Datas;
-using Parse.FrontEnd.Parsers.Logical;
+using Parse.FrontEnd.Parsers.LR;
 using Parse.FrontEnd.Parsers.Properties;
 using Parse.FrontEnd.RegularGrammar;
 using System;
@@ -127,14 +127,14 @@ namespace Parse.FrontEnd.ErrorHandler
         /// <summary>
         /// This function is an error handler for LR parsing.
         /// </summary>
-        /// <param name="snippet"></param>
+        /// <param name="parser"></param>
         /// <param name="parsingTable"></param>
         /// <param name="parsingResult"></param>
         /// <param name="tokens"></param>
         /// <param name="seeingTokenIndex"></param>
         /// <param name="synchronizeTokens">The token set to process</param>
         /// <returns></returns>
-        public static ErrorHandlingResult LRProcess(LRParserSnippet snippet, LRParsingTable parsingTable, ParsingResult parsingResult, int seeingTokenIndex, HashSet<Terminal> synchronizeTokens)
+        public static ErrorHandlingResult LRProcess(LRParser parser, LRParsingTable parsingTable, ParsingResult parsingResult, int seeingTokenIndex, HashSet<Terminal> synchronizeTokens)
         {
             ErrorHandlingResult result = new ErrorHandlingResult(parsingResult, seeingTokenIndex, false);
             ParsingBlock blockToRecover = null;
@@ -163,7 +163,7 @@ namespace Parse.FrontEnd.ErrorHandler
                 if (AdjustStack(parsingTable, stackToProcess, targetTerminal))
                 {
                     seeingParsingUnit.AfterStack = stackToProcess;
-                    snippet.BlockParsing(parsingResult[seeingTokenIndex], true);
+                    parser.BlockParsing(parsingResult[seeingTokenIndex], true);
                     parsingResult[seeingTokenIndex].Units.Last().SetRecoveryMessage(string.Format("({0})", Resource.RecoverySuccessed));
                     blockToRecover.errorInfos.Add(ParsingErrorInfo.CreateParsingError(nameof(AlarmCodes.CE0003), string.Format(AlarmCodes.CE0003, tokenData.Input)));
                 }

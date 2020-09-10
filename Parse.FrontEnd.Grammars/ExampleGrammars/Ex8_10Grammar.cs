@@ -20,6 +20,8 @@ namespace Parse.FrontEnd.Grammars.ExampleGrammars
 
         public override Sdts SDTS { get; }
 
+        public override NonTerminal EbnfRoot => E;
+
         public Ex8_10Grammar()
         {
             this.SDTS = new Ex8_10Sdts(this.keyManager);

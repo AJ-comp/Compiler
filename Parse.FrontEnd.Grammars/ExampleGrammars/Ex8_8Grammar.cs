@@ -16,6 +16,7 @@ namespace Parse.FrontEnd.Grammars.ExampleGrammars
 
         public override Sdts SDTS => throw new System.NotImplementedException();
 
+        public override NonTerminal EbnfRoot => P;
 
         public Ex8_8Grammar()
         {

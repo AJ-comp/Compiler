@@ -1,4 +1,5 @@
-﻿using Parse.FrontEnd.Tokenize;
+﻿using Parse.FrontEnd.RegularGrammar;
+using Parse.FrontEnd.Tokenize;
 using Parse.WpfControls.Common;
 using Parse.WpfControls.EventArgs;
 using Parse.WpfControls.Models;
@@ -408,12 +409,11 @@ namespace Parse.WpfControls
         /// </summary>
         /// <param name="text">This argument means text to highlight. This argument can be a pattern.</param>
         /// <param name="foreBrush">This argument means the foreground color of the text.</param>
-        /// <param name="bCanDerived">If this argument is false regex expression is displayed like as (ex : ++ -> \b++\b)</param>
-        /// <param name="bOperator">If this argument is true regex expression is displayed like as (ex : ++ -> \+\+)</param>
-        public void AddSyntaxHighLightInfo(Brush foreBrush, Brush backBrush, string text, object optionData, bool bCanDerived, bool bOperator = false)
+        /// <param name="terminal"></param>
+        public void AddSyntaxHighLightInfo(Brush foreBrush, Brush backBrush, Terminal terminal)
         {
-            this.textStyleDic.Add(text, new TextStyle(foreBrush, Brushes.Transparent));
-            this.AddTokenPattern(text, optionData, bCanDerived, bOperator);
+            this.textStyleDic.Add(terminal.Value, new TextStyle(foreBrush, Brushes.Transparent));
+            this.AddTokenPattern(terminal);
         }
 
         public override void TokenizeRuleClear()

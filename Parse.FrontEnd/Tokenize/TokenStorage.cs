@@ -7,12 +7,8 @@ namespace Parse.FrontEnd.Tokenize
 {
     public class TokenStorage : ICloneable
     {
-        private Dictionary<TokenPatternInfo, List<int>> tableForAllPatternsOnView = new Dictionary<TokenPatternInfo, List<int>>();
-
-        internal List<TokenCell> tokensToView = new List<TokenCell>();
-
         /// <summary> The tokens to view (This include all tokens) </summary>
-        public IReadOnlyList<TokenCell> TokensToView => tokensToView;
+        public IReadOnlyList<TokenCell> TokensToView => _tokensToView;
 
         /// <summary> This property returns a whole table has columns that have positions for each TokenPatternInfo. </summary>
         public Dictionary<TokenPatternInfo, List<int>> TableForAllPatternsOnParsing => this.TableForAllPatternsOnParsing;
@@ -23,9 +19,9 @@ namespace Parse.FrontEnd.Tokenize
         {
             foreach (KeyValuePair<TokenPatternInfo, List<int>> item in this.tableForAllPatternsOnView) item.Value.Clear();
 
-            Parallel.For(0, this.tokensToView.Count, i =>
+            Parallel.For(0, this._tokensToView.Count, i =>
             {
-                var token = this.tokensToView[i];
+                var token = this._tokensToView[i];
 
                 lock (this.tableForAllPatternsOnView[token.PatternInfo])
                     this.tableForAllPatternsOnView[token.PatternInfo].Add(i);
@@ -215,9 +211,9 @@ namespace Parse.FrontEnd.Tokenize
         {
             int index = -1;
 
-            Parallel.For(0, this.tokensToView.Count, (i, loopState) =>
+            Parallel.For(0, this._tokensToView.Count, (i, loopState) =>
             {
-                TokenCell tokenInfo = this.tokensToView[i];
+                TokenCell tokenInfo = this._tokensToView[i];
 
                 if (tokenInfo.Contains(offset, recognWay))
                 {
@@ -264,7 +260,7 @@ namespace Parse.FrontEnd.Tokenize
             //            toIndex = (toIndex == -1 || toIndex >= this.tokensToView.Count - 1) ? this.tokensToView.Count - 1 : toIndex + 1;
 
             fromIndex = (fromIndex == -1) ? 0 : fromIndex;
-            toIndex = (toIndex == -1) ? this.tokensToView.Count - 1 : toIndex;
+            toIndex = (toIndex == -1) ? this._tokensToView.Count - 1 : toIndex;
 
             return new Range(fromIndex, toIndex - fromIndex + 1);
         }
@@ -279,7 +275,7 @@ namespace Parse.FrontEnd.Tokenize
             string result = string.Empty;
 
             for (int i = range.StartIndex; i <= range.EndIndex; i++)
-                result += this.tokensToView[i].Data;
+                result += this._tokensToView[i].Data;
 
             return result;
         }
@@ -295,10 +291,10 @@ namespace Parse.FrontEnd.Tokenize
             foreach (var item in replaceTokenList) addLength += item.Data.Length;
 
             for (int i = range.StartIndex; i <= range.EndIndex; i++)
-                addLength -= this.tokensToView[i].Data.Length;
+                addLength -= this._tokensToView[i].Data.Length;
 
-            int contentIndex = (range.StartIndex == 0) ? 0 : this.tokensToView[range.StartIndex].StartIndex;
-            this.tokensToView.RemoveRange(range.StartIndex, range.Count);
+            int contentIndex = (range.StartIndex == 0) ? 0 : this._tokensToView[range.StartIndex].StartIndex;
+            this._tokensToView.RemoveRange(range.StartIndex, range.Count);
 
             int startIndex = range.StartIndex;
             foreach(var item in replaceTokenList)
@@ -306,7 +302,7 @@ namespace Parse.FrontEnd.Tokenize
                 item.StartIndex = contentIndex;
                 contentIndex = item.EndIndex + 1;
 
-                this.tokensToView.Insert(startIndex++, item);
+                this._tokensToView.Insert(startIndex++, item);
             }
 
             Parallel.Invoke(
@@ -316,9 +312,9 @@ namespace Parse.FrontEnd.Tokenize
                 },
                 () =>
                 {
-                    Parallel.For(startIndex, this.tokensToView.Count, i =>
+                    Parallel.For(startIndex, this._tokensToView.Count, i =>
                     {
-                        this.tokensToView[i].StartIndex += addLength;
+                        this._tokensToView[i].StartIndex += addLength;
                     });
                 });
         }
@@ -330,7 +326,7 @@ namespace Parse.FrontEnd.Tokenize
             Parallel.Invoke(
                 () =>
                 {
-                    result.tokensToView = new List<TokenCell>(this.tokensToView);
+                    result._tokensToView = new List<TokenCell>(this._tokensToView);
                 },
                 () =>
                 {
@@ -339,5 +335,12 @@ namespace Parse.FrontEnd.Tokenize
 
             return result;
         }
+
+
+
+
+
+        private Dictionary<TokenPatternInfo, List<int>> tableForAllPatternsOnView = new Dictionary<TokenPatternInfo, List<int>>();
+        internal List<TokenCell> _tokensToView = new List<TokenCell>();
     }
 }

@@ -1,7 +1,6 @@
 ﻿using Parse.FrontEnd.Grammars;
 using Parse.FrontEnd.Parsers;
 using Parse.FrontEnd.Parsers.Datas;
-using Parse.FrontEnd.Parsers.Logical;
 
 namespace Parse.FrontEnd.ErrorHandler.GrammarPrivate
 {
@@ -14,6 +13,6 @@ namespace Parse.FrontEnd.ErrorHandler.GrammarPrivate
             this.grammar = grammar;
         }
 
-        public abstract ErrorHandlingResult Call(ParserSnippet snippet, ParsingResult parsingResult, int seeingTokenIndex);
+        public abstract ErrorHandlingResult Call(Parser snippet, ParsingResult parsingResult, int seeingTokenIndex);
     }
 }

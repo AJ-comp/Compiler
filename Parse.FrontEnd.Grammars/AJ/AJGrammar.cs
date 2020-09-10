@@ -64,6 +64,7 @@ namespace Parse.FrontEnd.Grammars.AJ
 
         public override Sdts SDTS { get; }
 
+        public override NonTerminal EbnfRoot => throw new System.NotImplementedException();
 
         public AJGrammar()
         {

@@ -8,6 +8,9 @@ namespace Parse.FrontEnd.Grammars
 {
     public abstract class Grammar
     {
+        public abstract NonTerminal EbnfRoot { get; }
+
+
         protected KeyManager keyManager = new KeyManager();
 
         protected Terminal space = new Terminal(TokenType.SpecialToken.Delimiter, " ");

@@ -110,6 +110,8 @@ namespace Parse.FrontEnd.Grammars.MiniC
 
         public override Grammars.Sdts SDTS { get; }
 
+        public override NonTerminal EbnfRoot => this.miniC;
+
         public MiniCGrammar()
         {
             this.ScopeInfos.Add(new ScopeInfo(this.scopeCommentStart, this.scopeCommentEnd));

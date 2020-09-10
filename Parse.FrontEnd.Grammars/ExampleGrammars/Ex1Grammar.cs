@@ -18,6 +18,7 @@ namespace Parse.FrontEnd.Grammars.ExampleGrammars
 
         public override Sdts SDTS { get; } = null;
 
+        public override NonTerminal EbnfRoot => A;
 
         public Ex1Grammar()
         {

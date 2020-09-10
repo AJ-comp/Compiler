@@ -2,12 +2,11 @@
 using Parse.FrontEnd.Grammars;
 using Parse.FrontEnd.Parsers.Collections;
 using Parse.FrontEnd.Parsers.Datas;
-using Parse.FrontEnd.Parsers.Logical;
 using Parse.FrontEnd.RegularGrammar;
+using Parse.FrontEnd.Tokenize;
 using ParsingLibrary.Parsers.RelationAnalyzers;
 using System;
 using System.Collections.Generic;
-using System.Data;
 
 namespace Parse.FrontEnd.Parsers
 {
@@ -166,7 +165,12 @@ namespace Parse.FrontEnd.Parsers
         }
         */
 
-        public override ParserSnippet NewParserSnippet()
+        public override ParsingResult Parsing(IReadOnlyList<TokenCell> tokens)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override ParsingResult Parsing(IReadOnlyList<TokenCell> tokens, ParsingResult prevParsingInfo, TokenizeImpactRanges rangeToParse)
         {
             throw new NotImplementedException();
         }

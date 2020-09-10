@@ -8,8 +8,9 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts.AstNodes
 {
     public class ProgramNode : MiniCNode
     {
-        public IReadOnlyList<VariableDclsNode> VarNodes => _varNodes;
-        public IReadOnlyList<FuncDefNode> FuncDefNodes => _funcDefNodes;
+        public IEnumerable<DefinePrepNode> DefinePrep => _definePrepNodes;
+        public IEnumerable<VariableDclsNode> VarNodes => _varNodes;
+        public IEnumerable<FuncDefNode> FuncDefNodes => _funcDefNodes;
 
         public Func<SdtsNode, IRExpression> ConvertFunc { get; set; }
 
@@ -28,8 +29,13 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts.AstNodes
             {
                 var minicNode = item as MiniCNode;
 
+                // #define
+                if (minicNode is DefinePrepNode)
+                {
+                    _definePrepNodes.Add(minicNode.Build(param) as DefinePrepNode);
+                }
                 // Global variable
-                if (minicNode is VariableDclsNode)
+                else if (minicNode is VariableDclsNode)
                 {
                     // children node is parsing only variable elements so it doesn't need to clone an param
                     _varNodes.Add(minicNode.Build(param) as VariableDclsNode);
@@ -48,7 +54,7 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts.AstNodes
             return this;
         }
 
-
+        private List<DefinePrepNode> _definePrepNodes = new List<DefinePrepNode>();
         private List<VariableDclsNode> _varNodes = new List<VariableDclsNode>();
         private List<FuncDefNode> _funcDefNodes = new List<FuncDefNode>();
     }

@@ -1,4 +1,5 @@
-﻿using Parse.FrontEnd.Tokenize;
+﻿using Parse.FrontEnd.RegularGrammar;
+using Parse.FrontEnd.Tokenize;
 using Parse.WpfControls.Models;
 using System;
 using System.Collections.Generic;
@@ -16,11 +17,11 @@ namespace Parse.WpfControls.Common
         private SelectionTokensContainer selectionBlocks = new SelectionTokensContainer();
         private Lexer lexer = new Lexer();
         private TokenStorage tokens;
-        private TokenizeImpactRanges recentTokenizeHistory;
+        private TokenizeImpactRanges _recentTokenizeHistory;
 
         public SyntaxPairCollection syntaxPairs = new SyntaxPairCollection();
         public IReadOnlyList<TokenCell> Tokens => tokens.TokensToView;
-        public TokenizeImpactRanges RecentTokenizeHistory => recentTokenizeHistory;
+        public TokenizeImpactRanges RecentTokenizeHistory => _recentTokenizeHistory;
 
 
         public int TokenIndex
@@ -37,9 +38,9 @@ namespace Parse.WpfControls.Common
         public TokenizeTextBox()
         {
             // Register default a tokenize rules.
-            this.lexer.AddTokenRule(" ", null, false, true);
-            this.lexer.AddTokenRule("\r", null, false, true);
-            this.lexer.AddTokenRule("\n", null, false, true);
+            this.lexer.AddTokenRule(new CustomTerminal(TokenType.SpecialToken.Delimiter, " "));
+            this.lexer.AddTokenRule(new CustomTerminal(TokenType.SpecialToken.Delimiter, "\r"));
+            this.lexer.AddTokenRule(new CustomTerminal(TokenType.SpecialToken.Delimiter, "\n"));
 
             this.Loaded += (s, e) =>
             {
@@ -114,7 +115,7 @@ namespace Parse.WpfControls.Common
             var delInfos = this.GetSelectionTokenInfos(changeInfo.Offset, changeInfo.RemovedLength);
 
             this.tokens = this.lexer.Lexing(this.tokens, delInfos);
-            this.recentTokenizeHistory = this.lexer.ImpactRanges;
+            this._recentTokenizeHistory = this.lexer.ImpactRanges;
         }
 
         private void UpdateTokens(TextChange changeInfo)
@@ -125,7 +126,7 @@ namespace Parse.WpfControls.Common
 
             string addString = this.Text.Substring(changeInfo.Offset, changeInfo.AddedLength);
             this.tokens = this.lexer.Lexing(this.tokens, delInfos, addString);
-            this.recentTokenizeHistory = this.lexer.ImpactRanges;
+            this._recentTokenizeHistory = this.lexer.ImpactRanges;
         }
 
         private void UpdateTokenInfos(TextChange changeInfo)
@@ -138,7 +139,7 @@ namespace Parse.WpfControls.Common
             {
                 string addString = this.Text.Substring(changeInfo.Offset, changeInfo.AddedLength);
                 this.tokens = this.lexer.Lexing(this.tokens, changeInfo.Offset, addString);
-                this.recentTokenizeHistory = this.lexer.ImpactRanges;
+                this._recentTokenizeHistory = this.lexer.ImpactRanges;
             }
         }
 
@@ -151,13 +152,10 @@ namespace Parse.WpfControls.Common
         /// <summary>
         /// This function register a pattern for tokenizing.
         /// </summary>
-        /// <param name="text"></param>
-        /// <param name="optionData"></param>
-        /// <param name="bCanDerived"></param>
-        /// <param name="bOperator"></param>
-        public void AddTokenPattern(string text, object optionData = null, bool bCanDerived = false, bool bOperator = false)
+        /// <param name="terminal"></param>
+        public void AddTokenPattern(Terminal terminal)
         {
-            this.lexer.AddTokenRule(text, optionData, bCanDerived, bOperator);
+            this.lexer.AddTokenRule(terminal);
         }
 
         /// <summary>

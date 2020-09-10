@@ -40,7 +40,7 @@
                                                 LineCommentForeground="ForestGreen"
                                                 HighlightMap="{Binding FontsAndColorsVM.HighlightMap}"
                                                 Text="{Binding CurrentData, Mode=TwoWay}"
-                                                ParserSnippet="{Binding ParserSnippet}"
+                                                Parser="{Binding Parser}"
                                                 CloseCharacters="{Binding CloseCharacters}">
 
             <i:Interaction.Behaviors>

@@ -19,6 +19,7 @@ namespace Parse.FrontEnd
         public static UInt32 EndMarkerKey { get; } = 1;
         public static UInt32 EpsilonKey { get; } = 2;
         public static UInt32 NotDefinedKey { get; } = 3;
+        public static UInt32 CustomTerminalKey { get; } = 4;
 
 
         public void AllocateUniqueKey(Terminal item)

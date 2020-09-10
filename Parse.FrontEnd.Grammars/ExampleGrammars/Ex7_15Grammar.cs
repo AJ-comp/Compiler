@@ -14,6 +14,7 @@ namespace Parse.FrontEnd.Grammars.ExampleGrammars
 
         public override Sdts SDTS => throw new System.NotImplementedException();
 
+        public override NonTerminal EbnfRoot => S;
 
         public Ex7_15Grammar()
         {

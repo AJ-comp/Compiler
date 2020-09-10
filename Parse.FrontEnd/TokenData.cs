@@ -27,7 +27,7 @@ namespace Parse.FrontEnd
             if (tokenCell.Data == new EndMarker().Value && bEndIndex) terminal = new EndMarker();
             else
             {
-                var typeData = tokenCell.PatternInfo.OptionData as Terminal;
+                var typeData = tokenCell.PatternInfo.Terminal as Terminal;
                 if (typeData == null) terminal = new NotDefined();
                 else if (typeData.TokenType == TokenType.SpecialToken.Delimiter || typeData.TokenType == TokenType.SpecialToken.Comment) terminal = null;
                 else terminal = typeData;

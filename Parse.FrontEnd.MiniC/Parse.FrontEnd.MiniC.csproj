@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Parse.FrontEnd.Grammars\Parse.FrontEnd.Grammars.csproj" />
+    <ProjectReference Include="..\Parse.FrontEnd.Parsers\Parse.FrontEnd.Parsers.csproj" />
+  </ItemGroup>
+
+</Project>

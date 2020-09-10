@@ -94,7 +94,7 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts.Datas
 
 
 
-    public class DefinePrepTable : MiniCReferenceTable<MiniCFuncData>
+    public class DefinePrepTable : MiniCReferenceTable<DefinePrepData>
     { 
 
     }

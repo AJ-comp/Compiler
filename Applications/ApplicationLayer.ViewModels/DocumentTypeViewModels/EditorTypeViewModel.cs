@@ -11,8 +11,8 @@ using Parse.FrontEnd.Ast;
 using Parse.FrontEnd.Grammars;
 using Parse.FrontEnd.Grammars.MiniC;
 using Parse.FrontEnd.Grammars.MiniC.Sdts.AstNodes;
+using Parse.FrontEnd.Parsers;
 using Parse.FrontEnd.Parsers.Datas;
-using Parse.FrontEnd.Parsers.Logical;
 using Parse.FrontEnd.ParseTree;
 using Parse.FrontEnd.Support.Drawing;
 using Parse.FrontEnd.Tokenize;
@@ -34,7 +34,7 @@ namespace ApplicationLayer.ViewModels.DocumentTypeViewModels
         private object _lockObject = new object();
         private int _caretIndex = 0;
         private SourceFileTreeNodeModel _fileNode;
-        private ParserSnippet _parserSnippet;
+        private Parser _parser;
         private RelayCommand _saveCommand;
         private List<HighlightMapItem> _highlightMaps = new List<HighlightMapItem>();
         private RelayCommand<ParsingCompletedEventArgs> _parsingCompletedCommand = null;
@@ -56,7 +56,7 @@ namespace ApplicationLayer.ViewModels.DocumentTypeViewModels
         public Grammar Grammar { get; } = new MiniCGrammar();
 
         public TokenizeImpactRanges RecentTokenizeHistory { get; } = new TokenizeImpactRanges();
-        public ParserSnippet ParserSnippet => _parserSnippet;
+        public Parser Parser => _parser;
         public ParseTreeSymbol ParseTree { get; private set; }
         public DataTable ParsingHistory { get; private set; }
         public IEnumerable<AstSymbol> InterLanguage { get; private set; }
@@ -115,7 +115,7 @@ namespace ApplicationLayer.ViewModels.DocumentTypeViewModels
         public EditorTypeViewModel(SourceFileTreeNodeModel fileNode) : base(fileNode?.FileName, fileNode?.FullPath, fileNode?.FullPath)
         {
             this._fileNode = fileNode;
-            this._parserSnippet = ParserFactory.Instance.GetParser(ParserFactory.ParserKind.SLR_Parser, Grammar).NewParserSnippet();
+            this._parser = ParserFactory.Instance.GetParser(ParserFactory.ParserKind.SLR_Parser, Grammar);
 
             this.CurrentData = Data;
             this.CloseCharacters.Add("{");
