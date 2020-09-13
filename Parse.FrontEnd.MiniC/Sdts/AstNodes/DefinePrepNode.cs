@@ -1,9 +1,7 @@
 ﻿using Parse.FrontEnd.Ast;
 using Parse.FrontEnd.Grammars.MiniC.Sdts.AstNodes.ExprNodes;
 using Parse.FrontEnd.Grammars.MiniC.Sdts.Datas;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using System.Linq;
 
 namespace Parse.FrontEnd.Grammars.MiniC.Sdts.AstNodes
 {
@@ -24,7 +22,13 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts.AstNodes
             Ident = (Items[1].Build(param) as TerminalNode).Token;
             Expression = Items[2].Build(param) as ExprNode;
 
-//            SymbolTable.DefineTable.CreateNewBlock(new DefinePrepData(Ident.Input, )
+            string exprString = string.Empty;
+            foreach (var token in Expression.AllTokens) exprString += token.Input + " ";
+
+            if (Expression.AllTokens.Contains(Ident))
+                MiniCUtilities.AddErrorDefineCantOwn(this, Ident);
+
+            SymbolTable.DefineTable.CreateNewBlock(new DefinePrepData(Ident.Input, Expression.AllTokens), this);
 
             return this;
         }

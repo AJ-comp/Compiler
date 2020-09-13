@@ -49,13 +49,12 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts.AstNodes
                                                                                (BlockLevel == 0) ? VarProperty.Global : VarProperty.Normal,
                                                                                initDeclarator.Right);
 
-                // save to SymbolTable
-                bool result = (param as MiniCSdtsParams).SymbolTable
-                                                                             .VarTable
-                                                                             .CreateNewBlock(varData, new ReferenceInfo(this, initDeclarator.Right));
+                if (!MiniCChecker.CanAddVarData(this, varData)) continue;
 
-                // duplicated declaration
-                if (!result) MiniCUtilities.AddDuplicatedError(this, initDeclarator.NameToken);
+                // save to SymbolTable
+                (param as MiniCSdtsParams).SymbolTable
+                                                          .VarTable
+                                                          .CreateNewBlock(varData, new ReferenceInfo(this, initDeclarator.Right));
             }
 
             return this;

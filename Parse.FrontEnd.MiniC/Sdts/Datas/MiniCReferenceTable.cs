@@ -24,9 +24,9 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts.Datas
             return result;
         }
 
-        public bool CreateNewBlock(T baseForm, MiniCNode miniCNode) => CreateNewBlock(baseForm, new ReferenceInfo(miniCNode));
+        public virtual bool CreateNewBlock(T baseForm, MiniCNode miniCNode) => CreateNewBlock(baseForm, new ReferenceInfo(miniCNode));
 
-        public bool CreateNewBlock(T baseForm, ReferenceInfo referenceInfo)
+        public virtual bool CreateNewBlock(T baseForm, ReferenceInfo referenceInfo)
         {
             var recordToAdd = new MiniCReferenceRecord<T>(baseForm, referenceInfo);
             if (_recordBlocks.Contains(recordToAdd)) return false;
@@ -95,7 +95,12 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts.Datas
 
 
     public class DefinePrepTable : MiniCReferenceTable<DefinePrepData>
-    { 
+    {
+        public override bool CreateNewBlock(DefinePrepData baseForm, MiniCNode miniCNode)
+        {
+            if(baseForm.)
 
+            return base.CreateNewBlock(baseForm, miniCNode);
+        }
     }
 }

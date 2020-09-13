@@ -1,6 +1,7 @@
 ﻿using Parse.FrontEnd.Grammars;
 using Parse.FrontEnd.Parsers.Collections;
 using Parse.FrontEnd.Parsers.Datas;
+using Parse.FrontEnd.ParseTree;
 using Parse.FrontEnd.RegularGrammar;
 using Parse.FrontEnd.Tokenize;
 using System;
@@ -19,6 +20,7 @@ namespace Parse.FrontEnd.Parsers.LR
         public abstract event EventHandler<ParsingUnit> ReduceAction;
         public abstract event EventHandler<ParsingUnit> GotoAction;
         public abstract event EventHandler<ParsingUnit> ShiftAction;
+
         /// <summary>
         /// The Error Handler that if the action failed.
         /// ParsingFailResult : The state information when error generated

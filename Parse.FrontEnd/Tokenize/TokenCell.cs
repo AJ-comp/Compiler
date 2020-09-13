@@ -9,7 +9,7 @@ namespace Parse.FrontEnd.Tokenize
     public class TokenCell
     {
         public int StartIndex { get; internal set; }
-        public int EndIndex { get => this.StartIndex + this.Data.Length - 1; }
+        public int EndIndex => this.StartIndex + this.Data.Length - 1;
         public string Data { get; } = string.Empty;
         public Match matchData { get; }
         public TokenPatternInfo PatternInfo { get; internal set; }

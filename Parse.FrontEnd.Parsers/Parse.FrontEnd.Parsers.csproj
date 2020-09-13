@@ -5,7 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Parse.FrontEnd.Grammars.MiniC\Parse.FrontEnd.Grammars.MiniC.csproj" />
     <ProjectReference Include="..\Parse.FrontEnd.Grammars\Parse.FrontEnd.Grammars.csproj" />
   </ItemGroup>
 

@@ -23,7 +23,7 @@ namespace Parse.FrontEnd.Tokenize
             this._tokenizer.TokenizeCompleted = TokenizeCompletedWork;
         }
 
-        private void TokenizeCompletedWork(List<TokenCell> tokenCells)
+        private void TokenizeCompletedWork(IReadOnlyList<TokenCell> tokenCells)
         {
             // It would attach the label (TokenPatternInfo).
             Parallel.For(0, tokenCells.Count, index =>

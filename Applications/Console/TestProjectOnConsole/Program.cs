@@ -1,7 +1,4 @@
-﻿using Parse.FrontEnd.Grammars;
-using Parse.FrontEnd.Grammars.MiniC;
-using Parse.FrontEnd.Parsers.LR;
-using Parse.FrontEnd.Tokenize;
+﻿using Parse.FrontEnd.MiniCParser;
 
 namespace TestProjectOnConsole
 {
@@ -9,17 +6,10 @@ namespace TestProjectOnConsole
     {
         static void Main(string[] args)
         {
-            Lexer lexer = new Lexer();
-            Grammar miniC = new MiniCGrammar();
-            SLRParser parser = new SLRParser(miniC);
+            MiniCParser parser = new MiniCParser();
+            var parsingResult = parser.Operate("test.mc", "#define A 10\r\n void main()\r\n");
 
-            foreach (var terminal in miniC.TerminalSet)
-            {
-                lexer.AddTokenRule(terminal);
-            }
-
-            var result = lexer.Lexing("void main()\r\n");
-            parser.NewParserSnippet().Parsing(result.TokensToView);
+            bool result = parsingResult.Success;
         }
     }
 }

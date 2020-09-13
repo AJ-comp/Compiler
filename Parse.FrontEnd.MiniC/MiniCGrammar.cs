@@ -1,5 +1,5 @@
-﻿using Parse.FrontEnd.Grammars.MiniC.Properties;
-using Parse.FrontEnd.Grammars.MiniC.Sdts;
+﻿using Parse.FrontEnd.Grammars.MiniC.Sdts;
+using Parse.FrontEnd.MiniC.Properties;
 using Parse.FrontEnd.RegularGrammar;
 
 namespace Parse.FrontEnd.Grammars.MiniC
@@ -107,6 +107,42 @@ namespace Parse.FrontEnd.Grammars.MiniC
         private NonTerminal actualParam = new NonTerminal("actual_param");
         private NonTerminal actualParamList = new NonTerminal("actual_param_list");
         private NonTerminal primaryExp = new NonTerminal("primary_exp");
+
+
+
+
+        // These are meaning unit for semantic analysis.
+        public static MeaningUnit Program { get; } = new MeaningUnit("Program");
+        public static MeaningUnit DefinePrep { get; } = new MeaningUnit("DefinePrep");
+        public static MeaningUnit FuncDef { get; } = new MeaningUnit("FuncDef");
+        public static MeaningUnit FuncHead { get; } = new MeaningUnit("FuncHead");
+        public static MeaningUnit DclSpec { get; } = new MeaningUnit("DclSpec");
+        public static MeaningUnit ConstNode { get; } = new MeaningUnit("ConstNode");
+        public static MeaningUnit CharNode { get; } = new MeaningUnit("CharNode");
+        public static MeaningUnit ShortNode { get; } = new MeaningUnit("ShortNode");
+        public static MeaningUnit IntNode { get; } = new MeaningUnit("IntNode");
+        public static MeaningUnit DoubleNode { get; } = new MeaningUnit("DoubleNode");
+        public static MeaningUnit VoidNode { get; } = new MeaningUnit("VoidNode");
+        public static MeaningUnit FormalPara { get; } = new MeaningUnit("FormalPara");
+        public static MeaningUnit ParamDcl { get; } = new MeaningUnit("ParamDcl");
+        public static MeaningUnit CompoundSt { get; } = new MeaningUnit("CompoundSt");
+        public static MeaningUnit DclList { get; } = new MeaningUnit("DclList");
+        public static MeaningUnit Dcl { get; } = new MeaningUnit("Dcl");
+        public static MeaningUnit DclItem { get; } = new MeaningUnit("DclItem");
+        public static MeaningUnit DeclareVar { get; } = new MeaningUnit("DeclareVar");
+        public static MeaningUnit StatList { get; } = new MeaningUnit("StatList");
+        public static MeaningUnit ExpSt { get; } = new MeaningUnit("ExpSt");
+        public static MeaningUnit IfSt { get; } = new MeaningUnit("IfSt");
+        public static MeaningUnit IfElseSt { get; } = new MeaningUnit("IfElseSt");
+        public static MeaningUnit WhileSt { get; } = new MeaningUnit("WhileSt");
+        public static MeaningUnit ReturnSt { get; } = new MeaningUnit("ReturnSt");
+        public static MeaningUnit Index { get; } = new MeaningUnit("Index");
+        public static MeaningUnit Call { get; } = new MeaningUnit("Call");
+        public static MeaningUnit ActualParam { get; } = new MeaningUnit("ActualParam");
+        public static MeaningUnit UseVar { get; } = new MeaningUnit("UseVar");
+        public static MeaningUnit IntLiteralNode { get; } = new MeaningUnit("IntLiteralNode");
+
+
 
         public override Grammars.Sdts SDTS { get; }
 

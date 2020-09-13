@@ -97,61 +97,16 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="MCL0000" xml:space="preserve">
-    <value>{0} is already defined.</value>
+  <data name="Ident" xml:space="preserve">
+    <value>identifier</value>
   </data>
-  <data name="MCL0001" xml:space="preserve">
-    <value>{0} is not defined.</value>
+  <data name="DecimalNumber" xml:space="preserve">
+    <value>decimal number</value>
   </data>
-  <data name="MCL0002" xml:space="preserve">
-    <value>Value can not be changed because the constant type.</value>
+  <data name="HexNumber" xml:space="preserve">
+    <value>hex number</value>
   </data>
-  <data name="MCL0003" xml:space="preserve">
-    <value>It can not be allocated because the data type differs.</value>
-  </data>
-  <data name="MCL0004" xml:space="preserve">
-    <value>lvalue have to be modifiable format.</value>
-  </data>
-  <data name="MCL0005" xml:space="preserve">
-    <value>{0} variable that not initialized is using.</value>
-  </data>
-  <data name="MCL0006" xml:space="preserve">
-    <value>Integer or enum type has to be to expression.</value>
-  </data>
-  <data name="MCL0007" xml:space="preserve">
-    <value>Buffer overflow fired while write {0}. writable byte is {1} but in fact write {2} byte.</value>
-  </data>
-  <data name="MCL0008" xml:space="preserve">
-    <value>The operand of Inc or Dec operator has to be variable, property or indexer.</value>
-  </data>
-  <data name="MCL0009" xml:space="preserve">
-    <value>The {0} identifier was already defined in the current block.</value>
-  </data>
-  <data name="MCL0010" xml:space="preserve">
-    <value>It was failed to struct Sdts nodes.</value>
-  </data>
-  <data name="MCL0011" xml:space="preserve">
-    <value>The calculation '{0}' is not applicated for the operand '{1}' and '{2}.</value>
-  </data>
-  <data name="MCL0012" xml:space="preserve">
-    <value>The operand of the inc or dec has to be variable, property or indexer.</value>
-  </data>
-  <data name="MCL0013" xml:space="preserve">
-    <value>The operator '{0}' is not applicated to string type.</value>
-  </data>
-  <data name="MCL0014" xml:space="preserve">
-    <value>The member '{0}' is not used as method.</value>
-  </data>
-  <data name="MCL0015" xml:space="preserve">
-    <value>There is not overload method '{1}' that use parameter {0} count.</value>
-  </data>
-  <data name="MCL0016" xml:space="preserve">
-    <value>There is not argument for parameter '{1}' that need in the '{0}' method.</value>
-  </data>
-  <data name="MCL0017" xml:space="preserve">
-    <value>It can't be declared using identifier that defined in macro.</value>
-  </data>
-  <data name="MCL0018" xml:space="preserve">
-    <value>The macro can't be included own identifier.</value>
+  <data name="BinNumber" xml:space="preserve">
+    <value>binary number</value>
   </data>
 </root>

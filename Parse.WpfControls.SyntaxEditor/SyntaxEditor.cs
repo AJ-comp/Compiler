@@ -2,6 +2,7 @@
 using Parse.FrontEnd.Ast;
 using Parse.FrontEnd.Parsers;
 using Parse.FrontEnd.Parsers.Datas;
+using Parse.FrontEnd.ParseTree;
 using Parse.FrontEnd.RegularGrammar;
 using Parse.FrontEnd.Support.Drawing;
 using Parse.FrontEnd.Tokenize;
@@ -49,13 +50,14 @@ namespace Parse.WpfControls.SyntaxEditor
         public static void ParserChanged(DependencyObject dp, DependencyPropertyChangedEventArgs args)
         {
             SyntaxEditor editor = dp as SyntaxEditor;
-            if(args.NewValue == null)
+            if (args.NewValue == null)
             {
                 editor.TextArea.TokenizeRuleClear();
                 return;
             }
 
             Parser parser = args.NewValue as Parser;
+            parser.ParseTreeCreated += Parser_ParseTreeCreated;
             if (editor.TextArea == null) editor.bReserveRegistKeywords = true;
             else
             {
@@ -65,6 +67,28 @@ namespace Parse.WpfControls.SyntaxEditor
                 var tempText = editor.Text;
                 editor.Text = string.Empty;
                 editor.Text = tempText;
+            }
+        }
+
+
+        /// <summary>
+        /// This function is event handler. this is called when ParseTree(node) is created.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private static void Parser_ParseTreeCreated(object sender, ParseTreeSymbol e)
+        {
+            var astSymbol = e.ToAst;
+
+            if (astSymbol is AstTerminal)
+            {
+                var astTerminal = astSymbol as AstTerminal;
+            }
+            else if (astSymbol is AstNonTerminal)
+            {
+                var astNonT = astSymbol as AstNonTerminal;
+
+                astNonT.
             }
         }
 
@@ -228,7 +252,7 @@ namespace Parse.WpfControls.SyntaxEditor
             this.TextArea.TextChanged += TextArea_TextChanged;
             this.completionList = new CompletionList(this.TextArea);
             this.completionList.RegisterKey(CompletionItemType.Class, new KeyData(FindResource("ClassActive16Path") as BitmapImage,
-                                                                                                                    FindResource("ClassInActive16Path") as BitmapImage, 
+                                                                                                                    FindResource("ClassInActive16Path") as BitmapImage,
                                                                                                                     string.Format(Properties.Resources.DisplayOnly, Properties.Resources.Class_)));
             this.completionList.RegisterKey(CompletionItemType.CodeSnipp, new KeyData(FindResource("CodeSnippetActive16Path") as BitmapImage,
                                                                                                                             FindResource("CodeSnippetInActive16Path") as BitmapImage,
@@ -277,7 +301,7 @@ namespace Parse.WpfControls.SyntaxEditor
             ParsingResult localResult;
             TextChange localTextChange;
 
-            while(true)
+            while (true)
             {
                 Thread.Sleep(50);
 

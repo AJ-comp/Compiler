@@ -9,7 +9,6 @@ using Parse.MiddleEnd.IR;
 using Parse.MiddleEnd.IR.LLVM;
 using Parse.MiddleEnd.IR.LLVM.Expressions;
 using System;
-using System.Collections.Generic;
 
 namespace Parse.FrontEnd.IRGenerator
 {

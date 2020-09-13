@@ -117,61 +117,16 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="MCL0000" xml:space="preserve">
-    <value>{0}는(은) 이미 정의되었습니다.</value>
+  <data name="Ident" xml:space="preserve">
+    <value>식별자</value>
   </data>
-  <data name="MCL0001" xml:space="preserve">
-    <value>{0} 가 선언되지 않았습니다.</value>
+  <data name="DecimalNumber" xml:space="preserve">
+    <value>10진수</value>
   </data>
-  <data name="MCL0002" xml:space="preserve">
-    <value>상수타입이므로 값을 변경할 수 없습니다.</value>
+  <data name="HexNumber" xml:space="preserve">
+    <value>16진수</value>
   </data>
-  <data name="MCL0003" xml:space="preserve">
-    <value>데이터 타입이 다르므로 할당할 수 없습니다.</value>
-  </data>
-  <data name="MCL0004" xml:space="preserve">
-    <value>왼쪽식이 수정할 수 있는 형태여야 합니다.</value>
-  </data>
-  <data name="MCL0005" xml:space="preserve">
-    <value>초기화 되지 않은 변수 {0}를 사용하고 있습니다.</value>
-  </data>
-  <data name="MCL0006" xml:space="preserve">
-    <value>식에 정수 또는 범위가 지정되지 않은 열거형 형식이 있어야 합니다.</value>
-  </data>
-  <data name="MCL0007" xml:space="preserve">
-    <value>{0}에 쓰는 동안 버퍼오버런이 발생했습니다. 쓰기 가능한 바이트는 {1} 인데 실제로 {2}만큼 쓰고 있습니다.</value>
-  </data>
-  <data name="MCL0008" xml:space="preserve">
-    <value>증가 연산자 또는 감소 연산자의 피연산자는 변수, 속성 또는 인덱서여야 합니다.</value>
-  </data>
-  <data name="MCL0009" xml:space="preserve">
-    <value>{0} 식별자는 현재 블록에 이미 정의되어 있습니다.</value>
-  </data>
-  <data name="MCL0010" xml:space="preserve">
-    <value>Sdts 노드 구성에 실패했습니다.</value>
-  </data>
-  <data name="MCL0011" xml:space="preserve">
-    <value>'{0}' 연산은 '{1}' 및 '{2}' 형식의 피연산자에 적용할 수 없습니다.</value>
-  </data>
-  <data name="MCL0012" xml:space="preserve">
-    <value>증가 연산자 또는 감소 연산자의 피연산자는 변수, 속성 또는 인덱서여야 합니다.</value>
-  </data>
-  <data name="MCL0013" xml:space="preserve">
-    <value>'{0}' 연산자는 string 타입에 적용할 수 없습니다.</value>
-  </data>
-  <data name="MCL0014" xml:space="preserve">
-    <value>호출할 수 없는 멤버인 '{0}'은(는) 메서드처럼 사용할 수 없습니다.</value>
-  </data>
-  <data name="MCL0015" xml:space="preserve">
-    <value>인수 {0} 개를 사용하는 사용하는 '{1}' 메서드에 대한 오버로드가 없습니다.</value>
-  </data>
-  <data name="MCL0016" xml:space="preserve">
-    <value>'{0}' 메서드에서 필요한 매개 변수 '{1}'에 해당하는 제공된 인수가 없습니다.</value>
-  </data>
-  <data name="MCL0017" xml:space="preserve">
-    <value>메크로 상수에 정의 되어 있는 식별자를 사용하여 선언할 수 없습니다.</value>
-  </data>
-  <data name="MCL0018" xml:space="preserve">
-    <value>메크로 상수는 자신의 식별자를 포함할 수 없습니다.</value>
+  <data name="BinNumber" xml:space="preserve">
+    <value>2진수</value>
   </data>
 </root>

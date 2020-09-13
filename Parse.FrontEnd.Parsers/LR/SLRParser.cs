@@ -22,6 +22,7 @@ namespace Parse.FrontEnd.Parsers.LR
         public override event EventHandler<ParsingUnit> GotoAction;
         public override event EventHandler<ParsingUnit> ShiftAction;
         public override event EventHandler<ParsingUnit> ActionFailed;
+        public override event EventHandler<ParseTreeSymbol> ParseTreeCreated;
 
         public override IParsingTable ParsingTable { get; } = new LRParsingTable();
         public override string AnalysisResult => this.C0.ToString();
@@ -45,14 +46,16 @@ namespace Parse.FrontEnd.Parsers.LR
         {
             ParsingUnit parsingUnit = parsingBlock.Units.Last();
 
-            if (parsingUnit.Action.Direction == ActionDir.shift)
+            if (parsingUnit.Action.Direction == ActionDir.shift)    // case shift
             {
                 var treeTerminal = new ParseTreeTerminal(parsingUnit.InputValue);
                 parsingBlock.TokenTree = treeTerminal;
                 parsingUnit.AfterStack.Push(treeTerminal);
                 parsingUnit.AfterStack.Push(parsingUnit.Action.Dest);
+
+                ParseTreeCreated?.Invoke(this, treeTerminal);
             }
-            else if (parsingUnit.Action.Direction == ActionDir.reduce)
+            else if (parsingUnit.Action.Direction == ActionDir.reduce)  // case reduce
             {
                 var reduceDest = parsingUnit.Action.Dest as NonTerminalSingle;
                 var dataToInsert = new ParseTreeNonTerminal(reduceDest);
@@ -60,15 +63,24 @@ namespace Parse.FrontEnd.Parsers.LR
                 for (int i = 0; i < reduceDest.Count * 2; i++)
                 {
                     var data = parsingUnit.AfterStack.Pop();
-                    if (i % 2 > 0)
-                        dataToInsert.Insert(0, (data as ParseTreeSymbol));
+                    if (i % 2 > 0) dataToInsert.Insert(0, (data as ParseTreeSymbol));
                 }
                 parsingUnit.AfterStack.Push(dataToInsert);
+
+                ParseTreeCreated?.Invoke(this, dataToInsert);
             }
-            else if (parsingUnit.Action.Direction == ActionDir.epsilon_reduce)
-                parsingUnit.AfterStack.Push(new ParseTreeNonTerminal(parsingUnit.Action.Dest as NonTerminalSingle));
-            else if (parsingUnit.Action.Direction == ActionDir.moveto)
+            else if (parsingUnit.Action.Direction == ActionDir.epsilon_reduce)  // case epsilon reduce
+            {
+                var dataToInsert = new ParseTreeNonTerminal(parsingUnit.Action.Dest as NonTerminalSingle);
+
+                parsingUnit.AfterStack.Push(dataToInsert);
+                ParseTreeCreated?.Invoke(this, dataToInsert);
+            }
+            else if (parsingUnit.Action.Direction == ActionDir.moveto)  // case goto
+            {
                 parsingUnit.AfterStack.Push((int)parsingUnit.Action.Dest);
+                GotoAction?.Invoke(this, parsingUnit);
+            }
         }
 
         /// <summary>

@@ -212,5 +212,23 @@ namespace Parse.FrontEnd.Grammars.Properties {
                 return ResourceManager.GetString("MCL0016", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   It can&apos;t be declared using identifier that defined in macro.과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string MCL0017 {
+            get {
+                return ResourceManager.GetString("MCL0017", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   The macro can&apos;t be included own identifier.과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string MCL0018 {
+            get {
+                return ResourceManager.GetString("MCL0018", resourceCulture);
+            }
+        }
     }
 }

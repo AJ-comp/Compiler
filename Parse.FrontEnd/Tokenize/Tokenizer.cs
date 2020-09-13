@@ -6,7 +6,7 @@ namespace Parse.FrontEnd.Tokenize
 {
     public class Tokenizer
     {
-        public Action<List<TokenCell>> TokenizeCompleted = null;
+        public Action<IReadOnlyList<TokenCell>> TokenizeCompleted = null;
         public Action<Match> Matched = null;
 
         private IReadOnlyList<TokenCell> AddToken(int index, int basisIndex, string targetString, Match matchData)
@@ -30,7 +30,7 @@ namespace Parse.FrontEnd.Tokenize
         /// <param name="targetString">The string to tokenize.</param>
         /// <param name="basisIndex">The basis index that uses to set up a starting index of a token.</param>
         /// <returns></returns>
-        public List<TokenCell> Tokenize(string tokenizeRule, string targetString, int basisIndex = 0)
+        public IReadOnlyList<TokenCell> Tokenize(string tokenizeRule, string targetString, int basisIndex = 0)
         {
             List<TokenCell> result = new List<TokenCell>();
             int prevEI = 0;
