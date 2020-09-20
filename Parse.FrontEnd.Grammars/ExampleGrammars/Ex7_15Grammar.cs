@@ -12,8 +12,6 @@ namespace Parse.FrontEnd.Grammars.ExampleGrammars
         private NonTerminal A = new NonTerminal("A");
         private NonTerminal AL = new NonTerminal("A`");
 
-        public override Sdts SDTS => throw new System.NotImplementedException();
-
         public override NonTerminal EbnfRoot => S;
 
         public Ex7_15Grammar()

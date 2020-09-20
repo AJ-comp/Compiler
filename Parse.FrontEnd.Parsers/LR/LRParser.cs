@@ -1,25 +1,28 @@
-﻿using Parse.FrontEnd.Grammars;
+﻿using Parse.FrontEnd.Ast;
+using Parse.FrontEnd.Grammars;
 using Parse.FrontEnd.Parsers.Collections;
 using Parse.FrontEnd.Parsers.Datas;
-using Parse.FrontEnd.ParseTree;
 using Parse.FrontEnd.RegularGrammar;
 using Parse.FrontEnd.Tokenize;
 using System;
 using System.Collections.Generic;
+using static Parse.FrontEnd.Parsers.Datas.LR.LRParsingRowDataFormat;
 
 namespace Parse.FrontEnd.Parsers.LR
 {
-    public abstract class LRParser : Parser
+    public abstract partial class LRParser : Parser
     {
         public abstract CanonicalTable C0 { get; }
 
         /// <summary>
         /// The Error Handler that if the action completed.
         /// </summary>
-        public abstract event EventHandler<ParsingUnit> ActionSuccessed;
-        public abstract event EventHandler<ParsingUnit> ReduceAction;
-        public abstract event EventHandler<ParsingUnit> GotoAction;
-        public abstract event EventHandler<ParsingUnit> ShiftAction;
+        public event EventHandler<ParsingUnit> ActionSuccessed;
+        public event EventHandler<ParsingUnit> ReduceAction;
+        public event EventHandler<ParsingUnit> GotoAction;
+        public event EventHandler<ParsingUnit> ShiftAction;
+        public override event EventHandler<ParseCreatedArgs> ParseTreeCreated;
+        public override event EventHandler<AstSymbol> ASTCreated;
 
         /// <summary>
         /// The Error Handler that if the action failed.
@@ -27,8 +30,7 @@ namespace Parse.FrontEnd.Parsers.LR
         /// </summary>
         public abstract event EventHandler<ParsingUnit> ActionFailed;
 
-        public abstract SuccessedKind BlockParsing(ParsingBlock parsingBlock, bool bFromLastNext = true);
-        public abstract SuccessedKind RecoveryBlockParsing(ParsingBlock parsingBlock, IReadOnlyList<ParsingRecoveryData> recoveryTokenInfos);
+        public abstract SuccessedKind BlockParsing(ParsingBlock parsingBlock);
 
 
         /// <summary>
@@ -89,6 +91,32 @@ namespace Parse.FrontEnd.Parsers.LR
                     result.Add(TokenData.CreateFromTokenCell(tokenCell, (i == tokenCells.Count - 1)));
                 }
             }
+
+            return result;
+        }
+
+        /// <summary>
+        /// This function is performed if a parsing process result is a success.
+        /// </summary>
+        /// <param name="successResult">The result of the 1 level parsing</param>
+        /// <returns></returns>
+        protected SuccessedKind ParsingSuccessedProcess(ParsingUnit successResult)
+        {
+            SuccessedKind result = SuccessedKind.NotApplicable;
+
+            // syntax analysis complete
+            if (successResult.Action.Direction == ActionDir.accept)
+            {
+                result = SuccessedKind.Completed;
+            }
+            else if (successResult.Action.Direction == ActionDir.reduce ||
+                        successResult.Action.Direction == ActionDir.epsilon_reduce ||
+                        successResult.Action.Direction == ActionDir.moveto)
+            {
+                result = SuccessedKind.ReduceOrGoto;
+                this.ActionSuccessed?.Invoke(this, successResult);
+            }
+            else if (successResult.Action.Direction == ActionDir.shift) result = SuccessedKind.Shift;
 
             return result;
         }

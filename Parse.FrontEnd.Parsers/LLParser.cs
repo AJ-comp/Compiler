@@ -1,4 +1,5 @@
 ﻿using Parse.Extensions;
+using Parse.FrontEnd.Ast;
 using Parse.FrontEnd.Grammars;
 using Parse.FrontEnd.Parsers.Collections;
 using Parse.FrontEnd.Parsers.Datas;
@@ -15,6 +16,9 @@ namespace Parse.FrontEnd.Parsers
         private RelationAnalyzer relationAnalyzer = new RelationAnalyzer();
         private ParsingHistory parsingHistory = new ParsingHistory();
         private Stack<Symbol> stack = new Stack<Symbol>();
+
+        public override event EventHandler<ParseCreatedArgs> ParseTreeCreated;
+        public override event EventHandler<AstSymbol> ASTCreated;
 
         public string ShowStack => string.Join("", this.stack);
         public override IParsingTable ParsingTable => null;

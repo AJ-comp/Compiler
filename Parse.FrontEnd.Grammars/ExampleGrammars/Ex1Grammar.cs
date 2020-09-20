@@ -16,8 +16,6 @@ namespace Parse.FrontEnd.Grammars.ExampleGrammars
         private NonTerminal C = new NonTerminal("C");
         private NonTerminal D = new NonTerminal("D");
 
-        public override Sdts SDTS { get; } = null;
-
         public override NonTerminal EbnfRoot => A;
 
         public Ex1Grammar()

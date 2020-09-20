@@ -91,16 +91,4 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts.Datas
     {
 
     }
-
-
-
-    public class DefinePrepTable : MiniCReferenceTable<DefinePrepData>
-    {
-        public override bool CreateNewBlock(DefinePrepData baseForm, MiniCNode miniCNode)
-        {
-            if(baseForm.)
-
-            return base.CreateNewBlock(baseForm, miniCNode);
-        }
-    }
 }

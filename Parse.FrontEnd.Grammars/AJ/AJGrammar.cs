@@ -62,8 +62,6 @@ namespace Parse.FrontEnd.Grammars.AJ
         private NonTerminal accessor = new NonTerminal("Accessor");
         private NonTerminal varType = new NonTerminal("VarType");
 
-        public override Sdts SDTS { get; }
-
         public override NonTerminal EbnfRoot => throw new System.NotImplementedException();
 
         public AJGrammar()

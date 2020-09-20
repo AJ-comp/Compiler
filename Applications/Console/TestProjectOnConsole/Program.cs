@@ -6,7 +6,7 @@ namespace TestProjectOnConsole
     {
         static void Main(string[] args)
         {
-            MiniCParser parser = new MiniCParser();
+            MiniCCompiler parser = new MiniCCompiler();
             var parsingResult = parser.Operate("test.mc", "#define A 10\r\n void main()\r\n");
 
             bool result = parsingResult.Success;

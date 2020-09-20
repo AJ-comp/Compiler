@@ -6,62 +6,41 @@ using System.Collections.Generic;
 namespace Parse.FrontEnd
 {
     public enum ErrorType { Error, Warning, Information };
+    public enum MatchedAction { None, OffsetPlus, BlockPlus };
 
     public class MeaningUnit
     {
-        internal uint uniqueKey;
-
         public string Name { get; } = string.Empty;
+        public MatchedAction Action { get; } = MatchedAction.None;
 
-        public MeaningUnit(string name)
+        public MeaningUnit(string name, MatchedAction action = MatchedAction.None)
         {
-            this.Name = name;
+            Name = name;
+            Action = action;
         }
 
-        public bool Equals(MeaningUnit other)
-        {
-            if (object.ReferenceEquals(other, null)) return false;
-
-            return (this.GetHashCode() == other.GetHashCode());
-        }
-
-        public override int GetHashCode() => (int)this.uniqueKey;
+        public override string ToString() => Name;
 
         public override bool Equals(object obj)
         {
-            bool result = false;
+            return obj is MeaningUnit unit &&
+                   Name == unit.Name;
+        }
 
-            if (obj is MeaningUnit)
-            {
-                MeaningUnit right = obj as MeaningUnit;
-
-                result = (this.GetHashCode() == right.GetHashCode());
-            }
-
-            return result;
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(Name);
         }
 
         public static bool operator ==(MeaningUnit left, MeaningUnit right)
         {
-            if (object.ReferenceEquals(left, null))
-            {
-                return object.ReferenceEquals(right, null);
-            }
-
-            return left.Equals(right);
+            return EqualityComparer<MeaningUnit>.Default.Equals(left, right);
         }
 
         public static bool operator !=(MeaningUnit left, MeaningUnit right)
         {
-            if (object.ReferenceEquals(left, null))
-            {
-                return !object.ReferenceEquals(right, null);
-            }
-
-            return !left.Equals(right);
+            return !(left == right);
         }
-
-        public override string ToString() => Name;
     }
 
 

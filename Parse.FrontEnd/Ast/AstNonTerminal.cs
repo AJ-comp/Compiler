@@ -1,4 +1,5 @@
-﻿using Parse.FrontEnd.RegularGrammar;
+﻿using Parse.FrontEnd.ParseTree;
+using Parse.FrontEnd.RegularGrammar;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -42,9 +43,10 @@ namespace Parse.FrontEnd.Ast
 
 
 
-        public AstNonTerminal(NonTerminalSingle singleNT)
+        public AstNonTerminal(ParseTreeNonTerminal connectedParseTree)
         {
-            this.SignPost = singleNT;
+            this.SignPost = connectedParseTree.SignPost;
+            ConnectedParseTree = connectedParseTree;
         }
 
         public void Add(AstSymbol item)
@@ -52,6 +54,14 @@ namespace Parse.FrontEnd.Ast
             item.Parent = this;
 
             ((IList<AstSymbol>)_symbols).Add(item);
+        }
+
+        public void AddRange(IEnumerable<AstSymbol> items)
+        {
+            foreach (var item in items)
+            {
+                if (item != null) Add(item);
+            }
         }
 
         public void Clear()

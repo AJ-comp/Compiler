@@ -565,7 +565,7 @@ namespace ApplicationLayer.WpfApp.Commands
 
                 var solution = mainViewModel.SolutionExplorer.Solution;
                 var editorViewModel = mainViewModel.SolutionExplorer.SelectedDocument as EditorTypeViewModel;
-                var modelsToDisplay = UcodeDisplayConverter.Convert(editorViewModel.InterLanguage, editorViewModel.Grammar);
+//                var modelsToDisplay = UcodeDisplayConverter.Convert(editorViewModel.InterLanguage, editorViewModel.Grammar);
 //                var textDoc = new UCodeViewModel(modelsToDisplay, selDoc.Title + " " + CommonResource.InterLanguage);
 //                mainViewModel.SolutionExplorer.Documents.Add(textDoc);
 //                mainViewModel.SolutionExplorer.SelectedDocument = textDoc;

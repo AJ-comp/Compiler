@@ -1,5 +1,8 @@
 ﻿using Parse.FrontEnd;
 using Parse.FrontEnd.Ast;
+using Parse.FrontEnd.Grammars.MiniC.Sdts;
+using Parse.FrontEnd.Grammars.MiniC.Sdts.AstNodes;
+using Parse.FrontEnd.Grammars.MiniC.Sdts.Datas;
 using Parse.FrontEnd.Parsers;
 using Parse.FrontEnd.Parsers.Datas;
 using Parse.FrontEnd.ParseTree;
@@ -57,7 +60,7 @@ namespace Parse.WpfControls.SyntaxEditor
             }
 
             Parser parser = args.NewValue as Parser;
-            parser.ParseTreeCreated += Parser_ParseTreeCreated;
+            parser.ASTCreated += Parser_ASTCreated;
             if (editor.TextArea == null) editor.bReserveRegistKeywords = true;
             else
             {
@@ -70,26 +73,14 @@ namespace Parse.WpfControls.SyntaxEditor
             }
         }
 
-
         /// <summary>
-        /// This function is event handler. this is called when ParseTree(node) is created.
+        /// This function is event handler. this is called when AST(node) is created.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private static void Parser_ParseTreeCreated(object sender, ParseTreeSymbol e)
+        private static void Parser_ASTCreated(object sender, AstSymbol e)
         {
-            var astSymbol = e.ToAst;
-
-            if (astSymbol is AstTerminal)
-            {
-                var astTerminal = astSymbol as AstTerminal;
-            }
-            else if (astSymbol is AstNonTerminal)
-            {
-                var astNonT = astSymbol as AstNonTerminal;
-
-                astNonT.
-            }
+            e.Sdts = MiniCCreator.CreateSdtsNode(e) as MiniCNode;
         }
 
 
@@ -221,6 +212,7 @@ namespace Parse.WpfControls.SyntaxEditor
             {
                 if (this.Parser == null) return;
 
+                /*
                 this.Parser.Grammar.SDTS.SemanticErrorEventHandler += (sdts, errorInfo) =>
                 {
                     if (errorInfo.ErrorType == ErrorType.Error)
@@ -230,6 +222,7 @@ namespace Parse.WpfControls.SyntaxEditor
                         // you have to send error message to the AlarmList.
                     }
                 };
+                */
 
                 if (this.bReserveRegistKeywords)
                 {
@@ -330,7 +323,12 @@ namespace Parse.WpfControls.SyntaxEditor
                 Dispatcher.Invoke(() =>
                 {
                     var result = this.SementicAnalysis(localResult);
-                    this.ParsingCompleted?.Invoke(this, new ParsingCompletedEventArgs(localResult, result.SdtsRoot, result.AllNodes, result.FiredException));
+                    if (result == null) return;
+
+                    this.ParsingCompleted?.Invoke(this, new ParsingCompletedEventArgs(localResult, 
+                                                                                                                        result.SdtsRoot, 
+                                                                                                                        result.AllNodes, 
+                                                                                                                        result.FiredException));
                 });
             }
         }
@@ -422,7 +420,9 @@ namespace Parse.WpfControls.SyntaxEditor
             try
             {
                 AstSymbol rootSymbol = target.ToParseTree?.ToAst;
-                var result = this.Parser.Grammar.SDTS.Process(rootSymbol);
+
+                var rootSdts = rootSymbol.Sdts.Build(new MiniCSdtsParams(0, 0));
+                var result = new SemanticAnalysisResult(rootSdts, new List<AstSymbol>());
                 ParsingFailedListPreProcess(target);
 
                 return result;

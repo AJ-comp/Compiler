@@ -1,4 +1,5 @@
-﻿using Parse.FrontEnd.Grammars;
+﻿using Parse.FrontEnd.Ast;
+using Parse.FrontEnd.Grammars;
 using Parse.FrontEnd.Parsers.Collections;
 using Parse.FrontEnd.Parsers.Datas;
 using Parse.FrontEnd.ParseTree;
@@ -45,7 +46,8 @@ namespace Parse.FrontEnd.Parsers
         public abstract string AnalysisResult { get; }
         /// <summary> Get the parsing table with data table format. </summary>
         public abstract IParsingTable ParsingTable { get; }
-        public abstract event EventHandler<ParseTreeSymbol> ParseTreeCreated;
+        public abstract event EventHandler<ParseCreatedArgs> ParseTreeCreated;
+        public abstract event EventHandler<AstSymbol> ASTCreated;
 
         /// <summary>
         /// This function performs whole parsing for tokenCells

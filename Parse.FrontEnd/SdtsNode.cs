@@ -13,6 +13,8 @@ namespace Parse.FrontEnd
         public IReadOnlyList<TokenData> MeaningTokens => Ast.AllTokens;
         public IReadOnlyList<TokenData> AllTokens => Ast.ConnectedParseTree.AllTokens;
 
+        public bool IsBuild { get; protected set; }
+
         public IReadOnlyList<SdtsNode> ErrNodes
         {
             get

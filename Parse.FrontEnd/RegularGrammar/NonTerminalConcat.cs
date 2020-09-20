@@ -7,11 +7,13 @@ namespace Parse.FrontEnd.RegularGrammar
     {
         protected List<Symbol> _symbols = new List<Symbol>();
 
+        public bool IsNull => this.Count == 0;
+
         public bool IsAllTerminal
         {
             get
             {
-                foreach(var symbol in this)
+                foreach (var symbol in this)
                 {
                     if (symbol is NonTerminal) return false;
                 }
@@ -19,8 +21,6 @@ namespace Parse.FrontEnd.RegularGrammar
                 return true;
             }
         }
-
-        public bool IsNull => this.Count == 0;
         public bool IsEpsilon
         {
             get
@@ -65,9 +65,9 @@ namespace Parse.FrontEnd.RegularGrammar
 
         public void Replace(Symbol from, Symbol to)
         {
-            for(int i=0; i<this.Count; i++)
+            for (int i = 0; i < this.Count; i++)
             {
-                if(this[i] == from) this.Replace(i, to);
+                if (this[i] == from) this.Replace(i, to);
             }
         }
 
@@ -75,14 +75,14 @@ namespace Parse.FrontEnd.RegularGrammar
         {
             this.RemoveAt(index);
 
-            foreach(var symbol in symbolList)   this.Insert(index++, symbol);
+            foreach (var symbol in symbolList) this.Insert(index++, symbol);
         }
 
         public HashSet<NonTerminal> ToNonTerminalSet()
         {
             HashSet<NonTerminal> result = new HashSet<NonTerminal>();
 
-            foreach(var item in this)
+            foreach (var item in this)
             {
                 if (item is NonTerminal) result.Add(item as NonTerminal);
             }

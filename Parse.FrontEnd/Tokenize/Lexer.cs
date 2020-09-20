@@ -229,7 +229,8 @@ namespace Parse.FrontEnd.Tokenize
         {
             TokenStorage result = new TokenStorage(this._tokenPatternList);
 
-            this._tokenizer.Tokenize(this._tokenizeRule, data).ForEach(i => result._tokensToView.Add(i));
+            var tokenCells = this._tokenizer.Tokenize(this._tokenizeRule, data);
+            foreach (var tCell in tokenCells) result._tokensToView.Add(tCell);
             result.UpdateTableForAllPatterns();
 
             if(result._tokensToView.Count > 0)  this.ImpactRanges.Add(new RangePair(new Range(-1, 0), new Range(0, result._tokensToView.Count)));

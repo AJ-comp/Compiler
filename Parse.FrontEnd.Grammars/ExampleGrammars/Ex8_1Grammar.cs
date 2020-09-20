@@ -10,8 +10,6 @@ namespace Parse.FrontEnd.Grammars.ExampleGrammars
         private NonTerminal LIST = new NonTerminal("LIST", true);
         private NonTerminal ELEMENT = new NonTerminal("ELEMENT");
 
-        public override Sdts SDTS => throw new System.NotImplementedException();
-
         public override NonTerminal EbnfRoot => LIST;
 
         public Ex8_1Grammar()

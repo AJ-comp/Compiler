@@ -1,8 +1,4 @@
-﻿using Parse.FrontEnd.Ast;
-using Parse.FrontEnd.RegularGrammar;
-using System;
-using System.Collections.Generic;
-using static Parse.FrontEnd.Grammars.Sdts;
+﻿using Parse.FrontEnd.RegularGrammar;
 
 namespace Parse.FrontEnd.Grammars.PracticeGrammars
 {
@@ -15,47 +11,20 @@ namespace Parse.FrontEnd.Grammars.PracticeGrammars
         private NonTerminal E = new NonTerminal("E", true);
         private NonTerminal T = new NonTerminal("T");
 
-        public override Sdts SDTS { get; }
+        public MeaningUnit Add { get; } = new MeaningUnit("Add");
+        public MeaningUnit Mul { get; } = new MeaningUnit("Mul");
 
         public override NonTerminal EbnfRoot => E;
 
+
         public LRTest1Grammar()
         {
-            this.SDTS = new LRTest1Sdts(this.keyManager);
-
-            E.AddItem((E + plus + T), SDTS.Add);
-            E.AddItem((E + mul + T), SDTS.Mul);
+            E.AddItem((E + plus + T), Add);
+            E.AddItem((E + mul + T), Mul);
             E.AddItem(T);
             T.SetChildren(a);
 
             this.Optimization();
-        }
-    }
-
-    public class LRTest1Sdts : Sdts
-    {
-        public override event EventHandler<SemanticErrorArgs> SemanticErrorEventHandler;
-
-        private void ActionAdd(AstSymbol node)
-        {
-        }
-
-        private void ActionMul(AstSymbol node)
-        {
-        }
-
-        public LRTest1Sdts(KeyManager keyManager) : base(keyManager)
-        {
-        }
-
-        public override SemanticAnalysisResult Process(AstSymbol node)
-        {
-            return null;
-        }
-
-        public override SdtsNode GenerateSdtsAst(AstSymbol root)
-        {
-            throw new NotImplementedException();
         }
     }
 }

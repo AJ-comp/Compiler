@@ -11,6 +11,7 @@ namespace Parse.FrontEnd.ParseTree
         public abstract IReadOnlyList<TokenData> AllTokens { get; }
 
         public abstract bool IsVirtual { get; }
+        public abstract bool IsMeaning { get; }
         public abstract bool HasVirtualChild { get; }
         public abstract AstSymbol ToAst { get; }
         public abstract string AllInputDatas { get; }

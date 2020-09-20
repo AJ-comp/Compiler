@@ -54,6 +54,7 @@ namespace Parse.FrontEnd
 
         public void AllocateUniqueKey(MeaningUnit item)
         {
+            /*
             if (this.meaningUnitKeyDic.ContainsValue(item.Name))
                 item.uniqueKey = this.meaningUnitKeyDic.FirstOrDefault(x => x.Value == item.Name).Key;
             else
@@ -61,6 +62,7 @@ namespace Parse.FrontEnd
                 this.meaningUnitKeyDic.Add(this.meaningUnitKey, item.Name);
                 item.uniqueKey = this.meaningUnitKey++;
             }
+            */
         }
 
         public void Remove(NonTerminal nonTerminal)

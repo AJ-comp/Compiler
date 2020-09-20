@@ -69,11 +69,11 @@ namespace Parse.FrontEnd.Parsers.Datas
                         // InputValue value is null or InputValue.Kind is null means that a token is not target to parsing. (ex : " ", "\r", "\n", etc)
                         if (record.InputValue == null || record.InputValue.Kind == null) continue;
 
-                        var param1 = Convert.ToString(record.BeforeStack.Reverse(), " ");
+                        var param1 = Convert.ToString(record.BeforeStack.Stack.Reverse(), " ");
                         var param2 = record.InputValue.ToString();
                         var param3 = record.Action.ToString() + " ";
                         var param4 = record.RecoveryMessage;
-                        var param5 = Convert.ToString(record.AfterStack.Reverse(), " ");
+                        var param5 = Convert.ToString(record.AfterStack.Stack.Reverse(), " ");
 
                         if (record.IsError) param3 += record.ErrorMessage;
 //                        else if (record.Action.Direction != ActionDir.accept)
@@ -94,7 +94,7 @@ namespace Parse.FrontEnd.Parsers.Datas
                 ParseTreeSymbol result = null;
                 if (this.Success == false) return result;
 
-                return this.Last().Units.Last().AfterStack.SecondItemPeek() as ParseTreeSymbol;
+                return this.Last().Units.Last().AfterStack.Stack.SecondItemPeek() as ParseTreeSymbol;
             }
         }
 

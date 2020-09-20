@@ -32,26 +32,7 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
                 });
             });
 
-            Action findLogicInDefineTable = new Action(() =>
-            {
-                foreach (var symbolTable in MiniCUtilities.GetReferableSymbolTablelList(node))
-                {
-                    Parallel.ForEach(symbolTable.DefineTable, (record) =>
-                    {
-                        if (record.DefineField.Name != varData.Name) return;
-
-                        result = false;
-                        // duplicated declaration (in define block)
-                        MiniCUtilities.AddErrorUseDefinedIdent(node, varData.NameToken);
-                    });
-                }
-            });
-
             Parallel.Invoke(
-                () =>
-                {
-                    findLogicInDefineTable();
-                },
                 () =>
                 {
                     findLogicInVarTable();

@@ -1,8 +1,6 @@
-﻿using Parse.Extensions;
-using Parse.FrontEnd.Parsers.EventArgs;
+﻿using Parse.FrontEnd.Parsers.EventArgs;
 using Parse.FrontEnd.Parsers.Properties;
 using Parse.FrontEnd.RegularGrammar;
-using System.Collections.Generic;
 
 namespace Parse.FrontEnd.Parsers.Datas
 {
@@ -12,8 +10,11 @@ namespace Parse.FrontEnd.Parsers.Datas
     /// <see cref="https://www.lucidchart.com/documents/edit/c96f0bde-4111-4957-bf65-75b56d8074dc/0_0?beaconFlowId=687BBA49A656D177"/>
     public class ParsingUnit
     {
-        public Stack<object> BeforeStack { get; } = new Stack<object>();
-        public Stack<object> AfterStack { get; set; } = new Stack<object>();
+
+        public ParsingStackUnit BeforeStack { get; } = new ParsingStackUnit();
+        public ParsingStackUnit AfterStack { get; set; } = new ParsingStackUnit();
+
+
         public ActionData Action { get; internal set; } = new ActionData();
         public TokenData InputValue { get; set; }
         public TerminalSet PossibleTerminalSet { get; internal set; } = new TerminalSet();
@@ -36,7 +37,7 @@ namespace Parse.FrontEnd.Parsers.Datas
             get
             {
                 var result = new ParsingUnit();
-                result.BeforeStack.Push(0);
+                result.BeforeStack.Stack.Push(0);
 
                 return result;
             }
@@ -49,18 +50,18 @@ namespace Parse.FrontEnd.Parsers.Datas
             InputValue = token;
         }
 
-        public ParsingUnit(Stack<object> beforeStack)
+        public ParsingUnit(ParsingStackUnit beforeStack)
         {
             BeforeStack = beforeStack;
         }
 
-        public ParsingUnit(Stack<object> beforeStack, Stack<object> afterStack)
+        public ParsingUnit(ParsingStackUnit beforeStack, ParsingStackUnit afterStack)
         {
             BeforeStack = beforeStack;
             AfterStack = afterStack;
         }
 
-        public ParsingUnit(Stack<object> beforeStack, Stack<object> afterStack, TokenData token) : this(token)
+        public ParsingUnit(ParsingStackUnit beforeStack, ParsingStackUnit afterStack, TokenData token) : this(token)
         {
             BeforeStack = beforeStack;
             AfterStack = afterStack;
@@ -111,7 +112,8 @@ namespace Parse.FrontEnd.Parsers.Datas
         {
             var inputString = (InputValue == null) ? "null" : this.InputValue.Input;
 
-            return string.Format("BeforeStack count : {0}, AfterStack count : {1}, InputValue : {2}, Action : {3}", BeforeStack.Count, AfterStack.Count, inputString, Action.ToString());
+            return string.Format("BeforeStack count : {0}, AfterStack count : {1}, InputValue : {2}, Action : {3}", 
+                                            BeforeStack.Stack.Count, AfterStack.Stack.Count, inputString, Action.ToString());
         }
     }
 }

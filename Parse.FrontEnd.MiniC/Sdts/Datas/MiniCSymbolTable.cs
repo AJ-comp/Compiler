@@ -6,7 +6,6 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts.Datas
     public class MiniCSymbolTable : SymbolTable
     {
         public MiniCSymbolTable Base { get; }
-        public DefinePrepTable DefineTable => _definePrepTable;
         public FuncTable FuncTable => _funcTable;
         public VarTable VarTable => _varTable;
 
@@ -62,7 +61,6 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts.Datas
             Base = @base;
         }
 
-        private DefinePrepTable _definePrepTable = new DefinePrepTable();
         private VarTable _varTable = new VarTable();
         private FuncTable _funcTable = new FuncTable();
     }

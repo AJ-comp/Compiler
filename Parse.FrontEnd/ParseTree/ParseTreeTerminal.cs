@@ -10,9 +10,10 @@ namespace Parse.FrontEnd.ParseTree
 
         public override bool IsVirtual => Token.IsVirtual;
         public override bool HasVirtualChild => false;
-        public override AstSymbol ToAst => (Token.Kind.Meaning) ? new AstTerminal(Token) : null;
+        public override AstSymbol ToAst => (IsMeaning) ? new AstTerminal(Token) : null;
         public override IReadOnlyList<TokenData> AllTokens => new List<TokenData>() { Token };
         public override string AllInputDatas => Token.Input;
+        public override bool IsMeaning => (Token.Kind.Meaning);
 
         public ParseTreeTerminal(TokenData tokenData)
         {

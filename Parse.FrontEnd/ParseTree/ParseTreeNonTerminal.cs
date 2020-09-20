@@ -3,7 +3,6 @@ using Parse.FrontEnd.RegularGrammar;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Data;
 
 namespace Parse.FrontEnd.ParseTree
 {
@@ -164,6 +163,8 @@ namespace Parse.FrontEnd.ParseTree
             }
         }
 
+        public override bool IsMeaning => (SignPost.MeaningUnit != null);
+
         public ParseTreeNonTerminal(NonTerminalSingle singleNT)
         {
             this.SignPost = singleNT;
@@ -207,10 +208,7 @@ namespace Parse.FrontEnd.ParseTree
 
             if (convertedParentTree.SignPost.MeaningUnit != null)
             {
-                result = new AstNonTerminal(convertedParentTree.SignPost)
-                {
-                    ConnectedParseTree = curTree as ParseTreeNonTerminal
-                };
+                result = new AstNonTerminal(curTree as ParseTreeNonTerminal);
 
                 if (result.SignPost.IsInduceEpsilon) epsilonableTree = result;
                 // if 'curTree' is Ast and Ast doesn't exist of the children tree then it(curTree) can same that induce epsilon in the Ast rule.

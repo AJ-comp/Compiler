@@ -1,5 +1,4 @@
-﻿using Parse.FrontEnd.Grammars.MiniC.Sdts;
-using Parse.FrontEnd.MiniC.Properties;
+﻿using Parse.FrontEnd.MiniC.Properties;
 using Parse.FrontEnd.RegularGrammar;
 
 namespace Parse.FrontEnd.Grammars.MiniC
@@ -16,6 +15,7 @@ namespace Parse.FrontEnd.Grammars.MiniC
         public static Terminal Short { get; } = new Terminal(TokenType.Keyword.DefinedDataType, "short");
         public static Terminal Int { get; } = new Terminal(TokenType.Keyword.DefinedDataType, "int");
         public static Terminal Double { get; } = new Terminal(TokenType.Keyword.DefinedDataType, "double");
+        public static Terminal Register { get; } = new Terminal(TokenType.Keyword.DefinedDataType, "register");
         public static Terminal Void { get; } = new Terminal(TokenType.Keyword.DefinedDataType, "void");
         public static Terminal Ident { get; } = new Terminal(TokenType.Identifier, "[_a-zA-Z][_a-zA-Z0-9]*", Resource.Ident, true, true);
         public static Terminal HexNumber { get; } = new Terminal(TokenType.Digit.Digit16, "0[xX][0-9a-fA-F]+", Resource.HexNumber, true, true);
@@ -112,39 +112,62 @@ namespace Parse.FrontEnd.Grammars.MiniC
 
 
         // These are meaning unit for semantic analysis.
-        public static MeaningUnit Program { get; } = new MeaningUnit("Program");
-        public static MeaningUnit DefinePrep { get; } = new MeaningUnit("DefinePrep");
-        public static MeaningUnit FuncDef { get; } = new MeaningUnit("FuncDef");
-        public static MeaningUnit FuncHead { get; } = new MeaningUnit("FuncHead");
-        public static MeaningUnit DclSpec { get; } = new MeaningUnit("DclSpec");
-        public static MeaningUnit ConstNode { get; } = new MeaningUnit("ConstNode");
-        public static MeaningUnit CharNode { get; } = new MeaningUnit("CharNode");
-        public static MeaningUnit ShortNode { get; } = new MeaningUnit("ShortNode");
-        public static MeaningUnit IntNode { get; } = new MeaningUnit("IntNode");
-        public static MeaningUnit DoubleNode { get; } = new MeaningUnit("DoubleNode");
-        public static MeaningUnit VoidNode { get; } = new MeaningUnit("VoidNode");
-        public static MeaningUnit FormalPara { get; } = new MeaningUnit("FormalPara");
-        public static MeaningUnit ParamDcl { get; } = new MeaningUnit("ParamDcl");
-        public static MeaningUnit CompoundSt { get; } = new MeaningUnit("CompoundSt");
-        public static MeaningUnit DclList { get; } = new MeaningUnit("DclList");
-        public static MeaningUnit Dcl { get; } = new MeaningUnit("Dcl");
-        public static MeaningUnit DclItem { get; } = new MeaningUnit("DclItem");
-        public static MeaningUnit DeclareVar { get; } = new MeaningUnit("DeclareVar");
-        public static MeaningUnit StatList { get; } = new MeaningUnit("StatList");
-        public static MeaningUnit ExpSt { get; } = new MeaningUnit("ExpSt");
-        public static MeaningUnit IfSt { get; } = new MeaningUnit("IfSt");
-        public static MeaningUnit IfElseSt { get; } = new MeaningUnit("IfElseSt");
-        public static MeaningUnit WhileSt { get; } = new MeaningUnit("WhileSt");
-        public static MeaningUnit ReturnSt { get; } = new MeaningUnit("ReturnSt");
-        public static MeaningUnit Index { get; } = new MeaningUnit("Index");
-        public static MeaningUnit Call { get; } = new MeaningUnit("Call");
-        public static MeaningUnit ActualParam { get; } = new MeaningUnit("ActualParam");
-        public static MeaningUnit UseVar { get; } = new MeaningUnit("UseVar");
-        public static MeaningUnit IntLiteralNode { get; } = new MeaningUnit("IntLiteralNode");
+        public static MeaningUnit Program { get; } = new MeaningUnit(nameof(Program));
+        public static MeaningUnit FuncDef { get; } = new MeaningUnit(nameof(FuncDef));
+        public static MeaningUnit FuncHead { get; } = new MeaningUnit(nameof(FuncHead), MatchedAction.BlockPlus);
+        public static MeaningUnit DclSpec { get; } = new MeaningUnit(nameof(DclSpec));
+        public static MeaningUnit ConstNode { get; } = new MeaningUnit(nameof(ConstNode));
+        public static MeaningUnit CharNode { get; } = new MeaningUnit(nameof(CharNode));
+        public static MeaningUnit ShortNode { get; } = new MeaningUnit(nameof(ShortNode));
+        public static MeaningUnit IntNode { get; } = new MeaningUnit(nameof(IntNode));
+        public static MeaningUnit DoubleNode { get; } = new MeaningUnit(nameof(DoubleNode));
+        public static MeaningUnit VoidNode { get; } = new MeaningUnit(nameof(VoidNode));
+        public static MeaningUnit FormalPara { get; } = new MeaningUnit(nameof(FormalPara));
+        public static MeaningUnit ParamDcl { get; } = new MeaningUnit(nameof(ParamDcl));
+        public static MeaningUnit CompoundSt { get; } = new MeaningUnit(nameof(CompoundSt));
+        public static MeaningUnit DclList { get; } = new MeaningUnit(nameof(DclList));
+        public static MeaningUnit Dcl { get; } = new MeaningUnit(nameof(Dcl));
+        public static MeaningUnit DclVar { get; } = new MeaningUnit(nameof(DclVar), MatchedAction.OffsetPlus);
+        public static MeaningUnit DeclareVarIdent { get; } = new MeaningUnit(nameof(DeclareVarIdent));
+        public static MeaningUnit StatList { get; } = new MeaningUnit(nameof(StatList));
+        public static MeaningUnit ExpSt { get; } = new MeaningUnit(nameof(ExpSt));
+        public static MeaningUnit IfSt { get; } = new MeaningUnit(nameof(IfSt));
+        public static MeaningUnit IfElseSt { get; } = new MeaningUnit(nameof(IfElseSt));
+        public static MeaningUnit WhileSt { get; } = new MeaningUnit(nameof(WhileSt));
+        public static MeaningUnit ReturnSt { get; } = new MeaningUnit(nameof(ReturnSt));
+        public static MeaningUnit Index { get; } = new MeaningUnit(nameof(Index));
+        public static MeaningUnit Call { get; } = new MeaningUnit(nameof(Call));
+        public static MeaningUnit ActualParam { get; } = new MeaningUnit(nameof(ActualParam), MatchedAction.OffsetPlus);
+        public static MeaningUnit UseVar { get; } = new MeaningUnit(nameof(UseVar));
+        public static MeaningUnit IntLiteralNode { get; } = new MeaningUnit(nameof(IntLiteralNode));
 
 
+        public static MeaningUnit AddM { get; } = new MeaningUnit(nameof(AddM));
+        public static MeaningUnit SubM { get; } = new MeaningUnit(nameof(SubM));
+        public static MeaningUnit MulM { get; } = new MeaningUnit(nameof(MulM));
+        public static MeaningUnit DivM { get; } = new MeaningUnit(nameof(DivM));
+        public static MeaningUnit ModM { get; } = new MeaningUnit(nameof(ModM));
+        public static MeaningUnit AssignM { get; } = new MeaningUnit(nameof(AssignM));
+        public static MeaningUnit AddAssignM { get; } = new MeaningUnit(nameof(AddAssignM));
+        public static MeaningUnit SubAssignM { get; } = new MeaningUnit(nameof(SubAssignM));
+        public static MeaningUnit MulAssignM { get; } = new MeaningUnit(nameof(MulAssignM));
+        public static MeaningUnit DivAssignM { get; } = new MeaningUnit(nameof(DivAssignM));
+        public static MeaningUnit ModAssignM { get; } = new MeaningUnit(nameof(ModAssignM));
+        public static MeaningUnit LogicalOrM { get; } = new MeaningUnit(nameof(LogicalOrM));
+        public static MeaningUnit LogicalAndM { get; } = new MeaningUnit(nameof(LogicalAndM));
+        public static MeaningUnit LogicalNotM { get; } = new MeaningUnit(nameof(LogicalNotM));
+        public static MeaningUnit EqualM { get; } = new MeaningUnit(nameof(EqualM));
+        public static MeaningUnit NotEqualM { get; } = new MeaningUnit(nameof(NotEqualM));
+        public static MeaningUnit GreaterThanM { get; } = new MeaningUnit(nameof(GreaterThanM));
+        public static MeaningUnit LessThanM { get; } = new MeaningUnit(nameof(LessThanM));
+        public static MeaningUnit GreaterEqualM { get; } = new MeaningUnit(nameof(GreaterEqualM));
+        public static MeaningUnit LessEqualM { get; } = new MeaningUnit(nameof(LessEqualM));
+        public static MeaningUnit UnaryMinusM { get; } = new MeaningUnit(nameof(UnaryMinusM));
+        public static MeaningUnit PreIncM { get; } = new MeaningUnit(nameof(PreIncM));
+        public static MeaningUnit PreDecM { get; } = new MeaningUnit(nameof(PreDecM));
+        public static MeaningUnit PostIncM { get; } = new MeaningUnit(nameof(PostIncM));
+        public static MeaningUnit PostDecM { get; } = new MeaningUnit(nameof(PostDecM));
 
-        public override Grammars.Sdts SDTS { get; }
 
         public override NonTerminal EbnfRoot => this.miniC;
 
@@ -152,111 +175,107 @@ namespace Parse.FrontEnd.Grammars.MiniC
         {
             this.ScopeInfos.Add(new ScopeInfo(this.scopeCommentStart, this.scopeCommentEnd));
 
-            this.SDTS = new MiniCSdts(this.keyManager, this);
-            var sdts = this.SDTS as MiniCSdts;
-
-            this.miniC.AddItem(this.translationUnit, sdts.Program);
+            this.miniC.AddItem(this.translationUnit, Program);
             this.translationUnit.AddItem(this.externalDcl | this.defineUnit | this.translationUnit + this.externalDcl);
-            this.defineUnit.AddItem(this.Define + Ident + this.expression, sdts.DefinePrep);
             this.externalDcl.AddItem(this.functionDef | this.declaration);
-            this.functionDef.AddItem(this.functionHeader + this.compoundSt, sdts.FuncDef);
-            this.functionHeader.AddItem(this.dclSpec + this.functionName + this.formalParam, sdts.FuncHead);
-            this.dclSpec.AddItem(this.dclSpecifiers, sdts.DclSpec);
+            this.functionDef.AddItem(this.functionHeader + this.compoundSt, FuncDef);
+            this.functionHeader.AddItem(this.dclSpec + this.functionName + this.formalParam, FuncHead);
+            this.dclSpec.AddItem(this.dclSpecifiers, DclSpec);
             this.dclSpecifiers.AddItem(this.typeQualifier.Optional() + this.typeSpecifier);
-            this.typeQualifier.AddItem(this.Const, sdts.ConstNode);
+            this.typeQualifier.AddItem(this.Const, ConstNode);
 
-            this.typeSpecifier.AddItem(Char, sdts.CharNode);
-            this.typeSpecifier.AddItem(Short, sdts.ShortNode);
-            this.typeSpecifier.AddItem(Int, sdts.IntNode);
-            this.typeSpecifier.AddItem(Double, sdts.DoubleNode);
-            this.typeSpecifier.AddItem(Void, sdts.VoidNode);
+            this.typeSpecifier.AddItem(Char, CharNode);
+            this.typeSpecifier.AddItem(Short, ShortNode);
+            this.typeSpecifier.AddItem(Int, IntNode);
+            this.typeSpecifier.AddItem(Double, DoubleNode);
+            this.typeSpecifier.AddItem(Void, VoidNode);
 
             this.functionName.AddItem(Ident);
-            this.formalParam.AddItem(this.OpenParenthesis + this.optFormalParam + this.CloseParenthesis, sdts.FormalPara);
+            this.formalParam.AddItem(this.OpenParenthesis + this.optFormalParam + this.CloseParenthesis, FormalPara);
             this.optFormalParam.AddItem(this.formalParamList | new Epsilon());
             this.formalParamList.AddItem(this.paramDcl | this.formalParamList + this.Comma + this.paramDcl);
-            this.paramDcl.AddItem(this.dclSpec + this.declarator, sdts.ParamDcl);
-            this.compoundSt.AddItem(this.OpenCurlyBrace + this.optDclList + this.optStatList + this.CloseCurlyBrace, sdts.CompoundSt);
-            this.optDclList.AddItem(this.declarationList | new Epsilon(), sdts.DclList);
+            this.paramDcl.AddItem(this.dclSpec + this.declarator, ParamDcl);
+            this.compoundSt.AddItem(this.OpenCurlyBrace + this.optDclList + this.optStatList + this.CloseCurlyBrace, CompoundSt);
+            this.optDclList.AddItem(this.declarationList | new Epsilon(), DclList);
             this.declarationList.AddItem(this.declaration | this.declarationList + this.declaration);
-            this.declaration.AddItem(this.dclSpec + this.initDclList + this.SemiColon, sdts.Dcl);
+            this.declaration.AddItem(this.dclSpec + this.initDclList + this.SemiColon, Dcl);
             this.initDclList.AddItem(this.initDeclarator | this.initDclList + this.Comma + this.initDeclarator);
 
-            this.initDeclarator.AddItem(this.declarator + (this.Assign + this.expression).Optional(), sdts.DclItem);
+            this.initDeclarator.AddItem(this.declarator + (this.Assign + this.expression).Optional(), DclVar);
 
-            this.declarator.AddItem(Ident, sdts.DeclareVar);
-            this.declarator.AddItem(Ident + this.OpenSquareBrace + this.optNumber + this.CloseSquareBrace, sdts.DeclareVar);
+            this.declarator.AddItem(Ident, DeclareVarIdent);
+            this.declarator.AddItem(Ident + this.OpenSquareBrace + this.optNumber + this.CloseSquareBrace, DeclareVarIdent);
 
             this.optNumber.AddItem(Number | HexNumber | new Epsilon());
-            this.optStatList.AddItem(this.statementList, sdts.StatList);
+            this.optStatList.AddItem(this.statementList, StatList);
             this.optStatList.AddItem(new Epsilon());
 
             this.statementList.AddItem(this.statement | this.statementList + this.statement);
             this.statement.AddItem(this.compoundSt | this.expressionSt | this.ifSt | this.whileSt | this.returnSt);
-            this.expressionSt.AddItem(this.optExpression + this.SemiColon, sdts.ExpSt);
+            this.expressionSt.AddItem(this.optExpression + this.SemiColon, ExpSt);
             this.optExpression.AddItem(this.expression | new Epsilon());
 
-            this.ifSt.AddItem(this.If + this.OpenParenthesis + this.expression + this.CloseParenthesis + this.statement, 1, sdts.IfSt);
-            this.ifSt.AddItem(this.If + this.OpenParenthesis + this.expression + this.CloseParenthesis + this.statement + this.Else + this.statement, 0, sdts.IfElseSt);
+            this.ifSt.AddItem(this.If + this.OpenParenthesis + this.expression + this.CloseParenthesis + this.statement, 1, IfSt);
+            this.ifSt.AddItem(this.If + this.OpenParenthesis + this.expression + this.CloseParenthesis + this.statement + this.Else + this.statement, 0, IfElseSt);
 
-            this.whileSt.AddItem(this.While + this.OpenParenthesis + this.expression + this.CloseParenthesis + this.statement, sdts.WhileSt);
-            this.returnSt.AddItem(this.Return + this.expressionSt, sdts.ReturnSt);
+            this.whileSt.AddItem(this.While + this.OpenParenthesis + this.expression + this.CloseParenthesis + this.statement, WhileSt);
+            this.returnSt.AddItem(this.Return + this.expressionSt, ReturnSt);
             this.expression.AddItem(this.assignmentExp);
 
             this.assignmentExp.AddItem(this.logicalOrExp);
-            this.assignmentExp.AddItem(this.assignmentExp + this.Assign + this.assignmentExp, sdts.Assign);
-            this.assignmentExp.AddItem(this.assignmentExp + this.AddAssign + this.assignmentExp, sdts.AddAssign);
-            this.assignmentExp.AddItem(this.assignmentExp + this.SubAssign + this.assignmentExp, sdts.SubAssign);
-            this.assignmentExp.AddItem(this.assignmentExp + this.MulAssign + this.assignmentExp, sdts.MulAssign);
-            this.assignmentExp.AddItem(this.assignmentExp + this.DivAssign + this.assignmentExp, sdts.DivAssign);
-            this.assignmentExp.AddItem(this.assignmentExp + this.ModAssign + this.assignmentExp, sdts.ModAssign);
+            this.assignmentExp.AddItem(this.assignmentExp + this.Assign + this.assignmentExp, AssignM);
+            this.assignmentExp.AddItem(this.assignmentExp + this.AddAssign + this.assignmentExp, AddAssignM);
+            this.assignmentExp.AddItem(this.assignmentExp + this.SubAssign + this.assignmentExp, SubAssignM);
+            this.assignmentExp.AddItem(this.assignmentExp + this.MulAssign + this.assignmentExp, MulAssignM);
+            this.assignmentExp.AddItem(this.assignmentExp + this.DivAssign + this.assignmentExp, DivAssignM);
+            this.assignmentExp.AddItem(this.assignmentExp + this.ModAssign + this.assignmentExp, ModAssignM);
 
             this.logicalOrExp.AddItem(this.logicalAndExp);
-            this.logicalOrExp.AddItem(this.logicalOrExp + this.LogicalOr + this.logicalAndExp, sdts.LogicalOr);
+            this.logicalOrExp.AddItem(this.logicalOrExp + this.LogicalOr + this.logicalAndExp, LogicalOrM);
 
             this.logicalAndExp.AddItem(this.equalityExp);
-            this.logicalAndExp.AddItem(this.logicalAndExp + this.LogicalAnd + this.equalityExp, sdts.LogicalAnd);
+            this.logicalAndExp.AddItem(this.logicalAndExp + this.LogicalAnd + this.equalityExp, LogicalAndM);
 
             this.equalityExp.AddItem(this.relationalExp);
-            this.equalityExp.AddItem(this.equalityExp + this.Equal + this.relationalExp, sdts.Equal);
-            this.equalityExp.AddItem(this.equalityExp + this.NotEqual + this.relationalExp, sdts.NotEqual);
+            this.equalityExp.AddItem(this.equalityExp + this.Equal + this.relationalExp, EqualM);
+            this.equalityExp.AddItem(this.equalityExp + this.NotEqual + this.relationalExp, NotEqualM);
 
             this.relationalExp.AddItem(this.additiveExp);
-            this.relationalExp.AddItem(this.relationalExp + this.GreaterThan + this.additiveExp, sdts.GreaterThan);
-            this.relationalExp.AddItem(this.relationalExp + this.LessThan + this.additiveExp, sdts.LessThan);
-            this.relationalExp.AddItem(this.relationalExp + this.GreaterEqual + this.additiveExp, sdts.GreaterEqual);
-            this.relationalExp.AddItem(this.relationalExp + this.LessEqual + this.additiveExp, sdts.LessEqual);
+            this.relationalExp.AddItem(this.relationalExp + this.GreaterThan + this.additiveExp, GreaterThanM);
+            this.relationalExp.AddItem(this.relationalExp + this.LessThan + this.additiveExp, LessThanM);
+            this.relationalExp.AddItem(this.relationalExp + this.GreaterEqual + this.additiveExp, GreaterEqualM);
+            this.relationalExp.AddItem(this.relationalExp + this.LessEqual + this.additiveExp, LessEqualM);
 
             this.additiveExp.AddItem(this.multiplicativeExp);
-            this.additiveExp.AddItem(this.additiveExp + this.Add + this.multiplicativeExp, sdts.Add);
-            this.additiveExp.AddItem(this.additiveExp + this.Sub + this.multiplicativeExp, sdts.Sub);
+            this.additiveExp.AddItem(this.additiveExp + this.Add + this.multiplicativeExp, AddM);
+            this.additiveExp.AddItem(this.additiveExp + this.Sub + this.multiplicativeExp, SubM);
 
             this.multiplicativeExp.AddItem(this.unaryExp);
-            this.multiplicativeExp.AddItem(this.multiplicativeExp + this.Mul + this.unaryExp, sdts.Mul);
-            this.multiplicativeExp.AddItem(this.multiplicativeExp + this.Div + this.unaryExp, sdts.Div);
-            this.multiplicativeExp.AddItem(this.multiplicativeExp + this.Mod + this.unaryExp, sdts.Mod);
+            this.multiplicativeExp.AddItem(this.multiplicativeExp + this.Mul + this.unaryExp, MulM);
+            this.multiplicativeExp.AddItem(this.multiplicativeExp + this.Div + this.unaryExp, DivM);
+            this.multiplicativeExp.AddItem(this.multiplicativeExp + this.Mod + this.unaryExp, ModM);
 
             this.unaryExp.AddItem(this.postfixExp);
-            this.unaryExp.AddItem(this.Sub + this.unaryExp, sdts.UnaryMinus);
-            this.unaryExp.AddItem(this.LogicalNot + this.unaryExp, sdts.LogicalNot);
-            this.unaryExp.AddItem(this.Inc + this.unaryExp, sdts.PreInc);
-            this.unaryExp.AddItem(this.Dec + this.unaryExp, sdts.PreDec);
+            this.unaryExp.AddItem(this.Sub + this.unaryExp, UnaryMinusM);
+            this.unaryExp.AddItem(this.LogicalNot + this.unaryExp, LogicalNotM);
+            this.unaryExp.AddItem(this.Inc + this.unaryExp, PreIncM);
+            this.unaryExp.AddItem(this.Dec + this.unaryExp, PreDecM);
 
             this.postfixExp.AddItem(this.primaryExp);
-            this.postfixExp.AddItem(this.postfixExp + this.OpenSquareBrace + this.expression + this.CloseSquareBrace, sdts.Index);
-            this.postfixExp.AddItem(this.postfixExp + this.OpenParenthesis + this.optActualParam + this.CloseParenthesis, sdts.Call);
-            this.postfixExp.AddItem(this.postfixExp + this.Inc, sdts.PostInc);
-            this.postfixExp.AddItem(this.postfixExp + this.Dec, sdts.PostDec);
+            this.postfixExp.AddItem(this.postfixExp + this.OpenSquareBrace + this.expression + this.CloseSquareBrace, Index);
+            this.postfixExp.AddItem(this.postfixExp + this.OpenParenthesis + this.optActualParam + this.CloseParenthesis, Call);
+            this.postfixExp.AddItem(this.postfixExp + this.Inc, PostIncM);
+            this.postfixExp.AddItem(this.postfixExp + this.Dec, PostDecM);
 
-            this.optActualParam.AddItem(this.actualParam, sdts.ActualParam);
+            this.optActualParam.AddItem(this.actualParam, ActualParam);
             this.optActualParam.AddItem(new Epsilon());
 
             this.actualParam.AddItem(this.actualParamList);
             this.actualParamList.AddItem(this.logicalOrExp);
             this.actualParamList.AddItem(this.actualParamList + this.Comma + this.logicalOrExp);
 
-            this.primaryExp.AddItem(Ident, sdts.UseVar);
-            this.primaryExp.AddItem(this.optNumber, sdts.IntLiteralNode);
+            this.primaryExp.AddItem(Ident, UseVar);
+            this.primaryExp.AddItem(this.optNumber, IntLiteralNode);
             this.primaryExp.AddItem(this.OpenParenthesis + this.expression + this.CloseParenthesis);
 
 
