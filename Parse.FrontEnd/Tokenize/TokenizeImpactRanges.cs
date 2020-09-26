@@ -1,8 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Parse.FrontEnd.Tokenize
 {
-    public class TokenizeImpactRanges : List<RangePair>
+    public class TokenizeImpactRanges : List<RangePair>, ICloneable<TokenizeImpactRanges>
     {
         /// PrevRange : CurRange
         /// The following property pair means PrevRange : CurRange
@@ -51,6 +52,9 @@ namespace Parse.FrontEnd.Tokenize
             }
         }
         */
-
+        public TokenizeImpactRanges Clone()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

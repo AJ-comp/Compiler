@@ -160,9 +160,9 @@ namespace Parse.WpfControls
             SetValue(CompletionItemsProperty, new ObservableCollection<CompletionItem>());
             SetValue(DelimiterSetProperty, new StringCollection());
 
-//            this.AddHandler(ListBox.MouseLeftButtonDownEvent, new RoutedEventHandler(this.OnMouseLeftClick), true);
+            //            this.AddHandler(ListBox.MouseLeftButtonDownEvent, new RoutedEventHandler(this.OnMouseLeftClick), true);
 
-            Loaded += (s,e) =>
+            Loaded += (s, e) =>
             {
                 this.InvalidateVisual();
             };
@@ -209,55 +209,11 @@ namespace Parse.WpfControls
                 BorderThickness = this.SelectionLineBorderThickness,
                 BackGroundBrush = Brushes.Transparent
             };
-            int addedLineIndex = this.LineIndex - this.GetStartLineOnViewPos(this.VerticalOffset);
+            var point = this.GetIndexInfoFromCaretIndex(CaretIndex);
+            int addedLineIndex = point.Y - this.GetStartLineOnViewPos(this.VerticalOffset);
             this.renderCanvas?.DrawSelectedLineAppearance(addedLineIndex, appearance);
         }
 
-        private void AddLineString(ref LineHighlightText from, List<LineHighlightText> to, int lineIndex)
-        {
-            from.AbsoluteLineIndex = lineIndex - 1;
-            to.Add(from);
-            from = new LineHighlightText();
-        }
-
-
-        /// <summary>
-        /// This function stores to List after split line by line.
-        /// </summary>
-        /// <param name="lineString">string list in the line</param>
-        /// <param name="result">line list</param>
-        /// <param name="lineIndex">line index</param>
-        /// <param name="tokenIndex">The index of the token that has "\n" string</param>
-        private void SplitMultipleLineFromToken(ref LineHighlightText lineString, List<LineHighlightText> result, ref int lineIndex, int tokenIndex)
-        {
-            // Found the line break syntax.
-            int startPos = 0;
-            string searchString = this.Tokens[tokenIndex].Data;
-            while (true)
-            {
-                if (searchString.Length == 0)
-                {
-                    // If searchString is empty then the last string is "n" so must add one line.
-                    lineString.Add(this.GetHighlightToken(this.Tokens[tokenIndex]));
-                    break;
-                }
-
-                int endPos = searchString.IndexOf("\n");
-
-                // The "\n" was not in the searchString.
-                if (endPos < startPos)
-                {
-                    lineString.Add(this.GetHighlightToken(this.Tokens[tokenIndex]));
-                    break;
-                }
-
-                // Found the "\n"
-                lineString.Add(this.GetHighlightToken(searchString.Substring(0, endPos + 1), this.Tokens[tokenIndex].PatternInfo.OriginalPattern, DrawOption.None));
-                this.AddLineString(ref lineString, result, lineIndex);
-                lineIndex++;
-                searchString = searchString.Substring(endPos + 1);
-            }
-        }
 
         /// <summary>
         /// This function gets the line-string-collection.
@@ -265,35 +221,29 @@ namespace Parse.WpfControls
         /// <param name="startLine">The start line that gets line-string-collection</param>
         /// <param name="cnt">Line count</param>
         /// <returns></returns>
-        private List<LineHighlightText> GetLineDrawingTokenList(int startLine, int cnt)
+        private IEnumerable<LineHighlightText> GetLineDrawingTokenList(int startLine, int cnt)
         {
             List<LineHighlightText> result = new List<LineHighlightText>();
-            var tokenStartIndex = this.GetTokenIndexForCaretIndex(this.GetStartingCaretIndexOfLineIndex(startLine), RecognitionWay.Front);
+            //            var tokenStartIndex = this.GetTokenIndexForCaretIndex(this.GetStartingCaretIndexOfLineIndex(startLine), RecognitionWay.Front);
 
-            if (tokenStartIndex < 0) return result;
-            if (startLine >= this.LineIndexes.Count) return result;
+            //            if (tokenStartIndex < 0) return result;
+            //            if (startLine >= this.LineIndexes.Count) return result;
 
-            int maxCnt = (startLine + cnt < this.LineIndexes.Count) ? startLine + cnt : this.LineIndexes.Count;
+            //            int maxCnt = (startLine + cnt < this.LineIndexes.Count) ? startLine + cnt : this.LineIndexes.Count;
+            int maxCnt = startLine + cnt;
 
-            int lineIndex = startLine + 1;
-            LineHighlightText lineString = new LineHighlightText();
-            for (int i = tokenStartIndex; i < this.Tokens.Count; i++)
+            for (int i = startLine; i < maxCnt; i++)
             {
-                int lbPos = (lineIndex == this.LineIndexes.Count) ? -1 : this.LineIndexes[lineIndex] - 1;
+                LineHighlightText lineString = new LineHighlightText();
+                var tokens = RecentLexedData.TokenStorage.GetTokensForLine(i);
 
-                // Not found the line break syntax.
-                if (this.Tokens[i].StartIndex > lbPos || lbPos > this.Tokens[i].EndIndex)
+                foreach (var token in tokens)
                 {
-                    lineString.Add(this.GetHighlightToken(this.Tokens[i]));
-                    continue;
+                    lineString.Add(this.ConvertToHighlightToken(token));
                 }
 
-                this.SplitMultipleLineFromToken(ref lineString, result, ref lineIndex, i);
-
-                if (lineIndex > maxCnt) break;
+                result.Add(lineString);
             }
-
-            if (lineString.Count > 0) this.AddLineString(ref lineString, result, lineIndex);
 
             return result;
         }
@@ -303,12 +253,12 @@ namespace Parse.WpfControls
         /// </summary>
         /// <param name="tokenInfo"></param>
         /// <returns></returns>
-        private HighlightToken GetHighlightToken(TokenCell tokenInfo)
+        private HighlightToken ConvertToHighlightToken(TokenCell tokenInfo)
         {
-            return this.GetHighlightToken(tokenInfo.Data, tokenInfo.PatternInfo.OriginalPattern, (DrawOption)tokenInfo.ValueOptionData);
+            return this.ConvertToHighlightToken(tokenInfo.Data, tokenInfo.PatternInfo.OriginalPattern, (DrawOption)tokenInfo.ValueOptionData);
         }
 
-        private HighlightToken GetHighlightToken(string text, string pattern, DrawOption status)
+        private HighlightToken ConvertToHighlightToken(string text, string pattern, DrawOption status)
         {
             Brush foreBrush = this.DefaultTextBrush;
             if (this.textStyleDic.ContainsKey(pattern))
@@ -350,7 +300,7 @@ namespace Parse.WpfControls
             if (addedLineIndex < 0) return;
 
             var ViewLineString = this.GetLineDrawingTokenList(this.LineIndex, 1);
-            if (ViewLineString.Count == 0) return;
+            if (ViewLineString.Count() == 0) return;
 
             this.renderCanvas.DrawLine(addedLineIndex, ViewLineString.First());
         }
@@ -362,7 +312,7 @@ namespace Parse.WpfControls
             int startNumber = 1;
             int endNumber = 1;
 
-            if (ViewLineString.Count == 0) this.renderCanvas.Clear();
+            if (ViewLineString.Count() == 0) this.renderCanvas.Clear();
             else
             {
                 startNumber += ViewLineString.First().AbsoluteLineIndex;
@@ -394,7 +344,7 @@ namespace Parse.WpfControls
             }
             else
             */
-                this.AllRender(drawingContext);
+            this.AllRender(drawingContext);
 
             this.DrawSelectionLineAppearance();
         }

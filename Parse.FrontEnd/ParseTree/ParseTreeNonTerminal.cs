@@ -36,20 +36,14 @@ namespace Parse.FrontEnd.ParseTree
 
                 foreach (var item in _symbols)
                 {
-                    if (item is ParseTreeTerminal)
-                    {
-                        if ((item as ParseTreeTerminal).Token.Kind.Meaning) result.Add(item);
-                    }
-
-                    else if (item is ParseTreeNonTerminal)
-                    {
-                        if ((item as ParseTreeNonTerminal).SignPost.MeaningUnit != null) result.Add(item);
-                    }
+                    if (item.IsMeaning) result.Add(item);
                 }
 
                 return result;
             }
         }
+
+        public override bool IsTerminal => false;
 
         public override bool HasVirtualChild
         {
@@ -217,7 +211,7 @@ namespace Parse.FrontEnd.ParseTree
                 if (newParentTree == null) newParentTree = result;
                 else if (newParentTree != result)
                 {
-                    (newParentTree as AstNonTerminal).Add(result);
+                    newParentTree.Add(result);
                     newParentTree = result;
                 }
             }

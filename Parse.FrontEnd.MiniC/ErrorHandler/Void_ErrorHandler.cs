@@ -1,13 +1,14 @@
-﻿using Parse.FrontEnd.Grammars;
+﻿using Parse.FrontEnd.ErrorHandler.GrammarPrivate;
+using Parse.FrontEnd.Grammars;
 using Parse.FrontEnd.Grammars.MiniC;
 using Parse.FrontEnd.Parsers;
 using Parse.FrontEnd.Parsers.Datas;
 
-namespace Parse.FrontEnd.ErrorHandler.GrammarPrivate.MiniC_LR
+namespace Parse.FrontEnd.MiniC.ErrorHandler
 {
-    public class While_ErrorHandler : GrammarPrivateLRErrorHandler
+    public class Void_ErrorHandler : GrammarPrivateLRErrorHandler
     {
-        public While_ErrorHandler(Grammar grammar, int ixIndex) : base(grammar, ixIndex)
+        public Void_ErrorHandler(Grammar grammar, int ixIndex) : base(grammar, ixIndex)
         {
         }
 
@@ -15,9 +16,7 @@ namespace Parse.FrontEnd.ErrorHandler.GrammarPrivate.MiniC_LR
         private static ErrorHandlingResult ErrorHandlingLogic(MiniCGrammar grammar, int ixIndex, Parser parser, ParsingResult parsingResult, int seeingTokenIndex)
         {
             /// Here, someone has to add error handling logic for ixIndex.
-            if (ixIndex == 0)
-                return GrammarPrivateLRErrorHandler.DelCurToken(ixIndex, parsingResult, seeingTokenIndex);
-            else if (ixIndex == 107)
+            if (ixIndex == 107)
                 return GrammarPrivateLRErrorHandler.DelCurToken(ixIndex, parsingResult, seeingTokenIndex);
 
             return DefaultErrorHandler.Process(grammar, parser, parsingResult, seeingTokenIndex);
@@ -25,7 +24,7 @@ namespace Parse.FrontEnd.ErrorHandler.GrammarPrivate.MiniC_LR
 
         public override ErrorHandlingResult Call(Parser parser, ParsingResult parsingResult, int seeingTokenIndex)
         {
-            return While_ErrorHandler.ErrorHandlingLogic(this.grammar as MiniCGrammar, this.ixIndex, parser, parsingResult, seeingTokenIndex);
+            return Void_ErrorHandler.ErrorHandlingLogic(this.grammar as MiniCGrammar, this.ixIndex, parser, parsingResult, seeingTokenIndex);
         }
     }
 }

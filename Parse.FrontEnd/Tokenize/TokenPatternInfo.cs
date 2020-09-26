@@ -8,8 +8,8 @@ namespace Parse.FrontEnd.Tokenize
         public Terminal Terminal { get; private set; }
         public string Pattern => Terminal.RegexExpression;
         public string OriginalPattern => Terminal.Value;
-        public bool bWord => Terminal.bWord;
-        public bool Operator => Terminal.bOper;
+        public bool IsWord => Terminal.IsWord;
+        public bool Operator => Terminal.IsOper;
 
 
         public static TokenPatternInfo NotDefinedToken { get => new TokenPatternInfo(0, new NotDefined()); }
@@ -44,6 +44,6 @@ namespace Parse.FrontEnd.Tokenize
             return result;
         }
 
-        public override string ToString() => string.Format("{0}, {1}, {2}, {3}", this.Key, this.Pattern, this.bWord.ToString().ToLower(), this.Operator.ToString().ToLower());
+        public override string ToString() => string.Format("{0}, {1}, {2}, {3}", this.Key, this.Pattern, this.IsWord.ToString().ToLower(), this.Operator.ToString().ToLower());
     }
 }

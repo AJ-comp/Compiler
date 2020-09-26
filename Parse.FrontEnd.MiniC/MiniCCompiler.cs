@@ -1,19 +1,25 @@
-﻿using Parse.FrontEnd.Grammars;
+﻿using Parse.FrontEnd.Ast;
+using Parse.FrontEnd.Grammars;
 using Parse.FrontEnd.Grammars.MiniC;
+using Parse.FrontEnd.Grammars.MiniC.Sdts;
+using Parse.FrontEnd.Grammars.MiniC.Sdts.AstNodes;
+using Parse.FrontEnd.Grammars.MiniC.Sdts.Datas;
 using Parse.FrontEnd.MiniC;
+using Parse.FrontEnd.MiniC.ErrorHandler;
 using Parse.FrontEnd.Parsers.Datas;
 using Parse.FrontEnd.Parsers.LR;
 using Parse.FrontEnd.Tokenize;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace Parse.FrontEnd.MiniCParser
 {
     public class MiniCCompiler
     {
+        public Grammar Grammar => _miniC;
+
         public event EventHandler<string> ReplaceByMacroCompleted;
-        public event EventHandler<TokenStorage> LexingCompleted;
+        public event EventHandler<LexingData> LexingCompleted;
         public event EventHandler<ParsingResult> ParsingCompleted;
         public event EventHandler<SemanticAnalysisResult> SemanticAnalysisCompleted;
 
@@ -22,38 +28,91 @@ namespace Parse.FrontEnd.MiniCParser
         {
             var instance = MiniCDefineTable.Instance;
             _parser = new SLRParser(_miniC);
+            _parser.ASTCreated += ASTCreated;
 
             foreach (var terminal in _miniC.TerminalSet)
-            {
                 _lexer.AddTokenRule(terminal);
-            }
+
+            MiniC_LRErrorHandlerFactory.Instance.AddErrorHandler(_parser);
+        }
+
+        private void ASTCreated(object sender, AstSymbol e)
+        {
+            e.Sdts = MiniCCreator.CreateSdtsNode(e) as MiniCNode;
         }
 
         public ParsingResult Operate(string path, string data)
         {
             ReplaceByMacroCompleted?.Invoke(this, data);
 
-            // first parsing
-            if (_docTable.ContainsKey(path) == false)
-            {
-                var tokenStorage = _lexer.Lexing(data);
-                LexingCompleted?.Invoke(this, tokenStorage);
+            // lexing
+            var lexingData = _lexer.Lexing(data);
+            LexingCompleted?.Invoke(this, lexingData);
 
-                var parsingResult = _parser.Parsing(tokenStorage.TokensToView);
+            // parsing
+            var parsingResult = _parser.Parsing(lexingData.TokenStorage.TokensToView);
+            ParsingCompleted?.Invoke(this, parsingResult);
 
-                _docTable.Add(path, new TotalData(data, data, tokenStorage.TokensToView, parsingResult));
-
-                return parsingResult;
-            }
+            if (_docTable.ContainsKey(path))
+                _docTable[path] = new TotalData(data, data, lexingData, parsingResult);
             else
+                _docTable.Add(path, new TotalData(data, data, lexingData, parsingResult));
+
+            return parsingResult;
+        }
+
+        public ParsingResult Operate(string path, int addOffset, string addData)
+        {
+            var totalData = _docTable[path];
+            var data = totalData.OriginalData.Insert(addOffset, addData);
+
+            // lexing
+            var lexingData = _lexer.Lexing(totalData.LexedData.TokenStorage, addOffset, addData);
+            LexingCompleted?.Invoke(this, lexingData);
+
+            // parsing
+            var parsingResult = _parser.Parsing(lexingData, totalData.ParsedData);
+            ParsingCompleted?.Invoke(this, parsingResult);
+
+            _docTable[path] = new TotalData(data, data, lexingData, parsingResult);
+
+            return parsingResult;
+        }
+
+
+        public ParsingResult Operate(string path, int delOffset, int delLen)
+        {
+            var totalData = _docTable[path];
+            var data = totalData.OriginalData.Remove(delOffset, delLen);
+
+            // lexing
+            var lexingData = _lexer.Lexing(totalData.LexedData.TokenStorage, delOffset, delLen);
+            LexingCompleted?.Invoke(this, lexingData);
+
+            // parsing
+            var parsingResult = _parser.Parsing(lexingData, totalData.ParsedData);
+            ParsingCompleted?.Invoke(this, parsingResult);
+
+            _docTable[path] = new TotalData(data, data, lexingData, parsingResult);
+
+            return parsingResult;
+        }
+
+        public SemanticAnalysisResult StartSemanticAnalysis(string path)
+        {
+            try
             {
                 var totalData = _docTable[path];
-                var tokenStorage = _lexer.Lexing(data);
-                var parsingResult = _parser.Parsing(tokenStorage.TokensToView, totalData.ParsedData, _lexer.ImpactRanges);
+                AstSymbol rootSymbol = totalData.ParsedData.AstRoot;
 
-                _docTable[path] = new TotalData(data, data, tokenStorage.TokensToView, parsingResult);
+                var rootSdts = rootSymbol.Sdts.Build(new MiniCSdtsParams(0, 0));
+                var result = new SemanticAnalysisResult(rootSdts, new List<AstSymbol>());
 
-                return parsingResult;
+                return result;
+            }
+            catch
+            {
+                return null;
             }
         }
 

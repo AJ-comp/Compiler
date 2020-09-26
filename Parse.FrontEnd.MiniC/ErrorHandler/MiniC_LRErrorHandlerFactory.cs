@@ -6,7 +6,7 @@ using Parse.Utilities;
 using System;
 using static Parse.FrontEnd.Parsers.Datas.LR.LRParsingRowDataFormat;
 
-namespace Parse.FrontEnd.ErrorHandler.GrammarPrivate.MiniC_LR
+namespace Parse.FrontEnd.MiniC.ErrorHandler
 {
     public class MiniC_LRErrorHandlerFactory : Singleton<MiniC_LRErrorHandlerFactory>
     {

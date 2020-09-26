@@ -23,8 +23,7 @@ namespace ApplicationLayer.ViewModels.DocumentTypeViewModels
             set
             {
                 this._selectedItem = value;
-                ParserFactory.Instance.RegisterParser(ParserFactory.ParserKind.SLR_Parser, _selectedItem);
-                ParserViewModel = new LRParserViewModel(ParserFactory.Instance.GetParser(ParserFactory.ParserKind.SLR_Parser, _selectedItem) as LRParser);
+                ParserViewModel = new LRParserViewModel(new SLRParser(_selectedItem));
                 this.RaisePropertyChanged(nameof(SelectedItem));
             }
         }

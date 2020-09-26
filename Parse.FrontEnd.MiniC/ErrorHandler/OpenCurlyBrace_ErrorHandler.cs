@@ -1,9 +1,10 @@
-﻿using Parse.FrontEnd.Grammars;
+﻿using Parse.FrontEnd.ErrorHandler.GrammarPrivate;
+using Parse.FrontEnd.Grammars;
 using Parse.FrontEnd.Grammars.MiniC;
 using Parse.FrontEnd.Parsers;
 using Parse.FrontEnd.Parsers.Datas;
 
-namespace Parse.FrontEnd.ErrorHandler.GrammarPrivate.MiniC_LR
+namespace Parse.FrontEnd.MiniC.ErrorHandler
 {
     public class OpenCurlyBrace_ErrorHandler : GrammarPrivateLRErrorHandler
     {

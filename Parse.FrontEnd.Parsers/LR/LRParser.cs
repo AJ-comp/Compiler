@@ -30,8 +30,6 @@ namespace Parse.FrontEnd.Parsers.LR
         /// </summary>
         public abstract event EventHandler<ParsingUnit> ActionFailed;
 
-        public abstract SuccessedKind BlockParsing(ParsingBlock parsingBlock);
-
 
         /// <summary>
         /// The Error Handler that if the goto failed.

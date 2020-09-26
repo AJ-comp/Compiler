@@ -11,14 +11,14 @@ namespace Parse.FrontEnd.Parsers.Datas
     public class ParsingStackUnit : ICloneable<ParsingStackUnit>
     {
         public Stack<object> Stack { get; } = new Stack<object>();
-        public Stack<IEnumerable<AstSymbol>> AstListStack { get; } = new Stack<IEnumerable<AstSymbol>>();
+        public Stack<object> AstListStack { get; } = new Stack<object>();
 
 
         public ParsingStackUnit()
         {
         }
 
-        public ParsingStackUnit(Stack<object> stack, Stack<IEnumerable<AstSymbol>> astListStack)
+        public ParsingStackUnit(Stack<object> stack, Stack<object> astListStack)
         {
             Stack = stack;
             AstListStack = astListStack;
@@ -35,7 +35,7 @@ namespace Parse.FrontEnd.Parsers.Datas
             if (treeTerminal.IsMeaning)
             {
                 astSymbol = new AstTerminal(seeingToken);
-                AstListStack.Push(new List<AstSymbol>() { astSymbol });
+                AstListStack.Push(astSymbol);
             }
 
             return new Tuple<ParseTreeSymbol, AstSymbol>(treeTerminal, astSymbol);
@@ -47,7 +47,7 @@ namespace Parse.FrontEnd.Parsers.Datas
             AstNonTerminal astNT = (dataToInsert.IsMeaning) ? new AstNonTerminal(dataToInsert)
                                                                                       : null;
 
-            List <AstSymbol> astChildren = new List<AstSymbol>();
+            List<object> astChildren = new List<object>();
             for (int i = 0; i < reduceDest.Count * 2; i++)
             {
                 var data = Stack.Pop();
@@ -56,16 +56,22 @@ namespace Parse.FrontEnd.Parsers.Datas
                     var child = data as ParseTreeSymbol;
                     dataToInsert.Insert(0, child);
 
-                    if (!child.IsMeaning) continue;
+                    if (!child.IsMeaning && child.IsTerminal) continue;
+                    if (child is ParseTreeNonTerminal)
+                    {
+                        // epsilon reduce case
+                        if ((child as ParseTreeNonTerminal).Count == 0) continue;
+                    }
+
                     var astChild = AstListStack.Pop();
-                    astChildren.AddRange(astChild);
+                    astChildren.Insert(0, astChild);
                 }
             }
             Stack.Push(dataToInsert);
 
             if (astNT != null)
             {
-                astNT.AddRange(astChildren);
+                astNT.AddRange(TakeOffList(astChildren));
                 AstListStack.Push(astNT);
             }
             else AstListStack.Push(astChildren);
@@ -99,6 +105,20 @@ namespace Parse.FrontEnd.Parsers.Datas
 
         public ParsingStackUnit Reverse() => new ParsingStackUnit(Stack.Reverse(), AstListStack.Reverse());
 
-        public ParsingStackUnit Clone() => new ParsingStackUnit(Stack, AstListStack);
+        public ParsingStackUnit Clone() => new ParsingStackUnit(Stack.Clone(), AstListStack.Clone());
+
+
+        private IEnumerable<AstSymbol> TakeOffList(IEnumerable<object> list)
+        {
+            List<AstSymbol> result = new List<AstSymbol>();
+
+            foreach (var item in list)
+            {
+                if (item is AstSymbol) result.Add(item as AstSymbol);
+                else result.AddRange(TakeOffList(item as List<object>));
+            }
+
+            return result;
+        }
     }
 }

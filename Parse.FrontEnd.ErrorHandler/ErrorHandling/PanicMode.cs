@@ -80,7 +80,7 @@ namespace Parse.FrontEnd.ErrorHandler
 
                 // The token of the first index may fire an error while parsing. because history has to be, Clear function doesn't call.
                 if(seeingTokenIndex > firstIndex)
-                    blockToSkip.units.Clear(); // it has to delete an all unit because a block to skip.
+                    blockToSkip._units.Clear(); // it has to delete an all unit because a block to skip.
 
                 // check
                 var targetTerminal = curToken.Kind;
@@ -92,11 +92,11 @@ namespace Parse.FrontEnd.ErrorHandler
                 newParsingUnit.SetRecoveryMessage(string.Format("({0}, {1})", 
                                                                                                 Resource.RecoverWithPanicMode, 
                                                                                                 Resource.SkipToken));
-                blockToSkip.units.Add(newParsingUnit);
+                blockToSkip._units.Add(newParsingUnit);
 
                 var parsingErrInfo = ParsingErrorInfo.CreateParsingError(nameof(AlarmCodes.CE0001), 
                                                                                                     string.Format(AlarmCodes.CE0001, blockToSkip.Token.Input));
-                blockToSkip.errorInfos.Add(parsingErrInfo);
+                blockToSkip._errorInfos.Add(parsingErrInfo);
                 seeingTokenIndex++;
 
                 //                if (ixMetrix.PossibleTerminalSet.Contains(curToken.Data)) break;
@@ -123,8 +123,8 @@ namespace Parse.FrontEnd.ErrorHandler
                                                                                             Resource.RecoverWithPanicMode, 
                                                                                             Resource.TryAdjustStackWithThisToken));
 
-            curBlock.units.Add(seeingParsingUnit);
-            curBlock.errorInfos.Add(ParsingErrorInfo.CreateParsingError(nameof(AlarmCodes.CE0003), 
+            curBlock._units.Add(seeingParsingUnit);
+            curBlock._errorInfos.Add(ParsingErrorInfo.CreateParsingError(nameof(AlarmCodes.CE0003), 
                                                                                                     string.Format(AlarmCodes.CE0003, curBlock.Token)));
 
             return curBlock;
@@ -175,12 +175,12 @@ namespace Parse.FrontEnd.ErrorHandler
                     var seeingBlock = parsingResult[seeingTokenIndex];
 
                     seeingParsingUnit.AfterStack = stackToProcess;
-                    parser.BlockParsing(seeingBlock);
+                    parser.BlockParsing(parsingResult, seeingTokenIndex);
                     seeingBlock.Units.Last().SetRecoveryMessage(string.Format("({0})", Resource.RecoverySuccessed));
 
                     var parsingErrorInfo = ParsingErrorInfo.CreateParsingError(nameof(AlarmCodes.CE0003),
                                                                                                             string.Format(AlarmCodes.CE0003, tokenData.Input));
-                    blockToRecover.errorInfos.Add(parsingErrorInfo);
+                    blockToRecover._errorInfos.Add(parsingErrorInfo);
                 }
                 else return result;
 
@@ -196,7 +196,7 @@ namespace Parse.FrontEnd.ErrorHandler
                         InputValue = seeingParsingUnit.InputValue
                     };
                     newUnit.SetRecoveryMessage(string.Format("({0})", Resource.RecoveryFailed));
-                    blockToRecover.units.Add(newUnit);
+                    blockToRecover._units.Add(newUnit);
                 }
 
                 return new ErrorHandlingResult(parsingResult, seeingTokenIndex, false);

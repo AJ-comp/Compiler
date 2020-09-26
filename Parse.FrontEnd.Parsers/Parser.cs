@@ -55,7 +55,7 @@ namespace Parse.FrontEnd.Parsers
         /// <param name="tokens">The tokenCells to parsing</param>
         /// <returns>The parsing result</returns>
         public abstract ParsingResult Parsing(IReadOnlyList<TokenCell> tokens);
-        public abstract ParsingResult Parsing(IReadOnlyList<TokenCell> tokens, ParsingResult prevParsingInfo, TokenizeImpactRanges rangeToParse);
+        public abstract ParsingResult Parsing(LexingData lexingData, ParsingResult prevParsingInfo);
 
 
         protected Parser(Grammar grammar)

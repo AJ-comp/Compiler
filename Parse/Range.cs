@@ -25,7 +25,7 @@ namespace Parse
         /// </summary>
         /// <param name="range">The range to compare</param>
         /// <returns>returns true if be included else false</returns>
-        public bool IsInclude(Range range) => (this.StartIndex <= range.StartIndex && this.EndIndex >= range.EndIndex) ? true : false;
+        public bool IsInclude(Range range) => (this.StartIndex <= range.StartIndex && this.EndIndex >= range.EndIndex);
 
         /// <summary>
         /// This function judgment whether a parameter range intersects with this range.
@@ -95,6 +95,11 @@ namespace Parse
             return hashCode;
         }
     }
+
+
+
+
+
 
     public class RangePair : Tuple<Range, Range>
     {

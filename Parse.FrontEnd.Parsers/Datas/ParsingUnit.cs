@@ -1,6 +1,7 @@
 ﻿using Parse.FrontEnd.Parsers.EventArgs;
 using Parse.FrontEnd.Parsers.Properties;
 using Parse.FrontEnd.RegularGrammar;
+using System.Diagnostics;
 
 namespace Parse.FrontEnd.Parsers.Datas
 {
@@ -8,6 +9,8 @@ namespace Parse.FrontEnd.Parsers.Datas
     /// 
     /// </summary>
     /// <see cref="https://www.lucidchart.com/documents/edit/c96f0bde-4111-4957-bf65-75b56d8074dc/0_0?beaconFlowId=687BBA49A656D177"/>
+
+    [DebuggerDisplay("{DebuggerDisplay, nq}")]
     public class ParsingUnit
     {
 
@@ -108,12 +111,17 @@ namespace Parse.FrontEnd.Parsers.Datas
             this.ErrorMessage = string.Empty;
         }
 
-        public override string ToString()
-        {
-            var inputString = (InputValue == null) ? "null" : this.InputValue.Input;
 
-            return string.Format("BeforeStack count : {0}, AfterStack count : {1}, InputValue : {2}, Action : {3}", 
-                                            BeforeStack.Stack.Count, AfterStack.Stack.Count, inputString, Action.ToString());
+
+        private string DebuggerDisplay
+        {
+            get
+            {
+                var inputString = (InputValue == null) ? "null" : this.InputValue.Input;
+
+                return string.Format("BeforeStack count : {0}, AfterStack count : {1}, InputValue : {2}, Action : {3}",
+                                                BeforeStack.Stack.Count, AfterStack.Stack.Count, inputString, Action.ToString());
+            }
         }
     }
 }

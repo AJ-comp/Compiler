@@ -1,4 +1,5 @@
 ﻿using Parse.Extensions;
+using Parse.FrontEnd.Ast;
 using Parse.FrontEnd.Parsers.Properties;
 using Parse.FrontEnd.ParseTree;
 using System;
@@ -47,6 +48,16 @@ namespace Parse.FrontEnd.Parsers.Datas
                 });
 
                 return result;
+            }
+        }
+
+        public AstSymbol AstRoot
+        {
+            get
+            {
+                if (!Success) return null;
+
+                return this.Last().Units.Last().AfterStack.AstListStack.Peek() as AstSymbol;
             }
         }
 

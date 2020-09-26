@@ -11,6 +11,7 @@ using Parse.FrontEnd.Ast;
 using Parse.FrontEnd.Grammars;
 using Parse.FrontEnd.Grammars.MiniC;
 using Parse.FrontEnd.Grammars.MiniC.Sdts.AstNodes;
+using Parse.FrontEnd.MiniCParser;
 using Parse.FrontEnd.Parsers;
 using Parse.FrontEnd.Parsers.Datas;
 using Parse.FrontEnd.ParseTree;
@@ -34,7 +35,7 @@ namespace ApplicationLayer.ViewModels.DocumentTypeViewModels
         private object _lockObject = new object();
         private int _caretIndex = 0;
         private SourceFileTreeNodeModel _fileNode;
-        private Parser _parser;
+        private MiniCCompiler _compiler;
         private RelayCommand _saveCommand;
         private List<HighlightMapItem> _highlightMaps = new List<HighlightMapItem>();
         private RelayCommand<ParsingCompletedEventArgs> _parsingCompletedCommand = null;
@@ -56,7 +57,7 @@ namespace ApplicationLayer.ViewModels.DocumentTypeViewModels
         public Grammar Grammar { get; } = new MiniCGrammar();
 
         public TokenizeImpactRanges RecentTokenizeHistory { get; } = new TokenizeImpactRanges();
-        public Parser Parser => _parser;
+        public MiniCCompiler Compiler => _compiler;
         public ParseTreeSymbol ParseTree { get; private set; }
         public DataTable ParsingHistory { get; private set; }
         public IEnumerable<AstSymbol> InterLanguage { get; private set; }
@@ -112,10 +113,11 @@ namespace ApplicationLayer.ViewModels.DocumentTypeViewModels
         /********************************************************************************************
          * constructor section
          ********************************************************************************************/
-        public EditorTypeViewModel(SourceFileTreeNodeModel fileNode) : base(fileNode?.FileName, fileNode?.FullPath, fileNode?.FullPath)
+        public EditorTypeViewModel(SourceFileTreeNodeModel fileNode, MiniCCompiler compiler)
+            : base(fileNode?.FileName, fileNode?.FullPath, fileNode?.FullPath)
         {
             this._fileNode = fileNode;
-            this._parser = ParserFactory.Instance.GetParser(ParserFactory.ParserKind.SLR_Parser, Grammar);
+            this._compiler = compiler;
 
             this.CurrentData = Data;
             this.CloseCharacters.Add("{");

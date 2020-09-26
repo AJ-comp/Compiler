@@ -1,11 +1,12 @@
-﻿using Parse.FrontEnd.Grammars;
+﻿using Parse.FrontEnd.ErrorHandler.GrammarPrivate;
+using Parse.FrontEnd.Grammars;
 using Parse.FrontEnd.Grammars.MiniC;
 using Parse.FrontEnd.Parsers;
 using Parse.FrontEnd.Parsers.Datas;
 using Parse.FrontEnd.Parsers.LR;
 using Parse.FrontEnd.Tokenize;
 
-namespace Parse.FrontEnd.ErrorHandler.GrammarPrivate.MiniC_LR
+namespace Parse.FrontEnd.MiniC.ErrorHandler
 {
     public class Ident_ErrorHandler : GrammarPrivateLRErrorHandler
     {

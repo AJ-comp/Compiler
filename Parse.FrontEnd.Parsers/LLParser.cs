@@ -174,7 +174,7 @@ namespace Parse.FrontEnd.Parsers
             throw new NotImplementedException();
         }
 
-        public override ParsingResult Parsing(IReadOnlyList<TokenCell> tokens, ParsingResult prevParsingInfo, TokenizeImpactRanges rangeToParse)
+        public override ParsingResult Parsing(LexingData lexingData, ParsingResult prevParsingInfo)
         {
             throw new NotImplementedException();
         }

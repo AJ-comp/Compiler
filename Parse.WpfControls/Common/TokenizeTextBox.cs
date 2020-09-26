@@ -3,25 +3,31 @@ using Parse.FrontEnd.Tokenize;
 using Parse.WpfControls.Models;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
 
 namespace Parse.WpfControls.Common
 {
     public class TokenizeTextBox : ExtensionTextBox
     {
         private List<Tuple<int, int>> scopeSyntaxes = new List<Tuple<int, int>>();
-        private Dictionary<int, List<int>> tokenIndexesTable = new Dictionary<int, List<int>>();
-        private SelectionTokensContainer selectionBlocks = new SelectionTokensContainer();
         private Lexer lexer = new Lexer();
-        private TokenStorage tokens;
-        private TokenizeImpactRanges _recentTokenizeHistory;
+        private TokenStorage _tokens;
+        private LexingData _lexedData;
 
         public SyntaxPairCollection syntaxPairs = new SyntaxPairCollection();
-        public IReadOnlyList<TokenCell> Tokens => tokens.TokensToView;
-        public TokenizeImpactRanges RecentTokenizeHistory => _recentTokenizeHistory;
+        public IReadOnlyList<TokenCell> Tokens => _tokens.TokensToView;
+        public LexingData RecentLexedData
+        {
+            get => _lexedData;
+            set
+            {
+                _lexedData = value;
+                _tokens = _lexedData?.TokenStorage;
+
+                LineIndexes.Clear();
+                LineIndexes.AddRange(_lexedData.TokenStorage.LineIndexes);
+            }
+        }
 
 
         public int TokenIndex
@@ -48,105 +54,21 @@ namespace Parse.WpfControls.Common
 
             this.SelectionChanged += (s, e) =>
             {
-                if (tokens == null) return;
+                if (_tokens == null) return;
 
                 this.UpdateTokenIndex();
-            };
-
-            this.TextChanged += (s, e) =>
-            {
-                this.UpdateTokenInfos(e.Changes.First());
             };
         }
 
         private void UpdateTokenIndex()
         {
-            this.TokenIndex = this.tokens.TokenIndexForOffset(this.CaretIndex);
-
-            this.selectionBlocks = this.GetSelectionTokenInfos(this.SelectionStart, this.SelectionLength);
-        }
-
-        /// <summary>
-        /// This function returns a selected information.
-        /// </summary>
-        /// <returns></returns>
-        private SelectionTokensContainer GetSelectionTokenInfos(int offset, int len)
-        {
-            SelectionTokensContainer result = new SelectionTokensContainer();
-            if (len <= 0) return result;
-
-            int endOffset = offset + len;
-
-            Parallel.For(0, this.Tokens.Count, (i, loopOption) =>
-            {
-                var token = this.Tokens[i];
-                // If whole of the token is contained -> reserve delete
-                if (token.MoreRange(offset, endOffset))
-                {
-                    lock(result.WholeSelectionBag) result.WholeSelectionBag.Add(i);
-                }
-                // If overlap in part of the first token
-                else if (token.Contains(offset, RecognitionWay.Front))
-                {
-                    int cIndex = offset - token.StartIndex;
-                    int length = token.Data.Length - cIndex;
-                    length = (len > length) ? length : len;
-
-                    lock(result.PartSelectionBag) result.PartSelectionBag.Add(new Tuple<int, int, int>(i, cIndex, length));
-                }
-                // If overlap in part of the last token
-                else if (token.Contains(endOffset, RecognitionWay.Back))
-                {
-                    int cIndex = endOffset - token.StartIndex;
-
-                    lock(result.PartSelectionBag) result.PartSelectionBag.Add(new Tuple<int, int, int>(i, 0, cIndex));
-                }
-            });
-
-            result.SortAll();
-
-            return result;
-        }
-
-        private void DelTokens(TextChange changeInfo)
-        {
-            //            var delInfos = (this.selectionBlocks.IsEmpty()) ? 
-            //                this.GetSelectionTokenInfos(changeInfo.Offset, changeInfo.RemovedLength) : this.selectionBlocks;
-            var delInfos = this.GetSelectionTokenInfos(changeInfo.Offset, changeInfo.RemovedLength);
-
-            this.tokens = this.lexer.Lexing(this.tokens, delInfos);
-            this._recentTokenizeHistory = this.lexer.ImpactRanges;
-        }
-
-        private void UpdateTokens(TextChange changeInfo)
-        {
-            //            var delInfos = (this.selectionBlocks.IsEmpty()) ?
-            //                this.GetSelectionTokenInfos(changeInfo.Offset, changeInfo.RemovedLength) : this.selectionBlocks;
-            var delInfos = this.GetSelectionTokenInfos(changeInfo.Offset, changeInfo.RemovedLength);
-
-            string addString = this.Text.Substring(changeInfo.Offset, changeInfo.AddedLength);
-            this.tokens = this.lexer.Lexing(this.tokens, delInfos, addString);
-            this._recentTokenizeHistory = this.lexer.ImpactRanges;
-        }
-
-        private void UpdateTokenInfos(TextChange changeInfo)
-        {
-            this.lexer.ImpactRanges.Clear();
-
-            if (changeInfo.RemovedLength > 0 && changeInfo.AddedLength > 0) this.UpdateTokens(changeInfo);
-            else if (changeInfo.RemovedLength > 0) this.DelTokens(changeInfo);
-            else if (changeInfo.AddedLength > 0)
-            {
-                string addString = this.Text.Substring(changeInfo.Offset, changeInfo.AddedLength);
-                this.tokens = this.lexer.Lexing(this.tokens, changeInfo.Offset, addString);
-                this._recentTokenizeHistory = this.lexer.ImpactRanges;
-            }
+            this.TokenIndex = this._tokens.TokenIndexForOffset(this.CaretIndex);
         }
 
         public int GetTokenIndexForCaretIndex(int caretIndex, RecognitionWay recognitionWay)
         {
-            if (this.tokens == null) return -1;
-            return this.tokens.TokenIndexForOffset(caretIndex, recognitionWay);
+            if (this._tokens == null) return -1;
+            return this._tokens.TokenIndexForOffset(caretIndex, recognitionWay);
         }
 
         /// <summary>

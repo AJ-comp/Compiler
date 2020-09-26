@@ -32,30 +32,6 @@ namespace Parse.FrontEnd.Parsers.LR
             ParsingTable.CreateParsingTable(this.C0, this._followAnalyzer.Datas);
         }
 
-
-        public override SuccessedKind BlockParsing(ParsingBlock parsingBlock)
-        {
-            SuccessedKind result = SuccessedKind.NotApplicable;
-            if (parsingBlock == null) return result;
-
-            // remove prev information before block parsing.
-            parsingBlock.errorInfos.Clear();
-
-            var token = parsingBlock.Token;
-//            ParsingUnit newParsingUnit = (bFromLastNext) ? parsingBlock.AddParsingItem() : parsingBlock.Units.Last();
-//            newParsingUnit.InputValue = token;
-
-            while (true)
-            {
-                result = UnitParsing(parsingBlock, token);
-
-                if (result == SuccessedKind.NotApplicable) break;
-                if (result == SuccessedKind.Completed) break;
-            }
-
-            return result;
-        }
-
         public void PartialParsing(ParsingResult target, TokenizeImpactRanges rangesToParse)
         {
             int indexToSee = 0;
@@ -73,7 +49,7 @@ namespace Parse.FrontEnd.Parsers.LR
                     if (i == 0) target[i] = new ParsingBlock(target[i].Token);
                     else target[i] = new ParsingBlock(new ParsingUnit(target[i - 1].Units.Last().AfterStack), target[i].Token);
 
-                    var successKind = this.BlockParsing(target[i]);
+                    var successKind = this.BlockParsing(target, i);
                     this.PostProcessing(successKind, target, true, ref i);
 
                     indexToSee = i + 1;
@@ -83,14 +59,14 @@ namespace Parse.FrontEnd.Parsers.LR
                 for (int i = indexToSee; i < target.Count; i++)
                 {
                     var targetToCompare = target[i];
-                    target[i] = new ParsingBlock(new ParsingUnit(target[i - 1].Units.Last().AfterStack), target[i].Token);
-                    var successKind = this.BlockParsing(target[i]);
-                    if (targetToCompare.Units.First().AfterStack.Stack.SequenceEqual(target[i].Units.Last().AfterStack.Stack))
-                    //                        if (ElementsEquals(targetToCompare.Units.Last().AfterStack.ToList(), target[i].Units.Last().AfterStack.ToList()))
+                    if(targetToCompare.Units.First().BeforeStack.Stack.SequenceEqual(target[i].Units.Last().AfterStack.Stack))
                     {
                         indexToSee = i + 1;
                         break;
                     }
+
+                    target[i] = new ParsingBlock(new ParsingUnit(target[i - 1].Units.Last().AfterStack), target[i].Token);
+                    var successKind = this.BlockParsing(target, i);
 
                     this.PostProcessing(successKind, target, true, ref i);
                     indexToSee = i + 1;
@@ -102,16 +78,13 @@ namespace Parse.FrontEnd.Parsers.LR
         /// This function performs the following process
         /// It parsing next to 'basis' from 'seeingIndex' of 'wholeTokens' as much as 'rangeToParse'.
         /// </summary>
-        /// <param name="basis"></param>
-        /// <param name="wholeTokens"></param>
-        /// <param name="rangeToParse"></param>
-        /// <param name="seeingIndex"></param>
+        /// <param name="target"></param>
         /// <returns></returns>
         private void AllParsing(ParsingResult target)
         {
             for (int i = 0; i < target.Count; i++)
             {
-                var blockParsingResult = this.BlockParsing(target[i]);
+                var blockParsingResult = this.BlockParsing(target, i);
 
                 if (this.PostProcessing(blockParsingResult, target, true, ref i)) break;
             }
@@ -148,18 +121,20 @@ namespace Parse.FrontEnd.Parsers.LR
             return result;
         }
 
-        public override ParsingResult Parsing(IReadOnlyList<TokenCell> tokenCells, ParsingResult prevParsingInfo, TokenizeImpactRanges rangeToParse)
+        public override ParsingResult Parsing(LexingData lexingData, ParsingResult prevParsingInfo)
         {
+            var tokenCells = lexingData.TokenStorage.TokensToView;
+
             if (prevParsingInfo == null) return this.Parsing(tokenCells);
             if (prevParsingInfo.Success == false) return this.Parsing(tokenCells);
-            if (rangeToParse == null) return this.Parsing(tokenCells);
+            if (lexingData.RangeToParse == null) return this.Parsing(tokenCells);
 
             var tokens = ToTokenDataList(tokenCells);
             ParsingResult result = null;
             try
             {
-                result = this.ReplaceRanges(prevParsingInfo, tokens, rangeToParse);
-                this.PartialParsing(result, rangeToParse);
+                result = this.ReplaceRanges(prevParsingInfo, tokens, lexingData.RangeToParse);
+                this.PartialParsing(result, lexingData.RangeToParse);
                 result.Success = true;
             }
             catch (ParsingException ex)
@@ -203,7 +178,6 @@ namespace Parse.FrontEnd.Parsers.LR
         /// </summary>
         /// <param name="successedType">The result kind of the parsing</param>
         /// <param name="parsingResult">The whole result of the parsing until the current</param>
-        /// <param name="tokens"></param>
         /// <param name="bErrorRecover"></param>
         /// <param name="index"></param>
         /// <returns>Return true if a token that must to parse does not exist (Completed), else Return false.</returns>
@@ -211,6 +185,8 @@ namespace Parse.FrontEnd.Parsers.LR
         private bool PostProcessing(SuccessedKind successedType, ParsingResult parsingResult, bool bErrorRecover, ref int index)
         {
             bool result = false;
+
+            ParsingBlock nextBlock = (parsingResult.Count > index) ? parsingResult[index] : null;
 
             // ReduceOrGoto state can't arrive in this function because it is processed in 'BlockParsing' function.
             // Therefore this function doesn't process ReduceOrGoto state.

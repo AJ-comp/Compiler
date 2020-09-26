@@ -11,12 +11,11 @@ namespace Parse.FrontEnd.Parsers.LR
         /// This function performs follow-up processing after shift operation.
         /// </summary>
         /// <param name="parsingBlock"></param>
-        private void ShiftFollowUpProcess(ParsingBlock parsingBlock)
+        private void ShiftFollowUpProcess(ParsingUnit unitToParsing)
         {
-            var lastUnit = parsingBlock.Units.Last();
-            var afterStack = lastUnit.AfterStack;
+            var afterStack = unitToParsing.AfterStack;
 
-            var result = afterStack.Shift(lastUnit.InputValue, lastUnit.Action.Dest);
+            var result = afterStack.Shift(unitToParsing.InputValue, unitToParsing.Action.Dest);
 
             // inform to external
             ParseTreeCreated?.Invoke(this, new ParseCreatedArgs(result.Item1, null));
@@ -71,16 +70,14 @@ namespace Parse.FrontEnd.Parsers.LR
         /// <summary>
         /// This function builds a stack and parse tree information following action rule (parsingUnit.Action).
         /// </summary>
-        /// <param name="parsingBlock"></param>
-        protected void BuildStackAndParseTree(ParsingBlock parsingBlock)
+        /// <param name="unitToParsing"></param>
+        protected void BuildStackAndParseTree(ParsingUnit unitToParsing)
         {
-            ParsingUnit parsingUnit = parsingBlock.Units.Last();
-
             // case shift
-            if (parsingUnit.Action.Direction == ActionDir.shift) ShiftFollowUpProcess(parsingBlock);
-            else if (parsingUnit.Action.Direction == ActionDir.reduce) ReduceFollowUpProcess(parsingUnit);
-            else if (parsingUnit.Action.Direction == ActionDir.epsilon_reduce) EpsilonReduceFollowUpProcess(parsingUnit);
-            else if (parsingUnit.Action.Direction == ActionDir.moveto) GotoFollowUpProcess(parsingUnit);
+            if (unitToParsing.Action.Direction == ActionDir.shift) ShiftFollowUpProcess(unitToParsing);
+            else if (unitToParsing.Action.Direction == ActionDir.reduce) ReduceFollowUpProcess(unitToParsing);
+            else if (unitToParsing.Action.Direction == ActionDir.epsilon_reduce) EpsilonReduceFollowUpProcess(unitToParsing);
+            else if (unitToParsing.Action.Direction == ActionDir.moveto) GotoFollowUpProcess(unitToParsing);
         }
     }
 }

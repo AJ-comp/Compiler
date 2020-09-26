@@ -2,54 +2,11 @@
 using Parse.FrontEnd.Parsers.Collections;
 using Parse.FrontEnd.Parsers.Datas;
 using Parse.FrontEnd.ParseTree;
-using Parse.FrontEnd.RegularGrammar;
-using System.Linq;
 
 namespace Parse.FrontEnd.Parsers.LR
 {
     public abstract partial class LRParser
     {
-        public SuccessedKind UnitParsing(ParsingBlock block, TokenData seeingToken)
-        {
-            var newUnit = (block.Units.Count == 0) ? ParsingUnit.FirstParsingUnit
-                                                                      : new ParsingUnit(block.Units.Last().AfterStack);
-
-            UnitParsing(newUnit, seeingToken);
-            block.units.Add(newUnit);
-
-            if (newUnit.IsError) return SuccessedKind.NotApplicable;
-            else if (seeingToken.Kind == null) return SuccessedKind.Shift;
-
-            // post process
-            BuildStackAndParseTree(block);
-            return this.ParsingSuccessedProcess(newUnit);
-        }
-
-
-        /// <summary>
-        /// This function returns a parsing unit (after goto or shift or reduce process)
-        /// </summary>
-        /// <param name="parsingUnit"></param>
-        /// <param name="seeingToken">input terminal</param>
-        /// <returns>It returns true if successed else returns false</returns>
-        private bool UnitParsing(ParsingUnit parsingUnit, TokenData seeingToken)
-        {
-            // filtering
-            if (seeingToken.Kind == null)
-            {
-                parsingUnit.CopyBeforeStackToAfterStack();
-                parsingUnit.InputValue = seeingToken;
-
-                return true;
-            }
-            if (seeingToken.Kind == new NotDefined()) { }
-
-            // recover error if an error does exist.
-
-            return (IsGoToCondition(parsingUnit.BeforeStack)) ? GoTo(parsingUnit, seeingToken)
-                                                                                     : ShiftOrReduce(parsingUnit, seeingToken);
-        }
-
         /// <summary>
         /// This function processes shift or reduce process.
         /// </summary>

@@ -6,6 +6,7 @@ using ApplicationLayer.ViewModels.DocumentTypeViewModels;
 using ApplicationLayer.ViewModels.Messages;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
+using Parse.FrontEnd.MiniCParser;
 using System;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
@@ -26,6 +27,7 @@ namespace ApplicationLayer.ViewModels.ToolWindowViewModels
         private DocumentViewModel selectedDocument;
         private RelayCommand doubleClickCommand;
         private RelayCommand<TreeNodeModel> selectedCommand;
+        private MiniCCompiler _compiler = new MiniCCompiler();  // temporary position
 
 
 
@@ -374,7 +376,7 @@ namespace ApplicationLayer.ViewModels.ToolWindowViewModels
                 var fileNode = (SelectedItem as SourceFileTreeNodeModel);
                 if (fileNode.IsExistFile == false) return;
 
-                var editor = new EditorTypeViewModel(fileNode);
+                var editor = new EditorTypeViewModel(fileNode, _compiler);
                 if (this.Documents.Contains(editor))
                 {
                     this.SelectedDocument = editor;

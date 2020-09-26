@@ -74,7 +74,7 @@ namespace Parse.WpfControls
             set => caretIndexWhenCLOccur = value;
         }
 
-        public bool IsOpened => (_parentPopup == null) ? false : _parentPopup.IsOpen;
+        public bool IsOpened => _parentPopup != null && _parentPopup.IsOpen;
 
         private bool IsOpen
         {

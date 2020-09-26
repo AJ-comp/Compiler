@@ -1,4 +1,3 @@
-using ApplicationLayer.Common.Utilities;
 using ApplicationLayer.ViewModels.DialogViewModels;
 using ApplicationLayer.ViewModels.DocumentTypeViewModels;
 using ApplicationLayer.ViewModels.Messages;
@@ -7,11 +6,9 @@ using CommonServiceLocator;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
-using Parse.FrontEnd.ErrorHandler.GrammarPrivate.MiniC_LR;
 using Parse.FrontEnd.Grammars;
 using Parse.FrontEnd.Grammars.MiniC;
 using Parse.FrontEnd.Grammars.PracticeGrammars;
-using Parse.FrontEnd.Parsers.LR;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -197,20 +194,6 @@ namespace ApplicationLayer.WpfApp.ViewModels
         }
         #endregion
 
-        private void InitParserToUse()
-        {
-            foreach(var grammar in this.supplyGrammars)
-            {
-                ParserFactory.Instance.RegisterParser(ParserFactory.ParserKind.SLR_Parser, grammar);
-
-                if (grammar.ToString() == new MiniCGrammar().ToString())
-                {
-                    LRParser parser = ParserFactory.Instance.GetParser(ParserFactory.ParserKind.SLR_Parser, grammar) as LRParser;
-                    MiniC_LRErrorHandlerFactory.Instance.AddErrorHandler(parser);
-                }
-            }
-        }
-
         private void InitGrammarWindow()
         {
             var grmmarViewModel = ServiceLocator.Current.GetInstance<GrammarInfoViewModel>();
@@ -271,7 +254,6 @@ namespace ApplicationLayer.WpfApp.ViewModels
             this.supplyGrammars.Add(new MiniCGrammar());
             this.supplyGrammars.Add(new LRTest1Grammar());
 
-            this.InitParserToUse();
             this.InitGrammarWindow();
             this.InitSolutionExplorer();
             this.InitOutputView();

@@ -32,7 +32,7 @@ namespace Parse.FrontEnd.ErrorHandler.GrammarPrivate
 
             var parsingErrInfo = ParsingErrorInfo.CreateParsingError(nameof(AlarmCodes.CE0004), string.Format(AlarmCodes.CE0004, virtualToken.Kind));
             //            frontBlock.errorInfos.Add(parsingErrInfo);   // set error informations (what virtualToken is inserted in front of the token of the seeingBlock means the error was fired on the frontBlock.)
-            seeingBlock.errorInfos.Add(parsingErrInfo);
+            seeingBlock._errorInfos.Add(parsingErrInfo);
 
             // set param to recovery
             List<ParsingRecoveryData> param = new List<ParsingRecoveryData>();
@@ -61,7 +61,7 @@ namespace Parse.FrontEnd.ErrorHandler.GrammarPrivate
 
             // set error informations
             var parsingErrInfo = ParsingErrorInfo.CreateParsingError(nameof(AlarmCodes.CE0000), string.Format(AlarmCodes.CE0000, virtualToken.Input));
-            seeingBlock.errorInfos.Add(parsingErrInfo);
+            seeingBlock._errorInfos.Add(parsingErrInfo);
 
             // set param to recovery
             List<ParsingRecoveryData> param = new List<ParsingRecoveryData>();
@@ -89,11 +89,11 @@ namespace Parse.FrontEnd.ErrorHandler.GrammarPrivate
 
             // set error infomations
             var parsingErrInfo = ParsingErrorInfo.CreateParsingError(nameof(AlarmCodes.CE0002), string.Format(AlarmCodes.CE0002, curBlock.Token.Input));
-            curBlock.errorInfos.Add(parsingErrInfo);
+            curBlock._errorInfos.Add(parsingErrInfo);
 
             newUnit.SetRecoveryMessage(recoveryMessage);
             newUnit.CopyBeforeStackToAfterStack();
-            curBlock.units.Add(newUnit);
+            curBlock._units.Add(newUnit);
 
             return new ErrorHandlingResult(parsingResult, seeingTokenIndex, true);
         }

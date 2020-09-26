@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Parse.FrontEnd.Tokenize
 {
-    public class TokenStorage : ICloneable
+    public partial class TokenStorage : ICloneable
     {
         /// <summary> The tokens to view (This include all tokens) </summary>
         public IReadOnlyList<TokenCell> TokensToView => _tokensToView;
@@ -32,11 +32,11 @@ namespace Parse.FrontEnd.Tokenize
         /// This function initializes the token table into the argument value.
         /// </summary>
         /// <param name="tokenPatternList">The value of the token pattern list to initialize.</param>
-        internal void InitTokenTable(IReadOnlyList<TokenPatternInfo> tokenPatternList)
+        internal void InitTokenTable(IEnumerable<TokenPatternInfo> tokenPatternList)
         {
             this.tableForAllPatternsOnView.Clear();
 
-            foreach(var item in tokenPatternList)
+            foreach (var item in tokenPatternList)
             {
                 this.tableForAllPatternsOnView.Add(item, new List<int>());
             }
@@ -46,25 +46,9 @@ namespace Parse.FrontEnd.Tokenize
 
         private TokenStorage() { }
 
-        public TokenStorage(IReadOnlyList<TokenPatternInfo> tokenPatternList)
+        public TokenStorage(IEnumerable<TokenPatternInfo> tokenPatternList)
         {
             this.InitTokenTable(tokenPatternList);
-        }
-
-        /// <summary>
-        /// This function returns indexes for the special pattern from the TokenPatternInfo.
-        /// </summary>
-        /// <param name="pattern"></param>
-        /// <returns></returns>
-        public List<int> GetIndexesForSpecialPattern(TokenPatternInfo pattern)
-        {
-            var table = this.TableForAllPatternsOnView;
-            List<int> result = new List<int>();
-
-            if (table.ContainsKey(pattern))
-                result = table[pattern];
-
-            return result;
         }
 
 
@@ -87,98 +71,6 @@ namespace Parse.FrontEnd.Tokenize
 
 
         /// <summary>
-        /// This function returns indexes for the special pattern from the string.
-        /// </summary>
-        /// <param name="pattern"></param>
-        /// <returns></returns>
-        public List<int> GetIndexesForSpecialPattern(string pattern)
-        {
-            return this.GetTokenPatternInfoFromString(pattern).Value;
-        }
-
-        public List<int> GetIndexesForSpecialPattern(params string[] patterns)
-        {
-            var table = this.TableForAllPatternsOnView;
-            List<int> result = new List<int>();
-
-            foreach (KeyValuePair<TokenPatternInfo, List<int>> items in table)
-            {
-                for (int i = 0; i < patterns.Length; i++)
-                {
-                    if (items.Key.OriginalPattern == patterns[i])
-                        result.AddRange(items.Value);
-                }
-            }
-
-            return result;
-        }
-
-        public int GetTopFrontIndexFromTokenIndex(string pattern, int tokenIndex)
-        {
-            var indexes = this.GetIndexesForSpecialPattern(pattern);
-
-            int result = -1;
-            int minDiffer = int.MaxValue;
-            indexes.ForEach(i =>
-            {
-                int differ = tokenIndex - i;
-                if (differ < minDiffer)
-                {
-                    result = i;
-                    minDiffer = differ;
-                }
-
-                if (i > tokenIndex) return;
-            });
-
-            return result;
-        }
-
-        public int GetTopFrontIndexFromTokenIndex(TokenPatternInfo findPattern, int tokenIndex)
-        {
-            var indexes = this.GetIndexesForSpecialPattern(findPattern);
-
-            int result = -1;
-            int minDiffer = int.MaxValue;
-            indexes.ForEach(i => 
-            {
-                int differ = tokenIndex - i;
-                if (differ < minDiffer)
-                {
-                    result = i;
-                    minDiffer = differ;
-                }
-
-                if (i > tokenIndex) return;
-            });
-
-            return result;
-        }
-
-
-        public int GetTopBackIndexFromTokenIndex(TokenPatternInfo findPattern, int tokenIndex)
-        {
-            var indexes = this.GetIndexesForSpecialPattern(findPattern);
-
-            int result = -1;
-            int minDiffer = int.MaxValue;
-            indexes.ForEach(i =>
-            {
-                if (i > tokenIndex)
-                {
-                    int differ = i - tokenIndex;
-                    if (differ < minDiffer)
-                    {
-                        result = i;
-                        minDiffer = differ;
-                    }
-                }
-            });
-
-            return result;
-        }
-
-        /// <summary>
         /// This function returns a part string that applied the PartSelectionBag in the SelectionTokensContainer.
         /// </summary>
         /// <param name="tokenIndex"></param>
@@ -198,31 +90,6 @@ namespace Parse.FrontEnd.Tokenize
             }
 
             return result;
-        }
-
-
-        /// <summary>
-        /// This function returns a token index from the caretIndex.
-        /// </summary>
-        /// <param name="offset">The offset index</param>
-        /// <param name="recognWay">The standard index for recognition a token</param>
-        /// <returns>a token index</returns>
-        public int TokenIndexForOffset(int offset, RecognitionWay recognWay = RecognitionWay.Back)
-        {
-            int index = -1;
-
-            Parallel.For(0, this._tokensToView.Count, (i, loopState) =>
-            {
-                TokenCell tokenInfo = this._tokensToView[i];
-
-                if (tokenInfo.Contains(offset, recognWay))
-                {
-                    index = i;
-                    loopState.Stop();
-                }
-            });
-
-            return index;
         }
 
 
@@ -249,8 +116,8 @@ namespace Parse.FrontEnd.Tokenize
                 () =>
                 {
                     fromIndex = indexes.GetIndexNearestLessThanValue(startTokenIndex);
-                }, 
-                () => 
+                },
+                () =>
                 {
                     toIndex = indexes.GetIndexNearestMoreThanValue(endTokenIndex);
                 });
@@ -297,7 +164,7 @@ namespace Parse.FrontEnd.Tokenize
             this._tokensToView.RemoveRange(range.StartIndex, range.Count);
 
             int startIndex = range.StartIndex;
-            foreach(var item in replaceTokenList)
+            foreach (var item in replaceTokenList)
             {
                 item.StartIndex = contentIndex;
                 contentIndex = item.EndIndex + 1;

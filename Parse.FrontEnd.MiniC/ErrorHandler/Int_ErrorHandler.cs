@@ -1,15 +1,16 @@
-﻿using Parse.FrontEnd.Grammars;
+﻿using Parse.FrontEnd.ErrorHandler.GrammarPrivate;
+using Parse.FrontEnd.Grammars;
 using Parse.FrontEnd.Grammars.MiniC;
 using Parse.FrontEnd.Parsers;
 using Parse.FrontEnd.Parsers.Datas;
 using Parse.FrontEnd.Parsers.LR;
 using Parse.FrontEnd.Tokenize;
 
-namespace Parse.FrontEnd.ErrorHandler.GrammarPrivate.MiniC_LR
+namespace Parse.FrontEnd.MiniC.ErrorHandler
 {
-    public class CloseCurlyBrace_ErrorHandler : GrammarPrivateLRErrorHandler
+    public class Int_ErrorHandler : GrammarPrivateLRErrorHandler
     {
-        public CloseCurlyBrace_ErrorHandler(Grammar grammar, int ixIndex) : base(grammar, ixIndex)
+        public Int_ErrorHandler(Grammar grammar, int ixIndex) : base(grammar, ixIndex)
         {
         }
 
@@ -17,7 +18,7 @@ namespace Parse.FrontEnd.ErrorHandler.GrammarPrivate.MiniC_LR
         private static ErrorHandlingResult ErrorHandlingLogic(MiniCGrammar grammar, int ixIndex, Parser parser, ParsingResult parsingResult, int seeingTokenIndex)
         {
             /// Here, someone has to add error handling logic for ixIndex.
-            if (ixIndex == 51)
+            if (ixIndex == 65)
             {
                 var virtualToken = new TokenData(grammar.SemiColon, new TokenCell(-1, grammar.SemiColon.Value, null), true);
                 var frontBlock = parsingResult.GetFrontBlockCanParse(seeingTokenIndex);
@@ -26,13 +27,15 @@ namespace Parse.FrontEnd.ErrorHandler.GrammarPrivate.MiniC_LR
                 return (blockParsingResult == LRParser.SuccessedKind.NotApplicable) ?
                     new ErrorHandlingResult(parsingResult, seeingTokenIndex, false) : new ErrorHandlingResult(parsingResult, seeingTokenIndex, true);
             }
+            else if (ixIndex == 107)
+                return GrammarPrivateLRErrorHandler.DelCurToken(ixIndex, parsingResult, seeingTokenIndex);
             else
                 return DefaultErrorHandler.Process(grammar, parser, parsingResult, seeingTokenIndex);
         }
 
         public override ErrorHandlingResult Call(Parser parser, ParsingResult parsingResult, int seeingTokenIndex)
         {
-            return CloseCurlyBrace_ErrorHandler.ErrorHandlingLogic(this.grammar as MiniCGrammar, this.ixIndex, parser, parsingResult, seeingTokenIndex);
+            return Int_ErrorHandler.ErrorHandlingLogic(this.grammar as MiniCGrammar, this.ixIndex, parser, parsingResult, seeingTokenIndex);
         }
     }
 }

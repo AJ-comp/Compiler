@@ -49,6 +49,7 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts.AstNodes
                                                                                (BlockLevel == 0) ? VarProperty.Global : VarProperty.Normal,
                                                                                initDeclarator.Right);
 
+                this.SymbolTable = (param as MiniCSdtsParams).SymbolTable;
                 if (!MiniCChecker.CanAddVarData(this, varData)) continue;
 
                 // save to SymbolTable

@@ -1,15 +1,16 @@
-﻿using Parse.FrontEnd.Grammars;
+﻿using Parse.FrontEnd.ErrorHandler.GrammarPrivate;
+using Parse.FrontEnd.Grammars;
 using Parse.FrontEnd.Grammars.MiniC;
 using Parse.FrontEnd.Parsers;
 using Parse.FrontEnd.Parsers.Datas;
 using Parse.FrontEnd.Parsers.LR;
 using Parse.FrontEnd.Tokenize;
 
-namespace Parse.FrontEnd.ErrorHandler.GrammarPrivate.MiniC_LR
+namespace Parse.FrontEnd.MiniC.ErrorHandler
 {
-    public class EndMarker_ErrorHandler : GrammarPrivateLRErrorHandler
+    public class CloseParenthesis_ErrorHandler : GrammarPrivateLRErrorHandler
     {
-        public EndMarker_ErrorHandler(Grammar grammar, int ixIndex) : base(grammar, ixIndex)
+        public CloseParenthesis_ErrorHandler(Grammar grammar, int ixIndex) : base(grammar, ixIndex)
         {
         }
 
@@ -17,9 +18,11 @@ namespace Parse.FrontEnd.ErrorHandler.GrammarPrivate.MiniC_LR
         private static ErrorHandlingResult ErrorHandlingLogic(MiniCGrammar grammar, int ixIndex, Parser parser, ParsingResult parsingResult, int seeingTokenIndex)
         {
             /// Here, someone has to add error handling logic for ixIndex.
-            if (ixIndex == 37)
+            if (ixIndex == 0)
+                ;
+            else if(ixIndex == 12)
             {
-                var virtualToken = new TokenData(grammar.CloseCurlyBrace, new TokenCell(-1, grammar.CloseCurlyBrace.Value, null), true);
+                var virtualToken = new TokenData(MiniCGrammar.Ident, new TokenCell(-1, "temp", null), true);
                 var frontBlock = parsingResult.GetFrontBlockCanParse(seeingTokenIndex);
                 var blockParsingResult = GrammarPrivateLRErrorHandler.InsertVirtualToken(ixIndex, parser, frontBlock, parsingResult[seeingTokenIndex], virtualToken);
 
@@ -27,12 +30,13 @@ namespace Parse.FrontEnd.ErrorHandler.GrammarPrivate.MiniC_LR
                     new ErrorHandlingResult(parsingResult, seeingTokenIndex, false) : new ErrorHandlingResult(parsingResult, seeingTokenIndex, true);
             }
 
+
             return DefaultErrorHandler.Process(grammar, parser, parsingResult, seeingTokenIndex);
         }
 
-        public override ErrorHandlingResult Call(Parser snippet, ParsingResult parsingResult, int seeingTokenIndex)
+        public override ErrorHandlingResult Call(Parser parser, ParsingResult parsingResult, int seeingTokenIndex)
         {
-            return EndMarker_ErrorHandler.ErrorHandlingLogic(this.grammar as MiniCGrammar, this.ixIndex, snippet, parsingResult, seeingTokenIndex);
+            return CloseParenthesis_ErrorHandler.ErrorHandlingLogic(this.grammar as MiniCGrammar, this.ixIndex, parser, parsingResult, seeingTokenIndex);
         }
     }
 }

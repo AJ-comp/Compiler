@@ -1,7 +1,6 @@
-﻿using Parse.FrontEnd.Ast;
-using Parse.FrontEnd.ParseTree;
-using Parse.FrontEnd.RegularGrammar;
+﻿using Parse.FrontEnd.RegularGrammar;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -11,23 +10,24 @@ namespace Parse.FrontEnd.Parsers.Datas
     /// 
     /// </summary>
     /// <see cref="https://www.lucidchart.com/documents/edit/c96f0bde-4111-4957-bf65-75b56d8074dc/0_0?beaconFlowId=687BBA49A656D177"/>
+    [DebuggerDisplay("{DebuggerDisplay, nq}")]
     public class ParsingBlock
     {
         #region This has to be capsule later
-        public List<ParsingUnit> units = new List<ParsingUnit>();
-        public List<ParsingErrorInfo> errorInfos = new List<ParsingErrorInfo>();
+        public List<ParsingUnit> _units = new List<ParsingUnit>();
+        public List<ParsingErrorInfo> _errorInfos = new List<ParsingErrorInfo>();
         #endregion
 
         public TokenData Token { get; } = null;
-        public IReadOnlyList<ParsingUnit> Units => this.units;
-        public IReadOnlyList<ParsingErrorInfo> ErrorInfos => errorInfos;
-        public IReadOnlyList<ParsingUnit> ErrorUnits
+        public IReadOnlyList<ParsingUnit> Units => this._units;
+        public IReadOnlyList<ParsingErrorInfo> ErrorInfos => _errorInfos;
+        public IEnumerable<ParsingUnit> ErrorUnits
         {
             get
             {
                 List<ParsingUnit> result = new List<ParsingUnit>();
 
-                Parallel.ForEach(this.units, (unit) => 
+                Parallel.ForEach(this._units, (unit) => 
                 {
                     if (unit.IsError)
                     {
@@ -38,7 +38,7 @@ namespace Parse.FrontEnd.Parsers.Datas
                 return result;
             }
         }
-        public TerminalSet PossibleTerminalSet => (this.units.Count == 0) ? new TerminalSet() : this.units.Last().PossibleTerminalSet;
+        public TerminalSet PossibleTerminalSet => (this._units.Count == 0) ? new TerminalSet() : this._units.Last().PossibleTerminalSet;
 
         public ParsingBlock(TokenData token)
         {
@@ -52,14 +52,46 @@ namespace Parse.FrontEnd.Parsers.Datas
         /// <param name="token"></param>
         public ParsingBlock(ParsingUnit parsingUnit, TokenData token) : this(token)
         {
-            this.units.Add(parsingUnit);
+            this._units.Add(parsingUnit);
         }
 
         public ParsingBlock(IEnumerable<ParsingUnit> parsingUnits, TokenData token) : this(token)
         {
-            this.units = new List<ParsingUnit>(parsingUnits);
+            this._units = new List<ParsingUnit>(parsingUnits);
         }
 
-        public override string ToString() => string.Format("TokenCell : {0}, Unit count : {1}", this.Token, this.units.Count);
+        public void AddItem()
+        {
+            var lastUnit = Units.Last();
+            var newUnit = (lastUnit == null) ? ParsingUnit.FirstParsingUnit : new ParsingUnit(lastUnit.AfterStack);
+
+            _units.Add(newUnit);
+        }
+
+        public void AddItem(ParsingStackUnit initStack)
+        {
+            var newUnit = (initStack == null) ? ParsingUnit.FirstParsingUnit : new ParsingUnit(initStack);
+
+            _units.Add(newUnit);
+        }
+
+
+        public void Clear()
+        {
+            _units.Clear();
+            _errorInfos.Clear();
+        }
+
+
+        private string DebuggerDisplay
+        {
+            get
+            {
+                var result = string.Format("TokenCell : {0}, Unit count : {1}", this.Token, this._units.Count);
+                if (ErrorInfos.Count() > 0) result += string.Format(" Fired Error");
+
+                return result;
+            }
+        }
     }
 }

@@ -1,36 +1,20 @@
 ﻿using Parse.FrontEnd;
-using Parse.FrontEnd.Ast;
-using Parse.FrontEnd.Grammars.MiniC.Sdts;
-using Parse.FrontEnd.Grammars.MiniC.Sdts.AstNodes;
-using Parse.FrontEnd.Grammars.MiniC.Sdts.Datas;
-using Parse.FrontEnd.Parsers;
+using Parse.FrontEnd.MiniCParser;
 using Parse.FrontEnd.Parsers.Datas;
-using Parse.FrontEnd.ParseTree;
 using Parse.FrontEnd.RegularGrammar;
-using Parse.FrontEnd.Support.Drawing;
-using Parse.FrontEnd.Tokenize;
-using Parse.WpfControls.Models;
 using Parse.WpfControls.SyntaxEditor.EventArgs;
-using Parse.WpfControls.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
-using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Threading;
 
 namespace Parse.WpfControls.SyntaxEditor
 {
     [TemplatePart(Name = "TextArea", Type = typeof(HighlightTextBox))]
-    public class SyntaxEditor : Editor
+    public partial class SyntaxEditor : Editor
     {
-        private Thread _workerManager;
-        private CompletionList completionList;
         private bool bReserveRegistKeywords = false;
         private ParsingResult parsingResult = new ParsingResult();
 
@@ -39,18 +23,18 @@ namespace Parse.WpfControls.SyntaxEditor
         private Tuple<ParsingResult, TextChange> _csPostProcessData;
 
 
-        public Parser Parser
+        public MiniCCompiler Compiler
         {
-            get { return (Parser)GetValue(ParserProperty); }
-            set { SetValue(ParserProperty, value); }
+            get { return (MiniCCompiler)GetValue(CompilerProperty); }
+            set { SetValue(CompilerProperty, value); }
         }
 
-        // Using a DependencyProperty as the backing store for ParserSnippet.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty ParserProperty =
-            DependencyProperty.Register("Parser", typeof(Parser), typeof(SyntaxEditor), new PropertyMetadata(null, ParserChanged));
+        // Using a DependencyProperty as the backing store for Compiler.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty CompilerProperty =
+            DependencyProperty.Register("Compiler", typeof(MiniCCompiler), typeof(SyntaxEditor), new PropertyMetadata(CompilerChanged));
 
 
-        public static void ParserChanged(DependencyObject dp, DependencyPropertyChangedEventArgs args)
+        public static void CompilerChanged(DependencyObject dp, DependencyPropertyChangedEventArgs args)
         {
             SyntaxEditor editor = dp as SyntaxEditor;
             if (args.NewValue == null)
@@ -59,8 +43,6 @@ namespace Parse.WpfControls.SyntaxEditor
                 return;
             }
 
-            Parser parser = args.NewValue as Parser;
-            parser.ASTCreated += Parser_ASTCreated;
             if (editor.TextArea == null) editor.bReserveRegistKeywords = true;
             else
             {
@@ -72,17 +54,6 @@ namespace Parse.WpfControls.SyntaxEditor
                 editor.Text = tempText;
             }
         }
-
-        /// <summary>
-        /// This function is event handler. this is called when AST(node) is created.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private static void Parser_ASTCreated(object sender, AstSymbol e)
-        {
-            e.Sdts = MiniCCreator.CreateSdtsNode(e) as MiniCNode;
-        }
-
 
         #region CloseCharacters DP
         public StringCollection CloseCharacters
@@ -98,119 +69,23 @@ namespace Parse.WpfControls.SyntaxEditor
         #endregion
 
 
-        public delegate void OnParserChangedEventHandler(object sender);
-        public event OnParserChangedEventHandler OnParserChanged;
-
         public event EventHandler<ParsingCompletedEventArgs> ParsingCompleted;
-
-
-
-        public string FontFamilyTest
-        {
-            get { return (string)GetValue(FontFamilyTestProperty); }
-            set { SetValue(FontFamilyTestProperty, value); }
-        }
-
-        // Using a DependencyProperty as the backing store for FontFamilyTest.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty FontFamilyTestProperty =
-            DependencyProperty.Register("FontFamilyTest", typeof(string), typeof(SyntaxEditor), new PropertyMetadata(string.Empty, OnFontFamilyChanged));
-
-        public static void OnFontFamilyChanged(DependencyObject dp, DependencyPropertyChangedEventArgs args)
-        {
-            SyntaxEditor editor = dp as SyntaxEditor;
-            try
-            {
-                editor.FontFamily = new FontFamily(args.NewValue as string);
-                if (editor.TextArea != null)
-                    editor.TextArea.FontFamily = editor.FontFamily;
-            }
-            catch
-            {
-            }
-        }
-
-
-        public HighlightMap HighlightMap
-        {
-            get { return (HighlightMap)GetValue(HighlightMapProperty); }
-            set { SetValue(HighlightMapProperty, value); }
-        }
-
-        // Using a DependencyProperty as the backing store for HighlightMap.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty HighlightMapProperty =
-            DependencyProperty.Register("HighlightMap", typeof(HighlightMap), typeof(SyntaxEditor), new PropertyMetadata(null, OnHighlightMapChanged));
-
-
-        public static void OnHighlightMapChanged(DependencyObject dp, DependencyPropertyChangedEventArgs args)
-        {
-            SyntaxEditor editor = dp as SyntaxEditor;
-            if (editor.TextArea == null) editor.bReserveRegistKeywords = true;
-        }
-
-
-        #region Dependency Properties related to numeral foreground color
-        public Brush DigitForeground
-        {
-            get { return (Brush)GetValue(DigitForegroundProperty); }
-            set { SetValue(DigitForegroundProperty, value); }
-        }
-
-        // Using a DependencyProperty as the backing store for DigitForeground.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty DigitForegroundProperty =
-            DependencyProperty.Register("DigitForeground", typeof(Brush), typeof(SyntaxEditor), new PropertyMetadata(Brushes.LightSteelBlue));
-
-
-        public Brush BinaryForeground
-        {
-            get { return (Brush)GetValue(BinaryForegroundProperty); }
-            set { SetValue(BinaryForegroundProperty, value); }
-        }
-
-        // Using a DependencyProperty as the backing store for BinaryForeground.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty BinaryForegroundProperty =
-            DependencyProperty.Register("BinaryForeground", typeof(Brush), typeof(SyntaxEditor), new PropertyMetadata(Brushes.LightSteelBlue));
-
-
-        public Brush OctalForeground
-        {
-            get { return (Brush)GetValue(OctalForegroundProperty); }
-            set { SetValue(OctalForegroundProperty, value); }
-        }
-
-        // Using a DependencyProperty as the backing store for OctalForeground.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty OctalForegroundProperty =
-            DependencyProperty.Register("OctalForeground", typeof(Brush), typeof(SyntaxEditor), new PropertyMetadata(Brushes.LightSteelBlue));
-
-
-        public Brush HexForeground
-        {
-            get { return (Brush)GetValue(HexForegroundProperty); }
-            set { SetValue(HexForegroundProperty, value); }
-        }
-
-        // Using a DependencyProperty as the backing store for HexForeground.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty HexForegroundProperty =
-            DependencyProperty.Register("HexForeground", typeof(Brush), typeof(SyntaxEditor), new PropertyMetadata(Brushes.LightSteelBlue));
-        #endregion
-
-        #region Dependency Properties related to comment foreground color
-        public Brush LineCommentForeground
-        {
-            get { return (Brush)GetValue(LineCommentForegroundProperty); }
-            set { SetValue(LineCommentForegroundProperty, value); }
-        }
-
-        // Using a DependencyProperty as the backing store for LineCommentForeground.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty LineCommentForegroundProperty =
-            DependencyProperty.Register("LineCommentForeground", typeof(Brush), typeof(SyntaxEditor), new PropertyMetadata(Brushes.Green));
-        #endregion
-
 
         public SyntaxEditor()
         {
             Loaded += (s, e) =>
             {
-                if (this.Parser == null) return;
+                if (this.Compiler == null) return;
+
+                Compiler.LexingCompleted += Compiler_LexingCompleted;
+                this.Compiler.Operate(FileName, Text);
+
+                // shallow copy
+//                var newParsingResult = this.parsingResult.Clone() as ParsingResult;
+//                lock (_lockObject)
+//                    _csPostProcessData = new Tuple<ParsingResult, TextChange>(newParsingResult, e.Changes.First());
+
+                this.TextArea.InvalidateVisual();
 
                 /*
                 this.Parser.Grammar.SDTS.SemanticErrorEventHandler += (sdts, errorInfo) =>
@@ -242,127 +117,9 @@ namespace Parse.WpfControls.SyntaxEditor
         {
             base.OnApplyTemplate();
 
-            this.TextArea.TextChanged += TextArea_TextChanged;
-            this.completionList = new CompletionList(this.TextArea);
-            this.completionList.RegisterKey(CompletionItemType.Class, new KeyData(FindResource("ClassActive16Path") as BitmapImage,
-                                                                                                                    FindResource("ClassInActive16Path") as BitmapImage,
-                                                                                                                    string.Format(Properties.Resources.DisplayOnly, Properties.Resources.Class_)));
-            this.completionList.RegisterKey(CompletionItemType.CodeSnipp, new KeyData(FindResource("CodeSnippetActive16Path") as BitmapImage,
-                                                                                                                            FindResource("CodeSnippetInActive16Path") as BitmapImage,
-                                                                                                                            string.Format(Properties.Resources.DisplayOnly, Properties.Resources.CodeSnippet)));
-            this.completionList.RegisterKey(CompletionItemType.Delegate, new KeyData(FindResource("DelegateActive16Path") as BitmapImage,
-                                                                                                                          FindResource("DelegateInActive16Path") as BitmapImage,
-                                                                                                                          string.Format(Properties.Resources.DisplayOnly, Properties.Resources.Delegate)));
-            this.completionList.RegisterKey(CompletionItemType.Enum, new KeyData(FindResource("EnumActive16Path") as BitmapImage,
-                                                                                                                     FindResource("EnumInActive16Path") as BitmapImage,
-                                                                                                                     string.Format(Properties.Resources.DisplayOnly, Properties.Resources.Enumerate)));
-            this.completionList.RegisterKey(CompletionItemType.Event, new KeyData(FindResource("EventActive16Path") as BitmapImage,
-                                                                                                                     FindResource("EventInActive16Path") as BitmapImage,
-                                                                                                                     string.Format(Properties.Resources.DisplayOnly, Properties.Resources.Event)));
-            this.completionList.RegisterKey(CompletionItemType.Field, new KeyData(FindResource("FieldActive16Path") as BitmapImage,
-                                                                                                                    FindResource("FieldInActive16Path") as BitmapImage,
-                                                                                                                    string.Format(Properties.Resources.DisplayOnly, Properties.Resources.Field_)));
-            this.completionList.RegisterKey(CompletionItemType.Function, new KeyData(FindResource("FunctionActive16Path") as BitmapImage,
-                                                                                                                         FindResource("FunctionInActive16Path") as BitmapImage,
-                                                                                                                         string.Format(Properties.Resources.DisplayOnly, Properties.Resources.Function_)));
-            this.completionList.RegisterKey(CompletionItemType.Interface, new KeyData(FindResource("InterfaceActive16Path") as BitmapImage,
-                                                                                                                          FindResource("InterfaceInActive16Path") as BitmapImage,
-                                                                                                                          string.Format(Properties.Resources.DisplayOnly, Properties.Resources.Interface_)));
-            this.completionList.RegisterKey(CompletionItemType.Keyword, new KeyData(FindResource("KeywordActive16Path") as BitmapImage,
-                                                                                                                          FindResource("KeywordInActive16Path") as BitmapImage,
-                                                                                                                          string.Format(Properties.Resources.DisplayOnly, Properties.Resources.Keyword_)));
-            this.completionList.RegisterKey(CompletionItemType.Namespace, new KeyData(FindResource("NamespaceActive16Path") as BitmapImage,
-                                                                                                                             FindResource("NamespaceInActive16Path") as BitmapImage,
-                                                                                                                             string.Format(Properties.Resources.DisplayOnly, Properties.Resources.Namespace)));
-            this.completionList.RegisterKey(CompletionItemType.Property, new KeyData(FindResource("PropertyActive16Path") as BitmapImage,
-                                                                                                                         FindResource("PropertyInActive16Path") as BitmapImage,
-                                                                                                                         string.Format(Properties.Resources.DisplayOnly, Properties.Resources.Property_)));
-            this.completionList.RegisterKey(CompletionItemType.Struct, new KeyData(FindResource("StructActive16Path") as BitmapImage,
-                                                                                                                      FindResource("StructInActive16Path") as BitmapImage,
-                                                                                                                      string.Format(Properties.Resources.DisplayOnly, Properties.Resources.Structure)));
-
-            this._workerManager = new Thread(WokerManagerLogic)
-            {
-                IsBackground = true,
-                Priority = ThreadPriority.Lowest
-            };
-            this._workerManager.Start();
-        }
-
-        private void WokerManagerLogic()
-        {
-            ParsingResult localResult;
-            TextChange localTextChange;
-
-            while (true)
-            {
-                Thread.Sleep(50);
-
-                lock (_lockObject)
-                {
-                    if (_csPostProcessData == null) continue;
-
-                    localResult = _csPostProcessData.Item1;
-                    localTextChange = _csPostProcessData.Item2;
-                    _csPostProcessData = null;
-                }
-
-                int tokenIndex = -1;
-                Dispatcher.Invoke(() =>
-                {
-                    tokenIndex = this.TextArea.GetTokenIndexForCaretIndex(this.TextArea.CaretIndex, RecognitionWay.Back);
-                });
-
-                var list = this.GetCompletionList(localResult, tokenIndex);
-
-                Dispatcher.Invoke(() =>
-                {
-                    this.ShowIntellisense(localTextChange, list);
-                }, DispatcherPriority.ApplicationIdle);
-
-                Dispatcher.Invoke(() =>
-                {
-                    var result = this.SementicAnalysis(localResult);
-                    if (result == null) return;
-
-                    this.ParsingCompleted?.Invoke(this, new ParsingCompletedEventArgs(localResult, 
-                                                                                                                        result.SdtsRoot, 
-                                                                                                                        result.AllNodes, 
-                                                                                                                        result.FiredException));
-                });
-            }
-        }
-
-        private void RegisterKeywords()
-        {
-            this.TextArea.TokenizeRuleClear();
-
-            // The keyword type doesn't have delimitable ability.
-            // The terminal that has the derive ability also doesn't have delimitable ability.
-            // Only operator type has delimitable ability.
-
-            foreach (var terminal in this.Parser.Grammar.TerminalSet)
-            {
-                // setting color for token.
-                var item = this.HighlightMap.GetItem(terminal.TokenType.GetType());
-                if (item is null)
-                {
-                    this.TextArea.AddTokenPattern(terminal);
-                    continue;
-                }
-
-                var mediaForeground = ColorUtility.ToMediaBrush(item.ForegroundColor);
-                var mediaBackground = ColorUtility.ToMediaBrush(item.BackgroundColor);
-
-                if (terminal.TokenType.GetType() == item.Type)
-                    this.TextArea.AddSyntaxHighLightInfo(mediaForeground, mediaBackground, terminal);
-            }
-
-            foreach (var delimiter in this.Parser.Grammar.DelimiterDic)
-            {
-                if (this.TextArea.DelimiterSet.Contains(delimiter.Key) == false)
-                    this.TextArea.DelimiterSet.Add(delimiter.Key);
-            }
+            TextArea.TextChanged += TextArea_TextChanged;
+            InitializeCompletionList();
+            StartBackgroundWorker();
         }
 
         // 전처리기 등록자 (ex : #define, #undef ) 등록 함수 만들기 
@@ -413,92 +170,6 @@ namespace Parse.WpfControls.SyntaxEditor
 
                 lock (errorBlocks) errorBlocks.Add(new Tuple<int, ParsingBlock>(i, block));
             });
-        }
-
-        private SemanticAnalysisResult SementicAnalysis(ParsingResult target)
-        {
-            try
-            {
-                AstSymbol rootSymbol = target.ToParseTree?.ToAst;
-
-                var rootSdts = rootSymbol.Sdts.Build(new MiniCSdtsParams(0, 0));
-                var result = new SemanticAnalysisResult(rootSdts, new List<AstSymbol>());
-                ParsingFailedListPreProcess(target);
-
-                return result;
-            }
-            catch
-            {
-                return null;
-            }
-        }
-
-        private IReadOnlyList<ItemData> GetCompletionList(ParsingResult parsingResult, int tokenIndex)
-        {
-            List<ItemData> result = new List<ItemData>();
-            if (tokenIndex < 0) return result;
-            if (parsingResult.Count <= tokenIndex) return result;
-
-            foreach (var item in parsingResult[tokenIndex].PossibleTerminalSet)
-            {
-                if (item.Meaning == false) continue;
-                result.Add(new ItemData(CompletionItemType.Keyword, item.Value, string.Empty));
-            }
-
-            return result;
-        }
-
-        private bool IsBackSpace(TextChange changeInfo) => (changeInfo.RemovedLength >= 1 && changeInfo.AddedLength == 0);
-
-        private void ShowIntellisense(TextChange changeInfo, IReadOnlyList<ItemData> items)
-        {
-            if (items.Count == 0) return;
-
-            var addString = TextArea.Text.Substring(changeInfo.Offset, changeInfo.AddedLength);
-            if (addString.Length > 1) { completionList.Close(); return; }
-            if (CloseCharacters.Contains(addString)) { completionList.Close(); return; }
-
-            if (IsBackSpace(changeInfo))
-            {
-                if (TextArea.CaretIndex <= completionList.CaretIndexWhenCLOccur) { completionList.Close(); return; }
-            }
-            else if (completionList.IsOpened == false)
-            {
-                if (addString.Length == 1)
-                {
-                    completionList.CaretIndexWhenCLOccur = TextArea.CaretIndex - 1;
-                }
-            }
-
-            var rect = TextArea.GetRectFromCharacterIndex(TextArea.CaretIndex);
-            double x = rect.X;
-            double y = (LineHeight > 0) ? rect.Y + LineHeight : rect.Y + TextArea.FontSize;
-            var inputString = TextArea.Text.Substring(completionList.CaretIndexWhenCLOccur, TextArea.CaretIndex - completionList.CaretIndexWhenCLOccur);
-
-            if (completionList.IsOpened) completionList.Show(inputString, x, y);
-            else completionList.Create(items, x, y);
-
-
-        }
-
-
-        private void TextArea_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            Text = TextArea.Text;
-
-            if (this.parsingResult.Success)  // if prev parsing successed.
-                // partial parsing
-                this.parsingResult = this.Parser.Parsing(TextArea.Tokens, this.parsingResult, this.TextArea.RecentTokenizeHistory);
-            else
-                // whole parsing
-                this.parsingResult = this.Parser.Parsing(TextArea.Tokens);
-
-            // shallow copy
-            var newParsingResult = this.parsingResult.Clone() as ParsingResult;
-            lock (_lockObject)
-                _csPostProcessData = new Tuple<ParsingResult, TextChange>(newParsingResult, e.Changes.First());
-
-            this.TextArea.InvalidateVisual();
         }
     }
 }

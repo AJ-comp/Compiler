@@ -109,7 +109,7 @@ namespace Parse.WpfControls
             }
         }
 
-        public void DrawAll(List<LineHighlightText> contents, double horizontalOffset, double verticalOffset)
+        public void DrawAll(IEnumerable<LineHighlightText> contents, double horizontalOffset, double verticalOffset)
         {
             this.algorithm.Initial(this.LineHeight, horizontalOffset, verticalOffset);
 

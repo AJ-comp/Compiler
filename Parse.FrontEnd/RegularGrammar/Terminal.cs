@@ -9,19 +9,19 @@ namespace Parse.FrontEnd.RegularGrammar
         public TokenType TokenType { get; }
         public string Value { get; } = string.Empty;
         public bool Meaning { get; } = true;
-        public bool bWord { get; } = false;
+        public bool IsWord { get; } = false;
 
         /// <summary>
         /// If this argument is true regex expression is displayed like as (ex : ++ -> \+\+)
         /// </summary>
-        public bool bOper => (TokenType is ScopeComment || 
+        public bool IsOper => (TokenType is ScopeComment || 
                                          TokenType is Operator || 
                                          TokenType is Delimiter);
         public string RegexExpression
         {
             get
             {
-                return (bOper) ? RegexGenerator.GetOperatorRegex(Value)
+                return (IsOper) ? RegexGenerator.GetOperatorRegex(Value)
                                       : RegexGenerator.GetWordRegex(Value);
             }
         }
@@ -43,7 +43,7 @@ namespace Parse.FrontEnd.RegularGrammar
             this.Value = value;
             this.caption = caption;
             this.Meaning = meaning;
-            this.bWord = bWord;
+            this.IsWord = bWord;
         }
 
         public override string ToString()

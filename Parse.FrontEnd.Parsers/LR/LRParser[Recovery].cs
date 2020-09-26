@@ -20,7 +20,10 @@ namespace Parse.FrontEnd.Parsers.LR
             {
                 while (true)
                 {
-                    result = UnitParsing(parsingBlock, recoveryInfo.RecoveryToken);
+                    parsingBlock.AddItem();
+                    var lastUnit = parsingBlock.Units.Last();
+
+                    result = UnitParsing(lastUnit, recoveryInfo.RecoveryToken);
                     if (result == SuccessedKind.NotApplicable) break;
 
                     var newUnit = parsingBlock.Units.Last();

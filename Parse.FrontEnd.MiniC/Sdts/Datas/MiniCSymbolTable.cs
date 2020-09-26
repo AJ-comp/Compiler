@@ -1,8 +1,11 @@
 ﻿using Parse.FrontEnd.Grammars.MiniC.Sdts.Datas.Variables;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
 
 namespace Parse.FrontEnd.Grammars.MiniC.Sdts.Datas
 {
+    [DebuggerDisplay("{DebuggerDisplay}")]
     public class MiniCSymbolTable : SymbolTable
     {
         public MiniCSymbolTable Base { get; }
@@ -63,5 +66,8 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts.Datas
 
         private VarTable _varTable = new VarTable();
         private FuncTable _funcTable = new FuncTable();
+
+        private string DebuggerDisplay
+            => string.Format("FuncTable items : {0}, VarTable items : {1}", _funcTable.Count(), _varTable.Count());
     }
 }

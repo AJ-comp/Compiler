@@ -1,17 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text.RegularExpressions;
 
 namespace Parse.FrontEnd.Tokenize
 {
     public enum RecognitionWay { Front, Back };
 
+    [DebuggerDisplay("{DebuggerDisplay,nq}")]
     public class TokenCell
     {
         public int StartIndex { get; internal set; }
         public int EndIndex => this.StartIndex + this.Data.Length - 1;
         public string Data { get; } = string.Empty;
-        public Match matchData { get; }
+        public Match MatchData { get; }
         public TokenPatternInfo PatternInfo { get; internal set; }
 
         public ValueType ValueOptionData { get; set; } = 0;
@@ -32,7 +34,7 @@ namespace Parse.FrontEnd.Tokenize
             this.StartIndex = startIndex;
             this.Data = data;
 
-            this.matchData = matchData;
+            this.MatchData = matchData;
         }
 
         public bool Contains(int caretIndex, RecognitionWay recognitionWay)
@@ -84,16 +86,6 @@ namespace Parse.FrontEnd.Tokenize
             return result;
         }
 
-        public override string ToString()
-        {
-            string convertedString = this.Data.Replace("\r", "\\r");
-            convertedString = convertedString.Replace("\n", "\\n");
-            convertedString = convertedString.Replace("\t", "\\t");
-
-            return (PatternInfo.Terminal == null) ? string.Format("{0}, \"{1}\", {2}", this.StartIndex, convertedString, "null") :
-                string.Format("{0}, \"{1}\", {2}", this.StartIndex, convertedString, PatternInfo.Terminal);
-        }
-
         public override int GetHashCode()
         {
             var hashCode = -2097962145;
@@ -111,6 +103,22 @@ namespace Parse.FrontEnd.Tokenize
         public static bool operator !=(TokenCell cell1, TokenCell cell2)
         {
             return !(cell1 == cell2);
+        }
+
+
+        private string DebuggerDisplay
+        {
+            get
+            {
+                string convertedString = this.Data.Replace("\r", "\\r");
+                convertedString = convertedString.Replace("\n", "\\n");
+                convertedString = convertedString.Replace("\t", "\\t");
+
+                var result =  (PatternInfo.Terminal == null) ? string.Format("{0}, \"{1}\", {2}", this.StartIndex, convertedString, "null")
+                                                                                : string.Format("{0}, \"{1}\", {2}", this.StartIndex, convertedString, PatternInfo.Terminal);
+
+                return result;
+            }
         }
     }
 }

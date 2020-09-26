@@ -1,9 +1,6 @@
 ﻿using Parse.WpfControls.EventArgs;
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Drawing;
-using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -86,13 +83,13 @@ namespace Parse.WpfControls.Common
 
             this.SelectionChanged += (s, e) =>
             {
-                this.UpdateCaretInfo();
+//                this.UpdateCaretInfo();
             };
 
             this.TextChanged += (s, e) =>
             {
-                TextChange changeInfo = e.Changes.First();
-                this.UpdateLineString(changeInfo);
+//                TextChange changeInfo = e.Changes.First();
+//                this.UpdateLineString(changeInfo);
             };
         }
 
@@ -154,88 +151,6 @@ namespace Parse.WpfControls.Common
             selectionInfo.EndCaretFromLine = point.X;
 
             this.selectionBlocks.Add(selectionInfo);
-        }
-
-        /// <summary>
-        /// This function updates a line-string when is changed string of editor.
-        /// </summary>
-        /// <param name="changeInfo">update information</param>
-        private void UpdateLineString(TextChange changeInfo)
-        {
-            string addString = this.Text.Substring(changeInfo.Offset, changeInfo.AddedLength);
-
-            this.DelTextProcess(changeInfo);
-            this.AddTextProcess(changeInfo.Offset, addString);
-        }
-
-        /// <summary>
-        /// This function adds line-string an added string.
-        /// </summary>
-        /// <see cref=""/>
-        /// <param name="offset">Start position of addString</param>
-        /// <param name="addString">added string</param>
-        private void AddTextProcess(int offset, string addString)
-        {
-            if (addString.Length == 0) return;
-
-            int index = this.LineIndexes.FindIndex(p => p > offset);
-            if (index >= 0)
-            {
-                for (int i = index; i < this.LineIndexes.Count; i++)
-                    this.LineIndexes[i] += addString.Length;
-            }
-
-            int startIndex = 0;
-            while(true)
-            {
-                var newLineIndex = addString.IndexOf(Environment.NewLine, startIndex);
-                if (newLineIndex < 0) break;
-
-                startIndex = newLineIndex + Environment.NewLine.Length;
-
-                this.LineIndexes.Add(offset + startIndex);
-            }
-
-            this.LineIndexes.Sort();
-
-//            this.EditToken(lineIndex, startCaretByLine, addString);
-        }
-
-        /// <summary>
-        /// This function removes from the line-string a string.
-        /// </summary>
-        /// <param name="changeInfo"></param>
-        private void DelTextProcess(TextChange changeInfo)
-        {
-            if (changeInfo.RemovedLength == 0) return;
-
-            int findIndex = 0;
-            List<int> removeIndexes = new List<int>();
-            for (int i = changeInfo.Offset+1; i <= changeInfo.Offset + changeInfo.RemovedLength; i++)
-            {
-                for(int j=findIndex; j<this.LineIndexes.Count; j++)
-                {
-                    if (this.LineIndexes[j] <= i) findIndex = j;
-                    else break;
-
-                    if (this.LineIndexes[j] == i)
-                    {
-                        removeIndexes.Add(j);
-                        break;
-                    }
-                }
-            }
-            
-            if(removeIndexes.Count > 0)
-                this.LineIndexes.RemoveRange(removeIndexes.First(), removeIndexes.Count);
-
-            int index = this.LineIndexes.FindIndex(p => p > changeInfo.Offset + changeInfo.RemovedLength);
-            if (index >= 0)
-            {
-                for (int i = index; i < this.LineIndexes.Count; i++)
-                    this.LineIndexes[i] -= changeInfo.RemovedLength;
-            }
-
         }
     }
 

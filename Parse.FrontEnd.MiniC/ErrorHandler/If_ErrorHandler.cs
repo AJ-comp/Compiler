@@ -1,13 +1,14 @@
-﻿using Parse.FrontEnd.Grammars;
+﻿using Parse.FrontEnd.ErrorHandler.GrammarPrivate;
+using Parse.FrontEnd.Grammars;
 using Parse.FrontEnd.Grammars.MiniC;
 using Parse.FrontEnd.Parsers;
 using Parse.FrontEnd.Parsers.Datas;
 
-namespace Parse.FrontEnd.ErrorHandler.GrammarPrivate.MiniC_LR
+namespace Parse.FrontEnd.MiniC.ErrorHandler
 {
-    public class Return_ErrorHandler : GrammarPrivateLRErrorHandler
+    public class If_ErrorHandler : GrammarPrivateLRErrorHandler
     {
-        public Return_ErrorHandler(Grammar grammar, int ixIndex) : base(grammar, ixIndex)
+        public If_ErrorHandler(Grammar grammar, int ixIndex) : base(grammar, ixIndex)
         {
         }
 
@@ -25,7 +26,7 @@ namespace Parse.FrontEnd.ErrorHandler.GrammarPrivate.MiniC_LR
 
         public override ErrorHandlingResult Call(Parser parser, ParsingResult parsingResult, int seeingTokenIndex)
         {
-            return Return_ErrorHandler.ErrorHandlingLogic(this.grammar as MiniCGrammar, this.ixIndex, parser, parsingResult, seeingTokenIndex);
+            return If_ErrorHandler.ErrorHandlingLogic(this.grammar as MiniCGrammar, this.ixIndex, parser, parsingResult, seeingTokenIndex);
         }
     }
 }
