@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Windows.Media.Imaging;
 
 namespace Parse.WpfControls.Models
@@ -76,6 +77,8 @@ namespace Parse.WpfControls.Models
         public string ToolTipData { get; } = string.Empty;
     }
 
+
+    [DebuggerDisplay("{DebuggerDisplay,nq}")]
     public class ItemData
     {
         public ItemData(Enum type, string item, string toolTipData)
@@ -91,5 +94,7 @@ namespace Parse.WpfControls.Models
         public Enum Type { get; }
         public string Item { get; }
         public string ToolTipData { get; }
+
+        private string DebuggerDisplay => string.Format("Type : {0}, Item : {1}", Type.ToString(), Item);
     }
 }

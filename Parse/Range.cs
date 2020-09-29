@@ -11,13 +11,12 @@ namespace Parse
     {
         public int StartIndex { get; }
         public int Count { get; }
-        public int EndIndex { get; }
+        public int EndIndex => this.StartIndex + this.Count - 1;
 
         public Range(int startIndex, int count)
         {
             this.StartIndex = startIndex;
             this.Count = count;
-            this.EndIndex = this.StartIndex + this.Count - 1;
         }
 
         /// <summary>

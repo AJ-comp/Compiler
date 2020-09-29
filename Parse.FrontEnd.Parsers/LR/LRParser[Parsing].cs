@@ -57,7 +57,7 @@ namespace Parse.FrontEnd.Parsers.LR
             }
             if (seeingToken.Kind == new NotDefined()) { }
 
-            // recover error if an error does exist.
+            // recover error if there is an error
 
             var result = (IsGoToCondition(unit.BeforeStack)) ? GoTo(unit, seeingToken)
                                                                             : ShiftOrReduce(unit, seeingToken);

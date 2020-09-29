@@ -7,8 +7,11 @@ namespace Parse.FrontEnd.Tokenize
 {
     public partial class TokenStorage : ICloneable
     {
-        /// <summary> The tokens to view (This include all tokens) </summary>
+        /// <summary> 
+        /// The tokens to view (This include all tokens) 
+        /// </summary>
         public IReadOnlyList<TokenCell> TokensToView => _tokensToView;
+
 
         /// <summary> This property returns a whole table has columns that have positions for each TokenPatternInfo. </summary>
         public Dictionary<TokenPatternInfo, List<int>> TableForAllPatternsOnParsing => this.TableForAllPatternsOnParsing;

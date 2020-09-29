@@ -11,6 +11,7 @@ namespace Parse.FrontEnd.ErrorHandler.GrammarPrivate
     public abstract class GrammarPrivateLRErrorHandler : GrammarPrivateErrorHandler
     {
         protected int ixIndex = 0;
+        protected TokenData _prevToken = null;
 
         public GrammarPrivateLRErrorHandler(Grammar grammar, int ixIndex) : base(grammar)
         {

@@ -133,6 +133,22 @@ namespace Parse.FrontEnd.Parsers.Datas
 
 
         /// <summary>
+        /// This function checks whether block and block is connected right.
+        /// </summary>
+        /// <param name="blockIndexToCheck"></param>
+        /// <returns></returns>
+        public bool IsRightBlockConnected(int blockIndexToCheck)
+        {
+            if (blockIndexToCheck >= this.Count - 1) return true;
+
+            var prevBlock = this[blockIndexToCheck];
+            var nextBlock = this[blockIndexToCheck + 1];
+
+            // this means  (check prevBlock[Last] afterStack == nextBlock[First] beforeStack)
+            return prevBlock.Units.Last().AfterStack.Stack.SequenceEqual(nextBlock.Units.First().BeforeStack.Stack);
+        }
+
+        /// <summary>
         /// This function returns it after adding a new ParsingUnit on current ParsingBlock.
         /// </summary>
         /// <param name="blockIndex"></param>

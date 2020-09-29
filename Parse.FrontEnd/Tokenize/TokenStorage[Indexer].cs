@@ -11,8 +11,7 @@ namespace Parse.FrontEnd.Tokenize
         {
             get
             {
-                List<int> result = new List<int>();
-                result.Add(0);
+                List<int> result = new List<int> { 0 };
 
                 Parallel.ForEach(TokensToView, (token) =>
                 {
@@ -159,51 +158,6 @@ namespace Parse.FrontEnd.Tokenize
         }
 
 
-        public int GetTopFrontIndexFromTokenIndex(TokenPatternInfo findPattern, int tokenIndex)
-        {
-            var indexes = this.GetIndexesForSpecialPattern(findPattern);
-
-            int result = -1;
-            int minDiffer = int.MaxValue;
-            indexes.ForEach(i =>
-            {
-                int differ = tokenIndex - i;
-                if (differ < minDiffer)
-                {
-                    result = i;
-                    minDiffer = differ;
-                }
-
-                if (i > tokenIndex) return;
-            });
-
-            return result;
-        }
-
-
-        public int GetTopBackIndexFromTokenIndex(TokenPatternInfo findPattern, int tokenIndex)
-        {
-            var indexes = this.GetIndexesForSpecialPattern(findPattern);
-
-            int result = -1;
-            int minDiffer = int.MaxValue;
-            indexes.ForEach(i =>
-            {
-                if (i > tokenIndex)
-                {
-                    int differ = i - tokenIndex;
-                    if (differ < minDiffer)
-                    {
-                        result = i;
-                        minDiffer = differ;
-                    }
-                }
-            });
-
-            return result;
-        }
-
-
         /// <summary>
         /// This function returns a token index from the caretIndex.
         /// </summary>
@@ -302,7 +256,6 @@ namespace Parse.FrontEnd.Tokenize
         }
 
 
-        private int _totalLineCount = 0;
         private List<Tuple<int, int>> _tokenIndexByLine = new List<Tuple<int, int>>();
     }
 }

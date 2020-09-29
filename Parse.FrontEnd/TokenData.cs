@@ -27,12 +27,14 @@ namespace Parse.FrontEnd
             if (tokenCell.Data == new EndMarker().Value && bEndIndex) terminal = new EndMarker();
             else
             {
-                var typeData = tokenCell.PatternInfo.Terminal as Terminal;
+                var typeData = tokenCell.PatternInfo.Terminal;
                 if (typeData == null) terminal = new NotDefined();
-                else if (typeData.TokenType == TokenType.SpecialToken.Delimiter || typeData.TokenType == TokenType.SpecialToken.Comment) terminal = null;
+                else if (typeData.TokenType == TokenType.SpecialToken.Delimiter || 
+                            typeData.TokenType == TokenType.SpecialToken.Comment) terminal = null;
                 else terminal = typeData;
             }
 
+            //            return (terminal != null) ? new TokenData(terminal, tokenCell) : null;
             return new TokenData(terminal, tokenCell);
         }
 

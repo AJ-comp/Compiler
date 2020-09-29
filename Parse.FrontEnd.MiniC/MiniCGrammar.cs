@@ -5,7 +5,6 @@ namespace Parse.FrontEnd.Grammars.MiniC
 {
     public class MiniCGrammar : Grammar
     {
-        public Terminal Define { get; } = new Terminal(TokenType.Keyword.DefinedDataType, "#define");
         public Terminal If { get; } = new Terminal(TokenType.Keyword.Controlword, "if");
         public Terminal Else { get; } = new Terminal(TokenType.Keyword.Controlword, "else");
         public Terminal While { get; } = new Terminal(TokenType.Keyword.Repeateword, "while");
@@ -15,7 +14,7 @@ namespace Parse.FrontEnd.Grammars.MiniC
         public static Terminal Short { get; } = new Terminal(TokenType.Keyword.DefinedDataType, "short");
         public static Terminal Int { get; } = new Terminal(TokenType.Keyword.DefinedDataType, "int");
         public static Terminal Double { get; } = new Terminal(TokenType.Keyword.DefinedDataType, "double");
-        public static Terminal Register { get; } = new Terminal(TokenType.Keyword.DefinedDataType, "register");
+        public static Terminal Address { get; } = new Terminal(TokenType.Keyword.DefinedDataType, "address");
         public static Terminal Void { get; } = new Terminal(TokenType.Keyword.DefinedDataType, "void");
         public static Terminal Ident { get; } = new Terminal(TokenType.Identifier, "[_a-zA-Z][_a-zA-Z0-9]*", Resource.Ident, true, true);
         public static Terminal HexNumber { get; } = new Terminal(TokenType.Digit.Digit16, "0[xX][0-9a-fA-F]+", Resource.HexNumber, true, true);
@@ -117,6 +116,7 @@ namespace Parse.FrontEnd.Grammars.MiniC
         public static MeaningUnit FuncHead { get; } = new MeaningUnit(nameof(FuncHead), MatchedAction.BlockPlus);
         public static MeaningUnit DclSpec { get; } = new MeaningUnit(nameof(DclSpec));
         public static MeaningUnit ConstNode { get; } = new MeaningUnit(nameof(ConstNode));
+        public static MeaningUnit AddressNode { get; } = new MeaningUnit(nameof(AddressNode));
         public static MeaningUnit CharNode { get; } = new MeaningUnit(nameof(CharNode));
         public static MeaningUnit ShortNode { get; } = new MeaningUnit(nameof(ShortNode));
         public static MeaningUnit IntNode { get; } = new MeaningUnit(nameof(IntNode));
@@ -184,6 +184,7 @@ namespace Parse.FrontEnd.Grammars.MiniC
             this.dclSpecifiers.AddItem(this.typeQualifier.Optional() + this.typeSpecifier);
             this.typeQualifier.AddItem(this.Const, ConstNode);
 
+            this.typeSpecifier.AddItem(Address, AddressNode);
             this.typeSpecifier.AddItem(Char, CharNode);
             this.typeSpecifier.AddItem(Short, ShortNode);
             this.typeSpecifier.AddItem(Int, IntNode);

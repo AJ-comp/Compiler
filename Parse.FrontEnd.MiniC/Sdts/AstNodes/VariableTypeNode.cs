@@ -1,6 +1,6 @@
 ﻿using Parse.FrontEnd.Ast;
-using Parse.FrontEnd.Grammars.MiniC.Sdts.AstNodes.TypeNodes;
 using Parse.FrontEnd.Grammars.MiniC.Sdts.Datas;
+using Parse.FrontEnd.MiniC.Sdts.AstNodes.TypeNodes;
 using static Parse.FrontEnd.Grammars.MiniC.Sdts.Datas.Variables.VariableMiniC;
 
 namespace Parse.FrontEnd.Grammars.MiniC.Sdts.AstNodes
@@ -39,6 +39,11 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts.AstNodes
                 {
                     DataType = MiniCDataType.Int;
                     DataTypeToken = (node as IntNode).DataTypeToken;
+                }
+                else if(node is AddressNode)
+                {
+                    DataType = MiniCDataType.Address;
+                    DataTypeToken = (node as AddressNode).DataTypeToken;
                 }
             }
 

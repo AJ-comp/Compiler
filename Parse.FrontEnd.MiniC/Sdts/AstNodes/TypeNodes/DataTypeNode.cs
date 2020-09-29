@@ -1,8 +1,9 @@
 ﻿using Parse.FrontEnd.Ast;
+using Parse.FrontEnd.Grammars.MiniC.Sdts.AstNodes;
 
-namespace Parse.FrontEnd.Grammars.MiniC.Sdts.AstNodes.TypeNodes
+namespace Parse.FrontEnd.MiniC.Sdts.AstNodes.TypeNodes
 {
-    public enum DataType { Unknown, Void, Int }
+    public enum DataType { Unknown, Void, Int, Address }
 
     public abstract class DataTypeNode : MiniCNode
     {

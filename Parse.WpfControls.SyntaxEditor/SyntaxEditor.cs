@@ -16,7 +16,6 @@ namespace Parse.WpfControls.SyntaxEditor
     public partial class SyntaxEditor : Editor
     {
         private bool bReserveRegistKeywords = false;
-        private ParsingResult parsingResult = new ParsingResult();
 
         // Critical Section member
         private object _lockObject = new object();
@@ -78,6 +77,7 @@ namespace Parse.WpfControls.SyntaxEditor
                 if (this.Compiler == null) return;
 
                 Compiler.LexingCompleted += Compiler_LexingCompleted;
+                Compiler.ParsingCompleted += Compiler_ParsingCompleted;
                 this.Compiler.Operate(FileName, Text);
 
                 // shallow copy

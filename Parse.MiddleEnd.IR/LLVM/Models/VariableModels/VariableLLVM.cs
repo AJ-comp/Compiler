@@ -55,6 +55,14 @@ namespace Parse.MiddleEnd.IR.LLVM.Models.VariableModels
                 else if (castingConstant.TypeName == DType.Short) result = new ShortVariableLLVM(var.Name, castingConstant as ShortConstant);
                 else if (castingConstant.TypeName == DType.Int) result = new IntVariableLLVM(var.Name, castingConstant as IntConstant);
                 else if (castingConstant.TypeName == DType.Double) result = new DoubleVariableLLVM(var.Name, castingConstant as DoubleConstant);
+
+                // pointer type
+                else if(castingConstant.TypeName == DType.PBit) result = new BitVariableLLVM(var.Name, castingConstant as BitConstant);
+                else if (castingConstant.TypeName == DType.PByte) result = new ByteVariableLLVM(var.Name, castingConstant as ByteConstant);
+                else if (castingConstant.TypeName == DType.PShort) result = new ShortVariableLLVM(var.Name, castingConstant as ShortConstant);
+                else if (castingConstant.TypeName == DType.PInt) result = new IntVariableLLVM(var.Name, castingConstant as IntConstant);
+                else if (castingConstant.TypeName == DType.PDouble) result = new DoubleVariableLLVM(var.Name, castingConstant as DoubleConstant);
+
             }
             else result = From(var.Name, toType);
 
@@ -84,6 +92,13 @@ namespace Parse.MiddleEnd.IR.LLVM.Models.VariableModels
             else if (toType == DType.Short) result = new ShortVariableLLVM(name, null);
             else if (toType == DType.Int) result = new IntVariableLLVM(name, null);
             else if (toType == DType.Double) result = new DoubleVariableLLVM(name, null);
+
+            // pointer type
+            else if (toType == DType.PBit) result = new BitVariableLLVM(name, null);
+            else if (toType == DType.PByte) result = new ByteVariableLLVM(name, null);
+            else if (toType == DType.PShort) result = new ShortVariableLLVM(name, null);
+            else if (toType == DType.PInt) result = new IntVariableLLVM(name, null);
+            else if (toType == DType.PDouble) result = new DoubleVariableLLVM(name, null);
 
             result.Offset = 0;
 

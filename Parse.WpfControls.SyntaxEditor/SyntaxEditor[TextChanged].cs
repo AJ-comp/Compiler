@@ -14,17 +14,21 @@ namespace Parse.WpfControls.SyntaxEditor
             UpdateTokenInfos(e.Changes.First());
 
             // shallow copy
-            var newParsingResult = this.parsingResult.Clone() as ParsingResult;
             lock (_lockObject)
-                _csPostProcessData = new Tuple<ParsingResult, TextChange>(newParsingResult, e.Changes.First());
+                _csPostProcessData = new Tuple<ParsingResult, TextChange>(parsingResult, e.Changes.First());
 
             this.TextArea.InvalidateVisual();
         }
 
 
-        private void Compiler_LexingCompleted(object sender, LexingData e)
+        private void Compiler_LexingCompleted(object sender, LexingResult e)
         {
             TextArea.RecentLexedData = e;
+        }
+
+        private void Compiler_ParsingCompleted(object sender, ParsingResult e)
+        {
+            parsingResult = e.Clone() as ParsingResult;
         }
 
 
@@ -47,5 +51,8 @@ namespace Parse.WpfControls.SyntaxEditor
             string addString = this.Text.Substring(changeInfo.Offset, changeInfo.AddedLength);
             this.Compiler.Operate(FileName, changeInfo.Offset, addString);
         }
+
+
+        private ParsingResult parsingResult = new ParsingResult();
     }
 }

@@ -38,7 +38,8 @@ namespace Parse.FrontEnd.Parsers.Datas
                 return result;
             }
         }
-        public TerminalSet PossibleTerminalSet => (this._units.Count == 0) ? new TerminalSet() : this._units.Last().PossibleTerminalSet;
+        public TerminalSet PossibleTerminalSet 
+            => (this._units.Count == 0) ? new TerminalSet() : this._units.First().PossibleTerminalSet;
 
         public ParsingBlock(TokenData token)
         {

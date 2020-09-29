@@ -1,12 +1,4 @@
-﻿using Parse.FrontEnd.Ast;
-using Parse.FrontEnd.Grammars.MiniC.Sdts.AstNodes;
-using Parse.FrontEnd.Grammars.MiniC.Sdts.AstNodes.ExprNodes;
-using Parse.FrontEnd.Grammars.MiniC.Sdts.AstNodes.ExprNodes.ArithmeticExprNodes;
-using Parse.FrontEnd.Grammars.MiniC.Sdts.AstNodes.ExprNodes.AssignExprNodes;
-using Parse.FrontEnd.Grammars.MiniC.Sdts.AstNodes.ExprNodes.LiteralNodes;
-using Parse.FrontEnd.Grammars.MiniC.Sdts.AstNodes.ExprNodes.LogicalExprNodes;
-using Parse.FrontEnd.Grammars.MiniC.Sdts.AstNodes.StatementNodes;
-using Parse.FrontEnd.Grammars.MiniC.Sdts.AstNodes.TypeNodes;
+﻿using Parse.FrontEnd.Grammars.MiniC.Sdts.AstNodes;
 using Parse.FrontEnd.Grammars.MiniC.Sdts.Datas;
 using Parse.FrontEnd.Grammars.MiniC.Sdts.Datas.Variables;
 using Parse.FrontEnd.Grammars.Properties;

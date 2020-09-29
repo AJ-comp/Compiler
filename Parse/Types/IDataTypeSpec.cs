@@ -3,7 +3,12 @@ using System;
 
 namespace Parse.Types
 {
-    public enum DType { Unknown, Bit, Byte, Short, Int, Double }
+    public enum DType 
+    { 
+        Unknown, 
+        Bit, Byte, Short, Int, Double,
+        PBit, PByte, PShort, PInt, PDouble
+    }
 
     public interface IDataTypeSpec : ICompareOperation
     {

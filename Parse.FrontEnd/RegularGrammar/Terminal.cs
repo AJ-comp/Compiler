@@ -9,7 +9,7 @@ namespace Parse.FrontEnd.RegularGrammar
         public TokenType TokenType { get; }
         public string Value { get; } = string.Empty;
         public bool Meaning { get; } = true;
-        public bool IsWord { get; } = false;
+        public bool IsWordPattern { get; } = false;
 
         /// <summary>
         /// If this argument is true regex expression is displayed like as (ex : ++ -> \+\+)
@@ -37,13 +37,13 @@ namespace Parse.FrontEnd.RegularGrammar
         public Terminal(TokenType type, string value, bool meaning = true, bool bWord = false) : this(type, value, value, meaning, bWord)
         {
         }
-        public Terminal(TokenType type, string value, string caption, bool meaning = true, bool bWord = false)
+        public Terminal(TokenType type, string value, string caption, bool meaning = true, bool bWordPattern = false)
         {
             this.TokenType = type;
             this.Value = value;
             this.caption = caption;
             this.Meaning = meaning;
-            this.IsWord = bWord;
+            this.IsWordPattern = bWordPattern;
         }
 
         public override string ToString()

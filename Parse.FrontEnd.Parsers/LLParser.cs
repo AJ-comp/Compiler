@@ -174,7 +174,7 @@ namespace Parse.FrontEnd.Parsers
             throw new NotImplementedException();
         }
 
-        public override ParsingResult Parsing(LexingData lexingData, ParsingResult prevParsingInfo)
+        public override ParsingResult Parsing(LexingResult lexingData, ParsingResult prevParsingInfo)
         {
             throw new NotImplementedException();
         }

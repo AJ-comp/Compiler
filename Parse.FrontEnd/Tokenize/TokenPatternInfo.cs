@@ -8,7 +8,7 @@ namespace Parse.FrontEnd.Tokenize
         public Terminal Terminal { get; private set; }
         public string Pattern => Terminal.RegexExpression;
         public string OriginalPattern => Terminal.Value;
-        public bool IsWord => Terminal.IsWord;
+        public bool IsWord => Terminal.IsWordPattern;
         public bool Operator => Terminal.IsOper;
 
 

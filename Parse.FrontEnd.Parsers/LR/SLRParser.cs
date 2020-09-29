@@ -58,8 +58,7 @@ namespace Parse.FrontEnd.Parsers.LR
                 // parsing for post range until sync.
                 for (int i = indexToSee; i < target.Count; i++)
                 {
-                    var targetToCompare = target[i];
-                    if(targetToCompare.Units.First().BeforeStack.Stack.SequenceEqual(target[i].Units.Last().AfterStack.Stack))
+                    if(target.IsRightBlockConnected(i - 1))
                     {
                         indexToSee = i + 1;
                         break;
@@ -121,20 +120,20 @@ namespace Parse.FrontEnd.Parsers.LR
             return result;
         }
 
-        public override ParsingResult Parsing(LexingData lexingData, ParsingResult prevParsingInfo)
+        public override ParsingResult Parsing(LexingResult lexingData, ParsingResult prevParsingInfo)
         {
             var tokenCells = lexingData.TokenStorage.TokensToView;
 
             if (prevParsingInfo == null) return this.Parsing(tokenCells);
             if (prevParsingInfo.Success == false) return this.Parsing(tokenCells);
-            if (lexingData.RangeToParse == null) return this.Parsing(tokenCells);
+            if (lexingData.RangeToLex == null) return this.Parsing(tokenCells);
 
             var tokens = ToTokenDataList(tokenCells);
             ParsingResult result = null;
             try
             {
-                result = this.ReplaceRanges(prevParsingInfo, tokens, lexingData.RangeToParse);
-                this.PartialParsing(result, lexingData.RangeToParse);
+                result = this.ReplaceRanges(prevParsingInfo, tokens, lexingData.RangeToLex);
+                this.PartialParsing(result, lexingData.RangeToLex);
                 result.Success = true;
             }
             catch (ParsingException ex)
@@ -185,8 +184,6 @@ namespace Parse.FrontEnd.Parsers.LR
         private bool PostProcessing(SuccessedKind successedType, ParsingResult parsingResult, bool bErrorRecover, ref int index)
         {
             bool result = false;
-
-            ParsingBlock nextBlock = (parsingResult.Count > index) ? parsingResult[index] : null;
 
             // ReduceOrGoto state can't arrive in this function because it is processed in 'BlockParsing' function.
             // Therefore this function doesn't process ReduceOrGoto state.

@@ -5,7 +5,7 @@ namespace Parse.FrontEnd.Tokenize
 {
     public partial class Lexer
     {
-        public LexingData Lexing(TokenStorage targetStorage, SelectionTokensContainer delInfos, string replaceString)
+        public LexingResult Lexing(TokenStorage targetStorage, SelectionTokensContainer delInfos, string replaceString)
         {
 //            if (delInfos.IsEmpty()) return targetStorage;
 //            if (replaceString.Length == 0) return targetStorage;
@@ -24,11 +24,11 @@ namespace Parse.FrontEnd.Tokenize
                 new RangePair(impactRange, new Range(impactRange.StartIndex, toInsertTokens.Count))
             };
 
-            return new LexingData(result, ranges);
+            return new LexingResult(result, ranges);
         }
 
 
-        public LexingData Lexing(TokenStorage targetStorage, int offset, int len)
+        public LexingResult Lexing(TokenStorage targetStorage, int offset, int len)
         {
             var delInfos = GetSelectionTokenInfos(targetStorage, offset, len);
 
@@ -45,7 +45,7 @@ namespace Parse.FrontEnd.Tokenize
         /// <param name="targetStorage"></param>
         /// <param name="delInfos"></param>
         /// /// <returns></returns>
-        public LexingData Lexing(TokenStorage targetStorage, SelectionTokensContainer delInfos)
+        public LexingResult Lexing(TokenStorage targetStorage, SelectionTokensContainer delInfos)
         {
             TokenStorage result = targetStorage.Clone() as TokenStorage;
 
@@ -77,7 +77,7 @@ namespace Parse.FrontEnd.Tokenize
             };
             ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-            return new LexingData(result, tokenizeRanges);
+            return new LexingResult(result, tokenizeRanges);
 
             // The Rectangle Deletion operation need to write other algorithm also the algorithm will very complicate so I don't write it yet.
             // (The above data struct can be used on the Rectangle Deletion operation.)

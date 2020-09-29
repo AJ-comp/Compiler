@@ -59,8 +59,8 @@ namespace Parse.WpfControls
          * private field section [Not Control]
          ********************************************************************************************/
         private int caretIndexWhenCLOccur;
-        private bool isIncludeZeroSimilarity;
-        private string lastInputString = string.Empty;
+        private bool _isIncludeZeroSimilarity;
+        private string _lastInputString = string.Empty;
         private Dictionary<Enum, KeyData> Keys = new Dictionary<Enum, KeyData>();
         private ObservableCollection<ItemData> AllItems = new ObservableCollection<ItemData>();
         private ObservableCollection<ItemData> VisibleItems = new ObservableCollection<ItemData>();
@@ -98,7 +98,7 @@ namespace Parse.WpfControls
 
         // Using a DependencyProperty as the backing store for FilterButtonCheckedBackgroundColor.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty FilterButtonCheckedBackgroundColorProperty =
-            DependencyProperty.Register("FilterButtonCheckedBackgroundColor", typeof(Brush), typeof(CompletionList), 
+            DependencyProperty.Register("FilterButtonCheckedBackgroundColor", typeof(Brush), typeof(CompletionList),
                                                         new PropertyMetadata((SolidColorBrush)(new BrushConverter().ConvertFrom("#007ACC"))));
 
 
@@ -110,7 +110,7 @@ namespace Parse.WpfControls
 
         // Using a DependencyProperty as the backing store for FilterButtonMouseEnterBackgroundColor.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty FilterButtonMouseEnterBackgroundColorProperty =
-            DependencyProperty.Register("FilterButtonMouseEnterBackgroundColor", typeof(Brush), typeof(CompletionList), 
+            DependencyProperty.Register("FilterButtonMouseEnterBackgroundColor", typeof(Brush), typeof(CompletionList),
                                                         new PropertyMetadata((SolidColorBrush)(new BrushConverter().ConvertFrom("#007ACC"))));
 
 
@@ -155,7 +155,7 @@ namespace Parse.WpfControls
         }
 
         public static readonly DependencyProperty StaysOpenProperty =
-        Popup.StaysOpenProperty.AddOwner(typeof(CompletionList), 
+        Popup.StaysOpenProperty.AddOwner(typeof(CompletionList),
             new FrameworkPropertyMetadata(false, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault,
                                                                 new PropertyChangedCallback(OnStaysOpenChanged)));
 
@@ -236,16 +236,22 @@ namespace Parse.WpfControls
             this.listBox = (ListBox)Template.FindName("PART_ListBox", this);
             this.stackPanel = (StackPanel)Template.FindName("PART_StackPanel", this);
 
+            this.IsVisibleChanged += CompletionList_IsVisibleChanged;
             this.listBox.ItemsSource = VisibleItems;
             this.listBox.SelectionChanged += ((s, le) => this.listBox.ScrollIntoView(this.listBox.SelectedItem));
             this.listBox.SelectionChanged += ((s, le) => this.parent.Focus());
             this.listBox.MouseDoubleClick += ListBox_MouseDoubleClick;
         }
 
+        private void CompletionList_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            if ((bool)e.NewValue == false) this.Close();
+        }
+
         #region event handler
         private void Parent_PreviewKeyDown(object sender, KeyEventArgs e)
         {
-            if (this.IsOpen)
+            if (IsOpen && IsVisible)
             {
                 if (this.InputProcessOnCompletionList(this.parent, e.Key)) e.Handled = true;
                 return;
@@ -270,7 +276,7 @@ namespace Parse.WpfControls
         {
             var filterButton = sender as ToggleButton;
 
-            if(filterButton.IsChecked == false)
+            if (filterButton.IsChecked == false)
             {
                 var border = filterButton.Content as Border;
                 border.Background = Brushes.Transparent;
@@ -304,7 +310,7 @@ namespace Parse.WpfControls
         {
             List<Enum> result = new List<Enum>();
 
-            foreach(var item in this.stackPanel.Children)
+            foreach (var item in this.stackPanel.Children)
             {
                 var filterButton = item as ToggleButton;
 
@@ -344,9 +350,9 @@ namespace Parse.WpfControls
             return result;
         }
 
-        private void ChangeFilterState(IReadOnlyList<ItemData> itemDatas)
+        private void ChangeFilterState(IEnumerable<ItemData> itemDatas)
         {
-            foreach(var filter in this.stackPanel.Children)
+            foreach (var filter in this.stackPanel.Children)
             {
                 ToggleButton filterButton = filter as ToggleButton;
 
@@ -355,7 +361,7 @@ namespace Parse.WpfControls
                 filterButton.Content = this.GetFilterContent(bitmapImage, 16, 16, bChecked);
             }
 
-            foreach(var item in itemDatas)
+            foreach (var item in itemDatas)
             {
                 ToggleButton filterButton = this.GetFilterButtonFromEnum(item.Type);
                 var bitmapImage = this.Keys[item.Type as Enum].ActiveImgSource;
@@ -364,70 +370,62 @@ namespace Parse.WpfControls
             }
         }
 
-        private void SelectTopCandidate(IList<double> similarityValues)
-        {
-            if (similarityValues.Count == 0) return;
-            if (this.VisibleItems.Count != similarityValues.Count) return;
-
-            var index = similarityValues.IndexOf(similarityValues.Max());
-            this.listBox.SelectedItem = this.VisibleItems[index];
-        }
-
         /// <summary>
         /// This function returns a similarity list by comparing an 'inputString' from 'itemsDatas'.
         /// </summary>
         /// <param name="itemDatas">The list to compare</param>
         /// <param name="inputString">The string to compare with an element of the 'itemDatas'</param>
-        /// <returns></returns>
-        private IList<double> GetSimilarityList(IReadOnlyList<ItemData> itemDatas, string inputString)
+        /// <returns>first : simility value, second : ItemData </returns>
+        private IEnumerable<Tuple<double, ItemData>> GetSimilarityList(IEnumerable<ItemData> itemDatas, string inputString)
         {
-            List<double> similarityValues = new List<double>();
+            List<Tuple<double, ItemData>> similarityValues = new List<Tuple<double, ItemData>>();
 
             foreach (var item in itemDatas)
             {
                 double value = this.similarity.SimilarityValue(item.Item, inputString, out List<uint> matchedIndex);
 
                 item.MatchedIndexes = matchedIndex;
-                this.VisibleItems.Add(item);
-                similarityValues.Add(value);
+                similarityValues.Add(new Tuple<double, ItemData>(value, item));
             }
+
+            similarityValues.Sort((Tuple<double, ItemData> x, Tuple<double, ItemData> y) =>
+            {
+                if (x.Item1 > y.Item1) return -1;
+                else if (x.Item1 == y.Item1) return 0;
+                else return 1;
+            });
 
             return similarityValues;
         }
 
         private bool InputProcessOnCompletionList(TextBox textbox, Key keyType)
         {
-            bool result = false;
+            bool result = true;
 
             if (keyType == Key.Up)
             {
                 if (this.listBox.SelectedIndex > 0) this.listBox.SelectedIndex--;
-                result = true;
             }
             else if (keyType == Key.Down)
             {
                 if (this.listBox.SelectedIndex < this.listBox.Items.Count - 1) this.listBox.SelectedIndex++;
-                result = true;
             }
             else if (keyType == Key.Enter || keyType == Key.Tab)
             {
                 this.IsOpen = false;
                 BringStringFromCompletionList(textbox);
-                result = true;
             }
             else if (keyType == Key.Space || keyType == Key.OemPeriod)
             {
                 this.IsOpen = false;
                 if (keyType == Key.Space) BringStringFromCompletionList(textbox, " ");
                 else if (keyType == Key.OemPeriod) BringStringFromCompletionList(textbox, ".");
-
-                result = true;
             }
             else if (keyType == Key.Escape)
             {
                 this.IsOpen = false;
-                result = true;
             }
+            else result = false;
 
             return result;
         }
@@ -540,7 +538,7 @@ namespace Parse.WpfControls
         public void ClearKeySet() => this.Keys.Clear();
 
 
-        public void Create(IReadOnlyList<ItemData> items, double x, double y)
+        public void Create(IEnumerable<ItemData> items, double x, double y)
         {
             this.ClearItems();
             foreach (var item in items) this.RegisterItem(item);
@@ -549,10 +547,10 @@ namespace Parse.WpfControls
             this.StaysOpen = false;
             this.Placement = PlacementMode.Relative;
             this.PlacementTarget = this.parent;
-            this.HorizontalOffset = x;
-            this.VerticalOffset = y;
-
             this.IsOpen = true;
+
+            this.HorizontalOffset = x + this.ActualWidth;
+            this.VerticalOffset = y;
 
             this.CreateFilterButtons();
         }
@@ -563,40 +561,38 @@ namespace Parse.WpfControls
             this.ChangeFilterState(filteredList);
 
             this.VisibleItems.Clear();
-            foreach (var item in filteredList) this.VisibleItems.Add(item);
+            //            foreach (var item in filteredList) this.VisibleItems.Add(item);
 
-            if (this.lastInputString.Length > 0)
+            if (this._lastInputString.Length > 0)
             {
-                var similarityList = this.GetSimilarityList(filteredList, this.lastInputString);
+                var similarityList = this.GetSimilarityList(filteredList, this._lastInputString);
 
-                this.SelectTopCandidate(similarityList);
-
-                if (this.isIncludeZeroSimilarity == false)
+                foreach (var item in similarityList)
                 {
-                    List<int> removeIndexes = new List<int>();
-                    for (int i = 0; i < similarityList.Count; i++)
-                    {
-                        if (similarityList[i] == 0) removeIndexes.Add(i);
-                    }
-
-                    this.VisibleItems.RemoveList(removeIndexes);
+                    var compare = (this._isIncludeZeroSimilarity) ? -1 : 0;
+                    if (item.Item1 > compare)
+                        this.VisibleItems.Add(item.Item2);
                 }
+
+                if (similarityList.First()?.Item1 > 0)
+                    this.listBox.SelectedItem = this.VisibleItems[0];
             }
         }
 
         public void Show(string inputString, double x, double y, bool IsIncludeZeroSimilarity = false)
         {
-            this.lastInputString = inputString;
-            this.isIncludeZeroSimilarity = IsIncludeZeroSimilarity;
+            this._lastInputString = inputString;
+            this._isIncludeZeroSimilarity = IsIncludeZeroSimilarity;
 
             this.Refresh();
 
             this.StaysOpen = false;
             this.Placement = PlacementMode.Relative;
             this.PlacementTarget = this.parent;
-            this.HorizontalOffset = x;
-            this.VerticalOffset = y;
             this.IsOpen = true;
+
+            this.HorizontalOffset = x + this.ActualWidth;
+            this.VerticalOffset = y;
         }
 
         public void Close() => this.IsOpen = false;

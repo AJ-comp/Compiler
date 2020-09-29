@@ -10,7 +10,7 @@ namespace Parse.FrontEnd.Tokenize
         /// </summary>
         /// <param name="data">The string data to lex</param>
         /// <returns></returns>
-        public LexingData Lexing(string data)
+        public LexingResult Lexing(string data)
         {
             TokenStorage result = new TokenStorage(this._tokenPatternList);
 
@@ -21,7 +21,7 @@ namespace Parse.FrontEnd.Tokenize
             TokenizeImpactRanges impactRanges = new TokenizeImpactRanges();
             if (result._tokensToView.Count > 0) impactRanges.Add(new RangePair(new Range(-1, 0), new Range(0, result._tokensToView.Count)));
 
-            return new LexingData(result, impactRanges);
+            return new LexingResult(result, impactRanges);
         }
 
         /// <summary>
@@ -31,7 +31,7 @@ namespace Parse.FrontEnd.Tokenize
         /// <param name="dataToAdd">The data to add</param>
         /// <see cref="https://www.lucidchart.com/documents/edit/f4366425-61f9-4b4f-9abc-72ce4efe864c/ZYtDEhwbkIBA?beaconFlowId=53B1C199D7307981"/>
         /// <returns></returns>
-        public LexingData Lexing(TokenStorage prevTokens, string dataToAdd)
+        public LexingResult Lexing(TokenStorage prevTokens, string dataToAdd)
         {
             if (prevTokens == null) return this.Lexing(dataToAdd);
 
@@ -47,7 +47,7 @@ namespace Parse.FrontEnd.Tokenize
         /// <param name="dataToAdd">The data to add</param>
         /// <see cref="https://www.lucidchart.com/documents/edit/f4366425-61f9-4b4f-9abc-72ce4efe864c/ZYtDEhwbkIBA?beaconFlowId=53B1C199D7307981"/>
         /// <returns></returns>
-        public LexingData Lexing(TokenStorage prevTokens, int offset, string dataToAdd)
+        public LexingResult Lexing(TokenStorage prevTokens, int offset, string dataToAdd)
         {
             if (prevTokens == null) return this.Lexing(dataToAdd);
             if (prevTokens.TokensToView.Count == 0) return this.Lexing(dataToAdd);
@@ -81,7 +81,7 @@ namespace Parse.FrontEnd.Tokenize
         /// <param name="replaceIndex"></param>
         /// <param name="mergeString"></param>
         /// <returns></returns>
-        private LexingData TokenizeAfterReplace(TokenStorage targetStorage, int replaceIndex, string mergeString)
+        private LexingResult TokenizeAfterReplace(TokenStorage targetStorage, int replaceIndex, string mergeString)
         {
             var impactRange = targetStorage.FindImpactRange(replaceIndex);
 
@@ -121,7 +121,7 @@ namespace Parse.FrontEnd.Tokenize
                 rangePairToRegist
             };
 
-            return new LexingData(cloneStorage, ranges);
+            return new LexingResult(cloneStorage, ranges);
         }
     }
 }

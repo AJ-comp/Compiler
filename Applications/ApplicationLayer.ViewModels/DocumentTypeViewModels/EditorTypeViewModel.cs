@@ -137,14 +137,15 @@ namespace ApplicationLayer.ViewModels.DocumentTypeViewModels
         private void OnParsingCompleted(ParsingCompletedEventArgs parsingCompletedInfo)
         {
             var parsingResult = parsingCompletedInfo.ParsingResult;
+            var semanticResult = parsingCompletedInfo.SemanticResult;
 
-            this.ParsingHistory = parsingCompletedInfo.ParsingResult.ToParsingHistory;
-            this.ParseTree = parsingCompletedInfo.ParsingResult.ToParseTree;
-            this.Ast = parsingCompletedInfo.SdtsRoot;
+            this.ParsingHistory = parsingResult.ToParsingHistory;
+            this.ParseTree = parsingResult.ToParseTree;
+            this.Ast = semanticResult?.SdtsRoot;
 
 
             AlarmCollection alarmCollection = GetSyntaxAlarmCollection(parsingResult);
-            alarmCollection.AddRange(GetSemanticAlarmCollection(parsingCompletedInfo.SdtsRoot, parsingCompletedInfo.FiredException));
+            alarmCollection.AddRange(GetSemanticAlarmCollection(semanticResult));
             if (alarmCollection.Count == 0) alarmCollection.Add(new AlarmEventArgs(string.Empty, this.FileName));
 
             // inform to alarm list view.
@@ -152,10 +153,11 @@ namespace ApplicationLayer.ViewModels.DocumentTypeViewModels
 
             // Add sementic parsing information to the current FileTreeNode.
             _fileNode.Clear();
+            if (semanticResult == null) return;
 
-            if(parsingCompletedInfo.SdtsRoot is MiniCNode)
+            if (semanticResult.SdtsRoot is MiniCNode)
             {
-                var minicRoot = parsingCompletedInfo.SdtsRoot as MiniCNode;
+                var minicRoot = semanticResult.SdtsRoot as MiniCNode;
                 var symbolTable = minicRoot?.SymbolTable;
                 if (symbolTable == null) return;
 
@@ -175,7 +177,7 @@ namespace ApplicationLayer.ViewModels.DocumentTypeViewModels
                     _fileNode.AddChildren(funcTreeNode);
                 }
 
-                InterLanguage = (parsingCompletedInfo.FiredException == null) ? parsingCompletedInfo.AllNodes : null;
+                InterLanguage = (semanticResult.FiredException == null) ? semanticResult.AllNodes : null;
             }
         }
 
@@ -221,21 +223,21 @@ namespace ApplicationLayer.ViewModels.DocumentTypeViewModels
             return alarmList;
         }
 
-        private AlarmCollection GetSemanticAlarmCollection(SdtsNode sdtsRoot, Exception e)
+        private AlarmCollection GetSemanticAlarmCollection(SemanticAnalysisResult semanticResult)
         {
             AlarmCollection alarmList = new AlarmCollection();
 
             ProjectTreeNodeModel projNode = _fileNode.ManagerTree as ProjectTreeNodeModel;
 
-            if(e != null)
+            if (semanticResult?.FiredException != null)
             {
-                var alarm = ParsingErrorInfo.CreateParsingError("EX0000", e.Message);
+                var alarm = ParsingErrorInfo.CreateParsingError("EX0000", semanticResult?.FiredException.Message);
                 alarmList.Add(new AlarmEventArgs(projNode?.FileNameWithoutExtension, FileName, 0, 0, null, alarm));
             }
 
-            if (sdtsRoot == null) return alarmList;
+            if (semanticResult?.SdtsRoot == null) return alarmList;
 
-            var errNodes = sdtsRoot.ErrNodes;
+            var errNodes = semanticResult?.SdtsRoot.ErrNodes;
             foreach (var item in errNodes)
             {
                 foreach (var alarm in item.ConnectedErrInfoList)
@@ -251,7 +253,7 @@ namespace ApplicationLayer.ViewModels.DocumentTypeViewModels
         private void AddAlarmData(ParsingResult e, AlarmCollection alarmList)
         {
             int lineIndex = 0;
-            Parallel.For(0, e.Count, tokenIndex => 
+            Parallel.For(0, e.Count, tokenIndex =>
             {
                 var block = e[tokenIndex];
                 if (block.Token.Input == "\n") lineIndex++;                // this may need to use a lock object.
@@ -266,9 +268,9 @@ namespace ApplicationLayer.ViewModels.DocumentTypeViewModels
 
                 ProjectTreeNodeModel projNode = _fileNode.ManagerTree as ProjectTreeNodeModel;
 
-                lock(_lockObject)
+                lock (_lockObject)
                 {
-                    foreach(var errorInfo in block.ErrorInfos)
+                    foreach (var errorInfo in block.ErrorInfos)
                         alarmList.Add(new AlarmEventArgs(projNode?.FileNameWithoutExtension, FileName, tokenIndex, lineIndex + 1, errToken, errorInfo));
                 }
             });

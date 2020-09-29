@@ -2,6 +2,7 @@
 using Parse.WpfControls.Models;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
@@ -52,7 +53,7 @@ namespace Parse.WpfControls.SyntaxEditor
         }
 
 
-        private IReadOnlyList<ItemData> GetCompletionList(ParsingResult parsingResult, int tokenIndex)
+        private IEnumerable<ItemData> GetCompletionList(ParsingResult parsingResult, int tokenIndex)
         {
             List<ItemData> result = new List<ItemData>();
             if (tokenIndex < 0) return result;
@@ -61,6 +62,8 @@ namespace Parse.WpfControls.SyntaxEditor
             foreach (var item in parsingResult[tokenIndex].PossibleTerminalSet)
             {
                 if (item.Meaning == false) continue;
+                if (item.IsWordPattern) continue;
+
                 result.Add(new ItemData(CompletionItemType.Keyword, item.Value, string.Empty));
             }
 
@@ -69,9 +72,9 @@ namespace Parse.WpfControls.SyntaxEditor
 
         private bool IsBackSpace(TextChange changeInfo) => (changeInfo.RemovedLength >= 1 && changeInfo.AddedLength == 0);
 
-        private void ShowIntellisense(TextChange changeInfo, IReadOnlyList<ItemData> items)
+        private void ShowIntellisense(TextChange changeInfo, IEnumerable<ItemData> items)
         {
-            if (items.Count == 0) return;
+            if (items.Count() == 0) { completionList.Close(); return; }
 
             var addString = TextArea.Text.Substring(changeInfo.Offset, changeInfo.AddedLength);
             if (addString.Length > 1) { completionList.Close(); return; }
@@ -96,8 +99,6 @@ namespace Parse.WpfControls.SyntaxEditor
 
             if (completionList.IsOpened) completionList.Show(inputString, x, y);
             else completionList.Create(items, x, y);
-
-
         }
 
 

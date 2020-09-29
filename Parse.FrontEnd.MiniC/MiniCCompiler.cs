@@ -19,7 +19,7 @@ namespace Parse.FrontEnd.MiniCParser
         public Grammar Grammar => _miniC;
 
         public event EventHandler<string> ReplaceByMacroCompleted;
-        public event EventHandler<LexingData> LexingCompleted;
+        public event EventHandler<LexingResult> LexingCompleted;
         public event EventHandler<ParsingResult> ParsingCompleted;
         public event EventHandler<SemanticAnalysisResult> SemanticAnalysisCompleted;
 

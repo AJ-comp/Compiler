@@ -9,16 +9,13 @@ namespace Parse.WpfControls.SyntaxEditor.EventArgs
     public class ParsingCompletedEventArgs
     {
         public ParsingResult ParsingResult { get; }
-        public SdtsNode SdtsRoot { get; }
-        public IEnumerable<AstSymbol> AllNodes { get; }
-        public Exception FiredException { get; }
+        public SemanticAnalysisResult SemanticResult { get; }
 
-        public ParsingCompletedEventArgs(ParsingResult parsingResult, SdtsNode rootNode, IEnumerable<AstSymbol> allNodes, Exception firedException)
+
+        public ParsingCompletedEventArgs(ParsingResult parsingResult, SemanticAnalysisResult semanticResult)
         {
             ParsingResult = parsingResult;
-            SdtsRoot = rootNode;
-            AllNodes = allNodes;
-            FiredException = firedException;
+            SemanticResult = semanticResult;
         }
     }
 }

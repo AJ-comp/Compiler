@@ -53,13 +53,10 @@ namespace Parse.WpfControls.SyntaxEditor
                 Dispatcher.Invoke(() =>
                 {
                     var result = Compiler.StartSemanticAnalysis(FileName);
-                    if (result == null) return;
-
                     ParsingFailedListPreProcess(localResult);
-                    this.ParsingCompleted?.Invoke(this, new ParsingCompletedEventArgs(localResult,
-                                                                                                                        result.SdtsRoot,
-                                                                                                                        result.AllNodes,
-                                                                                                                        result.FiredException));
+//                    if (result == null) return;
+
+                    this.ParsingCompleted?.Invoke(this, new ParsingCompletedEventArgs(localResult, result));
                 });
             }
         }

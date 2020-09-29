@@ -12,6 +12,7 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts.Datas.Variables
         public enum MiniCDataType
         {
             [Description("UnKnown")] Unknown,
+            [Description("address")] Address,
             [Description("void")] Void,
             [Description("int")] Int,
             [Description("string")] String

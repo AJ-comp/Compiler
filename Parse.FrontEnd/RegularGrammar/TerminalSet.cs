@@ -40,7 +40,7 @@ namespace Parse.FrontEnd.RegularGrammar
         {
             foreach (var terminal in this)
             {
-                if (terminal.IsWord)
+                if (terminal.IsWordPattern)
                 {
                     if (Regex.Match(value, terminal.Value).Value == value) return terminal;
                 }
@@ -56,7 +56,7 @@ namespace Parse.FrontEnd.RegularGrammar
 
             foreach(var terminal in this)
             {
-                if(terminal.IsWord)
+                if(terminal.IsWordPattern)
                 {
                     if (Regex.Match(value, terminal.Value).Value == value) result.Add(terminal);
                 }
