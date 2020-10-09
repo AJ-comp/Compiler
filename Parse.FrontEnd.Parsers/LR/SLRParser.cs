@@ -32,19 +32,21 @@ namespace Parse.FrontEnd.Parsers.LR
             ParsingTable.CreateParsingTable(this.C0, this._followAnalyzer.Datas);
         }
 
-        public void PartialParsing(ParsingResult target, TokenizeImpactRanges rangesToParse)
+        public void PartialParsing(ParsingResult target, IReadOnlyList<RangePair> rangesToParse)
         {
             int indexToSee = 0;
 
             foreach (var range in rangesToParse)
             {
-                if (range.Item2.StartIndex < indexToSee && indexToSee < range.Item2.EndIndex)
+                var newRange = range.Item2;
+
+                if (newRange.StartIndex < indexToSee && indexToSee < newRange.EndIndex)
                 {
                 }
-                else if (indexToSee > range.Item2.EndIndex) continue;
+                else if (indexToSee > newRange.EndIndex) continue;
 
                 // parsing update range.
-                for (int i = range.Item2.StartIndex; i <= range.Item2.EndIndex; i++)
+                for (int i = newRange.StartIndex; i <= newRange.EndIndex; i++)
                 {
                     if (i == 0) target[i] = new ParsingBlock(target[i].Token);
                     else target[i] = new ParsingBlock(new ParsingUnit(target[i - 1].Units.Last().AfterStack), target[i].Token);
@@ -120,20 +122,21 @@ namespace Parse.FrontEnd.Parsers.LR
             return result;
         }
 
-        public override ParsingResult Parsing(LexingResult lexingData, ParsingResult prevParsingInfo)
+        public override ParsingResult Parsing(LexingData lexingData, ParsingResult prevParsingInfo)
         {
-            var tokenCells = lexingData.TokenStorage.TokensToView;
+            var tokenCells = lexingData.TokensForParsing;
 
             if (prevParsingInfo == null) return this.Parsing(tokenCells);
             if (prevParsingInfo.Success == false) return this.Parsing(tokenCells);
             if (lexingData.RangeToLex == null) return this.Parsing(tokenCells);
 
-            var tokens = ToTokenDataList(tokenCells);
             ParsingResult result = null;
+            var tokens = ToTokenDataList(tokenCells);
+
             try
             {
-                result = this.ReplaceRanges(prevParsingInfo, tokens, lexingData.RangeToLex);
-                this.PartialParsing(result, lexingData.RangeToLex);
+                result = this.ReplaceRanges(prevParsingInfo, tokens, lexingData.RangeToParsing);
+                this.PartialParsing(result, lexingData.RangeToParsing);
                 result.Success = true;
             }
             catch (ParsingException ex)
@@ -219,7 +222,7 @@ namespace Parse.FrontEnd.Parsers.LR
             return prevParsingResult;
         }
 
-        private ParsingResult ReplaceRanges(ParsingResult srcResult, IReadOnlyList<TokenData> newTokens, TokenizeImpactRanges ranges)
+        private ParsingResult ReplaceRanges(ParsingResult srcResult, IReadOnlyList<TokenData> newTokens, IReadOnlyList<RangePair> ranges)
         {
             int addVal = 0;
 

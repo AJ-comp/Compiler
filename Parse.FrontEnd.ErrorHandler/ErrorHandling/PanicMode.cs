@@ -80,7 +80,7 @@ namespace Parse.FrontEnd.ErrorHandler
 
                 // The token of the first index may fire an error while parsing. because history has to be, Clear function doesn't call.
                 if(seeingTokenIndex > firstIndex)
-                    blockToSkip._units.Clear(); // it has to delete an all unit because a block to skip.
+                    blockToSkip.Clear(); // it has to delete an all unit because a block to skip.
 
                 // check
                 var targetTerminal = curToken.Kind;
@@ -89,10 +89,10 @@ namespace Parse.FrontEnd.ErrorHandler
                 // create a new unit on current ParsingBlock (blockToSkip)
                 var newParsingUnit = parsingResult.AddUnitOnCurBlock(seeingTokenIndex);
                 newParsingUnit.CopyBeforeStackToAfterStack();   // stack sync because to throw away token.
-                newParsingUnit.SetRecoveryMessage(string.Format("({0}, {1})", 
-                                                                                                Resource.RecoverWithPanicMode, 
-                                                                                                Resource.SkipToken));
-                blockToSkip._units.Add(newParsingUnit);
+                blockToSkip.AddItem(newParsingUnit);
+                blockToSkip.AddRecoveryMessageToLastHistory(string.Format("({0}, {1})",
+                                                                                                            Resource.RecoverWithPanicMode,
+                                                                                                            Resource.SkipToken));
 
                 var parsingErrInfo = ParsingErrorInfo.CreateParsingError(nameof(AlarmCodes.CE0001), 
                                                                                                     string.Format(AlarmCodes.CE0001, blockToSkip.Token.Input));
@@ -118,12 +118,10 @@ namespace Parse.FrontEnd.ErrorHandler
             // Else, the ParsingUnit of the current ParsingBlock may or may not be empty.
 
             var curBlock = parsingResult[seeingTokenIndex];
-            var seeingParsingUnit = parsingResult.AddUnitOnCurBlock(seeingTokenIndex);
-            seeingParsingUnit.SetRecoveryMessage(string.Format("({0}, {1})",
-                                                                                            Resource.RecoverWithPanicMode, 
+            curBlock.AddRecoveryMessageToLastHistory(string.Format("({0}, {1})",
+                                                                                            Resource.RecoverWithPanicMode,
                                                                                             Resource.TryAdjustStackWithThisToken));
 
-            curBlock._units.Add(seeingParsingUnit);
             curBlock._errorInfos.Add(ParsingErrorInfo.CreateParsingError(nameof(AlarmCodes.CE0003), 
                                                                                                     string.Format(AlarmCodes.CE0003, curBlock.Token)));
 
@@ -176,7 +174,7 @@ namespace Parse.FrontEnd.ErrorHandler
 
                     seeingParsingUnit.AfterStack = stackToProcess;
                     parser.BlockParsing(parsingResult, seeingTokenIndex);
-                    seeingBlock.Units.Last().SetRecoveryMessage(string.Format("({0})", Resource.RecoverySuccessed));
+                    seeingBlock.AddRecoveryMessageToLastHistory(string.Format("({0})", Resource.RecoverySuccessed));
 
                     var parsingErrorInfo = ParsingErrorInfo.CreateParsingError(nameof(AlarmCodes.CE0003),
                                                                                                             string.Format(AlarmCodes.CE0003, tokenData.Input));
@@ -190,13 +188,7 @@ namespace Parse.FrontEnd.ErrorHandler
             {
                 if(blockToRecover != null)
                 {
-                    var seeingParsingUnit = blockToRecover.Units.Last();
-                    var newUnit = new ParsingUnit(seeingParsingUnit.AfterStack)
-                    {
-                        InputValue = seeingParsingUnit.InputValue
-                    };
-                    newUnit.SetRecoveryMessage(string.Format("({0})", Resource.RecoveryFailed));
-                    blockToRecover._units.Add(newUnit);
+                    blockToRecover.AddRecoveryMessageToLastHistory(string.Format("({0})", Resource.RecoveryFailed));
                 }
 
                 return new ErrorHandlingResult(parsingResult, seeingTokenIndex, false);

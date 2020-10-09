@@ -7,12 +7,12 @@ namespace Parse.FrontEnd.Tokenize
     public class ParsingData
     {
         public IReadOnlyList<TokenData> Tokens => _tokens;
-        public TokenizeImpactRanges Ranges { get; }
+        public RangeList RangesToParse { get; }
 
 
-        public ParsingData(TokenizeImpactRanges ranges, IEnumerable<TokenData> tokens)
+        public ParsingData(RangeList ranges, IEnumerable<TokenData> tokens)
         {
-            Ranges = ranges;
+            RangesToParse = ranges;
             _tokens.AddRange(tokens);
         }
 

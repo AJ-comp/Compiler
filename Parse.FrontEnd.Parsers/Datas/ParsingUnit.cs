@@ -23,13 +23,10 @@ namespace Parse.FrontEnd.Parsers.Datas
         public TerminalSet PossibleTerminalSet { get; internal set; } = new TerminalSet();
 
 
-        public bool IsError { get; private set; } = false;
+        public bool IsError { get; set; } = false;
         public IErrorHandlable ErrorHandler { get; private set; }
         public string ErrorMessage { get; private set; } = string.Empty;
         public ErrorPosition ErrorPosition { get; private set; } = ErrorPosition.OnNormalToken;
-
-        public bool IsRecovery { get; private set; } = false;
-        public string RecoveryMessage { get; private set; } = string.Empty;
 
 
         /// <summary>
@@ -78,7 +75,8 @@ namespace Parse.FrontEnd.Parsers.Datas
             this.AfterStack = this.BeforeStack.Clone();
         }
 
-        public void ChangeToFailedState(IErrorHandlable errorHandler = null) => this.ChangeToFailedState("(" + Resource.CantShift + " " + this.PossibleTerminalSet + " " + Resource.MustCome + ")", errorHandler);
+        public void ChangeToFailedState(IErrorHandlable errorHandler = null) 
+            => this.ChangeToFailedState("(" + Resource.CantShift + " " + this.PossibleTerminalSet + " " + Resource.MustCome + ")", errorHandler);
 
         public void ChangeToFailedState(string errorMessage, IErrorHandlable errorHandler = null)
         {
@@ -95,22 +93,6 @@ namespace Parse.FrontEnd.Parsers.Datas
                 ErrorPosition = ErrorPosition.OnNormalToken;
             }
         }
-
-        public void SetRecoveryMessage(string recoveryMessage)
-        {
-            this.IsError = true;
-            this.IsRecovery = true;
-            this.RecoveryMessage = recoveryMessage;
-        }
-
-        public void ChangeToNormalState()
-        {
-            this.IsError = false;
-            this.IsRecovery = false;
-            this.ErrorHandler = null;
-            this.ErrorMessage = string.Empty;
-        }
-
 
 
         private string DebuggerDisplay

@@ -21,7 +21,7 @@ namespace Parse.WpfControls.SyntaxEditor
         }
 
 
-        private void Compiler_LexingCompleted(object sender, LexingResult e)
+        private void Compiler_LexingCompleted(object sender, LexingData e)
         {
             TextArea.RecentLexedData = e;
         }

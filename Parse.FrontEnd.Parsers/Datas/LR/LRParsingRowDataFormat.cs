@@ -2,13 +2,23 @@
 using Parse.FrontEnd.RegularGrammar;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using static Parse.FrontEnd.Parsers.Datas.LR.LRParsingRowDataFormat;
 
 namespace Parse.FrontEnd.Parsers.Datas.LR
 {
     public class LRParsingRowDataFormat : ParsingRowDataFormat<CanonicalItemSet, Symbol, Tuple<ActionDir, object>>
     {
-        public enum ActionDir { shift, reduce, epsilon_reduce, moveto, accept, failed }
+        public enum ActionDir 
+        {
+            [Description("shift")] shift,
+            [Description("reduce")] reduce,
+            [Description("epsilon reduce")] epsilon_reduce, 
+            [Description ("goto")] moveto,
+            [Description("accept")] accept,
+            [Description("not processed yet")] not_processed,
+            [Description("failed")] failed 
+        }
 
         public override TerminalSet PossibleTerminalSet
         {

@@ -13,24 +13,21 @@ namespace Parse.FrontEnd.Parsers.LR
         /// <param name="recoveryTokenInfos">The param is used when the units of the block must have multiple tokens</param>
         /// <returns></returns>
         public SuccessedKind RecoveryBlockParsing(ParsingBlock parsingBlock,
-                                                                        IReadOnlyList<ParsingRecoveryData> recoveryTokenInfos)
+                                                                        IEnumerable<ParsingRecoveryData> recoveryTokenInfos)
         {
             SuccessedKind result = SuccessedKind.NotApplicable;
             foreach (var recoveryInfo in recoveryTokenInfos)
             {
-                while (true)
+                // repeat while it is reduce or goto
+                do
                 {
-                    parsingBlock.AddItem();
+                    parsingBlock.AddItem(recoveryInfo.RecoveryToken);
                     var lastUnit = parsingBlock.Units.Last();
 
                     result = UnitParsing(lastUnit, recoveryInfo.RecoveryToken);
-                    if (result == SuccessedKind.NotApplicable) break;
 
-                    var newUnit = parsingBlock.Units.Last();
-                    newUnit.SetRecoveryMessage(recoveryInfo.RecoveryMessage); // Replace the message that may exist to the recovery message.
-
-                    if (result == SuccessedKind.Completed) break;
-                }
+                    parsingBlock.AddRecoveryMessageToLastHistory(recoveryInfo.RecoveryMessage);
+                } while (result == SuccessedKind.ReduceOrGoto);
 
                 if (result == SuccessedKind.NotApplicable) break;
             }

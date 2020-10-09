@@ -10,18 +10,14 @@ namespace Parse.FrontEnd.Tokenize
         /// </summary>
         /// <param name="data">The string data to lex</param>
         /// <returns></returns>
-        public LexingResult Lexing(string data)
+        public LexingData Lexing(string data)
         {
-            TokenStorage result = new TokenStorage(this._tokenPatternList);
+            LexingData result = new LexingData(this._tokenPatternList);
 
             var tokenCells = this._tokenizer.Tokenize(this._tokenizeRule, data);
-            foreach (var tCell in tokenCells) result._tokensToView.Add(tCell);
-            result.UpdateTableForAllPatterns();
+            result.InitToken(tokenCells);
 
-            TokenizeImpactRanges impactRanges = new TokenizeImpactRanges();
-            if (result._tokensToView.Count > 0) impactRanges.Add(new RangePair(new Range(-1, 0), new Range(0, result._tokensToView.Count)));
-
-            return new LexingResult(result, impactRanges);
+            return result;
         }
 
         /// <summary>
@@ -31,11 +27,11 @@ namespace Parse.FrontEnd.Tokenize
         /// <param name="dataToAdd">The data to add</param>
         /// <see cref="https://www.lucidchart.com/documents/edit/f4366425-61f9-4b4f-9abc-72ce4efe864c/ZYtDEhwbkIBA?beaconFlowId=53B1C199D7307981"/>
         /// <returns></returns>
-        public LexingResult Lexing(TokenStorage prevTokens, string dataToAdd)
+        public LexingData Lexing(LexingData prevTokens, string dataToAdd)
         {
             if (prevTokens == null) return this.Lexing(dataToAdd);
 
-            int offset = prevTokens.TokensToView.Count - 1;
+            int offset = prevTokens.TokensForView.Count - 1;
             return this.Lexing(prevTokens, offset, dataToAdd);
         }
 
@@ -47,10 +43,10 @@ namespace Parse.FrontEnd.Tokenize
         /// <param name="dataToAdd">The data to add</param>
         /// <see cref="https://www.lucidchart.com/documents/edit/f4366425-61f9-4b4f-9abc-72ce4efe864c/ZYtDEhwbkIBA?beaconFlowId=53B1C199D7307981"/>
         /// <returns></returns>
-        public LexingResult Lexing(TokenStorage prevTokens, int offset, string dataToAdd)
+        public LexingData Lexing(LexingData prevTokens, int offset, string dataToAdd)
         {
             if (prevTokens == null) return this.Lexing(dataToAdd);
-            if (prevTokens.TokensToView.Count == 0) return this.Lexing(dataToAdd);
+            if (prevTokens.TokensForView.Count == 0) return this.Lexing(dataToAdd);
 
             //            TokenStorage result = prevTokens.Clone() as TokenStorage;
 
@@ -59,12 +55,12 @@ namespace Parse.FrontEnd.Tokenize
 
             if (curTokenIndex == -1)
             {
-                TokenCell token = prevTokens.TokensToView[0];
+                TokenCell token = prevTokens.TokensForView[0];
                 return this.TokenizeAfterReplace(prevTokens, 0, token.MergeString(offset, dataToAdd, RecognitionWay.Front));
             }
             else
             {
-                TokenCell token = prevTokens.TokensToView[curTokenIndex];
+                TokenCell token = prevTokens.TokensForView[curTokenIndex];
                 return this.TokenizeAfterReplace(prevTokens, curTokenIndex, token.MergeString(offset, dataToAdd, recognitionWay));
             }
         }
@@ -81,11 +77,11 @@ namespace Parse.FrontEnd.Tokenize
         /// <param name="replaceIndex"></param>
         /// <param name="mergeString"></param>
         /// <returns></returns>
-        private LexingResult TokenizeAfterReplace(TokenStorage targetStorage, int replaceIndex, string mergeString)
+        private LexingData TokenizeAfterReplace(LexingData targetStorage, int replaceIndex, string mergeString)
         {
             var impactRange = targetStorage.FindImpactRange(replaceIndex);
 
-            TokenStorage cloneStorage = targetStorage.Clone() as TokenStorage;
+//            TokenStorage cloneStorage = targetStorage.Clone();
             var firstString = targetStorage.GetMergeStringOfRange(new Range(impactRange.StartIndex, replaceIndex - impactRange.StartIndex));
             var lastString = targetStorage.GetMergeStringOfRange(new Range(replaceIndex + 1, impactRange.EndIndex - replaceIndex));
             mergeString = firstString + mergeString + lastString;
@@ -93,8 +89,9 @@ namespace Parse.FrontEnd.Tokenize
             // If a basisIndex is used then it can increase the performance of the ReplaceToken function because of need not arrange.
             // But the logic is not written yet.
             var tokenList = this._tokenizer.Tokenize(this._tokenizeRule, mergeString);
-            cloneStorage.ReplaceToken(impactRange, tokenList);
-            var rangePairToRegist = new RangePair(impactRange, new Range(impactRange.StartIndex, tokenList.Count));
+            targetStorage.ReplaceToken(impactRange, tokenList);
+
+            return targetStorage;
 
             /// The comment can include all tokens therefore if a comment exists the process is performed as below.
             /// ex : void main()\r\n{}\r\n -> void main(/*)\r\n{}\r\n
@@ -104,6 +101,8 @@ namespace Parse.FrontEnd.Tokenize
             ///       process 2 : "void", " ", "main", "(", "/*)\r\n", "{", "}", "\r", "\n" -> The tokens in the impact range.
             ///                        "void main(/*)\r\n{}\r\n"                                     -> The string that merged.
             ///                        "void", " ", "main", "(", "/*)\r\n{}\r\n"                   -> The tokens after splite.
+
+            /*
             while (true)
             {
                 var impactRangeToParse = cloneStorage.FindImpactRange(rangePairToRegist.Item1.StartIndex, rangePairToRegist.Item1.EndIndex);
@@ -113,15 +112,9 @@ namespace Parse.FrontEnd.Tokenize
 
                 if (beforeTokens.IsEqual(processedTokens)) break;
                 cloneStorage.ReplaceToken(impactRangeToParse, processedTokens);
-                rangePairToRegist = new RangePair(impactRangeToParse, new Range(impactRangeToParse.StartIndex, processedTokens.Count));
+                rangePairToRegist = new RangePair(impactRange, new Range(impactRangeToParse.StartIndex, processedTokens.Count));
             }
-
-            TokenizeImpactRanges ranges = new TokenizeImpactRanges
-            {
-                rangePairToRegist
-            };
-
-            return new LexingResult(cloneStorage, ranges);
+            */
         }
     }
 }

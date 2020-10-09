@@ -20,11 +20,12 @@ namespace Parse
         }
 
         /// <summary>
-        /// This function judgment whether a parameter range includes in this range.
+        /// This function judgment whether a parameter range is included in this range.
         /// </summary>
         /// <param name="range">The range to compare</param>
         /// <returns>returns true if be included else false</returns>
         public bool IsInclude(Range range) => (this.StartIndex <= range.StartIndex && this.EndIndex >= range.EndIndex);
+        public bool IsInclude(int index) => (StartIndex <= index && EndIndex >= index);
 
         /// <summary>
         /// This function judgment whether a parameter range intersects with this range.
@@ -156,7 +157,7 @@ namespace Parse
         /// This function returns a mergeable index block list.
         /// </summary>
         /// <returns>A mergeable index block list</returns>
-        private List<List<int>> GetMergeableIndexBlockList()
+        private IEnumerable<IEnumerable<int>> GetMergeableIndexBlockList()
         {
             // ex return shape : {0,1},{2},{3,4,5}
             List<List<int>> result = new List<List<int>>();

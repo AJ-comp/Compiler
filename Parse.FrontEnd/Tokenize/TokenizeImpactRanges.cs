@@ -1,10 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Parse.FrontEnd.Tokenize
 {
     public class TokenizeImpactRanges : List<RangePair>, ICloneable<TokenizeImpactRanges>
     {
+        public bool IsInclude(int index)
+        {
+            bool result = false;
+
+            Parallel.For(0, Count, (i, state) =>
+            {
+                if (this[i].Item2.IsInclude(index))
+                {
+                    result = true;
+                    state.Stop();
+                }
+            });
+
+            return result;
+        }
+
         /// PrevRange : CurRange
         /// The following property pair means PrevRange : CurRange
         /// Therefore the start index of PrevRange equals the start index of CurRagne.

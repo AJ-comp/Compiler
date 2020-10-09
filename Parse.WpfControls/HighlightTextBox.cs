@@ -235,7 +235,7 @@ namespace Parse.WpfControls
             for (int i = startLine; i < maxCnt; i++)
             {
                 LineHighlightText lineString = new LineHighlightText();
-                var tokens = RecentLexedData.TokenStorage.GetTokensForLine(i);
+                var tokens = RecentLexedData.GetTokensForLine(i);
 
                 foreach (var token in tokens)
                 {
@@ -255,10 +255,10 @@ namespace Parse.WpfControls
         /// <returns></returns>
         private HighlightToken ConvertToHighlightToken(TokenCell tokenInfo)
         {
-            return this.ConvertToHighlightToken(tokenInfo.Data, tokenInfo.PatternInfo.OriginalPattern, (DrawOption)tokenInfo.ValueOptionData);
+            return this.ConvertToHighlightToken(tokenInfo.Data, tokenInfo.PatternInfo.OriginalPattern, (DrawingOption)tokenInfo.ValueOptionData);
         }
 
-        private HighlightToken ConvertToHighlightToken(string text, string pattern, DrawOption status)
+        private HighlightToken ConvertToHighlightToken(string text, string pattern, DrawingOption status)
         {
             Brush foreBrush = this.DefaultTextBrush;
             if (this.textStyleDic.ContainsKey(pattern))
@@ -271,11 +271,11 @@ namespace Parse.WpfControls
                 LineHeight = this.LineHeight
             };
 
-            if ((status & DrawOption.Selected) == DrawOption.Selected)
+            if ((status & DrawingOption.Selected) == DrawingOption.Selected)
                 ft.AppearanceInfo.Selected = true;
             else ft.AppearanceInfo.Selected = false;
 
-            if ((status & DrawOption.Underline) == DrawOption.Underline)
+            if ((status & DrawingOption.Underline) == DrawingOption.Underline)
                 ft.AppearanceInfo.UnderLine = true;
             else ft.AppearanceInfo.UnderLine = false;
 

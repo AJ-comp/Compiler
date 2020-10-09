@@ -5,18 +5,17 @@ using System.Threading.Tasks;
 
 namespace Parse.FrontEnd.Tokenize
 {
-    public partial class TokenStorage : ICloneable
+    public partial class LexingData
     {
-        public IEnumerable<int> LineIndexes
+        public IEnumerable<int> LineIndexesForCaret
         {
             get
             {
                 List<int> result = new List<int> { 0 };
 
-                Parallel.ForEach(TokensToView, (token) =>
+                Parallel.ForEach(_lineIndexer, (tokenIndex) =>
                 {
-                    if (token.Data == "\n")
-                        result.Add(token.StartIndex);
+                    result.Add(TokensForView[tokenIndex].StartIndex);
                 });
 
                 result.Sort();
@@ -26,45 +25,21 @@ namespace Parse.FrontEnd.Tokenize
         }
 
 
-        /// <summary>
-        /// This function returns a index of first token on line index. (in other words this function returns the token index after "\n".)
-        /// if "\r" or "\n" token is after "\n" it is useless token. item2 = 0
-        /// </summary>
-        /// <param name="lineIndex"></param>
-        /// <returns></returns>
-        public IEnumerable<Tuple<int, int>> TokenIndexByLine
+        private void InitAllPatternsTable()
         {
-            get
+            _lineIndexer.Clear();
+
+            Parallel.For(0, _tokensForView.Count, i =>
             {
-                if (_tokenIndexByLine.Count > 0) return _tokenIndexByLine;
+                var token = _tokensForView[i];
 
-                var list = FirstTokenIndexOnLine;
+                if (token.Data != "\n") return;
 
-                // convert
-                int offset = 0;
-                for (int i = 0; i < list.Count; i++)
-                {
-                    var current = list[i];
+                lock (_lineIndexer)
+                    _lineIndexer.Add(i);
+            });
 
-                    int count = 0;
-                    if (current.Item2)
-                    {
-                        var to = list[i].Item1;
-                        count = to - offset - 1;
-                    }
-                    _tokenIndexByLine.Add(new Tuple<int, int>(offset, count));
-                    offset = current.Item1 + 1;
-
-                    // if there is a line that "\n" is not included (real last line)
-                    if (i == list.Count - 1 && current.Item2)
-                    {
-                        count = TokensToView.Count - offset;
-                        _tokenIndexByLine.Add(new Tuple<int, int>(offset, count));
-                    }
-                }
-
-                return _tokenIndexByLine;
-            }
+            _lineIndexer.Sort();
         }
 
 
@@ -75,17 +50,26 @@ namespace Parse.FrontEnd.Tokenize
         /// <returns></returns>
         public IEnumerable<TokenCell> GetTokensForLine(int lineIndex)
         {
-            var list = TokenIndexByLine;
-
             var result = new List<TokenCell>();
-            if (lineIndex >= list.Count()) return result;
+            if (lineIndex > _lineIndexer.Count) return result;
 
-            var range = list.ElementAt(lineIndex);
-            if (range.Item2 <= 0) return result;
+            // get tokens of last line
+            if (lineIndex == _lineIndexer.Count)
+            {
+                // check if last line is 0
+                // example 
+                // if line count is 1 (last line index is 0) get tokens from 0 ~ to TokensToView.Count.
+                // else line count is 2 more (last line index is not 0) get tokens from last line token ~ to TokensToView.Count.
+                var fromIndex = (_lineIndexer.Count == 0) ? 0 : _lineIndexer.Last() + 1;
+                for (int i = fromIndex; i < TokensForView.Count; i++) result.Add(TokensForView[i]);
+            }
+            else
+            {
+                var fromIndex = (lineIndex == 0) ? 0 : _lineIndexer[lineIndex - 1] + 1;
+                var toIndex = _lineIndexer[lineIndex];
 
-            int to = range.Item1 + range.Item2;
-            for (int i = range.Item1; i < to; i++)
-                result.Add(TokensToView[i]);
+                for (int i = fromIndex; i < toIndex; i++) result.Add(TokensForView[i]);
+            }
 
             return result;
         }
@@ -110,12 +94,12 @@ namespace Parse.FrontEnd.Tokenize
 
         public int GetLineIndex(int tokenIndex)
         {
-            if (tokenIndex >= TokensToView.Count) return -1;
+            if (tokenIndex >= TokensForView.Count) return -1;
 
             int result = 0;
             Parallel.For(0, tokenIndex, (i) =>
             {
-                if (TokensToView[i].Data == "\n") result++;
+                if (TokensForView[i].Data == "\n") result++;
             });
 
             return result;
@@ -130,7 +114,7 @@ namespace Parse.FrontEnd.Tokenize
             int lineStartIndex = 0;
             for (int i = tokenIndex; i >= 0; i--)
             {
-                if (TokensToView[tokenIndex].Data == "\n") lineStartIndex = i;
+                if (TokensForView[tokenIndex].Data == "\n") lineStartIndex = i;
             }
 
             return tokenIndex - lineStartIndex;
@@ -168,9 +152,9 @@ namespace Parse.FrontEnd.Tokenize
         {
             int index = -1;
 
-            Parallel.For(0, this._tokensToView.Count, (i, loopState) =>
+            Parallel.For(0, this._tokensForView.Count, (i, loopState) =>
             {
-                TokenCell tokenInfo = this._tokensToView[i];
+                TokenCell tokenInfo = this._tokensForView[i];
 
                 if (tokenInfo.Contains(offset, recognWay))
                 {
@@ -223,10 +207,10 @@ namespace Parse.FrontEnd.Tokenize
             {
                 List<Tuple<int, bool>> result = new List<Tuple<int, bool>>();
 
-                Parallel.For(0, TokensToView.Count, i =>
+                Parallel.For(0, TokensForView.Count, i =>
                 {
-                    var token = TokensToView[i];
-                    bool isLast = (i == TokensToView.Count - 1);
+                    var token = TokensForView[i];
+                    bool isLast = (i == TokensForView.Count - 1);
 
                     if (token.Data != "\n") return;
 
@@ -238,7 +222,7 @@ namespace Parse.FrontEnd.Tokenize
                     }
 
                     // the token is "\n" after "\n" (useless token)
-                    var nextToken = TokensToView[i + 1];
+                    var nextToken = TokensForView[i + 1];
                     if (nextToken.Data == "\n")
                     {
                         lock (result) result.Add(new Tuple<int, bool>(i, false));
@@ -256,6 +240,7 @@ namespace Parse.FrontEnd.Tokenize
         }
 
 
+        private List<int> _lineIndexer = new List<int>();
         private List<Tuple<int, int>> _tokenIndexByLine = new List<Tuple<int, int>>();
     }
 }

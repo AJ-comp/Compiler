@@ -5,7 +5,7 @@ using System.ComponentModel;
 namespace Parse
 {
     [Flags]
-    public enum DrawOption { None = 0, Underline = 1, EndPointUnderline = 2, Selected = 4 }
+    public enum DrawingOption { None = 0, Underline = 1, EndPointUnderline = 2, Selected = 4 }
 
     public abstract class TokenType
     {
@@ -39,6 +39,13 @@ namespace Parse
                 }
             }
         }
+
+        /*
+        public bool IsDirectedLine(TokenType tokenType)
+        {
+            if(this is tokenType)
+        }
+        */
 
         public static Keyword Keyword
         {

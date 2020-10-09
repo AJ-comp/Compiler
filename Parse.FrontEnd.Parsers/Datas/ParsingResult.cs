@@ -19,16 +19,16 @@ namespace Parse.FrontEnd.Parsers.Datas
         public bool Success
         {
             get; internal set;
-                /*
-            {
-                if (this.Count == 0) return false;
+            /*
+        {
+            if (this.Count == 0) return false;
 
-                var lastUnit = this.Last().Units.Last();
-                if (lastUnit == null) return false;
+            var lastUnit = this.Last().Units.Last();
+            if (lastUnit == null) return false;
 
-                return (lastUnit.Action.Direction == ActionDir.accept) ? true : false;
-            }
-            */
+            return (lastUnit.Action.Direction == ActionDir.accept) ? true : false;
+        }
+        */
         }
 
         public bool HasError
@@ -39,8 +39,8 @@ namespace Parse.FrontEnd.Parsers.Datas
 
                 Parallel.ForEach(this, (block, loopOption) =>
                 {
-//                    if (block.ErrorUnits.Count > 0)
-                    if(block.ErrorInfos.Count > 0)
+                    //                    if (block.ErrorUnits.Count > 0)
+                    if (block.ErrorInfos.Count > 0)
                     {
                         result = true;
                         loopOption.Stop();
@@ -75,20 +75,17 @@ namespace Parse.FrontEnd.Parsers.Datas
 
                 foreach (var block in this)
                 {
-                    foreach(var record in block.Units)
+                    foreach (var record in block.History)
                     {
-                        // InputValue value is null or InputValue.Kind is null means that a token is not target to parsing. (ex : " ", "\r", "\n", etc)
-                        if (record.InputValue == null || record.InputValue.Kind == null) continue;
-
-                        var param1 = Convert.ToString(record.BeforeStack.Stack.Reverse(), " ");
-                        var param2 = record.InputValue.ToString();
-                        var param3 = record.Action.ToString() + " ";
+                        var param1 = Convert.ToString(record.Unit.BeforeStack.Stack.Reverse(), " ");
+                        var param2 = record.Unit.InputValue?.ToString();
+                        var param3 = record.Unit.Action.ToString() + " ";
                         var param4 = record.RecoveryMessage;
-                        var param5 = Convert.ToString(record.AfterStack.Stack.Reverse(), " ");
+                        var param5 = Convert.ToString(record.Unit.AfterStack.Stack.Reverse(), " ");
 
-                        if (record.IsError) param3 += record.ErrorMessage;
-//                        else if (record.Action.Direction != ActionDir.accept)
-//                            param3 += (record.Action.Dest is NonTerminalSingle) ? (record.Action.Dest as NonTerminalSingle).ToGrammarString() : string.Empty;
+                        if (record.Unit.IsError) param3 += record.Unit.ErrorMessage;
+                        //                        else if (record.Action.Direction != ActionDir.accept)
+                        //                            param3 += (record.Action.Dest is NonTerminalSingle) ? (record.Action.Dest as NonTerminalSingle).ToGrammarString() : string.Empty;
 
                         this.AddRow(result, param1, param2, param3, param4, param5);
                     }
@@ -104,6 +101,7 @@ namespace Parse.FrontEnd.Parsers.Datas
             {
                 ParseTreeSymbol result = null;
                 if (this.Success == false) return result;
+                if (this.Count == 0) return result;
 
                 return this.Last().Units.Last().AfterStack.Stack.SecondItemPeek() as ParseTreeSymbol;
             }
@@ -158,7 +156,7 @@ namespace Parse.FrontEnd.Parsers.Datas
             var prevBlock = this.GetFrontBlock(blockIndex);
             var curBlock = this[blockIndex];
 
-            ParsingUnit result = (curBlock.Units.Count > 0) ? new ParsingUnit(curBlock.Units.Last().AfterStack) : 
+            ParsingUnit result = (curBlock.Units.Count > 0) ? new ParsingUnit(curBlock.Units.Last().AfterStack) :
                                             (prevBlock == null) ? ParsingUnit.FirstParsingUnit : new ParsingUnit(prevBlock.Units.Last().AfterStack);
             result.InputValue = this[blockIndex].Token;
 
@@ -172,25 +170,53 @@ namespace Parse.FrontEnd.Parsers.Datas
         /// <returns></returns>
         public ParsingBlock GetFrontBlock(int index) => (index <= 0) ? null : this[index - 1];
 
-        /// <summary>
-        /// This function returns ParsingBlock that can be parsing and exist anterior from the block of the current index.
-        /// </summary>
-        /// <param name="index"></param>
-        /// <returns></returns>
-        public ParsingBlock GetFrontBlockCanParse(int index)
+        public TokenData GetBeforeTokenData(int stdBlockIndex, int indexToGet)
         {
-            ParsingBlock result = null;
-            if (index <= 0) return result;
-
-            for (int i = index - 1; i >= 0; i--)
+            try
             {
-                if (this[i].Token.Kind == null) continue;
+                TokenData result = null;
+                var curBlock = GetRealBlock(stdBlockIndex--);
 
-                result = this[i];
-                break;
+                while(true)
+                {
+                    var tokenList = curBlock.UnitTokenList.Reverse();
+
+                    if (tokenList.Count() <= indexToGet)
+                    {
+                        indexToGet -= tokenList.Count();
+                        curBlock = GetRealBlock(stdBlockIndex--);
+                    }
+                    else
+                    {
+                        result = tokenList.ElementAt(indexToGet);
+                        break;
+                    }
+                }
+
+                return result;
             }
+            catch
+            {
+                return null;
+            }
+        }
 
-            return result;
+        public ParsingBlock GetRealBlock(int blockIndex)
+        {
+            try
+            {
+                ParsingBlock curBlock = null;
+                do
+                {
+                    curBlock = this[blockIndex--];
+                } while (curBlock.IsIgnore);
+
+                return curBlock;
+            }
+            catch
+            {
+                return null;
+            }
         }
 
         public object Clone() => new ParsingResult(this) { Success = this.Success };

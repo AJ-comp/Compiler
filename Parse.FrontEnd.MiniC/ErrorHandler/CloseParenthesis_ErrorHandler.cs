@@ -3,8 +3,8 @@ using Parse.FrontEnd.Grammars;
 using Parse.FrontEnd.Grammars.MiniC;
 using Parse.FrontEnd.Parsers;
 using Parse.FrontEnd.Parsers.Datas;
-using Parse.FrontEnd.Parsers.LR;
-using Parse.FrontEnd.Tokenize;
+using Parse.FrontEnd.RegularGrammar;
+using System.Collections.Generic;
 
 namespace Parse.FrontEnd.MiniC.ErrorHandler
 {
@@ -18,20 +18,27 @@ namespace Parse.FrontEnd.MiniC.ErrorHandler
         private static ErrorHandlingResult ErrorHandlingLogic(MiniCGrammar grammar, int ixIndex, Parser parser, ParsingResult parsingResult, int seeingTokenIndex)
         {
             /// Here, someone has to add error handling logic for ixIndex.
-            if (ixIndex == 0)
-                ;
-            else if(ixIndex == 12)
-            {
-                var virtualToken = new TokenData(MiniCGrammar.Ident, new TokenCell(-1, "temp", null), true);
-                var frontBlock = parsingResult.GetFrontBlockCanParse(seeingTokenIndex);
-                var blockParsingResult = GrammarPrivateLRErrorHandler.InsertVirtualToken(ixIndex, parser, frontBlock, parsingResult[seeingTokenIndex], virtualToken);
+            var prevToken = (seeingTokenIndex > 0) ? parsingResult.GetBeforeTokenData(seeingTokenIndex, 1) : null;
+            var curBlock = parsingResult[seeingTokenIndex];
+            curBlock.RemoveLastToken();
 
-                return (blockParsingResult == LRParser.SuccessedKind.NotApplicable) ?
-                    new ErrorHandlingResult(parsingResult, seeingTokenIndex, false) : new ErrorHandlingResult(parsingResult, seeingTokenIndex, true);
-            }
+            if (prevToken == null) return RecoveryWithDelCurToken(ixIndex, parsingResult, seeingTokenIndex);
+            if (prevToken.Kind.TokenType == TokenType.Keyword.DefinedDataType)
+                return DefiendDataTypeErrorHandler(grammar, ixIndex, parser, parsingResult, seeingTokenIndex);
+
 
 
             return DefaultErrorHandler.Process(grammar, parser, parsingResult, seeingTokenIndex);
+        }
+
+
+        private static ErrorHandlingResult DefiendDataTypeErrorHandler(MiniCGrammar grammar, int ixIndex, Parser parser, 
+                                                                                                    ParsingResult parsingResult, int seeingTokenIndex)
+        {
+            List<Terminal[]> param = new List<Terminal[]>();
+            param.Add(new Terminal[] { MiniCGrammar.Ident });
+
+            return TryRecovery(param, ixIndex, parser, parsingResult, seeingTokenIndex);
         }
 
         public override ErrorHandlingResult Call(Parser parser, ParsingResult parsingResult, int seeingTokenIndex)

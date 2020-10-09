@@ -48,7 +48,16 @@ namespace ApplicationLayer.Common.Utilities
             List<Assembly> result = new List<Assembly>();
 
             foreach (var fileName in referencedPaths)
-                result.Add(Assembly.Load(AssemblyName.GetAssemblyName(fileName)));
+            {
+                try
+                {
+                    result.Add(Assembly.Load(AssemblyName.GetAssemblyName(fileName)));
+                }
+                catch
+                {
+
+                }
+            }
 
             return result;
         }

@@ -151,20 +151,20 @@ namespace Parse.WpfControls.SyntaxEditor
                 if (block.Token.Kind == null) return;
                 if (block.ErrorInfos.Count == 0)
                 {
-                    block.Token.TokenCell.ValueOptionData = DrawOption.None;
+                    block.Token.TokenCell.ValueOptionData = DrawingOption.None;
                     return;
                 }
 
                 var errToken = block.Token;
 
-                DrawOption status = DrawOption.None;
+                DrawingOption status = DrawingOption.None;
                 if (errToken.TokenCell.ValueOptionData != null)
-                    status = (DrawOption)errToken.TokenCell.ValueOptionData;
+                    status = (DrawingOption)errToken.TokenCell.ValueOptionData;
 
                 if (errToken.Kind == new EndMarker())
-                    status |= DrawOption.EndPointUnderline;
+                    status |= DrawingOption.EndPointUnderline;
                 else
-                    status |= DrawOption.Underline;
+                    status |= DrawingOption.Underline;
 
                 errToken.TokenCell.ValueOptionData = status;
 

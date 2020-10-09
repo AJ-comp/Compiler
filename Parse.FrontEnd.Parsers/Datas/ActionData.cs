@@ -4,7 +4,7 @@ namespace Parse.FrontEnd.Parsers.Datas
 {
     public class ActionData
     {
-        public ActionDir Direction { get; internal set; } = ActionDir.failed;
+        public ActionDir Direction { get; internal set; } = ActionDir.not_processed;
         public object Dest { get; internal set; } = null;
 
         public ActionData() { }
@@ -19,7 +19,7 @@ namespace Parse.FrontEnd.Parsers.Datas
         {
             var destString = (Dest == null) ? "null" : Dest.ToString();
 
-            return string.Format("{0} {1}", Direction.ToString(), destString);
+            return string.Format("{0} {1}", Helper.GetEnumDescription(Direction), destString);
         }
     }
 }

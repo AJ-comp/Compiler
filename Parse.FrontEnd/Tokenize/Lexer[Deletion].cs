@@ -5,30 +5,23 @@ namespace Parse.FrontEnd.Tokenize
 {
     public partial class Lexer
     {
-        public LexingResult Lexing(TokenStorage targetStorage, SelectionTokensContainer delInfos, string replaceString)
+        public LexingData Lexing(LexingData targetStorage, SelectionTokensContainer delInfos, string replaceString)
         {
 //            if (delInfos.IsEmpty()) return targetStorage;
 //            if (replaceString.Length == 0) return targetStorage;
 
-            TokenStorage result = targetStorage.Clone() as TokenStorage;
-
             var indexInfo = delInfos.Range;
-            var impactRange = result.FindImpactRange(indexInfo.StartIndex, indexInfo.EndIndex);
-            string mergeString = this.GetImpactedStringFromDelInfo(result, delInfos, replaceString);
+            var impactRange = targetStorage.FindImpactRange(indexInfo.StartIndex, indexInfo.EndIndex);
+            string mergeString = this.GetImpactedStringFromDelInfo(targetStorage, delInfos, replaceString);
 
             var toInsertTokens = this._tokenizer.Tokenize(this._tokenizeRule, mergeString);
-            result.ReplaceToken(impactRange, toInsertTokens);
+            targetStorage.ReplaceToken(impactRange, toInsertTokens);
 
-            TokenizeImpactRanges ranges = new TokenizeImpactRanges
-            {
-                new RangePair(impactRange, new Range(impactRange.StartIndex, toInsertTokens.Count))
-            };
-
-            return new LexingResult(result, ranges);
+            return targetStorage;
         }
 
 
-        public LexingResult Lexing(TokenStorage targetStorage, int offset, int len)
+        public LexingData Lexing(LexingData targetStorage, int offset, int len)
         {
             var delInfos = GetSelectionTokenInfos(targetStorage, offset, len);
 
@@ -45,10 +38,8 @@ namespace Parse.FrontEnd.Tokenize
         /// <param name="targetStorage"></param>
         /// <param name="delInfos"></param>
         /// /// <returns></returns>
-        public LexingResult Lexing(TokenStorage targetStorage, SelectionTokensContainer delInfos)
+        public LexingData Lexing(LexingData targetStorage, SelectionTokensContainer delInfos)
         {
-            TokenStorage result = targetStorage.Clone() as TokenStorage;
-
             ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             // The following process needs because of the following.
             // Ex 1 : void main()A
@@ -65,19 +56,14 @@ namespace Parse.FrontEnd.Tokenize
             //       6. The deletion result is "void", " ", "main", "{", "}".
 
             var indexInfo = delInfos.Range;
-            var impactRange = result.FindImpactRange(indexInfo.StartIndex, indexInfo.EndIndex);
-            string mergeString = this.GetImpactedStringFromDelInfo(result, delInfos);
+            var impactRange = targetStorage.FindImpactRange(indexInfo.StartIndex, indexInfo.EndIndex);
+            string mergeString = this.GetImpactedStringFromDelInfo(targetStorage, delInfos);
 
             var toInsertTokens = this._tokenizer.Tokenize(this._tokenizeRule, mergeString);
-            result.ReplaceToken(impactRange, toInsertTokens);
-
-            TokenizeImpactRanges tokenizeRanges = new TokenizeImpactRanges
-            {
-                new RangePair(impactRange, new Range(impactRange.StartIndex, toInsertTokens.Count))
-            };
+            targetStorage.ReplaceToken(impactRange, toInsertTokens);
             ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-            return new LexingResult(result, tokenizeRanges);
+            return targetStorage;
 
             // The Rectangle Deletion operation need to write other algorithm also the algorithm will very complicate so I don't write it yet.
             // (The above data struct can be used on the Rectangle Deletion operation.)
@@ -88,16 +74,16 @@ namespace Parse.FrontEnd.Tokenize
         /// This function returns a selected information.
         /// </summary>
         /// <returns></returns>
-        private SelectionTokensContainer GetSelectionTokenInfos(TokenStorage targetStorage, int offset, int len)
+        private SelectionTokensContainer GetSelectionTokenInfos(LexingData targetStorage, int offset, int len)
         {
             SelectionTokensContainer result = new SelectionTokensContainer();
             if (len <= 0) return result;
 
             int endOffset = offset + len;
 
-            Parallel.For(0, targetStorage.TokensToView.Count, (i, loopOption) =>
+            Parallel.For(0, targetStorage.TokensForView.Count, (i, loopOption) =>
             {
-                var token = targetStorage.TokensToView[i];
+                var token = targetStorage.TokensForView[i];
                 // If whole of the token is contained -> reserve delete
                 if (token.MoreRange(offset, endOffset))
                 {

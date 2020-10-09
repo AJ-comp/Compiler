@@ -7,7 +7,7 @@ namespace Parse.FrontEnd.MiniC
 {
     public class TotalData
     {
-        public TotalData(string originalData, string replacedData, LexingResult lexedData, ParsingResult parsedData)
+        public TotalData(string originalData, string replacedData, LexingData lexedData, ParsingResult parsedData)
         {
             OriginalData = originalData;
             ReplacedData = replacedData;
@@ -18,7 +18,7 @@ namespace Parse.FrontEnd.MiniC
         public string OriginalData { get; }
         public string ReplacedData { get; }
 
-        public LexingResult LexedData { get; }
+        public LexingData LexedData { get; }
         public ParsingResult ParsedData { get; }
         public MiniCNode RootNode { get; set; }
     }

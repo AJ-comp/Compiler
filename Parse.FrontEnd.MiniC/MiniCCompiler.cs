@@ -19,7 +19,7 @@ namespace Parse.FrontEnd.MiniCParser
         public Grammar Grammar => _miniC;
 
         public event EventHandler<string> ReplaceByMacroCompleted;
-        public event EventHandler<LexingResult> LexingCompleted;
+        public event EventHandler<LexingData> LexingCompleted;
         public event EventHandler<ParsingResult> ParsingCompleted;
         public event EventHandler<SemanticAnalysisResult> SemanticAnalysisCompleted;
 
@@ -50,7 +50,7 @@ namespace Parse.FrontEnd.MiniCParser
             LexingCompleted?.Invoke(this, lexingData);
 
             // parsing
-            var parsingResult = _parser.Parsing(lexingData.TokenStorage.TokensToView);
+            var parsingResult = _parser.Parsing(lexingData.TokensForParsing);
             ParsingCompleted?.Invoke(this, parsingResult);
 
             if (_docTable.ContainsKey(path))
@@ -67,7 +67,7 @@ namespace Parse.FrontEnd.MiniCParser
             var data = totalData.OriginalData.Insert(addOffset, addData);
 
             // lexing
-            var lexingData = _lexer.Lexing(totalData.LexedData.TokenStorage, addOffset, addData);
+            var lexingData = _lexer.Lexing(totalData.LexedData, addOffset, addData);
             LexingCompleted?.Invoke(this, lexingData);
 
             // parsing
@@ -86,7 +86,7 @@ namespace Parse.FrontEnd.MiniCParser
             var data = totalData.OriginalData.Remove(delOffset, delLen);
 
             // lexing
-            var lexingData = _lexer.Lexing(totalData.LexedData.TokenStorage, delOffset, delLen);
+            var lexingData = _lexer.Lexing(totalData.LexedData, delOffset, delLen);
             LexingCompleted?.Invoke(this, lexingData);
 
             // parsing

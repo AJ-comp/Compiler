@@ -16,10 +16,16 @@ namespace Parse.FrontEnd.MiniC.ErrorHandler
         private static ErrorHandlingResult ErrorHandlingLogic(MiniCGrammar grammar, int ixIndex, Parser parser, ParsingResult parsingResult, int seeingTokenIndex)
         {
             /// Here, someone has to add error handling logic for ixIndex.
-            if (ixIndex == 0)
-                return GrammarPrivateLRErrorHandler.DelCurToken(ixIndex, parsingResult, seeingTokenIndex);
-            else if (ixIndex == 107)
-                return GrammarPrivateLRErrorHandler.DelCurToken(ixIndex, parsingResult, seeingTokenIndex);
+            var prevToken = (seeingTokenIndex > 0) ? parsingResult.GetBeforeTokenData(seeingTokenIndex, 1) : null;
+            var curBlock = parsingResult[seeingTokenIndex];
+            curBlock.RemoveLastToken();
+
+            // 'if' at start of file
+            if (prevToken == null) return RecoveryWithDelCurToken(ixIndex, parsingResult, seeingTokenIndex);
+            // (void | char | short | int | ... ) 'if'
+            else if (prevToken.Kind.TokenType is Keyword) return RecoveryWithDelCurToken(ixIndex, parsingResult, seeingTokenIndex);
+            // 'ident' 'if'
+            else if (prevToken.Kind == MiniCGrammar.Ident) return RecoveryWithDelCurToken(ixIndex, parsingResult, seeingTokenIndex);
 
             return DefaultErrorHandler.Process(grammar, parser, parsingResult, seeingTokenIndex);
         }

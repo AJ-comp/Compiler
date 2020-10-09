@@ -151,6 +151,15 @@ namespace Parse.FrontEnd.Parsers.Properties {
         }
         
         /// <summary>
+        ///   Rollback as much as {0} count because can&apos;t shift.과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string RemoveParsingUnits {
+            get {
+                return ResourceManager.GetString("RemoveParsingUnits", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   replace to a virtual token : {0}과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string ReplaceVirtualToken {

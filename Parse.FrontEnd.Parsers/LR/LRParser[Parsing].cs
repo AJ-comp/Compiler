@@ -1,6 +1,7 @@
 ﻿using Parse.FrontEnd.Parsers.Datas;
 using Parse.FrontEnd.RegularGrammar;
 using System.Linq;
+using static Parse.FrontEnd.Parsers.Datas.LR.LRParsingRowDataFormat;
 
 namespace Parse.FrontEnd.Parsers.LR
 {
@@ -49,12 +50,6 @@ namespace Parse.FrontEnd.Parsers.LR
             unit.CopyBeforeStackToAfterStack();
 
             // filtering
-            if (seeingToken.Kind == null)
-            {
-                unit.InputValue = seeingToken;
-
-                return SuccessedKind.Shift;
-            }
             if (seeingToken.Kind == new NotDefined()) { }
 
             // recover error if there is an error
@@ -62,9 +57,11 @@ namespace Parse.FrontEnd.Parsers.LR
             var result = (IsGoToCondition(unit.BeforeStack)) ? GoTo(unit, seeingToken)
                                                                             : ShiftOrReduce(unit, seeingToken);
 
-
-            if (unit.IsError) return SuccessedKind.NotApplicable;
-            else if (seeingToken.Kind == null) return SuccessedKind.Shift;
+            if (unit.IsError)
+            {
+                unit.Action.Direction = ActionDir.failed;
+                return SuccessedKind.NotApplicable;
+            }
 
             // post process
             BuildStackAndParseTree(unit);

@@ -104,7 +104,7 @@ namespace Parse.FrontEnd.Tokenize
             });
         }
 
-        private string GetImpactedStringFromDelInfo(TokenStorage result, SelectionTokensContainer delInfos, string replaceString = "")
+        private string GetImpactedStringFromDelInfo(LexingData result, SelectionTokensContainer delInfos, string replaceString = "")
         {
             var indexInfo = delInfos.Range;
 

@@ -142,4 +142,7 @@
   <data name="StackAfterParsing" xml:space="preserve">
     <value>The stack after parsing</value>
   </data>
+  <data name="RemoveParsingUnits" xml:space="preserve">
+    <value>Rollback as much as {0} count because can't shift.</value>
+  </data>
 </root>

@@ -162,4 +162,7 @@
   <data name="StackAfterParsing" xml:space="preserve">
     <value>파싱 이후 스택</value>
   </data>
+  <data name="RemoveParsingUnits" xml:space="preserve">
+    <value>Shift가 불가하므로 {0}개 만큼 되돌립니다.</value>
+  </data>
 </root>

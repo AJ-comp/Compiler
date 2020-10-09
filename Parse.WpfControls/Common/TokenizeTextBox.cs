@@ -11,21 +11,21 @@ namespace Parse.WpfControls.Common
     {
         private List<Tuple<int, int>> scopeSyntaxes = new List<Tuple<int, int>>();
         private Lexer lexer = new Lexer();
-        private TokenStorage _tokens;
-        private LexingResult _lexedData;
+        private LexingData _tokens;
+        private LexingData _lexedData;
 
         public SyntaxPairCollection syntaxPairs = new SyntaxPairCollection();
-        public IReadOnlyList<TokenCell> Tokens => _tokens.TokensToView;
-        public LexingResult RecentLexedData
+        public IReadOnlyList<TokenCell> Tokens => _tokens.TokensForView;
+        public LexingData RecentLexedData
         {
             get => _lexedData;
             set
             {
                 _lexedData = value;
-                _tokens = _lexedData?.TokenStorage;
+                _tokens = _lexedData;
 
                 LineIndexes.Clear();
-                LineIndexes.AddRange(_lexedData.TokenStorage.LineIndexes);
+                LineIndexes.AddRange(_lexedData.LineIndexesForCaret);
             }
         }
 
