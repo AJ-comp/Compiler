@@ -28,8 +28,7 @@ namespace Parse.Types.VarTypes
 
                 // operand may be not int type so it has to make int type explicity.
                 ValueConstant = new IntConstant((int)ValueConstant.Value, 
-                                                                    ValueConstant.ValueState, 
-                                                                    valueConstant.PointerLevel);
+                                                                    ValueConstant.ValueState);
             }
             else
             {
@@ -37,8 +36,7 @@ namespace Parse.Types.VarTypes
 
                 // operand may be not int type so it has to make int type explicity.
                 ValueConstant = new IntConstant((int)ValueConstant.Value,
-                                                                    ValueConstant.ValueState,
-                                                                    valueConstant.PointerLevel);
+                                                                    ValueConstant.ValueState);
             }
 
             return ValueConstant;

@@ -12,7 +12,7 @@ namespace Parse.MiddleEnd.IR.LLVM.Models.VariableModels
         public IntVariableLLVM(int offset, IntConstant value) : base(offset, value)
         {
         }
-        public IntVariableLLVM(int offset, uint pointerLevel) : base(offset, new IntConstant(0, State.NotInit, pointerLevel))
+        public IntVariableLLVM(int offset) : base(offset, new IntConstant(0, State.NotInit))
         {
         }
         public IntVariableLLVM(string name, IntConstant value) : base(name, value)

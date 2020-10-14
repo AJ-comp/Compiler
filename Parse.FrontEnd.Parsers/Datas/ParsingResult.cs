@@ -137,12 +137,14 @@ namespace Parse.FrontEnd.Parsers.Datas
         /// <returns></returns>
         public bool IsRightBlockConnected(int blockIndexToCheck)
         {
+            // case last unit
             if (blockIndexToCheck >= this.Count - 1) return true;
 
             var prevBlock = this[blockIndexToCheck];
             var nextBlock = this[blockIndexToCheck + 1];
 
             // this means  (check prevBlock[Last] afterStack == nextBlock[First] beforeStack)
+            if (prevBlock.Units.Count == 0 || nextBlock.Units.Count == 0) return false;
             return prevBlock.Units.Last().AfterStack.Stack.SequenceEqual(nextBlock.Units.First().BeforeStack.Stack);
         }
 
@@ -201,6 +203,12 @@ namespace Parse.FrontEnd.Parsers.Datas
             }
         }
 
+        /// <summary>
+        /// This function returns block that is not ignored and less than blockIndex.
+        /// ignored property may be set up if error fired.
+        /// </summary>
+        /// <param name="blockIndex"></param>
+        /// <returns></returns>
         public ParsingBlock GetRealBlock(int blockIndex)
         {
             try

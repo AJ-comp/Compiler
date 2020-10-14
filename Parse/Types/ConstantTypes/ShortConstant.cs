@@ -11,19 +11,15 @@
             Signed = false;
         }
 
-        public ShortConstant(uint pointerLevel, short value) : base(pointerLevel, value)
+        public ShortConstant(short value, State valueState) : base(value, valueState)
         {
         }
 
-        public ShortConstant(short value, State valueState, uint pointerLevel) : base(value, valueState, pointerLevel)
+        public ShortConstant(ushort value, State valueState) : base(value, valueState)
         {
         }
 
-        public ShortConstant(ushort value, State valueState, uint pointerLevel) : base(value, valueState, pointerLevel)
-        {
-        }
-
-        public ShortConstant(ShortConstant t) : base((short)t.Value, t.ValueState, t.PointerLevel)
+        public ShortConstant(ShortConstant t) : base((short)t.Value, t.ValueState)
         {
         }
 
@@ -37,22 +33,22 @@
             if (to == DType.Bit)
             {
                 var data = ((int)Value == 0) ? false : true;
-                result = new BitConstant(data, ValueState, PointerLevel);
+                result = new BitConstant(data, ValueState);
             }
             else if (to == DType.Byte)
             {
-                result = (Signed) ? new ByteConstant((sbyte)Value, ValueState, PointerLevel)
-                                          : new ByteConstant((byte)Value, ValueState, PointerLevel);
+                result = (Signed) ? new ByteConstant((sbyte)Value, ValueState)
+                                          : new ByteConstant((byte)Value, ValueState);
             }
             else if (to == DType.Short) result = this;
             else if (to == DType.Int)
             {
-                result = (Signed) ? new IntConstant((int)Value, ValueState, PointerLevel)
-                                          : new IntConstant((uint)Value, ValueState, PointerLevel);
+                result = (Signed) ? new IntConstant((int)Value, ValueState)
+                                          : new IntConstant((uint)Value, ValueState);
             }
             else if (to == DType.Double)
             {
-                result = new DoubleConstant((double)Value, ValueState, PointerLevel);
+                result = new DoubleConstant((double)Value, ValueState);
             }
 
             return result;

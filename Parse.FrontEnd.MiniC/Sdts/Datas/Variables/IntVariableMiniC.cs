@@ -41,8 +41,7 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts.Datas.Variables
 
                 // operand may be not int type so it has to make int type explicity.
                 ValueConstant = new IntConstant((int)ValueConstant.Value,
-                                                                    ValueConstant.ValueState,
-                                                                    valueConstant.PointerLevel);
+                                                                    ValueConstant.ValueState);
             }
             else
             {
@@ -50,8 +49,7 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts.Datas.Variables
 
                 // operand may be not int type so it has to make int type explicity.
                 ValueConstant = new IntConstant((int)ValueConstant.Value,
-                                                                    ValueConstant.ValueState,
-                                                                    valueConstant.PointerLevel);
+                                                                    ValueConstant.ValueState);
             }
 
             return ValueConstant;
@@ -80,7 +78,7 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts.Datas.Variables
             // Only global variable uses ExprNode.Result.
             else if (varProperty == VarProperty.Global && node.Result != null) return node.Result;
 
-            return new IntConstant(0, State.NotInit, 0);
+            return new IntConstant(0, State.NotInit);
         }
     }
 }

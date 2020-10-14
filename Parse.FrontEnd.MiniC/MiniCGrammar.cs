@@ -275,7 +275,7 @@ namespace Parse.FrontEnd.Grammars.MiniC
             this.actualParamList.AddItem(this.logicalOrExp);
             this.actualParamList.AddItem(this.actualParamList + this.Comma + this.logicalOrExp);
 
-            this.primaryExp.AddItem(Ident, UseVar);
+            this.primaryExp.AddItem(Mul.Optional() + Ident, UseVar);
             this.primaryExp.AddItem(this.optNumber, IntLiteralNode);
             this.primaryExp.AddItem(this.OpenParenthesis + this.expression + this.CloseParenthesis);
 

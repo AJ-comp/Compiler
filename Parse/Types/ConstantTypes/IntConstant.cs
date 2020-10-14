@@ -14,19 +14,15 @@
         {
         }
 
-        public IntConstant(uint pointerLevel, int value) : base(pointerLevel, value)
+        public IntConstant(int value, State valueState) : base(value, valueState)
         {
         }
 
-        public IntConstant(int value, State valueState, uint pointerLevel) : base(value, valueState, pointerLevel)
+        public IntConstant(uint value, State valueState) : base(value, valueState)
         {
         }
 
-        public IntConstant(uint value, State valueState, uint pointerLevel) : base(value, valueState, pointerLevel)
-        {
-        }
-
-        public IntConstant(IntConstant t) : base((int)t.Value, t.ValueState, t.PointerLevel)
+        public IntConstant(IntConstant t) : base((int)t.Value, t.ValueState)
         {
         }
 
@@ -37,22 +33,22 @@
             if (to == DType.Bit)
             {
                 var data = ((int)Value == 0) ? false : true;
-                result = new BitConstant(data, ValueState, PointerLevel);
+                result = new BitConstant(data, ValueState);
             }
             else if (to == DType.Byte)
             {
-                result = (Signed) ? new ByteConstant((sbyte)Value, ValueState, PointerLevel)
-                                          : new ByteConstant((byte)Value, ValueState, PointerLevel);
+                result = (Signed) ? new ByteConstant((sbyte)Value, ValueState)
+                                          : new ByteConstant((byte)Value, ValueState);
             }
             else if (to == DType.Short)
             {
-                result = (Signed) ? new ShortConstant((short)Value, ValueState, PointerLevel)
-                                          : new ShortConstant((ushort)Value, ValueState, PointerLevel);
+                result = (Signed) ? new ShortConstant((short)Value, ValueState)
+                                          : new ShortConstant((ushort)Value, ValueState);
             }
             else if (to == DType.Int) result = this;
             else if (to == DType.Double)
             {
-                result = new DoubleConstant((double)Value, ValueState, PointerLevel);
+                result = new DoubleConstant((double)Value, ValueState);
             }
 
             return result;

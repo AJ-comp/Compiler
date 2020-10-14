@@ -18,7 +18,7 @@ namespace Parse.MiddleEnd.IR.LLVM.Models.VariableModels
         {
         }
 
-        public BitVariableLLVM(int offset, uint pointerLevel) : base(offset, new BitConstant(false, State.NotInit, pointerLevel))
+        public BitVariableLLVM(int offset) : base(offset, new BitConstant(false, State.NotInit))
         {
         }
 

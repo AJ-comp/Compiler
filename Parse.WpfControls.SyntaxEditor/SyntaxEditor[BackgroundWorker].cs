@@ -37,13 +37,14 @@ namespace Parse.WpfControls.SyntaxEditor
                     _csPostProcessData = null;
                 }
 
-                int tokenIndex = -1;
+                int pTokenIndex = -1;
                 Dispatcher.Invoke(() =>
                 {
-                    tokenIndex = this.TextArea.GetTokenIndexForCaretIndex(this.TextArea.CaretIndex, RecognitionWay.Back);
+                    var vTokenIndex = TextArea.GetTokenIndexForCaretIndex(TextArea.CaretIndex, RecognitionWay.Back);
+                    pTokenIndex = TextArea.RecentLexedData.GetNearestPIndexFromVIndex(vTokenIndex);
                 });
 
-                var list = this.GetCompletionList(localResult, tokenIndex);
+                var list = this.GetCompletionList(localResult, pTokenIndex);
 
                 Dispatcher.Invoke(() =>
                 {
@@ -54,9 +55,9 @@ namespace Parse.WpfControls.SyntaxEditor
                 {
                     var result = Compiler.StartSemanticAnalysis(FileName);
                     ParsingFailedListPreProcess(localResult);
-//                    if (result == null) return;
+                    TextArea.InvalidateVisual();
 
-                    this.ParsingCompleted?.Invoke(this, new ParsingCompletedEventArgs(localResult, result));
+                    this.ParsingCompleted?.Invoke(this, new ParsingCompletedEventArgs(TextArea.RecentLexedData, localResult, result));
                 });
             }
         }

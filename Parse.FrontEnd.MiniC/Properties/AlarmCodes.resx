@@ -154,4 +154,7 @@
   <data name="MCL0018" xml:space="preserve">
     <value>The macro can't be included own identifier.</value>
   </data>
+  <data name="MCL0019" xml:space="preserve">
+    <value>The reverse reference can be used only if type is address type.</value>
+  </data>
 </root>

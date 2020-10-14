@@ -7,12 +7,6 @@ namespace Parse.Types.Operations
     {
         public static bool CanOperation(IValue operand1, IValue operand2)
         {
-            if (operand1.PointerLevel != operand2.PointerLevel) return false;
-            if (operand1.IsPointerType)
-            {
-                if (operand1.GetType() != operand2.GetType()) return false;
-            }
-
             return true;
         }
 
@@ -97,7 +91,7 @@ namespace Parse.Types.Operations
 
             bool condition = (operand2 is IArithmetic);
 
-            if (condition) return new BitConstant(operand1.PointerLevel, (int)operand1.Value == (int)operand2.Value);
+            if (condition) return new BitConstant((int)operand1.Value == (int)operand2.Value);
             if (operand2 is IDouble) return new BitConstant((double)operand1.Value == (double)operand2.Value);
 
             // impossible
@@ -183,8 +177,8 @@ namespace Parse.Types.Operations
             // process by condition
             bool condition = (operand2 is IArithmetic);
 
-            if (operand2 is IDouble) return new DoubleConstant(operand1.PointerLevel, (double)valueCalculated);
-            if (condition) return new IntConstant(operand1.PointerLevel, Convert.ToInt32(valueCalculated));
+            if (operand2 is IDouble) return new DoubleConstant((double)valueCalculated);
+            if (condition) return new IntConstant(Convert.ToInt32(valueCalculated));
 
             // impossible
             throw new FormatException();
@@ -249,8 +243,6 @@ namespace Parse.Types.Operations
         #region The operation related to string type
         public static IConstant StringEqual(IValue operand1, IValue operand2)
         {
-            if (operand1.PointerLevel != operand2.PointerLevel) throw new FormatException();
-
             if (operand2 is IString)
             {
                 string targetValue = operand2.Value as string;
@@ -261,8 +253,6 @@ namespace Parse.Types.Operations
 
         public static IConstant StringNotEqual(IValue operand1, IValue operand2)
         {
-            if (operand1.PointerLevel != operand2.PointerLevel) throw new FormatException();
-
             if (operand2 is IString)
             {
                 string targetValue = operand2.Value as string;
@@ -274,20 +264,18 @@ namespace Parse.Types.Operations
 
         public static IConstant StringAdd(IValue operand1, IValue operand2)
         {
-            if (operand1.PointerLevel != operand2.PointerLevel) throw new FormatException();
-
             if (operand2 is IString)
             {
                 string targetValue = operand1.Value + (operand2.Value as string);
 
-                return new StringConstant(operand1.PointerLevel, targetValue);
+                return new StringConstant(targetValue);
             }
 
             if (operand2 is IInt)
             {
                 string targetValue = operand1.Value + (operand2.Value.ToString());
 
-                return new StringConstant(operand1.PointerLevel, operand1.Value + targetValue);
+                return new StringConstant(operand1.Value + targetValue);
             }
 
             else throw new NotSupportedException();

@@ -39,13 +39,6 @@ namespace Parse.WpfControls
     [TemplatePart(Name = "TextArea", Type = typeof(HighlightTextBox))]
     public class Editor : Control
     {
-        private double recentVerticalOffset = 0;
-        private double recentHorizontalOffset = 0;
-        private int startLine = 0;
-        private int endLine = 1;
-        private TextCanvas lineNumbersCanvas;
-
-
         #region Dependency Properties
         public string FileName
         {
@@ -164,8 +157,8 @@ namespace Parse.WpfControls
 
             this.recentHorizontalOffset = arg.HorizontalOffset;
             this.recentVerticalOffset = arg.VerticalOffset;
-            this.startLine = arg.ViewStartLineIndex;
-            this.endLine = arg.ViewEndLineIndex;
+            this._startLine = arg.ViewStartLineIndex;
+            this._endLine = arg.ViewEndLineIndex;
 
             this.InvalidateVisual();
         }
@@ -178,15 +171,15 @@ namespace Parse.WpfControls
         protected override void OnRender(DrawingContext drawingContext)
         {
             if (this.IsLoaded == false || this.lineNumbersCanvas == null || this.TextArea == null) return;
-            if (this.endLine - this.startLine <= 0) return;
+            if (this._endLine - this._startLine <= 0) return;
 
             this.lineNumbersCanvas.SetDrawStartingPos(0, this.recentVerticalOffset);
 
             List<FormattedText> lines = new List<FormattedText>();
 
-            int maxNumberOfDigit = endLine.ToString().Length;
+            int maxNumberOfDigit = _endLine.ToString().Length;
             this.lineNumbersCanvas.Width = maxNumberOfDigit * this.FontSize;
-            for (int i = startLine; i < endLine; i++)
+            for (int i = _startLine; i < _endLine; i++)
             {
                 FormattedText lineNumberingText = new FormattedText((i + 1).ToString(), CultureInfo.InvariantCulture, FlowDirection.LeftToRight,
                     new Typeface(FontFamily, FontStyle, FontWeight, FontStretch), this.FontSize, this.LineNumberForeColor, VisualTreeHelper.GetDpi(this).PixelsPerDip);
@@ -207,5 +200,13 @@ namespace Parse.WpfControls
         static void TextPropertyChanged(DependencyObject sender, DependencyPropertyChangedEventArgs args)
         {
         }
+
+
+
+        private double recentVerticalOffset = 0;
+        private double recentHorizontalOffset = 0;
+        private int _startLine = 0;
+        private int _endLine = 1;
+        private TextCanvas lineNumbersCanvas;
     }
 }

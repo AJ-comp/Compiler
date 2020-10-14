@@ -1,5 +1,6 @@
 ﻿using Parse.FrontEnd.Ast;
 using Parse.FrontEnd.Grammars.Properties;
+using Parse.FrontEnd.MiniC.Properties;
 
 namespace Parse.FrontEnd.Grammars.MiniC.Sdts.AstNodes.ExprNodes
 {

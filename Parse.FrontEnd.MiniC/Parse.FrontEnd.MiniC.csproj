@@ -15,6 +15,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Properties\AlarmCodes.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>AlarmCodes.resx</DependentUpon>
+    </Compile>
     <Compile Update="Properties\Resource.Designer.cs">
       <DependentUpon>Resource.resx</DependentUpon>
       <DesignTime>True</DesignTime>
@@ -23,6 +28,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Update="Properties\AlarmCodes.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>AlarmCodes.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Update="Properties\Resource.ko-KR.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
     </EmbeddedResource>

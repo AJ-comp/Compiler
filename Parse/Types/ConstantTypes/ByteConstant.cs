@@ -10,19 +10,15 @@
         {
         }
 
-        public ByteConstant(uint pointerLevel, byte value) : base(pointerLevel, value)
+        public ByteConstant(byte value, State valueState) : base(value, valueState)
         {
         }
 
-        public ByteConstant(byte value, State valueState, uint pointerLevel) : base(value, valueState, pointerLevel)
+        public ByteConstant(sbyte value, State valueState) : base(value, valueState)
         {
         }
 
-        public ByteConstant(sbyte value, State valueState, uint pointerLevel) : base(value, valueState, pointerLevel)
-        {
-        }
-
-        public ByteConstant(ByteConstant t) : base((byte)t.Value, t.ValueState, t.PointerLevel)
+        public ByteConstant(ByteConstant t) : base((byte)t.Value, t.ValueState)
         {
         }
 
@@ -34,9 +30,9 @@
             Constant result = null;
 
             if (to == DType.Bit) result = this;
-            else if (to == DType.Byte) result = new ByteConstant((byte)Value, ValueState, PointerLevel);
-            else if (to == DType.Int) result = new IntConstant((int)Value, ValueState, PointerLevel);
-            else if (to == DType.Double) result = new DoubleConstant((double)Value, ValueState, PointerLevel);
+            else if (to == DType.Byte) result = new ByteConstant((byte)Value, ValueState);
+            else if (to == DType.Int) result = new IntConstant((int)Value, ValueState);
+            else if (to == DType.Double) result = new DoubleConstant((double)Value, ValueState);
 
             return result;
         }

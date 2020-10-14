@@ -9,7 +9,6 @@ namespace Parse.Types.VarTypes
         public int Address { get; set; }
         public object Value => ValueConstant.Value;
         public State ValueState => ValueConstant.ValueState;
-        public uint PointerLevel => ValueConstant.PointerLevel;
         public abstract DType TypeName { get; }
 
         public IConstant ValueConstant { get; protected set; }

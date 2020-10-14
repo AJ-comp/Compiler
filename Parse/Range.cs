@@ -19,6 +19,9 @@ namespace Parse
             this.Count = count;
         }
 
+        public bool IsEmpty => Count <= 0;
+        public static Range EmptyRange => new Range(-1, 0);
+
         /// <summary>
         /// This function judgment whether a parameter range is included in this range.
         /// </summary>

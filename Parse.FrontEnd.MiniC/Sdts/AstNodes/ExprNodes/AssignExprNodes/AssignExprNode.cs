@@ -2,6 +2,7 @@
 using Parse.FrontEnd.Grammars.MiniC.Sdts.AstNodes.ExprNodes.LiteralNodes;
 using Parse.FrontEnd.Grammars.MiniC.Sdts.Datas.Variables;
 using Parse.FrontEnd.Grammars.Properties;
+using Parse.FrontEnd.MiniC.Properties;
 using System;
 
 namespace Parse.FrontEnd.Grammars.MiniC.Sdts.AstNodes.ExprNodes.AssignExprNodes

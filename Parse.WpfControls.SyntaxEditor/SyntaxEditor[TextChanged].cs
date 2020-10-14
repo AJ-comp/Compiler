@@ -3,15 +3,30 @@ using Parse.FrontEnd.Tokenize;
 using System;
 using System.Linq;
 using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace Parse.WpfControls.SyntaxEditor
 {
     public partial class SyntaxEditor
     {
+        public bool IsInsertWord(TextChange changeInfo) => (changeInfo.RemovedLength == 0 && changeInfo.AddedLength == 1);
+
+        public bool IsDeleteWord(TextChange changeInfo) => (changeInfo.RemovedLength == 1 && changeInfo.AddedLength == 0);
+
+
         private void TextArea_TextChanged(object sender, TextChangedEventArgs e)
         {
             Text = TextArea.Text;
             UpdateTokenInfos(e.Changes.First());
+
+            
+            /*
+            var changeInfo = e.Changes.First();
+            if (IsInsertWord(changeInfo))
+            {
+                TextCompositionManager.StartComposition(new TextComposition(InputManager.Current, TextArea, ")"));
+            }
+            */
 
             // shallow copy
             lock (_lockObject)

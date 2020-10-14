@@ -7,27 +7,22 @@ namespace Parse.Types.ConstantTypes
         public bool Signed { get; protected set; }
         public abstract int Size { get; }
 
-        protected IntegerConstant(int value) : base(value, State.Fixed, 0)
+        protected IntegerConstant(int value) : base(value, State.Fixed)
         {
             Signed = true;
         }
 
-        protected IntegerConstant(uint value) : base(value, State.Fixed, 0)
+        protected IntegerConstant(uint value) : base(value, State.Fixed)
         {
             Signed = false;
         }
 
-        protected IntegerConstant(uint pointerLevel, int value) : base(value, State.Fixed, pointerLevel)
+        protected IntegerConstant(int value, State valueState) : base(value, valueState)
         {
             Signed = true;
         }
 
-        protected IntegerConstant(int value, State valueState, uint pointerLevel) : base(value, valueState, pointerLevel)
-        {
-            Signed = true;
-        }
-
-        protected IntegerConstant(uint value, State valueState, uint pointerLevel) : base(value, valueState, pointerLevel)
+        protected IntegerConstant(uint value, State valueState) : base(value, valueState)
         {
             Signed = true;
         }

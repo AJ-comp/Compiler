@@ -22,7 +22,7 @@ namespace Parse.Types.VarTypes
             if (operand is IString)
             {
                 string targetValue = operand.Value as string;
-                return new StringConstant(PointerLevel, targetValue);
+                return new StringConstant(targetValue);
             }
             else throw new NotSupportedException();
         }

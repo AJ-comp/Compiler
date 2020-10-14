@@ -34,43 +34,26 @@ namespace Parse.FrontEnd.Parsers.LR
 
         public void PartialParsing(ParsingResult target, IReadOnlyList<RangePair> rangesToParse)
         {
-            int indexToSee = 0;
-
             foreach (var range in rangesToParse)
             {
-                var newRange = range.Item2;
-
-                if (newRange.StartIndex < indexToSee && indexToSee < newRange.EndIndex)
-                {
-                }
-                else if (indexToSee > newRange.EndIndex) continue;
+                int startIndex = (!range.Item1.IsEmpty) ? range.Item1.StartIndex : range.Item2.StartIndex;
+                if (startIndex < 0) continue;
 
                 // parsing update range.
-                for (int i = newRange.StartIndex; i <= newRange.EndIndex; i++)
+                for (int i = startIndex; i <= target.Count; i++)
                 {
+                    // check if it has to parsing
+                    // if 0 index token was modified it always has to parsing.
+                    if (i > 0)
+                    {
+                        if (target.IsRightBlockConnected(i - 1)) continue;
+                    }
+
                     if (i == 0) target[i] = new ParsingBlock(target[i].Token);
                     else target[i] = new ParsingBlock(new ParsingUnit(target[i - 1].Units.Last().AfterStack), target[i].Token);
 
                     var successKind = this.BlockParsing(target, i);
                     this.PostProcessing(successKind, target, true, ref i);
-
-                    indexToSee = i + 1;
-                }
-
-                // parsing for post range until sync.
-                for (int i = indexToSee; i < target.Count; i++)
-                {
-                    if(target.IsRightBlockConnected(i - 1))
-                    {
-                        indexToSee = i + 1;
-                        break;
-                    }
-
-                    target[i] = new ParsingBlock(new ParsingUnit(target[i - 1].Units.Last().AfterStack), target[i].Token);
-                    var successKind = this.BlockParsing(target, i);
-
-                    this.PostProcessing(successKind, target, true, ref i);
-                    indexToSee = i + 1;
                 }
             }
         }
@@ -135,7 +118,7 @@ namespace Parse.FrontEnd.Parsers.LR
 
             try
             {
-                result = this.ReplaceRanges(prevParsingInfo, tokens, lexingData.RangeToParsing);
+                result = this.ReplaceRanges(prevParsingInfo, lexingData.RangeToParsing, tokens);
                 this.PartialParsing(result, lexingData.RangeToParsing);
                 result.Success = true;
             }
@@ -222,16 +205,30 @@ namespace Parse.FrontEnd.Parsers.LR
             return prevParsingResult;
         }
 
-        private ParsingResult ReplaceRanges(ParsingResult srcResult, IReadOnlyList<TokenData> newTokens, IReadOnlyList<RangePair> ranges)
+        private ParsingResult ReplaceRanges(ParsingResult srcResult, IReadOnlyList<RangePair> rangePairs, IReadOnlyList<TokenData> newTokens)
         {
-            int addVal = 0;
+            //            int addVal = 0;
 
-            foreach (var range in ranges)
+            foreach (var rangePair in rangePairs)
             {
-                var adjustRange = new Range(range.Item1.StartIndex + addVal, range.Item1.Count);
+                var removeRange = rangePair.Item1;
+                if (!removeRange.IsEmpty) srcResult.RemoveRange(removeRange.StartIndex, removeRange.Count);
 
-                srcResult = this.ReplaceRange(srcResult, adjustRange, newTokens, range.Item2);
-                addVal += range.Item2.Count - range.Item1.Count;
+                var insertRange = rangePair.Item2;
+                if (!insertRange.IsEmpty)
+                {
+                    for (int i = insertRange.StartIndex; i <= insertRange.EndIndex; i++)
+                    {
+                        srcResult.Insert(i, new ParsingBlock(newTokens[i]));
+                    }
+                }
+
+                /*
+                var adjustRange = new Range(rangePair.Item1.StartIndex + addVal, rangePair.Item1.Count);
+
+                srcResult = this.ReplaceRange(srcResult, adjustRange, newTokens, rangePair.Item2);
+                addVal += rangePair.Item2.Count - rangePair.Item1.Count;
+                */
             }
 
             return srcResult;

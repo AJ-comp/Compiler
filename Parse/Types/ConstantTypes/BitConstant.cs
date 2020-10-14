@@ -6,19 +6,15 @@ namespace Parse.Types.ConstantTypes
     {
         public override DType TypeName => DType.Bit;
 
-        public BitConstant(bool value) : this(value, State.Fixed, 0)
+        public BitConstant(bool value) : this(value, State.Fixed)
         {
         }
 
-        public BitConstant(uint pointerLevel, bool value) : this(value, State.Fixed, pointerLevel)
+        public BitConstant(bool value, State valueState) : base(value, valueState)
         {
         }
 
-        public BitConstant(bool value, State valueState, uint pointerLevel) : base(value, valueState, pointerLevel)
-        {
-        }
-
-        public BitConstant(BitConstant t) : base(t.Value, t.ValueState, t.PointerLevel)
+        public BitConstant(BitConstant t) : base(t.Value, t.ValueState)
         {
         }
 
@@ -39,9 +35,9 @@ namespace Parse.Types.ConstantTypes
             Constant result = null;
 
             if (to == DType.Bit) result = this;
-            else if (to == DType.Byte) result = new ByteConstant((byte)Value, ValueState, PointerLevel);
-            else if (to == DType.Int) result = new IntConstant((int)Value, ValueState, PointerLevel);
-            else if (to == DType.Double) result = new DoubleConstant((double)Value, ValueState, PointerLevel);
+            else if (to == DType.Byte) result = new ByteConstant((byte)Value, ValueState);
+            else if (to == DType.Int) result = new IntConstant((int)Value, ValueState);
+            else if (to == DType.Double) result = new DoubleConstant((double)Value, ValueState);
 
             return result;
         }

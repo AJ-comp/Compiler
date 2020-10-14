@@ -4,16 +4,12 @@ namespace Parse.Types.ConstantTypes
 {
     public class DoubleConstant : Constant, IDouble
     {
-        public DoubleConstant(double value) : this(value, State.Fixed, 0)
+        public DoubleConstant(double value) : this(value, State.Fixed)
         {
             Nan = false;
         }
 
-        public DoubleConstant(uint pointerLevel, double value) : this(value, State.Fixed, pointerLevel)
-        {
-        }
-
-        public DoubleConstant(double value, State valueState, uint pointerLevel) : base(value, valueState, pointerLevel)
+        public DoubleConstant(double value, State valueState) : base(value, valueState)
         {
         }
 
@@ -38,11 +34,11 @@ namespace Parse.Types.ConstantTypes
             if (to == DType.Bit)
             {
                 var data = ((int)Value == 0) ? false : true;
-                result = new BitConstant(data, ValueState, PointerLevel);
+                result = new BitConstant(data, ValueState);
             }
-            else if (to == DType.Byte) result = new ByteConstant((byte)Value, ValueState, PointerLevel);
-            else if (to == DType.Short) result = new ShortConstant((short)Value, ValueState, PointerLevel);
-            else if (to == DType.Int) result = new IntConstant((int)Value, ValueState, PointerLevel);
+            else if (to == DType.Byte) result = new ByteConstant((byte)Value, ValueState);
+            else if (to == DType.Short) result = new ShortConstant((short)Value, ValueState);
+            else if (to == DType.Int) result = new IntConstant((int)Value, ValueState);
             else if (to == DType.Double) result = this;
 
             return result;

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Parse.FrontEnd.Tokenize
@@ -71,7 +72,7 @@ namespace Parse.FrontEnd.Tokenize
 
 
         /// <summary>
-        /// This function returns a selected information.
+        /// This function returns a selected information. (gets detailed information)
         /// </summary>
         /// <returns></returns>
         private SelectionTokensContainer GetSelectionTokenInfos(LexingData targetStorage, int offset, int len)

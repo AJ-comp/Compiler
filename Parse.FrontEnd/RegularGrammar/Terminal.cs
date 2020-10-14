@@ -4,10 +4,9 @@ namespace Parse.FrontEnd.RegularGrammar
 {
     public class Terminal : Symbol
     {
-        private string caption = string.Empty;
-
         public TokenType TokenType { get; }
         public string Value { get; } = string.Empty;
+        public string Caption { get; } = string.Empty;
         public bool Meaning { get; } = true;
         public bool IsWordPattern { get; } = false;
 
@@ -41,14 +40,14 @@ namespace Parse.FrontEnd.RegularGrammar
         {
             this.TokenType = type;
             this.Value = value;
-            this.caption = caption;
+            this.Caption = caption;
             this.Meaning = meaning;
             this.IsWordPattern = bWordPattern;
         }
 
         public override string ToString()
         {
-            return this.caption;
+            return this.Caption;
         }
 
         public override string ToGrammarString()

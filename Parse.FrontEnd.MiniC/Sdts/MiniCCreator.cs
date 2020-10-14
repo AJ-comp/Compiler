@@ -8,7 +8,7 @@ using Parse.FrontEnd.Grammars.MiniC.Sdts.AstNodes.ExprNodes.LogicalExprNodes;
 using Parse.FrontEnd.Grammars.MiniC.Sdts.AstNodes.StatementNodes;
 using Parse.FrontEnd.Grammars.MiniC.Sdts.Datas;
 using Parse.FrontEnd.Grammars.MiniC.Sdts.Datas.Variables;
-using Parse.FrontEnd.Grammars.Properties;
+using Parse.FrontEnd.MiniC.Properties;
 using Parse.FrontEnd.MiniC.Sdts.AstNodes.TypeNodes;
 using System;
 using static Parse.FrontEnd.Grammars.MiniC.Sdts.Datas.Variables.VariableMiniC;
@@ -19,11 +19,11 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
     {
         public static VariableMiniC CreateVarData(MiniCTypeInfo typeDatas,
                                                                             TokenData nameToken,
-                                                                            TokenData levelToken, 
+                                                                            TokenData levelToken,
                                                                             TokenData dimensionToken,
-                                                                            int blockLevel, 
-                                                                            int offset, 
-                                                                            VarProperty varProperty, 
+                                                                            int blockLevel,
+                                                                            int offset,
+                                                                            VarProperty varProperty,
                                                                             ExprNode value)
         {
             VariableMiniC result = null;
@@ -49,16 +49,27 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
                                                             varProperty,
                                                             value);
             }
+            else if (typeDatas.DataType == MiniCDataType.Address)
+            {
+                result = new IntVariableMiniC(typeDatas,
+                                                            nameToken,
+                                                            levelToken,
+                                                            dimensionToken,
+                                                            blockLevel,
+                                                            offset,
+                                                            varProperty,
+                                                            value);
+            }
 
             return result;
         }
 
 
-        public static VariableMiniC CreateVarData(MiniCTypeInfo typeDatas, 
+        public static VariableMiniC CreateVarData(MiniCTypeInfo typeDatas,
                                                                             TokenData nameToken,
-                                                                            TokenData levelToken, 
+                                                                            TokenData levelToken,
                                                                             TokenData dimensionToken,
-                                                                            int blockLevel, 
+                                                                            int blockLevel,
                                                                             int offset,
                                                                             VarProperty varProperty)
         {
@@ -122,6 +133,7 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
                 else if (cRoot.SignPost.MeaningUnit == MiniCGrammar.ConstNode) result = new ConstNode(root);
                 else if (cRoot.SignPost.MeaningUnit == MiniCGrammar.VoidNode) result = new VoidNode(root);
                 else if (cRoot.SignPost.MeaningUnit == MiniCGrammar.IntNode) result = new IntNode(root);
+                else if (cRoot.SignPost.MeaningUnit == MiniCGrammar.AddressNode) result = new AddressNode(root);
                 else if (cRoot.SignPost.MeaningUnit == MiniCGrammar.DclList) result = new VariableDclsListNode(root);
                 else if (cRoot.SignPost.MeaningUnit == MiniCGrammar.Dcl) result = new VariableDclsNode(root);
                 else if (cRoot.SignPost.MeaningUnit == MiniCGrammar.DclVar) result = new InitDeclaratorNode(root);

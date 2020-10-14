@@ -1,6 +1,7 @@
 ﻿using Parse.FrontEnd.RegularGrammar;
 using Parse.FrontEnd.Tokenize;
 using Parse.WpfControls.Models;
+using Parse.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Windows;
@@ -12,20 +13,18 @@ namespace Parse.WpfControls.Common
         private List<Tuple<int, int>> scopeSyntaxes = new List<Tuple<int, int>>();
         private Lexer lexer = new Lexer();
         private LexingData _tokens;
-        private LexingData _lexedData;
 
         public SyntaxPairCollection syntaxPairs = new SyntaxPairCollection();
         public IReadOnlyList<TokenCell> Tokens => _tokens.TokensForView;
         public LexingData RecentLexedData
         {
-            get => _lexedData;
+            get => _tokens;
             set
             {
-                _lexedData = value;
-                _tokens = _lexedData;
+                _tokens = value;
 
                 LineIndexes.Clear();
-                LineIndexes.AddRange(_lexedData.LineIndexesForCaret);
+                LineIndexes.AddRange(_tokens.LineIndexesForCaret);
             }
         }
 
@@ -67,8 +66,14 @@ namespace Parse.WpfControls.Common
 
         public int GetTokenIndexForCaretIndex(int caretIndex, RecognitionWay recognitionWay)
         {
-            if (this._tokens == null) return -1;
-            return this._tokens.TokenIndexForOffset(caretIndex, recognitionWay);
+            if (_tokens == null) return -1;
+            return _tokens.TokenIndexForOffset(caretIndex, recognitionWay);
+        }
+
+        public bool IsLastVisibleTokenInLine(int caretIndex)
+        {
+            int tokenIndex = GetTokenIndexForCaretIndex(caretIndex, RecognitionWay.Back);
+            return _tokens.IsLastVisibleTokenInLine(tokenIndex);
         }
 
         /// <summary>

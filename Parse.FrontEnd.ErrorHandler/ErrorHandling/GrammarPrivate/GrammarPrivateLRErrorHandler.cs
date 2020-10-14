@@ -21,6 +21,35 @@ namespace Parse.FrontEnd.ErrorHandler.GrammarPrivate
             this.ixIndex = ixIndex;
         }
 
+        private static bool TryRecoveryStep(Terminal[] virtualTokens, int ixIndex, Parser parser, 
+                                                            ParsingResult parsingResult, int seeingTokenIndex)
+        {
+            bool result = TryRecoveryWithInsertVirtualTokens(virtualTokens, ixIndex, parser, parsingResult, seeingTokenIndex);
+
+            if (result)
+            {
+                var curBlock = parsingResult[seeingTokenIndex];
+                result = TryRecoveryWithInsertVirtualToken(curBlock.Token.Kind, ixIndex, parser, parsingResult, seeingTokenIndex);
+
+                if (result)
+                {
+                    for (int j = 0; j < virtualTokens.Count(); j++)
+                    {
+                        var parsingErrInfo = ParsingErrorInfo.CreateParsingError(nameof(AlarmCodes.CE0004),
+                                                                                                            string.Format(AlarmCodes.CE0004, virtualTokens.ElementAt(j).Caption));
+                        curBlock._errorInfos.Add(parsingErrInfo);
+                    }
+                }
+                else
+                {
+                    // remove all successed virtual tokens because it has to see next virtual tokens.
+                    for (int j = 0; j < virtualTokens.Count(); j++) curBlock.RemoveLastToken();
+                }
+            }
+
+            return result;
+        }
+
         protected static ErrorHandlingResult TryRecovery(IEnumerable<Terminal[]> virtualTokenList, int ixIndex, 
                                                                                 Parser parser, ParsingResult parsingResult, int seeingTokenIndex)
         {
@@ -30,18 +59,8 @@ namespace Parse.FrontEnd.ErrorHandler.GrammarPrivate
             {
                 var virtualTokens = virtualTokenList.ElementAt(i);
 
-                if (TryRecoveryWithInsertVirtualTokens(virtualTokens, ixIndex, parser, parsingResult, seeingTokenIndex))
-                {
-                    var curBlock = parsingResult[seeingTokenIndex];
-                    result = TryRecoveryWithInsertVirtualToken(curBlock.Token.Kind, ixIndex, parser, parsingResult, seeingTokenIndex);
-
-                    if (result) break;
-                    else
-                    {
-                        // remove all successed virtual tokens because it has to see next virtual tokens.
-                        for (int j = 0; j < virtualTokens.Count(); j++) curBlock.RemoveLastToken();
-                    }
-                }
+                result = TryRecoveryStep(virtualTokens, ixIndex, parser, parsingResult, seeingTokenIndex);
+                if (result) break;
             }
 
             if (!result) RecoveryWithDelCurToken(ixIndex, parsingResult, seeingTokenIndex);

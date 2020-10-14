@@ -1,9 +1,7 @@
 ﻿using Parse.FrontEnd.Parsers.Datas;
 using Parse.WpfControls.Models;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 
@@ -100,7 +98,6 @@ namespace Parse.WpfControls.SyntaxEditor
             if (completionList.IsOpened) completionList.Show(inputString, x, y);
             else completionList.Create(items, x, y);
         }
-
 
 
         private CompletionList completionList;

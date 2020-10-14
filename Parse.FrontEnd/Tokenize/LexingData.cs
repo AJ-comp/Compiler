@@ -1,8 +1,5 @@
-﻿using Parse.Extensions;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography;
 using System.Threading.Tasks;
 
 namespace Parse.FrontEnd.Tokenize
@@ -84,47 +81,6 @@ namespace Parse.FrontEnd.Tokenize
             return result;
         }
 
-
-        /// <summary>
-        /// This function returns the impact range on the basis of the tokenIndex argument.
-        /// </summary>
-        /// <param name="tokenIndex"></param>
-        /// <returns>The first value : index, The second value : count </returns>
-        public Range FindImpactRange(int tokenIndex) => this.FindImpactRange(tokenIndex, tokenIndex);
-
-        /// <summary>
-        /// This function returns the impact range on the basis of the arguments.
-        /// </summary>
-        /// <param name="startTokenIndex"></param>
-        /// <param name="endTokenIndex"></param>
-        /// <returns>The first value : index, The second value : count </returns>
-        public Range FindImpactRange(int startTokenIndex, int endTokenIndex)
-        {
-            //            var indexes = this.GetIndexesForSpecialPattern(" ", "\t", "\r", "\n");
-            var indexes = _lineIndexer;
-            var fromIndex = -1;
-            var toIndex = -1;
-
-            Parallel.Invoke(
-                () =>
-                {
-                    fromIndex = indexes.GetIndexNearestLessThanValue(startTokenIndex);
-                },
-                () =>
-                {
-                    toIndex = indexes.GetIndexNearestMoreThanValue(endTokenIndex);
-                });
-
-            // Except PerfactDelimiter
-            //            fromIndex = (fromIndex == 0 || fromIndex == -1) ? 0 : fromIndex - 1;
-            //            toIndex = (toIndex == -1 || toIndex >= this.tokensToView.Count - 1) ? this.tokensToView.Count - 1 : toIndex + 1;
-
-            fromIndex = (fromIndex == -1) ? 0 : fromIndex;
-            toIndex = (toIndex == -1) ? this._tokensForView.Count - 1 : toIndex;
-
-            return new Range(fromIndex, toIndex - fromIndex + 1);
-        }
-
         /// <summary>
         /// This function returns the merged string of all tokens in the range.
         /// </summary>
@@ -166,6 +122,7 @@ namespace Parse.FrontEnd.Tokenize
             InitAllPatternsTable();
         }
 
+
         /// <summary>
         /// This function replaces an exist token to new tokens (replaceTokenList)
         /// </summary>
@@ -174,7 +131,7 @@ namespace Parse.FrontEnd.Tokenize
         public void ReplaceToken(Range range, IEnumerable<TokenCell> replaceTokenList)
         {
             var updateRange = UpdateViewToken(range, replaceTokenList);
-            var updateRange2 = UpdateParsingToken(range, replaceTokenList);
+            var updateRange2 = UpdateIndexMapAndParsingToken(range, replaceTokenList);
 
             ClearUpdateRanges();
             _lexedRanges.Add(updateRange);
@@ -183,116 +140,33 @@ namespace Parse.FrontEnd.Tokenize
         }
 
 
-
-        private Dictionary<TokenPatternInfo, List<int>> _tableForAllPatternsOnView = new Dictionary<TokenPatternInfo, List<int>>();
-        private List<TokenCell> _tokensForView = new List<TokenCell>();
-        private List<TokenCell> _tokensForParsing = new List<TokenCell>();
-        private IndexMap _indexMap = new IndexMap();
-
-
-
-        private RangePair UpdateViewToken(Range rangeToRemove, IEnumerable<TokenCell> tokenCellsToAdd)
+        public bool IsLastVisibleTokenInLine(int index)
         {
-            // prepare
-            int removeTotalLen = 0;
-            for (int i = rangeToRemove.StartIndex; i <= rangeToRemove.EndIndex; i++)
-                removeTotalLen += TokensForView[i].Data.Length;
+            bool result = true;
 
-            // remove process on view tokens
-            Parallel.For(rangeToRemove.EndIndex + 1, TokensForView.Count, i =>
+            for (int i = index; i < _tokensForView.Count; i++)
             {
-                _tokensForView[i].StartIndex -= removeTotalLen;
-            });
-            _tokensForView.RemoveRange(rangeToRemove.StartIndex, rangeToRemove.Count);
+                var tokenCell = _tokensForView[i];
 
+                if (tokenCell.Data == "\n") break;
 
-            // prepare
-            int totalLen = 0;
-            foreach (var token in tokenCellsToAdd)
-                totalLen += token.Data.Length;
+                if (tokenCell.Data == " ") continue;
+                if (tokenCell.Data == "\t") continue;
+                if (tokenCell.Data == "\r") continue;
 
-            // insert process on view tokens
-            int startIndex = rangeToRemove.StartIndex;
-            _tokensForView.InsertRange(startIndex, tokenCellsToAdd);
-            Parallel.Invoke(() =>
-            {
-                // adjust index for added tokens
-                if (startIndex == 0) return;
-                var adjustIndex = _tokensForView[startIndex - 1].EndIndex + 1;
-                Parallel.For(startIndex, startIndex + tokenCellsToAdd.Count(), i =>
-                {
-                    _tokensForView[i].StartIndex += adjustIndex;
-                });
-
-            }, () =>
-            {
-                // adjust index for tokens behind added tokens
-                Parallel.For(startIndex + tokenCellsToAdd.Count(), TokensForView.Count, i =>
-                {
-                    _tokensForView[i].StartIndex += removeTotalLen;
-                });
-            });
-
-            return new RangePair(rangeToRemove, new Range(rangeToRemove.StartIndex, tokenCellsToAdd.Count()));
-        }
-
-        private RangePair UpdateParsingToken(Range range, IEnumerable<TokenCell> tokenCells)
-        {
-            // remove process on parsing tokens
-            var rangeForParsing = GetRangeForParsing(range);
-            _tokensForParsing.RemoveRange(rangeForParsing.StartIndex, rangeForParsing.Count);
-            Range removedRange = new Range(rangeForParsing.StartIndex, rangeForParsing.Count);
-
-            // remove process on index map
-            Parallel.For(range.EndIndex + 1, _indexMap.Count, i =>
-            {
-                _indexMap[i] -= rangeForParsing.Count;
-            });
-            _indexMap.RemoveRange(range.StartIndex, range.Count);
-
-            // insert process on parsing tokens
-            int startIndex = range.StartIndex;
-            var toAddTokensForParsing = FilterForParsingToken(tokenCells);
-            int insertPos = rangeForParsing.StartIndex;
-//            int insertPos = FindFirstParsingIndexToForward(startIndex) + 1;
-            _tokensForParsing.InsertRange(insertPos, toAddTokensForParsing);
-
-            // insert process on index map
-            var indexMapSnippet = CreateIndexMapSnippet(insertPos, tokenCells);
-            Parallel.For(startIndex, _indexMap.Count, i =>
-            {
-                _indexMap[i] += toAddTokensForParsing.Count();
-            });
-            _indexMap.InsertRange(startIndex, indexMapSnippet);
-
-            return new RangePair(removedRange, new Range(insertPos, toAddTokensForParsing.Count()));
-        }
-
-
-        private IEnumerable<int> CreateIndexMapSnippet(int parsingStartIndex, IEnumerable<TokenCell> tokenCells)
-        {
-            List<int> result = new List<int>();
-
-            foreach (var token in tokenCells)
-            {
-                var tokenType = token.PatternInfo.Terminal.TokenType;
-
-                if (tokenType == TokenType.SpecialToken.Comment)
-                {
-                    result.Add(-1);
-                    continue;
-                }
-                if (tokenType == TokenType.SpecialToken.Delimiter)
-                {
-                    result.Add(-1);
-                    continue;
-                }
-
-                result.Add(parsingStartIndex++);
+                result = false;
             }
 
             return result;
         }
+
+
+
+        private Dictionary<TokenPatternInfo, List<int>> _tableForAllPatternsOnView = new Dictionary<TokenPatternInfo, List<int>>();
+        private TokenCellList _tokensForView = new TokenCellList();
+        private TokenCellList _tokensForParsing = new TokenCellList();
+        private IndexMap _indexMap = new IndexMap();
+
 
         private IEnumerable<TokenCell> FilterForParsingToken(IEnumerable<TokenCell> tokenCells)
         {
@@ -308,6 +182,15 @@ namespace Parse.FrontEnd.Tokenize
             return result;
         }
 
+        private IEnumerable<bool> IsParsingList(IEnumerable<TokenCell> tokenCells)
+        {
+            List<bool> result = new List<bool>();
+
+            foreach (var token in tokenCells) result.Add(IsParsingToken(token));
+
+            return result;
+        }
+
         private bool IsParsingToken(TokenCell token)
         {
             bool result = true;
@@ -319,46 +202,29 @@ namespace Parse.FrontEnd.Tokenize
             return result;
         }
 
-        private int FindFirstParsingIndexToForward(int index)
+        private void CheckRight()
         {
-            int result = -1;
+            if (_indexMap.Count != _tokensForView.Count) throw new System.Exception();
 
-            for (int i = index - 1; i >= 0; i--)
+            int errorIndex = -1;
+
+            Parallel.For(0, _tokensForView.Count, (i, option) =>
             {
-                result = _indexMap[i];
-                if (result >= 0) break;
-            }
+                var isParsingToken = IsParsingToken(_tokensForView[i]);
 
-            return result;
-        }
+                if (isParsingToken && _indexMap[i] < 0)
+                {
+                    errorIndex = i;
+                    option.Stop();
+                }
+                else if (!isParsingToken && _indexMap[i] >= 0)
+                {
+                    errorIndex = i;
+                    option.Stop();
+                }
+            });
 
-        private int FindFirstParsingIndexToBackward(int index)
-        {
-            int result = -1;
-
-            for (int i = index + 1; i < TokensForView.Count; i++)
-            {
-                result = _indexMap[i];
-                if (result >= 0) break;
-            }
-
-            return result;
-        }
-
-
-        private Range GetRangeForParsing(Range range)
-        {
-            List<int> indexes = new List<int>();
-
-            for (int i = range.StartIndex; i <= range.EndIndex; i++)
-            {
-                var parsingTokenIndex = _indexMap[i];
-                if (parsingTokenIndex == -1) continue;
-
-                indexes.Add(parsingTokenIndex);
-            }
-
-            return new Range(indexes.First(), indexes.Count());
+            if (errorIndex >= 0) throw new System.Exception();
         }
     }
 }

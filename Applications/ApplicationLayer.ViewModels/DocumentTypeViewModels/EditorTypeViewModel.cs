@@ -144,7 +144,7 @@ namespace ApplicationLayer.ViewModels.DocumentTypeViewModels
             this.Ast = semanticResult?.SdtsRoot;
 
 
-            AlarmCollection alarmCollection = GetSyntaxAlarmCollection(parsingResult);
+            AlarmCollection alarmCollection = GetSyntaxAlarmCollection(parsingCompletedInfo);
             alarmCollection.AddRange(GetSemanticAlarmCollection(semanticResult));
             if (alarmCollection.Count == 0) alarmCollection.Add(new AlarmEventArgs(string.Empty, this.FileName));
 
@@ -211,12 +211,13 @@ namespace ApplicationLayer.ViewModels.DocumentTypeViewModels
             foreach (var item in correctList) alarmList.Add(item);
         }
 
-        private AlarmCollection GetSyntaxAlarmCollection(ParsingResult parsingResult)
+        private AlarmCollection GetSyntaxAlarmCollection(ParsingCompletedEventArgs parsingCompletedInfo)
         {
             AlarmCollection alarmList = new AlarmCollection();
-            if (parsingResult.HasError)
+
+            if (parsingCompletedInfo.ParsingResult.HasError)
             {
-                this.AddAlarmData(parsingResult, alarmList);
+                this.AddAlarmData(parsingCompletedInfo, alarmList);
                 this.AdjustToValidAlarmList(alarmList);
             }
 
@@ -250,16 +251,16 @@ namespace ApplicationLayer.ViewModels.DocumentTypeViewModels
             return alarmList;
         }
 
-        private void AddAlarmData(ParsingResult e, AlarmCollection alarmList)
+        private void AddAlarmData(ParsingCompletedEventArgs e, AlarmCollection alarmList)
         {
-            int lineIndex = 0;
-            Parallel.For(0, e.Count, tokenIndex =>
+            Parallel.For(0, e.ParsingResult.Count, pIndex =>
             {
-                var block = e[tokenIndex];
-                if (block.Token.Input == "\n") lineIndex++;                // this may need to use a lock object.
+                var block = e.ParsingResult[pIndex];
                 if (block.ErrorInfos.Count == 0) return;
 
                 var errToken = block.Token;
+                var viewIndex = e.LexingData.GetVIndexFromPIndex(pIndex);
+                var lineIndex = e.LexingData.GetLineIndex(viewIndex);
 
                 // If the error fired on EndMarker then error point is last line.
                 //var point = (errToken.Kind != new EndMarker()) ?
@@ -271,7 +272,7 @@ namespace ApplicationLayer.ViewModels.DocumentTypeViewModels
                 lock (_lockObject)
                 {
                     foreach (var errorInfo in block.ErrorInfos)
-                        alarmList.Add(new AlarmEventArgs(projNode?.FileNameWithoutExtension, FileName, tokenIndex, lineIndex + 1, errToken, errorInfo));
+                        alarmList.Add(new AlarmEventArgs(projNode?.FileNameWithoutExtension, FileName, viewIndex, lineIndex + 1, errToken, errorInfo));
                 }
             });
         }

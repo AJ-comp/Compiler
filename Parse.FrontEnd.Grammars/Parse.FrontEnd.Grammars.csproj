@@ -10,22 +10,4 @@
     <ProjectReference Include="..\Parse\Parse.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Compile Update="Properties\AlarmCodes.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>AlarmCodes.resx</DependentUpon>
-    </Compile>
-  </ItemGroup>
-
-  <ItemGroup>
-    <EmbeddedResource Update="Properties\AlarmCodes.ko-KR.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Properties\AlarmCodes.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>AlarmCodes.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-  </ItemGroup>
-
 </Project>

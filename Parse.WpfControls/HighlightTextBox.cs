@@ -228,19 +228,17 @@ namespace Parse.WpfControls
 
             //            if (tokenStartIndex < 0) return result;
             //            if (startLine >= this.LineIndexes.Count) return result;
-
-            //            int maxCnt = (startLine + cnt < this.LineIndexes.Count) ? startLine + cnt : this.LineIndexes.Count;
-            int maxCnt = startLine + cnt;
+            int maxCnt = (startLine + cnt < RecentLexedData.GetLineCount()) ? startLine + cnt : RecentLexedData.GetLineCount();
 
             for (int i = startLine; i < maxCnt; i++)
             {
                 LineHighlightText lineString = new LineHighlightText();
                 var tokens = RecentLexedData.GetTokensForLine(i);
+                lineString.AbsoluteLineIndex = i;
 
                 foreach (var token in tokens)
-                {
                     lineString.Add(this.ConvertToHighlightToken(token));
-                }
+
 
                 result.Add(lineString);
             }

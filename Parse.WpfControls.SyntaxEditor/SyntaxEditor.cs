@@ -1,12 +1,8 @@
-﻿using Parse.FrontEnd;
-using Parse.FrontEnd.MiniCParser;
+﻿using Parse.FrontEnd.MiniCParser;
 using Parse.FrontEnd.Parsers.Datas;
-using Parse.FrontEnd.RegularGrammar;
 using Parse.WpfControls.SyntaxEditor.EventArgs;
 using System;
-using System.Collections.Generic;
 using System.Collections.Specialized;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -127,49 +123,5 @@ namespace Parse.WpfControls.SyntaxEditor
 
         // 전처리기 액션자 (ex : #if ~ #elsif ~ #else ~ #endif) 등록 함수 만들기
         // (파라메터 : 1.액션자 syntax, 액션자 범주에서 행동 요소), 3.액션자의 Highlight Color)
-
-        private void MoveCaretToToken(int tokenIndex, TokenData tokenData)
-        {
-            if (tokenIndex >= this.parsingResult.Count) return;
-            var tokenDataToCompare = this.parsingResult[tokenIndex].Token;
-
-            if (tokenDataToCompare.Equals(tokenData) == false) return;
-            if (tokenDataToCompare.Input != tokenData.Input) return;
-
-            this.TextArea.MoveCaretToToken(tokenIndex);
-        }
-
-
-
-        private static void ParsingFailedListPreProcess(ParsingResult e)
-        {
-            List<Tuple<int, ParsingBlock>> errorBlocks = new List<Tuple<int, ParsingBlock>>();
-
-            Parallel.For(0, e.Count, i =>
-            {
-                var block = e[i];
-                if (block.Token.Kind == null) return;
-                if (block.ErrorInfos.Count == 0)
-                {
-                    block.Token.TokenCell.ValueOptionData = DrawingOption.None;
-                    return;
-                }
-
-                var errToken = block.Token;
-
-                DrawingOption status = DrawingOption.None;
-                if (errToken.TokenCell.ValueOptionData != null)
-                    status = (DrawingOption)errToken.TokenCell.ValueOptionData;
-
-                if (errToken.Kind == new EndMarker())
-                    status |= DrawingOption.EndPointUnderline;
-                else
-                    status |= DrawingOption.Underline;
-
-                errToken.TokenCell.ValueOptionData = status;
-
-                lock (errorBlocks) errorBlocks.Add(new Tuple<int, ParsingBlock>(i, block));
-            });
-        }
     }
 }

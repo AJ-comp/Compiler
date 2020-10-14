@@ -106,6 +106,9 @@ namespace Parse.FrontEnd.Tokenize
         }
 
 
+        public int GetLineCount() => _lineIndexer.Count() + 1;
+
+
         public int GetColumnIndexOfLine(int tokenIndex)
         {
             var line = GetLineIndex(tokenIndex);

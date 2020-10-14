@@ -2,6 +2,7 @@
 using Parse.FrontEnd.Grammars.MiniC.Sdts.Datas;
 using Parse.FrontEnd.Grammars.MiniC.Sdts.Datas.Variables;
 using Parse.FrontEnd.Grammars.Properties;
+using Parse.FrontEnd.MiniC.Properties;
 using System.Collections.Generic;
 
 namespace Parse.FrontEnd.Grammars.MiniC.Sdts

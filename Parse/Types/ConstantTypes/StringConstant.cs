@@ -4,15 +4,11 @@ namespace Parse.Types.ConstantTypes
 {
     public class StringConstant : Constant, IString
     {
-        public StringConstant(string value) : base(value, State.Fixed, 0)
+        public StringConstant(string value) : base(value, State.Fixed)
         {
         }
 
-        public StringConstant(uint pointerLevel, string value) : base(value, State.Fixed, pointerLevel)
-        {
-        }
-
-        public StringConstant(string value, State valueState, uint pointerLevel) : base(value, valueState, pointerLevel)
+        public StringConstant(string value, State valueState) : base(value, valueState)
         {
         }
 
