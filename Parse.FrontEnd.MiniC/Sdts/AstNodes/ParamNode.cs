@@ -21,7 +21,7 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts.AstNodes
                                                                     VariableNode.DimensionToken,
                                                                     BlockLevel,
                                                                     Offset,
-                                                                    VariableMiniC.VarProperty.Param);
+                                                                    VarProperty.Param);
             }
         }
 

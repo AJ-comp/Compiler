@@ -10,13 +10,15 @@ namespace Parse.MiddleEnd.IR.Datas
         public IEnumerable<IRVar> Arguments => _arguments;
         public bool IsSigned => false;
         public bool IsNan => false;
+        public uint PointerLevel { get; set; }
 
-        public IRFuncData(IEnumerable<IRVar> arguments, bool constReturn, ReturnType returnType, string name)
+        public IRFuncData(IEnumerable<IRVar> arguments, bool constReturn, ReturnType returnType, string name, uint pointerLevel)
         {
             _arguments.AddRange(arguments);
             ConstReturn = constReturn;
             ReturnType = returnType;
             Name = name;
+            PointerLevel = pointerLevel;
         }
 
         private List<IRVar> _arguments = new List<IRVar>();

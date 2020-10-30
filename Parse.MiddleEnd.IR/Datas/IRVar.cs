@@ -1,22 +1,23 @@
 ﻿using Parse.Types;
-using Parse.Types.VarTypes;
 
 namespace Parse.MiddleEnd.IR.Datas
 {
-    public interface IRVar : IVariable
+    public interface IRVar : IValue
     {
         string Name { get; }
-        int Block { get; }
-        int Offset { get; }
+        int Block { get; set; }
+        int Offset { get; set; }
         int Length { get; }
+        uint PointerLevel { get; set; }
     }
 
-
-    public interface IRIntegerVar : IRVar, IByte, IShort, IInt
+    public interface IRSignableVar : IRVar
     {
+        public bool Signed { get; }
     }
 
-    public interface IRDoubleVar : IRVar, IDouble
+    public interface IRDoubleVar : IRVar
     {
+        public bool Nan { get; }
     }
 }

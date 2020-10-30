@@ -1,9 +1,8 @@
-﻿using System.Collections.Generic;
-
-namespace Parse.MiddleEnd.IR.Datas
+﻿namespace Parse.MiddleEnd.IR.Datas
 {
     public interface IUseDefChainable
     {
         string Name { get; }
+        uint PointerLevel { get; set; }
     }
 }

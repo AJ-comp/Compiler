@@ -9,13 +9,4 @@
         State ValueState { get; }
         bool IsInitialized => (ValueState != State.NotInit);
     }
-
-
-    public interface IPointerValue
-    {
-        int PointerLevel { get; }
-        int Value { get; }
-        State ValueState { get; }
-        bool IsInitialized => (ValueState != State.NotInit);
-    }
 }

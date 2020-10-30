@@ -165,4 +165,7 @@
   <data name="RemoveParsingUnits" xml:space="preserve">
     <value>Shift가 불가하므로 {0}개 만큼 되돌립니다.</value>
   </data>
+  <data name="StackForAst" xml:space="preserve">
+    <value>Ast 스택</value>
+  </data>
 </root>

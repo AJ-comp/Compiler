@@ -3,7 +3,7 @@ using System.Diagnostics;
 
 namespace Parse.Types.VarTypes
 {
-    [DebuggerDisplay("Value:{Value}, ValueState:{ValueState}, PointerLevel:{PointerLevel}")]
+    [DebuggerDisplay("Value:{Value}, ValueState:{ValueState}")]
     public abstract class Variable : IVariable
     {
         public int Address { get; set; }
@@ -30,5 +30,40 @@ namespace Parse.Types.VarTypes
         }
 
         public abstract IConstant Assign(IValue operand);
+        public abstract bool CanAssign(IValue operand);
+    }
+
+
+
+    public abstract class ValueVariable : Variable
+    {
+        protected ValueVariable(IValue value) : base(value)
+        {
+        }
+    }
+
+
+    [DebuggerDisplay("Value:{Value}, ValueState:{ValueState}")]
+    public class PointerVariable : Variable, ICanBePointerType
+    {
+        public PointerVariable(DType type, IValue value) : base(value)
+        {
+            TypeName = type;
+        }
+
+        public int PointerLevel { get; }
+        public override DType TypeName { get; }
+        uint ICanBePointerType.PointerLevel { get; }
+
+
+        public override bool CanAssign(IValue operand)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public override IConstant Assign(IValue operand)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

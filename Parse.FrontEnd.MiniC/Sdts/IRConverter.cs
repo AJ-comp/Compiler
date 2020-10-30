@@ -1,5 +1,5 @@
-﻿using Parse.MiddleEnd.IR;
-using static Parse.FrontEnd.Grammars.MiniC.Sdts.Datas.Variables.VariableMiniC;
+﻿using Parse.FrontEnd.Grammars.MiniC.Sdts.Datas.Variables;
+using Parse.MiddleEnd.IR;
 
 namespace Parse.FrontEnd.Grammars.MiniC.Sdts
 {

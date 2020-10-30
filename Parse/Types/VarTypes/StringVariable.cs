@@ -15,9 +15,16 @@ namespace Parse.Types.VarTypes
         {
         }
 
+        public override bool CanAssign(IValue operand)
+        {
+            if (!Operation.CanOperation(this, operand)) return false;
+
+            return true;
+        }
+
         public override IConstant Assign(IValue operand)
         {
-            if (!Operation.CanOperation(this, operand)) throw new FormatException();
+            if (!CanAssign(operand)) throw new FormatException();
 
             if (operand is IString)
             {

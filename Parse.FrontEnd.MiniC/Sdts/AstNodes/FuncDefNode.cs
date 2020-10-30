@@ -50,7 +50,7 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts.AstNodes
             foreach (var varTable in SymbolTable.AllVarTable)
             {
                 foreach (var varRecord in varTable)
-                    if (varRecord.DefineField.VariableProperty == VariableMiniC.VarProperty.Param) paramVars.Add(varRecord.DefineField);
+                    if (varRecord.DefineField.VariableProperty == VarProperty.Param) paramVars.Add(varRecord.DefineField);
             }
 
             FuncHeadNode funcHead = FuncHead;
@@ -58,7 +58,8 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts.AstNodes
             return new IRFuncData(paramVars,
                                                 funcHead.ReturnType.Const,
                                                 IRConverter.ToIRReturnType(funcHead.ReturnType.DataType),
-                                                funcHead.Name
+                                                funcHead.Name,
+                                                0
                                                 );
         }
     }

@@ -196,6 +196,15 @@ namespace Parse.FrontEnd.Parsers.Properties {
         }
         
         /// <summary>
+        ///   The stack for ast과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string StackForAst {
+            get {
+                return ResourceManager.GetString("StackForAst", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   try to adjust a stack with this token과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string TryAdjustStackWithThisToken {

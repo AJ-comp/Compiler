@@ -1,4 +1,5 @@
-﻿using Parse.MiddleEnd.IR.LLVM.Models.VariableModels;
+﻿using Parse.MiddleEnd.IR.Datas;
+using Parse.MiddleEnd.IR.LLVM.Models.VariableModels;
 using Parse.Types;
 using System.Collections.Generic;
 
@@ -46,7 +47,7 @@ namespace Parse.MiddleEnd.IR.LLVM.Expressions.ExprExpressions
         }
 
         protected bool IsDoubleType(IValue value) => (value is IDouble);
-        protected IEnumerable<Instruction> ExtensionToI32Inst(IntegerVariableLLVM value, LLVMSSATable ssTable)
+        protected IEnumerable<Instruction> ExtensionToI32Inst(IntegerVarLLVM value, LLVMSSATable ssTable)
         {
             List<Instruction> result = new List<Instruction>();
             if (value is IInt) return result;

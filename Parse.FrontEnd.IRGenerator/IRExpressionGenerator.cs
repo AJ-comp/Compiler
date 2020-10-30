@@ -5,6 +5,7 @@ using Parse.FrontEnd.Grammars.MiniC.Sdts.AstNodes.ExprNodes.AssignExprNodes;
 using Parse.FrontEnd.Grammars.MiniC.Sdts.AstNodes.ExprNodes.LiteralNodes;
 using Parse.FrontEnd.Grammars.MiniC.Sdts.AstNodes.ExprNodes.LogicalExprNodes;
 using Parse.FrontEnd.Grammars.MiniC.Sdts.AstNodes.StatementNodes;
+using Parse.FrontEnd.MiniC.Sdts.AstNodes.ExprNodes;
 using Parse.MiddleEnd.IR;
 using Parse.MiddleEnd.IR.LLVM;
 using Parse.MiddleEnd.IR.LLVM.Expressions;
@@ -67,6 +68,7 @@ namespace Parse.FrontEnd.IRGenerator
             else if (rootNode is PostIncExprNode) rootNode.ConvertingToIRExpression = PostIncExprNodeToIRExpression;
             else if (rootNode is PreDecExprNode) rootNode.ConvertingToIRExpression = PreDecExprNodeToIRExpression;
             else if (rootNode is PostDecExprNode) rootNode.ConvertingToIRExpression = PostDecExprNodeToIRExpression;
+            else if (rootNode is DeRefExprNode) rootNode.ConvertingToIRExpression = DeRefExprNodeToIRExpression;
 
             else if (rootNode is UseIdentNode) rootNode.ConvertingToIRExpression = UseIdentNodeToIRExpression;
             else if (rootNode is LiteralNode) rootNode.ConvertingToIRExpression = LiteralNodeToIRExpression;

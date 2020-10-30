@@ -1,4 +1,4 @@
-﻿using static Parse.FrontEnd.Grammars.MiniC.Sdts.Datas.Variables.VariableMiniC;
+﻿using Parse.FrontEnd.Grammars.MiniC.Sdts.Datas.Variables;
 
 namespace Parse.FrontEnd.Grammars.MiniC.Sdts.Datas
 {

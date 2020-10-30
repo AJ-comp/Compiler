@@ -17,10 +17,17 @@ namespace Parse.Types.VarTypes
             Signed = value.Signed;
         }
 
+        public override bool CanAssign(IValue operand)
+        {
+            if (!Operation.CanOperation(this, operand)) return false;
+            if (!(operand is IIntegerKind)) return false;
+
+            return true;
+        }
+
         public override IConstant Assign(IValue operand)
         {
-            if (!Operation.CanOperation(this, operand)) throw new FormatException();
-            if (!(operand is IIntegerKind)) throw new NotSupportedException();
+            if(!CanAssign(operand)) throw new NotSupportedException();
 
             if (operand is IVariable)
             {

@@ -1,5 +1,4 @@
 ﻿using Parse.FrontEnd.Grammars.MiniC.Sdts.AstNodes.ExprNodes;
-using Parse.MiddleEnd.IR.Datas;
 using Parse.Types;
 using Parse.Types.ConstantTypes;
 using Parse.Types.Operations;
@@ -7,7 +6,7 @@ using System;
 
 namespace Parse.FrontEnd.Grammars.MiniC.Sdts.Datas.Variables
 {
-    public class StringVariableMiniC : VariableMiniC, IRVar, IString
+    public class StringVariableMiniC : VariableMiniC, IString
     {
         public StringVariableMiniC(MiniCTypeInfo typeDatas, 
                                                 TokenData nameToken, 
@@ -31,6 +30,16 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts.Datas.Variables
         public static IValue Convert(ExprNode node)
         {
             return null;
+        }
+
+        public override IConstant Assign(IValue operand)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override bool CanAssign(IValue operand)
+        {
+            throw new NotImplementedException();
         }
     }
 }

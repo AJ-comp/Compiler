@@ -7,7 +7,6 @@ namespace Parse.Types
     { 
         Unknown, 
         Bit, Byte, Short, Int, Double,
-        PBit, PByte, PShort, PInt, PDouble
     }
 
     public interface IDataTypeSpec : ICompareOperation

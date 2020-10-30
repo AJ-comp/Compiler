@@ -2,7 +2,6 @@
 {
     public interface ICanBePointerType
     {
-        uint PointerLevel { get; }
-        bool IsPointerType => PointerLevel > 0;
+        public uint PointerLevel { get; }
     }
 }

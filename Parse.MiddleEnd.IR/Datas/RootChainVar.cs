@@ -1,5 +1,4 @@
 ﻿using Parse.Types;
-using Parse.Types.ConstantTypes;
 
 namespace Parse.MiddleEnd.IR.Datas
 {
@@ -9,11 +8,11 @@ namespace Parse.MiddleEnd.IR.Datas
 
         public override DType TypeName { get; }
         public override string Name { get; }
-        public override int Block => throw new System.NotImplementedException();
-        public override int Offset { get => throw new System.NotImplementedException(); protected set => throw new System.NotImplementedException(); }
+        public override int Block { get; set; }
+        public override int Offset { get; set; }
         public override int Length => throw new System.NotImplementedException();
 
-        public RootChainVar(IRVar var) : base(var)
+        public RootChainVar(IRVar var) : base(var.PointerLevel)
         {
             TypeName = var.TypeName;
             Name = var.Name;
@@ -24,9 +23,10 @@ namespace Parse.MiddleEnd.IR.Datas
             LinkedObject = toLinkObject;
         }
 
-        public override IConstant Assign(IValue operand)
+        public override string ToString()
         {
-            throw new System.NotImplementedException();
+            return string.Format("TypeName : {0}, Name : {1}, PointerLevel : {2}, Offset : {3}, Length {4}",
+                                            TypeName, Name, PointerLevel, Offset, Length);
         }
     }
 }

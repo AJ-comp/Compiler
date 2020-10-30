@@ -63,7 +63,7 @@ namespace Parse.FrontEnd.IRGenerator
             // local variable initialize
             foreach (var varRecord in cNode.SymbolTable.VarTable)
             {
-                if (varRecord.DefineField.VariableProperty == VariableMiniC.VarProperty.Param) continue;
+                if (varRecord.DefineField.VariableProperty == VarProperty.Param) continue;
                 if (varRecord.InitValue != null)
                     blockExpression.AddItem
                         (

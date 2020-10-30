@@ -1,5 +1,5 @@
-﻿using Parse.Types;
-using static Parse.FrontEnd.Grammars.MiniC.Sdts.Datas.Variables.VariableMiniC;
+﻿using Parse.FrontEnd.Grammars.MiniC.Sdts.Datas.Variables;
+using Parse.Types;
 
 namespace Parse.FrontEnd.Grammars.MiniC
 {
@@ -21,6 +21,7 @@ namespace Parse.FrontEnd.Grammars.MiniC
 
             if (data == MiniCGrammar.Void.Value) result = MiniCDataType.Void;
             else if (data == MiniCGrammar.Int.Value) result = MiniCDataType.Int;
+            else if (data == MiniCGrammar.Address.Value) result = MiniCDataType.Address;
 
             return result;
         }

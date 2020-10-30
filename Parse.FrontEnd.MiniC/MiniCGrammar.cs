@@ -12,6 +12,7 @@ namespace Parse.FrontEnd.Grammars.MiniC
         public Terminal Const { get; } = new Terminal(TokenType.Keyword.DefinedDataType, "const");
         public static Terminal Char { get; } = new Terminal(TokenType.Keyword.DefinedDataType, "char");
         public static Terminal Short { get; } = new Terminal(TokenType.Keyword.DefinedDataType, "short");
+        public static Terminal System { get; } = new Terminal(TokenType.Keyword.DefinedDataType, "system");
         public static Terminal Int { get; } = new Terminal(TokenType.Keyword.DefinedDataType, "int");
         public static Terminal Double { get; } = new Terminal(TokenType.Keyword.DefinedDataType, "double");
         public static Terminal Address { get; } = new Terminal(TokenType.Keyword.DefinedDataType, "address");
@@ -119,6 +120,7 @@ namespace Parse.FrontEnd.Grammars.MiniC
         public static MeaningUnit AddressNode { get; } = new MeaningUnit(nameof(AddressNode));
         public static MeaningUnit CharNode { get; } = new MeaningUnit(nameof(CharNode));
         public static MeaningUnit ShortNode { get; } = new MeaningUnit(nameof(ShortNode));
+        public static MeaningUnit SystemNode { get; } = new MeaningUnit(nameof(SystemNode));
         public static MeaningUnit IntNode { get; } = new MeaningUnit(nameof(IntNode));
         public static MeaningUnit DoubleNode { get; } = new MeaningUnit(nameof(DoubleNode));
         public static MeaningUnit VoidNode { get; } = new MeaningUnit(nameof(VoidNode));
@@ -138,6 +140,7 @@ namespace Parse.FrontEnd.Grammars.MiniC
         public static MeaningUnit Index { get; } = new MeaningUnit(nameof(Index));
         public static MeaningUnit Call { get; } = new MeaningUnit(nameof(Call));
         public static MeaningUnit ActualParam { get; } = new MeaningUnit(nameof(ActualParam), MatchedAction.OffsetPlus);
+        public static MeaningUnit DeRef { get; } = new MeaningUnit(nameof(DeRef));
         public static MeaningUnit UseVar { get; } = new MeaningUnit(nameof(UseVar));
         public static MeaningUnit IntLiteralNode { get; } = new MeaningUnit(nameof(IntLiteralNode));
 
@@ -187,6 +190,7 @@ namespace Parse.FrontEnd.Grammars.MiniC
             this.typeSpecifier.AddItem(Address, AddressNode);
             this.typeSpecifier.AddItem(Char, CharNode);
             this.typeSpecifier.AddItem(Short, ShortNode);
+            this.typeSpecifier.AddItem(System, SystemNode);
             this.typeSpecifier.AddItem(Int, IntNode);
             this.typeSpecifier.AddItem(Double, DoubleNode);
             this.typeSpecifier.AddItem(Void, VoidNode);
@@ -264,18 +268,18 @@ namespace Parse.FrontEnd.Grammars.MiniC
 
             this.postfixExp.AddItem(this.primaryExp);
             this.postfixExp.AddItem(this.postfixExp + this.OpenSquareBrace + this.expression + this.CloseSquareBrace, Index);
-            this.postfixExp.AddItem(this.postfixExp + this.OpenParenthesis + this.optActualParam + this.CloseParenthesis, Call);
+            this.postfixExp.AddItem(this.postfixExp + this.OpenParenthesis + this.optActualParam.Optional() + this.CloseParenthesis, Call);
             this.postfixExp.AddItem(this.postfixExp + this.Inc, PostIncM);
             this.postfixExp.AddItem(this.postfixExp + this.Dec, PostDecM);
+            this.postfixExp.AddItem(Mul + this.postfixExp, DeRef);
 
             this.optActualParam.AddItem(this.actualParam, ActualParam);
-            this.optActualParam.AddItem(new Epsilon());
 
             this.actualParam.AddItem(this.actualParamList);
             this.actualParamList.AddItem(this.logicalOrExp);
             this.actualParamList.AddItem(this.actualParamList + this.Comma + this.logicalOrExp);
 
-            this.primaryExp.AddItem(Mul.Optional() + Ident, UseVar);
+            this.primaryExp.AddItem(Ident, UseVar);
             this.primaryExp.AddItem(this.optNumber, IntLiteralNode);
             this.primaryExp.AddItem(this.OpenParenthesis + this.expression + this.CloseParenthesis);
 

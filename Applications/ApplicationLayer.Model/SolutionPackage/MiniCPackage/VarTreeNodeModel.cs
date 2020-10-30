@@ -14,7 +14,7 @@ namespace ApplicationLayer.Models.SolutionPackage.MiniCPackage
         public string BlockIndex => (_varData != null) ? _varData.Block.ToString() : string.Empty;
         public string Offset => (_varData != null) ? _varData.Offset.ToString() : string.Empty;
         public bool IsGlobal => (_varData?.Block== 0);
-        public bool IsParam => (_varData?.VariableProperty == VariableMiniC.VarProperty.Param);
+        public bool IsParam => (_varData?.VariableProperty == VarProperty.Param);
 
         public override string DisplayName
         {

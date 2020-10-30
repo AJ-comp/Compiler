@@ -15,7 +15,7 @@ namespace Parse.MiddleEnd.IR.LLVM
 
         public string CommandLine { get; }
         public VariableLLVM NewSSAVar { get; }
-        public string Comment => (_comment.Length > 0) ?  ";" + _comment : string.Empty;
+        public string Comment => (_comment.Length > 0) ? ";" + _comment : string.Empty;
 
         public string FullData => CommandLine + Comment;
 
@@ -37,18 +37,18 @@ namespace Parse.MiddleEnd.IR.LLVM
         // @a = [common] global i32 0, align 4
         internal static Instruction DeclareGlobalVar(RootChainVar var, string comment = "")
         {
-            var type = LLVMConverter.ToInstructionName(var.TypeName);
-            int align = LLVMConverter.ToAlignSize(var.TypeName);
+            int align = LLVMConverter.ToAlignSize(var);
+            var type = LLVMConverter.ToInstructionName(var);
 
             return new Instruction(string.Format("{0} = global {1} {2}, align {3}",
-                                                                    var.LinkedObject.Name, type, var.Value, align),
+                                                                    var.LinkedObject.Name, type, var.Name, align),
                                                                     comment);
         }
 
         internal static Instruction DeclareLocalVar(RootChainVar var, string comment = "")
         {
+            int align = LLVMConverter.ToAlignSize(var);
             var type = LLVMConverter.ToInstructionName(var.TypeName);
-            int align = LLVMConverter.ToAlignSize(var.TypeName);
 
             return new Instruction(string.Format("{0} = alloca {1}, align {2}",
                                                                     var.LinkedObject.Name, type, align),
@@ -57,11 +57,12 @@ namespace Parse.MiddleEnd.IR.LLVM
 
         // sample
         // <result> = load <ty>, <ty>* <pointer>[, align <alignment>]
-        internal static Instruction Load(VariableLLVM useVar, LLVMSSATable ssTable, string comment = "")
+        internal static Instruction Load(VariableLLVM useVar, LLVMSSATable ssaTable, string comment = "")
         {
-            var newVar = ssTable.NewLink(useVar);
-            var type = LLVMConverter.ToInstructionName(newVar.TypeName);
-            int align = LLVMConverter.ToAlignSize(newVar.TypeName);
+            var newVar = ssaTable.NewLink(useVar);
+
+            int align = LLVMConverter.ToAlignSize(newVar);
+            var type = LLVMConverter.ToInstructionName(newVar);
 
             return new Instruction(string.Format("{0} = load {1}, {1}* {2}, align {3}",
                                                                     newVar.Name, type, useVar.Name, align),     // string param
@@ -71,38 +72,56 @@ namespace Parse.MiddleEnd.IR.LLVM
 
         // sample
         // store i32 %3, i32* @a, align 4
-        internal static Instruction Store(IRVar fromSSVar, IRVar toSSVar, string comment = "")
+        internal static Instruction Store(IRVar fromSSVar, IRVar toSSVar, bool deRef = false, string comment = "")
         {
-            var fromType = LLVMConverter.ToInstructionName(fromSSVar.TypeName);
-            int fromAlign = LLVMConverter.ToAlignSize(fromSSVar.TypeName);
+            if (deRef)
+            {
+                if (fromSSVar.PointerLevel != toSSVar.PointerLevel - 1) throw new FormatException();
+            }
 
-            return new Instruction(string.Format("store {0} {1}, {0}* {2}, align {3}", 
+            int fromAlign = LLVMConverter.ToAlignSize(fromSSVar);
+            var fromType = LLVMConverter.ToInstructionName(fromSSVar);
+
+            return new Instruction(string.Format("store {0} {1}, {0}* {2}, align {3}",
                                                                     fromType, fromSSVar.Name, toSSVar.Name, fromAlign), // string param
                                                                     comment);                                                                   // comment
         }
 
         // sample
         // store i32 10, i32* %1, align 4
-        internal static Instruction Store(IConstant value, IRVar toSSVar, string comment = "")
+        internal static Instruction Store(IConstant value, IRVar toSSVar, bool deRef = false, string comment = "")
         {
-            var fromType = LLVMConverter.ToInstructionName(toSSVar.TypeName);
-            int fromAlign = LLVMConverter.ToAlignSize(toSSVar.TypeName);
+            if(deRef)
+            {
+                if (toSSVar.PointerLevel == 0) throw new FormatException();
+                toSSVar.PointerLevel--;
+            }
 
-            return new Instruction(string.Format("store {0} {1}, {0}* {2}, align {3}",
-                                                                    fromType, value.Value, toSSVar.Name, fromAlign),      // string param
+            int fromAlign = LLVMConverter.ToAlignSize(toSSVar);
+            var toType = LLVMConverter.ToInstructionName(toSSVar);
+
+            string valueString = (toSSVar.PointerLevel > 0)
+                                      ? string.Format("inttoptr (i64 {0} to {1})", value.Value, toType) : value.Value.ToString();
+
+            var result = new Instruction(string.Format("store {0} {1}, {0}* {2}, align {3}",
+                                                                    toType, valueString, toSSVar.Name, fromAlign),      // string param
                                                                     comment);                                                               // comment
+
+            if (deRef) toSSVar.PointerLevel++;
+
+            return result;
         }
 
         // sample
         // <result> = add nsw <ty> <op1>, <op2>
-        internal static Instruction BinOp(VariableLLVM op1, VariableLLVM op2, LLVMSSATable ssTable, IROperation operation)
+        internal static Instruction BinOp(VariableLLVM op1, VariableLLVM op2, LLVMSSATable ssaTable, IROperation operation)
         {
-            var newVar = ssTable.NewLink(op1, op2);
+            var newVar = ssaTable.NewLink(op1, op2);
             var binOp = Helper.GetEnumDescription(operation);
 
             if (op1 is DoubleVariableLLVM)
             {
-                return new Instruction(string.Format("{0} = f{1} double {2}, {3}", 
+                return new Instruction(string.Format("{0} = f{1} double {2}, {3}",
                                                                         newVar.Name, binOp, op1.Name, op2.Name),
                                                                         newVar);
             }
@@ -110,7 +129,7 @@ namespace Parse.MiddleEnd.IR.LLVM
             {
                 var type = LLVMConverter.ToInstructionName(op1.TypeName);
 
-                return new Instruction(string.Format("{0} = {1} nsw {2} {3}, {4}", 
+                return new Instruction(string.Format("{0} = {1} nsw {2} {3}, {4}",
                                                                         newVar.Name, binOp, type, op1.Name, op2.Name),
                                                                         newVar);
             }
@@ -123,7 +142,7 @@ namespace Parse.MiddleEnd.IR.LLVM
 
             if (op1.TypeName == DType.Double)
             {
-                return new Instruction(string.Format("{0} = f{1} double {2}, {3}", 
+                return new Instruction(string.Format("{0} = f{1} double {2}, {3}",
                                                                         newVar.Name, binOp, op1.Name, op2.Value),
                                                                         newVar);
             }
@@ -131,7 +150,7 @@ namespace Parse.MiddleEnd.IR.LLVM
             {
                 var type = LLVMConverter.ToInstructionName(op1.TypeName);
 
-                return new Instruction(string.Format("{0} = {1} nsw {2} {3}, {4}", 
+                return new Instruction(string.Format("{0} = {1} nsw {2} {3}, {4}",
                                                                         newVar.Name, binOp, type, op1.Name, op2.Value),
                                                                         newVar);
             }
@@ -141,7 +160,7 @@ namespace Parse.MiddleEnd.IR.LLVM
         // <result> = sext <ty> <op> to <to_op> || <result> = trunc <ty> <op> to <to_op>
         internal static Instruction ConvertType(VariableLLVM op, DType toType, LLVMSSATable ssTable)
         {
-            var typeSize = LLVMConverter.ToAlignSize(op.TypeName);
+            var typeSize = LLVMConverter.ToAlignSize(op);
             var toTypeSize = LLVMConverter.ToAlignSize(toType);
 
             if (toType == DType.Double) throw new ArgumentException();
@@ -152,7 +171,7 @@ namespace Parse.MiddleEnd.IR.LLVM
 
             var newVar = ssTable.NewLink(toType, op);
 
-            if(typeSize < toTypeSize)
+            if (typeSize < toTypeSize)
             {
                 var command = (typeSize == 0) ? "zext" : "sext";
 
@@ -175,12 +194,12 @@ namespace Parse.MiddleEnd.IR.LLVM
         {
             var newVar = ssTable.NewLink(DType.Double, var);
 
-            if(var.Signed)
-                return new Instruction(string.Format("{0} = sitofp i32 {1} to i32", 
+            if (var.Signed)
+                return new Instruction(string.Format("{0} = sitofp i32 {1} to i32",
                                                                         newVar.Name, var.Name),
                                                                         newVar);
             else
-                return new Instruction(string.Format("{0} = uitofp i32 {1} to i32", 
+                return new Instruction(string.Format("{0} = uitofp i32 {1} to i32",
                                                                         newVar.Name, var.Name),
                                                                         newVar);
         }
@@ -197,9 +216,9 @@ namespace Parse.MiddleEnd.IR.LLVM
             if (op1.TypeName != DType.Int) throw new FormatException();
             if (op2.TypeName != DType.Int) throw new FormatException();
 
-            return (op1 is IVariable && op2 is IVariable) ? Icmp(cond, op1 as IntVariableLLVM, op2 as IntVariableLLVM, ssTable) :
-                      (op1 is IVariable && op2 is IConstant) ? Icmp(cond, op1 as IntVariableLLVM, op2 as IntConstant, ssTable) :
-                      (op1 is IConstant && op2 is IVariable) ? Icmp(cond, op2 as IntVariableLLVM, op1 as IntConstant, ssTable)
+            return (op1 is IRVar && op2 is IRVar) ? Icmp(cond, op1 as IntVariableLLVM, op2 as IntVariableLLVM, ssTable) :
+                      (op1 is IRVar && op2 is IConstant) ? Icmp(cond, op1 as IntVariableLLVM, op2 as IntConstant, ssTable) :
+                      (op1 is IConstant && op2 is IRVar) ? Icmp(cond, op2 as IntVariableLLVM, op1 as IntConstant, ssTable)
                                                                              : throw new FormatException();
         }
 
@@ -253,7 +272,7 @@ namespace Parse.MiddleEnd.IR.LLVM
             var typeName = LLVMConverter.ToInstructionName(op1.TypeName);
             var condIns = LLVMConverter.GetInstructionNameForDouble(cond, isNan);
 
-            return new Instruction(string.Format("{0} = fcmp {1} {2} {3}, {4}", 
+            return new Instruction(string.Format("{0} = fcmp {1} {2} {3}, {4}",
                                                                     newVar.Name, condIns, typeName, op1.Name, op2.Name),
                                                                     newVar);
         }
@@ -267,7 +286,7 @@ namespace Parse.MiddleEnd.IR.LLVM
             var typeName = LLVMConverter.ToInstructionName(op1.TypeName);
             var condIns = LLVMConverter.GetInstructionNameForDouble(cond, isNan);
 
-            return new Instruction(string.Format("{0} = fcmp {1} {2} {3}, {4}", 
+            return new Instruction(string.Format("{0} = fcmp {1} {2} {3}, {4}",
                                                                     newVar.Name, condIns, typeName, op1.Name, op2.Value),
                                                                     newVar);
         }
@@ -276,7 +295,7 @@ namespace Parse.MiddleEnd.IR.LLVM
         // br i1 <condlabel>, label <iftrue>, label <iffalse>
         internal static Instruction CBranch(BitVariableLLVM cond, BitVariableLLVM trueLabel, BitVariableLLVM falseLabel)
         {
-            return new Instruction(string.Format("br i1 {0}, label {1}, label {2}", 
+            return new Instruction(string.Format("br i1 {0}, label {1}, label {2}",
                                                                     cond.Name, trueLabel.Name, falseLabel.Name));
         }
 
@@ -292,7 +311,7 @@ namespace Parse.MiddleEnd.IR.LLVM
                 var resultVar = ssaTable.NewLink(irFuncData);
                 returnCommand = resultVar.Name;
             }
-            
+
             string command = string.Format("call {0} @{1}", LLVMConverter.ToInstructionName(irFuncData.ReturnType), irFuncData.Name);
 
             string argData = "(";
@@ -316,7 +335,7 @@ namespace Parse.MiddleEnd.IR.LLVM
                                                                  : new Instruction(string.Format("{0}{1}", command, argData));
         }
 
-        internal static Instruction EmptyLine(string comment="") => new Instruction(string.Empty, comment);
+        internal static Instruction EmptyLine(string comment = "") => new Instruction(string.Empty, comment);
 
         public string ToFormatString() => string.Format("{0} {1}", CommandLine, Comment);
 

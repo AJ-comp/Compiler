@@ -12,10 +12,17 @@ namespace Parse.Types.VarTypes
         {
         }
 
+        public override bool CanAssign(IValue operand)
+        {
+            if (!Operation.CanOperation(this, operand)) return false;
+            if (!(operand is IBit)) return false;
+
+            return true;
+        }
+
         public override IConstant Assign(IValue operand)
         {
-            if (!Operation.CanOperation(this, operand)) throw new FormatException();
-            if (!(operand is IBit)) throw new NotSupportedException();
+            if(!CanAssign(operand)) throw new NotSupportedException();
 
             if (operand is IVariable)
                 ValueConstant = (operand as IVariable).ValueConstant;

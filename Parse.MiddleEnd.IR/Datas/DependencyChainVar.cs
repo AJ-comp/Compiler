@@ -1,5 +1,4 @@
-﻿using Parse.Types;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace Parse.MiddleEnd.IR.Datas
 {
@@ -7,7 +6,7 @@ namespace Parse.MiddleEnd.IR.Datas
     {
         public IEnumerable<DependencyChainVar> LinkedObject => _linkedObject;
 
-        protected DependencyChainVar(IValue value) : base(value)
+        protected DependencyChainVar(uint pointerLevel) : base(pointerLevel)
         {
         }
 

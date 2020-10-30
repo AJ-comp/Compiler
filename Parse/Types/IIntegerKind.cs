@@ -1,5 +1,4 @@
-﻿using Parse.Types.ConstantTypes;
-using Parse.Types.Operations;
+﻿using Parse.Types.Operations;
 
 namespace Parse.Types
 {

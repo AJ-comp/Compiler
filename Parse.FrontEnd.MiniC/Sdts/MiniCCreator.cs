@@ -9,9 +9,10 @@ using Parse.FrontEnd.Grammars.MiniC.Sdts.AstNodes.StatementNodes;
 using Parse.FrontEnd.Grammars.MiniC.Sdts.Datas;
 using Parse.FrontEnd.Grammars.MiniC.Sdts.Datas.Variables;
 using Parse.FrontEnd.MiniC.Properties;
+using Parse.FrontEnd.MiniC.Sdts.AstNodes.ExprNodes;
 using Parse.FrontEnd.MiniC.Sdts.AstNodes.TypeNodes;
+using Parse.Types;
 using System;
-using static Parse.FrontEnd.Grammars.MiniC.Sdts.Datas.Variables.VariableMiniC;
 
 namespace Parse.FrontEnd.Grammars.MiniC.Sdts
 {
@@ -51,14 +52,7 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
             }
             else if (typeDatas.DataType == MiniCDataType.Address)
             {
-                result = new IntVariableMiniC(typeDatas,
-                                                            nameToken,
-                                                            levelToken,
-                                                            dimensionToken,
-                                                            blockLevel,
-                                                            offset,
-                                                            varProperty,
-                                                            value);
+                result = new PointerVariableMiniC(typeDatas, nameToken, offset, varProperty, 1, value, DType.Int);
             }
 
             return result;
@@ -132,12 +126,14 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
                 else if (cRoot.SignPost.MeaningUnit == MiniCGrammar.DclSpec) result = new VariableTypeNode(root);
                 else if (cRoot.SignPost.MeaningUnit == MiniCGrammar.ConstNode) result = new ConstNode(root);
                 else if (cRoot.SignPost.MeaningUnit == MiniCGrammar.VoidNode) result = new VoidNode(root);
+                else if (cRoot.SignPost.MeaningUnit == MiniCGrammar.SystemNode) result = new SystemNode(root);
                 else if (cRoot.SignPost.MeaningUnit == MiniCGrammar.IntNode) result = new IntNode(root);
                 else if (cRoot.SignPost.MeaningUnit == MiniCGrammar.AddressNode) result = new AddressNode(root);
                 else if (cRoot.SignPost.MeaningUnit == MiniCGrammar.DclList) result = new VariableDclsListNode(root);
                 else if (cRoot.SignPost.MeaningUnit == MiniCGrammar.Dcl) result = new VariableDclsNode(root);
                 else if (cRoot.SignPost.MeaningUnit == MiniCGrammar.DclVar) result = new InitDeclaratorNode(root);
                 else if (cRoot.SignPost.MeaningUnit == MiniCGrammar.DeclareVarIdent) result = new DeclareVarNode(root);
+                else if (cRoot.SignPost.MeaningUnit == MiniCGrammar.DeRef) result = new DeRefExprNode(root);
                 else if (cRoot.SignPost.MeaningUnit == MiniCGrammar.UseVar) result = new UseIdentNode(root);
                 else if (cRoot.SignPost.MeaningUnit == MiniCGrammar.IntLiteralNode) result = new IntLiteralNode(root);
                 else throw new Exception(AlarmCodes.MCL0010);

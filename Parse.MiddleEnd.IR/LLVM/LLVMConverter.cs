@@ -1,4 +1,5 @@
-﻿using Parse.MiddleEnd.IR.LLVM.Expressions.ExprExpressions;
+﻿using Parse.MiddleEnd.IR.Datas;
+using Parse.MiddleEnd.IR.LLVM.Expressions.ExprExpressions;
 using Parse.Types;
 using System.Collections;
 
@@ -45,18 +46,35 @@ namespace Parse.MiddleEnd.IR.LLVM
             return result;
         }
 
-        public static int ToBitSize(DType type) => (type == DType.Bit) ? 1 : ToAlignSize(type) * 8;
+        public static string ToInstructionName(IRVar var) => ToInstructionName(var.TypeName) + ToPointerDepth(var.PointerLevel);
 
-        public static int ToAlignSize(DType type)
+        public static string ToPointerDepth(uint pointerLevel)
+        {
+            string result = string.Empty;
+
+            for (int i = 0; i < pointerLevel; i++) result += "*";
+
+            return result;
+        }
+
+        public static int ToAlignSize(DType typeName)
         {
             int result = 0;
 
-            if (type == DType.Byte) result = 1;
-            else if (type == DType.Short) result = 2;
-            else if (type == DType.Int) result = 4;
-            else if (type == DType.Double) result = 8;
+            if (typeName == DType.Byte) result = 1;
+            else if (typeName == DType.Short) result = 2;
+            else if (typeName == DType.Int) result = 4;
+            else if (typeName == DType.Double) result = 8;
 
             return result;
+        }
+
+        public static int ToAlignSize(IRVar var)
+        {
+            int result = 0;
+            if (var.PointerLevel > 0) return 8;
+
+            return ToAlignSize(var.TypeName);
         }
 
         public static string GetInstructionNameForInteger(IRCondition condition, bool bSigned)
@@ -88,8 +106,8 @@ namespace Parse.MiddleEnd.IR.LLVM
         {
             string result = string.Empty;
 
-                if (condition == IRCondition.EQ) result = "ueq";
-                else if (condition == IRCondition.NE) result = "une";
+            if (condition == IRCondition.EQ) result = "ueq";
+            else if (condition == IRCondition.NE) result = "une";
 
             if (bNans)
             {

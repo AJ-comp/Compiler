@@ -44,28 +44,33 @@ namespace Parse.FrontEnd.Parsers.Datas
         public Tuple<ParseTreeSymbol, AstSymbol> Reduce(NonTerminalSingle reduceDest)
         {
             var dataToInsert = new ParseTreeNonTerminal(reduceDest);
-            AstNonTerminal astNT = (dataToInsert.IsMeaning) ? new AstNonTerminal(dataToInsert)
-                                                                                      : null;
+            AstNonTerminal astNT = (dataToInsert.IsMeaning)
+                                             ? new AstNonTerminal(dataToInsert) : null;
 
             List<object> astChildren = new List<object>();
             for (int i = 0; i < reduceDest.Count * 2; i++)
             {
                 var data = Stack.Pop();
-                if (i % 2 > 0)
-                {
-                    var child = data as ParseTreeSymbol;
-                    dataToInsert.Insert(0, child);
+                if (i % 2 == 0) continue;
 
-                    if (!child.IsMeaning && child.IsTerminal) continue;
-                    if (child is ParseTreeNonTerminal)
+                var child = data as ParseTreeSymbol;
+                dataToInsert.Insert(0, child);
+
+                // meanless token
+                if (!child.IsMeaning && child.IsTerminal) continue;
+
+                if (child is ParseTreeNonTerminal)
+                {
+                    // meanless NonTerminal
+                    if(!child.IsMeaning)
                     {
                         // epsilon reduce case
                         if ((child as ParseTreeNonTerminal).Count == 0) continue;
                     }
-
-                    var astChild = AstListStack.Pop();
-                    astChildren.Insert(0, astChild);
                 }
+
+                var astChild = AstListStack.Pop();
+                astChildren.Insert(0, astChild);
             }
             Stack.Push(dataToInsert);
 
@@ -82,8 +87,8 @@ namespace Parse.FrontEnd.Parsers.Datas
         public Tuple<ParseTreeSymbol, AstSymbol> EpsilonReduce(NonTerminalSingle reduceDest)
         {
             var dataToInsert = new ParseTreeNonTerminal(reduceDest);
-            AstNonTerminal astSymbol = (dataToInsert.IsMeaning) ? new AstNonTerminal(dataToInsert)
-                                                                                    : null;
+            AstNonTerminal astSymbol = (dataToInsert.IsMeaning)
+                                                    ? new AstNonTerminal(dataToInsert) : null;
 
             Stack.Push(dataToInsert);
             if (astSymbol != null) AstListStack.Push(astSymbol);
@@ -116,6 +121,23 @@ namespace Parse.FrontEnd.Parsers.Datas
             {
                 if (item is AstSymbol) result.Add(item as AstSymbol);
                 else result.AddRange(TakeOffList(item as List<object>));
+            }
+
+            return result;
+        }
+    }
+
+    public class AstListViewer
+    {
+        public static string ToString(IEnumerable<object> list)
+        {
+            string result = string.Empty;
+            if (list == null) return result;
+
+            foreach (var item in list)
+            {
+                if (item is AstSymbol) result += (item as AstSymbol).ToString() + " ";
+                else result += string.Format("List<{0}>", ToString(item as List<object>));
             }
 
             return result;

@@ -72,6 +72,7 @@ namespace Parse.FrontEnd.Parsers.Datas
                 this.AddColumn(result, Resource.ActionInfo);
                 this.AddColumn(result, Resource.RecoveryInfo);
                 this.AddColumn(result, Resource.StackAfterParsing);
+                this.AddColumn(result, Resource.StackForAst);
 
                 foreach (var block in this)
                 {
@@ -82,12 +83,13 @@ namespace Parse.FrontEnd.Parsers.Datas
                         var param3 = record.Unit.Action.ToString() + " ";
                         var param4 = record.RecoveryMessage;
                         var param5 = Convert.ToString(record.Unit.AfterStack.Stack.Reverse(), " ");
+                        var param6 = AstListViewer.ToString(record.Unit.AfterStack.AstListStack.Reverse());
 
                         if (record.Unit.IsError) param3 += record.Unit.ErrorMessage;
                         //                        else if (record.Action.Direction != ActionDir.accept)
                         //                            param3 += (record.Action.Dest is NonTerminalSingle) ? (record.Action.Dest as NonTerminalSingle).ToGrammarString() : string.Empty;
 
-                        this.AddRow(result, param1, param2, param3, param4, param5);
+                        this.AddRow(result, param1, param2, param3, param4, param5, param6);
                     }
                 }
 

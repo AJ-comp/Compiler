@@ -145,4 +145,7 @@
   <data name="RemoveParsingUnits" xml:space="preserve">
     <value>Rollback as much as {0} count because can't shift.</value>
   </data>
+  <data name="StackForAst" xml:space="preserve">
+    <value>The stack for ast</value>
+  </data>
 </root>

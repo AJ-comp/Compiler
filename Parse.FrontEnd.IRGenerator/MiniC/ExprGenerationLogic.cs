@@ -3,6 +3,7 @@ using Parse.FrontEnd.Grammars.MiniC.Sdts.AstNodes.ExprNodes.ArithmeticExprNodes;
 using Parse.FrontEnd.Grammars.MiniC.Sdts.AstNodes.ExprNodes.AssignExprNodes;
 using Parse.FrontEnd.Grammars.MiniC.Sdts.AstNodes.ExprNodes.LiteralNodes;
 using Parse.FrontEnd.Grammars.MiniC.Sdts.AstNodes.ExprNodes.LogicalExprNodes;
+using Parse.FrontEnd.MiniC.Sdts.AstNodes.ExprNodes;
 using Parse.MiddleEnd.IR;
 using Parse.MiddleEnd.IR.LLVM;
 using Parse.MiddleEnd.IR.LLVM.Expressions.AssignExpressions;
@@ -30,7 +31,7 @@ namespace Parse.FrontEnd.IRGenerator
             var cNode = node as AssignNode;
             var ssaTable = param as LLVMSSATable;
 
-            return new LLVMAssignExpression(cNode.LeftVar, 
+            return new LLVMAssignExpression(cNode.Left.ExecuteToIRExpression(ssaTable) as LLVMExprExpression, 
                                                                 cNode.Right.ExecuteToIRExpression(ssaTable) as LLVMExprExpression,
                                                                 ssaTable);
         }
@@ -120,6 +121,14 @@ namespace Parse.FrontEnd.IRGenerator
                                                                 param as LLVMSSATable);
         }
 
+        private static IRExpression DeRefExprNodeToIRExpression(SdtsNode node, object param)
+        {
+            var cNode = node as DeRefExprNode;
+            var ssaTable = param as LLVMSSATable;
+
+            return new LLVMDeRefExpression(cNode.IdentNode.ExecuteToIRExpression(ssaTable) as LLVMUseVarExpression,
+                                                                param as LLVMSSATable);
+        }
 
         private static IRExpression UseIdentNodeToIRExpression(SdtsNode sdtsNode, object param)
             => new LLVMUseVarExpression((sdtsNode as UseIdentNode).VarData, param as LLVMSSATable);

@@ -52,7 +52,8 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts.Datas
             return new IRFuncData(paramVars,
                                                 TypeData.Const,
                                                 IRConverter.ToIRReturnType(ReturnType),
-                                                Name);
+                                                Name,
+                                                0);
         }
     }
 }

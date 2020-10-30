@@ -1,27 +1,14 @@
 ﻿using Parse.MiddleEnd.IR.Datas;
 using Parse.Types;
-using Parse.Types.ConstantTypes;
 
 namespace Parse.MiddleEnd.IR.LLVM.Models.VariableModels
 {
-    public class ByteVariableLLVM : IntegerVariableLLVM, IByte
+    public class ByteVariableLLVM : IntegerVarLLVM
     {
-        public override int Size => 8;
+        public int Size => 8;
         public override DType TypeName => DType.Byte;
 
-        public ByteVariableLLVM(int offset, ByteConstant value) : base(offset, value)
-        {
-        }
-
-        public ByteVariableLLVM(string varName, ByteConstant value) : base(varName, value)
-        {
-        }
-
-        public ByteVariableLLVM(int offset) : base(offset, new IntConstant(0, State.NotInit))
-        {
-        }
-
-        public ByteVariableLLVM(IRIntegerVar var) : base(var)
+        public ByteVariableLLVM(IRVar var, bool isGlobal) : base(var, isGlobal)
         {
         }
     }

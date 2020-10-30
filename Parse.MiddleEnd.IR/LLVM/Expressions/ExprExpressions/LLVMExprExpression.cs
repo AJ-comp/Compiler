@@ -1,4 +1,5 @@
-﻿using Parse.Types;
+﻿using Parse.MiddleEnd.IR.Datas;
+using Parse.Types;
 using System.Collections.Generic;
 
 namespace Parse.MiddleEnd.IR.LLVM.Expressions.ExprExpressions
@@ -9,6 +10,7 @@ namespace Parse.MiddleEnd.IR.LLVM.Expressions.ExprExpressions
         {
         }
 
+        public bool IsRight { get; set; }
         public IValue Result { get; protected set; }
 
         protected IEnumerable<Instruction> ConvertToExtension(LLVMExprExpression target, DType to)

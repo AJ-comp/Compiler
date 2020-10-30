@@ -1,18 +1,24 @@
 ﻿using Parse.Types;
-using Parse.Types.VarTypes;
 using System;
 
 namespace Parse.MiddleEnd.IR.Datas
 {
-    public abstract class UseDefChainVar : Variable, IUseDefChainable, IRVar
+    public abstract class UseDefChainVar : IUseDefChainable, IRVar, ICanBePointerType
     {
         public abstract string Name { get; }
-        public abstract int Block { get; }
-        public abstract int Offset { get; protected set; }
+        public abstract int Block { get; set; }
+        public abstract int Offset { get; set; }
         public abstract int Length { get; }
+        public abstract DType TypeName { get; }
+        public uint PointerLevel { get; set; }
 
-        protected UseDefChainVar(IValue value) : base(value)
+        // is not used only. for interface 
+        public object Value => throw new NotImplementedException();
+        public State ValueState => throw new NotImplementedException();
+
+        protected UseDefChainVar(uint pointerLevel)
         {
+            PointerLevel = pointerLevel;
         }
 
         public override bool Equals(object obj)

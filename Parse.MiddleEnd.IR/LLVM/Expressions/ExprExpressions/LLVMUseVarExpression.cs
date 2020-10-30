@@ -7,10 +7,12 @@ namespace Parse.MiddleEnd.IR.LLVM.Expressions.ExprExpressions
     public class LLVMUseVarExpression : LLVMExprExpression
     {
         public bool IsUseVar { get; set; }
-        public VariableLLVM Var => Result as VariableLLVM;
+        public IRVar OriginalVar { get; }
+        public VariableLLVM SSAVar => Result as VariableLLVM;
 
         public LLVMUseVarExpression(IRVar var, LLVMSSATable ssaTable) : base(ssaTable)
         {
+            OriginalVar = var;
             var localVar = _ssaTable.Find(var).LinkedObject;
             Result = localVar;
         }

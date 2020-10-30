@@ -1,8 +1,8 @@
 ﻿using Parse.FrontEnd.Ast;
 using Parse.FrontEnd.Grammars.MiniC.Sdts.AstNodes.ExprNodes.LiteralNodes;
 using Parse.FrontEnd.Grammars.MiniC.Sdts.Datas.Variables;
-using Parse.FrontEnd.Grammars.Properties;
 using Parse.FrontEnd.MiniC.Properties;
+using Parse.FrontEnd.MiniC.Sdts.AstNodes.ExprNodes;
 using System;
 
 namespace Parse.FrontEnd.Grammars.MiniC.Sdts.AstNodes.ExprNodes.AssignExprNodes
@@ -27,8 +27,12 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts.AstNodes.ExprNodes.AssignExprNodes
             if (Left is UseIdentNode)
             {
                 LeftVar = (Left as UseIdentNode).VarData;
+                if (LeftVar is null) return this;   // case for not declared.
 
-                if (CanAssign(LeftVar, Right)) Process();
+                if (CanAssign(LeftVar, Right)) LeftIsIdentProcess();
+            }
+            else if(Left is DeRefExprNode)
+            {
             }
             else
             {
@@ -50,7 +54,7 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts.AstNodes.ExprNodes.AssignExprNodes
 
         protected bool CanAssign(VariableMiniC leftVar, ExprNode rightNode)
         {
-            if (leftVar.GetType() == rightNode.GetType()) return true;
+            if (leftVar.CanAssign(rightNode.Result)) return true;
             else
             {
                 // check detaily
@@ -63,7 +67,7 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts.AstNodes.ExprNodes.AssignExprNodes
         /// <summary>
         /// This function defines the process for when left is variable.
         /// </summary>
-        private void Process()
+        private void LeftIsIdentProcess()
         {
             if (Right is LiteralNode)    // variable = literal
             {
@@ -77,6 +81,10 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts.AstNodes.ExprNodes.AssignExprNodes
             {
                 RightIsExprHandler?.Invoke(this, null);
             }
+        }
+
+        private void LeftIsDeRefProcess()
+        {
         }
     }
 }

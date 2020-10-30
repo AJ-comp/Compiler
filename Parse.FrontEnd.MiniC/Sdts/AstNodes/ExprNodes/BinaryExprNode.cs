@@ -1,5 +1,5 @@
 ﻿using Parse.FrontEnd.Ast;
-using Parse.FrontEnd.Grammars.Properties;
+using Parse.FrontEnd.Grammars.MiniC.Sdts.AstNodes.ExprNodes.AssignExprNodes;
 using Parse.FrontEnd.MiniC.Properties;
 using Parse.Types;
 
@@ -23,7 +23,11 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts.AstNodes.ExprNodes
             Items[0].Build(param);
             Items[1].Build(param);
 
-            if (Left is UseIdentNode) IsNotInit(Left as UseIdentNode);
+            if(!(this is AssignNode))
+            {
+                if (Left is UseIdentNode) IsNotInit(Left as UseIdentNode);
+            }
+
             if (Right is UseIdentNode) IsNotInit(Right as UseIdentNode);
 
             return this;
