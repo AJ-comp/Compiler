@@ -7,6 +7,9 @@ namespace Parse.Types.ConstantTypes
         public bool Signed { get; protected set; }
         public abstract int Size { get; }
 
+        public override bool AlwaysTrue => (ValueState == State.Fixed && (int)Value != 0);
+        public override bool AlwaysFalse => (ValueState == State.Fixed && (int)Value == 0);
+
         protected IntegerConstant(int value) : base(value, State.Fixed)
         {
             Signed = true;

@@ -21,8 +21,16 @@ namespace Parse.MiddleEnd.IR.LLVM.Models.VariableModels
 
         protected VariableLLVM(IRVar var, bool isGlobal) : base(var.PointerLevel)
         {
-            if (isGlobal) _varName = var.Name;
-            else Offset = var.Offset;
+            if (isGlobal)
+            {
+                _varName = var.Name;
+                Name = "@" + _varName;
+            }
+            else
+            {
+                Offset = var.Offset;
+                Name = "%" + Offset;
+            }
 
             Block = var.Block;
             Length = var.Length;
@@ -30,11 +38,26 @@ namespace Parse.MiddleEnd.IR.LLVM.Models.VariableModels
         }
 
 
-        public bool IsGlobal { get; private set; }
-        public override int Offset { get; set; }
+        public bool IsGlobal
+        {
+            get => _isGlobal;
+            private set
+            {
+                _isGlobal = value;
+                if (_isGlobal) Name = "@" + _varName;
+            }
+        }
+        public override int Offset
+        {
+            get => _offset;
+            set
+            {
+                _offset = value;
+                if (!_isGlobal) Name = "%" + _offset;
+            }
+        }
         public override int Block { get; set; }
         public override int Length { get; }
-        public override string Name => (IsGlobal) ? "@" + _varName : "%" + Offset;
 
         // This property is used to check if any value is assigned.
         public bool New { get; set; } = true;
@@ -61,6 +84,8 @@ namespace Parse.MiddleEnd.IR.LLVM.Models.VariableModels
 
 
         private string _varName;
+        private bool _isGlobal;
+        private int _offset;
 
         private static VariableLLVM From(IRVar var, DType toType, bool isGlobal)
         {

@@ -5,6 +5,8 @@
         public object Value { get; set; }
         public State ValueState { get; protected set; } = State.NotInit;
         public abstract DType TypeName { get; }
+        public abstract bool AlwaysTrue { get; }
+        public abstract bool AlwaysFalse { get; }
 
 
         protected Constant(object value, State valueState)

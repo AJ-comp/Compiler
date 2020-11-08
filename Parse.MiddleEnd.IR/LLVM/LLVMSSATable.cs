@@ -8,7 +8,7 @@ namespace Parse.MiddleEnd.IR.LLVM
 {
     public class LLVMSSATable : SSATable
     {
-        public int Offset { get; set; } = 1;
+        public int Offset { get; set; } = 0;
 
 
         public LLVMSSATable()
@@ -78,8 +78,7 @@ namespace Parse.MiddleEnd.IR.LLVM
         public DependencyChainVar NewLink(DType toType, params UseDefChainVar[] targets)
         {
             var firstTarget = targets.First();
-            firstTarget.Offset = Offset++;
-            var result = VariableLLVM.From(firstTarget, toType);
+            var result = VariableLLVM.From(firstTarget, toType, Offset++);
 
             foreach (var target in targets) target.Link(result);
 

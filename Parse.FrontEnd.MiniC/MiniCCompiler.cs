@@ -110,7 +110,7 @@ namespace Parse.FrontEnd.MiniCParser
 
                 return result;
             }
-            catch
+            catch (Exception ex)
             {
                 return null;
             }

@@ -1,5 +1,6 @@
 ﻿using Parse.FrontEnd.Ast;
 using Parse.FrontEnd.Grammars.MiniC.Sdts.AstNodes.ExprNodes.AssignExprNodes;
+using Parse.FrontEnd.Grammars.MiniC.Sdts.Datas.Variables;
 using Parse.FrontEnd.MiniC.Properties;
 using Parse.Types;
 
@@ -58,6 +59,7 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts.AstNodes.ExprNodes
             var varRecord = MiniCUtilities.GetVarRecordFromReferableST(this, varNode.IdentToken);
             if (varRecord == null) return;
             if (varRecord.DefineField.IsVirtual) return;
+            if (varRecord.DefineField.VariableProperty == VarProperty.Param) return;
             if (varRecord.InitValue != null) return;
 
             // Add semantic error information if varData is exist in the SymbolTable.

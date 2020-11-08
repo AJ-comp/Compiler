@@ -97,6 +97,23 @@ namespace Parse.FrontEnd.ParseTree
             }
         }
 
+        public bool HasMeaningToken
+        {
+            get
+            {
+                foreach (var item in _symbols)
+                {
+                    if (item is ParseTreeTerminal)
+                    {
+                        if ((item as ParseTreeTerminal).Token.Kind.Meaning)
+                            return true;
+                    }
+                }
+
+                return false;
+            }
+        }
+
         public IReadOnlyList<ParseTreeTerminal> AllTreeTerminal
         {
             get

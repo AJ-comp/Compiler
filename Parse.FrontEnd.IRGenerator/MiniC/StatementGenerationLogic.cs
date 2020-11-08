@@ -1,13 +1,16 @@
 ﻿using Parse.FrontEnd.Grammars.MiniC.Sdts.AstNodes.StatementNodes;
 using Parse.FrontEnd.Grammars.MiniC.Sdts.Datas.Variables;
 using Parse.MiddleEnd.IR;
+using Parse.MiddleEnd.IR.Datas;
 using Parse.MiddleEnd.IR.LLVM;
 using Parse.MiddleEnd.IR.LLVM.Expressions;
 using Parse.MiddleEnd.IR.LLVM.Expressions.AssignExpressions;
 using Parse.MiddleEnd.IR.LLVM.Expressions.ExprExpressions;
 using Parse.MiddleEnd.IR.LLVM.Expressions.ExprExpressions.LogicalExpressions;
 using Parse.MiddleEnd.IR.LLVM.Expressions.StmtExpressions;
+using Parse.MiddleEnd.IR.LLVM.Models;
 using Parse.Types.ConstantTypes;
+using System.Collections.Generic;
 
 namespace Parse.FrontEnd.IRGenerator
 {
@@ -56,22 +59,28 @@ namespace Parse.FrontEnd.IRGenerator
             var ssaTable = param as LLVMSSATable;
             LLVMBlockExpression blockExpression = new LLVMBlockExpression(ssaTable);
 
-            // local variable declaration
+            // param variable declaration
+            List<IRVar> paramVars = new List<IRVar>();
             foreach (var varRecord in cNode.SymbolTable.VarTable)
-                blockExpression.AddItem(new LLVMLocalVariableExpression(varRecord.DefineField, ssaTable));
+            {
+                if (varRecord.DefineField.VariableProperty == VarProperty.Param) paramVars.Add(varRecord.DefineField);
+            }
 
-            // local variable initialize
+            blockExpression.AddItem(new LLVMParamListAndReturnExpression(paramVars, null, ssaTable));
+
+            // local variable declaration
+            List<CalculationInfo> declareInfos = new List<CalculationInfo>();
             foreach (var varRecord in cNode.SymbolTable.VarTable)
             {
                 if (varRecord.DefineField.VariableProperty == VarProperty.Param) continue;
-                if (varRecord.InitValue != null)
-                    blockExpression.AddItem
-                        (
-                            new LLVMAssignExpression(varRecord.DefineField, 
-                                                                     varRecord.InitValue.ExecuteToIRExpression(ssaTable) as LLVMExprExpression,
-                                                                     ssaTable)
-                        );
+
+                var initExpression = new CalculationInfo(varRecord.DefineField,
+                                                                            varRecord.InitValue?.ExecuteToIRExpression(ssaTable) as LLVMExprExpression);
+
+                declareInfos.Add(initExpression);
             }
+
+            blockExpression.AddItem(new LLVMLocalVarListExpression(declareInfos, ssaTable));
 
             // statment list (if, while, call ...)
             if (cNode.StatListNode != null)
@@ -96,7 +105,7 @@ namespace Parse.FrontEnd.IRGenerator
             var cNode = node as ExprStatementNode;
             var ssaTable = param as LLVMSSATable;
 
-            return new LLVMExprStmtExpression(cNode.Expr.ExecuteToIRExpression(ssaTable) as LLVMExprExpression, ssaTable);
+            return new LLVMExprStmtExpression(cNode.Expr?.ExecuteToIRExpression(ssaTable) as LLVMExprExpression, ssaTable);
 
 
             //List<LLVMLocalVariableExpression> irVarList = new List<LLVMLocalVariableExpression>();

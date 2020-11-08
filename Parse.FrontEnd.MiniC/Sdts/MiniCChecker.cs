@@ -1,10 +1,7 @@
 ﻿using Parse.FrontEnd.Grammars.MiniC.Sdts.AstNodes;
-using Parse.FrontEnd.Grammars.MiniC.Sdts.Datas;
 using Parse.FrontEnd.Grammars.MiniC.Sdts.Datas.Variables;
-using Parse.FrontEnd.Grammars.Properties;
 using System;
 using System.Threading.Tasks;
-using static Parse.FrontEnd.Grammars.MiniC.Sdts.Datas.Variables.VariableMiniC;
 
 namespace Parse.FrontEnd.Grammars.MiniC.Sdts
 {

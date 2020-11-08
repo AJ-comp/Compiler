@@ -112,7 +112,7 @@ namespace Parse.FrontEnd.IRGenerator
             return new LLVMFuncDefExpression(cNode.ToIRFuncData(),
                                                                     cNode.CompoundSt.ExecuteToIRExpression(ssaTable) as LLVMBlockExpression,
                                                                     ssaTable,
-                                                                    index);
+                                                                    0);
         }
     }
 }

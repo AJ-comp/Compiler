@@ -5,7 +5,7 @@ namespace Parse.MiddleEnd.IR.Datas
 {
     public abstract class UseDefChainVar : IUseDefChainable, IRVar, ICanBePointerType
     {
-        public abstract string Name { get; }
+        public string Name { get; protected set; }
         public abstract int Block { get; set; }
         public abstract int Offset { get; set; }
         public abstract int Length { get; }

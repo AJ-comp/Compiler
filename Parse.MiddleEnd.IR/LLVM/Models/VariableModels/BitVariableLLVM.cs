@@ -1,6 +1,5 @@
 ﻿using Parse.MiddleEnd.IR.Datas;
 using Parse.Types;
-using Parse.Types.ConstantTypes;
 
 namespace Parse.MiddleEnd.IR.LLVM.Models.VariableModels
 {

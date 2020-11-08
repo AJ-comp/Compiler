@@ -13,10 +13,13 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts.AstNodes.StatementNodes
 
 
         // format summary
-        // (AddAssign | SubAssign | MulAssign | DivAssign | ...) ;
+        // (AddAssign | SubAssign | MulAssign | DivAssign | ...).Optional ;
         public override SdtsNode Build(SdtsParams param)
         {
-            Expr = Items[0].Build(param) as ExprNode;
+            if (Items.Count > 0)
+            {
+                Expr = Items[0].Build(param) as ExprNode;
+            }
 
             return this;
         }

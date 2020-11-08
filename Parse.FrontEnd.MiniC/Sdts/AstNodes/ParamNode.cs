@@ -39,6 +39,8 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts.AstNodes
             BlockLevel = param.BlockLevel;
             Offset = param.Offset;
 
+            SymbolTable = (param as MiniCSdtsParams).SymbolTable;
+
             DataTypeNode = Items[0].Build(param) as VariableTypeNode;
             VariableNode = Items[1].Build(param) as DeclareVarNode;
 

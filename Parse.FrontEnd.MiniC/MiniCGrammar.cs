@@ -84,7 +84,7 @@ namespace Parse.FrontEnd.Grammars.MiniC
         private NonTerminal initDclList = new NonTerminal("init_dcl_list");
         private NonTerminal initDeclarator = new NonTerminal("init_declarator");
         private NonTerminal declarator = new NonTerminal("declarator");
-        private NonTerminal optNumber = new NonTerminal("opt_number");
+        private NonTerminal literalInt = new NonTerminal("opt_number");
         private NonTerminal optStatList = new NonTerminal("opt_stat_list");
         private NonTerminal statementList = new NonTerminal("statement_list");
         private NonTerminal statement = new NonTerminal("statement");
@@ -209,11 +209,10 @@ namespace Parse.FrontEnd.Grammars.MiniC
             this.initDeclarator.AddItem(this.declarator + (this.Assign + this.expression).Optional(), DclVar);
 
             this.declarator.AddItem(Ident, DeclareVarIdent);
-            this.declarator.AddItem(Ident + this.OpenSquareBrace + this.optNumber + this.CloseSquareBrace, DeclareVarIdent);
+            this.declarator.AddItem(Ident + this.OpenSquareBrace + this.literalInt + this.CloseSquareBrace, DeclareVarIdent);
 
-            this.optNumber.AddItem(Number | HexNumber | new Epsilon());
-            this.optStatList.AddItem(this.statementList, StatList);
-            this.optStatList.AddItem(new Epsilon());
+            this.literalInt.AddItem(Number | HexNumber, IntLiteralNode);
+            this.optStatList.AddItem(this.statementList | new Epsilon(), StatList);
 
             this.statementList.AddItem(this.statement | this.statementList + this.statement);
             this.statement.AddItem(this.compoundSt | this.expressionSt | this.ifSt | this.whileSt | this.returnSt);
@@ -280,7 +279,7 @@ namespace Parse.FrontEnd.Grammars.MiniC
             this.actualParamList.AddItem(this.actualParamList + this.Comma + this.logicalOrExp);
 
             this.primaryExp.AddItem(Ident, UseVar);
-            this.primaryExp.AddItem(this.optNumber, IntLiteralNode);
+            this.primaryExp.AddItem(this.literalInt);
             this.primaryExp.AddItem(this.OpenParenthesis + this.expression + this.CloseParenthesis);
 
 

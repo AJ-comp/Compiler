@@ -13,13 +13,12 @@ namespace Parse.MiddleEnd.IR.LLVM.Expressions.ExprExpressions
         {
             _useVarExpression = useVarExpression;
             _useVarExpression.IsUseVar = true;
-
-            DeRefVar = ssaTable.NewLinkAsDeRef(Var) as VariableLLVM;
         }
 
         public override IEnumerable<Instruction> Build()
         {
             List<Instruction> instructionList = new List<Instruction>();
+            DeRefVar = _ssaTable.NewLinkAsDeRef(Var) as VariableLLVM;
 
             instructionList.AddRange(_useVarExpression.Build());
             instructionList.Add(Instruction.Load(DeRefVar, _ssaTable));

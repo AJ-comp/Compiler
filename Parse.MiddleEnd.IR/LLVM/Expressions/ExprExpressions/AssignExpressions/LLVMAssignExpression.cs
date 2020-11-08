@@ -67,6 +67,8 @@ namespace Parse.MiddleEnd.IR.LLVM.Expressions.AssignExpressions
             if (IsDeRef) result.AddRange(LeftIsDeRefExprProcess());
             else result.AddRange(LeftIsVarProcess());
 
+            Result = result.Last().NewSSAVar;
+
             return result;
         }
 

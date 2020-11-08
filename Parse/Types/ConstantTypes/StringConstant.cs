@@ -15,6 +15,8 @@ namespace Parse.Types.ConstantTypes
         public int Size => throw new System.NotImplementedException();
 
         public override DType TypeName => DType.Unknown;
+        public override bool AlwaysTrue => (ValueState == State.Fixed && Value.ToString().Length > 0);
+        public override bool AlwaysFalse => false;
 
         public IConstant Add(IValue operand) => Operation.StringAdd(this, operand);
         public IConstant Equal(IValue operand) => Operation.StringEqual(this, operand);

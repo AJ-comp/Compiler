@@ -6,6 +6,10 @@ namespace ApplicationLayer.Common
 {
     public class MakeFileBuilder
     {
+        public HashSet<string> CleanExtensions { get; }
+
+        public HashSet<MakeFileSectionStruct> Sections = new HashSet<MakeFileSectionStruct>();
+
         /// <summary>
         /// This function creates makefile code snippet that creating the object file.
         /// </summary>
@@ -13,7 +17,7 @@ namespace ApplicationLayer.Common
         /// <param name="targetCodeFile"></param>
         /// <param name="referenceFiles"></param>
         /// <returns></returns>
-        public static MakeFileStruct CreateObjectSnippet(string path, string targetCodeFile, IEnumerable<string> referenceFiles)
+        public static MakeFileSectionStruct CreateObjectSnippet(string path, string targetCodeFile, IEnumerable<string> referenceFiles)
         {
             var fileWithoutExt = Path.GetFileNameWithoutExtension(targetCodeFile);
             var fileFullPath = Path.Combine(path, fileWithoutExt);
@@ -23,7 +27,19 @@ namespace ApplicationLayer.Common
 
             var content = string.Format("arm-none-eabi-as {0} -o {1}", fileFullPath + ".s", fileFullPath + ".o");
 
-            return new MakeFileStruct(fileWithoutExt + ".o", cTargetCodeFile, content);
+            return new MakeFileSectionStruct(fileWithoutExt + ".o", cTargetCodeFile, content);
+        }
+
+
+        public static MakeFileSectionStruct CreateObjectSnippet(string path, string targetCodeFile)
+        {
+            var fileWithoutExt = Path.GetFileNameWithoutExtension(targetCodeFile);
+            var fileFullPath = Path.Combine(path, fileWithoutExt);
+
+            var cTargetCodeFile = new List<string>() { targetCodeFile };
+            var content = string.Format("arm-none-eabi-as {0} -o {1}", fileFullPath + ".s", fileFullPath + ".o");
+
+            return new MakeFileSectionStruct(fileWithoutExt + ".o", cTargetCodeFile, content);
         }
 
 
@@ -34,25 +50,26 @@ namespace ApplicationLayer.Common
         /// <param name="binFileName"></param>
         /// <param name="targetCodeFiles"></param>
         /// <returns></returns>
-        public static MakeFileStruct CreateBinSnippet(string path, string binFileName, IEnumerable<string> targetCodeFiles)
+        public static MakeFileSectionStruct CreateBinSnippet(string path, string binFileName, string linkerFullPath, IEnumerable<string> targetCodeFiles)
         {
             var fileWithoutExt = Path.GetFileNameWithoutExtension(binFileName);
             var fileFullPath = Path.Combine(path, fileWithoutExt);
-            var binFileNameToCreate = fileWithoutExt + ".bin";
-            var elfFileName = fileFullPath + ".elf";
+            var binFullPath = fileWithoutExt + ".bin";
+            var mapFullPath = fileFullPath + ".map";
+            var disassemFullPath = fileFullPath + ".dis";
 
             var linkingParam = string.Empty;
             foreach (var refFile in targetCodeFiles) linkingParam += " " + refFile;
 
             List<string> contents = new List<string>();
-            contents.Add(string.Format("arm-none-eabi-ld -Ttext=0x08000000 {0} -o {1}",
-                                                        linkingParam, elfFileName));
+            contents.Add(string.Format("arm-none-eabi-ld {0} -T{1} -Map {2} --gc-sections -o {3}",
+                                                        linkingParam, linkerFullPath, mapFullPath, fileFullPath));
 
-            contents.Add(string.Format("arm-none-eabi-objdump -D {0}", elfFileName));
+            contents.Add(string.Format("arm-none-eabi-objdump -hD {0} > {1}", fileFullPath, disassemFullPath));
             contents.Add(string.Format("arm-none-eabi-objcopy {0} -O binary {1}",
-                                                                elfFileName, binFileNameToCreate));
+                                                                fileFullPath, binFullPath));
 
-            return new MakeFileStruct(binFileNameToCreate, targetCodeFiles, contents);
+            return new MakeFileSectionStruct(binFullPath, targetCodeFiles, contents);
         }
 
 
@@ -60,9 +77,9 @@ namespace ApplicationLayer.Common
         /// This function creates makefile code snippet for clean block.
         /// </summary>
         /// <returns></returns>
-        public static MakeFileStruct CreateCleanSnippet()
+        public static MakeFileSectionStruct CreateCleanSnippet()
         {
-            var result = new MakeFileStruct("clean", "rm -f *.o", "rm -f *.elf", "rm -f *.bin");
+            var result = new MakeFileSectionStruct("clean", "rm -f *.o", "rm -f *.elf", "rm -f *.bin");
             result.StartingMessage = "Running target clean";
 
             return result;
@@ -74,7 +91,7 @@ namespace ApplicationLayer.Common
         /// </summary>
         /// <param name="fullPath"></param>
         /// <param name="makeFileBlocks"></param>
-        public static void CreateMakeFile(string fullPath, IEnumerable<MakeFileStruct> makeFileBlocks)
+        public static void CreateMakeFile(string fullPath, IEnumerable<MakeFileSectionStruct> makeFileBlocks)
         {
             string result = string.Empty;
 
@@ -83,5 +100,8 @@ namespace ApplicationLayer.Common
 
             File.WriteAllText(fullPath, result);
         }
+
+
+        private Dictionary<string, string> _pathVar;
     }
 }

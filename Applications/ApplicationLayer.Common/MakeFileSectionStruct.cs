@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace ApplicationLayer.Common
 {
-    public class MakeFileStruct
+    public class MakeFileSectionStruct
     {
         public string Result { get; }
         public List<string> Materials { get; } = new List<string>();
@@ -13,27 +13,27 @@ namespace ApplicationLayer.Common
         public string EndingMessage { get; set; } = string.Empty;
 
 
-        public MakeFileStruct(string result, IEnumerable<string> materials, IEnumerable<string> recipe)
+        public MakeFileSectionStruct(string result, IEnumerable<string> materials, IEnumerable<string> recipe)
         {
             Result = result;
             Materials.AddRange(materials);
             Recipe.AddRange(recipe);
         }
 
-        public MakeFileStruct(string result, IEnumerable<string> materials, params string[] recipe)
+        public MakeFileSectionStruct(string result, IEnumerable<string> materials, params string[] recipe)
         {
             Result = result;
             Materials.AddRange(materials);
             Recipe.AddRange(recipe);
         }
 
-        public MakeFileStruct(string result, IEnumerable<string> recipe)
+        public MakeFileSectionStruct(string result, IEnumerable<string> recipe)
         {
             Result = result;
             Recipe.AddRange(recipe);
         }
 
-        public MakeFileStruct(string result, params string[] recipe)
+        public MakeFileSectionStruct(string result, params string[] recipe)
         {
             Result = result;
             Recipe.AddRange(recipe);
@@ -46,8 +46,8 @@ namespace ApplicationLayer.Common
             foreach (var material in Materials) header += " " + material;
             header += Environment.NewLine;
 
-            var content = (StartingMessage.Length > 0) 
-                                ? "\t" + "@echo" + StartingMessage + Environment.NewLine
+            var content = (StartingMessage.Length > 0)
+                                ? string.Format("\t@echo \"{0}\"{1}", StartingMessage, Environment.NewLine)
                                 : string.Empty;
 
             foreach (var recipe in Recipe) content += "\t" + recipe + Environment.NewLine;

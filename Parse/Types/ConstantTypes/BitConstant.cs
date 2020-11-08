@@ -5,6 +5,8 @@ namespace Parse.Types.ConstantTypes
     public class BitConstant : Constant, IBit
     {
         public override DType TypeName => DType.Bit;
+        public override bool AlwaysTrue => (ValueState == State.Fixed && (bool)Value == true);
+        public override bool AlwaysFalse => (ValueState == State.Fixed && (bool)Value == false);
 
         public BitConstant(bool value) : this(value, State.Fixed)
         {

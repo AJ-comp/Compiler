@@ -1,6 +1,5 @@
 ﻿using Parse.FrontEnd.Parsers.Datas;
 using Parse.FrontEnd.RegularGrammar;
-using System.Linq;
 using static Parse.FrontEnd.Parsers.Datas.LR.LRParsingRowDataFormat;
 
 namespace Parse.FrontEnd.Parsers.LR

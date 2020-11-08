@@ -12,7 +12,14 @@ namespace Parse.MiddleEnd.IR.LLVM.Expressions.StmtExpressions
             _expr = expr;
         }
 
-        public override IEnumerable<Instruction> Build() => _expr.Build();
+        public override IEnumerable<Instruction> Build()
+        {
+            List<Instruction> result = new List<Instruction>();
+
+            if (_expr != null) result.AddRange(_expr.Build());
+
+            return result;
+        }
 
         private LLVMExprExpression _expr;
     }

@@ -17,6 +17,8 @@ namespace Parse.Types.ConstantTypes
         public bool Nan { get; }
 
         public override DType TypeName => DType.Double;
+        public override bool AlwaysTrue => (ValueState == State.Fixed && (double)Value != 0);
+        public override bool AlwaysFalse => (ValueState == State.Fixed && (double)Value == 0);
 
         public IConstant Add(IValue operand) => Operation.ArithmeticAdd(this, operand);
         public IConstant Div(IValue operand) => Operation.ArithmeticDiv(this, operand);

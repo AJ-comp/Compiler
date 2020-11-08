@@ -11,8 +11,6 @@ namespace Parse.MiddleEnd.IR.LLVM
 {
     public class Instruction : IRUnit
     {
-        private string _comment;
-
         public string CommandLine { get; }
         public VariableLLVM NewSSAVar { get; }
         public string Comment => (_comment.Length > 0) ? ";" + _comment : string.Empty;
@@ -48,7 +46,7 @@ namespace Parse.MiddleEnd.IR.LLVM
         internal static Instruction DeclareLocalVar(RootChainVar var, string comment = "")
         {
             int align = LLVMConverter.ToAlignSize(var);
-            var type = LLVMConverter.ToInstructionName(var.TypeName);
+            var type = LLVMConverter.ToInstructionName(var);
 
             return new Instruction(string.Format("{0} = alloca {1}, align {2}",
                                                                     var.LinkedObject.Name, type, align),
@@ -70,9 +68,15 @@ namespace Parse.MiddleEnd.IR.LLVM
                                                                     comment);                                                  // comment
         }
 
+
+        internal static Instruction Store(IValue from, IRVar to, bool deRef = false, string comment = "")
+        {
+            return (from is IRVar) ? Store(from as IRVar, to, deRef, comment) : Store(from as IConstant, to, deRef, comment);
+        }
+
         // sample
         // store i32 %3, i32* @a, align 4
-        internal static Instruction Store(IRVar fromSSVar, IRVar toSSVar, bool deRef = false, string comment = "")
+        private static Instruction Store(IRVar fromSSVar, IRVar toSSVar, bool deRef = false, string comment = "")
         {
             if (deRef)
             {
@@ -89,7 +93,7 @@ namespace Parse.MiddleEnd.IR.LLVM
 
         // sample
         // store i32 10, i32* %1, align 4
-        internal static Instruction Store(IConstant value, IRVar toSSVar, bool deRef = false, string comment = "")
+        private static Instruction Store(IConstant value, IRVar toSSVar, bool deRef = false, string comment = "")
         {
             if(deRef)
             {
@@ -340,5 +344,10 @@ namespace Parse.MiddleEnd.IR.LLVM
         public string ToFormatString() => string.Format("{0} {1}", CommandLine, Comment);
 
         public override string ToString() => ToFormatString();
+
+
+
+
+        private string _comment = string.Empty;
     }
 }

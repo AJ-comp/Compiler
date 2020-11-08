@@ -440,6 +440,15 @@ namespace ApplicationLayer.WpfApp.Commands
                 var binFileName = FileHelper.ConvertBinaryFileName(solution.DisplayName);
                 Directory.CreateDirectory(solution.BinFolderPath);
 
+                // create bootstrap
+                var bootstrapName = "vector.s";
+                BootsTrapGenerator.CreateVectorTable(solution.BinFolderPath, bootstrapName);
+
+                // create linker script
+                var linkerScriptName = "stm32.lds";
+                Builder.CreateLinkerScript(solution.BinFolderPath, linkerScriptName);
+
+
                 List<FileReferenceInfo> fileReferenceInfos = new List<FileReferenceInfo>();
                 foreach (var project in solution.Children)
                 {
@@ -450,7 +459,7 @@ namespace ApplicationLayer.WpfApp.Commands
                 }
 
 
-                List<MakeFileStruct> allMakeFileSnippets = new List<MakeFileStruct>();
+                List<MakeFileSectionStruct> allMakeFileSnippets = new List<MakeFileSectionStruct>();
                 List<string> allObjectFiles = new List<string>();
 
                 allMakeFileSnippets.Add(MakeFileBuilder.CreateCleanSnippet());
@@ -459,7 +468,7 @@ namespace ApplicationLayer.WpfApp.Commands
                 foreach (var fileRefInfo in fileReferenceInfos)
                 {
                     Messenger.Default.Send(new AddBuildMessage("generateing makefile"));
-                    allMakeFileSnippets.Add(MakeFileBuilder.CreateObjectSnippet(solution.BinFolderPath, 
+                    allMakeFileSnippets.Add(MakeFileBuilder.CreateObjectSnippet(string.Empty, 
                                                                                                                 fileRefInfo.StandardFile, 
                                                                                                                 fileRefInfo.ReferenceFile));
 
@@ -467,9 +476,18 @@ namespace ApplicationLayer.WpfApp.Commands
                     allObjectFiles.Add(FileHelper.ConvertObjectFileName(fileRefInfo.StandardFile));
                 }
 
+                // add a bootstrap
+                Messenger.Default.Send(new AddBuildMessage("generateing vector table"));
+                allMakeFileSnippets.Add(MakeFileBuilder.CreateObjectSnippet(string.Empty, bootstrapName));
+
+                // gathering all created object files
+                allObjectFiles.Add(FileHelper.ConvertObjectFileName(bootstrapName));
+
+
                 // create makefile bin snippet from a entry point (the file that existing main function) of starting project
-                allMakeFileSnippets.Add(MakeFileBuilder.CreateBinSnippet(solution.BinFolderPath,
+                allMakeFileSnippets.Add(MakeFileBuilder.CreateBinSnippet(string.Empty,
                                                                                                         binFileName,
+                                                                                                        linkerScriptName,
                                                                                                         allObjectFiles));
 
                 // create makefile
