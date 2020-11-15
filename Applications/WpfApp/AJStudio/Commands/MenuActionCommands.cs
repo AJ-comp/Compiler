@@ -28,6 +28,7 @@ using System.Windows;
 using System.Windows.Forms;
 using WPFLocalizeExtension.Engine;
 using CommonResource = ApplicationLayer.Define.Properties.Resources;
+using ViewResources = ApplicationLayer.Define.Properties.WindowViewResources;
 
 namespace ApplicationLayer.WpfApp.Commands
 {
@@ -74,7 +75,7 @@ namespace ApplicationLayer.WpfApp.Commands
         /// <summary>
         /// Add New Project Command
         /// </summary>
-        public static readonly RelayUICommand<SolutionTreeNodeModel> AddNewProject = new RelayUICommand<SolutionTreeNodeModel>(CommonResource.NewProject, 
+        public static readonly RelayUICommand<SolutionTreeNodeModel> AddNewProject = new RelayUICommand<SolutionTreeNodeModel>(CommonResource.NewProject,
             (solutionNode) =>
         {
             NewProjectDialog dialog = new NewProjectDialog();
@@ -84,7 +85,7 @@ namespace ApplicationLayer.WpfApp.Commands
             dialog.Owner = RootWindow;
             dialog.ShowInTaskbar = false;
             dialog.ShowDialog();
-        }, (condition) => 
+        }, (condition) =>
         {
             var vm = RootWindow.DataContext as MainViewModel;
             return (vm.IsDebugStatus == false);
@@ -93,7 +94,7 @@ namespace ApplicationLayer.WpfApp.Commands
         /// <summary>
         /// Add Exist Project Command
         /// </summary>
-        public static readonly RelayUICommand<SolutionTreeNodeModel>AddExistProject = new RelayUICommand<SolutionTreeNodeModel>(CommonResource.ExistProject, 
+        public static readonly RelayUICommand<SolutionTreeNodeModel> AddExistProject = new RelayUICommand<SolutionTreeNodeModel>(CommonResource.ExistProject,
             (solutionNode) =>
             {
                 OpenFileDialog dialog = new OpenFileDialog
@@ -102,7 +103,7 @@ namespace ApplicationLayer.WpfApp.Commands
                 };
                 dialog.ShowDialog();
 
-                foreach(var fullPath in dialog.FileNames)
+                foreach (var fullPath in dialog.FileNames)
                 {
                     // If file is not in the solution path then the project path is absolute.
                     var projPath = Path.GetDirectoryName(fullPath);
@@ -116,7 +117,7 @@ namespace ApplicationLayer.WpfApp.Commands
 
                     solutionNode.AddProject(projectTreeNode);
 
-                    if(solutionNode.IsChanged) Messenger.Default.Send<AddChangedFileMessage>(new AddChangedFileMessage(solutionNode));
+                    if (solutionNode.IsChanged) Messenger.Default.Send<AddChangedFileMessage>(new AddChangedFileMessage(solutionNode));
                     else Messenger.Default.Send<RemoveChangedFileMessage>(new RemoveChangedFileMessage(solutionNode));
                 }
             }, (condition) =>
@@ -163,7 +164,7 @@ namespace ApplicationLayer.WpfApp.Commands
             {
                 OpenFileDialog dialog = new OpenFileDialog
                 {
-                    Filter = string.Format("{0} {1}|{2} {3}", CommonResource.MiniCFile, "(*.mc)|*.mc", 
+                    Filter = string.Format("{0} {1}|{2} {3}", CommonResource.MiniCFile, "(*.mc)|*.mc",
                                                                                 CommonResource.AllFiles, "(*.*)|*.*")
                 };
                 dialog.ShowDialog();
@@ -368,7 +369,7 @@ namespace ApplicationLayer.WpfApp.Commands
                     else Messenger.Default.Send<RemoveChangedFileMessage>(new RemoveChangedFileMessage(projectHier));
                 }
                 */
-                
+
             }, (condition) =>
             {
                 var vm = RootWindow.DataContext as MainViewModel;
@@ -419,7 +420,7 @@ namespace ApplicationLayer.WpfApp.Commands
                 var mainViewModel = RootWindow.DataContext as MainViewModel;
                 var solution = mainViewModel.SolutionExplorer.Solution;
 
-                CommandLogic.BuildProject(solution, projectNode);
+                CommandLogic.BuildProject(solution.BinFolderPath, projectNode);
             }, (condition) =>
             {
                 return true;
@@ -434,70 +435,25 @@ namespace ApplicationLayer.WpfApp.Commands
                 var mainViewModel = RootWindow.DataContext as MainViewModel;
                 var solution = mainViewModel.SolutionExplorer.Solution;
 
-                Messenger.Default.Send(new AddBuildMessage("starting build"));
-
                 // create bin folder.
                 var binFileName = FileHelper.ConvertBinaryFileName(solution.DisplayName);
                 Directory.CreateDirectory(solution.BinFolderPath);
 
-                // create bootstrap
+                // save all opened files and build all project
+                CommandLogic.SaveAllFiles(mainViewModel.SolutionExplorer.Documents);
+                var fileReferenceInfos = CommandLogic.BuildAllProjects(solution);
+
+                // create bootstrap and linker script
                 var bootstrapName = "vector.s";
-                BootsTrapGenerator.CreateVectorTable(solution.BinFolderPath, bootstrapName);
-
-                // create linker script
                 var linkerScriptName = "stm32.lds";
-                Builder.CreateLinkerScript(solution.BinFolderPath, linkerScriptName);
+                CommandLogic.CreateStartingFile(solution.BinFolderPath, bootstrapName, linkerScriptName);
 
-
-                List<FileReferenceInfo> fileReferenceInfos = new List<FileReferenceInfo>();
-                foreach (var project in solution.Children)
-                {
-                    var cProject = project as ProjectTreeNodeModel;
-
-                    CommandLogic.BuildProject(solution, cProject);
-                    fileReferenceInfos.AddRange(cProject.FileReferenceInfos);
-                }
-
-
-                List<MakeFileSectionStruct> allMakeFileSnippets = new List<MakeFileSectionStruct>();
-                List<string> allObjectFiles = new List<string>();
-
-                allMakeFileSnippets.Add(MakeFileBuilder.CreateCleanSnippet());
-
-                // create makefile object snippet from file reference information
-                foreach (var fileRefInfo in fileReferenceInfos)
-                {
-                    Messenger.Default.Send(new AddBuildMessage("generateing makefile"));
-                    allMakeFileSnippets.Add(MakeFileBuilder.CreateObjectSnippet(string.Empty, 
-                                                                                                                fileRefInfo.StandardFile, 
-                                                                                                                fileRefInfo.ReferenceFile));
-
-                    // gathering all created object files
-                    allObjectFiles.Add(FileHelper.ConvertObjectFileName(fileRefInfo.StandardFile));
-                }
-
-                // add a bootstrap
-                Messenger.Default.Send(new AddBuildMessage("generateing vector table"));
-                allMakeFileSnippets.Add(MakeFileBuilder.CreateObjectSnippet(string.Empty, bootstrapName));
-
-                // gathering all created object files
-                allObjectFiles.Add(FileHelper.ConvertObjectFileName(bootstrapName));
-
-
-                // create makefile bin snippet from a entry point (the file that existing main function) of starting project
-                allMakeFileSnippets.Add(MakeFileBuilder.CreateBinSnippet(string.Empty,
-                                                                                                        binFileName,
-                                                                                                        linkerScriptName,
-                                                                                                        allObjectFiles));
-
-                // create makefile
-                allMakeFileSnippets.Reverse();
+                // create makefile and execute it
+                var allMakeFileSnippets = CommandLogic.CreateAllMakeFileSection(bootstrapName, linkerScriptName, binFileName, fileReferenceInfos);
                 MakeFileBuilder.CreateMakeFile(Path.Combine(solution.BinFolderPath, "makefile"), allMakeFileSnippets);
-
                 Builder.ExecuteMakeFile(solution.BinFolderPath);
-                Builder.CreateJLinkCommanderScript(solution.BinFolderPath, binFileName);
 
-
+                Builder.CreateJLinkCommanderScript(solution.BinFolderPath, binFileName, "0x08000000");
             }, () =>
             {
                 return true;
@@ -515,7 +471,7 @@ namespace ApplicationLayer.WpfApp.Commands
                 Process jlink = new Process();
                 jlink.StartInfo.FileName = string.Format("C:\\Program Files (x86)\\SEGGER\\JLink\\JLink.exe");
                 jlink.StartInfo.Arguments = string.Format("-device {0} -speed {1} -autoconnect 1 -CommanderScript {2}",
-//                                                                            startingProject.ProjectData.Target, // temperory
+                                                                            //                                                                            startingProject.ProjectData.Target, // temperory
                                                                             "STM32L152VD",   // temporary
                                                                             "4000",
                                                                             Path.Combine(solution.BinFolderPath, "CommanderScript.jlink"));
@@ -538,7 +494,7 @@ namespace ApplicationLayer.WpfApp.Commands
         public static readonly RelayUICommand ParsingHistory = new RelayUICommand(CommonResource.ParsingHistory,
             () =>
             {
-//                if ((docViewModel is EditorTypeViewModel) == false) return;
+                //                if ((docViewModel is EditorTypeViewModel) == false) return;
                 var mainViewModel = RootWindow.DataContext as MainViewModel;
                 var selDoc = mainViewModel.SolutionExplorer.SelectedDocument;
                 if ((selDoc is EditorTypeViewModel) == false) return;
@@ -554,7 +510,7 @@ namespace ApplicationLayer.WpfApp.Commands
 
 
         /// This command shows parse tree for selected document.
-        public static readonly RelayUICommand ShowParseTreeCommand = new RelayUICommand(CommonResource.ParseTree, 
+        public static readonly RelayUICommand ShowParseTreeCommand = new RelayUICommand(CommonResource.ParseTree,
             () =>
             {
                 //                if ((docViewModel is EditorTypeViewModel) == false) return;
@@ -583,10 +539,10 @@ namespace ApplicationLayer.WpfApp.Commands
 
                 var solution = mainViewModel.SolutionExplorer.Solution;
                 var editorViewModel = mainViewModel.SolutionExplorer.SelectedDocument as EditorTypeViewModel;
-//                var modelsToDisplay = UcodeDisplayConverter.Convert(editorViewModel.InterLanguage, editorViewModel.Grammar);
-//                var textDoc = new UCodeViewModel(modelsToDisplay, selDoc.Title + " " + CommonResource.InterLanguage);
-//                mainViewModel.SolutionExplorer.Documents.Add(textDoc);
-//                mainViewModel.SolutionExplorer.SelectedDocument = textDoc;
+                //                var modelsToDisplay = UcodeDisplayConverter.Convert(editorViewModel.InterLanguage, editorViewModel.Grammar);
+                //                var textDoc = new UCodeViewModel(modelsToDisplay, selDoc.Title + " " + CommonResource.InterLanguage);
+                //                mainViewModel.SolutionExplorer.Documents.Add(textDoc);
+                //                mainViewModel.SolutionExplorer.SelectedDocument = textDoc;
 
                 if (editorViewModel.Ast?.ErrNodes.Count == 0)
                 {
@@ -610,7 +566,7 @@ namespace ApplicationLayer.WpfApp.Commands
         /// <summary>
         /// This command is executed if docking windows were closed.
         /// </summary>
-        public static readonly RelayUICommand<Tuple<object, DockingWindowsEventArgs>> DockingWindowClosed = 
+        public static readonly RelayUICommand<Tuple<object, DockingWindowsEventArgs>> DockingWindowClosed =
             new RelayUICommand<Tuple<object, DockingWindowsEventArgs>>(CommonResource.Close, (eventArgs) =>
             {
                 if (eventArgs == null) return;
@@ -677,7 +633,7 @@ namespace ApplicationLayer.WpfApp.Commands
         /// <summary>
         /// This command is executed before the main window is closed.
         /// </summary>
-        public static readonly RelayUICommand<Tuple<object, CancelEventArgs>> MainWindowClosing = 
+        public static readonly RelayUICommand<Tuple<object, CancelEventArgs>> MainWindowClosing =
             new RelayUICommand<Tuple<object, CancelEventArgs>>(CommonResource.Close, (e) =>
             {
                 if (RootWindow == null) return;
@@ -769,7 +725,7 @@ namespace ApplicationLayer.WpfApp.Commands
             () =>
             {
                 LocalizeDictionary.Instance.SetCurrentThreadCulture = true;
-//                LocalizeDictionary.Instance.Culture = new CultureInfo("ko-KR");
+                //                LocalizeDictionary.Instance.Culture = new CultureInfo("ko-KR");
             }, () =>
             {
                 var vm = RootWindow.DataContext as MainViewModel;
@@ -783,7 +739,7 @@ namespace ApplicationLayer.WpfApp.Commands
             () =>
             {
                 LocalizeDictionary.Instance.SetCurrentThreadCulture = true;
-//                LocalizeDictionary.Instance.Culture = new CultureInfo("ko-KR");
+                //                LocalizeDictionary.Instance.Culture = new CultureInfo("ko-KR");
             }, () =>
             {
                 var vm = RootWindow.DataContext as MainViewModel;

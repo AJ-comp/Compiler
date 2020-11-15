@@ -29,16 +29,16 @@
 
   <ItemGroup>
     <Reference Include="ActiproSoftware.Docking.Wpf">
-      <HintPath>..\..\..\..\..\..\..\..\..\Program Files (x86)\Actipro Software\WPF-Controls\v19.1.0685\Assemblies\ActiproSoftware.Docking.Wpf.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\..\..\..\Program Files (x86)\Actipro Software\WPF-Controls\v20.1.0\Assemblies\ActiproSoftware.Docking.Wpf.dll</HintPath>
     </Reference>
     <Reference Include="ActiproSoftware.Editors.Wpf">
-      <HintPath>..\..\..\..\..\..\..\..\..\Program Files (x86)\Actipro Software\WPF-Controls\v19.1.0685\Assemblies\ActiproSoftware.Editors.Wpf.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\..\..\..\Program Files (x86)\Actipro Software\WPF-Controls\v20.1.0\Assemblies\ActiproSoftware.Editors.Wpf.dll</HintPath>
     </Reference>
     <Reference Include="ActiproSoftware.Grids.Wpf">
-      <HintPath>..\..\..\..\..\..\..\..\..\Program Files (x86)\Actipro Software\WPF-Controls\v19.1.0685\Assemblies\ActiproSoftware.Grids.Wpf.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\..\..\..\Program Files (x86)\Actipro Software\WPF-Controls\v20.1.0\Assemblies\ActiproSoftware.Grids.Wpf.dll</HintPath>
     </Reference>
     <Reference Include="ActiproSoftware.Shared.Wpf">
-      <HintPath>..\..\..\..\..\..\..\..\..\Program Files (x86)\Actipro Software\WPF-Controls\v19.1.0685\Assemblies\ActiproSoftware.Shared.Wpf.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\..\..\..\Program Files (x86)\Actipro Software\WPF-Controls\v20.1.0\Assemblies\ActiproSoftware.Shared.Wpf.dll</HintPath>
     </Reference>
   </ItemGroup>
 

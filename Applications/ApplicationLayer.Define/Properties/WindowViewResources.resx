@@ -130,4 +130,10 @@
   <data name="Param" xml:space="preserve">
     <value>Parameter</value>
   </data>
+  <data name="StartBuild_2" xml:space="preserve">
+    <value>Start build: Project: {0}, Configuration: {1}</value>
+  </data>
+  <data name="GenerateFile_1" xml:space="preserve">
+    <value>Generating {0}</value>
+  </data>
 </root>

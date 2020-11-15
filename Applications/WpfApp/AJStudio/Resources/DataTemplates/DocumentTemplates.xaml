@@ -36,6 +36,7 @@
         <syntaxEditor:SyntaxEditor FontSize="{Binding FontsAndColorsVM.FontSizeSelected}"
                                                 FontFamilyTest="{Binding FontsAndColorsVM.FontSelected, Converter={viewConverters:StringToFontFamilyConverter}}"
                                                 FileName="{Binding Title}"
+                                                Changed="{Binding Changed}"
                                                 IsLineNumberingVisible="True"  LineNumberForeColor="DarkGreen"
                                                 LineCommentForeground="ForestGreen"
                                                 HighlightMap="{Binding FontsAndColorsVM.HighlightMap}"

@@ -52,7 +52,7 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts
             }
             else if (typeDatas.DataType == MiniCDataType.Address)
             {
-                result = new PointerVariableMiniC(typeDatas, nameToken, offset, varProperty, 1, value, DType.Int);
+                result = new PointerVariableMiniC(typeDatas, nameToken, blockLevel, offset, varProperty, 1, value, DType.Int);
             }
 
             return result;

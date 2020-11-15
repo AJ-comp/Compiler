@@ -16,6 +16,9 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts.AstNodes
         // logicalOrExp [LogicalOr]
         public override SdtsNode Build(SdtsParams param)
         {
+            // if there is a prev information remove it.
+            _paramNodeList.Clear();
+
             foreach (var item in Items)
                 _paramNodeList.Add(item.Build(param) as ExprNode);
 

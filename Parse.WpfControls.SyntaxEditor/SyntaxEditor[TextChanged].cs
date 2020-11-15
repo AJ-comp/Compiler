@@ -3,7 +3,6 @@ using Parse.FrontEnd.Tokenize;
 using System;
 using System.Linq;
 using System.Windows.Controls;
-using System.Windows.Input;
 
 namespace Parse.WpfControls.SyntaxEditor
 {
@@ -16,6 +15,8 @@ namespace Parse.WpfControls.SyntaxEditor
 
         private void TextArea_TextChanged(object sender, TextChangedEventArgs e)
         {
+            Changed = true;
+
             Text = TextArea.Text;
             UpdateTokenInfos(e.Changes.First());
 

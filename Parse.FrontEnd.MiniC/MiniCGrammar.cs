@@ -5,6 +5,10 @@ namespace Parse.FrontEnd.Grammars.MiniC
 {
     public class MiniCGrammar : Grammar
     {
+        public Terminal Namespace { get; } = new Terminal(TokenType.Keyword.CategoryKeyword, "namespace");
+        public Terminal Class { get; } = new Terminal(TokenType.Keyword.CategoryKeyword, "class");
+        public Terminal Private { get; } = new Terminal(TokenType.Keyword.Accessword, "private");
+        public Terminal Public { get; } = new Terminal(TokenType.Keyword.Accessword, "public");
         public Terminal If { get; } = new Terminal(TokenType.Keyword.Controlword, "if");
         public Terminal Else { get; } = new Terminal(TokenType.Keyword.Controlword, "else");
         public Terminal While { get; } = new Terminal(TokenType.Keyword.Repeateword, "while");
@@ -62,6 +66,7 @@ namespace Parse.FrontEnd.Grammars.MiniC
 
 
         private NonTerminal miniC = new NonTerminal("mini_c", true);
+        private NonTerminal namespaceDcl = new NonTerminal("namespace_dcl");
         private NonTerminal translationUnit = new NonTerminal("translation_unit");
         private NonTerminal defineUnit = new NonTerminal("define_unit");
         private NonTerminal externalDcl = new NonTerminal("external_dcl");

@@ -6,6 +6,7 @@ using Parse.Types.ConstantTypes;
 using Parse.Types.VarTypes;
 using System;
 using System.ComponentModel;
+using System.Diagnostics;
 
 namespace Parse.FrontEnd.Grammars.MiniC.Sdts.Datas.Variables
 {
@@ -26,6 +27,8 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts.Datas.Variables
         [Description("param")] Param
     }
 
+
+    [DebuggerDisplay("{DebuggerDisplay,nq}")]
     public abstract class VariableMiniC : Variable, IRVar, IHasName
     {
         protected VariableMiniC(MiniCTypeInfo typeDatas, TokenData nameToken,
@@ -98,6 +101,10 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts.Datas.Variables
 
             return new IntConstant(0, State.NotInit);
         }
+
+
+
+        private string DebuggerDisplay => string.Format("{0} {1} B: {2} O: {3} L: {4}", Helper.GetEnumDescription(DataType), Name, Block, Offset, Length);
     }
 
     public abstract class ValueVarMiniC : VariableMiniC
@@ -121,8 +128,10 @@ namespace Parse.FrontEnd.Grammars.MiniC.Sdts.Datas.Variables
 
     public class PointerVariableMiniC : VariableMiniC, IRVar
     {
-        public PointerVariableMiniC(MiniCTypeInfo typeDatas, TokenData nameToken, int offset, VarProperty varProperty, uint pointerLevel, ExprNode value, DType typeName)
-                                                : base(typeDatas, nameToken, null, null, 0, offset, varProperty, VariableMiniC.Convert(varProperty, value))
+        public PointerVariableMiniC(MiniCTypeInfo typeDatas, TokenData nameToken, 
+                                                int blockLevel, int offset, VarProperty varProperty, 
+                                                uint pointerLevel, ExprNode value, DType typeName)
+                                                : base(typeDatas, nameToken, null, null, blockLevel, offset, varProperty, VariableMiniC.Convert(varProperty, value))
         {
             PointerLevel = pointerLevel;
             TypeName = typeName;

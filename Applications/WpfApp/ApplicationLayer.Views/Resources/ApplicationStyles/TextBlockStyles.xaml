@@ -1,7 +1,6 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:themes="http://schemas.actiprosoftware.com/winfx/xaml/themes"
-                    xmlns:local="clr-namespace:ApplicationLayer.Views.Resources.ApplicationStyles">
+                    xmlns:themes="http://schemas.actiprosoftware.com/winfx/xaml/themes">
 
     <Style x:Key="BasicTextBlockStyle" TargetType="TextBlock">
         <Setter Property="TextTrimming" Value="WordEllipsis"/>
@@ -20,7 +19,7 @@
 
     <Style x:Key="DocumentSubHeadingTextBlockStyle" TargetType="TextBlock" BasedOn="{StaticResource BasicTextBlockStyle}">
         <Setter Property="FontSize" Value="20"/>
-        <Setter Property="Foreground" Value="{DynamicResource {x:Static themes:AssetResourceKeys.DocumentTextAccent1ForegroundNormalBrushKey}}"/>
+        <Setter Property="Foreground" Value="{DynamicResource {x:Static themes:AssetResourceKeys.DocumentHeading1ForegroundNormalBrushKey}}"/>
         <Setter Property="HorizontalAlignment" Value="Left"/>
         <Setter Property="LineHeight" Value="20"/>
         <Setter Property="LineStackingStrategy" Value="BlockLineHeight"/>
@@ -32,7 +31,7 @@
 
     <Style x:Key="DocumentSubHeading2TextBlockStyle" TargetType="TextBlock" BasedOn="{StaticResource DocumentSubHeadingTextBlockStyle}">
         <Setter Property="FontSize" Value="15"/>
-        <Setter Property="Foreground" Value="{DynamicResource {x:Static themes:AssetResourceKeys.DocumentTextAccent2ForegroundNormalBrushKey}}"/>
+        <Setter Property="Foreground" Value="{DynamicResource {x:Static themes:AssetResourceKeys.DocumentHeading2ForegroundNormalBrushKey}}"/>
         <Setter Property="LineHeight" Value="15"/>
         <Setter Property="MaxWidth" Value="400"/>
         <Setter Property="Margin" Value="0,5,60,3"/>

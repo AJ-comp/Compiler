@@ -4,11 +4,12 @@ using System;
 
 namespace ApplicationLayer.ViewModels.DocumentTypeViewModels
 {
-    public class DocumentViewModel : DockingItemViewModel
+    public abstract class DocumentViewModel : DockingItemViewModel
     {
         public event EventHandler CloseRequest;
         public event EventHandler AllCloseExceptThisRequest;
 
+        public bool Changed { get; set; }
         public string ToolTipText { get; }
 
         private RelayCommand closeCommand;

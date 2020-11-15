@@ -40,6 +40,7 @@
         <TextBox Grid.Row="0"/>
         <TextBox Grid.Row="1"/>
         <grids:TreeListBox x:Name="treeListBox" Grid.Row="2" IsRootItemVisible="True" TopLevelIndent="2"
+                                    Background="#252526"
                                     RootItem="{Binding Solution, Mode=OneWay}"
                                     SelectedItem="{Binding SelectedItem}"
                                     ap:TreeListBoxHook.DefaultActionHook="True"

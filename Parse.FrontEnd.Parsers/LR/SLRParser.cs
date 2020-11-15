@@ -118,8 +118,16 @@ namespace Parse.FrontEnd.Parsers.LR
 
             try
             {
-                result = this.ReplaceRanges(prevParsingInfo, lexingData.RangeToParsing, tokens);
-                this.PartialParsing(result, lexingData.RangeToParsing);
+                var differRanges = CollectDifferRanges(prevParsingInfo, lexingData.RangeToParsing, tokens);
+
+                if (differRanges.Count() > 0)
+                {
+                    result = ReplaceRanges(prevParsingInfo, differRanges, tokens);
+                    PartialParsing(result, lexingData.RangeToParsing);
+                }
+                // if tokens to remove same with tokens to insert it doesn't need parsing.
+                else result = prevParsingInfo;
+
                 result.Success = true;
             }
             catch (ParsingException ex)
@@ -190,6 +198,28 @@ namespace Parse.FrontEnd.Parsers.LR
             return result;
         }
 
+        private IEnumerable<RangePair> CollectDifferRanges(ParsingResult srcResult, IReadOnlyList<RangePair> rangePairs, IReadOnlyList<TokenData> newTokens)
+        {
+            List<RangePair> result = new List<RangePair>();
+
+            foreach (var rangePair in rangePairs)
+            {
+                if (!rangePair.Same)
+                {
+                    result.Add(rangePair);
+                    continue;
+                }
+
+                // rangePair is same
+                for (int i = rangePair.Item1.StartIndex; i < rangePair.Item1.EndIndex; i++)
+                {
+                    if (srcResult[i].Token.Input != newTokens[i].Input) result.Add(rangePair);
+                }
+            }
+
+            return result;
+        }
+
         private ParsingResult ReplaceRange(ParsingResult srcResult, Range range, IReadOnlyList<TokenData> newTokens, Range newRange)
         {
             var prevParsingResult = new ParsingResult(srcResult.Take(range.StartIndex));
@@ -205,10 +235,8 @@ namespace Parse.FrontEnd.Parsers.LR
             return prevParsingResult;
         }
 
-        private ParsingResult ReplaceRanges(ParsingResult srcResult, IReadOnlyList<RangePair> rangePairs, IReadOnlyList<TokenData> newTokens)
+        private ParsingResult ReplaceRanges(ParsingResult srcResult, IEnumerable<RangePair> rangePairs, IReadOnlyList<TokenData> newTokens)
         {
-            //            int addVal = 0;
-
             foreach (var rangePair in rangePairs)
             {
                 var removeRange = rangePair.Item1;

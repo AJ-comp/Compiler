@@ -88,6 +88,15 @@ namespace ApplicationLayer.Define.Properties {
         }
         
         /// <summary>
+        ///   Generating {0}과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string GenerateFile_1 {
+            get {
+                return ResourceManager.GetString("GenerateFile_1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Global과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string Global {
@@ -129,6 +138,15 @@ namespace ApplicationLayer.Define.Properties {
         public static string ReturnType {
             get {
                 return ResourceManager.GetString("ReturnType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Start build: Project: {0}, Configuration: {1}과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string StartBuild_2 {
+            get {
+                return ResourceManager.GetString("StartBuild_2", resourceCulture);
             }
         }
         

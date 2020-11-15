@@ -1,6 +1,5 @@
 ﻿using ApplicationLayer.Common;
 using ApplicationLayer.Common.Interfaces;
-using QuikGraph;
 using System;
 using System.IO;
 
@@ -19,6 +18,17 @@ namespace ApplicationLayer.Models.SolutionPackage
                 if(this.IsExistFile == false)  return;
 
                 File.WriteAllText(this.FullPath, value);
+            }
+        }
+
+        public string CurrentData
+        {
+            get => _currentData;
+            set
+            {
+                _currentData = value;
+
+                Changed?.Invoke(this, null);
             }
         }
         public string FileType => System.IO.Path.GetExtension(this.FileName).Replace(".", "");
@@ -107,11 +117,13 @@ namespace ApplicationLayer.Models.SolutionPackage
         {
             var extension = System.IO.Path.GetExtension(fileName);
 
-            if (extension == ".mc" ||
-                extension == ".mh") return new SourceFileTreeNodeModel(path, fileName);
+            if (extension == ".mc" || extension == ".mh") return new SourceFileTreeNodeModel(path, fileName);
 
             return new UndefinedTreeNodeModel(path, fileName);
         }
 
+
+
+        private string _currentData;
     }
 }

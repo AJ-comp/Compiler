@@ -4,6 +4,18 @@
     {
         internal Keyword(int hashCode, string value) : base(hashCode, value) { }
 
+        public CategoryKeyword CategoryKeyword
+        {
+            get
+            {
+                var data = "CategoryKeyword";
+                var hashCode = GetHashCode(data);
+                var cacheType = GetTokenType(hashCode);
+
+                return (cacheType == null) ? new CategoryKeyword(hashCode, data) : cacheType as CategoryKeyword;
+            }
+        }
+
         public NormalKeyword NormalKeyword
         {
             get
@@ -65,6 +77,11 @@
         }
     }
 
+
+    public class CategoryKeyword : Keyword
+    {
+        internal CategoryKeyword(int hashCode, string value) : base(hashCode, value) { }
+    }
 
     public class NormalKeyword : Keyword
     {

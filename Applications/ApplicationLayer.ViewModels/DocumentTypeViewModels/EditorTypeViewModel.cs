@@ -1,5 +1,4 @@
-﻿using ApplicationLayer.Common.Utilities;
-using ApplicationLayer.Models.Invokers;
+﻿using ApplicationLayer.Models.Invokers;
 using ApplicationLayer.Models.SolutionPackage;
 using ApplicationLayer.Models.SolutionPackage.MiniCPackage;
 using ApplicationLayer.ViewModels.DialogViewModels.OptionViewModels;
@@ -12,8 +11,6 @@ using Parse.FrontEnd.Grammars;
 using Parse.FrontEnd.Grammars.MiniC;
 using Parse.FrontEnd.Grammars.MiniC.Sdts.AstNodes;
 using Parse.FrontEnd.MiniCParser;
-using Parse.FrontEnd.Parsers;
-using Parse.FrontEnd.Parsers.Datas;
 using Parse.FrontEnd.ParseTree;
 using Parse.FrontEnd.Support.Drawing;
 using Parse.FrontEnd.Tokenize;

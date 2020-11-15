@@ -140,16 +140,17 @@ namespace ApplicationLayer.Common
         }
 
 
-        public static void CreateJLinkCommanderScript(string path, string binFileToLoad)
+        public static void CreateJLinkCommanderScript(string path, string binFileToLoad, string downloadAddress)
         {
             var fileContent = string.Format("si 1" + Environment.NewLine +
                                                           "r " + Environment.NewLine +
                                                           "erase " + Environment.NewLine +
                                                           "h " + Environment.NewLine +
-                                                          "loadbin {0}, 0x08000000 " + Environment.NewLine +
+                                                          "loadbin {0}, {1} " + Environment.NewLine +
                                                           "g" + Environment.NewLine +
                                                           "exit",
-                                                           Path.Combine(path, binFileToLoad));
+                                                           Path.Combine(path, binFileToLoad),
+                                                           downloadAddress);
 
             File.WriteAllText(Path.Combine(path, "CommanderScript.jlink"), fileContent);
         }

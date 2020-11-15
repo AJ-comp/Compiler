@@ -158,7 +158,7 @@ namespace ApplicationLayer.Models.SolutionPackage
             foreach (var item in e.NewItems)
             {
                 var node = item as TreeNodeModel;
-                node.Changed += Node_Changed; ;
+                node.Changed += Node_Changed;
             }
         }
 

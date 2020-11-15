@@ -50,6 +50,18 @@ namespace Parse.WpfControls.SyntaxEditor
             }
         }
 
+        public bool Changed
+        {
+            get { return (bool)GetValue(ChangedProperty); }
+            set { SetValue(ChangedProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for Changed.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty ChangedProperty =
+            DependencyProperty.Register("Changed", typeof(bool), typeof(SyntaxEditor), new PropertyMetadata(false));
+
+
+
         #region CloseCharacters DP
         public StringCollection CloseCharacters
         {

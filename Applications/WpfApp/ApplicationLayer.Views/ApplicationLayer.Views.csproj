@@ -97,19 +97,19 @@
 
   <ItemGroup>
     <Reference Include="ActiproSoftware.Editors.Wpf">
-      <HintPath>..\..\..\..\..\..\..\..\..\Program Files (x86)\Actipro Software\WPF-Controls\v19.1.0685\Assemblies\ActiproSoftware.Editors.Wpf.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\..\..\..\Program Files (x86)\Actipro Software\WPF-Controls\v20.1.0\Assemblies\ActiproSoftware.Editors.Wpf.dll</HintPath>
     </Reference>
     <Reference Include="ActiproSoftware.Grids.Wpf">
-      <HintPath>..\..\..\..\..\..\..\..\..\Program Files (x86)\Actipro Software\WPF-Controls\v19.1.0685\Assemblies\ActiproSoftware.Grids.Wpf.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\..\..\..\Program Files (x86)\Actipro Software\WPF-Controls\v20.1.0\Assemblies\ActiproSoftware.Grids.Wpf.dll</HintPath>
     </Reference>
     <Reference Include="ActiproSoftware.Navigation.Wpf">
-      <HintPath>..\..\..\..\..\..\..\..\..\Program Files (x86)\Actipro Software\WPF-Controls\v19.1.0685\Assemblies\ActiproSoftware.Navigation.Wpf.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\..\..\..\Program Files (x86)\Actipro Software\WPF-Controls\v20.1.0\Assemblies\ActiproSoftware.Navigation.Wpf.dll</HintPath>
     </Reference>
     <Reference Include="ActiproSoftware.Shared.Wpf">
-      <HintPath>..\..\..\..\..\..\..\..\..\Program Files (x86)\Actipro Software\WPF-Controls\v19.1.0685\Assemblies\ActiproSoftware.Shared.Wpf.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\..\..\..\Program Files (x86)\Actipro Software\WPF-Controls\v20.1.0\Assemblies\ActiproSoftware.Shared.Wpf.dll</HintPath>
     </Reference>
     <Reference Include="ActiproSoftware.Shell.Wpf">
-      <HintPath>..\..\..\..\..\..\..\..\..\Program Files (x86)\Actipro Software\WPF-Controls\v19.1.0685\Assemblies\ActiproSoftware.Shell.Wpf.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\..\..\..\Program Files (x86)\Actipro Software\WPF-Controls\v20.1.0\Assemblies\ActiproSoftware.Shell.Wpf.dll</HintPath>
     </Reference>
     <Reference Include="WindowsFormsIntegration">
       <HintPath>..\..\..\..\..\..\..\..\..\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.8\WindowsFormsIntegration.dll</HintPath>

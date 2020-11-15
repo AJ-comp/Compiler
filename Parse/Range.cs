@@ -103,9 +103,10 @@ namespace Parse
 
 
 
-
     public class RangePair : Tuple<Range, Range>
     {
+        public bool Same => (Item1 == Item2);
+
         public RangePair(Range item1, Range item2) : base(item1, item2)
         {
         }
