@@ -1,8 +1,8 @@
 ﻿using Parse.FrontEnd.Ast;
-using Parse.FrontEnd.Grammars.MiniC.Sdts.AstNodes.ExprNodes;
+using Parse.FrontEnd.MiniC.Sdts.AstNodes.ExprNodes;
 using System.Collections.Generic;
 
-namespace Parse.FrontEnd.Grammars.MiniC.Sdts.AstNodes
+namespace Parse.FrontEnd.MiniC.Sdts.AstNodes
 {
     public class ActualParamNode : MiniCNode
     {

@@ -1,4 +1,4 @@
-﻿using Parse.FrontEnd.MiniCParser;
+﻿using Parse.FrontEnd.MiniC;
 using Parse.FrontEnd.Parsers.Datas;
 using Parse.WpfControls.SyntaxEditor.EventArgs;
 using System;

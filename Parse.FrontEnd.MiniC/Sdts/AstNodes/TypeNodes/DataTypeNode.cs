@@ -1,5 +1,5 @@
 ﻿using Parse.FrontEnd.Ast;
-using Parse.FrontEnd.Grammars.MiniC.Sdts.AstNodes;
+using Parse.FrontEnd.MiniC.Sdts.AstNodes;
 
 namespace Parse.FrontEnd.MiniC.Sdts.AstNodes.TypeNodes
 {

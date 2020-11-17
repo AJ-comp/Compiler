@@ -1,7 +1,7 @@
 ﻿using Parse.FrontEnd.Ast;
 using Parse.Types.ConstantTypes;
 
-namespace Parse.FrontEnd.Grammars.MiniC.Sdts.AstNodes.ExprNodes
+namespace Parse.FrontEnd.MiniC.Sdts.AstNodes.ExprNodes
 {
     public abstract class ExprNode : MiniCNode
     {

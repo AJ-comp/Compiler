@@ -1,10 +1,10 @@
 ﻿using Parse.FrontEnd.Ast;
-using Parse.FrontEnd.Grammars.MiniC.Sdts.Datas;
+using Parse.FrontEnd.MiniC.Sdts.Datas;
 using Parse.MiddleEnd.IR;
 using System;
 using System.Collections.Generic;
 
-namespace Parse.FrontEnd.Grammars.MiniC.Sdts.AstNodes
+namespace Parse.FrontEnd.MiniC.Sdts.AstNodes
 {
     public class ProgramNode : MiniCNode
     {

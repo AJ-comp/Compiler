@@ -1,9 +1,9 @@
-﻿using Parse.FrontEnd.Grammars.MiniC.Sdts.AstNodes;
-using Parse.FrontEnd.Grammars.MiniC.Sdts.Datas.Variables;
+﻿using Parse.FrontEnd.MiniC.Sdts.AstNodes;
+using Parse.FrontEnd.MiniC.Sdts.Datas.Variables;
 using System;
 using System.Threading.Tasks;
 
-namespace Parse.FrontEnd.Grammars.MiniC.Sdts
+namespace Parse.FrontEnd.MiniC.Sdts
 {
     public class MiniCChecker
     {

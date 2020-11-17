@@ -1,7 +1,7 @@
 ﻿using Parse.FrontEnd.Ast;
 using Parse.Types;
 
-namespace Parse.FrontEnd.Grammars.MiniC.Sdts.AstNodes.ExprNodes.ArithmeticExprNodes
+namespace Parse.FrontEnd.MiniC.Sdts.AstNodes.ExprNodes.ArithmeticExprNodes
 {
     public abstract class IncDecExprNode : SingleExprNode
     {

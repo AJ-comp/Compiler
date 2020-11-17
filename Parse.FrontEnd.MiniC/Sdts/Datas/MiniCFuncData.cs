@@ -1,9 +1,8 @@
-﻿using Parse.FrontEnd.Grammars.MiniC.Sdts.Datas.Variables;
+﻿using Parse.FrontEnd.MiniC.Sdts.Datas.Variables;
 using Parse.MiddleEnd.IR.Datas;
 using System.Collections.Generic;
-using static Parse.FrontEnd.Grammars.MiniC.Sdts.Datas.Variables.VariableMiniC;
 
-namespace Parse.FrontEnd.Grammars.MiniC.Sdts.Datas
+namespace Parse.FrontEnd.MiniC.Sdts.Datas
 {
     public class MiniCFuncData : IHasName
     {

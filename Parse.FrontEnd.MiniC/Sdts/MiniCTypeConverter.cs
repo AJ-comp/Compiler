@@ -1,7 +1,7 @@
-﻿using Parse.FrontEnd.Grammars.MiniC.Sdts.Datas.Variables;
+﻿using Parse.FrontEnd.MiniC.Sdts.Datas.Variables;
 using Parse.Types;
 
-namespace Parse.FrontEnd.Grammars.MiniC
+namespace Parse.FrontEnd.MiniC
 {
     internal class MiniCTypeConverter
     {

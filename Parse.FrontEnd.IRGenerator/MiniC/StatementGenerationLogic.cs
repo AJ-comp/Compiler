@@ -1,5 +1,5 @@
-﻿using Parse.FrontEnd.Grammars.MiniC.Sdts.AstNodes.StatementNodes;
-using Parse.FrontEnd.Grammars.MiniC.Sdts.Datas.Variables;
+﻿using Parse.FrontEnd.MiniC.Sdts.AstNodes.StatementNodes;
+using Parse.FrontEnd.MiniC.Sdts.Datas.Variables;
 using Parse.MiddleEnd.IR;
 using Parse.MiddleEnd.IR.Datas;
 using Parse.MiddleEnd.IR.LLVM;

@@ -1,10 +1,10 @@
 ﻿using Parse.FrontEnd.Ast;
-using Parse.FrontEnd.Grammars.MiniC.Sdts.AstNodes.ExprNodes.AssignExprNodes;
-using Parse.FrontEnd.Grammars.MiniC.Sdts.Datas.Variables;
+using Parse.FrontEnd.MiniC.Sdts.AstNodes.ExprNodes.AssignExprNodes;
+using Parse.FrontEnd.MiniC.Sdts.Datas.Variables;
 using Parse.FrontEnd.MiniC.Properties;
 using Parse.Types;
 
-namespace Parse.FrontEnd.Grammars.MiniC.Sdts.AstNodes.ExprNodes
+namespace Parse.FrontEnd.MiniC.Sdts.AstNodes.ExprNodes
 {
     public abstract class BinaryExprNode : ExprNode
     {

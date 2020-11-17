@@ -1,6 +1,6 @@
 ﻿using Parse.Types.ConstantTypes;
 
-namespace Parse.FrontEnd.Grammars.MiniC.Sdts.Datas
+namespace Parse.FrontEnd.MiniC.Sdts.Datas
 {
     public class IntLiteralData : IntConstant
     {

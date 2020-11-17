@@ -1,4 +1,4 @@
-﻿using Parse.FrontEnd.Grammars.MiniC.Sdts.AstNodes;
+﻿using Parse.FrontEnd.MiniC.Sdts.AstNodes;
 using Parse.FrontEnd.Parsers.Datas;
 using Parse.FrontEnd.Tokenize;
 using System.Collections.Generic;

@@ -1,9 +1,9 @@
-﻿using Parse.FrontEnd.Grammars.MiniC.Sdts.Datas.Variables;
+﻿using Parse.FrontEnd.MiniC.Sdts.Datas.Variables;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 
-namespace Parse.FrontEnd.Grammars.MiniC.Sdts.Datas
+namespace Parse.FrontEnd.MiniC.Sdts.Datas
 {
     [DebuggerDisplay("{DebuggerDisplay}")]
     public class MiniCSymbolTable : SymbolTable

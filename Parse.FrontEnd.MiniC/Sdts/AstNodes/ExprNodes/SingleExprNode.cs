@@ -2,7 +2,7 @@
 using Parse.FrontEnd.Grammars.Properties;
 using Parse.FrontEnd.MiniC.Properties;
 
-namespace Parse.FrontEnd.Grammars.MiniC.Sdts.AstNodes.ExprNodes
+namespace Parse.FrontEnd.MiniC.Sdts.AstNodes.ExprNodes
 {
     public abstract class SingleExprNode : ExprNode
     {

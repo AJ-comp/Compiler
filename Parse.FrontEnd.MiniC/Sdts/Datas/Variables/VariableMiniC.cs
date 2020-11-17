@@ -1,5 +1,5 @@
-﻿using Parse.FrontEnd.Grammars.MiniC.Sdts.AstNodes.ExprNodes;
-using Parse.FrontEnd.Grammars.MiniC.Sdts.AstNodes.ExprNodes.LiteralNodes;
+﻿using Parse.FrontEnd.MiniC.Sdts.AstNodes.ExprNodes;
+using Parse.FrontEnd.MiniC.Sdts.AstNodes.ExprNodes.LiteralNodes;
 using Parse.MiddleEnd.IR.Datas;
 using Parse.Types;
 using Parse.Types.ConstantTypes;
@@ -8,7 +8,7 @@ using System;
 using System.ComponentModel;
 using System.Diagnostics;
 
-namespace Parse.FrontEnd.Grammars.MiniC.Sdts.Datas.Variables
+namespace Parse.FrontEnd.MiniC.Sdts.Datas.Variables
 {
     public enum MiniCDataType
     {

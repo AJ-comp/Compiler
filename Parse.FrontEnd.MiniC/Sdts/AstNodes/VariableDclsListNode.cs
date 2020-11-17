@@ -1,7 +1,7 @@
 ﻿using Parse.FrontEnd.Ast;
 using System.Collections.Generic;
 
-namespace Parse.FrontEnd.Grammars.MiniC.Sdts.AstNodes
+namespace Parse.FrontEnd.MiniC.Sdts.AstNodes
 {
     public class VariableDclsListNode : MiniCNode
     {

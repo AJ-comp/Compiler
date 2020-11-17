@@ -1,7 +1,7 @@
 ﻿using Parse.FrontEnd.Ast;
-using Parse.FrontEnd.Grammars.MiniC.Sdts.Datas;
+using Parse.FrontEnd.MiniC.Sdts.Datas;
 
-namespace Parse.FrontEnd.Grammars.MiniC.Sdts.AstNodes.ExprNodes.LiteralNodes
+namespace Parse.FrontEnd.MiniC.Sdts.AstNodes.ExprNodes.LiteralNodes
 {
     public class IntLiteralNode : LiteralNode
     {

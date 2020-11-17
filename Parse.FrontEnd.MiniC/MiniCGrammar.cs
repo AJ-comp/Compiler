@@ -1,7 +1,8 @@
-﻿using Parse.FrontEnd.MiniC.Properties;
+﻿using Parse.FrontEnd.Grammars;
+using Parse.FrontEnd.MiniC.Properties;
 using Parse.FrontEnd.RegularGrammar;
 
-namespace Parse.FrontEnd.Grammars.MiniC
+namespace Parse.FrontEnd.MiniC
 {
     public class MiniCGrammar : Grammar
     {

@@ -1,7 +1,7 @@
 ﻿using Parse.FrontEnd.Ast;
-using Parse.FrontEnd.Grammars.MiniC.Sdts.AstNodes.ExprNodes;
+using Parse.FrontEnd.MiniC.Sdts.AstNodes.ExprNodes;
 
-namespace Parse.FrontEnd.Grammars.MiniC.Sdts.AstNodes.StatementNodes
+namespace Parse.FrontEnd.MiniC.Sdts.AstNodes.StatementNodes
 {
     public class ReturnStatementNode : StatementNode
     {

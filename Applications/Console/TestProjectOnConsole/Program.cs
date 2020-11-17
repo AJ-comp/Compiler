@@ -1,4 +1,4 @@
-﻿using Parse.FrontEnd.MiniCParser;
+﻿using Parse.FrontEnd.MiniC;
 using System;
 using System.Diagnostics;
 

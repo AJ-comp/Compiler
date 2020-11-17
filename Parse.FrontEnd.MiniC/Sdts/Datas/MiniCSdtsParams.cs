@@ -1,4 +1,4 @@
-﻿namespace Parse.FrontEnd.Grammars.MiniC.Sdts.Datas
+﻿namespace Parse.FrontEnd.MiniC.Sdts.Datas
 {
     public class MiniCSdtsParams : SdtsParams
     {

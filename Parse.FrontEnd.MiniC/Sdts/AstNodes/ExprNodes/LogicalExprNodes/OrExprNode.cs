@@ -1,6 +1,6 @@
 ﻿using Parse.FrontEnd.Ast;
 
-namespace Parse.FrontEnd.Grammars.MiniC.Sdts.AstNodes.ExprNodes.LogicalExprNodes
+namespace Parse.FrontEnd.MiniC.Sdts.AstNodes.ExprNodes.LogicalExprNodes
 {
     public class OrExprNode : LogicalExprNode
     {

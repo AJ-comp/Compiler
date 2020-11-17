@@ -1,9 +1,9 @@
 ﻿using Parse.FrontEnd.Ast;
-using Parse.FrontEnd.Grammars.MiniC.Sdts.Datas;
-using Parse.FrontEnd.Grammars.MiniC.Sdts.Datas.Variables;
+using Parse.FrontEnd.MiniC.Sdts.Datas;
+using Parse.FrontEnd.MiniC.Sdts.Datas.Variables;
 using Parse.FrontEnd.MiniC.Sdts.AstNodes.TypeNodes;
 
-namespace Parse.FrontEnd.Grammars.MiniC.Sdts.AstNodes
+namespace Parse.FrontEnd.MiniC.Sdts.AstNodes
 {
     public class VariableTypeNode : MiniCNode
     {

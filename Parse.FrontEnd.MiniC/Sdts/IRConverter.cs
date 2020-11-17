@@ -1,7 +1,7 @@
-﻿using Parse.FrontEnd.Grammars.MiniC.Sdts.Datas.Variables;
+﻿using Parse.FrontEnd.MiniC.Sdts.Datas.Variables;
 using Parse.MiddleEnd.IR;
 
-namespace Parse.FrontEnd.Grammars.MiniC.Sdts
+namespace Parse.FrontEnd.MiniC.Sdts
 {
     public class IRConverter
     {

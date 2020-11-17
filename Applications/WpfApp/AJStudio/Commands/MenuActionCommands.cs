@@ -16,7 +16,7 @@ using ApplicationLayer.Views.DialogViews.OptionViews;
 using ApplicationLayer.WpfApp.ViewModels;
 using ApplicationLayer.WpfApp.Views.DialogViews;
 using GalaSoft.MvvmLight.Messaging;
-using Parse.FrontEnd.Grammars.MiniC.Sdts.AstNodes;
+using Parse.FrontEnd.MiniC.Sdts.AstNodes;
 using Parse.FrontEnd.IRGenerator;
 using System;
 using System.Collections.Generic;

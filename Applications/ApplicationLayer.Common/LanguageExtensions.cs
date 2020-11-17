@@ -1,5 +1,5 @@
 ﻿using Parse.FrontEnd.Grammars;
-using Parse.FrontEnd.Grammars.MiniC;
+using Parse.FrontEnd.MiniC;
 using System.IO;
 
 namespace ApplicationLayer.Common

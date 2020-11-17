@@ -1,7 +1,7 @@
 ﻿using Parse.FrontEnd.Ast;
 using System;
 
-namespace Parse.FrontEnd.Grammars.MiniC.Sdts.AstNodes.ExprNodes.AssignExprNodes
+namespace Parse.FrontEnd.MiniC.Sdts.AstNodes.ExprNodes.AssignExprNodes
 {
     public abstract class OperationAssignExprNode : AssignExprNode
     {

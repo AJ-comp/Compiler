@@ -1,6 +1,6 @@
 ﻿using ApplicationLayer.Common;
-using Parse.FrontEnd.Grammars.MiniC.Sdts.Datas;
-using Parse.FrontEnd.Grammars.MiniC.Sdts.Datas.Variables;
+using Parse.FrontEnd.MiniC.Sdts.Datas;
+using Parse.FrontEnd.MiniC.Sdts.Datas.Variables;
 using System;
 
 namespace ApplicationLayer.Models.SolutionPackage.MiniCPackage

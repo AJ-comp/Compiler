@@ -1,7 +1,7 @@
 ﻿using Parse.FrontEnd.Ast;
-using Parse.FrontEnd.Grammars.MiniC.Sdts.Datas;
+using Parse.FrontEnd.MiniC.Sdts.Datas;
 
-namespace Parse.FrontEnd.Grammars.MiniC.Sdts.AstNodes.StatementNodes
+namespace Parse.FrontEnd.MiniC.Sdts.AstNodes.StatementNodes
 {
     public class CompoundStNode : StatementNode
     {

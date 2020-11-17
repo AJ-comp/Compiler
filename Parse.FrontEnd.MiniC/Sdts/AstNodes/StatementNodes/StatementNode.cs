@@ -1,6 +1,6 @@
 ﻿using Parse.FrontEnd.Ast;
 
-namespace Parse.FrontEnd.Grammars.MiniC.Sdts.AstNodes.StatementNodes
+namespace Parse.FrontEnd.MiniC.Sdts.AstNodes.StatementNodes
 {
     public abstract class StatementNode : MiniCNode
     {

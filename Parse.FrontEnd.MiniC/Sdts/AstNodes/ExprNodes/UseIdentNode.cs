@@ -1,8 +1,8 @@
 ﻿using Parse.FrontEnd.Ast;
-using Parse.FrontEnd.Grammars.MiniC.Sdts.Datas.Variables;
+using Parse.FrontEnd.MiniC.Sdts.Datas.Variables;
 using Parse.FrontEnd.MiniC.Properties;
 
-namespace Parse.FrontEnd.Grammars.MiniC.Sdts.AstNodes.ExprNodes
+namespace Parse.FrontEnd.MiniC.Sdts.AstNodes.ExprNodes
 {
     public class UseIdentNode : ExprNode
     {

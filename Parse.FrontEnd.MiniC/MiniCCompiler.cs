@@ -1,10 +1,9 @@
 ﻿using Parse.FrontEnd.Ast;
 using Parse.FrontEnd.Grammars;
 using Parse.FrontEnd.Grammars.MiniC;
-using Parse.FrontEnd.Grammars.MiniC.Sdts;
-using Parse.FrontEnd.Grammars.MiniC.Sdts.AstNodes;
-using Parse.FrontEnd.Grammars.MiniC.Sdts.Datas;
-using Parse.FrontEnd.MiniC;
+using Parse.FrontEnd.MiniC.Sdts;
+using Parse.FrontEnd.MiniC.Sdts.AstNodes;
+using Parse.FrontEnd.MiniC.Sdts.Datas;
 using Parse.FrontEnd.MiniC.ErrorHandler;
 using Parse.FrontEnd.Parsers.Datas;
 using Parse.FrontEnd.Parsers.LR;
@@ -12,7 +11,7 @@ using Parse.FrontEnd.Tokenize;
 using System;
 using System.Collections.Generic;
 
-namespace Parse.FrontEnd.MiniCParser
+namespace Parse.FrontEnd.MiniC
 {
     public class MiniCCompiler
     {

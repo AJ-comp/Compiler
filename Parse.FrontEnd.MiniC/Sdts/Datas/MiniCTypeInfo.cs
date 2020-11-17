@@ -1,6 +1,6 @@
-﻿using Parse.FrontEnd.Grammars.MiniC.Sdts.Datas.Variables;
+﻿using Parse.FrontEnd.MiniC.Sdts.Datas.Variables;
 
-namespace Parse.FrontEnd.Grammars.MiniC.Sdts.Datas
+namespace Parse.FrontEnd.MiniC.Sdts.Datas
 {
     public class MiniCTypeInfo
     {

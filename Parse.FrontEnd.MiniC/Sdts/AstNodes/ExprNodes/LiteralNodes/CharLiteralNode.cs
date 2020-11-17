@@ -1,6 +1,6 @@
 ﻿using Parse.FrontEnd.Ast;
 
-namespace Parse.FrontEnd.Grammars.MiniC.Sdts.AstNodes.ExprNodes.LiteralNodes
+namespace Parse.FrontEnd.MiniC.Sdts.AstNodes.ExprNodes.LiteralNodes
 {
     public class CharLiteralNode : LiteralNode
     {

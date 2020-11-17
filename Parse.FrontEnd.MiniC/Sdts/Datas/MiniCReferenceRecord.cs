@@ -1,9 +1,9 @@
-﻿using Parse.FrontEnd.Grammars.MiniC.Sdts.AstNodes;
-using Parse.FrontEnd.Grammars.MiniC.Sdts.AstNodes.ExprNodes;
+﻿using Parse.FrontEnd.MiniC.Sdts.AstNodes;
+using Parse.FrontEnd.MiniC.Sdts.AstNodes.ExprNodes;
 using System;
 using System.Collections.Generic;
 
-namespace Parse.FrontEnd.Grammars.MiniC.Sdts.Datas
+namespace Parse.FrontEnd.MiniC.Sdts.Datas
 {
     public class MiniCReferenceRecord<T>
     {

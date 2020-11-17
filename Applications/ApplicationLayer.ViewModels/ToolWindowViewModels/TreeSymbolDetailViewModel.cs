@@ -1,7 +1,7 @@
 ﻿using ApplicationLayer.Models.SolutionPackage;
 using ApplicationLayer.Models.SolutionPackage.MiniCPackage;
 using ApplicationLayer.ViewModels.Messages;
-using Parse.FrontEnd.Grammars.MiniC.Sdts.AstNodes;
+using Parse.FrontEnd.MiniC.Sdts.AstNodes;
 using System.Collections.ObjectModel;
 using System.Linq;
 using CommonResource = ApplicationLayer.Define.Properties.Resources;

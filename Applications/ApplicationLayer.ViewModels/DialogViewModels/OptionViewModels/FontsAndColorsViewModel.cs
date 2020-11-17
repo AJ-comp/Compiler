@@ -2,9 +2,9 @@
 using ApplicationLayer.Models;
 using GalaSoft.MvvmLight.Command;
 using Parse;
-using Parse.FrontEnd.Support.Drawing;
 using Parse.FrontEnd.Grammars;
-using Parse.FrontEnd.Grammars.MiniC;
+using Parse.FrontEnd.MiniC;
+using Parse.FrontEnd.Support.Drawing;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;

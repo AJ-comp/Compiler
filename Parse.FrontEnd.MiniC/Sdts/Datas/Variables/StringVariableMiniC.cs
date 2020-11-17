@@ -1,10 +1,10 @@
-﻿using Parse.FrontEnd.Grammars.MiniC.Sdts.AstNodes.ExprNodes;
+﻿using Parse.FrontEnd.MiniC.Sdts.AstNodes.ExprNodes;
 using Parse.Types;
 using Parse.Types.ConstantTypes;
 using Parse.Types.Operations;
 using System;
 
-namespace Parse.FrontEnd.Grammars.MiniC.Sdts.Datas.Variables
+namespace Parse.FrontEnd.MiniC.Sdts.Datas.Variables
 {
     public class StringVariableMiniC : VariableMiniC, IString
     {

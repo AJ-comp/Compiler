@@ -6,7 +6,7 @@ using ApplicationLayer.ViewModels.DocumentTypeViewModels;
 using ApplicationLayer.ViewModels.Messages;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
-using Parse.FrontEnd.MiniCParser;
+using Parse.FrontEnd.MiniC;
 using System;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;

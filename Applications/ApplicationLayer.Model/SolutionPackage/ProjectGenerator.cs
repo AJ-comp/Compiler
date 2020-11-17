@@ -1,7 +1,7 @@
 ﻿using ApplicationLayer.Models.GrammarPackages.MiniCPackage;
 using Parse.BackEnd.Target;
 using Parse.FrontEnd.Grammars;
-using Parse.FrontEnd.Grammars.MiniC;
+using Parse.FrontEnd.MiniC;
 
 namespace ApplicationLayer.Models.SolutionPackage
 {

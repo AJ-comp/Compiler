@@ -3,7 +3,7 @@ using Parse.Types.ConstantTypes;
 using Parse.Types.Operations;
 using System;
 
-namespace Parse.FrontEnd.Grammars.MiniC.Sdts.AstNodes.ExprNodes.AssignExprNodes
+namespace Parse.FrontEnd.MiniC.Sdts.AstNodes.ExprNodes.AssignExprNodes
 {
     public class AddAssignNode : OperationAssignExprNode
     {

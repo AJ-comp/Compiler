@@ -1,20 +1,19 @@
 ﻿using Parse.FrontEnd.Ast;
-using Parse.FrontEnd.Grammars.MiniC.Sdts.AstNodes;
-using Parse.FrontEnd.Grammars.MiniC.Sdts.AstNodes.ExprNodes;
-using Parse.FrontEnd.Grammars.MiniC.Sdts.AstNodes.ExprNodes.ArithmeticExprNodes;
-using Parse.FrontEnd.Grammars.MiniC.Sdts.AstNodes.ExprNodes.AssignExprNodes;
-using Parse.FrontEnd.Grammars.MiniC.Sdts.AstNodes.ExprNodes.LiteralNodes;
-using Parse.FrontEnd.Grammars.MiniC.Sdts.AstNodes.ExprNodes.LogicalExprNodes;
-using Parse.FrontEnd.Grammars.MiniC.Sdts.AstNodes.StatementNodes;
-using Parse.FrontEnd.Grammars.MiniC.Sdts.Datas;
-using Parse.FrontEnd.Grammars.MiniC.Sdts.Datas.Variables;
 using Parse.FrontEnd.MiniC.Properties;
+using Parse.FrontEnd.MiniC.Sdts.AstNodes;
 using Parse.FrontEnd.MiniC.Sdts.AstNodes.ExprNodes;
+using Parse.FrontEnd.MiniC.Sdts.AstNodes.ExprNodes.ArithmeticExprNodes;
+using Parse.FrontEnd.MiniC.Sdts.AstNodes.ExprNodes.AssignExprNodes;
+using Parse.FrontEnd.MiniC.Sdts.AstNodes.ExprNodes.LiteralNodes;
+using Parse.FrontEnd.MiniC.Sdts.AstNodes.ExprNodes.LogicalExprNodes;
+using Parse.FrontEnd.MiniC.Sdts.AstNodes.StatementNodes;
 using Parse.FrontEnd.MiniC.Sdts.AstNodes.TypeNodes;
+using Parse.FrontEnd.MiniC.Sdts.Datas;
+using Parse.FrontEnd.MiniC.Sdts.Datas.Variables;
 using Parse.Types;
 using System;
 
-namespace Parse.FrontEnd.Grammars.MiniC.Sdts
+namespace Parse.FrontEnd.MiniC.Sdts
 {
     public class MiniCCreator
     {
