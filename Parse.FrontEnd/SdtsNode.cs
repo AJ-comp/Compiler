@@ -32,5 +32,10 @@ namespace Parse.FrontEnd
         }
 
         public abstract SdtsNode Build(SdtsParams param);
+
+        public override string ToString()
+            => string.Format("Ast: {0}, Error node count: {1}",
+                                        Ast,
+                                        ErrNodes.Count);
     }
 }

@@ -2,7 +2,6 @@
 using System;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
-using System.Windows.Documents;
 using CommonResource = ApplicationLayer.Define.Properties.Resources;
 
 namespace ApplicationLayer.ViewModels.ToolWindowViewModels

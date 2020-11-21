@@ -1,4 +1,5 @@
 ﻿using Parse.FrontEnd.Ast;
+using Parse.FrontEnd.MiniC.Sdts.AstNodes.StatementNodes;
 using Parse.FrontEnd.MiniC.Sdts.Datas;
 using Parse.MiddleEnd.IR;
 using System;
@@ -8,8 +9,7 @@ namespace Parse.FrontEnd.MiniC.Sdts.AstNodes
 {
     public class ProgramNode : MiniCNode
     {
-        public IEnumerable<VariableDclsNode> VarNodes => _varNodes;
-        public IEnumerable<FuncDefNode> FuncDefNodes => _funcDefNodes;
+        public IEnumerable<NamespaceNode> NamespaceNodes => _namespaceNodes;
 
         public Func<SdtsNode, IRExpression> ConvertFunc { get; set; }
 
@@ -18,8 +18,8 @@ namespace Parse.FrontEnd.MiniC.Sdts.AstNodes
             IsNeedWhileIRGeneration = true;
         }
 
-        // [0:n] : Dcl? (AstNonTerminal)
-        // [n+1:y] : FuncDef? (AstNonTerminal)
+        // [0:n] : Using? (AstNonTerminal)
+        // [n+1:y] : Namespace? (AstNonTerminal)
         public override SdtsNode Build(SdtsParams param)
         {
             SymbolTable = (param as MiniCSdtsParams).SymbolTable;
@@ -29,26 +29,22 @@ namespace Parse.FrontEnd.MiniC.Sdts.AstNodes
                 var minicNode = item as MiniCNode;
 
                 // Global variable
-                if (minicNode is VariableDclsNode)
+                if (minicNode is UsingStNode)
                 {
-                    // children node is parsing only variable elements so it doesn't need to clone an param
-                    _varNodes.Add(minicNode.Build(param) as VariableDclsNode);
+//                    _varNodes.Add(minicNode.Build(param) as UsingStNode);
                 }
                 // Global function
-                else if (minicNode is FuncDefNode)
+                else if (minicNode is NamespaceNode)
                 {
-                    param.Offset = 0;
-
-                    var node = minicNode.Build(param) as FuncDefNode;
-                    SymbolTable.FuncTable.CreateNewBlock(node.FuncData, this);
-                    _funcDefNodes.Add(node);
+                    var node = minicNode.Build(param) as NamespaceNode;
+                    SymbolTable.NamespaceTable.CreateNewBlock(node.NamespaceData, this);
+                    _namespaceNodes.Add(node);
                 }
             }
 
             return this;
         }
 
-        private List<VariableDclsNode> _varNodes = new List<VariableDclsNode>();
-        private List<FuncDefNode> _funcDefNodes = new List<FuncDefNode>();
+        private List<NamespaceNode> _namespaceNodes = new List<NamespaceNode>();
     }
 }

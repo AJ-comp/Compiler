@@ -91,4 +91,21 @@ namespace Parse.FrontEnd.MiniC.Sdts.Datas
     {
 
     }
+
+
+    /// <summary>
+    /// This class has the structure as below.
+    /// namespace 1 - Ref1
+    ///                     - Ref2
+    ///                     - Ref3
+    ///         ...
+    ///         
+    /// namespace2 - Ref1
+    ///                    - Ref2
+    ///                    - Ref3
+    /// </summary>
+    public class NamespaceTable : MiniCReferenceTable<MiniCNamespaceData>
+    {
+
+    }
 }

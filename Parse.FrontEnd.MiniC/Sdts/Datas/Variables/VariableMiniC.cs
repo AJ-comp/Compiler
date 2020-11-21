@@ -27,8 +27,6 @@ namespace Parse.FrontEnd.MiniC.Sdts.Datas.Variables
         [Description("param")] Param
     }
 
-
-    [DebuggerDisplay("{DebuggerDisplay,nq}")]
     public abstract class VariableMiniC : Variable, IRVar, IHasName
     {
         protected VariableMiniC(MiniCTypeInfo typeDatas, TokenData nameToken,
@@ -103,8 +101,15 @@ namespace Parse.FrontEnd.MiniC.Sdts.Datas.Variables
         }
 
 
-
-        private string DebuggerDisplay => string.Format("{0} {1} B: {2} O: {3} L: {4}", Helper.GetEnumDescription(DataType), Name, Block, Offset, Length);
+        public override string ToString()
+            => string.Format("{0}{1} {2} Block: {3} Offset: {4} Length: {5} Property: {6}",
+                                        (Const) ? "const " : string.Empty,
+                                        Helper.GetEnumDescription(DataType),
+                                        Name,
+                                        Block,
+                                        Offset,
+                                        Length,
+                                        Helper.GetEnumDescription(VariableProperty));
     }
 
     public abstract class ValueVarMiniC : VariableMiniC
@@ -122,8 +127,6 @@ namespace Parse.FrontEnd.MiniC.Sdts.Datas.Variables
             throw new NotImplementedException();
         }
     }
-
-
 
 
     public class PointerVariableMiniC : VariableMiniC, IRVar

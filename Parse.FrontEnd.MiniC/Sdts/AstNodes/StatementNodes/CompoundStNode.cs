@@ -1,5 +1,4 @@
 ﻿using Parse.FrontEnd.Ast;
-using Parse.FrontEnd.MiniC.Sdts.Datas;
 
 namespace Parse.FrontEnd.MiniC.Sdts.AstNodes.StatementNodes
 {
@@ -18,14 +17,15 @@ namespace Parse.FrontEnd.MiniC.Sdts.AstNodes.StatementNodes
         // [1] : StatListNode [StatList] [epsilon able]
         public override SdtsNode Build(SdtsParams param)
         {
-            SymbolTable = (param as MiniCSdtsParams).SymbolTable;
+            // it needs to clone an param
+            var newParam = CreateParamForNewBlock(param);
 
             // build VariableDclsListNode
-            VarListNode = Items[0].Build(param) as VariableDclsListNode;
+            VarListNode = Items[0].Build(newParam) as VariableDclsListNode;
 
             // build StatListNode
             if(Items.Count > 1)
-                StatListNode = Items[1].Build(param) as StatListNode;
+                StatListNode = Items[1].Build(newParam) as StatListNode;
 
             return this;
         }

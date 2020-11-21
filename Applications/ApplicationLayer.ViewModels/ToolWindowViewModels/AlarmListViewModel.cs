@@ -2,7 +2,7 @@
 using ApplicationLayer.ViewModels.DocumentTypeViewModels;
 using ApplicationLayer.ViewModels.Messages;
 using GalaSoft.MvvmLight.Command;
-using Parse.WpfControls.SyntaxEditor.EventArgs;
+using Parse.FrontEnd.Support.EventArgs;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -89,7 +89,7 @@ namespace ApplicationLayer.ViewModels.ToolWindowViewModels
             if (message is null) return;
 
             List<AlarmData> alarmList = new List<AlarmData>();
-            var editorViewModel = message.Editor as EditorTypeViewModel;
+            var editorViewModel = message.Editor;
 
             Parallel.ForEach(message.AlarmDatas, item =>
             {
@@ -101,7 +101,13 @@ namespace ApplicationLayer.ViewModels.ToolWindowViewModels
                 if (item.Status == AlarmStatus.ParsingError) status = 0;
                 else if (item.Status == AlarmStatus.ParsingWarning) status = 1;
 
-                var alarmData = new AlarmData(editorViewModel, status, errInfo.Code, errInfo.Message, editorViewModel.FullPath, item.ProjectName, item.FileName, item.TokenIndex, item.Token, item.Line);
+                var alarmData = new AlarmData(editorViewModel, 
+                                                                status, 
+                                                                errInfo.Code, 
+                                                                errInfo.Message, 
+                                                                new AlarmFileInfo(editorViewModel.FullPath, item.ProjectName, item.FileName),
+                                                                new AlarmTokenInfo(item.TokenIndex, item.Token, item.Line));
+
                 lock (lockObject) alarmList.Add(alarmData);
             });
 

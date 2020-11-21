@@ -8,12 +8,12 @@ using GalaSoft.MvvmLight.Messaging;
 using Parse.FrontEnd;
 using Parse.FrontEnd.Ast;
 using Parse.FrontEnd.Grammars;
-using Parse.FrontEnd.MiniC.Sdts.AstNodes;
 using Parse.FrontEnd.MiniC;
+using Parse.FrontEnd.MiniC.Sdts.AstNodes;
 using Parse.FrontEnd.ParseTree;
 using Parse.FrontEnd.Support.Drawing;
+using Parse.FrontEnd.Support.EventArgs;
 using Parse.FrontEnd.Tokenize;
-using Parse.WpfControls.SyntaxEditor.EventArgs;
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
@@ -268,7 +268,12 @@ namespace ApplicationLayer.ViewModels.DocumentTypeViewModels
                 lock (_lockObject)
                 {
                     foreach (var errorInfo in block.ErrorInfos)
-                        alarmList.Add(new AlarmEventArgs(projNode?.FileNameWithoutExtension, FileName, viewIndex, lineIndex + 1, errToken, errorInfo));
+                        alarmList.Add(new AlarmEventArgs(projNode?.FileNameWithoutExtension, 
+                                                                            FileName, 
+                                                                            viewIndex, 
+                                                                            lineIndex + 1, 
+                                                                            errToken, 
+                                                                            errorInfo));
                 }
             });
         }

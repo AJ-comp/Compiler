@@ -16,7 +16,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Parse.WpfControls.SyntaxEditor\Parse.WpfControls.SyntaxEditor.csproj" />
     <ProjectReference Include="..\ApplicationLayer.Model\ApplicationLayer.Models.csproj" />
   </ItemGroup>
 

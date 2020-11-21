@@ -36,8 +36,6 @@ namespace Parse.FrontEnd.MiniC.Sdts.AstNodes
             MiniCSdtsParams result = paramToCopy.CloneForNewBlock() as MiniCSdtsParams;
             SymbolTable = result.SymbolTable;
 
-            result.BlockLevel++;
-
             return result;
         }
 

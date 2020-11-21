@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 
 namespace Parse.FrontEnd.Support.Drawing
 {
+    [DebuggerDisplay("{DebuggerDisplay, nq}")]
     public class HighlightMapItem
     {
         public Type Type { get; }
@@ -17,6 +19,13 @@ namespace Parse.FrontEnd.Support.Drawing
             ForegroundColor = foregroundColor;
             BackgroundColor = backgroundColor;
         }
+
+
+        private string DebuggerDisplay
+            => string.Format("Type: {0}, Foreground color: {1}, Background color: {2}",
+                                        Type.Name,
+                                        ForegroundColor.Name,
+                                        BackgroundColor.Name);
     }
 
     public class HighlightMap : List<HighlightMapItem>

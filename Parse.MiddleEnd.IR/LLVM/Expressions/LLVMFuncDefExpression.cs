@@ -7,15 +7,18 @@ namespace Parse.MiddleEnd.IR.LLVM.Expressions
     public class LLVMFuncDefExpression : LLVMFirstLayerExpression
     {
         public IRFuncData FuncData { get; private set; }
+        public LLVMParamListAndReturnExpression ParamListAndReturnExpression { get; }
         public LLVMBlockExpression BlockExpression { get; private set; }
         public int FuncIndex { get; private set; }
 
-        public LLVMFuncDefExpression(IRFuncData funcData, 
+        public LLVMFuncDefExpression(IRFuncData funcData,
+                                                        LLVMParamListAndReturnExpression paramAndReturnExpression,
                                                         LLVMBlockExpression blockExpression, 
                                                         LLVMSSATable ssaTable,
                                                         int funcIndex) : base(ssaTable)
         {
             FuncData = funcData;
+            ParamListAndReturnExpression = paramAndReturnExpression;
             BlockExpression = blockExpression;
             FuncIndex = funcIndex;
         }
@@ -41,6 +44,7 @@ namespace Parse.MiddleEnd.IR.LLVM.Expressions
 
             // generate block code
             result.Add(new Instruction("{"));
+            result.AddRange(ParamListAndReturnExpression.Build());
             result.AddRange(BlockExpression.Build());
             if (FuncData.ReturnType == ReturnType.Void) result.Add(new Instruction("ret void"));
             result.Add(new Instruction("}"));

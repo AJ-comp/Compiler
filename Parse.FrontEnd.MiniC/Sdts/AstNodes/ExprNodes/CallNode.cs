@@ -39,6 +39,8 @@ namespace Parse.FrontEnd.MiniC.Sdts.AstNodes.ExprNodes
         // [1] : ActualParam? (AstNonTerminal)
         public override SdtsNode Build(SdtsParams param)
         {
+            _params.Clear();
+
             var ident = Items[0].Build(param);
             if(Items.Count > 1)
             {
@@ -50,8 +52,8 @@ namespace Parse.FrontEnd.MiniC.Sdts.AstNodes.ExprNodes
             MethodNameToken = useVarNode.IdentToken;
 
             List<MiniCFuncData> matchedList = new List<MiniCFuncData>();
-            var nodes = MiniCUtilities.GetReferableSymbolTablelList(this);
-            foreach (var func in nodes.Last().FuncTable) // func list exists in the root symbol table
+            var node = MiniCUtilities.GetSymbolTableOfAnyNode(this, typeof(NamespaceNode));
+            foreach (var func in node.FuncTable) // func list exists in the root symbol table
             {
                 if (func.DefineField.Name == useVarNode.IdentToken.Input)
                     matchedList.Add(func.DefineField);
@@ -64,7 +66,7 @@ namespace Parse.FrontEnd.MiniC.Sdts.AstNodes.ExprNodes
         }
 
 
-        private IReadOnlyList<MiniCFuncData> GetParamCountMatchedList(IReadOnlyList<MiniCFuncData> funcListToFind)
+        private IReadOnlyList<MiniCFuncData> GetParamCountMatchedList(IEnumerable<MiniCFuncData> funcListToFind)
         {
             List<MiniCFuncData> result = new List<MiniCFuncData>();
 
@@ -132,7 +134,7 @@ namespace Parse.FrontEnd.MiniC.Sdts.AstNodes.ExprNodes
         }
 
 
-        private void CheckParams(IReadOnlyList<MiniCFuncData> matchedFuncList)
+        private void CheckParams(IEnumerable<MiniCFuncData> matchedFuncList)
         {
             var funcList = GetParamCountMatchedList(matchedFuncList);
             if (funcList.Count == 0)    // param count is not equal

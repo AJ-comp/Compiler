@@ -3,6 +3,7 @@ using ApplicationLayer.Common.Utilities;
 using ApplicationLayer.Models.SolutionPackage;
 using ApplicationLayer.Models.SolutionPackage.MiniCPackage;
 using Parse.BackEnd.Target;
+using System;
 using System.IO;
 using CommonResource = ApplicationLayer.Define.Properties.Resources;
 
@@ -44,9 +45,12 @@ namespace ApplicationLayer.Models.GrammarPackages.MiniCPackage
             var headerFilter = new FilterTreeNodeModel(CommonResource.HeaderFiles);
             result.AddFilter(headerFilter);
 
-            string path = System.IO.Path.Combine(solutionPath, projectPath);
+            string path = Path.Combine(solutionPath, projectPath);
             string fileName = string.Format("main.{0}", this.Extension);
-            string defaultContent = "void main()\r\n{\r\n}";
+            string defaultContent = string.Format("namespace {1}{0}" +
+                                                                   "void main(){0}{{0}}{0}",
+                                                                   Environment.NewLine,
+                                                                   projectName);
 
             Directory.CreateDirectory(path);
             fileName = FileExtend.CreateFile(path, fileName, defaultContent);

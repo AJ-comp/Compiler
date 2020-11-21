@@ -1,9 +1,5 @@
-﻿using Parse.WpfControls.SyntaxEditor;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Parse.FrontEnd.Support.EventArgs;
+using Parse.WpfControls.SyntaxEditor;
 using System.Windows;
 using System.Windows.Input;
 
@@ -33,7 +29,7 @@ namespace ApplicationLayer.Views.AttachedProperties
             else editor.ParsingCompleted -= Editor_ParsingCompleted;
         }
 
-        private static void Editor_ParsingCompleted(object sender, Parse.WpfControls.SyntaxEditor.EventArgs.ParsingCompletedEventArgs e)
+        private static void Editor_ParsingCompleted(object sender, ParsingCompletedEventArgs e)
         {
             var command = SyntaxEditorHook.GetParsingCompletedCommand(sender as SyntaxEditor);
             if (command == null) return;

@@ -1,6 +1,6 @@
 ﻿using ApplicationLayer.ViewModels.DocumentTypeViewModels;
 using GalaSoft.MvvmLight.Messaging;
-using Parse.WpfControls.SyntaxEditor.EventArgs;
+using Parse.FrontEnd.Support.EventArgs;
 
 namespace ApplicationLayer.ViewModels.Messages
 {

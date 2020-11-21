@@ -6,6 +6,7 @@ namespace Parse.FrontEnd.MiniC
 {
     public class MiniCGrammar : Grammar
     {
+        public Terminal Using { get; } = new Terminal(TokenType.Keyword.CategoryKeyword, "using");
         public Terminal Namespace { get; } = new Terminal(TokenType.Keyword.CategoryKeyword, "namespace");
         public Terminal Class { get; } = new Terminal(TokenType.Keyword.CategoryKeyword, "class");
         public Terminal Private { get; } = new Terminal(TokenType.Keyword.Accessword, "private");
@@ -67,6 +68,7 @@ namespace Parse.FrontEnd.MiniC
 
 
         private NonTerminal miniC = new NonTerminal("mini_c", true);
+        private NonTerminal usingDcl = new NonTerminal("using_dcl");
         private NonTerminal namespaceDcl = new NonTerminal("namespace_dcl");
         private NonTerminal translationUnit = new NonTerminal("translation_unit");
         private NonTerminal defineUnit = new NonTerminal("define_unit");
@@ -119,6 +121,8 @@ namespace Parse.FrontEnd.MiniC
 
         // These are meaning unit for semantic analysis.
         public static MeaningUnit Program { get; } = new MeaningUnit(nameof(Program));
+        public static MeaningUnit UsingNode { get; } = new MeaningUnit(nameof(UsingNode));
+        public static MeaningUnit NamespaceNode { get; } = new MeaningUnit(nameof(NamespaceNode));
         public static MeaningUnit FuncDef { get; } = new MeaningUnit(nameof(FuncDef));
         public static MeaningUnit FuncHead { get; } = new MeaningUnit(nameof(FuncHead), MatchedAction.BlockPlus);
         public static MeaningUnit DclSpec { get; } = new MeaningUnit(nameof(DclSpec));
@@ -184,7 +188,9 @@ namespace Parse.FrontEnd.MiniC
         {
             this.ScopeInfos.Add(new ScopeInfo(this.scopeCommentStart, this.scopeCommentEnd));
 
-            this.miniC.AddItem(this.translationUnit, Program);
+            this.miniC.AddItem(usingDcl.ZeroOrMore() | namespaceDcl, Program);
+            this.usingDcl.AddItem(Using + Ident + SemiColon, UsingNode);
+            this.namespaceDcl.AddItem(Namespace + Ident + OpenCurlyBrace + translationUnit + CloseCurlyBrace, NamespaceNode);
             this.translationUnit.AddItem(this.externalDcl | this.defineUnit | this.translationUnit + this.externalDcl);
             this.externalDcl.AddItem(this.functionDef | this.declaration);
             this.functionDef.AddItem(this.functionHeader + this.compoundSt, FuncDef);

@@ -59,15 +59,6 @@ namespace Parse.FrontEnd.IRGenerator
             var ssaTable = param as LLVMSSATable;
             LLVMBlockExpression blockExpression = new LLVMBlockExpression(ssaTable);
 
-            // param variable declaration
-            List<IRVar> paramVars = new List<IRVar>();
-            foreach (var varRecord in cNode.SymbolTable.VarTable)
-            {
-                if (varRecord.DefineField.VariableProperty == VarProperty.Param) paramVars.Add(varRecord.DefineField);
-            }
-
-            blockExpression.AddItem(new LLVMParamListAndReturnExpression(paramVars, null, ssaTable));
-
             // local variable declaration
             List<CalculationInfo> declareInfos = new List<CalculationInfo>();
             foreach (var varRecord in cNode.SymbolTable.VarTable)

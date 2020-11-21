@@ -1,6 +1,6 @@
 ﻿using Parse.FrontEnd.Parsers.Datas;
+using Parse.FrontEnd.Support.EventArgs;
 using Parse.FrontEnd.Tokenize;
-using Parse.WpfControls.SyntaxEditor.EventArgs;
 using System.Threading;
 using System.Windows.Controls;
 using System.Windows.Threading;

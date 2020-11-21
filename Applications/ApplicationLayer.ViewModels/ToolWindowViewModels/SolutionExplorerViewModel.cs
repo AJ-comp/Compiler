@@ -159,7 +159,9 @@ namespace ApplicationLayer.ViewModels.ToolWindowViewModels
 
             this.Solution = result;
             if(this.Solution.LoadProject() == false)
-                Messenger.Default.Send<DisplayMessage>(new DisplayMessage(new Models.MessageData(Models.MessageKind.Information, CommonResource.WarningOnLoad), string.Empty));
+                Messenger.Default.Send(new DisplayMessage(new Models.MessageData(Models.MessageKind.Information, 
+                                                                                                                            CommonResource.WarningOnLoad), 
+                                                                                                                            string.Empty));
 
             this.Solution.IsExpanded = true;
 
@@ -195,8 +197,8 @@ namespace ApplicationLayer.ViewModels.ToolWindowViewModels
         {
             IManagableElements manager = sender as IManagableElements;
 
-            if (manager.IsChanged) Messenger.Default.Send<AddChangedFileMessage>(new AddChangedFileMessage(manager));
-            else Messenger.Default.Send<RemoveChangedFileMessage>(new RemoveChangedFileMessage(manager));
+            if (manager.IsChanged) Messenger.Default.Send(new AddChangedFileMessage(manager));
+            else Messenger.Default.Send(new RemoveChangedFileMessage(manager));
         }
 
         /// <summary>
@@ -207,7 +209,10 @@ namespace ApplicationLayer.ViewModels.ToolWindowViewModels
         {
             if (message is null) return;
 
-            this.Solution = SolutionTreeNodeModel.Create(message.SolutionPath, message.SolutionName, message.Language, message.MachineTarget);
+            this.Solution = SolutionTreeNodeModel.Create(message.SolutionPath, 
+                                                                                message.SolutionName, 
+                                                                                message.Language, 
+                                                                                message.MachineTarget);
             this.Solution.IsExpanded = true;
 
             this.Save();
@@ -254,14 +259,14 @@ namespace ApplicationLayer.ViewModels.ToolWindowViewModels
         {
             ShowSaveDialogMessage result = null;
 
-            Messenger.Default.Send<AddMissedChangedFilesMessage>(new AddMissedChangedFilesMessage());
+            Messenger.Default.Send(new AddMissedChangedFilesMessage());
 
             var process = new GetChangedListMessage(string.Empty, (hirStructs) => 
             {
                 if (hirStructs.Count <= 0) return;
 
                 result = new ShowSaveDialogMessage();
-                Messenger.Default.Send<ShowSaveDialogMessage>(result);
+                Messenger.Default.Send(result);
 
                 if (result.ResultStatus == ShowSaveDialogMessage.Result.Yes)
                 {
@@ -285,7 +290,7 @@ namespace ApplicationLayer.ViewModels.ToolWindowViewModels
                 }
             });
 
-            Messenger.Default.Send<GetChangedListMessage>(process);
+            Messenger.Default.Send(process);
 
             return result;
         }
@@ -301,7 +306,7 @@ namespace ApplicationLayer.ViewModels.ToolWindowViewModels
         /// <param name="message">Information about the solution to load</param>
         public void ReceivedLoadSolutionMessage(LoadSolutionMessage message)
         {
-            var answer = SolutionExplorerViewModel.CheckChangedFiles();
+            var answer = CheckChangedFiles();
 
             if (answer?.ResultStatus == ShowSaveDialogMessage.Result.Cancel) return;
 
@@ -331,7 +336,10 @@ namespace ApplicationLayer.ViewModels.ToolWindowViewModels
             string projectPath = (isAbsolutePath) ? message.ProjectPath : message.ProjectPath.Substring(matchedPos);
             if (projectPath[0] == '\\') projectPath = projectPath.Remove(0, 1);
 
-            ProjectTreeNodeModel newProject = projectGenerator.CreateDefaultProject(solutionPath, projectPath, message.ProjectName, message.MachineTarget);
+            ProjectTreeNodeModel newProject = projectGenerator.CreateDefaultProject(solutionPath, 
+                                                                                                                            projectPath, 
+                                                                                                                            message.ProjectName, 
+                                                                                                                            message.MachineTarget);
             this.Solution.AddProject(newProject);
             newProject.Save();
 

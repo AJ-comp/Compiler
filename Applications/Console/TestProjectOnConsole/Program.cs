@@ -10,7 +10,11 @@ namespace TestProjectOnConsole
         {
             MiniCCompiler parser = new MiniCCompiler();
 
-            var parsingResult = parser.Operate("test.mc", "void main(){}\r\n");
+            var parsingResult = parser.Operate("test.mc", 
+                                                                string.Format("namespace {1}{0}" + 
+                                                                                    "void main(){0}{{0}}{0}",
+                                                                                    Environment.NewLine,
+                                                                                    "test"));
             bool result = parsingResult.Success;
 
             Stopwatch stopWatch = new Stopwatch();

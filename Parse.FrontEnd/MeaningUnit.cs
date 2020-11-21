@@ -2,12 +2,14 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace Parse.FrontEnd
 {
     public enum ErrorType { Error, Warning, Information };
     public enum MatchedAction { None, OffsetPlus, BlockPlus };
 
+    [DebuggerDisplay("{DebuggerDisplay, nq}")]
     public class MeaningUnit
     {
         public string Name { get; } = string.Empty;
@@ -41,6 +43,12 @@ namespace Parse.FrontEnd
         {
             return !(left == right);
         }
+
+
+        private string DebuggerDisplay
+            => string.Format("Name: {0}, Matched action: {1}",
+                                        Name,
+                                        Action);
     }
 
 
@@ -117,6 +125,7 @@ namespace Parse.FrontEnd
 
 
 
+    [DebuggerDisplay("{DebuggerDisplay, nq}")]
     public class SemanticAnalysisResult
     {
         public SdtsNode SdtsRoot { get; }
@@ -129,5 +138,11 @@ namespace Parse.FrontEnd
             AllNodes = allNodes;
             FiredException = exception;
         }
+
+        private string DebuggerDisplay
+            => string.Format("SdtsRoot: {0}, AllNode count: {1}, Exception message: {2}", 
+                                        SdtsRoot,
+                                        AllNodes.Count,
+                                        FiredException.Message);
     }
 }

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Parse.WpfControls.SyntaxEditor.EventArgs
+namespace Parse.FrontEnd.Support.EventArgs
 {
     public class AlarmCollection : List<AlarmEventArgs>
     {

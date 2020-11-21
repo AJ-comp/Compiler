@@ -10,26 +10,23 @@ namespace ApplicationLayer.Models
         public object FromControl { get; }
         public string Code { get; }
         public string Message { get; }
-        public string FullPath { get; }
-        public string ProjectName { get; }
-        public string FileName { get; }
-        public int TokenIndex { get; }
-        public TokenData TokenData { get; }
-        public int Line { get; }
+        public string FullPath => _alarmFileInfo?.FullPath;
+        public string ProjectName => _alarmFileInfo?.ProjectName;
+        public string FileName => _alarmFileInfo?.FileName;
+        public int TokenIndex => (_alarmTokenInfo != null) ? _alarmTokenInfo.TokenIndex : 0;
+        public TokenData TokenData => _alarmTokenInfo?.TokenData;
+        public int Line => (_alarmTokenInfo != null) ? _alarmTokenInfo.Line : 0;
 
-        public AlarmData(object fromControl, int status, string code, string message, string fullPath, string projectName, string fileName, int tokenIndex, TokenData tokenData, int line)
+        public AlarmData(object fromControl, int status, string code, string message, AlarmFileInfo alarmFileInfo, AlarmTokenInfo alarmTokenInfo)
         {
             this.Status = status;
 
             this.FromControl = fromControl;
             this.Code = code;
             this.Message = message;
-            this.FullPath = fullPath;
-            this.ProjectName = projectName;
-            this.FileName = fileName;
-            this.TokenIndex = tokenIndex;
-            this.TokenData = tokenData;
-            this.Line = line;
+
+            _alarmFileInfo = alarmFileInfo;
+            _alarmTokenInfo = alarmTokenInfo;
         }
 
         public override bool Equals(object obj)
@@ -47,6 +44,40 @@ namespace ApplicationLayer.Models
             hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(FullPath);
             hashCode = hashCode * -1521134295 + TokenIndex.GetHashCode();
             return hashCode;
+        }
+
+
+        private AlarmFileInfo _alarmFileInfo;
+        private AlarmTokenInfo _alarmTokenInfo;
+    }
+
+
+    public class AlarmFileInfo
+    {
+        public string FullPath { get; }
+        public string ProjectName { get; }
+        public string FileName { get; }
+
+
+        public AlarmFileInfo(string fullPath, string projectName, string fileName)
+        {
+            FullPath = fullPath;
+            ProjectName = projectName;
+            FileName = fileName;
+        }
+    }
+
+    public class AlarmTokenInfo
+    {
+        public int TokenIndex;
+        public TokenData TokenData;
+        public int Line;
+
+        public AlarmTokenInfo(int tokenIndex, TokenData tokenData, int line)
+        {
+            this.TokenIndex = tokenIndex;
+            this.TokenData = tokenData;
+            this.Line = line;
         }
     }
 }

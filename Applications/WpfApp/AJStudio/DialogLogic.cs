@@ -1,7 +1,6 @@
-﻿using System;
+﻿using GalaSoft.MvvmLight.Views;
+using System;
 using System.Threading.Tasks;
-using System.Windows;
-using GalaSoft.MvvmLight.Views;
 
 namespace ApplicationLayer.WpfApp
 {

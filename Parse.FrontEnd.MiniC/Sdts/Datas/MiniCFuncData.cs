@@ -1,9 +1,11 @@
 ﻿using Parse.FrontEnd.MiniC.Sdts.Datas.Variables;
 using Parse.MiddleEnd.IR.Datas;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace Parse.FrontEnd.MiniC.Sdts.Datas
 {
+    [DebuggerDisplay ("{DebuggerDisplay, nq}")]
     public class MiniCFuncData : IHasName
     {
         public MiniCDataType ReturnType => TypeData.DataType;
@@ -25,7 +27,8 @@ namespace Parse.FrontEnd.MiniC.Sdts.Datas
 
         public string ToDefineString(bool bDisplayReturnType, bool bDisplayParams)
         {
-            string result = (bDisplayReturnType) ? ReturnType.ToString() + Name : Name;
+            string result = (bDisplayReturnType) ? string.Format("{0} {1}", Helper.GetDescription(ReturnType), Name)
+                                                                 : Name;
 
             if (bDisplayParams)
             {
@@ -54,5 +57,8 @@ namespace Parse.FrontEnd.MiniC.Sdts.Datas
                                                 Name,
                                                 0);
         }
+
+
+        private string DebuggerDisplay => ToDefineString(true, true);
     }
 }

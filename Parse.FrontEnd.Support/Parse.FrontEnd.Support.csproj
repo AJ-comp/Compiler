@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Parse.FrontEnd.Parsers\Parse.FrontEnd.Parsers.csproj" />
     <ProjectReference Include="..\Parse.FrontEnd\Parse.FrontEnd.csproj" />
     <ProjectReference Include="..\Parse\Parse.csproj" />
   </ItemGroup>

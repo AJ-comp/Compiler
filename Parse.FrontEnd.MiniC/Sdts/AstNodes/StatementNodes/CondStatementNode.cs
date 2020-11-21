@@ -21,7 +21,7 @@ namespace Parse.FrontEnd.MiniC.Sdts.AstNodes.StatementNodes
         {
             Condition = Items[1].Build(param) as ExprNode;
 
-            TrueStatement = Items[2].Build(param.CloneForNewBlock()) as StatementNode;
+            TrueStatement = Items[2].Build(param) as StatementNode;
 
             /*
             if(node0 is BinaryExprNode)

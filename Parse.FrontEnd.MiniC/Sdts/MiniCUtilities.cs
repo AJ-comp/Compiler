@@ -3,6 +3,7 @@ using Parse.FrontEnd.MiniC.Sdts.Datas;
 using Parse.FrontEnd.MiniC.Sdts.Datas.Variables;
 using Parse.FrontEnd.MiniC.Properties;
 using System.Collections.Generic;
+using System;
 
 namespace Parse.FrontEnd.MiniC.Sdts
 {
@@ -85,6 +86,25 @@ namespace Parse.FrontEnd.MiniC.Sdts
             {
                 if(trasverNode.SymbolTable != null)
                     result.Add(trasverNode.SymbolTable);
+
+                trasverNode = trasverNode.Parent as MiniCNode;
+            }
+
+            return result;
+        }
+
+        public static MiniCSymbolTable GetSymbolTableOfAnyNode(MiniCNode fromNode, Type anyNodeType)
+        {
+            MiniCSymbolTable result = null;
+            MiniCNode trasverNode = fromNode;
+
+            while (trasverNode != null)
+            {
+                if (trasverNode.SymbolTable != null && trasverNode.GetType() == anyNodeType)
+                {
+                    result = trasverNode.SymbolTable;
+                    break;
+                }
 
                 trasverNode = trasverNode.Parent as MiniCNode;
             }

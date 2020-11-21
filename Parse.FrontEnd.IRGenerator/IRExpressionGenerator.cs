@@ -5,11 +5,13 @@ using Parse.FrontEnd.MiniC.Sdts.AstNodes.ExprNodes.AssignExprNodes;
 using Parse.FrontEnd.MiniC.Sdts.AstNodes.ExprNodes.LiteralNodes;
 using Parse.FrontEnd.MiniC.Sdts.AstNodes.ExprNodes.LogicalExprNodes;
 using Parse.FrontEnd.MiniC.Sdts.AstNodes.StatementNodes;
-using Parse.FrontEnd.MiniC.Sdts.AstNodes.ExprNodes;
+using Parse.FrontEnd.MiniC.Sdts.Datas.Variables;
 using Parse.MiddleEnd.IR;
+using Parse.MiddleEnd.IR.Datas;
 using Parse.MiddleEnd.IR.LLVM;
 using Parse.MiddleEnd.IR.LLVM.Expressions;
 using System;
+using System.Collections.Generic;
 
 namespace Parse.FrontEnd.IRGenerator
 {
@@ -74,7 +76,7 @@ namespace Parse.FrontEnd.IRGenerator
             else if (rootNode is LiteralNode) rootNode.ConvertingToIRExpression = LiteralNodeToIRExpression;
 
             // remove for a while for debugging
-//            else throw new NotImplementedException();
+            //            else throw new NotImplementedException();
 
 
             foreach (var item in rootNode.Items)
@@ -92,10 +94,13 @@ namespace Parse.FrontEnd.IRGenerator
                 result.FirstLayers.Add(new LLVMGlobalVariableExpression(varRecord.DefineField, ssaTable));
 
             int index = 0;
-            foreach (var funcDef in cNode.FuncDefNodes)
+            foreach (var namespaceNode in cNode.NamespaceNodes)
             {
-                var funcParam = new Tuple<LLVMSSATable, int>(ssaTable.Clone() as LLVMSSATable, index++);
-                result.FirstLayers.Add(funcDef.ExecuteToIRExpression(funcParam) as LLVMFirstLayerExpression);
+                foreach (var funcDef in namespaceNode.FuncDefNodes)
+                {
+                    var funcParam = new Tuple<LLVMSSATable, int>(ssaTable.Clone() as LLVMSSATable, index++);
+                    result.FirstLayers.Add(funcDef.ExecuteToIRExpression(funcParam) as LLVMFirstLayerExpression);
+                }
             }
 
             return result;
@@ -109,7 +114,17 @@ namespace Parse.FrontEnd.IRGenerator
             var ssaTable = cParam.Item1;
             var index = cParam.Item2;
 
+            // param variable declaration
+            List<IRVar> paramVars = new List<IRVar>();
+            foreach (var varRecord in cNode.SymbolTable.VarTable)
+            {
+                if (varRecord.DefineField.VariableProperty == VarProperty.Param) paramVars.Add(varRecord.DefineField);
+            }
+
+            var paramListAndReturnExpression = new LLVMParamListAndReturnExpression(paramVars, null, ssaTable);
+
             return new LLVMFuncDefExpression(cNode.ToIRFuncData(),
+                                                                    paramListAndReturnExpression,
                                                                     cNode.CompoundSt.ExecuteToIRExpression(ssaTable) as LLVMBlockExpression,
                                                                     ssaTable,
                                                                     0);

@@ -1,12 +1,17 @@
 ﻿using Parse.Types.Operations;
 using System;
+using System.ComponentModel;
 
 namespace Parse.Types
 {
     public enum DType 
     { 
-        Unknown, 
-        Bit, Byte, Short, Int, Double,
+        [Description("Unknown")] Unknown, 
+        [Description("bit")] Bit, 
+        [Description("byte")] Byte, 
+        [Description("short")] Short, 
+        [Description("int")] Int, 
+        [Description("double")] Double,
     }
 
     public interface IDataTypeSpec : ICompareOperation

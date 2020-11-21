@@ -33,7 +33,8 @@ namespace Parse.FrontEnd.MiniC.Sdts.AstNodes
         {
             // it needs to clone an param
             var newParam = CreateParamForNewBlock(param);
-
+            SymbolTable = newParam.SymbolTable;
+            
             // build FuncHead node
             FuncHead = Items[0].Build(newParam) as FuncHeadNode;
 
@@ -59,8 +60,7 @@ namespace Parse.FrontEnd.MiniC.Sdts.AstNodes
                                                 funcHead.ReturnType.Const,
                                                 IRConverter.ToIRReturnType(funcHead.ReturnType.DataType),
                                                 funcHead.Name,
-                                                0
-                                                );
+                                                0);
         }
     }
 }

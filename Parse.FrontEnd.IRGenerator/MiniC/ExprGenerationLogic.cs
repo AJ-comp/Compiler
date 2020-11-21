@@ -3,7 +3,6 @@ using Parse.FrontEnd.MiniC.Sdts.AstNodes.ExprNodes.ArithmeticExprNodes;
 using Parse.FrontEnd.MiniC.Sdts.AstNodes.ExprNodes.AssignExprNodes;
 using Parse.FrontEnd.MiniC.Sdts.AstNodes.ExprNodes.LiteralNodes;
 using Parse.FrontEnd.MiniC.Sdts.AstNodes.ExprNodes.LogicalExprNodes;
-using Parse.FrontEnd.MiniC.Sdts.AstNodes.ExprNodes;
 using Parse.MiddleEnd.IR;
 using Parse.MiddleEnd.IR.LLVM;
 using Parse.MiddleEnd.IR.LLVM.Expressions.AssignExpressions;

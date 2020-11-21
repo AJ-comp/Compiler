@@ -29,6 +29,8 @@ namespace Parse.FrontEnd.MiniC.Sdts.AstNodes
         // [0:n] : ParamNode [ParamDcl]
         public override SdtsNode Build(SdtsParams param)
         {
+            _paramNodes.Clear();
+
             foreach (var item in Items)
             {
                 _paramNodes.Add(item.Build(param) as ParamNode);

@@ -2,6 +2,7 @@
 using Parse.Utilities;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 
 namespace Parse.FrontEnd.Support.Drawing
@@ -37,20 +38,21 @@ namespace Parse.FrontEnd.Support.Drawing
         private HighlightMapHelper()
         {
             #region Keyword
-            _dic.Add(typeof(Keyword), new TokenResourceInfo(Resources.Keyword, Color.LightCyan, Color.Transparent));
-            _dic.Add(typeof(NormalKeyword), new TokenResourceInfo(Resources.EtcKeyword, Color.LightCyan, Color.Transparent));
-            _dic.Add(typeof(Repeateword), new TokenResourceInfo(Resources.RepeatStatement, Color.LightCyan, Color.Transparent));
-            _dic.Add(typeof(Controlword), new TokenResourceInfo(Resources.ControlStatement, Color.LightCyan, Color.Transparent));
-            _dic.Add(typeof(Accessword), new TokenResourceInfo(Resources.Accesser, Color.LightCyan, Color.Transparent));
-            _dic.Add(typeof(DefinedDataType), new TokenResourceInfo(Resources.DefinedDataType, Color.LightCyan, Color.Transparent));
+            _dic.Add(typeof(Keyword), new TokenResourceInfo(Resources.Keyword, Color.FromArgb(239, 201, 134), Color.Transparent));
+            _dic.Add(typeof(CategoryKeyword), new TokenResourceInfo(Resources.Keyword, Color.FromArgb(239, 201, 134), Color.Transparent));
+            _dic.Add(typeof(NormalKeyword), new TokenResourceInfo(Resources.EtcKeyword, Color.FromArgb(239, 201, 134), Color.Transparent));
+            _dic.Add(typeof(Repeateword), new TokenResourceInfo(Resources.RepeatStatement, Color.FromArgb(239, 201, 134), Color.Transparent));
+            _dic.Add(typeof(Controlword), new TokenResourceInfo(Resources.ControlStatement, Color.FromArgb(239, 201, 134), Color.Transparent));
+            _dic.Add(typeof(Accessword), new TokenResourceInfo(Resources.Accesser, Color.FromArgb(239, 201, 134), Color.Transparent));
+            _dic.Add(typeof(DefinedDataType), new TokenResourceInfo(Resources.DefinedDataType, Color.FromArgb(239, 201, 134), Color.Transparent));
             #endregion
 
             #region Digit
-            _dic.Add(typeof(Digit), new TokenResourceInfo(Resources.Digit, Color.Purple, Color.Transparent));
-            _dic.Add(typeof(Digit2), new TokenResourceInfo(Resources.Digit2, Color.Purple, Color.Transparent));
-            _dic.Add(typeof(Digit8), new TokenResourceInfo(Resources.Digit8, Color.Purple, Color.Transparent));
-            _dic.Add(typeof(Digit10), new TokenResourceInfo(Resources.Digit10, Color.Purple, Color.Transparent));
-            _dic.Add(typeof(Digit16), new TokenResourceInfo(Resources.Digit16, Color.Purple, Color.Transparent));
+            _dic.Add(typeof(Digit), new TokenResourceInfo(Resources.Digit, Color.FromArgb(90, 150, 168), Color.Transparent));
+            _dic.Add(typeof(Digit2), new TokenResourceInfo(Resources.Digit2, Color.FromArgb(90, 150, 168), Color.Transparent));
+            _dic.Add(typeof(Digit8), new TokenResourceInfo(Resources.Digit8, Color.FromArgb(90, 150, 168), Color.Transparent));
+            _dic.Add(typeof(Digit10), new TokenResourceInfo(Resources.Digit10, Color.FromArgb(90, 150, 168), Color.Transparent));
+            _dic.Add(typeof(Digit16), new TokenResourceInfo(Resources.Digit16, Color.FromArgb(90, 150, 168), Color.Transparent));
             #endregion
 
             #region Operator
@@ -75,6 +77,7 @@ namespace Parse.FrontEnd.Support.Drawing
         }
     }
 
+    [DebuggerDisplay("{DebuggerDisplay, nq}")]
     public class TokenResourceInfo
     {
         public string DisplayName { get; }
@@ -87,5 +90,12 @@ namespace Parse.FrontEnd.Support.Drawing
             DefaultForegroundColor = defaultForegroundColor;
             DefaultBackgroundColor = defaultBackgroundColor;
         }
+
+
+        private string DebuggerDisplay
+            => string.Format("Display name: {0}, Foreground color: {1}, Background color: {2}",
+                                        DisplayName,
+                                        DefaultForegroundColor.Name,
+                                        DefaultBackgroundColor.Name);
     }
 }

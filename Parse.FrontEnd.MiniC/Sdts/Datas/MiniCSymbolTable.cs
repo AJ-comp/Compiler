@@ -5,12 +5,31 @@ using System.Linq;
 
 namespace Parse.FrontEnd.MiniC.Sdts.Datas
 {
-    [DebuggerDisplay("{DebuggerDisplay}")]
+    [DebuggerDisplay("{DebuggerDisplay, nq}")]
     public class MiniCSymbolTable : SymbolTable
     {
         public MiniCSymbolTable Base { get; }
+
         public FuncTable FuncTable => _funcTable;
         public VarTable VarTable => _varTable;
+        public NamespaceTable NamespaceTable => _namespaceTable;
+
+        public int BaseCount
+        {
+            get
+            {
+                int result = 0;
+
+                MiniCSymbolTable baseTable = this.Base;
+                while (baseTable != null)
+                {
+                    result++;
+                    baseTable = baseTable.Base;
+                }
+
+                return result;
+            }
+        }
 
         public IEnumerable<VarTable> AllVarTable
         {
@@ -28,6 +47,15 @@ namespace Parse.FrontEnd.MiniC.Sdts.Datas
                 return result;
             }
         }
+
+        public string DebuggerDisplay
+            => string.Format("FuncTable items : {0}, VarTable items : {1}, Namespace items: {2}, Base count: {3}", 
+                                        _funcTable.Count(), 
+                                        _varTable.Count(),
+                                        _namespaceTable.Count(),
+                                        BaseCount);
+
+
 
         public VariableMiniC GetVarByName(string name)
         {
@@ -59,6 +87,24 @@ namespace Parse.FrontEnd.MiniC.Sdts.Datas
             return result;
         }
 
+
+        public MiniCNamespaceData GetNamespaceByName(string name)
+        {
+            MiniCNamespaceData result = null;
+
+            foreach (var namespaceData in NamespaceTable)
+            {
+                if (namespaceData.DefineField.Name == name)
+                {
+                    result = namespaceData.DefineField;
+                    break;
+                }
+            }
+
+            return result;
+        }
+
+
         public MiniCSymbolTable(MiniCSymbolTable @base = null)
         {
             Base = @base;
@@ -66,8 +112,6 @@ namespace Parse.FrontEnd.MiniC.Sdts.Datas
 
         private VarTable _varTable = new VarTable();
         private FuncTable _funcTable = new FuncTable();
-
-        private string DebuggerDisplay
-            => string.Format("FuncTable items : {0}, VarTable items : {1}", _funcTable.Count(), _varTable.Count());
+        private NamespaceTable _namespaceTable = new NamespaceTable();
     }
 }
