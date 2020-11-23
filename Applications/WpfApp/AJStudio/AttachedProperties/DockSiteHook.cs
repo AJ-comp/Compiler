@@ -13,8 +13,10 @@ namespace ApplicationLayer.WpfApp.AttachedProperties
         /////////////////////////////////////////////////////////////////////////////////////////////////////
         // Attached Property for a menu items hook
         /////////////////////////////////////////////////////////////////////////////////////////////////////
-        public static bool GetEnableMenuItemHook(DependencyObject obj) => (bool)obj.GetValue(EnableMenuItemHookProperty);
-        public static void SetEnableMenuItemHook(DependencyObject obj, bool value) => obj.SetValue(EnableMenuItemHookProperty, value);
+        public static bool GetEnableMenuItemHook(DependencyObject obj)
+            => (bool)obj.GetValue(EnableMenuItemHookProperty);
+        public static void SetEnableMenuItemHook(DependencyObject obj, bool value)
+            => obj.SetValue(EnableMenuItemHookProperty, value);
 
         // Using a DependencyProperty as the backing store for EnableMenuItemHook.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty EnableMenuItemHookProperty =
@@ -68,7 +70,13 @@ namespace ApplicationLayer.WpfApp.AttachedProperties
             e.Menu.Items.Add(new Separator());
             foreach(MenuItem menuItem in menu.Items)
             {
-                var addItem = new MenuItem() { Header = menuItem.Header, Command = menuItem.Command, CommandParameter = menuItem.CommandParameter };
+                var addItem = new MenuItem()
+                {
+                    Header = menuItem.Header, 
+                    Command = menuItem.Command, 
+                    CommandParameter = menuItem.CommandParameter
+                };
+
                 e.Menu.Items.Add(addItem);
             }
         }
@@ -77,8 +85,10 @@ namespace ApplicationLayer.WpfApp.AttachedProperties
         /////////////////////////////////////////////////////////////////////////////////////////////////////
         // This AP registers a menu item to add into the Document.
         /////////////////////////////////////////////////////////////////////////////////////////////////////
-        public static Menu GetDocumentMenuItemsToAdd(DependencyObject obj) => (Menu)obj.GetValue(DocumentMenuItemsToAddProperty);
-        public static void SetDocumentMenuItemsToAdd(DependencyObject obj, Menu value) => obj.SetValue(DocumentMenuItemsToAddProperty, value);
+        public static Menu GetDocumentMenuItemsToAdd(DependencyObject obj)
+            => (Menu)obj.GetValue(DocumentMenuItemsToAddProperty);
+        public static void SetDocumentMenuItemsToAdd(DependencyObject obj, Menu value)
+            => obj.SetValue(DocumentMenuItemsToAddProperty, value);
 
         // Using a DependencyProperty as the backing store for DocumentMenuItemsToAdd.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty DocumentMenuItemsToAddProperty =
@@ -89,8 +99,10 @@ namespace ApplicationLayer.WpfApp.AttachedProperties
         /////////////////////////////////////////////////////////////////////////////////////////////////////
         // This AP registers a filter for menu item to add into the Document.
         /////////////////////////////////////////////////////////////////////////////////////////////////////
-        public static Type GetFilterDocumentMenuItemToAdd(DependencyObject obj) => (Type)obj.GetValue(FilterDocumentMenuItemToAddProperty);
-        public static void SetFilterDocumentMenuItemToAdd(DependencyObject obj, Type value) => obj.SetValue(FilterDocumentMenuItemToAddProperty, value);
+        public static Type GetFilterDocumentMenuItemToAdd(DependencyObject obj)
+            => (Type)obj.GetValue(FilterDocumentMenuItemToAddProperty);
+        public static void SetFilterDocumentMenuItemToAdd(DependencyObject obj, Type value)
+            => obj.SetValue(FilterDocumentMenuItemToAddProperty, value);
 
         // Using a DependencyProperty as the backing store for FilterDocumentMenuItemToAdd.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty FilterDocumentMenuItemToAddProperty =
@@ -101,8 +113,10 @@ namespace ApplicationLayer.WpfApp.AttachedProperties
         /////////////////////////////////////////////////////////////////////////////////////////////////////
         // This AP registers a menu item to add into the ToolWindow.
         /////////////////////////////////////////////////////////////////////////////////////////////////////
-        public static Menu GetToolWindowMenuItemsToAdd(DependencyObject obj) => (Menu)obj.GetValue(ToolWindowMenuItemsToAddProperty);
-        public static void SetToolWindowMenuItemToAdd(DependencyObject obj, Menu value) => obj.SetValue(ToolWindowMenuItemsToAddProperty, value);
+        public static Menu GetToolWindowMenuItemsToAdd(DependencyObject obj)
+            => (Menu)obj.GetValue(ToolWindowMenuItemsToAddProperty);
+        public static void SetToolWindowMenuItemToAdd(DependencyObject obj, Menu value)
+            => obj.SetValue(ToolWindowMenuItemsToAddProperty, value);
 
         // Using a DependencyProperty as the backing store for ToolWindowMenuItemToAdd.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty ToolWindowMenuItemsToAddProperty =
@@ -113,8 +127,10 @@ namespace ApplicationLayer.WpfApp.AttachedProperties
         /////////////////////////////////////////////////////////////////////////////////////////////////////
         // This AP registers a filter for menu item to add into the ToolWindow.
         /////////////////////////////////////////////////////////////////////////////////////////////////////
-        public static Type GetFilterToolWindowMenuItemsToAdd(DependencyObject obj) => (Type)obj.GetValue(FilterToolWindowMenuItemsToAddProperty);
-        public static void SetFilterToolWindowMenuItemsToAdd(DependencyObject obj, Type value) => obj.SetValue(FilterToolWindowMenuItemsToAddProperty, value);
+        public static Type GetFilterToolWindowMenuItemsToAdd(DependencyObject obj)
+            => (Type)obj.GetValue(FilterToolWindowMenuItemsToAddProperty);
+        public static void SetFilterToolWindowMenuItemsToAdd(DependencyObject obj, Type value)
+            => obj.SetValue(FilterToolWindowMenuItemsToAddProperty, value);
 
         // Using a DependencyProperty as the backing store for FilterToolWindowMenuItemToAdd.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty FilterToolWindowMenuItemsToAddProperty =
@@ -128,8 +144,10 @@ namespace ApplicationLayer.WpfApp.AttachedProperties
         /////////////////////////////////////////////////////////////////////////////////////////////////////
         // This AP set up whether hooks a primary document changed event.
         /////////////////////////////////////////////////////////////////////////////////////////////////////
-        public static bool GetEnablePrimaryDocumentChangedHook(DependencyObject obj) => (bool)obj.GetValue(EnablePrimaryDocumentChangedHookProperty);
-        public static void SetEnablePrimaryDocumentChangedHook(DependencyObject obj, bool value) => obj.SetValue(EnablePrimaryDocumentChangedHookProperty, value);
+        public static bool GetEnablePrimaryDocumentChangedHook(DependencyObject obj)
+            => (bool)obj.GetValue(EnablePrimaryDocumentChangedHookProperty);
+        public static void SetEnablePrimaryDocumentChangedHook(DependencyObject obj, bool value)
+            => obj.SetValue(EnablePrimaryDocumentChangedHookProperty, value);
 
         // Using a DependencyProperty as the backing store for EnablePrimaryDocumentChangedHook.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty EnablePrimaryDocumentChangedHookProperty =
@@ -162,8 +180,10 @@ namespace ApplicationLayer.WpfApp.AttachedProperties
         /////////////////////////////////////////////////////////////////////////////////////////////////////
         // This AP has command to execute when a primary document changed event fired.
         /////////////////////////////////////////////////////////////////////////////////////////////////////
-        public static ICommand GetPrimaryDocumentChangedCommand(DependencyObject obj) => (ICommand)obj.GetValue(PrimaryDocumentChangedCommandProperty);
-        public static void SetPrimaryDocumentChangedCommand(DependencyObject obj, ICommand value) => obj.SetValue(PrimaryDocumentChangedCommandProperty, value);
+        public static ICommand GetPrimaryDocumentChangedCommand(DependencyObject obj)
+            => (ICommand)obj.GetValue(PrimaryDocumentChangedCommandProperty);
+        public static void SetPrimaryDocumentChangedCommand(DependencyObject obj, ICommand value)
+            => obj.SetValue(PrimaryDocumentChangedCommandProperty, value);
 
         // Using a DependencyProperty as the backing store for PrimaryDocumentChangedCommand.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty PrimaryDocumentChangedCommandProperty =
@@ -174,8 +194,10 @@ namespace ApplicationLayer.WpfApp.AttachedProperties
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // This AP has command parameter to pass to the command when a primary document changed event fired.
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        public static object GetPrimaryDocumentChangedCommandParameter(DependencyObject obj) => (object)obj.GetValue(PrimaryDocumentChangedCommandParameterProperty);
-        public static void SetPrimaryDocumentChangedCommandParameter(DependencyObject obj, object value) => obj.SetValue(PrimaryDocumentChangedCommandParameterProperty, value);
+        public static object GetPrimaryDocumentChangedCommandParameter(DependencyObject obj)
+            => (object)obj.GetValue(PrimaryDocumentChangedCommandParameterProperty);
+        public static void SetPrimaryDocumentChangedCommandParameter(DependencyObject obj, object value)
+            => obj.SetValue(PrimaryDocumentChangedCommandParameterProperty, value);
 
         // Using a DependencyProperty as the backing store for PrimaryDocumentChangedCommandParameter.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty PrimaryDocumentChangedCommandParameterProperty =
@@ -189,8 +211,10 @@ namespace ApplicationLayer.WpfApp.AttachedProperties
         /////////////////////////////////////////////////////////////////////////////////////////////////////
         // This AP set up whether hooks a window closed event.
         /////////////////////////////////////////////////////////////////////////////////////////////////////
-        public static bool GetEnableWindowClosedHook(DependencyObject obj) => (bool)obj.GetValue(EnableWindowClosedHookProperty);
-        public static void SetEnableWindowClosedHook(DependencyObject obj, bool value) => obj.SetValue(EnableWindowClosedHookProperty, value);
+        public static bool GetEnableWindowClosedHook(DependencyObject obj)
+            => (bool)obj.GetValue(EnableWindowClosedHookProperty);
+        public static void SetEnableWindowClosedHook(DependencyObject obj, bool value)
+            => obj.SetValue(EnableWindowClosedHookProperty, value);
 
         // Using a DependencyProperty as the backing store for EnableWindowClosedHook.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty EnableWindowClosedHookProperty =
@@ -224,8 +248,10 @@ namespace ApplicationLayer.WpfApp.AttachedProperties
         /////////////////////////////////////////////////////////////////////////////////////////////////////
         // This AP has command to execute when a window closed event fired.
         /////////////////////////////////////////////////////////////////////////////////////////////////////
-        public static ICommand GetWindowClosedCommand(DependencyObject obj) => (ICommand)obj.GetValue(WindowClosedCommandProperty);
-        public static void SetWindowClosedCommand(DependencyObject obj, ICommand value) => obj.SetValue(WindowClosedCommandProperty, value);
+        public static ICommand GetWindowClosedCommand(DependencyObject obj)
+            => (ICommand)obj.GetValue(WindowClosedCommandProperty);
+        public static void SetWindowClosedCommand(DependencyObject obj, ICommand value)
+            => obj.SetValue(WindowClosedCommandProperty, value);
 
         // Using a DependencyProperty as the backing store for WindowClosedCommand.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty WindowClosedCommandProperty =
@@ -236,8 +262,10 @@ namespace ApplicationLayer.WpfApp.AttachedProperties
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // This AP has command parameter to pass to the command when a window closed event fired.
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        public static object GetWindowClosedCommandParameter(DependencyObject obj) => (object)obj.GetValue(WindowClosedCommandParameterProperty);
-        public static void SetWindowClosedCommandParameter(DependencyObject obj, object value) => obj.SetValue(WindowClosedCommandParameterProperty, value);
+        public static object GetWindowClosedCommandParameter(DependencyObject obj)
+            => (object)obj.GetValue(WindowClosedCommandParameterProperty);
+        public static void SetWindowClosedCommandParameter(DependencyObject obj, object value)
+            => obj.SetValue(WindowClosedCommandParameterProperty, value);
 
         // Using a DependencyProperty as the backing store for WindowClosedCommandParameter.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty WindowClosedCommandParameterProperty =
@@ -245,8 +273,10 @@ namespace ApplicationLayer.WpfApp.AttachedProperties
 
 
 
-        public static DocumentViewModel GetPrimaryDocument(DependencyObject obj) => (DocumentViewModel)obj.GetValue(PrimaryDocumentProperty);
-        public static void SetPrimaryDocument(DependencyObject obj, DocumentViewModel value) => obj.SetValue(PrimaryDocumentProperty, value);
+        public static DocumentViewModel GetPrimaryDocument(DependencyObject obj)
+            => (DocumentViewModel)obj.GetValue(PrimaryDocumentProperty);
+        public static void SetPrimaryDocument(DependencyObject obj, DocumentViewModel value)
+            => obj.SetValue(PrimaryDocumentProperty, value);
 
         // Using a DependencyProperty as the backing store for PrimaryDocument.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty PrimaryDocumentProperty =

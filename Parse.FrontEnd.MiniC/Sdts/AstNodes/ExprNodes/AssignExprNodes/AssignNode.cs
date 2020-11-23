@@ -1,8 +1,5 @@
 ﻿using Parse.FrontEnd.Ast;
 using Parse.FrontEnd.MiniC.Sdts.AstNodes.ExprNodes.LiteralNodes;
-using Parse.FrontEnd.MiniC.Sdts.Datas.Variables;
-using Parse.MiddleEnd.IR.Datas;
-using Parse.Types.ConstantTypes;
 using System;
 
 namespace Parse.FrontEnd.MiniC.Sdts.AstNodes.ExprNodes.AssignExprNodes

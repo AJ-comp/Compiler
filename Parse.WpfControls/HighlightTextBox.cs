@@ -1,4 +1,5 @@
 ﻿using Parse.FrontEnd.RegularGrammar;
+using Parse.FrontEnd.Support.Drawing;
 using Parse.FrontEnd.Tokenize;
 using Parse.WpfControls.Common;
 using Parse.WpfControls.EventArgs;

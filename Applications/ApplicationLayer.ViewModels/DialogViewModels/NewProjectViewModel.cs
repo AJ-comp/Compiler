@@ -100,7 +100,10 @@ namespace ApplicationLayer.ViewModels.DialogViewModels
         private void OnCreate(Action action)
         {
             Target target = Activator.CreateInstance(this.ProjectSelection.SelectedTerminalItem) as Target;
-            Messenger.Default.Send(new AddProjectMessage(System.IO.Path.Combine(this.projectPath, this.projectName), this.projectName, this.ProjectSelection.SelectedProject.Grammar, target));
+            Messenger.Default.Send(new AddProjectMessage(System.IO.Path.Combine(this.projectPath, this.projectName), 
+                                                                                     this.projectName, 
+                                                                                     this.ProjectSelection.SelectedProject.Grammar, 
+                                                                                     target));
 
             action?.Invoke();
         }

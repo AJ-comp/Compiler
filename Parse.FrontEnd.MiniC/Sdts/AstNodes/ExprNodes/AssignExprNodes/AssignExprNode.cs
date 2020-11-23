@@ -1,8 +1,7 @@
 ﻿using Parse.FrontEnd.Ast;
+using Parse.FrontEnd.MiniC.Properties;
 using Parse.FrontEnd.MiniC.Sdts.AstNodes.ExprNodes.LiteralNodes;
 using Parse.FrontEnd.MiniC.Sdts.Datas.Variables;
-using Parse.FrontEnd.MiniC.Properties;
-using Parse.FrontEnd.MiniC.Sdts.AstNodes.ExprNodes;
 using System;
 
 namespace Parse.FrontEnd.MiniC.Sdts.AstNodes.ExprNodes.AssignExprNodes
@@ -36,24 +35,28 @@ namespace Parse.FrontEnd.MiniC.Sdts.AstNodes.ExprNodes.AssignExprNodes
             }
             else
             {
-                AddMCL0004Exception();
+                AddException(nameof(AlarmCodes.MCL0004), AlarmCodes.MCL0004);
             }
 
             return this;
         }
 
-        protected void AddMCL0004Exception()
+        protected void AddException(string exceptionName, string exceptionMessage)
         {
             Left.ConnectedErrInfoList.Add
             (
-                new MeaningErrInfo(Left.MeaningTokens,
-                                                nameof(AlarmCodes.MCL0004),
-                                                string.Format(AlarmCodes.MCL0004))
+                new MeaningErrInfo(Left.MeaningTokens, exceptionName, exceptionMessage)
             );
         }
 
         protected bool CanAssign(VariableMiniC leftVar, ExprNode rightNode)
         {
+            if (leftVar.Const)
+            {
+                AddException(nameof(AlarmCodes.MCL0002), AlarmCodes.MCL0002);
+                return false;
+            }
+
             if (leftVar.CanAssign(rightNode.Result)) return true;
             else
             {

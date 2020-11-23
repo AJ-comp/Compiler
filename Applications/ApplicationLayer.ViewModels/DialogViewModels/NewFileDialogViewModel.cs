@@ -111,8 +111,20 @@ namespace ApplicationLayer.ViewModels.DialogViewModels
          ********************************************************************************************/
         public NewFileDialogViewModel()
         {
-            this.NewFileDataCollection.Add(new Document(DocumentType.MiniCHeader, CommonResource.MiniCFile, CommonResource.MiniCHeaderFileExplain, "", "NewHeader.h"));
-            this.NewFileDataCollection.Add(new Document(DocumentType.MiniCSource, CommonResource.MiniCFile, CommonResource.MiniCSourceFileExplain, "", "NewSource.mc"));
+            var headerDoc = new Document(DocumentType.MiniCHeader, 
+                                                            CommonResource.MiniCFile, 
+                                                            CommonResource.MiniCHeaderFileExplain, 
+                                                            "", 
+                                                            "NewHeader.h");
+
+            var sourceDoc = new Document(DocumentType.MiniCSource, 
+                                                            CommonResource.MiniCFile, 
+                                                            CommonResource.MiniCSourceFileExplain, 
+                                                            "", 
+                                                            "NewSource.mc");
+
+            this.NewFileDataCollection.Add(headerDoc);
+            this.NewFileDataCollection.Add(sourceDoc);
         }
 
 

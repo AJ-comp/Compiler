@@ -22,6 +22,8 @@ namespace Parse.FrontEnd.MiniC.Sdts.AstNodes
         // [n+1:y] : Namespace? (AstNonTerminal)
         public override SdtsNode Build(SdtsParams param)
         {
+            _namespaceNodes.Clear();
+
             SymbolTable = (param as MiniCSdtsParams).SymbolTable;
 
             foreach (var item in Items)

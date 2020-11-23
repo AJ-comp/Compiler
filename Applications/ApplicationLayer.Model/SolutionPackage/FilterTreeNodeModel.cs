@@ -30,7 +30,7 @@ namespace ApplicationLayer.Models.SolutionPackage
                         foreach (var childItem in filter.ToFilterFileTreeNodeModel)
                         {
                             string filterFullPath = Path.Combine(this.FilterName, childItem.FilterPath);
-                            FilterFileTreeNodeModel curNode = new FilterFileTreeNodeModel(filterFullPath, childItem.Path, childItem.FileName);
+                            var curNode = new FilterFileTreeNodeModel(filterFullPath, childItem.Path, childItem.FileName);
 
                             result.Add(curNode);
                         }
@@ -38,7 +38,7 @@ namespace ApplicationLayer.Models.SolutionPackage
                     else if(child is FileTreeNodeModel)
                     {
                         var file = child as FileTreeNodeModel;
-                        FilterFileTreeNodeModel curNode = new FilterFileTreeNodeModel(this.FilterName, file.Path, file.FileName);
+                        var curNode = new FilterFileTreeNodeModel(this.FilterName, file.Path, file.FileName);
 
                         result.Add(curNode);
                     }

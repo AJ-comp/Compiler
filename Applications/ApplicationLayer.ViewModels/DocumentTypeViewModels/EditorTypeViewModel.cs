@@ -151,10 +151,12 @@ namespace ApplicationLayer.ViewModels.DocumentTypeViewModels
             _fileNode.Clear();
             if (semanticResult == null) return;
 
-            if (semanticResult.SdtsRoot is MiniCNode)
+            foreach(var node in semanticResult.SdtsRoot.Items)
             {
-                var minicRoot = semanticResult.SdtsRoot as MiniCNode;
-                var symbolTable = minicRoot?.SymbolTable;
+                if (!(node is NamespaceNode)) continue;
+
+                var namespaceNode = node as NamespaceNode;
+                var symbolTable = namespaceNode?.SymbolTable;
                 if (symbolTable == null) return;
 
                 // Add abstract variable list information to the current FileTreeNode.

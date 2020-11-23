@@ -12,6 +12,7 @@ namespace ApplicationLayer.Models.SolutionPackage.MiniCPackage
         public string ReturnType => (_funcData == null) ? string.Empty : _funcData.ReturnType.ToString();
         public string Name => _funcData.Name;
         public string Offset => _funcData.Offset.ToString();
+        public bool IsGlobal => true;
         public bool CanReference { get; } = true;
 
         public override string DisplayName

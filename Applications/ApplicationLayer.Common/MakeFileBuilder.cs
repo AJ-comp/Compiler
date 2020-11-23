@@ -50,7 +50,10 @@ namespace ApplicationLayer.Common
         /// <param name="binFileName"></param>
         /// <param name="targetCodeFiles"></param>
         /// <returns></returns>
-        public static MakeFileSectionStruct CreateBinSnippet(string path, string binFileName, string linkerFullPath, IEnumerable<string> targetCodeFiles)
+        public static MakeFileSectionStruct CreateBinSnippet(string path, 
+                                                                                    string binFileName, 
+                                                                                    string linkerFullPath, 
+                                                                                    IEnumerable<string> targetCodeFiles)
         {
             var fileWithoutExt = Path.GetFileNameWithoutExtension(binFileName);
             var fileFullPath = Path.Combine(path, fileWithoutExt);
@@ -66,8 +69,7 @@ namespace ApplicationLayer.Common
                                                         linkingParam, linkerFullPath, mapFullPath, fileFullPath));
 
             contents.Add(string.Format("arm-none-eabi-objdump -hD {0} > {1}", fileFullPath, disassemFullPath));
-            contents.Add(string.Format("arm-none-eabi-objcopy {0} -O binary {1}",
-                                                                fileFullPath, binFullPath));
+            contents.Add(string.Format("arm-none-eabi-objcopy {0} -O binary {1}", fileFullPath, binFullPath));
 
             return new MakeFileSectionStruct(binFullPath, targetCodeFiles, contents);
         }

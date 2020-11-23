@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 
 using CommonResource = ApplicationLayer.Define.Properties.Resources;
 
@@ -14,7 +15,7 @@ namespace ApplicationLayer.Models.GrammarPackages.MiniCPackage
                 {
                     new Document(DocumentType.MiniCSource, CommonResource.MiniCFile, CommonResource.MiniCCategory, CommonResource.EmptyMiniCItem, "empty.mc")
                     {
-                        Data = "void class()\r\n{\r\n}"
+                        Data = string.Format("void class(){0}{{0}}", Environment.NewLine)
                     },
 
                     // for test

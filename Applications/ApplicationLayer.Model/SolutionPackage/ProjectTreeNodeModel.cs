@@ -3,6 +3,7 @@ using ApplicationLayer.Common.Interfaces;
 using Parse.MiddleEnd.IR.LLVM;
 using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.IO;
 using System.Xml.Serialization;
 
@@ -151,7 +152,7 @@ namespace ApplicationLayer.Models.SolutionPackage
         /********************************************************************************************
          * event handler section
          ********************************************************************************************/
-        private void Children_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        private void Children_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             if (e.NewItems == null) return;
 

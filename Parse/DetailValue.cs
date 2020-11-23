@@ -1,7 +1,15 @@
-﻿namespace Parse
-{
-    public enum UnknownState { NotInitialized = 1, DynamicAllocation = 2 }
+﻿using System.ComponentModel;
+using System.Diagnostics;
 
+namespace Parse
+{
+    public enum UnknownState
+    {
+        [Description("not initialized")] NotInitialized = 1, 
+        [Description("dynamic allocation")] DynamicAllocation = 2
+    }
+
+    [DebuggerDisplay("{DebuggerDisplay, nq}")]
     public class DetailValue : ICloneable<DetailValue>
     {
         public DetailValue()
@@ -53,9 +61,7 @@
             return (IsUnknown) ? new DetailValue() : new DetailValue(Value, Signed);
         }
 
-        public override string ToString()
-        {
-            return string.Format("Value : {0}, IsSigned : {1}, IsUnknown : {2}", Value, Signed, IsUnknown);
-        }
+        private string DebuggerDisplay
+            => string.Format("Value : {0}, IsSigned : {1}, IsUnknown : {2}", Value, Signed, IsUnknown);
     }
 }

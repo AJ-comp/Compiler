@@ -3,7 +3,6 @@ using ActiproSoftware.Windows.Controls.Docking.Serialization;
 using ApplicationLayer.Common;
 using ApplicationLayer.Common.Helpers;
 using ApplicationLayer.Common.Utilities;
-using ApplicationLayer.Models;
 using ApplicationLayer.Models.SolutionPackage;
 using ApplicationLayer.ViewModels;
 using ApplicationLayer.ViewModels.DialogViewModels;
@@ -16,8 +15,8 @@ using ApplicationLayer.Views.DialogViews.OptionViews;
 using ApplicationLayer.WpfApp.ViewModels;
 using ApplicationLayer.WpfApp.Views.DialogViews;
 using GalaSoft.MvvmLight.Messaging;
-using Parse.FrontEnd.MiniC.Sdts.AstNodes;
 using Parse.FrontEnd.IRGenerator;
+using Parse.FrontEnd.MiniC.Sdts.AstNodes;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -28,7 +27,7 @@ using System.Windows;
 using System.Windows.Forms;
 using WPFLocalizeExtension.Engine;
 using CommonResource = ApplicationLayer.Define.Properties.Resources;
-using ViewResources = ApplicationLayer.Define.Properties.WindowViewResources;
+using FormsMessageBox = System.Windows.Forms.MessageBox;
 
 namespace ApplicationLayer.WpfApp.Commands
 {
@@ -42,8 +41,8 @@ namespace ApplicationLayer.WpfApp.Commands
         /// <summary>
         /// New Solution Command
         /// </summary>
-        public static readonly RelayUICommand CreateNewSolution = new RelayUICommand(CommonResource.Project,
-            () =>
+        public static readonly RelayUICommand CreateNewSolution
+            = new RelayUICommand(CommonResource.Project, () =>
         {
             NewSolutionDialog dialog = new NewSolutionDialog();
             var vm = dialog.DataContext as NewSolutionViewModel;
@@ -57,8 +56,8 @@ namespace ApplicationLayer.WpfApp.Commands
             return (vm.IsDebugStatus == false);
         });
 
-        public static readonly RelayUICommand ShowOptionDialog = new RelayUICommand(CommonResource.Option,
-            () =>
+        public static readonly RelayUICommand ShowOptionDialog
+            = new RelayUICommand(CommonResource.Option, () =>
         {
             OptionDialog dialog = new OptionDialog();
             var vm = dialog.DataContext as OptionViewModel;
@@ -75,8 +74,8 @@ namespace ApplicationLayer.WpfApp.Commands
         /// <summary>
         /// Add New Project Command
         /// </summary>
-        public static readonly RelayUICommand<SolutionTreeNodeModel> AddNewProject = new RelayUICommand<SolutionTreeNodeModel>(CommonResource.NewProject,
-            (solutionNode) =>
+        public static readonly RelayUICommand<SolutionTreeNodeModel> AddNewProject
+            = new RelayUICommand<SolutionTreeNodeModel>(CommonResource.NewProject, (solutionNode) =>
         {
             NewProjectDialog dialog = new NewProjectDialog();
             var vm = dialog.DataContext as NewProjectViewModel;
@@ -94,8 +93,8 @@ namespace ApplicationLayer.WpfApp.Commands
         /// <summary>
         /// Add Exist Project Command
         /// </summary>
-        public static readonly RelayUICommand<SolutionTreeNodeModel> AddExistProject = new RelayUICommand<SolutionTreeNodeModel>(CommonResource.ExistProject,
-            (solutionNode) =>
+        public static readonly RelayUICommand<SolutionTreeNodeModel> AddExistProject
+            = new RelayUICommand<SolutionTreeNodeModel>(CommonResource.ExistProject, (solutionNode) =>
             {
                 OpenFileDialog dialog = new OpenFileDialog
                 {
@@ -117,8 +116,8 @@ namespace ApplicationLayer.WpfApp.Commands
 
                     solutionNode.AddProject(projectTreeNode);
 
-                    if (solutionNode.IsChanged) Messenger.Default.Send<AddChangedFileMessage>(new AddChangedFileMessage(solutionNode));
-                    else Messenger.Default.Send<RemoveChangedFileMessage>(new RemoveChangedFileMessage(solutionNode));
+                    if (solutionNode.IsChanged) Messenger.Default.Send(new AddChangedFileMessage(solutionNode));
+                    else Messenger.Default.Send(new RemoveChangedFileMessage(solutionNode));
                 }
             }, (condition) =>
             {
@@ -130,8 +129,8 @@ namespace ApplicationLayer.WpfApp.Commands
         /// <summary>
         /// New Item Command
         /// </summary>
-        public static readonly RelayUICommand<TreeNodeModel> AddNewItem = new RelayUICommand<TreeNodeModel>(CommonResource.NewItem,
-            (selectedNode) =>
+        public static readonly RelayUICommand<TreeNodeModel> AddNewItem
+            = new RelayUICommand<TreeNodeModel>(CommonResource.NewItem, (selectedNode) =>
             {
                 NewFileDialog dialog = new NewFileDialog();
                 var vm = dialog.DataContext as NewFileDialogViewModel;
@@ -140,7 +139,9 @@ namespace ApplicationLayer.WpfApp.Commands
                 vm.CreateRequest += (s, e) =>
                 {
                     FileExtend.CreateFile(vm.Path, vm.FileName, vm.SelectedItem.Data);
-                    var newFileNode = TreeNodeCreator.CreateFileTreeNodeModel(vm.Path, selectedNode.FullOnlyPath, vm.FileName);
+                    var newFileNode = TreeNodeCreator.CreateFileTreeNodeModel(vm.Path, 
+                                                                                                                selectedNode.FullOnlyPath, 
+                                                                                                                vm.FileName);
 
                     selectedNode.AddChildren(newFileNode);
                     ChangedFileMessage(selectedNode);
@@ -159,8 +160,8 @@ namespace ApplicationLayer.WpfApp.Commands
         /// <summary>
         /// Load Existing Item Command
         /// </summary>
-        public static readonly RelayUICommand<TreeNodeModel> AddExistItem = new RelayUICommand<TreeNodeModel>(CommonResource.ExistItem,
-            (selectedNode) =>
+        public static readonly RelayUICommand<TreeNodeModel> AddExistItem
+            = new RelayUICommand<TreeNodeModel>(CommonResource.ExistItem, (selectedNode) =>
             {
                 OpenFileDialog dialog = new OpenFileDialog
                 {
@@ -182,7 +183,9 @@ namespace ApplicationLayer.WpfApp.Commands
                         string destPath = Path.Combine(selectedNode.FullOnlyPath, fileName);
                         if (File.Exists(destPath))
                         {
-                            DialogResult dResult = System.Windows.Forms.MessageBox.Show(CommonResource.AlreadyExistFile, string.Empty, MessageBoxButtons.YesNo);
+                            DialogResult dResult = FormsMessageBox.Show(CommonResource.AlreadyExistFile, 
+                                                                                                   string.Empty, 
+                                                                                                   MessageBoxButtons.YesNo);
 
                             if (dResult == DialogResult.Yes) File.Copy(fullPath, destPath);
                             else return;
@@ -231,13 +234,15 @@ namespace ApplicationLayer.WpfApp.Commands
         /// <summary>
         /// Item Unload command
         /// </summary>
-        public static readonly RelayUICommand<TreeNodeModel> Remove = new RelayUICommand<TreeNodeModel>(CommonResource.Remove,
-            (selectedNode) =>
+        public static readonly RelayUICommand<TreeNodeModel> Remove
+            = new RelayUICommand<TreeNodeModel>(CommonResource.Remove, (selectedNode) =>
             {
                 TreeNodeModel parent = selectedNode.Parent;
                 if (parent == null) return;
 
-                DialogResult dResult = System.Windows.Forms.MessageBox.Show(CommonResource.RemoveWarning, string.Empty, MessageBoxButtons.YesNo);
+                DialogResult dResult = FormsMessageBox.Show(CommonResource.RemoveWarning, 
+                                                                                      string.Empty, 
+                                                                                      MessageBoxButtons.YesNo);
 
                 if (dResult == DialogResult.Yes)
                 {
@@ -254,13 +259,15 @@ namespace ApplicationLayer.WpfApp.Commands
         /// <summary>
         /// Item delete command
         /// </summary>
-        public static readonly RelayUICommand<TreeNodeModel> DelItem = new RelayUICommand<TreeNodeModel>(CommonResource.Delete,
-            (selectedNode) =>
+        public static readonly RelayUICommand<TreeNodeModel> DelItem
+            = new RelayUICommand<TreeNodeModel>(CommonResource.Delete, (selectedNode) =>
             {
                 TreeNodeModel parent = selectedNode.Parent;
                 if (parent == null) return;
 
-                DialogResult dResult = System.Windows.Forms.MessageBox.Show(CommonResource.DeleteWarning, string.Empty, MessageBoxButtons.YesNo);
+                DialogResult dResult = FormsMessageBox.Show(CommonResource.DeleteWarning, 
+                                                                                      string.Empty, 
+                                                                                      MessageBoxButtons.YesNo);
 
                 if (dResult == DialogResult.Yes)
                 {
@@ -299,8 +306,8 @@ namespace ApplicationLayer.WpfApp.Commands
         /// <summary>
         /// Item rename command
         /// </summary>
-        public static readonly RelayUICommand<TreeNodeModel> Rename = new RelayUICommand<TreeNodeModel>(CommonResource.Rename,
-            (selectedNode) =>
+        public static readonly RelayUICommand<TreeNodeModel> Rename
+            = new RelayUICommand<TreeNodeModel>(CommonResource.Rename, (selectedNode) =>
             {
                 if (selectedNode.IsEditable) selectedNode.IsEditing = true;
             }, (condition) =>
@@ -313,8 +320,8 @@ namespace ApplicationLayer.WpfApp.Commands
         /// <summary>
         /// Add a new filter command
         /// </summary>
-        public static readonly RelayUICommand<TreeNodeModel> AddNewFilter = new RelayUICommand<TreeNodeModel>(CommonResource.NewFilter,
-            (selectedNode) =>
+        public static readonly RelayUICommand<TreeNodeModel> AddNewFilter
+            = new RelayUICommand<TreeNodeModel>(CommonResource.NewFilter, (selectedNode) =>
             {
                 var filterName = TreeNodeCreator.CreateFilterTreeNodeModel(selectedNode, "Filter");
 
@@ -329,8 +336,8 @@ namespace ApplicationLayer.WpfApp.Commands
         /// <summary>
         /// Add a new folder command
         /// </summary>
-        public static readonly RelayUICommand<TreeNodeModel> AddNewFolder = new RelayUICommand<TreeNodeModel>(CommonResource.NewFolder,
-            (selHier) =>
+        public static readonly RelayUICommand<TreeNodeModel> AddNewFolder
+            = new RelayUICommand<TreeNodeModel>(CommonResource.NewFolder, (selHier) =>
             {
                 string newFolderName = "New Folder";
 
@@ -380,8 +387,8 @@ namespace ApplicationLayer.WpfApp.Commands
         /// <summary>
         /// This command open folder from file explorer
         /// </summary>
-        public static readonly RelayUICommand<TreeNodeModel> OpenFolder = new RelayUICommand<TreeNodeModel>(CommonResource.OpenFolderFromExplorer,
-            (treeNode) =>
+        public static readonly RelayUICommand<TreeNodeModel> OpenFolder
+            = new RelayUICommand<TreeNodeModel>(CommonResource.OpenFolderFromExplorer, (treeNode) =>
             {
                 // opens explorer, showing some other folder)
                 Process.Start("explorer.exe", treeNode.FullOnlyPath);
@@ -429,8 +436,8 @@ namespace ApplicationLayer.WpfApp.Commands
 
 
 
-        public static readonly RelayUICommand BuildSolutionCommand = new RelayUICommand(CommonResource.ParsingHistory,
-            () =>
+        public static readonly RelayUICommand BuildSolutionCommand
+            = new RelayUICommand(CommonResource.ParsingHistory, () =>
             {
                 var mainViewModel = RootWindow.DataContext as MainViewModel;
                 var solution = mainViewModel.SolutionExplorer.Solution;
@@ -449,7 +456,11 @@ namespace ApplicationLayer.WpfApp.Commands
                 CommandLogic.CreateStartingFile(solution.BinFolderPath, bootstrapName, linkerScriptName);
 
                 // create makefile and execute it
-                var allMakeFileSnippets = CommandLogic.CreateAllMakeFileSection(bootstrapName, linkerScriptName, binFileName, fileReferenceInfos);
+                var allMakeFileSnippets = CommandLogic.CreateAllMakeFileSection(bootstrapName, 
+                                                                                                                  linkerScriptName, 
+                                                                                                                  binFileName, 
+                                                                                                                  fileReferenceInfos);
+
                 MakeFileBuilder.CreateMakeFile(Path.Combine(solution.BinFolderPath, "makefile"), allMakeFileSnippets);
                 Builder.ExecuteMakeFile(solution.BinFolderPath);
 
@@ -460,8 +471,8 @@ namespace ApplicationLayer.WpfApp.Commands
             });
 
 
-        public static readonly RelayUICommand DownloadAndDebug = new RelayUICommand(CommonResource.OpenFolderFromExplorer,
-            () =>
+        public static readonly RelayUICommand DownloadAndDebug
+            = new RelayUICommand(CommonResource.OpenFolderFromExplorer, () =>
             {
                 var mainViewModel = RootWindow.DataContext as MainViewModel;
                 var solution = mainViewModel.SolutionExplorer.Solution;
@@ -491,8 +502,8 @@ namespace ApplicationLayer.WpfApp.Commands
         /// <summary>
         /// This command shows parsing history for selected document.
         /// </summary>
-        public static readonly RelayUICommand ParsingHistory = new RelayUICommand(CommonResource.ParsingHistory,
-            () =>
+        public static readonly RelayUICommand ParsingHistory
+            = new RelayUICommand(CommonResource.ParsingHistory, () =>
             {
                 //                if ((docViewModel is EditorTypeViewModel) == false) return;
                 var mainViewModel = RootWindow.DataContext as MainViewModel;
@@ -510,8 +521,8 @@ namespace ApplicationLayer.WpfApp.Commands
 
 
         /// This command shows parse tree for selected document.
-        public static readonly RelayUICommand ShowParseTreeCommand = new RelayUICommand(CommonResource.ParseTree,
-            () =>
+        public static readonly RelayUICommand ShowParseTreeCommand
+            = new RelayUICommand(CommonResource.ParseTree, () =>
             {
                 //                if ((docViewModel is EditorTypeViewModel) == false) return;
                 var mainViewModel = RootWindow.DataContext as MainViewModel;
@@ -529,8 +540,8 @@ namespace ApplicationLayer.WpfApp.Commands
 
 
         /// This command shows inter-language for selected document.
-        public static readonly RelayUICommand ShowInterLanguageCommand = new RelayUICommand(CommonResource.InterLanguage,
-            () =>
+        public static readonly RelayUICommand ShowInterLanguageCommand
+            = new RelayUICommand(CommonResource.InterLanguage, () =>
             {
                 //                if ((docViewModel is EditorTypeViewModel) == false) return;
                 var mainViewModel = RootWindow.DataContext as MainViewModel;
@@ -566,8 +577,8 @@ namespace ApplicationLayer.WpfApp.Commands
         /// <summary>
         /// This command is executed if docking windows were closed.
         /// </summary>
-        public static readonly RelayUICommand<Tuple<object, DockingWindowsEventArgs>> DockingWindowClosed =
-            new RelayUICommand<Tuple<object, DockingWindowsEventArgs>>(CommonResource.Close, (eventArgs) =>
+        public static readonly RelayUICommand<Tuple<object, DockingWindowsEventArgs>> DockingWindowClosed
+            = new RelayUICommand<Tuple<object, DockingWindowsEventArgs>>(CommonResource.Close, (eventArgs) =>
             {
                 if (eventArgs == null) return;
                 if (eventArgs.Item1 == null) return;
@@ -595,8 +606,8 @@ namespace ApplicationLayer.WpfApp.Commands
         /// <summary>
         /// This command is executed after the main window is loaded.
         /// </summary>
-        public static readonly RelayUICommand<Tuple<object, RoutedEventArgs>> MainWindowLoaded = new RelayUICommand<Tuple<object, RoutedEventArgs>>(string.Empty,
-            (e) =>
+        public static readonly RelayUICommand<Tuple<object, RoutedEventArgs>> MainWindowLoaded
+            = new RelayUICommand<Tuple<object, RoutedEventArgs>>(string.Empty, (e) =>
             {
                 RootWindow = e.Item1 as MainWindow;
                 if (RootWindow == null) return;
@@ -633,8 +644,8 @@ namespace ApplicationLayer.WpfApp.Commands
         /// <summary>
         /// This command is executed before the main window is closed.
         /// </summary>
-        public static readonly RelayUICommand<Tuple<object, CancelEventArgs>> MainWindowClosing =
-            new RelayUICommand<Tuple<object, CancelEventArgs>>(CommonResource.Close, (e) =>
+        public static readonly RelayUICommand<Tuple<object, CancelEventArgs>> MainWindowClosing
+            = new RelayUICommand<Tuple<object, CancelEventArgs>>(CommonResource.Close, (e) =>
             {
                 if (RootWindow == null) return;
                 var mainViewModel = RootWindow.DataContext as MainViewModel;
@@ -672,8 +683,8 @@ namespace ApplicationLayer.WpfApp.Commands
 
 
 
-        public static readonly RelayUICommand<Tuple<object, DockingWindowEventArgs>> PrimaryDocumentCommand =
-            new RelayUICommand<Tuple<object, DockingWindowEventArgs>>(string.Empty, (eventArgs) =>
+        public static readonly RelayUICommand<Tuple<object, DockingWindowEventArgs>> PrimaryDocumentCommand
+            = new RelayUICommand<Tuple<object, DockingWindowEventArgs>>(string.Empty, (eventArgs) =>
             {
                 if (eventArgs == null) return;
                 if (eventArgs.Item1 == null) return;

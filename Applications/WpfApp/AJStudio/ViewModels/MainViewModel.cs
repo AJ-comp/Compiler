@@ -206,10 +206,17 @@ namespace ApplicationLayer.WpfApp.ViewModels
         {
             var solutionExplorer = ServiceLocator.Current.GetInstance<SolutionExplorerViewModel>();
 
-            Messenger.Default.Register<CreateSolutionMessage>(solutionExplorer, solutionExplorer.ReceivedCreateSolutionMessage);
-            Messenger.Default.Register<LoadSolutionMessage>(solutionExplorer, solutionExplorer.ReceivedLoadSolutionMessage);
-            Messenger.Default.Register<AddProjectMessage>(solutionExplorer, solutionExplorer.ReceivedAddNewProjectMessage);
-            Messenger.Default.Register<AddMissedChangedFilesMessage>(solutionExplorer, solutionExplorer.ReceivedAddMissedChangedFilesMessage);
+            Messenger.Default.Register<CreateSolutionMessage>(solutionExplorer, 
+                                                                                           solutionExplorer.ReceivedCreateSolutionMessage);
+
+            Messenger.Default.Register<LoadSolutionMessage>(solutionExplorer, 
+                                                                                        solutionExplorer.ReceivedLoadSolutionMessage);
+
+            Messenger.Default.Register<AddProjectMessage>(solutionExplorer, 
+                                                                                     solutionExplorer.ReceivedAddNewProjectMessage);
+
+            Messenger.Default.Register<AddMissedChangedFilesMessage>(solutionExplorer, 
+                                                                                                        solutionExplorer.ReceivedAddMissedChangedFilesMessage);
         }
 
         private void InitAlarmList()
@@ -230,16 +237,22 @@ namespace ApplicationLayer.WpfApp.ViewModels
         {
             var treeSymbolDetailView = ServiceLocator.Current.GetInstance<TreeSymbolDetailViewModel>();
 
-            Messenger.Default.Register<TreeSymbolMessage>(treeSymbolDetailView, treeSymbolDetailView.ReceivedTreeSymbolDetailMessage);
+            Messenger.Default.Register<TreeSymbolMessage>(treeSymbolDetailView, 
+                                                                                       treeSymbolDetailView.ReceivedTreeSymbolDetailMessage);
         }
 
         private void InitQuestionToSaveDialog()
         {
             var questionToSaveDialog = ServiceLocator.Current.GetInstance<QuestionToSaveViewModel>();
 
-            Messenger.Default.Register<AddChangedFileMessage>(questionToSaveDialog, questionToSaveDialog.ReceivedAddChangedFileMessage);
-            Messenger.Default.Register<RemoveChangedFileMessage>(questionToSaveDialog, questionToSaveDialog.ReceivedRemoveChangedFileMessage);
-            Messenger.Default.Register<GetChangedListMessage>(questionToSaveDialog, questionToSaveDialog.ReceivedGetChangedFileListMessage);
+            Messenger.Default.Register<AddChangedFileMessage>(questionToSaveDialog, 
+                                                                                             questionToSaveDialog.ReceivedAddChangedFileMessage);
+
+            Messenger.Default.Register<RemoveChangedFileMessage>(questionToSaveDialog, 
+                                                                                                   questionToSaveDialog.ReceivedRemoveChangedFileMessage);
+
+            Messenger.Default.Register<GetChangedListMessage>(questionToSaveDialog, 
+                                                                                            questionToSaveDialog.ReceivedGetChangedFileListMessage);
         }
 
         /// <summary>

@@ -41,8 +41,10 @@ namespace Parse.MiddleEnd.IR.Datas
 
         public override string ToString()
         {
-            return string.Format("TypeName : {0}, Name : {1}, PointerLevel : {2}, Offset : {3}, Length {4}",
-                                            TypeName, Name, PointerLevel, Offset, Length);
+            var result = base.ToString();
+
+            result += string.Format(" -> {0}", LinkedObject.SummaryString());
+            return result;
         }
 
 

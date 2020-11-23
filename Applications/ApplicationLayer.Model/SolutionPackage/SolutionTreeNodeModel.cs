@@ -16,7 +16,7 @@ namespace ApplicationLayer.Models.SolutionPackage
         /********************************************************************************************
          * private field section
          ********************************************************************************************/
-        private double versionRecentSaved;
+        private double _versionRecentSaved;
 
 
 
@@ -29,7 +29,7 @@ namespace ApplicationLayer.Models.SolutionPackage
         {
             get
             {
-                if (versionRecentSaved != Version) return true;
+                if (_versionRecentSaved != Version) return true;
                 if (ProjectPaths.Count != Children.Count) return true;
 
                 foreach (var child in Children)
@@ -222,7 +222,10 @@ namespace ApplicationLayer.Models.SolutionPackage
             ProjectGenerator projectGenerator = ProjectGenerator.CreateProjectGenerator(grammar);
             if (projectGenerator == null) return result;
 
-            var newProject = projectGenerator.CreateDefaultProject(solutionPath, result.FileNameWithoutExtension, result.FileNameWithoutExtension, target);
+            var newProject = projectGenerator.CreateDefaultProject(solutionPath, 
+                                                                                              result.FileNameWithoutExtension, 
+                                                                                              result.FileNameWithoutExtension, 
+                                                                                              target);
             result.AddProject(newProject);
             result.SyncWithCurrentValue();
 
@@ -234,11 +237,11 @@ namespace ApplicationLayer.Models.SolutionPackage
         /********************************************************************************************
          * interface method section
          ********************************************************************************************/
-        public void SyncWithLoadValue() => Version = versionRecentSaved;
+        public void SyncWithLoadValue() => Version = _versionRecentSaved;
 
         public void SyncWithCurrentValue()
         {
-            versionRecentSaved = Version;
+            _versionRecentSaved = Version;
 
             ProjectPaths.Clear();
             foreach (var child in Children)

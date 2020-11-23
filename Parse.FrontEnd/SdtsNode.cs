@@ -1,10 +1,12 @@
-﻿using Parse.FrontEnd.Ast;
+﻿using Parse.Extensions;
+using Parse.FrontEnd.Ast;
 using System.Collections.Generic;
 
 namespace Parse.FrontEnd
 {
     public abstract class SdtsNode
     {
+        public string Name => GetType().Name;
         public bool IsNeedWhileIRGeneration { get; protected set; } = false;
         public AstSymbol Ast { get; protected set; }
         public SdtsNode Parent { get; set; }
@@ -34,8 +36,16 @@ namespace Parse.FrontEnd
         public abstract SdtsNode Build(SdtsParams param);
 
         public override string ToString()
-            => string.Format("Ast: {0}, Error node count: {1}",
-                                        Ast,
-                                        ErrNodes.Count);
+        {
+            string result = string.Format("Ast: {0}, Error node count: {1}", Ast, ErrNodes.Count);
+
+            if (Items.Count > 0)
+            {
+                result += string.Format(", Expression: {0} -> ", Name);
+                result += Items.ItemsString();
+            }
+
+            return result;
+        }
     }
 }

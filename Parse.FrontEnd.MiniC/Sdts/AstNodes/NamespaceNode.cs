@@ -19,6 +19,9 @@ namespace Parse.FrontEnd.MiniC.Sdts.AstNodes
         // [n+1:y] : FuncDef? (AstNonTerminal)
         public override SdtsNode Build(SdtsParams param)
         {
+            _varNodes.Clear();
+            _funcDefNodes.Clear();
+
             Items[0].Build(param);
 
             // it needs to clone an param

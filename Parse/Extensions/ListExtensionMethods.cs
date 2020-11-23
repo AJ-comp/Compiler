@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 
 namespace Parse.Extensions
@@ -52,7 +54,7 @@ namespace Parse.Extensions
         /// <param name="value"></param>
         /// <param name="bZeroDiffInclude"></param>
         /// <returns></returns>
-        public static int GetIndexNearestLessThanValue(this List<int>obj, int value, bool bZeroDiffInclude=false)
+        public static int GetIndexNearestLessThanValue(this List<int> obj, int value, bool bZeroDiffInclude = false)
         {
             int result = -1;
             if (obj.Count == 0) return result;
@@ -81,7 +83,7 @@ namespace Parse.Extensions
         /// <param name="value"></param>
         /// <param name="bZeroDiffInclude"></param>
         /// <returns></returns>
-        public static int GetIndexNearestMoreThanValue(this List<int>obj, int value, bool bZeroDiffInclude=false)
+        public static int GetIndexNearestMoreThanValue(this List<int> obj, int value, bool bZeroDiffInclude = false)
         {
             int result = -1;
             if (obj.Count == 0) return result;
@@ -99,6 +101,43 @@ namespace Parse.Extensions
                     else if (diff < minDiff) { result = i; minDiff = diff; }
                 }
             });
+
+            return result;
+        }
+
+
+        public static string ItemsString<T>(this IEnumerable<T> obj, ScopeSyntax scopeSyntax, string propertyName = "")
+        {
+            string result = string.Empty;
+
+            result += scopeSyntax.StartSyntax;
+            result += ItemsString(obj, propertyName);
+            result += scopeSyntax.EndSyntax;
+
+            return result;
+        }
+
+        public static string ItemsString<T>(this IEnumerable<T> obj, string propertyName = "")
+        {
+            string result = string.Empty;
+
+            foreach (var item in obj)
+            {
+                string data = item.GetType().Name;
+
+                try
+                {
+                    if (propertyName.Length > 0)
+                        data = item.GetType().GetProperty(propertyName).GetValue(item) as string;
+                }
+                catch
+                {
+                    data = item.GetType().Name;
+                }
+
+                result += data + ", ";
+            }
+            if (obj.Count() > 0) result = result.Substring(0, result.Length - 2); // remove last string ", ";
 
             return result;
         }

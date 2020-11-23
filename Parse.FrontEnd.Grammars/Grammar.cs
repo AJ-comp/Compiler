@@ -1,6 +1,7 @@
 ﻿using Parse.FrontEnd.RegularGrammar;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 
@@ -236,6 +237,7 @@ namespace Parse.FrontEnd.Grammars
     }
 
 
+    [DebuggerDisplay("{DebuggerDisplay, nq}")]
     public class ScopeInfo
     {
         public Terminal StartTerminal { get; }
@@ -247,6 +249,7 @@ namespace Parse.FrontEnd.Grammars
             this.EndTerminal = endTerminal;
         }
 
-        public override string ToString() => string.Format("{0},{1}", this.StartTerminal, this.EndTerminal);
+        private string DebuggerDisplay
+            => string.Format("{0},{1}", this.StartTerminal, this.EndTerminal);
     }
 }

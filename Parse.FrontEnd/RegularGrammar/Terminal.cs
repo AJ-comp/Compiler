@@ -45,10 +45,7 @@ namespace Parse.FrontEnd.RegularGrammar
             this.IsWordPattern = bWordPattern;
         }
 
-        public override string ToString()
-        {
-            return this.Caption;
-        }
+        public override string ToString() => Caption;
 
         public override string ToGrammarString()
         {

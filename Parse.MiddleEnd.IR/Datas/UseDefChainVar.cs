@@ -33,6 +33,15 @@ namespace Parse.MiddleEnd.IR.Datas
             return HashCode.Combine(TypeName, Name);
         }
 
+        public override string ToString()
+            => string.Format("{0} {1} [Block: {2}, Offset: {3}, Length: {4}, PointerLevel: {5}]",
+                                        Helper.GetDescription(TypeName),
+                                        Name,
+                                        Block,
+                                        Offset,
+                                        Length,
+                                        PointerLevel);
+
         public abstract void Link(DependencyChainVar toLinkObject);
     }
 }

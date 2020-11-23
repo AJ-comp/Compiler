@@ -72,7 +72,8 @@ namespace ApplicationLayer.Models.SolutionPackage
             FileName = filename;
         }
 
-        public override string ToString() => string.Format("filter path : {0}, real path : {1}, filename : {2}", FilterPath, Path, FileName);
+        public override string ToString()
+            => string.Format("filter path : {0}, real path : {1}, filename : {2}", FilterPath, Path, FileName);
 
         public override bool Equals(object obj)
         {

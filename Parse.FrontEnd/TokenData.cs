@@ -38,7 +38,7 @@ namespace Parse.FrontEnd
             return new TokenData(terminal, tokenCell);
         }
 
-        public override string ToString() => this.Input;
+        public override string ToString() => Input;
 
         public override bool Equals(object obj)
         {

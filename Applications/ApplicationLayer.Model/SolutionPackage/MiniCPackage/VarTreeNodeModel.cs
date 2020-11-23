@@ -1,5 +1,4 @@
 ﻿using ApplicationLayer.Common;
-using Parse.FrontEnd.MiniC.Sdts.Datas;
 using Parse.FrontEnd.MiniC.Sdts.Datas.Variables;
 using System;
 
@@ -13,7 +12,7 @@ namespace ApplicationLayer.Models.SolutionPackage.MiniCPackage
         public string Dimension => (_varData != null) ? _varData.Dimension.ToString() : string.Empty;
         public string BlockIndex => (_varData != null) ? _varData.Block.ToString() : string.Empty;
         public string Offset => (_varData != null) ? _varData.Offset.ToString() : string.Empty;
-        public bool IsGlobal => (_varData?.Block== 0);
+        public bool IsGlobal => (_varData?.Block== 1);
         public bool IsParam => (_varData?.VariableProperty == VarProperty.Param);
 
         public override string DisplayName

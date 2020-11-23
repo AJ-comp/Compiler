@@ -13,6 +13,7 @@ namespace Parse.FrontEnd.MiniC.Sdts.AstNodes
 
         public override SdtsNode Build(SdtsParams param)
         {
+            Items[0].Build(param);
             ConstToken = (Items[0] as TerminalNode).Token;
 
             return this;

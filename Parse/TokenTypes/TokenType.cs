@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using System.Collections.Generic;
 
 namespace Parse
 {
-    [Flags]
-    public enum DrawingOption { None = 0, Underline = 1, EndPointUnderline = 2, Selected = 4 }
-
     public abstract class TokenType
     {
         private string _originalValue;

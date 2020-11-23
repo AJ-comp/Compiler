@@ -78,7 +78,7 @@ namespace ApplicationLayer.Common.Utilities
             return result;
         }
 
-        public IReadOnlyList<Type> GetAllTypesOfLoadedAssemblies(IReadOnlyList<Assembly> loadedAssemblies)
+        public IEnumerable<Type> GetAllTypesOfLoadedAssemblies(IEnumerable<Assembly> loadedAssemblies)
         {
             List<Type> result = new List<Type>();
 

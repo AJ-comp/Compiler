@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Parse.MiddleEnd.IR
+﻿namespace Parse.MiddleEnd.IR
 {
     public abstract class IRExpression
     {
+        public string Name => GetType().Name;
     }
 }

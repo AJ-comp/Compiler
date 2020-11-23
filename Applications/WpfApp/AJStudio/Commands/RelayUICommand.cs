@@ -13,7 +13,8 @@ namespace ApplicationLayer.WpfApp.Commands
             this.Text = text;
         }
 
-        public RelayUICommand(string text, Action execute, Func<bool> canExecute, bool keepTargetAlive = false) : base(execute, canExecute, keepTargetAlive)
+        public RelayUICommand(string text, Action execute, Func<bool> canExecute, bool keepTargetAlive = false)
+            : base(execute, canExecute, keepTargetAlive)
         {
             this.Text = text;
         }
@@ -28,7 +29,8 @@ namespace ApplicationLayer.WpfApp.Commands
             this.Text = text;
         }
 
-        public RelayUICommand(string text, Action<T> execute, Func<T, bool> canExecute, bool keepTargetAlive = false) : base(execute, canExecute, keepTargetAlive)
+        public RelayUICommand(string text, Action<T> execute, Func<T, bool> canExecute, bool keepTargetAlive = false)
+            : base(execute, canExecute, keepTargetAlive)
         {
             this.Text = text;
         }
