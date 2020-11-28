@@ -29,7 +29,7 @@
                                                                         OptimizeWidthAndHeight="false"
                                                                         Direction="TopToBottom"
                                                                         SpanningTreeGeneration="DFS"/>-->
-                    <tree:SimpleTreeLayoutParameters Direction="LeftToRight"/>
+                    <tree:SimpleTreeLayoutParameters Direction="TopToBottom"/>
                 </Setter.Value>
             </Setter>
         </Style>

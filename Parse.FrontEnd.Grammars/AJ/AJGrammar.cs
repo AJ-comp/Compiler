@@ -46,12 +46,12 @@ namespace Parse.FrontEnd.Grammars.AJ
         private Terminal @andAnd = new Terminal(TokenType.Operator.NormalOperator, "&&");
         private Terminal @orOr = new Terminal(TokenType.Operator.NormalOperator, "||");
 
-        private Terminal @openCurlyBrace = new Terminal(TokenType.Operator.CurlyBrace, "{");
-        private Terminal @closeCurlyBrace = new Terminal(TokenType.Operator.CurlyBrace, "}");
-        private Terminal @openParenthesis = new Terminal(TokenType.Operator.Parenthesis, "(");
-        private Terminal @closeParenthesis = new Terminal(TokenType.Operator.Parenthesis, ")");
-        private Terminal @openSquareBrace = new Terminal(TokenType.Operator.Square, "[");
-        private Terminal @closeSquareBrace = new Terminal(TokenType.Operator.Square, "]");
+        private Terminal @openCurlyBrace = new Terminal(TokenType.Operator.PairOpen, "{");
+        private Terminal @closeCurlyBrace = new Terminal(TokenType.Operator.PairClose, "}");
+        private Terminal @openParenthesis = new Terminal(TokenType.Operator.PairOpen, "(");
+        private Terminal @closeParenthesis = new Terminal(TokenType.Operator.PairClose, ")");
+        private Terminal @openSquareBrace = new Terminal(TokenType.Operator.PairOpen, "[");
+        private Terminal @closeSquareBrace = new Terminal(TokenType.Operator.PairClose, "]");
 
         private NonTerminal namespaceStatement = new NonTerminal("NamespaceStatement", true);
         private NonTerminal classStatement = new NonTerminal("ClassStatement");

@@ -103,7 +103,7 @@ namespace Parse.FrontEnd.MiniC
                 var totalData = _docTable[path];
                 AstSymbol rootSymbol = totalData.ParsedData.AstRoot;
 
-                var rootSdts = rootSymbol.Sdts.Build(new MiniCSdtsParams(0, 0));
+                var rootSdts = rootSymbol.Sdts.Build(_rootParams);
                 var result = new SemanticAnalysisResult(rootSdts, new List<AstSymbol>());
 
                 return result;
@@ -117,6 +117,7 @@ namespace Parse.FrontEnd.MiniC
 
         private Lexer _lexer = new Lexer();
         private Grammar _miniC = new MiniCGrammar();
+        private MiniCSdtsParams _rootParams = new MiniCSdtsParams(0, 0);
         private LRParser _parser;
 
         private Dictionary<string, TotalData> _docTable = new Dictionary<string, TotalData>();

@@ -60,8 +60,8 @@ namespace Parse.FrontEnd.Support.Drawing
             _dic.Add(typeof(NormalOperator), new TokenResourceInfo(Resources.EtcOperator, Color.White, Color.Transparent));
             _dic.Add(typeof(Comma), new TokenResourceInfo(Resources.Comma, Color.White, Color.Transparent));
             _dic.Add(typeof(Square), new TokenResourceInfo(Resources.Squre, Color.White, Color.Transparent));
-            _dic.Add(typeof(Parenthesis), new TokenResourceInfo(Resources.Parenthesis, Color.White, Color.Transparent));
-            _dic.Add(typeof(CurlyBrace), new TokenResourceInfo(Resources.CurlyBrace, Color.White, Color.Transparent));
+            _dic.Add(typeof(PairOpen), new TokenResourceInfo(Resources.Parenthesis, Color.White, Color.Transparent));
+            _dic.Add(typeof(PairClose), new TokenResourceInfo(Resources.CurlyBrace, Color.White, Color.Transparent));
             #endregion
 
             #region Special Token

@@ -18,6 +18,8 @@ namespace Parse.FrontEnd.MiniC.Sdts.AstNodes.ExprNodes
         // [0] : ident
         public override SdtsNode Build(SdtsParams param)
         {
+            ConnectedErrInfoList.Clear();
+
             var node = Items[0].Build(param) as TerminalNode;
             IdentToken = node.Token;
 

@@ -28,42 +28,29 @@
             }
         }
 
-        /// <summary> '[' or ']' </summary>
-        public Square Square
+        /// <summary> open token of pair token </summary>
+        public PairOpen PairOpen
         {
             get
             {
-                var data = "Square";
+                var data = "PairOpen";
                 var hashCode = GetHashCode(data);
                 var cacheType = GetTokenType(hashCode);
 
-                return (cacheType == null) ? new Square(hashCode, data) : cacheType as Square;
+                return (cacheType == null) ? new PairOpen(hashCode, data) : cacheType as PairOpen;
             }
         }
 
-        /// <summary> '(' or ')' </summary>
-        public Parenthesis Parenthesis
+        /// <summary> close token of pair token </summary>
+        public PairClose PairClose
         {
             get
             {
-                var data = "Parenthesis";
+                var data = "PairClose";
                 var hashCode = GetHashCode(data);
                 var cacheType = GetTokenType(hashCode);
 
-                return (cacheType == null) ? new Parenthesis(hashCode, data) : cacheType as Parenthesis;
-            }
-        }
-
-        /// <summary> '{' or '}' </summary>
-        public CurlyBrace CurlyBrace
-        {
-            get
-            {
-                var data = "CurlyBrace";
-                var hashCode = GetHashCode(data);
-                var cacheType = GetTokenType(hashCode);
-
-                return (cacheType == null) ? new CurlyBrace(hashCode, data) : cacheType as CurlyBrace;
+                return (cacheType == null) ? new PairClose(hashCode, data) : cacheType as PairClose;
             }
         }
     }
@@ -85,13 +72,13 @@
         internal Square(int hashCode, string value) : base(hashCode, value) { }
     }
 
-    public class Parenthesis : Operator
+    public class PairOpen : Operator
     {
-        internal Parenthesis(int hashCode, string value) : base(hashCode, value) { }
+        internal PairOpen(int hashCode, string value) : base(hashCode, value) { }
     }
 
-    public class CurlyBrace : Operator
+    public class PairClose : Operator
     {
-        internal CurlyBrace(int hashCode, string value) : base(hashCode, value) { }
+        internal PairClose(int hashCode, string value) : base(hashCode, value) { }
     }
 }

@@ -10,6 +10,9 @@ using System.Threading.Tasks;
 
 namespace Parse.FrontEnd.Parsers.Datas
 {
+    public enum Direction { Backward, Forward }
+
+
     /// <summary>
     /// 
     /// </summary>
@@ -174,21 +177,25 @@ namespace Parse.FrontEnd.Parsers.Datas
         /// <returns></returns>
         public ParsingBlock GetFrontBlock(int index) => (index <= 0) ? null : this[index - 1];
 
-        public TokenData GetBeforeTokenData(int stdBlockIndex, int indexToGet)
+
+        public TokenData GetNextTokenData(int stdBlockIndex, int indexToGet)
         {
             try
             {
                 TokenData result = null;
-                var curBlock = GetRealBlock(stdBlockIndex--);
 
-                while(true)
+                // It has to start from current block index because may there is multiple TokenData in the current block.
+                var curBlock = GetNotIgnoredBlockOnFlow(stdBlockIndex++, Direction.Forward);
+                if (curBlock == null) return result;
+
+                while (true)
                 {
-                    var tokenList = curBlock.UnitTokenList.Reverse();
+                    var tokenList = curBlock.UnitTokenList;
 
                     if (tokenList.Count() <= indexToGet)
                     {
                         indexToGet -= tokenList.Count();
-                        curBlock = GetRealBlock(stdBlockIndex--);
+                        curBlock = GetNotIgnoredBlockOnFlow(stdBlockIndex++, Direction.Forward);
                     }
                     else
                     {
@@ -205,20 +212,58 @@ namespace Parse.FrontEnd.Parsers.Datas
             }
         }
 
+        public TokenData GetPrevTokenData(int stdBlockIndex, int indexToGet)
+        {
+            try
+            {
+                TokenData result = null;
+
+                // It has to start from current block index because may there is multiple TokenData in the current block.
+                var curBlock = GetNotIgnoredBlockOnFlow(stdBlockIndex--, Direction.Backward);
+                if (curBlock == null) return result;
+
+                while (true)
+                {
+                    var tokenList = curBlock.UnitTokenList;
+
+                    if (tokenList.Count() <= indexToGet)
+                    {
+                        indexToGet -= tokenList.Count();
+                        curBlock = GetNotIgnoredBlockOnFlow(stdBlockIndex--, Direction.Backward);
+                    }
+                    else
+                    {
+                        result = tokenList.Reverse().ElementAt(indexToGet);
+                        break;
+                    }
+                }
+
+                return result;
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
         /// <summary>
-        /// This function returns block that is not ignored and less than blockIndex.
+        /// This function returns block that is not ignored and on the basis of blockIndex.
         /// ignored property may be set up if error fired.
         /// </summary>
         /// <param name="blockIndex"></param>
+        /// <param name="direction"></param>
         /// <returns></returns>
-        public ParsingBlock GetRealBlock(int blockIndex)
+        public ParsingBlock GetNotIgnoredBlockOnFlow(int blockIndex, Direction direction)
         {
             try
             {
                 ParsingBlock curBlock = null;
                 do
                 {
-                    curBlock = this[blockIndex--];
+                    curBlock = this[blockIndex];
+
+                    if (direction == Direction.Backward) blockIndex--;
+                    else blockIndex++;
                 } while (curBlock.IsIgnore);
 
                 return curBlock;

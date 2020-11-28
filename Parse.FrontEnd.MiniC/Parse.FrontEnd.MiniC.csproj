@@ -28,8 +28,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Update="Properties\AlarmCodes.ko-KR.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="Properties\AlarmCodes.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>AlarmCodes.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Update="Properties\Resource.ko-KR.resx">

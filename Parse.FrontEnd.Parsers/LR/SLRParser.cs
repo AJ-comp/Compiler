@@ -161,7 +161,7 @@ namespace Parse.FrontEnd.Parsers.LR
             this.ActionFailed?.Invoke(this, lastParsingUnit);
 
             if (lastParsingUnit.ErrorHandler != null)
-                result = lastParsingUnit.ErrorHandler.Call(this, parsingResult, curTokenIndex);
+                result = lastParsingUnit.ErrorHandler.Call(new DataForRecovery(this, parsingResult, curTokenIndex));
 
             return result;
         }
@@ -211,7 +211,7 @@ namespace Parse.FrontEnd.Parsers.LR
                 }
 
                 // rangePair is same
-                for (int i = rangePair.Item1.StartIndex; i < rangePair.Item1.EndIndex; i++)
+                for (int i = rangePair.Item1.StartIndex; i < rangePair.Item1.EndIndex + 1; i++)
                 {
                     if (srcResult[i].Token.Input != newTokens[i].Input) result.Add(rangePair);
                 }

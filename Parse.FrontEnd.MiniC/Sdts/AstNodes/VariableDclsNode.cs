@@ -1,4 +1,5 @@
 ﻿using Parse.FrontEnd.Ast;
+using Parse.FrontEnd.MiniC.Properties;
 using Parse.FrontEnd.MiniC.Sdts.Datas;
 using Parse.FrontEnd.MiniC.Sdts.Datas.Variables;
 using System.Collections.Generic;
@@ -24,8 +25,15 @@ namespace Parse.FrontEnd.MiniC.Sdts.AstNodes
         // [1] : InitDeclaratorNode* [InitDeclarator]
         public override SdtsNode Build(SdtsParams param)
         {
+            ConnectedErrInfoList.Clear();
+
             // build VariableTypeNode
             VarType = Items[0].Build(param) as VariableTypeNode;
+            //if (VarType.DataType == MiniCDataType.Void)
+            //{
+            //    ConnectedErrInfoList.Add(new MeaningErrInfo(nameof(AlarmCodes.MCL0020), AlarmCodes.MCL0020));
+            //    return this;
+            //}
 
             // build InitDeclaratorNodes
             for (int i = 1; i < Items.Count; i++)

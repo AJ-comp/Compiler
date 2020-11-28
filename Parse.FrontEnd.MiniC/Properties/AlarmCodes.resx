@@ -157,4 +157,7 @@
   <data name="MCL0019" xml:space="preserve">
     <value>The reverse reference can be used only if type is address type.</value>
   </data>
+  <data name="MCL0020" xml:space="preserve">
+    <value>The '{0}' type can't be used for variable type.</value>
+  </data>
 </root>

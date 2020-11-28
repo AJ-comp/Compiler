@@ -83,6 +83,7 @@ namespace Parse.FrontEnd.MiniC.Sdts
                 if (cRoot.SignPost.MeaningUnit == MiniCGrammar.Program) result = new ProgramNode(root);
                 else if (cRoot.SignPost.MeaningUnit == MiniCGrammar.UsingNode) result = new UsingStNode(root);
                 else if (cRoot.SignPost.MeaningUnit == MiniCGrammar.NamespaceNode) result = new NamespaceNode(root);
+                else if (cRoot.SignPost.MeaningUnit == MiniCGrammar.StructDef) result = new StructDefNode(root);
                 else if (cRoot.SignPost.MeaningUnit == MiniCGrammar.FuncDef) result = new FuncDefNode(root);
                 else if (cRoot.SignPost.MeaningUnit == MiniCGrammar.FuncHead) result = new FuncHeadNode(root);
                 else if (cRoot.SignPost.MeaningUnit == MiniCGrammar.FormalPara) result = new ParamListNode(root);

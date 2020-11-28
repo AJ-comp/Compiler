@@ -8,6 +8,7 @@ namespace Parse.FrontEnd.MiniC
     {
         public Terminal Using { get; } = new Terminal(TokenType.Keyword.CategoryKeyword, "using");
         public Terminal Namespace { get; } = new Terminal(TokenType.Keyword.CategoryKeyword, "namespace");
+        public Terminal Struct { get; } = new Terminal(TokenType.Keyword.CategoryKeyword, "struct");
         public Terminal Class { get; } = new Terminal(TokenType.Keyword.CategoryKeyword, "class");
         public Terminal Private { get; } = new Terminal(TokenType.Keyword.Accessword, "private");
         public Terminal Public { get; } = new Terminal(TokenType.Keyword.Accessword, "public");
@@ -30,12 +31,12 @@ namespace Parse.FrontEnd.MiniC
         //        public Terminal RealNumber { get; } = new Terminal(TokenType.Digit.Digit10, "[0-9]+.[0-9]+", "real number", true, true);
         public Terminal LineComment { get; } = new Terminal(TokenType.SpecialToken.Comment, "//.*$", false, true);
 
-        public Terminal OpenParenthesis { get; } = new Terminal(TokenType.Operator.Parenthesis, "(", false);
-        public Terminal CloseParenthesis { get; } = new Terminal(TokenType.Operator.Parenthesis, ")", false);
-        public Terminal OpenCurlyBrace { get; } = new Terminal(TokenType.Operator.CurlyBrace, "{", false);
-        public Terminal CloseCurlyBrace { get; } = new Terminal(TokenType.Operator.CurlyBrace, "}", false);
-        public Terminal OpenSquareBrace { get; } = new Terminal(TokenType.Operator.Square, "[", false);
-        public Terminal CloseSquareBrace { get; } = new Terminal(TokenType.Operator.Square, "]", false);
+        public Terminal OpenParenthesis { get; } = new Terminal(TokenType.Operator.PairOpen, "(", false);
+        public Terminal CloseParenthesis { get; } = new Terminal(TokenType.Operator.PairClose, ")", false);
+        public Terminal OpenCurlyBrace { get; } = new Terminal(TokenType.Operator.PairOpen, "{", false);
+        public Terminal CloseCurlyBrace { get; } = new Terminal(TokenType.Operator.PairClose, "}", false);
+        public Terminal OpenSquareBrace { get; } = new Terminal(TokenType.Operator.PairOpen, "[", false);
+        public Terminal CloseSquareBrace { get; } = new Terminal(TokenType.Operator.PairOpen, "]", false);
 
         private Terminal scopeCommentStart = new Terminal(TokenType.SpecialToken.Comment.ScopeComment, "/*");
         private Terminal scopeCommentEnd = new Terminal(TokenType.SpecialToken.Comment.ScopeComment, "*/");
@@ -71,8 +72,8 @@ namespace Parse.FrontEnd.MiniC
         private NonTerminal usingDcl = new NonTerminal("using_dcl");
         private NonTerminal namespaceDcl = new NonTerminal("namespace_dcl");
         private NonTerminal translationUnit = new NonTerminal("translation_unit");
-        private NonTerminal defineUnit = new NonTerminal("define_unit");
         private NonTerminal externalDcl = new NonTerminal("external_dcl");
+        private NonTerminal structDef = new NonTerminal("struct_def");
         private NonTerminal functionDef = new NonTerminal("function_def");
         private NonTerminal functionHeader = new NonTerminal("function_header");
         private NonTerminal dclSpec = new NonTerminal("dcl_spec");
@@ -123,6 +124,7 @@ namespace Parse.FrontEnd.MiniC
         public static MeaningUnit Program { get; } = new MeaningUnit(nameof(Program));
         public static MeaningUnit UsingNode { get; } = new MeaningUnit(nameof(UsingNode));
         public static MeaningUnit NamespaceNode { get; } = new MeaningUnit(nameof(NamespaceNode));
+        public static MeaningUnit StructDef { get; } = new MeaningUnit(nameof(StructDef));
         public static MeaningUnit FuncDef { get; } = new MeaningUnit(nameof(FuncDef));
         public static MeaningUnit FuncHead { get; } = new MeaningUnit(nameof(FuncHead), MatchedAction.BlockPlus);
         public static MeaningUnit DclSpec { get; } = new MeaningUnit(nameof(DclSpec));
@@ -191,8 +193,9 @@ namespace Parse.FrontEnd.MiniC
             this.miniC.AddItem(usingDcl.ZeroOrMore() | namespaceDcl, Program);
             this.usingDcl.AddItem(Using + Ident + SemiColon, UsingNode);
             this.namespaceDcl.AddItem(Namespace + Ident + OpenCurlyBrace + translationUnit + CloseCurlyBrace, NamespaceNode);
-            this.translationUnit.AddItem(this.externalDcl | this.defineUnit | this.translationUnit + this.externalDcl);
-            this.externalDcl.AddItem(this.functionDef | this.declaration);
+            this.translationUnit.AddItem(this.externalDcl | this.translationUnit + this.externalDcl);
+            this.externalDcl.AddItem(structDef | functionDef | declaration);
+            this.structDef.AddItem(Struct + Ident + OpenCurlyBrace + declaration + CloseCurlyBrace, StructDef);
             this.functionDef.AddItem(this.functionHeader + this.compoundSt, FuncDef);
             this.functionHeader.AddItem(this.dclSpec + this.functionName + this.formalParam, FuncHead);
             this.dclSpec.AddItem(this.dclSpecifiers, DclSpec);

@@ -1,6 +1,5 @@
 ﻿using Parse.FrontEnd.ErrorHandler;
 using Parse.FrontEnd.Grammars;
-using Parse.FrontEnd.Grammars.MiniC;
 using Parse.FrontEnd.Parsers;
 using Parse.FrontEnd.Parsers.Collections;
 using Parse.FrontEnd.Parsers.Datas;
@@ -21,12 +20,12 @@ namespace Parse.FrontEnd.MiniC.ErrorHandler
             ParsingTable = parsingTable;
         }
 
-        public ErrorHandlingResult Call(Parser parser, ParsingResult parsingResult, int seeingTokenIndex)
+        public ErrorHandlingResult Call(DataForRecovery dataForRecovery)
         {
-            return DefaultErrorHandler.Process(this._grammar as MiniCGrammar, parser, parsingResult, seeingTokenIndex);
+            return Process(this._grammar as MiniCGrammar, dataForRecovery);
         }
 
-        public static ErrorHandlingResult Process(MiniCGrammar grammar, Parser parser, ParsingResult parsingResult, int seeingTokenIndex)
+        public static ErrorHandlingResult Process(MiniCGrammar grammar, DataForRecovery dataForRecovery)
         {
             var synchronizeTokens = new HashSet<Terminal>
             {
@@ -35,7 +34,11 @@ namespace Parse.FrontEnd.MiniC.ErrorHandler
                 new EndMarker()
             };
 
-            return PanicMode.LRProcess(parser as LRParser, ParsingTable, parsingResult, seeingTokenIndex, synchronizeTokens);
+            return PanicMode.LRProcess(dataForRecovery.Parser as LRParser, 
+                                                      ParsingTable, 
+                                                      dataForRecovery.ParsingResult,
+                                                      dataForRecovery.SeeingTokenIndex, 
+                                                      synchronizeTokens);
         }
     }
 }

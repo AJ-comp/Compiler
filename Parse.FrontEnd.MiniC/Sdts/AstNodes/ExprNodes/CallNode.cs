@@ -40,6 +40,7 @@ namespace Parse.FrontEnd.MiniC.Sdts.AstNodes.ExprNodes
         public override SdtsNode Build(SdtsParams param)
         {
             _params.Clear();
+            ConnectedErrInfoList.Clear();
 
             var ident = Items[0].Build(param);
             if(Items.Count > 1)

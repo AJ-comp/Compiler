@@ -4,7 +4,7 @@ namespace Parse.FrontEnd.MiniC.Sdts.AstNodes
 {
     public class DeclareVarNode : MiniCNode
     {
-        public string Name => NameToken?.Input;
+        public string VarName => NameToken?.Input;
         public int Dimension => (DimensionToken != null) ? System.Convert.ToInt32(DimensionToken?.Input) : 0;
 
         public TokenData NameToken { get; private set; }

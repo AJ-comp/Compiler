@@ -4,6 +4,6 @@ namespace Parse.FrontEnd.Parsers
 {
     public interface IErrorHandlable
     {
-        ErrorHandlingResult Call(Parser parser, ParsingResult parsingResult, int seeingTokenIndex);
+        ErrorHandlingResult Call(DataForRecovery dataForRecovery);
     }
 }

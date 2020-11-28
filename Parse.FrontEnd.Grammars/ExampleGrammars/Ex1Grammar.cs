@@ -8,8 +8,8 @@ namespace Parse.FrontEnd.Grammars.ExampleGrammars
         private Terminal e = new Terminal(TokenType.Keyword.DefinedDataType, "e");
         private Terminal @dot = new Terminal(TokenType.Operator, ".");
         private Terminal @replace = new Terminal(TokenType.Operator, "=");
-        private Terminal @openSquareBrace = new Terminal(TokenType.Operator.Square, "[");
-        private Terminal @closeSquareBrace = new Terminal(TokenType.Operator.Square, "]");
+        private Terminal @openSquareBrace = new Terminal(TokenType.Operator.PairOpen, "[");
+        private Terminal @closeSquareBrace = new Terminal(TokenType.Operator.PairClose, "]");
 
         private NonTerminal A = new NonTerminal("A", true);
         private NonTerminal B = new NonTerminal("B");

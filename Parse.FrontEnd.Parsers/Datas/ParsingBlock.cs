@@ -283,8 +283,12 @@ namespace Parse.FrontEnd.Parsers.Datas
         {
             get
             {
-                var result = string.Format("TokenCell : {0}, Unit count : {1}", this.Token, this._units.Count);
-                if (ErrorInfos.Count() > 0) result += string.Format(" Fired Error");
+                var result = string.Format("TokenCell : {0}, Unit count : {1}", 
+                                                        Token, 
+                                                        _units.Count);
+
+                if (ErrorInfos.Count() > 0) result += " Fired Error";
+                if (IsIgnore) result += "This token is ignored";
 
                 return result;
             }
@@ -294,29 +298,28 @@ namespace Parse.FrontEnd.Parsers.Datas
         private List<ParsingUnitHistory> _history = new List<ParsingUnitHistory>();
         private List<ParsingUnit> _units = new List<ParsingUnit>();
         private int _unitMark = -1;
+    }
 
-
-        public class UnitTokenRange : Range
+    public class UnitTokenRange : Range
+    {
+        public UnitTokenRange(int startIndex, int count) : base(startIndex, count)
         {
-            public UnitTokenRange(int startIndex, int count) : base(startIndex, count)
-            {
-            }
+        }
+    }
+
+    public class ParsingUnitHistory
+    {
+        public ParsingUnit Unit { get; }
+        public string RecoveryMessage { get; set; }
+
+        public ParsingUnitHistory(ParsingUnit unit) : this(unit, string.Empty)
+        {
         }
 
-        public class ParsingUnitHistory
+        public ParsingUnitHistory(ParsingUnit unit, string recoveryMessage)
         {
-            public ParsingUnit Unit { get; }
-            public string RecoveryMessage { get; set; }
-
-            public ParsingUnitHistory(ParsingUnit unit) : this(unit, string.Empty)
-            {
-            }
-
-            public ParsingUnitHistory(ParsingUnit unit, string recoveryMessage)
-            {
-                Unit = unit;
-                RecoveryMessage = recoveryMessage;
-            }
+            Unit = unit;
+            RecoveryMessage = recoveryMessage;
         }
     }
 }

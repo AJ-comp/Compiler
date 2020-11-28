@@ -1,5 +1,4 @@
-﻿using Parse.FrontEnd.Grammars.MiniC;
-using Parse.FrontEnd.Parsers.Collections;
+﻿using Parse.FrontEnd.Parsers.Collections;
 using Parse.FrontEnd.Parsers.LR;
 using Parse.FrontEnd.RegularGrammar;
 using Parse.Utilities;
@@ -40,7 +39,7 @@ namespace Parse.FrontEnd.MiniC.ErrorHandler
                     else if (terminal == grammar.While)
                         rowData.MatchedValueSet.Add(terminal, new Tuple<ActionDir, object>(ActionDir.failed, new While_ErrorHandler(grammar, ixIndex)));
                     else if (terminal == grammar.Return)
-                        rowData.MatchedValueSet.Add(terminal, new Tuple<ActionDir, object>(ActionDir.failed, new While_ErrorHandler(grammar, ixIndex)));
+                        rowData.MatchedValueSet.Add(terminal, new Tuple<ActionDir, object>(ActionDir.failed, new Return_ErrorHandler(grammar, ixIndex)));
                     else if (terminal == grammar.Const)
                         rowData.MatchedValueSet.Add(terminal, new Tuple<ActionDir, object>(ActionDir.failed, new Const_ErrorHandler(grammar, ixIndex)));
                     else if (terminal == MiniCGrammar.Void)

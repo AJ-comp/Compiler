@@ -22,7 +22,7 @@ namespace Parse.FrontEnd.MiniC.Properties {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class AlarmCodes {
+    public class AlarmCodes {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,7 +36,7 @@ namespace Parse.FrontEnd.MiniC.Properties {
         ///   이 클래스에서 사용하는 캐시된 ResourceManager 인스턴스를 반환합니다.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Parse.FrontEnd.MiniC.Properties.AlarmCodes", typeof(AlarmCodes).Assembly);
@@ -51,7 +51,7 @@ namespace Parse.FrontEnd.MiniC.Properties {
         ///   재정의합니다.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -63,7 +63,7 @@ namespace Parse.FrontEnd.MiniC.Properties {
         /// <summary>
         ///   {0} is already defined.과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
-        internal static string MCL0000 {
+        public static string MCL0000 {
             get {
                 return ResourceManager.GetString("MCL0000", resourceCulture);
             }
@@ -72,7 +72,7 @@ namespace Parse.FrontEnd.MiniC.Properties {
         /// <summary>
         ///   {0} is not defined.과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
-        internal static string MCL0001 {
+        public static string MCL0001 {
             get {
                 return ResourceManager.GetString("MCL0001", resourceCulture);
             }
@@ -81,7 +81,7 @@ namespace Parse.FrontEnd.MiniC.Properties {
         /// <summary>
         ///   Value can not be changed because the constant type.과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
-        internal static string MCL0002 {
+        public static string MCL0002 {
             get {
                 return ResourceManager.GetString("MCL0002", resourceCulture);
             }
@@ -90,7 +90,7 @@ namespace Parse.FrontEnd.MiniC.Properties {
         /// <summary>
         ///   It can not be allocated because the data type differs.과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
-        internal static string MCL0003 {
+        public static string MCL0003 {
             get {
                 return ResourceManager.GetString("MCL0003", resourceCulture);
             }
@@ -99,7 +99,7 @@ namespace Parse.FrontEnd.MiniC.Properties {
         /// <summary>
         ///   lvalue have to be modifiable format.과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
-        internal static string MCL0004 {
+        public static string MCL0004 {
             get {
                 return ResourceManager.GetString("MCL0004", resourceCulture);
             }
@@ -108,7 +108,7 @@ namespace Parse.FrontEnd.MiniC.Properties {
         /// <summary>
         ///   {0} variable that not initialized is using.과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
-        internal static string MCL0005 {
+        public static string MCL0005 {
             get {
                 return ResourceManager.GetString("MCL0005", resourceCulture);
             }
@@ -117,7 +117,7 @@ namespace Parse.FrontEnd.MiniC.Properties {
         /// <summary>
         ///   Integer or enum type has to be to expression.과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
-        internal static string MCL0006 {
+        public static string MCL0006 {
             get {
                 return ResourceManager.GetString("MCL0006", resourceCulture);
             }
@@ -126,7 +126,7 @@ namespace Parse.FrontEnd.MiniC.Properties {
         /// <summary>
         ///   Buffer overflow fired while write {0}. writable byte is {1} but in fact write {2} byte.과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
-        internal static string MCL0007 {
+        public static string MCL0007 {
             get {
                 return ResourceManager.GetString("MCL0007", resourceCulture);
             }
@@ -135,7 +135,7 @@ namespace Parse.FrontEnd.MiniC.Properties {
         /// <summary>
         ///   The operand of Inc or Dec operator has to be variable, property or indexer.과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
-        internal static string MCL0008 {
+        public static string MCL0008 {
             get {
                 return ResourceManager.GetString("MCL0008", resourceCulture);
             }
@@ -144,7 +144,7 @@ namespace Parse.FrontEnd.MiniC.Properties {
         /// <summary>
         ///   The {0} identifier was already defined in the current block.과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
-        internal static string MCL0009 {
+        public static string MCL0009 {
             get {
                 return ResourceManager.GetString("MCL0009", resourceCulture);
             }
@@ -153,7 +153,7 @@ namespace Parse.FrontEnd.MiniC.Properties {
         /// <summary>
         ///   It was failed to struct Sdts nodes.과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
-        internal static string MCL0010 {
+        public static string MCL0010 {
             get {
                 return ResourceManager.GetString("MCL0010", resourceCulture);
             }
@@ -162,7 +162,7 @@ namespace Parse.FrontEnd.MiniC.Properties {
         /// <summary>
         ///   The calculation &apos;{0}&apos; is not applicated for the operand &apos;{1}&apos; and &apos;{2}.과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
-        internal static string MCL0011 {
+        public static string MCL0011 {
             get {
                 return ResourceManager.GetString("MCL0011", resourceCulture);
             }
@@ -171,7 +171,7 @@ namespace Parse.FrontEnd.MiniC.Properties {
         /// <summary>
         ///   The operand of the inc or dec has to be variable, property or indexer.과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
-        internal static string MCL0012 {
+        public static string MCL0012 {
             get {
                 return ResourceManager.GetString("MCL0012", resourceCulture);
             }
@@ -180,7 +180,7 @@ namespace Parse.FrontEnd.MiniC.Properties {
         /// <summary>
         ///   The operator &apos;{0}&apos; is not applicated to string type.과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
-        internal static string MCL0013 {
+        public static string MCL0013 {
             get {
                 return ResourceManager.GetString("MCL0013", resourceCulture);
             }
@@ -189,7 +189,7 @@ namespace Parse.FrontEnd.MiniC.Properties {
         /// <summary>
         ///   The member &apos;{0}&apos; is not used as method.과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
-        internal static string MCL0014 {
+        public static string MCL0014 {
             get {
                 return ResourceManager.GetString("MCL0014", resourceCulture);
             }
@@ -198,7 +198,7 @@ namespace Parse.FrontEnd.MiniC.Properties {
         /// <summary>
         ///   There is not overload method &apos;{1}&apos; that use parameter {0} count.과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
-        internal static string MCL0015 {
+        public static string MCL0015 {
             get {
                 return ResourceManager.GetString("MCL0015", resourceCulture);
             }
@@ -207,7 +207,7 @@ namespace Parse.FrontEnd.MiniC.Properties {
         /// <summary>
         ///   There is not argument for parameter &apos;{1}&apos; that need in the &apos;{0}&apos; method.과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
-        internal static string MCL0016 {
+        public static string MCL0016 {
             get {
                 return ResourceManager.GetString("MCL0016", resourceCulture);
             }
@@ -216,7 +216,7 @@ namespace Parse.FrontEnd.MiniC.Properties {
         /// <summary>
         ///   It can&apos;t be declared using identifier that defined in macro.과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
-        internal static string MCL0017 {
+        public static string MCL0017 {
             get {
                 return ResourceManager.GetString("MCL0017", resourceCulture);
             }
@@ -225,7 +225,7 @@ namespace Parse.FrontEnd.MiniC.Properties {
         /// <summary>
         ///   The macro can&apos;t be included own identifier.과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
-        internal static string MCL0018 {
+        public static string MCL0018 {
             get {
                 return ResourceManager.GetString("MCL0018", resourceCulture);
             }
@@ -234,9 +234,18 @@ namespace Parse.FrontEnd.MiniC.Properties {
         /// <summary>
         ///   The reverse reference can be used only if type is address type.과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
-        internal static string MCL0019 {
+        public static string MCL0019 {
             get {
                 return ResourceManager.GetString("MCL0019", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   The &apos;{0}&apos; type can&apos;t be used for variable type.과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string MCL0020 {
+            get {
+                return ResourceManager.GetString("MCL0020", resourceCulture);
             }
         }
     }

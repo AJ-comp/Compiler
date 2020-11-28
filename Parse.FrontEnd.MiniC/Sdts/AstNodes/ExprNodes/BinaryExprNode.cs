@@ -20,6 +20,9 @@ namespace Parse.FrontEnd.MiniC.Sdts.AstNodes.ExprNodes
 
         public override SdtsNode Build(SdtsParams param)
         {
+            Left.ConnectedErrInfoList.Clear();
+            Right.ConnectedErrInfoList.Clear();
+
             // ExprNode or TerminalNode
             Items[0].Build(param);
             Items[1].Build(param);

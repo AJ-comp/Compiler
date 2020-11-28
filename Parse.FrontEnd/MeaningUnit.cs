@@ -82,7 +82,7 @@ namespace Parse.FrontEnd
             _errTokens.Add(token);
         }
 
-        public MeaningErrInfo(IReadOnlyList<TokenData> tokens, string code, string errorMessage, ErrorType errorType = ErrorType.Error)
+        public MeaningErrInfo(IEnumerable<TokenData> tokens, string code, string errorMessage, ErrorType errorType = ErrorType.Error)
             : this(code, errorMessage, errorType)
         {
             _errTokens.AddRange(tokens);

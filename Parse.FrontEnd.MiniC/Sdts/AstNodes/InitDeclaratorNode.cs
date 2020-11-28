@@ -13,7 +13,7 @@ namespace Parse.FrontEnd.MiniC.Sdts.AstNodes
         }
 
         public int Level => System.Convert.ToInt32(LevelToken?.Input);
-        public string Name => NameToken?.Input;
+        public string VarName => NameToken?.Input;
         public int Dimension => System.Convert.ToInt32(DimensionToken?.Input);
 
         public TokenData LevelToken { get; private set; }

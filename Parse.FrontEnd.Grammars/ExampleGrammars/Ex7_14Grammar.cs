@@ -7,8 +7,8 @@ namespace Parse.FrontEnd.Grammars.ExampleGrammars
     {
         private Terminal @plus = new Terminal(TokenType.Operator, "+");
         private Terminal @mul = new Terminal(TokenType.Operator, "*");
-        private Terminal @openParenthesis = new Terminal(TokenType.Operator.Parenthesis, "(");
-        private Terminal @closeParenthesis = new Terminal(TokenType.Operator.Parenthesis, ")");
+        private Terminal @openParenthesis = new Terminal(TokenType.Operator.PairOpen, "(");
+        private Terminal @closeParenthesis = new Terminal(TokenType.Operator.PairOpen, ")");
         private Terminal @identifier = new Terminal(TokenType.Identifier, "[_a-zA-Z][_a-zA-Z0-9]*", Resource.Ident, true);
 
         private NonTerminal E = new NonTerminal("E", true);

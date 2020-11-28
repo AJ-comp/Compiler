@@ -21,15 +21,14 @@ namespace Parse.FrontEnd.ErrorHandler.GrammarPrivate
             this.ixIndex = ixIndex;
         }
 
-        private static bool TryRecoveryStep(Terminal[] virtualTokens, int ixIndex, Parser parser, 
-                                                            ParsingResult parsingResult, int seeingTokenIndex)
+        private bool TryRecoveryStep(Terminal[] virtualTokens, DataForRecovery dataForRecovery)
         {
-            bool result = TryRecoveryWithInsertVirtualTokens(virtualTokens, ixIndex, parser, parsingResult, seeingTokenIndex);
+            bool result = TryRecoveryWithInsertVirtualTokens(virtualTokens, dataForRecovery);
 
             if (result)
             {
-                var curBlock = parsingResult[seeingTokenIndex];
-                result = TryRecoveryWithInsertVirtualToken(curBlock.Token.Kind, ixIndex, parser, parsingResult, seeingTokenIndex);
+                var curBlock = dataForRecovery.CurBlock;
+                result = TryRecoveryWithInsertVirtualToken(curBlock.Token.Kind, dataForRecovery);
 
                 if (result)
                 {
@@ -50,8 +49,7 @@ namespace Parse.FrontEnd.ErrorHandler.GrammarPrivate
             return result;
         }
 
-        protected static ErrorHandlingResult TryRecovery(IEnumerable<Terminal[]> virtualTokenList, int ixIndex, 
-                                                                                Parser parser, ParsingResult parsingResult, int seeingTokenIndex)
+        protected ErrorHandlingResult TryRecovery(IEnumerable<Terminal[]> virtualTokenList, DataForRecovery dataForRecovery)
         {
             bool result = false;
 
@@ -59,21 +57,22 @@ namespace Parse.FrontEnd.ErrorHandler.GrammarPrivate
             {
                 var virtualTokens = virtualTokenList.ElementAt(i);
 
-                result = TryRecoveryStep(virtualTokens, ixIndex, parser, parsingResult, seeingTokenIndex);
+                result = TryRecoveryStep(virtualTokens, dataForRecovery);
                 if (result) break;
             }
 
-            if (!result) RecoveryWithDelCurToken(ixIndex, parsingResult, seeingTokenIndex);
+            if (!result) RecoveryWithDelCurToken(dataForRecovery);
 
-            return new ErrorHandlingResult(parsingResult, seeingTokenIndex, true);
+            return new ErrorHandlingResult(dataForRecovery.ParsingResult, 
+                                                            dataForRecovery.SeeingTokenIndex, true);
         }
 
-        protected static bool TryRecoveryWithInsertVirtualToken(Terminal virtualT, int ixIndex, Parser parser,
-                                                                                            ParsingResult parsingResult, int seeingTokenIndex,
+        protected bool TryRecoveryWithInsertVirtualToken(Terminal virtualT, 
+                                                                                            DataForRecovery dataForRecovery,
                                                                                             bool bRemoveFailedUnit = true)
         {
             bool result = true;
-            var curBlock = parsingResult[seeingTokenIndex];
+            var curBlock = dataForRecovery.CurBlock;
 
             if (bRemoveFailedUnit)
                 curBlock.RemoveLastToken(true);
@@ -81,7 +80,7 @@ namespace Parse.FrontEnd.ErrorHandler.GrammarPrivate
             Random random = new Random();
             var asId = random.Next(-99999999, -1);
             var virtualToken = new TokenData(virtualT, new TokenCell(asId, virtualT.Value, null), true);
-            var blockParsingResult = InsertVirtualToken(ixIndex, parser, parsingResult[seeingTokenIndex], virtualToken);
+            var blockParsingResult = InsertVirtualToken(dataForRecovery, virtualToken);
 
             if (blockParsingResult == SuccessedKind.NotApplicable)
             {
@@ -93,49 +92,44 @@ namespace Parse.FrontEnd.ErrorHandler.GrammarPrivate
         }
 
 
-        protected static bool TryRecoveryWithInsertVirtualTokens(Terminal[] virtualList, int ixIndex, Parser parser,
-                                                                                            ParsingResult parsingResult, int seeingTokenIndex)
+        protected bool TryRecoveryWithInsertVirtualTokens(Terminal[] virtualList, DataForRecovery dataForRecovery)
         {
             bool result = true;
-            var curBlock = parsingResult[seeingTokenIndex];
 
-            curBlock.Try();
+            dataForRecovery.CurBlock.Try();
             foreach (var virtualT in virtualList)
             {
-                if (!TryRecoveryWithInsertVirtualToken(virtualT, ixIndex, parser, parsingResult, seeingTokenIndex))
+                if (!TryRecoveryWithInsertVirtualToken(virtualT, dataForRecovery))
                 {
                     result = false;
                     break;
                 }
             }
 
-            if (result) curBlock.Commit();
-            else curBlock.RollBack();
+            if (result) dataForRecovery.CurBlock.Commit();
+            else dataForRecovery.CurBlock.RollBack();
 
             return result;
         }
 
 
-        protected static ErrorHandlingResult RecoveryWithReplaceToVirtualToken(Terminal virtualT, int ixIndex, Parser parser, ParsingResult parsingResult, int seeingTokenIndex)
+        protected ErrorHandlingResult RecoveryWithReplaceToVirtualToken(Terminal virtualT, DataForRecovery dataForRecovery)
         {
             var virtualToken = new TokenData(virtualT, new TokenCell(-1, virtualT.Value, null), true);
-            var blockParsingResult = GrammarPrivateLRErrorHandler.ReplaceToVirtualToken(ixIndex, parser, parsingResult[seeingTokenIndex], virtualToken);
+            var blockParsingResult = ReplaceToVirtualToken(dataForRecovery, virtualToken);
 
-            return (blockParsingResult == LRParser.SuccessedKind.NotApplicable) ?
-                new ErrorHandlingResult(parsingResult, seeingTokenIndex, false) : new ErrorHandlingResult(parsingResult, seeingTokenIndex, true);
+            return (blockParsingResult == SuccessedKind.NotApplicable) ?
+                dataForRecovery.ToErrorHandlingResult(false) : dataForRecovery.ToErrorHandlingResult(true);
         }
 
         /// <summary>
         /// This function returns a parsing result after insert virtualToken front of the token of the seeingBlock.
         /// </summary>
-        /// <param name="ixIndex"></param>
-        /// <param name="parser"></param>
-        /// <param name="seeingBlock"></param>
         /// <param name="virtualToken"></param>
         /// <returns></returns>
-        protected static SuccessedKind InsertVirtualToken(int ixIndex, Parser parser, ParsingBlock seeingBlock, TokenData virtualToken)
+        protected SuccessedKind InsertVirtualToken(DataForRecovery dataForRecovery, TokenData virtualToken)
         {
-            var token = seeingBlock.Token;
+            var token = dataForRecovery.CurBlock.Token;
 
             //            var parsingErrInfo = ParsingErrorInfo.CreateParsingError(nameof(AlarmCodes.CE0004), string.Format(AlarmCodes.CE0004, virtualToken.Kind));
             //            seeingBlock._errorInfos.Add(parsingErrInfo);
@@ -149,8 +143,8 @@ namespace Parse.FrontEnd.ErrorHandler.GrammarPrivate
             param.Add(new ParsingRecoveryData(virtualToken, recoveryMessage1));
             //            param.Add(new ParsingRecoveryData(token, recoveryMessage2));
 
-            LRParser lrParser = parser as LRParser;
-            return lrParser.RecoveryBlockParsing(seeingBlock, param);
+            LRParser lrParser = dataForRecovery.Parser as LRParser;
+            return lrParser.RecoveryBlockParsing(dataForRecovery.CurBlock, param);
         }
 
         /// <summary>
@@ -162,13 +156,15 @@ namespace Parse.FrontEnd.ErrorHandler.GrammarPrivate
         /// <param name="seeingTokenIndex"></param>
         /// <param name="virtualToken">The virtual token to replace a exist token</param>
         /// <returns></returns>
-        protected static SuccessedKind ReplaceToVirtualToken(int ixIndex, Parser parser, ParsingBlock seeingBlock, TokenData virtualToken)
+        protected SuccessedKind ReplaceToVirtualToken(DataForRecovery dataForRecovery, TokenData virtualToken)
         {
-            var token = seeingBlock.Token;
+            var token = dataForRecovery.CurBlock.Token;
 
             // set error informations
-            var parsingErrInfo = ParsingErrorInfo.CreateParsingError(nameof(AlarmCodes.CE0000), string.Format(AlarmCodes.CE0000, virtualToken.Input));
-            seeingBlock._errorInfos.Add(parsingErrInfo);
+            var parsingErrInfo = ParsingErrorInfo.CreateParsingError(nameof(AlarmCodes.CE0000), 
+                                                                                                string.Format(AlarmCodes.CE0000, virtualToken.Input));
+
+            dataForRecovery.CurBlock._errorInfos.Add(parsingErrInfo);
 
             // set param to recovery
             List<ParsingRecoveryData> param = new List<ParsingRecoveryData>();
@@ -176,32 +172,34 @@ namespace Parse.FrontEnd.ErrorHandler.GrammarPrivate
             recoveryMessage += string.Format(", " + Resource.ReplaceVirtualToken, virtualToken.Input);
             param.Add(new ParsingRecoveryData(virtualToken, recoveryMessage));
 
-            LRParser lrSnippet = parser as LRParser;
-            return lrSnippet.RecoveryBlockParsing(seeingBlock, param);
+            LRParser lrSnippet = dataForRecovery.Parser as LRParser;
+            return lrSnippet.RecoveryBlockParsing(dataForRecovery.CurBlock, param);
         }
 
         /// <summary>
         /// This function deletes the current token. (ignore effect)
         /// </summary>
-        /// <param name="ixIndex"></param>
-        /// <param name="parsingResult"></param>
-        /// <param name="seeingTokenIndex"></param>
+        /// <param name="dataForRecovery"></param>
         /// <returns></returns>
-        protected static ErrorHandlingResult RecoveryWithDelCurToken(int ixIndex, ParsingResult parsingResult, int seeingTokenIndex)
+        protected ErrorHandlingResult RecoveryWithDelCurToken(DataForRecovery dataForRecovery)
         {
             // skip current token because of this token is useless
-            var curBlock = parsingResult[seeingTokenIndex];
+            var curBlock = dataForRecovery.CurBlock;
             curBlock.RemoveAllToken();
             curBlock.IsIgnore = true;
 
-            var recoveryMessage = string.Format(Resource.RecoverWithLRHandler + ", " + Resource.SkipToken, ixIndex, curBlock.Token.Kind.ToString());
+            var recoveryMessage = string.Format(Resource.RecoverWithLRHandler + ", " + Resource.SkipToken, 
+                                                                    ixIndex, 
+                                                                    curBlock.Token.Kind.ToString());
+
             curBlock.AddRecoveryMessageToLastHistory(recoveryMessage);
 
             // set error infomations
-            var parsingErrInfo = ParsingErrorInfo.CreateParsingError(nameof(AlarmCodes.CE0002), string.Format(AlarmCodes.CE0002, curBlock.Token.Input));
+            var parsingErrInfo = ParsingErrorInfo.CreateParsingError(nameof(AlarmCodes.CE0002), 
+                                                                                                string.Format(AlarmCodes.CE0002, curBlock.Token.Input));
             curBlock._errorInfos.Add(parsingErrInfo);
 
-            return new ErrorHandlingResult(parsingResult, seeingTokenIndex, true);
+            return dataForRecovery.ToErrorHandlingResult(true);
         }
     }
 }

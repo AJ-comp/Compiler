@@ -6,13 +6,13 @@ namespace Parse.FrontEnd.ErrorHandler.GrammarPrivate
 {
     public abstract class GrammarPrivateErrorHandler : IErrorHandlable
     {
-        protected Grammar grammar;
+        protected Grammar _grammar;
 
         protected GrammarPrivateErrorHandler(Grammar grammar)
         {
-            this.grammar = grammar;
+            this._grammar = grammar;
         }
 
-        public abstract ErrorHandlingResult Call(Parser snippet, ParsingResult parsingResult, int seeingTokenIndex);
+        public abstract ErrorHandlingResult Call(DataForRecovery dataForRecovery);
     }
 }
