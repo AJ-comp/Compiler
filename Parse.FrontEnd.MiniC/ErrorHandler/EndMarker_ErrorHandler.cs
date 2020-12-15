@@ -29,12 +29,14 @@ namespace Parse.FrontEnd.MiniC.ErrorHandler
         {
             var grammar = _grammar as MiniCGrammar;
 
-            List<Terminal[]> param = new List<Terminal[]>();
-            param.Add(new Terminal[] { grammar.CloseCurlyBrace });
-            param.Add(new Terminal[] { grammar.CloseCurlyBrace, grammar.CloseCurlyBrace });
-            param.Add(new Terminal[] { grammar.CloseCurlyBrace, grammar.CloseCurlyBrace, grammar.CloseCurlyBrace });
-            param.Add(new Terminal[] { grammar.CloseCurlyBrace, grammar.CloseCurlyBrace, grammar.CloseCurlyBrace, grammar.CloseCurlyBrace });
-            param.Add(new Terminal[] { grammar.CloseCurlyBrace, grammar.CloseCurlyBrace, grammar.CloseCurlyBrace, grammar.CloseCurlyBrace, grammar.CloseCurlyBrace });
+            List<Terminal[]> param = new List<Terminal[]>
+            {
+                new Terminal[] { grammar.CloseCurlyBrace },
+                new Terminal[] { grammar.CloseCurlyBrace, grammar.CloseCurlyBrace },
+                new Terminal[] { grammar.CloseCurlyBrace, grammar.CloseCurlyBrace, grammar.CloseCurlyBrace },
+                new Terminal[] { grammar.CloseCurlyBrace, grammar.CloseCurlyBrace, grammar.CloseCurlyBrace, grammar.CloseCurlyBrace },
+                new Terminal[] { grammar.CloseCurlyBrace, grammar.CloseCurlyBrace, grammar.CloseCurlyBrace, grammar.CloseCurlyBrace, grammar.CloseCurlyBrace }
+            };
 
             return TryRecovery(param, dataForRecovery);
         }

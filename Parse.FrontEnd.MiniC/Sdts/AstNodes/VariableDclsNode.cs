@@ -1,19 +1,18 @@
 ﻿using Parse.FrontEnd.Ast;
-using Parse.FrontEnd.MiniC.Properties;
 using Parse.FrontEnd.MiniC.Sdts.Datas;
 using Parse.FrontEnd.MiniC.Sdts.Datas.Variables;
 using System.Collections.Generic;
 
 namespace Parse.FrontEnd.MiniC.Sdts.AstNodes
 {
-    public class VariableDclsNode : MiniCNode
+    public class VariableDclsNode : MiniCNode, IHasVarInfos
     {
         public VariableDclsNode(AstSymbol node) : base(node)
         {
         }
 
         public VariableTypeNode VarType { get; private set; }
-        public IReadOnlyList<InitDeclaratorNode> InitDeclarators => _initDeclarators;
+        public IEnumerable<VariableMiniC> VarList => _varDatas;
 
         public int BlockLevel { get; private set; }
         public int Offset { get; private set; }
@@ -25,10 +24,20 @@ namespace Parse.FrontEnd.MiniC.Sdts.AstNodes
         // [1] : InitDeclaratorNode* [InitDeclarator]
         public override SdtsNode Build(SdtsParams param)
         {
+            _varDatas.Clear();
             ConnectedErrInfoList.Clear();
 
+            int startOffset = 0;
+            Access accessState = Access.Private;
+            if(Items[0] is AccesserNode)
+            {
+                var accesserNode = Items[0].Build(param) as AccesserNode;
+                accessState = accesserNode.AccessState;
+                startOffset = 1;
+            }
+
             // build VariableTypeNode
-            VarType = Items[0].Build(param) as VariableTypeNode;
+            VarType = Items[startOffset].Build(param) as VariableTypeNode;
             //if (VarType.DataType == MiniCDataType.Void)
             //{
             //    ConnectedErrInfoList.Add(new MeaningErrInfo(nameof(AlarmCodes.MCL0020), AlarmCodes.MCL0020));
@@ -36,19 +45,18 @@ namespace Parse.FrontEnd.MiniC.Sdts.AstNodes
             //}
 
             // build InitDeclaratorNodes
-            for (int i = 1; i < Items.Count; i++)
+            for (int i = startOffset + 1; i < Items.Count; i++)
             {
                 var initDeclarator = Items[i].Build(param) as InitDeclaratorNode;
                 if (initDeclarator.ConnectedErrInfoList.Count > 0) continue;
                 if (initDeclarator.NameToken.IsVirtual) continue;
 
-                _initDeclarators.Add(initDeclarator);
-
                 BlockLevel = param.BlockLevel;
                 Offset = param.Offset++;
 
                 // convert to VarData to save to SymbolTable
-                var varData = MiniCCreator.CreateVarData(VarType.MiniCTypeInfo,
+                var varData = MiniCCreator.CreateVarData(accessState,
+                                                                               VarType.MiniCTypeInfo,
                                                                                initDeclarator.NameToken,
                                                                                initDeclarator.LevelToken,
                                                                                initDeclarator.DimensionToken,
@@ -57,18 +65,14 @@ namespace Parse.FrontEnd.MiniC.Sdts.AstNodes
                                                                                (BlockLevel == 0) ? VarProperty.Global : VarProperty.Normal,
                                                                                initDeclarator.Right);
 
-                SymbolTable = (param as MiniCSdtsParams).SymbolTable;
                 if (!MiniCChecker.CanAddVarData(this, varData)) continue;
-
-                // save to SymbolTable
-                (param as MiniCSdtsParams).SymbolTable
-                                                          .VarTable
-                                                          .CreateNewBlock(varData, new ReferenceInfo(this, initDeclarator.Right));
+                _varDatas.Add(varData);
+                varData.ReferenceTable.Add(this);
             }
 
             return this;
         }
 
-        private List<InitDeclaratorNode> _initDeclarators = new List<InitDeclaratorNode>();
+        private List<VariableMiniC> _varDatas = new List<VariableMiniC>();
     }
 }

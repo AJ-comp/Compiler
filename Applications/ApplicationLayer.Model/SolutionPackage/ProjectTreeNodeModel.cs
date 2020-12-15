@@ -1,11 +1,14 @@
 ﻿using ApplicationLayer.Common;
 using ApplicationLayer.Common.Interfaces;
+using ApplicationLayer.Common.Utilities;
+using Parse.BackEnd.Target;
 using Parse.MiddleEnd.IR.LLVM;
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.IO;
 using System.Xml.Serialization;
+using static ApplicationLayer.Models.ProjectType;
 
 namespace ApplicationLayer.Models.SolutionPackage
 {
@@ -14,7 +17,10 @@ namespace ApplicationLayer.Models.SolutionPackage
         // this property has to bring a information via current mode. (ex : debug or release)
         [XmlIgnore] public ProjectProperty ProjectData => GetProjectProperty(ProjectProperty.Configure.Debug);
         [XmlIgnore] public string MCPUType => LLVMConverter.GetMCPUOption(ProjectData.Target);
-        [XmlIgnore] public bool StartingProject { get; set; }
+        [XmlIgnore] public Target MCUType => AssemblyManager.CreateInstanceFromClassName(ProjectData.Target) as Target;
+
+        [XmlElement("IsStartingProject")]  public bool StartingProject { get; set; }
+        [XmlElement("ProjectType")] public ProjectKinds ProjectType { get; set; }
 
 
 
@@ -74,7 +80,7 @@ namespace ApplicationLayer.Models.SolutionPackage
          * abstract property section
          ********************************************************************************************/
         public abstract bool IsChanged { get; }
-        public abstract string ProjectType { get; }
+        public abstract string LanguageType { get; }
         /// <summary>
         /// This property returns the reference file list of the files in project.
         /// </summary>
@@ -99,10 +105,12 @@ namespace ApplicationLayer.Models.SolutionPackage
             this._children.CollectionChanged += Children_CollectionChanged;
         }
 
-        public ProjectTreeNodeModel(string path, string projName) : base(path, projName)
+        public ProjectTreeNodeModel(ProjectData projectData)
+            : base(projectData.ProjectPath, projectData.ProjectNameWithExtension)
         {
-            this.IsEditable = true;
-            this._children.CollectionChanged += Children_CollectionChanged;
+            IsEditable = true;
+            ProjectType = projectData.ProjectType.ProjectKind;
+            _children.CollectionChanged += Children_CollectionChanged;
         }
 
 

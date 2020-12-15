@@ -94,12 +94,13 @@ namespace Parse.FrontEnd.IRGenerator
                 result.FirstLayers.Add(new LLVMGlobalVariableExpression(varRecord.DefineField, ssaTable));
 
             int index = 0;
-            foreach (var namespaceNode in cNode.NamespaceNodes)
+            foreach (var namespaceNode in cNode.NamespaceDatas)
             {
-                foreach (var funcDef in namespaceNode.FuncDefNodes)
+                foreach (var classData in namespaceNode.ClassDatas)
                 {
                     var funcParam = new Tuple<LLVMSSATable, int>(ssaTable.Clone() as LLVMSSATable, index++);
-                    result.FirstLayers.Add(funcDef.ExecuteToIRExpression(funcParam) as LLVMFirstLayerExpression);
+                    var defNode = classData.ReferenceTable[0] as MiniCNode;
+                    result.FirstLayers.Add(defNode.ExecuteToIRExpression(funcParam) as LLVMFirstLayerExpression);
                 }
             }
 
@@ -123,7 +124,7 @@ namespace Parse.FrontEnd.IRGenerator
 
             var paramListAndReturnExpression = new LLVMParamListAndReturnExpression(paramVars, null, ssaTable);
 
-            return new LLVMFuncDefExpression(cNode.ToIRFuncData(),
+            return new LLVMFuncDefExpression(cNode.FuncData.ToIRFuncData(),
                                                                     paramListAndReturnExpression,
                                                                     cNode.CompoundSt.ExecuteToIRExpression(ssaTable) as LLVMBlockExpression,
                                                                     ssaTable,

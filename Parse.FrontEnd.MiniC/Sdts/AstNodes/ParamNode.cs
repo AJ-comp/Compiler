@@ -15,7 +15,8 @@ namespace Parse.FrontEnd.MiniC.Sdts.AstNodes
         {
             get
             {
-                return MiniCCreator.CreateVarData(DataTypeNode.MiniCTypeInfo,
+                return MiniCCreator.CreateVarData(Access.Private,
+                                                                    DataTypeNode.MiniCTypeInfo,
                                                                     VariableNode.NameToken,
                                                                     null,
                                                                     VariableNode.DimensionToken,

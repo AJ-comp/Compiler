@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace Parse.FrontEnd.MiniC.Sdts.Datas
 {
-    public class MiniCReferenceTable<T> : IEnumerable<MiniCReferenceRecord<T>> where T : IHasName
+    public class MiniCReferenceTable<T> : IEnumerable<MiniCReferenceRecord<T>> where T : ISymbolData
     {
         public bool AddReferenceRecord(T baseForm, ReferenceInfo referenceInfo)
         {
@@ -37,7 +37,7 @@ namespace Parse.FrontEnd.MiniC.Sdts.Datas
 
         public T GetMatchedItemWithName(string name)
         {
-            T result = default(T);
+            T result = default;
 
             foreach (var block in _recordBlocks)
             {
@@ -71,40 +71,6 @@ namespace Parse.FrontEnd.MiniC.Sdts.Datas
     ///         - Ref3
     /// </summary>
     public class VarTable : MiniCReferenceTable<VariableMiniC>
-    {
-
-    }
-
-
-    /// <summary>
-    /// This class has the structure as below.
-    /// Fun1 - Ref1
-    ///         - Ref2
-    ///         - Ref3
-    ///         ...
-    ///         
-    /// Fun2 - Ref1
-    ///         - Ref2
-    ///         - Ref3
-    /// </summary>
-    public class FuncTable : MiniCReferenceTable<MiniCFuncData>
-    {
-
-    }
-
-
-    /// <summary>
-    /// This class has the structure as below.
-    /// namespace 1 - Ref1
-    ///                     - Ref2
-    ///                     - Ref3
-    ///         ...
-    ///         
-    /// namespace2 - Ref1
-    ///                    - Ref2
-    ///                    - Ref3
-    /// </summary>
-    public class NamespaceTable : MiniCReferenceTable<MiniCNamespaceData>
     {
 
     }

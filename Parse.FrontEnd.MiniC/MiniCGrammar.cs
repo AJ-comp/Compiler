@@ -6,12 +6,13 @@ namespace Parse.FrontEnd.MiniC
 {
     public class MiniCGrammar : Grammar
     {
-        public Terminal Using { get; } = new Terminal(TokenType.Keyword.CategoryKeyword, "using");
-        public Terminal Namespace { get; } = new Terminal(TokenType.Keyword.CategoryKeyword, "namespace");
-        public Terminal Struct { get; } = new Terminal(TokenType.Keyword.CategoryKeyword, "struct");
-        public Terminal Class { get; } = new Terminal(TokenType.Keyword.CategoryKeyword, "class");
-        public Terminal Private { get; } = new Terminal(TokenType.Keyword.Accessword, "private");
-        public Terminal Public { get; } = new Terminal(TokenType.Keyword.Accessword, "public");
+        public Terminal Using { get; } = new Terminal(TokenType.Keyword.CategoryKeyword, "using", false);
+        public Terminal Namespace { get; } = new Terminal(TokenType.Keyword.CategoryKeyword, "namespace", false);
+        public Terminal Struct { get; } = new Terminal(TokenType.Keyword.CategoryKeyword, "struct", false);
+        public Terminal Class { get; } = new Terminal(TokenType.Keyword.CategoryKeyword, "class", false);
+        public static Terminal Private { get; } = new Terminal(TokenType.Keyword.Accessword, "private");
+        public static Terminal Public { get; } = new Terminal(TokenType.Keyword.Accessword, "public");
+        public static Terminal This { get; } = new Terminal(TokenType.Keyword, "this");
         public Terminal If { get; } = new Terminal(TokenType.Keyword.Controlword, "if");
         public Terminal Else { get; } = new Terminal(TokenType.Keyword.Controlword, "else");
         public Terminal While { get; } = new Terminal(TokenType.Keyword.Repeateword, "while");
@@ -62,6 +63,7 @@ namespace Parse.FrontEnd.MiniC
         public Terminal LessEqual { get; } = new Terminal(TokenType.Operator.NormalOperator, "<=", false);
         public Terminal SemiColon { get; } = new Terminal(TokenType.Operator.NormalOperator, ";", false);
         public Terminal Comma { get; } = new Terminal(TokenType.Operator.Comma, ",", false);
+        public Terminal Dot { get; } = new Terminal(TokenType.Operator, ".", false);
 
         public Terminal LogicalOr { get; } = new Terminal(TokenType.Operator, "||", false);
         public Terminal LogicalAnd { get; } = new Terminal(TokenType.Operator, "&&", false);
@@ -70,10 +72,20 @@ namespace Parse.FrontEnd.MiniC
 
         private NonTerminal miniC = new NonTerminal("mini_c", true);
         private NonTerminal usingDcl = new NonTerminal("using_dcl");
-        private NonTerminal namespaceDcl = new NonTerminal("namespace_dcl");
+        private NonTerminal namespaceDcl = new NonTerminal(nameof(namespaceDcl));
+        private NonTerminal namespaceMemberDcl = new NonTerminal(nameof(namespaceMemberDcl));
+        private NonTerminal accesser = new NonTerminal(nameof(accesser));
+
+        private NonTerminal structDef = new NonTerminal(nameof(structDef));
+        private NonTerminal classDef = new NonTerminal(nameof(classDef));
+
+        private NonTerminal classMemberDcl = new NonTerminal(nameof(classMemberDcl));
+        private NonTerminal memberFieldDef = new NonTerminal(nameof(memberFieldDef));
+        private NonTerminal memberPropDef = new NonTerminal(nameof(memberPropDef));
+        private NonTerminal memberFuncDef = new NonTerminal(nameof(memberFuncDef));
+
         private NonTerminal translationUnit = new NonTerminal("translation_unit");
         private NonTerminal externalDcl = new NonTerminal("external_dcl");
-        private NonTerminal structDef = new NonTerminal("struct_def");
         private NonTerminal functionDef = new NonTerminal("function_def");
         private NonTerminal functionHeader = new NonTerminal("function_header");
         private NonTerminal dclSpec = new NonTerminal("dcl_spec");
@@ -122,9 +134,15 @@ namespace Parse.FrontEnd.MiniC
 
         // These are meaning unit for semantic analysis.
         public static MeaningUnit Program { get; } = new MeaningUnit(nameof(Program));
+        public static MeaningUnit AccesserNode { get; } = new MeaningUnit(nameof(AccesserNode));
         public static MeaningUnit UsingNode { get; } = new MeaningUnit(nameof(UsingNode));
         public static MeaningUnit NamespaceNode { get; } = new MeaningUnit(nameof(NamespaceNode));
+
         public static MeaningUnit StructDef { get; } = new MeaningUnit(nameof(StructDef));
+        public static MeaningUnit ClassDef { get; } = new MeaningUnit(nameof(ClassDef));
+        public static MeaningUnit MemberField { get; } = new MeaningUnit(nameof(MemberField));
+        public static MeaningUnit MemberFunc { get; } = new MeaningUnit(nameof(MemberFunc));
+
         public static MeaningUnit FuncDef { get; } = new MeaningUnit(nameof(FuncDef));
         public static MeaningUnit FuncHead { get; } = new MeaningUnit(nameof(FuncHead), MatchedAction.BlockPlus);
         public static MeaningUnit DclSpec { get; } = new MeaningUnit(nameof(DclSpec));
@@ -139,7 +157,6 @@ namespace Parse.FrontEnd.MiniC
         public static MeaningUnit FormalPara { get; } = new MeaningUnit(nameof(FormalPara));
         public static MeaningUnit ParamDcl { get; } = new MeaningUnit(nameof(ParamDcl));
         public static MeaningUnit CompoundSt { get; } = new MeaningUnit(nameof(CompoundSt));
-        public static MeaningUnit DclList { get; } = new MeaningUnit(nameof(DclList));
         public static MeaningUnit Dcl { get; } = new MeaningUnit(nameof(Dcl));
         public static MeaningUnit DclVar { get; } = new MeaningUnit(nameof(DclVar), MatchedAction.OffsetPlus);
         public static MeaningUnit DeclareVarIdent { get; } = new MeaningUnit(nameof(DeclareVarIdent));
@@ -190,14 +207,22 @@ namespace Parse.FrontEnd.MiniC
         {
             this.ScopeInfos.Add(new ScopeInfo(this.scopeCommentStart, this.scopeCommentEnd));
 
-            this.miniC.AddItem(usingDcl.ZeroOrMore() | namespaceDcl, Program);
+            this.miniC.AddItem(usingDcl.ZeroOrMore() + namespaceDcl, Program);
             this.usingDcl.AddItem(Using + Ident + SemiColon, UsingNode);
-            this.namespaceDcl.AddItem(Namespace + Ident + OpenCurlyBrace + translationUnit + CloseCurlyBrace, NamespaceNode);
-            this.translationUnit.AddItem(this.externalDcl | this.translationUnit + this.externalDcl);
-            this.externalDcl.AddItem(structDef | functionDef | declaration);
-            this.structDef.AddItem(Struct + Ident + OpenCurlyBrace + declaration + CloseCurlyBrace, StructDef);
-            this.functionDef.AddItem(this.functionHeader + this.compoundSt, FuncDef);
-            this.functionHeader.AddItem(this.dclSpec + this.functionName + this.formalParam, FuncHead);
+
+            // namespace
+            this.accesser.AddItem(Private | Public, AccesserNode);
+            this.namespaceDcl.AddItem(Namespace + Ident + OpenCurlyBrace + namespaceMemberDcl.ZeroOrMore() + CloseCurlyBrace, NamespaceNode);
+            this.namespaceMemberDcl.AddItem(structDef | classDef);
+
+            // struct and class
+            this.structDef.AddItem(accesser.Optional() + Struct + Ident + OpenCurlyBrace + declaration + CloseCurlyBrace, StructDef);
+            this.classDef.AddItem(accesser.Optional() + Class + Ident + OpenCurlyBrace + classMemberDcl.ZeroOrMore() + CloseCurlyBrace, ClassDef);
+            this.classMemberDcl.AddItem(memberFieldDef | functionDef);
+            this.memberFieldDef.AddItem(accesser + declaration, MemberField);
+            this.functionDef.AddItem(accesser + functionHeader + compoundSt, FuncDef);
+            this.functionHeader.AddItem(dclSpec + functionName + formalParam, FuncHead);
+
             this.dclSpec.AddItem(this.dclSpecifiers, DclSpec);
             this.dclSpecifiers.AddItem(this.typeQualifier.Optional() + this.typeSpecifier);
             this.typeQualifier.AddItem(this.Const, ConstNode);
@@ -215,8 +240,7 @@ namespace Parse.FrontEnd.MiniC
             this.optFormalParam.AddItem(this.formalParamList | new Epsilon());
             this.formalParamList.AddItem(this.paramDcl | this.formalParamList + this.Comma + this.paramDcl);
             this.paramDcl.AddItem(this.dclSpec + this.declarator, ParamDcl);
-            this.compoundSt.AddItem(this.OpenCurlyBrace + this.optDclList + this.optStatList + this.CloseCurlyBrace, CompoundSt);
-            this.optDclList.AddItem(this.declarationList | new Epsilon(), DclList);
+            this.compoundSt.AddItem(this.OpenCurlyBrace + (declaration | statementList).ZeroOrMore() + this.CloseCurlyBrace, CompoundSt);
             this.declarationList.AddItem(this.declaration | this.declarationList + this.declaration);
             this.declaration.AddItem(this.dclSpec + this.initDclList + this.SemiColon, Dcl);
             this.initDclList.AddItem(this.initDeclarator | this.initDclList + this.Comma + this.initDeclarator);
@@ -280,12 +304,12 @@ namespace Parse.FrontEnd.MiniC
             this.unaryExp.AddItem(this.Inc + this.unaryExp, PreIncM);
             this.unaryExp.AddItem(this.Dec + this.unaryExp, PreDecM);
 
-            this.postfixExp.AddItem(this.primaryExp);
-            this.postfixExp.AddItem(this.postfixExp + this.OpenSquareBrace + this.expression + this.CloseSquareBrace, Index);
-            this.postfixExp.AddItem(this.postfixExp + this.OpenParenthesis + this.optActualParam.Optional() + this.CloseParenthesis, Call);
-            this.postfixExp.AddItem(this.postfixExp + this.Inc, PostIncM);
-            this.postfixExp.AddItem(this.postfixExp + this.Dec, PostDecM);
-            this.postfixExp.AddItem(Mul + this.postfixExp, DeRef);
+            this.postfixExp.AddItem(primaryExp);
+            this.postfixExp.AddItem(postfixExp + OpenSquareBrace + expression + CloseSquareBrace, Index);
+            this.postfixExp.AddItem(postfixExp + Dot + Ident + OpenParenthesis + optActualParam.Optional() + CloseParenthesis, Call);
+            this.postfixExp.AddItem(postfixExp + Inc, PostIncM);
+            this.postfixExp.AddItem(postfixExp + Dec, PostDecM);
+            this.postfixExp.AddItem(Mul + postfixExp, DeRef);
 
             this.optActualParam.AddItem(this.actualParam, ActualParam);
 

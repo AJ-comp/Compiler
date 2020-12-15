@@ -1,4 +1,5 @@
-﻿using Parse.FrontEnd.MiniC.Sdts.AstNodes.StatementNodes;
+﻿using Parse.FrontEnd.MiniC.Sdts.AstNodes;
+using Parse.FrontEnd.MiniC.Sdts.AstNodes.StatementNodes;
 using Parse.FrontEnd.MiniC.Sdts.Datas.Variables;
 using Parse.MiddleEnd.IR;
 using Parse.MiddleEnd.IR.Datas;
@@ -61,12 +62,13 @@ namespace Parse.FrontEnd.IRGenerator
 
             // local variable declaration
             List<CalculationInfo> declareInfos = new List<CalculationInfo>();
-            foreach (var varRecord in cNode.SymbolTable.VarTable)
+            foreach (var varData in cNode.VarList)
             {
-                if (varRecord.DefineField.VariableProperty == VarProperty.Param) continue;
+                if (varData.VariableProperty == VarProperty.Param) continue;
 
-                var initExpression = new CalculationInfo(varRecord.DefineField,
-                                                                            varRecord.InitValue?.ExecuteToIRExpression(ssaTable) as LLVMExprExpression);
+                var initValueExprNode = varData.ReferenceTable[0] as MiniCNode;
+                var initExpression = new CalculationInfo(varData,
+                                                                            initValueExprNode?.ExecuteToIRExpression(ssaTable) as LLVMExprExpression);
 
                 declareInfos.Add(initExpression);
             }

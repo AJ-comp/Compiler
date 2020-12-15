@@ -4,7 +4,7 @@ namespace Parse.FrontEnd.MiniC.Sdts.AstNodes.StatementNodes
 {
     public class CompoundStNode : StatementNode
     {
-        public VariableDclsListNode VarListNode { get; private set; }
+        public VariableDclsNode VarListNode { get; private set; }
         public StatListNode StatListNode { get; private set; }
 
 
@@ -20,12 +20,27 @@ namespace Parse.FrontEnd.MiniC.Sdts.AstNodes.StatementNodes
             // it needs to clone an param
             var newParam = CreateParamForNewBlock(param);
 
-            // build VariableDclsListNode
-            VarListNode = Items[0].Build(newParam) as VariableDclsListNode;
+            foreach (var item in Items)
+            {
+                if (item is VariableDclsNode)
+                {
+                    // build VariableDclsListNode
+                    VarListNode = item.Build(newParam) as VariableDclsNode;
+                }
+                else if (item is StatListNode)
+                {
+                    // build StatListNode
+                    StatListNode = item.Build(newParam) as StatListNode;
+                }
+            }
 
-            // build StatListNode
-            if(Items.Count > 1)
-                StatListNode = Items[1].Build(newParam) as StatListNode;
+            if (VarListNode != null)
+            {
+                foreach (var varData in VarListNode.VarList)
+                {
+                    _varList.Add(varData);
+                }
+            }
 
             return this;
         }

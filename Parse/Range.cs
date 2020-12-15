@@ -92,10 +92,7 @@ namespace Parse
 
         public override int GetHashCode()
         {
-            var hashCode = 1523823687;
-            hashCode = hashCode * -1521134295 + StartIndex.GetHashCode();
-            hashCode = hashCode * -1521134295 + Count.GetHashCode();
-            return hashCode;
+            return HashCode.Combine(StartIndex, Count);
         }
     }
 

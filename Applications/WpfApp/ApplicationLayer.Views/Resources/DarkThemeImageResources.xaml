@@ -36,6 +36,7 @@
     <BitmapImage x:Key="OpenFolderImagePath" UriSource="/ApplicationLayer.Views;component/Resources/Images/Basic/open_folder_16.png"/>
     <BitmapImage x:Key="CloseDepFilterImagePath" UriSource="/ApplicationLayer.Views;component/Resources/Images/Basic/closed_dependency_filter_16.png"/>
     <BitmapImage x:Key="OpenDepFilterImagePath" UriSource="/ApplicationLayer.Views;component/Resources/Images/Basic/open_dependency_filter_16.png"/>
+    <BitmapImage x:Key="Class16ImagePath" UriSource="/ApplicationLayer.Views;component/Resources/Images/DarkTheme/outer_16.png"/>
     <BitmapImage x:Key="Func16ImagePath" UriSource="/ApplicationLayer.Views;component/Resources/Images/Basic/func_16.png"/>
     <BitmapImage x:Key="Var16ImagePath" UriSource="/ApplicationLayer.Views;component/Resources/Images/Basic/var_16.png"/>
 

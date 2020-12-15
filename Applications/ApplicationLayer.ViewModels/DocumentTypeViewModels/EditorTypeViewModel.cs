@@ -19,6 +19,7 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Data;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace ApplicationLayer.ViewModels.DocumentTypeViewModels
@@ -156,23 +157,29 @@ namespace ApplicationLayer.ViewModels.DocumentTypeViewModels
                 if (!(node is NamespaceNode)) continue;
 
                 var namespaceNode = node as NamespaceNode;
-                var symbolTable = namespaceNode?.SymbolTable;
-                if (symbolTable == null) return;
+                if (namespaceNode == null) return;
 
                 // Add abstract variable list information to the current FileTreeNode.
-                foreach (var varRecord in symbolTable.VarTable)
+                foreach (var classData in namespaceNode.ClassDatas)
                 {
-                    if (varRecord.DefineField.IsVirtual) continue;
+                    if (classData.NameToken.IsVirtual) continue;
 
-                    var varTreeNode = new VarTreeNodeModel(varRecord.DefineField);
+                    var varTreeNode = new ClassTreeNodeModel(classData);
                     _fileNode.AddChildren(varTreeNode);
-                }
 
-                // Add abstract function list information to the current FileTreeNode.
-                foreach (var item in symbolTable.FuncTable)
-                {
-                    var funcTreeNode = new FuncTreeNodeModel(item.DefineField);
-                    _fileNode.AddChildren(funcTreeNode);
+                    var childNode = _fileNode.Children.Last();
+                    Parallel.Invoke(
+                        () =>
+                        {
+                            foreach (var varData in classData.Fields)
+                                childNode.AddChildren(new VarTreeNodeModel(varData));
+                        },
+                        () =>
+                        {
+                            // Add abstract function list information to the current FileTreeNode.
+                            foreach (var funcData in classData.Funcs)
+                                childNode.AddChildren(new FuncTreeNodeModel(funcData));
+                        });
                 }
 
                 InterLanguage = (semanticResult.FiredException == null) ? semanticResult.AllNodes : null;

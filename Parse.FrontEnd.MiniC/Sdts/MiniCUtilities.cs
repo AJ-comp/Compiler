@@ -18,7 +18,7 @@ namespace Parse.FrontEnd.MiniC.Sdts
         /// <returns></returns>
         public static bool AddDuplicatedError(MiniCNode node, TokenData varTokenToCheck = null)
         {
-            if(varTokenToCheck == null)
+            if (varTokenToCheck == null)
             {
                 node.ConnectedErrInfoList.Add
                 (
@@ -84,7 +84,7 @@ namespace Parse.FrontEnd.MiniC.Sdts
 
             while (trasverNode != null)
             {
-                if(trasverNode.SymbolTable != null)
+                if (trasverNode.SymbolTable != null)
                     result.Add(trasverNode.SymbolTable);
 
                 trasverNode = trasverNode.Parent as MiniCNode;
@@ -137,21 +137,89 @@ namespace Parse.FrontEnd.MiniC.Sdts
             return null;
         }
 
-        public static MiniCFuncData GetFuncDataFromReferableST(MiniCNode fromNode, TokenData varTokenToFind)
+        public static IEnumerable<IHasVarInfos> GetReferableHasVarNodes(MiniCNode fromNode)
+        {
+            var transNode = fromNode;
+            List<IHasVarInfos> result = new List<IHasVarInfos>();
+
+            while (transNode != null)
+            {
+                if (transNode is IHasVarInfos)
+                    result.Add(transNode as IHasVarInfos);
+
+                transNode = transNode.Parent as MiniCNode;
+            }
+
+            return result;
+        }
+
+
+        public static IEnumerable<VariableMiniC> GetReferableVarDatas(MiniCNode fromNode)
+        {
+            List<VariableMiniC> result = new List<VariableMiniC>();
+            var hasVarList = GetReferableHasVarNodes(fromNode);
+
+            foreach(var hasVar in hasVarList)
+            {
+                if (hasVar.VarList == null) continue;
+
+                result.AddRange(hasVar.VarList);
+            }
+
+            return result;
+        }
+
+
+        public static VariableMiniC GetVarDCLSymbolData(MiniCNode fromNode, TokenData varTokenToFind)
         {
             if (varTokenToFind == null) return null;
 
-            MiniCFuncData result = null;
-            var tableList = GetReferableSymbolTablelList(fromNode);
+            VariableMiniC result = null;
+            MiniCNode curNode = fromNode;
 
-            foreach (var table in tableList)
+            while (true)
             {
-                var funcData = table.GetFuncByName(varTokenToFind.Input);
-                if (funcData != null)
+                if (curNode == null) break;
+                if (!(curNode is IHasVarInfos)) curNode = curNode.Parent as MiniCNode;
+
+                var hasVarInfo = curNode as IHasVarInfos;
+                foreach (var varInfo in hasVarInfo.VarList)
                 {
-                    result = funcData;
+                    if (varInfo.NameToken.Input != varTokenToFind.Input) continue;
+
+                    result = varInfo;
                     break;
                 }
+
+                if (result != null) break;
+            }
+
+            return result;
+        }
+
+        public static IEnumerable<FuncData> GetFuncDataList(MiniCNode fromNode, TokenData funcTokenToFind)
+        {
+            if (funcTokenToFind == null) return null;
+
+            MiniCNode curNode = fromNode;
+            List<FuncData> result = new List<FuncData>();
+
+            while (true)
+            {
+                if (curNode == null) break;
+                if (!(curNode is IHasFuncInfos)) curNode = curNode.Parent as MiniCNode;
+
+                // This would be class.
+                var hasFuncInfo = curNode as IHasFuncInfos;
+                foreach (var funcInfos in hasFuncInfo.FuncList)
+                {
+                    if (funcInfos.Name != funcTokenToFind.Input) continue;
+
+                    result.Add(funcInfos);
+                }
+
+                // only class has IHasFuncInfos feature so it doesn't need to see more.
+                break;
             }
 
             return result;

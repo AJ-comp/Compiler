@@ -1,12 +1,13 @@
 ﻿using Parse.Extensions;
 using Parse.FrontEnd.Ast;
+using System;
 using System.Collections.Generic;
 
 namespace Parse.FrontEnd
 {
     public abstract class SdtsNode
     {
-        public string Name => GetType().Name;
+        public string NodeName => GetType().Name;
         public bool IsNeedWhileIRGeneration { get; protected set; } = false;
         public AstSymbol Ast { get; protected set; }
         public SdtsNode Parent { get; set; }
@@ -16,6 +17,7 @@ namespace Parse.FrontEnd
         public IReadOnlyList<TokenData> AllTokens => Ast.ConnectedParseTree.AllTokens;
 
         public bool IsBuild { get; protected set; }
+
 
         public IReadOnlyList<SdtsNode> ErrNodes
         {
@@ -41,8 +43,8 @@ namespace Parse.FrontEnd
 
             if (Items.Count > 0)
             {
-                result += string.Format(", Expression: {0} -> ", Name);
-                result += Items.ItemsString();
+                result += string.Format(", Expression: {0} -> ", NodeName);
+                result += Items.ItemsString(PrintType.Type);
             }
 
             return result;

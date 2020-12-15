@@ -745,6 +745,15 @@ namespace ApplicationLayer.Define.Properties {
         }
         
         /// <summary>
+        ///   Set to starting project과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string SetStartingProject {
+            get {
+                return ResourceManager.GetString("SetStartingProject", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Solution과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string Solution {

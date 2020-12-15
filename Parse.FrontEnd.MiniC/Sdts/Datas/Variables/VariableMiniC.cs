@@ -5,8 +5,8 @@ using Parse.Types;
 using Parse.Types.ConstantTypes;
 using Parse.Types.VarTypes;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
-using System.Diagnostics;
 
 namespace Parse.FrontEnd.MiniC.Sdts.Datas.Variables
 {
@@ -27,12 +27,14 @@ namespace Parse.FrontEnd.MiniC.Sdts.Datas.Variables
         [Description("param")] Param
     }
 
-    public abstract class VariableMiniC : Variable, IRVar, IHasName
+    public abstract class VariableMiniC : Variable, IRVar, ISymbolData
     {
-        protected VariableMiniC(MiniCTypeInfo typeDatas, TokenData nameToken,
-                                        TokenData levelToken, TokenData dimensionToken,
-                                        int blockLevel, int offset, VarProperty varProperty, IValue value) : base(value)
+        protected VariableMiniC(Access accessType, 
+                                            MiniCTypeInfo typeDatas, TokenData nameToken,
+                                            TokenData levelToken, TokenData dimensionToken,
+                                            int blockLevel, int offset, VarProperty varProperty, IValue value) : base(value)
         {
+            AccessType = accessType;
             ConstToken = typeDatas.ConstToken;
             DataTypeToken = typeDatas.DataTypeToken;
             NameToken = nameToken;
@@ -53,6 +55,7 @@ namespace Parse.FrontEnd.MiniC.Sdts.Datas.Variables
         public int Dimension => System.Convert.ToInt32(DimensionToken?.Input);
 
 
+        public Access AccessType { get; internal set; }
         public TokenData ConstToken { get; }
         public TokenData DataTypeToken { get; }
         public TokenData NameToken { get; }
@@ -67,6 +70,8 @@ namespace Parse.FrontEnd.MiniC.Sdts.Datas.Variables
         public int Length => System.Convert.ToInt32(LevelToken?.Input);
 
         public uint PointerLevel { get; set; }
+        public List<SdtsNode> ReferenceTable => new List<SdtsNode>();
+
 
         //public MeaningErrInfoList MeaningErrorList
         //{
@@ -110,14 +115,40 @@ namespace Parse.FrontEnd.MiniC.Sdts.Datas.Variables
                                         Offset,
                                         Length,
                                         Helper.GetEnumDescription(VariableProperty));
+
+        public override bool Equals(object obj)
+        {
+            return obj is VariableMiniC c &&
+                   Name == c.Name &&
+                   Block == c.Block &&
+                   Offset == c.Offset;
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(Name, Block, Offset);
+        }
+
+        public static bool operator ==(VariableMiniC left, VariableMiniC right)
+        {
+            return EqualityComparer<VariableMiniC>.Default.Equals(left, right);
+        }
+
+        public static bool operator !=(VariableMiniC left, VariableMiniC right)
+        {
+            return !(left == right);
+        }
     }
+
+
+
 
     public abstract class ValueVarMiniC : VariableMiniC
     {
-        public ValueVarMiniC(MiniCTypeInfo typeDatas, TokenData nameToken,
+        public ValueVarMiniC(Access accessType, MiniCTypeInfo typeDatas, TokenData nameToken,
                                         TokenData levelToken, TokenData dimensionToken,
                                         int blockLevel, int offset, VarProperty varProperty, IValue value)
-                                        : base(typeDatas, nameToken, levelToken, dimensionToken, blockLevel, offset, varProperty, value)
+                                        : base(accessType, typeDatas, nameToken, levelToken, dimensionToken, blockLevel, offset, varProperty, value)
         {
         }
 
@@ -131,10 +162,10 @@ namespace Parse.FrontEnd.MiniC.Sdts.Datas.Variables
 
     public class PointerVariableMiniC : VariableMiniC, IRVar
     {
-        public PointerVariableMiniC(MiniCTypeInfo typeDatas, TokenData nameToken, 
+        public PointerVariableMiniC(Access accessType, MiniCTypeInfo typeDatas, TokenData nameToken, 
                                                 int blockLevel, int offset, VarProperty varProperty, 
                                                 uint pointerLevel, ExprNode value, DType typeName)
-                                                : base(typeDatas, nameToken, null, null, blockLevel, offset, varProperty, VariableMiniC.Convert(varProperty, value))
+                                                : base(accessType, typeDatas, nameToken, null, null, blockLevel, offset, varProperty, VariableMiniC.Convert(varProperty, value))
         {
             PointerLevel = pointerLevel;
             TypeName = typeName;

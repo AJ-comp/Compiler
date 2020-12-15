@@ -32,7 +32,7 @@
 
             if (to == DType.Bit)
             {
-                var data = ((int)Value == 0) ? false : true;
+                var data = (int)Value != 0;
                 result = new BitConstant(data, ValueState);
             }
             else if (to == DType.Byte)

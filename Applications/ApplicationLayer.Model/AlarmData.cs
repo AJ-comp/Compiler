@@ -39,13 +39,8 @@ namespace ApplicationLayer.Models
 
         public override int GetHashCode()
         {
-            var hashCode = -1608452051;
-            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Code);
-            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(FullPath);
-            hashCode = hashCode * -1521134295 + TokenIndex.GetHashCode();
-            return hashCode;
+            return System.HashCode.Combine(Code, FullPath, TokenIndex);
         }
-
 
         private AlarmFileInfo _alarmFileInfo;
         private AlarmTokenInfo _alarmTokenInfo;

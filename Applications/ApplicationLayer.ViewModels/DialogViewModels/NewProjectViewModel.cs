@@ -1,4 +1,5 @@
-﻿using ApplicationLayer.ViewModels.Interfaces;
+﻿using ApplicationLayer.Models;
+using ApplicationLayer.ViewModels.Interfaces;
 using ApplicationLayer.ViewModels.Messages;
 using ApplicationLayer.ViewModels.SubViewModels;
 using GalaSoft.MvvmLight.Command;
@@ -99,11 +100,14 @@ namespace ApplicationLayer.ViewModels.DialogViewModels
 
         private void OnCreate(Action action)
         {
-            Target target = Activator.CreateInstance(this.ProjectSelection.SelectedTerminalItem) as Target;
-            Messenger.Default.Send(new AddProjectMessage(System.IO.Path.Combine(this.projectPath, this.projectName), 
-                                                                                     this.projectName, 
-                                                                                     this.ProjectSelection.SelectedProject.Grammar, 
-                                                                                     target));
+            Target target = Activator.CreateInstance(ProjectSelection.SelectedTerminalItem) as Target;
+
+            var selectedProject = ProjectSelection.SelectedProject;
+            var projectData = new ProjectData(System.IO.Path.Combine(projectPath, projectName),
+                                                               projectName,
+                                                               new ProjectType(selectedProject.Grammar, selectedProject.ProjectKind));
+
+            Messenger.Default.Send(new AddProjectMessage(projectData, target));
 
             action?.Invoke();
         }

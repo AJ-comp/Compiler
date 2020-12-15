@@ -148,8 +148,9 @@ namespace Parse.FrontEnd.Parsers.Datas
             var prevBlock = this[blockIndexToCheck];
             var nextBlock = this[blockIndexToCheck + 1];
 
-            // this means  (check prevBlock[Last] afterStack == nextBlock[First] beforeStack)
             if (prevBlock.Units.Count == 0 || nextBlock.Units.Count == 0) return false;
+
+            // this means  (check prevBlock[Last] afterStack == nextBlock[First] beforeStack)
             return prevBlock.Units.Last().AfterStack.Stack.SequenceEqual(nextBlock.Units.First().BeforeStack.Stack);
         }
 

@@ -27,16 +27,18 @@
             <Border x:Name="border" BorderThickness="1" VerticalAlignment="Stretch">
                     <VirtualizingStackPanel Name="vStack" Orientation="Horizontal">
                         <Image x:Name="image" Width="24" Height="24" Margin="0,0,10,0"/>
-                        <TextBlock Text="{Binding ProjectType}" Width="100"/>
+                        <TextBlock Text="{Binding ProjectKind, 
+                                                    Converter={localConverters:EnumToStringConverter},
+                                                    ConverterParameter=true}" Width="100"/>
                         <TextBlock Text="{Binding Grammar}" />
                     </VirtualizingStackPanel>
                 </Border>
 
             <DataTemplate.Triggers>
-                <DataTrigger Binding="{Binding ProjectType}" Value="Project">
+                <DataTrigger Binding="{Binding ProjectKind}" Value="Execute">
                     <Setter TargetName="image" Property="Source" Value="{DynamicResource MCProject24ImagePath}"/>
                 </DataTrigger>
-                <DataTrigger Binding="{Binding ProjectType}" Value="LibraryProject">
+                <DataTrigger Binding="{Binding ProjectKind}" Value="Library">
                     <Setter TargetName="image" Property="Source" Value="{DynamicResource MCLibProject24ImagePath}"/>
                 </DataTrigger>
             </DataTemplate.Triggers>

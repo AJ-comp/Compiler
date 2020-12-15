@@ -1,13 +1,15 @@
 ﻿using ApplicationLayer.Common;
+using Parse.FrontEnd.MiniC.Sdts.AstNodes;
 using Parse.FrontEnd.MiniC.Sdts.Datas;
 using Parse.FrontEnd.MiniC.Sdts.Datas.Variables;
 using System;
+using System.Linq;
 
 namespace ApplicationLayer.Models.SolutionPackage.MiniCPackage
 {
     public class FuncTreeNodeModel : TreeNodeModel
     {
-        private MiniCFuncData _funcData;
+        private FuncData _funcData;
 
         public string ReturnType => (_funcData == null) ? string.Empty : _funcData.ReturnType.ToString();
         public string Name => _funcData.Name;
@@ -20,11 +22,13 @@ namespace ApplicationLayer.Models.SolutionPackage.MiniCPackage
             get
             {
                 string result = Name + "(";
-                foreach(var param in _funcData.ParamVars)
+                var paramVars = _funcData.ParamVars;
+
+                foreach (var param in paramVars)
                 {
                     result += param.DataType + ",";
                 }
-                if (_funcData.ParamVars.Count > 0) result = result.Substring(0, result.Length - 1);
+                if (paramVars.Count() > 0) result = result.Substring(0, result.Length - 1);
                 result += ")";
 
                 if (ReturnType != MiniCDataType.Void.ToString()) result += " : " + ReturnType.ToString();
@@ -38,7 +42,7 @@ namespace ApplicationLayer.Models.SolutionPackage.MiniCPackage
 
         public override event EventHandler<FileChangedEventArgs> Changed;
 
-        public FuncTreeNodeModel(MiniCFuncData funcData, bool canReference = true)
+        public FuncTreeNodeModel(FuncData funcData, bool canReference = true)
         {
             _funcData = funcData;
             CanReference = canReference;

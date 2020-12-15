@@ -19,8 +19,8 @@ namespace ApplicationLayer.ViewModels.SubViewModels
         private List<DetailType> terminalList = new List<DetailType>();
         private ISimilarityComparison similarity = new LikeVSSimilarityComparison();
 
-        public ObservableCollection<ProjectData> TotalProjectList { get; private set; } = new ObservableCollection<ProjectData>();
-        public ObservableCollection<ProjectData> AvailableProjectList { get; private set; } = new ObservableCollection<ProjectData>();
+        public ObservableCollection<ProjectType> TotalProjectList { get; private set; } = new ObservableCollection<ProjectType>();
+        public ObservableCollection<ProjectType> AvailableProjectList { get; private set; } = new ObservableCollection<ProjectType>();
         public ObservableCollection<string> SupportLanguages { get; private set; } = new ObservableCollection<string>();
         public ObservableCollection<ClassHierarchyData> TotalCPUs { get; private set; } = new ObservableCollection<ClassHierarchyData>();
         public ObservableCollection<DetailType> FilterCPUs { get; private set; } = new ObservableCollection<DetailType>();
@@ -161,8 +161,8 @@ namespace ApplicationLayer.ViewModels.SubViewModels
             }
         }
 
-        private ProjectData selectedProject;
-        public ProjectData SelectedProject
+        private ProjectType selectedProject;
+        public ProjectType SelectedProject
         {
             get => this.selectedProject;
             set
@@ -174,10 +174,10 @@ namespace ApplicationLayer.ViewModels.SubViewModels
 
         public ProjectSelectionViewModel()
         {
-            this.TotalProjectList.Add(new ProjectData() { Grammar = new MiniCGrammar(), ProjectType = ProjectData.ProjectTypes.Project });
-            this.TotalProjectList.Add(new ProjectData() { Grammar = new MiniCGrammar(), ProjectType = ProjectData.ProjectTypes.LibraryProject });
-            this.TotalProjectList.Add(new ProjectData() { Grammar = new AJGrammar(), ProjectType = ProjectData.ProjectTypes.Project });
-            this.TotalProjectList.Add(new ProjectData() { Grammar = new AJGrammar(), ProjectType = ProjectData.ProjectTypes.LibraryProject });
+            this.TotalProjectList.Add(new ProjectType(new MiniCGrammar(), ProjectKinds.Execute));
+            this.TotalProjectList.Add(new ProjectType(new MiniCGrammar(), ProjectKinds.Library));
+            this.TotalProjectList.Add(new ProjectType(new AJGrammar(), ProjectKinds.Execute));
+            this.TotalProjectList.Add(new ProjectType(new AJGrammar(), ProjectKinds.Library));
 
             ClassHierarchyGenerator classHierarchyGenerator = new ClassHierarchyGenerator();
 
@@ -187,6 +187,7 @@ namespace ApplicationLayer.ViewModels.SubViewModels
 
             this.FilterCPUs.CollectionChanged += FilterCPUs_CollectionChanged;
         }
+
 
         private void FilterCPUs_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {

@@ -47,7 +47,7 @@ namespace Parse.FrontEnd.MiniC.Sdts.AstNodes.ExprNodes
             var varData = MiniCUtilities.GetVarRecordFromReferableST(this, IdentToken);
             if (varData != null) return false;
 
-            var funcData = MiniCUtilities.GetFuncDataFromReferableST(this, IdentToken);
+            var funcData = MiniCUtilities.GetFuncDataList(this, IdentToken);
             if (funcData != null) return false;
 
             ConnectedErrInfoList.Add

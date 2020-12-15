@@ -9,7 +9,7 @@ namespace Parse.FrontEnd.MiniC.Sdts.AstNodes
 {
     public class ProgramNode : MiniCNode
     {
-        public IEnumerable<NamespaceNode> NamespaceNodes => _namespaceNodes;
+        public IEnumerable<NamespaceData> NamespaceDatas => _namespaceDatas;
 
         public Func<SdtsNode, IRExpression> ConvertFunc { get; set; }
 
@@ -22,7 +22,7 @@ namespace Parse.FrontEnd.MiniC.Sdts.AstNodes
         // [n+1:y] : Namespace? (AstNonTerminal)
         public override SdtsNode Build(SdtsParams param)
         {
-            _namespaceNodes.Clear();
+            _namespaceDatas.Clear();
 
             SymbolTable = (param as MiniCSdtsParams).SymbolTable;
 
@@ -30,23 +30,22 @@ namespace Parse.FrontEnd.MiniC.Sdts.AstNodes
             {
                 var minicNode = item as MiniCNode;
 
-                // Global variable
+                // using statement list
                 if (minicNode is UsingStNode)
                 {
 //                    _varNodes.Add(minicNode.Build(param) as UsingStNode);
                 }
-                // Global function
+                // namespace statement list
                 else if (minicNode is NamespaceNode)
                 {
                     var node = minicNode.Build(param) as NamespaceNode;
-                    SymbolTable.NamespaceTable.CreateNewBlock(node.NamespaceData, this);
-                    _namespaceNodes.Add(node);
+                    _namespaceDatas.Add(node.NamespaceData);
                 }
             }
 
             return this;
         }
 
-        private List<NamespaceNode> _namespaceNodes = new List<NamespaceNode>();
+        private List<NamespaceData> _namespaceDatas = new List<NamespaceData>();
     }
 }

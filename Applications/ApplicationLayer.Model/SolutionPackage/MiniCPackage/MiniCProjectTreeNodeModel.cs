@@ -16,11 +16,12 @@ namespace ApplicationLayer.Models.SolutionPackage.MiniCPackage
         /********************************************************************************************
          * private field section
          ********************************************************************************************/
-        private ProjectProperty debugConfigureRecentSaved = new ProjectProperty();
-        private ProjectProperty releaseConfigureRecentSaved = new ProjectProperty();
+        private bool _startingProject = false;
+        private ProjectProperty _debugConfigureRecentSaved = new ProjectProperty();
+        private ProjectProperty _releaseConfigureRecentSaved = new ProjectProperty();
 
-        private FilterTreeNodeModel references = new FilterTreeNodeModel(CommonResource.References);
-        private FilterTreeNodeModel outerDependenies = new FilterTreeNodeModel(CommonResource.ExternDependency);
+        private FilterTreeNodeModel _references = new FilterTreeNodeModel(CommonResource.References);
+        private FilterTreeNodeModel _outerDependenies = new FilterTreeNodeModel(CommonResource.ExternDependency);
 
 
 
@@ -89,20 +90,20 @@ namespace ApplicationLayer.Models.SolutionPackage.MiniCPackage
          ********************************************************************************************/
         [XmlIgnore] public FilterTreeNodeModel References
         {
-            get => references;
+            get => _references;
             set
             {
-                references = value;
+                _references = value;
                 OnPropertyChanged(nameof(References));
             }
         }
 
         [XmlIgnore] public FilterTreeNodeModel OuterDependencies
         {
-            get => outerDependenies;
+            get => _outerDependenies;
             set
             {
-                outerDependenies = value;
+                _outerDependenies = value;
                 OnPropertyChanged(nameof(OuterDependencies));
             }
         }
@@ -112,14 +113,15 @@ namespace ApplicationLayer.Models.SolutionPackage.MiniCPackage
         /********************************************************************************************
          * override property section
          ********************************************************************************************/
-        public override string ProjectType => LanguageExtensions.MiniCSource;
+        public override string LanguageType => LanguageExtensions.MiniCSource;
 
         public override bool IsChanged
         {
             get
             {
-                if (debugConfigureRecentSaved.Equals(DebugConfigure) == false) return true;
-                if (releaseConfigureRecentSaved.Equals(ReleaseConfigure) == false) return true;
+                if (_startingProject != StartingProject) return true;
+                if (_debugConfigureRecentSaved.Equals(DebugConfigure) == false) return true;
+                if (_releaseConfigureRecentSaved.Equals(ReleaseConfigure) == false) return true;
 
                 List<FilterFileTreeNodeModel> dataToCompare = new List<FilterFileTreeNodeModel>();
                 foreach(var child in this.Children)
@@ -167,20 +169,22 @@ namespace ApplicationLayer.Models.SolutionPackage.MiniCPackage
         /********************************************************************************************
          * constructor section
          ********************************************************************************************/
-        public MiniCProjectTreeNodeModel() : base(string.Empty, string.Empty)
+        /// <summary>
+        /// This constructor needs to serialize or 
+        /// </summary>
+        public MiniCProjectTreeNodeModel()
         {
-            this.references.IsEditable = false;
-            this.outerDependenies.IsEditable = false;
+            this._references.IsEditable = false;
+            this._outerDependenies.IsEditable = false;
         }
 
-        public MiniCProjectTreeNodeModel(string path, string projName, Target target)
-            : base(path, projName + string.Format(".{0}proj", LanguageExtensions.MiniCSource))
+        public MiniCProjectTreeNodeModel(ProjectData projectData, Target target) : base(projectData)
         {
             this.DebugConfigure.Target = target?.Name;
             this.ReleaseConfigure.Target = target?.Name;
 
-            this.references.IsEditable = false;
-            this.outerDependenies.IsEditable = false;
+            this._references.IsEditable = false;
+            this._outerDependenies.IsEditable = false;
 
             this.SyncWithCurrentValue();
         }
@@ -222,6 +226,8 @@ namespace ApplicationLayer.Models.SolutionPackage.MiniCPackage
 
         public override void SyncWithCurrentValue()
         {
+            _startingProject = StartingProject;
+
             FilterFiles.Clear();
             foreach(var child in Children)
             {
@@ -240,6 +246,8 @@ namespace ApplicationLayer.Models.SolutionPackage.MiniCPackage
 
         public override void LoadElement()
         {
+            _startingProject = StartingProject;
+
             foreach (var item in FilterFiles)
             {
                 var filterDataTree = item.FilterDataTree;

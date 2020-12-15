@@ -400,7 +400,7 @@ namespace ApplicationLayer.WpfApp.Commands
 
 
         public static readonly RelayUICommand<ProjectTreeNodeModel> SetStartingProject
-            = new RelayUICommand<ProjectTreeNodeModel>(CommonResource.OpenFolderFromExplorer, (treeNode) =>
+            = new RelayUICommand<ProjectTreeNodeModel>(CommonResource.SetStartingProject, (treeNode) =>
             {
                 if (treeNode.StartingProject) return;
 
@@ -453,7 +453,7 @@ namespace ApplicationLayer.WpfApp.Commands
                 // create bootstrap and linker script
                 var bootstrapName = "vector.s";
                 var linkerScriptName = "stm32.lds";
-                CommandLogic.CreateStartingFile(solution.BinFolderPath, bootstrapName, linkerScriptName);
+                CommandLogic.CreateStartingFile(solution.BinFolderPath, bootstrapName, linkerScriptName, solution.StartingProject.MCUType);
 
                 // create makefile and execute it
                 var allMakeFileSnippets = CommandLogic.CreateAllMakeFileSection(bootstrapName, 

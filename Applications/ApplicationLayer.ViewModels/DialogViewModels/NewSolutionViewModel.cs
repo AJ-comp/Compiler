@@ -112,11 +112,11 @@ namespace ApplicationLayer.ViewModels.DialogViewModels
 
         private void OnCreate(Action action)
         {
-            Target target = Activator.CreateInstance(this.ProjectSelection.SelectedTerminalItem) as Target;
-            Messenger.Default.Send(new CreateSolutionMessage(this.Path, 
-                                                                                          this.SolutionName, 
-                                                                                          this.CreateSolutionFolder, 
-                                                                                          this.ProjectSelection.SelectedProject.Grammar, 
+            Target target = Activator.CreateInstance(ProjectSelection.SelectedTerminalItem) as Target;
+            Messenger.Default.Send(new CreateSolutionMessage(Path, 
+                                                                                          SolutionName, 
+                                                                                          CreateSolutionFolder, 
+                                                                                          ProjectSelection.SelectedProject, 
                                                                                           target));
 
             action?.Invoke();

@@ -13,9 +13,11 @@ namespace ApplicationLayer.Models.GrammarPackages.MiniCPackage
     {
         public override string Extension { get; } = LanguageExtensions.MiniCSource;
 
-        public override ProjectTreeNodeModel CreateEmptyProject(string solutionPath, string projectPath, string projectName, Target target)
+        public override ProjectTreeNodeModel CreateEmptyProject(string solutionPath, 
+                                                                                             ProjectData projectData,
+                                                                                             Target target)
         {
-            MiniCProjectTreeNodeModel result = new MiniCProjectTreeNodeModel(projectPath, projectName, target)
+            MiniCProjectTreeNodeModel result = new MiniCProjectTreeNodeModel(projectData, target)
             {
                 OuterDependencies = new FilterTreeNodeModel(CommonResource.ExternDependency)
             };
@@ -32,9 +34,11 @@ namespace ApplicationLayer.Models.GrammarPackages.MiniCPackage
             return result;
         }
 
-        public override ProjectTreeNodeModel CreateDefaultProject(string solutionPath, string projectPath, string projectName, Target target)
+        public override ProjectTreeNodeModel CreateDefaultProject(string solutionPath, 
+                                                                                               ProjectData projectData,
+                                                                                               Target target)
         {
-            MiniCProjectTreeNodeModel result = new MiniCProjectTreeNodeModel(projectPath, projectName, target)
+            MiniCProjectTreeNodeModel result = new MiniCProjectTreeNodeModel(projectData, target)
             {
                 OuterDependencies = new FilterTreeNodeModel(CommonResource.ExternDependency)
             };
@@ -45,15 +49,16 @@ namespace ApplicationLayer.Models.GrammarPackages.MiniCPackage
             var headerFilter = new FilterTreeNodeModel(CommonResource.HeaderFiles);
             result.AddFilter(headerFilter);
 
-            string path = Path.Combine(solutionPath, projectPath);
-            string fileName = string.Format("main.{0}", this.Extension);
-            string defaultContent = string.Format("namespace {1}{0}" +
-                                                                   "void main(){0}{{0}}{0}",
-                                                                   Environment.NewLine,
-                                                                   projectName);
+            string projAbsPath = Path.Combine(solutionPath, projectData.ProjectName);
+            string fileName = string.Format("main.{0}", Extension);
 
-            Directory.CreateDirectory(path);
-            fileName = FileExtend.CreateFile(path, fileName, defaultContent);
+            string defaultContent = string.Format("namespace {0}" + Environment.NewLine, projectData.ProjectName);
+            defaultContent += "{" + Environment.NewLine;
+            defaultContent += GetDefaultFunction("main");
+            defaultContent += "}" + Environment.NewLine;
+
+            Directory.CreateDirectory(projAbsPath);
+            fileName = FileExtend.CreateFile(projAbsPath, fileName, defaultContent);
 
             var sourceFilter = new FilterTreeNodeModel(CommonResource.SourceFiles);
             var sourceFile = new SourceFileTreeNodeModel(string.Empty, fileName);
@@ -61,6 +66,16 @@ namespace ApplicationLayer.Models.GrammarPackages.MiniCPackage
             result.AddFilter(sourceFilter);
 
             result.SyncWithCurrentValue();
+
+            return result;
+        }
+
+
+        private string GetDefaultFunction(string functionName)
+        {
+            string result = string.Format("    void {0}()" + Environment.NewLine, functionName);
+            result += "    {" + Environment.NewLine;
+            result += "    }" + Environment.NewLine;
 
             return result;
         }

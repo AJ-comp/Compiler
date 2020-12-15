@@ -85,11 +85,7 @@ namespace ApplicationLayer.Models.SolutionPackage
 
         public override int GetHashCode()
         {
-            int hashCode = 1426925678;
-            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(FilterPath);
-            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Path);
-            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(FileName);
-            return hashCode;
+            return System.HashCode.Combine(FilterPath, Path, FileName);
         }
     }
 }

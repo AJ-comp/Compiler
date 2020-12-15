@@ -1,4 +1,4 @@
-﻿using ApplicationLayer.Models.SolutionPackage;
+﻿using ApplicationLayer.Models;
 using GalaSoft.MvvmLight.Messaging;
 using Parse.BackEnd.Target;
 using Parse.FrontEnd.Grammars;
@@ -13,18 +13,21 @@ namespace ApplicationLayer.ViewModels.Messages
     {
         public string SolutionPath { get; }
         public string SolutionName { get; }
-        public Grammar Language { get; }
+        public ProjectType ProjectType { get; }
         public Target MachineTarget { get; }
 
-        public CreateSolutionMessage(string solutionPath, string solutionName, bool isCreateSolutionFolder,
-                                                Grammar language, Target machineTarget)
+        public CreateSolutionMessage(string solutionPath, 
+                                                    string solutionName, 
+                                                    bool isCreateSolutionFolder,
+                                                    ProjectType projectType,
+                                                    Target machineTarget)
         {
             if (isCreateSolutionFolder)
-                this.SolutionPath = Path.Combine(solutionPath, solutionName);
+                SolutionPath = Path.Combine(solutionPath, solutionName);
 
-            this.SolutionName = solutionName;
-            this.Language = language;
-            this.MachineTarget = machineTarget;
+            SolutionName = solutionName;
+            ProjectType = projectType;
+            MachineTarget = machineTarget;
         }
     }
 
@@ -50,19 +53,13 @@ namespace ApplicationLayer.ViewModels.Messages
     /// </summary>
     public class AddProjectMessage : MessageBase
     {
-        public string ProjectPath { get; }
-        public string ProjectName { get; }
-        public Grammar Language { get; }
+        public ProjectData ProjectData { get; }
         public Target MachineTarget { get; }
 
-        public string ProjectFullPath => Path.Combine(this.ProjectPath, this.ProjectName);
-
-        public AddProjectMessage(string projectPath, string projectName, Grammar language, Target machineTarget)
+        public AddProjectMessage(ProjectData projectData, Target machineTarget)
         {
-            this.ProjectPath = projectPath;
-            this.ProjectName = projectName;
-            this.Language = language;
-            this.MachineTarget = machineTarget;
+            ProjectData = projectData;
+            MachineTarget = machineTarget;
         }
     }
 

@@ -2,24 +2,18 @@
 using Parse.FrontEnd.MiniC.Sdts.AstNodes.StatementNodes;
 using Parse.FrontEnd.MiniC.Sdts.Datas;
 using Parse.FrontEnd.MiniC.Sdts.Datas.Variables;
-using Parse.MiddleEnd.IR.Datas;
 using System.Collections.Generic;
 
 namespace Parse.FrontEnd.MiniC.Sdts.AstNodes
 {
-    public class FuncDefNode : MiniCNode
+    public class FuncDefNode : MiniCNode, IHasVarInfos
     {
         public FuncHeadNode FuncHead { get; private set; }
         public CompoundStNode CompoundSt { get; private set; }
 
-        public int Offset { get; private set; }
+        public IEnumerable<VariableMiniC> VarList => FuncData?.ParamVars;
 
-        public MiniCFuncData FuncData
-            => new MiniCFuncData(FuncHead.ReturnType.MiniCTypeInfo,
-                                               FuncHead.NameToken,
-                                               0,
-                                               FuncHead.ParamVarList.ToVarDataList);
-
+        public FuncData FuncData { get; private set; }
 
         public FuncDefNode(AstSymbol node) : base(node)
         {
@@ -27,40 +21,33 @@ namespace Parse.FrontEnd.MiniC.Sdts.AstNodes
         }
 
 
-        // [0] : FuncHead (AstNonTerminal)
-        // [1] : CompoundSt (AstNonTerminal)
+        // [0] : Accessor (AccesserNode)
+        // [0] : FuncHead (FuncHeadNode)
+        // [1] : CompoundSt (CompoundStNode)
         public override SdtsNode Build(SdtsParams param)
         {
             // it needs to clone an param
             var newParam = CreateParamForNewBlock(param);
             SymbolTable = newParam.SymbolTable;
+
+            var accesserNode = Items[0].Build(newParam) as AccesserNode;
+            var accessState = accesserNode.AccessState;
             
             // build FuncHead node
-            FuncHead = Items[0].Build(newParam) as FuncHeadNode;
+            FuncHead = Items[1].Build(newParam) as FuncHeadNode;
 
             // build CompoundSt node
-            CompoundSt = Items[1].Build(newParam) as CompoundStNode;
+            CompoundSt = Items[2].Build(newParam) as CompoundStNode;
+
+            FuncData = new FuncData(accessState, 
+                                                    FuncHead.ReturnType.MiniCTypeInfo, 
+                                                    FuncHead.NameToken, 
+                                                    0, 
+                                                    FuncHead.ParamVarList.ToVarDataList);
+
+            FuncData.ReferenceTable.Add(this);
 
             return this;
-        }
-
-        public IRFuncData ToIRFuncData()
-        {
-            List<IRVar> paramVars = new List<IRVar>();
-
-            foreach (var varTable in SymbolTable.AllVarTable)
-            {
-                foreach (var varRecord in varTable)
-                    if (varRecord.DefineField.VariableProperty == VarProperty.Param) paramVars.Add(varRecord.DefineField);
-            }
-
-            FuncHeadNode funcHead = FuncHead;
-
-            return new IRFuncData(paramVars,
-                                                funcHead.ReturnType.Const,
-                                                IRConverter.ToIRReturnType(funcHead.ReturnType.DataType),
-                                                funcHead.Name,
-                                                0);
         }
     }
 }

@@ -36,32 +36,6 @@ namespace ApplicationLayer.Common.Utilities
             return parentTypeHier;
         }
 
-        private IEnumerable<Assembly> GetAllLoadedAssemblyList()
-        {
-            //                var loadedAssemblies = AppDomain.CurrentDomain.GetAssemblies().ToList();
-            //                var loadedPaths = loadedAssemblies.Select(a => a.Location).ToArray();
-
-            var referencedPaths = Directory.GetFiles(AppDomain.CurrentDomain.BaseDirectory, "*.dll");
-            //                var toLoad = referencedPaths.Where(r => !loadedPaths.Contains(r, StringComparer.InvariantCultureIgnoreCase)).ToList();
-            //                toLoad.ForEach(path => loadedAssemblies.Add(AppDomain.CurrentDomain.Load(AssemblyName.GetAssemblyName(path))));
-
-            List<Assembly> result = new List<Assembly>();
-
-            foreach (var fileName in referencedPaths)
-            {
-                try
-                {
-                    result.Add(Assembly.Load(AssemblyName.GetAssemblyName(fileName)));
-                }
-                catch
-                {
-
-                }
-            }
-
-            return result;
-        }
-
         private static ClassHierarchyData FindNode(HashSet<ClassHierarchyData> list, Type targetToFind)
         {
             ClassHierarchyData result = null;
@@ -78,21 +52,9 @@ namespace ApplicationLayer.Common.Utilities
             return result;
         }
 
-        public IEnumerable<Type> GetAllTypesOfLoadedAssemblies(IEnumerable<Assembly> loadedAssemblies)
-        {
-            List<Type> result = new List<Type>();
-
-            foreach (Assembly assembly in loadedAssemblies)
-            {
-                foreach (Type type in assembly.GetTypes()) result.Add(type);
-            }
-
-            return result;
-        }
-
         public ClassHierarchyData ToHierarchyDataDirectionChild(Type rootType)
         {
-            var loadedAssemblyList = this.GetAllLoadedAssemblyList();
+            var loadedAssemblyList = AssemblyManager.GetAllLoadedAssemblyList();
 
             this.sortedList.Add(rootType.Name, rootType);
 

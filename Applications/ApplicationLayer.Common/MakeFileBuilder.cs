@@ -64,12 +64,14 @@ namespace ApplicationLayer.Common
             var linkingParam = string.Empty;
             foreach (var refFile in targetCodeFiles) linkingParam += " " + refFile;
 
-            List<string> contents = new List<string>();
-            contents.Add(string.Format("arm-none-eabi-ld {0} -T{1} -Map {2} --gc-sections -o {3}",
-                                                        linkingParam, linkerFullPath, mapFullPath, fileFullPath));
+            List<string> contents = new List<string>
+            {
+                string.Format("arm-none-eabi-ld {0} -T{1} -Map {2} --gc-sections -o {3}",
+                                                        linkingParam, linkerFullPath, mapFullPath, fileFullPath),
 
-            contents.Add(string.Format("arm-none-eabi-objdump -hD {0} > {1}", fileFullPath, disassemFullPath));
-            contents.Add(string.Format("arm-none-eabi-objcopy {0} -O binary {1}", fileFullPath, binFullPath));
+                string.Format("arm-none-eabi-objdump -hD {0} > {1}", fileFullPath, disassemFullPath),
+                string.Format("arm-none-eabi-objcopy {0} -O binary {1}", fileFullPath, binFullPath)
+            };
 
             return new MakeFileSectionStruct(binFullPath, targetCodeFiles, contents);
         }

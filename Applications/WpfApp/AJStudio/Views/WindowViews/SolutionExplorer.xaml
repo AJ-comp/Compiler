@@ -126,6 +126,13 @@
                         <!-- setting a variable node -->
                         <DataTrigger Binding="{Binding Tag,
                                             Converter={converter:DataTypeConverter}}"
+                                            Value="{x:Type mcModels:ClassTreeNodeModel}">
+                            <Setter TargetName="image" Property="Source" Value="{DynamicResource Class16ImagePath}"/>
+                        </DataTrigger>
+
+                        <!-- setting a variable node -->
+                        <DataTrigger Binding="{Binding Tag,
+                                            Converter={converter:DataTypeConverter}}"
                                             Value="{x:Type mcModels:VarTreeNodeModel}">
                             <Setter TargetName="image" Property="Source" Value="{DynamicResource Var16ImagePath}"/>
                         </DataTrigger>

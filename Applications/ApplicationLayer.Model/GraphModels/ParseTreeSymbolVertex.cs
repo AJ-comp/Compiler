@@ -18,7 +18,7 @@ namespace ApplicationLayer.Models.GraphModels
                 else if(TreeSymbol is ParseTreeNonTerminal)
                 {
                     var treeNonTerminal = (TreeSymbol as ParseTreeNonTerminal);
-                    result = (treeNonTerminal.SignPost.MeaningUnit == null) ? false : true;
+                    result = treeNonTerminal.SignPost.MeaningUnit != null;
                 }
 
                 return result;

@@ -62,15 +62,17 @@ namespace ApplicationLayer.Models.SolutionPackage
             return result;
         }
 
-        public static ProjectTreeNodeModel CreateProjectTreeNodeModel(string path, string fileName, Target target)
+        /*
+        public static ProjectTreeNodeModel CreateProjectTreeNodeModel(ProjectData projectData, Target target)
         {
             ProjectTreeNodeModel result = null;
 
-            if (Path.GetExtension(fileName) == "." + LanguageExtensions.MiniCSource + "proj")
-                result = new MiniCProjectTreeNodeModel(path, fileName, target);
+            if (Path.GetExtension(projectData.ProjectName) == "." + LanguageExtensions.MiniCSource + "proj")
+                result = new MiniCProjectTreeNodeModel(path, fileName, projectType, target);
 
             return result;
         }
+        */
 
         public static Type GetType(string fileName)
         {

@@ -214,17 +214,20 @@ namespace ApplicationLayer.Models.SolutionPackage
         /********************************************************************************************
          * public static method section
          ********************************************************************************************/
-        public static SolutionTreeNodeModel Create(string solutionPath, string solutionName, Grammar grammar, Target target)
+        public static SolutionTreeNodeModel Create(string solutionPath, string solutionName, ProjectType projectType, Target target)
         {
             SolutionTreeNodeModel result = new SolutionTreeNodeModel(solutionPath, solutionName);
             result.Version = 1.0;
 
-            ProjectGenerator projectGenerator = ProjectGenerator.CreateProjectGenerator(grammar);
+            ProjectGenerator projectGenerator = ProjectGenerator.CreateProjectGenerator(projectType.Grammar);
             if (projectGenerator == null) return result;
 
+            var projectData = new ProjectData(System.IO.Path.Combine(solutionPath, result.FileNameWithoutExtension),
+                                                                result.FileNameWithoutExtension,
+                                                                projectType);
+
             var newProject = projectGenerator.CreateDefaultProject(solutionPath, 
-                                                                                              result.FileNameWithoutExtension, 
-                                                                                              result.FileNameWithoutExtension, 
+                                                                                              projectData, 
                                                                                               target);
             result.AddProject(newProject);
             result.SyncWithCurrentValue();

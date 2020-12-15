@@ -35,9 +35,11 @@ namespace Parse.FrontEnd.MiniC.ErrorHandler
 
             if (prevToken.Kind == grammar.Return)
             {
-                List<Terminal[]> param = new List<Terminal[]>();
-                param.Add(new Terminal[] { grammar.SemiColon });
-                param.Add(new Terminal[] { MiniCGrammar.Ident, grammar.SemiColon });
+                List<Terminal[]> param = new List<Terminal[]>
+                {
+                    new Terminal[] { grammar.SemiColon },
+                    new Terminal[] { MiniCGrammar.Ident, grammar.SemiColon }
+                };
 
                 return TryRecovery(param, dataForRecovery);
             }

@@ -39,7 +39,7 @@ namespace Parse.FrontEnd.Parsers.LR
                 int startIndex = (!range.Item1.IsEmpty) ? range.Item1.StartIndex : range.Item2.StartIndex;
                 if (startIndex < 0) continue;
 
-                // parsing update range.
+                // parsing only update range.
                 for (int i = startIndex; i <= target.Count; i++)
                 {
                     // check if it has to parsing

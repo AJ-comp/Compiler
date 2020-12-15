@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
-using System.Runtime.CompilerServices;
 
 namespace Parse.Extensions
 {
+    public enum PrintType { String, Type, Property, Function }
+
     public static class ListExtensionMethods
     {
         public static List<T> ToReverseList<T>(this IList<T> obj)
@@ -106,38 +105,45 @@ namespace Parse.Extensions
         }
 
 
-        public static string ItemsString<T>(this IEnumerable<T> obj, ScopeSyntax scopeSyntax, string propertyName = "")
-        {
-            string result = string.Empty;
+        //public static string ItemsString<T>(this IEnumerable<T> obj, ScopeSyntax scopeSyntax, string propertyName = "")
+        //{
+        //    string result = string.Empty;
 
-            result += scopeSyntax.StartSyntax;
-            result += ItemsString(obj, propertyName);
-            result += scopeSyntax.EndSyntax;
+        //    result += scopeSyntax.StartSyntax;
+        //    result += ItemsString(obj, propertyName);
+        //    result += scopeSyntax.EndSyntax;
 
-            return result;
-        }
+        //    return result;
+        //}
 
-        public static string ItemsString<T>(this IEnumerable<T> obj, string propertyName = "")
+        public static string ItemsString<T>(this IEnumerable<T> obj, PrintType printType, string name = "", string connector = ", ")
         {
             string result = string.Empty;
 
             foreach (var item in obj)
             {
-                string data = item.GetType().Name;
+                string data = string.Empty;
 
                 try
                 {
-                    if (propertyName.Length > 0)
-                        data = item.GetType().GetProperty(propertyName).GetValue(item) as string;
+                    data = (printType == PrintType.Type) ? item.GetType().Name
+                            : (printType == PrintType.String) ? item.ToString()
+                            : (printType == PrintType.Property) ? item.GetType()
+                                                                                         .GetProperty(name)
+                                                                                         .GetValue(item) as string
+                            : (printType == PrintType.Function) ? item.GetType()
+                                                                                         .GetMethod(name)
+                                                                                         .Name
+                            : string.Empty;
                 }
                 catch
                 {
                     data = item.GetType().Name;
                 }
 
-                result += data + ", ";
+                result += data + connector;
             }
-            if (obj.Count() > 0) result = result.Substring(0, result.Length - 2); // remove last string ", ";
+            if (obj.Count() > 0) result = result.Substring(0, result.Length - connector.Length); // remove last string ", ";
 
             return result;
         }

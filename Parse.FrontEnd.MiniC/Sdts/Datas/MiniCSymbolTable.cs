@@ -1,4 +1,5 @@
-﻿using Parse.FrontEnd.MiniC.Sdts.Datas.Variables;
+﻿using Parse.FrontEnd.MiniC.Sdts.AstNodes;
+using Parse.FrontEnd.MiniC.Sdts.Datas.Variables;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -10,9 +11,26 @@ namespace Parse.FrontEnd.MiniC.Sdts.Datas
     {
         public MiniCSymbolTable Base { get; }
 
-        public FuncTable FuncTable => _funcTable;
         public VarTable VarTable => _varTable;
-        public NamespaceTable NamespaceTable => _namespaceTable;
+
+        /// <summary>
+        /// For example this class has the structure as below.
+        /// namespace 1 - Ref1
+        ///                     - Ref2
+        ///                     - Ref3
+        /// namespace 2 - Ref1
+        ///                     - Ref2
+        ///                     - Ref3
+        /// funcdef 1       - Ref1
+        ///                     - Ref2
+        ///                     - Ref3
+        /// funcdef 2       - Ref1
+        ///                     - Ref2
+        ///                     - Ref3
+        ///         ...
+        /// </summary>
+        public MiniCReferenceTable<ISymbolData> Nodes { get; } = new MiniCReferenceTable<ISymbolData>();
+
 
         public int BaseCount
         {
@@ -38,7 +56,7 @@ namespace Parse.FrontEnd.MiniC.Sdts.Datas
                 List<VarTable> result = new List<VarTable>();
 
                 MiniCSymbolTable currentTable = this;
-                while(currentTable != null)
+                while (currentTable != null)
                 {
                     result.Add(currentTable.VarTable);
                     currentTable = currentTable.Base;
@@ -49,11 +67,25 @@ namespace Parse.FrontEnd.MiniC.Sdts.Datas
         }
 
         public string DebuggerDisplay
-            => string.Format("FuncTable items : {0}, VarTable items : {1}, Namespace items: {2}, Base count: {3}", 
-                                        _funcTable.Count(), 
-                                        _varTable.Count(),
-                                        _namespaceTable.Count(),
-                                        BaseCount);
+        {
+            get
+            {
+                int funcCount = 0;
+                int namespaceCount = 0;
+
+                foreach (var item in Nodes)
+                {
+                    if (item is NamespaceNode) namespaceCount++;
+                    else if (item is FuncDefNode) funcCount++;
+                }
+
+                return string.Format("Namespace items: {0}, Func items: {1}, VarTable items : {2}, Base count: {3}",
+                                                namespaceCount,
+                                                funcCount,
+                                                _varTable.Count(),
+                                                BaseCount);
+            }
+        }
 
 
 
@@ -71,34 +103,34 @@ namespace Parse.FrontEnd.MiniC.Sdts.Datas
             return result;
         }
 
-        public MiniCFuncData GetFuncByName(string name)
+        public FuncDefNode GetFuncByName(string name)
         {
-            MiniCFuncData result = null;
+            FuncDefNode result = null;
 
-            foreach (var funcData in FuncTable)
+            foreach (var record in Nodes)
             {
-                if (funcData.DefineField.Name == name)
-                {
-                    result = funcData.DefineField;
-                    break;
-                }
+                if (!(record.DefineField is FuncDefNode)) continue;
+                if (record.DefineField.Name != name) continue;
+
+                result = record.DefineField as FuncDefNode;
+                break;
             }
 
             return result;
         }
 
 
-        public MiniCNamespaceData GetNamespaceByName(string name)
+        public NamespaceNode GetNamespaceByName(string name)
         {
-            MiniCNamespaceData result = null;
+            NamespaceNode result = null;
 
-            foreach (var namespaceData in NamespaceTable)
+            foreach (var record in Nodes)
             {
-                if (namespaceData.DefineField.Name == name)
-                {
-                    result = namespaceData.DefineField;
-                    break;
-                }
+                if (!(record.DefineField is NamespaceNode)) continue;
+                if (record.DefineField.Name != name) continue;
+
+                result = record.DefineField as NamespaceNode;
+                break;
             }
 
             return result;
@@ -111,7 +143,5 @@ namespace Parse.FrontEnd.MiniC.Sdts.Datas
         }
 
         private VarTable _varTable = new VarTable();
-        private FuncTable _funcTable = new FuncTable();
-        private NamespaceTable _namespaceTable = new NamespaceTable();
     }
 }

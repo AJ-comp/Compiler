@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Parse;
+using System;
 using System.Globalization;
 using System.Windows.Data;
 using System.Windows.Markup;
@@ -11,7 +12,8 @@ namespace ApplicationLayer.Views.Converters
         {
             try
             {
-                return Enum.GetName((value.GetType()), value);
+                return (parameter.ToString() == "true") ? Helper.GetDescription(value)
+                                                                           : Enum.GetName((value.GetType()), value);
             }
             catch
             {

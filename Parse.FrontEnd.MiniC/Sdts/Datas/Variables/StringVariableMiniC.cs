@@ -8,14 +8,16 @@ namespace Parse.FrontEnd.MiniC.Sdts.Datas.Variables
 {
     public class StringVariableMiniC : VariableMiniC, IString
     {
-        public StringVariableMiniC(MiniCTypeInfo typeDatas, 
+        public StringVariableMiniC(Access accessType,
+                                                MiniCTypeInfo typeDatas, 
                                                 TokenData nameToken, 
                                                 TokenData levelToken, 
                                                 TokenData dimensionToken, 
                                                 int blockLevel, 
                                                 int offset, 
                                                 VarProperty varProperty, 
-                                                ExprNode value) : base(typeDatas, nameToken, levelToken, dimensionToken, blockLevel, offset, varProperty, Convert(value))
+                                                ExprNode value)
+            : base(accessType, typeDatas, nameToken, levelToken, dimensionToken, blockLevel, offset, varProperty, Convert(value))
         {
         }
 

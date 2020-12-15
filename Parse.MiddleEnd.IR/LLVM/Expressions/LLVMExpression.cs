@@ -14,7 +14,7 @@ namespace Parse.MiddleEnd.IR.LLVM.Expressions
             if (Items.Count > 0)
             {
                 result += string.Format(", Expression: {0} -> ", Name);
-                result += Items.ItemsString();
+                result += Items.ItemsString(PrintType.Type);
             }
 
             return result;

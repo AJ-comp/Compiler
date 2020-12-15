@@ -4,6 +4,7 @@ using ApplicationLayer.Models.SolutionPackage;
 using ApplicationLayer.ViewModels.DocumentTypeViewModels;
 using ApplicationLayer.ViewModels.Messages;
 using GalaSoft.MvvmLight.Messaging;
+using Parse.BackEnd.Target;
 using System.Collections.Generic;
 using System.IO;
 using ViewResources = ApplicationLayer.Define.Properties.WindowViewResources;
@@ -103,10 +104,10 @@ namespace ApplicationLayer.ViewModels
         /// <param name="bootstrapName"></param>
         /// <param name="linkerScriptName"></param>
         /// ********************************************************
-        public static void CreateStartingFile(string solutionBinFolderPath, string bootstrapName, string linkerScriptName)
+        public static void CreateStartingFile(string solutionBinFolderPath, string bootstrapName, string linkerScriptName, Target target)
         {
             // create bootstrap
-            BootsTrapGenerator.CreateVectorTable(solutionBinFolderPath, bootstrapName);
+            File.WriteAllText(Path.Combine(solutionBinFolderPath, bootstrapName), target.StartUpCode);
 
             // create linker script
             Builder.CreateLinkerScript(solutionBinFolderPath, linkerScriptName);

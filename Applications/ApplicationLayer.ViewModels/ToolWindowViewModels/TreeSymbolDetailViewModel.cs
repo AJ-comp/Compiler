@@ -2,6 +2,7 @@
 using ApplicationLayer.Models.SolutionPackage.MiniCPackage;
 using ApplicationLayer.ViewModels.Messages;
 using Parse.FrontEnd.MiniC.Sdts.AstNodes;
+using Parse.FrontEnd.MiniC.Sdts.Datas;
 using System.Collections.ObjectModel;
 using System.Linq;
 using CommonResource = ApplicationLayer.Define.Properties.Resources;
@@ -36,13 +37,14 @@ namespace ApplicationLayer.ViewModels.ToolWindowViewModels
             {
                 MiniCNode miniCNode = sdtsNode as MiniCNode;
 
-                var symbolTable = miniCNode.SymbolTable;
-                while (symbolTable != null)
+                var symbolData = miniCNode as ISymbolData;
+                while (symbolData != null)
                 {
-                    if (symbolTable.VarTable.Count() == 0 && symbolTable.FuncTable.Count() == 0)
+                    if(!IsExistSymbol(symbolData))
                     {
                         sdtsNode = null;
-                        symbolTable = symbolTable.Base;
+                        miniCNode = miniCNode.Parent as MiniCNode;
+                        symbolData = miniCNode as ISymbolData;
                         continue;
                     }
 
@@ -50,21 +52,38 @@ namespace ApplicationLayer.ViewModels.ToolWindowViewModels
                     SymbolDatas.AddChildrenToFirst(new CategoryTreeNodeModel(categoryName));
                     SymbolDatas.IsExpanded = true;
 
-                    foreach (var varRecord in symbolTable.VarTable)
+                    var hasVar = symbolData as IHasVarInfos;
+                    foreach (var varInfo in hasVar?.VarList)
                     {
-                        if (varRecord.DefineField.IsVirtual) continue;
+                        if (varInfo.IsVirtual) continue;
 
-                        SymbolDatas.Children.First().AddChildren(new VarTreeNodeModel(varRecord.DefineField));
+                        SymbolDatas.Children.First().AddChildren(new VarTreeNodeModel(varInfo));
                     }
 
-                    foreach (var item in symbolTable.FuncTable)
-                        SymbolDatas.Children.First().AddChildren(new FuncTreeNodeModel(item.DefineField));
+                    var hasFunc = symbolData as IHasFuncInfos;
+                    foreach (var item in hasFunc.FuncList)
+                        SymbolDatas.Children.First().AddChildren(new FuncTreeNodeModel(item));
 
                     sdtsNode = null;
-                    symbolTable = symbolTable.Base;
+                    miniCNode = miniCNode.Parent as MiniCNode;
+                    symbolData = miniCNode as ISymbolData;
                 }
             }
 //            (message.TreeSymbol as TreeNonTerminal).ConnectedErrInfoList
+        }
+
+
+        private bool IsExistSymbol(ISymbolData symbolData)
+        {
+            bool result = false;
+
+            var hasVar = symbolData as IHasVarInfos;
+            if (hasVar?.VarList?.Count() > 0) result = true;
+
+            var hasFunc = symbolData as IHasFuncInfos;
+            if (hasFunc?.FuncList?.Count() > 0) result = true;
+
+            return result;
         }
     }
 }

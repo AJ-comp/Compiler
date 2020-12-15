@@ -1,23 +1,27 @@
 ﻿using Parse.FrontEnd.MiniC.Sdts.Datas.Variables;
 using Parse.MiddleEnd.IR.Datas;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 
 namespace Parse.FrontEnd.MiniC.Sdts.Datas
 {
-    [DebuggerDisplay ("{DebuggerDisplay, nq}")]
-    public class MiniCFuncData : IHasName
+    [DebuggerDisplay("{DebuggerDisplay, nq}")]
+    public class FuncData : ISymbolData, IConvertableToIRCode
     {
         public MiniCDataType ReturnType => TypeData.DataType;
         public string Name => NameToken.Input;
 
-        public MiniCTypeInfo TypeData { get; private set; }
-        public TokenData NameToken { get; private set; }
-        public int Offset { get; private set; }
+        public Access AccessType { get; internal set; }
+        public MiniCTypeInfo TypeData { get; internal set; }
+        public TokenData NameToken { get; internal set; }
+        public int Offset { get; internal set; }
         public List<VariableMiniC> ParamVars { get; } = new List<VariableMiniC>();
+        public List<SdtsNode> ReferenceTable { get; } = new List<SdtsNode>();
 
-        public MiniCFuncData(MiniCTypeInfo typeData, TokenData nameToken, int offset, IEnumerable<VariableMiniC> paramVars)
+        public FuncData(Access accessType, MiniCTypeInfo typeData, TokenData nameToken, int offset, IEnumerable<VariableMiniC> paramVars)
         {
+            AccessType = accessType;
             TypeData = typeData;
             NameToken = nameToken;
             Offset = offset;
@@ -58,7 +62,43 @@ namespace Parse.FrontEnd.MiniC.Sdts.Datas
                                                 0);
         }
 
+        public override bool Equals(object obj)
+        {
+            var data = obj as FuncData;
+            if (data == null) return false;
+
+            if (Name != data.Name) return false;
+            if (ParamVars.Count != data.ParamVars.Count) return false;
+
+            for (int i = 0; i < ParamVars.Count; i++)
+            {
+                if (ParamVars[i] != data.ParamVars[i]) return false;
+            }
+
+            return true;
+        }
+
+        public override int GetHashCode()
+        {
+            List<MiniCDataType> paramTypes = new List<MiniCDataType>();
+
+            int hash = 0;
+            foreach (var param in ParamVars)
+                hash ^= param.DataType.GetHashCode();
+
+            return HashCode.Combine(Name, hash);
+        }
 
         private string DebuggerDisplay => ToDefineString(true, true);
+
+        public static bool operator ==(FuncData left, FuncData right)
+        {
+            return EqualityComparer<FuncData>.Default.Equals(left, right);
+        }
+
+        public static bool operator !=(FuncData left, FuncData right)
+        {
+            return !(left == right);
+        }
     }
 }

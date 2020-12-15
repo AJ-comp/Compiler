@@ -22,11 +22,7 @@ namespace ApplicationLayer.Models.SolutionPackage
 
         public override int GetHashCode()
         {
-            var hashCode = -949592730;
-            hashCode = hashCode * -1521134295 + Mode.GetHashCode();
-            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Target);
-            hashCode = hashCode * -1521134295 + OptimizeLevel.GetHashCode();
-            return hashCode;
+            return HashCode.Combine(Mode, Target, OptimizeLevel);
         }
     }
 }

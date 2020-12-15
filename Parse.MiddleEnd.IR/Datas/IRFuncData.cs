@@ -14,7 +14,7 @@ namespace Parse.MiddleEnd.IR.Datas
         public bool IsSigned => false;
         public bool IsNan => false;
         public uint PointerLevel { get; set; }
-        public string ArgumentsString => Arguments.ItemsString("TypeName");
+        public string ArgumentsString => Arguments.ItemsString(PrintType.Property, "TypeName");
 
         public IRFuncData(IEnumerable<IRVar> arguments, bool constReturn, ReturnType returnType, string name, uint pointerLevel)
         {
@@ -37,7 +37,7 @@ namespace Parse.MiddleEnd.IR.Datas
                 result += string.Format("{0} {1}", ReturnType, Name);
 
                 result += "(";
-                Arguments.ItemsString("TypeName");
+                Arguments.ItemsString(PrintType.Property, "TypeName");
                 result += ")";
 
                 return result;

@@ -5,16 +5,19 @@
         public string Name { get; protected set; }
         public string Explain { get; protected set; }
 
+        public abstract string StartUpCode { get; }
+        public abstract MemoryInfo FlashMemory { get; }
+        public abstract MemoryInfo RAM { get; }
 
         public abstract string LLVM_IR_MCPU_String();
         public abstract string GCC_IR_MCPU_String();
     }
 
-    public class AVR : Target
+    public abstract class AVR : Target
     {
         public AVR()
         {
-            this.Name = "AVR";
+            this.Name = GetType().Name;
         }
 
         public override string GCC_IR_MCPU_String() => "atmega";

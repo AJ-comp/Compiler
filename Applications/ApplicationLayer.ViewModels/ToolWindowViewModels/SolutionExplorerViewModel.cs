@@ -1,6 +1,7 @@
 ﻿using ApplicationLayer.Common;
 using ApplicationLayer.Common.Helpers;
 using ApplicationLayer.Common.Interfaces;
+using ApplicationLayer.Models;
 using ApplicationLayer.Models.SolutionPackage;
 using ApplicationLayer.ViewModels.DocumentTypeViewModels;
 using ApplicationLayer.ViewModels.Messages;
@@ -211,8 +212,9 @@ namespace ApplicationLayer.ViewModels.ToolWindowViewModels
 
             this.Solution = SolutionTreeNodeModel.Create(message.SolutionPath, 
                                                                                 message.SolutionName, 
-                                                                                message.Language, 
+                                                                                message.ProjectType, 
                                                                                 message.MachineTarget);
+
             this.Solution.IsExpanded = true;
 
             this.Save();
@@ -327,19 +329,24 @@ namespace ApplicationLayer.ViewModels.ToolWindowViewModels
 
             // if a project path is in the solution path.
             var solutionPath = this.Solution.Path;
-            int matchedPos = message.ProjectPath.IndexOf(solutionPath, StringComparison.Ordinal) + solutionPath.Length;
-            bool isAbsolutePath = (PathHelper.ComparePath(solutionPath, message.ProjectPath) == false);
+            int matchedPos = message.ProjectData.ProjectPath.IndexOf(solutionPath, StringComparison.Ordinal) + solutionPath.Length;
+            bool isAbsolutePath = (PathHelper.ComparePath(solutionPath, message.ProjectData.ProjectPath) == false);
 
-            ProjectGenerator projectGenerator = ProjectGenerator.CreateProjectGenerator(message.Language);
+            ProjectGenerator projectGenerator = ProjectGenerator.CreateProjectGenerator(message.ProjectData.ProjectType.Grammar);
             if (projectGenerator == null) return;
 
-            string projectPath = (isAbsolutePath) ? message.ProjectPath : message.ProjectPath.Substring(matchedPos);
+            string projectPath = (isAbsolutePath) ? message.ProjectData.ProjectPath
+                                                                  : message.ProjectData.ProjectPath.Substring(matchedPos);
+
             if (projectPath[0] == '\\') projectPath = projectPath.Remove(0, 1);
 
+            var projectData = new ProjectData(projectPath, 
+                                                               message.ProjectData.ProjectName, 
+                                                               message.ProjectData.ProjectType);
+
             ProjectTreeNodeModel newProject = projectGenerator.CreateDefaultProject(solutionPath, 
-                                                                                                                            projectPath, 
-                                                                                                                            message.ProjectName, 
-                                                                                                                            message.MachineTarget);
+                                                                                                                          projectData, 
+                                                                                                                          message.MachineTarget);
             this.Solution.AddProject(newProject);
             newProject.Save();
 

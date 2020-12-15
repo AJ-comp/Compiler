@@ -29,10 +29,12 @@ namespace Parse.FrontEnd.MiniC.ErrorHandler
         {
             MiniCGrammar grammar = _grammar as MiniCGrammar;
 
-            List<Terminal[]> param = new List<Terminal[]>();
-            param.Add(new Terminal[] { grammar.SemiColon });
-            param.Add(new Terminal[] { grammar.Comma });
-            param.Add(new Terminal[] { grammar.Assign, MiniCGrammar.Number, grammar.SemiColon });
+            List<Terminal[]> param = new List<Terminal[]>
+            {
+                new Terminal[] { grammar.SemiColon },
+                new Terminal[] { grammar.Comma },
+                new Terminal[] { grammar.Assign, MiniCGrammar.Number, grammar.SemiColon }
+            };
 
             return TryRecovery(param, dataForRecovery);
         }

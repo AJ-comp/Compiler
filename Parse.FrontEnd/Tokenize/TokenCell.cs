@@ -88,11 +88,7 @@ namespace Parse.FrontEnd.Tokenize
 
         public override int GetHashCode()
         {
-            var hashCode = -2097962145;
-            hashCode = hashCode * -1521134295 + StartIndex.GetHashCode();
-            hashCode = hashCode * -1521134295 + EndIndex.GetHashCode();
-            hashCode = hashCode * -1521134295 + PatternInfo.GetHashCode();
-            return hashCode;
+            return HashCode.Combine(StartIndex, EndIndex, PatternInfo);
         }
 
         public static bool operator ==(TokenCell cell1, TokenCell cell2)

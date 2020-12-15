@@ -32,11 +32,12 @@ namespace Parse.MiddleEnd.IR.LLVM.Expressions.StmtExpressions
 
         private IEnumerable<Instruction> ArrangeInstructions()
         {
-            List<Instruction> result = new List<Instruction>();
-
-            result.Add(Instruction.UCBranch(_startLabel));
-            result.Add(Instruction.EmptyLine());
-            result.Add(Instruction.EmptyLine(_startLabel.Name));
+            List<Instruction> result = new List<Instruction>
+            {
+                Instruction.UCBranch(_startLabel),
+                Instruction.EmptyLine(),
+                Instruction.EmptyLine(_startLabel.Name)
+            };
 
             result.AddRange(_condInstructions);
             result.Add(Instruction.CBranch(_condExpression.Result as BitVariableLLVM,

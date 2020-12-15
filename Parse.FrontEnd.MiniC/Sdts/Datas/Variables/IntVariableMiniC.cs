@@ -14,7 +14,8 @@ namespace Parse.FrontEnd.MiniC.Sdts.Datas.Variables
         public int Size => 32;
         public override DType TypeName => DType.Int;
 
-        public IntVariableMiniC(MiniCTypeInfo typeDatas, 
+        public IntVariableMiniC(Access accessType,
+                                            MiniCTypeInfo typeDatas, 
                                             TokenData nameToken,
                                             TokenData levelToken, 
                                             TokenData dimensionToken,
@@ -22,7 +23,7 @@ namespace Parse.FrontEnd.MiniC.Sdts.Datas.Variables
                                             int offset, 
                                             VarProperty varProperty, 
                                             ExprNode value)
-                                        : base(typeDatas, nameToken, levelToken, dimensionToken,
+                                        : base(accessType, typeDatas, nameToken, levelToken, dimensionToken,
                                                     blockLevel, offset, varProperty, VariableMiniC.Convert(varProperty, value))
         {
 
