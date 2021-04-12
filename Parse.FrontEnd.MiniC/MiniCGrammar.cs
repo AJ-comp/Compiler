@@ -20,8 +20,10 @@ namespace Parse.FrontEnd.MiniC
         public Terminal Const { get; } = new Terminal(TokenType.Keyword.DefinedDataType, "const");
         public static Terminal Char { get; } = new Terminal(TokenType.Keyword.DefinedDataType, "char");
         public static Terminal Short { get; } = new Terminal(TokenType.Keyword.DefinedDataType, "short");
+        public static Terminal UShort { get; } = new Terminal(TokenType.Keyword.DefinedDataType, "ushort");
         public static Terminal System { get; } = new Terminal(TokenType.Keyword.DefinedDataType, "system");
         public static Terminal Int { get; } = new Terminal(TokenType.Keyword.DefinedDataType, "int");
+        public static Terminal UInt { get; } = new Terminal(TokenType.Keyword.DefinedDataType, "uint");
         public static Terminal Double { get; } = new Terminal(TokenType.Keyword.DefinedDataType, "double");
         public static Terminal Address { get; } = new Terminal(TokenType.Keyword.DefinedDataType, "address");
         public static Terminal Void { get; } = new Terminal(TokenType.Keyword.DefinedDataType, "void");
@@ -55,12 +57,12 @@ namespace Parse.FrontEnd.MiniC
         public Terminal MulAssign { get; } = new Terminal(TokenType.Operator.NormalOperator, "*=", false);
         public Terminal DivAssign { get; } = new Terminal(TokenType.Operator.NormalOperator, "/=", false);
         public Terminal ModAssign { get; } = new Terminal(TokenType.Operator.NormalOperator, "%=", false);
-        public Terminal Equal { get; } = new Terminal(TokenType.Operator.NormalOperator, "==", false);
-        public Terminal NotEqual { get; } = new Terminal(TokenType.Operator.NormalOperator, "!=", false);
-        public Terminal GreaterThan { get; } = new Terminal(TokenType.Operator.NormalOperator, ">", false);
-        public Terminal LessThan { get; } = new Terminal(TokenType.Operator.NormalOperator, "<", false);
-        public Terminal GreaterEqual { get; } = new Terminal(TokenType.Operator.NormalOperator, ">=", false);
-        public Terminal LessEqual { get; } = new Terminal(TokenType.Operator.NormalOperator, "<=", false);
+        public static Terminal Equal { get; } = new Terminal(TokenType.Operator.NormalOperator, "==", false);
+        public static Terminal NotEqual { get; } = new Terminal(TokenType.Operator.NormalOperator, "!=", false);
+        public static Terminal GreaterThan { get; } = new Terminal(TokenType.Operator.NormalOperator, ">", false);
+        public static Terminal LessThan { get; } = new Terminal(TokenType.Operator.NormalOperator, "<", false);
+        public static Terminal GreaterEqual { get; } = new Terminal(TokenType.Operator.NormalOperator, ">=", false);
+        public static Terminal LessEqual { get; } = new Terminal(TokenType.Operator.NormalOperator, "<=", false);
         public Terminal SemiColon { get; } = new Terminal(TokenType.Operator.NormalOperator, ";", false);
         public Terminal Comma { get; } = new Terminal(TokenType.Operator.Comma, ",", false);
         public Terminal Dot { get; } = new Terminal(TokenType.Operator, ".", false);
@@ -140,7 +142,6 @@ namespace Parse.FrontEnd.MiniC
 
         public static MeaningUnit StructDef { get; } = new MeaningUnit(nameof(StructDef));
         public static MeaningUnit ClassDef { get; } = new MeaningUnit(nameof(ClassDef));
-        public static MeaningUnit MemberField { get; } = new MeaningUnit(nameof(MemberField));
         public static MeaningUnit MemberFunc { get; } = new MeaningUnit(nameof(MemberFunc));
 
         public static MeaningUnit FuncDef { get; } = new MeaningUnit(nameof(FuncDef));
@@ -152,6 +153,7 @@ namespace Parse.FrontEnd.MiniC
         public static MeaningUnit ShortNode { get; } = new MeaningUnit(nameof(ShortNode));
         public static MeaningUnit SystemNode { get; } = new MeaningUnit(nameof(SystemNode));
         public static MeaningUnit IntNode { get; } = new MeaningUnit(nameof(IntNode));
+        public static MeaningUnit UIntNode { get; } = new MeaningUnit(nameof(UIntNode));
         public static MeaningUnit DoubleNode { get; } = new MeaningUnit(nameof(DoubleNode));
         public static MeaningUnit VoidNode { get; } = new MeaningUnit(nameof(VoidNode));
         public static MeaningUnit FormalPara { get; } = new MeaningUnit(nameof(FormalPara));
@@ -218,9 +220,8 @@ namespace Parse.FrontEnd.MiniC
             // struct and class
             this.structDef.AddItem(accesser.Optional() + Struct + Ident + OpenCurlyBrace + declaration + CloseCurlyBrace, StructDef);
             this.classDef.AddItem(accesser.Optional() + Class + Ident + OpenCurlyBrace + classMemberDcl.ZeroOrMore() + CloseCurlyBrace, ClassDef);
-            this.classMemberDcl.AddItem(memberFieldDef | functionDef);
-            this.memberFieldDef.AddItem(accesser + declaration, MemberField);
-            this.functionDef.AddItem(accesser + functionHeader + compoundSt, FuncDef);
+            this.classMemberDcl.AddItem(accesser.Optional() + (declaration | functionDef));
+            this.functionDef.AddItem(functionHeader + compoundSt, FuncDef);
             this.functionHeader.AddItem(dclSpec + functionName + formalParam, FuncHead);
 
             this.dclSpec.AddItem(this.dclSpecifiers, DclSpec);
@@ -230,8 +231,10 @@ namespace Parse.FrontEnd.MiniC
             this.typeSpecifier.AddItem(Address, AddressNode);
             this.typeSpecifier.AddItem(Char, CharNode);
             this.typeSpecifier.AddItem(Short, ShortNode);
+            this.typeSpecifier.AddItem(UShort, ShortNode);
             this.typeSpecifier.AddItem(System, SystemNode);
             this.typeSpecifier.AddItem(Int, IntNode);
+            this.typeSpecifier.AddItem(UInt, UIntNode);
             this.typeSpecifier.AddItem(Double, DoubleNode);
             this.typeSpecifier.AddItem(Void, VoidNode);
 
@@ -280,14 +283,14 @@ namespace Parse.FrontEnd.MiniC
             this.logicalAndExp.AddItem(this.logicalAndExp + this.LogicalAnd + this.equalityExp, LogicalAndM);
 
             this.equalityExp.AddItem(this.relationalExp);
-            this.equalityExp.AddItem(this.equalityExp + this.Equal + this.relationalExp, EqualM);
-            this.equalityExp.AddItem(this.equalityExp + this.NotEqual + this.relationalExp, NotEqualM);
+            this.equalityExp.AddItem(this.equalityExp + Equal + this.relationalExp, EqualM);
+            this.equalityExp.AddItem(this.equalityExp + NotEqual + this.relationalExp, NotEqualM);
 
             this.relationalExp.AddItem(this.additiveExp);
-            this.relationalExp.AddItem(this.relationalExp + this.GreaterThan + this.additiveExp, GreaterThanM);
-            this.relationalExp.AddItem(this.relationalExp + this.LessThan + this.additiveExp, LessThanM);
-            this.relationalExp.AddItem(this.relationalExp + this.GreaterEqual + this.additiveExp, GreaterEqualM);
-            this.relationalExp.AddItem(this.relationalExp + this.LessEqual + this.additiveExp, LessEqualM);
+            this.relationalExp.AddItem(this.relationalExp + GreaterThan + this.additiveExp, GreaterThanM);
+            this.relationalExp.AddItem(this.relationalExp + LessThan + this.additiveExp, LessThanM);
+            this.relationalExp.AddItem(this.relationalExp + GreaterEqual + this.additiveExp, GreaterEqualM);
+            this.relationalExp.AddItem(this.relationalExp + LessEqual + this.additiveExp, LessEqualM);
 
             this.additiveExp.AddItem(this.multiplicativeExp);
             this.additiveExp.AddItem(this.additiveExp + this.Add + this.multiplicativeExp, AddM);

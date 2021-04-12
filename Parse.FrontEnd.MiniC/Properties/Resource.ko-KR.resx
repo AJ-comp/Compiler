@@ -129,4 +129,22 @@
   <data name="BinNumber" xml:space="preserve">
     <value>2진수</value>
   </data>
+  <data name="AlreadyRegisteredAssembly" xml:space="preserve">
+    <value>이미 등록된 어셈블리 '{0}' 이(가) 존재 합니다.</value>
+  </data>
+  <data name="NotRegisteredAssembly" xml:space="preserve">
+    <value>등록된 어셈블리'{0}' 이(가) 없습니다.</value>
+  </data>
+  <data name="NotRegisteredFile" xml:space="preserve">
+    <value>등록된 파일 '{0}' 이(가) 없습니다.</value>
+  </data>
+  <data name="AlreadyRegisteredFile" xml:space="preserve">
+    <value>이미 등록된 파일 '{0}' 이(가) 존재 합니다.</value>
+  </data>
+  <data name="EqualToRemoveAndAddName" xml:space="preserve">
+    <value>제거할 대상과 추가할 대상의 이름이 같습니다.</value>
+  </data>
+  <data name="FileNameCantEmpty" xml:space="preserve">
+    <value>파일 명을 지정하세요</value>
+  </data>
 </root>

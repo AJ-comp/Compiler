@@ -1,4 +1,5 @@
-﻿using Parse.MiddleEnd.IR.LLVM.Expressions.ExprExpressions.LogicalExpressions;
+﻿using Parse.MiddleEnd.IR.Interfaces;
+using Parse.MiddleEnd.IR.LLVM.Expressions.ExprExpressions;
 using Parse.MiddleEnd.IR.LLVM.Models.VariableModels;
 using System.Collections.Generic;
 
@@ -6,12 +7,11 @@ namespace Parse.MiddleEnd.IR.LLVM.Expressions.StmtExpressions
 {
     public class LLVMWhileExpression : LLVMStmtExpression
     {
-        public LLVMWhileExpression(LLVMLogicalOpExpression condExpression,
-                                            LLVMStmtExpression trueStmtExpression,
-                                            LLVMSSATable ssaTable) : base(ssaTable)
+        public LLVMWhileExpression(IRWhileStatement statement, LLVMSSATable ssaTable) : base(ssaTable)
         {
-            _condExpression = condExpression;
-            _trueStmtExpression = trueStmtExpression;
+            _statement = statement;
+            _condExpr = new LLVMCompareOpExpression(statement.CondExpr, ssaTable);
+            _trueStmt = Create(statement.TrueStatement, ssaTable);
         }
 
         public override IEnumerable<Instruction> Build()
@@ -23,10 +23,10 @@ namespace Parse.MiddleEnd.IR.LLVM.Expressions.StmtExpressions
         private void CreateInstructionsAndLabels()
         {
             _startLabel = _ssaTable.RegisterLabel();
-            _condInstructions = _condExpression.Build();
+            _condInstructions = _condExpr.Build();
             _trueLabel = _ssaTable.RegisterLabel();            // create a true label.
 
-            _trueInstructions = _trueStmtExpression.Build();
+            _trueInstructions = _trueStmt.Build();
             _falseLabel = _ssaTable.RegisterLabel();            // create a false label.
         }
 
@@ -40,7 +40,7 @@ namespace Parse.MiddleEnd.IR.LLVM.Expressions.StmtExpressions
             };
 
             result.AddRange(_condInstructions);
-            result.Add(Instruction.CBranch(_condExpression.Result as BitVariableLLVM,
+            result.Add(Instruction.CBranch(_condExpr.Result as BitVariableLLVM,
                                                             _trueLabel,
                                                             _falseLabel));
 
@@ -55,9 +55,9 @@ namespace Parse.MiddleEnd.IR.LLVM.Expressions.StmtExpressions
             return result;
         }
 
-
-        private LLVMLogicalOpExpression _condExpression;
-        private LLVMStmtExpression _trueStmtExpression;
+        private IRWhileStatement _statement;
+        private LLVMCompareOpExpression _condExpr;
+        private LLVMStmtExpression _trueStmt;
 
         private BitVariableLLVM _startLabel;
         private BitVariableLLVM _trueLabel;

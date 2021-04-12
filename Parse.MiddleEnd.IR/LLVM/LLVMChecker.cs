@@ -4,19 +4,19 @@ namespace Parse.MiddleEnd.IR.LLVM
 {
     public class LLVMChecker
     {
-        public static bool IsExistDoubleType(DType op1Type, DType op2Type) => ((op1Type == DType.Double) || (op2Type == DType.Double));
+        public static bool IsExistDoubleType(StdType op1Type, StdType op2Type) => ((op1Type == StdType.Double) || (op2Type == StdType.Double));
 
-        public static bool IsItoFpCondition(DType op1Type, DType op2Type)
+        public static bool IsItoFpCondition(StdType op1Type, StdType op2Type)
         {
             if (op1Type == op2Type) return false;   // case double, double
-            if (op1Type == DType.Double && op2Type == DType.Double) return false; // case not double, not double
+            if (op1Type == StdType.Double && op2Type == StdType.Double) return false; // case not double, not double
 
             return true;
         }
 
-        public static bool IsIntegerKind(DType opType) => (opType == DType.Byte || opType == DType.Short || opType == DType.Int);
+        public static bool IsIntegerKind(StdType opType) => (opType == StdType.Byte || opType == StdType.Short || opType == StdType.Int);
 
-        public static DType MaximumType(DType op1Type, DType op2Type)
+        public static StdType MaximumType(StdType op1Type, StdType op2Type)
         {
             var op1Size = LLVMConverter.ToAlignSize(op1Type);
             var op2Size = LLVMConverter.ToAlignSize(op2Type);

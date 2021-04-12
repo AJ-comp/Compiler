@@ -1,25 +1,29 @@
 ﻿using Parse.FrontEnd.Ast;
 using Parse.FrontEnd.MiniC.Properties;
 using Parse.FrontEnd.MiniC.Sdts.Datas;
-using Parse.FrontEnd.MiniC.Sdts.Datas.Variables;
+using Parse.MiddleEnd.IR.Datas;
+using Parse.MiddleEnd.IR.Interfaces;
 using Parse.Types;
+using Parse.Types.ConstantTypes;
+using Parse.Types.VarTypes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace Parse.FrontEnd.MiniC.Sdts.AstNodes.ExprNodes
 {
-    public class CallNode : ExprNode
+    public class CallNode : ExprNode, ICallExpression
     {
-        public FuncData FuncData { get; private set; }
+        public FuncDefData FuncData { get; private set; }
+        public IFunctionExpression CallFuncDef => FuncData;
 
         public TokenData MethodNameToken { get; private set; }
-        public IReadOnlyList<ExprNode> Params => _params;
-        public IReadOnlyList<IValue> ParamsTypeList
+        public IEnumerable<IExprExpression> Params => _params;
+        public IReadOnlyList<IConstant> ParamsTypeList
         {
             get
             {
-                List<IValue> result = new List<IValue>();
+                List<IConstant> result = new List<IConstant>();
 
                 foreach (var param in Params) result.Add(param.Result);
 
@@ -50,7 +54,7 @@ namespace Parse.FrontEnd.MiniC.Sdts.AstNodes.ExprNodes
                 _params.AddRange(result.ParamNodeList);
             }
 
-            MiniCChecker.IsDefinedVar(this, ident.IdentToken);
+            MiniCChecker.IsDefinedSymbol(this, ident.IdentToken);
             var matchedList = MiniCUtilities.GetFuncDataList(this, functionName.IdentToken);
 
             if (matchedList.Count() == 0) AddMCL0014Exception();
@@ -60,13 +64,13 @@ namespace Parse.FrontEnd.MiniC.Sdts.AstNodes.ExprNodes
         }
 
 
-        private IEnumerable<FuncData> GetParamCountMatchedList(IEnumerable<FuncData> funcListToFind)
+        private IEnumerable<FuncDefData> GetParamCountMatchedList(IEnumerable<FuncDefData> funcListToFind)
         {
-            List<FuncData> result = new List<FuncData>();
+            List<FuncDefData> result = new List<FuncDefData>();
 
             foreach (var func in funcListToFind)
             {
-                if (func.ParamVars.Count() != Params.Count) continue;
+                if (func.ParamVarList.Count() != Params.Count()) continue;
 
                 result.Add(func);
             }
@@ -75,13 +79,13 @@ namespace Parse.FrontEnd.MiniC.Sdts.AstNodes.ExprNodes
         }
 
 
-        private IEnumerable<FuncData> GetParamAllMatchedList(IEnumerable<FuncData> funcListToFind)
+        private IEnumerable<FuncDefData> GetParamAllMatchedList(IEnumerable<FuncDefData> funcListToFind)
         {
-            List<FuncData> result = new List<FuncData>();
+            List<FuncDefData> result = new List<FuncDefData>();
 
             foreach (var func in funcListToFind)
             {
-                if (GetMatchedTypeCount(func.ParamVars, ParamsTypeList) != func.ParamVars.Count) continue;
+                if (GetMatchedTypeCount(func.ParamVarList, ParamsTypeList) != func.ParamVarList.Count) continue;
 
                 result.Add(func);
             }
@@ -90,32 +94,37 @@ namespace Parse.FrontEnd.MiniC.Sdts.AstNodes.ExprNodes
         }
 
 
-        private Tuple<FuncData, int> GetTopCandidate(IEnumerable<FuncData> funcListToFind)
+        private Tuple<FuncDefData, int> GetTopCandidate(IEnumerable<FuncDefData> funcListToFind)
         {
-            FuncData result = null;
+            FuncDefData result = null;
             int topMatchedIndex = -1;
 
             foreach (var func in funcListToFind)
             {
-                var matchedIndex = GetMatchedTypeCount(func.ParamVars, ParamsTypeList);
+                var matchedIndex = GetMatchedTypeCount(func.ParamVarList, ParamsTypeList);
 
                 if (topMatchedIndex > matchedIndex) result = func;
             }
 
-            return new Tuple<FuncData, int>(result, topMatchedIndex);
+            return new Tuple<FuncDefData, int>(result, topMatchedIndex);
         }
 
 
-        private int GetMatchedTypeCount(IEnumerable<VariableMiniC> src, IReadOnlyList<IValue> target)
+        private int GetMatchedTypeCount(IEnumerable<IDeclareVarExpression> srcList, IReadOnlyList<IConstant> targetList)
         {
-            if (src.Count() != target.Count) return 0;
+            if (srcList.Count() != targetList.Count) return 0;
 
             int result = 0;
-            for (int i = 0; i < src.Count(); i++)
+            for (int i = 0; i < srcList.Count(); i++)
             {
                 try
                 {
-                    src.ElementAt(i).Assign(target[i]);
+                    IDeclareVarExpression src = srcList.ElementAt(i);
+                    IValue target = targetList.ElementAt(i);
+
+                    if (src is IVariable) (src as IVariable).Assign(targetList[i]);
+                    else if (src.TypeKind != target.TypeKind) break;
+
                     result++;
                 }
                 catch
@@ -128,12 +137,12 @@ namespace Parse.FrontEnd.MiniC.Sdts.AstNodes.ExprNodes
         }
 
 
-        private void CheckParams(IEnumerable<FuncData> matchedFuncList)
+        private void CheckParams(IEnumerable<FuncDefData> matchedFuncList)
         {
             var funcList = GetParamCountMatchedList(matchedFuncList);
             if (funcList.Count() == 0)    // param count is not equal
             {
-                AddMCL0015Exception(Params.Count);
+                AddMCL0015Exception(Params.Count());
                 return;
             }
 
@@ -147,6 +156,9 @@ namespace Parse.FrontEnd.MiniC.Sdts.AstNodes.ExprNodes
             else
                 FuncData = funcList2.First();
         }
+
+
+
 
 
 
@@ -170,7 +182,7 @@ namespace Parse.FrontEnd.MiniC.Sdts.AstNodes.ExprNodes
                 );
         }
 
-        private void AddMCL0016Exception(FuncData funcDefine, int paramIndex)
+        private void AddMCL0016Exception(FuncDefData funcDefine, int paramIndex)
         {
             ConnectedErrInfoList.Add
                 (
@@ -178,11 +190,11 @@ namespace Parse.FrontEnd.MiniC.Sdts.AstNodes.ExprNodes
                                                     nameof(AlarmCodes.MCL0016),
                                                     string.Format(AlarmCodes.MCL0016,
                                                                         funcDefine.ToDefineString(false, true),
-                                                                        funcDefine.ParamVars[paramIndex].Name))
+                                                                        funcDefine.ParamVarList[paramIndex].Name))
                 );
         }
 
 
-        private List<ExprNode> _params = new List<ExprNode>();
+        private List<IExprExpression> _params = new List<IExprExpression>();
     }
 }

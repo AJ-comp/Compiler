@@ -1,9 +1,10 @@
 ﻿using Parse.FrontEnd.Ast;
 using Parse.FrontEnd.MiniC.Sdts.AstNodes.ExprNodes;
+using Parse.FrontEnd.MiniC.Sdts.Datas;
 
 namespace Parse.FrontEnd.MiniC.Sdts.AstNodes.StatementNodes
 {
-    public class ExprStatementNode : StatementNode
+    public class ExprStatementNode : StatementNode, IExprTypeStatement
     {
         public ExprNode Expr { get; private set; }
 

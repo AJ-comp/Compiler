@@ -104,6 +104,20 @@ namespace Parse.Extensions
             return result;
         }
 
+        public static void AddExceptNull<T>(this IList<T> obj, T data)
+        {
+            if (data == null) return;
+
+            obj.Add(data);
+        }
+
+        public static void AddRangeExceptNull<T>(this List<T> obj, IEnumerable<T> collection)
+        {
+            if (collection == null) return;
+
+            obj.AddRange(collection);
+        }
+
 
         //public static string ItemsString<T>(this IEnumerable<T> obj, ScopeSyntax scopeSyntax, string propertyName = "")
         //{

@@ -23,16 +23,16 @@
         }
 
         public override int Size => 8;
-        public override DType TypeName => DType.Byte;
+        public override StdType TypeKind => StdType.Byte;
 
-        public override Constant Casting(DType to)
+        public override Constant Casting(StdType to)
         {
             Constant result = null;
 
-            if (to == DType.Bit) result = this;
-            else if (to == DType.Byte) result = new ByteConstant((byte)Value, ValueState);
-            else if (to == DType.Int) result = new IntConstant((int)Value, ValueState);
-            else if (to == DType.Double) result = new DoubleConstant((double)Value, ValueState);
+            if (to == StdType.Bit) result = this;
+            else if (to == StdType.Byte) result = new ByteConstant((byte)Value, ValueState);
+            else if (to == StdType.Int) result = new IntConstant((int)Value, ValueState);
+            else if (to == StdType.Double) result = new DoubleConstant((double)Value, ValueState);
 
             return result;
         }

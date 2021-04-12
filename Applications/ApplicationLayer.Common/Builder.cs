@@ -1,5 +1,5 @@
-﻿using Parse.FrontEnd;
-using Parse.FrontEnd.IRGenerator;
+﻿using Parse.FrontEnd.IRGenerator;
+using Parse.FrontEnd.MiniC.Sdts.Expressions;
 using System;
 using System.Diagnostics;
 using System.IO;
@@ -8,14 +8,16 @@ namespace ApplicationLayer.Common
 {
     public class Builder
     {
+        /// ***********************************************************************/
         /// <summary>
         /// This function creates a bitcode.
         /// </summary>
-        /// <param name="sdtsNode">The AST root node to create bitcode</param>
+        /// <param name="expression">The expression to create bitcode</param>
         /// <param name="bitCodeFullPath">The full path included bitcode name to create</param>
-        public static void CreateBitCode(SdtsNode sdtsNode, string bitCodeFullPath)
+        /// ***********************************************************************/
+        public static void CreateBitCode(AJExpression expression, string bitCodeFullPath)
         {
-            var test = IRExpressionGenerator.GenerateLLVMExpression(sdtsNode);
+            var test = IRExpressionGenerator.GenerateLLVMExpression(expression);
             var instructionList = test.Build();
 
             string textCode = string.Empty;
@@ -25,12 +27,14 @@ namespace ApplicationLayer.Common
         }
 
 
+        /// ***********************************************************************/
         /// <summary>
         /// This function creates a target code.
         /// </summary>
         /// <param name="bitCodeFullPath">The full path that included bitcode filename</param>
         /// <param name="targetCodeFullPath">The full path included target code name to create</param>
         /// <param name="mcpuType">The mcpu type of the target</param>
+        /// ***********************************************************************/
         public static void CreateAssem(string bitCodeFullPath, string targetCodeFullPath, string mcpuType)
         {
             var command = string.Format("-mtriple=arm-none-eabi -march=thumb -mattr=thumb2 -mcpu={0} {1} -o {2}",
@@ -49,6 +53,13 @@ namespace ApplicationLayer.Common
         }
 
 
+        /// ***********************************************************************/
+        /// <summary>
+        /// 링커스크립트를 생성합니다.
+        /// </summary>
+        /// <param name="path">링커스크립트를 생성할 경로</param>
+        /// <param name="fileName">링커스크립트 파일 명</param>
+        /// ***********************************************************************/
         public static void CreateLinkerScript(string path, string fileName)
         {
             string code = "OUTPUT_FORMAT(\"elf32-littlearm\", \"elf32-littlearm\", \"elf32-littlearm\")" + Environment.NewLine +
@@ -117,10 +128,12 @@ namespace ApplicationLayer.Common
         }
 
 
+        /// ***********************************************************************/
         /// <summary>
         /// This function executes a makefile.
         /// </summary>
         /// <param name="folderPath">The folder path that existing the makefile to execute</param>
+        /// ***********************************************************************/
         public static void ExecuteMakeFile(string folderPath)
         {
             // execute makefile with make.exe
@@ -140,6 +153,14 @@ namespace ApplicationLayer.Common
         }
 
 
+        /// ***********************************************************************/
+        /// <summary>
+        /// JLink 커맨드를 생성합니다.
+        /// </summary>
+        /// <param name="path">커맨드를 생성할 경로</param>
+        /// <param name="binFileToLoad">바이너리 파일 명</param>
+        /// <param name="downloadAddress">바이너리 코드가 다운로드 될 메모리 주소</param>
+        /// ***********************************************************************/
         public static void CreateJLinkCommanderScript(string path, string binFileToLoad, string downloadAddress)
         {
             var fileContent = string.Format("si 1" + Environment.NewLine +

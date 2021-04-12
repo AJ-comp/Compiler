@@ -1,17 +1,21 @@
 ﻿using Parse.FrontEnd.Ast;
-using Parse.FrontEnd.MiniC.Sdts.AstNodes.ExprNodes.AssignExprNodes;
-using Parse.FrontEnd.MiniC.Sdts.Datas.Variables;
 using Parse.FrontEnd.MiniC.Properties;
+using Parse.FrontEnd.MiniC.Sdts.AstNodes.ExprNodes.AssignExprNodes;
+using Parse.FrontEnd.MiniC.Sdts.AstNodes.ExprNodes.LiteralNodes;
+using Parse.MiddleEnd.IR.Interfaces;
 using Parse.Types;
+using Parse.Types.ConstantTypes;
 
 namespace Parse.FrontEnd.MiniC.Sdts.AstNodes.ExprNodes
 {
     public abstract class BinaryExprNode : ExprNode
     {
-        public ExprNode Left => Items[0] as ExprNode;
-        public ExprNode Right => Items[1] as ExprNode;
+        public ExprNode LeftNode => Items[0] as ExprNode;
+        public ExprNode RightNode => Items[1] as ExprNode;
 
-        public bool IsCalculateable => false;
+
+        public bool IsCalculateable { get; protected set; }
+        public bool IsBothLiteral => (LeftNode is LiteralNode && RightNode is LiteralNode);
 
 
         protected BinaryExprNode(AstSymbol node) : base(node)
@@ -20,30 +24,28 @@ namespace Parse.FrontEnd.MiniC.Sdts.AstNodes.ExprNodes
 
         public override SdtsNode Build(SdtsParams param)
         {
-            Left.ConnectedErrInfoList.Clear();
-            Right.ConnectedErrInfoList.Clear();
+            LeftNode.ConnectedErrInfoList.Clear();
+            RightNode.ConnectedErrInfoList.Clear();
 
             // ExprNode or TerminalNode
             Items[0].Build(param);
             Items[1].Build(param);
 
-            if(!(this is AssignNode))
+            if (!(this is AssignNode))
             {
-                if (Left is UseIdentNode) IsNotInit(Left as UseIdentNode);
+                if (LeftNode is UseIdentNode) IsNotInit(LeftNode as UseIdentNode);
             }
 
-            if (Right is UseIdentNode) IsNotInit(Right as UseIdentNode);
+            if (RightNode is UseIdentNode) IsNotInit(RightNode as UseIdentNode);
 
             return this;
         }
 
-        protected IArithmetic GetIArithmeticType()
+        protected IConstant ArithimeticOperation(IROperation operation)
         {
-            var leftVarData = (Left as UseIdentNode).VarData;
-
-            return (leftVarData is IArithmetic) ? leftVarData as IArithmetic : null;
+            // 확정된 타입이지만 연산을 할 수 없다면 unknown type을 유도하는 첫번째 로직이기에 오류를 표시합니다.
+            return MiniCOperator.ArithimeticOperation(LeftNode.Result, RightNode.Result, operation, AddMCL0011Exception);
         }
-
 
         protected void AddMCL0011Exception()
         {
@@ -52,17 +54,19 @@ namespace Parse.FrontEnd.MiniC.Sdts.AstNodes.ExprNodes
                 (
                     new MeaningErrInfo(MeaningTokens,
                                                     nameof(AlarmCodes.MCL0011),
-                                                    string.Format(AlarmCodes.MCL0011, Left.Result.ToString(), Right.Result.ToString()))
+                                                    string.Format(AlarmCodes.MCL0011, 
+                                                                         LeftNode.Result.ToString(), 
+                                                                         RightNode.Result.ToString()))
                 );
         }
 
         private void IsNotInit(UseIdentNode varNode)
         {
-//            varNode.SymbolTable.AllVarTable
+            //            varNode.SymbolTable.AllVarTable
             var varRecord = MiniCUtilities.GetVarRecordFromReferableST(this, varNode.IdentToken);
             if (varRecord == null) return;
             if (varRecord.DefineField.IsVirtual) return;
-            if (varRecord.DefineField.VariableProperty == VarProperty.Param) return;
+            //            if (varRecord.DefineField.VariableProperty == VarProperty.Param) return;
             if (varRecord.InitValue != null) return;
 
             // Add semantic error information if varData is exist in the SymbolTable.
@@ -73,5 +77,9 @@ namespace Parse.FrontEnd.MiniC.Sdts.AstNodes.ExprNodes
                                                     string.Format(AlarmCodes.MCL0005, varRecord.DefineField.Name))
                 );
         }
+
+
+        private bool IsContainFloatingType(StdType type1, StdType type2) => (type1 == StdType.Double || type2 == StdType.Double);
+        private bool IsContainStringType(StdType type1, StdType type2) => (type1 == StdType.String || type2 == StdType.String);
     }
 }

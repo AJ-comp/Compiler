@@ -11,7 +11,7 @@ namespace Parse.Types.Operations
         /// <param name="operand"></param>
         /// <returns></returns>
         ///////////////////////////////////////////////////////////////////////////////////////
-        IConstant Add(IValue operand);
+        IConstant Add(IConstant operand);
 
         ///////////////////////////////////////////////////////////////////////////////////////
         /// <summary>
@@ -20,7 +20,7 @@ namespace Parse.Types.Operations
         /// <param name="operand"></param>
         /// <returns></returns>
         ///////////////////////////////////////////////////////////////////////////////////////
-        IConstant Sub(IValue operand);
+        IConstant Sub(IConstant operand);
 
         ///////////////////////////////////////////////////////////////////////////////////////
         /// <summary>
@@ -29,7 +29,7 @@ namespace Parse.Types.Operations
         /// <param name="operand"></param>
         /// <returns></returns>
         ///////////////////////////////////////////////////////////////////////////////////////
-        IConstant Mul(IValue operand);
+        IConstant Mul(IConstant operand);
 
         ///////////////////////////////////////////////////////////////////////////////////////
         /// <summary>
@@ -38,7 +38,7 @@ namespace Parse.Types.Operations
         /// <param name="operand"></param>
         /// <returns></returns>
         ///////////////////////////////////////////////////////////////////////////////////////
-        IConstant Div(IValue operand);
+        IConstant Div(IConstant operand);
 
         ///////////////////////////////////////////////////////////////////////////////////////
         /// <summary>
@@ -47,6 +47,6 @@ namespace Parse.Types.Operations
         /// <param name="operand"></param>
         /// <returns></returns>
         ///////////////////////////////////////////////////////////////////////////////////////
-        IConstant Mod(IValue operand);
+        IConstant Mod(IConstant operand);
     }
 }

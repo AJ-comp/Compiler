@@ -1,5 +1,4 @@
 ﻿using Parse.FrontEnd.MiniC.Sdts.AstNodes;
-using Parse.FrontEnd.MiniC.Sdts.Datas;
 using Parse.FrontEnd.MiniC.Sdts.Datas.Variables;
 using System;
 using System.Threading.Tasks;
@@ -13,10 +12,10 @@ namespace Parse.FrontEnd.MiniC.Sdts
             return (left == MiniCDataType.Int && right == MiniCDataType.Int);
         }
 
-        public static bool IsDefinedVar(MiniCNode node, TokenData token)
+        public static bool IsDefinedSymbol(MiniCNode node, TokenData token)
         {
             bool result = false;
-            var variable = MiniCUtilities.GetVarDCLSymbolData(node, token);
+            var variable = node.GetSymbol(token);
 
             if (variable == null)
             {
@@ -39,15 +38,16 @@ namespace Parse.FrontEnd.MiniC.Sdts
 
             Action findLogicInVarTable = new Action(() =>
             {
-                var varNodeList = MiniCUtilities.GetReferableVarDatas(node);
+                var varNodeList = node.GetSymbols(varData.NameToken);
 
                 Parallel.ForEach(varNodeList, (record) =>
                 {
                     if (record.Name != varData.Name) return;
+                    if (record.Block != varData.Block) return;
 
                     result = false;
                     // duplicated declaration (in local block)
-                    MiniCUtilities.AddDuplicatedError(node, varData.NameToken);
+                    node.AddDuplicatedError(varData.NameToken);
                 });
             });
 

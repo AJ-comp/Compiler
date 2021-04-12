@@ -1,12 +1,13 @@
 ﻿using Parse.FrontEnd.MiniC.Sdts.AstNodes.ExprNodes;
-using Parse.FrontEnd.MiniC.Sdts.AstNodes.ExprNodes.LiteralNodes;
+using Parse.MiddleEnd.IR;
 using Parse.MiddleEnd.IR.Datas;
+using Parse.MiddleEnd.IR.Interfaces;
 using Parse.Types;
 using Parse.Types.ConstantTypes;
-using Parse.Types.VarTypes;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 
 namespace Parse.FrontEnd.MiniC.Sdts.Datas.Variables
 {
@@ -27,12 +28,14 @@ namespace Parse.FrontEnd.MiniC.Sdts.Datas.Variables
         [Description("param")] Param
     }
 
-    public abstract class VariableMiniC : Variable, IRVar, ISymbolData
+
+    [DebuggerDisplay("{DebuggerDisplay, nq}")]
+    public abstract class VariableMiniC : IDeclareVarExpression, ISymbolData
     {
         protected VariableMiniC(Access accessType, 
-                                            MiniCTypeInfo typeDatas, TokenData nameToken,
-                                            TokenData levelToken, TokenData dimensionToken,
-                                            int blockLevel, int offset, VarProperty varProperty, IValue value) : base(value)
+                                            MiniCTypeInfo typeDatas, TokenData nameToken, 
+                                            TokenData levelToken, TokenData dimensionToken, 
+                                            int blockLevel, int offset, IExprExpression initialExpr)
         {
             AccessType = accessType;
             ConstToken = typeDatas.ConstToken;
@@ -42,15 +45,21 @@ namespace Parse.FrontEnd.MiniC.Sdts.Datas.Variables
             DimensionToken = dimensionToken;
             Block = blockLevel;
             Offset = offset;
-            VariableProperty = varProperty;
+
+            if(initialExpr == null) InitialExpr = new DefaultExprData(MiniCTypeConverter.ToStdDataType(DataType));
+            else InitialExpr = initialExpr;
 
             IsVirtual = false;
         }
 
+        public bool IsStatic { get; }
+        public bool IsConst => ConstToken != null;
+        public string TypeName { get; set; }
+
+
         public bool IsMatchWithVarName(string name) => (Name == name);
         public bool IsVirtual { get; }
 
-        public bool Const => ConstToken != null;
         public MiniCDataType DataType => MiniCTypeConverter.ToMiniCDataType(DataTypeToken?.Input);
         public int Dimension => System.Convert.ToInt32(DimensionToken?.Input);
 
@@ -62,16 +71,36 @@ namespace Parse.FrontEnd.MiniC.Sdts.Datas.Variables
         public TokenData LevelToken { get; }
         public TokenData DimensionToken { get; }
 
-        public VarProperty VariableProperty { get; }
-
+        public string PartyName { get; set; }
         public string Name => NameToken?.Input;
         public int Block { get; set; }
         public int Offset { get; set; }
         public int Length => System.Convert.ToInt32(LevelToken?.Input);
 
         public uint PointerLevel { get; set; }
-        public List<SdtsNode> ReferenceTable => new List<SdtsNode>();
+        public List<SdtsNode> ReferenceTable { get; } = new List<SdtsNode>();
 
+        public abstract StdType TypeKind { get; }
+        public IExprExpression InitialExpr { get; set; }
+        public IConstant Result
+        {
+            get => (InitialExpr == null) ? new UnknownConstant() : InitialExpr.Result;
+            protected set => Result = value;
+        }
+
+
+        public virtual bool Assign(IConstant constant)
+        {
+            bool result = false;
+
+            if (TypeKind == constant.TypeKind)
+            {
+                result = true;
+                Result = constant;
+            }
+
+            return result;
+        }
 
         //public MeaningErrInfoList MeaningErrorList
         //{
@@ -92,29 +121,6 @@ namespace Parse.FrontEnd.MiniC.Sdts.Datas.Variables
         //        return result;
         //    }
         //}
-
-
-
-        public static IValue Convert(VarProperty varProperty, ExprNode node)
-        {
-            if (node is UseIdentNode) return (node as UseIdentNode).VarData;
-            else if (node is LiteralNode) return (node as LiteralNode).Result;
-            // Only global variable uses ExprNode.Result.
-            else if (varProperty == VarProperty.Global && node?.Result != null) return node.Result;
-
-            return new IntConstant(0, State.NotInit);
-        }
-
-
-        public override string ToString()
-            => string.Format("{0}{1} {2} Block: {3} Offset: {4} Length: {5} Property: {6}",
-                                        (Const) ? "const " : string.Empty,
-                                        Helper.GetEnumDescription(DataType),
-                                        Name,
-                                        Block,
-                                        Offset,
-                                        Length,
-                                        Helper.GetEnumDescription(VariableProperty));
 
         public override bool Equals(object obj)
         {
@@ -138,6 +144,17 @@ namespace Parse.FrontEnd.MiniC.Sdts.Datas.Variables
         {
             return !(left == right);
         }
+
+
+        private string DebuggerDisplay
+                        => string.Format("{0}{1} {2}{3} Block: {4} Offset: {5} Length: {6}",
+                                        (IsConst) ? "const " : string.Empty,
+                                        Helper.GetEnumDescription(DataType),
+                                        (PartyName.Length > 0) ? PartyName+"." : PartyName,
+                                        Name,
+                                        Block,
+                                        Offset,
+                                        Length);
     }
 
 
@@ -147,68 +164,38 @@ namespace Parse.FrontEnd.MiniC.Sdts.Datas.Variables
     {
         public ValueVarMiniC(Access accessType, MiniCTypeInfo typeDatas, TokenData nameToken,
                                         TokenData levelToken, TokenData dimensionToken,
-                                        int blockLevel, int offset, VarProperty varProperty, IValue value)
-                                        : base(accessType, typeDatas, nameToken, levelToken, dimensionToken, blockLevel, offset, varProperty, value)
+                                        int blockLevel, int offset, IExprExpression value)
+                                        : base(accessType, typeDatas, nameToken, levelToken, dimensionToken, blockLevel, offset, value)
         {
-        }
-
-
-        public override IConstant Assign(IValue operand)
-        {
-            throw new NotImplementedException();
         }
     }
 
 
-    public class PointerVariableMiniC : VariableMiniC, IRVar
+    public class PointerVariableMiniC : VariableMiniC
     {
-        public PointerVariableMiniC(Access accessType, MiniCTypeInfo typeDatas, TokenData nameToken, 
-                                                int blockLevel, int offset, VarProperty varProperty, 
-                                                uint pointerLevel, ExprNode value, DType typeName)
-                                                : base(accessType, typeDatas, nameToken, null, null, blockLevel, offset, varProperty, VariableMiniC.Convert(varProperty, value))
+        public PointerVariableMiniC(Access accessType, 
+                                                MiniCTypeInfo typeDatas, 
+                                                TokenData nameToken, 
+                                                int blockLevel, int offset, uint pointerLevel, 
+                                                ExprNode value, 
+                                                StdType typeName)
+                                                : base(accessType, typeDatas, nameToken, null, null, blockLevel, offset, value)
         {
             PointerLevel = pointerLevel;
-            TypeName = typeName;
+            TypeKind = typeName;
         }
 
-        public override DType TypeName { get; }
+        public override StdType TypeKind { get; }
 
-        public override bool CanAssign(IValue operand)
+        public override bool Assign(IConstant constant)
         {
-            if (operand is IntConstant) return true;
-
-            if (operand is PointerVariableMiniC)
+            if(constant is PointerConstant)
             {
-                var variable = (operand as PointerVariableMiniC);
-                return (PointerLevel == variable.PointerLevel);
+                var pConstant = constant as PointerConstant;
+                return (TypeKind == pConstant.TypeKind && PointerLevel == pConstant.PointerLevel);
             }
 
             return false;
-        }
-
-        public override IConstant Assign(IValue operand)
-        {
-            if (!CanAssign(operand)) throw new NotSupportedException();
-
-            if (operand is PointerVariableMiniC)
-            {
-                var variable = (operand as PointerVariable);
-                var valueConstant = variable.ValueConstant;
-
-                // operand may be not int type so it has to make int type explicity.
-                ValueConstant = new IntConstant((int)valueConstant.Value,
-                                                                    valueConstant.ValueState);
-            }
-            else
-            {
-                var valueConstant = (operand as IConstant);
-
-                // operand may be not int type so it has to make int type explicity.
-                ValueConstant = new IntConstant((int)valueConstant.Value,
-                                                                    valueConstant.ValueState);
-            }
-
-            return ValueConstant;
         }
     }
 }

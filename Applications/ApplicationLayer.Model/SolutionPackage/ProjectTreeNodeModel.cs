@@ -8,7 +8,6 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.IO;
 using System.Xml.Serialization;
-using static ApplicationLayer.Models.ProjectType;
 
 namespace ApplicationLayer.Models.SolutionPackage
 {

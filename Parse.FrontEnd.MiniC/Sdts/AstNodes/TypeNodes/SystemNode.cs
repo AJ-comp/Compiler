@@ -1,4 +1,5 @@
 ﻿using Parse.FrontEnd.Ast;
+using Parse.Types;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -7,7 +8,8 @@ namespace Parse.FrontEnd.MiniC.Sdts.AstNodes.TypeNodes
 {
     public class SystemNode : DataTypeNode
     {
-        public override DataType DataType => DataType.Int; // not fixed
+        // This type can be changed according to system.
+        public override StdType DataType => StdType.Int;
 
         public SystemNode(AstSymbol node) : base(node)
         {

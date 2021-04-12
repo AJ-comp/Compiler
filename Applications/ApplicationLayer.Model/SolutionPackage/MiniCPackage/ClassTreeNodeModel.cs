@@ -24,12 +24,12 @@ namespace ApplicationLayer.Models.SolutionPackage.MiniCPackage
         }
 
 
-        public ClassTreeNodeModel(ClassData classData)
+        public ClassTreeNodeModel(ClassDefData classData)
         {
             _classData = classData;
         }
 
 
-        private ClassData _classData;
+        private ClassDefData _classData;
     }
 }

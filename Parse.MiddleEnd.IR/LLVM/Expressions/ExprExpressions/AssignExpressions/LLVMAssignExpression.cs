@@ -1,8 +1,9 @@
 ﻿using Parse.MiddleEnd.IR.Datas;
+using Parse.MiddleEnd.IR.Interfaces;
 using Parse.MiddleEnd.IR.LLVM.Expressions.ExprExpressions;
+using Parse.MiddleEnd.IR.LLVM.Expressions.ExprExpressions.UseVarExpressions;
 using Parse.MiddleEnd.IR.LLVM.Models.VariableModels;
 using Parse.Types;
-using Parse.Types.ConstantTypes;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -16,13 +17,13 @@ namespace Parse.MiddleEnd.IR.LLVM.Expressions.AssignExpressions
 
         public bool IsDeRef { get; private set; } = false;
 
-        public LLVMAssignExpression(IRVar left,
-                                                    LLVMExprExpression right,
+        public LLVMAssignExpression(IRAssignOpExpr expression,
                                                     LLVMSSATable ssaTable) : base(ssaTable)
         {
-            LeftVar = _ssaTable.Find(left).LinkedObject as VariableLLVM;
+            _left = expression.Var;
+            LeftVar = _ssaTable.Find(_left).LinkedObject as VariableLLVM;
 
-            InitCommon(null, right);
+            InitCommon(null, _right);
         }
 
         public LLVMAssignExpression(LLVMExprExpression left,
@@ -31,15 +32,15 @@ namespace Parse.MiddleEnd.IR.LLVM.Expressions.AssignExpressions
         {
             InitCommon(left, right);
 
-            if (left is LLVMUseVarExpression)
+            if (left is LLVMUseNormalVarExpression)
             {
-                var useVarExpr = left as LLVMUseVarExpression;
+                var useVarExpr = left as LLVMUseNormalVarExpression;
 
                 LeftVar = _ssaTable.Find(useVarExpr.OriginalVar).LinkedObject as VariableLLVM;
             }
-            else if (left is LLVMDeRefExpression)
+            else if (left is LLVMUseDeRefExpression)
             {
-                var useVarExpr = left as LLVMDeRefExpression;
+                var useVarExpr = left as LLVMUseDeRefExpression;
                 LeftVar = useVarExpr.DeRefVar;
 
                 IsDeRef = true;
@@ -62,7 +63,7 @@ namespace Parse.MiddleEnd.IR.LLVM.Expressions.AssignExpressions
         {
             List<Instruction> result = new List<Instruction>();
             result.AddRange(RightExpr.Build());
-            result.AddRange(ConvertToExtension(RightExpr, DType.Int));
+            result.AddRange(ConvertToExtension(RightExpr, StdType.Int));
 
             if (IsDeRef) result.AddRange(LeftIsDeRefExprProcess());
             else result.AddRange(LeftIsVarProcess());
@@ -80,29 +81,29 @@ namespace Parse.MiddleEnd.IR.LLVM.Expressions.AssignExpressions
             RightExpr = right;
             RightExpr.IsRight = true;
 
-            if (RightExpr is LLVMUseVarExpression)
-                (RightExpr as LLVMUseVarExpression).IsUseVar = true;
+            if (RightExpr is LLVMUseNormalVarExpression)
+                (RightExpr as LLVMUseNormalVarExpression).IsUseVar = true;
         }
 
         private IEnumerable<Instruction> LeftIsVarProcess()
         {
             List<Instruction> result = new List<Instruction>();
 
-            if (RightExpr is LLVMUseVarExpression)
+            if (RightExpr is LLVMUseNormalVarExpression)
             {
-                var cRight = RightExpr as LLVMUseVarExpression;
+                var cRight = RightExpr as LLVMUseNormalVarExpression;
 
-                result.Add(Instruction.Store(cRight.SSAVar, LeftVar));
+                result.Add(Instruction.Store(cRight.Result, LeftVar));
             }
             else if (RightExpr is LLVMConstantExpression)
             {
-                var rightConstant = RightExpr.Result as IConstant;
+                var rightConstant = RightExpr as LLVMConstantExpression;
 
-                result.Add(Instruction.Store(rightConstant, LeftVar));
+                result.Add(Instruction.Store(rightConstant.Result, LeftVar));
             }
             else // expr
             {
-                result.Add(Instruction.Store(RightExpr.Result as VariableLLVM, LeftVar));
+                result.Add(Instruction.Store(RightExpr.Result, LeftVar));
             }
 
             return result;
@@ -112,33 +113,31 @@ namespace Parse.MiddleEnd.IR.LLVM.Expressions.AssignExpressions
         {
             List<Instruction> result = new List<Instruction>();
 
-            var deRefExpr = LeftExpr as LLVMDeRefExpression;
+            var deRefExpr = LeftExpr as LLVMUseDeRefExpression;
 
             var loadInstruction = Instruction.Load(deRefExpr.Var, _ssaTable);
             result.Add(loadInstruction);
-            var newSSAVar = loadInstruction.NewSSAVar;
+            var ssaVar = loadInstruction.NewSSAVar;
 
-            if (RightExpr is LLVMUseVarExpression)
-            {
-                var cRight = RightExpr as LLVMUseVarExpression;
-
-                result.Add(Instruction.Store(cRight.SSAVar, newSSAVar, true));
-            }
+            if (RightExpr is LLVMUseNormalVarExpression)
+                result.Add(Instruction.Store(RightExpr.Result, ssaVar, true));
             else if (RightExpr is LLVMConstantExpression)
             {
-                var rightConstant = RightExpr.Result as IConstant;
-
-                newSSAVar.PointerLevel--;
-                result.Add(Instruction.Store(rightConstant, newSSAVar));
-                newSSAVar.PointerLevel++;
+                ssaVar.PointerLevel--;
+                result.Add(Instruction.Store(RightExpr.Result, ssaVar));
+                ssaVar.PointerLevel++;
             }
             else // expr
             {
-                var deRefVar = _ssaTable.NewLinkAsDeRef(newSSAVar);
-                result.Add(Instruction.Store(RightExpr.Result as VariableLLVM, deRefVar));
+                var deRefVar = _ssaTable.NewLinkAsDeRef(ssaVar);
+                result.Add(Instruction.Store(RightExpr.Result, deRefVar));
             }
 
             return result;
         }
+
+
+        private IRDeclareVar _left;
+        private LLVMExprExpression _right;
     }
 }

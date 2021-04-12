@@ -1,25 +1,22 @@
 ﻿using Parse.MiddleEnd.IR.Datas;
+using Parse.MiddleEnd.IR.Interfaces;
+using Parse.MiddleEnd.IR.LLVM.Expressions.ExprExpressions.UseVarExpressions;
 using Parse.MiddleEnd.IR.LLVM.Models.VariableModels;
 using Parse.Types;
 using System.Collections.Generic;
 
 namespace Parse.MiddleEnd.IR.LLVM.Expressions.ExprExpressions
 {
-    // constant <binop> constant can't comes because optimization logic convert to one constant.
+    // constant <binop> constant can't come because optimization logic convert to one constant.
     // ex : 10 + 15 => 25
     // so this expression always has at least one variable.
-    public abstract class LLVMBinOpExpression : LLVMExprExpression
+    public class LLVMBinOpExpression : LLVMExprExpression
     {
-        public LLVMExprExpression Left { get; protected set; }
-        public LLVMExprExpression Right { get; protected set; }
-
-
-        protected LLVMBinOpExpression(LLVMExprExpression left, 
-                                                        LLVMExprExpression right, 
-                                                        LLVMSSATable ssaTable) : base(ssaTable)
+        public LLVMBinOpExpression(IRBinOpExpr expression, LLVMSSATable ssaTable) : base(ssaTable)
         {
-            Left = left;
-            Right = right;
+            _expression = expression;
+            _left = Create(expression.Left, ssaTable);
+            _right = Create(expression.Right, ssaTable);
         }
 
 
@@ -27,32 +24,35 @@ namespace Parse.MiddleEnd.IR.LLVM.Expressions.ExprExpressions
         {
             List<Instruction> result = new List<Instruction>();
 
-            if (Left is LLVMUseVarExpression)
-                (Left as LLVMUseVarExpression).IsUseVar = true;
+            if (_left is LLVMUseNormalVarExpression)
+                (_left as LLVMUseNormalVarExpression).IsUseVar = true;
 
-            if (Right is LLVMUseVarExpression)
-                (Right as LLVMUseVarExpression).IsUseVar = true;
+            if (_right is LLVMUseNormalVarExpression)
+                (_right as LLVMUseNormalVarExpression).IsUseVar = true;
 
-            result.AddRange(Left.Build());
-            result.AddRange(Right.Build());
+            result.AddRange(_left.Build());
+            result.AddRange(_right.Build());
 
             // Convert to equal the left type and right type.
-            var toType = LLVMChecker.MaximumType(Left.Result.TypeName, Right.Result.TypeName);
-            if (toType != DType.Double) toType = DType.Int;
+            var toType = LLVMChecker.MaximumType(_left.Result.TypeKind, _right.Result.TypeKind);
 
-            result.AddRange(ConvertToExtension(Left, toType));
-            result.AddRange(ConvertToExtension(Right, toType));
+            if (toType != StdType.Double) toType = StdType.Int;
+
+            result.AddRange(ConvertToExtension(_left, toType));
+            result.AddRange(ConvertToExtension(_right, toType));
+
+
 
             return result;
         }
 
-        protected bool IsDoubleType(IValue value) => (value is IDouble);
+        protected bool IsDoubleType(ISSAForm value) => (value.TypeKind == StdType.Double);
         protected IEnumerable<Instruction> ExtensionToI32Inst(IntegerVarLLVM value, LLVMSSATable ssTable)
         {
             List<Instruction> result = new List<Instruction>();
-            if (value is IInt) return result;
+            if (value.TypeKind == StdType.Int) return result;
 
-            result.Add(Instruction.ConvertType(value, DType.Int, ssTable));
+            result.Add(Instruction.ConvertType(value, StdType.Int, ssTable));
             return result;
         }
 
@@ -60,12 +60,16 @@ namespace Parse.MiddleEnd.IR.LLVM.Expressions.ExprExpressions
         {
             List<Instruction> result = new List<Instruction>();
 
-            if (!IsDoubleType(Right.Result)) return result;
-            if (!(Left.Result is IDouble) && !(Right.Result is IDouble)) return result;
+            if (!IsDoubleType(_right.Result)) return result;
+            if (!(_left.Result.TypeKind == StdType.Double) && !(_right.Result.TypeKind == StdType.Double)) return result;
             
             Instruction.IToFp(var, ssTable);
 
             return result;
         }
+
+        private IRBinOpExpr _expression;
+        private LLVMExprExpression _left;
+        private LLVMExprExpression _right;
     }
 }

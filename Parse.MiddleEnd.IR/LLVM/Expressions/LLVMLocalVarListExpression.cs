@@ -1,22 +1,21 @@
 ﻿using Parse.MiddleEnd.IR.Datas;
 using Parse.MiddleEnd.IR.LLVM.Expressions.ExprExpressions;
-using Parse.MiddleEnd.IR.LLVM.Models;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace Parse.MiddleEnd.IR.LLVM.Expressions
 {
     public class LLVMLocalVarListExpression : LLVMDependencyExpression
     {
-        public LLVMLocalVarListExpression(IEnumerable<CalculationInfo> declareInfoList, LLVMSSATable ssaTable) : base(ssaTable)
+        public LLVMLocalVarListExpression(IEnumerable<IRDeclareVar> initialVarList, LLVMSSATable ssaTable) : base(ssaTable)
         {
-            foreach (var declareInfo in declareInfoList)
+            foreach (var initialVar in initialVarList)
             {
-                var declareVar = _ssaTable.RegisterRootChainVarToLocal(declareInfo.Left);
-                var expression = declareInfo.Right;
+                var declareVar = _ssaTable.RegisterRootChainVarToLocal(initialVar);
+                var expression = initialVar.InitialExpr;
 
-                _declaredInfos.Add(new Tuple<RootChainVar, LLVMExprExpression>(declareVar, expression));
+                _declaredInfos.Add(new Tuple<RootChainVarContainer, LLVMExprExpression>(declareVar, 
+                                                                                                                    LLVMExprExpression.Create(expression, _ssaTable)));
             }
         }
 
@@ -43,7 +42,7 @@ namespace Parse.MiddleEnd.IR.LLVM.Expressions
         }
 
 
-        private List<Tuple<RootChainVar, LLVMExprExpression>> _declaredInfos = new List<Tuple<RootChainVar, LLVMExprExpression>>();
+        private List<Tuple<RootChainVarContainer, LLVMExprExpression>> _declaredInfos = new List<Tuple<RootChainVarContainer, LLVMExprExpression>>();
 
     }
 }

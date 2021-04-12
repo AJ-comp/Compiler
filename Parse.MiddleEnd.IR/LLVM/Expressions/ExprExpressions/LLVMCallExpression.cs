@@ -1,40 +1,43 @@
 ﻿using Parse.MiddleEnd.IR.Datas;
-using Parse.Types;
+using Parse.MiddleEnd.IR.Interfaces;
+using Parse.MiddleEnd.IR.LLVM.Expressions.ExprExpressions.UseVarExpressions;
 using System.Collections.Generic;
 
 namespace Parse.MiddleEnd.IR.LLVM.Expressions.ExprExpressions
 {
     public class LLVMCallExpression : LLVMExprExpression
     {
-
-
-        public LLVMCallExpression(IRFuncData funcData, IEnumerable<LLVMExprExpression> paramDatas, LLVMSSATable ssaTable) : base(ssaTable)
+        public LLVMCallExpression(IRCallExpr expression, 
+                                               LLVMSSATable ssaTable) : base(ssaTable)
         {
-            _funcData = funcData;
-            _paramDatas = paramDatas;
+            _expression = expression;
+
+            foreach (var paramData in _expression.Params)
+            {
+                _params.Add(Create(paramData, ssaTable));
+            }
         }
 
         public override IEnumerable<Instruction> Build()
         {
-            List<IValue> toPassParam = new List<IValue>();
+            List<ISSAForm> toPassParam = new List<ISSAForm>();
             List<Instruction> result = new List<Instruction>();
 
-            foreach (var paramData in _paramDatas)
+            foreach (var paramData in _params)
             {
-                if (paramData is LLVMUseVarExpression)
-                    (paramData as LLVMUseVarExpression).IsUseVar = true;
+                if (paramData is LLVMUseNormalVarExpression)
+                    (paramData as LLVMUseNormalVarExpression).IsUseVar = true;
 
                 result.AddRange(paramData.Build());
                 toPassParam.Add(paramData.Result);
             }
 
-            result.Add(Instruction.Call(_funcData, toPassParam, _ssaTable));
+            result.Add(Instruction.Call(_expression.FuncDefInfo, toPassParam, _ssaTable));
 
             return result;
         }
 
-
-        private IRFuncData _funcData;
-        private IEnumerable<LLVMExprExpression> _paramDatas;
+        private IRCallExpr _expression;
+        private List<LLVMExprExpression> _params;
     }
 }

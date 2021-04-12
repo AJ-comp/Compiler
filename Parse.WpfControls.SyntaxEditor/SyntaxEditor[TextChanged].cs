@@ -52,20 +52,20 @@ namespace Parse.WpfControls.SyntaxEditor
         {
             if (changeInfo.RemovedLength > 0 && changeInfo.AddedLength > 0) this.UpdateTokens(changeInfo);
             else if (changeInfo.RemovedLength > 0)
-                this.Compiler.Operate(FileName, changeInfo.Offset, changeInfo.RemovedLength);
+                this.Compiler.Parsing(FullPath, changeInfo.Offset, changeInfo.RemovedLength);
             else if (changeInfo.AddedLength > 0)
             {
                 string addString = this.Text.Substring(changeInfo.Offset, changeInfo.AddedLength);
-                this.Compiler.Operate(FileName, changeInfo.Offset, addString);
+                this.Compiler.Parsing(FullPath, changeInfo.Offset, addString);
             }
         }
 
         private void UpdateTokens(TextChange changeInfo)
         {
-            this.Compiler.Operate(FileName, changeInfo.Offset, changeInfo.RemovedLength);
+            this.Compiler.Parsing(FullPath, changeInfo.Offset, changeInfo.RemovedLength);
 
             string addString = this.Text.Substring(changeInfo.Offset, changeInfo.AddedLength);
-            this.Compiler.Operate(FileName, changeInfo.Offset, addString);
+            this.Compiler.Parsing(FullPath, changeInfo.Offset, addString);
         }
 
 

@@ -12,6 +12,6 @@ namespace Parse.Types.Operations
         /// <param name="operand"></param>
         /// <returns></returns>
         ///////////////////////////////////////////////////////////////////////////////////////
-        IConstant Assign(IValue operand);
+        IConstant Assign(IConstant operand);
     }
 }

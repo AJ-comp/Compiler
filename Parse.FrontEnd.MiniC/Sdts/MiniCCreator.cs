@@ -24,7 +24,6 @@ namespace Parse.FrontEnd.MiniC.Sdts
                                                                         TokenData dimensionToken,
                                                                         int blockLevel,
                                                                         int offset,
-                                                                        VarProperty varProperty,
                                                                         ExprNode value)
         {
             VariableMiniC result = null;
@@ -38,7 +37,7 @@ namespace Parse.FrontEnd.MiniC.Sdts
                                                                  dimensionToken,
                                                                  blockLevel,
                                                                  offset,
-                                                                 varProperty, value);
+                                                                 value);
             }
             else if (typeDatas.DataType == MiniCDataType.Int)
             {
@@ -49,7 +48,6 @@ namespace Parse.FrontEnd.MiniC.Sdts
                                                             dimensionToken,
                                                             blockLevel,
                                                             offset,
-                                                            varProperty,
                                                             value);
             }
             else if (typeDatas.DataType == MiniCDataType.Address)
@@ -59,10 +57,9 @@ namespace Parse.FrontEnd.MiniC.Sdts
                                                                     nameToken, 
                                                                     blockLevel, 
                                                                     offset, 
-                                                                    varProperty, 
                                                                     1, 
                                                                     value, 
-                                                                    DType.Int);
+                                                                    StdType.Int);
             }
 
             return result;
@@ -75,8 +72,7 @@ namespace Parse.FrontEnd.MiniC.Sdts
                                                                         TokenData levelToken,
                                                                         TokenData dimensionToken,
                                                                         int blockLevel,
-                                                                        int offset,
-                                                                        VarProperty varProperty)
+                                                                        int offset)
         {
             return CreateVarData(accessType, 
                                             typeDatas, 
@@ -85,7 +81,6 @@ namespace Parse.FrontEnd.MiniC.Sdts
                                             dimensionToken, 
                                             blockLevel, 
                                             offset, 
-                                            varProperty, 
                                             null);
         }
 
@@ -106,7 +101,6 @@ namespace Parse.FrontEnd.MiniC.Sdts
                 else if (cRoot.SignPost.MeaningUnit == MiniCGrammar.AccesserNode) result = new AccesserNode(root);
                 else if (cRoot.SignPost.MeaningUnit == MiniCGrammar.StructDef) result = new StructDefNode(root);
                 else if (cRoot.SignPost.MeaningUnit == MiniCGrammar.ClassDef) result = new ClassDefNode(root);
-                else if (cRoot.SignPost.MeaningUnit == MiniCGrammar.MemberField) result = new VariableDclsNode(root);
 
                 else if (cRoot.SignPost.MeaningUnit == MiniCGrammar.FuncDef) result = new FuncDefNode(root);
                 else if (cRoot.SignPost.MeaningUnit == MiniCGrammar.FuncHead) result = new FuncHeadNode(root);
@@ -154,9 +148,10 @@ namespace Parse.FrontEnd.MiniC.Sdts
                 else if (cRoot.SignPost.MeaningUnit == MiniCGrammar.ConstNode) result = new ConstNode(root);
                 else if (cRoot.SignPost.MeaningUnit == MiniCGrammar.VoidNode) result = new VoidNode(root);
                 else if (cRoot.SignPost.MeaningUnit == MiniCGrammar.SystemNode) result = new SystemNode(root);
-                else if (cRoot.SignPost.MeaningUnit == MiniCGrammar.IntNode) result = new IntNode(root);
+                else if (cRoot.SignPost.MeaningUnit == MiniCGrammar.IntNode) result = new IntNode(root, false);
+                else if (cRoot.SignPost.MeaningUnit == MiniCGrammar.UIntNode) result = new IntNode(root, true);
                 else if (cRoot.SignPost.MeaningUnit == MiniCGrammar.AddressNode) result = new AddressNode(root);
-                else if (cRoot.SignPost.MeaningUnit == MiniCGrammar.Dcl) result = new VariableDclsNode(root);
+                else if (cRoot.SignPost.MeaningUnit == MiniCGrammar.Dcl) result = new VariableDclListNode(root);
                 else if (cRoot.SignPost.MeaningUnit == MiniCGrammar.DclVar) result = new InitDeclaratorNode(root);
                 else if (cRoot.SignPost.MeaningUnit == MiniCGrammar.DeclareVarIdent) result = new DeclareVarNode(root);
                 else if (cRoot.SignPost.MeaningUnit == MiniCGrammar.DeRef) result = new DeRefExprNode(root);

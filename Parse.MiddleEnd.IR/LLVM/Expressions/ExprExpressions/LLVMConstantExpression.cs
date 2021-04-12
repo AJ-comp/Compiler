@@ -1,4 +1,5 @@
-﻿using Parse.Types.ConstantTypes;
+﻿using Parse.MiddleEnd.IR.Datas;
+using Parse.Types.ConstantTypes;
 using System.Collections.Generic;
 
 namespace Parse.MiddleEnd.IR.LLVM.Expressions.ExprExpressions
@@ -7,7 +8,7 @@ namespace Parse.MiddleEnd.IR.LLVM.Expressions.ExprExpressions
     {
         public LLVMConstantExpression(IConstant value, LLVMSSATable ssaTable) : base(ssaTable)
         {
-            Result = value;
+            Result = new SSAConst(value);
         }
 
         public override IEnumerable<Instruction> Build() => new List<Instruction>();

@@ -1,15 +1,15 @@
-﻿using Parse.MiddleEnd.IR.LLVM.Expressions.ExprExpressions;
-using System;
+﻿using Parse.MiddleEnd.IR.Interfaces;
+using Parse.MiddleEnd.IR.LLVM.Expressions.ExprExpressions;
 using System.Collections.Generic;
 
 namespace Parse.MiddleEnd.IR.LLVM.Expressions.StmtExpressions
 {
     public class LLVMExprStmtExpression : LLVMStmtExpression
     {
-        public LLVMExprStmtExpression(LLVMExprExpression expr, 
+        public LLVMExprStmtExpression(IRExprStatement statement, 
                                                         LLVMSSATable ssaTable) : base(ssaTable)
         {
-            _expr = expr;
+            _expr = LLVMExprExpression.Create(statement.Expression, ssaTable);
         }
 
         public override IEnumerable<Instruction> Build()

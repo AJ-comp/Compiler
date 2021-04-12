@@ -1,13 +1,14 @@
 ﻿using Parse.FrontEnd.Ast;
-using Parse.FrontEnd.MiniC.Sdts.AstNodes.ExprNodes;
+using Parse.FrontEnd.MiniC.Sdts.AstNodes.ExprNodes.LogicalExprNodes;
+using Parse.FrontEnd.MiniC.Sdts.Datas;
 
 namespace Parse.FrontEnd.MiniC.Sdts.AstNodes.StatementNodes
 {
-    public abstract class CondStatementNode : StatementNode
+    public abstract class CondStatementNode : StatementNode, IConditionStatement
     {
-        public ExprNode Condition { get; protected set; }
+        public ICompareExpression ConditionExpression { get; protected set; }
         public StatementNode TrueStatement { get; protected set; }
-
+        public StatementNode FalseStatement { get; protected set; }
 
         protected CondStatementNode(AstSymbol node) : base(node)
         {
@@ -19,21 +20,20 @@ namespace Parse.FrontEnd.MiniC.Sdts.AstNodes.StatementNodes
         // [2] : StatementNode [statement]
         public override SdtsNode Build(SdtsParams param)
         {
-            Condition = Items[1].Build(param) as ExprNode;
+            if (Items[1] is CompareExprNode)
+            {
+                ConditionExpression = Items[1].Build(param) as CompareExprNode;
+            }
+            else if(Items[1] is NotExprNode)
+            {
+                ConditionExpression = Items[1].Build(param) as NotExprNode;
+            }
+            else
+            {
+                // add an error
+            }
 
             TrueStatement = Items[2].Build(param) as StatementNode;
-
-            /*
-            if(node0 is BinaryExprNode)
-            {
-                var cNode = (node0 as BinaryExprNode);
-                if (cNode.Result == null) return this;
-
-                bool isZero = (bool)cNode.Result.Value;
-
-                if (isZero) node1.IsNotUsed = true;
-            }
-            */
 
             return this;
         }

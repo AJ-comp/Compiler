@@ -5,12 +5,12 @@ namespace Parse.FrontEnd.MiniC
 {
     internal class MiniCTypeConverter
     {
-        public static DType ToIRDataType(MiniCDataType dataType)
+        public static StdType ToStdDataType(MiniCDataType dataType)
         {
-            DType result = DType.Unknown;
+            StdType result = StdType.Unknown;
 
-            if (dataType == MiniCDataType.Int)
-                result = DType.Int;
+            if (dataType == MiniCDataType.Void) result = StdType.Void;
+            else if (dataType == MiniCDataType.Int) result = StdType.Int;
 
             return result;
         }
@@ -35,15 +35,15 @@ namespace Parse.FrontEnd.MiniC
             return result;
         }
 
-        public static MiniCDataType ToMiniCDataType(DType dType)
+        public static MiniCDataType ToMiniCDataType(StdType dType)
         {
             MiniCDataType result = MiniCDataType.Unknown;
 
-            if (dType == DType.Bit) result = MiniCDataType.Int;
-            else if (dType == DType.Byte) result = MiniCDataType.Int;
-            else if (dType == DType.Short) result = MiniCDataType.Int;
-            else if (dType == DType.Int) result = MiniCDataType.Int;
-            else if (dType == DType.Double) result = MiniCDataType.Int;
+            if (dType == StdType.Bit) result = MiniCDataType.Int;
+            else if (dType == StdType.Byte) result = MiniCDataType.Int;
+            else if (dType == StdType.Short) result = MiniCDataType.Int;
+            else if (dType == StdType.Int) result = MiniCDataType.Int;
+            else if (dType == StdType.Double) result = MiniCDataType.Int;
 
             return result;
         }

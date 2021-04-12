@@ -1,14 +1,25 @@
 ﻿using Parse.FrontEnd.Ast;
-using Parse.FrontEnd.MiniC.Sdts.Datas.Variables;
 using Parse.FrontEnd.MiniC.Properties;
+using Parse.FrontEnd.MiniC.Sdts.Datas;
+using Parse.FrontEnd.MiniC.Sdts.Datas.Variables;
+using Parse.MiddleEnd.IR.Datas;
+using Parse.MiddleEnd.IR.Interfaces;
 
 namespace Parse.FrontEnd.MiniC.Sdts.AstNodes.ExprNodes
 {
-    public class UseIdentNode : ExprNode
+    public class UseIdentNode : ExprNode, IUseIdentExpression
     {
         public TokenData IdentToken { get; private set; }
+        public VariableMiniC VarData { get; private set; }
+        public StructVariableMiniC StructVarData { get; private set; }
+        public FuncDefData FuncData { get; private set; }
+        public ISymbolData UsedSymbolData => GetSymbol(IdentToken);
 
-        public VariableMiniC VarData => MiniCUtilities.GetVarRecordFromReferableST(this, IdentToken)?.DefineField;
+
+        // for interface **************************************************/
+        public IDeclareVarExpression Var => VarData;
+        public IFunctionExpression Func => FuncData;
+        /*************************************************************/
 
 
         public UseIdentNode(AstSymbol node) : base(node)
@@ -23,41 +34,30 @@ namespace Parse.FrontEnd.MiniC.Sdts.AstNodes.ExprNodes
             var node = Items[0].Build(param) as TerminalNode;
             IdentToken = node.Token;
 
-            Result = VarData?.ValueConstant;
-
-            // If varToken is not declared, add as virtual token to the SymbolTable.
-            if (IsNotDeclared())
+            var symbolData = UsedSymbolData;
+            if (symbolData == null)
             {
-                // create MiniCVarData with unknown property.
-                //                var varData = new UnknownVarData(IdentToken, param.BlockLevel, param.Offset);
-
-                //                (param as MiniCSdtsParams).SymbolTable.AddVarData(varData, new ReferenceInfo(this, ));
-            }
-
-            return this;
-        }
-
-
-        /// <summary>
-        /// This function checks whether "varTokenToCheck" is Declarated.
-        /// </summary>
-        /// <returns></returns>
-        private bool IsNotDeclared()
-        {
-            var varData = MiniCUtilities.GetVarRecordFromReferableST(this, IdentToken);
-            if (varData != null) return false;
-
-            var funcData = MiniCUtilities.GetFuncDataList(this, IdentToken);
-            if (funcData != null) return false;
-
-            ConnectedErrInfoList.Add
+                ConnectedErrInfoList.Add
                 (
                     new MeaningErrInfo(IdentToken,
                                                     nameof(AlarmCodes.MCL0001),
                                                     string.Format(AlarmCodes.MCL0001, IdentToken.Input))
                 );
+            }
+            else if (symbolData is VariableMiniC)
+            {
+                VarData = symbolData as VariableMiniC;
+                Result = (symbolData as VariableMiniC).Result;
 
-            return true;
+                VarData.ReferenceTable.Add(this);
+            }
+            else if (symbolData is FuncDefData)
+            {
+                FuncData = symbolData as FuncDefData;
+                Result = (symbolData as FuncDefData).ReturnValue;
+            }
+
+            return this;
         }
     }
 }

@@ -5,19 +5,25 @@ namespace Parse.FrontEnd.Tokenize
 {
     public partial class LexingData
     {
+        /***************************************************************/
         /// <summary>
         /// This function returns the impact range on the basis of the tokenIndex argument.
+        /// tokenIndex 파라메터를 기반으로 한 영향 범위를 가져옵니다.
         /// </summary>
         /// <param name="tokenIndex"></param>
         /// <returns>The first value : index, The second value : count </returns>
+        /***************************************************************/
         public Range FindImpactRange(int tokenIndex) => this.FindImpactRange(tokenIndex, tokenIndex);
 
+
+        /***************************************************************/
         /// <summary>
         /// This function returns the impact range on the basis of the arguments.
         /// </summary>
         /// <param name="startTokenIndex"></param>
         /// <param name="endTokenIndex"></param>
         /// <returns>The first value : index, The second value : count </returns>
+        /***************************************************************/
         public Range FindImpactRange(int startTokenIndex, int endTokenIndex)
         {
             //            var indexes = this.GetIndexesForSpecialPattern(" ", "\t", "\r", "\n");
@@ -46,11 +52,14 @@ namespace Parse.FrontEnd.Tokenize
         }
 
 
+        /****************************************************/
         /// <summary>
         /// This function returns view token index for parsing token index.
+        /// 파싱 토큰 인덱스에 매치되는 뷰 토큰 인덱스를 가져옵니다.
         /// </summary>
         /// <param name="pTokenIndex"></param>
         /// <returns></returns>
+        /****************************************************/
         public int GetVIndexFromPIndex(int pTokenIndex)
         {
             int result = -1;

@@ -1,17 +1,7 @@
 ﻿using Parse.FrontEnd.MiniC.Sdts.AstNodes;
-using Parse.FrontEnd.MiniC.Sdts.AstNodes.ExprNodes;
-using Parse.FrontEnd.MiniC.Sdts.AstNodes.ExprNodes.ArithmeticExprNodes;
-using Parse.FrontEnd.MiniC.Sdts.AstNodes.ExprNodes.AssignExprNodes;
-using Parse.FrontEnd.MiniC.Sdts.AstNodes.ExprNodes.LiteralNodes;
-using Parse.FrontEnd.MiniC.Sdts.AstNodes.ExprNodes.LogicalExprNodes;
-using Parse.FrontEnd.MiniC.Sdts.AstNodes.StatementNodes;
-using Parse.FrontEnd.MiniC.Sdts.Datas.Variables;
-using Parse.MiddleEnd.IR;
-using Parse.MiddleEnd.IR.Datas;
+using Parse.FrontEnd.MiniC.Sdts.Expressions;
 using Parse.MiddleEnd.IR.LLVM;
 using Parse.MiddleEnd.IR.LLVM.Expressions;
-using System;
-using System.Collections.Generic;
 
 namespace Parse.FrontEnd.IRGenerator
 {
@@ -30,105 +20,33 @@ namespace Parse.FrontEnd.IRGenerator
             return result;
         }
 
-        public static LLVMExpression GenerateLLVMExpression(SdtsNode rootNode)
+
+        /// ***************************************************************/
+        /// <summary>
+        /// LLVM IR 생성을 위한 LLVMExpression을 생성합니다.
+        /// 파라메터 expression이 루트 Expression이 아닐 경우 null을 반환합니다.
+        /// </summary>
+        /// <param name="expression">LLVMExpression 생성을 위한 FianlExpression의 루트</param>
+        /// <returns></returns>
+        /// ***************************************************************/
+        public static LLVMExpression GenerateLLVMExpression(AJExpression expression)
         {
-            if (rootNode is MiniCNode)
-            {
-                var cRootNode = rootNode as MiniCNode;
-                ConnectGenerateHandler(cRootNode);
-
-                return cRootNode.ExecuteToIRExpression(new LLVMSSATable()) as LLVMExpression;
-            }
-
-            return null;
-        }
-
-        private static void ConnectGenerateHandler(MiniCNode rootNode)
-        {
-            if (rootNode is ProgramNode) rootNode.ConvertingToIRExpression = ProgramNodeToIRExpression;
-            else if (rootNode is FuncDefNode) rootNode.ConvertingToIRExpression = FuncDefNodeToIRExpression;
-            else if (rootNode is CompoundStNode) rootNode.ConvertingToIRExpression = CompoundStNodeToIRExpression;
-            else if (rootNode is IfStatementNode) rootNode.ConvertingToIRExpression = CommonCondStatementToIRExpression;
-            else if (rootNode is IfElseStatementNode) rootNode.ConvertingToIRExpression = CommonCondStatementToIRExpression;
-            else if (rootNode is WhileStatementNode) rootNode.ConvertingToIRExpression = CommonCondStatementToIRExpression;
-            else if (rootNode is ReturnStatementNode) rootNode.ConvertingToIRExpression = ReturnStatementToIRExpression;
-            else if (rootNode is ExprStatementNode) rootNode.ConvertingToIRExpression = ExprStatementNodeToIRExpression;
-            else if (rootNode is CallNode) rootNode.ConvertingToIRExpression = CallNodeToIRExpression;
-            else if (rootNode is AssignNode) rootNode.ConvertingToIRExpression = AssignNodeToIRExpression;
-            else if (rootNode is AddExprNode) rootNode.ConvertingToIRExpression = AddExprNodeToIRExpression;
-            else if (rootNode is SubExprNode) rootNode.ConvertingToIRExpression = SubExprNodeToIRExpression;
-            else if (rootNode is MulExprNode) rootNode.ConvertingToIRExpression = MulExprNodeToIRExpression;
-            else if (rootNode is ModExprNode) rootNode.ConvertingToIRExpression = DivExprNodeToIRExpression;
-            else if (rootNode is DivExprNode) rootNode.ConvertingToIRExpression = ModExprNodeToIRExpression;
-            else if (rootNode is EqualExprNode) rootNode.ConvertingToIRExpression = EqualExprNodeToIRExpression;
-            else if (rootNode is NotEqualExprNode) rootNode.ConvertingToIRExpression = NotEqualExprNodeToIRExpression;
-            else if (rootNode is GreaterThanNode) rootNode.ConvertingToIRExpression = GreaterThanExprNodeToIRExpression;
-            else if (rootNode is GreaterEqualNode) rootNode.ConvertingToIRExpression = GreaterEqualExprNodeToIRExpression;
-            else if (rootNode is LessThanNode) rootNode.ConvertingToIRExpression = LessThanExprNodeToIRExpression;
-            else if (rootNode is LessEqualNode) rootNode.ConvertingToIRExpression = LessEqualExprNodeToIRExpression;
-            else if (rootNode is PreIncExprNode) rootNode.ConvertingToIRExpression = PreIncExprNodeToIRExpression;
-            else if (rootNode is PostIncExprNode) rootNode.ConvertingToIRExpression = PostIncExprNodeToIRExpression;
-            else if (rootNode is PreDecExprNode) rootNode.ConvertingToIRExpression = PreDecExprNodeToIRExpression;
-            else if (rootNode is PostDecExprNode) rootNode.ConvertingToIRExpression = PostDecExprNodeToIRExpression;
-            else if (rootNode is DeRefExprNode) rootNode.ConvertingToIRExpression = DeRefExprNodeToIRExpression;
-
-            else if (rootNode is UseIdentNode) rootNode.ConvertingToIRExpression = UseIdentNodeToIRExpression;
-            else if (rootNode is LiteralNode) rootNode.ConvertingToIRExpression = LiteralNodeToIRExpression;
-
-            // remove for a while for debugging
-            //            else throw new NotImplementedException();
-
-
-            foreach (var item in rootNode.Items)
-                ConnectGenerateHandler(item as MiniCNode);
-        }
-
-        private static IRExpression ProgramNodeToIRExpression(SdtsNode sender, object param)
-        {
-            var cNode = sender as ProgramNode;
-            var ssaTable = param as LLVMSSATable;
+            var ssaTable = new LLVMSSATable();
 
             LLVMRootExpression result = new LLVMRootExpression();
 
-            foreach (var varRecord in cNode.SymbolTable.VarTable)
-                result.FirstLayers.Add(new LLVMGlobalVariableExpression(varRecord.DefineField, ssaTable));
+            if (!(expression is ProgramExpression)) return null;
+            var cExpression = expression as ProgramExpression;
 
-            int index = 0;
-            foreach (var namespaceNode in cNode.NamespaceDatas)
+            foreach (var namespaceExpression in cExpression.Namespaces)
             {
-                foreach (var classData in namespaceNode.ClassDatas)
+                foreach (var classData in namespaceExpression.Classes)
                 {
-                    var funcParam = new Tuple<LLVMSSATable, int>(ssaTable.Clone() as LLVMSSATable, index++);
-                    var defNode = classData.ReferenceTable[0] as MiniCNode;
-                    result.FirstLayers.Add(defNode.ExecuteToIRExpression(funcParam) as LLVMFirstLayerExpression);
+                    result.FirstLayers.Add(new LLVMClassExpression(classData.ToIRData(), ssaTable));
                 }
             }
 
             return result;
-        }
-
-
-        private static IRExpression FuncDefNodeToIRExpression(SdtsNode node, object param)
-        {
-            var cNode = node as FuncDefNode;
-            var cParam = param as Tuple<LLVMSSATable, int>;
-            var ssaTable = cParam.Item1;
-            var index = cParam.Item2;
-
-            // param variable declaration
-            List<IRVar> paramVars = new List<IRVar>();
-            foreach (var varRecord in cNode.SymbolTable.VarTable)
-            {
-                if (varRecord.DefineField.VariableProperty == VarProperty.Param) paramVars.Add(varRecord.DefineField);
-            }
-
-            var paramListAndReturnExpression = new LLVMParamListAndReturnExpression(paramVars, null, ssaTable);
-
-            return new LLVMFuncDefExpression(cNode.FuncData.ToIRFuncData(),
-                                                                    paramListAndReturnExpression,
-                                                                    cNode.CompoundSt.ExecuteToIRExpression(ssaTable) as LLVMBlockExpression,
-                                                                    ssaTable,
-                                                                    0);
         }
     }
 }

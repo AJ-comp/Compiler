@@ -58,7 +58,7 @@ namespace Parse.FrontEnd.MiniC.Sdts.Datas
                 if (InitValue?.Result != null)
                 {
                     result += string.Format("Init value: {0},{1},{2}",
-                                                        Helper.GetDescription(InitValue.Result.TypeName),
+                                                        Helper.GetDescription(InitValue.Result.TypeKind),
                                                         InitValue.Result.Value,
                                                         InitValue.Result.ValueState);
                 }

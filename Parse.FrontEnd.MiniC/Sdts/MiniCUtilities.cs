@@ -1,45 +1,17 @@
-﻿using Parse.FrontEnd.MiniC.Sdts.AstNodes;
+﻿using Parse.FrontEnd.MiniC.Properties;
+using Parse.FrontEnd.MiniC.Sdts.AstNodes;
 using Parse.FrontEnd.MiniC.Sdts.Datas;
 using Parse.FrontEnd.MiniC.Sdts.Datas.Variables;
-using Parse.FrontEnd.MiniC.Properties;
-using System.Collections.Generic;
+using Parse.MiddleEnd.IR.Interfaces;
+using Parse.Types;
+using Parse.Types.ConstantTypes;
 using System;
+using System.Collections.Generic;
 
 namespace Parse.FrontEnd.MiniC.Sdts
 {
     public class MiniCUtilities
     {
-
-        /// <summary>
-        /// This function adds duplicated error to the node.
-        /// </summary>
-        /// <param name="node"></param>
-        /// <param name="varTokenToCheck"></param>
-        /// <returns></returns>
-        public static bool AddDuplicatedError(MiniCNode node, TokenData varTokenToCheck = null)
-        {
-            if (varTokenToCheck == null)
-            {
-                node.ConnectedErrInfoList.Add
-                (
-                    new MeaningErrInfo(node.AllTokens,
-                                                    nameof(AlarmCodes.MCL0009),
-                                                    string.Format(AlarmCodes.MCL0009, node.AllTokens[0].Input))
-                );
-            }
-            else
-            {
-                node.ConnectedErrInfoList.Add
-                (
-                    new MeaningErrInfo(varTokenToCheck,
-                                                    nameof(AlarmCodes.MCL0009),
-                                                    string.Format(AlarmCodes.MCL0009, varTokenToCheck.Input))
-                );
-            }
-
-            return true;
-        }
-
         public static bool AddErrorUseDefinedIdent(MiniCNode node, TokenData tokenData = null)
         {
             if (tokenData == null)
@@ -137,72 +109,28 @@ namespace Parse.FrontEnd.MiniC.Sdts
             return null;
         }
 
-        public static IEnumerable<IHasVarInfos> GetReferableHasVarNodes(MiniCNode fromNode)
-        {
-            var transNode = fromNode;
-            List<IHasVarInfos> result = new List<IHasVarInfos>();
-
-            while (transNode != null)
-            {
-                if (transNode is IHasVarInfos)
-                    result.Add(transNode as IHasVarInfos);
-
-                transNode = transNode.Parent as MiniCNode;
-            }
-
-            return result;
-        }
-
 
         public static IEnumerable<VariableMiniC> GetReferableVarDatas(MiniCNode fromNode)
         {
             List<VariableMiniC> result = new List<VariableMiniC>();
-            var hasVarList = GetReferableHasVarNodes(fromNode);
+            var symbolDatas = fromNode.GetReferableSymbols();
 
-            foreach(var hasVar in hasVarList)
+            foreach (var symbolData in symbolDatas)
             {
-                if (hasVar.VarList == null) continue;
+                if (!(symbolData is VariableMiniC)) continue;
 
-                result.AddRange(hasVar.VarList);
+                result.Add(symbolData as VariableMiniC);
             }
 
             return result;
         }
 
-
-        public static VariableMiniC GetVarDCLSymbolData(MiniCNode fromNode, TokenData varTokenToFind)
-        {
-            if (varTokenToFind == null) return null;
-
-            VariableMiniC result = null;
-            MiniCNode curNode = fromNode;
-
-            while (true)
-            {
-                if (curNode == null) break;
-                if (!(curNode is IHasVarInfos)) curNode = curNode.Parent as MiniCNode;
-
-                var hasVarInfo = curNode as IHasVarInfos;
-                foreach (var varInfo in hasVarInfo.VarList)
-                {
-                    if (varInfo.NameToken.Input != varTokenToFind.Input) continue;
-
-                    result = varInfo;
-                    break;
-                }
-
-                if (result != null) break;
-            }
-
-            return result;
-        }
-
-        public static IEnumerable<FuncData> GetFuncDataList(MiniCNode fromNode, TokenData funcTokenToFind)
+        public static IEnumerable<FuncDefData> GetFuncDataList(MiniCNode fromNode, TokenData funcTokenToFind)
         {
             if (funcTokenToFind == null) return null;
 
             MiniCNode curNode = fromNode;
-            List<FuncData> result = new List<FuncData>();
+            List<FuncDefData> result = new List<FuncDefData>();
 
             while (true)
             {
@@ -223,6 +151,33 @@ namespace Parse.FrontEnd.MiniC.Sdts
             }
 
             return result;
+        }
+
+        public static bool IsContainUnknownValue(IConstant left, IConstant right)
+            => (left.ValueState != State.Fixed || right.ValueState != State.Fixed);
+
+
+
+
+        public static string ToSymbolString(IRCompareSymbol irSymbol)
+        {
+            if (irSymbol == IRCompareSymbol.EQ) return MiniCGrammar.Equal.Value;
+            if (irSymbol == IRCompareSymbol.GE) return MiniCGrammar.GreaterEqual.Value;
+            if (irSymbol == IRCompareSymbol.GT) return MiniCGrammar.GreaterThan.Value;
+            if (irSymbol == IRCompareSymbol.LE) return MiniCGrammar.LessEqual.Value;
+            if (irSymbol == IRCompareSymbol.LT) return MiniCGrammar.LessThan.Value;
+
+            return MiniCGrammar.NotEqual.Value;
+        }
+
+        public static bool IsArithmeticType(StdType type)
+        {
+            if (type == StdType.Byte) return true;
+            if (type == StdType.Short) return true;
+            if (type == StdType.Int) return true;
+            if (type == StdType.Double) return true;
+
+            return false;
         }
     }
 }

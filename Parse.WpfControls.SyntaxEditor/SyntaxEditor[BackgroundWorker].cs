@@ -53,7 +53,7 @@ namespace Parse.WpfControls.SyntaxEditor
 
                 Dispatcher.Invoke(() =>
                 {
-                    var result = Compiler.StartSemanticAnalysis(FileName);
+                    var result = Compiler.StartSemanticAnalysis(FullPath);
                     ParsingFailedListPreProcess(localResult);
                     TextArea.InvalidateVisual();
 

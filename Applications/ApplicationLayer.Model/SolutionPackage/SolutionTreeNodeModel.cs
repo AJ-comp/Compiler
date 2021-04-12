@@ -260,11 +260,9 @@ namespace ApplicationLayer.Models.SolutionPackage
         public void Save()
         {
             Directory.CreateDirectory(this.Path);
-            using (StreamWriter wr = new StreamWriter(this.PathWithFileName))
-            {
-                XmlSerializer xs = new XmlSerializer(typeof(SolutionTreeNodeModel));
-                xs.Serialize(wr, this);
-            }
+            using StreamWriter wr = new StreamWriter(this.PathWithFileName);
+            XmlSerializer xs = new XmlSerializer(typeof(SolutionTreeNodeModel));
+            xs.Serialize(wr, this);
         }
     }
 }

@@ -14,15 +14,15 @@ namespace Parse.Types.ConstantTypes
 
         public int Size => throw new System.NotImplementedException();
 
-        public override DType TypeName => DType.Unknown;
+        public override StdType TypeKind => StdType.Unknown;
         public override bool AlwaysTrue => (ValueState == State.Fixed && Value.ToString().Length > 0);
         public override bool AlwaysFalse => false;
 
-        public IConstant Add(IValue operand) => Operation.StringAdd(this, operand);
-        public IConstant Equal(IValue operand) => Operation.StringEqual(this, operand);
-        public IConstant NotEqual(IValue operand) => Operation.StringNotEqual(this, operand);
+        public IConstant Add(IConstant operand) => Operation.StringAdd(this, operand);
+        public IConstant Equal(IConstant operand) => Operation.StringEqual(this, operand);
+        public IConstant NotEqual(IConstant operand) => Operation.StringNotEqual(this, operand);
 
-        public override Constant Casting(DType to)
+        public override Constant Casting(StdType to)
         {
             return null;
         }

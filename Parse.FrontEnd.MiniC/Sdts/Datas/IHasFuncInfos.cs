@@ -4,6 +4,6 @@ namespace Parse.FrontEnd.MiniC.Sdts.Datas
 {
     public interface IHasFuncInfos
     {
-        IEnumerable<FuncData> FuncList { get; }
+        IEnumerable<FuncDefData> FuncList { get; }
     }
 }

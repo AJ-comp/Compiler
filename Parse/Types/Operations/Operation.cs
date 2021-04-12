@@ -5,280 +5,364 @@ namespace Parse.Types.Operations
 {
     public class Operation
     {
-        public static bool CanOperation(IValue operand1, IValue operand2)
+        public static bool CanOperation(IConstant operand1, IConstant operand2)
         {
             return true;
         }
 
 
         #region The operation related to Bit type
-        public static IConstant BitTypeAnd(IValue operand1, IValue operand2)
+        public static IConstant BitTypeAnd(IConstant operand1, IConstant operand2)
         {
-            if (!(operand2 is ILogicalOperation)) throw new FormatException();
-            if (!Operation.CanOperation(operand1, operand2)) throw new FormatException();
-
-            return new BitConstant((bool)operand1.Value && (bool)operand2.Value);
-        }
-
-        public static IConstant BitTypeNot(IValue operand) => new BitConstant(!(bool)operand.Value);
-
-        public static IConstant BitTypeBitAnd(IValue operand1, IValue operand2)
-        {
-            if (!(operand2 is ILogicalOperation)) throw new FormatException();
-            if (!Operation.CanOperation(operand1, operand2)) throw new FormatException();
-
-            bool tempValue = (bool)operand1.Value & (bool)operand2.Value;
-
-            return new BitConstant(tempValue);
-        }
-
-        public static IConstant BitTypeBitNot(IValue operand) => throw new NotSupportedException();
-
-        public static IConstant BitTypeBitOr(IValue operand1, IValue operand2)
-        {
-            if (!Operation.CanOperation(operand1, operand2)) throw new FormatException();
-
-            bool tempValue = (bool)operand1.Value | (bool)operand2.Value;
-
-            return new BitConstant(tempValue);
-        }
-
-        public static IConstant BitTypeBitXor(IValue operand1, IValue operand2)
-        {
-            if (!Operation.CanOperation(operand1, operand2)) throw new FormatException();
-
-            bool tempValue = (bool)operand1.Value ^ (bool)operand2.Value;
-
-            return new BitConstant(tempValue);
-        }
-
-        public static IConstant BitTypeEqual(IValue operand1, IValue operand2)
-        {
-            if (!Operation.CanOperation(operand1, operand2)) throw new FormatException();
-
-            return new BitConstant(operand1.Value == operand2.Value &&
-                                              operand1.IsInitialized == operand2.IsInitialized);
-        }
-
-        public static IConstant BitTypeNotEqual(IValue operand1, IValue operand2)
-        {
-            if (!Operation.CanOperation(operand1, operand2)) throw new FormatException();
-
-            throw new NotImplementedException();
-        }
-
-        public static IConstant BitTypeOr(IValue operand1, IValue operand2)
-        {
-            if (!Operation.CanOperation(operand1, operand2)) throw new FormatException();
-
-            if (!(operand2 is ILogicalOperation)) throw new FormatException();
-
-            return new BitConstant((bool)operand1.Value || (bool)operand2.Value);
-        }
-
-        public static IConstant BitTypeLeftShift(IValue operand, int count) => throw new NotSupportedException();
-        public static IConstant BitTypeRightShift(IValue operand, int count) => throw new NotSupportedException();
-        #endregion
-
-
-
-        #region The operation realted to Arithmetic type
-        public static IConstant ArithmeticEqual(IValue operand1, IValue operand2)
-        {
-            if (!(operand2 is ICompareOperation)) throw new NotSupportedException();
-            if (operand2 is IString) throw new NotSupportedException();
-            if (!CanOperation(operand1, operand2)) throw new FormatException();
-
-            bool condition = (operand2 is IArithmetic);
-
-            if (condition) return new BitConstant((int)operand1.Value == (int)operand2.Value);
-            if (operand2 is IDouble) return new BitConstant((double)operand1.Value == (double)operand2.Value);
-
-            // impossible
-            throw new FormatException();
-        }
-
-        public static IConstant ArithmeticNotEqual(IValue operand1, IValue operand2)
-        {
-            if (!(operand2 is ICompareOperation)) throw new NotSupportedException();
-            if (operand2 is IString) throw new NotSupportedException();
-            if (!CanOperation(operand1, operand2)) throw new FormatException();
-
-            bool condition = (operand2 is IArithmetic);
-
-            if (condition) return new BitConstant((int)operand1.Value != (int)operand2.Value);
-            if (operand2 is IDouble) return new BitConstant((double)operand1.Value != (double)operand2.Value);
-
-            // impossible
-            throw new FormatException();
-        }
-
-
-        public static IConstant ArithmeticAdd(IValue operand1, IValue operand2)
-        {
-            if (!(operand2 is IArithmeticOperation)) throw new NotSupportedException();
-            if (!CanOperation(operand1, operand2)) throw new FormatException();
-
-            // case string
-            if (operand2 is IString)
+            try
             {
-                var strValue = operand1.Value.ToString() + operand2.Value.ToString();
-
-                return new StringConstant(strValue);
+                return new BitConstant((bool)operand1.Value && (bool)operand2.Value);
             }
-
-            double value = Convert.ToDouble(operand1.Value) + Convert.ToDouble(operand2.Value);
-            return CommonArithmeticLogic(operand1, operand2, value);
+            catch
+            {
+                return new UnknownConstant();
+            }
         }
 
-        public static IConstant ArithmeticDiv(IValue operand1, IValue operand2)
-        {
-            if (!(operand2 is IArithmeticOperation)) throw new NotSupportedException();
-            if (operand2 is IString) throw new NotSupportedException();
-            if (!CanOperation(operand1, operand2)) throw new FormatException();
+        public static IConstant BitTypeNot(IConstant operand) => new BitConstant(!(bool)operand.Value);
 
-            var value = (double)operand1.Value / (double)operand2.Value;
-            return CommonArithmeticLogic(operand1, operand2, value);
+        public static IConstant BitTypeBitAnd(IConstant operand1, IConstant operand2)
+        {
+            try
+            {
+                return new BitConstant((bool)operand1.Value & (bool)operand2.Value);
+            }
+            catch
+            {
+                return new UnknownConstant();
+            }
         }
 
-        public static IConstant ArithmeticMod(IValue operand1, IValue operand2)
-        {
-            if (!(operand2 is IArithmeticOperation)) throw new NotSupportedException();
-            if (operand2 is IString) throw new NotSupportedException();
-            if (!CanOperation(operand1, operand2)) throw new FormatException();
+        public static IConstant BitTypeBitNot(IConstant operand) => new UnknownConstant();
 
-            var value = (double)operand1.Value % (double)operand2.Value;
-            return CommonArithmeticLogic(operand1, operand2, value);
+        public static IConstant BitTypeBitOr(IConstant operand1, IConstant operand2)
+        {
+            try
+            {
+                return new BitConstant((bool)operand1.Value | (bool)operand2.Value);
+            }
+            catch
+            {
+                return new UnknownConstant();
+            }
         }
 
-        public static IConstant ArithmeticMul(IValue operand1, IValue operand2)
+        public static IConstant BitTypeBitXor(IConstant operand1, IConstant operand2)
         {
-            if (!(operand2 is IArithmeticOperation)) throw new NotSupportedException();
-            if (operand2 is IString) throw new NotSupportedException();
-            if (!CanOperation(operand1, operand2)) throw new FormatException();
-
-            double value = (double)operand1.Value * (double)operand2.Value;
-            return CommonArithmeticLogic(operand1, operand2, value);
+            try
+            {
+                return new BitConstant((bool)operand1.Value ^ (bool)operand2.Value);
+            }
+            catch
+            {
+                return new UnknownConstant();
+            }
         }
 
-        public static IConstant ArithmeticSub(IValue operand1, IValue operand2)
+        public static IConstant BitTypeEqual(IConstant operand1, IConstant operand2)
         {
-            if (!(operand2 is IArithmeticOperation)) throw new NotSupportedException();
-            if (operand2 is IString) throw new NotSupportedException();
-            if (!CanOperation(operand1, operand2)) throw new FormatException();
+            try
+            {
+                return new BitConstant(operand1.Value == operand2.Value &&
+                                  operand1.IsInitialized == operand2.IsInitialized);
+            }
+            catch
+            {
+                return new UnknownConstant();
+            }
+        }
 
-            double value = (double)operand1.Value - (double)operand2.Value;
-            return CommonArithmeticLogic(operand1, operand2, value);
+        public static IConstant BitTypeNotEqual(IConstant operand1, IConstant operand2) => new UnknownConstant();
+
+        public static IConstant BitTypeOr(IConstant operand1, IConstant operand2)
+        {
+            try
+            {
+                return new BitConstant((bool)operand1.Value || (bool)operand2.Value);
+            }
+            catch
+            {
+                return new UnknownConstant();
+            }
+        }
+
+        public static IConstant BitTypeLeftShift(IConstant operand, int count) => new UnknownConstant();
+        public static IConstant BitTypeRightShift(IConstant operand, int count) => new UnknownConstant();
+        #endregion
+
+
+
+        #region The operation realted to Arithmetic type (Integer + double)
+        public static IConstant ArithmeticEqual(IConstant operand1, IConstant operand2)
+        {
+            try
+            {
+                bool condition = (operand2 is IArithmetic);
+
+                if (condition) return new BitConstant((int)operand1.Value == (int)operand2.Value);
+                if (operand2 is IDouble) return new BitConstant((double)operand1.Value == (double)operand2.Value);
+
+                return new UnknownConstant();
+            }
+            catch
+            {
+                return new UnknownConstant();
+            }
+        }
+
+        public static IConstant ArithmeticNotEqual(IConstant operand1, IConstant operand2)
+        {
+            try
+            {
+                bool condition = (operand2 is IArithmetic);
+
+                if (condition) return new BitConstant((int)operand1.Value != (int)operand2.Value);
+                if (operand2 is IDouble) return new BitConstant((double)operand1.Value != (double)operand2.Value);
+
+                return new UnknownConstant();
+            }
+            catch
+            {
+                return new UnknownConstant();
+            }
         }
 
 
-        private static IConstant CommonArithmeticLogic(IValue operand1, IValue operand2, object valueCalculated)
+        public static IConstant ArithmeticAdd(IConstant operand1, IConstant operand2)
         {
-            // process by condition
-            bool condition = (operand2 is IArithmetic);
+            try
+            {
+                // case string
+                if (operand2 is IString)
+                {
+                    var strValue = operand1.Value.ToString() + operand2.Value.ToString();
 
-            if (operand2 is IDouble) return new DoubleConstant((double)valueCalculated);
-            if (condition) return new IntConstant(Convert.ToInt32(valueCalculated));
+                    return new StringConstant(strValue);
+                }
 
-            // impossible
-            throw new FormatException();
+                double value = Convert.ToDouble(operand1.Value) + Convert.ToDouble(operand2.Value);
+                return CommonArithmeticLogic(operand1, operand2, value);
+            }
+            catch
+            {
+                return new UnknownConstant();
+            }
+        }
+
+        public static IConstant ArithmeticDiv(IConstant operand1, IConstant operand2)
+        {
+            try
+            {
+                var value = (double)operand1.Value / (double)operand2.Value;
+                return CommonArithmeticLogic(operand1, operand2, value);
+            }
+            catch
+            {
+                return new UnknownConstant();
+            }
+        }
+
+        public static IConstant ArithmeticMod(IConstant operand1, IConstant operand2)
+        {
+            try
+            {
+                var value = (double)operand1.Value % (double)operand2.Value;
+                return CommonArithmeticLogic(operand1, operand2, value);
+            }
+            catch
+            {
+                return new UnknownConstant();
+            }
+        }
+
+        public static IConstant ArithmeticMul(IConstant operand1, IConstant operand2)
+        {
+            try
+            {
+                double value = (double)operand1.Value * (double)operand2.Value;
+                return CommonArithmeticLogic(operand1, operand2, value);
+            }
+            catch
+            {
+                return new UnknownConstant();
+            }
+        }
+
+        public static IConstant ArithmeticSub(IConstant operand1, IConstant operand2)
+        {
+            try
+            {
+                double value = (double)operand1.Value - (double)operand2.Value;
+                return CommonArithmeticLogic(operand1, operand2, value);
+            }
+            catch
+            {
+                return new UnknownConstant();
+            }
+        }
+
+
+        private static IConstant CommonArithmeticLogic(IConstant operand1, IConstant operand2, object valueCalculated)
+        {
+            try
+            {
+                // process by condition
+                bool condition = (operand2 is IArithmetic);
+
+                if (operand2 is IDouble) return new DoubleConstant((double)valueCalculated);
+                if (condition) return new IntConstant(Convert.ToInt32(valueCalculated));
+
+                return new UnknownConstant();
+            }
+            catch
+            {
+                return new UnknownConstant();
+            }
         }
         #endregion
 
 
 
-        #region The operation realted to Integer kind.
-        private static bool CheckValidity(IValue operand1, IValue operand2)
+        #region The operation realted to Integer kind private.
+        public static IConstant IntegerKindBitAnd(IConstant operand1, IConstant operand2)
         {
-            if (!CanOperation(operand1, operand2)) throw new FormatException();
-            if (!(operand2 is IBitwiseOperation)) throw new NotSupportedException();
-            if (operand2 is IDouble) throw new NotSupportedException();
-
-            return true;
+            try
+            {
+                int value = (int)operand1.Value & (int)operand2.Value;
+                return CommonArithmeticLogic(operand1, operand2, value);
+            }
+            catch
+            {
+                return new UnknownConstant();
+            }
         }
 
-        public static IConstant IntegerKindBitAnd(IValue operand1, IValue operand2)
-        {
-            CheckValidity(operand1, operand2);
+        public static IConstant IntegerKindBitNot(IConstant operand) => new IntConstant(~(int)operand.Value);
 
-            int value = (int)operand1.Value & (int)operand2.Value;
-            return CommonArithmeticLogic(operand1, operand2, value);
+        public static IConstant IntegerKindBitOr(IConstant operand1, IConstant operand2)
+        {
+            try
+            {
+                var value = (int)operand1.Value | (int)operand2.Value;
+                return CommonArithmeticLogic(operand1, operand2, value);
+            }
+            catch
+            {
+                return new UnknownConstant();
+            }
         }
 
-        public static IConstant IntegerKindBitNot(IValue operand) => new IntConstant(~(int)operand.Value);
-
-        public static IConstant IntegerKindBitOr(IValue operand1, IValue operand2)
+        public static IConstant IntegerKindBitXor(IConstant operand1, IConstant operand2)
         {
-            CheckValidity(operand1, operand2);
-
-            var value = (int)operand1.Value | (int)operand2.Value;
-            return CommonArithmeticLogic(operand1, operand2, value);
+            try
+            {
+                var value = (int)operand1.Value ^ (int)operand2.Value;
+                return CommonArithmeticLogic(operand1, operand2, value);
+            }
+            catch
+            {
+                return new UnknownConstant();
+            }
         }
 
-        public static IConstant IntegerKindBitXor(IValue operand1, IValue operand2)
+        public static IConstant IntegerKindLeftShift(IConstant operand, int count)
         {
-            CheckValidity(operand1, operand2);
+            try
+            {
+                int tempValue = (int)operand.Value << count;
 
-            var value = (int)operand1.Value ^ (int)operand2.Value;
-            return CommonArithmeticLogic(operand1, operand2, value);
+                return new IntConstant(tempValue);
+            }
+            catch
+            {
+                return new UnknownConstant();
+            }
         }
 
-        public static IConstant IntegerKindLeftShift(IValue operand, int count)
+        public static IConstant IntegerKindRightShift(IConstant operand, int count)
         {
-            int tempValue = (int)operand.Value << count;
+            try
+            {
+                int tempValue = (int)operand.Value >> count;
 
-            return new IntConstant(tempValue);
-        }
-
-        public static IConstant IntegerKindRightShift(IValue operand, int count)
-        {
-            int tempValue = (int)operand.Value >> count;
-
-            return new IntConstant(tempValue);
+                return new IntConstant(tempValue);
+            }
+            catch
+            {
+                return new UnknownConstant();
+            }
         }
         #endregion
 
 
 
         #region The operation related to string type
-        public static IConstant StringEqual(IValue operand1, IValue operand2)
+        public static IConstant StringEqual(IConstant operand1, IConstant operand2)
         {
-            if (operand2 is IString)
+            try
             {
-                string targetValue = operand2.Value as string;
-                return new BitConstant((string)operand1.Value == targetValue);
+                if (operand2 is IString)
+                {
+                    string targetValue = operand2.Value as string;
+                    return new BitConstant((string)operand1.Value == targetValue);
+                }
+
+                return new UnknownConstant();
             }
-            else throw new NotSupportedException();
+            catch
+            {
+                return new UnknownConstant();
+            }
         }
 
-        public static IConstant StringNotEqual(IValue operand1, IValue operand2)
+        public static IConstant StringNotEqual(IConstant operand1, IConstant operand2)
         {
-            if (operand2 is IString)
+            try
             {
-                string targetValue = operand2.Value as string;
-                return new BitConstant((string)operand1.Value != targetValue);
+                if (operand2 is IString)
+                {
+                    string targetValue = operand2.Value as string;
+                    return new BitConstant((string)operand1.Value != targetValue);
+                }
+
+                return new UnknownConstant();
             }
-            else throw new NotSupportedException();
+            catch
+            {
+                return new UnknownConstant();
+            }
         }
 
 
-        public static IConstant StringAdd(IValue operand1, IValue operand2)
+        public static IConstant StringAdd(IConstant operand1, IConstant operand2)
         {
-            if (operand2 is IString)
+            try
             {
-                string targetValue = operand1.Value + (operand2.Value as string);
+                if (operand2 is IString)
+                {
+                    string targetValue = operand1.Value + (operand2.Value as string);
 
-                return new StringConstant(targetValue);
+                    return new StringConstant(targetValue);
+                }
+
+                if (operand2 is IInt)
+                {
+                    string targetValue = operand1.Value + (operand2.Value.ToString());
+
+                    return new StringConstant(operand1.Value + targetValue);
+                }
+
+                return new UnknownConstant();
             }
-
-            if (operand2 is IInt)
+            catch
             {
-                string targetValue = operand1.Value + (operand2.Value.ToString());
-
-                return new StringConstant(operand1.Value + targetValue);
+                return new UnknownConstant();
             }
-
-            else throw new NotSupportedException();
         }
         #endregion
     }

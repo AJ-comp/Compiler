@@ -61,6 +61,24 @@ namespace Parse.FrontEnd.MiniC.Properties {
         }
         
         /// <summary>
+        ///   There is already registered an assembly &apos;{0}&apos;.과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string AlreadyRegisteredAssembly {
+            get {
+                return ResourceManager.GetString("AlreadyRegisteredAssembly", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   There is already registered an file &apos;{0}&apos;.과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string AlreadyRegisteredFile {
+            get {
+                return ResourceManager.GetString("AlreadyRegisteredFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   binary number과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string BinNumber {
@@ -79,6 +97,24 @@ namespace Parse.FrontEnd.MiniC.Properties {
         }
         
         /// <summary>
+        ///   The target to remove and to add is equal.과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string EqualToRemoveAndAddName {
+            get {
+                return ResourceManager.GetString("EqualToRemoveAndAddName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Specify file name과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string FileNameCantEmpty {
+            get {
+                return ResourceManager.GetString("FileNameCantEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   hex number과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string HexNumber {
@@ -93,6 +129,24 @@ namespace Parse.FrontEnd.MiniC.Properties {
         public static string Ident {
             get {
                 return ResourceManager.GetString("Ident", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   There is not a registered assembly name &apos;{0}&apos;.과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string NotRegisteredAssembly {
+            get {
+                return ResourceManager.GetString("NotRegisteredAssembly", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   There is not a registered file name &apos;{0}&apos;.과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string NotRegisteredFile {
+            get {
+                return ResourceManager.GetString("NotRegisteredFile", resourceCulture);
             }
         }
     }

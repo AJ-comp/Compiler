@@ -19,6 +19,21 @@ namespace Parse.FrontEnd
         public bool IsBuild { get; protected set; }
 
 
+        public SdtsNode GetParent(Type toFindParent)
+        {
+            var travNode = this;
+
+            while (travNode != null)
+            {
+                if (travNode.GetType() == toFindParent) break;
+
+                travNode = travNode.Parent;
+            }
+
+            return travNode;
+        }
+
+
         public IReadOnlyList<SdtsNode> ErrNodes
         {
             get
@@ -33,6 +48,20 @@ namespace Parse.FrontEnd
 
                 return result;
             }
+        }
+
+        public IEnumerable<SdtsNode> GetMatchedTypeNodes(Type type)
+        {
+            List<SdtsNode> result = new List<SdtsNode>();
+
+            foreach (var child in Items)
+            {
+                if (child.GetType() == type) result.Add(child);
+
+                result.AddRange(child.GetMatchedTypeNodes(type));
+            }
+
+            return result;
         }
 
         public abstract SdtsNode Build(SdtsParams param);

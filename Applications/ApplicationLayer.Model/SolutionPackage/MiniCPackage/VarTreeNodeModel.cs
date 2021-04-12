@@ -6,14 +6,13 @@ namespace ApplicationLayer.Models.SolutionPackage.MiniCPackage
 {
     public class VarTreeNodeModel : TreeNodeModel
     {
-        public bool IsConst => (_varData != null) && _varData.Const;
+        public bool IsConst => (_varData != null) && _varData.IsConst;
         public string DataType => (_varData != null) ? _varData.DataType.ToString() : string.Empty;
         public string Name => (_varData != null) ? _varData.Name : string.Empty;
         public string Dimension => (_varData != null) ? _varData.Dimension.ToString() : string.Empty;
         public string BlockIndex => (_varData != null) ? _varData.Block.ToString() : string.Empty;
         public string Offset => (_varData != null) ? _varData.Offset.ToString() : string.Empty;
         public bool IsGlobal => (_varData?.Block== 1);
-        public bool IsParam => (_varData?.VariableProperty == VarProperty.Param);
 
         public override string DisplayName
         {

@@ -1,25 +1,30 @@
 ﻿using Parse.FrontEnd.Ast;
+using Parse.FrontEnd.MiniC.Sdts.Datas;
+using Parse.MiddleEnd.IR.Datas;
+using Parse.MiddleEnd.IR.Interfaces;
+using Parse.Types.ConstantTypes;
 using System;
 
 namespace Parse.FrontEnd.MiniC.Sdts.AstNodes.ExprNodes.AssignExprNodes
 {
-    public abstract class OperationAssignExprNode : AssignExprNode
+    public abstract class OperationAssignExprNode : AssignExprNode, IArithmeticAssignExpression
     {
         protected Action LiteralHandlerAction = null;
         protected Action VarHandlerAction = null;
         protected Action ExprHandlerAction = null;
 
+        public abstract IROperation Operation { get; }
+        public IDeclareVarExpression Left => LeftVar;
+        public IExprExpression Right { get; private set; }
+
         protected OperationAssignExprNode(AstSymbol node) : base(node)
         {
-            RightIsVarHandler += OperationAssignNode_RightIsVarHandler;
-            RightIsExprHandler += OperationAssignNode_RightIsExprHandler;
         }
 
 
         protected bool CheckCondRightIsLiteral()
         {
-            var left = GetIArithmeticType();
-            if (left == null)
+            if (!MiniCUtilities.IsArithmeticType(LeftNode.DataKind))
             {
                 AddMCL0011Exception();  // The calculate is not supported
                 return false;
@@ -31,8 +36,8 @@ namespace Parse.FrontEnd.MiniC.Sdts.AstNodes.ExprNodes.AssignExprNodes
 
         protected bool CheckCondRightIsVar()
         {
-            var leftVarData = (Left as UseIdentNode).VarData;
-            var rightVarData = (Right as UseIdentNode).VarData;
+            var leftVarData = (LeftNode as UseIdentNode).VarData;
+            var rightVarData = (RightNode as UseIdentNode).VarData;
 
             if (!MiniCChecker.IsAllArithmetic(leftVarData.DataType, rightVarData.DataType))
             {
@@ -43,37 +48,23 @@ namespace Parse.FrontEnd.MiniC.Sdts.AstNodes.ExprNodes.AssignExprNodes
             return true;
         }
 
-        private void OperationAssignNode_RightIsVarHandler(object sender, EventArgs e)
+        public override void LeftIsIdentProcess()
         {
-            var leftVarData = (Left as UseIdentNode).VarData;
-            var rightVarData = (Right as UseIdentNode).VarData;
+            if (!CheckCondRightIsLiteral()) return;
 
-            if (!MiniCChecker.IsAllArithmetic(leftVarData.DataType, rightVarData.DataType))
-            {
-                AddMCL0011Exception(); // The calculate is not supported
-                return;
-            }
+            var rightVarData = (RightNode as UseIdentNode).VarData;
 
+            var constant = ArithimeticOperation(Operation);
+            if (constant is UnknownConstant) return;
+
+            LeftVar.Assign(constant);
+
+            /*
             if (rightVarData != null)
             {
                 VarHandlerAction?.Invoke();
             }
-        }
-
-        private void OperationAssignNode_RightIsExprHandler(object sender, EventArgs e)
-        {
-            try
-            {
-                ExprHandlerAction?.Invoke();
-            }
-            catch (FormatException ex)
-            {
-
-            }
-            catch (NotSupportedException ex)
-            {
-
-            }
+            */
         }
     }
 }

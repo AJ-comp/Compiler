@@ -1,32 +1,28 @@
 ﻿using Parse.Types.Operations;
-using System;
 using System.ComponentModel;
 
 namespace Parse.Types
 {
-    public enum DType 
+    public enum StdType 
     { 
-        [Description("Unknown")] Unknown, 
+        [Description("error")] Error,
+        [Description("?")] Unknown,
+        [Description("void")] Void,
         [Description("bit")] Bit, 
-        [Description("byte")] Byte, 
-        [Description("short")] Short, 
-        [Description("int")] Int, 
+        [Description("byte")] Byte,
+        [Description("sbyte")] SByte,
+        [Description("short")] Short,
+        [Description("ushort")] UShort,
+        [Description("int")] Int,
+        [Description("uint")] UInt,
         [Description("double")] Double,
+        [Description("string")] String,
+        [Description("struct")] Struct,
+        [Description("enum")] Enum,
     }
 
-    public interface IDataTypeSpec : ICompareOperation
+    public interface IDataTypeSpec : IEqualOperation
     {
         public int Size { get; }
-
-        public static DType GetTypeName(Type type)
-        {
-            if (type == typeof(IDouble)) return DType.Double;
-            if (type == typeof(IInt)) return DType.Int;
-            if (type == typeof(IShort)) return DType.Short;
-            if (type == typeof(IByte)) return DType.Byte;
-            if (type == typeof(IBit)) return DType.Bit;
-
-            return DType.Unknown;
-        }
     }
 }

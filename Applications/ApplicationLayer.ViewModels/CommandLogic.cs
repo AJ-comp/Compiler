@@ -5,6 +5,7 @@ using ApplicationLayer.ViewModels.DocumentTypeViewModels;
 using ApplicationLayer.ViewModels.Messages;
 using GalaSoft.MvvmLight.Messaging;
 using Parse.BackEnd.Target;
+using Parse.FrontEnd.MiniC;
 using System.Collections.Generic;
 using System.IO;
 using ViewResources = ApplicationLayer.Define.Properties.WindowViewResources;
@@ -13,7 +14,7 @@ namespace ApplicationLayer.ViewModels
 {
     public class CommandLogic
     {
-        public static void BuildProject(string solutionBinFolderPath, ProjectTreeNodeModel projectNode)
+        public static void BuildProject(string solutionBinFolderPath, ProjectTreeNodeModel projectNode, MiniCCompiler compiler)
         {
             string buildMessage = string.Format(ViewResources.StartBuild_2,
                                                         projectNode.DisplayName,
@@ -36,7 +37,9 @@ namespace ApplicationLayer.ViewModels
                     var bitCodeFile = FileHelper.ConvertFileName(cFile.FileName, ".bc");
                     var bitCodeFullPath = Path.Combine(solutionBinFolderPath, bitCodeFile);
                     string bitCodeMessage = string.Format(ViewResources.GenerateFile_1, bitCodeFile);
-                    Builder.CreateBitCode(cFile.Ast, bitCodeFullPath);
+                    compiler.AllBuild();
+                    var finalExpression = compiler.GetFinalExpression(file.FullPath);
+                    Builder.CreateBitCode(finalExpression, bitCodeFullPath);
                     Messenger.Default.Send(new AddBuildMessage(bitCodeMessage));
 
                     // create target code
@@ -57,14 +60,14 @@ namespace ApplicationLayer.ViewModels
         /// <param name="solution"></param>
         /// <returns>referenced file infos on project</returns>
         /// ********************************************************
-        public static IEnumerable<FileReferenceInfo> BuildAllProjects(SolutionTreeNodeModel solution)
+        public static IEnumerable<FileReferenceInfo> BuildAllProjects(SolutionTreeNodeModel solution, MiniCCompiler compiler)
         {
             List<FileReferenceInfo> result = new List<FileReferenceInfo>();
             foreach (var project in solution.Children)
             {
                 var cProject = project as ProjectTreeNodeModel;
 
-                BuildProject(solution.BinFolderPath, cProject);
+                BuildProject(solution.BinFolderPath, cProject, compiler);
                 result.AddRange(cProject.FileReferenceInfos);
             }
 

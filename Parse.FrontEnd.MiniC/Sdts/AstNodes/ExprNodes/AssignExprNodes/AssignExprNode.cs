@@ -1,8 +1,6 @@
 ﻿using Parse.FrontEnd.Ast;
 using Parse.FrontEnd.MiniC.Properties;
-using Parse.FrontEnd.MiniC.Sdts.AstNodes.ExprNodes.LiteralNodes;
 using Parse.FrontEnd.MiniC.Sdts.Datas.Variables;
-using System;
 
 namespace Parse.FrontEnd.MiniC.Sdts.AstNodes.ExprNodes.AssignExprNodes
 {
@@ -10,27 +8,33 @@ namespace Parse.FrontEnd.MiniC.Sdts.AstNodes.ExprNodes.AssignExprNodes
     {
         public VariableMiniC LeftVar { get; private set; }
 
-        public event EventHandler RightIsLiteralHandler;
-        public event EventHandler RightIsVarHandler;
-        public event EventHandler RightIsExprHandler;
-
         public AssignExprNode(AstSymbol node) : base(node)
         {
             IsNeedWhileIRGeneration = true;
         }
 
+        public abstract void LeftIsIdentProcess();
+
         public override SdtsNode Build(SdtsParams param)
         {
             base.Build(param);
 
-            if (Left is UseIdentNode)
+            if (LeftNode is UseIdentNode)
             {
-                LeftVar = (Left as UseIdentNode).VarData;
-                if (LeftVar is null) return this;   // case for not declared.
+                LeftVar = (LeftNode as UseIdentNode).VarData;
 
-                if (CanAssign(LeftVar, Right)) LeftIsIdentProcess();
+                // case for not declared.
+                if (LeftVar is null)
+                {
+                    AddException(nameof(AlarmCodes.MCL0001),
+                                        string.Format(AlarmCodes.MCL0001, (LeftNode as UseIdentNode).IdentToken));
+
+                    return this;
+                }
+
+                LeftIsIdentProcess();
             }
-            else if(Left is DeRefExprNode)
+            else if(LeftNode is DeRefExprNode)
             {
             }
             else
@@ -43,51 +47,10 @@ namespace Parse.FrontEnd.MiniC.Sdts.AstNodes.ExprNodes.AssignExprNodes
 
         protected void AddException(string exceptionName, string exceptionMessage)
         {
-            Left.ConnectedErrInfoList.Add
+            LeftNode.ConnectedErrInfoList.Add
             (
-                new MeaningErrInfo(Left.MeaningTokens, exceptionName, exceptionMessage)
+                new MeaningErrInfo(LeftNode.MeaningTokens, exceptionName, exceptionMessage)
             );
-        }
-
-        protected bool CanAssign(VariableMiniC leftVar, ExprNode rightNode)
-        {
-            if (leftVar.Const)
-            {
-                AddException(nameof(AlarmCodes.MCL0002), AlarmCodes.MCL0002);
-                return false;
-            }
-
-            if (leftVar.CanAssign(rightNode.Result)) return true;
-            else
-            {
-                // check detaily
-
-                return false;
-            }
-        }
-
-
-        /// <summary>
-        /// This function defines the process for when left is variable.
-        /// </summary>
-        private void LeftIsIdentProcess()
-        {
-            if (Right is LiteralNode)    // variable = literal
-            {
-                RightIsLiteralHandler?.Invoke(this, null);
-            }
-            else if (Right is UseIdentNode)    // variable = variable
-            {
-                RightIsVarHandler?.Invoke(this, null);
-            }
-            else if (Right is ExprNode)   // variable = (exp)
-            {
-                RightIsExprHandler?.Invoke(this, null);
-            }
-        }
-
-        private void LeftIsDeRefProcess()
-        {
         }
     }
 }

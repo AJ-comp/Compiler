@@ -1,12 +1,9 @@
 ﻿using Parse.FrontEnd.Ast;
-using System.Collections.Generic;
 
 namespace Parse.FrontEnd.MiniC.Sdts.AstNodes.StatementNodes
 {
     public class StatListNode : StatementNode
     {
-        public IEnumerable<StatementNode> StatementNodes => _statementNodes;
-
         public StatListNode(AstSymbol node) : base(node)
         {
         }
@@ -46,7 +43,5 @@ namespace Parse.FrontEnd.MiniC.Sdts.AstNodes.StatementNodes
 
             return this;
         }
-
-        private List<StatementNode> _statementNodes = new List<StatementNode>();
     }
 }

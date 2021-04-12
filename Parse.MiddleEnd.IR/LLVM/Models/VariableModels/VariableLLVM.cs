@@ -4,23 +4,51 @@ using System.Diagnostics;
 
 namespace Parse.MiddleEnd.IR.LLVM.Models.VariableModels
 {
-    [DebuggerDisplay("{Name}, {Value}, {ValueState}, {PointerLevel}")]
-    public abstract class VariableLLVM : DependencyChainVar
+    [DebuggerDisplay("{DebuggerDisplay, nq}")]
+    public abstract class VariableLLVM : SSAVar
     {
-        protected VariableLLVM(int offset, uint pointerLevel) : base(pointerLevel)
+        public object Value { get; }
+        public State ValueState { get; }
+
+        public bool IsGlobal
+        {
+            get => _isGlobal;
+            private set
+            {
+                _isGlobal = value;
+                if (_isGlobal) Name = "@" + _varName;
+            }
+        }
+
+        public override int Offset
+        {
+            get => _offset;
+            set
+            {
+                _offset = value;
+                if (!_isGlobal) Name = "%" + _offset;
+            }
+        }
+
+        // This property is used to check if any value is assigned.
+        public bool New { get; set; } = true;
+
+        protected VariableLLVM(int offset, uint pointerLevel)
         {
             IsGlobal = false;
             Offset = offset;
         }
 
-        protected VariableLLVM(string varName, uint pointerLevel) : base(pointerLevel)
+        protected VariableLLVM(string varName, uint pointerLevel)
         {
             IsGlobal = true;
             _varName = varName;
         }
 
-        protected VariableLLVM(IRVar var, bool isGlobal) : base(var.PointerLevel)
+        protected VariableLLVM(IRDeclareVar var, bool isGlobal)
         {
+            InitialExpr = var.InitialExpr;
+
             if (isGlobal)
             {
                 _varName = var.Name;
@@ -35,49 +63,39 @@ namespace Parse.MiddleEnd.IR.LLVM.Models.VariableModels
             Block = var.Block;
             Length = var.Length;
             IsGlobal = isGlobal;
+            PointerLevel = var.PointerLevel;
         }
 
 
-        public bool IsGlobal
-        {
-            get => _isGlobal;
-            private set
-            {
-                _isGlobal = value;
-                if (_isGlobal) Name = "@" + _varName;
-            }
-        }
-        public override int Offset
-        {
-            get => _offset;
-            set
-            {
-                _offset = value;
-                if (!_isGlobal) Name = "%" + _offset;
-            }
-        }
-        public override int Block { get; set; }
-        public override int Length { get; }
-
-        // This property is used to check if any value is assigned.
-        public bool New { get; set; } = true;
+        public static VariableLLVM From(IRDeclareVar var) => From(var, var.TypeKind);
+        public static VariableLLVM From(IRDeclareVar var, int offsetToSet) => From(var, var.TypeKind, offsetToSet);
 
 
-        public static VariableLLVM From(IRVar var) => From(var, var.TypeName);
-        public static VariableLLVM From(IRVar var, int offsetToSet) => From(var, var.TypeName, offsetToSet);
-
-
-        public static VariableLLVM From(IRVar var, DType toType)
+        public static VariableLLVM From(IRDeclareVar var, StdType toType)
         {
             var result = From(var, toType, true);
 
             return result;
         }
 
-        public static VariableLLVM From(IRVar var, DType toType, int offsetToSet)
+        public static VariableLLVM From(IRDeclareVar var, StdType toType, int offsetToSet)
         {
             var result = From(var, toType, false);
             result.Offset = offsetToSet;
+
+            return result;
+        }
+
+        public static VariableLLVM From(int offset, StdType toType)
+        {
+            VariableLLVM result = null;
+
+            if (toType == StdType.Bit) result = new BitVariableLLVM(offset);
+            else if (toType == StdType.Byte) result = new ByteVariableLLVM(offset);
+            else if (toType == StdType.Short) result = new ShortVariableLLVM(offset);
+            else if (toType == StdType.Int) result = new IntVariableLLVM(offset);
+            else if (toType == StdType.Double) result = new DoubleVariableLLVM(offset);
+            else if (toType == StdType.Struct) result = new UserDefVariableLLVM(offset, 0);
 
             return result;
         }
@@ -87,17 +105,20 @@ namespace Parse.MiddleEnd.IR.LLVM.Models.VariableModels
         private bool _isGlobal;
         private int _offset;
 
-        private static VariableLLVM From(IRVar var, DType toType, bool isGlobal)
+        private static VariableLLVM From(IRDeclareVar var, StdType toType, bool isGlobal)
         {
             VariableLLVM result = null;
 
-            if (toType == DType.Bit) result = new BitVariableLLVM(var, isGlobal);
-            else if (toType == DType.Byte) result = new ByteVariableLLVM(var, isGlobal);
-            else if (toType == DType.Short) result = new ShortVariableLLVM(var, isGlobal);
-            else if (toType == DType.Int) result = new IntVariableLLVM(var, isGlobal);
-            else if (toType == DType.Double) result = new DoubleVariableLLVM(var as IRDoubleVar, isGlobal);
+            if (toType == StdType.Bit) result = new BitVariableLLVM(var, isGlobal);
+            else if (toType == StdType.Byte) result = new ByteVariableLLVM(var, isGlobal);
+            else if (toType == StdType.Short) result = new ShortVariableLLVM(var, isGlobal);
+            else if (toType == StdType.Int) result = new IntVariableLLVM(var, isGlobal);
+            else if (toType == StdType.Double) result = new DoubleVariableLLVM(var as IRDoubleVar, isGlobal);
+            else if (toType == StdType.Struct) result = new UserDefVariableLLVM(var as IRDeclareStructTypeVar, isGlobal);
 
             return result;
         }
+
+        public override string DebuggerDisplay => base.DebuggerDisplay;
     }
 }

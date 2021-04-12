@@ -31,6 +31,7 @@ namespace ApplicationLayer.ViewModels.ToolWindowViewModels
         private MiniCCompiler _compiler = new MiniCCompiler();  // temporary position
 
 
+        public MiniCCompiler LoadedCompiler => _compiler;
 
         /********************************************************************************************
          * property section
@@ -159,23 +160,32 @@ namespace ApplicationLayer.ViewModels.ToolWindowViewModels
             }
 
             this.Solution = result;
-            if(this.Solution.LoadProject() == false)
-                Messenger.Default.Send(new DisplayMessage(new Models.MessageData(Models.MessageKind.Information, 
-                                                                                                                            CommonResource.WarningOnLoad), 
-                                                                                                                            string.Empty));
+            if (this.Solution.LoadProject() == false)
+                Messenger.Default.Send(new DisplayMessage(new MessageData(MessageKind.Information,
+                                                                                                                CommonResource.WarningOnLoad),
+                                                                                                                string.Empty));
 
             this.Solution.IsExpanded = true;
 
             this.ConnectEventHandler();
+
+            foreach (var child in Solution.Children)
+            {
+                var project = child as ProjectTreeNodeModel;
+                _compiler.CreateAssembly(project.DisplayName);
+
+                foreach (var file in project.AllFileNodes)
+                    _compiler.AddFileToAssembly(project.DisplayName, file.FullPath);
+            }
         }
 
         private void ConnectEventHandler()
         {
             this.Solution.ChildrenChanged += ChildrenChanged;
 
-            foreach(var child in this._solution.Children)
+            foreach (var child in this._solution.Children)
             {
-                if(child is ProjectTreeNodeModel)
+                if (child is ProjectTreeNodeModel)
                 {
                     var projNode = child as ProjectTreeNodeModel;
                     projNode.ChildrenChanged += ChildrenChanged;
@@ -210,9 +220,9 @@ namespace ApplicationLayer.ViewModels.ToolWindowViewModels
         {
             if (message is null) return;
 
-            this.Solution = SolutionTreeNodeModel.Create(message.SolutionPath, 
-                                                                                message.SolutionName, 
-                                                                                message.ProjectType, 
+            this.Solution = SolutionTreeNodeModel.Create(message.SolutionPath,
+                                                                                message.SolutionName,
+                                                                                message.ProjectType,
                                                                                 message.MachineTarget);
 
             this.Solution.IsExpanded = true;
@@ -263,7 +273,7 @@ namespace ApplicationLayer.ViewModels.ToolWindowViewModels
 
             Messenger.Default.Send(new AddMissedChangedFilesMessage());
 
-            var process = new GetChangedListMessage(string.Empty, (hirStructs) => 
+            var process = new GetChangedListMessage(string.Empty, (hirStructs) =>
             {
                 if (hirStructs.Count <= 0) return;
 
@@ -340,17 +350,19 @@ namespace ApplicationLayer.ViewModels.ToolWindowViewModels
 
             if (projectPath[0] == '\\') projectPath = projectPath.Remove(0, 1);
 
-            var projectData = new ProjectData(projectPath, 
-                                                               message.ProjectData.ProjectName, 
+            var projectData = new ProjectData(projectPath,
+                                                               message.ProjectData.ProjectName,
                                                                message.ProjectData.ProjectType);
 
-            ProjectTreeNodeModel newProject = projectGenerator.CreateDefaultProject(solutionPath, 
-                                                                                                                          projectData, 
+            ProjectTreeNodeModel newProject = projectGenerator.CreateDefaultProject(solutionPath,
+                                                                                                                          projectData,
                                                                                                                           message.MachineTarget);
             this.Solution.AddProject(newProject);
             newProject.Save();
 
             this.ChildrenChanged(this.Solution, null);
+
+            this._compiler.CreateAssembly(newProject.DisplayName);
         }
 
         /// <summary>

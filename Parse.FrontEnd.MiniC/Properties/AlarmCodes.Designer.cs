@@ -248,5 +248,32 @@ namespace Parse.FrontEnd.MiniC.Properties {
                 return ResourceManager.GetString("MCL0020", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   The &apos;{1}&apos; definition is included in the &apos;{0}&apos; namespace.과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string MCL0021 {
+            get {
+                return ResourceManager.GetString("MCL0021", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   &apos;!&apos; operator can be applied to only &apos;bool&apos; type operand.과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string MCL0022 {
+            get {
+                return ResourceManager.GetString("MCL0022", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   &apos;{0}&apos; operator can&apos;t be applied to &apos;{1}&apos; and &apos;{2}&apos; type operand.과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string MCL0023 {
+            get {
+                return ResourceManager.GetString("MCL0023", resourceCulture);
+            }
+        }
     }
 }

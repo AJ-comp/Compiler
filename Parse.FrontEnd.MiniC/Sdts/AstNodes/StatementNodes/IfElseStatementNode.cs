@@ -2,9 +2,10 @@
 
 namespace Parse.FrontEnd.MiniC.Sdts.AstNodes.StatementNodes
 {
-    public class IfElseStatementNode : CondStatementNode
+    public class IfElseStatementNode : IfStatementNode
     {
-        public StatementNode FalseStatement { get; private set; }
+        public override StatementNode FalseStatement => _falseStatement;
+
 
         public IfElseStatementNode(AstSymbol node) : base(node)
         {
@@ -19,9 +20,12 @@ namespace Parse.FrontEnd.MiniC.Sdts.AstNodes.StatementNodes
         public override SdtsNode Build(SdtsParams param)
         {
             base.Build(param);
-            FalseStatement = Items[4].Build(param.CloneForNewBlock()) as StatementNode;
+            _falseStatement = Items[4].Build(param.CloneForNewBlock()) as StatementNode;
 
             return this;
         }
+
+
+        public StatementNode _falseStatement;
     }
 }

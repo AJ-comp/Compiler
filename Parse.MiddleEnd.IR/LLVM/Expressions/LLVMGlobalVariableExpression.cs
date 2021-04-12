@@ -5,9 +5,9 @@ namespace Parse.MiddleEnd.IR.LLVM.Expressions
 {
     public class LLVMGlobalVariableExpression : LLVMFirstLayerExpression
     {
-        public RootChainVar DeclaredVar { get; private set; }
+        public RootChainVarContainer DeclaredVar { get; private set; }
 
-        public LLVMGlobalVariableExpression(IRVar var, LLVMSSATable ssaTable) : base(ssaTable)
+        public LLVMGlobalVariableExpression(IRDeclareVar var, LLVMSSATable ssaTable) : base(ssaTable)
         {
             DeclaredVar = _ssaTable.RegisterRootChainVarToGlobal(var);
         }

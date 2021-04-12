@@ -216,12 +216,8 @@ namespace ApplicationLayer.Models.SolutionPackage
 
 		protected void OnPropertyChanged(string name)
 		{
-			PropertyChangedEventHandler handler = PropertyChanged;
-			if (handler != null)
-			{
-				handler(this, new PropertyChangedEventArgs(name));
-			}
-		}
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+        }
 
 		/// <summary>
 		/// Returns a <see cref="String"/> representation of this instance.

@@ -1,4 +1,5 @@
-﻿using Parse.MiddleEnd.IR.LLVM.Expressions.ExprExpressions.LogicalExpressions;
+﻿using Parse.MiddleEnd.IR.Interfaces;
+using Parse.MiddleEnd.IR.LLVM.Expressions.ExprExpressions;
 using Parse.MiddleEnd.IR.LLVM.Models.VariableModels;
 using System.Collections.Generic;
 
@@ -6,14 +7,18 @@ namespace Parse.MiddleEnd.IR.LLVM.Expressions.StmtExpressions
 {
     public class LLVMIFExpression : LLVMStmtExpression
     {
-        public LLVMIFExpression(LLVMLogicalOpExpression condExpression, 
-                                            LLVMStmtExpression trueStmtExpression, 
-                                            LLVMStmtExpression falseStmtExpression,
-                                            LLVMSSATable ssaTable) : base(ssaTable)
+        public LLVMIFExpression(IRIFStatement statement, LLVMSSATable ssaTable) : base(ssaTable)
         {
-            _condExpression = condExpression;
-            _trueStmtExpression = trueStmtExpression;
-            _falseStmtExpression = falseStmtExpression;
+            _statement = statement;
+
+            _condExpression = new LLVMCompareOpExpression(statement.CondExpr, ssaTable);
+            _trueStmt = Create(statement.TrueStatement, ssaTable);
+        }
+
+        public LLVMIFExpression(IRIFElseStatement statement, LLVMSSATable ssaTable)
+            : this(statement as IRIFStatement, ssaTable)
+        {
+            _falseStmt = Create(statement.FalseStatement, ssaTable);
         }
 
         public override IEnumerable<Instruction> Build()
@@ -27,12 +32,12 @@ namespace Parse.MiddleEnd.IR.LLVM.Expressions.StmtExpressions
             _condInstructions = _condExpression.Build();
             _trueLabel = _ssaTable.RegisterLabel();            // create a true label.
 
-            _trueInstructions = _trueStmtExpression.Build();
+            _trueInstructions = _trueStmt.Build();
             _falseLabel = _ssaTable.RegisterLabel();            // create a false label.
 
-            if (_falseStmtExpression != null)
+            if (_falseStmt != null)
             {
-                _falseInstructions = _falseStmtExpression.Build();
+                _falseInstructions = _falseStmt.Build();
                 _nextLabel = _ssaTable.RegisterLabel();            // create a next label.
             }
             else _nextLabel = _falseLabel;
@@ -65,9 +70,11 @@ namespace Parse.MiddleEnd.IR.LLVM.Expressions.StmtExpressions
             return result;
         }
 
-        private LLVMLogicalOpExpression _condExpression;
-        private LLVMStmtExpression _trueStmtExpression;
-        private LLVMStmtExpression _falseStmtExpression;
+        private IRIFStatement _statement;
+
+        private LLVMCompareOpExpression _condExpression;
+        private LLVMStmtExpression _trueStmt;
+        private LLVMStmtExpression _falseStmt;
 
         private BitVariableLLVM _trueLabel;
         private BitVariableLLVM _falseLabel;

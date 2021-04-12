@@ -35,6 +35,7 @@
     <DataTemplate DataType="{x:Type documentViewModels:EditorTypeViewModel}">
         <syntaxEditor:SyntaxEditor FontSize="{Binding FontsAndColorsVM.FontSizeSelected}"
                                                 FontFamilyTest="{Binding FontsAndColorsVM.FontSelected, Converter={viewConverters:StringToFontFamilyConverter}}"
+                                                FilePath="{Binding FilePath}"
                                                 FileName="{Binding Title}"
                                                 Changed="{Binding Changed}"
                                                 IsLineNumberingVisible="True"  LineNumberForeColor="DarkGreen"

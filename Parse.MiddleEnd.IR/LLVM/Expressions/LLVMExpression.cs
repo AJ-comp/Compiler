@@ -1,4 +1,5 @@
 ﻿using Parse.Extensions;
+using Parse.MiddleEnd.IR.Datas;
 using System.Collections.Generic;
 
 namespace Parse.MiddleEnd.IR.LLVM.Expressions
@@ -21,6 +22,9 @@ namespace Parse.MiddleEnd.IR.LLVM.Expressions
         }
 
         public abstract IEnumerable<Instruction> Build();
+
+        public static LLVMExpression Create(IRStructDefInfo structDefInfo, LLVMSSATable ssaTable)
+            => new LLVMClassExpression(structDefInfo, ssaTable);
 
 
         protected LLVMSSATable _ssaTable;

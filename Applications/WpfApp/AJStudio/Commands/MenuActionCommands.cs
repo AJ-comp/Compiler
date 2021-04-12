@@ -426,8 +426,9 @@ namespace ApplicationLayer.WpfApp.Commands
             {
                 var mainViewModel = RootWindow.DataContext as MainViewModel;
                 var solution = mainViewModel.SolutionExplorer.Solution;
+                var compiler = mainViewModel.SolutionExplorer.LoadedCompiler;
 
-                CommandLogic.BuildProject(solution.BinFolderPath, projectNode);
+                CommandLogic.BuildProject(solution.BinFolderPath, projectNode, compiler);
             }, (condition) =>
             {
                 return true;
@@ -441,6 +442,7 @@ namespace ApplicationLayer.WpfApp.Commands
             {
                 var mainViewModel = RootWindow.DataContext as MainViewModel;
                 var solution = mainViewModel.SolutionExplorer.Solution;
+                var compiler = mainViewModel.SolutionExplorer.LoadedCompiler;
 
                 // create bin folder.
                 var binFileName = FileHelper.ConvertBinaryFileName(solution.DisplayName);
@@ -448,7 +450,7 @@ namespace ApplicationLayer.WpfApp.Commands
 
                 // save all opened files and build all project
                 CommandLogic.SaveAllFiles(mainViewModel.SolutionExplorer.Documents);
-                var fileReferenceInfos = CommandLogic.BuildAllProjects(solution);
+                var fileReferenceInfos = CommandLogic.BuildAllProjects(solution, compiler);
 
                 // create bootstrap and linker script
                 var bootstrapName = "vector.s";
@@ -511,7 +513,9 @@ namespace ApplicationLayer.WpfApp.Commands
                 if ((selDoc is EditorTypeViewModel) == false) return;
 
                 var editorViewModel = mainViewModel.SolutionExplorer.SelectedDocument as EditorTypeViewModel;
-                var parsingHistoryDoc = new ParsingHistoryViewModel(editorViewModel.ParsingHistory, selDoc.ToolTipText);
+                var parsingHistoryDoc = new ParsingHistoryViewModel(editorViewModel.ParsingHistory, 
+                                                                                                selDoc.ToolTipText);
+
                 mainViewModel.SolutionExplorer.Documents.Add(parsingHistoryDoc);
                 mainViewModel.SolutionExplorer.SelectedDocument = parsingHistoryDoc;
             }, () =>
@@ -530,7 +534,10 @@ namespace ApplicationLayer.WpfApp.Commands
                 if ((selDoc is EditorTypeViewModel) == false) return;
 
                 var editorViewModel = mainViewModel.SolutionExplorer.SelectedDocument as EditorTypeViewModel;
-                var parseTreeDoc = new ParseTreeViewModel(editorViewModel.ParseTree, editorViewModel.Ast, selDoc.ToolTipText);
+                var parseTreeDoc = new ParseTreeViewModel(editorViewModel.ParseTree, 
+                                                                                    editorViewModel.Ast, 
+                                                                                    selDoc.ToolTipText);
+
                 mainViewModel.SolutionExplorer.Documents.Add(parseTreeDoc);
                 mainViewModel.SolutionExplorer.SelectedDocument = parseTreeDoc;
             }, () =>
@@ -557,12 +564,15 @@ namespace ApplicationLayer.WpfApp.Commands
 
                 if (editorViewModel.Ast?.ErrNodes.Count == 0)
                 {
-                    var test = IRExpressionGenerator.GenerateLLVMExpression(editorViewModel.Ast as MiniCNode);
+                    editorViewModel.Compiler.AllBuild();
+                    var buildExpression = editorViewModel.Compiler.GetFinalExpression(editorViewModel.FullPath);
+                    var test = IRExpressionGenerator.GenerateLLVMExpression(buildExpression);
                     var instructionList = test.Build();
 
                     var textDoc = new LLVMViewModel("LLVM IR")
                     {
-                        TextContent = File.ReadAllText(Path.Combine(solution.BinFolderPath, editorViewModel.FileNameWithoutExtension + ".bc"))
+                        TextContent = File.ReadAllText(Path.Combine(solution.BinFolderPath, 
+                                                                                            editorViewModel.FileNameWithoutExtension + ".bc"))
                     };
 
                     mainViewModel.SolutionExplorer.Documents.Add(textDoc);

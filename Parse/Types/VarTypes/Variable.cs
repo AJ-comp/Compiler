@@ -3,13 +3,13 @@ using System.Diagnostics;
 
 namespace Parse.Types.VarTypes
 {
-    [DebuggerDisplay("Value:{Value}, ValueState:{ValueState}")]
+    [DebuggerDisplay("{DebuggerDisplay, nq}")]
     public abstract class Variable : IVariable
     {
         public int Address { get; set; }
         public object Value => ValueConstant.Value;
         public State ValueState => ValueConstant.ValueState;
-        public abstract DType TypeName { get; }
+        public abstract StdType TypeKind { get; }
 
         public IConstant ValueConstant { get; protected set; }
 
@@ -29,8 +29,15 @@ namespace Parse.Types.VarTypes
             }
         }
 
-        public abstract IConstant Assign(IValue operand);
-        public abstract bool CanAssign(IValue operand);
+        public abstract IConstant Assign(IConstant operand);
+        public abstract bool CanAssign(IConstant operand);
+
+
+        private string DebuggerDisplay
+            => string.Format("{0} Value:{1}, ValueState:{2}",
+                                        Helper.GetEnumDescription(TypeKind),
+                                        Value, 
+                                        ValueState);
     }
 
 
@@ -46,22 +53,22 @@ namespace Parse.Types.VarTypes
     [DebuggerDisplay("Value:{Value}, ValueState:{ValueState}")]
     public class PointerVariable : Variable, ICanBePointerType
     {
-        public PointerVariable(DType type, IValue value) : base(value)
+        public PointerVariable(StdType type, IValue value) : base(value)
         {
-            TypeName = type;
+            TypeKind = type;
         }
 
         public int PointerLevel { get; }
-        public override DType TypeName { get; }
+        public override StdType TypeKind { get; }
         uint ICanBePointerType.PointerLevel { get; }
 
 
-        public override bool CanAssign(IValue operand)
+        public override bool CanAssign(IConstant operand)
         {
             throw new System.NotImplementedException();
         }
 
-        public override IConstant Assign(IValue operand)
+        public override IConstant Assign(IConstant operand)
         {
             throw new System.NotImplementedException();
         }

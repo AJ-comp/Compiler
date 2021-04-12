@@ -6,9 +6,13 @@ namespace Parse.MiddleEnd.IR.LLVM.Models.VariableModels
     public class IntVariableLLVM : IntegerVarLLVM
     {
         public int Size => 32;
-        public override DType TypeName => DType.Int;
+        public override StdType TypeKind => StdType.Int;
 
-        public IntVariableLLVM(IRVar var, bool isGlobal) : base(var, isGlobal)
+        public IntVariableLLVM(IRDeclareVar var, bool isGlobal) : base(var, isGlobal)
+        {
+        }
+
+        public IntVariableLLVM(int offset) : base(offset, 0)
         {
         }
     }

@@ -8,21 +8,21 @@ namespace Parse.Types.VarTypes
     {
         public int Size => throw new NotImplementedException();
 
-        public override DType TypeName => DType.Unknown;
+        public override StdType TypeKind => StdType.Unknown;
 
 
         public StringVariable(StringConstant value) : base(value)
         {
         }
 
-        public override bool CanAssign(IValue operand)
+        public override bool CanAssign(IConstant operand)
         {
-            if (!Operation.CanOperation(this, operand)) return false;
+            if (!Operation.CanOperation(ValueConstant, operand)) return false;
 
             return true;
         }
 
-        public override IConstant Assign(IValue operand)
+        public override IConstant Assign(IConstant operand)
         {
             if (!CanAssign(operand)) throw new FormatException();
 
@@ -34,8 +34,8 @@ namespace Parse.Types.VarTypes
             else throw new NotSupportedException();
         }
 
-        public IConstant Add(IValue operand) => Operation.StringAdd(this, operand);
-        public IConstant Equal(IValue operand) => Operation.StringEqual(this, operand);
-        public IConstant NotEqual(IValue operand) => Operation.StringNotEqual(this, operand);
+        public IConstant Add(IConstant operand) => Operation.StringAdd(ValueConstant, operand);
+        public IConstant Equal(IConstant operand) => Operation.StringEqual(ValueConstant, operand);
+        public IConstant NotEqual(IConstant operand) => Operation.StringNotEqual(ValueConstant, operand);
     }
 }

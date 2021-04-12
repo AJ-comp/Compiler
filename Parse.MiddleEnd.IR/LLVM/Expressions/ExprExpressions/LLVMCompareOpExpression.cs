@@ -1,28 +1,28 @@
-﻿using Parse.MiddleEnd.IR.LLVM.Expressions.ExprExpressions.LogicalExpressions;
+﻿using Parse.MiddleEnd.IR.Interfaces;
 using Parse.MiddleEnd.IR.LLVM.Models.VariableModels;
+using Parse.Types;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
 
 namespace Parse.MiddleEnd.IR.LLVM.Expressions.ExprExpressions
 {
-    public enum IRCondition
+    public class LLVMCompareOpExpression : LLVMBinOpExpression
     {
-        [Description("eq")] EQ,
-        [Description("ne")] NE,
-        [Description("gt")] GT,
-        [Description("ge")] GE,
-        [Description("lt")] LT,
-        [Description("le")] LE
-    };
+        // if condition statement is not logical statement, it has to convert to logical statement.
+        // (ex : (a + b)  convert to  (a + b) != 0)
+        /*
+        logicalOp = new LLVMCompareOpExpression(irExpression as LLVMExprExpression,
+                                                                                    new LLVMConstantExpression(new IntConstant(0), ssaTable), 
+                                                                                    IRCompareSymbol.NE, 
+                                                                                    ssaTable);
+        */
 
-    public class LLVMCompareOpExpression : LLVMLogicalOpExpression
-    {
-        public LLVMCompareOpExpression(LLVMExprExpression left, 
-                                                            LLVMExprExpression right, 
-                                                            IRCondition condition,
-                                                            LLVMSSATable ssaTable) : base(left, right, condition, ssaTable)
+        public LLVMCompareOpExpression(IRCompareOpExpr expression, LLVMSSATable ssaTable)
+            : base(expression, ssaTable)
         {
+            _condition = expression.CompareSymbol;
+            _left = expression.Left;
+            _right = expression.Right;
         }
 
         public override IEnumerable<Instruction> Build()
@@ -44,12 +44,15 @@ namespace Parse.MiddleEnd.IR.LLVM.Expressions.ExprExpressions
 
             // At here both left type and right type is equal
             // At here the type is int or double.
-            if (Left.Result.TypeName == Types.DType.Double)
-                result.Add(Instruction.FcmpA(Condition, Left.Result, Right.Result, _ssaTable));
+            if (_left.Result.TypeKind == StdType.Double)
+                result.Add(Instruction.FcmpA(_condition, _left.Result, _right.Result, _ssaTable));
             else
-                result.Add(Instruction.IcmpA(Condition, Left.Result, Right.Result, _ssaTable));
+                result.Add(Instruction.IcmpA(_condition, _left.Result, _right.Result, _ssaTable));
 
             return result;
         }
+
+        private IRCompareSymbol _condition;
+        private IRExpr _left, _right;
     }
 }

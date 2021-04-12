@@ -1,0 +1,26 @@
+﻿using Parse.Types.ConstantTypes;
+using System;
+
+namespace Parse.Types.Operations
+{
+    public interface IEqualOperation : IOperation
+    {
+        ///////////////////////////////////////////////////////////////////////////////////////
+        /// <summary>
+        /// This function means this == operand.
+        /// </summary>
+        /// <param name="operand"></param>
+        /// <returns></returns>
+        ///////////////////////////////////////////////////////////////////////////////////////
+        IConstant Equal(IConstant operand);
+
+        ///////////////////////////////////////////////////////////////////////////////////////
+        /// <summary>
+        /// This function means this != operand.
+        /// </summary>
+        /// <param name="operand"></param>
+        /// <returns></returns>
+        ///////////////////////////////////////////////////////////////////////////////////////
+        IConstant NotEqual(IConstant operand);
+    }
+}

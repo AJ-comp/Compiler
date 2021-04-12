@@ -2,6 +2,6 @@
 {
     public interface IConstant : IValue
     {
-        Constant Casting(DType to);
+        Constant Casting(StdType to);
     }
 }

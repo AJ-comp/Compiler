@@ -1,15 +1,26 @@
 ﻿using Parse.FrontEnd.Ast;
-using Parse.FrontEnd.MiniC.Sdts;
-using Parse.FrontEnd.MiniC.Sdts.AstNodes.ExprNodes;
+using Parse.FrontEnd.MiniC.Properties;
 using Parse.FrontEnd.MiniC.Sdts.Datas;
 using Parse.FrontEnd.MiniC.Sdts.Datas.Variables;
-using Parse.FrontEnd.MiniC.Properties;
+using Parse.MiddleEnd.IR.Datas;
+using Parse.MiddleEnd.IR.Interfaces;
 
 namespace Parse.FrontEnd.MiniC.Sdts.AstNodes.ExprNodes
 {
-    public class DeRefExprNode : ExprNode
+    /// <summary>
+    /// *a
+    /// *A()
+    /// </summary>
+    public class DeRefExprNode : ExprNode, IUseIdentExpression
     {
         public UseIdentNode IdentNode { get; private set; }
+
+
+        // for interface *******************************************************/
+        public IDeclareVarExpression Var => IdentNode?.Var;
+        public IFunctionExpression Func => IdentNode?.Func;
+        /*****************************************************************/
+
 
         public DeRefExprNode(AstSymbol node) : base(node)
         {

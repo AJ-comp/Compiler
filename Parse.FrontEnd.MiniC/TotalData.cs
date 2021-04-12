@@ -1,4 +1,5 @@
 ﻿using Parse.FrontEnd.MiniC.Sdts.AstNodes;
+using Parse.FrontEnd.MiniC.Sdts.Expressions;
 using Parse.FrontEnd.Parsers.Datas;
 using Parse.FrontEnd.Tokenize;
 using System.Collections.Generic;
@@ -21,5 +22,6 @@ namespace Parse.FrontEnd.MiniC
         public LexingData LexedData { get; }
         public ParsingResult ParsedData { get; }
         public MiniCNode RootNode { get; set; }
+        public AJExpression FinalExpression { get; set; }
     }
 }

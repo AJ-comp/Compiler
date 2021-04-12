@@ -86,7 +86,7 @@ namespace Parse.WpfControls.SyntaxEditor
 
                 Compiler.LexingCompleted += Compiler_LexingCompleted;
                 Compiler.ParsingCompleted += Compiler_ParsingCompleted;
-                this.Compiler.Operate(FileName, Text);
+                this.Compiler.NewParsing(FullPath, Text);
 
                 // shallow copy
 //                var newParsingResult = this.parsingResult.Clone() as ParsingResult;

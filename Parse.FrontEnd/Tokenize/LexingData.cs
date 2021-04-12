@@ -123,11 +123,13 @@ namespace Parse.FrontEnd.Tokenize
         }
 
 
+        /*********************************************************/
         /// <summary>
-        /// This function replaces an exist token to new tokens (replaceTokenList)
+        /// This function replaces an existing token to new tokens (replaceTokenList)
         /// </summary>
         /// <param name="range">The range of token for replacing.</param>
         /// <param name="replaceTokenList">The new tokens to replace.</param>
+        /*********************************************************/
         public void ReplaceToken(Range range, IEnumerable<TokenCell> replaceTokenList)
         {
             var updateRange = UpdateViewToken(range, replaceTokenList);

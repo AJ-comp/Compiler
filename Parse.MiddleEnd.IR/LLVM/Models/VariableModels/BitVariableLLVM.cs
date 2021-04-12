@@ -3,19 +3,15 @@ using Parse.Types;
 
 namespace Parse.MiddleEnd.IR.LLVM.Models.VariableModels
 {
-    public class BitVariableLLVM : VariableLLVM
+    public sealed class BitVariableLLVM : VariableLLVM
     {
-        public override DType TypeName => DType.Bit;
+        public override StdType TypeKind => StdType.Bit;
 
         public BitVariableLLVM(int offset) : base(offset, 0)
         {
         }
 
-        public BitVariableLLVM(string varName) : base(varName, 0)
-        {
-        }
-
-        public BitVariableLLVM(IRVar var, bool isGlobal) : base(var, isGlobal)
+        public BitVariableLLVM(IRDeclareVar var, bool isGlobal) : base(var, isGlobal)
         {
         }
     }

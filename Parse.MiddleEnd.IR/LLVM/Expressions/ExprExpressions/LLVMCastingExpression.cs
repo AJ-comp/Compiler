@@ -7,11 +7,11 @@ namespace Parse.MiddleEnd.IR.LLVM.Expressions.ExprExpressions
 {
     public class LLVMCastingExpression : LLVMExprExpression
     {
-        public DType CastingType { get; }
+        public StdType CastingType { get; }
         public LLVMExprExpression Value { get; }
 
 
-        public LLVMCastingExpression(DType castingType, 
+        public LLVMCastingExpression(StdType castingType, 
                                                     LLVMExprExpression valueToCasting, 
                                                     LLVMSSATable ssaTable) : base(ssaTable)
         {
@@ -28,9 +28,9 @@ namespace Parse.MiddleEnd.IR.LLVM.Expressions.ExprExpressions
         {
             List<Instruction> instructionList = new List<Instruction>();
 
-            if (Value.Result.TypeName == CastingType) return instructionList;
+            if (Value.Result.TypeKind == CastingType) return instructionList;
 
-            if (Value.Result.TypeName == DType.Double)
+            if (Value.Result.TypeKind == StdType.Double)
                 instructionList.AddRange(ValueIsDoubleProcess(Value.Result as DoubleVariableLLVM, _ssaTable));
             else
                 instructionList.AddRange(ValueIsNotDoubleProcess(Value.Result as VariableLLVM, _ssaTable));
@@ -43,9 +43,9 @@ namespace Parse.MiddleEnd.IR.LLVM.Expressions.ExprExpressions
             List<Instruction> instructionList = new List<Instruction>();
 
             // to double
-            if (CastingType == DType.Double)
+            if (CastingType == StdType.Double)
             {
-                instructionList.Add(Instruction.ConvertType(var, DType.Int, ssaTable));
+                instructionList.Add(Instruction.ConvertType(var, StdType.Int, ssaTable));
                 instructionList.Add(Instruction.IToFp(instructionList.First().NewSSAVar as IntVariableLLVM, ssaTable));
 
                 return instructionList;

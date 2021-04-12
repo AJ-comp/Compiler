@@ -1,30 +1,19 @@
 ﻿using Parse.FrontEnd.Ast;
-using Parse.Types.ConstantTypes;
-using System;
+using Parse.MiddleEnd.IR.Interfaces;
 
 namespace Parse.FrontEnd.MiniC.Sdts.AstNodes.ExprNodes.ArithmeticExprNodes
 {
     public class AddExprNode : ArithmeticExprNode
     {
+        public override IROperation Operation => IROperation.Add;
+
         public AddExprNode(AstSymbol node) : base(node)
         {
         }
 
         public override SdtsNode Build(SdtsParams param)
         {
-            base.Build(param);
-
-            try
-            {
-                if (Left.Result is IntConstant)
-                    Result = (Left.Result as IntConstant).Add(Right.Result);
-            }
-            catch(Exception ex)
-            {
-
-            }
-
-            return this;
+            return base.Build(param);
         }
     }
 }

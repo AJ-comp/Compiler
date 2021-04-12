@@ -8,11 +8,15 @@ namespace Parse.MiddleEnd.IR.LLVM.Models.VariableModels
         public int Size => 64;
         public bool Nan { get; }
 
-        public override DType TypeName => DType.Double;
+        public override StdType TypeKind => StdType.Double;
 
         public DoubleVariableLLVM(IRDoubleVar var, bool isGlobal) : base(var, isGlobal)
         {
             Nan = var.Nan;
+        }
+
+        public DoubleVariableLLVM(int offset) : base(offset, 0)
+        {
         }
     }
 }

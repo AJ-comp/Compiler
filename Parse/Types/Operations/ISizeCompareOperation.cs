@@ -11,7 +11,7 @@ namespace Parse.Types.Operations
         /// <param name="operand"></param>
         /// <returns></returns>
         ///////////////////////////////////////////////////////////////////////////////////////
-        IConstant GreaterThan(IValue operand);
+        IConstant GreaterThan(IConstant operand);
 
         ///////////////////////////////////////////////////////////////////////////////////////
         /// <summary>
@@ -20,7 +20,7 @@ namespace Parse.Types.Operations
         /// <param name="operand"></param>
         /// <returns></returns>
         ///////////////////////////////////////////////////////////////////////////////////////
-        IConstant LessThan(IValue operand);
+        IConstant LessThan(IConstant operand);
 
         ///////////////////////////////////////////////////////////////////////////////////////
         /// <summary>
@@ -29,7 +29,7 @@ namespace Parse.Types.Operations
         /// <param name="operand"></param>
         /// <returns></returns>
         ///////////////////////////////////////////////////////////////////////////////////////
-        IConstant GreaterEqual(IValue operand);
+        IConstant GreaterEqual(IConstant operand);
 
         ///////////////////////////////////////////////////////////////////////////////////////
         /// <summary>
@@ -38,6 +38,6 @@ namespace Parse.Types.Operations
         /// <param name="operand"></param>
         /// <returns></returns>
         ///////////////////////////////////////////////////////////////////////////////////////
-        IConstant LessEqual(IValue operand);
+        IConstant LessEqual(IConstant operand);
     }
 }

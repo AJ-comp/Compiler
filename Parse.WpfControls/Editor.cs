@@ -1,6 +1,7 @@
 ﻿using Parse.WpfControls.EventArgs;
 using System.Collections.Generic;
 using System.Globalization;
+using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -40,6 +41,17 @@ namespace Parse.WpfControls
     public class Editor : Control
     {
         #region Dependency Properties
+        public string FilePath
+        {
+            get { return (string)GetValue(FilePathProperty); }
+            set { SetValue(FilePathProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for FilePath.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty FilePathProperty =
+            DependencyProperty.Register("FilePath", typeof(string), typeof(Editor), new PropertyMetadata(""));
+
+
         public string FileName
         {
             get { return (string)GetValue(FileNameProperty); }
@@ -129,6 +141,9 @@ namespace Parse.WpfControls
         }
 
         #endregion
+
+
+        public string FullPath => Path.Combine(FilePath, FileName);
 
         static Editor()
         {

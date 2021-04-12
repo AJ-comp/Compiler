@@ -1,13 +1,17 @@
 ﻿using Parse.FrontEnd.Ast;
+using Parse.Types;
 
 namespace Parse.FrontEnd.MiniC.Sdts.AstNodes.TypeNodes
 {
     public class IntNode : DataTypeNode
     {
-        public IntNode(AstSymbol node) : base(node)
+        public IntNode(AstSymbol node, bool bSigned) : base(node)
         {
+            _signed = bSigned;
         }
 
-        public override DataType DataType => DataType.Int;
+        public override StdType DataType => (_signed) ? StdType.UInt : StdType.Int;
+
+        private bool _signed;
     }
 }

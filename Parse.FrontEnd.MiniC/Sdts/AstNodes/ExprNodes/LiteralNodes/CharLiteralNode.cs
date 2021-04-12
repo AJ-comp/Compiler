@@ -1,4 +1,5 @@
 ﻿using Parse.FrontEnd.Ast;
+using Parse.MiddleEnd.IR.Interfaces;
 
 namespace Parse.FrontEnd.MiniC.Sdts.AstNodes.ExprNodes.LiteralNodes
 {

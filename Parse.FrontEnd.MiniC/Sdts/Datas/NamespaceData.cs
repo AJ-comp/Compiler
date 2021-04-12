@@ -9,18 +9,36 @@ namespace Parse.FrontEnd.MiniC.Sdts.Datas
     {
         public List<SdtsNode> ReferenceTable { get; } = new List<SdtsNode>();
         public string Name => NameTokens.ItemsString(PrintType.String, string.Empty, ".");
-        public IEnumerable<ClassData> ClassDatas => _classDatas;
 
+        public Access AccessType => Access.Public;
+        public IEnumerable<ClassDefData> ClassDatas => _classDatas;
         public IEnumerable<TokenData> NameTokens => _nameTokens;
 
-        public NamespaceData(IEnumerable<TokenData> nameTokens, IEnumerable<ClassData> classDatas)
+        public IEnumerable<ISymbolData> AllSymbols
         {
-            _nameTokens.AddRange(nameTokens);
-            _classDatas.AddRange(classDatas);
+            get
+            {
+                List<ISymbolData> result = new List<ISymbolData>();
+
+                foreach (var item in ClassDatas) result.Add(item);
+
+                return result;
+            }
+        }
+
+        public int Block { get; private set; }
+        public int Offset { get; internal set; }
+
+        public NamespaceData(int blockLevel, List<TokenData> nameTokens, HashSet<ClassDefData> classDatas)
+        {
+            Block = blockLevel;
+
+            _nameTokens = nameTokens;
+            _classDatas = classDatas;
         }
 
 
         internal List<TokenData> _nameTokens = new List<TokenData>();
-        internal List<ClassData> _classDatas = new List<ClassData>();
+        internal HashSet<ClassDefData> _classDatas = new HashSet<ClassDefData>();
     }
 }

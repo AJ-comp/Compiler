@@ -180,4 +180,13 @@
   <data name="MCL0020" xml:space="preserve">
     <value>'{0}'은(는) 변수 타입으로 사용할 수 없습니다.</value>
   </data>
+  <data name="MCL0021" xml:space="preserve">
+    <value>'{0}' 네임스페이스에 이미 '{1}'에 대한 정의가 포함되어 있습니다.</value>
+  </data>
+  <data name="MCL0022" xml:space="preserve">
+    <value>'!'연산자는 'bool' 타입의 피연산자에만 적용할 수 있습니다.</value>
+  </data>
+  <data name="MCL0023" xml:space="preserve">
+    <value>{0} 연산자는 '{1}' 및 '{2}' 타입의 피연산자에 적용할 수 없습니다.</value>
+  </data>
 </root>

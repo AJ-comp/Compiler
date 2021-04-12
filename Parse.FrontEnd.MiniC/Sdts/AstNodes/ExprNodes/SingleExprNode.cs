@@ -1,12 +1,13 @@
 ﻿using Parse.FrontEnd.Ast;
-using Parse.FrontEnd.Grammars.Properties;
 using Parse.FrontEnd.MiniC.Properties;
+using Parse.Types;
 
 namespace Parse.FrontEnd.MiniC.Sdts.AstNodes.ExprNodes
 {
     public abstract class SingleExprNode : ExprNode
     {
         public TokenData Token { get; private set; }
+        public ExprNode ExprNode { get; private set; }
 
         public SingleExprNode(AstSymbol node) : base(node)
         {
@@ -14,7 +15,9 @@ namespace Parse.FrontEnd.MiniC.Sdts.AstNodes.ExprNodes
 
         public override SdtsNode Build(SdtsParams param)
         {
-            Items[0].Build(param);
+            ExprNode = (Items[0].Build(param) as ExprNode);
+
+            Result = ExprNode.Result;
 
             return this;
         }

@@ -1,11 +1,20 @@
 ﻿using Parse.FrontEnd.Ast;
-using Parse.Types;
+using Parse.FrontEnd.MiniC.Sdts.Datas;
+using Parse.FrontEnd.MiniC.Sdts.Datas.Variables;
+using Parse.MiddleEnd.IR.Interfaces;
 
 namespace Parse.FrontEnd.MiniC.Sdts.AstNodes.ExprNodes.ArithmeticExprNodes
 {
-    public abstract class IncDecExprNode : SingleExprNode
+    public abstract class IncDecExprNode : SingleExprNode, IIncDecExpression
     {
         public UseIdentNode UseIdentNode { get; private set; }
+
+
+        // for interface **********************************/
+        public IDeclareVarExpression Var => UseIdentNode.Var;
+        public abstract Info ProcessInfo { get; }
+        /********************************************/
+
 
         protected IncDecExprNode(AstSymbol node, string oper) : base(node)
         {
@@ -23,7 +32,7 @@ namespace Parse.FrontEnd.MiniC.Sdts.AstNodes.ExprNodes.ArithmeticExprNodes
             }
 
             UseIdentNode = Items[0] as UseIdentNode;
-            if (UseIdentNode.VarData is IString)
+            if (UseIdentNode.VarData.DataType == MiniCDataType.String)
             {
                 AddMCL0013Exception("--");
                 return this;

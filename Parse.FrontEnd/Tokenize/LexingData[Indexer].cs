@@ -7,6 +7,12 @@ namespace Parse.FrontEnd.Tokenize
 {
     public partial class LexingData
     {
+        /**********************************/
+        /// <summary>
+        /// This returns the line index for the caret.
+        /// 캐럿에 대한 라인 인덱스를 가져옵니다.
+        /// </summary>
+        /**********************************/
         public IEnumerable<int> LineIndexesForCaret
         {
             get
@@ -43,11 +49,14 @@ namespace Parse.FrontEnd.Tokenize
         }
 
 
+        /**********************************************/
         /// <summary>
-        /// This function returns tokens that there is on lineIndex.
+        /// This function returns the token list of the lineIndex.
+        /// 라인 인덱스의 뷰 토큰 리스트를 가져옵니다.
         /// </summary>
         /// <param name="lineIndex"></param>
         /// <returns></returns>
+        /**********************************************/
         public IEnumerable<TokenCell> GetTokensForLine(int lineIndex)
         {
             var result = new List<TokenCell>();
@@ -75,11 +84,43 @@ namespace Parse.FrontEnd.Tokenize
         }
 
 
+        /*****************************************/
+        /// <summary>
+        /// This returns absolute offset for line offset
+        /// 라인 offset에 해당하는 절대 offset 을 반환합니다.
+        /// </summary>
+        /// <param name="lineIndex"></param>
+        /// <param name="offsetOnLine"></param>
+        /// <returns></returns>
+        /*****************************************/
+        public int GetAbsOffsetForLineOffset(int lineIndex, int offsetOnLine)
+        {
+            var tokensOnLine = GetTokensForLine(lineIndex);
+            if (tokensOnLine.Count() == 0) return -1;
+
+            int result = tokensOnLine.Last().EndIndex + 1;
+            int indexOnLine = 0;
+            foreach (var token in tokensOnLine)
+            {
+                indexOnLine += token.Data.Length;
+
+                if (offsetOnLine > indexOnLine) continue;
+
+                result = token.StartIndex + token.Data.Length - (indexOnLine - offsetOnLine);
+                break;
+            }
+
+            return result;
+        }
+
+
+        /*************************************************************/
         /// <summary>
         /// This function returns indexes for the special pattern from the TokenPatternInfo.
         /// </summary>
         /// <param name="pattern"></param>
         /// <returns></returns>
+        /*************************************************************/
         public List<int> GetIndexesForSpecialPattern(TokenPatternInfo pattern)
         {
             var table = this.TableForAllPatternsOnView;
@@ -92,6 +133,14 @@ namespace Parse.FrontEnd.Tokenize
         }
 
 
+        /**************************************/
+        /// <summary>
+        /// This returns the line index for the token index.
+        /// 토큰 인덱스의 라인 인덱스를 가져옵니다.
+        /// </summary>
+        /// <param name="tokenIndex"></param>
+        /// <returns></returns>
+        /**************************************/
         public int GetLineIndex(int tokenIndex)
         {
             if (tokenIndex >= TokensForView.Count) return -1;
@@ -125,7 +174,7 @@ namespace Parse.FrontEnd.Tokenize
 
         public int GetTopFrontIndexFromTokenIndex(string pattern, int tokenIndex)
         {
-            var indexes = this.GetIndexesForSpecialPattern(pattern);
+            var indexes = this.GetIndexesForSpecificPattern(pattern);
 
             int result = -1;
             int minDiffer = int.MaxValue;
@@ -145,12 +194,15 @@ namespace Parse.FrontEnd.Tokenize
         }
 
 
+        /*******************************************************************/
         /// <summary>
         /// This function returns a token index from the caretIndex.
+        /// 캐럿위치에 해당하는 토큰 인덱스를 가져옵니다.
         /// </summary>
         /// <param name="offset">The offset index</param>
         /// <param name="recognWay">The standard index for recognition a token</param>
         /// <returns>a token index</returns>
+        /*******************************************************************/
         public int TokenIndexForOffset(int offset, RecognitionWay recognWay = RecognitionWay.Back)
         {
             int index = -1;
@@ -170,17 +222,19 @@ namespace Parse.FrontEnd.Tokenize
         }
 
 
+        /******************************************************/
         /// <summary>
-        /// This function returns indexes for the special pattern from the string.
+        /// This function returns indexes for the specific pattern from the string.
         /// </summary>
         /// <param name="pattern"></param>
         /// <returns></returns>
-        public List<int> GetIndexesForSpecialPattern(string pattern)
+        /******************************************************/
+        public List<int> GetIndexesForSpecificPattern(string pattern)
         {
             return this.GetTokenPatternInfoFromString(pattern).Value;
         }
 
-        public List<int> GetIndexesForSpecialPattern(params string[] patterns)
+        public IEnumerable<int> GetIndexesForSpecificPatterns(params string[] patterns)
         {
             var table = this.TableForAllPatternsOnView;
             List<int> result = new List<int>();
@@ -200,10 +254,13 @@ namespace Parse.FrontEnd.Tokenize
 
 
 
+        /******************************************************/
         /// <summary>
-        /// This function returns a index of first token on line index. (in other words this function returns the token index after "\n".)
+        /// This function returns a index of first token on line index. 
+        /// (in other words this function returns the token index after "\n".)
         /// if "\r" or "\n" token is after "\n" it is useless token. bool : false
         /// </summary>
+        /******************************************************/
         private List<Tuple<int, bool>> FirstTokenIndexOnLine
         {
             get
@@ -244,6 +301,6 @@ namespace Parse.FrontEnd.Tokenize
 
 
         private List<int> _lineIndexer = new List<int>();
-        private List<Tuple<int, int>> _tokenIndexByLine = new List<Tuple<int, int>>();
+        private Dictionary<int, int> _tokenIndexByLine = new Dictionary<int, int>();
     }
 }

@@ -6,30 +6,21 @@ namespace Parse.FrontEnd.MiniC.Sdts.Datas
     public class MiniCSdtsParams : SdtsParams
     {
         public MiniCSymbolTable SymbolTable { get; private set; } = new MiniCSymbolTable();
+        public AssemblyInfo AssemblyInfo { get; }
+        public RootData RootData { get; }
 
-        public MiniCSdtsParams(int blockLevel, int offset) : base(blockLevel, offset)
+        public MiniCSdtsParams(int blockLevel, int offset, AssemblyInfo assemblyInfo, RootData rootData) : base(blockLevel, offset)
         {
-        }
-
-        public MiniCSdtsParams(int blockLevel, int offset, MiniCSymbolTable baseTable) : this(blockLevel, offset)
-        {
-            SymbolTable = new MiniCSymbolTable(baseTable);
+            AssemblyInfo = assemblyInfo;
+            RootData = rootData;
         }
 
         public override SdtsParams Clone()
         {
-            var result = new MiniCSdtsParams(BlockLevel, Offset)
+            var result = new MiniCSdtsParams(BlockLevel, Offset, AssemblyInfo, RootData)
             {
                 SymbolTable = SymbolTable
             };
-
-            return result;
-        }
-
-        public override SdtsParams CloneForNewBlock()
-        {
-            var result = new MiniCSdtsParams(BlockLevel, Offset, SymbolTable);
-            result.BlockLevel++;
 
             return result;
         }

@@ -1,12 +1,11 @@
 ﻿using Parse.FrontEnd.Ast;
+using Parse.Types;
 
 namespace Parse.FrontEnd.MiniC.Sdts.AstNodes.TypeNodes
 {
-    public enum DataType { Unknown, Void, Int, Address }
-
     public abstract class DataTypeNode : MiniCNode
     {
-        public abstract DataType DataType { get; }
+        public abstract StdType DataType { get; }
         public TokenData DataTypeToken { get; protected set; }
 
         protected DataTypeNode(AstSymbol node) : base(node)

@@ -1,5 +1,4 @@
 ﻿using ApplicationLayer.Common;
-using Parse.FrontEnd.MiniC.Sdts.AstNodes;
 using Parse.FrontEnd.MiniC.Sdts.Datas;
 using Parse.FrontEnd.MiniC.Sdts.Datas.Variables;
 using System;
@@ -9,7 +8,7 @@ namespace ApplicationLayer.Models.SolutionPackage.MiniCPackage
 {
     public class FuncTreeNodeModel : TreeNodeModel
     {
-        private FuncData _funcData;
+        private FuncDefData _funcData;
 
         public string ReturnType => (_funcData == null) ? string.Empty : _funcData.ReturnType.ToString();
         public string Name => _funcData.Name;
@@ -22,7 +21,7 @@ namespace ApplicationLayer.Models.SolutionPackage.MiniCPackage
             get
             {
                 string result = Name + "(";
-                var paramVars = _funcData.ParamVars;
+                var paramVars = _funcData.ParamVarList;
 
                 foreach (var param in paramVars)
                 {
@@ -42,7 +41,7 @@ namespace ApplicationLayer.Models.SolutionPackage.MiniCPackage
 
         public override event EventHandler<FileChangedEventArgs> Changed;
 
-        public FuncTreeNodeModel(FuncData funcData, bool canReference = true)
+        public FuncTreeNodeModel(FuncDefData funcData, bool canReference = true)
         {
             _funcData = funcData;
             CanReference = canReference;

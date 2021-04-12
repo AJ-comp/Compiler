@@ -1,4 +1,5 @@
 ﻿using Parse.MiddleEnd.IR.Datas;
+using Parse.MiddleEnd.IR.Interfaces;
 using Parse.MiddleEnd.IR.LLVM.Models.VariableModels;
 using Parse.Types.ConstantTypes;
 using System.Collections.Generic;
@@ -8,16 +9,11 @@ namespace Parse.MiddleEnd.IR.LLVM.Expressions.ExprExpressions
 {
     public class LLVMIncDecExpression : LLVMExprExpression
     {
-        public enum Info { PreInc, PreDec, PostInc, PostDec };
-
-        public IRVar UseVar { get; }
-        public Info ProcessInfo { get; }
-
-
-        public LLVMIncDecExpression(IRVar var, Info processInfo, LLVMSSATable ssaTable) : base(ssaTable)
+        public LLVMIncDecExpression(IRIncDecExpr expression, LLVMSSATable ssaTable) : base(ssaTable)
         {
-            UseVar = var;
-            ProcessInfo = processInfo;
+            _expression = expression;
+            //            _useVar = (expression.Var as IRUseVarExpr).DeclareInfo;
+            _useVar = expression.Var;
         }
 
 
@@ -31,21 +27,25 @@ namespace Parse.MiddleEnd.IR.LLVM.Expressions.ExprExpressions
         {
             List<Instruction> instructionList = new List<Instruction>();
 
-            var ssVar = _ssaTable.Find(UseVar).LinkedObject as VariableLLVM;
+            var ssVar = _ssaTable.Find(_useVar).LinkedObject as VariableLLVM;
             instructionList.Add(Instruction.Load(ssVar, _ssaTable));
             var firstVar = instructionList.Last().NewSSAVar;
 
-            if (ProcessInfo == Info.PreInc || ProcessInfo == Info.PostInc)
-                instructionList.Add(Instruction.BinOp(firstVar, new IntConstant(1), _ssaTable, IROperation.Add));
+            if (_expression.ProcessInfo == Info.PreInc || _expression.ProcessInfo == Info.PostInc)
+                instructionList.Add(Instruction.BinOp(firstVar as VariableLLVM, new IntConstant(1), _ssaTable, IROperation.Add));
             else
-                instructionList.Add(Instruction.BinOp(firstVar, new IntConstant(1), _ssaTable, IROperation.Sub));
+                instructionList.Add(Instruction.BinOp(firstVar as VariableLLVM, new IntConstant(1), _ssaTable, IROperation.Sub));
 
-            Result = (ProcessInfo == Info.PreInc || ProcessInfo == Info.PreDec)
+            Result = (_expression.ProcessInfo == Info.PreInc || _expression.ProcessInfo == Info.PreDec)
                       ? instructionList.Last().NewSSAVar : firstVar;
 
             instructionList.Add(Instruction.Store(instructionList.Last().NewSSAVar, ssVar));
 
             return instructionList;
         }
+
+
+        private IRIncDecExpr _expression;
+        private IRDeclareVar _useVar;
     }
 }

@@ -1,71 +1,158 @@
 ﻿using Parse.FrontEnd.Ast;
 using Parse.FrontEnd.MiniC.Sdts.Datas;
-using Parse.FrontEnd.MiniC.Sdts.Datas.Variables;
+using Parse.MiddleEnd.IR.Datas;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Parse.FrontEnd.MiniC.Sdts.AstNodes
 {
-    public class ClassDefNode : MiniCNode, IHasVarInfos, IHasFuncInfos
+    public class ClassDefNode : MiniCNode, IHasSymbol, IClassExpression
     {
-        public IEnumerable<VariableMiniC> VarList => ClassData?.Fields;
-        public IEnumerable<FuncData> FuncList => ClassData?.Funcs;
+        public IEnumerable<ISymbolData> SymbolList => ClassData?.SymbolList;
 
-        public ClassData ClassData { get; private set; }
+
+        // for interface
+        public IEnumerable<IDeclareVarExpression> VarList => ClassData?.Fields;
+        public IEnumerable<IFunctionExpression> FuncList => ClassData?.Funcs;
+        public Access AccessType => ClassData.AccessType;
+        public string Name => ClassData.Name;
+
+
+
+        public IEnumerable<IDeclareVarExpression> MemberVarList
+        {
+            get
+            {
+                List<IDeclareVarExpression> result = new List<IDeclareVarExpression>();
+                foreach (var varData in VarList)
+                {
+                    // if static is not
+                    result.Add(varData);
+                }
+
+                return result;
+            }
+        }
+
+        public IEnumerable<IDeclareVarExpression> StaticVarList
+        {
+            get
+            {
+                List<IDeclareVarExpression> result = new List<IDeclareVarExpression>();
+                foreach (var varData in VarList)
+                {
+                    // add if static is
+                    result.Add(varData);
+                }
+
+                return result;
+            }
+        }
+
+
+        public IEnumerable<IFunctionExpression> MemberFuncList
+        {
+            get
+            {
+                List<IFunctionExpression> result = new List<IFunctionExpression>();
+                foreach (var funcData in FuncList)
+                {
+                    // if static is not 
+                    result.Add(funcData);
+                }
+
+                return result;
+            }
+        }
+
+        public IEnumerable<IFunctionExpression> StaticFuncList
+        {
+            get
+            {
+                List<IFunctionExpression> result = new List<IFunctionExpression>();
+                foreach (var funcData in FuncList)
+                {
+                    // if static
+                    result.Add(funcData);
+                }
+
+                return result;
+            }
+        }
+
+        public ClassDefData ClassData { get; private set; }
 
         public ClassDefNode(AstSymbol node) : base(node)
         {
+            BlockLevel = 2;
         }
 
         // [0] : accesser?
         // [1] : Ident
-        // [2:n] : Dcl? (AstNonTerminal)
-        // [n+1:y] : FuncDef? (AstNonTerminal)
+        // [2:n] : (accesser? (field | property | func))*
         public override SdtsNode Build(SdtsParams param)
         {
             var accessState = Access.Private;
-            TokenData classToken = null;
-            var newParam = param.CloneForNewBlock();
+            var newParam = param.Clone();
 
-            HashSet<VariableMiniC> varList = new HashSet<VariableMiniC>();
-            HashSet<FuncData> funcDataList = new HashSet<FuncData>();
+            HashSet<ISymbolData> symbolList = new HashSet<ISymbolData>();
 
-            foreach (var item in Items)
+            int offset = 0;
+            if (Items[offset] is AccesserNode)
             {
-                var minicNode = item as MiniCNode;
-
-                // Accesser
-                if (minicNode is AccesserNode)
-                {
-                    var accesserNode = minicNode.Build(param) as AccesserNode;
-                    if (accesserNode.AccessState == Access.Public) accessState = Access.Public;
-                }
-                // Ident
-                else if (minicNode is TerminalNode)
-                {
-                    var identNode = minicNode.Build(param) as TerminalNode;
-                    classToken = identNode.Token;
-                }
-                // Member variable
-                else if (minicNode is VariableDclsNode)
-                {
-                    // children node is parsing only variable elements so it doesn't need to clone an param
-                    var varDclsNode = minicNode.Build(newParam) as VariableDclsNode;
-                    foreach (var varData in varDclsNode.VarList) varList.Add(varData);
-                }
-                // Member function
-                else if (minicNode is FuncDefNode)
-                {
-                    newParam.Offset = 0;
-
-                    var node = minicNode.Build(newParam) as FuncDefNode;
-                    funcDataList.Add(node.FuncData);
-                }
+                var accesserNode = Items[offset++].Build(param) as AccesserNode;
+                if (accesserNode.AccessState == Access.Public) accessState = Access.Public;
             }
 
-            ClassData = new ClassData(accessState, classToken, varList, funcDataList);
+            var identNode = Items[offset++].Build(param) as TerminalNode;
+            var classToken = identNode.Token;
+
+            ClassData = new ClassDefData(BlockLevel, accessState, classToken, symbolList);
             ClassData.ReferenceTable.Add(this);
 
+            // field or property or function
+            while (true)
+            {
+                if (Items.Count <= offset) break;
+
+                Access accessType = Access.Private;
+                if (Items[offset] is AccesserNode)
+                {
+                    var accesserNode = Items[offset++].Build(param) as AccesserNode;
+                    if (accesserNode.AccessState == Access.Public) accessType = Access.Public;
+                }
+
+                if (Items[offset] is VariableDclListNode) BuildForVariableDclsNode(newParam, offset++, accessType, symbolList);
+                else if (Items[offset] is FuncDefNode) BuildForFuncDefNode(newParam, offset++, accessType, symbolList);
+            }
+
             return this;
+        }
+
+
+        private void BuildForVariableDclsNode(SdtsParams param, int offset, Access accessType, HashSet<ISymbolData> symbolList)
+        {
+            param.Offset = (VarList == null) ? 0 : VarList.Count();
+            // children node is parsing only variable elements so it doesn't need to clone an param
+            var varDclsNode = Items[offset].Build(param) as VariableDclListNode;
+
+            foreach (var varData in varDclsNode.VarList)
+            {
+                varData.AccessType = accessType;
+                varData.PartyName = Name;
+
+                symbolList.Add(varData);
+            }
+        }
+
+
+        private void BuildForFuncDefNode(SdtsParams param, int offset, Access accessType, HashSet<ISymbolData> symbolList)
+        {
+            param.Offset = 0;
+
+            var node = Items[offset].Build(param) as FuncDefNode;
+            node.FuncData.AccessType = accessType;
+            symbolList.Add(node.FuncData);
         }
     }
 }

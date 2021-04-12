@@ -109,4 +109,22 @@
   <data name="BinNumber" xml:space="preserve">
     <value>binary number</value>
   </data>
+  <data name="AlreadyRegisteredAssembly" xml:space="preserve">
+    <value>There is already registered an assembly '{0}'.</value>
+  </data>
+  <data name="NotRegisteredAssembly" xml:space="preserve">
+    <value>There is not a registered assembly name '{0}'.</value>
+  </data>
+  <data name="NotRegisteredFile" xml:space="preserve">
+    <value>There is not a registered file name '{0}'.</value>
+  </data>
+  <data name="AlreadyRegisteredFile" xml:space="preserve">
+    <value>There is already registered an file '{0}'.</value>
+  </data>
+  <data name="EqualToRemoveAndAddName" xml:space="preserve">
+    <value>The target to remove and to add is equal.</value>
+  </data>
+  <data name="FileNameCantEmpty" xml:space="preserve">
+    <value>Specify file name</value>
+  </data>
 </root>

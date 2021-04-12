@@ -8,23 +8,8 @@ namespace Parse.FrontEnd.MiniC.Sdts.AstNodes
     {
         public VariableTypeNode DataTypeNode { get; private set; }
         public DeclareVarNode VariableNode { get; private set; }
-        public int BlockLevel { get; private set; }
         public int Offset { get; private set; }
-
-        public VariableMiniC ToVarData
-        {
-            get
-            {
-                return MiniCCreator.CreateVarData(Access.Private,
-                                                                    DataTypeNode.MiniCTypeInfo,
-                                                                    VariableNode.NameToken,
-                                                                    null,
-                                                                    VariableNode.DimensionToken,
-                                                                    BlockLevel,
-                                                                    Offset,
-                                                                    VarProperty.Param);
-            }
-        }
+        public VariableMiniC ToVarData => _varData;
 
         public ParamNode(AstSymbol node) : base(node)
         {
@@ -37,6 +22,7 @@ namespace Parse.FrontEnd.MiniC.Sdts.AstNodes
         // [1] : VariableNode [Variable]
         public override SdtsNode Build(SdtsParams param)
         {
+            _varData = null;
             BlockLevel = param.BlockLevel;
             Offset = param.Offset;
 
@@ -55,7 +41,20 @@ namespace Parse.FrontEnd.MiniC.Sdts.AstNodes
                                                       .VarTable
                                                       .CreateNewBlock(ToVarData, new ReferenceInfo(this));
 
+            _varData = MiniCCreator.CreateVarData(Access.Private,
+                                                                        DataTypeNode.MiniCTypeInfo,
+                                                                        VariableNode.NameToken,
+                                                                        null,
+                                                                        VariableNode.DimensionToken,
+                                                                        BlockLevel,
+                                                                        Offset,
+                                                                        null);
+
             return this;
         }
+
+
+
+        private VariableMiniC _varData;
     }
 }

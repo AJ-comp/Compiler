@@ -1,30 +1,20 @@
-﻿using Parse.MiddleEnd.IR.LLVM.Models.VariableModels;
+﻿using Parse.MiddleEnd.IR.Interfaces;
+using Parse.MiddleEnd.IR.LLVM.Models.VariableModels;
 using Parse.Types.ConstantTypes;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
 
 namespace Parse.MiddleEnd.IR.LLVM.Expressions.ExprExpressions
 {
-    public enum IROperation
-    {
-        [Description("add")] Add,
-        [Description("sub")] Sub,
-        [Description("mul")] Mul,
-        [Description("sdiv")] Div,
-        [Description("srem")] Mod
-    };
-
     public class LLVMArithmeticExpression : LLVMBinOpExpression
     {
-        public IROperation Operation { get; }
-
-        public LLVMArithmeticExpression(LLVMExprExpression left, 
-                                                        LLVMExprExpression right, 
-                                                        IROperation operation,
-                                                        LLVMSSATable ssaTable) : base(left, right, ssaTable)
+        public LLVMArithmeticExpression(IRArithmeticOpExpr expression,
+                                                        LLVMSSATable ssaTable) : base(expression, ssaTable)
         {
-            Operation = operation;
+            _operation = expression.Operation;
+
+            _left = Create(expression.Left, ssaTable);
+            _right = Create(expression.Right, ssaTable);
         }
 
 
@@ -32,7 +22,7 @@ namespace Parse.MiddleEnd.IR.LLVM.Expressions.ExprExpressions
         {
             List<Instruction> result = new List<Instruction>();
             result.AddRange(base.Build());
-            result.AddRange(GenerateOperInstructions(Operation));
+            result.AddRange(GenerateOperInstructions(_operation));
 
             Result = result.Last().NewSSAVar;
 
@@ -46,29 +36,29 @@ namespace Parse.MiddleEnd.IR.LLVM.Expressions.ExprExpressions
         {
             List<Instruction> instructionList = new List<Instruction>();
 
-            if (Left.Result is VariableLLVM)
+            if (_left.Result is VariableLLVM)
             {
-                if (Right.Result is VariableLLVM)
+                if (_right.Result is VariableLLVM)
                 {
-                    instructionList.Add(Instruction.BinOp(Left.Result as VariableLLVM,
-                                                                         Right.Result as VariableLLVM,
+                    instructionList.Add(Instruction.BinOp(_left.Result as VariableLLVM,
+                                                                         _right.Result as VariableLLVM,
                                                                          _ssaTable,
                                                                          operation));
                 }
                 else
                 {
-                    instructionList.Add(Instruction.BinOp(Left.Result as VariableLLVM,
-                                                                         Right.Result as IConstant,
+                    instructionList.Add(Instruction.BinOp(_left.Result as VariableLLVM,
+                                                                         _right.Result as IConstant,
                                                                          _ssaTable,
                                                                          operation));
                 }
             }
             else // Constant
             {
-                if (Right.Result is VariableLLVM)
+                if (_right.Result is VariableLLVM)
                 {
-                    instructionList.Add(Instruction.BinOp(Right.Result as VariableLLVM, 
-                                                                         Left.Result as IConstant,
+                    instructionList.Add(Instruction.BinOp(_right.Result as VariableLLVM,
+                                                                         _left.Result as IConstant,
                                                                          _ssaTable, 
                                                                          operation));
                 }
@@ -78,5 +68,9 @@ namespace Parse.MiddleEnd.IR.LLVM.Expressions.ExprExpressions
 
             return instructionList;
         }
+
+        private IROperation _operation;
+        private LLVMExprExpression _left;
+        private LLVMExprExpression _right;
     }
 }

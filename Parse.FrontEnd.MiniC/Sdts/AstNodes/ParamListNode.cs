@@ -31,9 +31,15 @@ namespace Parse.FrontEnd.MiniC.Sdts.AstNodes
         {
             _paramNodes.Clear();
 
+            var classDefNode = GetParent(typeof(ClassDefNode)) as ClassDefNode;
+            _classTypeName = classDefNode.ClassData.Name;
+
             foreach (var item in Items)
             {
-                _paramNodes.Add(item.Build(param) as ParamNode);
+                var paramNode = item.Build(param) as ParamNode;
+                paramNode.ToVarData.PartyName = _classTypeName;
+
+                _paramNodes.Add(paramNode);
                 param.Offset++;
             }
 
@@ -42,5 +48,6 @@ namespace Parse.FrontEnd.MiniC.Sdts.AstNodes
 
 
         private List<ParamNode> _paramNodes = new List<ParamNode>();
+        private string _classTypeName;
     }
 }

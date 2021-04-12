@@ -1,13 +1,38 @@
 ﻿using Parse.FrontEnd.Ast;
+using Parse.FrontEnd.MiniC.Properties;
 using Parse.FrontEnd.MiniC.Sdts.Datas;
 using Parse.MiddleEnd.IR;
 using System;
 
 namespace Parse.FrontEnd.MiniC.Sdts.AstNodes
 {
-    public abstract class MiniCNode : SdtsNode
+    public abstract partial class MiniCNode : SdtsNode
     {
         public MiniCSymbolTable SymbolTable { get; protected set; }
+        public int BlockLevel { get; protected set; } = -1;
+
+        public int ParentBlockLevel
+        {
+            get
+            {
+                int result = -1;
+                var travNode = this.Parent as MiniCNode;
+
+                while (travNode != null)
+                {
+                    if (travNode.BlockLevel != -1)
+                    {
+                        result = travNode.BlockLevel;
+                        break;
+                    }
+
+                    travNode = travNode.Parent as MiniCNode;
+                }
+
+                return result;
+            }
+        }
+
         public bool IsNotUsed
         {
             get => _isNotUsed;
@@ -31,15 +56,8 @@ namespace Parse.FrontEnd.MiniC.Sdts.AstNodes
             Ast = node;
         }
 
-        public MiniCSdtsParams CreateParamForNewBlock(SdtsParams paramToCopy)
-        {
-            MiniCSdtsParams result = paramToCopy.CloneForNewBlock() as MiniCSdtsParams;
-            SymbolTable = result.SymbolTable;
-
-            return result;
-        }
-
         public override string ToString() => this.GetType().Name;
+
 
 
         private bool _isNotUsed = false;

@@ -1,6 +1,7 @@
 ﻿using Parse.FrontEnd.MiniC;
 using System;
 using System.Diagnostics;
+using System.IO;
 
 namespace TestProjectOnConsole
 {
@@ -8,26 +9,34 @@ namespace TestProjectOnConsole
     {
         static void Main(string[] args)
         {
-            MiniCCompiler parser = new MiniCCompiler();
+            MiniCCompiler compiler = new MiniCCompiler();
 
-            var parsingResult = parser.Operate("test.mc", 
-                                                                string.Format("namespace {1}{0}" + 
-                                                                                    "void main(){0}{{0}}{0}",
-                                                                                    Environment.NewLine,
-                                                                                    "test"));
-            bool result = parsingResult.Success;
+            try
+            {
+                var fileFullPath = Path.Combine(Environment.CurrentDirectory, "test.mc");
 
-            Stopwatch stopWatch = new Stopwatch();
-            stopWatch.Start();
+                compiler.CreateAssembly("TestAssembly");
+                compiler.AddFileToAssembly("TestAssembly", fileFullPath);
 
-            parsingResult = parser.Operate("test.mc", 10, "int a");
-            result = parsingResult.Success;
+                var parsingResult = compiler.NewParsing(fileFullPath);
+                bool result = parsingResult.Success;
 
-            stopWatch.Stop();
-            Console.WriteLine("Cost Time : {0} msec", stopWatch.ElapsedMilliseconds);
+                Stopwatch stopWatch = new Stopwatch();
+                stopWatch.Start();
 
-            parsingResult = parser.Operate("test.mc", 10, 5);
-            result = parsingResult.Success;
+//                parsingResult = compiler.Parsing(fileFullPath, 2, 10, "int a");
+//                result = parsingResult.Success;
+
+                stopWatch.Stop();
+                Console.WriteLine("Cost Time : {0} msec", stopWatch.ElapsedMilliseconds);
+
+                compiler.StartSemanticAnalysis(fileFullPath);
+                result = compiler.AllBuild();
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
         }
     }
 }

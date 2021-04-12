@@ -24,7 +24,9 @@ namespace Parse.FrontEnd.MiniC.Sdts.AstNodes
         {
             _namespaceDatas.Clear();
 
-            SymbolTable = (param as MiniCSdtsParams).SymbolTable;
+            var rootParam = param as MiniCSdtsParams;
+            rootParam.RootData.ProgramNodes.Remove(this);
+            rootParam.RootData.ProgramNodes.Add(this);
 
             foreach (var item in Items)
             {

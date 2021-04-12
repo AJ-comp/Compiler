@@ -4,7 +4,11 @@ namespace Parse.MiddleEnd.IR.LLVM.Models.VariableModels
 {
     public abstract class IntegerVarLLVM : VariableLLVM, IRSignableVar
     {
-        protected IntegerVarLLVM(IRVar var, bool isGlobal) : base(var, isGlobal)
+        protected IntegerVarLLVM(IRDeclareVar var, bool isGlobal) : base(var, isGlobal)
+        {
+        }
+
+        protected IntegerVarLLVM(int offset, uint pointerLevel) : base(offset, pointerLevel)
         {
         }
 

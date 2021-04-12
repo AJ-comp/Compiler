@@ -2,7 +2,7 @@
 
 namespace Parse.Types.ConstantTypes
 {
-    public class DoubleConstant : Constant, IDouble
+    public class DoubleConstant : Constant, IDouble, ISizeCompareOperation
     {
         public DoubleConstant(double value) : this(value, State.Fixed)
         {
@@ -16,32 +16,51 @@ namespace Parse.Types.ConstantTypes
         public int Size => 64;
         public bool Nan { get; }
 
-        public override DType TypeName => DType.Double;
+        public override StdType TypeKind => StdType.Double;
         public override bool AlwaysTrue => (ValueState == State.Fixed && (double)Value != 0);
         public override bool AlwaysFalse => (ValueState == State.Fixed && (double)Value == 0);
 
-        public IConstant Add(IValue operand) => Operation.ArithmeticAdd(this, operand);
-        public IConstant Div(IValue operand) => Operation.ArithmeticDiv(this, operand);
-        public IConstant Equal(IValue operand) => Operation.ArithmeticEqual(this, operand);
-        public IConstant Mod(IValue operand) => Operation.ArithmeticMod(this, operand);
-        public IConstant Mul(IValue operand) => Operation.ArithmeticMul(this, operand);
-        public IConstant NotEqual(IValue operand) => Operation.ArithmeticNotEqual(this, operand);
-        public IConstant Sub(IValue operand) => Operation.ArithmeticSub(this, operand);
+        public IConstant Add(IConstant operand) => Operation.ArithmeticAdd(this, operand);
+        public IConstant Div(IConstant operand) => Operation.ArithmeticDiv(this, operand);
+        public IConstant Equal(IConstant operand) => Operation.ArithmeticEqual(this, operand);
+        public IConstant Mod(IConstant operand) => Operation.ArithmeticMod(this, operand);
+        public IConstant Mul(IConstant operand) => Operation.ArithmeticMul(this, operand);
+        public IConstant NotEqual(IConstant operand) => Operation.ArithmeticNotEqual(this, operand);
+        public IConstant Sub(IConstant operand) => Operation.ArithmeticSub(this, operand);
 
+        public IConstant GreaterThan(IConstant operand)
+        {
+            throw new System.NotImplementedException();
+        }
 
-        public override Constant Casting(DType to)
+        public IConstant LessThan(IConstant operand)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public IConstant GreaterEqual(IConstant operand)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public IConstant LessEqual(IConstant operand)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public override Constant Casting(StdType to)
         {
             Constant result = null;
 
-            if (to == DType.Bit)
+            if (to == StdType.Bit)
             {
                 var data = (int)Value != 0;
                 result = new BitConstant(data, ValueState);
             }
-            else if (to == DType.Byte) result = new ByteConstant((byte)Value, ValueState);
-            else if (to == DType.Short) result = new ShortConstant((short)Value, ValueState);
-            else if (to == DType.Int) result = new IntConstant((int)Value, ValueState);
-            else if (to == DType.Double) result = this;
+            else if (to == StdType.Byte) result = new ByteConstant((byte)Value, ValueState);
+            else if (to == StdType.Short) result = new ShortConstant((short)Value, ValueState);
+            else if (to == StdType.Int) result = new IntConstant((int)Value, ValueState);
+            else if (to == StdType.Double) result = this;
 
             return result;
         }

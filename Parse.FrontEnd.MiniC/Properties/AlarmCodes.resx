@@ -160,4 +160,13 @@
   <data name="MCL0020" xml:space="preserve">
     <value>The '{0}' type can't be used for variable type.</value>
   </data>
+  <data name="MCL0021" xml:space="preserve">
+    <value>The '{1}' definition is included in the '{0}' namespace.</value>
+  </data>
+  <data name="MCL0022" xml:space="preserve">
+    <value>'!' operator can be applied to only 'bool' type operand.</value>
+  </data>
+  <data name="MCL0023" xml:space="preserve">
+    <value>'{0}' operator can't be applied to '{1}' and '{2}' type operand.</value>
+  </data>
 </root>

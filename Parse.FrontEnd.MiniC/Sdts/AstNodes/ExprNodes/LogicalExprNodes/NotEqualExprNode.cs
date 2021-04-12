@@ -1,9 +1,11 @@
 ﻿using Parse.FrontEnd.Ast;
+using Parse.MiddleEnd.IR.Interfaces;
 
 namespace Parse.FrontEnd.MiniC.Sdts.AstNodes.ExprNodes.LogicalExprNodes
 {
-    public class NotEqualExprNode : LogicalExprNode
+    public class NotEqualExprNode : CompareExprNode
     {
+        public override IRCompareSymbol CompareOper => IRCompareSymbol.NE;
         public NotEqualExprNode(AstSymbol node) : base(node)
         {
         }

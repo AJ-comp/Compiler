@@ -10,6 +10,7 @@ using Parse.FrontEnd.Ast;
 using Parse.FrontEnd.Grammars;
 using Parse.FrontEnd.MiniC;
 using Parse.FrontEnd.MiniC.Sdts.AstNodes;
+using Parse.FrontEnd.MiniC.Sdts.Datas;
 using Parse.FrontEnd.ParseTree;
 using Parse.FrontEnd.Support.Drawing;
 using Parse.FrontEnd.Support.EventArgs;
@@ -46,6 +47,7 @@ namespace ApplicationLayer.ViewModels.DocumentTypeViewModels
 
         public string FullPath => _fileNode.FullPath;
         public string Data => _fileNode.Data;
+        public string FilePath => _fileNode.FullOnlyPath;
         public string FileName => _fileNode.FileName;
         public string FileNameWithoutExtension => _fileNode.FileNameWithoutExtension;
         public string CurrentData { get; set; }
@@ -162,22 +164,23 @@ namespace ApplicationLayer.ViewModels.DocumentTypeViewModels
                 // Add abstract variable list information to the current FileTreeNode.
                 foreach (var classData in namespaceNode.ClassDatas)
                 {
-                    if (classData.NameToken.IsVirtual) continue;
+                    var cData = classData as ClassDefData;
+                    if (cData.NameToken.IsVirtual) continue;
 
-                    var varTreeNode = new ClassTreeNodeModel(classData);
+                    var varTreeNode = new ClassTreeNodeModel(cData);
                     _fileNode.AddChildren(varTreeNode);
 
                     var childNode = _fileNode.Children.Last();
                     Parallel.Invoke(
                         () =>
                         {
-                            foreach (var varData in classData.Fields)
+                            foreach (var varData in cData.Fields)
                                 childNode.AddChildren(new VarTreeNodeModel(varData));
                         },
                         () =>
                         {
                             // Add abstract function list information to the current FileTreeNode.
-                            foreach (var funcData in classData.Funcs)
+                            foreach (var funcData in cData.Funcs)
                                 childNode.AddChildren(new FuncTreeNodeModel(funcData));
                         });
                 }
