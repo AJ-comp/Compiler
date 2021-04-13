@@ -1,4 +1,5 @@
-﻿using Parse.MiddleEnd.IR.Datas;
+﻿using Parse.Extensions;
+using Parse.MiddleEnd.IR.Datas;
 using Parse.MiddleEnd.IR.Interfaces;
 using Parse.Types;
 
@@ -20,7 +21,7 @@ namespace Parse.MiddleEnd.IR
             if (var.Length > 0) result += "[" + var.Length + "]" + " ";
 
             result += " = ";
-            if (var.InitialExpr == null) result += Helper.GetEnumDescription(State.NotInit);
+            if (var.InitialExpr == null) result += State.NotInit.ToDescription();
             else
             {
                 if (var.InitialExpr is IRUseVarExpr)
@@ -33,12 +34,10 @@ namespace Parse.MiddleEnd.IR
                     var value = var.InitialExpr.Result.Value;
                     result += (value == null) ? "null" : value.ToString();
                 }
-                else result += Helper.GetEnumDescription(var.InitialExpr.Result.ValueState);
+                else result += var.InitialExpr.Result.ValueState.ToDescription();
             }
 
-            result += string.Format(" [Block: {0}, Offset: {1}]",
-                                                var.Block,
-                                                var.Offset);
+            result += $" [Block: {var.Block}, Offset: {var.Offset}]";
 
             return result;
         }

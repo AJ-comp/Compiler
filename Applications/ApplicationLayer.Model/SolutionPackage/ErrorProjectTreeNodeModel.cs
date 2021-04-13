@@ -1,4 +1,5 @@
 ﻿using ApplicationLayer.Common.Interfaces;
+using Compile.Models;
 using System.Collections.Generic;
 
 namespace ApplicationLayer.Models.SolutionPackage

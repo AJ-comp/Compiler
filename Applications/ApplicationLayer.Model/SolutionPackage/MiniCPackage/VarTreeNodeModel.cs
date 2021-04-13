@@ -1,5 +1,5 @@
 ﻿using ApplicationLayer.Common;
-using Parse.FrontEnd.MiniC.Sdts.Datas.Variables;
+using Parse.FrontEnd.AJ.Sdts.Datas.Variables;
 using System;
 
 namespace ApplicationLayer.Models.SolutionPackage.MiniCPackage

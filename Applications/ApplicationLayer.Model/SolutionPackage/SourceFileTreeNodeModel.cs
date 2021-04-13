@@ -1,5 +1,5 @@
 ﻿using Parse.FrontEnd;
-using Parse.FrontEnd.MiniC.Sdts.Expressions;
+using Parse.FrontEnd.AJ.Sdts.Expressions;
 
 namespace ApplicationLayer.Models.SolutionPackage
 {

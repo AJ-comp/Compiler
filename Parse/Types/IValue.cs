@@ -1,4 +1,6 @@
-﻿namespace Parse.Types
+﻿using Parse.Extensions;
+
+namespace Parse.Types
 {
     public enum State { Fixed, Dynamic, NotInit, Unknown };
 
@@ -12,10 +14,7 @@
 
         public string DebuggerDisplay(IValue value)
         {
-            return string.Format("{0} [{1}, {2}]",
-                                            Value,
-                                            Helper.GetEnumDescription(TypeKind),
-                                            Helper.GetEnumDescription(ValueState));
+            return $"{Value} [{TypeKind.ToDescription()}, {ValueState.ToDescription()}]";
         }
     }
 }

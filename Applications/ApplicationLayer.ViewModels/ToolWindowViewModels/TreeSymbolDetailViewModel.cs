@@ -1,8 +1,8 @@
 ﻿using ApplicationLayer.Models.SolutionPackage;
 using ApplicationLayer.Models.SolutionPackage.MiniCPackage;
 using ApplicationLayer.ViewModels.Messages;
-using Parse.FrontEnd.MiniC.Sdts.AstNodes;
-using Parse.FrontEnd.MiniC.Sdts.Datas;
+using Parse.FrontEnd.AJ.Sdts.AstNodes;
+using Parse.FrontEnd.AJ.Sdts.Datas;
 using System.Collections.ObjectModel;
 using System.Linq;
 using CommonResource = ApplicationLayer.Define.Properties.Resources;
@@ -33,9 +33,9 @@ namespace ApplicationLayer.ViewModels.ToolWindowViewModels
             var sdtsNode = message.TreeSymbol;
             var clickedTree = sdtsNode;
 
-            if (sdtsNode is MiniCNode)
+            if (sdtsNode is AJNode)
             {
-                MiniCNode miniCNode = sdtsNode as MiniCNode;
+                AJNode miniCNode = sdtsNode as AJNode;
 
                 var symbolData = miniCNode as ISymbolData;
                 while (symbolData != null)
@@ -43,7 +43,7 @@ namespace ApplicationLayer.ViewModels.ToolWindowViewModels
                     if(!IsExistSymbol(symbolData))
                     {
                         sdtsNode = null;
-                        miniCNode = miniCNode.Parent as MiniCNode;
+                        miniCNode = miniCNode.Parent as AJNode;
                         symbolData = miniCNode as ISymbolData;
                         continue;
                     }
@@ -65,7 +65,7 @@ namespace ApplicationLayer.ViewModels.ToolWindowViewModels
                         SymbolDatas.Children.First().AddChildren(new FuncTreeNodeModel(item));
 
                     sdtsNode = null;
-                    miniCNode = miniCNode.Parent as MiniCNode;
+                    miniCNode = miniCNode.Parent as AJNode;
                     symbolData = miniCNode as ISymbolData;
                 }
             }

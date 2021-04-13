@@ -1,6 +1,6 @@
 ﻿using ApplicationLayer.Common;
 using Parse.FrontEnd.Grammars;
-using Parse.FrontEnd.MiniC;
+using Parse.FrontEnd.AJ;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
@@ -47,7 +47,7 @@ namespace ApplicationLayer.Models
             {
                 string result = string.Empty;
 
-                if (ProjectType.Grammar is MiniCGrammar)
+                if (ProjectType.Grammar is AJGrammar)
                     result = string.Format(".{0}project", LanguageExtensions.MiniCSource);
 
                 return result;

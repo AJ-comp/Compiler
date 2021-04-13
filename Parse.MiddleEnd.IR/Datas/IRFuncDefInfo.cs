@@ -48,7 +48,7 @@ namespace Parse.MiddleEnd.IR.Datas
             {
                 string result = string.Empty;
 
-                result += string.Format("{0} {1}", Helper.GetEnumDescription(ReturnType), Name);
+                result += $"{ReturnType.ToDescription()} {Name}";
 
                 result += "(";
                 Arguments.ItemsString(PrintType.Property, "TypeName");

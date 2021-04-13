@@ -1,6 +1,7 @@
 ﻿using ApplicationLayer.Common;
 using ApplicationLayer.Common.Interfaces;
 using ApplicationLayer.Common.Utilities;
+using Compile.Models;
 using Parse.BackEnd.Target;
 using Parse.MiddleEnd.IR.LLVM;
 using System;

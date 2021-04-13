@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Parse.Extensions;
+using System;
 using System.Diagnostics;
 
 namespace Parse.Types.ConstantTypes
@@ -23,7 +24,6 @@ namespace Parse.Types.ConstantTypes
 
 
         private string DebuggerDisplay
-            => string.Format("Type : {0}, Not Initialized", 
-                                        Helper.GetEnumDescription(TypeKind));
+            => $"Type : {TypeKind.ToDescription()}, Not Initialized";
     }
 }

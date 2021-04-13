@@ -3,14 +3,15 @@ using ApplicationLayer.Models.SolutionPackage;
 using ApplicationLayer.Models.SolutionPackage.MiniCPackage;
 using ApplicationLayer.ViewModels.DialogViewModels.OptionViewModels;
 using ApplicationLayer.ViewModels.Messages;
+using Compile.AJ;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using Parse.FrontEnd;
+using Parse.FrontEnd.AJ;
+using Parse.FrontEnd.AJ.Sdts.AstNodes;
+using Parse.FrontEnd.AJ.Sdts.Datas;
 using Parse.FrontEnd.Ast;
 using Parse.FrontEnd.Grammars;
-using Parse.FrontEnd.MiniC;
-using Parse.FrontEnd.MiniC.Sdts.AstNodes;
-using Parse.FrontEnd.MiniC.Sdts.Datas;
 using Parse.FrontEnd.ParseTree;
 using Parse.FrontEnd.Support.Drawing;
 using Parse.FrontEnd.Support.EventArgs;
@@ -33,7 +34,7 @@ namespace ApplicationLayer.ViewModels.DocumentTypeViewModels
         private object _lockObject = new object();
         private int _caretIndex = 0;
         private SourceFileTreeNodeModel _fileNode;
-        private MiniCCompiler _compiler;
+        private AJCompiler _compiler;
         private RelayCommand _saveCommand;
         private List<HighlightMapItem> _highlightMaps = new List<HighlightMapItem>();
         private RelayCommand<ParsingCompletedEventArgs> _parsingCompletedCommand = null;
@@ -53,10 +54,10 @@ namespace ApplicationLayer.ViewModels.DocumentTypeViewModels
         public string CurrentData { get; set; }
 
         public StringCollection CloseCharacters { get; } = new StringCollection();
-        public Grammar Grammar { get; } = new MiniCGrammar();
+        public Grammar Grammar { get; } = new AJGrammar();
 
         public TokenizeImpactRanges RecentTokenizeHistory { get; } = new TokenizeImpactRanges();
-        public MiniCCompiler Compiler => _compiler;
+        public AJCompiler Compiler => _compiler;
         public ParseTreeSymbol ParseTree { get; private set; }
         public DataTable ParsingHistory { get; private set; }
         public IEnumerable<AstSymbol> InterLanguage { get; private set; }
@@ -112,7 +113,7 @@ namespace ApplicationLayer.ViewModels.DocumentTypeViewModels
         /********************************************************************************************
          * constructor section
          ********************************************************************************************/
-        public EditorTypeViewModel(SourceFileTreeNodeModel fileNode, MiniCCompiler compiler)
+        public EditorTypeViewModel(SourceFileTreeNodeModel fileNode, AJCompiler compiler)
             : base(fileNode?.FileName, fileNode?.FullPath, fileNode?.FullPath)
         {
             this._fileNode = fileNode;

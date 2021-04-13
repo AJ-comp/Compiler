@@ -8,7 +8,7 @@ using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using Parse.FrontEnd.Grammars;
 using Parse.FrontEnd.Grammars.PracticeGrammars;
-using Parse.FrontEnd.MiniC;
+using Parse.FrontEnd.AJ;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -264,7 +264,7 @@ namespace ApplicationLayer.WpfApp.ViewModels
             this._allToolItems.Add(ServiceLocator.Current.GetInstance<AlarmListViewModel>());
             this._allToolItems.Add(ServiceLocator.Current.GetInstance<OutputViewModel>());
 
-            this.supplyGrammars.Add(new MiniCGrammar());
+            this.supplyGrammars.Add(new AJGrammar());
             this.supplyGrammars.Add(new LRTest1Grammar());
 
             this.InitGrammarWindow();

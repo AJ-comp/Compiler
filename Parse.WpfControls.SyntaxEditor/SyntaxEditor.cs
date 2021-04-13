@@ -1,4 +1,5 @@
-﻿using Parse.FrontEnd.MiniC;
+﻿using Compile.AJ;
+using Parse.FrontEnd.AJ;
 using Parse.FrontEnd.Parsers.Datas;
 using Parse.FrontEnd.Support.EventArgs;
 using System;
@@ -18,15 +19,15 @@ namespace Parse.WpfControls.SyntaxEditor
         private Tuple<ParsingResult, TextChange> _csPostProcessData;
 
 
-        public MiniCCompiler Compiler
+        public AJCompiler Compiler
         {
-            get { return (MiniCCompiler)GetValue(CompilerProperty); }
+            get { return (AJCompiler)GetValue(CompilerProperty); }
             set { SetValue(CompilerProperty, value); }
         }
 
         // Using a DependencyProperty as the backing store for Compiler.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty CompilerProperty =
-            DependencyProperty.Register("Compiler", typeof(MiniCCompiler), typeof(SyntaxEditor), new PropertyMetadata(CompilerChanged));
+            DependencyProperty.Register("Compiler", typeof(AJCompiler), typeof(SyntaxEditor), new PropertyMetadata(CompilerChanged));
 
 
         public static void CompilerChanged(DependencyObject dp, DependencyPropertyChangedEventArgs args)

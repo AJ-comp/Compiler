@@ -1,6 +1,6 @@
 ﻿using ApplicationLayer.Common;
-using Parse.FrontEnd.MiniC.Sdts.Datas;
-using Parse.FrontEnd.MiniC.Sdts.Datas.Variables;
+using Parse.FrontEnd.AJ.Sdts.Datas;
+using Parse.FrontEnd.AJ.Sdts.Datas.Variables;
 using System;
 using System.Linq;
 

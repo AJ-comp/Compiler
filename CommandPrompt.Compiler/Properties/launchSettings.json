@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "CommandPrompt.Compiler": {
+      "commandName": "Project",
+      "commandLineArgs": "aj build C:\\test\\test.ajn"
+    }
+  }
+}

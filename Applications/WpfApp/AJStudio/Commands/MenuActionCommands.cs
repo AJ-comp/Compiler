@@ -1,7 +1,6 @@
 ﻿using ActiproSoftware.Windows.Controls.Docking;
 using ActiproSoftware.Windows.Controls.Docking.Serialization;
 using ApplicationLayer.Common;
-using ApplicationLayer.Common.Helpers;
 using ApplicationLayer.Common.Utilities;
 using ApplicationLayer.Models.SolutionPackage;
 using ApplicationLayer.ViewModels;
@@ -15,8 +14,8 @@ using ApplicationLayer.Views.DialogViews.OptionViews;
 using ApplicationLayer.WpfApp.ViewModels;
 using ApplicationLayer.WpfApp.Views.DialogViews;
 using GalaSoft.MvvmLight.Messaging;
-using Parse.FrontEnd.IRGenerator;
-using Parse.FrontEnd.MiniC.Sdts.AstNodes;
+using Parse.BackEnd.Target;
+using Compile;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -28,6 +27,7 @@ using System.Windows.Forms;
 using WPFLocalizeExtension.Engine;
 using CommonResource = ApplicationLayer.Define.Properties.Resources;
 using FormsMessageBox = System.Windows.Forms.MessageBox;
+using AJ.Common.Helpers;
 
 namespace ApplicationLayer.WpfApp.Commands
 {
@@ -444,29 +444,13 @@ namespace ApplicationLayer.WpfApp.Commands
                 var solution = mainViewModel.SolutionExplorer.Solution;
                 var compiler = mainViewModel.SolutionExplorer.LoadedCompiler;
 
-                // create bin folder.
-                var binFileName = FileHelper.ConvertBinaryFileName(solution.DisplayName);
-                Directory.CreateDirectory(solution.BinFolderPath);
-
                 // save all opened files and build all project
                 CommandLogic.SaveAllFiles(mainViewModel.SolutionExplorer.Documents);
-                var fileReferenceInfos = CommandLogic.BuildAllProjects(solution, compiler);
 
-                // create bootstrap and linker script
-                var bootstrapName = "vector.s";
-                var linkerScriptName = "stm32.lds";
-                CommandLogic.CreateStartingFile(solution.BinFolderPath, bootstrapName, linkerScriptName, solution.StartingProject.MCUType);
+                // create bin folder.
+                var binFileName = FileHelper.ConvertBinaryFileName(solution.DisplayName);
+                compiler.GenerateOutput(solution.BinFolderPath, binFileName, solution.StartingProject.MCUType);
 
-                // create makefile and execute it
-                var allMakeFileSnippets = CommandLogic.CreateAllMakeFileSection(bootstrapName, 
-                                                                                                                  linkerScriptName, 
-                                                                                                                  binFileName, 
-                                                                                                                  fileReferenceInfos);
-
-                MakeFileBuilder.CreateMakeFile(Path.Combine(solution.BinFolderPath, "makefile"), allMakeFileSnippets);
-                Builder.ExecuteMakeFile(solution.BinFolderPath);
-
-                Builder.CreateJLinkCommanderScript(solution.BinFolderPath, binFileName, "0x08000000");
             }, () =>
             {
                 return true;

@@ -1,7 +1,6 @@
-﻿using ApplicationLayer.Common;
-using ApplicationLayer.Common.Helpers;
+﻿using AJ.Common.Helpers;
+using ApplicationLayer.Common;
 using ApplicationLayer.Models.SolutionPackage.MiniCPackage;
-using Parse.BackEnd.Target;
 using System;
 using System.IO;
 using System.Threading.Tasks;

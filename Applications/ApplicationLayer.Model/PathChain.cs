@@ -1,4 +1,4 @@
-﻿using ApplicationLayer.Common.Helpers;
+﻿using AJ.Common.Helpers;
 using System.IO;
 
 namespace ApplicationLayer.Models

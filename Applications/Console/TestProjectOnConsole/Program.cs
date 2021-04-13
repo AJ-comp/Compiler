@@ -1,4 +1,4 @@
-﻿using Parse.FrontEnd.MiniC;
+﻿using Compile.AJ;
 using System;
 using System.Diagnostics;
 using System.IO;
@@ -9,7 +9,7 @@ namespace TestProjectOnConsole
     {
         static void Main(string[] args)
         {
-            MiniCCompiler compiler = new MiniCCompiler();
+            AJCompiler compiler = new AJCompiler();
 
             try
             {
@@ -28,10 +28,11 @@ namespace TestProjectOnConsole
 //                result = parsingResult.Success;
 
                 stopWatch.Stop();
-                Console.WriteLine("Cost Time : {0} msec", stopWatch.ElapsedMilliseconds);
+                Console.WriteLine($"Cost Time : {stopWatch.ElapsedMilliseconds} msec");
 
-                compiler.StartSemanticAnalysis(fileFullPath);
-                result = compiler.AllBuild();
+                var analysisResult = compiler.StartSemanticAnalysis(fileFullPath);
+                var finalExpression = compiler.CreateFinalExpression(analysisResult.SdtsRoot);
+
             }
             catch(Exception ex)
             {

@@ -1,5 +1,5 @@
-﻿using Parse.FrontEnd.Grammars;
-using Parse.FrontEnd.MiniC;
+﻿using Parse.FrontEnd.AJ;
+using Parse.FrontEnd.Grammars;
 using System.IO;
 
 namespace ApplicationLayer.Common
@@ -16,8 +16,8 @@ namespace ApplicationLayer.Common
             var extension = Path.GetExtension(fileName);
 
             Grammar result = null;
-            if (extension == MiniCSource) result = new MiniCGrammar();
-            else if (extension == Header) result = new MiniCGrammar();
+            if (extension == MiniCSource) result = new AJGrammar();
+            else if (extension == Header) result = new AJGrammar();
 
 
             return result;

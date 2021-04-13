@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\AJ.Common\AJ.Common.csproj" />
+    <ProjectReference Include="..\Parse.BackEnd\Parse.BackEnd.Target\Parse.BackEnd.Target.csproj" />
+    <ProjectReference Include="..\Parse.FrontEnd.AJ\Parse.FrontEnd.AJ.csproj" />
+    <ProjectReference Include="..\Parse.FrontEnd.Grammars\Parse.FrontEnd.Grammars.csproj" />
+    <ProjectReference Include="..\Parse.FrontEnd.Parsers\Parse.FrontEnd.Parsers.csproj" />
+  </ItemGroup>
+
+</Project>

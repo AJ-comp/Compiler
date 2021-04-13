@@ -1,5 +1,4 @@
-﻿using ApplicationLayer.Common.Helpers;
-using System.Collections.Generic;
+﻿using AJ.Common.Helpers;
 using System.Xml.Serialization;
 
 namespace ApplicationLayer.Models.SolutionPackage

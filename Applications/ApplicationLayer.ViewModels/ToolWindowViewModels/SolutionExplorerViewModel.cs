@@ -1,13 +1,13 @@
-﻿using ApplicationLayer.Common;
-using ApplicationLayer.Common.Helpers;
+﻿using AJ.Common.Helpers;
+using ApplicationLayer.Common;
 using ApplicationLayer.Common.Interfaces;
 using ApplicationLayer.Models;
 using ApplicationLayer.Models.SolutionPackage;
 using ApplicationLayer.ViewModels.DocumentTypeViewModels;
 using ApplicationLayer.ViewModels.Messages;
+using Compile.AJ;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
-using Parse.FrontEnd.MiniC;
 using System;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
@@ -28,10 +28,10 @@ namespace ApplicationLayer.ViewModels.ToolWindowViewModels
         private DocumentViewModel selectedDocument;
         private RelayCommand doubleClickCommand;
         private RelayCommand<TreeNodeModel> selectedCommand;
-        private MiniCCompiler _compiler = new MiniCCompiler();  // temporary position
+        private AJCompiler _compiler = new AJCompiler();  // temporary position
 
 
-        public MiniCCompiler LoadedCompiler => _compiler;
+        public AJCompiler LoadedCompiler => _compiler;
 
         /********************************************************************************************
          * property section

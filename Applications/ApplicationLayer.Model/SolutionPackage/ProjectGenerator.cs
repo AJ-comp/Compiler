@@ -1,7 +1,7 @@
 ﻿using ApplicationLayer.Models.GrammarPackages.MiniCPackage;
 using Parse.BackEnd.Target;
 using Parse.FrontEnd.Grammars;
-using Parse.FrontEnd.MiniC;
+using Parse.FrontEnd.AJ;
 
 namespace ApplicationLayer.Models.SolutionPackage
 {
@@ -19,7 +19,7 @@ namespace ApplicationLayer.Models.SolutionPackage
         public static ProjectGenerator CreateProjectGenerator(Grammar grammar)
         {
             ProjectGenerator result = null;
-            if (grammar is MiniCGrammar) result = new MiniCGenerator();
+            if (grammar is AJGrammar) result = new MiniCGenerator();
 
             return result;
         }

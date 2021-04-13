@@ -4,8 +4,7 @@ using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using Parse.Algorithms;
 using Parse.BackEnd.Target;
-using Parse.FrontEnd.Grammars.AJ;
-using Parse.FrontEnd.MiniC;
+using Parse.FrontEnd.AJ;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -174,8 +173,6 @@ namespace ApplicationLayer.ViewModels.SubViewModels
 
         public ProjectSelectionViewModel()
         {
-            this.TotalProjectList.Add(new ProjectType(new MiniCGrammar(), ProjectKinds.Execute));
-            this.TotalProjectList.Add(new ProjectType(new MiniCGrammar(), ProjectKinds.Library));
             this.TotalProjectList.Add(new ProjectType(new AJGrammar(), ProjectKinds.Execute));
             this.TotalProjectList.Add(new ProjectType(new AJGrammar(), ProjectKinds.Library));
 

@@ -1,4 +1,5 @@
-﻿using static Parse.FrontEnd.Parsers.Datas.LR.LRParsingRowDataFormat;
+﻿using Parse.Extensions;
+using static Parse.FrontEnd.Parsers.Datas.LR.LRParsingRowDataFormat;
 
 namespace Parse.FrontEnd.Parsers.Datas
 {
@@ -19,7 +20,7 @@ namespace Parse.FrontEnd.Parsers.Datas
         {
             var destString = (Dest == null) ? "null" : Dest.ToString();
 
-            return string.Format("{0} {1}", Helper.GetEnumDescription(Direction), destString);
+            return $"{Direction.ToDescription()} {destString}";
         }
     }
 }

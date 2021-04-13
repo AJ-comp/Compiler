@@ -1,4 +1,5 @@
-﻿using Parse.Types.ConstantTypes;
+﻿using Parse.Extensions;
+using Parse.Types.ConstantTypes;
 using System.Diagnostics;
 
 namespace Parse.Types.VarTypes
@@ -34,10 +35,7 @@ namespace Parse.Types.VarTypes
 
 
         private string DebuggerDisplay
-            => string.Format("{0} Value:{1}, ValueState:{2}",
-                                        Helper.GetEnumDescription(TypeKind),
-                                        Value, 
-                                        ValueState);
+            => $"{TypeKind.ToDescription()} Value:{Value}, ValueState:{ValueState}";
     }
 
 

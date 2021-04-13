@@ -1,11 +1,11 @@
-﻿using ApplicationLayer.Common;
-using ApplicationLayer.Models;
-using ApplicationLayer.Models.SolutionPackage;
+﻿using ApplicationLayer.Models.SolutionPackage;
 using ApplicationLayer.ViewModels.DocumentTypeViewModels;
 using ApplicationLayer.ViewModels.Messages;
+using Compile;
+using Compile.AJ;
+using Compile.Models;
 using GalaSoft.MvvmLight.Messaging;
 using Parse.BackEnd.Target;
-using Parse.FrontEnd.MiniC;
 using System.Collections.Generic;
 using System.IO;
 using ViewResources = ApplicationLayer.Define.Properties.WindowViewResources;
@@ -14,7 +14,7 @@ namespace ApplicationLayer.ViewModels
 {
     public class CommandLogic
     {
-        public static void BuildProject(string solutionBinFolderPath, ProjectTreeNodeModel projectNode, MiniCCompiler compiler)
+        public static void BuildProject(string solutionBinFolderPath, ProjectTreeNodeModel projectNode, AJCompiler compiler)
         {
             string buildMessage = string.Format(ViewResources.StartBuild_2,
                                                         projectNode.DisplayName,
@@ -55,28 +55,6 @@ namespace ApplicationLayer.ViewModels
 
         /// ********************************************************
         /// <summary>
-        /// This function builds all projects
-        /// </summary>
-        /// <param name="solution"></param>
-        /// <returns>referenced file infos on project</returns>
-        /// ********************************************************
-        public static IEnumerable<FileReferenceInfo> BuildAllProjects(SolutionTreeNodeModel solution, MiniCCompiler compiler)
-        {
-            List<FileReferenceInfo> result = new List<FileReferenceInfo>();
-            foreach (var project in solution.Children)
-            {
-                var cProject = project as ProjectTreeNodeModel;
-
-                BuildProject(solution.BinFolderPath, cProject, compiler);
-                result.AddRange(cProject.FileReferenceInfos);
-            }
-
-            return result;
-        }
-
-
-        /// ********************************************************
-        /// <summary>
         /// This function saves all files
         /// </summary>
         /// <param name="allDocuments"></param>
@@ -96,77 +74,6 @@ namespace ApplicationLayer.ViewModels
                 }
             }
             Messenger.Default.Send(new AddBuildMessage("===== Save Completed ====="));
-        }
-
-
-        /// ********************************************************
-        /// <summary>
-        /// This function creates bootstrap and linker script
-        /// </summary>
-        /// <param name="solutionBinFolderPath"></param>
-        /// <param name="bootstrapName"></param>
-        /// <param name="linkerScriptName"></param>
-        /// ********************************************************
-        public static void CreateStartingFile(string solutionBinFolderPath, string bootstrapName, string linkerScriptName, Target target)
-        {
-            // create bootstrap
-            File.WriteAllText(Path.Combine(solutionBinFolderPath, bootstrapName), target.StartUpCode);
-
-            // create linker script
-            Builder.CreateLinkerScript(solutionBinFolderPath, linkerScriptName);
-        }
-
-
-        /// ********************************************************
-        /// <summary>
-        /// This function creates makefile sections. this can be used to create makefile.
-        /// </summary>
-        /// <param name="bootstrapName"></param>
-        /// <param name="linkerScriptName"></param>
-        /// <param name="binFileName"></param>
-        /// <param name="fileReferenceInfos"></param>
-        /// <returns>makefile section list</returns>
-        /// ********************************************************
-        public static IEnumerable<MakeFileSectionStruct> CreateAllMakeFileSection(string bootstrapName,
-                                                                                                                        string linkerScriptName,
-                                                                                                                        string binFileName,
-                                                                                                                        IEnumerable<FileReferenceInfo> fileReferenceInfos)
-        {
-            List<MakeFileSectionStruct> allMakeFileSnippets = new List<MakeFileSectionStruct>();
-            List<string> allObjectFiles = new List<string>();
-
-            allMakeFileSnippets.Add(MakeFileBuilder.CreateCleanSnippet());
-
-            // create makefile object snippet from file reference information
-            foreach (var fileRefInfo in fileReferenceInfos)
-            {
-                Messenger.Default.Send(new AddBuildMessage(string.Format(ViewResources.GenerateFile_1, "makefile")));
-                allMakeFileSnippets.Add(MakeFileBuilder.CreateObjectSnippet(string.Empty,
-                                                                                                            fileRefInfo.StandardFile,
-                                                                                                            fileRefInfo.ReferenceFile));
-
-                // gathering all created object files
-                allObjectFiles.Add(FileHelper.ConvertObjectFileName(fileRefInfo.StandardFile));
-            }
-
-            // add a bootstrap
-            Messenger.Default.Send(new AddBuildMessage(string.Format(ViewResources.GenerateFile_1, "vector table")));
-            allMakeFileSnippets.Add(MakeFileBuilder.CreateObjectSnippet(string.Empty, bootstrapName));
-
-            // gathering all created object files
-            allObjectFiles.Add(FileHelper.ConvertObjectFileName(bootstrapName));
-
-
-            // create makefile bin snippet from a entry point (the file that existing main function) of starting project
-            allMakeFileSnippets.Add(MakeFileBuilder.CreateBinSnippet(string.Empty,
-                                                                                                    binFileName,
-                                                                                                    linkerScriptName,
-                                                                                                    allObjectFiles));
-
-            // create makefile
-            allMakeFileSnippets.Reverse();
-
-            return allMakeFileSnippets;
         }
     }
 }

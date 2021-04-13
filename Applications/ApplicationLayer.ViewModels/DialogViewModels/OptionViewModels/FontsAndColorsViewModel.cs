@@ -3,7 +3,7 @@ using ApplicationLayer.Models;
 using GalaSoft.MvvmLight.Command;
 using Parse;
 using Parse.FrontEnd.Grammars;
-using Parse.FrontEnd.MiniC;
+using Parse.FrontEnd.AJ;
 using Parse.FrontEnd.Support.Drawing;
 using System;
 using System.Collections.Generic;
@@ -67,7 +67,7 @@ namespace ApplicationLayer.ViewModels.DialogViewModels.OptionViewModels
                 {
                     _instance = new FontsAndColorsViewModel
                     {
-                        Grammar = new MiniCGrammar()   // temp
+                        Grammar = new AJGrammar()   // temp
                     };
                     _instance.SelectedItem = _instance.Root.Children[0] as HighlightTreeNodeModel;
                 }
