@@ -1,15 +1,8 @@
-﻿using Compile.Models;
-using Parse.BackEnd.Target;
+﻿using Parse.BackEnd.Target;
 using Parse.FrontEnd;
-using Parse.FrontEnd.AJ.Sdts.AstNodes;
-using Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes.ArithmeticExprNodes;
+using Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes.Binary;
 using Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes.LiteralNodes;
-using Parse.FrontEnd.AJ.Sdts.AstNodes.StatementNodes;
-using Parse.FrontEnd.AJ.Sdts.Expressions;
-using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Text;
 
 namespace Compile.AJ
 {
@@ -17,32 +10,40 @@ namespace Compile.AJ
     {
         /****************************************************************/
         /// <summary>
-        /// 프로젝트와 해당 프로젝트에 의존하는 프로젝트들을 빌드합니다
+        /// <para>Build the project and related to projects.</para>
+        /// <para>프로젝트와 해당 프로젝트에 의존하는 프로젝트들을 빌드합니다.</para>
         /// </summary>
-        /// <param name="projName">빌드할 프로젝트 명</param>
+        /// <param name="projName">The project name to build</param>
         /// <returns></returns>
         /****************************************************************/
         public bool BuildProject(string projName)
         {
-            foreach (var fileFullPath in _assemblyDic[projName].FileFullPaths)
+            foreach (var fileFullPath in _assemblyDic[projName].SourceFileAFullPaths)
             {
                 var parsingResult = NewParsing(fileFullPath);
                 bool result = parsingResult.Success;
-                if (result) StartSemanticAnalysis(fileFullPath);
+                if (result) StartSemanticAnalysis(fileFullPath, null, true);
 
                 var doc = _docTable[fileFullPath];
-                doc.FinalExpression = CreateFinalExpression(doc.RootNode);
             }
 
             return true;
         }
 
 
+        public CompileResult Compile(string fileFullPath, CompileParameter parameter)
+        {
+            var parsingResult = NewParsing(fileFullPath);
+            if (parsingResult.Success) StartSemanticAnalysis(fileFullPath, parameter, true);
+
+            return new CompileResult(fileFullPath, parsingResult);
+        }
+
+
         /****************************************************************/
         /// <summary>
-        /// This function builds all projects
-        /// 모든 프로젝트를 빌드 합니다.
-        /// 만일 컴파일 오류가 있다면 예외가 발생합니다.
+        /// <para>Build all projects.</para>
+        /// <para>모든 프로젝트를 빌드 합니다.</para>
         /// </summary>
         /// <returns></returns>
         /****************************************************************/
@@ -62,63 +63,19 @@ namespace Compile.AJ
         }
 
 
-        /****************************************************************/
-        /// <summary>
-        /// 빌드 후 생성된 fullPath에 해당하는 Expression을 가져옵니다.
-        /// </summary>
-        /// <param name="fullPath"></param>
-        /// <returns>생성된 Expression의 루트</returns>
-        /****************************************************************/
-        public AJExpression GetFinalExpression(string fullPath)
-        {
-            try
-            {
-                return _docTable[fullPath].FinalExpression;
-            }
-            catch
-            {
-                return null;
-            }
-        }
-
         public void Optimization(SdtsNode root)
         {
             for (int i = 0; i < root.Items.Count; i++)
             {
                 var item = root.Items[i];
 
-                if (item is ArithmeticExprNode)
+                if (item is ArithmeticNode)
                 {
-                    var arthNode = (item as ArithmeticExprNode);
+                    var arthNode = (item as ArithmeticNode);
                     if (arthNode.IsBothLiteral)
                         root.Items[i] = LiteralNode.CreateLiteralNode(arthNode.Result);
                 }
             }
-        }
-
-
-        /****************************************************************/
-        /// <summary>
-        /// FinalExpression을 생성합니다.
-        /// FinalExpression은 최종단계에 만들어지는 Expression 입니다.
-        /// FinalExpression을 통해 최적화와 가상코드 추가 프로세스가 진행됩니다.
-        /// </summary>
-        /// <param name="rootNode">FinalExpression을 만들기 위한 루트 AST</param>
-        /// <returns></returns>
-        /****************************************************************/
-        public ProgramExpression CreateFinalExpression(SdtsNode rootNode)
-        {
-            ProgramExpression result = new ProgramExpression();
-
-            foreach (var item in rootNode.Items)
-            {
-                if (item is UsingStNode)
-                    result.Usings.Add(new UsingExpression(item as UsingStNode));
-                else if (item is NamespaceNode)
-                    result.Namespaces.Add(new NamespaceExpression(item as NamespaceNode));
-            }
-
-            return result;
         }
 
 

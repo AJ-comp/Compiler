@@ -73,10 +73,10 @@ namespace Parse.FrontEnd.Parsers.LR
         protected void BuildStackAndParseTree(ParsingUnit unitToParsing)
         {
             // case shift
-            if (unitToParsing.Action.Direction == ActionDir.shift) ShiftFollowUpProcess(unitToParsing);
-            else if (unitToParsing.Action.Direction == ActionDir.reduce) ReduceFollowUpProcess(unitToParsing);
-            else if (unitToParsing.Action.Direction == ActionDir.epsilon_reduce) EpsilonReduceFollowUpProcess(unitToParsing);
-            else if (unitToParsing.Action.Direction == ActionDir.moveto) GotoFollowUpProcess(unitToParsing);
+            if (unitToParsing.Action.Direction == ActionDir.Shift) ShiftFollowUpProcess(unitToParsing);
+            else if (unitToParsing.Action.Direction == ActionDir.Reduce) ReduceFollowUpProcess(unitToParsing);
+            else if (unitToParsing.Action.Direction == ActionDir.EpsilonReduce) EpsilonReduceFollowUpProcess(unitToParsing);
+            else if (unitToParsing.Action.Direction == ActionDir.Goto) GotoFollowUpProcess(unitToParsing);
         }
     }
 }

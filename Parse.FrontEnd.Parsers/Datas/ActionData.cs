@@ -1,11 +1,11 @@
-﻿using Parse.Extensions;
+﻿using AJ.Common.Helpers;
 using static Parse.FrontEnd.Parsers.Datas.LR.LRParsingRowDataFormat;
 
 namespace Parse.FrontEnd.Parsers.Datas
 {
     public class ActionData
     {
-        public ActionDir Direction { get; internal set; } = ActionDir.not_processed;
+        public ActionDir Direction { get; internal set; } = ActionDir.NotProcessed;
         public object Dest { get; internal set; } = null;
 
         public ActionData() { }

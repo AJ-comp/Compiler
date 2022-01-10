@@ -59,7 +59,7 @@ namespace Parse.FrontEnd.Parsers.LR
 
             if (unit.IsError)
             {
-                unit.Action.Direction = ActionDir.failed;
+                unit.Action.Direction = ActionDir.Failed;
                 return SuccessedKind.NotApplicable;
             }
 

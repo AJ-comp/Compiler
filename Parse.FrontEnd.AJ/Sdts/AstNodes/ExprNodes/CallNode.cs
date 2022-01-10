@@ -1,35 +1,21 @@
-﻿using Parse.FrontEnd.Ast;
+﻿using Parse.FrontEnd.AJ.Data;
 using Parse.FrontEnd.AJ.Properties;
 using Parse.FrontEnd.AJ.Sdts.Datas;
-using Parse.MiddleEnd.IR.Datas;
-using Parse.MiddleEnd.IR.Interfaces;
-using Parse.Types;
-using Parse.Types.ConstantTypes;
-using Parse.Types.VarTypes;
+using Parse.FrontEnd.Ast;
+using Parse.MiddleEnd.IR.Expressions;
+using Parse.MiddleEnd.IR.Expressions.ExprExpressions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes
 {
-    public class CallNode : ExprNode, ICallExpression
+    public class CallNode : ExprNode
     {
-        public FuncDefData FuncData { get; private set; }
-        public IFunctionExpression CallFuncDef => FuncData;
+        public FuncDefNode Func { get; private set; }
 
         public TokenData MethodNameToken { get; private set; }
-        public IEnumerable<IExprExpression> Params => _params;
-        public IReadOnlyList<IConstant> ParamsTypeList
-        {
-            get
-            {
-                List<IConstant> result = new List<IConstant>();
-
-                foreach (var param in Params) result.Add(param.Result);
-
-                return result;
-            }
-        }
+        public List<ExprNode> Params { get; } = new List<ExprNode>();
 
         public CallNode(AstSymbol node) : base(node)
         {
@@ -41,32 +27,32 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes
         // [0] : Ident [UseVarNode]
         // [1] : Ident [UseVarNode]
         // [2] : ActualParam? (AstNonTerminal)
-        public override SdtsNode Build(SdtsParams param)
+        public override SdtsNode Compile(CompileParameter param)
         {
             _params.Clear();
             ConnectedErrInfoList.Clear();
 
-            var ident = Items[0].Build(param) as UseIdentNode;
-            var functionName = Items[1].Build(param) as UseIdentNode;
+            var ident = Items[0].Compile(param) as UseIdentNode;
+            var functionName = Items[1].Compile(param) as UseIdentNode;
             if (Items.Count > 2)
             {
-                var result = Items[2].Build(param) as ActualParamNode;
-                _params.AddRange(result.ParamNodeList);
+                var result = Items[2].Compile(param) as ActualParamNode;
+                Params.AddRange(result.ParamNodeList);
             }
 
             AJChecker.IsDefinedSymbol(this, ident.IdentToken);
-            var matchedList = AJUtilities.GetFuncDataList(this, functionName.IdentToken);
+            var matchedList = AJUtilities.GetFuncList(this, functionName.IdentToken);
 
-            if (matchedList.Count() == 0) AddMCL0014Exception();
+            if (matchedList.Count() == 0) AJAlarmFactory.CreateMCL0014(MethodNameToken.Input);
             else CheckParams(matchedList);
 
             return this;
         }
 
 
-        private IEnumerable<FuncDefData> GetParamCountMatchedList(IEnumerable<FuncDefData> funcListToFind)
+        private IEnumerable<FuncDefNode> GetParamCountMatchedList(IEnumerable<FuncDefNode> funcListToFind)
         {
-            List<FuncDefData> result = new List<FuncDefData>();
+            List<FuncDefNode> result = new List<FuncDefNode>();
 
             foreach (var func in funcListToFind)
             {
@@ -79,13 +65,13 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes
         }
 
 
-        private IEnumerable<FuncDefData> GetParamAllMatchedList(IEnumerable<FuncDefData> funcListToFind)
+        private IEnumerable<FuncDefNode> GetParamAllMatchedList(IEnumerable<FuncDefNode> funcListToFind)
         {
-            List<FuncDefData> result = new List<FuncDefData>();
+            List<FuncDefNode> result = new List<FuncDefNode>();
 
             foreach (var func in funcListToFind)
             {
-                if (GetMatchedTypeCount(func.ParamVarList, ParamsTypeList) != func.ParamVarList.Count) continue;
+                if (GetMatchedTypeCount(func.ParamVarList) != func.ParamVarList.Count) continue;
 
                 result.Add(func);
             }
@@ -94,36 +80,35 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes
         }
 
 
-        private Tuple<FuncDefData, int> GetTopCandidate(IEnumerable<FuncDefData> funcListToFind)
+        private Tuple<FuncDefNode, int> GetTopCandidate(IEnumerable<FuncDefNode> funcListToFind)
         {
-            FuncDefData result = null;
+            FuncDefNode result = null;
             int topMatchedIndex = -1;
 
             foreach (var func in funcListToFind)
             {
-                var matchedIndex = GetMatchedTypeCount(func.ParamVarList, ParamsTypeList);
+                var matchedIndex = GetMatchedTypeCount(func.ParamVarList);
 
                 if (topMatchedIndex > matchedIndex) result = func;
             }
 
-            return new Tuple<FuncDefData, int>(result, topMatchedIndex);
+            return new Tuple<FuncDefNode, int>(result, topMatchedIndex);
         }
 
 
-        private int GetMatchedTypeCount(IEnumerable<IDeclareVarExpression> srcList, IReadOnlyList<IConstant> targetList)
+        private int GetMatchedTypeCount(IEnumerable<VariableAJ> toCompareList)
         {
-            if (srcList.Count() != targetList.Count) return 0;
+            if (toCompareList.Count() != Params.Count) return 0;
 
             int result = 0;
-            for (int i = 0; i < srcList.Count(); i++)
+            for (int i = 0; i < toCompareList.Count(); i++)
             {
                 try
                 {
-                    IDeclareVarExpression src = srcList.ElementAt(i);
-                    IValue target = targetList.ElementAt(i);
+                    var src = toCompareList.ElementAt(i);
+                    var target = Params[i];
 
-                    if (src is IVariable) (src as IVariable).Assign(targetList[i]);
-                    else if (src.TypeKind != target.TypeKind) break;
+                    if (src.Type != Params[i].Type) break;
 
                     result++;
                 }
@@ -137,12 +122,12 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes
         }
 
 
-        private void CheckParams(IEnumerable<FuncDefData> matchedFuncList)
+        private void CheckParams(IEnumerable<FuncDefNode> matchedFuncList)
         {
             var funcList = GetParamCountMatchedList(matchedFuncList);
             if (funcList.Count() == 0)    // param count is not equal
             {
-                AddMCL0015Exception(Params.Count());
+                AJAlarmFactory.CreateMCL0015(Params.Count(), MethodNameToken.Input);
                 return;
             }
 
@@ -150,51 +135,32 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes
             if (funcList2.Count() == 0)    // param count is equal but param type is not fit
             {
                 var result = GetTopCandidate(funcList);
-                AddMCL0016Exception(result.Item1, result.Item2);
+                var funcDefine = result.Item1;
+                var paramIndex = result.Item2;
+
+                AJAlarmFactory.CreateMCL0016(funcDefine.ToDefineString(false, true), 
+                                                               funcDefine.ParamVarList[paramIndex].Name);
                 return;
             }
             else
-                FuncData = funcList2.First();
+                Func = funcList2.First();
         }
 
 
-
-
-
-
-        private void AddMCL0014Exception()
+        public override IRExpression To()
         {
-            ConnectedErrInfoList.Add
-                (
-                    new MeaningErrInfo(MethodNameToken,
-                                                    nameof(AlarmCodes.MCL0014),
-                                                    string.Format(AlarmCodes.MCL0014, MethodNameToken.Input))
-                );
+            IRCallExpr result = new IRCallExpr();
+
+            result.Function = Func.To() as IRFunction;
+
+            return result;
         }
 
-        private void AddMCL0015Exception(int paramCount)
+        public override IRExpression To(IRExpression from)
         {
-            ConnectedErrInfoList.Add
-                (
-                    new MeaningErrInfo(MethodNameToken,
-                                                    nameof(AlarmCodes.MCL0015),
-                                                    string.Format(AlarmCodes.MCL0015, paramCount, MethodNameToken.Input))
-                );
+            throw new NotImplementedException();
         }
 
-        private void AddMCL0016Exception(FuncDefData funcDefine, int paramIndex)
-        {
-            ConnectedErrInfoList.Add
-                (
-                    new MeaningErrInfo(MethodNameToken,
-                                                    nameof(AlarmCodes.MCL0016),
-                                                    string.Format(AlarmCodes.MCL0016,
-                                                                        funcDefine.ToDefineString(false, true),
-                                                                        funcDefine.ParamVarList[paramIndex].Name))
-                );
-        }
-
-
-        private List<IExprExpression> _params = new List<IExprExpression>();
+        private List<IExprBuildNode> _params = new List<IExprBuildNode>();
     }
 }

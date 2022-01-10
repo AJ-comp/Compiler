@@ -53,6 +53,18 @@
                 return (cacheType == null) ? new PairClose(hashCode, data) : cacheType as PairClose;
             }
         }
+
+        public ArraySymbol ArraySymbol
+        {
+            get
+            {
+                var data = "ArraySymbol";
+                var hashCode = GetHashCode(data);
+                var cacheType = GetTokenType(hashCode);
+
+                return (cacheType == null) ? new ArraySymbol(hashCode, data) : cacheType as ArraySymbol;
+            }
+        }
     }
 
 
@@ -80,5 +92,10 @@
     public class PairClose : Operator
     {
         internal PairClose(int hashCode, string value) : base(hashCode, value) { }
+    }
+
+    public class ArraySymbol : Operator
+    {
+        internal ArraySymbol(int hashCode, string value) : base(hashCode, value) { }
     }
 }

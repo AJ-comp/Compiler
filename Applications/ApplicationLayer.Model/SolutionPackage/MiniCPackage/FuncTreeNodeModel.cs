@@ -1,6 +1,6 @@
 ﻿using ApplicationLayer.Common;
-using Parse.FrontEnd.AJ.Sdts.Datas;
-using Parse.FrontEnd.AJ.Sdts.Datas.Variables;
+using Parse.FrontEnd.AJ.Data;
+using Parse.FrontEnd.AJ.Sdts.AstNodes;
 using System;
 using System.Linq;
 
@@ -8,7 +8,7 @@ namespace ApplicationLayer.Models.SolutionPackage.MiniCPackage
 {
     public class FuncTreeNodeModel : TreeNodeModel
     {
-        private FuncDefData _funcData;
+        private FuncDefNode _funcData;
 
         public string ReturnType => (_funcData == null) ? string.Empty : _funcData.ReturnType.ToString();
         public string Name => _funcData.Name;
@@ -30,7 +30,7 @@ namespace ApplicationLayer.Models.SolutionPackage.MiniCPackage
                 if (paramVars.Count() > 0) result = result.Substring(0, result.Length - 1);
                 result += ")";
 
-                if (ReturnType != MiniCDataType.Void.ToString()) result += " : " + ReturnType.ToString();
+                if (ReturnType != AJDataType.Void.ToString()) result += " : " + ReturnType.ToString();
 
                 return result;
             }
@@ -41,7 +41,7 @@ namespace ApplicationLayer.Models.SolutionPackage.MiniCPackage
 
         public override event EventHandler<FileChangedEventArgs> Changed;
 
-        public FuncTreeNodeModel(FuncDefData funcData, bool canReference = true)
+        public FuncTreeNodeModel(FuncDefNode funcData, bool canReference = true)
         {
             _funcData = funcData;
             CanReference = canReference;

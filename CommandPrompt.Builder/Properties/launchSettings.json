@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "CommandPrompt.Builder": {
+      "commandName": "Project",
+      "commandLineArgs": "ajbuild build C:\\aws --output_format json"
+    }
+  }
+}

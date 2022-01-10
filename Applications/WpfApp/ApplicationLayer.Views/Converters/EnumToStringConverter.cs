@@ -1,4 +1,4 @@
-﻿using Parse;
+﻿using AJ.Common.Helpers;
 using System;
 using System.Globalization;
 using System.Windows.Data;
@@ -12,7 +12,7 @@ namespace ApplicationLayer.Views.Converters
         {
             try
             {
-                return (parameter.ToString() == "true") ? Helper.GetDescription(value)
+                return (parameter.ToString() == "true") ? value.ToDescription()
                                                                            : Enum.GetName((value.GetType()), value);
             }
             catch

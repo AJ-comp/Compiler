@@ -14,13 +14,13 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes
 
 
         // logicalOrExp [LogicalOr]
-        public override SdtsNode Build(SdtsParams param)
+        public override SdtsNode Compile(CompileParameter param)
         {
             // if there is a prev information remove it.
             _paramNodeList.Clear();
 
             foreach (var item in Items)
-                _paramNodeList.Add(item.Build(param) as ExprNode);
+                _paramNodeList.Add(item.Compile(param) as ExprNode);
 
             return this;
         }

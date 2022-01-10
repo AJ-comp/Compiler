@@ -1,63 +1,67 @@
-﻿using Parse.FrontEnd.Ast;
+﻿using Parse.FrontEnd.AJ.Data;
 using Parse.FrontEnd.AJ.Properties;
 using Parse.FrontEnd.AJ.Sdts.Datas;
-using Parse.FrontEnd.AJ.Sdts.Datas.Variables;
-using Parse.MiddleEnd.IR.Datas;
-using Parse.MiddleEnd.IR.Interfaces;
+using Parse.FrontEnd.Ast;
+using Parse.MiddleEnd.IR.Expressions;
 
 namespace Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes
 {
-    public class UseIdentNode : ExprNode, IUseIdentExpression
+    public class UseIdentNode : ExprNode
     {
         public TokenData IdentToken { get; private set; }
-        public VariableMiniC VarData { get; private set; }
-        public StructVariableMiniC StructVarData { get; private set; }
-        public FuncDefData FuncData { get; private set; }
+        public VariableAJ Var { get; private set; }
+        public FuncDefNode Func { get; private set; }
         public ISymbolData UsedSymbolData => GetSymbol(IdentToken);
-
-
-        // for interface **************************************************/
-        public IDeclareVarExpression Var => VarData;
-        public IFunctionExpression Func => FuncData;
-        /*************************************************************/
 
 
         public UseIdentNode(AstSymbol node) : base(node)
         {
         }
 
-        // [0] : ident
-        public override SdtsNode Build(SdtsParams param)
+        /// <summary>
+        /// [0] : ident <br/>
+        /// This function checks condition as the below <br/>
+        /// 1. is it defined?
+        /// 2. if ident is variable is it initialized before use?
+        /// </summary>
+        /// <param name="param"></param>
+        /// <returns></returns>
+        public override SdtsNode Compile(CompileParameter param)
         {
             ConnectedErrInfoList.Clear();
 
-            var node = Items[0].Build(param) as TerminalNode;
+            var node = Items[0].Compile(param) as TerminalNode;
             IdentToken = node.Token;
 
             var symbolData = UsedSymbolData;
-            if (symbolData == null)
+            if (symbolData == null) Alarms.Add(AJAlarmFactory.CreateMCL0001(IdentToken));
+            else if(symbolData.Token.IsVirtual) Alarms.Add(AJAlarmFactory.CreateMCL0001(IdentToken));
+            else if (symbolData is VariableAJ)
             {
-                ConnectedErrInfoList.Add
-                (
-                    new MeaningErrInfo(IdentToken,
-                                                    nameof(AlarmCodes.MCL0001),
-                                                    string.Format(AlarmCodes.MCL0001, IdentToken.Input))
-                );
-            }
-            else if (symbolData is VariableMiniC)
-            {
-                VarData = symbolData as VariableMiniC;
-                Result = (symbolData as VariableMiniC).Result;
+                Var = symbolData as VariableAJ;
+                if (!Var.IsInitialized) Alarms.Add(AJAlarmFactory.CretaeMCL0005(Var.Token));
 
-                VarData.ReferenceTable.Add(this);
+                Result = (symbolData as VariableAJ).ToConstantAJ();
             }
-            else if (symbolData is FuncDefData)
+            else if (symbolData is FuncDefNode)
             {
-                FuncData = symbolData as FuncDefData;
-                Result = (symbolData as FuncDefData).ReturnValue;
+                Func = symbolData as FuncDefNode;
+                Result = (symbolData as FuncDefNode).ReturnValue;
             }
+
+            DBContext.Instance.Insert(this);
 
             return this;
+        }
+
+        public override IRExpression To()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public override IRExpression To(IRExpression from)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

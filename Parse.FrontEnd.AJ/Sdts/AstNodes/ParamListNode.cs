@@ -1,23 +1,13 @@
-﻿using Parse.FrontEnd.Ast;
-using Parse.FrontEnd.AJ.Sdts.Datas.Variables;
+﻿using Parse.FrontEnd.AJ.Data;
+using Parse.FrontEnd.AJ.Sdts.AstNodes.TypeNodes;
+using Parse.FrontEnd.Ast;
 using System.Collections.Generic;
 
 namespace Parse.FrontEnd.AJ.Sdts.AstNodes
 {
-    public class ParamListNode : AJNode
+    public class ParamListNode : AJNode, IHasVarList
     {
-        public IReadOnlyList<ParamNode> ParamNodes => _paramNodes;
-        public IEnumerable<VariableMiniC> ToVarDataList
-        {
-            get
-            {
-                List<VariableMiniC> result = new List<VariableMiniC>();
-
-                foreach (var node in ParamNodes) result.Add(node.ToVarData);
-
-                return result;
-            }
-        }
+        public IEnumerable<VariableAJ> VarList => _paramNodes;
 
         public ParamListNode(AstSymbol node) : base(node)
         {
@@ -26,20 +16,20 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes
 
 
         // format summary [Can induce epsilon]
-        // [0:n] : ParamNode [ParamDcl]
-        public override SdtsNode Build(SdtsParams param)
+        // [0:n] : DeclareVarNode
+        public override SdtsNode Compile(CompileParameter param)
         {
             _paramNodes.Clear();
 
             var classDefNode = GetParent(typeof(ClassDefNode)) as ClassDefNode;
-            _classTypeName = classDefNode.ClassData.Name;
+            _classTypeName = classDefNode.Name;
 
             foreach (var item in Items)
             {
-                var paramNode = item.Build(param) as ParamNode;
-                paramNode.ToVarData.PartyName = _classTypeName;
+                var paramNode = item.Compile(param) as DeclareVarNode;
 
-                _paramNodes.Add(paramNode);
+                paramNode.Variable.Param = true;
+                _paramNodes.Add(paramNode.Variable);
                 param.Offset++;
             }
 
@@ -47,7 +37,7 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes
         }
 
 
-        private List<ParamNode> _paramNodes = new List<ParamNode>();
+        private List<VariableAJ> _paramNodes = new List<VariableAJ>();
         private string _classTypeName;
     }
 }

@@ -1,5 +1,5 @@
 ﻿using Parse.BackEnd.Target;
-using Parse.FrontEnd.AJ.Sdts.Expressions;
+using Parse.FrontEnd;
 using System;
 using System.Diagnostics;
 using System.IO;
@@ -8,37 +8,45 @@ namespace Compile
 {
     public class Builder
     {
-        /// ***********************************************************************/
+        /***********************************************************************/
         /// <summary>
         /// This function creates a bitcode.
         /// </summary>
-        /// <param name="expression">The expression to create bitcode</param>
+        /// <param name="buildNode">The build node to create bitcode</param>
         /// <param name="bitCodeFullPath">The full path included bitcode name to create</param>
-        /// ***********************************************************************/
-        public static void CreateBitCode(AJExpression expression, string bitCodeFullPath)
+        /***********************************************************************/
+        public static void CreateBitCode(SdtsNode buildNode, string bitCodeFullPath)
         {
-            var test = IRExpressionGenerator.GenerateLLVMExpression(expression);
-            var instructionList = test.Build();
+            buildNode.Compile(new CompileParameter(0, 0, true));
+
+            /*
+            IRExpressionGenerator.WriteData(buildNode);
+            var instructionList = llvmExpr.Build();
 
             string textCode = string.Empty;
-            foreach (var instruction in instructionList) textCode += instruction.FullData + Environment.NewLine;
+            foreach (var instruction in instructionList)
+            {
+                instruction.Save();
+                textCode += instruction.Instruct + Environment.NewLine;
+            }
+
 
             File.WriteAllText(bitCodeFullPath, textCode);
+            */
         }
 
 
-        /// ***********************************************************************/
+        /*************************************************************************/
         /// <summary>
         /// This function creates a target code.
         /// </summary>
         /// <param name="bitCodeFullPath">The full path that included bitcode filename</param>
         /// <param name="targetCodeFullPath">The full path included target code name to create</param>
         /// <param name="mcpuType">The mcpu type of the target</param>
-        /// ***********************************************************************/
+        /*************************************************************************/
         public static void CreateAssem(string bitCodeFullPath, string targetCodeFullPath, string mcpuType)
         {
-            var command = string.Format("-mtriple=arm-none-eabi -march=thumb -mattr=thumb2 -mcpu={0} {1} -o {2}",
-                                                            mcpuType, bitCodeFullPath, targetCodeFullPath);
+            var command = $"-mtriple=arm-none-eabi -march=thumb -mattr=thumb2 -mcpu={mcpuType} {bitCodeFullPath} -o {targetCodeFullPath}";
 
             // execute llc.exe
             ProcessStartInfo startInfo = new ProcessStartInfo
@@ -53,13 +61,13 @@ namespace Compile
         }
 
 
-        /// ***********************************************************************/
+        /***********************************************************************/
         /// <summary>
         /// 링커스크립트를 생성합니다.
         /// </summary>
         /// <param name="path">링커스크립트를 생성할 경로</param>
         /// <param name="fileName">링커스크립트 파일 명</param>
-        /// ***********************************************************************/
+        /***********************************************************************/
         public static void CreateLinkerScript(string path, string fileName)
         {
             string code = "OUTPUT_FORMAT(\"elf32-littlearm\", \"elf32-littlearm\", \"elf32-littlearm\")" + Environment.NewLine +
@@ -128,18 +136,18 @@ namespace Compile
         }
 
 
-        /// ***********************************************************************/
+        /***********************************************************************/
         /// <summary>
         /// This function executes a makefile.
         /// </summary>
         /// <param name="folderPath">The folder path that existing the makefile to execute</param>
-        /// ***********************************************************************/
+        /***********************************************************************/
         public static void ExecuteMakeFile(string folderPath)
         {
             // execute makefile with make.exe
             var process = new Process();
             process.StartInfo.FileName = "make.exe";
-            process.StartInfo.Arguments = string.Format("-C {0} -f makefile", folderPath);
+            process.StartInfo.Arguments = $"-C {folderPath} -f makefile";
             process.StartInfo.UseShellExecute = false;
             process.StartInfo.RedirectStandardOutput = true;
             process.Start();
@@ -153,14 +161,14 @@ namespace Compile
         }
 
 
-        /// ***********************************************************************/
+        /***********************************************************************/
         /// <summary>
         /// JLink 커맨드를 생성합니다.
         /// </summary>
         /// <param name="path">커맨드를 생성할 경로</param>
         /// <param name="binFileToLoad">바이너리 파일 명</param>
         /// <param name="downloadAddress">바이너리 코드가 다운로드 될 메모리 주소</param>
-        /// ***********************************************************************/
+        /***********************************************************************/
         public static void CreateJLinkCommanderScript(string path, string binFileToLoad, string downloadAddress)
         {
             var fileContent = string.Format("si 1" + Environment.NewLine +
@@ -177,14 +185,15 @@ namespace Compile
         }
 
 
-        /// ********************************************************
+        /*****************************************************/
         /// <summary>
-        /// This function creates bootstrap and linker script
+        /// This function creates bootstrap and linker script.           <br/>
+        /// 부트스트랩과 링커스크립트를 생성합니다.                   <br/>
         /// </summary>
         /// <param name="solutionBinFolderPath"></param>
         /// <param name="bootstrapName"></param>
         /// <param name="linkerScriptName"></param>
-        /// ********************************************************
+        /*****************************************************/
         public static void CreateStartingFile(string solutionBinFolderPath, string bootstrapName, string linkerScriptName, Target target)
         {
             // create bootstrap

@@ -1,8 +1,7 @@
-﻿using Parse.FrontEnd.Ast;
-using Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes;
-using Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes.LiteralNodes;
-using Parse.Types;
-using Parse.Types.ConstantTypes;
+﻿using Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes;
+using Parse.FrontEnd.Ast;
+using Parse.MiddleEnd.IR.Expressions;
+using System.Collections.Generic;
 
 namespace Parse.FrontEnd.AJ.Sdts.AstNodes
 {
@@ -12,13 +11,11 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes
         {
         }
 
-        public int Level => System.Convert.ToInt32(LevelToken?.Input);
-        public string VarName => NameToken?.Input;
-        public int Dimension => System.Convert.ToInt32(DimensionToken?.Input);
+//        public int Level => System.Convert.ToInt32(LevelToken?.Input);
+//        public string VarName => NameToken?.Input;
 
-        public TokenData LevelToken { get; private set; }
+        public IEnumerable<TokenData> ArrayTokens => LeftVar.ArrayTokens;
         public TokenData NameToken => LeftVar.NameToken;
-        public TokenData DimensionToken => LeftVar.DimensionToken;
 
         public DeclareVarNode LeftVar { get; private set; }
         public ExprNode Right { get; private set; }
@@ -37,13 +34,13 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes
         /// <param name="param"></param>
         /// <returns></returns>
         /**************************************************/
-        public override SdtsNode Build(SdtsParams param)
+        public override SdtsNode Compile(CompileParameter param)
         {
             // build Simple or ArrayVar
-            LeftVar = Items[0].Build(param) as DeclareVarNode;
+            LeftVar = Items[0].Compile(param) as DeclareVarNode;
 
             if (Items.Count > 1)
-                Right = Items[1].Build(param) as ExprNode;
+                Right = Items[1].Compile(param) as ExprNode;
 
             return this;
         }

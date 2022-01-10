@@ -1,17 +1,19 @@
-﻿using Parse.FrontEnd.Ast;
+﻿using Parse.FrontEnd.AJ.Data;
 using Parse.FrontEnd.AJ.Sdts.AstNodes.StatementNodes;
-using Parse.FrontEnd.AJ.Sdts.Datas;
-using Parse.MiddleEnd.IR;
-using System;
+using Parse.FrontEnd.Ast;
 using System.Collections.Generic;
 
 namespace Parse.FrontEnd.AJ.Sdts.AstNodes
 {
     public class ProgramNode : AJNode
     {
-        public IEnumerable<NamespaceData> NamespaceDatas => _namespaceDatas;
+        public List<UsingStNode> UsingNamespaces { get; } = new List<UsingStNode>();
+        public List<NamespaceNode> Namespaces { get; } = new List<NamespaceNode>();
 
-        public Func<SdtsNode, IRExpression> ConvertFunc { get; set; }
+
+        public HashSet<AJTypeInfo> NoLinkedTypeSet { get; } = new HashSet<AJTypeInfo>();
+        public HashSet<IHasVarList> ShortCutDeclareVarSet { get; } = new HashSet<IHasVarList>();
+
 
         public ProgramNode(AstSymbol node) : base(node)
         {
@@ -20,34 +22,28 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes
 
         // [0:n] : Using? (AstNonTerminal)
         // [n+1:y] : Namespace? (AstNonTerminal)
-        public override SdtsNode Build(SdtsParams param)
+        public override SdtsNode Compile(CompileParameter param)
         {
-            _namespaceDatas.Clear();
-
-            var rootParam = param as AJSdtsParams;
-            rootParam.RootData.ProgramNodes.Remove(this);
-            rootParam.RootData.ProgramNodes.Add(this);
+            Namespaces.Clear();
+            param.RootNode = this;
 
             foreach (var item in Items)
             {
-                var minicNode = item as AJNode;
+                var ajNode = item as AJNode;
 
                 // using statement list
-                if (minicNode is UsingStNode)
+                if (ajNode is UsingStNode)
                 {
-//                    _varNodes.Add(minicNode.Build(param) as UsingStNode);
+                    UsingNamespaces.Add(ajNode.Compile(param) as UsingStNode);
                 }
                 // namespace statement list
-                else if (minicNode is NamespaceNode)
+                else if (ajNode is NamespaceNode)
                 {
-                    var node = minicNode.Build(param) as NamespaceNode;
-                    _namespaceDatas.Add(node.NamespaceData);
+                    Namespaces.Add(ajNode.Compile(param) as NamespaceNode);
                 }
             }
 
             return this;
         }
-
-        private List<NamespaceData> _namespaceDatas = new List<NamespaceData>();
     }
 }

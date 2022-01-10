@@ -1,22 +1,28 @@
 ﻿using Parse.Extensions;
-using Parse.FrontEnd.AJ.Sdts.Datas;
-using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
 
 namespace Parse.FrontEnd.AJ.Sdts.AstNodes
 {
     public abstract partial class AJNode
     {
-        public IEnumerable<ISymbolData> GetReferableSymbols()
+        /// <summary>
+        /// This function returns all referable symbols. <br/>
+        /// 참조 가능한 모든 symbol들을 가져옵니다. <br/>
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<ISymbolData> GetReferableSymbols(bool bIncludeVirtual = false)
         {
             var transNode = this;
             List<ISymbolData> result = new List<ISymbolData>();
 
             while (transNode != null)
             {
-                if (transNode is IHasSymbol)
-                    result.AddRangeExceptNull((transNode as IHasSymbol).SymbolList);
+                if (transNode is ISymbolCenter)
+                {
+                    if(bIncludeVirtual) result.AddRangeExceptNull((transNode as ISymbolCenter).SymbolList);
+                    else result.AddRangeExceptNull((transNode as ISymbolCenter).SymbolList.Where(s => s.Token.IsVirtual == false));
+                }
 
                 transNode = transNode.Parent as AJNode;
             }
@@ -35,16 +41,16 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes
             while (true)
             {
                 if (curNode == null) break;
-                if (!(curNode is IHasSymbol))
+                if (!(curNode is ISymbolCenter))
                 {
                     curNode = curNode.Parent as AJNode;
                     continue;
                 }
 
-                var symbolList = curNode as IHasSymbol;
-                foreach (var symbol in symbolList.SymbolList)
+                var symbolCenter = curNode as ISymbolCenter;
+                foreach (var symbol in symbolCenter.SymbolList)
                 {
-                    if (symbol.Name != toFindIdentToken.Input) continue;
+                    if (symbol.Token.Input != toFindIdentToken.Input) continue;
 
                     result = symbol;
                     break;
@@ -57,7 +63,6 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes
             return result;
         }
 
-
         public IEnumerable<ISymbolData> GetSymbols(TokenData toFindIdentToken)
         {
             var symbols = GetReferableSymbols();
@@ -65,7 +70,7 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes
 
             foreach (var symbol in symbols)
             {
-                if (symbol.Name == toFindIdentToken.Input) result.Add(symbol);
+                if (symbol.Token.Input == toFindIdentToken.Input) result.Add(symbol);
             }
 
             return result;

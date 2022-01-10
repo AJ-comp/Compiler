@@ -1,17 +1,15 @@
-﻿using Parse.FrontEnd.Ast;
-using Parse.FrontEnd.AJ.Sdts.Datas;
-using Parse.MiddleEnd.IR.Interfaces;
-using System.Collections.Generic;
+﻿using Parse.FrontEnd.AJ.Sdts.AstNodes.TypeNodes;
+using Parse.FrontEnd.Ast;
+using Parse.MiddleEnd.IR.Expressions;
+using Parse.MiddleEnd.IR.Expressions.StmtExpressions;
 using System.Linq;
 
 namespace Parse.FrontEnd.AJ.Sdts.AstNodes.StatementNodes
 {
-    public class CompoundStNode : StatementNode, ICompoundStmtExpression
+    public class CompoundStNode : StatementNode, IRootable
     {
         public StatListNode StatListNode { get; private set; }
-
-        public IEnumerable<IDeclareVarExpression> LocalVars => VarList;
-        public IEnumerable<IStmtExpression> Statements => StatementNodes;
+        public bool IsRoot => !(Parent is StatementNode);
 
 
         public CompoundStNode(AstSymbol node) : base(node)
@@ -19,40 +17,54 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.StatementNodes
         }
 
 
-        // [0] : VariableDclsListNode [DclList]
-        // [1] : StatListNode [StatList] [epsilon able]
-        public override SdtsNode Build(SdtsParams param)
+        // [0] : StatementNode* [StatList] [epsilon able]
+        public override SdtsNode Compile(CompileParameter param)
         {
             BlockLevel = ParentBlockLevel + 1;
 
             // it needs to clone an param
             _varList.Clear();
             var newParam = param.Clone();
+            newParam.Offset = 0;
             var classDefNode = GetParent(typeof(ClassDefNode)) as ClassDefNode;
 
             foreach (var item in Items)
             {
-                if (item is VariableDclListNode)
+                var statementNode = item.Compile(newParam);
+
+                if (statementNode is DeclareVarNode)
                 {
-                    newParam.Offset = (VarList == null) ? 0 : VarList.Count();
-
-                    // build VariableDclsListNode
-                    var varListNode = item.Build(newParam) as VariableDclListNode;
-
-                    foreach (var varData in varListNode.VarList)
-                    {
-//                        varData.PartyName = classDefNode.ClassData.Name;
-                        _varList.Add(varData);
-                    }
+                    var varNode = statementNode as DeclareVarNode;
+                    _varList.Add(varNode.Variable);
                 }
                 else if (item is StatListNode)
                 {
                     // build StatListNode
-                    StatListNode = item.Build(newParam) as StatListNode;
+                    StatListNode = item.Compile(newParam) as StatListNode;
                 }
+
+                if (IsRoot) (param.RootNode as ProgramNode).ShortCutDeclareVarSet.Add(this);
             }
 
             return this;
+        }
+
+        public override IRExpression To()
+        {
+            var result = new IRCompoundStatement();
+
+            foreach (var localVar in VarList)
+                result.LocalVars.Add(localVar.ToIR());
+
+            foreach (var statement in StatListNode.StatementNodes)
+                result.Expressions.Add(statement.To());
+
+            return result;
+        }
+
+        public override IRExpression To(IRExpression from)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

@@ -24,7 +24,7 @@ namespace Parse.Types.ConstantTypes
         {
             if (constant is IArithmeticOperation) return (constant as IArithmeticOperation).Add(operand);
             // in add case, it also has to support string type.
-            if (constant is IString) return (constant as IString).Add(operand);
+//            if (constant is IString) return (constant as IString).Add(operand);
 
             return new UnknownConstant();
         }
@@ -146,28 +146,28 @@ namespace Parse.Types.ConstantTypes
 
         public static IConstant GreaterThan(IConstant constant, IConstant operand)
         {
-            if (constant is ISizeCompareOperation) return (constant as ISizeCompareOperation).GreaterThan(operand);
+            if (constant is ICompareOperation) return (constant as ICompareOperation).GreaterThan(operand);
 
             return new UnknownConstant();
         }
 
         public static IConstant LessThan(IConstant constant, IConstant operand)
         {
-            if (constant is ISizeCompareOperation) return (constant as ISizeCompareOperation).LessThan(operand);
+            if (constant is ICompareOperation) return (constant as ICompareOperation).LessThan(operand);
 
             return new UnknownConstant();
         }
 
         public static IConstant GreaterEqual(IConstant constant, IConstant operand)
         {
-            if (constant is ISizeCompareOperation) return (constant as ISizeCompareOperation).GreaterEqual(operand);
+            if (constant is ICompareOperation) return (constant as ICompareOperation).GreaterEqual(operand);
 
             return new UnknownConstant();
         }
 
         public static IConstant LessEqual(IConstant constant, IConstant operand)
         {
-            if (constant is ISizeCompareOperation) return (constant as ISizeCompareOperation).LessEqual(operand);
+            if (constant is ICompareOperation) return (constant as ICompareOperation).LessEqual(operand);
 
             return new UnknownConstant();
         }

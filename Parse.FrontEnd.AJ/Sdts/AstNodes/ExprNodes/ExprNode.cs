@@ -1,20 +1,23 @@
-﻿using Parse.FrontEnd.Ast;
-using Parse.FrontEnd.AJ.Sdts.Datas;
-using Parse.Types;
-using Parse.Types.ConstantTypes;
+﻿using AJ.Common;
+using Parse.FrontEnd.AJ.Data;
+using Parse.FrontEnd.Ast;
+using Parse.MiddleEnd.IR.Expressions;
 
 namespace Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes
 {
-    public abstract class ExprNode : AJNode, IExprExpression
+    public abstract class ExprNode : AJNode, IHasType, IExportable<IRExpression>
     {
-        public StdType DataKind => Result.TypeKind;
         public object ResultValue => Result.Value;
-        public IConstant Result { get; protected set; }
+        public AJTypeInfo Type => Result.Type;
+        public ConstantAJ Result { get; set; }
 
         public bool AlwaysTrue { get; } = false;
 
         protected ExprNode(AstSymbol node) : base(node)
         {
         }
+
+        public abstract IRExpression To();
+        public abstract IRExpression To(IRExpression from);
     }
 }

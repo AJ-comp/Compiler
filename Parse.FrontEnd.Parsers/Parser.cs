@@ -49,6 +49,8 @@ namespace Parse.FrontEnd.Parsers
         public abstract event EventHandler<ParseCreatedArgs> ParseTreeCreated;
         public abstract event EventHandler<AstSymbol> ASTCreated;
 
+        public abstract FirstAndFollowCollection GetFirstAndFollow();
+
         /// <summary>
         /// This function performs whole parsing for tokenCells
         /// </summary>

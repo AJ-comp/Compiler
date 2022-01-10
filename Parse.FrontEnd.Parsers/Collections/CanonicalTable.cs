@@ -86,7 +86,7 @@ namespace Parse.FrontEnd.Parsers.Collections
             int prevIndex = 0;
             int curIndex = this.MaxIxIndex + 1;
 
-            foreach(var item in this.Values)
+            foreach (var item in this.Values)
             {
                 if (item.Item2.SetEquals(prevStatus))
                 {
@@ -95,9 +95,9 @@ namespace Parse.FrontEnd.Parsers.Collections
                 }
             }
 
-            foreach(var item in this.Values)
+            foreach (var item in this.Values)
             {
-                if(item.Item2.SetEquals(curStatus))
+                if (item.Item2.SetEquals(curStatus))
                 {
                     curIndex = item.Item1;
                     break;
@@ -108,7 +108,7 @@ namespace Parse.FrontEnd.Parsers.Collections
             var value = new Tuple<int, CanonicalItemSet>(curIndex, curStatus);
 
             bool result = !this.ContainsKey(key);
-            if(result)  this.Add(key, value);
+            if (result) this.Add(key, value);
 
             return result;
         }
@@ -122,9 +122,9 @@ namespace Parse.FrontEnd.Parsers.Collections
         {
             CanonicalItemSet result = null;
 
-            foreach(var item in this)
+            foreach (var item in this)
             {
-                if(item.Value.Item1 == IxIndex)   result = item.Value.Item2;
+                if (item.Value.Item1 == IxIndex) result = item.Value.Item2;
             }
 
             return result;
@@ -142,39 +142,41 @@ namespace Parse.FrontEnd.Parsers.Collections
             var tempStorage = new Dictionary<Symbol, uint>();
             CanonicalItemSet curStatus = this.GetStatusFromIxIndex(IxIndex);
 
-            // add shift action
+            // add shift or goto action
             foreach (var item in this)
             {
                 if (item.Key.Item1 == IxIndex)
                 {
                     uint highestPriority = int.MaxValue;
-                    foreach(var singleNT in curStatus.GetNTSingleMatchedMarkSymbol(item.Key.Item2))
+                    var singleNTSet = curStatus.GetNTSingleMatchedMarkSymbol(item.Key.Item2);
+
+                    foreach (var singleNT in curStatus.GetNTSingleMatchedMarkSymbol(item.Key.Item2))
                     {
                         if (singleNT.Priority < highestPriority) highestPriority = singleNT.Priority;
                     }
 
-                    ActionDir actionInfo = (item.Key.Item2 is Terminal) ? ActionDir.shift : ActionDir.moveto;
+                    ActionDir actionInfo = (item.Key.Item2 is Terminal) ? ActionDir.Shift : ActionDir.Goto;
 
                     tempStorage.Add(item.Key.Item2, highestPriority);
                     result.Add(item.Key.Item2, new Tuple<ActionDir, object>(actionInfo, item.Value.Item1));
                 }
             }
 
-            // add reduce action
+            // add reduce or accept action
             foreach (var singleNT in curStatus.EndMarkSymbolSet)
             {
                 foreach (var followItem in relationData[singleNT.ToNonTerminal()])
                 {
-                    ActionDir actionInfo = ActionDir.reduce;
-                    if (this.virtualStartSymbol.IsSubSet(singleNT)) actionInfo = ActionDir.accept;
-                    else if (singleNT.IsEpsilon) actionInfo = ActionDir.epsilon_reduce;
-//                    ActionInfo actionInfo = (this.virtualStartSymbol.IsSubSet(singleNT)) ? ActionInfo.accept : ActionInfo.reduce;
+                    ActionDir actionInfo = ActionDir.Reduce;
+                    if (this.virtualStartSymbol.IsSubSet(singleNT)) actionInfo = ActionDir.Accept;
+                    else if (singleNT.IsEpsilon) actionInfo = ActionDir.EpsilonReduce;
+                    //                    ActionInfo actionInfo = (this.virtualStartSymbol.IsSubSet(singleNT)) ? ActionInfo.accept : ActionInfo.reduce;
 
 
                     // prevent shift - reduce or reduce - reduce conflict using priority.
-                    if(result.ContainsKey(followItem))
+                    if (result.ContainsKey(followItem))
                     {
-                        if(tempStorage[followItem] > singleNT.Priority)
+                        if (tempStorage[followItem] > singleNT.Priority)
                         {
                             tempStorage.Remove(followItem);
                             tempStorage.Add(followItem, singleNT.Priority);
@@ -194,11 +196,25 @@ namespace Parse.FrontEnd.Parsers.Collections
         }
 
 
+        public IEnumerable<CanonicalLine> ToCanonicalLineList()
+        {
+            List<CanonicalLine> result = new List<CanonicalLine>();
+
+            foreach (var item in this)
+            {
+                CanonicalLine line = new CanonicalLine(item.Key.Item1, item.Key.Item2, item.Value.Item1, item.Value.Item2);
+                result.Add(line);
+            }
+
+            return result;
+        }
+
+
         public override string ToString()
         {
             string result = string.Empty;
 
-            foreach(var data in this)
+            foreach (var data in this)
             {
                 if (data.Key.Item1 == -1) result += string.Format("I{0} : ", data.Value.Item1);
                 else result += string.Format("Goto(I{0},{1}) = I{2} : ", data.Key.Item1, data.Key.Item2, data.Value.Item1);

@@ -1,9 +1,10 @@
-﻿using Parse.Types;
+﻿using Parse.FrontEnd.AJ.Sdts.Datas.Variables;
+using Parse.Types;
 using Parse.Types.ConstantTypes;
 
 namespace Parse.FrontEnd.AJ.Sdts.Datas
 {
-    public class DefaultExprData : IExprExpression
+    public class DefaultExprData : IExprBuildNode
     {
         public IConstant Result { get; }
 

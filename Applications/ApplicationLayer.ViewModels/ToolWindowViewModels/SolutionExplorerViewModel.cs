@@ -172,10 +172,10 @@ namespace ApplicationLayer.ViewModels.ToolWindowViewModels
             foreach (var child in Solution.Children)
             {
                 var project = child as ProjectTreeNodeModel;
-                _compiler.CreateAssembly(project.DisplayName);
+                _compiler.CreateProject(project.DisplayName);
 
                 foreach (var file in project.AllFileNodes)
-                    _compiler.AddFileToAssembly(project.DisplayName, file.FullPath);
+                    _compiler.AddExistFileToProject(project.DisplayName, file.FullPath);
             }
         }
 
@@ -362,7 +362,7 @@ namespace ApplicationLayer.ViewModels.ToolWindowViewModels
 
             this.ChildrenChanged(this.Solution, null);
 
-            this._compiler.CreateAssembly(newProject.DisplayName);
+            this._compiler.CreateProject(newProject.DisplayName);
         }
 
         /// <summary>

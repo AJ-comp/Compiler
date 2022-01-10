@@ -1,8 +1,9 @@
-﻿using Parse.Extensions;
+﻿using AJ.Common.Helpers;
+using Parse.Extensions;
 
 namespace Parse.Types
 {
-    public enum State { Fixed, Dynamic, NotInit, Unknown };
+    public enum State { Fixed, Dynamic, NotInit, Unknown, Error };
 
     public interface IValue
     {
@@ -15,6 +16,11 @@ namespace Parse.Types
         public string DebuggerDisplay(IValue value)
         {
             return $"{Value} [{TypeKind.ToDescription()}, {ValueState.ToDescription()}]";
+        }
+
+        public string GetDebuggerDisplay()
+        {
+            return $"{TypeKind.ToDescription()}, {ValueState.ToDescription()}";
         }
     }
 }

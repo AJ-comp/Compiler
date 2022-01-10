@@ -49,7 +49,7 @@ namespace Parse.FrontEnd.Parsers.RelationAnalyzers
 
 
         /// <summary>
-        /// contents(symbol 리스트)의 follow 집합을 update 합니다
+        /// contents(symbol 리스트)의 follow 집합을 update 합니다.
         /// </summary>
         /// <param name="contents"></param>
         /// <param name="followSet"></param>

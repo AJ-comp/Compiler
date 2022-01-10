@@ -2,7 +2,7 @@
 
 namespace Parse.Types.ConstantTypes
 {
-    public class DoubleConstant : Constant, IDouble, ISizeCompareOperation
+    public class DoubleConstant : Constant, IDouble, ICompareOperation
     {
         public DoubleConstant(double value) : this(value, State.Fixed)
         {
@@ -57,7 +57,7 @@ namespace Parse.Types.ConstantTypes
                 var data = (int)Value != 0;
                 result = new BitConstant(data, ValueState);
             }
-            else if (to == StdType.Byte) result = new ByteConstant((byte)Value, ValueState);
+            else if (to == StdType.Char) result = new ByteConstant((byte)Value, ValueState);
             else if (to == StdType.Short) result = new ShortConstant((short)Value, ValueState);
             else if (to == StdType.Int) result = new IntConstant((int)Value, ValueState);
             else if (to == StdType.Double) result = this;

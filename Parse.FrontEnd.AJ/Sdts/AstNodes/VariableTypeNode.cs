@@ -1,10 +1,11 @@
-﻿using Parse.FrontEnd.Ast;
-using Parse.FrontEnd.AJ.Sdts.Datas;
-using Parse.FrontEnd.AJ.Sdts.Datas.Variables;
+﻿using Parse.FrontEnd.AJ.Data;
 using Parse.FrontEnd.AJ.Sdts.AstNodes.TypeNodes;
+using Parse.FrontEnd.Ast;
+using System.Diagnostics;
 
 namespace Parse.FrontEnd.AJ.Sdts.AstNodes
 {
+    [DebuggerDisplay("{" + nameof(GetDebuggerDisplay) + "(),nq}")]
     public class VariableTypeNode : AJNode
     {
         public VariableTypeNode(AstSymbol node) : base(node)
@@ -12,47 +13,32 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes
         }
 
         public bool Const => ConstToken != null;
-        public MiniCDataType DataType { get; private set; }
-        public AJTypeInfo MiniCTypeInfo => new AJTypeInfo(ConstToken, DataTypeToken);
+        public AJTypeInfo Type { get; private set; }
 
         public TokenData ConstToken { get; private set; }
-        public TokenData DataTypeToken { get; private set; }
+        public AJDataType DataType => _dataTypeNode.Type;
+        public TokenData DataTypeToken => _dataTypeNode.DataTypeToken;
 
-        public override string ToString() => string.Format("const : {0}, DataType : {1}", Const.ToString(), DataType.ToString());
 
-        public override SdtsNode Build(SdtsParams param)
+        public override SdtsNode Compile(CompileParameter param)
         {
             foreach (var item in Items)
             {
-                var node = item.Build(param);
+                var node = item.Compile(param);
 
-                if(node is ConstNode)
-                {
-                    ConstToken = (node as ConstNode).ConstToken;
-                }
-                else if (node is VoidNode)
-                {
-                    DataType = MiniCDataType.Void;
-                    DataTypeToken = (node as VoidNode).DataTypeToken;
-                }
-                else if (node is SystemNode)
-                {
-                    DataType = MiniCDataType.Int;
-                    DataTypeToken = (node as IntNode).DataTypeToken;
-                }
-                else if (node is IntNode)
-                {
-                    DataType = MiniCDataType.Int;
-                    DataTypeToken = (node as IntNode).DataTypeToken;
-                }
-                else if(node is AddressNode)
-                {
-                    DataType = MiniCDataType.Address;
-                    DataTypeToken = (node as AddressNode).DataTypeToken;
-                }
+                if (node is ConstNode) ConstToken = (node as ConstNode).ConstToken;
+                else if (node is TypeDeclareNode) _dataTypeNode = node as TypeDeclareNode;
+                else if (node is ClassDefNode) _dataTypeNode = node as UserDefTypeNode;
             }
+
+            Type = new AJTypeInfo(_dataTypeNode.Type);
 
             return this;
         }
+
+
+        private DataTypeNode _dataTypeNode;
+
+        private string GetDebuggerDisplay() => $"const : {Const}, DataType : {DataType}";
     }
 }

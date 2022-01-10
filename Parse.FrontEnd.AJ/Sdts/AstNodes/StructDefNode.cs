@@ -13,10 +13,10 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes
 
         // [0] : Ident [TerminalNode]
         // [1] : declaration
-        public override SdtsNode Build(SdtsParams param)
+        public override SdtsNode Compile(CompileParameter param)
         {
-            Items[0].Build(param);
-            Items[1].Build(param);
+            Items[0].Compile(param);
+            Items[1].Compile(param);
 
             return this;
         }

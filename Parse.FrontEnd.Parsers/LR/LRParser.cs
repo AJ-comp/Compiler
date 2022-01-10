@@ -2,6 +2,7 @@
 using Parse.FrontEnd.Grammars;
 using Parse.FrontEnd.Parsers.Collections;
 using Parse.FrontEnd.Parsers.Datas;
+using Parse.FrontEnd.Parsers.Datas.LR;
 using Parse.FrontEnd.RegularGrammar;
 using Parse.FrontEnd.Tokenize;
 using System;
@@ -29,6 +30,8 @@ namespace Parse.FrontEnd.Parsers.LR
         /// ParsingFailResult : The state information when error generated
         /// </summary>
         public abstract event EventHandler<ParsingUnit> ActionFailed;
+
+        public abstract AmbiguityCheckResult CheckAmbiguity();
 
 
         /// <summary>
@@ -103,18 +106,18 @@ namespace Parse.FrontEnd.Parsers.LR
             SuccessedKind result = SuccessedKind.NotApplicable;
 
             // syntax analysis complete
-            if (successResult.Action.Direction == ActionDir.accept)
+            if (successResult.Action.Direction == ActionDir.Accept)
             {
                 result = SuccessedKind.Completed;
             }
-            else if (successResult.Action.Direction == ActionDir.reduce ||
-                        successResult.Action.Direction == ActionDir.epsilon_reduce ||
-                        successResult.Action.Direction == ActionDir.moveto)
+            else if (successResult.Action.Direction == ActionDir.Reduce ||
+                        successResult.Action.Direction == ActionDir.EpsilonReduce ||
+                        successResult.Action.Direction == ActionDir.Goto)
             {
                 result = SuccessedKind.ReduceOrGoto;
                 this.ActionSuccessed?.Invoke(this, successResult);
             }
-            else if (successResult.Action.Direction == ActionDir.shift) result = SuccessedKind.Shift;
+            else if (successResult.Action.Direction == ActionDir.Shift) result = SuccessedKind.Shift;
 
             return result;
         }

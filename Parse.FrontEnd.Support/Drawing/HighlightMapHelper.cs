@@ -48,7 +48,7 @@ namespace Parse.FrontEnd.Support.Drawing
             #endregion
 
             #region Digit
-            _dic.Add(typeof(Digit), new TokenResourceInfo(Resources.Digit, Color.FromArgb(90, 150, 168), Color.Transparent));
+            _dic.Add(typeof(Literal), new TokenResourceInfo(Resources.Digit, Color.FromArgb(90, 150, 168), Color.Transparent));
             _dic.Add(typeof(Digit2), new TokenResourceInfo(Resources.Digit2, Color.FromArgb(90, 150, 168), Color.Transparent));
             _dic.Add(typeof(Digit8), new TokenResourceInfo(Resources.Digit8, Color.FromArgb(90, 150, 168), Color.Transparent));
             _dic.Add(typeof(Digit10), new TokenResourceInfo(Resources.Digit10, Color.FromArgb(90, 150, 168), Color.Transparent));

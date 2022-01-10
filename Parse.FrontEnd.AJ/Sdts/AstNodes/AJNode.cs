@@ -1,15 +1,19 @@
-﻿using Parse.FrontEnd.Ast;
-using Parse.FrontEnd.AJ.Properties;
-using Parse.FrontEnd.AJ.Sdts.Datas;
-using Parse.MiddleEnd.IR;
-using System;
+﻿using Parse.FrontEnd.AJ.Sdts.Datas;
+using Parse.FrontEnd.Ast;
+using System.Collections.Generic;
 
 namespace Parse.FrontEnd.AJ.Sdts.AstNodes
 {
-    public abstract partial class AJNode : SdtsNode
+    public abstract partial class AJNode : SdtsNode, IData, IHasParent
     {
-        public AJSymbolTable SymbolTable { get; protected set; }
+        public int Id { get; set; }
+        public int ParentId { get; set; }
+        public string ParentType { get; set; }
+        public int ChildIndex { get; set; }
         public int BlockLevel { get; protected set; } = -1;
+
+        public CompileParameter NodeInfos { get; set; }
+
 
         public int ParentBlockLevel
         {
@@ -43,12 +47,6 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes
                 foreach (var token in AllTokens)
                     token.IsNotUsed = value;
             }
-        }
-
-        public Func<SdtsNode, object, IRExpression> ConvertingToIRExpression;
-        public IRExpression ExecuteToIRExpression(object param)
-        {
-            return ConvertingToIRExpression.Invoke(this, param);
         }
 
         protected AJNode(AstSymbol node)

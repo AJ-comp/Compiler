@@ -1,8 +1,6 @@
 ﻿using Parse.FrontEnd.AJ.Sdts.AstNodes;
-using Parse.FrontEnd.AJ.Sdts.Expressions;
 using Parse.FrontEnd.Parsers.Datas;
 using Parse.FrontEnd.Tokenize;
-using System.Collections.Generic;
 
 namespace Parse.FrontEnd.AJ
 {
@@ -22,6 +20,5 @@ namespace Parse.FrontEnd.AJ
         public LexingData LexedData { get; }
         public ParsingResult ParsedData { get; }
         public AJNode RootNode { get; set; }
-        public AJExpression FinalExpression { get; set; }
     }
 }

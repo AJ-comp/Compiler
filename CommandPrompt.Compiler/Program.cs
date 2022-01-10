@@ -12,27 +12,21 @@ namespace CommandPrompt.Compiler
     {
         static async Task<int> Main(string[] args)
         {
+            var cmd = new RootCommand();
+
+            cmd.Name = "ajc";
+            cmd.Description = Resource.Ajc;
+
+            cmd.Add(new Option<string>("/t:bin", Resource.ToBinary));
+//            cmd.Add(new Option<string>("/t:lib", Resource.ToLibrary));
+
+
+            return await cmd.InvokeAsync(args);
+
+            /*
             var cmd = new RootCommand
             {
                 new Command("-v", Resource.Version).WithHandler(nameof(HandleVersion)),
-                new Command("new", Resource.CreateSolution)
-                {
-                    new CreateSolution(_compiler.Version, "ajn"),
-                    new CreateProject("proj"),
-                    new CreateSource("source"),
-                },
-                new Command("add", Resource.CreateSolution)
-                {
-                    new LoadProject("proj"),
-                    new LoadSource("source"),
-                },
-                new Command("unload", Resource.CreateSolution)
-                {
-                    new UnloadProject("proj"),
-                    new UnloadSource("source"),
-                },
-                new Build("build"),
-
                 new Command("-c", Resource.Compile)
                 {
                     new Option("-g"),
@@ -40,10 +34,10 @@ namespace CommandPrompt.Compiler
                     new Argument<string>("inputFileName", Resource.InputFile),
                     new Argument<string>("outputFileName", Resource.InputFile),
                 }.WithHandler(nameof(HandleCompile)),
-
             };
 
             return await cmd.InvokeAsync(args);
+            */
         }
 
 
@@ -88,7 +82,7 @@ namespace CommandPrompt.Compiler
         {
             return ExecHandle(() =>
             {
-                _compiler.CreateAssembly("TestAssembly");
+                _compiler.CreateProject("TestAssembly");
 
                 string receiveCommand = string.Empty;
                 if (g) receiveCommand = "-g ";

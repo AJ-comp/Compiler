@@ -1,44 +1,33 @@
 ﻿using Parse.FrontEnd.Ast;
-using Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes.LogicalExprNodes;
-using Parse.FrontEnd.AJ.Sdts.Datas;
+using Parse.MiddleEnd.IR.Expressions;
+using Parse.MiddleEnd.IR.Expressions.ExprExpressions;
+using Parse.MiddleEnd.IR.Expressions.StmtExpressions;
 
 namespace Parse.FrontEnd.AJ.Sdts.AstNodes.StatementNodes
 {
-    public class IfStatementNode : StatementNode, IConditionStatement
+    public class IfStatementNode : CondStatementNode
     {
-        // for interface ********************************************/
-        public ICompareExpression ConditionExpression { get; private set; }
-        public StatementNode TrueStatement { get; private set; }
-        public virtual StatementNode FalseStatement => throw new System.NotImplementedException();
-        /*******************************************************/
-
-
         public IfStatementNode(AstSymbol node) : base(node)
         {
         }
 
 
-        // [0] : TerminalNode [if]
-        // [1] : ExprNode
-        // [2] : StatementNode [statement]
-        public override SdtsNode Build(SdtsParams param)
+        public override IRExpression To()
         {
-            if (Items[1] is CompareExprNode)
-            {
-                ConditionExpression = Items[1].Build(param) as CompareExprNode;
-            }
-            else if (Items[1] is NotExprNode)
-            {
-                ConditionExpression = Items[1].Build(param) as NotExprNode;
-            }
-            else
-            {
-                // add an error
-            }
+            var result = new IRConditionStatement();
 
-            TrueStatement = Items[2].Build(param) as StatementNode;
+            if (CompareCondition == null) throw new System.Exception();
 
-            return this;
+            result.Condition = CompareCondition.To() as IRBinaryExpr;
+            result.TrueStatement = TrueStatement.To() as IRStatement;
+            result.FalseStatement = FalseStatement?.To() as IRStatement;
+
+            return result;
+        }
+
+        public override IRExpression To(IRExpression from)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

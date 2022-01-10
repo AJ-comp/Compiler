@@ -1,4 +1,5 @@
 ﻿using Parse.Types;
+using System.Collections.Generic;
 
 namespace Parse
 {
@@ -8,18 +9,18 @@ namespace Parse
     }
 
 
-    /// ********************************/
+    /********************************/
     /// <summary>
     /// 변수 선언에 필요한 정보를 부여합니다.
     /// </summary>
-    /// ********************************/
+    /********************************/
     public interface IHasDclVarProperties
     {
         string PartyName { get; }
         StdType TypeKind { get; }
-        int Block { get; set; }
-        int Offset { get; set; }
-        int Length { get; }
+        int Block { get; }
+        int Offset { get; }
+        IEnumerable<int> ArrayLengths { get; }
         uint PointerLevel { get; set; }
     }
 }

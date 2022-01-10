@@ -14,7 +14,7 @@ namespace Parse.FrontEnd.Parsers.Collections
                 SymbolSet result = new SymbolSet();
                 foreach (var data in this)
                 {
-                    if(data.MarkSymbol != null) result.Add(data.MarkSymbol);
+                    if (data.MarkSymbol != null) result.Add(data.MarkSymbol);
                 }
 
                 return result;
@@ -28,7 +28,7 @@ namespace Parse.FrontEnd.Parsers.Collections
         {
             get
             {
-                foreach(var data in this)
+                foreach (var data in this)
                 {
                     if (data.IsEnd) return true;
                 }
@@ -38,7 +38,8 @@ namespace Parse.FrontEnd.Parsers.Collections
         }
 
         /// <summary>
-        /// This property gets the NonTerminalSingle Set that mark index reached the end.
+        /// This property gets the NonTerminalSingle Set that mark index reached to the end.
+        /// This means reduce items.
         /// </summary>
         public HashSet<NonTerminalSingle> EndMarkSymbolSet
         {
@@ -46,9 +47,24 @@ namespace Parse.FrontEnd.Parsers.Collections
             {
                 HashSet<NonTerminalSingle> result = new HashSet<NonTerminalSingle>();
 
-                foreach(var data in this)
+                foreach (var data in this)
                 {
                     if (data.IsEnd) result.Add(data.SingleNT);
+                }
+
+                return result;
+            }
+        }
+
+        public HashSet<NonTerminalSingle> ShiftItemList
+        {
+            get
+            {
+                HashSet<NonTerminalSingle> result = new HashSet<NonTerminalSingle>();
+
+                foreach (var data in this)
+                {
+                    if (!data.IsEnd) result.Add(data.SingleNT);
                 }
 
                 return result;
@@ -82,17 +98,17 @@ namespace Parse.FrontEnd.Parsers.Collections
         {
             CanonicalItem result = null;
 
-            foreach(var item in this)
+            foreach (var item in this)
             {
                 if (item.MarkSymbol != markSymbol) continue;
 
                 SymbolSet symbolSetAwayMarkSymbol = new SymbolSet();
-                for(int i=0; i<seenSymbols.Count; i++)
+                for (int i = 0; i < seenSymbols.Count; i++)
                 {
                     symbolSetAwayMarkSymbol.Add(item.GetSymbolFarMarkIndex(i));
                 }
 
-                if(symbolSetAwayMarkSymbol == seenSymbols)
+                if (symbolSetAwayMarkSymbol == seenSymbols)
                 {
                     result = item;
                     break;

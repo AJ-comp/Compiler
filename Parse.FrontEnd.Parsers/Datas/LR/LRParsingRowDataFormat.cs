@@ -11,13 +11,13 @@ namespace Parse.FrontEnd.Parsers.Datas.LR
     {
         public enum ActionDir 
         {
-            [Description("shift")] shift,
-            [Description("reduce")] reduce,
-            [Description("epsilon reduce")] epsilon_reduce, 
-            [Description ("goto")] moveto,
-            [Description("accept")] accept,
-            [Description("not processed yet")] not_processed,
-            [Description("failed")] failed 
+            [Description("shift")] Shift,
+            [Description("reduce")] Reduce,
+            [Description("epsilon reduce")] EpsilonReduce, 
+            [Description ("goto")] Goto,
+            [Description("accept")] Accept,
+            [Description("not processed yet")] NotProcessed,
+            [Description("failed")] Failed 
         }
 
         public override TerminalSet PossibleTerminalSet
@@ -28,7 +28,7 @@ namespace Parse.FrontEnd.Parsers.Datas.LR
 
                 foreach(var valueSet in this.MatchedValueSet)
                 {
-                    if (valueSet.Value.Item1 == ActionDir.failed) continue;
+                    if (valueSet.Value.Item1 == ActionDir.Failed) continue;
 
                     if (valueSet.Key is Terminal) result.Add(valueSet.Key as Terminal);
                 }
@@ -44,7 +44,7 @@ namespace Parse.FrontEnd.Parsers.Datas.LR
 
                 foreach(var valueSet in this.MatchedValueSet)
                 {
-                    if (valueSet.Value.Item1 == ActionDir.failed) continue;
+                    if (valueSet.Value.Item1 == ActionDir.Failed) continue;
 
                     if (valueSet.Key is NonTerminal) result.Add(valueSet.Key as NonTerminal);
                 }

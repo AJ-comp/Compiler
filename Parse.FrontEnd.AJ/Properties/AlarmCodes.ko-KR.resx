@@ -124,7 +124,7 @@
     <value>{0} 가 선언되지 않았습니다.</value>
   </data>
   <data name="MCL0002" xml:space="preserve">
-    <value>상수타입이므로 값을 변경할 수 없습니다.</value>
+    <value>{0}는 상수타입이므로 값을 변경할 수 없습니다.</value>
   </data>
   <data name="MCL0003" xml:space="preserve">
     <value>데이터 타입이 다르므로 할당할 수 없습니다.</value>
@@ -157,7 +157,7 @@
     <value>증가 연산자 또는 감소 연산자의 피연산자는 변수, 속성 또는 인덱서여야 합니다.</value>
   </data>
   <data name="MCL0013" xml:space="preserve">
-    <value>'{0}' 연산자는 string 타입에 적용할 수 없습니다.</value>
+    <value>'{0}' 연산자는 {1} 형식의 피연산자에 적용할 수 없습니다.</value>
   </data>
   <data name="MCL0014" xml:space="preserve">
     <value>호출할 수 없는 멤버인 '{0}'은(는) 메서드처럼 사용할 수 없습니다.</value>
@@ -188,5 +188,11 @@
   </data>
   <data name="MCL0023" xml:space="preserve">
     <value>{0} 연산자는 '{1}' 및 '{2}' 타입의 피연산자에 적용할 수 없습니다.</value>
+  </data>
+  <data name="MCL0024" xml:space="preserve">
+    <value>'{0}' 타입과 '{1}' 타입은 비교할 수 없습니다.</value>
+  </data>
+  <data name="MCL0025" xml:space="preserve">
+    <value>암시적으로 {0} 타입을 {1} 타입으로 변환할 수 없습니다.</value>
   </data>
 </root>

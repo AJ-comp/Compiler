@@ -6,4 +6,9 @@ namespace Parse.Types
     {
         public bool Signed { get; }
     }
+
+
+    public interface IIntegerKind<T> : IIntegerKind
+    {
+    }
 }

@@ -27,7 +27,7 @@ namespace Parse.Types.ConstantTypes
 
         protected IntegerConstant(uint value, State valueState) : base(value, valueState)
         {
-            Signed = true;
+            Signed = false;
         }
 
         public IConstant Equal(IConstant operand) => Operation.ArithmeticEqual(this, operand);

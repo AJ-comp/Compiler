@@ -15,8 +15,8 @@ namespace TestProjectOnConsole
             {
                 var fileFullPath = Path.Combine(Environment.CurrentDirectory, "test.mc");
 
-                compiler.CreateAssembly("TestAssembly");
-                compiler.AddFileToAssembly("TestAssembly", fileFullPath);
+                compiler.CreateProject("TestAssembly");
+                compiler.AddExistFileToProject("TestAssembly", fileFullPath);
 
                 var parsingResult = compiler.NewParsing(fileFullPath);
                 bool result = parsingResult.Success;
@@ -31,8 +31,10 @@ namespace TestProjectOnConsole
                 Console.WriteLine($"Cost Time : {stopWatch.ElapsedMilliseconds} msec");
 
                 var analysisResult = compiler.StartSemanticAnalysis(fileFullPath);
-                var finalExpression = compiler.CreateFinalExpression(analysisResult.SdtsRoot);
-
+                var assemblyInfo = compiler.GetAssemblyInfo(fileFullPath);
+                var outputPath = Path.Combine(Environment.CurrentDirectory, "bin");
+                Directory.CreateDirectory(outputPath);
+                Compile.Builder.CreateBitCode(analysisResult.SdtsRoot, Path.Combine(outputPath, "test.bc"));
             }
             catch(Exception ex)
             {

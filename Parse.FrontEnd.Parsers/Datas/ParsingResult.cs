@@ -3,6 +3,7 @@ using Parse.FrontEnd.Ast;
 using Parse.FrontEnd.Parsers.Properties;
 using Parse.FrontEnd.ParseTree;
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -47,6 +48,25 @@ namespace Parse.FrontEnd.Parsers.Datas
                     {
                         result = true;
                         loopOption.Stop();
+                    }
+                });
+
+                return result;
+            }
+        }
+
+
+        public IEnumerable<ParsingErrorInfo> AllErrors
+        {
+            get
+            {
+                ConcurrentBag<ParsingErrorInfo> result = new ConcurrentBag<ParsingErrorInfo>();
+
+                Parallel.ForEach(this, (block, loopOption) =>
+                {
+                    foreach (var errorInfo in block.ErrorInfos)
+                    {
+                        result.Add(errorInfo);
                     }
                 });
 
@@ -135,12 +155,14 @@ namespace Parse.FrontEnd.Parsers.Datas
         public ParsingResult(IEnumerable<ParsingBlock> parsingBlocks) => this.AddRange(parsingBlocks);
 
 
+        /*******************************************************/
         /// <summary>
         /// This function checks whether block and block is connected right.
         /// </summary>
         /// <param name="blockIndexToCheck"></param>
         /// <returns></returns>
-        public bool IsRightBlockConnected(int blockIndexToCheck)
+        /*******************************************************/
+        public bool IsBlockConnected(int blockIndexToCheck)
         {
             // case last unit
             if (blockIndexToCheck >= this.Count - 1) return true;
@@ -151,14 +173,31 @@ namespace Parse.FrontEnd.Parsers.Datas
             if (prevBlock.Units.Count == 0 || nextBlock.Units.Count == 0) return false;
 
             // this means  (check prevBlock[Last] afterStack == nextBlock[First] beforeStack)
-            return prevBlock.Units.Last().AfterStack.Stack.SequenceEqual(nextBlock.Units.First().BeforeStack.Stack);
+            return prevBlock.Units.Last().AfterStack.ApproxEqual(nextBlock.Units.First().BeforeStack);
         }
 
+
+        public bool JoinBlock(int stdBlockIndex)
+        {
+            if (!IsBlockConnected(stdBlockIndex)) return false;
+
+            var prevBlock = this[stdBlockIndex];
+            var nextBlock = this[stdBlockIndex + 1];
+
+            if (!prevBlock.Units.Last().AfterStack.SyncParent(nextBlock.Units.First().BeforeStack)) return false;
+            nextBlock.Units.First().BeforeStack = prevBlock.Units.Last().AfterStack;
+
+            return true;
+        }
+
+
+        /***************************************************************/
         /// <summary>
         /// This function returns it after adding a new ParsingUnit on current ParsingBlock.
         /// </summary>
         /// <param name="blockIndex"></param>
         /// <returns></returns>
+        /***************************************************************/
         public ParsingUnit AddUnitOnCurBlock(int blockIndex)
         {
             var prevBlock = this.GetFrontBlock(blockIndex);
@@ -171,11 +210,14 @@ namespace Parse.FrontEnd.Parsers.Datas
             return result;
         }
 
+
+        /*******************************************************************/
         /// <summary>
         /// This function returns ParsingBlock that exist anterior from the block of the current index.
         /// </summary>
         /// <param name="index"></param>
         /// <returns></returns>
+        /*******************************************************************/
         public ParsingBlock GetFrontBlock(int index) => (index <= 0) ? null : this[index - 1];
 
 
@@ -247,6 +289,8 @@ namespace Parse.FrontEnd.Parsers.Datas
             }
         }
 
+
+        /***************************************************************/
         /// <summary>
         /// This function returns block that is not ignored and on the basis of blockIndex.
         /// ignored property may be set up if error fired.
@@ -254,6 +298,7 @@ namespace Parse.FrontEnd.Parsers.Datas
         /// <param name="blockIndex"></param>
         /// <param name="direction"></param>
         /// <returns></returns>
+        /***************************************************************/
         public ParsingBlock GetNotIgnoredBlockOnFlow(int blockIndex, Direction direction)
         {
             try

@@ -1,5 +1,4 @@
-﻿using CommandPrompt.Compiler.Models;
-using System.CommandLine;
+﻿using System.CommandLine;
 using System.CommandLine.Invocation;
 using System.IO;
 

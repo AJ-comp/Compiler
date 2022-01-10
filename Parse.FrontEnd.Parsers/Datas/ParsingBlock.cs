@@ -18,7 +18,7 @@ namespace Parse.FrontEnd.Parsers.Datas
     public class ParsingBlock
     {
         #region This has to be capsule later
-        public List<ParsingErrorInfo> _errorInfos = new List<ParsingErrorInfo>();
+        public List<ParsingErrorInfo> _errorInfos { get; } = new List<ParsingErrorInfo>();
         #endregion
 
         public IEnumerable<ParsingUnitHistory> History => _history;
@@ -95,11 +95,14 @@ namespace Parse.FrontEnd.Parsers.Datas
             this.Token = token;
         }
 
+
+        /***************************************************/
         /// <summary>
         /// This constructor creates instance has parsingUnit and token.
         /// </summary>
         /// <param name="parsingUnit"></param>
         /// <param name="token"></param>
+        /***************************************************/
         public ParsingBlock(ParsingUnit parsingUnit, TokenData token) : this(token)
         {
             _units.Add(parsingUnit);
@@ -232,7 +235,7 @@ namespace Parse.FrontEnd.Parsers.Datas
 
             for (int i = startIndex; i < end; i++)
             {
-                if (_units[i].Action.Direction == ActionDir.failed)
+                if (_units[i].Action.Direction == ActionDir.Failed)
                 {
                     result = true;
                     break;

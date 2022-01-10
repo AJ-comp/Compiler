@@ -1,5 +1,6 @@
 ﻿using Parse.FrontEnd;
 using Parse.FrontEnd.AJ;
+using Parse.FrontEnd.AJ.Data;
 using Parse.FrontEnd.AJ.ErrorHandler;
 using Parse.FrontEnd.AJ.Properties;
 using Parse.FrontEnd.AJ.Sdts;
@@ -12,8 +13,8 @@ using Parse.FrontEnd.Parsers.LR;
 using Parse.FrontEnd.Tokenize;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
+using System.Linq;
 
 namespace Compile.AJ
 {
@@ -27,11 +28,11 @@ namespace Compile.AJ
         public event EventHandler<ParsingResult> ParsingCompleted;
         public event EventHandler<SemanticAnalysisResult> SemanticAnalysisCompleted;
 
-        public IEnumerable<AssemblyInfo> AssemblyInfoList
+        public IEnumerable<AJProject> ProjectList
         {
             get
             {
-                List<AssemblyInfo> result = new List<AssemblyInfo>();
+                List<AJProject> result = new List<AJProject>();
 
                 foreach (var assemblyInfo in _assemblyDic) result.Add(assemblyInfo.Value);
 
@@ -43,13 +44,13 @@ namespace Compile.AJ
         public AJCompiler()
         {
             var instance = AJDefineTable.Instance;
-            _parser = new SLRParser(_miniC);
-            _parser.ASTCreated += ASTCreated;
+            Parser = new SLRParser(_miniC);
+            Parser.ASTCreated += ASTCreated;
 
             foreach (var terminal in _miniC.TerminalSet)
                 _lexer.AddTokenRule(terminal);
 
-            MiniC_LRErrorHandlerFactory.Instance.AddErrorHandler(_parser);
+            MiniC_LRErrorHandlerFactory.Instance.AddErrorHandler(Parser);
         }
 
         private void ASTCreated(object sender, AstSymbol e)
@@ -58,132 +59,7 @@ namespace Compile.AJ
         }
 
 
-        /****************************************************************/
-        /// <summary>
-        /// 어셈블리를 생성합니다.
-        /// 어셈블리는 파일 관리 단위로 C#의 어셈블리와 같은 개념입니다.
-        /// </summary>
-        /// <param name="assemblyName"></param>
-        /****************************************************************/
-        public void CreateAssembly(string assemblyName)
-        {
-            // if already there is a same type it isn't added because collection type is hashset.
-            if (!_assemblyDic.ContainsKey(assemblyName))
-                _assemblyDic.Add(assemblyName, new AssemblyInfo(assemblyName));
-        }
-
-
-        /****************************************************************/
-        /// <summary>
-        /// 어셈블리에 파일을 추가합니다. 
-        /// 만약 어셈블리가 존재하지 않는다면 어셈블리 생성 후에 파일을 추가합니다.
-        /// </summary>
-        /// <param name="assemblyName">파일이 추가 될 어셈블리 명</param>
-        /// <param name="fileFullPath">추가할 파일 절대경로 fullPath</param>
-        /****************************************************************/
-        public void AddFileToAssembly(string assemblyName, string fileFullPath)
-        {
-            CreateAssembly(assemblyName);
-            _assemblyDic[assemblyName].FileFullPaths.Add(fileFullPath);
-        }
-
-
-        /****************************************************************/
-        /// <summary>
-        /// 어셈블리로부터 파일을 제거합니다.
-        /// </summary>
-        /// <param name="assemblyName">파일이 제거 될 어셈블리 명</param>
-        /// <param name="toRemoveFileFullPath">제거할 파일 절대경로 fullPath</param>
-        /****************************************************************/
-        public void RemoveFileFromAssembly(string assemblyName, string toRemoveFileFullPath)
-        {
-            if (!_assemblyDic.ContainsKey(assemblyName)) return;
-
-            _assemblyDic[assemblyName].FileFullPaths.Remove(toRemoveFileFullPath);
-        }
-
-
-        /****************************************************************/
-        /// <summary>
-        /// 어셈블리로부터 파일을 제거합니다.
-        /// </summary>
-        /// <param name="toRemoveFileFullPath">제거할 파일 절대경로 fullPath</param>
-        /****************************************************************/
-        public void RemoveFileFromAssembly(string toRemoveFileFullPath)
-        {
-            var originalAssemblyName = GetAssemblyName(toRemoveFileFullPath);
-
-            RemoveFileFromAssembly(originalAssemblyName, toRemoveFileFullPath);
-        }
-
-
-        /****************************************************************/
-        /// <summary>
-        /// 어셈블리 명을 바꿉니다.
-        /// </summary>
-        /// <param name="originalName">원본 어셈블리 명</param>
-        /// <param name="toChangeName">바꿀 어셈블리 명</param>
-        /****************************************************************/
-        public void ChangeAssemblyName(string originalName, string toChangeName)
-        {
-            if (originalName == toChangeName)
-                throw new Exception(Resource.EqualToRemoveAndAddName);
-            if (!_assemblyDic.ContainsKey(originalName))
-                throw new Exception(string.Format(Resource.NotRegisteredAssembly, originalName));
-            if (_assemblyDic.ContainsKey(toChangeName))
-                throw new Exception(string.Format(Resource.AlreadyRegisteredAssembly, toChangeName));
-
-            var assemblyInfo = _assemblyDic[originalName];
-            _assemblyDic.Remove(originalName);
-
-            _assemblyDic.Add(toChangeName, assemblyInfo);
-        }
-
-
-        /****************************************************************/
-        /// <summary>
-        /// 파일을 이동 합니다.
-        /// </summary>
-        /// <param name="originalFileFullPath">원본 절대경로 fullPath</param>
-        /// <param name="toMoveFileFullPath">이동후의 절대경로 fullPath</param>
-        /****************************************************************/
-        public void MoveFile(string originalFileFullPath, string toMoveFileFullPath)
-        {
-            if (originalFileFullPath == toMoveFileFullPath)
-                throw new Exception(Resource.EqualToRemoveAndAddName);
-            if (!_docTable.ContainsKey(originalFileFullPath))
-                throw new Exception(string.Format(Resource.NotRegisteredFile, originalFileFullPath));
-            if (_docTable.ContainsKey(toMoveFileFullPath))
-                throw new Exception(string.Format(Resource.AlreadyRegisteredFile, toMoveFileFullPath));
-
-            var data = _docTable[originalFileFullPath];
-            _docTable.Remove(originalFileFullPath);
-
-            _docTable.Add(toMoveFileFullPath, data);
-        }
-
-
-        /****************************************************************/
-        /// <summary>
-        /// 파일을 다른 어셈블리로 이동시킵니다.
-        /// </summary>
-        /// <param name="originalFileFullPath">이동 전 절대경로 fullPath</param>
-        /// <param name="toMoveAssemblyName">이동 할 어셈블리 명</param>
-        /// <param name="toMoveFileFullPath">이동 후의 절대경로 fullPath</param>
-        /****************************************************************/
-        public void MoveFileToOtherAssembly(string originalFileFullPath,
-                                                               string toMoveAssemblyName,
-                                                               string toMoveFileFullPath)
-        {
-            MoveFile(originalFileFullPath, toMoveFileFullPath);
-
-            RemoveFileFromAssembly(originalFileFullPath);
-            AddFileToAssembly(toMoveAssemblyName, toMoveFileFullPath);
-
-            var data = _docTable[toMoveFileFullPath];
-            NewParsing(toMoveFileFullPath, data.OriginalData);
-        }
-
+        public AJProject GetProject(string projectName) => _assemblyDic[projectName];
 
 
         public string GetAssemblyName(string fileFullPath) => GetAssemblyInfo(fileFullPath).AssemblyName;
@@ -191,18 +67,19 @@ namespace Compile.AJ
 
         /****************************************************************/
         /// <summary>
-        /// fileFullPath가 속한 어셈블리 정보를 가져옵니다.
+        /// <para>Get the project that included file. file has to the full path.</para>
+        /// <para>파일이 속한 프로젝트 정보를 가져옵니다. 파일은 전체 절대 경로 여야 합니다.</para>
         /// </summary>
-        /// <param name="fileFullPath"></param>
+        /// <param name="fileAFullPath">The file absolute full path to get the project information</param>
         /// <returns></returns>
         /****************************************************************/
-        public AssemblyInfo GetAssemblyInfo(string fileFullPath)
+        public AJProject GetAssemblyInfo(string fileAFullPath)
         {
-            AssemblyInfo result = null;
+            AJProject result = null;
 
             foreach (var value in _assemblyDic)
             {
-                if (!value.Value.FileFullPaths.Contains(fileFullPath)) continue;
+                if (!value.Value.SourceFileAFullPaths.Contains(fileAFullPath)) continue;
 
                 result = value.Value;
             }
@@ -211,9 +88,9 @@ namespace Compile.AJ
         }
 
 
-        public void AddReferenceAssembly(AssemblyInfo from, AssemblyInfo target)
+        public void AddReferenceAssembly(AJProject from, AJProject target)
         {
-            from.ReferenceAssemblies.Add(target);
+            from.ReferenceProjects.Add(target);
         }
 
 
@@ -224,10 +101,6 @@ namespace Compile.AJ
             if (fileFullPath.Length == 0)
                 throw new Exception(string.Format(Resource.FileNameCantEmpty));
 
-            var assemblyName = GetAssemblyName(fileFullPath);
-            if (!_assemblyDic.ContainsKey(assemblyName))
-                throw new Exception(string.Format(Resource.NotRegisteredFile, fileFullPath));
-
             ReplaceByMacroCompleted?.Invoke(this, data);
 
             // lexing
@@ -235,7 +108,7 @@ namespace Compile.AJ
             LexingCompleted?.Invoke(this, lexingData);
 
             // parsing
-            var parsingResult = _parser.Parsing(lexingData.TokensForParsing);
+            var parsingResult = Parser.Parsing(lexingData.TokensForParsing);
             ParsingCompleted?.Invoke(this, parsingResult);
 
             _docTable[fileFullPath] = new TotalData(data, data, lexingData, parsingResult);
@@ -263,7 +136,7 @@ namespace Compile.AJ
             LexingCompleted?.Invoke(this, lexingData);
 
             // parsing
-            var parsingResult = _parser.Parsing(lexingData, totalData.ParsedData);
+            var parsingResult = Parser.Parsing(lexingData, totalData.ParsedData);
             ParsingCompleted?.Invoke(this, parsingResult);
 
             _docTable[fileFullPath] = new TotalData(data, data, lexingData, parsingResult);
@@ -291,7 +164,7 @@ namespace Compile.AJ
             LexingCompleted?.Invoke(this, lexingData);
 
             // parsing
-            var parsingResult = _parser.Parsing(lexingData, totalData.ParsedData);
+            var parsingResult = Parser.Parsing(lexingData, totalData.ParsedData);
             ParsingCompleted?.Invoke(this, parsingResult);
 
             _docTable[fileFullPath] = new TotalData(data, data, lexingData, parsingResult);
@@ -324,20 +197,19 @@ namespace Compile.AJ
         /// fileFullPath의 내용을 의미분석합니다. 오류 발생 시 null을 반환합니다.
         /// </summary>
         /// <param name="fileFullPath"></param>
+        /// <param name="parameter"></param>
+        /// <param name="build"></param>
         /// <returns></returns>
         /****************************************************************/
-        public SemanticAnalysisResult StartSemanticAnalysis(string fileFullPath)
+        public SemanticAnalysisResult StartSemanticAnalysis(string fileFullPath, CompileParameter parameter, bool build = false)
         {
             try
             {
                 var totalData = _docTable[fileFullPath];
                 AstSymbol rootSymbol = totalData.ParsedData.AstRoot;
 
-                var param = new AJSdtsParams(0, 0, GetAssemblyInfo(fileFullPath), _rootData);
-                totalData.RootNode = rootSymbol.Sdts.Build(param) as AJNode;
-                var result = new SemanticAnalysisResult(totalData.RootNode, new List<AstSymbol>());
-
-                return result;
+                totalData.RootNode = rootSymbol.Sdts.Compile(parameter) as AJNode;
+                return new SemanticAnalysisResult(totalData.RootNode, new List<AstSymbol>());
             }
             catch (Exception ex)
             {
@@ -349,9 +221,8 @@ namespace Compile.AJ
         private Lexer _lexer = new Lexer();
         private Grammar _miniC = new AJGrammar();
         private RootData _rootData = new RootData();
-        private LRParser _parser;
+        public LRParser Parser { get; private set; }
 
-        private Dictionary<string, TotalData> _docTable = new Dictionary<string, TotalData>();
-        private Dictionary<string, AssemblyInfo> _assemblyDic = new Dictionary<string, AssemblyInfo>();
+        private List<CompileResult> _compileResult = new List<CompileResult>();
     }
 }

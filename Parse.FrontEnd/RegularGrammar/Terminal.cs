@@ -26,6 +26,7 @@ namespace Parse.FrontEnd.RegularGrammar
         }
 
 
+        /***************************************************************************************/
         /// <summary>
         /// 
         /// </summary>
@@ -33,6 +34,7 @@ namespace Parse.FrontEnd.RegularGrammar
         /// <param name="value"></param>
         /// <param name="meaning"></param>
         /// <param name="bWord">If this argument is false regex expression is displayed like as (ex : ++ -> \b++\b)</param>
+        /***************************************************************************************/
         public Terminal(TokenType type, string value, bool meaning = true, bool bWord = false) : this(type, value, value, meaning, bWord)
         {
         }
@@ -109,6 +111,6 @@ namespace Parse.FrontEnd.RegularGrammar
             this.UniqueKey = KeyManager.EndMarkerKey;
         }
 
-        public override string ToString() => string.Format("This is EndMarker! char : {0}", EndMarkerChar);
+        public override string ToString() => $"This is EndMarker! char : {EndMarkerChar}";
     }
 }

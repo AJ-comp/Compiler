@@ -77,9 +77,7 @@ namespace Parse.FrontEnd.ErrorHandler.GrammarPrivate
             if (bRemoveFailedUnit)
                 curBlock.RemoveLastToken(true);
 
-            Random random = new Random();
-            var asId = random.Next(-99999999, -1);
-            var virtualToken = new TokenData(virtualT, new TokenCell(asId, virtualT.Value, null), true);
+            var virtualToken = TokenData.CreateVirtualToken(virtualT);
             var blockParsingResult = InsertVirtualToken(dataForRecovery, virtualToken);
 
             if (blockParsingResult == SuccessedKind.NotApplicable)
@@ -122,11 +120,14 @@ namespace Parse.FrontEnd.ErrorHandler.GrammarPrivate
                 dataForRecovery.ToErrorHandlingResult(false) : dataForRecovery.ToErrorHandlingResult(true);
         }
 
+
+        /******************************************************************************/
         /// <summary>
         /// This function returns a parsing result after insert virtualToken front of the token of the seeingBlock.
         /// </summary>
         /// <param name="virtualToken"></param>
         /// <returns></returns>
+        /******************************************************************************/
         protected SuccessedKind InsertVirtualToken(DataForRecovery dataForRecovery, TokenData virtualToken)
         {
             var token = dataForRecovery.CurBlock.Token;
@@ -147,6 +148,8 @@ namespace Parse.FrontEnd.ErrorHandler.GrammarPrivate
             return lrParser.RecoveryBlockParsing(dataForRecovery.CurBlock, param);
         }
 
+
+        /******************************************************************************/
         /// <summary>
         /// This function returns a parsing result after replaces the token that current seeing to the virtual token.
         /// </summary>
@@ -156,6 +159,7 @@ namespace Parse.FrontEnd.ErrorHandler.GrammarPrivate
         /// <param name="seeingTokenIndex"></param>
         /// <param name="virtualToken">The virtual token to replace a exist token</param>
         /// <returns></returns>
+        /******************************************************************************/
         protected SuccessedKind ReplaceToVirtualToken(DataForRecovery dataForRecovery, TokenData virtualToken)
         {
             var token = dataForRecovery.CurBlock.Token;
@@ -176,11 +180,14 @@ namespace Parse.FrontEnd.ErrorHandler.GrammarPrivate
             return lrSnippet.RecoveryBlockParsing(dataForRecovery.CurBlock, param);
         }
 
+
+        /**********************************************************/
         /// <summary>
         /// This function deletes the current token. (ignore effect)
         /// </summary>
         /// <param name="dataForRecovery"></param>
         /// <returns></returns>
+        /**********************************************************/
         protected ErrorHandlingResult RecoveryWithDelCurToken(DataForRecovery dataForRecovery)
         {
             // skip current token because of this token is useless

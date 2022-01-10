@@ -166,7 +166,7 @@ namespace ApplicationLayer.ViewModels.DocumentTypeViewModels
                 foreach (var classData in namespaceNode.ClassDatas)
                 {
                     var cData = classData as ClassDefData;
-                    if (cData.NameToken.IsVirtual) continue;
+                    if (cData.Token.IsVirtual) continue;
 
                     var varTreeNode = new ClassTreeNodeModel(cData);
                     _fileNode.AddChildren(varTreeNode);
@@ -181,7 +181,7 @@ namespace ApplicationLayer.ViewModels.DocumentTypeViewModels
                         () =>
                         {
                             // Add abstract function list information to the current FileTreeNode.
-                            foreach (var funcData in cData.Funcs)
+                            foreach (var funcData in cData.AllFuncs)
                                 childNode.AddChildren(new FuncTreeNodeModel(funcData));
                         });
                 }

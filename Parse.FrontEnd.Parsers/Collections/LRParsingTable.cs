@@ -61,6 +61,19 @@ namespace Parse.FrontEnd.Parsers.Collections
             }
         }
 
+        public IEnumerable<Symbol> AllSymbols
+        {
+            get
+            {
+                List<Symbol> result = new List<Symbol>();
+
+                result.AddRange(RefNonTerminalSet);
+                result.AddRange(RefTerminalSet);
+
+                return result;
+            }
+        }
+
         public string Introduce { get; set; } = "Vi / Vt";
 
         private void CreateColumns(DataTable dataTable)
@@ -101,13 +114,14 @@ namespace Parse.FrontEnd.Parsers.Collections
             {
                 DataRow row = dataTable.NewRow();
 
-                row[this.Introduce] = "I" + index++.ToString();
+                row[this.Introduce] = $"I{index++}";
                 foreach (var matchedItem in item.MatchedValueSet)
                 {
                     string moveInfo = matchedItem.Value.Item1.ToString();
-                    var destInfo = (matchedItem.Value.Item2 is NonTerminalSingle) ? (matchedItem.Value.Item2 as NonTerminalSingle).ToGrammarString() : (matchedItem.Value.Item2 as int?).ToString();
+                    var destInfo = (matchedItem.Value.Item2 is NonTerminalSingle) ? (matchedItem.Value.Item2 as NonTerminalSingle).ToGrammarString()
+                                                                                                                 : (matchedItem.Value.Item2 as int?).ToString();
 
-                    row[matchedItem.Key.ToString()] = moveInfo + " [" + destInfo + "]";
+                    row[matchedItem.Key.ToString()] = moveInfo + $" [{destInfo}]";
                 }
 
                 dataTable.Rows.Add(row);
@@ -115,7 +129,7 @@ namespace Parse.FrontEnd.Parsers.Collections
         }
 
         /// <summary>
-        /// This function calculates core datas for parsing table.
+        /// This function calculates the core datas for parsing table.
         /// </summary>
         /// <param name="datas">First param needs CanonicalTable type and Second param needs RelationData type</param>
         public void CreateParsingTable(params object[] datas)

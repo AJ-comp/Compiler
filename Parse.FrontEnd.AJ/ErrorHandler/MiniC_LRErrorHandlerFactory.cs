@@ -33,33 +33,33 @@ namespace Parse.FrontEnd.AJ.ErrorHandler
                     if (rowData.MatchedValueSet.ContainsKey(terminal)) continue;
 
                     if (terminal == grammar.If)
-                        rowData.MatchedValueSet.Add(terminal, new Tuple<ActionDir, object>(ActionDir.failed, new If_ErrorHandler(grammar, ixIndex)));
+                        rowData.MatchedValueSet.Add(terminal, new Tuple<ActionDir, object>(ActionDir.Failed, new If_ErrorHandler(grammar, ixIndex)));
                     else if (terminal == grammar.Else)
-                        rowData.MatchedValueSet.Add(terminal, new Tuple<ActionDir, object>(ActionDir.failed, new Else_ErrorHandler(grammar, ixIndex)));
+                        rowData.MatchedValueSet.Add(terminal, new Tuple<ActionDir, object>(ActionDir.Failed, new Else_ErrorHandler(grammar, ixIndex)));
                     else if (terminal == grammar.While)
-                        rowData.MatchedValueSet.Add(terminal, new Tuple<ActionDir, object>(ActionDir.failed, new While_ErrorHandler(grammar, ixIndex)));
+                        rowData.MatchedValueSet.Add(terminal, new Tuple<ActionDir, object>(ActionDir.Failed, new While_ErrorHandler(grammar, ixIndex)));
                     else if (terminal == grammar.Return)
-                        rowData.MatchedValueSet.Add(terminal, new Tuple<ActionDir, object>(ActionDir.failed, new Return_ErrorHandler(grammar, ixIndex)));
-                    else if (terminal == grammar.Const)
-                        rowData.MatchedValueSet.Add(terminal, new Tuple<ActionDir, object>(ActionDir.failed, new Const_ErrorHandler(grammar, ixIndex)));
+                        rowData.MatchedValueSet.Add(terminal, new Tuple<ActionDir, object>(ActionDir.Failed, new Return_ErrorHandler(grammar, ixIndex)));
+                    else if (terminal == AJGrammar.Const)
+                        rowData.MatchedValueSet.Add(terminal, new Tuple<ActionDir, object>(ActionDir.Failed, new Const_ErrorHandler(grammar, ixIndex)));
                     else if (terminal == AJGrammar.Void)
-                        rowData.MatchedValueSet.Add(terminal, new Tuple<ActionDir, object>(ActionDir.failed, new Void_ErrorHandler(grammar, ixIndex)));
+                        rowData.MatchedValueSet.Add(terminal, new Tuple<ActionDir, object>(ActionDir.Failed, new Void_ErrorHandler(grammar, ixIndex)));
                     else if (terminal == AJGrammar.Int)
-                        rowData.MatchedValueSet.Add(terminal, new Tuple<ActionDir, object>(ActionDir.failed, new Int_ErrorHandler(grammar, ixIndex)));
+                        rowData.MatchedValueSet.Add(terminal, new Tuple<ActionDir, object>(ActionDir.Failed, new Int_ErrorHandler(grammar, ixIndex)));
                     else if(terminal == AJGrammar.Ident)
-                        rowData.MatchedValueSet.Add(terminal, new Tuple<ActionDir, object>(ActionDir.failed, new Ident_ErrorHandler(grammar, ixIndex)));
+                        rowData.MatchedValueSet.Add(terminal, new Tuple<ActionDir, object>(ActionDir.Failed, new Ident_ErrorHandler(grammar, ixIndex)));
                     else if (terminal == grammar.OpenParenthesis)
-                        rowData.MatchedValueSet.Add(terminal, new Tuple<ActionDir, object>(ActionDir.failed, new OpenParenthesis_ErrorHandler(grammar, ixIndex)));
+                        rowData.MatchedValueSet.Add(terminal, new Tuple<ActionDir, object>(ActionDir.Failed, new OpenParenthesis_ErrorHandler(grammar, ixIndex)));
                     else if(terminal == grammar.CloseParenthesis)
-                        rowData.MatchedValueSet.Add(terminal, new Tuple<ActionDir, object>(ActionDir.failed, new CloseParenthesis_ErrorHandler(grammar, ixIndex)));
+                        rowData.MatchedValueSet.Add(terminal, new Tuple<ActionDir, object>(ActionDir.Failed, new CloseParenthesis_ErrorHandler(grammar, ixIndex)));
                     else if (terminal == grammar.OpenCurlyBrace)
-                        rowData.MatchedValueSet.Add(terminal, new Tuple<ActionDir, object>(ActionDir.failed, new OpenCurlyBrace_ErrorHandler(grammar, ixIndex)));
+                        rowData.MatchedValueSet.Add(terminal, new Tuple<ActionDir, object>(ActionDir.Failed, new OpenCurlyBrace_ErrorHandler(grammar, ixIndex)));
                     else if (terminal == grammar.CloseCurlyBrace)
-                        rowData.MatchedValueSet.Add(terminal, new Tuple<ActionDir, object>(ActionDir.failed, new CloseCurlyBrace_ErrorHandler(grammar, ixIndex)));
+                        rowData.MatchedValueSet.Add(terminal, new Tuple<ActionDir, object>(ActionDir.Failed, new CloseCurlyBrace_ErrorHandler(grammar, ixIndex)));
                     else if (terminal == new EndMarker())
-                        rowData.MatchedValueSet.Add(terminal, new Tuple<ActionDir, object>(ActionDir.failed, new EndMarker_ErrorHandler(grammar, ixIndex)));
+                        rowData.MatchedValueSet.Add(terminal, new Tuple<ActionDir, object>(ActionDir.Failed, new EndMarker_ErrorHandler(grammar, ixIndex)));
                     else
-                        rowData.MatchedValueSet.Add(terminal, new Tuple<ActionDir, object>(ActionDir.failed, this.defaultHandler));
+                        rowData.MatchedValueSet.Add(terminal, new Tuple<ActionDir, object>(ActionDir.Failed, this.defaultHandler));
                 }
             }
         }

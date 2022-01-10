@@ -38,8 +38,7 @@ namespace ApplicationLayer.ViewModels
                     var bitCodeFullPath = Path.Combine(solutionBinFolderPath, bitCodeFile);
                     string bitCodeMessage = string.Format(ViewResources.GenerateFile_1, bitCodeFile);
                     compiler.AllBuild();
-                    var finalExpression = compiler.GetFinalExpression(file.FullPath);
-                    Builder.CreateBitCode(finalExpression, bitCodeFullPath);
+//                    Builder.CreateBitCode(finalExpression, bitCodeFullPath);
                     Messenger.Default.Send(new AddBuildMessage(bitCodeMessage));
 
                     // create target code

@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "CommandPrompt.Util": {
+      "commandName": "Project",
+      "commandLineArgs": "ajutil print first-follow --output C:\\aws\\test\\first_follow.csv"
+    }
+  }
+}

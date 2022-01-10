@@ -6,7 +6,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Parse.FrontEnd\Parse.FrontEnd.csproj" />
-    <ProjectReference Include="..\Parse.MiddleEnd.IR\Parse.MiddleEnd.IR.csproj" />
     <ProjectReference Include="..\Parse\Parse.csproj" />
   </ItemGroup>
 

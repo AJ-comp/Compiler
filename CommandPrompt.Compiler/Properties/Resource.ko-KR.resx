@@ -135,13 +135,16 @@
   <data name="OutputFile" xml:space="preserve">
     <value>출력 파일</value>
   </data>
-  <data name="CreateProject" xml:space="preserve">
-    <value>프로젝트 생성</value>
-  </data>
   <data name="ProjectFullPath" xml:space="preserve">
     <value>프로젝트 명을 포함한 전체 경로</value>
   </data>
-  <data name="CreateSolution" xml:space="preserve">
-    <value>솔루션 생성</value>
+  <data name="Ajc" xml:space="preserve">
+    <value>AJ 컴파일러</value>
+  </data>
+  <data name="ToBinary" xml:space="preserve">
+    <value>바이너리 파일로 만듭니다.</value>
+  </data>
+  <data name="ToLibrary" xml:space="preserve">
+    <value>라이브러리 파일로 만듭니다.</value>
   </data>
 </root>

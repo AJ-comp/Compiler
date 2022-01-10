@@ -1,0 +1,207 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="CreateSolution" xml:space="preserve">
+    <value>솔루션을 생성합니다</value>
+  </data>
+  <data name="Version" xml:space="preserve">
+    <value>버전 정보를 보여줍니다</value>
+  </data>
+  <data name="Sln" xml:space="preserve">
+    <value>솔루션 파일의 프로젝트를 나열하거나 수정합니다</value>
+  </data>
+  <data name="ListProject" xml:space="preserve">
+    <value>솔루션 파일의 모든 프로젝트를 나열합니다</value>
+  </data>
+  <data name="AddProject" xml:space="preserve">
+    <value>솔루션 파일에 프로젝트를 추가합니다</value>
+  </data>
+  <data name="RemoveProject" xml:space="preserve">
+    <value>솔루션 파일에서 프로젝트를 제거합니다</value>
+  </data>
+  <data name="NewCommand" xml:space="preserve">
+    <value>지정된 템플릿을 기반으로 새 프로젝트, 구성파일 또는 솔루션을 만듭니다</value>
+  </data>
+  <data name="Output" xml:space="preserve">
+    <value>생성된 출력을 배치할 위치 기본값은 현재 디렉터리입니다</value>
+  </data>
+  <data name="AJBuild" xml:space="preserve">
+    <value>빌드 솔루션을 구축하기 위한 cli 프로그램입니다</value>
+  </data>
+  <data name="Template" xml:space="preserve">
+    <value>명령이 호출될 때 인스턴스화할 템플릿입니다. 각 템플릿에는 전달할 수 있는 특정 옵션이 있을 수 있습니다. 자세한 내용은 템플릿 옵션을 참조하세요. ajbuild new --list를 실행하여 설치된 모든 템플릿의 목록을 볼 수 있습니다.</value>
+  </data>
+  <data name="ListTemplate" xml:space="preserve">
+    <value>지정된 템플릿 이름이 포함된 템플릿을 나열합니다. 이름을 지정하지 않으면 모든 템플릿을 나열합니다.</value>
+  </data>
+  <data name="CreateStartProject" xml:space="preserve">
+    <value>시작 프로젝트를 생성합니다.</value>
+  </data>
+  <data name="CreateLibraryProject" xml:space="preserve">
+    <value>라이브러리 프로젝트를 생성합니다.</value>
+  </data>
+  <data name="CreateSolutionSuccess" xml:space="preserve">
+    <value>솔루션 파일을 생성하였습니다.</value>
+  </data>
+  <data name="Path" xml:space="preserve">
+    <value>경로: </value>
+  </data>
+  <data name="CreateProjectSuccess" xml:space="preserve">
+    <value>프로젝트 파일을 생성하였습니다.</value>
+  </data>
+  <data name="ErrorReadSolution" xml:space="preserve">
+    <value>해당 경로에 솔루션 파일이 없거나 2개 이상의 솔루션 파일이 존재합니다.</value>
+  </data>
+  <data name="AddProjectSuccess" xml:space="preserve">
+    <value>프로젝트가 솔루션에 추가되었습니다.</value>
+  </data>
+  <data name="ErrorReadProject" xml:space="preserve">
+    <value>해당 경로에 프로젝트 파일이 없거나 2개 이상의 프로젝트 파일이 존재합니다.</value>
+  </data>
+  <data name="RemoveProjectSuccess" xml:space="preserve">
+    <value>솔루션에서 프로젝트가 제거되었습니다.</value>
+  </data>
+  <data name="BuildTarget" xml:space="preserve">
+    <value>빌드할 프로젝트 또는 솔루션 파일입니다. 프로젝트 또는 솔루션 파일을 지정하지 않으면 현재 작업 디렉터리에서 프로젝트파일 또는 솔루션 파일을 검색하고 해당 파일을 사용합니다.</value>
+  </data>
+  <data name="ArchOption" xml:space="preserve">
+    <value>대상 아키텍처를 지정합니다. ajbuild arch --list 명령을 통해 지원되는 아키텍처 종류를 볼 수 있습니다.</value>
+  </data>
+  <data name="ListArch" xml:space="preserve">
+    <value>지원되는 아키텍처 리스트를 나열합니다.</value>
+  </data>
+  <data name="ArmArch" xml:space="preserve">
+    <value>ARM 아키텍처를 지정합니다.</value>
+  </data>
+  <data name="AvrArch" xml:space="preserve">
+    <value>AVR 아키텍처를 지정합니다.</value>
+  </data>
+  <data name="Arch" xml:space="preserve">
+    <value>대상 아키텍처와 관련된 세부 내용들을 보여줍니다.</value>
+  </data>
+  <data name="Build" xml:space="preserve">
+    <value>이진 파일 집합으로 프로젝트와 해당 종속성을 빌드합니다.</value>
+  </data>
+  <data name="BuildConfig" xml:space="preserve">
+    <value>빌드 구성을 정의합니다. 기본 값은 debug 이며, 지원되는 빌드 구성은 다음과 같습니다. debug, release</value>
+  </data>
+  <data name="OutputFormat" xml:space="preserve">
+    <value>출력 형식을 지정합니다.</value>
+  </data>
+</root>

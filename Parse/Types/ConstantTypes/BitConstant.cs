@@ -37,7 +37,7 @@ namespace Parse.Types.ConstantTypes
             Constant result = null;
 
             if (to == StdType.Bit) result = this;
-            else if (to == StdType.Byte) result = new ByteConstant((byte)Value, ValueState);
+            else if (to == StdType.Char) result = new ByteConstant((byte)Value, ValueState);
             else if (to == StdType.Int) result = new IntConstant((int)Value, ValueState);
             else if (to == StdType.Double) result = new DoubleConstant((double)Value, ValueState);
 

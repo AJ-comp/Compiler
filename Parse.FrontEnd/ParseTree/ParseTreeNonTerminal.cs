@@ -65,7 +65,7 @@ namespace Parse.FrontEnd.ParseTree
                 if (SignPost.IsInduceEpsilon) return false;
                 if (_symbols.Count == 0) return false;
 
-                foreach(var item in _symbols)
+                foreach (var item in _symbols)
                 {
                     if (item.IsVirtual == false) return false;
                 }
@@ -86,7 +86,7 @@ namespace Parse.FrontEnd.ParseTree
                             return true;
                     }
 
-                    else if(item is ParseTreeNonTerminal)
+                    else if (item is ParseTreeNonTerminal)
                     {
                         if ((item as ParseTreeNonTerminal).SignPost.MeaningUnit != null)
                             return true;

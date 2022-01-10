@@ -1,5 +1,6 @@
-﻿using Parse.FrontEnd.Ast;
-using Parse.FrontEnd.AJ.Sdts.Datas;
+﻿using Parse.FrontEnd.AJ.Data;
+using Parse.FrontEnd.Ast;
+using Parse.MiddleEnd.IR.Expressions;
 
 namespace Parse.FrontEnd.AJ.Sdts.AstNodes
 {
@@ -11,9 +12,9 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes
         {
         }
 
-        public override SdtsNode Build(SdtsParams param)
+        public override SdtsNode Compile(CompileParameter param)
         {
-            var terminalNode = Items[0].Build(param) as TerminalNode;
+            var terminalNode = Items[0].Compile(param) as TerminalNode;
 
             if (terminalNode.Token.Kind == AJGrammar.Private) AccessState = Access.Private;
             else if (terminalNode.Token.Kind == AJGrammar.Public) AccessState = Access.Public;

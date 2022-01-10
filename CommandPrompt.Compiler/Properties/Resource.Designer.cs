@@ -61,6 +61,15 @@ namespace CommandPrompt.Compiler.Properties {
         }
         
         /// <summary>
+        ///   AJ Compiler과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        internal static string Ajc {
+            get {
+                return ResourceManager.GetString("Ajc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Create the assembly file after compile.과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         internal static string Assembly {
@@ -75,24 +84,6 @@ namespace CommandPrompt.Compiler.Properties {
         internal static string Compile {
             get {
                 return ResourceManager.GetString("Compile", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Create Project과(와) 유사한 지역화된 문자열을 찾습니다.
-        /// </summary>
-        internal static string CreateProject {
-            get {
-                return ResourceManager.GetString("CreateProject", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Create Solution과(와) 유사한 지역화된 문자열을 찾습니다.
-        /// </summary>
-        internal static string CreateSolution {
-            get {
-                return ResourceManager.GetString("CreateSolution", resourceCulture);
             }
         }
         
@@ -129,6 +120,24 @@ namespace CommandPrompt.Compiler.Properties {
         internal static string ProjectFullPath {
             get {
                 return ResourceManager.GetString("ProjectFullPath", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Create to binary file.과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        internal static string ToBinary {
+            get {
+                return ResourceManager.GetString("ToBinary", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Create to library file.과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        internal static string ToLibrary {
+            get {
+                return ResourceManager.GetString("ToLibrary", resourceCulture);
             }
         }
         

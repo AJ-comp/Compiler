@@ -8,10 +8,10 @@ namespace Parse.FrontEnd.Parsers
     public class Analyzer
     {
         /// <summary>
-        /// Get the first terminal set that can is induced by the symbol
+        /// <para>Get the first terminal set that can is induced by the symbol.</para>
+        /// <para>symbol로 부터 첫번째로 유도될 수 있는 단말 집합을 가져옵니다.</para>
         /// </summary>
         /// <param name="symbol"></param>
-        /// <param name="explorSet"></param>
         /// <returns></returns>
         public static TerminalSet FirstTerminalSet(Symbol symbol)
         {
@@ -30,10 +30,10 @@ namespace Parse.FrontEnd.Parsers
         }
 
         /// <summary>
-        /// Get the first terminal set that can is induced by the symbolList
+        /// <para>Get the first terminal set that can is induced by the singleNT.</para>
+        /// <para>비단말 기호로 부터 첫번째로 유도될 수 있는 단말 집합을 가져옵니다. </para>
         /// </summary>
-        /// <param name="symbolList"></param>
-        /// <param name="explorSet"></param>
+        /// <param name="singleNT"></param>
         /// <returns></returns>
         public static TerminalSet FirstTerminalSet(NonTerminalSingle singleNT)
         {
@@ -52,7 +52,8 @@ namespace Parse.FrontEnd.Parsers
         }
 
         /// <summary>
-        /// Get the second terminal set that can is induced by the symbol
+        /// <para>Get the second terminal set that can is induced by the symbol.</para>
+        /// <para></para>
         /// </summary>
         /// <param name="nonTerminal"></param>
         /// <returns></returns>
@@ -63,7 +64,8 @@ namespace Parse.FrontEnd.Parsers
 
 
         /// <summary>
-        /// 현재 등록된 모든 유도식에서 nonTerminal "다음에 오는" 모든 symbol 집합을 찾는다
+        /// <para>Get all symbol set that can come next of nonTerminal from allNonTerminal.</para>
+        /// <para>현재 등록된 모든 유도식에서 nonTerminal <b><i>다음에 오는</i></b> 모든 symbol 집합을 찾습니다.</para>
         /// </summary>
         /// <param name="nonTerminal"></param>
         /// <returns></returns>
@@ -79,7 +81,7 @@ namespace Parse.FrontEnd.Parsers
 
 
         /// <summary>
-        /// nonTerminal의 유도식 에서 findSymbol "다음에 오는" 모든 심벌집합을 찾는다
+        /// nonTerminal의 유도식 에서 findSymbol <b><i>다음에 오는</i></b> 모든 심벌집합을 찾습니다.
         /// </summary>
         /// <param name="nonTerminal">유도식의 최상단</param>
         /// <param name="findSymbol">찾고자 하는 심벌집합의 기준이 되는 심벌</param>

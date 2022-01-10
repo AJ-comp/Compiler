@@ -20,6 +20,11 @@ namespace Parse.FrontEnd.Parsers
         public override event EventHandler<ParseCreatedArgs> ParseTreeCreated;
         public override event EventHandler<AstSymbol> ASTCreated;
 
+        public override FirstAndFollowCollection GetFirstAndFollow()
+        {
+            throw new Exception();
+        }
+
         public string ShowStack => string.Join("", this.stack);
         public override IParsingTable ParsingTable => null;
 

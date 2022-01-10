@@ -35,7 +35,7 @@
                 var data = (int)Value != 0;
                 result = new BitConstant(data, ValueState);
             }
-            else if (to == StdType.Byte)
+            else if (to == StdType.Char)
             {
                 result = (Signed) ? new ByteConstant((sbyte)Value, ValueState)
                                           : new ByteConstant((byte)Value, ValueState);

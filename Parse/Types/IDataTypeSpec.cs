@@ -3,20 +3,17 @@ using System.ComponentModel;
 
 namespace Parse.Types
 {
-    public enum StdType 
-    { 
+    public enum StdType
+    {
         [Description("error")] Error,
         [Description("?")] Unknown,
+        [Description("null")] Null,
         [Description("void")] Void,
-        [Description("bit")] Bit, 
-        [Description("byte")] Byte,
-        [Description("sbyte")] SByte,
+        [Description("bool")] Bit, 
+        [Description("char")] Char,
         [Description("short")] Short,
-        [Description("ushort")] UShort,
         [Description("int")] Int,
-        [Description("uint")] UInt,
         [Description("double")] Double,
-        [Description("string")] String,
         [Description("struct")] Struct,
         [Description("enum")] Enum,
     }

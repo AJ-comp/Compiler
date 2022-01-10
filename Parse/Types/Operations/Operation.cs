@@ -137,14 +137,6 @@ namespace Parse.Types.Operations
         {
             try
             {
-                // case string
-                if (operand2 is IString)
-                {
-                    var strValue = operand1.Value.ToString() + operand2.Value.ToString();
-
-                    return new StringConstant(strValue);
-                }
-
                 double value = Convert.ToDouble(operand1.Value) + Convert.ToDouble(operand2.Value);
                 return CommonArithmeticLogic(operand1, operand2, value);
             }
@@ -306,12 +298,6 @@ namespace Parse.Types.Operations
         {
             try
             {
-                if (operand2 is IString)
-                {
-                    string targetValue = operand2.Value as string;
-                    return new BitConstant((string)operand1.Value == targetValue);
-                }
-
                 return new UnknownConstant();
             }
             catch
@@ -324,12 +310,6 @@ namespace Parse.Types.Operations
         {
             try
             {
-                if (operand2 is IString)
-                {
-                    string targetValue = operand2.Value as string;
-                    return new BitConstant((string)operand1.Value != targetValue);
-                }
-
                 return new UnknownConstant();
             }
             catch
@@ -343,20 +323,6 @@ namespace Parse.Types.Operations
         {
             try
             {
-                if (operand2 is IString)
-                {
-                    string targetValue = operand1.Value + (operand2.Value as string);
-
-                    return new StringConstant(targetValue);
-                }
-
-                if (operand2 is IInt)
-                {
-                    string targetValue = operand1.Value + (operand2.Value.ToString());
-
-                    return new StringConstant(operand1.Value + targetValue);
-                }
-
                 return new UnknownConstant();
             }
             catch

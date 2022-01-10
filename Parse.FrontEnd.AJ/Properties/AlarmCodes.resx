@@ -104,7 +104,7 @@
     <value>{0} is not defined.</value>
   </data>
   <data name="MCL0002" xml:space="preserve">
-    <value>Value can not be changed because the constant type.</value>
+    <value>Value can not be changed because {0} is the constant type.</value>
   </data>
   <data name="MCL0003" xml:space="preserve">
     <value>It can not be allocated because the data type differs.</value>
@@ -137,7 +137,7 @@
     <value>The operand of the inc or dec has to be variable, property or indexer.</value>
   </data>
   <data name="MCL0013" xml:space="preserve">
-    <value>The operator '{0}' is not applicated to string type.</value>
+    <value>The operator '{0}' is not applicated to {1} type operand.</value>
   </data>
   <data name="MCL0014" xml:space="preserve">
     <value>The member '{0}' is not used as method.</value>
@@ -168,5 +168,11 @@
   </data>
   <data name="MCL0023" xml:space="preserve">
     <value>'{0}' operator can't be applied to '{1}' and '{2}' type operand.</value>
+  </data>
+  <data name="MCL0024" xml:space="preserve">
+    <value>The type '{0}' and '{1}' can't be compared.</value>
+  </data>
+  <data name="MCL0025" xml:space="preserve">
+    <value>It can't convert from {0} type to {1} type implicitly.</value>
   </data>
 </root>

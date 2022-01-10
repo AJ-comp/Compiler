@@ -11,9 +11,9 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes
         {
         }
 
-        public override SdtsNode Build(SdtsParams param)
+        public override SdtsNode Compile(CompileParameter param)
         {
-            Items[0].Build(param);
+            Items[0].Compile(param);
             ConstToken = (Items[0] as TerminalNode).Token;
 
             return this;

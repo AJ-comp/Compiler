@@ -1,12 +1,12 @@
 ﻿using ApplicationLayer.Common;
-using Parse.FrontEnd.AJ.Sdts.Datas.Variables;
+using Parse.FrontEnd.AJ.Data;
 using System;
 
 namespace ApplicationLayer.Models.SolutionPackage.MiniCPackage
 {
     public class VarTreeNodeModel : TreeNodeModel
     {
-        public bool IsConst => (_varData != null) && _varData.IsConst;
+        public bool IsConst => (_varData != null) && _varData.Type.Const;
         public string DataType => (_varData != null) ? _varData.DataType.ToString() : string.Empty;
         public string Name => (_varData != null) ? _varData.Name : string.Empty;
         public string Dimension => (_varData != null) ? _varData.Dimension.ToString() : string.Empty;
@@ -16,7 +16,7 @@ namespace ApplicationLayer.Models.SolutionPackage.MiniCPackage
 
         public override string DisplayName
         {
-            get => string.Format("{0} : {1}", Name, DataType);
+            get => $"{Name} : {DataType}";
             set => throw new Exception();
         }
 
@@ -24,7 +24,7 @@ namespace ApplicationLayer.Models.SolutionPackage.MiniCPackage
 
         public override event EventHandler<FileChangedEventArgs> Changed;
 
-        public VarTreeNodeModel(VariableMiniC varData)
+        public VarTreeNodeModel(VariableAJ varData)
         {
             _varData = varData;
         }
@@ -34,6 +34,6 @@ namespace ApplicationLayer.Models.SolutionPackage.MiniCPackage
         }
 
 
-        private VariableMiniC _varData;
+        private VariableAJ _varData;
     }
 }

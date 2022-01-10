@@ -6,4 +6,8 @@ namespace Parse.Types
     {
         int IDataTypeSpec.Size => 1;
     }
+
+    public interface IBit<T> : IBit
+    {
+    }
 }

@@ -54,15 +54,15 @@ namespace Parse
             }
         }
 
-        public static Digit Digit
+        public static Literal Literal
         {
             get
             {
-                var data = "Digit";
+                var data = "Literal";
                 var hashCode = GetHashCode(data);
                 var cacheType = GetTokenType(hashCode);
 
-                return (cacheType == null) ? new Digit(hashCode, data) : cacheType as Digit;
+                return (cacheType == null) ? new Literal(hashCode, data) : cacheType as Literal;
             }
         }
 

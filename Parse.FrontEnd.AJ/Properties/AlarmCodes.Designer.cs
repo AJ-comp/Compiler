@@ -79,7 +79,7 @@ namespace Parse.FrontEnd.AJ.Properties {
         }
         
         /// <summary>
-        ///   Value can not be changed because the constant type.과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   Value can not be changed because {0} is the constant type.과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string MCL0002 {
             get {
@@ -178,7 +178,7 @@ namespace Parse.FrontEnd.AJ.Properties {
         }
         
         /// <summary>
-        ///   The operator &apos;{0}&apos; is not applicated to string type.과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   The operator &apos;{0}&apos; is not applicated to {1} type operand.과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string MCL0013 {
             get {
@@ -273,6 +273,24 @@ namespace Parse.FrontEnd.AJ.Properties {
         public static string MCL0023 {
             get {
                 return ResourceManager.GetString("MCL0023", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   The type &apos;{0}&apos; and &apos;{1}&apos; can&apos;t be compared.과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string MCL0024 {
+            get {
+                return ResourceManager.GetString("MCL0024", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   It can&apos;t convert from {0} type to {1} type implicitly.과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string MCL0025 {
+            get {
+                return ResourceManager.GetString("MCL0025", resourceCulture);
             }
         }
     }

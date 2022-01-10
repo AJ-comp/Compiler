@@ -39,8 +39,9 @@ namespace Parse.FrontEnd.Tokenize
 
         public bool Contains(int caretIndex, RecognitionWay recognitionWay)
         {
-            return (recognitionWay == RecognitionWay.Back) ?
-                (this.StartIndex < caretIndex && caretIndex <= this.EndIndex + 1) : (this.StartIndex <= caretIndex && caretIndex <= this.EndIndex);
+            return (recognitionWay == RecognitionWay.Back)
+                    ? (this.StartIndex < caretIndex && caretIndex <= this.EndIndex + 1)
+                    : (this.StartIndex <= caretIndex && caretIndex <= this.EndIndex);
         }
 
         public bool MoreRange(int startingPos, int endingPos) => (startingPos <= this.StartIndex && this.EndIndex < endingPos);
@@ -110,8 +111,8 @@ namespace Parse.FrontEnd.Tokenize
                 convertedString = convertedString.Replace("\n", "\\n");
                 convertedString = convertedString.Replace("\t", "\\t");
 
-                var result =  (PatternInfo.Terminal == null) ? string.Format("{0}, \"{1}\", {2}", this.StartIndex, convertedString, "null")
-                                                                                : string.Format("{0}, \"{1}\", {2}", this.StartIndex, convertedString, PatternInfo.Terminal);
+                var result =  (PatternInfo.Terminal == null) ? $"{this.StartIndex}, \"{convertedString}\", null"
+                                                                                : $"{this.StartIndex}, \"{convertedString}\", {PatternInfo.Terminal}";
 
                 return result;
             }

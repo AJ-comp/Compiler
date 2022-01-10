@@ -3,7 +3,9 @@ using Parse.FrontEnd.Ast;
 using Parse.FrontEnd.Grammars;
 using Parse.FrontEnd.Parsers.Collections;
 using Parse.FrontEnd.Parsers.Datas;
+using Parse.FrontEnd.Parsers.Datas.LR;
 using Parse.FrontEnd.Parsers.RelationAnalyzers;
+using Parse.FrontEnd.RegularGrammar;
 using Parse.FrontEnd.Tokenize;
 using System;
 using System.Collections.Generic;
@@ -21,6 +23,126 @@ namespace Parse.FrontEnd.Parsers.LR
         public override IParsingTable ParsingTable { get; } = new LRParsingTable();
         public override string AnalysisResult => this.C0.ToString();
         public override CanonicalTable C0 { get; } = new CanonicalTable();
+
+        public override AmbiguityCheckResult CheckAmbiguity()
+        {
+            var result = new AmbiguityCheckResult();
+
+            foreach (var line in C0.ToCanonicalLineList())
+            {
+                var lineCheckResult = new AmbiguityCheckItem();
+
+                lineCheckResult.CanonicalLine = line;
+
+                if (CheckReduceReduceConflict(line))
+                    lineCheckResult.AmbiguityContent = "reduce-reduce conflict";
+
+                if (CheckShiftReduceConflict(line))
+                    lineCheckResult.AmbiguityContent += "shift-reduce conflict";
+
+                result.Add(lineCheckResult);
+            }
+
+            return result;
+        }
+
+        public override FirstAndFollowCollection GetFirstAndFollow()
+        {
+            var result = new FirstAndFollowCollection();
+
+            foreach (var symbol in ParsingTable.AllSymbols)
+            {
+                if (symbol is NonTerminal)
+                    result.Add(new FirstAndFollowItem(symbol, Analyzer.FirstTerminalSet(symbol), _followAnalyzer.Follow(symbol as NonTerminal)));
+                else
+                    result.Add(new FirstAndFollowItem(symbol, Analyzer.FirstTerminalSet(symbol), new TerminalSet()));
+            }
+
+            return result;
+        }
+
+
+        /// <summary>
+        /// <para>Get all follow set for Nonterminal set.</para>
+        /// </summary>
+        /// <param name="nts"></param>
+        /// <returns></returns>
+        private TerminalSet FollowForNTSet(IEnumerable<NonTerminal> nts)
+        {
+            TerminalSet result = new TerminalSet();
+
+            foreach (var nt in nts)
+            {
+                result.UnionWith(_followAnalyzer.Follow(nt));
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// <para>Get all follow set for Nonterminal set.</para>
+        /// </summary>
+        /// <param name="ntSingles"></param>
+        /// <returns></returns>
+        private TerminalSet FollowForNTSet(IEnumerable<NonTerminalSingle> ntSingles)
+        {
+            List<NonTerminal> convert = new List<NonTerminal>();
+            foreach (var ntSingle in ntSingles)
+            {
+                convert.Add(ntSingle.ToNonTerminal());
+            }
+
+            return FollowForNTSet(convert);
+        }
+
+
+        private bool CheckReduceReduceConflict(CanonicalLine line)
+        {
+            var reduceItems = line.CurrentCanonical.EndMarkSymbolSet;
+
+            Dictionary<NonTerminal, TerminalSet> dic = new Dictionary<NonTerminal, TerminalSet>();
+            foreach (var reduceItem in reduceItems)
+            {
+                var nt = reduceItem.ToNonTerminal();
+
+                // example: 'ST_LIST -> ST | ST_LIST ST'
+                // The first reduceItem ST_LIST -> ST
+                // The second reduceItem ST_LIST -> ST_LIST ST
+                // The NonTerminal of the first reduceItem is the same with second reduceItem.
+                // So it may be there is a same key in dic.
+                if (dic.ContainsKey(nt)) continue;
+                dic.Add(nt, _followAnalyzer.Follow(nt));
+            }
+
+            // check reduce-reduce conflict
+            bool result = false;
+            TerminalSet checker = new TerminalSet();
+            foreach (var item in dic)
+            {
+                foreach (var terminal in item.Value)
+                {
+                    if (checker.Contains(terminal))
+                    {
+                        result = true;
+                        break;
+                    }
+
+                    checker.Add(terminal);
+                }
+            }
+
+            return result;
+        }
+
+
+        private bool CheckShiftReduceConflict(CanonicalLine line)
+        {
+            var reduceItems = line.CurrentCanonical.EndMarkSymbolSet;
+            var reduceFollowList = FollowForNTSet(reduceItems);
+
+            return reduceFollowList.Intersect(line.CurrentCanonical.MarkSymbolSet).Count() > 0;
+        }
+
 
         public SLRParser(Grammar grammar) : base(grammar)
         {
@@ -46,7 +168,12 @@ namespace Parse.FrontEnd.Parsers.LR
                     // if 0 index token was modified it always has to parsing.
                     if (i > 0)
                     {
-                        if (target.IsRightBlockConnected(i - 1)) continue;
+                        if (target.JoinBlock(i - 1))
+                        {
+                            // at least it has to see to the last index of range.
+                            if (i > range.Item2.EndIndex) break;
+                            else continue;
+                        }
                     }
 
                     if (i == 0) target[i] = new ParsingBlock(target[i].Token);
@@ -81,8 +208,7 @@ namespace Parse.FrontEnd.Parsers.LR
             ParsingResult result = new ParsingResult();
             try
             {
-                if (tokens == null) return result;
-                if (tokens.Count <= 0) return result;
+                if (tokens == null || tokens.Count <= 0) return result;
 
                 result = new ParsingResult();
                 foreach (var item in tokens) result.Add(new ParsingBlock(item));

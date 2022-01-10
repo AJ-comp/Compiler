@@ -43,7 +43,7 @@ namespace Parse.FrontEnd.AJ.ErrorHandler
 
                 return TryRecovery(param, dataForRecovery);
             }
-            if (prevToken.Kind == grammar.Const)
+            if (prevToken.Kind == AJGrammar.Const)
             {
                 List<Terminal[]> param = new List<Terminal[]>();
                 param.Add(new Terminal[] { AJGrammar.Int, AJGrammar.Ident, grammar.SemiColon });

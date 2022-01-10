@@ -5,12 +5,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Types\Operations\TypeOperations\" />
     <Folder Include="Types\Specification\" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\AJ.Common\AJ.Common.csproj" />
   </ItemGroup>
 
 </Project>

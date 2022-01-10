@@ -2,11 +2,17 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 
 namespace Parse.FrontEnd
 {
-    public enum ErrorType { Error, Warning, Information };
+    public enum ErrorType
+    {
+        [Description(nameof(Error))] Error,
+        [Description(nameof(Warning))] Warning,
+        [Description(nameof(Information))] Information
+    };
     public enum MatchedAction { None, OffsetPlus, BlockPlus };
 
     [DebuggerDisplay("{DebuggerDisplay, nq}")]
@@ -46,9 +52,7 @@ namespace Parse.FrontEnd
 
 
         private string DebuggerDisplay
-            => string.Format("Name: {0}, Matched action: {1}",
-                                        Name,
-                                        Action);
+            => $"Name: {Name}, Matched action: {Action}";
     }
 
 

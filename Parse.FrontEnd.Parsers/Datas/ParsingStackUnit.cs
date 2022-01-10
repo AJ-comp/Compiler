@@ -10,8 +10,8 @@ namespace Parse.FrontEnd.Parsers.Datas
 {
     public class ParsingStackUnit : ICloneable<ParsingStackUnit>
     {
-        public Stack<object> Stack { get; } = new Stack<object>();
-        public Stack<object> AstListStack { get; } = new Stack<object>();
+        public Stack<object> Stack { get; private set; } = new Stack<object>();
+        public Stack<object> AstListStack { get; private set; } = new Stack<object>();
 
 
         public ParsingStackUnit()
@@ -62,7 +62,7 @@ namespace Parse.FrontEnd.Parsers.Datas
                 if (child is ParseTreeNonTerminal)
                 {
                     // meanless NonTerminal
-                    if(!child.IsMeaning)
+                    if (!child.IsMeaning)
                     {
                         // epsilon reduce case
                         if ((child as ParseTreeNonTerminal).Count == 0) continue;
@@ -109,8 +109,53 @@ namespace Parse.FrontEnd.Parsers.Datas
         }
 
         public ParsingStackUnit Reverse() => new ParsingStackUnit(Stack.Reverse(), AstListStack.Reverse());
-
         public ParsingStackUnit Clone() => new ParsingStackUnit(Stack.Clone(), AstListStack.Clone());
+
+        public bool SyncParent(ParsingStackUnit src)
+        {
+            if (!ApproxEqual(src)) return false;
+
+            int size = src.Stack.Count;
+            for (int i = 0; i < size; i++)
+            {
+                var srctItem = src.Stack.ElementAt(i);
+                var targetItem = Stack.ElementAt(i);
+                if (!(srctItem is ParseTreeSymbol)) continue;
+
+                (targetItem as ParseTreeSymbol).Parent = (srctItem as ParseTreeSymbol).Parent;
+            }
+
+            return true;
+        }
+
+
+        /*******************************************************/
+        /// <summary>
+        /// This function checks whether equal <b>approximately</b> with target
+        /// </summary>
+        /// <remarks>
+        /// <b>approximately</b> means that it checks only symbol type.
+        /// </remarks>
+        /// <param name="target"></param>
+        /// <returns></returns>
+        /*******************************************************/
+        public bool ApproxEqual(ParsingStackUnit target)
+        {
+            //            return Stack.SequenceEqual(target.Stack);
+            if (Stack.Count != target.Stack.Count) return false;
+
+            bool result = true;
+            for (int i = 0; i < Stack.Count; i++)
+            {
+                if (!Stack.ElementAt(i).Equals(target.Stack.ElementAt(i)))
+                {
+                    result = false;
+                    break;
+                }
+            }
+
+            return result;
+        }
 
 
         private IEnumerable<AstSymbol> TakeOffList(IEnumerable<object> list)

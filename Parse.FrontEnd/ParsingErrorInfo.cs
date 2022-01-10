@@ -21,9 +21,6 @@ namespace Parse.FrontEnd
         public static ParsingErrorInfo CreateParsingInfomation(string code, string message) => new ParsingErrorInfo(ErrorType.Information, code, message);
 
         private string DebuggerDisplay
-            => string.Format("Error type:{0}, Code : {1}, Message : {2}", 
-                                        ErrType, 
-                                        Code, 
-                                        Message);
+            => $"Error type:{ErrType}, Code : {Code}, Message : {Message}";
     }
 }

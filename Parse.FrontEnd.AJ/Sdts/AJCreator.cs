@@ -1,89 +1,37 @@
-﻿using Parse.FrontEnd.Ast;
+﻿using Parse.FrontEnd.AJ.Data;
 using Parse.FrontEnd.AJ.Properties;
 using Parse.FrontEnd.AJ.Sdts.AstNodes;
 using Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes;
-using Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes.ArithmeticExprNodes;
-using Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes.AssignExprNodes;
+using Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes.Binary;
 using Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes.LiteralNodes;
-using Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes.LogicalExprNodes;
+using Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes.Single;
 using Parse.FrontEnd.AJ.Sdts.AstNodes.StatementNodes;
 using Parse.FrontEnd.AJ.Sdts.AstNodes.TypeNodes;
-using Parse.FrontEnd.AJ.Sdts.Datas;
-using Parse.FrontEnd.AJ.Sdts.Datas.Variables;
-using Parse.Types;
+using Parse.FrontEnd.Ast;
 using System;
+using System.Collections.Generic;
 
 namespace Parse.FrontEnd.AJ.Sdts
 {
     public class AJCreator
     {
-        public static VariableMiniC CreateVarData(Access accessType,
-                                                                        AJTypeInfo typeDatas,
-                                                                        TokenData nameToken,
-                                                                        TokenData levelToken,
-                                                                        TokenData dimensionToken,
-                                                                        int blockLevel,
-                                                                        int offset,
-                                                                        ExprNode value)
+        public static VariableAJ CreateVarData(Access accessType,
+                                                                AJTypeInfo typeInfo,
+                                                                TokenData nameToken,
+                                                                IEnumerable<TokenData> levelTokens,
+                                                                int blockLevel,
+                                                                int offset,
+                                                                ExprNode value)
         {
-            VariableMiniC result = null;
+            VariableAJ result = null;
 
-            if (typeDatas.DataType == MiniCDataType.String)
+            if (typeInfo.DataType == AJDataType.Int)
             {
-                result = new StringVariableMiniC(accessType,
-                                                                 typeDatas,
-                                                                 nameToken,
-                                                                 levelToken,
-                                                                 dimensionToken,
-                                                                 blockLevel,
-                                                                 offset,
-                                                                 value);
-            }
-            else if (typeDatas.DataType == MiniCDataType.Int)
-            {
-                result = new IntVariableMiniC(accessType,
-                                                            typeDatas,
-                                                            nameToken,
-                                                            levelToken,
-                                                            dimensionToken,
-                                                            blockLevel,
-                                                            offset,
-                                                            value);
-            }
-            else if (typeDatas.DataType == MiniCDataType.Address)
-            {
-                result = new PointerVariableMiniC(accessType, 
-                                                                    typeDatas, 
-                                                                    nameToken, 
-                                                                    blockLevel, 
-                                                                    offset, 
-                                                                    1, 
-                                                                    value, 
-                                                                    StdType.Int);
+                result = new VariableAJ(accessType, typeInfo, nameToken, levelTokens, blockLevel, offset);
             }
 
             return result;
         }
-
-
-        public static VariableMiniC CreateVarData(Access accessType,
-                                                                        AJTypeInfo typeDatas,
-                                                                        TokenData nameToken,
-                                                                        TokenData levelToken,
-                                                                        TokenData dimensionToken,
-                                                                        int blockLevel,
-                                                                        int offset)
-        {
-            return CreateVarData(accessType, 
-                                            typeDatas, 
-                                            nameToken, 
-                                            levelToken, 
-                                            dimensionToken, 
-                                            blockLevel, 
-                                            offset, 
-                                            null);
-        }
-
 
 
         public static SdtsNode CreateSdtsNode(AstSymbol root)
@@ -103,9 +51,7 @@ namespace Parse.FrontEnd.AJ.Sdts
                 else if (cRoot.SignPost.MeaningUnit == AJGrammar.ClassDef) result = new ClassDefNode(root);
 
                 else if (cRoot.SignPost.MeaningUnit == AJGrammar.FuncDef) result = new FuncDefNode(root);
-                else if (cRoot.SignPost.MeaningUnit == AJGrammar.FuncHead) result = new FuncHeadNode(root);
                 else if (cRoot.SignPost.MeaningUnit == AJGrammar.FormalPara) result = new ParamListNode(root);
-                else if (cRoot.SignPost.MeaningUnit == AJGrammar.ParamDcl) result = new ParamNode(root);
                 else if (cRoot.SignPost.MeaningUnit == AJGrammar.CompoundSt) result = new CompoundStNode(root);
 
                 else if (cRoot.SignPost.MeaningUnit == AJGrammar.StatList) result = new StatListNode(root);
@@ -113,50 +59,56 @@ namespace Parse.FrontEnd.AJ.Sdts
                 else if (cRoot.SignPost.MeaningUnit == AJGrammar.IfElseSt) result = new IfElseStatementNode(root);
                 else if (cRoot.SignPost.MeaningUnit == AJGrammar.WhileSt) result = new WhileStatementNode(root);
                 else if (cRoot.SignPost.MeaningUnit == AJGrammar.ReturnSt) result = new ReturnStatementNode(root);
+                else if (cRoot.SignPost.MeaningUnit == AJGrammar.DeclareVarSt) result = new ReturnStatementNode(root);
                 else if (cRoot.SignPost.MeaningUnit == AJGrammar.ExpSt) result = new ExprStatementNode(root);
                 else if (cRoot.SignPost.MeaningUnit == AJGrammar.Call) result = new CallNode(root);
                 else if (cRoot.SignPost.MeaningUnit == AJGrammar.ActualParam) result = new ActualParamNode(root);
                 else if (cRoot.SignPost.MeaningUnit == AJGrammar.Index) result = new IndexNode(root);
 
-                else if (cRoot.SignPost.MeaningUnit == AJGrammar.AddM) result = new AddExprNode(root);
-                else if (cRoot.SignPost.MeaningUnit == AJGrammar.SubM) result = new SubExprNode(root);
-                else if (cRoot.SignPost.MeaningUnit == AJGrammar.MulM) result = new MulExprNode(root);
-                else if (cRoot.SignPost.MeaningUnit == AJGrammar.DivM) result = new DivExprNode(root);
-                else if (cRoot.SignPost.MeaningUnit == AJGrammar.ModM) result = new ModExprNode(root);
+                else if (cRoot.SignPost.MeaningUnit == AJGrammar.AddM) result = new ArithmeticNode(root, IRArithmeticOperation.Add);
+                else if (cRoot.SignPost.MeaningUnit == AJGrammar.SubM) result = new ArithmeticNode(root, IRArithmeticOperation.Sub);
+                else if (cRoot.SignPost.MeaningUnit == AJGrammar.MulM) result = new ArithmeticNode(root, IRArithmeticOperation.Mul);
+                else if (cRoot.SignPost.MeaningUnit == AJGrammar.DivM) result = new ArithmeticNode(root, IRArithmeticOperation.Div);
+                else if (cRoot.SignPost.MeaningUnit == AJGrammar.ModM) result = new ArithmeticNode(root, IRArithmeticOperation.Mod);
                 else if (cRoot.SignPost.MeaningUnit == AJGrammar.AssignM) result = new AssignNode(root);
-                else if (cRoot.SignPost.MeaningUnit == AJGrammar.AddAssignM) result = new AddAssignNode(root);
-                else if (cRoot.SignPost.MeaningUnit == AJGrammar.SubAssignM) result = new SubAssignNode(root);
-                else if (cRoot.SignPost.MeaningUnit == AJGrammar.MulAssignM) result = new MulAssignNode(root);
-                else if (cRoot.SignPost.MeaningUnit == AJGrammar.DivAssignM) result = new DivAssignNode(root);
-                else if (cRoot.SignPost.MeaningUnit == AJGrammar.ModAssignM) result = new ModAssignNode(root);
-                else if (cRoot.SignPost.MeaningUnit == AJGrammar.PreIncM) result = new PreIncExprNode(root);
-                else if (cRoot.SignPost.MeaningUnit == AJGrammar.PreDecM) result = new PreDecExprNode(root);
-                else if (cRoot.SignPost.MeaningUnit == AJGrammar.PostIncM) result = new PostIncExprNode(root);
-                else if (cRoot.SignPost.MeaningUnit == AJGrammar.PostDecM) result = new PostDecExprNode(root);
+                else if (cRoot.SignPost.MeaningUnit == AJGrammar.AddAssignM) result = new ArithmeticAssignNode(root, IRArithmeticOperation.Add);
+                else if (cRoot.SignPost.MeaningUnit == AJGrammar.SubAssignM) result = new ArithmeticAssignNode(root, IRArithmeticOperation.Sub);
+                else if (cRoot.SignPost.MeaningUnit == AJGrammar.MulAssignM) result = new ArithmeticAssignNode(root, IRArithmeticOperation.Mul);
+                else if (cRoot.SignPost.MeaningUnit == AJGrammar.DivAssignM) result = new ArithmeticAssignNode(root, IRArithmeticOperation.Div);
+                else if (cRoot.SignPost.MeaningUnit == AJGrammar.ModAssignM) result = new ArithmeticAssignNode(root, IRArithmeticOperation.Mod);
+                else if (cRoot.SignPost.MeaningUnit == AJGrammar.PreIncM) result = new IncDecNode(root, AJGrammar.Inc.Value, Info.PreInc);
+                else if (cRoot.SignPost.MeaningUnit == AJGrammar.PreDecM) result = new IncDecNode(root, AJGrammar.Dec.Value, Info.PreDec);
+                else if (cRoot.SignPost.MeaningUnit == AJGrammar.PostIncM) result = new IncDecNode(root, AJGrammar.Inc.Value, Info.PostInc);
+                else if (cRoot.SignPost.MeaningUnit == AJGrammar.PostDecM) result = new IncDecNode(root, AJGrammar.Dec.Value, Info.PostDec);
 
-                else if (cRoot.SignPost.MeaningUnit == AJGrammar.LogicalOrM) result = new OrExprNode(root);
-                else if (cRoot.SignPost.MeaningUnit == AJGrammar.LogicalAndM) result = new AndExprNode(root);
-                else if (cRoot.SignPost.MeaningUnit == AJGrammar.LogicalNotM) result = new NotExprNode(root);
-                else if (cRoot.SignPost.MeaningUnit == AJGrammar.EqualM) result = new EqualExprNode(root);
-                else if (cRoot.SignPost.MeaningUnit == AJGrammar.NotEqualM) result = new NotEqualExprNode(root);
-                else if (cRoot.SignPost.MeaningUnit == AJGrammar.GreaterThanM) result = new GreaterThanNode(root);
-                else if (cRoot.SignPost.MeaningUnit == AJGrammar.LessThanM) result = new LessThanNode(root);
-                else if (cRoot.SignPost.MeaningUnit == AJGrammar.GreaterEqualM) result = new GreaterEqualNode(root);
-                else if (cRoot.SignPost.MeaningUnit == AJGrammar.LessEqualM) result = new LessEqualNode(root);
+                else if (cRoot.SignPost.MeaningUnit == AJGrammar.LogicalOrM) result = new BinLogicalNode(root, IRLogicalOperation.Or);
+                else if (cRoot.SignPost.MeaningUnit == AJGrammar.LogicalAndM) result = new BinLogicalNode(root, IRLogicalOperation.And);
+                else if (cRoot.SignPost.MeaningUnit == AJGrammar.LogicalNotM) result = new SLogicalNode(root, IRLogicalOperation.Not);
+                else if (cRoot.SignPost.MeaningUnit == AJGrammar.EqualM) result = new CompareNode(root, IRCompareOperation.EQ);
+                else if (cRoot.SignPost.MeaningUnit == AJGrammar.NotEqualM) result = new CompareNode(root, IRCompareOperation.NE);
+                else if (cRoot.SignPost.MeaningUnit == AJGrammar.GreaterThanM) result = new CompareNode(root, IRCompareOperation.GT);
+                else if (cRoot.SignPost.MeaningUnit == AJGrammar.LessThanM) result = new CompareNode(root, IRCompareOperation.LT);
+                else if (cRoot.SignPost.MeaningUnit == AJGrammar.GreaterEqualM) result = new CompareNode(root, IRCompareOperation.GE);
+                else if (cRoot.SignPost.MeaningUnit == AJGrammar.LessEqualM) result = new CompareNode(root, IRCompareOperation.LE);
 
-                else if (cRoot.SignPost.MeaningUnit == AJGrammar.DclSpec) result = new VariableTypeNode(root);
                 else if (cRoot.SignPost.MeaningUnit == AJGrammar.ConstNode) result = new ConstNode(root);
-                else if (cRoot.SignPost.MeaningUnit == AJGrammar.VoidNode) result = new VoidNode(root);
-                else if (cRoot.SignPost.MeaningUnit == AJGrammar.SystemNode) result = new SystemNode(root);
-                else if (cRoot.SignPost.MeaningUnit == AJGrammar.IntNode) result = new IntNode(root, false);
-                else if (cRoot.SignPost.MeaningUnit == AJGrammar.UIntNode) result = new IntNode(root, true);
-                else if (cRoot.SignPost.MeaningUnit == AJGrammar.AddressNode) result = new AddressNode(root);
-                else if (cRoot.SignPost.MeaningUnit == AJGrammar.Dcl) result = new VariableDclListNode(root);
+                else if (cRoot.SignPost.MeaningUnit == AJGrammar.Dcl) result = new DeclareVarNode(root);
                 else if (cRoot.SignPost.MeaningUnit == AJGrammar.DclVar) result = new InitDeclaratorNode(root);
-                else if (cRoot.SignPost.MeaningUnit == AJGrammar.DeclareVarIdent) result = new DeclareVarNode(root);
+                else if (cRoot.SignPost.MeaningUnit == AJGrammar.DeclareVar) result = new DeclareVarNode(root);
+                else if (cRoot.SignPost.MeaningUnit == AJGrammar.DeclareIdent) result = new DeclareIdentNode(root);
                 else if (cRoot.SignPost.MeaningUnit == AJGrammar.DeRef) result = new DeRefExprNode(root);
                 else if (cRoot.SignPost.MeaningUnit == AJGrammar.UseVar) result = new UseIdentNode(root);
-                else if (cRoot.SignPost.MeaningUnit == AJGrammar.IntLiteralNode) result = new IntLiteralNode(root);
+                else if (cRoot.SignPost.MeaningUnit == AJGrammar.IntLiteralNode) result = new IntegerLiteralNode(root);
+                else if (cRoot.SignPost.MeaningUnit == AJGrammar.BoolLiteralNode) result = new BoolLiteralNode(root);
+
+                else if (cRoot.SignPost.MeaningUnit == AJGrammar.VoidNode) result = new TypeDeclareNode(root, AJDataType.Void, false, AJGrammar.Void.Value);
+                else if (cRoot.SignPost.MeaningUnit == AJGrammar.CharNode) result = new TypeDeclareNode(root, AJDataType.Byte, false, AJGrammar.Char.Value);
+                else if (cRoot.SignPost.MeaningUnit == AJGrammar.ShortNode) result = new TypeDeclareNode(root, AJDataType.Short, false, AJGrammar.Short.Value);
+                else if (cRoot.SignPost.MeaningUnit == AJGrammar.SystemNode) result = new TypeDeclareNode(root, AJDataType.System, false, AJGrammar.System.Value);
+                else if (cRoot.SignPost.MeaningUnit == AJGrammar.IntNode) result = new TypeDeclareNode(root, AJDataType.Int, true, AJGrammar.Int.Value);
+                else if (cRoot.SignPost.MeaningUnit == AJGrammar.UIntNode) result = new TypeDeclareNode(root, AJDataType.Int, false, AJGrammar.UInt.Value);
+                else if (cRoot.SignPost.MeaningUnit == AJGrammar.UserDefTypeNode) result = new TypeDeclareNode(root);
+
                 else throw new Exception(AlarmCodes.MCL0010);
 
                 foreach (var item in cRoot.Items)

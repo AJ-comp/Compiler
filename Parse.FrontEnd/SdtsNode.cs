@@ -13,8 +13,10 @@ namespace Parse.FrontEnd
         public SdtsNode Parent { get; set; }
         public List<SdtsNode> Items { get; } = new List<SdtsNode>();
         public MeaningErrInfoList ConnectedErrInfoList { get; } = new MeaningErrInfoList();
-        public IReadOnlyList<TokenData> MeaningTokens => Ast.AllTokens;
-        public IReadOnlyList<TokenData> AllTokens => Ast.ConnectedParseTree.AllTokens;
+        public IReadOnlyList<TokenData> MeaningTokens => Ast?.AllTokens;
+        public IReadOnlyList<TokenData> AllTokens => Ast?.ConnectedParseTree.AllTokens;
+
+        public List<MeaningErrInfo> Alarms { get; set; } = new List<MeaningErrInfo>();
 
         public bool IsBuild { get; protected set; }
 
@@ -64,15 +66,15 @@ namespace Parse.FrontEnd
             return result;
         }
 
-        public abstract SdtsNode Build(SdtsParams param);
+        public abstract SdtsNode Compile(CompileParameter param);
 
         public override string ToString()
         {
-            string result = string.Format("Ast: {0}, Error node count: {1}", Ast, ErrNodes.Count);
+            string result = $"Ast: {Ast}, Error node count: {ErrNodes.Count}";
 
             if (Items.Count > 0)
             {
-                result += string.Format(", Expression: {0} -> ", NodeName);
+                result += $", Expression: {NodeName} -> ";
                 result += Items.ItemsString(PrintType.Type);
             }
 

@@ -1,4 +1,6 @@
-﻿using Parse.Types;
+﻿using Parse.MiddleEnd.IR.Datas;
+using Parse.Types;
+using System;
 
 namespace Parse.MiddleEnd.IR.LLVM
 {
@@ -14,15 +16,36 @@ namespace Parse.MiddleEnd.IR.LLVM
             return true;
         }
 
-        public static bool IsIntegerKind(StdType opType) => (opType == StdType.Byte || opType == StdType.Short || opType == StdType.Int);
+        public static bool IsIntegerKind(StdType opType) => (opType == StdType.Char || opType == StdType.Short || opType == StdType.Int);
 
-        public static StdType MaximumType(StdType op1Type, StdType op2Type)
+        public static TypeInfo MaximumType(TypeInfo op1Type, TypeInfo op2Type)
         {
             var op1Size = LLVMConverter.ToAlignSize(op1Type);
             var op2Size = LLVMConverter.ToAlignSize(op2Type);
 
             return (op1Size >= op2Size) ? op1Type : op2Type;
         }
+
+
+        /*
+        public static bool Compare(ConstantIR constant1, ConstantIR constant2, IRCompareOperation compareSymbol)
+        {
+            if (constant1.TypeInfo.IsArithmeticType) throw new InvalidOperationException();
+            if (constant2.TypeInfo.IsArithmeticType) throw new InvalidOperationException();
+
+            var operand1 = Convert.ToDouble(constant1.Value);
+            var operand2 = Convert.ToDouble(constant2.Value);
+
+            if (compareSymbol == IRCompareOperation.EQ) return operand1 == operand2;
+            else if(compareSymbol == IRCompareOperation.NE) return operand1 != operand2;
+            else if (compareSymbol == IRCompareOperation.GT) return operand1 > operand2;
+            else if (compareSymbol == IRCompareOperation.GE) return operand1 >= operand2;
+            else if (compareSymbol == IRCompareOperation.LT) return operand1 < operand2;
+            else if (compareSymbol == IRCompareOperation.LE) return operand1 <= operand2;
+
+            throw new InvalidOperationException();
+        }
+        */
 
         //public static BitConstantLLVM LogicalOp(IRValue s, IRValue t, IRCondition condition)
         //{

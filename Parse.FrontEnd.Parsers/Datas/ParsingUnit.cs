@@ -14,7 +14,7 @@ namespace Parse.FrontEnd.Parsers.Datas
     public class ParsingUnit
     {
 
-        public ParsingStackUnit BeforeStack { get; } = new ParsingStackUnit();
+        public ParsingStackUnit BeforeStack { get; internal set; } = new ParsingStackUnit();
         public ParsingStackUnit AfterStack { get; set; } = new ParsingStackUnit();
 
 

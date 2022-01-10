@@ -1,5 +1,6 @@
 ﻿using Parse.FrontEnd.RegularGrammar;
 using Parse.FrontEnd.Tokenize;
+using System;
 using System.Collections.Generic;
 
 namespace Parse.FrontEnd
@@ -7,6 +8,8 @@ namespace Parse.FrontEnd
     public class TokenData
     {
         public string Input => TokenCell?.Data;
+        public int StartIndex => (TokenCell != null) ? TokenCell.StartIndex : -1;
+        public int EndIndex => (TokenCell != null) ? TokenCell.EndIndex : -1;
         public Terminal Kind { get; } = new NotDefined();
         public TokenCell TokenCell { get; }
         public bool IsVirtual { get; private set; }
@@ -29,7 +32,7 @@ namespace Parse.FrontEnd
             {
                 var typeData = tokenCell.PatternInfo.Terminal;
                 if (typeData == null) terminal = new NotDefined();
-                else if (typeData.TokenType == TokenType.SpecialToken.Delimiter || 
+                else if (typeData.TokenType == TokenType.SpecialToken.Delimiter ||
                             typeData.TokenType == TokenType.SpecialToken.Comment) terminal = null;
                 else terminal = typeData;
             }
@@ -38,17 +41,52 @@ namespace Parse.FrontEnd
             return new TokenData(terminal, tokenCell);
         }
 
+
+        /***************************************************/
+        /// <summary>
+        /// This function creates the virtual token.        <br/>
+        /// 가상 토큰을 생성합니다.                           <br/>
+        /// </summary>
+        /// <param name="virtualT"></param>
+        /// <param name="valueWhenIdent">
+        /// This param means when virtualT type is ident
+        /// </param>
+        /// <returns></returns>
+        /***************************************************/
+        public static TokenData CreateVirtualToken(Terminal virtualT, string valueWhenIdent = "ident")
+        {
+            Random random = new Random();
+            var asId = random.Next(-99999999, -1);
+            string value = virtualT.Value;
+
+            if (virtualT.TokenType == TokenType.Identifier) value = valueWhenIdent;
+
+            return new TokenData(virtualT, new TokenCell(asId, value, null), true);
+        }
+
         public override string ToString() => Input;
 
         public override bool Equals(object obj)
         {
             return obj is TokenData data &&
-                   EqualityComparer<Terminal>.Default.Equals(Kind, data.Kind);
+                   Input == data.Input &&
+                   EqualityComparer<Terminal>.Default.Equals(Kind, data.Kind) &&
+                   IsVirtual == data.IsVirtual;
         }
 
         public override int GetHashCode()
         {
-            return -2026186021 + EqualityComparer<Terminal>.Default.GetHashCode(Kind);
+            return HashCode.Combine(Input, Kind, IsVirtual);
+        }
+
+        public static bool operator ==(TokenData left, TokenData right)
+        {
+            return EqualityComparer<TokenData>.Default.Equals(left, right);
+        }
+
+        public static bool operator !=(TokenData left, TokenData right)
+        {
+            return !(left == right);
         }
     }
 }

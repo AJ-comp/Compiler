@@ -5,9 +5,9 @@ namespace Parse.FrontEnd
     public class ParseCreatedArgs
     {
         public ParseTreeSymbol ParseTreeNonT { get; }
-        public SdtsParams SdtsParam { get; }
+        public CompileParameter SdtsParam { get; }
 
-        public ParseCreatedArgs(ParseTreeSymbol parseTreeNonT, SdtsParams sdtsParam)
+        public ParseCreatedArgs(ParseTreeSymbol parseTreeNonT, CompileParameter sdtsParam)
         {
             ParseTreeNonT = parseTreeNonT;
             SdtsParam = sdtsParam;

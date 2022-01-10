@@ -115,13 +115,16 @@
   <data name="OutputFile" xml:space="preserve">
     <value>The output file</value>
   </data>
-  <data name="CreateProject" xml:space="preserve">
-    <value>Create Project</value>
-  </data>
   <data name="ProjectFullPath" xml:space="preserve">
     <value>The full path with the project name</value>
   </data>
-  <data name="CreateSolution" xml:space="preserve">
-    <value>Create Solution</value>
+  <data name="Ajc" xml:space="preserve">
+    <value>AJ Compiler</value>
+  </data>
+  <data name="ToBinary" xml:space="preserve">
+    <value>Create to binary file.</value>
+  </data>
+  <data name="ToLibrary" xml:space="preserve">
+    <value>Create to library file.</value>
   </data>
 </root>

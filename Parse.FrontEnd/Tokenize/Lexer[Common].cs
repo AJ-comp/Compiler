@@ -1,4 +1,5 @@
-﻿using Parse.FrontEnd.RegularGrammar;
+﻿using AJ.Common.Helpers;
+using Parse.FrontEnd.RegularGrammar;
 using Parse.Utilities;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -43,9 +44,10 @@ namespace Parse.FrontEnd.Tokenize
                 string key = string.Empty;
                 do
                 {
-                    key = StringUtility.RandomString(3, false);
+                    key = StringHelper.RandomString(3, false);
                 } while (allHashCode.Contains(key));
 
+                //                result += string.Format($"(?<{key}>{pattern.Pattern})|");
                 result += string.Format("(?<{0}>{1})|", key, pattern.Pattern);
                 //                    patternSum += string.Format("({0})|", pattern.Pattern);
                 allHashCode.Add(key);
