@@ -2,7 +2,7 @@
   "profiles": {
     "CommandPrompt.Util": {
       "commandName": "Project",
-      "commandLineArgs": "ajutil print first-follow --output C:\\aws\\test\\first_follow.csv"
+      "commandLineArgs": "ajutil print canonical --output C:\\aws\\test\\canonical.csv"
     }
   }
 }

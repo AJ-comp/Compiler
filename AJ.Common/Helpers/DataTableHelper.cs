@@ -29,5 +29,22 @@ namespace AJ.Common.Helpers
 //            using var writer = new StreamWriter(fileFullPath);
             File.WriteAllLines(fileFullPath, lines);
         }
+
+
+        public static void CreateColumns(this DataTable dataTable, params string[] columns)
+        {
+            foreach(var column in columns)
+            {
+                DataColumn column1 = new DataColumn
+                {
+                    DataType = typeof(string),
+                    ColumnName = column,
+                    Caption = column,
+                    ReadOnly = true,
+                    DefaultValue = ""
+                };
+                dataTable.Columns.Add(column1);
+            }
+        }
     }
 }

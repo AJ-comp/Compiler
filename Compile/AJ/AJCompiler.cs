@@ -5,7 +5,6 @@ using Parse.FrontEnd.AJ.ErrorHandler;
 using Parse.FrontEnd.AJ.Properties;
 using Parse.FrontEnd.AJ.Sdts;
 using Parse.FrontEnd.AJ.Sdts.AstNodes;
-using Parse.FrontEnd.AJ.Sdts.Datas;
 using Parse.FrontEnd.Ast;
 using Parse.FrontEnd.Grammars;
 using Parse.FrontEnd.Parsers.Datas;
@@ -20,7 +19,7 @@ namespace Compile.AJ
 {
     public partial class AJCompiler
     {
-        public Grammar Grammar => _miniC;
+        public Grammar Grammar => _ajGrammar;
         public string Version => new Version(1,0,0).ToString();
 
         public event EventHandler<string> ReplaceByMacroCompleted;
@@ -44,10 +43,12 @@ namespace Compile.AJ
         public AJCompiler()
         {
             var instance = AJDefineTable.Instance;
-            Parser = new SLRParser(_miniC);
+            Parser = new LALRParser(_ajGrammar);
+//            Parser = new SLRParser(_ajGrammar);
+            //            Parser = new LLParser(_ajGrammar);
             Parser.ASTCreated += ASTCreated;
 
-            foreach (var terminal in _miniC.TerminalSet)
+            foreach (var terminal in _ajGrammar.TerminalSet)
                 _lexer.AddTokenRule(terminal);
 
             MiniC_LRErrorHandlerFactory.Instance.AddErrorHandler(Parser);
@@ -219,8 +220,8 @@ namespace Compile.AJ
 
 
         private Lexer _lexer = new Lexer();
-        private Grammar _miniC = new AJGrammar();
-        private RootData _rootData = new RootData();
+        private Grammar _ajGrammar = new AJGrammar();
+//        private Grammar _ajGrammar = new Ex8_15Grammar();
         public LRParser Parser { get; private set; }
 
         private List<CompileResult> _compileResult = new List<CompileResult>();

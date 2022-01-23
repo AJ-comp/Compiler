@@ -15,15 +15,15 @@ namespace Parse.FrontEnd.Parsers
         protected SymbolTableStack SymbolTableStack { get; } = new SymbolTableStack();
 
         /// <summary>
-        /// This event handler is called when the input token is not in the expected terminal set.
-        /// Terminal : Terminal that expected.
-        /// TokenData : Input token
+        /// This event handler is called when the input token is not in the expected terminal set. <br/>
+        /// Terminal : Terminal that expected. <br/>
+        /// TokenData : Input token <br/>
         /// </summary>
         public Action<Terminal, TokenData> MatchFailed { get; set; } = null;
         /// <summary> 
-        /// This event handler is called when can not expand from the current state when the input token enter. 
-        /// NonTerminal : Current state
-        /// TokenData : Input token
+        /// This event handler is called when can not expand from the current state when the input token enter. <br/>
+        /// NonTerminal : Current state <br/>
+        /// TokenData : Input token <br/>
         /// </summary>
         public Action<NonTerminal, TokenData> ExpandFailed { get; set; } = null;
 

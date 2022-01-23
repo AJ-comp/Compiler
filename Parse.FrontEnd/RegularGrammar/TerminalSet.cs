@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Parse.Extensions;
+using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
 namespace Parse.FrontEnd.RegularGrammar
@@ -94,13 +95,6 @@ namespace Parse.FrontEnd.RegularGrammar
             return result;
         }
 
-        public override string ToString()
-        {
-            string result = "{";
-
-            foreach(var item in this)   result += item.ToString() + ",";
-
-            return result.Substring(0, result.Length - 1) + "}";
-        }
+        public override string ToString() => "{" + this.ItemsString(PrintType.String) + "}";
     }
 }

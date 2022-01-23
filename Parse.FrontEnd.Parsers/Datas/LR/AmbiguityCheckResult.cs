@@ -1,4 +1,5 @@
-﻿using Parse.FrontEnd.Parsers.Collections;
+﻿using AJ.Common.Helpers;
+using Parse.FrontEnd.Parsers.Collections;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -16,7 +17,7 @@ namespace Parse.FrontEnd.Parsers.Datas.LR
             {
                 DataTable result = new DataTable();
 
-                this.CreateColumns(result);
+                result.CreateColumns(_prevStatus, _markSymbol, _currentStatus, _markListColumn, _follow, _lookAhead);
                 this.CreateRows(result);
 
                 return result;
@@ -24,68 +25,27 @@ namespace Parse.FrontEnd.Parsers.Datas.LR
         }
 
 
-        private void CreateColumns(DataTable dataTable)
-        {
-            DataColumn column1 = new DataColumn
-            {
-                DataType = typeof(string),
-                ColumnName = _prevStatusColumn,
-                Caption = _prevStatusColumn,
-                ReadOnly = true,
-                DefaultValue = ""
-            };
-            dataTable.Columns.Add(column1);
-
-            DataColumn column2 = new DataColumn
-            {
-                DataType = typeof(string),
-                ColumnName = _markSymbolColumn,
-                Caption = _markSymbolColumn,
-                ReadOnly = true,
-                DefaultValue = ""
-            };
-            dataTable.Columns.Add(column2);
-
-            DataColumn column3 = new DataColumn
-            {
-                DataType = typeof(string),
-                ColumnName = _currentStatusColumn,
-                Caption = _currentStatusColumn,
-                ReadOnly = true,
-                DefaultValue = ""
-            };
-            dataTable.Columns.Add(column3);
-
-            DataColumn column4 = new DataColumn
-            {
-                DataType = typeof(string),
-                ColumnName = _markListColumn,
-                Caption = _markListColumn,
-                ReadOnly = true,
-                DefaultValue = ""
-            };
-            dataTable.Columns.Add(column4);
-        }
-
         private void CreateRows(DataTable dataTable)
         {
             foreach (var item in this)
             {
                 DataRow row = dataTable.NewRow();
 
-                row[_prevStatusColumn] = $"I{item.CanonicalLine.PrevStatusIndex}";
-                row[_markSymbolColumn] = item.CanonicalLine.SeeingMarkSymbol;
-                row[_currentStatusColumn] = $"I{item.CanonicalLine.CurrentStatusIndex}";
+                row[_prevStatus] = $"I{item.CanonicalLine.PrevStatusIndex}";
+                row[_markSymbol] = item.CanonicalLine.SeeingMarkSymbol;
+                row[_currentStatus] = $"I{item.CanonicalLine.CurrentStatusIndex}";
 
                 foreach (var canonicalItem in item.CanonicalLine.CurrentCanonical)
                 {
                     row[_markListColumn] = canonicalItem.ToString();
+                    row[_follow] = canonicalItem.Follow;
+                    row[_lookAhead] = canonicalItem.LookAhead;
 
                     dataTable.Rows.Add(row);
                     row = dataTable.NewRow();
                 }
 
-                row[_prevStatusColumn] = "result";
+                row[_prevStatus] = "result";
                 row[_markListColumn] = (item.Result) ? "no conflict" : item.AmbiguityContent;
 
                 dataTable.Rows.Add(row);
@@ -96,21 +56,54 @@ namespace Parse.FrontEnd.Parsers.Datas.LR
         }
 
 
-        private string _prevStatusColumn = "prev status";
-        private string _markSymbolColumn = "seeing mark symbol";
-        private string _currentStatusColumn = "current status";
+        private string _prevStatus = "prev status";
+        private string _markSymbol = "seeing mark symbol";
+        private string _currentStatus = "current status";
         private string _markListColumn = "mark list & analysis result";
-//        private string _analysisResultColumn = "analysis result";
+        private string _follow = "follow";
+        private string _lookAhead = "lookahead";
+        //        private string _analysisResultColumn = "analysis result";
     }
+
 
 
     [DebuggerDisplay("{" + nameof(GetDebuggerDisplay) + "(),nq}")]
     public class AmbiguityCheckItem
     {
-        public CanonicalLine CanonicalLine { get; internal set; }
-        public bool Result => string.IsNullOrEmpty(AmbiguityContent);
-        public string AmbiguityContent { get; internal set; }
+        public CanonicalLine CanonicalLine { get; }
+        public bool Result => !IsReduceReduceConflict && !IsShiftReduceConflict;
+        public string AmbiguityContent
+        {
+            get
+            {
+                if (Result) return "no conflict";
+
+                string result = string.Empty;
+
+                if (IsReduceReduceConflict) result = "reduce-reduce conflict";
+                if (IsShiftReduceConflict) result += "shift-reduce conflict";
+
+                return result;
+            }
+        }
+
+        public bool IsReduceReduceConflict { get; }
+        public bool IsShiftReduceConflict { get; }
+
+
+        public AmbiguityCheckItem(CanonicalLine line, ReduceParameter reduceParameter)
+        {
+            CanonicalLine = line;
+            _reduceParameter = reduceParameter;
+
+            var state = CanonicalLine.CurrentCanonical;
+            IsReduceReduceConflict = state.IsReduceReduceConflict(_reduceParameter);
+            IsShiftReduceConflict = state.IsShiftReduceConflict(_reduceParameter);
+        }
 
         public string GetDebuggerDisplay() => $"{AmbiguityContent}:{CanonicalLine.GetDebuggerDisplay()}";
+
+
+        private ReduceParameter _reduceParameter;
     }
 }

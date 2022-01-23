@@ -131,18 +131,16 @@ namespace Parse.FrontEnd.Parsers.Collections
         /// <summary>
         /// This function calculates the core datas for parsing table.
         /// </summary>
-        /// <param name="datas">First param needs CanonicalTable type and Second param needs RelationData type</param>
+        /// <param name="datas">First param needs CanonicalRelation type and Second param needs RelationData type</param>
         public void CreateParsingTable(params object[] datas)
         {
-            if (datas.Length != 2) return;
-            CanonicalTable canonicalTable = datas[0] as CanonicalTable;
-            RelationData relationData = datas[1] as RelationData;
+            CanonicalRelation canonicalRelation = datas[0] as CanonicalRelation;
 
-            for (int i = 0; i <= canonicalTable.MaxIxIndex; i++)
+            for (int i = 0; i < canonicalRelation.NextIxIndex; i++)
             {
-                var curStatus = canonicalTable.GetStatusFromIxIndex(i);
+                var curStatus = canonicalRelation.IndexStateDic[i];
 
-                var matchValueSet = canonicalTable.GetCanSeeMatchValue(i, relationData);
+                var matchValueSet = canonicalRelation.GetCanSeeMatchValue(i);
                 this.Add(new LRParsingRowDataFormat(curStatus, matchValueSet));
             }
         }

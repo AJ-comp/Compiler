@@ -12,15 +12,14 @@ namespace Parse.FrontEnd.Parsers.Collections
         public int PrevStatusIndex { get; private set; }
         public Symbol SeeingMarkSymbol { get; private set; }
 
-        public int CurrentStatusIndex { get; private set; }
-        public CanonicalItemSet CurrentCanonical { get; private set; }
+        public int CurrentStatusIndex => CurrentCanonical.StateNumber;
+        public CanonicalState CurrentCanonical { get; private set; }
 
 
-        public CanonicalLine(int prevStatusIndex, Symbol seeingMarkSymbol, int currentStatusIndex, CanonicalItemSet currentCanonical)
+        public CanonicalLine(int prevStatusIndex, Symbol seeingMarkSymbol, CanonicalState currentCanonical)
         {
             PrevStatusIndex = prevStatusIndex;
             SeeingMarkSymbol = seeingMarkSymbol;
-            CurrentStatusIndex = currentStatusIndex;
             CurrentCanonical = currentCanonical;
         }
 

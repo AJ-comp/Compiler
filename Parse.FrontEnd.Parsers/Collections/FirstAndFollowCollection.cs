@@ -1,4 +1,5 @@
-﻿using Parse.FrontEnd.RegularGrammar;
+﻿using AJ.Common.Helpers;
+using Parse.FrontEnd.RegularGrammar;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -16,46 +17,13 @@ namespace Parse.FrontEnd.Parsers.Collections
             {
                 DataTable result = new DataTable();
 
-                this.CreateColumns(result);
+                result.CreateColumns(_symbolColumn, _firstColumn, _followColumn);
                 this.CreateRows(result);
 
                 return result;
             }
         }
 
-
-        private void CreateColumns(DataTable dataTable)
-        {
-            DataColumn column1 = new DataColumn
-            {
-                DataType = typeof(string),
-                ColumnName = _symbolColumn,
-                Caption = _symbolColumn,
-                ReadOnly = true,
-                DefaultValue = ""
-            };
-            dataTable.Columns.Add(column1);
-
-            DataColumn column2 = new DataColumn
-            {
-                DataType = typeof(string),
-                ColumnName = _firstColumn,
-                Caption = _firstColumn,
-                ReadOnly = true,
-                DefaultValue = ""
-            };
-            dataTable.Columns.Add(column2);
-
-            DataColumn column3 = new DataColumn
-            {
-                DataType = typeof(string),
-                ColumnName = _followColumn,
-                Caption = _followColumn,
-                ReadOnly = true,
-                DefaultValue = ""
-            };
-            dataTable.Columns.Add(column3);
-        }
 
         private void CreateRows(DataTable dataTable)
         {

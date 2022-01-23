@@ -224,10 +224,11 @@ namespace Parse.FrontEnd.AJ
             // struct and class def
             this.structDef.AddItem(accesser.Optional() + Struct + Ident + OpenCurlyBrace + declareVarSt + CloseCurlyBrace, StructDef);
             this.classDef.AddItem(accesser.Optional() + Class + Ident + OpenCurlyBrace + classMemberDcl.ZeroOrMore() + CloseCurlyBrace, ClassDef);
-            this.classMemberDcl.AddItem(accesser.Optional() + (functionDef));
+            this.classMemberDcl.AddItem(accesser.Optional() + (declareVarSt  | functionDef));
             this.functionDef.AddItem(Const.Optional() + typeSpecifier + Ident + formalParam + compoundSt, FuncDef);
             this.formalParam.AddItem(OpenParenthesis + formalParamList.Optional() + CloseParenthesis, FormalPara);
             this.formalParamList.AddItem(declaratorVar | formalParamList + Comma + declaratorVar);
+
 
             this.typeSpecifier.AddItem(Char, CharNode);
             this.typeSpecifier.AddItem(Short, ShortNode);

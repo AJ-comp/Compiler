@@ -32,6 +32,7 @@ namespace CommandPrompt.Util.Commands
                 if (string.IsNullOrEmpty(template) && list) ListProcess();
                 else if (template == "parsingtable") PrintParsingTable(list, output);
                 else if (template == "checkambi") PrintAmbiguityCheckResult(list, output);
+                else if (template == "canonical") PrintCanonical(list, output);
                 else if (template == "first-follow") PrintFirstAndFollowResult(list, output);
 
                 return 0;
@@ -57,6 +58,14 @@ namespace CommandPrompt.Util.Commands
             AJCompiler compiler = new AJCompiler();
 
             compiler.Parser.CheckAmbiguity().ToTableFormat.ToCSV(output);
+        }
+
+
+        private void PrintCanonical(bool list, string output)
+        {
+            AJCompiler compiler = new AJCompiler();
+
+            compiler.Parser.Canonical.ToDataTable().ToCSV(output);
         }
 
 

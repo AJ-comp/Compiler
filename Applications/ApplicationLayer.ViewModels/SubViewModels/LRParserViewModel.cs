@@ -113,9 +113,9 @@ namespace ApplicationLayer.ViewModels.SubViewModels
             {
                 List<string> result = new List<string>();
 
-                for (int i = 0; i <= this.LRParser.C0.MaxIxIndex; i++)
+                for (int i = 0; i < this.LRParser.Canonical.NextIxIndex; i++)
                 {
-                    CanonicalItemSet canonical = this.LRParser.C0.GetStatusFromIxIndex(i);
+                    CanonicalState canonical = this.LRParser.Canonical.IndexStateDic[i];
                     result.Add(canonical.ToLineString());
                 }
 
@@ -147,7 +147,7 @@ namespace ApplicationLayer.ViewModels.SubViewModels
             foreach (var item in this.LRParser.Grammar.NonTerminalMultiples)
                 NonTerminals.Add(item);
 
-            for (int i = 0; i <= this.LRParser.C0.MaxIxIndex; i++)
+            for (int i = 0; i < this.LRParser.Canonical.NextIxIndex; i++)
                 //                Canonicals.Add(string.Format("I{0}", i));
                 Canonicals.Add(FormattableString.Invariant($"I{i}"));
         }
@@ -183,13 +183,13 @@ namespace ApplicationLayer.ViewModels.SubViewModels
         {
             string result = string.Empty;
 
-            Parallel.ForEach(LRParser.C0, (data, loopOption) =>
+            Parallel.ForEach(LRParser.Canonical, (data, loopOption) =>
             {
-                if (data.Value.Item1 != index) return;
+                if (data.Value.StateNumber != index) return;
 
-                result = FormattableString.Invariant($"I{data.Value.Item1}") + Environment.NewLine;
+                result = FormattableString.Invariant($"I{data.Value.StateNumber}") + Environment.NewLine;
 //                result = string.Format("I{0} : ", data.Value.Item1) + Environment.NewLine;
-                result += data.Value.Item2.ToLineString();
+                result += data.Value.ToLineString();
 
                 loopOption.Stop();
             });
@@ -201,15 +201,15 @@ namespace ApplicationLayer.ViewModels.SubViewModels
         {
             StringCollection result = new StringCollection();
 
-            Parallel.ForEach(LRParser.C0, (data, loopOption) =>
+            Parallel.ForEach(LRParser.Canonical, (data, loopOption) =>
             {
                 if (data.Key.Item1 != index) return;
 
                 string cx = FormattableString.Invariant($"Goto(I{data.Key.Item1},{data.Key.Item2})") + Environment.NewLine;
 //                string cx = string.Format("Goto(I{0},{1})", data.Key.Item1, data.Key.Item2) + Environment.NewLine;
-                cx += FormattableString.Invariant($"I{data.Value.Item1} : ") + Environment.NewLine;
+                cx += FormattableString.Invariant($"I{data.Value.StateNumber} : ") + Environment.NewLine;
 //                cx += string.Format("I{0} : ", data.Value.Item1) + Environment.NewLine;
-                cx += data.Value.Item2.ToLineString();
+                cx += data.Value.ToLineString();
 
                 result.Add(cx);
             });

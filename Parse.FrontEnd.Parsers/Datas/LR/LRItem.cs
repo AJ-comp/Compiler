@@ -1,11 +1,16 @@
 ﻿using Parse.FrontEnd.RegularGrammar;
 using System;
+using System.Collections.Generic;
 
 namespace Parse.FrontEnd.Parsers.Datas.LR
 {
-    public class CanonicalItem : ICloneable
+    public class LRItem : ICloneable
     {
         private sbyte markIndex = 0;
+
+        public TerminalSet Follow { get; internal set; } = new TerminalSet();
+        public TerminalSet LookAhead { get; internal set; } = new TerminalSet();
+
 
         public NonTerminalSingle SingleNT { get; }
         public Symbol MarkSymbol
@@ -20,28 +25,57 @@ namespace Parse.FrontEnd.Parsers.Datas.LR
         }
 
         /// <summary>
+        /// The symbol immediately before the mark symbol.
+        /// </summary>
+        public Symbol PrevMarkSymbol
+        {
+            get
+            {
+                var result = this.GetSymbolFarMarkIndex(1);
+                if (result == new Epsilon()) result = null;
+
+                return result;
+            }
+        }
+
+        public bool IsFirst => markIndex == 0;
+
+        public NonTerminalConcat SymbolListAfterMarkSymbol => SingleNT.PostSymbolListFrom(markIndex);
+
+        /// <summary>
+        /// Get symbol list before mark symbol
+        /// </summary>
+        /// <example>
+        /// in case A -> abc.B 
+        /// get as [0]:a, [1]:b, [2]:c
+        /// </example>
+        public NonTerminalConcat SymbolListBeforeMarkSymbol => SingleNT.PrevSymbolListFrom(markIndex);
+
+
+        /// <summary>
         /// example A-> ab. does mark index reached the end?
         /// </summary>
-        public bool IsEnd
+        public bool IsReachedHandle
         {
             get
             {
                 if (this.SingleNT.IsEpsilon) return true;
 
-                return (this.markIndex >= this.SingleNT.Count);
+                return this.markIndex >= this.SingleNT.Count;
             }
         }
 
-        public CanonicalItem(NonTerminalSingle singleNT)
+        public LRItem(NonTerminalSingle singleNT)
         {
             this.SingleNT = singleNT;
         }
 
-        public CanonicalItem(NonTerminalSingle singleNT, sbyte markIdx)
+        public LRItem(NonTerminalSingle singleNT, sbyte markIdx)
         {
             this.SingleNT = singleNT;
             this.markIndex = markIdx;
         }
+
 
         public void MoveMarkSymbol()
         {
@@ -49,7 +83,8 @@ namespace Parse.FrontEnd.Parsers.Datas.LR
         }
 
         /// <summary>
-        /// This function gets the symbol as far away as an index from the markIndex.
+        /// <para>Get the symbol as far away as an index from the markIndex.</para>
+        /// <para>마킹 인덱스로부터 index 만큼 멀리 떨어진 symbol을 가져옵니다.</para>
         /// </summary>
         /// <param name="index"></param>
         /// <returns></returns>
@@ -72,18 +107,18 @@ namespace Parse.FrontEnd.Parsers.Datas.LR
 
             for (int i = 0; i < this.SingleNT.Count; i++)
             {
-                result += (i == this.markIndex) ? "." : " ";
+                result += (i == this.markIndex) ? "•" : " ";
 
                 if(this.SingleNT[i] != new Epsilon())
                     result += this.SingleNT[i].ToString();
             }
 
-            if (this.markIndex >= this.SingleNT.Count) result += ".";
+            if (this.markIndex >= this.SingleNT.Count) result += "•";
 
             return result;
         }
 
-        public bool Equals(CanonicalItem other)
+        public bool Equals(LRItem other)
         {
             if (object.ReferenceEquals(other, null)) return false;
 
@@ -96,9 +131,9 @@ namespace Parse.FrontEnd.Parsers.Datas.LR
         {
             bool result = false;
 
-            if (obj is CanonicalItem)
+            if (obj is LRItem)
             {
-                CanonicalItem right = obj as CanonicalItem;
+                LRItem right = obj as LRItem;
 
                 result = (this.GetHashCode() == right.GetHashCode());
             }
@@ -106,7 +141,7 @@ namespace Parse.FrontEnd.Parsers.Datas.LR
             return result;
         }
 
-        public static bool operator ==(CanonicalItem left, CanonicalItem right)
+        public static bool operator ==(LRItem left, LRItem right)
         {
             if (object.ReferenceEquals(left, null))
             {
@@ -116,7 +151,7 @@ namespace Parse.FrontEnd.Parsers.Datas.LR
             return left.Equals(right);
         }
 
-        public static bool operator !=(CanonicalItem left, CanonicalItem right)
+        public static bool operator !=(LRItem left, LRItem right)
         {
             if (object.ReferenceEquals(left, null))
             {
@@ -126,6 +161,8 @@ namespace Parse.FrontEnd.Parsers.Datas.LR
             return !left.Equals(right);
         }
 
-        public object Clone() => new CanonicalItem(this.SingleNT.Clone() as NonTerminalSingle, this.markIndex);
+        public LRItem FirstLRItem() => new LRItem(this.SingleNT.Clone() as NonTerminalSingle, 0);
+        public LRItem PrevLRItem() => (markIndex <= 0) ? null : new LRItem(this.SingleNT.Clone() as NonTerminalSingle, (sbyte)(markIndex -1));
+        public object Clone() => new LRItem(this.SingleNT.Clone() as NonTerminalSingle, markIndex);
     }
 }

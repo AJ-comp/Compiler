@@ -35,7 +35,7 @@ namespace Parse.FrontEnd.Parsers
         /// </summary>
         /// <param name="singleNT"></param>
         /// <returns></returns>
-        public static TerminalSet FirstTerminalSet(NonTerminalSingle singleNT)
+        public static TerminalSet FirstTerminalSet(NonTerminalConcat singleNT)
         {
             TerminalSet result = new TerminalSet();
 
@@ -69,7 +69,7 @@ namespace Parse.FrontEnd.Parsers
         /// </summary>
         /// <param name="nonTerminal"></param>
         /// <returns></returns>
-        public static SymbolSet GetFollowSymbols(HashSet<NonTerminal> allNonTerminal,  NonTerminal nonTerminal)
+        public static SymbolSet GetFollowSymbols(HashSet<NonTerminal> allNonTerminal, NonTerminal nonTerminal)
         {
             SymbolSet result = new SymbolSet();
 
@@ -115,13 +115,13 @@ namespace Parse.FrontEnd.Parsers
         /// <param name="exploredSet">explored node until now</param>
         /// <returns></returns>
         /// <see cref="https://www.lucidchart.com/documents/edit/515ff26b-2649-4150-86ec-80288ef51570/0?beaconFlowId=67B120E7DA8E4FC0"/>
-        public static CanonicalItemSet Closure(CanonicalItemSet iStatus, HashSet<NonTerminal> exploredSet = null)
+        public static CanonicalState Closure(CanonicalState iStatus, HashSet<NonTerminal> exploredSet = null)
         {
             if (exploredSet == null) exploredSet = new HashSet<NonTerminal>();
 
-            var result = new CanonicalItemSet();
+            var result = new CanonicalState();
 
-            foreach(var item in iStatus)
+            foreach (var item in iStatus)
             {
                 result.Add(item);
 
@@ -135,10 +135,10 @@ namespace Parse.FrontEnd.Parsers
                 if (exploredSet.Contains(multipleNT)) continue;
 
                 exploredSet.Add(multipleNT);
-                CanonicalItemSet param = new CanonicalItemSet();
+                CanonicalState param = new CanonicalState();
                 foreach (NonTerminalSingle single in multipleNT)
                 {
-                    param.Add(new CanonicalItem(single));
+                    param.Add(new LRItem(single));
                 }
 
                 result.UnionWith(Analyzer.Closure(param, exploredSet));
@@ -147,16 +147,16 @@ namespace Parse.FrontEnd.Parsers
             return result;
         }
 
-        public static CanonicalItemSet Goto(CanonicalItemSet iStatus, Symbol toSeeSymbol)
+        public static CanonicalState Goto(CanonicalState iStatus, Symbol toSeeSymbol)
         {
             if (toSeeSymbol == null) return null;
-            var param = new CanonicalItemSet();
+            var param = new CanonicalState();
 
-            foreach(var item in iStatus)
+            foreach (var item in iStatus)
             {
                 if (item.MarkSymbol == toSeeSymbol)
                 {
-                    var cloneNT = item.Clone() as CanonicalItem;
+                    var cloneNT = item.Clone() as LRItem;
 
                     cloneNT.MoveMarkSymbol();
 

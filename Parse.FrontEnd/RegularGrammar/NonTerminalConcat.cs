@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Parse.FrontEnd.RegularGrammar
 {
@@ -21,6 +22,7 @@ namespace Parse.FrontEnd.RegularGrammar
                 return true;
             }
         }
+
         public bool IsEpsilon
         {
             get
@@ -76,6 +78,36 @@ namespace Parse.FrontEnd.RegularGrammar
             this.RemoveAt(index);
 
             foreach (var symbol in symbolList) this.Insert(index++, symbol);
+        }
+
+        /// <summary>
+        /// Get the symbol list of after specified index.
+        /// </summary>
+        /// <param name="index"></param>
+        /// <returns></returns>
+        public NonTerminalConcat PostSymbolListFrom(int index)
+        {
+            var result = new NonTerminalConcat();
+            if (_symbols.Count <= index) return result;
+
+            result.AddRange(_symbols.Skip(index + 1).ToArray());
+
+            return result;
+        }
+
+        /// <summary>
+        /// Get the symbol list of before specified index.
+        /// </summary>
+        /// <param name="index"></param>
+        /// <returns></returns>
+        public NonTerminalConcat PrevSymbolListFrom(int index)
+        {
+            var result = new NonTerminalConcat();
+            if (_symbols.Count <= index) return result;
+
+            result.AddRange(_symbols.Take(index).ToArray());
+
+            return result;
         }
 
         public HashSet<NonTerminal> ToNonTerminalSet()
