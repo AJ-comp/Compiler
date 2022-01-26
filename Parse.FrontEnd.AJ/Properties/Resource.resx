@@ -127,4 +127,7 @@
   <data name="FileNameCantEmpty" xml:space="preserve">
     <value>Specify file name</value>
   </data>
+  <data name="RealNumber" xml:space="preserve">
+    <value>real number</value>
+  </data>
 </root>

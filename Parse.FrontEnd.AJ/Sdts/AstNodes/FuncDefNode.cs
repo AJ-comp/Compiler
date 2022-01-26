@@ -29,7 +29,7 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes
             AccessType = accessType;
             BlockLevel = blockLevel;
             Offset = offset;
-            TypeData = returnTypeInfo;
+            ReturnTypeData = returnTypeInfo;
         }
 
 
@@ -39,9 +39,9 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes
         /// <para>함수 정의에 대한 의미분석을 시작합니다.</para>
         /// </summary>
         /// <remarks>
-        /// [0] : declarator (DeclareVarNode)                <br/>
-        /// [1] : FormalPara (ParamListNode)                <br/>
-        /// [2] : CompoundSt (CompoundStNode)          <br/>
+        /// [0] : const? (TerminalNode)                         <br/>
+        /// [1] : type_spec (TypeDeclareNode)               <br/>
+        /// [2] : CompoundSt (CompoundStNode)           <br/>
         /// </remarks>
         /// <param name="param"></param>
         /// <returns></returns>
@@ -49,28 +49,38 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes
         public override SdtsNode Compile(CompileParameter param)
         {
             // it needs to clone an param
-            var newParam = param.Clone();
             var classDefNode = GetParent(typeof(ClassDefNode)) as ClassDefNode;
 
-            Type = FuncType.Normal;
-            BlockLevel = ParentBlockLevel;
+            //            BlockLevel = ParentBlockLevel;
+            BlockLevel = param.BlockLevel;
             AccessType = Access.Private;
 
-            // build FuncHead node
-            var declareIdent = Items[0].Compile(newParam) as DeclareIdentNode;
+            int offset = 0;
+            if (Items[offset] is TerminalNode)
+            {
+                offset++;
+                ReturnTypeData.Const = true;
+            }
 
-            TypeData = declareIdent.AJType;
-            Token = declareIdent.NameToken;
+            // compile FuncHead node
+            var declareIdent = Items[offset++].Compile(param.CloneForNewBlock()) as TypeDeclareNode;
+
+            ReturnTypeData = new AJTypeInfo(declareIdent.Type);
+            ReturnTypeData.Token = declareIdent.DataTypeToken;
+
+            // compile name
+            var nameNode = Items[offset++].Compile(param.CloneForNewBlock()) as TerminalNode;
+            NameToken = nameNode.Token;
 
             // add this reference
-            ParamVarList.Add(VariableAJ.CreateThisVar(classDefNode.Type, BlockLevel, 0));
-            var formalParam = Items[1].Compile(newParam) as ParamListNode;
+            ParamVarList.Add(VariableAJ.CreateThisVar(classDefNode.Type, classDefNode.NameToken, BlockLevel + 1, 0));
+            var formalParam = Items[offset++].Compile(param.CloneForNewBlock(1)) as ParamListNode;
             ParamVarList.AddRange(formalParam.VarList);
 
             Reference.Add(this);
 
-            // build CompoundSt node
-            CompoundSt = Items[1].Compile(newParam) as CompoundStNode;
+            // compile CompoundSt node
+            CompoundSt = Items[offset++].Compile(param.CloneForNewBlock()) as CompoundStNode;
 
             return this;
         }

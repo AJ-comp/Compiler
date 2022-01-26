@@ -19,12 +19,12 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes
 
         /**************************************************/
         /// <summary>
-        /// Start semantic analysis for variable declaration.
-        /// 변수 선언에 대한 의미분석을 시작합니다.
-        /// format summary
-        /// [0] : Const? (AstTerminal)
-        /// [1] : typespecifier 
-        /// [2] : ident  (AstTerminal)
+        /// <para>Start semantic analysis for variable declaration.</para>
+        /// <para>변수 선언에 대한 의미분석을 시작합니다.</para>
+        /// format summary  <br/>
+        /// [0] : Const? (AstTerminal)  <br/>
+        /// [1] : typespecifier <br/>
+        /// [2] : ident  (AstTerminal)  <br/>
         /// </summary>
         /// <param name="param"></param>
         /// <returns></returns>

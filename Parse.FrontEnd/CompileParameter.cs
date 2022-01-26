@@ -2,10 +2,12 @@
 using Parse.FrontEnd.RegularGrammar;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 
 namespace Parse.FrontEnd
 {
+    [DebuggerDisplay("{" + nameof(GetDebuggerDisplay) + "(),nq}")]
     public class CompileParameter : ICloneable<CompileParameter>
     {
         public ISymbolData ParentData { get; set; }
@@ -62,9 +64,15 @@ namespace Parse.FrontEnd
             return result;
         }
 
-        public virtual CompileParameter CloneForNewBlock()
+        public virtual CompileParameter CloneForNewBlock(int offset = 0)
         {
-            return null;
+            var result = Clone();
+            result.BlockLevel++;
+            result.Offset = offset;
+
+            return result;
         }
+
+        private string GetDebuggerDisplay() => $"[Block: {BlockLevel}, Offset: {Offset}, Build: {Build}]";
     }
 }

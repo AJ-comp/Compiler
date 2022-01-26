@@ -61,6 +61,51 @@ namespace Parse.FrontEnd.AJ.Properties {
         }
         
         /// <summary>
+        ///   The &apos;{1}&apos; definition is included in the &apos;{0}&apos; type.과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string AJ0026 {
+            get {
+                return ResourceManager.GetString("AJ0026", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   The member name can&apos;t same with the outer name.과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string AJ0027 {
+            get {
+                return ResourceManager.GetString("AJ0027", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   It can&apos;t be come the expression because the return type of function is void.과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string AJ0028 {
+            get {
+                return ResourceManager.GetString("AJ0028", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   It must be come the expression because the return type of function is not void.과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string AJ0029 {
+            get {
+                return ResourceManager.GetString("AJ0029", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   {0} type can&apos;t convert to {1} type. please return type of function.과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string AJ0030 {
+            get {
+                return ResourceManager.GetString("AJ0030", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   {0} is already defined.과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string MCL0000 {

@@ -11,14 +11,13 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.TypeNodes
     [DebuggerDisplay("{" + nameof(GetDebuggerDisplay) + "(),nq}")]
     public partial class ClassDefNode : ISymbolData
     {
-        public Access AccessType { get; set; }
+        public Access AccessType { get; set; } = Access.Private;
         public TokenData NameToken { get; set; }
         public override AJDataType Type => AJDataType.Class;
-        public TokenData Token { get; set; }
         public int Block { get; set; }
         public int Offset { get; set; }
         public override uint Size => AJUtilities.SizeOf(this);
-        public override string Name => Token.Input;
+        public override string Name => NameToken.Input;
         public List<VariableAJ> Fields { get; set; } = new List<VariableAJ>();
         public List<FuncDefNode> AllFuncs { get; set; } = new List<FuncDefNode>();
         public List<AJNode> References { get; set; } = new List<AJNode>();
@@ -110,6 +109,28 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.TypeNodes
         }
 
         private string GetDebuggerDisplay()
-            => $"class name: {Name}, field count: {Fields.Count()}, func count: {AllFuncs.Count()}";
+            => $"{AccessType} class {Name} (field: {Fields.Count()}, func: {AllFuncs.Count()})";
+
+
+        protected override bool IsDuplicated(TokenData tokenToAdd)
+        {
+            foreach (var field in Fields)
+            {
+                if (field.Name != tokenToAdd.Input) continue;
+
+                AddDuplicatedErrorInType(tokenToAdd);
+                return true;
+            }
+
+            foreach (var func in AllFuncs)
+            {
+                if (func.Name != tokenToAdd.Input) continue;
+
+                AddDuplicatedErrorInType(tokenToAdd);
+                return true;
+            }
+
+            return false;
+        }
     }
 }

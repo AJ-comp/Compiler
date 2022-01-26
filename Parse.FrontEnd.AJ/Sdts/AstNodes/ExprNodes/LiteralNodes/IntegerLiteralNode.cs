@@ -42,8 +42,7 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes.LiteralNodes
                 else if (ushort.MinValue <= value && value <= ushort.MaxValue) Result = new ConstantAJ((ushort)value);
                 else if (int.MinValue <= value && value <= int.MaxValue) Result = new ConstantAJ((int)value);
                 else if (uint.MinValue <= value && value <= uint.MaxValue) Result = new ConstantAJ((uint)value);
-
-                Result = new ConstantAJ((double)value);
+                else Result = new ConstantAJ((double)value);
             }
             catch(Exception)
             {

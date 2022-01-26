@@ -1,15 +1,15 @@
-﻿using Parse.FrontEnd.AJ.Properties;
-using Parse.Types;
-using Parse.Types.ConstantTypes;
+﻿using Parse.Types;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace Parse.FrontEnd.AJ.Data
 {
+    [DebuggerDisplay("{" + nameof(GetDebuggerDisplay) + "(),nq}")]
     public partial class ConstantAJ : ISymbolData, IHasType
     {
         public int Id { get; set; }
         public AJTypeInfo Type { get; set; }
-        public TokenData Token { get; set; }
+        public TokenData NameToken { get; set; }
 
         public int Block { get; set; }
         public int Offset { get; set; }
@@ -110,6 +110,11 @@ namespace Parse.FrontEnd.AJ.Data
             if (ValueState == State.Error || target == State.Error) return State.Error;
 
             return State.Fixed;
+        }
+
+        public string GetDebuggerDisplay()
+        {
+            return $"[{Type.DataType}] (Value: {Value}, State: {ValueState}) (Block: {Block}, Offset: {Offset})";
         }
     }
 }

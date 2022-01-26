@@ -22,5 +22,10 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.TypeNodes
         {
             throw new NotImplementedException();
         }
+
+        protected override bool IsDuplicated(TokenData tokenToAdd)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

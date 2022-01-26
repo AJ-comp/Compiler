@@ -175,4 +175,19 @@
   <data name="MCL0025" xml:space="preserve">
     <value>It can't convert from {0} type to {1} type implicitly.</value>
   </data>
+  <data name="AJ0026" xml:space="preserve">
+    <value>The '{1}' definition is included in the '{0}' type.</value>
+  </data>
+  <data name="AJ0027" xml:space="preserve">
+    <value>The member name can't same with the outer name.</value>
+  </data>
+  <data name="AJ0028" xml:space="preserve">
+    <value>It can't be come the expression because the return type of function is void.</value>
+  </data>
+  <data name="AJ0029" xml:space="preserve">
+    <value>It must be come the expression because the return type of function is not void.</value>
+  </data>
+  <data name="AJ0030" xml:space="preserve">
+    <value>{0} type can't convert to {1} type. please return type of function.</value>
+  </data>
 </root>

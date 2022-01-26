@@ -1,4 +1,7 @@
-﻿using Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes;
+﻿using Parse.FrontEnd.AJ.Data;
+using Parse.FrontEnd.AJ.Properties;
+using Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes;
+using Parse.FrontEnd.AJ.Sdts.AstNodes.TypeNodes;
 using Parse.FrontEnd.Ast;
 using Parse.MiddleEnd.IR.Expressions;
 using Parse.MiddleEnd.IR.Expressions.ExprExpressions;
@@ -17,11 +20,37 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.StatementNodes
         }
 
 
-        // [0] : return (AstTerminal)
-        // [1] : ExpSt (AstNonTerminal)
+
+        /// <summary>
+        /// format summary  <br/>
+        /// [0] : return (AstTerminal)  <br/>
+        /// [1] : ExpSt? (AstNonTerminal)   <br/>
+        /// </summary>
+        /// <param name="param"></param>
+        /// <returns></returns>
         public override SdtsNode Compile(CompileParameter param)
         {
-            Expr = Items[1].Compile(param) as ExprNode;
+            var classDefNode = GetParent(typeof(ClassDefNode)) as ClassDefNode;
+            var funcNode = GetParent(typeof(FuncDefNode)) as FuncDefNode;
+
+            // return;
+            if (Items.Count == 1)
+            {
+                var returnNode = Items[0].Compile(param) as TerminalNode;
+
+                if (funcNode.ReturnType != AJDataType.Void)
+                    Alarms.Add(new MeaningErrInfo(returnNode.Token, nameof(AlarmCodes.AJ0029), AlarmCodes.AJ0029));
+            }
+            // return value;
+            else
+            {
+                Expr = Items[1].Compile(param) as ExprNode;
+
+                if (funcNode.ReturnType == AJDataType.Void)
+                    Alarms.Add(new MeaningErrInfo(Expr.AllTokens, nameof(AlarmCodes.AJ0028), AlarmCodes.AJ0028));
+                else if (!funcNode.ReturnTypeData.IsIncludeType(Expr.Result.Type))
+                    Alarms.Add(AJAlarmFactory.CreateAJ0030(Expr.Result.Type, funcNode.ReturnTypeData));
+            }
 
             return this;
         }

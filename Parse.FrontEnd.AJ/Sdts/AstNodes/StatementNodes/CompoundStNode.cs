@@ -20,27 +20,33 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.StatementNodes
         // [0] : StatementNode* [StatList] [epsilon able]
         public override SdtsNode Compile(CompileParameter param)
         {
-            BlockLevel = ParentBlockLevel + 1;
+            BlockLevel = param.BlockLevel;
 
             // it needs to clone an param
             _varList.Clear();
-            var newParam = param.Clone();
-            newParam.Offset = 0;
+            param.Offset = 0;
             var classDefNode = GetParent(typeof(ClassDefNode)) as ClassDefNode;
+            var funcNode = GetParent(typeof(FuncDefNode)) as FuncDefNode;
 
             foreach (var item in Items)
             {
-                var statementNode = item.Compile(newParam);
-
-                if (statementNode is DeclareVarNode)
+                if (item is DeclareVarNode)
                 {
-                    var varNode = statementNode as DeclareVarNode;
+                    var varNode = item.Compile(param) as DeclareVarNode;
                     _varList.Add(varNode.Variable);
                 }
-                else if (item is StatListNode)
+                else if (item is CompoundStNode)
                 {
                     // build StatListNode
-                    StatListNode = item.Compile(newParam) as StatListNode;
+                    //                    StatListNode = item.Compile(param) as CompoundStNode;
+                }
+                else if (item is ReturnStatementNode)
+                {
+                    var returnNode = item.Compile(param) as ReturnStatementNode;
+                }
+                else if (item is IfStatementNode)
+                {
+                    var ifNode = item.Compile(param.CloneForNewBlock()) as IfStatementNode;
                 }
 
                 if (IsRoot) (param.RootNode as ProgramNode).ShortCutDeclareVarSet.Add(this);

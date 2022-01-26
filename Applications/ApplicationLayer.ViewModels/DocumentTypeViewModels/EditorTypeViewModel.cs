@@ -247,7 +247,7 @@ namespace ApplicationLayer.ViewModels.DocumentTypeViewModels
 
             if (semanticResult?.SdtsRoot == null) return alarmList;
 
-            var errNodes = semanticResult?.SdtsRoot.ErrNodes;
+            var errNodes = semanticResult?.SdtsRoot.AllAlarmNodes;
             foreach (var item in errNodes)
             {
                 foreach (var alarm in item.ConnectedErrInfoList)

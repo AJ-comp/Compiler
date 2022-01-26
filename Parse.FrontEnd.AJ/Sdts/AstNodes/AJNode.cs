@@ -1,6 +1,4 @@
-﻿using Parse.FrontEnd.AJ.Sdts.Datas;
-using Parse.FrontEnd.Ast;
-using System.Collections.Generic;
+﻿using Parse.FrontEnd.Ast;
 
 namespace Parse.FrontEnd.AJ.Sdts.AstNodes
 {

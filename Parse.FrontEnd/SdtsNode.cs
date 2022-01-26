@@ -36,7 +36,7 @@ namespace Parse.FrontEnd
         }
 
 
-        public IReadOnlyList<SdtsNode> ErrNodes
+        public IReadOnlyList<SdtsNode> AllAlarmNodes
         {
             get
             {
@@ -44,8 +44,8 @@ namespace Parse.FrontEnd
 
                 foreach (var item in Items)
                 {
-                    if (item.ConnectedErrInfoList.Count > 0) result.Add(item);
-                    result.AddRange(item.ErrNodes);
+                    if (item.Alarms.Count > 0) result.Add(item);
+                    result.AddRange(item.AllAlarmNodes);
                 }
 
                 return result;
@@ -70,7 +70,7 @@ namespace Parse.FrontEnd
 
         public override string ToString()
         {
-            string result = $"Ast: {Ast}, Error node count: {ErrNodes.Count}";
+            string result = $"Ast: {Ast}, Error node count: {AllAlarmNodes.Count}";
 
             if (Items.Count > 0)
             {

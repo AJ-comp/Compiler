@@ -33,7 +33,7 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes.Binary
                 }
                 else if (LeftVar.Type.Const)
                 {
-                    Alarms.Add(AJAlarmFactory.CreateMCL0002(LeftVar.Token));
+                    Alarms.Add(AJAlarmFactory.CreateMCL0002(LeftVar.NameToken));
                     IsCanParsing = false;
                 }
             }

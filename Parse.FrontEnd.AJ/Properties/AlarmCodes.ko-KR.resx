@@ -195,4 +195,19 @@
   <data name="MCL0025" xml:space="preserve">
     <value>암시적으로 {0} 타입을 {1} 타입으로 변환할 수 없습니다.</value>
   </data>
+  <data name="AJ0026" xml:space="preserve">
+    <value>{0} 형식에 이미 {1} 에 대한 정의가 포함되어 있습니다.</value>
+  </data>
+  <data name="AJ0027" xml:space="preserve">
+    <value>멤버이름은 바깥쪽 이름과 같을 수 없습니다.</value>
+  </data>
+  <data name="AJ0028" xml:space="preserve">
+    <value>함수의 리턴 타입이 void 형이므로 return 문 뒤에 개체식이 나오면 안됩니다.</value>
+  </data>
+  <data name="AJ0029" xml:space="preserve">
+    <value>함수의 리턴 타입이 void 형이 아니므로 return 문 뒤에 개체식이 나와야 합니다.</value>
+  </data>
+  <data name="AJ0030" xml:space="preserve">
+    <value>{0} 타입을 {1} 타입으로 변환할 수 없습니다. 함수의 리턴 타입을 확인하세요.</value>
+  </data>
 </root>

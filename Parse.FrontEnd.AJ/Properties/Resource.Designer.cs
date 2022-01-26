@@ -149,5 +149,14 @@ namespace Parse.FrontEnd.AJ.Properties {
                 return ResourceManager.GetString("NotRegisteredFile", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   real number과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string RealNumber {
+            get {
+                return ResourceManager.GetString("RealNumber", resourceCulture);
+            }
+        }
     }
 }

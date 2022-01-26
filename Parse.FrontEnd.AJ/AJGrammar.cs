@@ -19,6 +19,7 @@ namespace Parse.FrontEnd.AJ
         public Terminal While { get; } = new Terminal(TokenType.Keyword.Repeateword, "while");
         public Terminal Return { get; } = new Terminal(TokenType.Keyword.Controlword, "return");
         public static Terminal Const { get; } = new Terminal(TokenType.Keyword.DefinedDataType, "const");
+        public static Terminal Bool { get; } = new Terminal(TokenType.Keyword.DefinedDataType, "bool");
         public static Terminal Char { get; } = new Terminal(TokenType.Keyword.DefinedDataType, "char");
         public static Terminal Short { get; } = new Terminal(TokenType.Keyword.DefinedDataType, "short");
         public static Terminal UShort { get; } = new Terminal(TokenType.Keyword.DefinedDataType, "ushort");
@@ -30,10 +31,10 @@ namespace Parse.FrontEnd.AJ
         public static Terminal Ident { get; } = new Terminal(TokenType.Identifier, "[_a-zA-Z][_a-zA-Z0-9]*", Resource.Ident, true, true);
         public static Terminal HexNumber { get; } = new Terminal(TokenType.Literal.Digit16, "0[xX][0-9a-fA-F]+", Resource.HexNumber, true, true);
         public static Terminal BinNumber { get; } = new Terminal(TokenType.Literal.Digit16, "0[bB][01]+", Resource.BinNumber, true, true);
-        public static Terminal Number { get; } = new Terminal(TokenType.Literal.Digit10, "[0-9]+", Resource.DecimalNumber, true, true);
+        public static Terminal Number { get; } = new Terminal(TokenType.Literal.Digit10, "-?[0-9]+", Resource.DecimalNumber, true, true);
+        public static Terminal RealNumber { get; } = new Terminal(TokenType.Literal.Digit10, @"-?[0-9]+\.[0-9]+", Resource.RealNumber, true, true);
         public static Terminal BoolTrue { get; } = new Terminal(TokenType.Literal.Bool, "true");
         public static Terminal BoolFalse { get; } = new Terminal(TokenType.Literal.Bool, "false");
-        //        public Terminal RealNumber { get; } = new Terminal(TokenType.Digit.Digit10, "[0-9]+.[0-9]+", "real number", true, true);
         public Terminal LineComment { get; } = new Terminal(TokenType.SpecialToken.Comment, "//.*$", false, true);
 
         public Terminal OpenParenthesis { get; } = new Terminal(TokenType.Operator.PairOpen, "(", false);
@@ -76,7 +77,7 @@ namespace Parse.FrontEnd.AJ
         public Terminal LogicalNot { get; } = new Terminal(TokenType.Operator, "!", false);
 
 
-        private NonTerminal miniC = new NonTerminal("mini_c", true);
+        private NonTerminal ajProgram = new NonTerminal("mini_c", true);
         private NonTerminal usingDcl = new NonTerminal("using_dcl");
         private NonTerminal namespaceDcl = new NonTerminal(nameof(namespaceDcl));
         private NonTerminal namespaceMemberDcl = new NonTerminal(nameof(namespaceMemberDcl));
@@ -97,18 +98,16 @@ namespace Parse.FrontEnd.AJ
         private NonTerminal functionName = new NonTerminal("function_name");
         private NonTerminal formalParam = new NonTerminal("formal_param");
         private NonTerminal formalParamList = new NonTerminal("formal_param_list");
-        private NonTerminal compoundSt = new NonTerminal("compound_st");
-        private NonTerminal optDclList = new NonTerminal("opt_dcl_list");
+        private NonTerminal compoundSt = new NonTerminal(nameof(compoundSt));
         private NonTerminal declareVarSt = new NonTerminal(nameof(declareVarSt));
         private NonTerminal declarationList = new NonTerminal("declaration_list");
         private NonTerminal declaration = new NonTerminal("declaration");
-        private NonTerminal initDclList = new NonTerminal("init_dcl_list");
-        private NonTerminal initDeclarator = new NonTerminal("init_declarator");
+        private NonTerminal memberCommon = new NonTerminal(nameof(memberCommon));
         private NonTerminal declaratorVar = new NonTerminal("declarator");
         private NonTerminal declaratorIdent = new NonTerminal(nameof(declaratorIdent));
         private NonTerminal literalInt = new NonTerminal("opt_number");
+        private NonTerminal literalDouble = new NonTerminal(nameof(literalDouble));
         private NonTerminal literalBool = new NonTerminal("opt_bool");
-        private NonTerminal optStatList = new NonTerminal("opt_stat_list");
         private NonTerminal statementList = new NonTerminal("statement_list");
         private NonTerminal statement = new NonTerminal("statement");
         private NonTerminal expressionSt = new NonTerminal("expression_st");
@@ -149,6 +148,7 @@ namespace Parse.FrontEnd.AJ
         public static MeaningUnit FuncDef { get; } = new MeaningUnit(nameof(FuncDef));
 //        public static MeaningUnit FuncHead { get; } = new MeaningUnit(nameof(FuncHead), MatchedAction.BlockPlus);
         public static MeaningUnit ConstNode { get; } = new MeaningUnit(nameof(ConstNode));
+        public static MeaningUnit BoolNode { get; } = new MeaningUnit(nameof(BoolNode));
         public static MeaningUnit CharNode { get; } = new MeaningUnit(nameof(CharNode));
         public static MeaningUnit ShortNode { get; } = new MeaningUnit(nameof(ShortNode));
         public static MeaningUnit SystemNode { get; } = new MeaningUnit(nameof(SystemNode));
@@ -176,6 +176,7 @@ namespace Parse.FrontEnd.AJ
         public static MeaningUnit DeRef { get; } = new MeaningUnit(nameof(DeRef));
         public static MeaningUnit UseVar { get; } = new MeaningUnit(nameof(UseVar));
         public static MeaningUnit IntLiteralNode { get; } = new MeaningUnit(nameof(IntLiteralNode));
+        public static MeaningUnit DoubleLiteralNode { get; } = new MeaningUnit(nameof(DoubleLiteralNode));
         public static MeaningUnit BoolLiteralNode { get; } = new MeaningUnit(nameof(BoolLiteralNode));
 
 
@@ -207,13 +208,13 @@ namespace Parse.FrontEnd.AJ
         public static MeaningUnit PostDecM { get; } = new MeaningUnit(nameof(PostDecM));
 
 
-        public override NonTerminal EbnfRoot => this.miniC;
+        public override NonTerminal EbnfRoot => this.ajProgram;
 
         public AJGrammar()
         {
             this.ScopeInfos.Add(new ScopeInfo(this.scopeCommentStart, this.scopeCommentEnd));
 
-            this.miniC.AddItem(usingDcl.ZeroOrMore() + namespaceDcl, Program);
+            this.ajProgram.AddItem(usingDcl.ZeroOrMore() + namespaceDcl, Program);
             this.usingDcl.AddItem(Using + Ident + SemiColon, UsingNode);
 
             // namespace
@@ -230,6 +231,7 @@ namespace Parse.FrontEnd.AJ
             this.formalParamList.AddItem(declaratorVar | formalParamList + Comma + declaratorVar);
 
 
+            this.typeSpecifier.AddItem(Bool, BoolNode);
             this.typeSpecifier.AddItem(Char, CharNode);
             this.typeSpecifier.AddItem(Short, ShortNode);
             this.typeSpecifier.AddItem(UShort, ShortNode);
@@ -246,22 +248,21 @@ namespace Parse.FrontEnd.AJ
 //            this.initDclList.AddItem(this.initDeclarator | this.initDclList + this.Comma + this.initDeclarator);
 
             this.declaratorVar.AddItem(Const.Optional() + typeSpecifier + Ident + (Assign + expression).Optional(), DeclareVar);
-//            this.declaratorIdent.AddItem(Const.Optional() + typeSpecifier + Ident, DeclareIdent);
 
             this.literalInt.AddItem(Number | HexNumber, IntLiteralNode);
+            this.literalDouble.AddItem(RealNumber, DoubleLiteralNode);
             this.literalBool.AddItem(BoolTrue | BoolFalse, BoolLiteralNode);
-            this.optStatList.AddItem(this.statementList | new Epsilon(), StatList);
+//            this.optStatList.AddItem(this.statementList | new Epsilon(), StatList);
 
             this.statementList.AddItem(this.statement | this.statementList + this.statement);
             this.statement.AddItem(compoundSt | declareVarSt | expressionSt | ifSt | whileSt | returnSt);
-            this.expressionSt.AddItem(this.optExpression + this.SemiColon, ExpSt);
-            this.optExpression.AddItem(this.expression | new Epsilon());
+            this.expressionSt.AddItem(expression.Optional() + this.SemiColon, ExpSt);
 
             this.ifSt.AddItem(this.If + this.OpenParenthesis + this.expression + this.CloseParenthesis + this.statement, 1, IfSt);
             this.ifSt.AddItem(this.If + this.OpenParenthesis + this.expression + this.CloseParenthesis + this.statement + this.Else + this.statement, 0, IfElseSt);
 
             this.whileSt.AddItem(this.While + this.OpenParenthesis + this.expression + this.CloseParenthesis + this.statement, WhileSt);
-            this.returnSt.AddItem(this.Return + this.expressionSt, ReturnSt);
+            this.returnSt.AddItem(this.Return + expression.Optional() + SemiColon, ReturnSt);
             this.declareVarSt.AddItem(declaratorVar + SemiColon, DeclareVarSt);
 //            this.expression.AddItem(this.newAssignmentExp);
             this.expression.AddItem(this.assignmentExp);
@@ -325,6 +326,8 @@ namespace Parse.FrontEnd.AJ
 
             this.primaryExp.AddItem(Ident, UseVar);
             this.primaryExp.AddItem(this.literalInt);
+            this.primaryExp.AddItem(this.literalDouble);
+            this.primaryExp.AddItem(this.literalBool);
 
             // https://lucid.app/lucidchart/8a4c2427-e77c-4dc2-bfc3-a52a25eac791/edit?beaconFlowId=77C0A73F5DE9BDDD&invitationId=inv_d331b441-8997-489c-b184-7c28b3a411b7&page=0_0#
             this.primaryExp.AddItem(this.OpenParenthesis + this.expression + this.CloseParenthesis);

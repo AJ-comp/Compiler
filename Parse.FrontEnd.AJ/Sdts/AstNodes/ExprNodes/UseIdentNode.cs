@@ -35,11 +35,11 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes
 
             var symbolData = UsedSymbolData;
             if (symbolData == null) Alarms.Add(AJAlarmFactory.CreateMCL0001(IdentToken));
-            else if(symbolData.Token.IsVirtual) Alarms.Add(AJAlarmFactory.CreateMCL0001(IdentToken));
+            else if(symbolData.NameToken.IsVirtual) Alarms.Add(AJAlarmFactory.CreateMCL0001(IdentToken));
             else if (symbolData is VariableAJ)
             {
                 Var = symbolData as VariableAJ;
-                if (!Var.IsInitialized) Alarms.Add(AJAlarmFactory.CretaeMCL0005(Var.Token));
+                if (!Var.IsInitialized) Alarms.Add(AJAlarmFactory.CretaeMCL0005(Var.NameToken));
 
                 Result = (symbolData as VariableAJ).ToConstantAJ();
             }

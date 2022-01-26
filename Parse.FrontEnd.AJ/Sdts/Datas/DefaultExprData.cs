@@ -1,5 +1,4 @@
-﻿using Parse.FrontEnd.AJ.Sdts.Datas.Variables;
-using Parse.Types;
+﻿using Parse.Types;
 using Parse.Types.ConstantTypes;
 
 namespace Parse.FrontEnd.AJ.Sdts.Datas

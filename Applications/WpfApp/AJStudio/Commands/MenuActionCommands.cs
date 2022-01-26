@@ -546,7 +546,7 @@ namespace ApplicationLayer.WpfApp.Commands
                 //                mainViewModel.SolutionExplorer.Documents.Add(textDoc);
                 //                mainViewModel.SolutionExplorer.SelectedDocument = textDoc;
 
-                if (editorViewModel.Ast?.ErrNodes.Count == 0)
+                if (editorViewModel.Ast?.AllAlarmNodes.Count == 0)
                 {
                     editorViewModel.Compiler.AllBuild();
                     var buildExpression = editorViewModel.Compiler.GetFinalExpression(editorViewModel.FullPath);

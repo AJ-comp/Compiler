@@ -1,5 +1,4 @@
 ﻿using Parse.FrontEnd.AJ.Data;
-using Parse.FrontEnd.AJ.Sdts.Datas;
 using Parse.FrontEnd.Ast;
 
 namespace Parse.FrontEnd.AJ.Sdts.AstNodes.TypeNodes

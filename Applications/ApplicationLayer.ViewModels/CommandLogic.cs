@@ -29,7 +29,7 @@ namespace ApplicationLayer.ViewModels
 
                 var cFile = file as SourceFileTreeNodeModel;
 
-                if (cFile.Ast?.ErrNodes.Count == 0)
+                if (cFile.Ast?.AllAlarmNodes.Count == 0)
                 {
                     //                    File.WriteAllText(cFile.FullPath, cFile.);
 

@@ -42,7 +42,7 @@ namespace CommandPrompt.Builder
                 var compileResultJson = new CompileResultPrintFormat();
 
                 compileResultJson.Source = sourceDic.Key;
-                compileResultJson.Result = sourceDic.Value.ParsingResult.Success;
+                compileResultJson.Result = sourceDic.Value.Result;
 
                 // parsing error
                 foreach (var error in sourceDic.Value.Errors)

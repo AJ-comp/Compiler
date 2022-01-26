@@ -21,7 +21,7 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes
                 if (transNode is ISymbolCenter)
                 {
                     if(bIncludeVirtual) result.AddRangeExceptNull((transNode as ISymbolCenter).SymbolList);
-                    else result.AddRangeExceptNull((transNode as ISymbolCenter).SymbolList.Where(s => s.Token.IsVirtual == false));
+                    else result.AddRangeExceptNull((transNode as ISymbolCenter).SymbolList.Where(s => s.NameToken.IsVirtual == false));
                 }
 
                 transNode = transNode.Parent as AJNode;
@@ -50,7 +50,7 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes
                 var symbolCenter = curNode as ISymbolCenter;
                 foreach (var symbol in symbolCenter.SymbolList)
                 {
-                    if (symbol.Token.Input != toFindIdentToken.Input) continue;
+                    if (symbol.NameToken.Input != toFindIdentToken.Input) continue;
 
                     result = symbol;
                     break;
@@ -70,7 +70,7 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes
 
             foreach (var symbol in symbols)
             {
-                if (symbol.Token.Input == toFindIdentToken.Input) result.Add(symbol);
+                if (symbol.NameToken.Input == toFindIdentToken.Input) result.Add(symbol);
             }
 
             return result;

@@ -13,6 +13,7 @@ namespace Parse.FrontEnd
         public Terminal Kind { get; } = new NotDefined();
         public TokenCell TokenCell { get; }
         public bool IsVirtual { get; private set; }
+        public bool IsStubCode { get; private set; }
         public bool IsNotUsed { get; set; }
 
         public TokenData(Terminal kindTerminal, TokenCell tokenCell, bool isVirtual = false)
@@ -62,6 +63,17 @@ namespace Parse.FrontEnd
             if (virtualT.TokenType == TokenType.Identifier) value = valueWhenIdent;
 
             return new TokenData(virtualT, new TokenCell(asId, value, null), true);
+        }
+
+
+        public static TokenData CreateStubToken(Terminal virtualT, string valueWhenIdent = "ident")
+        {
+            var result = CreateVirtualToken(virtualT, valueWhenIdent);
+
+            result.IsVirtual = false;
+            result.IsStubCode = true;
+
+            return result;
         }
 
         public override string ToString() => Input;

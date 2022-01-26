@@ -35,11 +35,11 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes
         /// <summary>
         /// <para>Start semantic analysis for variable declaration.</para>
         /// <para>변수 선언에 대한 의미분석을 시작합니다.</para>
-        /// format summary
-        /// [0] : Const? (AstTerminal)
-        /// [1] : typespecifier 
-        /// [2] : ident  (AstTerminal)
-        /// [3] : expression? (AstNonTerminal)
+        /// format summary  <br/>
+        /// [0] : Const? (AstTerminal)  <br/>
+        /// [1] : typespecifier <br/>
+        /// [2] : ident  (AstTerminal)  <br/>
+        /// [3] : expression? (AstNonTerminal)  <br/>
         /// </summary>
         /// <param name="param"></param>
         /// <returns></returns>
@@ -59,8 +59,8 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes
 
             (param.RootNode as ProgramNode).ShortCutDeclareVarSet.Add(this);
 
-            var symbol = GetSymbol(Variable.Token);
-            if (symbol != null) Alarms.Add(AJAlarmFactory.CreateMCL0009(Variable.Token));
+            var symbol = GetSymbol(Variable.NameToken);
+            if (symbol != null) Alarms.Add(AJAlarmFactory.CreateMCL0009(Variable.NameToken));
 
             return this;
         }

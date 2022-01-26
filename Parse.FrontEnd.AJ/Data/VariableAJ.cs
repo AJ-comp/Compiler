@@ -26,7 +26,7 @@ namespace Parse.FrontEnd.AJ.Data
         public AJTypeInfo Type { get; set; }
         public bool Param { get; set; } = false;
         public bool ReadOnly { get; set; } = false;
-        public TokenData Token { get; set; }
+        public TokenData NameToken { get; set; }
         public int Block { get; set; }
         public int Offset { get; set; }
         public List<TokenData> LevelTokens { get; set; } = new List<TokenData>();
@@ -67,7 +67,7 @@ namespace Parse.FrontEnd.AJ.Data
                         if (!(item is TerminalNode)) continue;
 
                         var terminal = item as TerminalNode;
-                        if (terminal.Token == Token) result.Add(terminal.Token);
+                        if (terminal.Token == NameToken) result.Add(terminal.Token);
                     }
                 }
 
@@ -85,7 +85,7 @@ namespace Parse.FrontEnd.AJ.Data
         {
             AccessType = accessType;
             Type = typeInfo;
-            Token = nameToken;
+            NameToken = nameToken;
             _levelTokens.AddRangeExceptNull(levelTokens);
             Block = blockLevel;
             Offset = offset;
@@ -98,7 +98,7 @@ namespace Parse.FrontEnd.AJ.Data
         public AJDataType DataType => Type.DataType;
 
         public TokenData DataTypeToken { get; }
-        public string Name => Token?.Input;
+        public string Name => NameToken?.Input;
 
 
         public ConstantAJ ToConstantAJ()
@@ -121,9 +121,14 @@ namespace Parse.FrontEnd.AJ.Data
             return result;
         }
 
-        public static VariableAJ CreateThisVar(AJDataType type, int blockLevel, int offset)
+        public static VariableAJ CreateThisVar(AJDataType type, TokenData nameToken, int blockLevel, int offset)
         {
-            return new VariableAJ(Access.Private, AJTypeInfo.CreateThisType(type), null, null, blockLevel, offset);
+            return new VariableAJ(Access.Private, 
+                                             AJTypeInfo.CreateThisType(type, nameToken), 
+                                             TokenData.CreateStubToken(AJGrammar.Ident, "this"), 
+                                             null, 
+                                             blockLevel, 
+                                             offset);
         }
 
 
@@ -174,14 +179,7 @@ namespace Parse.FrontEnd.AJ.Data
 
         private List<TokenData> _levelTokens = new List<TokenData>();
 
-        private string DebuggerDisplay
-                        => string.Format("{0}{1} {3}[{4}] Block: {5} Offset: {6}",
-                                        (Type.Const) ? "const " : string.Empty,
-                                        DataType.ToDescription(),
-                                        Name,
-                                        Type.ArrayLength.ItemsString(PrintType.String),
-                                        Block,
-                                        Offset);
+        private string DebuggerDisplay => $"{AccessType} {Type.GetDebuggerDisplay()} {Name} (Block: {Block} Offset: {Offset})";
     }
 
 

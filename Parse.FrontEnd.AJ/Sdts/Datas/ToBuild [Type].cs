@@ -1,9 +1,4 @@
 ﻿using Parse.FrontEnd.AJ.Data;
-using Parse.FrontEnd.AJ.Sdts.Datas.Variables;
-using Parse.Types;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Parse.FrontEnd.AJ.Sdts.Datas
 {

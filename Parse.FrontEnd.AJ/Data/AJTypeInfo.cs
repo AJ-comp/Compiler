@@ -1,9 +1,12 @@
-﻿using Parse.FrontEnd.AJ.Sdts.AstNodes.TypeNodes;
+﻿using AJ.Common.Helpers;
+using Parse.Extensions;
+using Parse.FrontEnd.AJ.Sdts.AstNodes.TypeNodes;
 using Parse.MiddleEnd.IR.Datas;
 using Parse.Types;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 
 namespace Parse.FrontEnd.AJ.Data
 {
@@ -23,6 +26,8 @@ namespace Parse.FrontEnd.AJ.Data
         [Description("enum")] Enum,
     }
 
+
+    [DebuggerDisplay("{" + nameof(GetDebuggerDisplay) + "(),nq}")]
     public partial class AJTypeInfo : IData
     {
         public int Id { get; set; } = 0;
@@ -52,13 +57,12 @@ namespace Parse.FrontEnd.AJ.Data
         }
 
 
-        public static AJTypeInfo CreateThisType(AJDataType type)
+        public static AJTypeInfo CreateThisType(AJDataType type, TokenData token)
         {
-            var result = new AJTypeInfo(type);
+            var result = new AJTypeInfo(type, token);
 
             result.Static = false;
             result.Const = true;
-            result.Token = null;
             result.PointerDepth = 1;
             result.Size = 4;
             result.DataType = type;
@@ -133,6 +137,62 @@ namespace Parse.FrontEnd.AJ.Data
         }
 
 
+        public bool IsUserDefType()
+        {
+            if (DataType == AJDataType.Class) return true;
+            if (DataType == AJDataType.Struct) return true;
+            if (DataType == AJDataType.Enum) return true;
+
+            return false;
+        }
+
+
+        public bool IsSameType(AJTypeInfo target)
+        {
+            if (DataType != target.DataType) return false;
+            if (ArrayLength.Count != target.ArrayLength.Count) return false;
+            if (PointerDepth != target.PointerDepth) return false;
+
+            return true;
+        }
+
+
+        /// <summary>
+        /// Check if pointer level is 0 and array length is 0.
+        /// </summary>
+        /// <returns></returns>
+        public bool IsNormalType()
+        {
+            if (PointerDepth != 0) return false;
+            if (ArrayLength.Count > 0) return false;
+
+            return true;
+        }
+
+
+        public bool IsIncludeType(AJTypeInfo type)
+        {
+            if (DataType == AJDataType.Void) return false;
+            if (IsSameType(type)) return true;
+
+            if (!IsNormalType()) return false;
+
+            // if normal type
+            if (IsFloatingType() && type.IsArithmeticType()) return true;
+            if (DataType == AJDataType.Int && type.IsIntegerType()) return true;
+            if (DataType == AJDataType.Short && type.IsIntegerType())
+            {
+                return (type.DataType == AJDataType.Int) ? false : true;
+            }
+            if (DataType == AJDataType.Byte && type.IsIntegerType())
+            {
+                return (type.DataType == AJDataType.Byte) ? true : false;
+            }
+
+            return false;
+        }
+
+
         public IRType ToIR()
         {
             IRType result = null;
@@ -197,6 +257,24 @@ namespace Parse.FrontEnd.AJ.Data
             if (DataType == AJDataType.Enum) return 0;
 
             return 0;
+        }
+
+        public string GetDebuggerDisplay()
+        {
+            string result = Static ? "static " : string.Empty;
+            result += Const ? "const " : string.Empty;
+
+            if (IsUserDefType())
+                result += $"{DataType.ToDescription()} ({Token.Input}) (size: {Size})";
+            else
+                result += $"{DataType.ToDescription()} (size: {Size})";
+
+            result += PointerDepth.ToAnyStrings("*");
+            foreach(var arrayLength in ArrayLength) result += $"[{arrayLength}]";
+
+            if (IsFloatingType()) result += $"(nan: {Nan})";
+
+            return result;
         }
     }
 }

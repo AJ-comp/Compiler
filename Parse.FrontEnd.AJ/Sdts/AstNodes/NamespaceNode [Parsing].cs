@@ -1,6 +1,5 @@
 ﻿using Parse.FrontEnd.AJ.Properties;
 using Parse.FrontEnd.AJ.Sdts.AstNodes.TypeNodes;
-using Parse.FrontEnd.AJ.Sdts.Datas;
 using Parse.FrontEnd.Ast;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,54 +10,57 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes
     {
         public NamespaceNode(AstSymbol node) : base(node)
         {
-            BlockLevel = 1;
+            BlockLevel = 0;
         }
 
 
         /**************************************************/
         /// <summary>
-        /// Start semantic analysis for namespace.              <br/>
-        /// namespace에 대한 의미분석을 시작합니다.        <br/>
-        /// [0] : Ident (TerminalNode)
-        /// [1:n] : (ClassDefNode | StructDefNode | EnumNode)*  (NonTerminal)
+        /// <para>Start semantic analysis for namespace.</para>
+        /// <para>namespace에 대한 의미분석을 시작합니다.</para>
+        /// [0] : accesser? (AccesserNode) <br/>
+        /// [1] : Ident (TerminalNode)  <br/>
+        /// [2:n] : (ClassDefNode | StructDefNode | EnumNode)*  (NonTerminal)   <br/>
         /// </summary>
         /// <param name="param"></param>
         /// <returns></returns>
         /**************************************************/
         public override SdtsNode Compile(CompileParameter param)
         {
+            Alarms.Clear();
             ConnectedErrInfoList.Clear();
 
+            int offset = 0;
+            if (Items[offset] is AccesserNode)
+            {
+                // parsing for accesser
+                var accesserNode = Items[offset++].Compile(param) as AccesserNode;
+                AccessType = accesserNode.AccessState;
+            }
+
             // parsing for ident
-            var nameNode = Items[0].Compile(param) as TerminalNode;
+            var nameNode = Items[offset++].Compile(param) as TerminalNode;
             NameTokens.Add(nameNode.Token);
 
-            // it needs to clone an param
-            var newParam = param.Clone();
-
-            var items = Items.Skip(1);
-            foreach (var item in items)
+            int newBlockOffset = 0;
+            foreach (var item in Items.Skip(offset))
             {
-                var minicNode = item as AJNode;
+                var ajNode = item as AJNode;
 
-                if (minicNode is ClassDefNode)
+                if (ajNode is ClassDefNode)
                 {
-                    newParam.Offset = 0;
-
-                    var node = minicNode.Compile(newParam) as ClassDefNode;
-                    if (!IsDuplicated(node.Token)) Classes.Add(node);
+                    var node = ajNode.Compile(param.CloneForNewBlock(newBlockOffset++)) as ClassDefNode;
+                    if (!IsDuplicated(node.NameToken)) Classes.Add(node);
                 }
-                else if (minicNode is StructDefNode)
+                else if (ajNode is StructDefNode)
                 {
-                    newParam.Offset = 0;
-
-                    var node = minicNode.Compile(newParam) as StructDefNode;
+                    var node = ajNode.Compile(param.CloneForNewBlock(newBlockOffset++)) as StructDefNode;
                     _structDefNodes.Add(node);
                 }
             }
 
             References.Add(this);
-            DBContext.Instance.Insert(this);
+//            DBContext.Instance.Insert(this);
 
             return this;
         }

@@ -4,7 +4,7 @@ namespace Parse.FrontEnd
 {
     public interface ISymbolData : IData
     {
-        TokenData Token { get; }
+        TokenData NameToken { get; }
         int Block { get; }
         int Offset { get; }
     }

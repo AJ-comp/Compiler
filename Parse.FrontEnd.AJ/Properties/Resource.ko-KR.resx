@@ -147,4 +147,7 @@
   <data name="FileNameCantEmpty" xml:space="preserve">
     <value>파일 명을 지정하세요</value>
   </data>
+  <data name="RealNumber" xml:space="preserve">
+    <value>실수</value>
+  </data>
 </root>

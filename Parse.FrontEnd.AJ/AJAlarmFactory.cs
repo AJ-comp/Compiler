@@ -1,4 +1,6 @@
-﻿using Parse.FrontEnd.AJ.Properties;
+﻿using AJ.Common.Helpers;
+using Parse.FrontEnd.AJ.Data;
+using Parse.FrontEnd.AJ.Properties;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -303,6 +305,31 @@ namespace Parse.FrontEnd.AJ
         {
             var errMsg = string.Format(AlarmCodes.MCL0025, from, to);
             return new MeaningErrInfo(nameof(AlarmCodes.MCL0025), errMsg);
+        }
+
+
+        /*****************************************************/
+        /// <summary>
+        /// Create the MeaningErrInfo for code AJ0030. <br/>
+        /// AJ0030 is that <b><i>
+        /// {from} type can't convert to {to} type. please return type of function.</i></b>
+        /// </summary>
+        /// <param name="from"></param>
+        /// <param name="to"></param>
+        /// <returns></returns>
+        /*****************************************************/
+        public static MeaningErrInfo CreateAJ0030(AJTypeInfo from, AJTypeInfo to)
+        {
+            var errMsg = string.Format(AlarmCodes.AJ0030, 
+                                                     from.DataType.ToDescription(), 
+                                                     to.DataType.ToDescription());
+
+            List<TokenData> tokens = new List<TokenData>();
+
+            tokens.Add(from.Token);
+            tokens.Add(to.Token);
+
+            return new MeaningErrInfo(tokens, nameof(AlarmCodes.AJ0030), errMsg);
         }
     }
 }
