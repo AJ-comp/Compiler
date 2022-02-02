@@ -17,6 +17,8 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.StatementNodes
         // (AddAssign | SubAssign | MulAssign | DivAssign | ...).Optional ;
         public override SdtsNode Compile(CompileParameter param)
         {
+            base.Compile(param);
+
             if (Items.Count > 0)
             {
                 Expr = Items[0].Compile(param) as ExprNode;

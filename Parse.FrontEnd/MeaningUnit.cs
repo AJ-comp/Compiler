@@ -58,14 +58,13 @@ namespace Parse.FrontEnd
 
     public class MeaningErrInfo : ParsingErrorInfo
     {
-        public IReadOnlyList<TokenData> ErrTokens => _errTokens;
         public bool IsAllVirtualToken
         {
             get
             {
-                if (ErrTokens.Count == 0) return false;
+                if (_errTokens.Count == 0) return false;
 
-                foreach (var token in ErrTokens)
+                foreach (var token in _errTokens)
                 {
                     if (!token.IsVirtual) return false;
                 }
@@ -91,8 +90,6 @@ namespace Parse.FrontEnd
         {
             _errTokens.AddRange(tokens);
         }
-
-        private List<TokenData> _errTokens = new List<TokenData>();
     }
 
 

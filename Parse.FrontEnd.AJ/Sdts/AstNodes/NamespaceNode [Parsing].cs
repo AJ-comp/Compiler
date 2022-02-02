@@ -10,7 +10,6 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes
     {
         public NamespaceNode(AstSymbol node) : base(node)
         {
-            BlockLevel = 0;
         }
 
 

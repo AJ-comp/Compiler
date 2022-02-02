@@ -7,8 +7,8 @@ namespace Parse.FrontEnd.Tokenize
     {
         /***************************************************************/
         /// <summary>
-        /// This function returns the impact range on the basis of the tokenIndex argument.
-        /// tokenIndex 파라메터를 기반으로 한 영향 범위를 가져옵니다.
+        /// <para>This function returns the impact range on the basis of the tokenIndex argument.</para>
+        /// <para>tokenIndex 파라메터를 기반으로 한 영향 범위를 가져옵니다.</para>
         /// </summary>
         /// <param name="tokenIndex"></param>
         /// <returns>The first value : index, The second value : count </returns>

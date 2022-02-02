@@ -30,6 +30,8 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.StatementNodes
         /// <returns></returns>
         public override SdtsNode Compile(CompileParameter param)
         {
+            base.Compile(param);
+
             var classDefNode = GetParent(typeof(ClassDefNode)) as ClassDefNode;
             var funcNode = GetParent(typeof(FuncDefNode)) as FuncDefNode;
 

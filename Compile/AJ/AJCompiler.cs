@@ -110,6 +110,7 @@ namespace Compile.AJ
 
             // parsing
             var parsingResult = Parser.Parsing(lexingData.TokensForParsing);
+            parsingResult.LexingData = lexingData;
             ParsingCompleted?.Invoke(this, parsingResult);
 
             _docTable[fileFullPath] = new TotalData(data, data, lexingData, parsingResult);
@@ -214,7 +215,7 @@ namespace Compile.AJ
             }
             catch (Exception ex)
             {
-                return null;
+                return new SemanticAnalysisResult(_docTable[fileFullPath].RootNode, new List<AstSymbol>(), ex);
             }
         }
 

@@ -71,13 +71,7 @@ namespace Parse.FrontEnd.AJ.Sdts
 
             if (type is ClassDefNode)
             {
-                var structType = type as ClassDefNode;
 
-                uint size = 0;
-                foreach(var member in structType.Fields)
-                    size += member.Type.Size;
-
-                return size;
             }
 
             throw new Exception();

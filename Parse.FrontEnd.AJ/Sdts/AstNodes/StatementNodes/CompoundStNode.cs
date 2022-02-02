@@ -20,7 +20,7 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.StatementNodes
         // [0] : StatementNode* [StatList] [epsilon able]
         public override SdtsNode Compile(CompileParameter param)
         {
-            BlockLevel = param.BlockLevel;
+            base.Compile(param);
 
             // it needs to clone an param
             _varList.Clear();
@@ -30,10 +30,10 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.StatementNodes
 
             foreach (var item in Items)
             {
-                if (item is DeclareVarNode)
+                if (item is DeclareVarStNode)
                 {
-                    var varNode = item.Compile(param) as DeclareVarNode;
-                    _varList.Add(varNode.Variable);
+                    var varNode = item.Compile(param) as DeclareVarStNode;
+                    _varList.UnionWith(varNode.VarList);
                 }
                 else if (item is CompoundStNode)
                 {

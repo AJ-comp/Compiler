@@ -20,7 +20,7 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes
             {
                 if (transNode is ISymbolCenter)
                 {
-                    if(bIncludeVirtual) result.AddRangeExceptNull((transNode as ISymbolCenter).SymbolList);
+                    if (bIncludeVirtual) result.AddRangeExceptNull((transNode as ISymbolCenter).SymbolList);
                     else result.AddRangeExceptNull((transNode as ISymbolCenter).SymbolList.Where(s => s.NameToken.IsVirtual == false));
                 }
 
@@ -58,6 +58,66 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes
 
                 if (result != null) break;  // found
                 else curNode = curNode.Parent as AJNode;
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// Get all ISymbolCenter.
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<ISymbolCenter> GetSymbolCenters()
+        {
+            List<ISymbolCenter> result = new List<ISymbolCenter>();
+            AJNode curNode = this;
+
+            while (true)
+            {
+                if (curNode == null) break;
+                if (curNode is ISymbolCenter) result.Add(curNode as ISymbolCenter);
+
+                curNode = curNode.Parent as AJNode;
+            }
+
+            return result;
+        }
+
+
+        /// <summary>
+        /// Get all ISymbolData of current block.
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<ISymbolData> GetSymbolDatasOfCurrentBlock()
+        {
+            List<ISymbolData> result = new List<ISymbolData>();
+            AJNode curNode = this;
+
+            while (true)
+            {
+                if (curNode == null) break;
+                if (curNode is ISymbolCenter) result.AddRange((curNode as ISymbolCenter).SymbolList);
+
+                var parentNode = curNode.Parent as AJNode;
+                if (parentNode.BlockLevel != curNode.BlockLevel) break;
+
+                curNode = parentNode;
+            }
+
+            return result;
+        }
+
+
+        public ISymbolData GetSymbolFromCurrentBlock(TokenData toFindToken)
+        {
+            ISymbolData result = null;
+
+            foreach (var symbolData in GetSymbolDatasOfCurrentBlock())
+            {
+                if (symbolData.NameToken.Input != toFindToken.Input) continue;
+
+                result = symbolData;
+                break;
             }
 
             return result;

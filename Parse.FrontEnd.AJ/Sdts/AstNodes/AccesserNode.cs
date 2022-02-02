@@ -14,6 +14,7 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes
 
         public override SdtsNode Compile(CompileParameter param)
         {
+            base.Compile(param);
             var terminalNode = Items[0].Compile(param) as TerminalNode;
 
             if (terminalNode.Token.Kind == AJGrammar.Private) AccessState = Access.Private;

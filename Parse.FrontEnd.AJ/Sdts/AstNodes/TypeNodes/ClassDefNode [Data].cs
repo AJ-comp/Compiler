@@ -9,14 +9,24 @@ using System.Text;
 namespace Parse.FrontEnd.AJ.Sdts.AstNodes.TypeNodes
 {
     [DebuggerDisplay("{" + nameof(GetDebuggerDisplay) + "(),nq}")]
-    public partial class ClassDefNode : ISymbolData
+    public partial class ClassDefNode : ISymbolData, ISymbolCenter
     {
         public Access AccessType { get; set; } = Access.Private;
         public TokenData NameToken { get; set; }
         public override AJDataType Type => AJDataType.Class;
         public int Block { get; set; }
         public int Offset { get; set; }
-        public override uint Size => AJUtilities.SizeOf(this);
+        public override uint Size
+        {
+            get
+            {
+                uint size = 0;
+                foreach (var member in Fields)
+                    size += member.Type.Size;
+
+                return size;
+            }
+        }
         public override string Name => NameToken.Input;
         public List<VariableAJ> Fields { get; set; } = new List<VariableAJ>();
         public List<FuncDefNode> AllFuncs { get; set; } = new List<FuncDefNode>();

@@ -252,7 +252,7 @@ namespace ApplicationLayer.ViewModels.DocumentTypeViewModels
             {
                 foreach (var alarm in item.ConnectedErrInfoList)
                 {
-                    var errToken = alarm.ErrTokens[0];
+                    var errToken = alarm._errTokens[0];
                     alarmList.Add(new AlarmEventArgs(projNode?.FileNameWithoutExtension, FileName, 0, 0, errToken, alarm));
                 }
             }

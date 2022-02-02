@@ -27,7 +27,8 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes
         {
             Type = type;
             AccessType = accessType;
-            BlockLevel = blockLevel;
+            CompileData = new CompileParameter();
+            CompileData.BlockLevel = blockLevel;
             Offset = offset;
             ReturnTypeData = returnTypeInfo;
         }
@@ -49,11 +50,8 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes
         public override SdtsNode Compile(CompileParameter param)
         {
             // it needs to clone an param
+            base.Compile(param);
             var classDefNode = GetParent(typeof(ClassDefNode)) as ClassDefNode;
-
-            //            BlockLevel = ParentBlockLevel;
-            BlockLevel = param.BlockLevel;
-            AccessType = Access.Private;
 
             int offset = 0;
             if (Items[offset] is TerminalNode)

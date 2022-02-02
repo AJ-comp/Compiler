@@ -44,6 +44,8 @@ namespace Parse.FrontEnd.Tokenize
                     : (this.StartIndex <= caretIndex && caretIndex <= this.EndIndex);
         }
 
+        public bool Contains(int tokenIndex) => this.StartIndex <= tokenIndex && tokenIndex <= this.EndIndex;
+
         public bool MoreRange(int startingPos, int endingPos) => (startingPos <= this.StartIndex && this.EndIndex < endingPos);
         public bool SubRange(int startingPos, int endingPos) => (startingPos < this.StartIndex && this.EndIndex >= endingPos);
 

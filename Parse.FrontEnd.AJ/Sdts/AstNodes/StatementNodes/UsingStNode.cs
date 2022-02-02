@@ -15,7 +15,9 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.StatementNodes
         // [0] = Ident [TerminalNode]
         public override SdtsNode Compile(CompileParameter param)
         {
-            var node = (Items[0].Compile(param) as TerminalNode);
+            base.Compile(param);
+
+            var node = Items[0].Compile(param) as TerminalNode;
             Name = node.Token.Input;
 
             return this;

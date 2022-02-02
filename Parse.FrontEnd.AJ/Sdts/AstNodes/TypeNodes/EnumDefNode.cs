@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Parse.FrontEnd.AJ.Sdts.AstNodes.TypeNodes
 {
-    public partial class EnumDefNode : UserDefTypeNode
+    public partial class EnumDefNode : TypeDefNode
     {
         public EnumDefNode(AstSymbol node) : base(node)
         {
@@ -20,6 +20,8 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.TypeNodes
 
         public override SdtsNode Compile(CompileParameter param)
         {
+            base.Compile(param);
+
             throw new NotImplementedException();
         }
 

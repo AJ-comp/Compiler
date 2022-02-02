@@ -17,6 +17,7 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes
         public override SdtsNode Compile(CompileParameter param)
         {
             // if there is a prev information remove it.
+            base.Compile(param);
             _paramNodeList.Clear();
 
             foreach (var item in Items)

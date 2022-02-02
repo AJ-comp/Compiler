@@ -1,6 +1,4 @@
 ﻿using Parse.FrontEnd.AJ.Data;
-using Parse.FrontEnd.AJ.Properties;
-using Parse.FrontEnd.AJ.Sdts.Datas;
 using Parse.FrontEnd.Ast;
 using Parse.MiddleEnd.IR.Expressions;
 
@@ -19,6 +17,7 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes
         }
 
         /// <summary>
+        /// format summary  <br/>
         /// [0] : ident <br/>
         /// This function checks condition as the below <br/>
         /// 1. is it defined?
@@ -28,18 +27,20 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes
         /// <returns></returns>
         public override SdtsNode Compile(CompileParameter param)
         {
-            ConnectedErrInfoList.Clear();
+            base.Compile(param);
+            Alarms.Clear();
+            (CompileData.RootNode as ProgramNode).UnLinkedSymbol.Remove(this);
 
             var node = Items[0].Compile(param) as TerminalNode;
             IdentToken = node.Token;
 
             var symbolData = UsedSymbolData;
-            if (symbolData == null) Alarms.Add(AJAlarmFactory.CreateMCL0001(IdentToken));
-            else if(symbolData.NameToken.IsVirtual) Alarms.Add(AJAlarmFactory.CreateMCL0001(IdentToken));
+            if (symbolData == null) AddDuplicatedError(IdentToken);
+            else if (symbolData.NameToken.IsVirtual) AddDuplicatedError(IdentToken);
             else if (symbolData is VariableAJ)
             {
                 Var = symbolData as VariableAJ;
-                if (!Var.IsInitialized) Alarms.Add(AJAlarmFactory.CretaeMCL0005(Var.NameToken));
+                if (!Var.IsInitialized) Alarms.Add(AJAlarmFactory.CretaeMCL0005(IdentToken));
 
                 Result = (symbolData as VariableAJ).ToConstantAJ();
             }
@@ -49,7 +50,7 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes
                 Result = (symbolData as FuncDefNode).ReturnValue;
             }
 
-            DBContext.Instance.Insert(this);
+            //            DBContext.Instance.Insert(this);
 
             return this;
         }

@@ -1,16 +1,16 @@
 ﻿using Parse.FrontEnd.Ast;
+using System;
+using System.Collections.Generic;
 
 namespace Parse.FrontEnd.AJ.Sdts.AstNodes
 {
     public abstract partial class AJNode : SdtsNode, IData, IHasParent
     {
-        public int Id { get; set; }
+        public int Id { get; set; } = _nextId++;
         public int ParentId { get; set; }
         public string ParentType { get; set; }
         public int ChildIndex { get; set; }
-        public int BlockLevel { get; protected set; } = -1;
-
-        public CompileParameter NodeInfos { get; set; }
+        public int BlockLevel => CompileData.BlockLevel;
 
 
         public int ParentBlockLevel
@@ -52,10 +52,37 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes
             Ast = node;
         }
 
+        public override SdtsNode Compile(CompileParameter param)
+        {
+            if (param != null) CompileData = param;
+
+            return this;
+        }
+
         public override string ToString() => this.GetType().Name;
 
+        public override bool Equals(object obj)
+        {
+            return obj is AJNode node &&
+                   Id == node.Id;
+        }
 
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(Id);
+        }
 
         private bool _isNotUsed = false;
+        private static int _nextId = 0;
+
+        public static bool operator ==(AJNode left, AJNode right)
+        {
+            return EqualityComparer<AJNode>.Default.Equals(left, right);
+        }
+
+        public static bool operator !=(AJNode left, AJNode right)
+        {
+            return !(left == right);
+        }
     }
 }

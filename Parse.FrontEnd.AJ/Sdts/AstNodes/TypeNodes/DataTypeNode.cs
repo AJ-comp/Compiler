@@ -16,6 +16,8 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.TypeNodes
 
         public override SdtsNode Compile(CompileParameter param)
         {
+            base.Compile(param);
+
             var node = Items[0].Compile(param) as TerminalNode;
             DataTypeToken = node.Token;
 

@@ -5,8 +5,8 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes.Binary
 {
     public abstract class BinaryExprNode : ExprNode
     {
-        public ExprNode LeftNode => Items[0] as ExprNode;
-        public ExprNode RightNode => Items[1] as ExprNode;
+        public ExprNode LeftNode { get; private set; }
+        public ExprNode RightNode { get; private set; }
 
         public bool IsBothLiteral => LeftNode is LiteralNode && RightNode is LiteralNode;
 
@@ -20,8 +20,8 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes.Binary
             Alarms.Clear();
 
             // ExprNode or TerminalNode
-            Items[0].Compile(param);
-            Items[1].Compile(param);
+            LeftNode = Items[0].Compile(param) as ExprNode;
+            RightNode = Items[1].Compile(param) as ExprNode;
 
             return this;
         }

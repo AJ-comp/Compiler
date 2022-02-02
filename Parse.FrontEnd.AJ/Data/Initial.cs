@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
 
 namespace Parse.FrontEnd.AJ.Data
 {
+    [DebuggerDisplay("{" + nameof(GetDebuggerDisplay) + "(),nq}")]
     public class Initial : IData
     {
         public int Id { get; set; }
@@ -22,5 +24,12 @@ namespace Parse.FrontEnd.AJ.Data
                 return null;
             }
         }
+
+        public Initial(ISymbolData value)
+        {
+            Value = value;
+        }
+
+        private string GetDebuggerDisplay() => TerminalValue.GetDebuggerDisplay();
     }
 }

@@ -54,12 +54,12 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes
             if (Items.Last() is ExprNode)
             {
                 _initExpression = Items.Last().Compile(param) as ExprNode;
-                Variable.InitValue.Value = _initExpression.Result;
+                Variable.InitValue = new Initial(_initExpression.Result);
             }
 
             (param.RootNode as ProgramNode).ShortCutDeclareVarSet.Add(this);
 
-            var symbol = GetSymbol(Variable.NameToken);
+            var symbol = GetSymbolFromCurrentBlock(Variable.NameToken);
             if (symbol != null) Alarms.Add(AJAlarmFactory.CreateMCL0009(Variable.NameToken));
 
             return this;

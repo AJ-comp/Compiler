@@ -20,6 +20,8 @@ namespace Parse.FrontEnd.AJ
         public Terminal Return { get; } = new Terminal(TokenType.Keyword.Controlword, "return");
         public static Terminal Const { get; } = new Terminal(TokenType.Keyword.DefinedDataType, "const");
         public static Terminal Bool { get; } = new Terminal(TokenType.Keyword.DefinedDataType, "bool");
+        public static Terminal Byte { get; } = new Terminal(TokenType.Keyword.DefinedDataType, "byte");
+        public static Terminal SByte { get; } = new Terminal(TokenType.Keyword.DefinedDataType, "sbyte");
         public static Terminal Char { get; } = new Terminal(TokenType.Keyword.DefinedDataType, "char");
         public static Terminal Short { get; } = new Terminal(TokenType.Keyword.DefinedDataType, "short");
         public static Terminal UShort { get; } = new Terminal(TokenType.Keyword.DefinedDataType, "ushort");
@@ -149,8 +151,11 @@ namespace Parse.FrontEnd.AJ
 //        public static MeaningUnit FuncHead { get; } = new MeaningUnit(nameof(FuncHead), MatchedAction.BlockPlus);
         public static MeaningUnit ConstNode { get; } = new MeaningUnit(nameof(ConstNode));
         public static MeaningUnit BoolNode { get; } = new MeaningUnit(nameof(BoolNode));
+        public static MeaningUnit ByteNode { get; } = new MeaningUnit(nameof(ByteNode));
+        public static MeaningUnit SByteNode { get; } = new MeaningUnit(nameof(SByteNode));
         public static MeaningUnit CharNode { get; } = new MeaningUnit(nameof(CharNode));
         public static MeaningUnit ShortNode { get; } = new MeaningUnit(nameof(ShortNode));
+        public static MeaningUnit UShortNode { get; } = new MeaningUnit(nameof(UShortNode));
         public static MeaningUnit SystemNode { get; } = new MeaningUnit(nameof(SystemNode));
         public static MeaningUnit IntNode { get; } = new MeaningUnit(nameof(IntNode));
         public static MeaningUnit UIntNode { get; } = new MeaningUnit(nameof(UIntNode));
@@ -232,6 +237,7 @@ namespace Parse.FrontEnd.AJ
 
 
             this.typeSpecifier.AddItem(Bool, BoolNode);
+            this.typeSpecifier.AddItem(Byte, ByteNode);
             this.typeSpecifier.AddItem(Char, CharNode);
             this.typeSpecifier.AddItem(Short, ShortNode);
             this.typeSpecifier.AddItem(UShort, ShortNode);

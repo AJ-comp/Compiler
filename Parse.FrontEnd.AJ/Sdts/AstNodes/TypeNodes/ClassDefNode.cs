@@ -1,14 +1,12 @@
 ﻿using Parse.FrontEnd.AJ.Data;
-using Parse.FrontEnd.AJ.Properties;
 using Parse.FrontEnd.AJ.Sdts.AstNodes.StatementNodes;
 using Parse.FrontEnd.AJ.Sdts.Datas;
 using Parse.FrontEnd.Ast;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace Parse.FrontEnd.AJ.Sdts.AstNodes.TypeNodes
 {
-    public partial class ClassDefNode : UserDefTypeNode
+    public partial class ClassDefNode : TypeDefNode
     {
         public ClassDefNode(AstSymbol node) : base(node)
         {
@@ -31,8 +29,8 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.TypeNodes
         /**************************************************/
         public override SdtsNode Compile(CompileParameter param)
         {
+            base.Compile(param);
             AccessType = Access.Private;
-            BlockLevel = param.BlockLevel;
 
             int offset = 0;
             if (Items[offset] is AccesserNode)
@@ -64,6 +62,8 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.TypeNodes
             // 여기서 디폴트 생성자 소멸자를 무조건 생성한다
             CreateDefaultCreator(param.CloneForNewBlock());
             CreateDefaultDestructor(param.CloneForNewBlock());
+
+            (param.RootNode as ProgramNode).ShortCutTypeDefSet.Add(this);
 
             References.Add(this);
 //            DBContext.Instance.Insert(this);

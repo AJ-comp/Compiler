@@ -1,5 +1,6 @@
 ﻿using Parse.FrontEnd.AJ.Data;
 using Parse.FrontEnd.AJ.Sdts.AstNodes.StatementNodes;
+using Parse.FrontEnd.AJ.Sdts.AstNodes.TypeNodes;
 using Parse.FrontEnd.Ast;
 using System.Collections.Generic;
 
@@ -13,6 +14,8 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes
 
         public HashSet<AJTypeInfo> NoLinkedTypeSet { get; } = new HashSet<AJTypeInfo>();
         public HashSet<IHasVarList> ShortCutDeclareVarSet { get; } = new HashSet<IHasVarList>();
+        public HashSet<TypeDefNode> ShortCutTypeDefSet { get; } = new HashSet<TypeDefNode>();
+        public HashSet<AJNode> UnLinkedSymbol { get; } = new HashSet<AJNode>();
 
 
         public ProgramNode(AstSymbol node) : base(node)
@@ -42,6 +45,10 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes
                     Namespaces.Add(ajNode.Compile(param) as NamespaceNode);
                 }
             }
+
+            // retry compile for undefined symbol
+            foreach (var unlinkNode in UnLinkedSymbol) unlinkNode.Compile(null);
+
 
             return this;
         }

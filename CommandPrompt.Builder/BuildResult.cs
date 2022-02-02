@@ -1,7 +1,7 @@
 ﻿using AJ.Common.Helpers;
 using Compile;
 using ConsoleTables;
-using System;
+using Parse.FrontEnd.Tokenize;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json.Serialization;
@@ -48,10 +48,25 @@ namespace CommandPrompt.Builder
                 foreach (var error in sourceDic.Value.Errors)
                 {
                     var compileErrorJson = new CompileErrorPrintFormat();
-                    compileErrorJson.ErrorCode = error.Code;
 
+
+                    /*
+                    if (error.ErrToken != null)
+                    {
+                        var lineColumnTuple = sourceDic.Value.ParsingResult.LexingData.GetLineAndColumnIndex(error.ErrToken.StartIndex);
+                        compileErrorJson.Line = lineColumnTuple.Item1;
+                        compileErrorJson.Column = lineColumnTuple.Item2;
+                    }
+                    */
+                    compileErrorJson.ErrorCode = error.Code;
                     compileErrorJson.ErrorType = error.ErrType.ToDescription();
                     compileErrorJson.ErrorMessage = error.Message;
+
+                    foreach (var errToken in error.ErrTokens)
+                    {
+                        var tokenPos = sourceDic.Value.ParsingResult.LexingData.GetTokenPos(errToken.StartIndex);
+                        compileErrorJson.RelatedTokenPos.Add(tokenPos);
+                    }
 
                     compileResultJson.Errors.Add(compileErrorJson);
                 }
@@ -111,7 +126,7 @@ namespace CommandPrompt.Builder
         public string Source { get; set; }
         public bool Result { get; set; }
 
-        public List<CompileErrorPrintFormat> Errors { get; set; } = new List<CompileErrorPrintFormat>();
+        public List<CompileErrorPrintFormat> Errors { get; } = new List<CompileErrorPrintFormat>();
 
 
         public string ToTableFormat()
@@ -138,19 +153,18 @@ namespace CommandPrompt.Builder
 
     public class CompileErrorPrintFormat
     {
-        public int Line { get; set; }
-        public int Column { get; set; }
         public string ErrorType { get; set; }
         public string ErrorCode { get; set; }
         public string ErrorMessage { get; set; }
+
+        [JsonPropertyName("Token Position")]
+        public List<TokenPos> RelatedTokenPos { get; } = new List<TokenPos>();
 
 
         public string ToTableFormat()
         {
             Dictionary<string, string> datas = new Dictionary<string, string>
             {
-                { "Line", $"{Line}" },
-                { "Column", $"{Column}" },
                 { "Error type", $"{ErrorType}" },
                 { "Error code", $"{ErrorCode}" },
                 { "Error message", $"{ErrorMessage}" },
@@ -159,7 +173,13 @@ namespace CommandPrompt.Builder
             var table = new ConsoleTable(datas.Keys.ToArray());
             table.AddRow(datas.Values.ToArray());
 
-            return table.ToStringAlternative();
+            var result = table.ToStringAlternative();
+            foreach(var token in RelatedTokenPos)
+            {
+                result += token.ToTableFormat();
+            }
+
+            return result;
         }
     }
 }

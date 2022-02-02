@@ -104,6 +104,7 @@ namespace Parse.FrontEnd.AJ.Sdts
 
                 else if (cRoot.SignPost.MeaningUnit == AJGrammar.VoidNode) result = new TypeDeclareNode(root, AJDataType.Void, false, AJGrammar.Void.Value);
                 else if (cRoot.SignPost.MeaningUnit == AJGrammar.BoolNode) result = new TypeDeclareNode(root, AJDataType.Bool, false, AJGrammar.Bool.Value);
+                else if (cRoot.SignPost.MeaningUnit == AJGrammar.ByteNode) result = new TypeDeclareNode(root, AJDataType.Bool, false, AJGrammar.Byte.Value);
                 else if (cRoot.SignPost.MeaningUnit == AJGrammar.CharNode) result = new TypeDeclareNode(root, AJDataType.Byte, false, AJGrammar.Char.Value);
                 else if (cRoot.SignPost.MeaningUnit == AJGrammar.ShortNode) result = new TypeDeclareNode(root, AJDataType.Short, false, AJGrammar.Short.Value);
                 else if (cRoot.SignPost.MeaningUnit == AJGrammar.SystemNode) result = new TypeDeclareNode(root, AJDataType.System, false, AJGrammar.System.Value);

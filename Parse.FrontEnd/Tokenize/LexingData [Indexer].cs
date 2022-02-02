@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Parse.FrontEnd.Tokenize
@@ -9,8 +10,8 @@ namespace Parse.FrontEnd.Tokenize
     {
         /**********************************/
         /// <summary>
-        /// This returns the line index for the caret.
-        /// 캐럿에 대한 라인 인덱스를 가져옵니다.
+        /// <para>This returns the line index for the caret.</para>
+        /// <para>캐럿에 대한 라인 인덱스를 가져옵니다.</para>
         /// </summary>
         /**********************************/
         public IEnumerable<int> LineIndexesForCaret
@@ -51,8 +52,8 @@ namespace Parse.FrontEnd.Tokenize
 
         /**********************************************/
         /// <summary>
-        /// This function returns the token list of the lineIndex.
-        /// 라인 인덱스의 뷰 토큰 리스트를 가져옵니다.
+        /// <para>This function returns the token list of the lineIndex.</para>
+        /// <para>라인 인덱스의 뷰 토큰 리스트를 가져옵니다.</para>
         /// </summary>
         /// <param name="lineIndex"></param>
         /// <returns></returns>
@@ -86,8 +87,8 @@ namespace Parse.FrontEnd.Tokenize
 
         /*****************************************/
         /// <summary>
-        /// This returns absolute offset for line offset
-        /// 라인 offset에 해당하는 절대 offset 을 반환합니다.
+        /// <para>This returns absolute offset for line offset</para>
+        /// <para>라인 offset에 해당하는 절대 offset 을 반환합니다.</para>
         /// </summary>
         /// <param name="lineIndex"></param>
         /// <param name="offsetOnLine"></param>
@@ -135,21 +136,39 @@ namespace Parse.FrontEnd.Tokenize
 
         /**************************************/
         /// <summary>
-        /// This returns the line index for the token index.
-        /// 토큰 인덱스의 라인 인덱스를 가져옵니다.
+        /// <para>This returns the line index for the token index.</para>
+        /// <para>토큰 인덱스의 라인 인덱스를 가져옵니다.</para>
         /// </summary>
         /// <param name="tokenIndex"></param>
         /// <returns></returns>
         /**************************************/
         public int GetLineIndex(int tokenIndex)
         {
-            if (tokenIndex >= TokensForView.Count) return -1;
+            if (TokensForView.Count == 0) return -1;
+            if (tokenIndex > TokensForView.Last().EndIndex) return -1;
+
+            var subset = SubSetTo(tokenIndex);
 
             int result = 0;
-            Parallel.For(0, tokenIndex, (i) =>
+            Parallel.ForEach(subset, item =>
             {
-                if (TokensForView[i].Data == "\n") result++;
+                if (item.Data == "\n") Interlocked.Increment(ref result);
             });
+
+            return result;
+        }
+
+
+        public IEnumerable<TokenCell> SubSetTo(int tokenIndex)
+        {
+            List<TokenCell> result = new List<TokenCell>();
+
+            foreach (var item in TokensForView)
+            {
+                if (item.StartIndex > tokenIndex) break;
+
+                result.Add(item);
+            }
 
             return result;
         }
@@ -158,18 +177,25 @@ namespace Parse.FrontEnd.Tokenize
         public int GetLineCount() => _lineIndexer.Count() + 1;
 
 
-        public int GetColumnIndexOfLine(int tokenIndex)
+        public TokenPos GetTokenPos(int tokenIndex)
         {
             var line = GetLineIndex(tokenIndex);
-            if (line < 0) return -1;
+            var result = new TokenPos();
 
-            int lineStartIndex = 0;
-            for (int i = tokenIndex; i >= 0; i--)
+            if (line < 0) return result;
+
+            var tokensInLine = GetTokensForLine(line);
+            int columnIndex = 0;
+            foreach(var token in tokensInLine)
             {
-                if (TokensForView[tokenIndex].Data == "\n") lineStartIndex = i;
+                if (token.Contains(tokenIndex)) break;
+
+                columnIndex++;
             }
 
-            return tokenIndex - lineStartIndex;
+            result.Line = line;
+            result.Column = columnIndex;
+            return result;
         }
 
         public int GetTopFrontIndexFromTokenIndex(string pattern, int tokenIndex)
@@ -196,8 +222,8 @@ namespace Parse.FrontEnd.Tokenize
 
         /*******************************************************************/
         /// <summary>
-        /// This function returns a token index from the caretIndex.
-        /// 캐럿위치에 해당하는 토큰 인덱스를 가져옵니다.
+        /// <para>This function returns a token index from the caretIndex.</para>
+        /// <para>캐럿위치에 해당하는 토큰 인덱스를 가져옵니다.</para>
         /// </summary>
         /// <param name="offset">The offset index</param>
         /// <param name="recognWay">The standard index for recognition a token</param>

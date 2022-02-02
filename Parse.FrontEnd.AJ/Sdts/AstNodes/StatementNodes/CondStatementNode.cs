@@ -18,13 +18,19 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.StatementNodes
         }
 
 
-        // [0] : TerminalNode [if or while]
-        // [1] : ExprNode
-        // [2] : StatementNode [statement]
+        /// <summary>
+        /// format summary  <br/>
+        /// [0] : TerminalNode [if or while]    <br/>
+        /// [1] : ExprNode  <br/>
+        /// [2] : StatementNode [statement] <br/>
+        /// </summary>
+        /// <param name="param"></param>
+        /// <returns></returns>
         public override SdtsNode Compile(CompileParameter param)
         {
             try
             {
+                base.Compile(param);
                 var node = Items[1].Compile(param) as ExprNode;
                 if (node.Type.DataType != Data.AJDataType.Bool)
                 {

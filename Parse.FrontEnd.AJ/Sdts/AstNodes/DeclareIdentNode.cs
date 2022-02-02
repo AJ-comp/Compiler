@@ -32,6 +32,7 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes
         public override SdtsNode Compile(CompileParameter param)
         {
             bool bConst = false;
+            base.Compile(param);
             var firstNode = Items[0].Compile(param);
 
             // const
