@@ -3,11 +3,13 @@ using Parse.FrontEnd.AJ.Data;
 using Parse.FrontEnd.Parsers.Datas;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 
 namespace Compile
 {
+    [DebuggerDisplay("{" + nameof(GetDebuggerDisplay) + "(),nq}")]
     public class CompileResult
     {
         public string FilePath { get; }
@@ -45,5 +47,7 @@ namespace Compile
 
         private List<AJTypeInfo> _linkErrorTypeList = new List<AJTypeInfo>();
         private List<VariableAJ> _linkErrorVarList = new List<VariableAJ>();
+
+        private string GetDebuggerDisplay() => $"{FilePath} {Result}";
     }
 }

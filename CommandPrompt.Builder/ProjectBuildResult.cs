@@ -3,45 +3,32 @@ using Compile;
 using ConsoleTables;
 using Parse.FrontEnd.Tokenize;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text.Json.Serialization;
 
 namespace CommandPrompt.Builder
 {
-    public class SolutionBuildResult : Dictionary<string, BuildResult>
+    public class ProjectBuildResult : Dictionary<string, CompileResult>
     {
+        public string ProjectPath { get; }
 
-        public BuildResultPrintFormat ToJson()
+        public ProjectBuildResult(string projectPath = "")
         {
-            var result = new BuildResultPrintFormat();
-
-            result.ProjectCount = Count;
-
-            foreach (var projectDic in this)
-            {
-                var jsonFormat = projectDic.Value.ToPrintStructure();
-                jsonFormat.ProjectFullPath = projectDic.Key;
-
-                result.ProjectBuildResult.Add(jsonFormat);
-            }
-
-            return result;
+            ProjectPath = projectPath;
         }
-    }
-
-    public class BuildResult : Dictionary<string, CompileResult>
-    {
 
         public ProjectResultPrintFormat ToPrintStructure()
         {
             var result = new ProjectResultPrintFormat();
+            result.ProjectFullPath = ProjectPath;
             result.SourceCount = Count;
 
             foreach (var sourceDic in this)
             {
                 var compileResultJson = new CompileResultPrintFormat();
 
-                compileResultJson.Source = sourceDic.Key;
+                compileResultJson.FileFullPath = sourceDic.Key;
                 compileResultJson.Result = sourceDic.Value.Result;
 
                 // parsing error
@@ -118,12 +105,42 @@ namespace CommandPrompt.Builder
 
             return result;
         }
+
+
+        public override string ToString()
+        {
+            string result = string.Empty;
+
+            foreach (var item in CompileResults)
+            {
+                if (item.Result == true) continue;
+
+                foreach (var error in item.Errors)
+                {
+                    int line = 0;
+                    int column = 0;
+
+                    if (error.RelatedTokenPos.Count > 0)
+                    {
+                        line = error.RelatedTokenPos.First().Line + 1;
+                        column = error.RelatedTokenPos.First().CharColumn + 1;
+                    }
+
+                    result += $"{Path.GetFileName(item.FileFullPath)}" +
+                                   $":{error.ErrorCode}:{line}:{column}" +
+                                   $":{error.ErrorType.ToLower()}" +
+                                   $":{error.ErrorMessage}{System.Environment.NewLine}";
+                }
+            }
+
+            return result;
+        }
     }
 
 
     public class CompileResultPrintFormat
     {
-        public string Source { get; set; }
+        public string FileFullPath { get; set; }
         public bool Result { get; set; }
 
         public List<CompileErrorPrintFormat> Errors { get; } = new List<CompileErrorPrintFormat>();
@@ -133,7 +150,7 @@ namespace CommandPrompt.Builder
         {
             Dictionary<string, string> datas = new Dictionary<string, string>
             {
-                { "Source full path", $"{Source}" },
+                { "Source full path", $"{FileFullPath}" },
                 { "Compile result", $"{Result}" }
             };
 
@@ -174,7 +191,7 @@ namespace CommandPrompt.Builder
             table.AddRow(datas.Values.ToArray());
 
             var result = table.ToStringAlternative();
-            foreach(var token in RelatedTokenPos)
+            foreach (var token in RelatedTokenPos)
             {
                 result += token.ToTableFormat();
             }

@@ -32,6 +32,8 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.StatementNodes
             {
                 base.Compile(param);
                 var node = Items[1].Compile(param) as ExprNode;
+                TrueStatement = Items[2].Compile(param) as StatementNode;
+
                 if (node.Type.DataType != Data.AJDataType.Bool)
                 {
                     Alarms.Add(AJAlarmFactory.CreateMCL0025(node.Type.Name, "bool"));
@@ -59,8 +61,6 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.StatementNodes
                 {
                     throw new Exception();
                 }
-
-                TrueStatement = Items[2].Compile(param) as StatementNode;
             }
             catch(Exception)
             {

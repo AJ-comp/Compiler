@@ -133,6 +133,7 @@ namespace Parse.FrontEnd.AJ
         private NonTerminal actualParam = new NonTerminal("actual_param");
         private NonTerminal actualParamList = new NonTerminal("actual_param_list");
         private NonTerminal primaryExp = new NonTerminal("primary_exp");
+        private NonTerminal identChainExp = new NonTerminal(nameof(identChainExp));
 
 
 
@@ -220,11 +221,11 @@ namespace Parse.FrontEnd.AJ
             this.ScopeInfos.Add(new ScopeInfo(this.scopeCommentStart, this.scopeCommentEnd));
 
             this.ajProgram.AddItem(usingDcl.ZeroOrMore() + namespaceDcl, Program);
-            this.usingDcl.AddItem(Using + Ident + SemiColon, UsingNode);
+            this.usingDcl.AddItem(Using + identChainExp + SemiColon, UsingNode);
 
             // namespace
             this.accesser.AddItem(Private | Public, AccesserNode);
-            this.namespaceDcl.AddItem(accesser.Optional() + Namespace + Ident + OpenCurlyBrace + namespaceMemberDcl.ZeroOrMore() + CloseCurlyBrace, NamespaceNode);
+            this.namespaceDcl.AddItem(Namespace + Ident + (Dot + Ident).ZeroOrMore() + SemiColon + namespaceMemberDcl.ZeroOrMore(), NamespaceNode);
             this.namespaceMemberDcl.AddItem(structDef | classDef);
 
             // struct and class def
@@ -235,6 +236,7 @@ namespace Parse.FrontEnd.AJ
             this.formalParam.AddItem(OpenParenthesis + formalParamList.Optional() + CloseParenthesis, FormalPara);
             this.formalParamList.AddItem(declaratorVar | formalParamList + Comma + declaratorVar);
 
+            this.identChainExp.AddItem(Ident + (Dot + identChainExp).ZeroOrMore());
 
             this.typeSpecifier.AddItem(Bool, BoolNode);
             this.typeSpecifier.AddItem(Byte, ByteNode);

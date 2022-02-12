@@ -23,13 +23,16 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes
             IsNeedWhileIRGeneration = true;
         }
 
-        public FuncDefNode(FuncType type, Access accessType, int blockLevel, int offset, AJTypeInfo returnTypeInfo) : base(null)
+        public FuncDefNode(FuncType type, Access accessType, int blockLevel, int offset, SdtsNode rootNode, AJTypeInfo returnTypeInfo) : base(null)
         {
             Type = type;
             AccessType = accessType;
-            CompileData = new CompileParameter();
-            CompileData.BlockLevel = blockLevel;
-            Offset = offset;
+            var compileParam = new CompileParameter();
+            compileParam.BlockLevel = blockLevel;
+            compileParam.Offset = offset;
+            compileParam.RootNode = rootNode;
+
+            base.Compile(compileParam);
             ReturnTypeData = returnTypeInfo;
         }
 
@@ -89,7 +92,7 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes
 
             foreach (var arg in VarList)
                 function.Arguments.Add(arg.ToIR());
-            
+
             function.Statement = CompoundSt.To() as IRCompoundStatement;
 
             return function;

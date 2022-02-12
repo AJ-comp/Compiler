@@ -48,41 +48,6 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes
             return result;
         }
 
-        public override bool Equals(object obj)
-        {
-            var data = obj as FuncDefNode;
-            if (data == null) return false;
-
-            if (Type != data.Type) return false;
-            if (Name != data.Name) return false;
-            if (ParamVarList.Count() != data.ParamVarList.Count) return false;
-
-            for (int i = 0; i < ParamVarList.Count(); i++)
-            {
-                if (ParamVarList.ElementAt(i) != data.ParamVarList[i]) return false;
-            }
-
-            return true;
-        }
-
-        public override int GetHashCode()
-        {
-            int hash = 0;
-            foreach (var param in ParamVarList)
-                hash ^= param.DataType.GetHashCode();
-
-            return HashCode.Combine(Type, Name, hash);
-        }
-        public static bool operator ==(FuncDefNode left, FuncDefNode right)
-        {
-            return EqualityComparer<FuncDefNode>.Default.Equals(left, right);
-        }
-
-        public static bool operator !=(FuncDefNode left, FuncDefNode right)
-        {
-            return !(left == right);
-        }
-
 
         public override string ToString()
         {

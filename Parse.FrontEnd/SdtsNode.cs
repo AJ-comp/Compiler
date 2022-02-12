@@ -18,10 +18,6 @@ namespace Parse.FrontEnd
 
         public List<MeaningErrInfo> Alarms { get; set; } = new List<MeaningErrInfo>();
 
-        public CompileParameter CompileData { get; protected set; } = new CompileParameter();
-
-        public bool IsBuild { get; protected set; }
-
 
         public SdtsNode GetParent(Type toFindParent)
         {

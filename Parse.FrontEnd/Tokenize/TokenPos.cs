@@ -11,7 +11,12 @@ namespace Parse.FrontEnd.Tokenize
     public class TokenPos
     {
         public int Line { get; set; } = -1;
-        public int Column { get; set; } = -1;
+        public int CharColumn { get; set; } = -1;
+
+        /// <summary>
+        /// The column index of the token unit.
+        /// </summary>
+        public int TokenColumn { get; set; } = -1;
 
 
         public string ToTableFormat()
@@ -19,7 +24,7 @@ namespace Parse.FrontEnd.Tokenize
             Dictionary<string, string> datas = new Dictionary<string, string>
             {
                 { "Line", $"{Line}" },
-                { "Column", $"{Column}" },
+                { "Column", $"{CharColumn}" },
             };
 
             var table = new ConsoleTable(datas.Keys.ToArray());
@@ -28,6 +33,6 @@ namespace Parse.FrontEnd.Tokenize
             return table.ToStringAlternative();
         }
 
-        private string GetDebuggerDisplay() => $"Line: {Line} Column: {Column}";
+        private string GetDebuggerDisplay() => $"Line: {Line} Column: {CharColumn}";
     }
 }

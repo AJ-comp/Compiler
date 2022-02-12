@@ -5,6 +5,7 @@ using Parse.FrontEnd.AJ.ErrorHandler;
 using Parse.FrontEnd.AJ.Properties;
 using Parse.FrontEnd.AJ.Sdts;
 using Parse.FrontEnd.AJ.Sdts.AstNodes;
+using Parse.FrontEnd.AJ.Sdts.Datas;
 using Parse.FrontEnd.Ast;
 using Parse.FrontEnd.Grammars;
 using Parse.FrontEnd.Parsers.Datas;
@@ -198,16 +199,15 @@ namespace Compile.AJ
         /// <summary>
         /// fileFullPath의 내용을 의미분석합니다. 오류 발생 시 null을 반환합니다.
         /// </summary>
-        /// <param name="fileFullPath"></param>
         /// <param name="parameter"></param>
         /// <param name="build"></param>
         /// <returns></returns>
         /****************************************************************/
-        public SemanticAnalysisResult StartSemanticAnalysis(string fileFullPath, CompileParameter parameter, bool build = false)
+        public SemanticAnalysisResult StartSemanticAnalysis(CompileParameter parameter, bool build = false)
         {
             try
             {
-                var totalData = _docTable[fileFullPath];
+                var totalData = _docTable[parameter.FileFullPath];
                 AstSymbol rootSymbol = totalData.ParsedData.AstRoot;
 
                 totalData.RootNode = rootSymbol.Sdts.Compile(parameter) as AJNode;
@@ -215,7 +215,7 @@ namespace Compile.AJ
             }
             catch (Exception ex)
             {
-                return new SemanticAnalysisResult(_docTable[fileFullPath].RootNode, new List<AstSymbol>(), ex);
+                return new SemanticAnalysisResult(_docTable[parameter.FileFullPath].RootNode, new List<AstSymbol>(), ex);
             }
         }
 

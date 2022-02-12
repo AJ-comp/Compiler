@@ -30,6 +30,9 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.TypeNodes
         public override SdtsNode Compile(CompileParameter param)
         {
             base.Compile(param);
+            Fields.Clear();
+            AllFuncs.Clear();
+
             AccessType = Access.Private;
 
             int offset = 0;
@@ -63,10 +66,11 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.TypeNodes
             CreateDefaultCreator(param.CloneForNewBlock());
             CreateDefaultDestructor(param.CloneForNewBlock());
 
-            (param.RootNode as ProgramNode).ShortCutTypeDefSet.Add(this);
+            RootNode.LinkedSymbols.Add(this);
+            CheckDuplicated();
 
             References.Add(this);
-//            DBContext.Instance.Insert(this);
+            //            DBContext.Instance.Insert(this);
 
             return this;
         }
@@ -126,7 +130,7 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.TypeNodes
             param.Offset = AllFuncs == null ? 0 : AllFuncs.Count();
             AJTypeInfo returnTypeInfo = new AJTypeInfo(AJDataType.Void);
 
-            var func = new FuncDefNode(FuncType.Creator, Access.Public, param.BlockLevel, param.Offset, returnTypeInfo);
+            var func = new FuncDefNode(FuncType.Creator, Access.Public, param.BlockLevel, param.Offset, RootNode, returnTypeInfo);
             func.NameToken = TokenData.CreateStubToken(AJGrammar.Ident, Name);
             AllFuncs.Add(func);
         }
@@ -137,9 +141,26 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.TypeNodes
             param.Offset = AllFuncs == null ? 0 : AllFuncs.Count();
             AJTypeInfo returnTypeInfo = new AJTypeInfo(AJDataType.Void);
 
-            var func = new FuncDefNode(FuncType.Destructor, Access.Public, param.BlockLevel, param.Offset, returnTypeInfo);
+            var func = new FuncDefNode(FuncType.Destructor, Access.Public, param.BlockLevel, param.Offset, RootNode, returnTypeInfo);
             func.NameToken = TokenData.CreateStubToken(AJGrammar.Ident, Name);
             AllFuncs.Add(func);
+        }
+
+
+        /// <summary>
+        /// Check if there is a same class name on namespace that accessable.
+        /// </summary>
+        private void CheckDuplicated()
+        {
+            foreach (var namespaceNode in RootNode.AccessableNamespaces)
+            {
+                foreach (var classNode in namespaceNode.Classes)
+                {
+                    if (classNode.FullName != FullName) continue;
+
+                    Alarms.Add(AJAlarmFactory.CreateAJ0032(namespaceNode, classNode.NameToken));
+                }
+            }
         }
     }
 }

@@ -29,7 +29,6 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes
         {
             base.Compile(param);
             Alarms.Clear();
-            (CompileData.RootNode as ProgramNode).UnLinkedSymbol.Remove(this);
 
             var node = Items[0].Compile(param) as TerminalNode;
             IdentToken = node.Token;

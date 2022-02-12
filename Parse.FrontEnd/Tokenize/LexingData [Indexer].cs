@@ -159,13 +159,13 @@ namespace Parse.FrontEnd.Tokenize
         }
 
 
-        public IEnumerable<TokenCell> SubSetTo(int tokenIndex)
+        public IEnumerable<TokenCell> SubSetTo(int charIndex)
         {
             List<TokenCell> result = new List<TokenCell>();
 
             foreach (var item in TokensForView)
             {
-                if (item.StartIndex > tokenIndex) break;
+                if (item.StartIndex > charIndex) break;
 
                 result.Add(item);
             }
@@ -176,25 +176,37 @@ namespace Parse.FrontEnd.Tokenize
 
         public int GetLineCount() => _lineIndexer.Count() + 1;
 
+        /// <summary>
+        /// Get character start index for the token index.
+        /// </summary>
+        /// <param name="tokenIndex"></param>
+        /// <returns></returns>
+        public int GetCharStartIndex(int tokenIndex) => TokensForView[tokenIndex].StartIndex;
+        public int GetLineCharIndex(int line) => GetCharStartIndex(_lineIndexer[line]);
 
-        public TokenPos GetTokenPos(int tokenIndex)
+
+        public TokenPos GetTokenPos(int charStartIndex)
         {
-            var line = GetLineIndex(tokenIndex);
+            var line = GetLineIndex(charStartIndex);
             var result = new TokenPos();
 
             if (line < 0) return result;
 
+            result.Line = line;
+
             var tokensInLine = GetTokensForLine(line);
-            int columnIndex = 0;
+            int tokenColumn = 0;
             foreach(var token in tokensInLine)
             {
-                if (token.Contains(tokenIndex)) break;
+                if (token.Contains(charStartIndex)) break;
 
-                columnIndex++;
+                tokenColumn++;
             }
+            result.TokenColumn = tokenColumn;
 
-            result.Line = line;
-            result.Column = columnIndex;
+            if (line == 0) result.CharColumn = charStartIndex;
+            else result.CharColumn = (charStartIndex - GetLineCharIndex(line - 1)) - 1;
+
             return result;
         }
 
@@ -326,6 +338,7 @@ namespace Parse.FrontEnd.Tokenize
         }
 
 
+        // The token index list for lines
         private List<int> _lineIndexer = new List<int>();
         private Dictionary<int, int> _tokenIndexByLine = new Dictionary<int, int>();
     }

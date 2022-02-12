@@ -1,6 +1,8 @@
 ﻿using AJ.Common.Helpers;
 using Parse.FrontEnd.AJ.Data;
 using Parse.FrontEnd.AJ.Properties;
+using Parse.FrontEnd.AJ.Sdts.AstNodes;
+using Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes.Single;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -165,11 +167,12 @@ namespace Parse.FrontEnd.AJ
         /// The operand of the inc or dec has to be variable, property or indexer. 
         /// </i></b> <br/>
         /// </summary>
+        /// <param name="incDecExpr"></param>
         /// <returns></returns>
         /*****************************************************/
-        public static MeaningErrInfo CreateMCL0012()
+        public static MeaningErrInfo CreateMCL0012(IncDecNode incDecNode)
         {
-            return new MeaningErrInfo(nameof(AlarmCodes.MCL0012), AlarmCodes.MCL0012);
+            return new MeaningErrInfo(incDecNode.AllTokens, nameof(AlarmCodes.MCL0012), AlarmCodes.MCL0012);
         }
 
 
@@ -310,6 +313,21 @@ namespace Parse.FrontEnd.AJ
 
         /*****************************************************/
         /// <summary>
+        /// Create the MeaningErrInfo for code AJ0027. <br/>
+        /// AJ0027 is that <b><i>
+        /// The member name can't same with the outer name.</i></b>
+        /// </summary>
+        /// <param name="token"></param>
+        /// <returns></returns>
+        /*****************************************************/
+        public static MeaningErrInfo CreateAJ0027(TokenData token)
+        {
+            return new MeaningErrInfo(nameof(AlarmCodes.AJ0027), AlarmCodes.AJ0027);
+        }
+
+
+        /*****************************************************/
+        /// <summary>
         /// Create the MeaningErrInfo for code AJ0030. <br/>
         /// AJ0030 is that <b><i>
         /// {from} type can't convert to {to} type. please return type of function.</i></b>
@@ -330,6 +348,34 @@ namespace Parse.FrontEnd.AJ
             tokens.Add(to.Token);
 
             return new MeaningErrInfo(tokens, nameof(AlarmCodes.AJ0030), errMsg);
+        }
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="token"></param>
+        /// <returns></returns>
+        public static MeaningErrInfo CreateAJ0031(TokenData token)
+        {
+            return new MeaningErrInfo(token,
+                    nameof(AlarmCodes.AJ0031),
+                    string.Format(AlarmCodes.AJ0031, token.Input));
+        }
+
+
+        public static MeaningErrInfo CreateAJ0032(NamespaceNode namespaceNode, TokenData typeToken)
+        {
+            var errMsg = string.Format(AlarmCodes.AJ0032,
+                                                     namespaceNode.FullName,
+                                                     typeToken.Input);
+
+            List<TokenData> tokens = new List<TokenData>();
+
+            tokens.AddRange(namespaceNode.NameTokens);
+            tokens.Add(typeToken);
+
+            return new MeaningErrInfo(tokens, nameof(AlarmCodes.AJ0032), errMsg);
         }
     }
 }

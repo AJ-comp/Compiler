@@ -1,5 +1,6 @@
 ﻿using Parse.FrontEnd.AJ.Properties;
 using Parse.FrontEnd.AJ.Sdts.AstNodes.TypeNodes;
+using Parse.FrontEnd.AJ.Sdts.Datas;
 using Parse.FrontEnd.Ast;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,29 +18,25 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes
         /// <summary>
         /// <para>Start semantic analysis for namespace.</para>
         /// <para>namespace에 대한 의미분석을 시작합니다.</para>
-        /// [0] : accesser? (AccesserNode) <br/>
-        /// [1] : Ident (TerminalNode)  <br/>
-        /// [2:n] : (ClassDefNode | StructDefNode | EnumNode)*  (NonTerminal)   <br/>
+        /// [0:n] : Ident chain (TerminalNode List)  <br/>
+        /// [n+1:n] : (ClassDefNode | StructDefNode | EnumNode)*  (NonTerminal)   <br/>
         /// </summary>
         /// <param name="param"></param>
         /// <returns></returns>
         /**************************************************/
         public override SdtsNode Compile(CompileParameter param)
         {
-            Alarms.Clear();
-            ConnectedErrInfoList.Clear();
+            base.Compile(param);
 
             int offset = 0;
-            if (Items[offset] is AccesserNode)
+            while(Items[offset] is TerminalNode)
             {
-                // parsing for accesser
-                var accesserNode = Items[offset++].Compile(param) as AccesserNode;
-                AccessType = accesserNode.AccessState;
+                // parsing for ident chain
+                var nameNode = Items[offset++].Compile(param) as TerminalNode;
+                NameTokens.Add(nameNode.Token);
             }
 
-            // parsing for ident
-            var nameNode = Items[offset++].Compile(param) as TerminalNode;
-            NameTokens.Add(nameNode.Token);
+            NamespaceDictionary.Instance.Add(this);
 
             int newBlockOffset = 0;
             foreach (var item in Items.Skip(offset))
@@ -59,9 +56,9 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes
             }
 
             References.Add(this);
-//            DBContext.Instance.Insert(this);
+                //            DBContext.Instance.Insert(this);
 
-            return this;
+                return this;
         }
 
         private HashSet<StructDefNode> _structDefNodes = new HashSet<StructDefNode>();

@@ -23,6 +23,7 @@ namespace CommandPrompt.Builder.Commands
 
     public enum OutputFormat
     {
+        Private,
         Table,
         Json,
     }
@@ -50,7 +51,7 @@ namespace CommandPrompt.Builder.Commands
         private int HandleBuild(string buildTarget,
                                          Architecture arch,
                                          BuildConfig c,
-                                         OutputFormat output_format = OutputFormat.Json,
+                                         OutputFormat output_format = OutputFormat.Private,
                                          string output_file = "")
         {
             return Execute(() =>
@@ -71,31 +72,33 @@ namespace CommandPrompt.Builder.Commands
         }
 
 
-        private void PrintBuildResult(BuildResult buildResult)
+        private void PrintBuildResult(ProjectBuildResult buildResult)
         {
+            var options = new JsonSerializerOptions();
+            options.WriteIndented = true;
+            options.Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping;
+
+            var printStructure = buildResult.ToPrintStructure();
+            var toPrintString = (_outputFormat == OutputFormat.Json)
+                                    ? JsonSerializer.Serialize(printStructure, options)
+                                    : (_outputFormat == OutputFormat.Table)
+                                    ? printStructure.ToTableFormat()
+                                    : printStructure.ToString();
+
+            if (string.IsNullOrEmpty(_outputFile)) Console.WriteLine(toPrintString);
+            else
+            {
+                var outputFile = _outputFile.AbsolutePath();
+
+                StreamWriter fileStream = new StreamWriter(outputFile);
+                fileStream.Write(toPrintString);
+                fileStream.Close();
+            }
+
             foreach (var buildResultItem in buildResult)
             {
                 var sourceFullPath = buildResultItem.Key;
                 var compileResult = buildResultItem.Value;
-
-                var options = new JsonSerializerOptions();
-                options.WriteIndented = true;
-                options.Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping;
-
-                var printStructure = buildResult.ToPrintStructure();
-                var toPrintString = (_outputFormat == OutputFormat.Json)
-                                        ? JsonSerializer.Serialize(printStructure, options)
-                                        : printStructure.ToTableFormat();
-
-                if (string.IsNullOrEmpty(_outputFile)) Console.WriteLine(toPrintString);
-                else
-                {
-                    var outputFile = _outputFile.AbsolutePath();
-
-                    StreamWriter fileStream = new StreamWriter(outputFile);
-                    fileStream.Write(toPrintString);
-                    fileStream.Close();
-                }
 
                 // parsing history file
                 var fullPath = _outputFile.AbsolutePath();

@@ -1,6 +1,7 @@
 ﻿using Parse.FrontEnd.AJ.Data;
 using Parse.FrontEnd.AJ.Sdts.AstNodes.StatementNodes;
 using Parse.FrontEnd.AJ.Sdts.AstNodes.TypeNodes;
+using Parse.FrontEnd.AJ.Sdts.Datas;
 using Parse.FrontEnd.Ast;
 using System.Collections.Generic;
 
@@ -12,10 +13,35 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes
         public List<NamespaceNode> Namespaces { get; } = new List<NamespaceNode>();
 
 
-        public HashSet<AJTypeInfo> NoLinkedTypeSet { get; } = new HashSet<AJTypeInfo>();
         public HashSet<IHasVarList> ShortCutDeclareVarSet { get; } = new HashSet<IHasVarList>();
         public HashSet<TypeDefNode> ShortCutTypeDefSet { get; } = new HashSet<TypeDefNode>();
-        public HashSet<AJNode> UnLinkedSymbol { get; } = new HashSet<AJNode>();
+        public HashSet<AJNode> UnLinkedSymbols { get; } = new HashSet<AJNode>();
+        public HashSet<AJNode> LinkedSymbols { get; } = new HashSet<AJNode>();
+        public HashSet<AJNode> AmbiguityLinkedSymbols { get; } = new HashSet<AJNode>();
+        public HashSet<AJNode> CompletedSymbols { get; } = new HashSet<AJNode>();
+
+
+        public bool IsBuild { get; private set; }
+        public string FullPath { get; set; }
+
+
+        public IEnumerable<NamespaceNode> AccessableNamespaces
+        {
+            get
+            {
+                HashSet<NamespaceNode> result = new HashSet<NamespaceNode>();
+
+                foreach (var usingNamespace in UsingNamespaces)
+                {
+                    if (NamespaceDictionary.Instance.ContainsKey(usingNamespace.FullName))
+                        result.UnionWith(NamespaceDictionary.Instance[usingNamespace.FullName]);
+                }
+
+                foreach (var ns in Namespaces) result.UnionWith(NamespaceDictionary.Instance[ns.FullName]);
+
+                return result;
+            }
+        }
 
 
         public ProgramNode(AstSymbol node) : base(node)
@@ -27,6 +53,12 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes
         // [n+1:y] : Namespace? (AstNonTerminal)
         public override SdtsNode Compile(CompileParameter param)
         {
+            param.RootNode = this;
+
+            base.Compile(param);
+            IsBuild = param.Build;
+            FullPath = param.FileFullPath;
+
             Namespaces.Clear();
             param.RootNode = this;
 
@@ -47,7 +79,7 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes
             }
 
             // retry compile for undefined symbol
-            foreach (var unlinkNode in UnLinkedSymbol) unlinkNode.Compile(null);
+            foreach (var unlinkNode in UnLinkedSymbols) unlinkNode.Compile(null);
 
 
             return this;

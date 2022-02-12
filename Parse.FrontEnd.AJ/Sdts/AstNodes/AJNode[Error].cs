@@ -15,7 +15,7 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes
         public bool AddDuplicatedError(TokenData varTokenToCheck = null)
         {
             Alarms.Add(AJAlarmFactory.CreateMCL0001(varTokenToCheck));
-            (CompileData.RootNode as ProgramNode).UnLinkedSymbol.Add(this);
+            (RootNode as ProgramNode).UnLinkedSymbols.Add(this);
 
             return true;
         }

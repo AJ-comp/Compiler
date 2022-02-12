@@ -190,4 +190,13 @@
   <data name="AJ0030" xml:space="preserve">
     <value>{0} type can't convert to {1} type. please return type of function.</value>
   </data>
+  <data name="AJ0031" xml:space="preserve">
+    <value>Can't find {0} type or the namespace name. Check if there is the using directive or assembly reference.</value>
+  </data>
+  <data name="AJ0032" xml:space="preserve">
+    <value>The {1} type is already delcared in the {0} namespace.</value>
+  </data>
+  <data name="AJ0033" xml:space="preserve">
+    <value>There is an empty sentence. Is your intention correct?</value>
+  </data>
 </root>

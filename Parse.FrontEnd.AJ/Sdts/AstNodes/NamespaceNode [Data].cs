@@ -9,7 +9,6 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes
 {
     public partial class NamespaceNode
     {
-        public Access AccessType { get; private set; } = Access.Private;
         public List<TokenData> NameTokens { get; set; } = new List<TokenData>();
         public List<ClassDefNode> Classes { get; set; } = new List<ClassDefNode>();
         public int Block { get; private set; }

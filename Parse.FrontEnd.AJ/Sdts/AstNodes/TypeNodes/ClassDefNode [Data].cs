@@ -15,7 +15,7 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.TypeNodes
         public TokenData NameToken { get; set; }
         public override AJDataType Type => AJDataType.Class;
         public int Block { get; set; }
-        public int Offset { get; set; }
+
         public override uint Size
         {
             get
@@ -31,6 +31,22 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.TypeNodes
         public List<VariableAJ> Fields { get; set; } = new List<VariableAJ>();
         public List<FuncDefNode> AllFuncs { get; set; } = new List<FuncDefNode>();
         public List<AJNode> References { get; set; } = new List<AJNode>();
+
+        public NamespaceNode Namespace
+        {
+            get
+            {
+                var tracker = Parent;
+
+                while (true)
+                {
+                    if (tracker is null) return null;
+                    if (tracker is NamespaceNode) return tracker as NamespaceNode;
+
+                    tracker = tracker.Parent;
+                }
+            }
+        }
 
 
         public override string FullName
@@ -97,29 +113,9 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.TypeNodes
         public FuncDefNode Destructor
             => AllFuncs.Where(func => func.Type == FuncType.Destructor).FirstOrDefault();
 
-        public override bool Equals(object obj)
-        {
-            return obj is ClassDefNode node &&
-                   Name == node.Name;
-        }
-
-        public override int GetHashCode()
-        {
-            return HashCode.Combine(Name);
-        }
-
-        public static bool operator ==(ClassDefNode left, ClassDefNode right)
-        {
-            return EqualityComparer<ClassDefNode>.Default.Equals(left, right);
-        }
-
-        public static bool operator !=(ClassDefNode left, ClassDefNode right)
-        {
-            return !(left == right);
-        }
 
         private string GetDebuggerDisplay()
-            => $"{AccessType} class {Name} (field: {Fields.Count()}, func: {AllFuncs.Count()})";
+            => $"{AccessType} class {Name} (field: {Fields.Count()}, func: {AllFuncs.Count()}) [{GetType()}]";
 
 
         protected override bool IsDuplicated(TokenData tokenToAdd)

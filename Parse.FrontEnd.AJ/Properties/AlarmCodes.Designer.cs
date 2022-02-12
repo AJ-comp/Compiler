@@ -106,6 +106,33 @@ namespace Parse.FrontEnd.AJ.Properties {
         }
         
         /// <summary>
+        ///   Can&apos;t find {0} type or the namespace name. Check if there is the using directive or assembly reference.과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string AJ0031 {
+            get {
+                return ResourceManager.GetString("AJ0031", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   The {1} type is already delcared in the {0} namespace.과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string AJ0032 {
+            get {
+                return ResourceManager.GetString("AJ0032", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   There is an empty sentence. Is your intention correct?과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string AJ0033 {
+            get {
+                return ResourceManager.GetString("AJ0033", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   {0} is already defined.과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string MCL0000 {

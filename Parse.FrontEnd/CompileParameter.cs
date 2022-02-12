@@ -11,6 +11,7 @@ namespace Parse.FrontEnd
     public class CompileParameter : ICloneable<CompileParameter>
     {
         public ISymbolData ParentData { get; set; }
+        public string FileFullPath { get; set; }
         public SdtsNode RootNode { get; set; }
         public int BlockLevel { get; set; } = 0;
         public int Offset { get; set; } = 0;
@@ -57,6 +58,7 @@ namespace Parse.FrontEnd
             var result = new CompileParameter();
 
             result.RootNode = RootNode;
+            result.FileFullPath = FileFullPath;
             result.BlockLevel = BlockLevel;
             result.Offset = Offset;
             result.Build = Build;

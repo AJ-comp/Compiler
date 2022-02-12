@@ -22,7 +22,9 @@ namespace Compile.AJ
             {
                 var parsingResult = NewParsing(fileFullPath);
                 bool result = parsingResult.Success;
-                if (result) StartSemanticAnalysis(fileFullPath, null, true);
+
+                var compileParam = new CompileParameter();
+                if (result) StartSemanticAnalysis(compileParam, true);
 
                 var doc = _docTable[fileFullPath];
             }
@@ -31,12 +33,12 @@ namespace Compile.AJ
         }
 
 
-        public CompileResult Compile(string fileFullPath, CompileParameter parameter)
+        public CompileResult Compile(CompileParameter parameter)
         {
-            var parsingResult = NewParsing(fileFullPath);
-            if (parsingResult.Success) StartSemanticAnalysis(fileFullPath, parameter, true);
+            var parsingResult = NewParsing(parameter.FileFullPath);
+            if (parsingResult.Success) StartSemanticAnalysis(parameter, true);
 
-            return new CompileResult(fileFullPath, parsingResult);
+            return new CompileResult(parameter.FileFullPath, parsingResult);
         }
 
 

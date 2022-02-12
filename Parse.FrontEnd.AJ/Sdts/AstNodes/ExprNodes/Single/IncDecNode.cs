@@ -2,6 +2,7 @@
 using Parse.MiddleEnd.IR.Expressions;
 using Parse.MiddleEnd.IR.Expressions.ExprExpressions;
 using System;
+using System.Linq;
 
 namespace Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes.Single
 {
@@ -35,7 +36,7 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes.Single
             }
             catch(Exception)
             {
-                Alarms.Add(AJAlarmFactory.CreateMCL0012());
+                Alarms.Add(AJAlarmFactory.CreateMCL0012(this));
             }
             finally
             {

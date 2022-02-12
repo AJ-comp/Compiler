@@ -22,19 +22,20 @@ namespace CommandPrompt.Builder.Models
         [XmlIgnore] public string FullPath => Path.Combine(ProjectPath, FileName);
 
 
-        public BuildResult Build(AJCompiler compiler, CompileParameter compileParameter)
+        public ProjectBuildResult Build(AJCompiler compiler)
         {
-            var result = new BuildResult();
+            var result = new ProjectBuildResult(ProjectPath);
             var sources = Directory.GetFiles(ProjectPath, "*.aj");
 
             foreach (var source in sources)
             {
-                var sourceFullPath = Path.Combine(ProjectPath, source);
+                var compileParameter = new CompileParameter();
+                compileParameter.FileFullPath = Path.Combine(ProjectPath, source);
 
-                var compileResult = compiler.Compile(sourceFullPath, compileParameter);
-                compileParameter.ReferenceFiles.Add(sourceFullPath, compileResult.RootNode);
+                var compileResult = compiler.Compile(compileParameter);
+                compileParameter.ReferenceFiles.Add(compileParameter.FileFullPath, compileResult.RootNode);
 
-                result.Add(sourceFullPath, compileResult);
+                result.Add(compileParameter.FileFullPath, compileResult);
             }
 
             return result;
