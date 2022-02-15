@@ -63,14 +63,12 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes
                 ReturnTypeData.Const = true;
             }
 
-            // compile FuncHead node
+            // compile return type
             var declareIdent = Items[offset++].Compile(param.CloneForNewBlock()) as TypeDeclareNode;
+            ReturnTypeData = new AJTypeInfo(declareIdent.Type, declareIdent.DataTypeToken);
 
-            ReturnTypeData = new AJTypeInfo(declareIdent.Type);
-            ReturnTypeData.Token = declareIdent.DataTypeToken;
-
-            // compile name
-            var nameNode = Items[offset++].Compile(param.CloneForNewBlock()) as TerminalNode;
+            // compile function name
+            var nameNode = Items[offset++].Compile(param.CloneForNewBlock()) as DefNameNode;
             NameToken = nameNode.Token;
 
             // add this reference

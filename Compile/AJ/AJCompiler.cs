@@ -44,7 +44,7 @@ namespace Compile.AJ
         public AJCompiler()
         {
             var instance = AJDefineTable.Instance;
-            Parser = new LALRParser(_ajGrammar);
+            Parser = new LALRParser(_ajGrammar).AddErrorHandler(new AJGrammarErrorHandler());
 //            Parser = new SLRParser(_ajGrammar);
             //            Parser = new LLParser(_ajGrammar);
             Parser.ASTCreated += ASTCreated;

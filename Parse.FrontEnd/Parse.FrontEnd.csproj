@@ -11,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\AJ.Common\AJ.Common.csproj" />
     <ProjectReference Include="..\Parse\Parse.csproj" />
   </ItemGroup>
 

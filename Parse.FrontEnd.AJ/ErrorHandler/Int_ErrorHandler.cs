@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace Parse.FrontEnd.AJ.ErrorHandler
 {
-    public class Int_ErrorHandler : MiniCErrorHandler
+    public class Int_ErrorHandler : AJErrorHandler
     {
         public Int_ErrorHandler(Grammar grammar, int ixIndex) : base(grammar, ixIndex)
         {

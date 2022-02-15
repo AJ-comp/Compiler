@@ -1,14 +1,9 @@
-﻿using AJ.Common.Helpers;
-using Parse.Extensions;
+﻿using Parse.Extensions;
 using Parse.FrontEnd.AJ.Data;
 using Parse.FrontEnd.AJ.Sdts.AstNodes.StatementNodes;
+using Parse.FrontEnd.AJ.Sdts.AstNodes.TypeNodes;
 using Parse.FrontEnd.AJ.Sdts.Datas;
-using Parse.Types;
-using Parse.Types.ConstantTypes;
-using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
 
 namespace Parse.FrontEnd.AJ.Sdts.AstNodes
 {
@@ -23,7 +18,6 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes
         public AJTypeInfo ReturnTypeData { get; set; }
         public TokenData NameToken { get; set; }
         public int Block { get; set; }
-        public int Offset { get; set; }
 
         public List<VariableAJ> ParamVarList { get; set; } = new List<VariableAJ>();
         public List<AJNode> Reference { get; set; } = new List<AJNode>();
@@ -34,6 +28,50 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes
         public string Name => NameToken.Input;
 
         public ConstantAJ ReturnValue => ConstantAJ.CreateValueUnknown(ReturnType);
+
+
+        public IEnumerable<TokenData> FullNameTokens
+        {
+            get
+            {
+                List<TokenData> result = new List<TokenData>();
+
+                if (Parent is NamespaceNode)
+                {
+                    var parent = Parent as NamespaceNode;
+                    result.AddRange(parent.NameTokens);
+                }
+                else if (Parent is ClassDefNode)
+                {
+                    var parent = Parent as ClassDefNode;
+                    result.AddRange(parent.FullNameTokens);
+                }
+
+                result.Add(NameToken);
+
+                return result;
+            }
+        }
+
+
+        public string FullName => FullNameTokens.ItemsString(PrintType.Property, "Input", ".");
+
+
+        public bool IsEqualFunction(FuncDefNode target)
+        {
+            if (Name != target.Name) return false;
+            if (ParamVarList.Count != target.ParamVarList.Count) return false;
+
+            for(int i=0; i<ParamVarList.Count; i++)
+            {
+                var originalParam = ParamVarList[i];
+                var targetParam = target.ParamVarList[i];
+
+                if (originalParam.Type != targetParam.Type) return false;
+            }
+
+            return true;
+        }
 
 
         public string ToDefineString(bool bDisplayReturnType, bool bDisplayParams)

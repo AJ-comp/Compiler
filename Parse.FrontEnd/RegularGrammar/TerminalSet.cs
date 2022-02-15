@@ -25,9 +25,9 @@ namespace Parse.FrontEnd.RegularGrammar
         {
             bool result = false;
 
-            foreach(var item in this)
+            foreach (var item in this)
             {
-                if(item.Value == value)
+                if (item.Value == value)
                 {
                     result = true;
                     break;
@@ -55,9 +55,9 @@ namespace Parse.FrontEnd.RegularGrammar
         {
             TerminalSet result = new TerminalSet();
 
-            foreach(var terminal in this)
+            foreach (var terminal in this)
             {
-                if(terminal.IsWordPattern)
+                if (terminal.IsWordPattern)
                 {
                     if (Regex.Match(value, terminal.Value).Value == value) result.Add(terminal);
                 }

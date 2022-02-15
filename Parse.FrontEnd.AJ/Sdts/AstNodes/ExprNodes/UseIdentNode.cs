@@ -16,30 +16,32 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes
         {
         }
 
+
         /// <summary>
         /// format summary  <br/>
-        /// [0] : ident <br/>
+        /// [0] : Ident     <br/>
+        /// [1:n] : Ident   (option)    <br/>
         /// This function checks condition as the below <br/>
-        /// 1. is it defined?
-        /// 2. if ident is variable is it initialized before use?
+        /// 1. is it defined?   <br/>
+        /// 2. if ident is the reference type variable is it initialized before use?   <br/>
         /// </summary>
         /// <param name="param"></param>
         /// <returns></returns>
         public override SdtsNode Compile(CompileParameter param)
         {
             base.Compile(param);
-            Alarms.Clear();
 
             var node = Items[0].Compile(param) as TerminalNode;
             IdentToken = node.Token;
 
+            if (!CheckIsDefinedSymbol(IdentToken)) return this;
+
             var symbolData = UsedSymbolData;
-            if (symbolData == null) AddDuplicatedError(IdentToken);
-            else if (symbolData.NameToken.IsVirtual) AddDuplicatedError(IdentToken);
-            else if (symbolData is VariableAJ)
+            if (symbolData is VariableAJ)
             {
                 Var = symbolData as VariableAJ;
-                if (!Var.IsInitialized) Alarms.Add(AJAlarmFactory.CretaeMCL0005(IdentToken));
+                if(Var.VariableType == VarType.ReferenceType && !Var.IsInitialized)
+                    Alarms.Add(AJAlarmFactory.CretaeMCL0005(IdentToken));
 
                 Result = (symbolData as VariableAJ).ToConstantAJ();
             }

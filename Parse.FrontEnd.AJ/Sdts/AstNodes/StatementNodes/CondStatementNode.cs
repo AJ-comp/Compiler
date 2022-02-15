@@ -1,8 +1,10 @@
-﻿using Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes;
+﻿using Parse.FrontEnd.AJ.Properties;
+using Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes;
 using Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes.Binary;
 using Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes.LiteralNodes;
 using Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes.Single;
 using Parse.FrontEnd.Ast;
+using Parse.Types;
 using System;
 
 namespace Parse.FrontEnd.AJ.Sdts.AstNodes.StatementNodes
@@ -61,8 +63,10 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.StatementNodes
                 {
                     throw new Exception();
                 }
+
+                CheckNeverOperateCode();
             }
-            catch(Exception)
+            catch (Exception)
             {
 
             }
@@ -72,6 +76,16 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.StatementNodes
             }
 
             return this;
+        }
+
+
+        /// <summary>
+        /// Checks if the code is accessable.
+        /// </summary>
+        protected void CheckNeverOperateCode()
+        {
+            if (CompareCondition.Result.ValueState == State.Fixed && (bool)(CompareCondition.Result.Value) == false)
+                Alarms.Add(new MeaningErrInfo(AllTokens, nameof(AlarmCodes.AJ0034), AlarmCodes.AJ0034, ErrorType.Warning));
         }
     }
 }

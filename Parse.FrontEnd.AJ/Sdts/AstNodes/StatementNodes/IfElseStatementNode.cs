@@ -1,5 +1,6 @@
 ﻿using Parse.FrontEnd.Ast;
 using Parse.MiddleEnd.IR.Expressions;
+using System.Linq;
 
 namespace Parse.FrontEnd.AJ.Sdts.AstNodes.StatementNodes
 {
@@ -18,7 +19,7 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.StatementNodes
         public override SdtsNode Compile(CompileParameter param)
         {
             base.Compile(param);
-            FalseStatement = Items[4].Compile(param) as StatementNode;
+            FalseStatement = Items.Last().Compile(param) as StatementNode;
 
             return this;
         }

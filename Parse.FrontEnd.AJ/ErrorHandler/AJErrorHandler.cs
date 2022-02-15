@@ -5,9 +5,9 @@ using Parse.FrontEnd.Parsers.Datas;
 
 namespace Parse.FrontEnd.AJ.ErrorHandler
 {
-    public abstract class MiniCErrorHandler : GrammarPrivateLRErrorHandler
+    public abstract class AJErrorHandler : GrammarPrivateLRErrorHandler
     {
-        public MiniCErrorHandler(Grammar grammar, int ixIndex) : base(grammar, ixIndex)
+        public AJErrorHandler(Grammar grammar, int ixIndex) : base(grammar, ixIndex)
         {
         }
 

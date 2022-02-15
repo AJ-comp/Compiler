@@ -103,7 +103,7 @@ namespace Parse.FrontEnd.AJ
         private NonTerminal compoundSt = new NonTerminal(nameof(compoundSt));
         private NonTerminal declareVarSt = new NonTerminal(nameof(declareVarSt));
         private NonTerminal declarationList = new NonTerminal("declaration_list");
-        private NonTerminal declaration = new NonTerminal("declaration");
+        private NonTerminal defName = new NonTerminal(nameof(defName));
         private NonTerminal memberCommon = new NonTerminal(nameof(memberCommon));
         private NonTerminal declaratorVar = new NonTerminal("declarator");
         private NonTerminal declaratorIdent = new NonTerminal(nameof(declaratorIdent));
@@ -149,7 +149,9 @@ namespace Parse.FrontEnd.AJ
         public static MeaningUnit MemberFunc { get; } = new MeaningUnit(nameof(MemberFunc));
 
         public static MeaningUnit FuncDef { get; } = new MeaningUnit(nameof(FuncDef));
-//        public static MeaningUnit FuncHead { get; } = new MeaningUnit(nameof(FuncHead), MatchedAction.BlockPlus);
+        //        public static MeaningUnit FuncHead { get; } = new MeaningUnit(nameof(FuncHead), MatchedAction.BlockPlus);
+
+        public static MeaningUnit DefNameNode { get; } = new MeaningUnit(nameof(DefNameNode));
         public static MeaningUnit ConstNode { get; } = new MeaningUnit(nameof(ConstNode));
         public static MeaningUnit BoolNode { get; } = new MeaningUnit(nameof(BoolNode));
         public static MeaningUnit ByteNode { get; } = new MeaningUnit(nameof(ByteNode));
@@ -225,14 +227,14 @@ namespace Parse.FrontEnd.AJ
 
             // namespace
             this.accesser.AddItem(Private | Public, AccesserNode);
-            this.namespaceDcl.AddItem(Namespace + Ident + (Dot + Ident).ZeroOrMore() + SemiColon + namespaceMemberDcl.ZeroOrMore(), NamespaceNode);
+            this.namespaceDcl.AddItem(Namespace + defName + (Dot + defName).ZeroOrMore() + SemiColon + namespaceMemberDcl.ZeroOrMore(), NamespaceNode);
             this.namespaceMemberDcl.AddItem(structDef | classDef);
 
             // struct and class def
-            this.structDef.AddItem(accesser.Optional() + Struct + Ident + OpenCurlyBrace + declareVarSt + CloseCurlyBrace, StructDef);
-            this.classDef.AddItem(accesser.Optional() + Class + Ident + OpenCurlyBrace + classMemberDcl.ZeroOrMore() + CloseCurlyBrace, ClassDef);
+            this.structDef.AddItem(accesser.Optional() + Struct + defName + OpenCurlyBrace + declareVarSt + CloseCurlyBrace, StructDef);
+            this.classDef.AddItem(accesser.Optional() + Class + defName + OpenCurlyBrace + classMemberDcl.ZeroOrMore() + CloseCurlyBrace, ClassDef);
             this.classMemberDcl.AddItem(accesser.Optional() + (declareVarSt  | functionDef));
-            this.functionDef.AddItem(Const.Optional() + typeSpecifier + Ident + formalParam + compoundSt, FuncDef);
+            this.functionDef.AddItem(Const.Optional() + typeSpecifier + defName + formalParam + compoundSt, FuncDef);
             this.formalParam.AddItem(OpenParenthesis + formalParamList.Optional() + CloseParenthesis, FormalPara);
             this.formalParamList.AddItem(declaratorVar | formalParamList + Comma + declaratorVar);
 
@@ -250,12 +252,12 @@ namespace Parse.FrontEnd.AJ
             this.typeSpecifier.AddItem(Void, VoidNode);
             this.typeSpecifier.AddItem(Ident, UserDefTypeNode);
 
-            this.functionName.AddItem(Ident);
+            this.defName.AddItem(Ident, DefNameNode);
             this.compoundSt.AddItem(this.OpenCurlyBrace + statementList.ZeroOrMore() + this.CloseCurlyBrace, CompoundSt);
 //            this.declaration.AddItem(this.declaratorVar + this.SemiColon, Dcl);
 //            this.initDclList.AddItem(this.initDeclarator | this.initDclList + this.Comma + this.initDeclarator);
 
-            this.declaratorVar.AddItem(Const.Optional() + typeSpecifier + Ident + (Assign + expression).Optional(), DeclareVar);
+            this.declaratorVar.AddItem(Const.Optional() + typeSpecifier + defName + (Assign + expression).Optional(), DeclareVar);
 
             this.literalInt.AddItem(Number | HexNumber, IntLiteralNode);
             this.literalDouble.AddItem(RealNumber, DoubleLiteralNode);
@@ -318,7 +320,7 @@ namespace Parse.FrontEnd.AJ
             this.unaryExp.AddItem(Dec + this.unaryExp, PreDecM);
 
             this.callExp.AddItem(postfixExp);
-            this.callExp.AddItem(postfixExp + Dot + Ident + OpenParenthesis + optActualParam.Optional() + CloseParenthesis, Call);
+            this.callExp.AddItem(postfixExp + OpenParenthesis + optActualParam.Optional() + CloseParenthesis, Call);
 
             this.postfixExp.AddItem(primaryExp);
             this.postfixExp.AddItem(postfixExp + OpenSquareBrace + expression + CloseSquareBrace, Index);
@@ -332,7 +334,7 @@ namespace Parse.FrontEnd.AJ
             this.actualParamList.AddItem(this.logicalOrExp);
             this.actualParamList.AddItem(this.actualParamList + this.Comma + this.logicalOrExp);
 
-            this.primaryExp.AddItem(Ident, UseVar);
+            this.primaryExp.AddItem(Ident + (Dot + Ident).ZeroOrMore(), UseVar);
             this.primaryExp.AddItem(this.literalInt);
             this.primaryExp.AddItem(this.literalDouble);
             this.primaryExp.AddItem(this.literalBool);

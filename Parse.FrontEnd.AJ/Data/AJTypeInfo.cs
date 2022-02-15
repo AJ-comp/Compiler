@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Linq;
 
 namespace Parse.FrontEnd.AJ.Data
 {
@@ -30,11 +31,13 @@ namespace Parse.FrontEnd.AJ.Data
     [DebuggerDisplay("{" + nameof(GetDebuggerDisplay) + "(),nq}")]
     public partial class AJTypeInfo : IData
     {
+        private TokenDataList _nameTokens = new TokenDataList();
+
         public int Id { get; set; } = 0;
         public DataTypeNode DefineNode { get; set; }
         public bool Static { get; set; } = false;
         public bool Const { get; set; } = false;
-        public TokenData Token { get; set; }
+        public IEnumerable<TokenData> NameTokens => _nameTokens;
         public uint PointerDepth { get; set; } = 0;
         public uint Size { get; set; }
         public bool Signed { get; set; } = true;
@@ -42,7 +45,8 @@ namespace Parse.FrontEnd.AJ.Data
         public bool Nan { get; set; }
         public AJDataType DataType { get; set; } = AJDataType.Unknown;
 
-        public string Name => Token.Input;
+        public string Name => NameTokens.Last().Input;
+        public string FullName => _nameTokens.ToListString();
 
 
         public AJTypeInfo(AJDataType dataType)
@@ -53,7 +57,7 @@ namespace Parse.FrontEnd.AJ.Data
 
         public AJTypeInfo(AJDataType dataType, TokenData token) : this(dataType)
         {
-            Token = token;
+            _nameTokens.Add(token);
         }
 
 
@@ -265,7 +269,7 @@ namespace Parse.FrontEnd.AJ.Data
             result += Const ? "const " : string.Empty;
 
             if (IsUserDefType())
-                result += $"{DataType.ToDescription()} ({Token.Input}) (size: {Size})";
+                result += $"{DataType.ToDescription()} ({FullName}) (size: {Size})";
             else
                 result += $"{DataType.ToDescription()} (size: {Size})";
 

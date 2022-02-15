@@ -25,6 +25,7 @@ namespace Parse.FrontEnd.Parsers.LR
         public enum SuccessedKind { Completed, ReduceOrGoto, Shift, NotApplicable };
 
         public CanonicalRelation Canonical { get; } = new CanonicalRelation();
+        public IErrorHandlable ErrorHandler { get; private set; }
 
         /// <summary>
         /// The Error Handler that if the action completed.
@@ -76,6 +77,13 @@ namespace Parse.FrontEnd.Parsers.LR
             Canonical.Calculate(virtualStartSymbol, _followAnalyzer.Datas);
             Canonical.ReduceParameter = reduceParameter;
             ParsingTable.CreateParsingTable(this.Canonical);
+        }
+
+
+        public LRParser AddErrorHandler(IErrorHandlable errorHandler)
+        {
+            ErrorHandler = errorHandler;
+            return this;
         }
 
 
@@ -288,10 +296,12 @@ namespace Parse.FrontEnd.Parsers.LR
 
             this.ActionFailed?.Invoke(this, lastParsingUnit);
 
+            /*
             if (lastParsingUnit.ErrorHandler != null)
                 result = lastParsingUnit.ErrorHandler.Call(new DataForRecovery(this, parsingResult, curTokenIndex));
+            */
 
-            return result;
+            return ErrorHandler?.Call(new DataForRecovery(this, parsingResult, curTokenIndex));
         }
 
         /// <summary>

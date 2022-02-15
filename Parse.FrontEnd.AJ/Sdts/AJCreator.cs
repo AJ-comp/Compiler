@@ -112,6 +112,7 @@ namespace Parse.FrontEnd.AJ.Sdts
                 else if (cRoot.SignPost.MeaningUnit == AJGrammar.UIntNode) result = new TypeDeclareNode(root, AJDataType.Int, false, AJGrammar.UInt.Value);
                 else if (cRoot.SignPost.MeaningUnit == AJGrammar.DoubleNode) result = new TypeDeclareNode(root, AJDataType.Double, true, AJGrammar.Double.Value);
                 else if (cRoot.SignPost.MeaningUnit == AJGrammar.UserDefTypeNode) result = new TypeDeclareNode(root);
+                else if (cRoot.SignPost.MeaningUnit == AJGrammar.DefNameNode) result = new DefNameNode(root);
 
                 else throw new Exception(AlarmCodes.MCL0010);
 

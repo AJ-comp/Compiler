@@ -79,7 +79,8 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes
             }
 
             // retry compile for undefined symbol
-            foreach (var unlinkNode in UnLinkedSymbols) unlinkNode.Compile(null);
+            var copiedUnLinkedSymbols = new HashSet<AJNode>(UnLinkedSymbols);
+            foreach (var unlinkNode in copiedUnLinkedSymbols) unlinkNode.Compile(null);
 
 
             return this;

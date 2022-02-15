@@ -51,7 +51,7 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.StatementNodes
                 if (funcNode.ReturnType == AJDataType.Void)
                     Alarms.Add(new MeaningErrInfo(Expr.AllTokens, nameof(AlarmCodes.AJ0028), AlarmCodes.AJ0028));
                 else if (!funcNode.ReturnTypeData.IsIncludeType(Expr.Result.Type))
-                    Alarms.Add(AJAlarmFactory.CreateAJ0030(Expr.Result.Type, funcNode.ReturnTypeData));
+                    Alarms.Add(AJAlarmFactory.CreateAJ0030(Expr, funcNode.ReturnTypeData));
             }
 
             return this;

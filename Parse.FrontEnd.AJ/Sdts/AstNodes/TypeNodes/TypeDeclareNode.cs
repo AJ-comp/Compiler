@@ -35,11 +35,9 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.TypeNodes
 
         public AJTypeInfo ToAJTypeInfo(bool bConst)
         {
-            AJTypeInfo result = new AJTypeInfo(Type);
+            AJTypeInfo result = new AJTypeInfo(Type, DataTypeToken);
             result.Const = bConst;
             result.Signed = Signed;
-
-            if (TypeKind == TypeKind.UserDef) result.Token = DataTypeToken;
 
             return result;
         }

@@ -6,6 +6,7 @@ using Parse.FrontEnd.Parsers.Datas;
 using Parse.FrontEnd.Parsers.LR;
 using Parse.FrontEnd.RegularGrammar;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Parse.FrontEnd.AJ.ErrorHandler
 {
@@ -33,6 +34,11 @@ namespace Parse.FrontEnd.AJ.ErrorHandler
                 grammar.CloseCurlyBrace,
                 new EndMarker()
             };
+
+            /*
+            var possibleSet = dataForRecovery.CurBlock.PossibleTerminalSet;
+            if (possibleSet.Count == 1) return RecoveryWithReplaceToVirtualToken(possibleSet.First(), dataForRecovery);
+            */
 
             return PanicMode.LRProcess(dataForRecovery.Parser as LRParser, 
                                                       ParsingTable, 

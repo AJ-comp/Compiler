@@ -42,7 +42,7 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.TypeNodes
                 AccessType = accesserNode.AccessState;
             }
 
-            var nameNode = Items[offset++].Compile(param) as TerminalNode;
+            var nameNode = Items[offset++].Compile(param) as DefNameNode;
             NameToken = nameNode.Token;
 
             // field or property or function
@@ -161,6 +161,28 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.TypeNodes
                     Alarms.Add(AJAlarmFactory.CreateAJ0032(namespaceNode, classNode.NameToken));
                 }
             }
+        }
+
+
+        /// <summary>
+        /// Checks if there is a duplicated function in class.    <br/>
+        /// Checks using function name and parameter.       <br/>
+        /// </summary>
+        /// <param name="func"></param>
+        /// <returns>return true if there is no, return false if there is a duplicated function</returns>
+        public bool CheckIsDuplicatedFunction(FuncDefNode funcToCheck)
+        {
+            foreach (var func in FuncList)
+            {
+                if (func.IsEqualFunction(funcToCheck))
+                {
+                    Alarms.Add(AJAlarmFactory.CreateAJ0026(this, funcToCheck.NameToken));
+
+                    return false;
+                }
+            }
+
+            return true;
         }
     }
 }

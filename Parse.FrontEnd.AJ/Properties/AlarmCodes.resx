@@ -199,4 +199,10 @@
   <data name="AJ0033" xml:space="preserve">
     <value>There is an empty sentence. Is your intention correct?</value>
   </data>
+  <data name="AJ0034" xml:space="preserve">
+    <value>This statement can be removed as it is never performed because the value of the conditional statement is always false.</value>
+  </data>
+  <data name="AJ0035" xml:space="preserve">
+    <value>Can't use {0} keyword in the position.</value>
+  </data>
 </root>

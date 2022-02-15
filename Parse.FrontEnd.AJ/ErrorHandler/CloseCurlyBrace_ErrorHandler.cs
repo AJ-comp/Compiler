@@ -4,7 +4,7 @@ using Parse.FrontEnd.Parsers.Datas;
 
 namespace Parse.FrontEnd.AJ.ErrorHandler
 {
-    public class CloseCurlyBrace_ErrorHandler : MiniCErrorHandler
+    public class CloseCurlyBrace_ErrorHandler : AJErrorHandler
     {
         public CloseCurlyBrace_ErrorHandler(Grammar grammar, int ixIndex) : base(grammar, ixIndex)
         {

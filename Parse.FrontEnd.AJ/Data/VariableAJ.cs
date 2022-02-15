@@ -14,7 +14,12 @@ namespace Parse.FrontEnd.AJ.Data
         Extern = 0x02,
         Param = 0x04,
         Readonly = 0x04,
+    }
 
+    public enum VarType
+    {
+        ValueType,
+        ReferenceType
     }
 
 
@@ -90,15 +95,22 @@ namespace Parse.FrontEnd.AJ.Data
             Block = blockLevel;
             Offset = offset;
 
+            if (VariableType == VarType.ValueType)
+            {
+                if (typeInfo.IsArithmeticType()) InitValue = new Initial(new ConstantAJ(0));
+                else if (typeInfo.DataType == AJDataType.Bool) InitValue = new Initial(new ConstantAJ(false));
+            }
+
             IsVirtual = false;
         }
 
-        public bool IsMatchWithVarName(string name) => (Name == name);
+        public bool IsMatchWithVarName(string name) => Name == name;
         public int Dimension => _levelTokens.Count;
         public AJDataType DataType => Type.DataType;
 
         public TokenData DataTypeToken { get; }
         public string Name => NameToken?.Input;
+        public VarType VariableType => (DataType == AJDataType.Class) ? VarType.ReferenceType : VarType.ValueType;
 
 
         public ConstantAJ ToConstantAJ()
@@ -123,11 +135,11 @@ namespace Parse.FrontEnd.AJ.Data
 
         public static VariableAJ CreateThisVar(AJDataType type, TokenData nameToken, int blockLevel, int offset)
         {
-            return new VariableAJ(Access.Private, 
-                                             AJTypeInfo.CreateThisType(type, nameToken), 
-                                             TokenData.CreateStubToken(AJGrammar.Ident, "this"), 
-                                             null, 
-                                             blockLevel, 
+            return new VariableAJ(Access.Private,
+                                             AJTypeInfo.CreateThisType(type, nameToken),
+                                             TokenData.CreateStubToken(AJGrammar.Ident, "this"),
+                                             null,
+                                             blockLevel,
                                              offset);
         }
 

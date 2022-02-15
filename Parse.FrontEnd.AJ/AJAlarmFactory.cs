@@ -2,7 +2,9 @@
 using Parse.FrontEnd.AJ.Data;
 using Parse.FrontEnd.AJ.Properties;
 using Parse.FrontEnd.AJ.Sdts.AstNodes;
+using Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes;
 using Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes.Single;
+using Parse.FrontEnd.AJ.Sdts.AstNodes.TypeNodes;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -296,7 +298,7 @@ namespace Parse.FrontEnd.AJ
 
         /*****************************************************/
         /// <summary>
-        /// This function creates the MeaningErrInfo for code MCL0025. <br/>
+        /// Creates the MeaningErrInfo for code MCL0025. <br/>
         /// MCL0025 is that <b><i>
         /// It can't convert from {from} type to {to} type implicitly.</i></b>
         /// </summary>
@@ -308,6 +310,23 @@ namespace Parse.FrontEnd.AJ
         {
             var errMsg = string.Format(AlarmCodes.MCL0025, from, to);
             return new MeaningErrInfo(nameof(AlarmCodes.MCL0025), errMsg);
+        }
+
+
+        /*****************************************************/
+        /// <summary>
+        /// Create the MeaningErrInfo for code AJ0027. <br/>
+        /// AJ0027 is that <b><i>
+        /// The '{token}' definition is included in the '{type}' type.</i></b>
+        /// </summary>
+        /// <param name="typeDefNode"></param>
+        /// <param name="token"></param>
+        /// <returns></returns>
+        /*****************************************************/
+        public static MeaningErrInfo CreateAJ0026(TypeDefNode typeDefNode, TokenData token)
+        {
+            var errMsg = string.Format(AlarmCodes.AJ0026, typeDefNode.Name, token.Input);
+            return new MeaningErrInfo(token, nameof(AlarmCodes.AJ0026), errMsg);
         }
 
 
@@ -336,18 +355,13 @@ namespace Parse.FrontEnd.AJ
         /// <param name="to"></param>
         /// <returns></returns>
         /*****************************************************/
-        public static MeaningErrInfo CreateAJ0030(AJTypeInfo from, AJTypeInfo to)
+        public static MeaningErrInfo CreateAJ0030(ExprNode from, AJTypeInfo to)
         {
             var errMsg = string.Format(AlarmCodes.AJ0030, 
-                                                     from.DataType.ToDescription(), 
+                                                     from.Result.Type.DataType.ToDescription(), 
                                                      to.DataType.ToDescription());
 
-            List<TokenData> tokens = new List<TokenData>();
-
-            tokens.Add(from.Token);
-            tokens.Add(to.Token);
-
-            return new MeaningErrInfo(tokens, nameof(AlarmCodes.AJ0030), errMsg);
+            return new MeaningErrInfo(from.AllTokens, nameof(AlarmCodes.AJ0030), errMsg);
         }
 
 

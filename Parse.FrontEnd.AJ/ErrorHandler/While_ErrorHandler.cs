@@ -4,7 +4,7 @@ using Parse.FrontEnd.Parsers.Datas;
 
 namespace Parse.FrontEnd.AJ.ErrorHandler
 {
-    public class While_ErrorHandler : MiniCErrorHandler
+    public class While_ErrorHandler : AJErrorHandler
     {
         public While_ErrorHandler(Grammar grammar, int ixIndex) : base(grammar, ixIndex)
         {

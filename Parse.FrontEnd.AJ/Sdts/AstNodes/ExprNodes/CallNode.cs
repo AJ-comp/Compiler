@@ -1,6 +1,5 @@
 ﻿using Parse.FrontEnd.AJ.Data;
-using Parse.FrontEnd.AJ.Properties;
-using Parse.FrontEnd.AJ.Sdts.Datas;
+using Parse.FrontEnd.AJ.Sdts.AstNodes.TypeNodes;
 using Parse.FrontEnd.Ast;
 using Parse.MiddleEnd.IR.Expressions;
 using Parse.MiddleEnd.IR.Expressions.ExprExpressions;
@@ -29,26 +28,29 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes
         // [2] : ActualParam? (AstNonTerminal)
         public override SdtsNode Compile(CompileParameter param)
         {
-            _params.Clear();
-            ConnectedErrInfoList.Clear();
+            base.Compile(param);
 
-            var ident = Items[0].Compile(param) as UseIdentNode;
-            var functionName = Items[1].Compile(param) as UseIdentNode;
-            if (Items.Count > 2)
+            int offset = 0;
+            var functionName = Items[offset++].Compile(param) as UseIdentNode;
+            while (Items.Count > offset)
             {
-                var result = Items[2].Compile(param) as ActualParamNode;
+                var result = Items[offset++].Compile(param) as ActualParamNode;
                 Params.AddRange(result.ParamNodeList);
             }
 
-            AJChecker.IsDefinedSymbol(this, ident.IdentToken);
-            var matchedList = AJUtilities.GetFuncList(this, functionName.IdentToken);
+            if (!CheckIsDefinedSymbol(functionName.IdentToken)) return this;
+
+            // get func list of this class
+            var classDefNode = GetParent(typeof(ClassDefNode)) as ClassDefNode;
+            var matchedList = classDefNode.FuncList.Where(x => x.Name == functionName.IdentToken.Input);
+
+            // if static function is not then insert this 
 
             if (matchedList.Count() == 0) AJAlarmFactory.CreateMCL0014(MethodNameToken.Input);
             else CheckParams(matchedList);
 
             return this;
         }
-
 
         private IEnumerable<FuncDefNode> GetParamCountMatchedList(IEnumerable<FuncDefNode> funcListToFind)
         {
@@ -160,7 +162,5 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes
         {
             throw new NotImplementedException();
         }
-
-        private List<IExprBuildNode> _params = new List<IExprBuildNode>();
     }
 }

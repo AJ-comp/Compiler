@@ -1,10 +1,11 @@
 ﻿using Parse.FrontEnd.Grammars;
 using Parse.FrontEnd.Parsers;
 using Parse.FrontEnd.Parsers.Datas;
+using System.Linq;
 
 namespace Parse.FrontEnd.AJ.ErrorHandler
 {
-    public class Ident_ErrorHandler : MiniCErrorHandler
+    public class Ident_ErrorHandler : AJErrorHandler
     {
         public Ident_ErrorHandler(Grammar grammar, int ixIndex) : base(grammar, ixIndex)
         {
@@ -17,12 +18,7 @@ namespace Parse.FrontEnd.AJ.ErrorHandler
             var prevToken = dataForRecovery.PrevToken;
             var grammar = _grammar as AJGrammar;
 
-            if (prevToken == null)
-            {
-                // insert temporary type keyword (ex : int) because the type keyword is omitted.
-                return RecoveryWithReplaceToVirtualToken(AJGrammar.Int, dataForRecovery);
-            }
-            else if (prevToken.Kind == AJGrammar.Ident) return RecoveryWithDelCurToken(dataForRecovery);
+            if (prevToken.Kind == AJGrammar.Ident) return RecoveryWithDelCurToken(dataForRecovery);
 //            else if (ixIndex == 107) return RecoveryWithDelCurToken(dataForRecovery);
             else return DefaultErrorHandler.Process(grammar, dataForRecovery);
         }

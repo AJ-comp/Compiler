@@ -18,9 +18,15 @@ namespace Parse.FrontEnd
             Message = message;
         }
 
-        public static ParsingErrorInfo CreateParsingError(string code, string message) => new ParsingErrorInfo(ErrorType.Error, code, message);
-        public static ParsingErrorInfo CreateParsingWarning(string code, string message) => new ParsingErrorInfo(ErrorType.Warning, code, message);
-        public static ParsingErrorInfo CreateParsingInfomation(string code, string message) => new ParsingErrorInfo(ErrorType.Information, code, message);
+        protected ParsingErrorInfo(ErrorType errType, string code, string message, params TokenData[] errTokens) : this(errType, code, message)
+        {
+            _errTokens.AddRange(errTokens);
+        }
+
+        public static ParsingErrorInfo CreateParsingError(TokenData errToken, string code, string message, ErrorType error = ErrorType.Error)
+            => new ParsingErrorInfo(error, code, message, errToken);
+        public static ParsingErrorInfo CreateParsingError(string code, string message, ErrorType error = ErrorType.Error)
+            => new ParsingErrorInfo(error, code, message);
 
 
         protected List<TokenData> _errTokens = new List<TokenData>();

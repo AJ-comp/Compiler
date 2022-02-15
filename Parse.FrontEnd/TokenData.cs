@@ -1,4 +1,5 @@
-﻿using Parse.FrontEnd.RegularGrammar;
+﻿using Parse.Extensions;
+using Parse.FrontEnd.RegularGrammar;
 using Parse.FrontEnd.Tokenize;
 using System;
 using System.Collections.Generic;
@@ -100,5 +101,11 @@ namespace Parse.FrontEnd
         {
             return !(left == right);
         }
+    }
+
+
+    public class TokenDataList : List<TokenData>
+    {
+        public string ToListString(string separator = ".") => this.ItemsString(PrintType.Property, "Input", separator);
     }
 }

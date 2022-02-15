@@ -1,4 +1,5 @@
-﻿using Parse.FrontEnd.AJ.Data;
+﻿using Parse.Extensions;
+using Parse.FrontEnd.AJ.Data;
 using Parse.FrontEnd.AJ.Sdts.Datas;
 using System;
 using System.Collections.Generic;
@@ -49,27 +50,31 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.TypeNodes
         }
 
 
-        public override string FullName
+        public IEnumerable<TokenData> FullNameTokens
         {
             get
             {
-                string result = string.Empty;
+                List<TokenData> result = new List<TokenData>();
 
                 if (Parent is NamespaceNode)
                 {
                     var parent = Parent as NamespaceNode;
-                    result = parent.FullName;
+                    result.AddRange(parent.NameTokens);
                 }
                 else if (Parent is ClassDefNode)
                 {
                     var parent = Parent as ClassDefNode;
-                    result = parent.FullName;
+                    result.AddRange(parent.FullNameTokens);
                 }
 
-                return $"{result}.{Name}";
+                result.Add(NameToken);
+
+                return result;
             }
         }
 
+
+        public override string FullName => FullNameTokens.ItemsString(PrintType.Property, "Input", ".");
 
         public IEnumerable<ISymbolData> SymbolList
         {

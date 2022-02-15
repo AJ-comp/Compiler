@@ -133,6 +133,24 @@ namespace Parse.FrontEnd.AJ.Properties {
         }
         
         /// <summary>
+        ///   This statement can be removed as it is never performed because the value of the conditional statement is always false.과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string AJ0034 {
+            get {
+                return ResourceManager.GetString("AJ0034", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Can&apos;t use {0} keyword in the position.과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string AJ0035 {
+            get {
+                return ResourceManager.GetString("AJ0035", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   {0} is already defined.과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string MCL0000 {

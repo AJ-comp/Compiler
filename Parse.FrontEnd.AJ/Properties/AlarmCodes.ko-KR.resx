@@ -219,4 +219,10 @@
   <data name="AJ0033" xml:space="preserve">
     <value>빈 문장이 있습니다. 의도하는 바가 맞습니까?</value>
   </data>
+  <data name="AJ0034" xml:space="preserve">
+    <value>이 문장은 조건문의 값이 항상 false 이기 때문에 결코 수행되지 않으므로 제거할 수 있습니다.</value>
+  </data>
+  <data name="AJ0035" xml:space="preserve">
+    <value>현재 위치에서는 {0} 키워드를 사용할 수 없습니다.</value>
+  </data>
 </root>

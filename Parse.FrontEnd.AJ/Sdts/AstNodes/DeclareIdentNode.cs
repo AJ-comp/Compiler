@@ -43,9 +43,9 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes
             if (secondNode is TypeDeclareNode)
             {
                 _typeNode = secondNode as TypeDeclareNode;
-                _ident = Items[2].Compile(param) as TerminalNode;
+                _ident = Items[2].Compile(param) as DefNameNode;
             }
-            else _ident = secondNode as TerminalNode;
+            else _ident = secondNode as DefNameNode;
 
             AJType = _typeNode.ToAJTypeInfo(bConst);
             NameToken = _ident.Token;
@@ -55,6 +55,6 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes
 
 
         private TypeDeclareNode _typeNode;
-        private TerminalNode _ident;
+        private DefNameNode _ident;
     }
 }

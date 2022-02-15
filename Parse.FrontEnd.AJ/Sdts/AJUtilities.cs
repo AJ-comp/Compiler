@@ -10,35 +10,6 @@ namespace Parse.FrontEnd.AJ.Sdts
 {
     public class AJUtilities
     {
-        public static IEnumerable<FuncDefNode> GetFuncList(AJNode fromNode, TokenData funcTokenToFind)
-        {
-            if (funcTokenToFind == null) return null;
-
-            AJNode curNode = fromNode;
-            List<FuncDefNode> result = new List<FuncDefNode>();
-
-            while (true)
-            {
-                if (curNode == null) break;
-                if (!(curNode is IHasFuncInfos)) curNode = curNode.Parent as AJNode;
-
-                // This would be class.
-                var hasFuncInfo = curNode as IHasFuncInfos;
-                foreach (var funcInfos in hasFuncInfo.FuncList)
-                {
-                    if (funcInfos.Name != funcTokenToFind.Input) continue;
-
-                    result.Add(funcInfos);
-                }
-
-                // only class has IHasFuncInfos feature so it doesn't need to see more.
-                break;
-            }
-
-            return result;
-        }
-
-
         public static string ToSymbolString(IRCompareOperation irSymbol)
         {
             if (irSymbol == IRCompareOperation.EQ) return AJGrammar.Equal.Value;
