@@ -39,10 +39,8 @@ namespace CommandPrompt.Builder.Models
         }
 
 
-        public ProjectBuildResult Build()
+        public ProjectBuildResult Build(AJCompiler compiler)
         {
-            AJCompiler compiler = new AJCompiler();
-
             // it has to set the build order through the reference information.
 
             var result = new ProjectBuildResult();

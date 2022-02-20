@@ -57,8 +57,10 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.TypeNodes
                     accessType = accesserNode.AccessState;
                 }
 
-                if (Items[offset] is DeclareVarStNode) BuildForVariableDclsNode(param.CloneForNewBlock(), offset++, accessType);
-                else if (Items[offset] is FuncDefNode) BuildForFuncDefNode(param.CloneForNewBlock(), offset++, accessType);
+                if (Items[offset] is DeclareVarStNode) BuildForVariableDclsNode(param.CloneForNewBlock(), offset, accessType);
+                else if (Items[offset] is FuncDefNode) BuildForFuncDefNode(param.CloneForNewBlock(), offset, accessType);
+
+                offset++;
             }
 
             // 현재 문법으로는 사용자 단에서 명시적으로 생성자와 소멸자를 생성할 수 없으므로

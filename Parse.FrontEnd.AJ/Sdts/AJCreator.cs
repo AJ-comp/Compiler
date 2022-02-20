@@ -97,7 +97,8 @@ namespace Parse.FrontEnd.AJ.Sdts
                 else if (cRoot.SignPost.MeaningUnit == AJGrammar.DeclareVar) result = new DeclareVarNode(root);
                 else if (cRoot.SignPost.MeaningUnit == AJGrammar.DeclareIdent) result = new DeclareIdentNode(root);
                 else if (cRoot.SignPost.MeaningUnit == AJGrammar.DeRef) result = new DeRefExprNode(root);
-                else if (cRoot.SignPost.MeaningUnit == AJGrammar.UseVar) result = new UseIdentNode(root);
+                else if (cRoot.SignPost.MeaningUnit == AJGrammar.UseVar) result = new UseIdentNode(root, false);
+                else if (cRoot.SignPost.MeaningUnit == AJGrammar.UseMember) result = new UseIdentNode(root, true);
                 else if (cRoot.SignPost.MeaningUnit == AJGrammar.IntLiteralNode) result = new IntegerLiteralNode(root);
                 else if (cRoot.SignPost.MeaningUnit == AJGrammar.DoubleLiteralNode) result = new DoubleLiteralNode(root);
                 else if (cRoot.SignPost.MeaningUnit == AJGrammar.BoolLiteralNode) result = new BoolLiteralNode(root);

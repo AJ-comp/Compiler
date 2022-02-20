@@ -19,11 +19,10 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes.Binary
         {
             base.Compile(param);
 
+            if (!IsCanParsing) return this;
+
             try
             {
-                if (LeftNode.Result == null) return this;
-                if (RightNode.Result == null) return this;
-
                 if (Operation == IRArithmeticOperation.Add) Result = LeftNode.Result + RightNode.Result;
                 else if (Operation == IRArithmeticOperation.Sub) Result = LeftNode.Result - RightNode.Result;
                 else if (Operation == IRArithmeticOperation.Mul) Result = LeftNode.Result * RightNode.Result;
@@ -32,11 +31,15 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes.Binary
             }
             catch (Exception)
             {
-                AJAlarmFactory.CreateMCL0023(LeftNode.Result.Type.Name, RightNode.Result.Type.Name, Operation.ToDescription());
+                Alarms.Add(AJAlarmFactory.CreateMCL0023(LeftNode.Result.Type.Name, 
+                                                                                 RightNode.Result.Type.Name, 
+                                                                                 Operation.ToDescription()));
+
+                RootNode.UnLinkedSymbols.Add(this);
             }
             finally
             {
-                if (param.Build) DBContext.Instance.Insert(this);
+                if (RootNode.IsBuild) DBContext.Instance.Insert(this);
             }
 
             return this;

@@ -6,7 +6,7 @@ namespace Parse.Types.ConstantTypes
     {
         public StdType TypeKind => StdType.Unknown;
         public object Value => throw new NotImplementedException();
-        public State ValueState => State.Unknown;
+        public State ValueState => State.NotFixed;
 
         public UnknownConstant()
         {

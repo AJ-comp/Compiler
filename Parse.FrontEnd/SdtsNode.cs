@@ -2,11 +2,20 @@
 using Parse.FrontEnd.Ast;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Parse.FrontEnd
 {
-    public abstract class SdtsNode
+    public abstract class SdtsNode : IData, IHasParent
     {
+        // for interface *********************************/
+        public int Id { get; set; } = _nextId--;
+        public int ParentId { get; set; }
+        public string ParentType { get; set; }
+        public int ChildIndex { get; set; }
+        /********************************************/
+
+
         public string NodeName => GetType().Name;
         public bool IsNeedWhileIRGeneration { get; protected set; } = false;
         public AstSymbol Ast { get; protected set; }
@@ -15,6 +24,8 @@ namespace Parse.FrontEnd
         public MeaningErrInfoList ConnectedErrInfoList { get; } = new MeaningErrInfoList();
         public IReadOnlyList<TokenData> MeaningTokens => Ast?.AllTokens;
         public IReadOnlyList<TokenData> AllTokens => Ast?.ConnectedParseTree.AllTokens;
+
+        private static int _nextId = int.MaxValue;
 
         public List<MeaningErrInfo> Alarms { get; set; } = new List<MeaningErrInfo>();
 
@@ -34,7 +45,7 @@ namespace Parse.FrontEnd
         }
 
 
-        public IReadOnlyList<SdtsNode> AllAlarmNodes
+        public IEnumerable<SdtsNode> AllAlarmNodes
         {
             get
             {
@@ -46,7 +57,7 @@ namespace Parse.FrontEnd
                     result.AddRange(item.AllAlarmNodes);
                 }
 
-                return result;
+                return result.OrderBy(i => i.Id);
             }
         }
 
@@ -68,7 +79,7 @@ namespace Parse.FrontEnd
 
         public override string ToString()
         {
-            string result = $"Ast: {Ast}, Error node count: {AllAlarmNodes.Count}";
+            string result = $"Ast: {Ast}, Error node count: {AllAlarmNodes.Count()}";
 
             if (Items.Count > 0)
             {

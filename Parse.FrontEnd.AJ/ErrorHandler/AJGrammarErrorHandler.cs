@@ -168,8 +168,8 @@ namespace Parse.FrontEnd.AJ.ErrorHandler
 
             // set error informations
             var parsingErrInfo = ParsingErrorInfo.CreateParsingError(token,
-                                                                                                nameof(AlarmCodes.CE0000),
-                                                                                                string.Format(AlarmCodes.CE0000, virtualToken.Input));
+                                                                                                nameof(AlarmCodes.CE0001),
+                                                                                                string.Format(AlarmCodes.CE0001, token.Input));
 
             dataForRecovery.CurBlock._errorInfos.Add(parsingErrInfo);
 

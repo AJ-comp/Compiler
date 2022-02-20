@@ -1,15 +1,15 @@
 ﻿using Parse.FrontEnd.AJ.Data;
-using Parse.FrontEnd.AJ.Sdts.AstNodes;
 using Parse.FrontEnd.AJ.Sdts.AstNodes.TypeNodes;
-using Parse.FrontEnd.AJ.Sdts.Datas;
+using Parse.FrontEnd.RegularGrammar;
 using Parse.Types;
 using System;
-using System.Collections.Generic;
 
 namespace Parse.FrontEnd.AJ.Sdts
 {
-    public class AJUtilities
+    public static class AJUtilities
     {
+        public static bool IsEqual(this TokenData obj, Terminal target) => obj.Input == target.Caption;
+
         public static string ToSymbolString(IRCompareOperation irSymbol)
         {
             if (irSymbol == IRCompareOperation.EQ) return AJGrammar.Equal.Value;

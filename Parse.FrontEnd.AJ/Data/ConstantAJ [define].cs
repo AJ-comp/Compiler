@@ -18,7 +18,7 @@ namespace Parse.FrontEnd.AJ.Data
         public State ValueState { get; set; }
         public List<MeaningErrInfo> Alarms { get; } = new List<MeaningErrInfo>();
 
-        public bool IsUnknown => ValueState == State.Unknown;
+        public bool IsUnknown => ValueState == State.NotFixed;
 
         public ConstantAJ(bool value) : this(value, State.Fixed)
         {
@@ -76,7 +76,7 @@ namespace Parse.FrontEnd.AJ.Data
             result.Type = new AJTypeInfo(AJDataType.Unknown);
 
             result.Value = null;
-            result.ValueState = State.Unknown;
+            result.ValueState = State.NotFixed;
 
             return result;
         }
@@ -87,7 +87,7 @@ namespace Parse.FrontEnd.AJ.Data
             result.Type = new AJTypeInfo(type);
 
             result.Value = null;
-            result.ValueState = State.Unknown;
+            result.ValueState = State.NotFixed;
 
             return result;
         }
@@ -106,7 +106,7 @@ namespace Parse.FrontEnd.AJ.Data
 
         private State ValueStateAfterCalc(State target)
         {
-            if (ValueState == State.Unknown || target == State.Unknown) return State.Unknown;
+            if (ValueState == State.NotFixed || target == State.NotFixed) return State.NotFixed;
             if (ValueState == State.Error || target == State.Error) return State.Error;
 
             return State.Fixed;

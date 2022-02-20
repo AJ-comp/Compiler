@@ -205,4 +205,10 @@
   <data name="AJ0035" xml:space="preserve">
     <value>Can't use {0} keyword in the position.</value>
   </data>
+  <data name="AJ0036" xml:space="preserve">
+    <value>There are the incorrect symbol in this expression.</value>
+  </data>
+  <data name="AJ0037" xml:space="preserve">
+    <value>'this' keyword can't come on this position.</value>
+  </data>
 </root>

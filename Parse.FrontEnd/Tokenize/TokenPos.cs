@@ -12,6 +12,9 @@ namespace Parse.FrontEnd.Tokenize
     {
         public int Line { get; set; } = -1;
         public int CharColumn { get; set; } = -1;
+        public int EndLine { get; set; } = -1;
+        public int EndColumn { get; set; } = -1;
+
 
         /// <summary>
         /// The column index of the token unit.
@@ -33,6 +36,6 @@ namespace Parse.FrontEnd.Tokenize
             return table.ToStringAlternative();
         }
 
-        private string GetDebuggerDisplay() => $"Line: {Line} Column: {CharColumn}";
+        private string GetDebuggerDisplay() => $"Line: {Line} Column: {CharColumn} EndLine: {EndLine} EndColumn: {EndColumn}";
     }
 }

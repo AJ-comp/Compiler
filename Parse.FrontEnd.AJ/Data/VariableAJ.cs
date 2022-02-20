@@ -37,7 +37,7 @@ namespace Parse.FrontEnd.AJ.Data
         public List<TokenData> LevelTokens { get; set; } = new List<TokenData>();
         public uint PointerLevel { get; set; }
         public uint Size { get; }
-        public Initial InitValue { get; set; }
+        public Initial InitValue { get; set; } 
         public bool IsVirtual { get; set; }
 
         // The node that created own.
@@ -95,11 +95,15 @@ namespace Parse.FrontEnd.AJ.Data
             Block = blockLevel;
             Offset = offset;
 
+            InitValue = new Initial(ConstantAJ.CreateValueUnknown(Type.DataType));
+
+            /*
             if (VariableType == VarType.ValueType)
             {
                 if (typeInfo.IsArithmeticType()) InitValue = new Initial(new ConstantAJ(0));
                 else if (typeInfo.DataType == AJDataType.Bool) InitValue = new Initial(new ConstantAJ(false));
             }
+            */
 
             IsVirtual = false;
         }

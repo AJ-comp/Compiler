@@ -24,6 +24,8 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes.LiteralNodes
 
         public override SdtsNode Compile(CompileParameter param)
         {
+            base.Compile(param);
+
             try
             {
                 double value = 0;
@@ -50,7 +52,7 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes.LiteralNodes
             }
             finally
             {
-                if (param.Build) DBContext.Instance.Insert(this);
+                if (RootNode.IsBuild) DBContext.Instance.Insert(this);
             }
 
             return this;

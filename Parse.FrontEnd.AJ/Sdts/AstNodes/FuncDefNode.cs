@@ -54,6 +54,9 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes
         {
             // it needs to clone an param
             base.Compile(param);
+            ParamVarList.Clear();
+            Reference.Clear();
+
             var classDefNode = GetParent(typeof(ClassDefNode)) as ClassDefNode;
 
             int offset = 0;
@@ -72,7 +75,7 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes
             NameToken = nameNode.Token;
 
             // add this reference
-            ParamVarList.Add(VariableAJ.CreateThisVar(classDefNode.Type, classDefNode.NameToken, BlockLevel + 1, 0));
+//            ParamVarList.Add(VariableAJ.CreateThisVar(classDefNode.Type, classDefNode.NameToken, BlockLevel + 1, 0));
             var formalParam = Items[offset++].Compile(param.CloneForNewBlock(1)) as ParamListNode;
             ParamVarList.AddRange(formalParam.VarList);
 

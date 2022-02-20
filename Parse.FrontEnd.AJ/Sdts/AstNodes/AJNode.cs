@@ -4,13 +4,8 @@ using System.Collections.Generic;
 
 namespace Parse.FrontEnd.AJ.Sdts.AstNodes
 {
-    public abstract partial class AJNode : SdtsNode, IData, IHasParent
+    public abstract partial class AJNode : SdtsNode
     {
-        public int Id { get; set; } = _nextId++;
-        public int ParentId { get; set; }
-        public string ParentType { get; set; }
-        public int ChildIndex { get; set; }
-
         public ProgramNode RootNode { get; private set; }
         public int BlockLevel { get; private set; } = 0;
         public int Offset { get; private set; } = 0;
@@ -89,7 +84,6 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes
         }
 
         private bool _isNotUsed = false;
-        private static int _nextId = 0;
 
         public static bool operator ==(AJNode left, AJNode right)
         {

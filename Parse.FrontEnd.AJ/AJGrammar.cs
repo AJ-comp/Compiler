@@ -79,7 +79,7 @@ namespace Parse.FrontEnd.AJ
         public Terminal LogicalNot { get; } = new Terminal(TokenType.Operator, "!", false);
 
 
-        private NonTerminal ajProgram = new NonTerminal("mini_c", true);
+        private NonTerminal ajProgram = new NonTerminal("AJProgram", true);
         private NonTerminal usingDcl = new NonTerminal("using_dcl");
         private NonTerminal namespaceDcl = new NonTerminal(nameof(namespaceDcl));
         private NonTerminal namespaceMemberDcl = new NonTerminal(nameof(namespaceMemberDcl));
@@ -183,6 +183,7 @@ namespace Parse.FrontEnd.AJ
         public static MeaningUnit ActualParam { get; } = new MeaningUnit(nameof(ActualParam), MatchedAction.OffsetPlus);
         public static MeaningUnit DeRef { get; } = new MeaningUnit(nameof(DeRef));
         public static MeaningUnit UseVar { get; } = new MeaningUnit(nameof(UseVar));
+        public static MeaningUnit UseMember { get; } = new MeaningUnit(nameof(UseMember));
         public static MeaningUnit IntLiteralNode { get; } = new MeaningUnit(nameof(IntLiteralNode));
         public static MeaningUnit DoubleLiteralNode { get; } = new MeaningUnit(nameof(DoubleLiteralNode));
         public static MeaningUnit BoolLiteralNode { get; } = new MeaningUnit(nameof(BoolLiteralNode));
@@ -334,6 +335,7 @@ namespace Parse.FrontEnd.AJ
             this.actualParamList.AddItem(this.logicalOrExp);
             this.actualParamList.AddItem(this.actualParamList + this.Comma + this.logicalOrExp);
 
+            this.primaryExp.AddItem(This + (Dot + Ident).ZeroOrMore(), UseMember);
             this.primaryExp.AddItem(Ident + (Dot + Ident).ZeroOrMore(), UseVar);
             this.primaryExp.AddItem(this.literalInt);
             this.primaryExp.AddItem(this.literalDouble);

@@ -42,8 +42,6 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.StatementNodes
                 }
                 else if (item is ReturnStatementNode) item.Compile(param);
                 else item.Compile(param.CloneForNewBlock());
-
-                if (IsRoot) (param.RootNode as ProgramNode).ShortCutDeclareVarSet.Add(this);
             }
 
             return this;

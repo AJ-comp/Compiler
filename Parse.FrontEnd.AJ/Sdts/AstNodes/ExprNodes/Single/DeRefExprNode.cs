@@ -63,7 +63,7 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes.Single
             }
             finally
             {
-                if (param.Build) DBContext.Instance.Insert(this);
+                if (RootNode.IsBuild) DBContext.Instance.Insert(this);
             }
 
             return this;

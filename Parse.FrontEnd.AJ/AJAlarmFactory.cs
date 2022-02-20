@@ -103,7 +103,7 @@ namespace Parse.FrontEnd.AJ
         /// <param name="token"></param>
         /// <returns></returns>
         /*****************************************************/
-        public static MeaningErrInfo CretaeMCL0005(TokenData token)
+        public static MeaningErrInfo CreateMCL0005(TokenData token)
         {
             return new MeaningErrInfo(token,
                                 nameof(AlarmCodes.MCL0005),
@@ -202,13 +202,14 @@ namespace Parse.FrontEnd.AJ
         /// MCL0014 is that <b><i>
         /// The member '{0}' is not used to as method. </i></b>
         /// </summary>
-        /// <param name="name"></param>
+        /// <param name="nameToken"></param>
         /// <returns></returns>
         /*****************************************************/
-        public static MeaningErrInfo CreateMCL0014(string name)
+        public static MeaningErrInfo CreateMCL0014(TokenData nameToken)
         {
-            return new MeaningErrInfo(nameof(AlarmCodes.MCL0014),
-                                                    string.Format(AlarmCodes.MCL0014, name));
+            return new MeaningErrInfo(nameToken,
+                                                    nameof(AlarmCodes.MCL0014),
+                                                    string.Format(AlarmCodes.MCL0014, nameToken.Input));
         }
 
 
@@ -219,13 +220,14 @@ namespace Parse.FrontEnd.AJ
         /// There is not overload method '{1}' that use parameter {0} count. </i></b>
         /// </summary>
         /// <param name="paramCount"></param>
-        /// <param name="methodName"></param>
+        /// <param name="nameToken"></param>
         /// <returns></returns>
         /*****************************************************/
-        public static MeaningErrInfo CreateMCL0015(int paramCount, string methodName)
+        public static MeaningErrInfo CreateMCL0015(int paramCount, TokenData nameToken)
         {
-            return new MeaningErrInfo(nameof(AlarmCodes.MCL0015),
-                                                    string.Format(AlarmCodes.MCL0015, paramCount, methodName));
+            return new MeaningErrInfo(nameToken,
+                                                    nameof(AlarmCodes.MCL0015),
+                                                    string.Format(AlarmCodes.MCL0015, paramCount, nameToken.Input));
         }
 
 

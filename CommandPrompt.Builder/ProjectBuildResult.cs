@@ -51,7 +51,7 @@ namespace CommandPrompt.Builder
 
                     foreach (var errToken in error.ErrTokens)
                     {
-                        var tokenPos = sourceDic.Value.ParsingResult.LexingData.GetTokenPos(errToken.StartIndex);
+                        var tokenPos = sourceDic.Value.ParsingResult.LexingData.GetTokenPos(errToken);
                         compileErrorJson.RelatedTokenPos.Add(tokenPos);
                     }
 
@@ -119,15 +119,22 @@ namespace CommandPrompt.Builder
                 {
                     int line = 0;
                     int column = 0;
+                    int endLine = 0;
+                    int endColumn = 0;
 
                     if (error.RelatedTokenPos.Count > 0)
                     {
-                        line = error.RelatedTokenPos.First().Line + 1;
-                        column = error.RelatedTokenPos.First().CharColumn + 1;
+                        var errToken = error.RelatedTokenPos.First();
+
+                        line = errToken.Line + 1;
+                        column = errToken.CharColumn + 1;
+                        endLine = errToken.EndLine + 1;
+                        endColumn = (line == endLine) ? errToken.EndColumn + 2 : errToken.EndColumn + 1;
                     }
 
                     result += $"{Path.GetFileName(item.FileFullPath)}" +
-                                   $":{error.ErrorCode}:{line}:{column}" +
+                                   $":{error.ErrorCode}" +
+                                   $":{line}:{column}:{endLine}:{endColumn}" +
                                    $":{error.ErrorType.ToLower()}" +
                                    $":{error.ErrorMessage}{System.Environment.NewLine}";
                 }

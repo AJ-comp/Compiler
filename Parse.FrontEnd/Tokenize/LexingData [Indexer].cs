@@ -185,16 +185,18 @@ namespace Parse.FrontEnd.Tokenize
         public int GetLineCharIndex(int line) => GetCharStartIndex(_lineIndexer[line]);
 
 
-        public TokenPos GetTokenPos(int charStartIndex)
+        public TokenPos GetTokenPos(TokenData targetToken)
         {
-            var line = GetLineIndex(charStartIndex);
+            int charStartIndex = targetToken.StartIndex;
+            int charEndIndex = targetToken.EndIndex;
+
             var result = new TokenPos();
+            result.Line = GetLineIndex(charStartIndex);
+            result.EndLine = GetLineIndex(charEndIndex);
+            
+            if (result.Line < 0) return result;
 
-            if (line < 0) return result;
-
-            result.Line = line;
-
-            var tokensInLine = GetTokensForLine(line);
+            var tokensInLine = GetTokensForLine(result.Line);
             int tokenColumn = 0;
             foreach(var token in tokensInLine)
             {
@@ -204,8 +206,11 @@ namespace Parse.FrontEnd.Tokenize
             }
             result.TokenColumn = tokenColumn;
 
-            if (line == 0) result.CharColumn = charStartIndex;
-            else result.CharColumn = (charStartIndex - GetLineCharIndex(line - 1)) - 1;
+            if (result.Line == 0) result.CharColumn = charStartIndex;
+            else result.CharColumn = charStartIndex - GetLineCharIndex(result.Line - 1) - 1;
+
+            if (result.EndLine == 0) result.EndColumn = charEndIndex;
+            else result.EndColumn = charEndIndex - GetLineCharIndex(result.EndLine - 1) - 1;
 
             return result;
         }

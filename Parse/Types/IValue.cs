@@ -3,7 +3,7 @@ using Parse.Extensions;
 
 namespace Parse.Types
 {
-    public enum State { Fixed, Dynamic, NotInit, Unknown, Error };
+    public enum State { Fixed, Dynamic, NotInit, NotFixed, Error };
 
     public interface IValue
     {

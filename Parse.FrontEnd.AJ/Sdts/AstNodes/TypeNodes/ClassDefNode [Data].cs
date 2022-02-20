@@ -119,6 +119,17 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.TypeNodes
             => AllFuncs.Where(func => func.Type == FuncType.Destructor).FirstOrDefault();
 
 
+
+        /*
+        public FuncDefNode GetSymbol(TokenDataList tokens, IEnumerable<VariableAJ> paramTypes)
+        {
+            foreach (var token in tokens)
+            {
+                GetSymbol(token);
+            }
+        }
+        */
+
         private string GetDebuggerDisplay()
             => $"{AccessType} class {Name} (field: {Fields.Count()}, func: {AllFuncs.Count()}) [{GetType()}]";
 
@@ -143,5 +154,7 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.TypeNodes
 
             return false;
         }
+
+        private int test;
     }
 }

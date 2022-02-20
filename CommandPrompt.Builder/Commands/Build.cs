@@ -1,8 +1,10 @@
 ﻿using AJ.Common.Helpers;
 using CommandPrompt.Builder.Properties;
+using Compile.AJ;
 using System;
 using System.CommandLine;
 using System.CommandLine.Invocation;
+using System.Diagnostics;
 using System.IO;
 using System.Text.Encodings.Web;
 using System.Text.Json;
@@ -65,7 +67,15 @@ namespace CommandPrompt.Builder.Commands
                 else path = buildTarget.AbsolutePath();
 
                 var solution = GetSolution(path);
-                if (solution != null) PrintBuildResult(solution.Build());
+
+                AJCompiler compiler = new AJCompiler();
+                Stopwatch stopWatch = new Stopwatch();
+                stopWatch.Start();
+                var result = solution.Build(compiler);
+                stopWatch.Stop();
+                if (solution != null) PrintBuildResult(result);
+
+                Console.WriteLine($"Build Time : {stopWatch.ElapsedMilliseconds} msec");
 
                 return 0;
             });
@@ -93,20 +103,21 @@ namespace CommandPrompt.Builder.Commands
                 StreamWriter fileStream = new StreamWriter(outputFile);
                 fileStream.Write(toPrintString);
                 fileStream.Close();
-            }
 
-            foreach (var buildResultItem in buildResult)
-            {
-                var sourceFullPath = buildResultItem.Key;
-                var compileResult = buildResultItem.Value;
 
-                // parsing history file
-                var fullPath = _outputFile.AbsolutePath();
-                var dir = Path.GetDirectoryName(fullPath);
-                var fileName = Path.GetFileNameWithoutExtension(fullPath);
-                var targetFullPath = Path.Combine(dir, $"{fileName}.csv");
+                foreach (var buildResultItem in buildResult)
+                {
+                    var sourceFullPath = buildResultItem.Key;
+                    var compileResult = buildResultItem.Value;
 
-                compileResult.ParsingResult.ToParsingHistory.ToCSV(targetFullPath);
+                    // parsing history file
+                    var fullPath = _outputFile.AbsolutePath();
+                    var dir = Path.GetDirectoryName(fullPath);
+                    var fileName = Path.GetFileNameWithoutExtension(fullPath);
+                    var targetFullPath = Path.Combine(dir, $"{fileName}.csv");
+
+                    compileResult.ParsingResult.ToParsingHistory.ToCSV(targetFullPath);
+                }
             }
         }
     }

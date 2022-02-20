@@ -20,12 +20,11 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes.Binary
         {
             base.Compile(param);
 
+            if (!IsCanParsing) return this;
+
             try
             {
-                if (LeftNode.Result == null) return this;
-                if (RightNode.Result == null) return this;
-
-                else if (Operation == IRCompareOperation.EQ) Result = LeftNode.Result.EQ(RightNode.Result);
+                if (Operation == IRCompareOperation.EQ) Result = LeftNode.Result.EQ(RightNode.Result);
                 else if (Operation == IRCompareOperation.NE) Result = LeftNode.Result.NotEQ(RightNode.Result);
                 else if (Operation == IRCompareOperation.GT) Result = LeftNode.Result > RightNode.Result;
                 else if (Operation == IRCompareOperation.GE) Result = LeftNode.Result >= RightNode.Result;
@@ -38,7 +37,7 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes.Binary
             }
             finally
             {
-                if (param.Build) DBContext.Instance.Insert(this);
+                if (RootNode.IsBuild) DBContext.Instance.Insert(this);
             }
 
             return this;

@@ -13,6 +13,9 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes
 
         public bool AlwaysTrue { get; } = false;
 
+        public bool IsRoot => !(Parent is ExprNode);
+
+
         protected ExprNode(AstSymbol node) : base(node)
         {
         }

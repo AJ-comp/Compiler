@@ -19,21 +19,22 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes.Binary
         {
             base.Compile(param);
 
+            if (!IsCanParsing) return this;
+
             try
             {
-                if (LeftNode.Result == null) return this;
-                if (RightNode.Result == null) return this;
-
                 if (Operation == IRLogicalOperation.And) Result = LeftNode.Result.And(RightNode.Result);
                 else if (Operation == IRLogicalOperation.Or) Result = LeftNode.Result.Or(RightNode.Result);
             }
             catch (Exception)
             {
-                AJAlarmFactory.CreateMCL0023(LeftNode.Result.Type.Name, RightNode.Result.Type.Name, Operation.ToDescription());
+                Alarms.Add(AJAlarmFactory.CreateMCL0023(LeftNode.Result.Type.Name, 
+                                                                                 RightNode.Result.Type.Name, 
+                                                                                 Operation.ToDescription()));
             }
             finally
             {
-                if (param.Build) DBContext.Instance.Insert(this);
+                if (RootNode.IsBuild) DBContext.Instance.Insert(this);
             }
 
             return this;

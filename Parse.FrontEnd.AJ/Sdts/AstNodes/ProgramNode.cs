@@ -1,4 +1,5 @@
 ﻿using Parse.FrontEnd.AJ.Data;
+using Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes;
 using Parse.FrontEnd.AJ.Sdts.AstNodes.StatementNodes;
 using Parse.FrontEnd.AJ.Sdts.AstNodes.TypeNodes;
 using Parse.FrontEnd.AJ.Sdts.Datas;
@@ -79,9 +80,16 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes
             }
 
             // retry compile for undefined symbol
-            var copiedUnLinkedSymbols = new HashSet<AJNode>(UnLinkedSymbols);
-            foreach (var unlinkNode in copiedUnLinkedSymbols) unlinkNode.Compile(null);
+            var copiedUnLinkedSymbols = new HashSet<SdtsNode>(AllAlarmNodes);
+            foreach (var unlinkNode in copiedUnLinkedSymbols)
+            {
+                if (!(unlinkNode is ExprNode)) continue;
 
+                var exprNode = unlinkNode as ExprNode;
+                if (!exprNode.IsRoot) continue;
+
+                exprNode.Compile(null);
+            }
 
             return this;
         }

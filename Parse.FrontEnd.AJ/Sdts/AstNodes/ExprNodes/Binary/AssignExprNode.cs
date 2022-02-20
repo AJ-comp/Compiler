@@ -6,7 +6,6 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes.Binary
 {
     public abstract class AssignExprNode : BinaryExprNode
     {
-        public bool IsCanParsing { get; private set; } = true;
         public VariableAJ LeftVar { get; private set; }
 
         public AssignExprNode(AstSymbol node) : base(node)
@@ -18,8 +17,7 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes.Binary
         {
             base.Compile(param);
 
-            if (LeftNode.Result == null) { IsCanParsing = false; return this; }
-            if (RightNode.Result == null) { IsCanParsing = false; return this; }
+            if (!IsCanParsing) return this;
 
             if (LeftNode is UseIdentNode)
             {

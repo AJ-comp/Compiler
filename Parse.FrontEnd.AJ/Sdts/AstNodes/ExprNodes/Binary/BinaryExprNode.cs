@@ -1,4 +1,5 @@
-﻿using Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes.LiteralNodes;
+﻿using Parse.FrontEnd.AJ.Properties;
+using Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes.LiteralNodes;
 using Parse.FrontEnd.Ast;
 
 namespace Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes.Binary
@@ -9,6 +10,7 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes.Binary
         public ExprNode RightNode { get; private set; }
 
         public bool IsBothLiteral => LeftNode is LiteralNode && RightNode is LiteralNode;
+        public bool IsCanParsing { get; protected set; } = true;
 
 
         protected BinaryExprNode(AstSymbol node) : base(node)
@@ -17,13 +19,34 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes.Binary
 
         public override SdtsNode Compile(CompileParameter param)
         {
-            Alarms.Clear();
+            base.Compile(param);
 
             // ExprNode or TerminalNode
             LeftNode = Items[0].Compile(param) as ExprNode;
             RightNode = Items[1].Compile(param) as ExprNode;
 
+            IsCanParsing = CheckIfCorrectExpression();
+
             return this;
+        }
+
+
+        public bool CheckIfCorrectExpression()
+        {
+            bool result = true;
+
+            if (LeftNode.Result == null || RightNode.Result == null)
+            {
+                Alarms.Add(new MeaningErrInfo(AllTokens,
+                                                                nameof(AlarmCodes.AJ0036),
+                                                                string.Format(AlarmCodes.AJ0036, Ast.ConnectedParseTree.AllInputDatas)));
+
+                RootNode.UnLinkedSymbols.Add(this);
+
+                result = false;
+            }
+
+            return result;
         }
     }
 }
