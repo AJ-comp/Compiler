@@ -231,4 +231,7 @@
   <data name="AJ0037" xml:space="preserve">
     <value>이 위치에는 this 키워드가 올 수 없습니다.</value>
   </data>
+  <data name="AJ0038" xml:space="preserve">
+    <value>대입(=), 호출, 증가(++), 감소(--), 새 개체식(new) 만 문장이 될 수 있습니다.</value>
+  </data>
 </root>

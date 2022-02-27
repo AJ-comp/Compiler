@@ -14,8 +14,6 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.TypeNodes
 
         public override AJDataType Type => throw new NotImplementedException();
         public override uint Size => throw new NotImplementedException();
-        public override string Name => throw new NotImplementedException();
-        public override string FullName => throw new NotImplementedException();
 
 
         public override SdtsNode Compile(CompileParameter param)

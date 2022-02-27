@@ -14,7 +14,7 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes
         {
             // This has to be terminal type understandably
             Token = (Ast as AstTerminal).Token;
-            
+
             return this;
         }
     }

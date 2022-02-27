@@ -1,4 +1,5 @@
-﻿using Parse.FrontEnd.AJ.Data;
+﻿using Parse.Extensions;
+using Parse.FrontEnd.AJ.Data;
 using Parse.FrontEnd.AJ.Properties;
 using Parse.FrontEnd.Ast;
 using Parse.MiddleEnd.IR.Expressions;
@@ -61,9 +62,10 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes
                 if (offset >= Items.Count) break;
 
                 var node = Items[offset++].Compile(param) as TerminalNode;
-                AllIdentTokens.Add(node.Token);
+                AllIdentTokens.AddExceptNull(node.Token);
             }
 
+            if (IdentToken == null) return this;
             if (!CheckThisKeyword()) return this;
             if (!CheckIsDefinedSymbol(IdentToken)) return this;
 

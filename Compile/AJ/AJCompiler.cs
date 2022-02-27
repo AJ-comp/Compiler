@@ -28,18 +28,6 @@ namespace Compile.AJ
         public event EventHandler<ParsingResult> ParsingCompleted;
         public event EventHandler<SemanticAnalysisResult> SemanticAnalysisCompleted;
 
-        public IEnumerable<AJProject> ProjectList
-        {
-            get
-            {
-                List<AJProject> result = new List<AJProject>();
-
-                foreach (var assemblyInfo in _assemblyDic) result.Add(assemblyInfo.Value);
-
-                return result;
-            }
-        }
-
 
         public AJCompiler()
         {
@@ -59,42 +47,6 @@ namespace Compile.AJ
         {
             e.Sdts = AJCreator.CreateSdtsNode(e) as AJNode;
         }
-
-
-        public AJProject GetProject(string projectName) => _assemblyDic[projectName];
-
-
-        public string GetAssemblyName(string fileFullPath) => GetAssemblyInfo(fileFullPath).AssemblyName;
-
-
-        /****************************************************************/
-        /// <summary>
-        /// <para>Get the project that included file. file has to the full path.</para>
-        /// <para>파일이 속한 프로젝트 정보를 가져옵니다. 파일은 전체 절대 경로 여야 합니다.</para>
-        /// </summary>
-        /// <param name="fileAFullPath">The file absolute full path to get the project information</param>
-        /// <returns></returns>
-        /****************************************************************/
-        public AJProject GetAssemblyInfo(string fileAFullPath)
-        {
-            AJProject result = null;
-
-            foreach (var value in _assemblyDic)
-            {
-                if (!value.Value.SourceFileAFullPaths.Contains(fileAFullPath)) continue;
-
-                result = value.Value;
-            }
-
-            return result;
-        }
-
-
-        public void AddReferenceAssembly(AJProject from, AJProject target)
-        {
-            from.ReferenceProjects.Add(target);
-        }
-
 
         public ParsingResult NewParsing(string fileFullPath) => NewParsing(fileFullPath, File.ReadAllText(fileFullPath));
 

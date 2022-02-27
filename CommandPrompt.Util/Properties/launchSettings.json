@@ -2,7 +2,7 @@
   "profiles": {
     "CommandPrompt.Util": {
       "commandName": "Project",
-      "commandLineArgs": "ajutil print canonical --output C:\\aws\\test\\canonical.csv"
+      "commandLineArgs": "ajutil print C:\\aws\\test"
     }
   }
 }

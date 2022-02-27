@@ -106,4 +106,7 @@
   <data name="Output" xml:space="preserve">
     <value>The position to deploy the generated output, basis value is current directory</value>
   </data>
+  <data name="CreateFile" xml:space="preserve">
+    <value>The {0} file was created.</value>
+  </data>
 </root>

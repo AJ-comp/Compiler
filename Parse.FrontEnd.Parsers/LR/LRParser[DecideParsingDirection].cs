@@ -38,18 +38,18 @@ namespace Parse.FrontEnd.Parsers.LR
                 return false;
             }
             // invalid input symbol, can't shift (error handler exists)
-            else if (IxMetrix.MatchedValueSet[inputValue.Kind].Item2 is IErrorHandlable)
+            else if (IxMetrix.MatchedValueSet[inputValue.Kind].Dest is IErrorHandlable)
             {
                 var value = IxMetrix.MatchedValueSet[inputValue.Kind];
                 parsingUnit.PossibleTerminalSet = IxMetrix.PossibleTerminalSet;
-                parsingUnit.ChangeToFailedState(value.Item2 as IErrorHandlable);
+                parsingUnit.ChangeToFailedState(value.Dest as IErrorHandlable);
 
                 return false;
             }
 
             var matchedValue = IxMetrix.MatchedValueSet[inputValue.Kind];
 
-            parsingUnit.Action = new ActionData(matchedValue.Item1, matchedValue.Item2);
+            parsingUnit.Action = matchedValue;
             parsingUnit.PossibleTerminalSet = IxMetrix.PossibleTerminalSet;
 
             return true;
@@ -94,7 +94,7 @@ namespace Parse.FrontEnd.Parsers.LR
             var matchedValue = IxMetrix.MatchedValueSet[seenSingleNT.ToNonTerminal];
 
             parsingUnit.InputValue = inputValue;
-            parsingUnit.Action = new ActionData(matchedValue.Item1, matchedValue.Item2);
+            parsingUnit.Action = matchedValue;
             parsingUnit.PossibleTerminalSet = IxMetrix.PossibleTerminalSet;
 
             return true;

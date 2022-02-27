@@ -4,10 +4,8 @@ using Parse.FrontEnd.Parsers.LR;
 using Parse.FrontEnd.Parsers.Properties;
 using Parse.FrontEnd.RegularGrammar;
 using Parse.FrontEnd.Tokenize;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using static Parse.FrontEnd.Parsers.LR.LRParser;
 
 namespace Parse.FrontEnd.AJ.ErrorHandler
@@ -23,29 +21,33 @@ namespace Parse.FrontEnd.AJ.ErrorHandler
             else return RecoveryWithReplaceToVirtualToken(possibleSet.First(), dataForRecovery);
         }
 
+        /// <summary>
+        /// Try recovery with virtual tokens.
+        /// </summary>
+        /// <param name="virtualTokens"></param>
+        /// <param name="dataForRecovery"></param>
+        /// <returns></returns>
         private bool TryRecoveryStep(Terminal[] virtualTokens, DataForRecovery dataForRecovery)
         {
             bool result = TryRecoveryWithInsertVirtualTokens(virtualTokens, dataForRecovery);
+            if (!result) return result;
+
+            var curBlock = dataForRecovery.CurBlock;
+            result = TryRecoveryWithInsertVirtualToken(curBlock.Token.Kind, dataForRecovery);
 
             if (result)
             {
-                var curBlock = dataForRecovery.CurBlock;
-                result = TryRecoveryWithInsertVirtualToken(curBlock.Token.Kind, dataForRecovery);
-
-                if (result)
+                for (int j = 0; j < virtualTokens.Count(); j++)
                 {
-                    for (int j = 0; j < virtualTokens.Count(); j++)
-                    {
-                        var parsingErrInfo = ParsingErrorInfo.CreateParsingError(nameof(AlarmCodes.CE0004),
-                                                                                                            string.Format(AlarmCodes.CE0004, virtualTokens.ElementAt(j).Caption));
-                        curBlock._errorInfos.Add(parsingErrInfo);
-                    }
+                    var parsingErrInfo = ParsingErrorInfo.CreateParsingError(nameof(AlarmCodes.CE0004),
+                                                                                                        string.Format(AlarmCodes.CE0004, virtualTokens.ElementAt(j).Caption));
+                    curBlock._errorInfos.Add(parsingErrInfo);
                 }
-                else
-                {
-                    // remove all successed virtual tokens because it has to see next virtual tokens.
-                    for (int j = 0; j < virtualTokens.Count(); j++) curBlock.RemoveLastToken();
-                }
+            }
+            else
+            {
+                // remove all successed virtual tokens because it has to see next virtual tokens.
+                for (int j = 0; j < virtualTokens.Count(); j++) curBlock.RemoveLastToken();
             }
 
             return result;

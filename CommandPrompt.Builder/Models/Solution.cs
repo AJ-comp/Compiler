@@ -19,6 +19,7 @@ namespace CommandPrompt.Builder.Models
         [XmlIgnore] public static string Extension => ".sln";
         [XmlIgnore] public string SolutionPath { get; private set; }
         [XmlIgnore] public string FileName { get; private set; }
+        [XmlIgnore] public bool PrintParsingHistory { get; set; }
         [XmlIgnore]
         public IEnumerable<AJProject> Projects
         {
@@ -46,7 +47,7 @@ namespace CommandPrompt.Builder.Models
             var result = new ProjectBuildResult();
             foreach (var project in Projects)
             {
-                result = project.Build(compiler);
+                result = project.Build(compiler, PrintParsingHistory);
             }
 
             return result;

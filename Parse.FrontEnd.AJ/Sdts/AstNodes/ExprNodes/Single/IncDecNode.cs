@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes.Single
 {
-    public sealed class IncDecNode : SingleExprNode
+    public sealed class IncDecNode : SingleExprNode, ICanbeStatement
     {
         public Info ProcessInfo { get; }
 

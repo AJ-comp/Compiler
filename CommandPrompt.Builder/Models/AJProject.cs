@@ -1,4 +1,5 @@
 ﻿using Compile.AJ;
+using AJ.Common.Helpers;
 using Parse.FrontEnd;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -22,7 +23,7 @@ namespace CommandPrompt.Builder.Models
         [XmlIgnore] public string FullPath => Path.Combine(ProjectPath, FileName);
 
 
-        public ProjectBuildResult Build(AJCompiler compiler)
+        public ProjectBuildResult Build(AJCompiler compiler, bool printParsingHistory = false)
         {
             var result = new ProjectBuildResult(ProjectPath);
             var sources = Directory.GetFiles(ProjectPath, "*.aj");
@@ -34,6 +35,15 @@ namespace CommandPrompt.Builder.Models
 
                 var compileResult = compiler.Compile(compileParameter);
                 compileParameter.ReferenceFiles.Add(compileParameter.FileFullPath, compileResult.RootNode);
+
+                if(printParsingHistory)
+                {
+                    var file = $"{Path.GetFileNameWithoutExtension(source)}.csv";
+                    var dir = $"{ProjectPath}/Debug";
+
+                    Directory.CreateDirectory(dir);
+                    compileResult.ParsingResult.ToParsingHistory.ToCSV(Path.Combine(dir, file));
+                }
 
                 result.Add(compileParameter.FileFullPath, compileResult);
             }

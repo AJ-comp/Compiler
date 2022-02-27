@@ -169,6 +169,15 @@ namespace Parse.FrontEnd.AJ.Properties {
         }
         
         /// <summary>
+        ///   The statement can be only assign(=), call, inc(++), dec(--), new expression(new).과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string AJ0038 {
+            get {
+                return ResourceManager.GetString("AJ0038", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   {0} is already defined.과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string MCL0000 {

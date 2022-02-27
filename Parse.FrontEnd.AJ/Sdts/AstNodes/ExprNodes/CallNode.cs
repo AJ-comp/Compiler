@@ -9,7 +9,7 @@ using System.Linq;
 
 namespace Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes
 {
-    public class CallNode : ExprNode
+    public class CallNode : ExprNode, ICanbeStatement
     {
         public FuncDefNode Func { get; private set; }
 

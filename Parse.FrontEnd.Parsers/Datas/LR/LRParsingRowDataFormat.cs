@@ -1,13 +1,11 @@
 ﻿using Parse.FrontEnd.Parsers.Collections;
 using Parse.FrontEnd.RegularGrammar;
-using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using static Parse.FrontEnd.Parsers.Datas.LR.LRParsingRowDataFormat;
 
 namespace Parse.FrontEnd.Parsers.Datas.LR
 {
-    public class LRParsingRowDataFormat : ParsingRowDataFormat<CanonicalState, Symbol, Tuple<ActionDir, object>>
+    public class LRParsingRowDataFormat : ParsingRowDataFormat<CanonicalState, Symbol, ActionData>
     {
         public enum ActionDir 
         {
@@ -28,7 +26,7 @@ namespace Parse.FrontEnd.Parsers.Datas.LR
 
                 foreach(var valueSet in this.MatchedValueSet)
                 {
-                    if (valueSet.Value.Item1 == ActionDir.Failed) continue;
+                    if (valueSet.Value.Direction == ActionDir.Failed) continue;
 
                     if (valueSet.Key is Terminal) result.Add(valueSet.Key as Terminal);
                 }
@@ -44,7 +42,7 @@ namespace Parse.FrontEnd.Parsers.Datas.LR
 
                 foreach(var valueSet in this.MatchedValueSet)
                 {
-                    if (valueSet.Value.Item1 == ActionDir.Failed) continue;
+                    if (valueSet.Value.Direction == ActionDir.Failed) continue;
 
                     if (valueSet.Key is NonTerminal) result.Add(valueSet.Key as NonTerminal);
                 }

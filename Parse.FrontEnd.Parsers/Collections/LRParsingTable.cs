@@ -117,9 +117,9 @@ namespace Parse.FrontEnd.Parsers.Collections
                 row[this.Introduce] = $"I{index++}";
                 foreach (var matchedItem in item.MatchedValueSet)
                 {
-                    string moveInfo = matchedItem.Value.Item1.ToString();
-                    var destInfo = (matchedItem.Value.Item2 is NonTerminalSingle) ? (matchedItem.Value.Item2 as NonTerminalSingle).ToGrammarString()
-                                                                                                                 : (matchedItem.Value.Item2 as int?).ToString();
+                    string moveInfo = matchedItem.Value.Direction.ToString();
+                    var destInfo = (matchedItem.Value.Dest is NonTerminalSingle) ? (matchedItem.Value.Dest as NonTerminalSingle).ToGrammarString()
+                                                                                                                 : (matchedItem.Value.Dest as int?).ToString();
 
                     row[matchedItem.Key.ToString()] = moveInfo + $" [{destInfo}]";
                 }

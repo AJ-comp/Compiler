@@ -23,7 +23,7 @@ namespace Parse.FrontEnd.Parsers.Datas
 
         public IEnumerable<ParsingUnitHistory> History => _history;
 
-        public bool IsAllUnitConnected => (FirstDisconnectedIndex < 0);
+        public bool IsAllUnitConnected => FirstDisconnectedIndex < 0;
 
         public int FirstDisconnectedIndex
         {
@@ -142,7 +142,7 @@ namespace Parse.FrontEnd.Parsers.Datas
         }
 
         /// <summary>
-        /// This function checks if unit[unitIndex] is connectd with unit[unitIndex+1].
+        /// This function checks if unit[unitIndex] is connectd with unit[unitIndex+1]. <br/>
         /// if unitIndex is last index return always true.
         /// </summary>
         /// <param name="unitIndex"></param>
@@ -153,7 +153,7 @@ namespace Parse.FrontEnd.Parsers.Datas
             if (unitIndex >= _units.Count) return false;
             if (unitIndex == _units.Count - 1) return true;
 
-            return (_units[unitIndex].AfterStack == _units[unitIndex + 1].BeforeStack);
+            return _units[unitIndex].AfterStack == _units[unitIndex + 1].BeforeStack;
         }
 
         public void AddRecoveryMessageToLastHistory(string recoveryMessage)

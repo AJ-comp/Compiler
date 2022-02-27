@@ -561,7 +561,7 @@ namespace Parse.FrontEnd.Parsers.Collections
                 ActionDir actionInfo = (value.Item1 is Terminal) ? ActionDir.Shift : ActionDir.Goto;
 
                 tempStorage.Add(value.Item1, highestPriority);
-                result.Add(value.Item1, new Tuple<ActionDir, object>(actionInfo, value.Item2.StateNumber));
+                result.Add(value.Item1, new ActionData(actionInfo, value.Item2.StateNumber));
             }
         }
 
@@ -588,9 +588,9 @@ namespace Parse.FrontEnd.Parsers.Collections
                     //                    ActionInfo actionInfo = (this.virtualStartSymbol.IsSubSet(singleNT)) ? ActionInfo.accept : ActionInfo.reduce;
 
                     //                        tempStorage.Add(followItem, singleNT.Priority);
-                    // shift first, if contain key then this item is already registered at shift so don't regist.
+                    // shift first, if contain key then this item is already registered at shift so don't regist.   // shift-reduce or reduce-reduce conflict
                     if (result.ContainsKey(item)) continue;
-                    result.Add(item, new Tuple<ActionDir, object>(actionInfo, singleNT));
+                    result.Add(item, new ActionData(actionInfo, singleNT));
                 }
             }
         }
@@ -599,12 +599,12 @@ namespace Parse.FrontEnd.Parsers.Collections
         private void ConflictProcess(CanonicalState curStatus, Terminal seeingToken, ActionDicSymbolMatched result)
         {
             // shift - reduce conflict
-            if (result[seeingToken].Item1 == ActionDir.Shift)
+            if (result[seeingToken].Direction == ActionDir.Shift)
             {
                 _conflictLogs.Add($"Fired shift - reduce conflict [I{curStatus.StateNumber} - {seeingToken}]");
             }
             // reduce - reduce conflict
-            else if (result[seeingToken].Item1 == ActionDir.Reduce)
+            else if (result[seeingToken].Direction == ActionDir.Reduce)
                 _conflictLogs.Add($"Fired reduce - reduce conflict [I{curStatus.StateNumber} - {seeingToken}]");
 
             /*

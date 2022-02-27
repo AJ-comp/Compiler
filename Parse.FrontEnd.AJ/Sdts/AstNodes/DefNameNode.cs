@@ -16,6 +16,8 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes
             base.Compile(param);
 
             var terminalNode = Items[0].Compile(param) as TerminalNode;
+            if (terminalNode.Token.IsVirtual) return this;
+
             Token = terminalNode.Token;
 
             if (Token.Kind == AJGrammar.This)

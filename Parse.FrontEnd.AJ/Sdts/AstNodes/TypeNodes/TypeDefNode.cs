@@ -1,19 +1,19 @@
 ﻿using Parse.FrontEnd.AJ.Data;
 using Parse.FrontEnd.AJ.Properties;
 using Parse.FrontEnd.Ast;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Parse.FrontEnd.AJ.Sdts.AstNodes.TypeNodes
 {
-    public abstract class TypeDefNode : AJNode
+    public abstract class TypeDefNode : AJNode, ISymbolData
     {
         public abstract AJDataType Type { get; }
-        public TokenData DataTypeToken { get; protected set; }
+        public TokenData NameToken { get; protected set; }
+        public TokenDataList FullNameToken { get; } = new TokenDataList();
+        public string Name => NameToken?.Input;
+        public string FullName => FullNameToken.ToListString();
+        public int Block { get; set; }
+
         public abstract uint Size { get; }
-        public abstract string Name { get; }
-        public abstract string FullName { get; }
 
         public TypeDefNode(AstSymbol node) : base(node)
         {

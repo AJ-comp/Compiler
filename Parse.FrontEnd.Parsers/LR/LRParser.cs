@@ -291,7 +291,6 @@ namespace Parse.FrontEnd.Parsers.LR
         /// <returns>Returns ErrorHandlingResult if an error was recovered (this means that it can parse continue) else returns null.</returns>
         private ErrorHandlingResult ParsingFailedProcess(ParsingResult parsingResult, int curTokenIndex)
         {
-            ErrorHandlingResult result = null;
             ParsingUnit lastParsingUnit = parsingResult[curTokenIndex].Units.Last();
 
             this.ActionFailed?.Invoke(this, lastParsingUnit);

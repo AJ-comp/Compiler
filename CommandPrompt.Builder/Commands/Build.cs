@@ -35,13 +35,14 @@ namespace CommandPrompt.Builder.Commands
         public Build() : base(nameof(Build).ToLower(), Resource.Build)
         {
             Add(new Argument<string>("buildTarget", () => string.Empty, Resource.BuildTarget));
+            Add(new Argument<Architecture>("arch", () => Architecture.ARM, Resource.ArchOption));
+            Add(new Argument<BuildConfig>("buildConfig", () => BuildConfig.Debug, Resource.BuildConfig));
 
-            Add(new Option<string>("--arch", Resource.ArchOption));
-            Add(new Option<string>("-c", Resource.BuildConfig));
+            Add(new Option("--history", "history"));
             Add(new Option<string>("--output_format", Resource.ArchOption));
             Add(new Option<string>("--output_file", Resource.ArchOption));
 
-            Handler = CommandHandler.Create<string, Architecture, BuildConfig, OutputFormat, string>(HandleBuild);
+            Handler = CommandHandler.Create<string, Architecture, BuildConfig, bool, OutputFormat, string>(HandleBuild);
         }
 
 
@@ -52,21 +53,23 @@ namespace CommandPrompt.Builder.Commands
 
         private int HandleBuild(string buildTarget,
                                          Architecture arch,
-                                         BuildConfig c,
+                                         BuildConfig buildConfig,
+                                         bool history,
                                          OutputFormat output_format = OutputFormat.Private,
                                          string output_file = "")
         {
             return Execute(() =>
             {
-                _config = c;
+                var _ar = arch;
+                _config = buildConfig;
                 _outputFormat = output_format;
                 _outputFile = output_file;
 
-                string path = string.Empty;
-                if (string.IsNullOrEmpty(buildTarget)) path = Environment.CurrentDirectory;
-                else path = buildTarget.AbsolutePath();
+                if (string.IsNullOrEmpty(buildTarget)) _path = Environment.CurrentDirectory;
+                else _path = buildTarget.AbsolutePath();
 
-                var solution = GetSolution(path);
+                var solution = GetSolution(_path);
+                solution.PrintParsingHistory = history;
 
                 AJCompiler compiler = new AJCompiler();
                 Stopwatch stopWatch = new Stopwatch();
@@ -103,22 +106,10 @@ namespace CommandPrompt.Builder.Commands
                 StreamWriter fileStream = new StreamWriter(outputFile);
                 fileStream.Write(toPrintString);
                 fileStream.Close();
-
-
-                foreach (var buildResultItem in buildResult)
-                {
-                    var sourceFullPath = buildResultItem.Key;
-                    var compileResult = buildResultItem.Value;
-
-                    // parsing history file
-                    var fullPath = _outputFile.AbsolutePath();
-                    var dir = Path.GetDirectoryName(fullPath);
-                    var fileName = Path.GetFileNameWithoutExtension(fullPath);
-                    var targetFullPath = Path.Combine(dir, $"{fileName}.csv");
-
-                    compileResult.ParsingResult.ToParsingHistory.ToCSV(targetFullPath);
-                }
             }
         }
+
+
+        private string _path = string.Empty;
     }
 }

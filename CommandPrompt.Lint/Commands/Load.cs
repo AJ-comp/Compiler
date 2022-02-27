@@ -33,7 +33,8 @@ namespace CommandPrompt.Lint.Commands
                 else path = solutionPath.AbsolutePath();
 
                 var solution = GetSolution(path);
-                if (solution != null) solution.Build();
+                AJCompiler compiler = new AJCompiler();
+                if (solution != null) solution.Build(compiler);
 
                 return 0;
             });

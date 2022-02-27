@@ -8,6 +8,7 @@ using GalaSoft.MvvmLight.Messaging;
 using Parse.BackEnd.Target;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using ViewResources = ApplicationLayer.Define.Properties.WindowViewResources;
 
 namespace ApplicationLayer.ViewModels
@@ -29,7 +30,7 @@ namespace ApplicationLayer.ViewModels
 
                 var cFile = file as SourceFileTreeNodeModel;
 
-                if (cFile.Ast?.AllAlarmNodes.Count == 0)
+                if (cFile.Ast?.AllAlarmNodes.Count() == 0)
                 {
                     //                    File.WriteAllText(cFile.FullPath, cFile.);
 

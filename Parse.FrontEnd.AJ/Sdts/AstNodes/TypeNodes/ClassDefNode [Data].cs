@@ -1,21 +1,16 @@
-﻿using Parse.Extensions;
-using Parse.FrontEnd.AJ.Data;
+﻿using Parse.FrontEnd.AJ.Data;
 using Parse.FrontEnd.AJ.Sdts.Datas;
-using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Text;
 
 namespace Parse.FrontEnd.AJ.Sdts.AstNodes.TypeNodes
 {
     [DebuggerDisplay("{" + nameof(GetDebuggerDisplay) + "(),nq}")]
-    public partial class ClassDefNode : ISymbolData, ISymbolCenter
+    public partial class ClassDefNode : ISymbolCenter
     {
         public Access AccessType { get; set; } = Access.Private;
-        public TokenData NameToken { get; set; }
         public override AJDataType Type => AJDataType.Class;
-        public int Block { get; set; }
 
         public override uint Size
         {
@@ -28,7 +23,6 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.TypeNodes
                 return size;
             }
         }
-        public override string Name => NameToken.Input;
         public List<VariableAJ> Fields { get; set; } = new List<VariableAJ>();
         public List<FuncDefNode> AllFuncs { get; set; } = new List<FuncDefNode>();
         public List<AJNode> References { get; set; } = new List<AJNode>();
@@ -73,8 +67,6 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.TypeNodes
             }
         }
 
-
-        public override string FullName => FullNameTokens.ItemsString(PrintType.Property, "Input", ".");
 
         public IEnumerable<ISymbolData> SymbolList
         {

@@ -44,6 +44,7 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.TypeNodes
 
             var nameNode = Items[offset++].Compile(param) as DefNameNode;
             NameToken = nameNode.Token;
+            if (NameToken == null) return this;
 
             // field or property or function
             while (true)
@@ -156,7 +157,7 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.TypeNodes
         {
             foreach (var namespaceNode in RootNode.AccessableNamespaces)
             {
-                foreach (var classNode in namespaceNode.Classes)
+                foreach (var classNode in namespaceNode.DefTypes)
                 {
                     if (classNode.FullName != FullName) continue;
 

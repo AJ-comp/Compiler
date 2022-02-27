@@ -118,12 +118,15 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Util" xml:space="preserve">
-    <value>유틸티성 프로그램입니다. 파싱 테이블, Canonical set 출력 기능등을 지원합니다.</value>
+    <value>유틸리티성 프로그램입니다. 파싱 테이블, Canonical set 출력 기능등을 지원합니다.</value>
   </data>
   <data name="Template" xml:space="preserve">
     <value>명령이 호출될 때 인스턴스화할 템플릿입니다. 각 템플릿에는 전달할 수 있는 특정 옵션이 있을 수 있습니다. 자세한 내용은 템플릿 옵션을 참조하세요. ajbuild new --list를 실행하여 설치된 모든 템플릿의 목록을 볼 수 있습니다.</value>
   </data>
   <data name="Output" xml:space="preserve">
     <value>생성된 출력을 배치할 위치 기본값은 현재 디렉터리입니다</value>
+  </data>
+  <data name="CreateFile" xml:space="preserve">
+    <value>{0} 파일이 생성되었습니다.</value>
   </data>
 </root>

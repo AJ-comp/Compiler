@@ -211,4 +211,7 @@
   <data name="AJ0037" xml:space="preserve">
     <value>'this' keyword can't come on this position.</value>
   </data>
+  <data name="AJ0038" xml:space="preserve">
+    <value>The statement can be only assign(=), call, inc(++), dec(--), new expression(new).</value>
+  </data>
 </root>

@@ -93,11 +93,8 @@ namespace Parse.FrontEnd.AJ
         private NonTerminal memberPropDef = new NonTerminal(nameof(memberPropDef));
         private NonTerminal memberFuncDef = new NonTerminal(nameof(memberFuncDef));
 
-        private NonTerminal translationUnit = new NonTerminal("translation_unit");
-        private NonTerminal externalDcl = new NonTerminal("external_dcl");
         private NonTerminal functionDef = new NonTerminal("function_def");
         private NonTerminal typeSpecifier = new NonTerminal("type_specifier");
-        private NonTerminal functionName = new NonTerminal("function_name");
         private NonTerminal formalParam = new NonTerminal("formal_param");
         private NonTerminal formalParamList = new NonTerminal("formal_param_list");
         private NonTerminal compoundSt = new NonTerminal(nameof(compoundSt));
@@ -251,7 +248,7 @@ namespace Parse.FrontEnd.AJ
             this.typeSpecifier.AddItem(UInt, UIntNode);
             this.typeSpecifier.AddItem(Double, DoubleNode);
             this.typeSpecifier.AddItem(Void, VoidNode);
-            this.typeSpecifier.AddItem(Ident, UserDefTypeNode);
+            this.typeSpecifier.AddItem(identChainExp, UserDefTypeNode);
 
             this.defName.AddItem(Ident, DefNameNode);
             this.compoundSt.AddItem(this.OpenCurlyBrace + statementList.ZeroOrMore() + this.CloseCurlyBrace, CompoundSt);
@@ -336,7 +333,7 @@ namespace Parse.FrontEnd.AJ
             this.actualParamList.AddItem(this.actualParamList + this.Comma + this.logicalOrExp);
 
             this.primaryExp.AddItem(This + (Dot + Ident).ZeroOrMore(), UseMember);
-            this.primaryExp.AddItem(Ident + (Dot + Ident).ZeroOrMore(), UseVar);
+            this.primaryExp.AddItem(identChainExp, UseVar);
             this.primaryExp.AddItem(this.literalInt);
             this.primaryExp.AddItem(this.literalDouble);
             this.primaryExp.AddItem(this.literalBool);

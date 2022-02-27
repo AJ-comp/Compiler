@@ -1,10 +1,11 @@
-﻿using System.Collections;
+﻿using Parse.Extensions;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace Parse.FrontEnd.RegularGrammar
 {
-    public class NonTerminalConcat : IList<Symbol>, ICloneable<NonTerminalConcat>, ITemplateCreatable<NonTerminalConcat>
+    public class NonTerminalConcat : IList<Symbol>, ICloneable<NonTerminalConcat>, ITemplateCreatable<NonTerminalConcat>, IConvertableEbnfString
     {
         protected List<Symbol> _symbols = new List<Symbol>();
 
@@ -193,6 +194,18 @@ namespace Parse.FrontEnd.RegularGrammar
         {
             NonTerminalConcat result = this.Clone();
             result.Clear();
+
+            return result;
+        }
+
+        public string ToEbnfString(bool bContainLHS = false)
+        {
+            string result = string.Empty;
+
+            foreach(var item in _symbols)
+            {
+                result += item.ToEbnfString() + " ";
+            }
 
             return result;
         }

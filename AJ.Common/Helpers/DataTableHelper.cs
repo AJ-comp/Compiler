@@ -27,7 +27,7 @@ namespace AJ.Common.Helpers
             lines.AddRange(valueLines);
 
 //            using var writer = new StreamWriter(fileFullPath);
-            File.WriteAllLines(fileFullPath, lines);
+            File.WriteAllLines(fileFullPath, lines, new UTF8Encoding(true));
         }
 
 

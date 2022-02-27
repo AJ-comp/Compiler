@@ -61,6 +61,15 @@ namespace CommandPrompt.Util.Properties {
         }
         
         /// <summary>
+        ///   The {0} file was created.과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string CreateFile {
+            get {
+                return ResourceManager.GetString("CreateFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   The position to deploy the generated output, basis value is current directory과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string Output {

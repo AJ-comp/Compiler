@@ -34,7 +34,7 @@ namespace Parse.FrontEnd.AJ.Data
         private TokenDataList _nameTokens = new TokenDataList();
 
         public int Id { get; set; } = 0;
-        public DataTypeNode DefineNode { get; set; }
+        public TypeDefNode DefineNode { get; set; }
         public bool Static { get; set; } = false;
         public bool Const { get; set; } = false;
         public IEnumerable<TokenData> NameTokens => _nameTokens;

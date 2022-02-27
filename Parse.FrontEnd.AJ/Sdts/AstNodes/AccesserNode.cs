@@ -16,6 +16,7 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes
         {
             base.Compile(param);
             var terminalNode = Items[0].Compile(param) as TerminalNode;
+            if (terminalNode.Token == null) return this;
 
             if (terminalNode.Token.Kind == AJGrammar.Private) AccessState = Access.Private;
             else if (terminalNode.Token.Kind == AJGrammar.Public) AccessState = Access.Public;

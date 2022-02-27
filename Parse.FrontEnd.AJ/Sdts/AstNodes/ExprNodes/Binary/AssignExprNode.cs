@@ -4,7 +4,7 @@ using Parse.FrontEnd.Ast;
 
 namespace Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes.Binary
 {
-    public abstract class AssignExprNode : BinaryExprNode
+    public abstract class AssignExprNode : BinaryExprNode, ICanbeStatement
     {
         public VariableAJ LeftVar { get; private set; }
 

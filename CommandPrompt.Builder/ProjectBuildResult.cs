@@ -124,12 +124,13 @@ namespace CommandPrompt.Builder
 
                     if (error.RelatedTokenPos.Count > 0)
                     {
-                        var errToken = error.RelatedTokenPos.First();
+                        var firstErrToken = error.RelatedTokenPos.First();
+                        var lastErrToken = error.RelatedTokenPos.Last();
 
-                        line = errToken.Line + 1;
-                        column = errToken.CharColumn + 1;
-                        endLine = errToken.EndLine + 1;
-                        endColumn = (line == endLine) ? errToken.EndColumn + 2 : errToken.EndColumn + 1;
+                        line = firstErrToken.Line + 1;
+                        column = firstErrToken.CharColumn + 1;
+                        endLine = lastErrToken.EndLine + 1;
+                        endColumn = (line == endLine) ? lastErrToken.EndColumn + 2 : lastErrToken.EndColumn + 1;
                     }
 
                     result += $"{Path.GetFileName(item.FileFullPath)}" +

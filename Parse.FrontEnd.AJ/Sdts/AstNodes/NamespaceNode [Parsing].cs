@@ -1,4 +1,5 @@
-﻿using Parse.FrontEnd.AJ.Properties;
+﻿using Parse.Extensions;
+using Parse.FrontEnd.AJ.Properties;
 using Parse.FrontEnd.AJ.Sdts.AstNodes.TypeNodes;
 using Parse.FrontEnd.AJ.Sdts.Datas;
 using Parse.FrontEnd.Ast;
@@ -29,11 +30,11 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes
             base.Compile(param);
 
             int offset = 0;
-            while(Items[offset] is TerminalNode)
+            while (Items[offset] is DefNameNode)
             {
                 // parsing for ident chain
-                var nameNode = Items[offset++].Compile(param) as TerminalNode;
-                NameTokens.Add(nameNode.Token);
+                var nameNode = Items[offset++].Compile(param) as DefNameNode;
+                NameTokens.AddExceptNull(nameNode.Token);
             }
 
             NamespaceDictionary.Instance.Add(this);
@@ -46,7 +47,7 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes
                 if (ajNode is ClassDefNode)
                 {
                     var node = ajNode.Compile(param.CloneForNewBlock(newBlockOffset++)) as ClassDefNode;
-                    if (!IsDuplicated(node.NameToken)) Classes.Add(node);
+                    if (!IsDuplicated(node.NameToken)) DefTypes.Add(node);
                 }
                 else if (ajNode is StructDefNode)
                 {
@@ -56,9 +57,9 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes
             }
 
             References.Add(this);
-                //            DBContext.Instance.Insert(this);
+            //            DBContext.Instance.Insert(this);
 
-                return this;
+            return this;
         }
 
         private HashSet<StructDefNode> _structDefNodes = new HashSet<StructDefNode>();

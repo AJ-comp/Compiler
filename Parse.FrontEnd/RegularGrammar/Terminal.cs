@@ -45,9 +45,17 @@ namespace Parse.FrontEnd.RegularGrammar
             this.Caption = caption;
             this.Meaning = meaning;
             this.IsWordPattern = bWordPattern;
+
+            EbnfString = value;
         }
 
         public override string ToString() => Caption;
+
+
+        public override string ToEbnfString(bool bContainLHS = false)
+        {
+            return (IsWordPattern) ? $"{EbnfString}" : $"'{EbnfString}'";
+        }
 
         public override string ToGrammarString()
         {
