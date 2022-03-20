@@ -236,7 +236,7 @@ namespace Parse.FrontEnd.AJ
             this.formalParam.AddItem(OpenParenthesis + formalParamList.Optional() + CloseParenthesis, FormalPara);
             this.formalParamList.AddItem(declaratorVar | formalParamList + Comma + declaratorVar);
 
-            this.identChainExp.AddItem(Ident + (Dot + identChainExp).ZeroOrMore());
+            this.identChainExp.AddItem(Ident + (Dot + Ident).ZeroOrMore());
 
             this.typeSpecifier.AddItem(Bool, BoolNode);
             this.typeSpecifier.AddItem(Byte, ByteNode);

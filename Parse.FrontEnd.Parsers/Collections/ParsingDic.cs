@@ -54,13 +54,15 @@ namespace Parse.FrontEnd.Parsers.Collections
             {
                 if (result.Columns.Contains(item.Key.Item1.ToString())) continue;
 
-                DataColumn column = new DataColumn();
+                DataColumn column = new DataColumn
+                {
+                    DataType = typeof(string),
+                    ColumnName = item.Key.Item1.ToString(),
+                    Caption = item.Key.Item1.ToString(),
+                    ReadOnly = true,
+                    DefaultValue = string.Empty
+                };
 
-                column.DataType = typeof(string);
-                column.ColumnName = item.Key.Item1.ToString();
-                column.Caption = item.Key.Item1.ToString();
-                column.ReadOnly = true;
-                column.DefaultValue = string.Empty;
                 result.Columns.Add(column);
             }
 

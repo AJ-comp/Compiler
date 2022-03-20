@@ -1,5 +1,7 @@
-﻿using Parse.FrontEnd.Parsers.Datas.LR;
+﻿using Parse.Extensions;
+using Parse.FrontEnd.Parsers.Datas.LR;
 using Parse.FrontEnd.RegularGrammar;
+using System;
 using System.Collections.Generic;
 using System.Data;
 
@@ -117,11 +119,19 @@ namespace Parse.FrontEnd.Parsers.Collections
                 row[this.Introduce] = $"I{index++}";
                 foreach (var matchedItem in item.MatchedValueSet)
                 {
-                    string moveInfo = matchedItem.Value.Direction.ToString();
-                    var destInfo = (matchedItem.Value.Dest is NonTerminalSingle) ? (matchedItem.Value.Dest as NonTerminalSingle).ToGrammarString()
-                                                                                                                 : (matchedItem.Value.Dest as int?).ToString();
+                    string key = matchedItem.Key.ToString();
+                    List<string> matchedValues = new List<string>();
 
-                    row[matchedItem.Key.ToString()] = moveInfo + $" [{destInfo}]";
+                    foreach (var mItem in matchedItem.Value)
+                    {
+                        var moveInfo = mItem.Direction.ToString();
+                        var destInfo = (mItem.Dest is NonTerminalSingle) ? (mItem.Dest as NonTerminalSingle).ToGrammarString()
+                                                                                                 : (mItem.Dest as int?).ToString();
+
+                         matchedValues.Add(moveInfo + $" [{destInfo}]");
+                    }
+
+                    row[key] = matchedValues.ItemsString(PrintType.String, "", Environment.NewLine);
                 }
 
                 dataTable.Rows.Add(row);

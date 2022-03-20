@@ -216,8 +216,10 @@ namespace ApplicationLayer.Models.SolutionPackage
          ********************************************************************************************/
         public static SolutionTreeNodeModel Create(string solutionPath, string solutionName, ProjectType projectType, Target target)
         {
-            SolutionTreeNodeModel result = new SolutionTreeNodeModel(solutionPath, solutionName);
-            result.Version = 1.0;
+            SolutionTreeNodeModel result = new SolutionTreeNodeModel(solutionPath, solutionName)
+            {
+                Version = 1.0
+            };
 
             ProjectGenerator projectGenerator = ProjectGenerator.CreateProjectGenerator(projectType.Grammar);
             if (projectGenerator == null) return result;

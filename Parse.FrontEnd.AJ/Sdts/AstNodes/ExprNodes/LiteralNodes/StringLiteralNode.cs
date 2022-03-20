@@ -39,10 +39,11 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes.LiteralNodes
 
         public override IRExpression To()
         {
-            var result = new IRLiteralExpr();
-
-            result.Type = new TypeInfo(StdType.Char, 1);
-            result.Value = null;
+            var result = new IRLiteralExpr
+            {
+                Type = new TypeInfo(StdType.Char, 1),
+                Value = null
+            };
 
             return result;
         }

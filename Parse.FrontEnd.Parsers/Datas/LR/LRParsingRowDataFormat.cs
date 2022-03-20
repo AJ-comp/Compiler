@@ -5,7 +5,7 @@ using System.ComponentModel;
 
 namespace Parse.FrontEnd.Parsers.Datas.LR
 {
-    public class LRParsingRowDataFormat : ParsingRowDataFormat<CanonicalState, Symbol, ActionData>
+    public class LRParsingRowDataFormat : ParsingRowDataFormat<CanonicalState, Symbol, ActionDataList>
     {
         public enum ActionDir 
         {
@@ -26,7 +26,7 @@ namespace Parse.FrontEnd.Parsers.Datas.LR
 
                 foreach(var valueSet in this.MatchedValueSet)
                 {
-                    if (valueSet.Value.Direction == ActionDir.Failed) continue;
+                    if (valueSet.Value[0].Direction == ActionDir.Failed) continue;
 
                     if (valueSet.Key is Terminal) result.Add(valueSet.Key as Terminal);
                 }
@@ -34,6 +34,7 @@ namespace Parse.FrontEnd.Parsers.Datas.LR
                 return result;
             }
         }
+
         public override HashSet<NonTerminal> PossibleNonTerminalSet
         {
             get
@@ -42,7 +43,7 @@ namespace Parse.FrontEnd.Parsers.Datas.LR
 
                 foreach(var valueSet in this.MatchedValueSet)
                 {
-                    if (valueSet.Value.Direction == ActionDir.Failed) continue;
+                    if (valueSet.Value[0].Direction == ActionDir.Failed) continue;
 
                     if (valueSet.Key is NonTerminal) result.Add(valueSet.Key as NonTerminal);
                 }

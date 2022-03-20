@@ -27,10 +27,12 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes
         {
             Type = type;
             AccessType = accessType;
-            var compileParam = new CompileParameter();
-            compileParam.BlockLevel = blockLevel;
-            compileParam.Offset = offset;
-            compileParam.RootNode = rootNode;
+            var compileParam = new CompileParameter
+            {
+                BlockLevel = blockLevel,
+                Offset = offset,
+                RootNode = rootNode
+            };
 
             base.Compile(compileParam);
             ReturnTypeData = returnTypeInfo;

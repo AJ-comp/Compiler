@@ -69,6 +69,6 @@ namespace Parse.WpfControls.SyntaxEditor
         }
 
 
-        private ParsingResult parsingResult = new ParsingResult();
+        private ParsingResult parsingResult = new ParsingResult(true);
     }
 }

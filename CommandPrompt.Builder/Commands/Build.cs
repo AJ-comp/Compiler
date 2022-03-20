@@ -71,7 +71,7 @@ namespace CommandPrompt.Builder.Commands
                 var solution = GetSolution(_path);
                 solution.PrintParsingHistory = history;
 
-                AJCompiler compiler = new AJCompiler();
+                AJCompiler compiler = new AJCompiler(history);
                 Stopwatch stopWatch = new Stopwatch();
                 stopWatch.Start();
                 var result = solution.Build(compiler);
@@ -87,9 +87,11 @@ namespace CommandPrompt.Builder.Commands
 
         private void PrintBuildResult(ProjectBuildResult buildResult)
         {
-            var options = new JsonSerializerOptions();
-            options.WriteIndented = true;
-            options.Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping;
+            var options = new JsonSerializerOptions
+            {
+                WriteIndented = true,
+                Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping
+            };
 
             var printStructure = buildResult.ToPrintStructure();
             var toPrintString = (_outputFormat == OutputFormat.Json)

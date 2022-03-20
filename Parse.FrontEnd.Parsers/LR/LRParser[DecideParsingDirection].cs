@@ -2,6 +2,7 @@
 using Parse.FrontEnd.Parsers.Collections;
 using Parse.FrontEnd.Parsers.Datas;
 using Parse.FrontEnd.ParseTree;
+using System.Linq;
 
 namespace Parse.FrontEnd.Parsers.LR
 {
@@ -13,8 +14,10 @@ namespace Parse.FrontEnd.Parsers.LR
         /// <param name="parsingUnit"></param>
         /// <param name="inputValue"></param>
         /// <returns></returns>
-        private bool ShiftOrReduce(ParsingUnit parsingUnit, TokenData inputValue)
+        private bool ShiftOrReduce(ParsingUnit parsingUnit, TokenData inputValue, out ConflictItem conflictItem)
         {
+            conflictItem = null;
+
             ParsingStackUnit beforeStack = parsingUnit.BeforeStack;
             parsingUnit.InputValue = inputValue;
 
@@ -38,18 +41,22 @@ namespace Parse.FrontEnd.Parsers.LR
                 return false;
             }
             // invalid input symbol, can't shift (error handler exists)
-            else if (IxMetrix.MatchedValueSet[inputValue.Kind].Dest is IErrorHandlable)
+            else if (IxMetrix.MatchedValueSet[inputValue.Kind].DefaultDest is IErrorHandlable)
             {
                 var value = IxMetrix.MatchedValueSet[inputValue.Kind];
                 parsingUnit.PossibleTerminalSet = IxMetrix.PossibleTerminalSet;
-                parsingUnit.ChangeToFailedState(value.Dest as IErrorHandlable);
+                parsingUnit.ChangeToFailedState(value.DefaultDest as IErrorHandlable);
 
                 return false;
             }
 
             var matchedValue = IxMetrix.MatchedValueSet[inputValue.Kind];
 
-            parsingUnit.Action = matchedValue;
+            // it needs multiple process if conflict is fired.
+            if (matchedValue.Count() > 1)
+                conflictItem = new ConflictItem((int)topData, matchedValue.Skip(0));
+
+            parsingUnit.Action = matchedValue.First();
             parsingUnit.PossibleTerminalSet = IxMetrix.PossibleTerminalSet;
 
             return true;
@@ -94,7 +101,7 @@ namespace Parse.FrontEnd.Parsers.LR
             var matchedValue = IxMetrix.MatchedValueSet[seenSingleNT.ToNonTerminal];
 
             parsingUnit.InputValue = inputValue;
-            parsingUnit.Action = matchedValue;
+            parsingUnit.Action = matchedValue.First();      // there is no conflict in goto so has only one.
             parsingUnit.PossibleTerminalSet = IxMetrix.PossibleTerminalSet;
 
             return true;

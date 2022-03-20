@@ -8,6 +8,7 @@ using Parse.FrontEnd.AJ.Sdts.AstNodes;
 using Parse.FrontEnd.AJ.Sdts.Datas;
 using Parse.FrontEnd.Ast;
 using Parse.FrontEnd.Grammars;
+using Parse.FrontEnd.Grammars.ExampleGrammars;
 using Parse.FrontEnd.Parsers.Datas;
 using Parse.FrontEnd.Parsers.LR;
 using Parse.FrontEnd.Tokenize;
@@ -29,18 +30,16 @@ namespace Compile.AJ
         public event EventHandler<SemanticAnalysisResult> SemanticAnalysisCompleted;
 
 
-        public AJCompiler()
+        public AJCompiler(bool bParsingLogging = false)
         {
-            var instance = AJDefineTable.Instance;
             Parser = new LALRParser(_ajGrammar).AddErrorHandler(new AJGrammarErrorHandler());
-//            Parser = new SLRParser(_ajGrammar);
-            //            Parser = new LLParser(_ajGrammar);
+//            Parser = new LLParser(_ajGrammar);
             Parser.ASTCreated += ASTCreated;
 
             foreach (var terminal in _ajGrammar.TerminalSet)
                 _lexer.AddTokenRule(terminal);
 
-            MiniC_LRErrorHandlerFactory.Instance.AddErrorHandler(Parser);
+            AJ_LRErrorHandlerFactory.Instance.AddErrorHandler(Parser);
         }
 
         private void ASTCreated(object sender, AstSymbol e)
@@ -174,7 +173,7 @@ namespace Compile.AJ
 
         private Lexer _lexer = new Lexer();
         private Grammar _ajGrammar = new AJGrammar();
-//        private Grammar _ajGrammar = new Ex8_15Grammar();
+//        private Grammar _ajGrammar = new Thesis2Grammar();
         public LRParser Parser { get; private set; }
 
         private List<CompileResult> _compileResult = new List<CompileResult>();

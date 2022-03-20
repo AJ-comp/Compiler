@@ -60,9 +60,12 @@ namespace Parse.FrontEnd.Parsers
         public abstract ParsingResult Parsing(LexingData lexingData, ParsingResult prevParsingInfo);
 
 
-        protected Parser(Grammar grammar)
+        protected Parser(Grammar grammar, bool bLogging = false)
         {
             this.Grammar = grammar;
+            _logging = bLogging;
         }
+
+        protected bool _logging = false;
     }
 }

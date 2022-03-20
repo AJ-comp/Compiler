@@ -1,4 +1,5 @@
 ﻿using Parse.FrontEnd.Parsers;
+using Parse.FrontEnd.Parsers.Collections;
 using Parse.FrontEnd.Parsers.Datas;
 using Parse.FrontEnd.Parsers.LR;
 using Parse.FrontEnd.Parsers.Properties;
@@ -14,11 +15,31 @@ namespace Parse.FrontEnd.AJ.ErrorHandler
     {
         public ErrorHandlingResult Call(DataForRecovery dataForRecovery)
         {
-            var possibleSet = dataForRecovery.CurBlock.PossibleTerminalSet;
+            //            var possibleSet = dataForRecovery.CurBlock.PossibleTerminalSet;
+            if (TryRecoveryUsingConflictStateStack(dataForRecovery)) dataForRecovery.ToErrorHandlingResult(true);
+
+            var topData = dataForRecovery.CurBlock.Last().BeforeStack.Stack.First();
+            LRParsingTable parsingTable = dataForRecovery.Parser.ParsingTable as LRParsingTable;
+            var IxMetrix = parsingTable[(int)topData];
+
+            var possibleSet = IxMetrix.PossibleTerminalSet;
+
 
             if (possibleSet.Count == 1) return RecoveryWithReplaceToVirtualToken(possibleSet.First(), dataForRecovery);
             else if (possibleSet.Contains(AJGrammar.Ident)) return RecoveryWithReplaceToVirtualToken(AJGrammar.Ident, dataForRecovery);
             else return RecoveryWithReplaceToVirtualToken(possibleSet.First(), dataForRecovery);
+        }
+
+        private bool TryRecoveryUsingConflictStateStack(DataForRecovery dataForRecovery)
+        {
+            return false;
+            /*
+            var conflictPos = dataForRecovery.ParsingResult.ConflictStateStack.Peek();
+            LRParsingTable parsingTable = dataForRecovery.Parser.ParsingTable as LRParsingTable;
+            var IxMetrix = parsingTable[conflictPos.State];
+
+            conflictPos.
+            */
         }
 
         /// <summary>
@@ -149,7 +170,7 @@ namespace Parse.FrontEnd.AJ.ErrorHandler
             //            param.Add(new ParsingRecoveryData(token, recoveryMessage2));
 
             LRParser lrParser = dataForRecovery.Parser as LRParser;
-            return lrParser.RecoveryBlockParsing(dataForRecovery.CurBlock, param);
+            return lrParser.RecoveryBlockParsing(dataForRecovery, param);
         }
 
 
@@ -182,7 +203,7 @@ namespace Parse.FrontEnd.AJ.ErrorHandler
             param.Add(new ParsingRecoveryData(virtualToken, recoveryMessage));
 
             LRParser lrSnippet = dataForRecovery.Parser as LRParser;
-            return lrSnippet.RecoveryBlockParsing(dataForRecovery.CurBlock, param);
+            return lrSnippet.RecoveryBlockParsing(dataForRecovery, param);
         }
 
 

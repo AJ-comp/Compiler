@@ -68,14 +68,13 @@ namespace Parse.FrontEnd.Parsers.LR
         protected FollowAnalyzer _followAnalyzer = new FollowAnalyzer();
         protected Stack<IEnumerable<AstSymbol>> _astStack = new Stack<IEnumerable<AstSymbol>>();
 
-        protected LRParser(Grammar grammar, ReduceParameter reduceParameter) : base(grammar)
+        protected LRParser(Grammar grammar, CanonicalType canonicalType, bool logging = false) : base(grammar, logging)
         {
             DataTableExtensionMethods.ASCIIBorder();
 
             var virtualStartSymbol = this.Grammar.CreateVirtualSymbolForLRParsing("Accept");
             _followAnalyzer.CalculateAllFollow(this.Grammar.NonTerminalMultiples);
-            Canonical.Calculate(virtualStartSymbol, _followAnalyzer.Datas);
-            Canonical.ReduceParameter = reduceParameter;
+            Canonical.Calculate(virtualStartSymbol, _followAnalyzer.Datas, canonicalType);
             ParsingTable.CreateParsingTable(this.Canonical);
         }
 
@@ -129,7 +128,7 @@ namespace Parse.FrontEnd.Parsers.LR
                 for (int i = curRange.StartIndex; i < curRange.EndIndex + 1; i++)
                 {
                     var tokenCell = tokenCells[i];
-                    result.Add(TokenData.CreateFromTokenCell(tokenCell, (i == tokenCells.Count - 1)));
+                    result.Add(TokenData.CreateFromTokenCell(tokenCell, i == tokenCells.Count - 1));
                 }
             }
 
@@ -186,8 +185,12 @@ namespace Parse.FrontEnd.Parsers.LR
                         }
                     }
 
-                    if (i == 0) target[i] = new ParsingBlock(target[i].Token);
-                    else target[i] = new ParsingBlock(new ParsingUnit(target[i - 1].Units.Last().AfterStack), target[i].Token);
+                    if (i == 0) target.ChangeBlock(i, target[i].Token);
+                    else
+                    {
+                        var parsingUnit = new ParsingUnit(target[i - 1].Units.Last().AfterStack);
+                        target.ChangeBlock(i, parsingUnit, target[i].Token);
+                    }
 
                     var successKind = this.BlockParsing(target, i);
                     this.PostProcessing(successKind, target, true, ref i);
@@ -196,7 +199,7 @@ namespace Parse.FrontEnd.Parsers.LR
         }
 
         /// <summary>
-        /// This function performs the following process
+        /// This function performs the following process    <br/>
         /// It parsing next to 'basis' from 'seeingIndex' of 'wholeTokens' as much as 'rangeToParse'.
         /// </summary>
         /// <param name="target"></param>
@@ -215,20 +218,20 @@ namespace Parse.FrontEnd.Parsers.LR
         {
             var tokens = ToTokenDataList(tokenCells);
 
-            ParsingResult result = new ParsingResult();
+            ParsingResult result = new ParsingResult(_logging);
             try
             {
                 if (tokens == null || tokens.Count <= 0) return result;
 
-                result = new ParsingResult();
-                foreach (var item in tokens) result.Add(new ParsingBlock(item));
+                result = new ParsingResult(_logging);
+                foreach (var item in tokens) result.AddNewBlock(item);
 
                 this.AllParsing(result);
                 result.Success = true;
             }
             catch (ParsingException ex)
             {
-                result = new ParsingResult(result.Take(ex.SeeingIndex + 1))
+                result = new ParsingResult(result.Take(ex.SeeingIndex + 1), _logging)
                 {
                     Success = false
                 };
@@ -268,7 +271,7 @@ namespace Parse.FrontEnd.Parsers.LR
             }
             catch (ParsingException ex)
             {
-                result = new ParsingResult(result.Take(ex.SeeingIndex + 1))
+                result = new ParsingResult(result.Take(ex.SeeingIndex + 1), _logging)
                 {
                     Success = false
                 };
@@ -359,12 +362,12 @@ namespace Parse.FrontEnd.Parsers.LR
 
         private ParsingResult ReplaceRange(ParsingResult srcResult, Range range, IReadOnlyList<TokenData> newTokens, Range newRange)
         {
-            var prevParsingResult = new ParsingResult(srcResult.Take(range.StartIndex));
-            var postParsingResult = new ParsingResult(srcResult.Skip(range.EndIndex + 1));
+            var prevParsingResult = new ParsingResult(srcResult.Take(range.StartIndex), _logging);
+            var postParsingResult = new ParsingResult(srcResult.Skip(range.EndIndex + 1), _logging);
 
             for (int i = newRange.StartIndex; i <= newRange.EndIndex; i++)
             {
-                prevParsingResult.Add(new ParsingBlock(newTokens[i]));
+                prevParsingResult.AddNewBlock(newTokens[i]);
             }
 
             prevParsingResult.AddRange(postParsingResult);
@@ -384,7 +387,7 @@ namespace Parse.FrontEnd.Parsers.LR
                 {
                     for (int i = insertRange.StartIndex; i <= insertRange.EndIndex; i++)
                     {
-                        srcResult.Insert(i, new ParsingBlock(newTokens[i]));
+                        srcResult.AddAt(i, newTokens[i]);
                     }
                 }
 

@@ -40,10 +40,11 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes.LiteralNodes
 
         public override IRExpression To()
         {
-            var result = new IRLiteralExpr();
-
-            result.Type = new TypeInfo(StdType.Bit, 0);
-            result.Value = Value;
+            var result = new IRLiteralExpr
+            {
+                Type = new TypeInfo(StdType.Bit, 0),
+                Value = Value
+            };
 
             return result;
         }

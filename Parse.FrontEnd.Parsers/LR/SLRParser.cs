@@ -17,7 +17,7 @@ namespace Parse.FrontEnd.Parsers.LR
         }
 
 
-        public SLRParser(Grammar grammar) : base(grammar, ReduceParameter.Follow)
+        public SLRParser(Grammar grammar) : base(grammar, CanonicalType.C0)
         {
         }
     }

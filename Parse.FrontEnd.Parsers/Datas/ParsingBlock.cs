@@ -1,7 +1,9 @@
-﻿using Parse.FrontEnd.Parsers.Properties;
+﻿using Parse.FrontEnd.Parsers.Collections;
+using Parse.FrontEnd.Parsers.Properties;
 using Parse.FrontEnd.RegularGrammar;
 using Parse.FrontEnd.Tokenize;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -15,7 +17,7 @@ namespace Parse.FrontEnd.Parsers.Datas
     /// </summary>
     /// <see cref="https://www.lucidchart.com/documents/edit/c96f0bde-4111-4957-bf65-75b56d8074dc/0_0?beaconFlowId=687BBA49A656D177"/>
     [DebuggerDisplay("{DebuggerDisplay, nq}")]
-    public class ParsingBlock
+    public class ParsingBlock : IEnumerable<ParsingUnit>, ICloneable<ParsingBlock>
     {
         #region This has to be capsule later
         public List<ParsingErrorInfo> _errorInfos { get; } = new List<ParsingErrorInfo>();
@@ -90,9 +92,10 @@ namespace Parse.FrontEnd.Parsers.Datas
 
         public bool IsIgnore { get; set; } = false;
 
-        public ParsingBlock(TokenData token)
+        internal ParsingBlock(TokenData token, ParsingLogger logger)
         {
-            this.Token = token;
+            Token = token;
+            _history = logger;
         }
 
 
@@ -103,18 +106,10 @@ namespace Parse.FrontEnd.Parsers.Datas
         /// <param name="parsingUnit"></param>
         /// <param name="token"></param>
         /***************************************************/
-        public ParsingBlock(ParsingUnit parsingUnit, TokenData token) : this(token)
+        internal ParsingBlock(ParsingUnit parsingUnit, TokenData token, ParsingLogger logger) : this(token, logger)
         {
             _units.Add(parsingUnit);
-            _history.Add(new ParsingUnitHistory(parsingUnit));
-        }
-
-        public ParsingBlock(IEnumerable<ParsingUnit> parsingUnits, TokenData token) : this(token)
-        {
-            _units = new List<ParsingUnit>(parsingUnits);
-
-            foreach (var unit in _units)
-                _history.Add(new ParsingUnitHistory(unit));
+            _history?.Add(new ParsingUnitHistory(parsingUnit));
         }
 
         public void AddItem(TokenData tokenData)
@@ -124,7 +119,7 @@ namespace Parse.FrontEnd.Parsers.Datas
             newUnit.InputValue = tokenData;
 
             _units.Add(newUnit);
-            _history.Add(new ParsingUnitHistory(newUnit));
+            _history?.Add(new ParsingUnitHistory(newUnit));
         }
 
         public void AddItem(ParsingStackUnit initStack)
@@ -132,13 +127,13 @@ namespace Parse.FrontEnd.Parsers.Datas
             var newUnit = (initStack == null) ? ParsingUnit.FirstParsingUnit : new ParsingUnit(initStack);
 
             _units.Add(newUnit);
-            _history.Add(new ParsingUnitHistory(newUnit));
+            _history?.Add(new ParsingUnitHistory(newUnit));
         }
 
         public void AddItem(ParsingUnit parsingUnit)
         {
             _units.Add(parsingUnit);
-            _history.Add(new ParsingUnitHistory(parsingUnit));
+            _history?.Add(new ParsingUnitHistory(parsingUnit));
         }
 
         /// <summary>
@@ -281,14 +276,38 @@ namespace Parse.FrontEnd.Parsers.Datas
             _units.RemoveRange(startIndex, count);
         }
 
+        private ParsingBlock()
+        {
+        }
+
+        public ParsingBlock Clone()
+        {
+            var result = new ParsingBlock();
+
+            result._errorInfos.AddRange(_errorInfos);
+            result._units.AddRange(_units);
+
+            return result;
+        }
+
+        public IEnumerator<ParsingUnit> GetEnumerator()
+        {
+            for (int i = 0; i < this.Units.Count; i++)
+            {
+                yield return this.Units[i];
+            }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            throw new NotImplementedException();
+        }
 
         private string DebuggerDisplay
         {
             get
             {
-                var result = string.Format("TokenCell : {0}, Unit count : {1}", 
-                                                        Token, 
-                                                        _units.Count);
+                var result = $"TokenCell : {Token}, Unit count : {_units.Count}";
 
                 if (ErrorInfos.Count() > 0) result += " Fired Error";
                 if (IsIgnore) result += "This token is ignored";
@@ -298,31 +317,8 @@ namespace Parse.FrontEnd.Parsers.Datas
         }
 
 
-        private List<ParsingUnitHistory> _history = new List<ParsingUnitHistory>();
+        private ParsingLogger _history;
         private List<ParsingUnit> _units = new List<ParsingUnit>();
         private int _unitMark = -1;
-    }
-
-    public class UnitTokenRange : Range
-    {
-        public UnitTokenRange(int startIndex, int count) : base(startIndex, count)
-        {
-        }
-    }
-
-    public class ParsingUnitHistory
-    {
-        public ParsingUnit Unit { get; }
-        public string RecoveryMessage { get; set; }
-
-        public ParsingUnitHistory(ParsingUnit unit) : this(unit, string.Empty)
-        {
-        }
-
-        public ParsingUnitHistory(ParsingUnit unit, string recoveryMessage)
-        {
-            Unit = unit;
-            RecoveryMessage = recoveryMessage;
-        }
     }
 }

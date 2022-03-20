@@ -12,9 +12,12 @@ namespace Parse.FrontEnd.Parsers.LR
         /// <param name="parsingBlock">The prev parsing unit information</param>
         /// <param name="recoveryTokenInfos">The param is used when the units of the block must have multiple tokens</param>
         /// <returns></returns>
-        public SuccessedKind RecoveryBlockParsing(ParsingBlock parsingBlock,
+        public SuccessedKind RecoveryBlockParsing(DataForRecovery parsingData,
                                                                         IEnumerable<ParsingRecoveryData> recoveryTokenInfos)
         {
+            var parsingBlock = parsingData.CurBlock;
+            var logger = parsingData.ParsingResult.Logger;
+
             SuccessedKind result = SuccessedKind.NotApplicable;
             foreach (var recoveryInfo in recoveryTokenInfos)
             {
@@ -24,7 +27,10 @@ namespace Parse.FrontEnd.Parsers.LR
                     parsingBlock.AddItem(recoveryInfo.RecoveryToken);
                     var lastUnit = parsingBlock.Units.Last();
 
-                    result = UnitParsing(lastUnit, recoveryInfo.RecoveryToken);
+                    var unitParsingResult = UnitParsing(lastUnit, recoveryInfo.RecoveryToken);
+                    result = unitParsingResult.Item1;
+
+                    // ambigous parsing is not supported in error handling 
 
                     parsingBlock.AddRecoveryMessageToLastHistory(recoveryInfo.RecoveryMessage);
                 } while (result == SuccessedKind.ReduceOrGoto);

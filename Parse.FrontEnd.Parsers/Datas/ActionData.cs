@@ -1,4 +1,6 @@
 ﻿using AJ.Common.Helpers;
+using System.Collections.Generic;
+using System.Linq;
 using static Parse.FrontEnd.Parsers.Datas.LR.LRParsingRowDataFormat;
 
 namespace Parse.FrontEnd.Parsers.Datas
@@ -22,5 +24,12 @@ namespace Parse.FrontEnd.Parsers.Datas
 
             return $"{Direction.ToDescription()} {destString}";
         }
+    }
+
+
+    public class ActionDataList : List<ActionData>
+    {
+        public ActionDir DefaultDirection => (Count == 0) ? ActionDir.Failed : this.First().Direction;
+        public object DefaultDest => (Count == 0) ? ActionDir.Failed : this.First().Dest;
     }
 }

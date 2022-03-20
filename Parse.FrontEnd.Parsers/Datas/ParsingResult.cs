@@ -1,5 +1,6 @@
 ﻿using Parse.Extensions;
 using Parse.FrontEnd.Ast;
+using Parse.FrontEnd.Parsers.Collections;
 using Parse.FrontEnd.Parsers.Properties;
 using Parse.FrontEnd.ParseTree;
 using Parse.FrontEnd.Tokenize;
@@ -22,6 +23,9 @@ namespace Parse.FrontEnd.Parsers.Datas
     public class ParsingResult : List<ParsingBlock>, ICloneable
     {
         public LexingData LexingData { get; set; }
+        public Stack<ConflictItem> ConflictStateStack { get; } = new Stack<ConflictItem>();
+        public ParsingLogger Logger { get; } = new ParsingLogger();
+
 
         public bool Success
         {
@@ -154,8 +158,15 @@ namespace Parse.FrontEnd.Parsers.Datas
             table.Rows.Add(row);
         }
 
-        public ParsingResult() { }
-        public ParsingResult(IEnumerable<ParsingBlock> parsingBlocks) => this.AddRange(parsingBlocks);
+        public ParsingResult(bool bLogging)
+        {
+            if (bLogging) Logger = new ParsingLogger();
+        }
+
+        public ParsingResult(IEnumerable<ParsingBlock> parsingBlocks, bool bLogging) : this(bLogging)
+        {
+            AddRange(parsingBlocks);
+        }
 
 
         /*******************************************************/
@@ -187,8 +198,8 @@ namespace Parse.FrontEnd.Parsers.Datas
             var prevBlock = this[stdBlockIndex];
             var nextBlock = this[stdBlockIndex + 1];
 
-            if (!prevBlock.Units.Last().AfterStack.SyncParent(nextBlock.Units.First().BeforeStack)) return false;
-            nextBlock.Units.First().BeforeStack = prevBlock.Units.Last().AfterStack;
+            if (!prevBlock.Last().AfterStack.SyncParent(nextBlock.First().BeforeStack)) return false;
+            nextBlock.First().BeforeStack = prevBlock.Last().AfterStack;
 
             return true;
         }
@@ -222,6 +233,28 @@ namespace Parse.FrontEnd.Parsers.Datas
         /// <returns></returns>
         /*******************************************************************/
         public ParsingBlock GetFrontBlock(int index) => (index <= 0) ? null : this[index - 1];
+
+
+        public ParsingBlock GetBlockSameStack(ParsingStackUnit target)
+        {
+            ParsingBlock result = null;
+
+            foreach (var block in this)
+            {
+                foreach (var unit in block)
+                {
+                    if (unit.BeforeStack.ApproxEqual(target))
+                    {
+                        result = block;
+                        break;
+                    }
+                }
+
+                if (result != null) break;
+            }
+
+            return result;
+        }
 
 
         public TokenData GetNextTokenData(int stdBlockIndex, int indexToGet)
@@ -323,7 +356,31 @@ namespace Parse.FrontEnd.Parsers.Datas
             }
         }
 
-        public object Clone() => new ParsingResult(this) { Success = this.Success };
+        public void AddAt(int index, TokenData tokenData) => Insert(index, new ParsingBlock(tokenData, Logger));
+
+
+        /***************************************************************/
+        /// <summary>
+        /// Change the block of the index to the new ParsingBlock created with parameter.
+        /// </summary>
+        /// <param name="index"></param>
+        /// <param name="tokenData"></param>
+        /***************************************************************/
+        public void ChangeBlock(int index, TokenData tokenData) => this[index] = new ParsingBlock(tokenData, Logger);
+
+
+        /***************************************************************/
+        /// <summary>
+        /// Change the block of the index to the new ParsingBlock created with parameter.
+        /// </summary>
+        /// <param name="index"></param>
+        /// <param name="parsingUnit"></param>
+        /// <param name="token"></param>
+        /***************************************************************/
+        public void ChangeBlock(int index, ParsingUnit parsingUnit, TokenData token) => this[index] = new ParsingBlock(parsingUnit, token, Logger);
+        public void AddNewBlock(TokenData tokenData) => Add(new ParsingBlock(tokenData, Logger));
+
+        public object Clone() => new ParsingResult(this, Logger != null) { Success = this.Success };
 
 
         /*  LLParsing Tree

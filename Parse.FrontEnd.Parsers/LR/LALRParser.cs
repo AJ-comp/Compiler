@@ -9,7 +9,7 @@ namespace Parse.FrontEnd.Parsers.LR
 {
     public class LALRParser : LRParser
     {
-        public LALRParser(Grammar grammar) : base(grammar, ReduceParameter.LalrLookAhead)
+        public LALRParser(Grammar grammar) : base(grammar, CanonicalType.LALRC1)
         {
         }
 

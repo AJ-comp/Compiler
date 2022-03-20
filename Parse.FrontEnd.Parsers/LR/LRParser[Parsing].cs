@@ -24,7 +24,15 @@ namespace Parse.FrontEnd.Parsers.LR
             while (true)
             {
                 var parsingUnit = blockToParsing.Units.Last();
-                result = UnitParsing(parsingUnit, token);
+                var unitParsingResult = UnitParsing(parsingUnit, token);
+                result = unitParsingResult.Item1;
+
+                // update ConflictItem
+                if (unitParsingResult.Item2 != null)
+                {
+                    unitParsingResult.Item2.AmbiguousBlock = blockToParsing;
+                    parsingResult.ConflictStateStack.Push(unitParsingResult.Item2);
+                }
 
                 if (result == SuccessedKind.ReduceOrGoto)
                 {
@@ -42,10 +50,10 @@ namespace Parse.FrontEnd.Parsers.LR
         /// <summary>
         /// This function returns a parsing unit (after goto or shift or reduce process)
         /// </summary>
-        /// <param name="parsingUnit"></param>
+        /// <param name="unit"></param>
         /// <param name="seeingToken">input terminal</param>
         /// <returns>It returns true if successed else returns false</returns>
-        public SuccessedKind UnitParsing(ParsingUnit unit, TokenData seeingToken)
+        public (SuccessedKind, ConflictItem) UnitParsing(ParsingUnit unit, TokenData seeingToken)
         {
             unit.CopyBeforeStackToAfterStack();
 
@@ -54,18 +62,19 @@ namespace Parse.FrontEnd.Parsers.LR
 
             // recover error if there is an error
 
+            ConflictItem conflictItem = null;
             var result = (IsGoToCondition(unit.BeforeStack)) ? GoTo(unit, seeingToken)
-                                                                            : ShiftOrReduce(unit, seeingToken);
+                                                                            : ShiftOrReduce(unit, seeingToken, out conflictItem);
 
             if (unit.IsError)
             {
                 unit.Action.Direction = ActionDir.Failed;
-                return SuccessedKind.NotApplicable;
+                return (SuccessedKind.NotApplicable, conflictItem);
             }
 
             // post process
             BuildStackAndParseTree(unit);
-            return this.ParsingSuccessedProcess(unit);
+            return (this.ParsingSuccessedProcess(unit), conflictItem);
         }
     }
 }

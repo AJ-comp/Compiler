@@ -1,6 +1,7 @@
 ﻿using Parse.FrontEnd.Parsers.EventArgs;
 using Parse.FrontEnd.Parsers.Properties;
 using Parse.FrontEnd.RegularGrammar;
+using System.Collections.Generic;
 using System.Diagnostics;
 
 namespace Parse.FrontEnd.Parsers.Datas
@@ -16,6 +17,7 @@ namespace Parse.FrontEnd.Parsers.Datas
 
         public ParsingStackUnit BeforeStack { get; internal set; } = new ParsingStackUnit();
         public ParsingStackUnit AfterStack { get; set; } = new ParsingStackUnit();
+        public Stack<ConflictItem> ConflictStateStack { get; } = new Stack<ConflictItem>();
 
 
         public ActionData Action { get; internal set; } = new ActionData();

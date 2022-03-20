@@ -164,9 +164,10 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes
 
         public override IRExpression To()
         {
-            IRCallExpr result = new IRCallExpr();
-
-            result.Function = Func.To() as IRFunction;
+            IRCallExpr result = new IRCallExpr
+            {
+                Function = Func.To() as IRFunction
+            };
 
             return result;
         }

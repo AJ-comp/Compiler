@@ -145,7 +145,7 @@ namespace Parse.FrontEnd.ErrorHandler.GrammarPrivate
             //            param.Add(new ParsingRecoveryData(token, recoveryMessage2));
 
             LRParser lrParser = dataForRecovery.Parser as LRParser;
-            return lrParser.RecoveryBlockParsing(dataForRecovery.CurBlock, param);
+            return lrParser.RecoveryBlockParsing(dataForRecovery, param);
         }
 
 
@@ -177,7 +177,7 @@ namespace Parse.FrontEnd.ErrorHandler.GrammarPrivate
             param.Add(new ParsingRecoveryData(virtualToken, recoveryMessage));
 
             LRParser lrSnippet = dataForRecovery.Parser as LRParser;
-            return lrSnippet.RecoveryBlockParsing(dataForRecovery.CurBlock, param);
+            return lrSnippet.RecoveryBlockParsing(dataForRecovery, param);
         }
 
 

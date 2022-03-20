@@ -20,6 +20,14 @@ namespace Parse.FrontEnd.Parsers.Collections
         LookAhead2
     }
 
+    public enum CanonicalType
+    {
+        C0,
+        LALRC1,
+        C1,
+    }
+
+
     /// <summary>
     /// First : prev status index   <br/>
     /// Second : seeing MarkSymbol  <br/>
@@ -37,7 +45,7 @@ namespace Parse.FrontEnd.Parsers.Collections
         public Dictionary<(int, LRItem), TerminalSet> LookAheadTable = new Dictionary<(int, LRItem), TerminalSet>();
 
         public IEnumerable<string> ConflictLogs => _conflictLogs;
-        public ReduceParameter ReduceParameter { get; set; } = ReduceParameter.LalrLookAhead;
+        public ReduceParameter ReduceParameter { get; private set; } = ReduceParameter.LalrLookAhead;
 
         public CanonicalStateSet AllCanonicalStates
         {
@@ -55,18 +63,61 @@ namespace Parse.FrontEnd.Parsers.Collections
         }
 
 
-        public void Calculate(NonTerminal virtualStartSymbol, RelationData relationData)
+        /// <summary>
+        /// Construct the canonical collection.
+        /// </summary>
+        /// <remarks>
+        /// The constructed canonical collection is diffed by CanonicalType.
+        /// </remarks>
+        /// <param name="virtualStartSymbol"></param>
+        /// <param name="relationData"></param>
+        /// <param name="canonicalType"></param>
+        public void Calculate(NonTerminal virtualStartSymbol, RelationData relationData, CanonicalType canonicalType)
+        {
+            if (canonicalType == CanonicalType.C0)
+            {
+                ConstructC0(virtualStartSymbol, relationData);
+                ReduceParameter = ReduceParameter.Follow;
+            }
+            else if(canonicalType == CanonicalType.LALRC1)
+            {
+                if (ConstructC0(virtualStartSymbol, relationData)) ConvertC0ToC1(relationData);
+
+                ReduceParameter = ReduceParameter.LalrLookAhead;
+            }
+            else if(canonicalType == CanonicalType.C1)
+            {
+                ConstructC1(virtualStartSymbol, relationData);
+                ReduceParameter = ReduceParameter.LookAhead1;
+            }
+        }
+
+
+        private bool ConstructC0(NonTerminal virtualStartSymbol, RelationData relationData)
         {
             Clear();
 
             //I0 (virtualStartSymbol is always single not alter)
             this.virtualStartSymbol = virtualStartSymbol;
             var i0 = AddFirstState(virtualStartSymbol);
-            if (i0.Count == 0) return;
+            if (i0.Count == 0) return false;
 
             AddGoToState(i0);
             SetCache();
 
+            return true;
+        }
+
+
+        /// <summary>
+        /// Reconstruct C0 to C1 of LALR
+        /// </summary>
+        /// <remarks>
+        /// This function must be called after ConstructC0 function success. 
+        /// </remarks>
+        /// <param name="relationData"></param>
+        private void ConvertC0ToC1(RelationData relationData)
+        {
             //            CalculatePossibleShiftPath();
             CalculateLookAhead();
 
@@ -80,6 +131,13 @@ namespace Parse.FrontEnd.Parsers.Collections
                 state.GetItem(item.Key.Item2).LookAhead = item.Value;
             }
         }
+
+
+        private void ConstructC1(NonTerminal virtualStartSymbol, RelationData relationData)
+        {
+
+        }
+
 
 
         private CanonicalState AddFirstState(NonTerminal virtualStartSymbol)
@@ -309,29 +367,6 @@ namespace Parse.FrontEnd.Parsers.Collections
         }
 
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="lrItem"></param>
-        /// <returns></returns>
-        private CanonicalStateSet Pred(CanonicalState currentState, LRItem lrItem)
-        {
-            var firstLRItem = lrItem.FirstLRItem();
-            CanonicalStateSet result = new CanonicalStateSet();
-
-            foreach (var prevStateIdx in GetAllStartStateShiftableTo(currentState))
-            {
-                var prevState = IndexStateDic[prevStateIdx];
-                if (!prevState.HasItem(firstLRItem)) continue;
-
-                // if has item
-                result.Add(prevState);
-            }
-
-            return result;
-        }
-
-
         private CanonicalStateSet PredEx(CanonicalState currentState, LRItem lrItem)
         {
             CanonicalStateSet result = new CanonicalStateSet();
@@ -530,8 +565,8 @@ namespace Parse.FrontEnd.Parsers.Collections
             {
                 foreach (var value in data.Value)
                 {
-                    if (data.Key == 0) result += string.Format($"I0 : CLOSURE({virtualStartSymbol}) = [{value.Item2}]");
-                    else result += string.Format($"Goto(I{data.Key},{value.Item1}) = I{value.Item2} : ");
+                    if (data.Key == 0) result += $"I0 : CLOSURE({virtualStartSymbol}) = [{value.Item2}]";
+                    else result += $"Goto(I{data.Key},{value.Item1}) = I{value.Item2} : ";
 
                     result += Environment.NewLine;
                 }
@@ -561,7 +596,9 @@ namespace Parse.FrontEnd.Parsers.Collections
                 ActionDir actionInfo = (value.Item1 is Terminal) ? ActionDir.Shift : ActionDir.Goto;
 
                 tempStorage.Add(value.Item1, highestPriority);
-                result.Add(value.Item1, new ActionData(actionInfo, value.Item2.StateNumber));
+                if (!result.ContainsKey(value.Item1)) result.Add(value.Item1, new ActionDataList());
+
+                result[value.Item1].Add(new ActionData(actionInfo, value.Item2.StateNumber));
             }
         }
 
@@ -588,36 +625,12 @@ namespace Parse.FrontEnd.Parsers.Collections
                     //                    ActionInfo actionInfo = (this.virtualStartSymbol.IsSubSet(singleNT)) ? ActionInfo.accept : ActionInfo.reduce;
 
                     //                        tempStorage.Add(followItem, singleNT.Priority);
-                    // shift first, if contain key then this item is already registered at shift so don't regist.   // shift-reduce or reduce-reduce conflict
-                    if (result.ContainsKey(item)) continue;
-                    result.Add(item, new ActionData(actionInfo, singleNT));
+                    // if there is a item then it means shift-reduce or reduce reduce conflict was fired.
+                    if (!result.ContainsKey(item)) result.Add(item, new ActionDataList());
+
+                    result[item].Add(new ActionData(actionInfo, singleNT));
                 }
             }
-        }
-
-
-        private void ConflictProcess(CanonicalState curStatus, Terminal seeingToken, ActionDicSymbolMatched result)
-        {
-            // shift - reduce conflict
-            if (result[seeingToken].Direction == ActionDir.Shift)
-            {
-                _conflictLogs.Add($"Fired shift - reduce conflict [I{curStatus.StateNumber} - {seeingToken}]");
-            }
-            // reduce - reduce conflict
-            else if (result[seeingToken].Direction == ActionDir.Reduce)
-                _conflictLogs.Add($"Fired reduce - reduce conflict [I{curStatus.StateNumber} - {seeingToken}]");
-
-            /*
-            // prevent shift - reduce or reduce - reduce conflict using priority.
-            if (tempStorage[followItem] > singleNT.Priority)
-            {
-                tempStorage.Remove(followItem);
-                tempStorage.Add(followItem, singleNT.Priority);
-
-                result.Remove(followItem);
-                result.Add(followItem, new Tuple<ActionDir, object>(actionInfo, singleNT));
-            }
-            */
         }
 
         private List<string> _conflictLogs = new List<string>();

@@ -146,7 +146,5 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.TypeNodes
 
             return false;
         }
-
-        private int test;
     }
 }

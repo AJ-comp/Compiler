@@ -36,11 +36,12 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes.LiteralNodes
 
         public override IRExpression To()
         {
-            var result = new IRLiteralExpr();
-
-            result.Type = new TypeInfo(StdType.Null, 0);
-            result.Value = null;
-//            result.DebuggingInfo.ColumnIndex = Token.
+            var result = new IRLiteralExpr
+            {
+                Type = new TypeInfo(StdType.Null, 0),
+                Value = null
+            };
+            //            result.DebuggingInfo.ColumnIndex = Token.
 
             return result;
         }
