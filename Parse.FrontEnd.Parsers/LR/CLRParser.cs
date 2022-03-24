@@ -9,7 +9,7 @@ namespace Parse.FrontEnd.Parsers.LR
 {
     public class CLRParser : LRParser
     {
-        public CLRParser(Grammar grammar) : base(grammar, CanonicalType.C1)
+        public CLRParser(Grammar grammar, bool bLogging) : base(grammar, CanonicalType.C1, bLogging)
         {
 
         }

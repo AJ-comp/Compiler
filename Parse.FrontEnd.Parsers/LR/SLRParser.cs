@@ -17,7 +17,7 @@ namespace Parse.FrontEnd.Parsers.LR
         }
 
 
-        public SLRParser(Grammar grammar) : base(grammar, CanonicalType.C0)
+        public SLRParser(Grammar grammar, bool bLogging) : base(grammar, CanonicalType.C0, bLogging)
         {
         }
     }

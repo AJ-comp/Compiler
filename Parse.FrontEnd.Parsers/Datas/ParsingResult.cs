@@ -24,7 +24,26 @@ namespace Parse.FrontEnd.Parsers.Datas
     {
         public LexingData LexingData { get; set; }
         public Stack<ConflictItem> ConflictStateStack { get; } = new Stack<ConflictItem>();
-        public ParsingLogger Logger { get; } = new ParsingLogger();
+        public ParsingLogger Logger { get; }
+
+
+        public ConflictAction BackTracking()
+        {
+            if (ConflictStateStack.Count() == 0) return null;
+            var result = ConflictStateStack.Peek();
+
+            if (result.Actions.Count() == 1) ConflictStateStack.Pop();
+            else result.Actions.RemoveAt(0);
+
+            // clear units from block + 1 that conflict is fired to end.
+            for (int i = result.AmbiguousBlockIndex + 1; i < Count; i++) this[i].Clear();
+
+            // make up block that conflict is fired.
+            var parsingBlock = this[result.AmbiguousBlockIndex];
+            parsingBlock.RemoveRange(result.UnitIndexInBlock + 1, parsingBlock.Count() - result.UnitIndexInBlock);
+
+            return new ConflictAction(result.State, result.AmbiguousBlockIndex, result.Actions.First());
+        }
 
 
         public bool Success
@@ -104,23 +123,20 @@ namespace Parse.FrontEnd.Parsers.Datas
                 this.AddColumn(result, Resource.StackAfterParsing);
                 this.AddColumn(result, Resource.StackForAst);
 
-                foreach (var block in this)
+                foreach (var record in Logger)
                 {
-                    foreach (var record in block.History)
-                    {
-                        var param1 = Convert.ToString(record.Unit.BeforeStack.Stack.Reverse(), " ");
-                        var param2 = record.Unit.InputValue?.ToString();
-                        var param3 = record.Unit.Action.ToString() + " ";
-                        var param4 = record.RecoveryMessage;
-                        var param5 = Convert.ToString(record.Unit.AfterStack.Stack.Reverse(), " ");
-                        var param6 = AstListViewer.ToString(record.Unit.AfterStack.AstListStack.Reverse());
+                    var param1 = Convert.ToString(record.Unit.BeforeStack.Stack.Reverse(), " ");
+                    var param2 = record.Unit.InputValue?.ToString();
+                    var param3 = record.Unit.Action.ToString() + " ";
+                    var param4 = record.RecoveryMessage;
+                    var param5 = Convert.ToString(record.Unit.AfterStack.Stack.Reverse(), " ");
+                    var param6 = AstListViewer.ToString(record.Unit.AfterStack.AstListStack.Reverse());
 
-                        if (record.Unit.IsError) param3 += record.Unit.ErrorMessage;
-                        //                        else if (record.Action.Direction != ActionDir.accept)
-                        //                            param3 += (record.Action.Dest is NonTerminalSingle) ? (record.Action.Dest as NonTerminalSingle).ToGrammarString() : string.Empty;
+                    if (record.Unit.IsError) param3 += record.Unit.ErrorMessage;
+                    //                        else if (record.Action.Direction != ActionDir.accept)
+                    //                            param3 += (record.Action.Dest is NonTerminalSingle) ? (record.Action.Dest as NonTerminalSingle).ToGrammarString() : string.Empty;
 
-                        this.AddRow(result, param1, param2, param3, param4, param5, param6);
-                    }
+                    this.AddRow(result, param1, param2, param3, param4, param5, param6);
                 }
 
                 return result;

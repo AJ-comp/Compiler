@@ -9,7 +9,7 @@ namespace Parse.FrontEnd.Parsers.LR
     public abstract partial class LRParser
     {
         /// <summary>
-        /// This function processes shift or reduce process.
+        /// Process the shift or reduce operation from the top state of the current stack after see the seeingToken.
         /// </summary>
         /// <param name="parsingUnit"></param>
         /// <param name="inputValue"></param>
@@ -54,7 +54,7 @@ namespace Parse.FrontEnd.Parsers.LR
 
             // it needs multiple process if conflict is fired.
             if (matchedValue.Count() > 1)
-                conflictItem = new ConflictItem((int)topData, matchedValue.Skip(0));
+                conflictItem = new ConflictItem((int)topData, matchedValue.Skip(1));
 
             parsingUnit.Action = matchedValue.First();
             parsingUnit.PossibleTerminalSet = IxMetrix.PossibleTerminalSet;
@@ -83,7 +83,7 @@ namespace Parse.FrontEnd.Parsers.LR
         }
 
         /// <summary>
-        /// This function performs goto process.
+        /// Process the goto operation from the top state of the current stack after see the seeingToken.
         /// </summary>
         /// <param name="parsingUnit"></param>
         /// <param name="inputValue"></param>

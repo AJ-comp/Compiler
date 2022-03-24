@@ -10,7 +10,7 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.TypeNodes
         public TokenData NameToken { get; protected set; }
         public TokenDataList FullNameToken { get; } = new TokenDataList();
         public string Name => NameToken?.Input;
-        public string FullName => FullNameToken.ToListString();
+        public virtual string FullName => FullNameToken.ToListString();
         public int Block { get; set; }
 
         public abstract uint Size { get; }

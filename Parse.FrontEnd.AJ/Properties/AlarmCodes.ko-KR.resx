@@ -234,4 +234,7 @@
   <data name="AJ0038" xml:space="preserve">
     <value>대입(=), 호출, 증가(++), 감소(--), 새 개체식(new) 만 문장이 될 수 있습니다.</value>
   </data>
+  <data name="AJ0039" xml:space="preserve">
+    <value>{0} 타입과 {1} 타입이 모호합니다.</value>
+  </data>
 </root>

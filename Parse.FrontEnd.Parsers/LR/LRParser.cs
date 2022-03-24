@@ -16,6 +16,8 @@ namespace Parse.FrontEnd.Parsers.LR
 {
     public abstract partial class LRParser : Parser
     {
+        public bool BackTrackingOnConflict { get; private set; } = false;
+
         /// <summary>
         /// The Error Handler that if the goto failed.
         /// TokenData : input data
@@ -82,6 +84,12 @@ namespace Parse.FrontEnd.Parsers.LR
         public LRParser AddErrorHandler(IErrorHandlable errorHandler)
         {
             ErrorHandler = errorHandler;
+            return this;
+        }
+
+        public LRParser UseBackTrackingOnConflict()
+        {
+            BackTrackingOnConflict = true;
             return this;
         }
 
@@ -192,7 +200,7 @@ namespace Parse.FrontEnd.Parsers.LR
                         target.ChangeBlock(i, parsingUnit, target[i].Token);
                     }
 
-                    var successKind = this.BlockParsing(target, i);
+                    var successKind = this.BlockFullParsing(target, i);
                     this.PostProcessing(successKind, target, true, ref i);
                 }
             }
@@ -208,7 +216,7 @@ namespace Parse.FrontEnd.Parsers.LR
         {
             for (int i = 0; i < target.Count; i++)
             {
-                var blockParsingResult = this.BlockParsing(target, i);
+                var blockParsingResult = this.BlockFullParsing(target, i);
 
                 if (this.PostProcessing(blockParsingResult, target, true, ref i)) break;
             }
@@ -303,7 +311,7 @@ namespace Parse.FrontEnd.Parsers.LR
                 result = lastParsingUnit.ErrorHandler.Call(new DataForRecovery(this, parsingResult, curTokenIndex));
             */
 
-            return ErrorHandler?.Call(new DataForRecovery(this, parsingResult, curTokenIndex));
+            return ErrorHandler?.Call(new DataForRecovery(this, parsingResult, curTokenIndex, BackTrackingOnConflict));
         }
 
         /// <summary>

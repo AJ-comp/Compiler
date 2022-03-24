@@ -1,12 +1,11 @@
 ﻿using Parse.FrontEnd.AJ.Sdts.AstNodes;
-using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
 
 namespace Parse.FrontEnd.AJ.Sdts.Datas
 {
-    public class NamespaceDictionary : Dictionary<string, IEnumerable<NamespaceNode>>
+    public class NamespaceDictionary : Dictionary<string, List<ProgramNode>>
     {
         static NamespaceDictionary _instance;
 
@@ -56,14 +55,14 @@ namespace Parse.FrontEnd.AJ.Sdts.Datas
 
 
         [MethodImpl(MethodImplOptions.Synchronized)]
-        public void Add(NamespaceNode node)
+        public void Add(ProgramNode node)
         {
-            if (Contains(node)) return;
+            if (Contains(node.Namespace)) return;
 
-            if (!ContainsKey(node.FullName))
-                Add(node.FullName, new List<NamespaceNode>());
+            if (!ContainsKey(node.Namespace.FullName))
+                Add(node.Namespace.FullName, new List<ProgramNode>());
 
-            this[node.FullName].ToList().Add(node);
+            this[node.Namespace.FullName].Add(node);
         }
     }
 }

@@ -178,6 +178,15 @@ namespace Parse.FrontEnd.AJ.Properties {
         }
         
         /// <summary>
+        ///   It is ambiguity {0} and {1} type.과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string AJ0039 {
+            get {
+                return ResourceManager.GetString("AJ0039", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   {0} is already defined.과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string MCL0000 {

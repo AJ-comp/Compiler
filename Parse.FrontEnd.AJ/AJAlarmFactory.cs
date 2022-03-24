@@ -1,4 +1,5 @@
 ﻿using AJ.Common.Helpers;
+using Parse.Extensions;
 using Parse.FrontEnd.AJ.Data;
 using Parse.FrontEnd.AJ.Properties;
 using Parse.FrontEnd.AJ.Sdts.AstNodes;
@@ -380,18 +381,34 @@ namespace Parse.FrontEnd.AJ
         }
 
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="token"></param>
+        /// <returns></returns>
+        public static MeaningErrInfo CreateAJ0031(IEnumerable<TokenData> tokens)
+        {
+            return new MeaningErrInfo(tokens,
+                    nameof(AlarmCodes.AJ0031),
+                    string.Format(AlarmCodes.AJ0031, tokens.ItemsString(".")));
+        }
+
+
         public static MeaningErrInfo CreateAJ0032(NamespaceNode namespaceNode, TokenData typeToken)
         {
             var errMsg = string.Format(AlarmCodes.AJ0032,
                                                      namespaceNode.FullName,
                                                      typeToken.Input);
 
-            List<TokenData> tokens = new List<TokenData>();
+            return new MeaningErrInfo(typeToken, nameof(AlarmCodes.AJ0032), errMsg);
+        }
 
-            tokens.AddRange(namespaceNode.NameTokens);
-            tokens.Add(typeToken);
 
-            return new MeaningErrInfo(tokens, nameof(AlarmCodes.AJ0032), errMsg);
+        public static MeaningErrInfo CreateAJ0039(AJTypeInfo useType, TypeDefNode type1, TypeDefNode type2)
+        {
+            var errMsg = string.Format(AlarmCodes.AJ0039, type1.FullName, type2.FullName);
+
+            return new MeaningErrInfo(useType.NameTokens, nameof(AlarmCodes.AJ0039), errMsg);
         }
     }
 }

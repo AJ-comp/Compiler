@@ -1,4 +1,5 @@
-﻿using Parse.FrontEnd.Ast;
+﻿using Parse.FrontEnd.AJ.Data;
+using Parse.FrontEnd.Ast;
 using Parse.MiddleEnd.IR.Expressions;
 using System;
 using System.Collections.Generic;
@@ -6,7 +7,7 @@ using System.Text;
 
 namespace Parse.FrontEnd.AJ.Sdts.AstNodes.StatementNodes
 {
-    public class DeclareVarStNode : StatementNode
+    public class DeclareVarStNode : StatementNode, IDeclareable
     {
         public DeclareVarStNode(AstSymbol node) : base(node)
         {

@@ -23,7 +23,7 @@ namespace ApplicationLayer.ViewModels.DocumentTypeViewModels
             set
             {
                 this._selectedItem = value;
-                ParserViewModel = new LRParserViewModel(new SLRParser(_selectedItem));
+                ParserViewModel = new LRParserViewModel(new SLRParser(_selectedItem, true));
                 this.RaisePropertyChanged(nameof(SelectedItem));
             }
         }

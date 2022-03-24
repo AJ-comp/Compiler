@@ -6,15 +6,32 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.TypeNodes
 {
     public abstract class DataTypeNode : AJNode
     {
-        public abstract AJDataType Type { get; }
         public TokenDataList FullDataTypeToken { get; } = new TokenDataList();
-        public TokenData DataTypeToken => FullDataTypeToken.Last();
+
+        // abstract
         public abstract uint Size { get; }
+        public abstract AJDataType Type { get; }
+
+        // readonly
         public string Name => DataTypeToken.Input;
         public string FullName => FullDataTypeToken.ToListString();
+        public TokenData DataTypeToken => FullDataTypeToken.Last();
 
         protected DataTypeNode(AstSymbol node) : base(node)
         {
+        }
+
+
+        public override SdtsNode Compile(CompileParameter param)
+        {
+            FullDataTypeToken.Clear();
+            return base.Compile(param);
+        }
+
+
+        public override string ToString()
+        {
+            return $"<{Type}> {FullName} [{GetType().Name}]";
         }
     }
 }

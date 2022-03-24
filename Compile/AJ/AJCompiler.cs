@@ -32,7 +32,10 @@ namespace Compile.AJ
 
         public AJCompiler(bool bParsingLogging = false)
         {
-            Parser = new LALRParser(_ajGrammar).AddErrorHandler(new AJGrammarErrorHandler());
+            Parser = new LALRParser(_ajGrammar, bParsingLogging)
+                                .AddErrorHandler(new AJGrammarErrorHandler())
+                                .UseBackTrackingOnConflict();
+
 //            Parser = new LLParser(_ajGrammar);
             Parser.ASTCreated += ASTCreated;
 

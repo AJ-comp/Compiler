@@ -220,12 +220,12 @@ namespace Parse.FrontEnd.AJ
         {
             this.ScopeInfos.Add(new ScopeInfo(this.scopeCommentStart, this.scopeCommentEnd));
 
-            this.ajProgram.AddItem(usingDcl.ZeroOrMore() + namespaceDcl, Program);
+            this.ajProgram.AddItem(usingDcl.ZeroOrMore() + namespaceDcl + namespaceMemberDcl.ZeroOrMore(), Program);
             this.usingDcl.AddItem(Using + identChainExp + SemiColon, UsingNode);
 
             // namespace
             this.accesser.AddItem(Private | Public, AccesserNode);
-            this.namespaceDcl.AddItem(Namespace + defName + (Dot + defName).ZeroOrMore() + SemiColon + namespaceMemberDcl.ZeroOrMore(), NamespaceNode);
+            this.namespaceDcl.AddItem(Namespace + defName + (Dot + defName).ZeroOrMore() + SemiColon, NamespaceNode);
             this.namespaceMemberDcl.AddItem(structDef | classDef);
 
             // struct and class def

@@ -16,9 +16,6 @@ namespace Parse.FrontEnd.Parsers
         }
 
         public override string ToString()
-            => string.Format("ParsingResult count : {0}, token index to see : {1}, recover : {2} ", 
-                                        ParsingResult.Count, 
-                                        TokenIndexToSee, 
-                                        SuccessRecover);
+            => $"ParsingResult count : {ParsingResult.Count}, token index to see : {TokenIndexToSee}, recover : {SuccessRecover} ";
     }
 }

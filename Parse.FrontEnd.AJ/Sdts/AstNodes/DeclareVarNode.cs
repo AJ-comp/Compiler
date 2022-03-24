@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace Parse.FrontEnd.AJ.Sdts.AstNodes
 {
-    public class DeclareVarNode : DeclareIdentNode, IHasVarList
+    public class DeclareVarNode : DeclareIdentNode, IDeclareable
     {
         public VariableAJ Variable { get; private set; }
 
@@ -48,7 +48,7 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes
         {
             base.Compile(param);
 
-            Variable = new VariableAJ(Access.Private, AJType, NameToken, null, param.BlockLevel, param.Offset);
+            Variable = new VariableAJ(Access.Private, AJType, NameToken, null, BlockLevel, Offset);
             Variable.CreatedNode = this;
 
             if (Items.Last() is ExprNode)
@@ -63,8 +63,27 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes
 
             RootNode.ShortCutDeclareVarSet.Add(this);
 
-            var symbol = GetSymbolFromCurrentBlock(Variable.NameToken);
-            if (symbol != null) Alarms.Add(AJAlarmFactory.CreateMCL0009(Variable.NameToken));
+            var typeSymbols = GetDefineForType(Variable.Type.FullName);
+            if (typeSymbols.Count() == 0)   // there is no define for type
+            {
+                if (Variable.Type.IsUserDefType())
+                {
+                    RootNode.UnLinkedSymbols.Add(this);
+                    Alarms.Add(AJAlarmFactory.CreateAJ0031(Variable.Type.NameTokens));
+                }
+            }
+            else if(typeSymbols.Count() > 1)    // the type is ambiguity
+            {
+                Alarms.Add(AJAlarmFactory.CreateAJ0039(Variable.Type, typeSymbols.ElementAt(0), typeSymbols.ElementAt(1)));
+            }
+
+            // if link-time then it must not check duplication.
+            // In link-time, if the duplication check is performed the error will be fired. the symbol was already inserted at first compile time.
+            if(param != null)
+            {
+                var symbol = GetSymbolFromCurrentBlock(Variable.NameToken);
+                if (symbol != null) Alarms.Add(AJAlarmFactory.CreateMCL0009(Variable.NameToken));
+            }
 
             return this;
         }

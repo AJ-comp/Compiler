@@ -1,4 +1,5 @@
 ﻿using Parse.Extensions;
+using Parse.FrontEnd.AJ.Sdts.AstNodes.TypeNodes;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -118,6 +119,30 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes
 
                 result = symbolData;
                 break;
+            }
+
+            return result;
+        }
+
+
+        /// <summary>
+        /// Get define value list (TypeDefNode) for type  <br/>
+        /// </summary>
+        /// <remarks>
+        /// It may exist 2 more than and it means the type is ambiguity.
+        /// </remarks>
+        /// <param name="typeFullName"></param>
+        /// <returns></returns>
+        public IEnumerable<TypeDefNode> GetDefineForType(string typeFullName)
+        {
+            List<TypeDefNode> result = new List<TypeDefNode>();
+
+            foreach (var file in RootNode.AccessablePrograms)
+            {
+                foreach (var type in file.DefTypes)
+                {
+                    if (type.FullName == typeFullName) result.Add(type);
+                }
             }
 
             return result;

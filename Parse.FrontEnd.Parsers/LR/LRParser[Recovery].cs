@@ -1,4 +1,6 @@
-﻿using Parse.FrontEnd.Parsers.Datas;
+﻿using Parse.FrontEnd.Parsers.Collections;
+using Parse.FrontEnd.Parsers.Datas;
+using Parse.FrontEnd.Parsers.Properties;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -16,7 +18,6 @@ namespace Parse.FrontEnd.Parsers.LR
                                                                         IEnumerable<ParsingRecoveryData> recoveryTokenInfos)
         {
             var parsingBlock = parsingData.CurBlock;
-            var logger = parsingData.ParsingResult.Logger;
 
             SuccessedKind result = SuccessedKind.NotApplicable;
             foreach (var recoveryInfo in recoveryTokenInfos)
@@ -25,7 +26,7 @@ namespace Parse.FrontEnd.Parsers.LR
                 do
                 {
                     parsingBlock.AddItem(recoveryInfo.RecoveryToken);
-                    var lastUnit = parsingBlock.Units.Last();
+                    var lastUnit = parsingBlock.Last();
 
                     var unitParsingResult = UnitParsing(lastUnit, recoveryInfo.RecoveryToken);
                     result = unitParsingResult.Item1;
@@ -39,6 +40,30 @@ namespace Parse.FrontEnd.Parsers.LR
             }
 
             return result;
+        }
+
+
+        public SuccessedKind RecoveryWithSpecifiedAction(DataForRecovery parsingData, ConflictAction conflictAction)
+        {
+            var parsingResult = parsingData.ParsingResult;
+            var parsingBlock = parsingResult[conflictAction.AmbiguousBlockIndex];
+
+//            SuccessedKind result = SuccessedKind.NotApplicable;
+            var lastUnit = parsingBlock.Last();
+            lastUnit.CopyBeforeStackToAfterStack();
+
+            LRParsingTable parsingTable = ParsingTable as LRParsingTable;
+            var IxMetrix = parsingTable[conflictAction.State];
+
+            lastUnit.Action = conflictAction.Action;
+            lastUnit.PossibleTerminalSet = IxMetrix.PossibleTerminalSet;
+
+            // post process
+            ParseUnitCore(lastUnit);
+            parsingBlock.AddRecoveryMessageToLastHistory(string.Format(Resource.BackTracking, conflictAction.Action));
+
+            parsingBlock.AddItem(lastUnit.AfterStack);
+            return BlockPartialParsing(parsingResult, conflictAction.AmbiguousBlockIndex);
         }
     }
 }

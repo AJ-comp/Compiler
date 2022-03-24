@@ -214,4 +214,7 @@
   <data name="AJ0038" xml:space="preserve">
     <value>The statement can be only assign(=), call, inc(++), dec(--), new expression(new).</value>
   </data>
+  <data name="AJ0039" xml:space="preserve">
+    <value>It is ambiguity {0} and {1} type.</value>
+  </data>
 </root>

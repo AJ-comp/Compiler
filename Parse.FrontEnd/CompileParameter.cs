@@ -7,6 +7,13 @@ using System.Linq;
 
 namespace Parse.FrontEnd
 {
+    public enum CompileOption
+    {
+        AllCompile,
+        OnlyLink,
+    };
+
+
     [DebuggerDisplay("{" + nameof(GetDebuggerDisplay) + "(),nq}")]
     public class CompileParameter : ICloneable<CompileParameter>
     {
@@ -16,6 +23,7 @@ namespace Parse.FrontEnd
         public int BlockLevel { get; set; } = 0;
         public int Offset { get; set; } = 0;
         public bool Build { get; set; }
+        public CompileOption Option { get; set; } = CompileOption.AllCompile;
 
         public Dictionary<string, SdtsNode> ReferenceFiles { get; } = new Dictionary<string, SdtsNode>();
 

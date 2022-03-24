@@ -130,6 +130,8 @@ namespace Parse.Extensions
         //    return result;
         //}
 
+        public static string ItemsString<T>(this IEnumerable<T> obj, string connector = ", ") => ItemsString(obj, PrintType.String, "", connector);
+
         public static string ItemsString<T>(this IEnumerable<T> obj, PrintType printType, string name = "", string connector = ", ")
         {
             string result = string.Empty;

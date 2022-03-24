@@ -168,4 +168,7 @@
   <data name="StackForAst" xml:space="preserve">
     <value>Ast 스택</value>
   </data>
+  <data name="BackTracking" xml:space="preserve">
+    <value>백트래킹 후 {0} 동작을 수행합니다.</value>
+  </data>
 </root>

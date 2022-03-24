@@ -60,6 +60,11 @@ namespace Parse.FrontEnd.AJ.Data
             _nameTokens.Add(token);
         }
 
+        public AJTypeInfo(AJDataType dataType, TokenDataList tokens) : this(dataType)
+        {
+            _nameTokens = tokens;
+        }
+
 
         public static AJTypeInfo CreateThisType(AJDataType type, TokenData token)
         {
@@ -146,6 +151,7 @@ namespace Parse.FrontEnd.AJ.Data
             if (DataType == AJDataType.Class) return true;
             if (DataType == AJDataType.Struct) return true;
             if (DataType == AJDataType.Enum) return true;
+            if (DataType == AJDataType.Unknown) return true;    // predef type certainly can know type is what.
 
             return false;
         }

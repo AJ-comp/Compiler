@@ -9,8 +9,8 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes
 {
     public class DeclareIdentNode : AJNode
     {
-        public AJTypeInfo AJType;
-        public TokenData NameToken;
+        public AJTypeInfo AJType { get; protected set; }
+        public TokenData NameToken { get; protected set; }
 
         public DeclareIdentNode(AstSymbol node) : base(node)
         {

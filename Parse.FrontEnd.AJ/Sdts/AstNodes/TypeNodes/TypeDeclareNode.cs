@@ -62,13 +62,10 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.TypeNodes
                     FullDataTypeToken.Add(node.Token);
                 }
 
-                foreach (var ns in RootNode.Namespaces)
+                foreach (var cs in RootNode.DefTypes)
                 {
-                    foreach (var cs in ns.DefTypes)
-                    {
-                        if (cs.FullName == FullName) DefNode = cs;
-                        else if (cs.Name == Name) DefNode = cs;
-                    }
+                    if (cs.FullName == FullName) DefNode = cs;
+                    else if (cs.Name == Name) DefNode = cs;
                 }
             }
 
@@ -78,7 +75,7 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.TypeNodes
 
         public AJTypeInfo ToAJTypeInfo(bool bConst)
         {
-            AJTypeInfo result = new AJTypeInfo(Type, DataTypeToken)
+            AJTypeInfo result = new AJTypeInfo(Type, FullDataTypeToken)
             {
                 Const = bConst,
                 Signed = Signed

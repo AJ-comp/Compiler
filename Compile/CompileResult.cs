@@ -15,7 +15,7 @@ namespace Compile
         public string FilePath { get; }
         public bool Result => Errors.Count() == 0;
         public ParsingResult ParsingResult { get; }
-        public SdtsNode RootNode => ParsingResult.Success ? ParsingResult.AstRoot.Sdts : null;
+        public SdtsNode RootNode => ParsingResult.Success ? ParsingResult.AstRoot?.Sdts : null;
         public IEnumerable<AJTypeInfo> LinkErrorTypeList => _linkErrorTypeList;
         public IEnumerable<VariableAJ> LinkErrorVarList => _linkErrorVarList;
 

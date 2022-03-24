@@ -8,6 +8,15 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.TypeNodes
 {
     public partial class ClassDefNode : TypeDefNode
     {
+        public override string FullName
+        {
+            get
+            {
+                // if inner type def is support then this logic has to be changed.
+                return RootNode.Namespace.FullName + "." + Name;
+            }
+        }
+
         public ClassDefNode(AstSymbol node) : base(node)
         {
         }
@@ -155,13 +164,13 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.TypeNodes
         /// </summary>
         private void CheckDuplicated()
         {
-            foreach (var namespaceNode in RootNode.AccessableNamespaces)
+            foreach (var programNode in RootNode.AccessablePrograms)
             {
-                foreach (var classNode in namespaceNode.DefTypes)
+                foreach (var classNode in programNode.DefTypes)
                 {
                     if (classNode.FullName != FullName) continue;
 
-                    Alarms.Add(AJAlarmFactory.CreateAJ0032(namespaceNode, classNode.NameToken));
+                    Alarms.Add(AJAlarmFactory.CreateAJ0032(programNode.Namespace, classNode.NameToken));
                 }
             }
         }

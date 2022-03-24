@@ -70,6 +70,15 @@ namespace Parse.FrontEnd.Parsers.Properties {
         }
         
         /// <summary>
+        ///   The operation {0} is performed after back-tracking.과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string BackTracking {
+            get {
+                return ResourceManager.GetString("BackTracking", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   can&apos;t shift과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string CantShift {

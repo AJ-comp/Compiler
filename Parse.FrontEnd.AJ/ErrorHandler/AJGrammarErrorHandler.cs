@@ -16,31 +16,33 @@ namespace Parse.FrontEnd.AJ.ErrorHandler
         public ErrorHandlingResult Call(DataForRecovery dataForRecovery)
         {
             //            var possibleSet = dataForRecovery.CurBlock.PossibleTerminalSet;
-            if (TryRecoveryUsingConflictStateStack(dataForRecovery)) dataForRecovery.ToErrorHandlingResult(true);
+            var toSeeIndex = TryRecoveryUsingConflictStateStack(dataForRecovery);
+            if (toSeeIndex >= 0) return dataForRecovery.ToErrorHandlingResult(toSeeIndex);
 
             var topData = dataForRecovery.CurBlock.Last().BeforeStack.Stack.First();
             LRParsingTable parsingTable = dataForRecovery.Parser.ParsingTable as LRParsingTable;
             var IxMetrix = parsingTable[(int)topData];
-
             var possibleSet = IxMetrix.PossibleTerminalSet;
-
 
             if (possibleSet.Count == 1) return RecoveryWithReplaceToVirtualToken(possibleSet.First(), dataForRecovery);
             else if (possibleSet.Contains(AJGrammar.Ident)) return RecoveryWithReplaceToVirtualToken(AJGrammar.Ident, dataForRecovery);
             else return RecoveryWithReplaceToVirtualToken(possibleSet.First(), dataForRecovery);
         }
 
-        private bool TryRecoveryUsingConflictStateStack(DataForRecovery dataForRecovery)
-        {
-            return false;
-            /*
-            var conflictPos = dataForRecovery.ParsingResult.ConflictStateStack.Peek();
-            LRParsingTable parsingTable = dataForRecovery.Parser.ParsingTable as LRParsingTable;
-            var IxMetrix = parsingTable[conflictPos.State];
 
-            conflictPos.
-            */
+        private int TryRecoveryUsingConflictStateStack(DataForRecovery dataForRecovery)
+        {
+            if (!dataForRecovery.UseBackTracking) return -1;
+
+            var conflictInfo = dataForRecovery.ParsingResult.BackTracking();
+            if (conflictInfo == null) return -1;
+
+            var parser = dataForRecovery.Parser as LRParser;
+            parser.RecoveryWithSpecifiedAction(dataForRecovery, conflictInfo);
+
+            return conflictInfo.AmbiguousBlockIndex;
         }
+
 
         /// <summary>
         /// Try recovery with virtual tokens.

@@ -173,7 +173,7 @@ namespace Parse.FrontEnd.ErrorHandler
                     var seeingBlock = parsingResult[seeingTokenIndex];
 
                     seeingParsingUnit.AfterStack = stackToProcess;
-                    parser.BlockParsing(parsingResult, seeingTokenIndex);
+                    parser.BlockFullParsing(parsingResult, seeingTokenIndex);
                     seeingBlock.AddRecoveryMessageToLastHistory(string.Format("({0})", Resource.RecoverySuccessed));
 
                     var parsingErrorInfo = ParsingErrorInfo.CreateParsingError(nameof(AlarmCodes.CE0003),

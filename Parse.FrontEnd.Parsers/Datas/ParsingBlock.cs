@@ -153,6 +153,8 @@ namespace Parse.FrontEnd.Parsers.Datas
 
         public void AddRecoveryMessageToLastHistory(string recoveryMessage)
         {
+            if (_history == null) return;
+
             _history.Last().Unit.IsError = true;
             _history.Last().RecoveryMessage = recoveryMessage;
         }
@@ -212,7 +214,6 @@ namespace Parse.FrontEnd.Parsers.Datas
         public void Clear()
         {
             _units.Clear();
-            _history.Clear();
             _errorInfos.Clear();
         }
 
@@ -260,8 +261,10 @@ namespace Parse.FrontEnd.Parsers.Datas
         }
 
 
-        private void RemoveRange(int startIndex, int count)
+        public void RemoveRange(int startIndex, int count)
         {
+            if (startIndex >= _units.Count()) return;
+
             // first unit of block don't remove
             if (startIndex == 0)
             {
@@ -271,8 +274,9 @@ namespace Parse.FrontEnd.Parsers.Datas
                 if (startIndex >= _units.Count) return;
             }
 
-            var parsingUnit = new ParsingUnit(_units[startIndex + count - 1].AfterStack, _units[startIndex].BeforeStack);
-            _history.Add(new ParsingUnitHistory(parsingUnit, string.Format(Resource.RemoveParsingUnits, count)));
+
+//            var parsingUnit = new ParsingUnit(_units[startIndex + count - 1].AfterStack, _units[startIndex].BeforeStack);
+//            _history.Add(new ParsingUnitHistory(parsingUnit, string.Format(Resource.RemoveParsingUnits, count)));
             _units.RemoveRange(startIndex, count);
         }
 
