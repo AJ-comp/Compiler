@@ -1,8 +1,10 @@
-﻿using Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes.LiteralNodes;
+﻿using Parse.FrontEnd.AJ.Data;
+using Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes.LiteralNodes;
 using Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes.Single;
 using Parse.FrontEnd.Ast;
 using Parse.MiddleEnd.IR.Expressions;
 using Parse.MiddleEnd.IR.Expressions.ExprExpressions;
+using Parse.Types;
 using System;
 
 namespace Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes.Binary
@@ -22,23 +24,16 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes.Binary
 
             if (!IsCanParsing) return this;
 
-            try
-            {
-                if (Operation == IRCompareOperation.EQ) Result = LeftNode.Result.EQ(RightNode.Result);
-                else if (Operation == IRCompareOperation.NE) Result = LeftNode.Result.NotEQ(RightNode.Result);
-                else if (Operation == IRCompareOperation.GT) Result = LeftNode.Result > RightNode.Result;
-                else if (Operation == IRCompareOperation.GE) Result = LeftNode.Result >= RightNode.Result;
-                else if (Operation == IRCompareOperation.LT) Result = LeftNode.Result < RightNode.Result;
-                else if (Operation == IRCompareOperation.LE) Result = LeftNode.Result <= RightNode.Result;
-            }
-            catch (Exception)
-            {
-                AJAlarmFactory.CreateMCL0024(LeftNode.Result.Type.Name, RightNode.Result.Type.Name);
-            }
-            finally
-            {
-                if (RootNode.IsBuild) DBContext.Instance.Insert(this);
-            }
+            if (Operation == IRCompareOperation.EQ) EQ(LeftNode, RightNode);
+            else if (Operation == IRCompareOperation.NE) NotEQ(LeftNode, RightNode);
+            else if (Operation == IRCompareOperation.GT) GreaterThan(LeftNode, RightNode);
+            else if (Operation == IRCompareOperation.GE) GreaterEqual(LeftNode, RightNode);
+            else if (Operation == IRCompareOperation.LT) LessThan(LeftNode, RightNode);
+            else if (Operation == IRCompareOperation.LE) LessEqual(LeftNode, RightNode);
+
+            if(Type == null) AJAlarmFactory.CreateMCL0024(LeftNode.Type.FullName, RightNode.Type.FullName);
+
+            if (RootNode.IsBuild) DBContext.Instance.Insert(this);
 
             return this;
         }
@@ -66,28 +61,10 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes.Binary
         }
 
 
-
-        public static CompareNode From(SLogicalNode node)
-        {
-            if (node.Operation != IRLogicalOperation.Not) return null;
-            if (node.ExprNode.Result.Type.DataType != Data.AJDataType.Bool) return null;
-
-            CompareNode result = new CompareNode(null, IRCompareOperation.EQ);
-            var right = new BoolLiteralNode(null);
-            right.Result = new Data.ConstantAJ(false);
-
-            result.Items.Add(node.ExprNode);
-            result.Items.Add(right);
-
-            return result;
-        }
-
-
         public static CompareNode From(UseIdentNode node)
         {
             CompareNode result = new CompareNode(null, IRCompareOperation.EQ);
-            var right = new BoolLiteralNode(null);
-            right.Result = new Data.ConstantAJ(true);
+            var right = new BoolLiteralNode(true);
 
             result.Items.Add(node);
             result.Items.Add(right);
@@ -99,13 +76,126 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes.Binary
         public static CompareNode From(BoolLiteralNode node)
         {
             CompareNode result = new CompareNode(null, IRCompareOperation.EQ);
-            var right = new BoolLiteralNode(null);
-            right.Result = new Data.ConstantAJ(true);
+            var right = new BoolLiteralNode(true);
 
             result.Items.Add(node);
             result.Items.Add(right);
 
             return result;
+        }
+
+
+        public ExprNode EQ(ExprNode source, ExprNode target)
+        {
+            if (source.Type.IsArithmeticType()) ArithmeticEqual(source, target);
+            if (source.Type.DataType == AJDataType.Bool) return BoolEqual(source, target);
+            if (source.Type.DataType == AJDataType.String) return StringEqual(source, target);
+
+            return this;
+        }
+
+
+        public ExprNode NotEQ(ExprNode source, ExprNode target)
+        {
+            EQ(source, target);
+            if (ValueState == State.Fixed) Value = !(bool)Value;
+
+            return this;
+        }
+
+
+        private ExprNode GreaterEqual(ExprNode source, ExprNode target)
+        {
+            if (source.Type.IsArithmeticType()) Compare(source, target, IRCompareOperation.GE);
+
+            return this;
+        }
+
+        private ExprNode GreaterThan(ExprNode source, ExprNode target)
+        {
+            if (source.Type.IsArithmeticType()) Compare(source, target, IRCompareOperation.GT);
+
+            return this;
+        }
+
+        private ExprNode LessEqual(ExprNode source, ExprNode target)
+        {
+            if (source.Type.IsArithmeticType()) Compare(source, target, IRCompareOperation.LE);
+
+            return this;
+        }
+
+        private ExprNode LessThan(ExprNode source, ExprNode target)
+        {
+            if (source.Type.IsArithmeticType()) Compare(source, target, IRCompareOperation.LT);
+
+            return this;
+        }
+
+
+
+        private ExprNode Compare(ExprNode source, ExprNode target, IRCompareOperation compare)
+        {
+            if (target.Type.IsArithmeticType())
+            {
+                Type = target.Type;
+                if (source.ValueState != State.Fixed || target.ValueState != State.Fixed) return this;
+
+                if (compare == IRCompareOperation.GE) Value = (double)source.Value >= (double)target.Value;
+                else if (compare == IRCompareOperation.GT) Value = (double)source.Value > (double)target.Value;
+                else if (compare == IRCompareOperation.LE) Value = (double)source.Value <= (double)target.Value;
+                else if (compare == IRCompareOperation.LT) Value = (int)source.Value < (double)target.Value;
+
+                ValueState = State.Fixed;
+            }
+
+            return this;
+        }
+
+
+
+        private ExprNode ArithmeticEqual(ExprNode source, ExprNode target)
+        {
+            if (target.Type.IsArithmeticType())
+            {
+                Type = target.Type;
+                if (source.ValueState != State.Fixed || target.ValueState != State.Fixed) return this;
+
+                Value = (double)source.Value == (double)target.Value;
+                ValueState = State.Fixed;
+            }
+
+            return this;
+        }
+
+
+        private ExprNode BoolEqual(ExprNode source, ExprNode target)
+        {
+            if (target.Type.DataType == AJDataType.Bool)
+            {
+                Type = target.Type;
+                if (source.ValueState != State.Fixed || target.ValueState != State.Fixed) return this;
+
+                Value = (bool)source.Value == (bool)target.Value;
+                ValueState = State.Fixed;
+            }
+
+            return this;
+        }
+
+
+        private ExprNode StringEqual(ExprNode source, ExprNode target)
+        {
+            if (target.Type.DataType == AJDataType.String)
+            {
+                Type = target.Type;
+                if (source.ValueState != State.Fixed || target.ValueState != State.Fixed) return this;
+
+                Value = (string)source.Value == (string)target.Value;
+                ValueState = State.Fixed;
+            }
+
+            return this;
         }
     }
 }

@@ -9,8 +9,12 @@ namespace Parse.FrontEnd
 {
     public enum CompileOption
     {
-        AllCompile,
-        OnlyLink,
+        CheckUsing,
+        CheckNamespace,
+        CheckMemberDeclaration,
+        CheckTypeDefine,
+        CheckAmbiguous,
+        Logic,
     };
 
 
@@ -23,7 +27,7 @@ namespace Parse.FrontEnd
         public int BlockLevel { get; set; } = 0;
         public int Offset { get; set; } = 0;
         public bool Build { get; set; }
-        public CompileOption Option { get; set; } = CompileOption.AllCompile;
+        public CompileOption Option { get; set; } = CompileOption.Logic;
 
         public Dictionary<string, SdtsNode> ReferenceFiles { get; } = new Dictionary<string, SdtsNode>();
 
@@ -70,6 +74,7 @@ namespace Parse.FrontEnd
             result.BlockLevel = BlockLevel;
             result.Offset = Offset;
             result.Build = Build;
+            result.Option = Option;
 
             return result;
         }

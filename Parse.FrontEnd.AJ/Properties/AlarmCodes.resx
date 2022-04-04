@@ -217,4 +217,13 @@
   <data name="AJ0039" xml:space="preserve">
     <value>It is ambiguity {0} and {1} type.</value>
   </data>
+  <data name="AJ0040" xml:space="preserve">
+    <value>The {0} type is ambiguous because the same type is defined in other files.</value>
+  </data>
+  <data name="AJ9999" xml:space="preserve">
+    <value>The unknown exception is fired while compile in {0} file. Please see the except file in Exception folder</value>
+  </data>
+  <data name="AJ0041" xml:space="preserve">
+    <value></value>
+  </data>
 </root>

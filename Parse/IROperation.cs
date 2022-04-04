@@ -86,8 +86,17 @@ namespace Parse
         [Description(">>")] RightShift,
         [Description("<<")] LeftShift,
         [Description("~")] BitNot,
+        [Description("^")] BitXor,
     }
 
+
+    public enum IRBitAssignOperation
+    {
+        [Description("&=")] BitAndAssign,
+        [Description("|=")] BitOrAssign,
+        [Description(">>=")] RightShiftAssign,
+        [Description("<<=")] LeftShiftAssign,
+    }
 
     public enum Info { PreInc, PreDec, PostInc, PostDec };
 }

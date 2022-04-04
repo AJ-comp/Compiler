@@ -1,4 +1,5 @@
-﻿using Parse.FrontEnd.AJ.Properties;
+﻿using Parse.FrontEnd.AJ.Data;
+using Parse.FrontEnd.AJ.Properties;
 using Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes;
 using Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes.Binary;
 using Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes.LiteralNodes;
@@ -36,7 +37,8 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.StatementNodes
                 var node = Items[1].Compile(param) as ExprNode;
                 TrueStatement = Items[2].Compile(param) as StatementNode;
 
-                if (node.Type.DataType != Data.AJDataType.Bool)
+                if (node.Type == null) return this;
+                else if (node.Type.DataType != AJDataType.Bool)
                 {
                     Alarms.Add(AJAlarmFactory.CreateMCL0025(node.Type.Name, "bool"));
                     return this;
@@ -46,7 +48,7 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.StatementNodes
                 if (node is CompareNode) CompareCondition = node as CompareNode;
                 else if (node is SLogicalNode)
                 {
-                    CompareCondition = CompareNode.From(node as SLogicalNode);
+                    CompareCondition = (node as SLogicalNode).ToCompareNode();
                     CompareCondition.Compile(param);  // this node has to build because new node.
                 }
                 else if (node is UseIdentNode)
@@ -65,10 +67,14 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.StatementNodes
                 }
 
                 CheckNeverOperateCode();
+                ClarifyReturn = TrueStatement.ClarifyReturn;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                RootNode.FiredExceptoins.Add(ex);
 
+                Alarms.Add(new MeaningErrInfo(nameof(AlarmCodes.AJ9999),
+                                                                string.Format(AlarmCodes.AJ9999, RootNode.FileFullPath)));
             }
             finally
             {
@@ -84,7 +90,7 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.StatementNodes
         /// </summary>
         protected void CheckNeverOperateCode()
         {
-            if (CompareCondition.Result.ValueState == State.Fixed && (bool)(CompareCondition.Result.Value) == false)
+            if (CompareCondition.ValueState == State.Fixed && (bool)(CompareCondition.Value) == false)
                 Alarms.Add(new MeaningErrInfo(AllTokens, nameof(AlarmCodes.AJ0034), AlarmCodes.AJ0034, ErrorType.Warning));
         }
     }

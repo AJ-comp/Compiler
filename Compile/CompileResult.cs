@@ -16,7 +16,7 @@ namespace Compile
         public bool Result => Errors.Count() == 0;
         public ParsingResult ParsingResult { get; }
         public SdtsNode RootNode => ParsingResult.Success ? ParsingResult.AstRoot?.Sdts : null;
-        public IEnumerable<AJTypeInfo> LinkErrorTypeList => _linkErrorTypeList;
+        public IEnumerable<AJType> LinkErrorTypeList => _linkErrorTypeList;
         public IEnumerable<VariableAJ> LinkErrorVarList => _linkErrorVarList;
 
         public IEnumerable<ParsingErrorInfo> Errors
@@ -45,7 +45,7 @@ namespace Compile
 
 
 
-        private List<AJTypeInfo> _linkErrorTypeList = new List<AJTypeInfo>();
+        private List<AJType> _linkErrorTypeList = new List<AJType>();
         private List<VariableAJ> _linkErrorVarList = new List<VariableAJ>();
 
         private string GetDebuggerDisplay() => $"{FilePath} {Result}";

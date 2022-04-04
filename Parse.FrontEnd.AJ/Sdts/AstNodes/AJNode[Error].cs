@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Parse.FrontEnd.AJ.Sdts.AstNodes
 {
-    public partial class AJNode
+    public abstract partial class AJNode
     {
         /// <summary>
         /// This function adds symbol is not defined to the node.
@@ -23,6 +23,18 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes
             var symbolData = GetSymbol(token);
             if (symbolData == null) { AddNotDefinedError(token); return false; }
             else if (symbolData.NameToken.IsVirtual) { AddNotDefinedError(token); return false; }
+
+            return true;
+        }
+
+        public bool CheckIsDefinedSymbolChain(IEnumerable<TokenData> tokens)
+        {
+            foreach (var token in tokens)
+            {
+                var symbolData = GetSymbol(token);
+                if (symbolData == null) { AddNotDefinedError(token); return false; }
+                else if (symbolData.NameToken.IsVirtual) { AddNotDefinedError(token); return false; }
+            }
 
             return true;
         }

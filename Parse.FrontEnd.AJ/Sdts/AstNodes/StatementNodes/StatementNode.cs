@@ -14,6 +14,11 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.StatementNodes
 
         public bool IsEmpty => Items.Count == 0;
 
+        /// <summary>
+        /// This means whether clarify the return statement in a statement.
+        /// </summary>
+        public bool ClarifyReturn { get; protected set; } = false;
+
 
         protected StatementNode(AstSymbol node) : base(node)
         {

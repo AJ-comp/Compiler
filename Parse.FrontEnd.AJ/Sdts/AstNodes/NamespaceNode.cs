@@ -12,13 +12,9 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes
     {
         public TokenDataList NameTokens { get; } = new TokenDataList();
 
-        public List<TypeDefNode> DefTypes { get; } = new List<TypeDefNode>();
-
 
         public int Block { get; private set; }
-
         public List<AJNode> References { get; } = new List<AJNode>();
-
         public string FullName => NameTokens.ToListString();
 
 
@@ -40,7 +36,7 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes
         {
             base.Compile(param);
 
-            foreach(var item in Items)
+            foreach (var item in Items)
             {
                 // parsing for ident chain
                 var nameNode = item.Compile(param) as DefNameNode;
@@ -64,6 +60,25 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes
             }
 
             return true;
+        }
+
+        public IEnumerable<string> GetEffictiveCases()
+        {
+            List<string> result = new List<string>();
+
+            string accumlateString = string.Empty;
+            result.Add(accumlateString);
+
+            for (int i = NameTokens.Count - 1; i == 0; i--)
+            {
+                accumlateString += (accumlateString.Length > 0)
+                                        ? accumlateString += "." + NameTokens[i].Input
+                                        : NameTokens[i].Input;
+
+                result.Add(accumlateString);
+            }
+
+            return result;
         }
     }
 }

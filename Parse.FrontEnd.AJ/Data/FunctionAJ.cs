@@ -8,6 +8,6 @@ namespace Parse.FrontEnd.AJ.Data
     {
         public int Id { get; set; }
         public Access AccessType { get; internal set; }
-        public AJTypeInfo Type { get; set; }
+        public AJType Type { get; set; }
     }
 }

@@ -12,6 +12,7 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes.LiteralNodes
     {
         public NullLiteralNode(AstSymbol node) : base(node)
         {
+            Type = new AJPreDefType(AJDataType.Null);
         }
 
         public override SdtsNode Compile(CompileParameter param)
@@ -21,14 +22,15 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes.LiteralNodes
 
             try
             {
-                Result = ConstantAJ.CreateTypeUnknown();
+                Value = null;
+                ValueState = State.Fixed;
             }
             catch(Exception)
             {
             }
             finally
             {
-                if (param.Build) DBContext.Instance.Insert(Result);
+                if (param.Build) DBContext.Instance.Insert(this);
             }
 
             return this;

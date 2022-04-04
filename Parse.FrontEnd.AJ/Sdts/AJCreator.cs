@@ -7,6 +7,7 @@ using Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes.LiteralNodes;
 using Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes.Single;
 using Parse.FrontEnd.AJ.Sdts.AstNodes.StatementNodes;
 using Parse.FrontEnd.AJ.Sdts.AstNodes.TypeNodes;
+using Parse.FrontEnd.AJ.Sdts.Datas;
 using Parse.FrontEnd.Ast;
 using System;
 using System.Collections.Generic;
@@ -16,7 +17,7 @@ namespace Parse.FrontEnd.AJ.Sdts
     public class AJCreator
     {
         public static VariableAJ CreateVarData(Access accessType,
-                                                                AJTypeInfo typeInfo,
+                                                                AJType typeInfo,
                                                                 TokenData nameToken,
                                                                 IEnumerable<TokenData> levelTokens,
                                                                 int blockLevel,
@@ -50,7 +51,8 @@ namespace Parse.FrontEnd.AJ.Sdts
                 else if (cRoot.SignPost.MeaningUnit == AJGrammar.StructDef) result = new StructDefNode(root);
                 else if (cRoot.SignPost.MeaningUnit == AJGrammar.ClassDef) result = new ClassDefNode(root);
 
-                else if (cRoot.SignPost.MeaningUnit == AJGrammar.FuncDef) result = new FuncDefNode(root);
+                else if (cRoot.SignPost.MeaningUnit == AJGrammar.FuncDef) result = new FuncDefNode(root, FuncType.Normal);
+                else if (cRoot.SignPost.MeaningUnit == AJGrammar.Creator) result = new FuncDefNode(root, FuncType.Creator);
                 else if (cRoot.SignPost.MeaningUnit == AJGrammar.FormalPara) result = new ParamListNode(root);
                 else if (cRoot.SignPost.MeaningUnit == AJGrammar.CompoundSt) result = new CompoundStNode(root);
 
@@ -65,31 +67,61 @@ namespace Parse.FrontEnd.AJ.Sdts
                 else if (cRoot.SignPost.MeaningUnit == AJGrammar.ActualParam) result = new ActualParamNode(root);
                 else if (cRoot.SignPost.MeaningUnit == AJGrammar.Index) result = new IndexNode(root);
 
-                else if (cRoot.SignPost.MeaningUnit == AJGrammar.AddM) result = new ArithmeticNode(root, IRArithmeticOperation.Add);
-                else if (cRoot.SignPost.MeaningUnit == AJGrammar.SubM) result = new ArithmeticNode(root, IRArithmeticOperation.Sub);
+                // operator 1 priority 
+                else if (cRoot.SignPost.MeaningUnit == AJGrammar.PreIncM) result = new IncDecNode(root, AJGrammar.Inc.Value, Info.PreInc);
+                else if (cRoot.SignPost.MeaningUnit == AJGrammar.PreDecM) result = new IncDecNode(root, AJGrammar.Dec.Value, Info.PreDec);
+                else if (cRoot.SignPost.MeaningUnit == AJGrammar.PostIncM) result = new IncDecNode(root, AJGrammar.Inc.Value, Info.PostInc);
+                else if (cRoot.SignPost.MeaningUnit == AJGrammar.PostDecM) result = new IncDecNode(root, AJGrammar.Dec.Value, Info.PostDec);
+
+                // operator 2 priority 
+                else if (cRoot.SignPost.MeaningUnit == AJGrammar.LogicalNotM) result = new SLogicalNode(root, IRSingleOperation.Not);
+
+                // operator 3 priority 
                 else if (cRoot.SignPost.MeaningUnit == AJGrammar.MulM) result = new ArithmeticNode(root, IRArithmeticOperation.Mul);
                 else if (cRoot.SignPost.MeaningUnit == AJGrammar.DivM) result = new ArithmeticNode(root, IRArithmeticOperation.Div);
                 else if (cRoot.SignPost.MeaningUnit == AJGrammar.ModM) result = new ArithmeticNode(root, IRArithmeticOperation.Mod);
+
+                // operator 4 priority 
+                else if (cRoot.SignPost.MeaningUnit == AJGrammar.AddM) result = new ArithmeticNode(root, IRArithmeticOperation.Add);
+                else if (cRoot.SignPost.MeaningUnit == AJGrammar.SubM) result = new ArithmeticNode(root, IRArithmeticOperation.Sub);
+
+                // operator 5 priority 
+                else if (cRoot.SignPost.MeaningUnit == AJGrammar.RightShiftM) result = new BinBitwiseLogicalNode(root, IRBitwiseOperation.RightShift);
+                else if (cRoot.SignPost.MeaningUnit == AJGrammar.LeftShiftM) result = new BinBitwiseLogicalNode(root, IRBitwiseOperation.LeftShift);
+
+                // operator 6 priority 
+                else if (cRoot.SignPost.MeaningUnit == AJGrammar.GreaterThanM) result = new CompareNode(root, IRCompareOperation.GT);
+                else if (cRoot.SignPost.MeaningUnit == AJGrammar.LessThanM) result = new CompareNode(root, IRCompareOperation.LT);
+                else if (cRoot.SignPost.MeaningUnit == AJGrammar.GreaterEqualM) result = new CompareNode(root, IRCompareOperation.GE);
+                else if (cRoot.SignPost.MeaningUnit == AJGrammar.LessEqualM) result = new CompareNode(root, IRCompareOperation.LE);
+
+                // operator 7 priority 
+                else if (cRoot.SignPost.MeaningUnit == AJGrammar.EqualM) result = new CompareNode(root, IRCompareOperation.EQ);
+                else if (cRoot.SignPost.MeaningUnit == AJGrammar.NotEqualM) result = new CompareNode(root, IRCompareOperation.NE);
+
+                // operator 8 priority 
+                else if (cRoot.SignPost.MeaningUnit == AJGrammar.BitAndM) result = new BinBitwiseLogicalNode(root, IRBitwiseOperation.BitAnd);
+
+                // operator 9 priority 
+                else if (cRoot.SignPost.MeaningUnit == AJGrammar.BitOrM) result = new BinBitwiseLogicalNode(root, IRBitwiseOperation.BitOr);
+
+                // operator 10 priority 
+                else if (cRoot.SignPost.MeaningUnit == AJGrammar.LogicalAndM) result = new BinLogicalNode(root, IRLogicalOperation.And);
+
+                // operator 11 priority 
+                else if (cRoot.SignPost.MeaningUnit == AJGrammar.LogicalOrM) result = new BinLogicalNode(root, IRLogicalOperation.Or);
+
+                // operator 12 priority 
                 else if (cRoot.SignPost.MeaningUnit == AJGrammar.AssignM) result = new AssignNode(root);
                 else if (cRoot.SignPost.MeaningUnit == AJGrammar.AddAssignM) result = new ArithmeticAssignNode(root, IRArithmeticOperation.Add);
                 else if (cRoot.SignPost.MeaningUnit == AJGrammar.SubAssignM) result = new ArithmeticAssignNode(root, IRArithmeticOperation.Sub);
                 else if (cRoot.SignPost.MeaningUnit == AJGrammar.MulAssignM) result = new ArithmeticAssignNode(root, IRArithmeticOperation.Mul);
                 else if (cRoot.SignPost.MeaningUnit == AJGrammar.DivAssignM) result = new ArithmeticAssignNode(root, IRArithmeticOperation.Div);
                 else if (cRoot.SignPost.MeaningUnit == AJGrammar.ModAssignM) result = new ArithmeticAssignNode(root, IRArithmeticOperation.Mod);
-                else if (cRoot.SignPost.MeaningUnit == AJGrammar.PreIncM) result = new IncDecNode(root, AJGrammar.Inc.Value, Info.PreInc);
-                else if (cRoot.SignPost.MeaningUnit == AJGrammar.PreDecM) result = new IncDecNode(root, AJGrammar.Dec.Value, Info.PreDec);
-                else if (cRoot.SignPost.MeaningUnit == AJGrammar.PostIncM) result = new IncDecNode(root, AJGrammar.Inc.Value, Info.PostInc);
-                else if (cRoot.SignPost.MeaningUnit == AJGrammar.PostDecM) result = new IncDecNode(root, AJGrammar.Dec.Value, Info.PostDec);
-
-                else if (cRoot.SignPost.MeaningUnit == AJGrammar.LogicalOrM) result = new BinLogicalNode(root, IRLogicalOperation.Or);
-                else if (cRoot.SignPost.MeaningUnit == AJGrammar.LogicalAndM) result = new BinLogicalNode(root, IRLogicalOperation.And);
-                else if (cRoot.SignPost.MeaningUnit == AJGrammar.LogicalNotM) result = new SLogicalNode(root, IRLogicalOperation.Not);
-                else if (cRoot.SignPost.MeaningUnit == AJGrammar.EqualM) result = new CompareNode(root, IRCompareOperation.EQ);
-                else if (cRoot.SignPost.MeaningUnit == AJGrammar.NotEqualM) result = new CompareNode(root, IRCompareOperation.NE);
-                else if (cRoot.SignPost.MeaningUnit == AJGrammar.GreaterThanM) result = new CompareNode(root, IRCompareOperation.GT);
-                else if (cRoot.SignPost.MeaningUnit == AJGrammar.LessThanM) result = new CompareNode(root, IRCompareOperation.LT);
-                else if (cRoot.SignPost.MeaningUnit == AJGrammar.GreaterEqualM) result = new CompareNode(root, IRCompareOperation.GE);
-                else if (cRoot.SignPost.MeaningUnit == AJGrammar.LessEqualM) result = new CompareNode(root, IRCompareOperation.LE);
+                else if (cRoot.SignPost.MeaningUnit == AJGrammar.BitOrAssignM) result = new BinBitwiseAssignNode(root, IRBitwiseOperation.BitOr);
+                else if (cRoot.SignPost.MeaningUnit == AJGrammar.BitAndAssignM) result = new BinBitwiseAssignNode(root, IRBitwiseOperation.BitAnd);
+                else if (cRoot.SignPost.MeaningUnit == AJGrammar.RightShiftAssignM) result = new BinBitwiseAssignNode(root, IRBitwiseOperation.RightShift);
+                else if (cRoot.SignPost.MeaningUnit == AJGrammar.LeftShiftAssignM) result = new BinBitwiseAssignNode(root, IRBitwiseOperation.LeftShift);
 
                 else if (cRoot.SignPost.MeaningUnit == AJGrammar.ConstNode) result = new ConstNode(root);
                 else if (cRoot.SignPost.MeaningUnit == AJGrammar.Dcl) result = new DeclareVarNode(root);

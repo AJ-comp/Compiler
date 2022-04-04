@@ -4,6 +4,7 @@ using Parse.FrontEnd.AJ.Data;
 using Parse.FrontEnd.AJ.Properties;
 using Parse.FrontEnd.AJ.Sdts.AstNodes;
 using Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes;
+using Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes.Binary;
 using Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes.Single;
 using Parse.FrontEnd.AJ.Sdts.AstNodes.TypeNodes;
 using System;
@@ -270,15 +271,17 @@ namespace Parse.FrontEnd.AJ
         /// '{0}' operator can't be applied to '{1}' and '{2}' type operand. 
         /// </i></b> <br/>
         /// </summary>
-        /// <param name="left"></param>
-        /// <param name="right"></param>
+        /// <param name="binaryExprNode"></param>
         /// <param name="oper"></param>
         /// <returns></returns>
         /*****************************************************/
-        public static MeaningErrInfo CreateMCL0023(string left, string right, string oper)
+        public static MeaningErrInfo CreateMCL0023(BinaryExprNode binaryExprNode, string oper)
         {
-            var errMsg = string.Format(AlarmCodes.MCL0023, oper, left, right);
-            return new MeaningErrInfo(nameof(AlarmCodes.MCL0023), errMsg);
+            var leftType = binaryExprNode.LeftNode.Type;
+            var rightType = binaryExprNode.RightNode.Type;
+            var errMsg = string.Format(AlarmCodes.MCL0023, oper, leftType.FullName, rightType.FullName);
+
+            return new MeaningErrInfo(binaryExprNode.AllTokens, nameof(AlarmCodes.MCL0023), errMsg);
         }
 
 
@@ -318,9 +321,9 @@ namespace Parse.FrontEnd.AJ
 
         /*****************************************************/
         /// <summary>
-        /// Create the MeaningErrInfo for code AJ0027. <br/>
+        /// Create the MeaningErrInfo for code AJ0026. <br/>
         /// AJ0027 is that <b><i>
-        /// The '{token}' definition is included in the '{type}' type.</i></b>
+        /// The '{token}' definition is included in the '{typeDefNode}' type.</i></b>
         /// </summary>
         /// <param name="typeDefNode"></param>
         /// <param name="token"></param>
@@ -358,10 +361,10 @@ namespace Parse.FrontEnd.AJ
         /// <param name="to"></param>
         /// <returns></returns>
         /*****************************************************/
-        public static MeaningErrInfo CreateAJ0030(ExprNode from, AJTypeInfo to)
+        public static MeaningErrInfo CreateAJ0030(ExprNode from, AJType to)
         {
             var errMsg = string.Format(AlarmCodes.AJ0030, 
-                                                     from.Result.Type.DataType.ToDescription(), 
+                                                     from.Type.DataType.ToDescription(), 
                                                      to.DataType.ToDescription());
 
             return new MeaningErrInfo(from.AllTokens, nameof(AlarmCodes.AJ0030), errMsg);
@@ -404,11 +407,11 @@ namespace Parse.FrontEnd.AJ
         }
 
 
-        public static MeaningErrInfo CreateAJ0039(AJTypeInfo useType, TypeDefNode type1, TypeDefNode type2)
+        public static MeaningErrInfo CreateAJ0039(TypeDeclareNode useType, TypeDefNode type1, TypeDefNode type2)
         {
             var errMsg = string.Format(AlarmCodes.AJ0039, type1.FullName, type2.FullName);
 
-            return new MeaningErrInfo(useType.NameTokens, nameof(AlarmCodes.AJ0039), errMsg);
+            return new MeaningErrInfo(useType.FullDataTypeToken, nameof(AlarmCodes.AJ0039), errMsg);
         }
     }
 }

@@ -64,6 +64,10 @@ namespace Parse.FrontEnd.AJ
         public Terminal MulAssign { get; } = new Terminal(TokenType.Operator.NormalOperator, "*=", false);
         public Terminal DivAssign { get; } = new Terminal(TokenType.Operator.NormalOperator, "/=", false);
         public Terminal ModAssign { get; } = new Terminal(TokenType.Operator.NormalOperator, "%=", false);
+        public static Terminal RightShiftAssign { get; } = new Terminal(TokenType.Operator.NormalOperator, ">>=", false);
+        public static Terminal LeftShiftAssign { get; } = new Terminal(TokenType.Operator.NormalOperator, "<<=", false);
+        public static Terminal BitAndAssign { get; } = new Terminal(TokenType.Operator.NormalOperator, "&=", false);
+        public static Terminal BitOrAssign { get; } = new Terminal(TokenType.Operator.NormalOperator, "|=", false);
         public static Terminal Equal { get; } = new Terminal(TokenType.Operator.NormalOperator, "==", false);
         public static Terminal NotEqual { get; } = new Terminal(TokenType.Operator.NormalOperator, "!=", false);
         public static Terminal GreaterThan { get; } = new Terminal(TokenType.Operator.NormalOperator, ">", false);
@@ -74,9 +78,15 @@ namespace Parse.FrontEnd.AJ
         public Terminal Comma { get; } = new Terminal(TokenType.Operator.Comma, ",", false);
         public Terminal Dot { get; } = new Terminal(TokenType.Operator, ".", false);
 
+
+        public Terminal BitAnd { get; } = new Terminal(TokenType.Operator, "&", false);
+        public Terminal BitOr { get; } = new Terminal(TokenType.Operator, "|", false);
         public Terminal LogicalOr { get; } = new Terminal(TokenType.Operator, "||", false);
         public Terminal LogicalAnd { get; } = new Terminal(TokenType.Operator, "&&", false);
         public Terminal LogicalNot { get; } = new Terminal(TokenType.Operator, "!", false);
+        public Terminal RightShift { get; } = new Terminal(TokenType.Operator, ">>", false);
+        public Terminal LeftShift { get; } = new Terminal(TokenType.Operator, "<<", false);
+
 
 
         private NonTerminal ajProgram = new NonTerminal("AJProgram", true);
@@ -94,6 +104,7 @@ namespace Parse.FrontEnd.AJ
         private NonTerminal memberFuncDef = new NonTerminal(nameof(memberFuncDef));
 
         private NonTerminal functionDef = new NonTerminal("function_def");
+        private NonTerminal creator = new NonTerminal(nameof(creator));
         private NonTerminal typeSpecifier = new NonTerminal("type_specifier");
         private NonTerminal formalParam = new NonTerminal("formal_param");
         private NonTerminal formalParamList = new NonTerminal("formal_param_list");
@@ -119,8 +130,11 @@ namespace Parse.FrontEnd.AJ
         private NonTerminal newAssignmentExp = new NonTerminal(nameof(newAssignmentExp));
         private NonTerminal logicalOrExp = new NonTerminal("logical_or_exp");
         private NonTerminal logicalAndExp = new NonTerminal("logical_and_exp");
+        private NonTerminal bitOrExp = new NonTerminal(nameof(bitOrExp));
+        private NonTerminal bitAndExp = new NonTerminal(nameof(bitAndExp));
         private NonTerminal equalityExp = new NonTerminal("equality_exp");
         private NonTerminal relationalExp = new NonTerminal("relational_exp");
+        private NonTerminal shiftExp = new NonTerminal(nameof(shiftExp));
         private NonTerminal additiveExp = new NonTerminal("additive_exp");
         private NonTerminal multiplicativeExp = new NonTerminal("multiplicative_exp");
         private NonTerminal unaryExp = new NonTerminal("unary_exp");
@@ -146,6 +160,7 @@ namespace Parse.FrontEnd.AJ
         public static MeaningUnit MemberFunc { get; } = new MeaningUnit(nameof(MemberFunc));
 
         public static MeaningUnit FuncDef { get; } = new MeaningUnit(nameof(FuncDef));
+        public static MeaningUnit Creator { get; } = new MeaningUnit(nameof(Creator));
         //        public static MeaningUnit FuncHead { get; } = new MeaningUnit(nameof(FuncHead), MatchedAction.BlockPlus);
 
         public static MeaningUnit DefNameNode { get; } = new MeaningUnit(nameof(DefNameNode));
@@ -198,6 +213,13 @@ namespace Parse.FrontEnd.AJ
         public static MeaningUnit MulAssignM { get; } = new MeaningUnit(nameof(MulAssignM));
         public static MeaningUnit DivAssignM { get; } = new MeaningUnit(nameof(DivAssignM));
         public static MeaningUnit ModAssignM { get; } = new MeaningUnit(nameof(ModAssignM));
+        public static MeaningUnit RightShiftAssignM { get; } = new MeaningUnit(nameof(RightShiftAssignM));
+        public static MeaningUnit LeftShiftAssignM { get; } = new MeaningUnit(nameof(LeftShiftAssignM));
+        public static MeaningUnit BitAndAssignM { get; } = new MeaningUnit(nameof(BitAndAssignM));
+        public static MeaningUnit BitOrAssignM { get; } = new MeaningUnit(nameof(BitOrAssignM));
+
+        public static MeaningUnit BitAndM { get; } = new MeaningUnit(nameof(BitAndM));
+        public static MeaningUnit BitOrM { get; } = new MeaningUnit(nameof(BitOrM));
         public static MeaningUnit LogicalOrM { get; } = new MeaningUnit(nameof(LogicalOrM));
         public static MeaningUnit LogicalAndM { get; } = new MeaningUnit(nameof(LogicalAndM));
         public static MeaningUnit LogicalNotM { get; } = new MeaningUnit(nameof(LogicalNotM));
@@ -207,6 +229,8 @@ namespace Parse.FrontEnd.AJ
         public static MeaningUnit LessThanM { get; } = new MeaningUnit(nameof(LessThanM));
         public static MeaningUnit GreaterEqualM { get; } = new MeaningUnit(nameof(GreaterEqualM));
         public static MeaningUnit LessEqualM { get; } = new MeaningUnit(nameof(LessEqualM));
+        public static MeaningUnit RightShiftM { get; } = new MeaningUnit(nameof(RightShiftM));
+        public static MeaningUnit LeftShiftM { get; } = new MeaningUnit(nameof(LeftShiftM));
         public static MeaningUnit UnaryMinusM { get; } = new MeaningUnit(nameof(UnaryMinusM));
         public static MeaningUnit PreIncM { get; } = new MeaningUnit(nameof(PreIncM));
         public static MeaningUnit PreDecM { get; } = new MeaningUnit(nameof(PreDecM));
@@ -231,8 +255,9 @@ namespace Parse.FrontEnd.AJ
             // struct and class def
             this.structDef.AddItem(accesser.Optional() + Struct + defName + OpenCurlyBrace + declareVarSt + CloseCurlyBrace, StructDef);
             this.classDef.AddItem(accesser.Optional() + Class + defName + OpenCurlyBrace + classMemberDcl.ZeroOrMore() + CloseCurlyBrace, ClassDef);
-            this.classMemberDcl.AddItem(accesser.Optional() + (declareVarSt  | functionDef));
+            this.classMemberDcl.AddItem(accesser.Optional() + (declareVarSt  | functionDef | creator));
             this.functionDef.AddItem(Const.Optional() + typeSpecifier + defName + formalParam + compoundSt, FuncDef);
+            this.creator.AddItem(defName + formalParam + compoundSt, Creator);
             this.formalParam.AddItem(OpenParenthesis + formalParamList.Optional() + CloseParenthesis, FormalPara);
             this.formalParamList.AddItem(declaratorVar | formalParamList + Comma + declaratorVar);
 
@@ -285,22 +310,36 @@ namespace Parse.FrontEnd.AJ
             this.assignmentExp.AddItem(this.assignmentExp + this.MulAssign + this.assignmentExp, MulAssignM);
             this.assignmentExp.AddItem(this.assignmentExp + this.DivAssign + this.assignmentExp, DivAssignM);
             this.assignmentExp.AddItem(this.assignmentExp + this.ModAssign + this.assignmentExp, ModAssignM);
+            this.assignmentExp.AddItem(this.assignmentExp + RightShiftAssign + this.assignmentExp, RightShiftAssignM);
+            this.assignmentExp.AddItem(this.assignmentExp + LeftShiftAssign + this.assignmentExp, LeftShiftAssignM);
+            this.assignmentExp.AddItem(this.assignmentExp + BitOrAssign  + this.assignmentExp, BitOrAssignM);
+            this.assignmentExp.AddItem(this.assignmentExp + BitAndAssign + this.assignmentExp, BitAndAssignM);
 
             this.logicalOrExp.AddItem(this.logicalAndExp);
             this.logicalOrExp.AddItem(this.logicalOrExp + this.LogicalOr + this.logicalAndExp, LogicalOrM);
 
-            this.logicalAndExp.AddItem(this.equalityExp);
-            this.logicalAndExp.AddItem(this.logicalAndExp + this.LogicalAnd + this.equalityExp, LogicalAndM);
+            this.logicalAndExp.AddItem(this.bitOrExp);
+            this.logicalAndExp.AddItem(this.logicalAndExp + this.LogicalAnd + this.bitOrExp, LogicalAndM);
+
+            this.bitOrExp.AddItem(this.bitAndExp);
+            this.bitOrExp.AddItem(this.bitOrExp + BitOr + this.bitAndExp, BitOrM);
+
+            this.bitAndExp.AddItem(this.equalityExp);
+            this.bitAndExp.AddItem(this.bitAndExp + BitAnd + this.equalityExp, BitAndM);
 
             this.equalityExp.AddItem(this.relationalExp);
             this.equalityExp.AddItem(this.equalityExp + Equal + this.relationalExp, EqualM);
             this.equalityExp.AddItem(this.equalityExp + NotEqual + this.relationalExp, NotEqualM);
 
-            this.relationalExp.AddItem(this.additiveExp);
-            this.relationalExp.AddItem(this.relationalExp + GreaterThan + this.additiveExp, GreaterThanM);
-            this.relationalExp.AddItem(this.relationalExp + LessThan + this.additiveExp, LessThanM);
-            this.relationalExp.AddItem(this.relationalExp + GreaterEqual + this.additiveExp, GreaterEqualM);
-            this.relationalExp.AddItem(this.relationalExp + LessEqual + this.additiveExp, LessEqualM);
+            this.relationalExp.AddItem(this.shiftExp);
+            this.relationalExp.AddItem(this.relationalExp + GreaterThan + this.shiftExp, GreaterThanM);
+            this.relationalExp.AddItem(this.relationalExp + LessThan + this.shiftExp, LessThanM);
+            this.relationalExp.AddItem(this.relationalExp + GreaterEqual + this.shiftExp, GreaterEqualM);
+            this.relationalExp.AddItem(this.relationalExp + LessEqual + this.shiftExp, LessEqualM);
+
+            this.shiftExp.AddItem(this.additiveExp);
+            this.shiftExp.AddItem(this.shiftExp + RightShift + this.additiveExp, RightShiftM);
+            this.shiftExp.AddItem(this.shiftExp + LeftShift + this.additiveExp, LeftShiftM);
 
             this.additiveExp.AddItem(this.multiplicativeExp);
             this.additiveExp.AddItem(this.additiveExp + this.Add + this.multiplicativeExp, AddM);

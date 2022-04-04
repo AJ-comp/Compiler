@@ -76,12 +76,12 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes
                 if (Var.VariableType == VarType.ReferenceType && !Var.IsInitialized)
                     Alarms.Add(AJAlarmFactory.CreateMCL0005(IdentToken));
 
-                Result = (symbolData as VariableAJ).ToConstantAJ();
+                Type = Var.Type;
             }
             else if (symbolData is FuncDefNode)
             {
                 Func = symbolData as FuncDefNode;
-                Result = (symbolData as FuncDefNode).ReturnValue;
+                Type = (symbolData as FuncDefNode).ReturnType;
             }
 
             //            DBContext.Instance.Insert(this);

@@ -10,8 +10,6 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes.LiteralNodes
 {
     public class DoubleLiteralNode : LiteralNode
     {
-        public double Value => (double)Result.Value;
-
         public DoubleLiteralNode(AstSymbol node) : base(node)
         {
 
@@ -24,7 +22,8 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes.LiteralNodes
                 var node = Items[0].Compile(param) as TerminalNode;
                 Token = node.Token;
 
-                Result = new ConstantAJ(System.Convert.ToDouble(Token.Input));
+                Value = System.Convert.ToDouble(Token.Input);
+                ValueState = State.Fixed;
             }
             catch (Exception)
             {

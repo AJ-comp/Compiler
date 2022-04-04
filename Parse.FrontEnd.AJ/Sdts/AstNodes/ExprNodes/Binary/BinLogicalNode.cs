@@ -1,7 +1,9 @@
 ﻿using AJ.Common.Helpers;
+using Parse.FrontEnd.AJ.Data;
 using Parse.FrontEnd.Ast;
 using Parse.MiddleEnd.IR.Expressions;
 using Parse.MiddleEnd.IR.Expressions.ExprExpressions;
+using Parse.Types;
 using System;
 
 namespace Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes.Binary
@@ -21,21 +23,11 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes.Binary
 
             if (!IsCanParsing) return this;
 
-            try
-            {
-                if (Operation == IRLogicalOperation.And) Result = LeftNode.Result.And(RightNode.Result);
-                else if (Operation == IRLogicalOperation.Or) Result = LeftNode.Result.Or(RightNode.Result);
-            }
-            catch (Exception)
-            {
-                Alarms.Add(AJAlarmFactory.CreateMCL0023(LeftNode.Result.Type.Name, 
-                                                                                 RightNode.Result.Type.Name, 
-                                                                                 Operation.ToDescription()));
-            }
-            finally
-            {
-                if (RootNode.IsBuild) DBContext.Instance.Insert(this);
-            }
+            if (Operation == IRLogicalOperation.And) And(LeftNode, RightNode);
+            else if (Operation == IRLogicalOperation.Or) Or(LeftNode, RightNode);
+
+            Alarms.Add(AJAlarmFactory.CreateMCL0023(this, Operation.ToDescription()));
+            if (RootNode.IsBuild) DBContext.Instance.Insert(this);
 
             return this;
         }
@@ -56,6 +48,39 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes.Binary
         public override IRExpression To(IRExpression from)
         {
             throw new NotImplementedException();
+        }
+
+
+        public ExprNode And(ExprNode source, ExprNode target)
+        {
+            if (source.Type == null || target.Type == null) return null;
+
+            if (target.Type.DataType == AJDataType.Bool)
+            {
+                Type = target.Type;
+                if (source.ValueState != State.Fixed || target.ValueState != State.Fixed) return this;
+
+                Value = (bool)source.Value && (bool)target.Value;
+                ValueState = State.Fixed;
+            }
+
+            return this;
+        }
+
+        public ExprNode Or(ExprNode source, ExprNode target)
+        {
+            if (source.Type == null || target.Type == null) return null;
+
+            if (target.Type.DataType == AJDataType.Bool)
+            {
+                Type = target.Type;
+                if (source.ValueState != State.Fixed || target.ValueState != State.Fixed) return this;
+
+                Value = (bool)source.Value || (bool)target.Value;
+                ValueState = State.Fixed;
+            }
+
+            return this;
         }
     }
 }

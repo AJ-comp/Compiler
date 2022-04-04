@@ -10,10 +10,17 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes.LiteralNodes
 {
     public sealed class BoolLiteralNode : LiteralNode
     {
-        public bool Value => (bool)Result.Value;
-
         public BoolLiteralNode(AstSymbol node) : base(node)
         {
+            Type = new AJPreDefType(AJDataType.Bool);
+        }
+
+        public BoolLiteralNode(bool value) : base(null)
+        {
+            Value = value;
+            ValueState = State.Fixed;
+
+            Type = new AJPreDefType(AJDataType.Bool);
         }
 
         public override SdtsNode Compile(CompileParameter param)
@@ -23,8 +30,8 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes.LiteralNodes
                 var node = Items[0].Compile(param) as TerminalNode;
                 Token = node.Token;
 
-                bool value = System.Convert.ToBoolean(Token.Input);
-                Result = new ConstantAJ(value);
+                Value = System.Convert.ToBoolean(Token.Input);
+                ValueState = State.Fixed;
             }
             catch (Exception)
             {

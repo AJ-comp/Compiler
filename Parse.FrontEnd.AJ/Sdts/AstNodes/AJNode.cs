@@ -10,6 +10,8 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes
         public int BlockLevel { get; private set; } = 0;
         public int Offset { get; private set; } = 0;
 
+        public bool StubCode { get; protected set; } = false;
+
         public string FileFullPath => RootNode.FullPath;
 
 
@@ -61,11 +63,13 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes
                 Offset = param.Offset;
             }
 
+            /*
             Alarms.Clear();
             RootNode.UnLinkedSymbols.Remove(this);
             RootNode.LinkedSymbols.Remove(this);
             RootNode.AmbiguityLinkedSymbols.Remove(this);
             RootNode.CompletedSymbols.Remove(this);
+            */
 
             return this;
         }

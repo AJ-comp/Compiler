@@ -2,14 +2,15 @@
 using Parse.FrontEnd.AJ.Data;
 using Parse.FrontEnd.Ast;
 using Parse.MiddleEnd.IR.Expressions;
+using Parse.Types;
 
 namespace Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes
 {
-    public abstract class ExprNode : AJNode, IHasType, IExportable<IRExpression>
+    public abstract class ExprNode : AJNode, IHasType, IExportable<IRExpression>, ICanbeStatement
     {
-        public object ResultValue => Result.Value;
-        public AJTypeInfo Type => Result.Type;
-        public ConstantAJ Result { get; set; }
+        public object Value { get; set; } = null;
+        public State ValueState { get; set; } = State.NotFixed;
+        public AJType Type { get; internal set; } = null;
 
         public bool AlwaysTrue { get; } = false;
 
@@ -20,7 +21,31 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes
         {
         }
 
+
         public abstract IRExpression To();
         public abstract IRExpression To(IRExpression from);
+
+
+        public ExprNode Assign(ExprNode source, ExprNode target)
+        {
+            if (source.Type.DataType == AJDataType.Bool) return BoolAssign(source, target);
+
+            return source;
+        }
+
+
+        private ExprNode BoolAssign(ExprNode source, ExprNode target)
+        {
+            if (target.Type.DataType == AJDataType.Bool)
+            {
+                source.Type = target.Type;
+                if (source.ValueState != State.Fixed || target.ValueState != State.Fixed) return this;
+
+                source.Value = (bool)target.Value;
+                source.ValueState = State.Fixed;
+            }
+
+            return source;
+        }
     }
 }

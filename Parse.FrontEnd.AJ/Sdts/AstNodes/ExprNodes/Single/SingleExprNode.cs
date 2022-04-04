@@ -18,7 +18,6 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes.Single
             base.Compile(param);
 
             ExprNode = Items[0].Compile(param) as ExprNode;
-            Result = ExprNode.Result;
 
             return this;
         }

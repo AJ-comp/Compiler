@@ -2,22 +2,22 @@
 using Parse.FrontEnd.Ast;
 using Parse.Types;
 using Parse.Types.ConstantTypes;
+using System.Linq;
 
 namespace Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes.LiteralNodes
 {
     public abstract class LiteralNode : ExprNode
     {
         public TokenData Token { get; protected set; }
-        public ConstantAJ Constant { get; }
 
         protected LiteralNode(AstSymbol node) : base(node)
         {
         }
 
-        public static LiteralNode CreateLiteralNode(ConstantAJ value)
+        public static LiteralNode CreateLiteralNode(ExprNode exprNode)
         {
-            if (value.Type.DataType == AJDataType.Int) return new IntegerLiteralNode((int)value.Value);
-            if (value.Type.DataType == AJDataType.Short) return new IntegerLiteralNode((int)value.Value);
+            if (exprNode.Type.DataType == AJDataType.Int) return new IntegerLiteralNode((int)exprNode.Value);
+            if (exprNode.Type.DataType == AJDataType.Short) return new IntegerLiteralNode((int)exprNode.Value);
 
             return null;
         }

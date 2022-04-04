@@ -8,4 +8,9 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes
     {
         bool IsRoot { get; }
     }
+
+    public interface IAssignable
+    {
+
+    }
 }

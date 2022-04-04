@@ -1,6 +1,6 @@
-﻿using AJ.Common.Helpers;
-using Parse.Extensions;
+﻿using Parse.Extensions;
 using Parse.FrontEnd.AJ.Sdts.AstNodes;
+using Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes;
 using Parse.MiddleEnd.IR.Expressions;
 using System;
 using System.Collections.Generic;
@@ -28,16 +28,13 @@ namespace Parse.FrontEnd.AJ.Data
     {
         public int Id { get; set; }
         public Access AccessType { get; internal set; }
-        public AJTypeInfo Type { get; set; }
+        public AJType Type { get; set; }
         public bool Param { get; set; } = false;
         public bool ReadOnly { get; set; } = false;
         public TokenData NameToken { get; set; }
         public int Block { get; set; }
         public int Offset { get; set; }
-        public List<TokenData> LevelTokens { get; set; } = new List<TokenData>();
-        public uint PointerLevel { get; set; }
-        public uint Size { get; }
-        public Initial InitValue { get; set; } 
+        public ExprNode InitValue { get; set; }
         public bool IsVirtual { get; set; }
 
         // The node that created own.
@@ -80,12 +77,9 @@ namespace Parse.FrontEnd.AJ.Data
             }
         }
 
-        public ConstantAJ TerminalValue => InitValue?.TerminalValue;
-
-
 
         public VariableAJ(Access accessType,
-                                        AJTypeInfo typeInfo, TokenData nameToken, IEnumerable<TokenData> levelTokens,
+                                        AJType typeInfo, TokenData nameToken, IEnumerable<TokenData> levelTokens,
                                         int blockLevel, int offset)
         {
             AccessType = accessType;
@@ -95,7 +89,7 @@ namespace Parse.FrontEnd.AJ.Data
             Block = blockLevel;
             Offset = offset;
 
-            InitValue = new Initial(ConstantAJ.CreateValueUnknown(Type.DataType));
+            InitValue = null;
 
             /*
             if (VariableType == VarType.ValueType)
@@ -117,16 +111,6 @@ namespace Parse.FrontEnd.AJ.Data
         public VarType VariableType => (DataType == AJDataType.Class) ? VarType.ReferenceType : VarType.ValueType;
 
 
-        public ConstantAJ ToConstantAJ()
-        {
-            //            return Type.Const ? new ConstantAJ() AJTypeConverter.To(Type.ToTypeInfo(), TerminalValue.Value, TerminalValue.ValueState)
-            //                                       : AJTypeConverter.To(Type.ToTypeInfo(), null, State.Unknown);
-
-            if (Type.Const) return TerminalValue;
-            else return ConstantAJ.CreateValueUnknown(DataType);
-        }
-
-
         public IRVariable ToIR()
         {
             IRVariable result = new IRVariable(Type.ToIR(), Name);
@@ -135,16 +119,6 @@ namespace Parse.FrontEnd.AJ.Data
             result.OffsetIndex = Offset;
 
             return result;
-        }
-
-        public static VariableAJ CreateThisVar(AJDataType type, TokenData nameToken, int blockLevel, int offset)
-        {
-            return new VariableAJ(Access.Private,
-                                             AJTypeInfo.CreateThisType(type, nameToken),
-                                             TokenData.CreateStubToken(AJGrammar.Ident, "this"),
-                                             null,
-                                             blockLevel,
-                                             offset);
         }
 
 
@@ -204,7 +178,7 @@ namespace Parse.FrontEnd.AJ.Data
     public abstract class ValueVarAJ : VariableAJ
     {
         public ValueVarAJ(Access accessType,
-                                        AJTypeInfo typeInfo, TokenData nameToken,
+                                        AJType typeInfo, TokenData nameToken,
                                         IEnumerable<TokenData> levelTokens,
                                         int blockLevel, int offset)
                                         : base(accessType, typeInfo, nameToken, levelTokens, blockLevel, offset)

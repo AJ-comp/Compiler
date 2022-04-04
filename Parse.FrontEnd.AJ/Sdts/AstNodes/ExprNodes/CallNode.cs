@@ -24,8 +24,7 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes
 
 
         // [0] : Ident [UseVarNode]
-        // [1] : Ident [UseVarNode]
-        // [2] : ActualParam? (AstNonTerminal)
+        // [1] : ActualParam? (AstNonTerminal)
         public override SdtsNode Compile(CompileParameter param)
         {
             base.Compile(param);
@@ -41,7 +40,7 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes
                 Params.AddRange(result.ParamNodeList);
             }
 
-            if (!CheckIsDefinedSymbol(functionName.IdentToken)) return this;
+            if (!CheckIsDefinedSymbolChain(MethodNameTokens)) return this;
 
             /*
             // if 'this' keyword is declared that means to use the member.

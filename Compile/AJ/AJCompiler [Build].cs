@@ -73,9 +73,9 @@ namespace Compile.AJ
 
                 if (item is ArithmeticNode)
                 {
-                    var arthNode = (item as ArithmeticNode);
+                    var arthNode = item as ArithmeticNode;
                     if (arthNode.IsBothLiteral)
-                        root.Items[i] = LiteralNode.CreateLiteralNode(arthNode.Result);
+                        root.Items[i] = LiteralNode.CreateLiteralNode(arthNode);
                 }
             }
         }

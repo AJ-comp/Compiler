@@ -54,32 +54,15 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes
             if (Items.Last() is ExprNode)
             {
                 _initExpression = Items.Last().Compile(param) as ExprNode;
-                Variable.InitValue = new Initial(_initExpression.Result);
+                Variable.InitValue = _initExpression;
             }
             else if (Variable.VariableType == VarType.ValueType)
             {
-
-            }
-
-            RootNode.ShortCutDeclareVarSet.Add(this);
-
-            var typeSymbols = GetDefineForType(Variable.Type.FullName);
-            if (typeSymbols.Count() == 0)   // there is no define for type
-            {
-                if (Variable.Type.IsUserDefType())
-                {
-                    RootNode.UnLinkedSymbols.Add(this);
-                    Alarms.Add(AJAlarmFactory.CreateAJ0031(Variable.Type.NameTokens));
-                }
-            }
-            else if(typeSymbols.Count() > 1)    // the type is ambiguity
-            {
-                Alarms.Add(AJAlarmFactory.CreateAJ0039(Variable.Type, typeSymbols.ElementAt(0), typeSymbols.ElementAt(1)));
             }
 
             // if link-time then it must not check duplication.
             // In link-time, if the duplication check is performed the error will be fired. the symbol was already inserted at first compile time.
-            if(param != null)
+            if (param != null)
             {
                 var symbol = GetSymbolFromCurrentBlock(Variable.NameToken);
                 if (symbol != null) Alarms.Add(AJAlarmFactory.CreateMCL0009(Variable.NameToken));

@@ -21,6 +21,8 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.StatementNodes
             base.Compile(param);
             FalseStatement = Items.Last().Compile(param) as StatementNode;
 
+            ClarifyReturn = TrueStatement.ClarifyReturn & FalseStatement.ClarifyReturn;
+
             return this;
         }
     }

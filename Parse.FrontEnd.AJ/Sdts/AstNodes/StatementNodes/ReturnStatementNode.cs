@@ -40,7 +40,7 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.StatementNodes
             {
                 var returnNode = Items[0].Compile(param) as TerminalNode;
 
-                if (funcNode.ReturnType != AJDataType.Void)
+                if (funcNode.ReturnDataType != AJDataType.Void)
                     Alarms.Add(new MeaningErrInfo(returnNode.Token, nameof(AlarmCodes.AJ0029), AlarmCodes.AJ0029));
             }
             // return value;
@@ -48,10 +48,10 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.StatementNodes
             {
                 Expr = Items[1].Compile(param) as ExprNode;
 
-                if (funcNode.ReturnType == AJDataType.Void)
+                if (funcNode.ReturnDataType == AJDataType.Void)
                     Alarms.Add(new MeaningErrInfo(Expr.AllTokens, nameof(AlarmCodes.AJ0028), AlarmCodes.AJ0028));
-                else if (!funcNode.ReturnTypeData.IsIncludeType(Expr.Result.Type))
-                    Alarms.Add(AJAlarmFactory.CreateAJ0030(Expr, funcNode.ReturnTypeData));
+                else if (!funcNode.ReturnType.IsIncludeType(Expr.Type))
+                    Alarms.Add(AJAlarmFactory.CreateAJ0030(Expr, funcNode.ReturnType));
             }
 
             return this;

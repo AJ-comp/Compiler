@@ -1,11 +1,13 @@
-﻿using Parse.FrontEnd.Ast;
+﻿using Parse.FrontEnd.AJ.Data;
+using Parse.FrontEnd.Ast;
 using Parse.MiddleEnd.IR.Expressions;
 using Parse.MiddleEnd.IR.Expressions.ExprExpressions;
+using Parse.Types;
 using System;
 
 namespace Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes.Binary
 {
-    public sealed class AssignNode : AssignExprNode
+    public sealed class AssignNode : BinaryExprNode, IAssignable
     {
         public AssignNode(AstSymbol node) : base(node)
         {
@@ -14,22 +16,13 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes.Binary
         public override SdtsNode Compile(CompileParameter param)
         {
             base.Compile(param);
+            CheckAssignable();
 
-            try
-            {
-                if (!IsCanParsing) return this;
+            if (!IsCanParsing) return this;
+            Assign(LeftNode, RightNode);
 
-                LeftNode.Result.Assign(RightNode.Result);
-            }
-            catch (Exception)
-            {
-                Alarms.Add(AJAlarmFactory.CreateMCL0023(LeftNode.Result.Type.Name,
-                                                                                RightNode.Result.Type.Name, "="));
-            }
-            finally
-            {
-                if (RootNode.IsBuild) DBContext.Instance.Insert(this);
-            }
+            if(Type == null) Alarms.Add(AJAlarmFactory.CreateMCL0023(this, "="));
+            if (RootNode.IsBuild) DBContext.Instance.Insert(this);
 
             return this;
         }

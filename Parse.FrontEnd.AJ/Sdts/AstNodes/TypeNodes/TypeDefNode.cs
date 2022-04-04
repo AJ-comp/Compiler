@@ -1,23 +1,47 @@
 ﻿using Parse.FrontEnd.AJ.Data;
 using Parse.FrontEnd.AJ.Properties;
+using Parse.FrontEnd.AJ.Sdts.Datas;
 using Parse.FrontEnd.Ast;
+using System.Linq;
 
 namespace Parse.FrontEnd.AJ.Sdts.AstNodes.TypeNodes
 {
     public abstract class TypeDefNode : AJNode, ISymbolData
     {
-        public abstract AJDataType Type { get; }
         public TokenData NameToken { get; protected set; }
         public TokenDataList FullNameToken { get; } = new TokenDataList();
-        public string Name => NameToken?.Input;
-        public virtual string FullName => FullNameToken.ToListString();
         public int Block { get; set; }
+        public bool HeaderCompiled { get; protected set; } = false;
 
+        // abstract
+        public abstract AJDataType Type { get; }
         public abstract uint Size { get; }
+
+        // readonly
+        public string Name => NameToken?.Input;
+        public string Namespace => RootNode.Namespace.FullName;
+        public virtual string FullName => $"{Namespace}.{NameToken.Input}";
+
 
         public TypeDefNode(AstSymbol node) : base(node)
         {
 
+        }
+
+
+        public override SdtsNode Compile(CompileParameter param)
+        {
+            base.Compile(param);
+
+            if (param.Option == CompileOption.CheckAmbiguous)
+            {
+                if (SymbolTable.Instance.GetAllSameTypeDefNode(this, true).Count() > 0)
+                {
+                    AddAmbiguousError();
+                }
+            }
+
+            return this;
         }
 
 
@@ -64,6 +88,14 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.TypeNodes
         public void AddSameNameError(TokenData sameToken)
         {
             Alarms.Add(new MeaningErrInfo(sameToken, nameof(AlarmCodes.AJ0027), AlarmCodes.AJ0027));
+        }
+
+
+        public void AddAmbiguousError()
+        {
+            Alarms.Add(new MeaningErrInfo(NameToken,
+                                                            nameof(AlarmCodes.AJ0040),
+                                                            string.Format(AlarmCodes.AJ0040, FullName)));
         }
     }
 }

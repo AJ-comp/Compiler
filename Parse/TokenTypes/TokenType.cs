@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections.Concurrent;
+using System.Collections.Generic;
 
 namespace Parse
 {
@@ -6,7 +7,7 @@ namespace Parse
     {
         private string _originalValue;
         private readonly int _hashCode;
-        private static Dictionary<int, TokenType> _totalHashValue = new Dictionary<int, TokenType>();
+        private static ConcurrentDictionary<int, TokenType> _totalHashValue = new ConcurrentDictionary<int, TokenType>();
 
         protected static int GetHashCode(string value) => 2018552787 + EqualityComparer<string>.Default.GetHashCode(value);
         protected static TokenType GetTokenType(int hashValue) => (_totalHashValue.ContainsKey(hashValue)) ? _totalHashValue[hashValue] : null;
@@ -17,7 +18,7 @@ namespace Parse
             _originalValue = value;
 
             var bExist = _totalHashValue.ContainsKey(hashCode);
-            if (bExist == false) _totalHashValue.Add(hashCode, this);
+            if (bExist == false) _totalHashValue.TryAdd(hashCode, this);
             else
             {
                 // check a key duplication.
@@ -30,7 +31,7 @@ namespace Parse
                         hashCode++;
                     } while (_totalHashValue.ContainsKey(hashCode));
 
-                    _totalHashValue.Add(hashCode, this);
+                    _totalHashValue.TryAdd(hashCode, this);
                 }
             }
         }

@@ -10,7 +10,7 @@ namespace ApplicationLayer.Models.SolutionPackage.MiniCPackage
     {
         private FuncDefNode _funcData;
 
-        public string ReturnType => (_funcData == null) ? string.Empty : _funcData.ReturnType.ToString();
+        public string ReturnType => (_funcData == null) ? string.Empty : _funcData.ReturnDataType.ToString();
         public string Name => _funcData.Name;
         public string Offset => _funcData.Offset.ToString();
         public bool IsGlobal => true;

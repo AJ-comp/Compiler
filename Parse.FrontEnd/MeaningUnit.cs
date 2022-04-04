@@ -141,9 +141,6 @@ namespace Parse.FrontEnd
         }
 
         private string DebuggerDisplay
-            => string.Format("SdtsRoot: {0}, AllNode count: {1}, Exception message: {2}", 
-                                        SdtsRoot,
-                                        AllNodes.Count,
-                                        FiredException.Message);
+            => $"SdtsRoot: {SdtsRoot}, AllNode count: {AllNodes.Count}, Exception message: {FiredException.Message}";
     }
 }

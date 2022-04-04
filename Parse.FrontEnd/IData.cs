@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Parse.Extensions;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Parse.FrontEnd
@@ -8,7 +10,6 @@ namespace Parse.FrontEnd
     {
         int Id { get; set; }
     }
-
 
     public interface IHasParent : IData
     {

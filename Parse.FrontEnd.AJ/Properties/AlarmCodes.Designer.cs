@@ -187,6 +187,33 @@ namespace Parse.FrontEnd.AJ.Properties {
         }
         
         /// <summary>
+        ///   The {0} type is ambiguous because the same type is defined in other files.과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string AJ0040 {
+            get {
+                return ResourceManager.GetString("AJ0040", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string AJ0041 {
+            get {
+                return ResourceManager.GetString("AJ0041", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   The unknown exception is fired while compile in {0} file. Please see the except file in Exception folder과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string AJ9999 {
+            get {
+                return ResourceManager.GetString("AJ9999", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   {0} is already defined.과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string MCL0000 {

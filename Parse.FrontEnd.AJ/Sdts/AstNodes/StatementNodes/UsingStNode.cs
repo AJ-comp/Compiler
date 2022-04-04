@@ -8,7 +8,7 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.StatementNodes
 {
     public class UsingStNode : StatementNode
     {
-        public List<TokenData> NameTokens { get; set; } = new List<TokenData>();
+        public TokenDataList NameTokens { get; set; } = new TokenDataList();
         public string FullName => NameTokens.ItemsString(PrintType.String, string.Empty, ".");
 
         public UsingStNode(AstSymbol node) : base(node)
@@ -26,15 +26,8 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.StatementNodes
                 NameTokens.Add(node.Token);
             }
 
-            string name = string.Empty;
-            foreach (var nameToken in NameTokens)
-            {
-                name += nameToken.Input;
-                if (!NamespaceDictionary.Instance.ContainsKey(name))
-                    Alarms.Add(AJAlarmFactory.CreateAJ0031(nameToken));
-
-                name += ".";
-            }
+            if (!SymbolTable.Instance.ContainsKey(NameTokens.ToListString()))
+                Alarms.Add(AJAlarmFactory.CreateAJ0031(NameTokens));
 
             return this;
         }

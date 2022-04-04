@@ -2,7 +2,7 @@
   "profiles": {
     "CommandPrompt.Util": {
       "commandName": "Project",
-      "commandLineArgs": "ajutil print C:\\aws\\test"
+      "commandLineArgs": "ajutil print C:\\aws\\test\\Analysis"
     }
   }
 }

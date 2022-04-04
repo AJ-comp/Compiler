@@ -39,38 +39,49 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.TypeNodes
         public override SdtsNode Compile(CompileParameter param)
         {
             base.Compile(param);
-            Fields.Clear();
-            AllFuncs.Clear();
 
+            if (param.Option == CompileOption.CheckAmbiguous) CheckForDuplication(param);
+            else if (param.Option == CompileOption.CheckTypeDefine) CompileForTypeDefine(param);
+            else if (param.Option == CompileOption.CheckMemberDeclaration) CompileForMember(param);
+            else if (param.Option == CompileOption.Logic) CompileForLogic(param);
+
+            //            DBContext.Instance.Insert(this);
+
+            return this;
+        }
+
+        private void CompileForTypeDefine(CompileParameter param)
+        {
             AccessType = Access.Private;
 
-            int offset = 0;
-            if (Items[offset] is AccesserNode)
+            if (Items[_memberOffset] is AccesserNode)
             {
-                var accesserNode = Items[offset++].Compile(param) as AccesserNode;
+                var accesserNode = Items[_memberOffset++].Compile(param) as AccesserNode;
                 AccessType = accesserNode.AccessState;
             }
 
-            var nameNode = Items[offset++].Compile(param) as DefNameNode;
+            var nameNode = Items[_memberOffset++].Compile(param) as DefNameNode;
             NameToken = nameNode.Token;
-            if (NameToken == null) return this;
+        }
 
+        private void CompileForMember(CompileParameter param)
+        {
             // field or property or function
             while (true)
             {
-                if (Items.Count <= offset) break;
+                if (Items.Count <= _memberOffset) break;
 
                 Access accessType = Access.Private;
-                if (Items[offset] is AccesserNode)
+                if (Items[_memberOffset] is AccesserNode)
                 {
-                    var accesserNode = Items[offset++].Compile(param) as AccesserNode;
+                    var accesserNode = Items[_memberOffset++].Compile(param) as AccesserNode;
                     accessType = accesserNode.AccessState;
                 }
 
-                if (Items[offset] is DeclareVarStNode) BuildForVariableDclsNode(param.CloneForNewBlock(), offset, accessType);
-                else if (Items[offset] is FuncDefNode) BuildForFuncDefNode(param.CloneForNewBlock(), offset, accessType);
+                if (Items[_memberOffset] is DeclareVarStNode) CompileForVariableDclsNode(param.CloneForNewBlock(), _memberOffset, accessType);
+                else if (Items[_memberOffset] is FuncDefNode) CompileForFuncDefNode(param.CloneForNewBlock(), _memberOffset, accessType);
 
-                offset++;
+                _memberOffset++;
             }
 
             // 현재 문법으로는 사용자 단에서 명시적으로 생성자와 소멸자를 생성할 수 없으므로
@@ -78,13 +89,22 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.TypeNodes
             CreateDefaultCreator(param.CloneForNewBlock());
             CreateDefaultDestructor(param.CloneForNewBlock());
 
-            RootNode.LinkedSymbols.Add(this);
-            CheckDuplicated();
-
             References.Add(this);
-            //            DBContext.Instance.Insert(this);
+        }
 
-            return this;
+
+        private void CompileForLogic(CompileParameter param)
+        {
+            foreach (var func in AllFuncs.Where(x => x.StubCode == false)) func.Compile(param);
+        }
+
+
+        private void CheckForDuplication(CompileParameter param)
+        {
+            foreach(var defType in RootNode.DefTypes)
+            {
+
+            }
         }
 
 
@@ -97,7 +117,7 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.TypeNodes
         /// <param name="offset"></param>
         /// <param name="accessType"></param>
         /**************************************************/
-        private void BuildForVariableDclsNode(CompileParameter param, int offset, Access accessType)
+        private void CompileForVariableDclsNode(CompileParameter param, int offset, Access accessType)
         {
             param.Offset = Fields == null ? 0 : Fields.Count();
             // children node is parsing only variable elements so it doesn't need to clone an param
@@ -123,78 +143,42 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.TypeNodes
         /// <param name="offset"></param>
         /// <param name="accessType"></param>
         /**************************************************/
-        private void BuildForFuncDefNode(CompileParameter param, int offset, Access accessType)
+        private void CompileForFuncDefNode(CompileParameter param, int offset, Access accessType)
         {
             param.Offset = AllFuncs == null ? 0 : AllFuncs.Count();
 
             var node = Items[offset].Compile(param) as FuncDefNode;
-            node.AccessType = accessType;
 
+            node.AccessType = accessType;
             if (IsSameName(node.NameToken)) return;
             if (IsDuplicated(node.NameToken)) return;
-
-            AllFuncs.Add(node);
         }
 
 
         private void CreateDefaultCreator(CompileParameter param)
         {
             param.Offset = AllFuncs == null ? 0 : AllFuncs.Count();
-            AJTypeInfo returnTypeInfo = new AJTypeInfo(AJDataType.Void);
+            AJType returnTypeInfo = new AJPreDefType(AJDataType.Void);
 
             var func = new FuncDefNode(FuncType.Creator, Access.Public, param.BlockLevel, param.Offset, RootNode, returnTypeInfo);
             func.NameToken = TokenData.CreateStubToken(AJGrammar.Ident, Name);
-            AllFuncs.Add(func);
+
+            AutoGeneratedFuncs.Add(func);
         }
 
 
         private void CreateDefaultDestructor(CompileParameter param)
         {
             param.Offset = AllFuncs == null ? 0 : AllFuncs.Count();
-            AJTypeInfo returnTypeInfo = new AJTypeInfo(AJDataType.Void);
+            AJType returnTypeInfo = new AJPreDefType(AJDataType.Void);
 
             var func = new FuncDefNode(FuncType.Destructor, Access.Public, param.BlockLevel, param.Offset, RootNode, returnTypeInfo);
             func.NameToken = TokenData.CreateStubToken(AJGrammar.Ident, Name);
-            AllFuncs.Add(func);
+
+            AutoGeneratedFuncs.Add(func);
         }
 
 
-        /// <summary>
-        /// Check if there is a same class name on namespace that accessable.
-        /// </summary>
-        private void CheckDuplicated()
-        {
-            foreach (var programNode in RootNode.AccessablePrograms)
-            {
-                foreach (var classNode in programNode.DefTypes)
-                {
-                    if (classNode.FullName != FullName) continue;
-
-                    Alarms.Add(AJAlarmFactory.CreateAJ0032(programNode.Namespace, classNode.NameToken));
-                }
-            }
-        }
-
-
-        /// <summary>
-        /// Checks if there is a duplicated function in class.    <br/>
-        /// Checks using function name and parameter.       <br/>
-        /// </summary>
-        /// <param name="func"></param>
-        /// <returns>return true if there is no, return false if there is a duplicated function</returns>
-        public bool CheckIsDuplicatedFunction(FuncDefNode funcToCheck)
-        {
-            foreach (var func in FuncList)
-            {
-                if (func.IsEqualFunction(funcToCheck))
-                {
-                    Alarms.Add(AJAlarmFactory.CreateAJ0026(this, funcToCheck.NameToken));
-
-                    return false;
-                }
-            }
-
-            return true;
-        }
+        private int _memberOffset = 0;
     }
 }

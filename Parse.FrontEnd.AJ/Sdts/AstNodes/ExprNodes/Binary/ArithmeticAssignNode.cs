@@ -9,39 +9,29 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes.Binary
     /// <summary>
     /// This class parsing +=, -=, *=, /=, etc ...
     /// </summary>
-    public sealed class ArithmeticAssignNode : AssignExprNode
+    public sealed class ArithmeticAssignNode : ArithmeticNode, IAssignable
     {
-        public IRArithmeticOperation Operation { get; }
-
-        public ArithmeticAssignNode(AstSymbol node, IRArithmeticOperation operation) : base(node)
+        public ArithmeticAssignNode(AstSymbol node, IRArithmeticOperation operation) : base(node, operation)
         {
-            Operation = operation;
         }
 
         public override SdtsNode Compile(CompileParameter param)
         {
             base.Compile(param);
+            CheckAssignable();
 
             if (!IsCanParsing) return this;
 
-            try
-            {
-                if (Operation == IRArithmeticOperation.Add) Result = LeftNode.Result += RightNode.Result;
-                else if (Operation == IRArithmeticOperation.Sub) Result = LeftNode.Result -= RightNode.Result;
-                else if (Operation == IRArithmeticOperation.Mul) Result = LeftNode.Result *= RightNode.Result;
-                else if (Operation == IRArithmeticOperation.Div) Result = LeftNode.Result /= RightNode.Result;
-                else if (Operation == IRArithmeticOperation.Mod) Result = LeftNode.Result %= RightNode.Result;
-            }
-            catch (Exception)
-            {
-                Alarms.Add(AJAlarmFactory.CreateMCL0023(LeftNode.Result.Type.Name,
-                                                                                 RightNode.Result.Type.Name,
-                                                                                 Operation.ToDescription()));
-            }
-            finally
-            {
-                if (RootNode.IsBuild) DBContext.Instance.Insert(this);
-            }
+            if (Operation == IRArithmeticOperation.Add) Add(LeftNode, RightNode);
+            else if (Operation == IRArithmeticOperation.Sub) Sub(LeftNode, RightNode);
+            else if (Operation == IRArithmeticOperation.Mul) Mul(LeftNode, RightNode);
+            else if (Operation == IRArithmeticOperation.Div) Div(LeftNode, RightNode);
+            else if (Operation == IRArithmeticOperation.Mod) Mod(LeftNode, RightNode);
+
+            Assign(LeftNode, RightNode);
+
+            if(Type == null) Alarms.Add(AJAlarmFactory.CreateMCL0023(this, Operation.ToDescription()));
+            if (RootNode.IsBuild) DBContext.Instance.Insert(this);
 
             return this;
         }

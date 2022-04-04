@@ -69,14 +69,16 @@ namespace CommandPrompt.Util.Commands
 
         private void PrintParsingTable(AJCompiler compiler, bool list, string output)
         {
+            Directory.CreateDirectory(output);
             var fileFullPath = Path.Combine(output, "parsingtable.csv");
-            compiler.Parser.ParsingTable.ToTableFormat.ToCSV(fileFullPath);
 
+            compiler.Parser.ParsingTable.ToTableFormat.ToCSV(fileFullPath);
             Console.WriteLine(string.Format(Resource.CreateFile, fileFullPath));
         }
 
         private void PrintAmbiguityCheckResult(AJCompiler compiler, bool list, string output)
         {
+            Directory.CreateDirectory(output);
             var fileFullPath = Path.Combine(output, "ambiguity.csv");
 
             compiler.Parser.CheckAmbiguity().ToTableFormat.ToCSV(fileFullPath);
@@ -86,6 +88,7 @@ namespace CommandPrompt.Util.Commands
 
         private void PrintCanonical(AJCompiler compiler, bool list, string output)
         {
+            Directory.CreateDirectory(output);
             var fileFullPath = Path.Combine(output, "canonical.csv");
 
             compiler.Parser.Canonical.ToDataTable().ToCSV(fileFullPath);
@@ -95,6 +98,7 @@ namespace CommandPrompt.Util.Commands
 
         private void PrintFirstAndFollowResult(AJCompiler compiler, bool list, string output)
         {
+            Directory.CreateDirectory(output);
             var fileFullPath = Path.Combine(output, "first-follow.csv");
 
             compiler.Parser.GetFirstAndFollow().ToTableFormat.ToCSV(fileFullPath);
@@ -103,6 +107,7 @@ namespace CommandPrompt.Util.Commands
 
         private void PrintGrammarToEbnf(AJCompiler compiler, bool list, string output)
         {
+            Directory.CreateDirectory(output);
             var fileFullPath = Path.Combine(output, "AJ-grammar.ebnf");
 
             File.WriteAllLines(fileFullPath, compiler.Grammar.ToEbnfString(), new UTF8Encoding(true));

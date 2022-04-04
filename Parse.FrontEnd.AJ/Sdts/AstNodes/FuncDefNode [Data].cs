@@ -9,13 +9,11 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes
 {
     public partial class FuncDefNode : ISymbolData
     {
-        public int StructureId { get; set; }
-
-        public FuncType Type { get; set; } = FuncType.Normal;
+        public FuncType FunctionalType { get; set; } = FuncType.Normal;
         public Access AccessType { get; set; } = Access.Private;
         public bool IsStatic { get; set; }
         public StatementNode Statement { get; set; }
-        public AJTypeInfo ReturnTypeData { get; set; }
+        public AJType ReturnType { get; set; }
         public TokenData NameToken { get; set; }
         public int Block { get; set; }
 
@@ -23,11 +21,9 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes
         public List<AJNode> Reference { get; set; } = new List<AJNode>();
 
 
-        public bool IsConstReturn => (ReturnTypeData == null) ? false : ReturnTypeData.Const;
-        public AJDataType ReturnType => (ReturnTypeData == null) ? AJDataType.Unknown : ReturnTypeData.DataType;
+        public bool IsConstReturn => (ReturnType == null) ? false : ReturnType.Const;
+        public AJDataType ReturnDataType => (ReturnType == null) ? AJDataType.Unknown : ReturnType.DataType;
         public string Name => NameToken.Input;
-
-        public ConstantAJ ReturnValue => ConstantAJ.CreateValueUnknown(ReturnType);
 
 
         public IEnumerable<TokenData> FullNameTokens
@@ -77,7 +73,7 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes
         public string ToDefineString(bool bDisplayReturnType, bool bDisplayParams)
         {
             string result = string.Empty;
-            if (bDisplayReturnType) result += $"{ReturnTypeData.Name} ";
+            if (bDisplayReturnType) result += $"{ReturnType.Name} ";
             result += Name;
 
             if (bDisplayParams)
@@ -89,7 +85,7 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes
 
         public override string ToString()
         {
-            string result = $"[{Type}] {AccessType} {ReturnType} {Name} ";
+            string result = $"[{FunctionalType}] {AccessType} {ReturnDataType} {Name} ";
             result += "(";
             foreach (var paramVar in ParamVarList)
             {

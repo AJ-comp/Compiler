@@ -10,8 +10,6 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes.LiteralNodes
 {
     public class StringLiteralNode : LiteralNode
     {
-        public string Value => (string)Result.Value;
-
         public StringLiteralNode(AstSymbol node) : base(node)
         {
         }
@@ -23,7 +21,8 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes.LiteralNodes
                 var node = Items[0].Compile(param) as TerminalNode;
                 Token = node.Token;
 
-                Result = new ConstantAJ(Token.Input);
+                Value = Token.Input;
+                ValueState = State.Fixed;
             }
             catch (Exception)
             {

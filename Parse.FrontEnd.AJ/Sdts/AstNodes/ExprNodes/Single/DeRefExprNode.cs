@@ -39,9 +39,21 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes.Single
                                                     nameof(AlarmCodes.MCL0001),
                                                     string.Format(AlarmCodes.MCL0001, IdentNode.IdentToken)));
                     }
-                    else
+                    else if(varData is VariableAJ)
                     {
-                        if (!CheckDeRefable(varData))
+                        var variable = varData as VariableAJ;
+
+                        if (!CheckDeRefable(variable.Type))
+                        {
+                            Alarms.Add(new MeaningErrInfo(IdentNode.AllTokens,
+                                            nameof(AlarmCodes.MCL0019), AlarmCodes.MCL0019));
+                        }
+                    }
+                    else if(varData is FuncDefNode)
+                    {
+                        var func = varData as FuncDefNode;
+
+                        if (!CheckDeRefable(func.ReturnType))
                         {
                             Alarms.Add(new MeaningErrInfo(IdentNode.AllTokens,
                                             nameof(AlarmCodes.MCL0019), AlarmCodes.MCL0019));
@@ -50,7 +62,7 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes.Single
                 }
                 else // expr case (ex: *(a+b))
                 {
-                    if (!CheckDeRefable(node.Result))
+                    if (!CheckDeRefable(node.Type))
                     {
                         Alarms.Add(new MeaningErrInfo(node.AllTokens,
                                         nameof(AlarmCodes.MCL0019), AlarmCodes.MCL0019));
@@ -69,19 +81,7 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes.Single
             return this;
         }
 
-        private bool CheckDeRefable(ISymbolData symbol)
-        {
-            if (!(symbol is IHasType)) return false;
-
-            var var = symbol as IHasType;
-
-            // deref type has to be address type
-
-            if (var.Type.PointerDepth > 0) return true;
-            //            return (var.Type.DataType == AJDataType.Ptr);
-
-            return false;
-        }
+        private bool CheckDeRefable(AJType type) => type.PointerDepth > 0;
 
         public override IRExpression To()
         {

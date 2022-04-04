@@ -1,6 +1,7 @@
 ﻿using Parse.FrontEnd.AJ.Data;
 using Parse.FrontEnd.Ast;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Parse.FrontEnd.AJ.Sdts.AstNodes.TypeNodes
 {
@@ -61,27 +62,45 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.TypeNodes
 
                     FullDataTypeToken.Add(node.Token);
                 }
-
-                foreach (var cs in RootNode.DefTypes)
-                {
-                    if (cs.FullName == FullName) DefNode = cs;
-                    else if (cs.Name == Name) DefNode = cs;
-                }
             }
+
+            CheckDefineForType();
 
             return this;
         }
 
 
-        public AJTypeInfo ToAJTypeInfo(bool bConst)
+        public AJType ToAJTypeInfo(bool bConst)
         {
-            AJTypeInfo result = new AJTypeInfo(Type, FullDataTypeToken)
+            if(TypeKind == TypeKind.PreDef)
             {
-                Const = bConst,
-                Signed = Signed
-            };
+                AJType result = new AJPreDefType(Type, FullDataTypeToken)
+                {
+                    Const = bConst,
+                    Signed = Signed
+                };
 
-            return result;
+                return result;
+            }
+            else
+            {
+                var defNodes = GetDefineForType(FullDataTypeToken.ToListString());
+                return (defNodes.Count() == 1) ? new AJUserDefType(defNodes.First()) : new AJUserDefType(null);
+            }
+        }
+
+
+        private void CheckDefineForType()
+        {
+            // the predef type exists the define certainly.
+            if (TypeKind == TypeKind.PreDef) return;
+
+            var typeSymbols = GetDefineForType(FullName);
+            if (typeSymbols.Count() > 1)    // the type is ambiguity
+                Alarms.Add(AJAlarmFactory.CreateAJ0039(this, typeSymbols.ElementAt(0), typeSymbols.ElementAt(1)));
+            else if (typeSymbols.Count() == 0)   // there is no define for type
+                Alarms.Add(AJAlarmFactory.CreateAJ0031(FullDataTypeToken));
+            else DefNode = typeSymbols.First();
         }
 
 

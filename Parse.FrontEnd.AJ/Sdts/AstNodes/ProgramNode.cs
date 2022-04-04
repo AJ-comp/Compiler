@@ -5,6 +5,7 @@ using Parse.FrontEnd.AJ.Sdts.AstNodes.StatementNodes;
 using Parse.FrontEnd.AJ.Sdts.AstNodes.TypeNodes;
 using Parse.FrontEnd.AJ.Sdts.Datas;
 using Parse.FrontEnd.Ast;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -14,9 +15,6 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes
     {
         public List<UsingStNode> UsingNamespaces { get; } = new List<UsingStNode>();
         public NamespaceNode Namespace { get; private set; }
-
-        public List<TypeDefNode> DefTypes { get; } = new List<TypeDefNode>();
-        private HashSet<StructDefNode> _structDefNodes = new HashSet<StructDefNode>();
 
 
         public HashSet<IDeclareable> ShortCutDeclareVarSet { get; } = new HashSet<IDeclareable>();
@@ -29,6 +27,8 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes
         public bool IsBuild { get; private set; }
         public string FullPath { get; set; }
 
+        public List<Exception> FiredExceptoins { get; } = new List<Exception>();
+
 
         public IEnumerable<ProgramNode> AccessablePrograms
         {
@@ -38,12 +38,34 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes
 
                 foreach (var usingNamespace in UsingNamespaces)
                 {
-                    if (NamespaceDictionary.Instance.ContainsKey(usingNamespace.FullName))
-                        result.UnionWith(NamespaceDictionary.Instance[usingNamespace.FullName]);
+                    if (Datas.SymbolTable.Instance.ContainsKey(usingNamespace.FullName))
+                        result.UnionWith(SymbolTable.Instance[usingNamespace.FullName]);
                 }
 
-                result.UnionWith(NamespaceDictionary.Instance[Namespace.FullName]);
-                
+                result.UnionWith(SymbolTable.Instance[Namespace.FullName]);
+
+                return result;
+            }
+        }
+
+
+        public IEnumerable<TypeDefNode> DefTypes
+        {
+            get
+            {
+                List<TypeDefNode> result = new List<TypeDefNode>();
+
+                foreach (var item in Items)
+                {
+                    if (!(item is TypeDefNode)) continue;
+
+                    var typeNode = item as TypeDefNode;
+                    // The NameToken is null means not parsed yet.
+                    if (typeNode.NameToken == null) continue;
+
+                    result.Add(typeNode);
+                }
+
                 return result;
             }
         }
@@ -66,11 +88,24 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes
             FullPath = param.FileFullPath;
 
             param.RootNode = this;
+            if (param.Option == CompileOption.CheckUsing) UsingCompile(param);
+            else if (param.Option == CompileOption.CheckNamespace) NamespaceCompile(param);
+            else if (param.Option == CompileOption.CheckTypeDefine) DefineCompile(param);
+            else if (param.Option == CompileOption.CheckMemberDeclaration) DefineCompile(param);
+            else if (param.Option == CompileOption.CheckAmbiguous) DefineTypeAmbiguousCompile(param);
+            else if (param.Option == CompileOption.Logic) DefineCompile(param);
 
-            int index = 0;
+            return this;
+        }
+
+
+        public override string ToString() => $"{FileFullPath} {GetType().Name}";
+
+
+        private void UsingCompile(CompileParameter param)
+        {
             foreach (var item in Items)
             {
-                index++;
                 var ajNode = item as AJNode;
 
                 // using statement list
@@ -78,31 +113,45 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes
                 {
                     UsingNamespaces.Add(ajNode.Compile(param) as UsingStNode);
                 }
+            }
+        }
+
+
+        private void NamespaceCompile(CompileParameter param)
+        {
+            foreach (var item in Items)
+            {
                 // namespace statement list
-                else if (ajNode is NamespaceNode)
+                if (item is NamespaceNode)
                 {
-                    Namespace = ajNode.Compile(param) as NamespaceNode;
+                    Namespace = item.Compile(param) as NamespaceNode;
                     break;
                 }
             }
 
-            NamespaceDictionary.Instance.Add(this);
+            SymbolTable.Instance.Add(this);
+        }
 
+
+        private void DefineCompile(CompileParameter param)
+        {
             int newBlockOffset = 0;
-            foreach (var item in Items.Skip(index))
+            foreach (var item in Items)
             {
                 if (item is ClassDefNode)
                 {
                     var node = item.Compile(param.CloneForNewBlock(newBlockOffset++)) as ClassDefNode;
-                    if (node.Alarms.Count == 0) DefTypes.Add(node);
                 }
                 else if (item is StructDefNode)
                 {
                     var node = item.Compile(param.CloneForNewBlock(newBlockOffset++)) as StructDefNode;
-                    _structDefNodes.Add(node);
                 }
             }
+        }
 
+
+        private void UnLinkCompile(CompileParameter param)
+        {
             // retry compile for undefined symbol
             var copiedUnLinkedSymbols = new HashSet<SdtsNode>(AllAlarmNodes);
             foreach (var unlinkNode in copiedUnLinkedSymbols)
@@ -114,13 +163,25 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes
 
                     exprNode.Compile(null);
                 }
-                else if(unlinkNode is DeclareVarNode)
+                else if (unlinkNode is DeclareVarNode)
                 {
                     unlinkNode.Compile(null);
                 }
             }
+        }
 
-            return this;
+
+        private void DefineTypeAmbiguousCompile(CompileParameter param)
+        {
+            foreach (var item in Items)
+            {
+                if (!(item is TypeDefNode)) continue;
+
+                var typeNode = item as TypeDefNode;
+                if(SymbolTable.Instance.GetAllSameTypeDefNode(typeNode).Count() > 1)
+                    typeNode.AddAmbiguousError();
+
+            }
         }
     }
 }

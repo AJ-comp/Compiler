@@ -96,6 +96,15 @@ namespace AJ.Common.Helpers
         }
 
 
+        public static bool LastMatch(this string origin, string target)
+        {
+            var index = origin.LastIndexOf(target);
+            if (index == -1) return false;
+
+            return index + target.Length == origin.Length;
+        }
+
+
         public static string AbsolutePath(this string path)
             => Path.IsPathRooted(path) ? path : Path.Combine(Environment.CurrentDirectory, path);
 

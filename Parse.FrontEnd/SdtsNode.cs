@@ -3,13 +3,14 @@ using Parse.FrontEnd.Ast;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 
 namespace Parse.FrontEnd
 {
     public abstract class SdtsNode : IData, IHasParent
     {
         // for interface *********************************/
-        public int Id { get; set; } = _nextId--;
+        public int Id { get; set; } = Interlocked.Decrement(ref _nextId);
         public int ParentId { get; set; }
         public string ParentType { get; set; }
         public int ChildIndex { get; set; }

@@ -2,6 +2,6 @@
 {
     public interface IHasType
     {
-        AJTypeInfo Type { get; }
+        AJType Type { get; }
     }
 }

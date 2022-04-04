@@ -11,7 +11,6 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes.LiteralNodes
     public class IntegerLiteralNode : LiteralNode
     {
         public bool Signed { get; }
-        public int Value => (int)Result.Value;
 
         public IntegerLiteralNode(AstSymbol node) : base(node)
         {
@@ -19,7 +18,7 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes.LiteralNodes
 
         public IntegerLiteralNode(int value) : base(null)
         {
-            Result = new ConstantAJ(value);
+            Type = new AJPreDefType(AJDataType.Int);
         }
 
         public override SdtsNode Compile(CompileParameter param)
@@ -38,13 +37,16 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes.LiteralNodes
                     value = System.Convert.ToInt32(Token.Input, 2);
                 else value = System.Convert.ToInt32(Token.Input);
 
-                if (byte.MinValue <= value && value <= byte.MaxValue) Result = new ConstantAJ((byte)value);
-                else if (sbyte.MinValue <= value && value <= sbyte.MaxValue) Result = new ConstantAJ((sbyte)value);
-                else if (short.MinValue <= value && value <= short.MaxValue) Result = new ConstantAJ((short)value);
-                else if (ushort.MinValue <= value && value <= ushort.MaxValue) Result = new ConstantAJ((ushort)value);
-                else if (int.MinValue <= value && value <= int.MaxValue) Result = new ConstantAJ((int)value);
-                else if (uint.MinValue <= value && value <= uint.MaxValue) Result = new ConstantAJ((uint)value);
-                else Result = new ConstantAJ((double)value);
+                if (byte.MinValue <= value && value <= byte.MaxValue) AllocType(AJDataType.Bool, false);
+                else if (sbyte.MinValue <= value && value <= sbyte.MaxValue) AllocType(AJDataType.Bool, true);
+                else if (short.MinValue <= value && value <= short.MaxValue) AllocType(AJDataType.Short, true);
+                else if (ushort.MinValue <= value && value <= ushort.MaxValue) AllocType(AJDataType.Short, false);
+                else if (int.MinValue <= value && value <= int.MaxValue) AllocType(AJDataType.Int, true);
+                else if (uint.MinValue <= value && value <= uint.MaxValue) AllocType(AJDataType.Short, false);
+                else AllocType(AJDataType.Double, true);
+
+                Value = value;
+                ValueState = State.Fixed;
             }
             catch(Exception)
             {
@@ -62,9 +64,9 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes.LiteralNodes
         {
             var result = new IRLiteralExpr();
 
-            StdType type = (Result.Type.DataType == AJDataType.Byte)
+            StdType type = (Type.DataType == AJDataType.Byte)
                                 ? StdType.Char
-                                : (Result.Type.DataType == AJDataType.Short)
+                                : (Type.DataType == AJDataType.Short)
                                 ? StdType.Short
                                 : StdType.Int;
 
@@ -77,6 +79,14 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes.LiteralNodes
         public override IRExpression To(IRExpression from)
         {
             throw new NotImplementedException();
+        }
+
+
+        protected void AllocType(AJDataType dataType, bool signed)
+        {
+            var type = new AJPreDefType(dataType);
+            type.Signed = signed;
+            Type = type;
         }
     }
 }

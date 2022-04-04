@@ -1,4 +1,6 @@
-﻿using Parse.Extensions;
+﻿using AJ.Common.Helpers;
+using Parse.Extensions;
+using Parse.FrontEnd.AJ.Data;
 using Parse.FrontEnd.AJ.Sdts.AstNodes.TypeNodes;
 using System.Collections.Generic;
 using System.Linq;
@@ -139,9 +141,9 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes
 
             foreach (var file in RootNode.AccessablePrograms)
             {
-                foreach (var type in file.DefTypes)
+                foreach (var defType in file.DefTypes)
                 {
-                    if (type.FullName == typeFullName) result.Add(type);
+                    if (defType.FullName.LastMatch(typeFullName)) result.Add(defType);
                 }
             }
 

@@ -1,6 +1,7 @@
 ﻿using Parse.FrontEnd.Ast;
 using Parse.MiddleEnd.IR.Expressions;
 using Parse.MiddleEnd.IR.Expressions.ExprExpressions;
+using Parse.Types;
 using System;
 using System.Linq;
 
@@ -29,10 +30,10 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes.Single
                     return this;
                 }
 
-                if (ProcessInfo == Info.PreInc) Result = ExprNode.Result.PreInc();
-                else if (ProcessInfo == Info.PostDec) Result = ExprNode.Result.PostDec();
-                else if (ProcessInfo == Info.PreDec) Result = ExprNode.Result.PreDec();
-                else if (ProcessInfo == Info.PostInc) Result = ExprNode.Result.PostInc();
+                if (ProcessInfo == Info.PreInc) PreInc(ExprNode);
+                else if (ProcessInfo == Info.PostDec) PostDec(ExprNode);
+                else if (ProcessInfo == Info.PreDec) PreDec(ExprNode);
+                else if (ProcessInfo == Info.PostInc) PostInc(ExprNode);
             }
             catch(Exception)
             {
@@ -63,6 +64,63 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes.Single
         public override IRExpression To(IRExpression from)
         {
             throw new NotImplementedException();
+        }
+
+
+        public ExprNode PreInc(ExprNode source)
+        {
+            if (source.Type == null) return null;
+            if (source.ValueState != State.Fixed) return this;
+
+            if (Type.IsIntegerType())
+            {
+                Value = (int)source.Value + 1;
+                ValueState = State.Fixed;
+            }
+
+            return this;
+        }
+
+        public ExprNode PostInc(ExprNode source)
+        {
+            if (source.Type == null) return null;
+            if (source.ValueState != State.Fixed) return this;
+
+            if (Type.IsIntegerType())
+            {
+                Value = (int)source.Value;
+                ValueState = State.Fixed;
+            }
+
+            return this;
+        }
+
+        public ExprNode PreDec(ExprNode source)
+        {
+            if (source.Type == null) return null;
+            if (source.ValueState != State.Fixed) return this;
+
+            if (Type.IsIntegerType())
+            {
+                Value = (int)source.Value - 1;
+                ValueState = State.Fixed;
+            }
+
+            return this;
+        }
+
+        public ExprNode PostDec(ExprNode source)
+        {
+            if (source.Type == null) return null;
+            if (source.ValueState != State.Fixed) return this;
+
+            if (Type.IsIntegerType())
+            {
+                Value = (int)source.Value;
+                ValueState = State.Fixed;
+            }
+
+            return this;
         }
     }
 }

@@ -40,7 +40,11 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.StatementNodes
                     // build StatListNode
                     //                    StatListNode = item.Compile(param) as CompoundStNode;
                 }
-                else if (item is ReturnStatementNode) item.Compile(param);
+                else if (item is ReturnStatementNode)
+                {
+                    item.Compile(param);
+                    ClarifyReturn = true;
+                }
                 else item.Compile(param.CloneForNewBlock());
             }
 
