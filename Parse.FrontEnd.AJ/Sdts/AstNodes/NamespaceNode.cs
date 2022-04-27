@@ -32,9 +32,9 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes
         /// <param name="param"></param>
         /// <returns></returns>
         /**************************************************/
-        public override SdtsNode Compile(CompileParameter param)
+        protected override SdtsNode CompileLogic(CompileParameter param)
         {
-            base.Compile(param);
+            base.CompileLogic(param);
 
             foreach (var item in Items)
             {

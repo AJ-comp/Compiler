@@ -1,5 +1,6 @@
 ﻿using Parse.FrontEnd.AJ;
 using Parse.FrontEnd.AJ.Data;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.IO;
 
@@ -123,8 +124,7 @@ namespace Compile.AJ
             _assemblyDic.Remove(originalName);
         }
 
-
-        private Dictionary<string, TotalData> _docTable = new Dictionary<string, TotalData>();
+        private ConcurrentDictionary<string, TotalData> _docTable = new ConcurrentDictionary<string, TotalData>();
         private Dictionary<string, AJProject> _assemblyDic = new Dictionary<string, AJProject>();
 
 

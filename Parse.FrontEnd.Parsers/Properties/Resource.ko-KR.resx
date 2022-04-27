@@ -169,6 +169,6 @@
     <value>Ast 스택</value>
   </data>
   <data name="BackTracking" xml:space="preserve">
-    <value>백트래킹 후 {0} 동작을 수행합니다.</value>
+    <value>{0} 상태로 백트래킹 후 {1} 동작을 수행합니다.</value>
   </data>
 </root>

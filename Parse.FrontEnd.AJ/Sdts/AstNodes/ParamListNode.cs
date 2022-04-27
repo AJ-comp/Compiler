@@ -17,7 +17,7 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes
 
         // format summary [Can induce epsilon]
         // [0:n] : DeclareVarNode
-        public override SdtsNode Compile(CompileParameter param)
+        protected override SdtsNode CompileLogic(CompileParameter param)
         {
             _paramNodes.Clear();
 

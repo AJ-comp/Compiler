@@ -41,9 +41,9 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.TypeNodes
         /// </summary>
         /// <param name="param"></param>
         /// <returns></returns>
-        public override SdtsNode Compile(CompileParameter param)
+        protected override SdtsNode CompileLogic(CompileParameter param)
         {
-            base.Compile(param);
+            base.CompileLogic(param);
 
             if (TypeKind == TypeKind.PreDef)
             {
@@ -72,8 +72,10 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.TypeNodes
 
         public AJType ToAJTypeInfo(bool bConst)
         {
-            if(TypeKind == TypeKind.PreDef)
+            if (TypeKind == TypeKind.PreDef)
             {
+//                if(Type == AJDataType.Void) return new AJVoidType()
+
                 AJType result = new AJPreDefType(Type, FullDataTypeToken)
                 {
                     Const = bConst,
@@ -85,17 +87,22 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.TypeNodes
             else
             {
                 var defNodes = GetDefineForType(FullDataTypeToken.ToListString());
-                return (defNodes.Count() == 1) ? new AJUserDefType(defNodes.First()) : new AJUserDefType(null);
+
+                if (defNodes.Count() == 1) return new AJUserDefType(defNodes.First());
+                else return new AJUnknownType();
             }
         }
 
 
         private void CheckDefineForType()
         {
-            // the predef type exists the define certainly.
-            if (TypeKind == TypeKind.PreDef) return;
+            if (Type == AJDataType.Void) return;
 
-            var typeSymbols = GetDefineForType(FullName);
+            var typeFullName = (TypeKind == TypeKind.PreDef)
+                                      ? GetDefineFullNameForPreDefType(FullName)
+                                      : FullName;
+
+            var typeSymbols = GetDefineForType(typeFullName);
             if (typeSymbols.Count() > 1)    // the type is ambiguity
                 Alarms.Add(AJAlarmFactory.CreateAJ0039(this, typeSymbols.ElementAt(0), typeSymbols.ElementAt(1)));
             else if (typeSymbols.Count() == 0)   // there is no define for type
@@ -107,5 +114,21 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.TypeNodes
         public override AJDataType Type { get; }
         public override uint Size => AJUtilities.SizeOf(this);
 
+
+
+        private string GetDefineFullNameForPreDefType(string predefTypeName)
+        {
+            string result = string.Empty;
+            foreach (var predefType in PreDefTypeList)
+            {
+                if (predefType.ShortName == predefTypeName)
+                {
+                    result = predefType.DefineFullName;
+                    break;
+                }
+            }
+
+            return result;
+        }
     }
 }

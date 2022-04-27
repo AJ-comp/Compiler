@@ -16,9 +16,9 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.StatementNodes
         }
 
         // [0:n] = Ident chin [TerminalNode List]
-        public override SdtsNode Compile(CompileParameter param)
+        protected override SdtsNode CompileLogic(CompileParameter param)
         {
-            base.Compile(param);
+            base.CompileLogic(param);
 
             foreach (var item in Items)
             {

@@ -16,7 +16,7 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.StatementNodes
 
         // format summary
         // IfSt | IfElseSt | WhileSt | ExpSt | ReturnSt
-        public override SdtsNode Compile(CompileParameter param)
+        protected override SdtsNode CompileLogic(CompileParameter param)
         {
             foreach (var item in Items)
             {

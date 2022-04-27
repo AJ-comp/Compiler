@@ -10,7 +10,7 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes
         {
         }
 
-        public override SdtsNode Compile(CompileParameter param)
+        protected override SdtsNode CompileLogic(CompileParameter param)
         {
             // This has to be terminal type understandably
             Token = (Ast as AstTerminal).Token;

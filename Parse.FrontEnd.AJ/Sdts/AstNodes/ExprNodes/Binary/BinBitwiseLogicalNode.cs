@@ -17,17 +17,16 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes.Binary
             Operation = operation;
         }
 
-        public override SdtsNode Compile(CompileParameter param)
+        protected override SdtsNode CompileLogic(CompileParameter param)
         {
-            base.Compile(param);
+            base.CompileLogic(param);
 
             if (Operation == IRBitwiseOperation.LeftShift) LeftShift(LeftNode, RightNode);
             else if (Operation == IRBitwiseOperation.RightShift) RightShift(LeftNode, RightNode);
             else if (Operation == IRBitwiseOperation.BitAnd) BitAnd(LeftNode, RightNode);
             else if (Operation == IRBitwiseOperation.BitOr) BitOr(LeftNode, RightNode);
 
-            if(Type == null) AJAlarmFactory.CreateMCL0023(this, Operation.ToDescription());
-            if (RootNode.IsBuild) DBContext.Instance.Insert(this);
+            if(Type == null) Alarms.Add(AJAlarmFactory.CreateMCL0023(this, Operation.ToDescription()));
 
             return this;
         }
@@ -79,7 +78,7 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes.Binary
         {
             if (source.Type == null || target.Type == null) return null;
 
-            if (Type.IsIntegerType() && target.Type.IsIntegerType())
+            if (source.Type.IsIntegerType() && target.Type.IsIntegerType())
             {
                 Type = target.Type;
                 if (source.ValueState != State.Fixed || target.ValueState != State.Fixed) return this;
@@ -96,7 +95,7 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes.Binary
         {
             if (source.Type == null || target.Type == null) return null;
 
-            if (Type.IsIntegerType() && target.Type.IsIntegerType())
+            if (source.Type.IsIntegerType() && target.Type.IsIntegerType())
             {
                 Type = target.Type;
                 if (source.ValueState != State.Fixed || target.ValueState != State.Fixed) return this;

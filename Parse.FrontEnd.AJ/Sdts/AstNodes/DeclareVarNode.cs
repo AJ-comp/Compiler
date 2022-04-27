@@ -44,9 +44,9 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes
         /// <param name="param"></param>
         /// <returns></returns>
         /**************************************************/
-        public override SdtsNode Compile(CompileParameter param)
+        protected override SdtsNode CompileLogic(CompileParameter param)
         {
-            base.Compile(param);
+            base.CompileLogic(param);
 
             Variable = new VariableAJ(Access.Private, AJType, NameToken, null, BlockLevel, Offset);
             Variable.CreatedNode = this;

@@ -36,6 +36,7 @@ namespace Parse.FrontEnd.Parsers.Collections
     public class CanonicalRelation : Dictionary<int, HashSet<(Symbol, CanonicalState)>>
     {
         private NonTerminal virtualStartSymbol = null;
+        private FirstFollowAnalyzer _ffAnalyzer;
 
         private Dictionary<int, IEnumerable<(NonTerminalConcat, CanonicalState)>> _allPossibleShiftPaths
             = new Dictionary<int, IEnumerable<(NonTerminalConcat, CanonicalState)>>();
@@ -72,8 +73,11 @@ namespace Parse.FrontEnd.Parsers.Collections
         /// <param name="virtualStartSymbol"></param>
         /// <param name="relationData"></param>
         /// <param name="canonicalType"></param>
-        public void Calculate(NonTerminal virtualStartSymbol, RelationData relationData, CanonicalType canonicalType)
+        public void Calculate(NonTerminal virtualStartSymbol, FirstFollowAnalyzer ffAnalyzer, CanonicalType canonicalType)
         {
+            _ffAnalyzer = ffAnalyzer;
+            RelationData relationData = ffAnalyzer.Datas;
+
             if (canonicalType == CanonicalType.C0)
             {
                 ConstructC0(virtualStartSymbol, relationData);
@@ -268,7 +272,7 @@ namespace Parse.FrontEnd.Parsers.Collections
                 {
                     if (newLRItem.MarkSymbol != newMarkSymbol) continue;
 
-                    var alpha2 = Analyzer.FirstTerminalSet(newLRItem.SymbolListAfterMarkSymbol);
+                    var alpha2 = _ffAnalyzer.First(newLRItem.SymbolListAfterMarkSymbol);
                     if (alpha2.Contains(new Epsilon()) || alpha2.Count == 0)
                     {
                         var laTerminalSet = LookAheadTable.ContainsKey((predState.StateNumber, newLRItem))
@@ -469,7 +473,6 @@ namespace Parse.FrontEnd.Parsers.Collections
         public ActionDicSymbolMatched GetCanSeeMatchValue(int ixIndex)
         {
             var result = new ActionDicSymbolMatched();
-            var tempStorage = new Dictionary<Symbol, uint>();
             CanonicalState curStatus = IndexStateDic[ixIndex];
 
             if(curStatus.IsShiftReduceConflict(ReduceParameter))

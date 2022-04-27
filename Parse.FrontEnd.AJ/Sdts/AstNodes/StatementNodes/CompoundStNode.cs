@@ -18,9 +18,9 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.StatementNodes
 
 
         // [0] : StatementNode* [StatList] [epsilon able]
-        public override SdtsNode Compile(CompileParameter param)
+        protected override SdtsNode CompileLogic(CompileParameter param)
         {
-            base.Compile(param);
+            base.CompileLogic(param);
 
             // it needs to clone an param
             _varList.Clear();

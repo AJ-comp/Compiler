@@ -149,6 +149,6 @@
     <value>The stack for ast</value>
   </data>
   <data name="BackTracking" xml:space="preserve">
-    <value>The operation {0} is performed after back-tracking.</value>
+    <value>The operation {1} is performed after back-tracking to {0}.</value>
   </data>
 </root>

@@ -1,4 +1,5 @@
-﻿using Parse.FrontEnd.AJ.Properties;
+﻿using Parse.FrontEnd.AJ.Data;
+using Parse.FrontEnd.AJ.Properties;
 using Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes.LiteralNodes;
 using Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes.Single;
 using Parse.FrontEnd.Ast;
@@ -11,7 +12,7 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes.Binary
         public ExprNode RightNode { get; protected set; }
 
         public bool IsBothLiteral => LeftNode is LiteralNode && RightNode is LiteralNode;
-        public bool IsCanParsing { get; protected set; } = true;
+        public bool IsCanParsing => Alarms.Count > 0 || LeftNode.Alarms.Count > 0 || RightNode.Alarms.Count > 0;
 
 
         protected BinaryExprNode(AstSymbol node) : base(node)
@@ -24,19 +25,9 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes.Binary
 
             if (LeftNode is UseIdentNode)
             {
-                var LeftVar = (LeftNode as UseIdentNode).Var;
+                var useNode = LeftNode as UseIdentNode;
 
-                // case for not declared.
-                if (LeftVar is null)
-                {
-                    LeftNode.Alarms.Add(AJAlarmFactory.CreateMCL0001((LeftNode as UseIdentNode).IdentToken));
-                    IsCanParsing = false;
-                }
-                else if (LeftVar.Type.Const)
-                {
-                    Alarms.Add(AJAlarmFactory.CreateMCL0002(LeftVar.NameToken));
-                    IsCanParsing = false;
-                }
+                if (useNode.Type.Const) Alarms.Add(AJAlarmFactory.CreateMCL0002(useNode.IdentToken));
             }
             else if (LeftNode is DeRefExprNode)
             {
@@ -44,20 +35,19 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes.Binary
             else
             {
                 LeftNode.Alarms.Add(AJAlarmFactory.CreateMCL0004());
-                IsCanParsing = false;
             }
         }
 
 
-        public override SdtsNode Compile(CompileParameter param)
+        protected override SdtsNode CompileLogic(CompileParameter param)
         {
-            base.Compile(param);
+            base.CompileLogic(param);
 
             // ExprNode or TerminalNode
             LeftNode = Items[0].Compile(param) as ExprNode;
             RightNode = Items[1].Compile(param) as ExprNode;
 
-            IsCanParsing = CheckIfCorrectExpression();
+            CheckIfCorrectExpression();
 
             return this;
         }

@@ -115,7 +115,7 @@ namespace Parse.FrontEnd.AJ.Properties {
         }
         
         /// <summary>
-        ///   The {1} type is already delcared in the {0} namespace.과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   This position can come only field, property, variable, function.과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string AJ0032 {
             get {
@@ -196,11 +196,74 @@ namespace Parse.FrontEnd.AJ.Properties {
         }
         
         /// <summary>
-        ///   과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   This type is unknown.과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string AJ0041 {
             get {
                 return ResourceManager.GetString("AJ0041", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   &apos;this&apos; keyword is not used in static function.과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string AJ0042 {
+            get {
+                return ResourceManager.GetString("AJ0042", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   There is no the {1} field in the {0} type.과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string AJ0043 {
+            get {
+                return ResourceManager.GetString("AJ0043", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   The function {1} has not the parameter {0}.과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string AJ0044 {
+            get {
+                return ResourceManager.GetString("AJ0044", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   There is no the member function {1} in the function {0}.과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string AJ0045 {
+            get {
+                return ResourceManager.GetString("AJ0045", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   It can&apos;t no the type after the calculation.과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string AJ0046 {
+            get {
+                return ResourceManager.GetString("AJ0046", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   There is no {0} name in the current context.과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string AJ0047 {
+            get {
+                return ResourceManager.GetString("AJ0047", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   The unexpected error is fired while meaning analysis. {0}과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string AJ9998 {
+            get {
+                return ResourceManager.GetString("AJ9998", resourceCulture);
             }
         }
         

@@ -29,9 +29,9 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.StatementNodes
         public abstract IRExpression To();
         public abstract IRExpression To(IRExpression from);
 
-        public override SdtsNode Compile(CompileParameter param)
+        protected override SdtsNode CompileLogic(CompileParameter param)
         {
-            base.Compile(param);
+            base.CompileLogic(param);
 
             if (IsEmpty) AddEmptyStatementWarning();
 

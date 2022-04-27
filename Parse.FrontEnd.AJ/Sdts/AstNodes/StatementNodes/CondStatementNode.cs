@@ -29,57 +29,43 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.StatementNodes
         /// </summary>
         /// <param name="param"></param>
         /// <returns></returns>
-        public override SdtsNode Compile(CompileParameter param)
+        protected override SdtsNode CompileLogic(CompileParameter param)
         {
-            try
+            base.CompileLogic(param);
+            var node = Items[1].Compile(param) as ExprNode;
+            TrueStatement = Items[2].Compile(param) as StatementNode;
+
+            if (node.Type == null) return this;
+            else if (node.Type.DataType != AJDataType.Bool)
             {
-                base.Compile(param);
-                var node = Items[1].Compile(param) as ExprNode;
-                TrueStatement = Items[2].Compile(param) as StatementNode;
-
-                if (node.Type == null) return this;
-                else if (node.Type.DataType != AJDataType.Bool)
-                {
-                    Alarms.Add(AJAlarmFactory.CreateMCL0025(node.Type.Name, "bool"));
-                    return this;
-                }
-
-                // build only bool type
-                if (node is CompareNode) CompareCondition = node as CompareNode;
-                else if (node is SLogicalNode)
-                {
-                    CompareCondition = (node as SLogicalNode).ToCompareNode();
-                    CompareCondition.Compile(param);  // this node has to build because new node.
-                }
-                else if (node is UseIdentNode)
-                {
-                    CompareCondition = CompareNode.From(node as UseIdentNode);
-                    CompareCondition.Compile(param);  // this node has to build because new node.
-                }
-                else if (node is BoolLiteralNode)
-                {
-                    CompareCondition = CompareNode.From(node as BoolLiteralNode);
-                    CompareCondition.Compile(param);  // this node has to build because new node.
-                }
-                else
-                {
-                    throw new Exception();
-                }
-
-                CheckNeverOperateCode();
-                ClarifyReturn = TrueStatement.ClarifyReturn;
+                Alarms.Add(AJAlarmFactory.CreateMCL0025(node.Type.Name, "bool"));
+                return this;
             }
-            catch (Exception ex)
+
+            // build only bool type
+            if (node is CompareNode) CompareCondition = node as CompareNode;
+            else if (node is SLogicalNode)
             {
-                RootNode.FiredExceptoins.Add(ex);
-
-                Alarms.Add(new MeaningErrInfo(nameof(AlarmCodes.AJ9999),
-                                                                string.Format(AlarmCodes.AJ9999, RootNode.FileFullPath)));
+                CompareCondition = (node as SLogicalNode).ToCompareNode();
+                CompareCondition.Compile(param);  // this node has to build because new node.
             }
-            finally
+            else if (node is UseIdentNode)
             {
-                if (param.Build) DBContext.Instance.Insert(this);
+                CompareCondition = CompareNode.From(node as UseIdentNode);
+                CompareCondition.Compile(param);  // this node has to build because new node.
             }
+            else if (node is BoolLiteralNode)
+            {
+                CompareCondition = CompareNode.From(node as BoolLiteralNode);
+                CompareCondition.Compile(param);  // this node has to build because new node.
+            }
+            else
+            {
+                throw new Exception();
+            }
+
+            CheckNeverOperateCode();
+            ClarifyReturn = TrueStatement.ClarifyReturn;
 
             return this;
         }

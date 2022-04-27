@@ -14,6 +14,7 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes
         public bool IsStatic { get; set; }
         public StatementNode Statement { get; set; }
         public AJType ReturnType { get; set; }
+        public AJType Type => ReturnType;
         public TokenData NameToken { get; set; }
         public int Block { get; set; }
 

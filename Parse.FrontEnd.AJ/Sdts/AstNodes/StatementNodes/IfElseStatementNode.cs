@@ -16,9 +16,9 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.StatementNodes
         // [2] : StatementNode [statement]
         // [3] : TerminalNode [else]
         // [4] : StatementNode [statement]
-        public override SdtsNode Compile(CompileParameter param)
+        protected override SdtsNode CompileLogic(CompileParameter param)
         {
-            base.Compile(param);
+            base.CompileLogic(param);
             FalseStatement = Items.Last().Compile(param) as StatementNode;
 
             ClarifyReturn = TrueStatement.ClarifyReturn & FalseStatement.ClarifyReturn;

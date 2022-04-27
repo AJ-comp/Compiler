@@ -53,6 +53,7 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes
                 var symbolCenter = curNode as ISymbolCenter;
                 foreach (var symbol in symbolCenter.SymbolList)
                 {
+                    if (symbol.NameToken.IsVirtual) continue;
                     if (symbol.NameToken.Input != toFindIdentToken.Input) continue;
 
                     result = symbol;

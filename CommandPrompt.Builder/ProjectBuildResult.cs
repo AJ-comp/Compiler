@@ -133,7 +133,8 @@ namespace CommandPrompt.Builder
                         endColumn = (line == endLine) ? lastErrToken.EndColumn + 2 : lastErrToken.EndColumn + 1;
                     }
 
-                    result += $"{Path.GetFileName(item.FileFullPath)}" +
+                    var relativePath = item.FileFullPath.Substring(ProjectFullPath.Length);
+                    result += $"{relativePath}" +
                                    $":{error.ErrorCode}" +
                                    $":{line}:{column}:{endLine}:{endColumn}" +
                                    $":{error.ErrorType.ToLower()}" +

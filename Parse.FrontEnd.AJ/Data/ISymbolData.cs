@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
 
-namespace Parse.FrontEnd
+namespace Parse.FrontEnd.AJ.Data
 {
     public interface ISymbolData : IData
     {
         TokenData NameToken { get; }
+        AJType Type { get; }
         int Block { get; }
         int Offset { get; }
     }

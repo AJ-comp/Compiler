@@ -28,8 +28,8 @@ namespace CommandPrompt.Builder.Models
         [XmlIgnore] public string ProjectPath { get; private set; }
         [XmlIgnore] public string FileName { get; private set; }
         [XmlIgnore] public string FullPath => Path.Combine(ProjectPath, FileName);
-        [XmlIgnore] public string DebugFolder => $"{ProjectPath}/Debug";
-        [XmlIgnore] public string ExceptFolder => $"{ProjectPath}/Exception";
+        [XmlIgnore] public string DebugFolder => $"{ProjectPath}/bin/Debug";
+        [XmlIgnore] public string ExceptFolder => $"{ProjectPath}/bin/Exception";
 
 
         public ProjectBuildResult Build(AJCompiler compiler, bool printParsingHistory = false)
@@ -37,7 +37,7 @@ namespace CommandPrompt.Builder.Models
             DirectoryHelper.DeleteAllFiles(ExceptFolder);
 
             var result = new ProjectBuildResult(ProjectPath);
-            var sources = Directory.GetFiles(ProjectPath, "*.aj");
+            var sources = Directory.GetFiles(ProjectPath, "*.aj", SearchOption.AllDirectories);
 
             var parsingInfos = AllParsingWithParallel(compiler, sources);
 
@@ -95,6 +95,7 @@ namespace CommandPrompt.Builder.Models
 
         private void WriteException(ProgramNode programNode)
         {
+            if (programNode == null) return;
             Directory.CreateDirectory(ExceptFolder);
 
             string data = string.Empty;

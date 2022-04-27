@@ -16,9 +16,9 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.StatementNodes
 
         // format summary
         // (AddAssign | SubAssign | MulAssign | DivAssign | ...).Optional ;
-        public override SdtsNode Compile(CompileParameter param)
+        protected override SdtsNode CompileLogic(CompileParameter param)
         {
-            base.Compile(param);
+            base.CompileLogic(param);
 
             if (Items.Count > 0)
             {

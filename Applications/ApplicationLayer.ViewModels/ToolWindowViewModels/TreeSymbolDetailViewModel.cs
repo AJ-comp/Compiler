@@ -1,7 +1,7 @@
 ﻿using ApplicationLayer.Models.SolutionPackage;
 using ApplicationLayer.Models.SolutionPackage.MiniCPackage;
 using ApplicationLayer.ViewModels.Messages;
-using Parse.FrontEnd;
+using Parse.FrontEnd.AJ.Data;
 using Parse.FrontEnd.AJ.Sdts.AstNodes;
 using Parse.FrontEnd.AJ.Sdts.Datas;
 using System.Collections.ObjectModel;

@@ -14,7 +14,7 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes
         // format summary
         // [0] : VarNode (AstNonTerminal)
         // [1] : Exp (AstNonTerminal)
-        public override SdtsNode Compile(CompileParameter param)
+        protected override SdtsNode CompileLogic(CompileParameter param)
         {
             throw new NotImplementedException();
         }

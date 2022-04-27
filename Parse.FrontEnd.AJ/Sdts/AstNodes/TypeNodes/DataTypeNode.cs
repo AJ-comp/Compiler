@@ -22,10 +22,10 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.TypeNodes
         }
 
 
-        public override SdtsNode Compile(CompileParameter param)
+        protected override SdtsNode CompileLogic(CompileParameter param)
         {
             FullDataTypeToken.Clear();
-            return base.Compile(param);
+            return base.CompileLogic(param);
         }
 
 

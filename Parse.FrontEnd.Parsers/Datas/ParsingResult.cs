@@ -22,17 +22,26 @@ namespace Parse.FrontEnd.Parsers.Datas
     /// <see cref="https://www.lucidchart.com/documents/edit/c96f0bde-4111-4957-bf65-75b56d8074dc/0_0?beaconFlowId=687BBA49A656D177"/>
     public class ParsingResult : List<ParsingBlock>, ICloneable
     {
+        private Stack<ConflictItem> _conflictStateStack = new Stack<ConflictItem>();
+        private HashSet<ConflictItem> _searchedConflictItems = new HashSet<ConflictItem>();
+
         public LexingData LexingData { get; set; }
-        public Stack<ConflictItem> ConflictStateStack { get; } = new Stack<ConflictItem>();
         public ParsingLogger Logger { get; }
 
 
         public ConflictAction BackTracking()
         {
-            if (ConflictStateStack.Count() == 0) return null;
-            var result = ConflictStateStack.Peek();
+            if (_conflictStateStack.Count() == 0) return null;
+            var result = _conflictStateStack.Peek();
 
-            if (result.Actions.Count() == 1) ConflictStateStack.Pop();
+            if (result.Actions.Count() == 1)
+            {
+                _conflictStateStack.Pop();
+
+                // remove conflict state that bigger than conflict state that poped.
+                // 
+                _searchedConflictItems.RemoveWhere(x => x.AmbiguousBlockIndex > result.AmbiguousBlockIndex);
+            }
             else result.Actions.RemoveAt(0);
 
             // clear units from block + 1 that conflict is fired to end.
@@ -182,6 +191,15 @@ namespace Parse.FrontEnd.Parsers.Datas
         public ParsingResult(IEnumerable<ParsingBlock> parsingBlocks, bool bLogging) : this(bLogging)
         {
             AddRange(parsingBlocks);
+        }
+
+
+        public void AddToConfilctStateStack(ConflictItem item)
+        {
+            if (_searchedConflictItems.Contains(item)) return;
+
+            _conflictStateStack.Push(item);
+            _searchedConflictItems.Add(item);
         }
 
 

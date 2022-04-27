@@ -12,9 +12,9 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes
         {
         }
 
-        public override SdtsNode Compile(CompileParameter param)
+        protected override SdtsNode CompileLogic(CompileParameter param)
         {
-            base.Compile(param);
+            base.CompileLogic(param);
             var terminalNode = Items[0].Compile(param) as TerminalNode;
             if (terminalNode.Token == null) return this;
 

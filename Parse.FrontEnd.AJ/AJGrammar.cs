@@ -34,7 +34,7 @@ namespace Parse.FrontEnd.AJ
         public static Terminal HexNumber { get; } = new Terminal(TokenType.Literal.Digit16, "0[xX][0-9a-fA-F]+", Resource.HexNumber, true, true);
         public static Terminal BinNumber { get; } = new Terminal(TokenType.Literal.Digit16, "0[bB][01]+", Resource.BinNumber, true, true);
         public static Terminal Number { get; } = new Terminal(TokenType.Literal.Digit10, "-?[0-9]+", Resource.DecimalNumber, true, true);
-        public static Terminal RealNumber { get; } = new Terminal(TokenType.Literal.Digit10, @"-?[0-9]+\.[0-9]+", Resource.RealNumber, true, true);
+        public static Terminal RealNumber { get; } = new Terminal(TokenType.Literal.Digit10, @"(-?[0-9]+\.[0-9]+)([Ee][+-]?[0-9]+)?", Resource.RealNumber, true, true);
         public static Terminal BoolTrue { get; } = new Terminal(TokenType.Literal.Bool, "true");
         public static Terminal BoolFalse { get; } = new Terminal(TokenType.Literal.Bool, "false");
         public Terminal LineComment { get; } = new Terminal(TokenType.SpecialToken.Comment, "//.*$", false, true);
@@ -98,7 +98,7 @@ namespace Parse.FrontEnd.AJ
         private NonTerminal structDef = new NonTerminal(nameof(structDef));
         private NonTerminal classDef = new NonTerminal(nameof(classDef));
 
-        private NonTerminal classMemberDcl = new NonTerminal(nameof(classMemberDcl));
+        private NonTerminal memberDcl = new NonTerminal(nameof(memberDcl));
         private NonTerminal memberFieldDef = new NonTerminal(nameof(memberFieldDef));
         private NonTerminal memberPropDef = new NonTerminal(nameof(memberPropDef));
         private NonTerminal memberFuncDef = new NonTerminal(nameof(memberFuncDef));
@@ -144,7 +144,9 @@ namespace Parse.FrontEnd.AJ
         private NonTerminal actualParam = new NonTerminal("actual_param");
         private NonTerminal actualParamList = new NonTerminal("actual_param_list");
         private NonTerminal primaryExp = new NonTerminal("primary_exp");
+        private NonTerminal lowerUnitExp = new NonTerminal(nameof(lowerUnitExp));
         private NonTerminal identChainExp = new NonTerminal(nameof(identChainExp));
+        private NonTerminal symbolChainExp = new NonTerminal(nameof(symbolChainExp));
 
 
 
@@ -194,8 +196,9 @@ namespace Parse.FrontEnd.AJ
         public static MeaningUnit Call { get; } = new MeaningUnit(nameof(Call));
         public static MeaningUnit ActualParam { get; } = new MeaningUnit(nameof(ActualParam), MatchedAction.OffsetPlus);
         public static MeaningUnit DeRef { get; } = new MeaningUnit(nameof(DeRef));
-        public static MeaningUnit UseVar { get; } = new MeaningUnit(nameof(UseVar));
+        public static MeaningUnit UseSymbolChain { get; } = new MeaningUnit(nameof(UseSymbolChain));
         public static MeaningUnit UseMember { get; } = new MeaningUnit(nameof(UseMember));
+        public static MeaningUnit UseIdent { get; } = new MeaningUnit(nameof(UseIdent));
         public static MeaningUnit IntLiteralNode { get; } = new MeaningUnit(nameof(IntLiteralNode));
         public static MeaningUnit DoubleLiteralNode { get; } = new MeaningUnit(nameof(DoubleLiteralNode));
         public static MeaningUnit BoolLiteralNode { get; } = new MeaningUnit(nameof(BoolLiteralNode));
@@ -253,15 +256,16 @@ namespace Parse.FrontEnd.AJ
             this.namespaceMemberDcl.AddItem(structDef | classDef);
 
             // struct and class def
-            this.structDef.AddItem(accesser.Optional() + Struct + defName + OpenCurlyBrace + declareVarSt + CloseCurlyBrace, StructDef);
-            this.classDef.AddItem(accesser.Optional() + Class + defName + OpenCurlyBrace + classMemberDcl.ZeroOrMore() + CloseCurlyBrace, ClassDef);
-            this.classMemberDcl.AddItem(accesser.Optional() + (declareVarSt  | functionDef | creator));
+            this.structDef.AddItem(accesser.Optional() + Struct + defName + OpenCurlyBrace + memberDcl.ZeroOrMore() + CloseCurlyBrace, StructDef);
+            this.classDef.AddItem(accesser.Optional() + Class + defName + OpenCurlyBrace + memberDcl.ZeroOrMore() + CloseCurlyBrace, ClassDef);
+            this.memberDcl.AddItem(accesser.Optional() + (declareVarSt  | functionDef | creator));
             this.functionDef.AddItem(Const.Optional() + typeSpecifier + defName + formalParam + compoundSt, FuncDef);
             this.creator.AddItem(defName + formalParam + compoundSt, Creator);
             this.formalParam.AddItem(OpenParenthesis + formalParamList.Optional() + CloseParenthesis, FormalPara);
             this.formalParamList.AddItem(declaratorVar | formalParamList + Comma + declaratorVar);
 
             this.identChainExp.AddItem(Ident + (Dot + Ident).ZeroOrMore());
+            this.symbolChainExp.AddItem(callExp + (Dot + callExp).ZeroOrMore());
 
             this.typeSpecifier.AddItem(Bool, BoolNode);
             this.typeSpecifier.AddItem(Byte, ByteNode);
@@ -357,7 +361,8 @@ namespace Parse.FrontEnd.AJ
             this.unaryExp.AddItem(Dec + this.unaryExp, PreDecM);
 
             this.callExp.AddItem(postfixExp);
-            this.callExp.AddItem(postfixExp + OpenParenthesis + optActualParam.Optional() + CloseParenthesis, Call);
+            //            this.callExp.AddItem(postfixExp + OpenParenthesis + optActualParam.Optional() + CloseParenthesis, Call);
+            this.callExp.AddItem(Ident + OpenParenthesis + optActualParam.Optional() + CloseParenthesis, Call);
 
             this.postfixExp.AddItem(primaryExp);
             this.postfixExp.AddItem(postfixExp + OpenSquareBrace + expression + CloseSquareBrace, Index);
@@ -365,20 +370,23 @@ namespace Parse.FrontEnd.AJ
             this.postfixExp.AddItem(postfixExp + Dec, PostDecM);
             this.postfixExp.AddItem(Mul + postfixExp, DeRef);
 
+            this.lowerUnitExp.AddItem(primaryExp);
+            // https://lucid.app/lucidchart/8a4c2427-e77c-4dc2-bfc3-a52a25eac791/edit?beaconFlowId=77C0A73F5DE9BDDD&invitationId=inv_d331b441-8997-489c-b184-7c28b3a411b7&page=0_0#
+            this.lowerUnitExp.AddItem(this.OpenParenthesis + this.expression + this.CloseParenthesis);
+            //            this.lowerUnitExp.AddItem(this.OpenParenthesis + this.expression + this.CloseParenthesis + (Dot + symbolChainExp).OneOrMore());
+
+            this.primaryExp.AddItem(This + symbolChainExp, UseMember);
+            this.primaryExp.AddItem(symbolChainExp, UseSymbolChain);
+            this.primaryExp.AddItem(Ident, UseIdent);
+            this.primaryExp.AddItem(this.literalInt);
+            this.primaryExp.AddItem(this.literalDouble);
+            this.primaryExp.AddItem(this.literalBool);
+
             this.optActualParam.AddItem(this.actualParam, ActualParam);
 
             this.actualParam.AddItem(this.actualParamList);
             this.actualParamList.AddItem(this.logicalOrExp);
             this.actualParamList.AddItem(this.actualParamList + this.Comma + this.logicalOrExp);
-
-            this.primaryExp.AddItem(This + (Dot + Ident).ZeroOrMore(), UseMember);
-            this.primaryExp.AddItem(identChainExp, UseVar);
-            this.primaryExp.AddItem(this.literalInt);
-            this.primaryExp.AddItem(this.literalDouble);
-            this.primaryExp.AddItem(this.literalBool);
-
-            // https://lucid.app/lucidchart/8a4c2427-e77c-4dc2-bfc3-a52a25eac791/edit?beaconFlowId=77C0A73F5DE9BDDD&invitationId=inv_d331b441-8997-489c-b184-7c28b3a411b7&page=0_0#
-            this.primaryExp.AddItem(this.OpenParenthesis + this.expression + this.CloseParenthesis);
 
 
             this.Optimization();

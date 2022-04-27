@@ -12,12 +12,11 @@ namespace Parse.FrontEnd.Parsers.Datas
     /// <see cref="https://www.lucidchart.com/documents/edit/c96f0bde-4111-4957-bf65-75b56d8074dc/0_0?beaconFlowId=687BBA49A656D177"/>
 
     [DebuggerDisplay("{DebuggerDisplay, nq}")]
-    public class ParsingUnit
+    public class ParsingUnit : ICloneable<ParsingUnit>
     {
 
         public ParsingStackUnit BeforeStack { get; internal set; } = new ParsingStackUnit();
         public ParsingStackUnit AfterStack { get; set; } = new ParsingStackUnit();
-        public Stack<ConflictItem> ConflictStateStack { get; } = new Stack<ConflictItem>();
 
 
         public ActionData Action { get; internal set; } = new ActionData();
@@ -96,6 +95,23 @@ namespace Parse.FrontEnd.Parsers.Datas
             }
         }
 
+        public ParsingUnit Clone()
+        {
+            ParsingUnit result = new ParsingUnit();
+
+            result.BeforeStack = BeforeStack.Clone();
+            result.AfterStack = AfterStack.Clone();
+
+            result.Action = Action;
+            result.InputValue = InputValue;     // TokenData doesn't support deep copy yet.
+            result.PossibleTerminalSet = PossibleTerminalSet;   // This member also doesn't support deept copy.
+
+            result.IsError = IsError;
+            result.ErrorMessage = ErrorMessage;
+            result.ErrorPosition = ErrorPosition;
+
+            return result;
+        }
 
         private string DebuggerDisplay
         {

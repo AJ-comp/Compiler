@@ -49,7 +49,10 @@ namespace Parse.FrontEnd.Parsers.LR
                 {
                     unitParsingResult.Item2.AmbiguousBlockIndex = indexToParsing;
                     unitParsingResult.Item2.UnitIndexInBlock = blockToParsing.Units.Count() - 1;
-                    parsingResult.ConflictStateStack.Push(unitParsingResult.Item2);
+                    parsingResult.AddToConfilctStateStack(unitParsingResult.Item2);
+
+                    blockToParsing.CopyHistoryItem();
+                    blockToParsing.AddEtcMessageToLastHistory("conflict is fired!");
                 }
 
                 if (result == SuccessedKind.ReduceOrGoto)

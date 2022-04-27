@@ -19,9 +19,9 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes.Single
             Operation = operation;
         }
 
-        public override SdtsNode Compile(CompileParameter param)
+        protected override SdtsNode CompileLogic(CompileParameter param)
         {
-            base.Compile(param);
+            base.CompileLogic(param);
 
             try
             {

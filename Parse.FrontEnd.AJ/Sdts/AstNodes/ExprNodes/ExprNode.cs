@@ -1,8 +1,10 @@
 ﻿using AJ.Common;
 using Parse.FrontEnd.AJ.Data;
+using Parse.FrontEnd.AJ.Properties;
 using Parse.FrontEnd.Ast;
 using Parse.MiddleEnd.IR.Expressions;
 using Parse.Types;
+using System.Collections.Generic;
 
 namespace Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes
 {
@@ -33,6 +35,15 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes
             return source;
         }
 
+        protected void AddAlarmUnknownType(TokenData token)
+        {
+            Alarms.Add(new MeaningErrInfo(token, nameof(AlarmCodes.AJ0041), AlarmCodes.AJ0041));
+        }
+
+        protected void AddAlarmUnknownType(IEnumerable<TokenData> tokens)
+        {
+            Alarms.Add(new MeaningErrInfo(tokens, nameof(AlarmCodes.AJ0041), AlarmCodes.AJ0041));
+        }
 
         private ExprNode BoolAssign(ExprNode source, ExprNode target)
         {

@@ -21,9 +21,9 @@ namespace Parse.FrontEnd
     [DebuggerDisplay("{" + nameof(GetDebuggerDisplay) + "(),nq}")]
     public class CompileParameter : ICloneable<CompileParameter>
     {
-        public ISymbolData ParentData { get; set; }
         public string FileFullPath { get; set; }
         public SdtsNode RootNode { get; set; }
+        public SdtsNode ParentNode { get; set; }
         public int BlockLevel { get; set; } = 0;
         public int Offset { get; set; } = 0;
         public bool Build { get; set; }

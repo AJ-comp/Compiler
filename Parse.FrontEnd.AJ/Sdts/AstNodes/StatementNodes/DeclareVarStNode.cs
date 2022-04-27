@@ -18,9 +18,9 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.StatementNodes
         /// </summary>
         /// <param name="param"></param>
         /// <returns></returns>
-        public override SdtsNode Compile(CompileParameter param)
+        protected override SdtsNode CompileLogic(CompileParameter param)
         {
-            base.Compile(param);
+            base.CompileLogic(param);
             var dclVar = Items[0].Compile(param) as DeclareVarNode;
 
             _varList.Add(dclVar.Variable);

@@ -12,19 +12,22 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.TypeNodes
         {
         }
 
-        public override AJDataType Type => throw new NotImplementedException();
+        public override AJDataType DefType => throw new NotImplementedException();
         public override uint Size => throw new NotImplementedException();
-
-
-        public override SdtsNode Compile(CompileParameter param)
+        public override IEnumerable<VariableAJ> AllFields
         {
-            base.Compile(param);
+            get
+            {
+                List<VariableAJ> result = new List<VariableAJ>();
 
-            throw new NotImplementedException();
+                return result;
+            }
         }
 
-        protected override bool IsDuplicated(TokenData tokenToAdd)
+        protected override SdtsNode CompileLogic(CompileParameter param)
         {
+            base.CompileLogic(param);
+
             throw new NotImplementedException();
         }
     }

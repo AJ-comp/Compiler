@@ -40,6 +40,7 @@ namespace Parse.FrontEnd.Parsers.LR
 
                 return false;
             }
+            /*
             // invalid input symbol, can't shift (error handler exists)
             else if (IxMetrix.MatchedValueSet[inputValue.Kind].DefaultDest is IErrorHandlable)
             {
@@ -49,6 +50,7 @@ namespace Parse.FrontEnd.Parsers.LR
 
                 return false;
             }
+            */
 
             var matchedValue = IxMetrix.MatchedValueSet[inputValue.Kind];
 
@@ -79,7 +81,7 @@ namespace Parse.FrontEnd.Parsers.LR
             LRParsingTable parsingTable = ParsingTable as LRParsingTable;
             var IxMetrix = parsingTable[(int)secondData];
 
-            return (IxMetrix.MatchedValueSet.ContainsKey(seenSingleNT.ToNonTerminal));
+            return IxMetrix.MatchedValueSet.ContainsKey(seenSingleNT.ToNonTerminal);
         }
 
         /// <summary>

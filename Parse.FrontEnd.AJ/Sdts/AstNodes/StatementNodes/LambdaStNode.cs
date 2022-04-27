@@ -14,7 +14,7 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.StatementNodes
         {
         }
 
-        public override SdtsNode Compile(CompileParameter param)
+        protected override SdtsNode CompileLogic(CompileParameter param)
         {
             throw new NotImplementedException();
         }

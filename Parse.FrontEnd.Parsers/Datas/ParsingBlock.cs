@@ -160,6 +160,30 @@ namespace Parse.FrontEnd.Parsers.Datas
         }
 
 
+        public void AddEtcMessageToLastHistory(string message)
+        {
+            if (_history == null) return;
+
+            _history.Last().EtcMessage = message;
+        }
+
+
+        /// <summary>
+        /// Deep copy the unit of history.
+        /// <remarks>
+        /// If original unit referenced by the unit of history is changed through calculation after back-tracking
+        /// the unit of history also change because the unit of history is referenced original unit.
+        /// Therefore this function can be used to fix the unit of history not to change even though the original unit changes.
+        /// </remarks>
+        /// </summary>
+        public void CopyHistoryItem()
+        {
+            if (_history == null) return;
+
+            _history.Last().UnitCopy();
+        }
+
+
         /// <summary>
         /// This function starts transaction.
         /// </summary>

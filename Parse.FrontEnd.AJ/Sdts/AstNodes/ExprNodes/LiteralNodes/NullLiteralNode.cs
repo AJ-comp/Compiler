@@ -15,7 +15,7 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes.LiteralNodes
             Type = new AJPreDefType(AJDataType.Null);
         }
 
-        public override SdtsNode Compile(CompileParameter param)
+        protected override SdtsNode CompileLogic(CompileParameter param)
         {
             var node = Items[0].Compile(param) as TerminalNode;
             Token = node.Token;

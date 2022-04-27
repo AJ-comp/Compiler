@@ -44,6 +44,7 @@ namespace Parse.FrontEnd.Tokenize
             return result;
         }
 
-        public override string ToString() => string.Format("{0}, {1}, {2}, {3}", this.Key, this.Pattern, this.IsWord.ToString().ToLower(), this.Operator.ToString().ToLower());
+        public override string ToString()
+            => $"{this.Key}, {this.Pattern}, {this.IsWord.ToString().ToLower()}, {this.Operator.ToString().ToLower()}";
     }
 }

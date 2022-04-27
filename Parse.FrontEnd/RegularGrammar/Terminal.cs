@@ -16,11 +16,15 @@ namespace Parse.FrontEnd.RegularGrammar
         public bool IsOper => (TokenType is ScopeComment || 
                                          TokenType is Operator || 
                                          TokenType is Delimiter);
+
+        public bool IsNumber => TokenType is Digit10;
+
         public string RegexExpression
         {
             get
             {
                 return (IsOper) ? RegexGenerator.GetOperatorRegex(Value)
+                   : (IsNumber) ? Value
                                       : RegexGenerator.GetWordRegex(Value);
             }
         }

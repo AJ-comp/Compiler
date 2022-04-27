@@ -397,16 +397,6 @@ namespace Parse.FrontEnd.AJ
         }
 
 
-        public static MeaningErrInfo CreateAJ0032(NamespaceNode namespaceNode, TokenData typeToken)
-        {
-            var errMsg = string.Format(AlarmCodes.AJ0032,
-                                                     namespaceNode.FullName,
-                                                     typeToken.Input);
-
-            return new MeaningErrInfo(typeToken, nameof(AlarmCodes.AJ0032), errMsg);
-        }
-
-
         public static MeaningErrInfo CreateAJ0039(TypeDeclareNode useType, TypeDefNode type1, TypeDefNode type2)
         {
             var errMsg = string.Format(AlarmCodes.AJ0039, type1.FullName, type2.FullName);

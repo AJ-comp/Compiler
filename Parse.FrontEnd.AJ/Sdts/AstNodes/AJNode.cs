@@ -1,4 +1,5 @@
-﻿using Parse.FrontEnd.Ast;
+﻿using Parse.FrontEnd.AJ.Data;
+using Parse.FrontEnd.Ast;
 using System;
 using System.Collections.Generic;
 
@@ -9,11 +10,28 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes
         public ProgramNode RootNode { get; private set; }
         public int BlockLevel { get; private set; } = 0;
         public int Offset { get; private set; } = 0;
-
         public bool StubCode { get; protected set; } = false;
 
         public string FileFullPath => RootNode.FullPath;
 
+        public IEnumerable<PreDefTypeData> PreDefTypeList
+        {
+            get
+            {
+                List<PreDefTypeData> result = new List<PreDefTypeData>();
+
+                result.Add(new PreDefTypeData("bool", "System.Boolean", 1));
+                result.Add(new PreDefTypeData("byte", "System.Byte", 1));
+                result.Add(new PreDefTypeData("sbyte", "System.SByte", 1));
+                result.Add(new PreDefTypeData("short", "System.Int16", 2));
+                result.Add(new PreDefTypeData("ushort", "System.UInt16", 2));
+                result.Add(new PreDefTypeData("int", "System.Int32", 4));
+                result.Add(new PreDefTypeData("uint", "System.UInt32", 4));
+                result.Add(new PreDefTypeData("double", "System.Double", 8));
+
+                return result;
+            }
+        }
 
         public int ParentBlockLevel
         {
@@ -54,7 +72,27 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes
             Ast = node;
         }
 
+
         public override SdtsNode Compile(CompileParameter param)
+        {
+            try
+            {
+                return CompileLogic(param);
+            }
+            catch (Exception ex)
+            {
+                RootNode.FiredExceptoins.Add(ex);
+                AddUnExpectedError(ex.Message);
+
+                return this;
+            }
+            finally
+            {
+                if (param.Build) DBContext.Instance.Insert(this);
+            }
+        }
+
+        protected override SdtsNode CompileLogic(CompileParameter param)
         {
             if (param != null)
             {

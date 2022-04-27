@@ -79,11 +79,11 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes
         // [0:n] : Using? (AstNonTerminal)
         // [n+1:1] : Namespace (AstNonTerminal)
         // [n+2:y] : (ClassDefNode | StructDefNode | EnumNode)*  (NonTerminal)   <br/>
-        public override SdtsNode Compile(CompileParameter param)
+        protected override SdtsNode CompileLogic(CompileParameter param)
         {
             param.RootNode = this;
 
-            base.Compile(param);
+            base.CompileLogic(param);
             IsBuild = param.Build;
             FullPath = param.FileFullPath;
 

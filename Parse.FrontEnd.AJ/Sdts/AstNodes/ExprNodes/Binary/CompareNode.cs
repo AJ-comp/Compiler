@@ -18,9 +18,9 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes.Binary
             Operation = operation;
         }
 
-        public override SdtsNode Compile(CompileParameter param)
+        protected override SdtsNode CompileLogic(CompileParameter param)
         {
-            base.Compile(param);
+            base.CompileLogic(param);
 
             if (!IsCanParsing) return this;
 
@@ -31,7 +31,7 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes.Binary
             else if (Operation == IRCompareOperation.LT) LessThan(LeftNode, RightNode);
             else if (Operation == IRCompareOperation.LE) LessEqual(LeftNode, RightNode);
 
-            if(Type == null) AJAlarmFactory.CreateMCL0024(LeftNode.Type.FullName, RightNode.Type.FullName);
+            if(Type == null) Alarms.Add(AJAlarmFactory.CreateMCL0024(LeftNode.Type.FullName, RightNode.Type.FullName));
 
             if (RootNode.IsBuild) DBContext.Instance.Insert(this);
 

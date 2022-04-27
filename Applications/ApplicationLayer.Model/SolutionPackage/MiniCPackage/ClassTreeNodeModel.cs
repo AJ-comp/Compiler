@@ -1,4 +1,5 @@
 ﻿using ApplicationLayer.Common;
+using Parse.FrontEnd.AJ.Sdts.AstNodes.TypeNodes;
 using Parse.FrontEnd.AJ.Sdts.Datas;
 using System;
 using System.Collections.Generic;
@@ -24,12 +25,12 @@ namespace ApplicationLayer.Models.SolutionPackage.MiniCPackage
         }
 
 
-        public ClassTreeNodeModel(ClassDefData classData)
+        public ClassTreeNodeModel(ClassDefNode classData)
         {
             _classData = classData;
         }
 
 
-        private ClassDefData _classData;
+        private ClassDefNode _classData;
     }
 }

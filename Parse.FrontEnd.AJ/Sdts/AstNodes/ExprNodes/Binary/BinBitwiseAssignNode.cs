@@ -13,9 +13,9 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes.Binary
         {
         }
 
-        public override SdtsNode Compile(CompileParameter param)
+        protected override SdtsNode CompileLogic(CompileParameter param)
         {
-            base.Compile(param);
+            base.CompileLogic(param);
             CheckAssignable();
 
             if (!IsCanParsing) return this;
@@ -27,7 +27,7 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes.Binary
 
             Assign(LeftNode, RightNode);
 
-            if(Type == null) AJAlarmFactory.CreateMCL0023(this, Operation.ToDescription());
+            if(Type == null) Alarms.Add(AJAlarmFactory.CreateMCL0023(this, Operation.ToDescription()));
             if (RootNode.IsBuild) DBContext.Instance.Insert(this);
 
             return this;

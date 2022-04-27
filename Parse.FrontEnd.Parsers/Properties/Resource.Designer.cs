@@ -70,7 +70,7 @@ namespace Parse.FrontEnd.Parsers.Properties {
         }
         
         /// <summary>
-        ///   The operation {0} is performed after back-tracking.과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   The operation {1} is performed after back-tracking to {0}.과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string BackTracking {
             get {

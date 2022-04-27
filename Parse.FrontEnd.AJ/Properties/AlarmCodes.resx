@@ -194,7 +194,7 @@
     <value>Can't find {0} type or the namespace name. Check if there is the using directive or assembly reference.</value>
   </data>
   <data name="AJ0032" xml:space="preserve">
-    <value>The {1} type is already delcared in the {0} namespace.</value>
+    <value>This position can come only field, property, variable, function.</value>
   </data>
   <data name="AJ0033" xml:space="preserve">
     <value>There is an empty sentence. Is your intention correct?</value>
@@ -224,6 +224,27 @@
     <value>The unknown exception is fired while compile in {0} file. Please see the except file in Exception folder</value>
   </data>
   <data name="AJ0041" xml:space="preserve">
-    <value></value>
+    <value>This type is unknown.</value>
+  </data>
+  <data name="AJ0042" xml:space="preserve">
+    <value>'this' keyword is not used in static function.</value>
+  </data>
+  <data name="AJ0043" xml:space="preserve">
+    <value>There is no the {1} field in the {0} type.</value>
+  </data>
+  <data name="AJ0044" xml:space="preserve">
+    <value>The function {1} has not the parameter {0}.</value>
+  </data>
+  <data name="AJ0045" xml:space="preserve">
+    <value>There is no the member function {1} in the function {0}.</value>
+  </data>
+  <data name="AJ0046" xml:space="preserve">
+    <value>It can't no the type after the calculation.</value>
+  </data>
+  <data name="AJ9998" xml:space="preserve">
+    <value>The unexpected error is fired while meaning analysis. {0}</value>
+  </data>
+  <data name="AJ0047" xml:space="preserve">
+    <value>There is no {0} name in the current context.</value>
   </data>
 </root>

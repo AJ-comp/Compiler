@@ -1,54 +1,54 @@
 ﻿using Parse.FrontEnd.AJ.Data;
 using Parse.FrontEnd.AJ.Sdts.AstNodes.StatementNodes;
-using Parse.FrontEnd.AJ.Sdts.Datas;
 using Parse.FrontEnd.Ast;
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
+using System.Text;
 
 namespace Parse.FrontEnd.AJ.Sdts.AstNodes.TypeNodes
 {
-    public partial class ClassDefNode
+    [DebuggerDisplay("{" + nameof(GetDebuggerDisplay) + "(),nq}")]
+    public class StructDefNode : TypeDefNode
     {
-        public override string FullName
+        public StructDefNode(AstSymbol node) : base(node)
+        {
+        }
+
+        public override AJDataType DefType => AJDataType.Struct;
+        public override uint Size
         {
             get
             {
-                // if inner type def is support then this logic has to be changed.
-                return RootNode.Namespace.FullName + "." + Name;
+                foreach (var predefType in PreDefTypeList)
+                {
+                    if (FullName == predefType.DefineFullName) return predefType.Size;
+                }
+
+                uint size = 0;
+                foreach (var member in _fields)
+                    size += member.Type.Size;
+
+                return size;
             }
         }
-
-        public ClassDefNode(AstSymbol node) : base(node)
-        {
-        }
+        public override IEnumerable<VariableAJ> AllFields => throw new NotImplementedException();
 
 
-        /**************************************************/
-        /// <summary>
-        /// <para>Start semantic analysis for class.</para>
-        /// <para>class에 대한 의미분석을 시작합니다.</para>
-        /// </summary>
-        /// <param name="param"></param>
-        /// <returns></returns>
-        /// <remarks>
-        /// format summary                                              <br/>
-        /// [0] : accesser?                                                 <br/>
-        /// [1] : Ident                                                        <br/>
-        /// [2:n] : (accesser? (field | property | func))*       <br/>
-        /// </remarks>
-        /**************************************************/
+        // [0] : Ident [TerminalNode]
+        // [1] : declaration
         protected override SdtsNode CompileLogic(CompileParameter param)
         {
             base.CompileLogic(param);
 
-            if (param.Option == CompileOption.CheckAmbiguous) CheckForDuplication(param);
-            else if (param.Option == CompileOption.CheckTypeDefine) CompileForTypeDefine(param);
+            if (param.Option == CompileOption.CheckTypeDefine) CompileForTypeDefine(param);
             else if (param.Option == CompileOption.CheckMemberDeclaration) CompileForMember(param);
             else if (param.Option == CompileOption.Logic) CompileForLogic(param);
 
-            //            DBContext.Instance.Insert(this);
-
             return this;
         }
+
 
         private void CompileForTypeDefine(CompileParameter param)
         {
@@ -63,6 +63,7 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.TypeNodes
             var nameNode = Items[_memberOffset++].Compile(param) as DefNameNode;
             NameToken = nameNode.Token;
         }
+
 
         private void CompileForMember(CompileParameter param)
         {
@@ -97,15 +98,10 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.TypeNodes
         }
 
 
-        private void CheckForDuplication(CompileParameter param)
-        {
-            foreach(var defType in RootNode.DefTypes)
-            {
-
-            }
-        }
-
 
         private int _memberOffset = 0;
+
+        private string GetDebuggerDisplay()
+            => $"{AccessType} struct {Name} (field: {_fields.Count()}, func: {AllFuncs.Count()}) [{GetType().Name}]";
     }
 }

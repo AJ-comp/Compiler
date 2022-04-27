@@ -1,6 +1,7 @@
 ﻿using Parse.FrontEnd.AJ.Properties;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Parse.FrontEnd.AJ.Sdts.AstNodes
@@ -16,6 +17,20 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes
         {
             Alarms.Add(AJAlarmFactory.CreateMCL0001(varTokenToCheck));
             RootNode.UnLinkedSymbols.Add(this);
+        }
+
+        public void AddUnExpectedError(string message)
+        {
+            Alarms.Add(new MeaningErrInfo(AllTokens,
+                                                            nameof(AlarmCodes.AJ9998),
+                                                            string.Format(AlarmCodes.AJ9998, GetType().Name)));
+        }
+
+        public void AddAlarmNoSymbolInContext()
+        {
+            Alarms.Add(new MeaningErrInfo(AllTokens,
+                                                            nameof(AlarmCodes.AJ0047),
+                                                            string.Format(AlarmCodes.AJ0047, AllTokens.Last().Input)));
         }
 
         public bool CheckIsDefinedSymbol(TokenData token)

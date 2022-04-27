@@ -29,6 +29,28 @@ namespace Parse.FrontEnd.Parsers.Datas
         {
             return $"State: {State}, BlockIndex: {AmbiguousBlockIndex}, UnitIndex: {UnitIndexInBlock}, ActionCount: {Actions.Count}";
         }
+
+        public override bool Equals(object obj)
+        {
+            return obj is ConflictItem item &&
+                   State == item.State &&
+                   AmbiguousBlockIndex == item.AmbiguousBlockIndex;
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(State, AmbiguousBlockIndex);
+        }
+
+        public static bool operator ==(ConflictItem left, ConflictItem right)
+        {
+            return EqualityComparer<ConflictItem>.Default.Equals(left, right);
+        }
+
+        public static bool operator !=(ConflictItem left, ConflictItem right)
+        {
+            return !(left == right);
+        }
     }
 
 

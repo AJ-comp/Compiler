@@ -1,6 +1,6 @@
-﻿using Parse.FrontEnd.Parsers;
+﻿using Parse.FrontEnd;
+using Parse.FrontEnd.Parsers;
 using Parse.FrontEnd.Parsers.Collections;
-using Parse.FrontEnd.Parsers.RelationAnalyzers;
 using Parse.FrontEnd.RegularGrammar;
 using System;
 using System.Collections.Generic;
@@ -9,7 +9,7 @@ namespace ParsingLibrary.Parsers.RelationAnalyzers
 {
     internal class RelationAnalyzer
     {
-        public FollowAnalyzer FollowAnalyzer { get; } = new FollowAnalyzer();
+        public FirstFollowAnalyzer FFAnalyzer { get; } = new FirstFollowAnalyzer();
         public ParsingDic ParsingDic { get; } = new ParsingDic();
 
         public RelationAnalyzer()
@@ -18,11 +18,11 @@ namespace ParsingLibrary.Parsers.RelationAnalyzers
 
         private void SingleFormulaAnalysis(NonTerminalSingle singleNT, NonTerminal item)
         {
-            foreach (var terminal in Analyzer.FirstTerminalSet(singleNT))
+            foreach (var terminal in FFAnalyzer.FirstSet(singleNT))
             {
                 if (terminal == new Epsilon())
                 {
-                    foreach (var followTerminal in this.FollowAnalyzer.Datas[item])
+                    foreach (var followTerminal in this.FFAnalyzer.Datas[item])
                     {
                         var key = new Tuple<Terminal, NonTerminal>(followTerminal, item);
 
@@ -42,7 +42,7 @@ namespace ParsingLibrary.Parsers.RelationAnalyzers
 
         public void Analysis(HashSet<NonTerminal> nonTerminals)
         {
-            this.FollowAnalyzer.CalculateAllFollow(nonTerminals);
+            this.FFAnalyzer.CalculateAllFollow(nonTerminals);
 
             foreach (var item in nonTerminals)
             {

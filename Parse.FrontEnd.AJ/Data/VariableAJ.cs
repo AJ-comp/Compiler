@@ -169,7 +169,16 @@ namespace Parse.FrontEnd.AJ.Data
 
         private List<TokenData> _levelTokens = new List<TokenData>();
 
-        private string DebuggerDisplay => $"{AccessType} {Type.GetDebuggerDisplay()} {Name} (Block: {Block} Offset: {Offset})";
+        private string DebuggerDisplay
+        {
+            get
+            {
+                var type = (Type == null) ? "?" : Type.GetDebuggerDisplay();
+                string result = $"{AccessType} {type} {Name} (Block: {Block} Offset: {Offset})";
+
+                return result;
+            }
+        }
     }
 
 

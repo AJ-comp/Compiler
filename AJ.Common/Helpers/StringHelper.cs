@@ -96,12 +96,18 @@ namespace AJ.Common.Helpers
         }
 
 
-        public static bool LastMatch(this string origin, string target)
+        public static bool LastMatch(this string origin, string target, string separator = ".")
         {
             var index = origin.LastIndexOf(target);
             if (index == -1) return false;
 
-            return index + target.Length == origin.Length;
+            // ex) origin: System.Linq.Generic
+            // target: Generic
+            // => origin[index - 1] == '.' so true
+            // target: eneric
+            // => origin[index - 1] == 'G' so false
+            return (index == 0) ? index + target.Length == origin.Length
+                                         : index + target.Length == origin.Length && origin[index - 1] == '.';
         }
 
 

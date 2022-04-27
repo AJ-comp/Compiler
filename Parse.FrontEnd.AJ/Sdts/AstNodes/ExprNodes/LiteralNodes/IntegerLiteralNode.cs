@@ -21,41 +21,31 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes.LiteralNodes
             Type = new AJPreDefType(AJDataType.Int);
         }
 
-        public override SdtsNode Compile(CompileParameter param)
+        protected override SdtsNode CompileLogic(CompileParameter param)
         {
-            base.Compile(param);
+            base.CompileLogic(param);
 
-            try
-            {
-                double value = 0;
-                var node = Items[0].Compile(param) as TerminalNode;
-                Token = node.Token;
+            double value = 0;
+            var node = Items[0].Compile(param) as TerminalNode;
+            Token = node.Token;
 
-                if (Token.Kind.TokenType == AJGrammar.HexNumber.TokenType)
-                    value = System.Convert.ToInt32(Token.Input, 16);
-                else if (Token.Kind.TokenType == AJGrammar.BinNumber.TokenType)
-                    value = System.Convert.ToInt32(Token.Input, 2);
-                else value = System.Convert.ToInt32(Token.Input);
+            if (Token.Kind.TokenType == AJGrammar.HexNumber.TokenType)
+                value = System.Convert.ToInt32(Token.Input, 16);
+            else if (Token.Kind.TokenType == AJGrammar.BinNumber.TokenType)
+                value = System.Convert.ToInt64(Token.Input, 2);
+            else value = System.Convert.ToInt64(Token.Input);
 
-                if (byte.MinValue <= value && value <= byte.MaxValue) AllocType(AJDataType.Bool, false);
-                else if (sbyte.MinValue <= value && value <= sbyte.MaxValue) AllocType(AJDataType.Bool, true);
-                else if (short.MinValue <= value && value <= short.MaxValue) AllocType(AJDataType.Short, true);
-                else if (ushort.MinValue <= value && value <= ushort.MaxValue) AllocType(AJDataType.Short, false);
-                else if (int.MinValue <= value && value <= int.MaxValue) AllocType(AJDataType.Int, true);
-                else if (uint.MinValue <= value && value <= uint.MaxValue) AllocType(AJDataType.Short, false);
-                else AllocType(AJDataType.Double, true);
+            //                if (byte.MinValue <= value && value <= byte.MaxValue) AllocType(AJDataType.Bool, false);
+            if (sbyte.MinValue <= value && value <= sbyte.MaxValue) AllocType(AJDataType.Byte, true);
+            else if (byte.MinValue <= value && value <= byte.MaxValue) AllocType(AJDataType.Byte, false);
+            else if (short.MinValue <= value && value <= short.MaxValue) AllocType(AJDataType.Short, true);
+            else if (ushort.MinValue <= value && value <= ushort.MaxValue) AllocType(AJDataType.Short, false);
+            else if (int.MinValue <= value && value <= int.MaxValue) AllocType(AJDataType.Int, true);
+            else if (uint.MinValue <= value && value <= uint.MaxValue) AllocType(AJDataType.Int, false);
+            else AllocType(AJDataType.Double, true);
 
-                Value = value;
-                ValueState = State.Fixed;
-            }
-            catch(Exception)
-            {
-
-            }
-            finally
-            {
-                if (RootNode.IsBuild) DBContext.Instance.Insert(this);
-            }
+            Value = value;
+            ValueState = State.Fixed;
 
             return this;
         }

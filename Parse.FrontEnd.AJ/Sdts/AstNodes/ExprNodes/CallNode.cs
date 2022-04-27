@@ -1,4 +1,6 @@
-﻿using Parse.FrontEnd.AJ.Data;
+﻿using Parse.Extensions;
+using Parse.FrontEnd.AJ.Data;
+using Parse.FrontEnd.AJ.Properties;
 using Parse.FrontEnd.AJ.Sdts.AstNodes.TypeNodes;
 using Parse.FrontEnd.Ast;
 using Parse.MiddleEnd.IR.Expressions;
@@ -14,6 +16,7 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes
         public FuncDefNode Func { get; private set; }
 
         public TokenDataList MethodNameTokens { get; private set; } = new TokenDataList();
+        public TokenData MethodNameToken { get; private set; }
         public List<ExprNode> Params { get; } = new List<ExprNode>();
 
         public CallNode(AstSymbol node) : base(node)
@@ -23,16 +26,17 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes
 
 
 
-        // [0] : Ident [UseVarNode]
+        // [0] : Ident [UseIdentNode]
         // [1] : ActualParam? (AstNonTerminal)
-        public override SdtsNode Compile(CompileParameter param)
+        protected override SdtsNode CompileLogic(CompileParameter param)
         {
-            base.Compile(param);
-            Params.Clear();
+            base.CompileLogic(param);
+
+            var typeDefNode = param.ParentNode as TypeDefNode;
 
             int offset = 0;
-            var functionName = Items[offset++].Compile(param) as UseIdentNode;
-            MethodNameTokens = functionName.AllIdentTokensWithoutThis;
+            var functionName = Items[offset++].Compile(param) as TerminalNode;
+            MethodNameToken = functionName.Token;
 
             while (Items.Count > offset)
             {
@@ -40,26 +44,8 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes
                 Params.AddRange(result.ParamNodeList);
             }
 
-            if (!CheckIsDefinedSymbolChain(MethodNameTokens)) return this;
-
-            /*
-            // if 'this' keyword is declared that means to use the member.
-            if (functionName.ThisExpression)
-            {
-                var classDefNode = GetParent(typeof(ClassDefNode)) as ClassDefNode;
-                classDefNode.GetSymbol()
-
-            }
-            */
-
-            // get func list of this class
-            var classDefNode = GetParent(typeof(ClassDefNode)) as ClassDefNode;
-            var matchedList = classDefNode.FuncList.Where(x => x.Name == functionName.IdentToken.Input);
-
-            // if static function is not then insert this 
-
-            if (matchedList.Count() == 0) Alarms.Add(AJAlarmFactory.CreateMCL0014(MethodNameTokens.Last()));
-//            else CheckParams(matchedList);
+            Func = GetFuncDefForCallInfo(typeDefNode);
+            Type = Func?.ReturnType;
 
             return this;
         }
@@ -76,37 +62,6 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes
             }
 
             return result;
-        }
-
-
-        private IEnumerable<FuncDefNode> GetParamAllMatchedList(IEnumerable<FuncDefNode> funcListToFind)
-        {
-            List<FuncDefNode> result = new List<FuncDefNode>();
-
-            foreach (var func in funcListToFind)
-            {
-                if (GetMatchedTypeCount(func.ParamVarList) != func.ParamVarList.Count) continue;
-
-                result.Add(func);
-            }
-
-            return result;
-        }
-
-
-        private Tuple<FuncDefNode, int> GetTopCandidate(IEnumerable<FuncDefNode> funcListToFind)
-        {
-            FuncDefNode result = null;
-            int topMatchedIndex = -1;
-
-            foreach (var func in funcListToFind)
-            {
-                var matchedIndex = GetMatchedTypeCount(func.ParamVarList);
-
-                if (topMatchedIndex > matchedIndex) result = func;
-            }
-
-            return new Tuple<FuncDefNode, int>(result, topMatchedIndex);
         }
 
 
@@ -136,30 +91,68 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes
         }
 
 
-        private void CheckParams(IEnumerable<FuncDefNode> matchedFuncList)
+        public void AddCantFunc()
         {
-            var funcList = GetParamCountMatchedList(matchedFuncList);
-            if (funcList.Count() == 0)    // param count is not equal
-            {
-                Alarms.Add(AJAlarmFactory.CreateMCL0015(Params.Count(), MethodNameTokens.Last()));
-                return;
-            }
+            List<string> fullTypeName = new List<string>();
 
-            var funcList2 = GetParamAllMatchedList(funcList);
-            if (funcList2.Count() == 0)    // param count is equal but param type is not fit
-            {
-                var result = GetTopCandidate(funcList);
-                var funcDefine = result.Item1;
-                var paramIndex = result.Item2;
+            foreach (var param in Params) fullTypeName.Add(param.Type.DefineNode.FullName);
 
-                Alarms.Add(AJAlarmFactory.CreateMCL0016(funcDefine.ToDefineString(false, true), 
-                                                                                 funcDefine.ParamVarList[paramIndex].Name));
-                return;
-            }
-            else
-                Func = funcList2.First();
+            Alarms.Add(new MeaningErrInfo(MethodNameToken,
+                                                            nameof(AlarmCodes.AJ0044),
+                                                            string.Format(AlarmCodes.AJ0044, fullTypeName.ItemsString(PrintType.String), MethodNameToken.Input)));
         }
 
+        public void AddNotExistFunc(TypeDefNode lastTypeNode)
+        {
+            Alarms.Add(new MeaningErrInfo(MethodNameToken,
+                                                nameof(AlarmCodes.AJ0045),
+                                                string.Format(AlarmCodes.AJ0045, lastTypeNode.FullName, MethodNameToken.Input)));
+        }
+
+
+        public FuncDefNode GetFuncDefForCallInfo(TypeDefNode lastTypeNode)
+        {
+            FuncDefNode result = null;
+
+            var candidate = lastTypeNode.AllFuncs.Where(x => x.Name == MethodNameToken.Input);
+            if (candidate.Count() == 0)
+            {
+                AddNotExistFunc(lastTypeNode);
+                return result;
+            }
+
+            candidate = candidate.Where(x => x.ParamVarList.Count() == Params.Count);
+            if (candidate.Count() == 0)
+            {
+                AJAlarmFactory.CreateMCL0015(Params.Count, MethodNameToken);
+                return result;
+            }
+
+            foreach (var funcDef in candidate)
+            {
+                int matchCount = 0;
+
+                for (int i = 0; i < funcDef.ParamVarList.Count(); i++)
+                {
+                    var param = funcDef.ParamVarList[i];
+                    if (param.Type.DefineNode == null) break;
+                    if (Params[i].Type.DefineNode == null) break;
+
+                    if (param.Type.DefineNode.FullName != Params[i].Type.DefineNode.FullName) break;
+                    matchCount++;
+                }
+
+                if (matchCount == funcDef.ParamVarList.Count())
+                {
+                    result = funcDef;
+                    break;
+                }
+            }
+
+            if (result == null) AddCantFunc();
+
+            return result;
+        }
 
         public override IRExpression To()
         {

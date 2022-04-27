@@ -49,12 +49,12 @@ namespace Parse.FrontEnd.Parsers
                 string result = string.Empty;
 
                 foreach (var symbol in this.Grammar.NonTerminalMultiples)
-                    result += string.Format("First({0}) = {1}", symbol.Name, Analyzer.FirstTerminalSet(symbol).ToString()) + Environment.NewLine;
+                    result += string.Format("First({0}) = {1}", symbol.Name, relationAnalyzer.FFAnalyzer.First(symbol).ToString()) + Environment.NewLine;
 
                 result += Environment.NewLine;
 
                 foreach (var symbol in this.Grammar.NonTerminalMultiples)
-                    result += string.Format("Follow({0}) = {1}", symbol.Name, relationAnalyzer.FollowAnalyzer.Datas[symbol]) + Environment.NewLine;
+                    result += string.Format("Follow({0}) = {1}", symbol.Name, relationAnalyzer.FFAnalyzer.Datas[symbol]) + Environment.NewLine;
 
                 return result;
             }

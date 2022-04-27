@@ -4,7 +4,6 @@ using Parse.FrontEnd.Grammars;
 using Parse.FrontEnd.Parsers.Collections;
 using Parse.FrontEnd.Parsers.Datas;
 using Parse.FrontEnd.Parsers.Datas.LR;
-using Parse.FrontEnd.Parsers.RelationAnalyzers;
 using Parse.FrontEnd.RegularGrammar;
 using Parse.FrontEnd.Tokenize;
 using System;
@@ -57,17 +56,18 @@ namespace Parse.FrontEnd.Parsers.LR
 
             foreach (var symbol in ParsingTable.AllSymbols)
             {
-                if (symbol is NonTerminal)
-                    result.Add(new FirstAndFollowItem(symbol, Analyzer.FirstTerminalSet(symbol), _followAnalyzer.Follow(symbol as NonTerminal)));
-                else
-                    result.Add(new FirstAndFollowItem(symbol, Analyzer.FirstTerminalSet(symbol), new TerminalSet()));
+                if (!(symbol is NonTerminal)) continue;
+
+                result.Add(new FirstAndFollowItem(symbol, 
+                                                                    _followAnalyzer.First(symbol as NonTerminal), 
+                                                                    _followAnalyzer.Follow(symbol as NonTerminal)));
             }
 
             return result;
         }
 
 
-        protected FollowAnalyzer _followAnalyzer = new FollowAnalyzer();
+        protected FirstFollowAnalyzer _followAnalyzer = new FirstFollowAnalyzer();
         protected Stack<IEnumerable<AstSymbol>> _astStack = new Stack<IEnumerable<AstSymbol>>();
 
         protected LRParser(Grammar grammar, CanonicalType canonicalType, bool logging = false) : base(grammar, logging)
@@ -76,7 +76,7 @@ namespace Parse.FrontEnd.Parsers.LR
 
             var virtualStartSymbol = this.Grammar.CreateVirtualSymbolForLRParsing("Accept");
             _followAnalyzer.CalculateAllFollow(this.Grammar.NonTerminalMultiples);
-            Canonical.Calculate(virtualStartSymbol, _followAnalyzer.Datas, canonicalType);
+            Canonical.Calculate(virtualStartSymbol, _followAnalyzer, canonicalType);
             ParsingTable.CreateParsingTable(this.Canonical);
         }
 
@@ -239,10 +239,13 @@ namespace Parse.FrontEnd.Parsers.LR
             }
             catch (ParsingException ex)
             {
+                /*
                 result = new ParsingResult(result.Take(ex.SeeingIndex + 1), _logging)
                 {
                     Success = false
                 };
+                */
+                result.Success = false;
             }
             catch (Exception)
             {

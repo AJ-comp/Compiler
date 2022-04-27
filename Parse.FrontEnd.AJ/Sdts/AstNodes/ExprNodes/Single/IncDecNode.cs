@@ -18,9 +18,9 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes.Single
             IsNeedWhileIRGeneration = true;
         }
 
-        public override SdtsNode Compile(CompileParameter param)
+        protected override SdtsNode CompileLogic(CompileParameter param)
         {
-            base.Compile(param);
+            base.CompileLogic(param);
 
             try
             {

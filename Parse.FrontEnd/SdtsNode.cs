@@ -46,6 +46,21 @@ namespace Parse.FrontEnd
         }
 
 
+        public SdtsNode GetParentAs(Type toFindParent)
+        {
+            var travNode = this;
+
+            while (travNode != null)
+            {
+                if (travNode.GetType().IsSubclassOf(toFindParent)) break;
+
+                travNode = travNode.Parent;
+            }
+
+            return travNode;
+        }
+
+
         public IEnumerable<SdtsNode> AllAlarmNodes
         {
             get
@@ -77,6 +92,7 @@ namespace Parse.FrontEnd
         }
 
         public abstract SdtsNode Compile(CompileParameter param);
+        protected abstract SdtsNode CompileLogic(CompileParameter param);
 
         public override string ToString()
         {

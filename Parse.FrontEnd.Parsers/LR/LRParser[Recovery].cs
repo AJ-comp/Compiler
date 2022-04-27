@@ -31,7 +31,7 @@ namespace Parse.FrontEnd.Parsers.LR
                     var unitParsingResult = UnitParsing(lastUnit, recoveryInfo.RecoveryToken);
                     result = unitParsingResult.Item1;
 
-                    // ambigous parsing is not supported in error handling 
+                    // ambigous parsing is not supported in error handling
 
                     parsingBlock.AddRecoveryMessageToLastHistory(recoveryInfo.RecoveryMessage);
                 } while (result == SuccessedKind.ReduceOrGoto);
@@ -60,7 +60,7 @@ namespace Parse.FrontEnd.Parsers.LR
 
             // post process
             ParseUnitCore(lastUnit);
-            parsingBlock.AddRecoveryMessageToLastHistory(string.Format(Resource.BackTracking, conflictAction.Action));
+            parsingBlock.AddRecoveryMessageToLastHistory(string.Format(Resource.BackTracking, conflictAction.State, conflictAction.Action));
 
             parsingBlock.AddItem(lastUnit.AfterStack);
             return BlockPartialParsing(parsingResult, conflictAction.AmbiguousBlockIndex);

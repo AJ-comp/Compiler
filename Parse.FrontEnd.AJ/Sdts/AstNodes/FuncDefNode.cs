@@ -12,7 +12,7 @@ using System.Linq;
 
 namespace Parse.FrontEnd.AJ.Sdts.AstNodes
 {
-    public partial class FuncDefNode : AJNode, ISymbolCenter, IExportable<IRExpression>
+    public partial class FuncDefNode : DefinitionNode, ISymbolCenter, IExportable<IRExpression>
     {
         public CompoundStNode CompoundSt { get; private set; }
 
@@ -37,7 +37,7 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes
                 RootNode = rootNode
             };
 
-            base.Compile(compileParam);
+            base.CompileLogic(compileParam);
             ReturnType = returnTypeInfo;
             StubCode = true;
         }
@@ -56,10 +56,10 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes
         /// <param name="param"></param>
         /// <returns></returns>
         /**************************************************/
-        public override SdtsNode Compile(CompileParameter param)
+        protected override SdtsNode CompileLogic(CompileParameter param)
         {
             // it needs to clone an param
-            base.Compile(param);
+            base.CompileLogic(param);
 
             if (param.Option == CompileOption.CheckMemberDeclaration) DefineCompile(param);
             else if (param.Option == CompileOption.Logic) DetailCompile(param);
@@ -96,7 +96,7 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes
                 ReturnType.Const = true;
             }
 
-            if(FunctionalType == FuncType.Normal)
+            if (FunctionalType == FuncType.Normal)
             {
                 // compile return type
                 var declareIdent = Items[offset++].Compile(param.CloneForNewBlock()) as TypeDeclareNode;
