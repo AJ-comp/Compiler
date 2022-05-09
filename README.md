@@ -1,3 +1,9 @@
+# Youtube
+https://www.youtube.com/watch?v=oMhS3l0DyLo&t=187s <br/>
+https://www.youtube.com/watch?v=m1ylQsQRPF8&t=29s <br/>
+https://www.youtube.com/watch?v=QwPlyto8JAA&t=22s <br/>
+
+
 # Compiler (Basic Configure)
 This project is about compiler including EBNF input system and parsing analysis tools and AJ language that system programming language. <br/>
 IDE project is not supported more so don't build the projects in the Application folder. <br/>
