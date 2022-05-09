@@ -41,7 +41,7 @@ After download add to the project folder. the result is as below.
 
 15. AJ language is similar C#. click main.aj and let's type as below and build with ctrl + shift + b.
 
-![image](https://user-images.githubusercontent.com/69152847/167421900-312ae860-2ebf-4c09-8528-fc530de61778.png)
+![image](https://user-images.githubusercontent.com/69152847/167423068-5b4e22d8-4f3b-4964-87de-702030f62be8.png)
 
 16. Good, as above if syntax error or semantic error is fired the position that error fired shows.
 
