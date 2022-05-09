@@ -34,8 +34,6 @@ namespace CommandPrompt.Builder.Models
 
         public ProjectBuildResult Build(AJCompiler compiler, bool printParsingHistory = false)
         {
-            DirectoryHelper.DeleteAllFiles(ExceptFolder);
-
             var result = new ProjectBuildResult(ProjectPath);
             var sources = Directory.GetFiles(ProjectPath, "*.aj", SearchOption.AllDirectories);
 
@@ -97,6 +95,7 @@ namespace CommandPrompt.Builder.Models
         {
             if (programNode == null) return;
             Directory.CreateDirectory(ExceptFolder);
+            DirectoryHelper.DeleteAllFiles(ExceptFolder);
 
             string data = string.Empty;
             var exDir = Path.GetDirectoryName(programNode.FileFullPath);

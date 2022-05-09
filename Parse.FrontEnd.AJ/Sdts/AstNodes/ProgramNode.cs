@@ -38,7 +38,7 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes
 
                 foreach (var usingNamespace in UsingNamespaces)
                 {
-                    if (Datas.SymbolTable.Instance.ContainsKey(usingNamespace.FullName))
+                    if (SymbolTable.Instance.ContainsKey(usingNamespace.FullName))
                         result.UnionWith(SymbolTable.Instance[usingNamespace.FullName]);
                 }
 

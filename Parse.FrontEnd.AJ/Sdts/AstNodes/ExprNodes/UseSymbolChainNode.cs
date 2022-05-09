@@ -51,8 +51,6 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes
                 }
             }
 
-            //            DBContext.Instance.Insert(this);
-
             return this;
         }
 
@@ -60,8 +58,8 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes
         private ExprNode CompileFirstNode(CompileParameter param)
         {
             FuncDefNode funcDefNode = GetParentAs(typeof(FuncDefNode)) as FuncDefNode;
-
             TypeDefNode lastTypeNode = GetParentAs(typeof(TypeDefNode)) as TypeDefNode;
+
             param.ParentNode = lastTypeNode;
 
             /* UseIdentNode can't analysis var name that included namespace name or type name yet.
