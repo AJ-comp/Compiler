@@ -98,7 +98,7 @@ namespace CommandPrompt.Builder.Commands
                                     ? JsonSerializer.Serialize(printStructure, options)
                                     : (_outputFormat == OutputFormat.Table)
                                     ? printStructure.ToTableFormat()
-                                    : printStructure.ToString();
+                                    : printStructure.ToVSCodeString(_path);
 
             if (string.IsNullOrEmpty(_outputFile)) Console.WriteLine(toPrintString);
             else

@@ -39,6 +39,7 @@ namespace CommandPrompt.Builder.Models
 
             var parsingInfos = AllParsingWithParallel(compiler, sources);
 
+
             AllAnalysisWithParallel(compiler, parsingInfos, CompileOption.CheckNamespace);
             AllAnalysisWithParallel(compiler, parsingInfos, CompileOption.CheckUsing);
             AllAnalysisWithParallel(compiler, parsingInfos, CompileOption.CheckTypeDefine);
@@ -46,7 +47,8 @@ namespace CommandPrompt.Builder.Models
             var defineResult = AllAnalysisWithParallel(compiler, parsingInfos, CompileOption.CheckMemberDeclaration);
             var compileInfos = AllAnalysisWithParallel(compiler, parsingInfos, CompileOption.Logic);
 
-            Parallel.ForEach(compileInfos, compileInfo =>
+            foreach(var compileInfo in compileInfos)
+//            Parallel.ForEach(compileInfos, compileInfo =>
             {
                 var source = compileInfo.Key;
                 var compileResult = compileInfo.Value;
@@ -62,7 +64,7 @@ namespace CommandPrompt.Builder.Models
                 }
 
                 result.Add(source, compileResult);
-            });
+            }
 
             return result;
         }
@@ -126,7 +128,8 @@ namespace CommandPrompt.Builder.Models
                 //                var sourceFullPath = Path.Combine(ProjectPath, source);
                 var parsingResult = compiler.NewParsing(source);
 
-                parsingInfos.TryAdd(source, parsingResult);
+                // empty file is skip.
+                if (parsingResult.Count != 0) parsingInfos.TryAdd(source, parsingResult);
             });
 
             return parsingInfos;

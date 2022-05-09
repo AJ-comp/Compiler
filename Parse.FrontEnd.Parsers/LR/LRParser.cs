@@ -229,7 +229,11 @@ namespace Parse.FrontEnd.Parsers.LR
             ParsingResult result = new ParsingResult(_logging);
             try
             {
-                if (tokens == null || tokens.Count <= 0) return result;
+                if (tokens == null || tokens.Count <= 0)
+                {
+                    result.Success = true;
+                    return result;
+                }
 
                 result = new ParsingResult(_logging);
                 foreach (var item in tokens) result.AddNewBlock(item);

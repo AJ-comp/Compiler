@@ -107,7 +107,7 @@ namespace CommandPrompt.Builder
         }
 
 
-        public override string ToString()
+        public string ToVSCodeString(string solutionFullPath)
         {
             string result = string.Empty;
 
@@ -133,7 +133,7 @@ namespace CommandPrompt.Builder
                         endColumn = (line == endLine) ? lastErrToken.EndColumn + 2 : lastErrToken.EndColumn + 1;
                     }
 
-                    var relativePath = item.FileFullPath.Substring(ProjectFullPath.Length);
+                    var relativePath = item.FileFullPath.Substring(solutionFullPath.Length);
                     result += $"{relativePath}" +
                                    $":{error.ErrorCode}" +
                                    $":{line}:{column}:{endLine}:{endColumn}" +
