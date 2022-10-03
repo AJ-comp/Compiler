@@ -29,7 +29,7 @@ To use the compiler for AJ language in the VS Code follow the below sequence. <b
 10. Create the tasks.json file.
 11. Type the below content (if your solution path is different change the content of red underline.)
 
-![image](https://user-images.githubusercontent.com/69152847/167354844-e521ad39-3248-479b-82ff-4f5770f46a07.png)
+![image](https://user-images.githubusercontent.com/69152847/167998745-13121dd5-a51a-4289-bc2d-cef44ea4007f.png)
 
 12. Add main.aj file (file name does not matter) in the project path as below.
 
@@ -45,11 +45,15 @@ After download add to the project folder. the result is as below.
 
 ![image](https://user-images.githubusercontent.com/69152847/167375176-b86da848-3c18-4c85-9516-022db487b2db.png)
 
-15. AJ language is similar C#. click main.aj and let's type as below and build with ctrl + shift + b.
+15. AJ language is similar C#. So syntax highlighting is compatible with C#. Click the language mode button of right bottom and change to C# as below.
+
+![image](https://user-images.githubusercontent.com/69152847/167998433-4bcd8044-f1ac-47ab-82a9-55b4b08a8f3b.png)
+
+16. OK, click main.aj file in the solution explorer and let's type as below and build with ctrl + shift + b.
 
 ![image](https://user-images.githubusercontent.com/69152847/167423068-5b4e22d8-4f3b-4964-87de-702030f62be8.png)
 
-16. Good, as above if syntax error or semantic error is fired the position that error fired shows.
+17. Good, as above if syntax error or semantic error is fired the position that error fired shows.
 
 
 
