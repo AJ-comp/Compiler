@@ -33,15 +33,14 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes
             {
                 List<TokenData> result = new List<TokenData>();
 
-                if (Parent is NamespaceNode)
+                if (Parent is TypeDefNode)
                 {
-                    var parent = Parent as NamespaceNode;
-                    result.AddRange(parent.NameTokens);
-                }
-                else if (Parent is ClassDefNode)
-                {
-                    var parent = Parent as ClassDefNode;
+                    var parent = Parent as TypeDefNode;
                     result.AddRange(parent.FullNameTokens);
+                }
+                else
+                {
+                    result.AddRange(RootNode.Namespace.NameTokens);
                 }
 
                 result.Add(NameToken);
@@ -93,6 +92,7 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes
                 result += $"{paramVar.Type.GetDebuggerDisplay()} ";
             }
             result += ")";
+
 
             return result;
         }

@@ -5,8 +5,10 @@ using Parse.FrontEnd.AJ.Sdts.AstNodes.StatementNodes;
 using Parse.FrontEnd.AJ.Sdts.AstNodes.TypeNodes;
 using Parse.FrontEnd.AJ.Sdts.Datas;
 using Parse.FrontEnd.Ast;
+using Parse.MiddleEnd.IR.Datas;
 using Parse.MiddleEnd.IR.Expressions;
 using Parse.MiddleEnd.IR.Expressions.StmtExpressions;
+using Parse.Types;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -14,10 +16,35 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes
 {
     public partial class FuncDefNode : DefinitionNode, ISymbolCenter, IExportable<IRExpression>
     {
-        public CompoundStNode CompoundSt { get; private set; }
+        public CompoundStNode CompoundSt { get; internal set; }
 
         public IEnumerable<VariableAJ> VarList => ParamVarList;
         public IEnumerable<ISymbolData> SymbolList => VarList;
+
+        /// <summary>
+        /// returns a host struct or class that own function.
+        /// </summary>
+        public TypeDefNode HostStruct
+        {
+            get
+            {
+                TypeDefNode result = null;
+                var curNode = Parent;
+
+                while (!(curNode is ProgramNode))
+                {
+                    if (curNode is TypeDefNode)
+                    {
+                        result = curNode as TypeDefNode;
+                        break;
+                    }
+
+                    curNode = curNode.Parent;
+                }
+
+                return result;
+            }
+        }
 
 
         public FuncDefNode(AstSymbol node, FuncType type) : base(node)
@@ -26,20 +53,32 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes
             IsNeedWhileIRGeneration = true;
         }
 
-        public FuncDefNode(FuncType type, Access accessType, int blockLevel, int offset, SdtsNode rootNode, AJType returnTypeInfo) : base(null)
+
+        /// <summary>
+        /// Creator to create a creator of class or struct.
+        /// </summary>
+        /// <param name="type"></param>
+        /// <param name="accessType"></param>
+        /// <param name="blockLevel"></param>
+        /// <param name="offset"></param>
+        /// <param name="parentNode"></param>
+        /// <param name="returnTypeInfo"></param>
+        public FuncDefNode(FuncType type, Access accessType, int blockLevel, int offset, AJNode parentNode, AJType returnTypeInfo) : base(null)
         {
             FunctionalType = type;
             AccessType = accessType;
+            Parent = parentNode;
+            StubCode = true;
+
             var compileParam = new CompileParameter
             {
                 BlockLevel = blockLevel,
                 Offset = offset,
-                RootNode = rootNode
+                RootNode = parentNode.RootNode,
             };
 
             base.CompileLogic(compileParam);
             ReturnType = returnTypeInfo;
-            StubCode = true;
         }
 
 
@@ -67,13 +106,33 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes
             return this;
         }
 
+
+        public IRVariable ToIRVariable(TypeDefNode defNode)
+        {
+            var type = new IRType(StdType.Struct, 1);
+            type.Name = defNode.FullName;
+
+            IRVariable result = new IRVariable(type, AJGrammar.This.Value);
+
+            return result;
+        }
+
+
         public IRExpression To()
         {
             IRFunction function = new IRFunction();
 
+            // it has to pass 'this' pointer as argument if it is not static function.
+            if (HostStruct != null && !IsStatic)
+            {
+                function.Arguments.Add(ToIRVariable(HostStruct));
+            }
+
             foreach (var arg in VarList)
                 function.Arguments.Add(arg.ToIR());
 
+            function.ReturnType = ReturnType.ToIR();
+            function.Name = FullName;
             function.Statement = CompoundSt.To() as IRCompoundStatement;
 
             return function;

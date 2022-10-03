@@ -76,7 +76,11 @@ namespace CommandPrompt.Builder.Commands
                 stopWatch.Start();
                 var result = solution.Build(compiler);
                 stopWatch.Stop();
-                if (solution != null) PrintBuildResult(result);
+                if (solution != null)
+                {
+                    PrintBuildResult(result);
+                    PrintLLVMIR(result);
+                }
 
                 Console.WriteLine($"Build Time : {stopWatch.ElapsedMilliseconds} msec");
 
@@ -107,6 +111,19 @@ namespace CommandPrompt.Builder.Commands
 
                 StreamWriter fileStream = new StreamWriter(outputFile);
                 fileStream.Write(toPrintString);
+                fileStream.Close();
+            }
+        }
+
+
+        private void PrintLLVMIR(ProjectBuildResult buildResult)
+        {
+            foreach(var llvmCodes in buildResult.GetLLVMIRCodes())
+            {
+                var outputFile = $"{llvmCodes.Key}.ll";
+
+                StreamWriter fileStream = new StreamWriter(outputFile);
+                fileStream.Write(llvmCodes.Value);
                 fileStream.Close();
             }
         }

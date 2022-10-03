@@ -1,5 +1,7 @@
 ﻿using Compile.AJ;
 using Parse.FrontEnd;
+using Parse.FrontEnd.AJ.Sdts.AstNodes;
+using Parse.MiddleEnd.IR.LLVM;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;

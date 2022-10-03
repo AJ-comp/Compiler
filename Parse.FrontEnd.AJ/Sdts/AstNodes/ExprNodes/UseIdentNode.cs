@@ -1,6 +1,7 @@
 ﻿using Parse.FrontEnd.AJ.Data;
 using Parse.FrontEnd.Ast;
 using Parse.MiddleEnd.IR.Expressions;
+using Parse.MiddleEnd.IR.Expressions.ExprExpressions;
 
 namespace Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes
 {
@@ -44,7 +45,11 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes
 
         public override IRExpression To()
         {
-            throw new System.NotImplementedException();
+            IRUseIdentExpr result = new IRUseIdentExpr(Type.ToIR());
+
+            result.Name = IdentToken.Input;
+
+            return result;
         }
 
         public override IRExpression To(IRExpression from)

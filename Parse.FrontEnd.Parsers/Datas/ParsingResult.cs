@@ -49,7 +49,8 @@ namespace Parse.FrontEnd.Parsers.Datas
 
             // make up block that conflict is fired.
             var parsingBlock = this[result.AmbiguousBlockIndex];
-            parsingBlock.RemoveRange(result.UnitIndexInBlock + 1, parsingBlock.Count() - result.UnitIndexInBlock);
+            //            parsingBlock.RemoveRange(result.UnitIndexInBlock + 1, parsingBlock.Count() - result.UnitIndexInBlock);
+            parsingBlock.RemoveRange(result.UnitIndexInBlock + 1, parsingBlock.Count() - result.UnitIndexInBlock - 1);
 
             return new ConflictAction(result.State, result.AmbiguousBlockIndex, result.Actions.First());
         }

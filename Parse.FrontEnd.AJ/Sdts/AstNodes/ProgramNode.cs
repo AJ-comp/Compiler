@@ -1,17 +1,18 @@
-﻿using Parse.FrontEnd.AJ.Data;
-using Parse.FrontEnd.AJ.Properties;
+﻿using AJ.Common;
+using Parse.FrontEnd.AJ.Data;
 using Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes;
 using Parse.FrontEnd.AJ.Sdts.AstNodes.StatementNodes;
 using Parse.FrontEnd.AJ.Sdts.AstNodes.TypeNodes;
 using Parse.FrontEnd.AJ.Sdts.Datas;
 using Parse.FrontEnd.Ast;
+using Parse.MiddleEnd.IR.Expressions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace Parse.FrontEnd.AJ.Sdts.AstNodes
 {
-    public class ProgramNode : AJNode
+    public class ProgramNode : AJNode, IExportable<IRProgramRoot>
     {
         public List<UsingStNode> UsingNamespaces { get; } = new List<UsingStNode>();
         public NamespaceNode Namespace { get; private set; }
@@ -182,6 +183,30 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes
                     typeNode.AddAmbiguousError();
 
             }
+        }
+
+        public IRProgramRoot To()
+        {
+            IRProgramRoot result = new IRProgramRoot();
+            result.NamespaceName = Namespace.FullName;
+
+            foreach (var item in Items)
+            {
+                if (!(item is TypeDefNode)) continue;
+
+                var typeNode = item as TypeDefNode;
+
+                if (!typeNode.IsPreDefType) result.StructDefs.Add(typeNode.ToIR());
+                foreach (var func in typeNode.AllFuncs) result.Functions.Add(func.To() as IRFunction);
+            }
+
+            return result;
+        }
+
+
+        public IRProgramRoot To(IRProgramRoot from)
+        {
+            throw new NotImplementedException();
         }
     }
 }

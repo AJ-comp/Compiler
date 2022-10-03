@@ -16,7 +16,6 @@ namespace Parse.MiddleEnd.IR.LLVM
             return true;
         }
 
-        public static bool IsIntegerKind(StdType opType) => (opType == StdType.Char || opType == StdType.Short || opType == StdType.Int);
 
         public static TypeInfo MaximumType(TypeInfo op1Type, TypeInfo op2Type)
         {

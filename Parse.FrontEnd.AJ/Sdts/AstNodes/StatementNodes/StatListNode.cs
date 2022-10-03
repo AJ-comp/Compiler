@@ -54,7 +54,7 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.StatementNodes
             var result = new IRCompoundStatement();
 
             foreach (var statementNode in StatementNodes)
-                result.Expressions.Add(statementNode.To());
+                result.Expressions.Add(statementNode.To() as IRStatement);
 
             return result;
         }

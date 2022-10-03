@@ -301,6 +301,7 @@ namespace Parse.FrontEnd.Parsers.Datas
 
 //            var parsingUnit = new ParsingUnit(_units[startIndex + count - 1].AfterStack, _units[startIndex].BeforeStack);
 //            _history.Add(new ParsingUnitHistory(parsingUnit, string.Format(Resource.RemoveParsingUnits, count)));
+
             _units.RemoveRange(startIndex, count);
         }
 

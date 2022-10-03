@@ -25,31 +25,6 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.TypeNodes
 
         public override IEnumerable<VariableAJ> AllFields => _fields;
 
-
-        public IEnumerable<TokenData> FullNameTokens
-        {
-            get
-            {
-                List<TokenData> result = new List<TokenData>();
-
-                if (Parent is NamespaceNode)
-                {
-                    var parent = Parent as NamespaceNode;
-                    result.AddRange(parent.NameTokens);
-                }
-                else if (Parent is ClassDefNode)
-                {
-                    var parent = Parent as ClassDefNode;
-                    result.AddRange(parent.FullNameTokens);
-                }
-
-                result.Add(NameToken);
-
-                return result;
-            }
-        }
-
-
         public IEnumerable<ISymbolData> SymbolList
         {
             get

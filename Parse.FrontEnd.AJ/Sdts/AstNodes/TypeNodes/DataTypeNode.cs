@@ -14,7 +14,7 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.TypeNodes
 
         // readonly
         public string Name => DataTypeToken.Input;
-        public string FullName => FullDataTypeToken.ToListString();
+        public virtual string FullName => FullDataTypeToken.ToListString();
         public TokenData DataTypeToken => FullDataTypeToken.Last();
 
         protected DataTypeNode(AstSymbol node) : base(node)

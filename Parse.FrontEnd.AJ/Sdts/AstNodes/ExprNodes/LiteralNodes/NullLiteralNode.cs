@@ -12,7 +12,8 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes.LiteralNodes
     {
         public NullLiteralNode(AstSymbol node) : base(node)
         {
-            Type = new AJPreDefType(AJDataType.Null);
+            var dataType = AJDataType.Null;
+            Type = new AJPreDefType(dataType, GetDefineForPreDefType(dataType));
         }
 
         protected override SdtsNode CompileLogic(CompileParameter param)
@@ -36,17 +37,7 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes.LiteralNodes
             return this;
         }
 
-        public override IRExpression To()
-        {
-            var result = new IRLiteralExpr
-            {
-                Type = new TypeInfo(StdType.Null, 0),
-                Value = null
-            };
-            //            result.DebuggingInfo.ColumnIndex = Token.
-
-            return result;
-        }
+        public override IRExpression To() => new IRLiteralExpr(Type.ToIR(), null);
 
         public override IRExpression To(IRExpression from)
         {

@@ -13,6 +13,9 @@ namespace Parse.MiddleEnd.IR.Expressions
         public int AbsIndexInLocal { get; set; }
 
 
+        public string LLVMTypeName => Type.LLVMTypeName;
+
+
         public IRVariable(IRType type, string name)
         {
             Type = type;

@@ -1,8 +1,6 @@
-﻿using AJ.Common.Helpers;
-using Parse.Extensions;
+﻿using Parse.Extensions;
 using Parse.FrontEnd.AJ.Sdts.AstNodes.TypeNodes;
 using Parse.MiddleEnd.IR.Datas;
-using Parse.Types;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -17,10 +15,13 @@ namespace Parse.FrontEnd.AJ.Data
         [Description("null")] Null,
         [Description("bool")] Bool,
         [Description("byte")] Byte,
+        [Description("sbyte")] SByte,
         [Description("system")] System,
         [Description("void")] Void,
         [Description("short")] Short,
+        [Description("ushort")] UShort,
         [Description("int")] Int,
+        [Description("uint")] UInt,
         [Description("double")] Double,
         [Description("string")] String,
         [Description("struct")] Struct,
@@ -33,12 +34,13 @@ namespace Parse.FrontEnd.AJ.Data
     {
         protected TokenDataList _nameTokens = new TokenDataList();
 
-        protected AJType(AJDataType dataType)
+        protected AJType(AJDataType dataType, TypeDefNode defineNode)
         {
             DataType = dataType;
+            DefineNode = defineNode;
         }
 
-        public TypeDefNode DefineNode { get; protected set; }
+        public TypeDefNode DefineNode { get; }
         public bool Static { get; protected set; } = false;
         public bool Const { get; set; } = false;
         public uint PointerDepth { get; protected set; } = 0;
@@ -60,6 +62,9 @@ namespace Parse.FrontEnd.AJ.Data
             => (DefineNode != null) ? DefineNode.FullName : NameTokens.ItemsString();
 
 
+        public string PopularName => DefineNode?.PopularName;
+
+
         public abstract bool IsIntegerType();
         public abstract bool IsFloatingType();
         public abstract bool IsArithmeticType();
@@ -78,7 +83,6 @@ namespace Parse.FrontEnd.AJ.Data
 
             return true;
         }
-
 
         public override bool Equals(object obj)
         {

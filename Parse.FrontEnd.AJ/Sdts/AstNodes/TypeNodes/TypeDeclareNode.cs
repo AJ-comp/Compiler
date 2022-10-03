@@ -5,6 +5,7 @@ using System.Linq;
 
 namespace Parse.FrontEnd.AJ.Sdts.AstNodes.TypeNodes
 {
+
     public enum TypeKind
     {
         PreDef,
@@ -14,7 +15,7 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.TypeNodes
     public class TypeDeclareNode : DataTypeNode
     {
         public bool Signed { get; } = false;
-        public TypeKind TypeKind { get; }
+        public TypeKind TypeKind { get; private set; }
         public TypeDefNode DefNode { get; private set; }
 
         // predef type
@@ -74,9 +75,9 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.TypeNodes
         {
             if (TypeKind == TypeKind.PreDef)
             {
-//                if(Type == AJDataType.Void) return new AJVoidType()
+                //                if(Type == AJDataType.Void) return new AJVoidType()
 
-                AJType result = new AJPreDefType(Type, FullDataTypeToken)
+                AJType result = new AJPreDefType(Type, DefNode, FullDataTypeToken)
                 {
                     Const = bConst,
                     Signed = Signed
@@ -86,9 +87,7 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.TypeNodes
             }
             else
             {
-                var defNodes = GetDefineForType(FullDataTypeToken.ToListString());
-
-                if (defNodes.Count() == 1) return new AJUserDefType(defNodes.First());
+                if (DefNode != null) return new AJUserDefType(DefNode);
                 else return new AJUnknownType();
             }
         }
@@ -108,6 +107,10 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.TypeNodes
             else if (typeSymbols.Count() == 0)   // there is no define for type
                 Alarms.Add(AJAlarmFactory.CreateAJ0031(FullDataTypeToken));
             else DefNode = typeSymbols.First();
+
+            // if it is declared as System.Int16 then Type is decided to UserDef temperory on AJCreator
+            //but it is not UserDef type in reality so it has to modify to PreDef type in here.
+            if (DefNode.IsPreDefType) TypeKind = TypeKind.PreDef;
         }
 
 
@@ -116,12 +119,12 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.TypeNodes
 
 
 
-        private string GetDefineFullNameForPreDefType(string predefTypeName)
+        private string GetDefineFullNameForPreDefType(string popularName)
         {
             string result = string.Empty;
             foreach (var predefType in PreDefTypeList)
             {
-                if (predefType.ShortName == predefTypeName)
+                if (predefType.ShortName == popularName)
                 {
                     result = predefType.DefineFullName;
                     break;

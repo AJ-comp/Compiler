@@ -2,18 +2,35 @@
 using Parse.FrontEnd.Ast;
 using Parse.MiddleEnd.IR.Expressions;
 using Parse.MiddleEnd.IR.Expressions.StmtExpressions;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Parse.FrontEnd.AJ.Sdts.AstNodes.StatementNodes
 {
     public class CompoundStNode : StatementNode, IRootable
     {
-        public StatListNode StatListNode { get; private set; }
+//        public StatListNode StatListNode { get; private set; }
+        public List<StatementNode> StatementNodes = new List<StatementNode>();
         public bool IsRoot => !(Parent is StatementNode);
 
 
         public CompoundStNode(AstSymbol node) : base(node)
         {
+        }
+
+        public CompoundStNode(int blockLevel, int offset, AJNode parentNode) : base(null)
+        {
+            Parent = parentNode;
+            StubCode = true;
+
+            var compileParam = new CompileParameter
+            {
+                BlockLevel = blockLevel,
+                Offset = offset,
+                RootNode = parentNode.RootNode,
+            };
+
+            base.CompileLogic(compileParam);
         }
 
 
@@ -45,7 +62,7 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.StatementNodes
                     item.Compile(param);
                     ClarifyReturn = true;
                 }
-                else item.Compile(param.CloneForNewBlock());
+                else StatementNodes.Add(item.Compile(param.CloneForNewBlock()) as StatementNode);
             }
 
             return this;
@@ -58,8 +75,10 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.StatementNodes
             foreach (var localVar in VarList)
                 result.LocalVars.Add(localVar.ToIR());
 
-            foreach (var statement in StatListNode.StatementNodes)
-                result.Expressions.Add(statement.To());
+//            if (StatListNode == null) return result;
+
+            foreach (var statement in StatementNodes)
+                result.Expressions.Add(statement.To() as IRStatement);
 
             return result;
         }

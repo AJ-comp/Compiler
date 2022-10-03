@@ -24,7 +24,7 @@ namespace Parse.FrontEnd.AJ.Data
             throw new NotImplementedException();
         }
 
-        public AJVoidType(AJDataType dataType) : base(dataType)
+        public AJVoidType(AJDataType dataType) : base(dataType, null)
         {
         }
     }

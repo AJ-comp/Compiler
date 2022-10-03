@@ -18,7 +18,8 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes.LiteralNodes
 
         public IntegerLiteralNode(int value) : base(null)
         {
-            Type = new AJPreDefType(AJDataType.Int);
+            var dataType = AJDataType.Int;
+            Type = new AJPreDefType(dataType, GetDefineForPreDefType(dataType));
         }
 
         protected override SdtsNode CompileLogic(CompileParameter param)
@@ -50,21 +51,7 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes.LiteralNodes
             return this;
         }
 
-        public override IRExpression To()
-        {
-            var result = new IRLiteralExpr();
-
-            StdType type = (Type.DataType == AJDataType.Byte)
-                                ? StdType.Char
-                                : (Type.DataType == AJDataType.Short)
-                                ? StdType.Short
-                                : StdType.Int;
-
-            result.Type = new TypeInfo(type, 0);
-            result.Value = Value;
-
-            return result;
-        }
+        public override IRExpression To() => new IRLiteralExpr(Type.ToIR(), Value);
 
         public override IRExpression To(IRExpression from)
         {
@@ -74,7 +61,8 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes.LiteralNodes
 
         protected void AllocType(AJDataType dataType, bool signed)
         {
-            var type = new AJPreDefType(dataType);
+            var type = new AJPreDefType(dataType, GetDefineForPreDefType(dataType));
+
             type.Signed = signed;
             Type = type;
         }

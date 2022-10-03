@@ -57,14 +57,7 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.StatementNodes
             return this;
         }
 
-        public override IRExpression To()
-        {
-            var result = new IRReturnExpr();
-
-            result.ReturnExpr = Expr.To() as IRExpr;
-
-            return result;
-        }
+        public override IRExpression To() => new IRReturnExpr(Expr.To() as IRExpr);
 
         public override IRExpression To(IRExpression from)
         {

@@ -93,6 +93,12 @@ namespace CommandPrompt.Builder.Models
         }
 
 
+        private void GenerateIRCode()
+        {
+
+        }
+
+
         private void WriteException(ProgramNode programNode)
         {
             if (programNode == null) return;

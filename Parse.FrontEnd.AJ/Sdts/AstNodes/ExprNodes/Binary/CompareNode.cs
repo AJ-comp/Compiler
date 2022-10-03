@@ -40,7 +40,7 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes.Binary
 
         public override IRExpression To()
         {
-            IRBinaryExpr result = new IRBinaryExpr();
+            IRBinaryExpr result = new IRBinaryExpr(Type.ToIR());
 
             if (Operation == IRCompareOperation.EQ) result.Operation = IRBinaryOperation.EQ;
             else if (Operation == IRCompareOperation.NE) result.Operation = IRBinaryOperation.NE;
@@ -138,7 +138,7 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes.Binary
         {
             if (target.Type.IsArithmeticType())
             {
-                Type = target.Type;
+                Type = AJUtilities.CreateBooleanType(this);
                 if (source.ValueState != State.Fixed || target.ValueState != State.Fixed) return this;
 
                 if (compare == IRCompareOperation.GE) Value = (double)source.Value >= (double)target.Value;

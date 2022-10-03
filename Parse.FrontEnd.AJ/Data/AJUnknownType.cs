@@ -9,7 +9,7 @@ namespace Parse.FrontEnd.AJ.Data
 {
     public class AJUnknownType : AJType
     {
-        public AJUnknownType() : base(AJDataType.Unknown)
+        public AJUnknownType() : base(AJDataType.Unknown, null)
         {
         }
 

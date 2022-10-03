@@ -2,6 +2,8 @@
 using Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes;
 using Parse.FrontEnd.Ast;
 using Parse.MiddleEnd.IR.Expressions;
+using Parse.MiddleEnd.IR.Expressions.ExprExpressions;
+using Parse.MiddleEnd.IR.Expressions.StmtExpressions;
 
 namespace Parse.FrontEnd.AJ.Sdts.AstNodes.StatementNodes
 {
@@ -29,10 +31,7 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.StatementNodes
             return this;
         }
 
-        public override IRExpression To()
-        {
-            throw new System.NotImplementedException();
-        }
+        public override IRExpression To() => new IRExprStatement(Expr.To() as IRExpr);
 
         public override IRExpression To(IRExpression from)
         {

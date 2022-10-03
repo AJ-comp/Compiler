@@ -12,7 +12,8 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes.Binary
         public ExprNode RightNode { get; protected set; }
 
         public bool IsBothLiteral => LeftNode is LiteralNode && RightNode is LiteralNode;
-        public bool IsCanParsing => Alarms.Count > 0 || LeftNode.Alarms.Count > 0 || RightNode.Alarms.Count > 0;
+        //        public bool IsCanParsing => Alarms.Count > 0 || LeftNode.Alarms.Count > 0 || RightNode.Alarms.Count > 0;
+        public bool IsCanParsing => Alarms.Count == 0 && LeftNode.Alarms.Count == 0 && RightNode.Alarms.Count == 0;
 
 
         protected BinaryExprNode(AstSymbol node) : base(node)

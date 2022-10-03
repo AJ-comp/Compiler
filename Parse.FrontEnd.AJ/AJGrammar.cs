@@ -269,9 +269,10 @@ namespace Parse.FrontEnd.AJ
 
             this.typeSpecifier.AddItem(Bool, BoolNode);
             this.typeSpecifier.AddItem(Byte, ByteNode);
+            this.typeSpecifier.AddItem(SByte, SByteNode);
             this.typeSpecifier.AddItem(Char, CharNode);
             this.typeSpecifier.AddItem(Short, ShortNode);
-            this.typeSpecifier.AddItem(UShort, ShortNode);
+            this.typeSpecifier.AddItem(UShort, UShortNode);
             this.typeSpecifier.AddItem(System, SystemNode);
             this.typeSpecifier.AddItem(Int, IntNode);
             this.typeSpecifier.AddItem(UInt, UIntNode);

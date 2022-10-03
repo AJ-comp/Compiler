@@ -36,7 +36,7 @@ namespace Parse.FrontEnd
             foreach(var key in this.Keys)
             {
                 foreach(var value in this[key])
-                    result += string.Format("from {0} -> to {1}", value, key) + Environment.NewLine;
+                    result += $"from {value} -> to {key}" + Environment.NewLine;
             }
 
             return result;

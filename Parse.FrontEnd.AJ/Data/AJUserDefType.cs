@@ -15,10 +15,8 @@ namespace Parse.FrontEnd.AJ.Data
     {
         public override uint Size => (PointerDepth > 0) ? 4 : DefineNode.Size;
 
-        public AJUserDefType(TypeDefNode defType) : base(AJDataType.Unknown)
+        public AJUserDefType(TypeDefNode defType) : base(AJDataType.Unknown, defType)
         {
-            DefineNode = defType;
-
             if (DefineNode == null) DataType = AJDataType.Unknown;
             else if (DefineNode is ClassDefNode) DataType = AJDataType.Class;
         }
@@ -65,7 +63,7 @@ namespace Parse.FrontEnd.AJ.Data
             else if (DataType == AJDataType.Class) result = new IRType(StdType.Struct, PointerDepth);
             else if (DataType == AJDataType.Unknown) result = new IRType(StdType.Unknown, PointerDepth);
 
-            result.Name = Name;
+            result.Name = FullName;
             result.Size = Size;
             result.ArrayLength.AddRange(ArrayLength);
 

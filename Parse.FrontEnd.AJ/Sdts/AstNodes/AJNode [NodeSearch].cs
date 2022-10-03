@@ -151,6 +151,22 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes
             return result;
         }
 
+
+        public TypeDefNode GetDefineForPreDefType(AJDataType dataType)
+        {
+            TypeDefNode result = null;
+
+            foreach (var preDefType in PreDefTypeList)
+            {
+                if (preDefType.ShortName != dataType.ToDescription()) continue;
+
+                result = GetDefineForType(preDefType.DefineFullName).First();
+            }
+
+            return result;
+        }
+
+
         public IEnumerable<ISymbolData> GetSymbols(TokenData toFindIdentToken)
         {
             var symbols = GetReferableSymbols();

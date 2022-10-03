@@ -1,11 +1,10 @@
 ﻿using AJ.Common.Helpers;
 using Parse.Extensions;
+using Parse.FrontEnd.AJ.Sdts.AstNodes;
+using Parse.FrontEnd.AJ.Sdts.AstNodes.TypeNodes;
 using Parse.MiddleEnd.IR.Datas;
 using Parse.Types;
-using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Text;
 
 namespace Parse.FrontEnd.AJ.Data
 {
@@ -20,8 +19,11 @@ namespace Parse.FrontEnd.AJ.Data
             {
                 if (DataType == AJDataType.Bool) return 1;
                 if (DataType == AJDataType.Byte) return 1;
+                if (DataType == AJDataType.SByte) return 1;
                 if (DataType == AJDataType.Short) return 2;
+                if (DataType == AJDataType.UShort) return 2;
                 if (DataType == AJDataType.Int) return 4;
+                if (DataType == AJDataType.UInt) return 4;
                 if (DataType == AJDataType.Double) return 8;
                 if (DataType == AJDataType.System) return 4;
 
@@ -30,18 +32,17 @@ namespace Parse.FrontEnd.AJ.Data
         }
 
 
-
-        public AJPreDefType(AJDataType dataType) : base(dataType)
+        public AJPreDefType(AJDataType dataType, TypeDefNode defineNode) : base(dataType, defineNode)
         {
             DataType = dataType;
         }
 
-        public AJPreDefType(AJDataType dataType, TokenData token) : this(dataType)
+        public AJPreDefType(AJDataType dataType, TypeDefNode defineNode, TokenData token) : this(dataType, defineNode)
         {
             _nameTokens.Add(token);
         }
 
-        public AJPreDefType(AJDataType dataType, TokenDataList tokens) : this(dataType)
+        public AJPreDefType(AJDataType dataType, TypeDefNode defineNode, TokenDataList tokens) : this(dataType, defineNode)
         {
             _nameTokens = tokens;
         }
@@ -156,8 +157,11 @@ namespace Parse.FrontEnd.AJ.Data
             if (DataType == AJDataType.Void) result = new IRType(StdType.Void, PointerDepth);
             else if (DataType == AJDataType.Bool) result = new IRType(StdType.Bit, PointerDepth);
             else if (DataType == AJDataType.Byte) result = new IRType(StdType.Char, PointerDepth);
+            else if (DataType == AJDataType.SByte) result = new IRType(StdType.UChar, PointerDepth);
             else if (DataType == AJDataType.Short) result = new IRType(StdType.Short, PointerDepth);
+            else if (DataType == AJDataType.UShort) result = new IRType(StdType.UShort, PointerDepth);
             else if (DataType == AJDataType.Int) result = new IRType(StdType.Int, PointerDepth);
+            else if (DataType == AJDataType.UInt) result = new IRType(StdType.UInt, PointerDepth);
             else if (DataType == AJDataType.Double) result = new IRType(StdType.Double, PointerDepth);
             else if (DataType == AJDataType.String) result = new IRType(StdType.Char, PointerDepth);
             else if (DataType == AJDataType.Unknown) result = new IRType(StdType.Unknown, PointerDepth);

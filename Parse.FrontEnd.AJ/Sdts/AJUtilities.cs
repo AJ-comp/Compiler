@@ -1,4 +1,5 @@
 ﻿using Parse.FrontEnd.AJ.Data;
+using Parse.FrontEnd.AJ.Sdts.AstNodes;
 using Parse.FrontEnd.AJ.Sdts.AstNodes.TypeNodes;
 using Parse.FrontEnd.RegularGrammar;
 using Parse.Types;
@@ -31,6 +32,7 @@ namespace Parse.FrontEnd.AJ.Sdts
             return false;
         }
 
+
         public static uint SizeOf(DataTypeNode type)
         {
             if (type.Type == AJDataType.Bool) return 1;
@@ -46,6 +48,40 @@ namespace Parse.FrontEnd.AJ.Sdts
             }
 
             throw new Exception();
+        }
+
+
+        public static AJType CreateBooleanType(AJNode node)
+        {
+            var dataType = AJDataType.Bool;
+            return new AJPreDefType(dataType, node.GetDefineForPreDefType(dataType));
+        }
+
+        public static AJType CreateByteType(AJNode node, bool unsigned)
+        {
+            var dataType = (unsigned) ? AJDataType.Byte : AJDataType.SByte;
+            return new AJPreDefType(dataType, node.GetDefineForPreDefType(dataType));
+        }
+
+
+        public static AJType CreateShortType(AJNode node, bool unsigned)
+        {
+            var dataType = (unsigned) ? AJDataType.UShort : AJDataType.Short;
+            return new AJPreDefType(dataType, node.GetDefineForPreDefType(dataType));
+        }
+
+
+        public static AJType CreateIntType(AJNode node, bool unsigned)
+        {
+            var dataType = (unsigned) ? AJDataType.UInt : AJDataType.Int;
+            return new AJPreDefType(dataType, node.GetDefineForPreDefType(dataType));
+        }
+
+
+        public static AJType CreateDoubleType(AJNode node)
+        {
+            var dataType = AJDataType.Double;
+            return new AJPreDefType(dataType, node.GetDefineForPreDefType(dataType));
         }
     }
 }

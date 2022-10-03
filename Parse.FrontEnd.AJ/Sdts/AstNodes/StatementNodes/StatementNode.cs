@@ -33,6 +33,7 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.StatementNodes
         {
             base.CompileLogic(param);
 
+            if (StubCode) return this;
             if (IsEmpty) AddEmptyStatementWarning();
 
             return this;

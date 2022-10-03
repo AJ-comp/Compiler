@@ -4,8 +4,15 @@ namespace Parse.MiddleEnd.IR.Expressions.ExprExpressions
 {
     public class IRLiteralExpr : IRExpr
     {
-        public TypeInfo Type { get; set; }
         public object Value { get; set; }
 
+        public IRLiteralExpr(IRType type) : base(type)
+        {
+        }
+
+        public IRLiteralExpr(IRType type, object value) : base(type)
+        {
+            Value = value;
+        }
     }
 }

@@ -12,7 +12,7 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes.LiteralNodes
     {
         public BoolLiteralNode(AstSymbol node) : base(node)
         {
-            Type = new AJPreDefType(AJDataType.Bool);
+            Type = AJUtilities.CreateBooleanType(this);
         }
 
         public BoolLiteralNode(bool value) : base(null)
@@ -20,7 +20,7 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes.LiteralNodes
             Value = value;
             ValueState = State.Fixed;
 
-            Type = new AJPreDefType(AJDataType.Bool);
+            Type = AJUtilities.CreateBooleanType(this);
         }
 
         protected override SdtsNode CompileLogic(CompileParameter param)
@@ -45,16 +45,7 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes.LiteralNodes
             return this;
         }
 
-        public override IRExpression To()
-        {
-            var result = new IRLiteralExpr
-            {
-                Type = new TypeInfo(StdType.Bit, 0),
-                Value = Value
-            };
-
-            return result;
-        }
+        public override IRExpression To() => new IRLiteralExpr(Type.ToIR(), Value);
 
         public override IRExpression To(IRExpression from)
         {

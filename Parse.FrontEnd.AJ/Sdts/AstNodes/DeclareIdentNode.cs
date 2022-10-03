@@ -47,8 +47,8 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes
             }
             else _ident = secondNode as DefNameNode;
 
-            AJType = _typeNode.ToAJTypeInfo(bConst);
             NameToken = _ident.Token;
+            AJType = _typeNode.ToAJTypeInfo(bConst);
 
             return this;
         }

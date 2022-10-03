@@ -56,7 +56,7 @@ namespace Parse.FrontEnd.AJ.Sdts
                 else if (cRoot.SignPost.MeaningUnit == AJGrammar.FormalPara) result = new ParamListNode(root);
                 else if (cRoot.SignPost.MeaningUnit == AJGrammar.CompoundSt) result = new CompoundStNode(root);
 
-                else if (cRoot.SignPost.MeaningUnit == AJGrammar.StatList) result = new StatListNode(root);
+//                else if (cRoot.SignPost.MeaningUnit == AJGrammar.StatList) result = new StatListNode(root);
                 else if (cRoot.SignPost.MeaningUnit == AJGrammar.IfSt) result = new IfStatementNode(root);
                 else if (cRoot.SignPost.MeaningUnit == AJGrammar.IfElseSt) result = new IfElseStatementNode(root);
                 else if (cRoot.SignPost.MeaningUnit == AJGrammar.WhileSt) result = new WhileStatementNode(root);
@@ -139,12 +139,13 @@ namespace Parse.FrontEnd.AJ.Sdts
                 else if (cRoot.SignPost.MeaningUnit == AJGrammar.VoidNode) result = new TypeDeclareNode(root, AJDataType.Void, false, AJGrammar.Void.Value);
                 else if (cRoot.SignPost.MeaningUnit == AJGrammar.BoolNode) result = new TypeDeclareNode(root, AJDataType.Bool, false, AJGrammar.Bool.Value);
                 else if (cRoot.SignPost.MeaningUnit == AJGrammar.ByteNode) result = new TypeDeclareNode(root, AJDataType.Byte, false, AJGrammar.Byte.Value);
+                else if (cRoot.SignPost.MeaningUnit == AJGrammar.SByteNode) result = new TypeDeclareNode(root, AJDataType.SByte, false, AJGrammar.SByte.Value);
                 else if (cRoot.SignPost.MeaningUnit == AJGrammar.CharNode) result = new TypeDeclareNode(root, AJDataType.Byte, false, AJGrammar.Char.Value);
                 else if (cRoot.SignPost.MeaningUnit == AJGrammar.ShortNode) result = new TypeDeclareNode(root, AJDataType.Short, false, AJGrammar.Short.Value);
-                else if (cRoot.SignPost.MeaningUnit == AJGrammar.UShortNode) result = new TypeDeclareNode(root, AJDataType.Short, false, AJGrammar.Short.Value);
+                else if (cRoot.SignPost.MeaningUnit == AJGrammar.UShortNode) result = new TypeDeclareNode(root, AJDataType.UShort, false, AJGrammar.UShort.Value);
                 else if (cRoot.SignPost.MeaningUnit == AJGrammar.SystemNode) result = new TypeDeclareNode(root, AJDataType.System, false, AJGrammar.System.Value);
                 else if (cRoot.SignPost.MeaningUnit == AJGrammar.IntNode) result = new TypeDeclareNode(root, AJDataType.Int, true, AJGrammar.Int.Value);
-                else if (cRoot.SignPost.MeaningUnit == AJGrammar.UIntNode) result = new TypeDeclareNode(root, AJDataType.Int, false, AJGrammar.UInt.Value);
+                else if (cRoot.SignPost.MeaningUnit == AJGrammar.UIntNode) result = new TypeDeclareNode(root, AJDataType.UInt, false, AJGrammar.UInt.Value);
                 else if (cRoot.SignPost.MeaningUnit == AJGrammar.DoubleNode) result = new TypeDeclareNode(root, AJDataType.Double, true, AJGrammar.Double.Value);
                 else if (cRoot.SignPost.MeaningUnit == AJGrammar.UserDefTypeNode) result = new TypeDeclareNode(root);
                 else if (cRoot.SignPost.MeaningUnit == AJGrammar.DefNameNode) result = new DefNameNode(root);

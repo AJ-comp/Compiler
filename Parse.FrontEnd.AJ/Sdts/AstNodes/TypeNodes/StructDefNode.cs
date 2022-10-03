@@ -33,7 +33,7 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.TypeNodes
                 return size;
             }
         }
-        public override IEnumerable<VariableAJ> AllFields => throw new NotImplementedException();
+        public override IEnumerable<VariableAJ> AllFields => _fields;
 
 
         // [0] : Ident [TerminalNode]

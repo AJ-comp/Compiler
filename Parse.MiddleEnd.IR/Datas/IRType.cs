@@ -1,4 +1,5 @@
-﻿using Parse.Types;
+﻿using Parse.Extensions;
+using Parse.Types;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -29,9 +30,38 @@ namespace Parse.MiddleEnd.IR.Datas
                 else if (Type == StdType.Short) result = "i16";
                 else if (Type == StdType.Int) result = "i32";
                 else if (Type == StdType.Double) result = "double";
-                else if (Type == StdType.Struct) result = $"%struct.{Name}";
+                else if (Type == StdType.Struct) result = $"%struct.{Name.Replace(".", "_")}{PointerLevel.ToAnyStrings("*")}";
 
                 return result;
+            }
+        }
+
+        public bool IsIntegerType
+        {
+            get
+            {
+                // yet, pointer type also is classified to integer type.
+                if (PointerLevel > 0) return true;
+                if (Type == StdType.Char || Type == StdType.UChar) return true;
+                if (Type == StdType.Short || Type == StdType.UShort) return true;
+                if (Type == StdType.Int || Type == StdType.UInt) return true;
+
+                return false;
+            }
+        }
+
+
+        public bool IsUnsigned
+        {
+            get
+            {
+                if (PointerLevel > 0) return true;
+
+                if (Type == StdType.UChar) return true;
+                if (Type == StdType.UShort) return true;
+                if (Type == StdType.UInt) return true;
+
+                return false;
             }
         }
 
@@ -40,6 +70,8 @@ namespace Parse.MiddleEnd.IR.Datas
         {
             Type = type;
             PointerLevel = pointerLevel;
+
+            if (PointerLevel > 0) Size = 8;
         }
     }
 }

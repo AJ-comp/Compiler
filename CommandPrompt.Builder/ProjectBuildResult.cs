@@ -1,7 +1,9 @@
 ﻿using AJ.Common.Helpers;
 using Compile;
 using ConsoleTables;
+using Parse.FrontEnd.AJ.Sdts.AstNodes;
 using Parse.FrontEnd.Tokenize;
+using Parse.MiddleEnd.IR.LLVM;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -12,6 +14,45 @@ namespace CommandPrompt.Builder
     public class ProjectBuildResult : Dictionary<string, CompileResult>
     {
         public string ProjectPath { get; }
+        public bool BuildSuccess
+        {
+            get
+            {
+                bool result = true;
+
+                foreach (var sourceDic in this)
+                {
+                    var compileResultJson = new CompileResultPrintFormat();
+
+                    compileResultJson.FileFullPath = sourceDic.Key;
+                    if (!sourceDic.Value.Result)
+                    {
+                        result = false;
+                        break;
+                    }
+                }
+
+                return result;
+            }
+        }
+
+        public Dictionary<string, string> GetLLVMIRCodes()
+        {
+            Dictionary<string, string> result = new Dictionary<string, string>();
+
+            if (!BuildSuccess) return result;
+
+            // generate LLVM IR Code
+            foreach (var item in Values)
+            {
+                ProgramNode rootNode = item.RootNode as ProgramNode;
+                string llvmIR = LLVMInterpreter.ToBitCode(rootNode.To());
+
+                result.Add(rootNode.FileFullPath, llvmIR);
+            }
+
+            return result;
+        }
 
         public ProjectBuildResult(string projectPath = "")
         {

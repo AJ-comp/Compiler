@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Parse.MiddleEnd.IR.Datas;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -25,6 +26,11 @@ namespace Parse.MiddleEnd.IR.Expressions.ExprExpressions
 
                 return false;
             }
+        }
+
+
+        public IRBinaryExpr(IRType type) : base(type)
+        {
         }
     }
 }

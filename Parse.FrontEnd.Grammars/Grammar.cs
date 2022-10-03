@@ -269,6 +269,6 @@ namespace Parse.FrontEnd.Grammars
         }
 
         private string DebuggerDisplay
-            => string.Format("{0},{1}", this.StartTerminal, this.EndTerminal);
+            => $"{StartTerminal},{EndTerminal}";
     }
 }

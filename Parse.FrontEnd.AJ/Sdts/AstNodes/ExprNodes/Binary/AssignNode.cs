@@ -29,7 +29,7 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes.Binary
 
         public override IRExpression To()
         {
-            var result = new IRBinaryExpr();
+            var result = new IRBinaryExpr(Type.ToIR());
 
             result.Operation = IRBinaryOperation.Assign;
             result.Left = LeftNode.To() as IRExpr;

@@ -60,9 +60,9 @@ namespace Parse.MiddleEnd.IR.LLVM
         {
             uint result = 0;
 
-            if (type == StdType.Char) result = 1;
-            else if (type == StdType.Short) result = 2;
-            else if (type == StdType.Int) result = 4;
+            if (type == StdType.Char || type == StdType.UChar) result = 1;
+            else if (type == StdType.Short || type == StdType.UShort) result = 2;
+            else if (type == StdType.Int || type == StdType.UInt) result = 4;
             else if (type == StdType.Double) result = 8;
 
             return result;
@@ -70,27 +70,33 @@ namespace Parse.MiddleEnd.IR.LLVM
 
         public static uint ToAlignSize(TypeInfo typeInfo) => (typeInfo.PointerLevel > 0) ? 8 : ToAlignSize(typeInfo.Type);
 
-        public static string GetInstructionNameForInteger(IRCompareOperation condition, bool bSigned)
+        public static string GetInstructionName(IRCompareOperation condition)
         {
             string result = string.Empty;
 
             if (condition == IRCompareOperation.EQ) result = "eq";
             else if (condition == IRCompareOperation.NE) result = "ne";
 
-            else if (bSigned)
-            {
-                if (condition == IRCompareOperation.GT) result = "sgt";
-                else if (condition == IRCompareOperation.GE) result = "sge";
-                else if (condition == IRCompareOperation.LT) result = "slt";
-                else if (condition == IRCompareOperation.LE) result = "sle";
-            }
-            else
-            {
-                if (condition == IRCompareOperation.GT) result = "ugt";
-                else if (condition == IRCompareOperation.GE) result = "uge";
-                else if (condition == IRCompareOperation.LT) result = "ult";
-                else if (condition == IRCompareOperation.LE) result = "ule";
-            }
+            if (condition == IRCompareOperation.GT) result = "gt";
+            else if (condition == IRCompareOperation.GE) result = "ge";
+            else if (condition == IRCompareOperation.LT) result = "lt";
+            else if (condition == IRCompareOperation.LE) result = "le";
+
+            return result;
+        }
+
+
+        public static string GetInstructionName(IRBinaryOperation operation)
+        {
+            string result = string.Empty;
+
+            if (operation == IRBinaryOperation.EQ) result = "eq";
+            else if (operation == IRBinaryOperation.NE) result = "ne";
+
+            if (operation == IRBinaryOperation.GT) result = "gt";
+            else if (operation == IRBinaryOperation.GE) result = "ge";
+            else if (operation == IRBinaryOperation.LT) result = "lt";
+            else if (operation == IRBinaryOperation.LE) result = "le";
 
             return result;
         }
