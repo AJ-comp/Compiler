@@ -21,6 +21,7 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes.Single
         protected override SdtsNode CompileLogic(CompileParameter param)
         {
             base.CompileLogic(param);
+            Type = ExprNode.Type;
 
             try
             {
@@ -56,7 +57,8 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes.Single
             else if (ProcessInfo == Info.PreDec) result.Operation = IRSingleOperation.PreDec;
             else if (ProcessInfo == Info.PostDec) result.Operation = IRSingleOperation.PostDec;
 
-            result.Expression = ExprNode.To() as IRExpr;
+            //            result.Expression = ExprNode.To() as IRExpr;
+            result.Items.Add(ExprNode.To() as IRExpr);
 
             return result;
         }

@@ -14,5 +14,8 @@ namespace Parse.MiddleEnd.IR.Expressions.ExprExpressions
         {
             Value = value;
         }
+
+
+        public override string ToString() => Value.ToString();
     }
 }

@@ -84,8 +84,11 @@ namespace Parse.FrontEnd.AJ.Data
         public override bool IsIntegerType()
         {
             if (DataType == AJDataType.Byte) return true;
+            if (DataType == AJDataType.SByte) return true;
             if (DataType == AJDataType.Short) return true;
+            if (DataType == AJDataType.UShort) return true;
             if (DataType == AJDataType.Int) return true;
+            if (DataType == AJDataType.UInt) return true;
 
             return false;
         }
@@ -136,14 +139,18 @@ namespace Parse.FrontEnd.AJ.Data
 
             // if normal type
             if (IsFloatingType() && preDefType.IsArithmeticType()) return true;
-            if (DataType == AJDataType.Int && preDefType.IsIntegerType()) return true;
-            if (DataType == AJDataType.Short && preDefType.IsIntegerType())
+            if (DataType == AJDataType.Int || DataType == AJDataType.UInt)
             {
-                return (preDefType.DataType == AJDataType.Int) ? false : true;
+                if (preDefType.IsIntegerType()) return true;
             }
-            if (DataType == AJDataType.Byte && preDefType.IsIntegerType())
+            if (DataType == AJDataType.Short || DataType == AJDataType.UShort)
             {
-                return (preDefType.DataType == AJDataType.Byte) ? true : false;
+                if (preDefType.IsIntegerType())
+                    return (preDefType.DataType == AJDataType.Int || preDefType.DataType == AJDataType.UInt) ? false : true;
+            }
+            if (DataType == AJDataType.Byte && DataType == AJDataType.SByte)
+            {
+                return (preDefType.DataType == AJDataType.Byte || preDefType.DataType == AJDataType.SByte) ? true : false;
             }
 
             return false;
@@ -179,7 +186,7 @@ namespace Parse.FrontEnd.AJ.Data
         {
             string result = Static ? "static " : string.Empty;
             result += Const ? "const " : string.Empty;
-            
+
             result += $"{DataType.ToDescription()} (size: {Size})";
             result += PointerDepth.ToAnyStrings("*");
             foreach (var arrayLength in ArrayLength) result += $"[{arrayLength}]";

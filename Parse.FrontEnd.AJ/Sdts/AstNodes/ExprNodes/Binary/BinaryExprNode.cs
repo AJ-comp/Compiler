@@ -20,6 +20,10 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes.Binary
         {
         }
 
+
+        /// <summary>
+        /// common check for it is available assign command (detail check is executed in each operator)
+        /// </summary>
         protected void CheckAssignable()
         {
             if (!IsCanParsing) return;

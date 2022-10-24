@@ -9,9 +9,11 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.StatementNodes
 {
     public class CompoundStNode : StatementNode, IRootable
     {
-//        public StatListNode StatListNode { get; private set; }
+        //        public StatListNode StatListNode { get; private set; }
         public List<StatementNode> StatementNodes = new List<StatementNode>();
         public bool IsRoot => !(Parent is StatementNode);
+
+        public List<object> OrderingItems { get; } = new List<object>();
 
 
         public CompoundStNode(AstSymbol node) : base(node)
@@ -63,6 +65,8 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.StatementNodes
                     ClarifyReturn = true;
                 }
                 else StatementNodes.Add(item.Compile(param.CloneForNewBlock()) as StatementNode);
+
+                OrderingItems.Add(item);
             }
 
             return this;
@@ -72,13 +76,22 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.StatementNodes
         {
             var result = new IRCompoundStatement();
 
-            foreach (var localVar in VarList)
-                result.LocalVars.Add(localVar.ToIR());
+            foreach (var item in Items)
+            {
+                if (item is DeclareVarStNode)
+                {
+                    var dclVarNode = item as DeclareVarStNode;
 
-//            if (StatListNode == null) return result;
+                    foreach (var varItem in dclVarNode.VarList)
+                        result.Items.Add(varItem.ToIR());
+                }
+                else
+                {
+                    var statement = item as StatementNode;
 
-            foreach (var statement in StatementNodes)
-                result.Expressions.Add(statement.To() as IRStatement);
+                    result.Items.Add(statement.To());
+                }
+            }
 
             return result;
         }

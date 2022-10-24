@@ -21,6 +21,8 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes
         public IEnumerable<VariableAJ> VarList => ParamVarList;
         public IEnumerable<ISymbolData> SymbolList => VarList;
 
+        public IRFunction IRFunction { get; } = new IRFunction();
+
         /// <summary>
         /// returns a host struct or class that own function.
         /// </summary>
@@ -112,7 +114,7 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes
             var type = new IRType(StdType.Struct, 1);
             type.Name = defNode.FullName;
 
-            IRVariable result = new IRVariable(type, AJGrammar.This.Value);
+            IRVariable result = new IRVariable(type, AJGrammar.This.Value, null, 0, 0);
 
             return result;
         }
@@ -120,22 +122,20 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes
 
         public IRExpression To()
         {
-            IRFunction function = new IRFunction();
-
             // it has to pass 'this' pointer as argument if it is not static function.
             if (HostStruct != null && !IsStatic)
             {
-                function.Arguments.Add(ToIRVariable(HostStruct));
+                IRFunction.Arguments.Add(ToIRVariable(HostStruct));
             }
 
             foreach (var arg in VarList)
-                function.Arguments.Add(arg.ToIR());
+                IRFunction.Arguments.Add(arg.ToIR());
 
-            function.ReturnType = ReturnType.ToIR();
-            function.Name = FullName;
-            function.Statement = CompoundSt.To() as IRCompoundStatement;
+            IRFunction.ReturnType = ReturnType.ToIR();
+            IRFunction.Name = FullName;
+            IRFunction.Statement = CompoundSt.To() as IRCompoundStatement;
 
-            return function;
+            return IRFunction;
         }
 
         public IRExpression To(IRExpression from)
@@ -171,7 +171,9 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes
 
             // add this reference
             //            ParamVarList.Add(VariableAJ.CreateThisVar(classDefNode.Type, classDefNode.NameToken, BlockLevel + 1, 0));
-            var formalParam = Items[offset++].Compile(param.CloneForNewBlock(1)) as ParamListNode;
+            // if static is there is no 'this' pointer so offset is started to 0 but it is not static offset has to start to 1 (the offset of this pointer is 0)
+            var newParam = (IsStatic) ? param.CloneForNewBlock(0) : param.CloneForNewBlock(1);
+            var formalParam = Items[offset++].Compile(newParam) as ParamListNode;
             ParamVarList.AddRange(formalParam.VarList);
 
             Reference.Add(this);

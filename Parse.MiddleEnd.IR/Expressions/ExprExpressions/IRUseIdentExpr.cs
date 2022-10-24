@@ -7,11 +7,16 @@ namespace Parse.MiddleEnd.IR.Expressions.ExprExpressions
 {
     public class IRUseIdentExpr : IRExpr
     {
-        public string Name { get; set; }
+        public IRVariable Variable { get; }
+        public string Name => Variable.Name;
 
 
-        public IRUseIdentExpr(IRType type) : base(type)
+        public IRUseIdentExpr(IRType type, IRVariable variable) : base(type)
         {
+            Variable = variable;
         }
+
+
+        public override string ToString() => Name;
     }
 }

@@ -259,6 +259,15 @@ namespace Parse.FrontEnd.AJ.Properties {
         }
         
         /// <summary>
+        ///   It can&apos;t convert from {0} type to {1} type implicitly. If it use the explicit convert this is can. It should check if there is explicit convert.과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string AJ0048 {
+            get {
+                return ResourceManager.GetString("AJ0048", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   The unexpected error is fired while meaning analysis. {0}과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string AJ9998 {

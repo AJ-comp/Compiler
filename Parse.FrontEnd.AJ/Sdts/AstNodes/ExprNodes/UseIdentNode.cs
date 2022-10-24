@@ -45,9 +45,10 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes
 
         public override IRExpression To()
         {
-            IRUseIdentExpr result = new IRUseIdentExpr(Type.ToIR());
+            // only variable
+            var ajVar = UsedSymbolData as VariableAJ;
 
-            result.Name = IdentToken.Input;
+            IRUseIdentExpr result = new IRUseIdentExpr(Type.ToIR(), ajVar.ToIR());
 
             return result;
         }

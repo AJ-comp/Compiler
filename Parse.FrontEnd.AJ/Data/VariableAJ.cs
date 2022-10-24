@@ -2,6 +2,7 @@
 using Parse.FrontEnd.AJ.Sdts.AstNodes;
 using Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes;
 using Parse.MiddleEnd.IR.Expressions;
+using Parse.MiddleEnd.IR.Expressions.ExprExpressions;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -113,10 +114,8 @@ namespace Parse.FrontEnd.AJ.Data
 
         public IRVariable ToIR()
         {
-            IRVariable result = new IRVariable(Type.ToIR(), Name);
-
-            result.BlockIndex = Block;
-            result.OffsetIndex = Offset;
+            IRVariable result = (InitValue != null) ? new IRVariable(Type.ToIR(), Name, InitValue.To() as IRExpr, Block, Offset)
+                                                                   : new IRVariable(Type.ToIR(), Name, null, Block, Offset);
 
             return result;
         }

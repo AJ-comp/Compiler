@@ -1,4 +1,5 @@
-﻿using Parse.MiddleEnd.IR.Datas;
+﻿using AJ.Common.Helpers;
+using Parse.MiddleEnd.IR.Datas;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -31,6 +32,12 @@ namespace Parse.MiddleEnd.IR.Expressions.ExprExpressions
 
         public IRBinaryExpr(IRType type) : base(type)
         {
+        }
+
+
+        public override string ToString()
+        {
+            return $"{Left} {Operation.ToDescription()} {Right}";
         }
     }
 }

@@ -308,14 +308,29 @@ namespace Parse.FrontEnd.AJ
         /// MCL0025 is that <b><i>
         /// It can't convert from {from} type to {to} type implicitly.</i></b>
         /// </summary>
-        /// <param name="fromType"></param>
-        /// <param name="toType"></param>
+        /// <param name="from"></param>
+        /// <param name="to"></param>
         /// <returns></returns>
         /*****************************************************/
-        public static MeaningErrInfo CreateMCL0025(string from, string to)
+        public static MeaningErrInfo CreateMCL0025(ExprNode from, ExprNode to)
         {
-            var errMsg = string.Format(AlarmCodes.MCL0025, from, to);
-            return new MeaningErrInfo(nameof(AlarmCodes.MCL0025), errMsg);
+            // if predef type then display the name else display the full name included the namespace name.
+            var fromTypeName = from.Type.DefineNode.IsPreDefType ? from.Type.Name : from.Type.FullName;
+            var toTypeName = to.Type.DefineNode.IsPreDefType ? to.Type.Name : to.Type.FullName;
+
+            var errMsg = string.Format(AlarmCodes.AJ0048, fromTypeName, toTypeName);
+
+            return new MeaningErrInfo(from.Type.NameTokens, nameof(AlarmCodes.AJ0048), errMsg);
+        }
+
+        public static MeaningErrInfo CreateMCL0025(ExprNode from, string to)
+        {
+            // if predef type then display the name else display the full name included the namespace name.
+            var fromTypeName = from.Type.DefineNode.IsPreDefType ? from.Type.Name : from.Type.FullName;
+
+            var errMsg = string.Format(AlarmCodes.AJ0048, fromTypeName, to);
+
+            return new MeaningErrInfo(from.AllTokens, nameof(AlarmCodes.MCL0025), errMsg);
         }
 
 
@@ -402,6 +417,29 @@ namespace Parse.FrontEnd.AJ
             var errMsg = string.Format(AlarmCodes.AJ0039, type1.FullName, type2.FullName);
 
             return new MeaningErrInfo(useType.FullDataTypeToken, nameof(AlarmCodes.AJ0039), errMsg);
+        }
+
+
+        /*****************************************************/
+        /// <summary>
+        /// Creates the MeaningErrInfo for code AJ0048. <br/>
+        /// AJ0048 is that <b><i>
+        /// It can't convert from {0} type to {1} type implicitly. If it use the explicit convert this is can. It should check if there is explicit convert. </i></b>
+        /// </summary>
+        /// <param name="from"></param>
+        /// <param name="to"></param>
+        /// <param name="toCorrect"></param>
+        /// <returns></returns>
+        /*****************************************************/
+        public static MeaningErrInfo CreateAJ0048(ExprNode from, ExprNode to)
+        {
+            // if predef type then display the name else display the full name included the namespace name.
+            var fromTypeName = from.Type.DefineNode.IsPreDefType ? from.Type.Name : from.Type.FullName;
+            var toTypeName = to.Type.DefineNode.IsPreDefType ? to.Type.Name : to.Type.FullName;
+
+            var errMsg = string.Format(AlarmCodes.AJ0048, fromTypeName, toTypeName);
+
+            return new MeaningErrInfo(from.AllTokens, nameof(AlarmCodes.AJ0048), errMsg);
         }
     }
 }

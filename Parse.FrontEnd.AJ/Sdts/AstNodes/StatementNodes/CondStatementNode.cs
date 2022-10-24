@@ -38,7 +38,7 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.StatementNodes
             if (node.Type == null) return this;
             else if (node.Type.DataType != AJDataType.Bool)
             {
-                Alarms.Add(AJAlarmFactory.CreateMCL0025(node.Type.Name, "bool"));
+                Alarms.Add(AJAlarmFactory.CreateMCL0025(node, "bool"));
                 return this;
             }
 

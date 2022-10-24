@@ -27,8 +27,11 @@ namespace Parse.MiddleEnd.IR.Datas
                 if (Type == StdType.Void) result = "void";
                 else if (Type == StdType.Bit) result = "i1";
                 else if (Type == StdType.Char) result = "i8";
+                else if (Type == StdType.UChar) result = "i8";
                 else if (Type == StdType.Short) result = "i16";
+                else if (Type == StdType.UShort) result = "i16";
                 else if (Type == StdType.Int) result = "i32";
+                else if (Type == StdType.UInt) result = "i32";
                 else if (Type == StdType.Double) result = "double";
                 else if (Type == StdType.Struct) result = $"%struct.{Name.Replace(".", "_")}{PointerLevel.ToAnyStrings("*")}";
 

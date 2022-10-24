@@ -4,6 +4,7 @@ using Parse.MiddleEnd.IR.Expressions.StmtExpressions;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Text;
 
 namespace Parse.MiddleEnd.IR.Expressions
@@ -15,10 +16,6 @@ namespace Parse.MiddleEnd.IR.Expressions
         public IRType ReturnType { get; set; }
         public List<IRVariable> Arguments { get; } = new List<IRVariable>();
         public IRCompoundStatement Statement { get; set; }
-        public int VarIndex { get; internal set; } = 0;
-        public int CmpVarIndex { get; internal set; } = 0;
-
-        public string IRName => Name.Replace(".", "_").Replace("~", "_");
 
         private string GetDebuggerDisplay()
         {

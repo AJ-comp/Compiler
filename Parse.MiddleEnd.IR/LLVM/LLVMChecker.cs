@@ -17,13 +17,16 @@ namespace Parse.MiddleEnd.IR.LLVM
         }
 
 
-        public static TypeInfo MaximumType(TypeInfo op1Type, TypeInfo op2Type)
+        public static IRType MaximumType(IRType op1Type, IRType op2Type)
         {
             var op1Size = LLVMConverter.ToAlignSize(op1Type);
             var op2Size = LLVMConverter.ToAlignSize(op2Type);
 
             return (op1Size >= op2Size) ? op1Type : op2Type;
         }
+
+
+        public static bool IsInc(IRSingleOperation operation) => operation == IRSingleOperation.PostInc || operation == IRSingleOperation.PreInc;
 
 
         /*

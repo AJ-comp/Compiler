@@ -1,4 +1,5 @@
 ﻿using Parse.Extensions;
+using Parse.MiddleEnd.IR.Datas;
 using Parse.MiddleEnd.IR.Expressions;
 using Parse.MiddleEnd.IR.Expressions.ExprExpressions;
 using Parse.MiddleEnd.IR.Expressions.StmtExpressions;
@@ -8,7 +9,7 @@ using System.Collections.Generic;
 
 namespace Parse.MiddleEnd.IR.LLVM
 {
-    public class LLVMInterpreter
+    public partial class LLVMInterpreter
     {
         public static Dictionary<IRFunction, int> NextIndexByFunction { get; } = new Dictionary<IRFunction, int>();
 
@@ -65,16 +66,20 @@ namespace Parse.MiddleEnd.IR.LLVM
         /**********************************************************/
         public static string ToBitCode(IRFunction function)
         {
-            string result = $"define dso_local {function.ReturnType.LLVMTypeName} @{function.IRName} ";
+            var llvmFunction = new LLVMFunction(function);
+            string result = $"define dso_local {llvmFunction.ReturnType.LLVMTypeName} @{llvmFunction.IRName} ";
 
             // argument code
             result += "(";
-            for (int i = 0; i < function.Arguments.Count; i++)
+            for (int i = 0; i < llvmFunction.Arguments.Count; i++)
             {
-                var arg = function.Arguments[i];
+                var arg = llvmFunction.Arguments[i];
 
-                result += $"{arg.Type.LLVMTypeName} noundef %{arg.Name}";
-                if (i < function.Arguments.Count - 1) result += ", ";
+                var param = new LLVMNamedVar(arg);
+                llvmFunction.AddVar(param);
+
+                result += $"{param.TypeName} noundef %{arg.Name}";
+                if (i < llvmFunction.Arguments.Count - 1) result += ", ";
             }
             result += ") #0";
             result += Environment.NewLine;
@@ -84,9 +89,9 @@ namespace Parse.MiddleEnd.IR.LLVM
             result += "entry:" + Environment.NewLine;
 
             // init argument
-            for (int i = function.Arguments.Count - 1; i >= 0; i--)
+            for (int i = llvmFunction.Arguments.Count - 1; i >= 0; i--)
             {
-                var arg = function.Arguments[i];
+                var arg = llvmFunction.Arguments[i];
 
                 result += $"; initialize for parameter {i}" + Environment.NewLine;
                 result += $"%{arg.Name}.addr = alloca {arg.Type.LLVMTypeName}, align {arg.Type.Size}" + Environment.NewLine;
@@ -94,8 +99,8 @@ namespace Parse.MiddleEnd.IR.LLVM
                 result += Environment.NewLine;
             }
 
-            result += ToBitCode(function.Statement, function);
-            result += RetCode(function);
+            result += ToBitCode(llvmFunction.Statement, llvmFunction);
+            result += RetCode(llvmFunction);
             result += "}";
             result += Environment.NewLine;
 
@@ -103,12 +108,12 @@ namespace Parse.MiddleEnd.IR.LLVM
         }
 
 
-        private static string RetCode(IRFunction function)
+        private static string RetCode(LLVMFunction function)
         {
             return "ret void" + Environment.NewLine;
         }
 
-        public static string ToBitCode(IRStatement statement, IRFunction ownFunction)
+        public static string ToBitCode(IRStatement statement, LLVMFunction ownFunction)
         {
             if (statement is IRConditionStatement) return ToBitCode(statement as IRConditionStatement, ownFunction);
             else if (statement is IRCompoundStatement) return ToBitCode(statement as IRCompoundStatement, ownFunction);
@@ -119,62 +124,155 @@ namespace Parse.MiddleEnd.IR.LLVM
         }
 
 
-        public static string ToBitCode(IRCompoundStatement statement, IRFunction ownFunction)
+        public static string ToBitCode(IRConditionStatement statement, LLVMFunction ownFunction)
         {
             string result = string.Empty;
 
-            foreach (var localVar in statement.LocalVars)
+            result += ToBitCode(statement.Condition, ownFunction, new LLVMBuildOption(false));
+
+            var cmpVar = ownFunction.GetRecentVar(LLVMVarType.CmpVar);
+            var ifVar = LLVMVar.CreateLabelVar(LLVMVarType.IfVar);
+            var elseVar = (statement.FalseStatement != null) ? LLVMVar.CreateLabelVar(LLVMVarType.IfElseVar) : null;
+            var endVar = LLVMVar.CreateLabelVar(LLVMVarType.IfEndVar);
+            ownFunction.AddVars(ifVar, elseVar, endVar);
+
+            var elseOrEnd = (elseVar == null) ? endVar.NameInLLVMFunction : elseVar.NameInLLVMFunction;
+
+            result += $"br {cmpVar.TypeName} {cmpVar.NameInLLVMFunction}, label {ifVar.NameInLLVMFunction}, label {elseOrEnd} {Environment.NewLine}";
+            result += Environment.NewLine;
+            result += $"{ifVar.NameInLLVMFunction} : \t\t\t ; {statement.Condition} is true {Environment.NewLine}";
+            result += ToBitCode(statement.TrueStatement, ownFunction);
+            result += $"br label {endVar.NameInLLVMFunction} {Environment.NewLine}";
+            result += Environment.NewLine;
+
+            if (elseVar != null)
             {
-                result += $"; initialize for local var {localVar.Name}" + Environment.NewLine;
-                result += $"%{localVar.Name} = alloca {localVar.Type.LLVMTypeName}, align {localVar.Type.Size}" + Environment.NewLine;
-                if (localVar.Type.Type != StdType.Struct)
-                {
-                    result += $"%{ownFunction.VarIndex++} = load {localVar.Type.LLVMTypeName}, {localVar.Type.LLVMTypeName}* %{localVar.Name}, align {localVar.Type.Size}";
-                    result += Environment.NewLine;
-                }
+                result += $"{elseVar.NameInLLVMFunction} : \t\t\t ; {statement.Condition} is false {Environment.NewLine}";
+                result += ToBitCode(statement.FalseStatement, ownFunction);
+                result += $"br label {endVar.NameInLLVMFunction} {Environment.NewLine}";
                 result += Environment.NewLine;
             }
 
-            foreach (var expression in statement.Expressions)
+            result += $"{endVar.NameInLLVMFunction} : \t\t\t ; cmp is end {Environment.NewLine}";
+
+            return result;
+        }
+
+
+        private static string ToBitCode(IRVariable localVar, LLVMFunction ownFunction)
+        {
+            string result = string.Empty;
+
+            var namedVar = new LLVMNamedVar(localVar);
+            ownFunction.AddVar(namedVar);
+
+            result += $"; {localVar}" + Environment.NewLine;
+            result += $"{namedVar.NameInLLVMFunction} = alloca {localVar.Type.LLVMTypeName}, align {localVar.Type.Size}" + Environment.NewLine;
+
+            if (localVar.Type.Type == StdType.Struct)
             {
-                result += ToBitCode(expression, ownFunction);
+
+            }
+            else
+            {
+                if (localVar.InitValue is IRLiteralExpr)
+                {
+                    var literalVar = localVar.InitValue as IRLiteralExpr;
+
+                    result += $"store {namedVar.TypeName} {literalVar.Value} {namedVar.TypeName}* {namedVar.NameInLLVMFunction}, align {namedVar.Size} {Environment.NewLine}";
+                }
+                else
+                {
+                    result += ToBitCode(localVar.InitValue, ownFunction, new LLVMBuildOption(true));
+                    var exprVar = ownFunction.GetRecentVar();
+
+                    result += $"store {namedVar.TypeName} {exprVar.NameInLLVMFunction} {namedVar.TypeName}* {namedVar.NameInLLVMFunction}, align {namedVar.Size} {Environment.NewLine}";
+                }
+            }
+            return result + Environment.NewLine;
+        }
+
+
+        public static string ToBitCode(IRCompoundStatement statement, LLVMFunction ownFunction)
+        {
+            string result = string.Empty;
+
+            foreach (var item in statement.Items)
+            {
+                if (item is IRVariable) result += ToBitCode(item as IRVariable, ownFunction);
+                else result += ToBitCode(item as IRStatement, ownFunction);
             }
 
             return result;
         }
 
 
-        public static string ToBitCode(IRConditionStatement statement, IRFunction ownFunction)
+        public static string ToBitCode(IRExprStatement statement, LLVMFunction ownFunction)
         {
-            string result = string.Empty;
-
-            result += ToBitCode(statement.Condition, ownFunction);
-            result += ToBitCode(statement.TrueStatement, ownFunction);
-            if (statement.FalseStatement != null) result += ToBitCode(statement.FalseStatement, ownFunction);
-
-            return result;
+            string result = $"; {statement.Expr} {Environment.NewLine}";
+            return result + ToBitCode(statement.Expr, ownFunction, new LLVMBuildOption(true));
         }
 
 
-        public static string ToBitCode(IRExpr expr, IRFunction ownFunction)
+        public static string ToBitCode(IRExpr expr, LLVMFunction ownFunction, LLVMBuildOption option)
         {
             string result = string.Empty;
 
-            if (expr is IRBinaryExpr) return ToBitCode(expr as IRBinaryExpr, ownFunction);
-            else if (expr is IRCallExpr) return ToBitCode(expr as IRCallExpr, ownFunction);
+            if (expr is IRBinaryExpr) return ToBitCode(expr as IRBinaryExpr, ownFunction, option);
+            else if (expr is IRCallExpr) return ToBitCode(expr as IRCallExpr, ownFunction, option);
+            else if (expr is IRSingleExpr) return ToBitCode(expr as IRSingleExpr, ownFunction, option);
+            else if (expr is IRLiteralExpr) return ToBitCode(expr as IRLiteralExpr, ownFunction, option);
+            else if (expr is IRUseIdentExpr) return ToBitCode(expr as IRUseIdentExpr, ownFunction, option);
 
             throw new Exception("There is no correct expr.");
         }
 
-
-        public static string ToBitCode(IRBinaryExpr expr, IRFunction ownFunction)
+        public static string ToBitCode(IRCallExpr expr, LLVMFunction ownFunction, LLVMBuildOption option)
         {
-            string cmpType = (expr.Left.Type.IsIntegerType && expr.Right.Type.IsIntegerType) ? "icmp" : "fcmp";
-            string unsign = (expr.Left.Type.IsUnsigned || expr.Right.Type.IsUnsigned) ? "u" : "s";
-            string operation = LLVMConverter.GetInstructionName(expr.Operation);
+            return string.Empty;
+        }
+
+        public static string ToBitCode(IRSingleExpr expr, LLVMFunction ownFunction, LLVMBuildOption option)
+        {
+            string result = (option.NoComment) ? string.Empty : $"; {expr} {Environment.NewLine}";
+            result += ToBitCode(expr.Items[0] as IRExpr, ownFunction, option);
+            var recentVar = ownFunction.GetRecentVar(LLVMVarType.NormalVar);
+
+            if (expr.Operation == IRSingleOperation.PostInc || expr.Operation == IRSingleOperation.PreInc ||
+                expr.Operation == IRSingleOperation.PostDec || expr.Operation == IRSingleOperation.PreDec)
+            {
+                // postinc, postdec, preinc, predec has only IRUseIdentExpr
+                // ex: a++ = ok, (a+b)++ = no
+                var namedVar = ownFunction.GetNamedVar((expr.Items[0] as IRUseIdentExpr).Variable);
+                var value = LLVMChecker.IsInc(expr.Operation) ? 1 : -1;
+                var type = LLVMChecker.IsInc(expr.Operation) ? LLVMVarType.IncVar : LLVMVarType.DecVar;
+                var incDecVar = new LLVMVar(type, expr.Type);
+                ownFunction.AddVar(incDecVar);
+
+                result += $"{incDecVar.NameInLLVMFunction} = add {incDecVar.TypeName} {recentVar.NameInLLVMFunction}, {value} {Environment.NewLine}";
+                result += $"store {incDecVar.TypeName} {incDecVar.NameInLLVMFunction}, {incDecVar.TypeName}* {namedVar.NameInLLVMFunction}, align {recentVar.Size} {Environment.NewLine}";
+            }
+
+            return result;
+        }
+
+        public static string ToBitCode(IRLiteralExpr expr, LLVMFunction ownFunction, LLVMBuildOption option)
+        {
+            LLVMVar var = new LLVMLiteralVar(expr);
+            ownFunction.AddVar(var);
+
+            return string.Empty;
+        }
 
 
-            return $"%cmp{ownFunction.CmpVarIndex} = {cmpType} {unsign}{operation}";
+        public static string ToBitCode(IRUseIdentExpr expr, LLVMFunction ownFunction, LLVMBuildOption option)
+        {
+            var namedVar = ownFunction.GetNamedVar(expr.Variable);
+            var llvmVar = new LLVMVar(LLVMVarType.NormalVar, expr);
+            ownFunction.AddVar(llvmVar);
+
+            // namedVar.Typename == llvmVar.TypeName
+            return $"{llvmVar.NameInLLVMFunction} = load {llvmVar.TypeName}, {llvmVar.TypeName}* {namedVar.NameInLLVMFunction}, align {namedVar.Size} {Environment.NewLine}";
         }
     }
 }

@@ -68,7 +68,7 @@ namespace Parse.MiddleEnd.IR.LLVM
             return result;
         }
 
-        public static uint ToAlignSize(TypeInfo typeInfo) => (typeInfo.PointerLevel > 0) ? 8 : ToAlignSize(typeInfo.Type);
+        public static uint ToAlignSize(IRType typeInfo) => (typeInfo.PointerLevel > 0) ? 8 : ToAlignSize(typeInfo.Type);
 
         public static string GetInstructionName(IRCompareOperation condition)
         {

@@ -47,8 +47,8 @@ namespace Parse
         [Description("*")] DeRef,
         [Description("!")] Not,
         [Description("~")] BitNot,
-        PreInc,
-        PreDec,
+        [Description("++")] PreInc,
+        [Description("--")] PreDec,
         PostInc,
         PostDec,
     }

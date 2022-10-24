@@ -19,9 +19,10 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes.Binary
             CheckAssignable();
 
             if (!IsCanParsing) return this;
-            Assign(LeftNode, RightNode);
+            var result = Assign(LeftNode, RightNode);
+            Type = result?.Type;
 
-            if(Type == null) Alarms.Add(AJAlarmFactory.CreateMCL0023(this, "="));
+            if (result == null) Alarms.Add(AJAlarmFactory.CreateMCL0023(this, "="));
             if (RootNode.IsBuild) DBContext.Instance.Insert(this);
 
             return this;
