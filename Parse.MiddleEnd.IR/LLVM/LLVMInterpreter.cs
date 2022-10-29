@@ -82,92 +82,168 @@ namespace Parse.MiddleEnd.IR.LLVM
                 if (i < llvmFunction.Arguments.Count - 1) result += ", ";
             }
             result += ") #0";
-            result += Environment.NewLine;
+            llvmFunction.Code.AddEtcCommand(result);
+            llvmFunction.Code.AddNewLine();
 
             // statement code
-            result += "{" + Environment.NewLine;
-            result += "entry:" + Environment.NewLine;
+            llvmFunction.Code.AddOpenBlock();
+            llvmFunction.Code.AddEtcCommand("entry:");
 
             // init argument
             for (int i = llvmFunction.Arguments.Count - 1; i >= 0; i--)
             {
                 var arg = llvmFunction.Arguments[i];
 
-                result += $"; initialize for parameter {i}" + Environment.NewLine;
-                result += $"%{arg.Name}.addr = alloca {arg.Type.LLVMTypeName}, align {arg.Type.Size}" + Environment.NewLine;
-                result += $"store {arg.Type.LLVMTypeName} %{arg.Name}, {arg.Type.LLVMTypeName}* %{arg.Name}.addr, align {arg.Type.Size}" + Environment.NewLine;
-                result += Environment.NewLine;
+                llvmFunction.Code.AddComment($"initialize for parameter {i}");
+                llvmFunction.Code.AddInitialize(arg);
+                llvmFunction.Code.AddNewLine();
             }
 
-            result += ToBitCode(llvmFunction.Statement, llvmFunction);
-            result += RetCode(llvmFunction);
-            result += "}";
-            result += Environment.NewLine;
+            ToBitCode(llvmFunction.Statement, llvmFunction);
+            llvmFunction.Code.AddReturn();
+            llvmFunction.Code.AddCloseBlock();
+            llvmFunction.Code.AddNewLine();
 
-            return result;
+            return llvmFunction.Code.GetAllCode();
         }
 
 
-        private static string RetCode(LLVMFunction function)
+        public static void ToBitCode(IRStatement statement, LLVMFunction ownFunction)
         {
-            return "ret void" + Environment.NewLine;
-        }
-
-        public static string ToBitCode(IRStatement statement, LLVMFunction ownFunction)
-        {
-            if (statement is IRConditionStatement) return ToBitCode(statement as IRConditionStatement, ownFunction);
-            else if (statement is IRCompoundStatement) return ToBitCode(statement as IRCompoundStatement, ownFunction);
-            else if (statement is IRExprStatement) return ToBitCode(statement as IRExprStatement, ownFunction);
-            else if (statement is IRRepeatStatement) return ToBitCode(statement as IRRepeatStatement, ownFunction);
-
-            throw new Exception("There is no correct statement.");
+            if (statement is IRConditionStatement) ToBitCode(statement as IRConditionStatement, ownFunction);
+            else if (statement is IRCompoundStatement) ToBitCode(statement as IRCompoundStatement, ownFunction);
+            else if (statement is IRExprStatement) ToBitCode(statement as IRExprStatement, ownFunction);
+            else if (statement is IRRepeatStatement) ToBitCode(statement as IRRepeatStatement, ownFunction);
+            else if (statement is IRControlStatement) ToBitCode(statement as IRControlStatement, ownFunction);
+            else throw new Exception("There is no correct statement.");
         }
 
 
-        public static string ToBitCode(IRConditionStatement statement, LLVMFunction ownFunction)
-        {
-            string result = string.Empty;
 
-            result += ToBitCode(statement.Condition, ownFunction, new LLVMBuildOption(false));
+        /// <summary>
+        /// Create the br endVar code from elseOrEnVar through the below principle. <br/>
+        /// 1. If the last code is br then do nothing.  (it doesn't need to create br endVar code because there is already other the br code. <br/>
+        /// 2. If the type of elseOrEndVar is elseVar then it think of endVar was not created therefore create the endVar. <br/>
+        /// </summary>
+        /// <param name="elseOrEndVar"></param>
+        /// <param name="ownFunction"></param>
+        /// <returns></returns>
+        private static LLVMVar CreateEndVarCodeConditional(LLVMVar elseOrEndVar, LLVMFunction ownFunction)
+        {
+            LLVMVar endVar = null;
+            if (ownFunction.Code.LastCommandIsBranch()) return endVar;
+
+            // if endVar is not created yet then create at here.
+            if (elseOrEndVar.VarType == LLVMVarType.IfElseVar)
+            {
+                endVar = LLVMVar.CreateLabelVar(LLVMVarType.IfEndVar);
+                ownFunction.AddVar(endVar);
+            }
+            else endVar = elseOrEndVar;
+
+            ownFunction.Code.AddBranch(endVar);
+            return endVar;
+        }
+
+
+        /// <summary>
+        /// Algorithm: <br/>
+        /// ex 1: in "if statement" <br/> 
+        /// "if statement" create ifVar and endVar in the beginning.  (br if.then if.end)<br/>
+        /// when the "if statement" is end then it try to create br endVar code using CreateEndVarCodeConditional function. <br/>
+        /// if the last code is the br code don't create br code. <br/>
+        /// else the endVar will be not created because it will be already created. And create br code using the endVar.<br/>
+        /// ex 2: in "if else statement" <br/>
+        /// "if else statement" create ifVar and elseVar in the beginning. (br if.then if.else) <br/>
+        /// when the "if statement" is end in "if else statement" then it try to create br endVar code using CreateEndVarCodeConditional function. <br/>
+        /// if the last code is not the br code then the endVar will be created.<br/>
+        /// when the "else statement" is end then it try to create br endVar code using CreateEndVarCodeConditional function. <br/>
+        /// <i>here!! if there is already endVar that created from "if statement" it has to pass that. Because it has to same the br label of "if statement" and "else statement".</i> <br/>
+        /// </summary>
+        /// <param name="statement"></param>
+        /// <param name="ownFunction"></param>
+        public static void ToBitCode(IRConditionStatement statement, LLVMFunction ownFunction)
+        {
+            ToBitCode(statement.Condition, ownFunction, new LLVMBuildOption(false));
 
             var cmpVar = ownFunction.GetRecentVar(LLVMVarType.CmpVar);
             var ifVar = LLVMVar.CreateLabelVar(LLVMVarType.IfVar);
-            var elseVar = (statement.FalseStatement != null) ? LLVMVar.CreateLabelVar(LLVMVarType.IfElseVar) : null;
-            var endVar = LLVMVar.CreateLabelVar(LLVMVarType.IfEndVar);
-            ownFunction.AddVars(ifVar, elseVar, endVar);
+            var elseOrEndVar = (statement.FalseStatement != null) ? LLVMVar.CreateLabelVar(LLVMVarType.IfElseVar)
+                                                                                            : LLVMVar.CreateLabelVar(LLVMVarType.IfEndVar);
 
-            var elseOrEnd = (elseVar == null) ? endVar.NameInLLVMFunction : elseVar.NameInLLVMFunction;
+            ownFunction.AddVars(ifVar, elseOrEndVar);
 
-            result += $"br {cmpVar.TypeName} {cmpVar.NameInLLVMFunction}, label {ifVar.NameInLLVMFunction}, label {elseOrEnd} {Environment.NewLine}";
-            result += Environment.NewLine;
-            result += $"{ifVar.NameInLLVMFunction} : \t\t\t ; {statement.Condition} is true {Environment.NewLine}";
-            result += ToBitCode(statement.TrueStatement, ownFunction);
-            result += $"br label {endVar.NameInLLVMFunction} {Environment.NewLine}";
-            result += Environment.NewLine;
+            ownFunction.Code.AddBranch(cmpVar, ifVar, elseOrEndVar);
+            ownFunction.Code.AddNewLine();
+            ownFunction.Code.AddLabel(ifVar, $"{statement.Condition} is true");
+            ToBitCode(statement.TrueStatement, ownFunction);
+            var endVar = CreateEndVarCodeConditional(elseOrEndVar, ownFunction);
+            ownFunction.Code.AddNewLine();
 
-            if (elseVar != null)
+            LLVMVar endVar2 = null;
+            if (elseOrEndVar.VarType == LLVMVarType.IfElseVar)
             {
-                result += $"{elseVar.NameInLLVMFunction} : \t\t\t ; {statement.Condition} is false {Environment.NewLine}";
-                result += ToBitCode(statement.FalseStatement, ownFunction);
-                result += $"br label {endVar.NameInLLVMFunction} {Environment.NewLine}";
-                result += Environment.NewLine;
+                ownFunction.Code.AddLabel(elseOrEndVar, $"{statement.Condition} is false");
+                ToBitCode(statement.FalseStatement, ownFunction);
+                var param = (endVar != null) ? endVar : elseOrEndVar;
+                // endVar2 is null or same value with endVar
+                endVar2 = CreateEndVarCodeConditional(param, ownFunction);
             }
 
-            result += $"{endVar.NameInLLVMFunction} : \t\t\t ; cmp is end {Environment.NewLine}";
-
-            return result;
+            var finalEndVar = (endVar != null) ? endVar : endVar2;
+            if (finalEndVar != null)
+            {
+                ownFunction.Code.AddNewLine();
+                ownFunction.Code.AddLabel(finalEndVar, "cmp is end");
+            }
         }
 
 
-        private static string ToBitCode(IRVariable localVar, LLVMFunction ownFunction)
+        public static void ToBitCode(IRRepeatStatement statement, LLVMFunction ownFunction)
         {
-            string result = string.Empty;
+            var whileBodyVar = LLVMVar.CreateLabelVar(LLVMVarType.WhileBodyVar);
+            ownFunction.AddVar(whileBodyVar);
+            var whileCondVar = LLVMVar.CreateLabelVar(LLVMVarType.WhileCondVar);
+            ownFunction.AddVar(whileCondVar);
+            var whileEndVar = LLVMVar.CreateLabelVar(LLVMVarType.WhileEndVar);
+            ownFunction.AddVar(whileEndVar);
 
+            ownFunction.Code.AddBranch(whileCondVar);
+            ownFunction.Code.AddNewLine();
+
+            // while.cond
+            ownFunction.Code.AddLabel(whileCondVar);
+            ToBitCode(statement.Condition, ownFunction, new LLVMBuildOption(false));
+            ownFunction.Code.AddBranch(ownFunction.GetRecentVar(), whileBodyVar, whileEndVar);
+            ownFunction.Code.AddNewLine();
+
+            // while.body
+            ownFunction.Code.AddLabel(whileBodyVar);
+            ToBitCode(statement.TrueStatement, ownFunction);
+            if (!statement.IncludeBreak) ownFunction.Code.AddBranch(whileCondVar);
+            ownFunction.Code.AddNewLine();
+
+            // while.end
+            ownFunction.Code.AddLabel(whileEndVar);
+        }
+
+
+        public static void ToBitCode(IRControlStatement statement, LLVMFunction ownFunction)
+        {
+            if (statement.ControlType == IRControlType.Break)
+                ownFunction.Code.AddBranch(ownFunction.GetRecentVar(LLVMVarType.WhileEndVar));
+            else if (statement.ControlType == IRControlType.Continue)
+                ownFunction.Code.AddBranch(ownFunction.GetRecentVar(LLVMVarType.WhileCondVar));
+        }
+
+
+        private static void ToBitCode(IRVariable localVar, LLVMFunction ownFunction)
+        {
             var namedVar = new LLVMNamedVar(localVar);
             ownFunction.AddVar(namedVar);
 
-            result += $"; {localVar}" + Environment.NewLine;
-            result += $"{namedVar.NameInLLVMFunction} = alloca {localVar.Type.LLVMTypeName}, align {localVar.Type.Size}" + Environment.NewLine;
+            ownFunction.Code.AddComment(localVar.ToString());
+            ownFunction.Code.AddAlloca(namedVar);
 
             if (localVar.Type.Type == StdType.Struct)
             {
@@ -178,101 +254,99 @@ namespace Parse.MiddleEnd.IR.LLVM
                 if (localVar.InitValue is IRLiteralExpr)
                 {
                     var literalVar = localVar.InitValue as IRLiteralExpr;
-
-                    result += $"store {namedVar.TypeName} {literalVar.Value} {namedVar.TypeName}* {namedVar.NameInLLVMFunction}, align {namedVar.Size} {Environment.NewLine}";
+                    ownFunction.Code.AddStore(namedVar, literalVar);
                 }
                 else
                 {
-                    result += ToBitCode(localVar.InitValue, ownFunction, new LLVMBuildOption(true));
-                    var exprVar = ownFunction.GetRecentVar();
-
-                    result += $"store {namedVar.TypeName} {exprVar.NameInLLVMFunction} {namedVar.TypeName}* {namedVar.NameInLLVMFunction}, align {namedVar.Size} {Environment.NewLine}";
+                    ToBitCode(localVar.InitValue, ownFunction, new LLVMBuildOption(true));
+                    ownFunction.Code.AddStore(namedVar, ownFunction.GetRecentVar());
                 }
             }
-            return result + Environment.NewLine;
+
+            ownFunction.Code.AddNewLine();
         }
 
 
-        public static string ToBitCode(IRCompoundStatement statement, LLVMFunction ownFunction)
+        public static void ToBitCode(IRCompoundStatement statement, LLVMFunction ownFunction)
         {
-            string result = string.Empty;
-
             foreach (var item in statement.Items)
             {
-                if (item is IRVariable) result += ToBitCode(item as IRVariable, ownFunction);
-                else result += ToBitCode(item as IRStatement, ownFunction);
+                if (item is IRVariable) ToBitCode(item as IRVariable, ownFunction);
+                else ToBitCode(item as IRStatement, ownFunction);
             }
-
-            return result;
         }
 
 
-        public static string ToBitCode(IRExprStatement statement, LLVMFunction ownFunction)
+        public static void ToBitCode(IRExprStatement statement, LLVMFunction ownFunction)
         {
-            string result = $"; {statement.Expr} {Environment.NewLine}";
-            return result + ToBitCode(statement.Expr, ownFunction, new LLVMBuildOption(true));
+            ownFunction.Code.AddComment($"{statement.Expr}");
+            ToBitCode(statement.Expr, ownFunction, new LLVMBuildOption(true));
         }
 
 
-        public static string ToBitCode(IRExpr expr, LLVMFunction ownFunction, LLVMBuildOption option)
+        public static void ToBitCode(IRExpr expr, LLVMFunction ownFunction, LLVMBuildOption option)
         {
-            string result = string.Empty;
-
-            if (expr is IRBinaryExpr) return ToBitCode(expr as IRBinaryExpr, ownFunction, option);
-            else if (expr is IRCallExpr) return ToBitCode(expr as IRCallExpr, ownFunction, option);
-            else if (expr is IRSingleExpr) return ToBitCode(expr as IRSingleExpr, ownFunction, option);
-            else if (expr is IRLiteralExpr) return ToBitCode(expr as IRLiteralExpr, ownFunction, option);
-            else if (expr is IRUseIdentExpr) return ToBitCode(expr as IRUseIdentExpr, ownFunction, option);
-
-            throw new Exception("There is no correct expr.");
+            if (expr is IRBinaryExpr) ToBitCode(expr as IRBinaryExpr, ownFunction, option);
+            else if (expr is IRCallExpr) ToBitCode(expr as IRCallExpr, ownFunction, option);
+            else if (expr is IRSingleExpr) ToBitCode(expr as IRSingleExpr, ownFunction, option);
+            else if (expr is IRLiteralExpr) ToBitCode(expr as IRLiteralExpr, ownFunction, option);
+            else if (expr is IRUseIdentExpr) ToBitCode(expr as IRUseIdentExpr, ownFunction, option);
+            else throw new Exception("There is no correct expr.");
         }
 
-        public static string ToBitCode(IRCallExpr expr, LLVMFunction ownFunction, LLVMBuildOption option)
+        public static void ToBitCode(IRCallExpr expr, LLVMFunction ownFunction, LLVMBuildOption option)
         {
-            return string.Empty;
         }
 
-        public static string ToBitCode(IRSingleExpr expr, LLVMFunction ownFunction, LLVMBuildOption option)
+        public static void ToBitCode(IRSingleExpr expr, LLVMFunction ownFunction, LLVMBuildOption option)
         {
-            string result = (option.NoComment) ? string.Empty : $"; {expr} {Environment.NewLine}";
-            result += ToBitCode(expr.Items[0] as IRExpr, ownFunction, option);
-            var recentVar = ownFunction.GetRecentVar(LLVMVarType.NormalVar);
+            if (!option.NoComment) ownFunction.Code.AddComment($"; {expr}");
 
-            if (expr.Operation == IRSingleOperation.PostInc || expr.Operation == IRSingleOperation.PreInc ||
-                expr.Operation == IRSingleOperation.PostDec || expr.Operation == IRSingleOperation.PreDec)
+            // postinc, postdec, preinc, predec has only IRUseIdentExpr
+            // ex: a++ = ok, (a+b)++ = no
+            var namedVar = ownFunction.GetNamedVar((expr.Items[0] as IRUseIdentExpr).Variable);
+            var value = LLVMChecker.IsInc(expr.Operation) ? new IRLiteralExpr(1) : new IRLiteralExpr(-1);
+            var type = LLVMChecker.IsInc(expr.Operation) ? LLVMVarType.IncVar : LLVMVarType.DecVar;
+
+            if (expr.Operation == IRSingleOperation.PostInc || expr.Operation == IRSingleOperation.PostDec)
             {
-                // postinc, postdec, preinc, predec has only IRUseIdentExpr
-                // ex: a++ = ok, (a+b)++ = no
-                var namedVar = ownFunction.GetNamedVar((expr.Items[0] as IRUseIdentExpr).Variable);
-                var value = LLVMChecker.IsInc(expr.Operation) ? 1 : -1;
-                var type = LLVMChecker.IsInc(expr.Operation) ? LLVMVarType.IncVar : LLVMVarType.DecVar;
+                // The post has to be recent var is before calculate.
+                var incDecVar = new LLVMVar(type, expr.Type);
+                ownFunction.AddVar(incDecVar);
+                ToBitCode(expr.Items[0] as IRExpr, ownFunction, option);
+                var recentVar = ownFunction.GetRecentVar(LLVMVarType.NormalVar);
+
+                ownFunction.Code.AddArithmetic(incDecVar, recentVar, value, IRBinaryOperation.Add);
+                ownFunction.Code.AddStore(namedVar, incDecVar);
+            }
+            else if (expr.Operation == IRSingleOperation.PreInc || expr.Operation == IRSingleOperation.PreDec)
+            {
+                // The pre has to be recent var is after calculate.
+                ToBitCode(expr.Items[0] as IRExpr, ownFunction, option);
+                var recentVar = ownFunction.GetRecentVar(LLVMVarType.NormalVar);
                 var incDecVar = new LLVMVar(type, expr.Type);
                 ownFunction.AddVar(incDecVar);
 
-                result += $"{incDecVar.NameInLLVMFunction} = add {incDecVar.TypeName} {recentVar.NameInLLVMFunction}, {value} {Environment.NewLine}";
-                result += $"store {incDecVar.TypeName} {incDecVar.NameInLLVMFunction}, {incDecVar.TypeName}* {namedVar.NameInLLVMFunction}, align {recentVar.Size} {Environment.NewLine}";
+                ownFunction.Code.AddArithmetic(incDecVar, recentVar, value, IRBinaryOperation.Add);
+                ownFunction.Code.AddStore(namedVar, incDecVar);
             }
-
-            return result;
         }
 
-        public static string ToBitCode(IRLiteralExpr expr, LLVMFunction ownFunction, LLVMBuildOption option)
+        public static void ToBitCode(IRLiteralExpr expr, LLVMFunction ownFunction, LLVMBuildOption option)
         {
             LLVMVar var = new LLVMLiteralVar(expr);
             ownFunction.AddVar(var);
-
-            return string.Empty;
         }
 
 
-        public static string ToBitCode(IRUseIdentExpr expr, LLVMFunction ownFunction, LLVMBuildOption option)
+        public static void ToBitCode(IRUseIdentExpr expr, LLVMFunction ownFunction, LLVMBuildOption option)
         {
             var namedVar = ownFunction.GetNamedVar(expr.Variable);
             var llvmVar = new LLVMVar(LLVMVarType.NormalVar, expr);
             ownFunction.AddVar(llvmVar);
 
             // namedVar.Typename == llvmVar.TypeName
-            return $"{llvmVar.NameInLLVMFunction} = load {llvmVar.TypeName}, {llvmVar.TypeName}* {namedVar.NameInLLVMFunction}, align {namedVar.Size} {Environment.NewLine}";
+            ownFunction.Code.AddLoad(llvmVar, namedVar);
         }
     }
 }

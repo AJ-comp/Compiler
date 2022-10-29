@@ -17,6 +17,8 @@ namespace Parse.FrontEnd.AJ
         public Terminal If { get; } = new Terminal(TokenType.Keyword.Controlword, "if");
         public Terminal Else { get; } = new Terminal(TokenType.Keyword.Controlword, "else");
         public Terminal While { get; } = new Terminal(TokenType.Keyword.Repeateword, "while");
+        public Terminal Break { get; } = new Terminal(TokenType.Keyword.Controlword, "break");
+        public Terminal Continue { get; } = new Terminal(TokenType.Keyword.Controlword, "continue");
         public Terminal Return { get; } = new Terminal(TokenType.Keyword.Controlword, "return");
         public static Terminal Const { get; } = new Terminal(TokenType.Keyword.DefinedDataType, "const");
         public static Terminal Bool { get; } = new Terminal(TokenType.Keyword.DefinedDataType, "bool");
@@ -124,6 +126,8 @@ namespace Parse.FrontEnd.AJ
         private NonTerminal optExpression = new NonTerminal("opt_expression");
         private NonTerminal ifSt = new NonTerminal("if_st");
         private NonTerminal whileSt = new NonTerminal("while_st");
+        private NonTerminal breakSt = new NonTerminal(nameof(breakSt));
+        private NonTerminal continueSt = new NonTerminal(nameof(continueSt));
         private NonTerminal returnSt = new NonTerminal("return_st");
         private NonTerminal expression = new NonTerminal("expression");
         private NonTerminal assignmentExp = new NonTerminal("assignment_exp");
@@ -190,6 +194,8 @@ namespace Parse.FrontEnd.AJ
         public static MeaningUnit IfSt { get; } = new MeaningUnit(nameof(IfSt));
         public static MeaningUnit IfElseSt { get; } = new MeaningUnit(nameof(IfElseSt));
         public static MeaningUnit WhileSt { get; } = new MeaningUnit(nameof(WhileSt));
+        public static MeaningUnit BreakSt { get; } = new MeaningUnit(nameof(BreakSt));
+        public static MeaningUnit ContinueSt { get; } = new MeaningUnit(nameof(continueSt));
         public static MeaningUnit ReturnSt { get; } = new MeaningUnit(nameof(ReturnSt));
         public static MeaningUnit DeclareVarSt { get; } = new MeaningUnit(nameof(DeclareVarSt));
         public static MeaningUnit Index { get; } = new MeaningUnit(nameof(Index));
@@ -293,13 +299,15 @@ namespace Parse.FrontEnd.AJ
 //            this.optStatList.AddItem(this.statementList | new Epsilon(), StatList);
 
             this.statementList.AddItem(this.statement | this.statementList + this.statement);
-            this.statement.AddItem(compoundSt | declareVarSt | expressionSt | ifSt | whileSt | returnSt);
+            this.statement.AddItem(compoundSt | declareVarSt | expressionSt | ifSt | whileSt | returnSt | breakSt | continueSt);
             this.expressionSt.AddItem(expression.Optional() + this.SemiColon, ExpSt);
 
             this.ifSt.AddItem(this.If + this.OpenParenthesis + this.expression + this.CloseParenthesis + this.statement, 1, IfSt);
             this.ifSt.AddItem(this.If + this.OpenParenthesis + this.expression + this.CloseParenthesis + this.statement + this.Else + this.statement, 0, IfElseSt);
 
             this.whileSt.AddItem(this.While + this.OpenParenthesis + this.expression + this.CloseParenthesis + this.statement, WhileSt);
+            this.breakSt.AddItem(this.Break + SemiColon, BreakSt);
+            this.continueSt.AddItem(this.Continue + SemiColon, ContinueSt);
             this.returnSt.AddItem(this.Return + expression.Optional() + SemiColon, ReturnSt);
             this.declareVarSt.AddItem(declaratorVar + SemiColon, DeclareVarSt);
 //            this.expression.AddItem(this.newAssignmentExp);

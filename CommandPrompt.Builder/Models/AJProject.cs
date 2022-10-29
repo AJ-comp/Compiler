@@ -53,8 +53,6 @@ namespace CommandPrompt.Builder.Models
                 var source = compileInfo.Key;
                 var compileResult = compileInfo.Value;
 
-                WriteException(compileResult.RootNode as ProgramNode);
-
                 if (printParsingHistory)
                 {
                     Directory.CreateDirectory(DebugFolder);
@@ -62,6 +60,8 @@ namespace CommandPrompt.Builder.Models
                     var file = $"{Path.GetFileNameWithoutExtension(source)}.csv";
                     compileResult.ParsingResult.ToParsingHistory.ToCSV(Path.Combine(DebugFolder, file));
                 }
+
+                WriteException(compileResult.RootNode as ProgramNode);
 
                 result.Add(source, compileResult);
             }

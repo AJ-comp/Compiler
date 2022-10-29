@@ -8,77 +8,62 @@ namespace Parse.MiddleEnd.IR.LLVM
 {
     public partial class LLVMInterpreter
     {
-        private static string Add(IRBinaryExpr expr, LLVMFunction ownFunction, LLVMBuildOption option)
+        private static void Arithmetic(IRBinaryExpr expr, LLVMFunction ownFunction, LLVMBuildOption option)
         {
-            if (expr.Operation != IRBinaryOperation.Add) throw new Exception();
-
             var recentVars = new List<LLVMVar>();
             recentVars.AddRange(ownFunction.GetRecentVars(2));
             var maximumType = LLVMChecker.MaximumType(expr.Left.Type, expr.Right.Type);
 
-            var newVar = new LLVMVar(LLVMVarType.AddVar, maximumType);
-            ownFunction.AddVar(newVar);
+            LLVMVarType type = (expr.Operation == IRBinaryOperation.Add) ? LLVMVarType.AddVar
+                                        : (expr.Operation == IRBinaryOperation.Sub) ? LLVMVarType.SubVar
+                                        : (expr.Operation == IRBinaryOperation.Mul) ? LLVMVarType.MulVar
+                                        : (expr.Operation == IRBinaryOperation.Div) ? LLVMVarType.DivVar
+                                        : (expr.Operation == IRBinaryOperation.Mod) ? LLVMVarType.RemVar
+                                        : throw new Exception("");
 
-            return $"{newVar.NameInLLVMFunction} add {newVar.TypeName} {recentVars[0].NameInLLVMFunction}, {recentVars[1].NameInLLVMFunction} {Environment.NewLine}";
+            var newVar = new LLVMVar(type, maximumType);
+            ownFunction.AddVar(newVar);
+            ownFunction.Code.AddArithmetic(newVar, recentVars[0], recentVars[1], expr.Operation);
         }
 
-
-        private static string Sub(IRBinaryExpr expr, LLVMFunction ownFunction, LLVMBuildOption option)
-        {
-            if (expr.Operation != IRBinaryOperation.Sub) throw new Exception();
-
-            var recentVars = new List<LLVMVar>();
-            recentVars.AddRange(ownFunction.GetRecentVars(2));
-            var maximumType = LLVMChecker.MaximumType(expr.Left.Type, expr.Right.Type);
-
-            var newVar = new LLVMVar(LLVMVarType.SubVar, maximumType);
-            ownFunction.AddVar(newVar);
-
-            return $"{newVar.NameInLLVMFunction} sub {newVar.TypeName} {recentVars[0].NameInLLVMFunction}, {recentVars[1].NameInLLVMFunction} {Environment.NewLine}";
-        }
-
-
-        private static string Assign(IRBinaryExpr expr, LLVMFunction ownFunction, LLVMBuildOption option)
+        private static void Assign(IRBinaryExpr expr, LLVMFunction ownFunction, LLVMBuildOption option)
         {
             if (expr.Operation != IRBinaryOperation.Assign) throw new Exception();
 
             var namedVar = ownFunction.GetNamedVar((expr.Left as IRUseIdentExpr).Variable);
             var rightVar = ownFunction.GetRecentVar();
-//            var maximumType = LLVMChecker.MaximumType(expr.Left.Type, expr.Right.Type);
+            //            var maximumType = LLVMChecker.MaximumType(expr.Left.Type, expr.Right.Type);
 
-            return $"store {namedVar.TypeName} {rightVar.NameInLLVMFunction} {namedVar.TypeName}* {namedVar.NameInLLVMFunction}, align {namedVar.Size} {Environment.NewLine}";
+            ownFunction.Code.AddStore(namedVar, rightVar);
         }
 
 
-        public static string ToBitCode(IRBinaryExpr expr, LLVMFunction ownFunction, LLVMBuildOption option)
+        public static void ToBitCode(IRBinaryExpr expr, LLVMFunction ownFunction, LLVMBuildOption option)
         {
-            string result = option.NoComment ? string.Empty : $"; {expr.Left} {expr.Operation.ToDescription()} {expr.Right} {Environment.NewLine}";
+            if(!option.NoComment) ownFunction.Code.AddComment($"{expr.Left} {expr.Operation.ToDescription()} {expr.Right}");
 
             // assign category is not load left var
-            if(expr.Operation != IRBinaryOperation.Assign)  result += ToBitCode(expr.Left, ownFunction, option);
-            result += ToBitCode(expr.Right, ownFunction, option);
+            if(expr.Operation != IRBinaryOperation.Assign)  ToBitCode(expr.Left, ownFunction, option);
+            ToBitCode(expr.Right, ownFunction, option);
 
             var recentVars = new List<LLVMVar>();
             recentVars.AddRange(ownFunction.GetRecentVars(2));
-            var maximumType = LLVMChecker.MaximumType(expr.Left.Type, expr.Right.Type);
 
-            if (expr.Operation == IRBinaryOperation.Add) result += Add(expr, ownFunction, option);
-            else if (expr.Operation == IRBinaryOperation.Sub) result += Sub(expr, ownFunction, option);
-            else if (expr.Operation == IRBinaryOperation.Assign) result += Assign(expr, ownFunction, option);
+            if (IRChecker.IsArithmetic(expr.Operation)) Arithmetic(expr, ownFunction, option);
+            else if (expr.Operation == IRBinaryOperation.Assign) Assign(expr, ownFunction, option);
             else
             {
-                string cmpType = (expr.Left.Type.IsIntegerType && expr.Right.Type.IsIntegerType) ? "icmp" : "fcmp";
-                string unsign = (expr.Left.Type.IsUnsigned || expr.Right.Type.IsUnsigned) ? "u" : "s";
-                string operation = LLVMConverter.GetInstructionName(expr.Operation);
+                if (expr.AlwaysTrue || expr.AlwaysFalse)
+                {
+                    ownFunction.Code.AddComment($"{expr} is always true or false so cmp logic is not genereated.");
+                    return;
+                }
 
                 var cmpVar = LLVMVar.CreateCmpVar();
                 ownFunction.AddVar(cmpVar);
 
-                result += $"{cmpVar.NameInLLVMFunction} = {cmpType} {unsign}{operation} {maximumType.LLVMTypeName} " +
-                        $"{recentVars[0].NameInLLVMFunction}, {recentVars[1].NameInLLVMFunction} {Environment.NewLine}";
+                ownFunction.Code.AddCmp(expr, cmpVar, recentVars[0], recentVars[1]);
             }
-
-            return result;
         }
     }
 }

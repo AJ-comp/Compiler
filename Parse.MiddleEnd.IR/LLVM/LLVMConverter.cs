@@ -126,6 +126,24 @@ namespace Parse.MiddleEnd.IR.LLVM
             return result;
         }
 
+        public static string GetTypeName(IRType type)
+        {
+            string result = string.Empty;
+
+            if (type.Type == StdType.Void) result = "void";
+            else if (type.Type == StdType.Bit) result = "i1";
+            else if (type.Type == StdType.Char) result = "i8";
+            else if (type.Type == StdType.UChar) result = "i8";
+            else if (type.Type == StdType.Short) result = "i16";
+            else if (type.Type == StdType.UShort) result = "i16";
+            else if (type.Type == StdType.Int) result = "i32";
+            else if (type.Type == StdType.UInt) result = "i32";
+            else if (type.Type == StdType.Double) result = "double";
+            else if (type.Type == StdType.Struct) result = $"%struct.{type.Name.Replace(".", "_")}{type.PointerLevel.ToAnyStrings("*")}";
+
+            return result;
+        }
+
         public static string GetMCPUOption(string name)
         {
             return (name.Contains("Stm32")) ? "cortex-m3" : string.Empty;

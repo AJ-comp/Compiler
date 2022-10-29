@@ -268,6 +268,15 @@ namespace Parse.FrontEnd.AJ.Properties {
         }
         
         /// <summary>
+        ///   There is no roop to exit with a break or continue.과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string AJ0049 {
+            get {
+                return ResourceManager.GetString("AJ0049", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   The unexpected error is fired while meaning analysis. {0}과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string AJ9998 {

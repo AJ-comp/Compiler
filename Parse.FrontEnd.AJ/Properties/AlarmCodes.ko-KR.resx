@@ -268,6 +268,9 @@
     <value>{0} 이름이 현재 컨텍스트에 없습니다.</value>
   </data>
   <data name="AJ0048" xml:space="preserve">
-    <value>암시적으로 {0} 타입을 {1} 타입으로 변환할 수 없습니다. 명시적 변환으로는 가능합니다. 캐스트를 확인하세요</value>
+    <value>암시적으로 {0} 타입을 {1} 타입으로 변환할 수 없습니다. 명시적 변환으로는 가능합니다. 캐스트를 확인하세요.</value>
+  </data>
+  <data name="AJ0049" xml:space="preserve">
+    <value>break 또는 continue 되어 빠져나갈 루프가 없습니다.</value>
   </data>
 </root>

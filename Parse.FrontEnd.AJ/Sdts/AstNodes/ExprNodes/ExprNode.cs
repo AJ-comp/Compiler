@@ -14,8 +14,6 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes
         public State ValueState { get; set; } = State.NotFixed;
         public AJType Type { get; internal set; } = null;
 
-        public bool AlwaysTrue { get; } = false;
-
         public bool IsRoot => !(Parent is ExprNode);
 
 

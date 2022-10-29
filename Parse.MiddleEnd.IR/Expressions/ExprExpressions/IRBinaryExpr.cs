@@ -13,6 +13,9 @@ namespace Parse.MiddleEnd.IR.Expressions.ExprExpressions
         public IRExpr Left { get; set; }
         public IRExpr Right { get; set; }
 
+        public bool AlwaysTrue { get; set; }
+        public bool AlwaysFalse { get; set; }
+
 
         public bool Compareable
         {

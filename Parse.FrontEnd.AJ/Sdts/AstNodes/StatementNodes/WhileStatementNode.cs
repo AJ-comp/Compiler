@@ -1,16 +1,16 @@
-﻿using Parse.FrontEnd.Ast;
+﻿using Parse.FrontEnd.AJ.Data;
+using Parse.FrontEnd.Ast;
 using Parse.MiddleEnd.IR.Expressions;
 using Parse.MiddleEnd.IR.Expressions.ExprExpressions;
 using Parse.MiddleEnd.IR.Expressions.StmtExpressions;
 
 namespace Parse.FrontEnd.AJ.Sdts.AstNodes.StatementNodes
 {
-    public class WhileStatementNode : CondStatementNode
+    public class WhileStatementNode : RoopStatementNode
     {
         public WhileStatementNode(AstSymbol node) : base(node)
         {
         }
-
 
         public override IRExpression To()
         {
@@ -18,6 +18,7 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.StatementNodes
 
             result.Condition = CompareCondition.To() as IRBinaryExpr;
             result.TrueStatement = TrueStatement.To() as IRStatement;
+            result.IncludeBreak = IncludeBreak;
 
             return result;
         }

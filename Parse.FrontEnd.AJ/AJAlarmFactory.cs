@@ -6,6 +6,7 @@ using Parse.FrontEnd.AJ.Sdts.AstNodes;
 using Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes;
 using Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes.Binary;
 using Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes.Single;
+using Parse.FrontEnd.AJ.Sdts.AstNodes.StatementNodes;
 using Parse.FrontEnd.AJ.Sdts.AstNodes.TypeNodes;
 using System;
 using System.Collections.Generic;
@@ -440,6 +441,14 @@ namespace Parse.FrontEnd.AJ
             var errMsg = string.Format(AlarmCodes.AJ0048, fromTypeName, toTypeName);
 
             return new MeaningErrInfo(from.AllTokens, nameof(AlarmCodes.AJ0048), errMsg);
+        }
+
+
+        public static MeaningErrInfo CreateAJ0049(StatementNode node)
+        {
+            var errMsg = string.Format(AlarmCodes.AJ0049);
+
+            return new MeaningErrInfo(node.AllTokens, nameof(AlarmCodes.AJ0049), errMsg);
         }
     }
 }

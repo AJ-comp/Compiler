@@ -214,9 +214,11 @@ namespace Parse.FrontEnd.Parsers.LR
         /// <returns></returns>
         private void AllParsing(ParsingResult target)
         {
+            int count = 0;
             for (int i = 0; i < target.Count; i++)
             {
                 var blockParsingResult = this.BlockFullParsing(target, i);
+                if (count++ > 10000) break;
 
                 if (this.PostProcessing(blockParsingResult, target, true, ref i)) break;
             }

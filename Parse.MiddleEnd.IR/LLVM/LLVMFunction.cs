@@ -17,7 +17,7 @@ namespace Parse.MiddleEnd.IR.LLVM
         public IRCompoundStatement Statement => _irFunction.Statement;
         public string IRName => Name.Replace(".", "_").Replace("~", "_");
 
-
+        public Code Code { get; } = new Code();
 
         public void AddVar(LLVMVar var)
         {
@@ -27,16 +27,16 @@ namespace Parse.MiddleEnd.IR.LLVM
 
                 // get the count of same name in current function
                 var count = GetCountOfSameName(namedVar);
-                namedVar.NameInLLVMFunction = $"{var.VarType.ToDescription()}{namedVar.Variable.Name}{count}";
+                namedVar.NameInFunction = $"{var.VarType.ToDescription()}{namedVar.Variable.Name}{count}";
             }
             else if (var is LLVMLiteralVar)
             {
                 var literalVar = var as LLVMLiteralVar;
-                var.NameInLLVMFunction = literalVar.Value.ToString();
+                var.NameInFunction = literalVar.Value.ToString();
             }
             else
             {
-                var.NameInLLVMFunction = $"{var.VarType.ToDescription()}{_localVars[var.VarType].Count}";
+                var.NameInFunction = $"{var.VarType.ToDescription()}{_localVars[var.VarType].Count}";
             }
 
             _orderingVars.Add(var);

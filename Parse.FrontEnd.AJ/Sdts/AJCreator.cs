@@ -56,10 +56,12 @@ namespace Parse.FrontEnd.AJ.Sdts
                 else if (cRoot.SignPost.MeaningUnit == AJGrammar.FormalPara) result = new ParamListNode(root);
                 else if (cRoot.SignPost.MeaningUnit == AJGrammar.CompoundSt) result = new CompoundStNode(root);
 
-//                else if (cRoot.SignPost.MeaningUnit == AJGrammar.StatList) result = new StatListNode(root);
+                //                else if (cRoot.SignPost.MeaningUnit == AJGrammar.StatList) result = new StatListNode(root);
                 else if (cRoot.SignPost.MeaningUnit == AJGrammar.IfSt) result = new IfStatementNode(root);
                 else if (cRoot.SignPost.MeaningUnit == AJGrammar.IfElseSt) result = new IfElseStatementNode(root);
                 else if (cRoot.SignPost.MeaningUnit == AJGrammar.WhileSt) result = new WhileStatementNode(root);
+                else if (cRoot.SignPost.MeaningUnit == AJGrammar.BreakSt) result = new BreakStatementNode(root);
+                else if (cRoot.SignPost.MeaningUnit == AJGrammar.ContinueSt) result = new ContinueStatementNode(root);
                 else if (cRoot.SignPost.MeaningUnit == AJGrammar.ReturnSt) result = new ReturnStatementNode(root);
                 else if (cRoot.SignPost.MeaningUnit == AJGrammar.DeclareVarSt) result = new DeclareVarStNode(root);
                 else if (cRoot.SignPost.MeaningUnit == AJGrammar.ExpSt) result = new ExprStatementNode(root);

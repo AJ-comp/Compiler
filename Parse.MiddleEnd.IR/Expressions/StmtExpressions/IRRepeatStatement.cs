@@ -10,5 +10,6 @@ namespace Parse.MiddleEnd.IR.Expressions.StmtExpressions
         public IRBinaryExpr Condition { get; set; }
 
         public IRStatement TrueStatement { get; set; }
+        public bool IncludeBreak { get; set; } = false;
     }
 }

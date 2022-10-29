@@ -1,6 +1,5 @@
 ﻿using Parse.FrontEnd.AJ.Data;
 using Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes.LiteralNodes;
-using Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes.Single;
 using Parse.FrontEnd.Ast;
 using Parse.MiddleEnd.IR.Expressions;
 using Parse.MiddleEnd.IR.Expressions.ExprExpressions;
@@ -12,6 +11,9 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes.Binary
     public sealed class CompareNode : BinaryExprNode
     {
         public IRCompareOperation Operation { get; }
+        public bool AlwaysTrue { get; private set; } = false;
+        public bool AlwaysFalse { get; private set; } = false;
+
 
         public CompareNode(AstSymbol node, IRCompareOperation operation) : base(node)
         {
@@ -31,7 +33,7 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes.Binary
             else if (Operation == IRCompareOperation.LT) LessThan(LeftNode, RightNode);
             else if (Operation == IRCompareOperation.LE) LessEqual(LeftNode, RightNode);
 
-            if(Type == null) Alarms.Add(AJAlarmFactory.CreateMCL0024(LeftNode.Type.FullName, RightNode.Type.FullName));
+            if (Type == null) Alarms.Add(AJAlarmFactory.CreateMCL0024(LeftNode.Type.FullName, RightNode.Type.FullName));
 
             if (RootNode.IsBuild) DBContext.Instance.Insert(this);
 
@@ -51,6 +53,9 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes.Binary
 
             result.Left = LeftNode.To() as IRExpr;
             result.Right = RightNode.To() as IRExpr;
+
+            result.AlwaysTrue = AlwaysTrue;
+            result.AlwaysFalse = AlwaysFalse;
 
             return result;
         }
@@ -178,6 +183,9 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes.Binary
 
                 Value = (bool)source.Value == (bool)target.Value;
                 ValueState = State.Fixed;
+
+                if ((bool)Value == true) AlwaysTrue = true;
+                else AlwaysFalse = true;
             }
 
             return this;

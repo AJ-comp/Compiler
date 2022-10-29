@@ -250,4 +250,7 @@
   <data name="AJ0048" xml:space="preserve">
     <value>It can't convert from {0} type to {1} type implicitly. If it use the explicit convert this is can. It should check if there is explicit convert.</value>
   </data>
+  <data name="AJ0049" xml:space="preserve">
+    <value>There is no roop to exit with a break or continue.</value>
+  </data>
 </root>

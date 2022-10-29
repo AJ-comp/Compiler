@@ -11,5 +11,16 @@ namespace Parse.MiddleEnd.IR
 
             return (p1Size >= p2Size) ? p1 : p2;
         }
+
+        public static bool IsArithmetic(IRBinaryOperation operation)
+        {
+            if (operation == IRBinaryOperation.Add) return true;
+            if (operation == IRBinaryOperation.Sub) return true;
+            if (operation == IRBinaryOperation.Mul) return true;
+            if (operation == IRBinaryOperation.Div) return true;
+            if (operation == IRBinaryOperation.Mod) return true;
+
+            return false;
+        }
     }
 }
