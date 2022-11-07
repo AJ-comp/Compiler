@@ -3,7 +3,9 @@ using Parse.FrontEnd.AJ.Properties;
 using Parse.FrontEnd.AJ.Sdts.AstNodes.StatementNodes;
 using Parse.FrontEnd.AJ.Sdts.Datas;
 using Parse.FrontEnd.Ast;
+using Parse.MiddleEnd.IR.Datas;
 using Parse.MiddleEnd.IR.Expressions;
+using Parse.Types;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -117,6 +119,16 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.TypeNodes
 
             result.Name = FullName;
             foreach (var field in AllFields.Where(s => s.Type.Const == false)) result.Members.Add(field.ToIR());
+
+            return result;
+        }
+
+        public IRVariable ToIRVariable()
+        {
+            var type = new IRType(StdType.Struct, 1);
+            type.Name = FullName;
+
+            IRVariable result = new IRVariable(type, AJGrammar.This.Value, null, 0, 0);
 
             return result;
         }

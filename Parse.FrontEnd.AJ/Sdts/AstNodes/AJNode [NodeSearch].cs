@@ -160,7 +160,7 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes
             {
                 if (preDefType.ShortName != dataType.ToDescription()) continue;
 
-                result = GetDefineForType(preDefType.DefineFullName).First();
+                result = GetDefineForType(preDefType.DefineFullName)?.First();
             }
 
             return result;

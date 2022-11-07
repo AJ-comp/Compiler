@@ -109,23 +109,12 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes
         }
 
 
-        public IRVariable ToIRVariable(TypeDefNode defNode)
-        {
-            var type = new IRType(StdType.Struct, 1);
-            type.Name = defNode.FullName;
-
-            IRVariable result = new IRVariable(type, AJGrammar.This.Value, null, 0, 0);
-
-            return result;
-        }
-
-
         public IRExpression To()
         {
             // it has to pass 'this' pointer as argument if it is not static function.
             if (HostStruct != null && !IsStatic)
             {
-                IRFunction.Arguments.Add(ToIRVariable(HostStruct));
+                IRFunction.Arguments.Add(HostStruct.ToIRVariable());
             }
 
             foreach (var arg in VarList)
@@ -135,6 +124,11 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes
             IRFunction.Name = FullName;
             IRFunction.Statement = CompoundSt.To() as IRCompoundStatement;
 
+            return IRFunction;
+        }
+
+        public IRExpression LazyTo()
+        {
             return IRFunction;
         }
 

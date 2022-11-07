@@ -77,7 +77,6 @@ namespace CommandPrompt.Builder
                 {
                     var compileErrorJson = new CompileErrorPrintFormat();
 
-
                     /*
                     if (error.ErrToken != null)
                     {
@@ -154,8 +153,6 @@ namespace CommandPrompt.Builder
 
             foreach (var item in CompileResults)
             {
-                if (item.Result == true) continue;
-
                 foreach (var error in item.Errors)
                 {
                     int line = 0;

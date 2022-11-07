@@ -1,6 +1,7 @@
 ﻿using Parse.FrontEnd.AJ.Data;
 using Parse.FrontEnd.Ast;
 using Parse.MiddleEnd.IR.Expressions;
+using Parse.MiddleEnd.IR.Expressions.StmtExpressions;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -30,7 +31,10 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.StatementNodes
 
         public override IRExpression To()
         {
-            throw new NotImplementedException();
+            List<IRVariable> vars = new List<IRVariable>();
+            foreach (var varItem in VarList) vars.Add(varItem.ToIR());
+
+            return new IRDclVarStatement(vars);
         }
 
         public override IRExpression To(IRExpression from)

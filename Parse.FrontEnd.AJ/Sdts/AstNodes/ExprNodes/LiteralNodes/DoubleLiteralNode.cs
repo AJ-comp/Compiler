@@ -12,11 +12,12 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes.LiteralNodes
     {
         public DoubleLiteralNode(AstSymbol node) : base(node)
         {
-
         }
 
         protected override SdtsNode CompileLogic(CompileParameter param)
         {
+            base.CompileLogic(param);
+
             try
             {
                 var node = Items[0].Compile(param) as TerminalNode;

@@ -32,7 +32,7 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes
         {
             base.CompileLogic(param);
 
-            var typeDefNode = param.ParentNode as TypeDefNode;
+            var typeDefNode = GetParentAs(typeof(TypeDefNode)) as TypeDefNode;
 
             int offset = 0;
             var functionName = Items[offset++].Compile(param) as TerminalNode;
@@ -154,7 +154,20 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes
             return result;
         }
 
-        public override IRExpression To() => new IRCallExpr(Func.To() as IRFunction);
+        public override IRExpression To()
+        {
+            List<IRExpr> @params = new List<IRExpr>();
+            if (!Func.IsStatic)
+            {
+                var hostStruct = GetParentAs(typeof(TypeDefNode)) as TypeDefNode;
+                @params.Add(new IRUseIdentExpr(hostStruct.ToIRVariable()));
+            }
+
+            foreach(var param in Params)
+                @params.Add(param.To() as IRExpr);
+
+            return new IRCallExpr(Func.LazyTo() as IRFunction, @params);
+        }
 
         public override IRExpression To(IRExpression from)
         {

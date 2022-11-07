@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Text;
+using System.Threading;
 
 namespace Parse.MiddleEnd.IR.LLVM
 {
@@ -25,6 +26,7 @@ namespace Parse.MiddleEnd.IR.LLVM
         [Description("%while.cond")] WhileCondVar,
         [Description("%while.body")] WhileBodyVar,
         [Description("%while.end")] WhileEndVar,
+        [Description("%call")] CallVar,
 
         [Description("%add")] AddVar,
         [Description("%sub")] SubVar,
@@ -36,10 +38,11 @@ namespace Parse.MiddleEnd.IR.LLVM
     }
 
     [DebuggerDisplay("{" + nameof(GetDebuggerDisplay) + "(),nq}")]
-    public class LLVMVar
+    public class LLVMVar : IRExpr
     {
+        public long Index { get; } = Interlocked.Increment(ref _nextId);
+
         public LLVMVarType VarType { get; }
-        public IRType Type { get; }
         public IRExpr Expr { get; }
 
         public string OriginalName { get; protected set; }
@@ -52,17 +55,15 @@ namespace Parse.MiddleEnd.IR.LLVM
         public uint Size => Type.Size;
 
 
-        public LLVMVar(LLVMVarType varType, IRExpr expr)
+        public LLVMVar(LLVMVarType varType, IRExpr expr) : base(expr.Type)
         {
             VarType = varType;
             Expr = expr;
-            Type = Expr.Type;
         }
 
-        public LLVMVar(LLVMVarType varType, IRType type)
+        public LLVMVar(LLVMVarType varType, IRType type) : base(type)
         {
             VarType = varType;
-            Type = type;
         }
 
 
@@ -70,6 +71,7 @@ namespace Parse.MiddleEnd.IR.LLVM
         public static LLVMVar CreateLabelVar(LLVMVarType type) => new LLVMVar(type, new IRType(StdType.Bit, 0));
 
         private string GetDebuggerDisplay() => NameInFunction;
+        private static long _nextId = long.MinValue;
     }
 
 

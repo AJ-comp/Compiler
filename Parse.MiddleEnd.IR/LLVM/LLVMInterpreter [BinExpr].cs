@@ -53,7 +53,7 @@ namespace Parse.MiddleEnd.IR.LLVM
             else if (expr.Operation == IRBinaryOperation.Assign) Assign(expr, ownFunction, option);
             else
             {
-                if (expr.AlwaysTrue || expr.AlwaysFalse)
+                if (expr.OnlyTrue || expr.OnlyFalse)
                 {
                     ownFunction.Code.AddComment($"{expr} is always true or false so cmp logic is not genereated.");
                     return;

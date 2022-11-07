@@ -11,7 +11,7 @@ namespace Parse.MiddleEnd.IR.Expressions.ExprExpressions
         public string Name => Variable.Name;
 
 
-        public IRUseIdentExpr(IRType type, IRVariable variable) : base(type)
+        public IRUseIdentExpr(IRVariable variable) : base(variable.Type)
         {
             Variable = variable;
         }

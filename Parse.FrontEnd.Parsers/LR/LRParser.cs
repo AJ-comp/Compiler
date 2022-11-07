@@ -16,6 +16,7 @@ namespace Parse.FrontEnd.Parsers.LR
     public abstract partial class LRParser : Parser
     {
         public bool BackTrackingOnConflict { get; private set; } = false;
+        public Exception FiredException { get; private set; }
 
         /// <summary>
         /// The Error Handler that if the goto failed.
@@ -251,10 +252,12 @@ namespace Parse.FrontEnd.Parsers.LR
                     Success = false
                 };
                 */
+                FiredException = ex;
                 result.Success = false;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                FiredException = ex;
                 result.Success = false;
             }
 

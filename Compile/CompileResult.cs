@@ -13,11 +13,22 @@ namespace Compile
     public class CompileResult
     {
         public string FilePath { get; }
-        public bool Result => Errors.Count() == 0;
         public ParsingResult ParsingResult { get; }
         public SdtsNode RootNode => ParsingResult.Success ? ParsingResult.AstRoot?.Sdts : null;
         public IEnumerable<AJType> LinkErrorTypeList => _linkErrorTypeList;
         public IEnumerable<VariableAJ> LinkErrorVarList => _linkErrorVarList;
+        public bool Result
+        {
+            get
+            {
+                foreach (var alarm in Errors)
+                {
+                    if (alarm.ErrType == ErrorType.Error) return false;
+                }
+
+                return true;
+            }
+        }
 
         public IEnumerable<ParsingErrorInfo> Errors
         {
@@ -27,9 +38,11 @@ namespace Compile
 
                 result.AddRange(ParsingResult.AllErrors);
                 if (RootNode == null) return result;
-                
+
                 foreach (var alarmNode in RootNode.AllAlarmNodes)
+                {
                     result.AddRange(alarmNode.Alarms);
+                }
 
                 return result;
             }

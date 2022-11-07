@@ -78,19 +78,9 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.StatementNodes
 
             foreach (var item in Items)
             {
-                if (item is DeclareVarStNode)
-                {
-                    var dclVarNode = item as DeclareVarStNode;
+                var statement = item as StatementNode;
 
-                    foreach (var varItem in dclVarNode.VarList)
-                        result.Items.Add(varItem.ToIR());
-                }
-                else
-                {
-                    var statement = item as StatementNode;
-
-                    result.Items.Add(statement.To());
-                }
+                result.Items.Add(statement.To());
             }
 
             return result;

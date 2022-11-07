@@ -28,7 +28,7 @@ namespace Parse.FrontEnd
 
         private static int _nextId = int.MaxValue;
 
-        public List<MeaningErrInfo> Alarms { get; set; } = new List<MeaningErrInfo>();
+        public List<MeaningErrInfo> Alarms { get; } = new List<MeaningErrInfo>();
 
 
         public SdtsNode GetParent(Type toFindParent)

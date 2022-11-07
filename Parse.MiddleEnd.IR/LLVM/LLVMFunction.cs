@@ -15,7 +15,7 @@ namespace Parse.MiddleEnd.IR.LLVM
         public IRType ReturnType => _irFunction.ReturnType;
         public List<IRVariable> Arguments => _irFunction.Arguments;
         public IRCompoundStatement Statement => _irFunction.Statement;
-        public string IRName => Name.Replace(".", "_").Replace("~", "_");
+        public string IRName => LLVMConverter.ToLLVMFuncName(Name);
 
         public Code Code { get; } = new Code();
 
@@ -73,7 +73,32 @@ namespace Parse.MiddleEnd.IR.LLVM
         }
 
         public LLVMVar GetRecentVar() => _orderingVars.Last();
-        public LLVMVar GetRecentVar(LLVMVarType varType) => _localVars[varType].Last();
+        public LLVMVar GetRecentVar(LLVMVarType varType) => (_localVars[varType].Count > 0) ? _localVars[varType].Last() : null;
+
+        /// <summary>
+        /// Gets most recent var in list of varTypes.
+        /// </summary>
+        /// <param name="varTypes"></param>
+        /// <returns></returns>
+        public LLVMVar GetRecentVar(params LLVMVarType[] varTypes)
+        {
+            LLVMVar result = null;
+            foreach (var varType in varTypes)
+            {
+                var lastVarType = (_localVars[varType].Count > 0) ? _localVars[varType].Last() : null;
+                if (lastVarType != null)
+                {
+                    if (result == null) result = lastVarType;
+                    else
+                    {
+                        // The recent var has more bigger Index value.
+                        if (lastVarType.Index > result.Index) result = lastVarType;
+                    }
+                }
+            }
+
+            return result;
+        }
         public IEnumerable<LLVMVar> GetRecentVars(int count) => _orderingVars.TakeLast(count);
 
 

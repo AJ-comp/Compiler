@@ -12,7 +12,6 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes.LiteralNodes
     {
         public BoolLiteralNode(AstSymbol node) : base(node)
         {
-            Type = AJUtilities.CreateBooleanType(this);
         }
 
         public BoolLiteralNode(bool value) : base(null)
@@ -20,18 +19,25 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes.LiteralNodes
             Value = value;
             ValueState = State.Fixed;
 
-            Type = AJUtilities.CreateBooleanType(this);
+            StubCode = true;
         }
 
         protected override SdtsNode CompileLogic(CompileParameter param)
         {
+            base.CompileLogic(param);
+
             try
             {
-                var node = Items[0].Compile(param) as TerminalNode;
-                Token = node.Token;
+                if(!StubCode)
+                {
+                    var node = Items[0].Compile(param) as TerminalNode;
+                    Token = node.Token;
 
-                Value = System.Convert.ToBoolean(Token.Input);
-                ValueState = State.Fixed;
+                    Value = System.Convert.ToBoolean(Token.Input);
+                    ValueState = State.Fixed;
+                }
+
+                Type = AJUtilities.CreateBooleanType(this);
             }
             catch (Exception)
             {

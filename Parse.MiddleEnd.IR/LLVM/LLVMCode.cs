@@ -3,6 +3,8 @@ using Parse.MiddleEnd.IR.Expressions;
 using Parse.MiddleEnd.IR.Expressions.ExprExpressions;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
 using System.Text;
 
 namespace Parse.MiddleEnd.IR.LLVM
@@ -75,28 +77,51 @@ namespace Parse.MiddleEnd.IR.LLVM
         /// Create the initialize code for parameter.
         /// </summary>
         /// <param name="arg"></param>
-        public void AddInitialize(IRVariable arg)
+        public void AddInitialize(LLVMNamedVar arg)
         {
-            Add(new CodeSnippet(CodeType.Command.Alloca, $"%{arg.Name}.addr = alloca {arg.Type.LLVMTypeName}, align {arg.Type.Size}"));
-            Add(new CodeSnippet(CodeType.Command.Store, $"store {arg.Type.LLVMTypeName} %{arg.Name}, {arg.Type.LLVMTypeName}* %{arg.Name}.addr, align {arg.Type.Size}"));
+            Add(new CodeSnippet(CodeType.Command.Alloca, $"{arg.NameInFunction}.addr = alloca {arg.Type.LLVMTypeName}, align {arg.Type.Size}"));
+            Add(new CodeSnippet(CodeType.Command.Store, $"store {arg.Type.LLVMTypeName} {arg.NameInFunction}, " +
+                                                                                      $"{arg.Type.LLVMTypeName}* {arg.NameInFunction}.addr, align {arg.Type.Size}"));
         }
 
-        public void AddStore(LLVMNamedVar namedVar, LLVMVar tVar)
+
+        private string CheckAddr(LLVMVar toCheckVar)
         {
-            Add(new CodeSnippet(CodeType.Command.Store,
-                                            $"store {namedVar.TypeName} {tVar.NameInFunction}, {namedVar.TypeName}* {namedVar.NameInFunction}, align {namedVar.Size}"));
+            string result = string.Empty;
+
+            if (toCheckVar is LLVMNamedVar)
+            {
+                if (toCheckVar.Type.PointerLevel > 0) result = ".addr";
+            }
+
+            return result;
         }
 
-        public void AddStore(LLVMNamedVar namedVar, IRLiteralExpr expr)
+        public void AddStore(LLVMVar toVar, LLVMVar fVar)
         {
+            string addr = CheckAddr(toVar);
+
             Add(new CodeSnippet(CodeType.Command.Store,
-                                            $"store {namedVar.TypeName} {expr.Value}, {namedVar.TypeName}* {namedVar.NameInFunction}, align {namedVar.Size}"));
+                                            $"store {toVar.TypeName} {fVar.NameInFunction}, {toVar.TypeName}* {toVar.NameInFunction}{addr}, align {toVar.Size}"));
+        }
+
+        public void AddStore(LLVMVar toVar, IRLiteralExpr expr)
+        {
+            string value = expr.Value.ToString();
+            string addr = CheckAddr(toVar);
+
+            if (toVar.Type.PointerLevel > 0) value = $"inttoptr(i64 {expr.Value} to {toVar.TypeName})";
+
+            Add(new CodeSnippet(CodeType.Command.Store,
+                                            $"store {toVar.TypeName} {value}, {toVar.TypeName}* {toVar.NameInFunction}{addr}, align {toVar.Size}"));
         }
 
         public void AddLoad(LLVMVar toVar, LLVMNamedVar fromVar)
         {
+            string addr = CheckAddr(fromVar);
+
             Add(new CodeSnippet(CodeType.Command.Load,
-                                            $"{toVar.NameInFunction} = load {toVar.TypeName}, {toVar.TypeName}* {fromVar.NameInFunction}, align {fromVar.Size}"));
+                                            $"{toVar.NameInFunction} = load {toVar.TypeName}, {toVar.TypeName}* {fromVar.NameInFunction}{addr}, align {fromVar.Size}"));
         }
 
 
@@ -140,6 +165,41 @@ namespace Parse.MiddleEnd.IR.LLVM
         }
 
 
+        public void AddCall(LLVMVar returnVar, string funcName, IEnumerable<LLVMVar> @params)
+        {
+            string data = $"{returnVar.NameInFunction} = call {returnVar.Type.LLVMTypeName} {funcName}";
+            data += GetCallParamCommand(@params);
+
+            Add(new CodeSnippet(CodeType.Command.Call, data));
+        }
+
+        public void AddCall(string funcName, IEnumerable<LLVMVar> @params)
+        {
+            string data = $"call void {funcName}";
+            data += GetCallParamCommand(@params);
+
+            Add(new CodeSnippet(CodeType.Command.Call, data));
+        }
+
+
+        private string GetCallParamCommand(IEnumerable<LLVMVar> @params)
+        {
+            string data = "(";
+            for (int i = 0; i < @params.Count(); i++)
+            {
+                var param = @params.ElementAt(i);
+
+                data += $"{param.Type.LLVMTypeName} noundef ";
+                if (param is LLVMLiteralVar) data += $"{(param as LLVMLiteralVar).Value}";
+                else data += $"{param.NameInFunction}";
+
+                if (i < @params.Count() - 1) data += ", ";
+            }
+            data += ")";
+
+            return data;
+        }
+
 
         private string GetArithmeticCommand(LLVMVar toVar, LLVMVar fromVar1, IRLiteralExpr fromValue, IRBinaryOperation operation)
         {
@@ -169,8 +229,7 @@ namespace Parse.MiddleEnd.IR.LLVM
         }
     }
 
-
-
+    [DebuggerDisplay("{" + nameof(GetDebuggerDisplay) + "(),nq}")]
     public class CodeSnippet
     {
         public CodeSnippet(CodeType codeType, string data)
@@ -181,5 +240,7 @@ namespace Parse.MiddleEnd.IR.LLVM
 
         public CodeType CodeType { get; }
         public string Data { get; }
+
+        private string GetDebuggerDisplay() => Data;
     }
 }

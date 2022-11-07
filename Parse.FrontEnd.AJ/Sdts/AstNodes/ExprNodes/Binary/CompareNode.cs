@@ -54,8 +54,8 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes.Binary
             result.Left = LeftNode.To() as IRExpr;
             result.Right = RightNode.To() as IRExpr;
 
-            result.AlwaysTrue = AlwaysTrue;
-            result.AlwaysFalse = AlwaysFalse;
+            result.OnlyTrue = AlwaysTrue;
+            result.OnlyFalse = AlwaysFalse;
 
             return result;
         }

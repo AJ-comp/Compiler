@@ -8,8 +8,9 @@ namespace Parse.MiddleEnd.IR.Expressions
 {
     public class IRVariable : IRExpression
     {
-        public IRType Type { get; }
+//        public IRType Type { get; }
         public string Name { get; }
+        public IRType Type { get; }
         public bool IsGlobal { get; set; } = false;
         public int BlockIndex { get; set; }
         public int OffsetIndex { get; set; }

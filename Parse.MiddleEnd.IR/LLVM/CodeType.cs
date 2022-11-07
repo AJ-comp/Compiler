@@ -209,6 +209,18 @@ namespace Parse.MiddleEnd.IR.LLVM
             }
         }
 
+        public Call Call
+        {
+            get
+            {
+                var data = "Call";
+                var hashCode = GetHashCode(data);
+                var cacheType = GetCodeType(hashCode);
+
+                return (cacheType == null) ? new Call(hashCode, data) : cacheType as Call;
+            }
+        }
+
 
         public Return Return
         {
@@ -278,6 +290,11 @@ namespace Parse.MiddleEnd.IR.LLVM
     public class Return : Command
     {
         internal Return(int hashCode, string value) : base(hashCode, value) { }
+    }
+
+    public class Call : Command
+    {
+        internal Call(int hashCode, string value) : base(hashCode, value) { }
     }
 
     public class Etc : Command

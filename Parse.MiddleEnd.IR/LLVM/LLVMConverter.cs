@@ -8,6 +8,9 @@ namespace Parse.MiddleEnd.IR.LLVM
 {
     public class LLVMConverter
     {
+        public static string ToLLVMName(string name) => name.Replace(".", "_").Replace("~", "_");
+        public static string ToLLVMFuncName(string name) => $"@{ToLLVMName(name)}";
+
         public static string ToInstructionName(StdType type)
         {
             string result = string.Empty;
@@ -139,7 +142,9 @@ namespace Parse.MiddleEnd.IR.LLVM
             else if (type.Type == StdType.Int) result = "i32";
             else if (type.Type == StdType.UInt) result = "i32";
             else if (type.Type == StdType.Double) result = "double";
-            else if (type.Type == StdType.Struct) result = $"%struct.{type.Name.Replace(".", "_")}{type.PointerLevel.ToAnyStrings("*")}";
+            else if (type.Type == StdType.Struct) result = $"%struct.{type.Name.Replace(".", "_")}";
+
+            if (result.Length > 0) result += type.PointerLevel.ToAnyStrings("*");
 
             return result;
         }

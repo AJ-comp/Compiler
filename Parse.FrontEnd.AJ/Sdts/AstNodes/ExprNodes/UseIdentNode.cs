@@ -48,7 +48,7 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes
             // only variable
             var ajVar = UsedSymbolData as VariableAJ;
 
-            IRUseIdentExpr result = new IRUseIdentExpr(Type.ToIR(), ajVar.ToIR());
+            IRUseIdentExpr result = new IRUseIdentExpr(ajVar.ToIR());
 
             return result;
         }
