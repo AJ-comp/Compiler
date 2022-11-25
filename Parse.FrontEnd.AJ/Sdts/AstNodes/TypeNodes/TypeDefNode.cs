@@ -128,7 +128,7 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.TypeNodes
             var type = new IRType(StdType.Struct, 1);
             type.Name = FullName;
 
-            IRVariable result = new IRVariable(type, AJGrammar.This.Value, null, 0, 0);
+            IRVariable result = new IRVariable(type, AJGrammar.This.Value, null, 0, 0, DebuggingData.CreateDummy());
 
             return result;
         }

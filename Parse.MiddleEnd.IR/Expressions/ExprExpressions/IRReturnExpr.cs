@@ -13,5 +13,7 @@ namespace Parse.MiddleEnd.IR.Expressions.ExprExpressions
         {
             ReturnExpr = returnExpr;
         }
+
+//        public override string ToString() => ReturnExpr.SourceCode;
     }
 }

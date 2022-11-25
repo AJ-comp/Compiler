@@ -51,8 +51,13 @@ namespace Parse.MiddleEnd.IR.LLVM
         }
 
 
+        public void AddComment(string comment)
+        {
+            if (string.IsNullOrEmpty(comment)) return;
+
+            Add(new CodeSnippet(CodeType.Comment, $"; {comment}"));
+        }
         public void AddNewLine() => Add(new CodeSnippet(CodeType.Decorator, Environment.NewLine));
-        public void AddComment(string comment) => Add(new CodeSnippet(CodeType.Comment, $"; {comment}"));
         public void AddOpenBlock() => Add(new CodeSnippet(CodeType.Command.Block, "{"));
         public void AddCloseBlock() => Add(new CodeSnippet(CodeType.Command.Block, "}"));
         public void AddEtcCommand(string command) => Add(new CodeSnippet(CodeType.Command.Etc, command));
@@ -180,6 +185,23 @@ namespace Parse.MiddleEnd.IR.LLVM
 
             Add(new CodeSnippet(CodeType.Command.Call, data));
         }
+
+        public bool IsExistLabel()
+        {
+            bool result = false;
+
+            foreach(var code in this)
+            {
+                if(code.CodeType == CodeType.Command.Label)
+                {
+                    result = true;
+                    break;
+                }
+            }
+
+            return result;
+        }
+
 
 
         private string GetCallParamCommand(IEnumerable<LLVMVar> @params)

@@ -99,7 +99,19 @@ namespace Parse.MiddleEnd.IR.LLVM
             }
 
             ToBitCode(llvmFunction.Statement, llvmFunction);
+
+            // return expression
+            var returnVar = llvmFunction.GetReturnVar();
+            if (returnVar != null)
+            {
+                if (llvmFunction.Code.IsExistLabel())
+                    llvmFunction.Code.AddBranch(returnVar);
+
+                llvmFunction.Code.AddNewLine();
+                llvmFunction.Code.AddLabel(returnVar);
+            }
             llvmFunction.Code.AddReturn();
+
             llvmFunction.Code.AddCloseBlock();
             llvmFunction.Code.AddNewLine();
 
@@ -131,7 +143,6 @@ namespace Parse.MiddleEnd.IR.LLVM
         private static LLVMVar CreateEndVarCodeConditional(LLVMVar elseOrEndVar, LLVMFunction ownFunction)
         {
             LLVMVar endVar = null;
-            if (ownFunction.Code.LastCommandIsBranch()) return endVar;
 
             // if endVar is not created yet then create at here.
             if (elseOrEndVar.VarType == LLVMVarType.IfElseVar)
@@ -141,7 +152,7 @@ namespace Parse.MiddleEnd.IR.LLVM
             }
             else endVar = elseOrEndVar;
 
-            ownFunction.Code.AddBranch(endVar);
+            if (!ownFunction.Code.LastCommandIsBranch()) ownFunction.Code.AddBranch(endVar);
             return endVar;
         }
 
@@ -187,11 +198,11 @@ namespace Parse.MiddleEnd.IR.LLVM
                 ownFunction.Code.AddLabel(ifVar, $"{statement.Condition} is true");
                 ToBitCode(statement.TrueStatement, ownFunction);
                 var endVar = CreateEndVarCodeConditional(elseOrEndVar, ownFunction);
-                ownFunction.Code.AddNewLine();
 
                 LLVMVar endVar2 = null;
                 if (elseOrEndVar.VarType == LLVMVarType.IfElseVar)
                 {
+                    ownFunction.Code.AddNewLine();
                     ownFunction.Code.AddLabel(elseOrEndVar, $"{statement.Condition} is false");
                     ToBitCode(statement.FalseStatement, ownFunction);
                     var param = (endVar != null) ? endVar : elseOrEndVar;
@@ -212,7 +223,7 @@ namespace Parse.MiddleEnd.IR.LLVM
         public static void ToBitCode(IRDclVarStatement statement, LLVMFunction ownFunction)
         {
             foreach(var item in statement.Vars)
-                ToBitCode(item as IRVariable, ownFunction);
+                ToBitCode(item, ownFunction);
         }
 
 
@@ -317,6 +328,7 @@ namespace Parse.MiddleEnd.IR.LLVM
             else if (expr is IRSingleExpr) ToBitCode(expr as IRSingleExpr, ownFunction, option);
             else if (expr is IRLiteralExpr) ToBitCode(expr as IRLiteralExpr, ownFunction, option);
             else if (expr is IRUseIdentExpr) ToBitCode(expr as IRUseIdentExpr, ownFunction, option);
+            else if (expr is IRReturnExpr) ToBitCode(expr as IRReturnExpr, ownFunction, option);
             else throw new Exception("There is no correct expr.");
         }
 
@@ -393,6 +405,19 @@ namespace Parse.MiddleEnd.IR.LLVM
 
             // namedVar.Typename == llvmVar.TypeName
             ownFunction.Code.AddLoad(llvmVar, namedVar);
+        }
+
+
+        public static void ToBitCode(IRReturnExpr expr, LLVMFunction ownFunction, LLVMBuildOption option)
+        {
+            var parentStatement = expr.GetParentAs(typeof(IRRepeatStatement), typeof(IRConditionStatement));
+            if (parentStatement is null) return;
+
+            // if there is return statement in the condition statement or roop statement
+            var llvmVar = new LLVMVar(LLVMVarType.ReturnVar, expr);
+            ownFunction.AddVar(llvmVar);
+
+            ownFunction.Code.AddBranch(llvmVar);
         }
     }
 }

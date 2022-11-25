@@ -1,11 +1,13 @@
 ﻿using Parse.Extensions;
 using Parse.FrontEnd.AJ.Sdts.AstNodes;
 using Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes;
+using Parse.MiddleEnd.IR.Datas;
 using Parse.MiddleEnd.IR.Expressions;
 using Parse.MiddleEnd.IR.Expressions.ExprExpressions;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 
 namespace Parse.FrontEnd.AJ.Data
 {
@@ -114,8 +116,22 @@ namespace Parse.FrontEnd.AJ.Data
 
         public IRVariable ToIR()
         {
-            IRVariable result = (InitValue != null) ? new IRVariable(Type.ToIR(), Name, InitValue.To() as IRExpr, Block, Offset)
-                                                                   : new IRVariable(Type.ToIR(), Name, null, Block, Offset);
+            var source = string.Empty;
+            var debuggingData = DebuggingData.CreateDummy(source);
+
+            if (Type.NameTokens.Count() > 0)
+            {
+                source = $"{Type.NameTokens.ItemsString(".")} {NameToken.Input}";
+                var typeCell = Type.NameTokens.First().TokenCell;
+                if (InitValue != null) source += $" = {InitValue.AllTokens}";
+                source += ";";
+
+                debuggingData = new DebuggingData(typeCell.StartLineIndex, NameToken.TokenCell.EndLineIndex,
+                                                                             typeCell.StartColumnIndex, NameToken.TokenCell.EndColumnIndex, source);
+            }
+
+            IRVariable result = (InitValue != null) ? new IRVariable(Type.ToIR(), Name, InitValue.To() as IRExpr, Block, Offset, debuggingData)
+                                                                   : new IRVariable(Type.ToIR(), Name, null, Block, Offset, debuggingData);
 
             return result;
         }

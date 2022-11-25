@@ -79,8 +79,10 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.StatementNodes
             foreach (var item in Items)
             {
                 var statement = item as StatementNode;
+                var irNode = statement.To();
+                irNode.Parent = result;
 
-                result.Items.Add(statement.To());
+                result.Items.Add(irNode);
             }
 
             return result;

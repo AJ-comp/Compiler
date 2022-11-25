@@ -10,7 +10,11 @@ namespace Parse.MiddleEnd.IR.Expressions.ExprExpressions
         public IRFunction Function { get; }
         public IEnumerable<IRExpr> Params => _exprs;
 
-        public IRCallExpr(IRFunction function, IEnumerable<IRExpr> exprs) : base(function.ReturnType)
+        public IRCallExpr(IRFunction function, IEnumerable<IRExpr> exprs) : this(function, exprs, DebuggingData.CreateDummy())
+        {
+        }
+
+        public IRCallExpr(IRFunction function, IEnumerable<IRExpr> exprs, DebuggingData debuggingData) : base(function.ReturnType, debuggingData)
         {
             Function = function;
             _exprs.AddRange(exprs);

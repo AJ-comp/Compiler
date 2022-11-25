@@ -3,6 +3,7 @@ using Parse.FrontEnd.RegularGrammar;
 using Parse.FrontEnd.Tokenize;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Parse.FrontEnd
 {
@@ -63,7 +64,7 @@ namespace Parse.FrontEnd
 
             if (virtualT.TokenType == TokenType.Identifier) value = valueWhenIdent;
 
-            return new TokenData(virtualT, new TokenCell(asId, value, null), true);
+            return new TokenData(virtualT, new TokenCell(asId, -1, -1, value, null), true);
         }
 
 
@@ -106,6 +107,23 @@ namespace Parse.FrontEnd
 
     public class TokenDataList : List<TokenData>
     {
+        public TokenDataList()
+        {
+        }
+
+        public TokenDataList(IEnumerable<TokenData> tokenDatas)
+        {
+            AddRange(tokenDatas);
+        }
+
         public string ToListString(string separator = ".") => this.ItemsString(PrintType.Property, "Input", separator);
+        public override string ToString()
+        {
+            string result = string.Empty;
+
+            foreach (var item in this) result += item.Input;
+
+            return result;
+        }
     }
 }

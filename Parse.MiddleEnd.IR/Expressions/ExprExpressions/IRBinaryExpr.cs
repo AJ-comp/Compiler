@@ -35,14 +35,8 @@ namespace Parse.MiddleEnd.IR.Expressions.ExprExpressions
         }
 
 
-        public IRBinaryExpr(IRType type) : base(type)
+        public IRBinaryExpr(IRType type, DebuggingData debuggingData) : base(type, debuggingData)
         {
-        }
-
-
-        public override string ToString()
-        {
-            return $"{Left} {Operation.ToDescription()} {Right}";
         }
     }
 }

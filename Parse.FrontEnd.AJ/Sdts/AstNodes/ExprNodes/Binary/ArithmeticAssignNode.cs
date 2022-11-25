@@ -38,7 +38,7 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes.Binary
 
         public override IRExpression To()
         {
-            var result = new IRBinaryExpr(Type.ToIR());
+            var result = new IRBinaryExpr(Type.ToIR(), GetDebuggingData());
 
             if (Operation == IRArithmeticOperation.Add) result.Operation = IRBinaryOperation.AddAssign;
             else if (Operation == IRArithmeticOperation.Sub) result.Operation = IRBinaryOperation.SubAssign;

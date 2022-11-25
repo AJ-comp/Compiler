@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Text.RegularExpressions;
 
 namespace Parse.FrontEnd.Tokenize
@@ -12,6 +13,19 @@ namespace Parse.FrontEnd.Tokenize
     {
         public int StartIndex { get; internal set; }
         public int EndIndex => this.StartIndex + this.Data.Length - 1;
+        public int StartLineIndex { get; internal set; }
+        public int EndLineIndex => StartLineIndex + Regex.Matches(Data, "\n").Count;
+        public int StartColumnIndex { get; }
+        public int EndColumnIndex
+        {
+            get
+            {
+                if (StartLineIndex == EndLineIndex) return StartColumnIndex + Data.Length - 1;
+
+                var colCountInNewLine = Data.Skip(Data.LastIndexOf("\n") + 1).Count();
+                return (colCountInNewLine == 0) ? 0 : colCountInNewLine - 1;
+            }
+        }
         public string Data { get; } = string.Empty;
         public Match MatchData { get; }
         public TokenPatternInfo PatternInfo { get; internal set; }
@@ -29,10 +43,12 @@ namespace Parse.FrontEnd.Tokenize
         }
         */
 
-        public TokenCell(int startIndex, string data, Match matchData)
+        public TokenCell(int startIndex, int startLineIndex, int startColIndex, string data, Match matchData)
         {
             this.StartIndex = startIndex;
             this.Data = data;
+            this.StartLineIndex = startLineIndex;
+            this.StartColumnIndex = startColIndex;
 
             this.MatchData = matchData;
         }

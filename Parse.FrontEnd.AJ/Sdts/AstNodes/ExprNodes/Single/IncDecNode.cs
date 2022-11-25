@@ -50,7 +50,7 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes.Single
 
         public override IRExpression To()
         {
-            var result = new IRSingleExpr(Type.ToIR());
+            var result = new IRSingleExpr(Type.ToIR(), GetDebuggingData());
 
             if (ProcessInfo == Info.PreInc) result.Operation = IRSingleOperation.PreInc;
             else if(ProcessInfo == Info.PostInc) result.Operation = IRSingleOperation.PostInc;

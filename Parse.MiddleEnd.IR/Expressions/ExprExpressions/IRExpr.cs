@@ -9,7 +9,11 @@ namespace Parse.MiddleEnd.IR.Expressions.ExprExpressions
     {
         public IRType Type { get; set; }
 
-        public IRExpr(IRType type)
+        public IRExpr(IRType type) : this(type, DebuggingData.CreateDummy())
+        {
+        }
+
+        public IRExpr(IRType type, DebuggingData debuggingData) : base(debuggingData)
         {
             Type = type;
         }

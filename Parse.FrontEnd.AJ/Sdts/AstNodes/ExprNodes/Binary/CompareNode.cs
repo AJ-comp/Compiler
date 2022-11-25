@@ -42,7 +42,7 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes.Binary
 
         public override IRExpression To()
         {
-            IRBinaryExpr result = new IRBinaryExpr(Type.ToIR());
+            IRBinaryExpr result = new IRBinaryExpr(Type.ToIR(), GetDebuggingData());
 
             if (Operation == IRCompareOperation.EQ) result.Operation = IRBinaryOperation.EQ;
             else if (Operation == IRCompareOperation.NE) result.Operation = IRBinaryOperation.NE;
@@ -68,7 +68,7 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes.Binary
 
         public static CompareNode From(UseIdentNode node)
         {
-            CompareNode result = new CompareNode(null, IRCompareOperation.EQ);
+            CompareNode result = new CompareNode(node.Ast, IRCompareOperation.EQ);
             var right = new BoolLiteralNode(true);
 
             result.Items.Add(node);
@@ -80,7 +80,7 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes.Binary
 
         public static CompareNode From(BoolLiteralNode node)
         {
-            CompareNode result = new CompareNode(null, IRCompareOperation.EQ);
+            CompareNode result = new CompareNode(node.Ast, IRCompareOperation.EQ);
             var right = new BoolLiteralNode(true);
 
             result.Items.Add(node);

@@ -115,7 +115,7 @@ namespace Parse.FrontEnd.Parsers.LR
             }
 
             var endMarker = new EndMarker();
-            result[^1] = new TokenData(endMarker, new TokenCell(-1, endMarker.Value, null));
+            result[^1] = new TokenData(endMarker, new TokenCell(-1, -1, -1, endMarker.Value, null));
 
             return result;
         }

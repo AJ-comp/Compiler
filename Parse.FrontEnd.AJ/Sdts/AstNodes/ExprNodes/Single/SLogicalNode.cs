@@ -48,7 +48,7 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes.Single
 
         public override IRExpression To()
         {
-            var result = new IRSingleExpr(Type.ToIR());
+            var result = new IRSingleExpr(Type.ToIR(), GetDebuggingData());
 
             result.Expression = ExprNode.To() as IRExpr;
 

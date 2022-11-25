@@ -1,4 +1,5 @@
-﻿using Parse.Extensions;
+﻿using AJ.Common;
+using Parse.Extensions;
 using Parse.FrontEnd.Ast;
 using System;
 using System.Collections.Generic;
@@ -7,7 +8,7 @@ using System.Threading;
 
 namespace Parse.FrontEnd
 {
-    public abstract class SdtsNode : IData, IHasParent
+    public abstract class SdtsNode : IData, IHasParent, ITree<SdtsNode>
     {
         // for interface *********************************/
         public int Id { get; set; } = Interlocked.Decrement(ref _nextId);
@@ -23,42 +24,16 @@ namespace Parse.FrontEnd
         public SdtsNode Parent { get; set; }
         public List<SdtsNode> Items { get; } = new List<SdtsNode>();
         public MeaningErrInfoList ConnectedErrInfoList { get; } = new MeaningErrInfoList();
-        public IReadOnlyList<TokenData> MeaningTokens => Ast?.AllTokens;
-        public IReadOnlyList<TokenData> AllTokens => Ast?.ConnectedParseTree.AllTokens;
+        public TokenDataList MeaningTokens => new TokenDataList(Ast?.AllTokens);
+        public TokenDataList AllTokens => new TokenDataList(Ast?.ConnectedParseTree.AllTokens);
 
         private static int _nextId = int.MaxValue;
 
         public List<MeaningErrInfo> Alarms { get; } = new List<MeaningErrInfo>();
 
 
-        public SdtsNode GetParent(Type toFindParent)
-        {
-            var travNode = this;
-
-            while (travNode != null)
-            {
-                if (travNode.GetType() == toFindParent) break;
-
-                travNode = travNode.Parent;
-            }
-
-            return travNode;
-        }
-
-
-        public SdtsNode GetParentAs(Type toFindParent)
-        {
-            var travNode = this;
-
-            while (travNode != null)
-            {
-                if (travNode.GetType().IsSubclassOf(toFindParent)) break;
-
-                travNode = travNode.Parent;
-            }
-
-            return travNode;
-        }
+        public SdtsNode GetParent(Type toFindParent) => TreeHelper.GetParent(this, toFindParent);
+        public SdtsNode GetParentAs(Type toFindParent) => TreeHelper.GetParentAs(this, toFindParent);
 
 
         public IEnumerable<SdtsNode> AllAlarmNodes

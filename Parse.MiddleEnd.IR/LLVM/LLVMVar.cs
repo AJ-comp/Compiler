@@ -33,6 +33,7 @@ namespace Parse.MiddleEnd.IR.LLVM
         [Description("%mul")] MulVar,
         [Description("%div")] DivVar,
         [Description("%rem")] RemVar,
+        [Description("%return")] ReturnVar,
 
         LiteralVar,
     }
@@ -93,6 +94,14 @@ namespace Parse.MiddleEnd.IR.LLVM
         public LLVMLiteralVar(IRLiteralExpr expr) : base(LLVMVarType.LiteralVar, expr.Type)
         {
             Value = expr.Value;
+        }
+    }
+
+
+    public class LLVMUniqueVar : LLVMVar
+    {
+        public LLVMUniqueVar(LLVMVarType varType, IRType type) : base(varType, type)
+        {
         }
     }
 }

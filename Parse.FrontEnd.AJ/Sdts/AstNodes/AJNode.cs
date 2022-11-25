@@ -1,7 +1,9 @@
 ﻿using Parse.FrontEnd.AJ.Data;
 using Parse.FrontEnd.Ast;
+using Parse.MiddleEnd.IR.Datas;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Parse.FrontEnd.AJ.Sdts.AstNodes
 {
@@ -111,6 +113,18 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes
 
             return this;
         }
+
+        public DebuggingData GetDebuggingData()
+        {
+            if (AllTokens == null) return DebuggingData.CreateDummy("");
+            if (AllTokens.Count == 0) return DebuggingData.CreateDummy("");
+
+            var sToken = AllTokens.First().TokenCell;
+            var eToken = AllTokens.Last().TokenCell;
+
+            return new DebuggingData(sToken.StartLineIndex, eToken.EndLineIndex, sToken.StartColumnIndex, eToken.EndColumnIndex, AllTokens.ToString());
+        }
+
 
         public override string ToString() => this.GetType().Name;
 

@@ -87,7 +87,7 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.TypeNodes
             }
             else
             {
-                if (DefNode != null) return new AJUserDefType(DefNode);
+                if (DefNode != null) return new AJUserDefType(DefNode, FullDataTypeToken);
                 else return new AJUnknownType();
             }
         }

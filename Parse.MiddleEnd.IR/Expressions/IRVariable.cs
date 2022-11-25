@@ -22,7 +22,7 @@ namespace Parse.MiddleEnd.IR.Expressions
         public string LLVMTypeName => Type.LLVMTypeName;
 
 
-        public IRVariable(IRType type, string name, IRExpr initValue, int block, int offset)
+        public IRVariable(IRType type, string name, IRExpr initValue, int block, int offset, DebuggingData debuggingData) : base(debuggingData)
         {
             Type = type;
             Name = name;
@@ -54,6 +54,7 @@ namespace Parse.MiddleEnd.IR.Expressions
             return !(left == right);
         }
 
+        /*
         public override string ToString()
         {
             var result = $"{Type.Type.ToDescription()} {Name}";
@@ -61,6 +62,7 @@ namespace Parse.MiddleEnd.IR.Expressions
 
             return result;
         }
+        */
 
         /**********************************************************/
         /// <summary>

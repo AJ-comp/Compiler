@@ -140,7 +140,7 @@ namespace Parse.FrontEnd.AJ.ErrorHandler
 
         protected ErrorHandlingResult RecoveryWithReplaceToVirtualToken(Terminal virtualT, DataForRecovery dataForRecovery)
         {
-            var virtualToken = new TokenData(virtualT, new TokenCell(-1, virtualT.Caption, null), true);
+            var virtualToken = new TokenData(virtualT, new TokenCell(-1, -1, -1, virtualT.Caption, null), true);
             var blockParsingResult = ReplaceToVirtualToken(dataForRecovery, virtualToken);
 
             return (blockParsingResult == SuccessedKind.NotApplicable) ?

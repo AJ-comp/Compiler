@@ -11,6 +11,7 @@ namespace Parse.MiddleEnd.IR.Expressions.StmtExpressions
 
         public IRExprStatement(IRExpr expr)
         {
+            expr.Parent = this;
             Expr = expr;
         }
     }

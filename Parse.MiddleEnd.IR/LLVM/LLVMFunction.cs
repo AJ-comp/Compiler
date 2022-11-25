@@ -1,14 +1,17 @@
 ﻿using AJ.Common.Helpers;
+using Parse.Extensions;
 using Parse.MiddleEnd.IR.Datas;
 using Parse.MiddleEnd.IR.Expressions;
 using Parse.MiddleEnd.IR.Expressions.StmtExpressions;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 
 namespace Parse.MiddleEnd.IR.LLVM
 {
+    [DebuggerDisplay("{" + nameof(GetDebuggerDisplay) + "(),nq}")]
     public class LLVMFunction
     {
         public string Name => _irFunction.Name;
@@ -21,7 +24,14 @@ namespace Parse.MiddleEnd.IR.LLVM
 
         public void AddVar(LLVMVar var)
         {
-            if (var is LLVMNamedVar)
+            if (var.VarType == LLVMVarType.ReturnVar)
+            {
+                // return var is unique.
+                if (_uniqueVars.ContainsKey(var.VarType)) return;
+                var.NameInFunction = $"{var.VarType.ToDescription()}";
+                _uniqueVars[var.VarType] = var;
+            }
+            else if (var is LLVMNamedVar)
             {
                 var namedVar = var as LLVMNamedVar;
 
@@ -72,6 +82,14 @@ namespace Parse.MiddleEnd.IR.LLVM
             return result;
         }
 
+
+        public LLVMVar GetReturnVar()
+        {
+            if (!_uniqueVars.ContainsKey(LLVMVarType.ReturnVar)) return null;
+
+            return _uniqueVars[LLVMVarType.ReturnVar];
+        }
+
         public LLVMVar GetRecentVar() => _orderingVars.Last();
         public LLVMVar GetRecentVar(LLVMVarType varType) => (_localVars[varType].Count > 0) ? _localVars[varType].Last() : null;
 
@@ -102,6 +120,7 @@ namespace Parse.MiddleEnd.IR.LLVM
         public IEnumerable<LLVMVar> GetRecentVars(int count) => _orderingVars.TakeLast(count);
 
 
+        private Dictionary<LLVMVarType, LLVMVar> _uniqueVars = new Dictionary<LLVMVarType, LLVMVar>();
         private Dictionary<LLVMVarType, List<LLVMVar>> _localVars = new Dictionary<LLVMVarType, List<LLVMVar>>();
         private List<LLVMVar> _orderingVars = new List<LLVMVar>();
 
@@ -130,5 +149,7 @@ namespace Parse.MiddleEnd.IR.LLVM
 
             return result;
         }
+
+        private string GetDebuggerDisplay() => $"{IRName}({Arguments.ItemsString()})";
     }
 }

@@ -15,8 +15,10 @@ namespace Parse.FrontEnd.AJ.Data
     {
         public override uint Size => (PointerDepth > 0) ? 4 : DefineNode.Size;
 
-        public AJUserDefType(TypeDefNode defType) : base(AJDataType.Unknown, defType)
+        public AJUserDefType(TypeDefNode defType, TokenDataList tokens = null) : base(AJDataType.Unknown, defType)
         {
+            _nameTokens.AddRangeExceptNull(tokens);
+
             if (DefineNode == null) DataType = AJDataType.Unknown;
             else if (DefineNode is ClassDefNode) DataType = AJDataType.Class;
         }

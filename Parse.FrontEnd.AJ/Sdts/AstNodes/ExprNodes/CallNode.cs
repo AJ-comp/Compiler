@@ -166,7 +166,7 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes
             foreach(var param in Params)
                 @params.Add(param.To() as IRExpr);
 
-            return new IRCallExpr(Func.LazyTo() as IRFunction, @params);
+            return new IRCallExpr(Func.LazyTo() as IRFunction, @params, GetDebuggingData());
         }
 
         public override IRExpression To(IRExpression from)

@@ -12,20 +12,12 @@ namespace Parse.MiddleEnd.IR.Expressions.ExprExpressions
         public IRExpr Expression { get; set; }
         public bool Compareable => Operation == IRSingleOperation.Not;
 
-        public IRSingleExpr(IRType type) : base(type)
+        public IRSingleExpr(IRType type) : this(type, DebuggingData.CreateDummy())
         {
         }
 
-
-        public override string ToString()
+        public IRSingleExpr(IRType type, DebuggingData debuggingData) : base(type, debuggingData)
         {
-            string result = string.Empty;
-
-            if (Operation == IRSingleOperation.PostInc) result += $"{Items[0]}++";
-            else if (Operation == IRSingleOperation.PostDec) result += $"{Items[0]}--";
-            else result += $"{Operation.ToDescription()}{Items[0]}";
-
-            return result;
         }
     }
 }

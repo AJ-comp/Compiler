@@ -22,6 +22,10 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.StatementNodes
             result.TrueStatement = TrueStatement.To() as IRStatement;
             result.FalseStatement = FalseStatement?.To() as IRStatement;
 
+            result.Condition.Parent = result;
+            result.TrueStatement.Parent = result;
+            if(result.FalseStatement != null) result.FalseStatement.Parent = result;
+
             return result;
         }
 

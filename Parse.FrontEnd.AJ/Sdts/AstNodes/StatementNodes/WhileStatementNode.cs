@@ -18,6 +18,9 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.StatementNodes
 
             result.Condition = CompareCondition.To() as IRBinaryExpr;
             result.TrueStatement = TrueStatement.To() as IRStatement;
+
+            result.Condition.Parent = result;
+            result.TrueStatement.Parent = result;
             result.IncludeBreak = IncludeBreak;
 
             return result;
