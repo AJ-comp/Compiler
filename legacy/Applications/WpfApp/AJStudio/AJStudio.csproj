@@ -1,0 +1,46 @@
+<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <UseWindowsForms>true</UseWindowsForms>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CommonServiceLocation" Version="1.0.0" />
+    <PackageReference Include="Microsoft-WindowsAPICodePack-Core" Version="1.1.4" />
+    <PackageReference Include="Microsoft-WindowsAPICodePack-Shell" Version="1.1.4" />
+    <PackageReference Include="MvvmLight" Version="5.4.1.1" />
+    <PackageReference Include="MvvmLightLibs" Version="5.4.1.1" />
+    <PackageReference Include="WpfLocalizeExtension" Version="3.6.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\src\Compile\Compile\Compile.csproj" />
+    <ProjectReference Include="..\..\..\..\Parse.BackEnd.Target\Parse.BackEnd.Target.ARMv7\Parse.BackEnd.Target.ARMv7.csproj" />
+    <ProjectReference Include="..\..\..\..\src\BackEnd\Parse.BackEnd\Parse.BackEnd.Target.AVR\Parse.BackEnd.Target.AVR.csproj" />
+    <ProjectReference Include="..\..\..\..\src\BackEnd\Parse.BackEnd\Parse.BackEnd.Target\Parse.BackEnd.Target.csproj" />
+    <ProjectReference Include="..\..\..\..\src\FrontEnd\Parse.FrontEnd.ErrorHandler\Parse.FrontEnd.ErrorHandler.csproj" />
+    <ProjectReference Include="..\..\..\Parse.WpfControls.SyntaxEditor\Parse.WpfControls.SyntaxEditor.csproj" />
+    <ProjectReference Include="..\..\..\Wpf.UI.Themes\Wpf.UI.Advance\Wpf.UI.Advance.csproj" />
+    <ProjectReference Include="..\..\..\Wpf.UI.Themes\Wpf.UI.Basic\Wpf.UI.Basic.csproj" />
+    <ProjectReference Include="..\ApplicationLayer.Views\ApplicationLayer.Views.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="ActiproSoftware.Docking.Wpf">
+      <HintPath>..\..\..\..\..\..\..\..\..\Program Files (x86)\Actipro Software\WPF-Controls\v20.1.0\Assemblies\ActiproSoftware.Docking.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="ActiproSoftware.Editors.Wpf">
+      <HintPath>..\..\..\..\..\..\..\..\..\Program Files (x86)\Actipro Software\WPF-Controls\v20.1.0\Assemblies\ActiproSoftware.Editors.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="ActiproSoftware.Grids.Wpf">
+      <HintPath>..\..\..\..\..\..\..\..\..\Program Files (x86)\Actipro Software\WPF-Controls\v20.1.0\Assemblies\ActiproSoftware.Grids.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="ActiproSoftware.Shared.Wpf">
+      <HintPath>..\..\..\..\..\..\..\..\..\Program Files (x86)\Actipro Software\WPF-Controls\v20.1.0\Assemblies\ActiproSoftware.Shared.Wpf.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>

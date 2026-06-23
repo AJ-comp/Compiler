@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <OutputType>Library</OutputType>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Properties\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="GraphShape" Version="1.1.0" />
+    <PackageReference Include="GraphSharp" Version="1.1.0" />
+    <PackageReference Include="QuickGraph" Version="3.6.61119.7" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\src\BackEnd\Parse.BackEnd\Parse.BackEnd.Target.ARM\Parse.BackEnd.Target.ARM.csproj" />
+    <ProjectReference Include="..\..\..\src\BackEnd\Parse.BackEnd\Parse.BackEnd.Target.AVR\Parse.BackEnd.Target.AVR.csproj" />
+    <ProjectReference Include="..\..\..\src\BackEnd\Parse.BackEnd\Parse.BackEnd.Target\Parse.BackEnd.Target.csproj" />
+    <ProjectReference Include="..\..\..\src\FrontEnd\Parse.FrontEnd.AJ\Parse.FrontEnd.AJ.csproj" />
+    <ProjectReference Include="..\..\..\src\FrontEnd\Parse.FrontEnd.Parsers\Parse.FrontEnd.Parsers.csproj" />
+    <ProjectReference Include="..\..\..\src\FrontEnd\Parse.FrontEnd.Support\Parse.FrontEnd.Support.csproj" />
+    <ProjectReference Include="..\ApplicationLayer.Common\ApplicationLayer.Common.csproj" />
+  </ItemGroup>
+
+</Project>

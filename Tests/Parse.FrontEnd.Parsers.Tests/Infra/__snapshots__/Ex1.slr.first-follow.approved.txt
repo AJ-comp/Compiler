@@ -1,0 +1,5 @@
+symbol | first | follow
+A | {a} | {This is EndMarker! char : щ}
+B | {[, ., epsilon} | {=}
+C | {[, .} | {[, ., =}
+D | {e, epsilon} | {]}

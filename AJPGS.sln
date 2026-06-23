@@ -5,9 +5,9 @@ VisualStudioVersion = 16.0.29806.167
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Wpf.UI", "Wpf.UI", "{F06688AF-2C86-47D4-A159-BEDAFF072A49}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Application", "Application", "{397493D9-A8A6-4976-9EE9-ECEF4533F3E9}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "7. IDE (deprecated)", "7. IDE (deprecated)", "{397493D9-A8A6-4976-9EE9-ECEF4533F3E9}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Parse.BackEnd", "Parse.BackEnd", "{F98EFA69-50AE-4ED6-9236-4AEEF140947F}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3. BackEnd", "3. BackEnd", "{F98EFA69-50AE-4ED6-9236-4AEEF140947F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WpfApp", "WpfApp", "{B51EDBFE-321C-47C6-A75A-83CF6D084EF6}"
 EndProject
@@ -16,59 +16,73 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.editorconfig = .editorconfig
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Parse", "Parse\Parse.csproj", "{9EC93435-60DA-432C-B89F-2D564F814806}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Parse", "src\FrontEnd\Parse\Parse.csproj", "{9EC93435-60DA-432C-B89F-2D564F814806}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Parse.MiddleEnd.IR", "Parse.MiddleEnd.IR\Parse.MiddleEnd.IR.csproj", "{8FAE7A6E-6D71-4C78-A2A0-8CF35E45D2E2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Parse.MiddleEnd.IR", "src\MiddleEnd\Parse.MiddleEnd.IR\Parse.MiddleEnd.IR.csproj", "{8FAE7A6E-6D71-4C78-A2A0-8CF35E45D2E2}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Parse.FrontEnd", "Parse.FrontEnd\Parse.FrontEnd.csproj", "{40856149-8AA9-4D57-B369-9552F0E30C81}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Parse.FrontEnd", "src\FrontEnd\Parse.FrontEnd\Parse.FrontEnd.csproj", "{40856149-8AA9-4D57-B369-9552F0E30C81}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Parse.FrontEnd.Support", "Parse.FrontEnd.Support\Parse.FrontEnd.Support.csproj", "{36CACBD1-FDFE-4F09-8C1F-A78552B5A1AA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Parse.FrontEnd.Support", "src\FrontEnd\Parse.FrontEnd.Support\Parse.FrontEnd.Support.csproj", "{36CACBD1-FDFE-4F09-8C1F-A78552B5A1AA}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Parse.FrontEnd.Grammars", "Parse.FrontEnd.Grammars\Parse.FrontEnd.Grammars.csproj", "{D49D19E3-BC54-404C-BEBC-8278CDC4B4DC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Parse.FrontEnd.Grammars", "src\FrontEnd\Parse.FrontEnd.Grammars\Parse.FrontEnd.Grammars.csproj", "{D49D19E3-BC54-404C-BEBC-8278CDC4B4DC}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Parse.FrontEnd.Parsers", "Parse.FrontEnd.Parsers\Parse.FrontEnd.Parsers.csproj", "{8EE7EB48-B3B9-479F-B942-A33BE2091738}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Parse.FrontEnd.Parsers", "src\FrontEnd\Parse.FrontEnd.Parsers\Parse.FrontEnd.Parsers.csproj", "{8EE7EB48-B3B9-479F-B942-A33BE2091738}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Wpf.UI.Basic", "Wpf.UI.Themes\Wpf.UI.Basic\Wpf.UI.Basic.csproj", "{CA0DB8EB-7687-4605-9656-675677DA9E71}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Wpf.UI.Basic", "legacy\Wpf.UI.Themes\Wpf.UI.Basic\Wpf.UI.Basic.csproj", "{CA0DB8EB-7687-4605-9656-675677DA9E71}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Wpf.UI.Advance", "Wpf.UI.Themes\Wpf.UI.Advance\Wpf.UI.Advance.csproj", "{0B81124D-87B4-4B0E-A69C-200EAE280CFE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Wpf.UI.Advance", "legacy\Wpf.UI.Themes\Wpf.UI.Advance\Wpf.UI.Advance.csproj", "{0B81124D-87B4-4B0E-A69C-200EAE280CFE}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Parse.WpfControls", "Parse.WpfControls\Parse.WpfControls.csproj", "{FB780D6C-EEFE-4CC4-AD06-E226282313C2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Parse.WpfControls", "legacy\Parse.WpfControls\Parse.WpfControls.csproj", "{FB780D6C-EEFE-4CC4-AD06-E226282313C2}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Parse.WpfControls.SyntaxEditor", "Parse.WpfControls.SyntaxEditor\Parse.WpfControls.SyntaxEditor.csproj", "{E9659DA0-D594-49C3-BF84-1E36804F1E96}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Parse.WpfControls.SyntaxEditor", "legacy\Parse.WpfControls.SyntaxEditor\Parse.WpfControls.SyntaxEditor.csproj", "{E9659DA0-D594-49C3-BF84-1E36804F1E96}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApplicationLayer.Define", "Applications\ApplicationLayer.Define\ApplicationLayer.Define.csproj", "{161C0316-82EF-4E67-B960-BA40DD53F40F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApplicationLayer.Define", "legacy\Applications\ApplicationLayer.Define\ApplicationLayer.Define.csproj", "{161C0316-82EF-4E67-B960-BA40DD53F40F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApplicationLayer.Common", "Applications\ApplicationLayer.Common\ApplicationLayer.Common.csproj", "{826E961C-0F1D-487E-AC1F-F57755FFDE36}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApplicationLayer.Common", "legacy\Applications\ApplicationLayer.Common\ApplicationLayer.Common.csproj", "{826E961C-0F1D-487E-AC1F-F57755FFDE36}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApplicationLayer.Models", "Applications\ApplicationLayer.Model\ApplicationLayer.Models.csproj", "{41F46F0B-8509-4BD4-84CF-BDAC016537EB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApplicationLayer.Models", "legacy\Applications\ApplicationLayer.Model\ApplicationLayer.Models.csproj", "{41F46F0B-8509-4BD4-84CF-BDAC016537EB}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApplicationLayer.ViewModels", "Applications\ApplicationLayer.ViewModels\ApplicationLayer.ViewModels.csproj", "{D5FCC315-BBFA-4DE2-B451-A944A90490FB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApplicationLayer.ViewModels", "legacy\Applications\ApplicationLayer.ViewModels\ApplicationLayer.ViewModels.csproj", "{D5FCC315-BBFA-4DE2-B451-A944A90490FB}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApplicationLayer.Views", "Applications\WpfApp\ApplicationLayer.Views\ApplicationLayer.Views.csproj", "{5B9C142A-2DA2-40FD-A596-AFB91B8D37DE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApplicationLayer.Views", "legacy\Applications\WpfApp\ApplicationLayer.Views\ApplicationLayer.Views.csproj", "{5B9C142A-2DA2-40FD-A596-AFB91B8D37DE}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AJStudio", "Applications\WpfApp\AJStudio\AJStudio.csproj", "{E6EDBE6F-7048-4714-A33D-AA0C59D7A14C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AJStudio", "legacy\Applications\WpfApp\AJStudio\AJStudio.csproj", "{E6EDBE6F-7048-4714-A33D-AA0C59D7A14C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Parse.BackEnd.Target", "Parse.BackEnd\Parse.BackEnd.Target\Parse.BackEnd.Target.csproj", "{EAD83887-5D64-4630-B1A0-B6B9C365F96C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Parse.BackEnd.Target", "src\BackEnd\Parse.BackEnd\Parse.BackEnd.Target\Parse.BackEnd.Target.csproj", "{EAD83887-5D64-4630-B1A0-B6B9C365F96C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Parse.BackEnd.Target.AVR", "Parse.BackEnd\Parse.BackEnd.Target.AVR\Parse.BackEnd.Target.AVR.csproj", "{CFE30E5A-AA37-41BD-A293-522CBC04E223}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Parse.BackEnd.Target.AVR", "src\BackEnd\Parse.BackEnd\Parse.BackEnd.Target.AVR\Parse.BackEnd.Target.AVR.csproj", "{CFE30E5A-AA37-41BD-A293-522CBC04E223}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Parse.BackEnd.Target.ARM", "Parse.BackEnd\Parse.BackEnd.Target.ARM\Parse.BackEnd.Target.ARM.csproj", "{DCAC357E-6F9E-4596-945D-6C891B1ADDE1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Parse.BackEnd.Target.ARM", "src\BackEnd\Parse.BackEnd\Parse.BackEnd.Target.ARM\Parse.BackEnd.Target.ARM.csproj", "{DCAC357E-6F9E-4596-945D-6C891B1ADDE1}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Parse.FrontEnd.ErrorHandler", "Parse.FrontEnd.ErrorHandler\Parse.FrontEnd.ErrorHandler.csproj", "{51DBD12E-40FC-4CFF-8B6E-D28433068129}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Parse.FrontEnd.ErrorHandler", "src\FrontEnd\Parse.FrontEnd.ErrorHandler\Parse.FrontEnd.ErrorHandler.csproj", "{51DBD12E-40FC-4CFF-8B6E-D28433068129}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Parse.FrontEnd.AJ", "Parse.FrontEnd.AJ\Parse.FrontEnd.AJ.csproj", "{A1D7704C-768C-49E6-ABB0-257138B2FE25}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Parse.FrontEnd.AJ", "src\FrontEnd\Parse.FrontEnd.AJ\Parse.FrontEnd.AJ.csproj", "{A1D7704C-768C-49E6-ABB0-257138B2FE25}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CommandPrompt.Compiler", "CommandPrompt.Compiler\CommandPrompt.Compiler.csproj", "{50B8B7C8-BDE8-47AF-A940-B7B882C716DD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CommandPrompt.Compiler", "src\Cli\CommandPrompt.Compiler\CommandPrompt.Compiler.csproj", "{50B8B7C8-BDE8-47AF-A940-B7B882C716DD}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Compile", "Compile\Compile.csproj", "{52A70EEA-12EC-45B0-A7F8-39477024A4D5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Compile", "src\Compile\Compile\Compile.csproj", "{52A70EEA-12EC-45B0-A7F8-39477024A4D5}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AJ.Common", "AJ.Common\AJ.Common.csproj", "{96BA1CD2-8EFB-4A64-A55F-C326B8A4564F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AJ.Common", "src\Common\AJ.Common\AJ.Common.csproj", "{96BA1CD2-8EFB-4A64-A55F-C326B8A4564F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CommandPrompt.Builder", "CommandPrompt.Builder\CommandPrompt.Builder.csproj", "{A014BA3A-C4A5-452D-9C69-DA464B9973F6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CommandPrompt.Builder", "src\Cli\CommandPrompt.Builder\CommandPrompt.Builder.csproj", "{A014BA3A-C4A5-452D-9C69-DA464B9973F6}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CommandPrompt.Lint", "CommandPrompt.Lint\CommandPrompt.Lint.csproj", "{9F57DE59-3F9B-4C05-9C7F-57B9F836C0EB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CommandPrompt.Lint", "src\Cli\CommandPrompt.Lint\CommandPrompt.Lint.csproj", "{9F57DE59-3F9B-4C05-9C7F-57B9F836C0EB}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CommandPrompt.Util", "CommandPrompt.Util\CommandPrompt.Util.csproj", "{CCCFE825-9B17-481F-B2FF-EE48B1392602}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CommandPrompt.Util", "src\Cli\CommandPrompt.Util\CommandPrompt.Util.csproj", "{CCCFE825-9B17-481F-B2FF-EE48B1392602}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "6. Tests", "6. Tests", "{9E925208-3589-6B36-FF0A-35760A5B3FD1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Parse.FrontEnd.Parsers.Tests", "Tests\Parse.FrontEnd.Parsers.Tests\Parse.FrontEnd.Parsers.Tests.csproj", "{C52F65E7-487B-44D6-9215-9F27EF6C730C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "0. Common", "0. Common", "{BBFA36D4-658D-7312-7D42-AD6FFE7D9109}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1. FrontEnd", "1. FrontEnd", "{BCDC3941-A7B4-4F8F-BFB8-5ABF93C3B049}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2. MiddleEnd", "2. MiddleEnd", "{3A6EE066-14F2-497E-8A07-8739DD3CBAFA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4. Compile", "4. Compile", "{298CAEA3-F0BF-450F-8435-6EA10C8BB340}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "5. CLI", "5. CLI", "{FF170549-B8A0-4CBF-A5F5-6D0332DBAAFC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -514,6 +528,22 @@ Global
 		{CCCFE825-9B17-481F-B2FF-EE48B1392602}.Release|x64.Build.0 = Release|Any CPU
 		{CCCFE825-9B17-481F-B2FF-EE48B1392602}.Release|x86.ActiveCfg = Release|Any CPU
 		{CCCFE825-9B17-481F-B2FF-EE48B1392602}.Release|x86.Build.0 = Release|Any CPU
+		{C52F65E7-487B-44D6-9215-9F27EF6C730C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C52F65E7-487B-44D6-9215-9F27EF6C730C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C52F65E7-487B-44D6-9215-9F27EF6C730C}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{C52F65E7-487B-44D6-9215-9F27EF6C730C}.Debug|ARM.Build.0 = Debug|Any CPU
+		{C52F65E7-487B-44D6-9215-9F27EF6C730C}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{C52F65E7-487B-44D6-9215-9F27EF6C730C}.Debug|x64.Build.0 = Debug|Any CPU
+		{C52F65E7-487B-44D6-9215-9F27EF6C730C}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{C52F65E7-487B-44D6-9215-9F27EF6C730C}.Debug|x86.Build.0 = Debug|Any CPU
+		{C52F65E7-487B-44D6-9215-9F27EF6C730C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C52F65E7-487B-44D6-9215-9F27EF6C730C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C52F65E7-487B-44D6-9215-9F27EF6C730C}.Release|ARM.ActiveCfg = Release|Any CPU
+		{C52F65E7-487B-44D6-9215-9F27EF6C730C}.Release|ARM.Build.0 = Release|Any CPU
+		{C52F65E7-487B-44D6-9215-9F27EF6C730C}.Release|x64.ActiveCfg = Release|Any CPU
+		{C52F65E7-487B-44D6-9215-9F27EF6C730C}.Release|x64.Build.0 = Release|Any CPU
+		{C52F65E7-487B-44D6-9215-9F27EF6C730C}.Release|x86.ActiveCfg = Release|Any CPU
+		{C52F65E7-487B-44D6-9215-9F27EF6C730C}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -531,6 +561,24 @@ Global
 		{EAD83887-5D64-4630-B1A0-B6B9C365F96C} = {F98EFA69-50AE-4ED6-9236-4AEEF140947F}
 		{CFE30E5A-AA37-41BD-A293-522CBC04E223} = {F98EFA69-50AE-4ED6-9236-4AEEF140947F}
 		{DCAC357E-6F9E-4596-945D-6C891B1ADDE1} = {F98EFA69-50AE-4ED6-9236-4AEEF140947F}
+		{C52F65E7-487B-44D6-9215-9F27EF6C730C} = {9E925208-3589-6B36-FF0A-35760A5B3FD1}
+		{96BA1CD2-8EFB-4A64-A55F-C326B8A4564F} = {BBFA36D4-658D-7312-7D42-AD6FFE7D9109}
+		{9EC93435-60DA-432C-B89F-2D564F814806} = {BCDC3941-A7B4-4F8F-BFB8-5ABF93C3B049}
+		{40856149-8AA9-4D57-B369-9552F0E30C81} = {BCDC3941-A7B4-4F8F-BFB8-5ABF93C3B049}
+		{36CACBD1-FDFE-4F09-8C1F-A78552B5A1AA} = {BCDC3941-A7B4-4F8F-BFB8-5ABF93C3B049}
+		{D49D19E3-BC54-404C-BEBC-8278CDC4B4DC} = {BCDC3941-A7B4-4F8F-BFB8-5ABF93C3B049}
+		{8EE7EB48-B3B9-479F-B942-A33BE2091738} = {BCDC3941-A7B4-4F8F-BFB8-5ABF93C3B049}
+		{51DBD12E-40FC-4CFF-8B6E-D28433068129} = {BCDC3941-A7B4-4F8F-BFB8-5ABF93C3B049}
+		{A1D7704C-768C-49E6-ABB0-257138B2FE25} = {BCDC3941-A7B4-4F8F-BFB8-5ABF93C3B049}
+		{8FAE7A6E-6D71-4C78-A2A0-8CF35E45D2E2} = {3A6EE066-14F2-497E-8A07-8739DD3CBAFA}
+		{52A70EEA-12EC-45B0-A7F8-39477024A4D5} = {298CAEA3-F0BF-450F-8435-6EA10C8BB340}
+		{A014BA3A-C4A5-452D-9C69-DA464B9973F6} = {FF170549-B8A0-4CBF-A5F5-6D0332DBAAFC}
+		{CCCFE825-9B17-481F-B2FF-EE48B1392602} = {FF170549-B8A0-4CBF-A5F5-6D0332DBAAFC}
+		{50B8B7C8-BDE8-47AF-A940-B7B882C716DD} = {FF170549-B8A0-4CBF-A5F5-6D0332DBAAFC}
+		{9F57DE59-3F9B-4C05-9C7F-57B9F836C0EB} = {FF170549-B8A0-4CBF-A5F5-6D0332DBAAFC}
+		{F06688AF-2C86-47D4-A159-BEDAFF072A49} = {397493D9-A8A6-4976-9EE9-ECEF4533F3E9}
+		{FB780D6C-EEFE-4CC4-AD06-E226282313C2} = {397493D9-A8A6-4976-9EE9-ECEF4533F3E9}
+		{E9659DA0-D594-49C3-BF84-1E36804F1E96} = {397493D9-A8A6-4976-9EE9-ECEF4533F3E9}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {86A882EF-9DAF-4F4B-93CD-B7D21FFA5322}

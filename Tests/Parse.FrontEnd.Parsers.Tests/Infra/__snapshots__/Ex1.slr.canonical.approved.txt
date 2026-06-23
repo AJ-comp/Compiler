@@ -1,0 +1,46 @@
+state number | LR items | mark symbol | follow set | lookahead set | shift-reduce conflict | reduce-reduce conflict
+0 | Accept ->•A | A | {} | {} | False | False
+ | A ->•a B = e | a | {} | {} |  |
+ |  |  |  |  |  |
+1 | Accept -> A• |  | {} | {} | False | False
+ |  |  |  |  |  |
+2 | A -> a•B = e | B | {} | {} | False | False
+ | B ->•C B | C | {} | {} |  |
+ | C ->•[ e D ] | [ | {} | {} |  |
+ | C ->•. a | . | {} | {} |  |
+ | B ->• |  | {} | {} |  |
+ |  |  |  |  |  |
+3 | A -> a B•= e | = | {} | {} | False | False
+ |  |  |  |  |  |
+4 | B -> C•B | B | {} | {} | False | False
+ | B ->•C B | C | {} | {} |  |
+ | C ->•[ e D ] | [ | {} | {} |  |
+ | C ->•. a | . | {} | {} |  |
+ | B ->• |  | {} | {} |  |
+ |  |  |  |  |  |
+5 | C -> [•e D ] | e | {} | {} | False | False
+ |  |  |  |  |  |
+6 | C -> .•a | a | {} | {} | False | False
+ |  |  |  |  |  |
+7 | A -> a B =•e | e | {} | {} | False | False
+ |  |  |  |  |  |
+8 | B -> C B• |  | {} | {} | False | False
+ |  |  |  |  |  |
+9 | C -> [ e•D ] | D | {} | {} | False | False
+ | D ->•e D | e | {} | {} |  |
+ | D ->• |  | {} | {} |  |
+ |  |  |  |  |  |
+10 | C -> . a• |  | {} | {} | False | False
+ |  |  |  |  |  |
+11 | A -> a B = e• |  | {} | {} | False | False
+ |  |  |  |  |  |
+12 | C -> [ e D•] | ] | {} | {} | False | False
+ |  |  |  |  |  |
+13 | D -> e•D | D | {} | {} | False | False
+ | D ->•e D | e | {} | {} |  |
+ | D ->• |  | {} | {} |  |
+ |  |  |  |  |  |
+14 | C -> [ e D ]• |  | {} | {} | False | False
+ |  |  |  |  |  |
+15 | D -> e D• |  | {} | {} | False | False
+ |  |  |  |  |  |

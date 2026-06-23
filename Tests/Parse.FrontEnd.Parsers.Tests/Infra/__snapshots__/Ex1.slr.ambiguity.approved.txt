@@ -1,0 +1,80 @@
+prev status | seeing mark symbol | current status | mark list & analysis result | follow | lookahead
+I-1 |  | I0 | Accept ->•A | {} | {}
+ |  |  | A ->•a B = e | {} | {}
+result |  |  | no conflict |  |
+ |  |  |  |  |
+I0 | A | I1 | Accept -> A• | {} | {}
+result |  |  | no conflict |  |
+ |  |  |  |  |
+I0 | a | I2 | A -> a•B = e | {} | {}
+ |  |  | B ->•C B | {} | {}
+ |  |  | C ->•[ e D ] | {} | {}
+ |  |  | C ->•. a | {} | {}
+ |  |  | B ->• | {} | {}
+result |  |  | no conflict |  |
+ |  |  |  |  |
+I2 | B | I3 | A -> a B•= e | {} | {}
+result |  |  | no conflict |  |
+ |  |  |  |  |
+I2 | C | I4 | B -> C•B | {} | {}
+ |  |  | B ->•C B | {} | {}
+ |  |  | C ->•[ e D ] | {} | {}
+ |  |  | C ->•. a | {} | {}
+ |  |  | B ->• | {} | {}
+result |  |  | no conflict |  |
+ |  |  |  |  |
+I2 | [ | I5 | C -> [•e D ] | {} | {}
+result |  |  | no conflict |  |
+ |  |  |  |  |
+I2 | . | I6 | C -> .•a | {} | {}
+result |  |  | no conflict |  |
+ |  |  |  |  |
+I3 | = | I7 | A -> a B =•e | {} | {}
+result |  |  | no conflict |  |
+ |  |  |  |  |
+I4 | B | I8 | B -> C B• | {} | {}
+result |  |  | no conflict |  |
+ |  |  |  |  |
+I4 | C | I4 | B -> C•B | {} | {}
+ |  |  | B ->•C B | {} | {}
+ |  |  | C ->•[ e D ] | {} | {}
+ |  |  | C ->•. a | {} | {}
+ |  |  | B ->• | {} | {}
+result |  |  | no conflict |  |
+ |  |  |  |  |
+I4 | [ | I5 | C -> [•e D ] | {} | {}
+result |  |  | no conflict |  |
+ |  |  |  |  |
+I4 | . | I6 | C -> .•a | {} | {}
+result |  |  | no conflict |  |
+ |  |  |  |  |
+I5 | e | I9 | C -> [ e•D ] | {} | {}
+ |  |  | D ->•e D | {} | {}
+ |  |  | D ->• | {} | {}
+result |  |  | no conflict |  |
+ |  |  |  |  |
+I6 | a | I10 | C -> . a• | {} | {}
+result |  |  | no conflict |  |
+ |  |  |  |  |
+I7 | e | I11 | A -> a B = e• | {} | {}
+result |  |  | no conflict |  |
+ |  |  |  |  |
+I9 | D | I12 | C -> [ e D•] | {} | {}
+result |  |  | no conflict |  |
+ |  |  |  |  |
+I9 | e | I13 | D -> e•D | {} | {}
+ |  |  | D ->•e D | {} | {}
+ |  |  | D ->• | {} | {}
+result |  |  | no conflict |  |
+ |  |  |  |  |
+I12 | ] | I14 | C -> [ e D ]• | {} | {}
+result |  |  | no conflict |  |
+ |  |  |  |  |
+I13 | D | I15 | D -> e D• | {} | {}
+result |  |  | no conflict |  |
+ |  |  |  |  |
+I13 | e | I13 | D -> e•D | {} | {}
+ |  |  | D ->•e D | {} | {}
+ |  |  | D ->• | {} | {}
+result |  |  | no conflict |  |
+ |  |  |  |  |
