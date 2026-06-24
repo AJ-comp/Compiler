@@ -59,7 +59,6 @@ namespace Parse.FrontEnd.Parsers.LR
         /// <param name="parsingUnit"></param>
         private void GotoFollowUpProcess(ParsingUnit parsingUnit)
         {
-            var reduceDest = parsingUnit.Action.Dest as NonTerminalSingle;
             var afterStack = parsingUnit.AfterStack;
 
             afterStack.Goto((int)parsingUnit.Action.Dest);

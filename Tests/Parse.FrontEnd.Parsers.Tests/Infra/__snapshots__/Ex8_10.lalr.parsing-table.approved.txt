@@ -1,0 +1,13 @@
+Vi / Vt | ( | [_a-zA-Z][_a-zA-Z0-9]* | + | This is EndMarker! char : щ | * | ) | E | T | F
+I0 | Shift [4] | Shift [5] |  |  |  |  | Goto [1] | Goto [2] | Goto [3]
+I1 |  |  | Shift [6] | Accept [Accept -> E] |  |  |  |  |
+I2 |  |  | Reduce [E -> T] | Reduce [E -> T] | Shift [7] | Reduce [E -> T] |  |  |
+I3 |  |  | Reduce [T -> F] | Reduce [T -> F] | Reduce [T -> F] | Reduce [T -> F] |  |  |
+I4 | Shift [4] | Shift [5] |  |  |  |  | Goto [8] | Goto [2] | Goto [3]
+I5 |  |  | Reduce [F -> [_a-zA-Z][_a-zA-Z0-9]*] | Reduce [F -> [_a-zA-Z][_a-zA-Z0-9]*] | Reduce [F -> [_a-zA-Z][_a-zA-Z0-9]*] | Reduce [F -> [_a-zA-Z][_a-zA-Z0-9]*] |  |  |
+I6 | Shift [4] | Shift [5] |  |  |  |  |  | Goto [9] | Goto [3]
+I7 | Shift [4] | Shift [5] |  |  |  |  |  |  | Goto [10]
+I8 |  |  | Shift [6] |  |  | Shift [11] |  |  |
+I9 |  |  | Reduce [E -> E + T] | Reduce [E -> E + T] | Shift [7] | Reduce [E -> E + T] |  |  |
+I10 |  |  | Reduce [T -> T * F] | Reduce [T -> T * F] | Reduce [T -> T * F] | Reduce [T -> T * F] |  |  |
+I11 |  |  | Reduce [F -> ( E )] | Reduce [F -> ( E )] | Reduce [F -> ( E )] | Reduce [F -> ( E )] |  |  |

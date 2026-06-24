@@ -1,4 +1,5 @@
 ﻿using Parse.Extensions;
+using Parse.FrontEnd.Parsers.Datas;
 using Parse.FrontEnd.Parsers.Datas.LR;
 using Parse.FrontEnd.RegularGrammar;
 using System;
@@ -9,6 +10,33 @@ namespace Parse.FrontEnd.Parsers.Collections
 {
     public class LRParsingTable : List<LRParsingRowDataFormat>, IParsingTable
     {
+        /// <summary>
+        /// The parse table as a flat sequence of strongly-typed entries — one per (state, symbol,
+        /// action). Lets a consumer iterate / LINQ the table without casting to this concrete type,
+        /// without hand-walking the nested row -> symbol -> action structure, and without the untyped
+        /// <c>object Dest</c>. Cells with no real parse action (NotProcessed / Failed) are skipped.
+        /// </summary>
+        public IEnumerable<ParseTableEntry> Entries
+        {
+            get
+            {
+                int state = 0;
+                foreach (var row in this)
+                {
+                    foreach (var cell in row.MatchedValueSet)
+                    {
+                        foreach (var actionData in cell.Value)
+                        {
+                            var action = actionData.Action;
+                            if (action != null) yield return new ParseTableEntry(state, cell.Key, action);
+                        }
+                    }
+
+                    state++;
+                }
+            }
+        }
+
         public TerminalSet RefTerminalSet
         {
             get
@@ -109,6 +137,28 @@ namespace Parse.FrontEnd.Parsers.Collections
             }
         }
 
+        /// <summary>
+        /// Renders one action as its table-cell text (e.g. <c>Shift [4]</c>, <c>Reduce [E -&gt; T]</c>,
+        /// <c>Accept [Accept -&gt; E]</c>). It reads the action through the shared <see cref="ActionData.Action"/>
+        /// projection — the same source of truth as <see cref="Entries"/> — so the rendered table and the
+        /// typed API can never drift apart. A direction with no parse action (Failed / NotProcessed) falls
+        /// back to its enum name with an empty dest, exactly as the previous inline formula did.
+        /// </summary>
+        internal static string FormatActionCell(ActionData action)
+        {
+            string label, dest;
+            switch (action.Action)
+            {
+                case ParseAction.Shift s:  label = "Shift"; dest = s.State.ToString(); break;
+                case ParseAction.Goto g:   label = "Goto";  dest = g.State.ToString(); break;
+                case ParseAction.Reduce r: label = r.IsEpsilon ? "EpsilonReduce" : "Reduce"; dest = r.Production.ToGrammarString(); break;
+                case ParseAction.Accept a: label = "Accept"; dest = a.Production.ToGrammarString(); break;
+                default:                   label = action.Direction.ToString(); dest = ""; break; // Failed / NotProcessed
+            }
+
+            return label + " [" + dest + "]";
+        }
+
         private void CreateRows(DataTable dataTable)
         {
             int index = 0;
@@ -123,13 +173,7 @@ namespace Parse.FrontEnd.Parsers.Collections
                     List<string> matchedValues = new List<string>();
 
                     foreach (var mItem in matchedItem.Value)
-                    {
-                        var moveInfo = mItem.Direction.ToString();
-                        var destInfo = (mItem.Dest is NonTerminalSingle) ? (mItem.Dest as NonTerminalSingle).ToGrammarString()
-                                                                                                 : (mItem.Dest as int?).ToString();
-
-                         matchedValues.Add(moveInfo + $" [{destInfo}]");
-                    }
+                        matchedValues.Add(FormatActionCell(mItem));
 
                     row[key] = matchedValues.ItemsString(PrintType.String, "", Environment.NewLine);
                 }

@@ -46,7 +46,12 @@ namespace Parse.FrontEnd.RegularGrammar
         {
             this.TokenType = type;
             this.Value = value;
-            this.Caption = caption;
+            // Caption is the terminal's display label (ToString, table headers, FIRST/FOLLOW,
+            // diagnostics); a null there crashes the text renderers, so it must never be null. When
+            // no caption is supplied — or it resolves to null, e.g. from a missing resource string —
+            // fall back to the value. (Value itself is left exactly as given: it is the lexer's
+            // matching value/pattern, NOT a display string, so it must not be altered.)
+            this.Caption = caption ?? value ?? string.Empty;
             this.Meaning = meaning;
             this.IsWordPattern = bWordPattern;
 

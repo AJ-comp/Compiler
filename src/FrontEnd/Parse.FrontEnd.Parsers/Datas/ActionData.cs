@@ -1,4 +1,5 @@
 ﻿using AJ.Common.Helpers;
+using Parse.FrontEnd.RegularGrammar;
 using System.Collections.Generic;
 using System.Linq;
 using static Parse.FrontEnd.Parsers.Datas.LR.LRParsingRowDataFormat;
@@ -16,6 +17,29 @@ namespace Parse.FrontEnd.Parsers.Datas
         {
             this.Direction = actionDir;
             this.Dest = actionDest;
+        }
+
+        /// <summary>
+        /// A strongly-typed projection of this action (<see cref="Direction"/> + <see cref="Dest"/>):
+        /// <see cref="ParseAction.Shift"/> / <see cref="ParseAction.Goto"/> / <see cref="ParseAction.Reduce"/> /
+        /// <see cref="ParseAction.Accept"/>, or <c>null</c> for a non-parse direction (NotProcessed / Failed).
+        /// Additive and read-only — it does not change Direction/Dest, so existing consumers are
+        /// unaffected. (For a Failed action the Dest is an error handler, so it maps to null here.)
+        /// </summary>
+        public ParseAction Action
+        {
+            get
+            {
+                switch (Direction)
+                {
+                    case ActionDir.Shift:         return new ParseAction.Shift((int)Dest);
+                    case ActionDir.Goto:          return new ParseAction.Goto((int)Dest);
+                    case ActionDir.Reduce:        return new ParseAction.Reduce((NonTerminalSingle)Dest);
+                    case ActionDir.EpsilonReduce: return new ParseAction.Reduce((NonTerminalSingle)Dest, true);
+                    case ActionDir.Accept:        return new ParseAction.Accept((NonTerminalSingle)Dest);
+                    default:                      return null; // NotProcessed / Failed
+                }
+            }
         }
 
         public override string ToString()
