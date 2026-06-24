@@ -28,6 +28,13 @@ namespace Parse.FrontEnd.Parsers.Datas
         public LexingData LexingData { get; set; }
         public ParsingLogger Logger { get; }
 
+        /// <summary>
+        /// The parse as a flat, strongly-typed sequence of steps (the data-oriented counterpart of
+        /// <see cref="ToParsingHistory"/>). Each step exposes its typed <see cref="ParseAction"/>,
+        /// lookahead, before/after stack and any error note — see <see cref="ParseTrace"/>.
+        /// </summary>
+        public ParseTrace Trace => ParseTrace.From(Logger);
+
 
         public ConflictAction BackTracking()
         {

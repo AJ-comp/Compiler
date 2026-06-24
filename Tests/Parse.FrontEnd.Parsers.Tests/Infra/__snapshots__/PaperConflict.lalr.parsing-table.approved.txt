@@ -1,9 +1,9 @@
-Vi / Vt | const | ident | This is EndMarker! char : щ | = | . | ; | Program | Declare | G1 | Expression | IdentChain
-I0 | Shift [4] | Shift [7]  EpsilonReduce [G1 -> epsilon] |  |  |  |  | Goto [1] | Goto [2] | Goto [3] | Goto [5] | Goto [6]
+Vi / Vt | const | ident | This is EndMarker! char : щ | = | . | ; | Program | Declare | G# | Expression | IdentChain
+I0 | Shift [4] | Shift [7]  EpsilonReduce [G# -> epsilon] |  |  |  |  | Goto [1] | Goto [2] | Goto [3] | Goto [5] | Goto [6]
 I1 |  |  | Accept [Accept -> Program] |  |  |  |  |  |  |  |
 I2 |  |  | Reduce [Program -> Declare] |  |  |  |  |  |  |  |
 I3 |  | Shift [7] |  |  |  |  |  |  |  |  | Goto [8]
-I4 |  | Reduce [G1 -> const] |  |  |  |  |  |  |  |  |
+I4 |  | Reduce [G# -> const] |  |  |  |  |  |  |  |  |
 I5 |  |  | Reduce [Program -> Expression] |  |  |  |  |  |  |  |
 I6 |  |  |  | Shift [9] | Shift [10] |  |  |  |  |  |
 I7 |  | Reduce [IdentChain -> ident] |  | Reduce [IdentChain -> ident] | Reduce [IdentChain -> ident] | Reduce [IdentChain -> ident] |  |  |  |  |
@@ -13,5 +13,5 @@ I10 |  | Shift [13] |  |  |  |  |  |  |  |  |
 I11 |  |  |  |  | Shift [10] | Shift [14] |  |  |  |  |
 I12 |  |  |  |  | Shift [10] | Shift [15] |  |  |  |  |
 I13 |  | Reduce [IdentChain -> IdentChain . ident] |  | Reduce [IdentChain -> IdentChain . ident] | Reduce [IdentChain -> IdentChain . ident] | Reduce [IdentChain -> IdentChain . ident] |  |  |  |  |
-I14 |  |  | Reduce [Declare -> G1 IdentChain IdentChain ;] |  |  |  |  |  |  |  |
+I14 |  |  | Reduce [Declare -> G# IdentChain IdentChain ;] |  |  |  |  |  |  |  |
 I15 |  |  | Reduce [Expression -> IdentChain = IdentChain ;] |  |  |  |  |  |  |  |

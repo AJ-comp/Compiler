@@ -411,5 +411,3 @@ Videos about this project:
 ## License
 
 MIT — see [LICENSE](LICENSE).
-
-The name **Orchid** (난, the orchid) carries a small dedication; see [DEDICATION](DEDICATION).

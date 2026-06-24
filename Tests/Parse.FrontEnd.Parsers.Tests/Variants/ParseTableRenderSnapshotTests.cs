@@ -1,3 +1,4 @@
+using System.Text.RegularExpressions;
 using Parse.FrontEnd.Grammars.ExampleGrammars;
 using Parse.FrontEnd.Parsers.LR;
 using Parse.FrontEnd.Parsers.Tests.Infra;
@@ -15,13 +16,20 @@ namespace Parse.FrontEnd.Parsers.Tests;
 [Trait("Category", "Variant")]
 public class ParseTableRenderSnapshotTests
 {
+    // Auto-generated nonterminals are named G<n> from a PROCESS-GLOBAL counter, so the exact number
+    // shifts with test order/count across a run. Normalize it (G<n> -> G#) so the snapshot pins the
+    // table SHAPE, not the non-deterministic counter. (The counter's non-determinism itself is a
+    // separate static-state item, tracked apart from this rendering test.)
+    private static string Normalize(string tableText)
+        => Regex.Replace(tableText, @"\bG\d+\b", "G#");
+
     [Fact]
     public void Ex8_10_parsing_table_matches_snapshot()
         => Snapshot.Match("Ex8_10.lalr.parsing-table",
-            DataTableText.ToText(new LALRParser(new Ex8_10Grammar(), false).ParsingTable.ToTableFormat));
+            Normalize(DataTableText.ToText(new LALRParser(new Ex8_10Grammar(), false).ParsingTable.ToTableFormat)));
 
     [Fact]
     public void PaperConflict_parsing_table_matches_snapshot()
         => Snapshot.Match("PaperConflict.lalr.parsing-table",
-            DataTableText.ToText(new LALRParser(new PaperConflictDeclExprGrammar(), false).ParsingTable.ToTableFormat));
+            Normalize(DataTableText.ToText(new LALRParser(new PaperConflictDeclExprGrammar(), false).ParsingTable.ToTableFormat)));
 }
