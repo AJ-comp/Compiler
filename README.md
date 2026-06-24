@@ -13,8 +13,22 @@ pluggable error recovery.
 
 ---
 
+## Try it online
+
+**🌿 [Live playground →](https://polite-island-0b2142200.7.azurestaticapps.net)**
+
+Define a grammar in EBNF, give it some input, and watch the LR parser work — the
+ACTION/GOTO table, a step-by-step parse with the parsing stack drawn live, a parse
+tree that builds up as you step (shift adds a leaf, reduce joins them into a
+subtree), and a panel that flags shift-reduce / reduce-reduce conflicts. It runs
+entirely in your browser (Blazor WebAssembly), no install. Source:
+[`samples/Playground`](samples/Playground).
+
+---
+
 ## Table of contents
 
+- [Try it online](#try-it-online) — the live web playground
 - [Why Orchid](#why-orchid)
 - [Quick start](#quick-start)
 - [Defining a grammar](#defining-a-grammar) — terminals, rules, EBNF operators, semantic actions
