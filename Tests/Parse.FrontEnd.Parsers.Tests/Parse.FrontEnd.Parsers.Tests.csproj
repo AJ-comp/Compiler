@@ -23,6 +23,7 @@
     <!-- The pure parser engine + the example grammars it is exercised with. -->
     <ProjectReference Include="..\..\src\FrontEnd\Parse.FrontEnd.Parsers\Parse.FrontEnd.Parsers.csproj" />
     <ProjectReference Include="..\..\src\FrontEnd\Parse.FrontEnd.Grammars\Parse.FrontEnd.Grammars.csproj" />
+    <ProjectReference Include="..\..\src\FrontEnd\Parse.FrontEnd.Grammars.Ebnf\Parse.FrontEnd.Grammars.Ebnf.csproj" />
   </ItemGroup>
 
 </Project>

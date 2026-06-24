@@ -113,3 +113,178 @@ code {
 .form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
     text-align: start;
 }
+
+/* Monaco grammar editor: give the editor element an explicit height so it lays out properly.
+   Without a definite height the editor collapses to a thin strip at the top of its container. */
+#grammar-editor {
+    height: 220px;
+    border: 1px solid #ced4da;
+    border-radius: .375rem;
+    overflow: hidden;
+}
+
+/* Parse-stack visualization for the step-through view. */
+.parse-stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    align-items: center;
+    padding: 10px;
+    background: #f8f9fa;
+    border: 1px solid #e9ecef;
+    border-radius: 6px;
+    min-height: 46px;
+}
+
+.frame {
+    padding: 2px 9px;
+    border-radius: 4px;
+    font-family: monospace;
+    font-size: .9rem;
+}
+
+.frame-state {
+    background: #cfe2ff;
+    color: #084298;
+    font-weight: bold;
+}
+
+.frame-sym {
+    background: #e9ecef;
+    color: #333;
+}
+
+/* Parse-tree diagram — top-down tree drawn with pure CSS (no JS).
+   The recursive component emits nested <ul>/<li>; the connectors below are
+   drawn with ::before / ::after pseudo-elements. */
+.tree-wrap {
+    overflow-x: auto;
+    border: 1px solid #e9ecef;
+    border-radius: 6px;
+    background: #fff;
+    padding: 12px 6px;
+}
+
+.tree {
+    position: relative;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    white-space: nowrap;
+    text-align: center;
+    font-family: monospace;
+}
+
+.tree ul {
+    position: relative;
+    list-style: none;
+    margin: 0;
+    padding: 20px 0 0 0;
+    white-space: nowrap;
+    text-align: center;
+}
+
+.tree li {
+    display: inline-block;
+    vertical-align: top;
+    position: relative;
+    padding: 20px 6px 0 6px;
+}
+
+/* horizontal connector bar (two halves) + vertical stub down to each node */
+.tree li::before,
+.tree li::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    width: 50%;
+    height: 20px;
+    border-top: 1px solid #c4c9d0;
+}
+
+.tree li::before {
+    right: 50%;
+}
+
+.tree li::after {
+    left: 50%;
+    border-left: 1px solid #c4c9d0;
+}
+
+/* trim the outer half-bars at the row ends (keep the vertical stub) */
+.tree li:first-child::before {
+    border-top: 0;
+}
+
+.tree li:last-child::after {
+    border-top: 0;
+}
+
+/* a single child: no bar, just the straight line from the parent */
+.tree li:only-child {
+    padding-top: 0;
+}
+
+.tree li:only-child::before,
+.tree li:only-child::after {
+    display: none;
+}
+
+/* vertical line from a parent down to its children's bar */
+.tree ul::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 0;
+    height: 20px;
+    border-left: 1px solid #c4c9d0;
+}
+
+/* node labels */
+.tree-label {
+    display: inline-block;
+    padding: 3px 9px;
+    border: 1px solid #c4c9d0;
+    border-radius: 5px;
+    background: #fff;
+}
+
+.tree-nt {
+    background: #e7f1ff;
+    border-color: #b6d4fe;
+    color: #084298;
+    font-weight: 600;
+}
+
+.tree-leaf {
+    background: #fff3cd;
+    border-color: #ffe69c;
+    color: #664d03;
+}
+
+/* Forest: the partial parse trees on the stack at the current step, side by side. */
+.forest {
+    display: flex;
+    align-items: flex-start;
+    gap: 28px;
+    padding: 2px;
+}
+
+/* New nodes pop in as the parse builds. Reused DOM (unchanged subtrees) does not
+   re-run the animation, so only freshly added/joined nodes pop. */
+.forest .tree-label {
+    animation: nodepop .2s ease;
+}
+
+@keyframes nodepop {
+    from {
+        transform: scale(.8);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}

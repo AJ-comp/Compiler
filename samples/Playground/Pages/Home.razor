@@ -1,7 +1,298 @@
-﻿@page "/"
+@page "/"
+@using Parse.FrontEnd
+@using Parse.FrontEnd.ParseTree
+@using Parse.FrontEnd.Grammars.Ebnf
+@using Parse.FrontEnd.Parsers.Datas
+@using Parse.FrontEnd.Parsers.Datas.LR
+@using Parse.FrontEnd.Parsers.LR
+@using Parse.FrontEnd.Tokenize
 
-<PageTitle>Home</PageTitle>
+<PageTitle>Orchid Playground</PageTitle>
 
-<h1>Hello, world!</h1>
+<h1>Orchid Playground</h1>
+<p>Define a grammar in EBNF, give it some input, and step through how the LR parser works on it.</p>
 
-Welcome to your new app.
+<div class="row g-3">
+    <div class="col-md-6">
+        <label class="form-label"><strong>Grammar (EBNF)</strong></label>
+        <StandaloneCodeEditor @ref="_grammarEditor" Id="grammar-editor" ConstructionOptions="GrammarOptions" />
+    </div>
+    <div class="col-md-6">
+        <label class="form-label"><strong>Input</strong></label>
+        <textarea class="form-control font-monospace" rows="9" @bind="_inputText"></textarea>
+    </div>
+</div>
+
+<button class="btn btn-primary mt-3" @onclick="Run">Run</button>
+
+@if (_grammarErrors is not null)
+{
+    <div class="alert alert-danger mt-3">
+        <strong>Grammar errors</strong>
+        <ul class="mb-0">
+            @foreach (var error in _grammarErrors)
+            {
+                <li>@error</li>
+            }
+        </ul>
+    </div>
+}
+
+@if (_ran && _grammarErrors is null)
+{
+    <p class="mt-3 fs-5">
+        Result:
+        @if (_success)
+        {
+            <span class="badge bg-success">accepted</span>
+        }
+        else
+        {
+            <span class="badge bg-danger">rejected</span>
+        }
+    </p>
+
+    @if (_conflicts.Count > 0)
+    {
+        <div class="alert alert-warning">
+            <strong>⚠ @_conflicts.Count grammar conflict@(_conflicts.Count > 1 ? "s" : "")</strong>
+            — this grammar is not LALR(1) as written; at a conflict the parser falls back to a default action.
+            <ul class="mb-0 mt-1">
+                @foreach (var c in _conflicts)
+                {
+                    <li>
+                        <span class="badge bg-warning text-dark">@c.AmbiguityContent</span>
+                        at state <strong>I@(c.CanonicalLine.CurrentStatusIndex)</strong>
+                    </li>
+                }
+            </ul>
+        </div>
+    }
+
+    @if (_trace.Count > 0)
+    {
+        var step = _trace[_step];
+
+        <h5>Parse — step through</h5>
+
+        <div class="d-flex align-items-center gap-2 mb-2">
+            <button class="btn btn-sm btn-outline-secondary" @onclick="First" disabled="@(_step == 0)">⏮</button>
+            <button class="btn btn-sm btn-outline-secondary" @onclick="Prev" disabled="@(_step == 0)">◀</button>
+            <button class="btn btn-sm btn-outline-secondary" @onclick="Next" disabled="@(_step >= _trace.Count - 1)">▶</button>
+            <button class="btn btn-sm btn-outline-secondary" @onclick="Last" disabled="@(_step >= _trace.Count - 1)">⏭</button>
+            <button class="btn btn-sm btn-outline-primary" @onclick="TogglePlay">@(_playing ? "⏸ Pause" : "▶ Play")</button>
+            <span class="text-muted ms-2">step @(_step + 1) / @_trace.Count</span>
+            <span class="ms-auto d-flex align-items-center gap-1">
+                <span class="text-muted small">speed</span>
+                <select class="form-select form-select-sm" style="width: auto" @bind="_intervalMs">
+                    <option value="250">fast (0.25s)</option>
+                    <option value="600">normal (0.6s)</option>
+                    <option value="1200">slow (1.2s)</option>
+                </select>
+            </span>
+        </div>
+
+        <input type="range" class="form-range mb-3" min="0" max="@(_trace.Count - 1)" @bind="_step" @bind:event="oninput" />
+
+        <div class="d-flex align-items-center mb-2">
+            <div>
+                <span class="badge @BadgeClass(step.Action)">@Kind(step.Action)</span>
+                <span class="font-monospace ms-1">@Target(step.Action)</span>
+                @if (step.IsError)
+                {
+                    <span class="ms-2 text-danger">@step.ErrorMessage</span>
+                }
+            </div>
+            <div class="ms-auto text-muted">
+                @if (step.Lookahead is not null)
+                {
+                    <span>lookahead: <code>@step.Lookahead.Input</code></span>
+                }
+            </div>
+        </div>
+
+        <div class="parse-stack">
+            @foreach (var frame in step.StackAfter)
+            {
+                @if (frame.Symbol is not null)
+                {
+                    <span class="frame frame-sym">@frame.Symbol</span>
+                }
+                <span class="frame frame-state">@frame.State</span>
+            }
+        </div>
+        <div class="text-muted small mt-1">stack — bottom (left) to top (right): <span class="frame frame-state">state</span> <span class="frame frame-sym">symbol</span></div>
+
+        <h6 class="mt-3">Parse tree <span class="text-muted fw-normal">(builds as you step — shift adds a leaf, reduce joins them)</span></h6>
+        <div class="tree-wrap">
+            <div class="forest">
+                @foreach (var frame in step.StackAfter)
+                {
+                    @if (frame.Symbol is not null)
+                    {
+                        <ul class="tree">
+                            <ParseTreeNode Node="frame.Symbol" />
+                        </ul>
+                    }
+                }
+            </div>
+        </div>
+    }
+
+    <div class="row g-4 mt-1">
+        <div class="col-lg-6">
+            <h5>Parse table (ACTION / GOTO)</h5>
+            <table class="table table-sm table-bordered font-monospace">
+                <thead><tr><th>state</th><th>symbol</th><th>action</th></tr></thead>
+                <tbody>
+                    @foreach (var entry in _table)
+                    {
+                        <tr>
+                            <td>I@(entry.State)</td>
+                            <td>@entry.Symbol</td>
+                            <td>
+                                <span class="badge @BadgeClass(entry.Action)">@Kind(entry.Action)</span>
+                                <span class="ms-1">@Target(entry.Action)</span>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <details class="mt-3">
+        <summary class="h5">Full trace (@_trace.Count steps)</summary>
+        <table class="table table-sm table-bordered font-monospace mt-2">
+            <thead><tr><th>#</th><th>action</th><th>input</th></tr></thead>
+            <tbody>
+                @foreach (var s in _trace)
+                {
+                    <tr class="@(s.Index == _step ? "table-active" : null)">
+                        <td>@s.Index</td>
+                        <td>
+                            @if (s.Action is not null)
+                            {
+                                <span class="badge @BadgeClass(s.Action)">@Kind(s.Action)</span> @Target(s.Action)
+                            }
+                        </td>
+                        <td>@s.Lookahead?.Input</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </details>
+}
+
+@code {
+    private StandaloneCodeEditor _grammarEditor = null!;
+    private string _inputText = "a + a * a";
+
+    private bool _ran;
+    private bool _success;
+    private IReadOnlyList<string>? _grammarErrors;
+    private List<ParseStep> _trace = new();
+    private List<ParseTableEntry> _table = new();
+    private List<AmbiguityCheckItem> _conflicts = new();
+
+    private int _step;
+    private bool _playing;
+    private int _intervalMs = 600;
+
+    private const string DefaultGrammar =
+        "Expr   : Expr '+' Term | Term ;\n" +
+        "Term   : Term '*' Factor | Factor ;\n" +
+        "Factor : '(' Expr ')' | id ;\n" +
+        "id     := \"[a-zA-Z]+\" ;";
+
+    private StandaloneEditorConstructionOptions GrammarOptions(StandaloneCodeEditor editor) =>
+        new StandaloneEditorConstructionOptions
+        {
+            AutomaticLayout = true,
+            Language = "ebnf",
+            Theme = "ebnf-theme",
+            Value = DefaultGrammar,
+        };
+
+    private async Task Run()
+    {
+        _ran = true;
+        _grammarErrors = null;
+        _trace = new();
+        _table = new();
+        _conflicts = new();
+        _step = 0;
+        _playing = false;
+
+        var grammarText = await _grammarEditor.GetValue();
+
+        var read = EbnfGrammarReader.Read(grammarText);
+        if (!read.Success)
+        {
+            _grammarErrors = read.Errors;
+            return;
+        }
+
+        var grammar = read.Grammar;
+        var lexer = new Lexer();
+        foreach (var terminal in grammar.TerminalSet) lexer.AddTokenRule(terminal);
+
+        var parser = new LALRParser(grammar, bLogging: true);
+        var result = parser.Parsing(lexer.Lexing(_inputText).TokensForParsing);
+
+        _success = result.Success;
+        _table = parser.ParsingTable.Entries.ToList();
+        _trace = result.Trace.Steps.ToList();
+        _step = _trace.Count > 0 ? _trace.Count - 1 : 0;   // show the finished tree first
+        _conflicts = parser.CheckAmbiguity()
+            .Where(c => c.IsShiftReduceConflict || c.IsReduceReduceConflict)
+            .ToList();
+    }
+
+    private void First() { _playing = false; _step = 0; }
+    private void Prev() { _playing = false; if (_step > 0) _step--; }
+    private void Next() { _playing = false; if (_step < _trace.Count - 1) _step++; }
+    private void Last() { _playing = false; _step = _trace.Count - 1; }
+
+    private async Task TogglePlay()
+    {
+        if (_playing) { _playing = false; return; }
+
+        if (_step >= _trace.Count - 1) _step = 0;   // replay from the start
+        _playing = true;
+        while (_playing && _step < _trace.Count - 1)
+        {
+            await Task.Delay(_intervalMs);
+            if (!_playing) break;
+            _step++;
+            StateHasChanged();
+        }
+        _playing = false;
+    }
+
+    private static string Kind(ParseAction action) => action switch
+    {
+        ParseAction.Shift => "shift",
+        ParseAction.Goto => "goto",
+        ParseAction.Reduce reduce => reduce.IsEpsilon ? "ε-reduce" : "reduce",
+        ParseAction.Accept => "accept",
+        _ => ""
+    };
+
+    private static string Target(ParseAction action) => action switch
+    {
+        ParseAction.Shift shift => $"I{shift.State}",
+        ParseAction.Goto go => $"I{go.State}",
+        ParseAction.Reduce reduce => reduce.Production.ToGrammarString(),
+        _ => ""
+    };
+
+    private static string BadgeClass(ParseAction action) => action switch
+    {
+        ParseAction.Shift => "bg-primary",            // blue
+        ParseAction.Goto => "bg-info text-dark",      // cyan
+        ParseAction.Reduce => "bg-success",           // green
+        ParseAction.Accept => "bg-warning text-dark", // gold
+        _ => "bg-secondary"
+    };
+}
