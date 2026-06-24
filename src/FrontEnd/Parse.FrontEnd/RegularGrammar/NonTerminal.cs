@@ -130,9 +130,9 @@ namespace Parse.FrontEnd.RegularGrammar
 
             this.alters.Add(new NonTerminalConcat(treeBlockRoot));
 
-            Optimizer.OptSingleChildNode(this);
-            Optimizer.OptConcatNode(this);
-            Optimizer.OptAltNode(this);
+            // Attach the meaning unit to the raw production; normalization (flatten/absorb) runs
+            // later as a single global pass (Grammar.Optimization) and carries it along.
+            this.ElementAt(0).MeaningUnit = meaningUnit;
         }
 
         public void AddItem(NonTerminal treeBlockRoot, MeaningUnit meaningUnit = null)
@@ -151,11 +151,8 @@ namespace Parse.FrontEnd.RegularGrammar
             int prevCnt = this.Count;
             this.alters.Add(new NonTerminalConcat(treeBlockRoot));
 
-            Optimizer.OptSingleChildNode(this);
-            Optimizer.OptConcatNode(this);
-            Optimizer.OptAltNode(this);
-
-            // 최적화가 끝난 (필요없는 노드 삭제) 이후 우선순위와 의미단위를 넣는다
+            // Attach priority/meaning unit to the raw production. Normalization (flatten/absorb)
+            // runs later as a single global pass (Grammar.Optimization) and carries them along.
             for (int i = prevCnt; i < this.Count; i++)
             {
                 this.ElementAt(i).Priority = priority;

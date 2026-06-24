@@ -28,7 +28,7 @@ namespace Parse.FrontEnd.Parsers
         public Action<NonTerminal, TokenData> ExpandFailed { get; set; } = null;
 
         public Grammar Grammar { get; } = null;
-        public string OptimizeList => Optimizer.ChangeableNodeData(this.Grammar.NonTerminalMultiples).ToString();
+        public string OptimizeList => GrammarNormalization.ChangeableNodeData(this.Grammar.NonTerminalMultiples).ToString();
 
         public List<string> DelimiterList
         {

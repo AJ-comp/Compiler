@@ -35,6 +35,10 @@ public class PaperConflictDeclExprGrammar : Grammar
 
     public override NonTerminal EbnfRoot => Program;
 
+    // Keep the natural (conflicting) form: do NOT auto-absorb the optional. This grammar exists to
+    // demonstrate the shift/reduce conflict and that LGLR backtracking handles it.
+    public override bool AbsorbOptionals => false;
+
     public PaperConflictDeclExprGrammar()
     {
         Program.AddItem(Declare);

@@ -6,6 +6,12 @@ namespace Parse.FrontEnd.AJ
 {
     public class AJGrammar : Grammar
     {
+        // AJ keeps the natural grammar and resolves the optional-induced conflicts with LGLR
+        // backtracking (its own paper's mechanism), so it opts OUT of the automatic optional-absorb.
+        // (An audit found flipping this on is safe for AJ's semantic handlers, but it is left off
+        // until a real AJ runtime run confirms it — AJ does not need absorb to work.)
+        public override bool AbsorbOptionals => false;
+
         public Terminal Using { get; } = new Terminal(TokenType.Keyword.CategoryKeyword, "using", false);
         public Terminal Namespace { get; } = new Terminal(TokenType.Keyword.CategoryKeyword, "namespace", false);
         public Terminal Struct { get; } = new Terminal(TokenType.Keyword.CategoryKeyword, "struct", false);

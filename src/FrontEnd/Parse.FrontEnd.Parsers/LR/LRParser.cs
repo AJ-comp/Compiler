@@ -75,6 +75,10 @@ namespace Parse.FrontEnd.Parsers.LR
         {
             DataTableExtensionMethods.ASCIIBorder();
 
+            // Make sure the grammar is normalized before the table is built. Idempotent, so it is a
+            // no-op when the author already called Optimization(); when they did not, this runs it.
+            this.Grammar.Optimization();
+
             var virtualStartSymbol = this.Grammar.CreateVirtualSymbolForLRParsing("Accept");
             _followAnalyzer.CalculateAllFollow(this.Grammar.NonTerminalMultiples);
             Canonical.Calculate(virtualStartSymbol, _followAnalyzer, canonicalType);

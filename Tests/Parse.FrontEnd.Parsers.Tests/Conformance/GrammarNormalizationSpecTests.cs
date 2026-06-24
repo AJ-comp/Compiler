@@ -22,6 +22,7 @@ public class GrammarNormalizationSpecTests
     private static int ConflictCount()
     {
         var g = new PaperConflictDeclExprGrammar();
+        g.NormalizeOptionals();
         return new LALRParser(g, false).CheckAmbiguity()
                    .Count(i => i.IsShiftReduceConflict || i.IsReduceReduceConflict);
     }
@@ -29,17 +30,18 @@ public class GrammarNormalizationSpecTests
     private static ParsingResult ParsePlain(string input)
     {
         var g = new PaperConflictDeclExprGrammar();
+        g.NormalizeOptionals();
         var lexer = new Lexer();
         foreach (var t in g.TerminalSet) lexer.AddTokenRule(t);
         return new LALRParser(g, false).Parsing(lexer.Lexing(input).TokensForParsing);
     }
 
-    [Fact(Skip = "TARGET: GrammarNormalization optional-absorb not implemented yet")]
+    [Fact]
     public void Normalized_optional_grammar_has_no_conflict_under_plain_LALR()
         => Assert.Equal(0, ConflictCount());
 
-    [Theory(Skip = "TARGET: GrammarNormalization optional-absorb not implemented yet")]
-    [InlineData("a b ;")]            // const-less declaration (today: fails under plain LALR)
+    [Theory]
+    [InlineData("a b ;")]            // const-less declaration (the one that fails before GN)
     [InlineData("const a b ;")]      // const declaration
     [InlineData("a = b ;")]          // expression
     public void Normalized_optional_grammar_parses_under_plain_LALR(string input)
