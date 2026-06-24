@@ -1,0 +1,9 @@
+파싱 이전 스택 | 입력 심벌 | 액션 정보 | 복구 정보 | 파싱 이후 스택 | Ast 스택
+ 0 | a | shift 2  |  |  0 a 2 | a
+ 0 a 2 | = | epsilon reduce B -> epsilon  |  |  0 a 2 B | a
+ 0 a 2 B | = | goto 3  |  |  0 a 2 B 3 | a
+ 0 a 2 B 3 | = | shift 7  |  |  0 a 2 B 3 = 7 | a =
+ 0 a 2 B 3 = 7 | e | shift 11  |  |  0 a 2 B 3 = 7 e 11 | a = e
+ 0 a 2 B 3 = 7 e 11 | щ | reduce A -> a B = e  |  |  0 A | List<a = e >
+ 0 A | щ | goto 1  |  |  0 A 1 | List<a = e >
+ 0 A 1 | щ | accept Accept -> A  |  |  0 A 1 | List<a = e >

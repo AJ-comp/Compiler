@@ -1,0 +1,59 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+
+    <IsPackable>true</IsPackable>
+    <!-- Install id must be globally unique on nuget.org; "Orchid" is taken (unlisted), so
+         the orchid family name "Orchidaceae" is the package id. The friendly brand is "Orchid". -->
+    <PackageId>Orchidaceae</PackageId>
+    <Title>Orchid</Title>
+    <Description>Orchid is a general-purpose, embeddable LR/LALR parser-generator engine for .NET. Define a grammar in C#, then parse with incremental reparsing, error recovery, and grammar introspection (parse tables, FIRST/FOLLOW, conflict reports). Early preview — the public API is still unstable.</Description>
+    <PackageTags>parser;parsing;parser-generator;lr;lalr;grammar;compiler;lexer;ebnf;incremental;orchid</PackageTags>
+
+    <!-- Package icon (an orchid). Drop a PNG (<=1MB, ~128x128) at src/Orchid/icon.png and it
+         is packed automatically; until then the package builds without an icon. -->
+    <PackageIcon Condition="Exists('icon.png')">icon.png</PackageIcon>
+
+    <!-- Bundle the engine assemblies into this single package's lib folder. -->
+    <TargetsForTfmSpecificBuildOutput>$(TargetsForTfmSpecificBuildOutput);IncludeEngineAssemblies</TargetsForTfmSpecificBuildOutput>
+  </PropertyGroup>
+
+  <ItemGroup Condition="Exists('icon.png')">
+    <None Include="icon.png" Pack="true" PackagePath="\" />
+  </ItemGroup>
+
+  <!--
+    The engine assemblies. PrivateAssets="all" stops them from becoming separate
+    package dependencies; instead their DLLs are bundled (see the target below),
+    so a consumer installs one package ("Orchid") and gets the whole engine.
+  -->
+  <ItemGroup>
+    <ProjectReference Include="..\Common\AJ.Common\AJ.Common.csproj" PrivateAssets="all" />
+    <ProjectReference Include="..\FrontEnd\Parse\Parse.csproj" PrivateAssets="all" />
+    <ProjectReference Include="..\FrontEnd\Parse.FrontEnd\Parse.FrontEnd.csproj" PrivateAssets="all" />
+    <ProjectReference Include="..\FrontEnd\Parse.FrontEnd.Grammars\Parse.FrontEnd.Grammars.csproj" PrivateAssets="all" />
+    <ProjectReference Include="..\FrontEnd\Parse.FrontEnd.Parsers\Parse.FrontEnd.Parsers.csproj" PrivateAssets="all" />
+    <ProjectReference Include="..\FrontEnd\Parse.FrontEnd.ErrorHandler\Parse.FrontEnd.ErrorHandler.csproj" PrivateAssets="all" />
+    <ProjectReference Include="..\FrontEnd\Parse.FrontEnd.Support\Parse.FrontEnd.Support.csproj" PrivateAssets="all" />
+  </ItemGroup>
+
+  <!-- Runtime NuGet dependencies the engine actually uses -> real package deps. -->
+  <ItemGroup>
+    <PackageReference Include="ConsoleTables" Version="2.7.0" />
+    <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
+  </ItemGroup>
+
+  <Target Name="IncludeEngineAssemblies">
+    <ItemGroup>
+      <BuildOutputInPackage Include="$(TargetDir)AJ.Common.dll" />
+      <BuildOutputInPackage Include="$(TargetDir)Parse.dll" />
+      <BuildOutputInPackage Include="$(TargetDir)Parse.FrontEnd.dll" />
+      <BuildOutputInPackage Include="$(TargetDir)Parse.FrontEnd.Grammars.dll" />
+      <BuildOutputInPackage Include="$(TargetDir)Parse.FrontEnd.Parsers.dll" />
+      <BuildOutputInPackage Include="$(TargetDir)Parse.FrontEnd.ErrorHandler.dll" />
+      <BuildOutputInPackage Include="$(TargetDir)Parse.FrontEnd.Support.dll" />
+    </ItemGroup>
+  </Target>
+
+</Project>

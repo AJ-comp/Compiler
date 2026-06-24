@@ -1,0 +1,17 @@
+Vi / Vt | a | This is EndMarker! char : щ | [ | . | = | e | ] | A | B | C | D
+I0 | Shift [2] |  |  |  |  |  |  | Goto [1] |  |  |
+I1 |  | Accept [Accept -> A] |  |  |  |  |  |  |  |  |
+I2 |  |  | Shift [5] | Shift [6] | EpsilonReduce [B -> epsilon] |  |  |  | Goto [3] | Goto [4] |
+I3 |  |  |  |  | Shift [7] |  |  |  |  |  |
+I4 |  |  | Shift [5] | Shift [6] | EpsilonReduce [B -> epsilon] |  |  |  | Goto [8] | Goto [4] |
+I5 |  |  |  |  |  | Shift [9] |  |  |  |  |
+I6 | Shift [10] |  |  |  |  |  |  |  |  |  |
+I7 |  |  |  |  |  | Shift [11] |  |  |  |  |
+I8 |  |  |  |  | Reduce [B -> C B] |  |  |  |  |  |
+I9 |  |  |  |  |  | Shift [13] | EpsilonReduce [D -> epsilon] |  |  |  | Goto [12]
+I10 |  |  | Reduce [C -> . a] | Reduce [C -> . a] | Reduce [C -> . a] |  |  |  |  |  |
+I11 |  | Reduce [A -> a B = e] |  |  |  |  |  |  |  |  |
+I12 |  |  |  |  |  |  | Shift [14] |  |  |  |
+I13 |  |  |  |  |  | Shift [13] | EpsilonReduce [D -> epsilon] |  |  |  | Goto [15]
+I14 |  |  | Reduce [C -> [ e D ]] | Reduce [C -> [ e D ]] | Reduce [C -> [ e D ]] |  |  |  |  |  |
+I15 |  |  |  |  |  |  | Reduce [D -> e D] |  |  |  |

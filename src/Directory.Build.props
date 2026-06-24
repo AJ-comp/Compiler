@@ -1,0 +1,39 @@
+<Project>
+
+  <!-- Shared package metadata for the Larix engine (applies to all projects under src/). -->
+  <PropertyGroup>
+    <Authors>AJ-comp</Authors>
+    <Company>AJ-comp</Company>
+    <Product>Orchid</Product>
+    <Version>0.1.0-preview.1</Version>
+
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/AJ-comp/Compiler</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/AJ-comp/Compiler</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+
+    <!-- XML docs deferred to 0.x (the codebase has some malformed doc comments to clean first). -->
+    <GenerateDocumentationFile>false</GenerateDocumentationFile>
+    <Deterministic>true</Deterministic>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+
+    <!-- Nothing under src/ is packable by default; only the Larix packaging project opts in. -->
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0" PrivateAssets="All" />
+  </ItemGroup>
+
+  <!--
+    A quiet dedication, melted into every assembly built from this tree
+    so that it is always carried along, even when unseen.
+
+        사랑하는 엄마, 박애자를 기리며 (2018. 4. 7.)
+  -->
+  <ItemGroup>
+    <AssemblyMetadata Include="Dedication" Value="사랑하는 엄마, 박애자를 기리며 (2018. 4. 7.)" />
+  </ItemGroup>
+
+</Project>
