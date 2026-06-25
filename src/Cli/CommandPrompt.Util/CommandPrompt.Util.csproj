@@ -12,7 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Common\AJ.Common\AJ.Common.csproj" />
-    <ProjectReference Include="..\..\Compile\Compile\Compile.csproj" />
+    <ProjectReference Include="..\..\Compile\Compile.csproj" />
     <ProjectReference Include="..\..\FrontEnd\Parse.FrontEnd.AJ\Parse.FrontEnd.AJ.csproj" />
     <ProjectReference Include="..\..\FrontEnd\Parse.FrontEnd.Grammars\Parse.FrontEnd.Grammars.csproj" />
     <ProjectReference Include="..\..\FrontEnd\Parse.FrontEnd.Parsers\Parse.FrontEnd.Parsers.csproj" />

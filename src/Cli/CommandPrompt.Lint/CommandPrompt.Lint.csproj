@@ -11,7 +11,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\CommandPrompt.Builder\CommandPrompt.Builder.csproj" />
-    <ProjectReference Include="..\..\Compile\Compile\Compile.csproj" />
+    <ProjectReference Include="..\..\Compile\Compile.csproj" />
   </ItemGroup>
 
 </Project>

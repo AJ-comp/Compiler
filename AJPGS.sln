@@ -60,7 +60,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Parse.FrontEnd.AJ", "src\Fr
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CommandPrompt.Compiler", "src\Cli\CommandPrompt.Compiler\CommandPrompt.Compiler.csproj", "{50B8B7C8-BDE8-47AF-A940-B7B882C716DD}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Compile", "src\Compile\Compile\Compile.csproj", "{52A70EEA-12EC-45B0-A7F8-39477024A4D5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Compile", "src\Compile\Compile.csproj", "{52A70EEA-12EC-45B0-A7F8-39477024A4D5}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AJ.Common", "src\Common\AJ.Common\AJ.Common.csproj", "{96BA1CD2-8EFB-4A64-A55F-C326B8A4564F}"
 EndProject
