@@ -1,0 +1,70 @@
+name: Deploy manual to GitHub Pages
+
+# Builds the DocFX manual (docs/ + templates/orchid) into a static site and
+# publishes it to GitHub Pages via the Actions artifact method (no gh-pages
+# branch). Runs on changes to the manual or this workflow, and on demand.
+
+on:
+  push:
+    branches: [ master ]
+    paths:
+      - 'docs/**'
+      - 'templates/**'
+      - 'docfx.json'
+      - '.github/workflows/deploy-docs.yml'
+  workflow_dispatch:
+
+# Permissions required by the Pages deploy.
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Let a new run cancel an in-progress one; don't cancel a live deployment.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    name: Build manual
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+
+      - name: Install DocFX
+        run: |
+          dotnet tool update -g docfx
+          echo "$HOME/.dotnet/tools" >> "$GITHUB_PATH"
+
+      # Auto-enable GitHub Pages (Actions source) on the first run, so no manual
+      # Settings → Pages step is needed.
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+        with:
+          enablement: true
+
+      - name: Build the site
+        run: docfx docfx.json
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    name: Deploy to GitHub Pages
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy
+        id: deployment
+        uses: actions/deploy-pages@v4

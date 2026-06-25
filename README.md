@@ -24,6 +24,10 @@ subtree), and a panel that flags shift-reduce / reduce-reduce conflicts. It runs
 entirely in your browser (Blazor WebAssembly), no install. Source:
 [`samples/Playground`](samples/Playground).
 
+**📖 [Read the manual →](https://aj-comp.github.io/Compiler/)** — a from-scratch guide to LR/LALR
+parsing built on this engine: grammar reading → FIRST/FOLLOW → LR items → states → closure / GOTO →
+canonical collection → parse table → a full worked parse. Available in 한국어 / English / 日本語.
+
 ---
 
 ## Table of contents

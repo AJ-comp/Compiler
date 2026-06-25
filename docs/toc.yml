@@ -1,0 +1,9 @@
+# Top navbar. Page/URL links ONLY — never reference a toc.yml here (that merges
+# it into this top toc and makes every page load THIS as its sidebar instead of
+# its own ko/toc.yml, which breaks the per-language chapter sidebar).
+- name: Home
+  href: index.md
+- name: Docs
+  href: ko/index.md
+- name: Playground
+  href: https://polite-island-0b2142200.7.azurestaticapps.net

@@ -1,0 +1,73 @@
+# English sidebar — groups + collapsible (Mythosia style: no numbers or "to be written", only finished pages).
+- name: Getting Started
+  items:
+  - name: Introduction
+    href: index.md
+  - name: Quick Start
+    href: getting-started.md
+  - name: The Pipeline at a Glance
+    href: the-big-picture.md
+
+- name: Basic Track (Concepts)
+  items:
+  - name: How to Read a Grammar
+    href: grammar-reading.md
+  - name: FIRST / FOLLOW
+    href: first-follow.md
+  - name: The Dot and States
+    href: dot-and-state.md
+  - name: Real Parsing with the Table
+    href: parsing-in-action.md
+
+- name: Advanced Track (Principles and Code)
+  items:
+  - name: Symbol — the Smallest Unit
+    href: deep-symbols.md
+  - name: Terminal — a Leaf (Token)
+    href: deep-terminal.md
+  - name: NonTerminal — a Rule (Branch)
+    href: deep-nonterminal.md
+  - name: Concat — Order (Concatenation)
+    href: deep-concat.md
+  - name: Single — a Single Production
+    href: deep-single.md
+  - name: Alter — Choice (Set of Alternatives)
+    href: deep-alter.md
+  - name: FIRST — Formula and Implementation
+    items:
+    - name: Definition and Derivation
+      href: first-formula.md
+    - name: Computation Rules
+      href: first-rules.md
+    - name: Implementation (Code)
+      href: first-impl.md
+  - name: FOLLOW — Formula and Implementation
+    items:
+    - name: Definition and Derivation
+      href: follow-formula.md
+    - name: Computation Rules
+      href: follow-rules.md
+    - name: Implementation (Code)
+      href: follow-impl.md
+  - name: LR Parser — Building the Parse Table
+    items:
+    - name: LR Item
+      href: lr-item.md
+    - name: State (Iₓ)
+      href: lr-state.md
+    - name: Closure
+      items:
+      - name: Definition
+        href: closure-def.md
+      - name: How to Compute
+        href: closure-calc.md
+      - name: Implementation (Code)
+        href: closure-impl.md
+    - name: GOTO
+      href: goto.md
+    - name: Canonical Collection
+      href: canonical-set.md
+    - name: Parse Table
+      items:
+      - name: How to Build It
+        href: parse-table-build.md

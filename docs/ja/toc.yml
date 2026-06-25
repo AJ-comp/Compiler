@@ -1,0 +1,73 @@
+# 日本語サイドバー — グループ + 折りたたみ (Mythosiaスタイル: 番号・「作成予定」なし、作成済みページのみ)。
+- name: はじめに
+  items:
+  - name: 紹介
+    href: index.md
+  - name: クイックスタート
+    href: getting-started.md
+  - name: パイプライン全体像
+    href: the-big-picture.md
+
+- name: 基本コース (概念)
+  items:
+  - name: 文法の読み方
+    href: grammar-reading.md
+  - name: FIRST / FOLLOW
+    href: first-follow.md
+  - name: ドットと状態
+    href: dot-and-state.md
+  - name: 表で実際に構文解析
+    href: parsing-in-action.md
+
+- name: 発展コース (原理とコード)
+  items:
+  - name: Symbol — 最小の単位
+    href: deep-symbols.md
+  - name: Terminal — 葉 (トークン)
+    href: deep-terminal.md
+  - name: NonTerminal — 規則 (枝)
+    href: deep-nonterminal.md
+  - name: Concat — 順序 (連接)
+    href: deep-concat.md
+  - name: Single — 生成規則ひとつ
+    href: deep-single.md
+  - name: Alter — 択一 (代替の集合)
+    href: deep-alter.md
+  - name: FIRST — 公式と実装
+    items:
+    - name: 定義と導出
+      href: first-formula.md
+    - name: 計算規則
+      href: first-rules.md
+    - name: 実装 (コード)
+      href: first-impl.md
+  - name: FOLLOW — 公式と実装
+    items:
+    - name: 定義と導出
+      href: follow-formula.md
+    - name: 計算規則
+      href: follow-rules.md
+    - name: 実装 (コード)
+      href: follow-impl.md
+  - name: LRパーサ — 構文解析表を作る
+    items:
+    - name: LR項目
+      href: lr-item.md
+    - name: 状態 (Iₓ)
+      href: lr-state.md
+    - name: 閉包
+      items:
+      - name: 定義
+        href: closure-def.md
+      - name: 計算法
+        href: closure-calc.md
+      - name: 実装 (コード)
+        href: closure-impl.md
+    - name: GOTO
+      href: goto.md
+    - name: 正準集合
+      href: canonical-set.md
+    - name: 構文解析表
+      items:
+      - name: 作り方
+        href: parse-table-build.md

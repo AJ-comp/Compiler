@@ -1,0 +1,73 @@
+# 한국어 사이드바 — 그룹 + 접이식 (Mythosia 스타일: 번호·"작성 예정" 없이, 작성된 페이지만).
+- name: 시작하기
+  items:
+  - name: 소개
+    href: index.md
+  - name: 빠른 시작
+    href: getting-started.md
+  - name: 한눈에 보는 파이프라인
+    href: the-big-picture.md
+
+- name: 기본 과정 (개념)
+  items:
+  - name: 문법 읽는 법
+    href: grammar-reading.md
+  - name: FIRST / FOLLOW
+    href: first-follow.md
+  - name: 점과 상태
+    href: dot-and-state.md
+  - name: 표로 실제 파싱
+    href: parsing-in-action.md
+
+- name: 심화 과정 (원리와 코드)
+  items:
+  - name: Symbol — 가장 작은 단위
+    href: deep-symbols.md
+  - name: Terminal — 잎(토큰)
+    href: deep-terminal.md
+  - name: NonTerminal — 규칙(가지)
+    href: deep-nonterminal.md
+  - name: Concat — 순서(연접)
+    href: deep-concat.md
+  - name: Single — 생성규칙 한 개
+    href: deep-single.md
+  - name: Alter — 택일(대안 집합)
+    href: deep-alter.md
+  - name: FIRST — 공식과 구현
+    items:
+    - name: 정의와 유도
+      href: first-formula.md
+    - name: 계산 규칙
+      href: first-rules.md
+    - name: 구현 (코드)
+      href: first-impl.md
+  - name: FOLLOW — 공식과 구현
+    items:
+    - name: 정의와 유도
+      href: follow-formula.md
+    - name: 계산 규칙
+      href: follow-rules.md
+    - name: 구현 (코드)
+      href: follow-impl.md
+  - name: LR 파서 — 파싱 테이블 만들기
+    items:
+    - name: LR 아이템
+      href: lr-item.md
+    - name: 상태 (Iₓ)
+      href: lr-state.md
+    - name: 클로저
+      items:
+      - name: 정의
+        href: closure-def.md
+      - name: 계산법
+        href: closure-calc.md
+      - name: 구현 (코드)
+        href: closure-impl.md
+    - name: GOTO
+      href: goto.md
+    - name: 정준 집합
+      href: canonical-set.md
+    - name: 파싱 테이블
+      items:
+      - name: 만드는 법
+        href: parse-table-build.md
