@@ -92,7 +92,7 @@
 [文法の読み方](grammar-reading.md) → [FIRST / FOLLOW](first-follow.md) → [ドット・状態](dot-and-state.md) →
 *実際のパース* まで、LR パースの大きな絵を全部つかみましたね。
 
-> 🎓 *表を自分で作る方法* と *Orchid のコード* が気になったら — **発展講座** へ行けばよいです。\
+> 🎓 *表を自分で作る方法* と *Janglim のコード* が気になったら — **発展講座** へ行けばよいです。\
 > [LR項目](lr-item.md) → [状態](lr-state.md) → [閉包](closure-def.md) → [GOTO](goto.md) →
 > [正準集合](canonical-set.md) → [構文解析表](parse-table-build.md) の順で、さっき見たものを *自分で作って*
 > みましょう。(見なくても概念はもうすべてつかんでいます。🙂)

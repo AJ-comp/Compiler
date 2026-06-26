@@ -167,7 +167,7 @@ public class NonTerminalAlter : ISet<NonTerminalConcat>
 
 ## 조각이 다 맞물렸어요 — 전체 그림
 
-여기까지가 Orchid 문법 구조의 **뼈대 전부** 예요.\
+여기까지가 Janglim 문법 구조의 **뼈대 전부** 예요.\
 한 장에 모아 볼게요.
 
 ```

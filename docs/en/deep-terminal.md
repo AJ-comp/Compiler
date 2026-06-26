@@ -53,8 +53,8 @@ So when there's no caption, we fill it in with value.\
 not the display string.
 
 ```csharp
-// caption이 null이면 value로 fallback (표시가 null이면 텍스트 렌더러가 깨지므로).
-// 단, Value 자체는 준 그대로 — 렉서의 매칭 값/패턴이라 절대 바꾸지 않는다.
+// If caption is null, fall back to value (a null display would break the text renderer).
+// However, Value itself stays exactly as given — it's the lexer's matching value/pattern, so it's never changed.
 this.Caption = caption ?? value ?? string.Empty;
 ```
 
@@ -94,8 +94,8 @@ Finally, the author made a few fake tokens that *aren't in the real input but ar
 They're exactly the ones we met in [FIRST/FOLLOW](first-follow.md).
 
 ```csharp
-public class Epsilon   : Terminal { ... }   // ε — "빈 것"
-public class EndMarker : Terminal { ... }   // $ — "입력의 끝"
+public class Epsilon   : Terminal { ... }   // ε — "the empty one"
+public class EndMarker : Terminal { ... }   // $ — "the end of input"
 ```
 
 These have a **fixed UniqueKey** (`KeyManager.EpsilonKey`, etc.).\
@@ -111,32 +111,32 @@ With the logic emptied out, it shows only *what is there*.
 ```csharp
 public class Terminal : Symbol
 {
-    // ── 무엇인가 ────────────────────────────
+    // ── What it is ──────────────────────────
     public TokenType TokenType { get; }
-    public string Value { get; }        // 렉서가 맞춰볼 값 (필수 · 건드리지 않음)
-    public string Caption { get; }       // 표시 이름 (ToString 이 이걸 씀)
-    public bool Meaning { get; }         // 의미 있는 토큰인가 (AST 용)
+    public string Value { get; }        // the value the lexer matches against (required · never touched)
+    public string Caption { get; }       // the display name (ToString uses this)
+    public bool Meaning { get; }         // is it a meaningful token (for the AST)
     public bool IsWordPattern { get; }
 
-    // ── 파생 정보 ───────────────────────────
-    public bool IsOper { get; }          // 연산자/구분자류인가
+    // ── Derived information ─────────────────
+    public bool IsOper { get; }          // is it an operator/delimiter kind
     public bool IsNumber { get; }
-    public string RegexExpression { get; }   // Value → 실제 렉서용 정규식
+    public string RegexExpression { get; }   // Value → the actual regex for the lexer
 
-    // ── 생성 ────────────────────────────────
+    // ── Construction ────────────────────────
     public Terminal(TokenType type, string value, bool meaning = true, bool bWord = false);
     public Terminal(TokenType type, string value, string caption, ...);
 
-    // ── 표현 ────────────────────────────────
+    // ── Representation ──────────────────────
     public override string ToString();   // → Caption
     public override string ToEbnfString(bool bContainLHS = false);
     public override string ToGrammarString();
     public override string ToTreeString(ushort depth = 1);
 }
 
-// 특수한 잎들 — 전부 Terminal 의 자식, 고정 UniqueKey
-public class Epsilon        : Terminal { }   // ε — 빈 것
-public class EndMarker      : Terminal { }   // $ — 입력의 끝
+// Special leaves — all children of Terminal, with fixed UniqueKey
+public class Epsilon        : Terminal { }   // ε — the empty one
+public class EndMarker      : Terminal { }   // $ — the end of input
 public class InputTerminal  : Terminal { }
 public class NotDefined     : Terminal { }
 public class CustomTerminal : Terminal { }

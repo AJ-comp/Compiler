@@ -23,7 +23,7 @@ a + a * a   →   "아, 이건 (a) 더하기 (a 곱하기 a) 구조구나"
 이 구조를 알아야 그다음(계산·번역·컴파일)으로 넘어갈 수 있어요.\
 파싱은 거의 모든 언어 처리의
 **첫 관문**이에요.\
-자 — 이 '파싱'을 이제 Orchid로 직접 해봅시다.
+자 — 이 '파싱'을 이제 Janglim로 직접 해봅시다.
 
 ## 설치
 
@@ -31,11 +31,10 @@ a + a * a   →   "아, 이건 (a) 더하기 (a 곱하기 a) 구조구나"
 .NET 프로젝트에서:
 
 ```bash
-dotnet add package Orchidaceae --prerelease
+dotnet add package Janglim --prerelease
 ```
 
-> 패키지 이름이 왜 **`Orchidaceae`** 냐면 — 브랜드명 "Orchid"가 nuget.org에 이미 예약돼 있어서,
-> 난초과(科)의 학명인 `Orchidaceae`를 id로 써요. `--prerelease`는 아직 초기 프리뷰라 붙입니다.
+> `--prerelease`는 아직 초기 프리뷰라 붙입니다.
 
 > 🌿 **설치가 번거로우면 잠깐 미뤄도 돼요.** 잠시 뒤에 짤 코드와 *똑같은 걸* **브라우저에서
 > 클릭만으로** 해볼 수 있는 [라이브 플레이그라운드](https://polite-island-0b2142200.7.azurestaticapps.net)가

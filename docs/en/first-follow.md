@@ -198,7 +198,7 @@ next basic chapter.\
 Still, for those who want to dig deeper, let me open up one path.
 
 > 🎓 We just worked out the FIRST/FOLLOW of *this example grammar* by hand. Tidying that up into a **formula (algorithm) that
-> works for any grammar**, and seeing **how it's implemented in the Orchid code** — that's covered separately in the
+> works for any grammar**, and seeing **how it's implemented in the Janglim code** — that's covered separately in the
 > **advanced track** at [FIRST — Definition and Derivation](first-formula.md) (→ calculation rules → implementation).
 >
 > **It's totally fine not to read it.** You've already got the concept down. 🙂

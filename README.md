@@ -1,4 +1,4 @@
-# Orchid
+# Janglim
 
 **A general-purpose, embeddable LR/LALR parser-generator engine for .NET.**
 
@@ -8,8 +8,7 @@ reports, automatic grammar normalization, optional LGLR backtracking, incrementa
 pluggable error recovery.
 
 > **Status — early preview (`0.1.0-preview`).** The public API is still unstable and will change
-> across `0.x`. Not yet on NuGet; build from source for now. (Planned package id: `Orchidaceae`;
-> the brand is **Orchid**.)
+> across `0.x`. Available on NuGet as **`Janglim`** (preview): `dotnet add package Janglim --prerelease`.
 
 ---
 
@@ -32,7 +31,7 @@ parsing, built around this engine.
 ## Table of contents
 
 - [Try it online](#try-it-online) — the live web playground
-- [Why Orchid](#why-orchid)
+- [Why Janglim](#why-janglim)
 - [Quick start](#quick-start)
 - [Defining a grammar](#defining-a-grammar) — terminals, rules, EBNF operators, semantic actions
 - [Parsing](#parsing)
@@ -49,10 +48,10 @@ parsing, built around this engine.
 
 ---
 
-## Why Orchid
+## Why Janglim
 
 Most parser generators ask you to learn a separate grammar language and run a code-generation step.
-Orchid takes a different approach: **the grammar _is_ C#.** Terminals and non-terminals are fields,
+Janglim takes a different approach: **the grammar _is_ C#.** Terminals and non-terminals are fields,
 productions are built with operators (`+` for sequence, `|` for choice, `?` `*` `+` for EBNF
 repetition), and the whole thing is just an object you construct at runtime.
 
@@ -202,7 +201,7 @@ see [Known limitations](#status--known-limitations).)
 
 ## Looking inside the parser
 
-This is where Orchid earns its keep. Everything the parser computes is available to you.
+This is where Janglim earns its keep. Everything the parser computes is available to you.
 
 ### Step-by-step parse trace
 
@@ -303,7 +302,7 @@ as text) are available as well.
 
 ## Automatic grammar normalization
 
-Before the parse table is built, Orchid normalizes the grammar **once, automatically** — you do not
+Before the parse table is built, Janglim normalizes the grammar **once, automatically** — you do not
 have to call anything. Two things happen:
 
 1. **Flattening.** The helper rules that `+`, `|`, `?`, `*`, `+` generate are folded away where they
@@ -311,7 +310,7 @@ have to call anything. Two things happen:
 
 2. **Optional-absorb.** An optional written `X?` in front of other symbols (e.g. `const? type name`)
    would normally force the parser to decide "is the optional here?" too early, creating a
-   shift/reduce conflict. Orchid rewrites it into explicit alternatives so the decision is deferred
+   shift/reduce conflict. Janglim rewrites it into explicit alternatives so the decision is deferred
    to where it can be made deterministically:
 
    ```
@@ -363,7 +362,7 @@ mechanism the AJ language uses.
 
 ## The AJ language — a worked example
 
-Orchid is dogfooded by the **AJ language**, a small C#-like systems language. Its compiler runs
+Janglim is dogfooded by the **AJ language**, a small C#-like systems language. Its compiler runs
 parse → semantic analysis → **LLVM IR** entirely on this engine, and its grammar shows off optionals,
 repetition, semantic actions, and LGLR backtracking on a real language.
 
@@ -377,7 +376,7 @@ code, the problem/diagnostics view, and the LLVM-IR / assembly walkthrough.
 ```
 src/
   Common/     shared utilities (AJ.Common)
-  FrontEnd/   the parsing engine — the publishable "Orchid":
+  FrontEnd/   the parsing engine — the publishable "Janglim":
                 Parse, Parse.FrontEnd, .Grammars, .Parsers, .ErrorHandler, .Support
               example front ends built on the engine:
                 Parse.FrontEnd.AJ (the AJ language), Parse.FrontEnd.Grammars.MiniC (a MiniC sample)
@@ -385,7 +384,7 @@ src/
   BackEnd/    code-generation targets  (Parse.BackEnd)
   Compile/    the AJ compiler driver
   Cli/        command-line tools (ajbuild, ajutil, …)
-  Orchid/     NuGet packaging project (bundles the engine assemblies)
+  Janglim/    NuGet packaging project (bundles the engine assemblies)
 Tests/        xUnit suite for the engine  (Parse.FrontEnd.Parsers.Tests)
 legacy/       deprecated IDE / WPF projects, kept for history
 ```

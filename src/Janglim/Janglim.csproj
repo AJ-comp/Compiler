@@ -4,15 +4,14 @@
     <TargetFramework>netstandard2.1</TargetFramework>
 
     <IsPackable>true</IsPackable>
-    <!-- Install id must be globally unique on nuget.org; "Orchid" is taken (unlisted), so
-         the orchid family name "Orchidaceae" is the package id. The friendly brand is "Orchid". -->
-    <PackageId>Orchidaceae</PackageId>
-    <Title>Orchid</Title>
-    <Description>Orchid is a general-purpose, embeddable LR/LALR parser-generator engine for .NET. Define a grammar in C#, then parse with incremental reparsing, error recovery, and grammar introspection (parse tables, FIRST/FOLLOW, conflict reports). Early preview — the public API is still unstable.</Description>
-    <PackageTags>parser;parsing;parser-generator;lr;lalr;grammar;compiler;lexer;ebnf;incremental;orchid</PackageTags>
+    <PackageId>Janglim</PackageId>
+    <Title>Janglim</Title>
+    <Description>Janglim is a general-purpose, embeddable LR/LALR parser-generator engine for .NET. Define a grammar in C#, then parse with incremental reparsing, error recovery, and grammar introspection (parse tables, FIRST/FOLLOW, conflict reports). Early preview — the public API is still unstable.</Description>
+    <PackageTags>parser;parsing;parser-generator;lr;lalr;grammar;compiler;lexer;ebnf;incremental;janglim</PackageTags>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
 
-    <!-- Package icon (an orchid). Drop a PNG (<=1MB, ~128x128) at src/Orchid/icon.png and it
-         is packed automatically; until then the package builds without an icon. -->
+    <!-- Package icon (an orchid — the project emblem). Drop a PNG (<=1MB, ~128x128) at src/Janglim/icon.png
+         and it is packed automatically; until then the package builds without an icon. -->
     <PackageIcon Condition="Exists('icon.png')">icon.png</PackageIcon>
 
     <!-- Bundle the engine assemblies into this single package's lib folder. -->
@@ -23,10 +22,14 @@
     <None Include="icon.png" Pack="true" PackagePath="\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="README.md" Pack="true" PackagePath="\" />
+  </ItemGroup>
+
   <!--
     The engine assemblies. PrivateAssets="all" stops them from becoming separate
     package dependencies; instead their DLLs are bundled (see the target below),
-    so a consumer installs one package ("Orchid") and gets the whole engine.
+    so a consumer installs one package ("Janglim") and gets the whole engine.
   -->
   <ItemGroup>
     <ProjectReference Include="..\Common\AJ.Common\AJ.Common.csproj" PrivateAssets="all" />
@@ -34,6 +37,7 @@
     <ProjectReference Include="..\FrontEnd\Parse.FrontEnd\Parse.FrontEnd.csproj" PrivateAssets="all" />
     <ProjectReference Include="..\FrontEnd\Parse.FrontEnd.Grammars\Parse.FrontEnd.Grammars.csproj" PrivateAssets="all" />
     <ProjectReference Include="..\FrontEnd\Parse.FrontEnd.Parsers\Parse.FrontEnd.Parsers.csproj" PrivateAssets="all" />
+    <ProjectReference Include="..\FrontEnd\Parse.FrontEnd.Grammars.Ebnf\Parse.FrontEnd.Grammars.Ebnf.csproj" PrivateAssets="all" />
     <ProjectReference Include="..\FrontEnd\Parse.FrontEnd.ErrorHandler\Parse.FrontEnd.ErrorHandler.csproj" PrivateAssets="all" />
     <ProjectReference Include="..\FrontEnd\Parse.FrontEnd.Support\Parse.FrontEnd.Support.csproj" PrivateAssets="all" />
   </ItemGroup>
@@ -51,6 +55,7 @@
       <BuildOutputInPackage Include="$(TargetDir)Parse.FrontEnd.dll" />
       <BuildOutputInPackage Include="$(TargetDir)Parse.FrontEnd.Grammars.dll" />
       <BuildOutputInPackage Include="$(TargetDir)Parse.FrontEnd.Parsers.dll" />
+      <BuildOutputInPackage Include="$(TargetDir)Parse.FrontEnd.Grammars.Ebnf.dll" />
       <BuildOutputInPackage Include="$(TargetDir)Parse.FrontEnd.ErrorHandler.dll" />
       <BuildOutputInPackage Include="$(TargetDir)Parse.FrontEnd.Support.dll" />
     </ItemGroup>

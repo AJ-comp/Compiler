@@ -1,10 +1,10 @@
 <Project>
 
-  <!-- Shared package metadata for the Larix engine (applies to all projects under src/). -->
+  <!-- Shared package metadata for the Janglim engine (applies to all projects under src/). -->
   <PropertyGroup>
     <Authors>AJ-comp</Authors>
     <Company>AJ-comp</Company>
-    <Product>Orchid</Product>
+    <Product>Janglim</Product>
     <Version>0.1.0-preview.1</Version>
 
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
@@ -18,7 +18,7 @@
     <Deterministic>true</Deterministic>
     <EmbedUntrackedSources>true</EmbedUntrackedSources>
 
-    <!-- Nothing under src/ is packable by default; only the Larix packaging project opts in. -->
+    <!-- Nothing under src/ is packable by default; only the Janglim packaging project opts in. -->
     <IsPackable>false</IsPackable>
   </PropertyGroup>
 

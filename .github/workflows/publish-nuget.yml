@@ -1,0 +1,55 @@
+name: Publish to NuGet
+
+# Manual release of the Janglim engine package (PackageId: Janglim) to nuget.org.
+# Trigger it by hand from the Actions tab. The package is built from the checked-out
+# commit, so SourceLink and the package contents always match a real commit.
+#
+# Auth: nuget.org Trusted Publishing (OIDC) — no stored secret. A Trusted
+# Publishing policy on nuget.org links this repo + this workflow file to the
+# package owner, and NuGet/login exchanges the GitHub OIDC token for a
+# short-lived API key at run time.
+
+on:
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Pack only — do NOT push to nuget.org (use to test the build)"
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+  id-token: write   # required for OIDC / NuGet Trusted Publishing
+
+jobs:
+  publish:
+    name: Pack and publish
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+
+      - name: Pack
+        run: dotnet pack src/Janglim/Janglim.csproj -c Release -o artifacts
+
+      - name: List the package
+        run: ls -l artifacts
+
+      - name: NuGet login (Trusted Publishing)
+        if: ${{ !inputs.dry_run }}
+        uses: NuGet/login@v1
+        id: login
+        with:
+          user: JJW
+
+      - name: Push to nuget.org
+        if: ${{ !inputs.dry_run }}
+        run: >-
+          dotnet nuget push artifacts/*.nupkg
+          --api-key ${{ steps.login.outputs.NUGET_API_KEY }}
+          --source https://api.nuget.org/v3/index.json
+          --skip-duplicate

@@ -1,8 +1,8 @@
 # Symbol — the smallest unit of a grammar
 
-> 🎓 This is the **deep-dive track**. If the basics track was about the *concept*, the deep-dive track follows **how Orchid built that concept up in code** — and it does so **in the exact order it was built, slowly**.
+> 🎓 This is the **deep-dive track**. If the basics track was about the *concept*, the deep-dive track follows **how Janglim built that concept up in code** — and it does so **in the exact order it was built, slowly**.
 
-> Let me make one promise before we go. In this deep-dive track, whenever I say **"the author"**, I mean the **person** who designed and wrote Orchid's code (the owner of this project). *Not the AI that is putting these notes together right now.*
+> Let me make one promise before we go. In this deep-dive track, whenever I say **"the author"**, I mean the **person** who designed and wrote Janglim's code (the owner of this project). *Not the AI that is putting these notes together right now.*
 
 > And to be honest, the "author's thoughts" captured here are really **a mix of two things**:
 
@@ -34,14 +34,14 @@ So `Symbol` can't be born on its own (`new Symbol()` is impossible) — it must 
 ```csharp
 public abstract class Symbol : IShowable, IQuantifiable, IConvertableEbnfString
 {
-    // 두 구체(Terminal · NonTerminal)를 추상화한 공통 베이스
+    // A common base abstracting the two concretes (Terminal · NonTerminal)
 }
 ```
 
 ```
-        Symbol  (추상 — 두 구체의 공통 추상)
-        ├── Terminal      ← 잎: 더 안 쪼개지는 토큰   (다음 장)
-        └── NonTerminal   ← 가지: 더 쪼개지는 규칙   (그다음 장)
+        Symbol  (abstract — the common abstraction of the two concretes)
+        ├── Terminal      ← leaf: a token that splits no further   (next chapter)
+        └── NonTerminal   ← branch: a rule that splits further     (the chapter after)
 ```
 
 > 💡 **This habit shows up again throughout the manual.** From now on, whenever you *see several concrete classes, expect that above them there's a class that abstracts them all* — read it that way and it's much easier to follow the author's train of thought.
@@ -62,8 +62,8 @@ It's a numeric unique identifier, *entirely separate* from the display name.
 ```csharp
 public UInt32 UniqueKey { get; internal set; } = UInt32.MaxValue;
 
-public override int GetHashCode() => (int)this.UniqueKey;   // 해시도
-// == 도, Equals 도 — 전부 UniqueKey 로만 비교
+public override int GetHashCode() => (int)this.UniqueKey;   // the hash too
+// == too, Equals too — all compared by UniqueKey alone
 ```
 
 Equality (`==`), hashing too — **all of it is done by `UniqueKey` alone**.
@@ -84,9 +84,9 @@ The **`+` (join) and `|` (choose) operators** used here, and the `?`·`*`·`+` (
 So these operators and quantifiers all live on `Symbol` too. (Gathering the common behavior in the abstract base.)
 
 ```csharp
-public static NonTerminal operator +(Symbol left, Symbol right);   // 잇기(연접)
-public static NonTerminal operator |(Symbol left, Symbol right);   // 고르기(택일)
-// ?(Optional) · *(ZeroOrMore) · +(OneOrMore) 도 Symbol 에 (IQuantifiable)
+public static NonTerminal operator +(Symbol left, Symbol right);   // join (concatenation)
+public static NonTerminal operator |(Symbol left, Symbol right);   // choose (choice)
+// ?(Optional) · *(ZeroOrMore) · +(OneOrMore) are on Symbol too (IQuantifiable)
 ```
 
 For now it's just *"ah, they live here"* — **what structure these actually produce** we'll dig into one chapter at a time, slowly, later on.
@@ -109,26 +109,26 @@ The logic is emptied out — just *what's in it*. (So you can go "ah, so that's 
 ```csharp
 public abstract class Symbol : IShowable, IQuantifiable, IConvertableEbnfString
 {
-    // ── 정체성 ──────────────────────────────
+    // ── identity ──────────────────────────────
     public UInt32 UniqueKey { get; internal set; }
     protected string EbnfString { get; set; }
 
-    // ── 표현 (자식이 채움) ───────────────────
+    // ── representation (filled in by the children) ───
     public abstract string ToEbnfString(bool bContainLHS = false);
     public abstract string ToGrammarString();
     public abstract string ToTreeString(ushort depth = 1);
 
-    // ── 같음 (전부 UniqueKey 기준) ───────────
+    // ── equality (all based on UniqueKey) ───────────
     public bool Equals(Symbol other);
     public override int GetHashCode();
     public static bool operator ==(Symbol left, Symbol right);
     public static bool operator !=(Symbol left, Symbol right);
 
-    // ── 잇기 / 고르기 ────────────────────────
-    public static NonTerminal operator +(Symbol left, Symbol right);   // 연접: a 다음 b
-    public static NonTerminal operator |(Symbol left, Symbol right);   // 택일: a 또는 b
+    // ── join / choose ────────────────────────
+    public static NonTerminal operator +(Symbol left, Symbol right);   // concatenation: a then b
+    public static NonTerminal operator |(Symbol left, Symbol right);   // choice: a or b
 
-    // ── 수량자 (IQuantifiable) ───────────────
+    // ── quantifiers (IQuantifiable) ───────────────
     public NonTerminal ZeroOrMore();   // *
     public NonTerminal OneOrMore();    // +
     public NonTerminal Optional();     // ?

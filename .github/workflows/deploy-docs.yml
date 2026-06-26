@@ -1,6 +1,6 @@
 name: Deploy manual to GitHub Pages
 
-# Builds the DocFX manual (docs/ + templates/orchid) into a static site and
+# Builds the DocFX manual (docs/ + templates/janglim) into a static site and
 # publishes it to GitHub Pages via the Actions artifact method (no gh-pages
 # branch). Runs on changes to the manual or this workflow, and on demand.
 

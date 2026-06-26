@@ -1,9 +1,9 @@
 # Symbol — 文法の最も小さな単位
 
-> 🎓 ここは **深化コース** です。基本コースが *概念* だったとすれば、深化コースは **その概念を Orchid が
+> 🎓 ここは **深化コース** です。基本コースが *概念* だったとすれば、深化コースは **その概念を Janglim が
 > どのようにコードへ積み上げたのか** を — それも **作った順番のまま、ゆっくりと** — たどっていきます。
 >
-> 一つだけ約束しておきますね。この深化コースで **「著者」** と言うときは、Orchid を自ら設計しコードを
+> 一つだけ約束しておきますね。この深化コースで **「著者」** と言うときは、Janglim を自ら設計しコードを
 > 書いた **人**(このプロジェクトの主)を指します。*いま、この文章を整理している AI ではありません。*
 >
 > そして正直に言うと、ここに込めた「著者の考え」は **二つのものが混ざって** います:
@@ -42,14 +42,14 @@
 ```csharp
 public abstract class Symbol : IShowable, IQuantifiable, IConvertableEbnfString
 {
-    // 두 구체(Terminal · NonTerminal)를 추상화한 공통 베이스
+    // 二つの具体(Terminal · NonTerminal)を抽象化した共通ベース
 }
 ```
 
 ```
-        Symbol  (추상 — 두 구체의 공통 추상)
-        ├── Terminal      ← 잎: 더 안 쪼개지는 토큰   (다음 장)
-        └── NonTerminal   ← 가지: 더 쪼개지는 규칙   (그다음 장)
+        Symbol  (抽象 — 二つの具体の共通の抽象)
+        ├── Terminal      ← 葉: これ以上分かれないトークン   (次の章)
+        └── NonTerminal   ← 枝: さらに分かれる規則           (その次の章)
 ```
 
 > 💡 **この習慣はマニュアルの随所でまた出てきます。** これから *具体クラスが複数見えたら、その上にそれらを
@@ -76,8 +76,8 @@ NonTerminal であろうと同じように必要なものですよね — だか
 ```csharp
 public UInt32 UniqueKey { get; internal set; } = UInt32.MaxValue;
 
-public override int GetHashCode() => (int)this.UniqueKey;   // 해시도
-// == 도, Equals 도 — 전부 UniqueKey 로만 비교
+public override int GetHashCode() => (int)this.UniqueKey;   // ハッシュも
+// == も、Equals も — すべて UniqueKey でのみ比較
 ```
 
 同じかどうかの判定(`==`)も、ハッシュも、**ただ `UniqueKey` だけで** 行います。
@@ -101,9 +101,9 @@ public override int GetHashCode() => (int)this.UniqueKey;   // 해시도
 なので、この演算子・数量子もすべて `Symbol` にあります。(抽象ベースに共通の動作を集めておくわけです。)
 
 ```csharp
-public static NonTerminal operator +(Symbol left, Symbol right);   // 잇기(연접)
-public static NonTerminal operator |(Symbol left, Symbol right);   // 고르기(택일)
-// ?(Optional) · *(ZeroOrMore) · +(OneOrMore) 도 Symbol 에 (IQuantifiable)
+public static NonTerminal operator +(Symbol left, Symbol right);   // つなぐ(連接)
+public static NonTerminal operator |(Symbol left, Symbol right);   // 選ぶ(選択)
+// ?(Optional) · *(ZeroOrMore) · +(OneOrMore) も Symbol に (IQuantifiable)
 ```
 
 いまは *「ここにあるんだな」* だけ — これが実際に **どんな構造を作り出すのか** は、後で一章ずつゆっくり
@@ -128,26 +128,26 @@ public static NonTerminal operator |(Symbol left, Symbol right);   // 고르기(
 ```csharp
 public abstract class Symbol : IShowable, IQuantifiable, IConvertableEbnfString
 {
-    // ── 정체성 ──────────────────────────────
+    // ── アイデンティティ ────────────────────
     public UInt32 UniqueKey { get; internal set; }
     protected string EbnfString { get; set; }
 
-    // ── 표현 (자식이 채움) ───────────────────
+    // ── 表現 (子が埋める) ───────────────────
     public abstract string ToEbnfString(bool bContainLHS = false);
     public abstract string ToGrammarString();
     public abstract string ToTreeString(ushort depth = 1);
 
-    // ── 같음 (전부 UniqueKey 기준) ───────────
+    // ── 等価 (すべて UniqueKey 基準) ─────────
     public bool Equals(Symbol other);
     public override int GetHashCode();
     public static bool operator ==(Symbol left, Symbol right);
     public static bool operator !=(Symbol left, Symbol right);
 
-    // ── 잇기 / 고르기 ────────────────────────
-    public static NonTerminal operator +(Symbol left, Symbol right);   // 연접: a 다음 b
-    public static NonTerminal operator |(Symbol left, Symbol right);   // 택일: a 또는 b
+    // ── つなぐ / 選ぶ ────────────────────────
+    public static NonTerminal operator +(Symbol left, Symbol right);   // 連接: a の次に b
+    public static NonTerminal operator |(Symbol left, Symbol right);   // 選択: a または b
 
-    // ── 수량자 (IQuantifiable) ───────────────
+    // ── 数量子 (IQuantifiable) ───────────────
     public NonTerminal ZeroOrMore();   // *
     public NonTerminal OneOrMore();    // +
     public NonTerminal Optional();     // ?

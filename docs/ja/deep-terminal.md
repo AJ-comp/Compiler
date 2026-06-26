@@ -54,8 +54,8 @@ public override string ToString() => Caption;
 表示文字列ではないからです。
 
 ```csharp
-// caption이 null이면 value로 fallback (표시가 null이면 텍스트 렌더러가 깨지므로).
-// 단, Value 자체는 준 그대로 — 렉서의 매칭 값/패턴이라 절대 바꾸지 않는다.
+// caption が null なら value で fallback(表示が null だとテキストレンダラーが壊れるため)。
+// ただし、Value 自体は与えられたまま — 字句解析器のマッチング値/パターンなので絶対に変えない。
 this.Caption = caption ?? value ?? string.Empty;
 ```
 
@@ -95,8 +95,8 @@ public string RegexExpression => (IsOper) ? ... : (IsNumber) ? Value : ... ;
 [FIRST/FOLLOW](first-follow.md) で出会った、まさにそれらです。
 
 ```csharp
-public class Epsilon   : Terminal { ... }   // ε — "빈 것"
-public class EndMarker : Terminal { ... }   // $ — "입력의 끝"
+public class Epsilon   : Terminal { ... }   // ε — "空のもの"
+public class EndMarker : Terminal { ... }   // $ — "入力の終わり"
 ```
 
 これらは **固定された UniqueKey** を持ちます(`KeyManager.EpsilonKey` など)。\
@@ -112,32 +112,32 @@ public class EndMarker : Terminal { ... }   // $ — "입력의 끝"
 ```csharp
 public class Terminal : Symbol
 {
-    // ── 무엇인가 ────────────────────────────
+    // ── 何なのか ────────────────────────────
     public TokenType TokenType { get; }
-    public string Value { get; }        // 렉서가 맞춰볼 값 (필수 · 건드리지 않음)
-    public string Caption { get; }       // 표시 이름 (ToString 이 이걸 씀)
-    public bool Meaning { get; }         // 의미 있는 토큰인가 (AST 용)
+    public string Value { get; }        // 字句解析器が照らし合わせる値 (必須 · 触らない)
+    public string Caption { get; }       // 表示名 (ToString がこれを使う)
+    public bool Meaning { get; }         // 意味のあるトークンか (AST 用)
     public bool IsWordPattern { get; }
 
-    // ── 파생 정보 ───────────────────────────
-    public bool IsOper { get; }          // 연산자/구분자류인가
+    // ── 派生情報 ───────────────────────────
+    public bool IsOper { get; }          // 演算子/区切り記号の類か
     public bool IsNumber { get; }
-    public string RegexExpression { get; }   // Value → 실제 렉서용 정규식
+    public string RegexExpression { get; }   // Value → 実際の字句解析器用の正規表現
 
-    // ── 생성 ────────────────────────────────
+    // ── 生成 ────────────────────────────────
     public Terminal(TokenType type, string value, bool meaning = true, bool bWord = false);
     public Terminal(TokenType type, string value, string caption, ...);
 
-    // ── 표현 ────────────────────────────────
+    // ── 表現 ────────────────────────────────
     public override string ToString();   // → Caption
     public override string ToEbnfString(bool bContainLHS = false);
     public override string ToGrammarString();
     public override string ToTreeString(ushort depth = 1);
 }
 
-// 특수한 잎들 — 전부 Terminal 의 자식, 고정 UniqueKey
-public class Epsilon        : Terminal { }   // ε — 빈 것
-public class EndMarker      : Terminal { }   // $ — 입력의 끝
+// 特殊な葉たち — すべて Terminal の子、固定 UniqueKey
+public class Epsilon        : Terminal { }   // ε — 空のもの
+public class EndMarker      : Terminal { }   // $ — 入力の終わり
 public class InputTerminal  : Terminal { }
 public class NotDefined     : Terminal { }
 public class CustomTerminal : Terminal { }

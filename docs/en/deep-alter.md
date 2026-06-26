@@ -151,7 +151,7 @@ In one line — **`Alter` = a *set* of Concats (alternatives). And `+`/`|` decid
 
 ## All the pieces have locked together — the whole picture
 
-This is the **entire skeleton** of Orchid's grammar structure.\
+This is the **entire skeleton** of Janglim's grammar structure.\
 Let me gather it onto one page.
 
 ```

@@ -159,7 +159,7 @@
       (function () {
         var LANGS = [['ko', '한국어'], ['en', 'English'], ['ja', '日本語']];
         function pick() {
-          try { var s = localStorage.getItem('orchidLang'); if (s) return s; } catch (e) {}
+          try { var s = localStorage.getItem('janglimLang'); if (s) return s; } catch (e) {}
           var prefs = navigator.languages || [navigator.language || ''];
           for (var i = 0; i < prefs.length; i++) {
             var l = (prefs[i] || '').toLowerCase();
@@ -192,7 +192,7 @@
           var as = box.getElementsByClassName('lang-link');
           for (var j = 0; j < as.length; j++) {
             as[j].addEventListener('click', function () {
-              try { localStorage.setItem('orchidLang', this.getAttribute('data-lang')); } catch (e) {}
+              try { localStorage.setItem('janglimLang', this.getAttribute('data-lang')); } catch (e) {}
             });
           }
         }

@@ -92,7 +92,7 @@
 [문법 읽는 법](grammar-reading.md) → [FIRST / FOLLOW](first-follow.md) → [점·상태](dot-and-state.md) →
 *실제 파싱* 까지, LR 파싱의 큰 그림을 다 잡으셨어요.
 
-> 🎓 *표를 직접 만드는 법* 과 *Orchid 코드* 가 궁금하면 — **심화 과정** 으로 가면 돼요.\
+> 🎓 *표를 직접 만드는 법* 과 *Janglim 코드* 가 궁금하면 — **심화 과정** 으로 가면 돼요.\
 > [LR 아이템](lr-item.md) → [상태](lr-state.md) → [클로저](closure-def.md) → [GOTO](goto.md) →
 > [정준 집합](canonical-set.md) → [파싱 테이블](parse-table-build.md) 순서로, 방금 본 걸 *직접 만들어*
 > 봐요. (안 봐도 개념은 이미 다 잡으셨어요. 🙂)

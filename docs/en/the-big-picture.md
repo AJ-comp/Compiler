@@ -56,14 +56,14 @@ a + a * a   →   a + (a * a)      ← '*' is grouped more deeply (first)
 ```
 
 The thing that does this is the **parser**.\
-And this is exactly the part Orchid focuses on.
+And this is exactly the part Janglim focuses on.
 
 ### ③ tree → what comes next
 
 Once you have a parse tree, what follows splits by purpose.\
 A calculator walks the tree and computes a value,
 a compiler analyzes the meaning and translates it into machine code / LLVM IR.\
-The **AJ language**, which Orchid built for dogfooding (self-verification),
+The **AJ language**, which Janglim built for dogfooding (self-verification),
 goes all the way here.
 
 ## The LR parser's hidden stage 0: "building the table in advance"
@@ -93,7 +93,7 @@ We start from [FIRST/FOLLOW](first-follow.md).
 
 ## The layers of the code — just a peek
 
-The inside of Orchid is several modules stacked **layer upon layer**.\
+The inside of Janglim is several modules stacked **layer upon layer**.\
 The further down you go, the more fundamental the part.
 
 ```

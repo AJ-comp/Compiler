@@ -1,6 +1,6 @@
 # GOTO — 記号を一つ読んで次の状態へ
 
-> 🎓 **心化コース** です。\
+> 🎓 **上級コース** です。\
 > 前の [閉包 · 計算法](closure-calc.md) で開始状態 `I₀` を作りましたね。\
 > 今度はその状態から **記号を一つ読むと** どの状態へ行くのか — それを決めるのが **GOTO** です。
 
@@ -35,7 +35,7 @@ GOTO は *一度で終わる* 演算です。\
 
 ドットの後ろが `id` の項目は `Factor → • id` 一つだけですね。ドットを `id` の後ろへ動かすと:
 
-<pre class="lrbox">   Factor → <span class="lrdot">•</span> id        ──( id 読む )──▶        Factor → id <span class="lrdot">•</span></pre>
+<pre class="lrbox">   Factor → <span class="lrdot">•</span> id        ──( id を読む )──▶        Factor → id <span class="lrdot">•</span></pre>
 
 `Factor → id •` はドットが末尾に届きました — *完了項目(reduce)* ですね。(この状態に来ると *「`id` を `Factor`
 にまとめよ」* になります。)ドットの後ろに非終端記号がないので閉包で追加されるものもありません。→ **項目 1個だけ** の次の
@@ -74,7 +74,7 @@ GOTO は *一度で終わる* 演算です。\
 
 ドットの後ろが `'('` の項目は `Factor → • '(' Expr ')'` 一つですね。ドットを `'('` の後ろへ動かすと:
 
-<pre class="lrbox">   Factor → <span class="lrdot">•</span> '(' Expr ')'    ──( '(' 読む )──▶    Factor → '(' <span class="lrdot">•</span> Expr ')'</pre>
+<pre class="lrbox">   Factor → <span class="lrdot">•</span> '(' Expr ')'    ──( '(' を読む )──▶    Factor → '(' <span class="lrdot">•</span> Expr ')'</pre>
 
 ところが今回は違います — 動かした先の **ドットの後ろが非終端記号 `Expr`** なのです!\
 さっきの `id`・`Term`・`Expr` のときはドットを動かすだけで終わりでしたが、この一項目だけでは *`Expr` をどう始めるのか* が
@@ -128,15 +128,15 @@ public static CanonicalState Goto(CanonicalState iStatus, Symbol toSeeSymbol)
 
     foreach (var item in iStatus)
     {
-        if (item.MarkSymbol == toSeeSymbol)   // 점 뒤가 읽을 기호와 같은 아이템만
+        if (item.MarkSymbol == toSeeSymbol)   // ドットの後ろが読む記号と同じ項目だけ
         {
             var clone = item.Clone() as LRItem;
-            clone.MoveMarkSymbol();            // 점을 한 칸 앞으로
+            clone.MoveMarkSymbol();            // ドットを一つ前へ
             param.Add(clone);
         }
     }
 
-    return Analyzer.Closure(param);            // 옮긴 아이템들을 다시 클로저
+    return Analyzer.Closure(param);            // 動かした項目たちを再び閉包
 }
 ```
 

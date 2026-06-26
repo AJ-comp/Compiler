@@ -10,7 +10,7 @@ _disableBreadcrumb: true
 <div class="hero-section">
   <div class="hero-content">
     <div class="hero-badge">Open Source · .NET · LR / LALR</div>
-    <h1 class="hero-title"><span class="hero-accent">Orchid</span></h1>
+    <h1 class="hero-title"><span class="hero-accent">Janglim</span></h1>
     <p class="hero-subtitle">
       A general-purpose, embeddable <strong>LR/LALR parser-generator</strong> for .NET.<br>
       Define a grammar — in C# or EBNF — and <strong>look inside every parse</strong>.
@@ -70,7 +70,7 @@ _disableBreadcrumb: true
     <div class="quickstart-code">
       <div class="code-block">
         <div class="code-header">.NET CLI</div>
-        <pre><code>dotnet add package Orchidaceae --prerelease</code></pre>
+        <pre><code>dotnet add package Janglim --prerelease</code></pre>
         <pre><code>var p = new LALRParser(grammar);</code></pre>
         <pre><code>var r = p.Parsing(tokens);  // r.Success == true</code></pre>
       </div>

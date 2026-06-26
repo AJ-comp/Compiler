@@ -22,7 +22,7 @@ a + a * a   →   "Ah, this is a (a) plus (a times a) structure"
 You have to know this structure before you can move on to the next step (calculation, translation, compilation).\
 Parsing is the
 **first gateway** of almost all language processing.\
-All right — let's now do this 'parsing' ourselves with Orchid.
+All right — let's now do this 'parsing' ourselves with Janglim.
 
 ## Installation
 
@@ -30,11 +30,10 @@ First, install the package.\
 In a .NET project:
 
 ```bash
-dotnet add package Orchidaceae --prerelease
+dotnet add package Janglim --prerelease
 ```
 
-> Why is the package named **`Orchidaceae`**? — The brand name "Orchid" is already reserved on nuget.org, so
-> we use `Orchidaceae`, the scientific name of the orchid family, as the id. We add `--prerelease` because it's still an early preview.
+> We add `--prerelease` because it's still an early preview.
 
 > 🌿 **If installation feels like a hassle, you can put it off for a moment.** The *exact same thing* as the code you'll write in a bit can be done **with just clicks in your browser** — there's a [live playground](https://polite-island-0b2142200.7.azurestaticapps.net)
 > for that. There it even shows you the parse table and tree as pictures. For now, it's fine to go take a look with your own eyes first.

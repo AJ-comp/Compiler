@@ -90,7 +90,7 @@ This is **all there is to LR parsing** — *read (shift), bundle when it matches
 From [how to read a grammar](grammar-reading.md) → [FIRST / FOLLOW](first-follow.md) → [dots and states](dot-and-state.md) →
 *parsing for real*, you've now grasped the big picture of LR parsing.
 
-> 🎓 If you're curious about *how to build the table yourself* and *the Orchid code* — head to the **advanced track**.\
+> 🎓 If you're curious about *how to build the table yourself* and *the Janglim code* — head to the **advanced track**.\
 > In the order [LR item](lr-item.md) → [state](lr-state.md) → [closure](closure-def.md) → [GOTO](goto.md) →
 > [canonical collection](canonical-set.md) → [parse table](parse-table-build.md), you'll *build with your own hands* what you just saw.
 > (Even without it, you already have the concepts down. 🙂)

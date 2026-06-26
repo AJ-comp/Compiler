@@ -22,7 +22,7 @@ That's all it is.
 ```csharp
 public class NonTerminalConcat : IList<Symbol>
 {
-    protected List<Symbol> _symbols = new();   // [Expr, '+', Term] 처럼 순서대로
+    protected List<Symbol> _symbols = new();   // in order, like [Expr, '+', Term]
 }
 ```
 
@@ -67,15 +67,15 @@ They look trivial right now, but **later they get used as-is in the
 heart of LR parsing.**
 
 ```csharp
-public NonTerminalConcat PrevSymbolListFrom(int index);   // 어떤 위치 *앞쪽* 기호들
-public NonTerminalConcat PostSymbolListFrom(int index);   // 어떤 위치 *뒤쪽* 기호들
+public NonTerminalConcat PrevSymbolListFrom(int index);   // symbols *in front of* some position
+public NonTerminalConcat PostSymbolListFrom(int index);   // symbols *behind* some position
 ```
 
 Here's why this matters — an LR parser marks "how far it has read into this rule right now" with a **dot (`•`)**.\
 If we call the symbol **right after** the dot `X`, the production takes this shape.
 
 ```
-   A → α • X β       (α = 이미 읽음,  X = 지금 볼 기호,  β = 남음)
+   A → α • X β       (α = already read,  X = symbol to look at now,  β = remaining)
 ```
 
 At this point, if you give the position of `X` as `index`, the two methods peel off `α` and `β` **as whole ranges**.\
@@ -83,13 +83,13 @@ At this point, if you give the position of `X` as `index`, the two methods peel 
 it's `Prev = _symbols.Take(index)`, `Post = _symbols.Skip(index + 1)`.)
 
 ```
-   A → Expr '+' Term          (인덱스   0     1     2)
+   A → Expr '+' Term          (index   0     1     2)
 
-   X = '+' (인덱스 1) 로 보면   →   A → Expr • '+' Term
+   taking X = '+' (index 1)   →   A → Expr • '+' Term
 
-   PrevSymbolListFrom(1) = [ Expr ]        ← α : 점 앞 '전부'  (Take(1))
-   PostSymbolListFrom(1) = [ Term ]        ← β : X 뒤 '전부'   (Skip(2))
-   ( 인덱스 1의 '+' 자신은 어느 쪽에도 안 들어가요 — 지금 '보는' 기호니까 )
+   PrevSymbolListFrom(1) = [ Expr ]        ← α : 'everything' before the dot  (Take(1))
+   PostSymbolListFrom(1) = [ Term ]        ← β : 'everything' after X         (Skip(2))
+   ( the '+' at index 1 itself goes into neither side — it's the symbol being 'looked at' now )
 ```
 
 The point is — these two return not *a single symbol* but the **entire front/back range**.\
@@ -104,28 +104,28 @@ The logic is emptied out, showing only *what is there*.
 ```csharp
 public class NonTerminalConcat : IList<Symbol>, ...
 {
-    protected List<Symbol> _symbols;     // 순서대로 늘어선 기호들
+    protected List<Symbol> _symbols;     // the symbols lined up in order
 
-    // ── 꼬리표 ───────────────────────────────
+    // ── tags ─────────────────────────────────
     public uint Priority { get; internal set; }
     public MeaningUnit MeaningUnit { get; internal set; }
 
-    // ── 판단 ─────────────────────────────────
-    public bool IsNull { get; }          // 비어 있나
-    public bool IsEpsilon { get; }       // 빈 것(ε) 하나뿐인가
-    public bool IsAllTerminal { get; }   // 전부 단말인가
+    // ── checks ───────────────────────────────
+    public bool IsNull { get; }          // is it empty
+    public bool IsEpsilon { get; }       // is it just the single empty one (ε)
+    public bool IsAllTerminal { get; }   // are they all terminals
 
-    // ── 앞/뒤 떼어내기 (LR 의 점 앞/뒤) ──────
+    // ── peeling off the front/back (LR's before/after the dot) ──────
     public NonTerminalConcat PrevSymbolListFrom(int index);
     public NonTerminalConcat PostSymbolListFrom(int index);
 
-    // ── 편집 ─────────────────────────────────
+    // ── editing ──────────────────────────────
     public void Replace(int index, Symbol item);
     public void AddRange(params Symbol[] symbols);
     public NonTerminalConcat ToReverse();
-    // … IList<Symbol> 의 Add / Insert / RemoveAt / this[i] …
+    // … IList<Symbol>'s Add / Insert / RemoveAt / this[i] …
 
-    // ── 변환 ─────────────────────────────────
+    // ── conversion ───────────────────────────
     public HashSet<NonTerminal> ToNonTerminalSet();
     public TerminalSet ToTerminalSet();
 }

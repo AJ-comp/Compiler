@@ -1,6 +1,6 @@
-# Welcome to the Orchid manual
+# Welcome to the Janglim manual
 
-Orchid is an **LR/LALR parser-generator engine for .NET**.\
+Janglim is an **LR/LALR parser-generator engine for .NET**.\
 Sounds hard, right?\
 **That's okay.**\
 This manual
@@ -14,7 +14,7 @@ need this" and explains it step by step, in the simplest words possible.\
 So by the time you finish reading, two things will stay with you.
 
 1. **The concept of parsing** itself — knowledge you'll use for the rest of your life, no matter which parser you end up using
-2. **The tool called Orchid** — and (if you want) even how it's built in code on the inside
+2. **The tool called Janglim** — and (if you want) even how it's built in code on the inside
 
 ## This manual has two tracks
 
@@ -32,7 +32,7 @@ Each page has:
 
 **🔵 Advanced course — formulas + code.**\
 We take the same concept and organize it into *a formula (algorithm) that works for any grammar*,
-and then look at **how it's implemented in the Orchid code**.\
+and then look at **how it's implemented in the Janglim code**.\
 At the end of each concept in the basic course, I'll leave a "→ to advanced"
 link.
 
@@ -61,7 +61,7 @@ the first time it shows up, so there's no need to worry about it in advance.)
 - 👉 **[Quick Start](getting-started.md)** — install it and run your first parse in 5 lines.
 - 🌿 **[Live playground](https://polite-island-0b2142200.7.azurestaticapps.net)** — right in the browser, no install needed.
 
-> **Note:** Orchid is still an **early preview (`0.1.0-preview`)**.\
+> **Note:** Janglim is still an **early preview (`0.1.0-preview`)**.\
 > The public API may change during `0.x`.
 
 ---
