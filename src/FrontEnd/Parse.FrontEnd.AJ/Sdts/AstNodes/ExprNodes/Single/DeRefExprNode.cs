@@ -1,7 +1,7 @@
 ﻿using Parse.FrontEnd.AJ.Data;
 using Parse.FrontEnd.AJ.Properties;
 using Parse.FrontEnd.AJ.Sdts.Datas;
-using Parse.FrontEnd.Ast;
+using Janglim.FrontEnd.Ast;
 using Parse.MiddleEnd.IR.Expressions;
 using System;
 

@@ -1,9 +1,9 @@
-using Parse.FrontEnd.Grammars.Ebnf;
-using Parse.FrontEnd.Parsers.LR;
-using Parse.FrontEnd.Tokenize;
+using Janglim.FrontEnd.Grammars.Ebnf;
+using Janglim.FrontEnd.Parsers.LR;
+using Janglim.FrontEnd.Tokenize;
 using Xunit;
 
-namespace Parse.FrontEnd.Parsers.Tests;
+namespace Janglim.FrontEnd.Parsers.Tests;
 
 /// <summary>
 /// End-to-end for the text path: EBNF grammar TEXT -> EbnfGrammarReader -> a runnable grammar that

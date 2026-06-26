@@ -1,9 +1,9 @@
 ﻿using Parse.FrontEnd.AJ.Data;
 using Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes.LiteralNodes;
-using Parse.FrontEnd.Ast;
+using Janglim.FrontEnd.Ast;
 using Parse.MiddleEnd.IR.Expressions;
 using Parse.MiddleEnd.IR.Expressions.ExprExpressions;
-using Parse.Types;
+using Janglim.Types;
 using System;
 
 namespace Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes.Binary

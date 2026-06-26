@@ -4,7 +4,7 @@ using Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes;
 using Parse.FrontEnd.AJ.Sdts.AstNodes.StatementNodes;
 using Parse.FrontEnd.AJ.Sdts.AstNodes.TypeNodes;
 using Parse.FrontEnd.AJ.Sdts.Datas;
-using Parse.FrontEnd.Ast;
+using Janglim.FrontEnd.Ast;
 using Parse.MiddleEnd.IR.Expressions;
 using System;
 using System.Collections.Generic;

@@ -1,7 +1,7 @@
-﻿using Parse.FrontEnd.RegularGrammar;
+﻿using Janglim.FrontEnd.RegularGrammar;
 using System.Collections.Generic;
 
-namespace Parse.FrontEnd.Parsers.Datas
+namespace Janglim.FrontEnd.Parsers.Datas
 {
     /// <summary>
     /// The information for actions when seen symbol.

@@ -2,9 +2,9 @@
 using ApplicationLayer.ViewModels.Messages;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
-using Parse.FrontEnd;
-using Parse.FrontEnd.Ast;
-using Parse.FrontEnd.ParseTree;
+using Janglim.FrontEnd;
+using Janglim.FrontEnd.Ast;
+using Janglim.FrontEnd.ParseTree;
 using System;
 using CommonResource = ApplicationLayer.Define.Properties.Resources;
 

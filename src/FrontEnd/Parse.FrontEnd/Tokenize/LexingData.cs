@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Parse.FrontEnd.Tokenize
+namespace Janglim.FrontEnd.Tokenize
 {
     public partial class LexingData
     {

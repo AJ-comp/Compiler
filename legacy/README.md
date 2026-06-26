@@ -7,7 +7,7 @@
 |---|---|
 | `Applications/` | AJStudio WPF IDE 및 MVVM 레이어 (netcoreapp3.1, ActiPro 의존) |
 | `Wpf.UI.Themes/` | WPF 테마 (Wpf.UI.Basic / Wpf.UI.Advance) |
-| `Parse.WpfControls/`, `Parse.WpfControls.SyntaxEditor/` | IDE용 커스텀 구문 편집기 컨트롤 |
+| `Janglim.WpfControls/`, `Janglim.WpfControls.SyntaxEditor/` | IDE용 커스텀 구문 편집기 컨트롤 |
 | `ParsingLibrary/` | 초기 파서 제너레이터 원형 (net472, 고아 — 솔루션 미포함) |
 
 ## 주의사항

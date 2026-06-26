@@ -1,9 +1,9 @@
-﻿using Parse.FrontEnd.RegularGrammar;
+﻿using Janglim.FrontEnd.RegularGrammar;
 using System;
 using System.Collections.Generic;
 using System.Data;
 
-namespace Parse.FrontEnd.Parsers.Collections
+namespace Janglim.FrontEnd.Parsers.Collections
 {
     public class ParsingDic : Dictionary<Tuple<Terminal, NonTerminal>, NonTerminalSingle>
     {

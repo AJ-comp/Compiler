@@ -1,11 +1,11 @@
 ﻿using AJ.Common.Helpers;
-using Parse.FrontEnd.RegularGrammar;
-using Parse.Utilities;
+using Janglim.FrontEnd.RegularGrammar;
+using Janglim.Utilities;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-namespace Parse.FrontEnd.Tokenize
+namespace Janglim.FrontEnd.Tokenize
 {
     public partial class Lexer
     {

@@ -5,7 +5,7 @@
 > If FIRST was about *"what does it *start* with"*, then FOLLOW is about *"what comes *after* it"*.\
 > On this page we'll look at the **definition** and at **deriving it directly from the definition**. Then comes → **computation rules** → **implementation**.
 
-> 📍 **Where it lives** · engine `FirstFollowAnalyzer` · module `Parse.FrontEnd` — **Layer 2** (the floor
+> 📍 **Where it lives** · engine `FirstFollowAnalyzer` · module `Janglim.FrontEnd` — **Layer 2** (the floor
 > *below* the parse table)
 
 This is the example grammar we keep using.\

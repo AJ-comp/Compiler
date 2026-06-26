@@ -1,4 +1,4 @@
-﻿namespace Parse.FrontEnd.ErrorHandler
+﻿namespace Janglim.FrontEnd.ErrorHandler
 {
     public interface IErrorAlgorithm
     {

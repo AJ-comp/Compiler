@@ -61,7 +61,7 @@ id     := "[a-zA-Z]+" ;
 - 👉 **[빠른 시작](getting-started.md)** — 설치하고, 5줄로 첫 파싱을 돌려봅니다.
 - 🌿 **[라이브 플레이그라운드](https://polite-island-0b2142200.7.azurestaticapps.net)** — 설치 없이 브라우저에서 바로.
 
-> **참고:** Janglim는 아직 **초기 프리뷰(`0.1.0-preview`)** 예요.\
+> **참고:** Janglim는 아직 **초기 프리뷰(`0.2.0-preview`)** 예요.\
 > 공개 API는 `0.x` 동안 바뀔 수 있어요.
 
 ---

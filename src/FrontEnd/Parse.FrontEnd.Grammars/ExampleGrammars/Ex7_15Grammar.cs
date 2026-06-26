@@ -1,6 +1,6 @@
-﻿using Parse.FrontEnd.RegularGrammar;
+﻿using Janglim.FrontEnd.RegularGrammar;
 
-namespace Parse.FrontEnd.Grammars.ExampleGrammars
+namespace Janglim.FrontEnd.Grammars.ExampleGrammars
 {
     public class Ex7_15Grammar : Grammar
     {

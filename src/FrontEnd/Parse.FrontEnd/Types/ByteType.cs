@@ -1,6 +1,6 @@
-﻿using Parse.Types;
+﻿using Janglim.Types;
 
-namespace Parse.FrontEnd.Types
+namespace Janglim.FrontEnd.Types
 {
     public class ByteType : IntegerType
     {

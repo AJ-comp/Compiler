@@ -1,8 +1,8 @@
-﻿using Parse.FrontEnd.Types;
-using Parse.FrontEnd.Types.Operations;
-using Parse.Types;
+﻿using Janglim.FrontEnd.Types;
+using Janglim.FrontEnd.Types.Operations;
+using Janglim.Types;
 
-namespace Parse.FrontEnd.Types
+namespace Janglim.FrontEnd.Types
 {
     public class DoubleType : PLType, IArithmeticOperation, IEqualOperation
     {

@@ -37,7 +37,7 @@
 못 태어나요 (`new Symbol()` 불가능) — 반드시 Terminal이나 NonTerminal 중 하나로 **구체화돼야**
 하죠.
 
-> 📍 **`Symbol`** · 모듈 `Parse.FrontEnd` (Layer 2) · `src/FrontEnd/Parse.FrontEnd/RegularGrammar/Symbol.cs`
+> 📍 **`Symbol`** · 모듈 `Janglim.FrontEnd` (Layer 2) · `src/FrontEnd/Janglim.FrontEnd/RegularGrammar/Symbol.cs`
 
 ```csharp
 public abstract class Symbol : IShowable, IQuantifiable, IConvertableEbnfString

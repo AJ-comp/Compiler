@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Parse.FrontEnd.RegularGrammar
+namespace Janglim.FrontEnd.RegularGrammar
 {
     public class NonTerminal : Symbol, IEnumerable<NonTerminalSingle>, ICloneable
     {

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Parse.FrontEnd.Grammars
+namespace Janglim.FrontEnd.Grammars
 {
     public class SemanticErrorArgs : EventArgs
     {

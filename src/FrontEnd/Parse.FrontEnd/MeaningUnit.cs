@@ -1,11 +1,11 @@
-﻿using Parse.FrontEnd.Ast;
+﻿using Janglim.FrontEnd.Ast;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 
-namespace Parse.FrontEnd
+namespace Janglim.FrontEnd
 {
     public enum ErrorType
     {

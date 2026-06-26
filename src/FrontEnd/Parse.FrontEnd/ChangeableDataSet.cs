@@ -1,8 +1,8 @@
-﻿using Parse.FrontEnd.RegularGrammar;
+﻿using Janglim.FrontEnd.RegularGrammar;
 using System;
 using System.Collections.Generic;
 
-namespace Parse.FrontEnd
+namespace Janglim.FrontEnd
 {
     /// <summary>
     /// key 외의 분화식에서 value가 포함되어 있으면 모두 key로 교체

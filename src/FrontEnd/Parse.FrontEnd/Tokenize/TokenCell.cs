@@ -4,7 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text.RegularExpressions;
 
-namespace Parse.FrontEnd.Tokenize
+namespace Janglim.FrontEnd.Tokenize
 {
     public enum RecognitionWay { Front, Back };
 

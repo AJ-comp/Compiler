@@ -2,7 +2,7 @@
 using ApplicationLayer.Models;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
-using Parse.Algorithms;
+using Janglim.Algorithms;
 using Parse.BackEnd.Target;
 using Parse.FrontEnd.AJ;
 using System;

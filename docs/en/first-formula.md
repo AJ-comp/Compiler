@@ -7,7 +7,7 @@
 >
 > Don't feel any pressure — we'll go slowly.
 
-> 📍 **Where it lives** · engine `FirstFollowAnalyzer` · module `Parse.FrontEnd` — **Layer 2** (the
+> 📍 **Where it lives** · engine `FirstFollowAnalyzer` · module `Janglim.FrontEnd` — **Layer 2** (the
 > tier *below* the parse table)
 
 Here's the example grammar we keep using.

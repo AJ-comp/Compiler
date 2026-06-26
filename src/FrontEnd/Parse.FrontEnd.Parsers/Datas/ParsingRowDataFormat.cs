@@ -1,7 +1,7 @@
-﻿using Parse.FrontEnd.RegularGrammar;
+﻿using Janglim.FrontEnd.RegularGrammar;
 using System.Collections.Generic;
 
-namespace Parse.FrontEnd.Parsers.Datas
+namespace Janglim.FrontEnd.Parsers.Datas
 {
     public abstract class ParsingRowDataFormat<ROW, COL, VAL>
     {

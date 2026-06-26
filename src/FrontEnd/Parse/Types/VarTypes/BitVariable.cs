@@ -1,8 +1,8 @@
-﻿using Parse.Types.ConstantTypes;
-using Parse.Types.Operations;
+﻿using Janglim.Types.ConstantTypes;
+using Janglim.Types.Operations;
 using System;
 
-namespace Parse.Types.VarTypes
+namespace Janglim.Types.VarTypes
 {
     public class BitVariable : Variable, IBit
     {

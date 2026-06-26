@@ -1,10 +1,10 @@
 ﻿using AJ.Common.Helpers;
-using Parse.FrontEnd.RegularGrammar;
+using Janglim.FrontEnd.RegularGrammar;
 using System.Collections.Generic;
 using System.Linq;
-using static Parse.FrontEnd.Parsers.Datas.LR.LRParsingRowDataFormat;
+using static Janglim.FrontEnd.Parsers.Datas.LR.LRParsingRowDataFormat;
 
-namespace Parse.FrontEnd.Parsers.Datas
+namespace Janglim.FrontEnd.Parsers.Datas
 {
     public class ActionData
     {

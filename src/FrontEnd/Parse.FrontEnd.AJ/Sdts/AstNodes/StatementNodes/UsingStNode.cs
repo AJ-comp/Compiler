@@ -1,8 +1,8 @@
-﻿using Parse.FrontEnd.Ast;
+﻿using Janglim.FrontEnd.Ast;
 using Parse.FrontEnd.AJ.Sdts.Datas;
 using Parse.MiddleEnd.IR.Expressions;
 using System.Collections.Generic;
-using Parse.Extensions;
+using Janglim.Extensions;
 
 namespace Parse.FrontEnd.AJ.Sdts.AstNodes.StatementNodes
 {

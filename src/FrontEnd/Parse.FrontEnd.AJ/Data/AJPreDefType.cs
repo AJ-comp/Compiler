@@ -1,9 +1,9 @@
 ﻿using AJ.Common.Helpers;
-using Parse.Extensions;
+using Janglim.Extensions;
 using Parse.FrontEnd.AJ.Sdts.AstNodes;
 using Parse.FrontEnd.AJ.Sdts.AstNodes.TypeNodes;
 using Parse.MiddleEnd.IR.Datas;
-using Parse.Types;
+using Janglim.Types;
 using System.Diagnostics;
 
 namespace Parse.FrontEnd.AJ.Data

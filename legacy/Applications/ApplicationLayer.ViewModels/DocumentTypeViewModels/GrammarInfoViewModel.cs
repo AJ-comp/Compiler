@@ -1,8 +1,8 @@
 ﻿using ApplicationLayer.Common.Utilities;
 using ApplicationLayer.ViewModels.SubViewModels;
 using GalaSoft.MvvmLight.Command;
-using Parse.FrontEnd.Grammars;
-using Parse.FrontEnd.Parsers.LR;
+using Janglim.FrontEnd.Grammars;
+using Janglim.FrontEnd.Parsers.LR;
 using System.Collections.ObjectModel;
 
 using CommonResource = ApplicationLayer.Define.Properties.Resources;

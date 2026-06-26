@@ -2,7 +2,7 @@
 using Compile;
 using ConsoleTables;
 using Parse.FrontEnd.AJ.Sdts.AstNodes;
-using Parse.FrontEnd.Tokenize;
+using Janglim.FrontEnd.Tokenize;
 using Parse.MiddleEnd.IR.LLVM;
 using System.Collections.Generic;
 using System.IO;

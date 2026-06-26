@@ -1,7 +1,7 @@
 ﻿using ApplicationLayer.Models.GraphModels;
-using Parse.FrontEnd.Parsers.Collections;
-using Parse.FrontEnd.Parsers.LR;
-using Parse.FrontEnd.RegularGrammar;
+using Janglim.FrontEnd.Parsers.Collections;
+using Janglim.FrontEnd.Parsers.LR;
+using Janglim.FrontEnd.RegularGrammar;
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;

@@ -1,10 +1,10 @@
-﻿using Parse.FrontEnd.Ast;
-using Parse.FrontEnd.RegularGrammar;
+﻿using Janglim.FrontEnd.Ast;
+using Janglim.FrontEnd.RegularGrammar;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace Parse.FrontEnd.ParseTree
+namespace Janglim.FrontEnd.ParseTree
 {
     public class ParseTreeNonTerminal : ParseTreeSymbol, IList<ParseTreeSymbol>
     {

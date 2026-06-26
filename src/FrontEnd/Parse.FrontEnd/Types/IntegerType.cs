@@ -1,9 +1,9 @@
 ﻿using AJ.Common.Helpers;
-using Parse.FrontEnd.Properties;
-using Parse.FrontEnd.Types.Operations;
-using Parse.Types;
+using Janglim.FrontEnd.Properties;
+using Janglim.FrontEnd.Types.Operations;
+using Janglim.Types;
 
-namespace Parse.FrontEnd.Types
+namespace Janglim.FrontEnd.Types
 {
     public abstract class IntegerType : PLType, IArithmeticOperation, IBitwiseOperation, IEqualOperation
     {

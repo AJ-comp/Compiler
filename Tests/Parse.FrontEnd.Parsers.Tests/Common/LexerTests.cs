@@ -1,10 +1,10 @@
 using System.Linq;
-using Parse.FrontEnd.Grammars;
-using Parse.FrontEnd.Grammars.ExampleGrammars;
-using Parse.FrontEnd.Tokenize;
+using Janglim.FrontEnd.Grammars;
+using Janglim.FrontEnd.Grammars.ExampleGrammars;
+using Janglim.FrontEnd.Tokenize;
 using Xunit;
 
-namespace Parse.FrontEnd.Parsers.Tests;
+namespace Janglim.FrontEnd.Parsers.Tests;
 
 /// <summary>
 /// COMMON (parser-independent): the lexer turns an input string into tokens using the

@@ -1,12 +1,12 @@
 ﻿using AJ.Common.Helpers;
-using Parse.FrontEnd.Parsers.Collections;
+using Janglim.FrontEnd.Parsers.Collections;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics;
 using System.Text;
 
-namespace Parse.FrontEnd.Parsers.Datas.LR
+namespace Janglim.FrontEnd.Parsers.Datas.LR
 {
     public class AmbiguityCheckResult : List<AmbiguityCheckItem>
     {

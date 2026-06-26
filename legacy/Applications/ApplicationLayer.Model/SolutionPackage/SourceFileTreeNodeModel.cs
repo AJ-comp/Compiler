@@ -1,4 +1,4 @@
-﻿using Parse.FrontEnd;
+﻿using Janglim.FrontEnd;
 
 namespace ApplicationLayer.Models.SolutionPackage
 {

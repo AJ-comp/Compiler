@@ -1,6 +1,6 @@
-﻿using Parse.FrontEnd.Parsers.Datas;
+﻿using Janglim.FrontEnd.Parsers.Datas;
 
-namespace Parse.FrontEnd.Parsers
+namespace Janglim.FrontEnd.Parsers
 {
     public interface IErrorHandlable
     {

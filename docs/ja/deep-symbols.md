@@ -37,7 +37,7 @@
 生まれられません (`new Symbol()` は不可能) — 必ず Terminal か NonTerminal のいずれかへ **具体化されなければ**
 なりません。
 
-> 📍 **`Symbol`** · モジュール `Parse.FrontEnd` (Layer 2) · `src/FrontEnd/Parse.FrontEnd/RegularGrammar/Symbol.cs`
+> 📍 **`Symbol`** · モジュール `Janglim.FrontEnd` (Layer 2) · `src/FrontEnd/Janglim.FrontEnd/RegularGrammar/Symbol.cs`
 
 ```csharp
 public abstract class Symbol : IShowable, IQuantifiable, IConvertableEbnfString

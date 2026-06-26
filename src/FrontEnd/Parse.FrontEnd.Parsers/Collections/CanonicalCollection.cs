@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Parse.FrontEnd.Parsers.Collections
+namespace Janglim.FrontEnd.Parsers.Collections
 {
     public class CanonicalCollection : List<CanonicalState>
     {

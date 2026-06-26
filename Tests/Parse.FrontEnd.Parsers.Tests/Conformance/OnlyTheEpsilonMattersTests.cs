@@ -1,10 +1,10 @@
 using System.Linq;
-using Parse.FrontEnd.Parsers.Datas;
-using Parse.FrontEnd.Parsers.LR;
-using Parse.FrontEnd.Tokenize;
+using Janglim.FrontEnd.Parsers.Datas;
+using Janglim.FrontEnd.Parsers.LR;
+using Janglim.FrontEnd.Tokenize;
 using Xunit;
 
-namespace Parse.FrontEnd.Parsers.Tests;
+namespace Janglim.FrontEnd.Parsers.Tests;
 
 /// <summary>
 /// Pins down WHICH twist actually removes the LGLR paper's conflict. The paper grammar

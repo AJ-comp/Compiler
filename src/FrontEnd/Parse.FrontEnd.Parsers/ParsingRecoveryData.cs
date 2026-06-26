@@ -1,4 +1,4 @@
-﻿namespace Parse.FrontEnd.Parsers
+﻿namespace Janglim.FrontEnd.Parsers
 {
     public class ParsingRecoveryData
     {

@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Parse.FrontEnd.Parsers.Properties {
+namespace Janglim.FrontEnd.Parsers.Properties {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace Parse.FrontEnd.Parsers.Properties {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Parse.FrontEnd.Parsers.Properties.Resource", typeof(Resource).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Janglim.FrontEnd.Parsers.Properties.Resource", typeof(Resource).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

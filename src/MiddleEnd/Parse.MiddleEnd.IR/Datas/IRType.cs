@@ -1,6 +1,6 @@
-﻿using Parse.Extensions;
+﻿using Janglim.Extensions;
 using Parse.MiddleEnd.IR.LLVM;
-using Parse.Types;
+using Janglim.Types;
 using System;
 using System.Collections.Generic;
 using System.Text;

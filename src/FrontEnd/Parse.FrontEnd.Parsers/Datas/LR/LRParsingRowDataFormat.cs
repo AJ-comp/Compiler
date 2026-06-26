@@ -1,9 +1,9 @@
-﻿using Parse.FrontEnd.Parsers.Collections;
-using Parse.FrontEnd.RegularGrammar;
+﻿using Janglim.FrontEnd.Parsers.Collections;
+using Janglim.FrontEnd.RegularGrammar;
 using System.Collections.Generic;
 using System.ComponentModel;
 
-namespace Parse.FrontEnd.Parsers.Datas.LR
+namespace Janglim.FrontEnd.Parsers.Datas.LR
 {
     public class LRParsingRowDataFormat : ParsingRowDataFormat<CanonicalState, Symbol, ActionDataList>
     {

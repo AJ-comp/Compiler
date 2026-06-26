@@ -1,7 +1,7 @@
 ﻿using GalaSoft.MvvmLight.Command;
 using System.Windows.Controls;
 
-namespace Parse.WpfControls.Converters
+namespace Janglim.WpfControls.Converters
 {
     public class SingleSelectionChangedEventArgsConverter : IEventArgsConverter
     {

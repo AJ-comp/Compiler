@@ -1,6 +1,6 @@
-﻿using Parse.FrontEnd.Grammars;
+﻿using Janglim.FrontEnd.Grammars;
 
-namespace Parse.FrontEnd.ErrorHandler.GrammarPrivate
+namespace Janglim.FrontEnd.ErrorHandler.GrammarPrivate
 {
     public abstract class GrammarPrivateLLErrorHandler : GrammarPrivateErrorHandler
     {

@@ -2,7 +2,7 @@
 using Parse.FrontEnd.AJ.Properties;
 using Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes;
 using Parse.FrontEnd.AJ.Sdts.AstNodes.TypeNodes;
-using Parse.FrontEnd.Ast;
+using Janglim.FrontEnd.Ast;
 using Parse.MiddleEnd.IR.Datas;
 using Parse.MiddleEnd.IR.Expressions;
 using Parse.MiddleEnd.IR.Expressions.ExprExpressions;
@@ -62,7 +62,7 @@ namespace Parse.FrontEnd.AJ.Sdts.AstNodes.StatementNodes
 
         public override IRExpression To()
         {
-            var expr = (Expr == null) ? new IRReturnExpr(new IRExpr(new IRType(Parse.Types.StdType.Void, 0), GetDebuggingData()))
+            var expr = (Expr == null) ? new IRReturnExpr(new IRExpr(new IRType(Janglim.Types.StdType.Void, 0), GetDebuggingData()))
                                                  : new IRReturnExpr(Expr.To() as IRExpr);
 
             return new IRExprStatement(expr);

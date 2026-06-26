@@ -1,6 +1,6 @@
-﻿using Parse.Types.Operations;
+﻿using Janglim.Types.Operations;
 
-namespace Parse.Types
+namespace Janglim.Types
 {
     public interface IBit : IDataTypeSpec, ILogicalOperation, IBitwiseOperation
     {

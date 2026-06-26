@@ -1,6 +1,6 @@
-﻿using Parse.FrontEnd.Grammars;
+﻿using Janglim.FrontEnd.Grammars;
 using Parse.FrontEnd.AJ.Properties;
-using Parse.FrontEnd.RegularGrammar;
+using Janglim.FrontEnd.RegularGrammar;
 
 namespace Parse.FrontEnd.AJ
 {

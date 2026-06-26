@@ -1,5 +1,5 @@
 ﻿using Parse.MiddleEnd.IR.Datas;
-using Parse.Types;
+using Janglim.Types;
 
 namespace Parse.MiddleEnd.IR.Expressions.ExprExpressions
 {

@@ -1,12 +1,12 @@
-﻿using Parse.FrontEnd.RegularGrammar;
-using Parse.FrontEnd.Tokenize;
-using Parse.WpfControls.Models;
-using Parse.Extensions;
+﻿using Janglim.FrontEnd.RegularGrammar;
+using Janglim.FrontEnd.Tokenize;
+using Janglim.WpfControls.Models;
+using Janglim.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Windows;
 
-namespace Parse.WpfControls.Common
+namespace Janglim.WpfControls.Common
 {
     public class TokenizeTextBox : ExtensionTextBox
     {

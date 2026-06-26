@@ -4,8 +4,8 @@ using Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes;
 using Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes.Binary;
 using Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes.LiteralNodes;
 using Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes.Single;
-using Parse.FrontEnd.Ast;
-using Parse.Types;
+using Janglim.FrontEnd.Ast;
+using Janglim.Types;
 using System;
 
 namespace Parse.FrontEnd.AJ.Sdts.AstNodes.StatementNodes

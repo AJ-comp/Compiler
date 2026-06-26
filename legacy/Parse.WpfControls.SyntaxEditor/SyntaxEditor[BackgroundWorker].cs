@@ -1,11 +1,11 @@
-﻿using Parse.FrontEnd.Parsers.Datas;
-using Parse.FrontEnd.Support.EventArgs;
-using Parse.FrontEnd.Tokenize;
+﻿using Janglim.FrontEnd.Parsers.Datas;
+using Janglim.FrontEnd.Support.EventArgs;
+using Janglim.FrontEnd.Tokenize;
 using System.Threading;
 using System.Windows.Controls;
 using System.Windows.Threading;
 
-namespace Parse.WpfControls.SyntaxEditor
+namespace Janglim.WpfControls.SyntaxEditor
 {
     public partial class SyntaxEditor
     {

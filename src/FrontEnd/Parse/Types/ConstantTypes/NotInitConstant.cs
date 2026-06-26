@@ -1,9 +1,9 @@
 ﻿using AJ.Common.Helpers;
-using Parse.Extensions;
+using Janglim.Extensions;
 using System;
 using System.Diagnostics;
 
-namespace Parse.Types.ConstantTypes
+namespace Janglim.Types.ConstantTypes
 {
     [DebuggerDisplay("{DebuggerDisplay, nq}")]
     public class NotInitConstant : IConstant

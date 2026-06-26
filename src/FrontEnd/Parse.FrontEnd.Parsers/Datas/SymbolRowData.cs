@@ -1,4 +1,4 @@
-﻿namespace Parse.FrontEnd.Parsers.Datas
+﻿namespace Janglim.FrontEnd.Parsers.Datas
 {
     public class SymbolRowData
     {

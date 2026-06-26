@@ -1,4 +1,4 @@
-﻿namespace Parse.FrontEnd
+﻿namespace Janglim.FrontEnd
 {
     public class ISemantic
     {

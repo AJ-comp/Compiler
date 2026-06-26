@@ -1,8 +1,8 @@
-using Parse.FrontEnd.RegularGrammar;
+using Janglim.FrontEnd.RegularGrammar;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Parse.FrontEnd
+namespace Janglim.FrontEnd
 {
     /// <summary>
     /// Grammar normalization: rewrites a fully-defined grammar into an equivalent, cleaner one

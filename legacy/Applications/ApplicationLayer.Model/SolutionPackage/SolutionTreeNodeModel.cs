@@ -1,7 +1,7 @@
 ﻿using ApplicationLayer.Common;
 using ApplicationLayer.Common.Interfaces;
 using Parse.BackEnd.Target;
-using Parse.FrontEnd.Grammars;
+using Janglim.FrontEnd.Grammars;
 using System;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;

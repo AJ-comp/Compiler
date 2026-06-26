@@ -1,11 +1,11 @@
 using System.Linq;
-using Parse.FrontEnd.Grammars.ExampleGrammars;
-using Parse.FrontEnd.Parsers.Datas;
-using Parse.FrontEnd.Parsers.LR;
-using Parse.FrontEnd.Tokenize;
+using Janglim.FrontEnd.Grammars.ExampleGrammars;
+using Janglim.FrontEnd.Parsers.Datas;
+using Janglim.FrontEnd.Parsers.LR;
+using Janglim.FrontEnd.Tokenize;
 using Xunit;
 
-namespace Parse.FrontEnd.Parsers.Tests;
+namespace Janglim.FrontEnd.Parsers.Tests;
 
 /// <summary>
 /// ParsingResult.Trace is the flat, strongly-typed view of the parse (the data-oriented counterpart of

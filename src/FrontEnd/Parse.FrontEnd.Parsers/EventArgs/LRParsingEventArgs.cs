@@ -1,7 +1,7 @@
-﻿using Parse.FrontEnd.Parsers.Datas;
+﻿using Janglim.FrontEnd.Parsers.Datas;
 using System.Collections.Generic;
 
-namespace Parse.FrontEnd.Parsers.EventArgs
+namespace Janglim.FrontEnd.Parsers.EventArgs
 {
     public class LRParsingEventArgs : System.EventArgs
     {

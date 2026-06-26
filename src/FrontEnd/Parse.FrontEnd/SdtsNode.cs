@@ -1,12 +1,12 @@
 ﻿using AJ.Common;
-using Parse.Extensions;
-using Parse.FrontEnd.Ast;
+using Janglim.Extensions;
+using Janglim.FrontEnd.Ast;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 
-namespace Parse.FrontEnd
+namespace Janglim.FrontEnd
 {
     public abstract class SdtsNode : IData, IHasParent, ITree<SdtsNode>
     {

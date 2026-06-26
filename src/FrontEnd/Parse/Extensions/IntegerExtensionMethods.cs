@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Parse.Extensions
+namespace Janglim.Extensions
 {
     public static class IntegerExtensionMethods
     {

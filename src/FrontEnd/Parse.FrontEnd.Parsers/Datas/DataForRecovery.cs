@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics;
 
-namespace Parse.FrontEnd.Parsers.Datas
+namespace Janglim.FrontEnd.Parsers.Datas
 {
     [DebuggerDisplay("{" + nameof(GetDebuggerDisplay) + "(),nq}")]
     public class DataForRecovery

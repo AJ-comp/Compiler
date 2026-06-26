@@ -1,11 +1,11 @@
 using System.Collections.Generic;
-using Parse.FrontEnd.Grammars.Ebnf;
-using Parse.FrontEnd.Parsers.LR;
-using Parse.FrontEnd.Tokenize;
+using Janglim.FrontEnd.Grammars.Ebnf;
+using Janglim.FrontEnd.Parsers.LR;
+using Janglim.FrontEnd.Tokenize;
 using Xunit;
-using static Parse.FrontEnd.Grammars.Ebnf.EbnfSym;
+using static Janglim.FrontEnd.Grammars.Ebnf.EbnfSym;
 
-namespace Parse.FrontEnd.Parsers.Tests;
+namespace Janglim.FrontEnd.Parsers.Tests;
 
 /// <summary>
 /// Validates that a grammar built DYNAMICALLY (from an EbnfModel, not from C# fields) actually drives

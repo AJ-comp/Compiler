@@ -1,7 +1,7 @@
-﻿using Parse.FrontEnd.RegularGrammar;
+﻿using Janglim.FrontEnd.RegularGrammar;
 using System;
 
-namespace Parse.FrontEnd
+namespace Janglim.FrontEnd
 {
     public class AutoGenerator
     {

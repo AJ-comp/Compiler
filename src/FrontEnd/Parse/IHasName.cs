@@ -1,7 +1,7 @@
-﻿using Parse.Types;
+﻿using Janglim.Types;
 using System.Collections.Generic;
 
-namespace Parse
+namespace Janglim
 {
     public interface IHasName
     {

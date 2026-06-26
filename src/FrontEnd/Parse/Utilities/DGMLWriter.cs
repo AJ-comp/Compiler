@@ -2,7 +2,7 @@
 using System.Xml;
 using System.Xml.Serialization;
 
-namespace Parse.Utilities
+namespace Janglim.Utilities
 {
     public class DGMLWriter
     {

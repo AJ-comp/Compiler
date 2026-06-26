@@ -3,7 +3,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Interactivity;
 
-namespace Parse.WpfControls.Behaviors
+namespace Janglim.WpfControls.Behaviors
 {
     /// <summary>
     /// This class defines behavior pattern related to scrolling including zoom feature.

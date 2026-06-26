@@ -1,10 +1,10 @@
-using Parse.FrontEnd;                       // TokenData
-using Parse.FrontEnd.Parsers.Collections;   // ParsingLogger
-using Parse.FrontEnd.ParseTree;             // ParseTreeSymbol
+using Janglim.FrontEnd;                       // TokenData
+using Janglim.FrontEnd.Parsers.Collections;   // ParsingLogger
+using Janglim.FrontEnd.ParseTree;             // ParseTreeSymbol
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Parse.FrontEnd.Parsers.Datas
+namespace Janglim.FrontEnd.Parsers.Datas
 {
     /// <summary>
     /// One frame of the LR parse stack: a <see cref="State"/> with the <see cref="Symbol"/> sitting

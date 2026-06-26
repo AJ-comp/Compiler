@@ -5,7 +5,7 @@
 > FIRST 가 *"무엇으로 *시작* 하나"* 였다면, FOLLOW 는 *"무엇이 그 *다음에* 오나"* 예요.\
 > 이 페이지에선 **정의** 와 **정의대로 직접 유도** 까지 봐요. 이어서 → **계산 규칙** → **구현**.
 
-> 📍 **사는 곳** · 엔진 `FirstFollowAnalyzer` · 모듈 `Parse.FrontEnd` — **Layer 2** (파싱 테이블보다
+> 📍 **사는 곳** · 엔진 `FirstFollowAnalyzer` · 모듈 `Janglim.FrontEnd` — **Layer 2** (파싱 테이블보다
 > *아래* 단인 밑단)
 
 계속 쓰는 예제 문법이에요.\

@@ -1,6 +1,6 @@
 ﻿using Parse.FrontEnd.AJ.Data;
 using Parse.FrontEnd.AJ.Sdts.AstNodes.StatementNodes;
-using Parse.FrontEnd.Ast;
+using Janglim.FrontEnd.Ast;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;

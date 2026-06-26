@@ -1,8 +1,8 @@
-﻿using Parse.FrontEnd.ParseTree;
-using Parse.FrontEnd.RegularGrammar;
+﻿using Janglim.FrontEnd.ParseTree;
+using Janglim.FrontEnd.RegularGrammar;
 using System.Collections.Generic;
 
-namespace Parse.FrontEnd.Ast
+namespace Janglim.FrontEnd.Ast
 {
     public abstract class AstSymbol : IShowable
     {

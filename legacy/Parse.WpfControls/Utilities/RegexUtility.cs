@@ -1,6 +1,6 @@
 ﻿using System.Text.RegularExpressions;
 
-namespace Parse.WpfControls.Utilities
+namespace Janglim.WpfControls.Utilities
 {
     static class RegexUtility
     {

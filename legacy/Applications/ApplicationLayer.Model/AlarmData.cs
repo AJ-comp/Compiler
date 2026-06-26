@@ -1,4 +1,4 @@
-﻿using Parse.FrontEnd;
+﻿using Janglim.FrontEnd;
 using System.Collections.Generic;
 
 namespace ApplicationLayer.Models

@@ -1,6 +1,6 @@
-﻿using Parse.FrontEnd.RegularGrammar;
+﻿using Janglim.FrontEnd.RegularGrammar;
 
-namespace Parse.FrontEnd.Parsers.EventArgs
+namespace Janglim.FrontEnd.Parsers.EventArgs
 {
     public enum ErrorPosition { OnNormalToken, OnEndMarker }
 

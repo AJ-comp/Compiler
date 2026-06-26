@@ -1,9 +1,9 @@
-﻿using Parse.FrontEnd.RegularGrammar;
-using Parse.FrontEnd.Support.Drawing;
-using Parse.FrontEnd.Tokenize;
-using Parse.WpfControls.Common;
-using Parse.WpfControls.EventArgs;
-using Parse.WpfControls.Models;
+﻿using Janglim.FrontEnd.RegularGrammar;
+using Janglim.FrontEnd.Support.Drawing;
+using Janglim.FrontEnd.Tokenize;
+using Janglim.WpfControls.Common;
+using Janglim.WpfControls.EventArgs;
+using Janglim.WpfControls.Models;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
@@ -13,7 +13,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 
-namespace Parse.WpfControls
+namespace Janglim.WpfControls
 {
     public class HighlightTextBox : TokenizeTextBox
     {

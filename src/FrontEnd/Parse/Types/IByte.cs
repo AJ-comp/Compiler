@@ -1,4 +1,4 @@
-﻿namespace Parse.Types
+﻿namespace Janglim.Types
 {
     public interface IByte : IIntegerKind
     {

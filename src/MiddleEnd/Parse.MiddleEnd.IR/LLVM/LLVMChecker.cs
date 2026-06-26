@@ -1,5 +1,5 @@
 ﻿using Parse.MiddleEnd.IR.Datas;
-using Parse.Types;
+using Janglim.Types;
 using System;
 
 namespace Parse.MiddleEnd.IR.LLVM

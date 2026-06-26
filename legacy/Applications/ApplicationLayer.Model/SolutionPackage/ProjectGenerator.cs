@@ -1,6 +1,6 @@
 ﻿using ApplicationLayer.Models.GrammarPackages.MiniCPackage;
 using Parse.BackEnd.Target;
-using Parse.FrontEnd.Grammars;
+using Janglim.FrontEnd.Grammars;
 using Parse.FrontEnd.AJ;
 
 namespace ApplicationLayer.Models.SolutionPackage

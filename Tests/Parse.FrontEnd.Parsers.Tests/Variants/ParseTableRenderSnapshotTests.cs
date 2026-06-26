@@ -1,10 +1,10 @@
 using System.Text.RegularExpressions;
-using Parse.FrontEnd.Grammars.ExampleGrammars;
-using Parse.FrontEnd.Parsers.LR;
-using Parse.FrontEnd.Parsers.Tests.Infra;
+using Janglim.FrontEnd.Grammars.ExampleGrammars;
+using Janglim.FrontEnd.Parsers.LR;
+using Janglim.FrontEnd.Parsers.Tests.Infra;
 using Xunit;
 
-namespace Parse.FrontEnd.Parsers.Tests;
+namespace Janglim.FrontEnd.Parsers.Tests;
 
 /// <summary>
 /// Characterization snapshots of ParsingTable.ToTableFormat across several grammars, used as the

@@ -1,8 +1,8 @@
-﻿using Parse.FrontEnd.RegularGrammar;
+﻿using Janglim.FrontEnd.RegularGrammar;
 using System;
 using System.Collections.Generic;
 
-namespace Parse.FrontEnd.Parsers.Datas.LR
+namespace Janglim.FrontEnd.Parsers.Datas.LR
 {
     public class LRItem : ICloneable
     {

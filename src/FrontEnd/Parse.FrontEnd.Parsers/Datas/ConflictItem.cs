@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
 
-namespace Parse.FrontEnd.Parsers.Datas
+namespace Janglim.FrontEnd.Parsers.Datas
 {
     [DebuggerDisplay("{" + nameof(GetDebuggerDisplay) + "(),nq}")]
     public class ConflictItem

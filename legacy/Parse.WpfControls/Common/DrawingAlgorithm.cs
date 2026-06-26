@@ -1,7 +1,7 @@
 ﻿
 using System.Windows;
 
-namespace Parse.WpfControls
+namespace Janglim.WpfControls
 {
     public class DrawingAlgorithm
     {

@@ -1,12 +1,12 @@
 using System.Linq;
-using Parse.FrontEnd.Grammars.ExampleGrammars;
-using Parse.FrontEnd.Parsers.Collections;
-using Parse.FrontEnd.Parsers.Datas;
-using Parse.FrontEnd.Parsers.Datas.LR;
-using Parse.FrontEnd.Parsers.LR;
+using Janglim.FrontEnd.Grammars.ExampleGrammars;
+using Janglim.FrontEnd.Parsers.Collections;
+using Janglim.FrontEnd.Parsers.Datas;
+using Janglim.FrontEnd.Parsers.Datas.LR;
+using Janglim.FrontEnd.Parsers.LR;
 using Xunit;
 
-namespace Parse.FrontEnd.Parsers.Tests;
+namespace Janglim.FrontEnd.Parsers.Tests;
 
 /// <summary>
 /// The additive typed projection <see cref="ActionData.Action"/> must faithfully mirror the legacy

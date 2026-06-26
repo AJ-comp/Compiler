@@ -1,5 +1,5 @@
-﻿using Parse.FrontEnd.Support.EventArgs;
-using Parse.WpfControls.SyntaxEditor;
+﻿using Janglim.FrontEnd.Support.EventArgs;
+using Janglim.WpfControls.SyntaxEditor;
 using System.Windows;
 using System.Windows.Input;
 

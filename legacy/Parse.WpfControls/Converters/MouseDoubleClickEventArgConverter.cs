@@ -1,7 +1,7 @@
 ﻿using GalaSoft.MvvmLight.Command;
 using System.Windows.Input;
 
-namespace Parse.WpfControls.Converters
+namespace Janglim.WpfControls.Converters
 {
     public class MouseDoubleClickEventArgConverter : IEventArgsConverter
     {

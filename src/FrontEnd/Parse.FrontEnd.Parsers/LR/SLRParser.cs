@@ -1,8 +1,8 @@
-﻿using Parse.FrontEnd.Grammars;
-using Parse.FrontEnd.Parsers.Collections;
-using Parse.FrontEnd.Parsers.Datas.LR;
+﻿using Janglim.FrontEnd.Grammars;
+using Janglim.FrontEnd.Parsers.Collections;
+using Janglim.FrontEnd.Parsers.Datas.LR;
 
-namespace Parse.FrontEnd.Parsers.LR
+namespace Janglim.FrontEnd.Parsers.LR
 {
     public class SLRParser : LRParser
     {

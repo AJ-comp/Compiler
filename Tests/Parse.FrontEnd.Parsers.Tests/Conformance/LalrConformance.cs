@@ -1,8 +1,8 @@
-using Parse.FrontEnd.Grammars;
-using Parse.FrontEnd.Parsers.LR;
+using Janglim.FrontEnd.Grammars;
+using Janglim.FrontEnd.Parsers.LR;
 using Xunit;
 
-namespace Parse.FrontEnd.Parsers.Tests;
+namespace Janglim.FrontEnd.Parsers.Tests;
 
 /// <summary>
 /// Runs the whole <see cref="LRParserConformance"/> suite against LALR — the engine's

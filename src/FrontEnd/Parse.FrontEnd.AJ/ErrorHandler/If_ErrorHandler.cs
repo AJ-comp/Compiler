@@ -1,7 +1,7 @@
-﻿using Parse.FrontEnd.Grammars;
-using Parse.FrontEnd.Parsers;
-using Parse.FrontEnd.Parsers.Datas;
-using Parse.FrontEnd.RegularGrammar;
+﻿using Janglim.FrontEnd.Grammars;
+using Janglim.FrontEnd.Parsers;
+using Janglim.FrontEnd.Parsers.Datas;
+using Janglim.FrontEnd.RegularGrammar;
 using System.Collections.Generic;
 
 namespace Parse.FrontEnd.AJ.ErrorHandler

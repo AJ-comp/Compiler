@@ -2,10 +2,10 @@
 using Parse.FrontEnd.AJ.Properties;
 using Parse.FrontEnd.AJ.Sdts.AstNodes.StatementNodes;
 using Parse.FrontEnd.AJ.Sdts.Datas;
-using Parse.FrontEnd.Ast;
+using Janglim.FrontEnd.Ast;
 using Parse.MiddleEnd.IR.Datas;
 using Parse.MiddleEnd.IR.Expressions;
-using Parse.Types;
+using Janglim.Types;
 using System.Collections.Generic;
 using System.Linq;
 

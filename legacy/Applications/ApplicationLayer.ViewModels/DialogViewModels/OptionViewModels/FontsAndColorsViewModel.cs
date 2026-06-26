@@ -1,10 +1,10 @@
 ﻿using ApplicationLayer.Common.Utilities;
 using ApplicationLayer.Models;
 using GalaSoft.MvvmLight.Command;
-using Parse;
-using Parse.FrontEnd.Grammars;
+using Janglim;
+using Janglim.FrontEnd.Grammars;
 using Parse.FrontEnd.AJ;
-using Parse.FrontEnd.Support.Drawing;
+using Janglim.FrontEnd.Support.Drawing;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;

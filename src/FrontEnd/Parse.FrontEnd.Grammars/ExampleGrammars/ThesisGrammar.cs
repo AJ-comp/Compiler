@@ -1,10 +1,10 @@
-﻿using Parse.FrontEnd.Grammars.Properties;
-using Parse.FrontEnd.RegularGrammar;
+﻿using Janglim.FrontEnd.Grammars.Properties;
+using Janglim.FrontEnd.RegularGrammar;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Parse.FrontEnd.Grammars.ExampleGrammars
+namespace Janglim.FrontEnd.Grammars.ExampleGrammars
 {
     public class ThesisGrammar : Grammar
     {

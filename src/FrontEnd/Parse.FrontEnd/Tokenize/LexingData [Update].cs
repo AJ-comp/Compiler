@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace Parse.FrontEnd.Tokenize
+namespace Janglim.FrontEnd.Tokenize
 {
     public partial class LexingData
     {

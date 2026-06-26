@@ -1,11 +1,11 @@
-﻿using Parse.FrontEnd.Support.Properties;
-using Parse.Utilities;
+﻿using Janglim.FrontEnd.Support.Properties;
+using Janglim.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 
-namespace Parse.FrontEnd.Support.Drawing
+namespace Janglim.FrontEnd.Support.Drawing
 {
     public class HighlightMapHelper : Singleton<HighlightMapHelper>
     {

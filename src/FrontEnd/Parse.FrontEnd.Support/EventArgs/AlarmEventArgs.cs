@@ -1,7 +1,7 @@
-﻿using Parse.FrontEnd;
+﻿using Janglim.FrontEnd;
 using System.Diagnostics;
 
-namespace Parse.FrontEnd.Support.EventArgs
+namespace Janglim.FrontEnd.Support.EventArgs
 {
     public enum AlarmStatus { None, ParsingError, ParsingWarning }
 

@@ -1,9 +1,9 @@
-﻿using Parse.FrontEnd.Support.Drawing;
-using Parse.WpfControls.Utilities;
+﻿using Janglim.FrontEnd.Support.Drawing;
+using Janglim.WpfControls.Utilities;
 using System.Windows;
 using System.Windows.Media;
 
-namespace Parse.WpfControls.SyntaxEditor
+namespace Janglim.WpfControls.SyntaxEditor
 {
     public partial class SyntaxEditor
     {

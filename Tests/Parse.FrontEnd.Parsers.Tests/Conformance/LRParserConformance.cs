@@ -1,13 +1,13 @@
 using System.Linq;
-using Parse.FrontEnd.Grammars;
-using Parse.FrontEnd.Grammars.ExampleGrammars;
-using Parse.FrontEnd.Parsers.Datas;
-using Parse.FrontEnd.Parsers.LR;
-using Parse.FrontEnd.Tokenize;
+using Janglim.FrontEnd.Grammars;
+using Janglim.FrontEnd.Grammars.ExampleGrammars;
+using Janglim.FrontEnd.Parsers.Datas;
+using Janglim.FrontEnd.Parsers.LR;
+using Janglim.FrontEnd.Tokenize;
 using Xunit;
-using static Parse.FrontEnd.Parsers.Datas.LR.LRParsingRowDataFormat;
+using static Janglim.FrontEnd.Parsers.Datas.LR.LRParsingRowDataFormat;
 
-namespace Parse.FrontEnd.Parsers.Tests;
+namespace Janglim.FrontEnd.Parsers.Tests;
 
 /// <summary>
 /// CONFORMANCE: behavior that EVERY LR parser variant must satisfy identically — parse the

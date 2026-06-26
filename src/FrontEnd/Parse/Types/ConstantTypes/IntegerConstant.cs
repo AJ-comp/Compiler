@@ -1,6 +1,6 @@
-﻿using Parse.Types.Operations;
+﻿using Janglim.Types.Operations;
 
-namespace Parse.Types.ConstantTypes
+namespace Janglim.Types.ConstantTypes
 {
     public abstract class IntegerConstant : Constant, IIntegerKind
     {

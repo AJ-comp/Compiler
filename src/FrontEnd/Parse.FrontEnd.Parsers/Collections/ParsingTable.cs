@@ -1,9 +1,9 @@
-﻿using Parse.FrontEnd.Parsers.Datas;
-using Parse.FrontEnd.RegularGrammar;
+﻿using Janglim.FrontEnd.Parsers.Datas;
+using Janglim.FrontEnd.RegularGrammar;
 using System.Collections.Generic;
 using System.Data;
 
-namespace Parse.FrontEnd.Parsers.Collections
+namespace Janglim.FrontEnd.Parsers.Collections
 {
     public interface IParsingTable
     {

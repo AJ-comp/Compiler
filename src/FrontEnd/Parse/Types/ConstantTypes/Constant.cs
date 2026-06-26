@@ -1,7 +1,7 @@
-﻿using Parse.Types.Operations;
+﻿using Janglim.Types.Operations;
 using System;
 
-namespace Parse.Types.ConstantTypes
+namespace Janglim.Types.ConstantTypes
 {
     public abstract class Constant : IConstant
     {

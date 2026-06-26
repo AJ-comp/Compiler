@@ -1,7 +1,7 @@
-﻿using Parse.Extensions;
+﻿using Janglim.Extensions;
 using System.Linq;
 
-namespace Parse.FrontEnd.Tokenize
+namespace Janglim.FrontEnd.Tokenize
 {
     public partial class Lexer
     {

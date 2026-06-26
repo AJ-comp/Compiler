@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Parse.Algorithms
+namespace Janglim.Algorithms
 {
     /// <summary>
     /// 

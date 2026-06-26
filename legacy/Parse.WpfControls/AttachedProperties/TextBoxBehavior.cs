@@ -2,7 +2,7 @@
 using System.Windows.Controls;
 using System.Windows.Input;
 
-namespace Parse.WpfControls.AttachedProperties
+namespace Janglim.WpfControls.AttachedProperties
 {
     public class TextBoxBehavior : DependencyObject
     {

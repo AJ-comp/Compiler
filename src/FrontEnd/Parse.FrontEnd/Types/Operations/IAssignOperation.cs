@@ -1,7 +1,7 @@
-﻿using Parse.Types.ConstantTypes;
-using Parse.Types.VarTypes;
+﻿using Janglim.Types.ConstantTypes;
+using Janglim.Types.VarTypes;
 
-namespace Parse.FrontEnd.Types.Operations
+namespace Janglim.FrontEnd.Types.Operations
 {
     public interface IAssignOperation : IOperation
     {

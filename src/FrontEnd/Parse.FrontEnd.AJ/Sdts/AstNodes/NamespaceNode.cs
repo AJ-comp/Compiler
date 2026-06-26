@@ -1,7 +1,7 @@
-﻿using Parse.Extensions;
+﻿using Janglim.Extensions;
 using Parse.FrontEnd.AJ.Data;
 using Parse.FrontEnd.AJ.Sdts.AstNodes.TypeNodes;
-using Parse.FrontEnd.Ast;
+using Janglim.FrontEnd.Ast;
 using System;
 using System.Collections.Generic;
 using System.Text;

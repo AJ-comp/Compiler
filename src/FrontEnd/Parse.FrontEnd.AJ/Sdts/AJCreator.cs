@@ -8,7 +8,7 @@ using Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes.Single;
 using Parse.FrontEnd.AJ.Sdts.AstNodes.StatementNodes;
 using Parse.FrontEnd.AJ.Sdts.AstNodes.TypeNodes;
 using Parse.FrontEnd.AJ.Sdts.Datas;
-using Parse.FrontEnd.Ast;
+using Janglim.FrontEnd.Ast;
 using System;
 using System.Collections.Generic;
 

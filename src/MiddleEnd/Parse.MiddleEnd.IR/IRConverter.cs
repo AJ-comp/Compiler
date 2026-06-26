@@ -1,4 +1,4 @@
-﻿using Parse.Types;
+﻿using Janglim.Types;
 
 namespace Parse.MiddleEnd.IR
 {

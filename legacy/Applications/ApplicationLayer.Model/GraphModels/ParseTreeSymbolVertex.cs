@@ -1,4 +1,4 @@
-﻿using Parse.FrontEnd.ParseTree;
+﻿using Janglim.FrontEnd.ParseTree;
 using System.Diagnostics;
 
 namespace ApplicationLayer.Models.GraphModels

@@ -1,6 +1,6 @@
-﻿using Parse.FrontEnd.ParseTree;
+﻿using Janglim.FrontEnd.ParseTree;
 
-namespace Parse.FrontEnd
+namespace Janglim.FrontEnd
 {
     public class ParseCreatedArgs
     {

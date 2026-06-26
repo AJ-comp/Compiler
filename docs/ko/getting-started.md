@@ -45,9 +45,9 @@ dotnet add package Janglim --prerelease
 설치했으면, 콘솔 프로젝트의 `Program.cs`에 아래를 그대로 붙여넣어 보세요.
 
 ```csharp
-using Parse.FrontEnd.Grammars.Ebnf;   // 문법을 텍스트로 읽는 리더
-using Parse.FrontEnd.Parsers.LR;       // LALR 파서
-using Parse.FrontEnd.Tokenize;         // 렉서(토크나이저)
+using Janglim.FrontEnd.Grammars.Ebnf;   // 문법을 텍스트로 읽는 리더
+using Janglim.FrontEnd.Parsers.LR;       // LALR 파서
+using Janglim.FrontEnd.Tokenize;         // 렉서(토크나이저)
 
 // ① 문법을 EBNF 텍스트로 정의한다
 var read = EbnfGrammarReader.Read(@"

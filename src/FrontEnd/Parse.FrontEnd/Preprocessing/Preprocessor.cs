@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Parse.FrontEnd.Preprocessing
+namespace Janglim.FrontEnd.Preprocessing
 {
     public class Preprocessor
     {

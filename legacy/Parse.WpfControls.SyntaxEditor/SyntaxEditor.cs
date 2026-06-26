@@ -1,13 +1,13 @@
 ﻿using Compile.AJ;
 using Parse.FrontEnd.AJ;
-using Parse.FrontEnd.Parsers.Datas;
-using Parse.FrontEnd.Support.EventArgs;
+using Janglim.FrontEnd.Parsers.Datas;
+using Janglim.FrontEnd.Support.EventArgs;
 using System;
 using System.Collections.Specialized;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace Parse.WpfControls.SyntaxEditor
+namespace Janglim.WpfControls.SyntaxEditor
 {
     [TemplatePart(Name = "TextArea", Type = typeof(HighlightTextBox))]
     public partial class SyntaxEditor : Editor

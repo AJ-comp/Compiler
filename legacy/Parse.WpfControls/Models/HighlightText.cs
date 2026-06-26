@@ -1,11 +1,11 @@
-﻿using Parse.WpfControls.Common;
+﻿using Janglim.WpfControls.Common;
 using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Windows;
 using System.Windows.Media;
 
-namespace Parse.WpfControls.Models
+namespace Janglim.WpfControls.Models
 {
     public class HighlightToken : FormattedText
     {

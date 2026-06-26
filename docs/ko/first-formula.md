@@ -6,7 +6,7 @@
 >
 > 부담 갖지 마세요 — 천천히 갈게요.
 
-> 📍 **사는 곳** · 엔진 `FirstFollowAnalyzer` · 모듈 `Parse.FrontEnd` — **Layer 2** (파싱 테이블보다
+> 📍 **사는 곳** · 엔진 `FirstFollowAnalyzer` · 모듈 `Janglim.FrontEnd` — **Layer 2** (파싱 테이블보다
 > *아래* 단인 밑단)
 
 계속 쓰는 예제 문법이에요.

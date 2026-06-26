@@ -1,5 +1,5 @@
 ﻿using AJ.Common.Helpers;
-using Parse.Extensions;
+using Janglim.Extensions;
 using Parse.FrontEnd.AJ.Data;
 using Parse.FrontEnd.AJ.Sdts.AstNodes.TypeNodes;
 using System.Collections.Generic;

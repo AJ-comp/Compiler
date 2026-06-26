@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Parse.WpfControls.Properties {
+namespace Janglim.WpfControls.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]

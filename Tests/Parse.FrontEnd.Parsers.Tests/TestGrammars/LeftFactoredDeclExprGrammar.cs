@@ -1,7 +1,7 @@
-using Parse.FrontEnd.Grammars;
-using Parse.FrontEnd.RegularGrammar;
+using Janglim.FrontEnd.Grammars;
+using Janglim.FrontEnd.RegularGrammar;
 
-namespace Parse.FrontEnd.Parsers.Tests;
+namespace Janglim.FrontEnd.Parsers.Tests;
 
 /// <summary>
 /// LEFT-FACTORED grammar proving that "Declaration vs Expression" — the conflict in the

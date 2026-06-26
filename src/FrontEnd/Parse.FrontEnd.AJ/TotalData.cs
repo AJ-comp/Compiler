@@ -1,6 +1,6 @@
 ﻿using Parse.FrontEnd.AJ.Sdts.AstNodes;
-using Parse.FrontEnd.Parsers.Datas;
-using Parse.FrontEnd.Tokenize;
+using Janglim.FrontEnd.Parsers.Datas;
+using Janglim.FrontEnd.Tokenize;
 
 namespace Parse.FrontEnd.AJ
 {

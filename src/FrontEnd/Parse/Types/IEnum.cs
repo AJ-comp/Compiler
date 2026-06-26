@@ -1,9 +1,9 @@
-﻿using Parse.Types.ConstantTypes;
+﻿using Janglim.Types.ConstantTypes;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Parse.Types
+namespace Janglim.Types
 {
     public interface IEnum : IDataTypeSpec
     {

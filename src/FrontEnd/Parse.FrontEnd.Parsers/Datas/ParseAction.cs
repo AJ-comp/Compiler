@@ -1,6 +1,6 @@
-using Parse.FrontEnd.RegularGrammar;
+using Janglim.FrontEnd.RegularGrammar;
 
-namespace Parse.FrontEnd.Parsers.Datas
+namespace Janglim.FrontEnd.Parsers.Datas
 {
     /// <summary>
     /// A strongly-typed view of one parse-table action, projected from <see cref="ActionData"/>'s

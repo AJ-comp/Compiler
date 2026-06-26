@@ -1,9 +1,9 @@
-﻿using Parse.Extensions;
-using Parse.FrontEnd.Ast;
-using Parse.FrontEnd.Parsers.Collections;
-using Parse.FrontEnd.Parsers.Properties;
-using Parse.FrontEnd.ParseTree;
-using Parse.FrontEnd.Tokenize;
+﻿using Janglim.Extensions;
+using Janglim.FrontEnd.Ast;
+using Janglim.FrontEnd.Parsers.Collections;
+using Janglim.FrontEnd.Parsers.Properties;
+using Janglim.FrontEnd.ParseTree;
+using Janglim.FrontEnd.Tokenize;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -11,7 +11,7 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Parse.FrontEnd.Parsers.Datas
+namespace Janglim.FrontEnd.Parsers.Datas
 {
     public enum Direction { Backward, Forward }
 

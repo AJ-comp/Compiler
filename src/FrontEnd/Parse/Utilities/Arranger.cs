@@ -1,4 +1,4 @@
-﻿namespace Parse.Utilities
+﻿namespace Janglim.Utilities
 {
     public class Arranger
     {

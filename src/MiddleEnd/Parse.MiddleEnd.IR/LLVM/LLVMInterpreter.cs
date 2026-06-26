@@ -1,9 +1,9 @@
-﻿using Parse.Extensions;
+﻿using Janglim.Extensions;
 using Parse.MiddleEnd.IR.Datas;
 using Parse.MiddleEnd.IR.Expressions;
 using Parse.MiddleEnd.IR.Expressions.ExprExpressions;
 using Parse.MiddleEnd.IR.Expressions.StmtExpressions;
-using Parse.Types;
+using Janglim.Types;
 using System;
 using System.Collections.Generic;
 

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Parse.Types.ConstantTypes
+namespace Janglim.Types.ConstantTypes
 {
     public class PointerConstant : Constant
     {

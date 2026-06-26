@@ -1,8 +1,8 @@
-﻿using Parse.Extensions;
+﻿using Janglim.Extensions;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
-namespace Parse.FrontEnd.RegularGrammar
+namespace Janglim.FrontEnd.RegularGrammar
 {
     public class TerminalSet : HashSet<Terminal>
     {

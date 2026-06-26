@@ -1,5 +1,5 @@
 ﻿using GalaSoft.MvvmLight.Messaging;
-using Parse.FrontEnd;
+using Janglim.FrontEnd;
 
 namespace ApplicationLayer.ViewModels.Messages
 {

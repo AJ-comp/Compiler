@@ -1,16 +1,16 @@
-﻿using Parse.FrontEnd.Parsers.Collections;
-using Parse.FrontEnd.Parsers.Properties;
-using Parse.FrontEnd.RegularGrammar;
-using Parse.FrontEnd.Tokenize;
+﻿using Janglim.FrontEnd.Parsers.Collections;
+using Janglim.FrontEnd.Parsers.Properties;
+using Janglim.FrontEnd.RegularGrammar;
+using Janglim.FrontEnd.Tokenize;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
-using static Parse.FrontEnd.Parsers.Datas.LR.LRParsingRowDataFormat;
+using static Janglim.FrontEnd.Parsers.Datas.LR.LRParsingRowDataFormat;
 
-namespace Parse.FrontEnd.Parsers.Datas
+namespace Janglim.FrontEnd.Parsers.Datas
 {
     /// <summary>
     /// 

@@ -1,4 +1,4 @@
-﻿namespace Parse.Types.Operations
+﻿namespace Janglim.Types.Operations
 {
     public interface IOperation
     {

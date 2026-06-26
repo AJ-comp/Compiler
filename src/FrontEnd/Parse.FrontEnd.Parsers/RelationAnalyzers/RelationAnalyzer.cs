@@ -1,7 +1,7 @@
-﻿using Parse.FrontEnd;
-using Parse.FrontEnd.Parsers;
-using Parse.FrontEnd.Parsers.Collections;
-using Parse.FrontEnd.RegularGrammar;
+﻿using Janglim.FrontEnd;
+using Janglim.FrontEnd.Parsers;
+using Janglim.FrontEnd.Parsers.Collections;
+using Janglim.FrontEnd.RegularGrammar;
 using System;
 using System.Collections.Generic;
 

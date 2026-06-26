@@ -5,7 +5,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 
-namespace Parse.FrontEnd.Tokenize
+namespace Janglim.FrontEnd.Tokenize
 {
     [DebuggerDisplay("{" + nameof(GetDebuggerDisplay) + "(),nq}")]
     public class TokenPos

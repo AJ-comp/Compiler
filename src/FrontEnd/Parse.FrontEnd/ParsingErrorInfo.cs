@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 
-namespace Parse.FrontEnd
+namespace Janglim.FrontEnd
 {
     [DebuggerDisplay("{DebuggerDisplay, nq}")]
     public class ParsingErrorInfo

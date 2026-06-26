@@ -2,7 +2,7 @@
 using System.Windows;
 using System.Windows.Interactivity;
 
-namespace Parse.WpfControls.Behaviors
+namespace Janglim.WpfControls.Behaviors
 {
     public class RedirectRoutedEventBehavior : Behavior<UIElement>
     {

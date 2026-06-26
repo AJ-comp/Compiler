@@ -1,10 +1,10 @@
-﻿using Parse.Extensions;
-using Parse.FrontEnd.Parsers.Collections;
-using Parse.FrontEnd.Parsers.Datas;
-using Parse.FrontEnd.ParseTree;
+﻿using Janglim.Extensions;
+using Janglim.FrontEnd.Parsers.Collections;
+using Janglim.FrontEnd.Parsers.Datas;
+using Janglim.FrontEnd.ParseTree;
 using System.Linq;
 
-namespace Parse.FrontEnd.Parsers.LR
+namespace Janglim.FrontEnd.Parsers.LR
 {
     public abstract partial class LRParser
     {

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Parse
+namespace Janglim
 {
     public class SelectionTokensContainer
     {

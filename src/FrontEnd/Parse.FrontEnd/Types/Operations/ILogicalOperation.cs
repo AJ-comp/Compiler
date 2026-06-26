@@ -1,6 +1,6 @@
-﻿using Parse.Types.ConstantTypes;
+﻿using Janglim.Types.ConstantTypes;
 
-namespace Parse.FrontEnd.Types.Operations
+namespace Janglim.FrontEnd.Types.Operations
 {
     public interface ILogicalOperation : IOperation
     {

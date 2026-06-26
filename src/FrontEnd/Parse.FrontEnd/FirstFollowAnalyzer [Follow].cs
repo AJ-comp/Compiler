@@ -1,7 +1,7 @@
-﻿using Parse.FrontEnd.RegularGrammar;
+﻿using Janglim.FrontEnd.RegularGrammar;
 using System.Collections.Generic;
 
-namespace Parse.FrontEnd
+namespace Janglim.FrontEnd
 {
     public partial class FirstFollowAnalyzer
     {

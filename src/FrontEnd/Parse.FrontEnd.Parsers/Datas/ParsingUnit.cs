@@ -1,10 +1,10 @@
-﻿using Parse.FrontEnd.Parsers.EventArgs;
-using Parse.FrontEnd.Parsers.Properties;
-using Parse.FrontEnd.RegularGrammar;
+﻿using Janglim.FrontEnd.Parsers.EventArgs;
+using Janglim.FrontEnd.Parsers.Properties;
+using Janglim.FrontEnd.RegularGrammar;
 using System.Collections.Generic;
 using System.Diagnostics;
 
-namespace Parse.FrontEnd.Parsers.Datas
+namespace Janglim.FrontEnd.Parsers.Datas
 {
     /// <summary>
     /// 

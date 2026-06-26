@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 
-namespace Parse.FrontEnd.Support.Drawing
+namespace Janglim.FrontEnd.Support.Drawing
 {
     [Flags]
     public enum DrawingOption { None = 0, Underline = 1, EndPointUnderline = 2, Selected = 4 }

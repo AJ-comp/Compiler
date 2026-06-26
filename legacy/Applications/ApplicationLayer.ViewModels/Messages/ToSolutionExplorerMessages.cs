@@ -1,7 +1,7 @@
 ﻿using ApplicationLayer.Models;
 using GalaSoft.MvvmLight.Messaging;
 using Parse.BackEnd.Target;
-using Parse.FrontEnd.Grammars;
+using Janglim.FrontEnd.Grammars;
 using System.IO;
 
 namespace ApplicationLayer.ViewModels.Messages

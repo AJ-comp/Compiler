@@ -1,10 +1,10 @@
-﻿using Parse.FrontEnd.RegularGrammar;
+﻿using Janglim.FrontEnd.RegularGrammar;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
 
-namespace Parse.FrontEnd.Parsers.Collections
+namespace Janglim.FrontEnd.Parsers.Collections
 {
     [DebuggerDisplay("{" + nameof(GetDebuggerDisplay) + "(),nq}")]
     public class CanonicalLine

@@ -1,4 +1,4 @@
-﻿using Parse.FrontEnd.Ast;
+﻿using Janglim.FrontEnd.Ast;
 
 namespace Parse.FrontEnd.AJ.Sdts.AstNodes
 {

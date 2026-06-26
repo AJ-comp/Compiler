@@ -1,9 +1,9 @@
-﻿using Parse.FrontEnd.Ast;
-using Parse.FrontEnd.RegularGrammar;
+﻿using Janglim.FrontEnd.Ast;
+using Janglim.FrontEnd.RegularGrammar;
 using System;
 using System.Collections.Generic;
 
-namespace Parse.FrontEnd.ParseTree
+namespace Janglim.FrontEnd.ParseTree
 {
     public abstract class ParseTreeSymbol : IShowable
     {

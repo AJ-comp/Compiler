@@ -1,10 +1,10 @@
-﻿using Parse.FrontEnd.Parsers.Datas.LR;
-using Parse.FrontEnd.RegularGrammar;
+﻿using Janglim.FrontEnd.Parsers.Datas.LR;
+using Janglim.FrontEnd.RegularGrammar;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Parse.FrontEnd.Parsers.Collections
+namespace Janglim.FrontEnd.Parsers.Collections
 {
     public class CanonicalState : HashSet<LRItem>
     {

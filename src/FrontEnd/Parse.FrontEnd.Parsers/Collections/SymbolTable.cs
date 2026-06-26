@@ -1,7 +1,7 @@
-﻿using Parse.FrontEnd.Parsers.Datas;
+﻿using Janglim.FrontEnd.Parsers.Datas;
 using System.Collections.Generic;
 
-namespace Parse.FrontEnd.Parsers.Collections
+namespace Janglim.FrontEnd.Parsers.Collections
 {
     public class SymbolTable : HashSet<SymbolRowData>
     {

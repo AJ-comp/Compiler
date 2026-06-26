@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Parse.FrontEnd.Support.EventArgs
+namespace Janglim.FrontEnd.Support.EventArgs
 {
     public class AlarmCollection : List<AlarmEventArgs>
     {

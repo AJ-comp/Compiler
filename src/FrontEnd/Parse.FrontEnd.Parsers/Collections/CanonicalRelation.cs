@@ -1,16 +1,16 @@
 ﻿using AJ.Common.Helpers;
-using Parse.FrontEnd.Parsers.Datas;
-using Parse.FrontEnd.Parsers.Datas.LR;
-using Parse.FrontEnd.RegularGrammar;
+using Janglim.FrontEnd.Parsers.Datas;
+using Janglim.FrontEnd.Parsers.Datas.LR;
+using Janglim.FrontEnd.RegularGrammar;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
-using static Parse.FrontEnd.Parsers.Datas.LR.LRParsingRowDataFormat;
+using static Janglim.FrontEnd.Parsers.Datas.LR.LRParsingRowDataFormat;
 
-namespace Parse.FrontEnd.Parsers.Collections
+namespace Janglim.FrontEnd.Parsers.Collections
 {
     public enum ReduceParameter
     {

@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Parse.FrontEnd.Grammars.Ebnf
+namespace Janglim.FrontEnd.Grammars.Ebnf
 {
     /// <summary>
     /// A parsed EBNF grammar, ready to be turned into a <see cref="EbnfGrammar"/>. Produced by the

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Parse.FrontEnd.Parsers.Collections
+namespace Janglim.FrontEnd.Parsers.Collections
 {
     public class SymbolTableStack : Stack<SymbolTable>
     {

@@ -2,7 +2,7 @@
 using ApplicationLayer.ViewModels.DocumentTypeViewModels;
 using ApplicationLayer.ViewModels.Messages;
 using GalaSoft.MvvmLight.Command;
-using Parse.FrontEnd.Support.EventArgs;
+using Janglim.FrontEnd.Support.EventArgs;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;

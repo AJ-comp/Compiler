@@ -1,10 +1,10 @@
-﻿using Parse.Extensions;
+﻿using Janglim.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Parse.FrontEnd
+namespace Janglim.FrontEnd
 {
     public interface IData
     {

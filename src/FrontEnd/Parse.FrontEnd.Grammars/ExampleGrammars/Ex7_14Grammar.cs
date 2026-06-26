@@ -1,7 +1,7 @@
-﻿using Parse.FrontEnd.Grammars.Properties;
-using Parse.FrontEnd.RegularGrammar;
+﻿using Janglim.FrontEnd.Grammars.Properties;
+using Janglim.FrontEnd.RegularGrammar;
 
-namespace Parse.FrontEnd.Grammars.ExampleGrammars
+namespace Janglim.FrontEnd.Grammars.ExampleGrammars
 {
     public class Ex7_14Grammar : Grammar
     {

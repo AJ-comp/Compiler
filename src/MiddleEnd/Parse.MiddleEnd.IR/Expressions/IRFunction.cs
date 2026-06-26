@@ -1,4 +1,4 @@
-﻿using Parse.Extensions;
+﻿using Janglim.Extensions;
 using Parse.MiddleEnd.IR.Datas;
 using Parse.MiddleEnd.IR.Expressions.StmtExpressions;
 using System;

@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Diagnostics;
 
-namespace Parse
+namespace Janglim
 {
     public enum UnknownState
     {

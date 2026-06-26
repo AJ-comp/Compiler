@@ -29,7 +29,7 @@ Looking at these two *concrete classes*, the author probably reasoned like this:
 That's how `Symbol` came to be **designed as an abstract class (`abstract`) from the very start**.\
 So `Symbol` can't be born on its own (`new Symbol()` is impossible) — it must be **made concrete** as either Terminal or NonTerminal.
 
-> 📍 **`Symbol`** · module `Parse.FrontEnd` (Layer 2) · `src/FrontEnd/Parse.FrontEnd/RegularGrammar/Symbol.cs`
+> 📍 **`Symbol`** · module `Janglim.FrontEnd` (Layer 2) · `src/FrontEnd/Janglim.FrontEnd/RegularGrammar/Symbol.cs`
 
 ```csharp
 public abstract class Symbol : IShowable, IQuantifiable, IConvertableEbnfString

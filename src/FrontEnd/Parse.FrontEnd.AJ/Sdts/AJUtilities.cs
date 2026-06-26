@@ -1,8 +1,8 @@
 ﻿using Parse.FrontEnd.AJ.Data;
 using Parse.FrontEnd.AJ.Sdts.AstNodes;
 using Parse.FrontEnd.AJ.Sdts.AstNodes.TypeNodes;
-using Parse.FrontEnd.RegularGrammar;
-using Parse.Types;
+using Janglim.FrontEnd.RegularGrammar;
+using Janglim.Types;
 using System;
 
 namespace Parse.FrontEnd.AJ.Sdts

@@ -61,7 +61,7 @@ the first time it shows up, so there's no need to worry about it in advance.)
 - 👉 **[Quick Start](getting-started.md)** — install it and run your first parse in 5 lines.
 - 🌿 **[Live playground](https://polite-island-0b2142200.7.azurestaticapps.net)** — right in the browser, no install needed.
 
-> **Note:** Janglim is still an **early preview (`0.1.0-preview`)**.\
+> **Note:** Janglim is still an **early preview (`0.2.0-preview`)**.\
 > The public API may change during `0.x`.
 
 ---

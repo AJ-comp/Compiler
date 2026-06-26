@@ -1,10 +1,10 @@
-using Parse;
-using Parse.FrontEnd.RegularGrammar;
+using Janglim;
+using Janglim.FrontEnd.RegularGrammar;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Parse.FrontEnd.Grammars.Ebnf
+namespace Janglim.FrontEnd.Grammars.Ebnf
 {
     /// <summary>
     /// A <see cref="Grammar"/> built dynamically from a parsed <see cref="EbnfModel"/> — i.e. from EBNF

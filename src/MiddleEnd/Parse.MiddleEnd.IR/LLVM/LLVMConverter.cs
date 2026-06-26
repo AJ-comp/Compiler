@@ -1,7 +1,7 @@
 ﻿using AJ.Common.Helpers;
-using Parse.Extensions;
+using Janglim.Extensions;
 using Parse.MiddleEnd.IR.Datas;
-using Parse.Types;
+using Janglim.Types;
 using System.Linq;
 
 namespace Parse.MiddleEnd.IR.LLVM

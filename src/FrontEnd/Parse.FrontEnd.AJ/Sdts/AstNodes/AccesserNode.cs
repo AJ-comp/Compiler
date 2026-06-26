@@ -1,5 +1,5 @@
 ﻿using Parse.FrontEnd.AJ.Data;
-using Parse.FrontEnd.Ast;
+using Janglim.FrontEnd.Ast;
 using Parse.MiddleEnd.IR.Expressions;
 
 namespace Parse.FrontEnd.AJ.Sdts.AstNodes

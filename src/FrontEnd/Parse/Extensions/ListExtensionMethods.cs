@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace Parse.Extensions
+namespace Janglim.Extensions
 {
     public enum PrintType { String, Type, Property, Function }
 

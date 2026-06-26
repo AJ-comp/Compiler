@@ -1,4 +1,4 @@
-﻿using Parse.Types.ConstantTypes;
+﻿using Janglim.Types.ConstantTypes;
 
 namespace Parse.FrontEnd.AJ.Sdts.Datas
 {

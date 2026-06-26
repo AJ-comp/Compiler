@@ -1,9 +1,9 @@
 using System.Linq;
-using Parse.FrontEnd.Grammars.ExampleGrammars;
-using Parse.FrontEnd.Parsers.Tests.Infra;
+using Janglim.FrontEnd.Grammars.ExampleGrammars;
+using Janglim.FrontEnd.Parsers.Tests.Infra;
 using Xunit;
 
-namespace Parse.FrontEnd.Parsers.Tests;
+namespace Janglim.FrontEnd.Parsers.Tests;
 
 /// <summary>
 /// COMMON (parser-independent): the grammar itself — what the C# EBNF DSL builds.

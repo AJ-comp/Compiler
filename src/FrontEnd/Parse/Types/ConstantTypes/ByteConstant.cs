@@ -1,4 +1,4 @@
-﻿namespace Parse.Types.ConstantTypes
+﻿namespace Janglim.Types.ConstantTypes
 {
     public class ByteConstant : IntegerConstant, IByte
     {

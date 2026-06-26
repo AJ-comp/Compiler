@@ -1,6 +1,6 @@
-﻿using Parse.Algorithms;
-using Parse.Extensions;
-using Parse.WpfControls.Models;
+﻿using Janglim.Algorithms;
+using Janglim.Extensions;
+using Janglim.WpfControls.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -11,7 +11,7 @@ using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using System.Windows.Media;
 
-namespace Parse.WpfControls
+namespace Janglim.WpfControls
 {
     /// <summary>
     /// XAML 파일에서 이 사용자 지정 컨트롤을 사용하려면 1a 또는 1b단계를 수행한 다음 2단계를 수행하십시오.
@@ -20,14 +20,14 @@ namespace Parse.WpfControls
     /// 이 XmlNamespace 특성을 사용할 마크업 파일의 루트 요소에 이 특성을 
     /// 추가합니다.
     ///
-    ///     xmlns:MyNamespace="clr-namespace:Parse.WpfControls"
+    ///     xmlns:MyNamespace="clr-namespace:Janglim.WpfControls"
     ///
     ///
     /// 1b단계) 다른 프로젝트에 있는 XAML 파일에서 이 사용자 지정 컨트롤 사용.
     /// 이 XmlNamespace 특성을 사용할 마크업 파일의 루트 요소에 이 특성을 
     /// 추가합니다.
     ///
-    ///     xmlns:MyNamespace="clr-namespace:Parse.WpfControls;assembly=Parse.WpfControls"
+    ///     xmlns:MyNamespace="clr-namespace:Janglim.WpfControls;assembly=Janglim.WpfControls"
     ///
     /// 또한 XAML 파일이 있는 프로젝트의 프로젝트 참조를 이 프로젝트에 추가하고
     /// 다시 빌드하여 컴파일 오류를 방지해야 합니다.

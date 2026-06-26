@@ -1,7 +1,7 @@
-﻿using Parse.Extensions;
+﻿using Janglim.Extensions;
 using System.Threading.Tasks;
 
-namespace Parse.FrontEnd.Tokenize
+namespace Janglim.FrontEnd.Tokenize
 {
     public partial class LexingData
     {

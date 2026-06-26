@@ -1,6 +1,6 @@
-﻿using Parse.FrontEnd;
+﻿using Janglim.FrontEnd;
 using Parse.FrontEnd.AJ.Data;
-using Parse.FrontEnd.Parsers.Datas;
+using Janglim.FrontEnd.Parsers.Datas;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;

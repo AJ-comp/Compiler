@@ -1,4 +1,4 @@
-﻿namespace Parse.FrontEnd.Grammars
+﻿namespace Janglim.FrontEnd.Grammars
 {
     interface IStorableToHashTable
     {

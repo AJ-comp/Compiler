@@ -1,11 +1,11 @@
-﻿using Parse.FrontEnd.RegularGrammar;
+﻿using Janglim.FrontEnd.RegularGrammar;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 
-namespace Parse.FrontEnd.Grammars
+namespace Janglim.FrontEnd.Grammars
 {
     public abstract class Grammar
     {

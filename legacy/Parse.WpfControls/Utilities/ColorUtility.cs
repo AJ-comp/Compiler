@@ -5,7 +5,7 @@ using SDColor = System.Drawing.Color;
 using SWMBrush = System.Windows.Media.Brush;
 using SWMColor = System.Windows.Media.Color;
 
-namespace Parse.WpfControls.Utilities
+namespace Janglim.WpfControls.Utilities
 {
     public static class ColorUtility
     {

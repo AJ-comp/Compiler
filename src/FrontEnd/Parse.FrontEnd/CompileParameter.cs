@@ -1,11 +1,11 @@
-﻿using Parse.Extensions;
-using Parse.FrontEnd.RegularGrammar;
+﻿using Janglim.Extensions;
+using Janglim.FrontEnd.RegularGrammar;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 
-namespace Parse.FrontEnd
+namespace Janglim.FrontEnd
 {
     public enum CompileOption
     {

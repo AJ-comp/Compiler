@@ -1,8 +1,8 @@
 ﻿using AJ.Common.Helpers;
-using Parse.FrontEnd.Properties;
-using Parse.Types;
+using Janglim.FrontEnd.Properties;
+using Janglim.Types;
 
-namespace Parse.FrontEnd.Types
+namespace Janglim.FrontEnd.Types
 {
     public class IntType : IntegerType
     {

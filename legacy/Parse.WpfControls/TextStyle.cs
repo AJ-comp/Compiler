@@ -1,6 +1,6 @@
 ﻿using System.Windows.Media;
 
-namespace Parse.WpfControls
+namespace Janglim.WpfControls
 {
     public class TextStyle
     {

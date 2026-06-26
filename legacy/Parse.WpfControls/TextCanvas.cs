@@ -1,10 +1,10 @@
-﻿using Parse.WpfControls.Models;
+﻿using Janglim.WpfControls.Models;
 using System;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Media;
 
-namespace Parse.WpfControls
+namespace Janglim.WpfControls
 {
     //    [System.Windows.Markup.ContentProperty("Inlines")]
     public class TextCanvas : FrameworkElement

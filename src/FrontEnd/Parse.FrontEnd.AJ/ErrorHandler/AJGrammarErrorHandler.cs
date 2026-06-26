@@ -1,13 +1,13 @@
-﻿using Parse.FrontEnd.Parsers;
-using Parse.FrontEnd.Parsers.Collections;
-using Parse.FrontEnd.Parsers.Datas;
-using Parse.FrontEnd.Parsers.LR;
-using Parse.FrontEnd.Parsers.Properties;
-using Parse.FrontEnd.RegularGrammar;
-using Parse.FrontEnd.Tokenize;
+﻿using Janglim.FrontEnd.Parsers;
+using Janglim.FrontEnd.Parsers.Collections;
+using Janglim.FrontEnd.Parsers.Datas;
+using Janglim.FrontEnd.Parsers.LR;
+using Janglim.FrontEnd.Parsers.Properties;
+using Janglim.FrontEnd.RegularGrammar;
+using Janglim.FrontEnd.Tokenize;
 using System.Collections.Generic;
 using System.Linq;
-using static Parse.FrontEnd.Parsers.LR.LRParser;
+using static Janglim.FrontEnd.Parsers.LR.LRParser;
 
 namespace Parse.FrontEnd.AJ.ErrorHandler
 {

@@ -1,6 +1,6 @@
-﻿using Parse.FrontEnd.Grammars;
-using Parse.FrontEnd.Parsers;
-using Parse.FrontEnd.Parsers.Datas;
+﻿using Janglim.FrontEnd.Grammars;
+using Janglim.FrontEnd.Parsers;
+using Janglim.FrontEnd.Parsers.Datas;
 
 namespace Parse.FrontEnd.AJ.ErrorHandler
 {

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Parse
+namespace Janglim
 {
     public interface ICloneable<T> where T : class
     {

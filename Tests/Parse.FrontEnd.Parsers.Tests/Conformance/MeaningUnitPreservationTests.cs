@@ -1,8 +1,8 @@
 using System.Linq;
-using Parse.FrontEnd.Grammars.ExampleGrammars;
+using Janglim.FrontEnd.Grammars.ExampleGrammars;
 using Xunit;
 
-namespace Parse.FrontEnd.Parsers.Tests;
+namespace Janglim.FrontEnd.Parsers.Tests;
 
 /// <summary>
 /// MeaningUnit must survive the global flattening pass (the normalization that moved out of

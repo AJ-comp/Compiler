@@ -1,6 +1,6 @@
-﻿using Parse.FrontEnd.Ast;
+﻿using Janglim.FrontEnd.Ast;
 using Parse.FrontEnd.AJ.Properties;
-using Parse.Types;
+using Janglim.Types;
 
 namespace Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes.Single
 {

@@ -1,10 +1,10 @@
-﻿using Parse.FrontEnd.Parsers.Datas;
-using Parse.FrontEnd.Tokenize;
+﻿using Janglim.FrontEnd.Parsers.Datas;
+using Janglim.FrontEnd.Tokenize;
 using System;
 using System.Linq;
 using System.Windows.Controls;
 
-namespace Parse.WpfControls.SyntaxEditor
+namespace Janglim.WpfControls.SyntaxEditor
 {
     public partial class SyntaxEditor
     {

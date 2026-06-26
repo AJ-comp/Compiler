@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Parse.Algorithms
+namespace Janglim.Algorithms
 {
     public interface ISimilarityComparison
     {

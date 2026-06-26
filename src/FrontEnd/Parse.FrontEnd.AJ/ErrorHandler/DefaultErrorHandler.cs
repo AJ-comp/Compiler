@@ -1,10 +1,10 @@
-﻿using Parse.FrontEnd.ErrorHandler;
-using Parse.FrontEnd.Grammars;
-using Parse.FrontEnd.Parsers;
-using Parse.FrontEnd.Parsers.Collections;
-using Parse.FrontEnd.Parsers.Datas;
-using Parse.FrontEnd.Parsers.LR;
-using Parse.FrontEnd.RegularGrammar;
+﻿using Janglim.FrontEnd.ErrorHandler;
+using Janglim.FrontEnd.Grammars;
+using Janglim.FrontEnd.Parsers;
+using Janglim.FrontEnd.Parsers.Collections;
+using Janglim.FrontEnd.Parsers.Datas;
+using Janglim.FrontEnd.Parsers.LR;
+using Janglim.FrontEnd.RegularGrammar;
 using System.Collections.Generic;
 using System.Linq;
 

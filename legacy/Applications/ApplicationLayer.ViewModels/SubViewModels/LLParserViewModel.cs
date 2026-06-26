@@ -1,4 +1,4 @@
-﻿using Parse.FrontEnd.Parsers;
+﻿using Janglim.FrontEnd.Parsers;
 
 namespace ApplicationLayer.ViewModels.SubViewModels
 {

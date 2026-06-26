@@ -1,12 +1,12 @@
 ﻿using AJ.Common.Helpers;
-using Parse.FrontEnd.Properties;
-using Parse.FrontEnd.Types.Operations;
-using Parse.Types;
+using Janglim.FrontEnd.Properties;
+using Janglim.FrontEnd.Types.Operations;
+using Janglim.Types;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Parse.FrontEnd.Types
+namespace Janglim.FrontEnd.Types
 {
     public abstract class PLType
     {

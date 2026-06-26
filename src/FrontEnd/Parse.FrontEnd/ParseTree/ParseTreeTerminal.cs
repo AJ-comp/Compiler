@@ -1,8 +1,8 @@
-﻿using Parse.FrontEnd.Ast;
+﻿using Janglim.FrontEnd.Ast;
 using System;
 using System.Collections.Generic;
 
-namespace Parse.FrontEnd.ParseTree
+namespace Janglim.FrontEnd.ParseTree
 {
     public class ParseTreeTerminal : ParseTreeSymbol
     {

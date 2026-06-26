@@ -1,14 +1,14 @@
-﻿using Parse.FrontEnd.Ast;
-using Parse.FrontEnd.Grammars;
-using Parse.FrontEnd.Parsers.Collections;
-using Parse.FrontEnd.Parsers.Datas;
-using Parse.FrontEnd.ParseTree;
-using Parse.FrontEnd.RegularGrammar;
-using Parse.FrontEnd.Tokenize;
+﻿using Janglim.FrontEnd.Ast;
+using Janglim.FrontEnd.Grammars;
+using Janglim.FrontEnd.Parsers.Collections;
+using Janglim.FrontEnd.Parsers.Datas;
+using Janglim.FrontEnd.ParseTree;
+using Janglim.FrontEnd.RegularGrammar;
+using Janglim.FrontEnd.Tokenize;
 using System;
 using System.Collections.Generic;
 
-namespace Parse.FrontEnd.Parsers
+namespace Janglim.FrontEnd.Parsers
 {
     public abstract class Parser
     {

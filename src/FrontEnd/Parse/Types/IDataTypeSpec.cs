@@ -1,7 +1,7 @@
-﻿using Parse.Types.Operations;
+﻿using Janglim.Types.Operations;
 using System.ComponentModel;
 
-namespace Parse.Types
+namespace Janglim.Types
 {
     public enum StdType
     {

@@ -1,8 +1,8 @@
-﻿using Parse.FrontEnd.Parsers.Datas;
-using Parse.FrontEnd.Tokenize;
+﻿using Janglim.FrontEnd.Parsers.Datas;
+using Janglim.FrontEnd.Tokenize;
 using System.Diagnostics;
 
-namespace Parse.FrontEnd.Support.EventArgs
+namespace Janglim.FrontEnd.Support.EventArgs
 {
     [DebuggerDisplay("{DebuggerDisplay, nq}")]
     public class ParsingCompletedEventArgs

@@ -3,7 +3,7 @@ using System.Globalization;
 using System.Windows.Data;
 using System.Windows.Markup;
 
-namespace Parse.WpfControls.Converters
+namespace Janglim.WpfControls.Converters
 {
     public class LineHeightBasedFontSizeConverter : MarkupExtension, IValueConverter
     {

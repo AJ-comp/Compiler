@@ -2,7 +2,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 
-namespace Parse.FrontEnd.Parsers.Tests.Infra;
+namespace Janglim.FrontEnd.Parsers.Tests.Infra;
 
 /// <summary>
 /// Serializes a <see cref="DataTable"/> (the format the engine already uses for parsing

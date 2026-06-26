@@ -1,6 +1,6 @@
 ﻿using ApplicationLayer.ViewModels.DocumentTypeViewModels;
 using GalaSoft.MvvmLight.Messaging;
-using Parse.FrontEnd.Support.EventArgs;
+using Janglim.FrontEnd.Support.EventArgs;
 
 namespace ApplicationLayer.ViewModels.Messages
 {

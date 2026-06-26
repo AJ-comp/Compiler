@@ -1,16 +1,16 @@
-﻿using Parse.FrontEnd.Grammars;
-using Parse.FrontEnd.Parsers;
-using Parse.FrontEnd.Parsers.Datas;
-using Parse.FrontEnd.Parsers.LR;
-using Parse.FrontEnd.Parsers.Properties;
-using Parse.FrontEnd.RegularGrammar;
-using Parse.FrontEnd.Tokenize;
+﻿using Janglim.FrontEnd.Grammars;
+using Janglim.FrontEnd.Parsers;
+using Janglim.FrontEnd.Parsers.Datas;
+using Janglim.FrontEnd.Parsers.LR;
+using Janglim.FrontEnd.Parsers.Properties;
+using Janglim.FrontEnd.RegularGrammar;
+using Janglim.FrontEnd.Tokenize;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using static Parse.FrontEnd.Parsers.LR.LRParser;
+using static Janglim.FrontEnd.Parsers.LR.LRParser;
 
-namespace Parse.FrontEnd.ErrorHandler.GrammarPrivate
+namespace Janglim.FrontEnd.ErrorHandler.GrammarPrivate
 {
     public abstract class GrammarPrivateLRErrorHandler : GrammarPrivateErrorHandler
     {

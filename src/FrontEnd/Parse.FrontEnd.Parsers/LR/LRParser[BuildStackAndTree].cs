@@ -1,8 +1,8 @@
-﻿using Parse.FrontEnd.Parsers.Datas;
-using Parse.FrontEnd.RegularGrammar;
-using static Parse.FrontEnd.Parsers.Datas.LR.LRParsingRowDataFormat;
+﻿using Janglim.FrontEnd.Parsers.Datas;
+using Janglim.FrontEnd.RegularGrammar;
+using static Janglim.FrontEnd.Parsers.Datas.LR.LRParsingRowDataFormat;
 
-namespace Parse.FrontEnd.Parsers.LR
+namespace Janglim.FrontEnd.Parsers.LR
 {
     public abstract partial class LRParser
     {

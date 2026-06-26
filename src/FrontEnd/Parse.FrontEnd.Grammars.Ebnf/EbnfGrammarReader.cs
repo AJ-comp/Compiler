@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Parse.FrontEnd.Grammars.Ebnf
+namespace Janglim.FrontEnd.Grammars.Ebnf
 {
     /// <summary>The outcome of reading grammar text: a runnable grammar, or the errors that stopped it.</summary>
     public sealed class EbnfReadResult

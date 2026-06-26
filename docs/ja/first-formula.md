@@ -6,7 +6,7 @@
 >
 > 気負わないでください — ゆっくり進みます。
 
-> 📍 **在りか** · エンジン `FirstFollowAnalyzer` · モジュール `Parse.FrontEnd` — **Layer 2**(構文解析表より
+> 📍 **在りか** · エンジン `FirstFollowAnalyzer` · モジュール `Janglim.FrontEnd` — **Layer 2**(構文解析表より
 > *下* の段である下層)
 
 ずっと使っている例題文法です。

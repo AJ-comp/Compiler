@@ -1,4 +1,4 @@
-﻿using Parse.Extensions;
+﻿using Janglim.Extensions;
 using Parse.FrontEnd.AJ.Sdts.AstNodes;
 using Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes;
 using Parse.MiddleEnd.IR.Datas;

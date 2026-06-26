@@ -1,4 +1,4 @@
-﻿using Parse.WpfControls.Utilities;
+﻿using Janglim.WpfControls.Utilities;
 using System;
 using System.Globalization;
 using System.Windows.Data;

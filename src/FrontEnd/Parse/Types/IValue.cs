@@ -1,7 +1,7 @@
 ﻿using AJ.Common.Helpers;
-using Parse.Extensions;
+using Janglim.Extensions;
 
-namespace Parse.Types
+namespace Janglim.Types
 {
     public enum State { Fixed, Dynamic, NotInit, NotFixed, Error };
 

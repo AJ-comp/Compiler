@@ -1,4 +1,4 @@
-﻿namespace Parse
+﻿namespace Janglim
 {
     public class RegexGenerator
     {

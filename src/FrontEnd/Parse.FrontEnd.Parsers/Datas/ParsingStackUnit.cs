@@ -1,12 +1,12 @@
-﻿using Parse.Extensions;
-using Parse.FrontEnd.Ast;
-using Parse.FrontEnd.ParseTree;
-using Parse.FrontEnd.RegularGrammar;
+﻿using Janglim.Extensions;
+using Janglim.FrontEnd.Ast;
+using Janglim.FrontEnd.ParseTree;
+using Janglim.FrontEnd.RegularGrammar;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Parse.FrontEnd.Parsers.Datas
+namespace Janglim.FrontEnd.Parsers.Datas
 {
     public class ParsingStackUnit : ICloneable<ParsingStackUnit>
     {

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Reflection;
 
-namespace Parse.Utilities
+namespace Janglim.Utilities
 {
     public class Singleton<T> where T : class
     {

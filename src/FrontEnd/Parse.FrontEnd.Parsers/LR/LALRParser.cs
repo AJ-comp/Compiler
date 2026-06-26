@@ -1,11 +1,11 @@
-﻿using Parse.FrontEnd.Grammars;
-using Parse.FrontEnd.Parsers.Collections;
-using Parse.FrontEnd.Parsers.Datas.LR;
-using Parse.FrontEnd.RegularGrammar;
+﻿using Janglim.FrontEnd.Grammars;
+using Janglim.FrontEnd.Parsers.Collections;
+using Janglim.FrontEnd.Parsers.Datas.LR;
+using Janglim.FrontEnd.RegularGrammar;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Parse.FrontEnd.Parsers.LR
+namespace Janglim.FrontEnd.Parsers.LR
 {
     public class LALRParser : LRParser
     {

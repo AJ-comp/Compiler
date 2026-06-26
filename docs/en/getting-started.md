@@ -43,9 +43,9 @@ dotnet add package Janglim --prerelease
 Once you've installed it, paste the following as-is into your console project's `Program.cs`.
 
 ```csharp
-using Parse.FrontEnd.Grammars.Ebnf;   // the reader that reads a grammar from text
-using Parse.FrontEnd.Parsers.LR;       // the LALR parser
-using Parse.FrontEnd.Tokenize;         // the lexer (tokenizer)
+using Janglim.FrontEnd.Grammars.Ebnf;   // the reader that reads a grammar from text
+using Janglim.FrontEnd.Parsers.LR;       // the LALR parser
+using Janglim.FrontEnd.Tokenize;         // the lexer (tokenizer)
 
 // ① Define the grammar as EBNF text
 var read = EbnfGrammarReader.Read(@"

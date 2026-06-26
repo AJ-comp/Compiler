@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Parse.WpfControls.Utilities
+namespace Janglim.WpfControls.Utilities
 {
     public class StringUtility
     {

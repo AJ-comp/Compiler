@@ -1,12 +1,12 @@
 ﻿using Compile.AJ;
 using AJ.Common.Helpers;
-using Parse.FrontEnd;
+using Janglim.FrontEnd;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Xml.Serialization;
 using System.Threading.Tasks;
-using Parse.FrontEnd.Parsers.Datas;
+using Janglim.FrontEnd.Parsers.Datas;
 using System.Collections.Concurrent;
 using Compile;
 using System;

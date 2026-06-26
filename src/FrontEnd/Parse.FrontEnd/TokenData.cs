@@ -1,11 +1,11 @@
-﻿using Parse.Extensions;
-using Parse.FrontEnd.RegularGrammar;
-using Parse.FrontEnd.Tokenize;
+﻿using Janglim.Extensions;
+using Janglim.FrontEnd.RegularGrammar;
+using Janglim.FrontEnd.Tokenize;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Parse.FrontEnd
+namespace Janglim.FrontEnd
 {
     public class TokenData
     {

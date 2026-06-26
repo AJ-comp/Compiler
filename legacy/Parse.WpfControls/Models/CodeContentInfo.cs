@@ -4,7 +4,7 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Windows.Media.Imaging;
 
-namespace Parse.WpfControls.Models
+namespace Janglim.WpfControls.Models
 {
     public enum CompletionItemType { Field, Keyword, Property, Enum, Namespace, CodeSnipp, Function, Event, Delegate, Class, Struct, Interface };
 
@@ -30,14 +30,14 @@ namespace Parse.WpfControls.Models
 
         public CodeContentInfo(string imgName, string explain, CompletionItemType itemType)
         {
-            this.ImgSrc = "pack://application:,,,/Parse.WpfControls;component/Resources/" + imgName;
+            this.ImgSrc = "pack://application:,,,/Janglim.WpfControls;component/Resources/" + imgName;
             this.Explain = explain;
             this.ItemType = itemType;
         }
 
         public CodeContentInfo(string imgName, string explain, Enum itemType)
         {
-            this.ImgSrc = "pack://application:,,,/Parse.WpfControls;component/Resources/" + imgName;
+            this.ImgSrc = "pack://application:,,,/Janglim.WpfControls;component/Resources/" + imgName;
             this.Explain = explain;
             this.Type = itemType;
         }

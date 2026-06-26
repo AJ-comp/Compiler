@@ -1,12 +1,12 @@
-﻿using Parse.FrontEnd;
-using Parse.FrontEnd.Parsers.Datas;
-using Parse.FrontEnd.RegularGrammar;
-using Parse.FrontEnd.Support.Drawing;
+﻿using Janglim.FrontEnd;
+using Janglim.FrontEnd.Parsers.Datas;
+using Janglim.FrontEnd.RegularGrammar;
+using Janglim.FrontEnd.Support.Drawing;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Parse.WpfControls.SyntaxEditor
+namespace Janglim.WpfControls.SyntaxEditor
 {
     public partial class SyntaxEditor
     {

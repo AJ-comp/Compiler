@@ -1,11 +1,11 @@
-﻿using Parse.FrontEnd.Parsers.Datas;
-using Parse.WpfControls.Models;
+﻿using Janglim.FrontEnd.Parsers.Datas;
+using Janglim.WpfControls.Models;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 
-namespace Parse.WpfControls.SyntaxEditor
+namespace Janglim.WpfControls.SyntaxEditor
 {
     public partial class SyntaxEditor
     {

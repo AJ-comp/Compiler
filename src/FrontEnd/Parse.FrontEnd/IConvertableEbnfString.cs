@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Parse.FrontEnd
+namespace Janglim.FrontEnd
 {
     public interface IConvertableEbnfString
     {

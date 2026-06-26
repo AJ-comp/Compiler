@@ -1,5 +1,5 @@
 ﻿using ApplicationLayer.Common;
-using Parse.FrontEnd.Grammars;
+using Janglim.FrontEnd.Grammars;
 using Parse.FrontEnd.AJ;
 using System.ComponentModel;
 using System.Diagnostics;

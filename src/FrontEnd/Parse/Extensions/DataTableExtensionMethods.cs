@@ -5,7 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 
-namespace Parse.Extensions
+namespace Janglim.Extensions
 {
     public static class DataTableExtensionMethods
     {

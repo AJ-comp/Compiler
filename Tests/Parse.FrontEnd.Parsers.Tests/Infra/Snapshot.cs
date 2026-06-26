@@ -3,7 +3,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using Xunit;
 
-namespace Parse.FrontEnd.Parsers.Tests.Infra;
+namespace Janglim.FrontEnd.Parsers.Tests.Infra;
 
 /// <summary>
 /// Minimal golden-master (approval) helper. On the first run for a given name it

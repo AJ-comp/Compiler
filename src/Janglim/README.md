@@ -6,14 +6,14 @@ Define a grammar in C# — or in plain EBNF text — and get a full LR pipeline 
 look inside: parse tables, FIRST/FOLLOW, step-by-step parse traces, conflict reports,
 grammar normalization, incremental reparsing, and pluggable error recovery.
 
-> **Early preview (`0.1.0-preview`).** The public API is unstable and will change across `0.x`.
+> **Early preview (`0.2.0-preview`).** The public API is unstable and will change across `0.x`.
 
 ## Quick start
 
 ```csharp
-using Parse.FrontEnd.Grammars.Ebnf;
-using Parse.FrontEnd.Parsers.LR;
-using Parse.FrontEnd.Tokenize;
+using Janglim.FrontEnd.Grammars.Ebnf;
+using Janglim.FrontEnd.Parsers.LR;
+using Janglim.FrontEnd.Tokenize;
 
 var read = EbnfGrammarReader.Read(@"
     Expr   : Expr '+' Term | Term ;

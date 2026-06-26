@@ -1,7 +1,7 @@
-﻿using Parse.Types.ConstantTypes;
+﻿using Janglim.Types.ConstantTypes;
 using System;
 
-namespace Parse.FrontEnd.Types.Operations
+namespace Janglim.FrontEnd.Types.Operations
 {
     public interface IEqualOperation : IOperation
     {

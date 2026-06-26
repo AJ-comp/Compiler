@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Parse
+namespace Janglim
 {
     public class IndexList : List<int>
     {

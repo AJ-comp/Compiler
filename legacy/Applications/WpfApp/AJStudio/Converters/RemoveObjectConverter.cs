@@ -1,5 +1,5 @@
 ﻿using ApplicationLayer.Views.Converters;
-using Parse.FrontEnd.Support.EventArgs;
+using Janglim.FrontEnd.Support.EventArgs;
 
 namespace ApplicationLayer.WpfApp.Converters
 {

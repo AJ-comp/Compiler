@@ -1,7 +1,7 @@
-using Parse.FrontEnd.Grammars;
-using Parse.FrontEnd.RegularGrammar;
+using Janglim.FrontEnd.Grammars;
+using Janglim.FrontEnd.RegularGrammar;
 
-namespace Parse.FrontEnd.Parsers.Tests;
+namespace Janglim.FrontEnd.Parsers.Tests;
 
 /// <summary>
 /// Left- and right-recursive (and ambiguous) test grammar: S -> S '+' S | a.

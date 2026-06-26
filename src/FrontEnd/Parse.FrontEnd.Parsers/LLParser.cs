@@ -1,15 +1,15 @@
-﻿using Parse.Extensions;
-using Parse.FrontEnd.Ast;
-using Parse.FrontEnd.Grammars;
-using Parse.FrontEnd.Parsers.Collections;
-using Parse.FrontEnd.Parsers.Datas;
-using Parse.FrontEnd.RegularGrammar;
-using Parse.FrontEnd.Tokenize;
+﻿using Janglim.Extensions;
+using Janglim.FrontEnd.Ast;
+using Janglim.FrontEnd.Grammars;
+using Janglim.FrontEnd.Parsers.Collections;
+using Janglim.FrontEnd.Parsers.Datas;
+using Janglim.FrontEnd.RegularGrammar;
+using Janglim.FrontEnd.Tokenize;
 using ParsingLibrary.Parsers.RelationAnalyzers;
 using System;
 using System.Collections.Generic;
 
-namespace Parse.FrontEnd.Parsers
+namespace Janglim.FrontEnd.Parsers
 {
     public class LLParser : Parser
     {

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Parse.Types.ConstantTypes
+namespace Janglim.Types.ConstantTypes
 {
     public class UnknownConstant : IConstant
     {

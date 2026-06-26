@@ -1,8 +1,8 @@
-using Parse.FrontEnd.Parsers;
-using Parse.FrontEnd.Parsers.Datas;
-using Parse.FrontEnd.Parsers.LR;
+using Janglim.FrontEnd.Parsers;
+using Janglim.FrontEnd.Parsers.Datas;
+using Janglim.FrontEnd.Parsers.LR;
 
-namespace Parse.FrontEnd.Parsers.Tests;
+namespace Janglim.FrontEnd.Parsers.Tests;
 
 /// <summary>
 /// Minimal, GRAMMAR-AGNOSTIC backtracking error handler — the generic core of the LGLR

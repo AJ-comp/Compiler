@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Parse.FrontEnd.Parsers
+namespace Janglim.FrontEnd.Parsers
 {
     public class ParsingException : Exception
     {

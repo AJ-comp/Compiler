@@ -1,6 +1,6 @@
-﻿using Parse.FrontEnd.RegularGrammar;
+﻿using Janglim.FrontEnd.RegularGrammar;
 
-namespace Parse.FrontEnd.Parsers
+namespace Janglim.FrontEnd.Parsers
 {
     public class AmbiguityDeleter
     {

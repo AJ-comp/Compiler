@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace Parse.WpfControls.EventArgs
+namespace Janglim.WpfControls.EventArgs
 {
     public class EditorRenderedEventArgs : RoutedEventArgs
     {

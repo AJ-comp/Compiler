@@ -1,6 +1,6 @@
-using Parse.FrontEnd.RegularGrammar;
+using Janglim.FrontEnd.RegularGrammar;
 
-namespace Parse.FrontEnd.Parsers.Datas
+namespace Janglim.FrontEnd.Parsers.Datas
 {
     /// <summary>
     /// One cell of the parse table, flattened: at parser state <see cref="State"/>, on grammar symbol

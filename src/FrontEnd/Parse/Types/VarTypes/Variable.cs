@@ -1,9 +1,9 @@
 ﻿using AJ.Common.Helpers;
-using Parse.Extensions;
-using Parse.Types.ConstantTypes;
+using Janglim.Extensions;
+using Janglim.Types.ConstantTypes;
 using System.Diagnostics;
 
-namespace Parse.Types.VarTypes
+namespace Janglim.Types.VarTypes
 {
     [DebuggerDisplay("{DebuggerDisplay, nq}")]
     public abstract class Variable : IVariable

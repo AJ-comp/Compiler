@@ -2,7 +2,7 @@
 using System;
 using System.Windows.Markup;
 
-namespace Parse.WpfControls.Converters
+namespace Janglim.WpfControls.Converters
 {
     public abstract class EventArgConverterExtension<T> : MarkupExtension, IEventArgsConverter where T : class, new()
     {

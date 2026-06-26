@@ -1,5 +1,5 @@
 ﻿using Parse.FrontEnd.AJ;
-using Parse.FrontEnd.Grammars;
+using Janglim.FrontEnd.Grammars;
 using System.IO;
 
 namespace ApplicationLayer.Common

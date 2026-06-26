@@ -1,6 +1,6 @@
-﻿using Parse.FrontEnd.RegularGrammar;
+﻿using Janglim.FrontEnd.RegularGrammar;
 
-namespace Parse.FrontEnd.Grammars.PracticeGrammars
+namespace Janglim.FrontEnd.Grammars.PracticeGrammars
 {
     public class LRTest1Grammar : Grammar
     {

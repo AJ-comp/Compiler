@@ -1,5 +1,5 @@
-﻿using Parse.Types;
-using Parse.Types.ConstantTypes;
+﻿using Janglim.Types;
+using Janglim.Types.ConstantTypes;
 using System;
 using System.Collections.Generic;
 using System.Text;

@@ -1,5 +1,5 @@
-﻿using Parse.FrontEnd;
-using Parse.FrontEnd.Ast;
+﻿using Janglim.FrontEnd;
+using Janglim.FrontEnd.Ast;
 
 namespace ApplicationLayer.Models.GraphModels
 {

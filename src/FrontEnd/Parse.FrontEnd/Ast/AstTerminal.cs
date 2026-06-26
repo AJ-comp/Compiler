@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Parse.FrontEnd.Ast
+namespace Janglim.FrontEnd.Ast
 {
     public class AstTerminal : AstSymbol
     {

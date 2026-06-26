@@ -1,10 +1,10 @@
-﻿using Parse.WpfControls.EventArgs;
+﻿using Janglim.WpfControls.EventArgs;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace Parse.WpfControls.Common
+namespace Janglim.WpfControls.Common
 {
     /// <summary>
     /// This class extens a feature of TextBox control.

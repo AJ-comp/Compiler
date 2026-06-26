@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Parse.WpfControls.Models
+namespace Janglim.WpfControls.Models
 {
     public class CompletionItem
     {

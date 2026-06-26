@@ -7,7 +7,7 @@ LR pipeline you can look inside: parse tables, FIRST/FOLLOW, step-by-step parse 
 reports, automatic grammar normalization, optional LGLR backtracking, incremental reparsing, and
 pluggable error recovery.
 
-> **Status — early preview (`0.1.0-preview`).** The public API is still unstable and will change
+> **Status — early preview (`0.2.0-preview`).** The public API is still unstable and will change
 > across `0.x`. Available on NuGet as **`Janglim`** (preview): `dotnet add package Janglim --prerelease`.
 
 ---
@@ -68,12 +68,12 @@ The repository also ships the **AJ language** — a small C#-like systems langua
 ## Quick start
 
 ```csharp
-using Parse;                          // TokenType
-using Parse.FrontEnd;                 // MeaningUnit
-using Parse.FrontEnd.Grammars;        // Grammar
-using Parse.FrontEnd.RegularGrammar;  // Terminal, NonTerminal
-using Parse.FrontEnd.Parsers.LR;      // LALRParser
-using Parse.FrontEnd.Tokenize;        // Lexer
+using Janglim;                          // TokenType
+using Janglim.FrontEnd;                 // MeaningUnit
+using Janglim.FrontEnd.Grammars;        // Grammar
+using Janglim.FrontEnd.RegularGrammar;  // Terminal, NonTerminal
+using Janglim.FrontEnd.Parsers.LR;      // LALRParser
+using Janglim.FrontEnd.Tokenize;        // Lexer
 
 // 1. Define a grammar
 var grammar = new ExprGrammar();
@@ -99,10 +99,10 @@ A grammar is a class that derives from `Grammar`. You declare **terminals** and 
 fields, then wire up the productions in the constructor.
 
 ```csharp
-using Parse;
-using Parse.FrontEnd;
-using Parse.FrontEnd.Grammars;
-using Parse.FrontEnd.RegularGrammar;
+using Janglim;
+using Janglim.FrontEnd;
+using Janglim.FrontEnd.Grammars;
+using Janglim.FrontEnd.RegularGrammar;
 
 // E -> E + T | T
 // T -> T * F | F
@@ -377,7 +377,7 @@ code, the problem/diagnostics view, and the LLVM-IR / assembly walkthrough.
 src/
   Common/     shared utilities (AJ.Common)
   FrontEnd/   the parsing engine — the publishable "Janglim":
-                Parse, Parse.FrontEnd, .Grammars, .Parsers, .ErrorHandler, .Support
+                Parse, Janglim.FrontEnd, .Grammars, .Parsers, .ErrorHandler, .Support
               example front ends built on the engine:
                 Parse.FrontEnd.AJ (the AJ language), Parse.FrontEnd.Grammars.MiniC (a MiniC sample)
   MiddleEnd/  IR  (Parse.MiddleEnd.IR)
@@ -385,7 +385,7 @@ src/
   Compile/    the AJ compiler driver
   Cli/        command-line tools (ajbuild, ajutil, …)
   Janglim/    NuGet packaging project (bundles the engine assemblies)
-Tests/        xUnit suite for the engine  (Parse.FrontEnd.Parsers.Tests)
+Tests/        xUnit suite for the engine  (Janglim.FrontEnd.Parsers.Tests)
 legacy/       deprecated IDE / WPF projects, kept for history
 ```
 

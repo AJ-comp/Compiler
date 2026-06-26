@@ -1,7 +1,7 @@
 ﻿using Parse.FrontEnd.AJ.Data;
-using Parse.FrontEnd.Ast;
-using Parse.Types;
-using Parse.Types.ConstantTypes;
+using Janglim.FrontEnd.Ast;
+using Janglim.Types;
+using Janglim.Types.ConstantTypes;
 using System.Linq;
 
 namespace Parse.FrontEnd.AJ.Sdts.AstNodes.ExprNodes.LiteralNodes
