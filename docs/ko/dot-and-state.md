@@ -16,9 +16,9 @@
 
 아주 단순한 방법이 있어요 — **규칙 한가운데에 점(`•`) 을 하나 찍는** 거예요.
 
-```
-   Expr → Expr • '+' Term
-```
+<pre class="lrbox">
+   <span class="nt">Expr</span> → <span class="nt">Expr</span> • <span class="setm">'+'</span> <span class="nt">Term</span>
+</pre>
 
 점 **앞** 은 *이미 읽은 것*, 점 **뒤** 는 *아직 읽을 것* 이에요.\
 위 점은 *"Expr 까지 읽었고, 다음은 '+'"* 를 뜻하죠.
@@ -28,12 +28,12 @@
 
 점은 토큰을 하나 읽을 때마다 **한 칸씩 오른쪽** 으로 가요.
 
-```
-   Expr → • Expr '+' Term      (아직 아무것도 안 읽음)
-   Expr → Expr • '+' Term      (Expr 까지 읽음)
-   Expr → Expr '+' • Term      ('+' 까지 읽음)
-   Expr → Expr '+' Term •      (다 읽음 — 이제 한 덩어리로 묶을 차례!)
-```
+<pre class="lrbox">
+   <span class="nt">Expr</span> → • <span class="nt">Expr</span> <span class="setm">'+'</span> <span class="nt">Term</span>      (아직 아무것도 안 읽음)
+   <span class="nt">Expr</span> → <span class="nt">Expr</span> • <span class="setm">'+'</span> <span class="nt">Term</span>      (Expr 까지 읽음)
+   <span class="nt">Expr</span> → <span class="nt">Expr</span> <span class="setm">'+'</span> • <span class="nt">Term</span>      ('+' 까지 읽음)
+   <span class="nt">Expr</span> → <span class="nt">Expr</span> <span class="setm">'+'</span> <span class="nt">Term</span> •      (다 읽음 — 이제 한 덩어리로 묶을 차례!)
+</pre>
 
 점이 **맨 끝** 에 닿으면, 그 규칙을 *다 읽은* 거예요.\
 이때가 바로 **묶을(reduce) 차례** 고요. ([FIRST / FOLLOW](first-follow.md)에서 *"끝나면 묶는다"* 던 그
@@ -51,10 +51,10 @@
 - *"이 `Term` 하나로 한 덩어리 끝"* 일 수도 있고 → `Expr → Term •`
 - *"뒤에 `* 무언가` 가 더 붙는다"* 일 수도 있어요 → `Term → Term • '*' Factor`
 
-```
-   Expr → Term •                 ← 여기서 끝일 수도
-   Term → Term • '*' Factor      ← '*' 가 더 붙을 수도
-```
+<pre class="lrbox">
+   <span class="nt">Expr</span> → <span class="nt">Term</span> •                 ← 여기서 끝일 수도
+   <span class="nt">Term</span> → <span class="nt">Term</span> • <span class="setm">'*'</span> <span class="nt">Factor</span>      ← '*' 가 더 붙을 수도
+</pre>
 
 이렇게 *"지금 가능한 아이템들"* 을 한 묶음으로 모은 게 — 파서의 **상태(state)** 예요.
 

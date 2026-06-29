@@ -1,157 +1,149 @@
-# FIRST · Definition and derivation
+# FIRST · Definition & Derivation
 
-> 🎓 This is the **advanced track · theory**. It helps to first grab the *concept* over in
-> [the basic track's FIRST/FOLLOW](first-follow.md) and then come back. On this page we'll look at
-> **what FIRST is exactly (the definition)**, and at **the process of deriving it directly, following
-> that very definition**. Continuing on → **[Computation rules](first-rules.md)** → **[Implementation](first-impl.md)**.
+> 🎓 This is the **Advanced track · Theory**. It's good to grab the *concept* first from the [Basics-track FIRST/FOLLOW](first-follow.md)
+> and then come here. On this page we'll look at **exactly what FIRST is (the definition)** and the **process of
+> deriving it by hand, straight from that definition.**
 >
-> Don't feel any pressure — we'll go slowly.
+> Don't let it weigh on you — we'll go slowly.
 
-> 📍 **Where it lives** · engine `FirstFollowAnalyzer` · module `Janglim.FrontEnd` — **Layer 2** (the
-> tier *below* the parse table)
+> 📍 **Where it lives** · engine `FirstFollowAnalyzer` · module `Janglim.FrontEnd` — **Layer 2** (the lower layer,
+> *below* the parse table)
 
-Here's the example grammar we keep using.
+The example grammar we keep using.
 
-```
-Expr   : Expr '+' Term | Term ;
-Term   : Term '*' Factor | Factor ;
-Factor : '(' Expr ')' | id ;
-```
+<pre class="lrbox">
+<span class="nt">Expr</span>   : <span class="nt">Expr</span> <span class="setm">'+'</span> <span class="nt">Term</span> | <span class="nt">Term</span> ;
+<span class="nt">Term</span>   : <span class="nt">Term</span> <span class="setm">'*'</span> <span class="nt">Factor</span> | <span class="nt">Factor</span> ;
+<span class="nt">Factor</span> : <span class="setm">'('</span> <span class="nt">Expr</span> <span class="setm">')'</span> | <span class="setm">id</span> ;
+</pre>
 
 The answer we worked out by hand in the basics was `FIRST(Expr) = FIRST(Term) = FIRST(Factor) = { '(', id }`.\
-But before that — let's clearly pin down, step by step, **what FIRST is *exactly*** first.\
-(If we skip this, the computation rules later just become an incantation you memorize.)
+But before that — let's pin down clearly **what FIRST *exactly* is** first.\
+(Skip this, and the computation rules that follow become a spell you just memorize.)
 
 ---
 
-## Definition — what FIRST is
+## Definition — What FIRST is
 
 Let me nail it down in one line first.
 
-> **FIRST(X)** = the set that gathers up every **leading terminal** of all the terminal strings that the
-> symbol `X` **can derive (produce)**.
+> **FIRST(X)** = the set of **terminals that can appear first when you derive** the symbol `X`.
 
-There are two key words — **derivation** and **leading terminal**.\
-Let's look at each.
+There are two key words — **derive** and **the terminal that appears first** (the terminal that comes at the *very front*).\
+Let's look at them one at a time.
 
-### "derivation" — unfolding by the rules
+### "derivation" — expanding via the rules
 
-A single step of **swapping** a nonterminal for the right-hand side of its production is called a *derivation*,
-and we write it with the arrow `⇒`.
+We call one step of **substituting** a nonterminal with the right-hand side of its production a *derivation*, and write it with the arrow `⇒`.
 
-Let me unfold `Expr` one step at a time.
+Let me expand `Expr` one step at a time.
 
-```
-   Expr  ⇒  Term  ⇒  Factor  ⇒  id
+<pre class="lrbox">
+   <span class="nt">Expr</span>  ⇒  <span class="nt">Term</span>  ⇒  <span class="nt">Factor</span>  ⇒  <span class="setm">id</span>
         (Expr:Term)  (Term:Factor)  (Factor:id)
-```
+</pre>
 
-We applied the rules three times and finally arrived at a string `id` **made only of terminals**.\
-We write this unfolding over *several steps* as `⇒*` → `Expr ⇒* id` ("Expr derives id").
+By applying rules three times, we finally reached a string made of **terminals only**, `id`.\
+Expanding like this in *several steps* is written `⇒*` → `Expr ⇒* id` ("Expr derives id").
 
 ### So FIRST is
 
-It's the collection of every **leading terminal** of the terminal strings you get by unfolding `X` *every which
-way* all the way to the end.
+Expanding `X` *every which way* all the way down, and gathering up **all the terminals that can appear first** (= the terminal that comes at the very front).
 
-Looking directly at `Expr`:
+Seeing it directly with `Expr`:
 
-```
-   Expr ⇒* id …             →  leading is id   ⇒   id ∈ FIRST(Expr)
-   Expr ⇒* ( Expr ) …       →  leading is (    ⇒   ( ∈ FIRST(Expr)
-```
+<pre class="lrbox">
+   <span class="nt">Expr</span> ⇒* <span class="setm">id</span> …             →  front is <span class="setm">id</span>   ⇒   <span class="setm">id</span> ∈ FIRST(<span class="nt">Expr</span>)
+   <span class="nt">Expr</span> ⇒* <span class="setm">(</span> <span class="nt">Expr</span> <span class="setm">)</span> …       →  front is <span class="setm">(</span>    ⇒   <span class="setm">(</span> ∈ FIRST(<span class="nt">Expr</span>)
+</pre>
 
-`Expr` can build infinitely many strings (`id`, `id + id`, `( id ) * id`, …), but the **terminals that can come
-at the very front** are, in the end, just two — `id` or `(`. So:
+`Expr` can make countless strings (`id`, `id + id`, `( id ) * id`, …), but the **terminals that can come at the
+front** end up being just two, `id` or `(`. So:
 
-```
-   FIRST(Expr) = { '(', id }
-```
+<pre class="lrbox">
+   FIRST(<span class="nt">Expr</span>) = { <span class="setm">'('</span>, <span class="setm">id</span> }
+</pre>
 
-Written more rigorously in symbols (`T` = the set of terminals):
+Written more firmly in symbols, it's this (`T` = the set of terminals):
 
-```
-   FIRST(X) = { a ∈ T | X ⇒* a … (derives a string starting with a) }
-```
+<pre class="lrbox">
+   FIRST(<span class="nt">X</span>) = { <span class="setm">a</span> ∈ T | <span class="nt">X</span> ⇒* <span class="setm">a</span> … (derives a string starting with <span class="setm">a</span>) }
+</pre>
 
-> 📎 **Just one more thing about ε (the empty string).** If `X` can even derive *nothing at all*
-> (`X ⇒* ε`), **we put ε into FIRST(X) too.** It's a mark meaning "X may disappear entirely." (Our
+> 📎 **Just one more thing about ε (the empty string).** If `X` can derive even *nothing at all*
+> (`X ⇒* ε`), **we put ε into FIRST(X) too.** It's the mark for "X can disappear entirely." (Our
 > example has no such nonterminal, so ε doesn't show up — but it's definitely part of the definition.)
 
-To sum up — whether it's a terminal, a nonterminal, or a *sequence of several symbols*, FIRST is **"the set of
-leading terminals (plus ε if needed) of the strings you get by derivation."**\
+To sum up — whether it's a terminal, a nonterminal, or a *sequence of several symbols*, FIRST is **"the set of terminals (plus ε if needed) that can appear first when you derive it."**\
 That's the whole definition.
 
 ---
 
-## By the definition — deriving it directly
+## Straight from the definition — deriving it by hand
 
-Now let's compute FIRST by *applying that definition directly*.\
-"Derive and gather the leading terminals," by hand.\
+Now let's work out "deriving and gathering the front terminals" by *applying that definition directly*, by hand.\
 Starting with the easy one, `Factor`.
 
-### Factor — it unfolds all the way without getting stuck
+### Factor — expands all the way without a hitch
 
-Let's derive `Factor`'s two **productions** (one per line, split by `|` — `A → α`, in detail [Single](deep-single.md)) all
-the way out.
+Let's derive `Factor`'s two **productions** (one per line, split by `|` — of the form `A → α`, where `α` is the *sequence of symbols on the right-hand side*. Details in [Single](deep-single.md)) all the way down.
 
-```
-   Factor ⇒ id              →  leading terminal :  id
-   Factor ⇒ ( Expr )        →  leading terminal :  (
-```
+<pre class="lrbox">
+   <span class="nt">Factor</span> ⇒ <span class="setm">id</span>              →  front terminal :  <span class="setm">id</span>
+   <span class="nt">Factor</span> ⇒ <span class="setm">(</span> <span class="nt">Expr</span> <span class="setm">)</span>        →  front terminal :  <span class="setm">(</span>
+</pre>
 
-The front of the strings `Factor` produces is `id` or `(` — just those two.\
-Gathering them up exactly as the definition says:
+The front of the strings `Factor` produces is either `id` or `(` — just those two.\
+Gathering them up straight from the definition:
 
-```
-   FIRST(Factor) = { id, '(' }
-```
+<pre class="lrbox">
+   FIRST(<span class="nt">Factor</span>) = { <span class="setm">id</span>, <span class="setm">'('</span> }
+</pre>
 
 Easy, right?\
-Inside `Factor` it never mentions itself, so the derivation ends cleanly.
+Inside `Factor`, it doesn't show up by itself, so the derivation ends cleanly.
 
-### Term — when you unfold it, itself shows up again
+### Term — as you expand, itself shows up again
 
 `Term : Term '*' Factor | Factor`.\
-Let's derive the two productions.
+Let me derive the two productions.
 
-```
-   ① Term ⇒ Factor ⇒ … ⇒ id or (            →  leading :  id, (
-   ② Term ⇒ Term '*' Factor                  →  the front is Term again?!
-```
+<pre class="lrbox">
+   ① <span class="nt">Term</span> ⇒ <span class="nt">Factor</span> ⇒ … ⇒ <span class="setm">id</span> or <span class="setm">(</span>          →  front :  <span class="setm">id</span>, <span class="setm">(</span>
+   ② <span class="nt">Term</span> ⇒ <span class="nt">Term</span> <span class="setm">'*'</span> <span class="nt">Factor</span>                  →  front is again <span class="nt">Term</span> ?!
+</pre>
 
 ② is the odd one.\
-The front is *itself*, `Term`, so to know the leading terminal we have to unfold that `Term` **again**.
+The front is *itself*, `Term`, so to know the front terminal you have to expand that `Term` **again**.
 
-```
-   Term ⇒ Term '*' Factor
-        ⇒ (Term '*' Factor) '*' Factor
-        ⇒ …                              ←  unfold and unfold, the front stays Term, no end in sight
-```
+<pre class="lrbox">
+   <span class="nt">Term</span> ⇒ <span class="nt">Term</span> <span class="setm">'*'</span> <span class="nt">Factor</span>
+        ⇒ <span class="nt">Term</span> <span class="setm">'*'</span> <span class="nt">Factor</span> <span class="setm">'*'</span> <span class="nt">Factor</span>
+        ⇒ …                              ←  expand and expand, the front is still <span class="nt">Term</span>, no end in sight
+</pre>
 
-But eventually that leading `Term` too settles down via the `Factor` production at some point, and then the
-leading terminal becomes `id` or `(` again. So:
+But eventually the front `Term` too settles down into the `Factor` production, and then the front terminal becomes `id` or `(` again.
+So:
 
-```
-   FIRST(Term) = { id, '(' }
-```
+<pre class="lrbox">
+   FIRST(<span class="nt">Term</span>) = { <span class="setm">id</span>, <span class="setm">'('</span> }
+</pre>
 
 `Expr` (`Expr : Expr '+' Term | Term`) has the same shape, so `FIRST(Expr) = { id, '(' }`.
 
-### Here's where we get stuck — we can't derive "all the way"
+### Here's the snag — we can't derive "all the way"
 
-As we saw with `Term`, **if it holds onto itself (recursion), the derivation can grow infinitely long.**\
-The definition is clear ("the leading terminal of what's derived"), but unfolding that derivation *all the way out,
-one by one* is awkward to do by hand and by computer alike.
+As we saw with `Term`, **when it bites its own tail (recursion), the derivation can grow infinitely long.**\
+The definition is clear ("the terminal that appears first when you derive"), but actually expanding that derivation *all the way to the end, one by one* is awkward both by hand and by computer.
 
 ## Next — on to the computation rules
 
-So on the next page we'll move to the **computation rules** that pull out the same FIRST **without unfolding the
+So on the next page we'll move to a **computation rule** that pulls out the same FIRST **without expanding the
 derivation directly**.\
 (And recursion gets handled gracefully too.)
 
-👉 **[FIRST · Computation rules](first-rules.md)**
+👉 **[FIRST · Computation Rules](first-rules.md)**
 
 ---
 
-👈 Back to the basic concepts: [FIRST / FOLLOW](first-follow.md)
+👈 Back to the basic concept: [FIRST / FOLLOW](first-follow.md)

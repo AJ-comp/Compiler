@@ -6,14 +6,16 @@
 같이 천천히 뜯어볼게요.
 
 이게 그 문법이에요.\
-처음 보면 **암호처럼** 보이죠?
+처음 보면 기호가 많아 조금 낯설 수 있어요.
 
-```
-Expr   : Expr '+' Term | Term ;
-Term   : Term '*' Factor | Factor ;
-Factor : '(' Expr ')' | id ;
-id     := "[a-zA-Z]+" ;
-```
+<pre class="lrbox">
+<span class="nt">Expr</span>   : <span class="nt">Expr</span> <span class="setm">'+'</span> <span class="nt">Term</span> | <span class="nt">Term</span> ;
+<span class="nt">Term</span>   : <span class="nt">Term</span> <span class="setm">'*'</span> <span class="nt">Factor</span> | <span class="nt">Factor</span> ;
+<span class="nt">Factor</span> : <span class="setm">'('</span> <span class="nt">Expr</span> <span class="setm">')'</span> | <span class="setm">id</span> ;
+<span class="setm">id</span>     := "[a-zA-Z]+" ;
+</pre>
+
+> 🎨 *색 힌트 — <span class="nt">**보라**</span> 는 **비단말**, <span class="setm">**청록**</span> 은 **단말** 이에요. (둘 다 곧 아래에서 제대로 설명해요. 지금은 "색이 다른 두 종류가 있구나" 만.)*
 
 ## 기호 네 개
 
@@ -93,8 +95,8 @@ id     := "[a-zA-Z]+" ;
 비유하자면 — **비단말은 "요리 이름"**(예: *김치찌개*), **단말은 "실제 재료"**(김치, 두부, 물)예요.\
 요리 이름은 다른 요리나 재료로 풀어 쓸 수 있지만, 재료는 그 자체로 끝이죠.
 
-> 헷갈리면 이것만 기억하세요: **대문자로 시작(Expr, Term…) = 비단말(요리 이름)**,
-> **기호나 `id` = 단말(재료)**.
+> 한 줄 요약: **대문자로 시작(Expr, Term…)은 비단말, 기호나 `id` 는 단말.**\
+> (앞의 요리/재료 비유로 치면 — 비단말 = 요리 이름, 단말 = 재료.)
 
 ## 다음 장
 

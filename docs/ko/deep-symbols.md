@@ -1,9 +1,9 @@
 # Symbol — 문법의 가장 작은 단위
 
-> 🎓 여기는 **심화 과정** 이에요. 기본 과정이 *개념* 이었다면, 심화 과정은 **그 개념을 Janglim가
+> 🎓 여기는 **심화 과정** 이에요. 기본 과정이 *개념* 이었다면, 심화 과정은 **그 개념을 Janglim이
 > 코드로 어떻게 쌓아 올렸는지** 를 — 그것도 **만든 순서 그대로, 천천히** — 따라가요.
 >
-> 한 가지 약속하고 갈게요. 이 심화 과정에서 **"저자"** 라고 하면, Janglim를 직접 설계하고 코드를
+> 한 가지 약속하고 갈게요. 이 심화 과정에서 **"저자"** 라고 하면, Janglim을 직접 설계하고 코드를
 > 짠 **사람**(이 프로젝트의 주인)을 가리켜요. *지금 이 글을 정리하는 AI가 아니라요.*
 >
 > 그리고 솔직히 말하면, 여기 담은 "저자의 생각" 은 **두 가지가 섞여** 있어요:
@@ -37,7 +37,7 @@
 못 태어나요 (`new Symbol()` 불가능) — 반드시 Terminal이나 NonTerminal 중 하나로 **구체화돼야**
 하죠.
 
-> 📍 **`Symbol`** · 모듈 `Janglim.FrontEnd` (Layer 2) · `src/FrontEnd/Janglim.FrontEnd/RegularGrammar/Symbol.cs`
+> 📍 **`Symbol`** · 모듈 `Janglim.FrontEnd` (Layer 2) · `src/FrontEnd/Parse.FrontEnd/RegularGrammar/Symbol.cs`
 
 ```csharp
 public abstract class Symbol : IShowable, IQuantifiable, IConvertableEbnfString
@@ -93,7 +93,7 @@ public override int GetHashCode() => (int)this.UniqueKey;   // 해시도
 
 마지막으로, 우리가 C#으로 문법을 적을 때 `Expr + plus + Term` 이나 `... | Term` 처럼 쓰잖아요?\
 이때 쓰는 **`+`(잇기)·`|`(고르기) 연산자**, 그리고 `?`·`*`·`+`(수량자) 가 — 어디에 있어야
-할까요?
+할까요? *(`+` 가 둘로 보이죠 — 두 심볼을 잇는 이항 `a + b`, 그리고 한 심볼에 붙는 수량자 `+`(OneOrMore). 글자만 같고 역할은 달라요.)*
 
 > 저자의 판단: *"이건 Terminal이든 NonTerminal이든 **아무 심볼에나** 쓸 수 있어야 해. 그러면
 > 둘의 공통 추상인 `Symbol`에 두는 게 맞지."*

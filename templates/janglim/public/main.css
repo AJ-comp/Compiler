@@ -360,7 +360,8 @@ body:not([data-layout="landing"]) .content article li > p {
 
 /* LR 아이템 점(•) 강조 — 코드블록 모양 박스 + 눈에 띄는 점 */
 body:not([data-layout="landing"]) .content article pre.lrbox {
-  background: var(--bs-secondary-bg);
+  background: var(--bs-body-bg);
+  border: 1px solid var(--bs-border-color);
   padding: 1rem 1.1rem;
   border-radius: 8px;
   overflow-x: auto;
@@ -378,6 +379,54 @@ body:not([data-layout="landing"]) .content article .lrdot {
 body:not([data-layout="landing"]) .content article .lrmark {
   color: #f43f5e;
   font-weight: 700;
+}
+/* 인라인 코드는 이탤릭 안에서도 늘 똑바로 — 예: *`β`* 의 코드까지 기울던 문제 방지 */
+body:not([data-layout="landing"]) .content article code {
+  font-style: normal;
+}
+/* 예제 구획 카드 — 한 섹션(① Factor 등)을 박스로 묶어 한눈에 구분 */
+body:not([data-layout="landing"]) .content article .ex-card {
+  border: 1px solid var(--bs-border-color);
+  border-radius: 10px;
+  padding: .55rem 1.15rem 1rem;
+  margin: 1.1rem 0;
+  background: var(--bs-secondary-bg);
+}
+body:not([data-layout="landing"]) .content article .ex-card > p:first-child {
+  margin-top: .35rem;
+}
+
+/* 집합 { … } 표기 — 서로 또렷이 다른 색 (VS Code 풍).
+   브레이스 { } = 파랑, 원소(단말) = 청록, FIRST()/함수 = 보라. 둘러싼 코드색(핑크)과도 대비. */
+body:not([data-layout="landing"]) .content article .setb {
+  color: #2563eb;
+  font-weight: 800;
+}
+body:not([data-layout="landing"]) .content article .setm {
+  color: #0d9488;
+  font-weight: 600;
+}
+[data-bs-theme="dark"] .content article .setb {
+  color: #60a5fa;
+}
+[data-bs-theme="dark"] .content article .setm {
+  color: #4ec9b0;
+}
+body:not([data-layout="landing"]) .content article .setf {
+  color: #7c3aed;
+  font-weight: 700;
+}
+[data-bs-theme="dark"] .content article .setf {
+  color: #a78bfa;
+}
+
+/* 문법 기호 — 비단말 = 보라, 단말 = 청록(.setm). 둘이 또렷이 구분되게. */
+body:not([data-layout="landing"]) .content article .nt {
+  color: #8250df;
+  font-weight: 600;
+}
+[data-bs-theme="dark"] .content article .nt {
+  color: #d2a8ff;
 }
 
 body:not([data-layout="landing"]) .content article h3 {

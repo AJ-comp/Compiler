@@ -11,23 +11,23 @@
 
 우리 입력 `a + a * a`가 어떤 길을 걷는지 따라가 봅시다.
 
-```
+<pre class="lrbox">
    "a + a * a"            ← ① 그냥 글자들의 나열 (텍스트)
         │
         ▼  렉싱 (Lexing)
    [a] [+] [a] [*] [a]    ← ② 의미 있는 조각 = 토큰(token)들
         │
         ▼  파싱 (Parsing)
-        Expr              ← ③ 문법 구조 = 파스 트리(parse tree)
+        <span class="nt">Expr</span>              ← ③ 문법 구조 = 파스 트리(parse tree)
        /  |  \
-     Expr '+' Term
+     <span class="nt">Expr</span> <span class="setm">'+'</span> <span class="nt">Term</span>
       |       / | \
-     Term  Term '*' Factor
+     <span class="nt">Term</span>  <span class="nt">Term</span> <span class="setm">'*'</span> <span class="nt">Factor</span>
       ...
         │
         ▼  (그 다음 단계들 — 의미 분석, 코드 생성 …)
      실행 / 번역 / 컴파일
-```
+</pre>
 
 각 화살표가 하나의 **변환 단계**입니다.
 
@@ -42,7 +42,7 @@
 - `*` → "곱하기 연산자" 토큰
 - 공백 → 버림
 
-이 일을 하는 게 **렉서(lexer)** 또는 **토크나이저(tokenizer)** 예요. (렉싱은 곧 따로 한 장에서 더 자세히 다뤄요.)
+이 일을 하는 게 **렉서(lexer)** 또는 **토크나이저(tokenizer)** 예요.
 
 ### ② 토큰 → ③ 트리 : "파싱(Parsing)"
 
@@ -56,14 +56,14 @@ a + a * a   →   a + (a * a)      ← '*'가 더 깊이(먼저) 묶임
 ```
 
 이 일을 하는 게 **파서(parser)** 입니다.\
-그리고 Janglim가 집중하는 부분이 바로 여기예요.
+그리고 Janglim이 집중하는 부분이 바로 여기예요.
 
 ### ③ 트리 → 그 다음
 
 파스 트리가 나오면, 그 뒤로는 목적에 따라 갈립니다.\
 계산기라면 트리를 따라 값을 계산하고,
 컴파일러라면 의미를 분석하고 기계어/LLVM IR로 번역합니다.\
-Janglim가 dogfooding(자기 검증)
+Janglim이 dogfooding(자기 검증)
 용으로 만든 **AJ 언어**는 여기까지 갑니다.
 
 ## LR 파서의 숨은 0단계: "테이블 미리 만들기"
@@ -81,7 +81,7 @@ Janglim가 dogfooding(자기 검증)
 > **딱 하나**로 정해져 있어요. 그래서 파서는 매 순간 **갈림길에서 고민하거나 되돌아가지(backtrack)
 > 않고** 한 길로만 갑니다. 이렇게 *다음 행동이 늘 유일하게 정해지는* 파서를 결정적 파서라고 하고,
 > LR이 그 대표예요. (문법에 *충돌*이 있거나, 여러 갈래를 탐색하는 GLR/LGLR 방식을 쓰면 결정적이
-> 아니게 되는데 — 그건 뒤의 [충돌] 장에서 다뤄요.)
+> 아니게 되는데 — 그건 뒤의 [충돌](parse-table-conflict.md) 장에서 다뤄요.)
 
 ```
 문법  ──(미리 분석)──▶  파싱 테이블  ──(파싱 때 참고)──▶  결정(shift? reduce?)

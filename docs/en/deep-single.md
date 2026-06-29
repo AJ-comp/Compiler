@@ -1,24 +1,24 @@
 # Single — a single production
 
-> 🎓 This is an **advanced chapter**. In the previous [Concat](deep-concat.md) chapter we saw how to hold an *order (concatenation)*.\
+> 🎓 This is an **Advanced chapter**. In the previous [Concat](deep-concat.md) chapter we saw how to hold an *order (concatenation)*.\
 > Now we add a **"tag"** to that order, turning it into a real *single production*.
 
 First, let's recall one `Concat` we built in the previous chapter.
 
-```
-   [ Expr ] · [ '+' ] · [ Term ]      ← NonTerminalConcat (a list holding only the order)
-```
+<pre class="lrbox">
+   [ <span class="nt">Expr</span> ] · [ <span class="setm">'+'</span> ] · [ <span class="nt">Term</span> ]      ← NonTerminalConcat (a list holding only the order)
+</pre>
 
 This knows the *order*.\
 But — **it does not know *which rule* this is, nor *which alternative* it is.**
 
-## The author's dilemma — "Sometimes you need to know *whose, and which* this order is"
+## The author's worry — "sometimes you need to know *whose, and which* this order is"
 
 Let's look at our example again.
 
-```
-Expr : Expr '+' Term | Term ;
-```
+<pre class="lrbox">
+<span class="nt">Expr</span> : <span class="nt">Expr</span> <span class="setm">'+'</span> <span class="nt">Term</span> | <span class="nt">Term</span> ;
+</pre>
 
 There were two ways to make `Expr`.\
 The 0th is `Expr '+' Term`, the 1st is `Term`.
@@ -51,28 +51,28 @@ public class NonTerminalSingle : NonTerminalConcat   // ← the order (RHS) is a
 Words are abstract, so let's draw it.\
 If we make the **0th** alternative of `Expr` into a `Single`, it looks like this.
 
-```
-   Expr : Expr '+' Term | Term ;
+<pre class="lrbox">
+   <span class="nt">Expr</span> : <span class="nt">Expr</span> <span class="setm">'+'</span> <span class="nt">Term</span> | <span class="nt">Term</span> ;
                   │  (peel off the 0th alternative)
                   ▼
    NonTerminalSingle
      ├ Name        = "Expr"                 ← taken from _wholeExpression
      ├ alterIndex  = 0                       ← "which alternative"
-     └ (RHS — inherited from Concat)  [ Expr ] · [ '+' ] · [ Term ]
-```
+     └ (RHS — inherited from Concat)  [ <span class="nt">Expr</span> ] · [ <span class="setm">'+'</span> ] · [ <span class="nt">Term</span> ]
+</pre>
 
 And if we print this `Single` as text (`ToGrammarString()`), a real **single production line** comes out.
 
-```
-   ToGrammarString()  →  "Expr -> Expr '+' Term"
-```
+<pre class="lrbox">
+   ToGrammarString()  →  "<span class="nt">Expr</span> -> <span class="nt">Expr</span> <span class="setm">'+'</span> <span class="nt">Term</span>"
+</pre>
 
 You can make the 1st alternative the same way.
 
-```
+<pre class="lrbox">
    NonTerminalSingle  (alterIndex = 1)
-     └ (RHS)  [ Term ]          →  "Expr -> Term"
-```
+     └ (RHS)  [ <span class="nt">Term</span> ]          →  "<span class="nt">Expr</span> -> <span class="nt">Term</span>"
+</pre>
 
 Look — `Concat` was just a *row of symbols*, but once it becomes a `Single` it turns into a proper unit meaning **"one production of Expr."**
 
@@ -133,10 +133,10 @@ Like `A → α • β`.
 
 The **thing you place that dot on is exactly this `Single` (a production).**
 
-```
-   Single        :  Expr -> Expr '+' Term          ("the production" itself)
-   place a dot here →  Expr -> Expr '+' • Term     ("the LR item")
-```
+<pre class="lrbox">
+   Single        :  <span class="nt">Expr</span> -> <span class="nt">Expr</span> <span class="setm">'+'</span> <span class="nt">Term</span>          ("the production" itself)
+   place a dot here →  <span class="nt">Expr</span> -> <span class="nt">Expr</span> <span class="setm">'+'</span> • <span class="nt">Term</span>     ("the LR item")
+</pre>
 
 So `Single` is *the production body before the dot is placed*.\
 That is why the identity of "which alternative of which rule" mattered so much.\
@@ -201,4 +201,4 @@ But `Expr` had **several** productions (the 0th, the 1st…).\
 The last piece is the **container that bundles these several into one**.\
 It is also the true identity of that `alters` which [NonTerminal](deep-nonterminal.md) was holding.
 
-👉 **[Alter — selection (the set of alternatives)](deep-alter.md)**
+👉 **[Alter — choice (the set of alternatives)](deep-alter.md)**

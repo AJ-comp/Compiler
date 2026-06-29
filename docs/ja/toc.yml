@@ -16,22 +16,22 @@
     href: first-follow.md
   - name: ドットと状態
     href: dot-and-state.md
-  - name: 表で実際に構文解析
+  - name: 表で実際にパースする
     href: parsing-in-action.md
 
-- name: 発展コース (原理とコード)
+- name: 発展コース (しくみとコード)
   items:
-  - name: Symbol — 最小の単位
+  - name: Symbol — 最小単位
     href: deep-symbols.md
-  - name: Terminal — 葉 (トークン)
+  - name: Terminal — 葉（トークン）
     href: deep-terminal.md
-  - name: NonTerminal — 規則 (枝)
+  - name: NonTerminal — 規則（枝）
     href: deep-nonterminal.md
-  - name: Concat — 順序 (連接)
+  - name: Concat — 並び（連接）
     href: deep-concat.md
   - name: Single — 生成規則ひとつ
     href: deep-single.md
-  - name: Alter — 択一 (代替の集合)
+  - name: Alter — 選択（代替の集合）
     href: deep-alter.md
   - name: FIRST — 公式と実装
     items:
@@ -39,7 +39,7 @@
       href: first-formula.md
     - name: 計算規則
       href: first-rules.md
-    - name: 実装 (コード)
+    - name: 実装（コード）
       href: first-impl.md
   - name: FOLLOW — 公式と実装
     items:
@@ -47,8 +47,10 @@
       href: follow-formula.md
     - name: 計算規則
       href: follow-rules.md
-    - name: 実装 (コード)
+    - name: 実装（コード）
       href: follow-impl.md
+  - name: FIRST · FOLLOW — 例題集
+    href: first-follow-examples.md
   - name: LRパーサ — 構文解析表を作る
     items:
     - name: LR項目
@@ -61,7 +63,7 @@
         href: closure-def.md
       - name: 計算法
         href: closure-calc.md
-      - name: 実装 (コード)
+      - name: 実装（コード）
         href: closure-impl.md
     - name: GOTO
       href: goto.md
@@ -71,3 +73,25 @@
       items:
       - name: 作り方
         href: parse-table-build.md
+      - name: 衝突とは？
+        href: parse-table-conflict.md
+      - name: SLR
+        items:
+        - name: しくみ（見かけの衝突まで）
+          href: parse-table-slr.md
+        - name: 実装（コード）
+          href: parse-table-slr-impl.md
+      - name: 先読み（LR(1)項目）
+        href: parse-table-lookahead.md
+      - name: CLR
+        items:
+        - name: しくみ
+          href: parse-table-clr.md
+        - name: 実装（コード）
+          href: parse-table-clr-impl.md
+      - name: LALR
+        items:
+        - name: しくみ
+          href: parse-table-lalr.md
+        - name: 実装（コード）
+          href: parse-table-lalr-impl.md

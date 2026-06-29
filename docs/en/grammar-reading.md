@@ -6,14 +6,16 @@ Don't worry — once you know **exactly four symbols**, it reads smoothly.\
 Let's take it apart together, slowly.
 
 Here's that grammar.\
-The first time you see it, it looks like **a secret code**, doesn't it?
+The first time you see it, with so many symbols, it can feel a little unfamiliar.
 
-```
-Expr   : Expr '+' Term | Term ;
-Term   : Term '*' Factor | Factor ;
-Factor : '(' Expr ')' | id ;
-id     := "[a-zA-Z]+" ;
-```
+<pre class="lrbox">
+<span class="nt">Expr</span>   : <span class="nt">Expr</span> <span class="setm">'+'</span> <span class="nt">Term</span> | <span class="nt">Term</span> ;
+<span class="nt">Term</span>   : <span class="nt">Term</span> <span class="setm">'*'</span> <span class="nt">Factor</span> | <span class="nt">Factor</span> ;
+<span class="nt">Factor</span> : <span class="setm">'('</span> <span class="nt">Expr</span> <span class="setm">')'</span> | <span class="setm">id</span> ;
+<span class="setm">id</span>     := "[a-zA-Z]+" ;
+</pre>
+
+> 🎨 *Color hint — <span class="nt">**purple**</span> is a **nonterminal**, <span class="setm">**teal**</span> is a **terminal**. (We'll explain both properly down below. For now, just "ah, there are two kinds in different colors.")*
 
 ## The Four Symbols
 
@@ -86,15 +88,13 @@ The names in a grammar split into two kinds.\
 - **terminal** = an "actual token" that **doesn't break down any further** → `+`, `*`, `(`, `)`, `id`
   (the pieces that actually show up in the input.)
 
-> **Why the names are like this** — "terminal (終端, *terminal*)" means **end, terminus**. There's nothing
-> left to break apart, so it "ends" right there. A **non**terminal is the opposite — there's still more to unfold.
-> Just knowing what the names mean cuts down on confusion a lot.
+> **Why the names are like this** — "terminal" means **end, terminus**. There's nothing left to break apart, so it "ends" right there. A **non**terminal is the opposite — there's still more to unfold. Just knowing what the names mean cuts down on confusion a lot.
 
 To put it as an analogy — **a nonterminal is a "dish name"** (e.g., *kimchi stew*), and **a terminal is the "actual ingredients"** (kimchi, tofu, water).\
 A dish name can be unfolded into other dishes or ingredients, but an ingredient is the end in itself.
 
-> If you get confused, just remember this: **starts with a capital letter (Expr, Term…) = nonterminal (dish name)**,
-> **a symbol or `id` = terminal (ingredient)**.
+> One-line summary: **anything starting with a capital letter (Expr, Term…) is a nonterminal; a symbol or `id` is a terminal.**\
+> (In the dish/ingredient analogy from above — nonterminal = dish name, terminal = ingredient.)
 
 ## Next Chapter
 

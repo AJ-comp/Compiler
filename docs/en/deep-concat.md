@@ -1,6 +1,6 @@
-# Concat — Sequence (concatenation)
+# Concat — order (concatenation)
 
-> 🎓 This is a **deep-dive section**. In the previous [NonTerminal](deep-nonterminal.md) chapter, we said a rule
+> 🎓 This is a **Advanced chapter**. In the previous [NonTerminal](deep-nonterminal.md) chapter, we said a rule
 > holds `alters` (alternatives). Now we step **inside one of those alternatives**.
 
 What does a single alternative look like?
@@ -8,7 +8,7 @@ What does a single alternative look like?
 Look at `Expr '+' Term` — the symbols are lined up **in order**.\
 `Expr`, then `+`, then `Term`.
 
-## The author's dilemma — "How do I hold this *order*?"
+## The author's worry — "how do I hold this *order*?"
 
 The answer the author came up with is simple.
 
@@ -28,14 +28,14 @@ public class NonTerminalConcat : IList<Symbol>
 
 As a picture, it looks like this.
 
-```
-   Expr '+' Term
+<pre class="lrbox">
+   <span class="nt">Expr</span> <span class="setm">'+'</span> <span class="nt">Term</span>
         │
         ▼
    NonTerminalConcat
-     [ Expr ] → [ '+' ] → [ Term ]
+     [ <span class="nt">Expr</span> ] → [ <span class="setm">'+'</span> ] → [ <span class="nt">Term</span> ]
        0        1         2
-```
+</pre>
 
 Literally just slots lined up in order, a list.\
 Nothing hard about it.
@@ -47,11 +47,9 @@ The author attached two more things.
 
 **`Priority`** — the priority.\
 Later, when a *conflict* arises in the grammar, this is used as the
-criterion for deciding "which side to pick first."\
-(We'll get to the conflict story much later.)
+criterion for deciding "which side to pick first."
 
-**`MeaningUnit`** — "what *meaning unit* this line becomes in the AST."\
-(This too is covered separately later.)
+**`MeaningUnit`** — "what *meaning unit* this line becomes in the AST."
 
 ```csharp
 public uint Priority { get; internal set; }
@@ -74,23 +72,23 @@ public NonTerminalConcat PostSymbolListFrom(int index);   // symbols *behind* so
 Here's why this matters — an LR parser marks "how far it has read into this rule right now" with a **dot (`•`)**.\
 If we call the symbol **right after** the dot `X`, the production takes this shape.
 
-```
-   A → α • X β       (α = already read,  X = symbol to look at now,  β = remaining)
-```
+<pre class="lrbox">
+   <span class="nt">A</span> → α <span class="lrdot">•</span> X β       (α = already read,  X = symbol to look at now,  β = remaining)
+</pre>
 
 At this point, if you give the position of `X` as `index`, the two methods peel off `α` and `β` **as whole ranges**.\
 (Looking at the code,
 it's `Prev = _symbols.Take(index)`, `Post = _symbols.Skip(index + 1)`.)
 
-```
-   A → Expr '+' Term          (index   0     1     2)
+<pre class="lrbox">
+   <span class="nt">A</span> → <span class="nt">Expr</span> <span class="setm">'+'</span> <span class="nt">Term</span>          (index   0     1     2)
 
-   taking X = '+' (index 1)   →   A → Expr • '+' Term
+   taking X = <span class="setm">'+'</span> (index 1)   →   <span class="nt">A</span> → <span class="nt">Expr</span> <span class="lrdot">•</span> <span class="setm">'+'</span> <span class="nt">Term</span>
 
-   PrevSymbolListFrom(1) = [ Expr ]        ← α : 'everything' before the dot  (Take(1))
-   PostSymbolListFrom(1) = [ Term ]        ← β : 'everything' after X         (Skip(2))
-   ( the '+' at index 1 itself goes into neither side — it's the symbol being 'looked at' now )
-```
+   PrevSymbolListFrom(1) = [ <span class="nt">Expr</span> ]        ← α : 'everything' before the dot  (Take(1))
+   PostSymbolListFrom(1) = [ <span class="nt">Term</span> ]        ← β : 'everything' after X         (Skip(2))
+   ( the <span class="setm">'+'</span> at index 1 itself goes into neither side — it's the symbol being 'looked at' now )
+</pre>
 
 The point is — these two return not *a single symbol* but the **entire front/back range**.\
 For now, just knowing "this kind of thing is prepared in advance" is enough.\

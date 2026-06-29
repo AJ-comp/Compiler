@@ -1,157 +1,157 @@
 # FOLLOW · 定義と導出
 
-> 🎓 **発展課程 · 理論** です。\
-> [FIRST トラック](first-formula.md)を終えたので、今度はその相棒 **FOLLOW** です。\
-> FIRST が *「何で *始まる* か」* だったなら、FOLLOW は *「何が その *次に* 来るか」* です。\
-> このページでは **定義** と **定義どおりの直接導出** までを見ます。続いて → **計算規則** → **実装**。
+> 🎓 **発展コース · 理論** です。\
+> [FIRST トラック](first-formula.md)を終えたので、いよいよその相棒の **FOLLOW** です。\
+> FIRST が **「何で *始まる* か」** だったとすれば、FOLLOW は **「その *次に* 何が来るか」** です。\
+> このページでは **定義** と **定義どおりに直接導出** するところまで見ます。続いて → **計算規則** → **実装**。
 
-> 📍 **在りか** · エンジン `FirstFollowAnalyzer` · モジュール `Janglim.FrontEnd` — **Layer 2**(構文解析表より
-> *下* の段である土台層)
+> 📍 **ある場所** · エンジン `FirstFollowAnalyzer` · モジュール `Janglim.FrontEnd` — **Layer 2**（構文解析表よりも
+> *下* の段である土台側）
 
-ずっと使っている例文法です。\
-今回は **開始記号** が重要なので印を付けておきます — 一番上の `Expr` が開始記号です。
+ずっと使っている例の文法です。\
+今回は **開始記号** が大事なので、印を付けておきますね — 一番上の `Expr` が開始記号です。
 
-```
-Expr   : Expr '+' Term | Term ;      ← 開始記号
-Term   : Term '*' Factor | Factor ;
-Factor : '(' Expr ')' | id ;
-```
+<pre class="lrbox">
+<span class="nt">Expr</span>   : <span class="nt">Expr</span> <span class="setm">'+'</span> <span class="nt">Term</span> | <span class="nt">Term</span> ;      ← 開始記号
+<span class="nt">Term</span>   : <span class="nt">Term</span> <span class="setm">'*'</span> <span class="nt">Factor</span> | <span class="nt">Factor</span> ;
+<span class="nt">Factor</span> : <span class="setm">'('</span> <span class="nt">Expr</span> <span class="setm">')'</span> | <span class="setm">id</span> ;
+</pre>
 
-[基本課程](first-follow.md)で手で求めた答えはこうでした。
+[基本コース](first-follow.md)で手で求めた答えはこうでした。
 
-```
-   FOLLOW(Expr)   = { $, '+', ')' }
-   FOLLOW(Term)   = { $, '+', ')', '*' }
-   FOLLOW(Factor) = { $, '+', ')', '*' }
-```
+<pre class="lrbox">
+   FOLLOW(<span class="nt">Expr</span>)   = { $, <span class="setm">'+'</span>, <span class="setm">')'</span> }
+   FOLLOW(<span class="nt">Term</span>)   = { $, <span class="setm">'+'</span>, <span class="setm">')'</span>, <span class="setm">'*'</span> }
+   FOLLOW(<span class="nt">Factor</span>) = { $, <span class="setm">'+'</span>, <span class="setm">')'</span>, <span class="setm">'*'</span> }
+</pre>
 
-これを *定義* から改めて一つずつ見ていきます。
+これを *定義* からあらためて一つずつ見ていきます。
 
 ---
 
 ## 定義 — FOLLOW とは何か
 
-まず一行で言い切っておきます。
+まず一行で言い切っておきますね。
 
-> **FOLLOW(B)** = 正しい文のどこかで、非終端記号 `B` の **すぐ後ろに** 現れうる **終端記号** たちの
+> **FOLLOW(B)** = 正しい文のどこかで、非終端記号 `B` の **すぐ次に** 現れうる **終端記号** の
 > 集合。\
-> (そして `B` が文の *末尾* に来ることがあるなら、入力の終わりを表す `$` も入れます。)
+> （そして `B` が文の *一番後ろ* に来られるなら、入力の終わりを表す `$` も入れます。）
 
-FIRST と対にして見るとこうです — FIRST はその記号の *先頭* の終端記号、FOLLOW はその記号 *すぐ後ろ* の終端記号。
+FIRST と対にして見るとこうです — FIRST はその記号の *先頭* の終端記号、FOLLOW はその記号の *すぐ後ろ* の終端記号です。
 
 ### 「すぐ後ろ」を導出で見る
 
-[FIRST の定義](first-formula.md)で *導出(⇒)* を定義しましたね — 非終端記号を生成規則の右辺で置き換える
-ことです。\
-FOLLOW は、開始記号 `Expr` から導出していって **`B` のすぐ後ろにどんな終端記号が付くか** を見る
-ことです。
+[FIRST の定義](first-formula.md)で *導出（⇒）* を定義しましたね — 非終端記号を生成規則の右辺に置き換える
+ことでした。\
+FOLLOW は、開始記号 `Expr` から導出を進めていって **`B` のすぐ後ろにどんな終端記号が付くか** を見る
+ものです。
 
-```
-   Expr  ⇒*  …  B  a  …       →  a が B のすぐ後ろに来た   ⇒   a ∈ FOLLOW(B)
-```
+<pre class="lrbox">
+   <span class="nt">Expr</span>  ⇒*  …  <span class="nt">B</span>  <span class="setm">a</span>  …       →  <span class="setm">a</span> が <span class="nt">B</span> のすぐ後ろに来た   ⇒   <span class="setm">a</span> ∈ FOLLOW(<span class="nt">B</span>)
+</pre>
 
-記号でしっかり書くとこうです (`S` = 開始記号、`T` = 終端記号の集合)。
+記号できっちり書くとこうです（`S` = 開始記号、`T` = 終端記号の集合）。
 
-```
-   FOLLOW(B) = { a ∈ T | S ⇒* … B a … }   ∪   ( { $ }  if  S ⇒* … B )
-```
+<pre class="lrbox">
+   FOLLOW(<span class="nt">B</span>) = { <span class="setm">a</span> ∈ T | <span class="nt">S</span> ⇒* … <span class="nt">B</span> <span class="setm">a</span> … }   ∪   ( { $ }  if  <span class="nt">S</span> ⇒* … <span class="nt">B</span> )
+</pre>
 
 > 📎 FIRST と決定的に違う点が一つ。\
-> FIRST はその記号 **一つだけ** を見ればよかったですが、FOLLOW は **`B` が文法全体で *どこどこで使われているか* を
-> すべて洗い出す** 必要があります。`B` の後ろに何が来るかは、`B` を使った場所ごとに違うからです。
+> FIRST はその記号 **一つだけ** を見れば済みましたが、FOLLOW は **`B` が文法全体で *どこどこで使われているか* を
+> すべて見渡す** 必要があります。`B` の後ろに何が来るかは、`B` を使った場所ごとに違うからです。
 
 ---
 
-## 定義どおり — 導出して直接求めてみる
+## 定義どおりに — 導出して直接求めてみる
 
-定義を *直接適用* して求めてみます。「`B` のすぐ後ろに来る終端記号を集める」のを手作業でやります。
+「`B` のすぐ後ろに来る終端記号を集める」を、定義を *そのまま適用* して手で求めてみますね。
 
-### FOLLOW(Expr) — きれいに出てきます
+### FOLLOW(Expr) — きれいに出ます
 
-`Expr` は **開始記号** です — つまり *入力全体* が一つの `Expr` ですね。\
-では、その `Expr` を最後まで全部読み終えたら、すぐ後ろには何が来るでしょうか?\
-もう読むものが無い **入力の終わり** です。\
+`Expr` は **開始記号** です — つまり *入力全体* が一つの `Expr` なんですね。\
+では、その `Expr` を最後まで全部読み終えたら、すぐ後ろには何が来るでしょう？\
+もう読むものがない **入力の終わり** です。\
 その入力の終わりを表す仮想のトークンが `$` でしたね。\
-ですから `Expr` のすぐ後ろには `$` が来るわけです — **`$ ∈ FOLLOW(Expr)`。**
+ですから `Expr` のすぐ後ろには `$` が来ることになります — **`$ ∈ FOLLOW(Expr)`。**
 
-今度は文法全体で `Expr` の *すぐ後ろ* に来るものを探してみます。
+では文法全体で `Expr` の *すぐ後ろ* に来るものを探してみます。
 
-```
-   Expr → Expr '+' Term      前の Expr のすぐ後ろ :  '+'
-   Factor → '(' Expr ')'     Expr のすぐ後ろ :       ')'
-```
+<pre class="lrbox">
+   <span class="nt">Expr</span> → <span class="nt">Expr</span> <span class="setm">'+'</span> <span class="nt">Term</span>      前の <span class="nt">Expr</span> のすぐ後ろ :  <span class="setm">'+'</span>
+   <span class="nt">Factor</span> → <span class="setm">'('</span> <span class="nt">Expr</span> <span class="setm">')'</span>     <span class="nt">Expr</span> のすぐ後ろ :       <span class="setm">')'</span>
+</pre>
 
-`Expr` の後ろに来うるのは `'+'` と `')'`、そして末尾の `$`。全部集めると:
+`Expr` の後ろに来られるのは `'+'` と `')'`、そして一番後ろの `$`。全部集めると：
 
-```
-   FOLLOW(Expr) = { $, '+', ')' }
-```
+<pre class="lrbox">
+   FOLLOW(<span class="nt">Expr</span>) = { $, <span class="setm">'+'</span>, <span class="setm">')'</span> }
+</pre>
 
-### FOLLOW(Term) — ここで一度引っかかります
+### FOLLOW(Term) — 一番後ろに来ると受け継ぎます
 
 `Term` の *すぐ後ろ* を文法から探してみます。
 
-```
-   Term → Term '*' Factor    前の Term のすぐ後ろ :  '*'           →  '*' を追加
-   Expr → Expr '+' Term      Term が生成規則の末尾 …               →  後ろに何もないね?
-   Expr → Term               Term が生成規則の末尾 …               →  やはり後ろに何もない
-```
+<pre class="lrbox">
+   <span class="nt">Term</span> → <span class="nt">Term</span> <span class="setm">'*'</span> <span class="nt">Factor</span>    前の <span class="nt">Term</span> のすぐ後ろ :  <span class="setm">'*'</span>           →  <span class="setm">'*'</span> を追加
+   <span class="nt">Expr</span> → <span class="nt">Expr</span> <span class="setm">'+'</span> <span class="nt">Term</span>      <span class="nt">Term</span> が生成規則の一番後ろ …          →  後ろに何もないね？
+   <span class="nt">Expr</span> → <span class="nt">Term</span>               <span class="nt">Term</span> が生成規則の一番後ろ …          →  やはり後ろに何もない
+</pre>
 
-`'*'` はすぐに入ります。\
-ところが後ろの二行が妙です — `Term` が生成規則の **末尾** にあるので、すぐ後ろに終端記号がありません。
+`'*'` はそのまま入ります。\
+ところが後ろの二行が不思議です — `Term` が生成規則の **一番後ろ** にあるので、すぐ後ろに終端記号がありません。
 
-では `Term` の次には何が来るでしょうか?\
-`Expr → Term` を見ると、`Term` が `Expr` の *すべて* です — つまり **`Expr` と `Term` が同じ位置で終わります。**
+では `Term` の次には何が来るのでしょう？\
+`Expr → Term` を見ると、`Term` が `Expr` の *全部* です — つまり **`Expr` と `Term` が同じ場所で終わるんですね。**
 
-言葉だと抽象的なので、一つの場面で見てみます。\
-`( Expr )` という断片を思い浮かべてください (`Factor → '(' Expr ')'`)。ここでは `Expr` のすぐ後ろに `)` が来ますね。\
-ところがその `Expr` が単に `Term` 一つだとすると (`Expr → Term`)、同じ位置が `( Term )` になります。
+言葉だと抽象的なので、一つの場面で見てみますね。\
+`( Expr )` という断片を思い浮かべてください（`Factor → '(' Expr ')'`）。ここでは `Expr` のすぐ後ろに `)` が来ますね。\
+ところがその `Expr` がただの `Term` 一つだったら（`Expr → Term`）、同じ場所が `( Term )` になります。
 
-```
-   ( Expr )        →   Expr の後ろに )
-   ( Term )        →   今度は Term の後ろに )   (同じ位置!)
-```
+<pre class="lrbox">
+   <span class="setm">(</span> <span class="nt">Expr</span> <span class="setm">)</span>        →   <span class="nt">Expr</span> の後ろに <span class="setm">)</span>
+   <span class="setm">(</span> <span class="nt">Term</span> <span class="setm">)</span>        →   今度は <span class="nt">Term</span> の後ろに <span class="setm">)</span>   （同じ場所！）
+</pre>
 
 見てください — さっき `Expr` の後ろにあった `)` が、今度は **`Term` のすぐ後ろ** に来ています。\
-`Term` が `Expr` の終端位置をそのまま受け継いだからです。
+`Term` が `Expr` の末尾の場所をそのまま受け継いだからです。
 
-> 💡 **これが FOLLOW の核となる規則です。**\
-> ある非終端記号が生成規則の **末尾** に来ると、その生成規則の **LHS(左辺の非終端記号)の FOLLOW を丸ごと
-> 受け継ぎます。**\
-> ここでは `Expr → Term` なので — **`FOLLOW(Expr)` がそのまま `FOLLOW(Term)` へ流れ込みます。**
+> 💡 **これが FOLLOW の核心の規則です。**\
+> ある非終端記号が生成規則の **一番後ろ** に来ると、その生成規則の **LHS（左側の非終端記号）の FOLLOW を
+> まるごと受け継ぎます。**\
+> ここでは `Expr → Term` なので — **`FOLLOW(Expr)` がそのまま `FOLLOW(Term)` に流れ込んできます。**
 
-```
-   FOLLOW(Term) = { '*' }  ∪  FOLLOW(Expr)
-                = { '*' }  ∪  { $, '+', ')' }   =   { $, '+', ')', '*' }
-```
+<pre class="lrbox">
+   FOLLOW(<span class="nt">Term</span>) = { <span class="setm">'*'</span> }  ∪  FOLLOW(<span class="nt">Expr</span>)
+                = { <span class="setm">'*'</span> }  ∪  { $, <span class="setm">'+'</span>, <span class="setm">')'</span> }   =   { $, <span class="setm">'+'</span>, <span class="setm">')'</span>, <span class="setm">'*'</span> }
+</pre>
 
-### ここで引っかかる理由 — 「末尾に来ると LHS の FOLLOW を受け継ぐ」
+### なぜ一度で終わらないのか — 受け継ぐべき FOLLOW がまだ決まっていないことがあります
 
-今見たとおり、`B` が生成規則の **末尾** に来ると、その生成規則の **左辺の非終端記号(LHS)の FOLLOW** が
-必要になります。\
-ところがその LHS の FOLLOW もまだ埋まっている途中かもしれません。(FIRST のときに再帰で詰まったのと全く同じ
-状況ですね。)\
-ですから定義を *一つ一つたどる* だけでは一度では終わりません。
+たった今見たように、`B` が生成規則の **一番後ろ** に来ると、その生成規則の **左側の非終端記号（LHS）の FOLLOW** が
+必要です。\
+ところがその LHS の FOLLOW も、まだ埋まっている途中かもしれません。（FIRST のときに再帰で行き詰まったのと
+まったく同じ状況ですね。）\
+ですから定義を *一つずつたどる* だけでは、一度で終わりません。
 
-そこで次のページでは — この過程を **いくつかの規則に整理** し、FIRST のときと同じように **変わらなくなるまで反復**
+そこで次のページでは — この過程を **いくつかの規則に整理** して、FIRST のときと同じように **変わらなくなるまで反復**
 で解きます。
 
 ---
 
 ## まとめ
 
-定義どおりにたどってみると、FOLLOW は結局三つのことで埋まりました。
+定義どおりにたどってみると、FOLLOW は結局、三つで埋まりました。
 
-1. **開始記号** の FOLLOW には `$` が入る。(文の末尾に来られるので。)
-2. `B` の **すぐ後ろに何かが来れば**、その後ろのものの *最初の終端記号* が FOLLOW(B) に入る。
-3. `B` が生成規則の **末尾** に来ると、その生成規則の **LHS の FOLLOW** を受け継ぐ。
-
-(私たちの例では `B` の後ろが常に終端記号なので②が単純でしたが、後ろが非終端記号なら、その *FIRST* を見ます — 次の
-ページで触れます。)
+1. **開始記号** の FOLLOW には `$` が入る。（文の一番後ろに来られるから。）\
+   `$ ∈ FOLLOW(開始記号)`
+2. `B` の **すぐ後ろに何かが来れば**、その後ろのものの *先頭の終端記号* が FOLLOW(B) に入る。\
+   `A → α B β` なら、`FOLLOW(B)` に `FIRST(β) − ε`
+3. `B` が生成規則の **一番後ろ** に来れば、その生成規則の **LHS の FOLLOW** を受け継ぐ。\
+   `A → α B` なら、`FOLLOW(B)` に `FOLLOW(A)` を継承
 
 ## 次へ — この過程を規則に
 
-この三つを *どんな文法にでも* 通用する計算規則に整理し、反復で解くのが次です。
+この三つを *どんな文法にも* 通じる計算規則に整理して、反復で解くのが次の話です。
 
 👉 **[FOLLOW · 計算規則](follow-rules.md)**
 

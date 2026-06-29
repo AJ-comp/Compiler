@@ -1,160 +1,154 @@
-# FOLLOW · Definition and Derivation
+# FOLLOW · Definition and derivation
 
-> 🎓 This is the **Advanced track · Theory**.\
-> Now that you've finished the [FIRST track](first-formula.md), here comes its partner, **FOLLOW**.\
-> If FIRST was about *"what does it *start* with"*, then FOLLOW is about *"what comes *after* it"*.\
-> On this page we'll look at the **definition** and at **deriving it directly from the definition**. Then comes → **computation rules** → **implementation**.
+> 🎓 This is the **advanced track · theory**.\
+> Now that you've finished [the FIRST track](first-formula.md), here comes its partner, **FOLLOW**.\
+> If FIRST was about **"what does it *start* with,"** FOLLOW is about **"what comes *after* it."**\
+> On this page we'll look at the **definition** and at **deriving it directly from the definition**. Then on → **Computation rules** → **Implementation**.
 
-> 📍 **Where it lives** · engine `FirstFollowAnalyzer` · module `Janglim.FrontEnd` — **Layer 2** (the floor
+> 📍 **Where it lives** · engine `FirstFollowAnalyzer` · module `Janglim.FrontEnd` — **Layer 2** (the tier
 > *below* the parse table)
 
-This is the example grammar we keep using.\
-This time the **start symbol** matters, so let me mark it — the top `Expr` is the start symbol.
+Here's the example grammar we keep using.\
+This time the **start symbol** matters, so let me mark it — the `Expr` at the very top is the start symbol.
 
-```
-Expr   : Expr '+' Term | Term ;      ← start symbol
-Term   : Term '*' Factor | Factor ;
-Factor : '(' Expr ')' | id ;
-```
+<pre class="lrbox">
+<span class="nt">Expr</span>   : <span class="nt">Expr</span> <span class="setm">'+'</span> <span class="nt">Term</span> | <span class="nt">Term</span> ;      ← start symbol
+<span class="nt">Term</span>   : <span class="nt">Term</span> <span class="setm">'*'</span> <span class="nt">Factor</span> | <span class="nt">Factor</span> ;
+<span class="nt">Factor</span> : <span class="setm">'('</span> <span class="nt">Expr</span> <span class="setm">')'</span> | <span class="setm">id</span> ;
+</pre>
 
-In the [basic track](first-follow.md), the answer we worked out by hand was this.
+The answer we worked out by hand in [the basic track](first-follow.md) was this.
 
-```
-   FOLLOW(Expr)   = { $, '+', ')' }
-   FOLLOW(Term)   = { $, '+', ')', '*' }
-   FOLLOW(Factor) = { $, '+', ')', '*' }
-```
+<pre class="lrbox">
+   FOLLOW(<span class="nt">Expr</span>)   = { $, <span class="setm">'+'</span>, <span class="setm">')'</span> }
+   FOLLOW(<span class="nt">Term</span>)   = { $, <span class="setm">'+'</span>, <span class="setm">')'</span>, <span class="setm">'*'</span> }
+   FOLLOW(<span class="nt">Factor</span>) = { $, <span class="setm">'+'</span>, <span class="setm">')'</span>, <span class="setm">'*'</span> }
+</pre>
 
-Let's look at this again, carefully, starting from the *definition*.
+Let's go through this again, carefully, starting from the *definition*.
 
 ---
 
-## Definition — what is FOLLOW
+## Definition — what FOLLOW is
 
 Let me pin it down in one line first.
 
 > **FOLLOW(B)** = the set of **terminals** that can appear **immediately after** the nonterminal `B`
 > somewhere in a valid sentence.\
-> (And if `B` can come at the *very end* of a sentence, we also add `$`, which means the end of input.)
+> (And if `B` can come at the *very end* of a sentence, we also include `$`, which stands for the end of input.)
 
-Paired up with FIRST, it goes like this — FIRST is the terminals at the *very front* of that symbol, FOLLOW is the terminals *immediately after* that symbol.
+Lining it up with FIRST as a pair — FIRST is the terminal at the *very front* of a symbol, FOLLOW is the terminal *right behind* it.
 
-### Seeing "immediately after" as derivation
+### Seeing "right behind" through derivation
 
-In the [FIRST definition](first-formula.md) we defined *derivation (⇒)* — replacing a nonterminal with the
-right-hand side of a production.\
-FOLLOW is about starting to derive from the start symbol `Expr` and seeing **what terminal ends up
-attached right after `B`**.
+Back in [the FIRST definition](first-formula.md) we defined *derivation (⇒)* — swapping a nonterminal for the right-hand side of a production.\
+FOLLOW is about deriving outward from the start symbol `Expr` and watching **which terminal ends up attached right behind `B`.**
 
-```
-   Expr  ⇒*  …  B  a  …       →  a came right after B   ⇒   a ∈ FOLLOW(B)
-```
+<pre class="lrbox">
+   <span class="nt">Expr</span>  ⇒*  …  <span class="nt">B</span>  <span class="setm">a</span>  …       →  <span class="setm">a</span> came right after <span class="nt">B</span>   ⇒   <span class="setm">a</span> ∈ FOLLOW(<span class="nt">B</span>)
+</pre>
 
-Written down tightly in symbols, it's this (`S` = start symbol, `T` = set of terminals).
+Written tightly in symbols (`S` = start symbol, `T` = the set of terminals):
 
-```
-   FOLLOW(B) = { a ∈ T | S ⇒* … B a … }   ∪   ( { $ }  if  S ⇒* … B )
-```
+<pre class="lrbox">
+   FOLLOW(<span class="nt">B</span>) = { <span class="setm">a</span> ∈ T | <span class="nt">S</span> ⇒* … <span class="nt">B</span> <span class="setm">a</span> … }   ∪   ( { $ }  if  <span class="nt">S</span> ⇒* … <span class="nt">B</span> )
+</pre>
 
-> 📎 One thing that's decisively different from FIRST.\
-> For FIRST you only had to look at that **one** symbol, but for FOLLOW you have to **scan
-> *everywhere `B` is used* across the whole grammar**. Because what comes after `B` differs at every
-> place where `B` is used.
+> 📎 One thing that's crucially different from FIRST.\
+> With FIRST you only had to look at that **one symbol**, but for FOLLOW you have to **scan *everywhere `B`
+> is used* across the whole grammar.** What comes after `B` differs at every spot where `B` appears.
 
 ---
 
 ## By the definition — deriving it directly
 
-Let's work it out by *applying the definition directly*. Gathering "the terminals that come immediately after `B`" by hand.
+Let's *apply the definition directly* and work out "gather the terminals that come right after `B`" by hand.
 
-### FOLLOW(Expr) — this comes out cleanly
+### FOLLOW(Expr) — it comes out cleanly
 
-`Expr` is the **start symbol** — that is, the *entire input* is one `Expr`.\
-So once you've read that `Expr` all the way to the end, what comes right after it?\
-The **end of input**, where there's nothing left to read.\
-The imaginary token that marks that end of input was `$`.\
-So the thing that comes right after `Expr` is `$` — **`$ ∈ FOLLOW(Expr)`.**
+`Expr` is the **start symbol** — that is, the *entire input* is one big `Expr`.\
+So once you've read that `Expr` all the way to the end, what comes right after?\
+The **end of input**, with nothing left to read.\
+And the imaginary token that marks the end of input was `$`.\
+So in effect `$` comes right after `Expr` — **`$ ∈ FOLLOW(Expr)`.**
 
-Now let's find, across the whole grammar, what comes *right after* `Expr`.
+Now let's hunt across the whole grammar for what comes *right after* `Expr`.
 
-```
-   Expr → Expr '+' Term      right after the front Expr :  '+'
-   Factor → '(' Expr ')'     right after Expr :            ')'
-```
+<pre class="lrbox">
+   <span class="nt">Expr</span> → <span class="nt">Expr</span> <span class="setm">'+'</span> <span class="nt">Term</span>      right after the leading <span class="nt">Expr</span> :  <span class="setm">'+'</span>
+   <span class="nt">Factor</span> → <span class="setm">'('</span> <span class="nt">Expr</span> <span class="setm">')'</span>     right after <span class="nt">Expr</span> :       <span class="setm">')'</span>
+</pre>
 
 What can come after `Expr` is `'+'` and `')'`, plus `$` at the very end. Gathering them all:
 
-```
-   FOLLOW(Expr) = { $, '+', ')' }
-```
+<pre class="lrbox">
+   FOLLOW(<span class="nt">Expr</span>) = { $, <span class="setm">'+'</span>, <span class="setm">')'</span> }
+</pre>
 
-### FOLLOW(Term) — here we get stuck once
+### FOLLOW(Term) — when it sits at the end, it inherits
 
-Let's find in the grammar what comes *right after* `Term`.
+Let's hunt the grammar for what's *right after* `Term`.
 
-```
-   Term → Term '*' Factor    right after the front Term :  '*'           →  add '*'
-   Expr → Expr '+' Term      Term is at the very end of the production …  →  nothing comes after?
-   Expr → Term               Term is at the very end of the production …  →  again nothing after
-```
+<pre class="lrbox">
+   <span class="nt">Term</span> → <span class="nt">Term</span> <span class="setm">'*'</span> <span class="nt">Factor</span>    right after the leading <span class="nt">Term</span> :  <span class="setm">'*'</span>           →  add <span class="setm">'*'</span>
+   <span class="nt">Expr</span> → <span class="nt">Expr</span> <span class="setm">'+'</span> <span class="nt">Term</span>      <span class="nt">Term</span> is at the end of the production …          →  nothing after it?
+   <span class="nt">Expr</span> → <span class="nt">Term</span>               <span class="nt">Term</span> is at the end of the production …          →  again, nothing after
+</pre>
 
 `'*'` goes straight in.\
-But the last two lines are odd — `Term` is at the **very end** of the production, so no terminal comes right after it.
+But the last two lines are curious — `Term` sits at the **very end** of the production, so there's no terminal right behind it.
 
-So what comes after `Term`?\
-Looking at `Expr → Term`, `Term` is *all* of `Expr` — that is, **`Expr` and `Term` end at the exact same spot.**
+So then what comes after `Term`?\
+Look at `Expr → Term`: `Term` is *all* of `Expr` — that is, **`Expr` and `Term` end at the exact same spot.**
 
-That's abstract in words, so let's look at it as one scene.\
+Words are abstract, so let's see it as one scene.\
 Picture the fragment `( Expr )` (`Factor → '(' Expr ')'`). Here `)` comes right after `Expr`.\
-But if that `Expr` is just a single `Term` (`Expr → Term`), the same spot becomes `( Term )`.
+But if that `Expr` is just a single `Term` (`Expr → Term`), then the same spot becomes `( Term )`.
 
-```
-   ( Expr )        →   ) after Expr
-   ( Term )        →   now ) after Term   (same spot!)
-```
+<pre class="lrbox">
+   <span class="setm">(</span> <span class="nt">Expr</span> <span class="setm">)</span>        →   <span class="setm">)</span> after <span class="nt">Expr</span>
+   <span class="setm">(</span> <span class="nt">Term</span> <span class="setm">)</span>        →   now <span class="setm">)</span> after <span class="nt">Term</span>   (same spot!)
+</pre>
 
-Look — the `)` that was after `Expr` a moment ago is now **right after `Term`**.\
-Because `Term` inherited `Expr`'s end position exactly as it was.
+Look — the `)` that used to be after `Expr` is now sitting **right after `Term`.**\
+Because `Term` inherited the end-spot of `Expr` as is.
 
 > 💡 **This is the core rule of FOLLOW.**\
-> When some nonterminal comes at the **very end** of a production, it **inherits the entire FOLLOW of
-> that production's LHS (the left-hand nonterminal).**\
-> Here, because of `Expr → Term`, **`FOLLOW(Expr)` flows directly into `FOLLOW(Term)`.**
+> When a nonterminal comes at the **very end** of a production, it **inherits the entire FOLLOW of that
+> production's LHS (the left-hand nonterminal).**\
+> Here it's `Expr → Term`, so — **`FOLLOW(Expr)` flows straight into `FOLLOW(Term)`.**
 
-```
-   FOLLOW(Term) = { '*' }  ∪  FOLLOW(Expr)
-                = { '*' }  ∪  { $, '+', ')' }   =   { $, '+', ')', '*' }
-```
+<pre class="lrbox">
+   FOLLOW(<span class="nt">Term</span>) = { <span class="setm">'*'</span> }  ∪  FOLLOW(<span class="nt">Expr</span>)
+                = { <span class="setm">'*'</span> }  ∪  { $, <span class="setm">'+'</span>, <span class="setm">')'</span> }   =   { $, <span class="setm">'+'</span>, <span class="setm">')'</span>, <span class="setm">'*'</span> }
+</pre>
 
-### Why we get stuck here — "at the end, you inherit the LHS's FOLLOW"
+### Why it doesn't finish in one pass — the FOLLOW you'd inherit may not be settled yet
 
-As we just saw, when `B` comes at the **very end** of a production, you need that production's **left-hand
-nonterminal (LHS)'s FOLLOW**.\
-But that LHS's FOLLOW may itself still be in the middle of being filled in. (Exactly the same situation
-where we got stuck on recursion back in FIRST.)\
-So just *following the definition step by step* doesn't finish in one pass.
+As we just saw, when `B` comes at the **very end** of a production, you need the **FOLLOW of that production's left-hand nonterminal (LHS).**\
+But that LHS's FOLLOW may itself still be filling in. (Exactly the same situation as when recursion blocked us with FIRST.)\
+So just *following the definition step by step* won't finish in a single pass.
 
-That's why on the next page — we'll **organize this process into a few rules** and, just like with FIRST,
-solve it by **repeating until nothing changes**.
+That's why on the next page we'll — **tidy this process into a handful of rules** and solve it, like with FIRST, by **iterating until nothing changes.**
 
 ---
 
 ## Summary
 
-Following the definition, FOLLOW ended up being filled in by three things.
+Following the definition, FOLLOW ended up being filled in three ways.
 
-1. The FOLLOW of the **start symbol** gets `$`. (Because it can come at the very end of a sentence.)
-2. When **something comes right after `B`**, the *first terminal* of that following thing goes into FOLLOW(B).
-3. When `B` comes at the **very end** of a production, it inherits that production's **LHS's FOLLOW**.
-
-(In our example, whatever comes after `B` is always a terminal, so ② was simple; but if what comes after is a nonterminal, you look at its *FIRST* — we'll cover that on the next
-page.)
+1. The **start symbol**'s FOLLOW gets `$`. (Because it can come at the very end of a sentence.)\
+   `$ ∈ FOLLOW(start symbol)`
+2. If **something comes right after `B`**, the *first terminal* of that something goes into FOLLOW(B).\
+   For `A → α B β`, add `FIRST(β) − ε` to `FOLLOW(B)`
+3. If `B` comes at the **very end** of a production, it inherits the **FOLLOW of that production's LHS**.\
+   For `A → α B`, inherit `FOLLOW(A)` into `FOLLOW(B)`
 
 ## Next — turning this process into rules
 
-Organizing these three into computation rules that work for *any grammar*, and solving them by repetition, is what comes next.
+Next up is tidying these three into computation rules that work for *any grammar*, and solving them by iteration.
 
-👉 **[FOLLOW · Computation Rules](follow-rules.md)**
+👉 **[FOLLOW · Computation rules](follow-rules.md)**
 
 ---
 

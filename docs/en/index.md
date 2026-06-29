@@ -3,14 +3,12 @@
 Janglim is an **LR/LALR parser-generator engine for .NET**.\
 Sounds hard, right?\
 **That's okay.**\
-This manual
-assumes you don't know a single one of those scary words, and unpacks everything slowly, from the very beginning.
+This manual assumes you don't know a single one of those scary words, and unpacks everything slowly, from the very beginning.
 
 ## Who is this manual for?
 
 **It's totally fine if you have no idea what a parser is or how a compiler works.**\
-This manual starts from "why do we even
-need this" and explains it step by step, in the simplest words possible.\
+This manual starts from "why do we even need this" and explains it step by step, in the simplest words possible.\
 So by the time you finish reading, two things will stay with you.
 
 1. **The concept of parsing** itself — knowledge you'll use for the rest of your life, no matter which parser you end up using
@@ -18,9 +16,9 @@ So by the time you finish reading, two things will stay with you.
 
 ## This manual has two tracks
 
-To keep it from being overwhelming, we split it into two courses: **Basic / Advanced**.
+To keep it from being overwhelming, we split it into two courses: **Basics / Advanced**.
 
-**🟢 Basic course — just the concepts, nice and easy.**\
+**🟢 Basics track — just the concepts, nice and easy.**\
 No formulas, no code, just *the concept and the intuition*.\
 Each page has:
 
@@ -30,35 +28,32 @@ Each page has:
 | **② What it does** | The concept itself + a small example |
 | **③ See it in the playground** | Run it yourself in the browser and check |
 
-**🔵 Advanced course — formulas + code.**\
-We take the same concept and organize it into *a formula (algorithm) that works for any grammar*,
-and then look at **how it's implemented in the Janglim code**.\
-At the end of each concept in the basic course, I'll leave a "→ to advanced"
-link.
+**🔵 Advanced track — formulas + code.**\
+We take the same concept and organize it into *a formula (algorithm) that works for any grammar*, and then look at **how it's implemented in the Janglim code**.\
+At the end of each concept in the Basics track, I'll leave a "→ to Advanced" link.
 
-> **If this is your first time, just read straight through the basic course.**\
-> The advanced stuff is fine to look at later, whenever you get curious. 🙂
+> **If this is your first time, just read straight through the Basics track.**\
+> The Advanced stuff is fine to look at later, whenever you get curious. 🙂
 
 ## We go all the way with a single example
 
-Across the whole manual we keep using **just one tiny grammar** — it's a bit like basic arithmetic.
+Across the whole manual we keep using **just one tiny grammar** — it's a little arithmetic expression with addition and multiplication.
 
-```
-Expr   : Expr '+' Term | Term ;
-Term   : Term '*' Factor | Factor ;
-Factor : '(' Expr ')' | id ;
-id     := "[a-zA-Z]+" ;
-```
+<pre class="lrbox">
+<span class="nt">Expr</span>   : <span class="nt">Expr</span> <span class="setm">'+'</span> <span class="nt">Term</span> | <span class="nt">Term</span> ;
+<span class="nt">Term</span>   : <span class="nt">Term</span> <span class="setm">'*'</span> <span class="nt">Factor</span> | <span class="nt">Factor</span> ;
+<span class="nt">Factor</span> : <span class="setm">'('</span> <span class="nt">Expr</span> <span class="setm">')'</span> | <span class="setm">id</span> ;
+<span class="setm">id</span>     := "[a-zA-Z]+" ;
+</pre>
 
 And we keep parsing this input: **`a + a * a`**
 
 Every chapter adds one more layer of understanding to this *same* example.\
-(We'll take apart how to read this grammar slowly, together,
-the first time it shows up, so there's no need to worry about it in advance.)
+(We'll take apart how to read this grammar slowly, together, the first time it shows up, so there's no need to worry about it in advance.)
 
 ## So, shall we get started?
 
-- 👉 **[Quick Start](getting-started.md)** — install it and run your first parse in 5 lines.
+- 👉 **[Getting Started](getting-started.md)** — install it and run your first parse in 5 lines.
 - 🌿 **[Live playground](https://polite-island-0b2142200.7.azurestaticapps.net)** — right in the browser, no install needed.
 
 > **Note:** Janglim is still an **early preview (`0.2.0-preview`)**.\

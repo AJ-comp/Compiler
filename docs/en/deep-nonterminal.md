@@ -1,6 +1,6 @@
 # NonTerminal — the branch that holds rules inside
 
-> 🎓 This is the **deep-dive track**. Earlier we saw [Symbol](deep-symbols.md) (the shared abstraction) and [Terminal](deep-terminal.md) (the leaf).
+> 🎓 This is the **Advanced track**. Earlier we saw [Symbol](deep-symbols.md) (the shared abstraction) and [Terminal](deep-terminal.md) (the leaf).
 > Now for the remaining branch — the **branch, NonTerminal**.
 
 A `NonTerminal` is a **rule** like `Expr`, `Term`, or `Factor`.
@@ -14,9 +14,9 @@ A NonTerminal is the exact opposite — it holds a whole lot inside.**
 
 Let's look again at the first line of our example.
 
-```
-Expr : Expr '+' Term | Term ;
-```
+<pre class="lrbox">
+<span class="nt">Expr</span> : <span class="nt">Expr</span> <span class="setm">'+'</span> <span class="nt">Term</span> | <span class="nt">Term</span> ;
+</pre>
 
 There are **two ways** to build `Expr`.\
 Either `Expr '+' Term`, or just `Term` — one of the two.
@@ -45,14 +45,14 @@ This single line `Expr : Expr '+' Term | Term ;` goes, whole, into this `alters`
 Sounds abstract when it's just words, doesn't it?\
 Let me draw out **what shape it concretely takes**.
 
-```
-   Expr : Expr '+' Term | Term ;
+<pre class="lrbox">
+   <span class="nt">Expr</span> : <span class="nt">Expr</span> <span class="setm">'+'</span> <span class="nt">Term</span> | <span class="nt">Term</span> ;
                   │
                   ▼   this one line is held inside alters like this
    alters  (NonTerminalAlter)
-     ├─ alternative 0 :  [ Expr ] · [ '+' ] · [ Term ]      ← "Expr '+' Term" (in order)
-     └─ alternative 1 :  [ Term ]                            ← "Term"
-```
+     ├─ alternative 0 :  [ <span class="nt">Expr</span> ] · [ <span class="setm">'+'</span> ] · [ <span class="nt">Term</span> ]      ← "Expr '+' Term" (in order)
+     └─ alternative 1 :  [ <span class="nt">Term</span> ]                            ← "Term"
+</pre>
 
 `|` **separates the alternatives**, and within each alternative the symbols are lined up **in order**. (How this "order" and these "alternatives" are each represented
 in code — that's the topic starting from the next chapter, [Concat](deep-concat.md).)
@@ -61,13 +61,25 @@ in code — that's the topic starting from the next chapter, [Concat](deep-conca
 
 A rule carries two more pieces of information.
 
+<div class="ex-card">
+
+**① `Name` — the rule's name**
+
 **`Name`** — the rule's name.\
 Names like `Expr`, `Term`. (A Symbol's identity was [`UniqueKey`](deep-symbols.md), remember? `Name` is a separate, *display-only* thing.)
 
-**`IsStartSymbol`** — marks whether this rule is **the starting point of parsing**.
+</div>
 
-The parser has to know "where do I start reading from?", right?\
-Only that starting rule has this mark turned on.
+<div class="ex-card">
+
+**② `IsStartSymbol` — is it the starting point of parsing**
+
+**`IsStartSymbol`** — marks whether this rule is the grammar's **start symbol**.
+
+The start symbol is the rule that *generates the entire language* — it's **the root of the parse tree**, and the symbol parsing must reach when it finishes. (An LR parser reads the input *from the first token* upward, and at the very end folds it into this symbol.)\
+Only that start symbol has this mark turned on.
+
+</div>
 
 ## Attaching productions to a rule — AddItem / SetItem
 
@@ -107,15 +119,15 @@ Exactly what this `NonTerminalSingle` is — that's the very next topic.
 
 If we bundle everything so far into a picture, it looks like this.
 
-```
+<pre class="lrbox">
 NonTerminal  "Expr"
    ├ Name = "Expr",  IsStartSymbol = ?
    └ alters : NonTerminalAlter      ← the bundle of alternatives
-        ├ (alternative 0)  Expr '+' Term
-        └ (alternative 1)  Term
+        ├ (alternative 0)  <span class="nt">Expr</span> <span class="setm">'+'</span> <span class="nt">Term</span>
+        └ (alternative 1)  <span class="nt">Term</span>
 
    iterate with foreach → NonTerminalSingle 0, NonTerminalSingle 1
-```
+</pre>
 
 ## 📐 The author's design diagram
 

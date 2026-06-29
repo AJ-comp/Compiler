@@ -1,8 +1,8 @@
-# FOLLOW · Implementation (Code)
+# FOLLOW · Implementation (code)
 
 > 🎓 This is the **advanced track · implementation**.\
-> In the previous [FOLLOW · Calculation Rules](follow-rules.md), we saw the three rules (① start symbol `$` / ② the `FIRST` of what follows / ③ inherit the LHS when at the end) and the repetition.\
-> This time we'll follow how that went into the `FirstFollowAnalyzer` code, **almost line by line**.
+> In the previous [FOLLOW · Computation rules](follow-rules.md), we saw the three rules (① start symbol `$` / ② the `FIRST` of what follows / ③ inherit the LHS when at the end) and the iteration.\
+> This time we'll follow how that went into the `FirstFollowAnalyzer` code, **almost line by line.**
 
 ## Try it — the public API (one line)
 
@@ -50,12 +50,12 @@ public TerminalSet InitFollowSet(NonTerminal nonTerminal, HashSet<NonTerminal> n
 
 - `if (nonTerminal.IsStartSymbol) result.Add(new EndMarker())` → this is **rule ①**. (`$` is `EndMarker` in the code.)
 - Once `GetFollowSymbols(...)` gathers *the symbols that come right after `B`*, we drop `ε` from each one's `FirstSet` and merge them → **rule ②**.\
-  (Here `FirstSet` calls the [FIRST calculator](first-impl.md) directly. That's why FIRST has to be fully finished before FOLLOW.)
+  (Here `FirstSet` calls the [FIRST calculator](first-impl.md) directly. That's why FIRST has to be completely finished before FOLLOW.)
 
 ### Finding the symbol right after — `FindNextSymbolSet`
 
 `GetFollowSymbols` scans the whole grammar and collects the results of `FindNextSymbolSet`.\
-This is the code that finds *"right after `B`"*.
+This is the code that finds *"right after `B`."*
 
 ```csharp
 foreach (var symbol in singleNT)
@@ -69,8 +69,8 @@ foreach (var symbol in singleNT)
 }
 ```
 
-Starting from when we meet `B` (`findSymbol`), we collect symbols, but we stop the moment we hit a symbol that *cannot disappear (not ε)*.\
-This is exactly the *"FIRST of β"* gathering from calculation rule ②.
+From the point we meet `B` (`findSymbol`), we collect symbols, but the moment we hit a symbol that *cannot disappear (not ε)* we stop.\
+This is exactly the *"FIRST of β"* gathering from computation rule ②.
 
 ## ③ inherit, repeatedly — `ConCatExprUpdateFollow`
 
@@ -94,7 +94,7 @@ private bool ConCatExprUpdateFollow(NonTerminalSingle contents, TerminalSet foll
 
 `followSet` is exactly the FOLLOW of the LHS (`A`).\
 Walking the production **from the very end (right)**, we pour `FOLLOW(A)` into the nonterminal at the end → **rule ③**.\
-If that nonterminal *can disappear (ε)*, we keep pouring into the nonterminal before it as well; if it can't disappear, we stop — the calculation rule's
+If that nonterminal *can disappear (ε)*, we keep pouring into the nonterminal before it as well; if it can't disappear, we stop — the computation rule's
 *"if β disappears, go further back"* is exactly this one line, `if (!IsNullAble) break;`.
 
 (`UpdateFollow` is the wrapper that runs the above over *every production* of a single nonterminal.)
@@ -119,7 +119,7 @@ public void CalculateAllFollow(HashSet<NonTerminal> nonTerminals)
 }
 ```
 
-The calculation rules are here **in exactly the same order** — **FIRST first → initial values from rules ①·② → repeat rule ③ until nothing changes.**\
+The computation rules are here **in exactly the same order** — **FIRST first → initial values from rules ①·② → repeat rule ③ until nothing changes.**\
 The first line, `CalculateAllFirst`, nails down in code the fact that *"FOLLOW uses FIRST as its ingredient."*
 
 ## Reading out the result — `Follow`
@@ -133,7 +133,7 @@ The public API `GetFirstAndFollow()` calls this and fills in `item.Follow`.
 
 ## Formula ↔ code at a glance
 
-| Calculation rule | Code |
+| Computation rule | Code |
 |---|---|
 | Rule ① — start symbol `$` | `if (IsStartSymbol) result.Add(new EndMarker())` |
 | Rule ② — the `FIRST − ε` of what follows | `GetFollowSymbols` + `FirstSet(symbol).ExceptWith(ε)` |
@@ -143,7 +143,7 @@ The public API `GetFirstAndFollow()` calls this and fills in `item.Follow`.
 
 ## Following it with the example
 
-Run `CalculateAllFollow` on our grammar — and it flows exactly the way we did it by hand in the [calculation rules](follow-rules.md).
+Run `CalculateAllFollow` on our grammar — and it flows exactly the way we did it by hand in the [computation rules](follow-rules.md).
 
 - **`CalculateAllFirst`** first → the `FIRST` sets get filled in.
 - **`InitFollowSet`** (①②) → `FOLLOW(Expr)={$,'+',')'}`, `FOLLOW(Term)={'*'}`, `FOLLOW(Factor)={}`.
@@ -174,14 +174,14 @@ public partial class FirstFollowAnalyzer   // (FOLLOW side)
 
 ## Next chapter
 
-We've finished FIRST and FOLLOW all the way through — **definition · derivation · calculation rules · code**.\
+We've finished FIRST and FOLLOW all the way through — **definition · derivation · computation rules · code.**\
 These two are exactly the core ingredients that build the **parse table**.
 
 Next come the **LR item**, which expresses *"how far into this rule the LR parser has read so far,"* and the **canonical collection (the states)** —
 those come together and finally become that famous **parse table**.
 
-👉 **[LR Item](lr-item.md)**
+👉 **[LR item](lr-item.md)**
 
 ---
 
-👈 Previously: [FOLLOW · Calculation Rules](follow-rules.md)
+👈 Previously: [FOLLOW · Computation rules](follow-rules.md)

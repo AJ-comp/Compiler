@@ -14,9 +14,9 @@ NonTerminal はその正反対 — 中に何かをたっぷり抱えています
 
 私たちの例の最初の一行をもう一度見てみましょう。
 
-```
-Expr : Expr '+' Term | Term ;
-```
+<pre class="lrbox">
+<span class="nt">Expr</span> : <span class="nt">Expr</span> <span class="setm">'+'</span> <span class="nt">Term</span> | <span class="nt">Term</span> ;
+</pre>
 
 `Expr` を作る方法が **二通り** ですね。\
 `Expr '+' Term` であるか、それとも単なる `Term` であるか、どちらか一方です。
@@ -42,17 +42,17 @@ public class NonTerminal : Symbol, IEnumerable<NonTerminalSingle>
 
 `Expr : Expr '+' Term | Term ;` というこの一行が、まるごとこの `alters` の中に入るわけです。
 
-言葉だけだと抽象的ですよね？\
+言葉だけだと抽象的ですよね?\
 **具体的にどんな形なのか** を描いてみましょう。
 
-```
-   Expr : Expr '+' Term | Term ;
+<pre class="lrbox">
+   <span class="nt">Expr</span> : <span class="nt">Expr</span> <span class="setm">'+'</span> <span class="nt">Term</span> | <span class="nt">Term</span> ;
                   │
                   ▼   この一行が alters の中にこう収まります
    alters  (NonTerminalAlter)
-     ├─ 選択肢 0 :  [ Expr ] · [ '+' ] · [ Term ]      ← "Expr '+' Term" (順番どおり)
-     └─ 選択肢 1 :  [ Term ]                            ← "Term"
-```
+     ├─ 選択肢 0 :  [ <span class="nt">Expr</span> ] · [ <span class="setm">'+'</span> ] · [ <span class="nt">Term</span> ]      ← "Expr '+' Term" (順番どおり)
+     └─ 選択肢 1 :  [ <span class="nt">Term</span> ]                            ← "Term"
+</pre>
 
 `|` が **選択肢を区切り**、各選択肢の中では記号たちが **順番どおり** に並びます。(この「順番」と「選択肢」を
 コードでそれぞれどう表現するかが — 次の [Concat](deep-concat.md) 章からのテーマです。)
@@ -61,17 +61,29 @@ public class NonTerminal : Symbol, IEnumerable<NonTerminalSingle>
 
 規則には情報がもう二つくっつきます。
 
+<div class="ex-card">
+
+**① `Name` — 規則の名前**
+
 **`Name`** — 規則の名前です。\
-`Expr`、`Term` のような名前です。(Symbol のアイデンティティは [`UniqueKey`](deep-symbols.md) でしたね？ `Name` はそれとは別物の *表示用* です。)
+`Expr`、`Term` のような名前です。(Symbol のアイデンティティは [`UniqueKey`](deep-symbols.md) でしたね? `Name` はそれとは別物の *表示用* です。)
 
-**`IsStartSymbol`** — この規則が **構文解析の出発点** かどうかを示します。
+</div>
 
-パーサは「どこから読み始めるんだ？」を知っていないといけませんよね。\
-その出発規則だけにこの印が灯ります。
+<div class="ex-card">
+
+**② `IsStartSymbol` — 構文解析の出発点か**
+
+**`IsStartSymbol`** — この規則が文法の **開始記号** かどうかを示します。
+
+開始記号は *言語全体を作り出す* 規則です — **構文解析木の根** であり、構文解析が終わったときに到達すべき記号です。(LR パーサは入力を *最初のトークンから* 読み上げていき、最後にこの記号へと還元します。)\
+その開始記号だけにこの印が灯ります。
+
+</div>
 
 ## 規則に生成規則を付ける — AddItem / SetItem
 
-では私たちがコードで `Expr` に選択肢を **追加** するにはどうすればいいでしょうか？
+では私たちがコードで `Expr` に選択肢を **追加** するにはどうすればいいでしょうか?
 
 `NonTerminal` が提供する `AddItem` / `SetItem` でです。
 
@@ -107,15 +119,15 @@ foreach (NonTerminalSingle single in Expr)   // 0番目の選択肢、1番目の
 
 ここまでを絵にまとめるとこうなります。
 
-```
+<pre class="lrbox">
 NonTerminal  "Expr"
    ├ Name = "Expr",  IsStartSymbol = ?
    └ alters : NonTerminalAlter      ← 選択肢たちの束
-        ├ (選択肢 0)  Expr '+' Term
-        └ (選択肢 1)  Term
+        ├ (選択肢 0)  <span class="nt">Expr</span> <span class="setm">'+'</span> <span class="nt">Term</span>
+        └ (選択肢 1)  <span class="nt">Term</span>
 
    foreach で巡回すると → NonTerminalSingle 0, NonTerminalSingle 1
-```
+</pre>
 
 ## 📐 著者の設計ダイアグラム
 
@@ -172,7 +184,7 @@ public class NonTerminal : Symbol, IEnumerable<NonTerminalSingle>, ICloneable
 
 `NonTerminal` が **選択肢たちの束(`alters`)** を抱えるということを見ました。
 
-ところがその *選択肢一つ* は、コードの中で正確にどんな形なのでしょうか？
+ところがその *選択肢一つ* は、コードの中で正確にどんな形なのでしょうか?
 
 `Expr '+' Term` のような **順番(連接)** と、`... | Term` のような **選択(択一)** — この二つの正体を
 次の章で掘り下げます。

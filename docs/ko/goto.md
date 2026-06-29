@@ -20,13 +20,13 @@ GOTO 는 *한 번에 끝나는* 연산이에요.\
 
 앞 [계산법](closure-calc.md)에서 만든 시작 상태 `I₀` (7개)를 다시 가져올게요.
 
-<pre class="lrbox">   Accept → <span class="lrdot">•</span> Expr
-   Expr   → <span class="lrdot">•</span> Expr '+' Term
-   Expr   → <span class="lrdot">•</span> Term
-   Term   → <span class="lrdot">•</span> Term '*' Factor
-   Term   → <span class="lrdot">•</span> Factor
-   Factor → <span class="lrdot">•</span> '(' Expr ')'
-   Factor → <span class="lrdot">•</span> id</pre>
+<pre class="lrbox">   <span class="nt">Accept</span> → <span class="lrdot">•</span> <span class="nt">Expr</span>
+   <span class="nt">Expr</span>   → <span class="lrdot">•</span> <span class="nt">Expr</span> <span class="setm">'+'</span> <span class="nt">Term</span>
+   <span class="nt">Expr</span>   → <span class="lrdot">•</span> <span class="nt">Term</span>
+   <span class="nt">Term</span>   → <span class="lrdot">•</span> <span class="nt">Term</span> <span class="setm">'*'</span> <span class="nt">Factor</span>
+   <span class="nt">Term</span>   → <span class="lrdot">•</span> <span class="nt">Factor</span>
+   <span class="nt">Factor</span> → <span class="lrdot">•</span> <span class="setm">'('</span> <span class="nt">Expr</span> <span class="setm">')'</span>
+   <span class="nt">Factor</span> → <span class="lrdot">•</span> <span class="setm">id</span></pre>
 
 이 상태에서 *점 바로 뒤* 에 올 수 있는 기호는 — `Expr`, `Term`, `Factor`, `'('`, `id` 예요.\
 (이게 [상태](lr-state.md) 장에서 본 `MarkSymbolSet` 이죠.) 이 기호마다 GOTO 를 한 번씩 해봐요.
@@ -35,7 +35,7 @@ GOTO 는 *한 번에 끝나는* 연산이에요.\
 
 점 뒤가 `id` 인 아이템은 `Factor → • id` 하나뿐이죠. 점을 `id` 뒤로 옮기면:
 
-<pre class="lrbox">   Factor → <span class="lrdot">•</span> id        ──( id 읽음 )──▶        Factor → id <span class="lrdot">•</span></pre>
+<pre class="lrbox">   <span class="nt">Factor</span> → <span class="lrdot">•</span> <span class="setm">id</span>        ──( id 읽음 )──▶        <span class="nt">Factor</span> → <span class="setm">id</span> <span class="lrdot">•</span></pre>
 
 `Factor → id •` 은 점이 끝에 닿았어요 — *완료(reduce) 아이템* 이죠. (이 상태에 오면 *"`id` 를 `Factor`
 로 묶어라"* 가 돼요.) 점 뒤에 비단말이 없어 클로저로 더 붙을 것도 없고요. → **아이템 1개짜리** 다음
@@ -45,13 +45,13 @@ GOTO 는 *한 번에 끝나는* 연산이에요.\
 
 점 뒤가 `Term` 인 아이템은 *둘* 이에요. 둘의 점을 `Term` 뒤로 옮기면:
 
-<pre class="lrbox">   Expr → <span class="lrdot">•</span> Term              ──( Term )──▶   Expr → Term <span class="lrdot">•</span>
-   Term → <span class="lrdot">•</span> Term '*' Factor   ──( Term )──▶   Term → Term <span class="lrdot">•</span> '*' Factor</pre>
+<pre class="lrbox">   <span class="nt">Expr</span> → <span class="lrdot">•</span> <span class="nt">Term</span>              ──( Term )──▶   <span class="nt">Expr</span> → <span class="nt">Term</span> <span class="lrdot">•</span>
+   <span class="nt">Term</span> → <span class="lrdot">•</span> <span class="nt">Term</span> <span class="setm">'*'</span> <span class="nt">Factor</span>   ──( Term )──▶   <span class="nt">Term</span> → <span class="nt">Term</span> <span class="lrdot">•</span> <span class="setm">'*'</span> <span class="nt">Factor</span></pre>
 
 이 둘을 모으면 (점 뒤에 새 비단말이 없어 클로저로 더 안 붙어요):
 
-<pre class="lrbox">   Expr → Term <span class="lrdot">•</span>
-   Term → Term <span class="lrdot">•</span> '*' Factor</pre>
+<pre class="lrbox">   <span class="nt">Expr</span> → <span class="nt">Term</span> <span class="lrdot">•</span>
+   <span class="nt">Term</span> → <span class="nt">Term</span> <span class="lrdot">•</span> <span class="setm">'*'</span> <span class="nt">Factor</span></pre>
 
 > 💡 이 상태, 어디서 봤죠? 바로 **[상태](lr-state.md) 장의 그 `id * id` 상태** 예요!\
 > *"`id` 를 `Term` 까지 읽었을 때"* 의 그 상태가 — 사실은 **`I₀` 에서 `Term` 을 읽고 도달하는 상태**
@@ -61,8 +61,8 @@ GOTO 는 *한 번에 끝나는* 연산이에요.\
 
 점 뒤가 `Expr` 인 아이템도 둘이에요 (`Accept → •Expr`, `Expr → •Expr '+' Term`). 옮기면:
 
-<pre class="lrbox">   Accept → <span class="lrdot">•</span> Expr          ──( Expr )──▶   Accept → Expr <span class="lrdot">•</span>
-   Expr   → <span class="lrdot">•</span> Expr '+' Term ──( Expr )──▶   Expr → Expr <span class="lrdot">•</span> '+' Term</pre>
+<pre class="lrbox">   <span class="nt">Accept</span> → <span class="lrdot">•</span> <span class="nt">Expr</span>          ──( Expr )──▶   <span class="nt">Accept</span> → <span class="nt">Expr</span> <span class="lrdot">•</span>
+   <span class="nt">Expr</span>   → <span class="lrdot">•</span> <span class="nt">Expr</span> <span class="setm">'+'</span> <span class="nt">Term</span> ──( Expr )──▶   <span class="nt">Expr</span> → <span class="nt">Expr</span> <span class="lrdot">•</span> <span class="setm">'+'</span> <span class="nt">Term</span></pre>
 
 여기 `Accept → Expr •` 가 특별해요 — *가상 시작 규칙이 끝까지 갔다* 는 건, **입력이 여기서 끝(`$`)나면
 파싱을 받아들인다(accept)** 는 뜻이에요!\
@@ -74,7 +74,7 @@ GOTO 는 *한 번에 끝나는* 연산이에요.\
 
 점 뒤가 `'('` 인 아이템은 `Factor → • '(' Expr ')'` 하나죠. 점을 `'('` 뒤로 옮기면:
 
-<pre class="lrbox">   Factor → <span class="lrdot">•</span> '(' Expr ')'    ──( '(' 읽음 )──▶    Factor → '(' <span class="lrdot">•</span> Expr ')'</pre>
+<pre class="lrbox">   <span class="nt">Factor</span> → <span class="lrdot">•</span> <span class="setm">'('</span> <span class="nt">Expr</span> <span class="setm">')'</span>    ──( '(' 읽음 )──▶    <span class="nt">Factor</span> → <span class="setm">'('</span> <span class="lrdot">•</span> <span class="nt">Expr</span> <span class="setm">')'</span></pre>
 
 그런데 이번엔 달라요 — 옮긴 자리의 **점 뒤가 비단말 `Expr`** 이에요!\
 앞의 `id`·`Term`·`Expr` 때는 점만 옮기면 끝이었지만, 이 한 아이템만으론 *`Expr` 를 어떻게 시작하는지* 가
@@ -83,13 +83,13 @@ GOTO 는 *한 번에 끝나는* 연산이에요.\
 점 뒤 `Expr` 를 따라 — `Expr` 의 규칙, 거기서 `Term` 의 규칙, 또 `Factor` 의 규칙까지 — 줄줄이 끌려
 들어와 **7개로 채워져요.**
 
-<pre class="lrbox">   Factor → '(' <span class="lrdot">•</span> Expr ')'        <span style="opacity:.65">← 점 옮긴 것</span>
-   Expr   → <span class="lrdot">•</span> Expr '+' Term         <span style="opacity:.65">← 클로저로 채워짐</span>
-   Expr   → <span class="lrdot">•</span> Term
-   Term   → <span class="lrdot">•</span> Term '*' Factor
-   Term   → <span class="lrdot">•</span> Factor
-   Factor → <span class="lrdot">•</span> '(' Expr ')'
-   Factor → <span class="lrdot">•</span> id</pre>
+<pre class="lrbox">   <span class="nt">Factor</span> → <span class="setm">'('</span> <span class="lrdot">•</span> <span class="nt">Expr</span> <span class="setm">')'</span>        <span style="opacity:.65">← 점 옮긴 것</span>
+   <span class="nt">Expr</span>   → <span class="lrdot">•</span> <span class="nt">Expr</span> <span class="setm">'+'</span> <span class="nt">Term</span>         <span style="opacity:.65">← 클로저로 채워짐</span>
+   <span class="nt">Expr</span>   → <span class="lrdot">•</span> <span class="nt">Term</span>
+   <span class="nt">Term</span>   → <span class="lrdot">•</span> <span class="nt">Term</span> <span class="setm">'*'</span> <span class="nt">Factor</span>
+   <span class="nt">Term</span>   → <span class="lrdot">•</span> <span class="nt">Factor</span>
+   <span class="nt">Factor</span> → <span class="lrdot">•</span> <span class="setm">'('</span> <span class="nt">Expr</span> <span class="setm">')'</span>
+   <span class="nt">Factor</span> → <span class="lrdot">•</span> <span class="setm">id</span></pre>
 
 이게 바로 **`I₄`** 예요 ([정준 집합](canonical-set.md) 에 그대로 나와요).
 

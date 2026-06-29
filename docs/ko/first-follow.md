@@ -10,7 +10,7 @@
 그러니 한 번에 안 와닿아도 전혀 이상한 게 아니에요.\
 제가 진짜 천천히,
 손 잡고 갈게요.\
-다 읽고 나면 "어, 별거 아니었네?" 하게 될 거예요. 🙂
+천천히 따라오면, 이 두 집합이 왜 필요한지 자연스럽게 보일 거예요. 🙂
 
 ---
 
@@ -19,12 +19,12 @@
 
 이 장에서 계속 쓰는 예제 문법이에요 (참고용):
 
-```
-Expr   : Expr '+' Term | Term ;
-Term   : Term '*' Factor | Factor ;
-Factor : '(' Expr ')' | id ;
-id     := "[a-zA-Z]+" ;
-```
+<pre class="lrbox">
+<span class="nt">Expr</span>   : <span class="nt">Expr</span> <span class="setm">'+'</span> <span class="nt">Term</span> | <span class="nt">Term</span> ;
+<span class="nt">Term</span>   : <span class="nt">Term</span> <span class="setm">'*'</span> <span class="nt">Factor</span> | <span class="nt">Factor</span> ;
+<span class="nt">Factor</span> : <span class="setm">'('</span> <span class="nt">Expr</span> <span class="setm">')'</span> | <span class="setm">id</span> ;
+<span class="setm">id</span>     := "[a-zA-Z]+" ;
+</pre>
 
 ---
 
@@ -59,7 +59,7 @@ id     := "[a-zA-Z]+" ;
 
 > 💡 너무 깊게 생각하지 마세요. 한 줄 요약은 이거예요:
 > **FIRST/FOLLOW = 파서가 "시작/끝"을 판단하려고 미리 만들어 두는 *치트시트*.**
-> 이게 있어야 다음 장의 [파싱 테이블](first-follow.md)을 만들 수 있어요.
+> 이게 있어야 뒤에 나올 [파싱 테이블](parse-table-build.md)을 만들 수 있어요.
 
 ## ② 무엇을 하는가
 
@@ -68,43 +68,58 @@ id     := "[a-zA-Z]+" ;
 
 ### FIRST — "이건 어떤 토큰으로 *시작* 될 수 있나"
 
-**FIRST(X)** = X 가 만들어낼 수 있는 모든 문자열의 **맨 앞에 올 수 있는 단말(토큰)들의 모음**.
+**FIRST(X)** = X 를 유도해서 **가장 처음 나타날 수 있는 단말(토큰)들의 모음**. (= 그 문자열의 *맨 앞* 에 오는 단말)
 
-제일 쉬운 `Factor` 부터 가요.
+비단말 셋 — `Factor` · `Term` · `Expr` — 의 FIRST 를 하나씩 구해봐요. 제일 쉬운 것부터.
 
-```
-Factor : '(' Expr ')' | id ;
-```
+<div class="ex-card">
+
+**① `Factor` — 막힘 없이 끝나요**
+
+<pre class="lrbox">
+<span class="nt">Factor</span> : <span class="setm">'('</span> <span class="nt">Expr</span> <span class="setm">')'</span> | <span class="setm">id</span> ;
+</pre>
 
 `Factor` 는 `(` 로 시작하거나 `id` 로 시작하죠? 그러니:
 
-```
-FIRST(Factor) = { '(', id }
-```
+<pre class="lrbox">
+FIRST(<span class="nt">Factor</span>) = { <span class="setm">'('</span>, <span class="setm">id</span> }
+</pre>
 
-(`{ }` 는 그냥 "모음, 집합"이라는 표시예요.\
-중괄호 안에 든 게 후보들이에요.)
+> `{ }` 는 *집합* 을 뜻하는 표시예요 — 중괄호 안에 든 게 그 후보들이고요.
 
-다음 `Term`:
+</div>
 
-```
-Term : Term '*' Factor | Factor ;
-```
+<div class="ex-card">
+
+**② `Term` — 자기 자신이 또 나와요**
+
+<pre class="lrbox">
+<span class="nt">Term</span> : <span class="nt">Term</span> <span class="setm">'*'</span> <span class="nt">Factor</span> | <span class="nt">Factor</span> ;
+</pre>
 
 `Term` 은 `Term` 으로 시작하거나(자기 자신! — 아까 그 재귀죠) `Factor` 로 시작해요.\
 자기 자신으로
 시작하는 걸 계속 펼쳐보면 결국 맨 앞은 `Factor` 가 돼요.\
 그러니:
 
-```
-FIRST(Term) = FIRST(Factor) = { '(', id }
-```
+<pre class="lrbox">
+FIRST(<span class="nt">Term</span>) = FIRST(<span class="nt">Factor</span>) = { <span class="setm">'('</span>, <span class="setm">id</span> }
+</pre>
+
+</div>
+
+<div class="ex-card">
+
+**③ `Expr` — 같은 모양**
 
 같은 논리로 `Expr` 도:
 
-```
-FIRST(Expr) = { '(', id }
-```
+<pre class="lrbox">
+FIRST(<span class="nt">Expr</span>) = { <span class="setm">'('</span>, <span class="setm">id</span> }
+</pre>
+
+</div>
 
 셋 다 `(` 아니면 `id` 로 시작하네요.\
 말이 되죠?\
@@ -118,7 +133,12 @@ FIRST(Expr) = { '(', id }
 **FOLLOW(X)** = 올바른 문장 어딘가에서 X **바로 다음에 나타날 수 있는 단말들의 모음**.
 여기엔 특별한 기호 **`$`**(입력의 끝을 뜻하는 가상의 토큰)도 들어갈 수 있어요.
 
-`Expr` 부터요.\
+이번에도 셋 — `Expr` · `Term` · `Factor` — 을 하나씩 봐요.
+
+<div class="ex-card">
+
+**① `Expr` — 시작 기호부터**
+
 "`Expr` 다음에 뭐가 올 수 있지?" 를 문법 전체에서 찾아보면:
 
 - `Expr` 은 **시작 기호**예요 (문장 전체가 `Expr`) → 그러니 `Expr` 다음엔 **입력의 끝 `$`** 가 올 수 있음
@@ -127,9 +147,15 @@ FIRST(Expr) = { '(', id }
 
 다 모으면:
 
-```
-FOLLOW(Expr) = { $, '+', ')' }
-```
+<pre class="lrbox">
+FOLLOW(<span class="nt">Expr</span>) = { $, <span class="setm">'+'</span>, <span class="setm">')'</span> }
+</pre>
+
+</div>
+
+<div class="ex-card">
+
+**② `Term` — `Expr` 의 FOLLOW 를 물려받아요**
 
 `Term` 도 똑같이 "Term 다음에 오는 것"을 훑어보면:
 
@@ -137,18 +163,25 @@ FOLLOW(Expr) = { $, '+', ')' }
   올 수 있는 건 Term 다음에도 올 수 있어요** → FOLLOW(Expr) 가 그대로 들어옴
 - `Term : Term '*' Factor` → 첫 `Term` 다음엔 `*`
 
-```
-FOLLOW(Term) = FOLLOW(Expr) ∪ { '*' } = { $, '+', ')', '*' }
-```
+<pre class="lrbox">
+FOLLOW(<span class="nt">Term</span>) = FOLLOW(<span class="nt">Expr</span>) ∪ { <span class="setm">'*'</span> } = { $, <span class="setm">'+'</span>, <span class="setm">')'</span>, <span class="setm">'*'</span> }
+</pre>
 
-(`∪` 는 "합치기(합집합)" 기호예요.\
-두 모음을 그냥 합한다는 뜻이에요.)
+> `∪` 는 *합집합* 기호예요 — 두 모음을 그냥 합친다는 뜻이고요.
+
+</div>
+
+<div class="ex-card">
+
+**③ `Factor` — `Term` 과 똑같이**
 
 `Factor` 도 같은 식으로:
 
-```
-FOLLOW(Factor) = { $, '+', ')', '*' }
-```
+<pre class="lrbox">
+FOLLOW(<span class="nt">Factor</span>) = { $, <span class="setm">'+'</span>, <span class="setm">')'</span>, <span class="setm">'*'</span> }
+</pre>
+
+</div>
 
 ### 자, 다시 처음 그 고민으로 돌아가요
 
@@ -160,8 +193,8 @@ FOLLOW(Factor) = { $, '+', ')', '*' }
 - 다음이 `+` 또는 `$` → 이 둘은 **FOLLOW(Term)** 에 있음 → "Term 끝났으니 **묶어라(reduce)**"
 
 **바로 이렇게 FOLLOW 가 "언제 묶을지"를 결정해요.**\
-FIRST/FOLLOW 가 왜 파싱 테이블의 재료인지,
-이제 조금 감이 오시나요? (안 와도 괜찮아요 — 다음 장에서 테이블을 직접 보면 확 와닿을 거예요.)
+FIRST/FOLLOW 가 왜 파싱 테이블의 재료인지, 여기서 드러나요.\
+다음 장에서 그 테이블을 직접 만들어 보면 더 또렷해져요.
 
 ### 특수 상황 둘 (지금은 가볍게만)
 
@@ -169,7 +202,7 @@ FIRST/FOLLOW 가 왜 파싱 테이블의 재료인지,
 "이런 게 있구나" 정도만.
 
 - **ε(엡실론, 빈 문자열):** 어떤 비단말이 "아무것도 아닌 것"이 될 수 있을 때 쓰는 표시예요.
-  우리 예제엔 안 나오니 지금은 신경 안 써도 돼요. (나중에 심화 과정에서 따로 다뤄요.)
+  우리 예제엔 안 나오니 지금은 신경 안 써도 돼요.
 - **`$`(끝 표시):** 방금 봤듯 입력의 끝을 나타내는 가상의 토큰이에요. 시작 기호의 FOLLOW 엔 항상 들어가요.
 
 ## ③ 플레이그라운드에서 보기

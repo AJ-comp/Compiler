@@ -33,14 +33,14 @@
 
 먼저 생성규칙에 번호를 매겨요. (reduce 가 *"몇 번으로 묶을지"* 를 가리키거든요.)
 
-```
-   1:  Expr   → Expr '+' Term
-   2:  Expr   → Term
-   3:  Term   → Term '*' Factor
-   4:  Term   → Factor
-   5:  Factor → '(' Expr ')'
-   6:  Factor → id
-```
+<pre class="lrbox">
+   1:  <span class="nt">Expr</span>   → <span class="nt">Expr</span> <span class="setm">'+'</span> <span class="nt">Term</span>
+   2:  <span class="nt">Expr</span>   → <span class="nt">Term</span>
+   3:  <span class="nt">Term</span>   → <span class="nt">Term</span> <span class="setm">'*'</span> <span class="nt">Factor</span>
+   4:  <span class="nt">Term</span>   → <span class="nt">Factor</span>
+   5:  <span class="nt">Factor</span> → <span class="setm">'('</span> <span class="nt">Expr</span> <span class="setm">')'</span>
+   6:  <span class="nt">Factor</span> → <span class="setm">id</span>
+</pre>
 
 이제 각 상태 `Iᵢ` 마다 —
 
@@ -53,25 +53,43 @@
 
 > ③의 *"FOLLOW 에 있는 단말마다"* 가 핵심이에요 — *"이 규칙으로 묶고 난 다음에 올 수 있는 토큰"* 일
 > 때만 묶는 거죠. [상태](lr-state.md) 장에서 *"reduce 는 FOLLOW 일 때"* 라던 그 약속이에요.\
-> (이렇게 **FOLLOW 로 reduce 칸을 정하는 방식** 을 **SLR** 이라고 불러요 — 다음 페이지에서 제대로.)
+> (이렇게 **FOLLOW 로 reduce 칸을 정하는 방식** 을 **SLR** 이라고 불러요 — *충돌* 을 보고 난 뒤, SLR 장에서 제대로 다뤄요.)
 
 ## 직접 채워보기
 
 규칙을 우리 상태 몇 개에 직접 적용해 봐요. ([정준 집합](canonical-set.md)의 상태·전이표를 옆에 두고요.)
 
-**`I₀` 의 ACTION·GOTO** — `I₀` 엔 완료 아이템이 없으니 ①②만 써요.
+<div class="ex-card">
+
+**① `I₀` 의 ACTION·GOTO — 완료 아이템이 없어 ①②만**
+
+`I₀` 엔 완료 아이템이 없으니 ①②만 써요.
 
 - 점 뒤 단말: `'('`(`Factor → • '(' Expr ')'`)과 `id`(`Factor → • id`). 전이표에서
   `GOTO(I₀,'(') = I₄`, `GOTO(I₀,id) = I₅` 였죠 → **`'('` = s4,  `id` = s5**
 - 점 뒤 비단말: `Expr`→`I₁`, `Term`→`I₂`, `Factor`→`I₃` → **GOTO: `Expr` = 1, `Term` = 2, `Factor` = 3**
 
-**`I₂` 의 reduce** — `I₂` 엔 완료 아이템 `Expr → Term •` (2번 규칙)이 있어요.
+</div>
+
+<div class="ex-card">
+
+**② `I₂` 의 reduce — 완료 아이템의 FOLLOW 칸에 r2**
+
+`I₂` 엔 완료 아이템 `Expr → Term •` (2번 규칙)이 있어요.
 
 - `Expr` 의 FOLLOW 는 `{ $, '+', ')' }` 죠 → 그 세 칸에 **`'+'` = r2,  `')'` = r2,  `$` = r2**
 - 같이 있는 `Term → Term • '*' Factor` 에서 shift 도 나와요: `'*'`→`I₇` → **`'*'` = s7**
 
-**`I₁` 의 accept** — `I₁` 엔 `Accept → Expr •` 가 있으니 → **`$` = acc**.\
+</div>
+
+<div class="ex-card">
+
+**③ `I₁` 의 accept — `$` 칸이 받아들임**
+
+`I₁` 엔 `Accept → Expr •` 가 있으니 → **`$` = acc**.\
 (그리고 `Expr → Expr • '+' Term` 에서 `'+'`→`I₆` → **`'+'` = s6**.)
+
+</div>
 
 이런 식으로 12개 상태를 다 채우면 — 표가 완성돼요.
 
@@ -103,9 +121,9 @@ GOTO 칸의 숫자 = *비단말을 묶은 뒤* 갈 상태.\
 표는 다 만들었어요. 그런데 두 가지가 남았어요.
 
 - 만약 **한 칸에 행동이 둘** 들어가면 어쩌죠? ([상태](lr-state.md) 장에서 심어둔 그 **충돌** 씨앗.)
-- reduce 칸을 FOLLOW 로 정한 이 방식(**SLR**)은 — 더 똑똑한 방식(**LALR**)과 뭐가 다를까요?
+- reduce 칸을 FOLLOW 로 정한 이 방식(**SLR**)은 — 어떤 한계가 있고, 어떻게 더 정밀해질까요?
 
-👉 **파싱 테이블 · 충돌과 SLR/LALR** *(작성 예정)*
+👉 **[파싱 테이블 · 충돌이란?](parse-table-conflict.md)**
 
 ---
 

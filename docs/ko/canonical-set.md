@@ -14,12 +14,10 @@
 
 증대 문법은 이거예요.
 
-```
-   Accept → Expr
-   Expr   → Expr '+' Term   |  Term
-   Term   → Term '*' Factor  |  Factor
-   Factor → '(' Expr ')'     |  id
-```
+<pre class="lrbox">   <span class="nt">Accept</span> → <span class="nt">Expr</span>
+   <span class="nt">Expr</span>   → <span class="nt">Expr</span> <span class="setm">'+'</span> <span class="nt">Term</span>   |  <span class="nt">Term</span>
+   <span class="nt">Term</span>   → <span class="nt">Term</span> <span class="setm">'*'</span> <span class="nt">Factor</span>  |  <span class="nt">Factor</span>
+   <span class="nt">Factor</span> → <span class="setm">'('</span> <span class="nt">Expr</span> <span class="setm">')'</span>     |  <span class="setm">id</span></pre>
 
 ---
 
@@ -27,13 +25,13 @@
 
 `Accept → • Expr` 에서 클로저한 상태예요. ([계산법](closure-calc.md)에서 만든 그 7개.)
 
-<pre class="lrbox">   Accept → <span class="lrdot">•</span> Expr
-   Expr   → <span class="lrdot">•</span> Expr '+' Term
-   Expr   → <span class="lrdot">•</span> Term
-   Term   → <span class="lrdot">•</span> Term '*' Factor
-   Term   → <span class="lrdot">•</span> Factor
-   Factor → <span class="lrdot">•</span> '(' Expr ')'
-   Factor → <span class="lrdot">•</span> id</pre>
+<pre class="lrbox">   <span class="nt">Accept</span> → <span class="lrdot">•</span> <span class="nt">Expr</span>
+   <span class="nt">Expr</span>   → <span class="lrdot">•</span> <span class="nt">Expr</span> <span class="setm">'+'</span> <span class="nt">Term</span>
+   <span class="nt">Expr</span>   → <span class="lrdot">•</span> <span class="nt">Term</span>
+   <span class="nt">Term</span>   → <span class="lrdot">•</span> <span class="nt">Term</span> <span class="setm">'*'</span> <span class="nt">Factor</span>
+   <span class="nt">Term</span>   → <span class="lrdot">•</span> <span class="nt">Factor</span>
+   <span class="nt">Factor</span> → <span class="lrdot">•</span> <span class="setm">'('</span> <span class="nt">Expr</span> <span class="setm">')'</span>
+   <span class="nt">Factor</span> → <span class="lrdot">•</span> <span class="setm">id</span></pre>
 
 **전이:**
 
@@ -45,21 +43,21 @@
 
 ## `I₁` — `GOTO(I₀, Expr)`
 
-<pre class="lrbox">   Accept → Expr <span class="lrdot">•</span>              <span style="opacity:.65">← 완료 (입력 끝 $ 에서 accept)</span>
-   Expr   → Expr <span class="lrdot">•</span> '+' Term</pre>
+<pre class="lrbox">   <span class="nt">Accept</span> → <span class="nt">Expr</span> <span class="lrdot">•</span>              <span style="opacity:.65">← 완료 (입력 끝 $ 에서 accept)</span>
+   <span class="nt">Expr</span>   → <span class="nt">Expr</span> <span class="lrdot">•</span> <span class="setm">'+'</span> <span class="nt">Term</span></pre>
 
 **전이:** `'+'` 를 읽으면 → `I₆`
 
 ## `I₂` — `GOTO(I₀, Term)`
 
-<pre class="lrbox">   Expr → Term <span class="lrdot">•</span>               <span style="opacity:.65">← 완료 (reduce: Expr → Term)</span>
-   Term → Term <span class="lrdot">•</span> '*' Factor</pre>
+<pre class="lrbox">   <span class="nt">Expr</span> → <span class="nt">Term</span> <span class="lrdot">•</span>               <span style="opacity:.65">← 완료 (reduce: Expr → Term)</span>
+   <span class="nt">Term</span> → <span class="nt">Term</span> <span class="lrdot">•</span> <span class="setm">'*'</span> <span class="nt">Factor</span></pre>
 
 **전이:** `'*'` 를 읽으면 → `I₇`
 
 ## `I₃` — `GOTO(I₀, Factor)`
 
-<pre class="lrbox">   Term → Factor <span class="lrdot">•</span>             <span style="opacity:.65">← 완료 (reduce: Term → Factor)</span></pre>
+<pre class="lrbox">   <span class="nt">Term</span> → <span class="nt">Factor</span> <span class="lrdot">•</span>             <span style="opacity:.65">← 완료 (reduce: Term → Factor)</span></pre>
 
 **전이:** 없음 (완료 아이템만 있는 상태)
 
@@ -67,13 +65,13 @@
 
 `'('` 를 읽고 점을 옮긴 `Factor → '(' • Expr ')'` 에, `Expr` 가 점 뒤라 다시 클로저가 붙은 7개예요.
 
-<pre class="lrbox">   Factor → '(' <span class="lrdot">•</span> Expr ')'
-   Expr   → <span class="lrdot">•</span> Expr '+' Term
-   Expr   → <span class="lrdot">•</span> Term
-   Term   → <span class="lrdot">•</span> Term '*' Factor
-   Term   → <span class="lrdot">•</span> Factor
-   Factor → <span class="lrdot">•</span> '(' Expr ')'
-   Factor → <span class="lrdot">•</span> id</pre>
+<pre class="lrbox">   <span class="nt">Factor</span> → <span class="setm">'('</span> <span class="lrdot">•</span> <span class="nt">Expr</span> <span class="setm">')'</span>
+   <span class="nt">Expr</span>   → <span class="lrdot">•</span> <span class="nt">Expr</span> <span class="setm">'+'</span> <span class="nt">Term</span>
+   <span class="nt">Expr</span>   → <span class="lrdot">•</span> <span class="nt">Term</span>
+   <span class="nt">Term</span>   → <span class="lrdot">•</span> <span class="nt">Term</span> <span class="setm">'*'</span> <span class="nt">Factor</span>
+   <span class="nt">Term</span>   → <span class="lrdot">•</span> <span class="nt">Factor</span>
+   <span class="nt">Factor</span> → <span class="lrdot">•</span> <span class="setm">'('</span> <span class="nt">Expr</span> <span class="setm">')'</span>
+   <span class="nt">Factor</span> → <span class="lrdot">•</span> <span class="setm">id</span></pre>
 
 **전이:**
 
@@ -85,17 +83,17 @@
 
 ## `I₅` — `GOTO(I₀, id)`
 
-<pre class="lrbox">   Factor → id <span class="lrdot">•</span>               <span style="opacity:.65">← 완료 (reduce: Factor → id)</span></pre>
+<pre class="lrbox">   <span class="nt">Factor</span> → <span class="setm">id</span> <span class="lrdot">•</span>               <span style="opacity:.65">← 완료 (reduce: Factor → id)</span></pre>
 
 **전이:** 없음 (완료 아이템만 있는 상태)
 
 ## `I₆` — `GOTO(I₁, '+')`
 
-<pre class="lrbox">   Expr   → Expr '+' <span class="lrdot">•</span> Term
-   Term   → <span class="lrdot">•</span> Term '*' Factor
-   Term   → <span class="lrdot">•</span> Factor
-   Factor → <span class="lrdot">•</span> '(' Expr ')'
-   Factor → <span class="lrdot">•</span> id</pre>
+<pre class="lrbox">   <span class="nt">Expr</span>   → <span class="nt">Expr</span> <span class="setm">'+'</span> <span class="lrdot">•</span> <span class="nt">Term</span>
+   <span class="nt">Term</span>   → <span class="lrdot">•</span> <span class="nt">Term</span> <span class="setm">'*'</span> <span class="nt">Factor</span>
+   <span class="nt">Term</span>   → <span class="lrdot">•</span> <span class="nt">Factor</span>
+   <span class="nt">Factor</span> → <span class="lrdot">•</span> <span class="setm">'('</span> <span class="nt">Expr</span> <span class="setm">')'</span>
+   <span class="nt">Factor</span> → <span class="lrdot">•</span> <span class="setm">id</span></pre>
 
 **전이:**
 
@@ -106,9 +104,9 @@
 
 ## `I₇` — `GOTO(I₂, '*')`
 
-<pre class="lrbox">   Term   → Term '*' <span class="lrdot">•</span> Factor
-   Factor → <span class="lrdot">•</span> '(' Expr ')'
-   Factor → <span class="lrdot">•</span> id</pre>
+<pre class="lrbox">   <span class="nt">Term</span>   → <span class="nt">Term</span> <span class="setm">'*'</span> <span class="lrdot">•</span> <span class="nt">Factor</span>
+   <span class="nt">Factor</span> → <span class="lrdot">•</span> <span class="setm">'('</span> <span class="nt">Expr</span> <span class="setm">')'</span>
+   <span class="nt">Factor</span> → <span class="lrdot">•</span> <span class="setm">id</span></pre>
 
 **전이:**
 
@@ -118,8 +116,8 @@
 
 ## `I₈` — `GOTO(I₄, Expr)`
 
-<pre class="lrbox">   Factor → '(' Expr <span class="lrdot">•</span> ')'
-   Expr   → Expr <span class="lrdot">•</span> '+' Term</pre>
+<pre class="lrbox">   <span class="nt">Factor</span> → <span class="setm">'('</span> <span class="nt">Expr</span> <span class="lrdot">•</span> <span class="setm">')'</span>
+   <span class="nt">Expr</span>   → <span class="nt">Expr</span> <span class="lrdot">•</span> <span class="setm">'+'</span> <span class="nt">Term</span></pre>
 
 **전이:**
 
@@ -128,20 +126,20 @@
 
 ## `I₉` — `GOTO(I₆, Term)`
 
-<pre class="lrbox">   Expr → Expr '+' Term <span class="lrdot">•</span>      <span style="opacity:.65">← 완료 (reduce: Expr → Expr '+' Term)</span>
-   Term → Term <span class="lrdot">•</span> '*' Factor</pre>
+<pre class="lrbox">   <span class="nt">Expr</span> → <span class="nt">Expr</span> <span class="setm">'+'</span> <span class="nt">Term</span> <span class="lrdot">•</span>      <span style="opacity:.65">← 완료 (reduce: Expr → Expr '+' Term)</span>
+   <span class="nt">Term</span> → <span class="nt">Term</span> <span class="lrdot">•</span> <span class="setm">'*'</span> <span class="nt">Factor</span></pre>
 
 **전이:** `'*'` 를 읽으면 → `I₇`
 
 ## `I₁₀` — `GOTO(I₇, Factor)`
 
-<pre class="lrbox">   Term → Term '*' Factor <span class="lrdot">•</span>    <span style="opacity:.65">← 완료 (reduce: Term → Term '*' Factor)</span></pre>
+<pre class="lrbox">   <span class="nt">Term</span> → <span class="nt">Term</span> <span class="setm">'*'</span> <span class="nt">Factor</span> <span class="lrdot">•</span>    <span style="opacity:.65">← 완료 (reduce: Term → Term '*' Factor)</span></pre>
 
 **전이:** 없음 (완료 아이템만 있는 상태)
 
 ## `I₁₁` — `GOTO(I₈, ')')`
 
-<pre class="lrbox">   Factor → '(' Expr ')' <span class="lrdot">•</span>     <span style="opacity:.65">← 완료 (reduce: Factor → '(' Expr ')')</span></pre>
+<pre class="lrbox">   <span class="nt">Factor</span> → <span class="setm">'('</span> <span class="nt">Expr</span> <span class="setm">')'</span> <span class="lrdot">•</span>     <span style="opacity:.65">← 완료 (reduce: Factor → '(' Expr ')')</span></pre>
 
 **전이:** 없음 (완료 아이템만 있는 상태)
 

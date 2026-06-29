@@ -45,24 +45,22 @@
 따라가기 전에 **증대 문법** 을 펴 두고 갈게요. (각 단계에서 *어떤 생성규칙이* 들어오는지, 여기서
 바로바로 짚으려고요.)
 
-```
-   Accept → Expr
-   Expr   → Expr '+' Term   |  Term
-   Term   → Term '*' Factor  |  Factor
-   Factor → '(' Expr ')'     |  id
-```
+<pre class="lrbox">   <span class="nt">Accept</span> → <span class="nt">Expr</span>
+   <span class="nt">Expr</span>   → <span class="nt">Expr</span> <span class="setm">'+'</span> <span class="nt">Term</span>   |  <span class="nt">Term</span>
+   <span class="nt">Term</span>   → <span class="nt">Term</span> <span class="setm">'*'</span> <span class="nt">Factor</span>  |  <span class="nt">Factor</span>
+   <span class="nt">Factor</span> → <span class="setm">'('</span> <span class="nt">Expr</span> <span class="setm">')'</span>     |  <span class="setm">id</span></pre>
 
 **시작 — 1개.** 가상 시작 아이템 하나에서 출발해요.
 
-<pre class="lrbox">   Accept → <span class="lrdot">•</span> Expr</pre>
+<pre class="lrbox">   <span class="nt">Accept</span> → <span class="lrdot">•</span> <span class="nt">Expr</span></pre>
 
 **1단계.** `Accept → • Expr` 의 점 뒤는 `Expr` 죠.\
 문법에서 `Expr` 줄을 보면, 생성규칙이 **`Expr → Expr '+' Term`** 과 **`Expr → Term`** 둘이에요.\
 이 둘을 — 아직 아무것도 안 읽었으니 점을 맨 앞에 찍어 — 집합에 추가해요.
 
-<pre class="lrbox">   Accept → <span class="lrdot">•</span> Expr
-   Expr   → <span class="lrdot">•</span> Expr '+' Term       ← 새로
-   Expr   → <span class="lrdot">•</span> Term                ← 새로</pre>
+<pre class="lrbox">   <span class="nt">Accept</span> → <span class="lrdot">•</span> <span class="nt">Expr</span>
+   <span class="nt">Expr</span>   → <span class="lrdot">•</span> <span class="nt">Expr</span> <span class="setm">'+'</span> <span class="nt">Term</span>       ← 새로
+   <span class="nt">Expr</span>   → <span class="lrdot">•</span> <span class="nt">Term</span>                ← 새로</pre>
 
 → **3개.**
 
@@ -73,11 +71,11 @@
 - `Expr → • Expr '+' Term` 의 점 뒤도 `Expr` 지만 — `Expr` 는 **1단계에서 이미 펼쳤어요** (그 두 규칙이
   이미 집합에 있죠). 그래서 새로 넣을 게 없어요.
 
-<pre class="lrbox">   Accept → <span class="lrdot">•</span> Expr
-   Expr   → <span class="lrdot">•</span> Expr '+' Term
-   Expr   → <span class="lrdot">•</span> Term
-   Term   → <span class="lrdot">•</span> Term '*' Factor     ← 새로
-   Term   → <span class="lrdot">•</span> Factor              ← 새로</pre>
+<pre class="lrbox">   <span class="nt">Accept</span> → <span class="lrdot">•</span> <span class="nt">Expr</span>
+   <span class="nt">Expr</span>   → <span class="lrdot">•</span> <span class="nt">Expr</span> <span class="setm">'+'</span> <span class="nt">Term</span>
+   <span class="nt">Expr</span>   → <span class="lrdot">•</span> <span class="nt">Term</span>
+   <span class="nt">Term</span>   → <span class="lrdot">•</span> <span class="nt">Term</span> <span class="setm">'*'</span> <span class="nt">Factor</span>     ← 새로
+   <span class="nt">Term</span>   → <span class="lrdot">•</span> <span class="nt">Factor</span>              ← 새로</pre>
 
 → **5개.**
 
@@ -87,13 +85,13 @@
   와 **`Factor → id`** 둘이죠. 이 둘을 추가해요.
 - `Term → • Term '*' Factor` 의 점 뒤는 `Term` → **이미 펼쳤으니** 새 거 없음.
 
-<pre class="lrbox">   Accept → <span class="lrdot">•</span> Expr
-   Expr   → <span class="lrdot">•</span> Expr '+' Term
-   Expr   → <span class="lrdot">•</span> Term
-   Term   → <span class="lrdot">•</span> Term '*' Factor
-   Term   → <span class="lrdot">•</span> Factor
-   Factor → <span class="lrdot">•</span> '(' Expr ')'        ← 새로
-   Factor → <span class="lrdot">•</span> id                  ← 새로</pre>
+<pre class="lrbox">   <span class="nt">Accept</span> → <span class="lrdot">•</span> <span class="nt">Expr</span>
+   <span class="nt">Expr</span>   → <span class="lrdot">•</span> <span class="nt">Expr</span> <span class="setm">'+'</span> <span class="nt">Term</span>
+   <span class="nt">Expr</span>   → <span class="lrdot">•</span> <span class="nt">Term</span>
+   <span class="nt">Term</span>   → <span class="lrdot">•</span> <span class="nt">Term</span> <span class="setm">'*'</span> <span class="nt">Factor</span>
+   <span class="nt">Term</span>   → <span class="lrdot">•</span> <span class="nt">Factor</span>
+   <span class="nt">Factor</span> → <span class="lrdot">•</span> <span class="setm">'('</span> <span class="nt">Expr</span> <span class="setm">')'</span>        ← 새로
+   <span class="nt">Factor</span> → <span class="lrdot">•</span> <span class="setm">id</span>                  ← 새로</pre>
 
 → **7개.**
 
@@ -106,10 +104,8 @@
 집합이 **1개 → 3개 → 5개 → 7개** 로 *자라다가, 더 늘 게 없어 멈췄어요.*\
 이 마지막 **7개짜리 닫힌 집합** 이 바로 우리 문법의 **시작 상태 `I₀`** 예요.
 
-```
-   I₀ = CLOSURE( { Accept → •Expr } )
-      = Accept·Expr·Term·Factor 의 생성규칙들이 전부 점 맨 앞에 모인 7개 아이템
-```
+<pre class="lrbox">   I₀ = CLOSURE( { <span class="nt">Accept</span> → •<span class="nt">Expr</span> } )
+      = <span class="nt">Accept</span>·<span class="nt">Expr</span>·<span class="nt">Term</span>·<span class="nt">Factor</span> 의 생성규칙들이 전부 점 맨 앞에 모인 7개 아이템</pre>
 
 *"맨 앞에 올 수 있는 것 전부"* 가 `I₀` 에 담긴 거예요 — `Factor → •'(' Expr ')'` 와 `Factor → •id`
 의 점 뒤 `(`·`id` 가, 곧 *맨 처음 읽을 수 있는 단말* 이죠. (어, 그거 [FIRST(Expr)](first-rules.md)
@@ -127,12 +123,12 @@
 - 한 줄 내려갈 때마다, 그 빨간 비단말의 생성규칙들이 새 `Closure({ … })` 로 끌려 들어와요. (앞 줄에서
   이미 정리된 아이템은 *생략* 하고, 맨 끝 줄에 다 모아요.)
 
-<pre class="lrbox">Closure({ Accept → • <span class="lrmark">Expr</span> })
- = { Accept → • Expr,   Closure({ Expr → • Expr '+' Term,  Expr → • Term }) }
- = { Expr → • Expr '+' Term,  Expr → • <span class="lrmark">Term</span>,   Closure({ Term → • Term '*' Factor,  Term → • Factor }) }
- = { Term → • Term '*' Factor,  Term → • <span class="lrmark">Factor</span>,   Closure({ Factor → • '(' Expr ')',  Factor → • id }) }
- = { Factor → • '(' Expr ')',  Factor → • id }      <span style="opacity:.6">(점 뒤가 '(' · id — 단말이라 멈춤)</span>
- = { Accept→•Expr, Expr→•Expr'+'Term, Expr→•Term, Term→•Term'*'Factor, Term→•Factor, Factor→•'('Expr')', Factor→•id }   <span style="opacity:.6">= I₀</span></pre>
+<pre class="lrbox">Closure({ <span class="nt">Accept</span> → • <span class="lrmark">Expr</span> })
+ = { <span class="nt">Accept</span> → • <span class="nt">Expr</span>,   Closure({ <span class="nt">Expr</span> → • <span class="nt">Expr</span> <span class="setm">'+'</span> <span class="nt">Term</span>,  <span class="nt">Expr</span> → • <span class="nt">Term</span> }) }
+ = { <span class="nt">Expr</span> → • <span class="nt">Expr</span> <span class="setm">'+'</span> <span class="nt">Term</span>,  <span class="nt">Expr</span> → • <span class="lrmark">Term</span>,   Closure({ <span class="nt">Term</span> → • <span class="nt">Term</span> <span class="setm">'*'</span> <span class="nt">Factor</span>,  <span class="nt">Term</span> → • <span class="nt">Factor</span> }) }
+ = { <span class="nt">Term</span> → • <span class="nt">Term</span> <span class="setm">'*'</span> <span class="nt">Factor</span>,  <span class="nt">Term</span> → • <span class="lrmark">Factor</span>,   Closure({ <span class="nt">Factor</span> → • <span class="setm">'('</span> <span class="nt">Expr</span> <span class="setm">')'</span>,  <span class="nt">Factor</span> → • <span class="setm">id</span> }) }
+ = { <span class="nt">Factor</span> → • <span class="setm">'('</span> <span class="nt">Expr</span> <span class="setm">')'</span>,  <span class="nt">Factor</span> → • <span class="setm">id</span> }      <span style="opacity:.6">(점 뒤가 '(' · id — 단말이라 멈춤)</span>
+ = { <span class="nt">Accept</span>→•<span class="nt">Expr</span>, <span class="nt">Expr</span>→•<span class="nt">Expr</span><span class="setm">'+'</span><span class="nt">Term</span>, <span class="nt">Expr</span>→•<span class="nt">Term</span>, <span class="nt">Term</span>→•<span class="nt">Term</span><span class="setm">'*'</span><span class="nt">Factor</span>, <span class="nt">Term</span>→•<span class="nt">Factor</span>, <span class="nt">Factor</span>→•<span class="setm">'('</span><span class="nt">Expr</span><span class="setm">')'</span>, <span class="nt">Factor</span>→•<span class="setm">id</span> }   <span style="opacity:.6">= I₀</span></pre>
 
 맨 끝에서 `Closure({ … })` 가 *사라졌죠?* 더 펼칠 게 없다는 뜻 — 즉 **닫힌** 거예요. 그게 `I₀` 고요.\
 (*"이미 펼친 비단말은 다시 안 펼친다"* 는 약속도 그대로예요 — 그래서 `Expr → •Expr '+' Term` 의 그

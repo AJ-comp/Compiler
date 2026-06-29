@@ -1,9 +1,9 @@
 # Closure · Definition
 
-> 🎓 This is an **advanced track** chapter.\
+> 🎓 This is an **Advanced track** lesson.\
 > In the previous [State](lr-state.md) chapter — we saw that a state is a *set of LR items `Iₓ`*.\
 > But to build a state *properly*, you have to inflate its items with a **closure**.\
-> Just like [FIRST/FOLLOW](first-formula.md), let's split closure into **definition · how to compute · implementation** — this page is
+> Just like [FIRST/FOLLOW](first-formula.md), let's split closure into **definition · computation rules · implementation** — this page is
 > the first step, the **definition**.
 
 > 📍 **Where it lives** · `Analyzer.Closure` · `…/Parsers/Analyzer.cs`
@@ -11,7 +11,7 @@
 Closure is an operation that works on a **state** — the *set of LR items `Iₓ`* we saw in the previous [State](lr-state.md) chapter.
 To be precise, its job is to **fill a state out completely**. Let's see what that means.
 
-## Why do we have to "inflate" it
+## Why Do We Have to "Inflate" It
 
 Suppose some state holds a single item, `Expr → • Term`.\
 Right after the dot is the **nonterminal `Term`**. In other words, we're just about to read a `Term`.
@@ -23,7 +23,7 @@ So **those productions, in their "about to start" form,** also have to live in t
 If all you have is the lone `Expr → • Term`, then *how to start a Term* is missing — it's an **incomplete state**.\
 Filling that gap to make it a *complete state* is what **closure** does.
 
-## Definition — what closure is
+## Definition — What Closure Is
 
 We pinned [FIRST](first-formula.md) down in one sentence as *"of everything that symbol can derive, the **terminals that can come at the very front**"*. Closure can be pinned down in one sentence just the same way.
 
@@ -38,27 +38,25 @@ Written out a bit more carefully, as **two rules**, it goes like this.
 
 To see what ② actually looks like, let's pull off just **one slice of our grammar** — how ② now fills the *gap* of that `Expr → • Term` from the *'why inflate it'* section above. (This is also *part* of what really happens inside the start state `I₀` we'll build soon.) Here's the grammar.
 
-```
-   Expr   → Expr '+' Term   |  Term
-   Term   → Term '*' Factor  |  Factor
-   Factor → '(' Expr ')'     |  id
-```
+<pre class="lrbox">   <span class="nt">Expr</span>   → <span class="nt">Expr</span> <span class="setm">'+'</span> <span class="nt">Term</span>   |  <span class="nt">Term</span>
+   <span class="nt">Term</span>   → <span class="nt">Term</span> <span class="setm">'*'</span> <span class="nt">Factor</span>  |  <span class="nt">Factor</span>
+   <span class="nt">Factor</span> → <span class="setm">'('</span> <span class="nt">Expr</span> <span class="setm">')'</span>     |  <span class="setm">id</span></pre>
 
 Inside the set sits that `Expr → • Term`.
 
-<pre class="lrbox">   Expr → <span class="lrdot">•</span> Term</pre>
+<pre class="lrbox">   <span class="nt">Expr</span> → <span class="lrdot">•</span> <span class="nt">Term</span></pre>
 
 Right after the dot is the nonterminal `Term`. So ② kicks in — it finds `Term`'s two productions in the grammar, and\
 *since nothing has been read yet*, marks the dot at the very front and adds them to the set.
 
-<pre class="lrbox">   Expr → <span class="lrdot">•</span> Term
-   Term → <span class="lrdot">•</span> Term '*' Factor      <span style="opacity:.65">← pulled in by ②</span>
-   Term → <span class="lrdot">•</span> Factor               <span style="opacity:.65">← pulled in by ②</span></pre>
+<pre class="lrbox">   <span class="nt">Expr</span> → <span class="lrdot">•</span> <span class="nt">Term</span>
+   <span class="nt">Term</span> → <span class="lrdot">•</span> <span class="nt">Term</span> <span class="setm">'*'</span> <span class="nt">Factor</span>      <span style="opacity:.65">← pulled in by ②</span>
+   <span class="nt">Term</span> → <span class="lrdot">•</span> <span class="nt">Factor</span>               <span style="opacity:.65">← pulled in by ②</span></pre>
 
 Following the *nonterminal after the dot* and dragging its productions in — that's **one application of ②**.\
 And the `Term → • Factor` that just came in has a nonterminal after its dot too (`Factor`), so ② applies again… and this keeps going *until there's nothing left to pull in*.
 
-(Here we looked at just *one slice* of `I₀`. The process of starting from `Accept → • Expr` and running it **from start to finish** to complete `I₀`, we'll walk through one step at a time in the next chapter, [How to compute](closure-calc.md).)
+(Here we looked at just *one slice* of `I₀`. The process of starting from `Accept → • Expr` and running it **from start to finish** to complete `I₀`, we'll walk through one step at a time in the next chapter, [Computation Rules](closure-calc.md).)
 
 Writing the **two rules (①②)** above in short symbolic form gives this. (`A → α • B β` is exactly the notation we saw in the [LR item](lr-item.md) chapter — `α`·`β` are the symbols before and after the dot, `B` is the nonterminal right after the dot, and `γ` is the right-hand side of a `B` rule.)
 
@@ -81,7 +79,7 @@ Here you only need to grasp these two phrases, **"closed"** and **"smallest."**
 The definition said it's *"the smallest set closed under ②."*\
 So next is **how you actually compute it** — running it yourself, one step at a time.
 
-👉 **[Closure · How to compute](closure-calc.md)**
+👉 **[Closure · Computation Rules](closure-calc.md)**
 
 ---
 

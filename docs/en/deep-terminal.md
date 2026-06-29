@@ -1,6 +1,6 @@
 # Terminal — the leaf that splits no further
 
-> 🎓 This is a **deep-dive chapter**.\
+> 🎓 This is a **Advanced chapter**.\
 > In the previous chapter, [Symbol](deep-symbols.md), we saw the common root of every symbol.\
 > Now let's start with the simpler of the two branches — the **leaf (token), Terminal**.
 

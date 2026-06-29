@@ -56,21 +56,21 @@
 
 완성된 트리로 보면 한눈에 들어와요.
 
-```
-   Expr
-   ├─ Expr
-   │  └─ Term
-   │     └─ Factor
-   │        └─ a
-   ├─ +
-   └─ Term            ← a * a 가 여기 한 덩어리로!
-      ├─ Term
-      │  └─ Factor
-      │     └─ a
-      ├─ *
-      └─ Factor
-         └─ a
-```
+<pre class="lrbox">
+   <span class="nt">Expr</span>
+   ├─ <span class="nt">Expr</span>
+   │  └─ <span class="nt">Term</span>
+   │     └─ <span class="nt">Factor</span>
+   │        └─ <span class="setm">a</span>
+   ├─ <span class="setm">+</span>
+   └─ <span class="nt">Term</span>            ← a * a 가 여기 한 덩어리로!
+      ├─ <span class="nt">Term</span>
+      │  └─ <span class="nt">Factor</span>
+      │     └─ <span class="setm">a</span>
+      ├─ <span class="setm">*</span>
+      └─ <span class="nt">Factor</span>
+         └─ <span class="setm">a</span>
+</pre>
 
 맨 위 `Expr` 은 *(왼쪽 `a`) `+` (오른쪽 `a * a`)* 예요. `a * a` 가 오른쪽 깊은 곳에 한 덩어리로 묶여
 있죠? — 표가 그렇게 이끈 거예요.

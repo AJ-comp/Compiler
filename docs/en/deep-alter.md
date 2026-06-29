@@ -1,12 +1,12 @@
-# Alter — Choice (the set of alternatives)
+# Alter — choice (the set of alternatives)
 
-> 🎓 **Advanced track**. At last, it's time to open that **`alters` box** that [NonTerminal](deep-nonterminal.md) was holding. Thank you for making it all the way through the previous [Single](deep-single.md) chapter — here, the pieces lock together as one.
+> 🎓 This is the **Advanced track**. At last, it's time to open that **`alters` box** that [NonTerminal](deep-nonterminal.md) was holding. Thank you for making it all the way through the previous [Single](deep-single.md) chapter — here, the pieces lock together as one.
 
 In the [NonTerminal](deep-nonterminal.md) chapter we kept saying *"a rule holds `alters` (a bundle of alternatives)"*.
 
 The **true identity of that `alters`** is exactly `NonTerminalAlter`.
 
-## The author's dilemma — "How do I hold several alternatives?"
+## The author's worry — "how do I hold several alternatives?"
 
 `Expr` had two ways to be made.\
 They were `Expr '+' Term` and `Term`.
@@ -29,14 +29,14 @@ Why a **Set (HashSet)** instead of a List? If we follow the author's thinking:
 
 So `Expr`'s alternatives are held like this.
 
-```
-   Expr : Expr '+' Term | Term ;
+<pre class="lrbox">
+   <span class="nt">Expr</span> : <span class="nt">Expr</span> <span class="setm">'+'</span> <span class="nt">Term</span> | <span class="nt">Term</span> ;
                   │
                   ▼
    NonTerminalAlter   (= alters,  a set of Concats)
-     ├ NonTerminalConcat  [ Expr ] · [ '+' ] · [ Term ]     ← alternative 1
-     └ NonTerminalConcat  [ Term ]                           ← alternative 2
-```
+     ├ NonTerminalConcat  [ <span class="nt">Expr</span> ] · [ <span class="setm">'+'</span> ] · [ <span class="nt">Term</span> ]     ← alternative 1
+     └ NonTerminalConcat  [ <span class="nt">Term</span> ]                           ← alternative 2
+</pre>
 
 Remember the `alters` picture we drew in the [NonTerminal](deep-nonterminal.md) chapter?\
 This is the *real type* behind that picture.
@@ -62,11 +62,11 @@ public void AddAsAlter(params Symbol[] symbols)
 
 See the difference? **Even putting in the same `[a, b]`, the result is completely different.**
 
-```
-   AddAsConcat(a, b)   →   Alter { [ a · b ] }        ← 1 alternative (with a, b in order inside)
+<pre class="lrbox">
+   AddAsConcat(a, b)   →   Alter { [ <span class="setm">a</span> · <span class="setm">b</span> ] }        ← 1 alternative (with a, b in order inside)
 
-   AddAsAlter(a, b)    →   Alter { [ a ] , [ b ] }    ← 2 alternatives (a alone, b alone)
-```
+   AddAsAlter(a, b)    →   Alter { [ <span class="setm">a</span> ] , [ <span class="setm">b</span> ] }    ← 2 alternatives (a alone, b alone)
+</pre>
 
 And this is exactly the `+` and `|` we use when we write a grammar in code.
 
@@ -113,8 +113,7 @@ There's also a property that gives `true` if even one of the alternatives is **e
 public bool IsInduceEpsilon { get; }   // is there an ε (empty alternative) among the alternatives
 ```
 
-When computing [FIRST/FOLLOW](first-follow.md), "can this rule produce the empty string?" mattered.\
-This answers that judgment right here. (You're starting to see how the pieces connect, right?)
+Note, though, that this only checks whether there's a *direct* ε alternative (a case like `A → ε`). It can't catch the *true* nullable case, where ε is reached *indirectly through another rule* — like `A → B`, `B → ε`. That's judged separately in [FIRST/FOLLOW](first-follow.md), by whether ε ended up in `FIRST`. (You're starting to see how the pieces connect, right?)
 
 ## At a glance — the full shape of Alter
 
@@ -154,15 +153,15 @@ In one line — **`Alter` = a *set* of Concats (alternatives). And `+`/`|` decid
 This is the **entire skeleton** of Janglim's grammar structure.\
 Let me gather it onto one page.
 
-```
+<pre class="lrbox">
    Symbol  (abstract)
     ├ Terminal              ← leaf (token):  not split any further
-    └ NonTerminal "Expr"    ← branch (rule)
+    └ NonTerminal "<span class="nt">Expr</span>"    ← branch (rule)
          └ alters : NonTerminalAlter            ← the 'set' of alternatives   (Alter)
-              ├ NonTerminalConcat [Expr · '+' · Term]   ┐  view each element (Concat)
-              └ NonTerminalConcat [Term]                ┘  as "Expr's Nth"
+              ├ NonTerminalConcat [<span class="nt">Expr</span> · <span class="setm">'+'</span> · <span class="nt">Term</span>]   ┐  view each element (Concat)
+              └ NonTerminalConcat [<span class="nt">Term</span>]                ┘  as "Expr's Nth"
                                                             → NonTerminalSingle (production)
-```
+</pre>
 
 - **Symbol** — the abstract root of every symbol (identity = `UniqueKey`)
 - **Terminal / NonTerminal** — leaf / branch
@@ -178,6 +177,6 @@ We've now seen all of the *containers that hold* a grammar.\
 Now we move on to the computation the parser actually does **on top of** this structure.
 
 First of all comes the step of finding "which token a rule can start with (FIRST), and what can come after it (FOLLOW)".\
-The thing you met as a concept in the basic track — this time, as **formulas and code**.
+The thing you met as a concept in the Basics track — this time, as **formulas and code**.
 
-👉 **FIRST / FOLLOW — formulas and implementation** *(coming soon)*
+👉 **[FIRST · FOLLOW — formulas and implementation](first-formula.md)**

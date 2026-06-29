@@ -1,13 +1,13 @@
 # Single — 一つの生成規則
 
-> 🎓 **深化コース** です。前の [Concat](deep-concat.md) 章で *順序(連接)* を入れる方法を見ましたね。\
+> 🎓 **発展コース** です。前の [Concat](deep-concat.md) 章で *順序(連接)* を入れる方法を見ましたね。\
 > いよいよその順序に **「ラベル」** を貼って、本物の *生成規則一つ* に仕立てる段階です。
 
 まず、前の章で作った `Concat` 一つをもう一度思い出してみましょう。
 
-```
-   [ Expr ] · [ '+' ] · [ Term ]      ← NonTerminalConcat (順序だけを入れたリスト)
-```
+<pre class="lrbox">
+   [ <span class="nt">Expr</span> ] · [ <span class="setm">'+'</span> ] · [ <span class="nt">Term</span> ]      ← NonTerminalConcat (順序だけを入れたリスト)
+</pre>
 
 これは *順序* は分かります。\
 ところが — **これが *どの規則* の、*何番目* の選択肢なのかは分かりません。**
@@ -16,9 +16,9 @@
 
 私たちの例をもう一度見ましょう。
 
-```
-Expr : Expr '+' Term | Term ;
-```
+<pre class="lrbox">
+<span class="nt">Expr</span> : <span class="nt">Expr</span> <span class="setm">'+'</span> <span class="nt">Term</span> | <span class="nt">Term</span> ;
+</pre>
 
 `Expr` を作る方法は二つでしたね。\
 0番目は `Expr '+' Term`、1番目は `Term` です。
@@ -55,28 +55,28 @@ public class NonTerminalSingle : NonTerminalConcat   // ← 順序(RHS)は継承
 言葉だけでは抽象的なので描いてみます。\
 `Expr` の **0番目** の選択肢を `Single` にするとこうなります。
 
-```
-   Expr : Expr '+' Term | Term ;
+<pre class="lrbox">
+   <span class="nt">Expr</span> : <span class="nt">Expr</span> <span class="setm">'+'</span> <span class="nt">Term</span> | <span class="nt">Term</span> ;
                   │  (0番目の選択肢を取り出して)
                   ▼
    NonTerminalSingle
      ├ Name        = "Expr"                 ← _wholeExpression から取得
      ├ alterIndex  = 0                       ← "何番目の選択肢"
-     └ (RHS — Concat 継承)  [ Expr ] · [ '+' ] · [ Term ]
-```
+     └ (RHS — Concat 継承)  [ <span class="nt">Expr</span> ] · [ <span class="setm">'+'</span> ] · [ <span class="nt">Term</span> ]
+</pre>
 
 そしてこの `Single` を文字に起こすと(`ToGrammarString()`)、本物の **生成規則一行** が出てきます。
 
-```
-   ToGrammarString()  →  "Expr -> Expr '+' Term"
-```
+<pre class="lrbox">
+   ToGrammarString()  →  "<span class="nt">Expr</span> -> <span class="nt">Expr</span> <span class="setm">'+'</span> <span class="nt">Term</span>"
+</pre>
 
 1番目の選択肢も同じように作れます。
 
-```
+<pre class="lrbox">
    NonTerminalSingle  (alterIndex = 1)
-     └ (RHS)  [ Term ]          →  "Expr -> Term"
-```
+     └ (RHS)  [ <span class="nt">Term</span> ]          →  "<span class="nt">Expr</span> -> <span class="nt">Term</span>"
+</pre>
 
 見てください — `Concat` はただの *記号の列* でしたが、`Single` になると **「Expr の生成規則一つ」** という
 れっきとした単位になりました。
@@ -146,10 +146,10 @@ public override int GetHashCode()
 
 その **ドットを打つ対象がまさにこの `Single`(生成規則)** です。
 
-```
-   Single        :  Expr -> Expr '+' Term          ("生成規則" そのもの)
-   ここにドットを打つと →  Expr -> Expr '+' • Term     ("LR項目")
-```
+<pre class="lrbox">
+   Single        :  <span class="nt">Expr</span> -> <span class="nt">Expr</span> <span class="setm">'+'</span> <span class="nt">Term</span>          ("生成規則" そのもの)
+   ここにドットを打つと →  <span class="nt">Expr</span> -> <span class="nt">Expr</span> <span class="setm">'+'</span> • <span class="nt">Term</span>     ("LR項目")
+</pre>
 
 つまり `Single` は *ドットを打つ前の生成規則の本体* です。\
 だからこそ「どの規則の何番目の選択肢」という

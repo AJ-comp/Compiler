@@ -44,22 +44,20 @@
 `Expr → • Term` 의 *빈 곳* 을, 이번엔 ②가 어떻게 채우는지요. (이건 곧 만들 시작 상태 `I₀` 안에서
 실제로 일어나는 일의 *일부* 이기도 해요.) 문법은 이거고요.
 
-```
-   Expr   → Expr '+' Term   |  Term
-   Term   → Term '*' Factor  |  Factor
-   Factor → '(' Expr ')'     |  id
-```
+<pre class="lrbox">   <span class="nt">Expr</span>   → <span class="nt">Expr</span> <span class="setm">'+'</span> <span class="nt">Term</span>   |  <span class="nt">Term</span>
+   <span class="nt">Term</span>   → <span class="nt">Term</span> <span class="setm">'*'</span> <span class="nt">Factor</span>  |  <span class="nt">Factor</span>
+   <span class="nt">Factor</span> → <span class="setm">'('</span> <span class="nt">Expr</span> <span class="setm">')'</span>     |  <span class="setm">id</span></pre>
 
 집합 안에 그 `Expr → • Term` 이 들어 있어요.
 
-<pre class="lrbox">   Expr → <span class="lrdot">•</span> Term</pre>
+<pre class="lrbox">   <span class="nt">Expr</span> → <span class="lrdot">•</span> <span class="nt">Term</span></pre>
 
 점 바로 뒤가 비단말 `Term` 이죠. 그러니 ②가 작동해요 — 문법에서 `Term` 의 생성규칙 둘을 찾아,\
 *아직 아무것도 안 읽었으니* 점을 맨 앞에 찍어서 집합에 더해요.
 
-<pre class="lrbox">   Expr → <span class="lrdot">•</span> Term
-   Term → <span class="lrdot">•</span> Term '*' Factor      <span style="opacity:.65">← ② 로 따라 들어옴</span>
-   Term → <span class="lrdot">•</span> Factor               <span style="opacity:.65">← ② 로 따라 들어옴</span></pre>
+<pre class="lrbox">   <span class="nt">Expr</span> → <span class="lrdot">•</span> <span class="nt">Term</span>
+   <span class="nt">Term</span> → <span class="lrdot">•</span> <span class="nt">Term</span> <span class="setm">'*'</span> <span class="nt">Factor</span>      <span style="opacity:.65">← ② 로 따라 들어옴</span>
+   <span class="nt">Term</span> → <span class="lrdot">•</span> <span class="nt">Factor</span>               <span style="opacity:.65">← ② 로 따라 들어옴</span></pre>
 
 *점 뒤 비단말* 을 따라 그 생성규칙들이 끌려 들어오는 것 — 이게 **② 한 번** 이에요.\
 그리고 방금 들어온 `Term → • Factor` 의 점 뒤(`Factor`)에도 ②가 또 적용되고… 이렇게 *더 끌려올 게

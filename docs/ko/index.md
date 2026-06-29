@@ -1,6 +1,6 @@
 # Janglim 매뉴얼에 오신 걸 환영합니다
 
-Janglim는 **.NET용 LR/LALR 파서 제너레이터 엔진**입니다.\
+Janglim은 **.NET용 LR/LALR 파서 제너레이터 엔진**입니다.\
 말이 어렵죠?\
 **괜찮아요.**\
 이 매뉴얼은
@@ -41,14 +41,14 @@ Janglim는 **.NET용 LR/LALR 파서 제너레이터 엔진**입니다.\
 
 ## 하나의 예제로 끝까지 갑니다
 
-매뉴얼 전체에서 **딱 하나의 작은 문법**을 계속 씁니다 — 사칙연산 비슷한 거예요.
+매뉴얼 전체에서 **딱 하나의 작은 문법**을 계속 씁니다 — 덧셈·곱셈이 있는 작은 산술식이에요.
 
-```
-Expr   : Expr '+' Term | Term ;
-Term   : Term '*' Factor | Factor ;
-Factor : '(' Expr ')' | id ;
-id     := "[a-zA-Z]+" ;
-```
+<pre class="lrbox">
+<span class="nt">Expr</span>   : <span class="nt">Expr</span> <span class="setm">'+'</span> <span class="nt">Term</span> | <span class="nt">Term</span> ;
+<span class="nt">Term</span>   : <span class="nt">Term</span> <span class="setm">'*'</span> <span class="nt">Factor</span> | <span class="nt">Factor</span> ;
+<span class="nt">Factor</span> : <span class="setm">'('</span> <span class="nt">Expr</span> <span class="setm">')'</span> | <span class="setm">id</span> ;
+<span class="setm">id</span>     := "[a-zA-Z]+" ;
+</pre>
 
 그리고 이 입력을 계속 파싱해요: **`a + a * a`**
 
@@ -61,7 +61,7 @@ id     := "[a-zA-Z]+" ;
 - 👉 **[빠른 시작](getting-started.md)** — 설치하고, 5줄로 첫 파싱을 돌려봅니다.
 - 🌿 **[라이브 플레이그라운드](https://polite-island-0b2142200.7.azurestaticapps.net)** — 설치 없이 브라우저에서 바로.
 
-> **참고:** Janglim는 아직 **초기 프리뷰(`0.2.0-preview`)** 예요.\
+> **참고:** Janglim은 아직 **초기 프리뷰(`0.2.0-preview`)** 예요.\
 > 공개 API는 `0.x` 동안 바뀔 수 있어요.
 
 ---

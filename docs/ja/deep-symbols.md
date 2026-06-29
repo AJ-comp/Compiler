@@ -1,9 +1,9 @@
-# Symbol — 文法の最も小さな単位
+# Symbol — 文法の最小単位
 
-> 🎓 ここは **深化コース** です。基本コースが *概念* だったとすれば、深化コースは **その概念を Janglim が
+> 🎓 ここは **発展コース** です。基本コースが *概念* だったとすれば、発展コースは **その概念を Janglim が
 > どのようにコードへ積み上げたのか** を — それも **作った順番のまま、ゆっくりと** — たどっていきます。
 >
-> 一つだけ約束しておきますね。この深化コースで **「著者」** と言うときは、Janglim を自ら設計しコードを
+> 一つだけ約束しておきますね。この発展コースで **「著者」** と言うときは、Janglim を自ら設計しコードを
 > 書いた **人**(このプロジェクトの主)を指します。*いま、この文章を整理している AI ではありません。*
 >
 > そして正直に言うと、ここに込めた「著者の考え」は **二つのものが混ざって** います:
@@ -37,7 +37,7 @@
 生まれられません (`new Symbol()` は不可能) — 必ず Terminal か NonTerminal のいずれかへ **具体化されなければ**
 なりません。
 
-> 📍 **`Symbol`** · モジュール `Janglim.FrontEnd` (Layer 2) · `src/FrontEnd/Janglim.FrontEnd/RegularGrammar/Symbol.cs`
+> 📍 **`Symbol`** · モジュール `Janglim.FrontEnd` (Layer 2) · `src/FrontEnd/Parse.FrontEnd/RegularGrammar/Symbol.cs`
 
 ```csharp
 public abstract class Symbol : IShowable, IQuantifiable, IConvertableEbnfString
@@ -49,7 +49,7 @@ public abstract class Symbol : IShowable, IQuantifiable, IConvertableEbnfString
 ```
         Symbol  (抽象 — 二つの具体の共通の抽象)
         ├── Terminal      ← 葉: これ以上分かれないトークン   (次の章)
-        └── NonTerminal   ← 枝: さらに分かれる規則           (その次の章)
+        └── NonTerminal   ← 枝: さらに分かれる規則   (その次の章)
 ```
 
 > 💡 **この習慣はマニュアルの随所でまた出てきます。** これから *具体クラスが複数見えたら、その上にそれらを
@@ -93,7 +93,7 @@ public override int GetHashCode() => (int)this.UniqueKey;   // ハッシュも
 
 最後に、私たちが C# で文法を書くとき `Expr + plus + Term` や `... | Term` のように書きますよね?\
 このとき使う **`+`(つなぐ)・`|`(選ぶ)演算子**、そして `?`・`*`・`+`(数量子)は — どこにあるべき
-でしょうか?
+でしょうか? *(`+` が二つに見えますよね — 二つの記号をつなぐ二項の `a + b`、そして一つの記号に付く数量子の `+`(OneOrMore)。文字だけ同じで役割は違います。)*
 
 > 著者の判断: *「これは Terminal であろうと NonTerminal であろうと **どんな記号にでも** 使えるべきだ。それなら
 > 二つの共通の抽象である `Symbol` に置くのが正しいよね。」*
@@ -102,7 +102,7 @@ public override int GetHashCode() => (int)this.UniqueKey;   // ハッシュも
 
 ```csharp
 public static NonTerminal operator +(Symbol left, Symbol right);   // つなぐ(連接)
-public static NonTerminal operator |(Symbol left, Symbol right);   // 選ぶ(選択)
+public static NonTerminal operator |(Symbol left, Symbol right);   // 選ぶ(択一)
 // ?(Optional) · *(ZeroOrMore) · +(OneOrMore) も Symbol に (IQuantifiable)
 ```
 
@@ -145,7 +145,7 @@ public abstract class Symbol : IShowable, IQuantifiable, IConvertableEbnfString
 
     // ── つなぐ / 選ぶ ────────────────────────
     public static NonTerminal operator +(Symbol left, Symbol right);   // 連接: a の次に b
-    public static NonTerminal operator |(Symbol left, Symbol right);   // 選択: a または b
+    public static NonTerminal operator |(Symbol left, Symbol right);   // 択一: a または b
 
     // ── 数量子 (IQuantifiable) ───────────────
     public NonTerminal ZeroOrMore();   // *

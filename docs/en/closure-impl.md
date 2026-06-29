@@ -1,8 +1,9 @@
 # Closure · Implementation (code)
 
 > 🎓 This is an **advanced track** chapter.\
-> Earlier we saw the [definition](closure-def.md) of closure (the smallest closed set) and its [calculation method](closure-calc.md) (one step at a time until it closes).\
-> This time, let's see how that went into the `Analyzer.Closure` code, **almost line by line**.
+> Earlier we saw the [definition](closure-def.md) of closure (the smallest closed set) and its [computation method](closure-calc.md) (one
+> step at a time until it closes).\
+> This time, let's see how that went into the `Analyzer.Closure` code, **almost line by line.**
 
 ## Code — `Analyzer.Closure`
 
@@ -33,19 +34,19 @@ public static CanonicalState Closure(CanonicalState iStatus, HashSet<NonTerminal
 }
 ```
 
-## Definition · calculation ↔ code, line by line
+## Definition · computation method ↔ code, line by line
 
 Inside this short function, the previous two pages sit exactly as they were.
 
 - **`result.Add(item)`** → this is **①** of the definition ("embrace `I`'s items as they are").
-- **`continue` when `item.MarkSymbol == null` / `is Terminal`** → *if what's after the dot is a terminal or it's the end, there's nothing to expand.* (This is **step 3** of the [calculation method](closure-calc.md) — that part where we stopped at a terminal like `(` or `id`.)
+- **`continue` when `item.MarkSymbol == null` / `is Terminal`** → *if what's after the dot is a terminal or it's the end, there's nothing to expand.* (This is **step 3** of the [computation method](closure-calc.md) — that part where we stopped at a terminal like `(` or `id`.)
 - **nonterminal `B` after the dot → `foreach (single in B) param.Add(new LRItem(single))`** → this is **②** of the definition ("add every production of `B` as `B → •γ`"). `new LRItem(single)` is an item with the *dot at the very front* (the default constructor of [LR item](lr-item.md), `markIndex = 0`).
-- **`exploredSet`** → the calculation method's *"don't expand a nonterminal you've already expanded again."* Once `Expr` has been expanded once, it blocks it from being expanded again, breaking the **infinite loop**.
+- **`exploredSet`** → the computation method's *"don't expand a nonterminal you've already expanded again."* Once `Expr` has been expanded once, it blocks it from being expanded again, breaking the **infinite loop.**
 - **`result.UnionWith(Closure(param, exploredSet))`** → this accomplishes *"until it closes"* through **recursion** (a function calling itself again).\
-  If what's after the dot of the newly added `B → •γ` items is *also* a nonterminal, that recursion goes on to expand it. (This is that flow where the calculation method moved from step 1 → step 2.)
+  If what's after the dot of the newly added `B → •γ` items is *also* a nonterminal, that recursion goes on to expand it. (This is that flow where the computation method moved from step 1 → step 2.)
 
-> 💡 In the [calculation method](closure-calc.md) we said *"repeat one step at a time"*, but the code uses **recursion** rather than a `do…while` loop, right?\
-> The two do the same thing — recursion "follows the nonterminals after the dot inward" and expands until it closes, and `exploredSet` guarantees that *each nonterminal is expanded exactly once*, so in the end it settles into a single *smallest closed set*.
+> 💡 In the [computation method](closure-calc.md) we said *"repeat one step at a time,"* but the code uses **recursion** rather than a `do…while` loop, right?\
+> The two do the same thing — recursion "follows the nonterminals after the dot inward" and expands until it closes, and `exploredSet` guarantees that *each nonterminal is expanded exactly once*, so in the end it settles into a single *smallest closed set.*
 
 ## 📐 The author's closure design diagram
 
@@ -55,7 +56,7 @@ Inside this short function, the previous two pages sit exactly as they were.
 
 ## Next chapter
 
-We've now seen **how to fill one state completely** with closure — all the way from definition to calculation to implementation.
+We've now seen **how to fill one state completely** with closure — all the way from definition to computation to implementation.
 
 Now it's **GOTO**'s turn: deciding which state you go to **when you read one symbol** from that state.\
 (And GOTO too uses *this closure again at the very end* — that's why the state you newly arrive at is also completed with no gaps. You'll see it soon.)
@@ -64,4 +65,4 @@ Now it's **GOTO**'s turn: deciding which state you go to **when you read one sym
 
 ---
 
-👈 Previously: [Closure · Calculation](closure-calc.md)
+👈 Previously: [Closure · How to compute](closure-calc.md)

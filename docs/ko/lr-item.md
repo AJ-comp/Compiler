@@ -19,10 +19,10 @@ LR 파서는 입력을 **왼쪽부터 한 토큰씩** 읽어 나가요.\
 
 예를 들어 생성규칙 `Expr → Expr '+' Term` 하나에, 점을 찍을 수 있는 자리는 이래요.
 
-<pre class="lrbox">   Expr → <span class="lrdot">•</span> Expr '+' Term      아직 아무것도 안 읽음
-   Expr → Expr <span class="lrdot">•</span> '+' Term      Expr 까지 읽음
-   Expr → Expr '+' <span class="lrdot">•</span> Term      '+' 까지 읽음
-   Expr → Expr '+' Term <span class="lrdot">•</span>      다 읽음 — 이제 이 규칙으로 묶을(reduce) 차례!</pre>
+<pre class="lrbox">   <span class="nt">Expr</span> → <span class="lrdot">•</span> <span class="nt">Expr</span> <span class="setm">'+'</span> <span class="nt">Term</span>      아직 아무것도 안 읽음
+   <span class="nt">Expr</span> → <span class="nt">Expr</span> <span class="lrdot">•</span> <span class="setm">'+'</span> <span class="nt">Term</span>      Expr 까지 읽음
+   <span class="nt">Expr</span> → <span class="nt">Expr</span> <span class="setm">'+'</span> <span class="lrdot">•</span> <span class="nt">Term</span>      '+' 까지 읽음
+   <span class="nt">Expr</span> → <span class="nt">Expr</span> <span class="setm">'+'</span> <span class="nt">Term</span> <span class="lrdot">•</span>      다 읽음 — 이제 이 규칙으로 묶을(reduce) 차례!</pre>
 
 **같은 생성규칙이라도 점 위치가 다르면 다른 아이템** 이에요. 점이 "진행 상황" 이니까요.
 
@@ -113,8 +113,8 @@ public override int GetHashCode()
 
 [Single](deep-single.md) 의 정체성(`UniqueKey + alterIndex`)에 **점 위치(`markIndex`)** 를 한 겹 더 얹은
 거예요.\
-*"어느 규칙의 몇 번째 대안의, 점이 어디"* 가 곧 LR 아이템의 정체성이죠. (이게 바로 **정준 집합** 을
-*중복 없이* 만드는 열쇠가 돼요 — 다음다음 장에서.)
+*"어느 규칙의 몇 번째 대안의, 점이 어디"* 가 곧 LR 아이템의 정체성이죠. (이게 바로 [정준 집합](canonical-set.md) 을
+*중복 없이* 만드는 열쇠가 돼요.)
 
 ## 한눈에 — LRItem의 전체 모습
 

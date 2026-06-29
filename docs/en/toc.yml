@@ -1,4 +1,4 @@
-# English sidebar — groups + collapsible (Mythosia style: no numbers or "to be written", only finished pages).
+# English sidebar — groups + collapsible (Mythosia style: no numbers / "coming soon", only written pages).
 - name: Getting Started
   items:
   - name: Introduction
@@ -8,52 +8,54 @@
   - name: The Pipeline at a Glance
     href: the-big-picture.md
 
-- name: Basic Track (Concepts)
+- name: Basics (Concepts)
   items:
-  - name: How to Read a Grammar
+  - name: Reading a Grammar
     href: grammar-reading.md
   - name: FIRST / FOLLOW
     href: first-follow.md
   - name: The Dot and States
     href: dot-and-state.md
-  - name: Real Parsing with the Table
+  - name: Parsing in Action
     href: parsing-in-action.md
 
-- name: Advanced Track (Principles and Code)
+- name: Advanced (How It Works & Code)
   items:
-  - name: Symbol — the Smallest Unit
+  - name: Symbol — the smallest unit
     href: deep-symbols.md
-  - name: Terminal — a Leaf (Token)
+  - name: Terminal — a leaf (token)
     href: deep-terminal.md
-  - name: NonTerminal — a Rule (Branch)
+  - name: NonTerminal — a rule (branch)
     href: deep-nonterminal.md
-  - name: Concat — Order (Concatenation)
+  - name: Concat — sequence (concatenation)
     href: deep-concat.md
-  - name: Single — a Single Production
+  - name: Single — one production
     href: deep-single.md
-  - name: Alter — Choice (Set of Alternatives)
+  - name: Alter — choice (set of alternatives)
     href: deep-alter.md
-  - name: FIRST — Formula and Implementation
+  - name: FIRST — Formula & Implementation
     items:
-    - name: Definition and Derivation
+    - name: Definition & Derivation
       href: first-formula.md
     - name: Computation Rules
       href: first-rules.md
     - name: Implementation (Code)
       href: first-impl.md
-  - name: FOLLOW — Formula and Implementation
+  - name: FOLLOW — Formula & Implementation
     items:
-    - name: Definition and Derivation
+    - name: Definition & Derivation
       href: follow-formula.md
     - name: Computation Rules
       href: follow-rules.md
     - name: Implementation (Code)
       href: follow-impl.md
+  - name: FIRST · FOLLOW — Worked Examples
+    href: first-follow-examples.md
   - name: LR Parser — Building the Parse Table
     items:
-    - name: LR Item
+    - name: LR Items
       href: lr-item.md
-    - name: State (Iₓ)
+    - name: States (Iₓ)
       href: lr-state.md
     - name: Closure
       items:
@@ -69,5 +71,27 @@
       href: canonical-set.md
     - name: Parse Table
       items:
-      - name: How to Build It
+      - name: How to Build
         href: parse-table-build.md
+      - name: What Is a Conflict?
+        href: parse-table-conflict.md
+      - name: SLR
+        items:
+        - name: How It Works (incl. spurious conflicts)
+          href: parse-table-slr.md
+        - name: Implementation (Code)
+          href: parse-table-slr-impl.md
+      - name: Lookahead (LR(1) items)
+        href: parse-table-lookahead.md
+      - name: CLR
+        items:
+        - name: How It Works
+          href: parse-table-clr.md
+        - name: Implementation (Code)
+          href: parse-table-clr-impl.md
+      - name: LALR
+        items:
+        - name: How It Works
+          href: parse-table-lalr.md
+        - name: Implementation (Code)
+          href: parse-table-lalr-impl.md

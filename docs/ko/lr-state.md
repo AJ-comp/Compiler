@@ -13,11 +13,10 @@
 앞으로 상태 이야기엔 우리 **예제 문법** 이 줄곧 등장하거든요. [FIRST / FOLLOW](first-follow.md) 에서부터
 쭉 함께 써온 바로 그 문법이에요. 멀어지지 않게, 눈앞에 다시 펴 둘게요.
 
-```
-   Expr   → Expr '+' Term   |  Term
-   Term   → Term '*' Factor  |  Factor
-   Factor → '(' Expr ')'     |  id
-```
+<pre class="lrbox">   <span class="nt">Expr</span>   → <span class="nt">Expr</span> <span class="setm">'+'</span> <span class="nt">Term</span>   |  <span class="nt">Term</span>
+   <span class="nt">Term</span>   → <span class="nt">Term</span> <span class="setm">'*'</span> <span class="nt">Factor</span>  |  <span class="nt">Factor</span>
+   <span class="nt">Factor</span> → <span class="setm">'('</span> <span class="nt">Expr</span> <span class="setm">')'</span>     |  <span class="setm">id</span>
+</pre>
 
 - 식 `Expr` 은 — 항 `Term` 들을 `'+'` 로 이은 것,
 - 항 `Term` 은 — 인자 `Factor` 들을 `'*'` 로 이은 것,
@@ -41,27 +40,26 @@
 
 아이템 하나를 봐요 — `Expr → Term •` (*"Term 까지 읽어 Expr 이 끝났다"*).
 
-<pre class="lrbox">   Expr → Term <span class="lrdot">•</span></pre>
+<pre class="lrbox">   <span class="nt">Expr</span> → <span class="nt">Term</span> <span class="lrdot">•</span></pre>
 
 이 아이템 하나만 보면 *"Term 다 읽었으니 Expr 로 묶자"* 같죠.\
 그런데 — 정말 그렇게 단정해도 될까요? 우리 문법엔 이 규칙도 있어요.
 
-```
-   Term → Term '*' Factor
-```
+<pre class="lrbox">   <span class="nt">Term</span> → <span class="nt">Term</span> <span class="setm">'*'</span> <span class="nt">Factor</span>
+</pre>
 
 즉 방금 그 `Term` 뒤에 `'*' Factor` 가 더 붙어 **더 큰 `Term`** 이 될 수도 있어요.\
 그 가능성은 이 아이템으로 표현되죠.
 
-<pre class="lrbox">   Term → Term <span class="lrdot">•</span> '*' Factor</pre>
+<pre class="lrbox">   <span class="nt">Term</span> → <span class="nt">Term</span> <span class="lrdot">•</span> <span class="setm">'*'</span> <span class="nt">Factor</span></pre>
 
 점을 보세요 — *둘 다 `Term` 바로 뒤* 예요. **"여기까지 `Term` 을 읽었다"** 는 똑같은 상황을, 두 규칙이
 각자의 입장에서 본 거예요.\
 그러니 이 자리를 정직하게 적으려면 — **두 아이템을 동시에** 안고 있어야 해요.\
 이렇게 *한 자리에서 가능한 아이템을 모두 모은* 게 바로 **상태** 예요.
 
-<pre class="lrbox">   Expr → Term <span class="lrdot">•</span>                <span style="opacity:.65"># 이 Term 으로 Expr 이 끝났을 수도</span>
-   Term → Term <span class="lrdot">•</span> '*' Factor     <span style="opacity:.65"># 아니면 '*' 가 붙는 더 큰 Term 의 앞부분일 수도</span></pre>
+<pre class="lrbox">   <span class="nt">Expr</span> → <span class="nt">Term</span> <span class="lrdot">•</span>                <span style="opacity:.65"># 이 Term 으로 Expr 이 끝났을 수도</span>
+   <span class="nt">Term</span> → <span class="nt">Term</span> <span class="lrdot">•</span> <span class="setm">'*'</span> <span class="nt">Factor</span>     <span style="opacity:.65"># 아니면 '*' 가 붙는 더 큰 Term 의 앞부분일 수도</span></pre>
 
 > 이런 상태가 *언제, 어떻게* 정확히 만들어지는지는 — 바로 다음 **[클로저](closure-def.md)** 와
 > **[GOTO](goto.md)** 에서 다뤄요. 지금은 *"상태 = 한 자리에서 가능한 아이템을 다 모은 집합"* 이라는
@@ -103,8 +101,8 @@
 상상만 해봐요 — 만약 `'*'` 가 `FOLLOW(Expr)` 에도 들어 있었다면? 다음 토큰이 `'*'` 일 때, 두 아이템이
 *동시에* 손을 들어요.
 
-<pre class="lrbox">   Term → Term <span class="lrdot">•</span> '*' Factor    →  "'*' 를 읽자!"   (shift)
-   Expr → Term <span class="lrdot">•</span>               →  "Expr 로 묶자!"  (reduce — '*' 가 FOLLOW(Expr) 에 있다 가정)</pre>
+<pre class="lrbox">   <span class="nt">Term</span> → <span class="nt">Term</span> <span class="lrdot">•</span> <span class="setm">'*'</span> <span class="nt">Factor</span>    →  "'*' 를 읽자!"   (shift)
+   <span class="nt">Expr</span> → <span class="nt">Term</span> <span class="lrdot">•</span>               →  "Expr 로 묶자!"  (reduce — '*' 가 FOLLOW(Expr) 에 있다 가정)</pre>
 
 표로 치면 — `'*'` 칸이 이렇게 돼요.
 
@@ -163,8 +161,8 @@ public HashSet<NonTerminalSingle> ShiftItemList;     // 아직 진행 중인 생
 말로만 보면 흐릿하니, **예제 상태를 그대로 대입** 해 봐요. 각 변수에 무엇이 담기는지 보면 단번에
 또렷해져요.
 
-<pre class="lrbox">   Expr → Term <span class="lrdot">•</span>              <span style="opacity:.65">← 완료 아이템</span>
-   Term → Term <span class="lrdot">•</span> '*' Factor   <span style="opacity:.65">← 진행 중(shift) 아이템</span></pre>
+<pre class="lrbox">   <span class="nt">Expr</span> → <span class="nt">Term</span> <span class="lrdot">•</span>              <span style="opacity:.65">← 완료 아이템</span>
+   <span class="nt">Term</span> → <span class="nt">Term</span> <span class="lrdot">•</span> <span class="setm">'*'</span> <span class="nt">Factor</span>   <span style="opacity:.65">← 진행 중(shift) 아이템</span></pre>
 
 | 변수 | 이 상태에서의 값 | 왜 |
 |:--|:--|:--|
@@ -181,10 +179,10 @@ public HashSet<NonTerminalSingle> ShiftItemList;     // 아직 진행 중인 생
 나눗셈 `Term → Term '/' Factor` 와, '문장은 식 하나' 규칙 `Stmt → Term` 이 더 있었다고 *가정* 한
 거예요.)
 
-<pre class="lrbox">   Expr → Term <span class="lrdot">•</span>              <span style="opacity:.65">← 완료</span>
-   Stmt → Term <span class="lrdot">•</span>              <span style="opacity:.65">← 완료   (Stmt → Term 이 있었다면)</span>
-   Term → Term <span class="lrdot">•</span> '*' Factor   <span style="opacity:.65">← 진행 중</span>
-   Term → Term <span class="lrdot">•</span> '/' Factor   <span style="opacity:.65">← 진행 중 (Term → Term '/' Factor 가 있었다면)</span></pre>
+<pre class="lrbox">   <span class="nt">Expr</span> → <span class="nt">Term</span> <span class="lrdot">•</span>              <span style="opacity:.65">← 완료</span>
+   <span class="nt">Stmt</span> → <span class="nt">Term</span> <span class="lrdot">•</span>              <span style="opacity:.65">← 완료   (Stmt → Term 이 있었다면)</span>
+   <span class="nt">Term</span> → <span class="nt">Term</span> <span class="lrdot">•</span> <span class="setm">'*'</span> <span class="nt">Factor</span>   <span style="opacity:.65">← 진행 중</span>
+   <span class="nt">Term</span> → <span class="nt">Term</span> <span class="lrdot">•</span> <span class="setm">'/'</span> <span class="nt">Factor</span>   <span style="opacity:.65">← 진행 중 (Term → Term '/' Factor 가 있었다면)</span></pre>
 
 | 변수 | 값 (가정한 상태에서) |
 |:--|:--|

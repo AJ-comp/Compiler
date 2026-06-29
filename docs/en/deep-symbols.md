@@ -1,14 +1,14 @@
 # Symbol — the smallest unit of a grammar
 
-> 🎓 This is the **deep-dive track**. If the basics track was about the *concept*, the deep-dive track follows **how Janglim built that concept up in code** — and it does so **in the exact order it was built, slowly**.
-
-> Let me make one promise before we go. In this deep-dive track, whenever I say **"the author"**, I mean the **person** who designed and wrote Janglim's code (the owner of this project). *Not the AI that is putting these notes together right now.*
-
+> 🎓 This is the **Advanced track**. If the Basics track was about the *concept*, the Advanced track follows **how Janglim built that concept up in code** — and it does so **in the very order it was built, slowly**.
+>
+> Let me make one promise before we go. In this Advanced track, whenever I say **"the author"**, I mean the **person** who designed and wrote Janglim's code (the owner of this project). *Not the AI that is putting these notes together right now.*
+>
 > And to be honest, the "author's thoughts" captured here are really **a mix of two things**:
-
+>
 > - **Some come from asking the author directly**, so the intent is recorded as-is. (Though I did *not* ask about *every* decision.)
 > - **Many of the rest are inferred from reading the code** — "they probably made this call."
-
+>
 > So it doesn't split cleanly into *"this is the author's own words, that is a guess read off the code"* — the two are blended together naturally. But don't worry, **the code tells you more than you'd think.** 🙂
 
 ## The author's design starting point — "when you see the concrete, grab the abstraction first"
@@ -29,7 +29,7 @@ Looking at these two *concrete classes*, the author probably reasoned like this:
 That's how `Symbol` came to be **designed as an abstract class (`abstract`) from the very start**.\
 So `Symbol` can't be born on its own (`new Symbol()` is impossible) — it must be **made concrete** as either Terminal or NonTerminal.
 
-> 📍 **`Symbol`** · module `Janglim.FrontEnd` (Layer 2) · `src/FrontEnd/Janglim.FrontEnd/RegularGrammar/Symbol.cs`
+> 📍 **`Symbol`** · module `Janglim.FrontEnd` (Layer 2) · `src/FrontEnd/Parse.FrontEnd/RegularGrammar/Symbol.cs`
 
 ```csharp
 public abstract class Symbol : IShowable, IQuantifiable, IConvertableEbnfString
@@ -77,9 +77,9 @@ It looks small — but in *a project like a compiler, where a small mistake spre
 ## Another common part — operators and quantifiers
 
 Finally, when we write a grammar in C#, we write things like `Expr + plus + Term` or `... | Term`, right?\
-The **`+` (join) and `|` (choose) operators** used here, and the `?`·`*`·`+` (quantifiers) — where should they live?
+The **`+` (join) and `|` (choose) operators** used here, and the `?`·`*`·`+` (quantifiers) — where should they live? *(`+` looks like two things — the binary `a + b` that joins two symbols, and the quantifier `+` (OneOrMore) attached to a single symbol. Same character, different roles.)*
 
-> The author's call: *"This has to be usable on **any symbol**, whether Terminal or NonTerminal. So putting it on `Symbol`, the common abstraction of the two, is the right move."*
+> The author's call: *"This has to be usable on **any symbol at all**, whether Terminal or NonTerminal. So putting it on `Symbol`, the common abstraction of the two, is the right move."*
 
 So these operators and quantifiers all live on `Symbol` too. (Gathering the common behavior in the abstract base.)
 
@@ -91,10 +91,10 @@ public static NonTerminal operator |(Symbol left, Symbol right);   // choose (ch
 
 For now it's just *"ah, they live here"* — **what structure these actually produce** we'll dig into one chapter at a time, slowly, later on.
 
-## 📐 The author's design diagram
+## 📐 The author's design diagrams
 
-This is a diagram the author drew when designing this part (the same link is embedded in the code comments too).\
-Looking at it alongside makes the mental picture clearer.
+These are diagrams the author drew when designing this part (the same links are embedded in the code comments too).\
+Looking at them alongside makes the mental picture clearer.
 
 - Symbol and operator design — <https://www.lucidchart.com/documents/edit/d05e9c87-a3ab-4b64-8a75-c6b84c28aa45/0>
 

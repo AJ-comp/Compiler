@@ -49,6 +49,8 @@
       href: follow-rules.md
     - name: 구현 (코드)
       href: follow-impl.md
+  - name: FIRST · FOLLOW — 예제 모음
+    href: first-follow-examples.md
   - name: LR 파서 — 파싱 테이블 만들기
     items:
     - name: LR 아이템
@@ -71,3 +73,25 @@
       items:
       - name: 만드는 법
         href: parse-table-build.md
+      - name: 충돌이란?
+        href: parse-table-conflict.md
+      - name: SLR
+        items:
+        - name: 원리 (헛충돌까지)
+          href: parse-table-slr.md
+        - name: 구현 (코드)
+          href: parse-table-slr-impl.md
+      - name: lookahead (LR(1) 아이템)
+        href: parse-table-lookahead.md
+      - name: CLR
+        items:
+        - name: 원리
+          href: parse-table-clr.md
+        - name: 구현 (코드)
+          href: parse-table-clr-impl.md
+      - name: LALR
+        items:
+        - name: 원리
+          href: parse-table-lalr.md
+        - name: 구현 (코드)
+          href: parse-table-lalr-impl.md
