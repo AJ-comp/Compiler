@@ -37,6 +37,29 @@ public class EbnfGrammarReaderTests
         Assert.True(parse.Success, $"expected to parse: \"{input}\"");
     }
 
+    // A word-like keyword literal ('h') overlaps the identifier token rule. The lexer must recognize
+    // it as the keyword, not swallow it as an identifier — otherwise the rule never matches. (Regression
+    // guard for the EbnfGrammar literal: word-like literals take bWordPattern=false so they out-rank id.)
+    [Theory]
+    [InlineData("h q;")]
+    [InlineData("h foo;")]
+    public void Keyword_literal_wins_over_identifier(string input)
+    {
+        const string grammar = @"
+            Gate : 'h' id ';' ;
+            id   := ""[a-zA-Z_][a-zA-Z0-9_]*"" ;
+        ";
+
+        var read = EbnfGrammarReader.Read(grammar);
+        Assert.True(read.Success, string.Join("; ", read.Errors));
+
+        var lexer = new Lexer();
+        foreach (var term in read.Grammar.TerminalSet) lexer.AddTokenRule(term);
+
+        var parse = new LALRParser(read.Grammar, false).Parsing(lexer.Lexing(input).TokensForParsing);
+        Assert.True(parse.Success, $"the keyword 'h' should be recognized (not lexed as an identifier) for: \"{input}\"");
+    }
+
     [Theory]
     [InlineData("Expr : foo ;", "undefined")]          // reference to an undefined symbol
     [InlineData("Expr : id | ;", "empty")]             // empty alternative after '|'

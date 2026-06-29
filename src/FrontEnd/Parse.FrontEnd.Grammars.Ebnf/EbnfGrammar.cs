@@ -44,8 +44,13 @@ namespace Janglim.FrontEnd.Grammars.Ebnf
                 if (literals.TryGetValue(value, out var found)) return found;
 
                 bool isWord = value.Length > 0 && (char.IsLetter(value[0]) || value[0] == '_');
+                // bWordPattern must be FALSE for both: a literal's Value is matched verbatim, not as a
+                // regex. A word-like keyword literal ('qreg') is just as much a literal as a symbol one
+                // ('['), so it takes false too — that makes the lexer sort these literals AHEAD of the
+                // identifier token rule (which is a real word-pattern, true), so keywords win the tie
+                // against the identifier instead of losing to its longer pattern.
                 var t = isWord
-                    ? new Terminal(TokenType.Keyword, value, value, false, true)
+                    ? new Terminal(TokenType.Keyword, value, value, false, false)
                     : new Terminal(TokenType.Operator, value, value, false, false);
                 RegisterTerminal(t);
                 literals[value] = t;
