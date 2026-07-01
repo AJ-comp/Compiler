@@ -30,14 +30,27 @@ namespace Janglim.FrontEnd.Grammars.Ebnf
         public List<List<EbnfSym>> Alternatives { get; } = new List<List<EbnfSym>>();
     }
 
-    /// <summary>One symbol inside a production body: a literal (<c>'x'</c>) or a reference to a rule/token by name.</summary>
+    /// <summary>A repetition marker on a symbol: none, <c>*</c> (zero-or-more), <c>+</c> (one-or-more), or <c>?</c> (optional).</summary>
+    public enum EbnfQuantifier { None, ZeroOrMore, OneOrMore, Optional }
+
+    /// <summary>
+    /// One symbol inside a production body. It is a literal (<c>'x'</c>), a reference to a rule/token by
+    /// name, or a group (<c>( … | … )</c>) — and it may carry a quantifier (<c>* + ?</c>). Groups and
+    /// quantifiers are lowered to auto-generated productions when the grammar is built (see
+    /// <see cref="EbnfGrammar"/>), reusing the same machinery as the C# grammar API's
+    /// <c>ZeroOrMore()/OneOrMore()/Optional()</c>, so EBNF text and the C# API produce identical grammars.
+    /// </summary>
     public sealed class EbnfSym
     {
         public bool IsLiteral { get; set; }
-        public string Text { get; set; }
+        public bool IsGroup { get; set; }
+        public string Text { get; set; }                        // for a literal or a name reference
+        public List<List<EbnfSym>> Group { get; set; }          // for a group: its alternatives
+        public EbnfQuantifier Quantifier { get; set; } = EbnfQuantifier.None;
 
         public static EbnfSym Literal(string value) => new EbnfSym { IsLiteral = true, Text = value };
         public static EbnfSym Ref(string name) => new EbnfSym { IsLiteral = false, Text = name };
+        public static EbnfSym GroupOf(List<List<EbnfSym>> alternatives) => new EbnfSym { IsGroup = true, Group = alternatives };
     }
 
     /// <summary>Thrown when a grammar model cannot be turned into a grammar (e.g. an undefined symbol).</summary>

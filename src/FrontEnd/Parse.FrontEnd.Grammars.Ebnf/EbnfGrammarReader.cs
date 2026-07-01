@@ -21,10 +21,12 @@ namespace Janglim.FrontEnd.Grammars.Ebnf
     /// Reads EBNF grammar text into a runnable <see cref="EbnfGrammar"/>. Notation:
     /// <code>
     ///   Expr : Expr '+' Term | Term ;        # non-terminal rule (the FIRST rule's head is the start symbol)
+    ///   List : id ( ',' id )* ;              # groups '( … )' and quantifiers '* + ?'
     ///   id   := "[a-zA-Z_][a-zA-Z0-9_]*" ;   # token rule (a named regex terminal)
     /// </code>
     /// <c>'x'</c> is a literal terminal, <c>"x"</c> is a regex pattern, a bare name refers to a rule or
-    /// token, <c>|</c> separates alternatives, and <c>#</c> starts a line comment.
+    /// token, <c>|</c> separates alternatives, <c>( … )</c> groups, <c>* + ?</c> repeat/optional a
+    /// preceding item, and <c>#</c> starts a line comment.
     /// </summary>
     public static class EbnfGrammarReader
     {
@@ -40,11 +42,19 @@ namespace Janglim.FrontEnd.Grammars.Ebnf
             {
                 return new EbnfReadResult(null, new List<string> { ex.Message });
             }
+            catch (System.Exception ex)
+            {
+                // Read() promises errors-in-a-result, not a throw. An unexpected exception while building
+                // the grammar (anything that is not one of our own EbnfExceptions) is surfaced as an error
+                // rather than crashing the caller. (StackOverflowException is uncatchable in .NET and is
+                // not covered here; groups nest only as deep as the source text.)
+                return new EbnfReadResult(null, new List<string> { $"internal error: {ex.Message}" });
+            }
         }
 
         // ---------- lexer ----------
 
-        private enum Kind { Ident, Colon, ColonEquals, Pipe, Semicolon, Literal, Pattern, Eof }
+        private enum Kind { Ident, Colon, ColonEquals, Pipe, Semicolon, Literal, Pattern, LParen, RParen, Star, Plus, Question, Eof }
 
         private struct Tok
         {
@@ -74,6 +84,11 @@ namespace Janglim.FrontEnd.Grammars.Ebnf
                 }
                 if (c == '|') { tokens.Add(new Tok { Kind = Kind.Pipe, Line = line }); i++; continue; }
                 if (c == ';') { tokens.Add(new Tok { Kind = Kind.Semicolon, Line = line }); i++; continue; }
+                if (c == '(') { tokens.Add(new Tok { Kind = Kind.LParen, Line = line }); i++; continue; }
+                if (c == ')') { tokens.Add(new Tok { Kind = Kind.RParen, Line = line }); i++; continue; }
+                if (c == '*') { tokens.Add(new Tok { Kind = Kind.Star, Line = line }); i++; continue; }
+                if (c == '+') { tokens.Add(new Tok { Kind = Kind.Plus, Line = line }); i++; continue; }
+                if (c == '?') { tokens.Add(new Tok { Kind = Kind.Question, Line = line }); i++; continue; }
 
                 if (c == '\'' || c == '"')
                 {
@@ -110,10 +125,12 @@ namespace Janglim.FrontEnd.Grammars.Ebnf
         }
 
         // ---------- parser (recursive descent) ----------
-        //   grammar  := rule* EOF
-        //   rule     := IDENT ( ':' altList | ':=' PATTERN ) ';'
-        //   altList  := sequence ( '|' sequence )*
-        //   sequence := ( IDENT | LITERAL )+
+        //   grammar    := rule* EOF
+        //   rule       := IDENT ( ':' altList | ':=' PATTERN ) ';'
+        //   altList    := sequence ( '|' sequence )*
+        //   sequence   := factor+
+        //   factor     := atom ( '*' | '+' | '?' )?
+        //   atom       := IDENT | LITERAL | '(' altList ')'
 
         private sealed class Parser
         {
@@ -156,22 +173,58 @@ namespace Janglim.FrontEnd.Grammars.Ebnf
                 {
                     Take();
                     var rule = new EbnfRuleDef { Name = name };
-                    rule.Alternatives.Add(ParseSequence());
-                    while (Is(Kind.Pipe)) { Take(); rule.Alternatives.Add(ParseSequence()); }
+                    foreach (var alt in ParseAltList()) rule.Alternatives.Add(alt);
                     Expect(Kind.Semicolon, "';'");
                     model.Rules.Add(rule);
                 }
                 else throw new EbnfException($"line {Cur.Line}: expected ':' or ':=' after '{name}'");
             }
 
+            private List<List<EbnfSym>> ParseAltList()
+            {
+                var alternatives = new List<List<EbnfSym>> { ParseSequence() };
+                while (Is(Kind.Pipe)) { Take(); alternatives.Add(ParseSequence()); }
+                return alternatives;
+            }
+
             private List<EbnfSym> ParseSequence()
             {
                 var sequence = new List<EbnfSym>();
-                while (Is(Kind.Ident) || Is(Kind.Literal))
-                    sequence.Add(Is(Kind.Ident) ? EbnfSym.Ref(Take().Text) : EbnfSym.Literal(Take().Text));
+                while (Is(Kind.Ident) || Is(Kind.Literal) || Is(Kind.LParen))
+                    sequence.Add(ParseFactor());
 
                 if (sequence.Count == 0) throw new EbnfException($"line {Cur.Line}: empty alternative");
                 return sequence;
+            }
+
+            private EbnfSym ParseFactor()
+            {
+                var atom = ParseAtom();
+
+                if (Is(Kind.Star)) { Take(); atom.Quantifier = EbnfQuantifier.ZeroOrMore; }
+                else if (Is(Kind.Plus)) { Take(); atom.Quantifier = EbnfQuantifier.OneOrMore; }
+                else if (Is(Kind.Question)) { Take(); atom.Quantifier = EbnfQuantifier.Optional; }
+
+                // one quantifier per atom — a stacked '*'/'+'/'?' (e.g. `a*+`) is a clear error here,
+                // rather than a confusing "expected ';'" further along.
+                if (Is(Kind.Star) || Is(Kind.Plus) || Is(Kind.Question))
+                    throw new EbnfException($"line {Cur.Line}: a quantifier (* + ?) cannot be stacked");
+
+                return atom;
+            }
+
+            private EbnfSym ParseAtom()
+            {
+                if (Is(Kind.Ident)) return EbnfSym.Ref(Take().Text);
+                if (Is(Kind.Literal)) return EbnfSym.Literal(Take().Text);
+                if (Is(Kind.LParen))
+                {
+                    Take();
+                    var alternatives = ParseAltList();
+                    Expect(Kind.RParen, "')'");
+                    return EbnfSym.GroupOf(alternatives);
+                }
+                throw new EbnfException($"line {Cur.Line}: expected a name, a '...' literal, or '('");
             }
         }
     }

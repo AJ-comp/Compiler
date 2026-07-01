@@ -9,6 +9,7 @@ using Janglim.FrontEnd.Tokenize;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using static Janglim.FrontEnd.Parsers.Datas.LR.LRParsingRowDataFormat;
 
 namespace Janglim.FrontEnd.Parsers.LR
@@ -49,6 +50,51 @@ namespace Janglim.FrontEnd.Parsers.LR
         public event EventHandler<ParsingUnit> ActionFailed;
 
         public abstract AmbiguityCheckResult CheckAmbiguity();
+
+        // --- conflict reporting -------------------------------------------------------------------
+        // Detection already exists (CheckAmbiguity); the table is built in the ctor, so these expose it.
+        // The parse table still resolves conflicts silently — but now an author can SEE that a grammar
+        // is ambiguous instead of being left in the dark. Opt-in: nothing here runs unless you ask.
+
+        private IReadOnlyList<AmbiguityCheckItem> _conflicts;
+
+        /// <summary>Every conflict (shift/reduce or reduce/reduce) in the built parse table — computed
+        /// once, lazily, from <see cref="CheckAmbiguity"/>. Empty when the grammar is conflict-free.</summary>
+        public IReadOnlyList<AmbiguityCheckItem> Conflicts =>
+            _conflicts ??= CheckAmbiguity().Where(item => !item.Result).ToList();
+
+        /// <summary>True when the grammar has at least one shift/reduce or reduce/reduce conflict.</summary>
+        public bool HasConflicts => Conflicts.Count > 0;
+
+        /// <summary>A readable, multi-line report of the grammar's conflicts (state + kind + the symbol
+        /// being seen), or a single "no grammar conflicts" line. For logging / surfacing to an author.</summary>
+        public string ConflictReport
+        {
+            get
+            {
+                var conflicts = Conflicts;
+                if (conflicts.Count == 0) return "no grammar conflicts";
+
+                var sb = new StringBuilder();
+                sb.AppendLine($"{conflicts.Count} grammar conflict(s):");
+                foreach (var c in conflicts)
+                {
+                    var symbol = c.CanonicalLine?.SeeingMarkSymbol?.ToString();
+                    var at = string.IsNullOrEmpty(symbol) ? string.Empty : $" (on '{symbol}')";
+                    sb.AppendLine($"  state I{c.CanonicalLine?.CurrentStatusIndex}: {c.AmbiguityContent}{at}");
+                }
+                return sb.ToString().TrimEnd();
+            }
+        }
+
+        /// <summary>Opt-in fail-on-conflict: throws <see cref="GrammarConflictException"/> (carrying the
+        /// full report) when the grammar has conflicts, so a build can hard-stop instead of silently
+        /// parsing an ambiguous grammar. Returns this parser for chaining.</summary>
+        public LRParser ThrowIfConflicts()
+        {
+            if (HasConflicts) throw new GrammarConflictException(ConflictReport);
+            return this;
+        }
 
 
         public override FirstAndFollowCollection GetFirstAndFollow()

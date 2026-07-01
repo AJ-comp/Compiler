@@ -1,6 +1,5 @@
 using Janglim;
 using Janglim.FrontEnd.RegularGrammar;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -13,18 +12,22 @@ namespace Janglim.FrontEnd.Grammars.Ebnf
     /// non-terminals straight into the public collections (TerminalSet / NonTerminalMultiples), allocates
     /// their keys via the protected key manager, wires up the rules with AddItem, and marks the start
     /// symbol with the SetStartSymbol hook.
+    ///
+    /// Groups (<c>( … )</c>) and quantifiers (<c>* + ?</c>) in the model are lowered here, reusing the
+    /// exact same machinery as the C# grammar API: a group becomes an anonymous non-terminal, and a
+    /// quantifier calls <see cref="Symbol.ZeroOrMore"/>/<see cref="Symbol.OneOrMore"/>/<see cref="Symbol.Optional"/>.
+    /// The auto-generated non-terminals those create register themselves through the base Grammar's
+    /// AutoGenerator callback, and a final <see cref="Grammar.Optimization"/> absorbs optionals / flattens
+    /// them — so EBNF text and the C# API produce identical grammars.
     /// </summary>
     public sealed class EbnfGrammar : Grammar
     {
-        // No NonTerminal/Terminal fields here on purpose: the base ctor reflects the subclass's fields
-        // (which run their initializers BEFORE base()), so a null field would crash key allocation.
-        // The start symbol is set via SetStartSymbol and surfaced through StartSymbol.
         public override NonTerminal EbnfRoot => StartSymbol;
 
         public EbnfGrammar(EbnfModel model)
         {
-            // base() already ran: reflected fields (none here), wired AutoGenerator to this.keyManager,
-            // and added the EndMarker to TerminalSet.
+            // base() already ran: reflected fields (none here), wired AutoGenerator to this.keyManager /
+            // this.RegistAutoGenerateNT, and added the EndMarker to TerminalSet.
 
             if (model.Rules.Count == 0) throw new EbnfException("the grammar has no rules");
 
@@ -44,11 +47,9 @@ namespace Janglim.FrontEnd.Grammars.Ebnf
                 if (literals.TryGetValue(value, out var found)) return found;
 
                 bool isWord = value.Length > 0 && (char.IsLetter(value[0]) || value[0] == '_');
-                // bWordPattern must be FALSE for both: a literal's Value is matched verbatim, not as a
-                // regex. A word-like keyword literal ('qreg') is just as much a literal as a symbol one
-                // ('['), so it takes false too — that makes the lexer sort these literals AHEAD of the
-                // identifier token rule (which is a real word-pattern, true), so keywords win the tie
-                // against the identifier instead of losing to its longer pattern.
+                // A word-like keyword literal ('qreg') is a literal like a symbol one ('['), so bWordPattern
+                // is false for both — that sorts these literals AHEAD of the identifier token rule, so a
+                // keyword wins the lexer tie against the identifier instead of losing to its longer pattern.
                 var t = isWord
                     ? new Terminal(TokenType.Keyword, value, value, false, false)
                     : new Terminal(TokenType.Operator, value, value, false, false);
@@ -57,7 +58,7 @@ namespace Janglim.FrontEnd.Grammars.Ebnf
                 return t;
             }
 
-            // 3. non-terminals (one per rule name); the first rule's head is the start symbol
+            // 3. one non-terminal per named rule; the first rule's head is the start symbol
             string startName = model.Rules[0].Name;
             var nonterminals = new Dictionary<string, NonTerminal>();
             foreach (var rule in model.Rules)
@@ -70,23 +71,55 @@ namespace Janglim.FrontEnd.Grammars.Ebnf
                 nonterminals[rule.Name] = nt;
             }
 
+            // an anonymous non-terminal that holds a '( … )' group's alternatives
+            int groupCount = 0;
+            NonTerminal MakeGroup(List<List<EbnfSym>> alternatives)
+            {
+                var nt = new NonTerminal($"__grp{++groupCount}", false);
+                keyManager.AllocateUniqueKey(nt);
+                NonTerminalMultiples.Add(nt);
+                foreach (var alt in alternatives)
+                    AddAlternative(nt, alt.Select(Resolve).ToList());
+                return nt;
+            }
+
+            // resolve one EBNF symbol to a grammar Symbol: the base (literal / name / group), then the
+            // quantifier. ZeroOrMore()/OneOrMore()/Optional() build auto-generated NTs that self-register
+            // through the base Grammar's AutoGenerator callback.
+            Symbol Resolve(EbnfSym sym)
+            {
+                Symbol baseSym;
+                if (sym.IsGroup) baseSym = MakeGroup(sym.Group);
+                else if (sym.IsLiteral) baseSym = Literal(sym.Text);
+                else if (nonterminals.TryGetValue(sym.Text, out var nt)) baseSym = nt;
+                else if (tokens.TryGetValue(sym.Text, out var t)) baseSym = t;
+                else throw new EbnfException($"undefined symbol '{sym.Text}'");
+
+                switch (sym.Quantifier)
+                {
+                    case EbnfQuantifier.ZeroOrMore: return baseSym.ZeroOrMore();
+                    case EbnfQuantifier.OneOrMore: return baseSym.OneOrMore();
+                    case EbnfQuantifier.Optional: return baseSym.Optional();
+                    default: return baseSym;
+                }
+            }
+
             // 4. wire up the productions
             foreach (var rule in model.Rules)
             {
                 var head = nonterminals[rule.Name];
                 foreach (var alternative in rule.Alternatives)
-                {
-                    var symbols = alternative.Select(s => Resolve(s, tokens, nonterminals, Literal)).ToList();
-                    AddAlternative(head, symbols);
-                }
+                    AddAlternative(head, alternative.Select(Resolve).ToList());
             }
 
-            // 5. collect the per-production singles and mark the start symbol
+            SetStartSymbol(nonterminals[startName]);
+
+            // 5. normalize (absorb optionals / flatten auto-generated repetition), then collect the
+            //    per-production singles the parser needs.
+            this.Optimization();
             foreach (var nt in NonTerminalMultiples)
                 foreach (var single in nt)
                     NonTerminalSingles.Add(single as NonTerminalSingle);
-
-            SetStartSymbol(nonterminals[startName]);
         }
 
         private void RegisterTerminal(Terminal terminal)
@@ -98,16 +131,6 @@ namespace Janglim.FrontEnd.Grammars.Ebnf
             // it ran, so mirror that for operator literals (used by the lexer for token boundaries).
             if (terminal.TokenType == TokenType.Operator && !DelimiterDic.ContainsKey(terminal.Value))
                 DelimiterDic.Add(terminal.Value, false);
-        }
-
-        private static Symbol Resolve(EbnfSym sym, Dictionary<string, Terminal> tokens,
-                                      Dictionary<string, NonTerminal> nonterminals, Func<string, Terminal> literal)
-        {
-            if (sym.IsLiteral) return literal(sym.Text);
-            if (nonterminals.TryGetValue(sym.Text, out var nt)) return nt;
-            if (tokens.TryGetValue(sym.Text, out var t)) return t;
-
-            throw new EbnfException($"undefined symbol '{sym.Text}'");
         }
 
         private static void AddAlternative(NonTerminal head, List<Symbol> symbols)

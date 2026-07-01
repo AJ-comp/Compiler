@@ -66,6 +66,8 @@ public class EbnfGrammarReaderTests
     [InlineData("Expr : id", "';'")]                   // missing terminator
     [InlineData("id := \"[a-z]\" ;", "non-terminal")]  // only a token rule, no start rule
     [InlineData("", "non-terminal")]                   // nothing
+    [InlineData("A : a*+ ;", "stacked")]               // stacked quantifier (a*+)
+    [InlineData("A : ( a ;", "')'")]                   // unterminated group
     public void Read_reports_errors(string text, string expectedFragment)
     {
         var result = EbnfGrammarReader.Read(text);
@@ -73,5 +75,110 @@ public class EbnfGrammarReaderTests
         Assert.False(result.Success);
         Assert.NotEmpty(result.Errors);
         Assert.Contains(result.Errors, e => e.Contains(expectedFragment));
+    }
+
+    // ---- quantifiers ( * + ? ) and groups ( … ) ----
+
+    [Theory]
+    [InlineData("a")]              // zero repetitions of the group
+    [InlineData("a , b")]          // one
+    [InlineData("a , b , c")]      // many
+    public void ZeroOrMore_group_parses(string input)
+    {
+        const string grammar = @"
+            List : id ( ',' id )* ;
+            id   := ""[a-zA-Z]+"" ;
+        ";
+        AssertParses(grammar, input, expected: true);
+    }
+
+    [Fact]
+    public void ZeroOrMore_group_rejects_trailing_separator()
+    {
+        const string grammar = @"
+            List : id ( ',' id )* ;
+            id   := ""[a-zA-Z]+"" ;
+        ";
+        AssertParses(grammar, "a ,", expected: false);   // trailing ',' with no following id
+    }
+
+    [Theory]
+    [InlineData("x")]
+    [InlineData("x x")]
+    [InlineData("x x x")]
+    public void OneOrMore_parses(string input)
+    {
+        const string grammar = @"
+            Words : w+ ;
+            w     := ""[a-z]+"" ;
+        ";
+        AssertParses(grammar, input, expected: true);
+    }
+
+    [Theory]
+    [InlineData("var a ;")]        // optional absent
+    [InlineData("var a = b ;")]    // optional present
+    public void Optional_parses(string input)
+    {
+        const string grammar = @"
+            Decl : 'var' id ( '=' id )? ';' ;
+            id   := ""[a-zA-Z]+"" ;
+        ";
+        AssertParses(grammar, input, expected: true);
+    }
+
+    [Theory]
+    [InlineData("x")]
+    [InlineData("y")]
+    [InlineData("x y x")]
+    public void Group_with_alternation_parses(string input)
+    {
+        const string grammar = @"
+            Seq : ( 'x' | 'y' )+ ;
+        ";
+        AssertParses(grammar, input, expected: true);
+    }
+
+    // Adversarial (review finding #1): an optional as its OWN named rule, used before a required
+    // symbol. AbsorbOptionals must make this conflict-free and correct — no silent misparse.
+    [Theory]
+    [InlineData("x", true)]        // opt absent
+    [InlineData("a x", true)]      // opt present
+    [InlineData("a a x", false)]   // opt is single -> two a's must be rejected
+    public void Optional_named_rule_before_symbol(string input, bool expected)
+    {
+        const string grammar = @"
+            Rule : opt 'x' ;
+            opt  : 'a'? ;
+        ";
+        AssertParses(grammar, input, expected);
+    }
+
+    // Adversarial (review finding #1): an optional nested inside a group inside a '+'.
+    [Theory]
+    [InlineData("b", true)]
+    [InlineData("a b", true)]
+    [InlineData("b b", true)]
+    [InlineData("a b a b", true)]
+    [InlineData("a b b", true)]
+    [InlineData("a", false)]       // 'b' is required in each repetition
+    public void Optional_inside_group_inside_oneOrMore(string input, bool expected)
+    {
+        const string grammar = @"
+            Reps : ( 'a'? 'b' )+ ;
+        ";
+        AssertParses(grammar, input, expected);
+    }
+
+    private static void AssertParses(string grammar, string input, bool expected)
+    {
+        var read = EbnfGrammarReader.Read(grammar);
+        Assert.True(read.Success, string.Join("; ", read.Errors));
+
+        var lexer = new Lexer();
+        foreach (var term in read.Grammar.TerminalSet) lexer.AddTokenRule(term);
+
+        var parse = new LALRParser(read.Grammar, false).Parsing(lexer.Lexing(input).TokensForParsing);
+        Assert.Equal(expected, parse.Success);
     }
 }
