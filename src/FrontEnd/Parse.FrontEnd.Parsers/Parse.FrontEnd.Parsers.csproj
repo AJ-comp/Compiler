@@ -2,6 +2,10 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
+    <!-- Code namespaces were renamed Parse.* -> Janglim.* (commit ec6e7cd); the .resx Designers now
+         request "Janglim.FrontEnd.Parsers.Properties.*", so RootNamespace (which names the embedded
+         .resources) must match, or every resource lookup throws MissingManifestResourceException. -->
+    <RootNamespace>Janglim.FrontEnd.Parsers</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

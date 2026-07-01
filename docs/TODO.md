@@ -87,15 +87,32 @@ with messages), but each axis stops short of a mature generator in a specific
 
 ### P1 — high-value gaps
 
-- [ ] **Default error reporter, ON by default.** Today `LRParser.ErrorHandler`
-  is null → `LRParser[Parsing].cs` (~line 353) throws `ParsingException` on the
-  first error. The generic pieces already exist (`GrammarPrivateLRErrorHandler`,
-  `PanicMode`, messages CE0000 "{0} is expected" / CE0004 "{0} was missed"), but
-  nothing wires a *universal* default. Goal: a grammar-agnostic default handler
-  that fills empty parse-table cells (see `AJ_LRErrorHandlerFactory` for the
-  pattern) and is registered automatically, so ANY grammar gets position +
-  expected-token errors + panic recovery for free.
+- [x] **Default error reporter, ON by default.** ✅ **DONE 2026-07-01 (Minimal-B baseline).**
+  Before: `LRParser.ErrorHandler` was null → `ParsingFailedProcess` called `ErrorHandler?.Call(...)`,
+  so with no handler a failed parse threw `ParsingException` and came back with an **empty**
+  `AllErrors` — no position for a squiggle. Now a grammar-agnostic `DefaultLRErrorHandler`
+  (`LR/DefaultLRErrorHandler.cs`) is used whenever no custom handler is registered
+  (`ErrorHandler ?? _defaultErrorHandler` in `LRParser.cs`). On failure it records ONE positioned
+  error — the unexpected token, carrying its `StartIndex/EndIndex` — as a `ParsingErrorInfo`
+  (code CE0001) into the failing block, then reports "not recovered" so the parser **stops exactly
+  as before** (behaviour unchanged; only the empty-result gap is filled). Verified: `S : 'a' 'b'`
+  on `"a a"` → `AllErrors` has one error at the 2nd `a` (offset 2); valid `"a b"` → none. Same
+  plug-in point can later grow panic-mode recovery + an "expected {…}" message + multiple errors.
   **Directly unblocks editor squiggles (Ket VS Code extension / Playground).**
+  Files: `LR/DefaultLRErrorHandler.cs`, `LR/LRParser.cs`, test `Conformance/DefaultErrorHandlerTests.cs`.
+
+  - **Root-cause fix shipped alongside (resource-namespace mismatch).** Building the default
+    handler surfaced a latent bug from the `Parse.* → Janglim.*` rename (commit `ec6e7cd`): the
+    code/`.resx` Designers request `Janglim.FrontEnd.*.Properties.*` resources, but each project's
+    `RootNamespace` still defaulted to its old `Parse.FrontEnd.*` assembly name, so the *embedded*
+    `.resources` kept the old prefix → **every** resource lookup threw
+    `MissingManifestResourceException` (swallowed by the parser's catch → empty result). Fixed by
+    setting `<RootNamespace>Janglim.FrontEnd.*</RootNamespace>` in the 4 affected projects
+    (`Parse.FrontEnd`, `Parse.FrontEnd.Parsers`, `Parse.FrontEnd.Grammars`, `Parse.FrontEnd.Support`).
+    Bonus: this also cleared the **10 pre-existing `Ex8_10Grammar` test failures** (same root cause) —
+    the suite is now fully green (116/0, 1 skip). Note: `legacy/` and `src/Cli/CommandPrompt.Compiler`
+    remain broken from the same rename (code-namespace/missing-type errors, unrelated to resources) —
+    out of scope here.
 
 - [x] **Report grammar conflicts to the author.** ✅ **DONE 2026-07-01 (opt-in surface).**
   Detection already existed (`CheckAmbiguity()` → `AmbiguityCheckResult`) but was only reachable

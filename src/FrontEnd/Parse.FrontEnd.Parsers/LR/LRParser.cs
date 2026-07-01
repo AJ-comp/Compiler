@@ -30,6 +30,12 @@ namespace Janglim.FrontEnd.Parsers.LR
         public CanonicalRelation Canonical { get; } = new CanonicalRelation();
         public IErrorHandlable ErrorHandler { get; private set; }
 
+        // Grammar-agnostic fallback used when no custom ErrorHandler was registered: on a parse failure
+        // it records a positioned error (the unexpected token) so the result surfaces WHERE it failed
+        // instead of an empty "it failed". Records-only, no recovery -> behaviour is otherwise unchanged.
+        // (See DefaultLRErrorHandler; it can later grow panic recovery / "expected {…}" / multiple errors.)
+        private static readonly IErrorHandlable _defaultErrorHandler = new DefaultLRErrorHandler();
+
         /// <summary>
         /// The Error Handler that if the action completed.
         /// </summary>
@@ -373,7 +379,7 @@ namespace Janglim.FrontEnd.Parsers.LR
                 result = lastParsingUnit.ErrorHandler.Call(new DataForRecovery(this, parsingResult, curTokenIndex));
             */
 
-            return ErrorHandler?.Call(new DataForRecovery(this, parsingResult, curTokenIndex, BackTrackingOnConflict));
+            return (ErrorHandler ?? _defaultErrorHandler).Call(new DataForRecovery(this, parsingResult, curTokenIndex, BackTrackingOnConflict));
         }
 
         /// <summary>
