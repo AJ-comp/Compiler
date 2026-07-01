@@ -17,7 +17,7 @@ So far, the `a` `b` `c` `d` `x` `y` in our examples were **actual symbols baked 
 | Symbol | What kind of *blank* is it? | Examples it can be filled with |
 |:--:|:--|:--|
 | `A` `B` | a single *nonterminal* (a rule name) | the `A` · `B` · `S` … of the examples |
-| `α` `β` | a *string of symbols* — a stretch of **zero or more** terminals/nonterminals | the empty stretch · `c` · `A c` · `a A` … |
+| `α` `β` | a *string of symbols* — **zero or more** terminals/nonterminals in a row | the empty string · `c` · `A c` · `a A` … |
 | `t` | a single *terminal* — **the lookahead slot** | `c` · `d` · or end of input `$` |
 
 > ⚠️ **A note on notation — we write lookahead as `t`, not `a`.** Textbooks usually write the lookahead slot as `a`. But our examples have an *actual symbol* `a` (e.g. `S → a A c`), so `a` would overlap two meanings — the *actual symbol* and the *lookahead slot*.\
@@ -59,24 +59,33 @@ Here's the situation as we expand. Suppose we already have this item:
 [ <span class="nt">A</span> → α <span class="lrdot">•</span> <span class="nt">B</span> β , <span class="setm">t</span> ]
 </pre>
 
-There's a nonterminal `B` after the dot (with the stretch `β` after it, and this item's lookahead `t`). Closure pulls in the `B → γ` rules anew:
+There's a nonterminal `B` after the dot (with `β` after it, and this item's lookahead `t`). Closure pulls in the `B → γ` rules anew:
 
 <pre class="lrbox">
 [ <span class="nt">B</span> → <span class="lrdot">•</span> γ , ? ]      ← what goes in this new item's lookahead slot?
 </pre>
 
-**Think about it — once we've finished reducing `B`, what comes *right after* it?**\
-It's the stretch `β` that sat behind `B` in the original item. So `B`'s lookahead is *the first symbols of `β`* —
+**Think about it — once we've finished reducing `B`, what comes *right after* it?**
 
-> new lookahead = `FIRST(β)`
+<pre class="lrbox">
+[ <span class="nt">A</span> → α <span class="lrdot">•</span> <span class="nt">B</span> <span class="lrmark">β</span> , <span class="setm">t</span> ]
+</pre>
 
-But if **`β` is empty or can disappear entirely** (i.e. effectively nothing follows `B`), then what comes after `B` is *the original item's lookahead `t`*. Writing that "in that case, inherit `t`" in one go gives —
+It's the `β` that sat behind `B` in the original item. So `B`'s lookahead is *the first symbols of `β`* (`FIRST(β)`).
+
+But if **`β` is empty or can disappear entirely** (i.e. effectively nothing follows `B`), then what comes after `B` is *the original item's lookahead `t`*.
+
+> new lookahead = <span class="setm">t</span>
+
+**Why `t`?** The original item is `[ A → α • B β , t ]`; when `β` vanishes it effectively becomes `[ A → α • B , t ]`, and expanding `A` by this item leaves `B` at the *very end*. Once `B` is reduced, `A` is finished too. So what comes after `B` is just *what comes after `A`* — and the item already tells us that: its lookahead `t`. That's why `B` inherits that `t`.
+
+Folding both cases into one formula gives —
 
 > ### new lookahead = `FIRST( β t )`
 
 (`FIRST(β t)` = gather the FIRST of `β`, and if `β` can vanish entirely, include `t` too — exactly the [FIRST](first-formula.md) definition.)
 
-That's *all there is* to the formula for computing lookahead. It's *not a new computation* — it's just **applying the FIRST you already learned to "the stretch `β` after the dot."**
+That's *all there is* to the formula for computing lookahead. It's *not a new computation* — it's just **applying the FIRST you already learned to "`β` after the dot."**
 
 ---
 
@@ -100,9 +109,9 @@ Starting out and reading `(`, we have this item (the outermost is closed off by 
 A nonterminal `A` follows the dot. Time to expand and pull in `A → n` — **plug it into the formula `FIRST(β t)`**:
 
 - nonterminal `B` after the dot = `A`
-- the stretch `β` left after `A` = `)`
+- the `β` left after `A` = `)`
 - this item's lookahead `t` = `$`
-- → new lookahead = `FIRST( ) $ )` = `FIRST( ) )` = <code><span class="setb">{</span><span class="setm"> ) </span><span class="setb">}</span></code> &nbsp; (`)` is a terminal, so it's itself)
+- → new lookahead = `FIRST( ) $ )` — but the leading `)` is a terminal, so it can't vanish, which means FIRST never even reaches the `$` behind it. So the `$` drops out and `FIRST( ) )` = <code><span class="setb">{</span><span class="setm"> ) </span><span class="setb">}</span></code> &nbsp; (`)` is a terminal, so it's itself)
 
 So the new item is:
 
@@ -113,9 +122,9 @@ So the new item is:
 Read `n` and the dot moves over — **`[ A → n • , ) ]`.**\
 How to read it: *"right after reducing `A → n`, if `)` comes, it's correct."* — of course, since in `( n )` a `)` comes after `n`.
 
-**Let's also see the case where `β` is empty.** What if the rule weren't `S → ( A )` but just `S → A`? When expanding `A` in `[ S → • A , $ ]` — there's *no* stretch left after `A` (`β` is empty). Then the formula is `FIRST( $ )` = <code><span class="setb">{</span><span class="setm"> $ </span><span class="setb">}</span></code>, i.e. it **inherits the parent's lookahead `$` directly**, giving `[ A → • n , $ ]`.
+**Let's also see the case where `β` is empty.** What if the rule weren't `S → ( A )` but just `S → A`? When expanding `A` in `[ S → • A , $ ]` — there's *nothing* left after `A` (`β` is empty). Then the formula is `FIRST( $ )` = <code><span class="setb">{</span><span class="setm"> $ </span><span class="setb">}</span></code>, i.e. it **inherits the parent's lookahead `$` directly**, giving `[ A → • n , $ ]`.
 
-> 🔖 **In one line** — a lookahead is *the "next terminal it's OK to reduce on" attached to each item*, and you compute it in closure as **`FIRST(β t)`** (the FIRST of the stretch `β` after the dot, inheriting the parent `t` if `β` vanishes).
+> 🔖 **In one line** — a lookahead is *the "next terminal it's OK to reduce on" attached to each item*, and you compute it in closure as **`FIRST(β t)`** (the FIRST of `β` after the dot, inheriting the parent `t` if `β` vanishes).
 
 ---
 

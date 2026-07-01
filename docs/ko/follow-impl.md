@@ -41,7 +41,7 @@ public TerminalSet InitFollowSet(NonTerminal nonTerminal, HashSet<NonTerminal> n
     foreach (var symbol in GetFollowSymbols(nonTerminalSet, nonTerminal))  // ── 규칙 ② : 바로 뒤 기호들
     {
         var firstSet = FirstSet(symbol);                          //    그 뒤엣것의 FIRST
-        firstSet.ExceptWith(new TerminalSet(new Epsilon()));      //    ε 를 빼고
+        firstSet.ExceptWith(new TerminalSet(new Epsilon()));      //    ε 을 빼고
         result.UnionWith(firstSet);                               //    FOLLOW 에 더함
     }
     return result;
@@ -150,6 +150,27 @@ public TerminalSet Follow(NonTerminal nonTerminal) => this.Datas[nonTerminal];  
 - **`do…while`**(③) → `Term ⊇ FOLLOW(Expr)`, `Factor ⊇ FOLLOW(Term)` 로 전파돼, 둘 다 `{$,'+',')','*'}`.
 - 더 돌려도 변화가 없으면 `bChange = false` → 멈춤. ✓\
   (전파가 *몇 바퀴* 걸리는지는 `Datas` 의 처리 순서에 따라 한두 바퀴로 갈리지만, 멈춘 뒤의 값은 어느 순서든 똑같아요.)
+
+**ε(nullable)이 코드에서 도는 모습도 한 번.** expr 문법엔 nullable 이 없어서 위 트레이스는 규칙 ② 의 `ExceptWith(ε)` 도, 규칙 ③ 의 "사라지면 앞 비단말까지 전파" 도 안 건드려요. 이 절에서 예시로 쓸 문법은 아래와 같아요:
+
+<pre class="lrbox">
+<span class="nt">S</span> → <span class="nt">A</span> <span class="nt">B</span>
+<span class="nt">A</span> → <span class="setm">a</span> | ε
+<span class="nt">B</span> → <span class="setm">b</span> | ε
+</pre>
+
+`FOLLOW(A)` 를 코드대로 따라가요 (`A` 뒤 기호는 `B`):
+
+- `GetFollowSymbols` 가 `A` 뒤의 `B` 를 집어요. `FirstSet(B) = { b, ε }` 인데 **`ExceptWith(ε)`** 가 ε 을 떼니 `{ b }` 만 들어가요. (규칙 ② 의 `− ε`)
+- `B` 가 nullable 이라 `ConCatExprUpdateFollow` 가 거기서 안 멈추고, 그 앞 `A` 까지 LHS(`S`)의 FOLLOW 를 부어줘요. (규칙 ③ 의 "사라지면 전파")
+
+<pre class="lrbox">
+   FOLLOW(<span class="nt">A</span>) = <span class="setb">{</span> <span class="setm">b</span> <span class="setb">}</span>      <span style="opacity:.6">규칙 ② : FIRST(B) − ε</span>
+            ∪ <span class="setb">{</span> <span class="setm">$</span> <span class="setb">}</span>      <span style="opacity:.6">규칙 ③ : B 가 사라져 FOLLOW(S) 상속</span>
+            = <span class="setb">{</span> <span class="setm">b</span>, <span class="setm">$</span> <span class="setb">}</span>
+</pre>
+
+expr 트레이스에선 한 번도 안 돌던 `ExceptWith(ε)` 와 nullable 전파가, 여기선 실제로 발동해요.
 
 ## 한눈에 — FOLLOW 관련 전체 명세
 

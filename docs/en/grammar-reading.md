@@ -1,6 +1,6 @@
 # How to Read a Grammar
 
-From start to finish, this manual uses **just one tiny grammar** as its running example.\
+This manual uses **this one tiny grammar** as its main example (for special concepts like ε, it occasionally shows a small auxiliary grammar separately).\
 Before we dive into the real material, you'll want to be able to *read* this grammar, right?\
 Don't worry — once you know **exactly four symbols**, it reads smoothly.\
 Let's take it apart together, slowly.

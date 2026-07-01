@@ -175,10 +175,13 @@ FOLLOW(<span class="nt">Term</span>) = FOLLOW(<span class="nt">Expr</span>) ∪ 
 
 **③ `Factor` — `Term` 과 똑같이**
 
-`Factor` 도 같은 식으로:
+`Factor` 도 같은 식으로 자리를 짚어 보면:
+
+- `Factor` 는 늘 `Term` 규칙의 *맨 끝* 에 와요(`Term : Term '*' Factor`, `Term : Factor`) → 그러면 **Term 다음에
+  올 수 있는 건 Factor 다음에도 올 수 있어요** → FOLLOW(Term) 이 그대로 들어옴
 
 <pre class="lrbox">
-FOLLOW(<span class="nt">Factor</span>) = { $, <span class="setm">'+'</span>, <span class="setm">')'</span>, <span class="setm">'*'</span> }
+FOLLOW(<span class="nt">Factor</span>) = FOLLOW(<span class="nt">Term</span>) = { $, <span class="setm">'+'</span>, <span class="setm">')'</span>, <span class="setm">'*'</span> }
 </pre>
 
 </div>
@@ -202,7 +205,7 @@ FIRST/FOLLOW 가 왜 파싱 테이블의 재료인지, 여기서 드러나요.\
 "이런 게 있구나" 정도만.
 
 - **ε(엡실론, 빈 문자열):** 어떤 비단말이 "아무것도 아닌 것"이 될 수 있을 때 쓰는 표시예요.
-  우리 예제엔 안 나오니 지금은 신경 안 써도 돼요.
+  우리 예제엔 안 나오니 지금은 가볍게 넘기고, 심화 [FIRST · 계산 규칙](first-rules.md)에서 ε 이 있는 작은 문법으로 직접 보여줄게요.
 - **`$`(끝 표시):** 방금 봤듯 입력의 끝을 나타내는 가상의 토큰이에요. 시작 기호의 FOLLOW 엔 항상 들어가요.
 
 ## ③ 플레이그라운드에서 보기

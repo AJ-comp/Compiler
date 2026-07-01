@@ -132,6 +132,38 @@ FIRST のとき再帰で行き詰まったのとまったく同じですね — 
 
 [定義と導出ページ](follow-formula.md)·[基本コース](first-follow.md)で求めた答えと正確に同じです。 ✓
 
+## ε が含まれる場合 — 小さな文法で一度
+
+上の expr 文法には消える（nullable）非終端記号がないので、規則 ② の *`− ε`* と規則 ③ の *「β が消えたら」* の枝が一度も回りませんでした。この二つを目で見るために、この節で例に使う文法は以下のとおりです：
+
+<pre class="lrbox">
+<span class="nt">S</span> → <span class="nt">A</span> <span class="nt">B</span>
+<span class="nt">A</span> → <span class="setm">a</span> | ε
+<span class="nt">B</span> → <span class="setm">b</span> | ε
+</pre>
+
+`A` と `B` がそれぞれ ε に消えうります。
+
+<pre class="lrbox">
+   <span class="setf">FIRST(</span><span class="nt">A</span><span class="setf">)</span> = <span class="setb">{</span> <span class="setm">a</span>, ε <span class="setb">}</span>
+   <span class="setf">FIRST(</span><span class="nt">B</span><span class="setf">)</span> = <span class="setb">{</span> <span class="setm">b</span>, ε <span class="setb">}</span>
+</pre>
+
+では `FOLLOW(A)` を見ます。`S → A B` で `A` の後ろに `β = B` が付いています。
+
+- **規則 ②** — `FOLLOW(A)` に `FIRST(B) − ε` を入れます：`{ b, ε } − ε` = `{ b }`。← *ここで `− ε` が実際に働きます。*
+- **規則 ③** — ところが `B` が *消えうる* ので、`A` も実質的に末尾になりえます。だから LHS の `S` の FOLLOW も受け継ぎます：`FOLLOW(A) ⊇ FOLLOW(S)`。
+
+`FOLLOW(S)` は開始記号なので規則 ① で `{ $ }` です。そして `B` は `S → A B` の末尾なので、規則 ③ でその `FOLLOW(S)` をそのまま受け継ぎます。
+
+<pre class="lrbox">
+   FOLLOW(<span class="nt">S</span>) = <span class="setb">{</span> <span class="setm">$</span> <span class="setb">}</span>
+   FOLLOW(<span class="nt">B</span>) = <span class="setb">{</span> <span class="setm">$</span> <span class="setb">}</span>              <span style="opacity:.6">B が末尾 → FOLLOW(S) を継承</span>
+   FOLLOW(<span class="nt">A</span>) = <span class="setb">{</span> <span class="setm">b</span>, <span class="setm">$</span> <span class="setb">}</span>          <span style="opacity:.6">FIRST(B)−ε = {b}、さらに B が消えうるので FOLLOW(S) を継承</span>
+</pre>
+
+`B` が *消えられなかったら* `FOLLOW(A) = { b }` で終わるところですが、`B` が ε になりうるので `$` まで受け継ぎました。規則 ② の `− ε` と規則 ③ の「消えたら継承」が両方ともここで実際に回ります。
+
 ## まとめ
 
 規則に使う記号は `A → α B β` がすべてです。
@@ -139,7 +171,7 @@ FIRST のとき再帰で行き詰まったのとまったく同じですね — 
 <pre class="lrbox">
    <span class="nt">A</span> → α <span class="nt">B</span> β
    <span class="nt">A</span>, <span class="nt">B</span> = 非終端記号
-   α, β = 記号の並び <span style="opacity:.6">(B の前・後ろの断片 — 終端記号・非終端記号が混じっても、無くてもよい)</span>
+   α, β = 記号の並び <span style="opacity:.6">(B の前・後ろの部分 — 終端記号・非終端記号が混じっても、無くてもよい)</span>
 </pre>
 
 1. **開始記号**（`Expr`）の FOLLOW に `$`。

@@ -185,6 +185,23 @@ Starting with `FIRST(Factor)`. `Factor : '(' Expr ')' | id`.
 `Expr` too, by the same flow, is **`{ '(', id }`**.\
 Exactly the same as the answer worked out on the [Computation Rules page](first-rules.md) and the [Definition & Derivation page](first-formula.md). ✓
 
+**Let's also see ε (nullable) actually run in the code.** Since expr has no nullable, the trace above always flowed "no ε → break immediately." Here's the grammar we'll use for examples in this chapter:
+
+<pre class="lrbox">
+<span class="nt">S</span> → <span class="nt">A</span> <span class="nt">B</span>
+<span class="nt">A</span> → <span class="setm">a</span> | ε
+<span class="nt">B</span> → <span class="setm">b</span> | ε
+</pre>
+
+Let's run `FIRST(S)` through `FirstSet(Concat)`, symbol by symbol of `S → A B`:
+
+- first slot `A` → `FirstSet(A) = { a, ε }`. The `RingSum` result has ε in it (`IsNullAble = true`) → **don't `break`, move to the next slot** (← this is exactly the Case ③ path!)
+- second slot `B` → `FirstSet(B) = { b, ε }`.
+- drop ε (`Remove(ε)`) and combine with the previous slot: `{ a } ∪ { b, ε }` = `{ a, b, ε }`
+- → **`FIRST(S) = { a, b, ε }`**
+
+The *"don't stop, next slot"* branch of `if (!result.IsNullAble) break;` — which never ran in the expr trace above — actually fires here at the first slot `A`.
+
 ## At a glance — the whole FIRST-related spec
 
 This is the skeleton of the FIRST side of `FirstFollowAnalyzer`.\

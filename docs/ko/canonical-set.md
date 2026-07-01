@@ -89,6 +89,8 @@
 
 ## `I₆` — `GOTO(I₁, '+')`
 
+`'+'` 를 읽고 점을 옮긴 `Expr → Expr '+' • Term` 에, `Term` 이 점 뒤라 다시 클로저가 붙은 5개예요.
+
 <pre class="lrbox">   <span class="nt">Expr</span>   → <span class="nt">Expr</span> <span class="setm">'+'</span> <span class="lrdot">•</span> <span class="nt">Term</span>
    <span class="nt">Term</span>   → <span class="lrdot">•</span> <span class="nt">Term</span> <span class="setm">'*'</span> <span class="nt">Factor</span>
    <span class="nt">Term</span>   → <span class="lrdot">•</span> <span class="nt">Factor</span>
@@ -103,6 +105,8 @@
 - `id` 를 읽으면 → `I₅`
 
 ## `I₇` — `GOTO(I₂, '*')`
+
+`'*'` 를 읽고 점을 옮긴 `Term → Term '*' • Factor` 에, `Factor` 가 점 뒤라 다시 클로저가 붙은 3개예요.
 
 <pre class="lrbox">   <span class="nt">Term</span>   → <span class="nt">Term</span> <span class="setm">'*'</span> <span class="lrdot">•</span> <span class="nt">Factor</span>
    <span class="nt">Factor</span> → <span class="lrdot">•</span> <span class="setm">'('</span> <span class="nt">Expr</span> <span class="setm">')'</span>

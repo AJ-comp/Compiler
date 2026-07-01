@@ -37,7 +37,7 @@ Let me pin it down in one line first.
 > somewhere in a valid sentence.\
 > (And if `B` can come at the *very end* of a sentence, we also include `$`, which stands for the end of input.)
 
-Lining it up with FIRST as a pair — FIRST is the terminal at the *very front* of a symbol, FOLLOW is the terminal *right behind* it.
+Lining it up with FIRST as a pair: FIRST is the terminal that can come *first* when you derive that symbol, and FOLLOW is the terminal that can come *right after* it.
 
 ### Seeing "right behind" through derivation
 
@@ -122,6 +122,27 @@ Because `Term` inherited the end-spot of `Expr` as is.
    FOLLOW(<span class="nt">Term</span>) = { <span class="setm">'*'</span> }  ∪  FOLLOW(<span class="nt">Expr</span>)
                 = { <span class="setm">'*'</span> }  ∪  { $, <span class="setm">'+'</span>, <span class="setm">')'</span> }   =   { $, <span class="setm">'+'</span>, <span class="setm">')'</span>, <span class="setm">'*'</span> }
 </pre>
+
+### When ε is involved — with a small grammar
+
+Up to now, the `β` after `B` has always been a terminal (`'+'`, `')'`, `'*'`), so it was simple. But if `β` is a nonterminal that *can disappear*, one more layer appears. Our expr grammar has no such nonterminal, so here's the grammar we'll use for this section:
+
+<pre class="lrbox">
+<span class="nt">S</span> → <span class="nt">A</span> <span class="nt">B</span>
+<span class="nt">A</span> → <span class="setm">a</span> | ε
+<span class="nt">B</span> → <span class="setm">b</span> | ε
+</pre>
+
+`A` and `B` can each disappear into ε. Look at `FOLLOW(A)` by the definition: in `S → A B`, right after `A` comes `B`.
+
+- if `B` *doesn't disappear*: the first terminal after `A` is `B`'s first terminal `b`. → `b ∈ FOLLOW(A)`. (The `ε` in `FIRST(B)` isn't a terminal, so we drop it and add only `FIRST(B) − ε`.)
+- if `B` *does disappear*: `S ⇒ A B ⇒ A` (B is ε), so `A` becomes the very end of `S`, and what's after `A` is then what's after `S` — it inherits `FOLLOW(S)`. Since `FOLLOW(S) = { $ }` (start symbol), `$ ∈ FOLLOW(A)`.
+
+<pre class="lrbox">
+   FOLLOW(<span class="nt">A</span>) = ( FIRST(<span class="nt">B</span>) − ε )  ∪  FOLLOW(<span class="nt">S</span>)  =  <span class="setb">{</span> <span class="setm">b</span> <span class="setb">}</span> ∪ <span class="setb">{</span> <span class="setm">$</span> <span class="setb">}</span> = <span class="setb">{</span> <span class="setm">b</span>, <span class="setm">$</span> <span class="setb">}</span>
+</pre>
+
+`β` (here `B`) can disappear, which is why `$` flowed in too. These two things we just saw — *taking `FIRST(β)` with only `ε` removed* and *inheriting the LHS's FOLLOW when `β` disappears* — are exactly rules 2 and 3 of the summary below.
 
 ### Why it doesn't finish in one pass — the FOLLOW you'd inherit may not be settled yet
 

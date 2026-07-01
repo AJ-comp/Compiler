@@ -107,6 +107,11 @@
 
 `c` 를 막 읽은 상태가 *두 군데* 나와요. 아이템은 `{ A→c•, B→c• }` 로 같은데, *어디서 왔느냐* 에 따라 lookahead 가 엇갈려요.
 
+- **`a` 로 온 길**: `S → a A d` 라서 `A` 뒤는 `d`, `S → a B e` 라서 `B` 뒤는 `e`
+- **`b` 로 온 길**: `S → b A e` 라서 `A` 뒤는 `e`, `S → b B d` 라서 `B` 뒤는 `d`
+
+표로 모으면:
+
 | `c` 를 읽고 도착한 상태 | `A → c •` | `B → c •` |
 |:--|:--:|:--:|
 | `a c` 뒤 | <code><span class="setb">{</span><span class="setm"> d </span><span class="setb">}</span></code> | <code><span class="setb">{</span><span class="setm"> e </span><span class="setb">}</span></code> |

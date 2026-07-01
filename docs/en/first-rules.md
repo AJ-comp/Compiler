@@ -139,35 +139,32 @@ Look at the first production of `Term : Term '*' Factor | Factor`.
 
 Trying to work out `FIRST(Term)`, the front nonterminal is again `Term`.\
 That is, to work out `FIRST(Term)` you need `FIRST(Term)` — a **chicken-and-egg** situation.\
-As is, this doesn't solve in one go.
+As is, this doesn't solve in one go. But this kind of *direct* left recursion (where it bites itself directly) is actually easy.
 
-So we solve it like this — **start from the empty set, and repeat one round at a time until it stops growing.**\
-Let me run `FIRST(Term)` directly. (`FIRST(Factor) = { '(', id }` we already worked out in Case ①.)
+**Easy recursion — just drop that rule**
 
-Starting from the empty set, we scan `Term`'s two productions (①②) and repeat that — **until it stops growing.**\
-Seeing one round = one line, it goes like this.
+Just ask what `Term` can *start* with. `Term` has two rules, and they differ in what the front becomes.
 
-| round | ① `Term → Factor` | ② `Term → Term '*' Factor` | `FIRST(Term)` after the round |
-|:--:|:--|:--|:--:|
-| **start** | — | — | `{ }` |
-| **round 1** | add `FIRST(Factor)` = `{ '(', id }` | front `Term`'s *current value* → nothing new | **`{ '(', id }`** &nbsp;*(grew)* |
-| **round 2** | already there → nothing | current value `{ '(', id }` → nothing new | `{ '(', id }` &nbsp;*(unchanged)* |
+<pre class="lrbox">   ① <span class="nt">Term</span> → <span class="nt">Factor</span>            <span style="opacity:.6">front is Factor (settled!)</span>
+   ② <span class="nt">Term</span> → <span class="nt">Term</span> <span class="setm">'*'</span> <span class="nt">Factor</span>   <span style="opacity:.6">front is Term again (no progress)</span></pre>
 
-→ in **round 1** it *grew* from the empty set to `{ '(', id }`, so it does one more round, and in **round 2** nothing grows — **so it stops there.**
+`②` leaves a `Term` at the front, so it never settles the first symbol (`Term` just comes back as `Term`). So the only rule that settles the front is `①`, and it makes the front a `Factor`. So **`Term` always starts with a `Factor`**, which means **`FIRST(Term)` = `FIRST(Factor)` = `{ '(', id }`.**
+
+`Expr` (`Expr : Expr '+' Term | Term`) is the same direct left recursion, so by the same reasoning it's `{ '(', id }`.
+
+But this "just drop the in-place rule" shortcut only works for *direct* left recursion like `Term` — where it bites itself directly. When nonterminals bite each other *in a loop* (**indirect left recursion**), it's a different story.
 
 <pre class="lrbox">
-   <span class="setf">FIRST(</span><span class="nt">Term</span><span class="setf">)</span> = <span class="setb">{</span> <span class="setm">'('</span>, <span class="setm">id</span> <span class="setb">}</span>
+   <span class="nt">A</span> → <span class="nt">B</span> …
+   <span class="nt">B</span> → <span class="nt">A</span> …
 </pre>
 
-The key is production ②.\
-It points at itself, but it only pulls in "the *so-far* value of the front `Term`," so once that value is **filled in first** by the other production ① (`Factor`), there's nothing more to add.\
-That's why, without expanding infinitely, the answer firms up in just two rounds.
+`A` starts with `B`, and that `B` starts with `A` again, so there's no *directly self-biting* "in-place rule" anywhere to drop. To handle even cases like this all at once, the engine doesn't distinguish direct from indirect — it **handles every nonterminal the same way, by starting from the empty set and repeating until nothing more grows.**
+
+For direct left recursion like `Term`, this repetition finishes in a single round, so it's practically free. **Where the repetition really shows its power is when nonterminals tangle up like this** — and that comes up naturally in the next [FOLLOW](follow-formula.md) chapter, on this very expr grammar.
 
 > 💡 The wall of recursion where the derivation kept *growing infinitely long* on the previous page ([Definition & Derivation](first-formula.md)) — **getting over that wall is exactly this "repetition."**\
 > Instead of expanding all the way, we grow the set little by little and stop when it stops changing.
-
-`Expr` (`Expr : Expr '+' Term | Term`) has the same shape, so by the same method it firms up to `{ '(', id }`
-in two rounds.
 
 ## Case ③ — when the front nonterminal **can disappear** (ε)
 
@@ -188,9 +185,32 @@ This rule of *"if the front can disappear, move on to the next symbol and combin
             (A-ε) ∪ B      (if A can disappear → drop ε, and add B too)
 ```
 
-> Fortunately, our example grammar has not a single *disappearing (nullable) nonterminal*.\
-> So Case ③ doesn't actually happen, and ⊕ almost always ends right at the front symbol.\
-> For now it's enough to just know **"there's a safety net like this."** ⊕ shows its true worth in grammars with ε.
+We need to show ε here, but **our expr grammar has no nullable**, so instead of expr we use a small grammar. Here's the grammar we'll use for examples in this chapter:
+
+<pre class="lrbox">
+<span class="nt">S</span> → <span class="nt">A</span> <span class="nt">B</span>
+<span class="nt">A</span> → <span class="setm">a</span> | ε
+<span class="nt">B</span> → <span class="setm">b</span> | ε
+</pre>
+
+A grammar where `A` and `B` can *each disappear into ε* (nullable).
+
+Let's start with `A` and `B`'s FIRST. Both have an `ε` branch, so `ε` gets in.
+
+<pre class="lrbox">
+   <span class="setf">FIRST(</span><span class="nt">A</span><span class="setf">)</span> = <span class="setb">{</span> <span class="setm">a</span>, ε <span class="setb">}</span>
+   <span class="setf">FIRST(</span><span class="nt">B</span><span class="setf">)</span> = <span class="setb">{</span> <span class="setm">b</span>, ε <span class="setb">}</span>
+</pre>
+
+Now for `FIRST(S)`. In `S → A B`, since **the front `A` can disappear**, ⊕ doesn't stop at the first slot — it moves on to the next slot `B`.
+
+<pre class="lrbox">
+   <span class="setf">FIRST(</span><span class="nt">S</span><span class="setf">)</span> = <span class="setf">FIRST(</span><span class="nt">A</span><span class="setf">)</span> ⊕ <span class="setf">FIRST(</span><span class="nt">B</span><span class="setf">)</span> = ( <span class="setb">{</span> <span class="setm">a</span>, ε <span class="setb">}</span> − ε ) ∪ <span class="setb">{</span> <span class="setm">b</span>, ε <span class="setb">}</span> = <span class="setb">{</span> <span class="setm">a</span>, <span class="setm">b</span>, ε <span class="setb">}</span>
+</pre>
+
+If `A` didn't disappear it would end at `{ a }`, but since `A` can become ε, `B`'s first symbol `b` can come to the front too. And if `B` disappears as well, `S` becomes empty entirely, so `ε` gets in too. This is ⊕ actually at work.
+
+> Our expr grammar (Expr/Term/Factor) has no nullable, so there ⊕ always stops right at the front symbol. Still, the rule has to include this ε handling to be correct.
 
 ## Summary — the three cases are really one formula
 

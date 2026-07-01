@@ -107,6 +107,11 @@
 
 `c` を読んだばかりの状態が *二か所* 出てきます。項目は `{ A→c•, B→c• }` で同じですが、*どこから来たか* によって先読みが食い違います。
 
+- **`a` から来た道**: `S → a A d` なので `A` の次は `d`、`S → a B e` なので `B` の次は `e`
+- **`b` から来た道**: `S → b A e` なので `A` の次は `e`、`S → b B d` なので `B` の次は `d`
+
+表にまとめると：
+
 | `c` を読んで到着した状態 | `A → c •` | `B → c •` |
 |:--|:--:|:--:|
 | `a c` のあと | <code><span class="setb">{</span><span class="setm"> d </span><span class="setb">}</span></code> | <code><span class="setb">{</span><span class="setm"> e </span><span class="setb">}</span></code> |

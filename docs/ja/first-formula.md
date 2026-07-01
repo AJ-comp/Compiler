@@ -71,8 +71,24 @@
 </pre>
 
 > 📎 **ε（空文字列）を一つだけ追加で。** もし `X` が *何でもないもの* まで導出できるなら
-> （`X ⇒* ε`）、**ε も FIRST(X) に入れます。** 「X はまるごと消えることもある」という表示です。（私たちの
-> 例にはそういう非終端記号がないので ε は出てきません — でも定義には必ず含まれます。）
+> （`X ⇒* ε`）、**ε も FIRST(X) に入れます。** 「X はまるごと消えることもある」という表示です。
+
+ところが私たちの expr 文法には *何でもないものになれる* 非終端記号がなく、expr では見せられません。ε を一度目で見るために、小さな文法を一つ持ってきます。この章で例に使う文法は以下のとおりです：
+
+<pre class="lrbox">
+<span class="nt">S</span> → <span class="nt">A</span> <span class="nt">B</span>
+<span class="nt">A</span> → <span class="setm">a</span> | ε
+<span class="nt">B</span> → <span class="setm">b</span> | ε
+</pre>
+
+ここで `A` は生成規則が二つあり、そのうちの一つが `A → ε` なので、`A ⇒ ε` のように *何でもないもの* まで導出されます。定義どおり `ε` も `A` の FIRST に入り、`B` も同じ理由で入ります。
+
+<pre class="lrbox">
+   <span class="setf">FIRST(</span><span class="nt">A</span><span class="setf">)</span> = <span class="setb">{</span> <span class="setm">a</span>, ε <span class="setb">}</span>
+   <span class="setf">FIRST(</span><span class="nt">B</span><span class="setf">)</span> = <span class="setb">{</span> <span class="setm">b</span>, ε <span class="setb">}</span>
+</pre>
+
+> この小さな ε 文法は、後の [計算規則](first-rules.md) 章でも ε の例として使い続けます — expr の代わりにこれが出てきたら「ああ、ε を見せるあの文法」と思って読んでください。
 
 整理すると — 終端記号でも、非終端記号でも、*複数の記号からなる並び* でも、**「導出して一番最初に現れうる終端記号（＋必要なら ε）の集合」** が FIRST です。\
 これが定義のすべてです。

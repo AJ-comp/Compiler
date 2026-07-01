@@ -89,6 +89,8 @@ We read `'('` and moved the dot to get `Factor → '(' • Expr ')'`; since `Exp
 
 ## `I₆` — `GOTO(I₁, '+')`
 
+We read `'+'` and moved the dot to get `Expr → Expr '+' • Term`; since `Term` is right after the dot, the closure attaches again, giving 5 items.
+
 <pre class="lrbox">   <span class="nt">Expr</span>   → <span class="nt">Expr</span> <span class="setm">'+'</span> <span class="lrdot">•</span> <span class="nt">Term</span>
    <span class="nt">Term</span>   → <span class="lrdot">•</span> <span class="nt">Term</span> <span class="setm">'*'</span> <span class="nt">Factor</span>
    <span class="nt">Term</span>   → <span class="lrdot">•</span> <span class="nt">Factor</span>
@@ -103,6 +105,8 @@ We read `'('` and moved the dot to get `Factor → '(' • Expr ')'`; since `Exp
 - read `id` → `I₅`
 
 ## `I₇` — `GOTO(I₂, '*')`
+
+We read `'*'` and moved the dot to get `Term → Term '*' • Factor`; since `Factor` is right after the dot, the closure attaches again, giving 3 items.
 
 <pre class="lrbox">   <span class="nt">Term</span>   → <span class="nt">Term</span> <span class="setm">'*'</span> <span class="lrdot">•</span> <span class="nt">Factor</span>
    <span class="nt">Factor</span> → <span class="lrdot">•</span> <span class="setm">'('</span> <span class="nt">Expr</span> <span class="setm">')'</span>

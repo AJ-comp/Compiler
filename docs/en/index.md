@@ -37,7 +37,7 @@ At the end of each concept in the Basics track, I'll leave a "→ to Advanced" l
 
 ## We go all the way with a single example
 
-Across the whole manual we keep using **just one tiny grammar** — it's a little arithmetic expression with addition and multiplication.
+Across most of the manual we keep using **this one tiny grammar** — it's a little arithmetic expression with addition and multiplication.
 
 <pre class="lrbox">
 <span class="nt">Expr</span>   : <span class="nt">Expr</span> <span class="setm">'+'</span> <span class="nt">Term</span> | <span class="nt">Term</span> ;
@@ -49,6 +49,7 @@ Across the whole manual we keep using **just one tiny grammar** — it's a littl
 And we keep parsing this input: **`a + a * a`**
 
 Every chapter adds one more layer of understanding to this *same* example.\
+Now and then, when a concept can't be shown with this grammar (ε, conflicts, and the like), we bring in a *small auxiliary grammar* and show it in full right there.\
 (We'll take apart how to read this grammar slowly, together, the first time it shows up, so there's no need to worry about it in advance.)
 
 ## So, shall we get started?

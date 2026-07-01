@@ -71,8 +71,24 @@ Written more firmly in symbols, it's this (`T` = the set of terminals):
 </pre>
 
 > 📎 **Just one more thing about ε (the empty string).** If `X` can derive even *nothing at all*
-> (`X ⇒* ε`), **we put ε into FIRST(X) too.** It's the mark for "X can disappear entirely." (Our
-> example has no such nonterminal, so ε doesn't show up — but it's definitely part of the definition.)
+> (`X ⇒* ε`), **we put ε into FIRST(X) too.** It's the mark for "X can disappear entirely."
+
+But our expr grammar has no nonterminal that can *become nothing at all*, so we can't show this with expr. To see ε with our own eyes, let's bring in a small grammar. Here's the grammar we'll use for examples in this chapter:
+
+<pre class="lrbox">
+<span class="nt">S</span> → <span class="nt">A</span> <span class="nt">B</span>
+<span class="nt">A</span> → <span class="setm">a</span> | ε
+<span class="nt">B</span> → <span class="setm">b</span> | ε
+</pre>
+
+Here `A` has two productions, and one of them is `A → ε`, so `A ⇒ ε` — it derives *nothing at all*. Straight from the definition, `ε` is in `A`'s FIRST too, and so is `B`'s for the same reason.
+
+<pre class="lrbox">
+   <span class="setf">FIRST(</span><span class="nt">A</span><span class="setf">)</span> = <span class="setb">{</span> <span class="setm">a</span>, ε <span class="setb">}</span>
+   <span class="setf">FIRST(</span><span class="nt">B</span><span class="setf">)</span> = <span class="setb">{</span> <span class="setm">b</span>, ε <span class="setb">}</span>
+</pre>
+
+> We'll keep using this small ε grammar for ε examples in the later [Computation rules](first-rules.md) chapter too — whenever it shows up instead of expr, just read it as "ah, the grammar that shows ε."
 
 To sum up — whether it's a terminal, a nonterminal, or a *sequence of several symbols*, FIRST is **"the set of terminals (plus ε if needed) that can appear first when you derive it."**\
 That's the whole definition.

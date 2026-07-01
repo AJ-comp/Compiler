@@ -151,6 +151,25 @@ Run `CalculateAllFollow` on our grammar — and it flows exactly the way we did 
 - When running it more produces no change, `bChange = false` → stop. ✓\
   (How *many rounds* the propagation takes splits into one or two depending on the processing order of `Datas`, but the values after it stops are the same in any order.)
 
+**Let's see ε (nullable) run in the code too.** Since expr has no nullable, the trace above touches neither rule ②'s `ExceptWith(ε)` nor rule ③'s "propagate back to the preceding nonterminal when it disappears." Here's the grammar we'll use for this section:
+
+<pre class="lrbox">
+<span class="nt">S</span> → <span class="nt">A</span> <span class="nt">B</span>
+<span class="nt">A</span> → <span class="setm">a</span> | ε
+<span class="nt">B</span> → <span class="setm">b</span> | ε
+</pre>
+
+Let's follow `FOLLOW(A)` through the code (the symbol after `A` is `B`):
+
+- `GetFollowSymbols` picks up the `B` after `A`. `FirstSet(B) = { b, ε }`, and **`ExceptWith(ε)`** strips off the ε so only `{ b }` goes in. (rule ②'s `− ε`)
+- Since `B` is nullable, `ConCatExprUpdateFollow` doesn't stop there — it pours the LHS (`S`)'s FOLLOW all the way back to the preceding `A`. (rule ③'s "propagate when it disappears")
+
+<pre class="lrbox">
+   FOLLOW(<span class="nt">A</span>) = <span class="setb">{</span> <span class="setm">b</span> <span class="setb">}</span>      <span style="opacity:.6">rule ② : FIRST(B) − ε</span>
+            ∪ <span class="setb">{</span> <span class="setm">$</span> <span class="setb">}</span>      <span style="opacity:.6">rule ③ : B disappears, so inherit FOLLOW(S)</span>
+            = <span class="setb">{</span> <span class="setm">b</span>, <span class="setm">$</span> <span class="setb">}</span>
+</pre>
+
 ## At a glance — the full FOLLOW-related spec
 
 This is the FOLLOW-side skeleton of `FirstFollowAnalyzer`.\

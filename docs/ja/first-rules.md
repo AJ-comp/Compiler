@@ -139,37 +139,32 @@ FIRST は *この記号一つひとつに対して* 求めます。\
 
 `FIRST(Term)` を求めようとして見たら、先頭の非終端記号がまた `Term` です。\
 つまり `FIRST(Term)` を求めるのに `FIRST(Term)` が必要な、**鶏が先か卵が先か** の状況ですね。\
-このままでは一度には解けません。
+このままでは一度には解けません。でも、こういう *直接* 左再帰（自分をそのまま噛む場合）は実は簡単です。
 
-そこでこう解きます — **空集合から始めて、もう増えなくなるまで一周ずつ繰り返す。**\
-`FIRST(Term)` を実際に回してみます。（`FIRST(Factor) = { '(', id }` は場合 ① で既に求めましたね。）
+**簡単な再帰 — その規則をただ外せばいい**
 
-空集合から始めて、`Term` の二つの生成規則（①②）を洗い出すのを — **もう増えなくなるまで** 繰り返します。\
-一周 = 一行で見るとこうです。
+`Term` が何で *始まる* かだけを見ます。`Term` の規則は二つで、先頭がどうなるかが分かれます。
 
-| 周 | ① `Term → Factor` | ② `Term → Term '*' Factor` | 周の後の `FIRST(Term)` |
-|:--:|:--|:--|:--:|
-| **開始** | — | — | `{ }` |
-| **1周目** | `FIRST(Factor)` = `{ '(', id }` 追加 | 先頭 `Term` の *現在値* → 新しいものなし | **`{ '(', id }`** &nbsp;*(増えた)* |
-| **2周目** | すでにある → なし | 現在値 `{ '(', id }` → 新しいものなし | `{ '(', id }` &nbsp;*(そのまま)* |
+<pre class="lrbox">   ① <span class="nt">Term</span> → <span class="nt">Factor</span>            <span style="opacity:.6">先頭が Factor (決まり!)</span>
+   ② <span class="nt">Term</span> → <span class="nt">Term</span> <span class="setm">'*'</span> <span class="nt">Factor</span>   <span style="opacity:.6">先頭がまた Term (足踏み)</span></pre>
 
-→ **1周目** で空集合から `{ '(', id }` に *増えた* のでもう一周回り、**2周目** では何も増えない — **そこで止まります。**
+`②` は先頭が *また `Term`* なので、最初の文字が決まりません（`Term` がまた `Term` に戻るだけ）。だから先頭を決めるのは `①` だけで、`①` は先頭を `Factor` にします。つまり **`Term` の先頭はいつも `Factor`** なので **`FIRST(Term)` = `FIRST(Factor)` = `{ '(', id }`** です。
+
+`Expr`（`Expr : Expr '+' Term | Term`）も同じ直接左再帰なので、同じ理屈で `{ '(', id }` です。
+
+ところがこの「その場で噛む規則を外せばいい」という手軽なやり方は、`Term` のように *自分をそのまま噛む* **直接左再帰** でしか通じません。非終端記号どうしが *ぐるっと回って* 噛み合う **間接左再帰** は事情が違います。
 
 <pre class="lrbox">
-   <span class="setf">FIRST(</span><span class="nt">Term</span><span class="setf">)</span> = <span class="setb">{</span> <span class="setm">'('</span>, <span class="setm">id</span> <span class="setb">}</span>
+   <span class="nt">A</span> → <span class="nt">B</span> …
+   <span class="nt">B</span> → <span class="nt">A</span> …
 </pre>
 
-核心は生成規則 ② です。\
-自分自身を指していますが、「先頭 `Term` の *これまでの* 値」を引っぱってくるだけなので、その値が別の生成規則
-①（`Factor`）で **先に埋まってしまえば** もう加えるものがなくなります。\
-だから無限に展開しなくても、二周で答えが固まります。
+`A` は `B` で始まり、その `B` はまた `A` で始まるので、どこにも *自分をそのまま噛む* 「その場の規則」がありません。こういう場合まで一度に解くために、エンジンは直接・間接を区別せず、**空集合から始めて増えなくなるまで繰り返す一つのやり方で、すべての非終端記号を同じように** 処理します。
 
-> 💡 前のページ（[定義と導出](first-formula.md)）で導出が *無限に長くなっていた* あの再帰の壁 — **その壁を
-> 越えるのがまさにこの「繰り返し」** です。\
+`Term` のような直接左再帰はこの繰り返しが一周で終わるので、ほぼタダみたいなものです。**繰り返しが本当に威力を出すのは、このように非終端記号が絡み合うとき** で、それは次の [FOLLOW](follow-formula.md) 章で、この expr 文法のまま自然に出てきます。
+
+> 💡 前のページ（[定義と導出](first-formula.md)）で導出が *無限に長くなっていた* あの再帰の壁。**その壁を越えるのがまさにこの「繰り返し」** です。\
 > 最後まで展開する代わりに、集合を少しずつ大きくしていって変わらなくなったら止まるからです。
-
-`Expr`（`Expr : Expr '+' Term | Term`）も同じかたちなので、同じやり方で二周あれば `{ '(', id }` に
-固まります。
 
 ## 場合 ③ — 先頭の非終端記号が **消えうる** とき（ε）
 
@@ -190,9 +185,32 @@ FIRST は *この記号一つひとつに対して* 求めます。\
             (A-ε) ∪ B      (A が消えうるなら → ε を抜いて、B も加える)
 ```
 
-> 幸い、私たちの例文法には *消える（nullable）非終端記号* が一つもありません。\
-> ですから場合 ③ は実際には起こらず、⊕ もほぼ先頭の記号ですぐ終わります。\
-> 今は **「こういう安全装置があるんだな」** とだけ知っていれば十分です。⊕ の真価は ε のある文法で発揮されます。
+ここから ε を見せなければならないのですが、私たちの expr 文法には **nullable がないので**、expr の代わりに小さな文法を一つ使います。この章で例に使う文法は以下のとおりです：
+
+<pre class="lrbox">
+<span class="nt">S</span> → <span class="nt">A</span> <span class="nt">B</span>
+<span class="nt">A</span> → <span class="setm">a</span> | ε
+<span class="nt">B</span> → <span class="setm">b</span> | ε
+</pre>
+
+`A` と `B` が *それぞれ ε に消えうる*（nullable）文法です。
+
+まず `A`、`B` それぞれの FIRST から。どちらも `ε` の枝があるので `ε` が入ります。
+
+<pre class="lrbox">
+   <span class="setf">FIRST(</span><span class="nt">A</span><span class="setf">)</span> = <span class="setb">{</span> <span class="setm">a</span>, ε <span class="setb">}</span>
+   <span class="setf">FIRST(</span><span class="nt">B</span><span class="setf">)</span> = <span class="setb">{</span> <span class="setm">b</span>, ε <span class="setb">}</span>
+</pre>
+
+さて `FIRST(S)` を見ます。`S → A B` で **先頭の `A` が消えうる** ので、⊕ は最初の枠で止まらず、次の枠 `B` へ進みます。
+
+<pre class="lrbox">
+   <span class="setf">FIRST(</span><span class="nt">S</span><span class="setf">)</span> = <span class="setf">FIRST(</span><span class="nt">A</span><span class="setf">)</span> ⊕ <span class="setf">FIRST(</span><span class="nt">B</span><span class="setf">)</span> = ( <span class="setb">{</span> <span class="setm">a</span>, ε <span class="setb">}</span> − ε ) ∪ <span class="setb">{</span> <span class="setm">b</span>, ε <span class="setb">}</span> = <span class="setb">{</span> <span class="setm">a</span>, <span class="setm">b</span>, ε <span class="setb">}</span>
+</pre>
+
+`A` が消えなければ `{ a }` で終わるところですが、`A` が ε になりうるので `B` の先頭 `b` も先頭に来られます。さらに `B` まで消えると `S` がまるごと空になるので `ε` も入ります。これが ⊕ が実際に働く姿です。
+
+> 私たちの expr 文法（Expr/Term/Factor）には nullable がないので、そこでは ⊕ は常に先頭の記号ですぐ止まります。それでも規則にはこの ε 処理が必ず入っていなければ正しくありません。
 
 ## まとめ — 三つの場合は結局一つの式
 

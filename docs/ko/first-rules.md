@@ -57,7 +57,7 @@ FIRST 는 *이 기호 하나하나에 대해* 구해요.\
 
 > 📎 잠깐, 용어 하나. `Factor : '(' Expr ')' | id` 에서 `|` 로 나뉜 **하나하나** 를 **생성규칙
 > (production)** 이라고 불러요.\
-> `Factor → id` 처럼 *"비단말을 만드는 규칙 한 줄"* 이에요. (자세힌 [Single](deep-single.md).)\
+> `Factor → id` 처럼 *"비단말을 만드는 규칙 한 줄"* 이에요. (자세한 건 [Single](deep-single.md) 에서 봐요.)\
 > 앞으론 이 말을 써요.
 
 비단말 하나의 FIRST 는 이렇게 구해요 — **그 비단말의 모든 생성규칙 각각의 FIRST 를 구해서, 전부
@@ -139,37 +139,32 @@ FIRST 는 *이 기호 하나하나에 대해* 구해요.\
 
 `FIRST(Term)` 을 구하려고 보니, 맨 앞 비단말이 또 `Term` 이에요.\
 즉 `FIRST(Term)` 을 구하는 데 `FIRST(Term)` 이 필요한, **닭이 먼저냐 달걀이 먼저냐** 상황이죠.\
-이대로는 한 번에 안 풀려요.
+이대로는 한 번에 안 풀려요. 근데 이런 *직접* 좌재귀(자기를 바로 무는 경우)는 사실 쉬워요.
 
-그래서 이렇게 풀어요 — **빈 집합에서 시작해서, 더 안 늘어날 때까지 한 바퀴씩 반복.**\
-`FIRST(Term)` 을 직접 돌려볼게요. (`FIRST(Factor) = { '(', id }` 는 경우 ①에서 이미 구했죠.)
+**쉬운 재귀 — 그 규칙은 그냥 빼면 돼요**
 
-빈 집합에서 시작해, `Term` 의 두 생성규칙(①②)을 훑는 걸 — **더 안 늘어날 때까지** 반복해요.\
-한 바퀴 = 한 줄로 보면 이래요.
+`Term` 이 뭐로 *시작* 하는지만 보면 돼요. `Term` 의 규칙은 둘인데, 맨 앞이 어떻게 되는지가 갈려요.
 
-| 바퀴 | ① `Term → Factor` | ② `Term → Term '*' Factor` | 바퀴 후 `FIRST(Term)` |
-|:--:|:--|:--|:--:|
-| **시작** | — | — | `{ }` |
-| **1바퀴** | `FIRST(Factor)` = `{ '(', id }` 추가 | 맨 앞 `Term` 의 *현재값* → 새것 없음 | **`{ '(', id }`** &nbsp;*(늘어남)* |
-| **2바퀴** | 이미 있음 → 없음 | 현재값 `{ '(', id }` → 새것 없음 | `{ '(', id }` &nbsp;*(그대로)* |
+<pre class="lrbox">   ① <span class="nt">Term</span> → <span class="nt">Factor</span>            <span style="opacity:.6">맨 앞이 Factor (정해짐!)</span>
+   ② <span class="nt">Term</span> → <span class="nt">Term</span> <span class="setm">'*'</span> <span class="nt">Factor</span>   <span style="opacity:.6">맨 앞이 또 Term (제자리)</span></pre>
 
-→ **1바퀴** 에 빈 집합에서 `{ '(', id }` 로 *늘어서* 한 바퀴 더 돌고, **2바퀴** 엔 아무것도 안 늘어 — **거기서 멈춰요.**
+`②` 는 맨 앞이 *또 `Term`* 이라 첫 글자가 안 정해져요 (`Term` 이 다시 `Term` 으로 돌아오니까). 그러니 맨 앞을 정하는 건 `①` 뿐이고, `①` 은 맨 앞을 `Factor` 로 만들어요. 즉 **`Term` 의 맨 앞은 언제나 `Factor`** 이므로 **`FIRST(Term)` = `FIRST(Factor)` = `{ '(', id }`** 예요.
+
+`Expr`(`Expr : Expr '+' Term | Term`) 도 똑같은 직접 좌재귀라, 같은 식으로 `{ '(', id }`.
+
+그런데 이 "제자리인 규칙을 빼면 된다"는 손쉬운 방법은 `Term` 처럼 *자기를 바로 무는* **직접 좌재귀** 에서만 통해요. 비단말들이 *서로 빙 둘러* 무는 **간접 좌재귀** 는 사정이 달라요.
 
 <pre class="lrbox">
-   <span class="setf">FIRST(</span><span class="nt">Term</span><span class="setf">)</span> = <span class="setb">{</span> <span class="setm">'('</span>, <span class="setm">id</span> <span class="setb">}</span>
+   <span class="nt">A</span> → <span class="nt">B</span> …
+   <span class="nt">B</span> → <span class="nt">A</span> …
 </pre>
 
-핵심은 생성규칙 ② 예요.\
-자기 자신을 가리키지만, "맨 앞 `Term` 의 *지금까지* 값" 을 끌어올 뿐이라, 그 값이 다른 생성규칙
-①(`Factor`)으로 **먼저 채워지고 나면** 더 보탤 게 없어져요.\
-그래서 무한히 펼치지 않고도, 두 바퀴 만에 답이 굳습니다.
+`A` 는 `B` 로 시작하고 그 `B` 는 다시 `A` 로 시작하니, 어디에도 *자기를 바로 무는* "제자리 규칙" 이 없어요. 이런 경우까지 한꺼번에 풀려고, 엔진은 직접·간접을 가리지 않고 **빈 집합에서 시작해 더 안 늘 때까지 반복하는 한 가지 방법으로 모든 비단말을 똑같이** 처리해요.
 
-> 💡 앞 페이지([정의와 유도](first-formula.md))에서 유도가 *무한히 길어지던* 그 재귀의 벽 — **그 벽을
-> 넘는 게 바로 이 "반복"** 이에요.\
+`Term` 같은 직접 좌재귀는 이 반복이 한 바퀴면 끝나 거저나 마찬가지고, **반복이 진짜 위력을 내는 건 이렇게 비단말이 서로 얽힐 때** 인데, 그건 다음 [FOLLOW](follow-formula.md) 장에서 이 expr 문법 그대로 자연스럽게 나와요.
+
+> 💡 앞 페이지([정의와 유도](first-formula.md))에서 유도가 *무한히 길어지던* 그 재귀의 벽. **그 벽을 넘는 게 바로 이 "반복"** 이에요.\
 > 끝까지 펼치는 대신, 집합을 조금씩 키우다 안 바뀌면 멈추니까요.
-
-`Expr`(`Expr : Expr '+' Term | Term`) 도 똑같은 모양이라, 같은 식으로 두 바퀴면 `{ '(', id }` 로
-굳어요.
 
 ## 경우 ③ — 맨 앞 비단말이 **사라질 수 있을 때** (ε)
 
@@ -187,12 +182,35 @@ FIRST 는 *이 기호 하나하나에 대해* 구해요.\
 
 ```
    A ⊕ B =  A              (A 가 사라질 수 없으면 → 거기서 끝)
-            (A-ε) ∪ B      (A 가 사라질 수 있으면 → ε 를 빼고, B 도 더한다)
+            (A-ε) ∪ B      (A 가 사라질 수 있으면 → ε 을 빼고, B 도 더한다)
 ```
 
-> 다행히 우리 예제 문법엔 *사라지는(nullable) 비단말* 이 하나도 없어요.\
-> 그래서 경우 ③ 은 실제로 일어나지 않고, ⊕ 도 거의 맨 앞 기호에서 바로 끝나요.\
-> 지금은 **"이런 안전장치가 있구나"** 만 알면 충분합니다. ⊕ 의 진가는 ε 이 있는 문법에서 드러나요.
+여기서부터 ε 을 보여줘야 하는데, 우리 expr 문법엔 **nullable 이 없기 때문에** expr 대신 작은 문법 하나를 써요. 이 장에서 예시로 쓸 문법은 아래와 같아요:
+
+<pre class="lrbox">
+<span class="nt">S</span> → <span class="nt">A</span> <span class="nt">B</span>
+<span class="nt">A</span> → <span class="setm">a</span> | ε
+<span class="nt">B</span> → <span class="setm">b</span> | ε
+</pre>
+
+`A` 와 `B` 가 *각각 ε 로 사라질 수 있는* (nullable) 문법이에요.
+
+`A`, `B` 각각의 FIRST 부터 봐요. 둘 다 `ε` 갈래가 있어서 `ε` 가 들어가요.
+
+<pre class="lrbox">
+   <span class="setf">FIRST(</span><span class="nt">A</span><span class="setf">)</span> = <span class="setb">{</span> <span class="setm">a</span>, ε <span class="setb">}</span>
+   <span class="setf">FIRST(</span><span class="nt">B</span><span class="setf">)</span> = <span class="setb">{</span> <span class="setm">b</span>, ε <span class="setb">}</span>
+</pre>
+
+이제 `FIRST(S)` 를 봐요. `S → A B` 인데 **맨 앞 `A` 가 사라질 수 있으니**, ⊕ 가 첫 칸에서 안 멈추고 다음 칸 `B` 로 넘어가요.
+
+<pre class="lrbox">
+   <span class="setf">FIRST(</span><span class="nt">S</span><span class="setf">)</span> = <span class="setf">FIRST(</span><span class="nt">A</span><span class="setf">)</span> ⊕ <span class="setf">FIRST(</span><span class="nt">B</span><span class="setf">)</span> = ( <span class="setb">{</span> <span class="setm">a</span>, ε <span class="setb">}</span> − ε ) ∪ <span class="setb">{</span> <span class="setm">b</span>, ε <span class="setb">}</span> = <span class="setb">{</span> <span class="setm">a</span>, <span class="setm">b</span>, ε <span class="setb">}</span>
+</pre>
+
+`A` 가 안 사라졌으면 `{ a }` 로 끝났을 텐데, `A` 가 ε 이 될 수 있어서 `B` 의 첫 글자 `b` 까지 맨 앞에 올 수 있어요. 게다가 `B` 마저 사라지면 `S` 가 통째로 비니 `ε` 도 들어가죠. 이게 ⊕ 가 진짜로 일하는 모습이에요.
+
+> 우리 expr 문법(Expr/Term/Factor)엔 nullable 이 없어서, 거기선 ⊕ 가 늘 맨 앞 기호에서 바로 멈춰요. 그래도 규칙엔 이 ε 처리가 꼭 들어가야 맞아요.
 
 ## 정리 — 세 경우는 결국 한 식
 

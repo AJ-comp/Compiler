@@ -151,6 +151,25 @@ public TerminalSet Follow(NonTerminal nonTerminal) => this.Datas[nonTerminal];  
 - もっと回しても変化がなければ `bChange = false` → 止まる。 ✓\
   （伝播が *何周* かかるかは `Datas` の処理順序によって一周か二周かに分かれますが、止まった後の値はどの順序でも同じです。）
 
+**ε（nullable）がコードで回る様子も一度。** expr 文法には nullable がないので、上のトレースは規則 ② の `ExceptWith(ε)` も、規則 ③ の「消えたら前の非終端記号まで伝播」も触れません。この節で例に使う文法は以下のとおりです：
+
+<pre class="lrbox">
+<span class="nt">S</span> → <span class="nt">A</span> <span class="nt">B</span>
+<span class="nt">A</span> → <span class="setm">a</span> | ε
+<span class="nt">B</span> → <span class="setm">b</span> | ε
+</pre>
+
+`FOLLOW(A)` をコードどおりに追います（`A` の後ろの記号は `B`）：
+
+- `GetFollowSymbols` が `A` の後ろの `B` を拾います。`FirstSet(B) = { b, ε }` ですが、**`ExceptWith(ε)`** が ε を外すので `{ b }` だけ入ります。（規則 ② の `− ε`）
+- `B` が nullable なので `ConCatExprUpdateFollow` はそこで止まらず、その前の `A` まで LHS（`S`）の FOLLOW を注ぎます。（規則 ③ の「消えたら伝播」）
+
+<pre class="lrbox">
+   FOLLOW(<span class="nt">A</span>) = <span class="setb">{</span> <span class="setm">b</span> <span class="setb">}</span>      <span style="opacity:.6">規則 ② : FIRST(B) − ε</span>
+            ∪ <span class="setb">{</span> <span class="setm">$</span> <span class="setb">}</span>      <span style="opacity:.6">規則 ③ : B が消えるので FOLLOW(S) を継承</span>
+            = <span class="setb">{</span> <span class="setm">b</span>, <span class="setm">$</span> <span class="setb">}</span>
+</pre>
+
 ## ひと目で — FOLLOW 関連の全仕様
 
 `FirstFollowAnalyzer` の FOLLOW 側の骨格です。\

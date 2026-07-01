@@ -89,6 +89,8 @@
 
 ## `I₆` — `GOTO(I₁, '+')`
 
+`'+'` を読んでドットを動かした `Expr → Expr '+' • Term` に、`Term` がドットの後ろなので再び閉包が付いた5個です。
+
 <pre class="lrbox">   <span class="nt">Expr</span>   → <span class="nt">Expr</span> <span class="setm">'+'</span> <span class="lrdot">•</span> <span class="nt">Term</span>
    <span class="nt">Term</span>   → <span class="lrdot">•</span> <span class="nt">Term</span> <span class="setm">'*'</span> <span class="nt">Factor</span>
    <span class="nt">Term</span>   → <span class="lrdot">•</span> <span class="nt">Factor</span>
@@ -103,6 +105,8 @@
 - `id` を読むと → `I₅`
 
 ## `I₇` — `GOTO(I₂, '*')`
+
+`'*'` を読んでドットを動かした `Term → Term '*' • Factor` に、`Factor` がドットの後ろなので再び閉包が付いた3個です。
 
 <pre class="lrbox">   <span class="nt">Term</span>   → <span class="nt">Term</span> <span class="setm">'*'</span> <span class="lrdot">•</span> <span class="nt">Factor</span>
    <span class="nt">Factor</span> → <span class="lrdot">•</span> <span class="setm">'('</span> <span class="nt">Expr</span> <span class="setm">')'</span>

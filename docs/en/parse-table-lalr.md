@@ -107,6 +107,11 @@ Almost always, merging is harmless. But **very rarely**, the moment you merge, *
 
 The state right after reading `c` appears in *two places*. The items are the same — `{ A→c•, B→c• }` — but depending on *where you came from*, the lookaheads cross over.
 
+- **arriving via `a`**: `S → a A d`, so `A` is followed by `d`; `S → a B e`, so `B` is followed by `e`
+- **arriving via `b`**: `S → b A e`, so `A` is followed by `e`; `S → b B d`, so `B` is followed by `d`
+
+Gathered into a table:
+
 | state reached after reading `c` | `A → c •` | `B → c •` |
 |:--|:--:|:--:|
 | after `a c` | <code><span class="setb">{</span><span class="setm"> d </span><span class="setb">}</span></code> | <code><span class="setb">{</span><span class="setm"> e </span><span class="setb">}</span></code> |

@@ -128,7 +128,7 @@ public bool SetEquals(...);          // 대안 구성이 똑같은가
 public bool IsInduceEpsilon { get; }   // 대안 중 ε(빈 대안)이 있나
 ```
 
-단, 이건 *직접* ε 대안이 있는지만 봐요 (`A → ε` 같은 경우). `A → B`, `B → ε` 처럼 *다른 규칙을 거쳐 간접으로* ε 가 되는 **진짜 nullable** 은 못 잡아요 — 그건 [FIRST/FOLLOW](first-follow.md) 에서 `FIRST` 에 ε 이 들었는지로 따로 판정해요. (조각들이 어떻게 이어지는지 슬슬 보이시죠?)
+단, 이건 *직접* ε 대안이 있는지만 봐요 (`A → ε` 같은 경우). `A → B`, `B → ε` 처럼 *다른 규칙을 거쳐 간접으로* ε 이 되는 **진짜 nullable** 은 못 잡아요 — 그건 [FIRST/FOLLOW](first-follow.md) 에서 `FIRST` 에 ε 이 들었는지로 따로 판정해요. (조각들이 어떻게 이어지는지 슬슬 보이시죠?)
 
 ## 한눈에 — Alter의 전체 모습
 

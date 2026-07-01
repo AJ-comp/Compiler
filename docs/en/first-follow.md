@@ -175,10 +175,13 @@ FOLLOW(<span class="nt">Term</span>) = FOLLOW(<span class="nt">Expr</span>) ∪ 
 
 **③ `Factor` — just like `Term`**
 
-`Factor` works the same way:
+Pointing at the spots for `Factor` the same way:
+
+- `Factor` is always at the *very end* of `Term`'s rules (`Term : Term '*' Factor`, `Term : Factor`) → then **whatever can
+  come after Term can also come after Factor** → FOLLOW(Term) flows straight in
 
 <pre class="lrbox">
-FOLLOW(<span class="nt">Factor</span>) = { $, <span class="setm">'+'</span>, <span class="setm">')'</span>, <span class="setm">'*'</span> }
+FOLLOW(<span class="nt">Factor</span>) = FOLLOW(<span class="nt">Term</span>) = { $, <span class="setm">'+'</span>, <span class="setm">')'</span>, <span class="setm">'*'</span> }
 </pre>
 
 </div>
@@ -202,7 +205,7 @@ You don't need to go too deep.\
 Just enough to think "ah, there's a thing like this."
 
 - **ε (epsilon, the empty string):** the mark used when some nonterminal can become "nothing at all."
-  It doesn't show up in our example, so you don't need to worry about it right now.
+  It doesn't show up in our example, so take it lightly for now — the advanced [FIRST · Computation rules](first-rules.md) shows it directly with a small grammar that has ε.
 - **`$` (end mark):** as we just saw, an imaginary token representing end of input. It's always in the FOLLOW of the start symbol.
 
 ## ③ Seeing it in the playground

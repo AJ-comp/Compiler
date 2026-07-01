@@ -71,8 +71,24 @@
 </pre>
 
 > 📎 **ε(빈 문자열) 한 가지만 더.** 만약 `X` 가 *아무것도 아닌 것* 까지 유도할 수 있으면
-> (`X ⇒* ε`), **ε 도 FIRST(X) 에 넣어요.** "X 는 통째로 사라질 수도 있다" 는 표시예요. (우리
-> 예제엔 그런 비단말이 없어서 ε 은 안 나와요 — 하지만 정의엔 꼭 포함돼요.)
+> (`X ⇒* ε`), **ε 도 FIRST(X) 에 넣어요.** "X 는 통째로 사라질 수도 있다" 는 표시예요.
+
+그런데 우리 expr 문법엔 *아무것도 아닌 것이 될 수 있는* 비단말이 없어서 이걸 expr 로는 못 보여주니, ε 을 한 번 눈으로 보려고 작은 문법 하나를 가져올게요. 이 장에서 예시로 쓸 문법은 아래와 같아요:
+
+<pre class="lrbox">
+<span class="nt">S</span> → <span class="nt">A</span> <span class="nt">B</span>
+<span class="nt">A</span> → <span class="setm">a</span> | ε
+<span class="nt">B</span> → <span class="setm">b</span> | ε
+</pre>
+
+여기 `A` 는 생성규칙이 둘인데 그중 `A → ε` 가 있어서, `A ⇒ ε` 처럼 *아무것도 아닌 것* 까지 유도돼요. 정의 그대로 `ε` 도 `A` 의 FIRST 에 들어가고, `B` 도 같은 이유로 그래요.
+
+<pre class="lrbox">
+   <span class="setf">FIRST(</span><span class="nt">A</span><span class="setf">)</span> = <span class="setb">{</span> <span class="setm">a</span>, ε <span class="setb">}</span>
+   <span class="setf">FIRST(</span><span class="nt">B</span><span class="setf">)</span> = <span class="setb">{</span> <span class="setm">b</span>, ε <span class="setb">}</span>
+</pre>
+
+> 이 작은 ε 문법은 뒤 [계산 규칙](first-rules.md) 장에서도 ε 예시로 계속 써요 — 그때마다 expr 대신 이 문법이 나오면 "아, ε 보여주는 그 문법" 하고 보시면 돼요.
 
 정리하면 — 단말이든, 비단말이든, *기호 여러 개로 된 열* 이든, **"유도해서 가장 처음 나타날 수 있는 단말(+필요하면 ε) 집합"** 이 FIRST 예요.\
 이게 정의의 전부예요.
@@ -86,7 +102,7 @@
 
 ### Factor — 막힘 없이 끝까지 펼쳐져요
 
-`Factor` 의 두 **생성규칙**(`|` 로 갈린 한 줄씩 — `A → α` 꼴, 여기서 `α` 는 *우변의 기호 열*. 자세힌 [Single](deep-single.md))을 끝까지 유도해봐요.
+`Factor` 의 두 **생성규칙**을 끝까지 유도해봐요. (생성규칙 = `|` 로 갈린 한 줄씩, `A → α` 꼴이고, `α` 는 *우변의 기호 열* 이에요. 자세한 건 [Single](deep-single.md) 에서 봐요.)
 
 <pre class="lrbox">
    <span class="nt">Factor</span> ⇒ <span class="setm">id</span>              →  맨 앞 단말 :  <span class="setm">id</span>
