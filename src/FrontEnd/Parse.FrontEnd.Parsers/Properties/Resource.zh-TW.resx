@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="MustCome" xml:space="preserve">
+    <value>必須出現在這裡</value>
+  </data>
+  <data name="CantShift" xml:space="preserve">
+    <value>無法 shift</value>
+  </data>
+  <data name="RecoverWithPanicMode" xml:space="preserve">
+    <value>使用 panic mode 復原</value>
+  </data>
+  <data name="RecoverWithLRHandler" xml:space="preserve">
+    <value>使用 LR 專用錯誤處理器復原 ix: {0}, Token 型別: {1}</value>
+  </data>
+  <data name="InsertVirtualToken" xml:space="preserve">
+    <value>插入虛擬 Token: {0}</value>
+  </data>
+  <data name="SkipToken" xml:space="preserve">
+    <value>跳過此 Token</value>
+  </data>
+  <data name="TryAdjustStackWithThisToken" xml:space="preserve">
+    <value>嘗試用此 Token 調整堆疊</value>
+  </data>
+  <data name="RecoverySuccessed" xml:space="preserve">
+    <value>復原成功</value>
+  </data>
+  <data name="RecoveryFailed" xml:space="preserve">
+    <value>復原失敗</value>
+  </data>
+  <data name="ReplaceVirtualToken" xml:space="preserve">
+    <value>取代為虛擬 Token: {0}</value>
+  </data>
+  <data name="StackBeforeParsing" xml:space="preserve">
+    <value>剖析前的堆疊</value>
+  </data>
+  <data name="InputSymbol" xml:space="preserve">
+    <value>輸入符號</value>
+  </data>
+  <data name="ActionInfo" xml:space="preserve">
+    <value>動作資訊</value>
+  </data>
+  <data name="RecoveryInfo" xml:space="preserve">
+    <value>復原資訊</value>
+  </data>
+  <data name="StackAfterParsing" xml:space="preserve">
+    <value>剖析後的堆疊</value>
+  </data>
+  <data name="RemoveParsingUnits" xml:space="preserve">
+    <value>因無法 shift，回退 {0} 個單位。</value>
+  </data>
+  <data name="StackForAst" xml:space="preserve">
+    <value>AST 堆疊</value>
+  </data>
+  <data name="BackTracking" xml:space="preserve">
+    <value>回溯到狀態 {0} 後執行動作 {1}。</value>
+  </data>
+</root>

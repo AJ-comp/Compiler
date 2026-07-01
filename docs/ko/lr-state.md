@@ -243,4 +243,4 @@ public class CanonicalState : HashSet<LRItem>   // 상태 = LR 아이템 집합
 
 ---
 
-👈 앞으로: [LR 아이템](lr-item.md)
+👈 이전 장: [LR 아이템](lr-item.md)

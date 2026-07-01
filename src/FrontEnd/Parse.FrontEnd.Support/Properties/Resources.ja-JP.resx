@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Keyword" xml:space="preserve">
+    <value>キーワード</value>
+  </data>
+  <data name="Digit" xml:space="preserve">
+    <value>数字</value>
+  </data>
+  <data name="Operator" xml:space="preserve">
+    <value>演算子</value>
+  </data>
+  <data name="SpecialWord" xml:space="preserve">
+    <value>特殊文字</value>
+  </data>
+  <data name="Identifier" xml:space="preserve">
+    <value>識別子</value>
+  </data>
+  <data name="RepeatStatement" xml:space="preserve">
+    <value>繰り返し文</value>
+  </data>
+  <data name="ControlStatement" xml:space="preserve">
+    <value>制御文</value>
+  </data>
+  <data name="Accesser" xml:space="preserve">
+    <value>アクセス修飾子</value>
+  </data>
+  <data name="DefinedDataType" xml:space="preserve">
+    <value>定義済みデータ型</value>
+  </data>
+  <data name="EtcKeyword" xml:space="preserve">
+    <value>その他のキーワード</value>
+  </data>
+  <data name="Digit2" xml:space="preserve">
+    <value>2進数</value>
+  </data>
+  <data name="Digit8" xml:space="preserve">
+    <value>8進数</value>
+  </data>
+  <data name="Digit10" xml:space="preserve">
+    <value>10進数</value>
+  </data>
+  <data name="Digit16" xml:space="preserve">
+    <value>16進数</value>
+  </data>
+  <data name="EtcOperator" xml:space="preserve">
+    <value>その他の演算子</value>
+  </data>
+  <data name="Comma" xml:space="preserve">
+    <value>カンマ (,)</value>
+  </data>
+  <data name="Squre" xml:space="preserve">
+    <value>角括弧 ([ ])</value>
+  </data>
+  <data name="CurlyBrace" xml:space="preserve">
+    <value>波括弧 ({ })</value>
+  </data>
+  <data name="Parenthesis" xml:space="preserve">
+    <value>丸括弧 (( ))</value>
+  </data>
+  <data name="Comment" xml:space="preserve">
+    <value>コメント</value>
+  </data>
+  <data name="LineComment" xml:space="preserve">
+    <value>行コメント</value>
+  </data>
+  <data name="ScopeComment" xml:space="preserve">
+    <value>ブロックコメント</value>
+  </data>
+</root>

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Keyword" xml:space="preserve">
+    <value>Ключевое слово</value>
+  </data>
+  <data name="Digit" xml:space="preserve">
+    <value>Цифра</value>
+  </data>
+  <data name="Operator" xml:space="preserve">
+    <value>Оператор</value>
+  </data>
+  <data name="SpecialWord" xml:space="preserve">
+    <value>Специальный символ</value>
+  </data>
+  <data name="Identifier" xml:space="preserve">
+    <value>Идентификатор</value>
+  </data>
+  <data name="RepeatStatement" xml:space="preserve">
+    <value>Оператор цикла</value>
+  </data>
+  <data name="ControlStatement" xml:space="preserve">
+    <value>Управляющий оператор</value>
+  </data>
+  <data name="Accesser" xml:space="preserve">
+    <value>Модификатор доступа</value>
+  </data>
+  <data name="DefinedDataType" xml:space="preserve">
+    <value>Предопределенный тип данных</value>
+  </data>
+  <data name="EtcKeyword" xml:space="preserve">
+    <value>Другое ключевое слово</value>
+  </data>
+  <data name="Digit2" xml:space="preserve">
+    <value>Двоичное число</value>
+  </data>
+  <data name="Digit8" xml:space="preserve">
+    <value>Восьмеричное число</value>
+  </data>
+  <data name="Digit10" xml:space="preserve">
+    <value>Десятичное число</value>
+  </data>
+  <data name="Digit16" xml:space="preserve">
+    <value>Шестнадцатеричное число</value>
+  </data>
+  <data name="EtcOperator" xml:space="preserve">
+    <value>Другой оператор</value>
+  </data>
+  <data name="Comma" xml:space="preserve">
+    <value>Запятая (,)</value>
+  </data>
+  <data name="Squre" xml:space="preserve">
+    <value>Квадратные скобки ([ ])</value>
+  </data>
+  <data name="CurlyBrace" xml:space="preserve">
+    <value>Фигурные скобки ({ })</value>
+  </data>
+  <data name="Parenthesis" xml:space="preserve">
+    <value>Круглые скобки (( ))</value>
+  </data>
+  <data name="Comment" xml:space="preserve">
+    <value>Комментарий</value>
+  </data>
+  <data name="LineComment" xml:space="preserve">
+    <value>Однострочный комментарий</value>
+  </data>
+  <data name="ScopeComment" xml:space="preserve">
+    <value>Блочный комментарий</value>
+  </data>
+</root>

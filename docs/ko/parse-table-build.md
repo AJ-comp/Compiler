@@ -127,4 +127,4 @@ GOTO 칸의 숫자 = *비단말을 묶은 뒤* 갈 상태.\
 
 ---
 
-👈 앞으로: [정준 집합](canonical-set.md)
+👈 이전 장: [정준 집합](canonical-set.md)

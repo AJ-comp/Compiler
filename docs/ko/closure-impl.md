@@ -73,4 +73,4 @@ public static CanonicalState Closure(CanonicalState iStatus, HashSet<NonTerminal
 
 ---
 
-👈 앞으로: [클로저 · 계산법](closure-calc.md)
+👈 이전 장: [클로저 · 계산법](closure-calc.md)

@@ -30,7 +30,7 @@ public string Value { get; } = string.Empty;
 
 여기서 [Symbol 장](deep-symbols.md)의 **"정체성 ↔ 표시 분리"** 철학이 구체화돼요.\
 저자는 이런
-경우를 떠올렸을 거예요:
+상황을 떠올렸을 거예요:
 
 > *"`id` 토큰의 실제 값(Value)은 정규식 `[a-zA-Z]+` 인데, 화면엔 그냥 'id'라고 보여주고 싶어.\
 > 값이랑 표시가 다른 거지.\
@@ -46,10 +46,9 @@ public override string ToString() => Caption;
 그리고 — 이 부분은 *유추가 아니라, 저자가 코드 주석에 직접 적어둔* 내용이에요.
 
 `Caption`은 표·진단·FIRST/FOLLOW 출력 등 **표시에 쓰여요.**\
-그래서 null이면 텍스트 렌더러가
-터지죠.
+그래서 null이면 텍스트 렌더링 오류가 날 수 있어요.
 
-그래서 caption이 없으면 value로 메꿔요.\
+그래서 caption이 없으면 value로 보완해요.\
 **하지만 `Value`는 손대지 않아요** — 렉서의 매칭 값이지
 표시 문자열이 아니니까요.
 

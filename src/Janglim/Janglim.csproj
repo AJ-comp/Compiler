@@ -9,6 +9,7 @@
     <Description>Janglim is a general-purpose, embeddable LR/LALR parser-generator engine for .NET. Define a grammar in C#, then parse with incremental reparsing, error recovery, and grammar introspection (parse tables, FIRST/FOLLOW, conflict reports). Early preview — the public API is still unstable.</Description>
     <PackageTags>parser;parsing;parser-generator;lr;lalr;grammar;compiler;lexer;ebnf;incremental;janglim</PackageTags>
     <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageReleaseNotes>Fix regex-backed comment terminals so line comments win over overlapping operator tokens, and include localized resource assemblies in the package.</PackageReleaseNotes>
 
     <!-- Package icon (an orchid — the project emblem). Drop a PNG (<=1MB, ~128x128) at src/Janglim/icon.png
          and it is packed automatically; until then the package builds without an icon. -->
@@ -58,6 +59,10 @@
       <BuildOutputInPackage Include="$(TargetDir)Parse.FrontEnd.Grammars.Ebnf.dll" />
       <BuildOutputInPackage Include="$(TargetDir)Parse.FrontEnd.ErrorHandler.dll" />
       <BuildOutputInPackage Include="$(TargetDir)Parse.FrontEnd.Support.dll" />
+      <EngineSatelliteAssembly Include="$(TargetDir)**\*.resources.dll" />
+      <BuildOutputInPackage Include="@(EngineSatelliteAssembly)">
+        <TargetPath>%(EngineSatelliteAssembly.RecursiveDir)%(Filename)%(Extension)</TargetPath>
+      </BuildOutputInPackage>
     </ItemGroup>
   </Target>
 

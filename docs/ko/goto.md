@@ -159,4 +159,4 @@ public static CanonicalState Goto(CanonicalState iStatus, Symbol toSeeSymbol)
 
 ---
 
-👈 앞으로: [클로저 · 구현](closure-impl.md)
+👈 이전 장: [클로저 · 구현](closure-impl.md)

@@ -93,4 +93,4 @@
 
 ---
 
-👈 앞으로: [FIRST / FOLLOW](first-follow.md)
+👈 이전 장: [FIRST / FOLLOW](first-follow.md)

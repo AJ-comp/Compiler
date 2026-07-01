@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="TP0000" xml:space="preserve">
+    <value>{0} 型を {1} 型へ暗黙的に変換できません。キャスト演算子を使用してください。</value>
+  </data>
+  <data name="TP0001" xml:space="preserve">
+    <value>{0} {1} {2} は無効な演算です。両方の型を確認してください。</value>
+  </data>
+  <data name="TP0002" xml:space="preserve">
+    <value>{0} 型は bool 型のオペランドにのみ適用できます。</value>
+  </data>
+  <data name="TP0003" xml:space="preserve">
+    <value>bool 型ではシフト演算を実行できません。</value>
+  </data>
+  <data name="TP0004" xml:space="preserve">
+    <value>null 型は {0} 型と演算できません。</value>
+  </data>
+  <data name="TP0005" xml:space="preserve">
+    <value>{0} は不明な型です。</value>
+  </data>
+</root>

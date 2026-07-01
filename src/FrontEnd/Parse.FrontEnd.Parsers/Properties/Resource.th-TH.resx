@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="MustCome" xml:space="preserve">
+    <value>ต้องอยู่ที่นี่</value>
+  </data>
+  <data name="CantShift" xml:space="preserve">
+    <value>ไม่สามารถ shift ได้</value>
+  </data>
+  <data name="RecoverWithPanicMode" xml:space="preserve">
+    <value>กู้คืนด้วยโหมด panic</value>
+  </data>
+  <data name="RecoverWithLRHandler" xml:space="preserve">
+    <value>กู้คืนด้วยตัวจัดการข้อผิดพลาดเฉพาะ LR ix: {0}, ชนิดโทเค็น: {1}</value>
+  </data>
+  <data name="InsertVirtualToken" xml:space="preserve">
+    <value>แทรกโทเค็นเสมือน: {0}</value>
+  </data>
+  <data name="SkipToken" xml:space="preserve">
+    <value>ข้ามโทเค็นนี้</value>
+  </data>
+  <data name="TryAdjustStackWithThisToken" xml:space="preserve">
+    <value>ลองปรับสแตกด้วยโทเค็นนี้</value>
+  </data>
+  <data name="RecoverySuccessed" xml:space="preserve">
+    <value>กู้คืนสำเร็จ</value>
+  </data>
+  <data name="RecoveryFailed" xml:space="preserve">
+    <value>กู้คืนล้มเหลว</value>
+  </data>
+  <data name="ReplaceVirtualToken" xml:space="preserve">
+    <value>แทนที่ด้วยโทเค็นเสมือน: {0}</value>
+  </data>
+  <data name="StackBeforeParsing" xml:space="preserve">
+    <value>สแตกก่อนการแยกวิเคราะห์</value>
+  </data>
+  <data name="InputSymbol" xml:space="preserve">
+    <value>สัญลักษณ์อินพุต</value>
+  </data>
+  <data name="ActionInfo" xml:space="preserve">
+    <value>ข้อมูลการกระทำ</value>
+  </data>
+  <data name="RecoveryInfo" xml:space="preserve">
+    <value>ข้อมูลการกู้คืน</value>
+  </data>
+  <data name="StackAfterParsing" xml:space="preserve">
+    <value>สแตกหลังการแยกวิเคราะห์</value>
+  </data>
+  <data name="RemoveParsingUnits" xml:space="preserve">
+    <value>ย้อนกลับ {0} หน่วยเพราะไม่สามารถ shift ได้</value>
+  </data>
+  <data name="StackForAst" xml:space="preserve">
+    <value>สแตก AST</value>
+  </data>
+  <data name="BackTracking" xml:space="preserve">
+    <value>ย้อนกลับไปยังสถานะ {0} แล้วทำการกระทำ {1}</value>
+  </data>
+</root>

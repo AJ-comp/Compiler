@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="MustCome" xml:space="preserve">
+    <value>phải xuất hiện ở đây</value>
+  </data>
+  <data name="CantShift" xml:space="preserve">
+    <value>không thể shift</value>
+  </data>
+  <data name="RecoverWithPanicMode" xml:space="preserve">
+    <value>phục hồi bằng panic mode</value>
+  </data>
+  <data name="RecoverWithLRHandler" xml:space="preserve">
+    <value>phục hồi bằng bộ xử lý lỗi riêng cho LR ix: {0}, loại token: {1}</value>
+  </data>
+  <data name="InsertVirtualToken" xml:space="preserve">
+    <value>chèn token ảo: {0}</value>
+  </data>
+  <data name="SkipToken" xml:space="preserve">
+    <value>bỏ qua token này khi phân tích</value>
+  </data>
+  <data name="TryAdjustStackWithThisToken" xml:space="preserve">
+    <value>thử điều chỉnh stack bằng token này</value>
+  </data>
+  <data name="RecoverySuccessed" xml:space="preserve">
+    <value>phục hồi thành công</value>
+  </data>
+  <data name="RecoveryFailed" xml:space="preserve">
+    <value>phục hồi thất bại</value>
+  </data>
+  <data name="ReplaceVirtualToken" xml:space="preserve">
+    <value>thay thế bằng token ảo: {0}</value>
+  </data>
+  <data name="StackBeforeParsing" xml:space="preserve">
+    <value>stack trước khi phân tích</value>
+  </data>
+  <data name="InputSymbol" xml:space="preserve">
+    <value>ký hiệu đầu vào</value>
+  </data>
+  <data name="ActionInfo" xml:space="preserve">
+    <value>thông tin hành động</value>
+  </data>
+  <data name="RecoveryInfo" xml:space="preserve">
+    <value>thông tin phục hồi</value>
+  </data>
+  <data name="StackAfterParsing" xml:space="preserve">
+    <value>stack sau khi phân tích</value>
+  </data>
+  <data name="RemoveParsingUnits" xml:space="preserve">
+    <value>Lùi lại {0} đơn vị vì không thể shift.</value>
+  </data>
+  <data name="StackForAst" xml:space="preserve">
+    <value>stack AST</value>
+  </data>
+  <data name="BackTracking" xml:space="preserve">
+    <value>Backtrack về trạng thái {0}, sau đó thực hiện hành động {1}.</value>
+  </data>
+</root>

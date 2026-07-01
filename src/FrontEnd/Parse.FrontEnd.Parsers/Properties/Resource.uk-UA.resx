@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="MustCome" xml:space="preserve">
+    <value>має бути тут</value>
+  </data>
+  <data name="CantShift" xml:space="preserve">
+    <value>неможливо виконати shift</value>
+  </data>
+  <data name="RecoverWithPanicMode" xml:space="preserve">
+    <value>відновлення в panic mode</value>
+  </data>
+  <data name="RecoverWithLRHandler" xml:space="preserve">
+    <value>відновлення через обробник помилок LR ix: {0}, тип токена: {1}</value>
+  </data>
+  <data name="InsertVirtualToken" xml:space="preserve">
+    <value>вставити віртуальний токен: {0}</value>
+  </data>
+  <data name="SkipToken" xml:space="preserve">
+    <value>пропустити цей токен</value>
+  </data>
+  <data name="TryAdjustStackWithThisToken" xml:space="preserve">
+    <value>спробувати скоригувати стек цим токеном</value>
+  </data>
+  <data name="RecoverySuccessed" xml:space="preserve">
+    <value>відновлення успішне</value>
+  </data>
+  <data name="RecoveryFailed" xml:space="preserve">
+    <value>відновлення не вдалося</value>
+  </data>
+  <data name="ReplaceVirtualToken" xml:space="preserve">
+    <value>замінити віртуальним токеном: {0}</value>
+  </data>
+  <data name="StackBeforeParsing" xml:space="preserve">
+    <value>стек перед розбором</value>
+  </data>
+  <data name="InputSymbol" xml:space="preserve">
+    <value>вхідний символ</value>
+  </data>
+  <data name="ActionInfo" xml:space="preserve">
+    <value>інформація про дію</value>
+  </data>
+  <data name="RecoveryInfo" xml:space="preserve">
+    <value>інформація про відновлення</value>
+  </data>
+  <data name="StackAfterParsing" xml:space="preserve">
+    <value>стек після розбору</value>
+  </data>
+  <data name="RemoveParsingUnits" xml:space="preserve">
+    <value>Відкотити {0} одиниць, оскільки shift неможливий.</value>
+  </data>
+  <data name="StackForAst" xml:space="preserve">
+    <value>стек AST</value>
+  </data>
+  <data name="BackTracking" xml:space="preserve">
+    <value>Повернутися до стану {0}, потім виконати дію {1}.</value>
+  </data>
+</root>

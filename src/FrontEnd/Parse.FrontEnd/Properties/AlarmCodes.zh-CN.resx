@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="TP0000" xml:space="preserve">
+    <value>无法将 {0} 类型隐式转换为 {1} 类型。请使用强制转换运算符。</value>
+  </data>
+  <data name="TP0001" xml:space="preserve">
+    <value>{0} {1} {2} 是无效运算。请检查两侧类型。</value>
+  </data>
+  <data name="TP0002" xml:space="preserve">
+    <value>{0} 类型只能应用于 bool 类型操作数。</value>
+  </data>
+  <data name="TP0003" xml:space="preserve">
+    <value>bool 类型不能执行移位运算。</value>
+  </data>
+  <data name="TP0004" xml:space="preserve">
+    <value>null 类型不能与 {0} 类型进行运算。</value>
+  </data>
+  <data name="TP0005" xml:space="preserve">
+    <value>{0} 是未知类型。</value>
+  </data>
+</root>

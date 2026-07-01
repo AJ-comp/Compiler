@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Keyword" xml:space="preserve">
+    <value>關鍵字</value>
+  </data>
+  <data name="Digit" xml:space="preserve">
+    <value>數字</value>
+  </data>
+  <data name="Operator" xml:space="preserve">
+    <value>運算子</value>
+  </data>
+  <data name="SpecialWord" xml:space="preserve">
+    <value>特殊字元</value>
+  </data>
+  <data name="Identifier" xml:space="preserve">
+    <value>識別子</value>
+  </data>
+  <data name="RepeatStatement" xml:space="preserve">
+    <value>迴圈敘述</value>
+  </data>
+  <data name="ControlStatement" xml:space="preserve">
+    <value>控制敘述</value>
+  </data>
+  <data name="Accesser" xml:space="preserve">
+    <value>存取修飾子</value>
+  </data>
+  <data name="DefinedDataType" xml:space="preserve">
+    <value>預先定義的資料型別</value>
+  </data>
+  <data name="EtcKeyword" xml:space="preserve">
+    <value>其他關鍵字</value>
+  </data>
+  <data name="Digit2" xml:space="preserve">
+    <value>二進位數</value>
+  </data>
+  <data name="Digit8" xml:space="preserve">
+    <value>八進位數</value>
+  </data>
+  <data name="Digit10" xml:space="preserve">
+    <value>十進位數</value>
+  </data>
+  <data name="Digit16" xml:space="preserve">
+    <value>十六進位數</value>
+  </data>
+  <data name="EtcOperator" xml:space="preserve">
+    <value>其他運算子</value>
+  </data>
+  <data name="Comma" xml:space="preserve">
+    <value>逗號 (,)</value>
+  </data>
+  <data name="Squre" xml:space="preserve">
+    <value>方括號 ([ ])</value>
+  </data>
+  <data name="CurlyBrace" xml:space="preserve">
+    <value>大括號 ({ })</value>
+  </data>
+  <data name="Parenthesis" xml:space="preserve">
+    <value>小括號 (( ))</value>
+  </data>
+  <data name="Comment" xml:space="preserve">
+    <value>註解</value>
+  </data>
+  <data name="LineComment" xml:space="preserve">
+    <value>行註解</value>
+  </data>
+  <data name="ScopeComment" xml:space="preserve">
+    <value>區塊註解</value>
+  </data>
+</root>

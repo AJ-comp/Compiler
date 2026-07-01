@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="MustCome" xml:space="preserve">
+    <value>must come here</value>
+  </data>
+  <data name="CantShift" xml:space="preserve">
+    <value>cannot shift</value>
+  </data>
+  <data name="RecoverWithPanicMode" xml:space="preserve">
+    <value>recover with panic mode</value>
+  </data>
+  <data name="RecoverWithLRHandler" xml:space="preserve">
+    <value>recover with the LR-specific error handler ix: {0}, token type: {1}</value>
+  </data>
+  <data name="InsertVirtualToken" xml:space="preserve">
+    <value>insert virtual token: {0}</value>
+  </data>
+  <data name="SkipToken" xml:space="preserve">
+    <value>skip this token</value>
+  </data>
+  <data name="TryAdjustStackWithThisToken" xml:space="preserve">
+    <value>try to adjust the stack with this token</value>
+  </data>
+  <data name="RecoverySuccessed" xml:space="preserve">
+    <value>recovery succeeded</value>
+  </data>
+  <data name="RecoveryFailed" xml:space="preserve">
+    <value>recovery failed</value>
+  </data>
+  <data name="ReplaceVirtualToken" xml:space="preserve">
+    <value>replace with virtual token: {0}</value>
+  </data>
+  <data name="StackBeforeParsing" xml:space="preserve">
+    <value>stack before parsing</value>
+  </data>
+  <data name="InputSymbol" xml:space="preserve">
+    <value>input symbol</value>
+  </data>
+  <data name="ActionInfo" xml:space="preserve">
+    <value>action information</value>
+  </data>
+  <data name="RecoveryInfo" xml:space="preserve">
+    <value>recovery information</value>
+  </data>
+  <data name="StackAfterParsing" xml:space="preserve">
+    <value>stack after parsing</value>
+  </data>
+  <data name="RemoveParsingUnits" xml:space="preserve">
+    <value>Roll back {0} units because shift is not possible.</value>
+  </data>
+  <data name="StackForAst" xml:space="preserve">
+    <value>AST stack</value>
+  </data>
+  <data name="BackTracking" xml:space="preserve">
+    <value>Backtrack to state {0}, then perform action {1}.</value>
+  </data>
+</root>

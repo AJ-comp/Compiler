@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="MustCome" xml:space="preserve">
+    <value>debe aparecer aquí</value>
+  </data>
+  <data name="CantShift" xml:space="preserve">
+    <value>no se puede hacer shift</value>
+  </data>
+  <data name="RecoverWithPanicMode" xml:space="preserve">
+    <value>recuperar con modo pánico</value>
+  </data>
+  <data name="RecoverWithLRHandler" xml:space="preserve">
+    <value>recuperar con el controlador de errores específico de LR ix: {0}, tipo de token: {1}</value>
+  </data>
+  <data name="InsertVirtualToken" xml:space="preserve">
+    <value>insertar token virtual: {0}</value>
+  </data>
+  <data name="SkipToken" xml:space="preserve">
+    <value>omitir este token</value>
+  </data>
+  <data name="TryAdjustStackWithThisToken" xml:space="preserve">
+    <value>intentar ajustar la pila con este token</value>
+  </data>
+  <data name="RecoverySuccessed" xml:space="preserve">
+    <value>recuperación correcta</value>
+  </data>
+  <data name="RecoveryFailed" xml:space="preserve">
+    <value>recuperación fallida</value>
+  </data>
+  <data name="ReplaceVirtualToken" xml:space="preserve">
+    <value>reemplazar por token virtual: {0}</value>
+  </data>
+  <data name="StackBeforeParsing" xml:space="preserve">
+    <value>pila antes del análisis</value>
+  </data>
+  <data name="InputSymbol" xml:space="preserve">
+    <value>símbolo de entrada</value>
+  </data>
+  <data name="ActionInfo" xml:space="preserve">
+    <value>información de acción</value>
+  </data>
+  <data name="RecoveryInfo" xml:space="preserve">
+    <value>información de recuperación</value>
+  </data>
+  <data name="StackAfterParsing" xml:space="preserve">
+    <value>pila después del análisis</value>
+  </data>
+  <data name="RemoveParsingUnits" xml:space="preserve">
+    <value>Retroceder {0} unidades porque no se puede hacer shift.</value>
+  </data>
+  <data name="StackForAst" xml:space="preserve">
+    <value>pila AST</value>
+  </data>
+  <data name="BackTracking" xml:space="preserve">
+    <value>Retroceder al estado {0} y luego realizar la acción {1}.</value>
+  </data>
+</root>

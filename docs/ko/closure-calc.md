@@ -135,7 +135,7 @@
 `Expr`, `Term → •Term '*' Factor` 의 그 `Term` 은 마커로 안 잡혀요. 안 그러면 끝없이 돌 테니까요.)
 
 그리고 이 **`Closure` 가 `Closure` 를 부르는 재귀 모양** 이 — 바로 다음 [구현](closure-impl.md) 의 코드
-`result.UnionWith(Closure( … ))` 와 *판박이* 예요. 손으로 적던 걸 그대로 코드로 옮긴 셈이죠.\
+`result.UnionWith(Closure( … ))` 와 *같은 구조* 예요. 손으로 적던 걸 그대로 코드로 옮긴 셈이죠.\
 (저자의 원본 노트는 자기 테스트 문법 `S' → G`, `G → E = E | f`, … 로 그려져 있지만, 펼치는 원리는
 똑같아요.)
 
@@ -147,4 +147,4 @@
 
 ---
 
-👈 앞으로: [클로저 · 정의](closure-def.md)
+👈 이전 장: [클로저 · 정의](closure-def.md)

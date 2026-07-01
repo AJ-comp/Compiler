@@ -180,4 +180,4 @@
 
 ---
 
-👈 앞으로: [GOTO](goto.md)
+👈 이전 장: [GOTO](goto.md)

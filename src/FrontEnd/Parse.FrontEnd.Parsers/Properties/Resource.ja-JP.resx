@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="MustCome" xml:space="preserve">
+    <value>が必要です</value>
+  </data>
+  <data name="CantShift" xml:space="preserve">
+    <value>shift できません</value>
+  </data>
+  <data name="RecoverWithPanicMode" xml:space="preserve">
+    <value>パニックモードで復旧</value>
+  </data>
+  <data name="RecoverWithLRHandler" xml:space="preserve">
+    <value>LR 専用エラー処理器で復旧 ix: {0}, トークン型: {1}</value>
+  </data>
+  <data name="InsertVirtualToken" xml:space="preserve">
+    <value>仮想トークンを挿入: {0}</value>
+  </data>
+  <data name="SkipToken" xml:space="preserve">
+    <value>このトークンはパースしません</value>
+  </data>
+  <data name="TryAdjustStackWithThisToken" xml:space="preserve">
+    <value>このトークンでスタック調整を試行</value>
+  </data>
+  <data name="RecoverySuccessed" xml:space="preserve">
+    <value>復旧成功</value>
+  </data>
+  <data name="RecoveryFailed" xml:space="preserve">
+    <value>復旧失敗</value>
+  </data>
+  <data name="ReplaceVirtualToken" xml:space="preserve">
+    <value>仮想トークンに置換: {0}</value>
+  </data>
+  <data name="StackBeforeParsing" xml:space="preserve">
+    <value>パース前のスタック</value>
+  </data>
+  <data name="InputSymbol" xml:space="preserve">
+    <value>入力シンボル</value>
+  </data>
+  <data name="ActionInfo" xml:space="preserve">
+    <value>アクション情報</value>
+  </data>
+  <data name="RecoveryInfo" xml:space="preserve">
+    <value>復旧情報</value>
+  </data>
+  <data name="StackAfterParsing" xml:space="preserve">
+    <value>パース後のスタック</value>
+  </data>
+  <data name="RemoveParsingUnits" xml:space="preserve">
+    <value>shift できないため {0} 個分戻します。</value>
+  </data>
+  <data name="StackForAst" xml:space="preserve">
+    <value>AST スタック</value>
+  </data>
+  <data name="BackTracking" xml:space="preserve">
+    <value>状態 {0} へバックトラックした後、{1} 動作を実行します。</value>
+  </data>
+</root>

@@ -23,9 +23,17 @@ namespace Janglim.FrontEnd.RegularGrammar
         {
             get
             {
-                return (IsOper) ? RegexGenerator.GetOperatorRegex(Value)
-                   : (IsNumber) ? Value
-                                      : RegexGenerator.GetWordRegex(Value);
+                if (IsOper) return RegexGenerator.GetOperatorRegex(Value);
+                if (IsNumber) return Value;
+
+                // A comment's Value is already a raw regex (e.g. "//.*$"), so use it as-is.
+                // GetWordRegex would wrap it in \b...\b; since a line comment starts with a
+                // non-word char ('/'), the leading \b can never match, so the comment pattern
+                // was dead and a single '/' operator won instead (lexer longest-match item in
+                // docs/TODO.md). ScopeComment is IsOper, so it is handled above, not here.
+                if (TokenType is Comment) return Value;
+
+                return RegexGenerator.GetWordRegex(Value);
             }
         }
 

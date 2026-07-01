@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Keyword" xml:space="preserve">
+    <value>Keyword</value>
+  </data>
+  <data name="Digit" xml:space="preserve">
+    <value>Digit</value>
+  </data>
+  <data name="Operator" xml:space="preserve">
+    <value>Operator</value>
+  </data>
+  <data name="SpecialWord" xml:space="preserve">
+    <value>Special character</value>
+  </data>
+  <data name="Identifier" xml:space="preserve">
+    <value>Identifier</value>
+  </data>
+  <data name="RepeatStatement" xml:space="preserve">
+    <value>Loop statement</value>
+  </data>
+  <data name="ControlStatement" xml:space="preserve">
+    <value>Control statement</value>
+  </data>
+  <data name="Accesser" xml:space="preserve">
+    <value>Access modifier</value>
+  </data>
+  <data name="DefinedDataType" xml:space="preserve">
+    <value>Predefined data type</value>
+  </data>
+  <data name="EtcKeyword" xml:space="preserve">
+    <value>Other keyword</value>
+  </data>
+  <data name="Digit2" xml:space="preserve">
+    <value>Binary number</value>
+  </data>
+  <data name="Digit8" xml:space="preserve">
+    <value>Octal number</value>
+  </data>
+  <data name="Digit10" xml:space="preserve">
+    <value>Decimal number</value>
+  </data>
+  <data name="Digit16" xml:space="preserve">
+    <value>Hexadecimal number</value>
+  </data>
+  <data name="EtcOperator" xml:space="preserve">
+    <value>Other operator</value>
+  </data>
+  <data name="Comma" xml:space="preserve">
+    <value>Comma (,)</value>
+  </data>
+  <data name="Squre" xml:space="preserve">
+    <value>Square bracket ([ ])</value>
+  </data>
+  <data name="CurlyBrace" xml:space="preserve">
+    <value>Curly brace ({ })</value>
+  </data>
+  <data name="Parenthesis" xml:space="preserve">
+    <value>Parenthesis (( ))</value>
+  </data>
+  <data name="Comment" xml:space="preserve">
+    <value>Comment</value>
+  </data>
+  <data name="LineComment" xml:space="preserve">
+    <value>Line comment</value>
+  </data>
+  <data name="ScopeComment" xml:space="preserve">
+    <value>Block comment</value>
+  </data>
+</root>

@@ -18,6 +18,8 @@
     href: dot-and-state.md
   - name: 표로 실제 파싱
     href: parsing-in-action.md
+  - name: 틀린 입력 걸러내기
+    href: parsing-errors.md
 
 - name: 심화 과정 (원리와 코드)
   items:
@@ -95,3 +97,5 @@
           href: parse-table-lalr.md
         - name: 구현 (코드)
           href: parse-table-lalr-impl.md
+      - name: 올 수 있는 토큰
+        href: parse-table-expected.md

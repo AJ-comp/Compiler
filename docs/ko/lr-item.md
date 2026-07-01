@@ -165,4 +165,4 @@ LR 아이템 하나는 *"이 규칙을 어디까지 읽었나"* 를 표현해요
 
 ---
 
-👈 앞으로: [FOLLOW · 구현](follow-impl.md)
+👈 이전 장: [FOLLOW · 구현](follow-impl.md)

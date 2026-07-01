@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="CE0000" xml:space="preserve">
+    <value>{0} が必要です。</value>
+  </data>
+  <data name="CE0001" xml:space="preserve">
+    <value>{0} は現在位置では適切でないトークンです。</value>
+  </data>
+  <data name="CE0002" xml:space="preserve">
+    <value>{0} は不要なトークンです。</value>
+  </data>
+  <data name="CE0003" xml:space="preserve">
+    <value>構文エラーです。{0} の前のトークンを確認してください。</value>
+  </data>
+  <data name="CE0004" xml:space="preserve">
+    <value>構文エラーです。{0} が不足しています。</value>
+  </data>
+</root>
