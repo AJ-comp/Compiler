@@ -9,7 +9,7 @@ namespace Janglim.FrontEnd.Parsers.LR
 {
     public class LALRParser : LRParser
     {
-        public LALRParser(Grammar grammar, bool bLogging) : base(grammar, CanonicalType.LALRC1, bLogging)
+        public LALRParser(Grammar grammar, bool bLogging = false) : base(grammar, CanonicalType.LALRC1, bLogging)
         {
         }
 
