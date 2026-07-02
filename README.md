@@ -2,26 +2,57 @@
 
 **A general-purpose, embeddable LR/LALR parser-generator engine for .NET.**
 
-Write your grammar in plain C# — no external `.g` files, no build-time codegen step — and get a full
-LR pipeline you can look inside: parse tables, FIRST/FOLLOW, step-by-step parse traces, conflict
-reports, automatic grammar normalization, optional LGLR backtracking, incremental reparsing, and
-pluggable error recovery.
+[![NuGet (preview)](https://img.shields.io/nuget/vpre/Janglim.svg?label=NuGet)](https://www.nuget.org/packages/Janglim)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+![.NET Standard 2.1](https://img.shields.io/badge/.NET-netstandard2.1-512BD4)
+[![Live playground](https://img.shields.io/badge/playground-live-2ea44f)](https://polite-island-0b2142200.7.azurestaticapps.net)
 
-> **Status — early preview (`0.2.0-preview`).** The public API is still unstable and will change
-> across `0.x`. Available on NuGet as **`Janglim`** (preview): `dotnet add package Janglim --prerelease`.
+Define a grammar in plain C# — or in EBNF text — with no external `.g` files and no build-time
+codegen step, and get a full LR pipeline you can look inside: parse tables, FIRST/FOLLOW,
+step-by-step parse traces, conflict reports, automatic grammar normalization, optional LGLR
+backtracking, incremental reparsing, and pluggable error recovery.
 
----
+```bash
+dotnet add package Janglim --prerelease
+```
+
+> **Early preview (`0.x`).** The public API is still unstable and will change across `0.x`.
+
+## Quick start
+
+One copy-paste-runnable block — an expression grammar in EBNF text, lexed and parsed:
+
+```csharp
+using Janglim.FrontEnd.Grammars.Ebnf;
+using Janglim.FrontEnd.Parsers.LR;
+using Janglim.FrontEnd.Tokenize;
+
+var read = EbnfGrammarReader.Read(@"
+    Expr   : Expr '+' Term | Term ;
+    Term   : Term '*' Factor | Factor ;
+    Factor : '(' Expr ')' | id ;
+    id     := ""[a-zA-Z]+"" ;");
+
+var grammar = read.Grammar;
+var lexer = new Lexer();
+foreach (var t in grammar.TerminalSet) lexer.AddTokenRule(t);
+
+var parser = new LALRParser(grammar);
+var result = parser.Parsing(lexer.Lexing("a + a * a").TokensForParsing);
+
+Console.WriteLine(result.Success);   // True
+```
+
+Real projects usually define the grammar as a C# class instead — terminals and rules as code,
+with semantic actions attached. That form is the heart of the engine:
+[Defining a grammar](#defining-a-grammar).
 
 ## Try it online
 
-**🌿 [Live playground →](https://polite-island-0b2142200.7.azurestaticapps.net)**
-
-Define a grammar in EBNF, give it some input, and watch the LR parser work — the
-ACTION/GOTO table, a step-by-step parse with the parsing stack drawn live, a parse
-tree that builds up as you step (shift adds a leaf, reduce joins them into a
-subtree), and a panel that flags shift-reduce / reduce-reduce conflicts. It runs
-entirely in your browser (Blazor WebAssembly), no install. Source:
-[`samples/Playground`](samples/Playground).
+**🌿 [Live playground →](https://polite-island-0b2142200.7.azurestaticapps.net)** — define a grammar
+in EBNF, give it input, and watch the LR parser work: the ACTION/GOTO table, the parsing stack drawn
+live at each step, the parse tree building up shift by shift, and a conflict panel. Runs entirely in
+your browser (Blazor WebAssembly, source in [`samples/Playground`](samples/Playground)).
 
 **📖 [Read the manual →](https://aj-comp.github.io/Compiler/)** — a from-scratch guide to LR/LALR
 parsing, built around this engine.
@@ -30,9 +61,7 @@ parsing, built around this engine.
 
 ## Table of contents
 
-- [Try it online](#try-it-online) — the live web playground
 - [Why Janglim](#why-janglim)
-- [Quick start](#quick-start)
 - [Defining a grammar](#defining-a-grammar) — terminals, rules, EBNF operators, semantic actions
 - [Parsing](#parsing)
 - [Looking inside the parser](#looking-inside-the-parser) — parse trace, FIRST/FOLLOW, conflicts, tables
@@ -52,8 +81,9 @@ parsing, built around this engine.
 
 Most parser generators ask you to learn a separate grammar language and run a code-generation step.
 Janglim takes a different approach: **the grammar _is_ C#.** Terminals and non-terminals are fields,
-productions are built with operators (`+` for sequence, `|` for choice, `?` `*` `+` for EBNF
-repetition), and the whole thing is just an object you construct at runtime.
+productions are built with operators (`+` for sequence, `|` for choice, and `.Optional()` /
+`.ZeroOrMore()` / `.OneOrMore()` for EBNF repetition), and the whole thing is just an object you
+construct at runtime. (For quick experiments there is also the plain EBNF text form you saw above.)
 
 That makes the entire pipeline **inspectable and debuggable from your own code** — you can ask the
 parser for its FIRST/FOLLOW sets, dump its ACTION/GOTO table, watch every shift/reduce it makes, or
@@ -62,34 +92,6 @@ DSLs, and language tooling where you want to *understand* the parse, not just ge
 
 The repository also ships the **AJ language** — a small C#-like systems language whose compiler
 (parse → semantic analysis → **LLVM IR**) is built end-to-end on this engine, as the flagship example.
-
----
-
-## Quick start
-
-```csharp
-using Janglim;                          // TokenType
-using Janglim.FrontEnd;                 // MeaningUnit
-using Janglim.FrontEnd.Grammars;        // Grammar
-using Janglim.FrontEnd.RegularGrammar;  // Terminal, NonTerminal
-using Janglim.FrontEnd.Parsers.LR;      // LALRParser
-using Janglim.FrontEnd.Tokenize;        // Lexer
-
-// 1. Define a grammar
-var grammar = new ExprGrammar();
-
-// 2. Build a lexer from the grammar's terminals
-var lexer = new Lexer();
-foreach (var t in grammar.TerminalSet) lexer.AddTokenRule(t);
-
-// 3. Lex + parse
-var tokens = lexer.Lexing("a + a * a").TokensForParsing;
-var result = new LALRParser(grammar, bLogging: false).Parsing(tokens);
-
-Console.WriteLine(result.Success);    // True
-```
-
-`ExprGrammar` is defined below.
 
 ---
 
@@ -112,8 +114,8 @@ public class ExprGrammar : Grammar
     // ----- terminals -----
     private Terminal plus  = new Terminal(TokenType.Operator, "+", false);
     private Terminal mul   = new Terminal(TokenType.Operator, "*", false);
-    private Terminal open  = new Terminal(TokenType.Operator, "(");
-    private Terminal close = new Terminal(TokenType.Operator, ")");
+    private Terminal open  = new Terminal(TokenType.Operator, "(", false);
+    private Terminal close = new Terminal(TokenType.Operator, ")", false);
     // a regex-pattern terminal (an identifier): (type, pattern, display name, isMeaningful, isWordPattern)
     private Terminal ident = new Terminal(TokenType.Identifier, "[_a-zA-Z][_a-zA-Z0-9]*", "ident", true, true);
 
@@ -142,13 +144,18 @@ public class ExprGrammar : Grammar
 ### Terminals
 
 ```csharp
-new Terminal(TokenType.Operator, "+", meaning: false);                       // a literal operator
+new Terminal(TokenType.Operator, "+", meaning: false);                              // a literal operator
 new Terminal(TokenType.Identifier, "[_a-zA-Z][_a-zA-Z0-9]*", "ident", true, true);  // a regex pattern
+new Terminal(TokenType.Literal.StringLiteral, "\"[^\"\\r\\n]*\"", "string", true, true);  // a string literal
 ```
 
 - The **value** is either a literal string (`"+"`) or a regular-expression pattern for the lexer.
 - `meaning: false` marks punctuation/keywords that should be matched but dropped from the semantic
   tree (parentheses, operators); meaningful terminals (identifiers, literals) stay.
+- **String / char literal tokens** (`0.3.0-preview.1`+) use the `StringLiteral` / `CharLiteral`
+  token types, which take the pattern as a **raw regex**. Word-shaped patterns are wrapped in
+  `\b...\b`, which can never match a token that starts with a quote — these two types skip that.
+  C# API only for now; EBNF-text token rules still lex as word patterns.
 - The display-name and `isWordPattern` arguments help the lexer and diagnostics.
 
 ### Building rules
@@ -186,7 +193,7 @@ var lexer = new Lexer();
 foreach (var t in grammar.TerminalSet) lexer.AddTokenRule(t);
 
 var lexed  = lexer.Lexing("a + a * a");
-var result = new LALRParser(grammar, bLogging: false).Parsing(lexed.TokensForParsing);
+var result = new LALRParser(grammar).Parsing(lexed.TokensForParsing);
 
 if (result.Success)
 {
@@ -241,7 +248,7 @@ resulting stack at each step. The opening of the `a + a * a` trace:
 ### FIRST / FOLLOW
 
 ```csharp
-var ff = new LALRParser(grammar, false).GetFirstAndFollow();
+var ff = new LALRParser(grammar).GetFirstAndFollow();
 ```
 
 ```
@@ -256,7 +263,7 @@ var ff = new LALRParser(grammar, false).GetFirstAndFollow();
 Ask the parser what is ambiguous before you ship the grammar:
 
 ```csharp
-var conflicts = new LALRParser(grammar, false)
+var conflicts = new LALRParser(grammar)
     .CheckAmbiguity()
     .Where(c => c.IsShiftReduceConflict || c.IsReduceReduceConflict);
 ```
@@ -278,7 +285,7 @@ The full ACTION/GOTO table the parser runs on is available too — for debugging
 a visualizer:
 
 ```csharp
-var table = new LALRParser(grammar, false).ParsingTable;
+var table = new LALRParser(grammar).ParsingTable;
 ```
 
 For `ExprGrammar`, the first few states (`$` = end of input):
@@ -305,8 +312,9 @@ as text) are available as well.
 Before the parse table is built, Janglim normalizes the grammar **once, automatically** — you do not
 have to call anything. Two things happen:
 
-1. **Flattening.** The helper rules that `+`, `|`, `?`, `*`, `+` generate are folded away where they
-   are redundant, keeping the table small. Your `MeaningUnit`/priority tags ride along.
+1. **Flattening.** The helper rules that `|` and the EBNF helpers (`Optional()` / `ZeroOrMore()` /
+   `OneOrMore()`) generate are folded away where they are redundant, keeping the table small. Your
+   `MeaningUnit`/priority tags ride along.
 
 2. **Optional-absorb.** An optional written `X?` in front of other symbols (e.g. `const? type name`)
    would normally force the parser to decide "is the optional here?" too early, creating a
@@ -341,7 +349,7 @@ grammar you wrote) and resolve conflicts at parse time instead. Enable selective
 conflict:
 
 ```csharp
-var parser = new LALRParser(grammar, false)
+var parser = new LALRParser(grammar)
     .AddErrorHandler(myErrorHandler)
     .UseBackTrackingOnConflict();
 ```
@@ -376,16 +384,17 @@ code, the problem/diagnostics view, and the LLVM-IR / assembly walkthrough.
 ```
 src/
   Common/     shared utilities (AJ.Common)
-  FrontEnd/   the parsing engine — the publishable "Janglim":
-                Parse, Janglim.FrontEnd, .Grammars, .Parsers, .ErrorHandler, .Support
+  FrontEnd/   the parsing engine — the publishable "Janglim" (namespaces are Janglim.*):
+                Parse, Parse.FrontEnd, .Grammars, .Grammars.Ebnf, .Parsers, .ErrorHandler, .Support
               example front ends built on the engine:
-                Parse.FrontEnd.AJ (the AJ language), Parse.FrontEnd.Grammars.MiniC (a MiniC sample)
+                Parse.FrontEnd.AJ (the AJ language), Parse.FrontEnd.Grammars.MiniC (stub)
   MiddleEnd/  IR  (Parse.MiddleEnd.IR)
   BackEnd/    code-generation targets  (Parse.BackEnd)
   Compile/    the AJ compiler driver
   Cli/        command-line tools (ajbuild, ajutil, …)
   Janglim/    NuGet packaging project (bundles the engine assemblies)
-Tests/        xUnit suite for the engine  (Janglim.FrontEnd.Parsers.Tests)
+samples/      the Blazor WebAssembly playground
+Tests/        xUnit suite for the engine  (Parse.FrontEnd.Parsers.Tests)
 legacy/       deprecated IDE / WPF projects, kept for history
 ```
 
