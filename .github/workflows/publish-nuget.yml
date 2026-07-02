@@ -1,8 +1,13 @@
 name: Publish to NuGet
 
-# Manual release of the Janglim engine package (PackageId: Janglim) to nuget.org.
-# Trigger it by hand from the Actions tab. The package is built from the checked-out
-# commit, so SourceLink and the package contents always match a real commit.
+# Publishes the Janglim engine package (PackageId: Janglim) to nuget.org.
+#
+# Automatic: every push to master reads the <Version> in src/Directory.Build.props,
+# asks nuget.org whether that version already exists, and publishes only when it
+# does not — so bumping the version and pushing IS the release, and pushes without
+# a version bump are cheap no-ops. The workflow_dispatch trigger remains for
+# retries and dry runs. (--skip-duplicate stays as a second guard: the nuget.org
+# version index can lag a few minutes right after a publish.)
 #
 # Auth: nuget.org Trusted Publishing (OIDC) — no stored secret. A Trusted
 # Publishing policy on nuget.org links this repo + this workflow file to the
@@ -10,6 +15,11 @@ name: Publish to NuGet
 # short-lived API key at run time.
 
 on:
+  push:
+    branches: [master]
+    paths:
+      - 'src/**'
+      - '.github/workflows/publish-nuget.yml'
   workflow_dispatch:
     inputs:
       dry_run:
@@ -21,12 +31,33 @@ permissions:
   contents: read
   id-token: write   # required for OIDC / NuGet Trusted Publishing
 
+concurrency:
+  group: publish-nuget
+  cancel-in-progress: false
+
 jobs:
   publish:
     name: Pack and publish
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
+      - name: Read the package version
+        id: version
+        run: |
+          version=$(grep -oPm1 '(?<=<Version>)[^<]+' src/Directory.Build.props)
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+          echo "Package version: $version"
+
+      - name: Check whether nuget.org already has this version
+        id: check
+        run: |
+          version=$(echo '${{ steps.version.outputs.version }}' | tr '[:upper:]' '[:lower:]')
+          exists=$(curl -sfL https://api.nuget.org/v3-flatcontainer/janglim/index.json \
+                     | jq -r --arg v "$version" '.versions | map(ascii_downcase) | index($v) != null') \
+                  || exists=false
+          echo "exists=$exists" >> "$GITHUB_OUTPUT"
+          echo "Already on nuget.org: $exists"
 
       - name: Set up .NET
         uses: actions/setup-dotnet@v4
@@ -40,16 +71,26 @@ jobs:
         run: ls -l artifacts
 
       - name: NuGet login (Trusted Publishing)
-        if: ${{ !inputs.dry_run }}
+        if: ${{ steps.check.outputs.exists == 'false' && inputs.dry_run != true }}
         uses: NuGet/login@v1
         id: login
         with:
           user: JJW
 
       - name: Push to nuget.org
-        if: ${{ !inputs.dry_run }}
+        if: ${{ steps.check.outputs.exists == 'false' && inputs.dry_run != true }}
         run: >-
           dotnet nuget push artifacts/*.nupkg
           --api-key ${{ steps.login.outputs.NUGET_API_KEY }}
           --source https://api.nuget.org/v3/index.json
           --skip-duplicate
+
+      - name: Summary
+        run: |
+          if [ "${{ steps.check.outputs.exists }}" = "true" ]; then
+            echo "Version ${{ steps.version.outputs.version }} is already on nuget.org — nothing published." >> "$GITHUB_STEP_SUMMARY"
+          elif [ "${{ inputs.dry_run }}" = "true" ]; then
+            echo "Dry run — packed ${{ steps.version.outputs.version }} but did not publish." >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo "Published Janglim ${{ steps.version.outputs.version }} to nuget.org." >> "$GITHUB_STEP_SUMMARY"
+          fi
