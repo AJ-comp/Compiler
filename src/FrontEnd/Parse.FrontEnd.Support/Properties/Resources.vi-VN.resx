@@ -78,4 +78,10 @@
   <data name="ScopeComment" xml:space="preserve">
     <value>Chú thích khối</value>
   </data>
+  <data name="StringLiteral" xml:space="preserve">
+    <value>Hằng chuỗi</value>
+  </data>
+  <data name="CharLiteral" xml:space="preserve">
+    <value>Hằng ký tự</value>
+  </data>
 </root>

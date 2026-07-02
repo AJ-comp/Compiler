@@ -78,4 +78,10 @@
   <data name="ScopeComment" xml:space="preserve">
     <value>Comentário de bloco</value>
   </data>
+  <data name="StringLiteral" xml:space="preserve">
+    <value>Literal de cadeia</value>
+  </data>
+  <data name="CharLiteral" xml:space="preserve">
+    <value>Literal de carácter</value>
+  </data>
 </root>

@@ -19,12 +19,19 @@ namespace Janglim.FrontEnd.RegularGrammar
 
         public bool IsNumber => TokenType is Digit10;
 
+        public bool IsTextLiteral => (TokenType is StringLiteral || TokenType is CharLiteral);
+
         public string RegexExpression
         {
             get
             {
                 if (IsOper) return RegexGenerator.GetOperatorRegex(Value);
                 if (IsNumber) return Value;
+
+                // A string/char literal's Value is a raw regex (e.g. "[^"]*").  It must not go
+                // through GetWordRegex: the token starts and ends with a quote — a non-word
+                // char — so a surrounding \b could never match and the pattern would be dead.
+                if (IsTextLiteral) return Value;
 
                 // A comment's Value is already a raw regex (e.g. "//.*$"), so use it as-is.
                 // GetWordRegex would wrap it in \b...\b; since a line comment starts with a

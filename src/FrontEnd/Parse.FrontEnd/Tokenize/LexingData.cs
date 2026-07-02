@@ -104,10 +104,7 @@ namespace Janglim.FrontEnd.Tokenize
                 _tokensForView.Add(tCell);
 
                 // if it is not token for parsing then index is -1
-                var tokenType = tCell.PatternInfo.Terminal.TokenType;
-                int index = (tokenType == TokenType.SpecialToken.Comment) ? -1
-                              : (tokenType == TokenType.SpecialToken.Delimiter) ? -1
-                              : i;
+                int index = IsParsingToken(tCell) ? i : -1;
 
                 // add only if it is token for parsing.
                 if (index >= 0)
@@ -195,13 +192,15 @@ namespace Janglim.FrontEnd.Tokenize
 
         private bool IsParsingToken(TokenCell token)
         {
-            bool result = true;
             var tokenType = token.PatternInfo.Terminal.TokenType;
 
-            if (tokenType == TokenType.SpecialToken.Comment) result = false;
-            if (tokenType == TokenType.SpecialToken.Delimiter) result = false;
+            // A whole-comment token (Comment or LineComment) never reaches the parser.
+            // ScopeComment stays: it types the /* */ delimiter terminals, which are
+            // operator-like and are handled through the grammar's ScopeInfos instead.
+            if (tokenType is Comment && !(tokenType is ScopeComment)) return false;
+            if (tokenType == TokenType.SpecialToken.Delimiter) return false;
 
-            return result;
+            return true;
         }
 
         private void CheckRight()

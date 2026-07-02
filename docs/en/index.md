@@ -57,7 +57,7 @@ Now and then, when a concept can't be shown with this grammar (ε, conflicts, an
 - 👉 **[Getting Started](getting-started.md)** — install it and run your first parse in 5 lines.
 - 🌿 **[Live playground](https://polite-island-0b2142200.7.azurestaticapps.net)** — right in the browser, no install needed.
 
-> **Note:** Janglim is still an **early preview (`0.2.0-preview`)**.\
+> **Note:** Janglim is still an **early preview (`0.x`)**.\
 > The public API may change during `0.x`.
 
 ---

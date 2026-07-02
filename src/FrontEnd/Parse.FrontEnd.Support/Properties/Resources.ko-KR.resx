@@ -183,4 +183,10 @@
   <data name="ScopeComment" xml:space="preserve">
     <value>범위 주석</value>
   </data>
+  <data name="StringLiteral" xml:space="preserve">
+    <value>문자열 리터럴</value>
+  </data>
+  <data name="CharLiteral" xml:space="preserve">
+    <value>문자 리터럴</value>
+  </data>
 </root>

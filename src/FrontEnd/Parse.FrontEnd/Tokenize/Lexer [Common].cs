@@ -1,6 +1,7 @@
 ﻿using AJ.Common.Helpers;
 using Janglim.FrontEnd.RegularGrammar;
 using Janglim.Utilities;
+using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -158,10 +159,49 @@ namespace Janglim.FrontEnd.Tokenize
                     item.Terminal.Value == terminal.Value) return;
             }
 
+            ValidateTokenPattern(terminal);
+
             this._tokenPatternList.Add(new TokenPatternInfo(this._key++, terminal));
             this.SortTokenPatternList();
 
             this._tokenizeRule = this.GetTokenizeRule(this._tokenPatternList);
+        }
+
+
+        /// <summary>
+        /// This function checks that the terminal's regex can join the combined tokenize rule.
+        /// An invalid pattern would otherwise only surface as a Regex crash at tokenize time,
+        /// far away from the grammar definition that caused it.
+        /// </summary>
+        /// <param name="terminal"></param>
+        private static void ValidateTokenPattern(Terminal terminal)
+        {
+            // GetTokenizeRule skips empty patterns, so there is nothing to validate.
+            if (string.IsNullOrEmpty(terminal.Value)) return;
+
+            // The wrapper mirrors the (?<key>...) wrapping GetTokenizeRule applies. Its group
+            // name must be one no real pattern would reference, so that a backreference such
+            // as \k<t> cannot accidentally resolve against the wrapper and slip through.
+            Regex compiled;
+            try
+            {
+                compiled = new Regex(string.Format("(?<janglimValidationScope>{0})", terminal.RegexExpression),
+                                                RegexOptions.Multiline | RegexOptions.ExplicitCapture);
+            }
+            catch (ArgumentException e)
+            {
+                throw new ArgumentException(
+                    string.Format("The pattern '{0}' of the terminal '{1}' is not a valid regex: {2}",
+                                        terminal.Value, terminal.Caption, e.Message), e);
+            }
+
+            // Group 0 and the wrapper always exist. Anything beyond means the pattern defines
+            // its own capture group (under ExplicitCapture only named groups capture), which
+            // would shift the group-to-pattern index mapping GetMatchedPattern relies on.
+            if (compiled.GetGroupNames().Length > 2)
+                throw new ArgumentException(
+                    string.Format("The pattern '{0}' of the terminal '{1}' must not contain a named capture group.",
+                                        terminal.Value, terminal.Caption));
         }
 
 

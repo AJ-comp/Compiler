@@ -78,4 +78,10 @@
   <data name="ScopeComment" xml:space="preserve">
     <value>ブロックコメント</value>
   </data>
+  <data name="StringLiteral" xml:space="preserve">
+    <value>文字列リテラル</value>
+  </data>
+  <data name="CharLiteral" xml:space="preserve">
+    <value>文字リテラル</value>
+  </data>
 </root>

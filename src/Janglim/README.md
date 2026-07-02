@@ -6,7 +6,7 @@ Define a grammar in C# — or in plain EBNF text — and get a full LR pipeline 
 look inside: parse tables, FIRST/FOLLOW, step-by-step parse traces, conflict reports,
 grammar normalization, incremental reparsing, and pluggable error recovery.
 
-> **Early preview (`0.2.0-preview`).** The public API is unstable and will change across `0.x`.
+> **Early preview (`0.x`).** The public API is unstable and will change across `0.x`.
 
 ## Quick start
 
@@ -32,7 +32,22 @@ Console.WriteLine(result.Success);   // True
 ```
 
 You can also build the grammar directly in C# (terminals and non-terminals as fields,
-`+` for sequence, `|` for choice, `?` `*` `+` for EBNF repetition) instead of EBNF text.
+`+` for sequence, `|` for choice, and `.Optional()` / `.ZeroOrMore()` / `.OneOrMore()`
+for EBNF repetition) instead of EBNF text.
+
+### String / char literal tokens (C# API)
+
+Quote-delimited tokens need the `StringLiteral` / `CharLiteral` token types, which use the
+pattern as a raw regex (word-shaped tokens are wrapped in `\b...\b`, which can never match
+a token that starts with a quote):
+
+```csharp
+new Terminal(TokenType.Literal.StringLiteral, "\"[^\"\\r\\n]*\"", "string", true, true);
+new Terminal(TokenType.Literal.CharLiteral, "'[^'\\r\\n]'", "char", true, true);
+```
+
+These types are currently only available through the C# API — EBNF-text token rules
+(`name := "regex"`) still lex as word patterns.
 
 ## Links
 

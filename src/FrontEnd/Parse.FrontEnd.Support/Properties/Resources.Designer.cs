@@ -70,6 +70,15 @@ namespace Janglim.FrontEnd.Support.Properties {
         }
         
         /// <summary>
+        ///   Character literal과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string CharLiteral {
+            get {
+                return ResourceManager.GetString("CharLiteral", resourceCulture);
+            }
+        }
+
+        /// <summary>
         ///   Comma (,)과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         public static string Comma {
@@ -255,6 +264,15 @@ namespace Janglim.FrontEnd.Support.Properties {
         public static string Squre {
             get {
                 return ResourceManager.GetString("Squre", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   String literal과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        public static string StringLiteral {
+            get {
+                return ResourceManager.GetString("StringLiteral", resourceCulture);
             }
         }
     }

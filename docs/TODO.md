@@ -77,7 +77,7 @@ with messages), but each axis stops short of a mature generator in a specific
 
 | Dimension | Have | Missing (key) |
 |---|---|---|
-| Lexer | regex tokens, keyword priority + longest-match, positions (offset/line/col), comment/whitespace split, int/hex/bin/real literals | string + escape handling, lexer modes/states, token-filter API |
+| Lexer | regex tokens, keyword priority + longest-match, positions (offset/line/col), comment/whitespace split, int/hex/bin/real literals, string/char literals via raw-regex `StringLiteral`/`CharLiteral` types (0.3.0-preview.1, C# API only) | escape handling inside string/char literals, EBNF-text route to the literal types (`EbnfGrammar.cs` hardcodes `Identifier` for token rules), lexer modes/states, token-filter API |
 | Grammar spec | C# API + EBNF reader, `*`/`+`/`?` (code), priority field, left-recursion | EBNF **text** has no `*`/`+`/`?`/groups (code only); no precedence/associativity decls (`%left`/`%right`) |
 | Conflict reporting | LALR tables, conflict *detection*, priority resolution | conflicts resolved **silently** — no "your grammar is ambiguous here" warning; no fail-on-conflict |
 | Tree / AST | CST + MeaningUnit AST, child iteration | no visitor/listener; some display methods throw `NotImplementedException` |
@@ -147,7 +147,10 @@ with messages), but each axis stops short of a mature generator in a specific
 - [ ] Visitor / listener pattern for tree walking (today: manual `.Items` iteration).
 - [ ] Parser **code generation** (runtime-table-only today; no emitted source / table export).
 - [ ] Reduction-time semantic actions + synthesized/inherited **attribute** system (today: post-parse AST only).
-- [ ] Lexer **modes/states**, string + escape tokenizing, user token-filter API (comment/delimiter are enum-hardwired).
+- [ ] Lexer **modes/states**, escape handling inside string/char literals, user token-filter API
+  (comment/delimiter are enum-hardwired). Raw-regex string/char literal *tokens* shipped in
+  0.3.0-preview.1 (`StringLiteral`/`CharLiteral`, C# API only — wiring the EBNF text form to
+  these types is still open).
 - [ ] CLI diagnostics (`-v` / report export, FIRST/FOLLOW dump) and fill the
   `NotImplementedException` stubs (`ParseTreeTerminal.ToTreeString/ToGrammarString`,
   CLR `CheckAmbiguity`).

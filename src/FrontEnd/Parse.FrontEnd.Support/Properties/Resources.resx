@@ -174,4 +174,10 @@
   <data name="ScopeComment" xml:space="preserve">
     <value>Scope comment</value>
   </data>
+  <data name="StringLiteral" xml:space="preserve">
+    <value>String literal</value>
+  </data>
+  <data name="CharLiteral" xml:space="preserve">
+    <value>Character literal</value>
+  </data>
 </root>

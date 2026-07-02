@@ -78,4 +78,10 @@
   <data name="ScopeComment" xml:space="preserve">
     <value>區塊註解</value>
   </data>
+  <data name="StringLiteral" xml:space="preserve">
+    <value>字串常值</value>
+  </data>
+  <data name="CharLiteral" xml:space="preserve">
+    <value>字元常值</value>
+  </data>
 </root>

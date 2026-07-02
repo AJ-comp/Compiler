@@ -78,4 +78,10 @@
   <data name="ScopeComment" xml:space="preserve">
     <value>Блоковий коментар</value>
   </data>
+  <data name="StringLiteral" xml:space="preserve">
+    <value>Рядковий літерал</value>
+  </data>
+  <data name="CharLiteral" xml:space="preserve">
+    <value>Символьний літерал</value>
+  </data>
 </root>

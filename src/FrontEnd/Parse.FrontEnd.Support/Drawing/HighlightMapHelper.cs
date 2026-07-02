@@ -55,6 +55,11 @@ namespace Janglim.FrontEnd.Support.Drawing
             _dic.Add(typeof(Digit16), new TokenResourceInfo(Resources.Digit16, Color.FromArgb(90, 150, 168), Color.Transparent));
             #endregion
 
+            #region Text literal
+            _dic.Add(typeof(StringLiteral), new TokenResourceInfo(Resources.StringLiteral, Color.FromArgb(214, 157, 133), Color.Transparent));
+            _dic.Add(typeof(CharLiteral), new TokenResourceInfo(Resources.CharLiteral, Color.FromArgb(214, 157, 133), Color.Transparent));
+            #endregion
+
             #region Operator
             _dic.Add(typeof(Operator), new TokenResourceInfo(Resources.Operator, Color.White, Color.Transparent));
             _dic.Add(typeof(NormalOperator), new TokenResourceInfo(Resources.EtcOperator, Color.White, Color.Transparent));

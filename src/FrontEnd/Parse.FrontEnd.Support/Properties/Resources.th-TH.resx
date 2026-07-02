@@ -78,4 +78,10 @@
   <data name="ScopeComment" xml:space="preserve">
     <value>ความคิดเห็นแบบบล็อก</value>
   </data>
+  <data name="StringLiteral" xml:space="preserve">
+    <value>สตริงลิเทอรัล</value>
+  </data>
+  <data name="CharLiteral" xml:space="preserve">
+    <value>อักขระลิเทอรัล</value>
+  </data>
 </root>

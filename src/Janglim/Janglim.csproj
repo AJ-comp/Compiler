@@ -9,7 +9,7 @@
     <Description>Janglim is a general-purpose, embeddable LR/LALR parser-generator engine for .NET. Define a grammar in C#, then parse with incremental reparsing, error recovery, and grammar introspection (parse tables, FIRST/FOLLOW, conflict reports). Early preview — the public API is still unstable.</Description>
     <PackageTags>parser;parsing;parser-generator;lr;lalr;grammar;compiler;lexer;ebnf;incremental;janglim</PackageTags>
     <PackageReadmeFile>README.md</PackageReadmeFile>
-    <PackageReleaseNotes>Fix regex-backed comment terminals so line comments win over overlapping operator tokens, and include localized resource assemblies in the package.</PackageReleaseNotes>
+    <PackageReleaseNotes>Add StringLiteral and CharLiteral token types (C# API: TokenType.Literal.StringLiteral / CharLiteral) whose Value is used as a raw regex without \b wrapping, so quote-delimited tokens such as "..." and '.' can be lexed as single value-bearing tokens; EBNF-text token rules are not covered yet (they still lex as word patterns). Escape operator values with Regex.Escape so values containing letters or digits no longer turn into broken regex escapes. Validate terminal regex patterns at registration with a clear error instead of a crash at tokenize time, and filter LineComment-typed tokens from the parsing stream like the base Comment type.</PackageReleaseNotes>
 
     <!-- Package icon (an orchid — the project emblem). Drop a PNG (<=1MB, ~128x128) at src/Janglim/icon.png
          and it is packed automatically; until then the package builds without an icon. -->

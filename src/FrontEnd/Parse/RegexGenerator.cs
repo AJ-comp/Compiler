@@ -1,4 +1,6 @@
-﻿namespace Janglim
+﻿using System.Text.RegularExpressions;
+
+namespace Janglim
 {
     public class RegexGenerator
     {
@@ -12,11 +14,11 @@
 
         public static string GetOperatorRegex(string data)
         {
-            string result = string.Empty;
-
-            foreach (var c in data) result += "\\" + c;
-
-            return result;
+            // Escape only regex metacharacters. A backslash before EVERY char (the old way)
+            // turned letters and digits into regex escapes: \i is an invalid escape and \2 is
+            // a backreference, so operator values containing letters or digits (e.g. "id", "2")
+            // produced broken or silently-dead patterns.
+            return Regex.Escape(data);
         }
     }
 }

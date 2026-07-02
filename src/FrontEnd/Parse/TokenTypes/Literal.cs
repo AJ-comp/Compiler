@@ -64,6 +64,30 @@
                 return (cacheType == null) ? new Digit16(hashCode, data) : cacheType as Digit16;
             }
         }
+
+        public StringLiteral StringLiteral
+        {
+            get
+            {
+                var data = "StringLiteral";
+                var hashCode = GetHashCode(data);
+                var cacheType = GetTokenType(hashCode);
+
+                return (cacheType == null) ? new StringLiteral(hashCode, data) : cacheType as StringLiteral;
+            }
+        }
+
+        public CharLiteral CharLiteral
+        {
+            get
+            {
+                var data = "CharLiteral";
+                var hashCode = GetHashCode(data);
+                var cacheType = GetTokenType(hashCode);
+
+                return (cacheType == null) ? new CharLiteral(hashCode, data) : cacheType as CharLiteral;
+            }
+        }
     }
 
 
@@ -91,5 +115,16 @@
     public class Bool : Literal
     {
         internal Bool(int hashCode, string value) : base(hashCode, value) { }
+    }
+
+
+    public class StringLiteral : Literal
+    {
+        internal StringLiteral(int hashCode, string value) : base(hashCode, value) { }
+    }
+
+    public class CharLiteral : Literal
+    {
+        internal CharLiteral(int hashCode, string value) : base(hashCode, value) { }
     }
 }

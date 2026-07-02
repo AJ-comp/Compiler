@@ -36,7 +36,7 @@ namespace Janglim.FrontEnd
                 var typeData = tokenCell.PatternInfo.Terminal;
                 if (typeData == null) terminal = new NotDefined();
                 else if (typeData.TokenType == TokenType.SpecialToken.Delimiter ||
-                            typeData.TokenType == TokenType.SpecialToken.Comment) terminal = null;
+                            (typeData.TokenType is Comment && !(typeData.TokenType is ScopeComment))) terminal = null;
                 else terminal = typeData;
             }
 
