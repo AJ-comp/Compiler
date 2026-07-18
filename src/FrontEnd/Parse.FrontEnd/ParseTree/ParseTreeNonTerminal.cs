@@ -3,6 +3,7 @@ using Janglim.FrontEnd.RegularGrammar;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Text;
 
 namespace Janglim.FrontEnd.ParseTree
 {
@@ -319,23 +320,29 @@ namespace Janglim.FrontEnd.ParseTree
 
         public override string ToTreeString(ushort depth = 1)
         {
-            string result = string.Empty;
+            var sb = new StringBuilder();
+            AppendTreeString(sb, depth);
+            return sb.ToString();
+        }
 
-            for (int i = 1; i < depth; i++) result += "  ";
+        // Threads a single StringBuilder through the recursion so each node appends its own line once.
+        // Returning per-node substrings and concatenating upward would re-copy each subtree at every
+        // ancestor — O(n^2) on a deep chain; a shared buffer keeps the whole render O(n).
+        private void AppendTreeString(StringBuilder sb, ushort depth)
+        {
+            for (int i = 1; i < depth; i++) sb.Append("  ");
 
-            result += "Nonterminal : " + this.Name + Environment.NewLine;
+            sb.Append("Nonterminal : ").Append(this.Name).Append(Environment.NewLine);
 
             foreach (var symbol in this._symbols)
             {
                 if (symbol is ParseTreeTerminal)
                 {
-                    for (int i = 1; i < depth; i++) result += "  ";
-                    result += "  " + "Terminal : " + symbol.ToString() + Environment.NewLine;
+                    for (int i = 1; i < depth; i++) sb.Append("  ");
+                    sb.Append("  ").Append("Terminal : ").Append(symbol.ToString()).Append(Environment.NewLine);
                 }
-                else result += symbol.ToTreeString((ushort)(depth + 1));
+                else ((ParseTreeNonTerminal)symbol).AppendTreeString(sb, (ushort)(depth + 1));
             }
-
-            return result;
         }
 
         public override string ToString() => this.ToNonTerminal.ToString();  //this.Name?.ToString();
