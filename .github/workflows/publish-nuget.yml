@@ -91,7 +91,7 @@ jobs:
   deploy:
     name: Deploy playground
     needs: [verify, publish]
-    if: ${{ github.ref == 'refs/heads/master' && (github.event_name == 'push' || inputs.dry_run == false) }}
+    if: ${{ github.ref == 'refs/heads/master' && needs.verify.outputs.frontend_enabled == 'true' && (github.event_name == 'push' || inputs.dry_run == false) }}
     uses: ./.github/workflows/deploy-playground.yml
     with:
       artifact_name: ${{ needs.verify.outputs.web_artifact }}
@@ -114,6 +114,7 @@ jobs:
       RELEASE_REF: ${{ github.ref_name }}
       EVENT_NAME: ${{ github.event_name }}
       DRY_RUN: ${{ inputs.dry_run }}
+      FRONTEND_ENABLED: ${{ needs.verify.outputs.frontend_enabled }}
     steps:
       - name: Summarize verification and destinations
         run: |
@@ -132,5 +133,8 @@ jobs:
             elif [ "$RELEASE_REF" != 'master' ]; then
               echo ''
               echo 'This ref only validates artifacts; production releases require master.'
+            elif [ "$BUILD_RESULT" = 'success' ] && [ "$FRONTEND_ENABLED" != 'true' ]; then
+              echo ''
+              echo 'Legacy checkout: the production website is preserved until the React frontend is committed.'
             fi
           } >> "$GITHUB_STEP_SUMMARY"

@@ -52,6 +52,9 @@ jobs:
           test -n "$SWA_DEPLOY_TOKEN" || { echo 'Azure deployment token is not configured.' >&2; exit 1; }
           test -f publish/wwwroot/index.html
           test -d publish/wwwroot/_framework
+          test -f publish/wwwroot/ui/playground.js
+          test -f publish/wwwroot/ui/style.css
+          test -f publish/wwwroot/ui/locale.js
 
       - name: Deploy to Azure Static Web Apps
         uses: Azure/static-web-apps-deploy@v1

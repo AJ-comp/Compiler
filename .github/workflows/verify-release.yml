@@ -16,6 +16,9 @@ on:
       web_artifact:
         description: Name of the tested static site artifact
         value: ${{ jobs.build.outputs.web_artifact }}
+      frontend_enabled:
+        description: Whether this checkout includes the production React frontend
+        value: ${{ jobs.build.outputs.frontend_enabled }}
   pull_request:
     branches: [master]
   push:
@@ -45,6 +48,7 @@ jobs:
       web_version: ${{ steps.release.outputs.web_version }}
       package_artifact: ${{ steps.release.outputs.package_artifact }}
       web_artifact: ${{ steps.release.outputs.web_artifact }}
+      frontend_enabled: ${{ steps.frontend.outputs.enabled }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -110,6 +114,21 @@ jobs:
         if: steps.frontend.outputs.enabled == 'true'
         working-directory: samples/Playground/Frontend
         run: npm ci --no-audit --no-fund
+
+      - name: Verify web version metadata
+        if: steps.frontend.outputs.enabled == 'true'
+        env:
+          WEB_VERSION: ${{ steps.release.outputs.web_version }}
+        run: |
+          node --input-type=module <<'NODE'
+          import { readFileSync } from 'node:fs';
+          const root = 'samples/Playground/Frontend/';
+          const pkg = JSON.parse(readFileSync(root + 'package.json', 'utf8'));
+          const lock = JSON.parse(readFileSync(root + 'package-lock.json', 'utf8'));
+          if ([pkg.version, lock.version, lock.packages?.['']?.version].some(version => version !== process.env.WEB_VERSION)) {
+            throw new Error('The web project, package.json and package-lock.json versions must match.');
+          }
+          NODE
 
       - name: Test parser engine
         run: >-
