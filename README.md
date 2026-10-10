@@ -458,10 +458,11 @@ In bash, set the same flag with `export PLAYGROUND_PUBLIC_BUILD=1`. CI builds th
 solution in both configurations, then runs the parser/UI tests and creates the release artifacts.
 CI installs both .NET 8 and 10 SDKs; local builds only need the .NET 10 SDK and .NET 8 test runtime.
 
-The previous 30-project solution is preserved as
-[`legacy/AJPGS.Legacy.sln`](legacy/AJPGS.Legacy.sln), including the older AJ compiler, backends,
-CLI, and WPF IDE. Project source paths are unchanged. Open or build this solution explicitly
-when examining that historical work:
+The 28-project [`legacy/AJPGS.Legacy.sln`](legacy/AJPGS.Legacy.sln) contains the older AJ
+compiler, backends, Builder/Util/Lint CLI projects, and remaining WPF IDE components. The unused
+top-level `AJStudio` and `CommandPrompt.Compiler` executables were removed; the original author's
+designs and code remain in Git history. Remaining project source paths are unchanged. Open or
+build this solution explicitly when examining that historical work:
 
 ```shell
 dotnet build legacy/AJPGS.Legacy.sln -c Release

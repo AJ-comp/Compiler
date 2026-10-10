@@ -110,9 +110,12 @@ with messages), but each axis stops short of a mature generator in a specific
     setting `<RootNamespace>Janglim.FrontEnd.*</RootNamespace>` in the 4 affected projects
     (`Parse.FrontEnd`, `Parse.FrontEnd.Parsers`, `Parse.FrontEnd.Grammars`, `Parse.FrontEnd.Support`).
     Bonus: this also cleared the **10 pre-existing `Ex8_10Grammar` test failures** (same root cause) —
-    the suite is now fully green (116/0, 1 skip). Note: `legacy/` and `src/Cli/CommandPrompt.Compiler`
-    remain broken from the same rename (code-namespace/missing-type errors, unrelated to resources) —
-    out of scope here.
+    the suite is now fully green (116/0, 1 skip). At the time of this audit, `legacy/` and
+    `src/Cli/CommandPrompt.Compiler` were still broken from the same rename
+    (code-namespace/missing-type errors, unrelated to resources) — out of scope here.
+    **Cleanup update, 2026-10-11:** only the unused top-level `AJStudio` and
+    `CommandPrompt.Compiler` executables were removed; the original author's designs and source
+    remain in Git history. Remaining legacy namespace/XAML reference errors are still unresolved.
 
 - [x] **Report grammar conflicts to the author.** ✅ **DONE 2026-07-01 (opt-in surface).**
   Detection already existed (`CheckAmbiguity()` → `AmbiguityCheckResult`) but was only reachable
