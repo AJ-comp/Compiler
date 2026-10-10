@@ -106,6 +106,7 @@ parsing, built around this engine.
 - [Incremental reparse & error recovery](#incremental-reparse--error-recovery)
 - [The AJ language — a worked example](#the-aj-language--a-worked-example)
 - [Project layout](#project-layout)
+- [Building from source](#building-from-source)
 - [Status & known limitations](#status--known-limitations)
 - [Roadmap](#roadmap)
 - [Publications](#publications)
@@ -434,8 +435,41 @@ src/
   Janglim/    NuGet packaging project (bundles the engine assemblies)
 samples/      the React + Blazor WebAssembly playground
 Tests/        xUnit suite for the engine  (Parse.FrontEnd.Parsers.Tests)
-legacy/       deprecated IDE / WPF projects, kept for history
+legacy/       historical solution and deprecated IDE / WPF projects, kept for reference
 ```
+
+## Building from source
+
+[`AJPGS.sln`](AJPGS.sln) is the supported default solution: the nine engine/package projects,
+parser tests, and the Playground. Install the **.NET 10 SDK**, the **.NET 8 runtime** for running
+parser tests, and **Node.js 22.18.0 or later** with npm. The tests target `net8.0`; the Playground
+targets `net10.0`. Its MSBuild targets install and build the React frontend automatically.
+
+From the repository root, use a public build with the included loading component. This is also
+the build mode used by CI and requires no licensed frontend sources or key:
+
+```powershell
+$env:PLAYGROUND_PUBLIC_BUILD = '1'
+dotnet build -c Debug
+dotnet build -c Release
+```
+
+In bash, set the same flag with `export PLAYGROUND_PUBLIC_BUILD=1`. CI builds the default
+solution in both configurations, then runs the parser/UI tests and creates the release artifacts.
+CI installs both .NET 8 and 10 SDKs; local builds only need the .NET 10 SDK and .NET 8 test runtime.
+
+The previous 30-project solution is preserved as
+[`legacy/AJPGS.Legacy.sln`](legacy/AJPGS.Legacy.sln), including the older AJ compiler, backends,
+CLI, and WPF IDE. Project source paths are unchanged. Open or build this solution explicitly
+when examining that historical work:
+
+```shell
+dotnet build legacy/AJPGS.Legacy.sln -c Release
+```
+
+The historical solution is outside the supported build and CI scope. It still has unresolved
+source/reference errors, Windows WPF requirements, and proprietary Actipro DLL references;
+this separation does not repair those projects. See [legacy notes](legacy/README.md).
 
 ## Status & known limitations
 

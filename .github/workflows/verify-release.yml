@@ -130,12 +130,18 @@ jobs:
           }
           NODE
 
+      - name: Build default solution (Debug)
+        run: dotnet build AJPGS.sln -c Debug --nologo
+
+      - name: Build default solution (Release)
+        run: dotnet build AJPGS.sln -c Release --nologo
+
       - name: Test parser engine
         run: >-
           dotnet test Tests/Parse.FrontEnd.Parsers.Tests/Parse.FrontEnd.Parsers.Tests.csproj
           -c Release --logger trx --results-directory TestResults
 
-      - name: Test interface languages
+      - name: Test interface
         if: steps.frontend.outputs.enabled == 'true'
         working-directory: samples/Playground/Frontend
         run: npm test
