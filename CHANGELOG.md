@@ -2,6 +2,17 @@
 
 Engine and web releases use independent version numbers. The entries below describe each version's scope and changes.
 
+## Janglim Playground 1.1.0
+
+The first step toward Janglim Studio adds local workspace files while retaining the existing Playground and parser engine.
+
+- Save the current EBNF grammar and one input string to a tagged, versioned `.janglim.json` file.
+- Open a workspace file to restore its source and parse it again with the existing engine.
+- Keep the current work when a file is invalid or uses an unsupported format version; confirm replacement of unsaved edits inline before opening another workspace.
+- Read and write workspace files locally in the browser, with no account or server storage. Parse results are rebuilt instead of serialized.
+
+The engine package remains at 0.3.0. This web update does not add parser code generation or change the parsing algorithm.
+
 ## Janglim engine 0.3.0
 
 The first non-prerelease package in the 0.3 line targets the supported `LALRParser` workflow on .NET Standard 2.1. The package is installed as `Janglim`; its engine assemblies remain bundled in one NuGet package.

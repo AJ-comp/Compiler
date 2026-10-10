@@ -1,4 +1,26 @@
 const messages = {
+  File: "Файл",
+  "Open file…": "Відкрити файл…",
+  "Save file": "Зберегти файл",
+  "Grammar and input in one file": "Граматика та вхідний рядок в одному файлі",
+  "Saved {name}.": "Файл {name} збережено.",
+  "Opened {name}.": "Файл {name} відкрито.",
+  "Unable to save the file. Please try again.":
+    "Не вдалося зберегти файл. Спробуйте ще раз.",
+  "Unable to read this file. Please try again.":
+    "Не вдалося прочитати цей файл. Спробуйте ще раз.",
+  "This is not a valid Janglim workspace file.":
+    "Це некоректний файл робочого простору Janglim.",
+  "This file uses an unsupported workspace version.":
+    "Версія робочого простору в цьому файлі не підтримується.",
+  "Choose a workspace file smaller than 2 MB.":
+    "Виберіть файл робочого простору розміром менше ніж 2 МБ.",
+  "Replace your current work?": "Замінити поточну роботу?",
+  "You have unsaved changes. Save your file before opening another workspace.":
+    "Є незбережені зміни. Збережіть файл, перш ніж відкривати інший робочий простір.",
+  "Replace workspace": "Замінити робочий простір",
+  Cancel: "Скасувати",
+  "Dismiss notification": "Закрити сповіщення",
   Language: "Мова",
   "Language: {language}": "Мова: {language}",
   "Automatic (browser)": "Автоматично (мова браузера)",

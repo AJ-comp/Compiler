@@ -18,6 +18,47 @@ export type MessageValues = Record<string, string | number>;
 export const messages: Readonly<
   Record<string, readonly [ko: string, ja: string]>
 > = {
+  File: ["파일", "ファイル"],
+  "Open file…": ["파일 열기…", "ファイルを開く…"],
+  "Save file": ["파일 저장", "ファイルを保存"],
+  "Grammar and input in one file": [
+    "문법과 입력을 하나의 파일로",
+    "文法と入力を一つのファイルに",
+  ],
+  "Saved {name}.": ["{name} 파일을 저장했습니다.", "{name} を保存しました。"],
+  "Opened {name}.": ["{name} 파일을 열었습니다.", "{name} を開きました。"],
+  "Unable to save the file. Please try again.": [
+    "파일을 저장하지 못했습니다. 다시 시도해 주세요.",
+    "ファイルを保存できませんでした。もう一度お試しください。",
+  ],
+  "Unable to read this file. Please try again.": [
+    "이 파일을 읽지 못했습니다. 다시 시도해 주세요.",
+    "このファイルを読み込めませんでした。もう一度お試しください。",
+  ],
+  "This is not a valid Janglim workspace file.": [
+    "올바른 Janglim 작업 공간 파일이 아닙니다.",
+    "有効な Janglim ワークスペースファイルではありません。",
+  ],
+  "This file uses an unsupported workspace version.": [
+    "이 파일의 작업 공간 버전은 지원하지 않습니다.",
+    "このファイルのワークスペースバージョンはサポートされていません。",
+  ],
+  "Choose a workspace file smaller than 2 MB.": [
+    "2 MB보다 작은 작업 공간 파일을 선택해 주세요.",
+    "2 MB 未満のワークスペースファイルを選択してください。",
+  ],
+  "Replace your current work?": [
+    "현재 작업 내용을 바꾸시겠어요?",
+    "現在の作業内容を置き換えますか？",
+  ],
+  "You have unsaved changes. Save your file before opening another workspace.":
+    [
+      "저장하지 않은 변경 사항이 있습니다. 다른 작업 공간을 열기 전에 파일을 저장해 주세요.",
+      "保存されていない変更があります。別のワークスペースを開く前にファイルを保存してください。",
+    ],
+  "Replace workspace": ["작업 공간 바꾸기", "ワークスペースを置き換える"],
+  Cancel: ["취소", "キャンセル"],
+  "Dismiss notification": ["알림 닫기", "通知を閉じる"],
   Language: ["언어", "言語"],
   "Language: {language}": ["언어: {language}", "言語: {language}"],
   "Automatic (browser)": ["자동 · 브라우저 설정", "自動 · ブラウザー設定"],

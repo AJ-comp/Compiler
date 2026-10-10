@@ -1,4 +1,26 @@
 const messages = {
+  File: "Fichier",
+  "Open file…": "Ouvrir un fichier…",
+  "Save file": "Enregistrer le fichier",
+  "Grammar and input in one file": "Grammaire et saisie dans un seul fichier",
+  "Saved {name}.": "{name} a été enregistré.",
+  "Opened {name}.": "{name} a été ouvert.",
+  "Unable to save the file. Please try again.":
+    "Impossible d’enregistrer le fichier. Veuillez réessayer.",
+  "Unable to read this file. Please try again.":
+    "Impossible de lire ce fichier. Veuillez réessayer.",
+  "This is not a valid Janglim workspace file.":
+    "Ce fichier n’est pas un fichier d’espace de travail Janglim valide.",
+  "This file uses an unsupported workspace version.":
+    "La version de l’espace de travail de ce fichier n’est pas prise en charge.",
+  "Choose a workspace file smaller than 2 MB.":
+    "Choisissez un fichier d’espace de travail de moins de 2 Mo.",
+  "Replace your current work?": "Remplacer votre travail actuel ?",
+  "You have unsaved changes. Save your file before opening another workspace.":
+    "Vous avez des modifications non enregistrées. Enregistrez votre fichier avant d’ouvrir un autre espace de travail.",
+  "Replace workspace": "Remplacer l’espace de travail",
+  Cancel: "Annuler",
+  "Dismiss notification": "Fermer la notification",
   Language: "Langue",
   "Language: {language}": "Langue : {language}",
   "Automatic (browser)": "Automatique (langue du navigateur)",

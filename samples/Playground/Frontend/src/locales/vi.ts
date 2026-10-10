@@ -1,5 +1,27 @@
 // vi UI messages. Source identifiers and interpolation names are preserved.
 export default {
+  File: "Tệp",
+  "Open file…": "Mở tệp…",
+  "Save file": "Lưu tệp",
+  "Grammar and input in one file": "Ngữ pháp và dữ liệu đầu vào trong một tệp",
+  "Saved {name}.": "Đã lưu {name}.",
+  "Opened {name}.": "Đã mở {name}.",
+  "Unable to save the file. Please try again.":
+    "Không thể lưu tệp. Vui lòng thử lại.",
+  "Unable to read this file. Please try again.":
+    "Không thể đọc tệp này. Vui lòng thử lại.",
+  "This is not a valid Janglim workspace file.":
+    "Đây không phải là tệp không gian làm việc Janglim hợp lệ.",
+  "This file uses an unsupported workspace version.":
+    "Tệp này sử dụng phiên bản không gian làm việc không được hỗ trợ.",
+  "Choose a workspace file smaller than 2 MB.":
+    "Chọn tệp không gian làm việc có kích thước nhỏ hơn 2 MB.",
+  "Replace your current work?": "Thay thế nội dung đang làm việc?",
+  "You have unsaved changes. Save your file before opening another workspace.":
+    "Bạn có thay đổi chưa lưu. Hãy lưu tệp trước khi mở không gian làm việc khác.",
+  "Replace workspace": "Thay thế không gian làm việc",
+  Cancel: "Hủy",
+  "Dismiss notification": "Đóng thông báo",
   Language: "Ngôn ngữ",
   "Language: {language}": "Ngôn ngữ: {language}",
   "Automatic (browser)": "Tự động (theo trình duyệt)",
