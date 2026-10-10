@@ -22,8 +22,11 @@ internal static class DataTableText
         foreach (DataRow row in table.Rows)
         {
             var cells = row.ItemArray.Select(v => (v == null ? string.Empty : v.ToString())
-                                                      .Replace("\r", " ")
-                                                      .Replace("\n", " "));
+                                                      .Replace("\r\n", "\n")
+                                                      .Replace("\r", "\n")
+                                                      // Keep the approved two-space cell separator while
+                                                      // treating CRLF, LF and CR as one logical newline.
+                                                      .Replace("\n", "  "));
             sb.Append(string.Join(" | ", cells));
             sb.Append('\n');
         }

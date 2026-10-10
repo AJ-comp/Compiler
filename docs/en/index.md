@@ -55,10 +55,11 @@ Now and then, when a concept can't be shown with this grammar (ε, conflicts, an
 ## So, shall we get started?
 
 - 👉 **[Getting Started](getting-started.md)** — install it and run your first parse in 5 lines.
-- 🌿 **[Live playground](https://polite-island-0b2142200.7.azurestaticapps.net)** — right in the browser, no install needed.
+- 🌿 **[Live playground](https://janglim.mythosia.net)** — right in the browser, no install needed.
 
-> **Note:** Janglim is still an **early preview (`0.x`)**.\
-> The public API may change during `0.x`.
+> **Note:** Janglim engine `0.3.0` is a non-prerelease package with `LALRParser` as its supported parser.\
+> SLR and CLR remain experimental and incomplete, and the public API may change during `0.x`.\
+> Web Playground `1.0.0` is versioned independently of the engine.
 
 ---
 

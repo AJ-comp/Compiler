@@ -213,7 +213,7 @@ FIRST/FOLLOW そのものは画面に直接は見えませんが、**その産�
    現れる位置を確認 — まさに FOLLOW が「ここでまとめろ」と命じた場所です。
 3. **Step through** で一マスずつ進んでみると、`a` の後ろのトークンが `*` か `+` かによって動作が分かれるのが見えます。
 
-👉 **[ライブプレイグラウンド](https://polite-island-0b2142200.7.azurestaticapps.net)**
+👉 **[ライブプレイグラウンド](https://janglim.mythosia.net)**
 
 > （FIRST/FOLLOW 集合を *直接* 表で見せるパネルは追加予定です。）
 

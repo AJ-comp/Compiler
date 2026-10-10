@@ -218,7 +218,7 @@ FIRST/FOLLOW 자체는 화면에 직접 안 보이지만, **그 결과물인 파
    뜨는 자리를 확인 — 바로 FOLLOW 가 "여기서 묶어라"라고 시킨 곳이에요.
 3. **Step through** 로 한 칸씩 가보면, `a` 뒤 토큰이 `*` 냐 `+` 냐에 따라 행동이 갈리는 게 보여요.
 
-👉 **[라이브 플레이그라운드](https://polite-island-0b2142200.7.azurestaticapps.net)**
+👉 **[라이브 플레이그라운드](https://janglim.mythosia.net)**
 
 > (FIRST/FOLLOW 집합을 *직접* 표로 보여주는 패널은 추가 예정이에요.)
 

@@ -2,6 +2,7 @@ using Janglim.FrontEnd.Grammars.ExampleGrammars;
 using Janglim.FrontEnd.Parsers.LR;
 using Janglim.FrontEnd.Parsers.Tests.Infra;
 using Janglim.FrontEnd.Tokenize;
+using System.Globalization;
 using Xunit;
 
 namespace Janglim.FrontEnd.Parsers.Tests;
@@ -32,6 +33,17 @@ public class LalrTableTests
         foreach (var t in grammar.TerminalSet) lexer.AddTokenRule(t);
         var result = new LALRParser(grammar, true).Parsing(lexer.Lexing("a = e").TokensForParsing);
 
-        Snapshot.Match("Ex1.lalr.parse-trace.a-equals-e", DataTableText.ToText(result.ToParsingHistory));
+        // The approved trace includes Korean resource headers. Pin this rendering
+        // scope so the host's UI culture cannot change the snapshot's language.
+        var originalCulture = CultureInfo.CurrentUICulture;
+        try
+        {
+            CultureInfo.CurrentUICulture = CultureInfo.GetCultureInfo("ko-KR");
+            Snapshot.Match("Ex1.lalr.parse-trace.a-equals-e", DataTableText.ToText(result.ToParsingHistory));
+        }
+        finally
+        {
+            CultureInfo.CurrentUICulture = originalCulture;
+        }
     }
 }

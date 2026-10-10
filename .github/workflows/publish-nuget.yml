@@ -1,96 +1,140 @@
-name: Publish to NuGet
+name: Release Janglim
 
-# Publishes the Janglim engine package (PackageId: Janglim) to nuget.org.
-#
-# Automatic: every push to master reads the <Version> in src/Directory.Build.props,
-# asks nuget.org whether that version already exists, and publishes only when it
-# does not — so bumping the version and pushing IS the release, and pushes without
-# a version bump are cheap no-ops. The workflow_dispatch trigger remains for
-# retries and dry runs. (--skip-duplicate stays as a second guard: the nuget.org
-# version index can lag a few minutes right after a publish.)
-#
-# Auth: nuget.org Trusted Publishing (OIDC) — no stored secret. A Trusted
-# Publishing policy on nuget.org links this repo + this workflow file to the
-# package owner, and NuGet/login exchanges the GitHub OIDC token for a
-# short-lived API key at run time.
-
+# Keep this file name: the existing NuGet Trusted Publishing policy trusts it.
+# Every master push validates both products, publishes a new engine version,
+# then deploys the web artifact produced by that same validation run.
 on:
   push:
     branches: [master]
-    paths:
-      - 'src/**'
-      - '.github/workflows/publish-nuget.yml'
   workflow_dispatch:
     inputs:
       dry_run:
-        description: "Pack only — do NOT push to nuget.org (use to test the build)"
+        description: 'Validate and save artifacts without publishing or deploying'
         type: boolean
-        default: false
+        default: true
 
 permissions:
   contents: read
-  id-token: write   # required for OIDC / NuGet Trusted Publishing
 
 concurrency:
-  group: publish-nuget
+  group: janglim-release-${{ github.ref }}
   cancel-in-progress: false
 
 jobs:
+  verify:
+    name: Test and build
+    uses: ./.github/workflows/verify-release.yml
+
   publish:
-    name: Pack and publish
+    name: Publish engine to NuGet
+    needs: verify
+    if: ${{ github.ref == 'refs/heads/master' && (github.event_name == 'push' || inputs.dry_run == false) }}
     runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+      id-token: write
+    env:
+      PACKAGE_VERSION: ${{ needs.verify.outputs.package_version }}
     steps:
       - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
 
-      - name: Read the package version
-        id: version
-        run: |
-          version=$(grep -oPm1 '(?<=<Version>)[^<]+' src/Directory.Build.props)
-          echo "version=$version" >> "$GITHUB_OUTPUT"
-          echo "Package version: $version"
+      - name: Download the verified package
+        uses: actions/download-artifact@v4
+        with:
+          name: ${{ needs.verify.outputs.package_artifact }}
+          path: artifacts
+
+      - name: Verify package checksum
+        working-directory: artifacts
+        run: sha256sum --check SHA256SUMS.txt
 
       - name: Check whether nuget.org already has this version
         id: check
-        run: |
-          version=$(echo '${{ steps.version.outputs.version }}' | tr '[:upper:]' '[:lower:]')
-          exists=$(curl -sfL https://api.nuget.org/v3-flatcontainer/janglim/index.json \
-                     | jq -r --arg v "$version" '.versions | map(ascii_downcase) | index($v) != null') \
-                  || exists=false
-          echo "exists=$exists" >> "$GITHUB_OUTPUT"
-          echo "Already on nuget.org: $exists"
+        run: python3 .github/scripts/check-nuget-version.py Janglim "$PACKAGE_VERSION" >> "$GITHUB_OUTPUT"
 
       - name: Set up .NET
+        if: steps.check.outputs.exists == 'false'
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '10.0.x'
 
-      - name: Pack
-        run: dotnet pack src/Janglim/Janglim.csproj -c Release -o artifacts
-
-      - name: List the package
-        run: ls -l artifacts
-
       - name: NuGet login (Trusted Publishing)
-        if: ${{ steps.check.outputs.exists == 'false' && inputs.dry_run != true }}
+        if: steps.check.outputs.exists == 'false'
         uses: NuGet/login@v1
         id: login
         with:
           user: JJW
 
-      - name: Push to nuget.org
-        if: ${{ steps.check.outputs.exists == 'false' && inputs.dry_run != true }}
-        run: >-
-          dotnet nuget push artifacts/*.nupkg
-          --api-key ${{ steps.login.outputs.NUGET_API_KEY }}
-          --source https://api.nuget.org/v3/index.json
-          --skip-duplicate
-
-      - name: Summary
+      - name: Push the verified package to nuget.org
+        if: steps.check.outputs.exists == 'false'
+        env:
+          NUGET_API_KEY: ${{ steps.login.outputs.NUGET_API_KEY }}
         run: |
-          if [ "${{ steps.check.outputs.exists }}" = "true" ]; then
-            echo "Version ${{ steps.version.outputs.version }} is already on nuget.org — nothing published." >> "$GITHUB_STEP_SUMMARY"
-          elif [ "${{ inputs.dry_run }}" = "true" ]; then
-            echo "Dry run — packed ${{ steps.version.outputs.version }} but did not publish." >> "$GITHUB_STEP_SUMMARY"
+          dotnet nuget push "artifacts/Janglim.${PACKAGE_VERSION}.nupkg" \
+            --api-key "$NUGET_API_KEY" \
+            --source https://api.nuget.org/v3/index.json \
+            --skip-duplicate
+
+      - name: Record NuGet result
+        env:
+          VERSION_EXISTS: ${{ steps.check.outputs.exists }}
+        run: |
+          if [ "$VERSION_EXISTS" = 'true' ]; then
+            echo "Janglim $PACKAGE_VERSION is already on NuGet; publication skipped." >> "$GITHUB_STEP_SUMMARY"
           else
-            echo "Published Janglim ${{ steps.version.outputs.version }} to nuget.org." >> "$GITHUB_STEP_SUMMARY"
+            echo "Janglim $PACKAGE_VERSION was published to NuGet." >> "$GITHUB_STEP_SUMMARY"
           fi
+
+  deploy:
+    name: Deploy playground
+    needs: [verify, publish]
+    if: ${{ github.ref == 'refs/heads/master' && needs.verify.outputs.frontend_enabled == 'true' && (github.event_name == 'push' || inputs.dry_run == false) }}
+    uses: ./.github/workflows/deploy-playground.yml
+    with:
+      artifact_name: ${{ needs.verify.outputs.web_artifact }}
+      web_version: ${{ needs.verify.outputs.web_version }}
+    secrets:
+      AZURE_STATIC_WEB_APPS_API_TOKEN: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN }}
+
+  summary:
+    name: Release result
+    if: always()
+    needs: [verify, publish, deploy]
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    env:
+      BUILD_RESULT: ${{ needs.verify.result }}
+      NUGET_RESULT: ${{ needs.publish.result }}
+      WEB_RESULT: ${{ needs.deploy.result }}
+      PACKAGE_VERSION: ${{ needs.verify.outputs.package_version }}
+      WEB_VERSION: ${{ needs.verify.outputs.web_version }}
+      RELEASE_REF: ${{ github.ref_name }}
+      EVENT_NAME: ${{ github.event_name }}
+      DRY_RUN: ${{ inputs.dry_run }}
+      FRONTEND_ENABLED: ${{ needs.verify.outputs.frontend_enabled }}
+    steps:
+      - name: Summarize verification and destinations
+        run: |
+          {
+            echo '## Release result'
+            echo "Ref: $RELEASE_REF"
+            echo ''
+            echo '| Stage | Result |'
+            echo '| --- | --- |'
+            echo "| Test and build | $BUILD_RESULT |"
+            echo "| NuGet $PACKAGE_VERSION | $NUGET_RESULT |"
+            echo "| Playground $WEB_VERSION | $WEB_RESULT |"
+            if [ "$EVENT_NAME" = 'workflow_dispatch' ] && [ "$DRY_RUN" = 'true' ]; then
+              echo ''
+              echo 'Dry run: no package publication or production deployment.'
+            elif [ "$RELEASE_REF" != 'master' ]; then
+              echo ''
+              echo 'This ref only validates artifacts; production releases require master.'
+            elif [ "$BUILD_RESULT" = 'success' ] && [ "$FRONTEND_ENABLED" != 'true' ]; then
+              echo ''
+              echo 'Legacy checkout: the production website is preserved until the React frontend is committed.'
+            fi
+          } >> "$GITHUB_STEP_SUMMARY"
