@@ -1,0 +1,191 @@
+name: Verify release
+
+# All callers consume these exact tested artifacts; this workflow has no publish credentials.
+on:
+  workflow_call:
+    outputs:
+      package_version:
+        description: Evaluated NuGet package version
+        value: ${{ jobs.build.outputs.package_version }}
+      web_version:
+        description: Evaluated playground version
+        value: ${{ jobs.build.outputs.web_version }}
+      package_artifact:
+        description: Name of the tested NuGet artifact
+        value: ${{ jobs.build.outputs.package_artifact }}
+      web_artifact:
+        description: Name of the tested static site artifact
+        value: ${{ jobs.build.outputs.web_artifact }}
+  pull_request:
+    branches: [master]
+  push:
+    branches-ignore: [master]
+
+permissions:
+  contents: read
+
+# A separate prefix prevents a reusable invocation from cancelling its release caller.
+concurrency:
+  group: verify-release-${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' || (github.event_name == 'push' && github.ref != 'refs/heads/master') }}
+
+jobs:
+  build:
+    name: Test and build release artifacts
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    permissions:
+      contents: read
+    env:
+      PLAYGROUND_PUBLIC_BUILD: '1'
+      DOTNET_NOLOGO: 'true'
+      DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 'true'
+    outputs:
+      package_version: ${{ steps.release.outputs.package_version }}
+      web_version: ${{ steps.release.outputs.web_version }}
+      package_artifact: ${{ steps.release.outputs.package_artifact }}
+      web_artifact: ${{ steps.release.outputs.web_artifact }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Detect playground frontend
+        id: frontend
+        shell: bash
+        run: |
+          if [[ -f samples/Playground/Frontend/package.json ]]; then
+            if [[ ! -f samples/Playground/Frontend/package-lock.json ]]; then
+              echo '::error::The React frontend requires a committed package-lock.json.'
+              exit 1
+            fi
+            echo 'enabled=true' >> "$GITHUB_OUTPUT"
+            echo 'mode=React UI' >> "$GITHUB_OUTPUT"
+          else
+            echo 'enabled=false' >> "$GITHUB_OUTPUT"
+            echo 'mode=Legacy Blazor UI' >> "$GITHUB_OUTPUT"
+            echo 'Legacy Blazor UI: no Frontend/package.json in this checkout; Node.js steps are skipped.' >> "$GITHUB_STEP_SUMMARY"
+          fi
+
+      - name: Set up .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: |
+            8.0.x
+            10.0.x
+
+      - name: Read and validate release versions
+        id: release
+        shell: bash
+        env:
+          RUN_ID: ${{ github.run_id }}
+          RUN_ATTEMPT: ${{ github.run_attempt }}
+        run: |
+          package_version=$(dotnet msbuild src/Janglim/Janglim.csproj -nologo -getProperty:PackageVersion)
+          web_version=$(dotnet msbuild samples/Playground/Janglim.Playground.csproj -nologo -getProperty:Version)
+          version_pattern='^(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)(-[0-9A-Za-z-]+(\.[0-9A-Za-z-]+)*)?(\+[0-9A-Za-z-]+(\.[0-9A-Za-z-]+)*)?$'
+          if [[ ! "$package_version" =~ $version_pattern || "$package_version" == *+* || ! "$web_version" =~ $version_pattern ]]; then
+            echo '::error::The evaluated package and web versions must be safe semantic versions.'
+            exit 1
+          fi
+          {
+            echo "package_version=$package_version"
+            echo "web_version=$web_version"
+            echo "package_artifact=janglim-package-${RUN_ID}-${RUN_ATTEMPT}"
+            echo "web_artifact=playground-site-${RUN_ID}-${RUN_ATTEMPT}"
+          } >> "$GITHUB_OUTPUT"
+
+      - name: Test release infrastructure helpers
+        run: python3 -m unittest discover -s .github/scripts -p 'test_*.py'
+
+      - name: Set up Node.js
+        if: steps.frontend.outputs.enabled == 'true'
+        uses: actions/setup-node@v4
+        with:
+          node-version: '>=22.18.0 <23'
+          cache: npm
+          cache-dependency-path: samples/Playground/Frontend/package-lock.json
+
+      - name: Install UI dependencies
+        if: steps.frontend.outputs.enabled == 'true'
+        working-directory: samples/Playground/Frontend
+        run: npm ci --no-audit --no-fund
+
+      - name: Test parser engine
+        run: >-
+          dotnet test Tests/Parse.FrontEnd.Parsers.Tests/Parse.FrontEnd.Parsers.Tests.csproj
+          -c Release --logger trx --results-directory TestResults
+
+      - name: Test interface languages
+        if: steps.frontend.outputs.enabled == 'true'
+        working-directory: samples/Playground/Frontend
+        run: npm test
+
+      - name: Build public playground
+        run: dotnet publish samples/Playground/Janglim.Playground.csproj -c Release -o publish
+
+      - name: Pack engine
+        run: dotnet pack src/Janglim/Janglim.csproj -c Release -o artifacts
+
+      - name: Hash NuGet packages
+        shell: bash
+        working-directory: artifacts
+        run: |
+          shopt -s nullglob
+          packages=(*.nupkg)
+          if (( ${#packages[@]} == 0 )); then
+            echo '::error::The package build produced no .nupkg files.'
+            exit 1
+          fi
+          sha256sum -- "${packages[@]}" > SHA256SUMS.txt
+          sha256sum --check SHA256SUMS.txt
+
+      - name: Upload tested NuGet packages
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ steps.release.outputs.package_artifact }}
+          path: |
+            artifacts/*.nupkg
+            artifacts/SHA256SUMS.txt
+          if-no-files-found: error
+          retention-days: 14
+
+      - name: Upload tested playground
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ steps.release.outputs.web_artifact }}
+          path: publish/wwwroot/
+          if-no-files-found: error
+          retention-days: 14
+
+      - name: Upload parser test results
+        if: ${{ always() && hashFiles('TestResults/**/*.trx') != '' }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: parser-test-results-${{ github.run_id }}-${{ github.run_attempt }}
+          path: TestResults/**/*.trx
+          if-no-files-found: error
+          retention-days: 14
+
+      - name: Build summary
+        if: always()
+        shell: bash
+        env:
+          BUILD_RESULT: ${{ job.status }}
+          FRONTEND_MODE: ${{ steps.frontend.outputs.mode }}
+          PACKAGE_VERSION: ${{ steps.release.outputs.package_version }}
+          WEB_VERSION: ${{ steps.release.outputs.web_version }}
+          PACKAGE_ARTIFACT: ${{ steps.release.outputs.package_artifact }}
+          WEB_ARTIFACT: ${{ steps.release.outputs.web_artifact }}
+        run: |
+          {
+            echo '### Release verification'
+            echo
+            echo "- Result: $BUILD_RESULT"
+            echo "- Frontend: ${FRONTEND_MODE:-not detected}"
+            echo "- NuGet package: ${PACKAGE_VERSION:-not evaluated}"
+            echo "- Playground: ${WEB_VERSION:-not evaluated}"
+            echo "- Package artifact: ${PACKAGE_ARTIFACT:-not created}"
+            echo "- Site artifact: ${WEB_ARTIFACT:-not created}"
+            echo '- No NuGet publication or Azure deployment occurs in this workflow.'
+          } >> "$GITHUB_STEP_SUMMARY"
