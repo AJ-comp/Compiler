@@ -27,6 +27,18 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
+      - name: Require the current master commit
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_REPOSITORY: ${{ github.repository }}
+          DEPLOY_SHA: ${{ github.sha }}
+        run: |
+          latest_sha=$(gh api "repos/${RELEASE_REPOSITORY}/git/ref/heads/master" --jq '.object.sha')
+          if [ "$DEPLOY_SHA" != "$latest_sha" ]; then
+            echo '::error::This commit is no longer the master head. Run the release workflow on current master instead.'
+            exit 1
+          fi
+
       - name: Download the verified playground
         uses: actions/download-artifact@v4
         with:

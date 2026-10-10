@@ -41,7 +41,7 @@ gh workflow run publish-nuget.yml --ref master -f dry_run=true
 gh workflow run publish-nuget.yml --ref master -f dry_run=false
 ```
 
-NuGet 게시 후 Azure 배포가 실패하면 원인을 수정한 뒤 동일한 실행을 **Re-run all jobs**로 재시도할 수 있습니다. 이미 게시한 버전은 건너뛰며 웹 배포를 다시 진행합니다. 원격 NuGet 버전 목록에 반영이 지연되어도 `--skip-duplicate`가 중복 게시를 추가로 방지합니다. 이미 게시된 패키지 자체를 수정해야 한다면 새 엔진 버전으로 출시합니다.
+NuGet 게시 후 Azure 배포가 실패하면 해당 커밋이 여전히 최신 `master`인 경우 **Re-run all jobs**로 재시도할 수 있습니다. 이미 게시한 버전은 건너뛰며 웹 배포를 다시 진행합니다. `master`가 더 진행되었다면 최신 커밋으로 수동 실행하세요. 배포 직전에 현재 `master` 커밋을 확인하므로 예전 실행을 재시도해 최신 웹을 덮어쓰는 것을 막습니다. 원격 NuGet 버전 목록에 반영이 지연되어도 `--skip-duplicate`가 중복 게시를 추가로 방지합니다. 이미 게시된 패키지 자체를 수정해야 한다면 새 엔진 버전으로 출시합니다.
 
 ## 인증과 최초 적용
 
