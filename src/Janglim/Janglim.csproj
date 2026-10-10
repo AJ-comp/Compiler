@@ -6,10 +6,10 @@
     <IsPackable>true</IsPackable>
     <PackageId>Janglim</PackageId>
     <Title>Janglim</Title>
-    <Description>Janglim is a general-purpose, embeddable LR/LALR parser-generator engine for .NET. Define a grammar in C#, then parse with incremental reparsing, error recovery, and grammar introspection (parse tables, FIRST/FOLLOW, conflict reports). Early preview — the public API is still unstable.</Description>
-    <PackageTags>parser;parsing;parser-generator;lr;lalr;grammar;compiler;lexer;ebnf;incremental;janglim</PackageTags>
+    <Description>Janglim is an embeddable LALR(1) parser-generator engine for .NET. Define grammars in C# or EBNF text, tokenize and parse input, and inspect parse tables, FIRST/FOLLOW sets, parse traces, syntax trees, and conflicts. Includes incremental reparsing and opt-in, pluggable error recovery.</Description>
+    <PackageTags>parser;parser-generator;parsing;lalr;lalr1;lr;dotnet;csharp;grammar;ebnf;lexer;parse-tree;ast;first-follow;introspection;incremental;error-recovery;compiler;dsl;language-tooling;janglim</PackageTags>
     <PackageReadmeFile>README.md</PackageReadmeFile>
-    <PackageReleaseNotes>Render parse-tree and AST debug dumps (ParseTreeSymbol.ToTreeString / AstSymbol.ToTreeString) by threading a single shared StringBuilder through the recursion instead of accumulating per-node substrings, cutting the render from O(n^2) to O(n) on deeply nested trees; the emitted text is byte-for-byte unchanged. Parsing, tokenizing, and every other engine path are unaffected.</PackageReleaseNotes>
+    <PackageReleaseNotes>Janglim 0.3.0 official engine release. Includes C# grammars and EBNF text with grouping and *, +, ? operators; parsing-table, FIRST/FOLLOW, trace, and conflict introspection; incremental reparsing; and opt-in, pluggable error recovery. Parse-tree and AST debug dumps use a shared StringBuilder for O(n) rendering with unchanged output. LALRParser is supported; SLR and CLR remain experimental, and the public API may evolve during 0.x. Playground 1.0.0 has independent versioning at https://janglim.mythosia.net; its browser UI is not a NuGet runtime dependency.</PackageReleaseNotes>
 
     <!-- Package icon (an orchid — the project emblem). Drop a PNG (<=1MB, ~128x128) at src/Janglim/icon.png
          and it is packed automatically; until then the package builds without an icon. -->

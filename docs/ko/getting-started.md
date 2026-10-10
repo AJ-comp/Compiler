@@ -31,13 +31,15 @@ a + a * a   →   "아, 이건 (a) 더하기 (a 곱하기 a) 구조구나"
 .NET 프로젝트에서:
 
 ```bash
-dotnet add package Janglim --prerelease
+dotnet add package Janglim --version 0.3.0
 ```
 
-> `--prerelease`는 아직 초기 프리뷰라 붙입니다.
+> 이 예제는 정식 패키지 `0.3.0`을 기준으로 합니다. 지원되는 파서는 `LALRParser`이며,
+> SLR과 CLR은 아직 실험적·미완성입니다. 정식 패키지여도 `0.x` 동안 공개 API는 바뀔 수 있으니
+> 업그레이드할 때 [릴리즈 노트](https://github.com/AJ-comp/Compiler/blob/master/RELEASE_NOTES.md)를 확인하세요.
 
 > 🌿 **설치가 번거로우면 잠깐 미뤄도 돼요.** 잠시 뒤에 짤 코드와 *똑같은 걸* **브라우저에서
-> 클릭만으로** 해볼 수 있는 [라이브 플레이그라운드](https://polite-island-0b2142200.7.azurestaticapps.net)가
+> 클릭만으로** 해볼 수 있는 [라이브 플레이그라운드](https://janglim.mythosia.net)가
 > 있거든요. 거기선 파싱 테이블·트리까지 그림으로 보여줘요. 일단은 눈으로 먼저 보고 와도 좋아요.
 
 ## 첫 파싱 (5줄)

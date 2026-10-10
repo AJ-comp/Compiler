@@ -31,13 +31,15 @@ a + a * a   →   "ああ、これは (a) 足す (a 掛ける a) という構造
 .NET プロジェクトで:
 
 ```bash
-dotnet add package Janglim --prerelease
+dotnet add package Janglim --version 0.3.0
 ```
 
-> `--prerelease` は、まだ初期プレビューなので付けています。
+> この例は正式パッケージ `0.3.0` を使用します。サポート対象は `LALRParser` で、
+> SLR と CLR はまだ実験的・未完成です。正式パッケージでも `0.x` の間は公開 API が変わる可能性があるため、
+> 更新時には [リリースノート](https://github.com/AJ-comp/Compiler/blob/master/RELEASE_NOTES.md) を確認してください。
 
 > 🌿 **インストールが面倒なら、少し後回しにしても大丈夫です。** すぐ後で書くコードと *まったく同じもの* を
-> **ブラウザでクリックするだけ** で試せる [ライブプレイグラウンド](https://polite-island-0b2142200.7.azurestaticapps.net)が
+> **ブラウザでクリックするだけ** で試せる [ライブプレイグラウンド](https://janglim.mythosia.net)が
 > あるんです。そこでは構文解析表・構文木まで図で見せてくれます。まずは目で先に見てきても良いですよ。
 
 ## 最初の構文解析（5行）

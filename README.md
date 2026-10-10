@@ -1,28 +1,37 @@
 # Janglim
 
-**A general-purpose, embeddable LR/LALR parser-generator engine for .NET.**
+**A general-purpose, embeddable LALR parser-generator engine for .NET.**
 
-[![NuGet (preview)](https://img.shields.io/nuget/vpre/Janglim.svg?label=NuGet)](https://www.nuget.org/packages/Janglim)
+[![NuGet](https://img.shields.io/nuget/v/Janglim.svg?label=NuGet)](https://www.nuget.org/packages/Janglim)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 ![.NET Standard 2.1](https://img.shields.io/badge/.NET-netstandard2.1-512BD4)
-[![Live playground](https://img.shields.io/badge/playground-live-2ea44f)](https://polite-island-0b2142200.7.azurestaticapps.net)
+[![Playground 1.0.0](https://img.shields.io/badge/playground-1.0.0-2ea44f)](https://janglim.mythosia.net)
 
 Define a grammar in plain C# — or in EBNF text — with no external `.g` files and no build-time
 codegen step, and get a full LR pipeline you can look inside: parse tables, FIRST/FOLLOW,
 step-by-step parse traces, conflict reports, automatic grammar normalization, optional LGLR
 backtracking, incremental reparsing, and pluggable error recovery.
 
+> **Engine `0.3.0` · web Playground `1.0.0`.**
+> These products are versioned independently. `LALRParser` is the supported engine path;
+> SLR and CLR remain experimental and incomplete. The engine's public API may evolve across `0.x`.
+
+Install the engine:
+
 ```bash
-dotnet add package Janglim --prerelease
+dotnet add package Janglim --version 0.3.0
 ```
 
-> **Early preview (`0.x`).** The public API is still unstable and will change across `0.x`.
+See the [release notes](RELEASE_NOTES.md) for the release scope and
+[changelog](CHANGELOG.md) for version history. Maintainers can follow the
+[GitHub Actions release guide](.github/RELEASING.md) to publish the engine and deploy the Playground.
 
 ## Quick start
 
 One copy-paste-runnable block — an expression grammar in EBNF text, lexed and parsed:
 
 ```csharp
+using System;
 using Janglim.FrontEnd.Grammars.Ebnf;
 using Janglim.FrontEnd.Parsers.LR;
 using Janglim.FrontEnd.Tokenize;
@@ -32,6 +41,9 @@ var read = EbnfGrammarReader.Read(@"
     Term   : Term '*' Factor | Factor ;
     Factor : '(' Expr ')' | id ;
     id     := ""[a-zA-Z]+"" ;");
+
+if (!read.Success)
+    throw new InvalidOperationException(string.Join(Environment.NewLine, read.Errors));
 
 var grammar = read.Grammar;
 var lexer = new Lexer();
@@ -49,10 +61,24 @@ with semantic actions attached. That form is the heart of the engine:
 
 ## Try it online
 
-**🌿 [Live playground →](https://polite-island-0b2142200.7.azurestaticapps.net)** — define a grammar
-in EBNF, give it input, and watch the LR parser work: the ACTION/GOTO table, the parsing stack drawn
-live at each step, the parse tree building up shift by shift, and a conflict panel. Runs entirely in
-your browser (Blazor WebAssembly, source in [`samples/Playground`](samples/Playground)).
+**🌿 [Live playground →](https://janglim.mythosia.net)** — define an EBNF grammar,
+give it input, and watch the LALR parser work: the ACTION/GOTO table, the parsing stack at each step,
+the syntax tree building up shift by shift, and conflict reports.
+
+**Playground 1.0.0** brings a redesigned React interface with shadcn components,
+an interactive tree, execution playback, table filtering, light/dark themes, and an expandable
+results workspace. Select a tree node to highlight its matching grammar symbols and exact input
+range; repeated tokens are distinguished by their source positions. Editing the source marks the
+previous result as out of date until the next run.
+
+The interface supports **14 languages**: English, Korean, Japanese, Russian, Simplified Chinese,
+Traditional Chinese (Taiwan), Ukrainian, Vietnamese, German, French, Thai, Spanish, Portuguese,
+and Italian. It follows the browser language by default and remembers an explicit choice.
+Grammar symbols, parser actions, and engine diagnostics keep their original identifiers and text.
+
+Parsing runs entirely in your browser through **Blazor WebAssembly**, with the React interface in
+[`samples/Playground`](samples/Playground). The web release number is separate from the embedded
+engine's `0.3.0` version.
 
 **📖 [Read the manual →](https://aj-comp.github.io/Compiler/)** — a from-scratch guide to LR/LALR
 parsing, built around this engine.
@@ -201,8 +227,8 @@ if (result.Success)
 }
 ```
 
-`LALRParser` is the supported parser today. (SLR and CLR table builders exist but are incomplete —
-see [Known limitations](#status--known-limitations).)
+`LALRParser` is the supported parser for the `0.3.0` release. SLR and CLR variants are experimental
+and incomplete — see [Known limitations](#status--known-limitations).
 
 ---
 
@@ -357,6 +383,9 @@ var parser = new LALRParser(grammar)
 On a conflict the parser tries one branch and backtracks to the alternative if it fails. This is the
 mechanism the AJ language uses.
 
+The attached `IErrorHandlable` must implement the retry/recovery behavior.
+`UseBackTrackingOnConflict()` records conflict alternatives; the switch alone does not retry them.
+
 ---
 
 ## Incremental reparse & error recovery
@@ -393,29 +422,39 @@ src/
   Compile/    the AJ compiler driver
   Cli/        command-line tools (ajbuild, ajutil, …)
   Janglim/    NuGet packaging project (bundles the engine assemblies)
-samples/      the Blazor WebAssembly playground
+samples/      the React + Blazor WebAssembly playground
 Tests/        xUnit suite for the engine  (Parse.FrontEnd.Parsers.Tests)
 legacy/       deprecated IDE / WPF projects, kept for history
 ```
 
 ## Status & known limitations
 
-This is an honest `0.x` preview. What works well today:
+The **engine `0.3.0`** release supports the LALR path. Its `0.x` API policy remains explicit:
+public API changes may occur in later `0.x` versions and should be checked in the release notes.
+The **web Playground `1.0.0`** is versioned separately; it does not imply an engine `1.0` API contract.
+
+Supported engine features:
 
 - **LALR** table construction, parsing, conflict detection, FIRST/FOLLOW, normalization, EBNF
   operators, semantic actions, incremental reparse, error recovery, LGLR backtracking.
 
-Rough edges to be aware of:
+Known limitations and experimental scope:
 
-- **SLR and CLR are incomplete** — `SLRParser` builds reduce-deficient tables and `CLRParser` is not
-  implemented. **Use `LALRParser`.**
+- **SLR and CLR are experimental and incomplete** — `SLRParser` builds reduce-deficient tables,
+  and `CLRParser` has unimplemented behavior. **Use `LALRParser` for supported parsing.**
 - **The end-of-input marker prints a debug placeholder** in the textual dumps. Its display label is
   still being decided (`$`, the usual choice, collides with grammars that use `$` as a real token).
   The underlying data is correct — and terminal labels and the parse-table renderer were just made
   null-safe, so missing labels no longer crash or blank out the dumps.
-- **The public API is unstable** and leaks some implementation detail (e.g. `System.Data.DataTable`
-  in introspection results, and process-global state in the grammar builder). These are being cleaned
-  up over `0.x`.
+- **Grammar construction must be sequential.** The builder uses process-global static state;
+  constructing multiple grammars concurrently can interfere across instances.
+- **The `0.x` public API may evolve.** Introspection still exposes `System.Data.DataTable`, and the
+  grammar builder still exposes implementation details. API cleanup remains on the roadmap.
+- **Recovery is pluggable.** The default error handler reports positioned syntax errors; token
+  recovery and LGLR retries require an appropriate custom `IErrorHandlable`.
+
+See [RELEASE_NOTES.md](RELEASE_NOTES.md) for the official release scope and
+[CHANGELOG.md](CHANGELOG.md) for the engine and Playground histories.
 
 ## Roadmap
 

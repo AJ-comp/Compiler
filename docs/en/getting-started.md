@@ -27,12 +27,14 @@ First, install the package.\
 In a .NET project:
 
 ```bash
-dotnet add package Janglim --prerelease
+dotnet add package Janglim --version 0.3.0
 ```
 
-> We add `--prerelease` because it's still an early preview.
+> This example uses the non-prerelease package `0.3.0`. `LALRParser` is the supported parser;
+> SLR and CLR remain experimental and incomplete. The public API may still change during `0.x`,
+> so check the [release notes](https://github.com/AJ-comp/Compiler/blob/master/RELEASE_NOTES.md) when upgrading.
 
-> 🌿 **If installation feels like a hassle, you can put it off for a moment.** The *exact same thing* as the code you'll write in a bit can be done **with just clicks in your browser** — there's a [live playground](https://polite-island-0b2142200.7.azurestaticapps.net) for that. There it even shows you the parse table and tree as pictures. For now, it's fine to go take a look with your own eyes first.
+> 🌿 **If installation feels like a hassle, you can put it off for a moment.** The *exact same thing* as the code you'll write in a bit can be done **with just clicks in your browser** — there's a [live playground](https://janglim.mythosia.net) for that. There it even shows you the parse table and tree as pictures. For now, it's fine to go take a look with your own eyes first.
 
 ## Your first parse (5 lines)
 

@@ -261,3 +261,4 @@ __pycache__/
 *.pyc
 # DocFX build output
 /_site/
+/samples/Playground/wwwroot/ui/

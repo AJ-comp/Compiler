@@ -219,7 +219,7 @@ In the playground:
    `+`/`)`/`$` (that is, FOLLOW(Term)) — that's exactly where FOLLOW said "group up here."
 3. Going one cell at a time with **Step through**, you can watch the behavior split depending on whether the token after `a` is `*` or `+`.
 
-👉 **[Live playground](https://polite-island-0b2142200.7.azurestaticapps.net)**
+👉 **[Live playground](https://janglim.mythosia.net)**
 
 > (A panel that shows the FIRST/FOLLOW sets *directly* in a table is planned to be added.)
 

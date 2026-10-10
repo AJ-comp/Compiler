@@ -17,7 +17,7 @@ _disableBreadcrumb: true
     </p>
     <div class="hero-actions">
       <a href="ko/index.html" class="btn-primary-hero">Get Started</a>
-      <a href="https://polite-island-0b2142200.7.azurestaticapps.net" class="btn-secondary-hero" target="_blank">Live Playground ↗</a>
+      <a href="https://janglim.mythosia.net" class="btn-secondary-hero" target="_blank">Live Playground ↗</a>
       <a href="https://github.com/AJ-comp/Compiler" class="btn-ghost-hero" target="_blank">GitHub ↗</a>
     </div>
   </div>
@@ -39,7 +39,7 @@ _disableBreadcrumb: true
       <div class="feature-icon feature-icon-purple">👣</div>
       <h3>Step-through trace</h3>
       <p>Walk every shift / reduce / goto with the parsing stack drawn live, and watch the parse tree build up.</p>
-      <a href="https://polite-island-0b2142200.7.azurestaticapps.net" class="feature-link" target="_blank">Open the playground →</a>
+      <a href="https://janglim.mythosia.net" class="feature-link" target="_blank">Open the playground →</a>
     </div>
 
     <div class="feature-card">

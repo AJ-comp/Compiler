@@ -2,9 +2,17 @@
 
   <PropertyGroup>
     <TargetFramework>net10.0</TargetFramework>
+    <Version>1.0.0</Version>
+    <Product>Janglim Playground</Product>
+    <Title>Janglim Playground</Title>
+    <Authors>AJ-comp</Authors>
+    <Company>AJ-comp</Company>
+    <Description>Interactive browser playground for Janglim's LALR parser engine, with EBNF editing, parsing tables, execution traces, syntax-tree inspection, and a multilingual UI.</Description>
+    <IsPackable>false</IsPackable>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <OverrideHtmlAssetPlaceholders>true</OverrideHtmlAssetPlaceholders>
+    <DefaultItemExcludes>$(DefaultItemExcludes);Frontend\node_modules\**;Frontend\dist\**</DefaultItemExcludes>
   </PropertyGroup>
 
   <ItemGroup>
@@ -17,5 +25,31 @@
     <ProjectReference Include="..\..\src\FrontEnd\Parse.FrontEnd.Parsers\Parse.FrontEnd.Parsers.csproj" />
     <ProjectReference Include="..\..\src\FrontEnd\Parse.FrontEnd.Grammars.Ebnf\Parse.FrontEnd.Grammars.Ebnf.csproj" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="Frontend\**" />
+    <None Remove="Frontend\node_modules\**;Frontend\dist\**" />
+    <PlaygroundFrontendSource Include="Frontend\src\**\*;Frontend\scripts\**\*;Frontend\.licensed\**\*.tsx;Frontend\components.json;Frontend\vite.config.ts;Frontend\tsconfig*.json;Frontend\package.json;Frontend\package-lock.json" />
+  </ItemGroup>
+
+  <Target Name="RestorePlaygroundFrontend"
+          Inputs="Frontend\package.json;Frontend\package-lock.json"
+          Outputs="Frontend\node_modules\.package-lock.json"
+          Condition="'$(DesignTimeBuild)' != 'true' and Exists('Frontend/package-lock.json')">
+    <Exec Command="npm ci --no-audit --no-fund" WorkingDirectory="Frontend" />
+  </Target>
+
+  <Target Name="BuildPlaygroundFrontend"
+          BeforeTargets="PrepareForBuild"
+          DependsOnTargets="RestorePlaygroundFrontend"
+          Inputs="@(PlaygroundFrontendSource)"
+          Outputs="wwwroot\ui\playground.js;wwwroot\ui\style.css;wwwroot\ui\locale.js"
+          Condition="'$(DesignTimeBuild)' != 'true' and Exists('Frontend/package.json')">
+    <Exec Command="npm run build" WorkingDirectory="Frontend" />
+    <ItemGroup>
+      <Content Remove="wwwroot\ui\**" />
+      <Content Include="wwwroot\ui\**" CopyToPublishDirectory="PreserveNewest" />
+    </ItemGroup>
+  </Target>
 
 </Project>

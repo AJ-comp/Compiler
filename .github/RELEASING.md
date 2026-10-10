@@ -5,7 +5,7 @@
 ## 평소 출시 방법
 
 1. 엔진을 새로 게시하려면 [`src/Directory.Build.props`](../src/Directory.Build.props)의 `Version`을 아직 게시하지 않은 버전으로 올립니다. 같은 버전의 NuGet 패키지는 덮어쓸 수 없습니다.
-2. Playground 버전은 [`samples/Playground/Frontend/package.json`](../samples/Playground/Frontend/package.json)의 `version`과 [`Janglim.Playground.csproj`](../samples/Playground/Janglim.Playground.csproj)의 `Version`을 함께 갱신합니다. 엔진과 웹의 버전은 독립적입니다. 현재 출시 준비 버전은 엔진 `0.3.0`, 웹 `1.0.0`입니다.
+2. Playground 버전은 [`samples/Playground/Frontend/package.json`](../samples/Playground/Frontend/package.json)의 `version`과 [`Janglim.Playground.csproj`](../samples/Playground/Janglim.Playground.csproj)의 `Version`을 함께 갱신합니다. 엔진과 웹의 버전은 독립적입니다. 이 출시의 버전은 엔진 `0.3.0`, 웹 `1.0.0`입니다.
 3. README, 변경 이력, 릴리즈 노트를 갱신하고 PR 검증을 통과시킵니다.
 4. 검토한 변경을 `master`에 반영해 push합니다. [Actions](https://github.com/AJ-comp/Compiler/actions)에서 해당 커밋의 실행 결과를 확인합니다.
 
@@ -15,7 +15,7 @@
 
 [`verify-release.yml`](workflows/verify-release.yml)이 게시 스크립트 테스트, 엔진 Release 테스트, UI 테스트, NuGet 패키징, 공개 웹 게시 빌드를 수행합니다. PR과 `master` 외 브랜치의 push는 이 검증만 실행하며, NuGet 게시나 Azure 배포에 필요한 권한·비밀을 사용하지 않습니다.
 
-현재 원격 소스처럼 React `Frontend/package.json`이 없는 기존 Playground에서는 UI 테스트를 건너뛰고 웹 배포도 하지 않아 운영 화면을 유지합니다. 엔진 테스트·패키징·웹 게시 빌드는 계속 필수이며, React 소스가 들어오면 UI 의존성 설치·테스트·버전 일치 검사와 웹 배포가 활성화됩니다. 공개 빌드는 라이선스 컴포넌트 없이 기본 로딩 표시를 사용합니다.
+React `Frontend/package.json`이 없는 기존 Playground 체크아웃에서는 UI 테스트와 웹 배포를 건너뛰어 운영 화면을 유지합니다. 엔진 테스트·패키징·웹 게시 빌드는 계속 필수입니다. React 소스가 포함된 체크아웃에서는 UI 의존성 설치·테스트·버전 일치 검사와 웹 배포도 수행합니다. 공개 빌드는 라이선스 컴포넌트 없이 기본 로딩 표시를 사용합니다.
 
 검증에 성공하면 동일한 실행에서 만든 NuGet 패키지와 웹 산출물을 사용합니다. [`deploy-playground.yml`](workflows/deploy-playground.yml)은 검증된 웹 산출물을 내려받아 Azure에 업로드하며 별도로 다시 빌드하지 않습니다. Actions 실행 화면의 작업 요약에서 게시·건너뜀·dry run 상태를, **Artifacts**에서 테스트 결과·NuGet 패키지·웹 게시 파일을 확인할 수 있습니다.
 
@@ -47,4 +47,4 @@ NuGet 게시 후 Azure 배포가 실패하면 해당 커밋이 여전히 최신 
 
 NuGet 게시에는 기존 Trusted Publishing 정책을 사용합니다. 정책은 패키지 소유자 `JJW`, 저장소 `AJ-comp/Compiler`, `publish-nuget.yml` 파일에 연결되어 있으며 `NuGet/login@v1`이 GitHub OIDC로 짧게 유효한 API 키를 얻습니다. 저장소에 장기 NuGet API 키를 새로 추가할 필요가 없습니다. Azure 배포는 기존 저장소 비밀 `AZURE_STATIC_WEB_APPS_API_TOKEN`을 사용합니다. 워크플로 파일명이나 저장소를 바꾸면 NuGet 정책도 함께 확인해야 합니다.
 
-인프라 파일을 `master`에 처음 반영하는 push도 실제 출시 절차를 실행합니다. 다만 현재 원격 소스에는 React UI가 없으므로 인프라만 먼저 반영하면 운영 웹 배포를 건너뛰고, 이미 게시된 엔진 버전도 건너뜁니다. 이후 준비한 React 소스와 새 엔진 버전을 push하면 전체 게시·배포가 실행됩니다. 먼저 PR 검증을 확인하고 게시를 의도한 소스·버전만 `master`에 반영하세요. 새 워크플로의 원격 성공 여부는 해당 Actions 실행 결과로 확인해야 합니다.
+인프라 파일을 `master`에 처음 반영하는 push도 실제 출시 절차를 실행합니다. React 소스가 없는 체크아웃이면 운영 웹 배포를 건너뛰고, 이미 게시된 엔진 버전도 건너뜁니다. React 소스와 새 엔진 버전을 포함하면 전체 게시·배포가 실행됩니다. 먼저 PR 검증을 확인하고 게시를 의도한 소스·버전만 `master`에 반영하세요. 원격 성공 여부는 해당 Actions 실행 결과로 확인합니다.
