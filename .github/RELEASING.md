@@ -5,7 +5,7 @@
 ## 평소 출시 방법
 
 1. 엔진을 새로 게시하려면 [`src/Directory.Build.props`](../src/Directory.Build.props)의 `Version`을 아직 게시하지 않은 버전으로 올립니다. 같은 버전의 NuGet 패키지는 덮어쓸 수 없습니다.
-2. Playground 버전은 [`samples/Playground/Frontend/package.json`](../samples/Playground/Frontend/package.json)의 `version`과 [`Janglim.Playground.csproj`](../samples/Playground/Janglim.Playground.csproj)의 `Version`을 함께 갱신합니다. 엔진과 웹의 버전은 독립적입니다. 이 출시의 버전은 엔진 `0.3.0`, 웹 `1.0.0`입니다.
+2. Playground 버전은 [`samples/Playground/Frontend/package.json`](../samples/Playground/Frontend/package.json)의 `version`과 [`Janglim.Playground.csproj`](../samples/Playground/Janglim.Playground.csproj)의 `Version`을 함께 갱신합니다. 엔진과 웹의 버전은 독립적입니다. 현재 버전은 엔진 `0.3.0`, 웹 `1.1.0`입니다.
 3. README, 변경 이력, 릴리즈 노트를 갱신하고 PR 검증을 통과시킵니다.
 4. 검토한 변경을 `master`에 반영해 push합니다. [Actions](https://github.com/AJ-comp/Compiler/actions)에서 해당 커밋의 실행 결과를 확인합니다.
 
@@ -13,7 +13,9 @@
 
 ## 실행 순서와 결과 확인
 
-[`verify-release.yml`](workflows/verify-release.yml)이 게시 스크립트 테스트, 엔진 Release 테스트, UI 테스트, NuGet 패키징, 공개 웹 게시 빌드를 수행합니다. PR과 `master` 외 브랜치의 push는 이 검증만 실행하며, NuGet 게시나 Azure 배포에 필요한 권한·비밀을 사용하지 않습니다.
+[`verify-release.yml`](workflows/verify-release.yml)이 기본 솔루션 [`AJPGS.sln`](../AJPGS.sln)의 Debug·Release 빌드, 게시 스크립트 테스트, 엔진 Release 테스트, UI 테스트, NuGet 패키징, 공개 웹 게시 빌드를 수행합니다. 기본 솔루션에는 엔진·패키징 프로젝트, 파서 테스트, Playground가 포함됩니다. 테스트·게시·패키징은 기존처럼 각 프로젝트를 대상으로 수행하며, 구형 IDE·AJ 컴파일러·CLI를 보관한 [`legacy/AJPGS.Legacy.sln`](../legacy/AJPGS.Legacy.sln)은 CI 빌드 대상에 포함하지 않습니다. PR과 `master` 외 브랜치의 push는 이 검증만 실행하며, NuGet 게시나 Azure 배포에 필요한 권한·비밀을 사용하지 않습니다.
+
+로컬 기본 빌드에 필요한 .NET 10 SDK·테스트 실행용 .NET 8 런타임·Node.js 버전과 공개 빌드 환경 변수 `PLAYGROUND_PUBLIC_BUILD=1`은 [개발 빌드 안내](../README.md#building-from-source)에 정리했습니다. CI에는 .NET 8·10 SDK를 모두 설치합니다. 구형 솔루션의 알려진 오류와 외부 의존성은 [보관 안내](../legacy/README.md)를 참고하세요.
 
 React `Frontend/package.json`이 없는 기존 Playground 체크아웃에서는 UI 테스트와 웹 배포를 건너뛰어 운영 화면을 유지합니다. 엔진 테스트·패키징·웹 게시 빌드는 계속 필수입니다. React 소스가 포함된 체크아웃에서는 UI 의존성 설치·테스트·버전 일치 검사와 웹 배포도 수행합니다. 공개 빌드는 라이선스 컴포넌트 없이 기본 로딩 표시를 사용합니다.
 
