@@ -113,9 +113,14 @@ with messages), but each axis stops short of a mature generator in a specific
     the suite is now fully green (116/0, 1 skip). At the time of this audit, `legacy/` and
     `src/Cli/CommandPrompt.Compiler` were still broken from the same rename
     (code-namespace/missing-type errors, unrelated to resources) — out of scope here.
-    **Cleanup update, 2026-10-11:** only the unused top-level `AJStudio` and
-    `CommandPrompt.Compiler` executables were removed; the original author's designs and source
-    remain in Git history. Remaining legacy namespace/XAML reference errors are still unresolved.
+    **Cleanup update, 2026-10-11:** the unused top-level `AJStudio` and
+    `CommandPrompt.Compiler` executables were removed, followed by the unused
+    `ApplicationLayer.Views`, `ApplicationLayer.ViewModels`, `ApplicationLayer.Models`, `ApplicationLayer.Common`,
+    `Parse.WpfControls.SyntaxEditor`, and `Parse.WpfControls`
+    libraries; the original author's designs and source
+    remain in Git history. The projects with `ApplicationLayer.Common` namespace/project-reference
+    errors and the XAML reference errors have been removed; the historical solution remains
+    outside the supported default build and CI scope.
 
 - [x] **Report grammar conflicts to the author.** ✅ **DONE 2026-07-01 (opt-in surface).**
   Detection already existed (`CheckAmbiguity()` → `AmbiguityCheckResult`) but was only reachable
