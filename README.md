@@ -475,3 +475,7 @@ Videos about this project:
 ## License
 
 MIT — see [LICENSE](LICENSE).
+
+## Release automation
+
+See [publishing and deployment instructions](.github/RELEASING.md) for the master-push release pipeline, dry runs, and retries.
