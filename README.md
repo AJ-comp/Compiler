@@ -458,19 +458,22 @@ In bash, set the same flag with `export PLAYGROUND_PUBLIC_BUILD=1`. CI builds th
 solution in both configurations, then runs the parser/UI tests and creates the release artifacts.
 CI installs both .NET 8 and 10 SDKs; local builds only need the .NET 10 SDK and .NET 8 test runtime.
 
-The 28-project [`legacy/AJPGS.Legacy.sln`](legacy/AJPGS.Legacy.sln) contains the older AJ
-compiler, backends, Builder/Util/Lint CLI projects, and remaining WPF IDE components. The unused
-top-level `AJStudio` and `CommandPrompt.Compiler` executables were removed; the original author's
-designs and code remain in Git history. Remaining project source paths are unchanged. Open or
-build this solution explicitly when examining that historical work:
+The 22-project [`legacy/AJPGS.Legacy.sln`](legacy/AJPGS.Legacy.sln) contains the older AJ
+compiler, backends, Builder/Util/Lint CLI projects, remaining IDE definitions, and WPF themes. The unused
+top-level `AJStudio` and `CommandPrompt.Compiler` executables and the `ApplicationLayer.Views`,
+`ApplicationLayer.ViewModels`, `ApplicationLayer.Models`, `ApplicationLayer.Common`, `Parse.WpfControls.SyntaxEditor`,
+and `Parse.WpfControls` libraries were removed;
+the original author's designs and code remain in Git history. Remaining
+project source paths are unchanged. Open or build this solution explicitly when examining that
+historical work:
 
 ```shell
 dotnet build legacy/AJPGS.Legacy.sln -c Release
 ```
 
-The historical solution is outside the supported build and CI scope. It still has unresolved
-source/reference errors, Windows WPF requirements, and proprietary Actipro DLL references;
-this separation does not repair those projects. See [legacy notes](legacy/README.md).
+The historical solution is outside the supported build and CI scope. Projects with the known
+namespace/reference and XAML errors have been removed; WPF builds require Windows, and the
+remaining WPF projects target `netcoreapp3.1`. See [legacy notes](legacy/README.md).
 
 ## Status & known limitations
 
