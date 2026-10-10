@@ -1,5 +1,27 @@
 // th UI messages. Source identifiers and interpolation names are preserved.
 export default {
+  File: "ไฟล์",
+  "Open file…": "เปิดไฟล์…",
+  "Save file": "บันทึกไฟล์",
+  "Grammar and input in one file": "ไวยากรณ์และข้อมูลนำเข้าในไฟล์เดียว",
+  "Saved {name}.": "บันทึก {name} แล้ว",
+  "Opened {name}.": "เปิด {name} แล้ว",
+  "Unable to save the file. Please try again.":
+    "ไม่สามารถบันทึกไฟล์ได้ โปรดลองอีกครั้ง",
+  "Unable to read this file. Please try again.":
+    "ไม่สามารถอ่านไฟล์นี้ได้ โปรดลองอีกครั้ง",
+  "This is not a valid Janglim workspace file.":
+    "ไฟล์นี้ไม่ใช่ไฟล์พื้นที่ทำงาน Janglim ที่ถูกต้อง",
+  "This file uses an unsupported workspace version.":
+    "ไม่รองรับเวอร์ชันพื้นที่ทำงานของไฟล์นี้",
+  "Choose a workspace file smaller than 2 MB.":
+    "เลือกไฟล์พื้นที่ทำงานที่มีขนาดเล็กกว่า 2 MB",
+  "Replace your current work?": "แทนที่งานปัจจุบันของคุณหรือไม่?",
+  "You have unsaved changes. Save your file before opening another workspace.":
+    "คุณมีการเปลี่ยนแปลงที่ยังไม่ได้บันทึก โปรดบันทึกไฟล์ก่อนเปิดพื้นที่ทำงานอื่น",
+  "Replace workspace": "แทนที่พื้นที่ทำงาน",
+  Cancel: "ยกเลิก",
+  "Dismiss notification": "ปิดการแจ้งเตือน",
   Language: "ภาษา",
   "Language: {language}": "ภาษา: {language}",
   "Automatic (browser)": "อัตโนมัติ (ตามเบราว์เซอร์)",

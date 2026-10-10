@@ -1,7 +1,7 @@
 {
   "name": "janglim-playground-ui",
-  "version": "1.0.0",
-  "description": "A multilingual, browser-local EBNF and LALR parser playground with interactive syntax trees, parsing tables, execution traces, and linked source highlighting.",
+  "version": "1.1.0",
+  "description": "A multilingual, browser-local EBNF and LALR parser playground with portable workspace files, interactive syntax trees, parsing tables, execution traces, and linked source highlighting.",
   "keywords": [
     "janglim",
     "parser",
@@ -13,6 +13,7 @@
     "compiler",
     "lexer",
     "playground",
+    "workspace",
     "webassembly",
     "react",
     "language-tooling"
@@ -24,7 +25,7 @@
   "type": "module",
   "scripts": {
     "build": "tsc --noEmit && node scripts/build.mjs",
-    "test": "node --test scripts/test-language.mjs",
+    "test": "node --test scripts/test-language.mjs scripts/test-workspace.mjs",
     "dev": "vite"
   },
   "dependencies": {

@@ -1,5 +1,25 @@
 // zh-CN UI messages. Source identifiers and interpolation names are preserved.
 export default {
+  File: "文件",
+  "Open file…": "打开文件…",
+  "Save file": "保存文件",
+  "Grammar and input in one file": "将语法和输入保存在同一个文件中",
+  "Saved {name}.": "已保存 {name}。",
+  "Opened {name}.": "已打开 {name}。",
+  "Unable to save the file. Please try again.": "无法保存文件。请重试。",
+  "Unable to read this file. Please try again.": "无法读取此文件。请重试。",
+  "This is not a valid Janglim workspace file.":
+    "这不是有效的 Janglim 工作区文件。",
+  "This file uses an unsupported workspace version.":
+    "此文件使用的工作区版本不受支持。",
+  "Choose a workspace file smaller than 2 MB.":
+    "请选择小于 2 MB 的工作区文件。",
+  "Replace your current work?": "替换当前工作内容？",
+  "You have unsaved changes. Save your file before opening another workspace.":
+    "您有尚未保存的更改。请先保存文件，再打开其他工作区。",
+  "Replace workspace": "替换工作区",
+  Cancel: "取消",
+  "Dismiss notification": "关闭通知",
   Language: "语言",
   "Language: {language}": "语言：{language}",
   "Automatic (browser)": "自动（跟随浏览器）",

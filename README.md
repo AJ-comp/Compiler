@@ -5,14 +5,14 @@
 [![NuGet](https://img.shields.io/nuget/v/Janglim.svg?label=NuGet)](https://www.nuget.org/packages/Janglim)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 ![.NET Standard 2.1](https://img.shields.io/badge/.NET-netstandard2.1-512BD4)
-[![Playground 1.0.0](https://img.shields.io/badge/playground-1.0.0-2ea44f)](https://janglim.mythosia.net)
+[![Playground 1.1.0](https://img.shields.io/badge/playground-1.1.0-2ea44f)](https://janglim.mythosia.net)
 
 Define a grammar in plain C# — or in EBNF text — with no external `.g` files and no build-time
 codegen step, and get a full LR pipeline you can look inside: parse tables, FIRST/FOLLOW,
 step-by-step parse traces, conflict reports, automatic grammar normalization, optional LGLR
 backtracking, incremental reparsing, and pluggable error recovery.
 
-> **Engine `0.3.0` · web Playground `1.0.0`.**
+> **Engine `0.3.0` · web Playground `1.1.0`.**
 > These products are versioned independently. `LALRParser` is the supported engine path;
 > SLR and CLR remain experimental and incomplete. The engine's public API may evolve across `0.x`.
 
@@ -70,6 +70,16 @@ an interactive tree, execution playback, table filtering, light/dark themes, and
 results workspace. Select a tree node to highlight its matching grammar symbols and exact input
 range; repeated tokens are distinguished by their source positions. Editing the source marks the
 previous result as out of date until the next run.
+
+**Playground 1.1.0** adds workspace files as the first step toward Janglim Studio:
+
+1. Save your current EBNF grammar and input string to a `.janglim.json` file.
+2. Open a saved file to restore both editors and run the existing parser again.
+3. If you have unsaved edits, confirm their replacement in the workspace before opening the file.
+
+The tagged JSON format has its own version. Invalid or unsupported files leave your current work
+intact. Files stay on your device and are read in the browser; parse results are rebuilt from the
+saved source rather than stored in the file.
 
 The interface supports **14 languages**: English, Korean, Japanese, Russian, Simplified Chinese,
 Traditional Chinese (Taiwan), Ukrainian, Vietnamese, German, French, Thai, Spanish, Portuguese,
@@ -431,7 +441,7 @@ legacy/       deprecated IDE / WPF projects, kept for history
 
 The **engine `0.3.0`** release supports the LALR path. Its `0.x` API policy remains explicit:
 public API changes may occur in later `0.x` versions and should be checked in the release notes.
-The **web Playground `1.0.0`** is versioned separately; it does not imply an engine `1.0` API contract.
+The **web Playground `1.1.0`** is versioned separately; it does not imply an engine `1.0` API contract.
 
 Supported engine features:
 

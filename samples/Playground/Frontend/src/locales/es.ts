@@ -1,4 +1,26 @@
 export default {
+  File: "Archivo",
+  "Open file…": "Abrir archivo…",
+  "Save file": "Guardar archivo",
+  "Grammar and input in one file": "Gramática y entrada en un solo archivo",
+  "Saved {name}.": "Se ha guardado {name}.",
+  "Opened {name}.": "Se ha abierto {name}.",
+  "Unable to save the file. Please try again.":
+    "No se pudo guardar el archivo. Inténtalo de nuevo.",
+  "Unable to read this file. Please try again.":
+    "No se pudo leer este archivo. Inténtalo de nuevo.",
+  "This is not a valid Janglim workspace file.":
+    "Este no es un archivo válido de espacio de trabajo de Janglim.",
+  "This file uses an unsupported workspace version.":
+    "La versión del espacio de trabajo de este archivo no es compatible.",
+  "Choose a workspace file smaller than 2 MB.":
+    "Elige un archivo de espacio de trabajo de menos de 2 MB.",
+  "Replace your current work?": "¿Reemplazar tu trabajo actual?",
+  "You have unsaved changes. Save your file before opening another workspace.":
+    "Tienes cambios sin guardar. Guarda el archivo antes de abrir otro espacio de trabajo.",
+  "Replace workspace": "Reemplazar espacio de trabajo",
+  Cancel: "Cancelar",
+  "Dismiss notification": "Cerrar notificación",
   "Language": "Idioma",
   "Language: {language}": "Idioma: {language}",
   "Automatic (browser)": "Automático (navegador)",

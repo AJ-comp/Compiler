@@ -53,6 +53,8 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "./components/ui/tabs";
 import { GrammarEditor } from "./components/grammar-editor";
 import { InputEditor } from "./components/input-editor";
 import { LanguagePicker } from "./components/language-picker";
+import { WorkspaceFiles, type FileNotice } from "./components/workspace-files";
+import type { WorkspaceSource } from "./workspace-file";
 import {
   ParseTree,
   type StackFrame,
@@ -181,6 +183,8 @@ export function Playground({ bridge }: { bridge: ParserBridge }) {
   const [expanded, setExpanded] = useState(false);
   const [copied, setCopied] = useState(false);
   const [selectedNodeId, setSelectedNodeId] = useState<string | null>(null);
+  const [fileBusy, setFileBusy] = useState(false);
+  const [fileNotice, setFileNotice] = useState<FileNotice | null>(null);
   const [dark, setDark] = useState(() => {
     try {
       return localStorage.getItem("janglim-theme") === "dark";
@@ -189,6 +193,11 @@ export function Playground({ bridge }: { bridge: ParserBridge }) {
     }
   });
   const runningRef = useRef(false);
+  const fileBusyRef = useRef(false);
+  const changeFileBusy = (busy: boolean) => {
+    fileBusyRef.current = busy;
+    setFileBusy(busy);
+  };
   const steps = session?.steps ?? [];
   const current = steps[position];
   const dirty =
@@ -213,7 +222,7 @@ export function Playground({ bridge }: { bridge: ParserBridge }) {
 
   const run = useCallback(
     async (nextGrammar = grammar, nextInput = input) => {
-      if (runningRef.current) return;
+      if (runningRef.current || fileBusyRef.current) return;
       runningRef.current = true;
       setRunning(true);
       setPlaying(false);
@@ -265,7 +274,7 @@ export function Playground({ bridge }: { bridge: ParserBridge }) {
         event.key === "Enter"
       ) {
         event.preventDefault();
-        void run();
+        if (!fileBusy) void run();
       }
       if (event.key === "Escape") {
         setExpanded(false);
@@ -274,7 +283,7 @@ export function Playground({ bridge }: { bridge: ParserBridge }) {
     };
     document.addEventListener("keydown", handler, true);
     return () => document.removeEventListener("keydown", handler, true);
-  }, [run]);
+  }, [run, fileBusy]);
   useEffect(() => {
     if (!playing || !steps.length) return;
     const timer = window.setInterval(
@@ -338,6 +347,16 @@ export function Playground({ bridge }: { bridge: ParserBridge }) {
     setView("tree");
     setZoom(1);
     void run(selected.grammar, selected.input);
+  };
+  const openWorkspace = (source: WorkspaceSource) => {
+    setGrammar(source.grammar);
+    setInput(source.input);
+    setExample("");
+    setView("tree");
+    setZoom(1);
+    setFilter("");
+    setCopied(false);
+    void run(source.grammar, source.input);
   };
 
   return (
@@ -445,6 +464,16 @@ export function Playground({ bridge }: { bridge: ParserBridge }) {
                 </p>
               </div>
               <div className="heading-actions">
+                <WorkspaceFiles
+                  source={{ grammar, input }}
+                  disabled={running}
+                  onOpen={openWorkspace}
+                  onNotice={setFileNotice}
+                  onBusyChange={changeFileBusy}
+                  onFocusSource={() =>
+                    document.getElementById("parser-input")?.focus()
+                  }
+                />
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
                     <Button variant="outline" className="examples-trigger">
@@ -462,7 +491,7 @@ export function Playground({ bridge }: { bridge: ParserBridge }) {
                       <DropdownMenuItem
                         key={item.id}
                         onSelect={() => selectExample(item)}
-                        disabled={running}
+                        disabled={running || fileBusy}
                       >
                         <div>
                           <strong>{t(item.name)}</strong>
@@ -476,7 +505,7 @@ export function Playground({ bridge }: { bridge: ParserBridge }) {
                 <Button
                   className="run-button"
                   onClick={() => void run()}
-                  disabled={running}
+                  disabled={running || fileBusy}
                 >
                   {running ? (
                     <LoaderCircle className="spin" size={16} />
@@ -488,6 +517,30 @@ export function Playground({ bridge }: { bridge: ParserBridge }) {
                 </Button>
               </div>
             </section>
+
+            {fileNotice && (
+              <div
+                className={`workspace-file-notice ${fileNotice.error ? "error" : ""}`}
+                role={fileNotice.error ? "alert" : "status"}
+              >
+                {fileNotice.error ? (
+                  <TriangleAlert size={16} />
+                ) : (
+                  <CheckCircle2 size={16} />
+                )}
+                <span>
+                  {t(fileNotice.key, { name: fileNotice.name ?? "" })}
+                </span>
+                <Button
+                  variant="ghost"
+                  size="icon-sm"
+                  aria-label={t("Dismiss notification")}
+                  onClick={() => setFileNotice(null)}
+                >
+                  <X size={15} />
+                </Button>
+              </div>
+            )}
 
             <div className="session-strip" role="status" aria-live="polite">
               <div
@@ -614,8 +667,8 @@ export function Playground({ bridge }: { bridge: ParserBridge }) {
                     </IconButton>
                     <IconButton
                       label={t("Reset default example")}
+                      disabled={running || fileBusy}
                       onClick={reset}
-                      disabled={running}
                     >
                       <RotateCcw />
                     </IconButton>
@@ -650,7 +703,9 @@ export function Playground({ bridge }: { bridge: ParserBridge }) {
                   <InputEditor
                     value={input}
                     onChange={setInput}
-                    onRun={() => void run()}
+                    onRun={() => {
+                      if (!fileBusy) void run();
+                    }}
                     highlightRange={selectedNode?.inputRange}
                     selectedSymbol={selectedNode?.symbolName}
                   />

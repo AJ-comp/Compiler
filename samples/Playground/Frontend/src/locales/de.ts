@@ -1,4 +1,26 @@
 const messages = {
+  File: "Datei",
+  "Open file…": "Datei öffnen…",
+  "Save file": "Datei speichern",
+  "Grammar and input in one file": "Grammatik und Eingabe in einer Datei",
+  "Saved {name}.": "{name} wurde gespeichert.",
+  "Opened {name}.": "{name} wurde geöffnet.",
+  "Unable to save the file. Please try again.":
+    "Die Datei konnte nicht gespeichert werden. Versuchen Sie es erneut.",
+  "Unable to read this file. Please try again.":
+    "Diese Datei konnte nicht gelesen werden. Versuchen Sie es erneut.",
+  "This is not a valid Janglim workspace file.":
+    "Dies ist keine gültige Janglim-Arbeitsbereichsdatei.",
+  "This file uses an unsupported workspace version.":
+    "Die Arbeitsbereichsversion dieser Datei wird nicht unterstützt.",
+  "Choose a workspace file smaller than 2 MB.":
+    "Wählen Sie eine Arbeitsbereichsdatei, die kleiner als 2 MB ist.",
+  "Replace your current work?": "Aktuelle Arbeit ersetzen?",
+  "You have unsaved changes. Save your file before opening another workspace.":
+    "Sie haben ungespeicherte Änderungen. Speichern Sie Ihre Datei, bevor Sie einen anderen Arbeitsbereich öffnen.",
+  "Replace workspace": "Arbeitsbereich ersetzen",
+  Cancel: "Abbrechen",
+  "Dismiss notification": "Benachrichtigung schließen",
   Language: "Sprache",
   "Language: {language}": "Sprache: {language}",
   "Automatic (browser)": "Automatisch (Browsersprache)",
