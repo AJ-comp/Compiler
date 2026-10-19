@@ -1,5 +1,6 @@
 using Janglim.FrontEnd.Parsers.Datas;
 using Janglim.FrontEnd.Parsers.Properties;
+using System.Linq;
 
 namespace Janglim.FrontEnd.Parsers.LR
 {
@@ -19,15 +20,35 @@ namespace Janglim.FrontEnd.Parsers.LR
         {
             var block = dataForRecovery.CurBlock;   // the block the parser choked on
             var token = block.Token;                // the unexpected token — carries its StartIndex/EndIndex
+            var failedUnit = block.Units.LastOrDefault();
+            TokenData predicateToken = null;
+            if (failedUnit?.PredicateException is GrammarPredicateEvaluationException predicateError)
+                predicateToken = predicateError.Context.NextToken;
+            else if (failedUnit?.PredicateException is PredictionException predictionError)
+            {
+                var tokens = dataForRecovery.ParsingResult.PredicateTokens;
+                if (tokens != null && predictionError.TokenIndex >= 0 && predictionError.TokenIndex < tokens.Count)
+                    predicateToken = tokens[predictionError.TokenIndex];
+                else if (predictionError.TokenIndex >= 0 && predictionError.TokenIndex < dataForRecovery.ParsingResult.Count)
+                    predicateToken = dataForRecovery.ParsingResult[predictionError.TokenIndex].Token;
+            }
+            // A future predicate may fail while looking ahead from an earlier conflict.
+            // Point at that source token. Synthetic recovery tokens use the original error
+            // block's source position, rather than claiming an invented token existed there.
+            if (predicateToken != null && dataForRecovery.ParsingResult.Any(item => ReferenceEquals(item.Token, predicateToken)))
+                token = predicateToken;
+            var message = string.Format(AlarmCodes.CE0001, token?.Input ?? string.Empty);
+            var reason = failedUnit?.ErrorMessage;
+            if (!string.IsNullOrEmpty(reason)) message += " " + reason;
 
             // "{0} is inappropriate token on this position." Guard the token: a null here would NRE and be
             // swallowed by the parser's outer catch, silently degrading back to the old empty-result — so
             // fall back to a token-less error that at least records the failure.
             var error = (token != null)
                 ? ParsingErrorInfo.CreateParsingError(
-                    token, nameof(AlarmCodes.CE0001), string.Format(AlarmCodes.CE0001, token.Input))
+                    token, nameof(AlarmCodes.CE0001), message)
                 : ParsingErrorInfo.CreateParsingError(
-                    nameof(AlarmCodes.CE0001), string.Format(AlarmCodes.CE0001, string.Empty));
+                    nameof(AlarmCodes.CE0001), message);
             block._errorInfos.Add(error);
 
             // record only; do NOT recover -> the parser stops at the first error, exactly as before.

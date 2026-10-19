@@ -1,0 +1,258 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="같은 문법을 ANTLR4의 LL과 장림의 LR이 읽는 순서로 비교합니다. 공통 접두사, 충돌, lookahead와 조건절 예측의 설계 이유를 그림과 단계별 예제로 설명합니다.">
+  <meta name="color-scheme" content="light dark">
+  <title>ANTLR4의 LL과 장림의 LR — 규칙을 선택하는 시점 | Janglim</title>
+  <style>
+    :root{--bg:#f6f7fb;--paper:#fff;--ink:#202439;--muted:#606981;--line:#e0e4ef;--purple:#7046d5;--purple-soft:#f1ebff;--teal:#087e79;--teal-soft:#e5f5f1;--code:#f5f6fa;--amber:#8c580a;--amber-soft:#fff4dd;--shadow:0 10px 36px #28335408;--radius:18px}
+    *{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:88px}body{margin:0;background:var(--bg);color:var(--ink);font-family:"Segoe UI","Malgun Gothic",sans-serif;font-size:16px;line-height:1.85;word-break:keep-all;overflow-wrap:anywhere}a{color:var(--purple);text-underline-offset:4px}a:hover{text-decoration-thickness:2px}button{font:inherit}button,a{-webkit-tap-highlight-color:transparent}button:focus-visible,a:focus-visible,summary:focus-visible{outline:3px solid var(--purple);outline-offset:4px}button:disabled{opacity:.42;cursor:default}button:not(:disabled){cursor:pointer}::selection{background:var(--purple-soft);color:var(--ink)}
+    .skip{position:fixed;left:16px;top:-90px;z-index:5;background:var(--paper);padding:8px 18px;border:2px solid var(--purple);border-radius:8px}.skip:focus{top:10px}.topbar{position:sticky;top:0;z-index:3;border-bottom:1px solid var(--line);background:var(--paper)}.topbar-inner{max-width:1232px;margin:auto;display:flex;align-items:center;justify-content:space-between;gap:18px;padding:14px 28px}.brand{display:flex;align-items:center;gap:10px;font-weight:750;text-decoration:none;color:var(--ink);letter-spacing:-.3px}.brand-mark{display:grid;place-items:center;width:31px;height:31px;border-radius:9px;background:var(--purple);color:white;font-family:Consolas,monospace;font-size:17px}.toplinks{display:flex;flex-wrap:wrap;gap:18px;font-size:13px}.toplinks a{color:var(--muted);text-decoration:none}.layout{max-width:1232px;display:grid;grid-template-columns:204px minmax(0,1fr);gap:42px;margin:0 auto;padding:48px 28px 70px}.sidenav{align-self:start;position:sticky;top:95px;font-size:13px;color:var(--muted)}.sidenav p{font-size:11px;font-weight:750;letter-spacing:.12em;margin:0 0 13px}.sidenav a{display:block;text-decoration:none;color:var(--muted);padding:7px 0 7px 14px;border-left:2px solid var(--line)}.sidenav a:hover{color:var(--purple);border-color:var(--purple)}.sidenav .navnote{font-size:12px;margin-top:25px;font-weight:400;letter-spacing:0;line-height:1.7}.article{min-width:0}.eyebrow{color:var(--purple);font-size:12px;font-weight:750;letter-spacing:.08em;display:flex;flex-wrap:wrap;gap:12px;align-items:center}.eyebrow .date{color:var(--muted);font-weight:400;letter-spacing:0}h1{font-size:clamp(30px,3.7vw,43px);line-height:1.35;letter-spacing:-1.4px;margin:15px 0 20px;font-weight:780}h2{font-size:25px;line-height:1.45;letter-spacing:-.7px;margin:0 0 19px}h3{font-size:18px;line-height:1.55;margin:0 0 12px}p{margin:0 0 16px}.lead{font-size:18px;color:var(--muted);line-height:1.85;max-width:780px}.hero-insight{margin:27px 0 0;padding:18px 22px;background:var(--paper);border:1px solid var(--line);border-left:4px solid var(--purple);border-radius:0 12px 12px 0;box-shadow:var(--shadow)}.hero-insight p{margin:0}.section{margin-top:52px;padding-top:36px;border-top:1px solid var(--line)}.section-number{display:block;font-size:11px;font-weight:750;letter-spacing:.12em;color:var(--muted);margin-bottom:10px}.grid-two{display:grid;grid-template-columns:1fr 1fr;gap:18px}.card{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:24px;box-shadow:var(--shadow);min-width:0}.card p:last-child{margin-bottom:0}.pill{display:inline-block;font-size:11px;line-height:1.6;font-weight:750;letter-spacing:.04em;border-radius:6px;padding:3px 9px;margin-bottom:12px;background:var(--purple-soft);color:var(--purple)}.pill.lr{background:var(--teal-soft);color:var(--teal)}.pill.draft{background:var(--amber-soft);color:var(--amber)}.quiet{color:var(--muted);font-size:14px}.small{font-size:13px}.reason{padding:17px 21px;border-radius:12px;background:var(--teal-soft);margin-top:20px}.reason p:last-child{margin-bottom:0}.note{padding:18px 22px;border-radius:12px;background:var(--amber-soft);margin:22px 0}.note p:last-child{margin-bottom:0}.emphasis{font-weight:700;color:var(--purple)}code,pre{font-family:"Cascadia Code",Consolas,"Courier New",monospace}code{font-size:.9em;word-break:normal}p code,li code,td code{background:var(--code);border:1px solid var(--line);padding:1px 5px;border-radius:5px}pre{margin:18px 0;background:var(--code);border:1px solid var(--line);padding:19px 22px;border-radius:12px;font-size:14px;line-height:1.8;overflow-x:auto;word-break:normal;overflow-wrap:normal}pre code{font-size:inherit}.nt{color:var(--purple);font-weight:700}.term{color:var(--teal)}.dot{color:var(--purple);font-weight:750}.caption{color:var(--muted);font-size:13px;margin-top:11px}.diagram{margin:24px 0 0}.diagram svg{width:100%;height:auto;display:block}.diagram figcaption{font-size:13px;color:var(--muted);margin-top:10px}.diagram-card{padding:22px 20px 14px}.svg-node{fill:var(--paper);stroke:var(--line);stroke-width:1.4}.svg-ll{fill:var(--purple-soft);stroke:var(--purple);stroke-width:1.4}.svg-lr{fill:var(--teal-soft);stroke:var(--teal);stroke-width:1.4}.svg-text{fill:var(--ink);font-family:"Segoe UI","Malgun Gothic",sans-serif;font-size:17px}.svg-small{fill:var(--muted);font-family:"Segoe UI","Malgun Gothic",sans-serif;font-size:13px}.svg-arrow{stroke:var(--muted);stroke-width:1.5;fill:none}.table-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:12px;margin:20px 0;background:var(--paper)}table{border-collapse:collapse;width:100%;font-size:14px}th,td{text-align:left;padding:13px 16px;vertical-align:top;border-bottom:1px solid var(--line)}th{background:var(--code);font-weight:700}tr:last-child td{border-bottom:0}td:first-child{font-weight:600}.list{padding-left:22px;margin:14px 0}.list li{margin:8px 0}.simulator{border:1px solid var(--line);border-radius:var(--radius);background:var(--paper);padding:25px;margin-top:25px;box-shadow:var(--shadow)}.sim-heading{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:19px;align-items:center}.sim-heading h3{margin:0}.choice-group{display:flex;gap:5px;background:var(--code);padding:4px;border-radius:10px;border:1px solid var(--line)}.input-choice{border:0;background:transparent;color:var(--muted);padding:5px 15px;border-radius:7px;font-family:Consolas,monospace;font-size:14px}.input-choice[aria-pressed="true"]{background:var(--purple);color:white;box-shadow:0 2px 6px #7046d526}.sim-lanes{display:grid;grid-template-columns:1fr 1fr;gap:17px}.lane{padding:22px;border:1px solid var(--line);border-radius:13px;background:var(--bg);min-width:0}.lane-head{display:flex;gap:9px;align-items:center;margin-bottom:16px}.lane-head strong{font-size:16px}.lane-head .pill{margin:0}.token-strip{display:flex;gap:7px;flex-wrap:wrap;margin:16px 0}.token{display:inline-flex;align-items:center;justify-content:center;min-width:39px;height:39px;padding:0 9px;border:1px solid var(--line);background:var(--paper);border-radius:8px;font:14px Consolas,monospace}.token.read{border-color:var(--purple);box-shadow:inset 0 -3px 0 var(--purple)}.token.consumed{background:var(--teal-soft);border-color:var(--teal);color:var(--teal)}.legend{display:flex;flex-wrap:wrap;gap:16px;font-size:12px;color:var(--muted);margin:15px 0}.legend span{display:flex;align-items:center;gap:6px}.legend-dot{width:9px;height:9px;border-radius:3px;background:var(--purple)}.legend-dot.consumed{background:var(--teal)}.lane-status{font-size:16px;font-weight:700;min-height:29px}.lane-detail{font-size:13px;color:var(--muted);min-height:50px;margin:8px 0 13px}.lane pre{padding:12px 14px;font-size:13px;margin:0;min-height:76px;background:var(--paper)}.metrics{display:flex;align-items:baseline;gap:7px;font-size:12px;color:var(--muted);margin-top:13px}.metrics strong{color:var(--ink);font-size:19px;font-weight:750}.controls{display:flex;align-items:center;flex-wrap:wrap;gap:9px;margin-top:20px;padding-top:18px;border-top:1px solid var(--line)}.controls button{border:1px solid var(--line);border-radius:8px;background:var(--paper);color:var(--ink);padding:7px 13px;font-size:13px;line-height:1.6}.controls .primary{background:var(--purple);border-color:var(--purple);color:white}.step-label{margin-left:auto;font-size:12px;color:var(--muted)}.progress{display:flex;gap:5px;margin-top:14px}.progress span{flex:1;height:4px;border-radius:3px;background:var(--line)}.progress span.active{background:var(--purple)}.sim-note{font-size:12px;color:var(--muted);margin:15px 0 0}.flow{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:23px 0}.flow-step{padding:17px;border:1px solid var(--line);border-radius:11px;background:var(--paper)}.flow-step .step-num{display:block;font-size:11px;color:var(--purple);font-weight:750;margin-bottom:7px}.flow-step strong{font-size:15px}.flow-step p{font-size:13px;color:var(--muted);margin:8px 0 0}details{border:1px solid var(--line);border-radius:12px;background:var(--paper);padding:18px 21px;margin:22px 0}summary{cursor:pointer;font-size:14px;font-weight:700}details[open] summary{margin-bottom:16px}.sources{padding-left:20px;font-size:14px}.sources li{margin:13px 0}.sources p{font-size:12px;color:var(--muted);margin:3px 0}.author-note{border-top:1px solid var(--line);padding-top:23px;margin-top:29px;color:var(--muted);font-size:13px}.footer{margin-top:38px;padding-top:20px;border-top:1px solid var(--line);display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-size:12px;color:var(--muted)}
+    @media(prefers-color-scheme:dark){:root{--bg:#131723;--paper:#1a2030;--ink:#e7eafa;--muted:#a3acc6;--line:#343d55;--purple:#b59bff;--purple-soft:#302546;--teal:#71d3c4;--teal-soft:#173936;--code:#181e2c;--amber:#edc27e;--amber-soft:#372c1d;--shadow:none}.brand-mark,.input-choice[aria-pressed="true"],.controls .primary{background:#7651c9;color:white}}
+    @media(max-width:1000px){.layout{grid-template-columns:1fr;max-width:930px;padding-top:35px}.sidenav{position:static;display:none}h1{font-size:35px}.topbar-inner{max-width:930px}}
+    @media(max-width:660px){body{font-size:15px}.topbar-inner{padding:12px 18px}.toplinks{gap:12px;font-size:12px}.toplinks .desktop-link{display:none}.layout{padding:28px 18px 45px;gap:0}h1{font-size:29px;letter-spacing:-1px}.lead{font-size:16px}.grid-two,.sim-lanes,.flow{grid-template-columns:1fr}.section{margin-top:38px;padding-top:27px}h2{font-size:22px}.card{padding:21px}.simulator{padding:18px}.lane{padding:18px}.lane-detail{min-height:0}.sim-heading{align-items:flex-start}.step-label{margin-left:0;width:100%;padding-top:4px}pre{padding:16px;font-size:13px}.hero-insight{padding:16px 18px}.flow-step{padding:16px}th,td{padding:11px 13px;min-width:94px}.diagram-card{padding:20px 14px 12px}}
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+    @media print{html{scroll-behavior:auto}body{background:white;color:#202439;font-size:10pt;line-height:1.6}.topbar,.sidenav,.controls,.choice-group,.progress,.skip{display:none}.layout{display:block;padding:0;max-width:none}.section{margin-top:25px;padding-top:20px}.card,.simulator,.lane{box-shadow:none;break-inside:avoid;background:white}.grid-two{gap:12px}.simulator{display:none}.table-wrap{overflow:visible}pre{white-space:pre-wrap;overflow:visible}a{color:inherit}h1{font-size:25pt}h2{font-size:17pt}.footer{display:none}.sources li{break-inside:avoid}}
+  </style>
+</head>
+<body>
+  <a class="skip" href="#main">본문으로 이동</a>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="index.html"><span class="brand-mark" aria-hidden="true">J</span> Janglim <span class="quiet small">설계 노트</span></a>
+      <nav class="toplinks" aria-label="문서 연결">
+        <a href="index.html">한국어 매뉴얼</a>
+        <a href="https://janglim.mythosia.net" class="desktop-link">플레이그라운드</a>
+        <a href="https://github.com/AJ-comp/Compiler">GitHub ↗</a>
+      </nav>
+    </div>
+  </header>
+  <div class="layout">
+    <nav class="sidenav" aria-label="이 문서의 목차">
+      <p>이 문서에서</p>
+      <a href="#timing">규칙을 고르는 시점</a>
+      <a href="#shared-prefix">같은 x, 다른 다음 토큰</a>
+      <a href="#decision">선택 지점과 충돌</a>
+      <a href="#lookahead">고정 k와 가변 예측</a>
+      <a href="#predicate">조건절이 만드는 갈림길</a>
+      <a href="#design">장림의 추가 예측 설계</a>
+      <a href="#references">근거와 재현 예제</a>
+      <p class="navnote">하나의 예제를 따라가며<br>읽는 순서와 설계 이유를<br>함께 살펴봅니다.</p>
+    </nav>
+    <main id="main" class="article">
+      <div class="eyebrow">PARSER DESIGN NOTES <span class="date">2026.10.12 · 한국어</span></div>
+      <h1>ANTLR4의 LL과 장림의 LR<br>규칙을 선택하는 시점이 다릅니다</h1>
+      <p class="lead">같은 <code>x y</code>를 읽어도, 먼저 규칙을 고르고 읽을 수 있고 공통 부분을 읽은 뒤 규칙을 구별할 수도 있습니다. 이 작은 차이가 언제 추가 lookahead가 필요한지를 바꿉니다.</p>
+      <div class="hero-insight"><p><strong>이 문서의 중심 질문</strong><br>ANTLR4가 다음 토큰까지 미리 보는 문법을, 장림은 왜 기존 LALR(1) 테이블만으로 처리할 수 있을까요?</p></div>
+
+      <section id="timing" class="section" aria-labelledby="timing-title">
+        <span class="section-number">01 · 읽는 순서</span>
+        <h2 id="timing-title">LL은 대안을 고르고, LR은 공통 부분을 읽으며 판단을 미룰 수 있습니다</h2>
+        <p>LL과 LR은 모두 토큰을 왼쪽에서 오른쪽으로 읽습니다. LL의 두 번째 L은 <strong>문장에 남은 가장 왼쪽 비단말부터 전개</strong>한다는 뜻이고, LR의 R은 <strong>가장 오른쪽 비단말부터 전개하는 유도를 역순으로 복원</strong>한다는 뜻입니다. LR의 R도 입력을 오른쪽부터 읽는다는 뜻으로 해석하면 방향이 헷갈립니다.</p>
+        <div class="grid-two">
+          <div class="card"><span class="pill">ANTLR4 · LL / ALL(*)</span><h3>어느 규칙을 실행할지 먼저 고릅니다</h3><p>규칙에 들어가서 여러 대안 중 하나를 실행해야 할 때, 앞으로 올 입력을 살펴 대안을 선택합니다. 선택한 대안의 토큰과 하위 규칙을 실제로 읽어 갑니다.</p><p class="quiet">ANTLR4는 Adaptive LL(*) 예측을 사용합니다. 선택이 쉬운 곳은 다음 토큰 하나를 확인하는 코드로 처리합니다.</p></div>
+          <div class="card"><span class="pill lr">Janglim · LALR(1)</span><h3>읽은 부분이 어느 규칙을 이루는지 판단합니다</h3><p>현재 상태와 다음 토큰으로 테이블을 조회합니다. 공통 토큰은 Shift하고, 규칙의 오른쪽이 완성되면 Reduce합니다. 아직 구별되지 않은 규칙들은 한 LR 상태의 아이템으로 함께 기록될 수 있습니다.</p><p class="quiet">왜 이렇게 하나요? 공통 부분을 읽는 동안 같은 액션을 실행할 수 있다면, 구별되는 토큰이 나올 때까지 규칙 선택을 늦출 수 있기 때문입니다.</p></div>
+        </div>
+        <figure class="diagram">
+          <div class="grid-two">
+            <div class="card diagram-card">
+              <span class="pill">LL · 공통 접두사 예제</span>
+              <svg viewBox="0 0 480 190" role="img" aria-labelledby="ll-diagram-title ll-diagram-desc">
+                <title id="ll-diagram-title">LL은 예측으로 대안을 고른 뒤 실제 입력을 읽습니다</title><desc id="ll-diagram-desc">앞으로 올 x와 y 또는 z를 미리 본다. 첫 번째 또는 두 번째 대안을 선택한다. 선택한 규칙의 입력을 실제로 읽는다.</desc>
+                <defs><marker id="arrow-ll" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8" fill="currentColor"/></marker></defs>
+                <rect x="18" y="16" width="444" height="44" rx="10" class="svg-ll"/><text x="240" y="44" text-anchor="middle" class="svg-text">x 다음의 y / z를 미리 보기</text>
+                <path d="M240 61 V78" class="svg-arrow" marker-end="url(#arrow-ll)"/>
+                <rect x="18" y="83" width="444" height="44" rx="10" class="svg-node"/><text x="240" y="111" text-anchor="middle" class="svg-text">첫 번째 / 두 번째 대안 선택</text>
+                <path d="M240 128 V145" class="svg-arrow" marker-end="url(#arrow-ll)"/>
+                <text x="240" y="171" text-anchor="middle" class="svg-text">선택한 규칙의 x, y 또는 z 읽기</text>
+              </svg>
+            </div>
+            <div class="card diagram-card">
+              <span class="pill lr">LR · 공통 접두사 예제</span>
+              <svg viewBox="0 0 480 190" role="img" aria-labelledby="lr-diagram-title lr-diagram-desc">
+                <title id="lr-diagram-title">LR은 공통 x를 먼저 Shift하고 다음 토큰으로 구별합니다</title><desc id="lr-diagram-desc">x를 Shift한다. 하나의 LR 상태가 S에서 x를 읽고 y 또는 z를 기다리는 두 아이템을 함께 기록한다. 다음 토큰을 읽고 완성된 규칙을 Reduce한다.</desc>
+                <defs><marker id="arrow-lr" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8" fill="currentColor"/></marker></defs>
+                <rect x="18" y="16" width="444" height="44" rx="10" class="svg-lr"/><text x="240" y="44" text-anchor="middle" class="svg-text">공통인 x를 먼저 Shift</text>
+                <path d="M240 61 V78" class="svg-arrow" marker-end="url(#arrow-lr)"/>
+                <rect x="18" y="83" width="444" height="44" rx="10" class="svg-node"/><text x="240" y="111" text-anchor="middle" class="svg-text">한 상태에 x · y / x · z 기록</text>
+                <path d="M240 128 V145" class="svg-arrow" marker-end="url(#arrow-lr)"/>
+                <text x="240" y="171" text-anchor="middle" class="svg-text">다음 토큰을 Shift → 규칙 Reduce</text>
+              </svg>
+            </div>
+          </div>
+          <figcaption>이 도식은 아래의 공통 접두사 문법에서 대안을 구별하는 순서를 보여줍니다.</figcaption>
+        </figure>
+      </section>
+
+      <section id="shared-prefix" class="section" aria-labelledby="prefix-title">
+        <span class="section-number">02 · 같은 문법으로 비교하기</span>
+        <h2 id="prefix-title">x y와 x z: 장림이 추가 예측 없이 처리하는 이유</h2>
+        <pre><code><span class="nt">S</span> : <span class="term">'x' 'y'</span>
+  | <span class="term">'x' 'z'</span> ;</code></pre>
+        <p>여기서 두 대안은 모두 <code>x</code>로 시작합니다. ANTLR4가 이 대안 중 하나를 고르려면 <code>x</code> 다음의 <code>y</code> 또는 <code>z</code>까지 봅니다. 장림은 우선 공통인 <code>x</code>를 Shift합니다. 그 결과 한 상태 안에 다음 두 LR 아이템이 함께 남습니다.</p>
+        <pre><code><span class="nt">S</span> → x <span class="dot">·</span> y
+<span class="nt">S</span> → x <span class="dot">·</span> z</code></pre>
+        <p><code>·</code>는 현재 읽은 위치입니다. <strong>두 아이템은 한 상태가 기억하는 문법 정보</strong>입니다. 실제 실행한 액션은 <code>x</code>에 대한 Shift 하나이고, 실제 파서 스택도 하나입니다. 다음 토큰이 <code>y</code>면 <code>y</code>를 Shift하고, <code>z</code>면 <code>z</code>를 Shift하면 됩니다.</p>
+        <div class="reason"><p><strong>왜 ε Reduce 충돌도, 추가 예측도 없을까요?</strong><br>현재 상태에서 두 대안 모두 같은 <code>x</code> Shift 액션을 요구합니다. 다음 상태에서도 <code>y</code>와 <code>z</code>는 서로 다른 테이블 칸으로 구별됩니다. 매 순간 실행할 액션을 하나로 정할 수 있으므로 기존 LALR(1) 테이블로 충분합니다.</p></div>
+
+        <div class="simulator" aria-label="LL과 LR의 공통 접두사 읽기 단계 비교">
+          <div class="sim-heading"><h3>읽는 순서를 단계별로 보기</h3><div class="choice-group" role="group" aria-label="비교할 입력"><button type="button" class="input-choice" data-tail="y" aria-pressed="true">x y</button><button type="button" class="input-choice" data-tail="z" aria-pressed="false">x z</button></div></div>
+          <div class="legend"><span><i class="legend-dot" aria-hidden="true"></i>미리 살펴본 토큰</span><span><i class="legend-dot consumed" aria-hidden="true"></i>실제로 읽은 토큰</span></div>
+          <div class="sim-lanes">
+            <div class="lane"><div class="lane-head"><span class="pill">LL</span><strong>ANTLR4의 대안 선택</strong></div><div id="ll-tokens" class="token-strip" aria-label="LL 입력 토큰"></div><div id="ll-status" class="lane-status"></div><p id="ll-detail" class="lane-detail"></p><pre><code id="ll-code"></code></pre><div class="metrics">실제로 읽은 입력 토큰 <strong id="ll-count">0</strong><span>/ 2</span></div></div>
+            <div class="lane"><div class="lane-head"><span class="pill lr">LR</span><strong>장림의 테이블 실행</strong></div><div id="lr-tokens" class="token-strip" aria-label="LR 입력 토큰"></div><div id="lr-status" class="lane-status"></div><p id="lr-detail" class="lane-detail"></p><pre><code id="lr-code"></code></pre><div class="metrics">실제로 읽은 입력 토큰 <strong id="lr-count">0</strong><span>/ 2</span></div></div>
+          </div>
+          <div class="controls"><button type="button" id="previous-step" disabled>← 이전</button><button type="button" id="next-step" class="primary">다음 단계 →</button><button type="button" id="reset-step">처음으로</button><span id="step-label" class="step-label" role="status" aria-live="polite" aria-atomic="true"></span></div>
+          <div class="progress" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span></div>
+          <p class="sim-note">이 문법의 동작을 풀어 쓴 설명용 단계입니다. 각 열의 순서를 비교합니다. 처리 시간은 별도로 측정해야 합니다. 입력 토큰 수는 x와 y 또는 z를 세며, EOF는 입력 종료 표시입니다.</p>
+          <noscript><p class="note">단계 버튼을 사용하려면 JavaScript를 켜 주세요. 같은 흐름은 아래 표에서도 읽을 수 있습니다.</p></noscript>
+        </div>
+        <div class="table-wrap"><table><caption class="caption">입력 x y의 전체 읽기 순서</caption><thead><tr><th scope="col">단계</th><th scope="col">ANTLR4의 LL</th><th scope="col">장림의 LR</th></tr></thead><tbody><tr><td>시작</td><td>실행할 대안을 고를 준비</td><td>현재 상태에서 다음 액션 조회</td></tr><tr><td>x 확인</td><td>x만으로는 대안 구별이 어려움</td><td>공통 x를 Shift</td></tr><tr><td>다음 y 확인</td><td>첫 번째 대안 선택</td><td>현재 상태에서 y Shift 선택</td></tr><tr><td>입력 읽기</td><td>선택한 규칙의 x, y를 실제로 읽음</td><td>y를 Shift</td></tr><tr><td>규칙 완성</td><td>선택한 규칙의 끝에 도달</td><td>x y를 S로 Reduce하고 Goto</td></tr><tr><td>종료 확인</td><td>start 규칙의 EOF 확인</td><td>시작 규칙의 Accept</td></tr></tbody></table></div>
+        <p class="quiet">이 비교는 위 문법을 그대로 정의한 경우의 읽는 순서입니다. ANTLR 문법을 <code>s : 'x' ('y' | 'z');</code>처럼 공통 부분 밖으로 묶으면, ANTLR도 x를 읽은 뒤 y와 z를 선택할 수 있습니다. 문법을 어떻게 작성했는지도 선택 시점에 영향을 줍니다.</p>
+      </section>
+
+      <section id="decision" class="section" aria-labelledby="decision-title">
+        <span class="section-number">03 · 용어를 구별하는 이유</span>
+        <h2 id="decision-title">선택지가 있다는 것과 테이블 액션이 충돌한다는 것은 다릅니다</h2>
+        <div class="grid-two"><div class="card"><h3>대안 선택 지점</h3><p>어느 규칙을 실행할지 고르는 곳입니다. <code>|</code>로 나뉜 대안, 선택 구간 <code>?</code>의 실행·건너뛰기, 반복 <code>*</code>·<code>+</code>의 계속·종료 판단 등이 여기에 들어갑니다.</p></div><div class="card"><h3>장림에서 말하는 LR 충돌</h3><p>같은 상태와 같은 다음 토큰으로 조회한 테이블 칸에 액션 후보가 여러 개 있는 상황입니다. 대표적으로 Shift/Reduce 충돌과 Reduce/Reduce 충돌을 구별합니다.</p></div></div>
+        <pre><code><span class="nt">S</span> : <span class="term">'x' 'a'</span>
+  | <span class="term">'y' 'b'</span> ;</code></pre>
+        <p>이 문법도 대안 선택 지점이 있습니다. 하지만 첫 토큰이 <code>x</code>면 첫 번째 대안, <code>y</code>면 두 번째 대안이므로 쉽게 고릅니다. ANTLR4는 이런 선택에 <code>LA(1)</code>을 확인하는 간단한 코드를 생성할 수 있습니다. 추가로 여러 토큰을 살펴봐야 하는 선택에는 <code>adaptivePredict</code>를 사용합니다.</p>
+        <p><strong>왜 ANTLR의 선택 지점을 장림의 모든 LR 충돌과 같은 것으로 보면 헷갈릴까요?</strong> 앞의 <code>x y | x z</code> 문법처럼, LL에서 대안을 고르려고 미리 봐야 하는 문법을 LR은 충돌 없이 처리할 수 있기 때문입니다. 두 방식은 판단을 내리는 위치가 달라서 선택 지점과 충돌 지점이 일대일로 대응하지 않습니다.</p>
+        <p class="quiet">이 예제에서 장림의 추가 예측이 줄어드는 이유는 설명할 수 있습니다. 전체 언어 문법에서 이런 경우가 차지하는 비중이나 성능 차이는 해당 문법으로 측정해야 합니다.</p>
+      </section>
+
+      <section id="lookahead" class="section" aria-labelledby="lookahead-title">
+        <span class="section-number">04 · 얼마나 미리 볼까요?</span>
+        <h2 id="lookahead-title">고정 k와 필요한 만큼 살펴보는 예측</h2>
+        <p>LALR의 LA는 Look-Ahead입니다. <strong>LALR(1)은 현재 상태와 다음 토큰 한 개로 액션을 조회</strong>합니다. 여기서 LALR은 LR 상태와 lookahead 정보를 구성하는 특정 테이블 생성 방식의 이름입니다.</p>
+        <div class="table-wrap"><table><thead><tr><th scope="col">방식</th><th scope="col">lookahead를 정하는 방법</th><th scope="col">판단 위치</th></tr></thead><tbody><tr><td>LALR(1)</td><td>최대 한 토큰을 사용하는 테이블</td><td>현재 상태 + 다음 토큰</td></tr><tr><td>LALR(k)</td><td>테이블 생성 시 고정값 k를 정함</td><td>현재 상태 + 최대 k개 토큰의 조합</td></tr><tr><td>ANTLR4의 ALL(*)</td><td>입력에서 필요한 길이만큼 예측</td><td>대안 선택 지점</td></tr><tr><td>장림의 추가 예측 설계</td><td>기존 LALR(1) 셀의 후보를 후속 입력으로 비교</td><td>조건절의 ε Reduce와 Shift가 겹치는 지점</td></tr></tbody></table></div>
+        <p><strong>왜 유한한 입력을 보는 것과 고정 k는 다를까요?</strong> 한 입력에서는 두 토큰으로 구별되고, 다른 입력에서는 천 토큰 뒤에 구별점이 있을 수 있습니다. 각 입력에서 실제로 읽는 양은 유한하며, 예측하는 길이는 그 입력의 구별점에 따라 달라집니다.</p>
+        <pre><code>후보 A가 기다리는 구별점: b b b … b c
+후보 B가 기다리는 구별점: b b b … b d</code></pre>
+        <p>이 갈림길을 구별하려면 <code>b</code>들이 끝난 뒤의 <code>c</code> 또는 <code>d</code>까지 살펴봐야 합니다. ANTLR4는 k를 고정하지 않고 필요한 길이만큼 예측하며, 최악에는 남은 입력 전체를 볼 수 있습니다. 예측이 길어지면 시간과 메모리 사용량도 함께 고려해야 합니다.</p>
+        <div class="note"><p><strong>끝까지 봐도 두 규칙이 같은 입력을 허용한다면?</strong><br>추가 토큰으로 구별할 정보가 없으므로 모호성을 처리할 정책이 필요합니다. ANTLR4는 남은 대안 중 먼저 적힌 대안을 선택합니다. 장림의 추가 예측 설계에서도 명시적인 우선순위 또는 모호성 진단 정책을 정해야 합니다.</p></div>
+      </section>
+
+      <section id="predicate" class="section" aria-labelledby="predicate-title">
+        <span class="section-number">05 · 조건절이 들어오면</span>
+        <h2 id="predicate-title">조건절의 ε Reduce가 공통 Shift와 겹치는 경우</h2>
+        <span class="pill draft">조건절 내부 변환 · 설계안</span>
+        <pre><code><span class="nt">S</span> : <span class="term">'x'</span> {Allow()}? <span class="term">'y'</span>
+  | <span class="term">'x' 'y' 'z'</span> ;</code></pre>
+        <p>조건절은 입력 토큰을 소비하지 않고 C# 검사 함수의 결과로 진행 가능 여부를 판단합니다. 논의 중인 변환 설계에서는 조건절을 검사 함수가 연결된 빈 규칙으로 표현합니다.</p>
+        <pre><code><span class="nt">S</span> → x GuardAllow y
+<span class="nt">S</span> → x y z
+<span class="nt">GuardAllow</span> → ε  [C# 검사 함수: Allow]</code></pre>
+        <p><code>x</code>를 읽고 다음 토큰 <code>y</code>를 볼 때, 첫 번째 대안은 먼저 <code>GuardAllow</code>를 ε Reduce해야 하고 두 번째 대안은 바로 <code>y</code>를 Shift할 수 있습니다. 두 액션이 같은 칸에 들어가므로 <strong>Shift/Reduce 충돌</strong>입니다.</p>
+        <div class="table-wrap"><table><thead><tr><th scope="col">같은 셀의 후보</th><th scope="col">하는 일</th><th scope="col">입력 소비</th></tr></thead><tbody><tr><td>조건절의 ε Reduce</td><td>Allow 검사 후 빈 규칙을 Reduce하고 Goto</td><td>0개</td></tr><tr><td>Shift(y)</td><td>현재 y를 읽고 다음 상태로 이동</td><td>1개</td></tr></tbody></table></div>
+        <p><strong>왜 단순히 “true면 ε Reduce, false면 Shift”로 정하지 않을까요?</strong> <code>Allow()</code>가 true인 상태에서 입력이 <code>x y z</code>라면 첫 번째 대안으로 확정하게 됩니다. 첫 번째 규칙이 <code>x y</code>에서 끝나므로 남은 <code>z</code> 때문에 실패합니다. 두 번째 규칙은 이 입력을 받을 수 있는데, 일찍 확정하면서 그 가능성을 버린 겁니다.</p>
+        <p>조건을 <strong>이 경로가 허용되는가</strong>라는 검사로 쓰려면, 조건 통과와 최종 경로 선택을 구별해야 합니다. 조건에 경로 선택의 우선권까지 부여하려면 그 의미를 충돌 해결 정책으로 명시할 수 있습니다.</p>
+        <h3>같은 예제를 ANTLR4가 처리하는 결과</h3>
+        <p>ANTLR4 문법에서는 소문자 파서 규칙 <code>s</code>와 전체 입력 종료를 확인하는 <code>start : s EOF;</code>를 사용합니다. ANTLR 4.13.2와 Java 21로 다음 결과를 재현했습니다.</p>
+        <div class="table-wrap"><table><thead><tr><th scope="col">전체 입력</th><th scope="col">Allow</th><th scope="col">선택 경로</th><th scope="col">결과</th><th scope="col">조건 호출</th></tr></thead><tbody><tr><td>x y EOF</td><td>true</td><td>첫 번째</td><td>성공</td><td>1회</td></tr><tr><td>x y EOF</td><td>false</td><td>첫 번째</td><td>조건 실패</td><td>1회</td></tr><tr><td>x y z EOF</td><td>true</td><td>두 번째</td><td>성공</td><td>0회</td></tr><tr><td>x y z EOF</td><td>false</td><td>두 번째</td><td>성공</td><td>0회</td></tr></tbody></table></div>
+        <p>이 예제의 조건은 토큰 <code>'x'</code> 뒤에 있습니다. ANTLR4의 최초 대안 예측에서는 이 조건을 건너뛰고 입력의 문법 모양으로 대안을 구별합니다. 첫 번째 대안을 선택한 뒤 실제로 <code>x</code>를 읽었을 때 <code>Allow()</code>를 실행합니다. 두 번째 대안을 선택하면 첫 번째 대안의 조건은 실행되지 않습니다. <a href="https://github.com/antlr/antlr4/blob/master/doc/predicates.md#finding-visible-predicates">ANTLR4의 조건 가시성 설명</a></p>
+        <p class="quiet">위 호출 횟수는 ANTLR4의 해당 문법에서 측정한 값입니다. 장림의 추가 예측에서 C# 조건을 평가하는 시점과 호출 규약도 설계 항목으로 함께 정합니다.</p>
+      </section>
+
+      <section id="design" class="section" aria-labelledby="design-title">
+        <span class="section-number">06 · 기존 LR 구조를 살리는 보강</span>
+        <h2 id="design-title">예측은 후보를 비교하고, 실제 파서는 한 액션을 실행합니다</h2>
+        <span class="pill draft">장림의 추가 예측 · 설계안</span>
+        <p>이번에 논의한 적용 범위는 <strong>조건절이 붙은 ε Reduce와 Shift가 충돌하는 경우</strong>입니다. 기존 LALR(1) 테이블을 바탕으로, 이 셀에서 추가 예측기가 액션 하나를 고르게 합니다.</p>
+        <div class="flow" aria-label="추가 예측의 세 단계"><div class="flow-step"><span class="step-num">01 / 충돌 확인</span><strong>조건절 ε Reduce + Shift</strong><p>어느 액션을 선택할지 기존 셀만으로 확정하기 어려운 지점을 찾습니다.</p></div><div class="flow-step"><span class="step-num">02 / 후보 예측</span><strong>필요한 만큼 lookahead</strong><p>후보의 상태와 입력 위치를 비교하고 후속 입력으로 경로를 구별합니다.</p></div><div class="flow-step"><span class="step-num">03 / 실제 실행</span><strong>선택된 액션 하나</strong><p>실제 파서 스택과 파스 트리는 선택한 경로 하나로 진행합니다.</p></div></div>
+        <p><strong>왜 예측기와 실제 실행을 구분하나요?</strong> 후보를 비교하려면 예측 내부에서 여러 가능성을 추적해야 합니다. 이 단계에서 실제 트리나 사용자 액션까지 실행하면, 나중에 버릴 후보가 결과에 영향을 줄 수 있습니다. 예측은 상태와 입력을 바탕으로 판단하고, 실제 트리 구성과 액션 실행은 경로를 고른 뒤 수행하도록 분리합니다.</p>
+        <div class="table-wrap"><table><thead><tr><th scope="col">비교</th><th scope="col">여러 후보를 진행하는 위치</th><th scope="col">실제 파싱</th></tr></thead><tbody><tr><td>GLR의 분기 처리</td><td>파싱 중 여러 후보 스택을 유지</td><td>여러 파싱 경로를 유지하며 실패·병합을 처리</td></tr><tr><td>ANTLR4의 ALL(*)</td><td>대안을 선택하는 예측 단계</td><td>선택한 대안 하나를 실행</td></tr><tr><td>장림의 추가 예측 설계</td><td>특정 LR 충돌의 예측 단계</td><td>선택한 액션 하나를 실행</td></tr></tbody></table></div>
+        <p>이 설계에서는 실제 파싱의 단일 경로 실행을 유지합니다. 예측기 내부의 후보 비교에는 추가 계산이 필요합니다. EOF까지 여러 후보가 남으면 선택 정책을 적용하고, C# 검사 함수의 예측 중 평가 규약도 함께 정해야 합니다. 예측에서 사용할 조건은 입력 정보 등을 읽고 true 또는 false를 반환하는 순수 검사로 구성하는 방향입니다.</p>
+        <div class="reason"><p><strong>저자의 LR 구조를 보강하는 이유</strong><br>공통 접두사를 한 상태로 처리하는 기존 LR 구조를 유지하면, 충돌 없이 처리되는 문법은 기존 테이블로 진행할 수 있습니다. 추가 판단이 필요한 조건절 충돌에 예측을 붙이는 설계는 이 기반을 활용하면서 조건절이 앞당긴 선택 문제를 해결하려는 것입니다.</p></div>
+      </section>
+
+      <section id="references" class="section" aria-labelledby="references-title">
+        <span class="section-number">07 · 근거와 재현</span>
+        <h2 id="references-title">공식 자료와 실행 가능한 ANTLR 예제</h2>
+        <details><summary>조건절 예제를 재현하는 ANTLR4 문법 펼치기</summary><p class="quiet">Choice.g4로 저장해 Java 파서를 생성합니다. 각 입력마다 새 파서의 allow 값을 지정하고 start()를 호출한 뒤 문법 오류 수와 predicateCalls를 확인합니다. 문법 오류 수가 0이면 위 표의 성공에 해당합니다.</p><pre><code>grammar Choice;
+
+@parser::members {
+    public boolean allow = true;
+    public int predicateCalls = 0;
+
+    private boolean Allow() {
+        predicateCalls++;
+        return allow;
+    }
+}
+
+start : s EOF ;
+s : 'x' {Allow()}? 'y'
+  | 'x' 'y' 'z'
+  ;
+
+WS : [ \t\r\n]+ -> skip ;</code></pre><p class="quiet">실행 환경: ANTLR 4.13.2 · Java 21. predicateCalls는 호출 시점을 관찰하는 실험용 계수입니다.</p></details>
+        <ol class="sources"><li><a href="https://www.antlr.org/papers/allstar-techreport.pdf">Adaptive LL(*) Parsing: The Power of Dynamic Analysis</a><p>§1.1, §3: 가변 길이 예측, 예측 내부의 후보 비교, 선택 후 실제 파싱을 설명합니다.</p></li><li><a href="https://github.com/antlr/antlr4/blob/master/doc/predicates.md">ANTLR4 — Semantic Predicates</a><p>조건이 대안 선택에 보이는 위치와, 토큰 뒤 조건을 실제 파싱 중 검사하는 이유를 설명합니다.</p></li><li><a href="https://github.com/antlr/antlr4/blob/master/tool/src/org/antlr/v4/codegen/ParserFactory.java">ANTLR4 — ParserFactory</a> · <a href="https://github.com/antlr/antlr4/blob/master/tool/resources/org/antlr/v4/tool/templates/codegen/Java/Java.stg">Java 코드 생성 템플릿</a><p>단순 LL(1) 선택과 adaptivePredict를 사용하는 선택·반복 코드의 구분을 확인할 수 있습니다.</p></li><li><a href="https://www.gnu.org/software/bison/manual/html_node/Midrule-Action-Translation.html">Bison — Midrule Action Translation</a> · <a href="https://www.gnu.org/software/bison/manual/html_node/Midrule-Conflicts.html">Midrule Conflicts</a><p>중간 동작을 빈 규칙으로 변환하는 방법과, 일찍 결정을 내려야 하면서 충돌이 생기는 이유를 설명합니다.</p></li><li><a href="https://www.gnu.org/software/bison/manual/html_node/GLR-Parsers.html">Bison — GLR Parsers</a> · <a href="https://www.gnu.org/s/bison/manual/html_node/Glossary.html">LR(1)·LALR(1) 용어</a><p>실제 파싱 경로를 나누는 GLR과 한 토큰 lookahead의 기본 개념을 비교할 수 있습니다.</p></li></ol>
+        <div class="author-note"><p><strong>저자의 설계와 문서의 역할</strong><br>Janglim의 핵심 LR 구조는 저자가 설계하고 작성한 기반입니다. 이 문서는 기존 구조의 판단 순서를 공식 자료와 예제로 대조하고, 조건절을 보강하는 논의에서 나온 설계 이유를 기록합니다. 조건절 내부 변환과 추가 예측은 본문의 설계안 표시 아래 정리했습니다.</p></div>
+      </section>
+      <footer class="footer"><span>Janglim · 파서의 동작과 설계 이유를 함께 기록합니다.</span><a href="#main">문서 처음으로 ↑</a></footer>
+    </main>
+  </div>
+  <script>
+    (function () {
+      'use strict';
+      var tail = 'y';
+      var step = 0;
+      var stepNames = ['시작 상태', '공통 x 확인', '다음 토큰으로 구별', '실제 입력 진행', '규칙 완성', '입력 종료 확인'];
+      var previous = document.getElementById('previous-step');
+      var next = document.getElementById('next-step');
+      var choices = document.querySelectorAll('.input-choice');
+      function stages() {
+        var alternative = tail === 'y' ? '첫 번째' : '두 번째';
+        return [
+          {ll:{title:'대안 선택 준비',detail:'아직 대안을 선택하지 않았습니다. 실제 입력 위치는 x 앞입니다.',code:'s → x y | x z',count:0,peek:0},lr:{title:'테이블 조회 준비',detail:'현재 상태와 다음 토큰으로 실행할 액션을 찾습니다.',code:'S → · x y\nS → · x z',count:0,peek:0}},
+          {ll:{title:'x를 미리 살펴봅니다',detail:'두 대안 모두 x로 시작합니다. 아직 실제로 읽은 토큰은 0개입니다.',code:'후보 1: x y\n후보 2: x z',count:0,peek:1},lr:{title:'공통 x를 Shift합니다',detail:'x를 읽은 뒤 두 아이템을 한 상태에 함께 기록합니다.',code:'S → x · y\nS → x · z',count:1,peek:0}},
+          {ll:{title:alternative + ' 대안을 선택합니다',detail:'다음 ' + tail + '까지 미리 살펴 대안을 구별했습니다. 실제 입력 위치는 여전히 x 앞입니다.',code:'선택: s → x ' + tail,count:0,peek:2},lr:{title:'다음 ' + tail + '의 액션을 조회합니다',detail:'현재 상태와 다음 토큰 ' + tail + '로 Shift 액션 하나를 고릅니다.',code:'조회: [현재 상태, ' + tail + ']\n액션: Shift(' + tail + ')',count:1,peek:2}},
+          {ll:{title:'선택한 규칙의 x를 읽습니다',detail:'예측 결과에 따라 선택한 대안 하나를 실제로 실행합니다.',code:'s → x · ' + tail,count:1,peek:0},lr:{title:tail + '를 Shift합니다',detail:'두 입력 토큰을 모두 읽었습니다. 규칙의 오른쪽이 완성됩니다.',code:'S → x ' + tail + ' ·',count:2,peek:0}},
+          {ll:{title:'선택한 규칙의 ' + tail + '를 읽습니다',detail:'선택한 대안의 입력을 모두 읽어 s 규칙이 끝납니다.',code:'s → x ' + tail + ' ·',count:2,peek:0},lr:{title:'x ' + tail + '를 S로 Reduce합니다',detail:'다음 EOF에 맞는 Reduce와 Goto로 완성된 규칙을 스택에 반영합니다.',code:'Reduce: S → x ' + tail + '\nGoto(S)',count:2,peek:0}},
+          {ll:{title:'전체 입력을 확인했습니다',detail:'start 규칙의 EOF를 확인합니다. 입력 x ' + tail + '가 문법에 맞습니다.',code:'start → s EOF ·',count:2,peek:0},lr:{title:'전체 입력을 Accept합니다',detail:'시작 규칙의 Accept 액션으로 파싱을 완료합니다.',code:'Accept',count:2,peek:0}}
+        ];
+      }
+      function paintTokens(id, state) {
+        var container = document.getElementById(id);
+        container.replaceChildren();
+        ['x', tail, 'EOF'].forEach(function (value, index) {
+          var node = document.createElement('span');
+          node.className = 'token';
+          node.textContent = value;
+          var status = '남은 입력';
+          if (index < state.count) { node.classList.add('consumed'); status = '실제로 읽음'; }
+          else if (index < state.peek) { node.classList.add('read'); status = '미리 살펴봄'; }
+          if (step === 5 && index === 2) { node.classList.add('consumed'); status = '입력 종료 확인'; }
+          node.setAttribute('aria-label', value + ': ' + status);
+          container.appendChild(node);
+        });
+      }
+      function render() {
+        var current = stages()[step];
+        ['ll', 'lr'].forEach(function (name) {
+          var state = current[name];
+          document.getElementById(name + '-status').textContent = state.title;
+          document.getElementById(name + '-detail').textContent = state.detail;
+          document.getElementById(name + '-code').textContent = state.code;
+          document.getElementById(name + '-count').textContent = String(state.count);
+          paintTokens(name + '-tokens', state);
+        });
+        previous.disabled = step === 0;
+        next.disabled = step === 5;
+        document.getElementById('step-label').textContent = '단계 ' + step + ' / 5 · ' + stepNames[step];
+        document.querySelectorAll('.progress span').forEach(function (bar, index) { bar.classList.toggle('active', index <= step); });
+        choices.forEach(function (button) { button.setAttribute('aria-pressed', String(button.dataset.tail === tail)); });
+      }
+      previous.addEventListener('click', function () { if (step > 0) { step--; render(); } });
+      next.addEventListener('click', function () { if (step < 5) { step++; render(); } });
+      document.getElementById('reset-step').addEventListener('click', function () { step = 0; render(); });
+      choices.forEach(function (button) { button.addEventListener('click', function () { tail = button.dataset.tail; step = 0; render(); }); });
+      render();
+    }());
+  </script>
+</body>
+</html>

@@ -1,5 +1,17 @@
 # Janglim — TODO
 
+## 0.4.0 release checkpoint (2026-10-19)
+
+The engine now includes typed EBNF tokens, leading source trivia and line-break metadata,
+host-registered C# predicates, prediction for two-way Shift / predicate epsilon Reduce
+conflicts, and grammar checks for input-free repetition and guarded zero-token left recursion.
+The [release notes](../RELEASE_NOTES.md) describe the supported workflows and validation results.
+
+Context-dependent tokenization is the next design topic: a parser requests a token using the
+lexical rules allowed at its current grammar position. This requires a token-source interface
+and changes to prediction when candidates have different token boundaries. Complete JavaScript
+and TypeScript grammars belong to that later stage.
+
 ## Lexer: true longest-match tokenization (deferred 2026-06-30)
 
 ### Problem
@@ -64,25 +76,24 @@ dedicated, fully-tested effort rather than a rushed edit.
 
 ---
 
-## Parser-generator completeness audit (2026-07-01)
+## Parser-generator completeness audit (2026-07-01; status updated for 0.4.0)
 
 Source-grounded audit of Janglim vs mature generators (ANTLR / yacc-bison /
 tree-sitter / Roslyn), one agent per dimension, every claim cited to source.
-**Every dimension came back PARTIAL** — the core is real and working (lexer with
-positions, LALR tables, CST + MeaningUnit AST, FIRST/FOLLOW, error infrastructure
-with messages), but each axis stops short of a mature generator in a specific
-"last-mile" way.
+The original audit recorded a working core and follow-up work in each dimension.
+The scorecard below reflects the current source tree; the completed entries retain
+their implementation dates so historical findings and delivered work can be distinguished.
 
 ### Scorecard
 
 | Dimension | Have | Missing (key) |
 |---|---|---|
-| Lexer | regex tokens, keyword priority + longest-match, positions (offset/line/col), comment/whitespace split, int/hex/bin/real literals, string/char literals via raw-regex `StringLiteral`/`CharLiteral` types (0.3.0-preview.1, C# API only) | escape handling inside string/char literals, EBNF-text route to the literal types (`EbnfGrammar.cs` hardcodes `Identifier` for token rules), lexer modes/states, token-filter API |
-| Grammar spec | C# API + EBNF reader, `*`/`+`/`?` (code), priority field, left-recursion | EBNF **text** has no `*`/`+`/`?`/groups (code only); no precedence/associativity decls (`%left`/`%right`) |
-| Conflict reporting | LALR tables, conflict *detection*, priority resolution | conflicts resolved **silently** — no "your grammar is ambiguous here" warning; no fail-on-conflict |
+| Lexer | regex tokens, keyword priority, source positions, comment/whitespace split, typed EBNF tokens, leading trivia and line-break metadata | true maximal-munch for overlapping regexes (above), context-dependent tokenization, literal-value decoding and escape validation |
+| Grammar spec | C# API + EBNF text with groups and `*`/`+`/`?`, registered C# predicates, ordinary LR left recursion, progress and guarded-reentry validation | optional precedence/associativity declaration syntax; grammar structure already expresses both |
+| Conflict reporting | opt-in conflict reports and fail-on-conflict, on-demand prediction for a two-way Shift / predicate epsilon Reduce cell | automatic reporting for general conflicts and prediction beyond the supported two-action shape |
 | Tree / AST | CST + MeaningUnit AST, child iteration | no visitor/listener; some display methods throw `NotImplementedException` |
-| Semantics | MeaningUnit tagging → post-parse AST | no reduction-time actions (post-parse only); no attribute system |
-| Errors / recovery | positions + expected-token messages (CE0000/CE0004) + panic-mode infra | **opt-in, OFF by default** — throws on first error unless a handler is registered; no universal default handler |
+| Semantics | MeaningUnit tagging → post-parse AST, pure host-registered grammar predicates | reduction-time semantic actions and an attribute system |
+| Errors / recovery | default positioned error reporter, predicate/prediction diagnostics, pluggable recovery infrastructure | recovery strategies remain host-provided |
 | Output / tooling | runtime table parsing, FIRST/FOLLOW | no parser code-gen (runtime-only); no CLI diagnostics (`-v`); conflict reports in-memory only |
 
 ### P1 — high-value gaps
@@ -135,10 +146,6 @@ with messages), but each axis stops short of a mature generator in a specific
   `LR/LRParser.cs`, `LR/GrammarConflictException.cs`, test `Conformance/ConflictReportingTests.cs`.
   Possible follow-up: an *automatic* warning/opt-out-able on every build (currently opt-in only).
 
-- [ ] **Precedence / associativity declarations.** Only per-production `uint`
-  priority exists; no `%left`/`%right`/`%nonassoc`. Goal: declarative operator
-  precedence + associativity so expression grammars don't need hand-encoding.
-
 - [x] **EBNF text quantifiers & groups.** ✅ **DONE 2026-07-01.** Added `*`/`+`/`?`
   and `( … )` grouping to the EBNF text reader. Approach A (reuse the C# API machinery):
   the reader lowers each factor's quantifier via `Symbol.ZeroOrMore/OneOrMore/Optional`
@@ -150,15 +157,42 @@ with messages), but each axis stops short of a mature generator in a specific
   suite unchanged (the 10 pre-existing `Ex8_10Grammar` resource-load failures are
   unrelated). Files: `EbnfModel.cs`, `EbnfGrammarReader.cs`, `EbnfGrammar.cs`.
 
+- [x] **EBNF text token kinds.** **DONE 2026-10-11; included in 0.4.0.** Token rules now accept
+  an optional, case-sensitive `Identifier`, `StringLiteral`, `CharLiteral`, `NumberLiteral`,
+  `Comment`, or `Reject` before the double-quoted regex. Omitted kinds keep the existing
+  `Identifier` behavior. Literal rules reuse the existing raw-regex terminal types;
+  the grammar tree API is unchanged. `Comment` and `Reject` are lexical-only rules and
+  cannot enter productions. Comments are skipped; consumers check lexed terminals with
+  `EbnfGrammar.IsRejectedToken` and reject matching input before parsing. The MCP adapter
+  performs this check automatically, including unclosed-comment rejection.
+  A doubled double quote inside a regex represents one double quote, while backslashes
+  pass through unchanged. Single-quoted grammar literal syntax remains unchanged.
+  Literal-value decoding, complete C support, and validation beyond supplied regexes remain
+  separate work. A [C11 Core syntax profile and regression examples](../grammars/c/README.md)
+  now provide a bounded C baseline. See the [EBNF token syntax](../README.md#ebnf-text-token-declarations).
+
+- [x] **Source trivia and registered predicates.** **Included in 0.4.0.** Tokens retain
+  leading whitespace/comments and line-break information. C# hosts register pure callbacks
+  for `{Name()}?`, evaluated at their grammar boundary. The real parser selects one action
+  after prediction at an original two-way Shift / predicate epsilon Reduce conflict.
+  Prediction uses work/storage limits and reports failure, ambiguity, cycles, and exhausted
+  resources. Grammar preparation rejects nullable `*`/`+` bodies and zero-token recursive
+  paths that pass a condition. Ordinary LR left recursion and consuming repetitions remain
+  supported. The .NET host supplies callbacks; web and MCP inputs use the reader without a
+  callback registry.
+
 ### P2 — polish
 
+- [ ] Optional operator precedence/associativity declarations such as `%left` and `%right`.
+  Existing EBNF rule structure and recursion direction already express these choices;
+  declarations would provide a shorter authoring form.
 - [ ] Visitor / listener pattern for tree walking (today: manual `.Items` iteration).
 - [ ] Parser **code generation** (runtime-table-only today; no emitted source / table export).
 - [ ] Reduction-time semantic actions + synthesized/inherited **attribute** system (today: post-parse AST only).
-- [ ] Lexer **modes/states**, escape handling inside string/char literals, user token-filter API
+- [ ] Lexer **modes/states**, literal-value decoding and language-specific escape validation, user token-filter API
   (comment/delimiter are enum-hardwired). Raw-regex string/char literal *tokens* shipped in
-  0.3.0-preview.1 (`StringLiteral`/`CharLiteral`, C# API only — wiring the EBNF text form to
-  these types is still open).
+  0.3.0-preview.1 (`StringLiteral`/`CharLiteral`); the EBNF text route was added in the source
+  tree on 2026-10-11, as noted above.
 - [ ] CLI diagnostics (`-v` / report export, FIRST/FOLLOW dump) and fill the
   `NotImplementedException` stubs (`ParseTreeTerminal.ToTreeString/ToGrammarString`,
   CLR `CheckAmbiguity`).

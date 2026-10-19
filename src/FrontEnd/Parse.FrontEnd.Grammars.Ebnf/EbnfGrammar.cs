@@ -22,21 +22,43 @@ namespace Janglim.FrontEnd.Grammars.Ebnf
     /// </summary>
     public sealed class EbnfGrammar : Grammar
     {
+        private readonly HashSet<Terminal> rejectedTokens = new HashSet<Terminal>();
+        private readonly HashSet<NonTerminal> namedRules = new HashSet<NonTerminal>();
+
+        protected override IEnumerable<NonTerminal> NamedRulesForDiagnostics => namedRules;
+
         public override NonTerminal EbnfRoot => StartSymbol;
 
-        public EbnfGrammar(EbnfModel model)
+        /// <summary>Whether a lexical-only token explicitly marks input that must be rejected.</summary>
+        public bool IsRejectedToken(Terminal terminal) => rejectedTokens.Contains(terminal);
+
+        public EbnfGrammar(EbnfModel model) : this(model, null) { }
+
+        public EbnfGrammar(EbnfModel model, EbnfReaderOptions options)
         {
             // base() already ran: reflected fields (none here), wired AutoGenerator to this.keyManager /
             // this.RegistAutoGenerateNT, and added the EndMarker to TerminalSet.
 
             if (model.Rules.Count == 0) throw new EbnfException("the grammar has no rules");
+            var predicates = options?.SnapshotPredicates() ?? new Dictionary<string, GrammarPredicate>();
+            EbnfRepetitionValidation.Validate(model);
 
-            // 1. token rules ( Name := "regex" ) -> meaningful regex terminals, looked up by name
+            // 1. token rules -> meaningful regex terminals, looked up by name. Typed text literals
+            // use the existing Terminal behavior for raw regexes, without identifier word boundaries.
             var tokens = new Dictionary<string, Terminal>();
             foreach (var tok in model.Tokens)
             {
-                var t = new Terminal(TokenType.Identifier, tok.Pattern, tok.Name, true, true);
+                // The native lexer deduplicates equal token types and patterns. Reject shares
+                // the raw numeric-regex path; do not let a valid number silently hide a trap.
+                if ((tok.Kind == EbnfTokenKind.NumberLiteral || tok.Kind == EbnfTokenKind.Reject) &&
+                    tokens.Values.Any(existing => existing.TokenType == TokenType.Literal.Digit10 &&
+                        existing.Value == tok.Pattern &&
+                        IsRejectedToken(existing) != (tok.Kind == EbnfTokenKind.Reject)))
+                    throw new EbnfException($"token '{tok.Name}' has the same pattern as a conflicting NumberLiteral or Reject rule");
+                var t = new Terminal(ResolveTokenType(tok.Kind), tok.Pattern, tok.Name,
+                    tok.Kind != EbnfTokenKind.Comment && tok.Kind != EbnfTokenKind.Reject, true);
                 RegisterTerminal(t);
+                if (tok.Kind == EbnfTokenKind.Reject) rejectedTokens.Add(t);
                 tokens[tok.Name] = t;
             }
 
@@ -68,6 +90,7 @@ namespace Janglim.FrontEnd.Grammars.Ebnf
                 var nt = new NonTerminal(rule.Name, rule.Name == startName);
                 keyManager.AllocateUniqueKey(nt);
                 NonTerminalMultiples.Add(nt);
+                namedRules.Add(nt);
                 nonterminals[rule.Name] = nt;
             }
 
@@ -75,11 +98,40 @@ namespace Janglim.FrontEnd.Grammars.Ebnf
             int groupCount = 0;
             NonTerminal MakeGroup(List<List<EbnfSym>> alternatives)
             {
-                var nt = new NonTerminal($"__grp{++groupCount}", false);
+                // A helper must have its own symbol key even when a source rule or token
+                // uses the usual helper prefix. KeyManager identifies names when allocating keys.
+                string name;
+                do { name = $"__grp{++groupCount}"; }
+                while (nonterminals.ContainsKey(name) || tokens.ContainsKey(name));
+
+                var nt = new NonTerminal(name, false);
                 keyManager.AllocateUniqueKey(nt);
                 NonTerminalMultiples.Add(nt);
                 foreach (var alt in alternatives)
                     AddAlternative(nt, alt.Select(Resolve).ToList());
+                return nt;
+            }
+
+            // Each occurrence has its own zero-width production. Keeping it as a named (rather
+            // than flattenable auto-generated) node preserves the exact token boundary at which
+            // the parser evaluates the condition, including consecutive conditions.
+            int predicateCount = 0;
+            NonTerminal MakePredicate(EbnfSym sym)
+            {
+                string location = sym.SourceLine > 0 ? $"line {sym.SourceLine}: " : string.Empty;
+                if (sym.Quantifier != EbnfQuantifier.None)
+                    throw new EbnfException($"{location}a predicate cannot have a quantifier (* + ?)");
+                if (sym.Text == null || !predicates.TryGetValue(sym.Text, out var predicate))
+                    throw new EbnfException($"{location}predicate '{sym.Text}' is not registered; register its C# callback before reading the grammar");
+
+                string name;
+                do { name = $"__predicate{++predicateCount}"; }
+                while (model.Rules.Any(rule => rule.Name == name) || model.Tokens.Any(token => token.Name == name));
+
+                var nt = new NonTerminal(name, false);
+                keyManager.AllocateUniqueKey(nt);
+                nt.Add(new NonTerminalConcat(new Epsilon()) { Predicate = predicate });
+                NonTerminalMultiples.Add(nt);
                 return nt;
             }
 
@@ -89,10 +141,16 @@ namespace Janglim.FrontEnd.Grammars.Ebnf
             Symbol Resolve(EbnfSym sym)
             {
                 Symbol baseSym;
+                if (sym.IsPredicate) return MakePredicate(sym);
                 if (sym.IsGroup) baseSym = MakeGroup(sym.Group);
                 else if (sym.IsLiteral) baseSym = Literal(sym.Text);
                 else if (nonterminals.TryGetValue(sym.Text, out var nt)) baseSym = nt;
-                else if (tokens.TryGetValue(sym.Text, out var t)) baseSym = t;
+                else if (tokens.TryGetValue(sym.Text, out var t))
+                {
+                    if (t.TokenType is Comment || IsRejectedToken(t))
+                        throw new EbnfException($"token '{sym.Text}' is lexical-only and cannot be used in a production");
+                    baseSym = t;
+                }
                 else throw new EbnfException($"undefined symbol '{sym.Text}'");
 
                 switch (sym.Quantifier)
@@ -116,10 +174,42 @@ namespace Janglim.FrontEnd.Grammars.Ebnf
 
             // 5. normalize (absorb optionals / flatten auto-generated repetition), then collect the
             //    per-production singles the parser needs.
-            this.Optimization();
+            try
+            {
+                this.Optimization();
+            }
+            catch (GrammarProgressException ex)
+            {
+                // The shared tree-grammar validator also protects manually expressed nullable
+                // cycles. Expose these as grammar diagnostics through the reader's usual result.
+                throw new EbnfException(ex.Message);
+            }
+            catch (PredicateLeftRecursionException ex)
+            {
+                // Return the shared validator's rule, predicate and cycle information as
+                // an ordinary grammar diagnostic, before constructing the parsing table.
+                throw new EbnfException(ex.Message);
+            }
             foreach (var nt in NonTerminalMultiples)
                 foreach (var single in nt)
                     NonTerminalSingles.Add(single as NonTerminalSingle);
+        }
+
+        private static TokenType ResolveTokenType(EbnfTokenKind kind)
+        {
+            switch (kind)
+            {
+                case EbnfTokenKind.Identifier: return TokenType.Identifier;
+                case EbnfTokenKind.StringLiteral: return TokenType.Literal.StringLiteral;
+                case EbnfTokenKind.CharLiteral: return TokenType.Literal.CharLiteral;
+                case EbnfTokenKind.NumberLiteral: return TokenType.Literal.Digit10;
+                case EbnfTokenKind.Comment: return TokenType.SpecialToken.Comment;
+                // Reject tokens use the existing raw-regex path, never represent numeric values,
+                // and cannot enter productions. Consumers detect their explicit rejection policy
+                // with IsRejectedToken before invoking the parser.
+                case EbnfTokenKind.Reject: return TokenType.Literal.Digit10;
+                default: throw new EbnfException($"unsupported token kind '{kind}'");
+            }
         }
 
         private void RegisterTerminal(Terminal terminal)

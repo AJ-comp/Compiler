@@ -31,10 +31,10 @@ a + a * a   →   "ああ、これは (a) 足す (a 掛ける a) という構造
 .NET プロジェクトで:
 
 ```bash
-dotnet add package Janglim --version 0.3.0
+dotnet add package Janglim --version 0.4.0
 ```
 
-> この例は正式パッケージ `0.3.0` を使用します。サポート対象は `LALRParser` で、
+> この例はリリース `0.4.0` を対象とします。サポート対象は `LALRParser` で、
 > SLR と CLR はまだ実験的・未完成です。正式パッケージでも `0.x` の間は公開 API が変わる可能性があるため、
 > 更新時には [リリースノート](https://github.com/AJ-comp/Compiler/blob/master/RELEASE_NOTES.md) を確認してください。
 

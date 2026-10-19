@@ -28,6 +28,11 @@ namespace Janglim.FrontEnd.Parsers.Datas
         public LexingData LexingData { get; set; }
         public ParsingLogger Logger { get; }
 
+        // Predicate-aware recovery can replace a physical block with several logical tokens.
+        // Keep that input local to this parse, including the mapping used by later blocks.
+        internal IReadOnlyList<TokenData> PredicateTokens { get; set; }
+        internal int[] PredicateTokenIndices { get; set; }
+
         /// <summary>
         /// The parse as a flat, strongly-typed sequence of steps (the data-oriented counterpart of
         /// <see cref="ToParsingHistory"/>). Each step exposes its typed <see cref="ParseAction"/>,
@@ -422,7 +427,12 @@ namespace Janglim.FrontEnd.Parsers.Datas
         public void ChangeBlock(int index, ParsingUnit parsingUnit, TokenData token) => this[index] = new ParsingBlock(parsingUnit, token, Logger);
         public void AddNewBlock(TokenData tokenData) => Add(new ParsingBlock(tokenData, Logger));
 
-        public object Clone() => new ParsingResult(this, Logger != null) { Success = this.Success };
+        public object Clone() => new ParsingResult(this, Logger != null)
+        {
+            Success = this.Success,
+            PredicateTokens = this.PredicateTokens,
+            PredicateTokenIndices = this.PredicateTokenIndices == null ? null : (int[])this.PredicateTokenIndices.Clone()
+        };
 
 
         /*  LLParsing Tree

@@ -9,7 +9,7 @@ namespace Janglim.FrontEnd.Grammars.Ebnf
     /// </summary>
     public sealed class EbnfModel
     {
-        /// <summary>Token (terminal) rules: <c>Name := "regex"</c>.</summary>
+        /// <summary>Token rules: <c>Name := "regex"</c> or <c>Name := StringLiteral "regex"</c>.</summary>
         public List<EbnfTokenDef> Tokens { get; } = new List<EbnfTokenDef>();
 
         /// <summary>Non-terminal rules: <c>Name : alt | alt ;</c>. The first rule's head is the start symbol.</summary>
@@ -21,6 +21,20 @@ namespace Janglim.FrontEnd.Grammars.Ebnf
     {
         public string Name { get; set; }
         public string Pattern { get; set; }
+
+        /// <summary>Defaults to the original identifier/word-pattern behavior.</summary>
+        public EbnfTokenKind Kind { get; set; } = EbnfTokenKind.Identifier;
+    }
+
+    /// <summary>The token kinds supported by the EBNF text format.</summary>
+    public enum EbnfTokenKind
+    {
+        Identifier,
+        StringLiteral,
+        CharLiteral,
+        NumberLiteral,
+        Comment,
+        Reject
     }
 
     /// <summary>A non-terminal rule: a head name and one or more alternatives (each a sequence of symbols).</summary>
@@ -35,8 +49,9 @@ namespace Janglim.FrontEnd.Grammars.Ebnf
 
     /// <summary>
     /// One symbol inside a production body. It is a literal (<c>'x'</c>), a reference to a rule/token by
-    /// name, or a group (<c>( … | … )</c>) — and it may carry a quantifier (<c>* + ?</c>). Groups and
-    /// quantifiers are lowered to auto-generated productions when the grammar is built (see
+    /// name, a group (<c>( … | … )</c>), or a predicate (<c>{Name()}?</c>). Literals, references, and
+    /// groups may carry a quantifier (<c>* + ?</c>). Predicates become distinct zero-width rules;
+    /// groups and quantifiers are lowered to auto-generated productions when the grammar is built (see
     /// <see cref="EbnfGrammar"/>), reusing the same machinery as the C# grammar API's
     /// <c>ZeroOrMore()/OneOrMore()/Optional()</c>, so EBNF text and the C# API produce identical grammars.
     /// </summary>
@@ -44,13 +59,18 @@ namespace Janglim.FrontEnd.Grammars.Ebnf
     {
         public bool IsLiteral { get; set; }
         public bool IsGroup { get; set; }
-        public string Text { get; set; }                        // for a literal or a name reference
+        /// <summary>A registered zero-width condition, written <c>{Name()}?</c>.</summary>
+        public bool IsPredicate { get; set; }
+        public string Text { get; set; }                        // literal, symbol name, or predicate name
         public List<List<EbnfSym>> Group { get; set; }          // for a group: its alternatives
         public EbnfQuantifier Quantifier { get; set; } = EbnfQuantifier.None;
+        /// <summary>The symbol's source line (its quantifier's line when present), or zero for a C# model.</summary>
+        public int SourceLine { get; set; }
 
         public static EbnfSym Literal(string value) => new EbnfSym { IsLiteral = true, Text = value };
         public static EbnfSym Ref(string name) => new EbnfSym { IsLiteral = false, Text = name };
         public static EbnfSym GroupOf(List<List<EbnfSym>> alternatives) => new EbnfSym { IsGroup = true, Group = alternatives };
+        public static EbnfSym PredicateCall(string name) => new EbnfSym { IsPredicate = true, Text = name };
     }
 
     /// <summary>Thrown when a grammar model cannot be turned into a grammar (e.g. an undefined symbol).</summary>

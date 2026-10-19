@@ -1,6 +1,55 @@
 # Release history
 
-Engine and web releases use independent version numbers. The entries below describe each version's scope and changes.
+The engine, web application, MCP service, and built-in grammar baselines use independent version numbers. The entries below describe each version's scope and changes.
+
+## Janglim engine 0.4.0 — 2026-10-19
+
+Engine `0.4.0` adds EBNF token kinds, preserved source trivia, host-registered predicates, and prediction for a specific predicate conflict. The engine continues to target .NET Standard 2.1, with `LALRParser` as its supported parsing path.
+
+### EBNF and lexer APIs
+
+- Add `Identifier`, `StringLiteral`, `CharLiteral`, `NumberLiteral`, `Comment`, and `Reject` token kinds to EBNF-text definitions. Existing definitions without a kind retain `Identifier` behavior.
+- Use raw regexes for literal/number token kinds, skip declared comments, and expose `EbnfGrammar.IsRejectedToken()` for lexical rejection checks. The MCP adapter applies those checks before accepting input.
+- Preserve skipped source text and UTF-16 offsets in `TokenCell.LeadingTrivia` and `TokenData.LeadingTrivia`; expose `HasLineBreakBefore` and `LexingData.TrailingTrivia`.
+- Recognize CR, LF, U+2028, and U+2029 in leading trivia, including line breaks inside comments. Rebuild trivia after incremental edits so whitespace-only or comment-only edits update predicate context.
+
+### Host-registered predicates and conflict prediction
+
+- Register pure C# conditions through `EbnfReaderOptions.RegisterPredicate()` and call them from EBNF as `{Name()}?`. Conditions receive the previous token, next token, and input index through `PredicateContext`.
+- Evaluate conditions at a zero-token grammar position. False conditions exclude that path; missing registrations, malformed calls, and callback exceptions produce explicit diagnostics.
+- Predict only when the original table cell contains exactly one Shift and one predicate-bearing epsilon Reduce, and both remain viable after condition evaluation. Other conflicts retain their existing policy.
+- Copy prediction state and advance lookahead until one initial action survives. Return that original action to the actual parser without committing prediction stacks or input positions.
+- Report ambiguity when multiple initial actions accept the same complete input. Bound stack depth, configurations, and transitions independently of lookahead length, and report exhausted limits instead of choosing an action.
+- Keep callback registration and this prediction API in the .NET host workflow. Playground 1.1.0 and MCP 0.1.0 read EBNF with default options; MCP parsing and example checks require conflict-free tables.
+
+### Grammar validation
+
+- Reject `*` and `+` when the repeated body can finish without consuming a token; retain repetitions that require token consumption.
+- Add `PredicateLeftRecursionValidation` and `PredicateLeftRecursionException` to reject a predicate-bearing path that re-enters the same nonterminal before consuming input. Preserve ordinary LR left recursion, predicates after recursive entry, and token-consuming recursive paths.
+- Analyze indirect references, nullable prefixes, and predicate information on the same empty path. Include the rule name, predicate name, and closed rule path in diagnostics, checking unused named rules as well.
+- Run structural validation before normalization and table construction, without invoking registered conditions. Link the class summary to its [HTML behavior document](docs/ko/predicate-left-recursion-validation.html).
+
+### Repository, C11 Core, and MCP scope
+
+- Include the [C11 Core syntax profile and regression examples](grammars/c/README.md). The `c11-core` baseline is version `1.0.0` and covers documented declarations, functions, expressions, statements, and literals with ASCII identifiers. Its documented extension areas include preprocessing, typedef-name resolution, semantic checking, selected C11 constructs, and compiler extensions.
+- Expose `list_grammars`, `get_grammar`, `validate_grammar`, `parse_input`, and `run_tests` through the independently versioned MCP `0.1.0` service over stateless Streamable HTTP.
+- Embed the read-only baseline with its version, scope, and SHA-256 of LF-normalized UTF-8 text. Clients edit returned copies; requests cannot replace the catalog or persist user grammar projects.
+- Execute engine jobs in separate worker processes to isolate grammar-builder globals. Enforce request/output, concurrency, and execution limits; terminate work on timeout or cancellation.
+- Include engine and MCP tests, MCP publish/container builds, NuGet packaging, and public Playground builds in release verification. The release workflow publishes verified NuGet and Playground artifacts; MCP production deployment uses its dedicated Azure script.
+
+### Compatibility and verification
+
+The Playground remains at `1.1.0`; the MCP service remains at `0.1.0`. Their versions are independent of the engine package. Public APIs may evolve during `0.x`; pin versions and review changes when upgrading. SLR retains a known table-generation defect and CLR remains incomplete. In-process grammar construction uses global builder state and must run sequentially.
+
+Grammar preparation now rejects non-consuming `*`/`+` bodies and predicate-bearing zero-token left recursion. Review token consumption in existing repetition bodies and recursive prefixes when upgrading.
+
+Local validation on 2026-10-19 with the 0.4.0 metadata passed: 692 engine tests with one known SLR test skipped, 51 MCP tests, 22 UI tests, and 12 release-infrastructure tests. Debug and Release solution builds and local `dotnet publish` builds for the public Playground and MCP server succeeded. Both solution configurations retain five existing unused-field/event warnings and zero errors.
+
+The package at `artifacts/release-0.4.0/packages/Janglim.0.4.0.nupkg` includes nine engine DLLs at version `0.4.0.0` and 40 localized resource DLLs. Package metadata and the embedded README were checked. A separate `net8.0` consumer installed the local package and verified the README quickstart, true/false predicates, five typed-token inputs, lexical rejection, and exact comment/newline trivia. The local container build was not run because the Docker engine was inactive; container verification remains a CI step.
+
+Check the corresponding [Actions run](https://github.com/AJ-comp/Compiler/actions) for package publication and deployment results. Detailed local validation results and separate design work are recorded in [RELEASE_NOTES.md](RELEASE_NOTES.md).
+
+Janglim's core structure remains based on the human author's design and implementation. AI-assisted documentation, UI, release preparation, and separately authored grammar examples preserve that authorship context.
 
 ## Janglim Playground 1.1.0
 

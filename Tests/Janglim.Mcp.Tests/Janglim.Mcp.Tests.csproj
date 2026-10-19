@@ -1,0 +1,32 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <IsPackable>false</IsPackable>
+    <IsTestProject>true</IsTestProject>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.12.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="10.0.0" />
+    <PackageReference Include="xunit" Version="2.9.2" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.8.2">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <ProjectReference Include="../../services/Janglim.Mcp/Janglim.Mcp.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <!-- HTTP integration tests exercise the same canonical C grammar and corpus as parser tests. -->
+    <Content Include="../../grammars/c/c11-core.ebnf" Link="Fixtures/C/c11-core.ebnf" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="../../grammars/c/c11-core.cases.json" Link="Fixtures/C/c11-core.cases.json" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+  <!-- Integration tests launch the referenced server assembly in its isolated worker mode. -->
+  <Target Name="CopyMcpWorkerRuntimeFiles" AfterTargets="Build">
+    <ItemGroup>
+      <McpWorkerRuntimeFile Include="../../services/Janglim.Mcp/bin/$(Configuration)/net10.0/Janglim.Mcp.runtimeconfig.json" />
+      <McpWorkerRuntimeFile Include="../../services/Janglim.Mcp/bin/$(Configuration)/net10.0/Janglim.Mcp.deps.json" />
+    </ItemGroup>
+    <Copy SourceFiles="@(McpWorkerRuntimeFile)" DestinationFolder="$(TargetDir)" SkipUnchangedFiles="true" />
+  </Target>
+</Project>

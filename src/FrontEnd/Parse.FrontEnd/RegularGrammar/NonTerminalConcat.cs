@@ -39,6 +39,9 @@ namespace Janglim.FrontEnd.RegularGrammar
         public uint Priority { get; internal set; } = 0;
         public MeaningUnit MeaningUnit { get; internal set; } = null;
 
+        /// <summary>A zero-width condition attached to an epsilon production.</summary>
+        public GrammarPredicate Predicate { get; set; }
+
         public int Count => ((IList<Symbol>)_symbols).Count;
         public bool IsReadOnly => ((IList<Symbol>)_symbols).IsReadOnly;
         public Symbol this[int index] { get => ((IList<Symbol>)_symbols)[index]; set => ((IList<Symbol>)_symbols)[index] = value; }
@@ -184,7 +187,8 @@ namespace Janglim.FrontEnd.RegularGrammar
         {
             NonTerminalConcat result = new NonTerminalConcat(this.Priority, this._symbols.ToArray())
             {
-                MeaningUnit = this.MeaningUnit
+                MeaningUnit = this.MeaningUnit,
+                Predicate = this.Predicate
             };
 
             return result;

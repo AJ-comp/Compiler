@@ -14,6 +14,9 @@ namespace Janglim.FrontEnd
         public int EndIndex => (TokenCell != null) ? TokenCell.EndIndex : -1;
         public Terminal Kind { get; } = new NotDefined();
         public TokenCell TokenCell { get; }
+        /// <summary>The current leading source trivia of the wrapped lexer token.</summary>
+        public TokenTrivia LeadingTrivia => TokenCell?.LeadingTrivia ?? TokenTrivia.Empty;
+        public bool HasLineBreakBefore => LeadingTrivia.HasLineBreak;
         public bool IsVirtual { get; private set; }
         public bool IsStubCode { get; private set; }
         public bool IsNotUsed { get; set; }

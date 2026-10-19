@@ -122,6 +122,8 @@ namespace Janglim.FrontEnd.Parsers.LR
 
         protected FirstFollowAnalyzer _followAnalyzer = new FirstFollowAnalyzer();
         protected Stack<IEnumerable<AstSymbol>> _astStack = new Stack<IEnumerable<AstSymbol>>();
+        private readonly bool _hasGrammarPredicates;
+        private Exception _predicateException;
 
         protected LRParser(Grammar grammar, CanonicalType canonicalType, bool logging = false) : base(grammar, logging)
         {
@@ -130,6 +132,14 @@ namespace Janglim.FrontEnd.Parsers.LR
             // Make sure the grammar is normalized before the table is built. Idempotent, so it is a
             // no-op when the author already called Optimization(); when they did not, this runs it.
             this.Grammar.Optimization();
+
+            foreach (var production in this.Grammar.NonTerminalMultiples.SelectMany(nonTerminal => nonTerminal))
+            {
+                if (production.Predicate == null) continue;
+                if (!production.IsEpsilon)
+                    throw new ArgumentException("Grammar predicates must be attached to epsilon productions.", nameof(grammar));
+                _hasGrammarPredicates = true;
+            }
 
             var virtualStartSymbol = this.Grammar.CreateVirtualSymbolForLRParsing("Accept");
             _followAnalyzer.CalculateAllFollow(this.Grammar.NonTerminalMultiples);
@@ -158,7 +168,6 @@ namespace Janglim.FrontEnd.Parsers.LR
         /// <returns>The TokenData list converted</returns>
         protected IReadOnlyList<TokenData> ToTokenDataList(IReadOnlyList<TokenCell> tokenCells)
         {
-            if (tokenCells.Count == 0) return null;
             var result = new TokenData[tokenCells.Count + 1];
 
             for (int i = 0; i < tokenCells.Count; i++)
@@ -271,18 +280,35 @@ namespace Janglim.FrontEnd.Parsers.LR
         /// <returns></returns>
         private void AllParsing(ParsingResult target)
         {
-            int count = 0;
+            int highestIndex = -1;
+            int recoveryAttempts = 0;
             for (int i = 0; i < target.Count; i++)
             {
+                // Ordinary forward parsing is bounded by the token count. Limit only a
+                // recovery handler revisiting earlier positions, not a valid long input.
+                if (i > highestIndex) { highestIndex = i; recoveryAttempts = 0; }
+                else if (++recoveryAttempts > 10000)
+                {
+                    target[i].Last().ChangeToFailedState("Error recovery did not make input progress.");
+                    _defaultErrorHandler.Call(new DataForRecovery(this, target, i, false));
+                    throw new ParsingException(i);
+                }
                 var blockParsingResult = this.BlockFullParsing(target, i);
-                if (count++ > 10000) break;
-
-                if (this.PostProcessing(blockParsingResult, target, true, ref i)) break;
+                if (this.PostProcessing(blockParsingResult, target, true, ref i)) return;
             }
+            // A custom recovery handler may complete the EOF block itself. Otherwise
+            // exhausting the blocks is not a successful parse: an Accept action is required.
+            if (target.Last().Units.LastOrDefault()?.Action.Direction == ActionDir.Accept) return;
+            int lastIndex = target.Count - 1;
+            target[lastIndex].Last().ChangeToFailedState("Parsing ended before an Accept action.");
+            _defaultErrorHandler.Call(new DataForRecovery(this, target, lastIndex, false));
+            throw new ParsingException(lastIndex);
         }
 
         public override ParsingResult Parsing(IReadOnlyList<TokenCell> tokenCells)
         {
+            FiredException = null;
+            _predicateException = null;
             var tokens = ToTokenDataList(tokenCells);
 
             ParsingResult result = new ParsingResult(_logging);
@@ -308,7 +334,7 @@ namespace Janglim.FrontEnd.Parsers.LR
                     Success = false
                 };
                 */
-                FiredException = ex;
+                FiredException = _predicateException ?? ex;
                 result.Success = false;
             }
             catch (Exception ex)
@@ -320,6 +346,25 @@ namespace Janglim.FrontEnd.Parsers.LR
             return result;
         }
 
+        private static bool HasChangedTokenTrivia(ParsingResult previous, IReadOnlyList<TokenCell> tokenCells)
+        {
+            // Stack joining compares syntax, so it can retain old TokenData in blocks,
+            // trees and logs after trivia-only edits. Use the existing full parse when
+            // source context changes, or when physical tokens cannot be aligned by index.
+            // Retained cells already expose refreshed trivia through TokenData forwarding.
+            if (previous.Count != tokenCells.Count + 1) return true;
+
+            for (int i = 0; i < tokenCells.Count; i++)
+            {
+                var oldTrivia = previous[i].Token?.LeadingTrivia;
+                var newTrivia = tokenCells[i].LeadingTrivia;
+                if (oldTrivia == null || oldTrivia.StartIndex != newTrivia.StartIndex ||
+                    oldTrivia.Text != newTrivia.Text) return true;
+            }
+
+            return false;
+        }
+
         public override ParsingResult Parsing(LexingData lexingData, ParsingResult prevParsingInfo)
         {
             var tokenCells = lexingData.TokensForParsing;
@@ -327,6 +372,10 @@ namespace Janglim.FrontEnd.Parsers.LR
             if (prevParsingInfo == null) return this.Parsing(tokenCells);
             if (prevParsingInfo.Success == false) return this.Parsing(tokenCells);
             if (lexingData.RangeToLex == null) return this.Parsing(tokenCells);
+            // Existing results forward live TokenCell trivia. A delimiter-only edit can therefore
+            // change a guard's result even when all cached token values and stacks still match.
+            if (_hasGrammarPredicates) return this.Parsing(tokenCells);
+            if (HasChangedTokenTrivia(prevParsingInfo, tokenCells)) return this.Parsing(tokenCells);
 
             ParsingResult result = null;
             var tokens = ToTokenDataList(tokenCells);
@@ -379,7 +428,18 @@ namespace Janglim.FrontEnd.Parsers.LR
                 result = lastParsingUnit.ErrorHandler.Call(new DataForRecovery(this, parsingResult, curTokenIndex));
             */
 
-            return (ErrorHandler ?? _defaultErrorHandler).Call(new DataForRecovery(this, parsingResult, curTokenIndex, BackTrackingOnConflict));
+            var dataForRecovery = new DataForRecovery(this, parsingResult, curTokenIndex, BackTrackingOnConflict);
+            if (lastParsingUnit.PredicateException != null) return _defaultErrorHandler.Call(dataForRecovery);
+            var recovered = (ErrorHandler ?? _defaultErrorHandler).Call(dataForRecovery);
+            // A recovery callback can itself encounter a predicate exception. Stop instead of
+            // allowing a handler's optimistic success result to hide the callback failure.
+            if (_predicateException != null)
+            {
+                var failedIndex = parsingResult.FindIndex(block => block.Units.Any(unit => unit.PredicateException != null));
+                return _defaultErrorHandler.Call(new DataForRecovery(this, parsingResult,
+                    failedIndex >= 0 ? failedIndex : curTokenIndex, false));
+            }
+            return recovered;
         }
 
         /// <summary>

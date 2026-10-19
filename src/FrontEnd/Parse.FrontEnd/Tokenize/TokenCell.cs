@@ -30,6 +30,16 @@ namespace Janglim.FrontEnd.Tokenize
         public Match MatchData { get; }
         public TokenPatternInfo PatternInfo { get; internal set; }
 
+        /// <summary>
+        /// Skipped source text between the previous parsing token and this token,
+        /// or before the first parsing token. Populated by <see cref="LexingData"/>.
+        /// Manually constructed tokens and tokens excluded from parsing have empty trivia.
+        /// </summary>
+        public TokenTrivia LeadingTrivia { get; internal set; }
+
+        /// <summary>Whether <see cref="LeadingTrivia"/> contains a line break.</summary>
+        public bool HasLineBreakBefore => LeadingTrivia.HasLineBreak;
+
         public ValueType ValueOptionData { get; set; } = 0;
         public object RefOptionalData { get; set; }
 
@@ -51,6 +61,7 @@ namespace Janglim.FrontEnd.Tokenize
             this.StartColumnIndex = startColIndex;
 
             this.MatchData = matchData;
+            this.LeadingTrivia = new TokenTrivia(startIndex, string.Empty);
         }
 
         public bool Contains(int caretIndex, RecognitionWay recognitionWay)
