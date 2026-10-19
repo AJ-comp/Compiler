@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System;
 using System.Threading.Tasks;
 
 namespace Janglim.FrontEnd.Tokenize
@@ -98,9 +99,12 @@ namespace Janglim.FrontEnd.Tokenize
 
         public void InitToken(IEnumerable<TokenCell> tokenCells)
         {
-            for (int i = 0; i < tokenCells.Count(); i++)
+            if (tokenCells == null) throw new ArgumentNullException(nameof(tokenCells));
+            var tokens = tokenCells.ToArray();
+
+            for (int i = 0; i < tokens.Length; i++)
             {
-                var tCell = tokenCells.ElementAt(i);
+                var tCell = tokens[i];
                 _tokensForView.Add(tCell);
 
                 // if it is not token for parsing then index is -1
@@ -115,8 +119,9 @@ namespace Janglim.FrontEnd.Tokenize
                 else _indexMap.Add(index);
             }
 
-            InitRange(tokenCells);
+            InitRange(tokens);
             InitAllPatternsTable();
+            RebuildTrivia();
         }
 
 
@@ -129,13 +134,17 @@ namespace Janglim.FrontEnd.Tokenize
         /*********************************************************/
         public void ReplaceToken(Range range, IEnumerable<TokenCell> replaceTokenList)
         {
-            var updateRange = UpdateViewToken(range, replaceTokenList);
-            var updateRange2 = UpdateIndexMapAndParsingToken(range, replaceTokenList);
+            if (replaceTokenList == null) throw new ArgumentNullException(nameof(replaceTokenList));
+            var tokens = replaceTokenList.ToArray();
+
+            var updateRange = UpdateViewToken(range, tokens);
+            var updateRange2 = UpdateIndexMapAndParsingToken(range, tokens);
 
             ClearUpdateRanges();
             _lexedRanges.Add(updateRange);
             _forParsingRanges.Add(updateRange2);
             InitAllPatternsTable();
+            RebuildTrivia();
         }
 
 

@@ -12,12 +12,20 @@
   items:
   - name: 문법 읽는 법
     href: grammar-reading.md
+  - name: 렉서 — 토큰과 경계 원문
+    href: lexer.md
   - name: FIRST / FOLLOW
     href: first-follow.md
   - name: 점과 상태
     href: dot-and-state.md
   - name: 표로 실제 파싱
     href: parsing-in-action.md
+  - name: ANTLR4의 LL · 장림의 LR
+    href: antlr4-ll-janglim-lr.html
+  - name: 조건절과 반복 — 입력을 읽어야 하는 이유
+    href: predicate-repetition-rules.html
+  - name: 조건절과 좌재귀 — 문법 검사 클래스
+    href: predicate-left-recursion-validation.html
   - name: 틀린 입력 걸러내기
     href: parsing-errors.md
 
@@ -27,6 +35,8 @@
     href: deep-symbols.md
   - name: Terminal — 잎(토큰)
     href: deep-terminal.md
+  - name: 렉서 — 경계 정보와 구현 이유
+    href: deep-lexer.md
   - name: NonTerminal — 규칙(가지)
     href: deep-nonterminal.md
   - name: Concat — 순서(연접)
@@ -99,3 +109,8 @@
           href: parse-table-lalr-impl.md
       - name: 올 수 있는 토큰
         href: parse-table-expected.md
+
+- name: 함수별 동작
+  items:
+  - name: SelectFirstAction — 최초 액션 선택
+    href: functions/select-first-action.html

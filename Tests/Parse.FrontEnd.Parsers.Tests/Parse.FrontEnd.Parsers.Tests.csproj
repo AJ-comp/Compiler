@@ -26,4 +26,10 @@
     <ProjectReference Include="..\..\src\FrontEnd\Parse.FrontEnd.Grammars.Ebnf\Parse.FrontEnd.Grammars.Ebnf.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <!-- Exercise the canonical grammar/corpus, rather than maintaining test-only copies. -->
+    <None Include="..\..\grammars\c\c11-core.ebnf" Link="Fixtures\C\c11-core.ebnf" CopyToOutputDirectory="PreserveNewest" />
+    <None Include="..\..\grammars\c\c11-core.cases.json" Link="Fixtures\C\c11-core.cases.json" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
 </Project>

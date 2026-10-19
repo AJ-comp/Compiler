@@ -62,25 +62,23 @@ namespace Janglim.FrontEnd
                 if (seenNT.Contains(singleNT))
                 {
                     result.UnionWith(_cache[singleNT]);
-                    if (!_cache[singleNT].IsNullAble) continue;
+                    // A nullable cached result still must NOT recurse into the same rule.
+                    // The caller's concatenation uses epsilon to continue with later symbols;
+                    // CalculateAllFirst revisits rules until those cached sets reach a fixed point.
+                    continue;
                 }
                 seenNT.Add(singleNT);
 
-                // S -> S ~ 인 경우
-                if (singleNT[0] == symbol)
-                {
-                    result.UnionWith(_cache[singleNT]);
-                    if (!_cache[singleNT].IsNullAble) continue;
-                }
-
-                result.UnionWith(FirstSet(singleNT, seenNT));
-                result.UnionWith(_cache[singleNT]);
-
-                if (_cache[singleNT].Count() != result.Count())
+                var productionFirst = FirstSet(singleNT, seenNT);
+                int beforeCount = _cache[singleNT].Count;
+                // Cache this production's FIRST only. The aggregate result also contains
+                // earlier alternatives, whose epsilon/tokens must not leak into this rule.
+                _cache[singleNT].UnionWith(productionFirst);
+                if (_cache[singleNT].Count != beforeCount)
                 {
                     _bChanged = true;
-                    _cache[singleNT].UnionWith(result);
                 }
+                result.UnionWith(_cache[singleNT]);
             }
 
             return result;

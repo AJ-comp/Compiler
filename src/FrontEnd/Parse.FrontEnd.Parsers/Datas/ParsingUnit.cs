@@ -3,6 +3,7 @@ using Janglim.FrontEnd.Parsers.Properties;
 using Janglim.FrontEnd.RegularGrammar;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System;
 
 namespace Janglim.FrontEnd.Parsers.Datas
 {
@@ -21,6 +22,9 @@ namespace Janglim.FrontEnd.Parsers.Datas
 
         public ActionData Action { get; internal set; } = new ActionData();
         public TokenData InputValue { get; set; }
+        internal PredicateContext PredicateContext { get; set; }
+        internal ActionData PredicateCheckedAction { get; set; }
+        internal Exception PredicateException { get; set; }
         public TerminalSet PossibleTerminalSet { get; internal set; } = new TerminalSet();
 
 
@@ -104,6 +108,9 @@ namespace Janglim.FrontEnd.Parsers.Datas
 
             result.Action = Action;
             result.InputValue = InputValue;     // TokenData doesn't support deep copy yet.
+            result.PredicateContext = PredicateContext;
+            result.PredicateCheckedAction = PredicateCheckedAction;
+            result.PredicateException = PredicateException;
             result.PossibleTerminalSet = PossibleTerminalSet;   // This member also doesn't support deept copy.
 
             result.IsError = IsError;

@@ -1,6 +1,6 @@
 # Janglim Playground UI
 
-Playground 1.0.0 is the web release alongside Janglim engine 0.3.0. The web and NuGet versions are independent. See the [release history](../../../CHANGELOG.md) and [release notes](../../../RELEASE_NOTES.md) for scope and limitations.
+Playground 1.1.0 provides portable local workspace files and uses engine 0.4.0 when built from this source tree. The web and NuGet versions are independent. See the [release history](../../../CHANGELOG.md) and [release notes](../../../RELEASE_NOTES.md) for scope and supported workflows.
 
 React and shadcn/ui present the existing browser-local Blazor WebAssembly engine. `Home.razor` owns the host and exposes `Parse`; no parser implementation is duplicated in JavaScript. A completed run opens its final trace step. The tree, stack, ACTION/GOTO table, conflicts and execution trace all come from the same C# result.
 

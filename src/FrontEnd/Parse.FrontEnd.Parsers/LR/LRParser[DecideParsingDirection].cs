@@ -2,7 +2,11 @@
 using Janglim.FrontEnd.Parsers.Collections;
 using Janglim.FrontEnd.Parsers.Datas;
 using Janglim.FrontEnd.ParseTree;
+using Janglim.FrontEnd.RegularGrammar;
+using System;
+using System.Collections.Generic;
 using System.Linq;
+using static Janglim.FrontEnd.Parsers.Datas.LR.LRParsingRowDataFormat;
 
 namespace Janglim.FrontEnd.Parsers.LR
 {
@@ -14,7 +18,8 @@ namespace Janglim.FrontEnd.Parsers.LR
         /// <param name="parsingUnit"></param>
         /// <param name="inputValue"></param>
         /// <returns></returns>
-        private bool ShiftOrReduce(ParsingUnit parsingUnit, TokenData inputValue, out ConflictItem conflictItem)
+        private bool ShiftOrReduce(ParsingUnit parsingUnit, TokenData inputValue, out ConflictItem conflictItem,
+            IReadOnlyList<TokenData> tokens = null, int tokenIndex = -1)
         {
             conflictItem = null;
 
@@ -52,16 +57,63 @@ namespace Janglim.FrontEnd.Parsers.LR
             }
             */
 
-            var matchedValue = IxMetrix.MatchedValueSet[inputValue.Kind];
-
-            // it needs multiple process if conflict is fired.
-            if (matchedValue.Count() > 1)
-                conflictItem = new ConflictItem((int)topData, matchedValue.Skip(1));
-
-            parsingUnit.Action = matchedValue.First();
+            // Filtering is local: a false condition must not remove actions from the shared table.
+            var candidates = IxMetrix.MatchedValueSet[inputValue.Kind];
+            var matchedValue = new List<ActionData>();
+            string violation = null;
             parsingUnit.PossibleTerminalSet = IxMetrix.PossibleTerminalSet;
+            try
+            {
+                foreach (var action in candidates)
+                {
+                    if (EvaluatePredicate(action, parsingUnit.PredicateContext)) matchedValue.Add(action);
+                    else violation ??= $"Grammar predicate {GetPredicate(action).Name} evaluated to false.";
+                }
+                if (matchedValue.Count == 0)
+                {
+                    if (violation != null) parsingUnit.ChangeToFailedState(violation);
+                    else parsingUnit.ChangeToFailedState();
+                    return false;
+                }
 
-            return true;
+                // Only the ORIGINAL two-way Shift / guarded epsilon cell invokes prediction.
+                // The predictor selects a first action; the actual stack and input stay here.
+                if (matchedValue.Count == 2 && LRConflictPredictor.IsSupportedConflict(candidates))
+                {
+                    if (tokens == null)
+                    {
+                        throw new InvalidPredictionTableException(
+                            "conflict prediction requires the complete input; use the token-list UnitParsing overload",
+                            (int)topData, tokenIndex);
+                    }
+                    var actualStates = beforeStack.Stack.OfType<int>().Reverse().ToArray();
+                    parsingUnit.Action = new LRConflictPredictor(parsingTable, EvaluatePredicate)
+                        .SelectFirstAction(candidates, actualStates, tokens, tokenIndex);
+                }
+                else
+                {
+                    // All other conflicts keep their previous first-action/backtracking policy.
+                    if (matchedValue.Count > 1)
+                        conflictItem = new ConflictItem((int)topData, matchedValue.Skip(1));
+                    parsingUnit.Action = matchedValue[0];
+                }
+
+                // This unit has already checked the chosen guard. ParseUnitCore still checks
+                // manually supplied actions, without evaluating this selected guard twice.
+                if (GetPredicate(parsingUnit.Action) != null)
+                    parsingUnit.PredicateCheckedAction = parsingUnit.Action;
+                return true;
+            }
+            catch (GrammarPredicateEvaluationException exception)
+            {
+                RecordPredicateFailure(parsingUnit, exception);
+                return false;
+            }
+            catch (PredictionException exception)
+            {
+                RecordPredicateFailure(parsingUnit, exception);
+                return false;
+            }
         }
 
 

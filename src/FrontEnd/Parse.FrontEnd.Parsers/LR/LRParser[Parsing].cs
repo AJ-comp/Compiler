@@ -1,5 +1,7 @@
 ﻿using Janglim.FrontEnd.Parsers.Datas;
 using Janglim.FrontEnd.RegularGrammar;
+using System;
+using System.Collections.Generic;
 using System.Linq;
 using static Janglim.FrontEnd.Parsers.Datas.LR.LRParsingRowDataFormat;
 
@@ -38,10 +40,13 @@ namespace Janglim.FrontEnd.Parsers.LR
             if (lastAction.Direction == ActionDir.Shift) return SuccessedKind.Shift;
             if (lastAction.Direction == ActionDir.Accept) return SuccessedKind.Completed;
 
+            var tokens = _hasGrammarPredicates ? GetPredicateTokens(parsingResult) : null;
+            var tokenIndex = GetPredicateTokenIndex(parsingResult, indexToParsing);
+
             while (true)
             {
                 var parsingUnit = blockToParsing.Last();
-                var unitParsingResult = UnitParsing(parsingUnit, blockToParsing.Token);
+                var unitParsingResult = UnitParsing(parsingUnit, blockToParsing.Token, tokens, tokenIndex);
                 result = unitParsingResult.Item1;
 
                 // update ConflictItem
@@ -75,17 +80,34 @@ namespace Janglim.FrontEnd.Parsers.LR
         /// <param name="seeingToken">input terminal</param>
         /// <returns>Returns the parsing result and the conflict value (if there is the conflict).</returns>
         public (SuccessedKind, ConflictItem) UnitParsing(ParsingUnit unit, TokenData seeingToken)
+            => UnitParsing(unit, seeingToken, null, -1);
+
+        /// <summary>
+        /// Execute one actual action with complete input available for predicate context and
+        /// conflict prediction. Tokens must include the final EndMarker; tokenIndex is physical.
+        /// </summary>
+        public (SuccessedKind, ConflictItem) UnitParsing(ParsingUnit unit, IReadOnlyList<TokenData> tokens, int tokenIndex)
         {
+            if (tokens == null) throw new ArgumentNullException(nameof(tokens));
+            if (tokenIndex < 0 || tokenIndex >= tokens.Count) throw new ArgumentOutOfRangeException(nameof(tokenIndex));
+            return UnitParsing(unit, tokens[tokenIndex], tokens, tokenIndex);
+        }
+
+        private (SuccessedKind, ConflictItem) UnitParsing(ParsingUnit unit, TokenData seeingToken,
+            IReadOnlyList<TokenData> tokens, int tokenIndex)
+        {
+            if (unit == null) throw new ArgumentNullException(nameof(unit));
+            if (seeingToken == null) throw new ArgumentNullException(nameof(seeingToken));
             unit.CopyBeforeStackToAfterStack();
-
-            // filtering
-            if (seeingToken.Kind == new NotDefined()) { }
-
-            // recover error if there is an error
+            unit.InputValue = seeingToken;
+            unit.PredicateCheckedAction = null;
+            unit.PredicateException = null;
+            unit.PredicateContext = tokens != null ? CreatePredicateContext(tokens, tokenIndex)
+                : new PredicateContext(null, seeingToken, -1);
 
             ConflictItem conflictItem = null;
             var result = (IsGoToCondition(unit.BeforeStack)) ? GoTo(unit, seeingToken)
-                                                                            : ShiftOrReduce(unit, seeingToken, out conflictItem);
+                : ShiftOrReduce(unit, seeingToken, out conflictItem, tokens, tokenIndex);
 
             return (ParseUnitCore(unit), conflictItem);
         }
@@ -98,9 +120,13 @@ namespace Janglim.FrontEnd.Parsers.LR
         /// <returns></returns>
         public SuccessedKind ParseUnitCore(ParsingUnit unit)
         {
+            // Also enforce conditions for explicitly supplied recovery actions and public callers.
+            CheckSelectedPredicate(unit);
             if (unit.IsError)
             {
-                unit.Action.Direction = ActionDir.Failed;
+                // Action objects can originate in the shared parsing table or a conflict item.
+                // Keep failures local so another input can still use the original action.
+                unit.Action = new ActionData(ActionDir.Failed, null);
                 return SuccessedKind.NotApplicable;
             }
 

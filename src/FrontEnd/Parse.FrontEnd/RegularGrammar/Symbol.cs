@@ -47,6 +47,8 @@ namespace Janglim.FrontEnd.RegularGrammar
             NonTerminal result = AutoGenerator.GetNonTerminal();
             NonTerminal bridge = AutoGenerator.GetNonTerminal();
 
+            result.RepetitionOperand = this;
+
             result.AddAsAlter(bridge, new Epsilon());
             bridge.AddAsConcat(this, result);
 
@@ -63,6 +65,8 @@ namespace Janglim.FrontEnd.RegularGrammar
 
             NonTerminal result = AutoGenerator.GetNonTerminal();
             NonTerminal bridge = AutoGenerator.GetNonTerminal();
+
+            result.RepetitionOperand = this;
 
             result.AddAsConcat(this, bridge);
             bridge.AddAsAlter(result, new Epsilon());

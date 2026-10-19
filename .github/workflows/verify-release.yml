@@ -141,6 +141,11 @@ jobs:
           dotnet test Tests/Parse.FrontEnd.Parsers.Tests/Parse.FrontEnd.Parsers.Tests.csproj
           -c Release --logger trx --results-directory TestResults
 
+      - name: Test MCP protocol and isolated parser workers
+        run: >-
+          dotnet test Tests/Janglim.Mcp.Tests/Janglim.Mcp.Tests.csproj
+          -c Release --logger trx --results-directory TestResults
+
       - name: Test interface
         if: steps.frontend.outputs.enabled == 'true'
         working-directory: samples/Playground/Frontend
@@ -151,6 +156,20 @@ jobs:
 
       - name: Pack engine
         run: dotnet pack src/Janglim/Janglim.csproj -c Release -o artifacts
+
+      - name: Publish MCP server
+        run: dotnet publish services/Janglim.Mcp/Janglim.Mcp.csproj -c Release -o mcp-publish
+
+      - name: Verify MCP container
+        run: docker build --file services/Janglim.Mcp/Dockerfile --tag janglim-mcp:verify .
+
+      - name: Upload tested MCP server
+        uses: actions/upload-artifact@v4
+        with:
+          name: janglim-mcp-${{ github.run_id }}-${{ github.run_attempt }}
+          path: mcp-publish/
+          if-no-files-found: error
+          retention-days: 14
 
       - name: Hash NuGet packages
         shell: bash
@@ -183,7 +202,7 @@ jobs:
           if-no-files-found: error
           retention-days: 14
 
-      - name: Upload parser test results
+      - name: Upload engine and MCP test results
         if: ${{ always() && hashFiles('TestResults/**/*.trx') != '' }}
         uses: actions/upload-artifact@v4
         with:

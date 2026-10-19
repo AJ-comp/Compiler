@@ -17,6 +17,7 @@ namespace Janglim.FrontEnd.RegularGrammar
         {
             this._wholeExpression = target._wholeExpression;
             this.alterIndex = (sbyte)target.alterIndex;
+            this.Predicate = target.Predicate;
 
             this.AddRange(target);
         }
@@ -27,7 +28,9 @@ namespace Janglim.FrontEnd.RegularGrammar
             this.alterIndex = (sbyte)index;
 
             if (index >= target.Count) return;
-            this.AddRange(target.ElementAt(index));
+            var production = target.ElementAt(index);
+            this.Predicate = production.Predicate;
+            this.AddRange(production);
         }
 
         public NonTerminal ToNonTerminal() => new NonTerminal(this);
@@ -35,7 +38,8 @@ namespace Janglim.FrontEnd.RegularGrammar
         {
             var result = new NonTerminalConcat(this.Priority, this._symbols.ToArray())
             {
-                MeaningUnit = this.MeaningUnit
+                MeaningUnit = this.MeaningUnit,
+                Predicate = this.Predicate
             };
 
             return result;

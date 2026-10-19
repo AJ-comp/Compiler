@@ -7,24 +7,34 @@
 ![.NET Standard 2.1](https://img.shields.io/badge/.NET-netstandard2.1-512BD4)
 [![Playground 1.1.0](https://img.shields.io/badge/playground-1.1.0-2ea44f)](https://janglim.mythosia.net)
 
-Define a grammar in plain C# — or in EBNF text — with no external `.g` files and no build-time
-codegen step, and get a full LR pipeline you can look inside: parse tables, FIRST/FOLLOW,
-step-by-step parse traces, conflict reports, automatic grammar normalization, optional LGLR
+Define a grammar in plain C# or EBNF text and get a full LR pipeline you can look inside:
+parse tables, FIRST/FOLLOW, step-by-step parse traces, conflict reports, automatic grammar normalization, optional LGLR
 backtracking, incremental reparsing, and pluggable error recovery.
 
-> **Engine `0.3.0` · web Playground `1.1.0`.**
+> **Engine `0.4.0` · web Playground `1.1.0` · remote MCP `0.1.0`.**
 > These products are versioned independently. `LALRParser` is the supported engine path;
 > SLR and CLR remain experimental and incomplete. The engine's public API may evolve across `0.x`.
 
 Install the engine:
 
 ```bash
-dotnet add package Janglim --version 0.3.0
+dotnet add package Janglim --version 0.4.0
 ```
 
 See the [release notes](RELEASE_NOTES.md) for the release scope and
 [changelog](CHANGELOG.md) for version history. Maintainers can follow the
 [GitHub Actions release guide](.github/RELEASING.md) to publish the engine and deploy the Playground.
+
+Engine `0.4.0` adds:
+
+- [Lexer source trivia](#lexer-source-trivia): each parsing token exposes the exact skipped source
+  text before it and whether that text contains a line break.
+- [Typed EBNF token declarations](#ebnf-text-token-declarations), including string/character
+  literals, comments, and explicit reject tokens.
+- [Registered predicates](#registered-predicates): call a pure C# condition from `{Name()}?` in
+  EBNF, with selective prediction for Shift / predicate-bearing ε Reduce conflicts.
+- Grammar diagnostics for repetitions that can consume no input and predicate-bearing
+  zero-token left recursion, while preserving ordinary LR left recursion and consuming loops.
 
 ## Quick start
 
@@ -65,13 +75,13 @@ with semantic actions attached. That form is the heart of the engine:
 give it input, and watch the LALR parser work: the ACTION/GOTO table, the parsing stack at each step,
 the syntax tree building up shift by shift, and conflict reports.
 
-**Playground 1.0.0** brings a redesigned React interface with shadcn components,
+**Playground 1.1.0** includes a redesigned React interface with shadcn components,
 an interactive tree, execution playback, table filtering, light/dark themes, and an expandable
 results workspace. Select a tree node to highlight its matching grammar symbols and exact input
 range; repeated tokens are distinguished by their source positions. Editing the source marks the
 previous result as out of date until the next run.
 
-**Playground 1.1.0** adds workspace files as the first step toward Janglim Studio:
+Its workspace files are the first step toward Janglim Studio:
 
 1. Save your current EBNF grammar and input string to a `.janglim.json` file.
 2. Open a saved file to restore both editors and run the existing parser again.
@@ -87,19 +97,51 @@ and Italian. It follows the browser language by default and remembers an explici
 Grammar symbols, parser actions, and engine diagnostics keep their original identifiers and text.
 
 Parsing runs entirely in your browser through **Blazor WebAssembly**, with the React interface in
-[`samples/Playground`](samples/Playground). The web release number is separate from the embedded
-engine's `0.3.0` version.
+[`samples/Playground`](samples/Playground). Builds from this source tree use engine `0.4.0`.
+The web and engine release numbers are independent.
 
 **📖 [Read the manual →](https://aj-comp.github.io/Compiler/)** — a from-scratch guide to LR/LALR
 parsing, built around this engine.
+
+## Use with AI coding tools
+
+The independently versioned **MCP `0.1.0`** service in
+[`services/Janglim.Mcp`](services/Janglim.Mcp) exposes five tools over stateless
+Streamable HTTP: `list_grammars`, `get_grammar`, `validate_grammar`, `parse_input`, and
+`run_tests`. Connect Claude Code, Codex, or another MCP client to retrieve a baseline,
+validate EBNF, inspect LALR table conflicts, parse examples, and check positive/negative
+cases while the AI edits the grammar in your project.
+
+`get_grammar` with `grammarId: "c11-core"` returns the built-in
+[C11 Core profile](grammars/c/README.md), its version, scope, and SHA-256 fingerprint.
+The released baseline is read-only: the client edits its own copy and submits that text
+to the validation and parsing tools. User requests cannot update the shared baseline,
+and the service does not persist user grammar copies or projects. Baseline updates are
+controlled repository changes shipped with a new service release.
+
+The service runs the existing engine in bounded, isolated worker processes. It accepts text
+and returns structured results; project files and AI reasoning remain in the client. This
+first version uses a shared Bearer key for remote access and does not include OAuth, parser
+source generation, or automatic synchronization with the web Playground.
+
+The remote service is deployed to Azure Container Apps:
+[Janglim MCP endpoint](https://janglim-mcp.wonderfulsand-6b5e00a1.koreacentral.azurecontainerapps.io/mcp).
+Connect with an operator-provided Bearer key through the `JANGLIM_MCP_API_KEY` client environment
+variable; remote users do not need the .NET SDK. The existing NuGet/Playground release pipeline
+validates MCP but does not redeploy it. The included deployment script supports manual deployment
+and preserves the existing key. See the [MCP guide](docs/MCP.md) for client setup, limits, Azure
+operations, and remote verification. Local development still uses the .NET 10 SDK and included container.
 
 ---
 
 ## Table of contents
 
 - [Why Janglim](#why-janglim)
+- [Use with AI coding tools](#use-with-ai-coding-tools) — remote MCP validation, parsing, and examples
 - [Defining a grammar](#defining-a-grammar) — terminals, rules, EBNF operators, semantic actions
+- [Registered predicates](#registered-predicates) — host C# conditions and selective conflict prediction
 - [Parsing](#parsing)
+- [Lexer source trivia](#lexer-source-trivia) — skipped source text and line-break information
 - [Looking inside the parser](#looking-inside-the-parser) — parse trace, FIRST/FOLLOW, conflicts, tables
 - [Automatic grammar normalization](#automatic-grammar-normalization)
 - [LGLR: parsing conflict-laden grammars](#lglr-parsing-conflict-laden-grammars)
@@ -192,8 +234,110 @@ new Terminal(TokenType.Literal.StringLiteral, "\"[^\"\\r\\n]*\"", "string", true
 - **String / char literal tokens** (`0.3.0-preview.1`+) use the `StringLiteral` / `CharLiteral`
   token types, which take the pattern as a **raw regex**. Word-shaped patterns are wrapped in
   `\b...\b`, which can never match a token that starts with a quote — these two types skip that.
-  C# API only for now; EBNF-text token rules still lex as word patterns.
+  Engine `0.4.0` also exposes these types through EBNF token declarations below.
 - The display-name and `isWordPattern` arguments help the lexer and diagnostics.
+
+### EBNF text token declarations
+
+Token rules accept an optional, case-sensitive kind before the double-quoted regex:
+
+```ebnf
+Value : id | text | ch | number ;
+id    := Identifier "[a-zA-Z_][a-zA-Z_0-9]*" ;
+text  := StringLiteral """[^""\r\n]*""" ;
+ch    := CharLiteral "'[^'\r\n]'" ;
+number := NumberLiteral "[0-9]+(?:\.[0-9]+)?" ;
+comment := Comment "//[^\r\n]*|/\*[\s\S]*?\*/" ;
+invalid_comment := Reject "/\*(?:(?!\*/)[\s\S])*\z" ;
+```
+
+| Kind | Lexer behavior |
+| --- | --- |
+| `Identifier` | Existing word-pattern behavior, with word boundaries |
+| `StringLiteral` | Raw regex, mapped to `TokenType.Literal.StringLiteral` |
+| `CharLiteral` | Raw regex, mapped to `TokenType.Literal.CharLiteral` |
+| `NumberLiteral` | Raw regex without word boundaries for numeric tokens |
+| `Comment` | Raw regex; lexical-only tokens skipped before parsing |
+| `Reject` | Raw regex; lexical-only tokens marking invalid input |
+
+Omitting the kind keeps the existing behavior: `id := "[a-zA-Z]+" ;` is equivalent to
+`id := Identifier "[a-zA-Z]+" ;`. Other kind names are rejected.
+
+`Comment` and `Reject` rules cannot be referenced in productions. After lexing, check each
+token's terminal with `EbnfGrammar.IsRejectedToken` and reject matching input before invoking
+the parser. The MCP adapter performs this check automatically. For example, `invalid_comment`
+prevents an unclosed block comment from being parsed as division and dereference operators.
+
+Inside a double-quoted regex, write `""` for one literal double quote. Backslashes are passed
+unchanged to the regex engine: `\r` and `\n` above are regex escapes, not an extra EBNF escape
+layer. Single-quoted grammar literals retain their existing syntax. When embedding EBNF in
+C# or JSON, apply that host format's escaping separately.
+
+The example patterns recognize simple quoted strings and single characters. The token kind
+does not add C escape validation or decode literal values; the regex defines what is accepted.
+The repository includes a [C11 Core syntax profile and regression examples](grammars/c/README.md)
+for editing selected C constructs. Its documented scope excludes preprocessing, `typedef`
+context handling, and semantic type checking; it is not a complete C compiler.
+
+### Registered predicates
+
+When embedding the engine in a .NET application, register a C# condition and call it from EBNF
+with **`{Name()}?`**. The following grammar accepts `throw value;` and rejects a line break
+between `throw` and `value`:
+
+```csharp
+using System;
+using Janglim.FrontEnd.Grammars.Ebnf;
+using Janglim.FrontEnd.Parsers.LR;
+using Janglim.FrontEnd.Tokenize;
+
+var options = new EbnfReaderOptions()
+    .RegisterPredicate("NoLineBreak", context => !context.NextToken.HasLineBreakBefore);
+
+var read = EbnfGrammarReader.Read(@"
+    Throw : 'throw' {NoLineBreak()}? id ';' ;
+    id := ""[a-zA-Z_][a-zA-Z_0-9]*"" ;
+    comment := Comment ""/\*[\s\S]*?\*/"" ;", options);
+
+if (!read.Success)
+    throw new InvalidOperationException(string.Join(Environment.NewLine, read.Errors));
+
+var grammar = read.Grammar;
+var lexer = new Lexer();
+foreach (var terminal in grammar.TerminalSet) lexer.AddTokenRule(terminal);
+var parser = new LALRParser(grammar);
+
+bool Parse(string source) => parser.Parsing(lexer.Lexing(source).TokensForParsing).Success;
+
+Console.WriteLine(Parse("throw value;"));    // True
+Console.WriteLine(Parse("throw\nvalue;"));  // False
+```
+
+A predicate consumes no input. Its `PredicateContext` exposes the previous token, the next token,
+the input token index, and the end-of-input flag. Conditions must be pure: prediction and actual
+parsing may evaluate a condition more than once. A line break inside a skipped comment is also
+visible through `HasLineBreakBefore`.
+
+When an original table cell contains exactly **one Shift and one predicate-bearing ε Reduce**,
+and both actions remain allowed after checking the condition, the parser predicts ahead until
+it can select one first action. Prediction uses copied state
+stacks and input positions; the actual parser then executes that action. It has resource limits
+and reports failed or ambiguous predictions. Other conflict forms retain their existing policy.
+
+Grammar construction checks progress before building the table:
+
+- `({Allow()}?)*` and `({Allow()}?)+` produce a grammar error because an iteration can consume
+  no token. `('x' {Allow()}?)*` and `('x' {Allow()}?)+` are supported.
+- `A : {Allow()}? A 'x' | 'x';` produces a grammar error because the predicate lies on a
+  zero-token path back to A. Ordinary left recursion such as `A : A 'x' | 'x';` and a predicate
+  after recursive entry, such as `A : A {Allow()}? 'x' | 'x';`, remain supported.
+
+These structural checks never call the condition. EBNF readers return grammar diagnostics;
+native C# grammars throw the corresponding exception during `Optimization()` or parser construction.
+See the
+[predicate repetition rules](docs/ko/predicate-repetition-rules.html),
+[left-recursion validation](docs/ko/predicate-left-recursion-validation.html), and
+[prediction walkthrough](docs/ko/functions/select-first-action.html) for detailed examples.
 
 ### Building rules
 
@@ -238,8 +382,21 @@ if (result.Success)
 }
 ```
 
-`LALRParser` is the supported parser for the `0.3.0` release. SLR and CLR variants are experimental
+`LALRParser` is the supported parser for the `0.4.0` release. SLR and CLR variants are experimental
 and incomplete — see [Known limitations](#status--known-limitations).
+
+### Lexer source trivia
+
+`TokenCell.LeadingTrivia` preserves the exact skipped text before each parsing token, including
+whitespace and whole comments. `TokenData` forwards that information through `LeadingTrivia`
+and `HasLineBreakBefore`. Trivia also records its source range, so tools can relate a condition
+to the original text.
+
+For the input string `"return\n    value\n;"`, the token for `value` has
+`LeadingTrivia.Text == "\n    "` and `HasLineBreakBefore == true`. For `return value;`, the same
+token has `LeadingTrivia.Text == " "` and `HasLineBreakBefore == false`. This gives a registered
+condition the source information it needs to enforce a language's newline rule. See the
+[lexer guide](docs/ko/lexer.md) for source-position and comment examples.
 
 ---
 
@@ -434,16 +591,25 @@ src/
   Cli/        command-line tools (ajbuild, ajutil, …)
   Janglim/    NuGet packaging project (bundles the engine assemblies)
 samples/      the React + Blazor WebAssembly playground
-Tests/        xUnit suite for the engine  (Parse.FrontEnd.Parsers.Tests)
+services/     the .NET 10 remote MCP service  (Janglim.Mcp)
+Tests/        xUnit suites for the engine and MCP service
 legacy/       historical solution and deprecated IDE / WPF projects, kept for reference
 ```
 
 ## Building from source
 
-[`AJPGS.sln`](AJPGS.sln) is the supported default solution: the nine engine/package projects,
-parser tests, and the Playground. Install the **.NET 10 SDK**, the **.NET 8 runtime** for running
-parser tests, and **Node.js 22.18.0 or later** with npm. The tests target `net8.0`; the Playground
-targets `net10.0`. Its MSBuild targets install and build the React frontend automatically.
+[`AJPGS.sln`](AJPGS.sln) is the supported 13-project default solution: the nine engine/package
+projects, parser tests, the Playground, the MCP service, and MCP tests. The repository contains
+27 project files in total, including historical projects and projects outside both solutions.
+Install the **.NET 10 SDK**, the **.NET 8 runtime** for running parser tests, and
+**Node.js 22.18.0 or later** with npm. Parser tests target `net8.0`; the Playground, MCP service,
+and MCP tests target `net10.0`. The Playground's MSBuild targets install and build the React
+frontend automatically. The MCP service can be built separately without Node.js:
+
+```shell
+dotnet build services/Janglim.Mcp/Janglim.Mcp.csproj -c Release
+dotnet test Tests/Janglim.Mcp.Tests/Janglim.Mcp.Tests.csproj -c Release
+```
 
 From the repository root, use a public build with the included loading component. This is also
 the build mode used by CI and requires no licensed frontend sources or key:
@@ -477,7 +643,7 @@ remaining WPF projects target `netcoreapp3.1`. See [legacy notes](legacy/README.
 
 ## Status & known limitations
 
-The **engine `0.3.0`** release supports the LALR path. Its `0.x` API policy remains explicit:
+The **engine `0.4.0`** release supports the LALR path. Its `0.x` API policy remains explicit:
 public API changes may occur in later `0.x` versions and should be checked in the release notes.
 The **web Playground `1.1.0`** is versioned separately; it does not imply an engine `1.0` API contract.
 
@@ -485,6 +651,8 @@ Supported engine features:
 
 - **LALR** table construction, parsing, conflict detection, FIRST/FOLLOW, normalization, EBNF
   operators, semantic actions, incremental reparse, error recovery, LGLR backtracking.
+- Typed EBNF tokens, source trivia and line-break information, registered pure C# predicates,
+  selective Shift / predicate-bearing ε Reduce prediction, and grammar progress diagnostics.
 
 Known limitations and experimental scope:
 
@@ -495,7 +663,10 @@ Known limitations and experimental scope:
   The underlying data is correct — and terminal labels and the parse-table renderer were just made
   null-safe, so missing labels no longer crash or blank out the dumps.
 - **Grammar construction must be sequential.** The builder uses process-global static state;
-  constructing multiple grammars concurrently can interfere across instances.
+  constructing multiple grammars concurrently can interfere across instances. The MCP service
+  isolates separate requests in worker processes rather than sharing grammar instances.
+- **MCP remote access uses a shared Bearer key.** Per-user identity, OAuth, and measured public
+  service capacity are not part of this first implementation. See [MCP limits](docs/MCP.md#처리-제한과-격리).
 - **The `0.x` public API may evolve.** Introspection still exposes `System.Data.DataTable`, and the
   grammar builder still exposes implementation details. API cleanup remains on the roadmap.
 - **Recovery is pluggable.** The default error handler reports positioned syntax errors; token
@@ -509,7 +680,10 @@ See [RELEASE_NOTES.md](RELEASE_NOTES.md) for the official release scope and
 - Stabilize the public API (drop `DataTable` from the public surface, remove process-global static
   state, add a clean generic semantic-action hook).
 - Polish the diagnostic renderers (tables, FIRST/FOLLOW, item sets).
-- An external grammar-file format (`.ebnf` / `.g`) and/or a codegen backend.
+- Add parser-driven lexical goals and contextual scanning/rescanning, then develop and validate
+  complete JavaScript and TypeScript grammar profiles. This work is planned separately from the
+  token-trivia and predicate features in `0.4.0`.
+- Generate parser source at build time from the existing C# and EBNF grammar definitions.
 - Repair/finish the SLR and CLR table builders.
 
 ## Publications
