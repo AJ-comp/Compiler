@@ -24,6 +24,7 @@ Engine 0.5.0 adds parser-driven lexical input, longest-match token selection and
 
 - Add JavaScriptExpressionGrammar, JavaScriptScriptGrammar and JavaScriptModuleGrammar in Janglim.FrontEnd.Grammars.JavaScript. Consumers check Parsing success and Validate diagnostics together.
 - Embed six EBNF sources and Unicode 17 identifier data; include the Unicode data license in the NuGet package.
+- Copy the JavaScript grammar directory into the MCP container build context and include the Unicode notice in MCP and Playground publish output.
 - Support expressions, strict Script statements/declarations, Module syntax, contextual slash handling, templates, destructuring and bindings, ordinary/async/arrow functions, generators/async generators, object/class methods and accessors, classes and private names.
 - Include ASI, import/export and attributes, dynamic import, import.meta, top-level await and for-await-of with function/body context checks.
 - Validate regular-expression pattern bodies in ordinary/u/v modes on the final tree, plus lexical flags, declaration scope, parameters, assignment targets and other documented early errors.

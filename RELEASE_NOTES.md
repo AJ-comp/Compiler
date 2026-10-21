@@ -102,7 +102,7 @@ Console.WriteLine(diagnostics.Count == 0);
 
 이번 JavaScript API는 .NET 호스트에서 사용합니다. MCP 기준 문법 목록은 기존 `c11-core`를 유지합니다. Playground와 MCP의 일반 EBNF 처리 경로에는 공통 렉싱 개선이 적용됩니다.
 
-패키지에는 여섯 JavaScript EBNF 내장 리소스와 Unicode 17 식별자 데이터를 포함합니다. Unicode 데이터 출처·라이선스는 [Unicode 안내](grammars/javascript/unicode/README.txt)에 기록하고, NuGet에 `licenses/Unicode-LICENSE.txt`를 함께 넣습니다.
+패키지에는 여섯 JavaScript EBNF 내장 리소스와 Unicode 17 식별자 데이터를 포함합니다. Unicode 데이터 출처·라이선스는 [Unicode 안내](grammars/javascript/unicode/README.txt)에 기록합니다. NuGet과 MCP 게시 산출물에는 `licenses/Unicode-LICENSE.txt`를, Playground 정적 사이트에는 `wwwroot/licenses/Unicode-LICENSE.txt`를 함께 넣습니다. MCP 컨테이너 빌드에도 여섯 EBNF와 라이선스가 있는 JavaScript 문법 디렉터리를 복사합니다.
 
 엔진은 계속 .NET Standard 2.1을 대상으로 하며 지원 파서는 `LALRParser`입니다. 문법 빌더의 전역 상태 때문에 한 프로세스의 문법 생성은 순차적으로 수행합니다. 0.x 공개 API는 후속 버전에서 바뀔 수 있습니다.
 
@@ -119,6 +119,8 @@ Console.WriteLine(diagnostics.Count == 0);
 | 게시 인프라 테스트 | 12개 통과 |
 | 공개 Playground 게시 빌드 | 성공 |
 | MCP 서버 게시 빌드 | 성공 |
+| Docker 복사 목록만으로 구성한 MCP 소스 게시 빌드 | 성공. 컨텍스트 안의 프로젝트 참조·리소스 경로와 EBNF 6개 확인 |
+| MCP·Playground 게시 라이선스 | 두 게시 위치의 Unicode 라이선스가 원본과 바이트 단위로 일치 |
 | NuGet 패키징·내용 검사 | 0.5.0 패키지 생성. 엔진 DLL 9개 버전 0.5.0.0, 지역화 DLL 40개, EBNF 리소스 6개와 Unicode 라이선스 확인 |
 | 독립 net8.0 패키지 소비 프로젝트 | 80개 검사 통과. 저장소 ProjectReference 없이 새 API·JavaScript 정상/오류 입력과 정적 검사 확인 |
 | 저장소·패키지 README의 JavaScript 예제 | 문서의 코드 블록을 그대로 추출한 별도 프로젝트 2개에서 파싱 성공·정적 진단 0개 확인 |

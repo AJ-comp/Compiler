@@ -24,6 +24,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\src\FrontEnd\Parse.FrontEnd.Parsers\Parse.FrontEnd.Parsers.csproj" />
     <ProjectReference Include="..\..\src\FrontEnd\Parse.FrontEnd.Grammars.Ebnf\Parse.FrontEnd.Grammars.Ebnf.csproj" />
+    <Content Include="../../grammars/javascript/unicode/LICENSE.txt" Link="wwwroot/licenses/Unicode-LICENSE.txt" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
   </ItemGroup>
 
   <ItemGroup>

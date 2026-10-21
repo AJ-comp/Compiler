@@ -15,6 +15,7 @@ COPY src/FrontEnd/Parse.FrontEnd.Parsers/ src/FrontEnd/Parse.FrontEnd.Parsers/
 COPY src/FrontEnd/Parse.FrontEnd.ErrorHandler/ src/FrontEnd/Parse.FrontEnd.ErrorHandler/
 COPY src/FrontEnd/Parse.FrontEnd.Support/ src/FrontEnd/Parse.FrontEnd.Support/
 COPY grammars/c/c11-core.ebnf grammars/c/c11-core.ebnf
+COPY grammars/javascript/ grammars/javascript/
 COPY services/Janglim.Mcp/ services/Janglim.Mcp/
 
 RUN dotnet publish services/Janglim.Mcp/Janglim.Mcp.csproj \
