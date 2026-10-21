@@ -678,8 +678,12 @@ public sealed class JavaScriptFunctionKindsScriptTests
         var valid = _fixture.Success("async function* f() { const object = { async run() { return super.value; } }; yield await task; }");
         var invalid = _fixture.Parse("const object = { async run(first, first) {} };");
         Assert.True(invalid.Success);
-        var before = invalid.ToParseTree.AllTokens.ToArray();
-        var expected = _fixture.Language.Validate(invalid.ToParseTree)
+        // Extract the tree before starting workers: ToParseTree reads the parser's mutable
+        // result stack. This test exercises concurrent validation of a completed tree.
+        var invalidTree = invalid.ToParseTree;
+        Assert.NotNull(invalidTree);
+        var before = invalidTree.AllTokens.ToArray();
+        var expected = _fixture.Language.Validate(invalidTree)
             .Select(d => (d.Code, d.SourceOffset, d.Length)).ToArray();
         Assert.NotEmpty(expected);
         await Task.WhenAll(Enumerable.Range(0, 8).Select(_ => Task.Run(() =>
@@ -687,13 +691,13 @@ public sealed class JavaScriptFunctionKindsScriptTests
             for (int round = 0; round < 10; round++)
             {
                 Assert.Empty(_fixture.Language.Validate(valid));
-                Assert.Equal(expected, _fixture.Language.Validate(invalid.ToParseTree)
+                Assert.Equal(expected, _fixture.Language.Validate(invalidTree)
                     .Select(d => (d.Code, d.SourceOffset, d.Length)).ToArray());
-                Assert.Equal(expected, JavaScriptExpressionValidation.Validate(invalid.ToParseTree)
+                Assert.Equal(expected, JavaScriptExpressionValidation.Validate(invalidTree)
                     .Select(d => (d.Code, d.SourceOffset, d.Length)).ToArray());
             }
         })));
-        var after = invalid.ToParseTree.AllTokens.ToArray();
+        var after = invalidTree.AllTokens.ToArray();
         Assert.Equal(before.Length, after.Length);
         for (int index = 0; index < before.Length; index++) Assert.Same(before[index], after[index]);
     }
