@@ -37,6 +37,20 @@
     href: deep-terminal.md
   - name: 렉서 — 경계 정보와 구현 이유
     href: deep-lexer.md
+  - name: 파서 주도 렉싱 — 정규식 규칙 묶음 선택
+    href: parser-driven-lexing.html
+  - name: JavaScript 표현식 — ECMAScript 2026
+    href: javascript-expressions.html
+  - name: JavaScript 함수·문장·선언
+    href: javascript-statements.html
+  - name: JavaScript async·제너레이터·메서드
+    href: javascript-functions.html
+  - name: JavaScript 클래스 — 멤버와 본문 검사
+    href: javascript-classes.html
+  - name: JavaScript 모듈 — import·export와 문맥
+    href: javascript-modules.html
+  - name: JavaScript 정규식 — 본문 문법 검사
+    href: javascript-regexp.html
   - name: NonTerminal — 규칙(가지)
     href: deep-nonterminal.md
   - name: Concat — 순서(연접)

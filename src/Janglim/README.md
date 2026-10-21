@@ -8,21 +8,22 @@ Define a grammar in C# — or in plain EBNF text — and get a full LR pipeline 
 look inside: parse tables, FIRST/FOLLOW, step-by-step parse traces, conflict reports,
 grammar normalization, incremental reparsing, and pluggable error recovery.
 
-> **Engine `0.4.0`.** `LALRParser` is the supported parser.
+> **Engine `0.5.0`.** `LALRParser` is the supported parser.
 > The public API may evolve across `0.x`; SLR and CLR remain experimental and incomplete.
 
 Install the engine:
 
 ```bash
-dotnet add package Janglim --version 0.4.0
+dotnet add package Janglim --version 0.5.0
 ```
 
 See the [release notes](https://github.com/AJ-comp/Compiler/blob/master/RELEASE_NOTES.md) and
 [changelog](https://github.com/AJ-comp/Compiler/blob/master/CHANGELOG.md) for release scope and history.
 
-Version `0.4.0` adds lexer source trivia and line-break information, typed EBNF token declarations,
-registered pure C# predicates, selective Shift / predicate-bearing ε Reduce prediction, and
-grammar diagnostics for non-consuming repetitions and predicate-bearing left recursion.
+Version `0.5.0` adds longest-match registered-rule lexing, parser-driven lexical policies and
+independent input cursors, plus ECMAScript 2026 profiles for strict Script expressions, Scripts,
+and Modules. The JavaScript language layer includes templates, destructuring, functions,
+async functions, generators, object methods, classes, modules, and regular-expression validation.
 
 ## Quick start
 
@@ -57,9 +58,8 @@ for EBNF repetition) instead of EBNF text.
 
 ### String / char literal tokens
 
-Quote-delimited tokens need the `StringLiteral` / `CharLiteral` token types, which use the
-pattern as a raw regex (word-shaped tokens are wrapped in `\b...\b`, which can never match
-a token that starts with a quote):
+Use the `StringLiteral` / `CharLiteral` token kinds with a regex describing the complete
+quoted token. All regex rules use the supplied pattern without automatic `\b` boundaries:
 
 ```csharp
 using Janglim;
@@ -69,7 +69,7 @@ new Terminal(TokenType.Literal.StringLiteral, "\"[^\"\\r\\n]*\"", "string", true
 new Terminal(TokenType.Literal.CharLiteral, "'[^'\\r\\n]'", "char", true, true);
 ```
 
-Engine `0.4.0` also supports optional token kinds in EBNF text:
+EBNF text also supports optional token kinds:
 
 ```ebnf
 Value : id | text | ch | number ;
@@ -83,10 +83,9 @@ invalid_comment := Reject "/\*(?:(?!\*/)[\s\S])*\z" ;
 
 The supported kind names are exactly `Identifier`, `StringLiteral`, `CharLiteral`,
 `NumberLiteral`, `Comment`, and `Reject`.
-Omitting the kind preserves the existing `Identifier` behavior with word boundaries:
-`id := "[a-zA-Z]+" ;` remains valid. String and character kinds use the existing raw-regex
-terminal types without word boundaries. `NumberLiteral` also uses a raw regex without word
-boundaries. `Comment` tokens are skipped before parsing. `Reject` tokens mark invalid input;
+Omitting the kind selects `Identifier`, so `id := "[a-zA-Z]+" ;` remains valid.
+The regex determines accepted text for each kind. `Comment` tokens are skipped before parsing.
+`Reject` tokens mark invalid input;
 after lexing, check each token's terminal with `EbnfGrammar.IsRejectedToken` and reject matching
 input before invoking the parser. The MCP adapter performs this check automatically.
 `Comment` and `Reject` are lexical-only rules and cannot be referenced in productions.
@@ -96,10 +95,81 @@ unchanged, so regex escapes such as `\r` and `\n` reach the regex engine directl
 grammar literals keep their existing syntax. C# and JSON escaping still apply separately
 when embedding the EBNF in those formats.
 
-These simple examples do not define all C string/character escapes. Token kinds select lexer
-behavior; the supplied regex determines accepted text, and literal values are not decoded.
+These simple examples recognize basic quoted tokens. Token kinds classify the result and
+select comment/rejection behavior; the regex determines accepted text, and literal values are
+not decoded. Full C escape validation belongs to the language profile.
 The repository provides a [C11 Core syntax profile](https://github.com/AJ-comp/Compiler/blob/master/grammars/c/README.md) with a documented
 scope and regression examples. It does not implement a complete C compiler.
+
+## Longest-match and parser-driven lexing
+
+`Lexer.Lexing`, edited-input lexing, and token sources compare each registered rule's match at
+the current source position. The match consuming the most text wins; equal lengths use terminal
+category priority, then registration order within that category. Thus `ifValue` stays one
+identifier, while a literal `if` keyword wins an equal-length tie on the input `if`.
+
+Regex rules retain their authored .NET semantics, including explicit `\b`, anchors, alternation,
+and greediness. Longest-match selection compares returned matches from separate rules; it does
+not rewrite `a|ab` to prefer `ab`. A rule matching zero characters at the requested position
+raises `EmptyTokenMatchException`. When upgrading from `0.4.0`, review any patterns that relied
+on automatic word boundaries or shorter-rule precedence. The legacy combined-regex string API
+continues to use ordered .NET alternation.
+
+For context-sensitive tokenization, create `LexicalGoal` rule groups, register them in a
+`LexicalPolicy`, then call `lexer.CreateTokenSource(input, policy)` and `parser.Parsing(source)`.
+The parser supplies a read-only `LexicalContext` to the policy. The policy selects a group and
+the parser requests the next token from the source with that group. `Peek` returns a token and
+`Next` cursor; a Shift adopts that next cursor. Prediction candidates retain independent cursors
+and lexical states. A custom pure selector handles contexts that need the state stack or
+consumed-token history.
+
+The [illustrated guide](https://github.com/AJ-comp/Compiler/blob/master/docs/ko/parser-driven-lexing.html)
+explains the setup, division/regular-expression example, cursor fields, and responsibilities.
+
+## JavaScript profiles
+
+Use `Janglim.FrontEnd.Grammars.JavaScript.JavaScriptExpressionGrammar` for one expression in a
+strict Script context, `JavaScriptScriptGrammar` for strict declarations and statements, or
+`JavaScriptModuleGrammar` for Module input. The profiles target ECMAScript 2026 with Unicode 17
+identifiers and provide their own lexical policies and registered predicates.
+
+```csharp
+using System;
+using Janglim.FrontEnd.Grammars.JavaScript;
+using Janglim.FrontEnd.Parsers.LR;
+
+var language = new JavaScriptScriptGrammar();
+var parser = new LALRParser(language.Grammar);
+var parsed = parser.Parsing(language.CreateTokenSource(
+    "async function load({path}) { return /ab/g.test(await read(path)); }"));
+if (!parsed.Success)
+    throw new InvalidOperationException(parser.FiredException?.Message ?? "Parsing failed.");
+
+var diagnostics = language.Validate(parsed.ToParseTree);
+if (diagnostics.Count > 0)
+{
+    foreach (var diagnostic in diagnostics)
+        Console.WriteLine($"{diagnostic.Code}: {diagnostic.Message} " +
+            $"(offset {diagnostic.SourceOffset}, length {diagnostic.Length})");
+    return;
+}
+
+Console.WriteLine(parsed.ToParseTree.AllInputDatas);
+```
+
+**Check both `parsed.Success` and `language.Validate(...)`.** Parsing builds the syntax tree;
+validation checks assignment/binding restrictions, declaration and function contexts, private
+names, regular-expression bodies, and other documented static errors. The code does not execute
+JavaScript. Diagnostic offsets and lengths use .NET UTF-16 code units.
+
+Supported syntax includes templates, destructuring assignments and bindings, ordinary/arrow/async
+functions, generators and async generators, object methods and accessors, classes, imports and
+exports, dynamic import, `import.meta`, top-level await, and automatic semicolon insertion.
+Regular-expression bodies are validated in ordinary, `u`, and `v` modes. The current profile scope
+is strict Script and Module syntax with the documented static checks; non-strict syntax and
+full specification conformance remain follow-up work. See the
+[profile guide](https://github.com/AJ-comp/Compiler/blob/master/grammars/javascript/README.md)
+for the support matrix, examples, Unicode licensing, and authorship context.
 
 ## Source trivia and registered predicates
 
@@ -164,8 +234,10 @@ for the detailed behavior and examples.
 
 - **Supported:** LALR table construction and parsing, FIRST/FOLLOW, conflict reports, parse traces,
   EBNF operators, grammar normalization, semantic tags and ASTs, incremental reparsing, and
-  pluggable error recovery. Version `0.4.0` also supports typed EBNF tokens, token-boundary trivia,
-  registered C# predicates, selective guarded-conflict prediction, and grammar progress diagnostics.
+  pluggable error recovery, typed EBNF tokens, token-boundary trivia, registered C# predicates,
+  selective guarded-conflict prediction, and grammar progress diagnostics. Version `0.5.0` adds
+  longest-match registered-rule lexing, parser-driven token sources and lexical policies, and
+  the documented ECMAScript 2026 strict Script/Module profiles.
 - **Experimental and incomplete:** SLR builds reduce-deficient tables; CLR has unimplemented
   behavior. Use `LALRParser` for the supported parsing path.
 - **Build grammars sequentially:** grammar generation uses process-global state, so concurrent

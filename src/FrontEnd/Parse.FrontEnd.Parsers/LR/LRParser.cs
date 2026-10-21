@@ -14,6 +14,12 @@ using static Janglim.FrontEnd.Parsers.Datas.LR.LRParsingRowDataFormat;
 
 namespace Janglim.FrontEnd.Parsers.LR
 {
+    /// <summary>
+    /// LR 파싱 테이블과 상태 스택으로 입력 토큰의 문법 구조를 분석합니다.
+    /// <para>
+    /// <see href="../../../../docs/ko/parser-driven-lexing.html#parser-role">파서 주도 렉싱 설계 — LRParser의 토큰 요청과 Shift·Reduce 연결</see>
+    /// </para>
+    /// </summary>
     public abstract partial class LRParser : Parser
     {
         public bool BackTrackingOnConflict { get; private set; } = false;

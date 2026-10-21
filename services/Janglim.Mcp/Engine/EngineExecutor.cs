@@ -6,6 +6,7 @@ using Janglim.FrontEnd.Parsers.LR;
 using Janglim.FrontEnd.ParseTree;
 using Janglim.FrontEnd.RegularGrammar;
 using Janglim.FrontEnd.Tokenize;
+using System.Text.RegularExpressions;
 
 namespace Janglim.Mcp.Engine;
 
@@ -86,6 +87,10 @@ public static class EngineExecutor
             var passedCount = cases.Count(test => test.Passed);
             return new(status, status == "ok" ? null : "Some cases could not be evaluated normally.",
                 report, Tests: new(cases.Count, passedCount, cases.Count - passedCount, cases.ToArray()));
+        }
+        catch (RegexMatchTimeoutException)
+        {
+            return Limit("A token pattern exceeded the regex execution time limit.");
         }
         catch
         {
@@ -168,6 +173,18 @@ public static class EngineExecutor
 
             return new("ok", null, new(success, tokens.Count, diagnostics.ToArray(), returnedTokens,
                 tokensTruncated, tree, treeTruncated));
+        }
+        catch (RegexMatchTimeoutException)
+        {
+            // A per-regex deadline is the same resource-limit outcome as the worker
+            // deadline. It must not be reported as an engine failure or a passed negative case.
+            return ParseFailure("runtime_limit", "A token pattern exceeded the regex execution time limit.", 0);
+        }
+        catch (EmptyTokenMatchException exception)
+        {
+            const string message = "A token pattern matched an empty string.";
+            return new("invalid_grammar", message, new(false, 0,
+                [new("zero_length_token", message, exception.SourceOffset, exception.SourceOffset)], [], false));
         }
         catch
         {

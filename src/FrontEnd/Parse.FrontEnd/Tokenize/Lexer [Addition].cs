@@ -14,7 +14,7 @@ namespace Janglim.FrontEnd.Tokenize
         {
             LexingData result = new LexingData(this._tokenPatternList);
 
-            var tokenCells = this._tokenizer.Tokenize(this._tokenizeRule, data);
+            var tokenCells = this._tokenizer.Tokenize(this.LexicalRules, data);
             result.InitToken(tokenCells);
 
             return result;
@@ -88,7 +88,7 @@ namespace Janglim.FrontEnd.Tokenize
 
             // If a basisIndex is used then it can increase the performance of the ReplaceToken function because of need not arrange.
             // But the logic is not written yet.
-            var tokenList = this._tokenizer.Tokenize(this._tokenizeRule, mergeString);
+            var tokenList = this._tokenizer.Tokenize(this.LexicalRules, mergeString);
             targetStorage.ReplaceToken(impactRange, tokenList);
 
             return targetStorage;
@@ -108,7 +108,7 @@ namespace Janglim.FrontEnd.Tokenize
                 var impactRangeToParse = cloneStorage.FindImpactRange(rangePairToRegist.Item1.StartIndex, rangePairToRegist.Item1.EndIndex);
                 var beforeTokens = cloneStorage.TokensToView.Skip(impactRangeToParse.StartIndex).Take(impactRangeToParse.Count).ToList();
                 var basisIndex = (beforeTokens.Count > 0) ? beforeTokens[0].StartIndex : 0;
-                var processedTokens = this._tokenizer.Tokenize(this._tokenizeRule, cloneStorage.GetMergeStringOfRange(impactRangeToParse), basisIndex);
+                var processedTokens = this._tokenizer.Tokenize(this.LexicalRules, cloneStorage.GetMergeStringOfRange(impactRangeToParse), basisIndex);
 
                 if (beforeTokens.IsEqual(processedTokens)) break;
                 cloneStorage.ReplaceToken(impactRangeToParse, processedTokens);

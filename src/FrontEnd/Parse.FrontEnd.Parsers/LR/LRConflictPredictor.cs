@@ -12,6 +12,9 @@ namespace Janglim.FrontEnd.Parsers.LR
     /// Selects one real action at a Shift / predicate-bearing epsilon Reduce conflict.
     /// Prediction copies only state numbers and token positions. It never constructs trees,
     /// invokes parser events, consumes the caller's input, or modifies the shared LALR table.
+    /// <para>
+    /// <see href="../../../../docs/ko/parser-driven-lexing.html#prediction-role">파서 주도 렉싱 설계 — 예측 후보별 입력 위치와 문맥</see>
+    /// </para>
     /// </summary>
     internal sealed class LRConflictPredictor
     {

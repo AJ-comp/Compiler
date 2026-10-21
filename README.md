@@ -11,30 +11,31 @@ Define a grammar in plain C# or EBNF text and get a full LR pipeline you can loo
 parse tables, FIRST/FOLLOW, step-by-step parse traces, conflict reports, automatic grammar normalization, optional LGLR
 backtracking, incremental reparsing, and pluggable error recovery.
 
-> **Engine `0.4.0` · web Playground `1.1.0` · remote MCP `0.1.0`.**
+> **Engine `0.5.0` · web Playground `1.1.0` · remote MCP `0.1.0`.**
 > These products are versioned independently. `LALRParser` is the supported engine path;
 > SLR and CLR remain experimental and incomplete. The engine's public API may evolve across `0.x`.
 
 Install the engine:
 
 ```bash
-dotnet add package Janglim --version 0.4.0
+dotnet add package Janglim --version 0.5.0
 ```
 
 See the [release notes](RELEASE_NOTES.md) for the release scope and
 [changelog](CHANGELOG.md) for version history. Maintainers can follow the
 [GitHub Actions release guide](.github/RELEASING.md) to publish the engine and deploy the Playground.
 
-Engine `0.4.0` adds:
+Engine `0.5.0` adds:
 
-- [Lexer source trivia](#lexer-source-trivia): each parsing token exposes the exact skipped source
-  text before it and whether that text contains a line break.
-- [Typed EBNF token declarations](#ebnf-text-token-declarations), including string/character
-  literals, comments, and explicit reject tokens.
-- [Registered predicates](#registered-predicates): call a pure C# condition from `{Name()}?` in
-  EBNF, with selective prediction for Shift / predicate-bearing ε Reduce conflicts.
-- Grammar diagnostics for repetitions that can consume no input and predicate-bearing
-  zero-token left recursion, while preserving ordinary LR left recursion and consuming loops.
+- [Longest-match lexing](#token-selection): compare the text matched by each registered rule,
+  resolve equal lengths by rule priority, and use regexes without adding automatic `\b` boundaries.
+- [Parser-driven lexing](#parser-driven-lexing): register token-rule groups in a `LexicalPolicy`,
+  create a token source, and let that policy select a group before each requested token.
+  Prediction candidates keep independent input cursors and lexical state.
+- [JavaScript grammar profiles](#javascript-grammar-profiles) for ECMAScript 2026 strict Script
+  expressions, Scripts, and Modules, including templates, destructuring, functions, classes,
+  imports/exports, async functions, generators, and regular-expression body validation.
+- Illustrated guides for token exchange, cursor ownership, and JavaScript language support.
 
 ## Quick start
 
@@ -97,7 +98,7 @@ and Italian. It follows the browser language by default and remembers an explici
 Grammar symbols, parser actions, and engine diagnostics keep their original identifiers and text.
 
 Parsing runs entirely in your browser through **Blazor WebAssembly**, with the React interface in
-[`samples/Playground`](samples/Playground). Builds from this source tree use engine `0.4.0`.
+[`samples/Playground`](samples/Playground). Builds from this source tree use engine `0.5.0`.
 The web and engine release numbers are independent.
 
 **📖 [Read the manual →](https://aj-comp.github.io/Compiler/)** — a from-scratch guide to LR/LALR
@@ -141,6 +142,9 @@ operations, and remote verification. Local development still uses the .NET 10 SD
 - [Defining a grammar](#defining-a-grammar) — terminals, rules, EBNF operators, semantic actions
 - [Registered predicates](#registered-predicates) — host C# conditions and selective conflict prediction
 - [Parsing](#parsing)
+- [Token selection](#token-selection) — longest returned match and equal-length priority
+- [Parser-driven lexing](#parser-driven-lexing) — policy selection and lazy token requests
+- [JavaScript grammar profiles](#javascript-grammar-profiles) — strict Script and Module inputs
 - [Lexer source trivia](#lexer-source-trivia) — skipped source text and line-break information
 - [Looking inside the parser](#looking-inside-the-parser) — parse trace, FIRST/FOLLOW, conflicts, tables
 - [Automatic grammar normalization](#automatic-grammar-normalization)
@@ -231,11 +235,11 @@ new Terminal(TokenType.Literal.StringLiteral, "\"[^\"\\r\\n]*\"", "string", true
 - The **value** is either a literal string (`"+"`) or a regular-expression pattern for the lexer.
 - `meaning: false` marks punctuation/keywords that should be matched but dropped from the semantic
   tree (parentheses, operators); meaningful terminals (identifiers, literals) stay.
-- **String / char literal tokens** (`0.3.0-preview.1`+) use the `StringLiteral` / `CharLiteral`
-  token types, which take the pattern as a **raw regex**. Word-shaped patterns are wrapped in
-  `\b...\b`, which can never match a token that starts with a quote — these two types skip that.
-  Engine `0.4.0` also exposes these types through EBNF token declarations below.
-- The display-name and `isWordPattern` arguments help the lexer and diagnostics.
+- **String / char literal tokens** use the `StringLiteral` / `CharLiteral` token types.
+  Their regexes describe the complete token, including quote characters. Regex rules of every
+  kind use the supplied pattern without automatic `\b` boundaries.
+- The display-name argument labels diagnostics. `isWordPattern` distinguishes regex rules from
+  literal rules for display and equal-length priority; it does not add word boundaries.
 
 ### EBNF text token declarations
 
@@ -253,14 +257,14 @@ invalid_comment := Reject "/\*(?:(?!\*/)[\s\S])*\z" ;
 
 | Kind | Lexer behavior |
 | --- | --- |
-| `Identifier` | Existing word-pattern behavior, with word boundaries |
-| `StringLiteral` | Raw regex, mapped to `TokenType.Literal.StringLiteral` |
-| `CharLiteral` | Raw regex, mapped to `TokenType.Literal.CharLiteral` |
-| `NumberLiteral` | Raw regex without word boundaries for numeric tokens |
-| `Comment` | Raw regex; lexical-only tokens skipped before parsing |
-| `Reject` | Raw regex; lexical-only tokens marking invalid input |
+| `Identifier` | Declared regex, mapped to the identifier token kind |
+| `StringLiteral` | Declared regex, mapped to `TokenType.Literal.StringLiteral` |
+| `CharLiteral` | Declared regex, mapped to `TokenType.Literal.CharLiteral` |
+| `NumberLiteral` | Declared regex for numeric tokens |
+| `Comment` | Declared regex; lexical-only tokens skipped before parsing |
+| `Reject` | Declared regex; lexical-only tokens marking invalid input |
 
-Omitting the kind keeps the existing behavior: `id := "[a-zA-Z]+" ;` is equivalent to
+Omitting the kind selects `Identifier`: `id := "[a-zA-Z]+" ;` is equivalent to
 `id := Identifier "[a-zA-Z]+" ;`. Other kind names are rejected.
 
 `Comment` and `Reject` rules cannot be referenced in productions. After lexing, check each
@@ -382,8 +386,118 @@ if (result.Success)
 }
 ```
 
-`LALRParser` is the supported parser for the `0.4.0` release. SLR and CLR variants are experimental
+`LALRParser` is the supported parser for the `0.5.0` release. SLR and CLR variants are experimental
 and incomplete — see [Known limitations](#status--known-limitations).
+
+### Token selection
+
+`Lexer.Lexing`, edited-input lexing, and parser-driven token sources compare each active rule's
+match at the current source position. The rule that consumes the most text wins. Equal lengths
+use the existing terminal-category priority, then registration order within that category.
+For example, the identifier rule reads all of `ifValue` instead of splitting off the `if`
+keyword; on the input `if`, a literal keyword rule wins its equal-length tie with the identifier.
+
+The lexer uses regexes as declared and does not add `\b`. A language can therefore include `$`
+or Unicode characters in its identifiers. Explicit boundaries, anchors, alternation, and
+greediness keep their .NET regex meaning: `a|ab` still returns `a` within that rule. Longest-match
+selection compares the matches returned by separate rules. A rule that matches an empty string
+at the requested position produces `EmptyTokenMatchException` instead of an input-free loop.
+
+When upgrading from `0.4.0`, review patterns that relied on automatically added word boundaries
+or on a shorter rule winning before a longer match. Add an explicit boundary only where your
+language requires it. The legacy combined-regex string API retains ordered .NET alternation;
+the registered-rule lexer paths above use the new selection logic.
+
+### Parser-driven lexing
+
+Some languages need grammar context before the next token can be recognized. JavaScript's `/`
+can begin a division operator or a regular-expression literal. `LexicalGoal` holds a group of
+token rules; `LexicalPolicy` owns the available groups and selects one from the parsing context.
+`Lexer` then creates a source that applies the selected group to the input.
+
+With the lexer, parser, and terminal collections already prepared, the setup is:
+
+```csharp
+var div = new LexicalGoal(commonTokens.Append(divisionToken));
+var regExp = new LexicalGoal(commonTokens.Append(regexToken));
+var policy = new LexicalPolicy(div, regExp);
+var source = lexer.CreateTokenSource(input, policy);
+var result = parser.Parsing(source);
+```
+
+The parser passes a read-only `LexicalContext` to the source's policy. The policy chooses a
+group, and the parser passes that returned group to `source.Peek(cursor, goal)`. `Peek` returns
+a token and a `Next` cursor; the parser adopts `Next` when it shifts the token. Reductions do
+not consume input. Prediction candidates keep their own cursor, previous token, and lexical
+state, so speculative reads do not advance the actual parser.
+
+The default policy compares expected terminals with the registered groups. A pure C# selector
+can handle contexts that need the state stack or consumed-token history. The JavaScript profiles
+provide their own selector for slash, template, and statement contexts. See the
+[illustrated token-exchange guide](docs/ko/parser-driven-lexing.html), including
+[cursor fields and ownership](docs/ko/parser-driven-lexing.html#cursor-example).
+
+### JavaScript grammar profiles
+
+The package includes `Janglim.FrontEnd.Grammars.JavaScript` with three entry points:
+
+| Class | Input |
+| --- | --- |
+| `JavaScriptExpressionGrammar` | One expression in a strict Script context |
+| `JavaScriptScriptGrammar` | Declarations and statements in a strict Script context |
+| `JavaScriptModuleGrammar` | A Module, including import/export and top-level await |
+
+The profiles target ECMAScript 2026. They include Unicode 17 identifiers, numeric/string/BigInt
+literals, operator precedence, optional chaining, templates, destructuring, ordinary/arrow/async
+functions, generators and async generators, object methods and accessors, classes, and modules.
+Regular-expression literals are checked for boundaries, flags, and body grammar in ordinary,
+`u`, and `v` modes. Statement support includes automatic semicolon insertion and restricted
+line-break rules.
+
+Use both parsing and static validation. Parsing builds the concrete syntax tree; `Validate`
+checks restrictions such as assignment targets, declaration collisions, function contexts,
+private-name scopes, and regular-expression bodies:
+
+```csharp
+using System;
+using Janglim.FrontEnd.Grammars.JavaScript;
+using Janglim.FrontEnd.Parsers.LR;
+
+var language = new JavaScriptScriptGrammar();
+var parser = new LALRParser(language.Grammar);
+var input = @"
+async function load({path}) {
+    const text = await read(path);
+    return /ab/g.test(text);
+}";
+var parsed = parser.Parsing(language.CreateTokenSource(input));
+if (!parsed.Success)
+    throw new InvalidOperationException(parser.FiredException?.Message ?? "Parsing failed.");
+
+var diagnostics = language.Validate(parsed.ToParseTree);
+if (diagnostics.Count > 0)
+{
+    foreach (var diagnostic in diagnostics)
+        Console.WriteLine($"{diagnostic.Code}: {diagnostic.Message} " +
+            $"(offset {diagnostic.SourceOffset}, length {diagnostic.Length})");
+    return;
+}
+
+Console.WriteLine(parsed.ToParseTree.AllInputDatas);
+```
+
+This example parses and validates source; it does not execute the JavaScript. Diagnostic
+offsets and lengths use .NET UTF-16 code units. The current support scope is strict Script
+and Module syntax with the documented static checks; non-strict syntax and full specification
+conformance remain follow-up work.
+
+Read the [JavaScript profile guide](grammars/javascript/README.md) for the supported syntax,
+setup, Unicode provenance, and authorship context. Detailed guides cover
+[expressions and templates](docs/ko/javascript-expressions.html),
+[statements and bindings](docs/ko/javascript-statements.html),
+[async functions, generators, and methods](docs/ko/javascript-functions.html),
+[classes](docs/ko/javascript-classes.html), [modules](docs/ko/javascript-modules.html), and
+[regular expressions](docs/ko/javascript-regexp.html).
 
 ### Lexer source trivia
 
@@ -643,7 +757,7 @@ remaining WPF projects target `netcoreapp3.1`. See [legacy notes](legacy/README.
 
 ## Status & known limitations
 
-The **engine `0.4.0`** release supports the LALR path. Its `0.x` API policy remains explicit:
+The **engine `0.5.0`** release supports the LALR path. Its `0.x` API policy remains explicit:
 public API changes may occur in later `0.x` versions and should be checked in the release notes.
 The **web Playground `1.1.0`** is versioned separately; it does not imply an engine `1.0` API contract.
 
@@ -653,6 +767,8 @@ Supported engine features:
   operators, semantic actions, incremental reparse, error recovery, LGLR backtracking.
 - Typed EBNF tokens, source trivia and line-break information, registered pure C# predicates,
   selective Shift / predicate-bearing ε Reduce prediction, and grammar progress diagnostics.
+- Longest-match registered-rule lexing, parser-driven lexical policies, and independent
+  speculative cursors, plus the documented ECMAScript 2026 strict Script/Module profiles.
 
 Known limitations and experimental scope:
 
@@ -680,9 +796,8 @@ See [RELEASE_NOTES.md](RELEASE_NOTES.md) for the official release scope and
 - Stabilize the public API (drop `DataTable` from the public surface, remove process-global static
   state, add a clean generic semantic-action hook).
 - Polish the diagnostic renderers (tables, FIRST/FOLLOW, item sets).
-- Add parser-driven lexical goals and contextual scanning/rescanning, then develop and validate
-  complete JavaScript and TypeScript grammar profiles. This work is planned separately from the
-  token-trivia and predicate features in `0.4.0`.
+- Extend the JavaScript profiles with non-strict syntax and broader specification conformance
+  checks, then develop TypeScript support on the existing parser-driven lexing APIs.
 - Generate parser source at build time from the existing C# and EBNF grammar definitions.
 - Repair/finish the SLR and CLR table builders.
 

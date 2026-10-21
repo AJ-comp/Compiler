@@ -1,0 +1,408 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="ECMAScript 2026 엄격 모드 Script의 일반 함수·화살표 함수·문장·선언 문법입니다. 매개변수의 구조 분해, 화살표 함수의 본문과 줄바꿈, 자동 세미콜론 처리를 사용 예제로 설명합니다.">
+  <title>JavaScript 함수·문장·선언 문법 | Janglim</title>
+  <style>
+    :root{color-scheme:light dark;--bg:#fafbf9;--paper:#fff;--ink:#202e29;--secondary:#45564e;--line:#dce4de;--code:#f0f4f1;--accent:#145a45;--token:#254e79}
+    *{box-sizing:border-box}html{scroll-padding-top:28px}
+    body{margin:0;background:var(--bg);color:var(--ink);font:19px/1.95 "Pretendard Variable","Noto Sans KR","Malgun Gothic",system-ui,sans-serif;word-break:keep-all;overflow-wrap:break-word}
+    h1,h2,h3,p{margin:0}h1,h2,h3{font-weight:700;letter-spacing:-.035em}
+    h1{font-size:clamp(31px,4vw,42px);line-height:1.5}h2{font-size:29px;line-height:1.65;margin-bottom:24px}h3{font-size:23px;line-height:1.7;margin:32px 0 16px}
+    p+p{margin-top:22px}a{color:var(--accent);text-underline-offset:5px}a:focus-visible{outline:3px solid var(--accent);outline-offset:5px}
+    code,pre{font-family:"Cascadia Code",Consolas,"Liberation Mono",monospace;font-variant-ligatures:none}code{font-size:.96em;overflow-wrap:anywhere}p code,li code,td code{padding:2px 5px;background:var(--code);border-radius:4px}
+    pre{margin:26px 0;padding:24px 28px;background:var(--code);border-radius:9px;white-space:pre-wrap;overflow-wrap:anywhere;word-break:normal;font-size:18px;line-height:1.9}pre code{font-size:inherit}
+    .core{color:var(--accent);font-weight:700}.token{color:var(--token);font-weight:600}.lead{font-size:21px;margin-top:26px}
+    .skip{position:absolute;top:-100px;left:20px;padding:12px;background:var(--paper);z-index:10}.skip:focus{top:12px}
+    header{background:var(--paper);border-bottom:1px solid var(--line)}.topbar{max-width:1160px;margin:auto;padding:20px 30px}.brand{font-weight:700;text-decoration:none;color:var(--ink)}.brand span{margin-left:16px;font-weight:400}
+    .layout{max-width:1160px;margin:auto;padding:60px 30px 88px;display:grid;grid-template-columns:180px minmax(0,780px);gap:52px;justify-content:center}main{min-width:0}
+    nav{position:sticky;top:26px;align-self:start;font-size:17px;line-height:1.8}nav p{font-size:18px;font-weight:700;margin-bottom:16px}nav a{display:block;padding:10px 0;text-decoration:none;color:var(--secondary)}nav a:hover{text-decoration:underline;color:var(--accent)}
+    section+section{margin-top:72px;padding-top:32px;border-top:1px solid var(--line)}.kind{color:var(--secondary);font-size:18px;margin-bottom:20px}
+    .table-wrap{margin:28px 0;overflow-x:auto}table{width:100%;border-collapse:collapse;text-align:left;font-size:18px}caption{text-align:left;font-size:19px;font-weight:600;margin-bottom:14px}th,td{padding:17px 10px;border-bottom:1px solid var(--line);vertical-align:top}tbody tr:last-child td{border-bottom:0}
+    ul,ol{margin:24px 0;padding-left:28px}li{padding-left:5px;margin-top:16px}footer{margin-top:72px;padding-top:30px;border-top:1px solid var(--line);font-size:18px}.links{display:flex;flex-wrap:wrap;gap:18px 28px;margin-top:26px}
+    @media(prefers-color-scheme:dark){:root{--bg:#151c18;--paper:#202a24;--ink:#e8efea;--secondary:#c0cdc5;--line:#405248;--code:#28362d;--accent:#a5dfbf;--token:#b2d1f2}}
+    @media(max-width:1030px){.layout{display:block;max-width:840px;padding:42px 28px 76px}nav{display:none}.topbar{max-width:840px}}
+    @media(max-width:680px){body{font-size:18px}.topbar{padding:18px 20px}.brand span{display:none}.layout{padding:32px 20px 64px}h2{font-size:26px}h3{font-size:22px}.lead{font-size:20px}pre{padding:20px 18px;font-size:17px}section+section{margin-top:56px}table{font-size:17px}}
+    @media print{body{background:white;color:#202e29;font-size:12pt}header,nav,.skip{display:none}.layout{display:block;max-width:none;padding:0}section+section{margin-top:34px}pre{background:#f1f3f1}h1{font-size:26pt}h2{font-size:20pt}}
+  </style>
+</head>
+<body>
+  <a class="skip" href="#main">본문으로 이동</a>
+  <header><div class="topbar"><a class="brand" href="index.html">Janglim <span>JavaScript 함수·문장·선언</span></a></div></header>
+  <div class="layout">
+    <nav aria-label="이 문서의 목차">
+      <p>사용 순서와 구현 이유</p>
+      <a href="#purpose">이 클래스가 하는 일</a>
+      <a href="#context">1. 입력과 지원 범위</a>
+      <a href="#usage">2. C#에서 사용하는 순서</a>
+      <a href="#binding-patterns">3. 선언·매개변수의 구조 분해</a>
+      <a href="#functions">4. 함수와 return</a>
+      <a href="#arrows">5. 화살표 함수</a>
+      <a href="#statements">6. 조건·반복·예외 처리</a>
+      <a href="#semicolon">7. 줄바꿈과 세미콜론</a>
+      <a href="#early-errors">8. 이름과 제어문 검사</a>
+      <a href="#slash">9. 정책이 /를 읽는 방식</a>
+      <a href="#implementation">구현 파일과 역할</a>
+      <a href="javascript-classes.html">클래스의 멤버와 본문 검사</a>
+      <a href="#next-stages">다른 함수 종류와 모듈</a>
+      <a href="#sources">명세와 저자 맥락</a>
+    </nav>
+    <main id="main">
+      <section id="purpose">
+        <p class="kind">ECMAScript 2026 · JavaScript 언어 지원</p>
+        <h1>함수와 문장으로 구성된 Script를 파싱하고,<br>선언과 제어문의 사용 조건을 검사합니다.</h1>
+        <p class="lead"><code>JavaScriptScriptGrammar</code>는 JavaScript 코드에서 일반 함수와 화살표 함수, 변수 선언, 조건문과 반복문 등을 읽는 데 필요한 문법과 토큰 규칙을 준비합니다. 개발자는 이 문법으로 파서를 만들고, 코드 전체를 파싱한 뒤 <code>Validate</code>로 정적 문법 오류를 검사합니다.</p>
+        <p>예를 들어 함수 매개변수의 <code>{name}</code>, 함수 본문의 <code>return name;</code>, 함수 밖의 <code>const result = read(user);</code>를 하나의 구문 트리로 만들 수 있습니다. 같은 함수에서 매개변수 이름을 두 번 선언하거나, 함수 밖에서 <code>return</code>을 사용하면 정적 검사가 그 오류를 알려줍니다.</p>
+        <p><span class="core">표현식 하나에는 JavaScriptExpressionGrammar를, 선언과 문장 목록에는 JavaScriptScriptGrammar를 사용합니다.</span> 두 클래스는 같은 JavaScript 토큰 규칙과 표현식 문법을 공유합니다. 아래에서는 Script를 입력하는 방법부터 살펴본 뒤, 선언·함수·문장 처리의 차이를 차례로 설명합니다.</p>
+      </section>
+
+      <section id="context">
+        <h2>1. 입력은 엄격 모드의 Script입니다.</h2>
+        <p>이 문법은 <a href="https://tc39.es/ecma262/2026/multipage/ecmascript-language-statements-and-declarations.html">ECMAScript 2026, 제17판</a>을 기준으로 합니다. 입력 전체에 엄격 모드의 구문 조건을 적용하므로, 입력에 <code>"use strict";</code>를 따로 적지 않아도 선언 이름과 대입 대상 등을 엄격 모드 기준으로 검사합니다.</p>
+        <p>입력 문자열에는 다음처럼 여러 선언과 문장을 함께 전달합니다. 함수 본문도 같은 입력 안에서 파싱합니다.</p>
+        <pre><code>function display({name = 'guest'}, [first, ...rest]) {
+    if (first &gt; 0) {
+        return `${name}: ${rest.length}`;
+    }
+    return name;
+}
+
+const result = display(user, values);
+result;</code></pre>
+        <p>함수는 <code>function</code>으로 정의하는 일반 함수와, <code>value =&gt; value + 1</code>처럼 정의하는 화살표 함수를 사용할 수 있습니다. 일반 함수의 본문과 화살표 함수의 블록 본문 안에는 선언과 문장 목록이 들어갑니다. 화살표 함수의 본문을 표현식 하나로 쓰는 형태도 함께 지원합니다.</p>
+        <div class="table-wrap"><table>
+          <caption>현재 Script 문법에서 사용할 수 있는 구문</caption>
+          <thead><tr><th scope="col">구문</th><th scope="col">지원하는 형태</th></tr></thead>
+          <tbody>
+            <tr><td>선언과 바인딩</td><td><code>var</code>·<code>let</code>·<code>const</code>, 배열·객체 구조 분해, 중첩 패턴, 기본값, 나머지 요소</td></tr>
+            <tr><td>일반 함수</td><td>함수 선언·함수 표현식, 매개변수의 기본값·구조 분해·rest, 함수 본문의 문장 목록과 <code>return</code></td></tr>
+            <tr><td>화살표 함수</td><td>일반·async 화살표, 단일·괄호·빈 매개변수 목록, 기본값·구조 분해·rest, 표현식·블록 본문</td></tr>
+            <tr><td>async·제너레이터</td><td>함수 선언·표현식·객체·클래스 메서드, await·yield·yield*와 async 본문의 for-await-of</td></tr>
+            <tr><td>클래스</td><td>선언·표현식·상속, 생성자·일반 메서드·접근자, 인스턴스·static·private 필드와 static 블록</td></tr>
+            <tr><td>조건과 반복</td><td>블록, 빈 문장, 표현식 문장, <code>if</code>·<code>else</code>, <code>while</code>·<code>do/while</code>, 일반 <code>for</code>·<code>for/in</code>·<code>for/of</code></td></tr>
+            <tr><td>제어와 예외</td><td><code>break</code>·<code>continue</code>·레이블, <code>switch</code>·<code>case</code>·<code>default</code>, <code>throw</code>·<code>try</code>·<code>catch</code>·<code>finally</code>, <code>debugger</code></td></tr>
+            <tr><td>문장 경계</td><td>명시적 세미콜론과, 줄바꿈·닫는 중괄호·입력 끝에서 적용하는 자동 세미콜론 조건</td></tr>
+          </tbody>
+        </table></div>
+        <p>클래스 선언과 클래스 표현식도 같은 문법에 연결되어 있습니다. 생성자·일반 메서드·접근자, 필드·private 이름·static 블록의 사용법과 검사 이유는 <a href="javascript-classes.html">클래스 문서</a>에서 하나의 예제로 이어서 설명합니다.</p>
+        <p>이 Script의 최상위와 일반 함수 본문에서는 <code>await</code>를 식별자로 사용할 수 있습니다. async 함수·async 화살표 본문에서는 await를 키워드로 읽습니다. <code>yield</code>·<code>let</code> 등 엄격 모드 예약어는 변수 이름으로 사용할 수 없습니다. 속성 이름은 별도의 규칙을 사용하므로 <code>object.yield</code>처럼 쓸 수 있습니다.</p>
+      </section>
+
+      <section id="usage">
+        <h2>2. 문법을 준비하고, 코드를 파싱한 뒤 검사합니다.</h2>
+        <p>먼저 <code>Janglim.FrontEnd.Grammars.JavaScript</code> 네임스페이스의 <code>JavaScriptScriptGrammar</code>를 만듭니다. 그리고 <code>Grammar</code>를 <code>LALRParser</code>에 전달해 파싱 테이블을 준비합니다.</p>
+        <pre><code>using System;
+using Janglim.FrontEnd.Grammars.JavaScript;
+using Janglim.FrontEnd.Parsers.LR;
+
+var language = new JavaScriptScriptGrammar();
+var parser = new LALRParser(language.Grammar);</code></pre>
+        <p>이제 입력 문자열을 정합니다. 아래 코드는 <code>user</code>에서 이름을 꺼내 반환하는 함수와, 그 함수를 호출하는 선언으로 구성되어 있습니다.</p>
+        <pre><code>var input = @"
+function read({name = 'guest'}) {
+    return name;
+}
+const result = read(user);
+";
+
+var source = language.CreateTokenSource(input);
+var parsed = parser.Parsing(source);</code></pre>
+        <p><code>CreateTokenSource</code>는 원문과 JavaScript 토큰 규칙을 연결한 입력 공급자 <code>source</code>를 만듭니다. 파서는 이 공급자에 다음 토큰을 요청하면서 원문을 파싱합니다. 문법 객체와 파서는 여러 입력에서 다시 사용할 수 있고, 입력마다 새로운 <code>source</code>를 만듭니다.</p>
+        <p>파싱 결과가 성공이면 구문 트리를 <code>Validate</code>에 전달합니다. 이 검사는 선언 이름의 중복, 함수 밖의 <code>return</code>, 잘못된 구조 분해 대상처럼 구문 트리에서 확인할 수 있는 오류를 반환합니다.</p>
+        <pre><code>if (!parsed.Success)
+{
+    Console.WriteLine(parser.FiredException?.Message);
+    return;
+}
+
+var diagnostics = language.Validate(parsed.ToParseTree);
+if (diagnostics.Count &gt; 0)
+{
+    foreach (var diagnostic in diagnostics)
+        Console.WriteLine($"{diagnostic.Code}: {diagnostic.Message} " +
+            $"(위치 {diagnostic.SourceOffset}, 길이 {diagnostic.Length})");
+    return;
+}
+
+var tree = parsed.ToParseTree;
+Console.WriteLine(tree.AllInputDatas);</code></pre>
+        <p><span class="core">파싱 성공과 Validate의 빈 진단 목록을 함께 확인해야 합니다.</span> 진단의 위치와 길이는 .NET 문자열의 UTF-16 코드 단위입니다. 오류가 가리키는 원문은 <code>input.Substring(diagnostic.SourceOffset, diagnostic.Length)</code>로 확인할 수 있습니다.</p>
+        <p>공개 API는 두 입력 클래스가 같습니다. <code>Grammar</code>는 파서에 전달할 문법, <code>Policy</code>는 토큰 규칙 묶음을 선택하는 정책, <code>GrammarText</code>는 토큰 정규식 치환을 마친 EBNF입니다. 입력 단위에 맞는 클래스를 고른 뒤 <code>CreateTokenSource</code> → <code>Parsing</code> → <code>Validate</code> 순서로 사용합니다.</p>
+      </section>
+
+      <section id="binding-patterns">
+        <h2>3. 선언·매개변수의 구조 분해는 새 이름을 만듭니다.</h2>
+        <p>먼저 변수 선언부터 보겠습니다. 아래 선언은 <code>user.name</code>의 값을 새 변수 <code>displayName</code>에 연결합니다.</p>
+        <pre><code>const {name: displayName} = user;</code></pre>
+        <p>이처럼 선언에서 새 이름을 만드는 패턴을 <strong>바인딩 패턴</strong>이라고 부릅니다. 배열 패턴, 중첩 패턴, 기본값과 rest도 같은 선언 안에서 사용할 수 있습니다.</p>
+        <pre><code>let [first, second = 0, ...remaining] = values;
+const {profile: {name}, scores: [score]} = user;
+const {name = 'guest', ...other} = user;</code></pre>
+        <p>첫 번째 선언은 <code>first</code>·<code>second</code>·<code>remaining</code>을 만듭니다. 두 번째 선언은 중첩된 객체와 배열에서 <code>name</code>·<code>score</code>를 만듭니다. 세 번째 선언은 <code>name</code>에 사용할 기본값을 정하고, 남은 속성을 새 변수 <code>other</code>에 연결합니다.</p>
+        <p>함수 매개변수에서도 같은 바인딩 패턴을 사용합니다. 다음 함수의 <code>name</code>과 <code>rest</code>는 함수 안에서 사용할 매개변수 이름입니다.</p>
+        <pre><code>function read({name = 'guest'}, ...rest) {
+    return name;
+}</code></pre>
+        <h3>새 이름을 만드는 선언과, 기존 대상에 값을 넣는 할당은 검사 조건이 다릅니다.</h3>
+        <p>기존 구조 분해 할당은 객체의 속성을 대입 대상으로 사용할 수 있습니다. 예를 들어 아래 첫 줄은 <code>user.name</code>을 이미 존재하는 <code>target.name</code> 속성에 대입합니다. 반면 변수 선언은 새 이름이 필요하므로 두 번째 줄의 <code>target.name</code>을 바인딩 이름으로 받을 수 없습니다.</p>
+        <pre><code>({name: target.name} = user);        // 허용: 기존 속성에 대입
+const {name: target.name} = user;    // 오류: 속성 접근은 새 변수 이름이 아님</code></pre>
+        <p>이 차이를 지키기 위해 EBNF는 선언과 일반 함수 매개변수에 <code>BindingIdentifier</code>와 <code>BindingPattern</code> 전용 규칙을 사용합니다. 화살표 함수의 괄호 안은 일반 괄호식과 시작 모양이 같으므로, 공통 모양으로 읽은 뒤 같은 바인딩 조건을 검사합니다. 이 처리 순서는 아래 화살표 함수 절에서 설명합니다.</p>
+        <h3>나머지 요소는 마지막에 오며, 바인딩 대상에도 제한이 있습니다.</h3>
+        <p>배열과 함수 매개변수의 rest에는 식별자 또는 중첩 바인딩 패턴을 사용할 수 있습니다. 객체의 rest에는 새 이름을 만드는 식별자 하나를 사용합니다. 어느 경우든 rest 뒤에 요소·쉼표·rest 자체의 기본값을 추가할 수 없습니다.</p>
+        <pre><code>const [...[first, second]] = values;   // 허용: 배열 rest의 중첩 패턴
+function read(...[first, second]) {}   // 허용: 매개변수 rest의 중첩 패턴
+const {name, ...other} = user;         // 허용: 객체 rest의 식별자
+
+const {...{name}} = user;              // 오류: 객체 rest에 중첩 패턴
+const [...rest,] = values;             // 오류: rest 뒤의 쉼표
+function read(...rest = []) {}        // 오류: rest 자체의 기본값</code></pre>
+        <p>이 기본값과 계산된 속성 이름 안에는 여전히 일반 표현식이 들어갑니다. 예를 들어 <code>const {[key]: name = fallback()} = user;</code>에서 바인딩 이름은 <code>name</code>입니다. <code>key</code>와 <code>fallback()</code>은 표현식이므로 바인딩 이름 목록에 포함하지 않고, 기존 표현식 검사로 따로 확인합니다.</p>
+      </section>
+
+      <section id="functions">
+        <h2>4. 일반 함수는 매개변수와 본문을 함께 파싱합니다.</h2>
+        <p>앞에서는 함수 매개변수의 패턴을 살펴봤습니다. 이제 함수 전체를 보겠습니다. 함수 선언에는 이름, 매개변수 목록, 중괄호로 감싼 본문이 순서대로 나옵니다.</p>
+        <pre><code>function sum(first, second = 0) {
+    const result = first + second;
+    return result;
+}</code></pre>
+        <p><code>first</code>와 <code>second</code>는 매개변수이고, 본문은 <code>const</code> 선언과 <code>return</code> 문장으로 구성되어 있습니다. 함수 안에서 <code>return result;</code>를 사용하면 값을 반환하는 문장으로 파싱합니다. 반환할 표현식 없이 <code>return;</code>으로 끝낼 수도 있습니다.</p>
+        <p>함수를 값으로 사용할 때는 함수 표현식을 씁니다. 아래 입력에서는 이름 없는 함수 표현식을 <code>sum</code>에 대입합니다. 함수 표현식은 <code>JavaScriptExpressionGrammar</code>에 표현식 하나로 전달할 때도 사용할 수 있습니다.</p>
+        <pre><code>const sum = function (first, second) {
+    return first + second;
+};</code></pre>
+        <p>함수 본문은 독립적인 제어 문맥입니다. 따라서 바깥에 반복문이 있어도, 그 안에 정의한 함수가 바깥 반복문으로 <code>break</code>하거나 <code>continue</code>할 수는 없습니다. 이 함수 경계는 파싱 후 정적 검사에서 확인합니다. 같은 경계를 갖는 화살표 함수는 매개변수와 본문을 다른 표기로 연결합니다.</p>
+      </section>
+
+      <section id="arrows">
+        <h2>5. 화살표 함수는 매개변수와 본문을 =&gt;로 연결합니다.</h2>
+        <p>먼저 <code>value =&gt; value + 1</code>을 보겠습니다. <code>=&gt;</code> 앞의 <code>value</code>는 매개변수 이름이고, 뒤의 <code>value + 1</code>은 반환할 값을 나타내는 표현식입니다. 이런 함수 표현식을 변수에 대입하거나 다른 함수의 인자로 사용할 수 있습니다.</p>
+        <pre><code>const increment = value =&gt; value + 1;
+values.map(value =&gt; value + 1);</code></pre>
+        <p>매개변수가 식별자 하나이면 괄호를 생략할 수 있습니다. 매개변수가 여러 개이거나 하나도 없으면 괄호로 매개변수 목록을 표시합니다. 아래 각 선언은 이 세 형태를 보여 줍니다.</p>
+        <pre><code>const one = value =&gt; value;
+const pair = (first, second) =&gt; first + second;
+const empty = () =&gt; 0;</code></pre>
+        <p>표현식 입력 API에도 <code>(first, second) =&gt; first + second</code>처럼 화살표 함수 하나를 전달할 수 있습니다. 여러 선언과 함께 입력할 때는 위 예제처럼 Script API를 사용합니다.</p>
+
+        <h3>본문이 표현식이면 그 결과를 반환하고, 블록이면 문장들을 읽습니다.</h3>
+        <p>지금까지의 본문은 표현식 하나였습니다. 본문을 중괄호로 감싸면 그 안에는 선언과 문장이 들어갑니다. 이 블록 본문에서 값을 반환할 때는 <code>return</code> 문장을 적습니다.</p>
+        <pre><code>const expression = value =&gt; value + 1;
+
+const block = value =&gt; {
+    const result = value + 1;
+    return result;
+};</code></pre>
+        <p>이 구분 때문에 객체를 바로 반환할 때는 객체 리터럴을 괄호로 감쌉니다. <code>=&gt;</code> 바로 뒤의 <code>{</code>는 블록 본문을 시작하기 때문입니다.</p>
+        <pre><code>const makeObject = value =&gt; ({name: value});
+const emptyBlock = value =&gt; {};</code></pre>
+        <p>첫 번째 함수의 본문은 괄호 안의 객체 표현식이고, 두 번째 함수의 본문은 비어 있는 블록입니다. 문법은 <code>ArrowExpressionBody</code> 조건으로 이 두 시작 위치를 구분합니다.</p>
+
+        <h3>기본값·구조 분해·rest도 매개변수로 사용할 수 있습니다.</h3>
+        <p>이제 매개변수 목록을 살펴보겠습니다. 기본값이나 구조 분해, rest를 사용하면 목록 전체를 괄호로 감쌉니다. 각각의 대상에는 새 이름을 만드는 바인딩 조건을 적용합니다.</p>
+        <pre><code>const withDefault = (value = 0) =&gt; value;
+const pick = ({name = 'guest'}, [first, ...rest]) =&gt; name;
+const collect = (first, ...remaining) =&gt; remaining;
+const nestedRest = (...[first, second]) =&gt; first;</code></pre>
+        <p>따라서 <code>([target.name]) =&gt; 0</code>은 새 이름 대신 속성 접근을 매개변수로 사용한 오류입니다. rest는 마지막에 와야 하며, <code>(...rest,)</code>처럼 뒤에 쉼표를 붙이거나 <code>(...rest = [])</code>처럼 rest 자체에 기본값을 줄 수 없습니다. 객체 패턴 안의 rest는 <code>({...remaining}) =&gt; remaining</code>처럼 식별자 하나를 사용합니다.</p>
+        <p>파서가 <code>(value)</code>까지 읽었을 때에는 일반 괄호식인지, 뒤에 <code>=&gt;</code>가 붙을 매개변수 목록인지 아직 정해지지 않았습니다. 그래서 EBNF는 공통 모양을 먼저 읽고, <code>JavaScriptArrowFunctions</code>가 실제 화살표 헤드를 바인딩 목록으로 검사합니다. 빈 괄호 <code>()</code>나 뒤쪽 쉼표가 있는 <code>(value,)</code>는 이 헤드에서 허용하지만, 일반 괄호식으로 사용하면 오류를 반환합니다.</p>
+        <p><span class="core">바인딩으로 해석하는 범위는 실제 매개변수 패턴입니다. 기본값과 계산된 속성 이름 안의 식은 일반 표현식으로 계속 검사합니다.</span> 예를 들어 <code>({name = {key = 1}}) =&gt; name</code>은 기본값의 일반 객체 리터럴에 잘못된 축약 초기값을 적었으므로 오류입니다. 검사는 이런 경계를 구분하면서 원래 구문 트리와 원문을 보존합니다.</p>
+
+        <h3>매개변수 이름과 함수 본문의 선언을 함께 검사합니다.</h3>
+        <p>같은 화살표 함수에서는 매개변수 이름이 중복될 수 없습니다. 구조 분해 안에서 만든 이름도 이 목록에 포함합니다. 또한 매개변수 이름과 같은 함수 본문에 직접 선언한 <code>let</code>·<code>const</code> 이름이 겹치면 오류입니다.</p>
+        <pre><code>(value, value) =&gt; value;          // 오류: 중복 매개변수
+([value], {name: value}) =&gt; 0;     // 오류: 패턴에서 만든 이름도 중복
+value =&gt; { let value; };           // 오류: 같은 함수 본문의 선언
+value =&gt; { { let value; } };       // 허용: 안쪽 블록의 별도 선언</code></pre>
+        <p>기본값·구조 분해·rest가 있는 매개변수와 함수 자신의 <code>use strict</code> 지시문을 함께 쓰는 형태도 금지합니다. 따라서 <code>(value = 0) =&gt; { 'use strict'; }</code>는 오류입니다. 이 API는 입력 전체에 엄격 모드 조건을 적용하므로, 이런 함수에는 그 지시문을 추가하지 않고 매개변수를 사용하면 됩니다.</p>
+        <p>화살표 함수의 블록 본문 안에서는 <code>return</code>을 사용할 수 있습니다. 반면 함수 바깥의 반복문이나 레이블은 그 본문의 <code>break</code>·<code>continue</code> 목적지가 될 수 없습니다. 이름과 제어문의 범위 검사는 일반 함수와 같은 함수 경계에서 다시 시작합니다.</p>
+
+        <h3>매개변수와 =&gt; 사이에는 줄바꿈을 넣을 수 없습니다.</h3>
+        <p>줄바꿈 제약이 적용되는 구간은 매개변수 목록의 끝과 <code>=&gt;</code> 사이입니다. <code>=&gt;</code>를 읽은 뒤 본문을 다음 줄에 적는 형태는 허용합니다.</p>
+        <pre><code>const allowed = (value) =&gt;
+    value + 1;
+
+const rejected = (value)
+    =&gt; value + 1;                 // 오류: =&gt; 앞의 줄바꿈</code></pre>
+        <p>이 구간의 주석에 줄바꿈이 포함된 경우에도 같은 제약을 적용합니다. 기존 토큰의 <code>HasLineBreakBefore</code> 정보와 <code>NoLineTerminator</code> 조건으로 확인합니다.</p>
+
+        <h3>화살표 함수의 블록이 끝난 뒤에는 호출 인자를 바로 붙이지 않습니다.</h3>
+        <p>본문의 중괄호가 닫히면 화살표 함수 표현식 하나가 완성됩니다. 다음 예제에서는 뒤의 <code>(other)</code>를 그 함수의 호출 인자로 붙일 수 없으므로, 줄바꿈에서 선언을 끝내고 별도의 괄호식 문장으로 읽습니다.</p>
+        <pre><code>const transform = value =&gt; {}
+(other);</code></pre>
+        <p>반면 화살표 함수 전체를 괄호로 감싸면, 괄호식 뒤에 인자를 붙이는 함수 호출로 사용할 수 있습니다.</p>
+        <pre><code>(value =&gt; {})(other);</code></pre>
+        <p>이제 블록 대신 표현식 본문을 사용하는 경우를 보겠습니다. 아래 선언의 <code>(other)</code>는 본문의 <code>read</code>에 붙는 호출 인자이므로, 줄바꿈을 지나 <code>read(other)</code>까지 이어 읽습니다.</p>
+        <pre><code>const invoke = value =&gt; read
+(other);</code></pre>
+        <p>따라서 줄바꿈만 보고 두 선언을 똑같이 끊을 수는 없습니다. JavaScript 전용 문맥 추적기는 블록 본문의 끝을 기록합니다. 문장 종료 조건은 이 정보를 사용해 앞의 <code>transform</code> 선언을 끝내고, 표현식 본문을 가진 <code>invoke</code> 선언에서는 호출을 계속 읽습니다. 이 종료 처리의 공통 원리는 아래 <a href="#semicolon">줄바꿈과 세미콜론 절</a>에서 설명합니다.</p>
+      </section>
+
+      <section id="statements">
+        <h2>6. 함수 안팎에서 조건·반복·예외 문장을 연결합니다.</h2>
+        <p>함수 본문에서 사용한 선언과 반환문에 이어, 실행 순서를 나타내는 문장도 함께 파싱할 수 있습니다. 먼저 조건문과 반복문을 보겠습니다.</p>
+        <pre><code>for (const {name} of users) {
+    if (name === '') {
+        continue;
+    }
+    display(name);
+}</code></pre>
+        <p><code>for/of</code>의 선언 패턴은 반복마다 받은 값에서 <code>name</code>을 바인딩하는 구문입니다. 이 구문에서는 값이 반복 구문에서 공급되므로 <code>const {name} = ...</code> 형태의 초기값을 별도로 적지 않습니다. 본문의 <code>continue</code>는 현재 반복을 끝내고 다음 반복으로 넘어가는 문장으로 파싱합니다.</p>
+        <p>기존 변수나 속성에 값을 대입하는 <code>for/in</code>·<code>for/of</code>도 사용할 수 있습니다. 이때 선언 키워드가 없으면 왼쪽 부분에 바인딩 패턴이 아닌 할당 대상 검사를 적용합니다.</p>
+        <pre><code>for ([first, second] of pairs) {
+    display(first, second);
+}
+
+for (target.name in object) {
+    display(target.name);
+}</code></pre>
+        <p>다음으로 예외 처리 문장을 보겠습니다. <code>try</code>와 <code>finally</code>의 본문은 블록이고, <code>catch</code>의 매개변수에는 식별자 또는 바인딩 패턴을 사용할 수 있습니다.</p>
+        <pre><code>try {
+    process(value);
+} catch ({message}) {
+    display(message);
+} finally {
+    finish();
+}</code></pre>
+        <p>여기서 <code>message</code>는 catch 블록 안에서 사용하는 바인딩 이름입니다. catch 매개변수를 생략한 <code>catch { ... }</code>도 지원합니다. 조건문·반복문·예외 처리의 각 본문을 읽은 뒤에는 다음 문장으로 이어지며, 그 경계를 세미콜론이나 JavaScript의 자동 세미콜론 조건으로 판단합니다.</p>
+      </section>
+
+      <section id="semicolon">
+        <h2>7. 줄바꿈은 문장이 끝나는 조건 중 하나입니다.</h2>
+        <p>JavaScript의 자동 세미콜론 처리, 즉 ASI는 세미콜론을 생략한 입력에서 문장 경계를 정하는 규칙입니다. 다만 <strong>줄이 바뀌었다는 이유만으로 모든 문장을 끝내지는 않습니다.</strong> 다음 토큰이 앞의 표현식을 이어 갈 수 있는지, 줄바꿈을 금지한 구문인지도 함께 확인해야 합니다.</p>
+        <h3>호출로 이어지는 괄호 앞에서는 표현식이 계속됩니다.</h3>
+        <pre><code>a
+(b)</code></pre>
+        <p>첫 줄의 <code>a</code> 뒤에 호출 인자 <code>(b)</code>가 올 수 있으므로, 이 입력은 <code>a(b)</code>라는 표현식 문장 하나로 파싱합니다. 두 문장을 의도했다면 <code>a;</code>처럼 세미콜론으로 첫 문장을 끝내야 합니다.</p>
+        <h3>return 바로 뒤의 줄바꿈은 반환문을 끝냅니다.</h3>
+        <pre><code>function read() {
+    return
+    value;
+}</code></pre>
+        <p><code>return</code>과 반환할 표현식 사이에는 줄바꿈을 허용하지 않습니다. 따라서 이 함수 본문은 <code>return;</code>과 <code>value;</code>라는 두 문장으로 파싱합니다. <code>value</code>를 반환하려면 <code>return value;</code>처럼 같은 줄에서 표현식을 시작해야 합니다.</p>
+        <p><code>throw</code>도 뒤의 표현식 앞에 줄바꿈을 허용하지 않습니다. 하지만 <code>throw</code>에는 표현식 없는 형태가 없으므로, <code>throw</code> 다음 줄에 <code>error;</code>를 적으면 문법 오류입니다.</p>
+        <h3>줄바꿈 뒤의 ++는 앞 토큰의 후위 증감이 되지 않습니다.</h3>
+        <pre><code>value
+++other;</code></pre>
+        <p>이 입력에서는 <code>value</code>와 <code>++</code> 사이에 줄바꿈이 있습니다. 따라서 <code>value++</code>로 묶지 않고, <code>value;</code>와 전위 증감 표현식 <code>++other;</code>라는 두 문장으로 파싱합니다. 주석 안에 줄바꿈이 있어도 같은 줄바꿈 조건을 적용합니다.</p>
+        <h3>일반 for 헤더의 세미콜론 두 개는 직접 적습니다.</h3>
+        <pre><code>for (
+    let index = 0;
+    index &lt; 3;
+    index++
+) {
+    step(index);
+}</code></pre>
+        <p>일반 <code>for</code> 헤더의 세 구간은 세미콜론 두 개로 구분합니다. 이 두 세미콜론은 문장 끝을 보완하는 ASI 대상이 아니므로, 줄을 나누어 적어도 직접 넣어야 합니다.</p>
+        <h3>장림은 언어 문법의 종료 조건으로 이 경계를 판단합니다.</h3>
+        <p>이 처리는 JavaScript EBNF의 <code>ExpressionEnd</code>·<code>BindingEnd</code>·<code>RestrictedEnd</code> 등의 규칙과, C#에 등록한 검사 함수가 함께 담당합니다. 예를 들어 <code>ExpressionEnd</code>는 다음 토큰이 현재 표현식을 이어 가는지 확인하고, <code>RestrictedEnd</code>는 <code>return</code> 등의 줄바꿈 경계를 확인합니다.</p>
+        <p><span class="core">기존 엔진의 토큰 경계 정보와 프레디케이트를 사용해 문장을 끝낼 수 있는지 검사합니다.</span> 원문에 없던 세미콜론 토큰을 공통 엔진에 끼워 넣는 방식은 사용하지 않습니다. 따라서 원래 토큰과 원문 위치를 그대로 유지하면서 JavaScript의 문장 경계를 구문 트리에 반영합니다.</p>
+      </section>
+
+      <section id="early-errors">
+        <h2>8. Validate는 이름이 속한 범위와 제어문의 목적지를 검사합니다.</h2>
+        <p>지금까지는 각 구문을 어떻게 읽는지 살펴봤습니다. 읽은 구조를 올바르게 사용했는지 확인하는 단계는 <code>Validate</code>입니다. 먼저 선언 이름의 범위를 보겠습니다.</p>
+        <h3>같은 이름이어도 같은 범위에 선언했는지에 따라 결과가 달라집니다.</h3>
+        <pre><code>function read(name) {
+    let name;                 // 오류: 매개변수와 같은 함수 본문의 선언
+}
+
+function read(name) {
+    { let name; }             // 허용: 안쪽 블록의 별도 선언
+}</code></pre>
+        <p>첫 번째 함수는 매개변수 <code>name</code>과 함수 본문의 <code>let name</code>이 충돌합니다. 두 번째 함수의 <code>let name</code>은 안쪽 블록에 속하므로, 바깥 매개변수와 이름이 같아도 별도의 바인딩으로 허용합니다.</p>
+        <p><code>var</code>는 안쪽 블록에 적어도 둘러싼 함수나 Script의 변수 범위에 속합니다. 따라서 <code>let name; { var name; }</code>은 충돌하고, <code>var name; { let name; }</code>은 안쪽 블록의 별도 선언으로 허용합니다. 중첩 함수 안의 선언은 다시 그 함수의 범위에 속하므로 바깥 선언과 분리해서 검사합니다.</p>
+        <div class="table-wrap"><table>
+          <caption>이름·초기값·함수 문맥에서 확인하는 주요 조건</caption>
+          <thead><tr><th scope="col">검사</th><th scope="col">오류 예제와 이유</th></tr></thead>
+          <tbody>
+            <tr><td>엄격 모드 바인딩 이름</td><td><code>let eval;</code>, <code>function read(arguments) {}</code>는 이 문맥에서 사용할 수 없는 바인딩 이름입니다.</td></tr>
+            <tr><td>중복 이름</td><td><code>let [name, name] = values;</code>와 <code>function read(name, name) {}</code>은 같은 이름을 중복 바인딩합니다. <code>var</code>의 중복 선언은 구분해서 허용합니다.</td></tr>
+            <tr><td>const 초기값</td><td><code>const value;</code>에는 초기값이 필요합니다. 반복 값으로 바인딩하는 <code>for (const value of values)</code>는 별도 구문입니다.</td></tr>
+            <tr><td>매개변수와 지시문</td><td><code>function read(value = 0) { 'use strict'; }</code>는 기본값·구조 분해·rest가 있는 매개변수와 함수 자신의 <code>use strict</code> 지시문을 함께 사용한 오류입니다.</td></tr>
+            <tr><td>catch·for 이름 충돌</td><td><code>catch ({message}) { var message; }</code>처럼 매개변수와 본문 선언이 충돌하는 경우를 검사합니다. for의 lexical 바인딩과 본문의 var 선언도 확인합니다.</td></tr>
+          </tbody>
+        </table></div>
+        <p>기본값·구조 분해·rest가 있는 매개변수와 함수 자신의 <code>use strict</code> 지시문 조합은 ECMAScript가 금지하는 형태입니다. 이 API는 입력 전체를 엄격 모드로 검사하므로, 이런 함수의 본문에는 지시문을 추가하지 않고 매개변수를 그대로 사용하면 됩니다.</p>
+        <p>지시문 검사는 함수 본문의 맨 앞 문자열 문장들에만 적용합니다. 따라서 <code>('use strict');</code> 같은 괄호식, 다른 블록 안의 문자열, 일반 문장 뒤에 나오는 문자열은 함수의 <code>use strict</code> 지시문으로 처리하지 않습니다.</p>
+        <h3>break와 continue의 목적지는 같은 함수 안에 있어야 합니다.</h3>
+        <pre><code>outer: for (const value of values) {
+    if (value === 0) continue outer;
+    if (value &lt; 0) break outer;
+}</code></pre>
+        <p><code>outer</code>는 반복문에 붙인 레이블입니다. <code>continue outer</code>는 그 반복문의 다음 반복으로, <code>break outer</code>는 그 레이블이 붙은 문장의 바깥으로 이동하는 구문입니다. 정적 검사는 이 레이블이 현재 함수에서 활성 상태인지 확인합니다.</p>
+        <p>레이블 없는 <code>continue</code>는 반복문 안에서, 레이블 없는 <code>break</code>는 반복문이나 switch 안에서 사용할 수 있습니다. 레이블이 있는 <code>continue</code>의 목적지는 반복문이어야 합니다. 함수 밖의 <code>return</code>, 중복 활성 레이블, switch의 중복 default도 이 단계에서 검사합니다.</p>
+        <p>이 검사는 JavaScript 코드를 실행하지 않습니다. 변수의 실제 값이나 함수 호출 결과를 계산하는 대신, 구문 트리에서 선언 범위와 제어문이 연결된 위치를 확인합니다. 기존 표현식의 대입 대상·템플릿 이스케이프·객체 정적 오류 검사도 함께 적용합니다.</p>
+      </section>
+
+      <section id="slash">
+        <h2>9. 정책은 문장 문맥까지 살펴 /를 읽을 규칙 묶음을 선택합니다.</h2>
+        <p>문장을 추가하면 닫는 괄호의 역할도 중요해집니다. 같은 <code>)</code> 뒤라도 함수 호출이 끝난 자리인지, if 조건이 끝난 자리인지에 따라 다음 슬래시를 읽는 방식이 달라집니다.</p>
+        <pre><code>call(value) / divisor;
+
+if (ready) /ab/.test(text);</code></pre>
+        <p>첫 번째 문장의 <code>call(value)</code>는 값을 만드는 호출 표현식입니다. 그 뒤의 <code>/</code>는 나눗셈 연산자로 읽습니다. 두 번째 문장에서는 if 조건의 괄호가 닫힌 뒤 본문 문장이 시작됩니다. 이 자리에 있는 <code>/ab/</code>는 정규식 리터럴로 읽습니다.</p>
+        <p>이 차이를 판단하는 주체는 <strong>JavaScript 정책</strong>입니다. 파서가 현재 상태에서 받을 수 있는 토큰과 직전에 소비한 토큰 등의 문맥을 전달하면, 정책은 이 문맥에 맞는 규칙 묶음을 반환합니다. 파서는 그 반환값을 그대로 사용해 <code>source</code>에 다음 토큰을 요청합니다.</p>
+        <pre><code>// Parser: 문맥을 정책에 전달하고 반환값으로 다음 토큰을 요청합니다.
+var goal = policy.Resolve(context);
+var read = source.Peek(cursor, goal);</code></pre>
+        <p>위 코드는 내부 호출 관계를 보여 주는 예시입니다. 사용 코드는 앞에서 본 <code>language.CreateTokenSource(input)</code>과 <code>parser.Parsing(source)</code>면 됩니다. 선택 과정은 준비된 JavaScript 정책에서 수행합니다.</p>
+        <p>파싱 테이블의 한 행에서 두 슬래시 방식이 함께 후보로 나올 때는, 정책이 <code>JavaScriptSlashContext</code>에 기록된 문맥으로 둘을 구분합니다. 이 언어 전용 보조 코드는 제어문의 조건 괄호와 호출 괄호, 블록과 객체, 함수 선언·함수 표현식·화살표 함수의 본문을 구분합니다. 예를 들어 화살표 함수의 블록 본문이 닫힌 뒤 새 문장이 시작되면 정규식을 읽을 수 있고, 괄호로 감싼 화살표 함수 표현식 뒤에서는 나눗셈을 읽을 수 있습니다.</p>
+        <p>이 문맥을 얻기 위해 매 요청마다 원문의 처음부터 다시 살펴보지는 않습니다. <code>source</code>가 토큰을 반환할 때, 보조 코드는 직전 토큰의 문맥에서 새 토큰의 문맥을 계산해 보관합니다. 다음 요청에서 정책은 직전 토큰에 연결된 이 정보를 사용하며, 문장 종료 조건도 같은 정보에서 화살표 블록의 끝을 확인합니다. 문자열·정규식 토큰 내부나 건너뛴 주석의 글자는 괄호로 세지 않습니다.</p>
+        <p>문맥은 변경할 수 없는 값이며, 해당 토큰 객체에만 연결합니다. 같은 원문 위치라도 서로 다른 예측 후보가 만든 토큰을 합치지 않으므로, 한 후보가 살펴본 문맥이 다른 후보의 문맥을 바꾸지 않습니다. 내부 캐시는 약한 참조를 사용해 더 이상 사용하지 않는 토큰을 계속 붙잡아 두지 않습니다. 템플릿의 보간 중괄호 깊이는 각 커서의 <code>LexicalState</code>에 별도로 보관합니다. 공통 호출 구조는 <a href="parser-driven-lexing.html">파서 주도 렉싱 문서</a>에서 이어서 볼 수 있습니다.</p>
+      </section>
+
+      <section id="implementation">
+        <h2>문법·언어 검사·토큰 정책의 역할을 파일별로 나눕니다.</h2>
+        <p>이번 기능은 기존 LR 엔진 위의 JavaScript 언어 계층에 들어갑니다. EBNF는 구문의 순서를 표현하고, 언어 전용 C# 코드는 세미콜론 경계·슬래시 문맥·정적 오류를 검사합니다.</p>
+        <div class="table-wrap"><table>
+          <thead><tr><th scope="col">파일</th><th scope="col">담당하는 일</th></tr></thead>
+          <tbody>
+            <tr><td><a href="../../grammars/javascript/ecmascript-2026-expressions.ebnf">ecmascript-2026-expressions.ebnf</a></td><td>기존 표현식과 일반 함수·화살표 함수의 연결, 괄호식과 매개변수의 공통 모양</td></tr>
+            <tr><td><a href="../../grammars/javascript/ecmascript-2026-bindings.ebnf">ecmascript-2026-bindings.ebnf</a></td><td>선언·매개변수·catch에서 사용할 바인딩 패턴</td></tr>
+            <tr><td><a href="../../grammars/javascript/ecmascript-2026-statements.ebnf">ecmascript-2026-statements.ebnf</a></td><td>문장·선언·함수 본문, 문장 종료 조건과 for 헤더의 NoIn 문법</td></tr>
+            <tr><td><a href="../../grammars/javascript/ecmascript-2026-classes.ebnf">ecmascript-2026-classes.ebnf</a></td><td>클래스·메서드·필드·static 블록과 private·super·new.target 관련 구문</td></tr>
+            <tr><td><a href="../../grammars/javascript/ecmascript-2026-modules.ebnf">ecmascript-2026-modules.ebnf</a></td><td>동적 import와 Module 입력의 import·export·await 관련 구문. Module 사용법은 <a href="javascript-modules.html">모듈 문서</a>에서 설명합니다.</td></tr>
+            <tr><td><a href="../../src/FrontEnd/Parse.FrontEnd.Grammars.Ebnf/JavaScript/JavaScriptScriptGrammar.cs">JavaScriptScriptGrammar.cs</a></td><td>Script를 시작 규칙으로 사용하는 공개 API</td></tr>
+            <tr><td><a href="../../src/FrontEnd/Parse.FrontEnd.Grammars.Ebnf/JavaScript/JavaScriptStatementPredicates.cs">JavaScriptStatementPredicates.cs</a></td><td>문장 종료와 줄바꿈 제약을 검사하는 순수 C# 함수 등록</td></tr>
+            <tr><td><a href="../../src/FrontEnd/Parse.FrontEnd.Grammars.Ebnf/JavaScript/JavaScriptStatementValidation.cs">JavaScriptStatementValidation.cs</a></td><td>바인딩 이름·선언 범위·매개변수·제어문 목적지의 정적 검사</td></tr>
+            <tr><td><a href="../../src/FrontEnd/Parse.FrontEnd.Grammars.Ebnf/JavaScript/JavaScriptArrowFunctions.cs">JavaScriptArrowFunctions.cs</a></td><td>화살표 헤드를 바인딩 목록으로 검사하고, 일반 괄호식·기본값·계산된 속성 이름과 검사 범위를 구분</td></tr>
+            <tr><td><a href="../../src/FrontEnd/Parse.FrontEnd.Grammars.Ebnf/JavaScript/JavaScriptSlashContext.cs">JavaScriptSlashContext.cs</a></td><td>토큰마다 불변 문맥을 기록해 슬래시 정책과 화살표 블록의 문장 종료 조건에 제공</td></tr>
+          </tbody>
+        </table></div>
+        <p><code>for</code>의 초기식에는 구분자 <code>in</code>을 일반 이항 연산자로 소비하지 않도록 <code>NoIn</code> 계열의 생성 규칙을 사용합니다. 이 규칙 안의 대입 대상도 기존 할당 패턴 검사와 연결해, 일반 초기식과 for/in·for/of의 왼쪽 대상을 각각 검사합니다.</p>
+        <p>화살표 함수가 그 초기식에 들어가면 표현식 본문에도 <code>NoIn</code> 조건을 전달합니다. 예를 들어 <code>key =&gt; key in object</code>의 <code>in</code>을 본문에 그대로 포함하지 않고, <code>key =&gt; (key in object)</code>처럼 괄호 안의 일반 표현식으로 명시할 수 있습니다. 블록 본문 안의 문장은 일반 함수 본문과 같은 문장 문법을 사용합니다.</p>
+        <p>단위테스트는 새 구문의 수락·거부뿐 아니라 기존 표현식·템플릿과의 조합을 확인합니다. 선언 범위의 경계, ASI와 명시적 세미콜론, slash 문맥, 진단이 가리키는 원문 범위와 반복 파싱 간 상태 분리도 함께 검사합니다.</p>
+      </section>
+
+      <section id="next-stages">
+        <h2>async·제너레이터·메서드와 Module도 같은 사용 순서로 검사합니다.</h2>
+        <p>이 문서에서 살펴본 일반 함수·화살표 함수, 문장 목록, 선언과 매개변수의 구조 분해에 더해 <a href="javascript-classes.html">일반 메서드·필드·private 이름·static 블록을 가진 클래스</a>를 사용할 수 있습니다. <code>super</code>·<code>new.target</code>도 각 본문의 사용 조건과 함께 검사합니다.</p>
+        <p>정적 import·export를 포함한 파일에는 <a href="javascript-modules.html#api"><code>JavaScriptModuleGrammar</code></a>를 사용합니다. Module 문맥의 <code>import.meta</code>·top-level await와 모듈 선언의 이름 검사도 연결되어 있습니다. 동적 import는 표현식이므로 Script의 함수·문장 안에서도 사용할 수 있습니다.</p>
+        <p>Script 안의 정규식 리터럴은 토큰의 경계·플래그를 확인한 뒤, <code>Validate</code>에서 본문 문법까지 검사합니다. 함수 본문과 템플릿 보간 안의 정규식에도 같은 검사를 적용하며, <a href="javascript-regexp.html">정규식 문서</a>에서 일반·u·v 모드의 차이와 검사 이유를 설명합니다. async 함수·async 화살표와 제너레이터, 객체·클래스의 일반·async·제너레이터 메서드와 접근자도 사용할 수 있습니다. <a href="javascript-functions.html">함수 종류별 문법 문서</a>에서는 각 표기와 await·yield의 문맥을 한 주제씩 설명합니다.</p>
+      </section>
+
+      <section id="sources">
+        <h2>기준 명세와 관련 자료</h2>
+        <p>언어 문법은 연도가 고정된 ECMAScript 2026 문서를 기준으로 관리합니다. 구현에서 다루는 입력 문맥과 정적 오류도 이 기준에 맞춰 테스트합니다.</p>
+        <ul>
+          <li><a href="https://tc39.es/ecma262/2026/multipage/ecmascript-language-statements-and-declarations.html">ECMAScript 2026 — 문장·선언·바인딩 패턴</a></li>
+          <li><a href="https://tc39.es/ecma262/2026/multipage/ecmascript-language-functions-and-classes.html">ECMAScript 2026 — 매개변수·일반 함수·화살표 함수와 정적 오류</a></li>
+          <li><a href="https://tc39.es/ecma262/2026/multipage/ecmascript-language-lexical-grammar.html#sec-automatic-semicolon-insertion">ECMAScript 2026 — 자동 세미콜론 처리</a></li>
+          <li><a href="javascript-expressions.html">기존 표현식·템플릿·구조 분해 할당</a></li>
+          <li><a href="../../grammars/javascript/README.md">기준 문법 파일과 재현 방법</a></li>
+        </ul>
+        <p>catch의 선언 충돌은 본문 규정의 검사 기준을 사용하므로, <code>catch (error) { var error; }</code>도 오류로 처리합니다. <a href="https://tc39.es/ecma262/2026/multipage/additional-ecmascript-features-for-web-browsers.html#sec-variablestatements-in-catch-blocks">Annex B.3.4의 호스트 확장</a>을 적용하는 환경에서는 이 단일 식별자 형태를 허용할 수 있습니다. Node.js 등 다른 엔진과 결과를 비교할 때에는 이 확장 적용 여부를 구분합니다.</p>
+      </section>
+      <footer>
+        <p><strong>저자의 설계와 이번 언어 지원의 관계</strong></p>
+        <p>Janglim의 핵심 LR 구조는 저자가 설계하고 작성했습니다. 이번 JavaScript 함수·문장·선언 문법, 토큰 정책·정적 검사·테스트와 문서는 그 기존 구조 위에 대화에서 합의한 범위를 AI 보조로 추가한 언어 지원 계층입니다. 기존 엔진에 담긴 저자의 설계·구현과 새로 추가한 언어 지원을 구분합니다.</p>
+        <div class="links"><a href="index.html">한국어 매뉴얼</a><a href="#purpose">문서 처음으로</a></div>
+      </footer>
+    </main>
+  </div>
+</body>
+</html>

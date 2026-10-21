@@ -8,6 +8,13 @@ using System.Threading.Tasks;
 
 namespace Janglim.FrontEnd.Tokenize
 {
+    /// <summary>
+    /// 등록된 토큰 규칙으로 원문을 토큰화하고 토큰 경계 정보를 제공합니다.
+    /// <para>
+    /// <see href="../../../../docs/ko/parser-driven-lexing.html#lexer-role">파서 주도 렉싱 설계 — 다음 토큰 요청과 Lexer의 변경 역할</see>
+    /// <see href="../../../../docs/ko/parser-driven-lexing.html#token-selection">토큰 선택 — 실제 최장 일치와 동률 우선순위</see>
+    /// </para>
+    /// </summary>
     public partial class Lexer
     {
         public IReadOnlyList<TokenPatternInfo> TokenPatternList => _tokenPatternList;
@@ -22,6 +29,9 @@ namespace Janglim.FrontEnd.Tokenize
             // It would attach the label (TokenPatternInfo).
             Parallel.For(0, tokenCells.Count, index =>
             {
+                // Rule-based tokenization already knows the winning terminal. The public
+                // combined-regex tokenizer still uses the legacy group attribution fallback.
+                if (tokenCells[index].PatternInfo != null) return;
                 var patternInfo = this.GetMatchedPattern(tokenCells[index].MatchData);
 
                 tokenCells[index].PatternInfo = patternInfo;
@@ -29,12 +39,15 @@ namespace Janglim.FrontEnd.Tokenize
         }
 
         /// <summary>
-        /// This function returns the tokenize rule.
+        /// Returns a combined .NET regex for callers of the original string-regex API.
+        /// This representation preserves ordered regex alternation; Lexer.Lexing and
+        /// CreateTokenSource instead compare matches from individual registered rules.
         /// </summary>
         /// <param name="tokenPatternList"></param>
         public string GetTokenizeRule(List<TokenPatternInfo> tokenPatternList)
         {
             this._tokenPatternList = tokenPatternList;
+            this._lexicalRules = null;
 
             string result = string.Empty;
             HashSet<string> allHashCode = new HashSet<string>();
@@ -54,7 +67,7 @@ namespace Janglim.FrontEnd.Tokenize
                 allHashCode.Add(key);
             }
 
-            return result[0..^1];
+            return result.Length == 0 ? string.Empty : result[0..^1];
         }
 
         /// <summary>
@@ -83,10 +96,8 @@ namespace Janglim.FrontEnd.Tokenize
         }
 
         /// <summary>
-        /// This function sorts the TokenPatterList accoding to the following principle.
-        /// 1st : Delimitable == false, CanDerived == false 
-        /// 2nd : Delimitable == false, CanDerived == true
-        /// 3rd : Delimitable == true, CanDerived == false
+        /// Orders equal-length matches by existing literal/regex/operator category priority,
+        /// then registration order. Actual matched input length is compared by the matcher.
         /// </summary>
         private void SortTokenPatternList()
         {
@@ -101,9 +112,7 @@ namespace Janglim.FrontEnd.Tokenize
                     return (t.IsWord) ? 1 : -1;
                 }
 
-                if (t.OriginalPattern.Length > td.OriginalPattern.Length) return -1;
-                else if (t.OriginalPattern.Length <= td.OriginalPattern.Length) return 1;
-                return 0;
+                return t.Key.CompareTo(td.Key);
             });
         }
 
@@ -164,7 +173,7 @@ namespace Janglim.FrontEnd.Tokenize
             this._tokenPatternList.Add(new TokenPatternInfo(this._key++, terminal));
             this.SortTokenPatternList();
 
-            this._tokenizeRule = this.GetTokenizeRule(this._tokenPatternList);
+            this._lexicalRules = null;
         }
 
 
@@ -207,7 +216,10 @@ namespace Janglim.FrontEnd.Tokenize
 
         private int _key = 1;
         private List<TokenPatternInfo> _tokenPatternList = new List<TokenPatternInfo>();
-        private string _tokenizeRule = string.Empty;
+        // Compiled rules are reused until registration changes. Sources take independent
+        // snapshots, so later AddTokenRule calls cannot change an existing source.
+        private LexicalRule[] _lexicalRules;
+        private LexicalRule[] LexicalRules => _lexicalRules ??= LexicalRuleMatcher.Compile(_tokenPatternList);
         private Tokenizer _tokenizer = new Tokenizer();
     }
 }

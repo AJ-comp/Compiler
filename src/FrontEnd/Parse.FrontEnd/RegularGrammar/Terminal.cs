@@ -26,21 +26,11 @@ namespace Janglim.FrontEnd.RegularGrammar
             get
             {
                 if (IsOper) return RegexGenerator.GetOperatorRegex(Value);
-                if (IsNumber) return Value;
-
-                // A string/char literal's Value is a raw regex (e.g. "[^"]*").  It must not go
-                // through GetWordRegex: the token starts and ends with a quote — a non-word
-                // char — so a surrounding \b could never match and the pattern would be dead.
-                if (IsTextLiteral) return Value;
-
-                // A comment's Value is already a raw regex (e.g. "//.*$"), so use it as-is.
-                // GetWordRegex would wrap it in \b...\b; since a line comment starts with a
-                // non-word char ('/'), the leading \b can never match, so the comment pattern
-                // was dead and a single '/' operator won instead (lexer longest-match item in
-                // docs/TODO.md). ScopeComment is IsOper, so it is handled above, not here.
-                if (TokenType is Comment) return Value;
-
-                return RegexGenerator.GetWordRegex(Value);
+                // Regex token rules are used exactly as authored. In particular, Identifier
+                // and Keyword do not acquire .NET word boundaries: a language may allow '$'
+                // or other characters outside .NET's \w. The lexer compares actual match
+                // lengths and uses rule priority only to break ties. Explicit \b stays intact.
+                return Value;
             }
         }
 
@@ -52,7 +42,7 @@ namespace Janglim.FrontEnd.RegularGrammar
         /// <param name="type"></param>
         /// <param name="value"></param>
         /// <param name="meaning"></param>
-        /// <param name="bWord">If this argument is false regex expression is displayed like as (ex : ++ -> \b++\b)</param>
+        /// <param name="bWord">Whether this is a regex rule rather than a literal, for display and tie priority.</param>
         /***************************************************************************************/
         public Terminal(TokenType type, string value, bool meaning = true, bool bWord = false) : this(type, value, value, meaning, bWord)
         {

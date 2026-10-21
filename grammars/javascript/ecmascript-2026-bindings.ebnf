@@ -1,0 +1,47 @@
+# ECMAScript 2026 strict ordinary-function/declaration binding syntax.
+# Shared by the expression and Script entry points.
+# Sources: sections 14.3.3 and 15.1 of the pinned ECMAScript 2026 specification.
+# BindingIdentifier permits await in a Script and an ordinary non-async function.
+# The host rejects escaped reserved words, eval, and arguments in binding positions.
+# If another fragment introduces a contextual literal such as 'of', the same literal
+# must also be admitted here, in IdentifierReference, and in PropertyIdentifierName.
+
+BindingIdentifier : IdentifierName | 'await' | 'of' | 'async' ;
+BindingPattern : ObjectBindingPattern | ArrayBindingPattern ;
+Initializer : '=' AssignmentExpression ;
+SingleNameBinding : BindingIdentifier | BindingIdentifier Initializer ;
+BindingElement : SingleNameBinding | BindingPattern | BindingPattern Initializer ;
+
+# An object rest binding must be an identifier. A trailing comma after it is invalid.
+ObjectBindingPattern : '{' '}'
+                     | '{' BindingPropertyList '}'
+                     | '{' BindingPropertyList ',' '}'
+                     | '{' BindingRestProperty '}'
+                     | '{' BindingPropertyList ',' BindingRestProperty '}' ;
+BindingPropertyList : BindingProperty | BindingPropertyList ',' BindingProperty ;
+BindingProperty : SingleNameBinding | PropertyName ':' BindingElement ;
+BindingRestProperty : '...' BindingIdentifier ;
+
+# Commas stay in the tree, including elisions such as [,] and [first,,last].
+# The rest production can appear only at the end of the right-recursive list.
+# Therefore [...rest,], [...rest, next], and [...rest = value] have no production.
+# Array rest can contain a nested binding pattern: [...[first, second]].
+ArrayBindingPattern : '[' ']' | '[' ArrayBindingElements ']' ;
+ArrayBindingElements : BindingElement
+                     | BindingElement ','
+                     | BindingElement ',' ArrayBindingElements
+                     | ','
+                     | ',' ArrayBindingElements
+                     | BindingRestElement ;
+BindingRestElement : '...' BindingIdentifier | '...' BindingPattern ;
+
+# The EBNF reader spells the empty parameter list with an optional group.
+# Parameters may have defaults; a final rest parameter has neither an initializer
+# nor a following comma. Duplicate names are an early error in this strict grammar.
+FormalParameters : (FormalParameterList
+                  | FormalParameterList ','
+                  | FunctionRestParameter
+                  | FormalParameterList ',' FunctionRestParameter)? ;
+FormalParameterList : FormalParameter | FormalParameterList ',' FormalParameter ;
+FormalParameter : BindingElement ;
+FunctionRestParameter : BindingRestElement ;

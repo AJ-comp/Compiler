@@ -32,8 +32,9 @@ namespace Janglim.FrontEnd.Tokenize
 
         /// <summary>
         /// Skipped source text between the previous parsing token and this token,
-        /// or before the first parsing token. Populated by <see cref="LexingData"/>.
-        /// Manually constructed tokens and tokens excluded from parsing have empty trivia.
+        /// or before the first parsing token. Supplied by <see cref="LexingData"/>,
+        /// the request-driven lexer, or the constructor with explicit leading trivia.
+        /// The five-argument constructor initializes empty trivia.
         /// </summary>
         public TokenTrivia LeadingTrivia { get; internal set; }
 
@@ -62,6 +63,19 @@ namespace Janglim.FrontEnd.Tokenize
 
             this.MatchData = matchData;
             this.LeadingTrivia = new TokenTrivia(startIndex, string.Empty);
+        }
+
+        /// <summary>
+        /// Creates a source token with exact leading trivia. Custom <see cref="ITokenSource"/>
+        /// implementations can supply this information without mutating internal lexer fields.
+        /// The trivia ends at <paramref name="startIndex"/> and its start is derived from its length.
+        /// </summary>
+        public TokenCell(int startIndex, int startLineIndex, int startColIndex, string data, Match matchData,
+            string leadingTriviaText) : this(startIndex, startLineIndex, startColIndex, data, matchData)
+        {
+            if (leadingTriviaText == null) throw new ArgumentNullException(nameof(leadingTriviaText));
+            if (startIndex < leadingTriviaText.Length) throw new ArgumentOutOfRangeException(nameof(startIndex));
+            LeadingTrivia = new TokenTrivia(startIndex - leadingTriviaText.Length, leadingTriviaText);
         }
 
         public bool Contains(int caretIndex, RecognitionWay recognitionWay)

@@ -1,150 +1,139 @@
-# Janglim 0.4.0 출시 노트 — 2026-10-19
+# Janglim 0.5.0 출시 노트 — 2026-10-21
 
-**Janglim 엔진 `0.4.0`은 EBNF·렉서·조건절 API를 확장한 릴리즈입니다.** 이번 버전은 EBNF 토큰 종류 지정, 토큰 사이 원문 정보, 등록형 C# 조건절과 해당 충돌의 예측 기능을 추가합니다. 새 공개 API와 문법 처리 기능을 함께 제공하므로 엔진의 minor 버전을 올립니다.
+**Janglim 0.5.0은 파서 주도 렉싱과 ECMAScript 2026 기준 JavaScript 언어 지원을 추가합니다.** 파서는 현재 파싱 문맥을 정책에 전달하고, 정책이 선택한 토큰 규칙 묶음으로 다음 토큰을 요청합니다. 이 입력 구조 위에 표현식·엄격 모드 Script·Module의 세 JavaScript API를 제공합니다.
 
-엔진, 웹, MCP 서비스와 내장 문법은 각각 독립된 버전을 사용합니다.
-
-| 대상 | 버전 | 이번 릴리즈의 구성과 역할 |
+| 대상 | 버전 | 역할 |
 | --- | --- | --- |
-| Janglim 엔진·NuGet 패키지 | `0.4.0` | .NET Standard 2.1 기반의 지원 파서 `LALRParser`와 새 EBNF·렉서·조건절 API |
-| 웹 Playground | `1.1.0` | 브라우저 문법 편집·파싱·트리 탐색과 로컬 `.janglim.json` 작업 파일 |
-| MCP 서비스 소스 | `0.1.0` | 원격 문법 조회·검증·파싱·예제 검사 도구 |
-| 내장 C11 Core 기준 문법 | `1.0.0` | 명시된 C 구문 범위에서 사본을 수정하고 회귀 예제를 비교하는 출발점 |
+| Janglim 엔진·NuGet 패키지 | `0.5.0` | .NET Standard 2.1 LALR 엔진, 요청형 렉싱과 JavaScript 언어 API |
+| 웹 Playground | `1.1.0` | EBNF·입력 편집, 파싱·트리 탐색과 로컬 작업 파일 |
+| MCP 서비스 소스 | `0.1.0` | 원격 문법 조회·검증·파싱·예제 검사 |
+| 내장 C11 Core 기준 문법 | `1.0.0` | 수정할 사본과 회귀 예제를 제공하는 읽기 전용 기준 문법 |
 
-NuGet 패키지 ID는 `Janglim`이고 버전은 `0.4.0`입니다. 다음 설치 명령은 이 버전을 선택합니다.
+엔진·웹·MCP·기준 문법은 독립된 버전을 사용합니다. 이번에 올리는 NuGet 패키지 ID는 `Janglim`입니다.
 
 ```shell
-dotnet add package Janglim --version 0.4.0
+dotnet add package Janglim --version 0.5.0
 ```
 
-## EBNF에서 토큰의 용도를 지정합니다
+## 파서가 필요할 때 다음 토큰을 요청합니다
 
-기존 EBNF 표기를 유지하면서 이름 있는 정규식 토큰에 `Identifier`, `StringLiteral`, `CharLiteral`, `NumberLiteral`, `Comment`, `Reject`를 지정할 수 있습니다. 종류를 생략한 기존 정의는 `Identifier`로 읽습니다.
+새 입력 흐름은 **토큰 규칙 묶음 → 선택 정책 → 원문을 읽을 source → 파싱**입니다.
 
-`StringLiteral`·`CharLiteral`·`NumberLiteral`은 원시 정규식을 사용하므로 문자열·문자 리터럴과 `.5`, `1.` 같은 숫자를 문법 파일에서 정의할 수 있습니다. `Comment`는 주석처럼 파싱에서 제외할 입력을 정의합니다. `Reject`는 닫히지 않은 주석처럼 어휘 오류로 보고할 입력을 표시합니다.
-
-이렇게 토큰의 용도를 문법에 기록하면, C# 트리식에서 지정하던 토큰 정보를 EBNF 파일로도 전달할 수 있습니다. 직접 엔진을 호출하는 코드는 `EbnfGrammar.IsRejectedToken()`으로 `Reject` 일치를 확인합니다. MCP 어댑터는 이 검사를 적용해 해당 입력을 어휘 오류로 반환합니다.
-
-## 렉서가 토큰 앞의 원문과 줄바꿈을 보존합니다
-
-파싱 토큰의 `LeadingTrivia`에는 그 토큰 앞에서 제외한 공백과 주석의 원문·위치가 들어갑니다. `HasLineBreakBefore`로 앞에 줄바꿈이 있었는지도 확인할 수 있습니다.
-
-예를 들어 다음 입력에서는 `value` 토큰 앞의 원문이 `"\n    "`이고, `HasLineBreakBefore`는 참입니다.
-
-```text
-return
-    value;
+```csharp
+var goal = new LexicalGoal(terminals);
+var policy = new LexicalPolicy(goal);
+var source = lexer.CreateTokenSource(input, policy);
+var parsed = parser.Parsing(source);
 ```
 
-이 정보가 있어야 조건 함수가 같은 토큰 목록에서도 공백만 있는 입력과 줄바꿈이 있는 입력을 구별할 수 있습니다. 줄바꿈 판정은 CR, LF, U+2028, U+2029를 처리하며 주석 내부의 줄바꿈도 반영합니다. 마지막 토큰 뒤의 공백과 주석은 `LexingData.TrailingTrivia`에 보존합니다. 원문 위치와 길이는 기존 토큰 위치와 같은 UTF-16 단위입니다.
+`LexicalGoal`은 함께 사용할 단말 규칙의 묶음입니다. `LexicalPolicy`는 이 묶음들을 보관하고, 파서가 전달한 `LexicalContext`로 적합한 묶음을 선택합니다. `Lexer.CreateTokenSource`는 원문과 정책을 연결한 `ITokenSource`를 만듭니다.
 
-증분 편집에서도 토큰 사이 원문을 다시 계산하므로, 토큰 내용은 같고 앞의 공백·주석만 바뀐 경우에도 새 정보를 조건 검사에 전달합니다. 자세한 예제는 [렉서 문서](docs/ko/lexer.md)를 참고하세요.
+파서는 정책이 반환한 묶음을 `source.Peek`에 전달합니다. `source`는 토큰과 다음 커서를 `TokenRead`로 반환하고, 파서는 실제로 Shift할 때 `Next`를 현재 커서로 채택합니다. 예측 후보도 각자의 커서·소비 이력·룩어헤드와 렉서 상태를 보관합니다. 한 후보가 입력을 소비해도 다른 후보나 실제 파서의 위치는 바뀌지 않습니다.
 
-## .NET 호스트에서 C# 검사 함수를 등록합니다
+예를 들어 `result = /ab/g;`에서 파서가 `result`와 `=`를 소비했다면 현재 커서는 8번 공백 앞입니다. `Peek`는 9~13번의 `/ab/g` 토큰과 다음 위치 14를 반환하고, 현재 커서는 Shift할 때까지 8을 유지합니다. 위치·토큰 수·이전 토큰과 보관 구조를 설명하는 [세 장의 도식](docs/ko/parser-driven-lexing.html#cursor-example)을 추가했습니다.
 
-`EbnfReaderOptions.RegisterPredicate()`로 검사 함수를 등록하고, 문법에서는 `{Name()}?`로 호출합니다. 조건이 참이면 해당 위치를 통과하고, 거짓이면 그 조건절을 사용하는 경로가 제외됩니다. 조건절 자체는 입력 토큰을 소비하지 않습니다.
+기존 토큰 목록 입력과 요청형 입력을 모두 사용할 수 있습니다. 요청형 `Parsing(ITokenSource)`는 첫 오류에서 중단합니다. 사용자 오류 복구와 일반 충돌 백트래킹을 사용하는 코드는 기존 토큰 목록 입력 경로를 사용합니다.
 
-예를 들어 다음 문법의 `NoLineBreak`는 호스트가 등록한 C# 함수 이름입니다.
+## 렉서는 실제 입력을 가장 길게 읽는 규칙을 선택합니다
 
-```ebnf
-Throw : 'throw' {NoLineBreak()}? id ';' ;
-id := "[a-z]+" ;
-```
+`Lexer.Lexing`과 요청형 `source`는 공통 선택 코드를 사용합니다.
 
-호스트는 `context => !context.NextToken.HasLineBreakBefore`를 등록해 `throw` 다음 토큰 앞에 줄바꿈이 있는지 검사할 수 있습니다. `PredicateContext`는 이전 토큰, 다음 토큰과 입력 인덱스를 제공합니다.
+1. 현재 위치에서 여러 토큰 규칙이 일치하면, 실제 입력을 가장 길게 읽은 일치를 선택합니다.
+2. 길이가 같으면 토큰 분류의 우선순위와 등록 순서를 적용합니다.
+3. 공백·주석 스킵 규칙에도 같은 비교 기준을 적용합니다.
 
-예측과 실제 파싱은 같은 함수를 여러 번 호출할 수 있습니다. 따라서 등록 함수는 상태를 바꾸지 않고 같은 입력에 같은 결과를 반환하는 순수 함수로 작성합니다. 등록하지 않은 함수 이름과 잘못된 호출 형식은 문법 읽기 오류로 보고하고, 검사 함수가 던진 예외는 평가 오류로 전달합니다.
+예를 들어 키워드 `if`와 식별자 규칙이 함께 있을 때 `if`는 동률 우선순위에 따라 키워드로, `ifx`와 `if$`는 더 길게 일치하는 식별자로 읽습니다.
 
-### 조건절과 Shift가 겹치면 필요한 만큼 입력을 예측합니다
+**업그레이드할 때 확인할 변경:** 토큰 정규식에 자동으로 붙이던 `` 경계를 제거했습니다. 자동 경계에 의존하던 사용자 규칙은 필요한 경계를 정규식에 직접 작성해야 합니다. 종류를 생략한 EBNF 토큰은 계속 Identifier로 분류되며, 작성한 정규식을 그대로 사용합니다.
 
-예측 대상은 **원래 파싱 테이블의 한 칸에 Shift 하나와 조건절의 ε Reduce 하나가 있는 충돌**입니다. 조건을 검사한 뒤에도 두 액션이 모두 가능하면 예측기가 첫 액션을 선택합니다.
+각 정규식 내부의 대안 순서·탐욕성·지연 반복은 .NET 정규식 의미를 유지합니다. 비교 대상은 각 규칙이 반환한 일치입니다. 단일 결합 정규식 문자열을 받는 기존 `Tokenizer.Tokenize(string, ...)` 경로도 .NET 대안 순서를 유지합니다.
 
-```ebnf
-S : 'x' {Allow()}? 'y'
-  | 'x' 'y' 'z' ;
-```
+등록된 개별 규칙을 비교하는 렉싱 경로에서는 입력을 전혀 소비하지 않는 일치를 `EmptyTokenMatchException`으로 보고하고, 각 정규식 일치에 1초 제한을 적용합니다. MCP 어댑터는 빈 일치를 `invalid_grammar`/`zero_length_token`, 정규식 시간 초과를 `runtime_limit`으로 구분합니다.
 
-`Allow`가 참일 때 이 예제는 `x y`와 `x y z`를 모두 처리할 수 있습니다. 예측기는 실제 상태 스택과 입력 위치를 복사해 후보를 비교하고, 선택한 최초 액션 하나를 실제 파서에 반환합니다.
+## JavaScript 표현식·Script·Module을 파싱합니다
 
-룩어헤드 길이 k를 미리 고정하지 않고, 후보가 구별될 때까지 입력을 확인합니다. 두 후보가 같은 입력을 끝까지 받아들이면 모호성 진단을 반환합니다. 스택 깊이·후보 수·액션 전이 횟수에 대한 자원 한도에 도달한 경우에도 명확한 진단을 반환합니다. 그 밖의 충돌에는 기존 충돌 정책을 적용합니다.
+새 공개 네임스페이스는 `Janglim.FrontEnd.Grammars.JavaScript`입니다. 기존 EBNF 프로젝트와 Janglim 패키지 안에 언어 지원을 포함합니다.
 
-조건 등록과 이 예측 경로는 .NET 엔진 호스트 API에서 제공합니다. Playground 1.1.0과 MCP 0.1.0은 EBNF 텍스트를 기본 옵션으로 읽는 경로를 사용하며, MCP의 입력 파싱·예제 검사는 충돌을 먼저 해결한 문법을 대상으로 합니다.
-
-## 입력을 소비하지 않는 반복과 조건절 좌재귀를 미리 검사합니다
-
-같은 입력 위치에서 계산을 계속 반복하는 문법은 파싱을 실행하기 전에 검사합니다.
-
-| 문법 | 검사 결과와 이유 |
+| 진입점 | 입력 문맥 |
 | --- | --- |
-| `({Allow()}?)*` 또는 `({Allow()}?)+` | 오류. 반복 한 번을 마쳐도 입력 토큰을 소비하지 않습니다. |
-| `('x' {Allow()}?)*` | 허용. 반복 한 번마다 x를 반드시 소비합니다. |
-| `A : {Allow()}? A 'x' \| 'x' ;` | 오류. 조건절을 거쳐 같은 A를 다시 참조하기 전까지 토큰 소비가 없습니다. |
-| `A : A 'x' \| 'x' ;` | 허용. 조건절이 없는 일반 좌재귀입니다. |
-| `A : A {Allow()}? 'x' \| 'x' ;` | 허용. 재귀 참조 전까지의 경로에 조건절이 없습니다. |
+| `JavaScriptExpressionGrammar` | 엄격 모드 Script 문맥의 표현식 하나 |
+| `JavaScriptScriptGrammar` | 엄격 모드 Script의 선언·문장 목록 |
+| `JavaScriptModuleGrammar` | import·export와 top-level await를 포함한 Module 입력 |
 
-`PredicateLeftRecursionValidation`은 직접 재귀뿐 아니라 다른 비단말과 토큰을 생략할 수 있는 경로도 확인합니다. 조건절과 토큰 소비가 같은 경로에 있는지 분석하며, 조건 함수를 실행해 결과를 추측하지 않습니다.
+세 API는 `Grammar`, `Policy`, `GrammarText`, `CreateTokenSource(string)`, `Validate(tree)`를 제공합니다. **입력을 허용하려면 파싱 성공과 정적 검사 성공을 함께 확인합니다.**
 
-문제가 발견되면 `PredicateLeftRecursionException`에 규칙 이름·조건 함수 이름·참조 경로를 담습니다. EBNF 리더는 이 정보를 읽기 결과의 오류 목록으로 전달하고, C# 문법 준비 코드는 예외로 받습니다. 검사 기준과 이유는 [클래스 동작 문서](docs/ko/predicate-left-recursion-validation.html), 반복 예제는 [반복 규제 문서](docs/ko/predicate-repetition-rules.html)에 정리했습니다.
+```csharp
+using System;
+using Janglim.FrontEnd.Grammars.JavaScript;
+using Janglim.FrontEnd.Parsers.LR;
 
-## C11 Core 기준 문법과 MCP 소스
+var language = new JavaScriptScriptGrammar();
+var parser = new LALRParser(language.Grammar);
+var parsed = parser.Parsing(language.CreateTokenSource(
+    "const match = /ab/g.test(value);"));
 
-저장소에는 [C11 Core 기준 문법과 회귀 예제](grammars/c/README.md)가 포함됩니다. 이 프로필은 C 구문의 일부를 수정한 뒤, 수정 전후의 정상·오류 예제를 비교하는 데 사용합니다. MCP 빌드는 기준 EBNF를 `c11-core`, 버전 `1.0.0`으로 내장합니다.
+if (!parsed.Success)
+    throw new InvalidOperationException("JavaScript 구문을 확인하세요.");
 
-| 구분 | 범위 |
-| --- | --- |
-| 제공 구문 | 기본 타입의 선언·함수, 포인터·배열·함수 선언자, 구조체·공용체·열거형, 초기화, 표현식, 제어문, 리터럴·주석 |
-| 입력 기준 | 지원 구문으로 작성한 C 번역 단위, ASCII 식별자. 전처리 지시문이 필요한 코드는 호출 측에서 전처리한 뒤 입력 |
-| 프로필의 확장 대상 | `typedef` 선언과 타입 이름 해석, 의미·타입 검사, `_Atomic`·`_Generic`·`_Alignas`·`_Imaginary`, K&R 함수 정의, 유니코드 식별자·digraph·trigraph·컴파일러 전용 확장 |
+var diagnostics = language.Validate(parsed.ToParseTree);
+foreach (var diagnostic in diagnostics)
+    Console.WriteLine($"{diagnostic.Code}: {diagnostic.Message}");
 
-MCP 서비스는 stateless Streamable HTTP로 다음 다섯 도구를 제공합니다.
+Console.WriteLine(diagnostics.Count == 0);
+```
 
-| 도구 | 역할 |
-| --- | --- |
-| `list_grammars` | 기준 문법의 ID·버전·범위·SHA-256 조회 |
-| `get_grammar` | 기준 EBNF 사본과 메타데이터 가져오기 |
-| `validate_grammar` | EBNF 읽기, LALR 테이블 생성과 충돌 보고 |
-| `parse_input` | 입력 파싱, 위치가 있는 토큰·진단·선택적 구문 트리 반환 |
-| `run_tests` | 정상·오류 예제의 기대 결과와 실제 결과 비교 |
+이번 지원 범위는 다음과 같습니다.
 
-**서버의 기준 문법은 읽기 전용입니다.** 클라이언트는 받은 사본을 수정해 검사 도구에 전달합니다. 기준 문법과 다른 사용자의 사본은 유지되며, 서버는 사용자 프로젝트나 수정본을 영구 저장하지 않습니다.
+- Unicode 17 식별자·이스케이프, 숫자·BigInt·문자열과 문맥에 따른 나눗셈·정규식 토큰 선택
+- 연산자·대입·조건식·선택적 체이닝·호출·배열·객체와 일반·태그·중첩 템플릿
+- 구조 분해 할당과 선언·매개변수·for·catch의 바인딩 패턴
+- 일반·async 함수와 화살표 함수, 제너레이터·async 제너레이터, 객체·클래스 메서드와 getter·setter
+- 클래스 선언·표현식·상속·필드·private 이름·static 블록, super·new.target 문맥
+- 변수 선언, 조건문·반복문·제어문·switch·try/catch/finally·레이블, ASI
+- 정적 import·export·재내보내기·import attributes, 동적 import와 Module의 import.meta·top-level await·for-await-of
+- 정규식 리터럴의 경계·플래그와 일반·u·v 모드 본문 문법 검사
+- 대입 대상·예약어·선언 범위·매개변수·함수 문맥·private 이름 등 정적 오류 검사
 
-각 엔진 작업은 별도 프로세스에서 실행해 문법 빌더의 전역 상태를 요청 사이에서 분리합니다. 입력·출력 크기, 동시 작업과 실행 시간을 제한하고 취소·시간 초과 시 실제 워커 작업을 종료합니다. 연결과 운영 방법은 [MCP 가이드](docs/MCP.md)를 참고하세요.
+정규식 본문은 최종 구문 트리의 `Validate` 단계에서 검사합니다. 따라서 버려질 예측 후보의 정규식 오류가 정상적인 나눗셈 경로를 막지 않습니다. 진단에는 코드·설명과 UTF-16 원문 위치·길이가 들어 있습니다.
 
-## 호환성과 지원 범위
+비엄격 모드 Script와 명세 전체·Test262 구문 적합성 검증은 후속 범위입니다. 다음 개발은 이 범위를 넓히고 적합성 사례를 누적하는 작업입니다. 언어 계층의 기준과 세부 범위는 [JavaScript 안내](grammars/javascript/README.md)에 정리했습니다.
 
-지원 파싱 경로는 `LALRParser`이며 패키지 대상은 .NET Standard 2.1입니다. 기존 문법 정규화, FIRST/FOLLOW, ACTION/GOTO 테이블·충돌 보고, 파싱 기록·구문 트리·AST, 증분 재파싱과 C# 오류 복구 API를 이어갑니다. 오류 복구와 선택적 충돌 백트래킹은 동작에 맞는 `IErrorHandlable` 구현으로 연결합니다.
+## 패키지·웹·MCP의 연결 범위
 
-0.x에서는 공개 API가 바뀔 수 있으므로 버전을 고정하고 업그레이드할 때 변경 사항을 확인하세요. SLR은 알려진 테이블 생성 결함이 있는 실험 경로이고 CLR은 미완성 상태입니다. 문법 생성은 전역 빌더 상태를 사용하므로 한 프로세스 안에서는 순차적으로 수행합니다.
+이번 JavaScript API는 .NET 호스트에서 사용합니다. MCP 기준 문법 목록은 기존 `c11-core`를 유지합니다. Playground와 MCP의 일반 EBNF 처리 경로에는 공통 렉싱 개선이 적용됩니다.
 
-이번 버전부터 입력을 소비하지 않는 `*`·`+` 반복과 조건절을 거치는 무소비 좌재귀는 문법 준비 단계에서 오류로 처리합니다. 업그레이드할 때는 반복 본문과 재귀 참조 전 경로의 토큰 소비 여부를 확인하세요.
+패키지에는 여섯 JavaScript EBNF 내장 리소스와 Unicode 17 식별자 데이터를 포함합니다. Unicode 데이터 출처·라이선스는 [Unicode 안내](grammars/javascript/unicode/README.txt)에 기록합니다. NuGet과 MCP 게시 산출물에는 `licenses/Unicode-LICENSE.txt`를, Playground 정적 사이트에는 `wwwroot/licenses/Unicode-LICENSE.txt`를 함께 넣습니다. MCP 컨테이너 빌드에도 여섯 EBNF와 라이선스가 있는 JavaScript 문법 디렉터리를 복사합니다.
 
-## 출시 검증과 산출물
+엔진은 계속 .NET Standard 2.1을 대상으로 하며 지원 파서는 `LALRParser`입니다. 문법 빌더의 전역 상태 때문에 한 프로세스의 문법 생성은 순차적으로 수행합니다. 0.x 공개 API는 후속 버전에서 바뀔 수 있습니다.
 
-2026-10-19에 엔진 0.4.0 메타데이터를 적용한 뒤 빌드·테스트·패키징과 별도 소비 프로젝트 검증을 완료했습니다. 아래 표는 이날 실행한 로컬 검증 결과입니다.
+## 출시 검증
 
-| 검증 | 상태 |
+2026-10-21에 엔진 0.5.0을 적용한 소스에서 다음 로컬 검증을 완료했습니다.
+
+| 검증 | 결과 |
 | --- | --- |
 | 기본 솔루션 Debug·Release 빌드 | 모두 성공, 오류 0개. 기존 미사용 필드·이벤트 경고 각 5개 |
-| 공개 프런트엔드 빌드 | 성공 |
-| 공개 Playground 게시 빌드 | `dotnet publish` 성공 |
-| MCP 서버 게시 빌드 | `dotnet publish` 성공 |
+| 엔진 Release 테스트 | 4,976개 통과, 알려진 SLR 결함 테스트 1개 제외, 실패 0개 |
+| MCP Release 테스트 | 69개 통과, 실패 0개 |
 | UI 회귀 테스트 | 22개 통과 |
-| 출시 인프라 Python 테스트 | 12개 통과 |
-| 엔진 Release 테스트 | 692개 통과, 알려진 SLR 결함 테스트 1개 제외, 실패 0개 |
-| MCP 프로토콜·워커 격리 테스트 | 51개 통과, 제외 0개, 실패 0개 |
-| NuGet 0.4.0 패키징·내용 확인 | 패키지 생성 성공. nuspec의 설명·태그·릴리스 노트와 포함 README 일치 확인. 엔진 DLL 9개의 버전 `0.4.0.0`과 지역화 리소스 DLL 40개 포함 확인 |
-| 독립 `net8.0` 소비 프로젝트 | 로컬 패키지 설치 후 README 빠른 시작 예제의 `True`, 조건절의 참·거짓 결과, 종류 지정 토큰의 입력 5개, `Reject`와 주석·줄바꿈 원문 정보 검사 성공 |
-| 컨테이너 빌드 | 로컬 Docker 엔진이 실행되지 않아 미수행. CI 검증 대상 |
+| 게시 인프라 테스트 | 12개 통과 |
+| 공개 Playground 게시 빌드 | 성공 |
+| MCP 서버 게시 빌드 | 성공 |
+| Docker 복사 목록만으로 구성한 MCP 소스 게시 빌드 | 성공. 컨텍스트 안의 프로젝트 참조·리소스 경로와 EBNF 6개 확인 |
+| MCP·Playground 게시 라이선스 | 두 게시 위치의 Unicode 라이선스가 원본과 바이트 단위로 일치 |
+| NuGet 패키징·내용 검사 | 0.5.0 패키지 생성. 엔진 DLL 9개 버전 0.5.0.0, 지역화 DLL 40개, EBNF 리소스 6개와 Unicode 라이선스 확인 |
+| 독립 net8.0 패키지 소비 프로젝트 | 80개 검사 통과. 저장소 ProjectReference 없이 새 API·JavaScript 정상/오류 입력과 정적 검사 확인 |
+| 저장소·패키지 README의 JavaScript 예제 | 문서의 코드 블록을 그대로 추출한 별도 프로젝트 2개에서 파싱 성공·정적 진단 0개 확인 |
+| DocFX 문서 빌드 | 성공, 오류 0개. 기존 상대 링크 경고 11개 |
+| 로컬 MCP 컨테이너 빌드 | Docker 엔진이 실행되지 않아 미수행. CI의 필수 컨테이너 빌드로 검증 |
 
-로컬 검증 산출물 경로는 `artifacts/release-0.4.0/`이고, NuGet 패키지는 `artifacts/release-0.4.0/packages/Janglim.0.4.0.nupkg`입니다. 알려진 SLR 결함을 기록한 제외 테스트는 결과에 별도로 표시하고, 나머지 테스트 실패는 출시를 막습니다.
+산출물은 `artifacts/release-0.5.0/`에 보관합니다. NuGet 패키지는 `packages/Janglim.0.5.0.nupkg`, 엔진·MCP 결과는 `TestResults/`, 소비자 종합 결과는 `consumer-validation-summary.json`에 있습니다. 실제 게시에는 GitHub Actions가 해당 커밋에서 다시 검증해 생성한 산출물을 사용합니다.
 
-GitHub Actions의 [출시 검증](.github/workflows/verify-release.yml)은 기본 솔루션 Debug·Release 빌드, 엔진·MCP 테스트, UI 테스트, NuGet 패키징, 공개 웹 게시 빌드, MCP 서버 게시·컨테이너 빌드를 수행하도록 구성되어 있습니다.
+## 푸시와 자동 게시
 
-`master` push에서는 이 검증에 성공한 산출물로 새 엔진 버전을 NuGet에 게시하고 Playground를 배포합니다. MCP 서버 산출물은 CI에서 검증·보관하며, 운영 MCP 재배포는 전용 Azure 스크립트로 수행합니다. 실제 게시·배포 결과는 해당 [Actions 실행](https://github.com/AJ-comp/Compiler/actions)에서 확인합니다. 수동 검증은 `dry_run: true`를 기본으로 사용합니다. 자세한 절차는 [출시 안내](.github/RELEASING.md)를 참고하세요.
+`master` push는 [출시 워크플로](.github/workflows/publish-nuget.yml)를 실행합니다. 전체 검증을 통과하면 아직 게시하지 않은 엔진 버전을 NuGet에 게시하고, 같은 실행에서 검증한 Playground 산출물을 배포합니다. 문서는 별도 GitHub Pages 워크플로로 배포합니다.
 
-## 설계 중인 후속 기능
-
-다음 단계에서는 파서가 문법 문맥에 맞는 읽기 방식을 지정하고 렉서에 토큰 하나를 요청하는 구조를 설계합니다. JavaScript의 `/` 나눗셈과 정규식 리터럴 구분, 예측 후보별 원문 커서와 렉서 상태가 이 설계의 주요 과제입니다. JavaScript·TypeScript 전체 문법과 자동 세미콜론 처리도 이 후속 개발 범위에서 다룹니다.
+작업 브랜치 push와 PR은 검증만 실행합니다. 운영 MCP 재배포는 전용 Azure 스크립트로 수행합니다. 실제 게시·배포 상태는 해당 [GitHub Actions 실행](https://github.com/AJ-comp/Compiler/actions)에서 확인합니다.
 
 ## 저자와 이번 릴리즈
 
@@ -152,4 +141,6 @@ Janglim 핵심 구조는 저자가 직접 설계하고 작성해 온 코드에 �
 
 C11 Core 문법과 회귀 예제는 AI 보조로 준비한 별도 자료입니다. 엔진에 담긴 저자의 설계·구현과 이 자료의 작성 맥락은 [C11 Core 안내](grammars/c/README.md#기준과-저자-맥락)에 함께 기록했습니다.
 
-영문 변경 이력은 [CHANGELOG.md](CHANGELOG.md), 사용 예제와 프로젝트 소개는 [README.md](README.md)를 참고하세요.
+이번 JavaScript 언어 규칙·검사기·테스트와 설명 문서는 저자의 기존 LR 구조 위에 AI 보조로 추가한 언어 지원 계층입니다. 언어 규칙과 데이터 출처, 저자 맥락은 [JavaScript 안내](grammars/javascript/README.md#기준과-저자-맥락)에 기록했습니다.
+
+이전 릴리즈의 영문 변경 이력은 [CHANGELOG.md](CHANGELOG.md), 사용 예제와 프로젝트 소개는 [README.md](README.md)를 참고하세요.

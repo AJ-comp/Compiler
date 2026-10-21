@@ -7,6 +7,9 @@ namespace Janglim.FrontEnd.Parsers.LR
     {
         public int State { get; }
         public int TokenIndex { get; }
+        // Token ordinal and UTF-16 source offset differ under contextual tokenization.
+        internal int? SourceOffset { get; set; }
+        public override string Message => base.Message + (SourceOffset.HasValue ? " Source offset " + SourceOffset.Value + "." : string.Empty);
 
         protected PredictionException(string message, int state, int tokenIndex)
             : base(message + " (state " + state + ", token index " + tokenIndex + ").")

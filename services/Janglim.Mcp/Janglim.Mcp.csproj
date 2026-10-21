@@ -15,5 +15,6 @@
   <ItemGroup>
     <!-- Release-owned baseline, not a runtime-writable project file. -->
     <EmbeddedResource Include="../../grammars/c/c11-core.ebnf" LogicalName="Janglim.Mcp.Grammars.c11-core.ebnf" />
+    <Content Include="../../grammars/javascript/unicode/LICENSE.txt" Link="licenses/Unicode-LICENSE.txt" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
   </ItemGroup>
 </Project>

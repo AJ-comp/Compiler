@@ -57,7 +57,7 @@ Now and then, when a concept can't be shown with this grammar (ε, conflicts, an
 - 👉 **[Getting Started](getting-started.md)** — install it and run your first parse in 5 lines.
 - 🌿 **[Live playground](https://janglim.mythosia.net)** — right in the browser, no install needed.
 
-> **Note:** This source tree targets Janglim engine `0.4.0`, with `LALRParser` as its supported parser.\
+> **Note:** This source tree targets Janglim engine `0.5.0`, with `LALRParser` as its supported parser.\
 > SLR and CLR remain experimental and incomplete, and the public API may change during `0.x`.\
 > Web Playground `1.1.0` is versioned independently of the engine.
 

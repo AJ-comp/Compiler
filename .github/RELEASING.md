@@ -5,7 +5,7 @@
 ## 평소 출시 방법
 
 1. 엔진을 새로 게시하려면 [`src/Directory.Build.props`](../src/Directory.Build.props)의 `Version`을 아직 게시하지 않은 버전으로 올립니다. 같은 버전의 NuGet 패키지는 덮어쓸 수 없습니다.
-2. Playground 버전은 [`samples/Playground/Frontend/package.json`](../samples/Playground/Frontend/package.json)의 `version`과 [`Janglim.Playground.csproj`](../samples/Playground/Janglim.Playground.csproj)의 `Version`을 함께 갱신합니다. 엔진과 웹의 버전은 독립적입니다. 엔진 `0.4.0` 릴리즈에서 웹은 `1.1.0`을 유지합니다. MCP 서비스도 독립 버전 `0.1.0`을 사용합니다.
+2. Playground 버전은 [`samples/Playground/Frontend/package.json`](../samples/Playground/Frontend/package.json)의 `version`과 [`Janglim.Playground.csproj`](../samples/Playground/Janglim.Playground.csproj)의 `Version`을 함께 갱신합니다. 엔진과 웹의 버전은 독립적입니다. 엔진 `0.5.0` 릴리즈에서 웹은 `1.1.0`을 유지합니다. MCP 서비스도 독립 버전 `0.1.0`을 사용합니다.
 3. README, 변경 이력, 릴리즈 노트를 갱신하고 PR 검증을 통과시킵니다.
 4. 검토한 변경을 `master`에 반영해 push합니다. [Actions](https://github.com/AJ-comp/Compiler/actions)에서 해당 커밋의 실행 결과를 확인합니다.
 
