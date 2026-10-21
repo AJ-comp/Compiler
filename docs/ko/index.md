@@ -63,12 +63,19 @@ Janglim은 **.NET용 LR/LALR 파서 생성기**입니다.\
 - 🌿 **[라이브 플레이그라운드](https://janglim.mythosia.net)** — 설치 없이 브라우저에서 바로.
 - **[렉서 — 토큰과 경계 원문](lexer.md)** — 토큰 사이의 공백·주석·줄바꿈을 왜 보존해야 하는지,
   쉬운 예제로 봅니다. 실제 API와 구현 이유는 [렉서 심화 편](deep-lexer.md)에서 설명합니다.
+- **[파서 주도 렉싱 — 정규식 규칙 묶음 선택](parser-driven-lexing.html)** — 규칙 묶음과 선택 로직을 정책으로 준비한 뒤, 원문과 정책으로 source를 만듭니다. 파서는 source에 연결된 정책으로 묶음을 고르고, source에서 토큰을 받아 직접 파싱합니다. 이 API 흐름을 나눗셈·정규식 예제로 설명합니다.
+- **[JavaScript 표현식 — ECMAScript 2026](javascript-expressions.html)** — 준비된 EBNF 문법과 토큰 규칙으로 표현식을 파싱하고, 대입 대상과 예약어 같은 정적 오류를 검사하는 순서를 설명합니다.
+- **[JavaScript 함수·문장·선언](javascript-statements.html)** — Script를 파싱하는 사용법과 선언·매개변수의 구조 분해, 자동 세미콜론 처리, 선언 범위 검사를 예제로 설명합니다.
+- **[JavaScript async·제너레이터·메서드](javascript-functions.html)** — 함수 종류별 표기와 await·yield의 본문 경계, 객체·클래스 메서드와 접근자, 매개변수·줄바꿈 검사를 순서대로 설명합니다.
+- **[JavaScript 클래스 — 멤버와 본문 검사](javascript-classes.html)** — 클래스 선언·표현식, 상속, 일반 메서드·접근자·필드·private 이름·static 블록을 파싱하고 정적 오류를 검사합니다.
+- **[JavaScript 모듈 — import·export와 문맥](javascript-modules.html)** — Module 입력으로 import·export와 속성, 동적 import·import.meta·top-level await를 파싱하고 모듈의 이름·본문 문맥을 검사합니다.
+- **[JavaScript 정규식 — 본문 문법 검사](javascript-regexp.html)** — 리터럴 경계·플래그에 이어 일반·u·v 모드의 그룹·역참조·Unicode 속성과 문자 집합을 검사하는 순서와 이유를 설명합니다.
 - **[ANTLR4의 LL · 장림의 LR](antlr4-ll-janglim-lr.html)** — 같은 문법을 읽으며 두 파서가 언제 경로를 선택하는지, 그림과 예제로 비교합니다.
 - **[함수별 동작 — SelectFirstAction](functions/select-first-action.html)** — 처음 읽는 분도 예제 입력을 따라가며, 함수가 최초 액션을 선택하는 과정을 확인합니다.
 - **[조건절과 반복 — 입력을 읽어야 하는 이유](predicate-repetition-rules.html)** — 조건만 반복하는 문법을 왜 차단하는지, 토큰을 읽는 반복과 선택 표기를 천천히 비교합니다.
 - **[조건절과 좌재귀 — 문법 검사 클래스](predicate-left-recursion-validation.html)** — 조건절을 거쳐 같은 규칙으로 돌아오기까지 토큰을 읽는지, 세 단계의 핵심과 예제로 설명합니다.
 
-> **참고:** 이 소스 트리는 Janglim 엔진 `0.4.0`을 기준으로 하며, 지원되는 파서는 `LALRParser`예요.\
+> **참고:** 이 소스 트리는 Janglim 엔진 `0.5.0`을 기준으로 하며, 지원되는 파서는 `LALRParser`예요.\
 > SLR과 CLR은 아직 실험적·미완성이고, 공개 API는 `0.x` 동안 바뀔 수 있어요.\
 > 웹 플레이그라운드 `1.1.0`은 엔진과 독립된 버전입니다.
 

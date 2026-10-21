@@ -10,6 +10,73 @@ namespace Janglim.FrontEnd.Tokenize
         public Action<IReadOnlyList<TokenCell>> TokenizeCompleted = null;
         public Action<Match> Matched = null;
 
+        /// <summary>
+        /// Tokenizes registered rules by longest actual match, with rule priority for ties.
+        /// Unknown runs remain grouped for the editor, and skipped rules remain visible here;
+        /// LexingData supplies the filtered parsing stream and its trivia afterwards.
+        /// </summary>
+        internal IReadOnlyList<TokenCell> Tokenize(IReadOnlyList<LexicalRule> rules, string targetString, int basisIndex = 0)
+        {
+            if (targetString == null) throw new ArgumentNullException(nameof(targetString));
+            var result = new List<TokenCell>();
+            int offset = 0, line = 0, column = 0;
+            int unknownStart = -1, unknownLine = 0, unknownColumn = 0;
+            while (offset < targetString.Length)
+            {
+                var match = LexicalRuleMatcher.Select(rules, targetString, offset, out var rule);
+                if (match == null)
+                {
+                    if (unknownStart < 0)
+                    {
+                        unknownStart = offset;
+                        unknownLine = line;
+                        unknownColumn = column;
+                    }
+                    AdvancePosition(targetString, offset, 1, ref line, ref column);
+                    offset++;
+                    continue;
+                }
+
+                if (unknownStart >= 0)
+                {
+                    result.Add(Unknown(targetString, basisIndex, unknownStart, offset, unknownLine, unknownColumn));
+                    unknownStart = -1;
+                }
+                Matched?.Invoke(match);
+                result.Add(new TokenCell(basisIndex + offset, line, column, match.Value, match)
+                    { PatternInfo = rule.Pattern });
+                AdvancePosition(targetString, offset, match.Length, ref line, ref column);
+                offset += match.Length;
+            }
+            if (unknownStart >= 0)
+                result.Add(Unknown(targetString, basisIndex, unknownStart, offset, unknownLine, unknownColumn));
+            TokenizeCompleted?.Invoke(result);
+            return result;
+        }
+
+        private static TokenCell Unknown(string source, int basisIndex, int start, int end, int line, int column)
+            => new TokenCell(basisIndex + start, line, column, source.Substring(start, end - start), null)
+                { PatternInfo = TokenPatternInfo.NotDefinedToken };
+
+        private static void AdvancePosition(string source, int start, int length, ref int line, ref int column)
+        {
+            for (int i = start; i < start + length; i++)
+            {
+                char ch = source[i];
+                if (ch == '\r' || ch == '\u2028' || ch == '\u2029')
+                {
+                    line++;
+                    column = 0;
+                }
+                else if (ch == '\n')
+                {
+                    if (i == 0 || source[i - 1] != '\r') line++;
+                    column = 0;
+                }
+                else column++;
+            }
+        }
+
         private IReadOnlyList<TokenCell> AddToken(int index, int basisIndex, int lineIndex, int colIndexInLine, string targetString, Match matchData)
         {
             List<TokenCell> result = new List<TokenCell>();
@@ -27,6 +94,11 @@ namespace Janglim.FrontEnd.Tokenize
         /// <summary>
         /// This function register after tokenizing string into the multiple tokens.
         /// </summary>
+        /// <remarks>
+        /// The argument is one .NET regex, whose internal alternatives retain their normal
+        /// ordered semantics. For longest-match selection between registered token rules,
+        /// use <see cref="Lexer.Lexing(string)"/> or <see cref="Lexer.CreateTokenSource"/>.
+        /// </remarks>
         /// <param name="tokenizeRule">The rule to tokenize.</param>
         /// <param name="targetString">The string to tokenize.</param>
         /// <param name="basisIndex">The basis index that uses to set up a starting index of a token.</param>

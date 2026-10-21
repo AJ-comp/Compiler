@@ -1,0 +1,56 @@
+# ECMAScript 2026 sections 13.3.10-12 and 16.2: modules and import expressions.
+# Only the Module entry connects static declarations to its top-level item list.
+ModuleItemList : ModuleItem | ModuleItemList ModuleItem ;
+ModuleItem : ImportDeclaration | ExportDeclaration | StatementListItem ;
+ImportDeclaration : 'import' ImportClause FromClause ImportAttributes? ModuleEnd
+                  | 'import' ModuleSpecifier ImportAttributes? ModuleEnd ;
+ImportClause : ImportedBinding | ImportedBinding ',' NameSpaceImport
+             | ImportedBinding ',' NamedImports | NameSpaceImport | NamedImports ;
+ImportedBinding : BindingIdentifier ;
+NameSpaceImport : '*' ModuleAs ImportedBinding ;
+NamedImports : '{' '}' | '{' ImportSpecifierList '}' | '{' ImportSpecifierList ',' '}' ;
+ImportSpecifierList : ImportSpecifier | ImportSpecifierList ',' ImportSpecifier ;
+ImportSpecifier : ModuleExportName | ModuleExportName ModuleAs ImportedBinding ;
+ModuleExportName : PropertyIdentifierName | StringLiteral ;
+ModuleSpecifier : StringLiteral ;
+FromClause : ModuleFrom ModuleSpecifier ;
+# These contextual words keep their ordinary identifier token outside these positions.
+ModuleFrom : {ModuleFrom()}? IdentifierName ;
+ModuleAs : {ModuleAs()}? IdentifierName ;
+
+ImportAttributes : 'with' '{' '}' | 'with' '{' WithEntries '}' | 'with' '{' WithEntries ',' '}' ;
+WithEntries : WithEntry | WithEntries ',' WithEntry ;
+WithEntry : AttributeKey ':' StringLiteral ;
+AttributeKey : PropertyIdentifierName | StringLiteral ;
+
+ExportDeclaration : 'export' NamedExports ExportNamedEnd
+                  | 'export' NamedExports FromClause ImportAttributes? ModuleEnd
+                  | 'export' '*' FromClause ImportAttributes? ModuleEnd
+                  | 'export' '*' ModuleAs ModuleExportName FromClause ImportAttributes? ModuleEnd
+                  | 'export' Declaration | 'export' VariableStatement
+                  | DefaultExportFunction | DefaultExportClass | ExportDefaultExpression ;
+NamedExports : '{' '}' | '{' ExportSpecifierList '}' | '{' ExportSpecifierList ',' '}' ;
+ExportSpecifierList : ExportSpecifier | ExportSpecifierList ',' ExportSpecifier ;
+ExportSpecifier : ModuleExportName | ModuleExportName ModuleAs ModuleExportName ;
+# Reuse the ordinary function/class subtrees, but retain a distinct declaration wrapper.
+# A named default declaration introduces its name in the module's lexical scope.
+DefaultExportFunction : 'export' 'default' FunctionExpression | 'export' 'default' AsyncFunctionExpression
+                      | 'export' 'default' GeneratorExpression | 'export' 'default' AsyncGeneratorExpression ;
+DefaultExportClass : 'export' 'default' ClassExpression ;
+ExportDefaultExpression : 'export' 'default' {DefaultExportExpression()}? AssignmentExpression ExpressionEnd ;
+ModuleEnd : ';' | {ModuleEnd()}? ;
+ExportNamedEnd : ';' | {ExportNamedEnd()}? ;
+
+# ImportCall is a call expression, so it cannot be the direct operand of new.
+# Each optional trailing comma follows one of the two authored argument counts.
+ImportCall : 'import' '(' AssignmentExpression ')'
+           | 'import' '(' AssignmentExpression ',' ')'
+           | 'import' '(' AssignmentExpression ',' AssignmentExpression ')'
+           | 'import' '(' AssignmentExpression ',' AssignmentExpression ',' ')' ;
+ImportMeta : 'import' '.' PropertyIdentifierName ;
+
+# +Await expression variants connect AwaitExpression; source/function validation
+# checks for-await-of, synchronous function, field and static-block restrictions.
+AwaitExpression : 'await' UnaryExpression ;
+ForAwaitOfStatement : 'for' 'await' '(' LeftHandSideExpression 'of' AssignmentExpression ')' Statement
+                    | 'for' 'await' '(' ForDeclaration 'of' AssignmentExpression ')' Statement ;

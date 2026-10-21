@@ -19,7 +19,7 @@ namespace Janglim.FrontEnd.Parsers.LR
         /// <param name="inputValue"></param>
         /// <returns></returns>
         private bool ShiftOrReduce(ParsingUnit parsingUnit, TokenData inputValue, out ConflictItem conflictItem,
-            IReadOnlyList<TokenData> tokens = null, int tokenIndex = -1)
+            IReadOnlyList<TokenData> tokens = null, int tokenIndex = -1, ContextualInput contextualInput = null)
         {
             conflictItem = null;
 
@@ -80,15 +80,18 @@ namespace Janglim.FrontEnd.Parsers.LR
                 // The predictor selects a first action; the actual stack and input stay here.
                 if (matchedValue.Count == 2 && LRConflictPredictor.IsSupportedConflict(candidates))
                 {
-                    if (tokens == null)
+                    if (tokens == null && contextualInput == null)
                     {
                         throw new InvalidPredictionTableException(
                             "conflict prediction requires the complete input; use the token-list UnitParsing overload",
                             (int)topData, tokenIndex);
                     }
                     var actualStates = beforeStack.Stack.OfType<int>().Reverse().ToArray();
-                    parsingUnit.Action = new LRConflictPredictor(parsingTable, EvaluatePredicate)
-                        .SelectFirstAction(candidates, actualStates, tokens, tokenIndex);
+                    parsingUnit.Action = contextualInput != null
+                        ? new ContextualConflictPredictor(parsingTable, EvaluatePredicate)
+                            .SelectFirstAction(candidates, actualStates, contextualInput)
+                        : new LRConflictPredictor(parsingTable, EvaluatePredicate)
+                            .SelectFirstAction(candidates, actualStates, tokens, tokenIndex);
                 }
                 else
                 {

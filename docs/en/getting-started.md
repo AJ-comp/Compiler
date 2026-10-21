@@ -27,10 +27,10 @@ First, install the package.\
 In a .NET project:
 
 ```bash
-dotnet add package Janglim --version 0.4.0
+dotnet add package Janglim --version 0.5.0
 ```
 
-> This example targets the `0.4.0` release. `LALRParser` is the supported parser;
+> This example targets the `0.5.0` release. `LALRParser` is the supported parser;
 > SLR and CLR remain experimental and incomplete. The public API may still change during `0.x`,
 > so check the [release notes](https://github.com/AJ-comp/Compiler/blob/master/RELEASE_NOTES.md) when upgrading.
 

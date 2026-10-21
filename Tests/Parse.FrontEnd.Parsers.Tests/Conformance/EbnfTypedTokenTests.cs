@@ -60,7 +60,7 @@ public class EbnfTypedTokenTests
     }
 
     [Fact]
-    public void Both_text_kinds_preserve_raw_regexes_and_identifier_keeps_word_boundaries()
+    public void Text_and_identifier_kinds_preserve_authored_regexes_without_automatic_boundaries()
     {
         var grammar = Read(Assignments);
         var text = Assert.Single(grammar.TerminalSet, token => token.Caption == "text");
@@ -71,8 +71,7 @@ public class EbnfTypedTokenTests
         Assert.Equal("'(?:[^'\\\\\\r\\n]|\\\\[^\\r\\n])'", ch.Value);
         Assert.Equal(text.Value, text.RegexExpression);
         Assert.Equal(ch.Value, ch.RegexExpression);
-        Assert.StartsWith(@"\b", id.RegexExpression);
-        Assert.EndsWith(@"\b", id.RegexExpression);
+        Assert.Equal(id.Value, id.RegexExpression);
     }
 
     [Theory]
@@ -83,7 +82,7 @@ public class EbnfTypedTokenTests
         var grammar = Read("Start : 'if' id ; id := " + kind + "\"[a-z]+\" ;");
         var id = Assert.Single(grammar.TerminalSet, token => token.Caption == "id");
         Assert.Equal(TokenType.Identifier, id.TokenType);
-        Assert.StartsWith(@"\b", id.RegexExpression);
+        Assert.Equal(id.Value, id.RegexExpression);
         var tokens = CreateLexer(grammar).Lexing("if item").TokensForParsing;
         Assert.Equal(new[] { "if", "item" }, tokens.Select(token => token.Data));
         Assert.NotEqual(id.TokenType, tokens[0].PatternInfo.Terminal.TokenType);

@@ -1,0 +1,105 @@
+# ECMAScript 2026 strict statements and shared function/arrow bodies.
+# Semicolon predicates are host-registered, pure JavaScript-language conditions.
+# Explicit semicolons remain mandatory inside a classic for header.
+StatementList : StatementListItem | StatementList StatementListItem ;
+StatementListItem : Statement | Declaration ;
+Declaration : FunctionDeclaration | LexicalDeclaration | ClassDeclaration | AsyncFunctionDeclaration | GeneratorDeclaration | AsyncGeneratorDeclaration ;
+Statement : Block | VariableStatement | EmptyStatement | ExpressionStatement
+          | IfStatement | WhileStatement | DoWhileStatement | ForStatement
+          | ForInStatement | ForOfStatement | ContinueStatement | BreakStatement
+          | ReturnStatement | ThrowStatement | SwitchStatement | TryStatement
+          | LabelledStatement | DebuggerStatement | ForAwaitOfStatement ;
+Block : '{' '}' | '{' StatementList '}' ;
+EmptyStatement : ';' ;
+StatementExpressionStart : {ExpressionStatementStart()}? ;
+ExpressionStatement : StatementExpressionStart Expression ExpressionEnd ;
+
+# The nearest unmatched if owns else (the LR parser's existing Shift preference).
+IfStatement : 'if' '(' Expression ')' Statement
+            | 'if' '(' Expression ')' Statement 'else' Statement ;
+WhileStatement : 'while' '(' Expression ')' Statement ;
+DoWhileStatement : 'do' Statement 'while' '(' Expression ')' DoWhileEnd ;
+ForStatement : 'for' '(' ForInitializer? ';' Expression? ';' Expression? ')' Statement ;
+ForInitializer : ExpressionNoIn | 'var' ForVariableDeclarationList | LetOrConst ForLexicalBindingList ;
+ForVariableDeclarationList : ForVariableDeclaration | ForVariableDeclarationList ',' ForVariableDeclaration ;
+ForVariableDeclaration : BindingIdentifier | BindingIdentifier InitializerNoIn | BindingPattern InitializerNoIn ;
+ForLexicalBindingList : ForLexicalBinding | ForLexicalBindingList ',' ForLexicalBinding ;
+ForLexicalBinding : BindingIdentifier | BindingIdentifier InitializerNoIn | BindingPattern InitializerNoIn ;
+InitializerNoIn : '=' AssignmentExpressionNoIn ;
+ForInStatement : 'for' '(' LeftHandSideExpression 'in' Expression ')' Statement
+               | 'for' '(' ForDeclaration 'in' Expression ')' Statement ;
+ForOfStatement : 'for' '(' LeftHandSideExpression 'of' AssignmentExpression ')' Statement
+               | 'for' '(' ForDeclaration 'of' AssignmentExpression ')' Statement ;
+ForDeclaration : 'var' ForBinding | LetOrConst ForBinding ;
+ForBinding : BindingIdentifier | BindingPattern ;
+
+ContinueStatement : 'continue' RestrictedEnd | 'continue' NoLineTerminator LabelIdentifier StatementEnd ;
+BreakStatement : 'break' RestrictedEnd | 'break' NoLineTerminator LabelIdentifier StatementEnd ;
+ReturnStatement : 'return' RestrictedEnd | 'return' NoLineTerminator Expression ExpressionEnd ;
+ThrowStatement : 'throw' NoLineTerminator Expression ExpressionEnd ;
+# Share the initial identifier with an expression statement until ':' distinguishes
+# a label. Break/continue targets retain their separate, expression-free context.
+LabelledStatement : StatementExpressionStart IdentifierReference ':' Statement ;
+LabelIdentifier : IdentifierName | 'await' | 'of' | 'async' ;
+DebuggerStatement : 'debugger' StatementEnd ;
+SwitchStatement : 'switch' '(' Expression ')' CaseBlock ;
+CaseBlock : '{' '}' | '{' CaseClauses '}' ;
+CaseClauses : CaseClause | CaseClauses CaseClause ;
+CaseClause : 'case' Expression ':' | 'case' Expression ':' StatementList
+           | 'default' ':' | 'default' ':' StatementList ;
+TryStatement : 'try' Block CatchClause | 'try' Block FinallyClause | 'try' Block CatchClause FinallyClause ;
+CatchClause : 'catch' '(' CatchParameter ')' Block | 'catch' Block ;
+CatchParameter : BindingIdentifier | BindingPattern ;
+FinallyClause : 'finally' Block ;
+
+VariableStatement : 'var' VariableDeclarationList ;
+VariableDeclarationList : UninitializedVariableDeclaration BindingEnd
+                        | InitializedVariableDeclaration ExpressionEnd
+                        | VariableDeclaration ',' VariableDeclarationList ;
+VariableDeclaration : UninitializedVariableDeclaration | InitializedVariableDeclaration ;
+UninitializedVariableDeclaration : BindingIdentifier ;
+InitializedVariableDeclaration : BindingIdentifier Initializer | BindingPattern Initializer ;
+LexicalDeclaration : LetOrConst LexicalBindingList ;
+LetOrConst : 'let' | 'const' ;
+LexicalBindingList : UninitializedLexicalBinding BindingEnd
+                   | InitializedLexicalBinding ExpressionEnd
+                   | LexicalBinding ',' LexicalBindingList ;
+LexicalBinding : UninitializedLexicalBinding | InitializedLexicalBinding ;
+UninitializedLexicalBinding : BindingIdentifier ;
+InitializedLexicalBinding : BindingIdentifier Initializer | BindingPattern Initializer ;
+
+FunctionDeclaration : 'function' BindingIdentifier '(' FormalParameters ')' FunctionBody ;
+FunctionExpression : 'function' '(' FormalParameters ')' FunctionBody
+                   | 'function' BindingIdentifier '(' FormalParameters ')' FunctionBody ;
+FunctionBody : '{' '}' | '{' StatementList '}' ;
+
+# Ordinary arrow parameters use the identifier/parenthesized expression cover.
+# Their binding syntax and early errors are checked on the completed concrete tree.
+ArrowFunction : IdentifierReference NoLineTerminator '=>' ConciseBody | ParenthesizedExpression NoLineTerminator '=>' ConciseBody ;
+ConciseBody : FunctionBody | {ArrowExpressionBody()}? AssignmentExpression ;
+ArrowFunctionNoIn : IdentifierReference NoLineTerminator '=>' ConciseBodyNoIn | ParenthesizedExpression NoLineTerminator '=>' ConciseBodyNoIn ;
+ConciseBodyNoIn : FunctionBody | {ArrowExpressionBody()}? AssignmentExpressionNoIn ;
+
+# Separate termination contexts keep a bare declaration distinct from an initializer.
+# For example let a\n(b) ends the declaration, while let a=value\n(b) continues a call.
+ExpressionEnd : ';' | {ExpressionEnd()}? ;
+BindingEnd : ';' | {BindingEnd()}? ;
+RestrictedEnd : ';' | {RestrictedEnd()}? ;
+StatementEnd : ';' | {StatementEnd()}? ;
+DoWhileEnd : ';' | {DoWhileEnd()}? ;
+
+# The [In] grammar parameter is explicit in classic for initializers.
+# Parentheses, function bodies, computed keys and arguments keep the ordinary rules.
+ExpressionNoIn : AssignmentExpressionNoIn | ExpressionNoIn ',' AssignmentExpressionNoIn ;
+AssignmentExpressionNoIn : ConditionalExpressionNoIn | LeftHandSideExpression AssignmentOperator AssignmentExpressionNoIn | ArrowFunctionNoIn | AsyncArrowFunctionNoIn | YieldExpressionNoIn ;
+ConditionalExpressionNoIn : ShortCircuitExpressionNoIn | ShortCircuitExpressionNoIn '?' AssignmentExpression ':' AssignmentExpressionNoIn ;
+ShortCircuitExpressionNoIn : LogicalORExpressionNoIn | CoalesceExpressionNoIn ;
+LogicalORExpressionNoIn : LogicalANDExpressionNoIn | LogicalORExpressionNoIn '||' LogicalANDExpressionNoIn ;
+LogicalANDExpressionNoIn : BitwiseORExpressionNoIn | LogicalANDExpressionNoIn '&&' BitwiseORExpressionNoIn ;
+CoalesceExpressionNoIn : BitwiseORExpressionNoIn '??' BitwiseORExpressionNoIn | CoalesceExpressionNoIn '??' BitwiseORExpressionNoIn ;
+BitwiseORExpressionNoIn : BitwiseXORExpressionNoIn | BitwiseORExpressionNoIn '|' BitwiseXORExpressionNoIn ;
+BitwiseXORExpressionNoIn : BitwiseANDExpressionNoIn | BitwiseXORExpressionNoIn '^' BitwiseANDExpressionNoIn ;
+BitwiseANDExpressionNoIn : EqualityExpressionNoIn | BitwiseANDExpressionNoIn '&' EqualityExpressionNoIn ;
+EqualityExpressionNoIn : RelationalExpressionNoIn | EqualityExpressionNoIn EqualityOperator RelationalExpressionNoIn ;
+RelationalExpressionNoIn : ShiftExpression | RelationalExpressionNoIn RelationalOperatorNoIn ShiftExpression ;
+RelationalOperatorNoIn : '<' | '>' | '<=' | '>=' | 'instanceof' ;

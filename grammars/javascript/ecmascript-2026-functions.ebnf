@@ -1,0 +1,44 @@
+# ECMAScript 2026 sections 15.4-15.9: function kinds and object methods.
+# JavaScriptFunctionGrammar selects the Await context of each parameter/body reference.
+# Declarations retain the enclosing context for their name; expressions use their own.
+AsyncFunctionStart : {AsyncFunctionStart()}? 'async' NoLineTerminator 'function' ;
+AsyncFunctionDeclaration : AsyncFunctionStart BindingIdentifier '(' FormalParameters ')' FunctionBody ;
+AsyncFunctionExpression : AsyncFunctionStart '(' FormalParameters ')' FunctionBody
+                        | AsyncFunctionStart BindingIdentifier '(' FormalParameters ')' FunctionBody ;
+GeneratorDeclaration : 'function' '*' BindingIdentifier '(' FormalParameters ')' FunctionBody ;
+GeneratorExpression : 'function' '*' '(' FormalParameters ')' FunctionBody
+                    | 'function' '*' BindingIdentifier '(' FormalParameters ')' FunctionBody ;
+AsyncGeneratorDeclaration : AsyncFunctionStart '*' BindingIdentifier '(' FormalParameters ')' FunctionBody ;
+AsyncGeneratorExpression : AsyncFunctionStart '*' '(' FormalParameters ')' FunctionBody
+                         | AsyncFunctionStart '*' BindingIdentifier '(' FormalParameters ')' FunctionBody ;
+
+# Reuse the ordinary call cover until => is seen. The host then requires async(...).
+# The two-IdentifierReference cover is likewise checked for the exact raw async prefix.
+AsyncArrowFunction : CallExpression NoLineTerminator '=>' AsyncConciseBody
+                   | LeftHandSideExpression NoLineTerminator IdentifierReference NoLineTerminator '=>' AsyncConciseBody ;
+AsyncConciseBody : FunctionBody | {ArrowExpressionBody()}? AssignmentExpression ;
+AsyncArrowFunctionNoIn : CallExpression NoLineTerminator '=>' AsyncConciseBodyNoIn
+                       | LeftHandSideExpression NoLineTerminator IdentifierReference NoLineTerminator '=>' AsyncConciseBodyNoIn ;
+AsyncConciseBodyNoIn : FunctionBody | {ArrowExpressionBody()}? AssignmentExpressionNoIn ;
+
+YieldExpression : 'yield' {YieldEnd()}? | 'yield' NoLineTerminator AssignmentExpression
+                | 'yield' NoLineTerminator '*' AssignmentExpression ;
+YieldExpressionNoIn : 'yield' {YieldEnd()}? | 'yield' NoLineTerminator AssignmentExpressionNoIn
+                    | 'yield' NoLineTerminator '*' AssignmentExpressionNoIn ;
+
+# The prefix predicates inspect exact source spellings and line-break metadata.
+# They distinguish a modifier from a method whose own name is async/get/set.
+AsyncModifier : {AsyncModifier()}? ;
+ObjectAccessorName : {ObjectAccessor()}? PropertyName ;
+ObjectMethod : PropertyName '(' FormalParameters ')' FunctionBody
+             | PropertyName ObjectAccessorName '(' FormalParameters ')' FunctionBody ;
+ObjectGeneratorMethod : '*' PropertyName '(' FormalParameters ')' FunctionBody ;
+ObjectAsyncMethod : PropertyName AsyncModifier PropertyName '(' FormalParameters ')' FunctionBody
+                  | PropertyName AsyncModifier '*' PropertyName '(' FormalParameters ')' FunctionBody ;
+StaticGeneratorModifier : {StaticGeneratorModifier()}? ;
+ClassGeneratorMethod : '*' ClassElementName '(' FormalParameters ')' FunctionBody
+                     | ClassElementName StaticGeneratorModifier '*' ClassElementName '(' FormalParameters ')' FunctionBody ;
+ClassAsyncMethod : ClassElementName AsyncModifier ClassElementName '(' FormalParameters ')' FunctionBody
+                 | ClassElementName AsyncModifier '*' ClassElementName '(' FormalParameters ')' FunctionBody
+                 | ClassElementName ClassModifierName AsyncModifier ClassElementName '(' FormalParameters ')' FunctionBody
+                 | ClassElementName ClassModifierName AsyncModifier '*' ClassElementName '(' FormalParameters ')' FunctionBody ;

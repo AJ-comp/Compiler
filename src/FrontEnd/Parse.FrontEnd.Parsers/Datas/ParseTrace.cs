@@ -69,9 +69,11 @@ namespace Janglim.FrontEnd.Parsers.Datas
             Steps = steps;
         }
 
+        /// <summary>Projects collected records, or returns no steps when logging was disabled.</summary>
         public static ParseTrace From(ParsingLogger logger)
         {
             var steps = new List<ParseStep>();
+            if (logger == null) return new ParseTrace(steps);
             int index = 0;
 
             foreach (var record in logger)

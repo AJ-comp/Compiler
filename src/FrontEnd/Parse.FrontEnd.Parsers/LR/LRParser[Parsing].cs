@@ -1,5 +1,6 @@
 ﻿using Janglim.FrontEnd.Parsers.Datas;
 using Janglim.FrontEnd.RegularGrammar;
+using Janglim.FrontEnd.Tokenize;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -94,7 +95,7 @@ namespace Janglim.FrontEnd.Parsers.LR
         }
 
         private (SuccessedKind, ConflictItem) UnitParsing(ParsingUnit unit, TokenData seeingToken,
-            IReadOnlyList<TokenData> tokens, int tokenIndex)
+            IReadOnlyList<TokenData> tokens, int tokenIndex, ContextualInput contextualInput = null)
         {
             if (unit == null) throw new ArgumentNullException(nameof(unit));
             if (seeingToken == null) throw new ArgumentNullException(nameof(seeingToken));
@@ -102,12 +103,27 @@ namespace Janglim.FrontEnd.Parsers.LR
             unit.InputValue = seeingToken;
             unit.PredicateCheckedAction = null;
             unit.PredicateException = null;
-            unit.PredicateContext = tokens != null ? CreatePredicateContext(tokens, tokenIndex)
+            unit.PredicateContext = contextualInput != null ? contextualInput.CreatePredicateContext()
+                : tokens != null ? CreatePredicateContext(tokens, tokenIndex)
                 : new PredicateContext(null, seeingToken, -1);
 
             ConflictItem conflictItem = null;
             var result = (IsGoToCondition(unit.BeforeStack)) ? GoTo(unit, seeingToken)
-                : ShiftOrReduce(unit, seeingToken, out conflictItem, tokens, tokenIndex);
+                : ShiftOrReduce(unit, seeingToken, out conflictItem, tokens, tokenIndex, contextualInput);
+
+            if (contextualInput != null && !unit.IsError)
+            {
+                if ((unit.Action.Direction == ActionDir.Shift || unit.Action.Direction == ActionDir.Goto) &&
+                    (!(unit.Action.Dest is int destination) || destination < 0 || destination >= ((Collections.LRParsingTable)ParsingTable).Count))
+                    throw new ContextualLexingException("The parsing action has an invalid destination", States(unit.BeforeStack).Last(),
+                        contextualInput.Cursor.SourceOffset, contextualInput.Cursor.TokenIndex);
+                if (unit.Action.Direction == ActionDir.Shift && seeingToken.Kind is EndMarker)
+                    throw new ContextualLexingException("EOF must be accepted, never shifted", States(unit.BeforeStack).Last(),
+                        contextualInput.Cursor.SourceOffset, contextualInput.Cursor.TokenIndex);
+                if (unit.Action.Direction == ActionDir.Accept && !(seeingToken.Kind is EndMarker))
+                    throw new ContextualLexingException("Accept requires the end of the source", States(unit.BeforeStack).Last(),
+                        contextualInput.Cursor.SourceOffset, contextualInput.Cursor.TokenIndex);
+            }
 
             return (ParseUnitCore(unit), conflictItem);
         }

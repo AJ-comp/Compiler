@@ -2,6 +2,42 @@
 
 The engine, web application, MCP service, and built-in grammar baselines use independent version numbers. The entries below describe each version's scope and changes.
 
+## Janglim engine 0.5.0 — 2026-10-21
+
+Engine 0.5.0 adds parser-driven lexical input, longest-match token selection and ECMAScript 2026-based JavaScript language APIs. The package still targets .NET Standard 2.1; the web Playground remains 1.1.0 and MCP remains 0.1.0.
+
+### Parser-driven lexing
+
+- Add LexicalGoal rule groups, LexicalPolicy selection, ITokenSource, TokenCursor and TokenRead. Create a policy from rule groups, prepare a source with Lexer.CreateTokenSource(input, policy), then call LALRParser.Parsing(source).
+- Pass parsing context to the policy; pass only the returned rule group and input checkpoint to the source. Peek returns a token and its Next checkpoint, while the actual cursor advances only on Shift.
+- Preserve source trivia, previous-token context, lexical state and separate cursor/history/lookahead values for prediction candidates, including candidates that read different token boundaries.
+- Keep the existing token-list input API. Source-based parsing stops at the first error and explicitly rejects custom error recovery and general conflict backtracking settings.
+
+### Token selection and compatibility
+
+- Share longest returned match selection across Lexer.Lexing, incremental tokenization and parser-driven sources. Equal-length matches follow token-category priority and registration order, including skip rules.
+- Remove automatic word-boundary wrapping from token regexes. Grammars that relied on implicit \b must author the required boundary explicitly.
+- Preserve each regex's .NET alternation and greedy/lazy semantics. The existing single combined-regex Tokenizer.Tokenize(string, ...) path retains ordered alternatives.
+- In the registered-rule lexing paths, diagnose empty matches with EmptyTokenMatchException and apply a one-second limit per compiled token regex. MCP reports empty-token matches as invalid_grammar/zero_length_token and regex timeouts as runtime_limit.
+
+### JavaScript language layer
+
+- Add JavaScriptExpressionGrammar, JavaScriptScriptGrammar and JavaScriptModuleGrammar in Janglim.FrontEnd.Grammars.JavaScript. Consumers check Parsing success and Validate diagnostics together.
+- Embed six EBNF sources and Unicode 17 identifier data; include the Unicode data license in the NuGet package.
+- Support expressions, strict Script statements/declarations, Module syntax, contextual slash handling, templates, destructuring and bindings, ordinary/async/arrow functions, generators/async generators, object/class methods and accessors, classes and private names.
+- Include ASI, import/export and attributes, dynamic import, import.meta, top-level await and for-await-of with function/body context checks.
+- Validate regular-expression pattern bodies in ordinary/u/v modes on the final tree, plus lexical flags, declaration scope, parameters, assignment targets and other documented early errors.
+- Keep non-strict Script and full specification/Test262 syntax conformance as follow-up work. MCP's built-in grammar catalog remains c11-core.
+
+### Documentation and release preparation
+
+- Update package description, discovery tags, package/repository READMEs, release notes and manual installation versions to 0.5.0.
+- Add Korean implementation guides for parser-driven lexing and JavaScript expressions, statements, classes, modules, function kinds and regular expressions. Explain cursor fields, ownership and Peek results in three coordinated source-position diagrams.
+- Preserve the human author's engine-design attribution and distinguish the AI-assisted JavaScript language layer and documentation.
+- Validate the versioned source and package before pushing. Publication still requires master: feature-branch pushes and PRs run verification only; master verification feeds NuGet publication and Playground deployment.
+
+Local validation on 2026-10-21 passed 4,976 engine tests (one known SLR test skipped), 69 MCP tests, 22 UI tests and 12 release-infrastructure tests. Debug/Release solution builds, public Playground/MCP publish builds, packaging and DocFX succeeded. A separate net8.0 package consumer passed 80 checks, and both JavaScript README examples ran unchanged. Local Docker was inactive; container verification remains required in CI. See [release notes](RELEASE_NOTES.md) for artifacts and details.
+
 ## Janglim engine 0.4.0 — 2026-10-19
 
 Engine `0.4.0` adds EBNF token kinds, preserved source trivia, host-registered predicates, and prediction for a specific predicate conflict. The engine continues to target .NET Standard 2.1, with `LALRParser` as its supported parsing path.

@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="860" viewBox="0 0 1000 860" role="img" aria-labelledby="title desc">
+<title id="title">현재 커서를 보관하는 위치</title>
+<desc id="desc">이번 parser.Parsing(source) 호출에서 만든 ContextualInput이 Cursor를 보관한다. 시작할 때 source.Start로 초기화하고 두 토큰 소비 후 현재 Cursor는 원문 위치8을 가리킨다. source.Start는 시작 위치0을 유지한다.</desc>
+<rect width="1000" height="860" fill="#FFFFFF"/>
+<text x="60" y="57" fill="#526078" font-family="'Cascadia Mono',Consolas,monospace" font-size="23" font-weight="500" text-anchor="start">02  /  ContextualInput</text>
+<text x="60" y="120" fill="#172235" font-family="'Noto Sans KR','Malgun Gothic',sans-serif" font-size="40" font-weight="750" text-anchor="start">파서는 현재 커서를 따로 보관합니다.</text>
+<text x="60" y="167" fill="#526078" font-family="'Noto Sans KR','Malgun Gothic',sans-serif" font-size="25" font-weight="400" text-anchor="start">파싱 호출마다 만든 ContextualInput의 Cursor에 보관합니다.</text>
+<rect x="60" y="185" width="880" height="250" rx="18" fill="#151D2F"/>
+<text x="142.0" y="321" fill="#B9C3D4" font-family="'Cascadia Mono',Consolas,monospace" font-size="41" font-weight="450" text-anchor="middle">r</text>
+<polyline points="142.0,362 142.0,369" fill="none" stroke="#4E5B73" stroke-width="1"/>
+<text x="142.0" y="402" fill="#A5B2C8" font-family="'Cascadia Mono',Consolas,monospace" font-size="23" font-weight="400" text-anchor="middle">0</text>
+<text x="194.0" y="321" fill="#B9C3D4" font-family="'Cascadia Mono',Consolas,monospace" font-size="41" font-weight="450" text-anchor="middle">e</text>
+<polyline points="194.0,362 194.0,369" fill="none" stroke="#4E5B73" stroke-width="1"/>
+<text x="194.0" y="402" fill="#A5B2C8" font-family="'Cascadia Mono',Consolas,monospace" font-size="23" font-weight="400" text-anchor="middle">1</text>
+<text x="246.0" y="321" fill="#B9C3D4" font-family="'Cascadia Mono',Consolas,monospace" font-size="41" font-weight="450" text-anchor="middle">s</text>
+<polyline points="246.0,362 246.0,369" fill="none" stroke="#4E5B73" stroke-width="1"/>
+<text x="246.0" y="402" fill="#A5B2C8" font-family="'Cascadia Mono',Consolas,monospace" font-size="23" font-weight="400" text-anchor="middle">2</text>
+<text x="298.0" y="321" fill="#B9C3D4" font-family="'Cascadia Mono',Consolas,monospace" font-size="41" font-weight="450" text-anchor="middle">u</text>
+<polyline points="298.0,362 298.0,369" fill="none" stroke="#4E5B73" stroke-width="1"/>
+<text x="298.0" y="402" fill="#A5B2C8" font-family="'Cascadia Mono',Consolas,monospace" font-size="23" font-weight="400" text-anchor="middle">3</text>
+<text x="350.0" y="321" fill="#B9C3D4" font-family="'Cascadia Mono',Consolas,monospace" font-size="41" font-weight="450" text-anchor="middle">l</text>
+<polyline points="350.0,362 350.0,369" fill="none" stroke="#4E5B73" stroke-width="1"/>
+<text x="350.0" y="402" fill="#A5B2C8" font-family="'Cascadia Mono',Consolas,monospace" font-size="23" font-weight="400" text-anchor="middle">4</text>
+<text x="402.0" y="321" fill="#B9C3D4" font-family="'Cascadia Mono',Consolas,monospace" font-size="41" font-weight="450" text-anchor="middle">t</text>
+<polyline points="402.0,362 402.0,369" fill="none" stroke="#4E5B73" stroke-width="1"/>
+<text x="402.0" y="402" fill="#A5B2C8" font-family="'Cascadia Mono',Consolas,monospace" font-size="23" font-weight="400" text-anchor="middle">5</text>
+<text x="454.0" y="321" fill="#A5B2C8" font-family="'Cascadia Mono',Consolas,monospace" font-size="41" font-weight="450" text-anchor="middle">·</text>
+<polyline points="454.0,362 454.0,369" fill="none" stroke="#4E5B73" stroke-width="1"/>
+<text x="454.0" y="402" fill="#A5B2C8" font-family="'Cascadia Mono',Consolas,monospace" font-size="23" font-weight="400" text-anchor="middle">6</text>
+<text x="506.0" y="321" fill="#B9C3D4" font-family="'Cascadia Mono',Consolas,monospace" font-size="41" font-weight="450" text-anchor="middle">=</text>
+<polyline points="506.0,362 506.0,369" fill="none" stroke="#4E5B73" stroke-width="1"/>
+<text x="506.0" y="402" fill="#A5B2C8" font-family="'Cascadia Mono',Consolas,monospace" font-size="23" font-weight="400" text-anchor="middle">7</text>
+<text x="558.0" y="321" fill="#A5B2C8" font-family="'Cascadia Mono',Consolas,monospace" font-size="41" font-weight="450" text-anchor="middle">·</text>
+<polyline points="558.0,362 558.0,369" fill="none" stroke="#4E5B73" stroke-width="1"/>
+<text x="558.0" y="402" fill="#A5B2C8" font-family="'Cascadia Mono',Consolas,monospace" font-size="23" font-weight="400" text-anchor="middle">8</text>
+<text x="610.0" y="321" fill="#E9EDF7" font-family="'Cascadia Mono',Consolas,monospace" font-size="41" font-weight="450" text-anchor="middle">/</text>
+<polyline points="610.0,362 610.0,369" fill="none" stroke="#4E5B73" stroke-width="1"/>
+<text x="610.0" y="402" fill="#A5B2C8" font-family="'Cascadia Mono',Consolas,monospace" font-size="23" font-weight="400" text-anchor="middle">9</text>
+<text x="662.0" y="321" fill="#E9EDF7" font-family="'Cascadia Mono',Consolas,monospace" font-size="41" font-weight="450" text-anchor="middle">a</text>
+<polyline points="662.0,362 662.0,369" fill="none" stroke="#4E5B73" stroke-width="1"/>
+<text x="662.0" y="402" fill="#A5B2C8" font-family="'Cascadia Mono',Consolas,monospace" font-size="23" font-weight="400" text-anchor="middle">10</text>
+<text x="714.0" y="321" fill="#E9EDF7" font-family="'Cascadia Mono',Consolas,monospace" font-size="41" font-weight="450" text-anchor="middle">b</text>
+<polyline points="714.0,362 714.0,369" fill="none" stroke="#4E5B73" stroke-width="1"/>
+<text x="714.0" y="402" fill="#A5B2C8" font-family="'Cascadia Mono',Consolas,monospace" font-size="23" font-weight="400" text-anchor="middle">11</text>
+<text x="766.0" y="321" fill="#E9EDF7" font-family="'Cascadia Mono',Consolas,monospace" font-size="41" font-weight="450" text-anchor="middle">/</text>
+<polyline points="766.0,362 766.0,369" fill="none" stroke="#4E5B73" stroke-width="1"/>
+<text x="766.0" y="402" fill="#A5B2C8" font-family="'Cascadia Mono',Consolas,monospace" font-size="23" font-weight="400" text-anchor="middle">12</text>
+<text x="818.0" y="321" fill="#E9EDF7" font-family="'Cascadia Mono',Consolas,monospace" font-size="41" font-weight="450" text-anchor="middle">g</text>
+<polyline points="818.0,362 818.0,369" fill="none" stroke="#4E5B73" stroke-width="1"/>
+<text x="818.0" y="402" fill="#A5B2C8" font-family="'Cascadia Mono',Consolas,monospace" font-size="23" font-weight="400" text-anchor="middle">13</text>
+<text x="870.0" y="321" fill="#E9EDF7" font-family="'Cascadia Mono',Consolas,monospace" font-size="41" font-weight="450" text-anchor="middle">;</text>
+<polyline points="870.0,362 870.0,369" fill="none" stroke="#4E5B73" stroke-width="1"/>
+<text x="870.0" y="402" fill="#A5B2C8" font-family="'Cascadia Mono',Consolas,monospace" font-size="23" font-weight="400" text-anchor="middle">14</text>
+<text x="150" y="236" fill="#A5B2C8" font-family="'Noto Sans KR','Malgun Gothic',sans-serif" font-size="24" font-weight="600" text-anchor="middle">시작 0</text>
+<polyline points="116,257 116,343" fill="none" stroke="#A5B2C8" stroke-width="2" stroke-dasharray="5 5"/>
+<polygon points="108,259 124,259 116,271" fill="#A5B2C8"/>
+<rect x="454" y="208" width="156" height="39" rx="8" fill="#352A51"/>
+<text x="532" y="236" fill="#C9B2FF" font-family="'Cascadia Mono',Consolas,monospace" font-size="24" font-weight="600" text-anchor="middle">Cursor 8</text>
+<polyline points="532,257 532,343" fill="none" stroke="#C9B2FF" stroke-width="2"/>
+<polygon points="524,259 540,259 532,271" fill="#C9B2FF"/>
+<text x="60" y="487" fill="#526078" font-family="'Noto Sans KR','Malgun Gothic',sans-serif" font-size="25" font-weight="400" text-anchor="start">시작 커서에서 출발해, 호출별로 현재 위치를 보관합니다.</text>
+<rect x="60" y="535" width="250" height="190" rx="13" fill="#F5F7FA" stroke="#E3E8EF"/>
+<text x="85" y="580" fill="#172235" font-family="'Cascadia Mono',Consolas,monospace" font-size="27" font-weight="600" text-anchor="start">source.Start</text>
+<text x="85" y="625" fill="#526078" font-family="'Cascadia Mono',Consolas,monospace" font-size="22" font-weight="400" text-anchor="start">SourceOffset</text>
+<text x="85" y="692" fill="#526078" font-family="'Cascadia Mono',Consolas,monospace" font-size="47" font-weight="550" text-anchor="start">0</text>
+<text x="395" y="604" fill="#526078" font-family="'Noto Sans KR','Malgun Gothic',sans-serif" font-size="23" font-weight="500" text-anchor="middle">파싱 시작 시</text>
+<polyline points="330,647 460,647" fill="none" stroke="#8896AC" stroke-width="2"/>
+<polygon points="450,641 450,653 460,647" fill="#8896AC"/>
+<rect x="480" y="515" width="460" height="250" rx="13" fill="#FFFFFF" stroke="#E3E8EF"/>
+<text x="506" y="560" fill="#172235" font-family="'Cascadia Mono',Consolas,monospace" font-size="27" font-weight="600" text-anchor="start">ContextualInput</text>
+<text x="506" y="597" fill="#526078" font-family="'Noto Sans KR','Malgun Gothic',sans-serif" font-size="24" font-weight="400" text-anchor="start">파싱 호출마다 생성</text>
+<rect x="506" y="618" width="408" height="122" rx="9" fill="#F3F0FA"/>
+<text x="526" y="653" fill="#526078" font-family="'Cascadia Mono',Consolas,monospace" font-size="22" font-weight="400" text-anchor="start">Cursor.SourceOffset</text>
+<text x="526" y="711" fill="#526078" font-family="'Noto Sans KR','Malgun Gothic',sans-serif" font-size="28" font-weight="500" text-anchor="start">시작: 0</text>
+<text x="894" y="711" fill="#6D42C2" font-family="'Noto Sans KR','Malgun Gothic',sans-serif" font-size="28" font-weight="650" text-anchor="end">현재: 8</text>
+<text x="60" y="817" fill="#526078" font-family="'Noto Sans KR','Malgun Gothic',sans-serif" font-size="24" font-weight="400" text-anchor="start">source.Start는 0을 유지하고, 현재 커서는 Cursor에 보관합니다.</text>
+</svg>

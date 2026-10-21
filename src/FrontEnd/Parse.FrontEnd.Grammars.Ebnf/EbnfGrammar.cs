@@ -43,8 +43,8 @@ namespace Janglim.FrontEnd.Grammars.Ebnf
             var predicates = options?.SnapshotPredicates() ?? new Dictionary<string, GrammarPredicate>();
             EbnfRepetitionValidation.Validate(model);
 
-            // 1. token rules -> meaningful regex terminals, looked up by name. Typed text literals
-            // use the existing Terminal behavior for raw regexes, without identifier word boundaries.
+            // 1. Token rules -> meaningful regex terminals, looked up by name. All regex
+            // token kinds preserve authored patterns, including explicit boundary assertions.
             var tokens = new Dictionary<string, Terminal>();
             foreach (var tok in model.Tokens)
             {
@@ -71,7 +71,8 @@ namespace Janglim.FrontEnd.Grammars.Ebnf
                 bool isWord = value.Length > 0 && (char.IsLetter(value[0]) || value[0] == '_');
                 // A word-like keyword literal ('qreg') is a literal like a symbol one ('['), so bWordPattern
                 // is false for both — that sorts these literals AHEAD of the identifier token rule, so a
-                // keyword wins the lexer tie against the identifier instead of losing to its longer pattern.
+                // keyword wins an equal-input-length tie against the identifier. A longer
+                // identifier match always wins, independently of regex pattern text length.
                 var t = isWord
                     ? new Terminal(TokenType.Keyword, value, value, false, false)
                     : new Terminal(TokenType.Operator, value, value, false, false);

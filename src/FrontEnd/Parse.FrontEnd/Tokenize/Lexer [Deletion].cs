@@ -15,7 +15,7 @@ namespace Janglim.FrontEnd.Tokenize
             var impactRange = targetStorage.FindImpactRange(indexInfo.StartIndex, indexInfo.EndIndex);
             string mergeString = this.GetImpactedStringFromDelInfo(targetStorage, delInfos, replaceString);
 
-            var toInsertTokens = this._tokenizer.Tokenize(this._tokenizeRule, mergeString);
+            var toInsertTokens = this._tokenizer.Tokenize(this.LexicalRules, mergeString);
             targetStorage.ReplaceToken(impactRange, toInsertTokens);
 
             return targetStorage;
@@ -60,7 +60,7 @@ namespace Janglim.FrontEnd.Tokenize
             var impactRange = targetStorage.FindImpactRange(indexInfo.StartIndex, indexInfo.EndIndex);
             string mergeString = this.GetImpactedStringFromDelInfo(targetStorage, delInfos);
 
-            var toInsertTokens = this._tokenizer.Tokenize(this._tokenizeRule, mergeString);
+            var toInsertTokens = this._tokenizer.Tokenize(this.LexicalRules, mergeString);
             targetStorage.ReplaceToken(impactRange, toInsertTokens);
             ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

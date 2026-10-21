@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="825" viewBox="0 0 1000 825" role="img" aria-labelledby="title desc">
+<title id="title">Peek로 받은 토큰과 Next</title>
+<desc id="desc">현재 커서8에서 Peek를 요청하면 source는9부터13까지의 /ab/g 토큰과 SourceOffset14인 Next를 반환한다. 실제 파서의 현재 Cursor.SourceOffset은 여전히8이다.</desc>
+<rect width="1000" height="825" fill="#FFFFFF"/>
+<text x="60" y="57" fill="#526078" font-family="'Cascadia Mono',Consolas,monospace" font-size="23" font-weight="500" text-anchor="start">03  /  TokenRead</text>
+<text x="60" y="120" fill="#172235" font-family="'Noto Sans KR','Malgun Gothic',sans-serif" font-size="40" font-weight="750" text-anchor="start">Peek는 토큰과 Next를 반환합니다.</text>
+<text x="60" y="167" fill="#526078" font-family="'Noto Sans KR','Malgun Gothic',sans-serif" font-size="25" font-weight="400" text-anchor="start">현재 Cursor는 8에 남고, 반환된 Next는 14를 가리킵니다.</text>
+<rect x="60" y="185" width="880" height="250" rx="18" fill="#151D2F"/>
+<rect x="584" y="270" width="260" height="70" rx="9" fill="#263C5C"/>
+<polyline points="594,340 834,340" fill="none" stroke="#76B4FF" stroke-width="2"/>
+<text x="142.0" y="321" fill="#B9C3D4" font-family="'Cascadia Mono',Consolas,monospace" font-size="41" font-weight="450" text-anchor="middle">r</text>
+<polyline points="142.0,362 142.0,369" fill="none" stroke="#4E5B73" stroke-width="1"/>
+<text x="142.0" y="402" fill="#A5B2C8" font-family="'Cascadia Mono',Consolas,monospace" font-size="23" font-weight="400" text-anchor="middle">0</text>
+<text x="194.0" y="321" fill="#B9C3D4" font-family="'Cascadia Mono',Consolas,monospace" font-size="41" font-weight="450" text-anchor="middle">e</text>
+<polyline points="194.0,362 194.0,369" fill="none" stroke="#4E5B73" stroke-width="1"/>
+<text x="194.0" y="402" fill="#A5B2C8" font-family="'Cascadia Mono',Consolas,monospace" font-size="23" font-weight="400" text-anchor="middle">1</text>
+<text x="246.0" y="321" fill="#B9C3D4" font-family="'Cascadia Mono',Consolas,monospace" font-size="41" font-weight="450" text-anchor="middle">s</text>
+<polyline points="246.0,362 246.0,369" fill="none" stroke="#4E5B73" stroke-width="1"/>
+<text x="246.0" y="402" fill="#A5B2C8" font-family="'Cascadia Mono',Consolas,monospace" font-size="23" font-weight="400" text-anchor="middle">2</text>
+<text x="298.0" y="321" fill="#B9C3D4" font-family="'Cascadia Mono',Consolas,monospace" font-size="41" font-weight="450" text-anchor="middle">u</text>
+<polyline points="298.0,362 298.0,369" fill="none" stroke="#4E5B73" stroke-width="1"/>
+<text x="298.0" y="402" fill="#A5B2C8" font-family="'Cascadia Mono',Consolas,monospace" font-size="23" font-weight="400" text-anchor="middle">3</text>
+<text x="350.0" y="321" fill="#B9C3D4" font-family="'Cascadia Mono',Consolas,monospace" font-size="41" font-weight="450" text-anchor="middle">l</text>
+<polyline points="350.0,362 350.0,369" fill="none" stroke="#4E5B73" stroke-width="1"/>
+<text x="350.0" y="402" fill="#A5B2C8" font-family="'Cascadia Mono',Consolas,monospace" font-size="23" font-weight="400" text-anchor="middle">4</text>
+<text x="402.0" y="321" fill="#B9C3D4" font-family="'Cascadia Mono',Consolas,monospace" font-size="41" font-weight="450" text-anchor="middle">t</text>
+<polyline points="402.0,362 402.0,369" fill="none" stroke="#4E5B73" stroke-width="1"/>
+<text x="402.0" y="402" fill="#A5B2C8" font-family="'Cascadia Mono',Consolas,monospace" font-size="23" font-weight="400" text-anchor="middle">5</text>
+<text x="454.0" y="321" fill="#A5B2C8" font-family="'Cascadia Mono',Consolas,monospace" font-size="41" font-weight="450" text-anchor="middle">·</text>
+<polyline points="454.0,362 454.0,369" fill="none" stroke="#4E5B73" stroke-width="1"/>
+<text x="454.0" y="402" fill="#A5B2C8" font-family="'Cascadia Mono',Consolas,monospace" font-size="23" font-weight="400" text-anchor="middle">6</text>
+<text x="506.0" y="321" fill="#B9C3D4" font-family="'Cascadia Mono',Consolas,monospace" font-size="41" font-weight="450" text-anchor="middle">=</text>
+<polyline points="506.0,362 506.0,369" fill="none" stroke="#4E5B73" stroke-width="1"/>
+<text x="506.0" y="402" fill="#A5B2C8" font-family="'Cascadia Mono',Consolas,monospace" font-size="23" font-weight="400" text-anchor="middle">7</text>
+<text x="558.0" y="321" fill="#A5B2C8" font-family="'Cascadia Mono',Consolas,monospace" font-size="41" font-weight="450" text-anchor="middle">·</text>
+<polyline points="558.0,362 558.0,369" fill="none" stroke="#4E5B73" stroke-width="1"/>
+<text x="558.0" y="402" fill="#A5B2C8" font-family="'Cascadia Mono',Consolas,monospace" font-size="23" font-weight="400" text-anchor="middle">8</text>
+<text x="610.0" y="321" fill="#D4E8FF" font-family="'Cascadia Mono',Consolas,monospace" font-size="41" font-weight="450" text-anchor="middle">/</text>
+<polyline points="610.0,362 610.0,369" fill="none" stroke="#4E5B73" stroke-width="1"/>
+<text x="610.0" y="402" fill="#A5B2C8" font-family="'Cascadia Mono',Consolas,monospace" font-size="23" font-weight="400" text-anchor="middle">9</text>
+<text x="662.0" y="321" fill="#D4E8FF" font-family="'Cascadia Mono',Consolas,monospace" font-size="41" font-weight="450" text-anchor="middle">a</text>
+<polyline points="662.0,362 662.0,369" fill="none" stroke="#4E5B73" stroke-width="1"/>
+<text x="662.0" y="402" fill="#A5B2C8" font-family="'Cascadia Mono',Consolas,monospace" font-size="23" font-weight="400" text-anchor="middle">10</text>
+<text x="714.0" y="321" fill="#D4E8FF" font-family="'Cascadia Mono',Consolas,monospace" font-size="41" font-weight="450" text-anchor="middle">b</text>
+<polyline points="714.0,362 714.0,369" fill="none" stroke="#4E5B73" stroke-width="1"/>
+<text x="714.0" y="402" fill="#A5B2C8" font-family="'Cascadia Mono',Consolas,monospace" font-size="23" font-weight="400" text-anchor="middle">11</text>
+<text x="766.0" y="321" fill="#D4E8FF" font-family="'Cascadia Mono',Consolas,monospace" font-size="41" font-weight="450" text-anchor="middle">/</text>
+<polyline points="766.0,362 766.0,369" fill="none" stroke="#4E5B73" stroke-width="1"/>
+<text x="766.0" y="402" fill="#A5B2C8" font-family="'Cascadia Mono',Consolas,monospace" font-size="23" font-weight="400" text-anchor="middle">12</text>
+<text x="818.0" y="321" fill="#D4E8FF" font-family="'Cascadia Mono',Consolas,monospace" font-size="41" font-weight="450" text-anchor="middle">g</text>
+<polyline points="818.0,362 818.0,369" fill="none" stroke="#4E5B73" stroke-width="1"/>
+<text x="818.0" y="402" fill="#A5B2C8" font-family="'Cascadia Mono',Consolas,monospace" font-size="23" font-weight="400" text-anchor="middle">13</text>
+<text x="870.0" y="321" fill="#E9EDF7" font-family="'Cascadia Mono',Consolas,monospace" font-size="41" font-weight="450" text-anchor="middle">;</text>
+<polyline points="870.0,362 870.0,369" fill="none" stroke="#4E5B73" stroke-width="1"/>
+<text x="870.0" y="402" fill="#A5B2C8" font-family="'Cascadia Mono',Consolas,monospace" font-size="23" font-weight="400" text-anchor="middle">14</text>
+<text x="85" y="236" fill="#A5B2C8" font-family="'Cascadia Mono',Consolas,monospace" font-size="24" font-weight="500" text-anchor="start">source.Peek</text>
+<rect x="454" y="208" width="156" height="39" rx="8" fill="#352A51"/>
+<text x="532" y="236" fill="#C9B2FF" font-family="'Cascadia Mono',Consolas,monospace" font-size="24" font-weight="600" text-anchor="middle">Cursor 8</text>
+<polyline points="532,257 532,343" fill="none" stroke="#C9B2FF" stroke-width="2"/>
+<polygon points="524,259 540,259 532,271" fill="#C9B2FF"/>
+<rect x="766" y="208" width="156" height="39" rx="8" fill="#233C5D"/>
+<text x="844" y="236" fill="#9DCAFF" font-family="'Cascadia Mono',Consolas,monospace" font-size="24" font-weight="600" text-anchor="middle">Next 14</text>
+<polyline points="844,257 844,343" fill="none" stroke="#9DCAFF" stroke-width="2" stroke-dasharray="5 5"/>
+<polygon points="836,259 852,259 844,271" fill="#9DCAFF"/>
+<rect x="60" y="490" width="880" height="252" rx="13" fill="#FFFFFF" stroke="#E3E8EF"/>
+<text x="86" y="533" fill="#172235" font-family="'Noto Sans KR','Malgun Gothic',sans-serif" font-size="26" font-weight="650" text-anchor="start">source가 반환한 TokenRead</text>
+<polyline points="86,554 914,554" fill="none" stroke="#E3E8EF" stroke-width="1"/>
+<polyline points="500,578 500,718" fill="none" stroke="#E3E8EF" stroke-width="1"/>
+<text x="86" y="599" fill="#526078" font-family="'Cascadia Mono',Consolas,monospace" font-size="24" font-weight="500" text-anchor="start">Token</text>
+<text x="86" y="660" fill="#2166B0" font-family="'Cascadia Mono',Consolas,monospace" font-size="44" font-weight="550" text-anchor="start">/ab/g</text>
+<text x="86" y="707" fill="#526078" font-family="'Noto Sans KR','Malgun Gothic',sans-serif" font-size="24" font-weight="400" text-anchor="start">원문 9~13의 토큰</text>
+<text x="536" y="599" fill="#526078" font-family="'Cascadia Mono',Consolas,monospace" font-size="24" font-weight="500" text-anchor="start">Next</text>
+<text x="536" y="660" fill="#2166B0" font-family="'Cascadia Mono',Consolas,monospace" font-size="44" font-weight="550" text-anchor="start">14</text>
+<text x="625" y="659" fill="#526078" font-family="'Cascadia Mono',Consolas,monospace" font-size="23" font-weight="400" text-anchor="start">SourceOffset</text>
+<text x="536" y="707" fill="#526078" font-family="'Noto Sans KR','Malgun Gothic',sans-serif" font-size="24" font-weight="400" text-anchor="start">토큰 뒤의 원문 위치</text>
+<text x="60" y="791" fill="#6D42C2" font-family="'Noto Sans KR','Malgun Gothic',sans-serif" font-size="26" font-weight="500" text-anchor="start">파서의 현재 Cursor.SourceOffset은 여전히 8입니다.</text>
+</svg>

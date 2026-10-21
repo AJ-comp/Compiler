@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <PackageReference Include="ConsoleTables" Version="2.7.0" />
+    <InternalsVisibleTo Include="Parse.FrontEnd.Parsers" />
   </ItemGroup>
 
   <ItemGroup>

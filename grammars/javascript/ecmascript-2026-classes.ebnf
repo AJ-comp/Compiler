@@ -1,0 +1,34 @@
+# ECMAScript 2026 section 15.7: classes, fields, methods and accessors.
+# Function-kind productions are supplied by ecmascript-2026-functions.ebnf.
+# A class body owns its private-name environment; heritage uses the outer environment.
+ClassDeclaration : 'class' BindingIdentifier ClassTail ;
+ClassExpression : 'class' ClassTail | 'class' BindingIdentifier ClassTail ;
+ClassTail : ClassBody | ClassHeritage ClassBody ;
+ClassHeritage : 'extends' LeftHandSideExpression ;
+ClassBody : '{' '}' | '{' ClassElementList '}' ;
+ClassElementList : ClassElement | ClassElementList ClassElement ;
+ClassElement : ';' | ClassMethod | ClassField | ClassStaticBlock | ClassAsyncMethod | ClassGeneratorMethod ;
+ClassElementName : PropertyName | PrivateIdentifier ;
+
+# Share the first name until a following name/parenthesis distinguishes its role.
+# A modifier continuation is permitted only after the raw static/get/set spelling.
+# This factoring avoids a multi-way LR conflict between a keyword name and modifiers.
+ClassModifierName : {ClassModifierName()}? ClassElementName ;
+ClassMethod : ClassElementName '(' FormalParameters ')' FunctionBody
+            | ClassElementName ClassModifierName '(' FormalParameters ')' FunctionBody
+            | ClassElementName ClassModifierName ClassModifierName '(' FormalParameters ')' FunctionBody ;
+ClassField : ClassElementName ClassFieldEnd
+           | ClassElementName Initializer ClassFieldExpressionEnd
+           | ClassElementName ClassModifierName ClassFieldEnd
+           | ClassElementName ClassModifierName Initializer ClassFieldExpressionEnd ;
+ClassFieldEnd : ';' | {ClassFieldEnd()}? ;
+ClassFieldExpressionEnd : ';' | {ClassFieldExpressionEnd()}? ;
+ClassStaticBlock : ClassElementName {ClassStaticBlock()}? ClassStaticBody ;
+ClassStaticBody : '{' '}' | '{' StatementList '}' ;
+
+SuperCall : 'super' Arguments ;
+SuperProperty : 'super' '.' PropertyIdentifierName | 'super' '[' Expression ']' ;
+NewTarget : 'new' '.' PropertyIdentifierName ;
+PrivateMemberAccess : '.' PrivateIdentifier ;
+PrivateInExpression : PrivateIdentifier 'in' ShiftExpression ;
+PrivateIdentifier := Identifier "{{PrivateIdentifier}}" ;

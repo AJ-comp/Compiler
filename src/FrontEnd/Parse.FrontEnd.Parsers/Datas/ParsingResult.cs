@@ -37,6 +37,7 @@ namespace Janglim.FrontEnd.Parsers.Datas
         /// The parse as a flat, strongly-typed sequence of steps (the data-oriented counterpart of
         /// <see cref="ToParsingHistory"/>). Each step exposes its typed <see cref="ParseAction"/>,
         /// lookahead, before/after stack and any error note — see <see cref="ParseTrace"/>.
+        /// Contains no steps when logging was disabled for this parse.
         /// </summary>
         public ParseTrace Trace => ParseTrace.From(Logger);
 

@@ -6,10 +6,10 @@
     <IsPackable>true</IsPackable>
     <PackageId>Janglim</PackageId>
     <Title>Janglim</Title>
-    <Description>Janglim is an embeddable LALR parser-generator engine for .NET. Define grammars in C# or EBNF text with typed tokens and registered C# predicates. Preserve token trivia and line breaks, predict two-way Shift/predicate epsilon Reduce conflicts, and inspect tables, FIRST/FOLLOW sets, traces, syntax trees, and diagnostics. Includes grammar validation, incremental reparsing, and pluggable error recovery.</Description>
-    <PackageTags>parser;parser-generator;parsing;lalr;lalr1;lr;dotnet;csharp;grammar;ebnf;lexer;semantic-predicates;lookahead;token-trivia;grammar-validation;parse-tree;ast;first-follow;introspection;incremental;error-recovery;compiler;dsl;language-tooling;janglim</PackageTags>
+    <Description>Janglim is an embeddable LALR parser-generator engine for .NET with C# and EBNF grammars, longest-match lexing, parser-driven token sources, and registered C# predicates. Includes ECMAScript 2026 strict Script and Module profiles with static syntax validation. Inspect parsing tables, FIRST/FOLLOW sets, traces, syntax trees, and diagnostics, with incremental reparsing and pluggable error recovery.</Description>
+    <PackageTags>parser;parser-generator;parsing;lalr;lalr1;lr;dotnet;csharp;grammar;ebnf;lexer;lexical-policy;contextual-lexing;maximal-munch;javascript;ecmascript;semantic-predicates;lookahead;token-trivia;grammar-validation;parse-tree;ast;first-follow;introspection;incremental;error-recovery;compiler;dsl;language-tooling;janglim</PackageTags>
     <PackageReadmeFile>README.md</PackageReadmeFile>
-    <PackageReleaseNotes>Janglim 0.4.0 adds typed EBNF token declarations, leading source trivia and line-break metadata, and host-registered C# predicates using {Name()}? syntax. Two-way Shift/predicate epsilon Reduce conflicts use on-demand lookahead with explicit failure, ambiguity, and resource-limit diagnostics. Grammar validation rejects input-free repetition and predicate-bearing zero-token left recursion while preserving ordinary LR left recursion. LALRParser remains the supported path, with the existing 0.x API policy. Full release notes: https://github.com/AJ-comp/Compiler/blob/master/RELEASE_NOTES.md</PackageReleaseNotes>
+    <PackageReleaseNotes>Janglim 0.5.0 adds longest-match registered-rule lexing with stable equal-length priority and no automatic word boundaries. Parser-driven token sources use lexical policies and independent cursors for contextual reads and prediction. ECMAScript 2026 strict Script/Module profiles cover expressions, templates, destructuring, functions, async/generators, object methods, classes, modules, and regular-expression body checks. Check both Parsing and Validate results. Review regex behavior when upgrading from 0.4.0. LALRParser remains supported; the public API retains its 0.x policy. Full release notes: https://github.com/AJ-comp/Compiler/blob/master/RELEASE_NOTES.md</PackageReleaseNotes>
 
     <!-- Package icon (an orchid — the project emblem). Drop a PNG (<=1MB, ~128x128) at src/Janglim/icon.png
          and it is packed automatically; until then the package builds without an icon. -->
@@ -25,6 +25,7 @@
 
   <ItemGroup>
     <None Include="README.md" Pack="true" PackagePath="\" />
+    <None Include="..\..\grammars\javascript\unicode\LICENSE.txt" Pack="true" PackagePath="licenses\Unicode-LICENSE.txt" />
   </ItemGroup>
 
   <!--

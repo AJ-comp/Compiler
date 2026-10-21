@@ -1,0 +1,340 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Janglim의 JavaScript 클래스 문법 사용법입니다. 클래스 선언·표현식, 상속, 일반 메서드·접근자, 필드·private 이름·static 블록과 정적 문법 검사를 순서대로 설명합니다.">
+  <title>JavaScript 클래스 문법과 정적 검사 | Janglim</title>
+  <style>
+    :root{color-scheme:light dark;--bg:#fafbf9;--paper:#fff;--ink:#202e29;--secondary:#45564e;--line:#dce4de;--code:#f0f4f1;--accent:#145a45;--token:#254e79}
+    *{box-sizing:border-box}html{scroll-padding-top:28px}
+    body{margin:0;background:var(--bg);color:var(--ink);font:19px/1.95 "Pretendard Variable","Noto Sans KR","Malgun Gothic",system-ui,sans-serif;word-break:keep-all;overflow-wrap:break-word}
+    h1,h2,h3,p{margin:0}h1,h2,h3{font-weight:700;letter-spacing:-.035em}
+    h1{font-size:clamp(31px,4vw,42px);line-height:1.5}h2{font-size:29px;line-height:1.65;margin-bottom:24px}h3{font-size:23px;line-height:1.7;margin:32px 0 16px}
+    p+p{margin-top:22px}a{color:var(--accent);text-underline-offset:5px}a:focus-visible{outline:3px solid var(--accent);outline-offset:5px}
+    code,pre{font-family:"Cascadia Code",Consolas,"Liberation Mono",monospace;font-variant-ligatures:none}code{font-size:.96em;overflow-wrap:anywhere}p code,li code,td code{padding:2px 5px;background:var(--code);border-radius:4px}
+    pre{margin:26px 0;padding:24px 28px;background:var(--code);border-radius:9px;white-space:pre-wrap;overflow-wrap:anywhere;word-break:normal;font-size:18px;line-height:1.9}pre code{font-size:inherit}
+    .core{color:var(--accent);font-weight:700}.token{color:var(--token);font-weight:600}.lead{font-size:21px;margin-top:26px}
+    .skip{position:absolute;top:-100px;left:20px;padding:12px;background:var(--paper);z-index:10}.skip:focus{top:12px}
+    header{background:var(--paper);border-bottom:1px solid var(--line)}.topbar{max-width:1160px;margin:auto;padding:20px 30px}.brand{font-weight:700;text-decoration:none;color:var(--ink)}.brand span{margin-left:16px;font-weight:400}
+    .layout{max-width:1160px;margin:auto;padding:60px 30px 88px;display:grid;grid-template-columns:180px minmax(0,780px);gap:52px;justify-content:center}main{min-width:0}
+    nav{position:sticky;top:26px;align-self:start;font-size:17px;line-height:1.8}nav p{font-size:18px;font-weight:700;margin-bottom:16px}nav a{display:block;padding:10px 0;text-decoration:none;color:var(--secondary)}nav a:hover{text-decoration:underline;color:var(--accent)}
+    section+section{margin-top:72px;padding-top:32px;border-top:1px solid var(--line)}.kind{color:var(--secondary);font-size:18px;margin-bottom:20px}
+    .table-wrap{margin:28px 0;overflow-x:auto}table{width:100%;border-collapse:collapse;text-align:left;font-size:18px}caption{text-align:left;font-size:19px;font-weight:600;margin-bottom:14px}th,td{padding:17px 10px;border-bottom:1px solid var(--line);vertical-align:top}tbody tr:last-child td{border-bottom:0}
+    ul,ol{margin:24px 0;padding-left:28px}li{padding-left:5px;margin-top:16px}footer{margin-top:72px;padding-top:30px;border-top:1px solid var(--line);font-size:18px}.links{display:flex;flex-wrap:wrap;gap:18px 28px;margin-top:26px}
+    @media(prefers-color-scheme:dark){:root{--bg:#151c18;--paper:#202a24;--ink:#e8efea;--secondary:#c0cdc5;--line:#405248;--code:#28362d;--accent:#a5dfbf;--token:#b2d1f2}}
+    @media(max-width:1030px){.layout{display:block;max-width:840px;padding:42px 28px 76px}nav{display:none}.topbar{max-width:840px}}
+    @media(max-width:680px){body{font-size:18px}.topbar{padding:18px 20px}.brand span{display:none}.layout{padding:32px 20px 64px}h2{font-size:26px}h3{font-size:22px}.lead{font-size:20px}pre{padding:20px 18px;font-size:17px}section+section{margin-top:56px}table{font-size:17px}}
+    @media print{body{background:white;color:#202e29;font-size:12pt}header,nav,.skip{display:none}.layout{display:block;max-width:none;padding:0}section+section{margin-top:34px}pre{background:#f1f3f1}h1{font-size:26pt}h2{font-size:20pt}}
+  </style>
+</head>
+<body>
+  <a class="skip" href="#main">본문으로 이동</a>
+  <header><div class="topbar"><a class="brand" href="index.html">Janglim <span>JavaScript 클래스</span></a></div></header>
+  <div class="layout">
+    <nav aria-label="이 문서의 목차">
+      <p>사용 순서와 구현 이유</p>
+      <a href="#purpose">이 기능이 하는 일</a>
+      <a href="#scope">1. 클래스 지원 범위</a>
+      <a href="#api">2. C# 사용 순서</a>
+      <a href="#definitions">3. 선언·표현식과 상속</a>
+      <a href="#methods">4. 메서드와 접근자</a>
+      <a href="#fields">5. 필드와 문장 경계</a>
+      <a href="#private-names">6. private 이름의 범위</a>
+      <a href="#context">7. 본문마다 다른 사용 조건</a>
+      <a href="#static-blocks">8. static 블록의 범위</a>
+      <a href="#early-errors">9. 파싱 뒤에 검사하는 이유</a>
+      <a href="#implementation">구현 파일과 책임</a>
+      <a href="#validation-notes">다른 엔진과 비교할 때</a>
+      <a href="#sources">명세와 저자 맥락</a>
+    </nav>
+    <main id="main">
+      <section id="purpose">
+        <p class="kind">ECMAScript 2026 · JavaScript 언어 지원</p>
+        <h1>클래스의 구조를 파싱하고,<br>멤버와 본문의 사용 조건을 검사합니다.</h1>
+        <p class="lead">JavaScript 클래스에는 생성자, 메서드, 필드와 초기화 코드가 들어갑니다. Janglim의 JavaScript 문법은 이 구성 요소를 구문 트리로 만들고, <code>Validate</code>는 생성자 중복이나 선언하지 않은 private 이름처럼 클래스의 정적 문법 조건을 어긴 오류를 찾습니다.</p>
+        <p>예를 들어 <code>class Counter { #value = 0; read() { return this.#value; } }</code>를 파싱하면 클래스, 필드, 메서드와 속성 접근이 하나의 트리에 들어갑니다. 이때 <code>#value</code>가 해당 클래스에서 선언되었는지도 함께 검사합니다.</p>
+        <p><span class="core">클래스 지원은 기존 JavaScript 언어 계층에 추가됩니다. 개발자는 기존 Grammar → CreateTokenSource → Parsing → Validate 순서로 사용합니다.</span> 먼저 지원하는 클래스 구문을 확인한 뒤, 실제 사용 코드와 각 검사가 필요한 이유를 차례로 살펴보겠습니다.</p>
+      </section>
+
+      <section id="scope">
+        <h2>1. 일반 메서드·접근자와 필드·static 블록을 함께 파싱합니다.</h2>
+        <p>기준은 <a href="https://tc39.es/ecma262/2026/multipage/ecmascript-language-functions-and-classes.html#sec-class-definitions">ECMAScript 2026, 제17판의 클래스 문법</a>입니다. 기존의 엄격 모드 Script 입력에 클래스 선언을 추가하며, 표현식 입력에서는 클래스 표현식도 사용할 수 있습니다.</p>
+        <div class="table-wrap"><table>
+          <caption>클래스 안에서 사용할 수 있는 구성 요소</caption>
+          <thead><tr><th scope="col">구성 요소</th><th scope="col">지원하는 형태</th></tr></thead>
+          <tbody>
+            <tr><td>클래스 정의</td><td>이름이 있는 선언, 이름이 있거나 없는 클래스 표현식, <code>extends</code></td></tr>
+            <tr><td>메서드</td><td>일반 생성자, 인스턴스·static·private의 일반·async·제너레이터·async 제너레이터 메서드, 기본값·구조 분해·rest 매개변수</td></tr>
+            <tr><td>접근자</td><td><code>get</code>·<code>set</code>, 인스턴스·static·private 접근자</td></tr>
+            <tr><td>필드</td><td>초기값이 있거나 없는 필드, 인스턴스·static·private 필드, 계산된 속성 이름</td></tr>
+            <tr><td>초기화 블록</td><td><code>static { ... }</code>, 블록 내부의 선언과 문장</td></tr>
+            <tr><td>관련 표현식</td><td>private 속성 접근·선택적 접근, <code>#name in value</code>, 문맥에 맞는 <code>super</code>·<code>new.target</code></td></tr>
+          </tbody>
+        </table></div>
+        <p>클래스 선언은 <a href="javascript-modules.html#api">Module 입력</a>에서도 사용할 수 있습니다. 이 경우 모듈의 예약어와 top-level await 문맥을 함께 적용하며, <a href="javascript-modules.html#context">모듈의 클래스 본문 설명</a>에서 그 경계를 예제로 확인할 수 있습니다.</p>
+        <p>일반 메서드에 더해 async·제너레이터·async 제너레이터 메서드도 사용할 수 있습니다. <a href="javascript-functions.html#methods">함수·메서드 문서</a>에서 표기와 본문의 await·yield 조건을 비교합니다. 이 클래스 문서는 멤버 이름·private 선언·생성자와 클래스 본문의 검사에 집중합니다.</p>
+      </section>
+
+      <section id="api">
+        <h2>2. 클래스를 포함한 Script도 기존 C# API로 처리합니다.</h2>
+        <p>여러 선언과 문장을 입력하려면 <code>JavaScriptScriptGrammar</code>를 만듭니다. 아래 입력은 private 필드 하나와 생성자·일반 메서드 하나씩을 정의합니다.</p>
+        <pre><code>using System;
+using Janglim.FrontEnd.Grammars.JavaScript;
+using Janglim.FrontEnd.Parsers.LR;
+
+var language = new JavaScriptScriptGrammar();
+var parser = new LALRParser(language.Grammar);
+var input = @"
+class Counter {
+    #value = 0;
+    constructor(start) { this.#value = start; }
+    read() { return this.#value; }
+}
+const counter = new Counter(3);
+";
+
+var source = language.CreateTokenSource(input);
+var parsed = parser.Parsing(source);
+if (!parsed.Success)
+{
+    Console.WriteLine(parser.FiredException?.Message);
+    return;
+}
+
+var diagnostics = language.Validate(parsed.ToParseTree);
+foreach (var diagnostic in diagnostics)
+    Console.WriteLine($"{diagnostic.Code}: {diagnostic.Message} " +
+        $"(위치 {diagnostic.SourceOffset}, 길이 {diagnostic.Length})");
+
+if (diagnostics.Count == 0)
+    Console.WriteLine(parsed.ToParseTree.AllInputDatas);</code></pre>
+        <p><code>CreateTokenSource</code>는 원문과 JavaScript 토큰 규칙을 연결한 <code>source</code>를 만듭니다. 파서는 이 공급자에서 토큰을 받아 구문 트리를 만들고, <code>Validate</code>는 성공한 트리에서 정적 문법 오류를 찾습니다. 반환하는 진단의 위치와 길이는 .NET 문자열의 UTF-16 코드 단위입니다.</p>
+        <p><span class="core">입력을 올바른 코드로 받아들이려면 parsed.Success가 참이고, Validate의 진단 목록이 비어 있어야 합니다.</span> 이 과정은 JavaScript 입력을 실행하거나 인스턴스를 생성하지 않습니다. 위 예제의 <code>new Counter(3)</code>도 구문 트리에 기록합니다.</p>
+        <p>클래스 표현식 하나만 입력하려면 언어 클래스를 <code>JavaScriptExpressionGrammar</code>로 바꾸고, 예를 들어 <code>class { read() { return 1; } }</code>를 전달합니다. 파싱과 검사 순서는 그대로입니다.</p>
+      </section>
+
+      <section id="definitions">
+        <h2>3. 클래스 선언은 이름을 만들고, 클래스 표현식은 값의 자리에 들어갑니다.</h2>
+        <p>먼저 아래 선언은 현재 범위에 <code>Counter</code>라는 이름을 만듭니다. 따라서 같은 범위에 <code>let Counter;</code>나 <code>var Counter;</code>를 함께 선언하면 이름 충돌로 검사합니다.</p>
+        <pre><code>class Counter {
+    read() { return 1; }
+}</code></pre>
+        <p>반면 클래스 표현식은 변수의 초기값이나 함수 인자처럼 표현식이 들어갈 자리에 사용합니다. 클래스 표현식에는 이름을 적어도 되고 생략해도 됩니다.</p>
+        <pre><code>const First = class { read() { return 1; } };
+const Second = class Inner { read() { return Inner; } };</code></pre>
+        <p>두 번째 줄의 <code>Inner</code>는 그 클래스 안에서 사용하는 이름입니다. 이 이름이 클래스 표현식 바깥의 범위에 새 선언으로 추가되지는 않습니다.</p>
+        <p>이제 상속 관계를 문법에 표현하려면 클래스 이름 뒤에 <code>extends</code>와 부모 클래스를 나타내는 표현식을 적습니다.</p>
+        <pre><code>class Counter extends BaseCounter {
+    constructor(start) { super(start); }
+    read() { return super.read(); }
+}
+
+const Generated = class extends makeBase() {};</code></pre>
+        <p><code>extends</code> 뒤에는 속성 접근이나 함수 호출 같은 좌변식이 들어갈 수 있습니다. Janglim은 그 표현식의 구조를 파싱합니다. 실제로 <code>BaseCounter</code>가 어떤 값인지, <code>makeBase()</code>가 무엇을 반환하는지는 입력을 실행하는 환경에서 결정합니다.</p>
+      </section>
+
+      <section id="methods">
+        <h2>4. 메서드의 종류에 따라 이름과 매개변수 조건이 달라집니다.</h2>
+        <p>일반 메서드는 이름 뒤에 매개변수 목록과 본문을 적습니다. 매개변수에는 기존 함수와 같은 기본값·구조 분해·rest를 사용할 수 있고, 본문에는 선언·문장과 <code>return</code>을 사용할 수 있습니다.</p>
+        <pre><code>class User {
+    read({name = 'guest'}, ...other) { return name; }
+    static create(data) { return new User(data); }
+    [methodName](value) { return value; }
+}</code></pre>
+        <p>앞에 <code>static</code>을 붙이면 static 메서드입니다. 대괄호로 감싼 <code>[methodName]</code>은 표현식으로 속성 이름을 정하는 표기입니다. 일반 메서드의 매개변수 이름은 중복할 수 없으며, 매개변수 이름과 본문 최상위의 <code>let</code>·<code>const</code>·클래스 선언 이름도 충돌하면 오류입니다.</p>
+        <h3>인스턴스 constructor 메서드는 클래스마다 하나만 정의합니다.</h3>
+        <p>인스턴스 메서드의 이름을 <code>constructor</code>로 적으면 생성자를 정의합니다. 생성자를 두 번 정의하거나 생성자 이름으로 getter·setter·async·제너레이터 메서드를 정의하면 오류입니다.</p>
+        <pre><code>class User {
+    constructor(name) { this.name = name; }
+}
+
+class Invalid {
+    constructor() {}
+    constructor(value) {}   // 오류: 생성자 중복
+}</code></pre>
+        <p>이 특별한 이름 규칙은 계산하지 않은 속성 이름에 적용합니다. 예를 들어 <code>['constructor']() {}</code>는 계산된 이름의 일반 메서드이므로 위 생성자 개수에 포함하지 않습니다. static 메서드의 <code>constructor() {}</code>도 인스턴스 생성자와 구분합니다.</p>
+        <h3>getter는 매개변수가 없고, setter는 매개변수 하나를 받습니다.</h3>
+        <p>접근자는 <code>get</code> 또는 <code>set</code> 뒤에 속성 이름을 적습니다. 다음 getter는 값을 반환하는 본문을, setter는 전달받은 값을 사용하는 본문을 가집니다.</p>
+        <pre><code>class User {
+    #name;
+    get name() { return this.#name; }
+    set name(value) { this.#name = value; }
+}</code></pre>
+        <p>setter의 매개변수 하나에는 기본값이나 바인딩 패턴을 사용할 수 있습니다. 다만 rest 매개변수는 사용할 수 없습니다. <code>get()</code>·<code>set()</code>처럼 이름 바로 뒤에 괄호가 오면, 이름이 각각 get·set인 일반 메서드입니다.</p>
+      </section>
+
+      <section id="fields">
+        <h2>5. 필드는 초기값을 가질 수 있고, 줄바꿈으로 구분할 수도 있습니다.</h2>
+        <p>필드는 메서드와 달리 매개변수 목록이나 문장 본문이 없습니다. 이름 뒤에 초기값을 생략하거나 <code>=</code>와 표현식을 적습니다.</p>
+        <pre><code>class Counter {
+    value;
+    step = 1;
+    static defaultStep = 1;
+    [fieldName] = makeValue();
+}</code></pre>
+        <p>필드 이름 앞의 <code>static</code>은 static 필드를 나타냅니다. 이름을 계산하는 대괄호 구문도 메서드와 같은 방식으로 사용할 수 있습니다. 계산하지 않은 필드 이름으로 <code>constructor</code>를 사용할 수 없고, static 필드 이름으로 <code>prototype</code>도 사용할 수 없습니다.</p>
+        <p>위 예제는 각 필드를 세미콜론으로 끝냈습니다. 세미콜론을 생략하면 JavaScript의 자동 세미콜론 조건을 적용합니다. 예를 들어 다음처럼 줄바꿈으로 필드를 나눌 수 있습니다.</p>
+        <pre><code>class Counter {
+    value = 0
+    step = 1
+}</code></pre>
+        <p>다만 줄바꿈만 있다고 항상 필드가 끝나는 것은 아닙니다. 다음 코드의 대괄호는 앞의 초기값 표현식에 붙을 수 있으므로, 전체 초기값을 <code>makeValue()[fieldName]</code>으로 읽습니다.</p>
+        <pre><code>class Counter {
+    value = makeValue()
+    [fieldName]
+}</code></pre>
+        <p>의도한 구성이 두 필드라면 첫 번째 필드 뒤에 세미콜론을 적습니다. 그러면 두 번째 대괄호는 새 필드의 이름으로 파싱합니다.</p>
+        <pre><code>class Counter {
+    value = makeValue();
+    [fieldName];
+}</code></pre>
+        <p>이 구분은 JavaScript 전용 종료 조건이 담당합니다. 입력 토큰의 줄바꿈 정보와 초기값을 계속 읽을 수 있는지를 확인하며, 공통 파서에 가짜 세미콜론 토큰을 추가하지 않습니다.</p>
+        <p>필드를 줄바꿈으로 끝낼 때에는, 앞에서 읽은 단어가 수식어인지 실제 멤버 이름인지도 구분해야 합니다. <code>static</code>은 static 멤버를 표시하는 수식어이면서 멤버 이름으로도 사용할 수 있기 때문입니다. 다음 예제에서는 static이 두 번 나옵니다.</p>
+        <pre><code>class Counter {
+    static static
+    read() {}
+}</code></pre>
+        <p>첫 번째 <code>static</code>은 수식어이고, 두 번째 <code>static</code>은 필드 이름입니다. 따라서 줄바꿈에서 static 필드 하나가 끝나고, 다음 줄의 <code>read() {}</code>는 인스턴스 메서드가 됩니다.</p>
+        <p>반면 다음 예제의 <code>get</code>은 필드 이름이 아니라 getter를 시작하는 표시입니다. getter의 이름은 다음 줄에 있는 <code>value</code>이므로, 이 줄바꿈에서는 멤버를 끝내지 않습니다.</p>
+        <pre><code>class Counter {
+    static get
+    value() { return 1; }
+}</code></pre>
+        <p>두 예제 모두 줄바꿈 바로 앞에 특별한 역할을 가질 수 있는 단어가 있습니다. 하지만 첫 번째 예제는 필드를 끝내고, 두 번째 예제는 static getter를 이어 읽습니다. <span class="core">따라서 직전 토큰의 철자만 보고 필드 종료 여부를 판단할 수는 없습니다.</span> JavaScript 언어 계층은 토큰에 연결된 불변 문맥에 수식어를 읽는 중인지, 실제 멤버 이름까지 읽었는지를 기록합니다. 필드 종료 조건과 수식어 조건은 이 문맥을 함께 사용해 두 경우를 구분합니다.</p>
+      </section>
+
+      <section id="private-names">
+        <h2>6. private 이름은 클래스 본문 안에서 선언한 이름과 연결합니다.</h2>
+        <p>이름 앞에 <code>#</code>을 붙이면 private 필드·메서드·접근자를 정의합니다. 다음 예제는 <code>#value</code>를 선언하고, 메서드 안에서 그 이름을 두 가지 방식으로 사용합니다.</p>
+        <pre><code>class Counter {
+    #value = 0;
+    read(other) { return other.#value; }
+    contains(other) { return #value in other; }
+}</code></pre>
+        <p><code>other.#value</code>는 private 속성 접근이고, <code>#value in other</code>는 그 private 이름의 존재를 확인하는 표현식입니다. <code>other?.#value</code>처럼 선택적 접근도 사용할 수 있습니다. 어느 표현식이든 현재 클래스나 바깥 클래스에서 선언한 private 이름이어야 합니다.</p>
+        <p>이름의 선언 순서는 접근 위치보다 앞설 필요가 없습니다. 검사기는 클래스 본문의 선언을 먼저 모으므로, 메서드 뒤에 선언한 필드도 찾을 수 있습니다.</p>
+        <pre><code>class Counter {
+    read() { return this.#value; }
+    #value = 0;
+}</code></pre>
+        <p>클래스 본문은 자기 private 이름의 범위를 만듭니다. 따라서 계산된 속성 이름에서도 자기 private 이름을 참조할 수 있고, 중첩 클래스는 바깥 클래스의 private 이름을 참조할 수 있습니다. 중첩 클래스가 같은 이름을 선언하면 그 안에서는 가까운 클래스의 이름을 사용합니다.</p>
+        <p>한편 <code>extends</code> 뒤의 부모 클래스 표현식은 자기 클래스 본문에 들어가기 전에 평가하는 구간입니다. 그러므로 그 구간에서는 바깥 클래스의 private 이름만 참조할 수 있습니다. 자기 클래스에 나중에 선언한 private 이름은 부모 클래스 표현식의 선언으로 인정하지 않습니다.</p>
+        <pre><code>class Invalid extends object.#value {
+    #value;   // 이 선언은 extends 표현식의 #value를 제공하지 않음
+}</code></pre>
+        <p><span class="core">private 이름은 클래스마다 모아서 검사합니다. 한 클래스 안의 같은 이름은 같은 static 여부를 가진 getter·setter 한 쌍에서만 중복을 허용합니다.</span> 따라서 private 필드와 메서드에 같은 이름을 쓰거나, 인스턴스 필드와 static 필드에 같은 private 이름을 선언하면 오류입니다. <code>#constructor</code>도 사용할 수 없습니다.</p>
+        <p>private 속성은 <code>delete</code>로 삭제할 수 없습니다. 검사기는 <code>delete other.#value</code>뿐 아니라 괄호나 선택적 접근으로 감싼 형태에서도 같은 조건을 확인합니다.</p>
+      </section>
+
+      <section id="context">
+        <h2>7. 같은 표현식도 어느 본문에 있는지에 따라 허용 여부가 달라집니다.</h2>
+        <p>클래스의 이름과 멤버 구조를 확인했다면, 이제 본문 안의 표현식을 볼 차례입니다. 특히 <code>super</code>·<code>new.target</code>·<code>arguments</code>는 그 표현식이 들어 있는 위치를 알아야 검사할 수 있습니다.</p>
+        <div class="table-wrap"><table>
+          <caption>각 표현식을 사용할 수 있는 문맥</caption>
+          <thead><tr><th scope="col">표현식</th><th scope="col">검사 기준</th></tr></thead>
+          <tbody>
+            <tr><td><code>super.name</code>·<code>super[key]</code></td><td>클래스 메서드·생성자·필드 초기값·static 블록에서 허용합니다. 해당 클래스에 <code>extends</code>가 있는지는 이 구문 조건과 별개입니다.</td></tr>
+            <tr><td><code>super(...)</code></td><td><code>extends</code>가 있는 클래스의 인스턴스 생성자에서만 허용합니다. 생성자의 매개변수 기본값과 본문을 함께 검사합니다.</td></tr>
+            <tr><td><code>new.target</code></td><td>일반 함수·메서드·생성자와 필드 초기값·static 블록에서 허용합니다.</td></tr>
+            <tr><td><code>arguments</code> 참조</td><td>필드 초기값과 static 블록에서는 금지합니다. 그 안에 정의한 일반 함수의 매개변수·본문은 별도 함수 문맥을 사용합니다.</td></tr>
+          </tbody>
+        </table></div>
+        <p>화살표 함수는 이 세 표현식에 관한 바깥 문맥을 이어받습니다. 예를 들어 아래 화살표 함수의 <code>super.read()</code>는 메서드 본문의 문맥에서 검사합니다.</p>
+        <pre><code>class Counter extends BaseCounter {
+    read() { return () =&gt; super.read(); }
+}</code></pre>
+        <p>반면 일반 함수는 독립적인 함수 문맥을 만듭니다. 메서드 안에 일반 함수를 다시 정의했다고 해서, 그 함수 안의 <code>super.read()</code>까지 메서드의 권한을 이어받지는 않습니다.</p>
+        <pre><code>class Invalid extends BaseCounter {
+    read() {
+        return function () { return super.read(); }; // 오류
+    }
+}</code></pre>
+        <p>계산된 속성 이름과 <code>extends</code> 표현식에는 그 바깥 문맥을 적용합니다. 예를 들어 최상위 클래스의 <code>[new.target]</code>는 함수 안의 표현식이 아니므로 오류입니다. 같은 클래스 정의가 일반 함수 안에 있다면, 계산된 속성 이름도 그 함수의 문맥에서 검사합니다.</p>
+        <p>이처럼 검사기는 클래스 전체에 하나의 허용 여부를 붙이지 않습니다. 메서드 본문, 필드 초기값, 계산된 이름, 부모 클래스 표현식을 각각의 문맥에서 검사합니다.</p>
+      </section>
+
+      <section id="static-blocks">
+        <h2>8. static 블록은 자기 선언 범위와 제어문 문맥을 가집니다.</h2>
+        <p>static 필드는 초기값 표현식 하나를 적습니다. 여러 선언과 문장으로 초기화 코드를 구성하려면 <code>static { ... }</code>를 사용합니다.</p>
+        <pre><code>class Counter {
+    static value;
+    static {
+        const initial = 1;
+        this.value = initial;
+    }
+}</code></pre>
+        <p>이 블록의 선언은 블록 안에 속합니다. <code>var</code>나 함수 선언도 클래스 바깥의 범위로 전달하지 않으며, 서로 다른 static 블록도 독립적인 범위를 사용합니다.</p>
+        <pre><code>class Counter {
+    static { var initial = 1; }
+    static { let initial = 2; }   // 앞 블록의 이름과 충돌하지 않음
+}</code></pre>
+        <p>블록 안에서 루프와 레이블을 만들고 <code>break</code>·<code>continue</code>를 사용할 수 있습니다. 다만 클래스 바깥의 루프나 레이블로 이동할 수는 없습니다. static 블록의 <code>return</code>도 오류입니다.</p>
+        <p>또한 static 블록에서는 <code>await</code>를 직접 사용할 수 없습니다. <code>await</code>를 변수 이름으로 사용하거나 축약 속성 <code>{await}</code>로 참조하는 경우도 이 제한에 포함됩니다. <code>object.await</code>나 <code>{await: 1}</code>의 await는 속성 이름이므로 구분합니다.</p>
+        <p>블록 안에 일반 함수를 정의하면 그 함수의 매개변수·본문에는 일반 함수 문맥을 적용합니다. 화살표 함수는 매개변수 목록을 바깥 문맥에서 검사하고, 표현식·블록 본문에는 일반 화살표 함수의 문법을 적용합니다. 따라서 Script 입력에서 static 블록의 <code>await =&gt; 1</code>은 잘못된 매개변수 이름이지만, <code>() =&gt; await</code>의 본문에서는 await를 식별자로 사용할 수 있습니다. Module 입력은 <code>await</code>를 전체 원문에서 식별자로 금지하므로, 이 화살표 본문에서도 사용할 수 없습니다.</p>
+      </section>
+
+      <section id="early-errors">
+        <h2>9. 파싱은 구조를 만들고, Validate는 그 구조의 사용 조건을 확인합니다.</h2>
+        <p>다음 클래스는 메서드 두 개의 모양을 갖추고 있습니다. 하지만 두 메서드가 모두 인스턴스 생성자이므로, 올바른 클래스 정의로 받아들일 수 없습니다.</p>
+        <pre><code>class Invalid {
+    constructor() {}
+    constructor(value) {}
+}</code></pre>
+        <p>이 오류를 찾으려면 현재 메서드 하나만 읽는 것으로는 부족합니다. 검사기는 같은 클래스에 정의한 메서드들을 모아 생성자 개수를 확인해야 합니다. private 이름의 중복이나 선언 여부도 같은 방식으로 클래스 범위를 알아야 판단할 수 있습니다.</p>
+        <p>이처럼 실행 전에 확인하는 정적 문법 조건을 ECMAScript 명세에서는 <strong>early error</strong>라고 부릅니다. Janglim은 <code>Validate</code>에서 클래스의 이름과 문맥을 순회하며 다음 조건을 검사합니다.</p>
+        <ul>
+          <li>클래스 선언 이름이 같은 범위의 다른 선언과 충돌하는가</li>
+          <li>생성자·static 멤버·필드 이름이 각 이름 제한을 지키는가</li>
+          <li>메서드·접근자의 매개변수 개수와 바인딩 이름이 올바른가</li>
+          <li>private 이름이 선언되어 있고, 같은 클래스의 중복 조건을 지키는가</li>
+          <li><code>super</code>·<code>new.target</code>·<code>arguments</code>를 현재 문맥에서 사용할 수 있는가</li>
+          <li>static 블록의 선언·레이블·제어문이 블록 범위를 지키는가</li>
+        </ul>
+        <p><span class="core">따라서 파싱 성공만으로 클래스 검사가 끝나지 않습니다. 같은 구문 트리에 Validate를 적용하고 진단이 없는지도 확인해야 합니다.</span> 검사는 원래 트리의 노드와 입력 토큰을 바꾸지 않으며, 오류가 있는 원문 위치를 진단에 기록합니다.</p>
+        <p>클래스 멤버 안의 표현식에도 기존 JavaScript 검사를 함께 적용합니다. 예를 들어 필드 초기값이나 메서드 본문에 <code>/[z-a]/u</code>가 있으면, <code>Validate</code>가 잘못된 정규식 범위를 찾습니다. 이 본문 검사의 모드와 실행 순서는 <a href="javascript-regexp.html">정규식 문서</a>에서 설명합니다.</p>
+      </section>
+
+      <section id="implementation">
+        <h2>클래스 문법·정적 검사·토큰 문맥의 책임을 나눕니다.</h2>
+        <p>이번 기능은 공통 렉서·파서 엔진의 동작을 바꾸지 않고 JavaScript 언어 지원 계층에 구현합니다. 각 파일은 다음 책임을 가집니다.</p>
+        <div class="table-wrap"><table>
+          <thead><tr><th scope="col">파일</th><th scope="col">담당하는 일</th></tr></thead>
+          <tbody>
+            <tr><td><a href="../../grammars/javascript/ecmascript-2026-classes.ebnf">ecmascript-2026-classes.ebnf</a></td><td>클래스·멤버·초기화 블록과 관련 표현식의 생성 규칙</td></tr>
+            <tr><td><a href="../../src/FrontEnd/Parse.FrontEnd.Grammars.Ebnf/JavaScript/JavaScriptClassValidation.cs">JavaScriptClassValidation.cs</a></td><td>클래스 멤버·private 이름과 본문별 사용 조건의 검사</td></tr>
+            <tr><td><a href="../../src/FrontEnd/Parse.FrontEnd.Grammars.Ebnf/JavaScript/JavaScriptStatementValidation.cs">JavaScriptStatementValidation.cs</a></td><td>클래스 선언·메서드·static 블록의 선언 범위와 제어문 검사</td></tr>
+            <tr><td><a href="../../src/FrontEnd/Parse.FrontEnd.Grammars.Ebnf/JavaScript/JavaScriptStatementPredicates.cs">JavaScriptStatementPredicates.cs</a></td><td>필드 종료와 접근자 표기를 판별하는 순수 조건 함수</td></tr>
+            <tr><td><a href="../../src/FrontEnd/Parse.FrontEnd.Grammars.Ebnf/JavaScript/JavaScriptSlashContext.cs">JavaScriptSlashContext.cs</a></td><td>클래스 선언·표현식과 각 본문 경계를 반영한 JavaScript 토큰 문맥</td></tr>
+          </tbody>
+        </table></div>
+        <p>토큰 규칙은 <code>#</code>과 식별자 이름을 하나의 <code>PrivateIdentifier</code>로 읽습니다. private 이름의 선언 범위는 토큰화 단계가 아니라 구문 트리 검사에서 판단합니다. 그 결과 렉서는 클래스의 선언 목록을 알 필요가 없습니다.</p>
+        <p>슬래시 처리도 기존 책임을 유지합니다. 파서는 현재 파싱 문맥을 정책에 전달하고, 정책이 반환한 규칙 묶음으로 <code>source</code>에 다음 토큰을 요청합니다. JavaScript 정책은 클래스 선언 뒤의 새 표현식과 클래스 표현식 뒤의 나눗셈을 구분할 때, 토큰에 연결된 불변 문맥을 사용합니다.</p>
+        <p>테스트는 클래스 자체의 수락·거부뿐 아니라 일반 함수·화살표 함수·템플릿·구조 분해·ASI와 섞인 입력을 확인합니다. 중첩된 클래스의 이름 범위, 진단 위치, 원문과 트리의 보존, 서로 다른 입력과 예측 후보의 문맥 분리도 함께 점검합니다.</p>
+      </section>
+
+      <section id="validation-notes">
+        <h2>다른 엔진과 비교할 때에는 명세의 문법도 함께 확인합니다.</h2>
+        <p>검증용 JavaScript 엔진의 수락 결과는 중요한 비교 자료입니다. 다만 그 결과를 그대로 문법의 정의로 사용하지는 않습니다. 이번 비교에서는 Node.js 24가 static 필드 초기값의 식별자 <code>await</code>를 거부하고, setter 매개변수 뒤의 쉼표를 허용하는 차이를 확인했습니다.</p>
+        <p>이 구현은 연도가 고정된 ECMAScript 2026 생성 규칙의 Await 조건과 기존 지원 기준을 사용합니다. 엄격 모드 Script 최상위처럼 Await가 꺼진 문맥에서는 인스턴스·static 필드 초기값의 식별자 await를 허용합니다. 바깥 async 함수의 Await 조건이나 static 블록의 await 제한이 이어지는 초기화식에서는 await를 식별자로 사용할 수 없습니다. Module 입력에는 모듈의 await 예약어 조건도 적용합니다. setter에는 쉼표 없이 매개변수 하나를 받습니다.</p>
+        <p>필드 초기화식을 중단하는 await·yield 표현식과 문법 매개변수의 관계는 <a href="https://github.com/tc39/ecma262/issues/2437">TC39 #2437</a>·<a href="https://github.com/tc39/ecma262/issues/3333">#3333</a>의 미해결 명세 문제입니다. Janglim은 초기화식의 동기적인 검사 기준을 유지하고, 식별자 이름의 예약어 조건을 별도로 적용합니다. <a href="javascript-functions.html#context">함수·메서드 문서</a>에서 이 두 검사를 예제로 구분합니다.</p>
+      </section>
+
+      <section id="sources">
+        <h2>기준 명세와 저자 맥락</h2>
+        <ul>
+          <li><a href="https://tc39.es/ecma262/2026/multipage/ecmascript-language-functions-and-classes.html#sec-class-definitions">ECMAScript 2026 — 클래스 정의와 정적 오류</a></li>
+          <li><a href="https://tc39.es/ecma262/2026/multipage/ecmascript-language-functions-and-classes.html#sec-method-definitions">ECMAScript 2026 — 메서드와 접근자</a></li>
+          <li><a href="https://tc39.es/ecma262/2026/multipage/ecmascript-language-expressions.html#sec-left-hand-side-expressions">ECMAScript 2026 — 속성 접근·super·new.target</a></li>
+          <li><a href="javascript-statements.html">일반 함수·화살표 함수·문장과 선언</a></li>
+          <li><a href="javascript-expressions.html">표현식·템플릿·구조 분해 할당</a></li>
+          <li><a href="../../grammars/javascript/README.md">기준 문법 파일과 재현 방법</a></li>
+        </ul>
+        <p><strong>저자의 설계와 이번 언어 지원의 관계</strong></p>
+        <p>Janglim의 핵심 LR 구조는 저자가 설계하고 작성했습니다. 이번 JavaScript 클래스 문법·토큰 정책·정적 검사·테스트와 문서는 그 기존 구조 위에 대화에서 합의한 범위를 AI 보조로 추가한 언어 지원 계층입니다. 기존 엔진에 담긴 저자의 설계·구현과 새로 추가한 언어 지원을 구분합니다.</p>
+      </section>
+      <footer>Janglim · JavaScript 언어 지원<div class="links"><a href="javascript-statements.html">함수·문장·선언</a><a href="javascript-expressions.html">표현식 문법</a><a href="parser-driven-lexing.html">파서 주도 렉싱</a></div></footer>
+    </main>
+  </div>
+</body>
+</html>
