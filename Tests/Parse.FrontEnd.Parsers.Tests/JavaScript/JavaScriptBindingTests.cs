@@ -343,7 +343,7 @@ public sealed class JavaScriptBindingTests
     [Fact]
     public void The_expression_entry_also_accepts_ordinary_function_expressions()
     {
-        var language = new JavaScriptExpressionGrammar();
+        var language = new JavaScriptGrammar(inputKind: JavaScriptInputKind.Expression);
         var parser = new LALRParser(language.Grammar, false);
         foreach (string input in new[] { "function() {}", "function named(a) { return a; }",
                      "function({name}, [first] = values, ...rest) { return name; }",

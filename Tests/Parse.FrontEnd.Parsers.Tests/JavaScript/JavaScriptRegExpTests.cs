@@ -710,10 +710,11 @@ public sealed class JavaScriptRegExpTests
     {
         const string input = "value/+other/ divisor";
         var source = _fixture.Language.CreateTokenSource(input);
-        var regex = source.Policy.Goals.Single(goal =>
+        // Equivalent token bundles may carry different branch facts; select a representative.
+        var regex = source.Policy.Goals.First(goal =>
             goal.Terminals.Any(terminal => terminal.Caption == "RegularExpressionLiteral") &&
             !goal.Terminals.Any(terminal => terminal.Caption == "TemplateTail"));
-        var division = source.Policy.Goals.Single(goal =>
+        var division = source.Policy.Goals.First(goal =>
             !goal.Terminals.Any(terminal => terminal.Caption == "RegularExpressionLiteral") &&
             !goal.Terminals.Any(terminal => terminal.Caption == "TemplateTail"));
         var value = source.Peek(source.Start, division);

@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Janglim 0.6.0 TypeScriptGrammar의 사용 순서와 지원 범위. 입력 종류 선택, Parsing·Validate, 타입과 클래스 문법, JavaScript 재사용 구조를 설명합니다.">
+  <title>TypeScript 문법과 사용 순서 | Janglim</title>
+  <style>
+    :root{color-scheme:light dark;--bg:#fafbf9;--paper:#fff;--ink:#202e29;--secondary:#45564e;--line:#dce4de;--code:#f0f4f1;--accent:#145a45}
+    *{box-sizing:border-box}html{scroll-padding-top:28px}
+    body{margin:0;background:var(--bg);color:var(--ink);font:19px/1.95 "Pretendard Variable","Noto Sans KR","Malgun Gothic",system-ui,sans-serif;word-break:keep-all;overflow-wrap:break-word}
+    h1,h2,h3,p{margin:0}h1,h2,h3{font-weight:700;letter-spacing:-.035em}
+    h1{font-size:clamp(31px,4vw,42px);line-height:1.5}h2{font-size:29px;line-height:1.65;margin-bottom:24px}h3{font-size:23px;line-height:1.7;margin:32px 0 16px}
+    p+p{margin-top:22px}a{color:var(--accent);text-underline-offset:5px}a:focus-visible{outline:3px solid var(--accent);outline-offset:5px}
+    code,pre{font-family:"Cascadia Code",Consolas,"Liberation Mono",monospace;font-variant-ligatures:none}code{font-size:.96em;overflow-wrap:anywhere}p code,li code,td code{padding:2px 5px;background:var(--code);border-radius:4px}
+    pre{margin:26px 0;padding:24px 28px;background:var(--code);border-radius:9px;white-space:pre-wrap;overflow-wrap:anywhere;word-break:normal;font-size:18px;line-height:1.9}pre code{font-size:inherit}
+    .core{color:var(--accent);font-weight:700}.lead{font-size:21px;margin-top:26px}.kind{color:var(--secondary);font-size:18px;margin-bottom:20px}
+    .skip{position:absolute;top:-100px;left:20px;padding:12px;background:var(--paper);z-index:10}.skip:focus{top:12px}
+    header{background:var(--paper);border-bottom:1px solid var(--line)}.topbar{max-width:1160px;margin:auto;padding:20px 30px}.brand{font-weight:700;text-decoration:none;color:var(--ink)}.brand span{margin-left:16px;font-weight:400}
+    .layout{max-width:1160px;margin:auto;padding:60px 30px 88px;display:grid;grid-template-columns:180px minmax(0,780px);gap:52px;justify-content:center}main{min-width:0}
+    nav{position:sticky;top:26px;align-self:start;font-size:17px;line-height:1.8}nav p{font-size:18px;font-weight:700;margin-bottom:16px}nav a{display:block;padding:10px 0;text-decoration:none;color:var(--secondary)}nav a:hover{text-decoration:underline;color:var(--accent)}
+    section+section{margin-top:72px;padding-top:32px;border-top:1px solid var(--line)}
+    .table-wrap{margin:28px 0;overflow-x:auto}table{width:100%;border-collapse:collapse;text-align:left;font-size:18px}caption{text-align:left;font-size:19px;font-weight:600;margin-bottom:14px}th,td{padding:17px 10px;border-bottom:1px solid var(--line);vertical-align:top}tbody tr:last-child td{border-bottom:0}
+    ul{margin:24px 0;padding-left:28px}li{padding-left:5px;margin-top:16px}footer{margin-top:72px;padding-top:30px;border-top:1px solid var(--line);font-size:18px}.links{display:flex;flex-wrap:wrap;gap:18px 28px;margin-top:26px}
+    @media(prefers-color-scheme:dark){:root{--bg:#151c18;--paper:#202a24;--ink:#e8efea;--secondary:#c0cdc5;--line:#405248;--code:#28362d;--accent:#a5dfbf}}
+    @media(max-width:1030px){.layout{display:block;max-width:840px;padding:42px 28px 76px}nav{display:none}.topbar{max-width:840px}}
+    @media(max-width:680px){body{font-size:18px}.topbar{padding:18px 20px}.brand span{display:none}.layout{padding:32px 20px 64px}h2{font-size:26px}h3{font-size:22px}.lead{font-size:20px}pre{padding:20px 18px;font-size:17px}section+section{margin-top:56px}table{font-size:17px}}
+    @media print{body{background:white;color:#202e29;font-size:12pt}header,nav,.skip{display:none}.layout{display:block;max-width:none;padding:0}section+section{margin-top:34px}pre{background:#f1f3f1}h1{font-size:26pt}h2{font-size:20pt}}
+  </style>
+</head>
+<body>
+  <a class="skip" href="#main">본문으로 이동</a>
+  <header><div class="topbar"><a class="brand" href="index.html">Janglim <span>TypeScript 문법과 사용 순서</span></a></div></header>
+  <div class="layout">
+    <nav aria-label="이 문서의 목차">
+      <p>TypeScript 지원</p>
+      <a href="#purpose">이 기능이 하는 일</a>
+      <a href="#api">사용 코드</a>
+      <a href="#input-kind">입력 종류와 모드</a>
+      <a href="#scope">0.6.0 지원 범위</a>
+      <a href="#remaining">남은 문법</a>
+      <a href="#implementation">구현과 검사 책임</a>
+      <a href="#verification">검증 기준과 저자 맥락</a>
+    </nav>
+    <main id="main">
+      <section id="purpose">
+        <p class="kind">Janglim 0.6.0 · TypeScript 언어 지원</p>
+        <h1>TypeScript 원문에서<br>구문 트리와 문법 진단을 얻습니다.</h1>
+        <p class="lead"><code>TypeScriptGrammar</code>는 JavaScript 문법에 TypeScript의 타입 표기·선언·단언·클래스 확장을 연결합니다. 개발자는 이 클래스가 준비한 문법과 입력 공급자를 기존 <code>LALRParser</code>에 전달합니다.</p>
+        <p>파싱 결과에는 원문의 타입 노드와 토큰 위치가 함께 남습니다. 이어서 <code>Validate</code>를 호출하면 잘못된 수정자 조합이나 선언 위치 같은 문법 조건을 검사할 수 있습니다. <span class="core">0.6.0은 아래에 명시한 TypeScript 문법을 지원하며, 전체 문법 지원은 계속 확장 중입니다.</span></p>
+      </section>
+
+      <section id="api">
+        <h2>문법을 준비하고, Parsing과 Validate를 호출합니다.</h2>
+        <p>다음 예제의 입력은 타입이 붙은 생성자 매개변수를 사용하는 클래스입니다. <code>public readonly id: number</code>는 TypeScript 문법이며, 클래스의 기본 구조와 생성자 본문은 기존 JavaScript 문법으로 읽습니다.</p>
+        <pre><code>using System;
+using Janglim.FrontEnd.Grammars.TypeScript;
+using Janglim.FrontEnd.Parsers.LR;
+
+var language = new TypeScriptGrammar();
+var parser = new LALRParser(language.Grammar);
+var input = "class User { constructor(public readonly id: number) {} }";
+
+var parsed = parser.Parsing(language.CreateTokenSource(input));
+if (!parsed.Success)
+{
+    Console.WriteLine(parser.FiredException?.Message ?? "파싱 오류");
+    return;
+}
+
+var diagnostics = language.Validate(parsed.ToParseTree);
+foreach (var diagnostic in diagnostics)
+    Console.WriteLine($"{diagnostic.Code}: {diagnostic.Message} " +
+        $"(위치 {diagnostic.SourceOffset}, 길이 {diagnostic.Length})");
+
+if (diagnostics.Count == 0)
+    Console.WriteLine("문법 검사 통과");</code></pre>
+        <p><code>Parsing</code>은 원문의 구문 구조를 확인하고 트리를 만듭니다. 그다음 <code>Validate</code>가 완성된 트리에서 선언과 멤버의 문맥을 검사합니다. 따라서 <span class="core">파싱 성공과 진단 0개를 모두 확인해야 문법 검사가 끝납니다.</span></p>
+        <p>여기서 <code>number</code>는 트리에 보존되는 타입 표기입니다. 이름이 어떤 타입을 가리키는지, 실제 값이 그 타입에 대입 가능한지를 판단하는 작업은 별도의 타입 검사기가 담당합니다.</p>
+      </section>
+
+      <section id="input-kind">
+        <h2>입력 종류는 TypeScriptGrammar의 설정으로 선택합니다.</h2>
+        <p>앞의 기본 생성자는 비엄격 모드 Script를 준비합니다. 모듈 파일·표현식 하나·타입 하나를 검사할 때는 같은 생성자의 <code>inputKind</code>를 바꿉니다. 파서를 만들고 <code>Parsing</code>과 <code>Validate</code>를 호출하는 순서는 그대로입니다.</p>
+        <div class="table-wrap"><table>
+          <caption>TypeScriptInputKind별 입력 예제</caption>
+          <thead><tr><th scope="col">입력 종류</th><th scope="col">선택 코드</th><th scope="col">원문 예제</th></tr></thead>
+          <tbody>
+            <tr><td>Script — 기본값</td><td><code>new TypeScriptGrammar()</code></td><td><code>let value: number = 1;</code></td></tr>
+            <tr><td>Module</td><td><code>new TypeScriptGrammar(TypeScriptInputKind.Module)</code></td><td><code>export class User { constructor(public id: number) {} }</code></td></tr>
+            <tr><td>Expression</td><td><code>new TypeScriptGrammar(TypeScriptInputKind.Expression)</code></td><td><code>value as number</code></td></tr>
+            <tr><td>Type</td><td><code>new TypeScriptGrammar(TypeScriptInputKind.Type)</code></td><td><code>string | number[]</code></td></tr>
+          </tbody>
+        </table></div>
+        <p>Script·Expression·Type의 초기 모드는 <code>JavaScriptMode.NonStrict</code>입니다. 엄격 모드로 시작하려면 <code>mode: JavaScriptMode.Strict</code>를 지정합니다. Module은 항상 엄격 모드이며, Script 안에서도 <code>"use strict"</code> 지시문과 클래스의 엄격 모드 조건을 적용합니다.</p>
+        <pre><code>using Janglim.FrontEnd.Grammars.JavaScript;
+
+var language = new TypeScriptGrammar(
+    inputKind: TypeScriptInputKind.Script,
+    mode: JavaScriptMode.Strict);</code></pre>
+        <p>TypeScript API는 JavaScript의 브라우저 호환 옵션을 켜지 않습니다. JavaScript의 HTML 주석 등 Annex B 구문을 검사하려면 <a href="javascript-non-strict.html">JavaScriptGrammar의 웹 호환 설정</a>을 사용합니다.</p>
+      </section>
+
+      <section id="scope">
+        <h2>0.6.0에서는 타입·선언·단언·클래스 확장을 제공합니다.</h2>
+        <p>TypeScript 문법은 JavaScript 구문을 바탕으로 추가됩니다. 아래 표는 이번 버전에서 연결한 주요 문법이며, 각 영역의 문맥 조건도 정적 검사에 포함합니다.</p>
+        <div class="table-wrap"><table>
+          <caption>지원하는 주요 TypeScript 구문</caption>
+          <thead><tr><th scope="col">영역</th><th scope="col">내용</th></tr></thead>
+          <tbody>
+            <tr><td>타입</td><td>기본·리터럴·배열·튜플·객체 타입, 합집합·교집합, 제네릭 타입 참조, 함수·생성자 타입, 조건부·매핑·템플릿 리터럴 타입, <code>keyof</code>·<code>typeof</code>·<code>infer</code>와 인덱스 접근 타입</td></tr>
+            <tr><td>선언과 매개변수</td><td>타입 주석, 타입 매개변수, 함수 시그니처, <code>interface</code>·<code>type</code>·<code>enum</code>·<code>namespace</code>와 <code>declare</code> 선언</td></tr>
+            <tr><td>표현식 확장</td><td><code>as</code>·<code>satisfies</code>·non-null 단언 <code>!</code>과 해당 구문의 연산자 우선순위·줄바꿈 조건</td></tr>
+            <tr><td>클래스</td><td>접근 제한자, <code>readonly</code>·<code>override</code>·<code>abstract</code>·<code>declare</code>·<code>accessor</code>, 선택적·확정 할당 필드, 제네릭 상속·<code>implements</code>, 메서드 시그니처, 생성자 매개변수 프로퍼티, 인덱스 시그니처</td></tr>
+          </tbody>
+        </table></div>
+        <p>예를 들어 제네릭 클래스와 상속절의 타입 인수는 지원합니다. 다만 호출식에서 타입 인수를 사용하는 문법은 별도로 연결해야 하므로, 다음 절에서 현재 남아 있는 구문을 구분합니다.</p>
+      </section>
+
+      <section id="remaining">
+        <h2>호출식과 모듈의 TypeScript 확장 등은 후속 범위입니다.</h2>
+        <p>다음 구문은 0.6.0의 지원 범위에 포함되지 않습니다. 이 구문들이 필요한 입력을 처리하려면 해당 문법 확장과 회귀 검증이 먼저 필요합니다.</p>
+        <div class="table-wrap"><table>
+          <caption>남은 주요 문법과 구체적인 입력 예제</caption>
+          <thead><tr><th scope="col">남은 영역</th><th scope="col">예제</th></tr></thead>
+          <tbody>
+            <tr><td>제네릭 호출·객체 생성·인스턴스화 표현식</td><td><code>make&lt;string&gt;()</code>, <code>new Box&lt;string&gt;()</code>, <code>make&lt;string&gt;</code></td></tr>
+            <tr><td>타입이 붙은 화살표 함수·제네릭 화살표 함수</td><td><code>(x: number): number =&gt; x</code>, <code>&lt;T&gt;(x: T) =&gt; x</code></td></tr>
+            <tr><td>꺾쇠괄호 타입 단언</td><td><code>&lt;User&gt;value</code></td></tr>
+            <tr><td>TypeScript 전용 모듈 구문</td><td><code>import type { User } from './user';</code>, <code>export type { User };</code>, <code>import M = require('m');</code>, <code>export = value;</code></td></tr>
+            <tr><td>데코레이터와 TSX</td><td><code>@sealed class C {}</code>, <code>&lt;Button /&gt;</code></td></tr>
+          </tbody>
+        </table></div>
+        <p>모듈에서 타입 별칭을 선언하는 <code>export type User = string;</code>은 이미 지원합니다. 위 표의 <code>export type { User };</code>는 기존 이름을 타입으로 내보내는 다른 구문입니다.</p>
+      </section>
+
+      <section id="implementation">
+        <h2>TypeScript 계층은 기존 JavaScript 문법과 검사기를 재사용합니다.</h2>
+        <p><code>TypeScriptDialect</code>가 JavaScript 문법에 타입·선언·클래스 규칙을 연결하고, TypeScript의 렉싱 정책이 타입 괄호와 실행 표현식의 연산자를 구분합니다. 공통 파서는 준비된 문법과 입력 공급자로 원문을 읽습니다.</p>
+        <p>정적 검사에서는 TypeScript 전용 조건을 확인한 뒤, JavaScript 검사에 필요한 별도 트리 뷰를 만듭니다. 이 뷰에서 타입 표기를 제외하고 기존 JavaScript 검사를 수행하므로 함수·선언·클래스의 공통 조건을 재사용할 수 있습니다. <span class="core">개발자가 받은 원본 트리에는 타입 노드와 원문 위치가 그대로 보존됩니다.</span></p>
+        <div class="links"><a href="https://github.com/AJ-comp/Compiler/blob/master/grammars/typescript/README.md">문법 파일과 API 안내</a><a href="parser-driven-lexing.html">입력 공급자와 렉싱 정책</a></div>
+      </section>
+
+      <section id="verification">
+        <h2>검증 기준과 저자 맥락</h2>
+        <p>이번 TypeScript 지원은 고정한 TypeScript 7.0.2 참조 구현과 비교하며 개발했습니다. 참조 커밋과 비교 도구는 <a href="https://github.com/AJ-comp/Compiler/blob/master/tools/TypeScript/README.md">TypeScript 검증 도구 안내</a>에 기록되어 있습니다. 2026-10-28 검증에서는 현재 구현 범위의 TypeScript 테스트 975개가 통과했습니다. 전체 TypeScript 문법의 완성 여부는 남은 구문 구현과 별도의 전체 대조로 확인합니다.</p>
+        <p>Janglim의 핵심 LR 구조는 저자가 설계하고 작성했습니다. 이번 TypeScript 문법·렉싱 정책·정적 검사·테스트와 문서는 저자의 기존 엔진과 JavaScript 지원 계층 위에 대화에서 합의한 범위를 AI 보조로 추가했습니다.</p>
+      </section>
+      <footer><div class="links"><a href="index.html">한국어 매뉴얼</a><a href="#purpose">문서 처음으로</a></div></footer>
+    </main>
+  </div>
+</body>
+</html>

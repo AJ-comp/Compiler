@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="기존 재귀 계산에서 전달 관계를 기록하고, 재귀가 끝난 뒤 누락된 룩어헤드를 큐로 전파하는 Janglim 0.6.0 구현을 설명합니다.">
+  <title>재귀 계산과 룩어헤드 후처리 전파 | Janglim</title>
+  <style>
+    :root{color-scheme:light dark;--bg:#fafbf9;--paper:#fff;--ink:#202e29;--secondary:#45564e;--line:#dce4de;--code:#f0f4f1;--accent:#145a45;--accent-soft:#e6f1e9;--production:#6d28d9;--production-soft:#f3edff;--token:#254e79}
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--bg);color:var(--ink);font-family:"Pretendard Variable","Noto Sans KR","Malgun Gothic",system-ui,sans-serif;font-size:19px;line-height:1.95;word-break:keep-all;overflow-wrap:break-word}
+    main{max-width:880px;margin:auto;padding:64px 36px 100px}
+    h1,h2,h3,p,figure{margin:0}
+    h1,h2,h3{font-weight:700;letter-spacing:-.035em}
+    h1{font-size:clamp(31px,4vw,43px);line-height:1.5;max-width:760px}
+    h2{font-size:29px;line-height:1.6;margin-bottom:26px}
+    h3{font-size:23px;line-height:1.7;margin:40px 0 20px}
+    p+p{margin-top:22px}
+    strong{font-weight:700}
+    .core{color:var(--accent);font-weight:700}
+    .lead{font-size:22px;line-height:1.85;margin-top:28px}
+    .intro{margin-top:26px}
+    section{margin-top:78px;padding-top:34px;border-top:1px solid var(--line)}
+    code,pre{font-family:"Cascadia Code",Consolas,"Liberation Mono",monospace;font-variant-ligatures:none}
+    code{font-size:.97em;overflow-wrap:anywhere}
+    p code,li code,td code{padding:2px 5px;background:var(--code);border-radius:4px}
+    code.production{color:var(--production);background:var(--production-soft);font-weight:600}
+    pre{margin:0;white-space:pre-wrap;overflow-wrap:anywhere;word-break:normal;font-size:18px;line-height:1.85}
+    pre code{font-size:inherit}
+    figure{margin:30px 0}
+    figcaption{margin-top:18px;font-size:18px;line-height:1.85;color:var(--secondary)}
+    .code-block{padding:26px 28px;border-radius:9px;background:var(--code)}
+    .code-block figcaption{margin:0 0 16px;color:var(--ink);font-weight:600}
+    .grammar{padding:28px;background:var(--paper);border:1px solid var(--line);border-radius:10px}
+    .grammar pre{font-size:22px;color:var(--production);line-height:1.9}
+    .grammar figcaption{margin:0 0 18px;color:var(--ink);font-weight:600}
+    .diagram{padding:30px;background:var(--paper);border:1px solid var(--line);border-radius:12px}
+    .diagram-title{font-size:20px;font-weight:700;margin-bottom:24px}
+    .object{padding:24px;background:var(--code);border-radius:8px;min-width:0}
+    .object-title{font-size:20px;font-weight:700;margin-bottom:18px}
+    .object code{display:block;font-size:19px;line-height:1.9}
+    .object code+code{margin-top:9px}
+    .field-note{font-size:18px;margin-top:18px}
+    .key{font-size:18px;margin-bottom:18px}
+    .alias-columns{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:28px;align-items:end}
+    .memory-svg{display:block;width:100%;overflow:visible}
+    .memory-svg text{font-family:Consolas,"Malgun Gothic",monospace;font-size:18px;fill:var(--ink)}
+    .memory-svg .box{fill:var(--code);stroke:var(--line);stroke-width:1}
+    .memory-svg .set-box{fill:var(--accent-soft);stroke:none}
+    .memory-svg .edge{fill:none;stroke:var(--secondary);stroke-width:1.6}
+    .memory-svg .strong{font-weight:700}
+    .reference{min-width:0}
+    .reference>code{display:block;font-size:19px}
+    .reference .object{margin:18px 0}
+    .reference .property{font-size:20px;color:var(--accent);font-weight:600}
+    .arrow{font-size:31px;line-height:1.3;text-align:center;color:var(--secondary);margin:18px 0}
+    .shared{text-align:center;padding:25px;margin-top:10px;background:var(--accent-soft);border-radius:8px}
+    .shared strong{display:block;font-size:22px;color:var(--accent)}
+    .shared code{display:block;font-size:25px;margin-top:10px}
+    .transfer{display:grid;grid-template-columns:minmax(0,1fr) 60px minmax(0,1fr);gap:16px;align-items:center}
+    .transfer .object{padding:22px}
+    .transfer .object-title{font-size:18px;font-weight:600}
+    .set{font-size:28px;font-family:Consolas,monospace;color:var(--accent);line-height:1.7}
+    .operation{margin-top:26px;font-size:19px;text-align:center}
+    .route{display:flex;flex-wrap:wrap;gap:16px;align-items:center}
+    .route code{font-size:19px;line-height:1.8}
+    .route .arrow{margin:0;font-size:25px}
+    .route-vertical{display:grid;gap:16px;justify-items:start}
+    .route-vertical>code{font-size:21px}
+    .route-vertical>.arrow{margin:0 0 0 24px;font-size:27px}
+    .definition{margin:24px 0;padding-left:26px}
+    .definition li{padding-left:7px;margin-top:17px}
+    .worklist{display:grid;gap:15px;margin-top:22px}
+    .worklist>div{padding:16px 20px;background:var(--code);border-radius:7px}
+    .worklist code{font-size:19px}
+    .state-change{display:grid;grid-template-columns:minmax(0,1fr) 42px minmax(0,1fr);gap:18px;align-items:center}
+    .state-change .object-title{font-size:19px}
+    .state-change .value{font-family:Consolas,monospace;font-size:23px;color:var(--accent)}
+    .close{margin-top:32px}
+    a{color:var(--accent);text-underline-offset:4px}
+    a:focus-visible{outline:3px solid var(--accent);outline-offset:5px}
+    table{width:100%;border-collapse:collapse;text-align:left;margin:26px 0;font-size:18px} th,td{padding:16px 12px;border-bottom:1px solid var(--line);vertical-align:top} th{font-weight:700} @media(max-width:650px){th,td{padding:14px 7px;font-size:17px}}
+    .illustration{margin:32px 0} .illustration picture{display:block} .illustration img{display:block;width:100%;height:auto;border-radius:12px} .illustration figcaption{color:var(--secondary);font-size:18px} @media(max-width:650px){.illustration img{width:100%;height:auto}}
+    .overview{position:relative;left:50%;transform:translateX(-50%);width:min(1540px,calc(100vw - 40px));margin:32px 0 36px}
+    .graph-scroll{overflow-x:auto;border:1px solid var(--line);border-radius:12px;background:var(--paper)}
+    .graph-scroll a{display:block;width:100%;min-width:1120px}
+    .graph-scroll img{display:block;width:100%;height:auto}
+    .overview figcaption{max-width:808px;margin:18px auto 0}
+    footer{margin-top:70px;border-top:1px solid var(--line);padding-top:28px;color:var(--secondary);font-size:18px}
+    @media(prefers-color-scheme:dark){:root{--bg:#151c18;--paper:#202a24;--ink:#e8efea;--secondary:#c0cdc5;--line:#405248;--code:#28362d;--accent:#a5dfbf;--accent-soft:#2c4735;--production:#d8b4fe;--production-soft:#30203f;--token:#b2d1f2}}
+    @media(max-width:650px){body{font-size:18px}main{padding:36px 20px 70px}h2{font-size:26px}.lead{font-size:21px}section{margin-top:60px;padding-top:28px}.diagram,.grammar,.code-block{padding:23px 20px}.grammar pre{font-size:20px}.alias-columns,.transfer,.state-change{grid-template-columns:1fr;gap:16px}.transfer>.arrow,.state-change>.arrow{transform:rotate(90deg);margin:0}.reference .arrow{margin:14px 0}.reference+.reference{margin-top:18px}.object{padding:21px}.object code{font-size:18px}.diagram-title{font-size:19px}.set{font-size:26px}.route{display:grid;grid-template-columns:1fr;gap:14px}.route .arrow{justify-self:start;transform:rotate(90deg);margin-left:18px}}
+    @media(max-width:370px){main{padding-left:16px;padding-right:16px}.diagram,.grammar,.code-block{padding:21px 16px}.object{padding:18px}pre{font-size:17px}}
+    @media print{body{background:white;color:#202e29;font-size:12pt}main{padding:0;max-width:none}section{margin-top:34px}.diagram,.grammar,.code-block{break-inside:avoid}h1{font-size:26pt}h2{font-size:20pt}footer{margin-top:36px}}
+  </style>
+</head>
+<body>
+<main>
+  <header id="purpose">
+    <h1>재귀에서 전달 관계를 기록하고,<br>재귀가 끝난 뒤 누락분을 합칩니다.</h1>
+    <p class="lead">룩어헤드 집합을 한 번 읽었다고 해서 그 집합의 계산이 끝난 것은 아닙니다. 따라서 <strong>다른 항목의 집합을 사용한 관계를 기록해 두고, 나중에 추가된 토큰도 같은 대상에게 전달합니다.</strong></p>
+    <p>이 문서는 LR 항목과 룩어헤드를 알고 있는 독자를 대상으로 Janglim 0.6.0의 구현을 설명합니다. 저자가 작성한 기존 재귀 계산 흐름은 유지하고, 그 흐름에 전달 관계 기록과 후처리 전파를 보강했습니다.</p>
+  </header>
+
+  <section id="connections">
+    <h2>기존 재귀가 계산하고, 후처리가 빠진 값을 채웁니다.</h2>
+    <p><code>CalculateLookAhead()</code>는 Reduce에 사용할 완료 항목부터 <code>LookAhead(state, item)</code>을 호출합니다. <code>LookAhead</code>는 기존처럼 <code>PredEx</code>로 관련 선행 상태를 찾고, 그 상태에서 현재 비단말을 참조하는 항목의 FIRST와 룩어헤드를 계산에 사용합니다.</p>
+    <p>그런데 재귀가 순환하면 아직 계산 중인 집합을 먼저 읽을 수 있습니다. 그때 집합이 비어 있었다면, <code>UnionWith</code>도 아무 토큰을 추가하지 않습니다. 이후 원래 집합에 토큰이 생겨도 <strong>이미 합쳤던 다른 집합까지 자동으로 바뀌지는 않습니다.</strong></p>
+    <p>그래서 이번 구현은 다른 항목의 룩어헤드를 사용할 때 전달 관계도 기록합니다. 모든 재귀 호출이 끝나면 <code>PropagateLookAhead()</code>가 그 관계를 따라 집합을 다시 합칩니다.</p>
+    <figure class="code-block">
+      <figcaption>CalculateLookAhead의 전체 호출 순서</figcaption>
+      <pre><code>private void CalculateLookAhead()
+{
+    foreach (var state in GetStateSetHasReachedHandle())
+    {
+        foreach (var item in state.ReachedHandleItem)
+            LookAhead(state, item);
+    }
+
+    PropagateLookAhead();
+}</code></pre>
+    </figure>
+  </section>
+
+  <section id="entry-setup">
+    <h2>집합과 전달 대상을 같은 Entry에 보관합니다.</h2>
+    <p>각 집합의 주인을 구분하는 키는 <strong>상태 번호와 LR 항목의 쌍</strong>입니다. <code>LookAheadTable</code>은 그 키에 대응하는 <code>LookAheadEntry</code>를 보관합니다. Entry의 <code>LookAhead</code>에는 계산 중인 토큰 집합을, <code>Targets</code>에는 이 집합을 전달할 대상들의 키를 넣습니다.</p>
+    <figure class="code-block">
+      <figcaption>테이블의 값으로 사용하는 클래스</figcaption>
+      <pre><code>public sealed class LookAheadEntry
+{
+    public TerminalSet LookAhead { get; } = new TerminalSet();
+
+    public HashSet&lt;(int State, LRItem Item)&gt; Targets { get; }
+        = new HashSet&lt;(int State, LRItem Item)&gt;();
+}</code></pre>
+    </figure>
+    <p>재귀 함수는 계산을 시작할 때 Entry를 등록하고, <code>result</code>가 그 Entry의 집합을 가리키도록 합니다. 따라서 <code>result</code>에 토큰을 추가하면 테이블에서 조회한 집합에도 같은 변경이 보입니다.</p>
+    <figure class="code-block">
+      <pre><code>var entry = new LookAheadEntry();
+LookAheadTable.Add((state.StateNumber, item), entry);
+
+var result = entry.LookAhead;</code></pre>
+    </figure>
+    <p class="core">result와 entry.LookAhead는 같은 집합입니다. 다만 서로 다른 Entry는 각각 별도의 집합을 가지므로, Entry 사이에는 여전히 전파가 필요합니다.</p>
+  </section>
+
+  <section id="full-relations">
+    <h2>상위 룩어헤드를 사용하는 곳에서 관계를 기록합니다.</h2>
+    <p>다음 문법으로 전달 방향을 보겠습니다. 시작 비단말은 S이고, 엔진이 추가한 시작 규칙은 <code>Accept → S</code>입니다.</p>
+    <figure class="code-block grammar">
+      <pre><code>S : A ;
+A : 'a' ;</code></pre>
+    </figure>
+    <p><code>A → a•</code>의 룩어헤드를 계산할 때는 A를 참조하는 <code>S → •A</code> 항목을 찾습니다. A 뒤에는 기호가 없으므로 이 항목의 룩어헤드가 필요합니다. 따라서 <strong>S 항목의 Entry에 A 완료 항목의 키를 전달 대상으로 등록</strong>합니다.</p>
+    <p>아래 두 상자는 각각 해당 상태의 LR 항목을 키로 조회한 Entry입니다. <code>Targets</code>의 화살표는 룩어헤드를 전달하는 방향이며, 파싱 중 상태를 이동하는 Goto와는 별도로 기록한 관계입니다.</p>
+    <figure class="diagram">
+      <div class="object">
+        <div class="object-title">LookAheadEntry · 전달하는 쪽</div>
+        <code>S → •A</code>
+        <code>LookAhead = {EOF}</code>
+        <p class="field-note"><code>Targets</code>에 <strong>A → a•가 속한 상태 번호와 그 LR 항목</strong>의 쌍을 등록합니다.</p>
+      </div>
+      <div class="arrow" aria-hidden="true">↓</div>
+      <div class="object">
+        <div class="object-title">LookAheadEntry · 전달받는 쪽</div>
+        <code>A → a•</code>
+        <p class="field-note">이 Entry의 <code>LookAhead</code>가 <code>S → •A</code>의 룩어헤드를 전달받습니다.</p>
+      </div>
+      <figcaption>S 항목도 S 뒤에 기호가 없는 Accept → •S 항목에서 EOF를 얻습니다. 이처럼 필요한 상위 집합을 재귀로 계산하면서 전달 관계를 함께 기록합니다.</figcaption>
+    </figure>
+    <p>코드에서는 현재 계산 중인 항목이 <code>item</code>, 그 비단말을 참조하는 상위 항목이 <code>newLRItem</code>입니다. <code>alpha2</code>는 상위 항목에서 그 비단말 뒤에 있는 기호열의 FIRST입니다.</p>
+    <figure class="code-block">
+      <figcaption>LookAhead 안에서 상위 집합을 사용하는 부분</figcaption>
+      <pre><code>var alpha2 = _ffAnalyzer.First(newLRItem.SymbolListAfterMarkSymbol);
+
+if (alpha2.Contains(new Epsilon()))
+{
+    var laTerminalSet =
+        LookAheadTable.ContainsKey((predState.StateNumber, newLRItem))
+        ? LookAheadTable[(predState.StateNumber, newLRItem)].LookAhead
+        : LookAhead(predState, newLRItem);
+
+    RecordLookAheadTarget(
+        source: (predState.StateNumber, newLRItem),
+        target: (state.StateNumber, item));
+
+    result.UnionWith(alpha2.RingSum(laTerminalSet));
+}
+else
+{
+    result.UnionWith(alpha2);
+}</code></pre>
+    </figure>
+    <p><code>RecordLookAheadTarget</code>은 <code>LookAheadTable[source].Targets.Add(target)</code>를 실행합니다. 상위 집합을 전달하는 쪽에 현재 항목의 키를 기록하는 것입니다.</p>
+    <p>반면 <code>S → •A e</code>에서는 A 뒤의 FIRST가 <code>{e}</code>입니다. 이 경우에는 A의 집합에 e를 직접 추가하면 됩니다. <strong>뒤의 기호열이 ε을 만들 수 있을 때에만 상위 룩어헤드가 필요하므로, Targets도 그 경우에만 기록합니다.</strong> 빈 기호열의 FIRST는 <code>{ε}</code>이므로 앞의 <code>S → •A</code>도 같은 조건으로 처리됩니다.</p>
+  </section>
+
+  <section id="requeue">
+    <h2>재귀가 끝나면, 새 토큰을 얻은 Entry를 다시 전달합니다.</h2>
+    <p>이제 전달 관계가 기록되어 있으므로 후처리는 그 관계를 따라 집합을 합치면 됩니다. 처리할 Entry를 담는 큐의 이름은 <code>pending</code>입니다. 큐에서 꺼낸 Entry를 <code>source</code>, 이번에 집합을 전달받는 Entry를 <code>target</code>이라고 부릅니다.</p>
+    <p>처음에는 테이블에 있는 Entry를 모두 큐에 넣습니다. 재귀에서 이미 얻은 토큰도 전달 대상에게 합쳐야 하기 때문입니다. 이후에는 집합이 늘어난 Entry만 다시 큐에 넣습니다.</p>
+    <figure class="code-block">
+      <figcaption>PropagateLookAhead 구현</figcaption>
+      <pre><code>private void PropagateLookAhead()
+{
+    var pending = new Queue&lt;LookAheadEntry&gt;(LookAheadTable.Values);
+
+    while (pending.Count &gt; 0)
+    {
+        var source = pending.Dequeue();
+
+        foreach (var targetKey in source.Targets)
+        {
+            var target = LookAheadTable[targetKey];
+            int beforeCount = target.LookAhead.Count;
+
+            // 기존 토큰은 유지하고, source에만 있던 토큰을 추가합니다.
+            target.LookAhead.UnionWith(source.LookAhead);
+
+            // 새 토큰이 없으면 이 대상의 처리를 끝냅니다.
+            if (target.LookAhead.Count == beforeCount)
+                continue;
+
+            // target이 새로 얻은 토큰을 자신의 대상에게도 전달하게 합니다.
+            pending.Enqueue(target);
+        }
+    }
+}</code></pre>
+    </figure>
+    <p>예를 들어 target이 이미 <code>{e}</code>를 전달한 뒤, 다른 source에서 f를 받았다고 하겠습니다. target의 집합은 <code>{e, f}</code>로 늘어납니다. 그래서 target을 큐에 다시 넣고, 나중에 그 Entry를 꺼내면 그 Entry의 대상들도 f를 받습니다.</p>
+    <p class="core">집합이 늘었을 때만 다시 전달하므로, 순환 관계가 있어도 같은 토큰을 계속 보내며 반복하지 않습니다. 큐에 남은 Entry까지 처리하고 더 이상 새 토큰이 추가되지 않으면 전파가 끝납니다.</p>
+    <p>전파가 끝난 집합은 해당 LR 항목의 <code>LookAhead</code>에 연결됩니다. 파싱 테이블은 완료 항목의 이 집합을 사용해 Reduce할 입력 토큰을 정합니다.</p>
+  </section>
+
+  <section id="verification">
+    <h2>완료 항목의 집합과 실제 파싱 결과를 확인합니다.</h2>
+    <p>회귀 테스트는 순환 참조, 뒤늦게 추가되는 EOF, 여러 경로의 합류, nullable 기호열을 검사합니다. 별도의 정규 LR(1) 계산 후 같은 LR(0) 핵을 합친 결과와 비교하여, 완료 항목의 룩어헤드가 정확한지도 확인합니다.</p>
+    <p>또한 연결된 대상에는 새 토큰이 도달하고, 연결되지 않은 항목에는 토큰이 섞이지 않는지 검사합니다. 시작·중간 항목을 모두 테이블에 만드는 것을 요구하는 대신, <strong>Reduce에 필요한 완료 항목의 정확한 집합과 입력의 수락·거부 결과</strong>를 검증 기준으로 삼습니다.</p>
+  </section>
+  <footer>
+    <p><a href="https://github.com/AJ-comp/Compiler/blob/master/src/FrontEnd/Parse.FrontEnd.Parsers/Collections/CanonicalRelation.cs">CanonicalRelation.cs</a> · <code>CalculateLookAhead</code> / <code>LookAhead</code> / <code>PropagateLookAhead</code></p>
+    <p><a href="https://github.com/AJ-comp/Compiler/blob/master/Tests/Parse.FrontEnd.Parsers.Tests/LalrLookaheadRegressionTests.cs">문법 회귀 테스트</a> · <a href="https://github.com/AJ-comp/Compiler/blob/master/Tests/Parse.FrontEnd.Parsers.Tests/LalrLookaheadPropagationTests.cs">전파 테스트</a> · <a href="https://github.com/AJ-comp/Compiler/blob/master/Tests/Parse.FrontEnd.Parsers.Tests/LalrLookaheadReferenceTests.cs">독립 계산 대조 테스트</a></p>
+  </footer>
+</main>
+
+</body>
+</html>

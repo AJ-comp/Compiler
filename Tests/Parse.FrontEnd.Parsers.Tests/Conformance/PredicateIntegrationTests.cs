@@ -777,7 +777,20 @@ public class PredicateIntegrationTests
         public Terminal Plus => plus;
         public NonTerminal Expr => expression;
 
-        public TestGrammar(Action<TestGrammar> define) => define(this);
+        public TestGrammar(Action<TestGrammar> define)
+        {
+            define(this);
+
+            // Unconfigured helper fields that no production references are not
+            // part of the configured test grammar. Keep referenced empty rules.
+            var referenced = NonTerminalMultiples
+                .SelectMany(rule => rule)
+                .SelectMany(production => production)
+                .OfType<NonTerminal>()
+                .ToHashSet();
+            NonTerminalMultiples.RemoveWhere(rule =>
+                rule.Count == 0 && !rule.IsStartSymbol && !referenced.Contains(rule));
+        }
 
         public void Guard(NonTerminal target, string name, Func<PredicateContext, bool> callback)
             => target.Add(new NonTerminalConcat(new Epsilon()) { Predicate = new GrammarPredicate(name, callback) });

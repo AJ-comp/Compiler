@@ -23,6 +23,8 @@ namespace Janglim.FrontEnd.Grammars.JavaScript
             new ConditionalWeakTable<Janglim.FrontEnd.TokenData, State>();
         private readonly ConditionalWeakTable<Janglim.FrontEnd.TokenData, AsyncPrefix> asyncPrefixes =
             new ConditionalWeakTable<Janglim.FrontEnd.TokenData, AsyncPrefix>();
+        private readonly ConditionalWeakTable<Janglim.FrontEnd.TokenData, LetPrefix> letPrefixes =
+            new ConditionalWeakTable<Janglim.FrontEnd.TokenData, LetPrefix>();
 
         internal JavaScriptSlashContext(bool script, bool module = false)
         {
@@ -32,7 +34,16 @@ namespace Janglim.FrontEnd.Grammars.JavaScript
         }
 
         internal bool UseDivision(LexicalContext context) => !Get(context.PreviousToken).Operand;
+        internal void ObserveTransparent(Janglim.FrontEnd.TokenData previous, Janglim.FrontEnd.TokenData token)
+            => states.GetValue(token, _ => Get(previous));
         internal bool IsArrowBlockEnd(Janglim.FrontEnd.TokenData token) => Get(token).ArrowBlockEnd;
+        internal bool IsYieldIdentifierBefore(Janglim.FrontEnd.TokenData token) => Get(token).PreviousYieldIdentifier;
+        internal bool IsLetDeclarationStart(Janglim.FrontEnd.TokenData token)
+            => token?.Input == "let" && letPrefixes.TryGetValue(token, out var prefix) && prefix.Binding;
+        internal bool IsLetBracket(Janglim.FrontEnd.TokenData token)
+            => token?.Input == "let" && letPrefixes.TryGetValue(token, out var prefix) && prefix.Bracket;
+        internal void ObserveLet(Janglim.FrontEnd.TokenData token, Janglim.FrontEnd.TokenData following)
+            => letPrefixes.GetValue(token, _ => new LetPrefix(following));
         internal bool IsAsyncFunctionStart(Janglim.FrontEnd.TokenData token)
             => token != null && asyncPrefixes.TryGetValue(token, out var prefix) && prefix.Function;
         internal bool CanContinueClassModifier(Janglim.FrontEnd.TokenData token)
@@ -41,11 +52,12 @@ namespace Janglim.FrontEnd.Grammars.JavaScript
             return IsClassFrame(frame?.Kind) && frame.Element == 1 && frame.Prefix >= 1 && frame.Prefix <= 3;
         }
 
-        internal void Observe(Janglim.FrontEnd.TokenData previous, Janglim.FrontEnd.TokenData token, string input)
+        internal void Observe(Janglim.FrontEnd.TokenData previous, Janglim.FrontEnd.TokenData token, string input,
+            bool previousContextualIdentifier = false, bool previousAwaitOperand = false)
         {
             var before = Get(previous);
-            states.GetValue(token, _ => Advance(before, token));
             if (token.Input == "async") asyncPrefixes.GetValue(token, _ => new AsyncPrefix(StartsAsyncFunction(input, token.EndIndex + 1)));
+            states.GetValue(token, _ => Advance(before, token, previousContextualIdentifier, previousAwaitOperand));
         }
 
         // A contextual async prefix is determined from exact source spelling and
@@ -88,6 +100,21 @@ namespace Janglim.FrontEnd.Grammars.JavaScript
             internal bool Function { get; }
         }
 
+        private sealed class LetPrefix
+        {
+            internal LetPrefix(Janglim.FrontEnd.TokenData following)
+            {
+                Bracket = following.Input == "[";
+                Binding = following.Input == "[" || following.Input == "{" || following.Kind.Caption == "IdentifierName" ||
+                    following.Input == "await" || following.Input == "async" || following.Input == "of" ||
+                    following.Input == "yield" || following.Input == "let" || following.Input == "static" ||
+                    following.Input == "implements" || following.Input == "interface" || following.Input == "package" ||
+                    following.Input == "private" || following.Input == "protected" || following.Input == "public";
+            }
+            internal bool Binding { get; }
+            internal bool Bracket { get; }
+        }
+
         private State Get(Janglim.FrontEnd.TokenData token)
         {
             if (ReferenceEquals(token, null)) return initial;
@@ -95,7 +122,8 @@ namespace Janglim.FrontEnd.Grammars.JavaScript
             throw new InvalidOperationException("JavaScript token context requires tokens from this language's token source.");
         }
 
-        private State Advance(State before, Janglim.FrontEnd.TokenData token)
+        private State Advance(State before, Janglim.FrontEnd.TokenData token, bool previousContextualIdentifier,
+            bool previousAwaitOperand)
         {
             Frame frame = before.Frame;
             bool operand = before.Operand, statement = before.Statement, control = before.Control;
@@ -107,8 +135,16 @@ namespace Janglim.FrontEnd.Grammars.JavaScript
             bool property = previous == "." || previous == "?.";
             bool classFrame = IsClassFrame(frame?.Kind);
             bool objectFrame = frame?.Kind == "object";
-            bool asyncStatement = text == "async" && !property &&
-                (statement || module && previous == "default" || token.HasLineBreakBefore && before.ArrowBlockEnd);
+            // The JavaScript policy returns Div only if the current parser state
+            // expects a division continuation. On the next read this distinguishes
+            // an identifier `let`/`yield` from its declaration/keyword spelling.
+            // The fact belongs to this read, including speculative read branches.
+            if (previousContextualIdentifier) operand = false;
+            // The grammar can require an AwaitExpression operand in Script async
+            // code as well as Module code. Unlike an identifier `await`, that
+            // keyword cannot finish a statement at the following line terminator.
+            // Apply the immutable goal fact before deciding declaration vs expression.
+            if (previousAwaitOperand) operand = true;
             // ASI can finish a field before a new name on the next line. Calls and
             // computed-member suffixes still continue its initializer expression.
             if (classFrame && frame.Element == 2 && token.HasLineBreakBefore &&
@@ -118,9 +154,15 @@ namespace Janglim.FrontEnd.Grammars.JavaScript
                 IsElementName(token)) frame = frame.WithElement(0);
             bool elementName = (classFrame || objectFrame) && frame.Element != 2;
             bool statementScope = frame == null ? script : IsStatementFrame(frame.Kind);
+            bool startsStatement = text == "function" || text == "class" || text == "{" ||
+                text == "async" && IsAsyncFunctionStart(token) || text == "let" && IsLetDeclarationStart(token);
             if (token.HasLineBreakBefore && statementScope &&
                 (previous == "return" || previous == "break" || previous == "continue" ||
-                 !operand && (text == "function" || text == "class" || text == "{"))) statement = true;
+                 previous == "yield" && !previousContextualIdentifier || !operand && startsStatement)) statement = true;
+            // A newline may have just ended return/yield/an expression. Determine
+            // async declaration/expression role after that ASI transition, not before.
+            bool asyncStatement = text == "async" && !property &&
+                (statement || module && previous == "default" || token.HasLineBreakBefore && before.ArrowBlockEnd);
             if (caption == "TemplateHead")
             {
                 frame = new Frame("template", frame, ternary); ternary = 0;
@@ -156,7 +198,7 @@ namespace Janglim.FrontEnd.Grammars.JavaScript
                     previous == "async" && before.AsyncStatement && !token.HasLineBreakBefore ? "declaration" : "expression";
                 operand = true; statement = false;
             }
-            else if (!property && !elementName && (text == "if" || text == "while" || text == "for" || text == "switch" || text == "catch"))
+            else if (!property && !elementName && (text == "if" || text == "while" || text == "for" || text == "switch" || text == "catch" || text == "with"))
             {
                 control = true; operand = true; statement = text == "catch";
             }
@@ -233,6 +275,9 @@ namespace Janglim.FrontEnd.Grammars.JavaScript
             { operand = true; statement = false; }
             else if (!property && !elementName && text == "yield")
             { operand = true; statement = false; }
+            else if (!property && !elementName && text == "let" && letPrefixes.TryGetValue(token, out var letPrefix) &&
+                (!letPrefix.Binding || !statement))
+            { operand = false; statement = false; }
             else if (!property && (IsOperator(text) || text == "return" || text == "throw" || text == "var" || text == "let" || text == "const"))
             { operand = true; statement = false; }
             else { operand = false; statement = false; }
@@ -241,7 +286,8 @@ namespace Janglim.FrontEnd.Grammars.JavaScript
                 if (text == "=") frame = frame.WithElement(2);
                 else if (elementName && IsElementName(token)) frame = frame.WithName(text);
             }
-            return new State(frame, operand, statement, control, function, body, text, ternary, arrowBlockEnd, classes, asyncStatement);
+            return new State(frame, operand, statement, control, function, body, text, ternary, arrowBlockEnd, classes, asyncStatement,
+                previous == "yield" && previousContextualIdentifier);
         }
 
         private static bool IsClassFrame(string kind) => kind != null && kind.StartsWith("class:", StringComparison.Ordinal);
@@ -293,11 +339,12 @@ namespace Janglim.FrontEnd.Grammars.JavaScript
         private sealed class State
         {
             internal State(Frame frame, bool operand, bool statement, bool control, string function, string body,
-                string previous, int ternary, bool arrowBlockEnd, ClassHeader classes, bool asyncStatement)
+                string previous, int ternary, bool arrowBlockEnd, ClassHeader classes, bool asyncStatement, bool previousYieldIdentifier = false)
             {
                 Frame = frame; Operand = operand; Statement = statement; Control = control; Function = function;
                 Body = body; Previous = previous; Ternary = ternary; ArrowBlockEnd = arrowBlockEnd; Classes = classes;
                 AsyncStatement = asyncStatement;
+                PreviousYieldIdentifier = previousYieldIdentifier;
             }
             internal Frame Frame { get; }
             internal bool Operand { get; }
@@ -310,6 +357,7 @@ namespace Janglim.FrontEnd.Grammars.JavaScript
             internal bool ArrowBlockEnd { get; }
             internal ClassHeader Classes { get; }
             internal bool AsyncStatement { get; }
+            internal bool PreviousYieldIdentifier { get; }
         }
     }
 }

@@ -11,31 +11,37 @@ Define a grammar in plain C# or EBNF text and get a full LR pipeline you can loo
 parse tables, FIRST/FOLLOW, step-by-step parse traces, conflict reports, automatic grammar normalization, optional LGLR
 backtracking, incremental reparsing, and pluggable error recovery.
 
-> **Engine `0.5.0` · web Playground `1.1.0` · remote MCP `0.1.0`.**
+> **Engine `0.6.0` · web Playground `1.1.0` · remote MCP `0.1.0`.**
 > These products are versioned independently. `LALRParser` is the supported engine path;
 > SLR and CLR remain experimental and incomplete. The engine's public API may evolve across `0.x`.
 
 Install the engine:
 
 ```bash
-dotnet add package Janglim --version 0.5.0
+dotnet add package Janglim --version 0.6.0
 ```
 
 See the [release notes](RELEASE_NOTES.md) for the release scope and
 [changelog](CHANGELOG.md) for version history. Maintainers can follow the
 [GitHub Actions release guide](.github/RELEASING.md) to publish the engine and deploy the Playground.
 
-Engine `0.5.0` adds:
+Engine `0.6.0` adds:
 
-- [Longest-match lexing](#token-selection): compare the text matched by each registered rule,
-  resolve equal lengths by rule priority, and use regexes without adding automatic `\b` boundaries.
-- [Parser-driven lexing](#parser-driven-lexing): register token-rule groups in a `LexicalPolicy`,
-  create a token source, and let that policy select a group before each requested token.
-  Prediction candidates keep independent input cursors and lexical state.
-- [JavaScript grammar profiles](#javascript-grammar-profiles) for ECMAScript 2026 strict Script
-  expressions, Scripts, and Modules, including templates, destructuring, functions, classes,
-  imports/exports, async functions, generators, and regular-expression body validation.
-- Illustrated guides for token exchange, cursor ownership, and JavaScript language support.
+- A unified [JavaScript grammar API](#javascript-grammar), non-strict mode and optional
+  Annex B browser compatibility, with a pinned ECMAScript 2026/Test262 syntax audit.
+- Initial [TypeScript support](#typescript-grammar): type syntax, declarations, `as`,
+  `satisfies`, non-null assertions, and typed class members built on the JavaScript layer.
+- LALR lookahead propagation that carries late additions to dependent items, correct
+  `FIRST` results for empty symbol sequences, and diagnostics for nonterminals that cannot
+  derive a finite input. See the [lookahead implementation guide](docs/ko/lalr-lookahead-propagation.html).
+- Updated language guides and diagrams for parser-driven token exchange.
+
+**Upgrading from `0.5.0`:** replace `JavaScriptScriptGrammar` with `JavaScriptGrammar`.
+Replace `JavaScriptModuleGrammar` and `JavaScriptExpressionGrammar` with the same class
+and an explicit `JavaScriptInputKind.Module` or `.Expression`. The parsing/validation
+workflow is unchanged. Code that reads `CanonicalRelation.LookAheadTable[key]` now obtains
+a `LookAheadEntry`; use `.LookAhead` to access its terminal set. The
+[release notes](RELEASE_NOTES.md) describe these API changes and the grammar validation changes.
 
 ## Quick start
 
@@ -98,7 +104,7 @@ and Italian. It follows the browser language by default and remembers an explici
 Grammar symbols, parser actions, and engine diagnostics keep their original identifiers and text.
 
 Parsing runs entirely in your browser through **Blazor WebAssembly**, with the React interface in
-[`samples/Playground`](samples/Playground). Builds from this source tree use engine `0.5.0`.
+[`samples/Playground`](samples/Playground). Builds from this source tree use engine `0.6.0`.
 The web and engine release numbers are independent.
 
 **📖 [Read the manual →](https://aj-comp.github.io/Compiler/)** — a from-scratch guide to LR/LALR
@@ -144,7 +150,8 @@ operations, and remote verification. Local development still uses the .NET 10 SD
 - [Parsing](#parsing)
 - [Token selection](#token-selection) — longest returned match and equal-length priority
 - [Parser-driven lexing](#parser-driven-lexing) — policy selection and lazy token requests
-- [JavaScript grammar profiles](#javascript-grammar-profiles) — strict Script and Module inputs
+- [JavaScript grammar](#javascript-grammar) — one API with Script, Module, and Expression input kinds
+- [TypeScript grammar](#typescript-grammar) — current syntax support and remaining work
 - [Lexer source trivia](#lexer-source-trivia) — skipped source text and line-break information
 - [Looking inside the parser](#looking-inside-the-parser) — parse trace, FIRST/FOLLOW, conflicts, tables
 - [Automatic grammar normalization](#automatic-grammar-normalization)
@@ -386,7 +393,7 @@ if (result.Success)
 }
 ```
 
-`LALRParser` is the supported parser for the `0.5.0` release. SLR and CLR variants are experimental
+`LALRParser` is the supported parser for the `0.6.0` release. SLR and CLR variants are experimental
 and incomplete — see [Known limitations](#status--known-limitations).
 
 ### Token selection
@@ -432,22 +439,23 @@ not consume input. Prediction candidates keep their own cursor, previous token, 
 state, so speculative reads do not advance the actual parser.
 
 The default policy compares expected terminals with the registered groups. A pure C# selector
-can handle contexts that need the state stack or consumed-token history. The JavaScript profiles
-provide their own selector for slash, template, and statement contexts. See the
+can handle contexts that need the state stack or consumed-token history. The JavaScript grammar
+provides its own selector for slash, template, and statement contexts. See the
 [illustrated token-exchange guide](docs/ko/parser-driven-lexing.html), including
 [cursor fields and ownership](docs/ko/parser-driven-lexing.html#cursor-example).
 
-### JavaScript grammar profiles
+### JavaScript grammar
 
-The package includes `Janglim.FrontEnd.Grammars.JavaScript` with three entry points:
+Use `Janglim.FrontEnd.Grammars.JavaScript.JavaScriptGrammar` for JavaScript input.
+The default constructor reads a Script; set `inputKind` for a Module or a single expression:
 
-| Class | Input |
+| `JavaScriptInputKind` | Input |
 | --- | --- |
-| `JavaScriptExpressionGrammar` | One expression in a strict Script context |
-| `JavaScriptScriptGrammar` | Declarations and statements in a strict Script context |
-| `JavaScriptModuleGrammar` | A Module, including import/export and top-level await |
+| `Script` (default) | Declarations and statements with selectable initial strictness |
+| `Module` | A Module, including import/export and top-level await; always strict |
+| `Expression` | One expression with selectable initial Script strictness |
 
-The profiles target ECMAScript 2026. They include Unicode 17 identifiers, numeric/string/BigInt
+The grammar targets ECMAScript 2026. It includes Unicode 17 identifiers, numeric/string/BigInt
 literals, operator precedence, optional chaining, templates, destructuring, ordinary/arrow/async
 functions, generators and async generators, object methods and accessors, classes, and modules.
 Regular-expression literals are checked for boundaries, flags, and body grammar in ordinary,
@@ -463,7 +471,7 @@ using System;
 using Janglim.FrontEnd.Grammars.JavaScript;
 using Janglim.FrontEnd.Parsers.LR;
 
-var language = new JavaScriptScriptGrammar();
+var language = new JavaScriptGrammar();
 var parser = new LALRParser(language.Grammar);
 var input = @"
 async function load({path}) {
@@ -487,17 +495,70 @@ Console.WriteLine(parsed.ToParseTree.AllInputDatas);
 ```
 
 This example parses and validates source; it does not execute the JavaScript. Diagnostic
-offsets and lengths use .NET UTF-16 code units. The current support scope is strict Script
-and Module syntax with the documented static checks; non-strict syntax and full specification
-conformance remain follow-up work.
+offsets and lengths use .NET UTF-16 code units. The constructor defaults to strict Script;
+select `new JavaScriptGrammar(JavaScriptMode.NonStrict, webCompatibility: true)` for
+non-strict input with Annex B browser-compatible syntax. Use-strict directives, inherited
+strictness and class code retain their local restrictions; Modules are always strict.
+Use `new JavaScriptGrammar(inputKind: JavaScriptInputKind.Module)` for a Module or
+`new JavaScriptGrammar(inputKind: JavaScriptInputKind.Expression)` for one expression.
+`language.InputKind` records that choice; the grammar applies the matching start rule and
+validation context throughout parsing and validation.
+The web option separately enables Script HTML comments, legacy function forms, and the
+specified catch/var, for-in and call-target exceptions. The
+[ECMAScript 2026 conformance report](docs/ko/javascript-conformance.html) connects the
+standard's productions and early errors to implementation files and records Test262
+source-syntax results. The [verification tools](tools/Test262/README.md) reproduce the
+pinned corpus, mode variants, explicit feature exclusions, and parse/validation checks.
 
-Read the [JavaScript profile guide](grammars/javascript/README.md) for the supported syntax,
+Read the [JavaScript grammar guide](grammars/javascript/README.md) for the supported syntax,
 setup, Unicode provenance, and authorship context. Detailed guides cover
 [expressions and templates](docs/ko/javascript-expressions.html),
 [statements and bindings](docs/ko/javascript-statements.html),
 [async functions, generators, and methods](docs/ko/javascript-functions.html),
 [classes](docs/ko/javascript-classes.html), [modules](docs/ko/javascript-modules.html), and
-[regular expressions](docs/ko/javascript-regexp.html).
+[regular expressions](docs/ko/javascript-regexp.html), and
+[non-strict mode and browser compatibility](docs/ko/javascript-non-strict.html).
+
+### TypeScript grammar
+
+Use `Janglim.FrontEnd.Grammars.TypeScript.TypeScriptGrammar` to parse the TypeScript syntax
+currently implemented in the language layer. It reuses the JavaScript grammar, token source,
+and static checks. The API follows the same **parse, then validate** sequence:
+
+```csharp
+using System;
+using Janglim.FrontEnd.Grammars.TypeScript;
+using Janglim.FrontEnd.Parsers.LR;
+
+var language = new TypeScriptGrammar();
+var parser = new LALRParser(language.Grammar);
+var parsed = parser.Parsing(language.CreateTokenSource(
+    "class Box<T> { constructor(public value: T) {} }"));
+if (!parsed.Success)
+    throw new InvalidOperationException(parser.FiredException?.Message ?? "Parsing failed.");
+
+var diagnostics = language.Validate(parsed.ToParseTree);
+foreach (var diagnostic in diagnostics)
+    Console.WriteLine($"{diagnostic.Code}: {diagnostic.Message}");
+Console.WriteLine(diagnostics.Count == 0);
+```
+
+`TypeScriptInputKind` selects `Script` (default), `Module`, `Expression`, or `Type`.
+Script and Expression default to non-strict mode; Module remains strict. The returned concrete
+tree preserves TypeScript syntax and original token positions. Validation reports syntax and
+static grammar restrictions; type-name resolution and assignability require a type checker.
+
+The current scope includes type annotations, unions/intersections, tuples, mapped/conditional
+and template literal types, generic type references, interfaces, aliases, enums, namespaces,
+ambient declarations, typed function signatures, `as`/`satisfies`/non-null assertions, and class
+modifiers, generic heritage, typed members, signatures and constructor parameter properties.
+
+**TypeScript support is still partial.** Remaining syntax includes runtime generic calls and
+construction (`make<T>()`, `new Box<T>()`), typed/generic arrow functions, angle-bracket assertions,
+type-only import/export forms, `import =`/`export =`, decorators, and TSX. Generic type references
+and generic class declarations are supported independently of those missing expression forms.
+The [TypeScript guide](grammars/typescript/README.md) records the scope, reference version,
+examples, and test command.
 
 ### Lexer source trivia
 
@@ -757,7 +818,7 @@ remaining WPF projects target `netcoreapp3.1`. See [legacy notes](legacy/README.
 
 ## Status & known limitations
 
-The **engine `0.5.0`** release supports the LALR path. Its `0.x` API policy remains explicit:
+The **engine `0.6.0`** release supports the LALR path. Its `0.x` API policy remains explicit:
 public API changes may occur in later `0.x` versions and should be checked in the release notes.
 The **web Playground `1.1.0`** is versioned separately; it does not imply an engine `1.0` API contract.
 
@@ -768,7 +829,10 @@ Supported engine features:
 - Typed EBNF tokens, source trivia and line-break information, registered pure C# predicates,
   selective Shift / predicate-bearing ε Reduce prediction, and grammar progress diagnostics.
 - Longest-match registered-rule lexing, parser-driven lexical policies, and independent
-  speculative cursors, plus the documented ECMAScript 2026 strict Script/Module profiles.
+  speculative cursors, plus ECMAScript 2026 Script/Module/Expression input with strict,
+  non-strict and optional browser-compatible syntax.
+- The [documented TypeScript subset](#typescript-grammar), LALR lookahead propagation,
+  and validation of nonterminals that cannot derive finite input.
 
 Known limitations and experimental scope:
 
@@ -796,8 +860,10 @@ See [RELEASE_NOTES.md](RELEASE_NOTES.md) for the official release scope and
 - Stabilize the public API (drop `DataTable` from the public surface, remove process-global static
   state, add a clean generic semantic-action hook).
 - Polish the diagnostic renderers (tables, FIRST/FOLLOW, item sets).
-- Extend the JavaScript profiles with non-strict syntax and broader specification conformance
-  checks, then develop TypeScript support on the existing parser-driven lexing APIs.
+- Keep the ECMAScript specification/Test262 syntax checks current across strict, non-strict
+  and browser-compatible JavaScript.
+- Extend TypeScript with runtime generics, typed arrows, type-only modules, decorators and TSX,
+  then complete the syntax/static-error comparison against the pinned TypeScript implementation.
 - Generate parser source at build time from the existing C# and EBNF grammar definitions.
 - Repair/finish the SLR and CLR table builders.
 

@@ -390,8 +390,9 @@ public sealed class JavaScriptTemplateTests
         _fixture.Invalid(nested.Substring(0, nested.Length - 1));
     }
 
+    // Equivalent token bundles may carry different branch facts; select a representative.
     private static LexicalGoal Goal(ITokenSource source, bool regex, bool tail)
-        => source.Policy.Goals.Single(goal =>
+        => source.Policy.Goals.First(goal =>
             goal.Terminals.Any(terminal => terminal.Caption == "RegularExpressionLiteral") == regex &&
             goal.Terminals.Any(terminal => terminal.Caption == "TemplateTail") == tail);
 }

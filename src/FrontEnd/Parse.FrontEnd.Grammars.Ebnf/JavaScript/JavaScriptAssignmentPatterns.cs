@@ -18,6 +18,7 @@ namespace Janglim.FrontEnd.Grammars.JavaScript
         private readonly HashSet<ParseTreeNonTerminal> initializers = new HashSet<ParseTreeNonTerminal>(NodeIdentity.Instance);
         private readonly Stack<ParseTreeNonTerminal> pendingPatterns = new Stack<ParseTreeNonTerminal>();
         private readonly Func<ParseTreeSymbol, bool> isSimpleTarget;
+        private Func<ParseTreeSymbol, bool> isLoopTarget;
         private readonly List<JavaScriptDiagnostic> diagnostics;
 
         private JavaScriptAssignmentPatterns(Func<ParseTreeSymbol, bool> isSimpleTarget, List<JavaScriptDiagnostic> diagnostics)
@@ -27,9 +28,11 @@ namespace Janglim.FrontEnd.Grammars.JavaScript
         }
 
         internal static JavaScriptAssignmentPatterns Analyze(ParseTreeSymbol tree,
-            Func<ParseTreeSymbol, bool> isSimpleTarget, List<JavaScriptDiagnostic> diagnostics)
+            Func<ParseTreeSymbol, bool> isSimpleTarget, List<JavaScriptDiagnostic> diagnostics,
+            Func<ParseTreeSymbol, bool> isLoopTarget = null)
         {
             var result = new JavaScriptAssignmentPatterns(isSimpleTarget, diagnostics);
+            result.isLoopTarget = isLoopTarget ?? isSimpleTarget;
             var pending = new Stack<ParseTreeSymbol>();
             pending.Push(tree);
             while (pending.Count != 0)
@@ -37,12 +40,17 @@ namespace Janglim.FrontEnd.Grammars.JavaScript
                 if (!(pending.Pop() is ParseTreeNonTerminal node)) continue;
                 if (IsPatternAssignment(node)) result.Schedule(PatternRoot(node[0]));
                 string name = Name(node);
-                int targetIndex = name == "ForAwaitOfStatement" ? 3 : 2;
-                if ((name == "ForInStatement" || name == "ForOfStatement" || name == "ForAwaitOfStatement") && Name(node[targetIndex]) == "LeftHandSideExpression")
+                ParseTreeSymbol target = null;
+                if (name == "ForInStatement" || name == "ForOfStatement" || name == "ForAwaitOfStatement")
+                    foreach (var child in node.Items)
+                        if (Name(child) == "LeftHandSideExpression") { target = child; break; }
+                if (target != null)
                 {
-                    result.CheckTarget(node[targetIndex], allowPattern: true);
-                    if (name == "ForOfStatement" && IsRawAsync(node[targetIndex]))
-                        result.InvalidTarget(node[targetIndex]);
+                    var pattern = PatternRoot(target);
+                    if (pattern != null) result.Schedule(pattern);
+                    else if (!result.isLoopTarget(target)) result.InvalidTarget(target);
+                    if (name == "ForOfStatement" && IsRawAsync(target))
+                        result.InvalidTarget(target);
                 }
                 for (int index = node.Count - 1; index >= 0; index--) pending.Push(node[index]);
             }
@@ -202,7 +210,8 @@ namespace Janglim.FrontEnd.Grammars.JavaScript
             while (pending.Count != 0)
             {
                 var item = pending.Pop();
-                if (item is ParseTreeNonTerminal list && Name(list) == listName)
+                if (item is ParseTreeNonTerminal list && (Name(list) == listName ||
+                    listName == "ArrayElements" && (Name(list) == "ArrayElementList" || Name(list) == "ArrayElision")))
                     for (int index = list.Count - 1; index >= 0; index--) pending.Push(list[index]);
                 else result.Add(item);
             }

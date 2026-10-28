@@ -14,8 +14,9 @@ namespace Janglim.FrontEnd.Grammars.JavaScript
         internal static string Name(ParseTreeSymbol symbol)
         {
             string name = (symbol as ParseTreeNonTerminal)?.SignPost?.Name ?? string.Empty;
-            return name.EndsWith("__Await", StringComparison.Ordinal)
-                ? name.Substring(0, name.Length - 7) : name;
+            while (name.EndsWith("__Await", StringComparison.Ordinal) || name.EndsWith("__Yield", StringComparison.Ordinal))
+                name = name.Substring(0, name.Length - 7);
+            return name;
         }
 
         internal static string BaseName(ParseTreeSymbol symbol)
@@ -27,7 +28,10 @@ namespace Janglim.FrontEnd.Grammars.JavaScript
 
         internal static bool HasAwaitContext(ParseTreeSymbol symbol)
             => ((symbol as ParseTreeNonTerminal)?.SignPost?.Name ?? string.Empty)
-                .EndsWith("__Await", StringComparison.Ordinal);
+                .Contains("__Await");
+
+        internal static bool HasYieldContext(ParseTreeSymbol symbol)
+            => ((symbol as ParseTreeNonTerminal)?.SignPost?.Name ?? string.Empty).Contains("__Yield");
 
         internal static bool IsFunctionDeclaration(string name)
             => name == "FunctionDeclaration" || name == "GeneratorDeclaration" ||
@@ -44,7 +48,8 @@ namespace Janglim.FrontEnd.Grammars.JavaScript
 
         internal static bool IsMethod(string name)
             => name == "ClassMethod" || name == "ClassGeneratorMethod" || name == "ClassAsyncMethod" ||
-               name == "ObjectMethod" || name == "ObjectGeneratorMethod" || name == "ObjectAsyncMethod";
+               name == "ObjectMethod" || name == "ObjectGeneratorMethod" || name == "ObjectAsyncMethod" ||
+               name == "ObjectAsyncGeneratorMethod" || name == "ClassAsyncGeneratorMethod";
 
         internal static bool IsFunction(string name)
             => IsPlainFunction(name) || IsArrow(name) || IsMethod(name);
@@ -53,7 +58,8 @@ namespace Janglim.FrontEnd.Grammars.JavaScript
         {
             string name = Name(node);
             return name.StartsWith("Async", StringComparison.Ordinal) ||
-                name == "ClassAsyncMethod" || name == "ObjectAsyncMethod";
+                name == "ClassAsyncMethod" || name == "ObjectAsyncMethod" ||
+                name == "ClassAsyncGeneratorMethod" || name == "ObjectAsyncGeneratorMethod";
         }
 
         internal static bool IsGenerator(ParseTreeNonTerminal node)
@@ -61,7 +67,8 @@ namespace Janglim.FrontEnd.Grammars.JavaScript
             string name = Name(node);
             if (name == "GeneratorDeclaration" || name == "GeneratorExpression" ||
                 name == "AsyncGeneratorDeclaration" || name == "AsyncGeneratorExpression" ||
-                name == "ClassGeneratorMethod" || name == "ObjectGeneratorMethod") return true;
+                name == "ClassGeneratorMethod" || name == "ObjectGeneratorMethod" ||
+                name == "ClassAsyncGeneratorMethod" || name == "ObjectAsyncGeneratorMethod") return true;
             if (name != "ClassAsyncMethod" && name != "ObjectAsyncMethod") return false;
             foreach (var child in node.Items)
                 if (child is ParseTreeTerminal terminal && terminal.Token.Input == "*") return true;

@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="1340" viewBox="0 0 1000 1340" role="img" aria-labelledby="title desc">
+<title id="title">Peek 한 번의 요청과 반환</title>
+<desc id="desc">파서는 start: TokenCursor와 goal: LexicalGoal을 source: ITokenSource에 보낸다. source는 Token: TokenData와 Next: TokenCursor를 TokenRead 하나에 담아 반환한다. 원문 result = /ab/g;에서 start.SourceOffset은 8, 정책이 반환한 goal은 RegExp 규칙 묶음, Token.Input은 /ab/g, Next.SourceOffset은 14이다. Peek 직후 현재 커서는 8이며 Shift할 때 14로 이동한다.</desc>
+<rect width="1000" height="1340" fill="#FFFFFF"/>
+<text x="60" y="60" font-family="'Cascadia Mono',Consolas,monospace" font-size="22" font-weight="500" text-anchor="start" fill="#526078">ITokenSource / Peek</text>
+<text x="60" y="123" font-family="'Noto Sans KR','Malgun Gothic',sans-serif" font-size="40" font-weight="750" text-anchor="start" fill="#172235">한 번의 요청에서 오가는 네 가지 값</text>
+<text x="60" y="176" font-family="'Cascadia Mono',Consolas,monospace" font-size="22" font-weight="450" text-anchor="start" fill="#526078">TokenRead Peek(TokenCursor start, LexicalGoal goal);</text>
+<polyline points="60,211 940,211" stroke="#E3E8EF" stroke-width="1" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="60" y="263" font-family="'Noto Sans KR','Malgun Gothic',sans-serif" font-size="25" font-weight="700" text-anchor="start" fill="#6D42C2">01  요청</text>
+<text x="500" y="291" font-family="'Cascadia Mono',Consolas,monospace" font-size="25" font-weight="550" text-anchor="middle" fill="#6D42C2">Peek(start, goal)</text>
+<text x="60" y="330" font-family="'Noto Sans KR','Malgun Gothic',sans-serif" font-size="28" font-weight="700" text-anchor="start" fill="#172235">파서</text>
+<text x="940" y="330" font-family="'Cascadia Mono',Consolas,monospace" font-size="28" font-weight="650" text-anchor="end" fill="#172235">source</text>
+<polyline points="155,320 817,320" stroke="#A286D5" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="817,313 817,327 829,320" fill="#6D42C2"/>
+<text x="940" y="361" font-family="'Cascadia Mono',Consolas,monospace" font-size="19" font-weight="450" text-anchor="end" fill="#526078">ITokenSource</text>
+<rect x="60" y="386" width="423" height="188" rx="15" fill="#F7F4FD" stroke="#E5DDEF"/>
+<rect x="517" y="386" width="423" height="188" rx="15" fill="#F7F4FD" stroke="#E5DDEF"/>
+<text x="86" y="434" font-family="'Cascadia Mono',Consolas,monospace" font-size="31" font-weight="600" text-anchor="start" fill="#6D42C2">start</text>
+<text x="457" y="433" font-family="'Cascadia Mono',Consolas,monospace" font-size="23" font-weight="450" text-anchor="end" fill="#526078">TokenCursor</text>
+<text x="86" y="493" font-family="'Cascadia Mono',Consolas,monospace" font-size="27" font-weight="550" text-anchor="start" fill="#172235">SourceOffset = 8</text>
+<text x="86" y="544" font-family="'Noto Sans KR','Malgun Gothic',sans-serif" font-size="24" font-weight="450" text-anchor="start" fill="#526078">이번에 읽기 시작할 원문 위치</text>
+<text x="543" y="434" font-family="'Cascadia Mono',Consolas,monospace" font-size="31" font-weight="600" text-anchor="start" fill="#6D42C2">goal</text>
+<text x="914" y="433" font-family="'Cascadia Mono',Consolas,monospace" font-size="23" font-weight="450" text-anchor="end" fill="#526078">LexicalGoal</text>
+<text x="543" y="493" font-family="'Noto Sans KR','Malgun Gothic',sans-serif" font-size="28" font-weight="600" text-anchor="start" fill="#172235">RegExp 규칙 묶음</text>
+<text x="543" y="544" font-family="'Noto Sans KR','Malgun Gothic',sans-serif" font-size="24" font-weight="450" text-anchor="start" fill="#526078">정책이 선택해 반환한 묶음</text>
+<text x="60" y="639" font-family="'Noto Sans KR','Malgun Gothic',sans-serif" font-size="25" font-weight="700" text-anchor="start" fill="#2166B0">02  반환</text>
+<text x="500" y="671" font-family="'Cascadia Mono',Consolas,monospace" font-size="25" font-weight="550" text-anchor="middle" fill="#2166B0">TokenRead</text>
+<text x="60" y="710" font-family="'Noto Sans KR','Malgun Gothic',sans-serif" font-size="28" font-weight="700" text-anchor="start" fill="#172235">파서</text>
+<text x="940" y="710" font-family="'Cascadia Mono',Consolas,monospace" font-size="28" font-weight="650" text-anchor="end" fill="#172235">source</text>
+<polyline points="183,700 829,700" stroke="#78A4D5" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="183,693 183,707 171,700" fill="#2166B0"/>
+<rect x="60" y="750" width="880" height="248" rx="18" fill="#151D2F"/>
+<text x="88" y="793" font-family="'Cascadia Mono',Consolas,monospace" font-size="25" font-weight="550" text-anchor="start" fill="#E9EDF7">TokenRead</text>
+<text x="912" y="793" font-family="'Noto Sans KR','Malgun Gothic',sans-serif" font-size="22" font-weight="450" text-anchor="end" fill="#B9C6DB">두 값을 담은 반환 객체</text>
+<polyline points="88,816 912,816" stroke="#344158" stroke-width="1" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<polyline points="500,839 500,971" stroke="#344158" stroke-width="1" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="88" y="858" font-family="'Cascadia Mono',Consolas,monospace" font-size="29" font-weight="550" text-anchor="start" fill="#9DCAFF">Token</text>
+<text x="466" y="857" font-family="'Cascadia Mono',Consolas,monospace" font-size="22" font-weight="450" text-anchor="end" fill="#B9C6DB">TokenData</text>
+<text x="88" y="923" font-family="'Cascadia Mono',Consolas,monospace" font-size="43" font-weight="550" text-anchor="start" fill="#E9EDF7">/ab/g</text>
+<text x="88" y="970" font-family="'Noto Sans KR','Malgun Gothic',sans-serif" font-size="23" font-weight="450" text-anchor="start" fill="#C3CEE0">ACTION 조회에 사용할 토큰</text>
+<text x="534" y="858" font-family="'Cascadia Mono',Consolas,monospace" font-size="29" font-weight="550" text-anchor="start" fill="#9DCAFF">Next</text>
+<text x="912" y="857" font-family="'Cascadia Mono',Consolas,monospace" font-size="22" font-weight="450" text-anchor="end" fill="#B9C6DB">TokenCursor</text>
+<text x="534" y="918" font-family="'Cascadia Mono',Consolas,monospace" font-size="27" font-weight="500" text-anchor="start" fill="#E9EDF7">SourceOffset = 14</text>
+<text x="534" y="970" font-family="'Noto Sans KR','Malgun Gothic',sans-serif" font-size="23" font-weight="450" text-anchor="start" fill="#C3CEE0">토큰 소비 후 사용할 위치</text>
+<text x="60" y="1050" font-family="'Noto Sans KR','Malgun Gothic',sans-serif" font-size="25" font-weight="650" text-anchor="start" fill="#172235">같은 원문에서 start와 Next가 가리키는 위치</text>
+<rect x="60" y="1078" width="880" height="138" rx="14" fill="#F2F5FA"/>
+<text x="86" y="1112" font-family="'Noto Sans KR','Malgun Gothic',sans-serif" font-size="21" font-weight="500" text-anchor="start" fill="#526078">원문</text>
+<text x="532" y="1112" font-family="'Cascadia Mono',Consolas,monospace" font-size="22" font-weight="550" text-anchor="middle" fill="#6D42C2">start · 8</text>
+<text x="844" y="1112" font-family="'Cascadia Mono',Consolas,monospace" font-size="22" font-weight="550" text-anchor="middle" fill="#2166B0">Next · 14</text>
+<rect x="584" y="1134" width="260" height="57" rx="7" fill="#DFEAF9"/>
+<text x="142.0" y="1177" font-family="'Cascadia Mono',Consolas,monospace" font-size="36" font-weight="400" text-anchor="middle" fill="#172235">r</text>
+<text x="194.0" y="1177" font-family="'Cascadia Mono',Consolas,monospace" font-size="36" font-weight="400" text-anchor="middle" fill="#172235">e</text>
+<text x="246.0" y="1177" font-family="'Cascadia Mono',Consolas,monospace" font-size="36" font-weight="400" text-anchor="middle" fill="#172235">s</text>
+<text x="298.0" y="1177" font-family="'Cascadia Mono',Consolas,monospace" font-size="36" font-weight="400" text-anchor="middle" fill="#172235">u</text>
+<text x="350.0" y="1177" font-family="'Cascadia Mono',Consolas,monospace" font-size="36" font-weight="400" text-anchor="middle" fill="#172235">l</text>
+<text x="402.0" y="1177" font-family="'Cascadia Mono',Consolas,monospace" font-size="36" font-weight="400" text-anchor="middle" fill="#172235">t</text>
+<text x="506.0" y="1177" font-family="'Cascadia Mono',Consolas,monospace" font-size="36" font-weight="400" text-anchor="middle" fill="#172235">=</text>
+<text x="610.0" y="1177" font-family="'Cascadia Mono',Consolas,monospace" font-size="36" font-weight="500" text-anchor="middle" fill="#2166B0">/</text>
+<text x="662.0" y="1177" font-family="'Cascadia Mono',Consolas,monospace" font-size="36" font-weight="500" text-anchor="middle" fill="#2166B0">a</text>
+<text x="714.0" y="1177" font-family="'Cascadia Mono',Consolas,monospace" font-size="36" font-weight="500" text-anchor="middle" fill="#2166B0">b</text>
+<text x="766.0" y="1177" font-family="'Cascadia Mono',Consolas,monospace" font-size="36" font-weight="500" text-anchor="middle" fill="#2166B0">/</text>
+<text x="818.0" y="1177" font-family="'Cascadia Mono',Consolas,monospace" font-size="36" font-weight="500" text-anchor="middle" fill="#2166B0">g</text>
+<text x="870.0" y="1177" font-family="'Cascadia Mono',Consolas,monospace" font-size="36" font-weight="400" text-anchor="middle" fill="#172235">;</text>
+<polyline points="532,1125 532,1192" stroke="#6D42C2" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="526,1128 538,1128 532,1138" fill="#6D42C2"/>
+<polyline points="844,1125 844,1192" stroke="#2166B0" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="838,1128 850,1128 844,1138" fill="#2166B0"/>
+<text x="60" y="1261" font-family="'Noto Sans KR','Malgun Gothic',sans-serif" font-size="26" font-weight="650" text-anchor="start" fill="#6D42C2">Peek 직후 파서의 현재 커서는 8입니다.</text>
+<text x="60" y="1305" font-family="'Noto Sans KR','Malgun Gothic',sans-serif" font-size="25" font-weight="500" text-anchor="start" fill="#526078">파서가 /ab/g를 Shift할 때 Next(14)로 이동합니다.</text>
+</svg>

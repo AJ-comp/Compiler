@@ -26,7 +26,7 @@ namespace Janglim.FrontEnd.Grammars.JavaScript
             foreach (Match match in Header.Matches(text))
             {
                 int start = match.Index + match.Length;
-                int end = End(text, start);
+                int end = ProductionEnd(text, start);
                 var rule = new Rule(match.Groups["name"].Value, match.Groups["assign"].Value,
                     text.Substring(start, end - start).Trim());
                 rules.Add(rule);
@@ -80,6 +80,107 @@ namespace Janglim.FrontEnd.Grammars.JavaScript
             return output.ToString();
         }
 
+        // A non-strict `yield` can be an identifier. Unlike the strict-only profile,
+        // this grammar must distinguish ~Yield from +Yield before choosing a parse.
+        // Both parameters remain JavaScript production transformations; the LR engine
+        // continues to consume the ordinary EBNF grammar produced here.
+        internal static string ExpandNonStrict(string text, string entry)
+        {
+            var rules = new List<Rule>();
+            var names = new HashSet<string>(StringComparer.Ordinal);
+            foreach (Match match in Header.Matches(text))
+            {
+                int start = match.Index + match.Length;
+                int end = ProductionEnd(text, start);
+                var rule = new Rule(match.Groups["name"].Value, match.Groups["assign"].Value,
+                    text.Substring(start, end - start).Trim());
+                rules.Add(rule);
+                if (rule.Assign == ":") names.Add(rule.Name);
+            }
+            var sensitive = new HashSet<string>(StringComparer.Ordinal)
+            { "UnaryExpression", "IdentifierReference", "BindingIdentifier", "LabelIdentifier", "AssignmentExpression", "AssignmentExpressionNoIn" };
+            bool changed;
+            do
+            {
+                changed = false;
+                foreach (var rule in rules)
+                {
+                    if (rule.Assign != ":" || sensitive.Contains(rule.Name)) continue;
+                    foreach (Match word in Words.Matches(rule.Body))
+                    {
+                        if (!sensitive.Contains(word.Value)) continue;
+                        int first = NonStrictContext(rule.Name, word.Value, 0);
+                        for (int context = 1; context < 4; context++)
+                            if (NonStrictContext(rule.Name, word.Value, context) != first)
+                            { changed |= sensitive.Add(rule.Name); break; }
+                        if (sensitive.Contains(rule.Name)) break;
+                    }
+                }
+            } while (changed);
+
+            string Body(Rule rule, int context)
+            {
+                string body = rule.Body;
+                bool awaitContext = (context & 1) != 0, yieldContext = (context & 2) != 0;
+                if (rule.Name == "IdentifierReference" || rule.Name == "BindingIdentifier" || rule.Name == "LabelIdentifier")
+                {
+                    if (awaitContext) body = body.Replace(" | 'await'", string.Empty);
+                    if (!yieldContext) body += " | 'yield'";
+                }
+                if (!yieldContext && (rule.Name == "AssignmentExpression" || rule.Name == "AssignmentExpressionNoIn"))
+                    body = body.Replace(" | YieldExpressionNoIn", string.Empty).Replace(" | YieldExpression", string.Empty);
+                if (awaitContext && rule.Name == "UnaryExpression") body += " | AwaitExpression";
+                return Words.Replace(body, match => names.Contains(match.Value) && sensitive.Contains(match.Value)
+                    ? match.Value + Suffix(NonStrictContext(rule.Name, match.Value, context)) : match.Value);
+            }
+            var output = new StringBuilder();
+            void Emit(Rule rule, int context, bool suffix)
+            {
+                output.Append(rule.Name).Append(suffix ? Suffix(context) : string.Empty).Append(' ').Append(rule.Assign)
+                    .Append(' ').Append(rule.Assign == ":=" ? rule.Body : Body(rule, context)).AppendLine(" ;");
+            }
+            foreach (var rule in rules) if (rule.Name == entry) Emit(rule, 0, false);
+            foreach (var rule in rules)
+            {
+                if (rule.Name != entry) Emit(rule, 0, false);
+                if (rule.Assign == ":" && sensitive.Contains(rule.Name))
+                    for (int context = 1; context < 4; context++) Emit(rule, context, true);
+            }
+            return output.ToString();
+        }
+
+        private static string Suffix(int context)
+            => ((context & 2) != 0 ? "__Yield" : string.Empty) + ((context & 1) != 0 ? "__Await" : string.Empty);
+
+        private static int NonStrictContext(string rule, string reference, int outer)
+        {
+            if (reference == "FormalParameters" || reference == "FunctionBody")
+            {
+                if (rule == "AsyncGeneratorDeclaration" || rule == "AsyncGeneratorExpression" ||
+                    rule == "ClassAsyncGeneratorMethod" || rule == "ObjectAsyncGeneratorMethod") return 3;
+                if (rule == "GeneratorDeclaration" || rule == "GeneratorExpression" ||
+                    rule == "ClassGeneratorMethod" || rule == "ObjectGeneratorMethod") return 2;
+                if (rule == "AsyncFunctionDeclaration" || rule == "AsyncFunctionExpression" ||
+                    rule == "ClassAsyncMethod" || rule == "ObjectAsyncMethod") return 1;
+                if (rule == "FunctionDeclaration" || rule == "FunctionExpression" ||
+                    rule == "ClassMethod" || rule == "ObjectMethod") return 0;
+            }
+            if (reference == "BindingIdentifier")
+            {
+                if (rule == "AsyncGeneratorExpression") return 3;
+                if (rule == "GeneratorExpression") return 2;
+                if (rule == "AsyncFunctionExpression") return 1;
+                if (rule == "FunctionExpression") return 0;
+            }
+            if (rule == "ClassField" && reference == "Initializer" ||
+                rule == "ClassStaticBlock" && reference == "ClassStaticBody") return 0;
+            if (rule == "ConciseBody" || rule == "ConciseBodyNoIn") return 0;
+            if (rule == "AsyncConciseBody" || rule == "AsyncConciseBodyNoIn") return 1;
+            if ((rule == "ArrowFunction" || rule == "ArrowFunctionNoIn") && reference.StartsWith("ConciseBody", StringComparison.Ordinal)) return 0;
+            if ((rule == "AsyncArrowFunction" || rule == "AsyncArrowFunctionNoIn") && reference.StartsWith("AsyncConciseBody", StringComparison.Ordinal)) return 1;
+            return outer;
+        }
+
         private static bool Context(string rule, string reference, bool outer)
         {
             bool parameters = reference == "FormalParameters" || reference == "FunctionBody";
@@ -107,7 +208,7 @@ namespace Janglim.FrontEnd.Grammars.JavaScript
             return outer;
         }
 
-        private static int End(string text, int start)
+        internal static int ProductionEnd(string text, int start)
         {
             char quote = '\0';
             for (int index = start; index < text.Length; index++)

@@ -20,7 +20,7 @@ public sealed class JavaScriptModuleCollection : ICollectionFixture<JavaScriptMo
 
 public sealed class JavaScriptModuleFixture
 {
-    public JavaScriptModuleGrammar Language { get; } = new JavaScriptModuleGrammar();
+    public JavaScriptGrammar Language { get; } = new JavaScriptGrammar(inputKind: JavaScriptInputKind.Module);
     public LALRParser Parser { get; }
 
     public JavaScriptModuleFixture() => Parser = new LALRParser(Language.Grammar, false);
@@ -644,7 +644,7 @@ public sealed class JavaScriptModuleTests
     public void Public_module_factory_exposes_the_same_grammar_policy_and_edition_contract()
     {
         var language = _fixture.Language;
-        Assert.Equal(2026, JavaScriptModuleGrammar.Edition);
+        Assert.Equal(2026, JavaScriptGrammar.Edition);
         Assert.NotNull(language.Grammar);
         Assert.NotEmpty(language.Policy.Goals);
         Assert.Contains("ImportDeclaration", language.GrammarText);
@@ -716,10 +716,11 @@ public sealed class JavaScriptModuleTests
     {
         const string input = "/a/g.test(value); export default await import('module');";
         var source = _fixture.Language.CreateTokenSource(input);
-        var regex = source.Policy.Goals.Single(goal =>
+        // Equivalent token bundles may carry different branch facts; select a representative.
+        var regex = source.Policy.Goals.First(goal =>
             goal.Terminals.Any(terminal => terminal.Caption == "RegularExpressionLiteral") &&
             !goal.Terminals.Any(terminal => terminal.Caption == "TemplateTail"));
-        var division = source.Policy.Goals.Single(goal =>
+        var division = source.Policy.Goals.First(goal =>
             !goal.Terminals.Any(terminal => terminal.Caption == "RegularExpressionLiteral") &&
             !goal.Terminals.Any(terminal => terminal.Caption == "TemplateTail"));
         var original = source.Start;

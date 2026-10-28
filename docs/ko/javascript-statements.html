@@ -53,14 +53,14 @@
       <section id="purpose">
         <p class="kind">ECMAScript 2026 · JavaScript 언어 지원</p>
         <h1>함수와 문장으로 구성된 Script를 파싱하고,<br>선언과 제어문의 사용 조건을 검사합니다.</h1>
-        <p class="lead"><code>JavaScriptScriptGrammar</code>는 JavaScript 코드에서 일반 함수와 화살표 함수, 변수 선언, 조건문과 반복문 등을 읽는 데 필요한 문법과 토큰 규칙을 준비합니다. 개발자는 이 문법으로 파서를 만들고, 코드 전체를 파싱한 뒤 <code>Validate</code>로 정적 문법 오류를 검사합니다.</p>
+        <p class="lead"><code>JavaScriptGrammar</code>는 JavaScript 코드에서 일반 함수와 화살표 함수, 변수 선언, 조건문과 반복문 등을 읽는 데 필요한 문법과 토큰 규칙을 준비합니다. 개발자는 이 문법으로 파서를 만들고, 코드 전체를 파싱한 뒤 <code>Validate</code>로 정적 문법 오류를 검사합니다.</p>
         <p>예를 들어 함수 매개변수의 <code>{name}</code>, 함수 본문의 <code>return name;</code>, 함수 밖의 <code>const result = read(user);</code>를 하나의 구문 트리로 만들 수 있습니다. 같은 함수에서 매개변수 이름을 두 번 선언하거나, 함수 밖에서 <code>return</code>을 사용하면 정적 검사가 그 오류를 알려줍니다.</p>
-        <p><span class="core">표현식 하나에는 JavaScriptExpressionGrammar를, 선언과 문장 목록에는 JavaScriptScriptGrammar를 사용합니다.</span> 두 클래스는 같은 JavaScript 토큰 규칙과 표현식 문법을 공유합니다. 아래에서는 Script를 입력하는 방법부터 살펴본 뒤, 선언·함수·문장 처리의 차이를 차례로 설명합니다.</p>
+        <p><span class="core">JavaScriptGrammar의 기본 입력 종류는 여러 선언과 문장으로 구성된 Script입니다.</span> 표현식 하나만 읽으려면 같은 클래스의 <code>inputKind</code>를 <code>JavaScriptInputKind.Expression</code>으로 지정합니다. 아래에서는 기본값인 Script를 입력하는 방법부터 살펴본 뒤, 선언·함수·문장 처리를 차례로 설명합니다.</p>
       </section>
 
       <section id="context">
-        <h2>1. 입력은 엄격 모드의 Script입니다.</h2>
-        <p>이 문법은 <a href="https://tc39.es/ecma262/2026/multipage/ecmascript-language-statements-and-declarations.html">ECMAScript 2026, 제17판</a>을 기준으로 합니다. 입력 전체에 엄격 모드의 구문 조건을 적용하므로, 입력에 <code>"use strict";</code>를 따로 적지 않아도 선언 이름과 대입 대상 등을 엄격 모드 기준으로 검사합니다.</p>
+        <h2>1. 이 문서에서는 기본값인 엄격 모드 Script를 사용합니다.</h2>
+        <p>이 문법은 <a href="https://tc39.es/ecma262/2026/multipage/ecmascript-language-statements-and-declarations.html">ECMAScript 2026, 제17판</a>을 기준으로 합니다. 아래 예제는 생성자의 기본값인 엄격 모드를 사용합니다. 따라서 입력에 <code>"use strict";</code>를 따로 적지 않아도 선언 이름과 대입 대상 등을 엄격 모드 기준으로 검사합니다. 비엄격 입력은 <a href="javascript-non-strict.html#api"><code>mode: JavaScriptMode.NonStrict</code></a>로 선택합니다.</p>
         <p>입력 문자열에는 다음처럼 여러 선언과 문장을 함께 전달합니다. 함수 본문도 같은 입력 안에서 파싱합니다.</p>
         <pre><code>function display({name = 'guest'}, [first, ...rest]) {
     if (first &gt; 0) {
@@ -92,12 +92,12 @@ result;</code></pre>
 
       <section id="usage">
         <h2>2. 문법을 준비하고, 코드를 파싱한 뒤 검사합니다.</h2>
-        <p>먼저 <code>Janglim.FrontEnd.Grammars.JavaScript</code> 네임스페이스의 <code>JavaScriptScriptGrammar</code>를 만듭니다. 그리고 <code>Grammar</code>를 <code>LALRParser</code>에 전달해 파싱 테이블을 준비합니다.</p>
+        <p>먼저 <code>Janglim.FrontEnd.Grammars.JavaScript</code> 네임스페이스의 <code>JavaScriptGrammar</code>를 만듭니다. 그리고 <code>Grammar</code>를 <code>LALRParser</code>에 전달해 파싱 테이블을 준비합니다.</p>
         <pre><code>using System;
 using Janglim.FrontEnd.Grammars.JavaScript;
 using Janglim.FrontEnd.Parsers.LR;
 
-var language = new JavaScriptScriptGrammar();
+var language = new JavaScriptGrammar();
 var parser = new LALRParser(language.Grammar);</code></pre>
         <p>이제 입력 문자열을 정합니다. 아래 코드는 <code>user</code>에서 이름을 꺼내 반환하는 함수와, 그 함수를 호출하는 선언으로 구성되어 있습니다.</p>
         <pre><code>var input = @"
@@ -129,7 +129,7 @@ if (diagnostics.Count &gt; 0)
 var tree = parsed.ToParseTree;
 Console.WriteLine(tree.AllInputDatas);</code></pre>
         <p><span class="core">파싱 성공과 Validate의 빈 진단 목록을 함께 확인해야 합니다.</span> 진단의 위치와 길이는 .NET 문자열의 UTF-16 코드 단위입니다. 오류가 가리키는 원문은 <code>input.Substring(diagnostic.SourceOffset, diagnostic.Length)</code>로 확인할 수 있습니다.</p>
-        <p>공개 API는 두 입력 클래스가 같습니다. <code>Grammar</code>는 파서에 전달할 문법, <code>Policy</code>는 토큰 규칙 묶음을 선택하는 정책, <code>GrammarText</code>는 토큰 정규식 치환을 마친 EBNF입니다. 입력 단위에 맞는 클래스를 고른 뒤 <code>CreateTokenSource</code> → <code>Parsing</code> → <code>Validate</code> 순서로 사용합니다.</p>
+        <p><code>JavaScriptGrammar</code>는 모든 입력 종류에 같은 프로퍼티와 메서드를 제공합니다. <code>InputKind</code>는 선택한 입력 종류, <code>Grammar</code>는 파서에 전달할 문법, <code>Policy</code>는 토큰 규칙 묶음을 선택하는 정책, <code>GrammarText</code>는 토큰 정규식 치환을 마친 EBNF입니다. 입력 종류를 정한 뒤에는 <code>CreateTokenSource</code> → <code>Parsing</code> → <code>Validate</code> 순서로 사용합니다.</p>
       </section>
 
       <section id="binding-patterns">
@@ -170,7 +170,7 @@ function read(...rest = []) {}        // 오류: rest 자체의 기본값</code>
     return result;
 }</code></pre>
         <p><code>first</code>와 <code>second</code>는 매개변수이고, 본문은 <code>const</code> 선언과 <code>return</code> 문장으로 구성되어 있습니다. 함수 안에서 <code>return result;</code>를 사용하면 값을 반환하는 문장으로 파싱합니다. 반환할 표현식 없이 <code>return;</code>으로 끝낼 수도 있습니다.</p>
-        <p>함수를 값으로 사용할 때는 함수 표현식을 씁니다. 아래 입력에서는 이름 없는 함수 표현식을 <code>sum</code>에 대입합니다. 함수 표현식은 <code>JavaScriptExpressionGrammar</code>에 표현식 하나로 전달할 때도 사용할 수 있습니다.</p>
+        <p>함수를 값으로 사용할 때는 함수 표현식을 씁니다. 아래 입력에서는 이름 없는 함수 표현식을 <code>sum</code>에 대입합니다. 함수 표현식만 따로 읽으려면 같은 <code>JavaScriptGrammar</code>에서 <code>inputKind: JavaScriptInputKind.Expression</code>을 선택합니다.</p>
         <pre><code>const sum = function (first, second) {
     return first + second;
 };</code></pre>
@@ -186,7 +186,7 @@ values.map(value =&gt; value + 1);</code></pre>
         <pre><code>const one = value =&gt; value;
 const pair = (first, second) =&gt; first + second;
 const empty = () =&gt; 0;</code></pre>
-        <p>표현식 입력 API에도 <code>(first, second) =&gt; first + second</code>처럼 화살표 함수 하나를 전달할 수 있습니다. 여러 선언과 함께 입력할 때는 위 예제처럼 Script API를 사용합니다.</p>
+        <p>Expression 입력에는 <code>(first, second) =&gt; first + second</code>처럼 화살표 함수 하나를 전달할 수 있습니다. 여러 선언과 함께 입력할 때는 위 예제처럼 기본값인 Script를 사용합니다.</p>
 
         <h3>본문이 표현식이면 그 결과를 반환하고, 블록이면 문장들을 읽습니다.</h3>
         <p>지금까지의 본문은 표현식 하나였습니다. 본문을 중괄호로 감싸면 그 안에는 선언과 문장이 들어갑니다. 이 블록 본문에서 값을 반환할 때는 <code>return</code> 문장을 적습니다.</p>
@@ -217,7 +217,7 @@ const nestedRest = (...[first, second]) =&gt; first;</code></pre>
 ([value], {name: value}) =&gt; 0;     // 오류: 패턴에서 만든 이름도 중복
 value =&gt; { let value; };           // 오류: 같은 함수 본문의 선언
 value =&gt; { { let value; } };       // 허용: 안쪽 블록의 별도 선언</code></pre>
-        <p>기본값·구조 분해·rest가 있는 매개변수와 함수 자신의 <code>use strict</code> 지시문을 함께 쓰는 형태도 금지합니다. 따라서 <code>(value = 0) =&gt; { 'use strict'; }</code>는 오류입니다. 이 API는 입력 전체에 엄격 모드 조건을 적용하므로, 이런 함수에는 그 지시문을 추가하지 않고 매개변수를 사용하면 됩니다.</p>
+        <p>기본값·구조 분해·rest가 있는 매개변수와 함수 자신의 <code>use strict</code> 지시문을 함께 쓰는 형태도 금지합니다. 따라서 <code>(value = 0) =&gt; { 'use strict'; }</code>는 오류입니다. 이 문서의 예제는 기본 엄격 모드를 사용하므로, 이런 함수에는 그 지시문을 추가하지 않고 매개변수를 사용하면 됩니다.</p>
         <p>화살표 함수의 블록 본문 안에서는 <code>return</code>을 사용할 수 있습니다. 반면 함수 바깥의 반복문이나 레이블은 그 본문의 <code>break</code>·<code>continue</code> 목적지가 될 수 없습니다. 이름과 제어문의 범위 검사는 일반 함수와 같은 함수 경계에서 다시 시작합니다.</p>
 
         <h3>매개변수와 =&gt; 사이에는 줄바꿈을 넣을 수 없습니다.</h3>
@@ -326,7 +326,7 @@ function read(name) {
             <tr><td>catch·for 이름 충돌</td><td><code>catch ({message}) { var message; }</code>처럼 매개변수와 본문 선언이 충돌하는 경우를 검사합니다. for의 lexical 바인딩과 본문의 var 선언도 확인합니다.</td></tr>
           </tbody>
         </table></div>
-        <p>기본값·구조 분해·rest가 있는 매개변수와 함수 자신의 <code>use strict</code> 지시문 조합은 ECMAScript가 금지하는 형태입니다. 이 API는 입력 전체를 엄격 모드로 검사하므로, 이런 함수의 본문에는 지시문을 추가하지 않고 매개변수를 그대로 사용하면 됩니다.</p>
+        <p>기본값·구조 분해·rest가 있는 매개변수와 함수 자신의 <code>use strict</code> 지시문 조합은 ECMAScript가 금지하는 형태입니다. 이 문서의 예제는 입력 전체를 엄격 모드로 검사하므로, 이런 함수의 본문에는 지시문을 추가하지 않고 매개변수를 그대로 사용하면 됩니다.</p>
         <p>지시문 검사는 함수 본문의 맨 앞 문자열 문장들에만 적용합니다. 따라서 <code>('use strict');</code> 같은 괄호식, 다른 블록 안의 문자열, 일반 문장 뒤에 나오는 문자열은 함수의 <code>use strict</code> 지시문으로 처리하지 않습니다.</p>
         <h3>break와 continue의 목적지는 같은 함수 안에 있어야 합니다.</h3>
         <pre><code>outer: for (const value of values) {
@@ -366,7 +366,7 @@ var read = source.Peek(cursor, goal);</code></pre>
             <tr><td><a href="../../grammars/javascript/ecmascript-2026-statements.ebnf">ecmascript-2026-statements.ebnf</a></td><td>문장·선언·함수 본문, 문장 종료 조건과 for 헤더의 NoIn 문법</td></tr>
             <tr><td><a href="../../grammars/javascript/ecmascript-2026-classes.ebnf">ecmascript-2026-classes.ebnf</a></td><td>클래스·메서드·필드·static 블록과 private·super·new.target 관련 구문</td></tr>
             <tr><td><a href="../../grammars/javascript/ecmascript-2026-modules.ebnf">ecmascript-2026-modules.ebnf</a></td><td>동적 import와 Module 입력의 import·export·await 관련 구문. Module 사용법은 <a href="javascript-modules.html">모듈 문서</a>에서 설명합니다.</td></tr>
-            <tr><td><a href="../../src/FrontEnd/Parse.FrontEnd.Grammars.Ebnf/JavaScript/JavaScriptScriptGrammar.cs">JavaScriptScriptGrammar.cs</a></td><td>Script를 시작 규칙으로 사용하는 공개 API</td></tr>
+            <tr><td><a href="../../src/FrontEnd/Parse.FrontEnd.Grammars.Ebnf/JavaScript/JavaScriptGrammar.cs">JavaScriptGrammar.cs</a></td><td>기본 Script와 선택 가능한 Module·Expression 입력의 문법·정책·검사기를 준비하는 공개 API</td></tr>
             <tr><td><a href="../../src/FrontEnd/Parse.FrontEnd.Grammars.Ebnf/JavaScript/JavaScriptStatementPredicates.cs">JavaScriptStatementPredicates.cs</a></td><td>문장 종료와 줄바꿈 제약을 검사하는 순수 C# 함수 등록</td></tr>
             <tr><td><a href="../../src/FrontEnd/Parse.FrontEnd.Grammars.Ebnf/JavaScript/JavaScriptStatementValidation.cs">JavaScriptStatementValidation.cs</a></td><td>바인딩 이름·선언 범위·매개변수·제어문 목적지의 정적 검사</td></tr>
             <tr><td><a href="../../src/FrontEnd/Parse.FrontEnd.Grammars.Ebnf/JavaScript/JavaScriptArrowFunctions.cs">JavaScriptArrowFunctions.cs</a></td><td>화살표 헤드를 바인딩 목록으로 검사하고, 일반 괄호식·기본값·계산된 속성 이름과 검사 범위를 구분</td></tr>
@@ -381,7 +381,7 @@ var read = source.Peek(cursor, goal);</code></pre>
       <section id="next-stages">
         <h2>async·제너레이터·메서드와 Module도 같은 사용 순서로 검사합니다.</h2>
         <p>이 문서에서 살펴본 일반 함수·화살표 함수, 문장 목록, 선언과 매개변수의 구조 분해에 더해 <a href="javascript-classes.html">일반 메서드·필드·private 이름·static 블록을 가진 클래스</a>를 사용할 수 있습니다. <code>super</code>·<code>new.target</code>도 각 본문의 사용 조건과 함께 검사합니다.</p>
-        <p>정적 import·export를 포함한 파일에는 <a href="javascript-modules.html#api"><code>JavaScriptModuleGrammar</code></a>를 사용합니다. Module 문맥의 <code>import.meta</code>·top-level await와 모듈 선언의 이름 검사도 연결되어 있습니다. 동적 import는 표현식이므로 Script의 함수·문장 안에서도 사용할 수 있습니다.</p>
+        <p>정적 import·export를 포함한 파일은 같은 클래스의 <a href="javascript-modules.html#api"><code>inputKind</code>를 <code>JavaScriptInputKind.Module</code>로 지정해 읽습니다.</a> Module 문맥의 <code>import.meta</code>·top-level await와 모듈 선언의 이름 검사도 이 선택에 따라 적용합니다. 동적 import는 표현식이므로 Script의 함수·문장 안에서도 사용할 수 있습니다.</p>
         <p>Script 안의 정규식 리터럴은 토큰의 경계·플래그를 확인한 뒤, <code>Validate</code>에서 본문 문법까지 검사합니다. 함수 본문과 템플릿 보간 안의 정규식에도 같은 검사를 적용하며, <a href="javascript-regexp.html">정규식 문서</a>에서 일반·u·v 모드의 차이와 검사 이유를 설명합니다. async 함수·async 화살표와 제너레이터, 객체·클래스의 일반·async·제너레이터 메서드와 접근자도 사용할 수 있습니다. <a href="javascript-functions.html">함수 종류별 문법 문서</a>에서는 각 표기와 await·yield의 문맥을 한 주제씩 설명합니다.</p>
       </section>
 

@@ -1,12 +1,22 @@
 # ECMAScript 2026 표현식·함수·문장·클래스·모듈 문법
 
-`JavaScriptExpressionGrammar`는 JavaScript 표현식 하나를, `JavaScriptScriptGrammar`는 선언과 문장 목록으로 구성된 Script를 읽습니다. `JavaScriptModuleGrammar`는 import·export가 있는 Module 입력을 읽습니다. 세 클래스는 각 입력 문맥에 맞는 문법과 토큰 규칙을 준비하며, 모두 `language.Grammar`로 `LALRParser`를 만들고, `language.CreateTokenSource(input)`을 파싱한 뒤 `language.Validate(tree)`로 정적 문법 오류를 검사합니다.
+`JavaScriptGrammar` 하나로 JavaScript 문법을 준비합니다. 기본 입력 종류는 선언과 문장 목록으로 구성된 Script입니다. 모듈 파일이나 표현식 하나를 읽을 때에는 생성자의 `inputKind`로 Module 또는 Expression을 선택합니다. 이후에는 입력 종류에 관계없이 `language.Grammar`로 `LALRParser`를 만들고, `language.CreateTokenSource(input)`을 파싱한 뒤 `language.Validate(tree)`로 정적 문법 오류를 검사합니다.
 
-표현식·템플릿·구조 분해 할당은 [표현식 문서](../../docs/ko/javascript-expressions.html)에, 일반 함수·화살표 함수·문장·선언과 매개변수의 구조 분해는 [함수·문장 문서](../../docs/ko/javascript-statements.html)에 사용 예제와 구현 이유를 기록했습니다. 클래스 선언·표현식과 일반 메서드·접근자·필드·private 이름·static 블록은 [클래스 문서](../../docs/ko/javascript-classes.html)에서 설명합니다. Module 입력과 import·export, 동적 import·import.meta·top-level await는 [모듈 문서](../../docs/ko/javascript-modules.html)에 순서대로 정리했습니다. async 함수·화살표, 제너레이터·async 제너레이터와 객체·클래스 메서드는 [함수 종류별 문서](../../docs/ko/javascript-functions.html)에서 표기와 본문 경계를 차례로 설명합니다.
+표현식·템플릿·구조 분해 할당은 [표현식 문서](../../docs/ko/javascript-expressions.html)에, 일반 함수·화살표 함수·문장·선언과 매개변수의 구조 분해는 [함수·문장 문서](../../docs/ko/javascript-statements.html)에 사용 예제와 구현 이유를 기록했습니다. 클래스 선언·표현식과 일반 메서드·접근자·필드·private 이름·static 블록은 [클래스 문서](../../docs/ko/javascript-classes.html)에서 설명합니다. Module 입력과 import·export, 동적 import·import.meta·top-level await는 [모듈 문서](../../docs/ko/javascript-modules.html)에 순서대로 정리했습니다. async 함수·화살표, 제너레이터·async 제너레이터와 객체·클래스 메서드는 [함수 종류별 문서](../../docs/ko/javascript-functions.html)에서 표기와 본문 경계를 차례로 설명합니다. 비엄격 모드의 선택, 코드 구간별 엄격 모드와 별도 웹 호환 옵션은 [모드·웹 호환 문서](../../docs/ko/javascript-non-strict.html)에 정리했습니다.
 
 ## 입력 문맥과 지원 범위
 
-기준은 [ECMAScript 2026, 제17판](https://tc39.es/ecma262/2026/multipage/ecmascript-language-expressions.html)입니다. 표현식·Script API는 **엄격 모드 Script 문맥**을, Module API는 **Module 문맥**을 사용합니다. 모두 일반·async 함수와 화살표 함수, 제너레이터·async 제너레이터, 객체·클래스 메서드의 매개변수·본문을 함께 파싱합니다. Script 최상위와 일반 함수 본문에서는 `await`를 식별자로 사용할 수 있지만, Module 문맥에서는 중첩된 일반 함수까지 `await`를 식별자로 사용할 수 없습니다. `yield`·`let` 등 엄격 모드 예약어도 식별자 참조나 바인딩 이름으로 사용할 수 없습니다. 속성 이름에는 예약어를 사용할 수 있습니다.
+기준은 [ECMAScript 2026, 제17판](https://tc39.es/ecma262/2026/multipage/ecmascript-language-expressions.html)입니다. `new JavaScriptGrammar()`는 **엄격 모드 Script**를 읽습니다. Script와 Expression 입력은 `JavaScriptMode.NonStrict`로 비엄격 모드를 선택할 수 있습니다. Module 입력은 항상 엄격 모드인 **Module 문맥**을 사용합니다. `webCompatibility`는 이 모드와 독립적인 웹 호환 옵션이며 기본값은 `false`입니다.
+
+| `JavaScriptInputKind` | 입력과 검사 기준 |
+| --- | --- |
+| `Script` | 기본값. 변수·함수·클래스 선언과 여러 문장을 읽습니다. 처음 적용할 엄격 모드를 선택할 수 있습니다. |
+| `Module` | import·export를 포함할 수 있는 모듈 전체를 읽습니다. 모듈의 시작 문법과 엄격 모드 검사를 적용합니다. |
+| `Expression` | `price * count` 같은 표현식 하나를 읽습니다. Script 문맥에서 처음 적용할 엄격 모드를 선택할 수 있습니다. |
+
+선택한 종류는 `language.InputKind`에 보관합니다. 클래스가 통합되어도 내부에서는 입력 종류에 맞는 시작 규칙과 검사를 사용합니다. 예를 들어 Module의 `export`와 비엄격 Script의 `with`를 한 입력에서 함께 허용하지 않습니다. 생성자에서 선택한 입력 종류의 기준을 파싱과 정적 검사 전체에 적용합니다.
+
+어떤 입력 종류를 선택하더라도 일반·async 함수와 화살표 함수, 제너레이터·async 제너레이터, 객체·클래스 메서드의 매개변수·본문을 함께 파싱합니다. Script 최상위와 일반 함수 본문에서는 문맥에 따라 `await`를 식별자로 사용할 수 있지만, Module 문맥에서는 중첩된 일반 함수까지 `await`를 예약어로 검사합니다. `yield`·`let` 등은 실제 코드 구간의 엄격 모드와 함수 종류에 맞춰 검사합니다. 속성 이름에는 예약어를 사용할 수 있습니다.
 
 | 구문 | 지원 내용 |
 | --- | --- |
@@ -26,11 +36,13 @@
 | 모듈 | default·namespace·named·side-effect import, 선언·목록·default export, 재내보내기, 문자열 공개 이름과 `with` 속성 |
 | 모듈 관련 표현식 | 모든 입력의 동적 import, Module 입력의 `import.meta`·top-level await·for-await-of와 본문 문맥 검사 |
 | 문장 경계 | 명시적 세미콜론, ASI의 줄바꿈·닫는 중괄호·입력 끝 조건과 제한 구문 |
-| 정적 검사 | 대입·증감 대상, 엄격 모드 예약어·`eval`·`arguments` 사용, 식별자 참조의 `delete`, 중복 `__proto__` 설정, 일반 템플릿의 잘못된 이스케이프 |
+| 모드 | Strict·NonStrict Script와 표현식, 직접·상속된 use-strict 지시문, 클래스·Module의 엄격 모드와 계산된 메서드 이름의 바깥 문맥 |
+| 웹 호환 옵션 | Script HTML 주석, Annex B.3.1~B.3.5·B.3.9의 문법과 정적 검사 예외. 아래에 항목별 범위를 정리합니다. |
+| 정적 검사 | 모드·함수 문맥별 예약어·`eval`·`arguments`·`delete`, 대입·증감 대상, 구형 리터럴의 엄격 구간 사용, 중복 `__proto__` 설정, 일반 템플릿의 잘못된 이스케이프 |
 
-`JavaScriptExpressionGrammar`의 입력 단위는 표현식 하나입니다. 예를 들어 `result = a / b`, `function (value) { return value; }`, `value => value + 1`을 각각 입력합니다. `JavaScriptScriptGrammar`에는 세미콜론으로 끝나는 표현식 문장, 변수·함수 선언과 여러 문장을 함께 전달할 수 있습니다.
+`inputKind: JavaScriptInputKind.Expression`은 표현식 하나를 읽습니다. 예를 들어 `result = a / b`, `function (value) { return value; }`, `value => value + 1`을 각각 입력합니다. 기본값인 Script에는 세미콜론으로 끝나는 표현식 문장, 변수·함수 선언과 여러 문장을 함께 전달할 수 있습니다.
 
-정규식은 리터럴 경계와 플래그에 이어, `Validate`에서 본문의 `RegExpPattern` 문법까지 검사합니다. 일반·u·v 모드의 그룹·반복·역참조·Unicode 속성과 집합 조건을 적용합니다. async·제너레이터와 객체 메서드·접근자도 같은 Parsing → Validate 순서로 검사합니다. 비엄격 모드와 명세 전체의 적합성 검증은 후속 범위입니다.
+정규식은 리터럴 경계와 플래그에 이어, `Validate`에서 본문의 `RegExpPattern` 문법까지 검사합니다. 일반·u·v 모드의 그룹·반복·역참조·Unicode 속성과 집합 조건을 적용합니다. 비엄격·웹 호환 문법과 async·제너레이터·객체 메서드도 같은 Parsing → Validate 순서로 검사합니다. 이 구문·정적 검사 범위의 명세 대조와 공식 테스트 결과는 [ECMAScript 2026 검증 보고서](../../docs/ko/javascript-conformance.html)에 기록합니다.
 
 ## C# 사용 순서
 
@@ -39,10 +51,10 @@ using System;
 using Janglim.FrontEnd.Grammars.JavaScript;
 using Janglim.FrontEnd.Parsers.LR;
 
-var language = new JavaScriptExpressionGrammar();
+var language = new JavaScriptGrammar();
 var parser = new LALRParser(language.Grammar);
 
-var source = language.CreateTokenSource("result = /ab/g.test(value)");
+var source = language.CreateTokenSource("const result = /ab/g.test(value);");
 var parsed = parser.Parsing(source);
 if (!parsed.Success)
 {
@@ -63,17 +75,12 @@ var tree = parsed.ToParseTree;
 Console.WriteLine(tree.AllInputDatas);
 ```
 
-위 코드는 표현식 입력입니다. 여러 선언과 문장을 입력하려면 같은 사용 순서에서 언어 클래스와 입력을 다음처럼 바꿉니다.
+위 코드는 기본값인 Script를 검사합니다. 표현식 하나만 따로 읽으려면 같은 클래스의 `inputKind`를 Expression으로 지정합니다. 파싱과 검사 순서는 같습니다.
 
 ```csharp
-var language = new JavaScriptScriptGrammar();
+var language = new JavaScriptGrammar(inputKind: JavaScriptInputKind.Expression);
 var parser = new LALRParser(language.Grammar);
-var input = @"
-function read({name = 'guest'}) {
-    return name;
-}
-const result = read(user);
-";
+var input = "value => value + 1";
 var parsed = parser.Parsing(language.CreateTokenSource(input));
 // 이후에도 parsed.Success와 language.Validate(parsed.ToParseTree)를 함께 확인합니다.
 ```
@@ -83,6 +90,60 @@ var parsed = parser.Parsing(language.CreateTokenSource(input));
 `CreateTokenSource`는 원문과 `Policy`를 연결합니다. 파서는 현재 파싱 상태와 입력 커서 등의 문맥을 정책에 전달하고, 정책이 반환한 규칙 묶음으로 `source`에 다음 토큰을 요청합니다. `source`는 그 묶음 안에서 실제 입력을 가장 길게 읽는 규칙을 사용하며 동률이면 규칙 우선순위를 적용합니다. 정규식에 단어 경계 `\b`를 자동으로 덧붙이지 않습니다.
 
 문장 문법에서는 호출 괄호와 if 조건 괄호가 닫힌 뒤의 문맥도 구분해야 합니다. 정책은 파싱 테이블의 후보와 직전 토큰에 연결된 JavaScript 문맥을 살펴 `call(value) / divisor`의 나눗셈과 `if (ready) /ab/.test(text);`의 정규식을 구분합니다. 파서는 그 판단을 직접 수행하지 않고 정책의 반환값으로 다음 토큰을 요청합니다. [슬래시 문맥 설명](../../docs/ko/javascript-statements.html#slash)에 이 책임과 호출 순서를 기록했습니다.
+
+## 비엄격 모드와 웹 호환 옵션
+
+비엄격 Script는 다음처럼 준비합니다. 아래 C# 코드의 `input`이 실제 JavaScript 원문이며, 이후에도 위의 `Parsing`과 `Validate`를 모두 호출합니다.
+
+```csharp
+var language = new JavaScriptGrammar(JavaScriptMode.NonStrict);
+var input = "var value = 077; function read(item, item) { return item; }";
+```
+
+표현식 하나에는 `new JavaScriptGrammar(mode: JavaScriptMode.NonStrict, inputKind: JavaScriptInputKind.Expression)`를 사용합니다. 오래된 웹 입력에 필요한 호환 문법은 별도로 켭니다.
+
+```csharp
+var script = new JavaScriptGrammar(
+    mode: JavaScriptMode.NonStrict,
+    webCompatibility: true);
+
+var expression = new JavaScriptGrammar(
+    mode: JavaScriptMode.NonStrict,
+    webCompatibility: true,
+    inputKind: JavaScriptInputKind.Expression);
+
+var module = new JavaScriptGrammar(
+    webCompatibility: true,
+    inputKind: JavaScriptInputKind.Module); // Mode는 항상 Strict
+```
+
+**Mode는 처음 적용할 엄격 모드를, WebCompatibility는 웹 호환 규칙의 사용 여부를 정합니다.** 기본 생성자의 설정은 Strict·웹 호환 끄기입니다. HTML 주석은 웹 호환 옵션을 켠 엄격 Script에도 허용하지만 Module에는 허용하지 않습니다. 단순 catch 매개변수와 같은 이름의 `var`를 허용하는 예외는 웹 호환 옵션을 켠 엄격 Script와 Module에도 적용합니다. 이 차이를 표현하기 위해 두 설정을 분리합니다.
+
+### 기본 NonStrict 모드
+
+웹 호환 옵션을 끈 비엄격 코드에서도 구형 숫자 `077`·`08.5`, 문자열의 `\141`·`\8`, `with` 문, 문맥에 맞는 엄격 전용 예약어의 식별자 사용, `eval`·`arguments` 바인딩·대입, 식별자 `delete`를 허용합니다.
+
+중복 매개변수는 단순 식별자만 받는 비엄격 함수 선언·함수 표현식에 허용하며, 일반·async·제너레이터·async 제너레이터 함수가 모두 이 조건을 사용합니다. 화살표 함수와 객체·클래스 메서드는 모드와 관계없이 중복 매개변수를 금지합니다. 기본값·구조 분해·rest가 있는 비단순 목록도 모든 함수 종류에서 중복 이름을 금지합니다.
+
+비엄격으로 시작한 입력에서도 Script·함수의 실제 `"use strict"` 지시문, 포함된 엄격 함수, 클래스와 Module은 해당 코드 구간을 엄격 모드로 만듭니다. 함수의 지시문은 그 함수의 매개변수와 본문 전체에 적용하며, 지시문 영역에서 앞서 나온 문자열도 검사합니다. 일반 블록의 문자열, 괄호로 감싼 `("use strict")`, 이스케이프가 있는 `"use\x20strict"`는 엄격 모드 지시문으로 취급하지 않습니다.
+
+객체 메서드의 계산된 이름은 바깥 표현식의 모드를 사용하고, 매개변수·본문은 그 메서드의 모드를 사용합니다. 클래스는 그 자체가 엄격 모드이므로 계산된 클래스 멤버 이름도 클래스의 엄격 조건을 받습니다. 한 함수에서 선택한 엄격 모드는 바깥 비엄격 코드나 별도 형제 함수로 번지지 않습니다.
+
+토큰 공급자는 비엄격 입력의 구형 리터럴을 먼저 원문 그대로 읽습니다. 최종 트리에서 `JavaScriptStrictness`가 각 구간의 엄격 모드를 정한 뒤, `Validate`가 금지된 위치의 리터럴을 검사합니다. 첫 문자열 뒤에 `"use strict"`가 나오는 경우처럼 토큰 하나만으로는 사용 조건을 확정할 수 없기 때문입니다. 진단 `strict_legacy_numeric_literal`은 숫자 토큰 전체를, `strict_legacy_string_escape`는 문자열 안의 첫 금지 이스케이프를 가리킵니다. 잘못된 Unicode·정규식 플래그와 `00n`·`08_1` 같은 잘못된 숫자는 모드와 관계없이 검사합니다.
+
+### WebCompatibility가 추가하는 범위
+
+| 항목 | 문법·정적 검사 범위 |
+| --- | --- |
+| B.1.1 | Script의 HTML 주석. `<!--`는 줄 끝까지, `-->`는 줄 시작 조건에서 읽습니다. 엄격 Script에도 허용하며 Module에는 금지합니다. |
+| B.3.1 | 비엄격 코드의 레이블이 붙은 일반 함수 선언 |
+| B.3.2 | 비엄격 블록·switch 범위의 일반 함수 선언끼리 중복 이름을 허용하는 정적 예외 |
+| B.3.3 | 비엄격 코드의 if·else 바로 뒤에 적는 일반 함수 선언 |
+| B.3.4 | 단순 catch 식별자와 같은 이름의 var 선언. 엄격 Script·Module에도 적용하며 구조 분해 catch에는 기존 충돌 조건을 유지합니다. |
+| B.3.5 | 비엄격 `for (var key = 0 in object)` 형태. 식별자 하나의 var에 적용하며 for-of·구조 분해에는 확장하지 않습니다. |
+| B.3.9 | 비엄격 일반 호출의 대입·증감·반복 대상 허용. 논리 대입·구조 분해·선택적 호출 등의 대상에는 기존 조건을 유지합니다. |
+
+블록 함수의 실행 시 바인딩 생성과 호이스팅은 JavaScript 실행 환경의 역할입니다. `call() = value` 같은 호환 형태도 JavaScript에서 평가하면 `ReferenceError`가 될 수 있는 구문을 정적 단계에서 표현하는 범위입니다. Janglim은 입력을 실행하는 대신 구문 트리와 정적 진단을 반환합니다. 옵션별 예제와 이 구분의 이유는 [비엄격·웹 호환 설명](../../docs/ko/javascript-non-strict.html)에 있습니다.
 
 ## 템플릿과 보간 표현식
 
@@ -126,7 +187,7 @@ var parsed = parser.Parsing(language.CreateTokenSource(input));
 
 마지막 두 표현식의 `...`는 남은 요소나 속성을 받는 rest 대상입니다. **rest 대상은 마지막에 와야 하며, 뒤에 쉼표나 rest 자체의 기본값을 붙일 수 없습니다.** 따라서 `[...rest,] = values`와 `[...rest = fallback] = values`는 정적 오류입니다. 배열 rest는 `[...[first]] = values`처럼 중첩 패턴도 허용합니다. 객체 rest는 식별자 또는 대입 가능한 속성을 대상으로 받으므로 `({...target.other} = user)`는 허용하지만, `({...{name}} = user)`는 거부합니다.
 
-패턴은 일반 대입 `=`에 사용합니다. `[first] += values`와 `[first]++`는 오류입니다. 각 값의 대상에도 엄격 모드 대입 조건을 적용하므로 `[target.name] = values`는 허용하고 `[1] = values`, `[target?.name] = values`, `[eval] = values`는 거부합니다.
+패턴은 일반 대입 `=`에 사용합니다. `[first] += values`와 `[first]++`는 오류입니다. `[target.name] = values`는 허용하고, `[1] = values`와 `[target?.name] = values`는 거부합니다. `[eval] = values`는 해당 위치가 엄격 모드일 때 거부하며, 비엄격 대입 패턴에는 그 모드의 이름 조건을 적용합니다.
 
 이 사용 조건은 파싱 후 `Validate`가 검사합니다. EBNF의 `ArrayLiteral`·`ObjectLiteral`은 배열·객체를 만드는 표현식과 대입 패턴의 공통 구문을 담으며, 객체의 축약 기본값에는 `CoverInitializedName`을 사용합니다. `Validate`는 실제 패턴에 해당하는 노드만 구분해 검사하고 **구문 트리의 노드·원문을 변경하지 않습니다.**
 
@@ -147,7 +208,7 @@ const collect = (...[first, second]) => first;
 
 본문에 표현식 하나를 적으면 그 결과를 반환하는 형태입니다. 중괄호로 감싼 본문에는 선언과 문장이 들어가며, 값을 반환할 때 `return`을 적습니다. 객체를 바로 반환할 때는 `value => ({name: value})`처럼 객체 리터럴을 괄호로 감쌉니다. `=>` 바로 뒤의 `{`는 블록 본문을 시작하기 때문입니다.
 
-매개변수와 `=>` 사이에는 줄바꿈을 넣을 수 없습니다. 매개변수 이름의 중복, `eval`·`arguments` 같은 엄격 모드 바인딩 이름, 함수 본문의 직접 lexical 선언과 겹치는 매개변수도 거부합니다. 기본값·구조 분해·rest가 있는 매개변수와 함수 자신의 `use strict` 지시문 조합도 오류입니다. rest는 마지막에 오며 뒤쪽 쉼표나 rest 자체의 기본값을 허용하지 않습니다.
+매개변수와 `=>` 사이에는 줄바꿈을 넣을 수 없습니다. 화살표 함수는 모드와 관계없이 중복 매개변수 이름과 본문의 직접 lexical 선언에 겹치는 매개변수를 거부합니다. `eval`·`arguments` 바인딩에는 해당 함수의 엄격 모드 조건을 적용합니다. 기본값·구조 분해·rest가 있는 매개변수와 함수 자신의 `use strict` 지시문 조합도 오류입니다. rest는 마지막에 오며 뒤쪽 쉼표나 rest 자체의 기본값을 허용하지 않습니다.
 
 `(value)`는 괄호식과 매개변수 목록이 같은 모양이므로, EBNF는 공통 구문을 읽고 `JavaScriptArrowFunctions`가 실제 화살표 헤드를 바인딩 목록으로 검사합니다. 일반 괄호식에서는 `()`·`(value,)`·`(...rest)`를 거부합니다. 매개변수의 배열·객체만 바인딩 패턴으로 해석하며, 기본값·계산된 속성 이름 안의 식은 일반 표현식으로 계속 검사합니다. 검사는 구문 트리와 원문을 변경하지 않습니다.
 
@@ -220,10 +281,10 @@ class Counter {
 
 ## Module 입력과 import·export
 
-정적 import·export가 있는 파일에는 `JavaScriptModuleGrammar`를 선택합니다. 나머지 사용 순서는 동일합니다.
+정적 import·export가 있는 파일에는 같은 `JavaScriptGrammar`에서 `inputKind: JavaScriptInputKind.Module`을 선택합니다. 나머지 사용 순서는 동일합니다.
 
 ```csharp
-var language = new JavaScriptModuleGrammar();
+var language = new JavaScriptGrammar(inputKind: JavaScriptInputKind.Module);
 var parser = new LALRParser(language.Grammar);
 var input = @"
 import {calculate} from './math.js';
@@ -235,7 +296,7 @@ var parsed = parser.Parsing(language.CreateTokenSource(input));
 
 Module 문법은 정적 import·export를 최상위에만 연결합니다. 가져온 이름과 일반 선언의 충돌, 공개 이름의 중복, 선언하지 않은 이름의 local export, 해독한 문자열 이름과 import 속성의 중복도 검사합니다. 이름이 있는 default 함수·클래스 선언은 Module의 lexical 이름을 만들고, 괄호로 감싼 함수·클래스 표현식의 이름은 그 표현식의 범위에 속합니다.
 
-동적 `import(path[, options])`는 표현식이므로 세 API에서 모두 사용할 수 있습니다. Module 전용 `import.meta`는 중첩된 일반 함수에서도 사용할 수 있습니다. 반면 Module의 `await` 표현식과 for-await-of는 일반 함수·일반 화살표 함수의 매개변수·본문, 클래스 필드 초기값·static 블록에 들어갈 수 없습니다. async 함수·async 화살표·async 제너레이터는 자기 본문에서 await를 허용합니다. 부모 클래스 표현식과 계산된 멤버 이름은 바깥 Module 문맥을 사용합니다.
+동적 `import(path[, options])`는 표현식이므로 세 입력 종류에서 모두 사용할 수 있습니다. Module 전용 `import.meta`는 중첩된 일반 함수에서도 사용할 수 있습니다. 반면 Module의 `await` 표현식과 for-await-of는 일반 함수·일반 화살표 함수의 매개변수·본문, 클래스 필드 초기값·static 블록에 들어갈 수 없습니다. async 함수·async 화살표·async 제너레이터는 자기 본문에서 await를 허용합니다. 부모 클래스 표현식과 계산된 멤버 이름은 바깥 Module 문맥을 사용합니다.
 
 이 언어 계층은 구문 트리와 정적 진단을 만듭니다. 의존 파일을 불러오고 모듈을 연결·실행하는 작업은 애플리케이션의 로더·런타임에서 수행합니다. 각 구문과 문맥을 구분하는 이유는 [모듈 설명](../../docs/ko/javascript-modules.html)에 기록했습니다.
 
@@ -263,11 +324,13 @@ Unicode 속성 이름은 ECMAScript 2026의 명시 목록으로 한정하고, �
 | [`ecmascript-2026-classes.ebnf`](ecmascript-2026-classes.ebnf) | 클래스·메서드·필드·static 블록과 private·super·new.target 관련 구문입니다. |
 | [`ecmascript-2026-modules.ebnf`](ecmascript-2026-modules.ebnf) | Module 항목과 import·export·속성, import 관련 표현식과 await·for-await-of 생성 규칙입니다. |
 | [`ecmascript-2026-functions.ebnf`](ecmascript-2026-functions.ebnf) | async·제너레이터 함수, async 화살표, yield와 객체·클래스의 추가 메서드 생성 규칙입니다. |
-| [`JavaScriptFunctionGrammar.cs`](../../src/FrontEnd/Parse.FrontEnd.Grammars.Ebnf/JavaScript/JavaScriptFunctionGrammar.cs) | Await 문맥별 EBNF 규칙을 연결하고 함수·메서드별 매개변수·본문 경계를 준비합니다. |
-| [`JavaScriptSyntax.cs`](../../src/FrontEnd/Parse.FrontEnd.Grammars.Ebnf/JavaScript/JavaScriptSyntax.cs) | Await 변형 규칙 이름과 함수·메서드 종류를 검사기들이 같은 기준으로 구분하게 합니다. |
-| [`JavaScriptExpressionGrammar.cs`](../../src/FrontEnd/Parse.FrontEnd.Grammars.Ebnf/JavaScript/JavaScriptExpressionGrammar.cs) | EBNF를 내장 리소스로 읽고 토큰 정규식을 치환한 뒤 문법·입력 공급자를 준비합니다. |
-| [`JavaScriptScriptGrammar.cs`](../../src/FrontEnd/Parse.FrontEnd.Grammars.Ebnf/JavaScript/JavaScriptScriptGrammar.cs) | Script의 선언·문장 목록을 입력하는 공개 API입니다. |
-| [`JavaScriptModuleGrammar.cs`](../../src/FrontEnd/Parse.FrontEnd.Grammars.Ebnf/JavaScript/JavaScriptModuleGrammar.cs) | Module을 시작 문법으로 사용하는 공개 API입니다. |
+| [`JavaScriptFunctionGrammar.cs`](../../src/FrontEnd/Parse.FrontEnd.Grammars.Ebnf/JavaScript/JavaScriptFunctionGrammar.cs) | Strict에서는 Await의 두 문맥으로, NonStrict에서는 Await·Yield를 조합한 네 문맥으로 EBNF 규칙을 연결합니다. 함수·메서드의 매개변수와 본문에 맞는 문맥을 적용합니다. |
+| [`JavaScriptSyntax.cs`](../../src/FrontEnd/Parse.FrontEnd.Grammars.Ebnf/JavaScript/JavaScriptSyntax.cs) | 검사기들이 `__Await`·`__Yield` 변형에서 원래 생성 규칙 이름과 문맥을 확인하고, 함수·메서드 종류를 같은 기준으로 구분하게 합니다. |
+| [`JavaScriptMode.cs`](../../src/FrontEnd/Parse.FrontEnd.Grammars.Ebnf/JavaScript/JavaScriptMode.cs) | 표현식·Script 입력이 시작할 엄격 모드를 선택합니다. 웹 호환 옵션은 공개 언어 클래스가 별도로 보관합니다. |
+| [`JavaScriptStrictness.cs`](../../src/FrontEnd/Parse.FrontEnd.Grammars.Ebnf/JavaScript/JavaScriptStrictness.cs) | 지시문·포함 함수·클래스·Module과 계산된 메서드 이름을 구분해 노드별 엄격 모드를 정합니다. |
+| [`JavaScriptNonStrictGrammar.cs`](../../src/FrontEnd/Parse.FrontEnd.Grammars.Ebnf/JavaScript/JavaScriptNonStrictGrammar.cs) | 기존 EBNF 리더로 비엄격·웹 호환 생성 규칙을 연결합니다. |
+| [`JavaScriptInputKind.cs`](../../src/FrontEnd/Parse.FrontEnd.Grammars.Ebnf/JavaScript/JavaScriptInputKind.cs) | Script·Module·Expression 입력 종류를 선택합니다. |
+| [`JavaScriptGrammar.cs`](../../src/FrontEnd/Parse.FrontEnd.Grammars.Ebnf/JavaScript/JavaScriptGrammar.cs) | 세 입력 종류의 공통 공개 API입니다. EBNF 리소스와 토큰 규칙을 연결하고, 선택한 입력의 시작 규칙·정책·입력 공급자·검사기를 준비합니다. |
 | [`JavaScriptModuleValidation.cs`](../../src/FrontEnd/Parse.FrontEnd.Grammars.Ebnf/JavaScript/JavaScriptModuleValidation.cs) | 공개 이름·local export·속성과 import.meta·await의 문맥을 검사합니다. |
 | [`JavaScriptTokenPatterns.cs`](../../src/FrontEnd/Parse.FrontEnd.Grammars.Ebnf/JavaScript/JavaScriptTokenPatterns.cs) | 식별자·숫자·문자열·정규식·주석 규칙과 토큰 검사를 준비합니다. |
 | [`JavaScriptRegExpValidation.cs`](../../src/FrontEnd/Parse.FrontEnd.Grammars.Ebnf/JavaScript/JavaScriptRegExpValidation.cs) | 최종 정규식 토큰의 그룹·반복·역참조·이스케이프와 본문 문법을 검사합니다. |
@@ -283,7 +346,13 @@ Unicode 속성 이름은 ECMAScript 2026의 명시 목록으로 한정하고, �
 | [`JavaScriptSlashContext.cs`](../../src/FrontEnd/Parse.FrontEnd.Grammars.Ebnf/JavaScript/JavaScriptSlashContext.cs) | 직전 토큰에서 다음 토큰의 불변 문맥을 계산해 슬래시 정책과 화살표 블록의 문장 종료 조건에 제공합니다. |
 | [`unicode/`](unicode/README.txt) | Unicode 17.0.0 출처·해시·라이선스와 식별자 문자 범위·정규식 속성 별칭 재생성 스크립트입니다. |
 
-생성자는 여섯 EBNF 파일을 연결하고, `{{IdentifierName}}`, `{{PrivateIdentifier}}`, `{{NumericLiteral}}`, `{{StringLiteral}}`, `{{RegularExpressionLiteral}}`, `{{Comment}}`와 네 템플릿 토큰 표시를 실제 정규식으로 바꿉니다. 문장 경계와 줄바꿈의 C# 검사 함수도 등록합니다. `language.GrammarText`는 이 치환을 마친 EBNF이며, Script API는 시작 규칙을 Script의 문장 목록으로, Module API는 Module의 최상위 항목 목록으로 정합니다. `JavaScriptFunctionGrammar`는 Await가 꺼진 규칙과 켜진 `__Await` 규칙을 연결하고, 일반·async 함수와 메서드의 매개변수·본문에 맞는 규칙을 사용합니다. Module 최상위는 Await가 켜진 규칙에서 시작합니다. Yield 표현식은 공통 구문으로 읽고, 최종 언어 검사가 함수 종류와 매개변수 경계를 확인합니다. 기준 파일을 직접 사용하는 도구도 같은 파일 연결·정규식 치환·프레디케이트 등록이 필요합니다.
+생성자는 여섯 EBNF 파일을 연결하고, `{{IdentifierName}}`, `{{PrivateIdentifier}}`, `{{NumericLiteral}}`, `{{StringLiteral}}`, `{{RegularExpressionLiteral}}`, `{{Comment}}`와 네 템플릿 토큰 표시를 실제 정규식으로 바꿉니다. 선택한 모드로 숫자·문자열 패턴을, 웹 호환 옵션과 입력 종류로 주석 패턴을 준비합니다. `JavaScriptNonStrictGrammar`는 비엄격·웹 호환 생성 규칙을 연결합니다. 생성자는 문장 경계와 줄바꿈의 C# 검사 함수도 등록합니다. `language.GrammarText`는 이 준비를 마친 EBNF이며, `InputKind`에 따라 시작 규칙을 Script의 문장 목록, Module의 최상위 항목 목록 또는 표현식 하나로 정합니다.
+
+이 과정에서 `JavaScriptFunctionGrammar`는 함수 종류에 맞는 문맥별 생성 규칙을 준비합니다. 기본값인 Strict에서는 Await 문맥에 영향을 받는 생성 규칙을 Await가 꺼진 기본 규칙과 Await가 켜진 `__Await` 규칙으로 나눕니다. 일반 함수·제너레이터에서는 Await를 끄고, async 함수·async 제너레이터에서는 Await를 켜서 매개변수와 본문을 연결합니다. Module 최상위도 Await가 켜진 규칙에서 시작합니다. 이 Strict 경로에서는 Yield 표현식을 공통 구문으로 읽은 뒤, 최종 언어 검사가 함수 종류와 매개변수 경계에 맞게 사용했는지 확인합니다.
+
+NonStrict에서는 일반 코드의 `yield`를 식별자로 사용할 수 있으므로, 구문을 읽을 때부터 `yield` 식별자와 Yield 표현식을 구분해야 합니다. 따라서 문맥에 영향을 받는 생성 규칙을 **Await·Yield가 모두 꺼진 경우, Await만 켠 경우, Yield만 켠 경우, 둘 다 켠 경우의 네 가지**로 준비합니다. 각각 일반 함수·async 함수·제너레이터·async 제너레이터의 매개변수와 본문에 적용합니다. 문맥별 생성 규칙 이름에는 `__Await`, `__Yield`, `__Yield__Await` 접미사를 붙이며, 계산된 메서드 이름에는 바깥 문맥을 유지합니다. `JavaScriptSyntax`는 이 접미사에서 문맥을 확인하고, 원래 생성 규칙 이름을 기준으로 구문 트리의 역할을 구분합니다.
+
+이 문맥 연결은 JavaScript 지원 계층에서 일반 EBNF 생성 규칙을 준비하는 작업입니다. 기준 파일을 직접 사용하는 도구도 같은 파일 연결·문맥별 규칙 준비·정규식 치환·프레디케이트 등록이 필요합니다.
 
 이 구성에서 EBNF는 연산자 계층과 표현식 구조를 담당합니다. C#은 고정된 Unicode 데이터로 토큰 정규식을 준비하고, 이스케이프의 코드 포인트·정규식 플래그와 본문·구문 트리의 정적 조건을 검사합니다.
 
@@ -329,10 +398,17 @@ dotnet test Tests/Parse.FrontEnd.Parsers.Tests/Parse.FrontEnd.Parsers.Tests.cspr
 - 클래스: 선언·표현식·상속, 일반 메서드·접근자·필드·static 블록, private 이름 범위와 중복, super·new.target·arguments 문맥, 기존 함수·ASI·템플릿과의 조합
 - 모듈: import·export·재내보내기·속성, 문자열 이름, local export의 선언 범위, 동적 import와 import.meta의 입력 문맥, top-level await·for-await-of와 함수·클래스 경계
 - 바인딩: 선언·매개변수·for·catch 패턴, 이름 중복·선언 범위 충돌, 엄격 모드 이름, const 초기값, 매개변수와 use strict 지시문
+- 비엄격·웹 호환: 기본 모드 유지, 직접·상속 지시문과 클래스 경계, 구형 리터럴·모드별 이름·함수 조건, HTML 주석의 원문·줄바꿈, 항목별 웹 호환 예외와 Module 경계
 - 문장 경계: ASI와 명시적 세미콜론, 호출·후위 증감·return·throw의 줄바꿈, 일반 for 헤더의 구분자
 - 문맥 분리: 같은 커서에서의 반복 요청, 별도 입력 공급자와 예측 후보가 사용하는 보간 문맥의 독립성
 
 문법의 충돌 검사도 함께 수행합니다. 공식 Unicode 원본을 이용한 식별자 판정 비교와 Node.js의 구문 컴파일 비교는 입력을 실행하지 않고 진행합니다. 엔진 간 판정이 다르면 지원 범위를 먼저 확인한 뒤, 고정한 ECMAScript 2026 명세의 구문·정적 오류 조건과 대조합니다.
+
+## ECMAScript 2026 명세와 Test262 대조
+
+[명세 대조 보고서](../../docs/ko/javascript-conformance.html)는 생성 규칙 388개와 Early Errors 213개 항목을 구현·테스트 파일에 연결합니다. 공식 Test262 원문은 각 사례의 메타데이터에 따라 엄격 Script·비엄격 Script·Module로 나눠 파싱하고, 성공한 트리에 정적 검사를 적용합니다. 예상된 문법 오류와 내부 예외·시간 초과는 서로 구분해 집계합니다.
+
+고정한 원본 커밋, 2026 이후 제안 문법의 제외 이유, 실행 결과와 재현 명령은 [검증 도구 문서](../../tools/Test262/README.md)에 기록합니다. 테스트 안의 JavaScript를 실행하는 대신, 각 원문의 구문과 정적 오류 판정을 비교합니다.
 
 ## 기준과 저자 맥락
 

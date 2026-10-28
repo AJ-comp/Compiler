@@ -51,6 +51,12 @@
     href: javascript-modules.html
   - name: JavaScript 정규식 — 본문 문법 검사
     href: javascript-regexp.html
+  - name: JavaScript 비엄격 모드와 브라우저 호환 문법
+    href: javascript-non-strict.html
+  - name: ECMAScript 2026 명세 대조와 Test262 검증
+    href: javascript-conformance.html
+  - name: TypeScript 문법 — 사용 순서와 지원 범위
+    href: typescript.html
   - name: NonTerminal — 규칙(가지)
     href: deep-nonterminal.md
   - name: Concat — 순서(연접)
@@ -128,3 +134,5 @@
   items:
   - name: SelectFirstAction — 최초 액션 선택
     href: functions/select-first-action.html
+  - name: CalculateLookAhead — 항목 객체와 큐
+    href: lalr-lookahead-propagation.html

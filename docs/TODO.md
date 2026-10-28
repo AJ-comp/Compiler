@@ -1,5 +1,76 @@
 # Janglim — TODO
 
+## 0.6.0 release checkpoint (2026-10-28)
+
+Engine 0.6.0 packages the unified JavaScript API, non-strict/Annex B support and the
+ECMAScript 2026 verification work below, together with the initial TypeScript support layer.
+`TypeScriptGrammar` supplies Script, Module, Expression and Type input kinds. Current scope
+covers types and declarations, `as`/`satisfies`/non-null assertions, and TypeScript class
+extensions. The [TypeScript guide](ko/typescript.html) records supported syntax,
+usage, the pinned reference version and the remaining work.
+
+TypeScript remains partial. Next syntax work includes runtime generic calls/construction,
+typed/generic arrows, angle-bracket assertions, type-only module forms, decorators and TSX,
+followed by a complete syntax/static-error comparison with the TypeScript reference.
+
+The engine fixes in this release retain recursive LALR lookahead calculation, record its
+dependent items, and propagate late additions after recursion. `LookAheadTable` values are
+now `LookAheadEntry` objects with `LookAhead` and `Targets`. FIRST of an empty symbol sequence
+returns epsilon, and grammar optimization rejects nonterminals that cannot derive a finite
+token sequence. The [implementation guide](ko/lalr-lookahead-propagation.html) explains the
+lookahead change. These engine corrections are separate from the language-only JavaScript
+checkpoints recorded below.
+
+## ECMAScript 2026 syntax and early-error verification (2026-10-21)
+
+The frozen 2026 specification inventory maps 388 canonical production definitions and
+213 top-level Early Errors assertions to JavaScript implementation and test files.
+The final source passed all 48,375 selected Test262 variants from the pinned October
+snapshot, with zero missing/duplicate results, unexpected decisions, internal exceptions,
+timeouts or process crashes. Source and binary hashes were verified during aggregation.
+
+Additional ASI/slash cases passed 980/980; await reproductions passed 18/18; seven
+supplementary staging parse negatives were correctly rejected. Added 500 regression
+tests; the full parser suite passed 6,104 tests with one existing SLR skip. Verification
+tool tests passed 187/187. The common lexer, LR parser and EBNF reader are unchanged.
+
+See the [verification report](ko/javascript-conformance.html) and
+[reproduction tools](https://github.com/AJ-comp/Compiler/blob/master/tools/Test262/README.md). The sections below preserve earlier
+release and development checkpoints.
+
+## Unified JavaScript grammar API (source update 2026-10-21)
+
+`JavaScriptGrammar` is the single public grammar class for JavaScript input. Its default
+constructor prepares strict Script input with browser compatibility disabled. The optional
+`inputKind` parameter selects `JavaScriptInputKind.Module` or `.Expression`; the `InputKind`
+property records that choice. All kinds share the same grammar implementation and the
+existing Parsing-then-Validate workflow. Module input remains strict even when NonStrict
+is requested, and keeps module-specific import/export, await and HTML-comment checks.
+
+The previous three public grammar classes have been replaced. Current examples and fixtures
+use the unified API, with explicit Expression and Module input kinds. The
+[input kind guide](ko/javascript-modules.html#api) describes the unified constructors and usage.
+The common lexer, LR parser and EBNF reader are unchanged.
+
+## Non-strict JavaScript and browser compatibility (source update 2026-10-21)
+
+Expression and Script entry points accept `JavaScriptMode.NonStrict`; default constructors
+retain strict mode. The independent `webCompatibility` option enables Annex B syntax and
+early-error exceptions, including HTML comments in Script, legacy labelled/if functions,
+block function duplicates, catch/var, for-in initializers and non-strict call targets.
+Module input stays strict with either web setting.
+
+Per-validation strictness analysis handles directive prologues, inherited function strictness,
+classes and method computed-key boundaries. Legacy numeric/string tokens are checked again
+against their containing strict scope. JavaScript-only grammar expansion supplies Await/Yield
+contexts and registered predicates distinguish contextual `let` declarations and expressions.
+The common lexer, LR parser and EBNF reader are unchanged.
+
+See [the non-strict and web compatibility guide](ko/javascript-non-strict.html). The earlier
+0.5.0 checkpoint below records that release's scope. The current
+[ECMAScript 2026 verification report](ko/javascript-conformance.html) connects the frozen
+specification to implementation/tests and records the Test262 syntax and early-error audit.
+
 ## 0.5.0 release checkpoint (2026-10-21)
 
 Engine 0.5.0 adds parser-driven input and longest-match lexing, together with the
@@ -10,8 +81,9 @@ The [release notes](../RELEASE_NOTES.md) describe the supported workflows and va
 The current source also includes parser-driven token requests: `LexicalGoal` groups
 rules, `LexicalPolicy` selects a group, and `Lexer.CreateTokenSource` prepares an input
 source for `Parsing(source)`. Prediction keeps a separate cursor and consumed-token
-history for each candidate when token boundaries differ. Complete JavaScript and
-TypeScript grammars remain follow-up work.
+history for each candidate when token boundaries differ. At this 0.5.0 checkpoint,
+complete JavaScript verification and TypeScript support were follow-up work; the later
+checkpoints above record the subsequent implementation and remaining TypeScript scope.
 
 The [ECMAScript 2026 language profile](ko/javascript-expressions.html) supplies
 embedded EBNF grammars, Unicode 17 token rules, parser-driven lexical goals, strict
@@ -79,8 +151,8 @@ See the [regexp grammar and implementation guide](ko/javascript-regexp.html).
 
 ## JavaScript: modules and import expressions (source update 2026-10-20)
 
-`JavaScriptModuleGrammar` is a distinct source-goal entry with the same Grammar,
-Policy, GrammarText, CreateTokenSource and Validate contract. A fifth embedded
+`JavaScriptGrammar(inputKind: JavaScriptInputKind.Module)` selects Module input
+with the same Grammar, Policy, GrammarText, CreateTokenSource and Validate contract. A fifth embedded
 resource, `ecmascript-2026-modules.ebnf`, supplies static import/export forms,
 re-exports, string export names, with attributes and module termination predicates.
 The expression and Script entries also connect dynamic import expressions.
@@ -153,10 +225,10 @@ See the [arrow parameters, bodies and statement boundaries guide](ko/javascript-
 
 ## JavaScript: ordinary functions, statements and binding patterns (source update 2026-10-20)
 
-`JavaScriptScriptGrammar` accepts strict Script statement/declaration lists, while
-`JavaScriptExpressionGrammar` remains the single-expression entry point and now
-also accepts ordinary function expressions with their parameters and statement bodies.
-Both APIs expose `Grammar`, `Policy`, `GrammarText`, `CreateTokenSource` and `Validate`.
+`JavaScriptGrammar` accepts Script statement/declaration lists by default, while
+`inputKind: JavaScriptInputKind.Expression` selects a single expression, including
+ordinary function expressions with their parameters and statement bodies.
+Both input kinds expose `Grammar`, `Policy`, `GrammarText`, `CreateTokenSource` and `Validate`.
 Consumers check parsing success and then inspect the successful tree with `Validate`.
 
 The language layer now covers ordinary function declarations/expressions, var/let/const,

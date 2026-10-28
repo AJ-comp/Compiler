@@ -181,7 +181,7 @@
 using Janglim.FrontEnd.Grammars.JavaScript;
 using Janglim.FrontEnd.Parsers.LR;
 
-var language = new JavaScriptScriptGrammar();
+var language = new JavaScriptGrammar();
 var parser = new LALRParser(language.Grammar);
 var input = "const pattern = /[z-a]/u;";
 
@@ -245,7 +245,7 @@ foreach (var diagnostic in diagnostics)
           <li><a href="https://tc39.es/ecma262/2026/multipage/text-processing.html#table-binary-unicode-properties">ECMAScript 2026 — 허용하는 Unicode 속성 이름</a></li>
           <li><a href="https://www.unicode.org/Public/17.0.0/ucd/PropertyValueAliases.txt">Unicode 17.0.0 — 속성 값과 별칭</a></li>
           <li><a href="https://www.unicode.org/reports/tr31/tr31-43.html">Unicode UAX #31 — 역사적인 Hrkt 스크립트 값</a></li>
-          <li><a href="javascript-expressions.html#usage">JavaScript 표현식 API</a> · <a href="javascript-statements.html#usage">Script API</a> · <a href="javascript-modules.html#api">Module API</a></li>
+          <li>JavaScriptGrammar 사용법: <a href="javascript-expressions.html#usage">Expression 입력</a> · <a href="javascript-statements.html#usage">Script 입력</a> · <a href="javascript-modules.html#api">Module 입력</a></li>
         </ul>
         <p><strong>저자의 설계와 이번 언어 지원의 관계</strong></p>
         <p>Janglim의 핵심 LR 구조는 저자가 설계하고 작성했습니다. 이번 JavaScript 정규식 본문 검사·테스트와 문서는 그 기존 구조 위에 대화에서 합의한 범위를 AI 보조로 추가한 언어 지원 계층입니다. 기존 엔진에 담긴 저자의 설계·구현과 새로 추가한 언어 지원을 구분합니다.</p>

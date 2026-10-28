@@ -1,0 +1,56 @@
+{
+  "schemaVersion": 1,
+  "asOf": "2026-10-21",
+  "stableVersion": "7.0.2",
+  "nativeRepository": "https://github.com/microsoft/typescript-go",
+  "nativeRevision": "2bd066d87f5bafd315be9f40889d0a60b9e58e0b",
+  "migratedRepository": "https://github.com/microsoft/TypeScript",
+  "migratedReleaseTag": "v7.0.2",
+  "migratedReleaseRevision": "1e4744d68260a7cb91b62b12edc3f6a2187faaf1",
+  "corpusRevision": "4d4f005c8541e0255a9d8791205fdce326e462bc",
+  "comparisonApiVersion": "6.0.3",
+  "comparisonApiRevision": "050880ce59e30b356b686bd3144efe24f875ebc8",
+  "goVersion": "1.26.5",
+  "prereleaseExcluded": "7.1.0-beta",
+  "sources": {
+    "stableAnnouncement": "https://devblogs.microsoft.com/typescript/announcing-typescript-7-0/",
+    "stableRelease": "https://github.com/microsoft/TypeScript/releases/tag/v7.0.2",
+    "originalRelease": "https://github.com/microsoft/typescript-go/releases/tag/typescript%2Fv7.0.2",
+    "prereleaseAnnouncement": "https://devblogs.microsoft.com/typescript/announcing-typescript-7-1-beta/",
+    "jsx": "https://www.typescriptlang.org/docs/handbook/jsx.html",
+    "declarationFiles": "https://www.typescriptlang.org/docs/handbook/declaration-files/introduction.html",
+    "decorators": "https://www.typescriptlang.org/docs/handbook/release-notes/typescript-5-0.html#decorators"
+  },
+  "archives": {
+    "native-source.tar.gz": {
+      "url": "https://codeload.github.com/microsoft/typescript-go/tar.gz/2bd066d87f5bafd315be9f40889d0a60b9e58e0b",
+      "sha256": "5ccb47dbb3f68cd0da58b71e6f445eee36a50bd3e9f9f330cc23a97b88500119",
+      "size": 20375158
+    },
+    "typescript-win32-x64.tgz": {
+      "url": "https://github.com/microsoft/TypeScript/releases/download/v7.0.2/typescript-win32-x64.tgz",
+      "sha256": "61fc4e141d2bc687db580e71bbfa63b9c209f0310645d82ca1b457eb3a24fd19",
+      "size": 9776626
+    },
+    "typescript.tgz": {
+      "url": "https://github.com/microsoft/TypeScript/releases/download/v7.0.2/typescript.tgz",
+      "sha256": "da2513f4b95176d6dde8b51aab7afe8a927656c9d277369793f77f7e59371c08",
+      "size": 365612
+    },
+    "typescript-6.0.3.tgz": {
+      "url": "https://registry.npmjs.org/typescript/-/typescript-6.0.3.tgz",
+      "sha256": "33cd0ee1beaa8c9e9d15a9da836c62ddea4c34a42d7c2d349dbc80d94165d22a",
+      "size": 4515854
+    },
+    "corpus-source.tar.gz": {
+      "url": "https://codeload.github.com/microsoft/TypeScript/tar.gz/4d4f005c8541e0255a9d8791205fdce326e462bc",
+      "sha256": "99cbcb9abf5308b15e90b991919b3f897918f5c19c13dce3a4d3cab618c64bf9",
+      "size": 29342515
+    },
+    "go1.26.5.windows-amd64.zip": {
+      "url": "https://go.dev/dl/go1.26.5.windows-amd64.zip",
+      "sha256": "97e6b2a833b6d89f9ff17d25419ac0a7e3b482a044e9ab18cdef834bd834fd38",
+      "size": 74927386
+    }
+  }
+}

@@ -201,6 +201,19 @@ public class GrammarProgressTests
         internal readonly Terminal X = new Terminal(TokenType.Keyword, "x", "x", true, false);
         internal readonly Terminal Y = new Terminal(TokenType.Keyword, "y", "y", true, false);
         public override NonTerminal EbnfRoot => Start;
-        public ProgressGrammar(Action<ProgressGrammar> configure) { configure(this); }
+        public ProgressGrammar(Action<ProgressGrammar> configure)
+        {
+            configure(this);
+
+            // Unconfigured helper fields that no production references are not
+            // part of the configured test grammar. Keep referenced empty rules.
+            var referenced = NonTerminalMultiples
+                .SelectMany(rule => rule)
+                .SelectMany(production => production)
+                .OfType<NonTerminal>()
+                .ToHashSet();
+            NonTerminalMultiples.RemoveWhere(rule =>
+                rule.Count == 0 && !rule.IsStartSymbol && !referenced.Contains(rule));
+        }
     }
 }

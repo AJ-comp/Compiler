@@ -14,6 +14,9 @@ namespace Janglim.FrontEnd
         public TerminalSet First(NonTerminalSingle key) => _cache[key];
         public TerminalSet First(NonTerminalConcat concat)
         {
+            // 기호가 하나도 없는 경우도 명시적인 ε와 같은 빈 기호열입니다.
+            if (concat.Count == 0) return new TerminalSet(new Epsilon());
+
             var result = new TerminalSet();
 
             foreach (var symbol in concat)
@@ -92,6 +95,9 @@ namespace Janglim.FrontEnd
         /// <returns></returns>
         public TerminalSet FirstSet(NonTerminalConcat singleNT, HashSet<NonTerminalSingle> seenNT = null)
         {
+            // 캐시를 계산할 때도 빈 기호열의 FIRST는 {ε}로 표현합니다.
+            if (singleNT.Count == 0) return new TerminalSet(new Epsilon());
+
             if (seenNT == null) seenNT = new HashSet<NonTerminalSingle>();
             TerminalSet result = new TerminalSet();
 
